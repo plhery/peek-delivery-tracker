@@ -1,9 +1,11 @@
 import { render, screen, within } from '@testing-library/react';
+import { PEEK_SITE, renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fr from '../../shared/locales/fr.json';
 import { guideAddresses } from '../guides/guideAddresses';
 import { ANDROID_TEST_STORAGE_KEY } from '../lib/androidTest';
+import { SiteProvider } from '../SiteContext';
 import { AndroidTestScreen } from './AndroidTestScreen';
 
 const mocks = vi.hoisted(() => ({ track: vi.fn(), screen: vi.fn(), start: vi.fn(async () => undefined) }));
@@ -24,7 +26,7 @@ beforeEach(() => {
 describe('the steps page', () => {
   it('walks through the three steps, each in a new tab, the next one leading, the last two locked until the group', async () => {
     const user = userEvent.setup();
-    render(<AndroidTestScreen />);
+    renderOnPeek(<AndroidTestScreen />);
     expect(screen.getByRole('heading', { level: 1, name: 'Try Peek for Android' })).toBeVisible();
     expect(mocks.screen).toHaveBeenCalledExactlyOnceWith('android-test', 'anonymous');
     expect(mocks.start).toHaveBeenCalledExactlyOnceWith({ open: false });
@@ -55,7 +57,7 @@ describe('the steps page', () => {
 
   it('locks the last two steps again for a browser that took them without the group', () => {
     localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { optIn: true, install: true } }));
-    render(<AndroidTestScreen />);
+    renderOnPeek(<AndroidTestScreen />);
     expect(within(steps()[0]).getByRole('link')).toHaveClass('button--primary');
     for (const step of steps().slice(1)) {
       expect(within(step).queryByText('Done')).not.toBeInTheDocument();
@@ -65,7 +67,7 @@ describe('the steps page', () => {
 
   it('asks no more on “Don’t ask me again”, and says so where the button was', async () => {
     const user = userEvent.setup();
-    render(<AndroidTestScreen />);
+    renderOnPeek(<AndroidTestScreen />);
     await user.click(screen.getByRole('button', { name: 'Don’t ask me again' }));
     expect(stored().never).toBe(true);
     expect(mocks.track).toHaveBeenCalledExactlyOnceWith('android-test-never');
@@ -76,7 +78,7 @@ describe('the steps page', () => {
   it('offers the same app without Google Play: F-Droid’s address to copy, or GitHub', async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
-    render(<AndroidTestScreen />);
+    renderOnPeek(<AndroidTestScreen />);
     const other = screen.getByRole('region', { name: 'Without Google Play' });
     const address = 'https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7';
     expect(within(other).getByText(address)).toHaveAttribute('translate', 'no');
@@ -93,21 +95,33 @@ describe('the steps page', () => {
     writeText.mockRestore();
   });
 
+  it('leaves out the ways around Google Play that the site names none of', () => {
+    const app = { ...PEEK_SITE.android!, fdroid: null };
+    const { unmount } = render(<AndroidTestScreen />, { wrapper: ({ children }) => <SiteProvider site={{ ...PEEK_SITE, android: app }}>{children}</SiteProvider> });
+    const other = screen.getByRole('region', { name: 'Without Google Play' });
+    expect(within(other).queryByRole('button', { name: 'Copy the address' })).toBeNull();
+    expect(within(other).getByRole('link', { name: 'Open GitHub' })).toBeVisible();
+    unmount();
+    render(<AndroidTestScreen />, { wrapper: ({ children }) => <SiteProvider site={{ ...PEEK_SITE, android: { ...app, releases: null } }}>{children}</SiteProvider> });
+    expect(screen.queryByRole('region', { name: 'Without Google Play' })).toBeNull();
+    expect(steps()).toHaveLength(3);
+  });
+
   it('goes back to the home page from anywhere else', () => {
-    render(<AndroidTestScreen />);
+    renderOnPeek(<AndroidTestScreen />);
     expect(screen.getByRole('link', { name: 'Back' })).toHaveAttribute('href', '/');
   });
 
   it('links the app’s guide, in the visitor’s language', () => {
-    const { unmount } = render(<AndroidTestScreen guide={guideAddresses('android-app')} />);
+    const { unmount } = renderOnPeek(<AndroidTestScreen guide={guideAddresses('android-app')} />);
     expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-android');
     unmount();
-    render(<AndroidTestScreen guide={guideAddresses('android-app')} initialLocale="fr" initialMessages={fr} />);
+    renderOnPeek(<AndroidTestScreen guide={guideAddresses('android-app')} initialLocale="fr" initialMessages={fr} />);
     expect(screen.getByRole('link', { name: /^Peek pour Android/ })).toHaveAttribute('href', '/fr/guides/application-suivi-colis-android');
   });
 
   it('speaks the visitor’s language', () => {
-    render(<AndroidTestScreen initialLocale="fr" initialMessages={fr} />);
+    renderOnPeek(<AndroidTestScreen initialLocale="fr" initialMessages={fr} />);
     expect(screen.getByRole('heading', { level: 1, name: fr['androidTest.page.title'] })).toBeVisible();
     expect(within(steps()[1]).getByRole('button')).toHaveTextContent(fr['androidTest.step.locked']);
   });

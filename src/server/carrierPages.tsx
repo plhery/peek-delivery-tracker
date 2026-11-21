@@ -16,6 +16,7 @@ import { landingAddress } from './landingMetadata';
 import { jsonForScript, peekOrganization } from './landingStructuredData';
 import { siteOrigin } from './requestOrigin';
 import { sitePicture } from './sitePreview';
+import { siteName, siteSettings } from './siteSettings';
 
 /**
  * The carriers' own page's metadata. In a language no carrier's page is written in yet, it lists the English
@@ -45,7 +46,7 @@ export async function CarrierIndexRoute({ locale }: { locale: Locale }) {
   if (!guidePagesOn()) notFound();
   const t = guideWords(locale);
   const addresses = { ...carrierAddresses(), [locale]: carrierPath(locale) };
-  return <GuideFrame locale={locale} t={t} addresses={addresses} languageNames={languageNames()} screen={`carriers/${locale}`}>
+  return <GuideFrame locale={locale} t={t} addresses={addresses} languageNames={languageNames()} screen={`carriers/${locale}`} site={siteSettings()}>
     <CarrierIndex locale={locale} t={t} carriers={described(hasCarrierPages(locale) ? locale : 'en')} />
   </GuideFrame>;
 }
@@ -79,7 +80,7 @@ export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slu
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Peek', item: landingAddress(site, ui) },
+          { '@type': 'ListItem', position: 1, name: siteName(), item: landingAddress(site, ui) },
           { '@type': 'ListItem', position: 2, name: t('carriers.title'), item: carrierAlternates(site)[ui] },
           { '@type': 'ListItem', position: 3, name: text.title, item: url },
         ],
@@ -95,7 +96,7 @@ export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slu
   };
   const own = described(locale);
   const others = [...own, ...described(ui).filter((other) => !own.some(({ link: written }) => written.id === other.link.id))];
-  return <GuideFrame locale={ui} language={locale} t={t} addresses={carrierAddresses(link.id)} languageNames={languageNames()} screen={`carriers/${locale}/${link.id}`}>
+  return <GuideFrame locale={ui} language={locale} t={t} addresses={carrierAddresses(link.id)} languageNames={languageNames()} screen={`carriers/${locale}/${link.id}`} site={siteSettings()}>
     {/* Data, not a script: the browser runs nothing of it, so the page's script policy does not apply. */}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonForScript(data) }} />
     <CarrierPage text={text} carrier={link} locale={ui} language={locale} t={t} guides={guideLinks(guideLanguage(ui))}

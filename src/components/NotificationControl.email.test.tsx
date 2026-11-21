@@ -1,4 +1,5 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -35,7 +36,7 @@ async function open(preferences: Partial<NotificationPreferences> = {}, email: s
   stored = { ...SAVED, ...preferences };
   const apiAuth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
   const user = userEvent.setup();
-  render(<NotificationControl apiAuth={apiAuth} email={email ?? undefined} />);
+  renderOnPeek(<NotificationControl apiAuth={apiAuth} email={email ?? undefined} />);
   await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
   await screen.findByRole('radio', { name: /delivery only/i });
   return { user, apiAuth };
@@ -158,7 +159,7 @@ describe('the delivery email in Settings', () => {
   it('links the example in the reader’s language', async () => {
     stored = { ...SAVED, emailOnDelivery: true };
     const apiAuth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
-    render(<I18nProvider initialLocale="de" initialMessages={de}><NotificationControl apiAuth={apiAuth} email="alex@example.com" /></I18nProvider>);
+    renderOnPeek(<I18nProvider initialLocale="de" initialMessages={de}><NotificationControl apiAuth={apiAuth} email="alex@example.com" /></I18nProvider>);
     await userEvent.setup().click(await screen.findByRole('button', { name: 'Mitteilungen aktiviert' }));
     expect(await screen.findByRole('switch', { name: 'E-Mail, sobald ein Paket ankommt' })).toHaveAttribute('aria-checked', 'true');
     expect(screen.getByRole('link', { name: 'Beispiel ansehen' })).toHaveAttribute('href', '/email/example?lang=de');

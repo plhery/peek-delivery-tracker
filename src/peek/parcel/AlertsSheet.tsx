@@ -7,6 +7,7 @@ import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
 import { appStoreLink } from '../../lib/appStore';
 import { homeScreenPath } from '../../lib/homeScreen';
+import { useSite } from '../../SiteContext';
 import { AlertError, alertFailure, alertSupport, deviceAlert, quietRequests, turnOffAlert, turnOnAlert, type AlertSupport } from '../alerts';
 import { alertsForAll, setAlertsForAll, useAlertsForAll } from '../alertsForAll';
 import { appParcelURL, appStoreVisited, noteAppStoreVisit } from '../appLink';
@@ -82,6 +83,7 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
   onClose: () => void;
 }) {
   const { t, locale } = useI18n();
+  const { appStore } = useSite();
   const noted = useLinkNote(linkId).alert;
   const forAll = useAlertsForAll();
   const [support, setSupport] = useState<AlertSupport>(() => alertSupport(alerts));
@@ -168,12 +170,13 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
     // An app's own browser gets one line about Safari in place of the steps, and nothing before it.
     const safari = homeScreenPath() === 'safari';
     const intro = safari ? undefined : t('alerts.iphone.body');
-    const app = alerts?.app === true;
+    // The server offers the app only where the site has one.
+    const app = alerts?.app === true ? appStore : null;
     const appRow = app && <AppOffer body={t('alerts.app.body')}>
       {visited
-        ? <a href={appParcelURL(linkId, { key: ownerKey, name, origin: alerts.appOrigin })}
+        ? <a href={appParcelURL(linkId, { key: ownerKey, name, origin: alerts?.appOrigin })}
           onClick={() => trackAction('parcel-link-app-open')}>{t('alerts.app.open')}</a>
-        : <a href={appStoreLink('web-notify')}
+        : <a href={appStoreLink(app, 'web-notify')}
           onClick={() => { trackAction('parcel-link-app-get'); noteAppStoreVisit(); setVisited(true); }}>{t('alerts.app.get')}</a>}
     </AppOffer>;
     const homeScreen = app

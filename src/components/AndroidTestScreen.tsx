@@ -7,11 +7,12 @@ import { GuideTitleLink } from '../guides/GuideTitleLink';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
 import {
-  ANDROID_OTHER_SOURCES, ANDROID_TEST_LINKS, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
+  androidTestLinks, androidTestOpen, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
 } from '../lib/androidTest';
 import { AppearanceProvider } from '../lib/appearance';
 import { backOnSite } from '../lib/backOnSite';
 import { useTabTitle } from '../lib/tabTitle';
+import { useSite } from '../SiteContext';
 import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
 import './AndroidTestScreen.css';
@@ -32,8 +33,8 @@ const nothing = () => null;
  * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Google Play lets in
  * only the group's members, so the last two steps stay locked until the group's link was followed. Anyone who
  * reaches the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
- * Under them, the same app without Google Play: Peek's F-Droid repository, whose address is copied, or GitHub; then
- * the app's guide, in the reader's language or the nearest one it is written in.
+ * Under them, the same app without Google Play where the site gives a way: its F-Droid repository, whose address is
+ * copied, or its releases; then the app's guide, in the reader's language or the nearest one it is written in.
  */
 export function AndroidTestScreen({ guide, initialLocale, initialMessages }: { guide?: GuideAddresses; initialLocale?: Locale; initialMessages?: Messages }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
@@ -43,6 +44,11 @@ export function AndroidTestScreen({ guide, initialLocale, initialMessages }: { g
 
 function AndroidTest({ guide }: { guide?: GuideAddresses }) {
   const { t, locale } = useI18n();
+  const { android } = useSite();
+  // The page is served only while the test is open.
+  const links = androidTestOpen(android) ? androidTestLinks(android) : null;
+  const fdroid = android?.fdroid ?? null;
+  const releases = android?.releases ?? null;
   const note = useSyncExternalStore(subscribeAndroidTest, readAndroidTestNote, nothing);
   const [declined, setDeclined] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -60,9 +66,9 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
   // The first step not taken yet leads; once all are, none does.
   const next = joined ? STEPS.find(({ step }) => !note?.steps?.[step])?.step : 'group';
 
-  async function copyRepository() {
+  async function copyRepository(address: string) {
     trackAction('android-test-fdroid');
-    try { await navigator.clipboard.writeText(ANDROID_OTHER_SOURCES.fdroid); setCopied(true); }
+    try { await navigator.clipboard.writeText(address); setCopied(true); }
     catch { /* The address stays on screen to select by hand. */ }
   }
 
@@ -92,7 +98,7 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
               <p>{t(body)}</p>
               {locked
                 ? <button type="button" className="button button--secondary" disabled><Icon name="lock" />{t('androidTest.step.locked')}</button>
-                : <a className={`button ${next === step ? 'button--primary' : 'button--secondary'}`} href={ANDROID_TEST_LINKS[step]}
+                : <a className={`button ${next === step ? 'button--primary' : 'button--secondary'}`} href={links?.[step]}
                   target="_blank" rel="noopener noreferrer" onClick={() => { trackAction(event); noteAndroidTestStep(step); }}>
                   {t(action)}<Icon name="arrow" />
                 </a>}
@@ -101,18 +107,22 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
         })}
       </ol>
       <p className="android-steps__note">{t('androidTest.page.note')}</p>
-      <section className="android-steps__other" aria-labelledby="android-steps-other">
+      {(fdroid || releases) && <section className="android-steps__other" aria-labelledby="android-steps-other">
         <h2 id="android-steps-other">{t('androidTest.other.title')}</h2>
-        <p>{t('androidTest.other.fdroid')}</p>
-        <p className="android-steps__address" translate="no">{ANDROID_OTHER_SOURCES.fdroid}</p>
-        <button type="button" className="button button--secondary" onClick={() => void copyRepository()}>
-          <Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'androidTest.other.copied' : 'androidTest.other.copy')}
-        </button>
-        <p>{t('androidTest.other.github')}</p>
-        <a className="button button--secondary" href={ANDROID_OTHER_SOURCES.github} target="_blank" rel="noopener noreferrer"
-          onClick={() => trackAction('android-test-github')}>{t('androidTest.other.githubAction')}<Icon name="arrow" /></a>
+        {fdroid && <>
+          <p>{t('androidTest.other.fdroid')}</p>
+          <p className="android-steps__address" translate="no">{fdroid}</p>
+          <button type="button" className="button button--secondary" onClick={() => void copyRepository(fdroid)}>
+            <Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'androidTest.other.copied' : 'androidTest.other.copy')}
+          </button>
+        </>}
+        {releases && <>
+          <p>{t('androidTest.other.github')}</p>
+          <a className="button button--secondary" href={releases} target="_blank" rel="noopener noreferrer"
+            onClick={() => trackAction('android-test-github')}>{t('androidTest.other.githubAction')}<Icon name="arrow" /></a>
+        </>}
         <p>{t('androidTest.other.note')}</p>
-      </section>
+      </section>}
       {guide && <p className="android-steps__guide"><GuideTitleLink guide={guide} locale={locale} /></p>}
       {note?.never
         ? <p ref={said} className="android-steps__never" tabIndex={-1}>{t('androidTest.page.neverDone')}</p>

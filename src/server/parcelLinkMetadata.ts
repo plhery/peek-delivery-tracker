@@ -8,6 +8,7 @@ import { isParcelLinkId } from './publicParcels';
 import { requestLocale } from './requestLocale';
 import { requestOrigin } from './requestOrigin';
 import { siteTitle, wordsIn } from './sitePreview';
+import { appStoreApp, siteName } from './siteSettings';
 
 /** Where a parcel link's preview image is served. An id that cannot be a link's is not echoed. */
 export function parcelLinkImagePath(linkId: unknown): string {
@@ -18,7 +19,7 @@ export function parcelLinkImagePath(linkId: unknown): string {
 function shared(url: URL, image: URL, title: string, description: string): Pick<Metadata, 'openGraph' | 'twitter'> {
   return {
     openGraph: {
-      type: 'website', url: url.href, siteName: 'Peek', title, description,
+      type: 'website', url: url.href, siteName: siteName(), title, description,
       images: [{ url: image.href, width: 1200, height: 630, type: 'image/png', alt: title }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [{ url: image.href, alt: title }] },
@@ -29,8 +30,8 @@ function shared(url: URL, image: URL, title: string, description: string): Pick<
  * The parcel page's metadata, in the request's language: the status and the
  * carrier as the title, the estimate as the description, and the preview
  * image. A parcel link is a capability, so it is never indexed and never
- * leaves as a referrer; a link that leads nowhere gets Peek's own preview.
- * Safari's banner opens the parcel in the iPhone app.
+ * leaves as a referrer; a link that leads nowhere gets the site's own preview.
+ * Safari's banner opens the parcel in the iPhone app, where the site has one.
  */
 export async function parcelLinkMetadata(linkId: unknown): Promise<Metadata> {
   const locale = await requestLocale();
@@ -52,7 +53,7 @@ export async function parcelLinkMetadata(linkId: unknown): Promise<Metadata> {
     robots: { index: false, follow: false },
     referrer: 'no-referrer',
     ...shared(url, image, title, description),
-    other: smartAppBanner(url.href),
+    other: smartAppBanner(appStoreApp(), url.href),
   };
 }
 

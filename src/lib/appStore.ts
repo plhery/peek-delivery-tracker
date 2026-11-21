@@ -1,7 +1,11 @@
-/** Peek's iPhone app on the App Store. */
-export const APP_STORE_ID = '6823615370';
-/** The App Store Connect account a campaign link is counted under. */
-const PROVIDER_TOKEN = '129628155';
+/**
+ * The site's iPhone app on the App Store (`APP_STORE_ID`), and the App Store Connect account a campaign link is
+ * counted under (`APP_STORE_PROVIDER_TOKEN`), where the site has one. Without an app, nothing links the App Store.
+ */
+export interface AppStoreApp {
+  id: string;
+  providerToken: string | null;
+}
 
 /**
  * Where a link to the App Store sits, as App Store Connect's campaign report names it (30
@@ -15,9 +19,11 @@ const PROVIDER_TOKEN = '129628155';
  */
 export type AppStoreCampaign = 'web-banner' | 'web-more' | 'web-moves' | 'web-footer' | 'web-qr' | 'web-app' | 'web-notify' | 'web-settings' | 'web-settings-qr' | 'web-invite';
 
-/** The app's page on the App Store, counted under a campaign. */
-export function appStoreLink(campaign: AppStoreCampaign): string {
-  return `https://apps.apple.com/app/apple-store/id${APP_STORE_ID}?pt=${PROVIDER_TOKEN}&ct=${campaign}&mt=8`;
+/** The app's page on the App Store, counted under a campaign where the account is known. */
+export function appStoreLink(app: AppStoreApp, campaign: AppStoreCampaign): string {
+  return app.providerToken
+    ? `https://apps.apple.com/app/apple-store/id${app.id}?pt=${app.providerToken}&ct=${campaign}&mt=8`
+    : `https://apps.apple.com/app/id${app.id}`;
 }
 
 /** An iPad, whose Safari says it is a Mac but takes more than one finger. */
@@ -28,8 +34,10 @@ export function onIPad(): boolean {
 
 /**
  * Safari's Smart App Banner on an iPhone: it offers the app, or, where the app is installed,
- * opens it at `address`. Safari reads it once, from the page as the server sends it.
+ * opens it at `address`. Safari reads it once, from the page as the server sends it. None without an app.
  */
-export function smartAppBanner(address: string): Record<string, string> {
-  return { 'apple-itunes-app': `app-id=${APP_STORE_ID}, app-argument=${address}, affiliate-data=pt=${PROVIDER_TOKEN}&ct=web-banner` };
+export function smartAppBanner(app: AppStoreApp | null, address: string): Record<string, string> {
+  if (!app) return {};
+  const affiliate = app.providerToken ? `, affiliate-data=pt=${app.providerToken}&ct=web-banner` : '';
+  return { 'apple-itunes-app': `app-id=${app.id}, app-argument=${address}${affiliate}` };
 }

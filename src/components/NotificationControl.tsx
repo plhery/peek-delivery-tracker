@@ -25,7 +25,9 @@ import {
   useNotificationPreferences,
 } from '../store/notificationPreferences';
 import { type MessageKey, type Translate, useI18n } from '../i18n';
+import { useSite } from '../SiteContext';
 import { AppOffer, HomeScreenInstead } from './AppOffer';
+import { HomeScreenSteps } from './HomeScreenSteps';
 import { Icon } from './Icon';
 import './Settings.css';
 
@@ -44,6 +46,7 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
   variant?: 'icon' | 'row';
 }) {
   const { t, locale } = useI18n();
+  const { appStore, privacy } = useSite();
   const [open, setOpen] = useState(false);
   useEffect(() => { if (open) return trackOverlay('notifications'); }, [open]);
   const [state, setState] = useState<PushState | null>(null);
@@ -147,8 +150,8 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
 
   // The Peek app, on whichever phone: a scan away on a computer, as the landing's code, and a tap away on a phone or
   // a tablet. The stylesheet shows one of the two. Both go through `/app`, which sends an iPhone or an iPad to the App
-  // Store and an Android phone to the Android app's steps.
-  const phoneApp = <>
+  // Store and an Android phone to the Android app's steps. A site without an iPhone app has no `/app`, and offers none.
+  const phoneApp = appStore && <>
     <div className="notification-app-qr">
       {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
       <img src="/settings/app-qr.svg" alt="" width={60} height={60} loading="lazy" />
@@ -200,12 +203,12 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
               </div>
             </div>
 
-            {install && <>
+            {install && (appStore ? <>
               <AppOffer body={t('notifications.app.body')}>
-                <a href={appStoreLink('web-settings')} onClick={() => trackAction('notifications-app-get')}>{t('alerts.app.get')}</a>
+                <a href={appStoreLink(appStore, 'web-settings')} onClick={() => trackAction('notifications-app-get')}>{t('alerts.app.get')}</a>
               </AppOffer>
               <HomeScreenInstead then="notifications" text={t('notifications.app.homeScreen')} />
-            </>}
+            </> : <HomeScreenSteps then="notifications" cards />)}
 
             {(state?.kind === 'prompt' || enabled) && <>
               <div className="settings-box settings-device-control"><button className="settings-row" type="button" role="switch" aria-checked={enabled} aria-label={t('settings.deliveryUpdates')} disabled={busy} onClick={() => void (enabled ? disable() : enable())}><span>{t('settings.deliveryUpdates')}</span><span className="settings-switch" aria-hidden="true" /></button></div>
@@ -286,7 +289,7 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
                 {emailFailed && <p className="sheet__error" role="alert">{t('email.setting.failed')}</p>}
                 <p className="notification-email__links">
                   <a href={`/email/example?lang=${locale}`} target="_blank" rel="noopener" onClick={() => trackAction('email-example-open')}>{t('email.setting.example')}</a>
-                  <a href="/privacy.html" onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a>
+                  {privacy && <a href={privacy} onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a>}
                 </p>
               </section>
             )}

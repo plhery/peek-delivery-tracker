@@ -1,6 +1,7 @@
 import { unstable_doesMiddlewareMatch } from 'next/experimental/testing/server';
 import { NextRequest } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { config, proxy } from '../../proxy';
 import { assistantsPath } from '../assistants/paths';
 import { carrierPath } from '../carriers/paths';
@@ -8,6 +9,7 @@ import { CARRIER_LINKS } from '../generated/carriers';
 import { GUIDE_LINKS } from '../generated/guides';
 import { guidePath } from '../guides/paths';
 import { ADDRESS_LANGUAGES, GUIDE_LANGUAGES, PAGE_LANGUAGE_HEADER, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type PageOnlyLanguage } from '../lib/locale';
+import { LEGAL_PAGE_PATHS } from '../lib/site';
 import { canonicalOrigin, legacyHostRedirect, movedOrigin, requestHost, siteHosts } from './siteHosts';
 
 const moved = { CANONICAL_ORIGIN: 'https://peek.example.test', LEGACY_HOSTS: 'delivery.example.test, old.example.test' } as unknown as NodeJS.ProcessEnv;
@@ -155,8 +157,8 @@ describe('legacyHostRedirect', () => {
 
 describe('the page proxy', () => {
   const page = (url: string, init?: ConstructorParameters<typeof NextRequest>[1]) => proxy(new NextRequest(url, init));
-  // As on Peek's own site, which serves its guides and carriers' pages.
-  beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
+  // As on Peek's own site, which serves its guides and carriers' pages, its documents and `/app`.
+  beforeEach(stubPeekEnv);
   afterEach(() => { vi.unstubAllEnvs(); });
 
   it('answers every guides and carriers address with the 404 page on a site that serves none', () => {
@@ -175,6 +177,19 @@ describe('the page proxy', () => {
       expect(response.headers.get('cache-control'), path).toBe('private, no-store');
     }
     for (const path of ['/', '/de', '/guidesmore', '/carriersmore', '/app']) expect(answer(path).headers.get('x-middleware-rewrite'), path).toBeNull();
+  });
+
+  it("answers the operator's documents and /app with the 404 page on a site that serves neither", () => {
+    const rewrite = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test' } }).headers.get('x-middleware-rewrite');
+    const paths = [...LEGAL_PAGE_PATHS, '/app'];
+    for (const path of paths) {
+      expect(rewrite(path), path).toBeNull();
+      expect(unstable_doesMiddlewareMatch({ config, url: path }), path).toBe(true);
+    }
+    vi.stubEnv('LEGAL_PAGES', '');
+    vi.stubEnv('APP_STORE_ID', '');
+    for (const path of paths) expect(rewrite(path), path).toBe('https://peek.example.test/_not-found');
+    for (const path of ['/', '/privacy', '/apps']) expect(rewrite(path), path).toBeNull();
   });
 
   it('answers a page on a legacy host with a permanent redirect that nothing stores', () => {

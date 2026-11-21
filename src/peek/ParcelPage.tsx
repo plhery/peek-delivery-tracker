@@ -72,6 +72,7 @@ import { nonTrackingNote, nonTrackingShape } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 import { usePeekSession } from './session';
+import { useSite } from '../SiteContext';
 import { useParcelLink, type ParcelLinkState } from './useParcelLink';
 import './ParcelPage.css';
 
@@ -217,6 +218,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
 }) {
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const session = usePeekSession();
+  const site = useSite();
   const leave = useContext(Leave);
   const { trouble, checking, live, refreshing, seenAt, news, unseen, previousEstimate, refresh, dismissNews, adopt, frozen } = state;
   const { parcel, numberHint, link } = view;
@@ -476,7 +478,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const calendarWindow = slot && estimate ? capitalized(localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now, use24HourTime), languageTag) : null;
   function calendarFile(): boolean {
     return !!slot && downloadCalendar(deliveryCalendar({
-      slot, title: name ?? headline, description: t('link.preview.follow'), url: address, uid: `${linkId}@peek`,
+      product: site.name, slot, title: name ?? headline, description: t('link.preview.follow'), url: address, uid: `${linkId}@peek`,
     }));
   }
   function addToCalendar() {

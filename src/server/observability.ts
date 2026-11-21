@@ -3,6 +3,7 @@ import 'server-only';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import * as Sentry from '@sentry/node';
 import type { Breadcrumb, ErrorEvent } from '@sentry/node';
+import { sourceUrl } from './siteSettings';
 import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
 import type { JsonObject } from './types';
@@ -642,7 +643,7 @@ export function captureTrackingHealth(incident: JsonObject): string | null {
     scope.setTag('provider', String(incident.subject));
     scope.setContext('tracking_health', { ...incident, impact: message.impact, next_steps: message.nextSteps,
       suppression: 'Repeated incident notifications are limited to one per six hours.',
-      runbook: 'https://github.com/plhery/peek-delivery-tracker/blob/main/ops/sentry/README.md' });
+      runbook: `${sourceUrl()}/blob/main/ops/sentry/README.md` });
     // Opening and reminders are one issue.
     scope.setFingerprint(['delivery-tracker', 'tracking-health', String(incident.kind), String(incident.subject)]);
     scope.setLevel(incident.kind === 'refresh' ? 'error' : 'warning');

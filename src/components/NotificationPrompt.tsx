@@ -9,6 +9,7 @@ import {
   subscribeToNotificationInvitation,
 } from '../lib/notificationInvitation';
 import { enablePushNotifications, inspectPushState, type PushState } from '../lib/pushNotifications';
+import { useSite } from '../SiteContext';
 import { HomeScreenSteps } from './HomeScreenSteps';
 import { Icon } from './Icon';
 import './NotificationPrompt.css';
@@ -16,6 +17,7 @@ import './NotificationPrompt.css';
 /** A nonmodal invitation: no automatic permission request or focus change. */
 export function NotificationPrompt({ apiAuth, eligible }: { apiAuth: ApiAuth; eligible: boolean }) {
   const { t, locale } = useI18n();
+  const { appStore } = useSite();
   const dismissed = useSyncExternalStore(
     subscribeToNotificationInvitation,
     () => notificationInvitationDismissed(apiAuth.userId),
@@ -100,8 +102,9 @@ export function NotificationPrompt({ apiAuth, eligible }: { apiAuth: ApiAuth; el
   }
 
   if (!eligible || dismissed || closed || (state?.kind !== 'prompt' && state?.kind !== 'install')) return null;
-  // Outside the Home Screen, the app comes first and the Home Screen's steps a link below it.
-  const offer = state.kind === 'install' && !help;
+  // Outside the Home Screen, the app comes first and the Home Screen's steps a link below it; without an app, the steps.
+  const steps = help || (state.kind === 'install' && !appStore);
+  const offer = state.kind === 'install' && !steps ? appStore : null;
   const [orBefore, orAfter] = t('notifications.prompt.homeScreen').split('{{link}}');
 
   return (
@@ -116,18 +119,18 @@ export function NotificationPrompt({ apiAuth, eligible }: { apiAuth: ApiAuth; el
       <button className="notification-prompt__close" type="button" aria-label={t('common.close')} disabled={busy} onClick={dismiss}>
         <Icon name="close" />
       </button>
-      <h2 id="notification-prompt-title">{t(help ? 'notifications.prompt.installTitle' : 'notifications.prompt.title')}</h2>
-      {help ? <HomeScreenSteps then="notifications" /> : <p>{t('notifications.prompt.description')}</p>}
+      <h2 id="notification-prompt-title">{t(steps ? 'notifications.prompt.installTitle' : 'notifications.prompt.title')}</h2>
+      {steps ? <HomeScreenSteps then="notifications" /> : <p>{t('notifications.prompt.description')}</p>}
       {failed && <p className="notification-prompt__error" role="alert">{t('notifications.error.enable')}</p>}
       <div className="notification-prompt__actions">
         {offer
-          ? <a className="button button--primary" href={appStoreLink('web-invite')} onClick={getApp}>
+          ? <a className="button button--primary" href={appStoreLink(offer, 'web-invite')} onClick={getApp}>
             {t(onIPad() ? 'notifications.prompt.app.ipad' : 'notifications.prompt.app')}
           </a>
-          : <button ref={primary} className="button button--primary" type="button" disabled={busy} aria-busy={busy} onClick={help ? dismiss : () => void enable()}>
-            {t(help ? 'notifications.prompt.gotIt' : busy ? 'notifications.enabling' : failed ? 'common.retry' : 'notifications.enable')}
+          : <button ref={primary} className="button button--primary" type="button" disabled={busy} aria-busy={busy} onClick={steps ? dismiss : () => void enable()}>
+            {t(steps ? 'notifications.prompt.gotIt' : busy ? 'notifications.enabling' : failed ? 'common.retry' : 'notifications.enable')}
           </button>}
-        {!help && <button className="notification-prompt__later" type="button" disabled={busy} onClick={dismiss}>{t('onboarding.notifications.notNow')}</button>}
+        {!steps && <button className="notification-prompt__later" type="button" disabled={busy} onClick={dismiss}>{t('onboarding.notifications.notNow')}</button>}
       </div>
       {offer && <p className="notification-prompt__or">
         {orBefore}<button type="button" onClick={() => setHelp(true)}>{t('notifications.prompt.homeScreenLink')}</button>{orAfter}

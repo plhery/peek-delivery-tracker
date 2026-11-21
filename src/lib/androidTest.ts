@@ -1,50 +1,64 @@
 /**
- * Peek for Android's closed test on Google Play, and the site's invitation to it.
+ * The site's Android app, and its closed test on Google Play with the site's invitation to it.
  *
  * Google opens an app from a personal developer account to everyone only once 12 testers have stayed opted in to a
- * closed test for 14 days in a row. Peek's testers are the members of a Google Group: someone joins the group,
- * becomes a tester on Google Play, then installs the app. The site invites the Android visitors who can install it
- * on the parcel page, in its "Notify me" sheet and on the home page, and walks them through the three steps at
- * `/android`.
+ * closed test for 14 days in a row. The testers are the members of a Google Group: someone joins the group, becomes a
+ * tester on Google Play, then installs the app. While the test is open, the site invites the Android visitors who can
+ * install it on the parcel page, in its "Notify me" sheet and on the home page, and walks them through the three
+ * steps at `/android`.
  */
 
 /**
- * Whether the site invites anyone. Off, it shows nothing and `/android` is not found: once Google opens the app to
- * everyone, or while the release testers install doesn't work.
+ * The Android app as the server's settings give it: its package on Google Play (`ANDROID_APP_PACKAGE`), the testers'
+ * group while its closed test is open (`ANDROID_TEST_GROUP`), and the ways to it without Google Play: an F-Droid
+ * repository's whole address, with the fingerprint of the key its index is signed with (`ANDROID_FDROID_REPO`; opened
+ * in a browser, the address is a 404), and a page of releases (`ANDROID_RELEASES_URL`).
  */
-export const ANDROID_TEST_OPEN = true;
-
-/** The three steps' links: Peek's own testers' group, Google Play's page to become a tester, and the app on Google Play. */
-export const ANDROID_TEST_LINKS = {
-  group: 'https://groups.google.com/g/peek-android-testers',
-  optIn: 'https://play.google.com/apps/testing/com.plhery.peekdeliverytracker',
-  install: 'https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker',
-} as const;
-
-export type AndroidTestStep = keyof typeof ANDROID_TEST_LINKS;
+export interface AndroidApp {
+  package: string;
+  testGroup: string | null;
+  fdroid: string | null;
+  releases: string | null;
+}
 
 /**
- * The same app without Google Play: each release's fdroid build, signed with Peek's upload key, goes to Peek's own
- * F-Droid repository and to a GitHub pre-release (android/README.md). F-Droid takes the repository's whole address, with
- * the fingerprint of the key its index is signed with; opened in a browser, the address is a 404.
+ * Whether the site invites anyone to the closed test. Not without a testers' group: once Google opens the app to
+ * everyone, or while the release testers install doesn't work, it shows nothing and `/android` is not found.
  */
-export const ANDROID_OTHER_SOURCES = {
-  fdroid: 'https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7',
-  github: 'https://github.com/plhery/peek-delivery-tracker/releases',
-} as const;
+export function androidTestOpen(app: AndroidApp | null): app is AndroidApp & { testGroup: string } {
+  return app?.testGroup != null;
+}
+
+/** The app's page on Google Play. */
+export function googlePlayLink(app: AndroidApp): string {
+  return `https://play.google.com/store/apps/details?id=${app.package}`;
+}
+
+/** The three steps, in order: the testers' group, Google Play's page to become a tester, and the app on Google Play. */
+export const ANDROID_TEST_STEPS = ['group', 'optIn', 'install'] as const;
+export type AndroidTestStep = typeof ANDROID_TEST_STEPS[number];
+
+/** The three steps' links. */
+export function androidTestLinks(app: AndroidApp & { testGroup: string }): Record<AndroidTestStep, string> {
+  return { group: app.testGroup, optIn: `https://play.google.com/apps/testing/${app.package}`, install: googlePlayLink(app) };
+}
 
 /** The steps' page. */
 export const ANDROID_TEST_PATH = '/android';
 
-/** Where the landing's "Android app" button leads: the steps while the test is open, Google Play once it is not. */
-export const ANDROID_APP_LINK: string = ANDROID_TEST_OPEN ? ANDROID_TEST_PATH : ANDROID_TEST_LINKS.install;
+/**
+ * Where the landing's "Android app" button leads: the steps while the test is open, Google Play once it is not, and
+ * nowhere on a site without an Android app.
+ */
+export function androidAppLink(app: AndroidApp | null): string | null {
+  if (!app) return null;
+  return androidTestOpen(app) ? ANDROID_TEST_PATH : googlePlayLink(app);
+}
 
-/** Peek for Android runs on Android 12 and later. */
+/** The Android app runs on Android 12 and later. */
 const MINIMUM_ANDROID = 12;
 /** Chrome's reduced user agent names this version on every Android phone, whatever it runs. */
 const REDUCED_ANDROID = 10;
-/** The app opens the site's pages in a Custom Tab, which names it as the referrer. */
-const APP_REFERRER = 'android-app://com.plhery.peekdeliverytracker';
 /** How long × hides the invitation. */
 export const ANDROID_TEST_SNOOZE_MS = 7 * 24 * 60 * 60 * 1000;
 /** How long the thanks stays at most: the two weeks a tester keeps the app. */
@@ -143,7 +157,7 @@ function parse(raw: string | null): AndroidTestNote {
     const given = value as Record<string, unknown>;
     const time = (field: unknown) => typeof field === 'number' && Number.isFinite(field) ? field : undefined;
     const steps = given.steps && typeof given.steps === 'object' ? given.steps as Record<string, unknown> : {};
-    const followed = (Object.keys(ANDROID_TEST_LINKS) as AndroidTestStep[]).filter((step) => steps[step] === true);
+    const followed = ANDROID_TEST_STEPS.filter((step) => steps[step] === true);
     const note: AndroidTestNote = {};
     if (time(given.hiddenUntil) !== undefined) note.hiddenUntil = time(given.hiddenUntil);
     if (given.never === true) note.never = true;
@@ -215,7 +229,7 @@ export function restartAndroidTest(): void {
   });
 }
 
-/** A page opened from the app itself: this browser's owner has the app. */
-export function noteAndroidAppReferrer(referrer: string): void {
-  if (referrer.startsWith(APP_REFERRER) && !readAndroidTestNote().app) write((note) => ({ ...note, app: true }));
+/** A page opened from the app itself, in a Custom Tab, which names the app as the referrer: this browser's owner has the app. */
+export function noteAndroidAppReferrer(referrer: string, app: AndroidApp): void {
+  if (referrer.startsWith(`android-app://${app.package}`) && !readAndroidTestNote().app) write((note) => ({ ...note, app: true }));
 }

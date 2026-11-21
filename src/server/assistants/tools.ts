@@ -27,6 +27,7 @@ import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
 import { holdsPostcodeCountry, savePostcodeCountry } from '../postcodeCountry';
 import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
+import { siteName } from '../siteSettings';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import { isRecord, type JsonObject } from '../types';
 import { packageCarrierValues, packageLabel } from '../validation';
@@ -406,6 +407,11 @@ function additionSummary(addition: ParcelAddition) {
   };
 }
 
+/** The server's name for MCP clients: the product's name in lower case, its words joined by dashes ("peek"). */
+export function serverName(site: string): string {
+  return site.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'parcel-tracker';
+}
+
 /**
  * The MCP server for one request: Peek's tools, each working on the caller's own account only, through the server's
  * owner-checked functions, and only as far as the token's scopes allow. `resourceMetadata` is where a client learns how
@@ -418,8 +424,10 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   const amazonGuideLink = () => (guide ??= amazonGuide(service, caller.userId));
   const english = amazonGuideUrl();
   const withAmazonGuide = async (text: string) => (english && text.includes(english) ? text.replace(english, await amazonGuideLink() ?? english) : text);
+  // Clients list the server under the site's name (SITE_NAME); the tools' own words say Peek, as the app's do.
+  const site = siteName();
   const server = new McpServer(
-    { name: 'peek', title: 'Peek', version: '1.0.0' },
+    { name: serverName(site), title: site, version: '1.0.0' },
     {
       // Peek's tools never change while it runs, and `/mcp` refuses the stream that would say so (mcp.ts): a client told
       // the list may change opens `subscriptions/listen` and retries it.

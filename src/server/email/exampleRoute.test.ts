@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../../test/peekEnv';
 import de from '../../../shared/locales/de.json';
 import en from '../../../shared/locales/en.json';
 import { GET } from '../../../app/email/example/route';
@@ -14,6 +15,7 @@ vi.setConfig({ testTimeout: 30_000 });
 const example = (query = '') => GET(new Request(`https://peek.example.test/email/example${query}`));
 
 beforeEach(() => {
+  stubPeekEnv();
   request.headers = new Headers({ host: 'peek.example.test', 'x-forwarded-proto': 'https' });
 });
 afterEach(() => { vi.unstubAllEnvs(); });

@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { GET as image } from '../../app/api/public/parcels/[linkId]/image/route';
 import { generateMetadata } from '../../app/p/[id]/page';
 import { generateMetadata as sampleMetadata } from '../../app/sample/page';
@@ -47,6 +48,7 @@ function stored(overrides: JsonObject = {}, events: JsonObject[] = [
 const PRIVATE = new RegExp(`${trackingNumber}|TEST|private name|Exampletown|Sampleville|Example Shop|Example Kiosk|9999`);
 
 beforeEach(() => {
+  stubPeekEnv();
   vi.useFakeTimers({ now: NOW, toFake: ['Date'] });
   vi.stubEnv('SUPABASE_URL', 'https://database.example');
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');

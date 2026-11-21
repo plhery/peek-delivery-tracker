@@ -180,9 +180,14 @@ parcels by email, assistants (MCP), usage analytics (Umami), Sentry, Turnstile, 
 FlareSolverr and tracking proxies for the carriers whose sites turn servers away.
 Each one is off until its settings are there; `.env.example` lists them.
 
-**Off by default.** The guides and carrier pages are Peek's own, so a copy serves none
-of them unless `GUIDE_PAGES=on`, and nothing links them
-([Trademarks and content](#trademarks-and-content)).
+**Off by default.** A copy starts neutral: a site named "Parcel Tracker" with no App
+Store or Android app, no author links, and none of Peek's own pages. Name yours with
+`SITE_NAME`, add your apps with `APP_STORE_ID` and `ANDROID_APP_PACKAGE`, and link your
+own privacy notice with `PRIVACY_URL`. Peek's privacy notice, terms, help and accessibility
+pages (`LEGAL_PAGES`) name Peek's operator, and its guides and carrier pages
+(`GUIDE_PAGES`) are not licensed with the code, so a copy keeps both off and nothing
+links them ([Trademarks and content](#trademarks-and-content)). [Deployment](docs/DEPLOYMENT.md)
+describes each setting.
 
 ## Under the hood
 

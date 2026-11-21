@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { invitationSocialNickname } from './invitationSocial';
 import { friendsAction, invitationPreviewByHash } from './friends';
 import { SupabaseServiceClient } from './supabase';
@@ -16,6 +17,7 @@ const code = 'ab'.repeat(16);
 const preview = createHash('sha256').update(code).digest('hex');
 const sender = [{ friend_profiles: { nickname: 'Paul', email: 'private@example.test', parcels: ['private'] } }];
 beforeEach(() => {
+  stubPeekEnv();
   vi.stubEnv('SUPABASE_URL', 'https://database.example');
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
   vi.stubEnv('TRUST_PROXY_HEADERS', 'true');

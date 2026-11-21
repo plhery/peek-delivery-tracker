@@ -86,9 +86,10 @@ function nextDay(date: string): string {
 /**
  * A calendar file for one delivery, made in the browser: nothing is sent
  * anywhere. `url` is the parcel's own link; `uid` keeps a later download of
- * the same parcel from making a second entry.
+ * the same parcel from making a second entry; `product` is the site's name.
  */
-export function deliveryCalendar({ slot, title, description, url, uid, now = Date.now() }: {
+export function deliveryCalendar({ product, slot, title, description, url, uid, now = Date.now() }: {
+  product: string;
   slot: DeliverySlot;
   title: string;
   description?: string;
@@ -102,7 +103,7 @@ export function deliveryCalendar({ slot, title, description, url, uid, now = Dat
   return [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Peek//Universal Parcel Tracker//EN',
+    `PRODID:-//${icsText(product)}//Universal Parcel Tracker//EN`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',

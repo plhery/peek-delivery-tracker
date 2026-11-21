@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
+import { useSite } from '../../SiteContext';
 import { LandingIcon } from '../landing/glyphs';
-import { SOURCE_URL } from '../landing/links';
 import { turnOffAlert } from '../alerts';
 import { forgetParcelLink, ParcelLinkError, parcelLinkErrorKey } from '../links';
 import { forgetRecent } from '../recents';
@@ -112,6 +112,7 @@ export function ForgetFooter({ promise, onForget, onRemove, onArchive, onRestore
   onRestore?: () => void;
 }) {
   const { t } = useI18n();
+  const { privacy, source } = useSite();
   return <footer className="peekp-footer">
     {promise && <p><Icon name="lock" />{promise}</p>}
     <p>
@@ -119,7 +120,7 @@ export function ForgetFooter({ promise, onForget, onRemove, onArchive, onRestore
       {onRestore && <><button type="button" className="peekp-footer__forget" onClick={onRestore}>{t('detail.restore')}</button> · </>}
       {onForget && <><button type="button" className="peekp-footer__forget" onClick={onForget}>{t('link.forget.now')}</button> · </>}
       {onRemove && <><button type="button" className="peekp-footer__forget" onClick={onRemove}>{t('link.remove.now')}</button> · </>}
-      <a href="/privacy.html" onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a> · <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
+      {privacy && <><a href={privacy} onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a> · </>}<a href={source} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
     </p>
   </footer>;
 }

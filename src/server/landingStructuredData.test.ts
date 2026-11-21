@@ -1,11 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import de from '../../shared/locales/de.json';
 import en from '../../shared/locales/en.json';
-import { SOURCE_URL } from '../lib/source';
+import { UPSTREAM_SOURCE } from '../lib/source';
 import { jsonForScript, landingStructuredData, peekOrganization } from './landingStructuredData';
 
+afterEach(() => { vi.unstubAllEnvs(); });
+
 describe('landingStructuredData', () => {
-  const data = landingStructuredData({ origin: new URL('https://peek.example.test'), url: 'https://peek.example.test/', locale: 'en' });
+  let data: ReturnType<typeof landingStructuredData>;
+  beforeEach(() => {
+    stubPeekEnv();
+    data = landingStructuredData({ origin: new URL('https://peek.example.test'), url: 'https://peek.example.test/', locale: 'en' });
+  });
 
   it('names who makes Peek, with its public source, as one node the other pages name too', () => {
     expect(data['@context']).toBe('https://schema.org');
@@ -15,7 +22,7 @@ describe('landingStructuredData', () => {
       name: 'Peek',
       url: 'https://peek.example.test/',
       logo: { '@type': 'ImageObject', url: 'https://peek.example.test/icons/icon-512.png' },
-      sameAs: [SOURCE_URL],
+      sameAs: [UPSTREAM_SOURCE],
     });
     expect(peekOrganization(new URL('https://peek.example.test'))).toEqual(data['@graph'][2]);
   });

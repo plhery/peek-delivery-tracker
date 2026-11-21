@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { trackAction } from '../lib/analytics';
@@ -28,7 +29,7 @@ afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('NotificationPrompt', () => {
   it('waits for eligibility without requesting permission or taking focus', async () => {
-    const { rerender } = render(<><button>Keep tracking</button><NotificationPrompt apiAuth={apiAuth} eligible={false} /></>);
+    const { rerender } = renderOnPeek(<><button>Keep tracking</button><NotificationPrompt apiAuth={apiAuth} eligible={false} /></>);
     screen.getByRole('button', { name: 'Keep tracking' }).focus();
     expect(popup()).not.toBeInTheDocument();
     expect(inspectPushState).not.toHaveBeenCalled();
@@ -45,7 +46,7 @@ describe('NotificationPrompt', () => {
     { kind: 'unsupported' }, { kind: 'unavailable' },
   ])('stays quiet for $kind browsers', async (state) => {
     vi.mocked(inspectPushState).mockResolvedValue(state);
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await act(async () => {});
     expect(popup()).not.toBeInTheDocument();
     expect(enablePushNotifications).not.toHaveBeenCalled();
@@ -53,38 +54,38 @@ describe('NotificationPrompt', () => {
 
   it('stays quiet when checking fails or dismissal cannot be stored', async () => {
     vi.mocked(inspectPushState).mockRejectedValue(new Error('offline'));
-    const { unmount } = render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    const { unmount } = renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await act(async () => {});
     expect(popup()).not.toBeInTheDocument();
     unmount();
     vi.mocked(inspectPushState).mockClear();
     vi.spyOn(window.localStorage, 'getItem').mockImplementation(() => { throw new Error('blocked storage'); });
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     expect(inspectPushState).not.toHaveBeenCalled();
     expect(popup()).not.toBeInTheDocument();
   });
 
   it.each(['Not now', 'Close'])('remembers %s across remounts without affecting another account', async (label) => {
     const user = userEvent.setup();
-    const { unmount } = render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    const { unmount } = renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: label }));
     expect(notificationInvitationDismissed(apiAuth.userId)).toBe(true);
     unmount();
-    const next = render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    const next = renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     expect(popup()).not.toBeInTheDocument();
     next.unmount();
-    render(<NotificationPrompt apiAuth={{ ...apiAuth, userId: 'other-user' }} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={{ ...apiAuth, userId: 'other-user' }} eligible />);
     expect(await screen.findByRole('region', { name: 'Get delivery updates' })).toBeInTheDocument();
   });
 
   it('responds to a Settings dismissal and cross-tab storage changes', async () => {
-    const { unmount } = render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    const { unmount } = renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await screen.findByRole('region', { name: 'Get delivery updates' });
     act(() => dismissNotificationInvitation(apiAuth.userId));
     expect(popup()).not.toBeInTheDocument();
     unmount();
     localStorage.clear();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await screen.findByRole('region', { name: 'Get delivery updates' });
     localStorage.setItem(`deliveryTrackerNotificationInvitation:${apiAuth.userId}`, 'dismissed');
     fireEvent(window, new StorageEvent('storage'));
@@ -95,7 +96,7 @@ describe('NotificationPrompt', () => {
     let finish!: (value: boolean) => void;
     vi.mocked(enablePushNotifications).mockImplementation(() => new Promise(resolve => { finish = resolve; }));
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'Enable notifications' }));
     expect(enablePushNotifications).toHaveBeenCalledExactlyOnceWith('public', apiAuth, 'en');
     expect(screen.getByRole('button', { name: 'Enabling…' })).toBeDisabled();
@@ -109,7 +110,7 @@ describe('NotificationPrompt', () => {
     vi.stubGlobal('Notification', { permission });
     vi.mocked(enablePushNotifications).mockRejectedValue(new Error('Notifications were not allowed'));
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'Enable notifications' }));
     expect(popup()).not.toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
@@ -120,7 +121,7 @@ describe('NotificationPrompt', () => {
     vi.stubGlobal('Notification', { permission: 'granted' });
     vi.mocked(enablePushNotifications).mockRejectedValueOnce(new Error('offline')).mockResolvedValue(true);
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'Enable notifications' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('Couldn’t turn on notifications');
     expect(notificationInvitationDismissed(apiAuth.userId)).toBe(false);
@@ -132,7 +133,7 @@ describe('NotificationPrompt', () => {
   it('offers the app first, then closes once its App Store link is followed', async () => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     const app = await screen.findByRole('link', { name: 'Download on my iPhone' });
     expect(new URL(app.getAttribute('href')!).searchParams.get('ct')).toBe('web-invite');
     expect(screen.getByText('Know when your parcel arrives.')).toBeVisible();
@@ -152,7 +153,7 @@ describe('NotificationPrompt', () => {
     Object.defineProperty(navigator, 'maxTouchPoints', { configurable: true, get: () => 5 });
     try {
       vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
-      render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+      renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
       expect(await screen.findByRole('link', { name: 'Download on my iPad' })).toBeVisible();
     } finally {
       delete (navigator as { maxTouchPoints?: number }).maxTouchPoints;
@@ -162,7 +163,7 @@ describe('NotificationPrompt', () => {
   it('provides Home Screen steps without requesting permission', async () => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'add Peek to your Home Screen' }));
     expect(screen.getByRole('region', { name: 'Add to your Home Screen' })).toBeInTheDocument();
     expect(screen.getAllByRole('listitem').map((step) => step.textContent))
@@ -174,11 +175,21 @@ describe('NotificationPrompt', () => {
     expect(screen.queryByRole('region')).not.toBeInTheDocument();
   });
 
+  it('gives the Home Screen steps at once on a site with no iPhone app', async () => {
+    vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
+    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    expect(await screen.findByRole('region', { name: 'Add to your Home Screen' })).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+    expect(screen.queryByRole('link')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Not now' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Got it' })).toBeVisible();
+  });
+
   it('starts Safari 27 from the page menu of its address bar', async () => {
     vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue(IPHONE_SAFARI_27);
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'add Peek to your Home Screen' }));
     expect(screen.getAllByRole('listitem').map((step) => step.textContent)).toEqual([
       `1Tap Page Menu in Safari’s address bar${window.location.hostname}`,
@@ -192,7 +203,7 @@ describe('NotificationPrompt', () => {
     vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue(IPHONE_LINKEDIN);
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
     const user = userEvent.setup();
-    render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     await user.click(await screen.findByRole('button', { name: 'add Peek to your Home Screen' }));
     expect(screen.getByText('Notifications need Safari.')).toBeVisible();
     expect(screen.getByRole('link', { name: 'Open in Safari' })).toHaveAttribute('href', `x-safari-${window.location.href}`);
@@ -202,7 +213,7 @@ describe('NotificationPrompt', () => {
   it('rechecks permission on returning to the page and ignores stale results', async () => {
     let finish!: (state: PushState) => void;
     vi.mocked(inspectPushState).mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
-    const { rerender } = render(<NotificationPrompt apiAuth={apiAuth} eligible />);
+    const { rerender } = renderOnPeek(<NotificationPrompt apiAuth={apiAuth} eligible />);
     rerender(<NotificationPrompt apiAuth={apiAuth} eligible={false} />);
     await act(async () => finish(prompt));
     expect(popup()).not.toBeInTheDocument();

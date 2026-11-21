@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { readBodyBytes, withErrorCode } from '../api';
+import { siteName } from '../siteSettings';
 import type { SupabaseServiceClient } from '../supabase';
 import type { JsonObject } from '../types';
 import { assistantsOpenToAccount } from './access';
@@ -34,7 +35,7 @@ export function protectedResourceMetadata(settings: AssistantSettings) {
     authorization_servers: [settings.issuer],
     scopes_supported: [...SCOPES],
     bearer_methods_supported: ['header'],
-    resource_name: 'Peek',
+    resource_name: siteName(),
   };
 }
 
@@ -110,7 +111,7 @@ function tokenAnswer(access: string, expires: Date, refresh: string | null, scop
   }, { headers: NO_STORE });
 }
 
-const CLOSED_ACCOUNT = 'Peek no longer connects assistants to this account';
+const closedAccount = () => `${siteName()} no longer connects assistants to this account`;
 
 /**
  * The token endpoint: a code (with its PKCE verifier) or a refresh token, for a public client. An account the setting
@@ -144,7 +145,7 @@ export async function exchangeToken(
         accessDigest: secretDigest(access), accessExpires, refreshDigest: secretDigest(refresh), refreshExpires,
       });
       if (!issued) return oauthError('invalid_grant', 'The code is unknown, expired, already used, or not this client\'s');
-      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
+      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', closedAccount());
       return tokenAnswer(access, accessExpires, refresh, issued.scopes);
     }
     case 'refresh_token': {
@@ -160,7 +161,7 @@ export async function exchangeToken(
       });
       if (issued === 'invalid_scope') return oauthError('invalid_scope', 'Scope exceeds the original grant');
       if (!issued) return oauthError('invalid_grant', 'The refresh token is unknown, expired or revoked');
-      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
+      if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', closedAccount());
       return tokenAnswer(access, accessExpires, issued.rotated ? refresh : null, issued.scopes);
     }
     default:

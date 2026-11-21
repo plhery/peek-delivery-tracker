@@ -2,6 +2,7 @@ import 'server-only';
 import type { MetadataRoute } from 'next';
 import { documentLanguage, type Locale } from '../lib/locale';
 import { siteTitle, wordsIn } from './sitePreview';
+import { siteName } from './siteSettings';
 
 /**
  * The installed app, named and described in a language. Every language's
@@ -13,7 +14,7 @@ export function webAppManifest(locale: Locale): MetadataRoute.Manifest {
   const t = wordsIn(locale);
   return {
     name: siteTitle(t),
-    short_name: 'Peek',
+    short_name: siteName(),
     description: t('preview.site.description'),
     lang: documentLanguage(locale),
     id: '/',

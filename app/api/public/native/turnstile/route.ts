@@ -1,6 +1,8 @@
 import { randomBytes } from 'node:crypto';
 import { apiRoute, HttpError } from '../../../../../src/server/api';
+import { escapeHtml } from '../../../../../src/server/email/html';
 import { turnstileSettings } from '../../../../../src/server/lookupVerification';
+import { siteName } from '../../../../../src/server/siteSettings';
 import { documentLanguage, isLocale } from '../../../../../src/lib/locale';
 
 export const dynamic = 'force-dynamic';
@@ -13,7 +15,7 @@ export const GET = apiRoute(async ({ request }) => {
   const language = new URL(request.url).searchParams.get('language');
   const nonce = randomBytes(16).toString('base64');
   const config = JSON.stringify({ sitekey: settings.siteKey, language: isLocale(language) ? language : 'en' }).replace(/</g, '\\u003c');
-  const html = `<!doctype html><html lang="${isLocale(language) ? documentLanguage(language) : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Peek</title>
+  const html = `<!doctype html><html lang="${isLocale(language) ? documentLanguage(language) : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(siteName())}</title>
 <style nonce="${nonce}">html{color-scheme:light dark}body{margin:0;display:grid;place-content:center;min-height:70vh;font-family:system-ui}#check{min-height:65px}</style>
 </head><body><div id="check"></div><script nonce="${nonce}">
 function send(type,token){window.webkit?.messageHandlers?.peekVerification?.postMessage({type,token});}

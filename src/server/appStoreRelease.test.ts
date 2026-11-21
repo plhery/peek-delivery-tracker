@@ -1,5 +1,6 @@
 import { generateKeyPairSync } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { APP_FOLLOWS_LINKS_FROM, appFollowsLinks, appStoreLookupDone, resetAppStoreRelease, versionAtLeast } from './appStoreRelease';
 import { parcelAlerts } from './publicParcels';
 import { SupabaseServiceClient } from './supabase';
@@ -11,6 +12,7 @@ const lookup = (version: string | null) => vi.fn(async () => Response.json(
 ));
 
 beforeEach(async () => {
+  stubPeekEnv();
   await resetAppStoreRelease();
   vi.spyOn(console, 'warn').mockImplementation(() => undefined);
 });
@@ -46,6 +48,15 @@ describe('the App Store release', () => {
     appFollowsLinks(now + HOUR + 10 * 60 * 1_000, down);
     await appStoreLookupDone();
     expect(down).toHaveBeenCalledTimes(2);
+  });
+
+  it('asks the App Store nothing on a site with no app there, and reads as no', async () => {
+    vi.stubEnv('APP_STORE_ID', '');
+    const fetcher = lookup(APP_FOLLOWS_LINKS_FROM);
+    expect(appFollowsLinks(now, fetcher)).toBe(false);
+    await appStoreLookupDone();
+    expect(appFollowsLinks(now, fetcher)).toBe(false);
+    expect(fetcher).not.toHaveBeenCalled();
   });
 
   it('reads an app the App Store does not list as no', async () => {

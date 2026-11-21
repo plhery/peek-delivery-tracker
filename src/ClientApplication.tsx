@@ -22,6 +22,7 @@ import { followAlertLanguage } from './peek/alerts';
 import { usePendingInvitation } from './lib/friendInvites';
 import { parcelCode } from './peek/parcelCode';
 import { PeekRoot } from './peek/PeekRoot';
+import { useSite } from './SiteContext';
 import { useLandingRoute, useParcelLinkRoute } from './peek/route';
 import { useVisitorSession } from './peek/visitor';
 import type { ParcelRepo } from './types';
@@ -58,6 +59,7 @@ function Application({ invitationRoute = false, parcelLinkId = null, demoRoute =
     () => isDemoBuild ? createDemoRepo() : null,
     [],
   );
+  const { legalPages } = useSite();
 
   useEffect(() => {
     void startAnalytics();
@@ -65,7 +67,7 @@ function Application({ invitationRoute = false, parcelLinkId = null, demoRoute =
     let disposed = false;
     let disableUpdateChecks = () => {};
     if (process.env.NODE_ENV === 'production') {
-      void registerPwaServiceWorker().then((registration) => {
+      void registerPwaServiceWorker(undefined, legalPages).then((registration) => {
         if (registration && !disposed) disableUpdateChecks = checkForUpdatesOnResume(registration);
       }).catch(() => undefined);
     }
@@ -76,7 +78,7 @@ function Application({ invitationRoute = false, parcelLinkId = null, demoRoute =
       disableUpdateChecks();
       disableBadgeClearing();
     };
-  }, []);
+  }, [legalPages]);
 
   return (
     <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>

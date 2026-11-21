@@ -1,5 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import en from '../../shared/locales/en.json';
 import { hrefLanguage, SUPPORTED_LOCALES } from '../lib/locale';
 
@@ -17,6 +18,7 @@ const text = (html: string) => html.replace(/<[^>]+>/g, '').replaceAll('&#x27;',
 
 describe('the page on connecting an assistant', () => {
   beforeEach(() => {
+    stubPeekEnv();
     vi.stubEnv('ASSISTANT_ACCOUNTS', '*');
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
   });

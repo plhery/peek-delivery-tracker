@@ -2,11 +2,12 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
 import { useI18n } from '../i18n';
 import { trackAction, type AnalyticsSpot } from '../lib/analytics';
 import {
-  ANDROID_TEST_OPEN, ANDROID_TEST_PATH, androidTestShows, closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer,
+  ANDROID_TEST_PATH, androidTestOpen, androidTestShows, closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer,
   noteAndroidTestThanked, readAndroidDevice, readAndroidTestNote, restartAndroidTest, snoozeAndroidTest, subscribeAndroidTest,
   type AndroidTestShows,
 } from '../lib/androidTest';
 import { Toast } from '../peek/parcel/Toast';
+import { useSite } from '../SiteContext';
 import { AppOffer } from './AppOffer';
 import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
@@ -35,19 +36,21 @@ const nothing = () => null;
 const counted = new Set<AnalyticsSpot>();
 
 /**
- * What a place shows of the invitation to test Peek for Android, and the toast after its ×. Nothing is drawn by the
- * server, nor before the browser has said what it runs on, nor while the invitation is switched off.
+ * What a place shows of the invitation to test the Android app, and the toast after its ×. Nothing is drawn by the
+ * server, nor before the browser has said what it runs on, nor while the site invites no one (`ANDROID_TEST_GROUP`).
  */
 function useAndroidTest(spot: AnalyticsSpot, { thanks }: { thanks: boolean }) {
-  const note = useSyncExternalStore(ANDROID_TEST_OPEN ? subscribeAndroidTest : off, ANDROID_TEST_OPEN ? readAndroidTestNote : nothing, nothing);
-  const known = useSyncExternalStore(ANDROID_TEST_OPEN ? subscribeToDevice : off, ANDROID_TEST_OPEN ? () => device : nothing, nothing);
+  const { android } = useSite();
+  const testing = androidTestOpen(android);
+  const note = useSyncExternalStore(testing ? subscribeAndroidTest : off, testing ? readAndroidTestNote : nothing, nothing);
+  const known = useSyncExternalStore(testing ? subscribeToDevice : off, testing ? () => device : nothing, nothing);
   const [now] = useState(() => Date.now());
   const [hidden, setHidden] = useState(false);
   const shows: AndroidTestShows = note && known !== null
-    ? androidTestShows(note, { open: ANDROID_TEST_OPEN, device: known, now, thanks })
+    ? androidTestShows(note, { open: testing, device: known, now, thanks })
     : null;
 
-  useEffect(() => { if (ANDROID_TEST_OPEN) noteAndroidAppReferrer(document.referrer); }, []);
+  useEffect(() => { if (testing) noteAndroidAppReferrer(document.referrer, android); }, [testing, android]);
   useEffect(() => {
     if (shows === 'thanks') noteAndroidTestThanked();
     if (shows !== 'invite' || counted.has(spot)) return;

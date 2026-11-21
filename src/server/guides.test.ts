@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import de from '../../shared/locales/de.json';
 import fr from '../../shared/locales/fr.json';
 import { GUIDE_LANGUAGES, type GuideLanguage } from '../lib/locale';
@@ -18,7 +19,7 @@ const { GuideIndexRoute, GuideRoute, guideIndexMetadata, guideMetadata } = await
 const { frenchSpacing } = await import('../guides/markdown');
 
 // As on Peek's own site, which serves its guides and carriers' pages.
-beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
+beforeEach(stubPeekEnv);
 afterEach(() => { request.host = 'peek.example'; vi.unstubAllEnvs(); });
 
 const ids = guideLinks('en').map(({ id }) => id);

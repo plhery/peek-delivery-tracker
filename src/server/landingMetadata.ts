@@ -4,6 +4,7 @@ import { hrefLanguages, languagePath, SUPPORTED_LOCALES, type AddressLanguage, t
 import { requestLocale } from './requestLocale';
 import { requestOrigin, siteOrigin } from './requestOrigin';
 import { landingTitle, PREVIEW_LOCALES, sitePicture, wordsIn } from './sitePreview';
+import { siteName } from './siteSettings';
 
 /** The landing's address in a language, on the origin the site's addresses are written on: `/de` in German, `/` in English. */
 export function landingAddress(origin: URL, locale: Locale): string {
@@ -46,7 +47,7 @@ export async function landingMetadata(language?: AddressLanguage): Promise<Metad
     openGraph: {
       type: 'website',
       url: address,
-      siteName: 'Peek',
+      siteName: siteName(),
       locale: PREVIEW_LOCALES[locale],
       title,
       description,

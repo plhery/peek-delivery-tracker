@@ -4,6 +4,7 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { usePendingInvitation } from '../lib/friendInvites';
 import { FriendsError, type FriendsClient } from '../lib/friends';
 import type { ApiFriendsSnapshot } from '../generated/apiContract';
+import { renderOnPeek } from '../test/site';
 import { FriendInvitation } from './FriendInvitation';
 
 const code = 'ab'.repeat(16);
@@ -274,4 +275,15 @@ it('saves sharing edits without accepting the invitation', async () => {
   expect(client.action).toHaveBeenCalledExactlyOnceWith({ action: 'save_profile', nickname: 'Alex', shareStats: true, shareArrival: true }, []);
   expect(screen.getByRole('button', { name: 'Become friends' })).toBeEnabled();
   expect(sessionStorage.getItem('sdt.pendingFriendInvitation.v1')).not.toBeNull();
+});
+
+it('offers an iPhone the invitation in the iOS app only on a site with one on the App Store', async () => {
+  vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1');
+  const { unmount } = renderOnPeek(<Harness />);
+  expect(await screen.findByRole('link', { name: 'Open in the iOS app' })).toHaveAttribute('href', `peekdeliverytracker://invite#${code}`);
+  unmount();
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ previewNickname: 'Paul' }))));
+  render(<Harness />);
+  await screen.findByRole('heading', { name: 'Your friend Paul sent you an invitation' });
+  expect(screen.queryByRole('link', { name: 'Open in the iOS app' })).toBeNull();
 });

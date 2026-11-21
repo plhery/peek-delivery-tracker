@@ -1,11 +1,12 @@
-import { ANDROID_APP_LINK } from './androidTest';
-import { appStoreLink, type AppStoreCampaign } from './appStore';
+import { androidAppLink, type AndroidApp } from './androidTest';
+import { appStoreLink, type AppStoreApp, type AppStoreCampaign } from './appStore';
 
 /**
- * `/app`, the address of the codes to scan and of Settings' app row: one address for both phones. The server sends a
- * phone whose user agent names it on to its app: an iPhone or an iPad to the App Store, an Android phone where the
- * landing's "Get the Android app" leads. Anyone else, a computer or an iPad whose Safari says it is a Mac, gets a page
- * with both apps, which sends an iPad on to the App Store itself.
+ * `/app`, the address of the codes to scan and of Settings' app row: one address for both phones, on a site with an
+ * iPhone app (`APP_STORE_ID`); on another it is the 404 page and nothing links it. The server sends a phone whose user
+ * agent names it on to its app: an iPhone or an iPad to the App Store, an Android phone where the landing's "Get the
+ * Android app" leads. Anyone else, a computer or an iPad whose Safari says it is a Mac, gets a page with both apps,
+ * which sends an iPad on to the App Store itself.
  */
 export const PHONE_APP_PATH = '/app';
 
@@ -34,18 +35,19 @@ export function phoneAppSource(value: unknown): string | undefined {
 }
 
 /** The App Store, counted under the campaign of the link or code that led to `/app`. */
-export function phoneAppStoreLink(source?: string): string {
-  return appStoreLink((source && STORE_CAMPAIGNS.get(source)) || 'web-app');
+export function phoneAppStoreLink(app: AppStoreApp, source?: string): string {
+  return appStoreLink(app, (source && STORE_CAMPAIGNS.get(source)) || 'web-app');
 }
 
-/** Peek for Android. An address on this site carries the source on, for its page view to count. */
-export function phoneAppAndroidLink(source?: string): string {
-  return source && ANDROID_APP_LINK.startsWith('/') ? `${ANDROID_APP_LINK}?utm_source=${source}` : ANDROID_APP_LINK;
+/** The Android app, or null without one. An address on this site carries the source on, for its page view to count. */
+export function phoneAppAndroidLink(app: AndroidApp | null, source?: string): string | null {
+  const link = androidAppLink(app);
+  return link && source && link.startsWith('/') ? `${link}?utm_source=${source}` : link;
 }
 
-/** Where `/app` sends the phone a user agent names, or null when it names none the server can tell. */
-export function phoneAppDestination(userAgent: string, source?: string): string | null {
-  if (/\b(?:iPhone|iPad|iPod)\b/.test(userAgent)) return phoneAppStoreLink(source);
-  if (/\bAndroid\b/.test(userAgent)) return phoneAppAndroidLink(source);
+/** Where `/app` sends the phone a user agent names, or null when it names none the server can tell, or none of the site's apps runs on it. */
+export function phoneAppDestination(apps: { appStore: AppStoreApp; android: AndroidApp | null }, userAgent: string, source?: string): string | null {
+  if (/\b(?:iPhone|iPad|iPod)\b/.test(userAgent)) return phoneAppStoreLink(apps.appStore, source);
+  if (/\bAndroid\b/.test(userAgent)) return phoneAppAndroidLink(apps.android, source);
   return null;
 }

@@ -1,5 +1,6 @@
 import { generateKeyPairSync, verify } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { FCMAuthError, FcmClient, FCMError, fcmError, fcmTokenGone } from './fcm';
 import { friendshipNotification } from './friendshipPush';
 import * as metrics from './metrics';
@@ -60,6 +61,7 @@ function claims(assertion: string): { header: JsonObject; payload: JsonObject; v
   };
 }
 
+beforeEach(stubPeekEnv);
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
 describe('the service account\'s access token', () => {

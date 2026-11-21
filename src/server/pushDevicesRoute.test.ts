@@ -144,6 +144,7 @@ describe('an Android phone without Google\'s services', () => {
   const vapidSettings = () => {
     const vapid = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', vapid.publicKey);
+    vi.stubEnv('VAPID_SUBJECT', 'mailto:push@example.com');
     vi.stubEnv('VAPID_PRIVATE_KEY', vapid.privateKey);
   };
 

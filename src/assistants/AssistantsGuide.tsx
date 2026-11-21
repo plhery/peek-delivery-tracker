@@ -36,7 +36,14 @@ const TROUBLES: ReadonlyArray<readonly [problem: MessageKey, answer: MessageKey]
  * Settings gives them, what to ask it, what Peek shares, how to disconnect it and what to do when something goes wrong.
  * `mcpUrl` is the address assistants connect to, on the site's canonical origin.
  */
-export function AssistantsGuide({ t, mcpUrl }: { t: Translate; mcpUrl: string }) {
+export function AssistantsGuide({ t, mcpUrl, privacy = null, help = null }: {
+  t: Translate;
+  mcpUrl: string;
+  /** The privacy notice, which says what is kept about each assistant, where the site links one. */
+  privacy?: string | null;
+  /** The help page, which says how to reach the site's operator, where the site serves one. */
+  help?: string | null;
+}) {
   const place = `${t('settings.title')} › ${t('assistants.row')}`;
   const heading = (id: keyof typeof SECTIONS) => <h2 id={id}>{t(SECTIONS[id])}</h2>;
   return <article className="guide assistants-guide">
@@ -83,7 +90,7 @@ export function AssistantsGuide({ t, mcpUrl }: { t: Translate; mcpUrl: string })
 
         {heading('shares')}
         <p>{t('assistants.page.sharesBody')}</p>
-        <p><Filled text={t('assistants.page.privacy')} pieces={{ privacy: <a href="/privacy.html">{t('assistants.page.privacyLink')}</a> }} /></p>
+        {privacy && <p><Filled text={t('assistants.page.privacy')} pieces={{ privacy: <a href={privacy}>{t('assistants.page.privacyLink')}</a> }} /></p>}
 
         {heading('disconnect')}
         <p><Filled text={t('assistants.page.disconnectBody')} pieces={{ place: <strong>{place}</strong>, disconnect: <strong>{t('assistants.disconnect')}</strong> }} /></p>
@@ -93,7 +100,7 @@ export function AssistantsGuide({ t, mcpUrl }: { t: Translate; mcpUrl: string })
           <h3>{t(problem)}</h3>
           <p><Filled text={t(answer)} pieces={{ place: <strong>{place}</strong>, allow: <strong>{t('assistants.consent.allow')}</strong> }} /></p>
         </Fragment>)}
-        <p><Filled text={t('assistants.page.help')} pieces={{ help: <a href="/support.html">{t('assistants.page.helpLink')}</a> }} /></p>
+        {help && <p><Filled text={t('assistants.page.help')} pieces={{ help: <a href={help}>{t('assistants.page.helpLink')}</a> }} /></p>}
       </div>
     </div>
   </article>;

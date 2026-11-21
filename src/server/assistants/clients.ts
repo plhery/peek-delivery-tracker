@@ -4,6 +4,7 @@ import { lookup as dnsLookup, type LookupAddress, type LookupOptions } from 'nod
 import type { IncomingMessage } from 'node:http';
 import { request } from 'node:https';
 import { BlockList, isIP } from 'node:net';
+import { siteName } from '../siteSettings';
 import type { SupabaseServiceClient } from '../supabase';
 import { isRecord } from '../types';
 
@@ -223,7 +224,7 @@ function readDocument(url: string): Promise<unknown> {
       method: 'GET',
       agent: false,
       lookup: publicLookup as never,
-      headers: { Accept: 'application/json', 'User-Agent': 'Peek OAuth' },
+      headers: { Accept: 'application/json', 'User-Agent': `${siteName()} OAuth` },
       timeout: DOCUMENT_TIMEOUT_MS,
     }, (response) => {
       answer = response;

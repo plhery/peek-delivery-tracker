@@ -2,9 +2,7 @@ import type { MouseEvent } from 'react';
 import type { Locale } from '../../i18n';
 import { DEMO_PATH } from '../../lib/experience';
 
-export { SOURCE_URL } from '../../lib/source';
-
-/** Who makes Peek, on X. */
+/** Who makes Peek, on X: linked only where `AUTHOR_LINKS` is on. */
 export const AUTHOR_URL = 'https://x.com/plhery';
 
 /** The language a site written in `languages` (and English) speaks to a reader of `locale`: Portuguese to a Brazilian. */
@@ -14,7 +12,7 @@ function siteLanguage(locale: Locale, languages: readonly string[]): string {
 }
 
 /**
- * What else its author makes, each at its own address in the reader's language where it is written in it, else in
+ * What else its author makes (only where `AUTHOR_LINKS` is on), each at its own address in the reader's language where it is written in it, else in
  * English. ScootRadar's English is at its bare domain.
  */
 export const OTHER_SITES = {

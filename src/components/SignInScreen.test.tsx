@@ -1,12 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+import { PLAIN_SITE } from '../lib/site';
+import { SiteProvider } from '../SiteContext';
 import { SignInScreen } from './SignInScreen';
 
 describe('SignInScreen', () => {
   it('offers a sole custom provider without email, Google or Apple', async () => {
     const signInWithOidc = vi.fn().mockResolvedValue(undefined);
-    render(<SignInScreen configured oidcName="Authentik" signInWithOidc={signInWithOidc}
+    renderOnPeek(<SignInScreen configured oidcName="Authentik" signInWithOidc={signInWithOidc}
       emailOtpEnabled={false} sendCode={vi.fn()} verifyCode={vi.fn()} />);
     expect(screen.queryByLabelText('Email address')).not.toBeInTheDocument();
     expect(screen.getAllByRole('button')).toHaveLength(1);
@@ -20,7 +23,7 @@ describe('SignInScreen', () => {
     const signInWithOidc = vi.fn().mockImplementationOnce(() => new Promise((_, fail) => { reject = fail; }))
       .mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(<SignInScreen configured oidcName="Authentik" signInWithOidc={signInWithOidc}
+    renderOnPeek(<SignInScreen configured oidcName="Authentik" signInWithOidc={signInWithOidc}
       googleEnabled appleEnabled signInWithGoogle={vi.fn()} signInWithApple={vi.fn()}
       sendCode={vi.fn()} verifyCode={vi.fn()} />);
     await user.click(screen.getByRole('button', { name: 'Continue with Authentik' }));
@@ -34,12 +37,12 @@ describe('SignInScreen', () => {
   });
 
   it('hides an unconfigured custom provider', () => {
-    render(<SignInScreen configured signInWithOidc={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
+    renderOnPeek(<SignInScreen configured signInWithOidc={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
     expect(screen.queryByRole('button', { name: /Continue with/ })).not.toBeInTheDocument();
   });
 
   it('renders the configured provider name as text', () => {
-    render(<SignInScreen configured oidcName={'<img src=x onerror=alert(1)>'} signInWithOidc={vi.fn()}
+    renderOnPeek(<SignInScreen configured oidcName={'<img src=x onerror=alert(1)>'} signInWithOidc={vi.fn()}
       sendCode={vi.fn()} verifyCode={vi.fn()} />);
     const button = screen.getByRole('button', { name: 'Continue with <img src=x onerror=alert(1)>' });
     expect(button.querySelector('img')).toBeNull();
@@ -49,7 +52,7 @@ describe('SignInScreen', () => {
     const sendCode = vi.fn().mockResolvedValue(undefined);
     const verifyCode = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <SignInScreen card configured sendCode={sendCode} verifyCode={verifyCode} />,
     );
 
@@ -73,13 +76,26 @@ describe('SignInScreen', () => {
     expect(verifyCode).toHaveBeenCalledWith('owner@example.test', '123456');
   });
 
+  it('links the privacy notice only where the site names one', () => {
+    const { unmount } = render(<SignInScreen card configured sendCode={vi.fn()} verifyCode={vi.fn()} />);
+    expect(screen.getByText('Your tracking details stay private.')).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Privacy' })).toBeNull();
+    unmount();
+    render(
+      <SiteProvider site={{ ...PLAIN_SITE, privacy: 'https://example.com/privacy' }}>
+        <SignInScreen card configured sendCode={vi.fn()} verifyCode={vi.fn()} />
+      </SiteProvider>,
+    );
+    expect(screen.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', 'https://example.com/privacy');
+  });
+
   it('asks the one address that has a password for it instead of sending a code', async () => {
     const sendCode = vi.fn().mockResolvedValue(undefined);
     const signInWithPassword = vi.fn().mockRejectedValueOnce(Object.assign(new Error('Invalid login credentials'), { status: 400 }))
       .mockResolvedValue(undefined);
     const passwordFor = vi.fn(async (email: string) => email === 'review@example.test');
     const user = userEvent.setup();
-    render(<SignInScreen card configured sendCode={sendCode} verifyCode={vi.fn()} passwordFor={passwordFor}
+    renderOnPeek(<SignInScreen card configured sendCode={sendCode} verifyCode={vi.fn()} passwordFor={passwordFor}
       signInWithPassword={signInWithPassword} />);
 
     await user.type(screen.getByLabelText('Email address'), 'owner@example.test');
@@ -109,7 +125,7 @@ describe('SignInScreen', () => {
   it('keeps provider errors actionable', async () => {
     const sendCode = vi.fn().mockRejectedValue(new Error('Email rate limit reached'));
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <SignInScreen configured sendCode={sendCode} verifyCode={vi.fn()} />,
     );
     await user.type(screen.getByLabelText('Email address'), 'owner@example.test');
@@ -120,7 +136,7 @@ describe('SignInScreen', () => {
   it('supports Google-only production sign-in', async () => {
     const signInWithGoogle = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <SignInScreen
         configured
         googleEnabled
@@ -142,7 +158,7 @@ describe('SignInScreen', () => {
       .mockResolvedValue(undefined);
     const signInWithGoogle = vi.fn();
     const user = userEvent.setup();
-    render(<SignInScreen configured appleEnabled googleEnabled signInWithApple={signInWithApple}
+    renderOnPeek(<SignInScreen configured appleEnabled googleEnabled signInWithApple={signInWithApple}
       signInWithGoogle={signInWithGoogle} sendCode={vi.fn()} verifyCode={vi.fn()} />);
     expect(screen.getAllByRole('button', { name: /^Continue with / }).map((button) => button.textContent))
       .toEqual(['Continue with Google', 'Continue with Apple']);
@@ -161,7 +177,7 @@ describe('SignInScreen', () => {
 
   it('keeps email secondary with Apple as the only social provider', async () => {
     const user = userEvent.setup();
-    render(<SignInScreen configured appleEnabled signInWithApple={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
+    renderOnPeek(<SignInScreen configured appleEnabled signInWithApple={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
     expect(screen.queryByLabelText('Email address')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Continue with Google' })).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Sign in with email' }));
@@ -169,13 +185,13 @@ describe('SignInScreen', () => {
   });
 
   it('hides Apple until the provider is configured', () => {
-    render(<SignInScreen configured signInWithApple={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
+    renderOnPeek(<SignInScreen configured signInWithApple={vi.fn()} sendCode={vi.fn()} verifyCode={vi.fn()} />);
     expect(screen.queryByRole('button', { name: 'Continue with Apple' })).not.toBeInTheDocument();
   });
 
   it('keeps email secondary until the user asks for it', async () => {
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <SignInScreen
         configured
         googleEnabled
@@ -192,7 +208,7 @@ describe('SignInScreen', () => {
   });
 
   it('explains missing deployment configuration', () => {
-    render(
+    renderOnPeek(
       <SignInScreen configured={false} sendCode={vi.fn()} verifyCode={vi.fn()} />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent(

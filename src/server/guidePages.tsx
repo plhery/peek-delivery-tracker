@@ -15,6 +15,7 @@ import { jsonForScript, peekOrganization } from './landingStructuredData';
 import { messagesFor } from './requestLocale';
 import { requestOrigin, siteOrigin } from './requestOrigin';
 import { PREVIEW_LOCALES, sitePicture, wordsIn } from './sitePreview';
+import { siteName, siteSettings } from './siteSettings';
 
 /** How many other guides a guide offers below its text. */
 const READ_ON = 3;
@@ -32,7 +33,7 @@ export const languageNames = () => Object.fromEntries([
 ]) as Record<PageLanguage, string>;
 
 /**
- * A guides page's metadata, or a carrier's page's: its title with Peek's name, its address in each
+ * A guides page's metadata, or a carrier's page's: its title with the site's name, its address in each
  * language it is written in on the site's canonical origin, each language named as hreflang names it, and
  * Peek's own picture in the page's language, or for a language with pages alone, in the language around its text.
  */
@@ -43,13 +44,13 @@ export async function pageMetadata(locale: PageLanguage, alternates: (site: URL)
   const picture = sitePicture(origin, interfaceLanguage(locale));
   return {
     metadataBase: origin,
-    title: `${title} — Peek`,
+    title: `${title} — ${siteName()}`,
     description,
     alternates: { canonical: address, languages: hrefLanguages(languages) },
     openGraph: {
       ...(article ? { type: 'article', publishedTime: article.published, modifiedTime: article.updated } : { type: 'website' }),
       url: address,
-      siteName: 'Peek',
+      siteName: siteName(),
       locale: isPageOnlyLanguage(locale) ? PAGE_ONLY_LANGUAGES[locale].preview : PREVIEW_LOCALES[locale],
       title,
       description,
@@ -86,7 +87,7 @@ export async function GuideIndexRoute({ locale }: { locale: GuideLanguage }) {
   await connection();
   if (!guidePagesOn()) notFound();
   const t = guideWords(locale);
-  return <GuideFrame locale={locale} t={t} addresses={guideAddresses()} languageNames={languageNames()} screen={`guides/${locale}`}>
+  return <GuideFrame locale={locale} t={t} addresses={guideAddresses()} languageNames={languageNames()} screen={`guides/${locale}`} site={siteSettings()}>
     <GuideIndex locale={locale} t={t} guides={described(locale)} />
   </GuideFrame>;
 }
@@ -122,14 +123,14 @@ export async function GuideRoute({ locale, slug }: { locale: GuideLanguage; slug
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Peek', item: landingAddress(site, locale) },
+          { '@type': 'ListItem', position: 1, name: siteName(), item: landingAddress(site, locale) },
           { '@type': 'ListItem', position: 2, name: t('guides.title'), item: guideAlternates(site)[locale] },
           { '@type': 'ListItem', position: 3, name: text.title, item: url },
         ],
       },
     ],
   };
-  return <GuideFrame locale={locale} t={t} addresses={guideAddresses(link.id)} languageNames={languageNames()} screen={`guides/${locale}/${link.id}`}>
+  return <GuideFrame locale={locale} t={t} addresses={guideAddresses(link.id)} languageNames={languageNames()} screen={`guides/${locale}/${link.id}`} site={siteSettings()}>
     {/* Data, not a script: the browser runs nothing of it, so the page's script policy does not apply. */}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonForScript(data) }} />
     <GuidePage guide={text} id={link.id} locale={locale} t={t} links={links} others={next} />

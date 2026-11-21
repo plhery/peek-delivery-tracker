@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../../test/peekEnv';
 import { HttpError } from '../api';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import {
@@ -13,6 +14,9 @@ import {
 import { assistantSettings, newClientId, newSecret, pkceChallenge, secretDigest } from './settings';
 
 // Synthetic ids only.
+beforeEach(stubPeekEnv);
+afterEach(() => { vi.unstubAllEnvs(); });
+
 const userId = '5b000000-0000-4000-a000-0000000000a1';
 const grantId = '6c000000-0000-4000-a000-0000000000a1';
 const settings = assistantSettings({ ASSISTANT_ACCOUNTS: '*', CANONICAL_ORIGIN: 'https://peek.example' } as unknown as NodeJS.ProcessEnv)!;

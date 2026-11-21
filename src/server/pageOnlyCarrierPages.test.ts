@@ -1,5 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import en from '../../shared/locales/en.json';
 import { hrefLanguage } from '../lib/locale';
 
@@ -50,7 +51,7 @@ const { default: sitemap } = await import('../../app/sitemap');
 const { default: RootLayout } = await import('../../app/layout');
 
 // As on Peek's own site, which serves its guides and carriers' pages.
-beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
+beforeEach(stubPeekEnv);
 afterEach(() => {
   vi.unstubAllEnvs();
   request.page = null;

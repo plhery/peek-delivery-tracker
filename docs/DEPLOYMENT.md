@@ -94,14 +94,14 @@ At runtime, set the server Supabase values and `SUPABASE_SERVICE_ROLE_KEY`. Push
 optional:
 
 - Web Push: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (the canonical origin
-  when unset). The same key signs the UnifiedPush messages of the Android app without
+  when unset; the keys need one of the two). The same key signs the UnifiedPush messages of the Android app without
   Google's services; without it, UnifiedPush registrations are refused. That app's inbox
   needs nothing but the database, so every deployment serves it.
 - APNs: `APNS_TEAM_ID`, `APNS_KEY_ID`, `APNS_PRIVATE_KEY` (the whole `.p8`) and
   `APNS_BUNDLE_ID`. The same key sends alerts, Live Activity pushes and the alerts of
-  parcel links followed in the app. With it, the server asks the App Store once an hour
-  which version is out, to offer the app on a link's "Notify me" once that version
-  follows links.
+  parcel links followed in the app. With it and `APP_STORE_ID`, the server asks the App
+  Store once an hour which version is out, to offer the app on a link's "Notify me" once
+  that version follows links.
 - Firebase Cloud Messaging: `FCM_PROJECT_ID`, `FCM_CLIENT_EMAIL` and `FCM_PRIVATE_KEY`, the
   `project_id`, `client_email` and `private_key` of a service account key of the Firebase
   project the Android app is built with (a role that may send messages, such as Firebase Cloud
@@ -131,11 +131,12 @@ credentials and don't follow redirects, so keep it reachable through any edge pr
 iPhone Safari opens the app only from a link to another site, so the web's way into the
 app goes through the first of `LEGACY_HOSTS`, or the app's own scheme without one.
 
-**Links that open in the Android app.** `/.well-known/assetlinks.json` vouches for Peek's
-Android app: its package and the SHA-256 fingerprints of the key Google signs it with on
-Google Play and of the upload key that signs the fdroid build in Peek's F-Droid repository.
-`ANDROID_APP_PACKAGE` with `ANDROID_APP_CERT_SHA256` (comma-separated) names another app. Which links open is the app's manifest's to say. Google's servers fetch it like
-Apple's, so the same rule about edge protection applies.
+**Links that open in the Android app.** `/.well-known/assetlinks.json` vouches for the
+Android app `ANDROID_APP_PACKAGE` names, signed with the certificates whose SHA-256
+fingerprints `ANDROID_APP_CERT_SHA256` lists (comma-separated): for Peek's, the key Google
+signs it with on Google Play and the upload key that signs the fdroid build in Peek's F-Droid
+repository. Without both it answers 404. Which links open is the app's manifest's to say.
+Google's servers fetch it like Apple's, so the same rule about edge protection applies.
 
 - Expose port `3000` behind HTTPS.
 - `GET /health` returns `{"ok": true}` when the database answers within 2.5 s and the
@@ -352,6 +353,41 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   those are on. The Home Assistant integration signs in as
   `<origin>/oauth/clients/home-assistant.json`, on any origin, a development server's
   included.
+
+## The site's name, apps and documents
+
+The server reads what the site says about itself from its environment at each request, so
+one image serves any site. Unset, each setting is neutral: a site named "Parcel Tracker" with
+no apps, no author links and none of its operator's documents, that links the code where it
+comes from. Peek's own site sets each of them.
+
+- `SITE_NAME` (default `Parcel Tracker`) is the product's name where the code writes it: the
+  page titles and the manifest, link previews and their pictures, the structured data, the
+  guides' titles, notifications, the assistants' MCP server and OAuth texts, the apps'
+  Turnstile page and the User-Agent the server sends other services, with `CANONICAL_ORIGIN`. The
+  app's words (`shared/locales`), the sign-in email (`public/auth-emails/`) and the
+  maintenance page (`ops/cloudflare/`) name Peek themselves. `SITE_ALTERNATE_NAMES`
+  (comma-separated) are the other names the landing's structured data gives search engines,
+  before the host.
+- `APP_STORE_ID` is the iPhone app on the App Store, and `APP_STORE_PROVIDER_TOKEN` the App
+  Store Connect provider token its campaign links count under. Without an id, no page shows
+  the Smart App Banner, an App Store link or the app's code, `/app` is the 404 page, and the
+  App Store is never asked. The codes (`public/*/app-qr.svg`) lead to Peek's `/app`.
+- `ANDROID_APP_PACKAGE` is the Android app on Google Play; without it no page offers one.
+  `ANDROID_TEST_GROUP` is the Google Group of its closed test's testers: with it, the site
+  invites Android phones to the test at `/android`; without it, `/android` is the 404 page
+  and the Android button leads to Google Play. `ANDROID_FDROID_REPO` and
+  `ANDROID_RELEASES_URL` add an F-Droid repository to copy and a releases page to `/android`.
+- `SOURCE_URL` (default the repository the code comes from) is where the pages, the emails
+  and the Sentry alerts' runbook link the code.
+- `AUTHOR_LINKS=on` names Peek's author on the landing, on X, and the other sites they make.
+- `LEGAL_PAGES=on` serves the privacy notice, the terms of use, the help page and the
+  accessibility page (`public/*.html`). They name Peek's operator, so only Peek's own site
+  turns them on. Off, their addresses are the 404 page, the sitemap leaves them out, no page
+  or email links them, and the service worker keeps no copy of the privacy notice.
+- `PRIVACY_URL` is a privacy notice of the site's own, linked from sign-in, Settings, the
+  landing's foot and the emails. Without it they link `/privacy.html` where `LEGAL_PAGES` is
+  on, and no notice elsewhere.
 
 ## Guides and carrier pages
 

@@ -3,6 +3,7 @@ import type { PrecacheEntry, SerwistGlobalConfig, SerwistPlugin } from 'serwist'
 import { ExpirationPlugin, NetworkFirst, NetworkOnly, Serwist } from 'serwist';
 import { pageServerDown } from '../src/lib/maintenance';
 import { isShareDraftId, SHARE_DRAFTS, shareDraftAddress, shareTargetAddress, type ShareFailure } from '../src/lib/shareTarget';
+import { WORKER_WITHOUT_DOCUMENTS } from '../src/lib/site';
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -149,8 +150,15 @@ const pageNavigation = new NetworkFirst({
   ],
 });
 
+// A site that serves no privacy notice registers the worker with a query that says so (`LEGAL_PAGES`): its address is
+// the 404 page there, which would stop the worker installing.
+const keepsNoDocuments = self.location.search === `?${WORKER_WITHOUT_DOCUMENTS}`;
+const precacheEntries = keepsNoDocuments
+  ? self.__SW_MANIFEST?.filter((entry) => (typeof entry === 'string' ? entry : entry.url) !== '/privacy.html')
+  : self.__SW_MANIFEST;
+
 const serwist: Serwist = new Serwist({
-  precacheEntries: self.__SW_MANIFEST,
+  precacheEntries,
   skipWaiting: true,
   clientsClaim: true,
   // The app shell comes from the precache, so a preload request would go unused.

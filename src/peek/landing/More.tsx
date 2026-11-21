@@ -4,9 +4,10 @@ import { Seal } from '../../components/Seal';
 import { PeekMark } from '../../components/PeekMark';
 import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
-import { ANDROID_APP_LINK } from '../../lib/androidTest';
+import { androidAppLink } from '../../lib/androidTest';
 import { appStoreLink } from '../../lib/appStore';
 import { DEMO_PATH } from '../../lib/experience';
+import { useSite } from '../../SiteContext';
 import { usePeekSession } from '../session';
 import { PlatformLogo } from './glyphs';
 import { followDemoLink, followInPlace } from './links';
@@ -35,7 +36,8 @@ const DELIVERED = 10;
 /**
  * "Following more than one?": the deliveries list as the app shows it, what
  * signing in adds, and the passport, where a stamp lands each time the
- * journey above delivers. The demo deliveries are there to try before signing in.
+ * journey above delivers. The demo deliveries are there to try before signing in, and the site's apps, where it has
+ * any, to install.
  */
 export function More({ onSignIn, landed }: {
   onSignIn: () => void;
@@ -44,6 +46,8 @@ export function More({ onSignIn, landed }: {
 }) {
   const { t, languageTag } = useI18n();
   const { deliveryEmails, account, openDeliveries } = usePeekSession();
+  const site = useSite();
+  const android = androidAppLink(site.android);
   // Someone signed in already has what the section offers: it leads to their deliveries.
   const mine = account === 'signed-in' && openDeliveries;
   const phone = useRef<HTMLDivElement>(null);
@@ -101,18 +105,19 @@ export function More({ onSignIn, landed }: {
           <a className="button button--secondary" href={DEMO_PATH} onClick={followDemoLink}>{t('landing.more.demo')}</a>
         </div>
         {/* The two apps side by side, on a row of their own, each in its platform's colour. */}
-        <div className="landing-more__actions">
-          <a className="button button--apple" href={appStoreLink('web-more')} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>
+        {(site.appStore || android) && <div className="landing-more__actions">
+          {site.appStore && <a className="button button--apple" href={appStoreLink(site.appStore, 'web-more')} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>}
           {/* While the Android app is a closed test, the steps lead there: Google Play lets in only the testers' group. */}
-          <a className="button button--android" href={ANDROID_APP_LINK} onClick={() => trackAction('android-test-open', undefined, 'landing')}><PlatformLogo name="android" />{t('landing.more.android')}</a>
-        </div>
+          {android && <a className="button button--android" href={android} onClick={() => trackAction('android-test-open', undefined, 'landing')}><PlatformLogo name="android" />{t('landing.more.android')}</a>}
+        </div>}
       </div>
-      {/* On a computer either phone is a scan away: the code's address sends each on to its own app. */}
-      <div className="landing-qr">
+      {/* On a computer either phone is a scan away: the code's address, `/app`, sends each on to its own app. A site
+          without an iPhone app has no such address. */}
+      {site.appStore && <div className="landing-qr">
         {/* eslint-disable-next-line @next/next/no-img-element -- a small drawing, fetched only where it shows */}
         <img src="/landing/app-qr.svg" alt="" width={92} height={92} loading="lazy" />
         <span><strong>{t('landing.more.qr.title')}</strong><span>{t('landing.more.qr.body')}</span></span>
-      </div>
+      </div>}
     </div>
   </section>;
 }

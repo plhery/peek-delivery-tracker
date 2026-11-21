@@ -6,16 +6,22 @@ import { languageTags, translateMessage, type Translate } from '../../lib/messag
 import { pickupPoint, pickupPointMapsUrl, type PickupPoint } from '../../lib/pickupPoint';
 import { collectedFromPickupPoint } from '../../lib/stages';
 import { localeDistanceUnit, localeUses24HourTime } from '../../lib/units';
-import { SOURCE_URL } from '../../lib/source';
 import { capitalized } from '../../peek/parcel/summary';
 import { toParcel } from '../../store/apiRepo';
 import { errorType, logOperationalEvent } from '../observability';
 import { notificationText } from '../push';
 import { messagesFor } from '../requestLocale';
+import { privacyAddress, sourceUrl } from '../siteSettings';
 import type { DeliveryCard, DeliveryCardInput } from './card';
 import { deliveredWhen, type DeliveredWhen } from './delivered';
 import { emailHtml, emailText, type EmailWords } from './html';
 import type { DeliveryEmailContent, DeliveryEmailInput } from './types';
+
+/** The privacy notice the email links, on the site the parcel's page is on where it is the site's own; none where the site links none. */
+function privacyLink(journeyUrl: URL): string | null {
+  const address = privacyAddress();
+  return address && new URL(address, journeyUrl.origin).href;
+}
 
 /** Carriers that stand for "nobody knows which": the email names none of them. */
 const UNNAMED_CARRIERS = new Set(['unknown', 'intl-post']);
@@ -119,8 +125,8 @@ async function emailContent(input: DeliveryEmailInput, draw = drawCard): Promise
     textOff: t('email.delivered.textOff', { url: input.offUrl }),
     journeyUrl: input.journeyUrl,
     offUrl: input.offUrl,
-    privacyUrl: `${journeyUrl.origin}/privacy.html`,
-    sourceUrl: SOURCE_URL,
+    privacyUrl: privacyLink(journeyUrl),
+    sourceUrl: sourceUrl(),
   };
   return {
     subject: words.subject,

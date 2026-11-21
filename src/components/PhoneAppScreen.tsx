@@ -11,6 +11,7 @@ import { onIPad } from '../lib/appStore';
 import { backOnSite } from '../lib/backOnSite';
 import { phoneAppAndroidLink, phoneAppStoreLink } from '../lib/phoneApp';
 import { useTabTitle } from '../lib/tabTitle';
+import { useSite } from '../SiteContext';
 import { AndroidRobotCredit, PlatformLogo } from '../peek/landing/glyphs';
 import { Icon } from './Icon';
 import { PeekMark } from './PeekMark';
@@ -18,7 +19,7 @@ import './PhoneAppScreen.css';
 
 /**
  * `/app` for whoever the server could not send on to an app ([phoneApp](../lib/phoneApp.ts)): a computer gets the
- * code to scan with its phone and both apps, and an iPad whose Safari says it is a Mac goes on to the App Store.
+ * code to scan with its phone and the site's apps, and an iPad whose Safari says it is a Mac goes on to the App Store.
  * Under the apps, their guides, in the reader's language or the nearest one they are written in.
  */
 export function PhoneAppScreen({ source, guides, initialLocale, initialMessages }: {
@@ -40,12 +41,14 @@ const notKnown = () => false;
 
 function PhoneApp({ source, guides }: { source?: string; guides?: { iphone: GuideAddresses; android: GuideAddresses } }) {
   const { t, locale } = useI18n();
-  const appStore = phoneAppStoreLink(source);
+  const site = useSite();
+  const appStore = site.appStore && phoneAppStoreLink(site.appStore, source);
+  const android = phoneAppAndroidLink(site.android, source);
   // The server sends the page a computer gets; an iPad hides it as soon as it runs and goes on to the App Store.
-  const iPad = useSyncExternalStore(stays, onIPad, notKnown);
+  const iPad = useSyncExternalStore(stays, onIPad, notKnown) && appStore !== null;
   useTabTitle(`${t('app.title')} — ${t('phoneApp.title')}`);
   useEffect(() => {
-    if (iPad) {
+    if (iPad && appStore) {
       location.replace(appStore);
       return;
     }
@@ -70,16 +73,16 @@ function PhoneApp({ source, guides }: { source?: string; guides?: { iphone: Guid
         <span><strong>{t('landing.more.qr.title')}</strong><span>{t('landing.more.qr.body')}</span></span>
       </div>
       <div className="phone-app__buttons">
-        <a className="button button--apple" href={appStore} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>
-        <a className="button button--android" href={phoneAppAndroidLink(source)} onClick={() => trackAction('android-test-open', undefined, 'get-app')}>
+        {appStore && <a className="button button--apple" href={appStore} target="_blank" rel="noopener noreferrer"><PlatformLogo name="apple" />{t('landing.more.app')}</a>}
+        {android && <a className="button button--android" href={android} onClick={() => trackAction('android-test-open', undefined, 'get-app')}>
           <PlatformLogo name="android" />{t('landing.more.android')}
-        </a>
+        </a>}
       </div>
       {guides && <p className="phone-app__guides">
         <GuideTitleLink guide={guides.iphone} locale={locale} />
         <GuideTitleLink guide={guides.android} locale={locale} />
       </p>}
-      <AndroidRobotCredit className="phone-app__credit" />
+      {android && <AndroidRobotCredit className="phone-app__credit" />}
     </main>
   </div>;
 }

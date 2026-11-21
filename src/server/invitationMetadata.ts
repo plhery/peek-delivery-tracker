@@ -7,6 +7,7 @@ import { invitationSocialNickname, invitationTitle } from './invitationSocial';
 import { requestLocale } from './requestLocale';
 import { requestOrigin } from './requestOrigin';
 import { PREVIEW_LOCALES, wordsIn } from './sitePreview';
+import { appStoreApp, siteName } from './siteSettings';
 
 export async function invitationMetadata(preview: string | string[] | undefined): Promise<Metadata> {
   const nickname = await invitationSocialNickname(preview, await headers());
@@ -33,11 +34,11 @@ export async function invitationMetadata(preview: string | string[] | undefined)
     referrer: 'no-referrer',
     alternates: { canonical: url.href },
     openGraph: {
-      type: 'website', url: url.href, siteName: 'Peek', locale: PREVIEW_LOCALES[locale], title, description: invitationDescription,
+      type: 'website', url: url.href, siteName: siteName(), locale: PREVIEW_LOCALES[locale], title, description: invitationDescription,
       images: [{ url: image.href, width: 1200, height: 630, type: 'image/png', alt: title }],
     },
     twitter: { card: 'summary_large_image', title, description: invitationDescription, images: [{ url: image.href, alt: title }] },
     // Safari's banner opens a short invitation in the iPhone app. An older one keeps its code after the `#`, which the server never sees.
-    other: smartAppBanner(short ? url.href : new URL('/', origin).href),
+    other: smartAppBanner(appStoreApp(), short ? url.href : new URL('/', origin).href),
   };
 }

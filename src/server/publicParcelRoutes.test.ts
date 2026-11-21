@@ -683,6 +683,7 @@ describe('reading a parcel link', () => {
   it('says a link can take alerts, and with which key, when Web Push is configured', async () => {
     const keys = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', keys.publicKey);
+    vi.stubEnv('VAPID_SUBJECT', 'mailto:push@example.com');
     vi.stubEnv('VAPID_PRIVATE_KEY', keys.privateKey);
     find();
     const text = await (await open()).text();
@@ -1308,6 +1309,7 @@ describe('alerts for a parcel link', () => {
   beforeEach(() => {
     const vapid = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', vapid.publicKey);
+    vi.stubEnv('VAPID_SUBJECT', 'mailto:push@example.com');
     vi.stubEnv('VAPID_PRIVATE_KEY', vapid.privateKey);
   });
 
@@ -1632,6 +1634,7 @@ describe('alerts for a parcel link in the Android app without Google\'s services
       'FCM_PROJECT_ID', 'FCM_CLIENT_EMAIL', 'FCM_PRIVATE_KEY']) vi.stubEnv(name, '');
     const vapid = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', vapid.publicKey);
+    vi.stubEnv('VAPID_SUBJECT', 'mailto:push@example.com');
     vi.stubEnv('VAPID_PRIVATE_KEY', vapid.privateKey);
   });
 

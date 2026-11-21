@@ -1,25 +1,23 @@
 import { afterEach, expect, it, vi } from 'vitest';
+import { PEEK_ENV, stubPeekEnv } from '../test/peekEnv';
 
-const switched = vi.hoisted(() => ({ open: false }));
-vi.mock('../lib/androidTest', async (original) => ({
-  ...await original<typeof import('../lib/androidTest')>(),
-  get ANDROID_TEST_OPEN() { return switched.open; },
-}));
 vi.mock('next/headers', () => ({
   headers: vi.fn(async () => new Headers({ 'accept-language': 'de' })),
   cookies: vi.fn(async () => ({ get: () => undefined })),
 }));
 vi.mock('next/server', async (original) => ({ ...await original<typeof import('next/server')>(), connection: vi.fn(async () => undefined) }));
 
-afterEach(() => { switched.open = false; });
+afterEach(() => { vi.unstubAllEnvs(); });
 
-it('is not found while the invitation is switched off', async () => {
+it('is not found on a site without an Android app, or while its closed test has no testers’ group', async () => {
   const { default: page } = await import('../../app/android/page');
+  await expect(page()).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+  vi.stubEnv('ANDROID_APP_PACKAGE', PEEK_ENV.ANDROID_APP_PACKAGE);
   await expect(page()).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
 });
 
-it('draws the steps in the request’s language once it is on, and is never indexed', async () => {
-  switched.open = true;
+it('draws the steps in the request’s language while the test is open, and is never indexed', async () => {
+  stubPeekEnv();
   const { default: page, generateMetadata } = await import('../../app/android/page');
   const element = await page();
   expect(element.props).toMatchObject({ initialLocale: 'de' });

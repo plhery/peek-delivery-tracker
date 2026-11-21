@@ -2,51 +2,47 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import '../src/styles.css';
 import { authConfigFromEnvironment } from '../src/auth/authConfig';
-import { GuidePagesProvider } from '../src/guides/GuidePagesContext';
 import { APPEARANCE_BOOTSTRAP } from '../src/lib/appearanceConfig';
 import { smartAppBanner } from '../src/lib/appStore';
 import { ENTRY_HINT_BOOTSTRAP } from '../src/lib/entryHintConfig';
 import { ERROR_REPORTS_META } from '../src/lib/errorReportsConfig';
 import { documentLanguage, manifestPath } from '../src/lib/locale';
+import { SiteProvider } from '../src/SiteContext';
 import { browserErrorReporting } from '../src/server/browserErrors';
-import { guidePagesOn } from '../src/server/guideSettings';
 import { requestLocale, requestPageLanguage } from '../src/server/requestLocale';
 import { requestOrigin } from '../src/server/requestOrigin';
 import { PREVIEW_LOCALES, sitePicture, siteTitle, wordsIn } from '../src/server/sitePreview';
+import { appStoreApp, siteName, siteSettings } from '../src/server/siteSettings';
 
-const site: Metadata = {
-  applicationName: 'Peek',
-  icons: {
-    icon: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
-    apple: '/icons/apple-touch-icon.png',
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Peek',
-  },
+const icons: Metadata['icons'] = {
+  icon: { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+  apple: '/icons/apple-touch-icon.png',
 };
 
 /**
- * Peek's name and what it is, in the reader's language, for the page and for the app a
- * browser installs from it. A page that draws no preview of its own shares Peek's picture,
- * under its own title and description. On an iPhone, Safari offers the app above every page,
- * or opens it where it is installed: at the page's own address where the page names one.
+ * The site's name and what it is, in the reader's language, for the page and for the app a
+ * browser installs from it. A page that draws no preview of its own shares the site's picture,
+ * under its own title and description. On an iPhone, where the site has an app on the App Store,
+ * Safari offers it above every page, or opens it where it is installed: at the page's own address
+ * where the page names one.
  */
 export async function generateMetadata(): Promise<Metadata> {
   const origin = await requestOrigin();
   const locale = await requestLocale();
   const t = wordsIn(locale);
   const picture = sitePicture(origin, locale);
+  const name = siteName();
   return {
-    ...site,
+    applicationName: name,
+    icons,
+    appleWebApp: { capable: true, statusBarStyle: 'default', title: name },
     title: siteTitle(t),
     description: t('preview.site.description'),
     metadataBase: origin,
     manifest: manifestPath(locale),
-    openGraph: { type: 'website', siteName: 'Peek', locale: PREVIEW_LOCALES[locale], images: [picture] },
+    openGraph: { type: 'website', siteName: name, locale: PREVIEW_LOCALES[locale], images: [picture] },
     twitter: { card: 'summary_large_image', images: [picture.url] },
-    other: smartAppBanner(new URL('/', origin).href),
+    other: smartAppBanner(appStoreApp(), new URL('/', origin).href),
   };
 }
 
@@ -76,8 +72,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {authOrigin && <link rel="preconnect" href={authOrigin} crossOrigin="anonymous" />}
         {errorReports && <meta name={ERROR_REPORTS_META} content={JSON.stringify(errorReports)} />}
       </head>
-      {/* Whether the pages link the guides and the carriers' pages, which only the server knows. */}
-      <body><GuidePagesProvider on={guidePagesOn()}>{children}</GuidePagesProvider></body>
+      {/* What the server's settings say about the site, such as whether the pages link the guides, which only the server knows. */}
+      <body><SiteProvider site={siteSettings()}>{children}</SiteProvider></body>
     </html>
   );
 }

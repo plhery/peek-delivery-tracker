@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../../test/peekEnv';
 import en from '../../../shared/locales/en.json';
 import type { ApiPackageRow, ApiTrackingEventRow } from '../../generated/apiContract';
 import { documentLanguage, SUPPORTED_LOCALES } from '../../lib/locale';
@@ -53,9 +54,10 @@ const cardInput = () => drawn.card.mock.calls.at(-1)![0] as DeliveryCardInput;
 const sentence = (text: string) => text.split('\n')[1];
 
 beforeEach(() => {
+  stubPeekEnv();
   drawn.card.mockReset().mockResolvedValue(card());
 });
-afterEach(() => { vi.restoreAllMocks(); });
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
 describe('deliveryEmailContent', () => {
   it('names the parcel, says who delivered it and when, and shows the same time on the card', async () => {

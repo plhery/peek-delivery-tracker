@@ -3,12 +3,14 @@ import { assistantsAlternates } from '../src/assistants/paths';
 import { CARRIER_LINKS, CARRIER_LOCALES } from '../src/generated/carriers';
 import { GUIDE_LINKS } from '../src/generated/guides';
 import { GUIDE_LANGUAGES, hrefLanguages, SUPPORTED_LOCALES, type GuideLanguage, type Locale } from '../src/lib/locale';
+import { LEGAL_PAGE_PATHS } from '../src/lib/site';
 import { assistantsConfigured } from '../src/server/assistants/settings';
 import { carrierAlternates, carrierLanguages, carrierUpdated } from '../src/server/carrierTexts';
 import { guideAlternates, guideUpdated } from '../src/server/guides';
 import { guidePagesOn } from '../src/server/guideSettings';
 import { landingAddress, landingAlternates } from '../src/server/landingMetadata';
 import { siteOrigin } from '../src/server/requestOrigin';
+import { legalPagesOn } from '../src/server/siteSettings';
 
 const entities: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' };
 /** An address as XML text. The file is written from these strings as they are, and a request's host may hold any of the five. */
@@ -25,9 +27,10 @@ const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) =
 /**
  * The pages meant to be found: the landing in each language, the guides and the
  * carriers' pages where the site serves them (`GUIDE_PAGES`), the page on
- * connecting an assistant in each language where assistants can connect, the
- * privacy notice, the terms of use, the help page and the accessibility page.
- * A parcel, an invitation and the demo are not listed.
+ * connecting an assistant in each language where assistants can connect, and
+ * the privacy notice, the terms of use, the help page and the accessibility
+ * page where the site serves them (`LEGAL_PAGES`). A parcel, an invitation and
+ * the demo are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
@@ -37,10 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...SUPPORTED_LOCALES.map((locale) => ({ url: xml(landingAddress(origin, locale)), alternates: { languages: hrefLanguages(languages) } })),
     ...(guidePagesOn() ? guidePages(origin) : []),
     ...(assistantsConfigured() ? SUPPORTED_LOCALES.map((locale) => ({ url: assistants[locale], alternates: { languages: hrefLanguages(assistants) } })) : []),
-    { url: xml(new URL('/privacy.html', origin).href) },
-    { url: xml(new URL('/terms.html', origin).href) },
-    { url: xml(new URL('/support.html', origin).href) },
-    { url: xml(new URL('/accessibility.html', origin).href) },
+    ...(legalPagesOn() ? LEGAL_PAGE_PATHS.map((path) => ({ url: xml(new URL(path, origin).href) })) : []),
   ];
 }
 

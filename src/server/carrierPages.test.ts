@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
 import { isLocale, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
@@ -21,7 +22,7 @@ const { peekOrganization } = await import('./landingStructuredData');
 const { default: sitemap } = await import('../../app/sitemap');
 
 // As on Peek's own site, which serves its guides and carriers' pages.
-beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
+beforeEach(stubPeekEnv);
 afterEach(() => { request.host = 'peek.example'; vi.unstubAllEnvs(); });
 
 const [first] = carrierLinks('en');

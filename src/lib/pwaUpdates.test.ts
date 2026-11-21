@@ -241,6 +241,12 @@ describe('registerPwaServiceWorker', () => {
     });
   });
 
+  it('asks a site that serves no documents for a worker that keeps none offline', async () => {
+    const register = vi.fn().mockResolvedValue({});
+    await registerPwaServiceWorker({ register }, false);
+    expect(register).toHaveBeenCalledWith('/sw.js?documents=off', { scope: '/', updateViaCache: 'none' });
+  });
+
   it('is inert when service workers are unsupported', async () => {
     await expect(registerPwaServiceWorker(null)).resolves.toBeNull();
   });

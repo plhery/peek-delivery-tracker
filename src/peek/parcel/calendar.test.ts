@@ -8,7 +8,7 @@ const parcel = (expectedDelivery: string | undefined, expectedDeliveryFrom?: str
   testParcel({ expectedDelivery, expectedDeliveryFrom }, ['accepted', 'in_transit']);
 const lines = (calendar: string) => calendar.split('\r\n');
 const calendar = (slot: NonNullable<ReturnType<typeof deliverySlot>>, title = 'New sneakers') =>
-  deliveryCalendar({ slot, title, description: 'Follow it on Peek.', url: `https://peek.example/p/${LINK_ID}`, uid: `${LINK_ID}@peek`, now: Date.UTC(2026, 9, 2, 10, 0, 0) });
+  deliveryCalendar({ product: 'Peek', slot, title, description: 'Follow it on Peek.', url: `https://peek.example/p/${LINK_ID}`, uid: `${LINK_ID}@peek`, now: Date.UTC(2026, 9, 2, 10, 0, 0) });
 
 afterEach(() => { vi.restoreAllMocks(); vi.useRealTimers(); });
 

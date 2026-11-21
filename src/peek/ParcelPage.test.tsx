@@ -1,4 +1,5 @@
-import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, screen, waitFor, within } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } from '../test/parcelLinks';
@@ -37,7 +38,7 @@ const journey = [scan('registered', 50), scan('accepted', 30), scan('in_transit'
 
 function open(session?: PeekSession, props: Partial<Parameters<typeof ParcelPage>[0]> = {}) {
   const page = <><ParcelPage linkId={LINK_ID} {...props} /><NoticeToast /></>;
-  return render(session ? <PeekSessionProvider value={session}>{page}</PeekSessionProvider> : page, { wrapper: servingGuides });
+  return renderOnPeek(session ? <PeekSessionProvider value={session}>{page}</PeekSessionProvider> : page, { wrapper: servingGuides });
 }
 const card = () => screen.getByRole('region', { name: screen.getByRole('heading', { level: 1 }).textContent! });
 /** Under the journal: when the carrier was last asked. */
@@ -659,7 +660,7 @@ describe('ParcelPage stages and troubles', () => {
     mocks.read.mockResolvedValue(view([...journey.slice(0, 2), scan('in_transit', 6, 'Weighed 1.2 kg at the depot')], {
       weightKg: 1.2, dimensionsText: '30 × 20 × 10 cm',
     }));
-    render(<I18nProvider><ParcelPage linkId={LINK_ID} /></I18nProvider>, { wrapper: servingGuides });
+    renderOnPeek(<I18nProvider><ParcelPage linkId={LINK_ID} /></I18nProvider>, { wrapper: servingGuides });
     await screen.findByRole('heading', { level: 1 });
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('2.6 lb');
     expect(screen.getByText('Dimensions').nextElementSibling).toHaveTextContent('11.8 × 7.9 × 3.9 in');

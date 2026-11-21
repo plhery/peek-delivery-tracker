@@ -1,4 +1,5 @@
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { renderOnPeek } from './test/site';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import App from './App';
@@ -13,7 +14,7 @@ import { RefreshTimeoutError, type ParcelRepo, type ParcelWithEvents } from './t
 import { rememberPendingAdd } from './peek/pendingAdd';
 
 function renderApp(repo: ParcelRepo = createDemoRepo(window.localStorage)) {
-  return render(
+  return renderOnPeek(
     <ParcelsProvider repo={repo}>
       <App />
     </ParcelsProvider>,
@@ -21,7 +22,7 @@ function renderApp(repo: ParcelRepo = createDemoRepo(window.localStorage)) {
 }
 
 function renderSignedInApp() {
-  return render(
+  return renderOnPeek(
     <ParcelsProvider repo={createDemoRepo(window.localStorage)}>
       <App accountEmail="owner@example.test" onSignOut={vi.fn()} />
     </ParcelsProvider>,
@@ -61,7 +62,7 @@ describe('App', () => {
   it('ends the deliveries on a quiet foot that leads to the landing, the privacy notice and the code', async () => {
     const onOpenLanding = vi.fn();
     const user = userEvent.setup();
-    const view = render(<ParcelsProvider repo={createDemoRepo(window.localStorage)}>
+    const view = renderOnPeek(<ParcelsProvider repo={createDemoRepo(window.localStorage)}>
       <App accountEmail="owner@example.test" onSignOut={vi.fn()} onOpenLanding={onOpenLanding} />
     </ParcelsProvider>);
     const foot = view.container.querySelector<HTMLElement>('.app-foot')!;

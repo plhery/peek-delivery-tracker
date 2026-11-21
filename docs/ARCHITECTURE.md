@@ -133,6 +133,12 @@ Key server modules:
   account (see Trust boundaries).
 - `observability.ts` and `trackingAudit.ts` link Sentry and logs to the private audit
   tables ([OBSERVABILITY.md](OBSERVABILITY.md)).
+- `siteSettings.ts` reads what a deployment says about itself, its name, its apps, its
+  source, its author links and its documents ([DEPLOYMENT.md](DEPLOYMENT.md)), from the
+  environment at each request; `guideSettings.ts` does the same for the guides. The root
+  layout hands the pages what they need through `SiteProvider`
+  ([`SiteContext.tsx`](../src/SiteContext.tsx)), so nothing of it is built into the
+  scripts, and the proxy answers an address that is off with the 404 page.
 
 ## Trust boundaries
 
@@ -335,8 +341,8 @@ Key server modules:
     copy counts only when it can tell the update: of the shared parcel's carrier, with the
     postcode and phone digits the shared parcel has. A copy archived or muted there keeps the
     link quiet too: the account's settings rule, as for the owner's archived parcels.
-  - On an iPhone outside the Home Screen, "Notify me" offers the app first once the App
-    Store's version follows links (`APP_FOLLOWS_LINKS_FROM` in `appStoreRelease.ts`, checked
+  - On an iPhone outside the Home Screen, "Notify me" offers the app first, on a site with
+    one on the App Store (`APP_STORE_ID`), once the App Store's version follows links (`APP_FOLLOWS_LINKS_FROM` in `appStoreRelease.ts`, checked
     hourly against the App Store). Its "Open" leads through a legacy host, since Safari opens
     the app only from a link to another site, and carries the owner key after `#k=`; the
     web never reads that key and takes it out of its own address.
@@ -677,7 +683,7 @@ first byte: `<html lang>`, the words, the title and the link preview.
 For search engines, `/robots.txt` lets everything be fetched and `/sitemap.xml` lists the
 pages meant to be found: the landing; where `GUIDE_PAGES` is on, the guides' list and every guide in each language,
 the carriers' list in each language a carrier's page is written in and every carrier's page in each of its languages;
-the page on connecting an assistant in each language where assistants can connect, the privacy notice, the terms of use and the help page. A guide or a carrier's page is dated by the day its
+the page on connecting an assistant in each language where assistants can connect, and, where `LEGAL_PAGES` is on, the privacy notice, the terms of use and the help page. A guide or a carrier's page is dated by the day its
 facts were last checked, and never after the day the site was built: its text, its structured
 data and the sitemap show the build's day instead of a later one ([`buildDay.ts`](../src/server/buildDay.ts)). Each
 landing's HTML carries its title, description and canonical address, the address of every
@@ -974,6 +980,7 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
   iPhone or iPad outside the Home Screen, Settings and the deliveries' invitation to
   notifications offer the Peek app first, signed in to the same account, and the Home
   Screen's steps after it; a computer shows the App Store's code under Settings' switch.
+  A site with no app on the App Store gives the Home Screen's steps alone.
 - The delivery email is apart from notifications: off until the account switches it on,
   and switched off per parcel. A visitor who signs in from the email row of a parcel
   link's notifications gets it switched on once that parcel is in the account. A parcel

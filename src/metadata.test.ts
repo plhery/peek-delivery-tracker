@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import type { Metadata } from 'next';
 import { isValidElement, type ReactElement } from 'react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const request = vi.hoisted(() => ({ language: 'en' }));
 vi.mock('next/headers', () => ({
@@ -30,9 +30,10 @@ import { CARRIER_LINKS, CARRIER_LOCALES } from './generated/carriers';
 import { GUIDE_LINKS } from './generated/guides';
 import { guidePath } from './guides/paths';
 import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, hrefLanguages, PAGE_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type PageLanguage } from './lib/locale';
-import { SOURCE_URL } from './lib/source';
+import { UPSTREAM_SOURCE } from './lib/source';
 import { shownDay } from './server/buildDay';
 import { messagesFor } from './server/requestLocale';
+import { stubPeekEnv } from './test/site';
 
 const TITLE = 'Peek — Universal Parcel Tracker';
 const DESCRIPTION =
@@ -64,6 +65,9 @@ async function structuredData(page: ReactElement | Promise<ReactElement>) {
 }
 
 describe('public product metadata', () => {
+  // As Peek's own site is set up: each page says exactly what it says there.
+  beforeEach(() => { stubPeekEnv(); });
+
   it('names the site and the installed PWA Peek, with what it does where the name stands alone', async () => {
     expect(await layoutMetadata()).toMatchObject({
       applicationName: 'Peek',
@@ -212,7 +216,7 @@ describe('public product metadata', () => {
       },
       {
         '@type': 'Organization', '@id': 'https://delivery.example.test/#organization', name: 'Peek', url: 'https://delivery.example.test/',
-        logo: { '@type': 'ImageObject', url: 'https://delivery.example.test/icons/icon-512.png' }, sameAs: [SOURCE_URL],
+        logo: { '@type': 'ImageObject', url: 'https://delivery.example.test/icons/icon-512.png' }, sameAs: ['https://github.com/plhery/peek-delivery-tracker'],
       },
     ]);
     expect(application.props).toMatchObject({ landingRoute: false, initialLocale: 'en' });
@@ -232,8 +236,8 @@ describe('public product metadata', () => {
   });
 
   it('lists the pages meant to be found, on the canonical origin when one is configured', async () => {
-    // As on Peek's own site, which serves its guides and carriers' pages; without them the sitemap lists none (carrierPages.test.ts).
-    vi.stubEnv('GUIDE_PAGES', 'on');
+    // Peek's own site serves its guides, its carriers' pages and its documents; without them the sitemap lists none
+    // (carrierPages.test.ts, and below).
     const local = alternates('https://delivery.example.test');
     const here = await sitemap();
     expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[hrefLanguage(locale)], alternates: { languages: local } })));
@@ -399,5 +403,31 @@ describe('public product metadata', () => {
     for (const { tag, ...attributes } of shapes) {
       expect(picture).toContain(`<${tag} ${Object.entries(attributes).map(([name, value]) => `${name}="${value}"`).join(' ')}/>`);
     }
+  });
+});
+
+describe('a site whose settings set nothing', () => {
+  it('names itself "Parcel Tracker" where the code names it, and offers no app', async () => {
+    const metadata = await layoutMetadata();
+    expect(metadata).toMatchObject({ applicationName: 'Parcel Tracker', appleWebApp: { title: 'Parcel Tracker' }, openGraph: { siteName: 'Parcel Tracker' } });
+    expect(metadata.other).toEqual({});
+    expect(await englishManifest().json()).toMatchObject({ short_name: 'Parcel Tracker' });
+    expect((await generateMetadata()).openGraph).toMatchObject({ siteName: 'Parcel Tracker' });
+  });
+
+  it('tells search engines of no other name, no iPhone app and the code where it comes from', async () => {
+    const { text } = await structuredData(HomePage());
+    const [site, application, organization] = (JSON.parse(text) as { '@graph': Record<string, unknown>[] })['@graph'];
+    expect(site.alternateName).toEqual(['delivery.example.test']);
+    expect(application.operatingSystem).toBe('Web');
+    expect(organization).toMatchObject({ name: 'Parcel Tracker', sameAs: [UPSTREAM_SOURCE] });
+  });
+
+  it('lists none of the operator’s documents, and names another source where one is set', async () => {
+    const entries = await sitemap();
+    expect(entries.some(({ url }) => url.endsWith('.html'))).toBe(false);
+    vi.stubEnv('SOURCE_URL', 'https://code.example.test/tracker/');
+    const { text } = await structuredData(HomePage());
+    expect((JSON.parse(text) as { '@graph': Record<string, unknown>[] })['@graph'][2].sameAs).toEqual(['https://code.example.test/tracker']);
   });
 });

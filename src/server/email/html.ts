@@ -32,7 +32,8 @@ export interface EmailWords {
   textOff: string;
   journeyUrl: string;
   offUrl: string;
-  privacyUrl: string;
+  /** None where the site links no privacy notice. */
+  privacyUrl: string | null;
   sourceUrl: string;
 }
 
@@ -133,7 +134,7 @@ ${gutter}
 </td>
 </tr>
 <tr>
-<td align="center" style="padding: 18px 22px 0; ${type(COLOR.faint)}; font-size: 11px; line-height: 1.55; text-align: center">${footerHtml(words)}<br>${escapeHtml(words.brand)} · ${escapeHtml(words.tagline)} · ${link(words.privacyUrl, words.privacy, COLOR.faint)} · ${link(words.sourceUrl, words.source, COLOR.faint)}</td>
+<td align="center" style="padding: 18px 22px 0; ${type(COLOR.faint)}; font-size: 11px; line-height: 1.55; text-align: center">${footerHtml(words)}<br>${escapeHtml(words.brand)} · ${escapeHtml(words.tagline)} · ${words.privacyUrl ? `${link(words.privacyUrl, words.privacy, COLOR.faint)} · ` : ''}${link(words.sourceUrl, words.source, COLOR.faint)}</td>
 </tr>
 </table>
 <!--[if mso]></td></tr></table><![endif]-->
@@ -161,7 +162,7 @@ export function emailText(words: EmailWords): string {
     words.textOff,
     '',
     `${words.brand} · ${words.tagline}`,
-    `${words.privacy} · ${words.privacyUrl}`,
+    ...words.privacyUrl ? [`${words.privacy} · ${words.privacyUrl}`] : [],
     `${words.source} · ${words.sourceUrl}`,
     '',
   ].join('\n');

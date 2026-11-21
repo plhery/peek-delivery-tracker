@@ -1,2 +1,2 @@
-/** Where the code lives. Kept apart from the pages that link it, so the server can link it too. */
-export const SOURCE_URL = 'https://github.com/plhery/peek-delivery-tracker';
+/** Where the code comes from: the source a site links when its own settings name no other (`SOURCE_URL`). */
+export const UPSTREAM_SOURCE = 'https://github.com/plhery/peek-delivery-tracker';

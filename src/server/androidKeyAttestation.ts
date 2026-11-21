@@ -2,6 +2,7 @@ import 'server-only';
 
 import { timingSafeEqual, X509Certificate, type KeyObject } from 'node:crypto';
 import { ANDROID_ATTESTATION_ROOTS, SELF_SIGNED_BOOT_KEYS } from './androidAttestationRoots';
+import { siteUserAgent } from './siteSettings';
 
 /**
  * Android hardware key attestation (https://developer.android.com/privacy-and-security/security-key-attestation):
@@ -374,7 +375,7 @@ const globalStatus = globalThis as typeof globalThis & {
 
 async function readStatus(): Promise<StatusCopy> {
   const response = await fetch(STATUS_URL, {
-    headers: { Accept: 'application/json', 'User-Agent': 'Peek (https://peek.plhery.com)' },
+    headers: { Accept: 'application/json', 'User-Agent': siteUserAgent() },
     cache: 'no-store',
     signal: AbortSignal.timeout(10_000),
   });

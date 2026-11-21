@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent, { type UserEvent } from '@testing-library/user-event';
 import { StrictMode } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -38,7 +39,7 @@ describe('AccountMenu', () => {
     const onResetDemo = vi.fn().mockResolvedValue(undefined);
     const onExitDemo = vi.fn();
     const user = userEvent.setup();
-    render(<AccountMenu onResetDemo={onResetDemo} onExitDemo={onExitDemo} />);
+    renderOnPeek(<AccountMenu onResetDemo={onResetDemo} onExitDemo={onExitDemo} />);
     await user.click(screen.getByRole('button', { name: 'Account' }));
     expect(screen.queryByRole('button', { name: 'Reset demo data' })).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Demo & data' }));
@@ -55,7 +56,7 @@ describe('AccountMenu', () => {
 
   it('switches the mark on new updates off and on, on this browser for someone without an account', async () => {
     const user = userEvent.setup();
-    render(<AccountMenu onResetDemo={vi.fn()} onExitDemo={vi.fn()} />);
+    renderOnPeek(<AccountMenu onResetDemo={vi.fn()} onExitDemo={vi.fn()} />);
     await user.click(screen.getByRole('button', { name: 'Account' }));
     const mark = screen.getByRole('switch', { name: 'Dot on updated parcels' });
     expect(mark).toBeChecked();
@@ -76,7 +77,7 @@ describe('AccountMenu', () => {
     }));
     vi.stubGlobal('fetch', fetch);
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={{ userId: 'user-mark', getAccessToken: async () => 'session' }} />);
+    renderOnPeek(<AccountMenu email="owner@example.test" apiAuth={{ userId: 'user-mark', getAccessToken: async () => 'session' }} />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     const mark = screen.getByRole('switch', { name: 'Dot on updated parcels' });
     await user.click(mark);
@@ -94,7 +95,7 @@ describe('AccountMenu', () => {
   it('leads to the landing from the end of Settings, in place for a plain click', async () => {
     const onOpenLanding = vi.fn();
     const user = userEvent.setup();
-    const view = render(<AccountMenu email="owner@example.test" onOpenLanding={onOpenLanding} />);
+    const view = renderOnPeek(<AccountMenu email="owner@example.test" onOpenLanding={onOpenLanding} />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     const home = screen.getByRole('link', { name: /^Home page/ });
     expect(home).toHaveAttribute('href', '/home');
@@ -103,7 +104,7 @@ describe('AccountMenu', () => {
     expect(onOpenLanding).toHaveBeenCalledOnce();
     view.unmount();
     // Where nothing shows the landing, the row is not there.
-    render(<AccountMenu email="owner@example.test" />);
+    renderOnPeek(<AccountMenu email="owner@example.test" />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     expect(screen.queryByRole('link', { name: /^Home page/ })).not.toBeInTheDocument();
   });
@@ -111,7 +112,7 @@ describe('AccountMenu', () => {
   it('shows the account and signs out once', async () => {
     const onSignOut = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" onSignOut={onSignOut} />);
+    renderOnPeek(<AccountMenu email="owner@example.test" onSignOut={onSignOut} />);
 
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     expect(screen.getByText('owner@example.test')).toBeInTheDocument();
@@ -129,7 +130,7 @@ describe('AccountMenu', () => {
 
   it('keeps sign-out failures actionable', async () => {
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <AccountMenu
         email="owner@example.test"
         onSignOut={vi.fn().mockRejectedValue(new Error('Network unavailable'))}
@@ -148,7 +149,7 @@ describe('AccountMenu', () => {
     const onExport = vi.fn().mockResolvedValue(undefined);
     const onDelete = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(
+    renderOnPeek(
       <AccountMenu
         email="owner@example.test"
         onExport={onExport}
@@ -175,7 +176,7 @@ describe('AccountMenu', () => {
     const onDelete = vi.fn().mockRejectedValueOnce(new ApiRecentSignInError()).mockResolvedValueOnce(undefined);
     const methods = signIn();
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} onSignOut={vi.fn()} />);
+    renderOnPeek(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} onSignOut={vi.fn()} />);
     await askToDelete(user);
     expect(await screen.findByRole('heading', { name: 'Sign in again to delete your account' })).toBeInTheDocument();
     expect(screen.getByText('Deleting can’t be undone, so Peek checks it’s still you.')).toBeInTheDocument();
@@ -198,7 +199,7 @@ describe('AccountMenu', () => {
   it('leaves the deletion when the sign-in asked for again is cancelled', async () => {
     const onDelete = vi.fn().mockRejectedValueOnce(new ApiRecentSignInError());
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={signIn()} onDelete={onDelete} />);
+    renderOnPeek(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={signIn()} onDelete={onDelete} />);
     await askToDelete(user);
     await user.click(await screen.findByRole('button', { name: 'Cancel' }));
     expect(screen.queryByRole('heading', { name: 'Delete this account permanently?' })).not.toBeInTheDocument();
@@ -211,7 +212,7 @@ describe('AccountMenu', () => {
     const signInWithGoogle = vi.fn(async () => undefined);
     const methods = signIn({ googleEnabled: true, signInWithGoogle });
     const user = userEvent.setup();
-    const view = render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} />);
+    const view = renderOnPeek(<AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} />);
     await askToDelete(user);
     await user.click(await screen.findByRole('button', { name: 'Continue with Google' }));
     expect(signInWithGoogle).toHaveBeenCalledOnce();
@@ -219,7 +220,7 @@ describe('AccountMenu', () => {
     view.unmount();
 
     // The provider returns to the deliveries, signed in again.
-    render(<StrictMode><AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} /></StrictMode>);
+    renderOnPeek(<StrictMode><AccountMenu email="owner@example.test" apiAuth={apiAuth} signIn={methods} onDelete={onDelete} /></StrictMode>);
     expect(await screen.findByRole('heading', { name: 'Delete this account permanently?' })).toBeInTheDocument();
     expect(screen.getByLabelText(/type owner@example.test/i)).toHaveValue('owner@example.test');
     expect(onDelete).toHaveBeenCalledOnce();
@@ -231,7 +232,7 @@ describe('AccountMenu', () => {
   it('tells another account back from the provider that nothing was deleted', async () => {
     noteSignInAgain({ action: 'delete-account', userId: 'user-a' });
     const onDelete = vi.fn();
-    render(<AccountMenu email="other@example.test" apiAuth={{ userId: 'user-b', getAccessToken: async () => 'other session' }}
+    renderOnPeek(<AccountMenu email="other@example.test" apiAuth={{ userId: 'user-b', getAccessToken: async () => 'other session' }}
       signIn={signIn()} onDelete={onDelete} />);
     expect(await screen.findByText('You’re now signed in as other@example.test, so nothing was deleted.')).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Delete this account permanently?' })).not.toBeInTheDocument();

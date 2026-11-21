@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { GET } from '../../app/.well-known/assetlinks.json/route';
 import { config } from '../../proxy';
+import { PEEK_ENV, stubPeekEnv } from '../test/peekEnv';
 import { androidApp, androidAssetLinks } from './androidAppLinks';
 
 const env = (values: Record<string, string>) => values as unknown as NodeJS.ProcessEnv;
@@ -10,8 +11,13 @@ const other = '01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB
 afterEach(() => { vi.unstubAllEnvs(); });
 
 describe('androidApp', () => {
-  it("names Peek's app, as Google Play and the F-Droid repository sign it, when nothing is set", () => {
-    const app = androidApp(env({}));
+  it('has none when nothing is set', () => {
+    expect(androidApp(env({}))).toBeNull();
+    expect(androidAssetLinks(env({}))).toBeNull();
+  });
+
+  it("names Peek's app with Peek's settings, as Google Play and the F-Droid repository sign it", () => {
+    const app = androidApp(env({ ...PEEK_ENV }));
     expect(app?.package).toBe('com.plhery.peekdeliverytracker');
     // Google's app signing key, then Peek's upload key, which signs the fdroid build.
     expect(app?.fingerprints.map((value) => value.slice(0, 11))).toEqual(['F1:55:DB:E7', 'F4:33:CB:F0']);
@@ -51,6 +57,30 @@ describe('the asset links', () => {
     expect(response.headers.get('cache-control')).toBe('public, max-age=3600');
     expect(response.headers.get('content-security-policy')).toBeNull();
     expect((await response.json())[0].target.sha256_cert_fingerprints).toEqual([fingerprint]);
+  });
+
+  it("serve Peek's own, as they were before they were settings", async () => {
+    stubPeekEnv();
+    const response = GET();
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual([{
+      relation: ['delegate_permission/common.handle_all_urls'],
+      target: {
+        namespace: 'android_app',
+        package_name: 'com.plhery.peekdeliverytracker',
+        sha256_cert_fingerprints: [
+          'F1:55:DB:E7:76:F4:5F:EA:F2:51:4F:73:3B:98:4D:A3:FC:5F:56:2A:DA:66:F2:BD:65:1F:C5:89:D2:BD:DE:60',
+          'F4:33:CB:F0:3C:68:76:6D:1E:6B:32:1D:10:20:E8:FE:E5:1F:75:78:0B:56:C0:39:3F:F7:42:0F:93:10:3F:73',
+        ],
+      },
+    }]);
+  });
+
+  it('do not exist where no app is set', async () => {
+    vi.stubEnv('ANDROID_APP_PACKAGE', '');
+    vi.stubEnv('ANDROID_APP_CERT_SHA256', '');
+    const response = GET();
+    expect(response.status).toBe(404);
   });
 
   it('do not exist when the configured app is malformed', async () => {

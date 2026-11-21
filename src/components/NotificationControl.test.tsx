@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from 'vitest';
 import {
@@ -70,7 +71,7 @@ describe('NotificationControl', () => {
       getAccessToken: vi.fn().mockResolvedValue('token'),
     };
     const user = userEvent.setup();
-    render(<NotificationControl apiAuth={apiAuth} />);
+    renderOnPeek(<NotificationControl apiAuth={apiAuth} />);
 
     await user.click(screen.getByRole('button', { name: 'Notifications' }));
     expect(await screen.findByText(/hourly, day and night, and up to every 10 minutes/i)).toBeInTheDocument();
@@ -87,7 +88,7 @@ describe('NotificationControl', () => {
       .mockResolvedValueOnce({ kind: 'prompt', publicKey: 'public' });
     vi.mocked(disablePushNotifications).mockResolvedValue();
     const user = userEvent.setup();
-    render(<NotificationControl />);
+    renderOnPeek(<NotificationControl />);
     await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
     await user.click(screen.getByRole('switch', { name: 'Notifications' }));
     expect(disablePushNotifications).toHaveBeenCalled();
@@ -99,7 +100,7 @@ describe('NotificationControl', () => {
     vi.mocked(disablePushNotifications).mockRejectedValue(new Error('offline'));
     const apiAuth = { userId: 'user-1', getAccessToken: vi.fn() };
     const user = userEvent.setup();
-    render(<NotificationControl apiAuth={apiAuth} />);
+    renderOnPeek(<NotificationControl apiAuth={apiAuth} />);
     await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
     await user.click(screen.getByRole('switch', { name: 'Notifications' }));
     expect(notificationInvitationDismissed(apiAuth.userId)).toBe(true);
@@ -109,7 +110,7 @@ describe('NotificationControl', () => {
   it('says a browser without notifications can’t show them, and offers the app on whichever phone', async () => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind: 'unsupported' });
     const user = userEvent.setup();
-    render(<NotificationControl />);
+    renderOnPeek(<NotificationControl />);
     await user.click(screen.getByRole('button', { name: 'Notifications' }));
     expect(await screen.findByText('This browser can’t show notifications. Try another browser, or the Peek app on your phone.')).toBeInTheDocument();
     expect(screen.queryByText('Notifications in the Peek app')).toBeNull();
@@ -122,12 +123,34 @@ describe('NotificationControl', () => {
     expect(mocks.track).toHaveBeenCalledWith('notifications-app-get');
   });
 
+  it('offers no app on a site with none, and gives the Home Screen steps where notifications need them', async () => {
+    browse(IPHONE_SAFARI_27);
+    vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
+    const user = userEvent.setup();
+    const { unmount } = render(<NotificationControl />);
+    await user.click(screen.getByRole('button', { name: 'Notifications' }));
+    const sheet = screen.getByRole('dialog', { name: 'Notifications' });
+    expect(await within(sheet).findByText('Open Peek from your Home Screen and turn on notifications')).toBeVisible();
+    expect(within(sheet).queryByText('Notifications in the Peek app')).toBeNull();
+    expect(within(sheet).queryByRole('link', { name: 'Get' })).toBeNull();
+    expect(sheet.querySelector('.notification-app-qr, .notification-app-offer')).toBeNull();
+    unmount();
+
+    vi.mocked(inspectPushState).mockResolvedValue({ kind: 'prompt', publicKey: 'public' });
+    render(<NotificationControl />);
+    await user.click(screen.getByRole('button', { name: 'Notifications' }));
+    const again = screen.getByRole('dialog', { name: 'Notifications' });
+    expect(await within(again).findByRole('switch', { name: 'Notifications' })).toBeVisible();
+    expect(within(again).queryByText('On your phone too')).toBeNull();
+    expect(again.querySelector('img[src="/settings/app-qr.svg"]')).toBeNull();
+  });
+
   describe('in Safari on an iPhone or iPad, outside the Home Screen', () => {
     const apiAuth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
     async function open() {
       vi.mocked(inspectPushState).mockResolvedValue({ kind: 'install' });
       const user = userEvent.setup();
-      render(<NotificationControl apiAuth={apiAuth} />);
+      renderOnPeek(<NotificationControl apiAuth={apiAuth} />);
       await user.click(screen.getByRole('button', { name: 'Notifications' }));
       const sheet = screen.getByRole('dialog', { name: 'Notifications' });
       await within(sheet).findByText('Notifications in the Peek app');
@@ -172,7 +195,7 @@ describe('NotificationControl', () => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind, publicKey: 'public' });
     const apiAuth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
     const user = userEvent.setup();
-    render(<NotificationControl apiAuth={apiAuth} />);
+    renderOnPeek(<NotificationControl apiAuth={apiAuth} />);
     await user.click(await screen.findByRole('button', { name: kind === 'enabled' ? 'Notifications enabled' : 'Notifications' }));
     expect(await screen.findByRole('group', { name: 'Which updates? On all your devices' })).toBeVisible();
     // Both are drawn here; the stylesheet shows the code on a computer, as the landing's, and the row anywhere else.
@@ -201,7 +224,7 @@ describe('NotificationControl', () => {
       getAccessToken: vi.fn().mockResolvedValue('token'),
     };
     const user = userEvent.setup();
-    render(<NotificationControl apiAuth={apiAuth} />);
+    renderOnPeek(<NotificationControl apiAuth={apiAuth} />);
 
     await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
     await user.click(await screen.findByRole('radio', { name: /important steps/i }));

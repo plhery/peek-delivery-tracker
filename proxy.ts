@@ -9,13 +9,15 @@ import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
 import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage } from './src/lib/locale';
 import { MAIL_LINK_BOOTSTRAP } from './src/lib/mailLinkConfig';
 import { PHONE_APP_PATH, phoneAppDestination, phoneAppSource } from './src/lib/phoneApp';
+import { LEGAL_PAGE_PATHS } from './src/lib/site';
 import { assistantsConfigured } from './src/server/assistants/settings';
 import { guidePagesOn } from './src/server/guideSettings';
 import { pageSupabaseOrigins } from './src/server/runtime';
 import { legacyHostRedirect } from './src/server/siteHosts';
+import { androidStoreApp, appStoreApp, legalPagesOn } from './src/server/siteSettings';
 
-// The app and the static documents (the privacy notice, the terms, the help page and the accessibility page) use this exact,
-// fixed prepaint script.
+// The app and the static documents (the privacy notice, the terms, the help page and the accessibility page, where the
+// site serves them) use this exact, fixed prepaint script.
 const appearanceScriptHash = createHash('sha256').update(APPEARANCE_BOOTSTRAP).digest('base64');
 // The app's second prepaint script: who is about to see the landing.
 const entryHintScriptHash = createHash('sha256').update(ENTRY_HINT_BOOTSTRAP).digest('base64');
@@ -38,10 +40,12 @@ export function proxy(request: NextRequest) {
   const guide = pages && guideIdDestination(request.nextUrl.pathname);
   if (guide) return NextResponse.redirect(new URL(guide, request.url), { status: 308 });
 
-  // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else.
-  if (request.nextUrl.pathname === PHONE_APP_PATH) {
+  // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else. A site without
+  // an iPhone app has no such code, and the address is its 404 page.
+  const appStore = appStoreApp();
+  if (request.nextUrl.pathname === PHONE_APP_PATH && appStore) {
     const source = phoneAppSource(request.nextUrl.searchParams.get('utm_source'));
-    const destination = phoneAppDestination(request.headers.get('user-agent') ?? '', source);
+    const destination = phoneAppDestination({ appStore, android: androidStoreApp() }, request.headers.get('user-agent') ?? '', source);
     // Never stored either: the answer depends on the phone that asks.
     if (destination) {
       return NextResponse.redirect(new URL(destination, request.url), { status: 302, headers: { 'Cache-Control': 'private, no-store', Vary: 'User-Agent' } });
@@ -86,10 +90,13 @@ export function proxy(request: NextRequest) {
   requestHeaders.set('Content-Security-Policy', contentSecurityPolicy);
   // An address below a language's guides that names none of them is the site's 404 page, written whole by the
   // server, and so is one below its carriers that names no carrier written in that language, every guides and
-  // carriers address on a site that serves none (`GUIDE_PAGES`), and the page on connecting an assistant where none
-  // can connect.
+  // carriers address on a site that serves none (`GUIDE_PAGES`), the page on connecting an assistant where none
+  // can connect, `/app` on a site without an iPhone app, and the operator's documents on a site that serves none
+  // (`LEGAL_PAGES`).
   const missing = (pages ? namesNoGuide(pathname) || namesNoCarrier(pathname) : guidePathLanguage(pathname) !== null || carrierPageLanguage(pathname) !== null)
-    || (assistants !== null && !assistantsConfigured());
+    || (assistants !== null && !assistantsConfigured())
+    || (pathname === PHONE_APP_PATH && !appStore)
+    || (LEGAL_PAGE_PATHS.includes(pathname) && !legalPagesOn());
   // A carrier's page in a language with pages alone declares its text's language for the whole document, and the
   // page learns which from here alone: a client's own header is never passed on.
   const written = carrierPageLanguage(pathname);

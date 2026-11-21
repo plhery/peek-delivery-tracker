@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { renderOnPeek } from '../../test/site';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -19,7 +20,7 @@ const WINDOW = 'Today, 13:00–17:00';
 
 function open(props: Partial<Parameters<typeof AlertsSheet>[0]> = {}) {
   const handlers = { onCalendar: vi.fn(() => true), onSignIn: vi.fn(), onClose: vi.fn() };
-  const view = render(<AlertsSheet linkId={LINK_ID} ownerKey={null} alerts={SERVER} initialPreset="important" calendar={WINDOW} {...handlers} {...props} />);
+  const view = renderOnPeek(<AlertsSheet linkId={LINK_ID} ownerKey={null} alerts={SERVER} initialPreset="important" calendar={WINDOW} {...handlers} {...props} />);
   return { ...handlers, ...view };
 }
 const preset = (name: string) => screen.getByRole('button', { name });
@@ -367,6 +368,16 @@ describe('the Notify me sheet', () => {
       expect(within(sheet).getAllByRole('listitem')).toHaveLength(3);
       expect(within(sheet).queryByRole('button', { name: 'Show the steps' })).toBeNull();
       expect(screen.getByRole('button', { name: 'Or add to calendar' })).toBeVisible();
+    });
+
+    it('offers no app on a site with none on the App Store, whatever the server says', () => {
+      stubAlertBrowser({ userAgent: IPHONE_SAFARI });
+      render(<AlertsSheet linkId={LINK_ID} ownerKey={null} alerts={APP} initialPreset="important" calendar={WINDOW} onCalendar={vi.fn(() => true)} onSignIn={vi.fn()} onClose={vi.fn()} />);
+      const sheet = screen.getByRole('dialog', { name: 'Notifications on iPhone' });
+      expect(within(sheet).queryByText('Notifications in the Peek app')).toBeNull();
+      expect(within(sheet).queryByRole('link', { name: 'Get' })).toBeNull();
+      expect(within(sheet).getByText('An email when it arrives')).toBeVisible();
+      expect(within(sheet).getAllByRole('listitem')).toHaveLength(3);
     });
 
     it('goes to the App Store first, then opens the parcel in the app with its owner key and name', async () => {

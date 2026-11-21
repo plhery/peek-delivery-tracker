@@ -12,6 +12,7 @@ import App from '../App';
 import { createDemoRepo } from '../store/demoRepo';
 import { ParcelsProvider } from '../store/ParcelsContext';
 import { useEntryExperience } from '../lib/experience';
+import { useSite } from '../SiteContext';
 
 type Props = ComponentProps<typeof SignInScreen> & {
   invitation: PendingInvitationState;
@@ -23,6 +24,7 @@ const emptyParcels: ParcelWithEvents[] = [];
 
 export function FriendInvitation({ invitation, onDismiss, client, parcels = emptyParcels, ...signIn }: Props) {
   const { t } = useI18n();
+  const { appStore } = useSite();
   const activity = useFriendsActivity();
   const experience = useEntryExperience();
   const [demoRepo, setDemoRepo] = useState<ReturnType<typeof createDemoRepo> | null>(null);
@@ -95,7 +97,7 @@ export function FriendInvitation({ invitation, onDismiss, client, parcels = empt
       else invitation.setOpened(screen === 'sign-in');
     }}
     invitation={{ title, nickname: nickname ?? undefined, canOpen: !!nickname, received: !!receipt,
-      onDismiss, notice, appURL: ios && code ? `peekdeliverytracker://invite#${code}` : undefined,
+      onDismiss, notice, appURL: ios && code && appStore ? `peekdeliverytracker://invite#${code}` : undefined,
       afterOpen: receipt ? <section className="auth-flow friendship-received" role="status"><div className="auth-flow__heading"><h1 tabIndex={-1}>{t('friends.friendshipDelivered')}</h1></div></section>
         : !nickname ? <section className="auth-flow"><div className="auth-flow__heading"><h1 tabIndex={-1}>{title}</h1></div>{notice}</section>
         : client && code ? <InvitationAcceptance key={code} title={title} nickname={nickname} code={code} client={client} parcels={parcels} onAccepted={received} onDismiss={onDismiss} /> : undefined,

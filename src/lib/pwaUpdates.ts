@@ -1,3 +1,5 @@
+import { WORKER_WITHOUT_DOCUMENTS } from './site';
+
 type ServiceWorkerReloadSource = Pick<
   ServiceWorkerContainer,
   'controller' | 'addEventListener' | 'removeEventListener'
@@ -11,13 +13,17 @@ const RESUME_KEY = 'sdt.update-resume.v1';
 const RESUME_WINDOW_MS = 30_000;
 const INPUT_EVENTS = ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'] as const;
 
-/** Register the production worker without allowing an HTTP cache to pin an old build. */
+/**
+ * Register the production worker without allowing an HTTP cache to pin an old build. On a site that serves no
+ * documents of its own (`LEGAL_PAGES`), the worker is told to keep no privacy notice.
+ */
 export async function registerPwaServiceWorker(
   serviceWorker: ServiceWorkerRegistrationSource | null =
     ('serviceWorker' in navigator ? navigator.serviceWorker : null),
+  documents = true,
 ): Promise<ServiceWorkerRegistration | null> {
   if (!serviceWorker) return null;
-  return await serviceWorker.register('/sw.js', {
+  return await serviceWorker.register(documents ? '/sw.js' : `/sw.js?${WORKER_WITHOUT_DOCUMENTS}`, {
     scope: '/',
     updateViaCache: 'none',
   });

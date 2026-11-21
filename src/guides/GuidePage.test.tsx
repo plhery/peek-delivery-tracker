@@ -6,7 +6,9 @@ import fr from '../../shared/locales/fr.json';
 import italian from '../../shared/locales/it.json';
 import type { GuideLanguage, Locale } from '../lib/locale';
 import { translateMessage, type Messages, type Translate } from '../lib/messages';
-import { SOURCE_URL } from '../lib/source';
+import { PLAIN_SITE } from '../lib/site';
+import { UPSTREAM_SOURCE } from '../lib/source';
+import { PEEK_SITE } from '../test/site';
 import { GuideFrame } from './GuideFrame';
 import { GuideIndex } from './GuideIndex';
 import { GuidePage } from './GuidePage';
@@ -140,7 +142,7 @@ describe('what stands around a guides page', () => {
   const names = { en: 'English', de: 'Deutsch', fr: 'Français', it: 'Italiano', es: 'Español', pt: 'Português', 'pt-br': 'Português (Brasil)', pl: 'Polski', ru: 'Русский', zh: '简体中文' };
 
   it('leads to the tracker above, and below to all guides, all carriers, the notice, the code and the page in every language', () => {
-    render(<GuideFrame locale="fr" t={t('fr', fr)} addresses={addresses} languageNames={names} screen="guides/fr/customs"><p>The page</p></GuideFrame>);
+    render(<GuideFrame locale="fr" t={t('fr', fr)} addresses={addresses} languageNames={names} screen="guides/fr/customs" site={PEEK_SITE}><p>The page</p></GuideFrame>);
     expect(within(screen.getByRole('banner')).getByRole('link', { name: 'Suivre ton colis' })).toHaveAttribute('href', '/fr');
     expect(within(screen.getByRole('banner')).getByRole('link', { name: /Peek/ })).toHaveAttribute('href', '/fr');
     expect(screen.getByRole('main')).toHaveTextContent('The page');
@@ -148,7 +150,7 @@ describe('what stands around a guides page', () => {
     expect(within(foot).getByRole('link', { name: 'Tous les guides' })).toHaveAttribute('href', '/fr/guides');
     expect(within(foot).getByRole('link', { name: 'Tous les transporteurs' })).toHaveAttribute('href', '/fr/carriers');
     expect(within(foot).getByRole('link', { name: 'Confidentialité' })).toHaveAttribute('href', '/privacy.html');
-    expect(within(foot).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', SOURCE_URL);
+    expect(within(foot).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', UPSTREAM_SOURCE);
     expect(within(foot).getByRole('link', { name: /Peek/ })).toHaveAttribute('href', '/fr');
     const languages = within(within(foot).getByRole('navigation', { name: 'Langue' })).getAllByRole('link');
     expect(languages.map((link) => [link.textContent, link.getAttribute('href'), link.getAttribute('hreflang')])).toEqual(
@@ -157,8 +159,16 @@ describe('what stands around a guides page', () => {
     expect(languages.filter((link) => link.getAttribute('aria-current') === 'page').map((link) => link.textContent)).toEqual(['Français']);
   });
 
+  it('links no privacy notice where the site has none, and the code where its settings say it is', () => {
+    const site = { ...PLAIN_SITE, guidePages: true, source: 'https://code.example.test/tracker' };
+    render(<GuideFrame locale="en" t={t('en', en)} addresses={addresses} languageNames={names} screen="guides/en/customs" site={site}><p>The page</p></GuideFrame>);
+    const foot = screen.getByRole('contentinfo');
+    expect(within(foot).queryByRole('link', { name: 'Privacy' })).toBeNull();
+    expect(within(foot).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://code.example.test/tracker');
+  });
+
   it('counts the visit under the page’s own name, as no app open, and leads an English reader to `/`', () => {
-    render(<GuideFrame locale="en" t={t('en', en)} addresses={addresses} languageNames={names} screen="guides/en/customs"><p>The page</p></GuideFrame>);
+    render(<GuideFrame locale="en" t={t('en', en)} addresses={addresses} languageNames={names} screen="guides/en/customs" site={PEEK_SITE}><p>The page</p></GuideFrame>);
     expect(within(screen.getByRole('banner')).getByRole('link', { name: 'Track your parcel' })).toHaveAttribute('href', '/');
     expect(analytics.trackScreen).toHaveBeenCalledWith('guides/en/customs', 'anonymous');
     expect(analytics.startAnalytics).toHaveBeenCalledWith({ open: false });
@@ -167,7 +177,7 @@ describe('what stands around a guides page', () => {
   it('counts a reader signed in on this browser as an account, and one who signed out as anonymous', () => {
     localStorage.setItem('sb-peek-auth-token', '{"access_token":"x"}');
     try {
-      const frame = <GuideFrame locale="en" t={t('en', en)} addresses={addresses} languageNames={names} screen="guides/en"><p>The page</p></GuideFrame>;
+      const frame = <GuideFrame locale="en" t={t('en', en)} addresses={addresses} languageNames={names} screen="guides/en" site={PEEK_SITE}><p>The page</p></GuideFrame>;
       const { unmount } = render(frame);
       expect(analytics.trackScreen).toHaveBeenLastCalledWith('guides/en', 'account');
       unmount();

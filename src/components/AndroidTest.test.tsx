@@ -1,27 +1,37 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import type { ReactElement } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ANDROID_TEST_SNOOZE_MS, ANDROID_TEST_STORAGE_KEY } from '../lib/androidTest';
+import type { Site } from '../lib/site';
 
-const mocks = vi.hoisted(() => ({ open: true, device: vi.fn(async () => true), track: vi.fn() }));
+const mocks = vi.hoisted(() => ({ device: vi.fn(async () => true), track: vi.fn() }));
 vi.mock('../lib/androidTest', async (original) => ({
   ...await original<typeof import('../lib/androidTest')>(),
-  get ANDROID_TEST_OPEN() { return mocks.open; },
   readAndroidDevice: mocks.device,
 }));
 vi.mock('../lib/analytics', async (original) => ({ ...await original<typeof import('../lib/analytics')>(), trackAction: mocks.track }));
 
+let fresh: { site: typeof import('../test/site'); context: typeof import('../SiteContext') };
+
 /** A fresh page load: the device is asked again and every place counts its first showing again. */
 async function load() {
   vi.resetModules();
+  fresh = { site: await import('../test/site'), context: await import('../SiteContext') };
   return import('./AndroidTest');
+}
+
+/** Renders on Peek's own site, or on `site`, as the page just loaded knows it. */
+function show(ui: ReactElement, site?: Site) {
+  if (!site) return fresh.site.renderOnPeek(ui);
+  const { SiteProvider } = fresh.context;
+  return render(<SiteProvider site={site}>{ui}</SiteProvider>);
 }
 const stored = () => JSON.parse(localStorage.getItem(ANDROID_TEST_STORAGE_KEY) ?? '{}');
 const events = () => mocks.track.mock.calls.map(([name, , spot]) => [name, spot]);
 
 beforeEach(() => {
   localStorage.clear();
-  mocks.open = true;
   mocks.device.mockReset().mockResolvedValue(true);
   mocks.track.mockReset();
 });
@@ -29,12 +39,12 @@ beforeEach(() => {
 describe('the parcel page’s row', () => {
   it('invites an Android visitor to the steps, and counts it shown once per page load', async () => {
     const { AndroidTestRow } = await load();
-    const view = render(<AndroidTestRow />);
+    const view = show(<AndroidTestRow />);
     const link = await screen.findByRole('link', { name: 'Try our Android app Get it before anyone else' });
     expect(link).toHaveAttribute('href', '/android');
     view.rerender(<><AndroidTestRow /></>);
     view.unmount();
-    render(<AndroidTestRow />);
+    show(<AndroidTestRow />);
     await screen.findByRole('link', { name: /Try our Android app/ });
     await userEvent.click(screen.getByRole('link', { name: /Try our Android app/ }));
     expect(events()).toEqual([['android-test-view', 'parcel'], ['android-test-open', 'parcel']]);
@@ -44,7 +54,7 @@ describe('the parcel page’s row', () => {
   it('hides it for a week on ×, says so, and offers never to show it again', async () => {
     const user = userEvent.setup();
     const { AndroidTestRow } = await load();
-    render(<AndroidTestRow />);
+    show(<AndroidTestRow />);
     const before = Date.now();
     await user.click(await screen.findByRole('button', { name: 'Not now' }));
     expect(screen.queryByRole('link', { name: /Try our Android app/ })).not.toBeInTheDocument();
@@ -60,7 +70,7 @@ describe('the parcel page’s row', () => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
     try {
       const { AndroidTestRow } = await load();
-      render(<AndroidTestRow />);
+      show(<AndroidTestRow />);
       (await screen.findByRole('button', { name: 'Not now' })).click();
       expect(await screen.findByRole('status')).toBeInTheDocument();
       await act(async () => { vi.advanceTimersByTime(6_000); });
@@ -68,12 +78,15 @@ describe('the parcel page’s row', () => {
     } finally { vi.useRealTimers(); }
   });
 
-  it('shows nothing while switched off, without asking the browser anything', async () => {
-    mocks.open = false;
+  it('shows nothing without a testers’ group or an Android app, without asking the browser anything', async () => {
     const { AndroidTestRow } = await load();
-    const { container } = render(<AndroidTestRow />);
-    await act(async () => { await Promise.resolve(); });
-    expect(container).toBeEmptyDOMElement();
+    const { PEEK_SITE } = fresh.site;
+    for (const android of [{ ...PEEK_SITE.android!, testGroup: null }, null]) {
+      const { container, unmount } = show(<AndroidTestRow />, { ...PEEK_SITE, android });
+      await act(async () => { await Promise.resolve(); });
+      expect(container).toBeEmptyDOMElement();
+      unmount();
+    }
     expect(mocks.device).not.toHaveBeenCalled();
     expect(mocks.track).not.toHaveBeenCalled();
   });
@@ -81,7 +94,7 @@ describe('the parcel page’s row', () => {
   it('shows nothing on a device that can’t install the app, after never, or within the week', async () => {
     mocks.device.mockResolvedValue(false);
     let { AndroidTestRow } = await load();
-    let view = render(<AndroidTestRow />);
+    let view = show(<AndroidTestRow />);
     await waitFor(() => expect(mocks.device).toHaveBeenCalled());
     await act(async () => { await Promise.resolve(); });
     expect(view.container).toBeEmptyDOMElement();
@@ -91,7 +104,7 @@ describe('the parcel page’s row', () => {
     for (const note of [{ never: true }, { hiddenUntil: Date.now() + 60_000 }]) {
       localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify(note));
       ({ AndroidTestRow } = await load());
-      view = render(<AndroidTestRow />);
+      view = show(<AndroidTestRow />);
       await act(async () => { await Promise.resolve(); });
       expect(view.container).toBeEmptyDOMElement();
       view.unmount();
@@ -103,7 +116,7 @@ describe('the parcel page’s row', () => {
     const user = userEvent.setup();
     localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, optIn: true, install: true } }));
     let { AndroidTestRow } = await load();
-    const view = render(<AndroidTestRow />);
+    const view = show(<AndroidTestRow />);
     expect(await screen.findByText('Thanks for testing Peek for Android')).toBeVisible();
     expect(screen.getByText('Keep it two weeks: that opens it to everyone.')).toBeVisible();
     expect(stored().thanked).toEqual(expect.any(Number));
@@ -111,7 +124,7 @@ describe('the parcel page’s row', () => {
 
     // The next page load: still there, until closed.
     ({ AndroidTestRow } = await load());
-    render(<AndroidTestRow />);
+    show(<AndroidTestRow />);
     await user.click(await screen.findByRole('button', { name: 'Close' }));
     expect(screen.queryByText('Thanks for testing Peek for Android')).not.toBeInTheDocument();
     expect(stored().thanksClosed).toBe(true);
@@ -123,7 +136,7 @@ describe('the parcel page’s row', () => {
       steps: { group: true, optIn: true, install: true }, thanked: Date.now() - 60_000, hiddenUntil: 5,
     }));
     const { AndroidTestRow } = await load();
-    render(<AndroidTestRow />);
+    show(<AndroidTestRow />);
     const link = await screen.findByRole('link', { name: 'Didn’t work? See the steps' });
     expect(link).toHaveAttribute('href', '/android');
     link.addEventListener('click', (event) => event.preventDefault());
@@ -136,7 +149,7 @@ describe('the parcel page’s row', () => {
     Object.defineProperty(document, 'referrer', { value: 'android-app://com.plhery.peekdeliverytracker/', configurable: true });
     try {
       const { AndroidTestRow } = await load();
-      render(<AndroidTestRow />);
+      show(<AndroidTestRow />);
       await waitFor(() => expect(stored().app).toBe(true));
       expect(screen.queryByRole('link')).not.toBeInTheDocument();
     } finally {
@@ -148,7 +161,7 @@ describe('the parcel page’s row', () => {
 describe('the “Notify me” row', () => {
   it('offers the app early, with no × and no thanks', async () => {
     const { AndroidTestOffer } = await load();
-    render(<AndroidTestOffer />);
+    show(<AndroidTestOffer />);
     expect(await screen.findByText('Peek for Android')).toBeVisible();
     expect(screen.getByText('Try our Android app before anyone else.')).toBeVisible();
     await userEvent.click(screen.getByRole('link', { name: 'Get it early' }));
@@ -160,7 +173,7 @@ describe('the “Notify me” row', () => {
   it('goes with the rest once the install link was followed', async () => {
     localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
     const { AndroidTestOffer } = await load();
-    const { container } = render(<AndroidTestOffer />);
+    const { container } = show(<AndroidTestOffer />);
     await act(async () => { await Promise.resolve(); });
     expect(container).toBeEmptyDOMElement();
   });
@@ -170,7 +183,7 @@ describe('the home page’s banner', () => {
   it('invites, hides for a week on ×, and thanks in its place', async () => {
     const user = userEvent.setup();
     let { AndroidTestBanner } = await load();
-    const view = render(<AndroidTestBanner />);
+    const view = show(<AndroidTestBanner />);
     const link = await screen.findByRole('link', { name: 'Get the Android app early Join' });
     expect(link).toHaveAttribute('href', '/android');
     await user.click(screen.getByRole('button', { name: 'Not now' }));
@@ -180,7 +193,7 @@ describe('the home page’s banner', () => {
 
     localStorage.setItem(ANDROID_TEST_STORAGE_KEY, JSON.stringify({ steps: { group: true, install: true } }));
     ({ AndroidTestBanner } = await load());
-    render(<AndroidTestBanner />);
+    show(<AndroidTestBanner />);
     expect(await screen.findByText('Thanks for testing Peek for Android')).toBeVisible();
     expect(screen.queryByText('Keep it two weeks: that opens it to everyone.')).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Didn’t work? See the steps' })).toHaveAttribute('href', '/android');

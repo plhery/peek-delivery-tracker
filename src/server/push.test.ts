@@ -2,7 +2,8 @@ import { generateKeyPairSync } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import {
   CompositePushNotificationService,
   DeliveryLiveActivityNotificationService,
@@ -12,6 +13,9 @@ import {
 } from './push';
 import { SUPPORTED_LOCALES } from '../lib/locale';
 import type { JsonObject } from './types';
+
+beforeEach(stubPeekEnv);
+afterEach(() => { vi.unstubAllEnvs(); });
 
 const now = Date.parse('2026-09-07T12:40:00Z');
 const privateKey = generateKeyPairSync('ec', { namedCurve: 'prime256v1' })
@@ -365,6 +369,19 @@ describe('useful, localized tracking updates', () => {
     expect(String(sent[0]!.body).length).toBeGreaterThan(locale === 'zh' ? 20 : 40);
     if (locale !== 'en') expect(sent[0]!.body).not.toBe(sent[1]!.body);
     expect(sent[1]).toMatchObject({ title: 'You’ll hear from Peek' });
+  });
+
+  it('names the site the settings name, and Parcel Tracker where they name none', async () => {
+    const sent: JsonObject[] = [];
+    const browser = new WebPushNotificationService({} as never, 'public-key', 'private-key', 'https://delivery.example', () => now);
+    vi.spyOn(browser, 'send').mockImplementation(async (_row, payload) => { sent.push(payload!); });
+    vi.stubEnv('SITE_NAME', '');
+    await browser.sendTest({ locale: 'en' });
+    await browser.sendTest({ locale: 'de' });
+    vi.stubEnv('SITE_NAME', 'Colis');
+    await browser.sendTest({ locale: 'en' });
+    expect(sent.map(({ title }) => title)).toEqual(['You’ll hear from Parcel Tracker', expect.stringContaining('Parcel Tracker'), 'You’ll hear from Colis']);
+    expect(JSON.stringify(sent)).not.toContain('Peek');
   });
 });
 

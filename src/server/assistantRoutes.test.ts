@@ -1,6 +1,7 @@
 import { CLIENT_CAPABILITIES_META_KEY, LATEST_PROTOCOL_VERSION, PROTOCOL_VERSION_META_KEY } from '@modelcontextprotocol/server';
 import { NextRequest } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import { GET as authorizationServer } from '../../app/.well-known/oauth-authorization-server/route';
 import { GET as mcpResource } from '../../app/.well-known/oauth-protected-resource/mcp/route';
 import { GET as protectedResource } from '../../app/.well-known/oauth-protected-resource/route';
@@ -20,6 +21,7 @@ import { AMAZON_ACCOUNT_MESSAGE } from '../lib/amazon';
 import { amazonAccountMessage } from './amazonGuide';
 import { forgetAssistantEmails } from './assistants/access';
 import { newClientId, newSecret, pkceChallenge, secretDigest, type Scope } from './assistants/settings';
+import { serverName } from './assistants/tools';
 import { SupabaseAuthenticator } from './auth';
 import { addParcelsFromText } from './parcelsFromText';
 import { SupabaseError, SupabaseServiceClient, type AssistantGrant, type AssistantTokenOwner } from './supabase';
@@ -63,6 +65,7 @@ function connect(scopes: Scope[], user = userId, kind: 'access' | 'personal' = '
 }
 
 beforeEach(() => {
+  stubPeekEnv();
   vi.stubEnv('SUPABASE_URL', 'https://database.example');
   vi.stubEnv('SUPABASE_PUBLISHABLE_KEY', 'test-public');
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
@@ -268,7 +271,7 @@ describe('the MCP endpoint', () => {
     expect(started.status).toBe(200);
     const initialized = (await rpc(started)).result!;
     // The tool list never changes, so a client has no stream to open for it: Peek refuses `subscriptions/listen`.
-    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek' }, capabilities: { tools: { listChanged: false } } });
+    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek', title: 'Peek', version: '1.0.0' }, capabilities: { tools: { listChanged: false } } });
     const discovered = await mcp(reader, 'server/discover', {}, 'modern');
     expect(discovered.status).toBe(200);
     expect((await rpc(discovered)).result).toMatchObject({ capabilities: { tools: { listChanged: false } } });
@@ -714,7 +717,18 @@ describe('the MCP endpoint', () => {
     expect((await call(connect(['parcels:write']), 'add_parcels', { text: 'SYNTHETIC9' })).result!.content![0]!.text).not.toContain('looking for the carrier');
   });
 
+  it('names itself after the site, and says Parcel Tracker where the site sets no name', async () => {
+    vi.stubEnv('SITE_NAME', '');
+    const reader = connect(['parcels:read']);
+    const started = await mcp(reader, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
+    const initialized = (await rpc(started)).result! as { serverInfo: unknown; instructions: string };
+    expect(initialized.serverInfo).toMatchObject({ name: 'parcel-tracker', title: 'Parcel Tracker' });
+    expect(serverName('Colis à suivre')).toBe('colis-a-suivre');
+    expect(serverName('…')).toBe('parcel-tracker');
+  });
+
   it('names no guide on a site that serves none', async () => {
+    vi.stubEnv('GUIDE_PAGES', '');
     const writer = connect(['parcels:write']);
     const started = await mcp(writer, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
     const { instructions } = (await rpc(started)).result! as { instructions: string };

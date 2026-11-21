@@ -13,13 +13,14 @@ import { carrierChoiceSections, carrierChoiceTags, shapeCarrier, usedCarrierIds 
 import { carrierInfo, formatTrackingNumber, normalizeTrackingNumber } from '../lib/carriers';
 import { focusClickedButton } from '../lib/modal';
 import { useTabTitle } from '../lib/tabTitle';
+import { useSite } from '../SiteContext';
 import type { CarrierId } from '../types';
 import { CarrierRibbon } from './landing/CarrierRibbon';
 import { LandingIcon } from './landing/glyphs';
 import { HeroPip } from './landing/HeroPip';
 import { Landing } from './landing/Landing';
 import { LandingFooter } from './landing/Who';
-import { followInPlace, SOURCE_URL } from './landing/links';
+import { followInPlace } from './landing/links';
 import { SAMPLE_COUNT, SampleLine, SampleText } from './landing/Sample';
 import { useLive, useReducedMotion } from './landing/useLive';
 import { useSampleLoop } from './landing/useSampleLoop';
@@ -67,6 +68,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
 }) {
   const { t, locale } = useI18n();
   const { account, email, openDeliveries, signInWith } = usePeekSession();
+  const { source } = useSite();
   // Someone signed in reads the landing at its own address: the way back to their deliveries stands where signing in does.
   const mine = account === 'signed-in' && openDeliveries;
   const initial = email?.trim().charAt(0).toUpperCase();
@@ -282,7 +284,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
     <header className="door-header">
       <PeekLockup />
       <div className="door-header__actions">
-        <a className="door-github" href={SOURCE_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
+        <a className="door-github" href={source} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
         {account !== 'signed-in' && <GuestSettings className="door-settings" />}
         {mine
           // eslint-disable-next-line @next/next/no-html-link-for-pages -- followed in place: the app itself answers at `/`
@@ -297,7 +299,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
       <section ref={hero} className="door-hero" aria-labelledby="door-title" data-resting={(ready && !live) || undefined}>
         {opening && named && <div className="door-wash" aria-hidden="true" />}
         <div className="door-body">
-          {firstVisit && <a className="door-pill" href={SOURCE_URL} target="_blank" rel="noopener noreferrer">
+          {firstVisit && <a className="door-pill" href={source} target="_blank" rel="noopener noreferrer">
             {/* The spaces are for a screen reader: the dot between the two says nothing. */}
             <LandingIcon name="github" />{t('link.source')}{' '}<span className="door-pill__dot" aria-hidden="true" />{' '}{t('landing.pill.carriers')}
           </a>}

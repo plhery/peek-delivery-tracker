@@ -1,9 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  ANDROID_TEST_LINKS, ANDROID_TEST_SNOOZE_MS, ANDROID_TEST_STORAGE_KEY, ANDROID_TEST_THANKS_MS, androidTestShows, canInstallAndroidApp,
-  closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer, noteAndroidTestStep, noteAndroidTestThanked, readAndroidDevice,
+  ANDROID_TEST_SNOOZE_MS, ANDROID_TEST_STORAGE_KEY, ANDROID_TEST_THANKS_MS, androidTestShows, canInstallAndroidApp,
+  androidAppLink, androidTestLinks, androidTestOpen, closeAndroidTestThanks, neverAndroidTest, noteAndroidAppReferrer, noteAndroidTestStep, noteAndroidTestThanked, readAndroidDevice,
   readAndroidTestNote, restartAndroidTest, snoozeAndroidTest, subscribeAndroidTest, type AndroidTestNote,
 } from './androidTest';
+import { PEEK_SITE } from '../test/site';
+
+const peek = PEEK_SITE.android!;
 
 /** Chrome's reduced user agent: every Android phone says Android 10. */
 const CHROME_REDUCED = 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36';
@@ -149,11 +152,11 @@ describe('the note this browser keeps', () => {
     }
   });
 
-  it('marks a browser that opened a page from the app, and only from Peek', () => {
-    noteAndroidAppReferrer('https://www.google.com/');
-    noteAndroidAppReferrer('android-app://com.example.other/');
+  it('marks a browser that opened a page from the app, and only from the site’s own', () => {
+    noteAndroidAppReferrer('https://www.google.com/', peek);
+    noteAndroidAppReferrer('android-app://com.example.other/', peek);
     expect(readAndroidTestNote()).toEqual({});
-    noteAndroidAppReferrer('android-app://com.plhery.peekdeliverytracker/');
+    noteAndroidAppReferrer('android-app://com.plhery.peekdeliverytracker/', peek);
     expect(readAndroidTestNote()).toEqual({ app: true });
   });
 
@@ -167,9 +170,19 @@ describe('the note this browser keeps', () => {
 });
 
 it('leads to Peek’s own testers’ group and Peek’s own page on Google Play', () => {
-  expect(ANDROID_TEST_LINKS).toEqual({
+  expect(androidTestOpen(peek)).toBe(true);
+  expect(androidTestOpen(peek) && androidTestLinks(peek)).toEqual({
     group: 'https://groups.google.com/g/peek-android-testers',
     optIn: 'https://play.google.com/apps/testing/com.plhery.peekdeliverytracker',
     install: 'https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker',
   });
+  expect(androidAppLink(peek)).toBe('/android');
+});
+
+it('invites to no test without a testers’ group, and links no app on a site without one', () => {
+  const released = { ...peek, testGroup: null };
+  expect(androidTestOpen(released)).toBe(false);
+  expect(androidAppLink(released)).toBe('https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker');
+  expect(androidTestOpen(null)).toBe(false);
+  expect(androidAppLink(null)).toBeNull();
 });

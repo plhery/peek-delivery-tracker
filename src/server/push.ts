@@ -28,6 +28,7 @@ import { lateScans, providerTwins, relayRepeats } from './relayCopies';
 import { repeatedScans } from './scanRepeats';
 import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
+import { siteName } from './siteSettings';
 import type { RecentScan, SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
 import { WorkerLease } from './workerLease';
@@ -38,11 +39,11 @@ import { WorkerLease } from './workerLease';
  * arrives or what the step means. Those sentences start in lower case where
  * their language allows, and are capitalised when no name comes before them.
  * Nothing assumes the reader is the recipient: an account also follows the
- * parcels it sends.
+ * parcels it sends. `{{site}}` is the product's name.
  */
 const PUSH_COPY: Record<Locale, Record<string, string>> = {
   en: {
-    test_title: 'You’ll hear from Peek',
+    test_title: 'You’ll hear from {{site}}',
     test_body: 'This device gets a notification for the steps you chose. Change them any time in Settings › Notifications.',
     friend_title: '{{name}} is in',
     friend_body: 'Your passports are side by side now. Have a peek.',
@@ -59,7 +60,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'the carrier doesn’t have it yet',
     body_accepted: 'off it goes',
     body_in_transit: 'one step closer',
-    body_customs: 'Peek is keeping an eye on it',
+    body_customs: '{{site}} is keeping an eye on it',
     body_exception: 'the carrier flagged a problem. Tap to see what to do.',
     body_out_for_delivery: 'almost there',
     body_ready_for_pickup: 'waiting at the pickup point',
@@ -80,7 +81,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'now arriving between {{from}} and {{to}}',
   },
   de: {
-    test_title: 'Ab jetzt hörst du von Peek',
+    test_title: 'Ab jetzt hörst du von {{site}}',
     test_body: 'Dieses Gerät bekommt Mitteilungen für die Schritte, die du gewählt hast. Ändern kannst du sie jederzeit unter Einstellungen › Mitteilungen.',
     friend_title: '{{name}} ist dabei',
     friend_body: 'Eure Reisepässe liegen jetzt nebeneinander. Wirf einen Blick drauf.',
@@ -97,7 +98,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'der Paketdienst hat es noch nicht',
     body_accepted: 'und los geht’s',
     body_in_transit: 'wieder ein Stück näher',
-    body_customs: 'Peek behält es im Auge',
+    body_customs: '{{site}} behält es im Auge',
     body_exception: 'der Paketdienst meldet ein Problem. Tippe, um zu sehen, was zu tun ist.',
     body_out_for_delivery: 'fast da',
     body_ready_for_pickup: 'wartet an der Abholstelle',
@@ -118,7 +119,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'neuer Liefertermin: zwischen dem {{from}} und dem {{to}}',
   },
   fr: {
-    test_title: 'Peek te tient au courant',
+    test_title: '{{site}} te tient au courant',
     test_body: 'Cet appareil reçoit une notification pour les étapes que tu as choisies. Change-les quand tu veux dans Réglages › Notifications.',
     friend_title: '{{name}} est de la partie',
     friend_body: 'Vos passeports sont maintenant côte à côte. Jette un œil.',
@@ -135,7 +136,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'le transporteur ne l’a pas encore reçu',
     body_accepted: 'c’est parti',
     body_in_transit: 'il se rapproche',
-    body_customs: 'Peek garde un œil dessus',
+    body_customs: '{{site}} garde un œil dessus',
     body_exception: 'le transporteur signale un problème. Touche pour savoir quoi faire.',
     body_out_for_delivery: 'presque arrivé',
     body_ready_for_pickup: 'il attend au point de retrait',
@@ -156,7 +157,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'arrive désormais entre le {{from}} et le {{to}}',
   },
   it: {
-    test_title: 'Peek ti terrà al corrente',
+    test_title: '{{site}} ti terrà al corrente',
     test_body: 'Questo dispositivo riceve notifiche per i passaggi che hai scelto. Puoi cambiarli quando vuoi in Impostazioni › Notifiche.',
     friend_title: '{{name}} è nella tua cerchia',
     friend_body: 'I vostri passaporti ora sono fianco a fianco. Dai un’occhiata.',
@@ -173,7 +174,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'il corriere non ce l’ha ancora',
     body_accepted: 'si parte',
     body_in_transit: 'un passo più vicino',
-    body_customs: 'Peek lo tiene d’occhio',
+    body_customs: '{{site}} lo tiene d’occhio',
     body_exception: 'il corriere ha segnalato un problema. Tocca per vedere cosa fare.',
     body_out_for_delivery: 'manca poco',
     body_ready_for_pickup: 'in attesa al punto di ritiro',
@@ -194,7 +195,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'nuova data prevista: {{from}} – {{to}}',
   },
   es: {
-    test_title: 'Peek te mantendrá al tanto',
+    test_title: '{{site}} te mantendrá al tanto',
     test_body: 'Este dispositivo recibe notificaciones de los pasos que has elegido. Cámbialos cuando quieras en Ajustes › Notificaciones.',
     friend_title: '{{name}} se apunta',
     friend_body: 'Vuestros pasaportes ya están uno al lado del otro. Echa un vistazo.',
@@ -211,7 +212,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'el transportista aún no lo tiene',
     body_accepted: 'en marcha',
     body_in_transit: 'un paso más cerca',
-    body_customs: 'Peek no lo pierde de vista',
+    body_customs: '{{site}} no lo pierde de vista',
     body_exception: 'el transportista ha detectado un problema. Toca para ver qué hacer.',
     body_out_for_delivery: 'ya casi está',
     body_ready_for_pickup: 'esperando en el punto de recogida',
@@ -232,7 +233,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'ahora llega entre el {{from}} y el {{to}}',
   },
   pt: {
-    test_title: 'O Peek vai dando notícias',
+    test_title: 'O {{site}} vai dando notícias',
     test_body: 'Este dispositivo recebe notificações dos passos que escolheste. Podes alterá-los quando quiseres em Definições › Notificações.',
     friend_title: '{{name}} juntou-se a ti',
     friend_body: 'Os vossos passaportes já estão lado a lado. Dá uma espreitadela.',
@@ -249,7 +250,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'a transportadora ainda não a tem',
     body_accepted: 'a viagem começou',
     body_in_transit: 'um passo mais perto',
-    body_customs: 'o Peek está de olho nela',
+    body_customs: 'o {{site}} está de olho nela',
     body_exception: 'a transportadora assinalou um problema. Toca para ver o que fazer.',
     body_out_for_delivery: 'quase a chegar',
     body_ready_for_pickup: 'à espera no ponto de levantamento',
@@ -270,7 +271,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'afinal chega entre {{from}} e {{to}}',
   },
   pl: {
-    test_title: 'Peek da Ci znać',
+    test_title: '{{site}} da Ci znać',
     test_body: 'To urządzenie dostaje powiadomienia o wybranych przez Ciebie krokach. Zmienisz je w każdej chwili tutaj: Ustawienia › Powiadomienia.',
     friend_title: '{{name}} jest już w Twoim kręgu',
     friend_body: 'Wasze paszporty leżą teraz obok siebie. Zerknij.',
@@ -287,7 +288,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'przewoźnik jeszcze nie ma przesyłki',
     body_accepted: 'rusza w drogę',
     body_in_transit: 'o krok bliżej',
-    body_customs: 'Peek ma wszystko na oku',
+    body_customs: '{{site}} ma wszystko na oku',
     body_exception: 'przewoźnik zgłosił problem. Stuknij, aby zobaczyć, co zrobić.',
     body_out_for_delivery: 'już prawie na miejscu',
     body_ready_for_pickup: 'czeka w punkcie odbioru',
@@ -308,7 +309,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'nowy termin: {{from}} – {{to}}',
   },
   'pt-br': {
-    test_title: 'O Peek vai dar notícias',
+    test_title: 'O {{site}} vai dar notícias',
     test_body: 'Este dispositivo recebe notificações das etapas que você escolheu. Altere quando quiser em Configurações › Notificações.',
     friend_title: '{{name}} entrou no seu círculo',
     friend_body: 'Agora seus passaportes estão lado a lado. Dê uma espiada.',
@@ -325,7 +326,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'a transportadora ainda não recebeu a encomenda',
     body_accepted: 'começou a viagem',
     body_in_transit: 'um passo mais perto',
-    body_customs: 'o Peek está de olho',
+    body_customs: 'o {{site}} está de olho',
     body_exception: 'a transportadora informou um problema. Toque para ver o que fazer.',
     body_out_for_delivery: 'quase chegando',
     body_ready_for_pickup: 'esperando no ponto de retirada',
@@ -346,7 +347,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'agora chega entre {{from}} e {{to}}',
   },
   ru: {
-    test_title: 'Peek будет держать вас в курсе',
+    test_title: '{{site}} будет держать вас в курсе',
     test_body: 'Это устройство будет получать уведомления о выбранных вами этапах. Изменить их можно в любой момент: Настройки › Уведомления.',
     friend_title: '{{name}} теперь в вашем круге',
     friend_body: 'Ваши паспорта теперь рядом. Загляните.',
@@ -363,7 +364,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: 'служба доставки ещё не получила посылку',
     body_accepted: 'в путь!',
     body_in_transit: 'ещё на шаг ближе',
-    body_customs: 'Peek следит за ситуацией',
+    body_customs: '{{site}} следит за ситуацией',
     body_exception: 'служба доставки сообщила о проблеме. Нажмите, чтобы узнать, что делать.',
     body_out_for_delivery: 'почти на месте',
     body_ready_for_pickup: 'ждёт в пункте выдачи',
@@ -384,7 +385,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: 'теперь прибудет с {{from}} по {{to}}',
   },
   zh: {
-    test_title: 'Peek 会随时通知你',
+    test_title: '{{site}} 会随时通知你',
     test_body: '这台设备会收到你所选环节的通知。随时可以在“设置 › 通知”中更改。',
     friend_title: '{{name}} 已加入',
     friend_body: '你们的护照现在并排放在一起了。快去看看吧。',
@@ -401,7 +402,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     body_registered: '快递公司还没收到包裹',
     body_accepted: '出发了',
     body_in_transit: '又近了一步',
-    body_customs: 'Peek 正在帮你盯着',
+    body_customs: '{{site}} 正在帮你盯着',
     body_exception: '快递公司报告了问题。轻点查看该怎么办。',
     body_out_for_delivery: '马上就到',
     body_ready_for_pickup: '正在取件点等你',
@@ -422,6 +423,20 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_window: '预计送达改为：{{from}}至{{to}}',
   },
 };
+
+const pushCopies = new Map<string, Record<string, string>>();
+
+/** The copy in `locale`, with the product's name (`SITE_NAME`) where it names it. */
+function pushCopy(locale: Locale): Record<string, string> {
+  const name = siteName();
+  const key = `${locale} ${name}`;
+  let copy = pushCopies.get(key);
+  if (!copy) {
+    copy = Object.fromEntries(Object.entries(PUSH_COPY[locale]).map(([field, text]) => [field, text.replaceAll('{{site}}', name)]));
+    pushCopies.set(key, copy);
+  }
+  return copy;
+}
 
 /**
  * The pictures a browser draws with a notification. Android keeps only the
@@ -475,7 +490,7 @@ function notificationLocale(value: unknown): Locale {
 /** What tells someone a friend took their invitation, in the language of the device it goes to. */
 export function friendNotificationCopy(language: unknown, name: string): { locale: Locale; title: string; body: string } {
   const locale = notificationLocale(language);
-  const copy = PUSH_COPY[locale];
+  const copy = pushCopy(locale);
   // A function, so that a nickname with a dollar sign is written as it is.
   return { locale, title: copy.friend_title!.replace('{{name}}', () => name), body: copy.friend_body! };
 }
@@ -488,7 +503,7 @@ export function emailAddedNotificationCopy(language: unknown, label: unknown, ca
   const locale = notificationLocale(language);
   const name = notificationText(label, 80);
   const carrierName = notificationText(carrierDisplayName(carrier, locale), 80);
-  return { locale, title: PUSH_COPY[locale].email_added_title!, body: name ? `${name} · ${carrierName}` : carrierName };
+  return { locale, title: pushCopy(locale).email_added_title!, body: name ? `${name} · ${carrierName}` : carrierName };
 }
 
 /** One of the app's own words in a notification's language, so both say the same. */
@@ -622,7 +637,7 @@ function deliveredInstant(row: JsonObject, now: number): DateTime | null {
 }
 
 function deliveredMessage(row: JsonObject, locale: Locale, now: number, use24HourTime: boolean): string {
-  const copy = PUSH_COPY[locale];
+  const copy = pushCopy(locale);
   const instant = deliveredInstant(row, now);
   const zone = deliveryClock(row);
   const delivered = instant?.setZone(zone);
@@ -643,14 +658,14 @@ const ETA_NOTIFICATION_STAGES = new Set([
 /** The news a notification leads with: a title of its own, or the app's word for the stage. */
 function notificationTitle(row: JsonObject, locale: Locale): string {
   const stage = stringField(row, 'stage');
-  const copy = PUSH_COPY[locale];
+  const copy = pushCopy(locale);
   return notificationText(copy[`title_${stage}`] ?? appWord(locale, `stage.${stage}`) ?? copy.update, 80);
 }
 
 /** What the step means: when the parcel arrives if that is known, the stage's own sentence otherwise. */
 function notificationDetail(row: JsonObject, locale: Locale, now: number, use24HourTime = true): string {
   const stage = stringField(row, 'stage');
-  const copy = PUSH_COPY[locale];
+  const copy = pushCopy(locale);
   if (stage === 'delivered') return deliveredMessage(row, locale, now, use24HourTime);
   const expected = ETA_NOTIFICATION_STAGES.has(stage)
     ? expectedDelivery(row.expected_delivery, row.expected_delivery_from, stage, locale,
@@ -710,7 +725,7 @@ const DEVICE_CLOCK_KEYS = ['scan_at', 'body_same_day', 'body_other_day', 'date_l
 export function deviceClockFields(row: JsonObject, locale: Locale, now: number, lead = row.label): Record<string, string> {
   const instant = deliveredInstant(row, now);
   if (!instant) return {};
-  const copy = PUSH_COPY[locale];
+  const copy = pushCopy(locale);
   return {
     scan_at: instant.toISO()!,
     body_same_day: notificationBody(row, locale, now, lead, copy.delivered_time!),
@@ -1005,7 +1020,7 @@ export class WebPushNotificationService {
 
   async sendTest(subscription: JsonObject): Promise<void> {
     const locale = notificationLocale(subscription.locale);
-    const copy = PUSH_COPY[locale];
+    const copy = pushCopy(locale);
     await this.send(subscription, {
       title: copy.test_title,
       body: copy.test_body,
@@ -1508,7 +1523,7 @@ abstract class AppPushNotificationService {
   }
 
   async sendTest(device: JsonObject): Promise<void> {
-    const copy = PUSH_COPY[this.locale(device)];
+    const copy = pushCopy(this.locale(device));
     await this.send(device, this.payload(copy.test_title!, copy.test_body!, null));
   }
 
@@ -1921,7 +1936,7 @@ export class DeliveryLiveActivityNotificationService {
     const locale = this.apns.locale(row);
     const stage = stringField(row, 'stage');
     // The words the app writes on the activities it starts itself.
-    const status = appWord(locale, `stage.${stage}`) ?? PUSH_COPY[locale].update!;
+    const status = appWord(locale, `stage.${stage}`) ?? pushCopy(locale).update!;
     // Out for delivery, only the hours the carrier gives for today.
     const expected = notificationExpectedDelivery(
       row.expected_delivery,
@@ -2076,7 +2091,7 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
     publicKey: process.env.VAPID_PUBLIC_KEY?.trim() ?? '',
     privateKey: process.env.VAPID_PRIVATE_KEY?.trim() ?? '',
     // Push services ask who sends: the site itself, unless a contact is set.
-    subject: process.env.VAPID_SUBJECT?.trim() || process.env.CANONICAL_ORIGIN?.trim() || 'https://peektracker.com',
+    subject: process.env.VAPID_SUBJECT?.trim() || process.env.CANONICAL_ORIGIN?.trim() || '',
   };
   const nativeValues = {
     teamId: process.env.APNS_TEAM_ID?.trim() ?? '',
@@ -2091,6 +2106,9 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
   };
   if (Boolean(webValues.publicKey) !== Boolean(webValues.privateKey)) {
     throw new Error('VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY must be configured together');
+  }
+  if (webValues.publicKey && !webValues.subject) {
+    throw new Error('VAPID_SUBJECT or CANONICAL_ORIGIN must name who sends Web Push');
   }
   if (Object.values(nativeValues).some(Boolean) && !Object.values(nativeValues).every(Boolean)) {
     throw new Error('APNS_TEAM_ID, APNS_KEY_ID, APNS_PRIVATE_KEY and APNS_BUNDLE_ID are all required');

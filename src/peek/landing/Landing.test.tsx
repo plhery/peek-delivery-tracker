@@ -1,4 +1,6 @@
 import { act, render, screen, within } from '@testing-library/react';
+import { UPSTREAM_SOURCE } from '../../lib/source';
+import { renderOnPeek } from '../../test/site';
 import userEvent from '@testing-library/user-event';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -33,7 +35,7 @@ afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); vi.unstubAllEnvs();
 
 describe('Landing', () => {
   it('asks the visitor’s next three questions, in order, and answers each in words', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     expect(screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent)).toEqual([
       'Will I know when it moves?', 'Following more than one?', 'Who’s behind Peek?',
     ]);
@@ -57,17 +59,17 @@ describe('Landing', () => {
   it('says an account gets an email on delivery only where the server sends one', () => {
     const benefits = () => within(screen.getByRole('region', { name: 'Following more than one?' })).getAllByRole('listitem')
       .map((item) => item.querySelector('strong')!.textContent);
-    const { unmount } = render(<Landing onSignIn={onSignIn} />);
+    const { unmount } = renderOnPeek(<Landing onSignIn={onSignIn} />);
     expect(benefits()).toHaveLength(3);
     expect(document.body).not.toHaveTextContent(/e-?mail/i);
     unmount();
-    render(<PeekSessionProvider value={{ account: 'visitor', signIn: vi.fn(), deliveryEmails: true }}><Landing onSignIn={onSignIn} /></PeekSessionProvider>);
+    renderOnPeek(<PeekSessionProvider value={{ account: 'visitor', signIn: vi.fn(), deliveryEmails: true }}><Landing onSignIn={onSignIn} /></PeekSessionProvider>);
     expect(benefits()).toEqual(['One list, the next one on its map', 'Notifications for the steps you choose', 'An email when it arrives', 'A passport of deliveries']);
     expect(screen.getByText('A short email when a parcel is ready for pickup or delivered, to the address you sign in with. Only if you turn it on.')).toBeVisible();
   });
 
   it('keeps the moving pictures out of a screen reader’s way', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     // The journey is one image with a name; its pings, the phone and the passport are for the eye only.
     expect(journey()).toBeVisible();
     expect(document.querySelector('.landing-pings')).toHaveAttribute('aria-hidden', 'true');
@@ -78,7 +80,7 @@ describe('Landing', () => {
   });
 
   it('opens sign-in from the section that says why, under a name of its own', async () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     await userEvent.setup().click(screen.getByRole('button', { name: 'Sign in to keep them all' }));
     expect(onSignIn).toHaveBeenCalledOnce();
   });
@@ -86,7 +88,7 @@ describe('Landing', () => {
   it('offers the demo deliveries beside signing in, at their own address', async () => {
     const arrived = vi.fn();
     window.addEventListener('popstate', arrived);
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     const demo = within(screen.getByRole('region', { name: 'Following more than one?' })).getByRole('link', { name: 'Try the demo' });
     expect(demo).toHaveAttribute('href', '/demo');
     await userEvent.setup().click(demo);
@@ -98,7 +100,7 @@ describe('Landing', () => {
   });
 
   it('offers the iPhone app where the answer names it and after the list, each link counted under its own campaign', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     expect(screen.getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', 'https://apps.apple.com/app/apple-store/id6823615370?pt=129628155&ct=web-more&mt=8');
     const iphone = screen.getByRole('link', { name: 'your iPhone' });
     expect(iphone).toHaveAttribute('href', expect.stringContaining('&ct=web-moves&'));
@@ -111,7 +113,7 @@ describe('Landing', () => {
   });
 
   it('offers the Android app beside the iPhone app, each in its platform\'s colour, the Android one through the closed test\'s steps', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     const android = screen.getByRole('link', { name: 'Android app' });
     const iphone = screen.getByRole('link', { name: 'iPhone app' });
     expect(android).toHaveAttribute('href', '/android');
@@ -122,7 +124,7 @@ describe('Landing', () => {
   });
 
   it('ends with the name, the privacy notice, the iPhone and Android apps, the code and the language', () => {
-    render(<LandingFooter />);
+    renderOnPeek(<LandingFooter />);
     const footer = screen.getByRole('contentinfo');
     expect(footer).toHaveTextContent('Peek · Universal Parcel Tracker');
     expect(within(footer).getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', '/privacy.html');
@@ -135,7 +137,7 @@ describe('Landing', () => {
   it('names what else its author makes after its links, each at its address for the reader’s language, and credits the Android robot last', async () => {
     const maker = () => screen.getByRole('contentinfo').querySelector<HTMLElement>('.landing-footer__maker')!;
     const sites = () => within(maker()).getAllByRole('link');
-    const english = render(<LandingFooter />);
+    const english = renderOnPeek(<LandingFooter />);
     expect(maker()).toHaveTextContent(/^By the creator of X Horoscope, UnfollowMonkey and ScootRadar$/);
     const credit = screen.getByRole('contentinfo').lastElementChild;
     expect(credit).toHaveTextContent(/^The Android robot is adapted from work by Google, shared under CC BY 3\.0\.$/);
@@ -151,7 +153,7 @@ describe('Landing', () => {
     }
     english.unmount();
 
-    const french = render(<I18nProvider initialLocale="fr" initialMessages={await loadMessages('fr')}><LandingFooter /></I18nProvider>);
+    const french = renderOnPeek(<I18nProvider initialLocale="fr" initialMessages={await loadMessages('fr')}><LandingFooter /></I18nProvider>);
     expect(maker()).toHaveTextContent(/^Par le créateur de X Horoscope, d’UnfollowMonkey et de ScootRadar$/);
     expect(sites().map((link) => link.getAttribute('href'))).toEqual([
       'https://x-horoscope.com/fr/x', 'https://unfollow-monkey.com/fr', 'https://scootradar.com/fr',
@@ -161,11 +163,28 @@ describe('Landing', () => {
     french.unmount();
 
     // ScootRadar has no Polish: its English page is linked, at its bare domain.
-    render(<I18nProvider initialLocale="pl" initialMessages={await loadMessages('pl')}><LandingFooter /></I18nProvider>);
+    renderOnPeek(<I18nProvider initialLocale="pl" initialMessages={await loadMessages('pl')}><LandingFooter /></I18nProvider>);
     expect(maker()).toHaveTextContent(/^Od twórcy X Horoscope, UnfollowMonkey i ScootRadar$/);
     expect(sites().map((link) => link.getAttribute('href'))).toEqual([
       'https://x-horoscope.com/pl/x', 'https://unfollow-monkey.com/pl', 'https://scootradar.com',
     ]);
+  });
+
+  it('names no author, no documents and no app on a site whose settings set none, and links the code where it comes from', () => {
+    const landing = render(<Landing onSignIn={onSignIn} />);
+    expect(screen.queryByRole('link', { name: /iPhone/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Android app' })).not.toBeInTheDocument();
+    expect(screen.getByText(/Peek notifies you when it matters, on your iPhone or in your browser\.$/)).toBeInTheDocument();
+    expect(document.querySelector('.landing-qr, .landing-more__actions .button--apple')).toBeNull();
+    expect(screen.queryByRole('link', { name: '@plhery on X' })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'View on GitHub' })).toHaveAttribute('href', UPSTREAM_SOURCE);
+    landing.unmount();
+
+    render(<LandingFooter />);
+    const footer = screen.getByRole('contentinfo');
+    expect(within(footer).getAllByRole('link').map((link) => link.textContent)).toEqual(['GitHub']);
+    expect(within(footer).getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', UPSTREAM_SOURCE);
+    expect(footer.querySelector('.landing-footer__maker, .landing-footer__credit')).toBeNull();
   });
 
   it('links the other sites in the language they have nearest the reader’s, else in English', () => {
@@ -178,7 +197,7 @@ describe('Landing', () => {
   it('moves a language’s address with the language chosen at its foot, to where the landing is in English for this reader', async () => {
     const user = userEvent.setup();
     const choose = (language: string) => user.selectOptions(screen.getByRole('combobox', { name: 'Language' }), language);
-    const foot = (account: 'visitor' | 'checking' | 'signed-in') => render(<PeekSessionProvider value={{ account, signIn: vi.fn() }}><LandingFooter /></PeekSessionProvider>);
+    const foot = (account: 'visitor' | 'checking' | 'signed-in') => renderOnPeek(<PeekSessionProvider value={{ account, signIn: vi.fn() }}><LandingFooter /></PeekSessionProvider>);
 
     // A visitor: English is at `/`, the landing for them.
     history.replaceState(null, '', '/de');
@@ -213,7 +232,7 @@ describe('Landing', () => {
   });
 
   it('loads the map and the cards only when their sections come near', async () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     expect(screen.queryByTestId('journey-map')).not.toBeInTheDocument();
     expect(screen.queryByTestId('sample-list')).not.toBeInTheDocument();
     scroll(card(), .1);
@@ -228,7 +247,7 @@ describe('Landing: the journey', () => {
   beforeEach(() => { vi.useFakeTimers(); });
 
   it('tells four scans while its card is on screen: the headline, the step and the ping change together', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     expect(showing('.landing-stack > div')).toBe('In transitArrives in 2 days');
     expect(showing('.landing-ping')).toContain('Collected by DHL');
     expect(showing('.landing-ping')).toContain('New trainers · Hamburg, 17:48');
@@ -262,7 +281,7 @@ describe('Landing: the journey', () => {
   });
 
   it('waits until a good part of the card shows, and holds when it leaves', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     scroll(card(), .1);
     pass(2 * SCAN_MS);
     expect(journey()).toHaveAttribute('data-scan', '0');
@@ -275,7 +294,7 @@ describe('Landing: the journey', () => {
   });
 
   it('holds in a background tab', () => {
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     scroll(card(), 1);
     pass(SCAN_MS);
     vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('hidden');
@@ -287,7 +306,7 @@ describe('Landing: the journey', () => {
 
   it('shows someone who asked for less motion the parcel on its last mile, and never moves', () => {
     motion(true);
-    render(<Landing onSignIn={onSignIn} />);
+    renderOnPeek(<Landing onSignIn={onSignIn} />);
     scroll(card(), 1);
     expect(journey()).toHaveAttribute('data-scan', '2');
     expect(showing('.landing-stack > div')).toBe('Out for deliverytoday, 13:00–17:00');

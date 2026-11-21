@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from 'vitest';
+import { stubPeekEnv } from '../test/peekEnv';
 import {
   ALERT_PRESET_STAGES,
   ALL_NOTIFICATION_STAGES,
@@ -57,6 +58,7 @@ const apnsKey = () => generateKeyPairSync('ec', { namedCurve: 'prime256v1' }).pr
 const refused = (statusCode: number) => Object.assign(new Error('Received unexpected response code'), { statusCode });
 
 beforeEach(() => {
+  stubPeekEnv();
   client = new SupabaseServiceClient('https://database.example', 'test');
   web = new WebPushNotificationService(client, 'public-key', 'private-key', 'https://delivery.example', () => now);
   alerts = new ParcelLinkAlertService(web);
@@ -670,6 +672,7 @@ describe('alerts beside the account notifications', () => {
     const { default: webpush } = await import('web-push');
     const keys = webpush.generateVAPIDKeys();
     vi.stubEnv('VAPID_PUBLIC_KEY', keys.publicKey);
+    vi.stubEnv('VAPID_SUBJECT', 'mailto:push@example.com');
     vi.stubEnv('VAPID_PRIVATE_KEY', keys.privateKey);
     const configured = pushServices(client);
     expect(configured.linkAlerts).toBeInstanceOf(ParcelLinkAlertService);

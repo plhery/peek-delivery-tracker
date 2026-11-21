@@ -2,6 +2,7 @@ import { userErrorKey, userErrorMessage } from '../lib/userMessages';
 import { useState, type FormEvent, type ReactNode } from 'react';
 import { useI18n } from '../i18n';
 import Image from 'next/image';
+import { useSite } from '../SiteContext';
 
 export function SignInScreen({
   configured,
@@ -49,6 +50,7 @@ export function SignInScreen({
   signInWithPassword?: (email: string, password: string) => Promise<void>;
 }) {
   const { t } = useI18n();
+  const { privacy } = useSite();
   const [email, setEmail] = useState(initialEmail);
   const [code, setCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
@@ -271,8 +273,8 @@ export function SignInScreen({
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
             <p>
-              {t(card ? 'auth.privacyShort' : 'auth.privacy')}{' '}
-              <a href="/privacy.html">{t(card ? 'auth.privacyLink' : 'auth.readPrivacy')}</a>
+              {t(card ? 'auth.privacyShort' : 'auth.privacy')}
+              {privacy && <>{' '}<a href={privacy}>{t(card ? 'auth.privacyLink' : 'auth.readPrivacy')}</a></>}
             </p>
           </div>
         </section>

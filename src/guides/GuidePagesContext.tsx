@@ -1,15 +1,15 @@
 'use client';
 
-import { createContext, useContext, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { SiteProvider, useSite } from '../SiteContext';
 
-const GuidePagesContext = createContext(false);
-
-/** Tells the pages below whether the site serves its guides and carriers' pages (`GUIDE_PAGES`), which the server alone reads. */
+/** Tells the pages below whether the site serves its guides and carriers' pages (`GUIDE_PAGES`), whatever the site's provider says. */
 export function GuidePagesProvider({ on, children }: { on: boolean; children: ReactNode }) {
-  return <GuidePagesContext value={on}>{children}</GuidePagesContext>;
+  const site = useSite();
+  return <SiteProvider site={{ ...site, guidePages: on }}>{children}</SiteProvider>;
 }
 
 /** Whether to link the guides and the carriers' pages: never outside a provider that says the site serves them. */
 export function useGuidePages(): boolean {
-  return useContext(GuidePagesContext);
+  return useSite().guidePages;
 }

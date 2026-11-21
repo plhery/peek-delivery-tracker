@@ -9,6 +9,7 @@ import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { followInPlace } from '../peek/landing/links';
 import type { SignInMethods } from '../peek/session';
+import { useSite } from '../SiteContext';
 import { AddByEmailPage, useAddByEmail } from './AddByEmail';
 import { AssistantsPage, useAssistants } from './Assistants';
 import { Icon } from './Icon';
@@ -38,6 +39,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   signIn?: SignInMethods;
 }) {
   const { t } = useI18n();
+  const { privacy } = useSite();
   const initial = email?.trim().charAt(0).toUpperCase();
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState<Page>('home');
@@ -158,10 +160,10 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
               <button className="button button--primary" type="button" disabled={Boolean(working)} aria-busy={working === 'reset-demo'} onClick={() => void run('reset-demo', async () => { await onResetDemo(); setOpen(false); setPage('home'); setConfirmingReset(false); })}>{t('native.resetDemo')}</button>
             </div>
           </div> : <>
-            <section className="settings-group"><h3 className="settings-group__title">{t('settings.yourData')}</h3><div className="settings-box">
+            {(onExport || privacy) && <section className="settings-group"><h3 className="settings-group__title">{t('settings.yourData')}</h3><div className="settings-box">
               {onExport && <button className="settings-row" type="button" disabled={Boolean(working)} onClick={() => void run('export', onExport)}><Icon name="download" />{working === 'export' ? t('account.exporting') : t('account.export')}</button>}
-              <a className="settings-row" href="/privacy.html" onClick={() => trackAction('privacy-open')}><Icon name="lock" />{t('account.privacy')}<span className="settings-chevron" aria-hidden="true">›</span></a>
-            </div></section>
+              {privacy && <a className="settings-row" href={privacy} onClick={() => trackAction('privacy-open')}><Icon name="lock" />{t('account.privacy')}<span className="settings-chevron" aria-hidden="true">›</span></a>}
+            </div></section>}
             {(onExitDemo || onResetDemo) && <section className="settings-group"><h3 className="settings-group__title">{t('app.demo')}</h3><div className="settings-box">
               {onResetDemo && <button className="settings-row" type="button" disabled={Boolean(working)} onClick={() => setConfirmingReset(true)}>{t('native.resetDemo')}<span className="settings-chevron" aria-hidden="true">›</span></button>}
               {onExitDemo && <button type="button" className="settings-row" disabled={Boolean(working)} onClick={onExitDemo}>{t('native.exitDemo')}</button>}

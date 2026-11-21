@@ -3,7 +3,7 @@ import mark from '../brand/mark.json';
 import { carrierListPath } from '../carriers/paths';
 import { documentLanguage, guideLanguage, hrefLanguage, languagePath, PAGE_LANGUAGES, type Locale, type PageAddresses, type PageLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
-import { SOURCE_URL } from '../lib/source';
+import type { Site } from '../lib/site';
 import { GuideAnalytics } from './GuideAnalytics';
 import { guidePath } from './paths';
 import './guides.css';
@@ -26,7 +26,7 @@ function Mark({ size }: { size: number }) {
  * stands in the frame of `locale`, which declares its own language, and its
  * foot names its own language too.
  */
-export function GuideFrame({ locale, language = locale, t, addresses, languageNames, screen, guides = true, children }: {
+export function GuideFrame({ locale, language = locale, t, addresses, languageNames, screen, site, children }: {
   locale: Locale;
   /** The language of the page's text, when it is not `locale`'s. */
   language?: PageLanguage;
@@ -37,8 +37,11 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
   languageNames: Record<Locale, string> & Partial<Record<PageLanguage, string>>;
   /** The page's name in the usage counts. */
   screen: string;
-  /** Whether the foot leads to the guides and the carriers' pages: not on a site that serves none (`GUIDE_PAGES`). */
-  guides?: boolean;
+  /**
+   * What the foot leads to: the guides and the carriers' pages where the site serves them (`GUIDE_PAGES`), the privacy
+   * notice where it links one, and the code.
+   */
+  site: Pick<Site, 'guidePages' | 'privacy' | 'source'>;
   children: ReactNode;
 }) {
   const tracker = languagePath(locale);
@@ -55,10 +58,10 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
     <footer className="guide-footer">
       <div className="guide-footer__links">
         <a className="guide-footer__name" href={tracker}><Mark size={18} />{t('app.title')} · {t('app.tagline')}</a>
-        {guides && <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>}
-        {guides && <a href={carrierListPath(locale)}>{t('carriers.all')}</a>}
-        <a href="/privacy.html">{t('auth.privacyLink')}</a>
-        <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+        {site.guidePages && <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>}
+        {site.guidePages && <a href={carrierListPath(locale)}>{t('carriers.all')}</a>}
+        {site.privacy && <a href={site.privacy}>{t('auth.privacyLink')}</a>}
+        <a href={site.source} target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
       <nav className="guide-footer__languages" aria-label={t('language.label')}>
         {PAGE_LANGUAGES.filter((other) => addresses[other] !== undefined).map((other) => <a key={other} href={addresses[other]} hrefLang={hrefLanguage(other)} lang={documentLanguage(other)}

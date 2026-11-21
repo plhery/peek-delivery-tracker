@@ -8,6 +8,7 @@ import type { CarrierInfo } from '../lib/carriers';
 import type { Locale } from '../lib/locale';
 import type { ParcelLinkPreview } from './parcelLinkPreview';
 import { PICTURE_FACES, PICTURE_FONTS, writable } from './pictureFont';
+import { siteName } from './siteSettings';
 
 const HEADERS = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' };
 const INK = '#20251e';
@@ -133,6 +134,7 @@ export function parcelLinkSocialImage(preview: ParcelLinkPreview, host: string |
   const note = written(preview.note ?? null);
   const name = written(carrier && (WORDMARKS[carrierBrandFamily(carrier.id)] ?? carrier.name));
   const site = written(host);
+  const product = written(siteName());
   const palette = carrier ? carrierBrand(carrier.color, CARRIER_PALETTES[carrier.id]) : null;
   const surface = gift ? GIFT.surface : palette?.['surface-light'] ?? '#eceee7';
   const tone = gift ? GIFT.tone : palette?.['ink-light'] ?? '#657060';
@@ -161,7 +163,7 @@ export function parcelLinkSocialImage(preview: ParcelLinkPreview, host: string |
       }}>{note}</div>}
       <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: 84, bottom: 44, fontSize: 26, color: tone }}>
         <Mark size={38} />
-        <span style={{ marginLeft: 9, fontSize: 28, color: INK, ...bold(1.1, INK) }}>Peek</span>
+        {product && <span style={{ marginLeft: 9, fontSize: 28, color: INK, ...bold(1.1, INK) }}>{product}</span>}
         {site && <span style={{ marginLeft: 14 }}>{site}</span>}
       </div>
     </div>,

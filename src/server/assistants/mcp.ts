@@ -4,6 +4,7 @@ import { createMcpHandler, type McpHttpHandler } from '@modelcontextprotocol/ser
 import { clientIp, clientNetwork, clientSite, readBodyBytes } from '../api';
 import { captureOperationalError } from '../observability';
 import { RateLimiter } from '../rateLimit';
+import { siteName } from '../siteSettings';
 import type { AssistantTokenOwner, SupabaseServiceClient } from '../supabase';
 import { isRecord } from '../types';
 import { assistantsOpenToAccount } from './access';
@@ -101,7 +102,7 @@ export async function tokenOwner(
   const retryAfter = grants.retryAfter(owner.grantId, { limit: PER_GRANT_PER_MINUTE, window: 60 });
   if (retryAfter) return tooMany(retryAfter);
   if (!(await assistantsOpenToAccount(settings, service, owner.userId, now))) {
-    return Response.json({ error: 'Peek does not connect assistants to this account' }, { status: 403 });
+    return Response.json({ error: `${siteName()} does not connect assistants to this account` }, { status: 403 });
   }
   return owner;
 }
@@ -124,7 +125,7 @@ async function oneMessage(request: Request): Promise<Request | Response> {
   } catch { /* Not JSON. */ }
   if (Array.isArray(message) && message.length > 1) return rpcError(null, -32600, 'Send one message a request');
   const only: unknown = Array.isArray(message) ? message[0] : message;
-  if (isRecord(only) && only.method === 'subscriptions/listen') return rpcError(only.id, -32601, 'Peek sends no notifications');
+  if (isRecord(only) && only.method === 'subscriptions/listen') return rpcError(only.id, -32601, `${siteName()} sends no notifications`);
   return new Request(request.url, { method: request.method, headers: request.headers, body, signal: request.signal });
 }
 

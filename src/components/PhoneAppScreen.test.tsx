@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { renderOnPeek } from '../test/site';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import de from '../../shared/locales/de.json';
@@ -21,7 +22,7 @@ beforeEach(() => {
 
 describe('the page of the code for both phones', () => {
   it('gives a computer the code to scan and both apps, each link carrying where the visitor came from', async () => {
-    render(<PhoneAppScreen source="landing-qr" />);
+    renderOnPeek(<PhoneAppScreen source="landing-qr" />);
     expect(screen.getByRole('heading', { level: 1, name: 'Get the app' })).toBeVisible();
     expect(screen.getByText('Scan with your phone').closest('.phone-app__qr')?.querySelector('img')).toHaveAttribute('src', '/landing/app-qr.svg');
     expect(screen.getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', 'https://apps.apple.com/app/apple-store/id6823615370?pt=129628155&ct=web-qr&mt=8');
@@ -37,22 +38,22 @@ describe('the page of the code for both phones', () => {
 
   it('links both apps’ guides, in the visitor’s language or the nearest one they are written in', () => {
     const guides = { iphone: guideAddresses('iphone-app'), android: guideAddresses('android-app') };
-    const { unmount } = render(<PhoneAppScreen guides={guides} />);
+    const { unmount } = renderOnPeek(<PhoneAppScreen guides={guides} />);
     expect(screen.getByRole('link', { name: /^Peek for iPhone, iPad and Mac/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-iphone');
     expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-android');
     expect(screen.getByRole('link', { name: /^Peek for Android/ })).not.toHaveAttribute('hreflang');
     unmount();
 
-    const { unmount: away } = render(<PhoneAppScreen guides={guides} initialLocale="de" initialMessages={de} />);
+    const { unmount: away } = renderOnPeek(<PhoneAppScreen guides={guides} initialLocale="de" initialMessages={de} />);
     expect(screen.getByRole('link', { name: /^Peek für iPhone/ })).toHaveAttribute('href', '/de/guides/sendungsverfolgung-app-iphone');
     away();
     // No guide is written in Russian: the English one, which the link names.
-    render(<PhoneAppScreen guides={guides} initialLocale="ru" initialMessages={ru} />);
+    renderOnPeek(<PhoneAppScreen guides={guides} initialLocale="ru" initialMessages={ru} />);
     expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('hreflang', 'en');
   });
 
   it('counts the App Store as the address itself when it came without the code’s source', () => {
-    render(<PhoneAppScreen />);
+    renderOnPeek(<PhoneAppScreen />);
     expect(screen.getByRole('link', { name: 'iPhone app' })).toHaveAttribute('href', expect.stringContaining('&ct=web-app&'));
     expect(screen.getByRole('link', { name: 'Android app' })).toHaveAttribute('href', '/android');
   });
@@ -60,7 +61,7 @@ describe('the page of the code for both phones', () => {
   it('hides itself on an iPad, which goes on to the App Store without counting a view', () => {
     mocks.iPad.mockReturnValue(true);
     // jsdom does not navigate: the page only has to have asked.
-    const { container } = render(<PhoneAppScreen source="landing-qr" />);
+    const { container } = renderOnPeek(<PhoneAppScreen source="landing-qr" />);
     expect(container.querySelector('.phone-app')).not.toBeVisible();
     expect(mocks.screen).not.toHaveBeenCalled();
   });

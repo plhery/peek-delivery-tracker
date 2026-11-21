@@ -2724,6 +2724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "morning-global-sendungsverfolgung",
+      "title": "Morning Global Sendungsverfolgung: BR…MG-Nummern & Status",
+      "name": "Morning Global",
+      "color": "#050059"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "delhivery-sendungsverfolgung",
@@ -3606,6 +3614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "suivi-morning-global",
+      "title": "Suivi Morning Global\u00a0: numéros BR…MG, statuts et contacts",
+      "name": "Morning Global",
+      "color": "#050059"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "suivi-delhivery",
@@ -4382,6 +4398,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento India Post e Speed Post: numeri, stati e dogana",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "tracciamento-morning-global",
+      "title": "Tracciamento Morning Global: codici BR…MG, stati e contatti",
+      "name": "Morning Global",
+      "color": "#050059"
     },
     {
       "id": "delhivery",
@@ -5170,6 +5194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "seguimiento-morning-global",
+      "title": "Seguimiento Morning Global: códigos BR…MG, estados y ayuda",
+      "name": "Morning Global",
+      "color": "#050059"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "seguimiento-delhivery",
@@ -5914,6 +5946,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento India Post e Speed Post: números e estados",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "seguimento-morning-global",
+      "title": "Seguimento Morning Global: números BR…MG, estados e apoio",
+      "name": "Morning Global",
+      "color": "#050059"
     },
     {
       "id": "delhivery",
@@ -6718,6 +6758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie India Post: numery Speed Post, statusy i cło",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "sledzenie-morning-global",
+      "title": "Śledzenie Morning Global: numery BR…MG, statusy i kontakt",
+      "name": "Morning Global",
+      "color": "#050059"
     },
     {
       "id": "delhivery",

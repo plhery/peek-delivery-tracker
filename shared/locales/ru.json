@@ -1152,7 +1152,7 @@
   "email.setting.title": "Присылать письмо о доставке",
   "email.setting.body": "На {{email}} — адрес, с которым вы входите. Короткое письмо, когда посылка готова к выдаче и когда её доставили.",
   "email.setting.example": "Посмотреть пример",
-  "email.setting.failed": "Не удалось сохранить настройку писем. Попробуйте ещё раз.",
+  "email.setting.failed": "Настройка не сохранилась. Попробуйте снова.",
   "email.parcel.title": "Уведомления: {{name}}",
   "email.parcel.open": "Уведомления об этой посылке",
   "email.parcel.notifications": "Уведомления",

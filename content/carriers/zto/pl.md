@@ -15,7 +15,7 @@ ZTO nazywa go numerem listu przewozowego (`运单号`). Peek rozpoznaje dwa ukł
 | Numer (wymyślony) | Co oznacza |
 | --- | --- |
 | `784920573280` | 12 cyfr: list przewozowy ZTO Express — z takiego samego formatu korzystają m.in. [FedEx](carrier:fedex), [SF Express](carrier:sf-express), [DHL](carrier:dhl) oraz [BRT](carrier:brt). |
-| `73184920573649` | 14 cyfr zaczynających się od `7`: również ZTO Express, format współdzielony z [DPD Polska](carrier:dpd-pl), [Chronopost](carrier:chronopost), [SEUR](carrier:seur), [BRT](carrier:brt) i innymi sieciami. |
+| `73184920573649` | 14 cyfr zaczynających się od `7`: również ZTO Express, format współdzielony z [DPD Niemcy](carrier:dpd-de), [Chronopost](carrier:chronopost), [SEUR](carrier:seur), [BRT](carrier:brt) i innymi sieciami. |
 | `77148291057364` | `771` oraz 11 kolejnych cyfr: format ZTO International (`中通国际`). Peek w pierwszej kolejności odpytuje ZTO International. |
 
 Spacje nie mają znaczenia przy wklejaniu do Peek. Oficjalny tracker ZTO przyjmuje do 10 numerów naraz, rozdzielonych przecinkami lub spacjami (`最多可查询10条，以逗号、空格隔开`).
@@ -40,7 +40,7 @@ Każdy skan ma krótką chińską nazwę etapu, którą Peek pokazuje po angiels
 
 Pozostałe wpisy, takie jak zwrot (`退回件`) czy przekierowanie, zachowują w Peek oryginalne chińskie brzmienie. Więcej o ogólnych etapach w poradniku [co oznaczają statusy śledzenia](guide:tracking-statuses).
 
-**Wysłana do spedytora?** Wtedy `已签收` oznacza, że magazyn spedytora w Chinach pokwitował odbiór i krajowy odcinek ZTO Express dobiegł końca — dalszą drogę za granicę śledzisz pod nowym numerem spedytora. ZTO prowadzi też własną usługę konsolidacji międzynarodowej (`中通国际集运`), łączącą kilka paczek w magazynie w jedną przesyłkę zbiorczą (kontakt w Chinach pod numerem `95311`, dział międzynarodowy `95311转国际`).
+**Wysłana do spedytora?** Wtedy `已签收` oznacza, że magazyn spedytora w Chinach pokwitował odbiór i krajowy odcinek ZTO Express dobiegł końca — dalszą drogę za granicę śledzisz pod nowym numerem spedytora. ZTO prowadzi też własną usługę konsolidacji międzynarodowej (`中通国际集运`), łączącą kilka paczek w magazynie w jedną przesyłkę zbiorczą (kontakt w Chinach kontynentalnych pod numerem `95311`, dział międzynarodowy `95311转国际`).
 
 ## Doręczenia ZTO Express w Chinach: kurierzy, stacje i automaty
 
@@ -48,12 +48,12 @@ Poniższe zasady obowiązują przy doręczeniach na terenie **Chin kontynentalny
 
 Kurier ZTO przynosi paczkę pod adres albo zostawia ją w pobliskiej stacji paczkowej (`驿站`), punkcie odbioru (`代收点`) lub inteligentnym automacie paczkowym (`智能快件箱`) — umowa o świadczenie usług ZTO dopuszcza te formy. Chińskie *Przepisy o zarządzaniu rynkiem usług kurierskich* (`快递市场管理办法`), obowiązujące od 1 marca 2024 r., wymagają jednak Twojej zgody na umieszczenie przesyłki w automacie lub stacji i dają prawo sprawdzenia paczki przy odbiorze z listem przewozowym, a przy widocznym uszkodzeniu opakowania lub delikatnej zawartości — zajrzenia do środka albo odmowy przyjęcia.
 
-W przypadku paczek pozostawionych bez osobistego przekazania (pod drzwiami, w automacie lub stacji) umowa ZTO zaleca nagranie wideo (`录制视频`) z odbioru, otwarcia i sprawdzenia zawartości jako dowodu; doręczenie wykonane zgodnie z ustaleniami uznaje się za potwierdzone, jeśli w ciągu trzech dni (`三日`) nikt nie zgłosi pisemnego sprzeciwu.
+W przypadku paczek pozostawionych bez osobistego przekazania (pod drzwiami, w automacie lub stacji) umowa ZTO wymaga nagrania wideo (`录制视频`) z odbioru, otwarcia i sprawdzenia zawartości jako dowodu; doręczenie wykonane zgodnie z ustaleniami uznaje się za potwierdzone, jeśli w ciągu trzech dni (`三日`) nikt nie zgłosi pisemnego sprzeciwu.
 
 Według oficjalnego FAQ ZTO w Chinach:
 
 - **Brak kodu odbioru do automatu?** Wyszukaj oddział obsługujący Twój adres w [wyszukiwarce oddziałów ZTO](https://www.zto.com/service/station) (`服务网点查询`) i zadzwoń tam albo podaj numer listu na infolinii `95311`, aby uzyskać telefon do kuriera lub oddziału.
-- **Automat prosi o dopłatę za przeterminowany odbiór?** ZTO informuje, by przy odbiorze stuknąć na ekranie pomiń (`跳过`) — nie zapłacisz wtedy nic.
+- **Automat prosi o dopłatę za przeterminowany odbiór?** ZTO informuje, by przy odbiorze stuknąć pomiń (`跳过`) — nie zapłacisz wtedy nic.
 - **Żądanie opłaty za doręczenie?** Oddział doręczający nie ma prawa pobierać od odbiorcy żadnej opłaty za doręczenie (`派件网点不可以向收件客户收取任何派送费`).
 - **Adres poza strefą doręczeń?** Odbierz paczkę osobiście w oddziale (`自提`) lub poproś nadawcę o przeadresowanie inną firmą kurierską.
 - **Błędny adres?** Gdy przesyłka jest już w doręczeniu lub doręczona, adresu nie da się zmienić; wcześniej nadawca musi skontaktować się z oddziałem nadania.
@@ -64,15 +64,15 @@ Według oficjalnego FAQ ZTO w Chinach:
 
 **Brak nowych skanów.** Gdy paczka będąca nadal w drodze nie ma nowego skanu od 4 dni, Peek wyświetla komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika ZTO Express.” oraz link „Poproś przewoźnika ZTO Express o pomoc” prowadzący do strony kontaktowej ZTO. Sprawdź [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 
-**Zagubienie lub uszkodzenie (w Chinach).** Zgłoś się do sprzedawcy: według umowy ZTO nadawca (lub wskazana przez niego osoba uprawniona) składa pisemną reklamację w ciągu 30 dni (`三十日`) od powzięcia wiadomości o szkodzie. Bez ubezpieczenia (`保价`) ZTO wypłaca maksymalnie 500 juanów (`500元`), a z ubezpieczeniem — do kwoty ubezpieczenia. Braki lub uszkodzenia wewnątrz nienaruszonego opakowania zewnętrznego są wyłączone. Zobacz [zagubiona paczka](guide:lost-parcel).
+**Zagubienie lub uszkodzenie (w Chinach kontynentalnych).** Zgłoś się do sprzedawcy: według umowy ZTO nadawca (lub wskazana przez niego osoba uprawniona) składa pisemną reklamację w ciągu 30 dni (`三十日`) od powzięcia wiadomości o szkodzie. Bez ubezpieczenia (`保价`) ZTO wypłaca maksymalnie 500 juanów (`500元`), a z ubezpieczeniem — do kwoty ubezpieczenia. Braki lub uszkodzenia wewnątrz nienaruszonego opakowania zewnętrznego są wyłączone. Zobacz [zagubiona paczka](guide:lost-parcel).
 
-**Zwrot do nadawcy.** ZTO może odesłać paczkę, gdy adres jest niejasny, odbiorca odmówi przyjęcia lub dwie próby doręczenia nie powiodą się bez winy ZTO (`两次派送未成功的`). Zobacz [zwrot do nadawcy](guide:returned-to-sender).
+**Zwrot do nadawcy.** W Chinach kontynentalnych ZTO może odesłać paczkę, gdy adres jest niejasny, odbiorca odmówi przyjęcia lub dwie próby doręczenia nie powiodą się bez winy ZTO (`两次派送未成功的`). Zobacz [zwrot do nadawcy](guide:returned-to-sender).
 
-**Oznaczona jako doręczona, ale jej nie ma.** `已代收` oznacza oczekiwanie w punkcie odbioru, a `已签收` — pokwitowanie odbioru (przez recepcję, stację lub magazyn spedytora). Aby złożyć skargę w Chinach, podaj numer listu na infolinii `95311` albo skorzystaj z [formularza reklamacyjnego ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, wymaga logowania); w razie braku satysfakcjonującej lub terminowej odpowiedzi chińskie przepisy pozwalają wnieść odwołanie (`申诉`) do organu nadzoru pocztowego (`邮政管理部门`). Zobacz [dostarczona, ale nieotrzymana](guide:delivered-not-received).
+**Oznaczona jako doręczona, ale jej nie ma.** `已代收` oznacza oczekiwanie w punkcie odbioru, a `已签收` — pokwitowanie odbioru (przez recepcję, stację lub magazyn spedytora). Aby złożyć skargę w Chinach kontynentalnych, podaj numer listu na infolinii `95311` albo skorzystaj z [formularza reklamacyjnego ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, wymaga logowania); w razie braku satysfakcjonującej lub terminowej odpowiedzi chińskie przepisy pozwalają wnieść odwołanie (`申诉`) do organu nadzoru pocztowego (`邮政管理部门`). Zobacz [dostarczona, ale nieotrzymana](guide:delivered-not-received).
 
 ## Numer telefonu i obsługa klienta ZTO Express
 
-Oficjalne kanały kontaktu ZTO Express w **Chinach**:
+Oficjalne kanały kontaktu ZTO Express w **Chinach kontynentalnych**:
 
 - **`95311`:** ogólnokrajowa infolinia obsługi klienta (`全国统一客服热线`, na angielskiej stronie ZTO *Customer Service Hotline*), czynna według FAQ w godzinach `08:30`–`17:30` czasu chińskiego.
 - **`95720`:** dedykowany numer wychodzący, z którego dzwonią kurierzy ZTO (`中通业务员专属外呼号码`).
@@ -108,7 +108,7 @@ Odebrano za pokwitowaniem: Peek pokazuje `Signed for` i etap „Dostarczona”. 
 
 ### Jaki jest numer telefonu do ZTO Express?
 
-`95311` — ogólnokrajowa infolinia obsługi klienta w Chinach, czynna od `08:30` do `17:30` czasu chińskiego. Połączenia z numeru `95720` pochodzą od kurierów ZTO.
+`95311` — ogólnokrajowa infolinia obsługi klienta w Chinach kontynentalnych, czynna od `08:30` do `17:30` czasu chińskiego. Połączenia z numeru `95720` pochodzą tam od kurierów ZTO.
 
 :::sources
 - [ZTO Express: 运单查询 (wyszukiwanie przesyłek)](https://www.zto.com/check) – chiński tracker, do 10 numerów naraz i powiadomienia WeChat

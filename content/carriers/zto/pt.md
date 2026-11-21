@@ -40,7 +40,7 @@ Cada leitura tem um nome curto de etapa em chinês, que o Peek apresenta em ingl
 
 Outras etapas, como devoluções (`退回件`) ou reencaminhamentos, mantêm no Peek o texto chinês original. Mais detalhes em [o que significam os estados de seguimento](guide:tracking-statuses).
 
-**Enviada para um transitário?** Nesse caso, `已签收` significa que o armazém do transitário na China assinou a receção e o percurso interno da ZTO Express terminou: passa a valer o número internacional do transitário. A ZTO opera também um serviço de consolidação internacional (`中通国际集运`) que junta várias encomendas num armazém antes de as expedir juntas; na China, contacta-se pelo `95311` pedindo a linha internacional (`95311转国际`).
+**Enviada para um transitário?** Nesse caso, `已签收` significa que o armazém do transitário na China assinou a receção e o percurso interno da ZTO Express terminou: passa a valer o número internacional do transitário. A ZTO opera também um serviço de consolidação internacional (`中通国际集运`) que junta várias encomendas num armazém antes de as expedir juntas; na China continental, contacta-se pelo `95311` pedindo a linha internacional (`95311转国际`).
 
 ## Entrega da ZTO Express na China: estafetas, estações e cacifos
 
@@ -53,7 +53,7 @@ Nas entregas sem contacto presencial (porta, cacifo ou estação), o contrato da
 Segundo as perguntas frequentes oficiais da ZTO na China:
 
 - **Sem código para abrir o cacifo?** Procura a agência da tua zona na [pesquisa de agências da ZTO](https://www.zto.com/service/station) (`服务网点查询`) e liga-lhe, ou indica o número da carta de porte no `95311` para obteres o telefone do estafeta ou da agência.
-- **Pedido pagamento por demora no cacifo?** A ZTO indica tocar em saltar (`跳过`) no ecrã ao levantar para não pagares nada.
+- **Pedido pagamento por demora no cacifo?** A ZTO indica tocar em saltar (`跳过`) ao levantar para não pagares nada.
 - **Pedida taxa de entrega?** A agência distribuidora não pode cobrar qualquer taxa de entrega ao destinatário (`派件网点不可以向收件客户收取任何派送费`).
 - **Fora da área de distribuição?** Levanta na agência (`自提`) ou pede ao remetente que reenvie por outra transportadora.
 - **Morada errada?** Não pode ser alterada depois de sair para distribuição ou ser entregue; antes disso, o remetente tem de contactar a agência de origem.
@@ -64,15 +64,15 @@ Segundo as perguntas frequentes oficiais da ZTO na China:
 
 **Sem atualizações.** Quando uma encomenda em viagem está há 4 dias sem novas leituras, o Peek indica «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a ZTO Express.» e acrescenta a ligação «Pede ajuda a ZTO Express» para a página de contactos da ZTO. Lê [porque é que o seguimento não atualiza](guide:tracking-not-updating) e [seguir uma encomenda vinda da China](guide:tracking-from-china).
 
-**Perdida ou danificada (na China).** Fala com o vendedor: segundo o contrato da ZTO, o remetente (ou quem este designar) deve reclamar por escrito no prazo de 30 dias (`三十日`) após tomar conhecimento da perda ou dano. Sem seguro (`保价`), a ZTO indemniza até 500 iuans (`500元`); com seguro, até ao valor segurado. Faltas ou danos internos com embalagem exterior intacta estão excluídos. Vê [encomenda perdida](guide:lost-parcel).
+**Perdida ou danificada (na China continental).** Fala com o vendedor: segundo o contrato da ZTO, o remetente (ou quem este designar) deve reclamar por escrito no prazo de 30 dias (`三十日`) após tomar conhecimento da perda ou dano. Sem seguro (`保价`), a ZTO indemniza até 500 iuans (`500元`); com seguro, até ao valor segurado. Faltas ou danos internos com embalagem exterior intacta estão excluídos. Vê [encomenda perdida](guide:lost-parcel).
 
-**Devolvida.** A ZTO pode devolver um envio quando a morada é insuficiente, o destinatário recusa a entrega ou falham duas tentativas sem culpa da ZTO (`两次派送未成功的`). Vê [devolvida ao remetente](guide:returned-to-sender).
+**Devolvida.** Na China continental, a ZTO pode devolver um envio quando a morada é insuficiente, o destinatário recusa a entrega ou falham duas tentativas sem culpa da ZTO (`两次派送未成功的`). Vê [devolvida ao remetente](guide:returned-to-sender).
 
-**Dada como entregue mas não está lá.** `已代收` significa que aguarda num ponto de recolha e `已签收` que alguém assinou (portaria, estação ou armazém de transitário). Para reclamar na China, indica o número no apoio ao cliente pelo `95311` ou usa o [formulário de reclamações da ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, exige sessão iniciada); se a resposta não satisfizer ou tardar, as regras chinesas permitem recorrer (`申诉`) às autoridades postais (`邮政管理部门`). Vê [entregue mas não recebido](guide:delivered-not-received).
+**Dada como entregue mas não está lá.** `已代收` significa que aguarda num ponto de recolha e `已签收` que alguém assinou (portaria, estação ou armazém de transitário). Para reclamar na China continental, indica o número no apoio ao cliente pelo `95311` ou usa o [formulário de reclamações da ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, exige sessão iniciada); se a resposta não satisfizer ou tardar, as regras chinesas permitem recorrer (`申诉`) às autoridades postais (`邮政管理部门`). Vê [entregue mas não recebido](guide:delivered-not-received).
 
 ## Telefone e apoio ao cliente da ZTO Express
 
-Contactos oficiais da ZTO Express na **China**:
+Contactos oficiais da ZTO Express na **China continental**:
 
 - **`95311`:** linha nacional de apoio ao cliente (`全国统一客服热线`, *Customer Service Hotline* no site inglês da ZTO), aberta das `08:30` às `17:30` (hora da China) segundo as FAQ.
 - **`95720`:** número de saída exclusivo usado pelos estafetas da ZTO para ligar aos destinatários (`中通业务员专属外呼号码`).
@@ -108,7 +108,7 @@ Recebido com assinatura: o Peek mostra `Signed for` e o estado «Entregue». Pod
 
 ### Qual é o número de telefone da ZTO Express?
 
-O `95311`, a sua linha nacional de apoio ao cliente na China, das `08:30` às `17:30` (hora da China). As chamadas vindas do `95720` são feitas pelos estafetas da ZTO.
+O `95311`, a sua linha nacional de apoio ao cliente na China continental, das `08:30` às `17:30` (hora da China). Lá, as chamadas vindas do `95720` são feitas pelos estafetas da ZTO.
 
 :::sources
 - [ZTO Express: 运单查询 (pesquisa de envios)](https://www.zto.com/check) – localizador em chinês, até 10 números e subscrição WeChat

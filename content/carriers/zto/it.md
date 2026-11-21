@@ -40,7 +40,7 @@ Ogni scansione porta un breve nome di fase in cinese, che Peek traduce in ingles
 
 Altre voci, come resi (`退回件`) o reindirizzamenti, mantengono su Peek la dicitura cinese originale. Approfondisci in [cosa significano gli stati di tracciamento](guide:tracking-statuses).
 
-**Diretto a uno spedizioniere?** In quel caso `已签收` significa che il magazzino dello spedizioniere in Cina ha firmato la consegna e la tratta interna di ZTO Express è conclusa: subentra il numero internazionale dello spedizioniere. ZTO gestisce anche un servizio di consolidamento internazionale (`中通国际集运`) che raggruppa più colli in magazzino per spedirli insieme; in Cina risponde al `95311` selezionando il reparto internazionale (`95311转国际`).
+**Diretto a uno spedizioniere?** In quel caso `已签收` significa che il magazzino dello spedizioniere in Cina ha firmato la consegna e la tratta interna di ZTO Express è conclusa: subentra il numero internazionale dello spedizioniere. ZTO gestisce anche un servizio di consolidamento internazionale (`中通国际集运`) che raggruppa più colli in magazzino per spedirli insieme; nella Cina continentale risponde al `95311` selezionando il reparto internazionale (`95311转国际`).
 
 ## Consegna ZTO Express in Cina: corrieri, stazioni e smart locker
 
@@ -53,7 +53,7 @@ Per i pacchi non consegnati a mano (porta, locker, stazione), il contratto ZTO i
 Dalle FAQ ufficiali di ZTO in Cina:
 
 - **Manca il codice per aprire l'armadietto?** Cerca la filiale competente tramite la [ricerca filiali ZTO](https://www.zto.com/service/station) (`服务网点查询`) e chiamala, oppure comunica il numero di vettura al `95311` per avere il recapito del corriere o della filiale.
-- **Richiesto un pagamento per sosta prolungata nel locker?** ZTO indica di toccare salta (`跳过`) sullo schermo al momento del ritiro per non pagare nulla.
+- **Richiesto un pagamento per sosta prolungata nel locker?** ZTO indica di toccare salta (`跳过`) al momento del ritiro per non pagare nulla.
 - **Chiesto un supplemento di consegna?** La filiale di recapito non può addebitare alcun costo di consegna al destinatario (`派件网点不可以向收件客户收取任何派送费`).
 - **Fuori area di consegna?** Ritira il pacco in filiale (`自提`) o chiedi al mittente di rispedirlo con un altro corriere.
 - **Indirizzo errato?** Non è più modificabile quando il pacco è in consegna o consegnato; prima di allora il mittente deve chiederlo alla filiale di partenza.
@@ -64,15 +64,15 @@ Dalle FAQ ufficiali di ZTO in Cina:
 
 **Nessun aggiornamento.** Quando un pacco ancora in viaggio non riceve nuove scansioni da 4 giorni, Peek mostra «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a ZTO Express.» e aggiunge il link «Chiedi aiuto a ZTO Express» verso la pagina contatti di ZTO. Leggi [perché il tracciamento non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Smarrito o danneggiato (in Cina).** Contatta il venditore: secondo il contratto di ZTO, il mittente (o l'avente diritto designato) presenta reclamo scritto entro 30 giorni (`三十日`) da quando viene a conoscenza di perdita o danno. Senza assicurazione (`保价`), ZTO rimborsa al massimo 500 yuan (`500元`); con assicurazione, fino al valore assicurato. Sono esclusi ammanchi o danni interni con imballo esterno integro. Vedi [pacco smarrito](guide:lost-parcel).
+**Smarrito o danneggiato (nella Cina continentale).** Contatta il venditore: secondo il contratto di ZTO, il mittente (o l'avente diritto designato) presenta reclamo scritto entro 30 giorni (`三十日`) da quando viene a conoscenza di perdita o danno. Senza assicurazione (`保价`), ZTO rimborsa al massimo 500 yuan (`500元`); con assicurazione, fino al valore assicurato. Sono esclusi ammanchi o danni interni con imballo esterno integro. Vedi [pacco smarrito](guide:lost-parcel).
 
-**Restituito al mittente.** ZTO può rispedire indietro un pacco in caso di indirizzo impreciso, rifiuto del destinatario o due tentativi di consegna falliti senza colpa di ZTO (`两次派送未成功的`). Vedi [pacco restituito al mittente](guide:returned-to-sender).
+**Restituito al mittente.** Nella Cina continentale, ZTO può rispedire indietro un pacco in caso di indirizzo impreciso, rifiuto del destinatario o due tentativi di consegna falliti senza colpa di ZTO (`两次派送未成功的`). Vedi [pacco restituito al mittente](guide:returned-to-sender).
 
-**Risulta consegnato ma non c'è.** `已代收` indica la giacenza presso un punto di ritiro, mentre `已签收` significa che qualcuno ha firmato (portineria, stazione o magazzino dello spedizioniere). Per reclamare in Cina comunica il numero al servizio clienti al `95311` o usa il [modulo reclami ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, richiede accesso); se l'esito non soddisfa o tarda, le norme cinesi consentono il ricorso (`申诉`) alle autorità postali (`邮政管理部门`). Vedi [consegnato ma non ricevuto](guide:delivered-not-received).
+**Risulta consegnato ma non c'è.** `已代收` indica la giacenza presso un punto di ritiro, mentre `已签收` significa che qualcuno ha firmato (portineria, stazione o magazzino dello spedizioniere). Per reclamare nella Cina continentale comunica il numero al servizio clienti al `95311` o usa il [modulo reclami ZTO](https://www.zto.com/after/complaint/problemTypes) (`投诉反馈`, richiede accesso); se l'esito non soddisfa o tarda, le norme cinesi consentono il ricorso (`申诉`) alle autorità postali (`邮政管理部门`). Vedi [consegnato ma non ricevuto](guide:delivered-not-received).
 
 ## Numero di telefono e assistenza clienti ZTO Express
 
-Recapiti ufficiali di ZTO Express in **Cina**:
+Recapiti ufficiali di ZTO Express nella **Cina continentale**:
 
 - **`95311`:** numero nazionale del servizio clienti (`全国统一客服热线`, *Customer Service Hotline* sul sito inglese di ZTO), attivo dalle `08:30` alle `17:30` (ora cinese) secondo le FAQ.
 - **`95720`:** numero dedicato in uscita da cui chiamano i corrieri ZTO (`中通业务员专属外呼号码`).
@@ -84,7 +84,7 @@ Per l'ordine di acquisto rivolgiti prima al venditore da cui hai comprato.
 
 Incolla il codice su [Peek](/): segue oltre 3.500 corrieri. Incollare da solo un numero ZTO non basta perché Peek interroghi subito ZTO Express: prima chiede ad alcuni degli altri corrieri che condividono il formato (come [DHL](carrier:dhl) e [BRT](carrier:brt) per 12 cifre; DPD, [Chronopost](carrier:chronopost), [Hermes](carrier:hermes-de), [SEUR](carrier:seur) e [BRT](carrier:brt) per 14 cifre; ZTO International per primo sui numeri `771`) e poi ai servizi di tracciamento, mostrando «Verifica dei servizi di tracciamento…». Se questi trovano il pacco e indicano ZTO Express, Peek lo archivia sotto ZTO Express e interroga ZTO al controllo successivo; altrimenti compare «non ancora trovato · Peek continua a controllare». Per far leggere subito a Peek il tracker di ZTO Express, tocca «Cambia» e scegli **ZTO Express** sotto «Compatibili con questo numero», oppure cerca `ZTO` o `中通快递` (`中通` mostra anche ZTO International); su un pacco già salvato usa «Cambia corriere». ZTO Express accetta su Peek solo 12 cifre o 14 cifre inizianti per `7`: per ogni altro codice compare «non emette numeri come questo».
 
-Peek legge il tracker ufficiale di ZTO e apre un browser quando ZTO richiede una verifica. Per ciascuna scansione mostra la fase in inglese (tabella sopra), la città o il nome cinese della sede ZTO e l'orario convertito nel fuso del tuo dispositivo (su peektracker.com e nelle app iPhone e Android, sotto la cronologia appare «Orari nel tuo fuso orario: …»). Tralascia la frase integrale di ogni scansione e con essa i recapiti dei corrieri, i numeri di telefono e nome e indirizzo del destinatario, e non mostra una data stimata. Poiché il tracker web pubblico di ZTO può omettere le primissime tracce dell'ordine, anche su Peek la cronologia parte dallo stesso punto. Aggiungi l'eventuale codice internazionale dello spedizioniere come pacco separato.
+Peek legge il tracker ufficiale di ZTO e apre un browser quando ZTO richiede una verifica. Per ciascuna scansione mostra la fase in inglese (tabella sopra), la città o il nome cinese della sede ZTO e l'orario convertito nel fuso del tuo dispositivo (su peektracker.com e nelle app iPhone e Android, sotto la cronologia appare «Orari nel tuo fuso orario: …»). Tralascia la frase integrale di ogni scansione e con essa i recapiti dei corrieri, i numeri di telefono e nome e indirizzo del destinatario, e non mostra una data stimata. Poiché il tracker web pubblico di ZTO può omettere le primissime tracce dell'ordine, possono mancare anche su Peek. Aggiungi l'eventuale codice internazionale dello spedizioniere come pacco separato.
 
 Finché tieni aperto il pacco o, nel giorno di consegna, hai le notifiche attive, Peek controlla gli aggiornamenti fino a ogni 10 minuti — e fino a ogni 2 minuti (ogni 5 minuti quando la ricerca su ZTO ha aperto un browser) dalle 6:00 locali nel giorno in cui ZTO scansiona il pacco «In consegna», finché risponde il tracker di ZTO (tramite i soli servizi di tracciamento: ogni ora, ogni 3 ore dopo un giorno fermo e fino a ogni 15 minuti il giorno di consegna a pacco aperto o con notifiche attive). Negli altri casi, e dopo due giorni senza novità (o 12 ore su «Etichetta creata» o «Preso in carico»), Peek verifica ogni ora. Notifiche a scelta tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna» / «Solo giorno di consegna». Peek non può contattare ZTO, lo spedizioniere né il venditore per conto tuo.
 
@@ -108,7 +108,7 @@ Firmato alla consegna: Peek mostra `Signed for` con stato «Consegnato». Può a
 
 ### Qual è il numero di telefono di ZTO Express?
 
-Il `95311`, linea nazionale del servizio clienti in Cina, attiva dalle `08:30` alle `17:30` (ora della Cina). Le chiamate dal `95720` arrivano dai corrieri ZTO.
+Il `95311`, linea nazionale del servizio clienti nella Cina continentale, attiva dalle `08:30` alle `17:30` (ora della Cina). Lì, le chiamate dal `95720` arrivano dai corrieri ZTO.
 
 :::sources
 - [ZTO Express: 运单查询 (ricerca spedizioni)](https://www.zto.com/check) – tracker in cinese, fino a 10 numeri e aggiornamenti WeChat

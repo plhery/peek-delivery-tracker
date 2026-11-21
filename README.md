@@ -14,7 +14,7 @@ Peek finds the carrier, draws the journey, notifies you when the parcel moves.
 [![CI](https://github.com/plhery/peek-delivery-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/plhery/peek-delivery-tracker/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-[Try it: peektracker.com](https://peektracker.com) · [Run it locally](#run-it-locally) · [iPhone app](#iphone-app) · [Host your own](#host-your-own)
+[Try it: peektracker.com](https://peektracker.com) · [Run it locally](#run-it-locally) · [iPhone app](#iphone-app) · [Run your own](#run-your-own)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hero-dark.webp">
@@ -126,12 +126,62 @@ https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?finge
 
 Opened in a browser, the address shows a 404 page; that's expected.
 
-## Host your own
+## Run your own
 
-Peek is one long-running container (the web app, the API and the worker that keeps
-checking carriers) next to Supabase for sign-in and Postgres, behind HTTPS.
-[Deployment](docs/DEPLOYMENT.md) takes you through the database, sign-in, the build,
-upgrades and backups. A copy serves no guides or carrier pages: they are Peek's own
+Peek is one long-running container: the web app, the API and the worker that keeps
+checking carriers. Next to it, it needs Supabase for sign-in and Postgres. This is the
+short path; [Deployment](docs/DEPLOYMENT.md) has every step in full.
+
+**You need**
+
+- a host that keeps a Docker container running (serverless won't do: the worker must stay up);
+- a Supabase stack, hosted or your own: Auth, PostgREST and Postgres 16 or newer;
+- HTTPS in front of the container's port 3000;
+- SMTP with an authenticated domain, for sign-in by email.
+
+**The database.** Apply every file in [`supabase/migrations`](supabase/migrations) in
+filename order, each in its own transaction, stopping at the first error. To try them
+first, point `TEST_DATABASE_URL` at a throwaway Postgres 16 and run
+`scripts/test-migrations.sh`: it applies them all and runs the access tests.
+
+**Sign-in.** In Supabase Auth, set the Site URL to your origin, turn on at least one
+sign-in method and point the magic-link and confirmation emails at
+`/auth-emails/magic-link.html`. [Authentication](docs/AUTHENTICATION.md) has Google, Apple,
+email and OpenID Connect.
+
+**The env.** Copy [`.env.example`](.env.example) to `.env` and delete the services you
+don't use. What every server needs:
+
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, at build time and
+  at runtime, with the same values;
+- `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` and `SUPABASE_SERVICE_ROLE_KEY`, at runtime
+  only;
+- `CANONICAL_ORIGIN`, the address people reach the site at;
+- `TRUST_PROXY_HEADERS=true`, but only behind a proxy that overwrites the client's address
+  headers.
+
+**First run.**
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_SUPABASE_URL=https://supabase.example.com \
+  --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_example \
+  -t peek .
+docker run -d --name peek --restart unless-stopped --env-file .env -p 3000:3000 peek
+```
+
+The image turns on the API and email sign-in by default; `NEXT_PUBLIC_AUTH_*` build
+arguments change the sign-in methods. `GET /health` answers 200 once the database answers
+and the worker runs, and `scripts/smoke-url.sh https://your-host` checks the site from
+outside.
+
+**Optional.** Notifications (Web Push, APNs, Firebase), the delivery email, adding
+parcels by email, assistants (MCP), usage analytics (Umami), Sentry, Turnstile, and
+FlareSolverr and tracking proxies for the carriers whose sites turn servers away.
+Each one is off until its settings are there; `.env.example` lists them.
+
+**Off by default.** The guides and carrier pages are Peek's own, so a copy serves none
+of them unless `GUIDE_PAGES=on`, and nothing links them
 ([Trademarks and content](#trademarks-and-content)).
 
 ## Under the hood

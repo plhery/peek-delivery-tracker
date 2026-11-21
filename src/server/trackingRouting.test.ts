@@ -3042,6 +3042,16 @@ describe('persistent tracking routing', () => {
       expect(due.universal).toHaveBeenCalledOnce();
     });
 
+    it('keeps saved fuller history while the parcel shows China Post\'s own newer summary', async () => {
+      const filed = await saved();
+      delete (filed.carrier_data as JsonObject).tracking_provider;
+      const next = setup(new Date('2026-09-10T12:15:00Z'));
+      next.direct.mockResolvedValue(preview());
+      const value = await next.router.fetch(filed, true);
+      expect(next.universal).not.toHaveBeenCalled();
+      expect(value).toMatchObject({ sourceCarrierId: 'china-post', preserveHistory: true });
+    });
+
     it.each(['time', 'description', 'location', 'provider_code'] as const)('backfills a changed %s even with the same scan count and stage', async field => {
       const filed = await saved();
       const next = setup(new Date('2026-09-10T12:15:00Z'));

@@ -1620,12 +1620,15 @@ export class TrackingRouter {
     // A freshly checked preview can keep the already saved fuller history for PARTIAL_HOLD.
     // Compare the whole answer: a new scan can replace one in a fixed-size window without
     // changing its count or stage. A manual refresh still asks for the rest immediately.
+    // The parcel may show the provider's summary or the carrier's own newer one (no
+    // `tracking_provider`), not another provider's.
     const partial = partialDirect ?? localDirectFallback;
     const held = state.partial_history;
     const historyAge = now().getTime() - millis(held?.checked_at);
     if (scheduled && !changed && !released && universalNumber === number && partial && held
       && held.fingerprint === partialHistoryKey(partial.value) && historyAge >= 0 && historyAge < PARTIAL_HOLD
-      && metadata.tracking_provider === held.provider && sources.includes(held.provider as UniversalSource)
+      && (typeof metadata.tracking_provider !== 'string' || metadata.tracking_provider === held.provider)
+      && sources.includes(held.provider as UniversalSource)
       && resultStage(partial.value.result) === parcel.current_stage) {
       state.direct_retry_at = undefined;
       const kept = persistResult({ ...partial.value, preserveHistory: true }, partial.carrier);

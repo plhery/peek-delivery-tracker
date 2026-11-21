@@ -2515,6 +2515,32 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.parcels.compactMap(\.alertToken), ["token1", "token1"])
     }
 
+    /// More parcels than a round asks for: the rest are asked for as soon as the list refreshes, as on Android, rather
+    /// than at the next launch.
+    func testParcelsBeyondOneRoundAreAskedForAtTheNextRefresh() async {
+        let symbols = Array("23456789ABCDEFGHJKLMNPQRSTUVWXYZ")
+        let links = (0..<(DeviceParcels.alertsPerRound + 2)).map { "2222222222A" + String(symbols[$0]) }
+        let storage = Memory()
+        storage.keys = Dictionary(uniqueKeysWithValues: links.map { ($0, key) })
+        storage.parcels = links.enumerated().map { index, link in
+            DeviceParcel(linkID: link, label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL\(100 + index)")),
+                         checkedAt: Date())
+        }
+        let calls = Calls()
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let device = DeviceParcels(client: client(calls), storage: storage, now: { now })
+
+        await device.registerAlerts(token: "token1", locale: .en)
+        XCTAssertEqual(calls.all.count, DeviceParcels.alertsPerRound)
+        XCTAssertEqual(device.alertsRetryAt, now)
+        await device.retryAlerts()
+        XCTAssertEqual(calls.all.count, links.count)
+        XCTAssertNil(device.alertsRetryAt)
+        await device.retryAlerts()
+        XCTAssertEqual(calls.all.count, links.count, "Once every parcel was asked for, nothing is asked again")
+        XCTAssertEqual(storage.parcels.compactMap(\.alertToken).count, links.count)
+    }
+
     /// The guest list's refresh is what tries a round cut short again.
     func testTheGuestListsRefreshTriesNotificationsAgainAfterAnOutage() async throws {
         let transport = PostcodeTestURLProtocol.transport()

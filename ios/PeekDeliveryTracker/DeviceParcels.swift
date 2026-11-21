@@ -368,7 +368,8 @@ final class DeviceParcels {
     static let fresh: TimeInterval = 5 * 60
     static let settledFresh: TimeInterval = 12 * 60 * 60
     static let waitingFresh: TimeInterval = 1.5
-    /// How many parcels one round asks notifications for; the rest wait for the next round.
+    /// How many parcels one round asks notifications for; the rest wait for the next round, which starts as the list
+    /// next refreshes.
     static let alertsPerRound = 25
     /// How long a round cut short waits before it is tried again: a minute the first time, then twice as long each
     /// time, up to an hour.
@@ -1018,9 +1019,12 @@ final class DeviceParcels {
         defer { alertRounds.remove(round) }
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
-        defer { if round == alertGeneration { holdAlerts(pause, wanted) } }
-        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted && !$0.isFrozen }
-            .prefix(Self.alertsPerRound)
+        // More parcels wait than a round asks for.
+        var more = false
+        defer { if round == alertGeneration { holdAlerts(pause, wanted, more: more) } }
+        let waiting = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted && !$0.isFrozen }
+        more = waiting.count > Self.alertsPerRound
+        let due = waiting.prefix(Self.alertsPerRound)
         for entry in due {
             guard round == alertGeneration else { return }
             // Forgotten, followed through another link, turned off with its bell or forgotten by the service since the
@@ -1094,10 +1098,11 @@ final class DeviceParcels {
     }
 
     /// Notes how a round ended: one cut short is tried again after a wait, longer each time it fails again; one that
-    /// went through leaves nothing to try again.
-    private func holdAlerts(_ pause: TimeInterval?, _ wanted: AlertsWanted) {
+    /// went through leaves nothing to try again, unless `more` parcels than a round asks for wait: the next round asks for
+    /// them as soon as the list refreshes, as on Android.
+    private func holdAlerts(_ pause: TimeInterval?, _ wanted: AlertsWanted, more: Bool = false) {
         guard let pause else {
-            alertRetry = nil
+            alertRetry = more ? AlertRetry(wanted: wanted, at: now(), wait: Self.alertRetryFirst) : nil
             return
         }
         var wait = Self.alertRetryFirst

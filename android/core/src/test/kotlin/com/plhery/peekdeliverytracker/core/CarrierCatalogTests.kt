@@ -1205,9 +1205,11 @@ class CarrierCatalogTests {
         val mondialRelay = postcodeRequirement(CarrierId.MondialRelay, "76434219")
         val gls = postcodeRequirement(CarrierId.GlsCh, "999999999916")
         val belgian = GivenPostcode(CarrierId.SpringGDS, "1000", "BE")
-        // The country it was given from goes with it; one kept without its country was given from its carrier's home.
+        // The country it was given from goes with it, the carrier's home included; one given to a carrier that reads the
+        // country and kept without it is from a country not known.
         assertEquals(belgian, catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(belgian)))
-        assertEquals("FR", catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.MondialRelay, "75001")))?.country)
+        assertEquals("FR", catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.MondialRelay, "75001", "FR")))?.country)
+        assertNull(catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.MondialRelay, "75001"))))
         assertEquals("CH", catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.GlsCh, "8000")))?.country)
         // The carrier's own still comes first; a country the reader named takes only a postcode from there.
         val french = GivenPostcode(CarrierId.MondialRelay, "75001", "FR")
@@ -1245,6 +1247,18 @@ class CarrierCatalogTests {
         assertEquals("CH", catalog.givenPostcodeCountry(GivenPostcode(CarrierId.GlsCh, "8004")))
         assertNull(catalog.givenPostcodeCountry(GivenPostcode(CarrierId.Dpd, "75001")))
         assertNull(catalog.givenPostcodeCountry(GivenPostcode(CarrierId.Dhl, "75001")))
+
+        // A postcode this phone remembered for a carrier that reads the country, kept without one, was kept before the
+        // home country was kept too: it may be another country's (a Spanish "28001" sent to Mondial Relay as Spanish), so
+        // its country is not known and it fills no such field, as on the web and the iPhone.
+        assertNull(catalog.givenPostcodeCountry(GivenPostcode(CarrierId.MondialRelay, "28001"), homeUnrecorded = false))
+        assertNull(catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.MondialRelay, "28001"))))
+        assertEquals(GivenPostcode(CarrierId.MondialRelay, "75002", "FR"),
+            catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.MondialRelay, "75002", "FR"))))
+        // An account parcel's postcode stored without a country is from its carrier's home.
+        val account = parcel("76434219", "", CarrierId.MondialRelay, "2026-10-01T08:00:00Z", dpdPostcode = "75002")
+        assertEquals(listOf(GivenPostcode(CarrierId.MondialRelay, "75002", "FR")),
+            GivenPostcode.candidates(parcels = listOf(account), remembered = emptyList(), catalog = catalog))
     }
 
     @Test

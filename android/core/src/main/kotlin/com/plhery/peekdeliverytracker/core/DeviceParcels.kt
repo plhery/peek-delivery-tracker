@@ -150,7 +150,7 @@ enum class DeviceAlertAnswer {
  * phone rather than to a parcel: they outlast forgotten parcels and a sign-in, and fill in the next parcel's field. An
  * account's postcodes stay on its parcels. `defaults` is the app's standard UserDefaults stand-in.
  */
-class PostcodeMemory(private val defaults: UserDefaults) {
+class PostcodeMemory(private val defaults: UserDefaults, private val catalog: () -> CarrierCatalog = { CarrierCatalog.shared }) {
     val entries: List<GivenPostcode>
         get() = defaults.data(key)?.let { data ->
             try {
@@ -160,9 +160,14 @@ class PostcodeMemory(private val defaults: UserDefaults) {
             }
         } ?: emptyList()
 
-    /** The pair goes first; given before, it moves there rather than coming twice. */
+    /**
+     * The pair goes first; given before, it moves there rather than coming twice. It keeps the country sent with it, or
+     * the carrier's home where its lookup reads the country: one kept without any was kept before this phone kept the
+     * home country too, and its country is not known ([CarrierCatalog.givenPostcodeCountry]).
+     */
     fun remember(postcode: String, carrier: CarrierId, country: String? = null) {
         val postcode = postcode.trimmingWhitespacesAndNewlines().nonEmpty ?: return
+        val country = country?.nonEmpty ?: catalog().let { if (it.readsPostcodeCountry(carrier)) it.homeCountry(carrier) else null }
         write(
             listOf(GivenPostcode(carrier = carrier, postcode = postcode, country = country)) +
                 entries.filter { !it.carrier.rawValue.equalsCanonically(carrier.rawValue) || !bare(it.postcode).equalsCanonically(bare(postcode)) },

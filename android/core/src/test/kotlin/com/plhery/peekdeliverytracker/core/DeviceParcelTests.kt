@@ -113,7 +113,11 @@ class DeviceParcelTests {
 
     private val key = "k".repeat(43)
 
-    private fun given(carrier: CarrierId, postcode: String) = GivenPostcode(carrier = carrier, postcode = postcode)
+    /** A postcode given before, as this phone remembers it: with its country, the home one too where the carrier's lookup reads it. */
+    private fun given(carrier: CarrierId, postcode: String, country: String? = null): GivenPostcode {
+        val catalog = CarrierCatalog.shared
+        return GivenPostcode(carrier, postcode, country ?: if (catalog.readsPostcodeCountry(carrier)) catalog.homeCountry(carrier) else null)
+    }
 
     /** Swift's `Date` in a DeviceParcel: seconds since 2001. */
     private fun date(instant: Instant = Instant.now()): Double = instant.timeIntervalSinceReferenceDate
@@ -1364,6 +1368,31 @@ class DeviceParcelTests {
         memory.forget("3000")
         assertEquals(emptyList<GivenPostcode>(), memory.entries)
         assertTrue("Nothing is left behind", defaults.values.isEmpty())
+    }
+
+    /**
+     * A postcode remembered for Mondial Relay without its country, as this phone kept them before it kept the home country
+     * too, may be another country's (a Spanish one sent as Spanish): it is no longer offered as French. One remembered now
+     * keeps its country, France included.
+     */
+    @Test
+    fun aPostcodeRememberedWithoutItsCountryForACarrierThatReadsItIsNotOffered() {
+        val defaults = MemoryDefaults()
+        defaults.set("""[{"carrier":"mondial-relay","postcode":"28001"}]""".toByteArray(), forKey = "sdt.postcodeMemory.v1")
+        val memory = PostcodeMemory(defaults)
+        val catalog = CarrierCatalog.shared
+        val mondialRelay = catalog.requirements(CarrierId.MondialRelay, "76434219").first { it.field == CarrierRequirement.Field.DpdPostcode }
+        assertEquals(listOf(GivenPostcode(CarrierId.MondialRelay, "28001")), memory.entries)
+        assertNull(catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, memory.entries))
+
+        memory.remember("75002", CarrierId.MondialRelay)
+        assertEquals(GivenPostcode(CarrierId.MondialRelay, "75002", "FR"), memory.entries.first())
+        assertEquals(GivenPostcode(CarrierId.MondialRelay, "75002", "FR"), catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, memory.entries))
+        memory.remember("28001", CarrierId.MondialRelay, country = "ES")
+        assertEquals(GivenPostcode(CarrierId.MondialRelay, "28001", "ES"), memory.entries.first())
+        // A carrier that reads the postcode alone keeps none.
+        memory.remember("75001", CarrierId.Dpd)
+        assertEquals(GivenPostcode(CarrierId.Dpd, "75001"), memory.entries.first())
     }
 
     @Test

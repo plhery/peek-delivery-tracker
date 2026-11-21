@@ -129,12 +129,14 @@ data class GivenPostcode(
     companion object {
         /**
          * What the add sheet suggests from: the postcodes of the account's parcels, newest parcel first, then
-         * the ones this phone remembers, in their order.
+         * the ones this phone remembers, in their order. A parcel's postcode stored without its country is from its
+         * carrier's home where its lookup reads the country, as only another country is stored.
          */
-        fun candidates(parcels: List<Parcel>, remembered: List<GivenPostcode>): List<GivenPostcode> =
+        fun candidates(parcels: List<Parcel>, remembered: List<GivenPostcode>, catalog: CarrierCatalog = CarrierCatalog.shared): List<GivenPostcode> =
             parcels.sortedWith { left, right -> right.createdAt.compareTo(left.createdAt) }
                 .mapNotNull { parcel -> parcel.dpdPostcode?.let { postcode ->
-                    val country = parcel.carrierData?.postcodeCountry?.takeIf { it.postcode == postcode }?.country
+                    val home = if (catalog.readsPostcodeCountry(parcel.carrier)) catalog.homeCountry(parcel.carrier) else null
+                    val country = parcel.carrierData?.postcodeCountry?.takeIf { it.postcode == postcode }?.country ?: home
                     GivenPostcode(parcel.carrier, postcode, country)
                 } } + remembered
     }

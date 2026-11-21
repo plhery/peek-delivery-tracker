@@ -226,12 +226,15 @@ class CarrierChangeTests {
             listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "BE")))
         assertEquals("1000", known.sentPostcode)
         assertEquals("BE", known.sentPostcodeCountry)
-        // One kept without its country was given from its carrier's home, for which none is sent: it goes so again.
+        // One given from its carrier's home, for which none is sent, goes so again.
         val home = CarrierChange.start(source, CarrierId.MondialRelay, catalog, "BE",
-            listOf(GivenPostcode(CarrierId.MondialRelay, "1000")))
+            listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "FR")))
         assertEquals("1000", home.sentPostcode)
         assertEquals("FR", home.postcodeCountry)
         assertNull(home.sentPostcodeCountry)
+        // One this phone kept without any country, before it kept the home one too, is from a country not known: it
+        // fills nothing.
+        assertNull(CarrierChange.start(source, CarrierId.MondialRelay, catalog, "BE", listOf(GivenPostcode(CarrierId.MondialRelay, "1000"))).sentPostcode)
         assertNotNull(change.carrierPostcodeRequirement)
         assertEquals("FR", change.initialPostcodeCountry)
         assertEquals("FR", change.offeredPostcodeCountry)

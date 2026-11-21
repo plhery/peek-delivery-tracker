@@ -74,10 +74,13 @@ country stored with the parcel's postcode, then the parcel's destination, the re
 country and the carrier's own. A postcode given for an earlier parcel brings the country it
 was given from ([`postcodeMemory.ts`](../src/lib/postcodeMemory.ts)): such a field takes
 only one whose country it knows, and starts on that country when it fills it or the reader
-uses it. One kept without a country is from its carrier's home where that carrier's lookup
-reads the country, or where it reads the postcode alone and none of its requirements says
-`internationalPostcode`. One given to a field that took any country's postcode and read it
-alone has no known country (`givenPostcodeCountry`). For another country than the
+uses it. A browser or phone keeps the carrier's home with a postcode given to a carrier
+whose lookup reads the country; one it kept without any, from before, has no known
+country. An account parcel's postcode stored without a country is from its carrier's home
+where that carrier's lookup reads the country. Otherwise one kept without a country is
+from its carrier's home where that carrier reads the postcode alone and none of its
+requirements says `internationalPostcode`; one given to a field that took any country's
+postcode and read it alone has no known country (`givenPostcodeCountry`). For another country than the
 carrier's first, the field takes any country's shape and shows that country's example
 ([`postcodeCountry.ts`](../src/lib/postcodeCountry.ts), `CarrierCatalog.postcodeRequirement`
 on iPhone). Only such a country is sent: `dpdPostcodeCountry` in the API

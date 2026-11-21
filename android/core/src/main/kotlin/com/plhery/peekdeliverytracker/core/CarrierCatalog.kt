@@ -351,16 +351,20 @@ class CarrierCatalog private constructor(
         )
     }
 
+    /** Whether the carrier's lookup reads the country of a postcode given for any of its numbers. */
+    fun readsPostcodeCountry(carrier: CarrierId): Boolean = (info(carrier).tracking.requirements ?: emptyList()).any { it.readsCountry == true }
+
     /**
      * The country of a postcode given before: the one recorded with it. Otherwise, where the carrier it was given to
-     * reads the country, that carrier's home, as only another country is recorded. Where it reads the postcode alone,
-     * its home only when none of its requirements takes any country's postcode: one that does says nothing of the
-     * country, so it is not known (null).
+     * reads the country, that carrier's home, as only another country is sent ([homeUnrecorded]; false for a postcode
+     * this phone remembered before it recorded the home country too, whose country is then not known). Where it reads
+     * the postcode alone, its home only when none of its requirements takes any country's postcode: one that does says
+     * nothing of the country, so it is not known (null). As on the web and the iPhone.
      */
-    fun givenPostcodeCountry(entry: GivenPostcode): String? {
+    fun givenPostcodeCountry(entry: GivenPostcode, homeUnrecorded: Boolean = true): String? {
         entry.country?.nonEmpty?.let { return it.uppercase() }
         val requirements = info(entry.carrier).tracking.requirements ?: emptyList()
-        if (requirements.any { it.readsCountry == true }) return homeCountry(entry.carrier)
+        if (requirements.any { it.readsCountry == true }) return if (homeUnrecorded) homeCountry(entry.carrier) else null
         return if (requirements.any { it.field == CarrierRequirement.Field.DpdPostcode && it.takesAnyPostcode }) null
         else homeCountry(entry.carrier)
     }
@@ -370,7 +374,9 @@ class CarrierCatalog private constructor(
      * last one given to the same carrier, otherwise the last one given to any carrier that the field takes, as it
      * takes it. Most parcels go to the same address. A field that reads the postcode's country takes one only from
      * a country it lists ([givenPostcodeCountry]), the one `chosen` beside it once one is, in that country's shape,
-     * and the postcode brings its country.
+     * and the postcode brings its country. `given` holds the countries as recorded ([GivenPostcode.candidates]): one
+     * given to a carrier that reads the country and kept without it is from a country not known, and fills no such
+     * field.
      */
     fun rememberedPostcode(
         carrier: CarrierId,
@@ -381,7 +387,7 @@ class CarrierCatalog private constructor(
         val readsCountry = requirement.readsCountry == true
         val countries = postcodeCountries(carrier, requirement)
         val fitting = given.mapNotNull { entry ->
-            val country = if (readsCountry) givenPostcodeCountry(entry) else homeCountry(carrier)
+            val country = if (readsCountry) givenPostcodeCountry(entry, homeUnrecorded = false) else homeCountry(carrier)
             if (readsCountry && (country == null || country !in countries || (chosen != null && chosen != country))) {
                 return@mapNotNull null
             }

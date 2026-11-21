@@ -147,16 +147,20 @@ describe('tracking health evidence', () => {
       });
       return [...samples.values()];
     };
-    expect(await sample(new IndeterminateError('Track718', 'Track718 has not completed the Juxi lookup'))).toEqual([
+    expect(await sample(new IndeterminateError('Track718', 'Track718 has not completed the Juxi lookup', { reason: 'lookup_pending' }))).toEqual([
       expect.objectContaining({ kind: 'provider', subject: 'Track718', healthy: true,
         details: expect.objectContaining({ category: 'not_found', reason: 'lookup_pending' }) }),
     ]);
-    expect(await sample(new Error('lookup failed', { cause: new IndeterminateError('Track718', 'Track718 is temporarily busy') }))).toEqual([
+    expect(await sample(new Error('lookup failed', {
+      cause: new IndeterminateError('Track718', 'Track718 is temporarily busy', { reason: 'provider_busy' }),
+    }))).toEqual([
       expect.objectContaining({ healthy: true, details: expect.objectContaining({ category: 'not_found', reason: 'provider_busy' }) }),
     ]);
     for (const [error, carrier] of [
       [new IndeterminateError('Track718', 'Track718 returned an unreadable snapshot')],
-      [new IndeterminateError('Ship24', 'Ship24 is temporarily busy'), 'Ship24'],
+      [new IndeterminateError('Ship24', 'Ship24 is temporarily busy', { reason: 'provider_busy' }), 'Ship24'],
+      // The reason decides, not the wording.
+      [new IndeterminateError('Track718', 'Track718 is temporarily busy')],
       [new IndeterminateError('Track718', 'Track718 is temporarily busy', { reason: 'maintenance_page' })],
       [new ChallengeError('Track718', 'Track718 returned no bound Juxi response')],
       [new RateLimitedError('Track718')],

@@ -26,26 +26,20 @@ const CAPTURE_FAILURES = new Set(['capture_missing', 'capture_unreadable']);
 const answered = new Set(['ok', 'not_found', 'input_required']);
 
 /**
- * A provider's answer that it has nothing for the number yet, which the scraper raises as inconclusive without a reason
- * and tells by its wording alone: Track718 still fetching the carrier's history, or turning lookups away while it is
- * busy. Both are ordinary while a parcel is new; counted as failures, a run of them alone could open a Track718 incident.
- * The sample keeps which one as its reason.
+ * A provider's answer that it has nothing for the number yet, which the scraper raises as inconclusive with a reason:
+ * Track718 still fetching the carrier's history (`lookup_pending`), or turning lookups away while it is busy
+ * (`provider_busy`). Both are ordinary while a parcel is new; counted as failures, a run of them alone could open a
+ * Track718 incident. The sample keeps the reason.
  */
-const NOT_READY: ReadonlyArray<{ provider: string; wording: RegExp; reason: string }> = [
-  { provider: 'Track718', wording: /\bhas not completed the\b.*\blookup\b/i, reason: 'lookup_pending' },
-  { provider: 'Track718', wording: /\bis temporarily busy\b/i, reason: 'provider_busy' },
-];
-function notReady(error: unknown): string | undefined {
-  let current = error;
-  for (let depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
+const NOT_READY: ReadonlyMap<string, ReadonlySet<string>> = new Map([['Track718', new Set(['lookup_pending', 'provider_busy'])]]);
+function notReady(error: unknown): boolean {
+  for (let current = error, depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
     if (current instanceof CarrierError) {
-      const answer = current;
-      return answer instanceof IndeterminateError && !(answer instanceof NoHistoryError) && !answer.reason
-        ? NOT_READY.find(({ provider, wording }) => answer.provider === provider && wording.test(answer.message))?.reason
-        : undefined;
+      return current instanceof IndeterminateError && !(current instanceof NoHistoryError)
+        && !!NOT_READY.get(current.provider)?.has(current.reason ?? '');
     }
   }
-  return undefined;
+  return false;
 }
 
 /**
@@ -87,7 +81,7 @@ function details(record: StepRecord | LookupRecord, outcome: string): JsonObject
     if (current instanceof UpstreamHttpError && current.status >= 100 && current.status <= 599) status = current.status;
   }
   const proxy = proxyTunnelStatus(record.error);
-  const reason = carrierErrorReason(record.error) ?? notReady(record.error)
+  const reason = carrierErrorReason(record.error)
     ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : 'proxy_refused');
   return { error_type: record.errorType, category: outcome, reason, http_status: status,
     ...(proxy === null ? {} : { proxy_status: proxy }), step: 'step' in record ? record.step : record.finalStep };

@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-J&T Express doręcza przesyłki w Arabii Saudyjskiej, Zjednoczonych Emiratach Arabskich oraz Kuwejcie (strona kontaktowa wymienia również Katar, Jordanię i Bahrajn). W Arabii Saudyjskiej oferuje sklepom internetowym doręczenia tego samego dnia, standardowe i ekonomiczne do 30 kg oraz przesyłki od drzwi do drzwi z Chin kontynentalnych. Arabia Saudyjska, ZEA i Kuwejt korzystają ze wspólnej witryny `jtexpress.me` i jednego formatu listu przewozowego zaczynającego się od `JTE`, który Peek grupuje jako **J&T Express Middle East**. Sprawdź paczkę na [stronie śledzenia J&T](https://www.jtexpress.me/KSA/trackOrder) albo wklej numer powyżej — otrzymasz go od sklepu w szczegółach zamówienia lub wiadomości o wysyłce.
+J&T Express doręcza przesyłki w Arabii Saudyjskiej, Zjednoczonych Emiratach Arabskich oraz Kuwejcie (strona kontaktowa wymienia również Katar, Jordanię i Bahrajn). W Arabii Saudyjskiej oferuje sklepom internetowym doręczenia tego samego dnia, standardowe i ekonomiczne do 30 kg oraz przesyłki od drzwi do drzwi z Chin. Arabia Saudyjska, ZEA i Kuwejt korzystają ze wspólnej witryny `jtexpress.me` i jednego formatu listu przewozowego zaczynającego się od `JTE`, który Peek grupuje jako **J&T Express Middle East**. Sprawdź paczkę na [stronie śledzenia J&T](https://www.jtexpress.me/KSA/trackOrder) albo wklej numer powyżej — otrzymasz go od sklepu w szczegółach zamówienia lub wiadomości o wysyłce.
 
 ## Numer śledzenia J&T Express Middle East: jak wygląda
 
@@ -15,7 +15,7 @@ Numer listu przewozowego (*waybill*) J&T Express Middle East składa się z lite
 | Numer (przykładowy) | Co oznacza |
 | --- | --- |
 | `JTE482910573649` | `JTE` i 12 cyfr: przesyłka J&T Express Middle East, od razu rozpoznawana przez Peek. |
-| `JTE48291057364` | `JTE` i tylko 11 cyfr: brakuje jednego znaku. Gdy żaden przewoźnik nie odpowie, `peektracker.com` pokaże komunikat: „Zaczyna się jak numer śledzenia przewoźnika J&T Express Middle East, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.” |
+| `JTE48291057364` | `JTE` i tylko 11 cyfr: brakuje jednej cyfry. Peek nie rozpoznaje w nim żadnego przewoźnika: sprawdź numer w wiadomości o wysyłce. |
 | `JTDE482910573649` | `JTDE` i 12 cyfr: [J&T Express Niemcy](carrier:j-and-t-de). `JTAU` należy do J&T Express Australia, `JTUK` do J&T Express UK, a `JT` i 13 cyfr (`JT4829105736491`) do sieci w Azji Południowo-Wschodniej oraz [J&T Express Chiny](carrier:j-and-t-cn). |
 
 Spacje i małe litery nie mają w Peek znaczenia. Nie widzisz numeru? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number), a przy zamówieniu wysłanym z Chin kontynentalnych — [śledzenie paczek z Chin](guide:tracking-from-china).
@@ -36,7 +36,7 @@ Oto nagłówki rozpoznawane bezpośrednio przez Peek:
 | `Abnormal Parcel` | Bezpośrednio po `Delivering` oznacza nieudaną próbę doręczenia na tej trasie; w innym miejscu sygnalizuje problem, którego powód widnieje w zdaniu poniżej w wyszukiwarce J&T. | „Próba doręczenia” po `Delivering`, inaczej „Zgłoszono problem” |
 | `Signed` | Skan podpisu po trasie kuriera: doręczono pod wskazany adres (zdanie pod spodem w serwisie J&T podaje, kto podpisał odbiór). | „Dostarczona” |
 
-Pozostałe nagłówki Peek przypisuje na podstawie słów (np. zwrot jako „Zwrócona nadawcy”, a domyślnie „W transporcie”, chyba że paczka jest już w doręczeniu lub dalej). Dopóki J&T nie zna numeru lub zwraca go bez skanów, widać „Oczekiwanie na przewoźnika J&T Express Middle East”; jeśli po dwóch dniach żaden przewoźnik nie odpowie, Peek wyświetli: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
+Pozostałe nagłówki Peek przypisuje na podstawie słów (np. próbę doręczenia jako „Próba doręczenia”, zwrot jako „Zwrócona nadawcy”); nagłówek, którego Peek nie umie przypisać, zostawia paczkę na już osiągniętym etapie. Dopóki J&T nie zna numeru lub zwraca go bez skanów, widać „Oczekiwanie na przewoźnika J&T Express Middle East”; jeśli po dwóch dniach żaden przewoźnik nie odpowie, Peek wyświetli: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
 
 ## Doręczenie J&T w Arabii Saudyjskiej, ZEA i Kuwejcie
 
@@ -82,17 +82,16 @@ Na [stronie kontaktowej J&T](https://www.jtexpress.me/KSA/contact-us) widnieją 
 | Kuwejt | `+965 65850830` | `cs.kw@jtexpress.ae` | `+965 66227312` |
 
 - **Pozostałe kraje na stronie kontaktowej:** Katar (`+974 71226634` / `+974 30246099`, `cs.qat@jtexpress.sa.com`, WhatsApp `+974 77377607`), Jordania (`+962 797415444`, `cs.jor@jtexpress.sa.com`) oraz Bahrajn (`+973 39966461`, `cs.bh@jtexpress.sa.com`).
-- **Eskalacje i zgłoszenia nadużyć:** `escalations@jtexpress.sa.com` (wyłącznie dla nierozwiązanych skarg, bezpieczeństwa lub oszustw, nie do zwykłych pytań o śledzenie).
+- **Eskalacje i zgłoszenia nadużyć:** `escalations@jtexpress.sa.com` (wyłącznie dla nierozwiązanych skarg, bezpieczeństwa lub oszustw, nie do zwykłych pytań o śledzenie; zob. też [fałszywe SMS-y o paczkach](guide:delivery-scam-texts)).
 - **Biura:** *JNT Express KSA LLC*, `5/F, Building No.3.05, King Abdullah Financial Center, Riyadh, KSA` (rejestr handlowy `1010728810`); w ZEA *J&T Express Couriers Services LLC*, `Office 309, Emaar Business Park Building 1, Dubai, UAE`.
-- **Uwaga na fałszywe wiadomości:** sprawdzaj, czy linki i adresy prowadzą do oficjalnych domen `www.jtexpress.me` (`jtexpress.me`), `jtexpress.ae` lub `jtexpress.sa.com` ([fałszywe SMS-y o paczkach](guide:delivery-scam-texts)).
 
 ## Śledzenie przesyłki J&T Express Middle East w Peek
 
 Wklej numer `JTE` w [Peek](/): aplikacja od razu rozpoznaje J&T Express Middle East („Wykryty przewoźnik”), podobnie jak link z `jtexpress.me` lub `jtexpress.ae` z parametrem `waybillNo=` (przy ręcznym wyborze dla innego układu informuje, że przewoźnik „nie wydaje takich numerów”).
 
-Peek odpytuje wyszukiwarkę J&T po angielsku w strefie `GMT+0300` (`UTC+3`, czas saudyjski bez czasu letniego), odczytuje w niej każdy skan niezależnie od kraju zeskanowania i przelicza go na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Wyświetla nagłówek skanu wraz z miastem i prowincją oddziału (do 100 najnowszych zdarzeń), pomijając zdanie pod nagłówkiem, imię i dane kuriera, podpis odbiorcy oraz zdjęcie doręczenia; J&T nie podaje prognozowanej daty dostawy ani wagi. Gdy wyszukiwarka J&T zażąda kodu captcha, Peek go nie rozwiązuje — ponawia próbę później, a w międzyczasie pyta serwisy śledzące.
+Peek odpytuje wyszukiwarkę J&T po angielsku w strefie `GMT+0300` (`UTC+3`, czas saudyjski bez czasu letniego), odczytuje w niej każdy skan niezależnie od kraju zeskanowania i przelicza go na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”). Wyświetla nagłówek skanu wraz z miastem i prowincją oddziału (do 100 najnowszych zdarzeń), pomijając zdanie pod nagłówkiem, imię i dane kuriera, podpis odbiorcy oraz zdjęcie doręczenia; J&T nie podaje prognozowanej daty dostawy ani wagi. Gdy wyszukiwarka J&T zażąda kodu captcha, Peek go nie rozwiązuje — ponawia próbę później, a w międzyczasie pyta serwisy śledzące.
 
-Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami, a w dniu skanu `Delivering` od `06:00` czasu saudyjskiego (`07:00` w ZEA) nawet co 2 minuty, dopóki odpowiada wyszukiwarka J&T (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu doręczenia przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się w Twoim imieniu z J&T ani ze sklepem.
+Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a w dniu skanu `Delivering` od `06:00` czasu saudyjskiego (`07:00` w ZEA) nawet co 2 minuty, dopóki odpowiada wyszukiwarka J&T (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu doręczenia przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę. Powiadomienia do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z J&T ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie J&T Express na Bliskim Wschodzie
 
@@ -126,7 +125,7 @@ W ZEA zadzwoń pod `600566122`, napisz na `cs@jtexpress.ae` lub na WhatsApp `+97
 - [J&T Express Middle East: Terms of Use (ZEA)](https://www.jtexpress.me/UAE/terms-conditions) – warunki opublikowane dla ZEA oraz numery 600566122 i +965 65850830
 - [J&T Express Middle East: Polityka odszkodowań (PDF po arabsku)](https://www.jtexpress.me/%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B9%D9%88%D9%8A%D8%B6%20%D9%84%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AC%D9%8A%20%D8%A7%D9%86%D8%AF%20%D8%AA%D9%8A.pdf) – rejestr 1010728810, weryfikacja po 7 dniach roboczych, reklamacja w 30 dni na claim@jtexpress.sa.com, terminy 7 i 16 dni, limity 200 / 10 000 SAR i wyłączenia
 - [J&T Express Middle East: About Us](https://www.jtexpress.me/KSA/about-us) – założenie grupy w Indonezji w sierpniu 2015 r.
-- [J&T Express Middle East: Import Express](https://www.jtexpress.me/KSA/expressShipping/internationalExpress/importExpress) – przesyłki od drzwi do drzwi z Chin kontynentalnych do Arabii Saudyjskiej
+- [J&T Express Middle East: Import Express](https://www.jtexpress.me/KSA/expressShipping/internationalExpress/importExpress) – przesyłki od drzwi do drzwi z Chin do Arabii Saudyjskiej
 - [J&T Express Middle East: E-Commerce Partners](https://www.jtexpress.me/KSA/e-commerce-partners) – doręczenia tego samego dnia, standardowe i ekonomiczne do 30 kg dla sklepów internetowych
 - [Universal Parcel Scraper: J&T Express Middle East](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-middle-east) – układ JTE, strefa GMT+0300, statusy i odczyt w Peek
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formaty innych sieci J&T i zapasowe serwisy śledzące

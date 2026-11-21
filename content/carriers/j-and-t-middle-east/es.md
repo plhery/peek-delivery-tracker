@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-J&T Express reparte paquetes en Arabia Saudí, Emiratos Árabes Unidos y Kuwait (su página de contacto también incluye Catar, Jordania y Baréin). En Arabia Saudí ofrece a las tiendas online entrega en el mismo día, básica y económica de hasta 30 kg y envíos puerta a puerta desde China continental. Arabia Saudí, EAU y Kuwait comparten el portal `jtexpress.me` y un único formato de albarán iniciado por `JTE`, que Peek agrupa como **J&T Express Middle East**. Consulta tu envío en la [página de seguimiento de J&T](https://www.jtexpress.me/KSA/trackOrder) o pega el código arriba: te lo facilita la tienda en los detalles del pedido o en el aviso de expedición.
+J&T Express reparte paquetes en Arabia Saudí, Emiratos Árabes Unidos y Kuwait (su página de contacto también incluye Catar, Jordania y Baréin). En Arabia Saudí ofrece a las tiendas online entrega en el mismo día, básica y económica de hasta 30 kg y envíos puerta a puerta desde China. Arabia Saudí, EAU y Kuwait comparten el portal `jtexpress.me` y un único formato de albarán iniciado por `JTE`, que Peek agrupa como **J&T Express Middle East**. Consulta tu envío en la [página de seguimiento de J&T](https://www.jtexpress.me/KSA/trackOrder) o pega el código arriba: te lo facilita la tienda en los detalles del pedido o en el aviso de expedición.
 
 ## Número de seguimiento de J&T Express Middle East: cómo es
 
@@ -15,7 +15,7 @@ El número de guía (*waybill*) de J&T Express Middle East lleva `JTE` seguido d
 | Número (inventado) | Qué es |
 | --- | --- |
 | `JTE482910573649` | `JTE` y 12 cifras: un envío de J&T Express Middle East que Peek detecta al instante. |
-| `JTE48291057364` | `JTE` con 11 dígitos: falta un carácter. Si ningún operador responde, `peektracker.com` muestra «Empieza como un número de seguimiento de J&T Express Middle East, pero le falta un carácter: puede que tenga una errata. Compáralo con tu mensaje de envío.» |
+| `JTE48291057364` | `JTE` con 11 dígitos: falta un dígito. Peek no reconoce ningún transportista: revisa el número en tu mensaje de envío. |
 | `JTDE482910573649` | `JTDE` y 12 dígitos: [J&T Express Alemania](carrier:j-and-t-de). `JTAU` corresponde a J&T Express Australia, `JTUK` a J&T Express UK y `JT` con 13 dígitos (`JT4829105736491`) al Sudeste Asiático y [J&T Express China](carrier:j-and-t-cn). |
 
 Los espacios y las minúsculas no importan al pegar el número en Peek. ¿No aparece en tu correo? Revisa [cómo encontrar el número de seguimiento](guide:find-tracking-number) y, si tu compra salió de China continental, [seguimiento de paquetes desde China](guide:tracking-from-china).
@@ -36,7 +36,7 @@ Estos son los encabezados que reconoce Peek:
 | `Abnormal Parcel` | Justo después de `Delivering` indica que ese intento de reparto falló; en otro momento señala una incidencia cuyo motivo concreto figura en la frase inferior del rastreador de J&T. | «Intento de entrega» tras `Delivering`, o «Incidencia» |
 | `Signed` | Escaneo de firma tras el reparto: entregado en la dirección indicada (la frase inferior en la web de J&T nombra a quien firmó). | «Entregado» |
 
-Los demás encabezados se clasifican por sus palabras (por ejemplo, devolución como «Devuelto al remitente» o, por defecto, «En tránsito», salvo que el envío ya esté en reparto o en un paso posterior). Mientras J&T no conozca el código o lo liste sin escaneos, verás «Esperando a J&T Express Middle East»; si pasan dos días sin respuesta de ningún operador, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
+Los demás encabezados se clasifican por sus palabras (por ejemplo, un intento como «Intento de entrega» y una devolución como «Devuelto al remitente»); un encabezado que Peek no sabe clasificar deja el envío en el paso ya alcanzado. Mientras J&T no conozca el código o lo liste sin escaneos, verás «Esperando a J&T Express Middle East»; si pasan dos días sin respuesta de ningún operador, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
 
 ## Entrega de J&T en Arabia Saudí, EAU y Kuwait
 
@@ -82,9 +82,8 @@ La [página de contacto de J&T](https://www.jtexpress.me/KSA/contact-us) publica
 | Kuwait | `+965 65850830` | `cs.kw@jtexpress.ae` | `+965 66227312` |
 
 - **Otros países en la página de contacto:** Catar (`+974 71226634` / `+974 30246099`, `cs.qat@jtexpress.sa.com`, WhatsApp `+974 77377607`), Jordania (`+962 797415444`, `cs.jor@jtexpress.sa.com`) y Baréin (`+973 39966461`, `cs.bh@jtexpress.sa.com`).
-- **Escalaciones y fraude:** `escalations@jtexpress.sa.com` (exclusivo para quejas no resueltas, fraude o seguridad, no para consultas de seguimiento).
+- **Escalaciones y fraude:** `escalations@jtexpress.sa.com` (exclusivo para quejas no resueltas, fraude o seguridad, no para consultas de seguimiento; ver también [mensajes falsos de entrega](guide:delivery-scam-texts)).
 - **Oficinas:** *JNT Express KSA LLC*, `5/F, Building No.3.05, King Abdullah Financial Center, Riyadh, KSA` (registro mercantil `1010728810`); en EAU, *J&T Express Couriers Services LLC*, `Office 309, Emaar Business Park Building 1, Dubai, UAE`.
-- **Cuidado con SMS falsos:** comprueba que enlaces y remitentes usen `www.jtexpress.me` (`jtexpress.me`), `jtexpress.ae` o `jtexpress.sa.com` ([mensajes falsos de entrega](guide:delivery-scam-texts)).
 
 ## Seguir un paquete de J&T Express Middle East con Peek
 
@@ -92,7 +91,7 @@ Pega el código `JTE` en [Peek](/): detecta J&T Express Middle East al momento (
 
 Peek consulta el rastreador de J&T en inglés pidiendo la zona `GMT+0300` (`UTC+3`, hora saudí sin horario de verano), interpreta cada escaneo en ese huso sea cual sea el país donde se registró y lo convierte a la zona de tu dispositivo («Horas en tu zona horaria: …»). Muestra el encabezado de cada paso junto con la ciudad y provincia de la delegación (hasta los 100 escaneos más recientes) y descarta la frase inferior, nombre y teléfono del repartidor, firmante y foto de entrega; J&T no ofrece fecha estimada ni peso. Si J&T pide un captcha, Peek no lo resuelve: vuelve a intentarlo más tarde y consulta mientras tanto servicios de seguimiento.
 
-Peek comprueba hasta cada 10 minutos con el paquete abierto o el día de reparto con notificaciones activas, y hasta cada 2 minutos desde las `06:00` hora saudí (`07:00` en EAU) el día en que consta `Delivering` mientras responda el rastreador de J&T (mediante servicios de seguimiento: cada hora, cada 3 h tras un día sin cambios y hasta cada 15 minutos el día de entrega con el paquete abierto o alertas activas); el resto del tiempo, y tras 12 h en «Etiqueta creada» / «Admitido por el transportista» o dos días sin novedades, cada hora («Cada escaneo», «Pasos importantes» o «Solo la entrega»). Peek no puede contactar con J&T ni con el vendedor por ti.
+Con el paquete abierto, o el día de reparto con notificaciones activas, Peek comprueba hasta cada 10 minutos, y hasta cada 2 minutos desde las `06:00` hora saudí (`07:00` en EAU) el día en que consta `Delivering` mientras responda el rastreador de J&T (mediante servicios de seguimiento: cada hora, cada 3 h tras un día sin cambios y hasta cada 15 minutos el día de entrega con el paquete abierto o alertas activas); el resto del tiempo, y tras 12 h en «Etiqueta creada» / «Admitido por el transportista» o dos días sin novedades, cada hora. Notificaciones a elegir: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con J&T ni con el vendedor por ti.
 
 ## Preguntas frecuentes sobre el seguimiento de J&T Express en Oriente Medio
 
@@ -126,7 +125,7 @@ En EAU llama al `600566122`, escribe a `cs@jtexpress.ae` o por WhatsApp al `+971
 - [J&T Express Middle East: Terms of Use (EAU)](https://www.jtexpress.me/UAE/terms-conditions) – condiciones publicadas en EAU y teléfonos 600566122 y +965 65850830
 - [J&T Express Middle East: Política de compensación (PDF en árabe)](https://www.jtexpress.me/%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B9%D9%88%D9%8A%D8%B6%20%D9%84%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AC%D9%8A%20%D8%A7%D9%86%D8%AF%20%D8%AA%D9%8A.pdf) – registro 1010728810, consulta tras 7 días laborables, reclamación en 30 días a claim@jtexpress.sa.com, plazos de 7 y 16 días, tope 200 / 10.000 SAR y exclusiones
 - [J&T Express Middle East: About Us](https://www.jtexpress.me/KSA/about-us) – fundación del grupo en Indonesia en agosto de 2015
-- [J&T Express Middle East: Import Express](https://www.jtexpress.me/KSA/expressShipping/internationalExpress/importExpress) – envíos puerta a puerta desde China continental a Arabia Saudí
+- [J&T Express Middle East: Import Express](https://www.jtexpress.me/KSA/expressShipping/internationalExpress/importExpress) – envíos puerta a puerta desde China a Arabia Saudí
 - [J&T Express Middle East: E-Commerce Partners](https://www.jtexpress.me/KSA/e-commerce-partners) – entrega en el día, básica y económica hasta 30 kg para tiendas online
 - [Universal Parcel Scraper: J&T Express Middle East](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-middle-east) – formato JTE, huso GMT+0300, estados y lectura en Peek
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de otras redes J&T y servicios de seguimiento de respaldo

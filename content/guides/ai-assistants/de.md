@@ -4,7 +4,7 @@ description: Verbinde Peek mit ChatGPT, Claude oder Gemini und frag, wo deine Pa
 slug: pakete-verfolgen-chatgpt-claude-gemini
 picture: Pip, das Paket mit Gesicht, lehnt sich aus einem Chatfenster auf einem Laptop, in dem eine Frage zu den Paketen dieser Woche mit einer kurzen Liste beantwortet wird.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Business-, Enterprise- oder Edu-Tarif Gemini für Erwachsene in den USA mit einem privaten Google-Konto und OpenClaw für alle, die es selbst betreiben. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
@@ -90,7 +90,7 @@ Um Pakete hinzuzufügen, gib ihm eine Sendungsnummer oder den Versandteil einer 
 
 ### Amazon-Bestellungen
 
-Amazons E-Mails enthalten meist keine Sendungsnummer. Ein Assistent, der die Amazon-Seite aufrufen kann, auf der du angemeldet bist, wird angewiesen, „Meine Bestellungen“ zu öffnen, dann „Track package“, und den Paketdienst und die „Tracking ID“ zu schicken, nie die Bestellnummer. Er darf dort nur lesen: nie etwas kaufen, stornieren, zurückschicken oder ändern und sich nie für dich anmelden. Sonst such die Nummer selbst: [Unser Amazon-Ratgeber](guide:amazon-orders) zeigt, wo sie steht. Ein Paket, das Amazon selbst zustellt und für das es keine Sendungsnummer gibt, verfolgst du nur in deinem Amazon-Konto.
+Amazons E-Mails enthalten meist keine Sendungsnummer. Der Assistent braucht deshalb den Browser, in dem du bei Amazon angemeldet bist, auf einem Computer: Claude in Chrome oder die Browser-Erweiterung von ChatGPT. Aus seiner Handy-App oder mit einem Browser, den er auf seinen eigenen Servern betreibt, kommt er nicht an deine Bestellungen, und er ist angewiesen, das zu sagen, statt es zu versuchen. Ein Assistent, der die Amazon-Seite aufrufen kann, auf der du angemeldet bist, wird angewiesen, „Meine Bestellungen“ zu öffnen, dann „Track package“, und den Paketdienst und die „Tracking ID“ zu schicken, nie die Bestellnummer. Er darf dort nur lesen: nie etwas kaufen, stornieren, zurückschicken oder ändern und sich nie für dich anmelden. Sonst such die Nummer selbst: [Unser Amazon-Ratgeber](guide:amazon-orders) zeigt, wo sie steht. Ein Paket, das Amazon selbst zustellt und für das es keine Sendungsnummer gibt, verfolgst du nur in deinem Amazon-Konto.
 
 ## Kann der Assistent meine Pakete löschen oder ändern?
 

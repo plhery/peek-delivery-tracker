@@ -4,7 +4,7 @@ description: Onde a Amazon.es mostra a transportadora e o número de seguimento 
 slug: seguimento-encomenda-amazon
 picture: Um telemóvel mostra o progresso de uma encomenda, duas carrinhas passam uma encomenda de uma para a outra e o Pip observa.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Em Portugal compras na Amazon.es, que mostra a transportadora e o número de seguimento de cada encomenda em «Mis pedidos» e depois em «Localiza tu paquete». Copia o número para o [Peek](/) e segues a encomenda ao lado de todas as outras. Funciona da mesma maneira em todos os sites da Amazon.
@@ -48,7 +48,7 @@ Os mesmos botões, na Amazon.es e noutros sites da Amazon:
 
 ## O Claude ou o ChatGPT podem fazê-lo por mim?
 
-Sim, se o assistente puder usar o navegador onde tens sessão iniciada na Amazon: o Claude in Chrome num plano pago do Claude, ou a extensão de navegador do ChatGPT, que configuras a partir da app do ChatGPT para computador.
+Sim, se o assistente puder usar o navegador onde tens sessão iniciada na Amazon: o Claude in Chrome num plano pago do Claude, ou a extensão de navegador do ChatGPT, que configuras a partir da app do ChatGPT para computador. Para isso é preciso um computador: a partir da app no telemóvel, ou com um navegador que corre nos seus próprios servidores, o assistente não chega aos teus pedidos, e os e-mails da Amazon não trazem o número de seguimento.
 
 ### Sem o conector do Peek
 

@@ -4,7 +4,7 @@ description: Liga o Peek ao ChatGPT, Claude ou Gemini e pergunta onde estão as 
 slug: seguir-encomendas-chatgpt-claude-gemini
 picture: O Pip, a encomenda com cara, a espreitar de uma janela de conversa num portátil, onde uma pergunta sobre as encomendas desta semana recebe uma lista curta como resposta.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Podes seguir as tuas encomendas no Claude, no ChatGPT ou no Gemini se os ligares ao [Peek](/), um serviço gratuito de seguimento de encomendas: o assistente pode então dizer-te onde estão as tuas encomendas e adicionar os números de seguimento que lhe deres. Precisas de uma conta Peek, e cada assistente decide quem pode: o Claude em qualquer plano, o ChatGPT num plano Business, Enterprise ou Edu, o Gemini para adultos nos EUA com uma conta Google pessoal, e o OpenClaw para quem o executa. O Peek marca a funcionalidade como «Beta», por isso ainda pode mudar.
@@ -90,7 +90,7 @@ Para adicionar encomendas, dá-lhe um número de seguimento ou a parte do e-mail
 
 ### Encomendas da Amazon
 
-Os e-mails da Amazon normalmente não trazem número de seguimento. Se um assistente conseguir navegar no site da Amazon onde tens sessão iniciada, é-lhe indicado que abra «Os meus pedidos», depois «Track package», e que envie a transportadora e o «Tracking ID», nunca o número do pedido. Aí só pode ler: nunca comprar, cancelar, devolver ou alterar nada, nem iniciar sessão por ti. Caso contrário, procura tu o número: [o nosso guia da Amazon](guide:amazon-orders) mostra onde. Uma encomenda que a própria Amazon entrega, sem ID de seguimento, só se segue na tua conta Amazon.
+Os e-mails da Amazon normalmente não trazem número de seguimento. Por isso o assistente precisa do navegador onde tens sessão iniciada na Amazon, num computador: o Claude in Chrome ou a extensão de navegador do ChatGPT. A partir da app no telemóvel, ou com um navegador que corre nos seus próprios servidores, não chega aos teus pedidos, e é-lhe indicado que to diga em vez de tentar. Se um assistente conseguir navegar no site da Amazon onde tens sessão iniciada, é-lhe indicado que abra «Os meus pedidos», depois «Track package», e que envie a transportadora e o «Tracking ID», nunca o número do pedido. Aí só pode ler: nunca comprar, cancelar, devolver ou alterar nada, nem iniciar sessão por ti. Caso contrário, procura tu o número: [o nosso guia da Amazon](guide:amazon-orders) mostra onde. Uma encomenda que a própria Amazon entrega, sem ID de seguimento, só se segue na tua conta Amazon.
 
 ## O assistente pode apagar ou alterar as minhas encomendas?
 

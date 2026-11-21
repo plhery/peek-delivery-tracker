@@ -4,7 +4,7 @@ description: Conecta Peek a ChatGPT, Claude o Gemini y pregúntale dónde están
 slug: seguimiento-paquetes-chatgpt-claude-gemini
 picture: Pip, el paquete con cara, asomado a la ventana de un chat en un portátil, donde una pregunta sobre los paquetes de esta semana recibe una lista corta como respuesta.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Puedes seguir tus paquetes en Claude, ChatGPT o Gemini si los conectas a [Peek](/), un localizador de paquetes gratuito: el asistente podrá decirte dónde están tus paquetes y añadir los números de seguimiento que le des. Necesitas una cuenta de Peek, y cada asistente decide quién puede: Claude con cualquier plan, ChatGPT con un plan Business, Enterprise o Edu, Gemini para adultos en EE. UU. con una cuenta de Google personal, y OpenClaw para quien lo ejecuta. Peek marca la función como «Beta», así que aún puede cambiar.
@@ -90,7 +90,7 @@ Para añadir paquetes, dale un número de seguimiento o la parte del correo sobr
 
 ### Pedidos de Amazon
 
-Los correos de Amazon no suelen llevar número de seguimiento. Si un asistente puede navegar por la web de Amazon en la que tienes la sesión iniciada, se le indica que abra «Mis pedidos», luego «Track package», y que envíe el transportista y el «Tracking ID», nunca el número de pedido. Ahí solo puede leer: nunca comprar, cancelar, devolver ni cambiar nada, ni iniciar sesión por ti. Si no, busca tú el número: [nuestra guía de Amazon](guide:amazon-orders) te dice dónde. Un paquete que reparte la propia Amazon, sin ID de seguimiento, solo se sigue en tu cuenta de Amazon.
+Los correos de Amazon no suelen llevar número de seguimiento. Por eso el asistente necesita el navegador en el que has iniciado sesión en Amazon, en un ordenador: Claude in Chrome o la extensión de navegador de ChatGPT. Desde su app del móvil, o con un navegador que ejecuta en sus propios servidores, no llega a tus pedidos, y se le indica que te lo diga en vez de intentarlo. Si un asistente puede navegar por la web de Amazon en la que tienes la sesión iniciada, se le indica que abra «Mis pedidos», luego «Track package», y que envíe el transportista y el «Tracking ID», nunca el número de pedido. Ahí solo puede leer: nunca comprar, cancelar, devolver ni cambiar nada, ni iniciar sesión por ti. Si no, busca tú el número: [nuestra guía de Amazon](guide:amazon-orders) te dice dónde. Un paquete que reparte la propia Amazon, sin ID de seguimiento, solo se sigue en tu cuenta de Amazon.
 
 ## ¿Puede el asistente borrar o cambiar mis paquetes?
 

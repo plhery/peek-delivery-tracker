@@ -4,7 +4,7 @@ description: Connect Peek to ChatGPT, Claude or Gemini and ask where your parcel
 slug: track-parcels-chatgpt-claude-gemini
 picture: Pip, the parcel with a face, leaning out of a chat window on a laptop, where a question about this week's parcels gets a short list in reply.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Business, Enterprise or Edu plan, Gemini for adults in the US with a personal Google Account, and OpenClaw for whoever runs it. Peek labels the feature "Beta", so it may still change.
@@ -90,7 +90,7 @@ To add parcels, give it a tracking number or the shipping part of an email: Peek
 
 ### Amazon orders
 
-Amazon's emails usually hold no tracking number. An assistant that can browse the Amazon site you're signed in to is told to open "Your Orders", then "Track package", and send the carrier and "Tracking ID", never the order number. It may only read there: never buy, cancel, return or change anything, or sign in for you. Otherwise, find the number yourself: [our Amazon guide](guide:amazon-orders) shows where. A parcel Amazon delivers itself, with no tracking ID, is tracked only in your Amazon account.
+Amazon's emails usually hold no tracking number. So the assistant needs the browser where you're signed in to Amazon, on a computer: Claude in Chrome, or ChatGPT's browser extension. From its phone app, or with a browser it runs on its own servers, it can't reach your orders, and it's told to say so rather than try. An assistant that can browse the Amazon site you're signed in to is told to open "Your Orders", then "Track package", and send the carrier and "Tracking ID", never the order number. It may only read there: never buy, cancel, return or change anything, or sign in for you. Otherwise, find the number yourself: [our Amazon guide](guide:amazon-orders) shows where. A parcel Amazon delivers itself, with no tracking ID, is tracked only in your Amazon account.
 
 ## Can the assistant delete or change my parcels?
 

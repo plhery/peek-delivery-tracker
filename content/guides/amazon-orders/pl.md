@@ -4,7 +4,7 @@ description: Gdzie Amazon.pl pokazuje przewoźnika i numer śledzenia Twojej pac
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon pokazuje przewoźnika i numer śledzenia każdej paczki w „Moje zamówienia”, a potem w „Śledź przesyłkę”. Skopiuj numer do [Peek](/), a będziesz śledzić paczkę razem ze wszystkimi innymi. Na każdej stronie Amazona działa to tak samo.
@@ -44,7 +44,7 @@ Na innych stronach Amazona te same przyciski nazywają się tak:
 
 ## Czy Claude albo ChatGPT mogą to zrobić za mnie?
 
-Tak, jeśli asystent może korzystać z przeglądarki, w której logujesz się na Amazonie: Claude in Chrome w płatnym planie Claude albo rozszerzenie przeglądarki ChatGPT, które konfigurujesz w aplikacji ChatGPT na komputer.
+Tak, jeśli asystent może korzystać z przeglądarki, w której logujesz się na Amazonie: Claude in Chrome w płatnym planie Claude albo rozszerzenie przeglądarki ChatGPT, które konfigurujesz w aplikacji ChatGPT na komputer. Potrzebny jest do tego komputer: z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, asystent nie dostanie się do Twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
 
 ### Bez konektora Peek
 

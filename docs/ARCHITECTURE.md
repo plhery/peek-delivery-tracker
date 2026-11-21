@@ -498,7 +498,7 @@ Key server modules:
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`,
-    `find_carriers`), `parcels:write` (`add_parcels`, `archive_parcel`) and `parcels:edit`
+    `find_carriers`), `parcels:write` (`add_parcels`, `amazon_import_steps`, `archive_parcel`) and `parcels:edit`
     (`rename_parcel`, `change_carrier`, `set_parcel_notifications`, `restore_parcel`). Editing
     has its own scope because it came after grants had allowed writing: those keep adding and
     archiving, and a call to edit asks the owner for a new consent. It sends the browser nowhere before
@@ -550,14 +550,25 @@ Key server modules:
   - No tool deletes a parcel: deleting for good is too easy for an assistant to get wrong,
     and archive and restore cover what it needs. The owner deletes one in Peek.
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
-    its allowances. Amazon's shipping emails usually hold no tracking number, so the instructions
-    have an assistant that can browse the user's signed-in Amazon site (any: they all work the
-    same way, amazon.de serving as the example) open Your Orders, then
+    its allowances. A text an assistant sends may also be one number alone, as the Add sheet
+    takes a typed one, when its shape fits a carrier; with the carrier's id from
+    `find_carriers` it is taken whatever its shape, as is a number the text labels, since many
+    carriers' numbers have no shape Peek can tell. `find_carriers` gives the other name it
+    found a carrier by, so a shop's name for it can be checked.
+  - Amazon shows a parcel's carrier and tracking ID only in the buyer's signed-in account, and
+    its emails hold no tracking number. So the instructions say first what an import takes: a
+    browser on the user's own computer where they are signed in to Amazon, such as Claude in
+    Chrome or the ChatGPT browser extension. One the assistant runs elsewhere, web search and
+    the user's emails can't, and an assistant without such a browser doesn't try: it tells the
+    user to ask again on a computer, or to copy the tracking IDs themselves. Then the steps,
+    the same on every Amazon site (amazon.de serves as the example): Your Orders, then
     Track package on each package on its way or just delivered (older orders have no such
-    button), and add the carrier named after "Delivery By" with the "Tracking ID", never the
-    order number; it only reads there, never signs in, and says when Amazon tracks a parcel it
-    delivers itself in the account alone. `add_parcels`' description and its no-number answer point to the same page;
-    that answer and an Amazon refusal link Peek's Amazon guide in the language the account last used.
+    button), and add the "Tracking ID", never the order number, naming the carrier after
+    "Delivery By" when Peek can't tell the number's shape. It only reads there, never signs in, and says when Amazon tracks a parcel it
+    delivers itself in the account alone. A client may keep the tools without the
+    instructions, so `amazon_import_steps` answers the same, `add_parcels`' description sends
+    the assistant to it, and `add_parcels`' answer to a text about Amazon that holds no number
+    says what the import takes. That answer and an Amazon refusal link Peek's Amazon guide in the language the account last used.
     The tools' answers leave out the receiver's name and postcode, mask the postcode a
     C Chez Vous reference ends with, and read the scans as a
     link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan

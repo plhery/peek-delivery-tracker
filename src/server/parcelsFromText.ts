@@ -1,7 +1,9 @@
 import 'server-only';
 
 import { isAmazonTrackingNumber } from '../lib/amazon';
-import { carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
+import {
+  carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText,
+} from '../peek/lookup/reading';
 import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
@@ -34,6 +36,14 @@ export type ParcelAddition =
   | { trackingNumber: string; carrier: string; outcome: 'full' }
   | { trackingNumber: string; carrier: string; outcome: 'unavailable' };
 
+/**
+ * How far a text is read beyond an email's, when someone chose to send it, as an assistant does. `alone` takes a
+ * text that is one number and nothing else, as the Add sheet takes a typed one. `named` is for a sender who names
+ * the carrier of its numbers, as a shop's tracking page does: the number the text is, or one it labels, is then
+ * taken whatever its shape, since many carriers' numbers have no shape Peek can tell.
+ */
+export type TextTrust = 'alone' | 'named';
+
 /** A label that ends its line, as an email's plain text prints a table: "Sendungsnummer:" and the number below. */
 const LABEL_ENDING_ITS_LINE = /:[ \t]*(?:\r?\n[ \t]*){1,2}(?=\S)/g;
 
@@ -47,14 +57,17 @@ const LABEL_ENDING_ITS_LINE = /:[ \t]*(?:\r?\n[ \t]*){1,2}(?=\S)/g;
  * `carriers` are those the text's writer is, when it is a carrier's own email: a number whose shape proved no
  * carrier is then theirs (`fromCarrier`), and when no number was read, the one that stands without a label in
  * their shape is taken (`carrierNumberInText`).
+ *
+ * `trust` is for a text someone chose to send, as an assistant does (`TextTrust`).
  */
-export function trackingNumbersInText(text: string, carriers: readonly CarrierId[] = []): NumberInText[] {
+export function trackingNumbersInText(text: string, carriers: readonly CarrierId[] = [], trust?: TextTrust): NumberInText[] {
   const read = text.slice(0, MOST_TEXT_LENGTH);
   const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
   const named = new Set(certain.map(({ normalized }) => normalized));
-  const numbers = [...certain, ...labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': ')).filter(({ normalized }) => !named.has(normalized))];
+  const labelled = labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': '), trust === 'named');
+  const numbers = [...certain, ...labelled.filter(({ normalized }) => !named.has(normalized))];
   if (!numbers.length) {
-    const bare = carrierNumberInText(read, carriers);
+    const bare = carrierNumberInText(read, carriers) ?? (trust ? numberAlone(read, trust === 'named') : null);
     if (bare) numbers.push(bare);
   }
   return numbers.slice(0, MOST_NUMBERS_PER_TEXT).map((number) => fromCarrier(number, carriers));
@@ -93,6 +106,8 @@ export interface AddingOptions {
   addNew?: boolean;
   /** Mail delivery can retry a temporary eligibility lookup without claiming another allowance. */
   retryEligibility?: boolean;
+  /** How far the text is read beyond an email's (trackingNumbersInText). */
+  trust?: TextTrust;
 }
 
 /**
@@ -210,7 +225,7 @@ export async function addParcelsFromText(
 ): Promise<ParcelAddition[]> {
   const demos = reviewDemoNumbersInText(userId, text.slice(0, MOST_TEXT_LENGTH));
   const named = new Set(demos.map(({ normalized }) => normalized));
-  const numbers = [...demos, ...trackingNumbersInText(text, carriers).filter(({ normalized }) => !named.has(normalized))]
+  const numbers = [...demos, ...trackingNumbersInText(text, carriers, options.trust).filter(({ normalized }) => !named.has(normalized))]
     .slice(0, MOST_NUMBERS_PER_TEXT);
   return numbers.length ? addNumbersToAccount(service, userId, numbers, label, options) : [];
 }

@@ -4,7 +4,7 @@ description: Where Amazon shows your parcel's carrier and tracking number, and h
 slug: amazon-order-tracking
 picture: A phone showing an order's progress, two vans passing a parcel between them, and Pip watching.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon shows each parcel's carrier and tracking number under Your Orders, then Track package. Copy the number into [Peek](/) and you follow the parcel next to all your others. It works the same way on every Amazon site.
@@ -44,7 +44,7 @@ On other Amazon sites, the same buttons are called:
 
 ## Can ChatGPT or Claude do it for me?
 
-Yes, if the assistant can use the browser where you're signed in to Amazon: Claude in Chrome on a paid Claude plan, or ChatGPT's browser extension, from the ChatGPT desktop app.
+Yes, if the assistant can use the browser where you're signed in to Amazon: Claude in Chrome on a paid Claude plan, or ChatGPT's browser extension, from the ChatGPT desktop app. That takes a computer: from its phone app, or with a browser it runs on its own servers, the assistant can't reach your orders, and Amazon's emails don't give the tracking number.
 
 ### Without the Peek connector
 

@@ -317,8 +317,12 @@ function numberEnd(prose: string, number: string): number {
  * them. The label stands right before its number, as the parser reads one (`keywordNumberInText`); the number is
  * as long as tracking numbers are and is no shop's order number. The carriers are then asked. Numbers a carrier
  * claims with certainty are `numbersInText`'s.
+ *
+ * `anyShape` takes a labelled number whose shape fits no carrier too, and one shorter than most or a character off
+ * a carrier's length: for a text whose sender names the carrier, as the Add sheet takes any number with a carrier
+ * picked.
  */
-export function labelledNumbersInText(text: string): NumberInText[] {
+export function labelledNumbersInText(text: string, anyShape = false): NumberInText[] {
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
     let prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
@@ -327,18 +331,44 @@ export function labelledNumbersInText(text: string): NumberInText[] {
       if (!number) break;
       prose = prose.slice(numberEnd(prose, number));
       const normalized = normalizeTrackingNumber(number);
-      if (!normalized || found.has(normalized) || nonTrackingShape(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
+      if (!normalized || found.has(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
+      if (anyShape ? neverTracked(normalized) : nonTrackingShape(normalized)) continue;
       const detection = detectCarrierMatch(number, IN_TEXT);
-      if (detection.confidence === 'low') found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
+      if (detection.confidence === 'low' || (anyShape && detection.confidence === 'none')) {
+        found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
+      }
     }
   }
   return [...found.values()];
 }
 
-/** A line that gives a phone number, whose digits can fit a courier's shape. */
-const PHONE_LINE = /(?:^|[^\p{L}])(?:t[eé]l(?:[eé]fono|[eé]phone|efon)?|phone|fax|hotline|mobile|handy|whatsapp)(?![\p{L}])|☎|📞/iu;
+/** Whether a normalized number is one no carrier tracks whoever names it: a shop's order number or a shipping container's. */
+function neverTracked(normalized: string): boolean {
+  const shape = nonTrackingShape(normalized);
+  return shape?.kind === 'order' || shape?.kind === 'container';
+}
+
 /** A date as a carrier prints one: "14.11.2026", "2026-11-14". */
 const PRINTED_DATE = /^(?:\d{1,2}([./-])\d{1,2}\1\d{2,4}|\d{4}([./-])\d{1,2}\2\d{1,2})$/;
+
+/**
+ * The number a text is, when it is one tracking number and nothing else, as the Add sheet takes a number typed on its
+ * own: one word, or groups that each hold a digit ("1234 5678 9012"), so no sentence; no link, no date, no shop's
+ * order number and no shipping container's. Its shape fits a carrier and is as long as tracking numbers are, unless
+ * `anyShape`: a text whose sender names the carrier is taken whatever its shape.
+ */
+export function numberAlone(text: string, anyShape = false): NumberInText | null {
+  const whole = text.trim();
+  if (!whole || whole.includes('://') || whole.split(/\s+/).some((group) => !/\d/.test(group))) return null;
+  if (PRINTED_DATE.test(whole) || orderShop(whole) || !validTrackingNumber(whole)) return null;
+  const normalized = normalizeTrackingNumber(whole);
+  if (!normalized || (anyShape ? neverTracked(normalized) : nonTrackingShape(normalized))) return null;
+  const detection = detectCarrierMatch(whole);
+  return anyShape || detection.confidence !== 'none' ? { normalized, match: { trackingNumber: whole, source: 'number', ...detection } } : null;
+}
+
+/** A line that gives a phone number, whose digits can fit a courier's shape. */
+const PHONE_LINE = /(?:^|[^\p{L}])(?:t[eé]l(?:[eé]fono|[eé]phone|efon)?|phone|fax|hotline|mobile|handy|whatsapp)(?![\p{L}])|☎|📞/iu;
 
 /**
  * The one number of a carrier's own email that stands without a label: "Votre colis\n01234567890123". An email

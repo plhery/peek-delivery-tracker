@@ -4,7 +4,7 @@ description: Połącz Peek z ChatGPT, Claude lub Gemini i pytaj, gdzie są Twoje
 slug: sledzenie-przesylek-chatgpt-claude-gemini
 picture: Pip, paczka z buzią, wychyla się z okna czatu na laptopie, a na pytanie o przesyłki z tego tygodnia przychodzi tam krótka lista.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może Ci wtedy powiedzieć, gdzie są Twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Business, Enterprise lub Edu, w przypadku Gemini dorośli w USA z osobistym kontem Google, a w przypadku OpenClaw ten, kto go uruchamia. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
@@ -90,7 +90,7 @@ Potrafi też wskazać przesyłki, które wymagają Twojej uwagi, na przykład ta
 
 ### Zamówienia z Amazona
 
-E-maile od Amazona zwykle nie zawierają numeru śledzenia. Jeśli asystent może przeglądać stronę Amazona, na której masz otwartą sesję, dostaje polecenie, żeby otworzyć „Twoje zamówienia”, potem „Track package”, i przekazać przewoźnika oraz „Tracking ID”, nigdy numer zamówienia. Może tam tylko czytać: nie wolno mu niczego kupować, anulować, zwracać ani zmieniać, ani logować się za Ciebie. W przeciwnym razie znajdź numer samodzielnie: [nasz poradnik o Amazonie](guide:amazon-orders) pokazuje, gdzie. Przesyłkę, którą Amazon doręcza sam i bez identyfikatora śledzenia, śledzisz tylko na swoim koncie Amazon.
+E-maile od Amazona zwykle nie zawierają numeru śledzenia. Asystent potrzebuje więc przeglądarki, w której masz otwartą sesję na Amazonie, na komputerze: Claude in Chrome albo rozszerzenia przeglądarki ChatGPT. Z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, nie dostanie się do Twoich zamówień i ma polecenie, żeby to powiedzieć, zamiast próbować. Jeśli asystent może przeglądać stronę Amazona, na której masz otwartą sesję, dostaje polecenie, żeby otworzyć „Twoje zamówienia”, potem „Track package”, i przekazać przewoźnika oraz „Tracking ID”, nigdy numer zamówienia. Może tam tylko czytać: nie wolno mu niczego kupować, anulować, zwracać ani zmieniać, ani logować się za Ciebie. W przeciwnym razie znajdź numer samodzielnie: [nasz poradnik o Amazonie](guide:amazon-orders) pokazuje, gdzie. Przesyłkę, którą Amazon doręcza sam i bez identyfikatora śledzenia, śledzisz tylko na swoim koncie Amazon.
 
 ## Czy asystent może usunąć lub zmienić moje przesyłki?
 

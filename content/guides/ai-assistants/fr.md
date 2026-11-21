@@ -4,7 +4,7 @@ description: Connecte Peek à ChatGPT, Claude ou Gemini pour savoir où sont tes
 slug: suivre-colis-chatgpt-claude-gemini
 picture: Pip, le colis avec un visage, se penche hors d'une fenêtre de discussion sur un ordinateur portable, où une question sur les colis de la semaine reçoit une courte liste en réponse.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Tu peux suivre tes colis dans Claude, ChatGPT ou Gemini en les connectant à [Peek](/), un suivi de colis gratuit : l'assistant peut alors te dire où sont tes colis et ajouter les numéros de suivi que tu lui donnes. Il te faut un compte Peek, et chaque assistant décide qui y a droit : Claude avec n'importe quelle offre, ChatGPT avec une offre Business, Enterprise ou Edu, Gemini pour les adultes aux États-Unis avec un compte Google personnel, et OpenClaw pour qui le fait tourner. Peek marque la fonction « Bêta » : elle peut donc encore changer.
@@ -90,7 +90,7 @@ Pour ajouter des colis, donne-lui un numéro de suivi ou la partie d'un e-mail q
 
 ### Commandes Amazon
 
-Les e-mails d'Amazon ne contiennent en général aucun numéro de suivi. Un assistant capable de naviguer sur le site Amazon où tu es connecté reçoit la consigne d'ouvrir « Vos commandes », puis « Track package », et d'envoyer le transporteur et le « Tracking ID », jamais le numéro de commande. Sur Amazon, il ne peut que lire : jamais acheter, annuler, retourner ou modifier quoi que ce soit, ni se connecter à ta place. Sinon, trouve le numéro toi-même : [notre guide Amazon](guide:amazon-orders) montre où. Un colis qu'Amazon livre lui-même, sans numéro de suivi, ne se suit que dans ton compte Amazon.
+Les e-mails d'Amazon ne contiennent en général aucun numéro de suivi. L'assistant a donc besoin du navigateur où tu es connecté à Amazon, sur un ordinateur : Claude in Chrome, ou l'extension de navigateur de ChatGPT. Depuis son application sur téléphone, ou avec un navigateur qu'il fait tourner sur ses propres serveurs, il n'a pas accès à tes commandes, et il a pour consigne de le dire plutôt que d'essayer. Un assistant capable de naviguer sur le site Amazon où tu es connecté reçoit la consigne d'ouvrir « Vos commandes », puis « Track package », et d'envoyer le transporteur et le « Tracking ID », jamais le numéro de commande. Sur Amazon, il ne peut que lire : jamais acheter, annuler, retourner ou modifier quoi que ce soit, ni se connecter à ta place. Sinon, trouve le numéro toi-même : [notre guide Amazon](guide:amazon-orders) montre où. Un colis qu'Amazon livre lui-même, sans numéro de suivi, ne se suit que dans ton compte Amazon.
 
 ## L'assistant peut-il supprimer ou modifier mes colis ?
 

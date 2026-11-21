@@ -4,7 +4,7 @@ description: Collega Peek a ChatGPT, Claude o Gemini e chiedigli dove sono i tuo
 slug: tracciare-pacchi-chatgpt-claude-gemini
 picture: Pip, il pacco con la faccia, si sporge da una finestra di chat su un portatile, dove a una domanda sui pacchi di questa settimana risponde una breve lista.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Puoi tracciare i tuoi pacchi in Claude, ChatGPT o Gemini collegandoli a [Peek](/), un tracker di pacchi gratuito: l'assistente può poi dirti dove sono i tuoi pacchi e aggiungere i codici tracking che gli dai. Ti serve un account Peek, e ogni assistente decide chi può farlo: Claude con qualsiasi piano, ChatGPT con un piano Business, Enterprise o Edu, Gemini per i maggiorenni negli Stati Uniti con un account Google personale, e OpenClaw per chi lo fa girare. Peek indica la funzione come «Beta», quindi potrebbe ancora cambiare.
@@ -90,7 +90,7 @@ Per aggiungere pacchi, dagli un codice tracking o la parte dell'e-mail sulla spe
 
 ### Ordini Amazon
 
-Le e-mail di Amazon di solito non contengono un codice tracking. Un assistente che può navigare sul sito Amazon dove hai effettuato l'accesso riceve l'istruzione di aprire «I miei ordini», poi «Track package», e di inviare il corriere e il «Tracking ID», mai il numero d'ordine. Lì può solo leggere: mai comprare, annullare, restituire o modificare nulla, né accedere al posto tuo. Altrimenti trova il numero da te: [la nostra guida Amazon](guide:amazon-orders) ti mostra dove. Un pacco che Amazon consegna da sé, senza codice tracking, si segue solo nel tuo account Amazon.
+Le e-mail di Amazon di solito non contengono un codice tracking. Per questo l'assistente ha bisogno del browser in cui hai effettuato l'accesso ad Amazon, su un computer: Claude in Chrome o l'estensione per browser di ChatGPT. Dalla sua app sul telefono, o con un browser che fa girare sui propri server, non arriva ai tuoi ordini, e ha l'istruzione di dirtelo invece di provarci. Un assistente che può navigare sul sito Amazon dove hai effettuato l'accesso riceve l'istruzione di aprire «I miei ordini», poi «Track package», e di inviare il corriere e il «Tracking ID», mai il numero d'ordine. Lì può solo leggere: mai comprare, annullare, restituire o modificare nulla, né accedere al posto tuo. Altrimenti trova il numero da te: [la nostra guida Amazon](guide:amazon-orders) ti mostra dove. Un pacco che Amazon consegna da sé, senza codice tracking, si segue solo nel tuo account Amazon.
 
 ## L'assistente può eliminare o modificare i miei pacchi?
 

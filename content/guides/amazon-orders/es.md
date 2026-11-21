@@ -4,7 +4,7 @@ description: Dónde muestra Amazon el transportista y el número de seguimiento 
 slug: seguimiento-pedido-amazon
 picture: Un móvil muestra el avance de un pedido, dos furgonetas se pasan un paquete y Pip lo observa.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon muestra el transportista y el número de seguimiento de cada paquete en Mis pedidos, y luego en Localiza tu paquete. Copia el número en [Peek](/) y sigues el paquete junto a todos los demás. Funciona igual en todas las webs de Amazon.
@@ -44,7 +44,7 @@ En otras webs de Amazon, los mismos botones se llaman así:
 
 ## ¿Pueden Claude o ChatGPT hacerlo por mí?
 
-Sí, si el asistente puede usar el navegador en el que has iniciado sesión en Amazon: Claude in Chrome con un plan de pago de Claude, o la extensión de navegador de ChatGPT, que configuras desde la app de escritorio de ChatGPT.
+Sí, si el asistente puede usar el navegador en el que has iniciado sesión en Amazon: Claude in Chrome con un plan de pago de Claude, o la extensión de navegador de ChatGPT, que configuras desde la app de escritorio de ChatGPT. Para eso hace falta un ordenador: desde su app del móvil, o con un navegador que ejecuta en sus propios servidores, el asistente no llega a tus pedidos, y los correos de Amazon no traen el número de seguimiento.
 
 ### Sin el conector de Peek
 

@@ -4,7 +4,7 @@ description: Dove Amazon mostra il corriere e il numero di tracciamento del tuo 
 slug: tracciamento-ordine-amazon
 picture: Un telefono mostra l'avanzamento di un ordine, due furgoni si passano un pacco e Pip guarda.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon mostra il corriere e il numero di tracciamento di ogni pacco in I miei ordini, poi Traccia il mio pacco. Copia il numero in [Peek](/) e segui il pacco insieme a tutti gli altri. Funziona allo stesso modo su ogni sito Amazon.
@@ -44,7 +44,7 @@ Sugli altri siti Amazon, gli stessi pulsanti si chiamano così:
 
 ## Claude o ChatGPT possono farlo al posto mio?
 
-Sì, se l'assistente può usare il browser in cui hai effettuato l'accesso ad Amazon: Claude in Chrome con un piano Claude a pagamento, o l'estensione per browser di ChatGPT, che configuri dall'app ChatGPT per desktop.
+Sì, se l'assistente può usare il browser in cui hai effettuato l'accesso ad Amazon: Claude in Chrome con un piano Claude a pagamento, o l'estensione per browser di ChatGPT, che configuri dall'app ChatGPT per desktop. Serve quindi un computer: dalla sua app sul telefono, o con un browser che fa girare sui propri server, l'assistente non arriva ai tuoi ordini, e le e-mail di Amazon non riportano il numero di tracciamento.
 
 ### Senza il connettore Peek
 

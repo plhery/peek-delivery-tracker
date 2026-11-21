@@ -4,7 +4,7 @@ description: Où Amazon affiche le transporteur et le numéro de suivi de ton co
 slug: suivi-commande-amazon
 picture: Un téléphone affiche l'avancée d'une commande, deux camionnettes se passent un colis, et Pip regarde.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon affiche le transporteur et le numéro de suivi de chaque colis dans Vos commandes, puis Suivre le colis. Copie le numéro dans [Peek](/), et tu suis ce colis avec tous les autres. Ça marche pareil sur tous les sites Amazon.
@@ -44,7 +44,7 @@ Sur les autres sites Amazon, les mêmes boutons s'appellent :
 
 ## Claude ou ChatGPT peuvent-ils le faire pour moi ?
 
-Oui, si l'assistant peut se servir du navigateur où tu es connecté à Amazon : Claude in Chrome avec une offre Claude payante, ou l'extension de navigateur de ChatGPT, que tu installes depuis l'application ChatGPT pour ordinateur.
+Oui, si l'assistant peut se servir du navigateur où tu es connecté à Amazon : Claude in Chrome avec une offre Claude payante, ou l'extension de navigateur de ChatGPT, que tu installes depuis l'application ChatGPT pour ordinateur. Il faut donc un ordinateur : depuis son application sur téléphone, ou avec un navigateur qu'il fait tourner sur ses propres serveurs, l'assistant n'a pas accès à tes commandes, et les e-mails d'Amazon ne donnent pas le numéro de suivi.
 
 ### Sans le connecteur Peek
 

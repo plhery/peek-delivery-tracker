@@ -274,14 +274,26 @@ describe('the MCP endpoint', () => {
     // The instructions send the model to Peek's own tools alone, never to another connector.
     expect(initialized.instructions).toContain('add_parcels');
     expect(initialized.instructions).not.toMatch(/gmail|connector|plugin/i);
+    // An Amazon import takes a browser on the user's own computer, signed in to Amazon: nothing else reaches the page,
+    // and an assistant without one says so instead of trying a browser of its own or the user's emails.
+    expect(initialized.instructions).toContain('only inside the user\'s Amazon account, under Your Orders, then Track package');
+    expect(initialized.instructions).toContain('don\'t search the user\'s emails for Amazon orders');
+    expect(initialized.instructions).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon: Claude in Chrome, the ChatGPT browser extension');
+    expect(initialized.instructions).toContain('A browser that runs elsewhere (a cloud, agent or sandbox browser), web search and page fetching can\'t');
+    expect(initialized.instructions).toContain('Without such a browser, as in a phone app, don\'t start. Tell the user, in their language, that you can\'t reach their Amazon account from here');
+    expect(initialized.instructions).toContain('paste each tracking ID to you or into Peek');
     // An assistant that browses the user's Amazon site reads each shipment's carrier and tracking ID, and changes nothing.
-    expect(initialized.instructions).toContain('the Amazon site they use, where they are signed in (amazon.fr, .de, .it, .es, .co.uk, .nl, .com and so on: every Amazon site works the same way)');
-    expect(initialized.instructions).toContain('open Your Orders there, at /gp/css/order-history (on amazon.de, for example,');
+    expect(initialized.instructions).toContain('the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, .nl, .com and so on: every Amazon site works the same way)');
+    expect(initialized.instructions).toContain('at /gp/css/order-history (on amazon.de, for example,');
+    expect(initialized.instructions).toContain('If Amazon asks to sign in, stop and ask the user to sign in there themselves');
+    // Amazon names the carrier by a name or a code: the assistant gives its id when Peek can't tell the number's shape.
+    expect(initialized.instructions).toContain('look the carrier up with find_carriers, by the name Amazon writes, which may be a code such as VIR_TR');
     expect(initialized.instructions).toContain('Each package on its way or just delivered has its own Track package button');
     expect(initialized.instructions).toContain('That page names the carrier after "Delivery By" and shows the "Tracking ID", with labels in the site\'s language');
     expect(initialized.instructions).toMatch(/order number .* is never one: never send it/);
     expect(initialized.instructions).toContain('tell the user Amazon tracks that one only in their Amazon account');
-    expect(initialized.instructions).toContain('On Amazon, only read: never buy, cancel, return or change anything, and never sign in for the user');
+    expect(initialized.instructions).toContain('On Amazon, only read: never buy, cancel, return or change anything');
+    expect(initialized.instructions).toContain('never sign in for the user or ask for their Amazon password');
     const listed = async (secret: string, era?: 'legacy' | 'modern') => {
       const response = await mcp(secret, 'tools/list', {}, era);
       expect(response.status).toBe(200);
@@ -293,6 +305,7 @@ describe('the MCP endpoint', () => {
     const read = [{ type: 'oauth2', scopes: ['parcels:read'] }];
     const schemes = {
       add_parcels: write,
+      amazon_import_steps: write,
       rename_parcel: edit,
       change_carrier: edit,
       set_parcel_notifications: edit,
@@ -313,14 +326,14 @@ describe('the MCP endpoint', () => {
       name: string; annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean };
     }>;
     expect(tools.map(({ name }) => name).sort()).toEqual([
-      'add_parcels', 'archive_parcel', 'change_carrier', 'find_carriers', 'get_parcel', 'list_parcels', 'rename_parcel',
-      'restore_parcel', 'set_parcel_notifications',
+      'add_parcels', 'amazon_import_steps', 'archive_parcel', 'change_carrier', 'find_carriers', 'get_parcel', 'list_parcels',
+      'rename_parcel', 'restore_parcel', 'set_parcel_notifications',
     ]);
     // A new name or carrier replaces the old one; nothing else is lost, and every call may be repeated.
     expect(tools.filter(({ annotations }) => annotations?.destructiveHint !== false).map(({ name }) => name).sort())
       .toEqual(['change_carrier', 'rename_parcel']);
     expect(tools.filter(({ annotations }) => annotations?.readOnlyHint).map(({ name }) => name).sort())
-      .toEqual(['find_carriers', 'get_parcel', 'list_parcels']);
+      .toEqual(['amazon_import_steps', 'find_carriers', 'get_parcel', 'list_parcels']);
     for (const { annotations } of tools) expect(annotations?.idempotentHint).toBe(true);
     expect(Object.keys(tokenApi).filter((name) => /^[A-Z]+$/.test(name))).toEqual(['GET']);
   });
@@ -583,7 +596,8 @@ describe('the MCP endpoint', () => {
     ]);
     const writer = connect(['parcels:write']);
     const answer = await call(writer, 'add_parcels', { text: `Shipped with UPS: ${UPS}`, name: '  Example Shop ' });
-    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop');
+    // A text an assistant sends may be a number alone, as the Add sheet takes a typed one.
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop', [], { trust: 'alone' });
     expect(answer.result!.structuredContent).toEqual({
       parcels: [
         { trackingNumber: UPS, carrier: 'UPS', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000aa' },
@@ -598,15 +612,85 @@ describe('the MCP endpoint', () => {
   it('tells the assistant where an Amazon order\'s tracking number is, and never to send its order number', async () => {
     const writer = connect(['parcels:write']);
     const tools = (await rpc(await mcp(writer, 'tools/list'))).result!.tools! as Array<{ name: string; description: string }>;
+    // For a client that keeps the tools but not the instructions: what the import takes, and the tool that says the rest.
     const description = tools.find(({ name }) => name === 'add_parcels')!.description;
-    expect(description).toContain('Never send an Amazon order number');
+    expect(description).toContain('Never send an Amazon order number, and don\'t search the user\'s emails for Amazon orders');
     expect(description).toContain('Your Orders, then Track package');
+    expect(description).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon');
+    expect(description).toContain('Call amazon_import_steps before you try');
     vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
     const none = await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' });
     expect(none.result!.structuredContent).toEqual({ parcels: [] });
-    expect(none.result!.content![0]!.text).toContain('Amazon account: Your Orders, then Track package');
-    expect(none.result!.content![0]!.text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+    const text = none.result!.content![0]!.text;
+    expect(text).toContain('Amazon account: Your Orders, then Track package');
+    expect(text).toContain('find its id with find_carriers and send the tracking number again, alone, with that id as the carrier');
+    expect(text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+    expect(text).not.toContain('Claude in Chrome');
+  });
+
+  it('answers a text about an Amazon order that holds no number with what the import takes', async () => {
+    vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
+    vi.mocked(addParcelsFromText).mockResolvedValue([]);
+    const writer = connect(['parcels:write']);
+    // An Amazon email, or its order number, in the shape Amazon's help gives: made-up digits.
+    for (const text of ['Your Amazon.fr order has shipped and is running late.', 'Order 123-1234567-1234567']) {
+      const answer = (await call(writer, 'add_parcels', { text })).result!;
+      expect(answer.structuredContent).toEqual({ parcels: [] });
+      const told = answer.content![0]!.text;
+      expect(told, text).toContain('Amazon\'s emails hold no tracking number');
+      expect(told, text).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon');
+      expect(told, text).toContain('Without such a browser, as in a phone app, don\'t start');
+      expect(told, text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+    }
+  });
+
+  it('says what an Amazon import takes and its steps before the assistant tries, and changes nothing', async () => {
+    vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: 'fr' });
+    const french = `https://peektracker.com${guideHref('fr', 'amazon-orders')}`;
+    const writer = connect(['parcels:write']);
+    const tools = (await rpc(await mcp(writer, 'tools/list'))).result!.tools! as Array<{ name: string; description: string }>;
+    expect(tools.find(({ name }) => name === 'amazon_import_steps')!.description)
+      .toContain('Call it first whenever the user asks you to import, add or follow their Amazon orders, before you browse, search their emails or call add_parcels');
+    const answer = (await call(writer, 'amazon_import_steps', {})).result!;
+    const steps = answer.content![0]!.text;
+    expect(answer.structuredContent).toEqual({ guide: french, steps });
+    // What it takes comes first, then what to tell the user without it, then the steps.
+    const order = [
+      'only inside the user\'s Amazon account',
+      'only in a browser on the user\'s own computer where they are signed in to Amazon',
+      'Without such a browser, as in a phone app, don\'t start',
+      `Peek's guide shows where, with pictures: ${french}`,
+      'With one, open Your Orders',
+      'On Amazon, only read',
+    ].map((words) => steps.indexOf(words));
+    expect(order.every((index) => index >= 0)).toBe(true);
+    expect(order).toEqual([...order].sort((first, second) => first - second));
+    expect(addParcelsFromText).not.toHaveBeenCalled();
+    // Importing is adding: a grant that may only see parcels is asked to sign in again before it starts.
+    expect((await call(connect(['parcels:read']), 'amazon_import_steps', {})).result).toMatchObject({ isError: true });
+  });
+
+  it('follows a number whose shape Peek can\'t tell with the carrier the assistant names by its id', async () => {
+    vi.mocked(addParcelsFromText).mockResolvedValue([
+      { trackingNumber: 'SYNTHETIC7', carrier: 'jp-home', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000ab', jobId: null },
+    ]);
+    const writer = connect(['parcels:write']);
+    const answer = await call(writer, 'add_parcels', { text: 'SYNTHETIC7', name: 'Sofa', carrier: 'jp-home' });
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', 'Sofa', ['jp-home'], { trust: 'named' });
+    expect(answer.result!.structuredContent).toEqual({
+      parcels: [{ trackingNumber: 'SYNTHETIC7', carrier: 'JP HOME', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000ab' }],
+    });
+    // A name is no id: find_carriers gives it, with the other name it found the carrier by.
+    expect((await call(writer, 'add_parcels', { text: 'SYNTHETIC7', carrier: 'VIR_TR' })).result)
+      .toMatchObject({ isError: true, content: [{ text: expect.stringContaining('find_carriers') }] });
+    expect(addParcelsFromText).toHaveBeenCalledTimes(1);
+    const found = (await call(connect(['parcels:read']), 'find_carriers', { search: 'VIR_TR' })).result!.structuredContent;
+    expect(found).toMatchObject({ total: 1, carriers: [{ id: 'jp-home', name: 'JP HOME', alsoCalled: 'VIR Transport' }] });
+    // With a carrier named, the answer no longer asks for one.
+    vi.mocked(addParcelsFromText).mockResolvedValue([]);
+    vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
+    expect((await call(writer, 'add_parcels', { text: 'no number here', carrier: 'jp-home' })).result!.content![0]!.text).not.toContain('find its id');
   });
 
   it('links the Amazon guide in the language the account last used, read once a request', async () => {

@@ -4,7 +4,7 @@ description: Wo Amazon Paketdienst und Sendungsnummer deines Pakets zeigt und wi
 slug: amazon-sendungsverfolgung
 picture: Ein Handy zeigt den Fortschritt einer Bestellung, zwei Lieferwagen reichen sich ein Paket weiter, und Pip schaut zu.
 published: 2026-10-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Amazon zeigt Paketdienst und Sendungsnummer jedes Pakets unter „Meine Bestellungen“, dann „Sendung verfolgen“. Kopier die Nummer in [Peek](/), und du verfolgst das Paket neben all deinen anderen. Das geht auf jeder Amazon-Seite gleich.
@@ -44,7 +44,7 @@ Auf anderen Amazon-Seiten heißen dieselben Buttons so:
 
 ## Können Claude oder ChatGPT das für mich erledigen?
 
-Ja, wenn der Assistent den Browser nutzen kann, in dem du bei Amazon angemeldet bist: Claude in Chrome mit einem bezahlten Claude-Tarif oder die Browser-Erweiterung von ChatGPT, die du über die ChatGPT-Desktop-App einrichtest.
+Ja, wenn der Assistent den Browser nutzen kann, in dem du bei Amazon angemeldet bist: Claude in Chrome mit einem bezahlten Claude-Tarif oder die Browser-Erweiterung von ChatGPT, die du über die ChatGPT-Desktop-App einrichtest. Dafür brauchst du einen Computer: Aus seiner Handy-App oder mit einem Browser, den er auf seinen eigenen Servern betreibt, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
 
 ### Ohne den Peek-Konnektor
 

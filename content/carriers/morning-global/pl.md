@@ -21,7 +21,7 @@ Małe litery, spacje i myślniki są w Peek ignorowane. Wyszukiwarka Morning Glo
 
 **Gdzie go znaleźć.** W wiadomości e-mail o wysyłce ze sklepu lub na karcie zamówienia ([jak znaleźć numer śledzenia](guide:find-tracking-number) oraz [śledzenie paczek z Chin](guide:tracking-from-china)).
 
-**Inny układ numeru.** Po ręcznym wybraniu Morning Global Peek odpytuje jego wyszukiwarkę dla dowolnego ciągu od 8 do 40 liter i cyfr (poza tym zakresem informuje, że przewoźnik „nie wydaje takich numerów”).
+**Inny układ numeru.** Po ręcznym wybraniu Morning Global Peek odpytuje jego wyszukiwarkę dla dowolnego ciągu od 8 do 40 znaków łączącego litery i cyfry (przy innym numerze informuje, że przewoźnik „nie wydaje takich numerów”).
 
 **Dwie usługi.** Morning Global oferuje *MG International Express (MGIE)* — własny serwis ekspresowy drzwi–drzwi — oraz tańszy *MG International Postal (MGIP)* realizowany przez węzły pocztowe na świecie. Razem obejmują ponad 220 kierunków dla paczek do 30 kg.
 
@@ -45,7 +45,7 @@ Wyszukiwarka Morning Global pokazuje historię w sekcji `Shipment Journey`: każ
 | `Out for Delivery` | Dziś w trasie doręczeniowej. | „W doręczeniu” |
 | `Delivered` | Doręczona. | „Dostarczona” |
 
-Gdy opis wnosi więcej niż sam status, Peek pokazuje `status: opis`, usuwając nazwisko osoby kwitującej odbiór oraz numery telefonów. Komunikaty spoza listy są klasyfikowane według ogólnych reguł Peek lub wyświetlane bez własnego etapu.
+Gdy opis wnosi więcej niż sam status, Peek pokazuje `status: opis`, usuwając numery telefonów. Komunikaty spoza listy są klasyfikowane według ogólnych reguł Peek lub wyświetlane bez własnego etapu.
 
 **Brak przesyłki.** Dla nieznanego numeru wyszukiwarka Morning Global odpowiada `No shipment record was found for this tracking number.`
 
@@ -55,7 +55,7 @@ Wraz ze statusem `Handed Over for Delivery` Morning Global przekazuje przesyłk�
 
 **Własne oddziały.** Wśród własnych lokalizacji Morning Global wymienia Wielką Brytanię i USA, z centralami regionalnymi w Londynie (Wielka Brytania i Europa), Los Angeles (Ameryki) i Kantonie w Chinach kontynentalnych oraz oddziałem w Amsterdamie; Kanada widnieje wśród kluczowych rynków obok USA, a Australia w sieci partnerskiej. Morning Global nie publikuje własnych zasad prób doręczenia ani odbioru w punktach: obowiązują reguły firmy końcowej ([nieudane doręczenie](guide:missed-delivery), [nieodebrana paczka](guide:uncollected-parcel)).
 
-**Odprawa celna w Polsce i Unii Europejskiej.** W **Polsce** (całe terytorium kraju należy do obszaru celnego i obszaru VAT UE) zakupy internetowe spoza UE o wartości do 150 € objęte są od 1 lipca 2026 r. tymczasowym cłem 3 € za pozycję towarową (towary o wspólnej klasyfikacji taryfowej, opisie i — gdy wymagane — pochodzeniu; powyżej 150 € obowiązuje zwykła taryfa celna), a od 1 listopada 2026 r. także unijną opłatą manipulacyjną 2 € za pozycję niezależnie od wartości, plus VAT importowy — chyba że VAT pobrano już przy zamówieniu w procedurze IOSS. 22 października 2026 r. Morning Global poinformowało sklepy nadające, że od 1 listopada 2026 r. nalicza opłatę `EUR 2 Customs Handling Fee` od każdej pozycji zgłoszenia celnego dla przesyłek B2C do UE (zarówno w modelu IOSS, jak i DAP, również powyżej 150 €) powiększoną o ewentualny VAT od opłaty zależnie od kraju docelowego; komunikat nie rozstrzyga, czy sklepy przerzucają ją na kupującego ([paczka zatrzymana przez urząd celny](guide:customs)).
+**Odprawa celna w Polsce i Unii Europejskiej.** W **Polsce** (całe terytorium kraju należy do obszaru celnego i obszaru VAT UE) zakupy internetowe spoza UE o wartości do 150 € objęte są od 1 lipca 2026 r. tymczasowym cłem 3 € za pozycję towarową (towary o wspólnej klasyfikacji taryfowej, opisie i — gdy wymagane — pochodzeniu; powyżej 150 € obowiązuje zwykła taryfa celna), a od 1 listopada 2026 r. także unijną opłatą manipulacyjną 2 € za pozycję niezależnie od wartości, plus VAT importowy — chyba że VAT pobrano już przy zamówieniu w procedurze IOSS. 22 października 2026 r. Morning Global poinformowało sklepy nadające, że od 1 listopada 2026 r. naliczana jest opłata `EUR 2 Customs Handling Fee` od każdej pozycji zgłoszenia celnego dla przesyłek B2C do UE (zarówno w modelu IOSS, jak i DAP, również powyżej 150 €) powiększoną o ewentualny VAT od opłaty zależnie od kraju docelowego; komunikat nie rozstrzyga, czy sklepy przerzucają ją na kupującego ([paczka zatrzymana przez urząd celny](guide:customs)).
 
 **Dokumenty celne i komunikaty o opóźnieniach.** Gdy urząd celny poprosi o kopię dokumentu lub fakturę, na stronie Morning Global dostępny jest formularz [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) wymagający numeru śledzenia: korzystaj z niego wyłącznie w domenie `morninglobal.com` ([fałszywe SMS-y o paczkach](guide:delivery-scam-texts)). Utrudnienia publikowane są na podstronie *News* (np. komunikat z 30 października 2026 r. o 2–3 dniach roboczych opóźnienia paczek MGIP w Australii wskutek akcji strajkowej).
 
@@ -73,8 +73,8 @@ Klientami Morning Global są sklepy zlecające wysyłkę — w razie opóźnieni
 
 W sprawach przesyłek na [stronie kontaktowej Morning Global](https://www.morninglobal.com/contact/) (podaj numer śledzenia; godzin pracy nie opublikowano):
 
-- **Wielka Brytania i Europa** (centrala regionalna w Londynie): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
-- **USA / Ameryki** (centrala regionalna w Los Angeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
+- **Wielka Brytania** (centrala regionalna w Londynie): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
+- **USA** (centrala regionalna w Los Angeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
 - **Hongkong i Makau** (centrala światowa w Hongkongu): `cs.mghk@morninglobal.com`, `+852 3669 6360`.
 - **Chiny kontynentalne** (centrala regionalna w Kantonie): `cs.mgchina@morninglobal.com`, `+86 4008 268 216`.
 - **Pozostałe zespoły regionalne**: Włochy (`cs.mgit@morninglobal.com`), Indie, Filipiny i Singapur mają własne skrzynki na tej samej stronie.
@@ -84,9 +84,9 @@ W sprawach przesyłek na [stronie kontaktowej Morning Global](https://www.mornin
 
 ## Śledzenie przesyłki Morning Global w Peek
 
-Sam kształt `BR…MG` nie wystarcza, by [Peek](/) od razu wskazał Morning Global, ale aplikacja śledzi ponad 3 500 przewoźników: wklej numer, zobaczysz „Sprawdzanie usług śledzenia…” i „Morning Global ma tę przesyłkę.”, gdy wyszukiwarka Morning Global ją rozpozna. Link z `morninglobal.com` zawierający `tracking_number=` lub `ydh=` od razu zapisuje paczkę pod Morning Global („Wykryty przewoźnik”). W przeciwnym razie stuknij „Zmień” i wybierz Morning Global w sekcji „Pasują do numeru” lub „Wszyscy przewoźnicy” (albo „Zmień przewoźnika” przy dodanej paczce).
+Sam kształt `BR…MG` nie wystarcza, by [Peek](/) od razu wskazał Morning Global, ale aplikacja śledzi ponad 3 500 przewoźników: wklej numer, zobaczysz „Sprawdzanie usług śledzenia…” i „Morning Global ma tę przesyłkę.”, gdy wyszukiwarka Morning Global ją rozpozna. Link z `www.morninglobal.com` zawierający `tracking_number=` lub `ydh=` od razu zapisuje paczkę pod Morning Global („Wykryty przewoźnik”). W przeciwnym razie stuknij „Zmień” i wybierz Morning Global w sekcji „Pasują do numeru” lub „Wszyscy przewoźnicy” (albo „Zmień przewoźnika” przy dodanej paczce).
 
-Peek odczytuje wyszukiwarkę Morning Global bez kodu pocztowego: pokazuje status, każdy krok z miejscem, kraj docelowy i czas doręczenia, odczytuje godzinę według przesunięcia UTC przy kodzie kraju (a bez niego według zegara miejsca, sąsiedniego wpisu, Twojego kraju lub Hongkongu) i przelicza wszystko na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Pomija miejsce nadania, `Estimated Delivery`, wagę, liczbę sztuk, `Reference` oraz `Signed By` (nie wyświetla prognozowanej daty dostawy) i śledzi przesyłkę w Morning Global do końca bez odpytywania poczty w Twoim kraju.
+Peek odczytuje wyszukiwarkę Morning Global bez kodu pocztowego: pokazuje status, każdy krok z miejscem, kraj docelowy i czas doręczenia, odczytuje godzinę według przesunięcia UTC przy kodzie kraju (a bez niego według zegara miejsca, sąsiedniego wpisu lub Hongkongu) i przelicza wszystko na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Pomija miejsce nadania, `Estimated Delivery`, wagę, liczbę sztuk, `Reference` oraz `Signed By` (nie wyświetla prognozowanej daty dostawy) i śledzi przesyłkę w Morning Global do końca bez odpytywania poczty w Twoim kraju.
 
 Peek sprawdza zmiany najwyżej raz na godzinę (również w dniu „W doręczeniu”), a po nieudanym sprawdzeniu odczekuje 2 godziny (tak samo przy ręcznym odświeżeniu). Możesz włączyć „Każdy skan”, „Ważne etapy” (`Customs Clearance Begins`, `Out for Delivery` i `Delivered`) lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Morning Global ani ze sklepem.
 
@@ -110,7 +110,7 @@ Lokalny przewoźnik partnerski w Twoim kraju, którego strona ani wyszukiwarka M
 
 ### Jak skontaktować się z Morning Global?
 
-Napisz z numerem śledzenia na `cs.mgeu@morninglobal.com` (Wielka Brytania / Europa), `cs.mgus@morninglobal.com` (USA) lub `cs.mgworldwide@morninglobal.com` (reszta świata, także WhatsApp `+1 (479) 777 3307`). W sprawie samego zamówienia zwróć się najpierw do sprzedawcy.
+Napisz z numerem śledzenia na `cs.mgeu@morninglobal.com` (Wielka Brytania), `cs.mgus@morninglobal.com` (USA) lub `cs.mgworldwide@morninglobal.com` (reszta świata, także WhatsApp `+1 (479) 777 3307`). W sprawie samego zamówienia zwróć się najpierw do sprzedawcy.
 
 :::sources
 - [Morning Global: Trace & Track](https://www.morninglobal.com/trace-track/) – wyszukiwarka do 20 numerów, Shipment Journey, Estimated Delivery, Reference, Signed By i komunikat o braku przesyłki

@@ -21,7 +21,7 @@ Las minúsculas, los espacios y los guiones no importan en Peek. El buscador de 
 
 **Dónde encontrarlo.** En el correo de confirmación de envío de la tienda o en la página de tu pedido ([cómo encontrar el número de seguimiento](guide:find-tracking-number) y [seguimiento de paquetes desde China](guide:tracking-from-china)).
 
-**Otros formatos.** Una vez seleccionado Morning Global manualmente, Peek consulta su rastreador para cualquier código alfanumérico de entre 8 y 40 letras y dígitos (fuera de ese rango indica que «no emite números como este»).
+**Otros formatos.** Una vez seleccionado Morning Global manualmente, Peek consulta su rastreador para cualquier código de entre 8 y 40 caracteres que mezcle letras y dígitos (con otro código indica que «no emite números como este»).
 
 **Dos servicios.** Morning Global ofrece *MG International Express (MGIE)*, gestionado por ella misma puerta a puerta, y el servicio más económico *MG International Postal (MGIP)* a través de centros postales internacionales. Entre ambos cubren más de 220 destinos para envíos de hasta 30 kg.
 
@@ -45,7 +45,7 @@ El rastreador de Morning Global muestra las etapas bajo `Shipment Journey`, cada
 | `Out for Delivery` | En ruta de reparto hoy. | «En reparto» |
 | `Delivered` | Entregado. | «Entregado» |
 
-Cuando la descripción añade información al estado, Peek muestra `estado: descripción`, suprimiendo el nombre de quien firmó y los números de teléfono. Los textos fuera de esta tabla se clasifican con las reglas generales de Peek o se muestran sin cambio de etapa.
+Cuando la descripción añade información al estado, Peek muestra `estado: descripción`, suprimiendo los números de teléfono. Los textos fuera de esta tabla se clasifican con las reglas generales de Peek o se muestran sin cambio de etapa.
 
 **No encontrado.** Para un código desconocido, el rastreador de Morning Global contesta `No shipment record was found for this tracking number.`
 
@@ -55,7 +55,7 @@ Con `Handed Over for Delivery`, Morning Global traspasa el envío al socio encar
 
 **Red propia.** Morning Global incluye a Reino Unido y Estados Unidos entre sus sedes propias, con sedes regionales en Londres (Reino Unido y Europa), Los Ángeles (América) y Cantón en China continental, además de oficina en Ámsterdam; Canadá figura entre sus ubicaciones clave junto a EE. UU. y Australia en su red de socios. No publica normas propias sobre intentos de entrega ni puntos de recogida: rigen las del operador final ([entrega fallida](guide:missed-delivery), [paquetes no recogidos](guide:uncollected-parcel)).
 
-**Aduanas en España y otros destinos.** En **España** (Unión Europea), las compras online enviadas desde fuera de la UE con valor de hasta 150 € pagan desde el 1 de julio de 2026 un arancel provisional de 3 € por artículo (bienes con igual clasificación arancelaria, descripción y, cuando proceda, origen; por encima de 150 € se aplica el arancel ordinario) y, desde el 1 de noviembre de 2026, una tasa de tramitación de la Unión de 2 € por artículo cualquiera que sea su valor. En **Península y Baleares** se añade el IVA de importación salvo que ya se recaudara en la compra mediante IOSS; **Canarias** forma parte del territorio aduanero de la UE pero está fuera del territorio de IVA de la UE, y **Ceuta y Melilla** quedan fuera tanto del territorio aduanero como del territorio de IVA de la UE. El 22 de octubre de 2026, Morning Global comunicó a sus comercios clientes que desde el 1 de noviembre de 2026 aplica una `EUR 2 Customs Handling Fee` por cada línea de declaración aduanera en envíos B2C hacia la UE (tanto en IOSS como en DAP, incluidos los superiores a 150 €), más el IVA sobre dicha tasa donde el país de destino lo exija, sin indicar si las tiendas la repercuten al comprador. En **Latinoamérica** y **Estados Unidos**, lo que debas pagar depende de la normativa de cada país ([paquetes retenidos en aduanas](guide:customs)).
+**Aduanas en España y otros destinos.** En **España** (Unión Europea), las compras online enviadas desde fuera de la UE con valor de hasta 150 € pagan desde el 1 de julio de 2026 un arancel provisional de 3 € por artículo (bienes con igual clasificación arancelaria, descripción y, cuando proceda, origen; por encima de 150 € se aplica el arancel ordinario) y, desde el 1 de noviembre de 2026, una tasa de tramitación de la Unión de 2 € por artículo cualquiera que sea su valor. En **Península y Baleares** se añade el IVA de importación salvo que ya se recaudara en la compra mediante IOSS; **Canarias** forma parte del territorio aduanero de la UE pero está fuera del territorio de IVA de la UE, y **Ceuta y Melilla** quedan fuera tanto del territorio aduanero como del territorio de IVA de la UE. El 22 de octubre de 2026, Morning Global comunicó a sus comercios clientes que desde el 1 de noviembre de 2026 se aplica una `EUR 2 Customs Handling Fee` por cada línea de declaración aduanera en envíos B2C hacia la UE (tanto en IOSS como en DAP, incluidos los superiores a 150 €), más el IVA sobre dicha tasa donde el país de destino lo exija, sin indicar si las tiendas la repercuten al comprador. En **Latinoamérica** y **Estados Unidos**, lo que debas pagar depende de la normativa de cada país ([paquetes retenidos en aduanas](guide:customs)).
 
 **Documentación aduanera y avisos de demora.** Si aduanas solicita copia de documento de identidad o factura, Morning Global dispone del formulario [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) con el número de seguimiento: úsalo únicamente dentro de `morninglobal.com` ([mensajes falsos de entrega](guide:delivery-scam-texts)). Las incidencias de red se publican en su sección *News* (como el aviso del 30 de octubre de 2026 sobre demoras de unos 2 a 3 días hábiles en MGIP hacia Australia por huelgas).
 
@@ -73,8 +73,8 @@ Los clientes de Morning Global son los comercios remitentes: ante retrasos, pér
 
 Para consultas sobre envíos en la [página de contacto de Morning Global](https://www.morninglobal.com/contact/) (facilita tu código de seguimiento; no publica horarios):
 
-- **Reino Unido y Europa** (sede regional en Londres): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
-- **Estados Unidos / América** (sede regional en Los Ángeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
+- **Reino Unido** (sede regional en Londres): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
+- **Estados Unidos** (sede regional en Los Ángeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
 - **Hong Kong y Macao** (sede mundial en Hong Kong): `cs.mghk@morninglobal.com`, `+852 3669 6360`.
 - **China continental** (sede regional en Cantón): `cs.mgchina@morninglobal.com`, `+86 4008 268 216`.
 - **Otros equipos regionales**: Italia (`cs.mgit@morninglobal.com`), India, Filipinas y Singapur cuentan con correo propio en la misma página.
@@ -84,9 +84,9 @@ Para consultas sobre envíos en la [página de contacto de Morning Global](https
 
 ## Seguir un paquete de Morning Global con Peek
 
-[Peek](/) no adjudica Morning Global solo por ver un código `BR…MG`, pero sigue a más de 3.500 transportistas: pégalo, verás «Comprobando servicios de seguimiento…» y «Morning Global tiene este paquete.» cuando su rastreador lo reconozca. Un enlace de `morninglobal.com` con `tracking_number=` o `ydh=` lo archiva al instante en Morning Global («Transportista detectado»). Si aún no aparece, pulsa «Cambiar» y elige Morning Global en «Encaja con este número» o «Todos los transportistas» (o «Cambiar transportista» en un paquete ya añadido).
+[Peek](/) no adjudica Morning Global solo por ver un código `BR…MG`, pero sigue a más de 3.500 transportistas: pégalo, verás «Comprobando servicios de seguimiento…» y «Morning Global tiene este paquete.» cuando su rastreador lo reconozca. Un enlace de `www.morninglobal.com` con `tracking_number=` o `ydh=` lo archiva al instante en Morning Global («Transportista detectado»). Si aún no aparece, pulsa «Cambiar» y elige Morning Global en «Encaja con este número» o «Todos los transportistas» (o «Cambiar transportista» en un paquete ya añadido).
 
-Peek lee el rastreador propio de Morning Global sin código postal: muestra el estado, cada línea con su lugar, el país de destino y la hora de entrega, interpreta la hora con el desplazamiento UTC indicado junto al país (y sin él, con el reloj del lugar, de un paso vecino, de tu país o de Hong Kong) y convierte todo a la zona de tu dispositivo («Horas en tu zona horaria: …»). Descarta origen, `Estimated Delivery`, peso, bultos, `Reference` y `Signed By` (no muestra fecha estimada), y sigue el envío en Morning Global hasta el final sin consultar al correo de tu país.
+Peek lee el rastreador propio de Morning Global sin código postal: muestra el estado, cada línea con su lugar, el país de destino y la hora de entrega, interpreta la hora con el desplazamiento UTC indicado junto al país (y sin él, con el reloj del lugar, de un paso vecino o de Hong Kong) y convierte todo a la zona de tu dispositivo («Horas en tu zona horaria: …»). Descarta origen, `Estimated Delivery`, peso, bultos, `Reference` y `Signed By` (no muestra fecha estimada), y sigue el envío en Morning Global hasta el final sin consultar al correo de tu país.
 
 Peek comprueba como máximo una vez por hora (también en «En reparto») y espera 2 horas tras un fallo de consulta (igual al actualizar a mano). Puedes elegir «Cada escaneo», «Pasos importantes» (`Customs Clearance Begins`, `Out for Delivery` y `Delivered`) o «Solo la entrega». Peek no puede contactar con Morning Global ni con la tienda por ti.
 
@@ -110,7 +110,7 @@ Un operador colaborador en tu país, cuyo nombre no aparece en la web ni en el r
 
 ### ¿Cómo contacto con Morning Global?
 
-Escribe indicando tu código de seguimiento a `cs.mgeu@morninglobal.com` (Reino Unido / Europa), `cs.mgus@morninglobal.com` (EE. UU.) o `cs.mgworldwide@morninglobal.com` (resto del mundo, también por WhatsApp en el `+1 (479) 777 3307`). Sobre tu compra, acude primero al vendedor.
+Escribe indicando tu código de seguimiento a `cs.mgeu@morninglobal.com` (Reino Unido), `cs.mgus@morninglobal.com` (EE. UU.) o `cs.mgworldwide@morninglobal.com` (resto del mundo, también por WhatsApp en el `+1 (479) 777 3307`). Sobre tu compra, acude primero al vendedor.
 
 :::sources
 - [Morning Global: Trace & Track](https://www.morninglobal.com/trace-track/) – rastreador de hasta 20 códigos, Shipment Journey, Estimated Delivery, Reference, Signed By y aviso de no encontrado

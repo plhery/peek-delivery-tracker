@@ -21,7 +21,7 @@ Kleinschreibung, Leerzeichen und Bindestriche spielen in Peek keine Rolle. Morni
 
 **Wo du sie findest.** In der Versand-E-Mail des Händlers oder in deiner Bestellübersicht ([Sendungsnummer finden](guide:find-tracking-number) und [Pakete aus China verfolgen](guide:tracking-from-china)).
 
-**Abweichende Formate.** Wählst du Morning Global manuell aus, fragt Peek dessen Tracker für jede 8- bis 40-stellige Folge aus Buchstaben und Ziffern ab (außerhalb davon meldet Peek, dass der Dienst „vergibt keine Nummern wie diese“).
+**Abweichende Formate.** Wählst du Morning Global manuell aus, fragt Peek dessen Tracker für jede 8- bis 40-stellige Folge ab, die Buchstaben und Ziffern mischt (sonst meldet Peek, dass der Dienst „vergibt keine Nummern wie diese“).
 
 **Zwei Versandarten.** Morning Global bietet *MG International Express (MGIE)* als selbst betriebenen Tür-zu-Tür-Express sowie das günstigere *MG International Postal (MGIP)* über weltweite Post-Hubs an. Zusammen decken MGIE und MGIP über 220 Ziele für Pakete bis 30 kg ab.
 
@@ -45,7 +45,7 @@ Morning Globals Tracker listet den Verlauf unter `Shipment Journey` mit Status, 
 | `Out for Delivery` | Heute auf der Zustelltour. | „In Zustellung“ |
 | `Delivered` | Zugestellt. | „Zugestellt“ |
 
-Enthält die Beschreibung mehr als der reine Status, zeigt Peek `Status: Beschreibung` und entfernt dabei Empfänger-/Unterzeichnernamen sowie Telefonnummern. Andere Texte stuft Peek nach seinen allgemeinen Regeln ein oder zeigt sie ohne eigene Statusänderung.
+Enthält die Beschreibung mehr als der reine Status, zeigt Peek `Status: Beschreibung` und entfernt dabei Telefonnummern. Andere Texte stuft Peek nach seinen allgemeinen Regeln ein oder zeigt sie ohne eigene Statusänderung.
 
 **Nicht gefunden.** Kennt Morning Globals Tracker eine Nummer nicht, lautet die Antwort `No shipment record was found for this tracking number.`
 
@@ -55,7 +55,7 @@ Mit `Handed Over for Delivery` übergibt Morning Global die Sendung an den Partn
 
 **Eigene Standorte.** Zu seinen eigenbetriebenen Standorten zählt Morning Global Großbritannien und die USA (Regionalzentralen in London für UK und Europa, Los Angeles für Amerika sowie Guangzhou in Festlandchina, dazu eine Niederlassung in Amsterdam); Kanada wird neben den USA als Kernmarkt genannt, Australien als Partnernetzwerk. Eigene Regeln zu Zustellversuchen oder Paketshops veröffentlicht Morning Global nicht – es gelten die des Endzustellers ([Zustellung verpasst](guide:missed-delivery), [Nicht abgeholte Pakete](guide:uncollected-parcel)).
 
-**Zoll in Deutschland, Österreich, Luxemburg und der Schweiz.** In der **Europäischen Union** fällt für online außerhalb der EU gekaufte Waren in Sendungen bis 150 € seit 1. Juli 2026 ein vorläufiger Zoll von 3 € je Warenposition an (Waren gleicher Zolltarifnummer, Beschreibung und – sofern erforderlich – gleichen Ursprungs; über 150 € gilt der reguläre Zollsatz) sowie seit 1. November 2026 unabhängig vom Wert eine EU-Bearbeitungsgebühr von 2 € je Warenposition, zuzüglich Einfuhrumsatzsteuer in **Deutschland** (ausgenommen die Insel Helgoland und das Gebiet von Büsingen, die außerhalb des EU-Zoll- und Mehrwertsteuergebiets liegen), **Österreich** und **Luxemburg**, sofern die Mehrwertsteuer nicht bereits beim Kauf über IOSS erhoben wurde. Am 22. Oktober 2026 teilte Morning Global seinen Versandkunden mit, dass seit 1. November 2026 für B2C-Sendungen in die EU eine `EUR 2 Customs Handling Fee` je Zollanmeldungsposition berechnet wird (sowohl bei IOSS als auch bei DAP, auch über 150 €), zuzüglich etwaiger Mehrwertsteuer auf diese Gebühr je nach Zielland; ob Händler sie weiterberechnen, lässt die Mitteilung offen. In der **Schweiz** (Nicht-EU) erhebt das BAZG 8,1 % Einfuhrsteuer (2,6 % ermäßigter Satz), wobei „Zollabgaben bis 5 Schweizerfranken nicht erhoben“ und „Steuerbeträge bis 5 Schweizerfranken nicht erhoben“ werden ([Paket hängt beim Zoll](guide:customs)).
+**Zoll in Deutschland, Österreich und Luxemburg.** In der **Europäischen Union** fällt für online außerhalb der EU gekaufte Waren in Sendungen bis 150 € seit 1. Juli 2026 ein vorläufiger Zoll von 3 € je Warenposition an (Waren gleicher Zolltarifnummer, Beschreibung und – sofern erforderlich – gleichen Ursprungs; über 150 € gilt der reguläre Zollsatz) sowie seit 1. November 2026 unabhängig vom Wert eine EU-Bearbeitungsgebühr von 2 € je Warenposition, zuzüglich Einfuhrumsatzsteuer in **Deutschland** (ausgenommen die Insel Helgoland und das Gebiet von Büsingen, die außerhalb des EU-Zoll- und Mehrwertsteuergebiets liegen), **Österreich** und **Luxemburg**, sofern die Mehrwertsteuer nicht bereits beim Kauf über IOSS erhoben wurde. Am 22. Oktober 2026 teilte Morning Global seinen Versandkunden mit, dass seit 1. November 2026 für B2C-Sendungen in die EU eine `EUR 2 Customs Handling Fee` je Zollanmeldungsposition berechnet wird (sowohl bei IOSS als auch bei DAP, auch über 150 €), zuzüglich etwaiger Mehrwertsteuer auf diese Gebühr je nach Zielland; ob Händler sie weiterberechnen, lässt die Mitteilung offen ([Paket hängt beim Zoll](guide:customs)).
 
 **Zollunterlagen und Verspätungshinweise.** Fordert der Zoll Ausweiskopie oder Rechnung an, stellt Morning Global das Formular [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) bereit: Nutze es nur direkt auf `morninglobal.com` ([Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts)). Verzögerungen meldet die Seite *News* (etwa am 30. Oktober 2026 rund 2 bis 3 Werktage Zusatzlaufzeit für MGIP in Australien wegen Arbeitskampfmaßnahmen).
 
@@ -73,8 +73,8 @@ Vertragspartner von Morning Global sind die einliefernden Shops – wende dich b
 
 Für Sendungsanfragen auf Morning Globals [Kontaktseite](https://www.morninglobal.com/contact/) (Sendungsnummer bereithalten; Öffnungszeiten nennt Morning Global nicht):
 
-- **Großbritannien und Europa** (Regionalzentrale London): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
-- **USA / Amerika** (Regionalzentrale Los Angeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
+- **Großbritannien** (Regionalzentrale London): `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
+- **USA** (Regionalzentrale Los Angeles): `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
 - **Hongkong und Macau** (Weltzentrale Hongkong): `cs.mghk@morninglobal.com`, `+852 3669 6360`.
 - **Festlandchina** (Regionalzentrale Guangzhou): `cs.mgchina@morninglobal.com`, `+86 4008 268 216`.
 - **Weitere Regionalteams**: Italien (`cs.mgit@morninglobal.com`), Indien, die Philippinen und Singapur stehen mit eigenen Adressen auf derselben Seite.
@@ -84,9 +84,9 @@ Für Sendungsanfragen auf Morning Globals [Kontaktseite](https://www.morningloba
 
 ## Morning-Global-Pakete mit Peek verfolgen
 
-Allein aus einer `BR…MG`-Nummer schließt [Peek](/) noch nicht fest auf Morning Global, verfolgt aber über 3.500 Paketdienste: Beim Einfügen erscheint „Tracking-Dienste werden geprüft…“ und – sobald Morning Globals Tracker die Nummer kennt – „Morning Global hat dieses Paket.“. Ein `morninglobal.com`-Link mit `tracking_number=` oder `ydh=` legt das Paket sofort unter Morning Global an („Erkannter Paketdienst“). Andernfalls tippe auf „Ändern“ und wähle Morning Global unter „Passt zu dieser Nummer“ oder „Alle Paketdienste“ (bzw. „Paketdienst ändern“ bei gespeicherten Paketen).
+Allein aus einer `BR…MG`-Nummer schließt [Peek](/) noch nicht fest auf Morning Global, verfolgt aber über 3.500 Paketdienste: Beim Einfügen erscheint „Tracking-Dienste werden geprüft…“ und – sobald Morning Globals Tracker die Nummer kennt – „Morning Global hat dieses Paket.“. Ein `www.morninglobal.com`-Link mit `tracking_number=` oder `ydh=` legt das Paket sofort unter Morning Global an („Erkannter Paketdienst“). Andernfalls tippe auf „Ändern“ und wähle Morning Global unter „Passt zu dieser Nummer“ oder „Alle Paketdienste“ (bzw. „Paketdienst ändern“ bei gespeicherten Paketen).
 
-Peek fragt Morning Globals Tracker ohne Postleitzahl ab, zeigt Status, jeden Schritt mit Ort, Zielland und Zustellzeit, liest Zeiten anhand des angegebenen UTC-Offsets neben dem Land (ohne Offset über die Uhr des Orts, eines Nachbarschritts, deines Landes oder Hongkongs) und rechnet alles in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“). Herkunftsort, `Estimated Delivery`, Gewicht, Stückzahl, `Reference` und `Signed By` lässt Peek weg (daher kein voraussichtliches Lieferdatum) und bleibt bis zum Schluss bei Morning Globals Tracker, ohne deine Landespost abzufragen.
+Peek fragt Morning Globals Tracker ohne Postleitzahl ab, zeigt Status, jeden Schritt mit Ort, Zielland und Zustellzeit, liest Zeiten anhand des angegebenen UTC-Offsets neben dem Land (ohne Offset über die Uhr des Orts, eines Nachbarschritts oder Hongkongs) und rechnet alles in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“). Herkunftsort, `Estimated Delivery`, Gewicht, Stückzahl, `Reference` und `Signed By` lässt Peek weg (daher kein voraussichtliches Lieferdatum) und bleibt bis zum Schluss bei Morning Globals Tracker, ohne deine Landespost abzufragen.
 
 Peek prüft höchstens einmal pro Stunde (auch bei „In Zustellung“) und wartet nach einer fehlgeschlagenen Abfrage 2 Stunden (ebenso bei manueller Aktualisierung). Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ (`Customs Clearance Begins`, `Out for Delivery` und `Delivered`) oder „Nur die Zustellung“. Morning Global oder den Shop kontaktieren kann Peek nicht.
 
@@ -110,7 +110,7 @@ Ein Partnerdienst in deinem Land, den Morning Globals Website und Tracker nicht 
 
 ### Wie erreiche ich Morning Global?
 
-Per E-Mail mit deiner Sendungsnummer an `cs.mgeu@morninglobal.com` (UK/Europa), `cs.mgus@morninglobal.com` (USA) oder `cs.mgworldwide@morninglobal.com` (weltweit, auch WhatsApp `+1 (479) 777 3307`). Zur Bestellung selbst wende dich zuerst an den Shop.
+Per E-Mail mit deiner Sendungsnummer an `cs.mgeu@morninglobal.com` (Großbritannien), `cs.mgus@morninglobal.com` (USA) oder `cs.mgworldwide@morninglobal.com` (weltweit, auch WhatsApp `+1 (479) 777 3307`). Zur Bestellung selbst wende dich zuerst an den Shop.
 
 :::sources
 - [Morning Global: Trace & Track](https://www.morninglobal.com/trace-track/) – Suche bis zu 20 Nummern, Shipment Journey, Estimated Delivery, Reference, Signed By und Nicht-gefunden-Text
@@ -127,7 +127,6 @@ Per E-Mail mit deiner Sendungsnummer an `cs.mgeu@morninglobal.com` (UK/Europa), 
 - [Europäische Kommission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3-€-Zoll bis 150 € seit Juli 2026 und 2-€-Bearbeitungsgebühr seit November 2026
 - [Europäische Kommission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – Positionsbegriff, 2 € unabhängig vom Wert und IOSS-Mehrwertsteuerregelung
 - [Europäische Kommission: Territorialer Geltungsbereich von MwSt. und Zoll](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Helgoland und Büsingen außerhalb des EU-Zoll- und Mehrwertsteuergebiets
-- [BAZG: Empfangen von Briefen und Paketen](https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen) – Schweizer Einfuhrsteuer 8,1 % / 2,6 % und Nichterhebung bis 5 Schweizerfranken
 - [Universal Parcel Scraper: Morning Global](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/morning-global) – BR…MG-Muster, Links, Statuszuordnung, Zeitzonen, Stundentakt und verworfene Felder
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – S10-Abfrage mit Chronopost und kein Wechsel zur Landespost
 :::

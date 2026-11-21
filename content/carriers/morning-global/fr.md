@@ -21,7 +21,7 @@ Minuscules, espaces et tirets n'ont pas d'importance dans Peek. Le traceur de Mo
 
 **Où le trouver.** Dans l'e-mail d'expédition de la boutique ou sur la page de ta commande ([comment trouver son numéro de suivi](guide:find-tracking-number) et [suivre un colis venu de Chine](guide:tracking-from-china)).
 
-**Autre format.** Une fois Morning Global choisi manuellement, Peek interroge son traceur pour tout code composé de 8 à 40 lettres et chiffres (au-delà ou en deçà, il indique qu'il « n’émet pas de numéros comme celui-ci »).
+**Autre format.** Une fois Morning Global choisi manuellement, Peek interroge son traceur pour tout code de 8 à 40 caractères mêlant lettres et chiffres (pour un autre code, il indique qu'il « n’émet pas de numéros comme celui-ci »).
 
 **Deux services.** Morning Global commercialise *MG International Express (MGIE)*, son service express porte-à-porte exploité en propre, et *MG International Postal (MGIP)*, plus économique, acheminé via des hubs postaux dans le monde. Ensemble, MGIE et MGIP couvrent plus de 220 destinations pour des colis jusqu'à 30 kg.
 
@@ -45,7 +45,7 @@ Le traceur de Morning Global affiche les étapes sous `Shipment Journey`, chacun
 | `Out for Delivery` | En tournée de livraison aujourd'hui. | « En livraison » |
 | `Delivered` | Livré. | « Livré » |
 
-Quand la description d'une ligne précise le statut, Peek affiche le statut suivi de deux-points et de cette description, en retirant le nom du signataire et les numéros de téléphone. Les formulations absentes de cette liste sont classées selon les règles générales de Peek ou affichées sans changement d'étape.
+Quand la description d'une ligne précise le statut, Peek affiche le statut suivi de deux-points et de cette description, en retirant les numéros de téléphone. Les formulations absentes de cette liste sont classées selon les règles générales de Peek ou affichées sans changement d'étape.
 
 **Introuvable.** Pour un numéro inconnu, le traceur de Morning Global répond `No shipment record was found for this tracking number.`
 
@@ -55,7 +55,7 @@ Quand la description d'une ligne précise le statut, Peek affiche le statut suiv
 
 **Implantations propres.** Morning Global cite le Royaume-Uni et les États-Unis parmi ses implantations exploitées en propre, avec des sièges régionaux à Londres (Royaume-Uni et Europe), Los Angeles (Amériques) et Canton en Chine continentale, ainsi qu'une succursale à Amsterdam ; le Canada figure parmi ses implantations clés aux côtés des États-Unis, et l'Australie dans son réseau partenaire. Morning Global ne publie pas de règles de représentation ou de points relais : ce sont celles du transporteur final ([livraison manquée](guide:missed-delivery), [colis non réclamé](guide:uncollected-parcel)).
 
-**Douane en France, Belgique, Luxembourg et Suisse.** Dans l'**Union européenne**, les achats en ligne expédiés hors UE d'une valeur jusqu'à 150 € supportent depuis le 1er juillet 2026 un droit de douane temporaire de 3 € par article (marchandises partageant classement tarifaire, description et, si requis, origine ; au-delà de 150 €, tarif douanier normal) et, depuis le 1er novembre 2026, des frais de traitement de l'Union de 2 € par article quelle que soit la valeur, auxquels s'ajoute la TVA à l'importation en **France métropolitaine**, en **Belgique** et au **Luxembourg** sauf si la TVA a déjà été collectée lors du paiement via le guichet IOSS. En **Guadeloupe**, en **Martinique** et à **La Réunion**, la TVA à taux réduit et l'octroi de mer s'appliquent dans les mêmes conditions que la TVA ; en **Guyane** et à **Mayotte** (hors territoire TVA de l'UE), la TVA ne s'applique pas mais l'octroi de mer s'applique dans les mêmes conditions que la TVA ; Saint-Pierre-et-Miquelon, Saint-Barthélemy, la partie française de Saint-Martin, la Nouvelle-Calédonie, la Polynésie française et Wallis-et-Futuna sont hors territoire douanier et TVA de l'UE. Le 22 octobre 2026, Morning Global a informé ses marchands qu'à compter du 1er novembre 2026 des frais `EUR 2 Customs Handling Fee` sont facturés par ligne de déclaration douanière sur les envois B2C vers l'UE (en IOSS comme en DAP, même au-delà de 150 €), plus la TVA éventuelle sur ces frais selon le pays de destination, sans préciser si les boutiques les répercutent à l'acheteur. En **Suisse** (hors UE), l'OFDF perçoit 8,1 % de TVA à l'importation (2,6 % au taux réduit) et ne perçoit ni droits ni TVA lorsque leurs montants respectifs sont « inférieurs à 5 francs » ([colis retenu en douane](guide:customs)).
+**Douane en France, Belgique et Luxembourg.** Dans l'**Union européenne**, les achats en ligne expédiés hors UE d'une valeur jusqu'à 150 € supportent depuis le 1er juillet 2026 un droit de douane temporaire de 3 € par article (marchandises partageant classement tarifaire, description et, si requis, origine ; au-delà de 150 €, tarif douanier normal) et, depuis le 1er novembre 2026, des frais de traitement de l'Union de 2 € par article quelle que soit la valeur, auxquels s'ajoute la TVA à l'importation en **France métropolitaine**, en **Belgique** et au **Luxembourg** sauf si la TVA a déjà été collectée lors du paiement via le guichet IOSS. En **Guadeloupe**, en **Martinique** et à **La Réunion**, la TVA s'applique, et l'octroi de mer dans les mêmes conditions que la TVA ; en **Guyane** et à **Mayotte**, la TVA ne s'applique pas mais l'octroi de mer s'applique dans les mêmes conditions que la TVA ; ces cinq départements et la partie française de Saint-Martin font partie du territoire douanier de l'UE mais restent hors du territoire TVA de l'UE ; Saint-Pierre-et-Miquelon, Saint-Barthélemy, la Nouvelle-Calédonie, la Polynésie française et Wallis-et-Futuna sont hors territoire douanier et TVA de l'UE. Le 22 octobre 2026, Morning Global a informé ses marchands qu'à compter du 1er novembre 2026 des frais `EUR 2 Customs Handling Fee` sont facturés par ligne de déclaration douanière sur les envois B2C vers l'UE (en IOSS comme en DAP, même au-delà de 150 €), plus la TVA éventuelle sur ces frais selon le pays de destination, sans préciser si les boutiques les répercutent à l'acheteur ([colis retenu en douane](guide:customs)).
 
 **Documents de dédouanement et avis de retard.** Lorsqu'une pièce d'identité ou une facture est requise en douane, Morning Global propose un formulaire [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) demandant le numéro de suivi : utilise-le uniquement sur `morninglobal.com` ([reconnaître les SMS de livraison frauduleux](guide:delivery-scam-texts)). Morning Global publie aussi ses alertes de perturbation sur sa page *News* (comme l'avis du 30 octobre 2026 annonçant environ 2 à 3 jours ouvrables de délai supplémentaire sur MGIP en Australie en raison d'un mouvement social).
 
@@ -73,8 +73,8 @@ Les clients contractuels de Morning Global étant les boutiques expéditrices, a
 
 Pour les demandes liées à un envoi sur la [page Contact de Morning Global](https://www.morninglobal.com/contact/) (indique ton numéro de suivi, sans horaires publiés) :
 
-- **Royaume-Uni et Europe** (siège régional à Londres) : `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
-- **États-Unis / Amériques** (siège régional à Los Angeles) : `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
+- **Royaume-Uni** (siège régional à Londres) : `cs.mgeu@morninglobal.com`, `+44 20 7019 9035`.
+- **États-Unis** (siège régional à Los Angeles) : `cs.mgus@morninglobal.com`, `+1 888 981 8688`.
 - **Hong Kong et Macao** (siège mondial à Hong Kong) : `cs.mghk@morninglobal.com`, `+852 3669 6360`.
 - **Chine continentale** (siège régional à Canton) : `cs.mgchina@morninglobal.com`, `+86 4008 268 216`.
 - **Autres équipes régionales** : Italie (`cs.mgit@morninglobal.com`), Inde, Philippines et Singapour disposent chacune de leur adresse sur la même page.
@@ -84,9 +84,9 @@ Pour les demandes liées à un envoi sur la [page Contact de Morning Global](htt
 
 ## Suivre un colis Morning Global avec Peek
 
-[Peek](/) ne désigne pas Morning Global sur la seule forme d'un numéro `BR…MG`, mais suit plus de 3 500 transporteurs : colle le numéro, Peek affiche « Vérification des services de suivi… » puis « Morning Global a ce colis. » dès que le traceur de Morning Global le connaît. Un lien `morninglobal.com` contenant `tracking_number=` ou `ydh=` classe immédiatement l'envoi sous Morning Global (« Transporteur détecté »). Sinon, touche « Changer » et choisis Morning Global sous « Correspond à ce numéro » ou « Tous les transporteurs » (ou « Changer de transporteur » sur un colis déjà enregistré).
+[Peek](/) ne désigne pas Morning Global sur la seule forme d'un numéro `BR…MG`, mais suit plus de 3 500 transporteurs : colle le numéro, Peek affiche « Vérification des services de suivi… » puis « Morning Global a ce colis. » dès que le traceur de Morning Global le connaît. Un lien `www.morninglobal.com` contenant `tracking_number=` ou `ydh=` classe immédiatement l'envoi sous Morning Global (« Transporteur détecté »). Sinon, touche « Changer » et choisis Morning Global sous « Correspond à ce numéro » ou « Tous les transporteurs » (ou « Changer de transporteur » sur un colis déjà enregistré).
 
-Peek lit directement le traceur de Morning Global sans code postal : il affiche le statut, chaque étape avec son lieu, le pays de destination et l'heure de livraison, lit l'heure selon le décalage UTC indiqué à côté du pays (et sans décalage, selon l'horloge du lieu, d'une étape voisine, de ton pays ou de Hong Kong) et convertit le tout dans le fuseau de ton appareil (« Heures dans ton fuseau horaire : … »). Il écarte l'origine, `Estimated Delivery`, le poids, le nombre de pièces, `Reference` et `Signed By` (aucune date de livraison prévue n'est affichée), et suit l'envoi sur Morning Global jusqu'au bout sans interroger la poste de ton pays.
+Peek lit directement le traceur de Morning Global sans code postal : il affiche le statut, chaque étape avec son lieu, le pays de destination et l'heure de livraison, lit l'heure selon le décalage UTC indiqué à côté du pays (et sans décalage, selon l'horloge du lieu, d'une étape voisine ou de Hong Kong) et convertit le tout dans le fuseau de ton appareil (« Heures dans ton fuseau horaire : … »). Il écarte l'origine, `Estimated Delivery`, le poids, le nombre de pièces, `Reference` et `Signed By` (aucune date de livraison prévue n'est affichée), et suit l'envoi sur Morning Global jusqu'au bout sans interroger la poste de ton pays.
 
 Peek vérifie au maximum une fois par heure (y compris en « En livraison ») et patiente 2 heures après un échec de vérification (de même pour une actualisation manuelle). Tu peux activer « Chaque scan », « Étapes importantes » (`Customs Clearance Begins`, `Out for Delivery` et `Delivered`) ou « Livraison seulement ». Peek ne peut contacter ni Morning Global ni la boutique pour toi.
 
@@ -110,7 +110,7 @@ Un transporteur partenaire dans ton pays, que le site et le traceur de Morning G
 
 ### Comment contacter Morning Global ?
 
-Écris avec ton numéro de suivi à `cs.mgeu@morninglobal.com` (Royaume-Uni / Europe), `cs.mgus@morninglobal.com` (États-Unis) ou `cs.mgworldwide@morninglobal.com` (reste du monde, aussi sur WhatsApp au `+1 (479) 777 3307`). Pour ta commande, contacte d'abord le marchand.
+Écris avec ton numéro de suivi à `cs.mgeu@morninglobal.com` (Royaume-Uni), `cs.mgus@morninglobal.com` (États-Unis) ou `cs.mgworldwide@morninglobal.com` (reste du monde, aussi sur WhatsApp au `+1 (479) 777 3307`). Pour ta commande, contacte d'abord le marchand.
 
 :::sources
 - [Morning Global : Trace & Track](https://www.morninglobal.com/trace-track/) – traceur jusqu'à 20 numéros, Shipment Journey, Estimated Delivery, Reference, Signed By et message d'envoi introuvable
@@ -128,7 +128,6 @@ Un transporteur partenaire dans ton pays, que le site et le traceur de Morning G
 - [Commission européenne : Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – définition d'un article, frais de 2 € quelle que soit la valeur et exonération de TVA à l'importation via IOSS
 - [Commission européenne : Champ d'application territorial de la TVA et des douanes](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – statut douanier et TVA des départements et collectivités d'outre-mer français
 - [Douane française : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – TVA et octroi de mer dans les mêmes conditions que la TVA outre-mer
-- [OFDF : Réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse de 8,1 % / 2,6 % et franchise lorsque les montants sont inférieurs à 5 francs
 - [Universal Parcel Scraper : Morning Global](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/morning-global) – format BR…MG, liens, statuts, horloges, cadence horaire et champs écartés
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – vérification S10 avec Chronopost et absence de transfert vers la poste locale
 :::

@@ -24,9 +24,9 @@
       "name": "ChatGPT",
       "who": ["assistants.setup.chatgpt.who"],
       "steps": [
-        ["assistants.setup.chatgpt.open", { "plugins": "chatgpt.com/plugins", "plus": "+", "custom": "Add custom MCP server" }],
+        ["assistants.setup.chatgpt.open", { "plugins": "Plugins", "page": "chatgpt.com/plugins", "plus": "+", "custom": "Add custom MCP server" }],
         ["assistants.setup.chatgpt.add", { "oauth": "OAuth", "accept": "I understand and want to continue", "create": "Create as a plugin" }],
-        ["assistants.setup.chatgpt.use", { "plus": "+" }]
+        ["assistants.setup.chatgpt.use", { "install": "Install plugin" }]
       ]
     },
     {

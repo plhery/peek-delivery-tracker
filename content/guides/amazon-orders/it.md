@@ -56,7 +56,7 @@ Poi incolla tutto l'elenco in [Peek](/): Peek trova da solo ogni numero.
 
 ### Con Peek nell'assistente
 
-Collega Peek una volta. In Claude, aggiungi «Peek Parcel Tracker» dalla [directory dei connettori di Claude](https://claude.ai/directory/peek-parcel-tracker). In ChatGPT, aggiungi Peek come plugin, con un piano Business, Enterprise o Edu. [Qui trovi tutti i passaggi](guide:ai-assistants).
+Collega Peek una volta. In Claude, aggiungi «Peek Parcel Tracker» dalla [directory dei connettori di Claude](https://claude.ai/directory/peek-parcel-tracker). In ChatGPT, aggiungi Peek come plugin, con un piano Plus, Pro, Business, Enterprise o Edu. [Qui trovi tutti i passaggi](guide:ai-assistants).
 
 Poi chiedi:
 

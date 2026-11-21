@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-21
 ---
 
-Puoi tracciare i tuoi pacchi in Claude, ChatGPT o Gemini collegandoli a [Peek](/), un tracker di pacchi gratuito: l'assistente può poi dirti dove sono i tuoi pacchi e aggiungere i codici tracking che gli dai. Ti serve un account Peek, e ogni assistente decide chi può farlo: Claude con qualsiasi piano, ChatGPT con un piano Business, Enterprise o Edu, Gemini per i maggiorenni negli Stati Uniti con un account Google personale, e OpenClaw per chi lo fa girare. Peek indica la funzione come «Beta», quindi potrebbe ancora cambiare.
+Puoi tracciare i tuoi pacchi in Claude, ChatGPT o Gemini collegandoli a [Peek](/), un tracker di pacchi gratuito: l'assistente può poi dirti dove sono i tuoi pacchi e aggiungere i codici tracking che gli dai. Ti serve un account Peek, e ogni assistente decide chi può farlo: Claude con qualsiasi piano, ChatGPT con un piano Plus, Pro, Business, Enterprise o Edu, Gemini per i maggiorenni negli Stati Uniti con un account Google personale, e OpenClaw per chi lo fa girare. Peek indica la funzione come «Beta», quindi potrebbe ancora cambiare.
 
 ## ChatGPT, Claude o Gemini possono tracciare i miei pacchi?
 
@@ -16,7 +16,7 @@ Sì, una volta collegati a Peek. Ogni assistente fissa le sue condizioni:
 | Assistente | Dove funziona | Chi può aggiungere Peek |
 | --- | --- | --- |
 | Claude | claude.ai e le app Claude per desktop, iPhone e Android | Qualsiasi piano. Con un piano Team o Enterprise, prima un proprietario aggiunge Peek |
-| ChatGPT | chatgpt.com | Un piano Business, Enterprise o Edu. In uno spazio di lavoro, un amministratore potrebbe dover prima aggiungere o consentire Peek |
+| ChatGPT | Si aggiunge da computer, su chatgpt.com o nell'app ChatGPT per desktop | Un piano Plus, Pro, Business, Enterprise o Edu, non Free né Go. In uno spazio di lavoro, un amministratore potrebbe dover prima aggiungere o consentire Peek |
 | Gemini | Si collega su gemini.google.com, poi funziona anche nell'app Gemini | Almeno 18 anni, negli Stati Uniti, con un account Google personale e «History» attivo, in inglese |
 | OpenClaw | Il computer o il server su cui lo fai girare, nelle chat dei suoi agenti | Chi lo fa girare, da un terminale su quella macchina |
 | Un altro assistente | Qualsiasi assistente che permetta di aggiungere un connettore personalizzato o un server MCP | Chi può aggiungerne uno lì |
@@ -51,10 +51,10 @@ Se Claude non mostra «Peek Parcel Tracker», aggiungi Peek come connettore pers
 ### ChatGPT
 
 :::steps
-- Vai su «chatgpt.com/plugins» | Seleziona «+», poi «Add custom MCP server».
+- Apri «Plugins» | È nella barra laterale di ChatGPT, oppure su «chatgpt.com/plugins». Seleziona «+» in alto a destra, poi «Add custom MCP server».
 - Chiamalo Peek | Incolla `https://peektracker.com/mcp` e scegli «OAuth» come autenticazione. Seleziona «I understand and want to continue», poi «Create as a plugin».
 - Accedi a Peek | Scegli cosa può fare ChatGPT, poi seleziona «Consenti».
-- Installalo | Apri Peek nei tuoi plugin e seleziona «+». Poi scrivi @ in una nuova chat e scegli Peek.
+- Installalo | Apri Peek nei tuoi plugin e seleziona «Install plugin». Poi scrivi @ in una nuova chat e scegli Peek.
 :::
 
 ### Gemini
@@ -140,6 +140,10 @@ Altri casi sono in «Se qualcosa non va» sulla [pagina di Peek sugli assistenti
 - [Peek su GitHub: condizioni d'uso (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – gratuito, senza costi né abbonamento
 - [Peek: aiuto (in inglese)](https://peektracker.com/support.html) – accesso con un codice di sei cifre
 - [Assistenza Claude: Iniziare con i connettori personalizzati utilizzando MCP remoto](https://support.claude.com/it/articles/11175166-iniziare-con-i-connettori-personalizzati-utilizzando-mcp-remoto) – passaggi per il connettore personalizzato, uno solo con il piano Free
+- [OpenAI: Add custom MCP server (in inglese)](https://developers.openai.com/api/docs/guides/custom-mcp-server) – i passaggi in ChatGPT, con i nomi di menu e pulsanti
+- [Assistenza OpenAI: Plugins in ChatGPT (in inglese)](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt) – «Plugins» nella barra laterale, «Install plugin»
+- [ChatGPT: Pricing (in inglese)](https://chatgpt.com/pricing/) – «Developer mode», in cui rientra un server MCP personalizzato: Plus e Pro, non Free né Go
+- [Assistenza OpenAI: Connecting custom MCP servers in ChatGPT (in inglese)](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt) – Business, Enterprise ed Edu, e chi può aggiungerne uno in uno spazio di lavoro
 - [Guida di Gemini: Connect & manage custom apps for Gemini Apps (in inglese)](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – chi può collegare un'app personalizzata, History attivo, inglese, collegamento sul web
 - [OpenClaw: Transports and OAuth (in inglese)](https://docs.openclaw.ai/cli/mcp/transports) – salvare un server con OAuth, `openclaw mcp login`, completare con il codice, un accesso condiviso
 - [OpenClaw: Connect MCP servers (in inglese)](https://docs.openclaw.ai/tools/mcp) – gli agenti usano gli strumenti di un server salvato

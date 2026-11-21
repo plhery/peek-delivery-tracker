@@ -18,7 +18,8 @@ export interface AssistantSetup { name: string; who: SetupLine; steps: readonly 
  * How to add Peek to each assistant, from shared/assistant-setups.json, which the apps read too. Its steps come from
  * each assistant's own help pages: Peek Parcel Tracker's page in Claude's connector directory and Anthropic's "Use
  * connectors to extend Claude's capabilities", with "Get started with custom connectors using remote MCP" for the
- * custom connector Claude falls back on; OpenAI's "Add custom MCP server" and "Connect and test your plugin"; Google's
+ * custom connector Claude falls back on; OpenAI's "Add custom MCP server", "Connect and test your plugin" and "Plugins in
+ * ChatGPT", with its plans from ChatGPT's pricing page, where a custom MCP server comes under "Developer mode"; Google's
  * "Connect & manage custom apps for Gemini Apps"; and OpenClaw's "Transports and OAuth" and "Manage saved MCP servers"
  * (docs.openclaw.ai/cli/mcp), whose commands its released CLI runs only while the Gateway is stopped. Home Assistant
  * connects through Peek's integration (github.com/plhery/peek-ha), whose README gives its steps, named as Home

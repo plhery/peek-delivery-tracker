@@ -20485,6 +20485,29 @@
     ]
   },
   {
+    "input": "138762265",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt"
+    ]
+  },
+  {
+    "input": "138762277",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "13884E92",
     "carrier": "unknown",
     "confidence": "low",
@@ -63858,6 +63881,21 @@
     ]
   },
   {
+    "input": "6947889999999980",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aliexpress",
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce",
+      "aliexpress"
+    ]
+  },
+  {
     "input": "6956315632",
     "carrier": "unknown",
     "confidence": "low",
@@ -86792,6 +86830,9 @@
     "confidence": "low",
     "candidates": [
       "cmt-express"
+    ],
+    "asked": [
+      "cmt-express"
     ]
   },
   {
@@ -88371,6 +88412,18 @@
     ]
   },
   {
+    "input": "CT311228110UZ",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "uzbekistan-post",
+      "chronopost"
+    ]
+  },
+  {
     "input": "CT507133481DE",
     "carrier": "dhl",
     "confidence": "high",
@@ -89692,6 +89745,12 @@
   },
   {
     "input": "DUC616804",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DUS15034325",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -105306,10 +105365,34 @@
     ]
   },
   {
+    "input": "PE259451929CA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
+  },
+  {
     "input": "PE300009327MG",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "PE322659775US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
+  },
+  {
+    "input": "PE398196050US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
   },
   {
     "input": "PE421851137ZA",
@@ -105321,6 +105404,22 @@
     "asked": [
       "south-african-post-office",
       "chronopost"
+    ]
+  },
+  {
+    "input": "PE441451443CA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
+  },
+  {
+    "input": "PE576504012CA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
     ]
   },
   {
@@ -105357,6 +105456,30 @@
     "asked": [
       "south-african-post-office",
       "chronopost"
+    ]
+  },
+  {
+    "input": "PE912472376US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
+  },
+  {
+    "input": "PE924935636US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
+    ]
+  },
+  {
+    "input": "PE967067300US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "polar-express"
     ]
   },
   {
@@ -110679,6 +110802,12 @@
   },
   {
     "input": "S22226902",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "S2601A00324070",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

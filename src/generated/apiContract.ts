@@ -307,6 +307,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^694788\\d{10}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^PA0{2}\\d{8}$",
         "confidence": "low"
       },
@@ -44136,16 +44140,28 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cmt-express",
+      "recognitionRank": 26
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "tms.cmtexpress.com.cn"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^CMT\\d{12}$",
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.cmtexpress.com.cn/track.aspx"
+    "trackingSearchUrl": "https://www.cmtexpress.com.cn/track.aspx",
+    "trackingUrlTemplate": "https://tms.cmtexpress.com.cn/en/trackIndex.htm?documentCode={trackingNumber}"
   },
   "kuayuan-express": {
     "displayName": "Kuayuan Express",
@@ -67384,6 +67400,120 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ]
+  },
+  "emo-trans": {
+    "displayName": "EMO Trans",
+    "aliases": [
+      "EMO Trans, Inc.",
+      "Emotrans",
+      "EMO Trans Global"
+    ],
+    "countries": [
+      "US",
+      "DE"
+    ],
+    "color": "#0768A7",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "emo-trans"
+    },
+    "trackingUrlTemplate": "https://portal.emotrans-global.com/track/quicktrack?shipment={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.emotrans-global.com"
+        ],
+        "pathPattern": "^/track/quicktrack/?$",
+        "params": [
+          "shipment"
+        ]
+      },
+      {
+        "domains": [
+          "portal.emotrans-global.com"
+        ],
+        "pathPattern": "^/track/quicktrack/shipment/\\d+$",
+        "params": [
+          "search"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.emotrans-global.com/track/quicktrack",
+    "helpUrl": "https://www.emotrans-global.com/contact/garden-city-head-office/"
+  },
+  "numark-transportation": {
+    "displayName": "NuMark Transportation",
+    "countries": [
+      "US"
+    ],
+    "color": "#130958",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "numark-transportation"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.numarktransportation.net"
+        ],
+        "pathPattern": "^/cgibin/wbprotrk/?$",
+        "params": [
+          "wbfb"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.numarktransportation.net/",
+    "helpUrl": "https://www.numarktransportation.net/contact-us"
+  },
+  "polar-express": {
+    "displayName": "Polar Express",
+    "aliases": [
+      "PolExp",
+      "Полярный Экспресс"
+    ],
+    "countries": [
+      "US",
+      "CA",
+      "RU",
+      "UZ"
+    ],
+    "color": "#10233D",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "polar-express"
+    },
+    "trackingUrlTemplate": "https://the-tracking.com/{trackingNumber}/",
+    "linkRules": [
+      {
+        "domains": [
+          "the-tracking.com"
+        ],
+        "path": "^/([A-Za-z]{2}\\d{9}[A-Za-z]{2})/?$"
+      },
+      {
+        "domains": [
+          "the-tracking.com"
+        ],
+        "pathPattern": "^/?$",
+        "query": "(?:^|&)track_number=([A-Za-z]{2}\\d{9}[A-Za-z]{2})(?=&|$)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^PE\\d{9}(?:US|CA)$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://the-tracking.com/",
+    "helpUrl": "https://polexp.com/contacts.html"
   }
 } as const;
 
@@ -69434,7 +69564,10 @@ export const CARRIER_IDS = [
   "daytona-express",
   "dragonfly-nl",
   "dora-gate",
-  "huiyu"
+  "huiyu",
+  "emo-trans",
+  "numark-transportation",
+  "polar-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

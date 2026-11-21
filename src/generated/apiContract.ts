@@ -1954,6 +1954,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Asendia Management",
       "Asendia UK",
+      "wnDirect",
+      "WnDirect/Asendia UK",
       "asendia.com",
       "Asendia USA",
       "Globegistics",
@@ -4097,7 +4099,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "delhivery",
-      "recognitionRank": 600
+      "recognitionRank": 600,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [],
     "detectionRules": [
@@ -12906,12 +12909,16 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "app.loggi.com"
         ],
-        "path": "^/rastreador/([A-Za-z0-9]{8})/?$"
+        "path": "^/rastreador/([A-Za-z0-9]{8}|[A-Za-z]{4}[0-9][A-Za-z]{7}[0-9])/?$"
       }
     ],
     "detectionRules": [
       {
         "pattern": "^(?=[A-Z0-9]*[A-Z])[A-Z0-9]{8}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^[A-Z]{4}\\d[A-Z]{7}\\d$",
         "confidence": "low"
       }
     ]
@@ -13651,7 +13658,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Posta Moldovei",
       "Moldova Post",
-      "Post of Moldova"
+      "Post of Moldova",
+      "Moldavia Post"
     ],
     "countries": [
       "MD"
@@ -23681,7 +23689,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "metropolitan-warehouse",
-      "recognitionRank": 8
+      "recognitionRank": 8,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [],
     "detectionRules": [
@@ -42181,7 +42190,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sfyd-express"
     },
     "trackingUrlTemplate": "https://sfydexpress.com/tracking.html?c={trackingNumber}",
     "linkRules": [
@@ -50901,7 +50910,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "runforint"
     },
     "trackingUrlTemplate": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=137&key={trackingNumber}",
     "linkRules": [
@@ -51593,16 +51602,27 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "dpdex"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "client.duopudaexpress.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^DPE\\d{11}$",
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.duopudaexpress.com/"
+    "trackingSearchUrl": "https://client.duopudaexpress.com/track_query.aspx",
+    "trackingUrlTemplate": "https://client.duopudaexpress.com/track_query.aspx?track_number={trackingNumber}"
   },
   "crc-post": {
     "displayName": "CRC Post",
@@ -62666,6 +62686,2225 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "a-hartrodt": {
+    "displayName": "a. hartrodt",
+    "aliases": [
+      "A Hartrodt",
+      "a. hartrodt GmbH & Co. KG"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#163d72",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "a-hartrodt"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ttsecure.hartrodt.com/pserv/tt/open?sep=1"
+  },
+  "aerolineas-argentinas-cargo": {
+    "displayName": "Aerolíneas Argentinas Cargo",
+    "aliases": [
+      "Aerolineas Argentinas Air Cargo",
+      "Aerolíneas Cargo",
+      "Aerolineas Cargo"
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#009ADE",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "aerolineas-argentinas-cargo"
+    },
+    "trackingUrlTemplate": "https://aerolineas.smartkargo.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://aerolineas.smartkargo.com/FrmAWBTracking.aspx"
+  },
+  "air-europa-cargo": {
+    "displayName": "Air Europa Cargo",
+    "aliases": [
+      "Air Europa Air Cargo",
+      "Air Europa Líneas Aéreas Cargo",
+      "UX Cargo"
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#005699",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "air-europa-cargo"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.uxtracking.com/tracking.asp"
+  },
+  "air-greenland": {
+    "displayName": "Air Greenland Cargo",
+    "aliases": [
+      "Air Greenland",
+      "Grønlandsfly"
+    ],
+    "countries": [
+      "GL"
+    ],
+    "color": "#c3122f",
+    "selectable": true,
+    "timezone": "America/Nuuk",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "air-greenland"
+    },
+    "trackingUrlTemplate": "https://airgreenland.com/cargo/tracking-awb/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://airgreenland.com/cargo/tracking-awb/"
+  },
+  "akasa-air-cargo": {
+    "displayName": "Akasa Air Cargo",
+    "aliases": [
+      "Akasa Air",
+      "QP Cargo"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#ff5b19",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "akasa-air-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.akasaair.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.akasaair.com/FrmAWBTracking.aspx"
+  },
+  "alfa-mensajes": {
+    "displayName": "Alfa Mensajes",
+    "aliases": [
+      "Alfa Mensajes SAS",
+      "Alfamensajes",
+      "Alfa Mensajes S.A.S."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#1969ac",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "alfa-mensajes"
+    },
+    "trackingUrlTemplate": "https://alfamensajes.com/consulta/{trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://alfamensajes.com/"
+  },
+  "astral-aviation": {
+    "displayName": "Astral Aviation Cargo",
+    "aliases": [
+      "Astral Aviation",
+      "Astral Aviation Limited",
+      "8V Cargo"
+    ],
+    "countries": [
+      "KE",
+      "AE"
+    ],
+    "color": "#09518b",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "astral-aviation"
+    },
+    "trackingUrlTemplate": "https://astral.fr8booking.com/trackAndTrace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://astral.fr8booking.com/trackAndTrace"
+  },
+  "atlantic-container-line": {
+    "displayName": "Atlantic Container Line",
+    "aliases": [
+      "ACL Cargo",
+      "Atlantic Container Line AB",
+      "ACLU"
+    ],
+    "countries": [
+      "SE",
+      "GB",
+      "US"
+    ],
+    "color": "#004b86",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "atlantic-container-line"
+    },
+    "trackingUrlTemplate": "https://www.aclcargo.com/track-trace/",
+    "trackingSiteName": "ACL Track & Trace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.aclcargo.com/track-trace/"
+  },
+  "benben": {
+    "displayName": "Benben International",
+    "aliases": [
+      "犇犇",
+      "犇犇国际",
+      "犇犇国际物流"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#01477b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "benben"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "bermuda-container-line": {
+    "displayName": "Bermuda Container Line",
+    "aliases": [
+      "Neptune Bermuda Container Line",
+      "Bermuda Container Line Ltd"
+    ],
+    "countries": [
+      "BM",
+      "US"
+    ],
+    "color": "#253F60",
+    "selectable": true,
+    "timezone": "Atlantic/Bermuda",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bermuda-container-line"
+    },
+    "trackingUrlTemplate": "https://neptunebermuda.com/track-shipment/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://neptunebermuda.com/track-shipment/"
+  },
+  "bob-go": {
+    "displayName": "Bob Go",
+    "aliases": [
+      "BobGo"
+    ],
+    "countries": [
+      "ZA"
+    ],
+    "color": "#139e83",
+    "selectable": true,
+    "timezone": "Africa/Johannesburg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "bob-go"
+    },
+    "trackingUrlTemplate": "https://track.bobgo.co.za/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.bobgo.co.za"
+        ],
+        "path": "^/([A-Za-z0-9]{6,30})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.bobgo.co.za/"
+  },
+  "cadena-courier": {
+    "displayName": "Cadena Courier",
+    "aliases": [
+      "Cadena Courrier",
+      "Cadena Courier S.A.",
+      "Cadena Courrier S.A."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#006b59",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cadena-courier"
+    },
+    "trackingUrlTemplate": "https://guias.cadena.com.co/tracking/consulta.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://guias.cadena.com.co/tracking/consulta.aspx"
+  },
+  "calidex-courier": {
+    "displayName": "Calidex Courier",
+    "aliases": [
+      "Calidex",
+      "Calidex Trading Co",
+      "Calidexco"
+    ],
+    "countries": [
+      "CO",
+      "VE"
+    ],
+    "color": "#15235a",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "calidex-courier"
+    },
+    "trackingUrlTemplate": "https://calidex.multitrack.trackingpremium.us/tracking/tracking",
+    "trackingSiteName": "Calidex TrackingPremium",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://calidex.multitrack.trackingpremium.us/tracking/tracking"
+  },
+  "certipostal": {
+    "displayName": "Certipostal",
+    "aliases": [
+      "Certipostal S.A.S.",
+      "Certipostal SAS"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#28377e",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "certipostal"
+    },
+    "trackingUrlTemplate": "https://certipostal.fivesoftcolombia.com/tag_detail_v1.html?d={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://certipostal.com/seguimientos/fivepostal/"
+  },
+  "cesco-logistics": {
+    "displayName": "CESCO Logistics",
+    "aliases": [
+      "CESCO",
+      "CESCO Logistik Indonesia",
+      "PT CESCO Logistik Indonesia"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#1463a2",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cesco-logistics"
+    },
+    "trackingUrlTemplate": "https://cesco-logistics.com/tracking.php",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cesco-logistics.com/tracking.php"
+  },
+  "citilink-cargo": {
+    "displayName": "Citilink Cargo",
+    "aliases": [
+      "Citilink Indonesia Cargo",
+      "PT Citilink Indonesia Cargo"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#36853B",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "citilink-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.garuda-indonesia.com/Search",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search"
+  },
+  "conexiones-empresariales": {
+    "displayName": "Conexiones Empresariales",
+    "aliases": [
+      "Conexiones Empresariales S.A.S.",
+      "Conexiones Empresariales Mensajería"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#204a8e",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "conexiones-empresariales"
+    },
+    "trackingUrlTemplate": "https://app.conexionesempresariales.com/rastreo/?txtguia={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.conexionesempresariales.com/rastreo/"
+  },
+  "cootranstame": {
+    "displayName": "CootransTame",
+    "aliases": [
+      "Cooperativa de Transportadores de Tame",
+      "Cootranstame Carga"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#0a3d75",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cootranstame"
+    },
+    "trackingUrlTemplate": "https://www.cootranstame.com/rastreo-envios",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cootranstame.com/rastreo-envios"
+  },
+  "cordelia-shipping": {
+    "displayName": "Cordelia Container Shipping Line",
+    "aliases": [
+      "Cordelia Shipping",
+      "Cordelia Line",
+      "CCSL"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#003e80",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cordelia-shipping"
+    },
+    "trackingUrlTemplate": "https://cordelialine.com/",
+    "trackingSiteName": "Cordelia Track Shipment",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cordelialine.com/"
+  },
+  "cotaxi": {
+    "displayName": "COTAXI",
+    "aliases": [
+      "Cotaxi Colombia",
+      "Cooperativa Multiactiva de Taxistas y Transportadores Unidos"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#e45a2a",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cotaxi"
+    },
+    "trackingUrlTemplate": "https://www.cotaxi.com.co/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cotaxi.com.co/"
+  },
+  "courierit-nz": {
+    "displayName": "Courierit New Zealand",
+    "aliases": [
+      "Courierit NZ",
+      "Courierit Freight Gateway",
+      "Courierit Classic"
+    ],
+    "countries": [
+      "NZ"
+    ],
+    "color": "#166893",
+    "selectable": true,
+    "timezone": "Pacific/Auckland",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "courierit-nz"
+    },
+    "trackingUrlTemplate": "https://www.courierit.net.nz/Home/Track",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.courierit.net.nz/Home/Track"
+  },
+  "dongjin-shipping": {
+    "displayName": "Dongjin Shipping",
+    "aliases": [
+      "Dongjin Shipping Co., Ltd.",
+      "Dong Jin Shipping",
+      "동진상선"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#003e80",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dongjin-shipping"
+    },
+    "trackingUrlTemplate": "https://esvc.djship.co.kr/gnoss/CUP_HOM_3301.do?sessLocale=en",
+    "trackingSiteName": "Dongjin Shipping Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://esvc.djship.co.kr/gnoss/CUP_HOM_3301.do?sessLocale=en"
+  },
+  "dpd-by": {
+    "displayName": "DPD Belarus",
+    "aliases": [
+      "DPD Беларусь",
+      "DPD BY"
+    ],
+    "countries": [
+      "BY"
+    ],
+    "color": "#dc0032",
+    "selectable": true,
+    "timezone": "Europe/Minsk",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dpd-ru"
+    },
+    "trackingUrlTemplate": "https://mydpd.dpd.by/ols/trace2/standard.do2?orderNum={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mydpd.dpd.by"
+        ],
+        "pathPattern": "^/ols/trace2/standard\\.do2$",
+        "params": [
+          "orderNum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mydpd.dpd.by/ols/trace2/standard.do2"
+  },
+  "dpd-ru": {
+    "displayName": "DPD Russia",
+    "aliases": [
+      "DPD в России",
+      "DPD Россия",
+      "DPD RU",
+      "ДПД"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#dc0032",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dpd-ru"
+    },
+    "trackingUrlTemplate": "https://mydpd.dpd.kz/ols/trace2/standard.do2?orderNum={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mydpd.dpd.kz",
+          "www.dpd.ru",
+          "dpd.ru"
+        ],
+        "pathPattern": "^/ols/trace2/standard\\.do2$",
+        "params": [
+          "orderNum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://mydpd.dpd.kz/ols/trace2/standard.do2"
+  },
+  "dypaq": {
+    "displayName": "DYPAQ",
+    "aliases": [
+      "Dypaq",
+      "DYPAQ Mensajería",
+      "Dypaq Paquetería"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#f08226",
+    "selectable": true,
+    "timezone": "America/Merida",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dypaq"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dypaq.com/"
+  },
+  "eimskip": {
+    "displayName": "Eimskip",
+    "aliases": [
+      "Eimskipafélag Íslands",
+      "Eimskip Ísland",
+      "EIMU"
+    ],
+    "countries": [
+      "IS"
+    ],
+    "color": "#003b70",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "eimskip"
+    },
+    "trackingUrlTemplate": "https://www.eimskip.com/find-shipment/",
+    "trackingSiteName": "Eimskip Find Shipment",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.eimskip.com/find-shipment/"
+  },
+  "ellerman-city-liners": {
+    "displayName": "Ellerman City Liners",
+    "aliases": [
+      "Ellerman Lines",
+      "Ellerman City Liners Ltd",
+      "ECLK"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#132f59",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ellerman-city-liners"
+    },
+    "trackingUrlTemplate": "https://ellerman.orcapayments.app/container-tracking/",
+    "trackingSiteName": "Ellerman Container Track & Trace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ellerman.orcapayments.app/container-tracking/"
+  },
+  "enviamos-comunicaciones": {
+    "displayName": "Enviamos Comunicaciones",
+    "aliases": [
+      "Enviamos Comunicaciones S.A.S.",
+      "Enviamos Mensajería Certificada",
+      "Enviamos CYM"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#16649a",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "enviamos-comunicaciones"
+    },
+    "trackingUrlTemplate": "https://www.enviamoscym.com/rastreo-envios-mensajeria.php?codigo={trackingNumber}&tipo-codigo=cod-principal",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.enviamoscym.com/rastreo-envios-mensajeria.php"
+  },
+  "epex-colombia": {
+    "displayName": "EPEX Colombia",
+    "aliases": [
+      "EPEX",
+      "Expreso Palmira Encomiendas",
+      "EPEX Expreso Palmira"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#da291c",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "epex-colombia"
+    },
+    "trackingUrlTemplate": "https://epex.com.co/rastrea/?id={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://epex.com.co/rastrea/"
+  },
+  "esm-logistica": {
+    "displayName": "ESM Logística",
+    "aliases": [
+      "ESM Logistica",
+      "E.S.M. Logística",
+      "ESM Logística S.A.S."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#1a2e5a",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "esm-logistica"
+    },
+    "trackingUrlTemplate": "https://clientes.esmlogistica.com/seguimiento?guia={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://clientes.esmlogistica.com/seguimiento"
+  },
+  "ethiopian-cargo": {
+    "displayName": "Ethiopian Cargo",
+    "aliases": [
+      "Ethiopian Airlines Cargo",
+      "Ethiopian Cargo & Logistics Services",
+      "Ethiopian Cargo and Logistics Services"
+    ],
+    "countries": [
+      "ET"
+    ],
+    "color": "#168447",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ethiopian-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.ethiopianairlines.com/my-cargo/track-your-shipment",
+    "trackingSiteName": "Ethiopian Cargo Track Your Shipment",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.ethiopianairlines.com/my-cargo/track-your-shipment"
+  },
+  "evergreen-line": {
+    "displayName": "Evergreen Line",
+    "aliases": [
+      "Evergreen Marine",
+      "Evergreen Marine Corporation",
+      "EGLV",
+      "長榮海運"
+    ],
+    "countries": [
+      "TW"
+    ],
+    "color": "#00833e",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "evergreen-line"
+    },
+    "trackingUrlTemplate": "https://ct.shipmentlink.com/servlet/TDB1_CargoTracking.do",
+    "trackingSiteName": "ShipmentLink",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ct.shipmentlink.com/servlet/TDB1_CargoTracking.do"
+  },
+  "feima": {
+    "displayName": "Feima",
+    "aliases": [
+      "飞马物流",
+      "飛馬物流",
+      "FINMA PEGASUS",
+      "Finmaship"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#fe5624",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "feima",
+      "recognitionRank": 23,
+      "recognitionPattern": "^FM\\d{9}CN$"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "47.111.22.87"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^FM\\d{10}CN$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^FM\\d{9}CN$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "flow-progressive-logistics": {
+    "displayName": "Flow Progressive Logistics",
+    "aliases": [
+      "FLOW",
+      "Flow Progressive",
+      "Flow Logistics",
+      "فلو بروجرسف"
+    ],
+    "countries": [
+      "SA"
+    ],
+    "color": "#16365f",
+    "selectable": true,
+    "timezone": "Asia/Riyadh",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "flow-progressive-logistics"
+    },
+    "trackingUrlTemplate": "https://www.flowpl.com/order-tracking/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.flowpl.com/order-tracking/"
+  },
+  "freight-club": {
+    "displayName": "Freight Club",
+    "countries": [
+      "CA",
+      "US"
+    ],
+    "color": "#005a80",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "freight-club"
+    },
+    "trackingUrlTemplate": "https://app.freightclub.com/Tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "app.freightclub.com"
+        ],
+        "pathPattern": "^/Tracking(?:/[A-Za-z0-9_-]{3,80})?/?$",
+        "path": "^/Tracking/([A-Za-z0-9_-]{3,80})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.freightclub.com/Tracking"
+  },
+  "g2-ocean": {
+    "displayName": "G2 Ocean",
+    "aliases": [
+      "G2 Ocean AS",
+      "GSSW"
+    ],
+    "countries": [
+      "NO"
+    ],
+    "color": "#233e72",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "g2-ocean"
+    },
+    "trackingUrlTemplate": "https://myg2.g2ocean.com/cargo-tracking",
+    "trackingSiteName": "MyG2 Cargo Tracker",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://myg2.g2ocean.com/cargo-tracking"
+  },
+  "garuda-indonesia-cargo": {
+    "displayName": "Garuda Indonesia Cargo",
+    "aliases": [
+      "Garuda Cargo",
+      "Garuda Indonesia Air Cargo",
+      "Garuda Indonesia"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#006B8F",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "garuda-indonesia-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.garuda-indonesia.com/Search",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search"
+  },
+  "genei": {
+    "displayName": "Genei",
+    "aliases": [
+      "Genei.es",
+      "Genei Global Logistic"
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#214fc6",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "genei"
+    },
+    "trackingUrlTemplate": "https://www.genei.es/seguimiento-envios/?tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.genei.es",
+          "genei.es"
+        ],
+        "pathPattern": "^/seguimiento-envios/?$",
+        "query": "(?:^|&)tracking=([A-Z0-9]{8})(?:&|$)",
+        "detectFromNumber": false
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.genei.es/seguimiento-envios/"
+  },
+  "globkurier": {
+    "displayName": "GlobKurier",
+    "aliases": [
+      "GlobKurier.pl"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#e53930",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "globkurier"
+    },
+    "trackingUrlTemplate": "https://www.globkurier.pl/tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.globkurier.pl/tracking"
+  },
+  "hecny-shipping": {
+    "displayName": "Hecny Shipping",
+    "aliases": [
+      "Hecny Group",
+      "Hecny Transportation",
+      "HYSL"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#005398",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hecny-shipping"
+    },
+    "trackingUrlTemplate": "https://www.hecny.com/en/track-and-trace",
+    "trackingSiteName": "Hecny Track and Trace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.hecny.com/en/track-and-trace"
+  },
+  "hede-shipping": {
+    "displayName": "Hede Shipping",
+    "aliases": [
+      "Hede Hong Kong",
+      "Hede Hongkong International Shipping",
+      "合德海运",
+      "HDUJ"
+    ],
+    "countries": [
+      "HK",
+      "CN"
+    ],
+    "color": "#1554a0",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hede-shipping"
+    },
+    "trackingUrlTemplate": "https://hede.orcapayments.app/container-tracking/",
+    "trackingSiteName": "Hede Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://hede.orcapayments.app/container-tracking/"
+  },
+  "heung-a-line": {
+    "displayName": "Heung-A Line",
+    "aliases": [
+      "Heung A Line",
+      "Heung A Line Co Ltd",
+      "HAL",
+      "HASL",
+      "흥아라인"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#d12024",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "heung-a-line"
+    },
+    "trackingUrlTemplate": "https://ebiz.heungaline.com/Tracking",
+    "trackingSiteName": "Heung-A e-Service Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ebiz.heungaline.com/Tracking"
+  },
+  "hgd": {
+    "displayName": "HGD International",
+    "aliases": [
+      "HGD",
+      "Hengguangda",
+      "恒广达国际",
+      "恒广达",
+      "恒广达（深圳）供应链科技有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1f5fa8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hgd"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "hoegh-autoliners": {
+    "displayName": "Höegh Autoliners",
+    "aliases": [
+      "Hoegh Autoliners",
+      "Höegh Autoliners AS",
+      "HUAL"
+    ],
+    "countries": [
+      "NO"
+    ],
+    "color": "#007383",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hoegh-autoliners"
+    },
+    "trackingUrlTemplate": "https://www.hoeghautoliners.com/my-cargo",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.hoeghautoliners.com/my-cargo"
+  },
+  "honour-lane-shipping": {
+    "displayName": "Honour Lane Shipping",
+    "aliases": [
+      "HLS Honour Lane",
+      "Honour Lane Shipping Ltd",
+      "HNLT"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#17417c",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "honour-lane-shipping"
+    },
+    "trackingUrlTemplate": "https://tracking.cargolane.net/tracking/ShipmentInfo?paramType=ctn_no&paramNo={trackingNumber}",
+    "trackingSiteName": "HLS Online Service",
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "hua-express": {
+    "displayName": "HUA Express",
+    "aliases": [
+      "HUAEXPRESS",
+      "华联万通",
+      "华联万通国际供应链(深圳)有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e70012",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "hua-express"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "ibex-express-bo": {
+    "displayName": "IBEX Express",
+    "aliases": [
+      "IBEX Express Ltda."
+    ],
+    "countries": [
+      "BO"
+    ],
+    "color": "#d51a2d",
+    "selectable": true,
+    "timezone": "America/La_Paz",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ibex-express-bo"
+    },
+    "trackingUrlTemplate": "https://www.ibex.com.bo/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ibex.com.bo/"
+  },
+  "icasa-cargo": {
+    "displayName": "ICASA Cargo",
+    "aliases": [
+      "ICASA",
+      "Integradores de Carga Aérea"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#203c70",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "icasa-cargo"
+    },
+    "trackingUrlTemplate": "https://integracargo.com/rastreo/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://integracargo.com/rastreo/"
+  },
+  "indigo-cargo": {
+    "displayName": "IndiGo CarGo",
+    "aliases": [
+      "IndiGo Cargo",
+      "6E Cargo"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#242785",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "indigo-cargo"
+    },
+    "trackingUrlTemplate": "https://6ecargo.goindigo.in/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://6ecargo.goindigo.in/FrmAWBTracking.aspx"
+  },
+  "k-line-roro": {
+    "displayName": "K Line Global RoRo",
+    "aliases": [
+      "K Line RoRo",
+      "K Line",
+      "Kawasaki Kisen Kaisha",
+      "Kawasaki Kisen Kaisha Ltd.",
+      "KKLU"
+    ],
+    "countries": [
+      "JP"
+    ],
+    "color": "#bd212a",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "k-line-roro"
+    },
+    "trackingUrlTemplate": "https://apps.klineglobalroro.com/tracking/search?q={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://apps.klineglobalroro.com/tracking/search"
+  },
+  "kenya-airways-cargo": {
+    "displayName": "Kenya Airways Cargo",
+    "aliases": [
+      "KQ Cargo",
+      "Kenya Airways Air Cargo"
+    ],
+    "countries": [
+      "KE"
+    ],
+    "color": "#df1024",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "kenya-airways-cargo"
+    },
+    "trackingUrlTemplate": "https://cargotrack.kenya-airways.com/",
+    "trackingSiteName": "KQ Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargotrack.kenya-airways.com/"
+  },
+  "lalji-mulji-transport": {
+    "displayName": "Lalji Mulji Transport",
+    "aliases": [
+      "Lalji Mulji Transport Company",
+      "Lalji Mulji Transport Co.",
+      "LMTCO"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#d2272d",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "lalji-mulji-transport"
+    },
+    "trackingUrlTemplate": "https://lmtco.com/tracking-serices.html",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://lmtco.com/tracking-serices.html"
+  },
+  "lerdex": {
+    "displayName": "Lerdex",
+    "aliases": [
+      "LERDEX",
+      "乐易汇"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#3370ff",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "lerdex"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://website.bestdealer.com/tracking.html"
+  },
+  "leschaco": {
+    "displayName": "Leschaco",
+    "aliases": [
+      "Lexzau Scharbau",
+      "Anker Leschaco",
+      "Leschaco Visible",
+      "AC Container Line",
+      "ALRB"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#1D535E",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "leschaco"
+    },
+    "trackingUrlTemplate": "https://visible.leschaco.com/?forwarderRef={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://visible.leschaco.com/"
+  },
+  "marken": {
+    "displayName": "Marken",
+    "aliases": [
+      "Marken Logistics",
+      "Marken, UPS Healthcare"
+    ],
+    "countries": [
+      "US",
+      "GB"
+    ],
+    "color": "#0a2663",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "marken"
+    },
+    "trackingUrlTemplate": "https://www.marken.com/track-shipment?jobNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.marken.com",
+          "marken.com",
+          "es.marken.com"
+        ],
+        "pathPattern": "^/track-shipment/?$",
+        "params": [
+          "jobNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.marken.com/track-shipment"
+  },
+  "mol-ace": {
+    "displayName": "MOL Auto Carrier Express",
+    "aliases": [
+      "MOL ACE",
+      "Mitsui O.S.K. Lines Auto Carrier Express",
+      "MOL RoRo"
+    ],
+    "countries": [
+      "JP"
+    ],
+    "color": "#1d2c50",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "mol-ace"
+    },
+    "trackingUrlTemplate": "https://www.molace.com/TRK/Search",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.molace.com/TRK/Search"
+  },
+  "navex": {
+    "displayName": "Navex Delivery",
+    "aliases": [
+      "Navex",
+      "NAVEX"
+    ],
+    "countries": [
+      "TN"
+    ],
+    "color": "#062a43",
+    "selectable": true,
+    "timezone": "Africa/Tunis",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "navex"
+    },
+    "trackingUrlTemplate": "https://app.navex.tn/track.php?track={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "app.navex.tn"
+        ],
+        "pathPattern": "^/track\\.php$",
+        "params": [
+          "track"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://app.navex.tn/track.php"
+  },
+  "navlungo": {
+    "displayName": "Navlungo",
+    "aliases": [
+      "Navlungo Domestic",
+      "Navlungo Yurtiçi"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "color": "#1925a8",
+    "selectable": true,
+    "timezone": "Europe/Istanbul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "navlungo"
+    },
+    "trackingUrlTemplate": "https://domestic-track.navlungo.com/en/check/{trackingNumber}/",
+    "linkRules": [
+      {
+        "domains": [
+          "domestic-track.navlungo.com"
+        ],
+        "path": "^/(?:en|tr)/check/([A-Z0-9]{12})/?$",
+        "detectFromNumber": false
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://domestic-track.navlungo.com/en/"
+  },
+  "ots-astracon": {
+    "displayName": "O.T.S. ASTRACON",
+    "aliases": [
+      "OTS Astracon",
+      "O.T.S. Astracon International Air + Sea Forwarder",
+      "ASQR"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#00427a",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ots-astracon"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www-oaoosf.wisegrid.net/Portals/NEO/Desktop"
+  },
+  "pacific-international-lines": {
+    "displayName": "Pacific International Lines",
+    "aliases": [
+      "PIL",
+      "PIL Shipping",
+      "PABV"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#d41925",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pacific-international-lines"
+    },
+    "trackingUrlTemplate": "https://www.pilship.com/digital-solutions/?tab=customer&id=track-trace&label=containerTandT&module=TrackContStatus&refNo={trackingNumber}",
+    "trackingSiteName": "PIL Container T&T",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.pilship.com/digital-solutions/?tab=customer&id=track-trace"
+  },
+  "paqmex": {
+    "displayName": "PaqMex",
+    "aliases": [
+      "Autolíneas Villarreal",
+      "Autolineas Villarreal",
+      "Autolíneas Villareal"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#143764",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "paqmex"
+    },
+    "trackingUrlTemplate": "https://paqmex.com/rastreo?guias={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://paqmex.com/rastreo"
+  },
+  "paqueteria-vencedor": {
+    "displayName": "Paquetería Vencedor",
+    "aliases": [
+      "Grupo Vencedor",
+      "Vencedor Paquetería"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#ae232a",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "paqueteria-vencedor"
+    },
+    "trackingUrlTemplate": "https://www.grupovencedor.com/paqueteria",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.grupovencedor.com/paqueteria"
+  },
+  "parcel2go": {
+    "displayName": "Parcel2Go",
+    "aliases": [
+      "Parcel2Go.com"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#015db9",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "parcel2go"
+    },
+    "trackingUrlTemplate": "https://www.parcel2go.com/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.parcel2go.com",
+          "parcel2go.com"
+        ],
+        "path": "^/tracking/(P2G\\d{8,9})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.parcel2go.com/tracking"
+  },
+  "parcelninja": {
+    "displayName": "Parcelninja",
+    "aliases": [
+      "Parcel Ninja",
+      "Parcelninja South Africa"
+    ],
+    "countries": [
+      "ZA"
+    ],
+    "color": "#172d38",
+    "selectable": true,
+    "timezone": "Africa/Johannesburg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "parcelninja"
+    },
+    "trackingUrlTemplate": "https://store.parcelninja.com/tracking.aspx?WaybillNo={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://store.parcelninja.com/tracking.aspx"
+  },
+  "procon-express-lines": {
+    "displayName": "Procon Express Lines",
+    "aliases": [
+      "Procon Express Lines (CMS)",
+      "PCXS",
+      "Cargo Marketing Services"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#293B6D",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "procon-express-lines"
+    },
+    "trackingUrlTemplate": "https://cmsfreight.com/tracking/public-tracking/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cmsfreight.com/tracking/public-tracking/"
+  },
+  "pronto-envios": {
+    "displayName": "Pronto Envíos",
+    "aliases": [
+      "Pronto Envios",
+      "Pronto Envíos Logística",
+      "Pronto Envíos Logística S.A.S."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#e37724",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pronto-envios"
+    },
+    "trackingUrlTemplate": "https://prontoenvios.fivesoftcolombia.com/tag_detail_v1.html?d={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.prontoenvios.com.co/consulta_fivepostal.php"
+  },
+  "qatar-airways-cargo": {
+    "displayName": "Qatar Airways Cargo",
+    "aliases": [
+      "QR Cargo",
+      "Qatar Cargo"
+    ],
+    "countries": [
+      "QA"
+    ],
+    "color": "#5c0632",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "qatar-airways-cargo"
+    },
+    "trackingUrlTemplate": "https://www.qrcargo.com/s/track-your-shipment",
+    "trackingSiteName": "Qatar Airways Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.qrcargo.com/s/track-your-shipment"
+  },
+  "redecarga": {
+    "displayName": "Redecarga",
+    "aliases": [
+      "Redecarga S.A.S."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#16446d",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "redecarga"
+    },
+    "trackingUrlTemplate": "https://redecarga.gelotra.com/rastrearguia?guia={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://redecarga.gelotra.com/rastrearguia"
+  },
+  "rm-logistics": {
+    "displayName": "RM Logistics",
+    "aliases": [
+      "荣贸",
+      "荣贸供应链",
+      "金华市荣贸供应链管理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2a56a1",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "rm-logistics"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "rosalia-express": {
+    "displayName": "Rosalia Express",
+    "aliases": [
+      "Rosin Express",
+      "Rosalia Indah Express"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#e32b2b",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "rosalia-express"
+    },
+    "trackingUrlTemplate": "https://www.rosalia-express.com/cek-paket",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.rosalia-express.com/cek-paket",
+    "helpUrl": "https://www.rosalia-express.com/faq"
+  },
+  "saco-shipping-line": {
+    "displayName": "SACO Shipping Line",
+    "aliases": [
+      "SACO Shipping GmbH",
+      "SACO Shipping Line Limited",
+      "SSLL"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#043C70",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "saco-shipping-line"
+    },
+    "trackingUrlTemplate": "https://sacoshipping.com/track/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sacoshipping.com/track/"
+  },
+  "salam-pacific-indonesia-lines": {
+    "displayName": "Salam Pacific Indonesia Lines",
+    "aliases": [
+      "SPIL",
+      "PT Salam Pacific Indonesia Lines",
+      "mySPIL"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#008046",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "salam-pacific-indonesia-lines"
+    },
+    "trackingUrlTemplate": "https://myspil.com/",
+    "trackingSiteName": "mySPIL Track & Trace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://myspil.com/"
+  },
+  "sallaum-lines": {
+    "displayName": "Sallaum Lines",
+    "aliases": [
+      "Sallaum Lines Switzerland SA",
+      "Sallaum Lines DMCC",
+      "Sallaum Lines Ltd"
+    ],
+    "countries": [
+      "CH"
+    ],
+    "color": "#173253",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sallaum-lines"
+    },
+    "trackingUrlTemplate": "https://sallaumlines.com/track-shipment/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sallaumlines.com/track-shipment/"
+  },
+  "sea-legend-line": {
+    "displayName": "Sea Legend Line",
+    "aliases": [
+      "Sea Legend Shipping",
+      "Sea Legend Line Limited",
+      "海杰航运"
+    ],
+    "countries": [
+      "SG",
+      "CN"
+    ],
+    "color": "#003e80",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sea-legend-line"
+    },
+    "trackingUrlTemplate": "https://www.slg-shipping.com/#/home/tracking",
+    "trackingSiteName": "Sea Legend Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.slg-shipping.com/#/home/tracking"
+  },
+  "sfl-worldwide": {
+    "displayName": "SFL Worldwide",
+    "aliases": [
+      "SFL Worldwide LLC",
+      "SFL Worldwide Shipping"
+    ],
+    "countries": [
+      "US",
+      "IN"
+    ],
+    "color": "#136BA7",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sfl-worldwide"
+    },
+    "trackingUrlTemplate": "https://track.sflworldwide.com/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.sflworldwide.com/"
+  },
+  "sheensync": {
+    "displayName": "SheenSync",
+    "aliases": [
+      "鲜行供应链",
+      "鲜行",
+      "杭州鲜行供应链管理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#21803d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sheensync"
+    },
+    "trackingUrlTemplate": "https://sheen-sync.com/track.html?c={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "sheen-sync.com"
+        ],
+        "pathPattern": "^/track\\.html$",
+        "params": [
+          "c"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sheen-sync.com/track.html"
+  },
+  "sinokor-merchant-marine": {
+    "displayName": "Sinokor Merchant Marine",
+    "aliases": [
+      "Sinokor",
+      "Sinokor Merchant Marine Co Ltd",
+      "SNKO",
+      "장금상선"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#003f70",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sinokor-merchant-marine"
+    },
+    "trackingUrlTemplate": "https://ebiz.sinokor.co.kr/Tracking",
+    "trackingSiteName": "Sinokor E-Biz Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ebiz.sinokor.co.kr/Tracking"
+  },
+  "sm-line": {
+    "displayName": "SM Line",
+    "aliases": [
+      "SM Line Corporation",
+      "SMLM",
+      "에스엠상선"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#c9192d",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sm-line"
+    },
+    "trackingUrlTemplate": "https://esvc.smlines.com/smline/CUP_HOM_3301.do?sessLocale=en",
+    "trackingSiteName": "SM Line e-Service",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://esvc.smlines.com/smline/CUP_HOM_3301.do?sessLocale=en"
+  },
+  "spedition-moeller": {
+    "displayName": "Artur Möller",
+    "aliases": [
+      "Artur Möller GmbH & Co. KG",
+      "Spedition Artur Möller",
+      "Artur Moeller"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#dd3a32",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "spedition-moeller"
+    },
+    "trackingUrlTemplate": "https://portal.spedition-moeller.com/tracking.html",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.spedition-moeller.com/tracking.html"
+  },
+  "tailwind-shipping-lines": {
+    "displayName": "Tailwind Shipping Lines",
+    "aliases": [
+      "Tailwind Shipping Lines GmbH & Co. KG",
+      "Tailwind Shipping"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#135487",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "tailwind-shipping-lines"
+    },
+    "trackingUrlTemplate": "https://ecom.tailwind-ahead.com/tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ecom.tailwind-ahead.com/tracking"
+  },
+  "tanto-intim-line": {
+    "displayName": "Tanto Intim Line",
+    "aliases": [
+      "PT Tanto Intim Line",
+      "Tanto Line",
+      "Tanto"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#123b75",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "tanto-intim-line"
+    },
+    "trackingUrlTemplate": "https://www.tantonet.com/",
+    "trackingSiteName": "Tanto Container Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tantonet.com/"
+  },
+  "thai-airways-cargo": {
+    "displayName": "THAI Cargo",
+    "aliases": [
+      "Thai Airways Cargo",
+      "Thai Airways International Cargo"
+    ],
+    "countries": [
+      "TH"
+    ],
+    "color": "#512D6D",
+    "selectable": true,
+    "timezone": "Asia/Bangkok",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "thai-airways-cargo"
+    },
+    "trackingUrlTemplate": "https://chorus.thaicargo.com/skychain/app?service=page%2Fnwp%3ATrackshipmt",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://chorus.thaicargo.com/skychain/app?service=page%2Fnwp%3ATrackshipmt"
+  },
+  "transdirect": {
+    "displayName": "Transdirect",
+    "countries": [
+      "AU"
+    ],
+    "color": "#73cf11",
+    "selectable": true,
+    "timezone": "Australia/Brisbane",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "transdirect"
+    },
+    "trackingUrlTemplate": "https://www.transdirect.com.au/education/tracking/?reference={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "transdirect.com.au",
+          "www.transdirect.com.au"
+        ],
+        "pathPattern": "^/education/tracking/?$",
+        "params": [
+          "reference"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.transdirect.com.au/education/tracking/"
+  },
+  "translink-shipping": {
+    "displayName": "Translink Shipping",
+    "aliases": [
+      "Translink Shipping Inc",
+      "TLKP"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#174780",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "translink-shipping"
+    },
+    "trackingUrlTemplate": "https://vip.translinkshipping.com/Pages/CargoTracking.aspx",
+    "trackingSiteName": "Translink Cargo Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://vip.translinkshipping.com/Pages/CargoTracking.aspx"
+  },
+  "transportes-chevalier": {
+    "displayName": "Transportes Chevalier",
+    "aliases": [
+      "Transportes Chevalier S.A.",
+      "Chevalier Colombia",
+      "Chevalier Transportes"
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#173b5d",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "transportes-chevalier"
+    },
+    "trackingUrlTemplate": "https://chevalier.fivesoft.com.co/tag_detail_v1.html?d={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.transporteschevalier.com/consulttag.html"
+  },
+  "tuomeida": {
+    "displayName": "Tuomeida Logistics",
+    "aliases": [
+      "拓美达",
+      "拓美达国际物流",
+      "深圳市拓美达国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#147f79",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "tuomeida"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "umac-cargo": {
+    "displayName": "UMAC Forwarders Express",
+    "aliases": [
+      "UMAC Cargo",
+      "UMAC Forwarders Express Inc.",
+      "UMAC Balikbayan Box"
+    ],
+    "countries": [
+      "PH",
+      "US",
+      "CA"
+    ],
+    "color": "#ce392b",
+    "selectable": true,
+    "timezone": "Asia/Manila",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "umac-cargo"
+    },
+    "trackingUrlTemplate": "https://www.umaccargo.net/track-your-box-new.html",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.umaccargo.net/track-your-box-new.html"
+  },
+  "united-africa-feeder-line": {
+    "displayName": "United Africa Feeder Line",
+    "aliases": [
+      "UAFL",
+      "United Africa Feeder Line DMCC",
+      "UAFL Shipping"
+    ],
+    "countries": [
+      "AE",
+      "MU",
+      "ZA"
+    ],
+    "color": "#155e8a",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "united-africa-feeder-line"
+    },
+    "trackingUrlTemplate": "https://www.uaflshipping.com/Tracking?BookingNo={trackingNumber}",
+    "trackingSiteName": "UAFL Container Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.uaflshipping.com/Tracking"
+  },
+  "volaris-cargo": {
+    "displayName": "Volaris Cargo",
+    "aliases": [
+      "Volaris Air Cargo",
+      "Volaris Carga"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#A12885",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "volaris-cargo"
+    },
+    "trackingUrlTemplate": "https://volarisy4.smartkargo.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://volarisy4.smartkargo.com/FrmAWBTracking.aspx"
+  },
+  "wallenius-wilhelmsen": {
+    "displayName": "Wallenius Wilhelmsen",
+    "aliases": [
+      "Wallenius Wilhelmsen Ocean",
+      "Wallenius Wilhelmsen Logistics",
+      "WWL"
+    ],
+    "countries": [
+      "NO",
+      "SE"
+    ],
+    "color": "#144f73",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "wallenius-wilhelmsen"
+    },
+    "trackingUrlTemplate": "https://www.walleniuswilhelmsen.com/track-trace",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.walleniuswilhelmsen.com/track-trace"
+  },
+  "westjet-cargo": {
+    "displayName": "WestJet Cargo",
+    "aliases": [
+      "WestJet Air Cargo"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#017f7c",
+    "selectable": true,
+    "timezone": "America/Edmonton",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "westjet-cargo"
+    },
+    "trackingUrlTemplate": "https://westjet.smartkargo.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://westjet.smartkargo.com/FrmAWBTracking.aspx"
+  },
+  "whwdt": {
+    "displayName": "Wuhan Wodetong",
+    "aliases": [
+      "WHWDT",
+      "武汉沃德通",
+      "Wuhan Wodetong Supply Chain Technology",
+      "沃德通"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#30318b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "whwdt"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://hyd.itdida.com/itdida-flash/website/landing"
+  },
+  "xingyou": {
+    "displayName": "Xingyou International",
+    "aliases": [
+      "Xingyou",
+      "星邮国际",
+      "星邮",
+      "上海星邮供应链有限公司",
+      "Shanghai Xingyou Supply Chain"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1e4c9a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "xingyou"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "yitu": {
+    "displayName": "YITU",
+    "aliases": [
+      "Yitu",
+      "义途",
+      "义途供应链",
+      "义乌市义途供应链管理有限公司",
+      "Yiwu Yitu Supply Chain"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ff613e",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yitu"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "yuanpeng": {
+    "displayName": "Yuanpeng Supply Chain",
+    "aliases": [
+      "远朋",
+      "远朋跨境",
+      "深圳市远朋跨境供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0472be",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yuanpeng"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "ywd": {
+    "displayName": "YWD",
+    "aliases": [
+      "Yiwangda",
+      "易网达"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e8380d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ywd"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -64579,7 +66818,103 @@ export const CARRIER_IDS = [
   "ywbz",
   "gls-hu",
   "muser",
-  "zhongzhou-logistics"
+  "zhongzhou-logistics",
+  "a-hartrodt",
+  "aerolineas-argentinas-cargo",
+  "air-europa-cargo",
+  "air-greenland",
+  "akasa-air-cargo",
+  "alfa-mensajes",
+  "astral-aviation",
+  "atlantic-container-line",
+  "benben",
+  "bermuda-container-line",
+  "bob-go",
+  "cadena-courier",
+  "calidex-courier",
+  "certipostal",
+  "cesco-logistics",
+  "citilink-cargo",
+  "conexiones-empresariales",
+  "cootranstame",
+  "cordelia-shipping",
+  "cotaxi",
+  "courierit-nz",
+  "dongjin-shipping",
+  "dpd-by",
+  "dpd-ru",
+  "dypaq",
+  "eimskip",
+  "ellerman-city-liners",
+  "enviamos-comunicaciones",
+  "epex-colombia",
+  "esm-logistica",
+  "ethiopian-cargo",
+  "evergreen-line",
+  "feima",
+  "flow-progressive-logistics",
+  "freight-club",
+  "g2-ocean",
+  "garuda-indonesia-cargo",
+  "genei",
+  "globkurier",
+  "hecny-shipping",
+  "hede-shipping",
+  "heung-a-line",
+  "hgd",
+  "hoegh-autoliners",
+  "honour-lane-shipping",
+  "hua-express",
+  "ibex-express-bo",
+  "icasa-cargo",
+  "indigo-cargo",
+  "k-line-roro",
+  "kenya-airways-cargo",
+  "lalji-mulji-transport",
+  "lerdex",
+  "leschaco",
+  "marken",
+  "mol-ace",
+  "navex",
+  "navlungo",
+  "ots-astracon",
+  "pacific-international-lines",
+  "paqmex",
+  "paqueteria-vencedor",
+  "parcel2go",
+  "parcelninja",
+  "procon-express-lines",
+  "pronto-envios",
+  "qatar-airways-cargo",
+  "redecarga",
+  "rm-logistics",
+  "rosalia-express",
+  "saco-shipping-line",
+  "salam-pacific-indonesia-lines",
+  "sallaum-lines",
+  "sea-legend-line",
+  "sfl-worldwide",
+  "sheensync",
+  "sinokor-merchant-marine",
+  "sm-line",
+  "spedition-moeller",
+  "tailwind-shipping-lines",
+  "tanto-intim-line",
+  "thai-airways-cargo",
+  "transdirect",
+  "translink-shipping",
+  "transportes-chevalier",
+  "tuomeida",
+  "umac-cargo",
+  "united-africa-feeder-line",
+  "volaris-cargo",
+  "wallenius-wilhelmsen",
+  "westjet-cargo",
+  "whwdt",
+  "xingyou",
+  "yitu",
+  "yuanpeng",
+  "ywd"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

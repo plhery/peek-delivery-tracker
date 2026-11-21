@@ -1921,6 +1921,102 @@ value class CarrierId(val rawValue: String) {
         val GlsHu = CarrierId("gls-hu")
         val Muser = CarrierId("muser")
         val ZhongzhouLogistics = CarrierId("zhongzhou-logistics")
+        val AHartrodt = CarrierId("a-hartrodt")
+        val AerolineasArgentinasCargo = CarrierId("aerolineas-argentinas-cargo")
+        val AirEuropaCargo = CarrierId("air-europa-cargo")
+        val AirGreenland = CarrierId("air-greenland")
+        val AkasaAirCargo = CarrierId("akasa-air-cargo")
+        val AlfaMensajes = CarrierId("alfa-mensajes")
+        val AstralAviation = CarrierId("astral-aviation")
+        val AtlanticContainerLine = CarrierId("atlantic-container-line")
+        val Benben = CarrierId("benben")
+        val BermudaContainerLine = CarrierId("bermuda-container-line")
+        val BobGo = CarrierId("bob-go")
+        val CadenaCourier = CarrierId("cadena-courier")
+        val CalidexCourier = CarrierId("calidex-courier")
+        val Certipostal = CarrierId("certipostal")
+        val CescoLogistics = CarrierId("cesco-logistics")
+        val CitilinkCargo = CarrierId("citilink-cargo")
+        val ConexionesEmpresariales = CarrierId("conexiones-empresariales")
+        val Cootranstame = CarrierId("cootranstame")
+        val CordeliaShipping = CarrierId("cordelia-shipping")
+        val Cotaxi = CarrierId("cotaxi")
+        val CourieritNz = CarrierId("courierit-nz")
+        val DongjinShipping = CarrierId("dongjin-shipping")
+        val DpdBy = CarrierId("dpd-by")
+        val DpdRu = CarrierId("dpd-ru")
+        val Dypaq = CarrierId("dypaq")
+        val Eimskip = CarrierId("eimskip")
+        val EllermanCityLiners = CarrierId("ellerman-city-liners")
+        val EnviamosComunicaciones = CarrierId("enviamos-comunicaciones")
+        val EpexColombia = CarrierId("epex-colombia")
+        val EsmLogistica = CarrierId("esm-logistica")
+        val EthiopianCargo = CarrierId("ethiopian-cargo")
+        val EvergreenLine = CarrierId("evergreen-line")
+        val Feima = CarrierId("feima")
+        val FlowProgressiveLogistics = CarrierId("flow-progressive-logistics")
+        val FreightClub = CarrierId("freight-club")
+        val G2Ocean = CarrierId("g2-ocean")
+        val GarudaIndonesiaCargo = CarrierId("garuda-indonesia-cargo")
+        val Genei = CarrierId("genei")
+        val Globkurier = CarrierId("globkurier")
+        val HecnyShipping = CarrierId("hecny-shipping")
+        val HedeShipping = CarrierId("hede-shipping")
+        val HeungALine = CarrierId("heung-a-line")
+        val Hgd = CarrierId("hgd")
+        val HoeghAutoliners = CarrierId("hoegh-autoliners")
+        val HonourLaneShipping = CarrierId("honour-lane-shipping")
+        val HuaExpress = CarrierId("hua-express")
+        val IbexExpressBo = CarrierId("ibex-express-bo")
+        val IcasaCargo = CarrierId("icasa-cargo")
+        val IndigoCargo = CarrierId("indigo-cargo")
+        val KLineRoro = CarrierId("k-line-roro")
+        val KenyaAirwaysCargo = CarrierId("kenya-airways-cargo")
+        val LaljiMuljiTransport = CarrierId("lalji-mulji-transport")
+        val Lerdex = CarrierId("lerdex")
+        val Leschaco = CarrierId("leschaco")
+        val Marken = CarrierId("marken")
+        val MolAce = CarrierId("mol-ace")
+        val Navex = CarrierId("navex")
+        val Navlungo = CarrierId("navlungo")
+        val OtsAstracon = CarrierId("ots-astracon")
+        val PacificInternationalLines = CarrierId("pacific-international-lines")
+        val Paqmex = CarrierId("paqmex")
+        val PaqueteriaVencedor = CarrierId("paqueteria-vencedor")
+        val Parcel2go = CarrierId("parcel2go")
+        val Parcelninja = CarrierId("parcelninja")
+        val ProconExpressLines = CarrierId("procon-express-lines")
+        val ProntoEnvios = CarrierId("pronto-envios")
+        val QatarAirwaysCargo = CarrierId("qatar-airways-cargo")
+        val Redecarga = CarrierId("redecarga")
+        val RmLogistics = CarrierId("rm-logistics")
+        val RosaliaExpress = CarrierId("rosalia-express")
+        val SacoShippingLine = CarrierId("saco-shipping-line")
+        val SalamPacificIndonesiaLines = CarrierId("salam-pacific-indonesia-lines")
+        val SallaumLines = CarrierId("sallaum-lines")
+        val SeaLegendLine = CarrierId("sea-legend-line")
+        val SflWorldwide = CarrierId("sfl-worldwide")
+        val Sheensync = CarrierId("sheensync")
+        val SinokorMerchantMarine = CarrierId("sinokor-merchant-marine")
+        val SmLine = CarrierId("sm-line")
+        val SpeditionMoeller = CarrierId("spedition-moeller")
+        val TailwindShippingLines = CarrierId("tailwind-shipping-lines")
+        val TantoIntimLine = CarrierId("tanto-intim-line")
+        val ThaiAirwaysCargo = CarrierId("thai-airways-cargo")
+        val Transdirect = CarrierId("transdirect")
+        val TranslinkShipping = CarrierId("translink-shipping")
+        val TransportesChevalier = CarrierId("transportes-chevalier")
+        val Tuomeida = CarrierId("tuomeida")
+        val UmacCargo = CarrierId("umac-cargo")
+        val UnitedAfricaFeederLine = CarrierId("united-africa-feeder-line")
+        val VolarisCargo = CarrierId("volaris-cargo")
+        val WalleniusWilhelmsen = CarrierId("wallenius-wilhelmsen")
+        val WestjetCargo = CarrierId("westjet-cargo")
+        val Whwdt = CarrierId("whwdt")
+        val Xingyou = CarrierId("xingyou")
+        val Yitu = CarrierId("yitu")
+        val Yuanpeng = CarrierId("yuanpeng")
+        val Ywd = CarrierId("ywd")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3783,6 +3879,102 @@ value class CarrierId(val rawValue: String) {
             GlsHu,
             Muser,
             ZhongzhouLogistics,
+            AHartrodt,
+            AerolineasArgentinasCargo,
+            AirEuropaCargo,
+            AirGreenland,
+            AkasaAirCargo,
+            AlfaMensajes,
+            AstralAviation,
+            AtlanticContainerLine,
+            Benben,
+            BermudaContainerLine,
+            BobGo,
+            CadenaCourier,
+            CalidexCourier,
+            Certipostal,
+            CescoLogistics,
+            CitilinkCargo,
+            ConexionesEmpresariales,
+            Cootranstame,
+            CordeliaShipping,
+            Cotaxi,
+            CourieritNz,
+            DongjinShipping,
+            DpdBy,
+            DpdRu,
+            Dypaq,
+            Eimskip,
+            EllermanCityLiners,
+            EnviamosComunicaciones,
+            EpexColombia,
+            EsmLogistica,
+            EthiopianCargo,
+            EvergreenLine,
+            Feima,
+            FlowProgressiveLogistics,
+            FreightClub,
+            G2Ocean,
+            GarudaIndonesiaCargo,
+            Genei,
+            Globkurier,
+            HecnyShipping,
+            HedeShipping,
+            HeungALine,
+            Hgd,
+            HoeghAutoliners,
+            HonourLaneShipping,
+            HuaExpress,
+            IbexExpressBo,
+            IcasaCargo,
+            IndigoCargo,
+            KLineRoro,
+            KenyaAirwaysCargo,
+            LaljiMuljiTransport,
+            Lerdex,
+            Leschaco,
+            Marken,
+            MolAce,
+            Navex,
+            Navlungo,
+            OtsAstracon,
+            PacificInternationalLines,
+            Paqmex,
+            PaqueteriaVencedor,
+            Parcel2go,
+            Parcelninja,
+            ProconExpressLines,
+            ProntoEnvios,
+            QatarAirwaysCargo,
+            Redecarga,
+            RmLogistics,
+            RosaliaExpress,
+            SacoShippingLine,
+            SalamPacificIndonesiaLines,
+            SallaumLines,
+            SeaLegendLine,
+            SflWorldwide,
+            Sheensync,
+            SinokorMerchantMarine,
+            SmLine,
+            SpeditionMoeller,
+            TailwindShippingLines,
+            TantoIntimLine,
+            ThaiAirwaysCargo,
+            Transdirect,
+            TranslinkShipping,
+            TransportesChevalier,
+            Tuomeida,
+            UmacCargo,
+            UnitedAfricaFeederLine,
+            VolarisCargo,
+            WalleniusWilhelmsen,
+            WestjetCargo,
+            Whwdt,
+            Xingyou,
+            Yitu,
+            Yuanpeng,
+            Ywd,
         )
     }
 }

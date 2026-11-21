@@ -93,7 +93,7 @@ C'est le vendeur qui a réservé l'envoi chez HYWL : c'est à lui qu'il faut s'a
 
 ## Suivre un colis HYWL avec Peek
 
-[Peek](/) ne peut pas reconnaître un numéro HYWL à coup sûr d'après sa seule forme. Colle-le quand même : Peek suit plus de 4 000 transporteurs. Pendant l'ajout, Peek interroge le suivi de HYWL (« Vérification des services de suivi… ») et affiche « Huiyi Logistics a ce colis. » si HYWL connaît le numéro. Sinon, touche « Changer » et choisis Huiyi Logistics sous « Correspond à ce numéro » (tu le trouves aussi en tapant HYWL ou 汇一物流), ou utilise « Changer de transporteur » sur un colis déjà ajouté.
+[Peek](/) ne peut pas reconnaître un numéro HYWL à coup sûr d'après sa seule forme. Colle-le quand même : Peek suit plus de 4 500 transporteurs. Pendant l'ajout, Peek interroge le suivi de HYWL (« Vérification des services de suivi… ») et affiche « Huiyi Logistics a ce colis. » si HYWL connaît le numéro. Sinon, touche « Changer » et choisis Huiyi Logistics sous « Correspond à ce numéro » (tu le trouves aussi en tapant HYWL ou 汇一物流), ou utilise « Changer de transporteur » sur un colis déjà ajouté.
 
 Si tu ajoutes un numéro TRK sans choisir de transporteur et que HYWL ne le connaît pas encore, Peek affiche « Probablement Huiyi Logistics » et « En attente du premier scan de Huiyi Logistics », et continue d'interroger HYWL. Au bout d'une semaine, il te propose de vérifier le numéro auprès de l'expéditeur ou de choisir un autre transporteur.
 

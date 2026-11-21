@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek für iPhone, iPad und Mac ist eine kostenlose App, die Pakete von mehr als 4000 Paketdiensten verfolgt, ganz ohne Konto. Leg ihr Widget „Pakete“ auf deinen Home-Bildschirm, schick ihr Tracking-Links mit „Zu Peek hinzufügen“ im Teilen-Menü, oder scanne mit iPhone oder iPad den Barcode auf dem Etikett.
+Peek für iPhone, iPad und Mac ist eine kostenlose App, die Pakete von mehr als 4500 Paketdiensten verfolgt, ganz ohne Konto. Leg ihr Widget „Pakete“ auf deinen Home-Bildschirm, schick ihr Tracking-Links mit „Zu Peek hinzufügen“ im Teilen-Menü, oder scanne mit iPhone oder iPad den Barcode auf dem Etikett.
 
 Füge eine Sendungsnummer, einen Link vom Paketdienst oder eine ganze Versandmail ein, und [Peek](/) findet den Paketdienst und zeigt die Reise auf einer Karte. Es gibt keine In-App-Käufe und keine Werbung.
 
@@ -99,7 +99,7 @@ Im Fenster „Einstellungen“ von Peek hat „Allgemein“ den Schalter „In d
 
 :::sources
 - [Peek: App für iPhone, iPad und Mac (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – Paketlinks, Inhalt und Aktualisierung des Widgets, Siris Antworten, Tastenkürzel, Drag & Drop
-- [Peek: Text des App-Store-Eintrags](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/de.md) – Name, 4000+ Paketdienste, kostenlos ohne Werbung, Teilen aus Mail, Nachrichten oder Safari
+- [Peek: Text des App-Store-Eintrags](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/de.md) – Name, 4500+ Paketdienste, kostenlos ohne Werbung, Teilen aus Mail, Nachrichten oder Safari
 - [Peek: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – jede hier zitierte Peek-Beschriftung
 - [Peek: Projekteinstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, für iPhone und iPad gemacht
 - [Peek: Barrierefreiheit (auf Englisch)](https://peektracker.com/accessibility.html) – die App-Store-App auf iPhone, iPad und Mac

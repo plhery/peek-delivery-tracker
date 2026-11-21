@@ -104,7 +104,7 @@ Ponieważ reklamacje w JS Express składa nadawca, w sprawie zamówienia pisz do
 
 ## Śledzenie przesyłki JS Express w Peek
 
-[Peek](/) rozpoznaje numer JS Express po samym układzie znaków (JSE, dwie litery, dziesięć cyfr i YQ), którego nie używa żaden inny przewoźnik w katalogu, i odpytuje bezpośrednio śledzenie JS Express. Jeśli masz wyłącznie numer lokalnego kuriera, wklej go zamiast tego: Peek obsługuje ponad 4000 przewoźników, a gdy sam układ nie wskaże firmy, wybierzesz ją przyciskiem „Zmień”.
+[Peek](/) rozpoznaje numer JS Express po samym układzie znaków (JSE, dwie litery, dziesięć cyfr i YQ), którego nie używa żaden inny przewoźnik w katalogu, i odpytuje bezpośrednio śledzenie JS Express. Jeśli masz wyłącznie numer lokalnego kuriera, wklej go zamiast tego: Peek obsługuje ponad 4500 przewoźników, a gdy sam układ nie wskaże firmy, wybierzesz ją przyciskiem „Zmień”.
 
 Peek pobiera historię z angielskiej strony JS Express i pokazuje każdy skan wraz z miejscem oraz krajem docelowym, którego sama strona JS Express nie wyświetla. `到达待取` pojawia się po angielsku jako `Arrived, awaiting collection`, podobnie jak chiński komunikat o błędnym adresie. Nazwiska osób odbierających paczkę, numery telefonów, zdjęcia z doręczenia oraz wewnętrzny numer zamówienia sklepu są pomijane. Jako przewidywaną datę dostawy Peek pokazuje dzień szacowany przez JS Express i ukrywa go, gdy paczka przechodzi w stan „W doręczeniu”, bo doręczenie wypada już tego dnia. Wiersze informacyjne nie zmieniają statusu.
 

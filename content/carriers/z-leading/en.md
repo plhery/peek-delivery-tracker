@@ -59,7 +59,7 @@ Z-Leading lists no office or contact for recipients outside China. If you booked
 
 ## Track a Z-Leading shipment with Peek
 
-[Peek](/) can't tell a Z-Leading shipment by its number alone: the `ZL` shape above is only a weak match, so Peek doesn't name Z-Leading from it, though "Change" lists Z-Leading under "Fits this number". Paste it all the same: Peek follows more than 4,000 carriers. Peek recognises a valid UPS number at once; for ten or twelve digits, it asks the carriers whose numbers look like that, DHL Express and FedEx among them, and follows the one that has the parcel with its own tracking.
+[Peek](/) can't tell a Z-Leading shipment by its number alone: the `ZL` shape above is only a weak match, so Peek doesn't name Z-Leading from it, though "Change" lists Z-Leading under "Fits this number". Paste it all the same: Peek follows more than 4,500 carriers. Peek recognises a valid UPS number at once; for ten or twelve digits, it asks the carriers whose numbers look like that, DHL Express and FedEx among them, and follows the one that has the parcel with its own tracking.
 
 For any other number, Peek asks tracking services while you add it ("Checking tracking services…"). When they name Zhongling or Z-Leading as the carrier and show the parcel moving, Peek names Z-Leading. Otherwise pick Z-Leading with "Change": typing "Zhongling" or "中领国际" finds it too. If no service knows the number yet, the carrier list says "Not found by tracking services yet. Peek will keep checking after you add it."
 

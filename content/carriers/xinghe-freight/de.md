@@ -87,7 +87,7 @@ Für Paketempfänger im Ausland bietet die Seite keinen Kundendienst; das Kontak
 
 ## Xinghe-Freight-Paket mit Peek verfolgen
 
-[Peek](/) ordnet eine GZXH…YQ-Nummer sofort Xinghe Freight zu („Erkannter Paketdienst“). Hat dir der Shop eine Nummer in einem anderen Format geschickt, füg sie trotzdem ein: Peek unterstützt mehr als 4.000 Paketdienste. Um eine Sendung von Hand Xinghe zuzuweisen, tipp auf „Ändern“ und such nach Xinghe Freight (auch 星和货运 findet den Eintrag), oder nutze „Paketdienst ändern“ bei einem bereits gespeicherten Paket.
+[Peek](/) ordnet eine GZXH…YQ-Nummer sofort Xinghe Freight zu („Erkannter Paketdienst“). Hat dir der Shop eine Nummer in einem anderen Format geschickt, füg sie trotzdem ein: Peek unterstützt mehr als 4.500 Paketdienste. Um eine Sendung von Hand Xinghe zuzuweisen, tipp auf „Ändern“ und such nach Xinghe Freight (auch 星和货运 findet den Eintrag), oder nutze „Paketdienst ändern“ bei einem bereits gespeicherten Paket.
 
 Peek fragt GZYLs Tracker ab – genau wie das Suchfeld auf Xinghes eigener Website. Es zeigt den Status, jeden Schritt mit seinem Ort und das Zielland, sofern der Datensatz es enthält. Uhrzeiten werden als Pekinger Zeit gelesen und in der Zeitzone deines Geräts dargestellt; auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und dem Namen der Zeitzone. Namen, Anschrift, Postleitzahlen, Gewicht, Zahlungsangaben, Unterschrift und Zustellnachweis lässt Peek weg; ein voraussichtliches Lieferdatum gibt es nicht, weil der Tracker keines nennt.
 

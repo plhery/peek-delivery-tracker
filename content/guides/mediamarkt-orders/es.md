@@ -120,7 +120,7 @@ Para los artículos de otro vendedor del marketplace, el plazo es de 30 días de
 
 Sí, con el número del transportista. Cópialo del correo de envío o de la web del transportista y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack con `PK` y 18 cifras, y los de Correos de la tabla. Si una forma la usan varios transportistas, como las 14 cifras de SEUR, DPD y BRT o las 10 cifras de DHL y Mondial Relay, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo de MediaMarkt.
 
-Si el pedido llega en varias expediciones, añade cada número. Un artículo de otro vendedor llega con el transportista que él elija: Peek lo detecta entre más de 4000. El número de pedido de MediaMarkt no es un número de seguimiento, y una recogida en tienda o un envío con Glovo no tienen número que Peek pueda seguir.
+Si el pedido llega en varias expediciones, añade cada número. Un artículo de otro vendedor llega con el transportista que él elija: Peek lo detecta entre más de 4500. El número de pedido de MediaMarkt no es un número de seguimiento, y una recogida en tienda o un envío con Glovo no tienen número que Peek pueda seguir.
 
 Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan en tu cuenta de MediaMarkt.
 

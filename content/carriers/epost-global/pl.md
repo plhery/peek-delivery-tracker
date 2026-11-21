@@ -97,7 +97,7 @@ Według `epostglobalshipping.com`:
 
 ## Śledzenie przesyłki ePost Global w Peek
 
-[Peek](/) natychmiast rozpoznaje numer złożony z `EPG` i 10–15 cyfr („Wykryty przewoźnik”) i odpytuje `epgtrack.com` bez zakładania konta ani podawania kodu pocztowego. Działa również wklejenie linku z `epgtrack.com` lub `ppxtrack.com`: Peek wyciąga z niego numer (pierwszy z listy, jeśli parametr `?id=` zawiera ich kilka). Gdy masz wyłącznie numer lokalnego partnera, wklej go tak samo — Peek obsługuje ponad 4 000 przewoźników.
+[Peek](/) natychmiast rozpoznaje numer złożony z `EPG` i 10–15 cyfr („Wykryty przewoźnik”) i odpytuje `epgtrack.com` bez zakładania konta ani podawania kodu pocztowego. Działa również wklejenie linku z `epgtrack.com` lub `ppxtrack.com`: Peek wyciąga z niego numer (pierwszy z listy, jeśli parametr `?id=` zawiera ich kilka). Gdy masz wyłącznie numer lokalnego partnera, wklej go tak samo — Peek obsługuje ponad 4 500 przewoźników.
 
 Peek pokazuje aktualny status, każdy skan z jego miejscem, kraj przeznaczenia oraz nazwę i numer partnera, gdy podaje je ePost Global. Pomija pasek postępu, kody pocztowe, numery magazynów lub ulic, referencję klienta oraz lotnicze listy przewozowe (`MAWB`); ponieważ `epgtrack.com` nie udostępnia przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia, Peek ich nie wyświetla. Przycisk „Otwórz stronę przewoźnika ePost Global” otwiera Twoją paczkę bezpośrednio na `epgtrack.com`.
 

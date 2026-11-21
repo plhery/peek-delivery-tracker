@@ -86,7 +86,7 @@ For a Shopee order, ask through Shopee. For an order from another shop, ask that
 
 - **An SPXSG number.** Peek names SPX Express Singapore at once ("Detected carrier") and asks SPX's tracker. "Change" lets you pick another carrier.
 - **A link.** Paste a link to SPX's tracker on spx.sg with an SPXSG number in it (`/track?`, `/m/track?` or `/detail/`), and Peek takes the number from it.
-- **An SG number.** Peek can't be sure of the carrier from this shape alone. Paste it all the same: Peek follows more than 4,000 carriers. While it checks, you see "Checking tracking services…". To choose SPX yourself, press "Change": SPX Express Singapore is under "Fits this number". Better, use the SPXSG number if you have it: SPX's tracker often finds a Shopee parcel only by that number.
+- **An SG number.** Peek can't be sure of the carrier from this shape alone. Paste it all the same: Peek follows more than 4,500 carriers. While it checks, you see "Checking tracking services…". To choose SPX yourself, press "Change": SPX Express Singapore is under "Fits this number". Better, use the SPXSG number if you have it: SPX's tracker often finds a Shopee parcel only by that number.
 
 Added without a carrier, a parcel shows "No tracking history yet" while Peek asks tracking services. If one names SPX Express Singapore alone, with dated steps, Peek files the parcel under SPX.
 

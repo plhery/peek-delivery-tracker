@@ -87,7 +87,7 @@ As transpress.bg's Contacts page listed them on 13 November 2026:
 
 ## Track a Transpress parcel with Peek
 
-[Peek](/) follows more than 4,000 carriers but can't tell a Transpress number by its shape. A link to Transpress's tracker names Transpress at once; with the number alone, pick the carrier yourself:
+[Peek](/) follows more than 4,500 carriers but can't tell a Transpress number by its shape. A link to Transpress's tracker names Transpress at once; with the number alone, pick the carrier yourself:
 
 1. Paste the number in the box above.
 2. Press "Change" beside the carrier line and search for Transpress. "Транспрес" finds it too, shown with "Also called …", and so does "Bulgaria".

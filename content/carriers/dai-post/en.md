@@ -91,7 +91,7 @@ DAI Post's channels, as read on 1 November 2026:
 [Peek](/) follows a DAI Post parcel with the number alone: no account or postcode.
 
 - **An NZC number.** Peek names DAI Post at once ("Detected carrier").
-- **A 20-digit number starting 0039358094.** Paste it all the same: Peek follows more than 4,000 carriers. While it checks, you see "Checking tracking services…", and DAI Post is among the first asked. If DAI Post has it, Peek names it. If not yet, the parcel shows "Waiting for DAI Post’s first scan" and the card says "Probably DAI Post"; after a week, Peek suggests checking the number with the sender. To choose DAI Post yourself, tap "Change": it's under "Fits this number".
+- **A 20-digit number starting 0039358094.** Paste it all the same: Peek follows more than 4,500 carriers. While it checks, you see "Checking tracking services…", and DAI Post is among the first asked. If DAI Post has it, Peek names it. If not yet, the parcel shows "Waiting for DAI Post’s first scan" and the card says "Probably DAI Post"; after a week, Peek suggests checking the number with the sender. To choose DAI Post yourself, tap "Change": it's under "Fits this number".
 - **Any other number.** Paste it all the same, then tap "Change" and pick DAI Post (search DAI Post or Parcel Right). On a parcel already added, use "Change carrier".
 - **A link.** Paste a tracking link from daipost.com, parcelright.com.au or parcelrig.ht: Peek takes the number and names DAI Post straight away.
 

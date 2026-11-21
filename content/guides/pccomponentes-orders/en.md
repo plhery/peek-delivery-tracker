@@ -122,7 +122,7 @@ Returns are free for new and refurbished items. For Marketplace items, check the
 
 ## Can I track a PcComponentes parcel in Peek?
 
-Yes, with the agency's tracking number. Copy it from PcComponentes's shipping email or the agency's messages and paste it into [Peek](/). Peek recognises the Correos numbers above by their shape alone. The GLS shape is shared with other carriers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the agency the email names. For another agency, paste its number all the same: Peek follows more than 4,000 carriers.
+Yes, with the agency's tracking number. Copy it from PcComponentes's shipping email or the agency's messages and paste it into [Peek](/). Peek recognises the Correos numbers above by their shape alone. The GLS shape is shared with other carriers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the agency the email names. For another agency, paste its number all the same: Peek follows more than 4,500 carriers.
 
 An outside seller's item has its own number only if the seller ships it with tracking. If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. The PcComponentes order number isn't a tracking number: Peek can't follow it.
 

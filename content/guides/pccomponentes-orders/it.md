@@ -99,7 +99,7 @@ Una volta ritirato il prodotto o lasciato in un punto di ritiro, arriva a PcComp
 
 ## Posso tracciare un pacco PcComponentes in Peek?
 
-Sì, con il numero dell'agenzia. Copialo dall'e-mail di spedizione e incollalo in [Peek](/), qualunque sia l'agenzia: Peek segue più di 4.000 corrieri. Se lo stesso formato di numero appartiene a più corrieri, Peek interroga quelli probabili e ti mostra quello che conosce il numero. Se lo conoscono in tanti, tocca «Scegli»; se Peek mostra quello sbagliato, tocca «Cambia» e scegli l'agenzia indicata nell'e-mail.
+Sì, con il numero dell'agenzia. Copialo dall'e-mail di spedizione e incollalo in [Peek](/), qualunque sia l'agenzia: Peek segue più di 4.500 corrieri. Se lo stesso formato di numero appartiene a più corrieri, Peek interroga quelli probabili e ti mostra quello che conosce il numero. Se lo conoscono in tanti, tocca «Scegli»; se Peek mostra quello sbagliato, tocca «Cambia» e scegli l'agenzia indicata nell'e-mail.
 
 L'articolo di un venditore del Marketplace ha un suo numero solo se il venditore lo spedisce con tracciamento. Se il pacco cambia corriere lungo la strada e il primo indica quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Il numero d'ordine PcComponentes non è un numero di tracciamento: Peek non può seguirlo.
 

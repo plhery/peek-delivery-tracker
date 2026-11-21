@@ -26,7 +26,7 @@ Peek finds the carrier, draws the journey, notifies you when the parcel moves.
 ## What you get
 
 **Where's my parcel?**<br>
-Paste what you have. Peek works out which of 4,000+ carriers has the parcel and gives it a
+Paste what you have. Peek works out which of 4,500+ carriers has the parcel and gives it a
 page of its own: the journey on a map, every scan, the day it should arrive. No account
 needed.
 

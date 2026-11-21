@@ -22,7 +22,7 @@ Wielu innych chińskich spedytorów e-commerce także kończy swoje numery liter
 
 **Gdzie go znaleźć.** Jeśli numeru nie ma w wiadomości e-mail o nadaniu paczki ani na karcie zamówienia w sklepie lub na platformie zakupowej, zajrzyj do poradnika [jak znaleźć numer śledzenia przesyłki](guide:find-tracking-number).
 
-**Sprzedawca mógł podać numer kuriera końcowego.** Na stronach swoich linii przewozowych Shouwu wyjaśnia, że nadawca sam wybiera, który numer przekazuje kupującemu: własny numer Shouwu, pozwalający śledzić paczkę na całej trasie z Chin, albo od razu numer przewoźnika doręczającego przesyłkę w kraju docelowym. Dlatego paczka obsłużona przez Shouwu może dotrzeć pod numerem europejskiej poczty lub firmy kurierskiej. Taki numer również możesz wkleić powyżej — Peek obsługuje ponad 4 000 przewoźników.
+**Sprzedawca mógł podać numer kuriera końcowego.** Na stronach swoich linii przewozowych Shouwu wyjaśnia, że nadawca sam wybiera, który numer przekazuje kupującemu: własny numer Shouwu, pozwalający śledzić paczkę na całej trasie z Chin, albo od razu numer przewoźnika doręczającego przesyłkę w kraju docelowym. Dlatego paczka obsłużona przez Shouwu może dotrzeć pod numerem europejskiej poczty lub firmy kurierskiej. Taki numer również możesz wkleić powyżej — Peek obsługuje ponad 4 500 przewoźników.
 
 **Link do śledzenia.** Przycisk „Copy Link” na stronie śledzenia Shouwu kopiuje adres z parametrem `?q=` i numerem paczki na końcu. Taki link otwiera bezpośrednio daną przesyłkę, a w razie potrzeby możesz wkleić go w całości prosto do Peeka. Wyszukiwarka Shouwu przyjmuje jednocześnie do 40 numerów wpisywanych jeden pod drugim.
 

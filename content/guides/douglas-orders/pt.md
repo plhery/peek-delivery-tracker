@@ -98,7 +98,7 @@ Onde está o número de seguimento da devolução: [seguimento de devoluções](
 
 ## Posso seguir uma encomenda Douglas no Peek?
 
-Sim, com o número de seguimento da transportadora: cola-o no [Peek](/). Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. O Peek segue mais de 4000 transportadoras, por isso cola o número mesmo que não saibas de quem é.
+Sim, com o número de seguimento da transportadora: cola-o no [Peek](/). Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. O Peek segue mais de 4500 transportadoras, por isso cola o número mesmo que não saibas de quem é.
 
 Se a devolução tiver número de seguimento, cola-o da mesma maneira. Se a encomenda vier em vários pacotes, adiciona cada número.
 

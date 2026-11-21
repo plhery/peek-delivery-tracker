@@ -126,7 +126,7 @@ Pieniądze wracają tą samą metodą płatności, najpóźniej 14 dni po przyj�
 
 Tak, z numerem przewoźnika: wklej go do [Peek](/). Numery DPD z tabeli Peek rozpoznaje po samym kształcie. 24 cyfry InPostu i 13 cyfr FedExu mają też inni przewoźnicy, więc Peek pyta prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, Peek pokazuje każdego z dopiskiem „Zna ten numer”: wybierz tego, którego podaje e-mail o wysyłce. Jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika.
 
-Numer od Zadbano, kuriera Uber albo przewoźnika wybranego przez sprzedawcę Marketplace wklej mimo to: Peek śledzi ponad 4000 przewoźników. Gdy zamówienie przyjdzie w kilku paczkach, dodaj każdy numer.
+Numer od Zadbano, kuriera Uber albo przewoźnika wybranego przez sprzedawcę Marketplace wklej mimo to: Peek śledzi ponad 4500 przewoźników. Gdy zamówienie przyjdzie w kilku paczkach, dodaj każdy numer.
 
 :::sources
 - [Decathlon Polska: Dostawa](https://www.decathlon.pl/lp/i/dostawa) – formy dostawy, 1–3 dni robocze, dzień w koszyku, ceny i progi, aplikacja, koszt Click & Collect 1H w koszyku

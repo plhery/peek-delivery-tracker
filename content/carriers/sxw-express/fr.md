@@ -72,7 +72,7 @@ Le client contractuel de SXW Express étant le vendeur, adressez-vous d'abord à
 
 ## Suivre un colis SXW Express avec Peek
 
-[Peek](/) identifie immédiatement un code composé de `SXW` et douze chiffres avec la mention « Transporteur détecté », car aucun autre transporteur du catalogue n'utilise ce format (pour un numéro d'un autre format, Peek couvre plus de 4 000 transporteurs ; vous pouvez aussi choisir SXW Express manuellement via « Changer » ou « Changer de transporteur » en tapant `SXW Express`, `Shengxingwang` ou `胜兴旺`).
+[Peek](/) identifie immédiatement un code composé de `SXW` et douze chiffres avec la mention « Transporteur détecté », car aucun autre transporteur du catalogue n'utilise ce format (pour un numéro d'un autre format, Peek couvre plus de 4 500 transporteurs ; vous pouvez aussi choisir SXW Express manuellement via « Changer » ou « Changer de transporteur » en tapant `SXW Express`, `Shengxingwang` ou `胜兴旺`).
 
 Peek interroge le traceur officiel de SXW sans compte, code postal ni téléphone. Il affiche le statut, chaque scan (avec les trois étapes chinoises traduites en anglais), le lieu lorsqu'il est fourni, le nom du service et le pays de destination, tout en écartant les noms, adresse, codes postaux, nombre de colis, poids, référence client, détails de paiement, signataire, signature et preuve de livraison. Le traceur de SXW ne donnant pas de date de livraison estimée, Peek n'en affiche pas.
 

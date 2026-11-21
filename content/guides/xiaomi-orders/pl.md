@@ -118,7 +118,7 @@ Zwrot jedzie z własnym numerem przesyłki. Więcej: [śledzenie zwrotów](guide
 
 Tak: wklej do [Peek](/) numer przesyłki od przewoźnika. Numery InPost mają zwykle 24 cyfry, a taki kształt mają też numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego.
 
-Numer przesyłki zwrotnej wklej tak samo. Jeśli zwrot jedzie z DHL, a Peek pokaże innego przewoźnika, naciśnij „Zmień” i wybierz z listy właściwą usługę DHL. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
+Numer przesyłki zwrotnej wklej tak samo. Jeśli zwrot jedzie z DHL, a Peek pokaże innego przewoźnika, naciśnij „Zmień” i wybierz z listy właściwą usługę DHL. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4500 przewoźników. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 
 Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z Xiaomi.
 

@@ -124,7 +124,7 @@ Sì, con il numero del corriere. Incollalo in [Peek](/). Peek riconosce questi s
 
 Se lo stesso formato appartiene a più corrieri, Peek interroga quelli probabili e ti mostra quello che conosce il numero. Se lo conoscono in tanti, tocca «Scegli»; se Peek mostra quello sbagliato, tocca «Cambia» e scegli quello giusto.
 
-Quando DHL passa il pacco a DHL Express o a Poste Italiane, Peek tiene la cronologia dall'inizio e segue il nuovo corriere se DHL lo indica. Se un commerciante, un fornitore o una società di spedizione usa un altro corriere, incolla comunque il suo numero: Peek segue più di 4.000 corrieri. L'articolo di un commerciante ha un suo numero solo se viene spedito con tracciamento.
+Quando DHL passa il pacco a DHL Express o a Poste Italiane, Peek tiene la cronologia dall'inizio e segue il nuovo corriere se DHL lo indica. Se un commerciante, un fornitore o una società di spedizione usa un altro corriere, incolla comunque il suo numero: Peek segue più di 4.500 corrieri. L'articolo di un commerciante ha un suo numero solo se viene spedito con tracciamento.
 
 Peek mostra quello che pubblica il corriere. Casi, rimborsi e resi restano nel tuo conto Galaxus.
 

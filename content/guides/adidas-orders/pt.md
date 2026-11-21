@@ -119,7 +119,7 @@ Sim: cola no [Peek](/) o número de seguimento do e-mail de confirmação do env
 - Correos: 2 letras, 9 algarismos e `ES`, como `RR000000005ES`; `PR`, 15 algarismos e `C`; ou 16 ou 23 caracteres que começam por `P` ou `D` e outra letra e acabam em letra.
 - UPS: `1Z` e 16 letras ou algarismos.
 
-Para uma transportadora que este guia não nomeia, cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se várias usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Os números de devolução funcionam da mesma forma.
+Para uma transportadora que este guia não nomeia, cola o número na mesma: o Peek segue mais de 4500 transportadoras. Se várias usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Os números de devolução funcionam da mesma forma.
 
 Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica com ele, o Peek mantém o histórico desde o início e segue a nova. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam com a adidas.
 

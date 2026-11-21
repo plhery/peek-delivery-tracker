@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Um ein Paket zu verfolgen, musst du den Paketdienst nicht kennen: Füge die Sendungsnummer, den Tracking-Link des Paketdienstes oder die ganze Versandmail oder SMS ins Feld bei [Peek](/) ein, und Peek fischt die Nummer heraus, erkennt den Paketdienst und öffnet die Seite des Pakets. Auf peektracker.com musst du kein Konto anlegen, und Peek verfolgt Pakete von mehr als 4.000 Paketdiensten.
+Um ein Paket zu verfolgen, musst du den Paketdienst nicht kennen: Füge die Sendungsnummer, den Tracking-Link des Paketdienstes oder die ganze Versandmail oder SMS ins Feld bei [Peek](/) ein, und Peek fischt die Nummer heraus, erkennt den Paketdienst und öffnet die Seite des Pakets. Auf peektracker.com musst du kein Konto anlegen, und Peek verfolgt Pakete von mehr als 4.500 Paketdiensten.
 
 :::steps
 - Öffne peektracker.com | Im Feld unter „Wo ist mein Paket?“ steht „Nummer, Link oder Nachricht einfügen“.
@@ -76,7 +76,7 @@ Vielleicht steckt ein Tippfehler in der Nummer. Eine Nummer im 13-stelligen Post
 Steht ein Buchstabe, wo eine Ziffer hingehört, oder umgekehrt, und geht die Nummer mit seinem Doppelgänger auf, ergänzt Peek „Vielleicht wurde ein Buchstabe als Ziffer gelesen.“ und bietet die Korrektur an, mit dem geänderten Zeichen hervorgehoben: bei `RR12345678SCH` „Meintest du RR123456785CH?“ Für eine falsche Ziffer gibt es zu viele mögliche Korrekturen, deshalb sagt Peek „Vergleiche sie mit deiner Versandnachricht.“ So oder so behält „Wie eingegeben verfolgen“ die Nummer, wie sie ist.
 
 :::sources
-- [Peek: Startseite](https://peektracker.com/de) – das Feld, kein Konto nötig, 4.000+ Paketdienste
+- [Peek: Startseite](https://peektracker.com/de) – das Feld, kein Konto nötig, 4.500+ Paketdienste
 - [Peek: das Feld der Startseite](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – „Einfügen“, „Einfügen und verfolgen“ beim ersten Besuch auf dem Handy, die Beschriftung des Knopfs
 - [Peek: was das Feld sagt](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – die Zeile des Paketdienstes, mehrere Nummern, mehrere Paketdienste, die Hinweise zu Tippfehlern, Bestellnummern und Abholcodes, die zusätzlichen Felder, das Tageslimit
 - [Peek: einen eingefügten Text lesen](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – Links, Nummern, die eine Mail benennt, Prüfziffern und Doppelgänger

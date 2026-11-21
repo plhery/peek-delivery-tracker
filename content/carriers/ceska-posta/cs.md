@@ -90,7 +90,7 @@ Kontakty, jak je Česká pošta uváděla na svých webech v říjnu 2026:
 
 ## Sledování zásilek České pošty v Peeku
 
-[Peek](/) pozná vnitrostátní čísla České pošty, která začínají `B` nebo `D` (dvě písmena, 10 číslic, písmeno), hned podle tvaru. Číslo stejného tvaru s jinými písmeny na začátku žádnému dopravci nepřiřadí. I tak ho vlož (Peek sleduje přes 4 000 dopravců) a Českou poštu vyber přes „Change“.
+[Peek](/) pozná vnitrostátní čísla České pošty, která začínají `B` nebo `D` (dvě písmena, 10 číslic, písmeno), hned podle tvaru. Číslo stejného tvaru s jinými písmeny na začátku žádnému dopravci nepřiřadí. I tak ho vlož (Peek sleduje přes 4 500 dopravců) a Českou poštu vyber přes „Change“.
 
 U mezinárodních čísel končících `CZ` se správnou kontrolní číslicí se Peek zeptá České pošty (a [Chronopostu](carrier:chronopost)). Když pošta číslo zná, uvidíš „Česká pošta has this parcel.“, jinak „Not found at … yet. Peek will keep checking after you add it.“ S chybnou kontrolní číslicí se České pošty neptá: zkontroluj číslo, nebo ji vyber přes „Change“. Číslo zahraniční pošty, třeba končící `CN`, Peek přiřadí poště země původu, i když zásilka míří do Česka. České poště zásilku předá, jen když ji zahraniční dopravce jmenuje, a to se nestane u každé zásilky; jakmile je zásilka v Česku, můžeš Českou poštu vybrat přes „Change“. Vložit můžeš i odkaz z postaonline.cz, který obsahuje `/trackandtrace/-/zasilka/` a číslo.
 

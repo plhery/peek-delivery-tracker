@@ -31,7 +31,7 @@ Colle un numéro de suivi, un lien ou tout un e-mail d’expédition. Peek trouv
 ```text
 Où est mon colis ?
 
-Colle un numéro de suivi, un lien de transporteur ou tout un e-mail d’expédition, ou scanne le code-barres de l’étiquette. Parmi plus de 4 000 transporteurs, Peek trouve celui qui a le colis, puis affiche son trajet sur une carte, chaque scan et le jour où il devrait arriver.
+Colle un numéro de suivi, un lien de transporteur ou tout un e-mail d’expédition, ou scanne le code-barres de l’étiquette. Parmi plus de 4 500 transporteurs, Peek trouve celui qui a le colis, puis affiche son trajet sur une carte, chaque scan et le jour où il devrait arriver.
 
 Pas besoin de compte. Pas de pub.
 
@@ -47,7 +47,7 @@ Partage la page du colis avec un lien : pas besoin d’app ni de compte pour l
 UN PASSEPORT DE LIVRAISONS
 Avec un compte, chaque livraison s’inscrit dans ton passeport, et certaines te rapportent un timbre. Compare-le avec celui de tes amis ; tes colis restent privés.
 
-4 000+ TRANSPORTEURS
+4 500+ TRANSPORTEURS
 La Poste, Colissimo, Chronopost, Mondial Relay, Relais Colis, Colis Privé, DPD, GLS, DHL, UPS, FedEx, La Poste Suisse, bpost, Postes Canada, Cainiao, China Post, YunExpress et des milliers d’autres : postes nationales, transporteurs express et réseaux de livraison des grandes plateformes de vente en ligne.
 
 AUSSI DANS LE COLIS

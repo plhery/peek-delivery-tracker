@@ -92,7 +92,7 @@ For an order from a shop, ask the shop first: it booked the delivery. On Peek, t
 
 ## Track an Aras Kargo parcel with Peek
 
-[Peek](/) can't be sure of an Aras Kargo number by its shape alone: other carriers use 13 digits too. Paste it all the same: Peek follows more than 4,000 carriers.
+[Peek](/) can't be sure of an Aras Kargo number by its shape alone: other carriers use 13 digits too. Paste it all the same: Peek follows more than 4,500 carriers.
 
 - **13 digits starting with 60 or 65.** Peek asks Aras Kargo and Delhivery at once whether they have the parcel. While it asks, you see "Checking tracking services…". If Aras has it, Peek says "Aras Kargo has this parcel." and files it there.
 - **Other 13 digits, or no carrier has it yet.** Press "Change" and pick Aras Kargo (type Aras). Peek then asks Aras's tracker for that number. On a parcel you've already added, use "Change carrier".

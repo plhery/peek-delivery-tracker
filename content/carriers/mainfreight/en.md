@@ -108,7 +108,7 @@ Ask whoever booked the freight first: the shop or supplier for an order, the sen
 
 From New Zealand, Australia or the United States, Peek asks Mainfreight first about 11 digits while you add them ("Checking tracking services…") and names Mainfreight when its tracker has the shipment. From other countries, it doesn't ask Mainfreight while you add them: pick it as below.
 
-Any other number doesn't tell Peek it's Mainfreight. Paste it all the same: Peek follows more than 4,000 carriers. Then press "Change" and pick Mainfreight: for 11 digits it's under "Fits this number"; otherwise, search for it by name. On a shipment you've already added, use "Change carrier". A link to Mainfreight's tracker with the number in it names Mainfreight at once ("Detected carrier").
+Any other number doesn't tell Peek it's Mainfreight. Paste it all the same: Peek follows more than 4,500 carriers. Then press "Change" and pick Mainfreight: for 11 digits it's under "Fits this number"; otherwise, search for it by name. On a shipment you've already added, use "Change carrier". A link to Mainfreight's tracker with the number in it names Mainfreight at once ("Detected carrier").
 
 Peek needs no account or postcode. When Mainfreight's search doesn't find 11 digits, Peek tries its New Zealand, Australian and American services at once; if more than one knows the number, Peek can't tell which shipment is yours. For a house bill, a master bill or the sender's reference, Peek shows the number Mainfreight answers under as "Mainfreight tracks this as".
 

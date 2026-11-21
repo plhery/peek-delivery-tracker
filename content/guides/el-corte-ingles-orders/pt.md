@@ -126,7 +126,7 @@ A ajuda diz que a devolução não é cobrada; as condições de venda dizem que
 
 ## Posso seguir uma encomenda El Corte Inglés no Peek?
 
-Sim, com o número da transportadora. Se o seguimento em «Compras» te mostrar o número da transportadora, copia-o e cola-o no [Peek](/). O Peek procura a transportadora entre mais de 4000. Reconhece só pela forma, por exemplo, os números dos [CTT](carrier:ctt) com 2 letras, 9 dígitos e `PT`, como `DA000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que o seguimento do El Corte Inglés indica.
+Sim, com o número da transportadora. Se o seguimento em «Compras» te mostrar o número da transportadora, copia-o e cola-o no [Peek](/). O Peek procura a transportadora entre mais de 4500. Reconhece só pela forma, por exemplo, os números dos [CTT](carrier:ctt) com 2 letras, 9 dígitos e `PT`, como `DA000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que o seguimento do El Corte Inglés indica.
 
 Se a encomenda mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e muda quando o seguimento da nova transportadora avança. O cartão mostra então essa transportadora e o seu número. O número do pedido do El Corte Inglés não é um número de seguimento: o Peek não o consegue seguir. Para levantar um Click&Collect ou Click&Car, basta o e-mail de recolha ou o número do pedido.
 

@@ -77,7 +77,7 @@ Em `jtexpress.com.cn` (na China continental):
 
 ## Seguir uma encomenda da J&T Express China com o Peek
 
-Mesmo sendo o formato `JT` de 13 algarismos partilhado com a J&T Express no Sudeste Asiático, cola-o na mesma no [Peek](/) (mais de 4 000 transportadoras acompanhadas):
+Mesmo sendo o formato `JT` de 13 algarismos partilhado com a J&T Express no Sudeste Asiático, cola-o na mesma no [Peek](/) (mais de 4 500 transportadoras acompanhadas):
 
 - **Colado isoladamente.** O Peek mostra «A verificar serviços de seguimento…»: se os serviços apontarem para a J&T Express China com etapas datadas, o Peek regista-a aí automaticamente; se houver histórico sem transportadora definida, vês «Histórico encontrado. O Peek confirma a transportadora depois de guardares.»; caso contrário, «ainda não encontrada · o Peek continua a verificar».
 - **Escolhida por ti.** Toca em «Alterar» e seleciona a J&T Express China em «Corresponde a este número» ou pesquisando `J&T` ou `极兔` em «Todas as transportadoras» (ou usa «Alterar transportadora» numa encomenda já adicionada, incluindo se tiver ficado na J&T Express).

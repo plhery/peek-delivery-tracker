@@ -137,7 +137,7 @@ Oui : colle le numéro de suivi de l'e-mail d'expédition dans [Peek](/). Peek r
 - UPS : `1Z` et 16 lettres ou chiffres.
 - La Poste suisse : 18 chiffres commençant par `98` ou `99`, ou 2 lettres, 9 chiffres et `CH`, comme `RR000000005CH`.
 
-Les numéros DPD de 14 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 4 000 transporteurs. Les numéros de retour fonctionnent de la même façon.
+Les numéros DPD de 14 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 4 500 transporteurs. Les numéros de retour fonctionnent de la même façon.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez adidas.
 

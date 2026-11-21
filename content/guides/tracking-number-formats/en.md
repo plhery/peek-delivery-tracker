@@ -23,7 +23,7 @@ Four checks, in this order:
 - Try the candidates | Enter the number on each likely carrier's site. The one that shows scans for it has your parcel.
 :::
 
-If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and follows it across more than 4,000 carriers. When the shape fits several, Peek asks the likeliest, up to five at once, and five more if none of them has the parcel; meanwhile the carrier row shows "Checking tracking services…". Only an answer about a recent parcel counts, as carriers reuse old numbers in time. If one carrier knows the number, you see its name and "has this parcel". If several do, you see, say, "3 carriers know this number" and "choose yours": pick the one your shipping email names. If none knows it yet, you read "not found yet · Peek keeps checking".
+If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and follows it across more than 4,500 carriers. When the shape fits several, Peek asks the likeliest, up to five at once, and five more if none of them has the parcel; meanwhile the carrier row shows "Checking tracking services…". Only an answer about a recent parcel counts, as carriers reuse old numbers in time. If one carrier knows the number, you see its name and "has this parcel". If several do, you see, say, "3 carriers know this number" and "choose yours": pick the one your shipping email names. If none knows it yet, you read "not found yet · Peek keeps checking".
 
 ## Tracking number formats by carrier
 

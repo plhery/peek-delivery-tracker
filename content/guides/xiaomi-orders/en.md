@@ -122,7 +122,7 @@ Yes: paste the carrier's tracking number from your order page into [Peek](/). Pe
 - Royal Mail: two letters, 9 digits and `GB`, like `RR000000005GB`.
 - Australia Post: `C`, `E` or `L`, another letter, 9 digits and `AU`, like `CE000000005AU`, or 3 letters or digits, 9 digits, `000` and 6 digits, like `ABC000000000000000000` (sometimes with 2 more digits in front).
 
-DPD's 14-digit numbers and DHL's 10- or 14-digit numbers share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For Allied Express, or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,000 carriers. Return numbers work the same way. If your order comes in several parcels, add each number.
+DPD's 14-digit numbers and DHL's 10- or 14-digit numbers share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For Allied Express, or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,500 carriers. Return numbers work the same way. If your order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns stay with Xiaomi.
 

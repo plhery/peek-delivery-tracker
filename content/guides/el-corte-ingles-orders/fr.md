@@ -122,7 +122,7 @@ Un magasin El Corte Inglés te rembourse sur le moment ; après un enlèvement �
 
 Oui, quand tu as un numéro de transporteur. Copie-le depuis les e-mails ou SMS de l'agence de transport ou de Correos et colle-le dans [Peek](/). Peek reconnaît à leur seule forme les numéros de Correos ci-dessus. Pour une forme que plusieurs transporteurs partagent, Peek interroge les transporteurs possibles et affiche celui qui connaît le numéro. S'ils sont plusieurs, touche « Choisir » ; s'il affiche le mauvais, touche « Changer » et choisis le transporteur que nomme l'e-mail. Peek ne reconnaît pas les numéros de Celeritas à leur forme : touche « Changer » et choisis Celeritas.
 
-Un article d'un vendeur externe arrive avec le transporteur choisi par le vendeur : si l'envoi est suivi, Peek le détecte parmi plus de 4 000 transporteurs. Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau. Le numéro de commande El Corte Inglés et le QR code d'un retrait ne sont pas des numéros de suivi : Peek ne peut pas les suivre.
+Un article d'un vendeur externe arrive avec le transporteur choisi par le vendeur : si l'envoi est suivi, Peek le détecte parmi plus de 4 500 transporteurs. Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau. Le numéro de commande El Corte Inglés et le QR code d'un retrait ne sont pas des numéros de suivi : Peek ne peut pas les suivre.
 
 Peek montre ce que publie le transporteur. Réclamations, remboursements et retours restent dans ton compte El Corte Inglés.
 

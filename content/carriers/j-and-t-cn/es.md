@@ -77,7 +77,7 @@ En `jtexpress.com.cn` (China continental):
 
 ## Seguir un paquete de J&T Express China con Peek
 
-Aunque el patrón `JT` de 13 cifras coincida con J&T Express en el Sudeste Asiático, pégalo igual en [Peek](/) (compatible con más de 4.000 transportistas):
+Aunque el patrón `JT` de 13 cifras coincida con J&T Express en el Sudeste Asiático, pégalo igual en [Peek](/) (compatible con más de 4.500 transportistas):
 
 - **Pegado solo.** Peek muestra «Comprobando servicios de seguimiento…»: si los servicios coinciden en J&T Express China con pasos fechados, lo archiva ahí automáticamente; si hay historial sin operador confirmado, verás «Historial encontrado. Peek confirmará el transportista después de guardar.»; si ninguno lo tiene aún, «aún no encontrado · Peek seguirá comprobando».
 - **Elegido por ti.** Pulsa «Cambiar» y selecciona J&T Express China en «Encaja con este número» o buscando `J&T` o `极兔` en «Todos los transportistas» (o usa «Cambiar transportista» en un paquete ya guardado, incluso si quedó asignado a J&T Express).

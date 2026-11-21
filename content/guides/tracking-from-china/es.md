@@ -83,7 +83,7 @@ Además de Cainiao, verás [YunExpress](carrier:yunexpress), [4PX](carrier:4px),
 | `SF` + 13 cifras | SF Express |
 | `CNESP` + 20 cifras | Ecoscooting, una empresa de reparto que trabaja en España y Portugal |
 
-Pega cualquiera de los dos números en [Peek](/), que encuentra la empresa entre más de 4000. Para los números en general, mira [de qué empresa es un número de seguimiento](guide:tracking-number-formats).
+Pega cualquiera de los dos números en [Peek](/), que encuentra la empresa entre más de 4500. Para los números en general, mira [de qué empresa es un número de seguimiento](guide:tracking-number-formats).
 
 ## ¿Qué empresa reparte AliExpress, Temu y Shein en España?
 

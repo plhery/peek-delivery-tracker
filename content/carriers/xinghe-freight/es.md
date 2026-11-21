@@ -87,7 +87,7 @@ La web no ofrece atención para destinatarios particulares en otros países, y s
 
 ## Seguir un paquete de Xinghe Freight con Peek
 
-[Peek](/) reconoce al instante a Xinghe Freight ante un número GZXH…YQ, mostrando «Transportista detectado». Si el vendedor te dio un número con otro formato, pégalo igualmente: Peek sigue más de 4000 transportistas. Para asignar manualmente un envío a Xinghe, pulsa «Cambiar» y busca Xinghe Freight (también aparece escribiendo 星和货运), o usa «Cambiar transportista» en un paquete ya guardado.
+[Peek](/) reconoce al instante a Xinghe Freight ante un número GZXH…YQ, mostrando «Transportista detectado». Si el vendedor te dio un número con otro formato, pégalo igualmente: Peek sigue más de 4500 transportistas. Para asignar manualmente un envío a Xinghe, pulsa «Cambiar» y busca Xinghe Freight (también aparece escribiendo 星和货运), o usa «Cambiar transportista» en un paquete ya guardado.
 
 Peek consulta el sistema de GZYL, igual que hace el cuadro de búsqueda de la web de Xinghe. Muestra el estado, cada paso con su localidad y, cuando consta en el registro, el país de destino. Lee las horas en horario de Pekín y las presenta en la zona horaria de tu dispositivo; en peektracker.com y en las apps de iPhone y Android, el historial termina con «Horas en tu zona horaria:» seguido del nombre de tu zona. Peek descarta nombres, dirección, códigos postales, peso, datos de pago, firma y prueba de entrega que pueda traer la ficha, y no muestra fecha estimada de entrega porque el sistema no da ninguna.
 

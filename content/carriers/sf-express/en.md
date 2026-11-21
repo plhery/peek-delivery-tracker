@@ -95,7 +95,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 ## Track an SF Express parcel with Peek
 
-[Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 4,000 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link, the Taiwan site's `#search/bill-number/` link or an SF International tracking link with the number after `No=` names SF Express too.
+[Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 4,500 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link, the Taiwan site's `#search/bill-number/` link or an SF International tracking link with the number after `No=` names SF Express too.
 
 Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's; on peektracker.com and in the iPhone and Android apps, a line under the history names that zone. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 

@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-O Peek para iPhone, iPad e Mac é uma app grátis que segue encomendas de mais de 4000 transportadoras, sem precisares de conta. Adiciona o widget «Encomendas» ao ecrã principal, envia-lhe ligações de seguimento com «Adicionar ao Peek» no menu de partilha ou lê o código de barras da etiqueta com o teu iPhone ou iPad.
+O Peek para iPhone, iPad e Mac é uma app grátis que segue encomendas de mais de 4500 transportadoras, sem precisares de conta. Adiciona o widget «Encomendas» ao ecrã principal, envia-lhe ligações de seguimento com «Adicionar ao Peek» no menu de partilha ou lê o código de barras da etiqueta com o teu iPhone ou iPad.
 
 Cola um número de seguimento, a ligação de uma transportadora ou um e-mail de envio inteiro, e o [Peek](/) descobre a transportadora e mostra o percurso num mapa. Não tem compras integradas nem anúncios.
 
@@ -99,7 +99,7 @@ Na janela de definições do Peek, «Geral» tem «Mostrar na barra de menus», 
 
 :::sources
 - [Peek: app para iPhone, iPad e Mac (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – ligações das encomendas, conteúdo e atualização do widget, respostas da Siri, atalhos de teclado, arrastar e largar
-- [Peek: texto da ficha da App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/pt.md) – nome, mais de 4000 transportadoras, grátis e sem anúncios, partilha a partir do Mail, das Mensagens ou do Safari
+- [Peek: texto da ficha da App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/pt.md) – nome, mais de 4500 transportadoras, grátis e sem anúncios, partilha a partir do Mail, das Mensagens ou do Safari
 - [Peek: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – cada etiqueta do Peek citada aqui
 - [Peek: definições do projeto](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, feita para iPhone e iPad
 - [Peek: acessibilidade (em inglês)](https://peektracker.com/accessibility.html) – a app da App Store no iPhone, iPad e Mac

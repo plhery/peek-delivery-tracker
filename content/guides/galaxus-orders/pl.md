@@ -125,7 +125,7 @@ Gdzie jest numer przesyłki zwrotnej i kiedy przyjdą pieniądze: [śledzenie zw
 
 Tak, z numerem przewoźnika: wklej go w [Peek](/). Peek rozpoznaje numery Poczty Szwajcarskiej po samym kształcie: 18 cyfr zaczynających się od `98` lub `99` albo 2 litery, 9 cyfr i `CH`, jak `RR000000005CH` (zmyślony). Tak samo numery Planzer, z 13 cyframi od `99990` albo 20 cyframi od `91346097`, i większość numerów DHL złożonych z `JJD` i 18 cyfr. Jeśli ten sam kształt numeru ma kilku przewoźników, Peek pyta tych prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, stuknij „Wybierz”; jeśli Peek pokaże złego, stuknij „Zmień” i wybierz właściwego.
 
-Przy paczce od sprzedawcy, dostawcy albo firmy spedycyjnej i tak wklej jej numer: Peek śledzi ponad 4000 przewoźników. Produkt sprzedawcy zewnętrznego ma własny numer tylko wtedy, gdy sprzedawca wysyła go ze śledzeniem. W UE, gdy DHL przekazuje paczkę lokalnej poczcie i podaje ją jako przejmującą, Peek zachowuje historię od początku i śledzi nowego przewoźnika.
+Przy paczce od sprzedawcy, dostawcy albo firmy spedycyjnej i tak wklej jej numer: Peek śledzi ponad 4500 przewoźników. Produkt sprzedawcy zewnętrznego ma własny numer tylko wtedy, gdy sprzedawca wysyła go ze śledzeniem. W UE, gdy DHL przekazuje paczkę lokalnej poczcie i podaje ją jako przejmującą, Peek zachowuje historię od początku i śledzi nowego przewoźnika.
 
 Peek pokazuje to, co publikuje przewoźnik. Zgłoszenia, zwroty pieniędzy i zwroty towaru zostają na twoim koncie Galaxus.
 

@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-19
 ---
 
-Para seguir tu pedido de Temu necesitas el número de seguimiento de la empresa de reparto, no el número de pedido de Temu («PO» y 20 cifras). Pégalo en [Peek](/), que encuentra la empresa entre más de 4000, de CTT Express a Correos; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Un número recién creado puede no mostrar nada durante uno o dos días: la etiqueta existe antes de que la empresa tenga el paquete.
+Para seguir tu pedido de Temu necesitas el número de seguimiento de la empresa de reparto, no el número de pedido de Temu («PO» y 20 cifras). Pégalo en [Peek](/), que encuentra la empresa entre más de 4500, de CTT Express a Correos; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Un número recién creado puede no mostrar nada durante uno o dos días: la etiqueta existe antes de que la empresa tenga el paquete.
 
 ## ¿El número de pedido de Temu es un número de seguimiento?
 

@@ -83,7 +83,7 @@ O site não disponibiliza apoio para destinatários particulares no estrangeiro 
 
 ## Seguir uma encomenda Xinghe Freight com o Peek
 
-O [Peek](/) identifica imediatamente a Xinghe Freight perante um número `GZXH…YQ`. Se o vendedor te deu um código com outro formato, cola-o na mesma: o Peek acompanha mais de 4 000 transportadoras. Para associar manualmente um código à Xinghe, carrega para alterar a transportadora ao adicionar e procura Xinghe Freight (também podes escrever `星和货运`), ou usa «Alterar transportadora» numa encomenda já guardada.
+O [Peek](/) identifica imediatamente a Xinghe Freight perante um número `GZXH…YQ`. Se o vendedor te deu um código com outro formato, cola-o na mesma: o Peek acompanha mais de 4 500 transportadoras. Para associar manualmente um código à Xinghe, carrega para alterar a transportadora ao adicionar e procura Xinghe Freight (também podes escrever `星和货运`), ou usa «Alterar transportadora» numa encomenda já guardada.
 
 O Peek consulta o sistema da GZYL tal como faz a caixa de pesquisa do próprio site da Xinghe, apresentando o estado atual, cada etapa com o respetivo local e o país de destino quando o registo o indica. As horas são lidas no fuso de Pequim e convertidas para o fuso horário do teu dispositivo (com a nota «Horas no teu fuso horário: …» em `peektracker.com` e nas aplicações para iPhone e Android). O Peek descarta nomes, morada, códigos postais, peso, dados de pagamento, assinatura e comprovativo de entrega que possam constar do registo, e não mostra data prevista de entrega porque o sistema não indica nenhuma.
 

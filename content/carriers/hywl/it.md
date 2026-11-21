@@ -91,7 +91,7 @@ La spedizione l'ha prenotata il venditore: è a lui che devi chiedere del tuo or
 
 ## Tracciare un pacco HYWL con Peek
 
-Dalla sola forma, [Peek](/) non può essere sicuro che un numero sia di HYWL. Incollalo lo stesso: Peek segue più di 4.000 corrieri. Mentre lo aggiungi, Peek interroga il tracking di HYWL («Verifica dei servizi di tracciamento…») e, se HYWL conosce il numero, mostra «Huiyi Logistics ha questo pacco.» Altrimenti premi «Cambia» e scegli Huiyi Logistics sotto «Compatibili con questo numero» (lo trovi anche scrivendo HYWL o 汇一物流), oppure usa «Cambia corriere» su un pacco già aggiunto.
+Dalla sola forma, [Peek](/) non può essere sicuro che un numero sia di HYWL. Incollalo lo stesso: Peek segue più di 4.500 corrieri. Mentre lo aggiungi, Peek interroga il tracking di HYWL («Verifica dei servizi di tracciamento…») e, se HYWL conosce il numero, mostra «Huiyi Logistics ha questo pacco.» Altrimenti premi «Cambia» e scegli Huiyi Logistics sotto «Compatibili con questo numero» (lo trovi anche scrivendo HYWL o 汇一物流), oppure usa «Cambia corriere» su un pacco già aggiunto.
 
 Se aggiungi un numero TRK senza scegliere il corriere e HYWL non lo conosce ancora, Peek mostra «Probabilmente Huiyi Logistics» e «In attesa della prima scansione di Huiyi Logistics», e continua a chiedere. Dopo una settimana ti chiede di verificare il numero con il mittente o di scegliere un altro corriere.
 

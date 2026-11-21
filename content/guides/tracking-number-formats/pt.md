@@ -23,7 +23,7 @@ Quatro passos, por esta ordem:
 - Experimenta nos sites | Introduz o número no site de cada transportadora possível. A que mostrar leituras desse número é a que tem a tua encomenda.
 :::
 
-Se não te apetecer fazer de detetive, cola o número, uma ligação da transportadora ou o e-mail de envio inteiro no [Peek](/): ele encontra o número e deteta a transportadora entre mais de 4000. Os outros serviços que juntam várias transportadoras estão em [como seguir todas as encomendas num só lugar](guide:universal-tracker).
+Se não te apetecer fazer de detetive, cola o número, uma ligação da transportadora ou o e-mail de envio inteiro no [Peek](/): ele encontra o número e deteta a transportadora entre mais de 4500. Os outros serviços que juntam várias transportadoras estão em [como seguir todas as encomendas num só lugar](guide:universal-tracker).
 
 Quando a forma do número serve a mais do que uma transportadora, o verificador acima responde «Pode ser» e mostra as candidatas. No Peek, mal colas o número, ou sais do campo depois de o escreveres, a linha da transportadora mostra «A verificar serviços de seguimento…» enquanto o Peek pergunta às mais prováveis, até cinco de cada vez. Só conta a resposta sobre uma encomenda recente, porque as transportadoras voltam a usar números antigos. Se só uma conhecer o número, aparece o nome dela e «tem esta encomenda». Se forem várias, aparece, por exemplo, «3 transportadoras conhecem este número» e «escolhe a tua»: escolhe a que a mensagem de envio indica. Se nenhuma o conhecer ainda, lês «ainda não encontrada · o Peek continua a verificar».
 

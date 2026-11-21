@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek for iPhone, iPad and Mac is a free app that tracks parcels from more than 4,000 carriers, with no account needed. Add its "Parcels" widget to your Home Screen, send tracking links to it with "Add to Peek" in the share sheet, or scan the barcode on the label with your iPhone or iPad.
+Peek for iPhone, iPad and Mac is a free app that tracks parcels from more than 4,500 carriers, with no account needed. Add its "Parcels" widget to your Home Screen, send tracking links to it with "Add to Peek" in the share sheet, or scan the barcode on the label with your iPhone or iPad.
 
 Paste a tracking number, a carrier's link or a whole shipping email, and [Peek](/) finds the carrier and shows the journey on a map. There are no in-app purchases and no ads.
 
@@ -99,7 +99,7 @@ In Peek's Settings window, "General" has "Show in menu bar", which keeps Peek ru
 
 :::sources
 - [Peek: iPhone, iPad and Mac app](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – parcel links, widget contents and refresh, Siri's answers, keyboard shortcuts, drag and drop
-- [Peek: App Store listing text](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/en-GB.md) – name, 4,000+ carriers, free with no ads, sharing from Mail, Messages or Safari
+- [Peek: App Store listing text](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/en-GB.md) – name, 4,500+ carriers, free with no ads, sharing from Mail, Messages or Safari
 - [Peek: English copy](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – every Peek label quoted here
 - [Peek: project settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, made for iPhone and iPad
 - [Peek: accessibility](https://peektracker.com/accessibility.html) – the App Store app on iPhone, iPad and Mac

@@ -84,7 +84,7 @@ Les numéros postaux font exception. L'Union postale universelle ne permet qu'un
 | `SY` + 11 chiffres | Sunyou |
 | `SF` + 13 chiffres | SF Express |
 
-Colle l'un ou l'autre numéro dans [Peek](/) : il retrouve le transporteur parmi plus de 4 000. Pour les numéros en général : [à quoi ressemble un numéro de suivi](guide:tracking-number-formats).
+Colle l'un ou l'autre numéro dans [Peek](/) : il retrouve le transporteur parmi plus de 4 500. Pour les numéros en général : [à quoi ressemble un numéro de suivi](guide:tracking-number-formats).
 
 ## Quel transporteur livre AliExpress, Temu et Shein en France, en Belgique et en Suisse ?
 

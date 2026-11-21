@@ -108,7 +108,7 @@ Sì, con il numero di tracking del corriere: copialo dal «Link di tracciabilit�
 | UPS | `1Z` e 16 lettere o cifre, come `1Z0000000000000000` |
 | DHL Express | `JD01` e 16 cifre, come `JD014600000000000000` |
 
-I numeri FedEx da 12 cifre e quelli DHL da 10 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Un numero Chronopost: incollalo e, se Peek mostra un altro corriere, premi «Cambia» e scegli Chronopost. Per un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 4.000 corrieri. Se ricevi più pacchi, aggiungi ogni numero.
+I numeri FedEx da 12 cifre e quelli DHL da 10 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Un numero Chronopost: incollalo e, se Peek mostra un altro corriere, premi «Cambia» e scegli Chronopost. Per un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 4.500 corrieri. Se ricevi più pacchi, aggiungi ogni numero.
 
 Se un pacco cambia corriere lungo il percorso e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo. Peek mostra ciò che pubblica il corriere. Reclami, rimborsi, resi e riparazioni in garanzia restano a Back Market e al venditore.
 

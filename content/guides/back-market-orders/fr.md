@@ -110,7 +110,7 @@ Oui, avec le numéro de suivi du transporteur : copie-le depuis « Suivre mon co
 | UPS | `1Z` et 16 lettres ou chiffres, comme `1Z0000000000000000` |
 | DHL Express | `JD01` et 16 chiffres, comme `JD014600000000000000` |
 
-Les numéros FedEx de 12 chiffres et les numéros d'expédition DHL Express de 10 chiffres partagent leur forme avec ceux d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur ; en France, l'e-mail d'expédition le nomme. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 4 000 transporteurs. Si ta commande vient de plusieurs vendeurs, ajoute chaque numéro.
+Les numéros FedEx de 12 chiffres et les numéros d'expédition DHL Express de 10 chiffres partagent leur forme avec ceux d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur ; en France, l'e-mail d'expédition le nomme. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 4 500 transporteurs. Si ta commande vient de plusieurs vendeurs, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements, retours et réparations sous garantie se font chez Back Market et le vendeur.
 

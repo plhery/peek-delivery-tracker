@@ -184,7 +184,7 @@ function previewSvg(locale) {
   const detailY = Math.round(first + leading * (lines.length - 1) + 30 + 51 * size / 104);
   return drawing
     .replace(/<title id="title">[^<]*<\/title>/, `<title id="title">${words['app.title']} — ${words['peek.title']}</title>`)
-    .replace('>4,000+ carriers<', `>${words['landing.pill.carriers']}<`)
+    .replace('>4,500+ carriers<', `>${words['landing.pill.carriers']}<`)
     .replace(HEADLINE, `<text ${headlineAttributes} font-size="${size}" letter-spacing="${(-size * 0.035).toFixed(2)}" fill="#20251E" stroke="#20251E" stroke-width="${(size * 0.0404).toFixed(1)}" stroke-linejoin="round">\n${lines.map((line, index) => `    <tspan x="80" y="${Math.round(first + leading * index)}">${line}</tspan>`).join('\n')}\n  </text>`)
     .replace(DETAIL, `<text x="84" y="${detailY}" ${headlineAttributes} font-size="${detailSize}" fill="#526E5B">${detail}</text>`);
 }

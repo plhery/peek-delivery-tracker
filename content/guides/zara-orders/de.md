@@ -120,7 +120,7 @@ Zara erstattet auf die Zahlungsart, mit der du bezahlt hast. Eine Rücksendung b
 
 ## Kann ich ein Zara-Paket mit Peek verfolgen?
 
-Ja, mit der Sendungsnummer des Paketdienstes. Für die Lieferung nennt Zara in Deutschland, Österreich und der Schweiz keinen Paketdienst: Füg die Nummer trotzdem in [Peek](/) ein, Peek verfolgt mehr als 4.000 Paketdienste. Bei einer Form, die sich mehrere Dienste teilen, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst.
+Ja, mit der Sendungsnummer des Paketdienstes. Für die Lieferung nennt Zara in Deutschland, Österreich und der Schweiz keinen Paketdienst: Füg die Nummer trotzdem in [Peek](/) ein, Peek verfolgt mehr als 4.500 Paketdienste. Bei einer Form, die sich mehrere Dienste teilen, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst.
 
 Für Rücksendungen gilt: Nummern der Österreichischen Post aus zwei Buchstaben, 9 Ziffern und `AT`, etwa `RR000000005AT`, erkennt Peek allein an der Form, ebenso Nummern der Schweizerischen Post aus zwei Buchstaben, 9 Ziffern und `CH` oder aus 18 Ziffern ab `98` oder `99`. Reine Ziffernfolgen der Österreichischen Post mit 22 oder 24 Ziffern teilen sich mehrere Dienste: Dann hilft „Wählen“ oder „Ändern“.
 

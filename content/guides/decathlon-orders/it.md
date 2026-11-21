@@ -126,7 +126,7 @@ Il rimborso arriva sullo stesso metodo di pagamento, tra 7 e 15 giorni dall'arri
 
 Sì, con il numero del corriere: incollalo su [Peek](/). Peek riconosce dalla sola forma i numeri Poste Italiane della tabella. Quelli InPost, di 24 cifre, hanno la stessa forma di altri corrieri. Peek chiede ai corrieri probabili e ti mostra quello che conosce il numero. Se lo conoscono in più, Peek li mostra tutti con «Conosce questo numero»: scegli quello indicato nella tua email di spedizione. Se mostra quello sbagliato, premi «Cambia» e scegli quello giusto.
 
-La consegna a domicilio cambia corriere secondo il CAP, la Flash viaggia con Wora e un Partner sceglie il suo corriere: incolla comunque il numero, Peek segue più di 4.000 corrieri. Se l'ordine arriva in più spedizioni, aggiungi ogni numero.
+La consegna a domicilio cambia corriere secondo il CAP, la Flash viaggia con Wora e un Partner sceglie il suo corriere: incolla comunque il numero, Peek segue più di 4.500 corrieri. Se l'ordine arriva in più spedizioni, aggiungi ogni numero.
 
 :::sources
 - [Decathlon Italia: Opzioni di spedizione](https://www.decathlon.it/lp/i/tempi-e-costi-di-spedizione) – ritiro in negozio, locker e punti Poste e InPost, costi e tempi di ritiro, domicilio, Rapida e Flash, Wora, Partner e consegna gratuita, ingombranti, appuntamento, misure, corriere secondo il CAP, email e SMS di tracking, +39 0399007550 per problemi con il tracking

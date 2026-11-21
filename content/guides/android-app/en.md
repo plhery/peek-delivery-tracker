@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 Peek for Android is a beta, not public on Google Play: you get it from [peektracker.com/android](https://peektracker.com/android), by joining the Google Play test or by installing it from Peek's own F-Droid repository or from GitHub. It needs Android 12 or later and no account, and it adds a "Parcels" widget to your home screen and "Add to Peek" to your share sheet.
 
-It follows parcels from more than 4,000 carriers: paste a tracking number, a carrier's link or a whole shipping email, and [Peek](/) finds the carrier and shows the journey on a map. It's free, with no in-app purchases and no ads. For an iPhone, iPad or Mac, see [Peek for iPhone, iPad and Mac](guide:iphone-app).
+It follows parcels from more than 4,500 carriers: paste a tracking number, a carrier's link or a whole shipping email, and [Peek](/) finds the carrier and shows the journey on a map. It's free, with no in-app purchases and no ads. For an iPhone, iPad or Mac, see [Peek for iPhone, iPad and Mac](guide:iphone-app).
 
 ## Is Peek on Google Play?
 

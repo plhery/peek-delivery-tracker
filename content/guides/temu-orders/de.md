@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-08
 ---
 
-Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.000 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
+Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.500 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
 
 ## Ist meine Temu-Bestellnummer eine Sendungsnummer?
 
@@ -36,7 +36,7 @@ Wer für ein Paket haftet, das nie ankam, und welche Belege du aufheben solltest
 
 ## Kann ich ein Temu-Paket in Peek verfolgen?
 
-Ja, mit der Sendungsnummer des Paketdienstes. Füge sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.000 Paketdiensten. Bei einer Form, die sich mehrere Dienste teilen, tippe auf „Ändern“ und wähle den richtigen Paketdienst.
+Ja, mit der Sendungsnummer des Paketdienstes. Füge sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.500 Paketdiensten. Bei einer Form, die sich mehrere Dienste teilen, tippe auf „Ändern“ und wähle den richtigen Paketdienst.
 
 Nennt der erste Paketdienst den Partner vor Ort, der übernimmt, behält Peek den ersten Verlauf, folgt dem Partner, sobald dessen Tracking neue Schritte zeigt, und zeigt auf der Karte Namen und Nummer des Partners.
 

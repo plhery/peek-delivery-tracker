@@ -37,7 +37,7 @@ From outside, the only way in is an assistant's sign-in. Claude, ChatGPT, Gemini
 
 Use Universal Parcel Scraper, the engine that reads carriers for Peek. It finds the carrier, reads that carrier's own site, falls back on universal trackers only where it has to, and returns the same JSON for every carrier, with each scan filed under a common delivery stage.
 
-Its README counts more than 4,000 carriers, through more than 800 dedicated adapters and universal fallbacks. In its benchmark of 100 carriers picked for shoppers in Europe, the adapters return a history for 91, or 95 with every fallback, against 73 for the best single aggregator.
+Its README counts more than 4,500 carriers, through more than 800 dedicated adapters and universal fallbacks. In its benchmark of 100 carriers picked for shoppers in Europe, the adapters return a history for 91, or 95 with every fallback, against 73 for the best single aggregator.
 
 Besides the command line, it runs in three ways:
 

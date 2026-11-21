@@ -37,7 +37,7 @@ Z zewnątrz jedyną drogą jest logowanie asystenta. Claude, ChatGPT, Gemini alb
 
 Przez Universal Parcel Scraper, silnik, który odczytuje dla Peeka dane od przewoźników. Ustala przewoźnika, czyta jego własną stronę, sięga po uniwersalne trackery tylko wtedy, gdy musi, i zwraca ten sam JSON dla każdego przewoźnika, z każdym skanem przypisanym do wspólnego etapu doręczenia.
 
-Jego README mówi o ponad 4000 przewoźnikach, obsługiwanych przez ponad 800 dedykowanych adapterów i uniwersalne trackery zapasowe. W jego benchmarku 100 przewoźników wybranych pod kątem kupujących w Europie adaptery zwracają historię dla 91, a ze wszystkimi trackerami zapasowymi dla 95, wobec 73 w przypadku najlepszego pojedynczego agregatora.
+Jego README mówi o ponad 4500 przewoźnikach, obsługiwanych przez ponad 800 dedykowanych adapterów i uniwersalne trackery zapasowe. W jego benchmarku 100 przewoźników wybranych pod kątem kupujących w Europie adaptery zwracają historię dla 91, a ze wszystkimi trackerami zapasowymi dla 95, wobec 73 w przypadku najlepszego pojedynczego agregatora.
 
 Oprócz wiersza poleceń działa na trzy sposoby:
 

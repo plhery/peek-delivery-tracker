@@ -118,7 +118,7 @@ Zara zajmuje się zwrotem w ciągu 72 godzin od jego dotarcia i wysyła e-mail z
 
 ## Czy mogę śledzić zamówienie z Zara w Peek?
 
-Tak, jeśli masz numer przewoźnika: wklej go do [Peek](/). Zara nie podaje nazw swoich przewoźników, więc i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli taki kształt numeru ma kilku przewoźników, Peek pyta prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Jeśli każda dostawa ma własny numer, dodaj je wszystkie. Etykieta zwrotna ma własny numer: wklej go tak samo.
+Tak, jeśli masz numer przewoźnika: wklej go do [Peek](/). Zara nie podaje nazw swoich przewoźników, więc i tak wklej numer: Peek śledzi ponad 4500 przewoźników. Jeśli taki kształt numeru ma kilku przewoźników, Peek pyta prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Jeśli każda dostawa ma własny numer, dodaj je wszystkie. Etykieta zwrotna ma własny numer: wklej go tak samo.
 
 Statusy Zara, od `Kupione` do `Doręczone do klienta`, widzisz na koncie albo przez link z jej e-maili.
 

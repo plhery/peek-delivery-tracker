@@ -83,7 +83,7 @@ Pour suivre un retour : [suivi des retours](guide:returns-tracking).
 
 ## Puis-je suivre un colis Douglas dans Peek ?
 
-Oui, avec le numéro de suivi du transporteur : colle-le dans [Peek](/). En Suisse, les CGV de Douglas ne nomment pas le transporteur : colle son numéro quand même, Peek suit plus de 4 000 transporteurs.
+Oui, avec le numéro de suivi du transporteur : colle-le dans [Peek](/). En Suisse, les CGV de Douglas ne nomment pas le transporteur : colle son numéro quand même, Peek suit plus de 4 500 transporteurs.
 
 Si le numéro a la même forme que ceux d'autres transporteurs, Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 

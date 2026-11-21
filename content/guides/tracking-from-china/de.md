@@ -93,7 +93,7 @@ Neben Cainiao begegnen dir YunExpress, [4PX](carrier:4px), [Sunyou](carrier:suny
 | `SY` + 11 Ziffern | Sunyou |
 | `3A5V` + 9 Ziffern | CNE |
 
-Füge eine der beiden Nummern in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.000 Paketdiensten. Alles über Nummern im Allgemeinen: [Sendungsnummern erkennen](guide:tracking-number-formats).
+Füge eine der beiden Nummern in [Peek](/) ein, und Peek findet den passenden unter mehr als 4.500 Paketdiensten. Alles über Nummern im Allgemeinen: [Sendungsnummern erkennen](guide:tracking-number-formats).
 
 ## Welcher Paketdienst liefert Temu-, Shein- und AliExpress-Pakete aus?
 

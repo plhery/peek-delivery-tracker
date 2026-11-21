@@ -77,7 +77,7 @@ Su `jtexpress.com.cn` (nella Cina continentale):
 
 ## Tracciare un pacco J&T Express China con Peek
 
-Anche se il formato `JT` a 13 cifre è condiviso con J&T Express nel Sud-est asiatico, incollalo comunque in [Peek](/) (oltre 4.000 corrieri seguiti):
+Anche se il formato `JT` a 13 cifre è condiviso con J&T Express nel Sud-est asiatico, incollalo comunque in [Peek](/) (oltre 4.500 corrieri seguiti):
 
 - **Incollato da solo.** Peek mostra «Verifica dei servizi di tracciamento…»: se i servizi concordano su J&T Express China con tappe datate, Peek lo registra lì automaticamente; se emerge una cronologia ma il corriere non è ancora confermato, vedi «Cronologia trovata. Peek confermerà il corriere dopo il salvataggio.»; altrimenti «non ancora trovato · Peek continua a controllare».
 - **Scelto a mano.** Tocca «Cambia» e scegli J&T Express China sotto «Compatibili con questo numero» o cercando `J&T` o `极兔` in «Tutti i corrieri» (oppure «Cambia corriere» su un pacco già salvato, anche qualora fosse finito sotto J&T Express).

@@ -22,7 +22,7 @@ Auch andere chinesische Spediteure lassen ihre Nummern auf YQ enden, mit eigenen
 
 **Wo du sie findest.** Steht sie weder in der Versandmail des Shops noch auf der Bestellseite, lies, [wo du die Sendungsnummer findest](guide:find-tracking-number).
 
-**Vielleicht hast du die Nummer des Paketdiensts.** Shouwu lässt den Händler wählen, welche Nummer er weitergibt: Shouwus eigene, die das Paket von Anfang bis Ende begleitet, oder die des Paketdiensts, der in deinem Land zustellt. In Deutschland kann ein Shouwu-Paket also mit einer Nummer von DHL, Hermes oder DPD bei dir ankommen (mehr unten). Füg sie trotzdem ein: Peek verfolgt mehr als 4.000 Paketdienste.
+**Vielleicht hast du die Nummer des Paketdiensts.** Shouwu lässt den Händler wählen, welche Nummer er weitergibt: Shouwus eigene, die das Paket von Anfang bis Ende begleitet, oder die des Paketdiensts, der in deinem Land zustellt. In Deutschland kann ein Shouwu-Paket also mit einer Nummer von DHL, Hermes oder DPD bei dir ankommen (mehr unten). Füg sie trotzdem ein: Peek verfolgt mehr als 4.500 Paketdienste.
 
 **Ein Tracking-Link.** Mit „Copy Link“ kopiert Shouwus Sendungsverfolgung einen Link mit `?q=` und der Nummer. Er öffnet genau dieses Paket, und du kannst ihn komplett in Peek einfügen. Shouwus Seite nimmt bis zu 40 Nummern auf einmal, eine pro Zeile.
 

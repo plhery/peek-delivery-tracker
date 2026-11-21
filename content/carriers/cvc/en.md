@@ -62,7 +62,7 @@ CVC's own sites list no phone number, email or office: on 13 November 2026, my.e
 
 ## Track a CVC parcel with Peek
 
-[Peek](/) follows more than 4,000 carriers, CVC among them, but it can't tell a CVC parcel by its number alone. A link to CVC's tracker names CVC at once; with just the number, pick the carrier yourself:
+[Peek](/) follows more than 4,500 carriers, CVC among them, but it can't tell a CVC parcel by its number alone. A link to CVC's tracker names CVC at once; with just the number, pick the carrier yourself:
 
 1. Paste the number in the box above.
 2. Press "Change" beside the carrier line and search for CVC. "e-CVC" or "Си Ви Си" finds it too, with "Also called e-CVC" or "Also called Си Ви Си" under the name, and so does "Bulgaria".

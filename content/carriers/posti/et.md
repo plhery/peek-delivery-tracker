@@ -19,7 +19,7 @@ SmartPosti nimetab jälgimisnumbrit pakikoodiks, kuid koodi kuju oma lehtedel ei
 | `RR000000005FI` | Kaks tähte, üheksa numbrit ja `FI`: Soome Posti kood rahvusvahelises postivormingus. |
 | `RR000000005CN` | Välismaalt tuleval pakil võib olla saatjariigi posti number. `CN` lõpus tähendab, et pakk postitati Hiinas. |
 
-Kui sinu pakikood on muu kujuga, kleebi see ikkagi: Peek jälgib üle 4000 vedaja ja Posti saad valida ise (vt allpool).
+Kui sinu pakikood on muu kujuga, kleebi see ikkagi: Peek jälgib üle 4500 vedaja ja Posti saad valida ise (vt allpool).
 
 Pakikoodi ei tasu segi ajada uksekoodiga, mis avab pakiautomaadi kapi, ega PIN-koodiga, millega saad paki kätte pakipunktist. `JJEE`-ga algav või `EE`-ga lõppev kood on tavaliselt [Omniva](carrier:omniva) oma.
 

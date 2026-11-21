@@ -91,7 +91,7 @@ Strona jest wyłącznie po chińsku i nie ma formularza ani czatu dla odbiorców
 
 [Peek](/) od razu rozpoznaje przewoźnika Jifan po numerze `JFGJ…CN` („Wykryty przewoźnik”) — żaden inny obsługiwany przewoźnik nie używa takiego układu. Działa również link do `szjf56.cn/index/tracknumber/track` z numerem `JFGJ…CN` po parametrze `nos=` (jeśli w linku jest kilka numerów, Peek bierze pierwszy).
 
-Jeśli sprzedawca podał Ci inny numer, wklej go tak samo: Peek śledzi ponad 4 000 przewoźników, sprawdza serwisy śledzenia przy niejednoznacznym formacie i pozwala wybrać operatora przez „Zmień” lub „Zmień przewoźnika”. Wyszukiwarkę Jifan Peek odpytuje wyłącznie dla numerów `JFGJ…CN` — po ręcznym wybraniu Jifan dla innego numeru wskaże, że przewoźnik „nie wydaje takich numerów”.
+Jeśli sprzedawca podał Ci inny numer, wklej go tak samo: Peek śledzi ponad 4 500 przewoźników, sprawdza serwisy śledzenia przy niejednoznacznym formacie i pozwala wybrać operatora przez „Zmień” lub „Zmień przewoźnika”. Wyszukiwarkę Jifan Peek odpytuje wyłącznie dla numerów `JFGJ…CN` — po ręcznym wybraniu Jifan dla innego numeru wskaże, że przewoźnik „nie wydaje takich numerów”.
 
 Peek pobiera z wyszukiwarki Jifan status, wszystkie wiersze po angielsku oraz kraj docelowy. Gdy wiersz w USA otwiera miasto, stan i kod ZIP, Peek zapisuje miasto i stan jako miejsce skanu, a kod ZIP odrzuca. Każdy czas jest odczytywany jako czas pekiński (`UTC+8`) i przeliczany na strefę Twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się dopiskiem „Godziny w twojej strefie czasowej: …”. Przycisk „Otwórz stronę przewoźnika Jifan” otwiera Twój numer na `szjf56.cn`.
 

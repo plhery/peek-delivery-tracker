@@ -93,7 +93,7 @@ W sprawie niedostarczonej paczki GlobalPost odsyła najpierw do sprzedawcy, któ
 
 ## Śledzenie przesyłki GlobalPost w Peek
 
-[Peek](/) od razu rozpoznaje numer `GP` („Wykryty przewoźnik”) i odpytuje tracker GlobalPost bez konta ani kodu pocztowego (znalezioną kartę strona przechowuje przez kilka minut w pamięci podręcznej). Działa też link `goglobalpost.com/track-detail/?t=` lub `/track/?t=`; dla starszego numeru `SDC` wybierz GlobalPost przez „Zmień”. Jeśli masz tylko numer firmy doręczającej, wklej go tak samo — Peek obsługuje ponad 4 000 przewoźników.
+[Peek](/) od razu rozpoznaje numer `GP` („Wykryty przewoźnik”) i odpytuje tracker GlobalPost bez konta ani kodu pocztowego (znalezioną kartę strona przechowuje przez kilka minut w pamięci podręcznej). Działa też link `goglobalpost.com/track-detail/?t=` lub `/track/?t=`; dla starszego numeru `SDC` wybierz GlobalPost przez „Zmień”. Jeśli masz tylko numer firmy doręczającej, wklej go tak samo — Peek obsługuje ponad 4 500 przewoźników.
 
 Peek pokazuje status, każdy skan z lokalizacją (obcinając kody pocztowe), kraj docelowy oraz firmę doręczającą wraz z jej numerem, gdy podaje je GlobalPost. Pomija pasek postępu, miasta nadawcy i odbiorcy z nagłówka (odczytywane wyłącznie do rozpoznania zwrotu) oraz kody pocztowe; GlobalPost nie podaje przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia. Przycisk „Otwórz stronę przewoźnika GlobalPost” otwiera Twój numer na `goglobalpost.com`.
 

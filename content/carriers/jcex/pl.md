@@ -54,7 +54,7 @@ JCEX sam nie doręcza w Polsce i nie podaje, z kim tu współpracuje. Pisze tylk
 Kto ma Twoją paczkę, sprawdzisz tak:
 
 - **Najnowsze linie.** Po `CONSIGNMENT RECEIVED BY OVERSEAS FORWARDER` albo `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` paczkę ma przewoźnik doręczający. Jego własne linie i miejsca skanów mogą zdradzić, kto to jest.
-- **Drugi numer.** Gdy JCEX go ma, jego strona pokazuje obok numeru listu przewozowego („运单号”) drugi, „跟踪单号” (numer śledzenia); w znanych historiach go nie było. Jeśli go widzisz, wklej go do Peek. Gdy Peek nie rozpozna przewoźnika po samym kształcie numeru, dodaj go mimo to: Peek śledzi ponad 4000 przewoźników, a właściwego wybierzesz przyciskiem „Zmień”.
+- **Drugi numer.** Gdy JCEX go ma, jego strona pokazuje obok numeru listu przewozowego („运单号”) drugi, „跟踪单号” (numer śledzenia); w znanych historiach go nie było. Jeśli go widzisz, wklej go do Peek. Gdy Peek nie rozpozna przewoźnika po samym kształcie numeru, dodaj go mimo to: Peek śledzi ponad 4500 przewoźników, a właściwego wybierzesz przyciskiem „Zmień”.
 - **Sprzedawca.** To on nadał paczkę i może zapytać JCEX. Poproś go o nazwę przewoźnika w Polsce i numer przesyłki u niego.
 
 JCEX nie publikuje własnych zasad prób doręczenia, awizo, punktów odbioru ani czasu przechowania: to sprawa przewoźnika, który doręcza w Polsce. Jeśli to [Poczta Polska](carrier:poczta-polska) albo [InPost](carrier:inpost), odbiór i czas na odbiór opisują nasze strony o tych przewoźnikach.

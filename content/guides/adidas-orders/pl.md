@@ -113,7 +113,7 @@ Zwrot ma własny numer śledzenia od firmy kurierskiej. Gdy na stronie przewoźn
 
 ## Czy mogę śledzić paczkę z adidas w Peek?
 
-Tak: wklej do [Peek](/) numer z e-maila potwierdzającego wysyłkę. Numery InPost mają 24 cyfry, tak jak numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Numery zwrotów działają tak samo.
+Tak: wklej do [Peek](/) numer z e-maila potwierdzającego wysyłkę. Numery InPost mają 24 cyfry, tak jak numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4500 przewoźników. Numery zwrotów działają tak samo.
 
 Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z adidas.
 

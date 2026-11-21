@@ -82,7 +82,7 @@ En el encabezado de varias de sus páginas aparece «Lunes a sábado de 7:00 a 1
 
 ## Rastrear un paquete de Forza Delivery con Peek
 
-[Peek](/) no puede saber que es de Forza solo por la guía FD. Pégala de todos modos: Peek sigue más de 4000 transportistas. Si tu guía tiene de seis a ocho dígitos, Peek le pregunta a Forza («Comprobando servicios de seguimiento…») y te dice «Forza Delivery Express tiene este paquete.» cuando el rastreo de Forza conoce la guía. Si pegas un enlace de rastreo.forzadelivery.com con la guía, Peek lo asigna a Forza al instante («Transportista detectado»).
+[Peek](/) no puede saber que es de Forza solo por la guía FD. Pégala de todos modos: Peek sigue más de 4500 transportistas. Si tu guía tiene de seis a ocho dígitos, Peek le pregunta a Forza («Comprobando servicios de seguimiento…») y te dice «Forza Delivery Express tiene este paquete.» cuando el rastreo de Forza conoce la guía. Si pegas un enlace de rastreo.forzadelivery.com con la guía, Peek lo asigna a Forza al instante («Transportista detectado»).
 
 Si Peek no encuentra el paquete, toca «Cambiar» y elige Forza Delivery Express en «Encaja con este número», o en «Todos los transportistas» si tu guía tiene nueve dígitos (escribe Forza en el buscador para encontrarlo). En un paquete que ya agregaste, usa «Cambiar transportista». Si eliges Forza para un número que no es FD con seis a nueve dígitos, Peek te dice que Forza «no emite números como este»: revisa el número.
 

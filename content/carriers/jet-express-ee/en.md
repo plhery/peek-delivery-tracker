@@ -75,7 +75,7 @@ Have your order number ready when you call or write.
 
 ## Track a Jet Express shipment with Peek
 
-[Peek](/) can't tell a Jet Express shipment by its number alone: Jet Express publishes no number shape, and Peek's catalog links none to it, so Jet Express never shows under "Fits this number". Paste the number all the same: Peek follows more than 4,000 carriers. Then pick Jet Express with "Change" (on a parcel you've already added, "Change carrier"). Typing "Jet Express OÜ" or "Estonia" finds it too; "kuller" doesn't.
+[Peek](/) can't tell a Jet Express shipment by its number alone: Jet Express publishes no number shape, and Peek's catalog links none to it, so Jet Express never shows under "Fits this number". Paste the number all the same: Peek follows more than 4,500 carriers. Then pick Jet Express with "Change" (on a parcel you've already added, "Change carrier"). Typing "Jet Express OÜ" or "Estonia" finds it too; "kuller" doesn't.
 
 A tracking link is quicker: paste a portal.kuller.ee Track & Trace link that starts `https://portal.kuller.ee/opter/TT?keyword=` and ends with the number (with or without `https://`), and Peek takes the number from it and names Jet Express straight away. A link without `keyword=` has no number in it for Peek. A number of six digits alone, typed or in a link, first shows "That looks like a pickup code": once you pick Jet Express with "Change", Peek takes it as the tracking number.
 

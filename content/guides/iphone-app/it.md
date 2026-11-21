@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek per iPhone, iPad e Mac è un'app gratuita che traccia i pacchi di oltre 4.000 corrieri, senza bisogno di un account. Aggiungi il suo widget «Pacchi» alla schermata Home, mandale i link di tracking con «Aggiungi a Peek» dal menu di condivisione, oppure scansiona il codice a barre sull'etichetta con l'iPhone o l'iPad.
+Peek per iPhone, iPad e Mac è un'app gratuita che traccia i pacchi di oltre 4.500 corrieri, senza bisogno di un account. Aggiungi il suo widget «Pacchi» alla schermata Home, mandale i link di tracking con «Aggiungi a Peek» dal menu di condivisione, oppure scansiona il codice a barre sull'etichetta con l'iPhone o l'iPad.
 
 Incolla un codice tracking, il link di un corriere o un'intera e-mail di spedizione, e [Peek](/) trova il corriere e mostra il viaggio su una mappa. Niente acquisti in-app e niente pubblicità.
 
@@ -99,7 +99,7 @@ Nella finestra «Impostazioni» di Peek, «Generali» ha «Mostra nella barra de
 
 :::sources
 - [Peek: app per iPhone, iPad e Mac (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – link ai pacchi, contenuto e aggiornamento del widget, risposte di Siri, scorciatoie da tastiera, trascinamento
-- [Peek: testo della scheda App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/it.md) – nome, oltre 4.000 corrieri, gratis e senza pubblicità, condivisione da Mail, Messaggi o Safari
+- [Peek: testo della scheda App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/it.md) – nome, oltre 4.500 corrieri, gratis e senza pubblicità, condivisione da Mail, Messaggi o Safari
 - [Peek: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – tutte le etichette di Peek citate qui
 - [Peek: impostazioni del progetto](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, pensata per iPhone e iPad
 - [Peek: accessibilità (in inglese)](https://peektracker.com/accessibility.html) – l'app dell'App Store su iPhone, iPad e Mac

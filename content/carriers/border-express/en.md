@@ -66,7 +66,7 @@ On the parcel's page in Peek, "Open the Border Express website" opens your numbe
 
 ## Track a Border Express parcel with Peek
 
-Paste the number in [Peek](/), which follows more than 4,000 carriers. It may show "Checking tracking services…" while it asks around. Then press "Change" and pick Border Express: type Border Express in the search. BEX finds it too, but lists BEX Express, a carrier in Serbia, first. For a label barcode, Border Express is listed under "Fits this number". On a parcel you've already added, use "Change carrier". You need no account, postcode or phone number.
+Paste the number in [Peek](/), which follows more than 4,500 carriers. It may show "Checking tracking services…" while it asks around. Then press "Change" and pick Border Express: type Border Express in the search. BEX finds it too, but lists BEX Express, a carrier in Serbia, first. For a label barcode, Border Express is listed under "Fits this number". On a parcel you've already added, use "Change carrier". You need no account, postcode or phone number.
 
 If you add the number without picking a carrier, Peek asks only tracking services, never Border Express's tracker, and shows "No tracking history yet" until one of them knows the parcel. Only if a tracking service names Border Express does Peek go on to ask Border Express. Picking Border Express yourself is the way to get its tracker's steps.
 

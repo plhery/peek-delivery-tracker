@@ -101,7 +101,7 @@ From abroad, dial +886 and drop the first 0 of the (03) and (04) numbers, as Chu
 
 ## Track a Chunghwa Post parcel with Peek
 
-[Peek](/) recognises two letters, nine digits and `TW` as Chunghwa Post straight away when the first letter is C, E, L or R (or the letters are FT or FZ) and the check digit, the last of the nine, is right. With a wrong one, Peek doesn't take it for Chunghwa Post: check the number on the receipt. Links to Chunghwa Post's tracker of the form `CSController?MAILNO=` work too. Peek doesn't take a UH number for Chunghwa Post by its shape, and doesn't read 14- or 20-digit domestic numbers from Chunghwa Post: paste them all the same, as Peek follows more than 4,000 carriers.
+[Peek](/) recognises two letters, nine digits and `TW` as Chunghwa Post straight away when the first letter is C, E, L or R (or the letters are FT or FZ) and the check digit, the last of the nine, is right. With a wrong one, Peek doesn't take it for Chunghwa Post: check the number on the receipt. Links to Chunghwa Post's tracker of the form `CSController?MAILNO=` work too. Peek doesn't take a UH number for Chunghwa Post by its shape, and doesn't read 14- or 20-digit domestic numbers from Chunghwa Post: paste them all the same, as Peek follows more than 4,500 carriers.
 
 Peek reads Chunghwa Post's international tracker and shows each scan in Chinese, as Chunghwa Post wrote it, with the office that made it (an office written in Chinese is named by its town where Peek can place it). It knows the stages of the lines in the table above. Peek reads Chunghwa Post's own scans on Taiwan time, and scans made abroad on the local time of the post that made them. Chunghwa Post gives no expected delivery date or weight, and Peek leaves out the remarks beside each scan.
 

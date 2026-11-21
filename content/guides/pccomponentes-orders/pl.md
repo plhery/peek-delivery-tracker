@@ -123,7 +123,7 @@ Zwrot widzisz w „Historial de devoluciones” (historia zwrotów), gdzie może
 
 ## Czy mogę śledzić paczkę z PcComponentes w Peek?
 
-Tak, jeśli masz numer agencji. Skopiuj go z e-maila o wysyłce albo z wiadomości agencji i wklej w [Peek](/). Numery Correos opisane wyżej Peek rozpoznaje po samym kształcie. Kształt numeru GLS mają też inni przewoźnicy: Peek pyta tych prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, stuknij „Wybierz”; jeśli Peek pokaże złego, stuknij „Zmień” i wybierz agencję z e-maila. Jeśli e-mail podaje inną agencję, i tak wklej jej numer: Peek śledzi ponad 4000 przewoźników.
+Tak, jeśli masz numer agencji. Skopiuj go z e-maila o wysyłce albo z wiadomości agencji i wklej w [Peek](/). Numery Correos opisane wyżej Peek rozpoznaje po samym kształcie. Kształt numeru GLS mają też inni przewoźnicy: Peek pyta tych prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, stuknij „Wybierz”; jeśli Peek pokaże złego, stuknij „Zmień” i wybierz agencję z e-maila. Jeśli e-mail podaje inną agencję, i tak wklej jej numer: Peek śledzi ponad 4500 przewoźników.
 
 Produkt zewnętrznego sprzedawcy ma własny numer tylko wtedy, gdy sprzedawca wysyła go ze śledzeniem. Jeśli paczka w drodze zmieni przewoźnika, a pierwszy poda tego, który ją przejmuje, Peek zachowa historię od początku i będzie śledzić nowego przewoźnika. Numer zamówienia PcComponentes nie jest numerem przesyłki: Peek nie może go śledzić. Jeśli odbierasz zamówienie w sklepie przez własnego przewoźnika, śledź numer, który da ci ten przewoźnik.
 

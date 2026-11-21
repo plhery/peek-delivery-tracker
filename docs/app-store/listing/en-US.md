@@ -31,7 +31,7 @@ Paste a tracking number, a carrier link, or a whole shipping email. Peek finds t
 ```text
 Where’s my package?
 
-Paste a tracking number, a carrier link, or a whole shipping email, or scan the barcode on the label. Peek figures out which of 4,000+ carriers has the package and shows its journey on a map, every scan, and the day it should arrive.
+Paste a tracking number, a carrier link, or a whole shipping email, or scan the barcode on the label. Peek figures out which of 4,500+ carriers has the package and shows its journey on a map, every scan, and the day it should arrive.
 
 No account needed. No ads.
 
@@ -47,7 +47,7 @@ Share the package’s page with a link. They need no app and no account. Wrap it
 A PASSPORT OF DELIVERIES
 With an account, every delivery counts in your passport, and some earn a stamp. Compare passports with friends; your packages stay private.
 
-4,000+ CARRIERS
+4,500+ CARRIERS
 USPS, UPS, FedEx, DHL, Canada Post, Royal Mail, Evri, DPD, GLS, An Post, Australia Post, La Poste, Swiss Post, PostNL, Correos, Poste Italiane, InPost, China Post, Cainiao, YunExpress, and thousands more: national postal services, couriers, and marketplace shippers.
 
 ALSO IN THE BOX

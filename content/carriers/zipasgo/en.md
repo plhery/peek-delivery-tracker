@@ -63,7 +63,7 @@ Its pages show no phone number or office address for recipients. Give the tracki
 
 ## Track a ZipasGo parcel with Peek
 
-[Peek](/) can't tell a ZipasGo parcel by its number alone, because Peek knows no number shape for it. Paste it all the same: Peek follows more than 4,000 carriers. If the number has a partner's shape, such as UPS's, Peek may name that carrier.
+[Peek](/) can't tell a ZipasGo parcel by its number alone, because Peek knows no number shape for it. Paste it all the same: Peek follows more than 4,500 carriers. If the number has a partner's shape, such as UPS's, Peek may name that carrier.
 
 To follow the parcel as ZipasGo's, press "Change" and type "ZipasGo" in "Search carriers". "Parcel Stars" and "Zipas" find it too. It isn't listed under "Fits this number". On a parcel you've already added, press "Change carrier".
 

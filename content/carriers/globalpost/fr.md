@@ -93,7 +93,7 @@ Pour un colis en retard ou manquant, GlobalPost renvoie d'abord vers le vendeur 
 
 ## Suivre un colis GlobalPost avec Peek
 
-[Peek](/) identifie immédiatement un numéro `GP` (« Transporteur détecté ») et interroge le traceur de GlobalPost sans compte ni code postal (le site met en cache une page trouvée pendant quelques minutes). Un lien `goglobalpost.com/track-detail/?t=` ou `/track/?t=` fonctionne aussi ; pour un ancien numéro `SDC`, choisis GlobalPost via « Changer ». Si tu n'as que le numéro du transporteur final, colle-le quand même : Peek suit plus de 4 000 transporteurs.
+[Peek](/) identifie immédiatement un numéro `GP` (« Transporteur détecté ») et interroge le traceur de GlobalPost sans compte ni code postal (le site met en cache une page trouvée pendant quelques minutes). Un lien `goglobalpost.com/track-detail/?t=` ou `/track/?t=` fonctionne aussi ; pour un ancien numéro `SDC`, choisis GlobalPost via « Changer ». Si tu n'as que le numéro du transporteur final, colle-le quand même : Peek suit plus de 4 500 transporteurs.
 
 Peek affiche le statut, chaque scan avec son lieu (en coupant les codes postaux), le pays de destination ainsi que le transporteur final et son numéro lorsque GlobalPost les indique. Il écarte la barre de progression, les villes d'origine et de destination de l'en-tête (lues uniquement pour détecter un retour) et les codes postaux ; GlobalPost ne fournit ni date de livraison prévue, ni poids, ni preuve de livraison. Le bouton « Ouvrir le site GlobalPost » ouvre ton numéro sur `goglobalpost.com`.
 

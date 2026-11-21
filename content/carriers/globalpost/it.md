@@ -93,7 +93,7 @@ Per un pacco non arrivato, GlobalPost rimanda anzitutto al venditore che ha pren
 
 ## Tracciare un pacco GlobalPost con Peek
 
-[Peek](/) riconosce all'istante un codice `GP` («Corriere rilevato») e interroga il tracker di GlobalPost senza account né CAP (il sito mantiene in cache per qualche minuto le schede trovate). Funzionano anche i link `goglobalpost.com/track-detail/?t=` o `/track/?t=`; per un vecchio codice `SDC`, imposta GlobalPost con «Cambia». Se hai solo il numero del corriere finale, incollalo comunque: Peek segue oltre 4.000 corrieri.
+[Peek](/) riconosce all'istante un codice `GP` («Corriere rilevato») e interroga il tracker di GlobalPost senza account né CAP (il sito mantiene in cache per qualche minuto le schede trovate). Funzionano anche i link `goglobalpost.com/track-detail/?t=` o `/track/?t=`; per un vecchio codice `SDC`, imposta GlobalPost con «Cambia». Se hai solo il numero del corriere finale, incollalo comunque: Peek segue oltre 4.500 corrieri.
 
 Peek mostra lo stato, ogni scansione con la relativa località (tagliando i codici postali), il Paese di destinazione e il corriere finale con il suo numero quando GlobalPost li riporta. Esclude la barra d'avanzamento, le città del mittente e del destinatario nell'intestazione (lette solo per riconoscere un reso) e i CAP; GlobalPost non fornisce data di consegna stimata, peso o prova di consegna. «Apri il sito GlobalPost» apre il tuo codice su `goglobalpost.com`.
 

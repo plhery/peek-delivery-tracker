@@ -81,7 +81,7 @@ For an order from a shop, ask the shop first: it booked the delivery.
 
 ## Track a CDEK parcel with Peek
 
-[Peek](/) can't be sure of a CDEK number by its shape alone. Paste it all the same: Peek follows more than 4,000 carriers.
+[Peek](/) can't be sure of a CDEK number by its shape alone. Paste it all the same: Peek follows more than 4,500 carriers.
 
 - **11 digits starting with 10.** Peek asks carriers whose numbers have this shape whether they have the parcel, five at a time, and shows "Checking tracking services…" meanwhile. If you look it up from Russia, Kazakhstan, Belarus or Serbia (your phone's region, or on the web where you connect from), CDEK is asked first. From elsewhere, it is still among the first five asked. If CDEK knows the number, Peek names CDEK and says it "has this parcel". If several carriers know it, Peek asks you to choose. If none knows it yet, you see "not found yet · Peek keeps checking". You can also press "Change" and pick CDEK under "Fits this number".
 - **Another shape.** Press "Change" and search for CDEK: typing СДЭК or SDEK finds it too.

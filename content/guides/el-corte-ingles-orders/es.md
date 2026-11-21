@@ -112,7 +112,7 @@ Si lo devuelves en tienda, te devuelven el dinero en el momento; si lo recoge un
 
 Sí, cuando tienes un número de transportista. Cópialo de los correos o SMS de la agencia de transporte, o de Correos, y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Correos de arriba. Si una forma la usan varios transportistas, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo. Peek no reconoce por la forma los números de Celeritas: pulsa «Cambiar» y elige Celeritas, o pega el enlace de seguimiento de Celeritas entero, y Peek saca de él el número y el transportista.
 
-Un artículo de un vendedor externo llega con el transportista que él elija: si el envío tiene seguimiento, Peek lo detecta entre más de 4000. Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo, al ritmo del que reparte el paquete. El número de pedido de El Corte Inglés y el QR de una recogida no son números de seguimiento: Peek no puede seguirlos.
+Un artículo de un vendedor externo llega con el transportista que él elija: si el envío tiene seguimiento, Peek lo detecta entre más de 4500. Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo, al ritmo del que reparte el paquete. El número de pedido de El Corte Inglés y el QR de una recogida no son números de seguimiento: Peek no puede seguirlos.
 
 Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan en tu cuenta de El Corte Inglés.
 

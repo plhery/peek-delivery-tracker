@@ -118,7 +118,7 @@ Zara gestiona la devolución en las 72 horas siguientes a que llegue a sus insta
 
 ## ¿Puedo seguir un pedido de Zara en Peek?
 
-Sí, si tienes el número del transportista: pégalo en [Peek](/). Para la entrega, Zara no nombra a sus transportistas, así que pega su número igualmente: Peek sigue a más de 4000 transportistas. Si varios transportistas usan la misma forma de número, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Si cada entrega tiene su propio número, añádelos todos. La etiqueta de devolución lleva su propio número: pégalo igual.
+Sí, si tienes el número del transportista: pégalo en [Peek](/). Para la entrega, Zara no nombra a sus transportistas, así que pega su número igualmente: Peek sigue a más de 4500 transportistas. Si varios transportistas usan la misma forma de número, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Si cada entrega tiene su propio número, añádelos todos. La etiqueta de devolución lleva su propio número: pégalo igual.
 
 Los estados de Zara, de `Comprado` a `Entregado a cliente`, los ves en tu cuenta o en el enlace de sus correos.
 

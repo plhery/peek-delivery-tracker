@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 O Peek para Android é uma beta e não está público no Google Play: obténs a app em [peektracker.com/android](https://peektracker.com/android), ao aderires ao teste no Google Play ou ao instalá-la a partir do repositório F-Droid do próprio Peek ou do GitHub. Precisa do Android 12 ou posterior, não pede conta e acrescenta um widget «Encomendas» ao ecrã principal e «Adicionar ao Peek» ao menu de partilha.
 
-Segue encomendas de mais de 4000 transportadoras: cola um número de seguimento, a ligação de uma transportadora ou um e-mail de envio inteiro, e o [Peek](/) descobre a transportadora e mostra o percurso num mapa. É grátis, sem compras integradas nem anúncios. Para um iPhone, iPad ou Mac, vê [o Peek para iPhone, iPad e Mac](guide:iphone-app).
+Segue encomendas de mais de 4500 transportadoras: cola um número de seguimento, a ligação de uma transportadora ou um e-mail de envio inteiro, e o [Peek](/) descobre a transportadora e mostra o percurso num mapa. É grátis, sem compras integradas nem anúncios. Para um iPhone, iPad ou Mac, vê [o Peek para iPhone, iPad e Mac](guide:iphone-app).
 
 ## O Peek está no Google Play?
 

@@ -89,7 +89,7 @@ For an order from a shop, ask the shop first: it booked the delivery. Once a par
 
 ## Track an ePost Global parcel with Peek
 
-[Peek](/) names ePost Global at once from EPG and 10 to 15 digits ("Detected carrier"), and asks ePost Global's tracker by that number alone: no postcode or account is needed. A tracking link from ePost Global's tracker or from PPX Track works too: Peek takes the number from it, the first one if the link holds several. If all you have is the partner's number, paste it all the same: Peek follows more than 4,000 carriers.
+[Peek](/) names ePost Global at once from EPG and 10 to 15 digits ("Detected carrier"), and asks ePost Global's tracker by that number alone: no postcode or account is needed. A tracking link from ePost Global's tracker or from PPX Track works too: Peek takes the number from it, the first one if the link holds several. If all you have is the partner's number, paste it all the same: Peek follows more than 4,500 carriers.
 
 Peek shows the status, each line with its place, the destination country, and the partner with its number when ePost Global gives them. It leaves out the tracker's progress bar, postcodes and air waybill numbers. ePost Global's tracker gives no expected delivery date, weight or proof of delivery, so Peek shows none. The link on the parcel's page, "Open the ePost Global website", opens the number on ePost Global's tracker.
 

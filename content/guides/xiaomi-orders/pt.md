@@ -111,7 +111,7 @@ A devolução viaja com o seu próprio número de seguimento. Mais: [seguimento 
 
 ## Posso seguir uma encomenda Xiaomi no Peek?
 
-Sim: cola no [Peek](/) o número de seguimento que a loja te deu. Para a transportadora da loja, que este guia não nomeia, ou para a Mobel, cola o número na mesma: o Peek segue mais de 4000 transportadoras.
+Sim: cola no [Peek](/) o número de seguimento que a loja te deu. Para a transportadora da loja, que este guia não nomeia, ou para a Mobel, cola o número na mesma: o Peek segue mais de 4500 transportadoras.
 
 Numa encomenda de mi.com/es, o Peek reconhece os números dos Correos só pela forma: 2 letras, 9 algarismos e `ES`, como `RR000000005ES`. Os números da SEUR, como os de 14 algarismos, e os da DHL, como os de 10, têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Os números de devolução funcionam da mesma maneira. Se a encomenda vier em vários pacotes, adiciona cada número.
 

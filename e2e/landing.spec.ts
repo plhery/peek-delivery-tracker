@@ -83,7 +83,7 @@ test('asks four questions in order, with the field first and the name, the code 
   await expect(page.locator('.door h1, .door h2:not(.door-device h2)')).toHaveText([
     'Where’s my parcel?', 'Will I know when it moves?', 'Following more than one?', 'Who’s behind Peek?',
   ]);
-  await expect(page.getByRole('link', { name: 'Open source 4,000+ carriers' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Open source 4,500+ carriers' })).toBeVisible();
   await expect(page.getByRole('img', { name: 'Works with Swiss Post, DHL, UPS, DPD Switzerland, GLS and thousands more carriers' })).toBeVisible();
   const moves = page.getByRole('region', { name: 'Will I know when it moves?' });
   await expect(moves.getByRole('listitem')).toHaveText(['Checked up to every 10 min', 'Every 2 min on delivery day']);
@@ -154,7 +154,7 @@ test('a paste still tracks, whatever the field was showing', async ({ page }) =>
   const device = page.getByRole('region', { name: 'On this device' });
   await expect(device.getByRole('link')).toHaveCount(1);
   await expect(page.locator('.door')).toHaveAttribute('data-view', 'device');
-  await expect(page.getByRole('link', { name: 'Open source 4,000+ carriers' })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Open source 4,500+ carriers' })).toHaveCount(0);
   await expect(page.locator('.door-pip')).toHaveCount(0);
   expect(await device.evaluate((list) => Boolean(list.compareDocumentPosition(document.querySelector('.landing-moves')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
   await expect(page.getByRole('heading', { level: 2, name: 'Will I know when it moves?' })).toBeVisible();

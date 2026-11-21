@@ -122,7 +122,7 @@ An El Corte Inglés store refunds you on the spot; after a home collection or a 
 
 Yes, when you have a carrier's tracking number. Copy it from the delivery agency's or Correos's emails or texts and paste it into [Peek](/). Peek recognises the Correos numbers above by their shape alone. For a shape several carriers share, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the carrier the email names. Peek doesn't recognise Celeritas numbers by their shape: press "Change" and pick Celeritas.
 
-An outside seller's item comes with the carrier the seller picks: if the shipping is tracked, Peek detects it among more than 4,000 carriers. If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. The El Corte Inglés order number and a pickup's QR code aren't tracking numbers: Peek can't follow them.
+An outside seller's item comes with the carrier the seller picks: if the shipping is tracked, Peek detects it among more than 4,500 carriers. If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. The El Corte Inglés order number and a pickup's QR code aren't tracking numbers: Peek can't follow them.
 
 Peek shows what the carrier publishes. Complaints, refunds and returns stay in your El Corte Inglés account.
 

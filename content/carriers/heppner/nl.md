@@ -99,7 +99,7 @@ Zo stond het op 27 oktober 2026 op de Nederlandstalige pagina's van Heppner:
 
 ## Een Heppner-levering volgen met Peek
 
-[Peek](/) kan Heppner, Mondial Relay of Colisweb niet vragen of ze een nummer van 8 cijfers kennen. Plak het nummer toch: Peek volgt meer dan 4.000 vervoerders. Noemt geen enkele trackingdienst Heppner, tik dan op "Change" en kies Heppner onder "Fits this number". Een trackinglink van Heppner helpt Peek niet: typ de cijfers over.
+[Peek](/) kan Heppner, Mondial Relay of Colisweb niet vragen of ze een nummer van 8 cijfers kennen. Plak het nummer toch: Peek volgt meer dan 4.500 vervoerders. Noemt geen enkele trackingdienst Heppner, tik dan op "Change" en kies Heppner onder "Fits this number". Een trackinglink van Heppner helpt Peek niet: typ de cijfers over.
 
 Peek vraagt dan de "Delivery postcode": zonder die postcode volgt het niets. Een postcode van 4 cijfers vraagt Peek bij Heppner na in Zwitserland, dan in België en dan in Luxemburg, een van 5 cijfers in Frankrijk. Een verkeerde postcode ziet eruit als een onbekend nummer.
 

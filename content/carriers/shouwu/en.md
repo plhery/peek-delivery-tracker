@@ -22,7 +22,7 @@ Other Chinese forwarders end their waybills in YQ too, with their own letters in
 
 **Where to find it.** If it isn't in the shop's shipping email or on your order page, see [how to find your tracking number](guide:find-tracking-number).
 
-**You may get the courier's number instead.** Shouwu lets the seller choose which number to pass on: Shouwu's own, which follows the parcel end to end, or the number of the courier that delivers in your country. So a Shouwu parcel can reach you under a [Royal Mail](carrier:royal-mail), Yodel or [Evri](carrier:evri) number in the UK, or a [USPS](carrier:usps) number in the US. Paste that all the same: Peek follows more than 4,000 carriers.
+**You may get the courier's number instead.** Shouwu lets the seller choose which number to pass on: Shouwu's own, which follows the parcel end to end, or the number of the courier that delivers in your country. So a Shouwu parcel can reach you under a [Royal Mail](carrier:royal-mail), Yodel or [Evri](carrier:evri) number in the UK, or a [USPS](carrier:usps) number in the US. Paste that all the same: Peek follows more than 4,500 carriers.
 
 **A tracking link.** Shouwu's "Copy Link" button gives a link to its tracker with `?q=` and the number. It opens that parcel, and you can paste the whole link into Peek. Shouwu's tracker takes up to 40 numbers at once, one per line.
 

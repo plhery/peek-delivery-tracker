@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-19
 ---
 
-Pour suivre ta commande Temu, il te faut le numéro de suivi du transporteur, pas le numéro de commande Temu (PO et 20 chiffres). Colle-le dans [Peek](/) : il retrouve le transporteur parmi plus de 4 000, de La Poste (Colissimo) à bpost, puis suit le partenaire local si le premier transporteur en nomme un. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux : l'étiquette existe avant que le transporteur ait le colis.
+Pour suivre ta commande Temu, il te faut le numéro de suivi du transporteur, pas le numéro de commande Temu (PO et 20 chiffres). Colle-le dans [Peek](/) : il retrouve le transporteur parmi plus de 4 500, de La Poste (Colissimo) à bpost, puis suit le partenaire local si le premier transporteur en nomme un. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux : l'étiquette existe avant que le transporteur ait le colis.
 
 ## Mon numéro de commande Temu est-il un numéro de suivi ?
 

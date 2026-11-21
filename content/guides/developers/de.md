@@ -37,7 +37,7 @@ Von außen führt nur ein Weg hinein: die Anmeldung eines Assistenten. Claude, C
 
 Mit Universal Parcel Scraper, der Engine, die für Peek die Paketdienste abfragt. Er findet den Paketdienst, liest dessen eigene Website, weicht nur wo nötig auf universelle Tracker aus und liefert für jeden Paketdienst dasselbe JSON, in dem jeder Scan einem gemeinsamen Zustellschritt zugeordnet ist.
 
-Sein README zählt mehr als 4.000 Paketdienste, angebunden über mehr als 800 eigene Adapter und universelle Fallbacks. In seinem Benchmark mit 100 Paketdiensten, ausgewählt für Kunden in Europa, liefern die Adapter für 91 einen Verlauf, mit allen Fallbacks für 95, gegenüber 73 beim besten einzelnen Aggregator.
+Sein README zählt mehr als 4.500 Paketdienste, angebunden über mehr als 800 eigene Adapter und universelle Fallbacks. In seinem Benchmark mit 100 Paketdiensten, ausgewählt für Kunden in Europa, liefern die Adapter für 91 einen Verlauf, mit allen Fallbacks für 95, gegenüber 73 beim besten einzelnen Aggregator.
 
 Neben der Kommandozeile läuft er auf drei Arten:
 

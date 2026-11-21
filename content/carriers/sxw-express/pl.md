@@ -72,7 +72,7 @@ Klientem SXW Express jest sprzedawca, dlatego w sprawie zamówienia skontaktuj s
 
 ## Śledzenie przesyłki SXW Express w Peek
 
-[Peek](/) od razu rozpoznaje numer złożony z `SXW` i dwunastu cyfr jako „Wykryty przewoźnik”, ponieważ żaden inny przewoźnik w katalogu nie używa takiego formatu (przy innym formacie Peek obsługuje ponad 4 000 przewoźników; ręcznie wybierzesz SXW przez „Zmień” lub „Zmień przewoźnika”, wpisując `SXW Express`, `Shengxingwang` lub `胜兴旺`).
+[Peek](/) od razu rozpoznaje numer złożony z `SXW` i dwunastu cyfr jako „Wykryty przewoźnik”, ponieważ żaden inny przewoźnik w katalogu nie używa takiego formatu (przy innym formacie Peek obsługuje ponad 4 500 przewoźników; ręcznie wybierzesz SXW przez „Zmień” lub „Zmień przewoźnika”, wpisując `SXW Express`, `Shengxingwang` lub `胜兴旺`).
 
 Peek odpytuje oficjalny tracker SXW bez konta, kodu pocztowego i numeru telefonu. Pokazuje status, każdy potwierdzony skan (z trzema chińskimi komunikatami przetłumaczonymi na angielski), lokalizację, nazwę usługi i kraj docelowy, a pomija nazwiska, adres, kody pocztowe, liczbę sztuk, wagę, referencję klienta, dane płatności, osobę odbierającą, podpis i potwierdzenie doręczenia. Ponieważ tracker SXW nie podaje przewidywanej daty dostawy, Peek jej nie wyświetla.
 

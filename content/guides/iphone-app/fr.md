@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek pour iPhone, iPad et Mac est une app gratuite qui suit les colis de plus de 4 000 transporteurs, sans avoir besoin de compte. Ajoute son widget « Colis » à ton écran d'accueil, envoie-lui des liens de suivi avec « Ajouter à Peek » dans le menu de partage, ou scanne le code-barres de l'étiquette avec ton iPhone ou ton iPad.
+Peek pour iPhone, iPad et Mac est une app gratuite qui suit les colis de plus de 4 500 transporteurs, sans avoir besoin de compte. Ajoute son widget « Colis » à ton écran d'accueil, envoie-lui des liens de suivi avec « Ajouter à Peek » dans le menu de partage, ou scanne le code-barres de l'étiquette avec ton iPhone ou ton iPad.
 
 Colle un numéro de suivi, le lien d'un transporteur ou tout un e-mail d'expédition, et [Peek](/) trouve le transporteur et affiche le trajet sur une carte. Pas d'achats intégrés, pas de pub.
 
@@ -99,7 +99,7 @@ Dans la fenêtre « Réglages » de Peek, « Général » propose « Afficher da
 
 :::sources
 - [Peek : app iPhone, iPad et Mac (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – liens de colis, contenu et mise à jour du widget, réponses de Siri, raccourcis clavier, glisser-déposer
-- [Peek : texte de la fiche App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/fr.md) – nom, plus de 4 000 transporteurs, gratuit et sans pub, partage depuis Mail, Messages ou Safari
+- [Peek : texte de la fiche App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/fr.md) – nom, plus de 4 500 transporteurs, gratuit et sans pub, partage depuis Mail, Messages ou Safari
 - [Peek : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – chaque libellé de Peek cité ici
 - [Peek : réglages du projet](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, conçu pour iPhone et iPad
 - [Peek : accessibilité (en anglais)](https://peektracker.com/accessibility.html) – l'app de l'App Store sur iPhone, iPad et Mac

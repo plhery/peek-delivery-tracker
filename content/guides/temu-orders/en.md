@@ -7,7 +7,7 @@ published: 2026-10-17
 updated: 2026-11-19
 ---
 
-To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 4,000, from USPS to Royal Mail and Evri, then follows the local partner if the first carrier names one. A new number can show nothing for a day or two: the label exists before the carrier has the parcel.
+To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 4,500, from USPS to Royal Mail and Evri, then follows the local partner if the first carrier names one. A new number can show nothing for a day or two: the label exists before the carrier has the parcel.
 
 ## Is my Temu order number a tracking number?
 

@@ -75,7 +75,7 @@ Kui helistate või kirjutate, hoidke tellimuse number käepärast.
 
 ## Jet Expressi saadetise jälgimine Peekis
 
-[Peek](/) ei tunne Jet Expressi saadetist numbri järgi ära: Jet Express ei avalda numbri kuju ja Peeki kataloog ei seo temaga ühtegi kuju, seega ei näita Peek Jet Expressi ka jaotises „Fits this number“. Kleepige number siiski – Peek jälgib enam kui 4000 vedaja pakke – ja valige Jet Express nupuga „Change“ (juba lisatud pakil „Change carrier“). Otsingus leiab selle ka sõnadega „Jet Express OÜ“ ja riigi ingliskeelse nimega „Estonia“, aga mitte sõnaga „kuller“.
+[Peek](/) ei tunne Jet Expressi saadetist numbri järgi ära: Jet Express ei avalda numbri kuju ja Peeki kataloog ei seo temaga ühtegi kuju, seega ei näita Peek Jet Expressi ka jaotises „Fits this number“. Kleepige number siiski – Peek jälgib enam kui 4500 vedaja pakke – ja valige Jet Express nupuga „Change“ (juba lisatud pakil „Change carrier“). Otsingus leiab selle ka sõnadega „Jet Express OÜ“ ja riigi ingliskeelse nimega „Estonia“, aga mitte sõnaga „kuller“.
 
 Kiiremini läheb jälgimislingiga: kleepige portal.kuller.ee Track & Trace'i link, mis algab `https://portal.kuller.ee/opter/TT?keyword=` ja lõpeb numbriga (`https://` võib ka puududa). Peek võtab numbri lingist ja seob paki kohe Jet Expressiga. Lingist, milles `keyword=` puudub, Peek numbrit ei leia. Kui number on kuuekohaline ja ilma tähtedeta, olgu see sisestatud eraldi või lingis, näitab Peek kõigepealt teadet „That looks like a pickup code“; kui valite nupuga „Change“ Jet Expressi, võtab Peek selle jälgimisnumbrina vastu.
 

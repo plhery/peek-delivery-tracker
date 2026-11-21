@@ -102,7 +102,7 @@ Per seguire il reso: [tracking dei resi](guide:returns-tracking).
 
 ## Posso tracciare un pacco Douglas in Peek?
 
-Sì, con il numero del corriere: incollalo su [Peek](/). Quando più corrieri hanno numeri della stessa forma, Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Peek segue più di 4.000 corrieri, quindi incolla il numero anche se non sai di chi è. Se l'ordine arriva in più pacchi, aggiungi ogni numero, e lo stesso vale per il reso.
+Sì, con il numero del corriere: incollalo su [Peek](/). Quando più corrieri hanno numeri della stessa forma, Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Peek segue più di 4.500 corrieri, quindi incolla il numero anche se non sai di chi è. Se l'ordine arriva in più pacchi, aggiungi ogni numero, e lo stesso vale per il reso.
 
 Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano a Douglas.
 

@@ -97,7 +97,7 @@ Gecontroleerd op de Nederlandstalige pagina's van Mondial Relay op 25 oktober 20
 
 ## Uw Mondial Relay-pakket volgen met Peek
 
-[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10, 12 of 14 cijfers past ook bij andere vervoerders, en alleen bij de FV-nummers van InPost Spanje (FV en 8 cijfers) vraagt Peek Mondial Relay of het een nummer kent. Plak het toch: Peek volgt meer dan 4.000 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
+[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10, 12 of 14 cijfers past ook bij andere vervoerders, en alleen bij de FV-nummers van InPost Spanje (FV en 8 cijfers) vraagt Peek Mondial Relay of het een nummer kent. Plak het toch: Peek volgt meer dan 4.500 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
 
 Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent geen vervoerder of trackingdienst het nummer, dan stelt Peek vanuit Nederland, België, Frankrijk, Luxemburg, Spanje of Portugal zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10, 12 of 14 cijfers en voor de barcode is geen postcode nodig.
 

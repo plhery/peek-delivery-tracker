@@ -121,7 +121,7 @@ Cómo seguir una devolución: [seguimiento de devoluciones](guide:returns-tracki
 
 ## ¿Puedo seguir un paquete de Leroy Merlin en Peek?
 
-Sí, si tienes el número de seguimiento del transportista, por ejemplo desde «Rastrear paquete» de un pedido del Marketplace: pégalo en [Peek](/). Las páginas de Leroy Merlin España no nombran a sus agencias de transporte, así que pega el número igualmente: Peek sigue a más de 4000 transportistas.
+Sí, si tienes el número de seguimiento del transportista, por ejemplo desde «Rastrear paquete» de un pedido del Marketplace: pégalo en [Peek](/). Las páginas de Leroy Merlin España no nombran a sus agencias de transporte, así que pega el número igualmente: Peek sigue a más de 4500 transportistas.
 
 Muchos números tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista correcto. Si el pedido llega en varios paquetes, añade cada número.
 

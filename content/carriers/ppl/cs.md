@@ -90,7 +90,7 @@ Kontakty uvedené na ppl.cz 25. října 2026:
 
 ## Sledování zásilek PPL v Peeku
 
-[Peek](/) číslo PPL podle 11 číslic sám nepřiřadí, protože stejně dlouhá čísla mají i jiní dopravci. I tak ho vložte (Peek sleduje přes 4 000 dopravců). U čísla, které začíná číslicí 2 až 9, se Peek zeptá dopravců, kterým může patřit, mezi nimi PPL, GLS z několika zemí a švýcarské PostLogistics; přednost mají dopravci ze země, ze které Peek otevíráte. Když PPL číslo zná, uvidíte „PPL has this parcel“. Když ho zatím nezná nikdo z dotázaných, Peek se po přidání zásilky ptá dál.
+[Peek](/) číslo PPL podle 11 číslic sám nepřiřadí, protože stejně dlouhá čísla mají i jiní dopravci. I tak ho vložte (Peek sleduje přes 4 500 dopravců). U čísla, které začíná číslicí 2 až 9, se Peek zeptá dopravců, kterým může patřit, mezi nimi PPL, GLS z několika zemí a švýcarské PostLogistics; přednost mají dopravci ze země, ze které Peek otevíráte. Když PPL číslo zná, uvidíte „PPL has this parcel“. Když ho zatím nezná nikdo z dotázaných, Peek se po přidání zásilky ptá dál.
 
 PPL můžete vybrat i sami přes „Change“, třeba u čísla, které začíná 0 nebo 1: takové číslo Peek u PPL sám neověřuje. U čísla, které nemá přesně 11 číslic, Peek napíše, že PPL „doesn’t issue numbers like this one“. Vložit můžete i odkaz ze sledování na ppl.cz se `shipmentId=`.
 

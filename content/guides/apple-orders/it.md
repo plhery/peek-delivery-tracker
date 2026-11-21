@@ -122,7 +122,7 @@ L'hai comprato in un altro negozio? Le condizioni di Apple valgono solo per il s
 
 ## Posso tracciare un pacco Apple in Peek?
 
-Sì: incolla in [Peek](/) il numero di tracking dell'email di notifica di spedizione o di Stato dell'ordine. Apple non nomina i suoi corrieri nelle pagine, quindi incolla comunque il numero: Peek segue più di 4.000 corrieri. Se il numero ha la stessa forma di quelli di altri corrieri, Peek chiede ai corrieri probabili e mostra quello che lo conosce. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere che leggi nell'email.
+Sì: incolla in [Peek](/) il numero di tracking dell'email di notifica di spedizione o di Stato dell'ordine. Apple non nomina i suoi corrieri nelle pagine, quindi incolla comunque il numero: Peek segue più di 4.500 corrieri. Se il numero ha la stessa forma di quelli di altri corrieri, Peek chiede ai corrieri probabili e mostra quello che lo conosce. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere che leggi nell'email.
 
 Un ordine inferiore a 280 € viaggia per posta e, dice Apple, «il tracking dell'ordine non è disponibile». Se il reso ha un numero di tracking, incollalo allo stesso modo. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
 

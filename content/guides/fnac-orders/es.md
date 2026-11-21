@@ -83,7 +83,7 @@ Los gastos directos de devolución son tuyos, salvo que la tienda acepte pagarlo
 
 Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce muchos números solo por su forma. Si una forma la usan varios transportistas, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica Fnac o el vendedor.
 
-Peek busca entre más de 4000 transportistas. Si el paquete de un vendedor cambia de transportista en el camino y el primero nombra al que toma el relevo, Peek conserva el historial desde el principio y cambia cuando se mueve el seguimiento del nuevo transportista; la tarjeta muestra entonces ese transportista y su número.
+Peek busca entre más de 4500 transportistas. Si el paquete de un vendedor cambia de transportista en el camino y el primero nombra al que toma el relevo, Peek conserva el historial desde el principio y cambia cuando se mueve el seguimiento del nuevo transportista; la tarjeta muestra entonces ese transportista y su número.
 
 Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones quedan entre tú y Fnac o el vendedor.
 

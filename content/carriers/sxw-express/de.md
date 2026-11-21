@@ -72,7 +72,7 @@ Vertragspartner von SXW Express ist der Verkäufer: Wende dich bei Fragen zuerst
 
 ## SXW-Express-Pakete mit Peek verfolgen
 
-[Peek](/) ordnet eine Nummer aus `SXW` und zwölf Ziffern sofort mit „Erkannter Paketdienst“ SXW Express zu, da kein anderer Dienst im Katalog dieses Muster nutzt (andere Formate prüft Peek gegen über 4.000 Paketdienste; manuell findest du SXW über „Ändern“ oder „Paketdienst ändern“ unter `SXW Express`, `Shengxingwang` oder `胜兴旺`).
+[Peek](/) ordnet eine Nummer aus `SXW` und zwölf Ziffern sofort mit „Erkannter Paketdienst“ SXW Express zu, da kein anderer Dienst im Katalog dieses Muster nutzt (andere Formate prüft Peek gegen über 4.500 Paketdienste; manuell findest du SXW über „Ändern“ oder „Paketdienst ändern“ unter `SXW Express`, `Shengxingwang` oder `胜兴旺`).
 
 Peek fragt direkt den offiziellen Tracker von SXW ab – ohne Konto, Postleitzahl oder Telefonnummer. Angezeigt werden Status, jeder echte Scan (mit den drei chinesischen Systemzeilen auf Englisch), der Ort sofern vorhanden, die Versandart und das Zielland; Namen, Adresse, Postleitzahlen, Stückzahl, Gewicht, Kundenreferenz, Zahlungsdaten, Unterzeichner, Unterschrift und Zustellnachweis lässt Peek weg. Da SXW kein Lieferdatum liefert, zeigt Peek keines an.
 

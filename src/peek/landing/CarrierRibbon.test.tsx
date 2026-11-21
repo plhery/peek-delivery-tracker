@@ -20,7 +20,7 @@ describe('CarrierRibbon', () => {
     // No truck rides in step with its neighbour.
     const rhythm = (index: number) => (trucks[index] as HTMLElement).style.animationDuration;
     expect(new Set([0, 1, 2, 3].map(rhythm)).size).toBe(4);
-    expect(screen.getByText('Finds the carrier for you: 4,000+ of them, from Swiss Post to USPS')).toBeVisible();
+    expect(screen.getByText('Finds the carrier for you: 4,500+ of them, from Swiss Post to USPS')).toBeVisible();
   });
 
   it('arrives with one line of trucks, standing, and rolls once the page is live', () => {

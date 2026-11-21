@@ -112,7 +112,7 @@ Yes, with the carrier's tracking number: copy it from "Track my package" and pas
 | USPS | Most 22-digit numbers starting with `94`, like `9400100000000000000006` |
 | DHL Express | `JD01` and 16 digits, like `JD014600000000000000` |
 
-DPD UK's 14-digit numbers, FedEx's 12-digit numbers and DHL Express's 10-digit numbers share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,000 carriers. If your order comes from several sellers, add each number.
+DPD UK's 14-digit numbers, FedEx's 12-digit numbers and DHL Express's 10-digit numbers share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,500 carriers. If your order comes from several sellers, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds, returns and warranty repairs stay with Back Market and the seller.
 

@@ -29,7 +29,7 @@ Cola um número de seguimento, uma ligação ou todo o e-mail de envio. O Peek e
 ```text
 Onde está a minha encomenda?
 
-Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 4000 transportadoras tem a encomenda e mostra a viagem num mapa, cada registo e o dia em que deve chegar.
+Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 4500 transportadoras tem a encomenda e mostra a viagem num mapa, cada registo e o dia em que deve chegar.
 
 Não precisas de conta. Sem anúncios.
 
@@ -45,7 +45,7 @@ Partilha a página da encomenda com uma ligação. Quem a abre não precisa de a
 UM PASSAPORTE DE ENTREGAS
 Com uma conta, cada entrega fica no teu passaporte e algumas dão-te um selo. Compara passaportes com os teus amigos; as tuas encomendas continuam privadas.
 
-4000+ TRANSPORTADORAS
+4500+ TRANSPORTADORAS
 CTT, CTT Express, DPD, GLS, DHL, UPS, FedEx, SEUR, Correios do Brasil, Cainiao, China Post, YunExpress e milhares de outras: correios nacionais, empresas de correio expresso e as transportadoras das grandes lojas online.
 
 TAMBÉM VEM NA CAIXA

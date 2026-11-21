@@ -77,7 +77,7 @@ Na stronie `jtexpress.com.cn` (w Chinach kontynentalnych):
 
 ## Śledzenie paczki J&T Express China w Peek
 
-Choć układ `JT` i 13 cyfr pokrywa się z J&T Express w Azji Południowo-Wschodniej, wklej numer w [Peek](/) (obsługującym ponad 4 000 przewoźników):
+Choć układ `JT` i 13 cyfr pokrywa się z J&T Express w Azji Południowo-Wschodniej, wklej numer w [Peek](/) (obsługującym ponad 4 500 przewoźników):
 
 - **Wklejony sam numer.** Peek pokazuje „Sprawdzanie usług śledzenia…”: jeśli serwisy zgodnie wskażą J&T Express China z datowanymi krokami, Peek przypisze go automatycznie; gdy znajdzie historię bez ustalonego operatora, zobaczysz „Znaleziono historię. Peek potwierdzi przewoźnika po zapisaniu.”; w przeciwnym razie — „jeszcze nie znaleziono · Peek sprawdza dalej”.
 - **Wybrany ręcznie.** Stuknij „Zmień” i wybierz J&T Express China w sekcji „Pasują do numeru” albo wyszukując `J&T` lub `极兔` na liście „Wszyscy przewoźnicy” (lub użyj „Zmień przewoźnika” przy zapisanej paczce, także gdy trafiła pod J&T Express).

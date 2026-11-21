@@ -53,7 +53,7 @@ and [PRIVACY.md](../../PRIVACY.md). Nothing is used for tracking.
 Review notes, in English:
 
 ```text
-Peek follows parcels from more than 4,000 carriers. It is free and sells nothing.
+Peek follows parcels from more than 4,500 carriers. It is free and sells nothing.
 
 Without an account: paste or type a tracking number on the first screen. Peek finds the carrier and shows the parcel's journey. The server keeps these parcels without an account, and only that iPhone lists them.
 

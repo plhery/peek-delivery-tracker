@@ -120,7 +120,7 @@ Como seguir uma devolução: [seguimento de devoluções](guide:returns-tracking
 
 ## Posso seguir uma encomenda Leroy Merlin no Peek?
 
-Sim, se tiveres o número de seguimento da transportadora, por exemplo pelo link do email de expedição ou por «Acompanhar a minha encomenda» do Marketplace: cola-o no [Peek](/). As páginas da Leroy Merlin Portugal não nomeiam as transportadoras, por isso cola o número na mesma: o Peek segue mais de 4000 transportadoras.
+Sim, se tiveres o número de seguimento da transportadora, por exemplo pelo link do email de expedição ou por «Acompanhar a minha encomenda» do Marketplace: cola-o no [Peek](/). As páginas da Leroy Merlin Portugal não nomeiam as transportadoras, por isso cola o número na mesma: o Peek segue mais de 4500 transportadoras.
 
 Muitos números têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. Se a encomenda vier em vários pacotes, adiciona cada número.
 

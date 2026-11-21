@@ -83,7 +83,7 @@ Poza Cainiao zobaczysz [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Su
 | `SF` i 13 cyfr | SF Express |
 | `3A5V` i 9 cyfr | CNE |
 
-Wklej do [Peeka](/) którykolwiek numer, chiński albo polski, a Peek znajdzie przewoźnika spośród ponad 4000. Więcej o numerach przesyłek: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
+Wklej do [Peeka](/) którykolwiek numer, chiński albo polski, a Peek znajdzie przewoźnika spośród ponad 4500. Więcej o numerach przesyłek: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
 
 ## Kto dostarcza paczki z AliExpress, Temu i Shein w Polsce?
 

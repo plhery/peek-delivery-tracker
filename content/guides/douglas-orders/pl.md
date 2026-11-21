@@ -117,7 +117,7 @@ Jak śledzić zwrot: [śledzenie zwrotów](guide:returns-tracking).
 
 ## Czy mogę śledzić zamówienie Douglas w Peek?
 
-Tak: wklej do [Peek](/) numer przesyłki od przewoźnika. Gdy numery kilku przewoźników mają ten sam kształt, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Peek śledzi ponad 4000 przewoźników, więc numer od przewoźnika Partnera Douglas też po prostu wklej. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
+Tak: wklej do [Peek](/) numer przesyłki od przewoźnika. Gdy numery kilku przewoźników mają ten sam kształt, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Peek śledzi ponad 4500 przewoźników, więc numer od przewoźnika Partnera Douglas też po prostu wklej. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 
 Numer przesyłki zwrotnej wklej tak samo. 24-cyfrowe numery InPost mają ten sam kształt co numery kilku innych przewoźników, a numery ORLEN Paczki i DHL także dzielą kształt z innymi. Przy zwrocie kurierem DHL, jeśli Peek pokaże innego przewoźnika, naciśnij „Zmień” i wybierz z listy właściwą usługę DHL.
 

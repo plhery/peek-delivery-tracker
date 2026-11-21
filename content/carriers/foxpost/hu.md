@@ -92,7 +92,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 ## Foxpost-csomag követése a Peekkel
 
-A [Peek](/) a `CLFOX` kezdetű számról rögtön tudja, hogy Foxpost-csomag. A 10 jegyű, `66639` kezdetű házhoz szállítási számot viszont más szállítóknak ajánlja fel, a Foxpostnak nem. Ezt is nyugodtan illeszd be: a Peek több mint 4000 szállítót követ. A Foxpostot a „Change” gombbal választhatod ki. Beillesztheted a foxpost.hu Csomagkövetés linkjét is a `code=` résszel: ebből a Peek a számtól függetlenül tudja, hogy Foxpostról van szó. A `Z` kezdetű számot a Peek a [Packetánál](carrier:packeta) követi.
+A [Peek](/) a `CLFOX` kezdetű számról rögtön tudja, hogy Foxpost-csomag. A 10 jegyű, `66639` kezdetű házhoz szállítási számot viszont más szállítóknak ajánlja fel, a Foxpostnak nem. Ezt is nyugodtan illeszd be: a Peek több mint 4500 szállítót követ. A Foxpostot a „Change” gombbal választhatod ki. Beillesztheted a foxpost.hu Csomagkövetés linkjét is a `code=` résszel: ebből a Peek a számtól függetlenül tudja, hogy Foxpostról van szó. A `Z` kezdetű számot a Peek a [Packetánál](carrier:packeta) követi.
 
 A Peek a Foxpost teljes előzményét mutatja, a lépéseket pedig magyarul, ahogy a Foxpost írja őket, akármilyen nyelven használod a Peeket. Az időpontokat budapesti idő szerint értelmezi, és az eszközöd időzónájában jeleníti meg. Látod a feladót (többnyire a webshopot) és azt az automatát vagy átvevőhelyet, ahová a csomag tart, vagy ahol vár. Várható kézbesítési napot és súlyt a Foxpost nem ad, a rendelésszámot és a fizetési adatokat pedig a Peek nem veszi át. Ha változik a státusz, a Peek értesítést küldhet. A Foxposttal vagy a webshoppal helyetted nem tud kapcsolatba lépni.
 

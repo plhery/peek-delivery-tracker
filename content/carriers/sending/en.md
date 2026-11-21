@@ -67,7 +67,7 @@ As Sending's site listed them on 17 November 2026:
 
 ## Track a Sending parcel with Peek
 
-[Peek](/) can't tell a Sending number by its shape: 12 digits fit many carriers. Paste it all the same: Peek follows more than 4,000 carriers. When you add it from Spain, Portugal or Andorra, Peek asks several carriers that use 12 digits whether they know it, Sending first: you'll see "Checking tracking services…", then "Sending has this parcel." if only Sending knows the number. From anywhere else, that check leaves Sending out. If Sending doesn't come up, press "Change" and pick it, listed under "Fits this number" or found by typing its name. On a parcel you've already added, use "Change carrier".
+[Peek](/) can't tell a Sending number by its shape: 12 digits fit many carriers. Paste it all the same: Peek follows more than 4,500 carriers. When you add it from Spain, Portugal or Andorra, Peek asks several carriers that use 12 digits whether they know it, Sending first: you'll see "Checking tracking services…", then "Sending has this parcel." if only Sending knows the number. From anywhere else, that check leaves Sending out. If Sending doesn't come up, press "Change" and pick it, listed under "Fits this number" or found by typing its name. On a parcel you've already added, use "Change carrier".
 
 Peek takes only Sending's 12-digit shipment number: pick Sending for any other and Peek notes next to its name that it "doesn’t issue numbers like this one". For a reference, use the tracker on sending.es. A link to Sending's tracker on info.sending.es with `localizador=` and the number in it can be pasted too.
 

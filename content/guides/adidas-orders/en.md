@@ -132,7 +132,7 @@ Yes: paste the carrier's tracking number from the shipment confirmation email in
 - Lasership: `1LS` and 12 to 14 characters, which Peek follows with OnTrac.
 - Pitney Bowes: 20 characters starting with `UPAA` or `UPBE`, or `PBX` and two letters.
 
-For Evri's 16-character numbers starting with H or T, Peek asks Evri and shows it once Evri knows the number. FedEx's 12-digit numbers share their shape with other carriers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. A Buy with Prime number starting with `TBA` goes to Amazon's public tracker first. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,000 carriers. Return numbers work the same way.
+For Evri's 16-character numbers starting with H or T, Peek asks Evri and shows it once Evri knows the number. FedEx's 12-digit numbers share their shape with other carriers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. A Buy with Prime number starting with `TBA` goes to Amazon's public tracker first. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,500 carriers. Return numbers work the same way.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns stay with adidas.
 

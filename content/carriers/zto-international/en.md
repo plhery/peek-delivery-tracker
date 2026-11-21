@@ -88,7 +88,7 @@ The footer of www.ztoglobal.com also offers "Online Customer Service".
 
 ## Track a ZTO International parcel with Peek
 
-Paste the number in [Peek](/): it follows more than 4,000 carriers. It puts ZTO International first among the carriers whose numbers look the same, and shows "ZTO International has this parcel." when ZTO knows the number. If none does, it asks tracking services, and may show "Not found by tracking services yet. Peek will keep checking after you add it." A ZTO Express parcel inside China? Tap "Change" and pick ZTO Express under "Fits this number". An m.ztoglobal.com link with `inputNo=` names ZTO International too.
+Paste the number in [Peek](/): it follows more than 4,500 carriers. It puts ZTO International first among the carriers whose numbers look the same, and shows "ZTO International has this parcel." when ZTO knows the number. If none does, it asks tracking services, and may show "Not found by tracking services yet. Peek will keep checking after you add it." A ZTO Express parcel inside China? Tap "Change" and pick ZTO Express under "Fits this number". An m.ztoglobal.com link with `inputNo=` names ZTO International too.
 
 Peek reads ZTO International's own tracker; each scan's place comes from ZTO's Chinese line, and Peek names it by its town where it can place it, otherwise in Chinese as ZTO wrote it. ZTO dates every scan on China's clock, even in your country, an hour ahead of Thailand, Vietnam, Cambodia and Laos; Peek shows each in your device's time zone. It leaves out couriers', scanners' and signers' names, phone numbers, bag numbers and the parcel station, and gives no expected delivery date, weight or proof of delivery. It follows the 771 number to the end, with no second carrier.
 

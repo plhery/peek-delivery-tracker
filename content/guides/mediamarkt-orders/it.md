@@ -127,7 +127,7 @@ Sì, con il numero del corriere. Cercalo nello stato della spedizione in «I tuo
 
 Se una forma la usano più corrieri, come le 12 cifre di BRT e Poste Italiane, le 14 cifre di BRT e DPD o le 24 cifre di InPost, Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli quello indicato da MediaWorld.
 
-Ceva Logistics, Energo e Rhenus Logistics, che portano i prodotti pesanti, ti chiamano per fissare la data. Per un prodotto del Marketplace, Peek riconosce il corriere tra più di 4.000. Il numero d'ordine MediaWorld non è un numero di tracking, e il ritiro in negozio non ha un numero da seguire.
+Ceva Logistics, Energo e Rhenus Logistics, che portano i prodotti pesanti, ti chiamano per fissare la data. Per un prodotto del Marketplace, Peek riconosce il corriere tra più di 4.500. Il numero d'ordine MediaWorld non è un numero di tracking, e il ritiro in negozio non ha un numero da seguire.
 
 Peek mostra quello che pubblica il corriere. Rimborsi, reclami e resi restano nel tuo account MediaWorld.
 

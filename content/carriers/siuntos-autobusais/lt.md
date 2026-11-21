@@ -83,7 +83,7 @@ Dėl siuntos skambinkite į miesto, iš kurio ar į kurį ji siųsta, terminalą
 
 ## „Siuntos autobusais“ siuntos sekimas su Peek
 
-[Peek](/) pagal numerį „Siuntos autobusais“ siuntos atpažinti negali, nes jokios šio vežėjo numerio formos nežino. Vis tiek numerį įklijuokite – Peek seka daugiau nei 4 000 vežėjų. Kol siuntą pridedate, Peek gali pasitikrinti sekimo paslaugose ar pas vežėjus, kurių numeriai tokios pat formos („Checking tracking services…“). Tai nereiškia, kad siuntą veža jie.
+[Peek](/) pagal numerį „Siuntos autobusais“ siuntos atpažinti negali, nes jokios šio vežėjo numerio formos nežino. Vis tiek numerį įklijuokite – Peek seka daugiau nei 4 500 vežėjų. Kol siuntą pridedate, Peek gali pasitikrinti sekimo paslaugose ar pas vežėjus, kurių numeriai tokios pat formos („Checking tracking services…“). Tai nereiškia, kad siuntą veža jie.
 
 Kad siunta būtų sekama kaip „Siuntos autobusais“, paspauskite „Change“ ir lauke „Search carriers“ įrašykite „Siuntos autobusais“; tinka ir „Kautra“. Skiltyje „Fits this number“ jos nebus. Jau pridėtai siuntai spauskite „Change carrier“. Nuoroda iš siuntosautobusais.lt nepadės: numeris ten įvedamas formoje, todėl puslapio adrese jo nėra ir Peek jo neperskaito.
 

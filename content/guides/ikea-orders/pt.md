@@ -138,7 +138,7 @@ Onde está o número de seguimento da devolução: [seguimento de devoluções](
 
 ## Posso seguir uma encomenda IKEA no Peek?
 
-Sim, as entregas pequenas da DPD: cola o número no [Peek](/). Os números de 14 algarismos da DPD têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a DPD Portugal. Se receberes vários números, adiciona cada um. Com outra transportadora, cola o número na mesma: o Peek segue mais de 4000 transportadoras.
+Sim, as entregas pequenas da DPD: cola o número no [Peek](/). Os números de 14 algarismos da DPD têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a DPD Portugal. Se receberes vários números, adiciona cada um. Com outra transportadora, cola o número na mesma: o Peek segue mais de 4500 transportadoras.
 
 As entregas à porta e em casa da transportadora da IKEA seguem-se em «Acompanhar e gerir a sua encomenda» e com o SMS do dia da entrega.
 

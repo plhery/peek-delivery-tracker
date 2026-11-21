@@ -7,10 +7,14 @@ import { withLookupPurpose } from './metrics';
 import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
-const ONLOG_BROWSER_RECOGNITION_BUDGET_MS = 40_000;
-/** Shared work and saved-parcel callers allow Onlog's guest verification time to finish. */
+/**
+ * Carriers whose browser read needs longer: Onlog's guest verification, and ZTO's, whose reads through the browser
+ * service take 15–18 s.
+ */
+const LONGER_BROWSER_RECOGNITION_MS = new Map([['onlog-express', 40_000], ['zto', 40_000]]);
+/** Shared work and saved-parcel callers allow these carriers' verification time to finish. */
 export function browserRecognitionWorkBudget(carrier: string): number {
-  return carrier === 'onlog-express' ? ONLOG_BROWSER_RECOGNITION_BUDGET_MS : BROWSER_RECOGNITION_BUDGET_MS;
+  return LONGER_BROWSER_RECOGNITION_MS.get(carrier) ?? BROWSER_RECOGNITION_BUDGET_MS;
 }
 export const MAX_BROWSER_RECOGNITIONS = 2;
 

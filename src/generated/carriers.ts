@@ -2572,6 +2572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "mayi-yinfu-sendungsverfolgung",
+      "title": "Mayi Yinfu Sendungsverfolgung: MY-Nummern, Flüge und DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-sendungsverfolgung",
@@ -3406,6 +3414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "suivi-mayi-yinfu",
+      "title": "Suivi Mayi Yinfu\u00a0: numéros MY, vols et relais DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-suivi-colis",
@@ -4134,6 +4150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou tracking: codice TYZR, stati e consegna in Italia",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "tracciamento-mayi-yinfu",
+      "title": "Tracciamento Mayi Yinfu: codici MY, voli e consegna DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     },
     {
       "id": "jrt",
@@ -4882,6 +4906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "seguimiento-mayi-yinfu",
+      "title": "Seguimiento de Mayi Yinfu: códigos MY, vuelos y DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-seguimiento",
@@ -5586,6 +5618,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou rastreio: número TYZR…YQ, estados e entrega",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "seguimento-mayi-yinfu",
+      "title": "Seguimento Mayi Yinfu: números MY, voos e entrega DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     },
     {
       "id": "jrt",
@@ -6342,6 +6382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou śledzenie przesyłki: numer TYZR, statusy",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "sledzenie-mayi-yinfu",
+      "title": "Śledzenie Mayi Yinfu: numery MY, loty i doręczenie DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     },
     {
       "id": "jrt",

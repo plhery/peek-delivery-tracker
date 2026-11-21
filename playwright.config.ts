@@ -1,4 +1,5 @@
 import { defineConfig } from '@playwright/test';
+import { PEEK_ENV } from './src/test/peekSettings';
 
 const port = process.env.PLAYWRIGHT_PORT ?? '4173';
 const baseURL = `http://127.0.0.1:${port}`;
@@ -49,8 +50,8 @@ export default defineConfig({
       ? 'npm start'
       : `npm run dev -- --hostname 127.0.0.1 --port ${port}`,
     env: {
-      // Peek's own site serves its guides and carriers' pages, which the journeys walk.
-      GUIDE_PAGES: 'on',
+      // The journeys walk Peek's own site: its name, apps, author links, documents, guides and carriers' pages.
+      ...PEEK_ENV,
       HOSTNAME: '127.0.0.1',
       NEXT_PUBLIC_USE_API: 'false',
       PORT: port,

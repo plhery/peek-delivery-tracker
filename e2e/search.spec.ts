@@ -186,7 +186,7 @@ test('each language has an address whose first answer is entirely in that langua
       expect(alternatesOf(html), where).toEqual(everyLanguage(baseURL!, baseURL));
       expect(robotsOf(html), where).toBeNull();
       const description = tag(html, /<meta name="description" content="([^"]*)"/)!;
-      expect(description, where).toMatch(/3.?500/);
+      expect(description, where).toMatch(/4.?500/);
       expect(description, where).not.toContain('Track any package');
       expect(tag(html, /<meta property="og:title" content="([^"]*)"/), where).toBe(titleIn(language));
       expect(tag(html, /<meta property="og:description" content="([^"]*)"/), where).toBe(description);

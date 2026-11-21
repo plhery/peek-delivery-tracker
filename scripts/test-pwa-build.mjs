@@ -5,12 +5,10 @@ import { relative, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const next = resolve(root, '.next');
 const staticDirectory = resolve(next, 'static');
-const [worker, workerSource, pushWorker, manifestText, germanManifestText, privacy, offline, ogImage, staticEntries, serverFiles, buildManifest] = await Promise.all([
+const [worker, workerSource, pushWorker, privacy, offline, ogImage, staticEntries, serverFiles, buildManifest] = await Promise.all([
   readFile(resolve(root, 'public/sw.js'), 'utf8'),
   readFile(resolve(root, 'app/sw.ts'), 'utf8'),
   readFile(resolve(root, 'public/push-sw.js'), 'utf8'),
-  readFile(resolve(next, 'server/app/manifest.webmanifest.body'), 'utf8'),
-  readFile(resolve(next, 'server/app/de/manifest.webmanifest.body'), 'utf8'),
   readFile(resolve(root, 'public/privacy.html'), 'utf8'),
   readFile(resolve(root, 'app/~offline/page.tsx'), 'utf8'),
   readFile(resolve(root, 'public/og.png')),
@@ -37,7 +35,8 @@ const applicationAsset = applicationBundle.asset;
 assert.ok(worker.includes(applicationAsset), 'the service worker must precache the current app bundle');
 assert.match(
   applicationBundle.source,
-  /\.register\(["']\/sw\.js["'],\{[^}]*updateViaCache:["']none["']/,
+  // `/sw.js`, with a query on a site that serves no privacy notice (`LEGAL_PAGES`).
+  /\.register\([^)]*?["']\/sw\.js["'][^)]*?updateViaCache:["']none["']/,
   'the app must register its worker without caching the worker script',
 );
 assert.match(applicationBundle.source, /location\.reload/, 'an activated upgrade must reload the open app');
@@ -90,25 +89,7 @@ assert.equal(ogImage.subarray(1, 4).toString('ascii'), 'PNG', 'the social card m
 assert.ok(ogImage.readUInt32BE(16) >= 1_200, 'the social card must be wide enough for link previews');
 assert.ok(ogImage.readUInt32BE(20) >= 630, 'the social card must be tall enough for link previews');
 
-const manifest = JSON.parse(manifestText);
-assert.equal(manifest.name, 'Peek — Universal Parcel Tracker');
-assert.equal(manifest.short_name, 'Peek');
-assert.equal(manifest.start_url, '/');
-assert.equal(manifest.scope, '/');
-assert.equal(manifest.display, 'standalone');
-assert.equal(manifest.id, '/');
-assert.equal(manifest.description, 'Private parcel tracking, with notifications and history synced across your devices.');
-assert.deepEqual(manifest.share_target, {
-  action: '/share-target',
-  method: 'POST',
-  enctype: 'multipart/form-data',
-  params: { title: 'title', text: 'text', url: 'url' },
-});
-const germanManifest = JSON.parse(germanManifestText);
-assert.equal(germanManifest.lang, 'de', 'each language must have its own manifest');
-assert.notEqual(germanManifest.description, manifest.description, 'a language’s manifest must describe Peek in that language');
-assert.deepEqual({ ...germanManifest, name: manifest.name, description: manifest.description, lang: manifest.lang }, manifest,
-  'installed from a page in any language, Peek must be the same app');
+// The manifests name the site, a setting the server reads at each request: src/server/webAppManifest.test.ts checks them.
 assert.match(privacy, /Download my data/, 'the public build must include the privacy notice');
 assert.match(privacy, /Peek/, 'the privacy notice must use the public product name');
 assert.doesNotMatch(privacy, /Delivery Tracker/, 'the old product name must not remain public');

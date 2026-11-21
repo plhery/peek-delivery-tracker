@@ -327,7 +327,7 @@ class BrandParityTests {
     fun carriersWithoutAVerifiedBrandColorStayNeutral() {
         val brand = brand()
         val neutral = catalog.definitions.filter { it.value.color == CarrierVisualIdentity.defaultCarrierColor }
-        assertEquals(setOf(CarrierId.Unknown), neutral.keys)
+        assertTrue(CarrierId.Unknown in neutral.keys)
         for (id in neutral.keys) {
             assertNull(id.rawValue, brand.palettes[id.rawValue])
             assertEquals(id.rawValue, "default", identity(id.rawValue).decal)

@@ -800,12 +800,15 @@ final class DeviceParcels {
         }
         entries[index].checkedAt = now()
         entries[index].postcodeGiven = dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil
-        // A copy no longer updated of the same parcel or number gives way, and leaves its name to a parcel without one.
+        // A copy no longer updated of the same parcel or number gives way, and so does the same parcel followed here
+        // through another link; either leaves its name to a parcel without one.
         let superseded = entries.filter { Self.supersedes(parcel, $0, number: number) }
         entries.removeAll { Self.supersedes(parcel, $0, number: number) }
-        _ = removeTwin(of: parcel.id, besides: entry.linkID, client)
+        let twin = removeTwin(of: parcel.id, besides: entry.linkID, client)
         guard let changed = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { throw DeliveryAPIError.parcelMissing }
-        if entries[changed].label.isEmpty, let name = superseded.lazy.compactMap(\.label.nonEmpty).first { entries[changed].label = name }
+        if entries[changed].label.isEmpty, let name = (superseded + (twin.map { [$0] } ?? [])).lazy.compactMap(\.label.nonEmpty).first {
+            entries[changed].label = name
+        }
         save()
         if let dpdPostcode { postcodes.remember(dpdPostcode, for: carrier, country: dpdPostcodeCountry) }
         return Self.shown(entries[changed])

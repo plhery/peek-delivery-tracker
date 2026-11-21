@@ -265,6 +265,35 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd"])
     }
 
+    /// The link can move onto a parcel followed here already, through someone else's link that hides the number: one
+    /// parcel stays followed once, under the link of this iPhone's own, and the other link's notifications go off.
+    func testAMovedLinkOntoAParcelFollowedHereThroughAnotherLinkLeavesOneEntry() async throws {
+        let previousID = UUID(), friendsID = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        var friends = DeviceParcel(linkID: "33333333333A", label: "Lamp", archivedAt: nil,
+                                   parcel: Parcel(shared: package(friendsID, number: "", carrier: .dpd)), checkedAt: Date())
+        friends.viewer = true
+        friends.alertToken = "token1"
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(previousID)), checkedAt: Date()),
+            friends,
+        ]
+        let calls = Calls()
+        let moved = package(friendsID, carrier: .dpd)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }), storage: storage)
+
+        let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: nil)
+
+        XCTAssertEqual(parcel.id, friendsID)
+        XCTAssertEqual(parcel.label, "Lamp")
+        XCTAssertEqual(device.list().map(\.id), [friendsID])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222A"])
+        XCTAssertEqual(storage.keys, ["22222222222A": key])
+        for _ in 0..<200 where calls.all.count < 2 { await Task.yield() }
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd", "unalert 33333333333A token1"])
+    }
+
     func testANewPostcodeForTheSameCarrierMovesTheLinkToTheParcelWithIt() async throws {
         let (defaults, suite) = defaults()
         defer { defaults.removePersistentDomain(forName: suite) }

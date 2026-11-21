@@ -65822,6 +65822,37 @@
       "detectionRules": [],
       "trackingSearchUrl": "https://www.daytonaexpress.com.br/rastreamento",
       "helpUrl": "https://www.daytonaexpress.com.br/fale-conosco"
+    },
+    "dragonfly-nl": {
+      "displayName": "Dragonfly Netherlands",
+      "aliases": [
+        "Dragonfly (NL)",
+        "Dragonfly Shipping Netherlands"
+      ],
+      "countries": [
+        "NL"
+      ],
+      "color": "#13a58f",
+      "selectable": true,
+      "timezone": "Europe/Amsterdam",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "dragonfly-nl"
+      },
+      "trackingUrlTemplate": "https://dragonflyshipping.nl/en/track-your-package/?tracking-id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "dragonflyshipping.nl"
+          ],
+          "params": [
+            "tracking-id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://dragonflyshipping.nl/en/track-your-package/",
+      "helpUrl": "https://dragonflyshipping.nl/en/support/"
     }
   },
   "servers": [
@@ -71601,7 +71632,8 @@
           "airasia-cargo",
           "cargolux",
           "copa-airlines-cargo",
-          "daytona-express"
+          "daytona-express",
+          "dragonfly-nl"
         ]
       },
       "Stage": {

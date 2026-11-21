@@ -49,6 +49,8 @@ export default defineConfig({
       ? 'npm start'
       : `npm run dev -- --hostname 127.0.0.1 --port ${port}`,
     env: {
+      // Peek's own site serves its guides and carriers' pages, which the journeys walk.
+      GUIDE_PAGES: 'on',
       HOSTNAME: '127.0.0.1',
       NEXT_PUBLIC_USE_API: 'false',
       PORT: port,

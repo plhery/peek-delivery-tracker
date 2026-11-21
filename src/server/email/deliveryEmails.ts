@@ -134,7 +134,7 @@ export class DeliveryEmailService {
       // The page its "turn it off" link opens speaks the email's language.
       const links = unsubscribeUrls(this.settings.origin, claim.userId, locale);
       const content = await deliveryEmailContent({
-        parcel: withEventPlaces(parcel) as unknown as ApiPackageRow,
+        parcel: withEventPlaces(parcel, { peekAi: false }) as unknown as ApiPackageRow,
         locale,
         stage: claim.stage,
         timezone: claim.timezone,

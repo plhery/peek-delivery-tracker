@@ -97,7 +97,7 @@ export async function withSharedPassports(service: SupabaseServiceClient, viewer
   const allowed = owners.size ? await service.passportSharers([...owners.keys()], viewer) : owners;
   const passports = new Map<string, ApiFriendStats>();
   const passport = (owner: string) => {
-    if (!passports.has(owner)) passports.set(owner, sharedPassport((parcels.get(owner) ?? []).map((row) => toParcel(withEventPlaces(row) as unknown as ApiPackageRow))));
+    if (!passports.has(owner)) passports.set(owner, sharedPassport((parcels.get(owner) ?? []).map((row) => toParcel(withEventPlaces(row, { peekAi: false }) as unknown as ApiPackageRow))));
     return passports.get(owner)!;
   };
   const restamp = ({ sharesStats, ...card }: StoredFriendCard): ApiFriendCard => {

@@ -814,7 +814,8 @@ and nothing typed is sent.
   against a window of days it gives, it says nothing. The model and its tables are trained in
   private on production data and kept in `peek_ai_models`, which only the service role reads;
   the server loads the newest at start and every hour, and with none loaded says nothing. A
-  wrapped gift's link shows none, and an assistant's `list_parcels` and `get_parcel` give it
+  wrapped gift's link shows none, nor do emails, friends' passports or a link's preview, which
+  leave it out (`withEventPlaces(row, { peekAi: false })`), and an assistant's `list_parcels` and `get_parcel` give it
   as `peekAi` unless the account switched it off. Cards show one line under the carrier's
   date or in its place (beside the status on Next up), guests' lists too, and the parcel's
   page a short card that opens what Peek AI expects, why and how sure. Each estimate ends at

@@ -142,8 +142,8 @@ describe('telling an account that its parcel was delivered', () => {
       deliveredTime: 'timed',
       now,
     });
-    // The parcel as its owner's app gets it: the stored row, with every scan placed.
-    expect(places.withEventPlaces).toHaveBeenCalledExactlyOnceWith(parcel(claim(1).packageId));
+    // The parcel as its owner's app gets it: the stored row, with every scan placed, and no estimate the email never shows.
+    expect(places.withEventPlaces).toHaveBeenCalledExactlyOnceWith(parcel(claim(1).packageId), { peekAi: false });
     expect(input.parcel).toEqual({ ...parcel(claim(1).packageId), placed: true });
 
     expect(open).toHaveBeenCalledExactlyOnceWith(settings);

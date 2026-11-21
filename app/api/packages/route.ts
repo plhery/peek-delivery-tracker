@@ -40,7 +40,7 @@ export const GET = apiRoute(async (context) => {
       captureOperationalError(error, { component: 'packages', operation: 'record_account_opened' });
     }),
   ]);
-  return json({ packages: packages.map(withEventPlaces) });
+  return json({ packages: packages.map((row) => withEventPlaces(row)) });
 }, { serviceRequired: true });
 
 export const POST = apiRoute(async (context) => {

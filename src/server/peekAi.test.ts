@@ -224,6 +224,8 @@ describe('served', () => {
     setPeekAiBlob(blob());
     const served = withEventPlaces(row({}, [ACCEPTED, scan('in_transit', '2026-11-19T18:00:00Z', { provider_code: '13', written_at: null })]));
     expect(served.peek_ai).toMatchObject({ says: 'today_or_tomorrow', why: 'no_date' });
+    // Emails, friends' passports and a link's preview show no estimate, so none is worked out for them.
+    expect(withEventPlaces(row({}, [ACCEPTED, scan('in_transit', '2026-11-19T18:00:00Z')]), { peekAi: false })).not.toHaveProperty('peek_ai');
     for (const event of served.tracking_events as JsonObject[]) {
       expect(event).not.toHaveProperty('provider_code');
       expect(event).not.toHaveProperty('written_at');

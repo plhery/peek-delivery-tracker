@@ -538,12 +538,14 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * the recipient, a code that collects the parcel or the number of its door is
  * left out (`viewerScan`).
  */
-export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelAlerts): ApiPublicParcelResponse {
+export function publicParcelResponse(
+  found: StoredParcelLink, alerts: ApiParcelAlerts, { peekAi = true }: { peekAi?: boolean } = {},
+): ApiPublicParcelResponse {
   const { link } = found;
-  // As every client is served it: a placeholder number's parcel without what was stored from it, for one.
-  const row = withEventPlaces(found.package);
   const owner = link.owner === true;
   const wrapped = isWrappedGift(found);
+  // As every client is served it: a placeholder number's parcel without what was stored from it, for one.
+  const row = withEventPlaces(found.package, { peekAi: peekAi && !wrapped });
   const numberShown = owner || (link.show_number === true && !wrapped);
   const trackingNumber = String(row.tracking_number ?? '');
   const storedEvents = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
@@ -662,5 +664,7 @@ export async function viewerParcel(service: SupabaseServiceClient, linkId: strin
   const [found] = await Promise.all([isParcelLinkId(linkId) ? service.publicParcel(linkId, null, false) : null, loadCarrierOutages(service)]);
   if (found === null) return { status: 'unavailable' };
   if (found === 'stopped') return { status: 'stopped' };
-  return { status: 'shown', parcel: publicParcelResponse(found, parcelAlerts(service)), wrappedGift: isWrappedGift(found) };
+  // The page's metadata and preview image say nothing of Peek AI.
+  const parcel = publicParcelResponse(found, parcelAlerts(service), { peekAi: false });
+  return { status: 'shown', parcel, wrappedGift: isWrappedGift(found) };
 }

@@ -2340,6 +2340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Delivengo Sendungsverfolgung: Paket von La Poste verfolgen",
+      "name": "Delivengo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-sendungsverfolgung",
@@ -4128,6 +4136,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Tracking Delivengo: segui un pacco La Poste dalla Francia",
+      "name": "Delivengo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-tracking",
@@ -4952,6 +4968,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GEODIS: número 1G, estados y contacto",
       "name": "GEODIS",
       "color": "#3100e6"
+    },
+    {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Seguimiento Delivengo: paquete de La Poste desde Francia",
+      "name": "Delivengo",
+      "color": "#ffcf00"
     },
     {
       "id": "ecoscooting",
@@ -5788,6 +5812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Seguimento Delivengo: encomenda La Poste vinda de França",
+      "name": "Delivengo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-rastreio",
@@ -6622,6 +6654,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek GEODIS: numer 1G, statusy i kontakt",
       "name": "GEODIS",
       "color": "#3100e6"
+    },
+    {
+      "id": "delivengo",
+      "catalog": "delivengo",
+      "slug": "delivengo-tracking",
+      "title": "Śledzenie Delivengo: paczka La Poste wysłana z Francji",
+      "name": "Delivengo",
+      "color": "#ffcf00"
     },
     {
       "id": "ecoscooting",

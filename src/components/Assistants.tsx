@@ -65,7 +65,7 @@ export function useAssistants(apiAuth: ApiAuth | undefined, open: boolean) {
   return [value, update] as const;
 }
 
-/** What a connection may do, by whether it sees, adds and archives, and edits parcels. */
+/** What a connection may do, by whether it sees, adds, and edits and archives parcels. */
 const SCOPE_TEXT: Record<string, MessageKey> = {
   read: 'assistants.scope.read',
   write: 'assistants.scope.write',

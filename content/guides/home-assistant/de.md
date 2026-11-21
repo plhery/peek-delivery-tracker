@@ -4,7 +4,7 @@ description: Peeks Integration bringt deine Pakete als Sensoren, Lieferkalender 
 slug: pakete-verfolgen-home-assistant
 picture: Ein Tablet an einer Küchenwand zeigt ein Dashboard fürs Zuhause, mit einer Paketliste, einem kleinen Lieferkalender und Pip, dem Paket mit Gesicht, das aus einer der Karten lächelt.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Um deine Pakete in Home Assistant zu verfolgen, installiere Peek für Home Assistant: Die Integration holt deine Paketliste aus [Peek](/) in Home Assistant, in Form von Sensoren, einem Lieferkalender, einer Dashboard-Karte und einem Werkzeug für Assist. Du brauchst ein kostenloses Peek-Konto und Home Assistant 2026.11 oder neuer, wo du im Marketplace nach Peek suchst; unter 2026.10 suchst du in HACS danach.
@@ -41,7 +41,7 @@ Suche im Marketplace von Home Assistant nach Peek. Unter 2026.10 suche in HACS d
 :::steps
 - Öffne „Settings › Marketplace“ | Suche nach „Peek“ und öffne den Eintrag.
 - Installiere Peek | Wähle „Install“, dann „Set up“.
-- Melde dich bei Peek an | Dein Browser öffnet Peek. Prüfe, worum Home Assistant bittet (deine Pakete sehen, sie hinzufügen und archivieren, sie ändern und wiederherstellen), und wähle dann „Erlauben“.
+- Melde dich bei Peek an | Dein Browser öffnet Peek. Prüfe, worum Home Assistant bittet (deine Pakete sehen, sie hinzufügen, sie ändern, archivieren und wiederherstellen), und wähle dann „Erlauben“.
 - Geh zurück zu Home Assistant | Peek schickt dich über My Home Assistant (my.home-assistant.io) zurück. Beim ersten Mal fragt es nach der Adresse deines Home Assistant.
 :::
 

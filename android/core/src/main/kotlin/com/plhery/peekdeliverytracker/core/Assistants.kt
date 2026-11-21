@@ -61,7 +61,7 @@ object AssistantsResponseReader : JsonTransformingSerializer<AssistantsResponse>
 val AssistantsResponse.assistants: List<AssistantConnection>
     get() = connections.filter { it.kind == AssistantConnectionKind.Oauth }
 
-/** What the connection may do, as Settings words it: whether it sees, adds and archives, and edits parcels. */
+/** What the connection may do, as Settings words it: whether it sees, adds, and edits and archives parcels. */
 val AssistantConnection.scopeKey: String
     get() {
         val kinds = listOf(AssistantScope.ParcelsRead to "read", AssistantScope.ParcelsWrite to "write", AssistantScope.ParcelsEdit to "edit")

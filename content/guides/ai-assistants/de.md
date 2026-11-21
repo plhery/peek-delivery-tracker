@@ -99,8 +99,8 @@ Löschen kann er nie ein Paket: Das machst du in Peek. Den Rest bestimmst du: We
 | Berechtigung auf Peeks Bildschirm | Was der Assistent dann tun kann |
 | --- | --- |
 | „Deine Pakete sehen: wo jedes gerade ist, wann es erwartet wird und seinen Verlauf“ | Deine Pakete auflisten und eines mit seinen Scans öffnen |
-| „Pakete aus den Sendungsnummern hinzufügen, die du ihm gibst, und sie archivieren“ | Pakete hinzufügen und eines archivieren |
-| „Name, Paketdienst oder Mitteilungen deiner Pakete ändern und archivierte wiederherstellen“ | Ein Paket umbenennen, seinen Paketdienst ändern, seine Mitteilungen oder Peeks E-Mails aus- oder einschalten und ein archiviertes wiederherstellen |
+| „Pakete aus den Sendungsnummern hinzufügen, die du ihm gibst“ | Pakete hinzufügen |
+| „Name, Paketdienst oder Mitteilungen deiner Pakete ändern und sie archivieren oder wiederherstellen“ | Ein Paket umbenennen, seinen Paketdienst ändern, seine Mitteilungen oder Peeks E-Mails aus- oder einschalten und es archivieren oder wiederherstellen |
 
 Nimm den Haken bei allem heraus, was du nicht willst; „Erlauben“ bleibt ausgegraut, bis mindestens ein Kästchen angehakt ist. Bittest du später um etwas, das du nicht erlaubt hast, wird der Assistent angewiesen, Peek mit dieser Berechtigung neu zu verbinden.
 

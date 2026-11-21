@@ -283,15 +283,15 @@ function refusal(text: string) {
 
 /**
  * The scope each tool needs. Every grant sees every tool; a call outside the grant's scopes asks for a new sign-in.
- * Adding and archiving are what `parcels:write` was allowed for; editing came later, under its own scope.
+ * `parcels:write` only adds parcels; archiving goes with the other changes to a parcel, under `parcels:edit`.
  */
 export const TOOL_SCOPES = {
   add_parcels: 'parcels:write',
   amazon_import_steps: 'parcels:write',
-  archive_parcel: 'parcels:write',
   rename_parcel: 'parcels:edit',
   change_carrier: 'parcels:edit',
   set_parcel_notifications: 'parcels:edit',
+  archive_parcel: 'parcels:edit',
   restore_parcel: 'parcels:edit',
   list_parcels: 'parcels:read',
   get_parcel: 'parcels:read',
@@ -310,13 +310,13 @@ const MISSING_SCOPE: Record<Scope, { text: string; description: string }> = {
     description: 'This connection may not see parcels',
   },
   'parcels:write': {
-    text: 'This connection to Peek may not add or archive parcels. Connect Peek again and allow it to add and archive parcels.',
-    description: 'This connection may not add or archive parcels',
+    text: 'This connection to Peek may not add parcels. Connect Peek again and allow it to add parcels.',
+    description: 'This connection may not add parcels',
   },
   'parcels:edit': {
-    text: 'This connection to Peek may not edit parcels. Connect Peek again and allow it to change their name, carrier or '
-      + 'notifications and restore archived ones.',
-    description: 'This connection may not edit parcels',
+    text: 'This connection to Peek may not edit or archive parcels. Connect Peek again and allow it to change their name, '
+      + 'carrier or notifications, and archive or restore them.',
+    description: 'This connection may not edit or archive parcels',
   },
 };
 

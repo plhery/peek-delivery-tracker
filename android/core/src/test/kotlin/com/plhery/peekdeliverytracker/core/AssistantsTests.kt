@@ -242,7 +242,7 @@ class AssistantsTests {
         val localizer = Localizer(AppLanguage.En)
         val now = Instant.parse("2026-11-18T10:00:00Z")
         val used = assistant(listOf(AssistantScope.ParcelsRead, AssistantScope.ParcelsWrite), lastUsedAt = "2026-11-18T09:00:00Z")
-        assertEquals("claude.ai · Sees, adds and archives parcels · used 1 h ago", used.detail(localizer, now))
+        assertEquals("claude.ai · Sees and adds parcels · used 1 h ago", used.detail(localizer, now))
         assertEquals("claude.ai · Sees your parcels · not used yet", assistant().detail(localizer, now))
         assertEquals("Sees your parcels · not used yet", assistant(redirectHost = null).detail(localizer, now))
         // Only the assistants connected with OAuth show: a personal token has no screen.

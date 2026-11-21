@@ -498,10 +498,10 @@ Key server modules:
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`,
-    `find_carriers`), `parcels:write` (`add_parcels`, `amazon_import_steps`, `archive_parcel`) and `parcels:edit`
-    (`rename_parcel`, `change_carrier`, `set_parcel_notifications`, `restore_parcel`). Editing
-    has its own scope because it came after grants had allowed writing: those keep adding and
-    archiving, and a call to edit asks the owner for a new consent. It sends the browser nowhere before
+    `find_carriers`), `parcels:write` (`add_parcels`, `amazon_import_steps`) and `parcels:edit`
+    (`rename_parcel`, `change_carrier`, `set_parcel_notifications`, `archive_parcel`,
+    `restore_parcel`). A grant without `parcels:edit` keeps adding, and a call to edit or
+    archive asks the owner for a new consent. It sends the browser nowhere before
     the owner answers: a request it can't take is shown as one. A request without `scope`
     asks for every scope; one whose `scope` names none of them gets `invalid_scope`. The
     answer is a code valid once for ten minutes; one used twice ends its grant. An exchange

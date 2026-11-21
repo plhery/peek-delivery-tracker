@@ -99,8 +99,8 @@ Non può mai eliminare un pacco: quello lo fai tu in Peek. Il resto lo decidi tu
 | Permesso sulla schermata di Peek | Cosa può fare poi l'assistente |
 | --- | --- |
 | «Vedere i tuoi pacchi: dove si trova ciascuno, quando è previsto e la sua cronologia» | Elencare i tuoi pacchi, e aprirne uno con le sue scansioni |
-| «Aggiungere pacchi dai numeri di tracciamento che gli dai e archiviarli» | Aggiungere pacchi, e archiviarne uno |
-| «Cambiare il nome, il corriere o le notifiche dei tuoi pacchi e ripristinare quelli archiviati» | Rinominare un pacco, cambiarne il corriere, disattivare o riattivare le sue notifiche o le e-mail di Peek, e ripristinare un pacco archiviato |
+| «Aggiungere pacchi dai numeri di tracciamento che gli dai» | Aggiungere pacchi |
+| «Cambiare il nome, il corriere o le notifiche dei tuoi pacchi, e archiviarli o ripristinarli» | Rinominare un pacco, cambiarne il corriere, disattivare o riattivare le sue notifiche o le e-mail di Peek, e archiviarlo o ripristinarlo |
 
 Togli la spunta a ciò che non vuoi; «Consenti» resta grigio finché non è spuntata almeno una casella. Se più tardi chiedi qualcosa che non hai permesso, all'assistente viene detto di collegare di nuovo Peek con quel permesso.
 

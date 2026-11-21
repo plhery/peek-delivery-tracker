@@ -18,7 +18,7 @@ export interface AssistantSettings {
 }
 
 /**
- * What a grant may do: see parcels, add and archive them, or edit them (rename, change the carrier, mute, restore).
+ * What a grant may do: see parcels, add them, or edit them (rename, change the carrier, mute, archive, restore).
  * Editing came after the first two, so a grant made before it never holds it: the owner allows it in a new consent.
  */
 export const SCOPES = ['parcels:read', 'parcels:write', 'parcels:edit'] as const;

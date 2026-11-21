@@ -28,7 +28,7 @@ struct AssistantsOffer: Decodable {
 }
 
 extension AssistantConnection {
-    /// What the connection may do, as Settings words it: whether it sees, adds and archives, and edits parcels.
+    /// What the connection may do, as Settings words it: whether it sees, adds, and edits and archives parcels.
     var scopeKey: String {
         let kinds = [(AssistantScope.parcelsRead, "read"), (.parcelsWrite, "write"), (.parcelsEdit, "edit")]
             .filter { scopes.contains($0.0) }.map(\.1).joined(separator: " ")

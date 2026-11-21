@@ -4,7 +4,7 @@ description: L'integrazione Peek porta i pacchi in Home Assistant come sensori, 
 slug: tracciare-pacchi-home-assistant
 picture: Un tablet su una parete della cucina mostra una dashboard di casa, con un elenco di pacchi, un piccolo calendario delle consegne e Pip, il pacco con la faccia, che sorride da una delle schede.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Per tracciare i tuoi pacchi in Home Assistant, installa Peek per Home Assistant: l'integrazione porta il tuo elenco di pacchi di [Peek](/) in Home Assistant sotto forma di sensori, di un calendario delle consegne, di una scheda per la dashboard e di uno strumento per Assist. Ti servono un account Peek gratuito e Home Assistant 2026.11 o successivo, dove cerchi Peek nel Marketplace; con la versione 2026.10, lo cerchi in HACS.
@@ -41,7 +41,7 @@ Cerca Peek nel Marketplace di Home Assistant. Con la versione 2026.10, cercalo i
 :::steps
 - Apri «Settings › Marketplace» | Cerca «Peek» e aprilo.
 - Installa Peek | Seleziona «Install», poi «Set up».
-- Accedi a Peek | Il browser apre Peek. Controlla cosa chiede Home Assistant (vedere i tuoi pacchi, aggiungerli e archiviarli, modificarli e ripristinarli), poi seleziona «Consenti».
+- Accedi a Peek | Il browser apre Peek. Controlla cosa chiede Home Assistant (vedere i tuoi pacchi, aggiungerli, modificarli, archiviarli e ripristinarli), poi seleziona «Consenti».
 - Torna a Home Assistant | Peek ti riporta indietro tramite My Home Assistant (my.home-assistant.io). La prima volta, ti chiede l'indirizzo del tuo Home Assistant.
 :::
 

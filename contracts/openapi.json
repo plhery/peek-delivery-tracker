@@ -75107,7 +75107,7 @@
           "parcels:write",
           "parcels:edit"
         ],
-        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds and archives parcels; parcels:edit renames them, changes their carrier or notifications and restores archived ones."
+        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds parcels; parcels:edit renames them, changes their carrier or notifications, and archives or restores them."
       },
       "AssistantConnection": {
         "type": "object",

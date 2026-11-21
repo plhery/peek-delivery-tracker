@@ -99,8 +99,8 @@ Nunca puede borrar un paquete: eso lo haces tú en Peek. Lo demás lo decides t�
 | Permiso en la pantalla de Peek | Lo que el asistente puede hacer entonces |
 | --- | --- |
 | «Ver tus paquetes: dónde está cada uno, cuándo está previsto y su historial» | Ver la lista de tus paquetes y abrir uno con sus escaneos |
-| «Añadir paquetes a partir de los números de seguimiento que le des, y archivarlos» | Añadir paquetes y archivar uno |
-| «Cambiar el nombre, el transportista o las notificaciones de tus paquetes, y restaurar los archivados» | Cambiar el nombre de un paquete o su transportista, desactivar o activar sus notificaciones o los correos de Peek, y restaurar uno archivado |
+| «Añadir paquetes a partir de los números de seguimiento que le des» | Añadir paquetes |
+| «Cambiar el nombre, el transportista o las notificaciones de tus paquetes, y archivarlos o restaurarlos» | Cambiar el nombre de un paquete o su transportista, desactivar o activar sus notificaciones o los correos de Peek, y archivarlo o restaurarlo |
 
 Desmarca lo que no quieras; «Permitir» sigue en gris hasta que marques al menos una casilla. Si más adelante pides algo que no permitiste, al asistente se le indica que vuelva a conectar Peek con ese permiso.
 

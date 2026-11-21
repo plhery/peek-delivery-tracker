@@ -99,8 +99,8 @@ Nunca pode apagar uma encomenda: isso fazes tu no Peek. O resto depende de ti: q
 | Permissão no ecrã do Peek | O que o assistente pode então fazer |
 | --- | --- |
 | «Ver as tuas encomendas: onde está cada uma, quando está prevista e o seu histórico» | Listar as tuas encomendas e abrir uma com as suas leituras |
-| «Adicionar encomendas a partir dos números de seguimento que lhe deres e arquivá-las» | Adicionar encomendas e arquivar uma |
-| «Alterar o nome, a transportadora ou as notificações das tuas encomendas e restaurar as arquivadas» | Mudar o nome de uma encomenda ou a sua transportadora, desligar ou ligar as notificações dela ou os e-mails do Peek, e restaurar uma arquivada |
+| «Adicionar encomendas a partir dos números de seguimento que lhe deres» | Adicionar encomendas |
+| «Alterar o nome, a transportadora ou as notificações das tuas encomendas, e arquivá-las ou restaurá-las» | Mudar o nome de uma encomenda ou a sua transportadora, desligar ou ligar as notificações dela ou os e-mails do Peek, e arquivá-la ou restaurá-la |
 
 Desmarca o que não quiseres; «Permitir» fica a cinzento até haver pelo menos uma caixa marcada. Se mais tarde pedires algo que não permitiste, o assistente recebe a indicação de ligar o Peek outra vez com essa permissão.
 

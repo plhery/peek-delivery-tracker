@@ -4,7 +4,7 @@ description: Peek's Home Assistant integration brings your parcels in as sensors
 slug: track-parcels-home-assistant
 picture: A tablet on a kitchen wall showing a home dashboard, with a list of parcels, a small delivery calendar, and Pip, the parcel with a face, smiling from one of the cards.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 To track your parcels in Home Assistant, install Peek for Home Assistant: it brings your [Peek](/) parcel list in as sensors, a deliveries calendar, a dashboard card and a tool for Assist. You need a free Peek account and Home Assistant 2026.11 or later, where you search for Peek in the Marketplace; on 2026.10, you search for it in HACS.
@@ -41,7 +41,7 @@ Search for Peek in Home Assistant's Marketplace. On 2026.10, search for it in HA
 :::steps
 - Open "Settings › Marketplace" | Search for "Peek" and open it.
 - Install Peek | Select "Install", then "Set up".
-- Sign in to Peek | Your browser opens Peek. Check what Home Assistant asks for (to see your parcels, to add and archive them, and to change and restore them), then select "Allow".
+- Sign in to Peek | Your browser opens Peek. Check what Home Assistant asks for (to see your parcels, to add them, and to change, archive and restore them), then select "Allow".
 - Go back to Home Assistant | Peek sends you back through My Home Assistant (my.home-assistant.io). The first time, it asks for your Home Assistant's address.
 :::
 

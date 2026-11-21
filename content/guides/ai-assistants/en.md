@@ -99,8 +99,8 @@ It can never delete a parcel: you do that in Peek. The rest is up to you: when y
 | Permission on Peek's screen | What the assistant can then do |
 | --- | --- |
 | "See your parcels: where each one is, when it’s expected and its history" | List your parcels, and open one with its scans |
-| "Add parcels from the tracking numbers you give it, and archive them" | Add parcels, and archive one |
-| "Change your parcels’ name, carrier or notifications, and restore archived ones" | Rename a parcel, change its carrier, turn its notifications or Peek's emails off or on, and restore an archived one |
+| "Add parcels from the tracking numbers you give it" | Add parcels |
+| "Change your parcels’ name, carrier or notifications, and archive or restore them" | Rename a parcel, change its carrier, turn its notifications or Peek's emails off or on, and archive or restore it |
 
 Untick what you don't want; "Allow" stays greyed out until one box is ticked. If you later ask for something you didn't allow, the assistant is told to connect Peek again with that permission.
 

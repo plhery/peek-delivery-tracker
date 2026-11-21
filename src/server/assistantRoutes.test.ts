@@ -309,7 +309,7 @@ describe('the MCP endpoint', () => {
       rename_parcel: edit,
       change_carrier: edit,
       set_parcel_notifications: edit,
-      archive_parcel: write,
+      archive_parcel: edit,
       restore_parcel: edit,
       get_parcel: read,
       list_parcels: read,
@@ -718,32 +718,32 @@ describe('the MCP endpoint', () => {
     const challenge = (description: string) => 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", '
       + `scope="parcels:read parcels:write parcels:edit", error="insufficient_scope", error_description="${description}"`;
     const reader = connect(['parcels:read']);
-    const writes = [['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }]] as const;
+    const writes = [['add_parcels', { text: UPS }]] as const;
     const edits = [
-      ['restore_parcel', { parcel: UPS }], ['rename_parcel', { parcel: UPS, name: 'Sofa' }], ['change_carrier', { parcel: UPS, carrier: 'dhl' }],
-      ['set_parcel_notifications', { parcel: UPS, notifications: false }],
+      ['archive_parcel', { parcel: UPS }], ['restore_parcel', { parcel: UPS }], ['rename_parcel', { parcel: UPS, name: 'Sofa' }],
+      ['change_carrier', { parcel: UPS, carrier: 'dhl' }], ['set_parcel_notifications', { parcel: UPS, notifications: false }],
     ] as const;
     for (const era of ['legacy', 'modern'] as const) {
       for (const [name, args] of writes) {
         expect((await call(reader, name, args, era)).result).toMatchObject({
           isError: true,
-          content: [{ type: 'text', text: expect.stringContaining('allow it to add and archive parcels') }],
-          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add or archive parcels')] },
+          content: [{ type: 'text', text: expect.stringContaining('allow it to add parcels') }],
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add parcels')] },
         });
       }
       for (const [name, args] of edits) {
         expect((await call(reader, name, args, era)).result).toMatchObject({
           isError: true,
           content: [{ type: 'text', text: expect.stringContaining('allow it to change their name, carrier or notifications') }],
-          _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit parcels')] },
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit or archive parcels')] },
         });
       }
     }
-    // A grant made before editing had a scope of its own keeps what its owner allowed: adding and archiving, not editing.
+    // A grant that may see and add parcels, as those made before editing had a scope of its own, may not edit or archive them.
     const earlier = connect(['parcels:read', 'parcels:write']);
     for (const [name, args] of edits) {
       expect((await call(earlier, name, args)).result).toMatchObject({
-        isError: true, _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit parcels')] },
+        isError: true, _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit or archive parcels')] },
       });
     }
     expect(owned).not.toHaveBeenCalled();
@@ -779,7 +779,7 @@ describe('the MCP endpoint', () => {
     const known = vi.spyOn(service, 'accountTrackingNumbers').mockResolvedValue(new Map([[UPS, parcel.id]]));
     const owned = vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id, owner) => (id === parcel.id && owner === userId ? parcel : null));
     const archive = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
-    const secret = connect(['parcels:read', 'parcels:write']);
+    const secret = connect(['parcels:read', 'parcels:edit']);
 
     const read = await call(secret, 'get_parcel', { parcel: parcel.id.toUpperCase() });
     expect(read.result!.structuredContent).toMatchObject({ id: parcel.id, trackingNumber: UPS, status: 'in_transit' });
@@ -794,7 +794,7 @@ describe('the MCP endpoint', () => {
     const elsewhere = await call(secret, 'get_parcel', { parcel: '7d000000-0000-4000-a000-0000000000ff' });
     expect(elsewhere.result).toMatchObject({ isError: true, content: [{ text: 'No such parcel in this Peek account.' }] });
     vi.stubEnv('ASSISTANT_ACCOUNTS', `${userId},${otherUser}`);
-    const other = await call(connect(['parcels:read', 'parcels:write'], otherUser), 'archive_parcel', { parcel: parcel.id });
+    const other = await call(connect(['parcels:read', 'parcels:edit'], otherUser), 'archive_parcel', { parcel: parcel.id });
     expect(other.result).toMatchObject({ isError: true });
     expect(archive).toHaveBeenCalledTimes(1);
   });

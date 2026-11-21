@@ -99,8 +99,8 @@ Il ne peut jamais supprimer un colis : ça, tu le fais dans Peek. Pour le reste,
 | Autorisation sur l'écran de Peek | Ce que l'assistant peut alors faire |
 | --- | --- |
 | « Voir tes colis : où chacun se trouve, quand il est prévu et son historique » | Lister tes colis, et en ouvrir un avec ses scans |
-| « Ajouter des colis à partir des numéros de suivi que tu lui donnes, et les archiver » | Ajouter des colis, et en archiver un |
-| « Changer le nom, le transporteur ou les notifications de tes colis, et restaurer ceux qui sont archivés » | Renommer un colis, changer son transporteur, couper ou réactiver ses notifications ou les e-mails de Peek, et restaurer un colis archivé |
+| « Ajouter des colis à partir des numéros de suivi que tu lui donnes » | Ajouter des colis |
+| « Changer le nom, le transporteur ou les notifications de tes colis, et les archiver ou les restaurer » | Renommer un colis, changer son transporteur, couper ou réactiver ses notifications ou les e-mails de Peek, et l'archiver ou le restaurer |
 
 Décoche ce que tu ne veux pas ; « Autoriser » reste grisé tant qu'aucune case n'est cochée. Si tu demandes plus tard quelque chose que tu n'as pas autorisé, l'assistant reçoit la consigne de connecter à nouveau Peek avec cette autorisation.
 

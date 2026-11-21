@@ -82,8 +82,8 @@ describe('the page where an assistant asks to connect', () => {
     expect(screen.getByText('Claude asks to use your Peek account, owner@example.test.')).toBeInTheDocument();
     expect(screen.getByText('Its name comes from claude.example.')).toBeInTheDocument();
     expect(screen.getByText('Peek then sends you back to claude.example.')).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: 'Add parcels from the tracking numbers you give it, and archive them' })).toBeChecked();
-    expect(screen.getByRole('checkbox', { name: 'Change your parcels’ name, carrier or notifications, and restore archived ones' })).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Add parcels from the tracking numbers you give it' })).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Change your parcels’ name, carrier or notifications, and archive or restore them' })).toBeChecked();
     await user.click(screen.getByRole('checkbox', { name: /Add parcels/ }));
     await user.click(screen.getByRole('button', { name: 'Allow' }));
     expect(answerAssistantConsent).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-a' }),

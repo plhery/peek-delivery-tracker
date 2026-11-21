@@ -4,7 +4,7 @@ description: Integracja Peek dla Home Assistant pokazuje Twoje przesyłki jako c
 slug: sledzenie-przesylek-home-assistant
 picture: Tablet na ścianie w kuchni z pulpitem domu: lista przesyłek, mały kalendarz dostaw i Pip, paczka z buzią, uśmiechnięty na jednej z kart.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Żeby śledzić przesyłki w Home Assistant, zainstaluj Peek for Home Assistant: integracja przenosi Twoją listę przesyłek z [Peek](/) do Home Assistant jako czujniki, kalendarz dostaw, kartę na pulpit i narzędzie dla Assist. Potrzebujesz darmowego konta Peek i Home Assistant 2026.11 lub nowszego, gdzie wyszukujesz Peek w Marketplace; w wersji 2026.10 wyszukujesz go w HACS.
@@ -41,7 +41,7 @@ Wyszukaj Peek w Marketplace w Home Assistant. W wersji 2026.10 wyszukaj go w HAC
 :::steps
 - Otwórz „Settings › Marketplace” | Wyszukaj „Peek” i otwórz go.
 - Zainstaluj Peek | Wybierz „Install”, a potem „Set up”.
-- Zaloguj się do Peek | Przeglądarka otworzy Peek. Sprawdź, o co prosi Home Assistant (widzieć Twoje przesyłki, dodawać je i archiwizować oraz zmieniać je i przywracać), i wybierz „Zezwól”.
+- Zaloguj się do Peek | Przeglądarka otworzy Peek. Sprawdź, o co prosi Home Assistant (widzieć Twoje przesyłki, dodawać je oraz zmieniać, archiwizować i przywracać), i wybierz „Zezwól”.
 - Wróć do Home Assistant | Peek przekieruje Cię z powrotem przez My Home Assistant (my.home-assistant.io). Za pierwszym razem zapyta o adres Twojego Home Assistant.
 :::
 

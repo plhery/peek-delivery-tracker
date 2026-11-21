@@ -4,7 +4,7 @@ description: Avec l'intégration Peek, Home Assistant affiche tes colis en capte
 slug: suivre-colis-home-assistant
 picture: Une tablette sur un mur de cuisine affiche un tableau de bord de la maison, avec une liste de colis, un petit calendrier des livraisons et Pip, le colis avec un visage, qui sourit depuis l'une des cartes.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Pour suivre tes colis dans Home Assistant, installe Peek pour Home Assistant : l'intégration y apporte ta liste de colis [Peek](/) sous forme de capteurs, d'un calendrier des livraisons, d'une carte de tableau de bord et d'un outil pour Assist. Il te faut un compte Peek gratuit et Home Assistant 2026.11 ou plus récent, où tu cherches Peek dans le Marketplace ; avec la version 2026.10, tu le cherches dans HACS.
@@ -41,7 +41,7 @@ Cherche Peek dans le Marketplace de Home Assistant. Avec la version 2026.10, che
 :::steps
 - Ouvre « Settings › Marketplace » | Cherche « Peek » et ouvre-le.
 - Installe Peek | Sélectionne « Install », puis « Set up ».
-- Connecte-toi à Peek | Ton navigateur ouvre Peek. Vérifie ce que Home Assistant demande (voir tes colis, les ajouter et les archiver, les modifier et les restaurer), puis sélectionne « Autoriser ».
+- Connecte-toi à Peek | Ton navigateur ouvre Peek. Vérifie ce que Home Assistant demande (voir tes colis, les ajouter, les modifier, les archiver et les restaurer), puis sélectionne « Autoriser ».
 - Reviens dans Home Assistant | Peek te renvoie par My Home Assistant (my.home-assistant.io). La première fois, il te demande l'adresse de ton Home Assistant.
 :::
 

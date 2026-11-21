@@ -4,7 +4,7 @@ description: A integração do Peek para o Home Assistant traz as encomendas com
 slug: seguir-encomendas-home-assistant
 picture: Um tablet na parede de uma cozinha com o painel da casa: uma lista de encomendas, um pequeno calendário de entregas e o Pip, a encomenda com cara, a sorrir de um dos cartões.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Para seguires as tuas encomendas no Home Assistant, instala o Peek for Home Assistant: traz a tua lista de encomendas do [Peek](/) como sensores, um calendário de entregas, um cartão para o painel e uma ferramenta para o Assist. Precisas de uma conta Peek gratuita e do Home Assistant 2026.11 ou posterior, onde pesquisas o Peek no Marketplace; na versão 2026.10, pesquisas no HACS.
@@ -41,7 +41,7 @@ Pesquisa o Peek no Marketplace do Home Assistant. Na versão 2026.10, pesquisa-o
 :::steps
 - Abre «Settings › Marketplace» | Pesquisa «Peek» e abre-o.
 - Instala o Peek | Seleciona «Install» e depois «Set up».
-- Inicia sessão no Peek | O teu navegador abre o Peek. Verifica o que o Home Assistant pede (ver as tuas encomendas, adicioná-las e arquivá-las, e alterá-las e restaurá-las) e seleciona «Permitir».
+- Inicia sessão no Peek | O teu navegador abre o Peek. Verifica o que o Home Assistant pede (ver as tuas encomendas, adicioná-las, e alterá-las, arquivá-las e restaurá-las) e seleciona «Permitir».
 - Volta ao Home Assistant | O Peek leva-te de volta através do My Home Assistant (my.home-assistant.io). Da primeira vez, pede o endereço do teu Home Assistant.
 :::
 

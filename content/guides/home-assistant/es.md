@@ -4,7 +4,7 @@ description: La integración de Peek para Home Assistant trae tus paquetes como 
 slug: seguimiento-paquetes-home-assistant
 picture: Una tableta en la pared de una cocina con el panel de la casa: una lista de paquetes, un pequeño calendario de entregas y Pip, el paquete con cara, sonriendo desde una de las tarjetas.
 published: 2026-11-19
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Para seguir tus paquetes en Home Assistant, instala Peek for Home Assistant: trae tu lista de paquetes de [Peek](/) como sensores, un calendario de entregas, una tarjeta para tus paneles y una herramienta para Assist. Necesitas una cuenta gratuita de Peek y Home Assistant 2026.11 o posterior, donde buscas Peek en el Marketplace; en la versión 2026.10, lo buscas en HACS.
@@ -41,7 +41,7 @@ Busca Peek en el Marketplace de Home Assistant. En la versión 2026.10, búscalo
 :::steps
 - Abre «Settings › Marketplace» | Busca «Peek» y ábrelo.
 - Instala Peek | Selecciona «Install» y luego «Set up».
-- Inicia sesión en Peek | Tu navegador abre Peek. Comprueba lo que pide Home Assistant (ver tus paquetes, añadirlos y archivarlos, y cambiarlos y restaurarlos) y selecciona «Permitir».
+- Inicia sesión en Peek | Tu navegador abre Peek. Comprueba lo que pide Home Assistant (ver tus paquetes, añadirlos, y cambiarlos, archivarlos y restaurarlos) y selecciona «Permitir».
 - Vuelve a Home Assistant | Peek te devuelve a través de My Home Assistant (my.home-assistant.io). La primera vez, te pide la dirección de tu Home Assistant.
 :::
 

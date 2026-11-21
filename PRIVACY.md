@@ -50,8 +50,8 @@ using Peek involves.
   learn to read such emails better. An ignored email, one a limit held back
   and Gmail's forwarding confirmation are not kept.
 - When you connect an assistant or make a personal token: its name, the site
-  or app it answers to, what you allowed it (to see your parcels, to add and
-  archive them, to edit them), when you connected it and when it last used Peek, and
+  or app it answers to, what you allowed it (to see your parcels, to add
+  them, to edit or archive them), when you connected it and when it last used Peek, and
   its keys, kept only as fingerprints that cannot be turned back into them. Of
   a text the assistant sends to add parcels, the service keeps only the
   tracking numbers it adds and the name given, never the text itself.

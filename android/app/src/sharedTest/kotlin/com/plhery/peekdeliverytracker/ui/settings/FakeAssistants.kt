@@ -39,7 +39,7 @@ class FakeAssistantsClient : AssistantsClient {
 object AssistantsFixtures {
     const val ADDRESS = "https://example.com/mcp"
 
-    /** Connected with OAuth, used an hour ago: it sees, adds and archives parcels. */
+    /** Connected with OAuth, used an hour ago: it sees and adds parcels. */
     val claude = AssistantConnection(
         id = UUID.fromString("0f6c1d2e-3a4b-4c5d-8e9f-0a1b2c3d4e5f"), kind = AssistantConnectionKind.Oauth, name = "Claude",
         redirectHost = "claude.ai", scopes = listOf(AssistantScope.ParcelsRead, AssistantScope.ParcelsWrite),

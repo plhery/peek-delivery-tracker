@@ -5292,7 +5292,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -5307,7 +5307,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers</loc>
@@ -5322,7 +5322,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers</loc>
@@ -5337,7 +5337,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers</loc>
@@ -5352,7 +5352,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt-br/carriers</loc>
@@ -5382,7 +5382,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-20</lastmod>
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/ru/carriers</loc>
@@ -7943,8 +7943,86 @@
 <url>
 <loc>https://peektracker.com/carriers/dpd-uk-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
 <lastmod>2026-11-20</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/suivi-dpd-uk</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/tracciamento-dpd-uk</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/seguimiento-dpd-uk</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/seguimento-dpd-uk</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/sledzenie-dpd-uk</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dpd-uk-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-dpd-uk" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-uk-tracking" />
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/parcelforce-worldwide-tracking</loc>
@@ -13983,8 +14061,86 @@
 <url>
 <loc>https://peektracker.com/carriers/sxw-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
 <lastmod>2026-11-20</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/suivi-sxw-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/tracciamento-sxw-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/seguimiento-sxw-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/seguimento-sxw-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/sledzenie-sxw-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/sxw-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-sxw-express" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-sxw-express" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-sxw-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sxw-express-tracking" />
+<lastmod>2026-11-21</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/xuchuan-logistics-tracking</loc>

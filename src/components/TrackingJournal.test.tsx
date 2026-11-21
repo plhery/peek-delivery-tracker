@@ -5,47 +5,12 @@ import { hydrateRoot } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { timeZoneName } from '../lib/format';
-import { TrackingJournal, plannedAhead, unconfirmedDelivery } from './TrackingJournal';
-import type { PlannedEvent, TrackingEvent } from '../types';
+import { TrackingJournal, plannedAhead } from './TrackingJournal';
+import type { TrackingEvent } from '../types';
 
 it('keeps a day-only plan until the end of a 25-hour carrier day', () => {
   expect(plannedAhead({ day: '2026-10-25', occurredAt: '2026-10-24T22:00:00Z', expiresAt: '2026-10-25T23:00:00Z' },
     Date.parse('2026-10-25T22:30:00Z'))).toBe(true);
-});
-
-const UNCONFIRMED = 'Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.';
-
-describe('unconfirmedDelivery', () => {
-  const now = Date.parse('2024-09-20T00:00:00Z');
-  const delivered: PlannedEvent = { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' };
-  const departed: PlannedEvent = { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T01:00:00Z' };
-  const added = { stage: 'pending' as const };
-  const label = { stage: 'registered' as const };
-
-  it('names a written delivery whose time has passed while the scans tell nothing past the label, Peek’s own row aside', () => {
-    expect(unconfirmedDelivery([departed, delivered], [], now)).toBe(delivered);
-    expect(unconfirmedDelivery([departed, delivered], [added, label, label], now)).toBe(delivered);
-    // The newest of two written deliveries.
-    const later = { ...delivered, occurredAt: '2024-09-16T07:00:00Z' };
-    expect(unconfirmedDelivery([later, delivered], [label], now)).toBe(later);
-  });
-
-  it('names none once a scan tells more than the label', () => {
-    for (const stage of ['accepted', 'in_transit', 'customs', 'exception'] as const) {
-      expect(unconfirmedDelivery([delivered], [label, { stage }], now)).toBeNull();
-    }
-  });
-
-  it('names none while the delivery’s time is ahead, a day-only one through its day', () => {
-    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-21T07:00:00Z' }], [], now)).toBeNull();
-    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-19T16:00:00Z', day: '2024-09-20' }], [], now)).toBeNull();
-    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-18T16:00:00Z', day: '2024-09-19' }], [], now)).not.toBeNull();
-  });
-
-  it('names none without a written delivery', () => {
-    expect(unconfirmedDelivery([departed], [label], now)).toBeNull();
-    expect(unconfirmedDelivery([], [], now)).toBeNull();
-  });
 });
 
 function event(id: string, occurredAt: string, description: string, location?: string): TrackingEvent {
@@ -75,28 +40,33 @@ describe('TrackingJournal', () => {
     expect(screen.getByText('08:42')).toHaveAttribute('dateTime', '2024-09-09T08:42:00');
   });
 
-  it('shows the steps the carrier planned apart, greyed and newest first, without counting them as updates', () => {
+  it('folds the steps the carrier planned behind one line that says they’re only predictions, newest first, without counting them', async () => {
     beforeTheJourneys();
     const { container } = render(<TrackingJournal events={[event('picked', '2024-09-07T10:00:00', 'Picked up', 'Shenzhen, China')]} planned={[
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T09:00:00', location: 'Shenzhen, China' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T22:00:00.000Z', day: '2024-09-16' },
     ]} />);
     expect(screen.getByText('1 update')).toBeInTheDocument();
-    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
-    expect(within(planned).getByText('Not confirmed until they happen.')).toBeInTheDocument();
-    expect([...planned.querySelectorAll('li p')].map(line => line.textContent))
-      .toEqual(['Planned, not confirmed: Delivered', 'Planned, not confirmed: Departed the origin facility']);
-    expect([...planned.querySelectorAll('time')].map(time => [time.getAttribute('dateTime'), time.textContent]))
-      .toEqual([['2024-09-16', 'Mon 16 Sep 2024'], ['2024-09-08T09:00:00', 'Sun 8 Sep 2024, 09:00']]);
-    expect(planned.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Shenzhen, China$/u);
-    // The scans keep their own list and day groups.
+    const predicted = container.querySelector<HTMLDetailsElement>('.tracking-journal__predicted')!;
+    expect(predicted).not.toHaveAttribute('open');
+    const line = within(predicted).getByText('Other sites may show more steps, but they’re only predictions.').closest('summary')!;
+    expect(line).toHaveTextContent(/only predictions\. Show themHide them$/);
+    expect([...predicted.querySelectorAll('li p')].map(step => step.textContent)).toEqual(['Delivered', 'Departed the origin facility']);
+    expect([...predicted.querySelectorAll('time')].map(time => [time.getAttribute('dateTime'), time.textContent]))
+      .toEqual([['2024-09-16', 'Predicted for Mon 16 Sep 2024'], ['2024-09-08T09:00:00', 'Predicted for Sun 8 Sep 2024, 09:00']]);
+    expect(predicted.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Shenzhen, China$/u);
+    expect(container.querySelectorAll('.tracking-journal__predicted-mark')).toHaveLength(2);
+    // It opens in place, and sits above the scans, which keep their own list and day groups.
+    vi.useRealTimers();
+    await userEvent.setup().click(line);
+    expect(predicted).toHaveAttribute('open');
     const history = screen.getByRole('list', { name: 'Tracking history' });
+    expect(predicted.compareDocumentPosition(history) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(within(history).getByText('Picked up')).toBeInTheDocument();
     expect(within(history).queryByText(/Departed|Delivered/)).not.toBeInTheDocument();
-    expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(2);
   });
 
-  it('shows a planned step only while its time is ahead, one dated by its day alone through that day', () => {
+  it('keeps a planned step only while its time is ahead, one dated by its day alone through that day', () => {
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date('2024-09-08T10:00:00Z'));
     const picked = [event('picked', '2024-09-07T10:00:00Z', 'Picked up')];
@@ -107,53 +77,47 @@ describe('TrackingJournal', () => {
       { stage: 'delivered' as const, description: 'Delivered', occurredAt: '2024-09-08T15:00:00Z' },
     ];
     const { container, rerender } = render(<TrackingJournal events={picked} planned={plan} />);
-    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
-    expect([...planned.querySelectorAll('li p')].map(line => line.textContent))
-      .toEqual(['Planned, not confirmed: Delivered', 'Planned, not confirmed: Out for delivery']);
+    expect([...container.querySelectorAll('.tracking-journal__predicted li p')].map(line => line.textContent))
+      .toEqual(['Delivered', 'Out for delivery']);
     // Once the carrier's pre-written "Delivered" is due, nothing planned is left to show.
     vi.setSystemTime(new Date('2024-09-08T22:00:00Z'));
     rerender(<TrackingJournal events={picked} planned={plan} />);
-    expect(screen.queryByRole('region', { name: 'Planned by the carrier' })).not.toBeInTheDocument();
-    expect(container.querySelector('.tracking-journal__planned-mark')).toBeNull();
+    expect(container.querySelector('.tracking-journal__predicted')).toBeNull();
+    expect(screen.queryByText(/only predictions/)).not.toBeInTheDocument();
   });
 
-  it('shows the steps a carrier wrote in advance whose time has passed apart, greyed under its name, a delivery among them, without counting them', () => {
+  it('folds the steps a carrier wrote in advance whose time has passed among the predictions, a delivery among them, without counting them', () => {
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date('2024-09-20T00:00:00Z'));
     const { container } = render(<TrackingJournal events={[]} planned={[
       { stage: 'in_transit', description: 'Proof of delivery filed', occurredAt: '2024-09-25T02:00:00Z' },
-    ]} written={{ by: 'GZYL', steps: [
+    ]} written={[
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T01:00:00Z', location: 'Guangzhou, China' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' },
-    ] }} />);
+    ]} writtenAhead />);
     expect(screen.getByText('0 updates')).toBeInTheDocument();
     expect(screen.getByText('No tracking updates yet.')).toBeInTheDocument();
-    const written = screen.getByRole('region', { name: 'Written in advance by GZYL' });
-    expect(written).toHaveClass('tracking-journal__planned--written');
-    expect(within(written).getByText('No scan confirms them.')).toBeInTheDocument();
-    // Under the delivery, with no scan behind it, Peek says nothing confirms it.
-    expect([...written.querySelectorAll('li p')].map(line => line.textContent))
-      .toEqual(['Written in advance, not confirmed: Delivered', UNCONFIRMED, 'Written in advance, not confirmed: Departed the origin facility']);
-    expect(written.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Guangzhou, China$/u);
-    // The steps still ahead come first, under their own heading.
-    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
-    expect([...planned.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Planned, not confirmed: Proof of delivery filed']);
-    expect(planned.compareDocumentPosition(written) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(3);
+    const predicted = container.querySelector('.tracking-journal__predicted')!;
+    // Those still ahead and those gone by are one list, newest first, each with the day it was predicted for.
+    expect([...predicted.querySelectorAll('li p')].map(line => line.textContent))
+      .toEqual(['Proof of delivery filed', 'Delivered', 'Departed the origin facility']);
+    expect([...predicted.querySelectorAll('time')].map(time => time.textContent)).toEqual([
+      expect.stringMatching(/^Predicted for Wed 25 Sep, \d\d:\d\d$/u),
+      expect.stringMatching(/^Predicted for Sun 15 Sep, \d\d:\d\d$/u),
+      expect.stringMatching(/^Predicted for Sun 8 Sep, \d\d:\d\d$/u),
+    ]);
+    expect(predicted.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Guangzhou, China$/u);
+    expect(screen.queryByText(/written in advance|Nothing confirms/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('list', { name: 'Tracking history' })).not.toBeInTheDocument();
   });
 
-  it('says under a written delivery that nothing confirms it while the only scan is the label, and nothing once a scan tells more', () => {
-    vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2024-09-20T00:00:00Z'));
-    const written = { by: 'GZYL', steps: [{ stage: 'delivered' as const, description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' }] };
-    const label = { ...event('label', '2024-09-07T10:00:00Z', 'Label created'), stage: 'registered' as const };
-    const { rerender } = render(<TrackingJournal events={[label]} written={written} />);
-    const row = screen.getByRole('region', { name: 'Written in advance by GZYL' }).querySelector('li')!;
-    expect(within(row).getByText(UNCONFIRMED)).toHaveClass('tracking-journal__unconfirmed');
-    rerender(<TrackingJournal events={[label, event('scan', '2024-09-08T10:00:00Z', 'Departed the origin facility')]} written={written} />);
-    expect(screen.getByRole('region', { name: 'Written in advance by GZYL' })).toBeInTheDocument();
-    expect(screen.queryByText(UNCONFIRMED)).not.toBeInTheDocument();
+  it('says a carrier that writes its route ahead shows predictions on its site, even with none to list, and says nothing for another carrier', () => {
+    const scans = [event('picked', '2024-09-07T10:00:00Z', 'Picked up')];
+    const { container, rerender } = render(<TrackingJournal events={scans} writtenAhead />);
+    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toHaveClass('tracking-journal__predicted-note');
+    expect(container.querySelector('.tracking-journal__predicted')).toBeNull();
+    rerender(<TrackingJournal events={scans} />);
+    expect(screen.queryByText(/only predictions/)).not.toBeInTheDocument();
   });
 
   it('says under the history that its times are the reader’s, and names the reader’s zone', () => {

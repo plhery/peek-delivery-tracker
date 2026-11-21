@@ -1,8 +1,9 @@
-import { scanDate } from './format';
+import { localizedCalendarDate, scanDate } from './format';
 import { estimateDay, localizedDeliveryDate, numberToCheck, type MessageKey, type Translate } from './messages';
 import type { CarrierId, ParcelWithEvents } from '../types';
 import { currentEvent, stageMeta } from './stages';
 import { activeTrackingCarrierId, carrierInfo, tracksAutomatically } from './carriers';
+import type { ParcelAttention } from './parcelPriority';
 
 export interface ParcelDisplayStatus {
   label: string;
@@ -105,15 +106,30 @@ export function awaitedCarrier(parcel: ParcelWithEvents): CarrierId | null {
   return waits ? parcel.carrier : null;
 }
 
+const ATTENTION_LABELS: Record<ParcelAttention, MessageKey> = {
+  sync_error: 'attention.sync_error',
+  failed_attempt: 'attention.failed_attempt',
+  customs_tax_id: 'attention.customs_tax_id',
+  customs_duties: 'attention.customs_duties',
+  customs_documents: 'attention.customs_documents',
+  ready_for_pickup: 'attention.ready_for_pickup',
+  exception: 'attention.exception',
+  customs: 'attention.customs',
+  generated: 'attention.generated',
+  stalled: 'attention.stalled',
+  not_announced: 'attention.not_announced',
+};
+
 /**
- * The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page lists
- * steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words (`writtenAheadEvents`,
- * or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
+ * What a parcel's flag says. One that went quiet names the day of its latest scan, so a parcel silent for a month
+ * doesn't read as four days.
  */
-export function writtenAheadNote(parcel: ParcelWithEvents, t: Translate, locale: string): string | null {
-  if (!parcel.writtenAheadBy) return null;
-  const shown = !!(parcel.writtenAheadEvents?.length || parcel.plannedEvents?.length);
-  return t(shown ? 'parcel.writtenAheadShown' : 'parcel.writtenAhead', { carrier: carrierInfo(parcel.writtenAheadBy, locale).name });
+export function attentionLabel(flag: ParcelAttention, parcel: ParcelWithEvents, t: Translate, languageTag: string, now = Date.now()): string {
+  const current = flag === 'stalled' ? currentEvent(parcel.events, parcel.returnHeld) : null;
+  const latest = current ? scanDate(current) : null;
+  if (!latest) return t(ATTENTION_LABELS[flag]);
+  const withYear = latest.date.getFullYear() !== new Date(now).getFullYear();
+  return t('attention.stalledSince', { date: localizedCalendarDate(latest.date, languageTag, withYear) });
 }
 
 /**

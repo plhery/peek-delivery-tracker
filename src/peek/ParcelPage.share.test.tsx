@@ -420,7 +420,8 @@ describe('a gift', () => {
     open({ ...shown, parcel: { ...shown.parcel, carrier: 'gzyl', writtenAheadBy: 'gzyl',
       writtenAheadEvents: [{ stage: 'delivered', description: 'Delivered', occurredAt: '2026-01-01T00:00:00Z' }] } }, { hash: words });
     await screen.findByRole('region', { name: 'Something’s on its way to you' });
-    expect(screen.queryByRole('region', { name: /^Written in advance by/ })).toBeNull();
+    expect(screen.queryByText(/only predictions/)).toBeNull();
+    expect(document.querySelector('.tracking-journal__predicted')).toBeNull();
   });
 
   it('tells where it comes from once: the scans the server blurred alike are one row', async () => {

@@ -22,7 +22,7 @@ import { localizedCalendarDate } from '../lib/format';
 import { captureCardOrigin } from '../lib/cardTransition';
 import { useCardDialog } from '../lib/cardDialog';
 import { focusClickedButton } from '../lib/modal';
-import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, parcelPassedEstimate, writtenAheadNote } from '../lib/parcelStatus';
+import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, parcelPassedEstimate } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { awaitingHandover, currentEvent, heldReturn, isFinal, sortEventsDesc } from '../lib/stages';
 import { useTabTitle } from '../lib/tabTitle';
@@ -298,15 +298,13 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     previousEstimateLine(previousEstimate, parcel, wording),
     deliveryNote,
     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over;
-    // unless the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
+    // unless the carrier wrote the rest of its timeline ahead, whose line in the history says the rest are predictions.
     // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
     // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
     checking ? null : awaitingHandover(parcel.events, now) ? (parcel.writtenAheadBy ? null : t('parcel.awaitingHandover', { carrier: displayed.name }))
       : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
         : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name })
           : heldReturn(parcel, stage) ? t('parcel.returnUnderWay', { carrier: displayed.name }) : null,
-    // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm.
-    checking ? null : writtenAheadNote(parcel, t, locale),
   ].filter((note): note is string => !!note);
 
   // The reveal's last beat: the parcel's own link, offered once the card has settled.
@@ -598,9 +596,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         <ShipmentFacts parcel={parcel} stage={stage} />
         {carrierKnown && (automatic || moving) && <section className="peekp-journal">
           <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} planned={wrapped ? undefined : parcel.plannedEvents}
-            written={!wrapped && parcel.writtenAheadBy && parcel.writtenAheadEvents?.length
-              ? { by: carrierInfo(parcel.writtenAheadBy, locale).name, steps: parcel.writtenAheadEvents } : undefined}
-            syncing={checking} fold />
+            written={wrapped ? undefined : parcel.writtenAheadEvents} writtenAhead={!wrapped && !!parcel.writtenAheadBy} syncing={checking} fold />
         </section>}
         {!final && !frozen && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
         <FeedbackQuestion feedback={feedback} />

@@ -2040,10 +2040,10 @@ describe('App', () => {
     renderApp(repo);
 
     const card = await within(await screen.findByRole('region', { name: 'Needs attention' }))
-      .findByRole('button', { name: /Desk lamp — In transit\. No tracking update for four days/ });
+      .findByRole('button', { name: /Desk lamp — In transit\. No tracking update since Tue 14 Jul/ });
     expect(card.querySelector('.carrier-mark')).toHaveTextContent('Swiss Post');
     expect(within(card).getByText('In transit')).toHaveClass('parcel-card__state');
-    expect(within(card).getByText('No tracking update for four days')).toHaveClass('parcel-card__notice');
+    expect(within(card).getByText('No tracking update since Tue 14 Jul')).toHaveClass('parcel-card__notice');
   });
 
   it('says Peek keeps trying a carrier it could not reach, without exposing carrier diagnostics', async () => {

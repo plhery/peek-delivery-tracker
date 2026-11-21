@@ -353,40 +353,24 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByText(/go quiet on long flights/)).toBeNull();
   });
 
-  it('says only where to look for a label whose carrier wrote the rest of its timeline ahead', async () => {
+  it('keeps the card quiet for a label whose carrier wrote the rest of its timeline ahead, and says so in the history', async () => {
     await shown(view([scan('registered', 140)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
-    expect(within(card()).getByText(/steps written in advance, even a delivery/)).toBeVisible();
-    expect(screen.queryByText(/hasn’t handed it|hasn’t scanned the parcel yet|go quiet on long flights/)).toBeNull();
+    expect(screen.queryByText(/written in advance|hasn’t handed it|hasn’t scanned the parcel yet|go quiet on long flights/)).toBeNull();
+    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toBeVisible();
   });
 
-  it('says the carrier writes its timeline ahead', async () => {
-    await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
-    expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it leaves them out\. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller\.$/)).toBeVisible();
-  });
-
-  it('shows the steps the carrier wrote in advance whose time has passed greyed under its name, a delivery among them, and stays in transit', async () => {
-    const name = carrierInfo('gzyl', 'en').name;
+  it('folds the steps the carrier wrote in advance whose time has passed behind the predictions line, and stays in transit', async () => {
     await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl', writtenAheadEvents: [
       { stage: 'delivered', description: 'Delivered', occurredAt: ago(5) },
     ] }));
     expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();
-    expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it shows them greyed\./)).toBeVisible();
-    const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
-    // A scan past the label: no line under the delivery.
-    expect([...written.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Written in advance, not confirmed: Delivered']);
+    expect(within(card()).queryByText(/written in advance/)).toBeNull();
+    const predicted = document.querySelector<HTMLDetailsElement>('.tracking-journal__predicted')!;
+    expect(predicted).not.toHaveAttribute('open');
+    expect(within(predicted).getByText('Show them')).toBeVisible();
+    expect([...predicted.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Delivered']);
+    expect(screen.queryByText(/Nothing confirms this delivery/)).toBeNull();
     expect(screen.getByText('1 update')).toBeVisible();
-  });
-
-  it('says under a delivery the carrier wrote in advance that nothing confirms it while its only scan is the label', async () => {
-    const name = carrierInfo('gzyl', 'en').name;
-    await shown(view([scan('registered', 200, 'Label created')], { carrier: 'gzyl', writtenAheadBy: 'gzyl', writtenAheadEvents: [
-      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: ago(100) },
-      { stage: 'delivered', description: 'Delivered', occurredAt: ago(5) },
-    ] }));
-    const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
-    const [delivery] = written.querySelectorAll('li');
-    expect(within(delivery).getByText('Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.')).toBeVisible();
-    expect(written.querySelectorAll('.tracking-journal__unconfirmed')).toHaveLength(1);
   });
 
   it('keeps a number no carrier knows on a neutral card, and says to keep the page', async () => {
@@ -554,11 +538,20 @@ describe('ParcelPage stages and troubles', () => {
 
   it('explains a parcel that went quiet, and links its carrier’s help', async () => {
     await shown(view([scan('accepted', 140), scan('in_transit', 120)]));
-    expect(within(card()).getByText('No tracking update for four days')).toBeVisible();
+    const day = new Intl.DateTimeFormat('en', { weekday: 'short', day: 'numeric', month: 'short' }).formatToParts(new Date(ago(120)));
+    const part = (type: string) => day.find((entry) => entry.type === type)!.value;
+    expect(within(card()).getByText(`No tracking update since ${part('weekday')} ${part('day')} ${part('month')}`)).toBeVisible();
     const note = screen.getByRole('note');
     expect(note.querySelector('p')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL\.$/);
     expect(within(note).getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
+  });
+
+  it('says to ask the seller once a parcel has had no news for three weeks', async () => {
+    await shown(view([scan('accepted', 40 * 24)]));
+    expect(within(card()).getByText(/^No tracking update since /)).toBeVisible();
+    expect(screen.getByRole('note').querySelector('p')).toHaveTextContent(/^Nothing new for over three weeks\. If it still hasn’t arrived, ask the seller\. Peek keeps asking DHL\.$/);
+    expect(screen.queryByText(/go quiet on long flights/)).toBeNull();
   });
 
   it('says a quiet parcel’s carrier shows nothing of its leg abroad, and links no help a carrier has no page for', async () => {

@@ -6,7 +6,6 @@ import {
   localizedDeliveryWindow,
   localizedRelativeTime,
   localizedScanAge,
-  type MessageKey,
   type Translate,
 } from '../../lib/messages';
 import { parcelAttention, type ParcelAttention } from '../../lib/parcelPriority';
@@ -110,8 +109,6 @@ export function parcelFlag(parcel: ParcelWithEvents, now = Date.now()): Exclude<
   const reason = parcelAttention(parcel, now);
   return reason === 'ready_for_pickup' ? null : reason;
 }
-
-export const flagKey = (flag: ParcelAttention) => `attention.${flag}` as MessageKey;
 
 /** Whether the journey ended long enough ago for the page to wind down. */
 export function journeyEndedBefore(parcel: ParcelWithEvents, now = Date.now()): boolean {

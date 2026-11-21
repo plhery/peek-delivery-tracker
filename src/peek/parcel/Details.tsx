@@ -123,18 +123,24 @@ export interface Note {
   link?: { label: string; href: string; action?: string };
 }
 
+/** A parcel this long without a scan may be lost: its note says to ask the seller. */
+const LONG_QUIET_MS = 21 * 24 * 60 * 60 * 1000;
+
 /**
- * Why a parcel that stopped moving may still be on its way, that its carrier doesn't show its
- * journey in the destination country when it doesn't, and where to ask the carrier: the help
- * page of the carrier that has it, else of the one it is filed under. No page, no link.
+ * Why a parcel that stopped moving may still be on its way, or, three weeks on, to ask the seller;
+ * that its carrier doesn't show its journey in the destination country when it doesn't; and where
+ * to ask the carrier: the help page of the carrier that has it, else of the one it is filed under.
+ * No page, no link.
  */
-export function quietNote(parcel: ParcelWithEvents, carrier: CarrierInfo, t: Translate, locale: Locale): Note {
+export function quietNote(parcel: ParcelWithEvents, carrier: CarrierInfo, t: Translate, locale: Locale, now = Date.now()): Note {
   const active = carrierInfo(activeTrackingCarrierId(parcel), locale);
   const number = parcel.activeTrackingNumber ?? parcel.trackingNumber;
   const abroad = number && active.hidesDestinationLeg?.(number) ? ` ${t('link.quietAbroad', { carrier: active.name })}` : '';
   const help = [active, carrier].find((candidate) => candidate.helpUrl);
+  const latest = Date.parse(currentEvent(parcel.events, parcel.returnHeld)?.occurredAt ?? '');
+  const long = now - latest >= LONG_QUIET_MS;
   return {
-    id: 'quiet', icon: <Icon name="hourglass" />, body: `${t('link.quiet', { carrier: carrier.name })}${abroad}`,
+    id: 'quiet', icon: <Icon name="hourglass" />, body: `${t(long ? 'link.quietLong' : 'link.quiet', { carrier: carrier.name })}${abroad}`,
     link: help?.helpUrl ? { label: t('link.help', { carrier: help.name }), href: localizedCarrierUrl(help.id, help.helpUrl, locale) } : undefined,
   };
 }

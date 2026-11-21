@@ -1,4 +1,4 @@
-import { useId, useState, useSyncExternalStore } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { dayAndTime, localizedCalendarDate, localizedClockTime, scanDate, timeZoneName } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
@@ -14,15 +14,15 @@ const LISTED_DAYS = 3;
 /**
  * The whole journey grouped by local calendar day, newest first. With `fold`,
  * a long journey shows its newest days, the days before as one line each to
- * open, and keeps the oldest behind a button. The steps the carrier planned
- * and has not confirmed (`planned`) open it, greyed, apart from the scans, then
- * those the carrier named in `written.by` wrote in advance and whose time has
- * passed (`written.steps`), greyed too under "Written in advance by" it. Under
- * such a delivery that no scan past the label backs (`unconfirmedDelivery`), a
- * line says nothing confirms it, and whom to ask if nothing came.
+ * open, and keeps the oldest behind a button. One line opens it when the
+ * carrier's site shows steps that are no scans: those it planned (`planned`)
+ * and those it wrote in advance whose time has passed (`written`). It says
+ * they're only predictions and keeps them folded behind it, apart from the
+ * scans. A carrier that writes its route ahead (`writtenAhead`) gets the line
+ * even with no step to list.
  */
-export function TrackingJournal({ events: allEvents, planned = [], written, syncing = false, fold = false, returnHeld = false }: {
-  events: TrackingEvent[]; planned?: PlannedEvent[]; written?: { by: string; steps: PlannedEvent[] }; syncing?: boolean; fold?: boolean;
+export function TrackingJournal({ events: allEvents, planned = [], written = [], writtenAhead = false, syncing = false, fold = false, returnHeld = false }: {
+  events: TrackingEvent[]; planned?: PlannedEvent[]; written?: PlannedEvent[]; writtenAhead?: boolean; syncing?: boolean; fold?: boolean;
   /** The server holds the parcel's return (`currentEvent`). */
   returnHeld?: boolean;
 }) {
@@ -39,9 +39,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written, sync
     groups.get(key)!.events.push(event);
   }
   const now = new Date();
-  const ahead = planned.filter((step) => plannedAhead(step, now.getTime()));
-  const writtenSteps = written?.steps ?? [];
-  const unconfirmed = unconfirmedDelivery(writtenSteps, allEvents, now.getTime());
+  const predicted = [...planned.filter((step) => plannedAhead(step, now.getTime())), ...written];
   const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
@@ -50,7 +48,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written, sync
   const updates = (count: number) => t(count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count });
   const zone = useReaderTimeZone(languageTag);
   // The times are the reader's, wherever the carrier scanned: one quiet line says so under the history.
-  const timed = events.some((event) => scanDate(event)?.timed) || [...ahead, ...writtenSteps].some((step) => scanDate(step)?.timed);
+  const timed = events.some((event) => scanDate(event)?.timed) || predicted.some((step) => scanDate(step)?.timed);
 
   // A scan dated by its day alone can sort among the day before's scans, west of the carrier's zone.
   const days = [...groups].sort(([, a], [, b]) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
@@ -84,10 +82,8 @@ export function TrackingJournal({ events: allEvents, planned = [], written, sync
 
   return <details className={use24HourTime ? 'tracking-journal' : 'tracking-journal tracking-journal--am-pm'} open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
-    {ahead.length > 0 && <PlannedSteps steps={ahead} title={t('timeline.planned.title')} note={t('timeline.planned.note')}
-      label={t('timeline.planned.step', { step: '' }).trim()} />}
-    {written && writtenSteps.length > 0 && <PlannedSteps steps={writtenSteps} written title={t('timeline.writtenAhead.title', { carrier: written.by })}
-      note={t('timeline.writtenAhead.note')} label={t('timeline.writtenAhead.step', { step: '' }).trim()} unconfirmed={unconfirmed} />}
+    {predicted.length > 0 ? <PredictedSteps steps={predicted} />
+      : writtenAhead && <p className="tracking-journal__predicted-note">{t('timeline.predicted.note')}</p>}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -131,27 +127,12 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day' | 'ex
 }
 
 /**
- * The delivery a carrier wrote in advance (`steps`, served as `written_ahead_events`) whose time has passed while the
- * carrier's own scans (`events`, Peek's "added" row aside) tell nothing past the label: nothing confirms it, and readers
- * take it for real. The newest such step, or null once a scan tells more, or when no written delivery's time has passed.
+ * The steps the carrier's site shows that no scan confirms, behind one line that says they're only predictions:
+ * opened, they list newest first, greyed, each on a dashed mark instead of a time, with the day it was predicted for.
+ * They are no scans and count as no update.
  */
-export function unconfirmedDelivery(steps: readonly PlannedEvent[], events: readonly Pick<TrackingEvent, 'stage'>[], now: number): PlannedEvent | null {
-  if (events.some((event) => event.stage !== 'pending' && event.stage !== 'registered')) return null;
-  return steps.filter((step) => step.stage === 'delivered' && Number.isFinite(Date.parse(step.occurredAt)) && !plannedAhead(step, now))
-    .reduce<PlannedEvent | null>((newest, step) => !newest || Date.parse(step.occurredAt) > Date.parse(newest.occurredAt) ? step : newest, null);
-}
-
-/**
- * The steps the carrier listed before they happen, or those it wrote in advance whose time has passed (`written`),
- * newest first, under a heading that says so (`title`, `note`, and `label` before each step's words for a screen
- * reader): greyed, each on a dashed mark instead of a time, with its day. They are no scans and count as no update.
- * Under the `unconfirmed` delivery, a line in Peek's own words says nothing confirms it and whom to ask if nothing came.
- */
-function PlannedSteps({ steps, written = false, title, note, label, unconfirmed = null }: {
-  steps: PlannedEvent[]; written?: boolean; title: string; note: string; label: string; unconfirmed?: PlannedEvent | null;
-}) {
+function PredictedSteps({ steps }: { steps: PlannedEvent[] }) {
   const { languageTag, t, use24HourTime } = useI18n();
-  const heading = useId();
   const now = new Date();
   const offset = (days: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + days).toDateString();
   const when = (step: PlannedEvent) => {
@@ -160,27 +141,24 @@ function PlannedSteps({ steps, written = false, title, note, label, unconfirmed 
     const { date, timed } = scan;
     const day = date.toDateString() === offset(0) ? t('time.today') : date.toDateString() === offset(1) ? t('time.tomorrow')
       : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
-    return timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day;
+    return t('timeline.predicted.when', { when: timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day });
   };
   const newestFirst = [...steps].sort((a, b) => (scanDate(b)?.date.getTime() ?? 0) - (scanDate(a)?.date.getTime() ?? 0));
-  return <section className={written ? 'tracking-journal__planned tracking-journal__planned--written' : 'tracking-journal__planned'} aria-labelledby={heading}>
-    <h3 id={heading}>{title}</h3>
-    <p className="tracking-journal__planned-note">{note}</p>
+  return <details className="tracking-journal__predicted">
+    <summary><span className="tracking-journal__predicted-note">{t('timeline.predicted.note')}</span>{' '}
+      <span className="tracking-journal__predicted-show">{t('timeline.predicted.show')}</span>
+      <span className="tracking-journal__predicted-hide">{t('timeline.predicted.hide')}</span></summary>
     <ol className="tracking-journal__events">
-      {newestFirst.map((step, index) => {
-        const wording = localizedEventDescription(step.description, t) || stageLabel(t, step.stage);
-        return <li key={`${step.occurredAt}-${index}`}>
-          <svg className="tracking-journal__planned-mark" aria-hidden="true" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" /></svg>
-          <div>
-            <p><span className="sr-only">{label} </span>{wording}</p>
-            <time className="tracking-journal__planned-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
-            {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
-            {step === unconfirmed && <p className="tracking-journal__unconfirmed">{t('timeline.writtenAhead.delivery')}</p>}
-          </div>
-        </li>;
-      })}
+      {newestFirst.map((step, index) => <li key={`${step.occurredAt}-${index}`}>
+        <svg className="tracking-journal__predicted-mark" aria-hidden="true" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" /></svg>
+        <div>
+          <p>{localizedEventDescription(step.description, t) || stageLabel(t, step.stage)}</p>
+          <time className="tracking-journal__predicted-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
+          {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
+        </div>
+      </li>)}
     </ol>
-  </section>;
+  </details>;
 }
 
 /**

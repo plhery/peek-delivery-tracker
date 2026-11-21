@@ -91,28 +91,26 @@ describe('shipment details', () => {
       .querySelector('.detail__tracking-label')!.textContent).toBe('Tracking number');
   });
 
-  it('says once that the carrier writes its timeline ahead, as the other notes look', () => {
+  it('says in the history, not under the status, that the carrier writes its timeline ahead', () => {
     const view = show({ carrier: 'gzyl', writtenAheadBy: 'gzyl' });
-    expect(screen.getByText(`${carrierInfo('gzyl', 'en').name}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.`))
-      .toHaveClass('detail__handover');
+    expect(document.querySelector('.detail__handover')).toBeNull();
+    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toHaveClass('tracking-journal__predicted-note');
     view.unmount();
 
     show({ carrier: 'gzyl' });
-    expect(screen.queryByText(/site shows steps written in advance/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/only predictions/)).not.toBeInTheDocument();
   });
 
-  it('shows a delivery the carrier wrote in advance, before any real scan, greyed under its name, and the parcel stays undelivered', () => {
+  it('folds a delivery the carrier wrote in advance, before any real scan, among the predictions, and the parcel stays undelivered', () => {
     const name = carrierInfo('gzyl', 'en').name;
     show({ carrier: 'gzyl', syncStatus: 'waiting', writtenAheadBy: 'gzyl', writtenAheadEvents: [
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2026-09-11T01:00:00Z' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2026-09-14T07:00:00Z' },
     ] });
-    expect(screen.getByText(`${name}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it shows them greyed. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.`))
-      .toHaveClass('detail__handover');
-    const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
-    expect([...written.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Written in advance, not confirmed: Delivered',
-      'Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.',
-      'Written in advance, not confirmed: Departed the origin facility']);
+    expect(screen.queryByText(/written in advance|Nothing confirms/i)).not.toBeInTheDocument();
+    const predicted = document.querySelector<HTMLDetailsElement>('.tracking-journal__predicted')!;
+    expect(predicted).not.toHaveAttribute('open');
+    expect([...predicted.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Delivered', 'Departed the origin facility']);
     // The status, the date beside it and the count read the scans alone: there are none.
     expect(document.querySelector('.detail__state')).toHaveTextContent(`Waiting for ${name}`);
     expect(document.querySelector('.detail__state')).not.toHaveTextContent(/Delivered/);
@@ -235,9 +233,9 @@ describe('shipment details', () => {
     expect(document.querySelector('.detail__quiet')).toBeNull();
     view.unmount();
 
-    // A carrier that wrote the rest of its timeline ahead: its note says where to look instead.
+    // A carrier that wrote the rest of its timeline ahead: its line in the history says the rest are predictions.
     show({ carrier: 'gzyl', writtenAheadBy: 'gzyl', events: [...label] });
-    expect(screen.getByText(/steps written in advance, even a delivery/)).toBeVisible();
+    expect(screen.getByText(/only predictions/)).toBeVisible();
     expect(screen.queryByText(/hasn’t handed it/)).toBeNull();
     expect(document.querySelector('.detail__quiet')).toBeNull();
   });

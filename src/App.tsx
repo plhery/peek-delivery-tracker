@@ -43,6 +43,7 @@ import {
   type ParcelAttention,
 } from './lib/parcelPriority';
 import { numberToCheck } from './lib/messages';
+import { attentionLabel } from './lib/parcelStatus';
 import { useMarkNewUpdatesChoice, useSeenWhileOpen } from './lib/newUpdate';
 import {
   DEFAULT_PARCEL_SORT,
@@ -68,20 +69,6 @@ import type { CarrierId, ParcelWithEvents } from './types';
 
 const DETAIL_HISTORY_KEY = 'parcelPostDetail';
 const PARCEL_VIEW_CONTROLS_ID = 'parcel-view-controls';
-
-const ATTENTION_LABELS: Record<ParcelAttention, MessageKey> = {
-  sync_error: 'attention.sync_error',
-  failed_attempt: 'attention.failed_attempt',
-  customs_tax_id: 'attention.customs_tax_id',
-  customs_duties: 'attention.customs_duties',
-  customs_documents: 'attention.customs_documents',
-  ready_for_pickup: 'attention.ready_for_pickup',
-  exception: 'attention.exception',
-  customs: 'attention.customs',
-  generated: 'attention.generated',
-  stalled: 'attention.stalled',
-  not_announced: 'attention.not_announced',
-};
 
 /** How keeping a parcel from its link ended, as the deliveries say it. */
 const KEEP_MESSAGES = {
@@ -124,7 +111,7 @@ export default function App({
   /** Shows the landing: at its own address for an account, at `/` for the demo of a visitor. */
   onOpenLanding?: () => void;
 } = {}) {
-  const { t, use24HourTime, distanceUnit } = useI18n();
+  const { languageTag, t, use24HourTime, distanceUnit } = useI18n();
   const {
     parcels,
     loading,
@@ -515,7 +502,7 @@ export default function App({
   const noticeFor = (parcel: ParcelWithEvents, reason: ParcelAttention) => {
     const now = listed === parcels ? reason : parcelAttention(parcel, viewNow);
     // A number to check says so in its status line: no update was missed.
-    return now && !(now === 'sync_error' && numberToCheck(parcel.syncError)) ? t(ATTENTION_LABELS[now]) : undefined;
+    return now && !(now === 'sync_error' && numberToCheck(parcel.syncError)) ? attentionLabel(now, parcel, t, languageTag, viewNow) : undefined;
   };
   const remainingDeliveries = [...prioritized.arrivingToday, ...prioritized.onTheWay];
   const allArrived = !hasCustomView && listed.length > 0

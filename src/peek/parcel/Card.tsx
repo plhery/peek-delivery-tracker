@@ -8,10 +8,10 @@ import { ProgressTrack } from '../../components/ProgressTrack';
 import { useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import type { CarrierInfo } from '../../lib/carriers';
+import { attentionLabel } from '../../lib/parcelStatus';
 import type { ParcelWithEvents, Stage } from '../../types';
 import { PIP_TRANSITION_NAME } from '../route';
 import { Glyph } from './glyphs';
-import { flagKey } from './summary';
 import type { ParcelAttention } from '../../lib/parcelPriority';
 
 /** In a gift's card, beside the carrier: the way into the alerts. */
@@ -125,7 +125,7 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
    */
   gift?: 'wrapped' | 'opened' | 'own';
 }) {
-  const { t } = useI18n();
+  const { languageTag, t } = useI18n();
   const delivered = stage === 'delivered';
   const present = gift === 'wrapped' || gift === 'opened';
   const card = useRef<HTMLElement>(null);
@@ -157,7 +157,7 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
       {figure === 'kraft' && <KraftPip carrier={carrier} number={number} open={delivered} hero={false} sparks={settled && !delivered} />}
     </div>
     {outage ? <p className="peekp-card__flag peekp-card__flag--calm"><Icon name="refresh" /><span>{outage}</span></p>
-      : flag && <p className="peekp-card__flag">{FLAG_ICONS[flag]}<span>{t(flagKey(flag))}</span></p>}
+      : flag && <p className="peekp-card__flag">{FLAG_ICONS[flag]}<span>{attentionLabel(flag, parcel, t, languageTag)}</span></p>}
     {gift !== 'opened' && <div className="peekp-card__progress"><ProgressTrack stage={stage} /></div>}
   </section>;
 }

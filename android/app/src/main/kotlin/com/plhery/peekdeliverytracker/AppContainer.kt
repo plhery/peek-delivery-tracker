@@ -356,7 +356,10 @@ class AppContainer(
     val friends = FriendsStore(friendsClient)
 
     /** The app's `FriendsActivityStore()`: who accepted an invitation, while someone is signed in. */
-    val friendsActivity = FriendsActivityStore(friendsClient, signedIn = { session.user != null }, removeNotifications = posted::removeFriend)
+    val friendsActivity = FriendsActivityStore(
+        friendsClient, signedIn = { session.user != null }, removeNotifications = posted::removeFriend, defaults = defaults,
+        account = { session.user?.id },
+    )
 
     /**
      * The app's `FriendInvitationStore()`: the invitation a link brought, its code waiting in the app's defaults, its

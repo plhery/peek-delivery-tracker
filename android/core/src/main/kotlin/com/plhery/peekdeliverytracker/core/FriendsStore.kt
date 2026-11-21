@@ -307,12 +307,15 @@ val FriendStamp.symbol: String
  * `FriendsActivityStore`: memory-only news of friendships, the notices of invitations accepted ([updates]) and the friend
  * to reveal ([focusId]), each reveal a new [presentationId]. [client] asks for the account's; [signedIn] says whether
  * there is an account (`session.user != nil`); [removeNotifications] takes a friend's notifications off the device as
- * one is acknowledged (`removeDeliveredNotifications`).
+ * one is acknowledged (`removeDeliveredNotifications`). The acknowledgements the server hasn't answered wait in
+ * [defaults] under the [account] that made them.
  */
 class FriendsActivityStore(
     private val client: FriendsClient,
     private val signedIn: () -> Boolean,
     private val removeNotifications: suspend (UUID) -> Unit = {},
+    private val defaults: UserDefaults? = null,
+    private val account: () -> UUID? = { null },
 ) {
     private val updatesState = MutableStateFlow<List<FriendUpdate>>(emptyList())
     private val focusIdState = MutableStateFlow<UUID?>(null)
@@ -331,7 +334,11 @@ class FriendsActivityStore(
 
     private val dismissed = mutableSetOf<UUID>()
 
-    /** The acknowledgements the server hasn't answered, offline or away, sent again with each refresh until it does. */
+    /**
+     * The acknowledgements the server hasn't answered, offline or away, sent again with each refresh until it does. Each
+     * account's also wait on the phone ([defaults]), so a notice dismissed offline stays dismissed once the app starts
+     * again, and go with that account's next refresh, never another's.
+     */
     private val unanswered = LinkedHashSet<UUID>()
     private var generation = 0
 
@@ -345,9 +352,12 @@ class FriendsActivityStore(
             return
         }
         val current = generation
+        val owner = account()
+        // Those the account dismissed before the app last started stay dismissed too.
+        kept(owner).let { unanswered += it; dismissed += it }
         for (friendId in unanswered.toList()) {
             if (current != generation || friendId !in unanswered) break
-            sendAcknowledgement(friendId)
+            sendAcknowledgement(friendId, owner)
         }
         try {
             val next = client.activity()
@@ -376,19 +386,41 @@ class FriendsActivityStore(
         dismissed += friendId
         updatesState.value = updates.filter { it.friendId != friendId }
         removeNotifications(friendId)
+        val owner = account()
         unanswered += friendId
-        sendAcknowledgement(friendId)
+        keep(owner, kept(owner) + friendId)
+        sendAcknowledgement(friendId, owner)
     }
 
-    private suspend fun sendAcknowledgement(friendId: UUID) {
+    private suspend fun sendAcknowledgement(friendId: UUID, owner: UUID?) {
         try {
             client.action(FriendsActionRequest(FriendsAction.AcknowledgeFriend, friendId = friendId))
-            unanswered -= friendId
+            settle(friendId, owner)
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
-            if (answered(error)) unanswered -= friendId
+            if (answered(error)) settle(friendId, owner)
         }
     }
+
+    /** An acknowledgement the server answered: no longer sent again, by this run of the app or the next. */
+    private fun settle(friendId: UUID, owner: UUID?) {
+        unanswered -= friendId
+        if (friendId in kept(owner)) keep(owner, kept(owner) - friendId)
+    }
+
+    /** The acknowledgements the account `owner` made that the server hasn't answered, as kept on the phone. */
+    private fun kept(owner: UUID?): Set<UUID> {
+        val stored = owner?.let { defaults?.string(unansweredKey(it)) } ?: return emptySet()
+        return stored.split(',').mapNotNullTo(LinkedHashSet()) { runCatching { UUID.fromString(it) }.getOrNull() }
+    }
+
+    private fun keep(owner: UUID?, friends: Set<UUID>) {
+        val defaults = defaults ?: return
+        val key = unansweredKey(owner ?: return)
+        if (friends.isEmpty()) defaults.removeObject(key) else defaults.set(friends.joinToString(",") { it.uuidString }, forKey = key)
+    }
+
+    private fun unansweredKey(owner: UUID): String = "sdt.friendAcknowledgementsUnanswered.v1.${owner.uuidString}"
 
     /** Whether the server answered, refusing: not the network, too many requests at once or its own failure. */
     private fun answered(error: Exception): Boolean = error is DeliveryApiError && error !is DeliveryApiError.RateLimited &&

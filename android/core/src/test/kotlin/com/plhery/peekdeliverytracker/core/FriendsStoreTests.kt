@@ -394,6 +394,41 @@ class FriendsStoreTests {
     }
 
     @Test
+    fun aNoticeDismissedOfflineStaysDismissedOnceTheAppStartsAgainAndGoesWithItsAccountAlone() = runTest {
+        val client = FakeClient()
+        val defaults = MemoryDefaults()
+        val reader = UUID.fromString("44000000-0000-4000-8000-000000000004")
+        var account: UUID? = reader
+        fun start() = FriendsActivityStore(client, signedIn = { account != null }, defaults = defaults, account = { account })
+        val acknowledged = FriendsActionRequest(FriendsAction.AcknowledgeFriend, friendId = mila.id)
+        client.activity = FriendsActivity(listOf(FriendUpdate(mila.id, "Mila")))
+        val before = start()
+        before.refresh()
+        client.failure = IOException("offline")
+        before.acknowledge(mila.id)
+        assertTrue(before.updates.isEmpty())
+
+        // Another account signed in when the app starts again never sends it, and sees its own notices.
+        client.failure = null
+        client.actions.clear()
+        account = UUID.fromString("55000000-0000-4000-8000-000000000005")
+        val other = start()
+        other.refresh()
+        assertEquals(emptyList<FriendsActionRequest>(), client.actions)
+        assertEquals(listOf(mila.id), other.updates.map { it.friendId })
+
+        // The reader's account, online again: sent once, and the notice stays dismissed though the server still lists it.
+        account = reader
+        val again = start()
+        again.refresh()
+        assertEquals(listOf(acknowledged), client.actions)
+        assertTrue(again.updates.isEmpty())
+        // Answered: the next start sends it no more.
+        start().refresh()
+        assertEquals(listOf(acknowledged), client.actions)
+    }
+
+    @Test
     fun aRevealIsANewPresentationOfItsFriend() {
         val store = FriendsActivityStore(FakeClient(), signedIn = { true })
         val before = store.presentationId

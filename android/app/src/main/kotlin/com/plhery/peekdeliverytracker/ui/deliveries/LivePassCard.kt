@@ -401,7 +401,14 @@ internal fun LivePassCard(
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(localizer.parcelStatus(parcel), color = ink, style = type.subheadline.sfLines())
                 val date = localizer.parcelCompletionDate(parcel, now) ?: localizer.parcelDeliveryWindow(parcel, now)
-                if (date != null) Text(date, color = ink, style = type.caption.sfLines())
+                if (date != null) {
+                    Text(date, color = ink, style = type.caption.sfLines())
+                } else {
+                    // A day the carrier expected that has passed: when it was, muted, for a week.
+                    localizer.parcelPassedEstimate(parcel, now)?.let {
+                        Text(it, Modifier.testTag(PAGE_PASSED_ESTIMATE), color = secondary, style = type.caption.sfLines())
+                    }
+                }
             }
             val displayed = identities.displayName(parcel.displayedCarrier, language)
             // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then; unless

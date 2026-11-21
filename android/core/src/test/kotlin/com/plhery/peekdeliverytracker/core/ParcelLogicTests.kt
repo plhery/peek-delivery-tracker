@@ -13,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
+import com.plhery.peekdeliverytracker.core.api.CarrierServedElsewhere
 import com.plhery.peekdeliverytracker.core.api.ChangePackageCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.ErrorResponse
@@ -1416,6 +1417,27 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun aCarrierPickedByHandThatRefusesTheNumberStaysShownWhileAnotherOnesNewsFillsIt() {
+        val routing = CarrierDataRouting(servedElsewhere = CarrierServedElsewhere(picked = CarrierId.Inpost, carrier = CarrierId.Aliexpress))
+        var parcel = makeParcel(trackingNumber = "LP00123456789012")
+            .copy(carrier = CarrierId.Inpost, carrierData = CarrierData(activeTrackingCarrier = CarrierId.Aliexpress, routing = routing))
+        assertEquals(CarrierId.Aliexpress, parcel.servedElsewhere)
+        // The reader's carrier stays the one shown, with no handover to the one that has news, as on the web.
+        assertNull(parcel.trackingSource)
+        assertEquals(CarrierId.Inpost, parcel.activeTrackingCarrier)
+        assertEquals(CarrierId.Inpost, parcel.displayedCarrier)
+        assertNull(parcel.deliveringCarrier)
+        // Filed back under the carrier that has news, the note no longer applies.
+        parcel = parcel.copy(carrier = CarrierId.Aliexpress)
+        assertNull(parcel.servedElsewhere)
+        assertEquals(CarrierId.Aliexpress, parcel.activeTrackingCarrier)
+        // Without the routing note, the carrier that follows it now is the one shown, as before.
+        parcel = parcel.copy(carrier = CarrierId.Inpost, carrierData = parcel.carrierData?.copy(routing = null))
+        assertNull(parcel.servedElsewhere)
+        assertEquals(CarrierId.Aliexpress, parcel.activeTrackingCarrier)
+    }
+
+    @Test
     fun scheduledDeliveryMatchesWebApp() {
         val id = UUID.randomUUID()
         val delivered = makeParcel(id, events = listOf(event(id, TrackingStage.Delivered, "2026-08-08T12:00:00Z")))
@@ -1431,10 +1453,16 @@ class ParcelLogicTests {
         // One that lists it only as announced, without a scan of its own, has not taken it: the delivered step is still
         // the schedule's.
         val announced = handed.copy(carrierData = handed.carrierData?.copy(deliveryAnnounced = true))
-        assertEquals("parcel.deliveryAnnounced", announced.deliveryLineKey)
         assertTrue(announced.scheduledDelivery)
+        // Delivered, it waits for no partner: the line names who delivers, as on the web.
+        assertEquals("parcel.deliveryCarrier", announced.deliveryLineKey)
+        val returned = makeParcel(id, events = listOf(event(id, TrackingStage.Returned, "2026-08-08T12:00:00Z")))
+            .copy(carrier = CarrierId.Gzyl, carrierData = announced.carrierData)
+        assertEquals("parcel.deliveryCarrier", returned.deliveryLineKey)
         val moving = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-08-08T12:00:00Z")))
         assertFalse(moving.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
+        // On its way, it is still only announced there.
+        assertEquals("parcel.deliveryAnnounced", moving.copy(carrier = CarrierId.Gzyl, carrierData = announced.carrierData).deliveryLineKey)
     }
 
     // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.

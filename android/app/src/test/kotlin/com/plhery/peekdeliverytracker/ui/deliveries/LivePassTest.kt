@@ -25,12 +25,13 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -43,6 +44,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
@@ -79,6 +81,7 @@ import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.map.LocalMapSceneWatch
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
+import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.time.Duration
@@ -575,6 +578,49 @@ class LivePassTest {
         assertFalse(exists(PAGE_PROMPT))
         assertFalse(textExists("Add postcode"))
         assertFalse(hasClick(PAGE_MARKS))
+    }
+
+    // The day the carrier expected, once passed.
+
+    /** The demo with Moon lamp past the day its carrier expected, three days before the captures, and no estimate since. */
+    private fun passedParcels(change: (Parcel) -> Parcel = { it }): List<Parcel> = DemoCards.parcels().map { parcel ->
+        if (!parcel.label.startsWith("Moon lamp")) parcel else change(parcel.copy(expectedDelivery = null, expectedDeliveryPassed = "2026-10-26"))
+    }
+
+    /** The colour the text with `tag` is drawn in. */
+    private fun textColor(tag: String): Color {
+        val layouts = mutableListOf<TextLayoutResult>()
+        node(tag).fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        return layouts.first().layoutInput.style.color
+    }
+
+    @Test
+    fun thePageAloneSaysMutedWhenAParcelPastItsDayWasExpected() {
+        show(parcels = passedParcels())
+        // Not on the cards nor Next up.
+        assertFalse(textExists("Was expected"))
+
+        compose.runOnUiThread { deliveries.navigator.open(DemoCards.parcel("Moon lamp").id) }
+        settle()
+        node(PAGE_PASSED_ESTIMATE).assertTextEquals("Was expected Mon 26 Oct")
+        assertEquals(PeekColors(dark = false).secondaryText, textColor(PAGE_PASSED_ESTIMATE))
+    }
+
+    @Test
+    fun aParcelPastItsDayOnlySaysSoWhereNoDayOfItsOwnShows() {
+        val lamp = passedParcels().first { it.label.startsWith("Moon lamp") }
+        // A live estimate again: that day, and no passed one.
+        var shown by mutableStateOf(lamp.copy(expectedDelivery = DemoCards.parcel("Moon lamp").expectedDelivery))
+        card({ shown })
+        assertFalse(exists(PAGE_PASSED_ESTIMATE))
+        // Delivered: the day it came.
+        shown = DemoCards.parcel("Coffee beans").copy(expectedDeliveryPassed = "2026-10-26")
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PASSED_ESTIMATE))
+        // On its own, the page says when it was expected.
+        shown = lamp
+        compose.waitForIdle()
+        assertTrue(exists(PAGE_PASSED_ESTIMATE))
     }
 
     // The quiet note.

@@ -688,6 +688,23 @@ class Localizer(
         return deliveryWindow(parcel.carrierData?.expectedDeliveryFrom, value, now)
     }
 
+    /**
+     * The day the carrier last expected the parcel, once it has passed, for the parcel's page alone to say so, muted: "Was
+     * expected Tue 17 Nov". The server keeps the rule (`expectedDeliveryPassed`); the page shows it where it shows no
+     * estimate of its own, once the day has passed on this phone's clock too, for the week the server gives it (a copy
+     * kept on the phone, which no check updates, keeps it no longer), and not once the parcel is archived, as the web's
+     * `parcelPassedEstimate` does. Cards, widgets, share lines and the sort by delivery date leave it out.
+     */
+    fun parcelPassedEstimate(parcel: Parcel, now: Instant = AppClock.now()): String? {
+        val value = parcel.expectedDeliveryPassed ?: return null
+        if (parcel.isArchived || shownEstimate(parcel, now) != null) return null
+        val zone = ZoneId.systemDefault()
+        val day = DateParser.deliveryDate(value)?.atZone(zone)?.toLocalDate() ?: return null
+        val today = now.atZone(zone).toLocalDate()
+        if (day >= today || day < today.minusDays(PASSED_ESTIMATE_DAYS)) return null
+        return text("parcel.wasExpected", mapOf("date" to shortDate(day.atStartOfDay(zone).toInstant())))
+    }
+
     /** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
     private fun liveEstimate(parcel: Parcel, now: Instant): Pair<String, Instant>? {
         val value = parcel.expectedDelivery ?: return null
@@ -799,6 +816,9 @@ class Localizer(
     }
 
     companion object {
+        /** How many days after its expected day the parcel's page still says when the parcel was expected. */
+        private const val PASSED_ESTIMATE_DAYS = 7L
+
         /**
          * `countForm(_:in:)`: the form a count takes, as the web picks it (`translateMessage`): a whole count in Polish
          * or Russian takes CLDR's `one`, `few` or `many`, any other count `one` for exactly 1 and `other` otherwise.
@@ -872,7 +892,11 @@ class Localizer(
 /** The line a parcel's import charges read as, and whether they can still be paid online. */
 data class ImportChargesLine(val text: String, val payableOnline: Boolean)
 
-val Parcel.trackingSource: CarrierId? get() = carrierData?.activeTrackingCarrier
+/**
+ * The carrier that follows the parcel now, when it isn't the parcel's own: none while a carrier picked by hand refuses the
+ * number and another one's news fills it ([servedElsewhere]), so the parcel stays shown as the pick, as on the web.
+ */
+val Parcel.trackingSource: CarrierId? get() = if (servedElsewhere == null) carrierData?.activeTrackingCarrier else null
 val Parcel.swissPostReady: Boolean get() = carrierData?.swissPostReady == true
 
 /**

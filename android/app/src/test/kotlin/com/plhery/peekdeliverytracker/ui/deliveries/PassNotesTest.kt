@@ -51,6 +51,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
+import com.plhery.peekdeliverytracker.core.api.CarrierServedElsewhere
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
@@ -809,6 +810,24 @@ class PassNotesTest {
         compose.waitForIdle()
         assertEquals("https://example.com/track?n=1", opened()?.dataString)
         assertTrue("parcel-carrier-link" in source.actions)
+    }
+
+    @Test
+    fun aCarrierPickedByHandThatRefusesTheNumberStaysShownAndThePageSaysWhoHasNews() {
+        val vinyl = id("Kind of Blue")
+        val routing = CarrierDataRouting(servedElsewhere = CarrierServedElsewhere(picked = CarrierId.Inpost, carrier = CarrierId.Aliexpress))
+        show(demo("Kind of Blue") { it.copy(carrier = CarrierId.Inpost, carrierData = CarrierData(activeTrackingCarrier = CarrierId.Aliexpress, routing = routing)) })
+        open(vinyl)
+        val inpost = identities.displayName(CarrierId.Inpost, AppLanguage.En)
+        val aliexpress = identities.displayName(CarrierId.Aliexpress, AppLanguage.En)
+        compose.onNodeWithTag(PAGE_PICKED_CARRIER_SILENT).performScrollTo()
+        assertTrue(textExists("You picked $inpost, but only $aliexpress has news about this parcel."))
+        assertFalse(exists(PAGE_SYNC_ERROR))
+
+        // Filed back under the carrier that has news, the note no longer applies.
+        compose.runOnUiThread { source.parcels.value = source.parcels.value.map { if (it.id == vinyl) it.copy(carrier = CarrierId.Aliexpress) else it } }
+        compose.waitForIdle()
+        assertFalse(exists(PAGE_PICKED_CARRIER_SILENT))
     }
 
     @Test

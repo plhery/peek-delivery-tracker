@@ -770,7 +770,7 @@ class CarrierCatalog private constructor(
         }
         val links = carrierTrackingLinks(parcel, language)
         val data = parcel.carrierData
-        val lookupNumber = if (data?.originalCarrier != null && data.activeTrackingCarrier != null) {
+        val lookupNumber = if (data?.originalCarrier != null && parcel.trackingSource != null) {
             data.activeTrackingNumber?.nonEmpty ?: parcel.trackingNumber
         } else {
             parcel.trackingNumber

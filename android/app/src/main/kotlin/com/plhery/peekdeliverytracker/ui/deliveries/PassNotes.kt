@@ -45,6 +45,7 @@ import com.plhery.peekdeliverytracker.core.amazonShippingHistoryExpired
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.awaitedCarrier
+import com.plhery.peekdeliverytracker.core.servedElsewhere
 import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
@@ -312,6 +313,8 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
  *   `ink`, a way to change the carrier where the parcel is the reader's to change (`editable`), unless Amazon wants
  *   an account or no longer has the history. Where Amazon wants an account, the guide to the number its carrier
  *   tracks instead (`amazonGuideUrl`), 44 tall at least, in `ink` with its arrow.
+ * - Where the carrier picked by hand refuses the number and another one's news fills it (`servedElsewhere`): that only
+ *   that one has news about it, in secondary, before anything else.
  * - While the site of its carrier is down for every parcel (`shownCarrierOutage`): that, in secondary, and 44 tall at
  *   least, the carrier's page for the number in `ink` with its arrow, which `onCarrierPage` hears of, by the carrier's
  *   name. Nothing of the failed check then: it is no fault of the parcel's.
@@ -364,6 +367,18 @@ internal fun TrackingNotes(
             }
         }
         return
+    }
+    parcel.servedElsewhere?.let { served ->
+        // The carrier picked by hand refuses the number; the one that tracked it before still has news of it.
+        Text(
+            localizer.text(
+                "detail.pickedCarrierSilent",
+                mapOf("picked" to identities.displayName(parcel.carrier, language), "carrier" to identities.displayName(served, language)),
+            ),
+            Modifier.testTag(PAGE_PICKED_CARRIER_SILENT),
+            color = colors.secondaryText,
+            style = type.footnote.sfLines(),
+        )
     }
     parcel.shownCarrierOutage?.let { outage ->
         // The carrier's own site is down for every parcel, not this one's fault: its page shows the reader so.
@@ -487,5 +502,7 @@ const val PAGE_FACTS = "parcelPage.facts"
 const val PAGE_CARRIER_HINT = "parcelPage.carrierHint"
 const val PAGE_SYNC_ERROR = "parcelPage.syncError"
 const val PAGE_CARRIER_OUTAGE = "parcelPage.carrierOutage"
+const val PAGE_PICKED_CARRIER_SILENT = "parcelPage.pickedCarrierSilent"
+const val PAGE_PASSED_ESTIMATE = "parcelPage.passedEstimate"
 const val PAGE_CARRIER_OUTAGE_LINK = "parcelPage.carrierOutageLink"
 const val PAGE_AMAZON_GUIDE = "parcelPage.amazonGuide"

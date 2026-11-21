@@ -50,6 +50,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         carrier = shared.carrier,
         createdAt = shared.createdAt,
         expectedDelivery = shared.expectedDelivery,
+        expectedDeliveryPassed = shared.expectedDeliveryPassed,
         lastStatusText = shared.lastStatusText,
         lastSyncedAt = shared.lastSyncedAt,
         syncStatus = shared.syncStatus,

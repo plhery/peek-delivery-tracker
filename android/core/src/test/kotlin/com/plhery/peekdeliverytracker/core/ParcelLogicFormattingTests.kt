@@ -4,6 +4,9 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.event
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
+import com.plhery.peekdeliverytracker.core.api.PublicPackage
+import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
@@ -57,6 +60,37 @@ class ParcelLogicFormattingTests {
         parcel = parcel.copy(expectedDelivery = "2026-09-06")
         assertNull(localizer.parcelDeliveryEstimate(parcel, now))
         assertNull(localizer.parcelDeliveryWindow(parcel, now))
+    }
+
+    @Test
+    fun thePageSaysWhenAParcelPastItsDayWasExpectedForAWeek() {
+        val id = UUID.randomUUID()
+        // Noon in Zurich: the same day in any zone from UTC−11 to UTC+12.
+        val now = DateParser.date("2026-11-20T11:00:00Z")!!
+        val localizer = Localizer(AppLanguage.En)
+        val parcel = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-11-14T10:00:00Z")))
+            .copy(expectedDeliveryPassed = "2026-11-17")
+        assertEquals("Was expected Tue 17 Nov", localizer.parcelPassedEstimate(parcel, now))
+        assertEquals("Devait arriver le mar 17 nov", Localizer(AppLanguage.Fr).parcelPassedEstimate(parcel, now))
+        // A day that hasn't passed on this phone's clock yet, as a server's clock ahead of it could serve.
+        assertNull(localizer.parcelPassedEstimate(parcel.copy(expectedDeliveryPassed = "2026-11-20"), now))
+        // A week at most, for a copy kept on the phone that no check updates.
+        assertEquals("Was expected Fri 13 Nov", localizer.parcelPassedEstimate(parcel.copy(expectedDeliveryPassed = "2026-11-13"), now))
+        assertNull(localizer.parcelPassedEstimate(parcel.copy(expectedDeliveryPassed = "2026-11-12"), now))
+        // A live estimate of its own shows instead, and an archived parcel says nothing.
+        assertNull(localizer.parcelPassedEstimate(parcel.copy(expectedDelivery = "2026-11-22"), now))
+        assertNull(localizer.parcelPassedEstimate(parcel.copy(archivedAt = "2026-11-19T10:00:00Z"), now))
+        assertNull(localizer.parcelPassedEstimate(parcel.copy(expectedDeliveryPassed = null), now))
+        // A link's parcel keeps the day.
+        val shared = Parcel(
+            shared = PublicPackage(
+                id = id, trackingNumber = parcel.trackingNumber, label = "", carrier = parcel.carrier, createdAt = parcel.createdAt,
+                syncStatus = SyncStatus.Ok, carrierData = PublicPackageCarrierData(), notificationsMuted = false,
+                trackingEvents = parcel.trackingEvents, expectedDeliveryPassed = "2026-11-17",
+            ),
+        )
+        assertEquals("2026-11-17", shared.expectedDeliveryPassed)
+        assertEquals("Was expected Tue 17 Nov", localizer.parcelPassedEstimate(shared, now))
     }
 
     @Test

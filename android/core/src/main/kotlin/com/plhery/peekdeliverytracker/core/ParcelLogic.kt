@@ -377,6 +377,13 @@ fun Parcel.trackingNumberLabel(entry: ParcelTrackingNumber, localizer: Localizer
 val Parcel.displayedCarrier: CarrierId get() = carrierData?.originalCarrier ?: activeTrackingCarrier
 
 /**
+ * The carrier whose news fills a parcel the reader filed under one that refuses its number. The parcel stays filed and
+ * shown under the reader's carrier, and its page says only this one has news of it (`detail.pickedCarrierSilent`).
+ */
+val Parcel.servedElsewhere: CarrierId?
+    get() = carrierData?.routing?.servedElsewhere?.takeIf { it.picked == carrier }?.carrier
+
+/**
  * The carrier the followed one names as delivering, while the parcel is not followed there yet, and the
  * number it gave. Once it is followed, the parcel has been handed over and `trackingSource` says so.
  */
@@ -397,10 +404,16 @@ val Parcel.deliveringCarrier: CarrierId?
 
 /**
  * The words of the card's line on who delivers ([deliveringCarrier]): announced there and not received yet while the
- * carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
+ * carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web. A parcel
+ * delivered or returned waits for no partner: a carrier that writes its delivered step on a schedule (GZYL) keeps the
+ * flag after delivery only to say so ([scheduledDelivery]).
  */
 val Parcel.deliveryLineKey: String
-    get() = if (deliveryOnlyAnnounced) "parcel.deliveryAnnounced" else "parcel.deliveryCarrier"
+    get() = if (deliveryOnlyAnnounced && currentStage != TrackingStage.Delivered && currentStage != TrackingStage.Returned) {
+        "parcel.deliveryAnnounced"
+    } else {
+        "parcel.deliveryCarrier"
+    }
 
 /**
  * The carrier its carrier names as delivering lists the parcel without a scan of its own: announced there, and not

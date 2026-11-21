@@ -2172,6 +2172,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "DPD Polen (DPD Polska) Sendungsverfolgung: Status & Pickup",
+      "name": "DPD Poland",
+      "color": "#dc0032"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-sendungsverfolgung",
@@ -3036,6 +3044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Packeta\u00a0: numéro Z, statuts, relais et contact",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "Suivi DPD Pologne (DPD Polska)\u00a0: statuts et points Pickup",
+      "name": "DPD Poland",
+      "color": "#dc0032"
     },
     {
       "id": "4px",
@@ -3960,6 +3976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "Tracking DPD Polonia (DPD Polska): stati e punti Pickup",
+      "name": "DPD Poland",
+      "color": "#dc0032"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-traccia-pacco",
@@ -4760,6 +4784,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Packeta: código Z, estados y puntos de recogida",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "Seguimiento DPD Polonia (DPD Polska): estados y Pickup",
+      "name": "DPD Poland",
+      "color": "#dc0032"
     },
     {
       "id": "4px",
@@ -5602,6 +5634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Packeta: código Z, estados e levantamento",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "Seguimento DPD Polónia (DPD Polska): estados e DPD Pickup",
+      "name": "DPD Poland",
+      "color": "#dc0032"
     },
     {
       "id": "4px",

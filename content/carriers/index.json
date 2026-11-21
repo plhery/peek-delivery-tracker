@@ -23,7 +23,7 @@
   { "id": "mrw", "catalog": "mrw", "name": "MRW", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "ctt", "catalog": "ctt", "name": "CTT", "languages": ["en", "pt", "es", "fr", "de", "it", "pl"] },
   { "id": "packeta", "catalog": "packeta", "name": "Packeta", "languages": ["en", "pl", "cs", "sk", "hu", "ro", "de", "fr", "es", "it", "pt"] },
-  { "id": "dpd-pl", "catalog": "dpd-pl", "name": "DPD Poland", "languages": ["en", "pl"] },
+  { "id": "dpd-pl", "catalog": "dpd-pl", "name": "DPD Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
   { "id": "4px", "catalog": "four-px", "name": "4PX", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "swiss-post", "catalog": "swiss-post", "name": "Swiss Post", "languages": ["en", "de", "fr", "it", "pt", "es", "pl"] },
   { "id": "ctt-express", "catalog": "ctt-express", "name": "CTT Express", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },

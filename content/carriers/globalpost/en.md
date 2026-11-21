@@ -14,11 +14,11 @@ Peek recognises GlobalPost's current numbers by their shape: GP, four letters fo
 
 | Number (invented) | What it is |
 | --- | --- |
-| `GPXXXX0000000000US` | GP, four letters, ten digits and US: a GlobalPost parcel sent from the United States. |
-| `GPXXXX0000000000GB` | The same, ending in GB: sent from the United Kingdom. |
-| `SDC000000000000000` | SDC and 15 digits: an older GlobalPost label. Peek doesn't name a carrier from the number alone: choose GlobalPost with "Change". |
-| `GPXXXX000000000US` | Only nine digits: Peek recognises no carrier. Check for a missing digit. |
-| `LZ000000005US` | A US postal number, not GlobalPost's shape: Peek names [USPS](carrier:usps). If you choose GlobalPost for it, Peek says it "doesn’t issue numbers like this one". |
+| `GPECON4829105736US` | GP, four letters, ten digits and US: a GlobalPost parcel sent from the United States. |
+| `GPSTND4829105736GB` | The same, ending in GB: sent from the United Kingdom. |
+| `SDC482910573649182` | SDC and 15 digits: an older GlobalPost label. Peek doesn't name a carrier from the number alone: choose GlobalPost with "Change". |
+| `GPECON482910573US` | Only nine digits: Peek recognises no carrier. Check for a missing digit. |
+| `LZ482910576US` | A US postal number, not GlobalPost's shape: Peek names [USPS](carrier:usps). If you choose GlobalPost for it, Peek says it "doesn’t issue numbers like this one". |
 
 Peek ignores spaces, dashes and lower case.
 
@@ -69,11 +69,11 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 **Missed delivery and pickup.** The company delivering in your country makes the attempts and keeps a missed parcel: ask it, with its number. See [missed delivery](guide:missed-delivery), [uncollected parcels](guide:uncollected-parcel) and the posts' pages: [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post), [USPS](carrier:usps).
 
-**Customs.** On Economy and Standard, the duties and taxes are yours to pay ("Delivered Duties Unpaid"). In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. GlobalPost's service pages don't say how the €2 fee is charged: ask the seller whether your price included it. Elsewhere, see [parcels held at customs](guide:customs).
+**Customs.** On Economy and Standard, the duties and taxes are yours to pay ("Delivered Duties Unpaid"). In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. In the EU's VAT area, import VAT is due as well, unless it was charged at purchase through IOSS. Northern Ireland counts as EU territory for customs and VAT on goods, the European Commission says. GlobalPost's service pages don't say how the €2 fee is charged: ask the seller whether your price included it. Elsewhere, see [parcels held at customs](guide:customs).
 
 ## GlobalPost parcel not updating, lost or returned
 
-**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for GlobalPost" and keeps checking. With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
+**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for GlobalPost" and keeps checking. If GlobalPost still doesn't know the number after two days and no tracking service finds it either, Peek says: "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
 
 **No update for days.** GlobalPost says updates may take time on international shipments, and that weather, holidays, strikes and customs can delay them. On Economy, tracking ends after customs in your country. When a parcel still on its way has had no new scan for four days, Peek flags it ("No tracking update for four days") with a note that parcels often go quiet on long flights, at customs or over a weekend. The note links no GlobalPost help page; once Peek follows the parcel at the delivery company, it links that company's, if Peek knows one. See [why tracking stops updating](guide:tracking-not-updating).
 
@@ -85,7 +85,7 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 ## GlobalPost customer service and contact
 
-As read on 17 November 2026, GlobalPost's customer support answers on info@goglobalpost.com and on (888) 899-1255, Monday to Friday from 6 am to 6 pm Pacific time. Its [contact form](https://www.goglobalpost.com/contact-support/) takes recipients too: choose "Recipient" and give the tracking number. GlobalPost says its support team sees the same information as its tracking page.
+GlobalPost's customer support answers on info@goglobalpost.com and on (888) 899-1255, Monday to Friday from 6 am to 6 pm Pacific time. Its [contact form](https://www.goglobalpost.com/contact-support/) takes recipients too: choose "Recipient" and give the tracking number. GlobalPost says its support team sees the same information as its tracking page.
 
 For a parcel that hasn't come, GlobalPost sends you to the seller first: the seller booked the delivery and files any claim. A parcel from China sent with China Post is not a GlobalPost shipment, GlobalPost says: ask the sender.
 
@@ -99,7 +99,7 @@ GlobalPost's times carry no time zone: Peek reads each scan on the clock of its 
 
 When GlobalPost names a delivery company Peek knows by that name, the parcel card says "Delivery with" that company and lists its number after the GP number, and Peek asks that company too. While that company has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. With a number but no company Peek knows, Peek asks your country's post for a postal number, or the one carrier the number's shape points to. Once that company has a scan at least as recent as GlobalPost's newest, Peek follows the parcel there and keeps GlobalPost's history.
 
-While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open GlobalPost's tracker in a browser) from 6 a.m. local time on the day the parcel goes out for delivery, while GlobalPost's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact GlobalPost or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open GlobalPost's tracker in a browser) from 6 a.m. local time on the day the parcel goes out for delivery, while GlobalPost's own tracker answers (through tracking services, up to every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. When Peek follows the parcel with the delivery company, it follows that company's pace. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact GlobalPost or the seller for you.
 
 ## Questions about GlobalPost tracking
 
@@ -124,9 +124,9 @@ Yes. GlobalPost is part of Auctane and is sold through shipping platforms such a
 Email info@goglobalpost.com or call (888) 899-1255, weekdays from 6 am to 6 pm Pacific time. If the parcel hasn't arrived 30 days after shipping, GlobalPost asks you to go to the seller first.
 
 :::sources
-- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims, no claims for undeliverable parcels (read 17 November 2026)
+- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims, no claims for undeliverable parcels
 - [GlobalPost: Standard](https://www.goglobalpost.com/standard/) – services compared: tracking, duties, transit times
-- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – email, phone, hours, form, China Post (read 17 November 2026)
+- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – email, phone, hours, form, China Post
 - [GlobalPost: Home](https://www.goglobalpost.com/) – countries, shipments delivered
 - [GlobalPost: Track your package](https://www.goglobalpost.com/tracking/) – the tracker
 - [GlobalPost: Terms and Conditions](https://www.goglobalpost.com/conditions/) – shipping centres, transit time as an estimate

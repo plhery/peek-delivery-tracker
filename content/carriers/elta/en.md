@@ -10,13 +10,13 @@ ELTA Hellenic Post (ΕΛΤΑ) is Greece's national post, and ELTA Courier is now
 
 ## ELTA tracking number
 
-ELTA's tracking numbers have 13 characters: [two Latin letters, nine digits and two Latin letters](guide:tracking-number-formats). Items posted in Greece end in `GR`; ELTA's own example is `PP123456785GR`. The last of the nine digits is a check digit, so one mistyped digit usually makes the number invalid. ELTA Courier numbers mostly use the same layout, printed at the top right of the courier voucher. Simple tracked letters, whose numbers start with `U`, `L` or `TR` (`LL` within Greece), are left at the address without a signature.
+ELTA's tracking numbers have 13 characters: [two Latin letters, nine digits and two Latin letters](guide:tracking-number-formats). Items posted in Greece end in `GR`; ELTA's own example is `PP123456785GR`, a sample Peek refuses. The last of the nine digits is a check digit, so one mistyped digit usually makes the number invalid. ELTA Courier numbers mostly use the same layout, printed at the top right of the courier voucher. Simple tracked letters, whose numbers start with `U`, `L` or `TR` (`LL` within Greece), are left at the address without a signature.
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RR000000005GR` | A postal item from Greece. Spaces and lower case don't matter (`RR 123 456 785 GR`). |
-| `123456789012` | Some items from Germany carry a 12-digit barcode instead, which ELTA's tracker also accepts. |
-| `RR000000005CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
+| `RR482910576GR` | A postal item from Greece. Spaces and lower case don't matter (`RR 482 910 576 GR`). |
+| `482910573649` | Some items from Germany carry a 12-digit barcode instead, which ELTA's tracker also accepts. |
+| `RR482910576CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
 
 Lost the number? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -63,7 +63,7 @@ ELTA delivers a domestic parcel to your home, to an ELTA store (you get an SMS o
 
 If tracking stops moving for days, see [tracking that isn't updating](guide:tracking-not-updating) first.
 
-**Customs.** For parcels from outside the EU, duties are paid only at an ELTA store when you collect. ELTA sends a notice that lists the charges and the post office to collect from. A cleared item waits 20 days at the post office from the notice; you, or someone you authorise, bring the notice and the ID of whoever collects (ID card, passport or driving licence), and pay the charges there. After 20 days it goes back to ELTA's customs centre, where it is declared unclaimed or, in some cases, returned to the sender. If you dispute the charges, don't collect: file a reasoned request at the store with proof of value. More in [parcels held at customs](guide:customs).
+**Customs.** For parcels from outside the EU, duties are paid only at an ELTA store when you collect. In Greece, an online order shipped from outside the EU and worth up to €150 carries a temporary €3 customs duty per category of items since 1 July 2026, and since 1 November 2026 distance sales of any value also carry a €2 Union handling fee per category of items. Greek import VAT is added, except on Mount Athos, which is outside the EU VAT area, unless the VAT was paid at purchase through IOSS. ELTA sends a notice that lists the charges and the post office to collect from. A cleared item waits 20 days at the post office from the notice; you, or someone you authorise, bring the notice and the ID of whoever collects (ID card, passport or driving licence), and pay the charges there. After 20 days it goes back to ELTA's customs centre, where it is declared unclaimed or, in some cases, returned to the sender. If you dispute the charges, don't collect: file a reasoned request at the store with proof of value. More in [parcels held at customs](guide:customs).
 
 **Lost.** The sender or recipient can file a search request at an ELTA store, with ID and the receipt of posting, up to six months after posting. It covers fully tracked items only. ELTA answers by registered letter within 8 weeks (4 weeks for some items abroad).
 
@@ -73,7 +73,7 @@ If tracking stops moving for days, see [tracking that isn't updating](guide:trac
 
 ## ELTA contact number and email
 
-ELTA's channels, as elta.gr and elta-courier.gr listed them in November 2026. ELTA's tracking site gives the call centre for questions about an item; ELTA Courier gives its own line for courier tracking help.
+ELTA's channels, as elta.gr and elta-courier.gr list them. ELTA's tracking site gives the call centre for questions about an item; ELTA Courier gives its own line for courier tracking help.
 
 - **Call centre:** 800-11-82000 from a Greek landline, 212-0000-800 from a mobile, +30 212-0000-800 from abroad; Monday to Friday 08:00 to 18:00.
 - **New service points:** 212 00 00 700, a line only for questions about ELTA's new service points, Monday to Friday 08:00 to 18:00, at local call rates.
@@ -90,7 +90,7 @@ For a number ending `GR` with a valid check digit, [Peek](/) asks ELTA (and [Chr
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Greece (or names no destination and you're in Greece), Peek also asks ELTA with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at ELTA straight away, pick "ELTA Hellenic Post" with "Change".
 
-ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. Times show in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
+ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of a place the history names, Greek time for a history in Greece, and lists ELTA's own history with ELTA's English wording. Times show in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
 
 ## Questions about ELTA tracking
 
@@ -125,6 +125,8 @@ Use the store finder on elta.gr; ELTA Courier stores are on elta-courier.gr's ne
 - [ELTA Courier: Τηλεφωνική εξυπηρέτηση](https://www.elta-courier.gr/tilefwniki_eksypiresisi) – phone line charge, tracking help hours, online only at weekends and on holidays
 - [ELTA: PostBox](https://www.elta.gr/paralabi-antikeimenon-apo-tin-isonexupni-thuridasin-elta) – PIN by SMS or Viber, 48 hours, opening hours, no duties, items from abroad, size and weight, no extra charge, the store's PostBox after a missed delivery
 - [ELTA: Εκτελωνισμός](https://www.elta.gr/ektelonismos-2) – customs clearance, notice with the charges, 20 days, ID, an authorised representative, unclaimed items, disputes
+- [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – the €3 duty, the €2 fee on distance sales, import VAT through IOSS
+- [European Commission: Territorial scope of VAT and customs](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Mount Athos inside the EU customs territory but outside the EU VAT area
 - [ELTA: Δέματα Εσωτερικού](https://www.elta.gr/demata-esoterikou) – 3 working days, store, PostBox or home delivery
 - [ELTA: Υπηρεσίες Ταχυμεταφορών](https://www.elta.gr/ypiresia-esoterikou-porta-porta) – door-to-door courier service
 - [ELTA: Αίτηση Αναζήτησης](https://www.elta.gr/aitisi-anazitisis) – search request conditions, six months, 8 weeks

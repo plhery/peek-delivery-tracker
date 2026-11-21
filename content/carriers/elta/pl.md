@@ -26,7 +26,7 @@ Zgubiłeś numer? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-nu
 
 Wyszukiwarka ELTA wyświetla każdy skan po grecku lub po angielsku (przełącznik języka) z datą, godziną i nazwą jednostki (urzędu pocztowego lub agencji kurierskiej). Oto angielskie komunikaty w typowej kolejności:
 
-| Status ELTA | Co to oznacza dla Ciebie | Peek pokazuje |
+| Status ELTA | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Label printed by customer` | Nadawca wydrukował etykietę; ELTA nie przyjęła jeszcze przesyłki. | „Zarejestrowana” |
 | `Item deposited at ELTA` | Nadawca nadał przesyłkę w urzędzie pocztowym wymienionym w skanie. | „Przyjęta przez przewoźnika” |
@@ -34,7 +34,7 @@ Wyszukiwarka ELTA wyświetla każdy skan po grecku lub po angielsku (przełączn
 | `Arrival in` | Nadeszła do urzędu pocztowego lub agencji kurierskiej wymienionej po kilku spacjach (przez odstęp napis bywa pozornie urwany). | „W transporcie” |
 | `Arrival at the airport` | Dla przesyłek opuszczających Grecję: dotarcie do węzła ELTA na lotnisku w Atenach. | „W transporcie” |
 | `For dispatch abroad` | W węźle na lotnisku w Atenach, gotowa do wylotu z Grecji. | „W transporcie” |
-| `With Courier for delivery` | Wydana kurierowi do doręczenia pod Twój adres. | „W doręczeniu” |
+| `With Courier for delivery` | Wydana kurierowi do doręczenia pod twój adres. | „W doręczeniu” |
 | `Notification of attempted delivery` | Nie udało się doręczyć: zostawiono awizo, a w tej samej minucie osobny wpis podaje powód. | „Próba doręczenia” |
 | `ADDRESSEE NOT AVAILABLE AT TIME OF DELIVERY` | Nikogo nie zastano pod adresem w chwili doręczenia. | „Próba doręczenia” |
 | `ADDRESSEE REQUEST OWN PICK-UP` | Próba zakończona, ponieważ odbierzesz paczkę osobiście w placówce. | „Próba doręczenia” |
@@ -65,7 +65,7 @@ Gdy historia nie zmienia się od kilku dni, sprawdź najpierw [dlaczego śledzen
 
 **Zagubiona.** Nadawca lub odbiorca może złożyć reklamację poszukiwawczą w placówce ELTA z dokumentem tożsamości i dowodem nadania w ciągu sześciu miesięcy od nadania (tylko dla przesyłek z pełnym śledzeniem). ELTA odpowiada listem poleconym w ciągu 8 tygodni (4 tygodni przy wybranych przesyłkach zagranicznych) ([zagubiona paczka](guide:lost-parcel)).
 
-**Uszkodzona paczka kurierska.** Przyjmij ją z zastrzeżeniem i zgłoś szkodę w ciągu jednego dnia roboczego przez formularz kontaktowy ELTA Courier lub w placówce — bez tego ELTA nie ponosi odpowiedzialności. Wniosek odszkodowawczy z listem przewozowym, fakturą oraz zdjęciami zawartości i opakowania wyślij na `apozimiwseis@elta-courier.gr`; odszkodowanie przysługuje nadawcy albo Tobie za jego pisemnym zrzeczeniem (dział odszkodowań: `+30 210-6073066`).
+**Uszkodzona paczka kurierska.** Przyjmij ją z zastrzeżeniem i zgłoś szkodę w ciągu jednego dnia roboczego przez formularz kontaktowy ELTA Courier lub w placówce — bez tego ELTA nie ponosi odpowiedzialności. Wniosek odszkodowawczy z listem przewozowym, fakturą oraz zdjęciami zawartości i opakowania wyślij na `apozimiwseis@elta-courier.gr`; odszkodowanie przysługuje nadawcy albo tobie za jego pisemnym zrzeczeniem (dział odszkodowań: `+30 210-6073066`).
 
 **Skargi.** ELTA ma 15 dni na odpowiedź; w razie niezadowolenia poproś pisemnie Dział Obsługi Klienta o skierowanie sprawy do Komisji Rozwiązywania Sporów.
 
@@ -88,7 +88,7 @@ Dla numeru zakończonego na `GR` z poprawną cyfrą kontrolną [Peek](/) od razu
 
 Zagraniczną przesyłkę pocztową Peek śledzi najpierw u poczty nadania; gdy wskaże ona Grecję jako kraj docelowy (albo nie poda celu, a jesteś w Grecji), Peek odpytuje pod tym samym numerem również ELTA i przełącza na nią po pojawieniu się nowego skanu, zachowując wcześniejszą historię (możesz też od razu wybrać ELTA przez „Zmień”).
 
-ELTA zwraca datę i godzinę bez strefy czasowej: Peek odczytuje je według zegara miejsca wskazanego w historii (czas grecki `Europe/Athens` dla historii w Grecji), przelicza na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”), pokazuje angielskie opisy ELTA oraz urząd lub agencję odbioru, bez przewidywanej daty dostawy ani wagi (ELTA ich nie podaje). Po czterech dniach w drodze bez zmian Peek pokazuje „Brak aktualizacji od czterech dni”. Sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz nawet co 2 minuty od 6:00 (czasu greckiego) w dniu „W doręczeniu”; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch cichych dniach — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”).
+ELTA zwraca datę i godzinę bez strefy czasowej: Peek odczytuje je według zegara miejsca wskazanego w historii (czas grecki `Europe/Athens` dla historii w Grecji), przelicza na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”), pokazuje angielskie opisy ELTA oraz urząd lub agencję odbioru, bez przewidywanej daty dostawy ani wagi (ELTA ich nie podaje). Po czterech dniach w drodze bez zmian Peek pokazuje dzień ostatniego wpisu („Brak aktualizacji od pon 12 paź”). Sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz nawet co 2 minuty od 6:00 (czasu greckiego) w dniu „W doręczeniu”; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch cichych dniach — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”).
 
 ## Najczęstsze pytania o śledzenie ELTA
 

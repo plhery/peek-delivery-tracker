@@ -221,8 +221,9 @@ describe('shipment details', () => {
     expect(note.getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
     view.unmount();
 
-    show({ events: [...quiet] });
-    expect(document.querySelector('.detail__quiet')).toHaveTextContent('Peek keeps asking Heppner');
+    // YunExpress has no help page, as the parcel page's test and the apps' tests take it.
+    show({ carrier: 'yunexpress', trackingNumber: 'YT0000000000000001', events: [...quiet] });
+    expect(document.querySelector('.detail__quiet')).toHaveTextContent('Peek keeps asking YunExpress');
     expect(within(document.querySelector<HTMLElement>('.detail__quiet')!).queryByRole('link')).toBeNull();
   });
 

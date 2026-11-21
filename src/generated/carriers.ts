@@ -2260,6 +2260,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "gofo-italy-sendungsverfolgung",
+      "title": "GOFO Italy Sendungsverfolgung: GFIT-Nummern und Status",
+      "name": "GOFO Italy",
+      "color": "#fc4c02"
+    },
+    {
       "id": "speedpak",
       "catalog": "speedpak",
       "slug": "speedpak-sendungsverfolgung",
@@ -3219,6 +3227,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "gofo-france-suivi",
       "title": "GOFO France suivi colis\u00a0: numéros GFFR, statuts et aide",
       "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "suivi-gofo-italy",
+      "title": "Suivi GOFO Italy\u00a0: numéros GFIT, statuts et réclamations",
+      "name": "GOFO Italy",
       "color": "#fc4c02"
     },
     {
@@ -5114,6 +5130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "seguimiento-gofo-italy",
+      "title": "Seguimiento GOFO Italy: códigos GFIT, estados y reclamos",
+      "name": "GOFO Italy",
+      "color": "#fc4c02"
+    },
+    {
       "id": "speedpak",
       "catalog": "speedpak",
       "slug": "speedpak-seguimiento",
@@ -6028,6 +6052,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "rastreio-gofo-italy",
+      "title": "Rastreio GOFO Italy: códigos GFIT, estados e reclamações",
+      "name": "GOFO Italy",
+      "color": "#fc4c02"
+    },
+    {
       "id": "asendia",
       "catalog": "asendia",
       "slug": "asendia-rastreio",
@@ -6933,6 +6965,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "gofo-france-sledzenie",
       "title": "Śledzenie GOFO France: numery GFFR, statusy i pomoc",
       "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "sledzenie-gofo-italy",
+      "title": "Śledzenie GOFO Italy: numery GFIT, statusy i reklamacje",
+      "name": "GOFO Italy",
       "color": "#fc4c02"
     },
     {

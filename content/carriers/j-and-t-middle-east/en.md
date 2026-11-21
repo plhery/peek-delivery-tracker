@@ -39,7 +39,7 @@ J&T's tracker lists a parcel's scans newest first. Each scan has a short heading
 | "Returned to sender" | On its way back to the sender, or back there. |
 | "Waiting for J&T Express Middle East" | J&T doesn't list the number yet, or lists it with no scans. That's the label; if that lasts two days and nothing else has answered for the number, Peek asks you to check it instead. |
 
-A heading Peek can't place reads as "In transit", unless the parcel was already out for delivery or at a later step, such as an attempt, a delivery or a return: then it stays at that step. Either way, you see J&T's words in the history.
+A heading Peek can't place leaves the parcel at the step it had reached; you still see J&T's words in the history.
 
 ## J&T delivery in Saudi Arabia, the UAE and Kuwait
 
@@ -79,7 +79,7 @@ The shop chose J&T, so for an online order the shop is your first contact.
 
 ## J&T Express customer service in Saudi Arabia, the UAE and Kuwait
 
-As read on [J&T's contact page](https://www.jtexpress.me/KSA/contact-us) on 9 November 2026:
+As listed on [J&T's contact page](https://www.jtexpress.me/KSA/contact-us):
 
 | Country | Hotline | Email | WhatsApp |
 | --- | --- | --- | --- |
@@ -88,7 +88,7 @@ As read on [J&T's contact page](https://www.jtexpress.me/KSA/contact-us) on 9 No
 | Kuwait | +965 65850830 | cs.kw@jtexpress.ae | +965 66227312 |
 
 - **Another Saudi number:** 920051211, at the foot of J&T's Saudi pages. The contact page gives no opening hours.
-- **UAE and Kuwait:** a notice at the foot of J&T's UAE terms page says J&T UAE's phone system is being upgraded and gives 600566122 for the UAE and +965 65850830 for Kuwait in the meantime. It gives working hours of 9 a.m. to 5 p.m. GMT+3 (10 a.m. to 6 p.m. UAE time), Monday to Friday. If you can't get through on those numbers, write to cs@jtexpress.ae.
+- **UAE and Kuwait:** J&T's UAE terms page lists 600566122 for the UAE and +965 65850830 for Kuwait.
 - **Escalations:** if customer service hasn't solved your complaint, or to report fraud or a safety concern, write to escalations@jtexpress.sa.com. J&T keeps that address for escalations, not for tracking questions.
 - **Offices:** JNT Express KSA LLC, 5/F, Building No. 3.05, King Abdullah Financial Center, Riyadh. In the UAE, J&T Express Couriers Services LLC, Office 309, Emaar Business Park Building 1, Dubai.
 
@@ -98,7 +98,7 @@ Paste the `JTE` number in [Peek](/): it names J&T Express Middle East at once ("
 
 Peek asks J&T's own tracker, through the same lookup its tracking page makes, in English. It shows each scan's heading, its exact time and the branch's town and province, and on a very long history it keeps the newest 100 scans. It leaves out the sentence under each heading, the courier's name and contact details, who signed for the parcel and the proof of delivery. J&T gives no expected delivery day or weight, so Peek shows none. Until J&T lists a scan, Peek keeps asking. The parcel first reads "Waiting for J&T Express Middle East"; if J&T still doesn't know the number two days later, or still lists it with no scans, and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. When J&T's tracker asks for a captcha, Peek doesn't solve it: it tries J&T again later and asks other tracking services in the meantime.
 
-Peek checks J&T up to every 10 minutes while you follow the parcel, or every 2 minutes from 6 a.m. Saudi time (7 a.m. in the UAE) on the day J&T scans it out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks J&T up to every 10 minutes, or every 2 minutes from 6 a.m. Saudi time (7 a.m. in the UAE) on the day J&T scans it out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
 
 ## Questions about J&T Express tracking in the Middle East
 
@@ -120,7 +120,7 @@ Under J&T's published terms, it tries up to three times, between 9:00 and 22:00.
 
 ### How do I contact J&T Express in the UAE?
 
-Call 600566122, write to cs@jtexpress.ae or send a WhatsApp message to +971 526477476. J&T's UAE terms page gives working hours of 9 a.m. to 5 p.m. GMT+3 (10 a.m. to 6 p.m. UAE time), Monday to Friday. In Saudi Arabia, call 800-1010-111 or write to cs@jtexpress.sa.com; in Kuwait, call +965 65850830 or write to cs.kw@jtexpress.ae.
+Call 600566122, write to cs@jtexpress.ae or send a WhatsApp message to +971 526477476. In Saudi Arabia, call 800-1010-111 or write to cs@jtexpress.sa.com; in Kuwait, call +965 65850830 or write to cs.kw@jtexpress.ae.
 
 :::sources
 - [J&T Express Middle East: Track your shipment](https://www.jtexpress.me/KSA/trackOrder) – J&T's tracking page, country sections
@@ -129,7 +129,7 @@ Call 600566122, write to cs@jtexpress.ae or send a WhatsApp message to +971 5264
 - [J&T Express Middle East: Shipping Information (UAE)](https://www.jtexpress.me/UAE/shipping-information) – first attempt in normal and remote areas; UAE company and office
 - [J&T Express Middle East: Shipping Information (Kuwait)](https://www.jtexpress.me/KW/shipping-information) – the same table as Saudi Arabia, prices in riyals
 - [J&T Express Middle East: Terms of Use](https://www.jtexpress.me/KSA/terms-conditions) – JNT Express KSA LLC, delivery hours, three attempts, 7 working days, 2 more working days in holiday periods, collection times, cash on delivery and refusal, delivery to the address, customs and taxes, inspection, claims and the 200 SAR cap; Riyadh office
-- [J&T Express Middle East: Terms of Use (UAE)](https://www.jtexpress.me/UAE/terms-conditions) – the notice on J&T UAE's phone system, the numbers for the UAE and Kuwait, cs@jtexpress.ae, working hours
+- [J&T Express Middle East: Terms of Use (UAE)](https://www.jtexpress.me/UAE/terms-conditions) – the numbers for the UAE and Kuwait
 - [J&T Express Middle East: Compensation Policy (Saudi Arabia, PDF, Arabic)](https://www.jtexpress.me/%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B9%D9%88%D9%8A%D8%B6%20%D9%84%D8%B4%D8%B1%D9%83%D8%A9%20%D8%AC%D9%8A%20%D8%A7%D9%86%D8%AF%20%D8%AA%D9%8A.pdf) – who may claim, 30 days, claim@jtexpress.sa.com, documents, 7 and 16 days, 200 SAR uninsured, check after 7 working days without an update, responsibility up to the delivery the tracker shows, wrong delivery, fragile items, liquids, seized parcels, commercial registration
 - [J&T Express Middle East: About Us](https://www.jtexpress.me/KSA/about-us) – founded in Indonesia in 2015
 - [J&T Express Middle East: Import Express](https://www.jtexpress.me/KSA/expressShipping/internationalExpress/importExpress) – door to door from China to Saudi Arabia

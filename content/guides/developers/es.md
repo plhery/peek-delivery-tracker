@@ -37,7 +37,7 @@ Desde fuera, la única vía de entrada es el inicio de sesión de un asistente. 
 
 Con Universal Parcel Scraper, el motor que lee a los transportistas para Peek. Averigua el transportista, lee la propia web de ese transportista, recurre a localizadores universales solo cuando no queda otra, y devuelve el mismo JSON para todos los transportistas, con cada escaneo clasificado en una etapa de entrega común.
 
-Su README cuenta más de 4500 transportistas, gracias a más de 800 adaptadores específicos y a servicios de respaldo universales. En su benchmark de 100 transportistas elegidos para compradores en Europa, los adaptadores devuelven un historial para 91, o para 95 con todos los servicios de respaldo, frente a 73 del mejor agregador por sí solo.
+Su README cuenta más de 4500 transportistas, gracias a más de 800 adaptadores específicos y a servicios de respaldo universales. En su benchmark de 100 transportistas elegidos para compradores en Europa, los adaptadores devuelven un historial para 92, o para 95 con todos los servicios de respaldo, frente a 73 del mejor agregador por sí solo.
 
 Además de la línea de comandos, funciona de tres maneras:
 

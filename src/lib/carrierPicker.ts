@@ -62,10 +62,14 @@ function matchCarrier(
   const name = foldForSearch(carrier.name);
   const length = Array.from(folded).length;
   const lit = (start: number, score: number) => ({ highlight: [start, start + length] as const, score });
-  if (name.startsWith(folded)) return lit(0, 0);
+  // A query that is the name's whole first word, punctuation aside, comes before one that only
+  // starts it: "jt" lists J&T before JTL Express.
+  if (name.startsWith(folded)) return lit(0, LETTER_OR_DIGIT.test(Array.from(name)[length] ?? '') ? 0.25 : 0);
   const word = wordStart(name, folded);
   if (word > 0) return lit(word, 1);
-  if (squeezed && compact(carrier.name).startsWith(squeezed)) return { score: 1.5 };
+  if (squeezed && compact(carrier.name).startsWith(squeezed)) {
+    return { score: compact(name.split(/\s/u)[0] ?? '') === squeezed ? 0 : 1.5 };
+  }
   for (const alias of carrier.aliases) {
     if (wordStart(foldForSearch(alias), folded) >= 0 || (squeezed && compact(alias).startsWith(squeezed))) {
       return { alias, score: 2 };

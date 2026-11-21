@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { readBodyBytes, withErrorCode } from '../api';
-import { siteName } from '../siteSettings';
+import { assistantServerTitle, siteName } from '../siteSettings';
 import type { SupabaseServiceClient } from '../supabase';
 import type { JsonObject } from '../types';
 import { assistantsOpenToAccount } from './access';
@@ -35,7 +35,7 @@ export function protectedResourceMetadata(settings: AssistantSettings) {
     authorization_servers: [settings.issuer],
     scopes_supported: [...SCOPES],
     bearer_methods_supported: ['header'],
-    resource_name: siteName(),
+    resource_name: assistantServerTitle(),
   };
 }
 

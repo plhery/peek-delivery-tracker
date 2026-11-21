@@ -27,7 +27,7 @@ import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
 import { holdsPostcodeCountry, savePostcodeCountry } from '../postcodeCountry';
 import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
-import { siteName } from '../siteSettings';
+import { assistantServerTitle } from '../siteSettings';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import { isRecord, type JsonObject } from '../types';
 import { packageCarrierValues, packageLabel } from '../validation';
@@ -433,10 +433,11 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   const amazonGuideLink = () => (guide ??= amazonGuide(service, caller.userId));
   const english = amazonGuideUrl();
   const withAmazonGuide = async (text: string) => (english && text.includes(english) ? text.replace(english, await amazonGuideLink() ?? english) : text);
-  // Clients list the server under the site's name (SITE_NAME); the tools' own words say Peek, as the app's do.
-  const site = siteName();
+  // Clients list the server by the site's name and what it does ("Peek Parcel Tracker"); the tools' own words say
+  // Peek, as the app's do.
+  const title = assistantServerTitle();
   const server = new McpServer(
-    { name: serverName(site), title: site, version: '1.0.0' },
+    { name: serverName(title), title, version: '1.0.0' },
     {
       // Peek's tools never change while it runs, and `/mcp` refuses the stream that would say so (mcp.ts): a client told
       // the list may change opens `subscriptions/listen` and retries it.

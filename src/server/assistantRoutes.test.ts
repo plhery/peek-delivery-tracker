@@ -271,7 +271,7 @@ describe('the MCP endpoint', () => {
     expect(started.status).toBe(200);
     const initialized = (await rpc(started)).result!;
     // The tool list never changes, so a client has no stream to open for it: Peek refuses `subscriptions/listen`.
-    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek', title: 'Peek', version: '1.0.0' }, capabilities: { tools: { listChanged: false } } });
+    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek-parcel-tracker', title: 'Peek Parcel Tracker', version: '1.0.0' }, capabilities: { tools: { listChanged: false } } });
     const discovered = await mcp(reader, 'server/discover', {}, 'modern');
     expect(discovered.status).toBe(200);
     expect((await rpc(discovered)).result).toMatchObject({ capabilities: { tools: { listChanged: false } } });
@@ -723,7 +723,7 @@ describe('the MCP endpoint', () => {
     expect((await call(connect(['parcels:write']), 'add_parcels', { text: 'SYNTHETIC9' })).result!.content![0]!.text).not.toContain('looking for the carrier');
   });
 
-  it('names itself after the site, and says Parcel Tracker where the site sets no name', async () => {
+  it('names itself after the site and what it does, and Parcel Tracker alone where the site sets no name', async () => {
     vi.stubEnv('SITE_NAME', '');
     const reader = connect(['parcels:read']);
     const started = await mcp(reader, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });

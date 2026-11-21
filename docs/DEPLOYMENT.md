@@ -363,8 +363,9 @@ comes from. Peek's own site sets each of them.
 
 - `SITE_NAME` (default `Parcel Tracker`) is the product's name where the code writes it: the
   page titles and the manifest, link previews and their pictures, the structured data, the
-  guides' titles, notifications, the assistants' MCP server and OAuth texts, the apps'
-  Turnstile page and the User-Agent the server sends other services, with `CANONICAL_ORIGIN`. The
+  guides' titles, notifications, the assistants' OAuth texts and MCP server, which adds
+  "Parcel Tracker" unless the name says it ("Peek Parcel Tracker"), the apps' Turnstile page
+  and the User-Agent the server sends other services, with `CANONICAL_ORIGIN`. The
   app's words (`shared/locales`), the sign-in email (`public/auth-emails/`) and the
   maintenance page (`ops/cloudflare/`) name Peek themselves. `SITE_ALTERNATE_NAMES`
   (comma-separated) are the other names the landing's structured data gives search engines,

@@ -5,6 +5,7 @@ import { PEEK_ENV } from '../test/peekEnv';
 import {
   androidStoreApp,
   appStoreApp,
+  assistantServerTitle,
   authorLinksOn,
   legalPagesOn,
   privacyAddress,
@@ -41,6 +42,12 @@ describe('each setting', () => {
     expect(siteName(env({ SITE_NAME: '   ' }))).toBe('Parcel Tracker');
     expect(siteAlternateNames(env({ SITE_NAME: 'Colis', SITE_ALTERNATE_NAMES: ' Colis Tracker, , Mes colis ' })))
       .toEqual(['Colis Tracker', 'Mes colis']);
+  });
+
+  it('names the assistants\' server after the site and what it does, saying it once', () => {
+    expect(assistantServerTitle(env({ SITE_NAME: 'Peek' }))).toBe('Peek Parcel Tracker');
+    expect(assistantServerTitle(env({}))).toBe('Parcel Tracker');
+    expect(assistantServerTitle(env({ SITE_NAME: 'Acme parcel tracker' }))).toBe('Acme parcel tracker');
   });
 
   it('reads the App Store app by its number, with a provider token only when it is one', () => {

@@ -30,6 +30,15 @@ export function siteName(env: NodeJS.ProcessEnv = process.env): string {
   return env.SITE_NAME?.trim() || PLAIN_SITE.name;
 }
 
+/**
+ * What assistants list the MCP server and its sign-in as: the product's name with what it does, as Claude's connector
+ * directory lists it ("Peek Parcel Tracker"), since a name alone says little among a user's other connectors.
+ */
+export function assistantServerTitle(env: NodeJS.ProcessEnv = process.env): string {
+  const name = siteName(env);
+  return /parcel tracker/i.test(name) ? name : `${name} Parcel Tracker`;
+}
+
 /** The other names search engines are told the site goes by, before its host (`SITE_ALTERNATE_NAMES`, separated by commas). */
 export function siteAlternateNames(env: NodeJS.ProcessEnv = process.env): string[] {
   return (env.SITE_ALTERNATE_NAMES ?? '').split(',').map((name) => name.trim()).filter(Boolean);

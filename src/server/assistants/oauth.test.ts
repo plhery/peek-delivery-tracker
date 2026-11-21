@@ -50,7 +50,7 @@ describe('the metadata', () => {
       authorization_servers: ['https://peek.example'],
       scopes_supported: ['parcels:read', 'parcels:write', 'parcels:edit'],
       bearer_methods_supported: ['header'],
-      resource_name: 'Peek',
+      resource_name: 'Peek Parcel Tracker',
     });
   });
 

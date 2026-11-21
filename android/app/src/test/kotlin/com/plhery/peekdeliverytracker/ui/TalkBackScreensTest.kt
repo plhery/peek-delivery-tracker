@@ -196,7 +196,7 @@ class TalkBackScreensTest {
                 "From Mamie",
                 "At customs",
                 "Delivery progress [Step 4 of 6: At customs]",
-                "Peek AI, likely by Sat 31 Oct",
+                "Peek AI: likely by Sat 31 Oct",
                 "About Peek AI [button]",
                 "Chronopost gives no date. It reached customs 12 hours ago.",
                 "Tracking number",

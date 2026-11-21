@@ -272,6 +272,24 @@ class DeliveryWidgetTest {
     }
 
     /**
+     * Peek AI's words under a card's status: TalkBack reads them as Peek AI's, "Peek AI: by 16:00", after the card's own
+     * words, one card or two.
+     */
+    @Test
+    fun aCardReadsPeekAisWordsAsPeekAis() = runBlocking<Unit> {
+        val carded = three.map { it.copy(card = card(it.id.toString()), peekAi = "by 16:00") }
+        for ((count, size) in listOf(2 to IPHONE_MEDIUM, 1 to IPHONE_SMALL)) {
+            val said = appliedViews(app, listViews(app, size, cards(carded.take(count))) { _, _ -> art })
+                .filter { it.isClickable && it.isImportantForAccessibility }.map { spoken(it) }
+            assertEquals("$said", count, said.size)
+            for (card in said) {
+                assertTrue(card, card.endsWith("Peek AI: by 16:00"))
+                assertTrue(card, card.indexOf("Peek AI") > card.indexOf("Out for delivery"))
+            }
+        }
+    }
+
+    /**
      * The new-update dot (#72): a card's status keeps to the room the dot leaves before it, at a smaller size where it
      * must, its words whole, and the card's mark, its first words, says "New update." to TalkBack before the carrier.
      * ParcelsWidgetTest has the cards that show it.

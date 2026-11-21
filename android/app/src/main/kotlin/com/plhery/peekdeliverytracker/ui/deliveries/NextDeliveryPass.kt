@@ -5,7 +5,6 @@ import androidx.compose.animation.core.snap
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,9 +28,13 @@ import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
@@ -229,24 +232,55 @@ fun NextDeliveryPass(
             }
             if (notice != null) Text(notice, color = colors.secondaryText, style = type.caption.sfLines())
             if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
-            FlowRow(itemVerticalAlignment = Alignment.CenterVertically, verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    NewUpdateDot(newUpdate, ink)
-                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                        if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
-                        Text(status, color = ink, style = type.caption.sfLines())
-                    }
-                }
-                if (peekAiWords != null) {
+            StatusLine(
+                status = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(" · ", color = ink, style = type.caption.sfLines())
-                        PeekAiPhrase(peekAiWords, ink, type.caption)
+                        NewUpdateDot(newUpdate, ink)
+                        Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                            if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                            Text(status, color = ink, style = type.caption.sfLines())
+                        }
                     }
-                }
-            }
+                },
+                dot = { Text(" · ", color = ink, style = type.caption.sfLines()) },
+                peekAi = peekAiWords?.let { words -> { PeekAiPhrase(words, ink, type.caption) } },
+            )
             if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp), calm = outage != null)
         }
         SelectedCardRing(selected, Radii.nextUp, Modifier.matchParentSize())
+    }
+}
+
+/**
+ * The card's status, then Peek AI's words after a dot, on their first baseline, where the two fit on one line; else the
+ * words 3 under it, without the dot, which would end the status's line on nothing.
+ */
+@Composable
+private fun StatusLine(status: @Composable () -> Unit, dot: @Composable () -> Unit, peekAi: (@Composable () -> Unit)?) {
+    if (peekAi == null) return status()
+    Layout(contents = listOf(status, dot, peekAi)) { (statusMeasurable, dotMeasurable, phraseMeasurable), constraints ->
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val wide = listOf(statusMeasurable, dotMeasurable, phraseMeasurable).map { it.single().maxIntrinsicWidth(Constraints.Infinity) }
+        if (!constraints.hasBoundedWidth || wide.sum() <= constraints.maxWidth) {
+            val placed = listOf(statusMeasurable, dotMeasurable, phraseMeasurable).mapIndexed { index, it -> it.single().measure(loose.copy(maxWidth = wide[index])) }
+            val baselines = placed.map { it[FirstBaseline] }
+            val baseline = baselines.takeIf { AlignmentLine.Unspecified !in it }?.max()
+            // Without a baseline, they are centred on each other.
+            val height = placed.maxOf { it.height }
+            val tops = placed.mapIndexed { index, it -> if (baseline != null) baseline - baselines[index] else (height - it.height) / 2 }
+            layout(placed.sumOf { it.width }.coerceAtMost(constraints.maxWidth), placed.indices.maxOf { tops[it] + placed[it].height }) {
+                var x = 0
+                placed.forEachIndexed { index, it -> it.place(x, tops[index]); x += it.width }
+            }
+        } else {
+            val shown = statusMeasurable.single().measure(loose)
+            val words = phraseMeasurable.single().measure(loose)
+            val gap = 3.dp.roundToPx()
+            layout(maxOf(shown.width, words.width), shown.height + gap + words.height) {
+                shown.place(0, 0)
+                words.place(0, shown.height + gap)
+            }
+        }
     }
 }
 

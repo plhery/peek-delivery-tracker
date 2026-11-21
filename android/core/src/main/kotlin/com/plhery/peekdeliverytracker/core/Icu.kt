@@ -38,6 +38,12 @@ object Icu {
     /** Lists of names, which Foundation's `ListFormatter` joins with ICU. */
     val lists: ListJoiner = packages.firstNotNullOfOrNull { IcuLists.from("$it.text") } ?: ListJoiner { names, _ -> names.joinToString(", ") }
 
+    /**
+     * Lists of short units, as the web's `Intl.ListFormat` with `type: 'unit', style: 'short'` writes them ("Wed 25, Thu
+     * 26"): ICU's typed `ListFormatter` where the phone has it (Android 13 on), else the plain list ([lists]).
+     */
+    val unitLists: ListJoiner = packages.firstNotNullOfOrNull { IcuLists.from("$it.text", units = true) } ?: lists
+
     /** Time zones' names, which Foundation's `TimeZone.localizedName(for:locale:)` reads from ICU. */
     val zoneNames: ZoneNamer = packages.firstNotNullOfOrNull { IcuZoneNames.from(it) } ?: JdkZoneNames
 
@@ -138,22 +144,42 @@ fun interface ListJoiner {
     fun join(names: List<String>, locale: Locale): String
 }
 
-/** ICU's `ListFormatter` (android.icu.text, com.ibm.icu.text), found by name. */
-internal class IcuLists private constructor(packageName: String) : ListJoiner {
+/**
+ * ICU's `ListFormatter` (android.icu.text, com.ibm.icu.text), found by name: its standard list ("A, B and C"), or with
+ * `units` its short list of units, which its `Type` and `Width` name.
+ */
+internal class IcuLists private constructor(packageName: String, units: Boolean) : ListJoiner {
     private val formatterClass = Class.forName("$packageName.ListFormatter")
-    private val getInstance = formatterClass.getMethod("getInstance", Locale::class.java)
+    private val instance: (Locale) -> Any
+
+    init {
+        if (units) {
+            val type = Class.forName("$packageName.ListFormatter\$Type")
+            val width = Class.forName("$packageName.ListFormatter\$Width")
+            val getInstance = formatterClass.getMethod("getInstance", Locale::class.java, type, width)
+            val unitsType = type.enumConstants.first { (it as Enum<*>).name == "UNITS" }
+            val short = width.enumConstants.first { (it as Enum<*>).name == "SHORT" }
+            instance = { locale -> getInstance.invoke(null, locale, unitsType, short) }
+        } else {
+            val getInstance = formatterClass.getMethod("getInstance", Locale::class.java)
+            instance = { locale -> getInstance.invoke(null, locale) }
+        }
+    }
+
     private val format = formatterClass.getMethod("format", Collection::class.java)
     private val formatters = ConcurrentHashMap<Locale, Any>()
 
     override fun join(names: List<String>, locale: Locale): String =
-        format.invoke(formatters.getOrPut(locale) { getInstance.invoke(null, locale) }, names) as String
+        format.invoke(formatters.getOrPut(locale) { instance(locale) }, names) as String
 
     companion object {
-        fun from(packageName: String): IcuLists? = try {
-            IcuLists(packageName)
+        fun from(packageName: String, units: Boolean = false): IcuLists? = try {
+            IcuLists(packageName, units)
         } catch (_: ReflectiveOperationException) {
             null
         } catch (_: LinkageError) {
+            null
+        } catch (_: NoSuchElementException) {
             null
         }
     }

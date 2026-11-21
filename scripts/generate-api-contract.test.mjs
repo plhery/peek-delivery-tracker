@@ -103,6 +103,15 @@ test('reads Peek AI leniently in Swift, so an estimate it cannot read leaves out
   }
 });
 
+test('reads a parcel\'s Peek AI leniently in Kotlin, so that a value added later drops only Peek AI', (t) => {
+  const { root, run } = generateWith(t, []);
+  assert.equal(run.status, 0, run.stderr);
+  const kotlin = readFileSync(path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
+    'core', 'api', 'GeneratedApiContract.kt'), 'utf8');
+  const lenient = kotlin.match(/@SerialName\("peek_ai"\) @Serializable\(with = LenientPeekAiSerializer::class\) val peekAi: PeekAi\? = null,/g);
+  assert.equal(lenient?.length, 2);
+});
+
 test('stops on two carriers given one Swift and Kotlin name, naming both, and writes nothing', (t) => {
   const { run } = generateWith(t, ['2go', 'two-go']);
   assert.notEqual(run.status, 0);

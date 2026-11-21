@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PeekAi
@@ -9,14 +10,21 @@ import com.plhery.peekdeliverytracker.core.api.PeekAiSays
 import com.plhery.peekdeliverytracker.core.api.PeekAiStep
 import com.plhery.peekdeliverytracker.core.api.PeekAiStepKind
 import com.plhery.peekdeliverytracker.core.api.PeekAiWhy
+import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Duration
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.TimeZone
 import java.util.UUID
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -78,12 +86,12 @@ class PeekAiTests {
     }
 
     @Test
-    fun holdsADayUntilItHasPassedAndSoonerUntilTheCarriersOwnDay() {
+    fun holdsADayUntilItHasPassedAndSoonerUntilTheCarriersOwnDayComes() {
         val noDate = noDate
         assertSame(noDate, currentPeekAi(noDate, at(26, 23, 59)))
         assertNull(currentPeekAi(noDate, at(27, 0, 1)))
-        assertSame(sooner, currentPeekAi(sooner, at(27, 12)))
-        assertNull(currentPeekAi(sooner, at(28, 8)))
+        assertSame(sooner, currentPeekAi(sooner, at(26, 23, 59)))
+        assertNull(currentPeekAi(sooner, at(27, 0, 1)))
         assertNull(currentPeekAi(null, now))
     }
 
@@ -92,8 +100,57 @@ class PeekAiTests {
         assertEquals(at(25, 0), peekAiUntil(notToday))
         assertEquals(at(24, 16), peekAiUntil(byTime))
         assertEquals(at(27, 0), peekAiUntil(noDate))
-        assertEquals(at(28, 0), peekAiUntil(sooner))
+        assertEquals(at(27, 0), peekAiUntil(sooner))
         assertNull(peekAiUntil(sooner.copy(carrierDay = null)))
+    }
+
+    /** The phone in `zone` for `run`. */
+    private fun <T> onAPhoneIn(zone: String, run: () -> T): T {
+        val home = TimeZone.getDefault()
+        TimeZone.setDefault(TimeZone.getTimeZone(zone))
+        return try {
+            run()
+        } finally {
+            TimeZone.setDefault(home)
+        }
+    }
+
+    @Test
+    fun endsAtTheMomentTheServerGivesWhateverThePhonesZone() {
+        val zurich = byTime.copy(endsAt = "2026-11-24T16:00:00+01:00")
+        assertSame(zurich, currentPeekAi(zurich, Instant.parse("2026-11-24T14:59:00Z")))
+        assertNull(currentPeekAi(zurich, Instant.parse("2026-11-24T15:00:00Z")))
+        assertEquals(Instant.parse("2026-11-24T15:00:00Z"), peekAiUntil(zurich))
+        // A phone in Tokyo, already on the 25th: the parcel's evening still holds, not this phone's day.
+        val tonight = notToday.copy(endsAt = "2026-11-25T00:00:00+01:00")
+        onAPhoneIn("Asia/Tokyo") {
+            assertNull("The phone's own day would have let it go", currentPeekAi(notToday, Instant.parse("2026-11-24T22:59:00Z")))
+            assertSame(tonight, currentPeekAi(tonight, Instant.parse("2026-11-24T22:59:00Z")))
+            assertNull(currentPeekAi(tonight, Instant.parse("2026-11-24T23:00:00Z")))
+            assertEquals(Instant.parse("2026-11-24T23:00:00Z"), peekAiUntil(tonight))
+            assertEquals(listOf(Instant.parse("2026-11-24T23:00:00Z")), peekAiChanges(parcel(TrackingStage.InTransit, tonight), Instant.parse("2026-11-24T20:00:00Z")))
+        }
+        // A copy whose moment doesn't read goes by this phone's day.
+        val unread = sooner.copy(endsAt = "soon")
+        assertSame(unread, currentPeekAi(unread, at(26, 12)))
+        assertNull(currentPeekAi(unread, at(27, 0, 1)))
+    }
+
+    /** Zurich's clocks go back an hour on 25 October 2026: each midnight is still the day's, and the day ends at its own. */
+    @Test
+    fun aDayEndsAtItsOwnMidnightAcrossTheChangeOfTime() {
+        fun october(day: Int, hour: Int = 0) = LocalDateTime.of(2026, 10, day, hour, 0).atZone(zone).toInstant()
+        val ai = noDate.copy(day = "2026-10-27", last = null, days = null)
+        val then = october(23, 12)
+        assertEquals((24..28).map { october(it) }, peekAiChanges(parcel(TrackingStage.InTransit, ai), then))
+        assertEquals(Duration.ofHours(25), Duration.between(october(25), october(26)))
+        assertEquals(october(28), peekAiUntil(ai))
+        assertSame(ai, currentPeekAi(ai, october(28).minusSeconds(60)))
+        assertNull(currentPeekAi(ai, october(28)))
+        // The server's moment says the same: midnight at 23:00 in UTC once the clocks have gone back.
+        val served = ai.copy(endsAt = "2026-10-28T00:00:00+01:00")
+        assertEquals(october(28), peekAiUntil(served))
+        assertEquals(Instant.parse("2026-10-27T23:00:00Z"), peekAiUntil(served))
     }
 
     @Test
@@ -124,6 +181,9 @@ class PeekAiTests {
         assertEquals("DPD says today", english.peekAiCarrierWord(notToday, "DPD", "Today"))
         assertEquals("DPD says Fri 27 Nov", english.peekAiCarrierWord(sooner, "DPD", "Fri 27 Nov"))
         assertEquals("UPS gives no date", english.peekAiCarrierWord(noDate, "UPS", null))
+        // Still out late: the carrier set out to deliver it today, though its date is hidden while out for delivery.
+        val late = PeekAi(says = PeekAiSays.NotToday, why = PeekAiWhy.LateOut, sure = 0.88, outSince = "2026-11-24T08:12:00+01:00")
+        assertEquals("DPD says today", english.peekAiCarrierWord(late, "DPD", null))
         assertEquals("DPD says today, but it hasn’t gone out for delivery.", english.peekAiWhy(notToday, "DPD", now))
         assertEquals("Out for delivery since 08:12. FedEx names no hour.", english.peekAiWhy(byTime, "FedEx", now))
         assertEquals("UPS gives no date. It reached the delivery depot 2 days ago.", english.peekAiWhy(noDate, "UPS", now))
@@ -160,6 +220,12 @@ class PeekAiTests {
             listOf(listOf(false, false, false), listOf(true, false, false), listOf(true, false, false), listOf(false, true, true)),
             strip.cells.map { listOf(it.likely, it.maybe, it.carrier) },
         )
+        // What its shades and ring show, in words.
+        assertEquals("Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27", english.peekAiStripSpoken(strip, "DPD"))
+        val french = Localizer(AppLanguage.Fr)
+        val spoken = french.peekAiStripSpoken(requireNotNull(french.peekAiStrip(noDate.copy(carrierDay = "2026-11-27"), now)), "DPD")
+        assertTrue(spoken, spoken.startsWith("${french.text("peekAi.sheet.days")}: "))
+        assertTrue(spoken, spoken.endsWith(". ${french.text("peekAi.sheet.carrierDate", mapOf("carrier" to "DPD"))}: ven 27"))
     }
 
     @Test
@@ -171,7 +237,17 @@ class PeekAiTests {
             listOf(listOf(false, true, true), listOf(true, false, true), listOf(true, false, true), listOf(true, false, false), listOf(false, true, false)),
             strip.cells.map { listOf(it.likely, it.maybe, it.past) },
         )
+        // The likely hours still to come.
+        assertEquals("Most likely hours: 14:00", english.peekAiStripSpoken(strip, "DPD"))
         assertNull(english.peekAiStrip(notToday, now))
+    }
+
+    @Test
+    fun writesTheHoursOnTheReadersClock() {
+        val twelveHours = Localizer(AppLanguage.En, clockPreference = ClockPreference.TwelveHour)
+        val strip = requireNotNull(twelveHours.peekAiStrip(byTime, now))
+        assertEquals(listOf("8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"), strip.cells.map { it.main.replace(Regex("\\s"), " ") })
+        assertEquals("Most likely hours: 2:00 PM", twelveHours.peekAiStripSpoken(strip, "DPD").replace(Regex("\\s"), " "))
     }
 
     private fun parcel(stage: TrackingStage, ai: PeekAi?, archivedAt: String? = null, expectedDelivery: String? = null): Parcel {
@@ -183,6 +259,38 @@ class PeekAiTests {
                 TrackingEvent(id = UUID.randomUUID(), packageId = id, stage = stage, description = "", occurredAt = DateParser.isoString(now.minusSeconds(3_600))),
             ),
         )
+    }
+
+    /**
+     * A call, a reason or a step the server added after this release drops Peek AI alone: the parcel, and the list it
+     * came in, still read, as do a link's parcel and the parcels the phone keeps.
+     */
+    @Test
+    fun aCallTheAppCantReadDropsOnlyPeekAi() {
+        val known = """{"says":"by_day","why":"no_date","sure":0.81,"day":"2026-11-26","ends_at":"2026-11-27T00:00:00+01:00"}"""
+        val unread = listOf(
+            """{"says":"by_moonrise","why":"no_date","sure":0.81}""",
+            """{"says":"by_day","why":"tea_leaves","sure":0.81,"day":"2026-11-26"}""",
+            """{"says":"by_day","why":"no_date","sure":0.81,"day":"2026-11-26","last":{"kind":"drone","at":"2026-11-24T08:00:00+01:00"}}""",
+            """{"says":"by_day"}""",
+            """"by_day"""",
+        )
+        val row = ApiJson.encodeToJsonElement(Parcel.serializer(), parcel(TrackingStage.InTransit, null)).jsonObject
+        fun with(ai: String) = JsonObject(row + ("peek_ai" to ApiJson.parseToJsonElement(ai)))
+        val list = JsonArray(listOf(with(known)) + unread.map(::with) + JsonObject(row + ("peek_ai" to JsonNull)))
+        val parcels = ApiJson.decodeFromJsonElement(ListSerializer(Parcel.serializer()), list)
+        assertEquals(unread.size + 2, parcels.size)
+        assertEquals("2026-11-27T00:00:00+01:00", parcels.first().peekAi?.endsAt)
+        assertTrue(parcels.drop(1).all { it.peekAi == null && it.label == "Synthetic parcel" })
+
+        // The parcel a link shows reads the same way.
+        val link = JsonObject(with(unread.first()) + ("carrier_data" to JsonObject(emptyMap())))
+        assertNull(ApiJson.decodeFromJsonElement(PublicPackage.serializer(), link).peekAi)
+
+        // A parcel the phone kept, written as the iPhone writes it and read again.
+        val kept = parcels.first()
+        val bytes = JsonEncoder(sortedKeys = true, swiftKeys = true).encode(ListSerializer(Parcel.serializer()), listOf(kept, parcels[1]))
+        assertEquals(listOf(kept.peekAi, null), decodeSwiftKeys(ListSerializer(Parcel.serializer()), bytes).map { it.peekAi })
     }
 
     @Test

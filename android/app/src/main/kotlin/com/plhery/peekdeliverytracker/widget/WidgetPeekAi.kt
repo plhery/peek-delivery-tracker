@@ -16,6 +16,8 @@ import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.size
 import androidx.glance.layout.width
+import androidx.glance.semantics.contentDescription
+import androidx.glance.semantics.semantics
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
@@ -34,8 +36,11 @@ internal const val PEEK_AI_PILL = 0.14f
 /** The gap before Peek AI's phrase where it follows a line. */
 internal val PEEK_AI_GAP = 6.dp
 
-/** Peek AI's phrase for `parcel` at `points`, as wide as it stands, and as tall as a line of its words: its pill too. */
-internal class PeekAiFit(val name: String, val words: String, val points: Float, val width: Dp, val height: Dp)
+/**
+ * Peek AI's phrase for `parcel` at `points`, as wide as it stands, and as tall as a line of its words: its pill too. TalkBack
+ * reads it as `spoken`, "Peek AI: by 16:00", where it reads the card's words one after another.
+ */
+internal class PeekAiFit(val name: String, val words: String, val points: Float, val width: Dp, val height: Dp, val spoken: String)
 
 /**
  * Peek AI's phrase for `parcel` in `room`, at `points` where it fits, else as much smaller as it takes down to
@@ -46,8 +51,13 @@ internal fun WidgetText.peekAiFit(parcel: DeliveryWidgetParcel, languageCode: St
     val name = ExtensionLocalizer(languageCode).text("peekAi.name")
     fun width(size: Float): Dp =
         (size * (PILL_START + SPARKLE + SPARKLE_GAP + PILL_END + WORDS_GAP)).dp + width(name, size * NAME_SCALE, FontWeight.Bold) + width(words, size, FontWeight.Normal)
-    val size = listOf(points, points * LINE_FLOOR).firstOrNull { width(it) <= room } ?: return null
-    return PeekAiFit(name, words, size, width(size), lineHeight(size, FontWeight.Normal))
+    val full = width(points)
+    // The phrase grows with its size, near enough in proportion: the size that just fits, or a hair under it where the
+    // widths' rounding up runs over.
+    val just = points * (room / full)
+    val size = (if (full <= room) listOf(points) else listOf(just, just * 0.97f).map { it.coerceAtLeast(points * LINE_FLOOR) })
+        .firstOrNull { width(it) <= room } ?: return null
+    return PeekAiFit(name, words, size, width(size), lineHeight(size, FontWeight.Normal), peekAiSpoken(parcel, languageCode).orEmpty())
 }
 
 /** What TalkBack hears of the parcel's Peek AI words, "Peek AI: by 16:00"; nothing without them. */
@@ -58,7 +68,7 @@ internal fun peekAiSpoken(parcel: DeliveryWidgetParcel, languageCode: String): S
 @Composable
 internal fun PeekAiLine(fit: PeekAiFit, ink: ColorProvider, pill: ColorProvider, type: WidgetText) {
     val points = fit.points
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(GlanceModifier.semantics { contentDescription = fit.spoken }, verticalAlignment = Alignment.CenterVertically) {
         Row(
             GlanceModifier.height(fit.height).cornerRadius(fit.height / 2).background(pill)
                 .padding(start = (points * PILL_START).dp, end = (points * PILL_END).dp),

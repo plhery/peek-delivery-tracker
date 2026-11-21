@@ -18,10 +18,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
+import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
@@ -75,16 +77,23 @@ class ParcelsWidgetScreenshotTest {
 
     /**
      * The demo's first `count` parcels at `size`, those `marked` with the new-update dot, and Peek AI's words where
-     * `peekAi` gives some.
+     * `peekAi` gives some to a parcel still on its way ([onItsWay]).
      */
     private fun demo(size: DpSize, count: Int, marked: (Int) -> Boolean = { false }, peekAi: (Int) -> String? = { null }): Shown {
         val list = demoSource.list(CAPTURED)
         val parcels = list.parcels.take(count).mapIndexed { index, parcel ->
             val dotted = if (marked(index)) parcel.copy(newUpdate = true) else parcel
-            peekAi(index)?.let { dotted.copy(peekAi = it) } ?: dotted
+            peekAi(index)?.takeIf { parcel.onItsWay }?.let { dotted.copy(peekAi = it) } ?: dotted
         }
         return widget(size, list.copy(parcels = parcels), demoSource::read)
     }
+
+    /**
+     * Whether Peek AI would speak of the parcel: one on its way, not one held up or waiting for the reader (ready for
+     * pickup, a missed delivery) nor one delivered.
+     */
+    private val DeliveryWidgetParcel.onItsWay: Boolean
+        get() = section?.let { it == ParcelSectionKind.Today.rawValue || it == ParcelSectionKind.Active.rawValue } ?: (deliveredAt == null)
 
     private fun none() = DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
 
@@ -221,13 +230,15 @@ class ParcelsWidgetScreenshotTest {
     fun newUpdatesDark() = newUpdates("new_updates_dark", dark = true)
 
     /**
-     * Peek AI's words on two parcels in three, as the app's cards write them: the sample's rows at each size, two cells
-     * by four for its two-line rows; the demo's card, passes and cards two cells by two and four by two; a card over its
-     * steps, three cards and six passes four by four. The demo's first parcel has the dot too.
+     * Peek AI's words on two parcels in three still on their way, as the app's cards write them: the sample's rows at each
+     * size, two cells by four for its two-line rows; the demo's card, passes and cards two cells by two and four by two;
+     * a card over its steps, three cards and six passes four by four. The demo's first parcel has the dot too.
      */
     private fun peekAi(name: String, dark: Boolean) {
         val words = { index: Int -> listOf("by 16:00", "today or tomorrow", "by Fri 30 Oct")[index % 3].takeIf { index % 3 != 1 } }
-        val rows = sampleList().let { list -> list.copy(parcels = list.parcels.mapIndexed { index, parcel -> words(index)?.let { parcel.copy(peekAi = it) } ?: parcel }) }
+        val rows = sampleList().let { list ->
+            list.copy(parcels = list.parcels.mapIndexed { index, parcel -> words(index)?.takeIf { parcel.onItsWay }?.let { parcel.copy(peekAi = it) } ?: parcel })
+        }
         val dot = { index: Int -> index == 0 }
         shoot(
             name, dark,

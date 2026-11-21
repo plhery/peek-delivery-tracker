@@ -11,6 +11,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonNull
 
 /** Reads and writes the API's JSON the way the iPhone app's Codable models do. */
 val ApiJson = Json {
@@ -44,4 +46,31 @@ object TrackingEventsSerializer : KSerializer<List<TrackingEvent>> {
     override fun deserialize(decoder: Decoder): List<TrackingEvent> = nullableList.deserialize(decoder) ?: emptyList()
 
     override fun serialize(encoder: Encoder, value: List<TrackingEvent>) = list.serialize(encoder, value)
+}
+
+/**
+ * Peek AI's estimate on a parcel, read leniently: one the app can't read, a kind of call, a reason or a step added after
+ * a release, reads as none, and the parcel and its list still read.
+ */
+object LenientPeekAiSerializer : KSerializer<PeekAi?> {
+    private val strict = PeekAi.serializer()
+
+    override val descriptor: SerialDescriptor = strict.nullable.descriptor
+
+    override fun deserialize(decoder: Decoder): PeekAi? {
+        if (decoder !is JsonDecoder) return if (decoder.decodeNotNullMark()) strict.deserialize(decoder) else decoder.decodeNull()
+        val element = decoder.decodeJsonElement()
+        if (element is JsonNull) return null
+        return try {
+            decoder.json.decodeFromJsonElement(strict, element)
+        } catch (_: SerializationException) {
+            null
+        } catch (_: IllegalArgumentException) {
+            null
+        }
+    }
+
+    override fun serialize(encoder: Encoder, value: PeekAi?) {
+        if (value == null) encoder.encodeNull() else encoder.encodeSerializableValue(strict, value)
+    }
 }

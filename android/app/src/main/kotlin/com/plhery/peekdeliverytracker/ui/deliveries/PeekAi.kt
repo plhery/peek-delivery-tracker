@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -41,6 +43,16 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.vector.PathParser
+import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.layout.MultiContentMeasurePolicy
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -48,11 +60,15 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.plhery.peekdeliverytracker.core.PeekAiStrip
@@ -66,10 +82,13 @@ import com.plhery.peekdeliverytracker.core.peekAiClaim
 import com.plhery.peekdeliverytracker.core.peekAiHeading
 import com.plhery.peekdeliverytracker.core.peekAiRecord
 import com.plhery.peekdeliverytracker.core.peekAiStrip
+import com.plhery.peekdeliverytracker.core.peekAiStripSpoken
+import com.plhery.peekdeliverytracker.core.peekAiUntil
 import com.plhery.peekdeliverytracker.core.peekAiWhy
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
@@ -79,6 +98,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -119,8 +139,9 @@ private fun PeekAiIcon(data: String, tint: Color, size: Dp, modifier: Modifier =
 
 /**
  * "✦ Peek AI" in a pill of `ink` at 14 %, the name in semibold a little smaller than `style`, then its `words` 4 after it
- * in `style` (`wordsWeight`): Peek's, never the carrier's. The words wrap beside the pill where `wraps`, else stay on one
- * line. TalkBack reads the name and the words as one.
+ * in `style` (`wordsWeight`), on the name's first baseline: Peek's, never the carrier's. Where `wraps`, the words wrap
+ * beside the pill; else they stay on its line where they fit whole, and wrap under it where they don't, as the web's
+ * `flex-wrap`. TalkBack reads the name and the words as one, or `label` in their place.
  */
 @Composable
 internal fun PeekAiPhrase(
@@ -130,39 +151,105 @@ internal fun PeekAiPhrase(
     modifier: Modifier = Modifier,
     wordsWeight: FontWeight = FontWeight.Normal,
     wraps: Boolean = false,
+    label: String? = null,
 ) {
     val localizer = LocalLocalizer.current
     val density = LocalDensity.current
     val sparkle = with(density) { style.fontSize.toDp() } * 0.95f
-    Row(
-        modifier.semantics(mergeDescendants = true) {},
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Row(
-            Modifier
-                .background(ink.copy(alpha = ink.alpha * 0.14f), RoundedCornerShape(50))
-                .padding(start = 4.dp, end = 6.dp, top = 1.dp, bottom = 1.dp),
-            horizontalArrangement = Arrangement.spacedBy(3.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            PeekAiIcon(SPARKLE, ink, sparkle)
-            Text(
-                localizer.text("peekAi.name"),
-                color = ink,
-                style = style.copy(fontWeight = FontWeight.SemiBold, fontSize = style.fontSize * 0.92f).sfLines(),
-                maxLines = 1,
-                softWrap = false,
-            )
+    Layout(
+        contents = listOf(
+            {
+                Row(
+                    Modifier
+                        .background(ink.copy(alpha = ink.alpha * 0.14f), RoundedCornerShape(50))
+                        .padding(start = 4.dp, end = 6.dp, top = 1.dp, bottom = 1.dp),
+                    horizontalArrangement = Arrangement.spacedBy(3.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    PeekAiIcon(SPARKLE, ink, sparkle)
+                    Text(
+                        localizer.text("peekAi.name"),
+                        color = ink,
+                        style = style.copy(fontWeight = FontWeight.SemiBold, fontSize = style.fontSize * 0.92f).sfLines(),
+                        maxLines = 1,
+                        softWrap = false,
+                    )
+                }
+            },
+            { Text(words, color = ink, style = style.copy(fontWeight = wordsWeight).sfLines()) },
+        ),
+        modifier = if (label != null) modifier.clearAndSetSemantics { contentDescription = label } else modifier.semantics(mergeDescendants = true) {},
+        measurePolicy = remember(wraps) { PhraseLayout(wraps) },
+    )
+}
+
+/** [PeekAiPhrase]'s pill and words: on one line, on the first baseline, where they go there; else the words 1 under it. */
+private class PhraseLayout(private val wraps: Boolean) : MultiContentMeasurePolicy {
+    override fun MeasureScope.measure(measurables: List<List<Measurable>>, constraints: Constraints): MeasureResult {
+        val (pillMeasurable, wordsMeasurable) = measurables.map { it.single() }
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val pill = pillMeasurable.measure(loose)
+        val room = if (constraints.hasBoundedWidth) (constraints.maxWidth - pill.width - GAP.roundToPx()).coerceAtLeast(0) else Constraints.Infinity
+        // Beside: whole, or where they wrap, by words that each fit.
+        val beside = room >= wordsMeasurable.run { if (wraps) minIntrinsicWidth(Constraints.Infinity) else maxIntrinsicWidth(Constraints.Infinity) }
+        return if (beside) {
+            val words = wordsMeasurable.measure(loose.copy(maxWidth = room))
+            val pillBaseline = pill[FirstBaseline]
+            val wordsBaseline = words[FirstBaseline]
+            // Without a baseline (no text), the two are centred on each other.
+            val (pillTop, wordsTop) = if (pillBaseline == AlignmentLine.Unspecified || wordsBaseline == AlignmentLine.Unspecified) {
+                val height = maxOf(pill.height, words.height)
+                (height - pill.height) / 2 to (height - words.height) / 2
+            } else {
+                val baseline = maxOf(pillBaseline, wordsBaseline)
+                baseline - pillBaseline to baseline - wordsBaseline
+            }
+            val width = (pill.width + GAP.roundToPx() + words.width).coerceIn(constraints.minWidth, constraints.maxWidth)
+            layout(width, maxOf(pillTop + pill.height, wordsTop + words.height).coerceAtLeast(constraints.minHeight)) {
+                pill.place(0, pillTop)
+                words.place(pill.width + GAP.roundToPx(), wordsTop)
+            }
+        } else {
+            val words = wordsMeasurable.measure(loose)
+            val width = maxOf(pill.width, words.width).coerceIn(constraints.minWidth, constraints.maxWidth)
+            layout(width, (pill.height + LINE_GAP.roundToPx() + words.height).coerceAtLeast(constraints.minHeight)) {
+                pill.place(0, 0)
+                words.place(0, pill.height + LINE_GAP.roundToPx())
+            }
         }
-        Text(
-            words,
-            if (wraps) Modifier.weight(1f, fill = false) else Modifier,
-            color = ink,
-            style = style.copy(fontWeight = wordsWeight).sfLines(),
-            maxLines = if (wraps) Int.MAX_VALUE else 1,
-            softWrap = wraps,
-        )
+    }
+
+    override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurables: List<List<IntrinsicMeasurable>>, height: Int): Int {
+        val (pill, words) = measurables.map { it.single() }
+        return pill.maxIntrinsicWidth(height) + GAP.roundToPx() + words.maxIntrinsicWidth(height)
+    }
+
+    override fun IntrinsicMeasureScope.minIntrinsicWidth(measurables: List<List<IntrinsicMeasurable>>, height: Int): Int {
+        val (pill, words) = measurables.map { it.single() }
+        return maxOf(pill.minIntrinsicWidth(height), words.minIntrinsicWidth(height))
+    }
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(measurables: List<List<IntrinsicMeasurable>>, width: Int): Int =
+        intrinsicHeight(measurables, width) { minIntrinsicHeight(it) }
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurables: List<List<IntrinsicMeasurable>>, width: Int): Int =
+        intrinsicHeight(measurables, width) { maxIntrinsicHeight(it) }
+
+    private fun IntrinsicMeasureScope.intrinsicHeight(
+        measurables: List<List<IntrinsicMeasurable>>,
+        width: Int,
+        height: IntrinsicMeasurable.(Int) -> Int,
+    ): Int {
+        val (pill, words) = measurables.map { it.single() }
+        val pillWidth = pill.maxIntrinsicWidth(Constraints.Infinity)
+        val room = if (width == Constraints.Infinity) width else (width - pillWidth - GAP.roundToPx()).coerceAtLeast(0)
+        val beside = room >= if (wraps) words.minIntrinsicWidth(Constraints.Infinity) else words.maxIntrinsicWidth(Constraints.Infinity)
+        return if (beside) maxOf(pill.height(pillWidth), words.height(room)) else pill.height(pillWidth) + LINE_GAP.roundToPx() + words.height(width)
+    }
+
+    private companion object {
+        val GAP = 4.dp
+        val LINE_GAP = 1.dp
     }
 }
 
@@ -176,17 +263,23 @@ internal fun peekAiNow(parcel: Parcel, shown: Boolean): Instant =
     peekAiClock(shown) { now -> peekAiChanges(parcel, now).firstOrNull() }
 
 /**
- * The time the parcel's page draws Peek AI at, looked at again each minute while `watching` and its estimate holds, as
- * the iPhone's `PeekAiPageCard`: the card goes once its hour or day has passed, and "5 hours ago" moves on.
+ * The time the parcel's page draws Peek AI at, looked at again each minute while `watching` and its estimate holds, and
+ * at the moment it ends ([peekAiUntil]), as the iPhone's `PeekAiPageCard`: the card and its sheet go as its hour or day
+ * passes, and "5 hours ago" moves on.
  */
 @Composable
 private fun peekAiMinute(parcel: Parcel, watching: Boolean): Instant =
-    peekAiClock(watching) { now -> if (parcelPeekAi(parcel, now) != null) now.truncatedTo(ChronoUnit.MINUTES).plusSeconds(60) else null }
+    peekAiClock(watching) { now ->
+        parcelPeekAi(parcel, now)?.let { ai ->
+            val minute = now.truncatedTo(ChronoUnit.MINUTES).plusSeconds(60)
+            peekAiUntil(ai)?.takeIf { it > now && it < minute } ?: minute
+        }
+    }
 
 /**
  * The app's time, read again at the `next` moment after it while `watching`, and as the app comes back from the
  * background, as the phone may have slept past that moment (a wait stands still while it sleeps). The caller is drawn
- * again each time.
+ * again each time; not as it first shows, where the lifecycle replays its resume to the new observer.
  */
 @Composable
 private fun peekAiClock(watching: Boolean, next: (Instant) -> Instant?): Instant {
@@ -200,7 +293,8 @@ private fun peekAiClock(watching: Boolean, next: (Instant) -> Instant?): Instant
             delay(Duration.between(clock(), at).toMillis().coerceAtLeast(0) + 20)
             looks++
         }
-        LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { looks++ }
+        var watched by remember { mutableStateOf(false) }
+        LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { if (watched) looks++ else watched = true }
     }
     return now
 }
@@ -215,6 +309,7 @@ private fun peekAiClock(watching: Boolean, next: (Instant) -> Instant?): Instant
 internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Modifier = Modifier) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val identities = LocalCarrierIdentities.current ?: return
     val shown by state.source.showPeekAi.collectAsState()
     var open by rememberSaveable(parcel.id) { mutableStateOf(false) }
@@ -222,8 +317,8 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
     // The estimate while it holds, which the sheet keeps showing once Peek AI is switched off there.
     val current = parcelPeekAi(parcel, now)
     val ai = if (shown) current else null
-    // The call the sheet opened on, kept while it goes.
-    var kept by remember(parcel.id) { mutableStateOf<PeekAi?>(null) }
+    // The call the sheet opened on, kept while it goes; a sheet open again after the activity is recreated keeps its own.
+    var kept by remember(parcel.id) { mutableStateOf(if (open) current else null) }
     LaunchedEffect(current == null) { if (current == null) open = false }
     val carrier = identities.displayName(parcel.displayedCarrier, language)
     if (ai != null) {
@@ -238,12 +333,14 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
                 .padding(start = 16.dp, top = 6.dp, end = 6.dp, bottom = 12.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
+                val claim = localizer.peekAiClaim(ai, now)
                 PeekAiPhrase(
-                    localizer.peekAiClaim(ai, now), colors.label, type.footnote, Modifier.weight(1f), wordsWeight = FontWeight.SemiBold, wraps = true,
+                    claim, colors.label, type.footnote, Modifier.weight(1f), wordsWeight = FontWeight.SemiBold, wraps = true,
+                    label = localizer.text("peekAi.says", mapOf("words" to claim)),
                 )
                 Box(
                     Modifier
-                        .size(36.dp)
+                        .touchTarget(36.dp)
                         .testTag(PEEK_AI_INFO)
                         .button(interactionSource = null, indication = PlainPress, role = Role.Button, shape = CircleShape) {
                             kept = ai
@@ -292,6 +389,7 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
 internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boolean, now: Instant, onShow: (Boolean) -> Unit, close: () -> Unit) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
+    LocalUse24HourTime.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val bottom = sheetBottomInset()
@@ -344,10 +442,11 @@ internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boo
                     ) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             CarrierFleetMark(identity, Modifier.padding(bottom = 2.dp))
-                            Text(localizer.peekAiHeading(ai, now), color = colors.label, style = type.style(IosTextStyle.Title3, FontWeight.Bold).sfLines())
+                            Text(localizer.peekAiHeading(ai, now), color = colors.label, style = type.style(IosTextStyle.Title3, FontWeight.SemiBold).sfLines())
                             Text(localizer.peekAiCarrierWord(ai, carrier, estimate), color = ink, style = type.subheadline.sfLines())
                         }
-                        SmallPip(Modifier.width(64.dp))
+                        // At the accessibility sizes the words take the card's width.
+                        if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) SmallPip(Modifier.width(64.dp))
                     }
                 }
             }
@@ -403,6 +502,8 @@ private fun PeekAiFact(icon: String, title: String, words: String) {
 /**
  * The days Peek AI expects, each with its weekday over its date, or the hours two to a cell: the likely ones on the ink
  * at 13 %, the possible ones at 5 %, the carrier's day ringed and the hours gone faded; under them, what the shades say.
+ * A cell's words keep to one line, shrinking to 70 % ("10:00 PM" on a narrow phone). TalkBack hears the shades in words
+ * ([peekAiStripSpoken]).
  */
 @Composable
 private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
@@ -411,10 +512,12 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
     val type = PeekTheme.type
     val ink = colors.label
     val soft = colors.secondaryText
+    val spoken = localizer.peekAiStripSpoken(strip, carrier)
     Column(
         Modifier
             .fillMaxWidth()
             .testTag(PEEK_AI_STRIP)
+            .clearAndSetSemantics { contentDescription = spoken }
             .background(colors.sheetControl, ContinuousRoundedShape(16.dp))
             .padding(horizontal = 14.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -439,8 +542,8 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(1.dp),
                 ) {
-                    if (cell.over.isNotEmpty()) Text(cell.over, color = soft, style = type.caption2.sfLines(), maxLines = 1, softWrap = false)
-                    Text(cell.main, color = ink, style = type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines(), maxLines = 1, softWrap = false)
+                    if (cell.over.isNotEmpty()) CellWords(cell.over, type.caption2.sfLines().copy(color = soft))
+                    CellWords(cell.main, type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines().copy(color = ink))
                 }
             }
         }
@@ -455,6 +558,34 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
             }
         }
     }
+}
+
+/** A strip cell's words, on one line that shrinks to 70 % before it ends in an ellipsis, as the iPhone's. */
+@Composable
+private fun CellWords(text: String, style: TextStyle) {
+    val probe = LocalPeekAiCellWords.current
+    BasicText(
+        text,
+        style = style,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1,
+        autoSize = MinimumScale(style.fontSize, 0.7f, 0.1.sp),
+        onTextLayout = { probe?.invoke(it) },
+    )
+}
+
+/** Told how a strip cell's words are laid out: the tests check they keep to one line, whole. */
+internal val LocalPeekAiCellWords = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
+
+/**
+ * Lays the element out at `target` square, at least, and gives its parent `visible` square, `target` centred on it: a
+ * small button keeps a finger's room without moving what is drawn around it.
+ */
+private fun Modifier.touchTarget(visible: Dp, target: Dp = 48.dp): Modifier = layout { measurable, _ ->
+    val side = maxOf(visible, target).roundToPx()
+    val shown = visible.roundToPx()
+    val placeable = measurable.measure(Constraints.fixed(side, side))
+    layout(shown, shown) { placeable.place((shown - side) / 2, (shown - side) / 2) }
 }
 
 @Composable

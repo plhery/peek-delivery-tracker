@@ -31,12 +31,17 @@ private fun dateOf(day: String): LocalDate? = runCatching { LocalDate.parse(day.
 /** A day on this phone's calendar, as the server writes days. */
 private fun isoDay(at: Instant, zone: ZoneId = ZoneId.systemDefault()): String = at.atZone(zone).toLocalDate().toString()
 
+/** When the estimate stops holding, as the server gives it (`ends_at`, a moment with the parcel's offset); none where it doesn't. */
+private val PeekAi.endsAtMoment: Instant? get() = endsAt?.let(DateParser::date)
+
 /**
- * Peek AI's estimate while it still holds on this phone's clock: none once its day has passed, or the hour it named. A
- * page left open, or kept for a while without a connection, would otherwise go on saying it.
+ * Peek AI's estimate while it still holds: none from the moment the server gives (`ends_at`), whatever this phone's
+ * zone, else once its day or the hour it named has passed on this phone's clock. A page left open, or kept for a while
+ * without a connection, would otherwise go on saying it.
  */
 fun currentPeekAi(ai: PeekAi?, now: Instant = AppClock.now()): PeekAi? {
     ai ?: return null
+    ai.endsAtMoment?.let { end -> return if (now < end) ai else null }
     val today = isoDay(now)
     return when (ai.says) {
         PeekAiSays.NotToday -> ai.takeIf { (ai.carrierDay ?: dayOf(ai.outSince)) == today }
@@ -46,19 +51,20 @@ fun currentPeekAi(ai: PeekAi?, now: Instant = AppClock.now()): PeekAi? {
             val at = now.atZone(ZoneId.systemDefault())
             ai.takeIf { String.format(Locale.ROOT, "%02d:%02d", at.hour, at.minute) < time }
         }
-        // Earlier than the carrier's date holds until that date; the other days, until their own.
-        else -> {
-            val until = if (ai.says == PeekAiSays.Sooner) ai.carrierDay else ai.day
-            ai.takeIf { until == null || until >= today }
-        }
+        // Earlier than the carrier's date holds until that date comes; the other days, until their own has passed.
+        PeekAiSays.Sooner -> ai.takeIf { ai.carrierDay.let { it == null || it > today } }
+        else -> ai.takeIf { ai.day.let { it == null || it >= today } }
     }
 }
 
 /**
- * When [currentPeekAi] stops holding, for a widget drawn while the app is closed: the end of its day, or the hour it
- * named. None while it holds all along.
+ * When [currentPeekAi] stops holding, for a widget drawn while the app is closed and a screen left open: the moment the
+ * server gives, else the hour it named, the start of the carrier's day for "maybe sooner" or the end of its day. None
+ * while it holds all along.
  */
 fun peekAiUntil(ai: PeekAi, zone: ZoneId = ZoneId.systemDefault()): Instant? {
+    ai.endsAtMoment?.let { return it }
+    fun start(day: String?) = day?.let(::dateOf)?.atStartOfDay(zone)?.toInstant()
     fun after(day: String?) = day?.let(::dateOf)?.plusDays(1)?.atStartOfDay(zone)?.toInstant()
     return when (ai.says) {
         PeekAiSays.NotToday -> after(ai.carrierDay ?: dayOf(ai.outSince))
@@ -67,7 +73,7 @@ fun peekAiUntil(ai: PeekAi, zone: ZoneId = ZoneId.systemDefault()): Instant? {
             val time = ai.time?.let { runCatching { LocalTime.parse(it) }.getOrNull() } ?: return null
             day.atTime(time).atZone(zone).toInstant()
         }
-        PeekAiSays.Sooner -> after(ai.carrierDay)
+        PeekAiSays.Sooner -> start(ai.carrierDay)
         else -> after(ai.day)
     }
 }
@@ -85,9 +91,9 @@ fun parcelPeekAi(parcel: Parcel, now: Instant = AppClock.now()): PeekAi? {
 }
 
 /**
- * When what Peek AI says of the parcel on a card can next change, for a list left open: the hour or the midnight its
- * estimate ends ([peekAiUntil]), and each midnight before it, when "today" moves on, a week of them at most. None while
- * it says nothing.
+ * When what Peek AI says of the parcel on a card can next change, for a list left open: the moment its estimate ends
+ * ([peekAiUntil]), and each midnight before it, when "today" moves on, a week of them at most. None while it says
+ * nothing.
  */
 fun peekAiChanges(parcel: Parcel, now: Instant = AppClock.now()): List<Instant> {
     val ai = parcelPeekAi(parcel, now) ?: return emptyList()
@@ -165,14 +171,14 @@ fun Localizer.peekAiHeading(ai: PeekAi, now: Instant = AppClock.now()): String {
 
 /**
  * What the carrier says, under Peek AI's heading in its sheet: "DPD says today", "UPS gives no date". `estimate` is the
- * carrier's estimate as the card words it.
+ * carrier's estimate as the card words it. A parcel still out late is one the carrier set out to deliver today.
  */
 fun Localizer.peekAiCarrierWord(ai: PeekAi, carrier: String, estimate: String?): String {
     val named = mapOf("carrier" to carrier)
     return when {
         ai.why == PeekAiWhy.MissedDate -> text("peekAi.carrier.wasDue", named)
         ai.why == PeekAiWhy.OutForDelivery -> text("peekAi.carrier.noHour", named)
-        ai.why == PeekAiWhy.NoOutForDelivery -> text("peekAi.carrier.saysToday", named)
+        ai.why == PeekAiWhy.NoOutForDelivery || ai.why == PeekAiWhy.LateOut -> text("peekAi.carrier.saysToday", named)
         ai.why == PeekAiWhy.Ahead && ai.carrierDay != null -> text("peekAi.carrier.saysDate", named + ("date" to calendar(ai.carrierDay!!)))
         estimate != null -> text("peekAi.carrier.saysDate", named + ("date" to estimate))
         else -> text("peekAi.carrier.noDate", named)
@@ -251,6 +257,23 @@ data class PeekAiCell(
 /** The sheet's strip: days, or hours two to a cell. */
 data class PeekAiStrip(val kind: Kind, val cells: List<PeekAiCell>) {
     enum class Kind { Days, Hours }
+}
+
+/**
+ * The strip as TalkBack reads it, which its shades and ring show: the likely cells still to come, then the carrier's,
+ * "Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27", the cells listed as the language lists units. Empty where it
+ * shows neither.
+ */
+fun Localizer.peekAiStripSpoken(strip: PeekAiStrip, carrier: String): String {
+    fun named(cell: PeekAiCell) = listOf(cell.over, cell.main).filter { it.isNotEmpty() }.joinToString(" ")
+    val likely = strip.cells.filter { it.likely && !it.past }.map(::named)
+    val ringed = strip.cells.firstOrNull { it.carrier }
+    return listOfNotNull(
+        likely.takeIf { it.isNotEmpty() }?.let {
+            "${text(if (strip.kind == PeekAiStrip.Kind.Hours) "peekAi.sheet.hours" else "peekAi.sheet.days")}: ${Icu.unitLists.join(it, language.locale)}"
+        },
+        ringed?.let { "${text("peekAi.sheet.carrierDate", mapOf("carrier" to carrier))}: ${named(it)}" },
+    ).joinToString(". ")
 }
 
 /** Days with their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */

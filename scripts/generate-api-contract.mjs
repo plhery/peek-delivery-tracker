@@ -787,6 +787,8 @@ function generatedKotlinClass(schemaName, kotlinName, schema) {
     const type = kotlinBaseType(value, schemaName, jsonName);
     const annotations = [];
     if (name !== jsonName) annotations.push(`@SerialName(${JSON.stringify(jsonName)})`);
+    // Peek AI's estimate that the app can't read, a value added after a release, reads as none, not the parcel.
+    if (value.$ref === '#/components/schemas/PeekAi') annotations.push('@Serializable(with = LenientPeekAiSerializer::class)');
     // The server may leave a parcel's history out or send null; both read as none.
     if (schemaName === 'PackageRow' && jsonName === 'tracking_events') {
       annotations.push('@Serializable(with = TrackingEventsSerializer::class)');

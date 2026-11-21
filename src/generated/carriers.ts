@@ -2540,6 +2540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "spx-express-brasilien-sendungsverfolgung",
+      "title": "SPX Express Brasilien Sendungsverfolgung: Shopee & Status",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-sendungsverfolgung",
@@ -3398,6 +3406,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "suivi-spx-express-bresil",
+      "title": "Suivi SPX Express Brésil\u00a0: commandes Shopee et statuts",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "suivi-pengyou",
@@ -4150,6 +4166,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento YTO Express: numero YT, stati e consegna",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "tracciamento-spx-express-brasile",
+      "title": "Tracciamento SPX Express Brasile: ordini Shopee e stati",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
     },
     {
       "id": "pengyou",
@@ -4914,6 +4938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "seguimiento-spx-express-brasil",
+      "title": "Seguimiento de SPX Express Brasil: Shopee y estados",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-seguimiento",
@@ -5650,6 +5682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento YTO Express: número YT, estados e entrega",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "seguimento-spx-express-brasil",
+      "title": "Seguimento SPX Express Brasil: encomendas Shopee e estados",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
     },
     {
       "id": "pengyou",
@@ -6430,6 +6470,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YTO Express: numer YT, statusy i dostawa",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "sledzenie-spx-express-brazylia",
+      "title": "Śledzenie SPX Express Brazylia: zamówienia Shopee i statusy",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
     },
     {
       "id": "pengyou",

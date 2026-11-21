@@ -150,7 +150,10 @@ helps, and `proxy_refused` for any other.
    - Ordertracker is asked only about the carrier a lookup is filed under, when the scraper
      compared the feeds Ordertracker relays that carrier through with the carrier's own
      tracking (UPS, FedEx and La Poste among them). It answers over HTTP, but reads the
-     carrier while the check waits unless it already holds the parcel. The Add preflight and
+     carrier while the check waits unless it already holds the parcel, and goes on reading
+     after the call ends. A check someone waits for, with other providers left to ask,
+     leaves it after 15 s, asks them, and asks it again when none of them had progress: its
+     answer is there by then, or it is waited for until its read ends. The Add preflight and
      discovery for a number with no carrier don't ask it.
    - Exception: checksum-valid China Post `C…CN` and `L…CN` numbers try 17TRACK first,
      because it returns much richer history for them (see
@@ -184,7 +187,10 @@ direct lookup follows the normal provider fallback route (see its
 ## When a source fails
 
 In one check, every eligible universal provider is tried once, stopping at the first
-usable answer with movement if the parcel already has some. Budgets per provider: 45 s
+usable answer with movement if the parcel already has some. Ordertracker left while it
+reads the carriers (Source order) is the one asked twice, within its one budget. Left
+again, or not asked again because the check ran out of time, it keeps no failure and no
+rest, and with no other answer the parcel is checked again 15 minutes later. Budgets per provider: 45 s
 for ParcelsApp (slow first lookups, one network retry), 50 s for Ordertracker (up to 45 s
 before it says it has nothing), 30 s for the others, plus 5 s transport allowance each.
 That's 120 s in total by default, 35 s more with Postal Ninja and 55 s more for a carrier
@@ -1289,7 +1295,9 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   again every 2 s, as long as the call still keeps its full lookup budget; then it moves on
   to the next provider and records no cooldown, and with no other answer checks again
   15 minutes later. A cooldown is waited for only when it ends within 6 s (twice at most);
-  otherwise the check records it and moves on;
+  otherwise the check records it and moves on. The second ask of Ordertracker left while
+  it reads takes a lease of its own, counts in its hourly limit, and needs only the rest
+  of its read as budget;
 - an hourly limit per provider, stated with each lease
   ([providerPolicy.ts](../src/server/providerPolicy.ts)): ParcelsApp's well under what it
   has refused an address for, Ordertracker's below it, Ship24's the highest, the
@@ -1339,6 +1347,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection), at most once in 30 minutes: the budget at work, counted in `tracking_provider_budget_spent_total`, no Sentry event |
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `provider_limited` | A provider had been sent its lookups for the hour (Shared provider protection), and the check asked the next one |
+| `provider_reading` | Ordertracker was left while it read the carriers for the number: the check asked the next providers and came back, or the next check does |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |
 | `carrier_retry_awaited` | The carrier that answers for the parcel failed in passing and the scheduled check waits for its retry, asking no provider |

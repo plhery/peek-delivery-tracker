@@ -51,6 +51,8 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   Track718 still fetching the carrier's history or turning lookups away while busy, filed as
   not-found with the reason `lookup_pending` or `provider_busy`: the scraper words these
   answers without a reason, so health reads its wording, and a run of them opens no incident.
+  So is Ordertracker left while it reads the carriers (`still_reading`), as a check someone
+  waits for leaves it.
 - A confirmation asks a carrier whether it holds a parcel that is not its own yet: a
   delivery partner before the handover, or a carrier that detection or a provider names
   and that has not confirmed the number. Its other inconclusive answers, such as an item

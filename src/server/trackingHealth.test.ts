@@ -156,6 +156,11 @@ describe('tracking health evidence', () => {
     }))).toEqual([
       expect.objectContaining({ healthy: true, details: expect.objectContaining({ category: 'not_found', reason: 'provider_busy' }) }),
     ]);
+    // Ordertracker left while it reads the carriers, as a check someone waits for leaves it.
+    expect(await sample(new IndeterminateError('Ordertracker', 'Ordertracker is still reading the carriers for the number',
+      { reason: 'still_reading', retryAfterMs: 32_000 }), 'Ordertracker')).toEqual([
+      expect.objectContaining({ subject: 'Ordertracker', healthy: true, details: expect.objectContaining({ category: 'not_found', reason: 'still_reading' }) }),
+    ]);
     for (const [error, carrier] of [
       [new IndeterminateError('Track718', 'Track718 returned an unreadable snapshot')],
       [new IndeterminateError('Ship24', 'Ship24 is temporarily busy', { reason: 'provider_busy' }), 'Ship24'],

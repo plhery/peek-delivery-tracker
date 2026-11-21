@@ -29,9 +29,11 @@ const answered = new Set(['ok', 'not_found', 'input_required']);
  * A provider's answer that it has nothing for the number yet, which the scraper raises as inconclusive with a reason:
  * Track718 still fetching the carrier's history (`lookup_pending`), or turning lookups away while it is busy
  * (`provider_busy`). Both are ordinary while a parcel is new; counted as failures, a run of them alone could open a
- * Track718 incident. The sample keeps the reason.
+ * Track718 incident. So is Ordertracker left while it reads the carriers (`still_reading`), which a check someone
+ * waits for does to every number Ordertracker does not hold yet. The sample keeps the reason.
  */
-const NOT_READY: ReadonlyMap<string, ReadonlySet<string>> = new Map([['Track718', new Set(['lookup_pending', 'provider_busy'])]]);
+const NOT_READY: ReadonlyMap<string, ReadonlySet<string>> = new Map([
+  ['Track718', new Set(['lookup_pending', 'provider_busy'])], ['Ordertracker', new Set(['still_reading'])]]);
 function notReady(error: unknown): boolean {
   for (let current = error, depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
     if (current instanceof CarrierError) {

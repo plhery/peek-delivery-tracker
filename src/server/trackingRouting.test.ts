@@ -2147,6 +2147,88 @@ describe('persistent tracking routing', () => {
       expect(routing.next_check_at).toBe('2026-09-10T12:15:00.000Z');
     });
   });
+  describe('a provider left while it reads the carriers', () => {
+    // Ordertracker's failure when its call ends before its read does, with the time the read still takes.
+    const reads = (ms = 32_000) => new IndeterminateError('Ordertracker', 'Ordertracker is still reading the carriers for the number',
+      { reason: scraper.STILL_READING, retryAfterMs: ms });
+    const asked = (universal: ReturnType<typeof setup>['universal']) => universal.mock.calls.map(([source, , budget]) => [source, budget]);
+    const finished = (health: ReturnType<typeof setup>['health']) => health.finishTrackingProvider.mock.calls
+      .filter(([source]) => source === 'Ordertracker').map(([, , kind]) => kind);
+
+    it('is left after its patience by a check someone waits for, and asked again when no other provider has progress', async () => {
+      fixedPlan('Ordertracker', 'ParcelsApp', 'Ship24');
+      const { router, health, universal } = setup();
+      universal.mockRejectedValueOnce(reads()).mockRejectedValueOnce(new NotFoundError('ParcelsApp'))
+        .mockRejectedValueOnce(new NotFoundError('Ship24')).mockResolvedValueOnce(history());
+      const result = await router.fetch(parcel(), false);
+      expect(asked(universal)).toEqual([['Ordertracker', scraper.universalSourcePatience('Ordertracker')],
+        ['ParcelsApp', scraper.universalSourceBudget('ParcelsApp')], ['Ship24', scraper.universalSourceBudget('Ship24')],
+        ['Ordertracker', scraper.universalSourceBudget('Ordertracker')]]);
+      expect(scraper.universalSourcePatience('Ordertracker')).toBeLessThan(scraper.universalSourceBudget('Ordertracker'));
+      expect(result.result).toMatchObject({ tracking_provider: 'Ordertracker', routing: { preferred_provider: 'Ordertracker' } });
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('Ordertracker');
+      // Its first call ends as an answer without history does: spaced, with no failure counted and no rest.
+      expect(finished(health)).toEqual(['not_found', null]);
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_reading', expect.objectContaining({ provider: 'Ordertracker' }));
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_failed', expect.objectContaining({ provider: 'Ordertracker' }));
+    });
+
+    it('is not asked again once another provider has the parcel', async () => {
+      fixedPlan('Ordertracker', 'ParcelsApp', 'Ship24');
+      const { router, health, universal } = setup();
+      universal.mockRejectedValueOnce(reads()).mockResolvedValueOnce(history());
+      const result = await router.fetch(parcel(), false);
+      expect(asked(universal).map(([source]) => source)).toEqual(['Ordertracker', 'ParcelsApp']);
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp' });
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('Ordertracker');
+      expect(finished(health)).toEqual(['not_found']);
+    });
+
+    it('keeps its whole budget when nobody waits for the check, and when no other provider is left to ask', async () => {
+      fixedPlan('Ordertracker', 'ParcelsApp');
+      const scheduled = setup();
+      await scheduled.router.fetch(parcel(), true);
+      expect(asked(scheduled.universal)).toEqual([['Ordertracker', scraper.universalSourceBudget('Ordertracker')]]);
+      fixedPlan('ParcelsApp', 'Ordertracker');
+      const last = setup();
+      last.universal.mockRejectedValueOnce(new NotFoundError('ParcelsApp')).mockResolvedValueOnce(history());
+      await last.router.fetch(parcel(), false);
+      expect(asked(last.universal)).toEqual([['ParcelsApp', scraper.universalSourceBudget('ParcelsApp')],
+        ['Ordertracker', scraper.universalSourceBudget('Ordertracker')]]);
+    });
+
+    it('brings the next check 15 minutes on when its read outlasts the check, and keeps no failure', async () => {
+      fixedPlan('Ordertracker', 'ParcelsApp');
+      const { router, health, universal } = setup();
+      universal.mockRejectedValueOnce(reads()).mockRejectedValueOnce(new NotFoundError('ParcelsApp')).mockRejectedValueOnce(reads(20_000));
+      const deferred = await router.fetch(parcel(), false).catch((error: unknown) => error);
+      expect(deferred).toBeInstanceOf(RoutingDeferred);
+      expect(asked(universal).map(([source]) => source)).toEqual(['Ordertracker', 'ParcelsApp', 'Ordertracker']);
+      const routing = (deferred as RoutingDeferred).routing;
+      expect(routing.failures).not.toHaveProperty('Ordertracker');
+      // ParcelsApp's "not found" holds a day: the check comes back for what Ordertracker read.
+      expect(routing.failures).toHaveProperty('ParcelsApp');
+      expect(routing.next_check_at).toBe('2026-09-10T12:15:00.000Z');
+      expect(finished(health)).toEqual(['not_found', 'not_found']);
+    });
+
+    it('is asked again within what its read still takes, not its whole budget, when the check waits for its spacing', async () => {
+      fixedPlan('Ordertracker', 'ParcelsApp');
+      const { router, health, universal, wait } = setup();
+      let elapsed = 0;
+      vi.spyOn(performance, 'now').mockImplementation(() => elapsed);
+      universal.mockImplementationOnce(async () => { elapsed += 15_000; throw reads(); })
+        .mockImplementationOnce(async () => { elapsed += 45_000; throw new NotFoundError('ParcelsApp'); })
+        .mockResolvedValueOnce(history());
+      // The second ask finds the provider spaced after its own first call: 45 s of the check are left, less than its budget.
+      let leases = 0;
+      health.acquireTrackingProvider.mockImplementation(async (source: string) => source === 'Ordertracker' && ++leases === 2
+        ? { token: null, retry_at: '2026-09-10T12:00:05Z', held: true } : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+      const result = await router.fetch(parcel(), false);
+      expect(wait).toHaveBeenCalledOnce();
+      expect(result.result).toMatchObject({ tracking_provider: 'Ordertracker' });
+    });
+  });
   it('takes an answer another check of the run already has without contacting the provider', async () => {
     const { health, universal, direct, recognize, recognizeBrowser } = setup();
     const reusedUniversal = vi.fn((source: string) => source === 'ParcelsApp' ? Promise.resolve(history()) : undefined);

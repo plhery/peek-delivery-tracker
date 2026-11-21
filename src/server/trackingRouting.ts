@@ -9,7 +9,7 @@ import { activeRequirements, AUTOMATIC_CARRIER_IDS, carrierAdapter, carrierTimez
 import { checksumRejections, fillPartialAnswer, inferStage, isPartialAnswer, normalizeCarrierResult, resultStage, STAGES, type CarrierResult } from 'universal-parcel-scraper';
 import { isRecord, type JsonObject } from './types';
 import { STORED_EVENT_IDENTITIES } from './supabase';
-import { priorityUniversalSource, universalPlan, universalSourceBudget } from 'universal-parcel-scraper';
+import { priorityUniversalSource, stillReadingMs, universalPlan, universalSourceBudget, universalSourcePatience } from 'universal-parcel-scraper';
 import type { ObservedCoverage, UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
@@ -1946,13 +1946,20 @@ export class TrackingRouter {
     const heldUntil = new Map<UniversalSource, number>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
-    const universal = async (source: UniversalSource): Promise<RoutedResult | null> => {
+    // Providers left while they read the carriers for the number, and when their read ends on the monotonic clock:
+    // the check asks the next providers meanwhile and comes back for the answer.
+    const reading = new Map<UniversalSource, number>();
+    // `patient`: asked for as long as the provider's patience, because others are left to ask and it reads on after
+    // the call. `again`: the second ask of a provider left reading.
+    const universal = async (source: UniversalSource, visit?: 'patient' | 'again'): Promise<RoutedResult | null> => {
       signal?.throwIfAborted();
       // Node's AbortSignal.timeout requires integer milliseconds.
       const remaining = Math.floor(universalDeadline - performance.now());
-      if (attemptedUniversal.has(source) || remaining <= 5_000 || millis(state.failures[source]?.retry_at) > now().getTime()
+      if ((visit !== 'again' && attemptedUniversal.has(source)) || remaining <= 5_000 || millis(state.failures[source]?.retry_at) > now().getTime()
         || (scheduled && awaitsInput(source)) || (sparse && attempts > 0)) return null;
       attemptedUniversal.add(source);
+      // Asked now: what is recorded for it is what this ask finds.
+      if (visit === 'again') heldUntil.delete(source);
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
         const result = dueOnly(normalizeCarrierResult(prefetched), source);
@@ -1982,9 +1989,13 @@ export class TrackingRouter {
         const pause = this.options.wait ?? ((ms, abort) => sleep(ms, undefined, { signal: abort }));
         const since = performance.now();
         let waited = 0;
-        // A wait is taken only when the call still keeps its full lookup budget after it.
+        // A wait is taken only when the call still keeps its full lookup budget after it: for a second ask, the
+        // rest of the provider's read.
+        const needed = visit === 'again'
+          ? Math.min(universalSourceBudget(source), Math.max(0, (reading.get(source) ?? 0) - performance.now()) + 5_000)
+          : universalSourceBudget(source);
         const keepsBudget = (ms: number) =>
-          universalDeadline - Math.max(performance.now(), since + waited) - Math.max(0, ms) - 5_000 >= universalSourceBudget(source);
+          universalDeadline - Math.max(performance.now(), since + waited) - Math.max(0, ms) - 5_000 >= needed;
         let lease = await acquire();
         for (let round = 0; lease && !lease.token && !lease.limited && millis(lease.retry_at); ) {
           const wait = millis(lease.retry_at) - now().getTime();
@@ -2027,9 +2038,12 @@ export class TrackingRouter {
       let answered = false;
       // The number is behind a block the provider is still found in: this parcel waits, the provider does not rest.
       let behindBlock = false;
+      // Left while it reads the carriers for the number: neither an answer nor a failure.
+      let left = false;
       try {
         const answer = await (reused ?? this.options.universal(source, universalNumber,
-          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier));
+          Math.max(1, Math.min(visit === 'patient' ? universalSourcePatience(source) : universalSourceBudget(source),
+            Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier));
         answered = true;
         const result = dueOnly(normalizeCarrierResult(answer), source);
         if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back or not due yet`);
@@ -2050,6 +2064,16 @@ export class TrackingRouter {
         delete state.failures[source];
         return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
       } catch (caught) {
+        // The provider reads the carriers on after the call (Ordertracker) and has its answer for the next ask: it
+        // keeps no failure and no rest. The check comes back after the other providers, or the next check does.
+        const readsFor = stillReadingMs(caught);
+        if (readsFor !== undefined) {
+          left = true;
+          report('provider_reading', source);
+          if (visit === 'patient') reading.set(source, performance.now() + readsFor);
+          heldUntil.set(source, now().getTime() + readsFor);
+          return null;
+        }
         // The provider this number was tracked through finds no history for it. With another number
         // it tracked soon after, it refuses this server whatever it is asked (providerRefusals.ts):
         // it rests as on a rate limit, and the answer is no lack of history for this parcel. Nor is it
@@ -2086,7 +2110,7 @@ export class TrackingRouter {
       } finally {
         // A reused answer was counted, and its lease released, by the check that asked.
         if (token) {
-          if (providerInput || answeredInField) {
+          if ((providerInput || answeredInField) && !left) {
             // Every provider receives the postcode; supported sources can submit it.
             const step = kind === null ? 'history' : kind === 'input_required' ? 'still_required'
               : kind === 'not_found' || kind === 'no_history' ? 'no_history' : 'failed';
@@ -2094,7 +2118,7 @@ export class TrackingRouter {
             report('provider_input_lookup', source, step);
           }
           // An answer about this number, a refusal included, keeps the provider's circuit closed, like not-found.
-          try { await this.options.health.finishTrackingProvider(source, token, behindBlock || kind === 'no_history' || kind === 'input_required' || kind === 'invalid_input' ? 'not_found' : kind, retryAfterMs, performance.now() - before); }
+          try { await this.options.health.finishTrackingProvider(source, token, behindBlock || left || kind === 'no_history' || kind === 'input_required' || kind === 'invalid_input' ? 'not_found' : kind, retryAfterMs, performance.now() - before); }
           catch { report('health_store_unavailable', source, 'transport'); }
         }
       }
@@ -2107,13 +2131,20 @@ export class TrackingRouter {
     let selected: { value: RoutedResult; source: UniversalSource } | undefined;
     // The most scans a provider held beside the carrier's partial answer or label.
     let fullest = 0;
-    for (const source of ordered) {
-      const value = await universal(source).catch((error: unknown) => {
+    // A check someone waits for leaves a provider that reads on after its call (Ordertracker) once its patience is
+    // over, asks the providers after it, and comes back for its answer when none of them had progress.
+    const visits: Array<{ source: UniversalSource; again?: true }> = ordered.map((source) => ({ source }));
+    for (const [index, { source, again }] of visits.entries()) {
+      const visit = again ? 'again' : !scheduled && index < visits.length - 1 ? 'patient' : undefined;
+      const value = await universal(source, visit).catch((error: unknown) => {
         // A later cooldown cannot erase an answer already available to preserve.
         if (thinAnswer && error instanceof RoutingDeferred) return null;
         throw error;
       });
-      if (!value) continue;
+      if (!value) {
+        if (visit === 'patient' && reading.has(source)) visits.push({ source, again: true });
+        continue;
+      }
       // A newly preferred fallback must not hide progress already held by another source.
       if (source === 'Track123' && latest(value) < millis(state.last_event_at)) continue;
       // The carrier's partial answer stands unless this history is fuller and not behind it.

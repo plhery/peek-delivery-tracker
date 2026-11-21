@@ -2684,6 +2684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "jt-express-china-sendungsverfolgung",
+      "title": "J&T Express China Sendungsverfolgung: JT-Nummern & Status",
+      "name": "J&T Express China",
+      "color": "#e62019"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3478,6 +3486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "suivi-jt-express-china",
+      "title": "Suivi J&T Express China\u00a0: numéros JT, statuts et contact",
+      "name": "J&T Express China",
+      "color": "#e62019"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -4174,6 +4190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Jifan: numeri JFGJ, stati e ora di Pechino",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "tracciamento-jt-express-china",
+      "title": "Tracciamento J&T Express China: numeri JT, stati e contatti",
+      "name": "J&T Express China",
+      "color": "#e62019"
     },
     {
       "id": "xinghe-freight",
@@ -4882,6 +4906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "seguimiento-jt-express-china",
+      "title": "Seguimiento J&T Express China: números JT, estados y ayuda",
+      "name": "J&T Express China",
+      "color": "#e62019"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -5530,6 +5562,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Jifan: números JFGJ, estados e hora de Pequim",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "seguimento-jt-express-china",
+      "title": "Seguimento J&T Express China: números JT, estados e ajuda",
+      "name": "J&T Express China",
+      "color": "#e62019"
     },
     {
       "id": "xinghe-freight",
@@ -6246,6 +6286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jifan: numery JFGJ, statusy i czas pekiński",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "sledzenie-jt-express-china",
+      "title": "Śledzenie J&T Express China: numery JT, statusy i kontakt",
+      "name": "J&T Express China",
+      "color": "#e62019"
     },
     {
       "id": "xinghe-freight",

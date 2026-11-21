@@ -2916,6 +2916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "ozon-sendungsverfolgung",
+      "title": "Ozon Sendungsverfolgung: Nummern und Status auf Deutsch",
+      "name": "Ozon",
+      "color": "#005bff"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "jt-express-china-sendungsverfolgung",
@@ -3942,6 +3950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "suivi-ozon",
+      "title": "Suivi Ozon\u00a0: numéros de commande et statuts en français",
+      "name": "Ozon",
+      "color": "#005bff"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "suivi-jt-express-china",
@@ -4878,6 +4894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Jifan: numeri JFGJ, stati e ora di Pechino",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "tracking-ozon",
+      "title": "Tracking Ozon: codici d'ordine e stati in italiano",
+      "name": "Ozon",
+      "color": "#005bff"
     },
     {
       "id": "j-and-t-cn",
@@ -5818,6 +5842,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "seguimiento-ozon",
+      "title": "Seguimiento Ozon: números de pedido y estados en español",
+      "name": "Ozon",
+      "color": "#005bff"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "seguimiento-jt-express-china",
@@ -6714,6 +6746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Jifan: números JFGJ, estados e hora de Pequim",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "rastreio-ozon",
+      "title": "Rastreio Ozon: números de encomenda e estados em português",
+      "name": "Ozon",
+      "color": "#005bff"
     },
     {
       "id": "j-and-t-cn",
@@ -7678,6 +7718,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jifan: numery JFGJ, statusy i czas pekiński",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "sledzenie-ozon",
+      "title": "Śledzenie Ozon: numery zamówień i statusy po polsku",
+      "name": "Ozon",
+      "color": "#005bff"
     },
     {
       "id": "j-and-t-cn",

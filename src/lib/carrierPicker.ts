@@ -19,20 +19,46 @@ export function foldForSearch(value: string): string {
   }).join('');
 }
 
-function compact(value: string): string {
-  return Array.from(foldForSearch(value)).filter((character) => LETTER_OR_DIGIT.test(character)).join('');
+interface Folded {
+  /** `foldForSearch` of the text. */
+  text: string;
+  /** Its letters and digits alone. */
+  compact: string;
 }
 
-function startsWord(text: string, index: number): boolean {
-  return index === 0 || !LETTER_OR_DIGIT.test(Array.from(text)[index - 1] ?? '');
+const foldedTexts = new Map<string, Folded>();
+
+/**
+ * A name, other name or country name folded once: each keystroke searches every carrier's, about two thousand
+ * carriers, and folding them again each time held a phone's typing back.
+ */
+function folded(value: string): Folded {
+  let entry = foldedTexts.get(value);
+  if (!entry) {
+    const text = foldForSearch(value);
+    entry = { text, compact: Array.from(text).filter((character) => LETTER_OR_DIGIT.test(character)).join('') };
+    if (foldedTexts.size >= 50_000) foldedTexts.clear();
+    foldedTexts.set(value, entry);
+  }
+  return entry;
 }
+
+function compact(value: string): string {
+  return folded(value).compact;
+}
+
+const isHighSurrogate = (code: number) => code >= 0xd800 && code <= 0xdbff;
+const isLowSurrogate = (code: number) => code >= 0xdc00 && code <= 0xdfff;
 
 /** The first match of `query` in `text` that starts a word, else -1 (code point index). */
 function wordStart(text: string, query: string): number {
-  const characters = Array.from(text);
-  const length = Array.from(query).length;
-  for (let index = 0; index + length <= characters.length; index += 1) {
-    if (characters.slice(index, index + length).join('') === query && startsWord(text, index)) return index;
+  for (let at = text.indexOf(query); at >= 0; at = text.indexOf(query, at + 1)) {
+    const end = at + query.length;
+    // A match counts from one whole character to another, never from or to the middle of a surrogate pair.
+    if (isLowSurrogate(text.charCodeAt(at)) && isHighSurrogate(text.charCodeAt(at - 1))) continue;
+    if (isHighSurrogate(text.charCodeAt(end - 1)) && isLowSurrogate(text.charCodeAt(end))) continue;
+    const before = Array.from(text.slice(Math.max(0, at - 2), at)).at(-1);
+    if (before === undefined || !LETTER_OR_DIGIT.test(before)) return Array.from(text.slice(0, at)).length;
   }
   return -1;
 }
@@ -51,37 +77,44 @@ export interface CarrierSearchResult {
   score: number;
 }
 
+interface Query {
+  /** The query folded, without the spaces around it. */
+  text: string;
+  /** Its letters and digits alone. */
+  compact: string;
+  /** Its length in code points. */
+  length: number;
+}
+
 function matchCarrier(
   carrier: CarrierInfo,
-  query: string,
+  query: Query,
   countryNames: (code: string) => readonly string[],
 ): Omit<CarrierSearchResult, 'carrier'> | null {
-  const folded = foldForSearch(query.trim());
-  const squeezed = compact(query);
-  if (!folded) return null;
-  const name = foldForSearch(carrier.name);
-  const length = Array.from(folded).length;
+  const { text, compact: squeezed, length } = query;
+  const { text: name, compact: compactName } = folded(carrier.name);
   const lit = (start: number, score: number) => ({ highlight: [start, start + length] as const, score });
   // A query that is the name's whole first word, punctuation aside, comes before one that only
   // starts it: "jt" lists J&T before JTL Express.
-  if (name.startsWith(folded)) return lit(0, LETTER_OR_DIGIT.test(Array.from(name)[length] ?? '') ? 0.25 : 0);
-  const word = wordStart(name, folded);
+  if (name.startsWith(text)) return lit(0, LETTER_OR_DIGIT.test(Array.from(name)[length] ?? '') ? 0.25 : 0);
+  const word = wordStart(name, text);
   if (word > 0) return lit(word, 1);
-  if (squeezed && compact(carrier.name).startsWith(squeezed)) {
+  if (squeezed && compactName.startsWith(squeezed)) {
     return { score: compact(name.split(/\s/u)[0] ?? '') === squeezed ? 0 : 1.5 };
   }
   for (const alias of carrier.aliases) {
-    if (wordStart(foldForSearch(alias), folded) >= 0 || (squeezed && compact(alias).startsWith(squeezed))) {
+    const other = folded(alias);
+    if (wordStart(other.text, text) >= 0 || (squeezed && other.compact.startsWith(squeezed))) {
       return { alias, score: 2 };
     }
   }
-  const inside = codePointIndex(name, folded);
+  const inside = codePointIndex(name, text);
   if (inside > 0) return lit(inside, 3);
-  if (squeezed.length > 1 && compact(carrier.name).includes(squeezed)) return { score: 3.5 };
-  const alias = carrier.aliases.find((candidate) => foldForSearch(candidate).includes(folded));
+  if (squeezed.length > 1 && compactName.includes(squeezed)) return { score: 3.5 };
+  const alias = carrier.aliases.find((candidate) => folded(candidate).text.includes(text));
   if (alias) return { alias, score: 4 };
   const country = carrier.countries.some((code) =>
-    countryNames(code).some((countryName) => wordStart(foldForSearch(countryName), folded) >= 0));
+    countryNames(code).some((countryName) => wordStart(folded(countryName).text, text) >= 0));
   return country ? { score: 5 } : null;
 }
 
@@ -111,9 +144,16 @@ export function searchCarriers(
   },
 ): CarrierSearchResult[] {
   const compare = collator(options.languageTag);
+  const text = foldForSearch(query.trim());
+  if (!text) return [];
+  const prepared: Query = {
+    text,
+    compact: Array.from(text).filter((character) => LETTER_OR_DIGIT.test(character)).join(''),
+    length: Array.from(text).length,
+  };
   return carriers
     .flatMap((carrier) => {
-      const match = matchCarrier(carrier, query, options.countryNames);
+      const match = matchCarrier(carrier, prepared, options.countryNames);
       if (!match) return [];
       return [{ carrier, ...match, score: match.score - (options.preferred?.has(carrier.id) ? 0.3 : 0) }];
     })

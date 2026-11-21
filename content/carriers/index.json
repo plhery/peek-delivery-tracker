@@ -121,7 +121,7 @@
   { "id": "lso", "catalog": "lso", "name": "LSO", "languages": ["en"] },
   { "id": "gofo", "catalog": "gofo", "name": "GOFO Express", "languages": ["en", "es", "fr", "pt", "de", "it", "pl"] },
   { "id": "speedx", "catalog": "speedx", "name": "SpeedX", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
-  { "id": "australia-post", "catalog": "australia-post", "name": "Australia Post", "languages": ["en", "zh"] },
+  { "id": "australia-post", "catalog": "australia-post", "name": "Australia Post", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aramex-au", "catalog": "aramex-au", "name": "Aramex Australia", "languages": ["en"] },
   { "id": "couriersplease", "catalog": "couriersplease", "name": "CouriersPlease", "languages": ["en"] },
   { "id": "nz-post", "catalog": "nz-post", "name": "NZ Post", "languages": ["en"] },

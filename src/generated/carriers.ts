@@ -2460,6 +2460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1aa3ff"
     },
     {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "australia-post-sendungsverfolgung",
+      "title": "Australia Post Sendungsverfolgung: Nummern, Status & Fach",
+      "name": "Australia Post",
+      "color": "#dc1928"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",
@@ -3374,6 +3382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1aa3ff"
     },
     {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "suivi-australia-post",
+      "title": "Suivi Australia Post\u00a0: numéros, statuts et consignes",
+      "name": "Australia Post",
+      "color": "#dc1928"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-allemagne-suivi",
@@ -4166,6 +4182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento SpeedX: numeri SPX, stati e assistenza",
       "name": "SpeedX",
       "color": "#1aa3ff"
+    },
+    {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "tracciamento-australia-post",
+      "title": "Tracciamento Australia Post: codici, stati e locker",
+      "name": "Australia Post",
+      "color": "#dc1928"
     },
     {
       "id": "j-and-t-de",
@@ -4970,6 +4994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1aa3ff"
     },
     {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "seguimiento-australia-post",
+      "title": "Seguimiento de Australia Post: códigos, estados y taquillas",
+      "name": "Australia Post",
+      "color": "#dc1928"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "first-line-seguimiento",
@@ -5770,6 +5802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SpeedX: números SPX, estados e contactos",
       "name": "SpeedX",
       "color": "#1aa3ff"
+    },
+    {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "seguimento-australia-post",
+      "title": "Seguimento Australia Post: códigos, estados e cacifos",
+      "name": "Australia Post",
+      "color": "#dc1928"
     },
     {
       "id": "j-and-t-de",
@@ -6598,6 +6638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SpeedX: numery SPX, statusy i obsługa klienta",
       "name": "SpeedX",
       "color": "#1aa3ff"
+    },
+    {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "sledzenie-australia-post",
+      "title": "Śledzenie Australia Post: numery, statusy i automaty",
+      "name": "Australia Post",
+      "color": "#dc1928"
     },
     {
       "id": "j-and-t-de",

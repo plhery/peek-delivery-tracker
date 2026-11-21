@@ -178,6 +178,11 @@ export interface RoutingState extends JsonObject {
   /** The China Post preview whose fuller provider history was last fetched. The digest binds the lookup inputs and scraper rules too. */
   partial_history?: { fingerprint: string; provider: string; checked_at: string };
   /**
+   * The filed carrier's own answer (its label, part of its history or local clocks) a provider's fuller history was
+   * last served beside, while the parcel's newest scan was QUIET_AFTER old (QUIET_HOLD).
+   */
+  quiet_history?: { fingerprint: string; provider: string; checked_at: string };
+  /**
    * The filed carrier's local-clock answer that a provider's history last matched, adding no scan or stage,
    * or only guessing the clock of a scan the carrier dates by its day alone: then the carrier's answer was kept.
    */
@@ -354,6 +359,13 @@ const LABEL_WAIT = 2 * DAY;
  * same: any scan the carrier adds ends it at once.
  */
 const PARTIAL_HOLD = 3 * HOUR;
+/**
+ * Beside the carrier's own answer, providers follow the cadence of a parcel they alone answer for: once the parcel's
+ * newest scan is QUIET_AFTER old, a scheduled check that gets the same answer from the carrier keeps the history a
+ * provider served beside it for QUIET_HOLD. The carrier is still asked every check, so its news shows at once.
+ */
+const QUIET_HOLD = 3 * HOUR;
+const QUIET_AFTER = DAY;
 /**
  * How long a provider without history for a number nothing has answered for waits before it is asked again,
  * by its answers without history in a row, unless the parcel is filed under a carrier with no adapter of its own: at
@@ -719,7 +731,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
 const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'lookup_language', 'postcode_country', 'account_postcode', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
-  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier', 'written_ahead', 'planned'];
+  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'quiet_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier', 'written_ahead', 'planned'];
 /**
  * The parcel as if it had never stored a reused number's earlier parcel (`earlierParcelRows`):
  * no stage, summary, estimate or rows of that parcel, nor the routing it taught, so the check
@@ -928,6 +940,9 @@ export class TrackingRouter {
       && hasRoutingProgress(value.result)
       ? createHash('sha256').update(JSON.stringify([state.rules, declared, number, parcel.tracking_url,
         parcel.dpd_postcode, metadata.universal_input, value.result])).digest('base64url') : undefined;
+    // Any filed carrier's whole answer, with the lookup inputs and scraper rules (QUIET_HOLD).
+    const answerKey = (value: RoutedResult): string => createHash('sha256').update(JSON.stringify([state.rules, declared, number,
+      parcel.tracking_url, parcel.dpd_postcode, metadata.universal_input, value.sourceCarrierId, value.result])).digest('base64url');
     // Carriers asked in this check whose own answer for the number moved but had only
     // local clocks: the answer, the local history it brought, and how to confirm the carrier.
     const localAnswers = new Map<string, { value: RoutedResult; history: JsonObject | undefined; confirm: () => void }>();
@@ -1635,6 +1650,21 @@ export class TrackingRouter {
       state.next_check_at = iso(now().getTime() + UNIVERSAL_SPACING_MS);
       return kept;
     }
+    // QUIET_HOLD: the carrier's answer is the one a provider's history was served beside, and nothing has moved for a
+    // day. Out for delivery, the news is the delivery, and a manual refresh asks the providers at once.
+    const quiet = state.quiet_history;
+    const quietAge = now().getTime() - millis(quiet?.checked_at);
+    const newest = millis(state.last_event_at);
+    if (scheduled && !changed && !released && universalNumber === number && partial && quiet
+      && quiet.fingerprint === answerKey(partial.value) && quietAge >= 0 && quietAge < QUIET_HOLD
+      && newest > 0 && now().getTime() - newest >= QUIET_AFTER && parcel.current_stage !== 'out_for_delivery'
+      && (typeof metadata.tracking_provider !== 'string' || metadata.tracking_provider === quiet.provider)
+      && sources.includes(quiet.provider as UniversalSource)) {
+      state.direct_retry_at = undefined;
+      const kept = persistResult({ ...partial.value, preserveHistory: true }, partial.carrier);
+      state.next_check_at = iso(now().getTime() + UNIVERSAL_SPACING_MS);
+      return kept;
+    }
     // A provider held exactly the scans and stage of that answer in the last 6 h.
     const copy = state.provider_copy;
     const local = localDirectFallback && localAnswer(localDirectFallback.value.result);
@@ -2322,6 +2352,7 @@ export class TrackingRouter {
         report('delivery_disputed', chosen);
       }
       delete state.partial_history;
+      delete state.quiet_history;
       const partialAnswer = partialDirect ?? localDirectFallback;
       const fingerprint = partialAnswer && universalNumber === number ? partialHistoryKey(partialAnswer.value) : undefined;
       if (fingerprint && partialAnswer && !withoutProgress && !undisputed
@@ -2348,6 +2379,13 @@ export class TrackingRouter {
           state.direct_retry_at = undefined;
           return persistResult(handed, declared);
         }
+      }
+      // Served beside the carrier's own answer once nothing has moved for a day: checks that ask the carrier first keep
+      // this history while its answer stays the same (QUIET_HOLD). A carrier on local clocks keeps its 6 h wait.
+      const newestScan = Math.min(now().getTime(), Math.max(millis(state.last_event_at), latest(value)));
+      if (partialAnswer && !state.partial_history && universalNumber === number && !withoutProgress && !undisputed
+        && newestScan > 0 && now().getTime() - newestScan >= QUIET_AFTER) {
+        state.quiet_history = { fingerprint: answerKey(partialAnswer.value), provider: chosen, checked_at: now().toISOString() };
       }
       return persistResult(value, chosen, withoutProgress);
     }

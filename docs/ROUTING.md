@@ -448,7 +448,7 @@ and providers scan parcels across every time zone.
 | Out for delivery on an earlier day (the carrier's newest scan, on its clock), not expected today | hourly, whoever waits for it, until the carrier scans it again; opening a link checks it as one on screen |
 | Someone waiting for it otherwise: an alert on, or a read in the last hour (direct adapter) | hourly around the clock; manual refresh still allowed |
 | A universal provider alone answers for it (its carrier's own adapter did not answer beside it) | hourly, whoever waits for it; every 3 h once its newest scan is a day old; out for delivery today, every 15 min |
-| A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most |
+| A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most, every 3 h once its newest scan is a day old and the carrier's answer stays the same (below) |
 | PostNL | every 30 min, also after a failure and out for delivery |
 | A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, counted from the run of its last check, out for delivery and on a manual refresh too: a refresh within it asks nothing; when it also sets a wait after a failure, that wait follows a failed check, counted the same way |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
@@ -1266,10 +1266,19 @@ swapped carriers. The map draws the rest of the way to it.
 After a provider fills China Post's partial history, scheduled checks that fetch the exact
 same direct preview keep the saved summary, scans and source, whether the parcel shows that
 provider's summary or China Post's own newer one, but not another provider's. Providers
-backfill the rest
-every 3 hours; a changed preview, lookup input, carrier or scraper release, or a manual refresh,
-asks for it immediately. The preview is still partial, and keeping history does not claim
-a fresh provider lookup or change any scan's clock. Parcel checks keep their existing cadence.
+backfill the rest every 3 hours; a changed preview, lookup input, carrier or scraper release,
+or a manual refresh, asks for it immediately. The preview is still partial, and keeping history
+does not claim a fresh provider lookup or change any scan's clock. Parcel checks keep their
+existing cadence.
+
+Beside any carrier's own answer (its label, part of its history, or local clocks), providers
+follow the cadence of a parcel they alone answer for. Once the parcel's newest scan is a day old,
+for 3 hours after a provider served it, scheduled checks that get the exact same answer from the
+carrier keep that provider's summary, scans and source without asking the providers, unless the
+parcel shows another provider's summary. The carrier is still asked first at every check (a
+carrier on local clocks after its 6-hour wait), so its news shows at once: a changed answer,
+lookup input or scraper release, a parcel out for delivery, or a manual refresh asks the
+providers immediately.
 
 ## Tracking links
 

@@ -551,10 +551,12 @@ Key server modules:
     and archive and restore cover what it needs. The owner deletes one in Peek.
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. A text an assistant sends may also be one number alone, as the Add sheet
-    takes a typed one, when its shape fits a carrier; with the carrier's id from
-    `find_carriers` it is taken whatever its shape, as is a number the text labels, since many
-    carriers' numbers have no shape Peek can tell. `find_carriers` gives the other name it
-    found a carrier by, so a shop's name for it can be checked.
+    takes a typed one, and a number it sends alone or labels is added though its shape fits no
+    carrier: many carriers' numbers have no shape Peek can tell, and the universal providers
+    then look for it. With the carrier's id from `find_carriers` the parcel is filed under
+    that carrier, and the number may be shorter than tracking numbers mostly are.
+    `find_carriers` gives the other name it found a carrier by, so a shop's name for it can be
+    checked.
   - Amazon shows a parcel's carrier and tracking ID only in the buyer's signed-in account, and
     its emails hold no tracking number. So the instructions say first what an import takes: a
     browser on the user's own computer where they are signed in to Amazon, such as Claude in
@@ -563,8 +565,8 @@ Key server modules:
     user to ask again on a computer, or to copy the tracking IDs themselves. Then the steps,
     the same on every Amazon site (amazon.de serves as the example): Your Orders, then
     Track package on each package on its way or just delivered (older orders have no such
-    button), and add the "Tracking ID", never the order number, naming the carrier after
-    "Delivery By" when Peek can't tell the number's shape. It only reads there, never signs in, and says when Amazon tracks a parcel it
+    button), and add the "Tracking ID", never the order number, with the carrier named after
+    "Delivery By" when `find_carriers` knows it. It only reads there, never signs in, and says when Amazon tracks a parcel it
     delivers itself in the account alone. A client may keep the tools without the
     instructions, so `amazon_import_steps` answers the same, `add_parcels`' description sends
     the assistant to it, and `add_parcels`' answer to a text about Amazon that holds no number

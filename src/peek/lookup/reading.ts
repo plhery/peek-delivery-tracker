@@ -318,11 +318,10 @@ function numberEnd(prose: string, number: string): number {
  * as long as tracking numbers are and is no shop's order number. The carriers are then asked. Numbers a carrier
  * claims with certainty are `numbersInText`'s.
  *
- * `anyShape` takes a labelled number whose shape fits no carrier too, and one shorter than most or a character off
- * a carrier's length: for a text whose sender names the carrier, as the Add sheet takes any number with a carrier
- * picked.
+ * A text someone chose to send (`trust`) may label a number whose shape fits no carrier: it is taken too, for the
+ * universal providers to look for.
  */
-export function labelledNumbersInText(text: string, anyShape = false): NumberInText[] {
+export function labelledNumbersInText(text: string, trust?: TextTrust): NumberInText[] {
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
     let prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
@@ -332,15 +331,23 @@ export function labelledNumbersInText(text: string, anyShape = false): NumberInT
       prose = prose.slice(numberEnd(prose, number));
       const normalized = normalizeTrackingNumber(number);
       if (!normalized || found.has(normalized) || YEAR_FIRST_DATE.test(number.trim())) continue;
-      if (anyShape ? neverTracked(normalized) : nonTrackingShape(normalized)) continue;
+      if (trust === 'named' ? neverTracked(normalized) : nonTrackingShape(normalized)) continue;
       const detection = detectCarrierMatch(number, IN_TEXT);
-      if (detection.confidence === 'low' || (anyShape && detection.confidence === 'none')) {
+      if (detection.confidence === 'low' || (trust && detection.confidence === 'none')) {
         found.set(normalized, { normalized, match: { trackingNumber: number, source: 'text', ...detection } });
       }
     }
   }
   return [...found.values()];
 }
+
+/**
+ * How far a text is read beyond an email's, when someone chose to send it, as an assistant does. `sent` takes a
+ * number the text labels, or the one the whole text is, though its shape fits no carrier, as the Add sheet takes
+ * a typed one: the universal providers then look for it. `named` is for a sender who names the carrier, as a
+ * shop's tracking page does: the number may then be shorter than most, or a character off another carrier's.
+ */
+export type TextTrust = 'sent' | 'named';
 
 /** Whether a normalized number is one no carrier tracks whoever names it: a shop's order number or a shipping container's. */
 function neverTracked(normalized: string): boolean {
@@ -353,18 +360,17 @@ const PRINTED_DATE = /^(?:\d{1,2}([./-])\d{1,2}\1\d{2,4}|\d{4}([./-])\d{1,2}\2\d
 
 /**
  * The number a text is, when it is one tracking number and nothing else, as the Add sheet takes a number typed on its
- * own: one word, or groups that each hold a digit ("1234 5678 9012"), so no sentence; no link, no date, no shop's
- * order number and no shipping container's. Its shape fits a carrier and is as long as tracking numbers are, unless
- * `anyShape`: a text whose sender names the carrier is taken whatever its shape.
+ * own, whatever carrier its shape fits or none: one word, or groups that each hold a digit ("1234 5678 9012"), so no
+ * sentence; no link, no date, no shop's order number and no shipping container's. It is as long as tracking numbers
+ * are, unless its sender names the carrier (`named`).
  */
-export function numberAlone(text: string, anyShape = false): NumberInText | null {
+export function numberAlone(text: string, named = false): NumberInText | null {
   const whole = text.trim();
   if (!whole || whole.includes('://') || whole.split(/\s+/).some((group) => !/\d/.test(group))) return null;
   if (PRINTED_DATE.test(whole) || orderShop(whole) || !validTrackingNumber(whole)) return null;
   const normalized = normalizeTrackingNumber(whole);
-  if (!normalized || (anyShape ? neverTracked(normalized) : nonTrackingShape(normalized))) return null;
-  const detection = detectCarrierMatch(whole);
-  return anyShape || detection.confidence !== 'none' ? { normalized, match: { trackingNumber: whole, source: 'number', ...detection } } : null;
+  if (!normalized || (named ? neverTracked(normalized) : nonTrackingShape(normalized))) return null;
+  return { normalized, match: { trackingNumber: whole, source: 'number', ...detectCarrierMatch(whole) } };
 }
 
 /** A line that gives a phone number, whose digits can fit a courier's shape. */

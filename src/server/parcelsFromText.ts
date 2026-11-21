@@ -2,7 +2,7 @@ import 'server-only';
 
 import { isAmazonTrackingNumber } from '../lib/amazon';
 import {
-  carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText,
+  carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numberAlone, numbersInText, type NumberInText, type TextTrust,
 } from '../peek/lookup/reading';
 import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
@@ -36,14 +36,6 @@ export type ParcelAddition =
   | { trackingNumber: string; carrier: string; outcome: 'full' }
   | { trackingNumber: string; carrier: string; outcome: 'unavailable' };
 
-/**
- * How far a text is read beyond an email's, when someone chose to send it, as an assistant does. `alone` takes a
- * text that is one number and nothing else, as the Add sheet takes a typed one. `named` is for a sender who names
- * the carrier of its numbers, as a shop's tracking page does: the number the text is, or one it labels, is then
- * taken whatever its shape, since many carriers' numbers have no shape Peek can tell.
- */
-export type TextTrust = 'alone' | 'named';
-
 /** A label that ends its line, as an email's plain text prints a table: "Sendungsnummer:" and the number below. */
 const LABEL_ENDING_ITS_LINE = /:[ \t]*(?:\r?\n[ \t]*){1,2}(?=\S)/g;
 
@@ -64,7 +56,7 @@ export function trackingNumbersInText(text: string, carriers: readonly CarrierId
   const read = text.slice(0, MOST_TEXT_LENGTH);
   const certain = numbersInText(read).filter(({ normalized }) => nonTrackingShape(normalized)?.kind !== 'order');
   const named = new Set(certain.map(({ normalized }) => normalized));
-  const labelled = labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': '), trust === 'named');
+  const labelled = labelledNumbersInText(read.replace(LABEL_ENDING_ITS_LINE, ': '), trust);
   const numbers = [...certain, ...labelled.filter(({ normalized }) => !named.has(normalized))];
   if (!numbers.length) {
     const bare = carrierNumberInText(read, carriers) ?? (trust ? numberAlone(read, trust === 'named') : null);

@@ -287,8 +287,9 @@ describe('the MCP endpoint', () => {
     expect(initialized.instructions).toContain('the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, .nl, .com and so on: every Amazon site works the same way)');
     expect(initialized.instructions).toContain('at /gp/css/order-history (on amazon.de, for example,');
     expect(initialized.instructions).toContain('If Amazon asks to sign in, stop and ask the user to sign in there themselves');
-    // Amazon names the carrier by a name or a code: the assistant gives its id when Peek can't tell the number's shape.
-    expect(initialized.instructions).toContain('look the carrier up with find_carriers, by the name Amazon writes, which may be a code such as VIR_TR');
+    // The tracking ID is added whatever its shape; Amazon names the carrier by a name or a code, which the assistant passes on.
+    expect(initialized.instructions).toContain('Send each tracking ID to add_parcels, alone as the text, with the item or "Amazon" as the name: Peek adds it and looks for its carrier');
+    expect(initialized.instructions).toContain('When find_carriers knows the carrier by the name Amazon writes, which may be a code such as VIR_TR, give its id as the carrier in the same call');
     expect(initialized.instructions).toContain('Each package on its way or just delivered has its own Track package button');
     expect(initialized.instructions).toContain('That page names the carrier after "Delivery By" and shows the "Tracking ID", with labels in the site\'s language');
     expect(initialized.instructions).toMatch(/order number .* is never one: never send it/);
@@ -597,8 +598,9 @@ describe('the MCP endpoint', () => {
     ]);
     const writer = connect(['parcels:write']);
     const answer = await call(writer, 'add_parcels', { text: `Shipped with UPS: ${UPS}`, name: '  Example Shop ' });
-    // A text an assistant sends may be a number alone, as the Add sheet takes a typed one.
-    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop', [], { trust: 'alone' });
+    // A text an assistant sends may be a number alone, or name one whose carrier Peek can't tell, as the Add sheet takes a typed one.
+    expect(addParcelsFromText).toHaveBeenCalledExactlyOnceWith(expect.any(SupabaseServiceClient), userId, `Shipped with UPS: ${UPS}`, 'Example Shop', [], { trust: 'sent' });
+    expect(answer.result!.content![0]!.text).not.toContain('looking for the carrier');
     expect(answer.result!.structuredContent).toEqual({
       parcels: [
         { trackingNumber: UPS, carrier: 'UPS', outcome: 'added', id: '7d000000-0000-4000-a000-0000000000aa' },
@@ -626,7 +628,7 @@ describe('the MCP endpoint', () => {
     expect(none.result!.structuredContent).toEqual({ parcels: [] });
     const text = none.result!.content![0]!.text;
     expect(text).toContain('Amazon account: Your Orders, then Track package');
-    expect(text).toContain('find its id with find_carriers and send the tracking number again, alone, with that id as the carrier');
+    expect(text).toContain('numbers the text labels as a tracking number and a number sent alone as the text');
     expect(text).toContain(`Peek's guide shows where: https://peek.example${guideHref('en', 'amazon-orders')}`);
     expect(text).not.toContain('Claude in Chrome');
   });
@@ -691,10 +693,25 @@ describe('the MCP endpoint', () => {
     expect(addParcelsFromText).toHaveBeenCalledTimes(1);
     const found = (await call(connect(['parcels:read']), 'find_carriers', { search: 'VIR_TR' })).result!.structuredContent;
     expect(found).toMatchObject({ total: 1, carriers: [{ id: 'jp-home', name: 'JP HOME', alsoCalled: 'VIR Transport' }] });
-    // With a carrier named, the answer no longer asks for one.
-    vi.mocked(addParcelsFromText).mockResolvedValue([]);
-    vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
-    expect((await call(writer, 'add_parcels', { text: 'no number here', carrier: 'jp-home' })).result!.content![0]!.text).not.toContain('find its id');
+    // An empty carrier is none given.
+    await call(writer, 'add_parcels', { text: 'SYNTHETIC7', carrier: ' ' });
+    expect(addParcelsFromText).toHaveBeenLastCalledWith(expect.any(SupabaseServiceClient), userId, 'SYNTHETIC7', '', [], { trust: 'sent' });
+  });
+
+  it('adds a number whose carrier Peek can\'t tell, and says it is looking for the carrier', async () => {
+    vi.mocked(addParcelsFromText).mockResolvedValue([
+      { trackingNumber: 'SYNTHETIC8', carrier: 'unknown', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000ac', jobId: null },
+      { trackingNumber: 'SYNTHETIC9', carrier: 'unknown', outcome: 'known', packageId: '7d000000-0000-4000-a000-0000000000ad' },
+    ]);
+    const answer = (await call(connect(['parcels:write']), 'add_parcels', { text: 'Tracking ID: SYNTHETIC8, SYNTHETIC9' })).result!;
+    expect(answer.structuredContent).toMatchObject({ parcels: [{ carrier: 'Unknown carrier', outcome: 'added' }, { carrier: 'Unknown carrier', outcome: 'known' }] });
+    expect(answer.content![0]!.text).toContain('SYNTHETIC8 (Unknown carrier): added');
+    expect(answer.content![0]!.text).toContain('Peek is looking for the carrier of the parcels added under "Unknown carrier"');
+    // One followed already is not being looked for anew.
+    vi.mocked(addParcelsFromText).mockResolvedValue([
+      { trackingNumber: 'SYNTHETIC9', carrier: 'unknown', outcome: 'known', packageId: '7d000000-0000-4000-a000-0000000000ad' },
+    ]);
+    expect((await call(connect(['parcels:write']), 'add_parcels', { text: 'SYNTHETIC9' })).result!.content![0]!.text).not.toContain('looking for the carrier');
   });
 
   it('names no guide on a site that serves none', async () => {

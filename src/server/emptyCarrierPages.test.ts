@@ -1,5 +1,5 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import de from '../../shared/locales/de.json';
 
 vi.mock('next/headers', () => ({
@@ -26,6 +26,10 @@ const { CarrierIndexRoute, carrierIndexMetadata } = await import('./carrierPages
 const { default: sitemap } = await import('../../app/sitemap');
 
 const [english] = CARRIER_LINKS.en;
+
+// As on Peek's own site, which serves its guides and carriers' pages.
+beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
+afterEach(() => { vi.unstubAllEnvs(); });
 
 describe('the carriers’ own page of a language no carrier’s page is written in', () => {
   it('is led to by no link: its readers are sent to the English one', () => {

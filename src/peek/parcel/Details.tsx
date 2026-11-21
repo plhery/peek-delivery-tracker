@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, type ReactNode } from 'react';
 import { Icon } from '../../components/Icon';
 import { trackingFailureMessage, useI18n, type MessageKey } from '../../i18n';
 import { AMAZON_HISTORY_EXPIRED } from '../../lib/amazon';
+import { useGuidePages } from '../../guides/GuidePagesContext';
 import { guideHref } from '../../guides/paths';
 import type { Locale } from '../../lib/locale';
 import { numberToCheck, type Translate } from '../../lib/messages';
@@ -178,7 +179,7 @@ export function Notes({ view, stage, flag, trouble, carrier, outage }: {
   const active = carrierInfo(activeTrackingCarrierId(parcel));
   const expired = active.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automatic = tracksAutomatically(active.id) && !expired;
-  const amazonGuide = guideHref(locale, 'amazon-orders');
+  const amazonGuide = useGuidePages() ? guideHref(locale, 'amazon-orders') : null;
   const scan = currentEvent(parcel.events, parcel.returnHeld);
   const notes: Note[] = [];
 

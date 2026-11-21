@@ -1,4 +1,5 @@
 import { amazonOrdersUrl, isAmazonTrackingNumber, requiresAmazonAccount } from '../lib/amazon';
+import { useGuidePages } from '../guides/GuidePagesContext';
 import { guideHref } from '../guides/paths';
 import { trackAction } from '../lib/analytics';
 import { isDemoBuild } from '../lib/buildMode';
@@ -196,7 +197,7 @@ export function AddParcelSheet({
     && ['available', 'expired'].includes(currentVerification.amazonShippingStatus ?? '');
   const accountRequired = amazonNumber ? !shippingConfirmed : requiresAmazonAccount(selectedCarrier);
   // Amazon's carriers can be tracked: the guide shows where an Amazon order's tracking number is.
-  const amazonGuide = guideHref(locale, 'amazon-orders');
+  const amazonGuide = useGuidePages() ? guideHref(locale, 'amazon-orders') : null;
   const detectedCarrier = shouldLookup && currentVerification ? currentVerification.carrier
     : recognizedCarrier ?? parsedTracking.carrier;
   const resolvedCarrier = amazonNumber ? shippingConfirmed ? 'amazon-shipping' : 'amazon-logistics'

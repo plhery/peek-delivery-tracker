@@ -1,4 +1,4 @@
-import { AMAZON_ACCOUNT_MESSAGE, isAmazonTrackingNumber, requiresAmazonAccount } from '../lib/amazon';
+import { isAmazonTrackingNumber, requiresAmazonAccount } from '../lib/amazon';
 import {
   CARRIER_IDS,
   type ApiGiftWords,
@@ -9,6 +9,7 @@ import {
 import { carrierInfo, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { readsPostcodeCountry, sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
+import { amazonAccountMessage } from './amazonGuide';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import { isLocale, type Locale } from '../lib/locale';
 import { createECDH } from 'node:crypto';
@@ -109,7 +110,7 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
   let carrier = rawCarrier;
   if (!VALID_CARRIERS.has(carrier)) throw new HttpError(400, 'Choose a supported carrier');
   if (carrier === 'amazon-shipping' && !isAmazonTrackingNumber(trackingNumber)) throw new HttpError(400, 'Invalid Amazon tracking number');
-  if (requiresAmazonAccount(carrier, trackingNumber)) throw new HttpError(400, AMAZON_ACCOUNT_MESSAGE);
+  if (requiresAmazonAccount(carrier, trackingNumber)) throw new HttpError(400, amazonAccountMessage());
   if (/^44\d{16}$/.test(trackingNumber)) carrier = 'quickpac';
   let extras: ReturnType<typeof normalizeCarrierInputs>;
   try {

@@ -10,6 +10,7 @@ import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage }
 import { MAIL_LINK_BOOTSTRAP } from './src/lib/mailLinkConfig';
 import { PHONE_APP_PATH, phoneAppDestination, phoneAppSource } from './src/lib/phoneApp';
 import { assistantsConfigured } from './src/server/assistants/settings';
+import { guidePagesOn } from './src/server/guideSettings';
 import { pageSupabaseOrigins } from './src/server/runtime';
 import { legacyHostRedirect } from './src/server/siteHosts';
 
@@ -33,7 +34,8 @@ export function proxy(request: NextRequest) {
   if (moved) return NextResponse.redirect(moved, { status: 308, headers: { 'Cache-Control': 'private, no-store' } });
 
   // The apps name a guide by its id, which leads to its slug in the address's language.
-  const guide = guideIdDestination(request.nextUrl.pathname);
+  const pages = guidePagesOn();
+  const guide = pages && guideIdDestination(request.nextUrl.pathname);
   if (guide) return NextResponse.redirect(new URL(guide, request.url), { status: 308 });
 
   // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else.
@@ -83,9 +85,11 @@ export function proxy(request: NextRequest) {
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', contentSecurityPolicy);
   // An address below a language's guides that names none of them is the site's 404 page, written whole by the
-  // server, and so is one below its carriers that names no carrier written in that language, and the page on
-  // connecting an assistant where none can connect.
-  const missing = namesNoGuide(pathname) || namesNoCarrier(pathname) || (assistants !== null && !assistantsConfigured());
+  // server, and so is one below its carriers that names no carrier written in that language, every guides and
+  // carriers address on a site that serves none (`GUIDE_PAGES`), and the page on connecting an assistant where none
+  // can connect.
+  const missing = (pages ? namesNoGuide(pathname) || namesNoCarrier(pathname) : guidePathLanguage(pathname) !== null || carrierPageLanguage(pathname) !== null)
+    || (assistants !== null && !assistantsConfigured());
   // A carrier's page in a language with pages alone declares its text's language for the whole document, and the
   // page learns which from here alone: a client's own header is never passed on.
   const written = carrierPageLanguage(pathname);

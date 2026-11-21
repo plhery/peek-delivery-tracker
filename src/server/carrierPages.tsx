@@ -11,6 +11,7 @@ import { guideLanguage, hrefLanguage, interfaceLanguage, type Locale, type PageL
 import { carrierAddresses, carrierAlternates, carrierLinkBySlug, carrierLinks, carrierText } from './carrierTexts';
 import { guideWords, languageNames, pageMetadata } from './guidePages';
 import { guideLinks } from './guides';
+import { guidePagesOn } from './guideSettings';
 import { landingAddress } from './landingMetadata';
 import { jsonForScript, peekOrganization } from './landingStructuredData';
 import { siteOrigin } from './requestOrigin';
@@ -18,17 +19,19 @@ import { sitePicture } from './sitePreview';
 
 /**
  * The carriers' own page's metadata. In a language no carrier's page is written in yet, it lists the English
- * pages, so search engines leave it out and no other language names it, until one is.
+ * pages, so search engines leave it out and no other language names it, until one is. None on a site that serves
+ * no carriers' pages (`GUIDE_PAGES`), whose page is the 404 page.
  */
 export async function carrierIndexMetadata(locale: Locale): Promise<Metadata> {
+  if (!guidePagesOn()) return {};
   const t = guideWords(locale);
   const metadata = await pageMetadata(locale, (site) => carrierAlternates(site), t('carriers.heading'), t('carriers.lead'));
   return hasCarrierPages(locale) ? metadata : { ...metadata, alternates: undefined, robots: { index: false, follow: true } };
 }
 
-/** A carrier's page's metadata, or none of its own for a slug without a page, which the page answers with a 404. */
+/** A carrier's page's metadata, or none of its own for a slug without a page or on a site that serves none, which the page answers with a 404. */
 export async function carrierMetadata(locale: PageLanguage, slug: string): Promise<Metadata> {
-  const link = carrierLinkBySlug(locale, slug);
+  const link = guidePagesOn() && carrierLinkBySlug(locale, slug);
   if (!link) return {};
   const { title, description, published, updated } = carrierText(locale, link.id);
   return pageMetadata(locale, (site) => carrierAlternates(site, link.id), title, description, { published, updated });
@@ -39,6 +42,7 @@ const described = (locale: PageLanguage) => carrierLinks(locale).map((link) => (
 /** The carriers with a page in a language, all on one page; the English ones until a carrier's page is written in it. */
 export async function CarrierIndexRoute({ locale }: { locale: Locale }) {
   await connection();
+  if (!guidePagesOn()) notFound();
   const t = guideWords(locale);
   const addresses = { ...carrierAddresses(), [locale]: carrierPath(locale) };
   return <GuideFrame locale={locale} t={t} addresses={addresses} languageNames={languageNames()} screen={`carriers/${locale}`}>
@@ -48,15 +52,15 @@ export async function CarrierIndexRoute({ locale }: { locale: Locale }) {
 
 /**
  * One carrier's page, in the language of its address. The proxy sends an address without a page, a
- * carrier's in a language it is not written in too, to the site's 404 page before it gets here; reached
- * anyway, such a slug is still a 404. Its language links lead to the carrier's page in the languages it is
+ * carrier's in a language it is not written in too, and every carrier's page on a site that serves none, to the
+ * site's 404 page before it gets here; reached anyway, such an address is still a 404. Its language links lead to the carrier's page in the languages it is
  * written in, and to the carriers' own page in the others. A page in a language with pages alone stands in
  * English: its words around the text, its trail, its picture and its way to the tracker; its carriers lead
  * to their pages in its language first, then to the English ones.
  */
 export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slug: string }) {
   await connection();
-  const link = carrierLinkBySlug(locale, slug);
+  const link = guidePagesOn() && carrierLinkBySlug(locale, slug);
   if (!link) notFound();
   const text = carrierText(locale, link.id);
   const ui = interfaceLanguage(locale);

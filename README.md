@@ -131,7 +131,8 @@ Opened in a browser, the address shows a 404 page; that's expected.
 Peek is one long-running container (the web app, the API and the worker that keeps
 checking carriers) next to Supabase for sign-in and Postgres, behind HTTPS.
 [Deployment](docs/DEPLOYMENT.md) takes you through the database, sign-in, the build,
-upgrades and backups.
+upgrades and backups. A copy serves no guides or carrier pages: they are Peek's own
+([Trademarks and content](#trademarks-and-content)).
 
 ## Under the hood
 
@@ -157,4 +158,12 @@ to run before a pull request. Carrier fixes go to the
 [scraper](https://github.com/plhery/universal-parcel-scraper/blob/main/CONTRIBUTING.md).
 Found a security problem? [Report it privately](SECURITY.md).
 
-Made by [@plhery](https://x.com/plhery). Licensed under [Apache 2.0](LICENSE).
+## Trademarks and content
+
+The code is licensed under [Apache 2.0](LICENSE). The name "Peek", its logo and app icon,
+the App Store and Google Play assets, and the guides and carrier pages (the texts under
+`content/`) are not: Paul-Louis Hery keeps all rights to them. A copy or fork may not
+publish them or use the name "Peek", and a fork must rename itself before it is published
+or run as a public service. [Trademarks and content](TRADEMARKS.md) has the details.
+
+Made by [@plhery](https://x.com/plhery).

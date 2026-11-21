@@ -608,9 +608,10 @@ struct ParcelDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(localizer.text(parcel.amazonShippingHistoryExpired ? "add.amazonHistoryExpired" : catalog.trackingHintKey(for: parcel.activeTrackingCarrier), ["carrier": carrier.displayName]))
                         .font(.footnote).foregroundStyle(Brand.secondaryText)
-                    if catalog.requiresAmazonAccount(parcel.activeTrackingCarrier) && !parcel.amazonShippingHistoryExpired {
+                    if catalog.requiresAmazonAccount(parcel.activeTrackingCarrier) && !parcel.amazonShippingHistoryExpired,
+                       let guide = catalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language) {
                         // The guide shows where Amazon names the carrier and number that track the parcel instead.
-                        Link(destination: CarrierCatalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language)) {
+                        Link(destination: guide) {
                             HStack(spacing: 6) {
                                 Text(localizer.text("add.amazonGuide"))
                                 Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular)).accessibilityHidden(true)

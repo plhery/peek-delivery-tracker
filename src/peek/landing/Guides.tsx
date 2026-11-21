@@ -1,6 +1,7 @@
 import { useId, useRef, useState, type MouseEvent } from 'react';
 import { carrierListPath } from '../../carriers/paths';
 import { GUIDE_LINKS } from '../../generated/guides';
+import { useGuidePages } from '../../guides/GuidePagesContext';
 import { guidePath } from '../../guides/paths';
 import { useI18n } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
@@ -10,7 +11,8 @@ import { documentLanguage, guideLanguage } from '../../lib/locale';
  * The foot's way to the guides. It is a link to their page; a plain click
  * opens their list in place instead. The list is in the page from the start,
  * out of sight, so a search engine reads every guide's address on the landing,
- * and the way to the carriers' pages below it.
+ * and the way to the carriers' pages below it. Nothing on a site that serves
+ * no guides.
  */
 export function GuidesLink() {
   const { t, locale } = useI18n();
@@ -23,7 +25,7 @@ export function GuidesLink() {
   const id = useId();
   // A language the guides are not written in reads them in the nearest one.
   const language = guideLanguage(locale);
-  const links = GUIDE_LINKS[language];
+  const links = useGuidePages() ? GUIDE_LINKS[language] : [];
   if (!links.length) return null;
   const showing = () => list.current?.matches(':popover-open') === true;
 

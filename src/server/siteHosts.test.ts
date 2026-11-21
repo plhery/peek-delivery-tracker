@@ -1,6 +1,6 @@
 import { unstable_doesMiddlewareMatch } from 'next/experimental/testing/server';
 import { NextRequest } from 'next/server';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { config, proxy } from '../../proxy';
 import { assistantsPath } from '../assistants/paths';
 import { carrierPath } from '../carriers/paths';
@@ -155,7 +155,27 @@ describe('legacyHostRedirect', () => {
 
 describe('the page proxy', () => {
   const page = (url: string, init?: ConstructorParameters<typeof NextRequest>[1]) => proxy(new NextRequest(url, init));
+  // As on Peek's own site, which serves its guides and carriers' pages.
+  beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
   afterEach(() => { vi.unstubAllEnvs(); });
+
+  it('answers every guides and carriers address with the 404 page on a site that serves none', () => {
+    vi.stubEnv('GUIDE_PAGES', '');
+    const answer = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test' } });
+    const paths = [
+      // A guide named by its id, as the apps link one, is not led on to its page either.
+      ...GUIDE_LANGUAGES.flatMap((locale) => [guidePath(locale), ...GUIDE_LINKS[locale].slice(0, 2).flatMap(({ id, slug }) => [guidePath(locale, slug), guidePath(locale, id)])]),
+      ...SUPPORTED_LOCALES.map((locale) => carrierPath(locale)),
+      ...Object.keys(CARRIER_LINKS).flatMap((language) => CARRIER_LINKS[language as keyof typeof CARRIER_LINKS].slice(0, 1).map(({ slug }) => carrierPath(language as PageOnlyLanguage, slug))),
+    ];
+    for (const path of paths) {
+      const response = answer(path);
+      expect(response.status, path).toBe(200);
+      expect(response.headers.get('x-middleware-rewrite'), path).toBe('https://peek.example.test/_not-found');
+      expect(response.headers.get('cache-control'), path).toBe('private, no-store');
+    }
+    for (const path of ['/', '/de', '/guidesmore', '/carriersmore', '/app']) expect(answer(path).headers.get('x-middleware-rewrite'), path).toBeNull();
+  });
 
   it('answers a page on a legacy host with a permanent redirect that nothing stores', () => {
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');

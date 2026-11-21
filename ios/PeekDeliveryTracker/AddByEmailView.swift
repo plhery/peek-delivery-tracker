@@ -13,6 +13,7 @@ struct AddByEmailPage: View {
 
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ObservedObject private var catalog = CarrierCatalog.shared
     @State private var copied = false
     @State private var confirmingRenew = false
     @State private var forwarding = false
@@ -27,8 +28,10 @@ struct AddByEmailPage: View {
                     Text(localizer.text("inbox.intro"))
                         .font(.subheadline).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
-                    OutLink(url: CarrierCatalog.guideURL("add-parcels-by-email", base: linkBase, language: localizer.language), key: "inbox.guide")
-                        .accessibilityIdentifier("addByEmail.guide")
+                    if let guide = catalog.guideURL("add-parcels-by-email", base: linkBase, language: localizer.language) {
+                        OutLink(url: guide, key: "inbox.guide")
+                            .accessibilityIdentifier("addByEmail.guide")
+                    }
                 }
                 if let failure = model.failure {
                     Text(localizer.errorMessage(failure, fallback: "inbox.failed"))
@@ -114,8 +117,9 @@ struct AddByEmailPage: View {
                     }
                 }
                 if emails.contains(where: \.heldNoNumberUnexplained) { note(localizer.text("inbox.noNumber")) }
-                if emails.contains(where: \.heldNumberInAmazonAccount) {
-                    OutLink(url: CarrierCatalog.amazonGuideURL(base: linkBase, language: localizer.language), key: "add.amazonGuide")
+                if emails.contains(where: \.heldNumberInAmazonAccount),
+                   let guide = catalog.amazonGuideURL(base: linkBase, language: localizer.language) {
+                    OutLink(url: guide, key: "add.amazonGuide")
                         .accessibilityIdentifier("addByEmail.amazonGuide")
                 }
                 if offer.showsUsage {

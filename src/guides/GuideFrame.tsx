@@ -26,7 +26,7 @@ function Mark({ size }: { size: number }) {
  * stands in the frame of `locale`, which declares its own language, and its
  * foot names its own language too.
  */
-export function GuideFrame({ locale, language = locale, t, addresses, languageNames, screen, children }: {
+export function GuideFrame({ locale, language = locale, t, addresses, languageNames, screen, guides = true, children }: {
   locale: Locale;
   /** The language of the page's text, when it is not `locale`'s. */
   language?: PageLanguage;
@@ -37,6 +37,8 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
   languageNames: Record<Locale, string> & Partial<Record<PageLanguage, string>>;
   /** The page's name in the usage counts. */
   screen: string;
+  /** Whether the foot leads to the guides and the carriers' pages: not on a site that serves none (`GUIDE_PAGES`). */
+  guides?: boolean;
   children: ReactNode;
 }) {
   const tracker = languagePath(locale);
@@ -53,8 +55,8 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
     <footer className="guide-footer">
       <div className="guide-footer__links">
         <a className="guide-footer__name" href={tracker}><Mark size={18} />{t('app.title')} · {t('app.tagline')}</a>
-        <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>
-        <a href={carrierListPath(locale)}>{t('carriers.all')}</a>
+        {guides && <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>}
+        {guides && <a href={carrierListPath(locale)}>{t('carriers.all')}</a>}
         <a href="/privacy.html">{t('auth.privacyLink')}</a>
         <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>

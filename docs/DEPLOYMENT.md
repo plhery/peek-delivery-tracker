@@ -353,6 +353,15 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   `<origin>/oauth/clients/home-assistant.json`, on any origin, a development server's
   included.
 
+## Guides and carrier pages
+
+Off unless `GUIDE_PAGES=on`. Their texts, under `content/`, are Peek's own and not licensed with
+the code ([TRADEMARKS.md](../TRADEMARKS.md)), so only Peek's own site turns them on. Off, every
+address under `/guides` and `/carriers`, in every language, is the site's 404 page; the
+sitemap, and so IndexNow, leaves them out; no page links them; the Amazon message names no
+guide; and `/api/carriers` answers `"guidePages": false`, so the apps link none either. On, they
+are canonical on `CANONICAL_ORIGIN`.
+
 ## Moving to another host
 
 One container can answer on several hosts. To move the site, serve the new host next to

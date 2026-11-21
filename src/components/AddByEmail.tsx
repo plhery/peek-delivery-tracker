@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import type { ApiAddByEmail, ApiAddByEmailEntry, ApiAddByEmailResponse } from '../generated/apiContract';
 import { GUIDE_LINKS } from '../generated/guides';
+import { useGuidePages } from '../guides/GuidePagesContext';
 import { guidePath } from '../guides/paths';
 import { useI18n } from '../i18n';
 import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } from '../lib/addByEmail';
@@ -77,8 +78,9 @@ const SERVICE_NAMES: Record<Exclude<MailService, 'other'>, string> = { gmail: 'G
 
 /** A guide, adding parcels by email unless another is named, in the reader's language or the nearest one it is written in. */
 function GuideLink({ locale, id: named = 'add-parcels-by-email', children }: { locale: Locale; id?: string; children: string }) {
+  const guides = useGuidePages();
   const language = guideLanguage(locale);
-  const guide = GUIDE_LINKS[language].find(({ id }) => id === named);
+  const guide = guides && GUIDE_LINKS[language].find(({ id }) => id === named);
   if (!guide) return null;
   return <p className="add-by-email__note"><a className="add-by-email__link" href={guidePath(language, guide.slug)} target="_blank" rel="noopener"
     hrefLang={language === locale ? undefined : documentLanguage(language)}>{children}<span aria-hidden="true"> ›</span></a></p>;

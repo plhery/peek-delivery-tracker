@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { servingGuides } from '../../test/guidePages';
 
 const links = vi.hoisted(() => ({
   en: [{ id: 'customs', slug: 'held-at-customs', title: 'Held at customs' }, { id: 'tracking-statuses', slug: 'tracking-statuses-explained', title: 'Tracking statuses, explained' }],
@@ -51,7 +52,7 @@ afterEach(() => {
 
 describe('the landing’s way to the guides', () => {
   it('has every guide’s address in the page as the server writes it, and the carriers’, out of sight until asked for', () => {
-    const html = renderToString(<GuidesLink />);
+    const html = renderToString(servingGuides({ children: <GuidesLink /> }));
     expect(html).toContain('href="/guides"');
     expect(html).toContain('href="/guides/held-at-customs"');
     expect(html).toContain('href="/guides/tracking-statuses-explained"');
@@ -59,8 +60,12 @@ describe('the landing’s way to the guides', () => {
     expect(html).toContain('popover="auto"');
   });
 
+  it('shows no way to the guides on a site that serves none', () => {
+    expect(renderToString(<GuidesLink />)).toBe('');
+  });
+
   it('opens the list in place on a plain click, and counts it', () => {
-    render(<GuidesLink />);
+    render(<GuidesLink />, { wrapper: servingGuides });
     expect(link()).toHaveAttribute('href', '/guides');
     // The click is taken: the browser does not follow the link.
     expect(press()).toBe(true);
@@ -72,7 +77,7 @@ describe('the landing’s way to the guides', () => {
   });
 
   it('says whether the list is open, and names it by its heading', () => {
-    render(<GuidesLink />);
+    render(<GuidesLink />, { wrapper: servingGuides });
     expect(link()).toHaveAttribute('aria-expanded', 'false');
     press();
     expect(link()).toHaveAttribute('aria-expanded', 'true');
@@ -84,7 +89,7 @@ describe('the landing’s way to the guides', () => {
   });
 
   it('closes the list on a press of the link while it is open, by pointer or keyboard, counting only its opening', () => {
-    render(<GuidesLink />);
+    render(<GuidesLink />, { wrapper: servingGuides });
     press();
     // The browser closes an open list on a press outside it; the click that follows must not open it again.
     fireEvent.pointerDown(link());
@@ -114,7 +119,7 @@ describe('the landing’s way to the guides', () => {
   });
 
   it('follows the link to the guides’ own page on a modified click, and in a browser without popovers', () => {
-    render(<GuidesLink />);
+    render(<GuidesLink />, { wrapper: servingGuides });
     expect(press({ metaKey: true })).toBe(false);
     expect(list().showPopover).not.toHaveBeenCalled();
     delete (HTMLElement.prototype as Partial<HTMLElement>).showPopover;
@@ -123,14 +128,14 @@ describe('the landing’s way to the guides', () => {
   });
 
   it('lists the guides of the page’s language, under that language’s addresses', () => {
-    render(<I18nProvider initialLocale="fr" initialMessages={fr}><GuidesLink /></I18nProvider>);
+    render(<I18nProvider initialLocale="fr" initialMessages={fr}><GuidesLink /></I18nProvider>, { wrapper: servingGuides });
     expect(screen.getByRole('link', { name: 'Guides' })).toHaveAttribute('href', '/fr/guides');
     expect(within(list()).getByRole('link', { name: 'Colis en douane', hidden: true })).toHaveAttribute('href', '/fr/guides/colis-en-douane');
     expect(within(list()).getByRole('link', { name: 'Tous les transporteurs', hidden: true })).toHaveAttribute('href', '/fr/carriers');
   });
 
   it('shows nothing while a language has no guides', () => {
-    const { container } = render(<I18nProvider initialLocale="de" initialMessages={de}><GuidesLink /></I18nProvider>);
+    const { container } = render(<I18nProvider initialLocale="de" initialMessages={de}><GuidesLink /></I18nProvider>, { wrapper: servingGuides });
     expect(container).toBeEmptyDOMElement();
   });
 });

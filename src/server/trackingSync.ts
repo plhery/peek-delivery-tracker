@@ -3,7 +3,7 @@ import { answeredWithoutNews, carrierErrorReason, deferredTrackingFailure, NO_NE
 import { NUMBER_UNKNOWN, REFUSED_NUMBER } from '../lib/messages';
 import { CarrierError, carrierErrorKind, IndeterminateError, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
-import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
+import { AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
 import { isLocale } from '../lib/locale';
 import { carrierAdapter } from './carriers';
@@ -25,6 +25,7 @@ import { trackCarrier } from 'universal-parcel-scraper/node';
 import { airportTimeZone, carrierHomeZone, dateLocalClocks, locatePlace, placeTimeZone } from 'universal-parcel-scraper/places';
 import type { StepRecord, StepRecorder } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
+import { amazonAccountMessage } from './amazonGuide';
 import { normalizedLookupCountry } from './lookupCountry';
 import { preflightInputNeeded, takePreflightHistory } from './trackingPreflight';
 import { loadProviderCoverage, observedCoverage } from './providerCoverage';
@@ -2731,7 +2732,7 @@ export class TrackingSyncService {
         await audit.step('persist_package', async () => {
           await persist({
             sync_status: 'unsupported',
-            sync_error: accountRequired ? AMAZON_ACCOUNT_MESSAGE : 'Automatic updates are unavailable for this carrier. Change the carrier or check the tracking link.',
+            sync_error: accountRequired ? amazonAccountMessage() : 'Automatic updates are unavailable for this carrier. Change the carrier or check the tracking link.',
             last_synced_at: null,
           });
         });

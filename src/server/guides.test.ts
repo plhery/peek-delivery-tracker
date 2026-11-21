@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import de from '../../shared/locales/de.json';
 import fr from '../../shared/locales/fr.json';
 import { GUIDE_LANGUAGES, type GuideLanguage } from '../lib/locale';
@@ -17,6 +17,8 @@ const { guide, guideAddresses, guideAlternates, guideLinkBySlug, guideLinks, gui
 const { GuideIndexRoute, GuideRoute, guideIndexMetadata, guideMetadata } = await import('./guidePages');
 const { frenchSpacing } = await import('../guides/markdown');
 
+// As on Peek's own site, which serves its guides and carriers' pages.
+beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
 afterEach(() => { request.host = 'peek.example'; vi.unstubAllEnvs(); });
 
 const ids = guideLinks('en').map(({ id }) => id);
@@ -132,5 +134,15 @@ describe('what a guides page tells a search engine', () => {
       expect(words, slug).not.toMatch(/ [?!;:»]|« /);
       expect(words).toContain(frenchSpacing(fr['guides.cta.title']));
     }
+  });
+});
+
+describe('a site that serves no guides', () => {
+  it('answers the guides with the 404 page, with no metadata of their own', async () => {
+    vi.stubEnv('GUIDE_PAGES', '');
+    await expect(GuideIndexRoute({ locale: 'en' })).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+    await expect(GuideRoute({ locale: 'de', slug: guideLinks('de')[0].slug })).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+    expect(await guideIndexMetadata('en')).toEqual({});
+    expect(await guideMetadata('fr', guideLinks('fr')[0].slug)).toEqual({});
   });
 });

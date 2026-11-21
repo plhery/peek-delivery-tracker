@@ -65936,7 +65936,7 @@
             "description": "Versioned public carrier catalog used by native clients",
             "headers": {
               "ETag": {
-                "description": "Content fingerprint for conditional refreshes",
+                "description": "Content fingerprint for conditional refreshes, covering guidePages too",
                 "schema": {
                   "type": "string"
                 }
@@ -65948,11 +65948,16 @@
                   "type": "object",
                   "required": [
                     "version",
+                    "guidePages",
                     "x-carriers"
                   ],
                   "properties": {
                     "version": {
                       "type": "string"
+                    },
+                    "guidePages": {
+                      "type": "boolean",
+                      "description": "Whether the site serves its guides (/guides) and carrier pages (/carriers). A client links them only when true; a server without the field serves none."
                     },
                     "x-carriers": {
                       "type": "object",

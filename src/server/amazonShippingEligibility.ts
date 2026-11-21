@@ -1,6 +1,7 @@
 import 'server-only';
 
-import { AMAZON_ACCOUNT_MESSAGE, AMAZON_CHECK_UNAVAILABLE_MESSAGE } from '../lib/amazon';
+import { AMAZON_CHECK_UNAVAILABLE_MESSAGE } from '../lib/amazon';
+import { amazonAccountMessage } from './amazonGuide';
 import { amazonShippingEligibility } from 'universal-parcel-scraper/node';
 import { captureOperationalError } from './observability';
 import { HttpError } from './api';
@@ -20,6 +21,6 @@ export async function checkAmazonShipping(trackingNumber: string): Promise<'avai
 export async function verifyAmazonShippingAddition(carrier: string, trackingNumber: string): Promise<void> {
   if (carrier !== 'amazon-shipping') return;
   const status = await checkAmazonShipping(trackingNumber);
-  if (status === 'not-found') throw new HttpError(400, AMAZON_ACCOUNT_MESSAGE);
+  if (status === 'not-found') throw new HttpError(400, amazonAccountMessage());
   if (status === 'unavailable') throw new HttpError(503, AMAZON_CHECK_UNAVAILABLE_MESSAGE);
 }

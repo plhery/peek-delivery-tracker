@@ -5,6 +5,7 @@ import { AndroidTestScreen } from '../../src/components/AndroidTestScreen';
 import { guideAddresses } from '../../src/guides/guideAddresses';
 import { ANDROID_TEST_OPEN } from '../../src/lib/androidTest';
 import { translateMessage } from '../../src/lib/messages';
+import { guidePagesOn } from '../../src/server/guideSettings';
 import { messagesFor, requestLanguage, requestLocale } from '../../src/server/requestLocale';
 
 /** A page for the closed test only: never indexed. */
@@ -21,5 +22,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AndroidTestPage() {
   if (!ANDROID_TEST_OPEN) notFound();
   await connection();
-  return <AndroidTestScreen guide={guideAddresses('android-app')} {...await requestLanguage()} />;
+  return <AndroidTestScreen guide={guidePagesOn() ? guideAddresses('android-app') : undefined} {...await requestLanguage()} />;
 }

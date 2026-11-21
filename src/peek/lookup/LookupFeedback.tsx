@@ -3,6 +3,7 @@ import { CarrierMark, CarrierTruck } from '../../components/CarrierMark';
 import { PostcodeCountry } from '../../components/PostcodeCountry';
 import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
+import { useGuidePages } from '../../guides/GuidePagesContext';
 import { guideHref } from '../../guides/paths';
 import { amazonOrdersUrl } from '../../lib/amazon';
 import { carrierBrand } from '../../lib/carrierBrand';
@@ -254,6 +255,6 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
  */
 function AmazonGuideLink() {
   const { t, locale } = useI18n();
-  const href = guideHref(locale, 'amazon-orders');
+  const href = useGuidePages() ? guideHref(locale, 'amazon-orders') : null;
   return href && <a className="door-note__action" href={href} target="_blank" rel="noopener">{t('add.amazonGuide')}<Icon name="arrow" /></a>;
 }

@@ -16,7 +16,8 @@ import { POST as register } from '../../app/oauth/register/route';
 import { POST as revoke } from '../../app/oauth/revoke/route';
 import { POST as token } from '../../app/oauth/token/route';
 import { guideHref } from '../guides/paths';
-import { AMAZON_ACCOUNT_MESSAGE, AMAZON_GUIDE_URL } from '../lib/amazon';
+import { AMAZON_ACCOUNT_MESSAGE } from '../lib/amazon';
+import { amazonAccountMessage } from './amazonGuide';
 import { forgetAssistantEmails } from './assistants/access';
 import { newClientId, newSecret, pkceChallenge, secretDigest, type Scope } from './assistants/settings';
 import { SupabaseAuthenticator } from './auth';
@@ -610,6 +611,7 @@ describe('the MCP endpoint', () => {
   });
 
   it('tells the assistant where an Amazon order\'s tracking number is, and never to send its order number', async () => {
+    vi.stubEnv('GUIDE_PAGES', 'on');
     const writer = connect(['parcels:write']);
     const tools = (await rpc(await mcp(writer, 'tools/list'))).result!.tools! as Array<{ name: string; description: string }>;
     // For a client that keeps the tools but not the instructions: what the import takes, and the tool that says the rest.
@@ -625,11 +627,12 @@ describe('the MCP endpoint', () => {
     const text = none.result!.content![0]!.text;
     expect(text).toContain('Amazon account: Your Orders, then Track package');
     expect(text).toContain('find its id with find_carriers and send the tracking number again, alone, with that id as the carrier');
-    expect(text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+    expect(text).toContain(`Peek's guide shows where: https://peek.example${guideHref('en', 'amazon-orders')}`);
     expect(text).not.toContain('Claude in Chrome');
   });
 
   it('answers a text about an Amazon order that holds no number with what the import takes', async () => {
+    vi.stubEnv('GUIDE_PAGES', 'on');
     vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
     const writer = connect(['parcels:write']);
@@ -641,13 +644,14 @@ describe('the MCP endpoint', () => {
       expect(told, text).toContain('Amazon\'s emails hold no tracking number');
       expect(told, text).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon');
       expect(told, text).toContain('Without such a browser, as in a phone app, don\'t start');
-      expect(told, text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+      expect(told, text).toContain(`Peek's guide shows where: https://peek.example${guideHref('en', 'amazon-orders')}`);
     }
   });
 
   it('says what an Amazon import takes and its steps before the assistant tries, and changes nothing', async () => {
+    vi.stubEnv('GUIDE_PAGES', 'on');
     vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: 'fr' });
-    const french = `https://peektracker.com${guideHref('fr', 'amazon-orders')}`;
+    const french = `https://peek.example${guideHref('fr', 'amazon-orders')}`;
     const writer = connect(['parcels:write']);
     const tools = (await rpc(await mcp(writer, 'tools/list'))).result!.tools! as Array<{ name: string; description: string }>;
     expect(tools.find(({ name }) => name === 'amazon_import_steps')!.description)
@@ -693,19 +697,35 @@ describe('the MCP endpoint', () => {
     expect((await call(writer, 'add_parcels', { text: 'no number here', carrier: 'jp-home' })).result!.content![0]!.text).not.toContain('find its id');
   });
 
+  it('names no guide on a site that serves none', async () => {
+    const writer = connect(['parcels:write']);
+    const started = await mcp(writer, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
+    const { instructions } = (await rpc(started)).result! as { instructions: string };
+    expect(instructions).toContain('tell the user Amazon tracks that one only in their Amazon account. On Amazon');
+    expect(instructions).not.toContain('guide');
+    vi.mocked(addParcelsFromText).mockResolvedValue([]);
+    const none = await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' });
+    expect(none.result!.content![0]!.text).toMatch(/Your Orders, then Track package\.$/);
+    vi.mocked(addParcelsFromText).mockResolvedValue([{ trackingNumber: 'TBA999999999980', carrier: 'amazon-logistics', outcome: 'refused' as const, reason: amazonAccountMessage() }]);
+    const refused = await call(writer, 'add_parcels', { text: 'Tracking ID: TBA999999999980' });
+    expect(refused.result!.structuredContent).toMatchObject({ parcels: [{ reason: AMAZON_ACCOUNT_MESSAGE }] });
+  });
+
   it('links the Amazon guide in the language the account last used, read once a request', async () => {
+    vi.stubEnv('GUIDE_PAGES', 'on');
     const auth = vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: 'de-CH' });
-    const german = `https://peektracker.com${guideHref('de', 'amazon-orders')}`;
-    expect(german).not.toBe(AMAZON_GUIDE_URL);
+    const english = `https://peek.example${guideHref('en', 'amazon-orders')}`;
+    const german = `https://peek.example${guideHref('de', 'amazon-orders')}`;
+    expect(german).not.toBe(english);
     const writer = connect(['parcels:write']);
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
     expect((await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' })).result!.content![0]!.text).toContain(german);
     // Synthetic Amazon numbers, as the public routes' tests use.
     vi.mocked(addParcelsFromText).mockResolvedValue(['TBA999999999980', 'TBA999999999998'].map((trackingNumber) => (
-      { trackingNumber, carrier: 'amazon-logistics', outcome: 'refused' as const, reason: AMAZON_ACCOUNT_MESSAGE })));
+      { trackingNumber, carrier: 'amazon-logistics', outcome: 'refused' as const, reason: amazonAccountMessage() })));
     const refused = await call(writer, 'add_parcels', { text: 'Tracking IDs: TBA999999999980, TBA999999999998' });
     const reasons = (refused.result!.structuredContent!.parcels as Array<{ reason: string }>).map(({ reason }) => reason);
-    expect(reasons).toEqual(Array(2).fill(AMAZON_ACCOUNT_MESSAGE.replace(AMAZON_GUIDE_URL, german)));
+    expect(reasons).toEqual(Array(2).fill(amazonAccountMessage().replace(english, german)));
     expect(auth).toHaveBeenCalledTimes(2);
   });
 

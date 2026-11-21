@@ -28,6 +28,8 @@ describe('the days the site shows', () => {
 
   it('dates no carrier’s page, guide or sitemap entry after the build', async () => {
     vi.stubEnv('PEEK_BUILD_DAY', '2000-01-01');
+    // The sitemap dates the guides and the carriers' pages, on a site that serves them.
+    vi.stubEnv('GUIDE_PAGES', 'on');
     const { carrierLinks, carrierText, carrierUpdated } = await import('./carrierTexts');
     const { guide, guideLinks, guideUpdated } = await import('./guides');
     const [carrier] = carrierLinks('en');

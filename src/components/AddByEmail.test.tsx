@@ -11,6 +11,7 @@ import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } 
 import { gmailFilter } from '../lib/emailFilter';
 import { AccountMenu } from './AccountMenu';
 import { AddByEmailPage } from './AddByEmail';
+import { servingGuides } from '../test/guidePages';
 
 vi.mock('../lib/addByEmail', () => ({ readAddByEmail: vi.fn(), openAddByEmail: vi.fn(), closeAddByEmail: vi.fn(), setAddByEmailNotify: vi.fn() }));
 vi.mock('./NotificationControl', () => ({ NotificationControl: () => null }));
@@ -28,7 +29,7 @@ describe('adding parcels by email in Settings', () => {
   it('shows no row while the server offers the account no address', async () => {
     vi.mocked(readAddByEmail).mockResolvedValue(null);
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
+    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />, { wrapper: servingGuides });
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     await waitFor(() => expect(readAddByEmail).toHaveBeenCalled());
     expect(screen.queryByRole('button', { name: /Add parcels by email/ })).not.toBeInTheDocument();
@@ -37,7 +38,7 @@ describe('adding parcels by email in Settings', () => {
   it('reads the offer again when the reader comes back to the tab, so Gmail\'s confirmation shows', async () => {
     vi.mocked(readAddByEmail).mockResolvedValue(offer(inbox));
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
+    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />, { wrapper: servingGuides });
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     await waitFor(() => expect(readAddByEmail).toHaveBeenCalledTimes(1));
     vi.useFakeTimers({ toFake: ['Date'] });
@@ -54,7 +55,7 @@ describe('adding parcels by email in Settings', () => {
     vi.mocked(openAddByEmail).mockResolvedValue(offer(inbox));
     const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     const user = userEvent.setup();
-    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
+    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />, { wrapper: servingGuides });
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     await user.click(await screen.findByRole('button', { name: /^Add parcels by email ?Beta$/ }));
     expect(screen.getByRole('heading', { name: 'Add parcels by email Beta' })).toBeInTheDocument();
@@ -72,7 +73,7 @@ describe('adding parcels by email in Settings', () => {
     const onChange = vi.fn();
     vi.mocked(setAddByEmailNotify).mockResolvedValue(offer({ ...inbox, notify: false }));
     const user = userEvent.setup();
-    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={onChange} />);
+    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={onChange} />, { wrapper: servingGuides });
     const notify = screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' });
     expect(notify).toHaveAttribute('aria-checked', 'true');
     // One line, just above "Turn off".
@@ -91,7 +92,7 @@ describe('adding parcels by email in Settings', () => {
     vi.mocked(setAddByEmailNotify).mockRejectedValue(new Error('offline'));
     const onChange = vi.fn();
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} offer={offer({ ...inbox, notify: true })} onChange={onChange} />);
+    render(<AddByEmailPage apiAuth={apiAuth} offer={offer({ ...inbox, notify: true })} onChange={onChange} />, { wrapper: servingGuides });
     await user.click(screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' }));
     expect(await screen.findByRole('alert')).toBeInTheDocument();
     expect(onChange).not.toHaveBeenCalled();
@@ -102,7 +103,7 @@ describe('adding parcels by email in Settings', () => {
     vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
     const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} />);
+    render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} />, { wrapper: servingGuides });
     // Forwarding by a filter is folded away: one email forwarded by hand needs none of it.
     expect(screen.getByText('Forward automatically').closest('details')).not.toHaveAttribute('open');
     // Before the first email, the list keeps its place and says what will show there.
@@ -129,7 +130,7 @@ describe('adding parcels by email in Settings', () => {
   it('walks through Gmail in its order: the address confirmed, forwarding of all mail left off, then the filter', async () => {
     vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.test" offer={offer(inbox)} onChange={vi.fn()} />);
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.test" offer={offer(inbox)} onChange={vi.fn()} />, { wrapper: servingGuides });
     await user.click(screen.getByText('Forward automatically'));
     // An address of a domain no service owns starts on Gmail.
     const services = screen.getByRole('group', { name: 'Your mail service' });
@@ -164,7 +165,7 @@ describe('adding parcels by email in Settings', () => {
     vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
     const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} email="owner@hotmail.fr" offer={offer(inbox)} onChange={vi.fn()} />);
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@hotmail.fr" offer={offer(inbox)} onChange={vi.fn()} />, { wrapper: servingGuides });
     await user.click(screen.getByText('Forward automatically'));
     const services = screen.getByRole('group', { name: 'Your mail service' });
     expect(within(services).getByRole('button', { pressed: true })).toHaveTextContent('Outlook');
@@ -213,7 +214,7 @@ describe('adding parcels by email in Settings', () => {
     vi.mocked(openAddByEmail).mockResolvedValue(offer({ ...inbox, address: 'add+qrstuvwxyz234567@in.example.com' }));
     vi.mocked(closeAddByEmail).mockResolvedValue();
     const user = userEvent.setup();
-    render(<AddByEmailPage apiAuth={apiAuth} email="owner@outlook.com" offer={offer(shown)} onChange={onChange} />);
+    render(<AddByEmailPage apiAuth={apiAuth} email="owner@outlook.com" offer={offer(shown)} onChange={onChange} />, { wrapper: servingGuides });
     // The steps open by themselves while Gmail's confirmation waits, on Gmail whatever the account's address, with the
     // confirmation in the step that asks for it.
     expect(screen.getByText('Forward automatically').closest('details')).toHaveAttribute('open');
@@ -247,7 +248,7 @@ describe('adding parcels by email in Settings', () => {
       ...inbox, lastMailAt: new Date(now).toISOString(), lastResult: 'none', lastAdded: 0,
       recent: [{ at: new Date(now).toISOString(), sender: 'Amazon.it', result: 'none', added: 0, account: 'Amazon' }],
     };
-    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(shown)} onChange={onChange} />);
+    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(shown)} onChange={onChange} />, { wrapper: servingGuides });
     const recent = () => within(screen.getByRole('region', { name: 'Recent emails' }));
     expect(recent().getByRole('listitem').querySelector('.add-by-email__what')?.textContent)
       .toBe('Amazon.itThe tracking number shows only in your Amazon account');
@@ -262,9 +263,14 @@ describe('adding parcels by email in Settings', () => {
     expect(screen.getByText('Some shops, like Amazon, put no tracking number in their emails.')).toBeInTheDocument();
   });
 
+  it('links no guide on a site that serves none', () => {
+    render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} />);
+    expect(screen.getAllByRole('link').filter((link) => link.getAttribute('href')?.includes('/guides'))).toEqual([]);
+  });
+
   it('links the guide, in the reader\'s language or the nearest one it is written in', () => {
     const guide = () => screen.getByRole('link', { name: /guide|Ratgeber|guia|статья/ });
-    const { unmount } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(null)} onChange={vi.fn()} />);
+    const { unmount } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(null)} onChange={vi.fn()} />, { wrapper: servingGuides });
     expect(guide()).toHaveAttribute('href', '/guides/add-parcels-by-email');
     expect(guide()).toHaveTextContent('Read the whole guide');
     expect(guide()).toHaveAttribute('target', '_blank');
@@ -272,7 +278,7 @@ describe('adding parcels by email in Settings', () => {
     unmount();
 
     const shown = (locale: 'de' | 'pt-br' | 'ru', messages: Messages) => render(
-      <I18nProvider initialLocale={locale} initialMessages={messages}><AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} /></I18nProvider>);
+      <I18nProvider initialLocale={locale} initialMessages={messages}><AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} /></I18nProvider>, { wrapper: servingGuides });
     shown('de', de);
     expect(guide()).toHaveAttribute('href', '/de/guides/versandmail-weiterleiten-paket-verfolgen');
     expect(guide()).not.toHaveAttribute('hreflang');

@@ -232,6 +232,8 @@ describe('public product metadata', () => {
   });
 
   it('lists the pages meant to be found, on the canonical origin when one is configured', async () => {
+    // As on Peek's own site, which serves its guides and carriers' pages; without them the sitemap lists none (carrierPages.test.ts).
+    vi.stubEnv('GUIDE_PAGES', 'on');
     const local = alternates('https://delivery.example.test');
     const here = await sitemap();
     expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[hrefLanguage(locale)], alternates: { languages: local } })));

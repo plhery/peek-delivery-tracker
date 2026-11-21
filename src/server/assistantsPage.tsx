@@ -10,6 +10,7 @@ import { documentLanguage, guideLanguage, type Locale } from '../lib/locale';
 import { assistantsConfigured } from './assistants/settings';
 import { guideWords, languageNames, pageMetadata } from './guidePages';
 import { guide, guideLinks } from './guides';
+import { guidePagesOn } from './guideSettings';
 
 /** The guides the page offers at its end: connecting an assistant, and Home Assistant. */
 const ASSISTANT_GUIDES: readonly string[] = ['ai-assistants', 'home-assistant'];
@@ -31,10 +32,12 @@ export async function AssistantsRoute({ locale }: { locale: Locale }) {
   const settings = assistantsConfigured();
   if (!settings) notFound();
   const t = guideWords(locale);
-  // The guides on assistants, in the reader's language where the guides are written in it, in English otherwise.
+  // The guides on assistants, in the reader's language where the guides are written in it, in English otherwise; none
+  // on a site that serves no guides.
   const language = guideLanguage(locale);
-  const related = guideLinks(language).filter((link) => ASSISTANT_GUIDES.includes(link.id));
-  return <GuideFrame locale={locale} t={t} addresses={assistantsAddresses()} languageNames={languageNames()} screen={`assistants/${locale}`}>
+  const guides = guidePagesOn();
+  const related = guides ? guideLinks(language).filter((link) => ASSISTANT_GUIDES.includes(link.id)) : [];
+  return <GuideFrame locale={locale} t={t} addresses={assistantsAddresses()} languageNames={languageNames()} screen={`assistants/${locale}`} guides={guides}>
     <AssistantsGuide t={t} mcpUrl={settings.resource} />
     {related.length > 0 && <nav className="guide-more" aria-labelledby="guide-more">
       <h2 id="guide-more">{t('guides.more')}</h2>

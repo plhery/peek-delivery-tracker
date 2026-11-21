@@ -4,6 +4,7 @@ import { PhoneAppScreen } from '../../src/components/PhoneAppScreen';
 import { guideAddresses } from '../../src/guides/guideAddresses';
 import { translateMessage } from '../../src/lib/messages';
 import { phoneAppSource } from '../../src/lib/phoneApp';
+import { guidePagesOn } from '../../src/server/guideSettings';
 import { messagesFor, requestLanguage, requestLocale } from '../../src/server/requestLocale';
 
 /** An address for the code to scan only: never indexed. */
@@ -19,6 +20,6 @@ export async function generateMetadata(): Promise<Metadata> {
 /** The landing's code to scan, for whoever the proxy did not send on to an app: a computer, or an iPad that says it is a Mac. */
 export default async function PhoneAppPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   await connection();
-  return <PhoneAppScreen source={phoneAppSource((await searchParams).utm_source)}
-    guides={{ iphone: guideAddresses('iphone-app'), android: guideAddresses('android-app') }} {...await requestLanguage()} />;
+  const guides = guidePagesOn() ? { iphone: guideAddresses('iphone-app'), android: guideAddresses('android-app') } : undefined;
+  return <PhoneAppScreen source={phoneAppSource((await searchParams).utm_source)} guides={guides} {...await requestLanguage()} />;
 }

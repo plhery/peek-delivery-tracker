@@ -746,16 +746,31 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(link.url.host, "www.amazon.ca")
     }
 
-    func testAmazonGuideOpensInTheLanguageTheGuidesAreReadIn() {
+    func testAmazonGuideOpensInTheLanguageTheGuidesAreReadIn() throws {
+        let guides = try CarrierCatalog(data: Self.catalogData(guidePages: true))
         let base = URL(string: "https://peektracker.com")!
-        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .en).absoluteString, "https://peektracker.com/guides/amazon-orders")
-        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .fr).absoluteString, "https://peektracker.com/fr/guides/amazon-orders")
-        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ptBR).absoluteString, "https://peektracker.com/pt/guides/amazon-orders")
-        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ru).absoluteString, "https://peektracker.com/guides/amazon-orders")
-        XCTAssertEqual(CarrierCatalog.guideURL("add-parcels-by-email", base: base, language: .de).absoluteString,
+        XCTAssertEqual(guides.amazonGuideURL(base: base, language: .en)?.absoluteString, "https://peektracker.com/guides/amazon-orders")
+        XCTAssertEqual(guides.amazonGuideURL(base: base, language: .fr)?.absoluteString, "https://peektracker.com/fr/guides/amazon-orders")
+        XCTAssertEqual(guides.amazonGuideURL(base: base, language: .ptBR)?.absoluteString, "https://peektracker.com/pt/guides/amazon-orders")
+        XCTAssertEqual(guides.amazonGuideURL(base: base, language: .ru)?.absoluteString, "https://peektracker.com/guides/amazon-orders")
+        XCTAssertEqual(guides.guideURL("add-parcels-by-email", base: base, language: .de)?.absoluteString,
                        "https://peektracker.com/de/guides/add-parcels-by-email")
-        XCTAssertEqual(CarrierCatalog.guideURL("add-parcels-by-email", base: URL(string: "https://peektracker.com/")!, language: .en).absoluteString,
+        XCTAssertEqual(guides.guideURL("add-parcels-by-email", base: URL(string: "https://peektracker.com/")!, language: .en)?.absoluteString,
                        "https://peektracker.com/guides/add-parcels-by-email")
+    }
+
+    /// A server serves its guides and carrier pages only when its operator turns them on, and says so in the catalog:
+    /// an older one doesn't say, and the bundled catalog neither, so neither links a guide.
+    func testGuidesAreLinkedOnlyWhenTheSiteSaysItServesThem() throws {
+        let base = URL(string: "https://delivery.example")!
+        let on = try CarrierCatalog(data: Self.catalogData(guidePages: true))
+        XCTAssertTrue(on.guidePages)
+        XCTAssertNotNil(on.amazonGuideURL(base: base, language: .en))
+        for off in try [CarrierCatalog(data: Self.catalogData(guidePages: false)), CarrierCatalog(data: Self.catalogData(guidePages: nil)), catalog] {
+            XCTAssertFalse(off.guidePages)
+            XCTAssertNil(off.amazonGuideURL(base: base, language: .en))
+            XCTAssertNil(off.guideURL("add-parcels-by-email", base: base, language: .fr))
+        }
     }
 
     func testDetectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {
@@ -1899,6 +1914,50 @@ final class CarrierCatalogTests: XCTestCase {
         )
     }
 
+    /// Whether the site serves its guides is kept with the cached catalog, and a 304 keeps it; the server's ETag covers
+    /// it, so turning it off reaches the app as a new catalog.
+    @MainActor
+    func testWhetherTheSiteServesGuidesIsCachedAndKeptByANotModified() async throws {
+        let cacheURL = FileManager.default.temporaryDirectory
+            .appending(path: "carrier-catalog-\(UUID().uuidString).json")
+        defer { try? FileManager.default.removeItem(at: cacheURL) }
+        let site = URL(string: "https://delivery.example")!
+        let served = try Self.catalogData(guidePages: true)
+        let first = try CarrierCatalog(
+            data: Self.bundledCatalogData,
+            cacheURL: cacheURL,
+            loader: { request in (served, Self.response(for: request, status: 200, headers: ["ETag": "\"guides-v1\""])) }
+        )
+        XCTAssertFalse(first.guidePages)
+        let firstResult = await first.refresh(from: site, force: true)
+        XCTAssertEqual(firstResult, .updated)
+        XCTAssertTrue(first.guidePages)
+
+        let cached = CarrierCatalog(
+            bundle: .main,
+            cacheURL: cacheURL,
+            loader: { request in (Data(), Self.response(for: request, status: 304)) }
+        )
+        XCTAssertTrue(cached.guidePages)
+        let cachedResult = await cached.refresh(from: site, force: true)
+        XCTAssertEqual(cachedResult, .notModified)
+        XCTAssertTrue(cached.guidePages)
+        XCTAssertNotNil(cached.amazonGuideURL(base: site, language: .en))
+
+        // Without the field, as from an older server, the guides are off again, and stay off in the cache.
+        let older = try Self.catalogData(guidePages: nil)
+        let switched = CarrierCatalog(
+            bundle: .main,
+            cacheURL: cacheURL,
+            loader: { request in (older, Self.response(for: request, status: 200, headers: ["ETag": "\"guides-v2\""])) }
+        )
+        let switchedResult = await switched.refresh(from: site, force: true)
+        XCTAssertEqual(switchedResult, .updated)
+        XCTAssertFalse(switched.guidePages)
+        XCTAssertNil(switched.amazonGuideURL(base: site, language: .en))
+        XCTAssertFalse(CarrierCatalog(bundle: .main, cacheURL: cacheURL).guidePages)
+    }
+
     @MainActor
     func testRefreshedDefinitionsReplaceRememberedDetections() async throws {
         let catalog = try CarrierCatalog(
@@ -2115,6 +2174,13 @@ final class CarrierCatalogTests: XCTestCase {
       }
     }
     """.utf8)
+
+    /// The future catalog as a server sends it with `guidePages`, or without it (nil) as an older server does.
+    private static func catalogData(guidePages: Bool?) throws -> Data {
+        var answer = try XCTUnwrap(JSONSerialization.jsonObject(with: futureCatalogData) as? [String: Any])
+        answer["guidePages"] = guidePages
+        return try JSONSerialization.data(withJSONObject: answer)
+    }
 
     /// A catalog from a newer release whose rules name a check this build does not have.
     private static let unknownChecksumCatalogData = Data(#"""

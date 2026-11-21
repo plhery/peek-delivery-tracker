@@ -9,6 +9,7 @@ import { frenchSpacing } from '../guides/markdown';
 import { hrefLanguage, hrefLanguages, interfaceLanguage, isPageOnlyLanguage, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type Locale, type PageLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
 import { guide, guideAddresses, guideAlternates, guideLinkBySlug, guideLinks } from './guides';
+import { guidePagesOn } from './guideSettings';
 import { landingAddress } from './landingMetadata';
 import { jsonForScript, peekOrganization } from './landingStructuredData';
 import { messagesFor } from './requestLocale';
@@ -63,14 +64,16 @@ export async function pageMetadata(locale: PageLanguage, alternates: (site: URL)
   };
 }
 
+/** The guides page's metadata, or none on a site that serves no guides (`GUIDE_PAGES`), whose page is the 404 page. */
 export async function guideIndexMetadata(locale: GuideLanguage): Promise<Metadata> {
+  if (!guidePagesOn()) return {};
   const t = guideWords(locale);
   return pageMetadata(locale, (site) => guideAlternates(site), t('guides.heading'), t('guides.lead'));
 }
 
-/** A guide's metadata, or none of its own for a slug without a guide, which the page answers with a 404. */
+/** A guide's metadata, or none of its own for a slug without a guide or on a site that serves none, which the page answers with a 404. */
 export async function guideMetadata(locale: GuideLanguage, slug: string): Promise<Metadata> {
-  const link = guideLinkBySlug(locale, slug);
+  const link = guidePagesOn() && guideLinkBySlug(locale, slug);
   if (!link) return {};
   const { title, description, published, updated } = guide(locale, link.id);
   return pageMetadata(locale, (site) => guideAlternates(site, link.id), title, description, { published, updated });
@@ -78,9 +81,10 @@ export async function guideMetadata(locale: GuideLanguage, slug: string): Promis
 
 const described = (locale: GuideLanguage) => guideLinks(locale).map((link) => ({ link, description: guide(locale, link.id).description }));
 
-/** The guides of a language, all on one page. */
+/** The guides of a language, all on one page, on a site that serves them. */
 export async function GuideIndexRoute({ locale }: { locale: GuideLanguage }) {
   await connection();
+  if (!guidePagesOn()) notFound();
   const t = guideWords(locale);
   return <GuideFrame locale={locale} t={t} addresses={guideAddresses()} languageNames={languageNames()} screen={`guides/${locale}`}>
     <GuideIndex locale={locale} t={t} guides={described(locale)} />
@@ -88,11 +92,12 @@ export async function GuideIndexRoute({ locale }: { locale: GuideLanguage }) {
 }
 
 /**
- * One guide, in the language of its address. The proxy sends an address without a guide to the
- * site's 404 page before it gets here; reached anyway, such a slug is still a 404.
+ * One guide, in the language of its address. The proxy sends an address without a guide, and every guide on a
+ * site that serves none, to the site's 404 page before it gets here; reached anyway, such an address is still a 404.
  */
 export async function GuideRoute({ locale, slug }: { locale: GuideLanguage; slug: string }) {
   await connection();
+  if (!guidePagesOn()) notFound();
   const links = guideLinks(locale);
   const at = links.findIndex((link) => link.slug === slug);
   if (at < 0) notFound();

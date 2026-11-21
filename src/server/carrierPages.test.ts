@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
 import { isLocale, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
@@ -18,7 +18,10 @@ const { carrierAddresses, carrierAlternates, carrierLanguages, carrierLinkBySlug
 const { CarrierIndexRoute, CarrierRoute, carrierIndexMetadata, carrierMetadata } = await import('./carrierPages');
 const { frenchSpacing, questions } = await import('../guides/markdown');
 const { peekOrganization } = await import('./landingStructuredData');
+const { default: sitemap } = await import('../../app/sitemap');
 
+// As on Peek's own site, which serves its guides and carriers' pages.
+beforeEach(() => { vi.stubEnv('GUIDE_PAGES', 'on'); });
 afterEach(() => { request.host = 'peek.example'; vi.unstubAllEnvs(); });
 
 const [first] = carrierLinks('en');
@@ -204,5 +207,18 @@ describe('what a carrier’s page tells a search engine', () => {
       expect(words).not.toMatch(/ [?!;:»]|« /);
     }
     expect(pages[0]).toContain(frenchSpacing(fr['carriers.lead']));
+  });
+});
+
+describe('a site that serves no carriers\' pages', () => {
+  it('answers them with the 404 page, with no metadata of their own, and lists neither them nor the guides', async () => {
+    vi.stubEnv('GUIDE_PAGES', '');
+    await expect(CarrierIndexRoute({ locale: 'en' })).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+    await expect(CarrierRoute({ locale: 'en', slug: first.slug })).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+    expect(await carrierIndexMetadata('fr')).toEqual({});
+    expect(await carrierMetadata('en', first.slug)).toEqual({});
+    const listed = (await sitemap()).flatMap(({ url, alternates }) => [url, ...Object.values(alternates?.languages ?? {})]);
+    expect(listed.filter((url) => /\/(guides|carriers)(\/|$)/.test(new URL(url!).pathname))).toEqual([]);
+    expect(listed).toContain('https://peek.example/privacy.html');
   });
 });

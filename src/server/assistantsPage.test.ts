@@ -83,6 +83,16 @@ describe('the page on connecting an assistant', () => {
     for (const locale of SUPPORTED_LOCALES) expect(html).toContain(`href="${assistantsPath(locale)}"`);
   });
 
+  it('leads to the guides on assistants and to every guide only on a site that serves them', async () => {
+    const guides = (html: string) => [...html.matchAll(/href="([^"]*\/(?:guides|carriers)(?:\/[^"]*)?)"/g)].map(([, href]) => href);
+    vi.stubEnv('GUIDE_PAGES', 'on');
+    expect(guides(renderToStaticMarkup(await AssistantsRoute({ locale: 'en' })))).toEqual(expect.arrayContaining(['/guides', '/carriers']));
+    vi.stubEnv('GUIDE_PAGES', '');
+    const html = renderToStaticMarkup(await AssistantsRoute({ locale: 'en' }));
+    expect(guides(html)).toEqual([]);
+    expect(html).not.toContain(en['guides.more']);
+  });
+
   it('fills every name it shows, in every language', async () => {
     for (const locale of SUPPORTED_LOCALES) {
       const html = renderToStaticMarkup(await AssistantsRoute({ locale }));

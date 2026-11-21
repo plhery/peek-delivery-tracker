@@ -6,6 +6,7 @@ import { GUIDE_LANGUAGES, hrefLanguages, SUPPORTED_LOCALES, type GuideLanguage, 
 import { assistantsConfigured } from '../src/server/assistants/settings';
 import { carrierAlternates, carrierLanguages, carrierUpdated } from '../src/server/carrierTexts';
 import { guideAlternates, guideUpdated } from '../src/server/guides';
+import { guidePagesOn } from '../src/server/guideSettings';
 import { landingAddress, landingAlternates } from '../src/server/landingMetadata';
 import { siteOrigin } from '../src/server/requestOrigin';
 
@@ -22,23 +23,38 @@ const lastChecked = (locale: GuideLanguage) => GUIDE_LINKS[locale].map(({ id }) 
 const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) => carrierUpdated(locale, id)).sort().at(-1);
 
 /**
- * The pages meant to be found: the landing in each language, the guides' own
- * page and every guide in each language they are written in, each naming the
- * others, the carriers' own page in each language a carrier's page is written
- * in and every carrier's page in each of its languages, naming only those, as
- * hreflang names them, the page on connecting an assistant in each language
- * where assistants can connect, the privacy notice, the terms of use, the help
- * page and the accessibility page. A guide or a carrier's page is dated by the
- * day its facts were last checked. A parcel, an invitation and the demo are not listed.
+ * The pages meant to be found: the landing in each language, the guides and the
+ * carriers' pages where the site serves them (`GUIDE_PAGES`), the page on
+ * connecting an assistant in each language where assistants can connect, the
+ * privacy notice, the terms of use, the help page and the accessibility page.
+ * A parcel, an invitation and the demo are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
   const languages = xmlAddresses(landingAlternates(origin));
-  const index = xmlAddresses(guideAlternates(origin));
-  const carriers = xmlAddresses(carrierAlternates(origin));
   const assistants = xmlAddresses(assistantsAlternates(origin));
   return [
     ...SUPPORTED_LOCALES.map((locale) => ({ url: xml(landingAddress(origin, locale)), alternates: { languages: hrefLanguages(languages) } })),
+    ...(guidePagesOn() ? guidePages(origin) : []),
+    ...(assistantsConfigured() ? SUPPORTED_LOCALES.map((locale) => ({ url: assistants[locale], alternates: { languages: hrefLanguages(assistants) } })) : []),
+    { url: xml(new URL('/privacy.html', origin).href) },
+    { url: xml(new URL('/terms.html', origin).href) },
+    { url: xml(new URL('/support.html', origin).href) },
+    { url: xml(new URL('/accessibility.html', origin).href) },
+  ];
+}
+
+/**
+ * The guides' own page and every guide in each language they are written in,
+ * each naming the others, then the carriers' own page in each language a
+ * carrier's page is written in and every carrier's page in each of its
+ * languages, naming only those, as hreflang names them. A guide or a carrier's
+ * page is dated by the day its facts were last checked.
+ */
+function guidePages(origin: URL): MetadataRoute.Sitemap {
+  const index = xmlAddresses(guideAlternates(origin));
+  const carriers = xmlAddresses(carrierAlternates(origin));
+  return [
     ...GUIDE_LANGUAGES.map((locale) => ({ url: index[locale], lastModified: lastChecked(locale), alternates: { languages: hrefLanguages(index) } })),
     ...GUIDE_LINKS.en.flatMap(({ id }) => {
       const addresses = xmlAddresses(guideAlternates(origin, id));
@@ -49,10 +65,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const addresses = xmlAddresses(carrierAlternates(origin, id));
       return carrierLanguages(id).map((locale) => ({ url: addresses[locale]!, lastModified: carrierUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));
     }),
-    ...(assistantsConfigured() ? SUPPORTED_LOCALES.map((locale) => ({ url: assistants[locale], alternates: { languages: hrefLanguages(assistants) } })) : []),
-    { url: xml(new URL('/privacy.html', origin).href) },
-    { url: xml(new URL('/terms.html', origin).href) },
-    { url: xml(new URL('/support.html', origin).href) },
-    { url: xml(new URL('/accessibility.html', origin).href) },
   ];
 }

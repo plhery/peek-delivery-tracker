@@ -1,4 +1,5 @@
 import { AMAZON_HISTORY_EXPIRED } from '../lib/amazon';
+import { useGuidePages } from '../guides/GuidePagesContext';
 import { guideHref } from '../guides/paths';
 import { AutoCarrierNotice } from './AutoCarrierNotice';
 import { trackAction } from '../lib/analytics';
@@ -146,7 +147,7 @@ export function ParcelDetail({
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
   // A parcel only the buyer's Amazon account tracks links the guide to finding the number its carrier tracks instead.
-  const amazonGuide = guideHref(locale, 'amazon-orders');
+  const amazonGuide = useGuidePages() ? guideHref(locale, 'amazon-orders') : null;
   // The carrier's site is down: the parcel waits for it, whatever its own last check said.
   const outage = parcel.carrierOutage && !['delivered', 'returned'].includes(current?.stage ?? '') ? parcel.carrierOutage : undefined;
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.

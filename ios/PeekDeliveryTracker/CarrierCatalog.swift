@@ -460,14 +460,18 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     private struct Contract: Codable {
         var carriers: [String: CarrierDefinition]
+        /// Whether the server serves its guides and carrier pages. An older server doesn't say, and links none.
+        var guidePages = false
         /// Carriers this build cannot read, such as one asking for an input it does not know.
         var unreadable: Set<String> = []
-        enum CodingKeys: String, CodingKey { case carriers = "x-carriers" }
+        enum CodingKeys: String, CodingKey { case carriers = "x-carriers", guidePages }
 
         init(from decoder: Decoder) throws {
-            let entries = try decoder.container(keyedBy: CodingKeys.self).decode([String: Entry].self, forKey: .carriers)
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let entries = try container.decode([String: Entry].self, forKey: .carriers)
             carriers = entries.compactMapValues(\.definition)
             unreadable = Set(entries.filter { $0.value.definition == nil }.keys)
+            guidePages = (try? container.decode(Bool.self, forKey: .guidePages)) ?? false
         }
 
         /// One carrier, which a newer catalog may write in a way this build cannot read.
@@ -496,6 +500,11 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             numbersRead.removeAllObjects()
         }
     }
+
+    /// Whether the site the catalog came from serves its guides and carrier pages, which the app links only then
+    /// (`guideURL`). Kept with the cached catalog; the bundled one doesn't say, so a new install links none until
+    /// its first refresh.
+    @Published private(set) var guidePages: Bool
 
     /// Views ask for the same input's result many times per render and keystroke.
     private final class Memo<Value>: @unchecked Sendable {
@@ -533,9 +542,11 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         if let cacheURL,
            let cached = Self.cachedContract(at: cacheURL) {
             definitions = cached.definitions
+            guidePages = cached.guidePages
             cachedETag = cached.etag
         } else {
             definitions = Self.bundledDefinitions(in: bundle)
+            guidePages = false
             cachedETag = nil
         }
     }
@@ -547,6 +558,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     ) throws {
         let contract = try JSONDecoder().decode(Contract.self, from: data)
         definitions = try Self.validatedDefinitions(contract)
+        guidePages = contract.guidePages
         self.cacheURL = cacheURL
         self.loader = loader
         cachedETag = nil
@@ -588,6 +600,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             let refreshed = try Self.validatedDefinitions(contract)
             let etag = response.value(forHTTPHeaderField: "ETag")
             definitions = refreshed
+            guidePages = contract.guidePages
             cachedETag = etag
             saveCache(contract: contract, etag: etag)
             return .updated
@@ -763,15 +776,17 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         URL(string: "https://www.amazon.\(amazonMarketplace(number, country: country))/gp/your-account/order-history")!
     }
 
-    /// Peek's guide `id` on the site at `base`, in the language the guides are read in (`catalogLanguage`). The site
-    /// leads the guide's id to its address in that language; English has no prefix.
-    static func guideURL(_ id: String, base: URL, language: AppLanguage) -> URL {
+    /// Peek's guide `id` on the site at `base`, in the language the guides are read in (`catalogLanguage`), or nil
+    /// when the site serves no guides (`guidePages`). The site leads the guide's id to its address in that language;
+    /// English has no prefix.
+    func guideURL(_ id: String, base: URL, language: AppLanguage) -> URL? {
+        guard guidePages else { return nil }
         let language = language.catalogLanguage
         return base.appending(path: language == .en ? "guides/\(id)" : "\(language.rawValue)/guides/\(id)")
     }
 
-    /// Peek's guide to where an Amazon order's carrier and tracking number are.
-    static func amazonGuideURL(base: URL, language: AppLanguage) -> URL {
+    /// Peek's guide to where an Amazon order's carrier and tracking number are, when the site serves it.
+    func amazonGuideURL(base: URL, language: AppLanguage) -> URL? {
         guideURL("amazon-orders", base: base, language: language)
     }
 
@@ -2259,11 +2274,11 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     private static func cachedContract(
         at url: URL
-    ) -> (definitions: [CarrierID: CarrierDefinition], etag: String?)? {
+    ) -> (definitions: [CarrierID: CarrierDefinition], guidePages: Bool, etag: String?)? {
         guard let data = try? Data(contentsOf: url),
               let record = try? JSONDecoder().decode(CacheRecord.self, from: data),
               let definitions = try? validatedDefinitions(record.contract) else { return nil }
-        return (definitions, record.etag)
+        return (definitions, record.contract.guidePages, record.etag)
     }
 
     private static func validatedDefinitions(
@@ -2300,7 +2315,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     private static func defaultCacheURL() -> URL? {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
             .appending(path: "delivery-tracker", directoryHint: .isDirectory)
-            .appending(path: "carrier-catalog-v6.json")
+            .appending(path: "carrier-catalog-v7.json")
     }
 
     static let emptyMatch = TrackingInputMatch(

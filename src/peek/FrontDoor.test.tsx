@@ -20,6 +20,7 @@ import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
 import { pickCandidate, pressEnter } from '../test/inputMethod';
+import { servingGuides } from '../test/guidePages';
 
 const mocks = vi.hoisted(() => ({ lookup: vi.fn(), change: vi.fn(), detect: vi.fn(), read: vi.fn(), forget: vi.fn(), sample: vi.fn() }));
 vi.mock('./links', async (original) => ({
@@ -45,7 +46,7 @@ const TYPO_NUMBER = 'LX1234367B5DE';
 function door() {
   // The clipboard the Paste button reads exists from here on, as it does in a browser.
   const user = userEvent.setup();
-  const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+  const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
   return {
     view,
     user,
@@ -609,7 +610,7 @@ describe('FrontDoor', () => {
     };
     const session: PeekSession = { account: 'visitor', signIn: () => undefined, signInWith };
     const user = userEvent.setup();
-    render(<PeekSessionProvider value={session}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+    render(<PeekSessionProvider value={session}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>, { wrapper: servingGuides });
     await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), `${UPS}{Enter}`);
     await user.click(within(await screen.findByRole('alert')).getByRole('button', { name: 'Sign in' }));
     const sheet = screen.getByRole('dialog', { name: 'Sign in to unlock this' });
@@ -765,7 +766,7 @@ describe('FrontDoor', () => {
 
   it('looks up a number typed into a carrier’s page’s box once it opens, and only that once', async () => {
     writeCarrierHandoff(`  Your order has shipped: ${UPS}  `);
-    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     // Put in as if pasted: a certain carrier goes straight on, the field hidden behind the number it found.
     expect(document.querySelector('textarea')).toHaveValue(`Your order has shipped: ${UPS}`);
     expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal));
@@ -781,7 +782,7 @@ describe('FrontDoor', () => {
   it('waits with a number a parcel’s page hands back, its carrier picker open, until a carrier is chosen and tracked', async () => {
     writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true });
     const user = userEvent.setup();
-    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     expect(document.querySelector('textarea')).toHaveValue('DEMO4471205');
     const picker = await screen.findByRole('dialog', { name: 'Carrier' });
     expect(mocks.lookup).not.toHaveBeenCalled();
@@ -800,7 +801,7 @@ describe('FrontDoor', () => {
     mocks.change.mockResolvedValue(moved);
     writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true, link: LINK_ID });
     const user = userEvent.setup();
-    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     const picker = await screen.findByRole('dialog', { name: 'Carrier' });
     await user.type(within(picker).getByRole('combobox', { name: 'Search carriers' }), 'UPS');
     await user.click(within(picker).getByRole('option', { name: /^UPS/ }));
@@ -813,7 +814,7 @@ describe('FrontDoor', () => {
   it('looks the number up afresh when this device no longer holds the key of the link that handed it back', async () => {
     writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true, link: OTHER_LINK_ID });
     const user = userEvent.setup();
-    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     const picker = await screen.findByRole('dialog', { name: 'Carrier' });
     await user.type(within(picker).getByRole('combobox', { name: 'Search carriers' }), 'UPS');
     await user.click(within(picker).getByRole('option', { name: /^UPS/ }));
@@ -825,7 +826,7 @@ describe('FrontDoor', () => {
   it('leaves a number from a carrier’s page for later while it makes sure whose the landing is', async () => {
     const { PeekSessionProvider } = await import('./session');
     writeCarrierHandoff(UPS);
-    const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+    const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>, { wrapper: servingGuides });
     expect(document.querySelector('textarea')).toHaveValue('');
     expect(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)).not.toBeNull();
     // Nobody is signed in after all: this landing takes it.
@@ -889,7 +890,7 @@ describe('FrontDoor', () => {
       const id = '00000000-0000-4000-8000-0000000000d3';
       shareAt(id);
       const drafts = draft(UPS);
-      const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+      const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>, { wrapper: servingGuides });
       await act(async () => { await Promise.resolve(); });
       expect(drafts()).toEqual([]);
       expect(window.location.search).toBe(`?share-target=${id}`);
@@ -1289,7 +1290,7 @@ describe('FrontDoor: the landing', () => {
     stillMotion(false);
     stubIntersections();
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
-    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     scroll(hero(), 1);
     return { view, field: screen.getByRole<HTMLTextAreaElement>('textbox', { name: 'Tracking number or link' }) };
   }
@@ -1397,7 +1398,7 @@ describe('FrontDoor: the landing', () => {
   it('shows the placeholder, and nothing else, to someone who asked for less motion', () => {
     stubIntersections();
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
-    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     scroll(hero(), 1);
     pass(5 * SAMPLE_PERIOD_MS);
     expect(sample()).toBeNull();
@@ -1449,7 +1450,7 @@ describe('FrontDoor: the landing', () => {
     stillMotion(false);
     stubIntersections();
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] });
-    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
     scroll(hero(), 1);
     pass(3 * SAMPLE_PERIOD_MS);
     expect(document.querySelector('.door')).toHaveAttribute('data-view', 'device');
@@ -1471,7 +1472,7 @@ describe('FrontDoor: the landing', () => {
     const analytics = await import('../lib/analytics');
     const seen = vi.spyOn(analytics, 'trackScreen');
     const { PeekSessionProvider } = await import('./session');
-    const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+    const view = render(<PeekSessionProvider value={{ account: 'checking', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>, { wrapper: servingGuides });
     expect(seen).not.toHaveBeenCalled();
     view.rerender(<PeekSessionProvider value={{ account: 'visitor', signIn: () => undefined }}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
     expect(seen).toHaveBeenCalledWith('front-door', 'anonymous');
@@ -1483,7 +1484,7 @@ describe('FrontDoor: the landing', () => {
     const seen = vi.spyOn(analytics, 'trackScreen');
     const hour = 3_600_000;
     document.title = 'The parcel’s own title';
-    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} covered />);
+    const view = render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} covered />, { wrapper: servingGuides });
     expect(seen).not.toHaveBeenCalled();
     expect(document.title).toBe('The parcel’s own title');
     expect(document.querySelector<HTMLElement>('.door-pip')!.style.viewTransitionName).toBe('');
@@ -1515,7 +1516,7 @@ describe('FrontDoor: for someone signed in', () => {
     const user = userEvent.setup();
     render(<PeekSessionProvider value={{ account: 'signed-in', email: 'paul@example.test', signIn: () => undefined, openDeliveries }}>
       <FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />
-    </PeekSessionProvider>);
+    </PeekSessionProvider>, { wrapper: servingGuides });
     return { user, field: screen.getByRole<HTMLTextAreaElement>('textbox', { name: 'Tracking number or link' }) };
   }
 

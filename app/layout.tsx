@@ -2,12 +2,14 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import '../src/styles.css';
 import { authConfigFromEnvironment } from '../src/auth/authConfig';
+import { GuidePagesProvider } from '../src/guides/GuidePagesContext';
 import { APPEARANCE_BOOTSTRAP } from '../src/lib/appearanceConfig';
 import { smartAppBanner } from '../src/lib/appStore';
 import { ENTRY_HINT_BOOTSTRAP } from '../src/lib/entryHintConfig';
 import { ERROR_REPORTS_META } from '../src/lib/errorReportsConfig';
 import { documentLanguage, manifestPath } from '../src/lib/locale';
 import { browserErrorReporting } from '../src/server/browserErrors';
+import { guidePagesOn } from '../src/server/guideSettings';
 import { requestLocale, requestPageLanguage } from '../src/server/requestLocale';
 import { requestOrigin } from '../src/server/requestOrigin';
 import { PREVIEW_LOCALES, sitePicture, siteTitle, wordsIn } from '../src/server/sitePreview';
@@ -74,7 +76,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {authOrigin && <link rel="preconnect" href={authOrigin} crossOrigin="anonymous" />}
         {errorReports && <meta name={ERROR_REPORTS_META} content={JSON.stringify(errorReports)} />}
       </head>
-      <body>{children}</body>
+      {/* Whether the pages link the guides and the carriers' pages, which only the server knows. */}
+      <body><GuidePagesProvider on={guidePagesOn()}>{children}</GuidePagesProvider></body>
     </html>
   );
 }

@@ -526,11 +526,13 @@ struct AddParcelView: View {
         .foregroundStyle(Brand.ink)
     }
 
-    /// Amazon's parcels can be tracked: the guide shows where an order's carrier and tracking number are, in Safari.
-    private var amazonGuideLink: some View {
-        Link(localizer.text("add.amazonGuide"),
-             destination: CarrierCatalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language))
-            .font(.subheadline)
+    /// Amazon's parcels can be tracked: the guide shows where an order's carrier and tracking number are, in Safari,
+    /// when the site serves it.
+    @ViewBuilder private var amazonGuideLink: some View {
+        if let guide = catalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language) {
+            Link(localizer.text("add.amazonGuide"), destination: guide)
+                .font(.subheadline)
+        }
     }
 
     /// Several numbers in one text, in the order written: the first is added unless another is chosen, as on the

@@ -7,8 +7,6 @@ import en from '../../../shared/locales/en.json';
 import type {
   ApiPackageRow, ApiPeekAi, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse, ApiTokenPeekAi,
 } from '../../generated/apiContract';
-import { guideHref } from '../../guides/paths';
-import { AMAZON_GUIDE_URL } from '../../lib/amazon';
 import { searchCarriers, shapeCarrier } from '../../lib/carrierPicker';
 import { tagLocale } from '../../lib/locale';
 import {
@@ -20,6 +18,7 @@ import { storedPostcodeCountry } from '../../lib/postcodeCountry';
 import { currentEvent, currentStage, sortEventsDesc, withRelays } from '../../lib/stages';
 import { toParcel } from '../../store/apiRepo';
 import type { CarrierId, ParcelWithEvents } from '../../types';
+import { amazonGuideUrl } from '../amazonGuide';
 import { verifyAmazonShippingAddition } from '../amazonShippingEligibility';
 import { HttpError } from '../api';
 import { queueCarrierCheck } from '../carrierCheck';
@@ -355,7 +354,7 @@ const AMAZON_WITHOUT = 'Without such a browser, as in a phone app, don\'t start.
   + 'that you can\'t reach their Amazon account from here, and that they can either ask you again on a computer, with '
   + 'Claude in Chrome or the ChatGPT browser extension turned on for the chat and Amazon signed in, or open Your '
   + 'Orders, then Track package, themselves and paste each tracking ID to you or into Peek.';
-const AMAZON_WITH = 'With one, open Your Orders on the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, '
+const amazonWith = (guide: boolean) => 'With one, open Your Orders on the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, '
   + '.nl, .com and so on: every Amazon site works the same way), at /gp/css/order-history (on amazon.de, for example, '
   + 'https://www.amazon.de/gp/css/order-history). If Amazon asks to sign in, stop and ask the user to sign in there '
   + 'themselves. Each package on its way or just delivered has its own Track package button; older orders have none, '
@@ -364,21 +363,22 @@ const AMAZON_WITH = 'With one, open Your Orders on the Amazon site the user uses
   + 'name. When add_parcels finds no number in it, look the carrier up with find_carriers, by the name Amazon writes, '
   + 'which may be a code such as VIR_TR, and send the tracking ID again with that carrier\'s id as the carrier. When '
   + 'Amazon delivers a package itself and shows no tracking ID, or add_parcels refuses it, tell the user Amazon tracks '
-  + 'that one only in their Amazon account, with the guide link add_parcels answers with. On Amazon, only read: never '
-  + 'buy, cancel, return or change anything.';
-const AMAZON_INSTRUCTIONS = `Amazon orders: ${AMAZON_WHERE} ${AMAZON_BROWSER} ${AMAZON_WITHOUT} ${AMAZON_WITH}`;
+  + 'that one only in their Amazon account' + (guide ? ', with the guide link add_parcels answers with' : '')
+  + '. On Amazon, only read: never buy, cancel, return or change anything.';
+const amazonInstructions = (guide: boolean) => `Amazon orders: ${AMAZON_WHERE} ${AMAZON_BROWSER} ${AMAZON_WITHOUT} ${amazonWith(guide)}`;
 
 /** A text that speaks of Amazon or holds one of its order numbers: its no-number answer says what an Amazon import takes. */
 const ABOUT_AMAZON = /amazon|\b\d{3}-\d{7}-\d{7}\b/i;
 
 /**
  * Peek's guide to finding the number an Amazon parcel's carrier tracks, in the language the account last used, as its
- * delivery emails speak it, for the assistant to pass on. English when the account can't be read.
+ * delivery emails speak it, for the assistant to pass on. English when the account can't be read; none on a site that
+ * serves no guides.
  */
-async function amazonGuide(service: SupabaseServiceClient, userId: string): Promise<string> {
+async function amazonGuide(service: SupabaseServiceClient, userId: string): Promise<string | null> {
+  if (!amazonGuideUrl()) return null;
   const stored = await service.getAuthAccount(userId).then((account) => account?.locale ?? null, () => null);
-  const path = guideHref((stored && tagLocale(stored)) || 'en', 'amazon-orders');
-  return path ? new URL(path, AMAZON_GUIDE_URL).href : AMAZON_GUIDE_URL;
+  return amazonGuideUrl((stored && tagLocale(stored)) || 'en');
 }
 
 /** add_parcels' line on Amazon, for a client that keeps the tools but not the server's instructions. */
@@ -412,10 +412,12 @@ function additionSummary(addition: ParcelAddition) {
  * to sign in again for a scope the token lacks.
  */
 export function assistantServer(service: SupabaseServiceClient, caller: AssistantCaller, resourceMetadata: string): McpServer {
-  // The account's language is read once a request, and only for an answer that links the Amazon guide.
-  let guide: Promise<string> | undefined;
+  // The account's language is read once a request, and only for an answer that links the Amazon guide, which the
+  // server's messages name in English.
+  let guide: Promise<string | null> | undefined;
   const amazonGuideLink = () => (guide ??= amazonGuide(service, caller.userId));
-  const withAmazonGuide = async (text: string) => (text.includes(AMAZON_GUIDE_URL) ? text.replace(AMAZON_GUIDE_URL, await amazonGuideLink()) : text);
+  const english = amazonGuideUrl();
+  const withAmazonGuide = async (text: string) => (english && text.includes(english) ? text.replace(english, await amazonGuideLink() ?? english) : text);
   const server = new McpServer(
     { name: 'peek', title: 'Peek', version: '1.0.0' },
     {
@@ -432,7 +434,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         + 'instructions. When the user gives you shipping emails, or asks you to add the parcels from emails you can already '
         + 'see, send each email\'s shipping part to add_parcels. When add_parcels finds no number in a tracking number '
         + 'whose carrier you know, find the carrier\'s id with find_carriers and send the number again, alone, with '
-        + 'that id as the carrier. ' + AMAZON_INSTRUCTIONS,
+        + 'that id as the carrier. ' + amazonInstructions(english !== null),
     },
   );
   /** A tool's work, once the token's scopes cover it. */
@@ -466,12 +468,13 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named' })
       : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'alone' });
     if (!additions.length) {
+      const link = await amazonGuideLink();
       const amazon = ABOUT_AMAZON.test(text)
         ? `${AMAZON_WHERE} ${AMAZON_BROWSER} ${AMAZON_WITHOUT}`
         : 'An Amazon order\'s tracking number is in the user\'s Amazon account: Your Orders, then Track package.';
       return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises, numbers the text labels as a tracking number and a number sent alone whose shape fits a carrier; an order number is never one. '
         + `${carrier ? '' : 'When you know which carrier delivers the parcel, find its id with find_carriers and send the tracking number again, alone, with that id as the carrier. '}`
-        + `${amazon} Peek's guide shows where: ${await amazonGuideLink()}`);
+        + `${amazon}${link ? ` Peek's guide shows where: ${link}` : ''}`);
     }
     const parcels = await Promise.all(additions.map(async (addition) => {
       const summary = additionSummary(addition);
@@ -493,7 +496,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     _meta: security('amazon_import_steps'),
   }, allowed('amazon_import_steps', async () => {
     const guide = await amazonGuideLink();
-    const steps = `${AMAZON_WHERE}\n\n${AMAZON_BROWSER}\n\n${AMAZON_WITHOUT} Peek's guide shows where, with pictures: ${guide}\n\n${AMAZON_WITH}`;
+    const pictures = guide ? ` Peek's guide shows where, with pictures: ${guide}` : '';
+    const steps = `${AMAZON_WHERE}\n\n${AMAZON_BROWSER}\n\n${AMAZON_WITHOUT}${pictures}\n\n${amazonWith(guide !== null)}`;
     return answer({ guide, steps }, steps);
   }));
 

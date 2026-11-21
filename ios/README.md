@@ -26,7 +26,8 @@ APNs key, OAuth secret or SMTP credential in the app.
   `scripts/refresh-ios-app.sh` runs this for you and refuses unconfigured builds.
 - The carrier catalog refreshes from `/api/carriers` (ETag-cached) at launch and on
   foreground, with the generated catalog bundled as offline fallback. New carriers don't
-  need an app release.
+  need an app release. Its `guidePages` says whether that server serves its guides and
+  carrier pages: the app links them only then, so not before its first refresh.
 
 ## Links that open in the app
 

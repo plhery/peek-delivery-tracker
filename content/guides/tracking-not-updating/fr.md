@@ -4,7 +4,7 @@ description: Ton suivi n'avance plus depuis des jours ? Les raisons, combien de 
 slug: suivi-colis-ne-bouge-plus
 picture: Un calendrier aux jours barrés, une ligne de progression arrêtée à mi-chemin et Pip qui attend, l'air de s'ennuyer.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton colis ces derniers temps, pas qu'il s'est arrêté. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un long trajet, un vol, la douane ou un week-end peuvent laisser plusieurs jours sans nouvelle ligne. Ne t'inquiète qu'une fois passé le délai du transporteur lui-même (chez [bpost](carrier:bpost), au moins 5 jours ouvrables pour un envoi vers un pays voisin ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel), et même là, contacte d'abord le vendeur : c'est lui, le client du transporteur.
@@ -30,7 +30,7 @@ Aucun transporteur ne donne de durée unique pendant laquelle le suivi peut rest
 - home | Dernier kilomètre | En cours de livraison, puis livré : les scans s'enchaînent de nouveau.
 :::
 
-Quand un colis en est à l'étiquette créée, à la prise en charge ou en transit et que son dernier scan a quatre jours ou plus, [Peek](/) affiche « Aucune mise à jour depuis quatre jours » dans ta liste et, sur la page du colis, la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger bpost. » (ici avec bpost). Si le transporteur et les services de suivi répondent sans aucun scan (numéro introuvable, ou connu mais sans historique) pour un colis qui en a déjà, Peek garde ceux qu'il a trouvés et affiche sur la page du colis « Le transporteur n’a pas de nouveau scan pour l’instant. Ceux déjà trouvés sont gardés, et Peek continue de vérifier. »
+Quand un colis en est à l'étiquette créée, à la prise en charge ou en transit et que son dernier scan a quatre jours ou plus, [Peek](/) le signale dans ta liste avec le jour de ce scan (« Aucune mise à jour depuis lun 12 oct ») et affiche, sur la page du colis, la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger bpost. » (ici avec bpost). Après trois semaines sans nouveau scan, la note devient « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger bpost. » Si le transporteur et les services de suivi répondent sans aucun scan (numéro introuvable, ou connu mais sans historique) pour un colis qui en a déjà, Peek garde ceux qu'il a trouvés et affiche sur la page du colis « Le transporteur n’a pas de nouveau scan pour l’instant. Ceux déjà trouvés sont gardés, et Peek continue de vérifier. »
 
 ### Colis envoyé mais pas de suivi : combien de temps attendre ?
 

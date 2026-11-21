@@ -4,7 +4,7 @@ description: Why parcel tracking stops updating, how long a gap is normal at eac
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
@@ -31,7 +31,7 @@ No carrier gives one figure for how long tracking can stay quiet. Before the del
 - home | Last mile | Out for delivery, then delivered: scans come quickly again.
 :::
 
-When a parcel is at label created, received by the carrier or in transit and its last scan is four days old or more, [Peek](/) shows "No tracking update for four days" in your list and, on the parcel's page, the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking USPS." (with USPS, for example). If the carrier and the tracking services answer without any scan (the number not found, or listed without history) for a parcel that already has scans, Peek keeps the ones it found and shows on the parcel's page "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
+When a parcel is at label created, received by the carrier or in transit and its last scan is four days old or more, [Peek](/) flags it in your list with the day of that scan ("No tracking update since Mon 12 Oct") and, on the parcel's page, adds the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking USPS." (with USPS, for example). After three weeks with no new scan, the note becomes "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking USPS." If the carrier and the tracking services answer without any scan (the number not found, or listed without history) for a parcel that already has scans, Peek keeps the ones it found and shows on the parcel's page "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
 
 ### How long does a new tracking number take to update?
 

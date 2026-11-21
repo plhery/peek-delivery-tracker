@@ -3,7 +3,7 @@ title: Suivi J&T Express Allemagne : numéro JTDE et statuts
 description: Suivre un colis J&T Express en Allemagne : format du numéro JTDE, sens des statuts en anglais et que faire si le colis est bloqué, perdu ou non reçu.
 slug: jt-express-allemagne-suivi
 published: 2026-11-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Francfort-sur-le-Main) est le réseau allemand du groupe de livraison J&T Express : il livre des colis en Allemagne. Si une boutique a expédié ta commande vers une adresse allemande avec J&T, le numéro de suivi commence par `JTDE` : colle-le dans le champ ci-dessus, ou recherche-le sur [le suivi de J&T sur jtexpress.de](https://www.jtexpress.de/tracking). C'est la boutique qui a expédié ta commande qui détient ce numéro, dans son e-mail d'expédition ou sur la page de ta commande.
@@ -75,7 +75,7 @@ Dans les historiques que connaît le code de Peek, le livreur de J&T charge le c
 
 C'est la boutique qui a choisi J&T : pour une commande en ligne, le vendeur reste donc ton premier interlocuteur. En droit allemand (§ 475 du Code civil allemand, BGB), lorsque tu achètes auprès d'un professionnel en tant que consommateur, le vendeur supporte le risque de perte ou d'endommagement pendant le transport, à moins que tu aies toi-même mandaté un transporteur que le vendeur ne t'avait pas proposé au préalable.
 
-**Suivi qui ne bouge plus.** J&T ne publie pas de délais de livraison pour les destinataires. Un colis resté sur « Pris en charge » ou « En transit » sans nouvelle ligne pendant quatre jours reçoit une alerte dans Peek (« Aucune mise à jour depuis quatre jours ») accompagnée d'un lien « Demande de l’aide à J&T Express Germany ». Si rien n'évolue ensuite, contacte la boutique ou appelle l'assistance téléphonique de J&T avec ton numéro de suivi. Plus de détails dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
+**Suivi qui ne bouge plus.** J&T ne publie pas de délais de livraison pour les destinataires. Un colis resté sur « Pris en charge » ou « En transit » sans nouvelle ligne pendant quatre jours reçoit dans Peek une alerte qui donne le jour de la dernière ligne (« Aucune mise à jour depuis lun 12 oct »), accompagnée d'un lien « Demande de l’aide à J&T Express Germany ». Si rien n'évolue ensuite, contacte la boutique ou appelle l'assistance téléphonique de J&T avec ton numéro de suivi. Plus de détails dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
 **Aucun suivi pour l'instant.** Un numéro que le suivi de J&T ne connaît pas encore apparaît sous « En attente de J&T Express Germany ». Les boutiques créent souvent le numéro avant de remettre le colis au transporteur. Si deux jours plus tard J&T ne connaît toujours pas ce numéro et qu'aucune autre source n'a répondu pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » ; Peek le vérifie dès lors une fois par jour, puis une fois par semaine lorsqu'une semaine s'est écoulée depuis son ajout. Vérifie alors le numéro auprès de la boutique et demande si le colis a bien été remis au transporteur.
 

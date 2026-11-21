@@ -3,7 +3,7 @@ title: PostNL Sendungsverfolgung: 3S- und NL-Nummern & Status
 description: PostNL-Sendung außerhalb der Niederlande verfolgen: Aufbau von NL- und 3S-Nummern, Bedeutung der Status auf postnl.post und wer das Paket bei dir zustellt.
 slug: postnl-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 PostNL ist die niederländische Post. Sie befördert Pakete und Briefe niederländischer Online-Shops ins Ausland und transportiert über ihre internationale Tochter Spring GDS weltweit Sendungen für Online-Händler. Beide verfolgst du auf der internationalen Seite von PostNL, [postnl.post](https://postnl.post/) (auf Englisch), oder oben im Suchfeld. In deinem Land übernimmt anschließend oft der nationale Postdienst oder ein lokaler Partner die Zustellung. Die Nummer steht in der Versandbestätigung des Shops oder in deiner Bestellübersicht; fehlt sie, hilft [Sendungsnummer finden](guide:find-tracking-number).
@@ -63,7 +63,7 @@ Zustellversuche, Abholkarten und Lagerfristen richten sich nach dem jeweiligen Z
 
 **Noch kein Scan sichtbar.** Bei `Pre-advised` oder `Preparing` hat der Händler das Etikett gebucht, das Paket aber womöglich noch nicht übergeben. Spring GDS empfiehlt, nach Erhalt der Nummer 24 bis 48 Stunden auf den ersten Scan zu warten.
 
-**Keine Bewegung unterwegs.** Nach `Departed` oder `Transit` gibt es auf Luft- oder Seestrecken bis zur Ankunft keine Scans, und die Zollabfertigung (`Customs`) dauert oft mehrere Tage. Prüfe danach eine `NL`-Nummer beim nationalen Postdienst. Bleibt ein Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek in deiner Liste „Seit vier Tagen keine Aktualisierung“ und auf der Paketseite: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei PostNL nach.“, samt dem Link „Hol dir Hilfe bei PostNL“. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Bewegung unterwegs.** Nach `Departed` oder `Transit` gibt es auf Luft- oder Seestrecken bis zur Ankunft keine Scans, und die Zollabfertigung (`Customs`) dauert oft mehrere Tage. Prüfe danach eine `NL`-Nummer beim nationalen Postdienst. Bleibt ein Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek in deiner Liste den Tag des letzten Scans („Keine Aktualisierung seit Mo 12. Okt“) und auf der Paketseite: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei PostNL nach.“, samt dem Link „Hol dir Hilfe bei PostNL“. Nach drei Wochen ohne Scan steht dort stattdessen: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei PostNL nach.“ Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Als zugestellt gemeldet, aber nicht da.** Spring GDS rät, bei Nachbarn nachzufragen, typische Ablageorte wie Veranda oder Garage sowie Empfang oder Pförtner zu prüfen, und weist darauf hin, dass Zusteller Sendungen mitunter bis zu 24 Stunden vor der tatsächlichen Ankunft als `Delivered` markieren. Taucht nichts auf, kontaktiere den Verkäufer und lies [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

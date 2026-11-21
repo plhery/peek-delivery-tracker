@@ -3,7 +3,7 @@ title: 17FEIA tracking: FEI…YQ numbers, statuses and delivery
 description: Track a 17FEIA (一起飞) parcel from China: what a FEI…YQ number looks like, what each line on its tracker means, who delivers it and what Peek shows.
 slug: 17feia-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 17FEIA (一起飞, also Shanghai Hongshan International Logistics, 上海宏杉国际物流) is a Chinese logistics company. It takes parcels in at its warehouse in Shenzhen or Shanghai, flies them out of China and, after import customs, hands them to a carrier for delivery. Its numbers start with FEI and end with YQ. Paste yours in the box above, or use 17FEIA's own tracker on www.17feia.com. The number comes from whoever shipped your order: the seller, or the forwarder that sent your goods on from China.
@@ -71,7 +71,7 @@ After import customs, 17FEIA hands the parcel to a carrier that takes it on to y
 
 **Stuck on `The order has information pending customer confirmation.`** If you used a forwarder, check your account or messages there. Otherwise, ask the seller.
 
-**Quiet after the flight.** After `Flight has departed.`, there may be nothing new for days. After four days with no new line, Peek flags it ("No tracking update for four days"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**Quiet after the flight.** After `Flight has departed.`, there may be nothing new for days. After four days with no new line, Peek flags it with the day of that line ("No tracking update since Mon 12 Oct"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Delivered, but nothing came.** Check around your home and ask neighbours, then the delivering carrier and the seller. See [delivered but not received](guide:delivered-not-received).
 

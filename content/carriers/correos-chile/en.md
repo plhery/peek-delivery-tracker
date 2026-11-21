@@ -3,7 +3,7 @@ title: Correos de Chile tracking: numbers and statuses explained
 description: Track a Correos de Chile parcel: what a CL or 13-digit number looks like, what its Spanish statuses mean, IVA and customs in Chile, and who Peek asks abroad.
 slug: correos-chile-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Correos de Chile is Chile's postal service. Chile's customs service says that online orders sent to Chile by post come in through Correos de Chile, while courier companies bring others. Correos de Chile's own tracker is at www.correos.cl/seguimiento-en-linea. Or paste the number in the box above: this page explains each step. Bought online? The number is in the shop's shipping email or on your order page.
@@ -55,7 +55,7 @@ Was your parcel sent from Chile with a `CL` number? Once it has left Chile, chec
 
 **Stuck at customs.** The last line is `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS`, and Peek flags the parcel as "Customs clearance". Customs may be checking the parcel, or waiting for a document or a payment: Correos de Chile tells you when something is needed.
 
-**Quiet for days.** When a parcel at "Received by carrier" or "In transit" has had no new step for four days, Peek flags it ("No tracking update for four days"). Parcels often go quiet on long flights or over a weekend.
+**Quiet for days.** When a parcel at "Received by carrier" or "In transit" has had no new step for four days, Peek flags it with the day of that step ("No tracking update since Mon 12 Oct"). Parcels often go quiet on long flights or over a weekend. After three weeks with no new step, Peek says instead "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
 
 **Delivered, but nothing came.** Ask your neighbours and the delivery office, then the sender. See [delivered but not received](guide:delivered-not-received).
 

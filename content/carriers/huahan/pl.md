@@ -3,7 +3,7 @@ title: Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie
 description: Śledź paczkę HuaHan Logistics (华翰物流) z Chin: format numeru HHW…YQ, znaczenie statusów, lokalny przewoźnik doręczający, odprawa celna i śledzenie w Peek.
 slug: sledzenie-przesylek-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, działająca również pod nazwą HuaHan Express lub 华翰速递) to chiński operator logistyczny obsługujący transgraniczny handel internetowy, który wysyła paczki z Chin drogą lotniczą lub pocztową, a w kraju docelowym przekazuje je lokalnemu przewoźnikowi do doręczenia na ostatnim odcinku. Jeśli sklep internetowy nadał Twoje zamówienie przez HuaHan, poszukaj numeru zaczynającego się od `HHW` i zakończonego literami `YQ`, a następnie wklej go w polu powyżej. Publiczna wyszukiwarka HuaHan pod adresem [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) potrafi też wskazać lokalnego przewoźnika w Twoim kraju oraz nadany przez niego numer lokalny przesyłki.
@@ -113,7 +113,7 @@ HuaHan świadczy usługi dla sprzedawców internetowych, a jego strony nie rozst
 
 **Brak wpisów po `Has been given to local carrier`.** Lokalny przewoźnik przejął już paczkę, a jego własne śledzenie bywa dokładniejsze niż przekazywane przez HuaHan. Odczytaj nazwę i numer lokalny na stronie HuaHan lub na karcie przesyłki w Peek.
 
-**Brak aktualizacji od kilku dni.** Gdy przesyłka w drodze nie otrzyma żadnego nowego skanu przez cztery dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” i przypomina, że przerwy w skanowaniu często zdarzają się podczas długich lotów, odprawy celnej lub w weekend. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
+**Brak aktualizacji od kilku dni.** Gdy przesyłka w drodze nie otrzyma żadnego nowego skanu przez cztery dni, Peek oznacza ją komunikatem z dniem ostatniego skanu („Brak aktualizacji od pon 12 paź”) i przypomina, że przerwy w skanowaniu często zdarzają się podczas długich lotów, odprawy celnej lub w weekend; po trzech tygodniach bez nowości radzi zapytać sprzedawcę. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
 
 **Oznaczona jako dostarczona, ale jej nie ma.** Sprawdź skrzynkę, recepcję budynku, sąsiadów oraz pobliskie punkty odbioru, a następnie skontaktuj się z lokalnym przewoźnikiem i sprzedawcą. Zobacz [dostarczona, ale nieotrzymana](guide:delivered-not-received).
 

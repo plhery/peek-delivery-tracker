@@ -3,7 +3,7 @@ title: R+L Carriers Sendungsverfolgung: PRO-Nummer und Status
 description: Verfolge eine Frachtsendung von R+L Carriers in den USA: Aufbau der PRO-Nummer, Bedeutung jeder Statuszeile und Fristen bei Verspätung, Schaden oder Verlust.
 slug: rl-carriers-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 R+L Carriers ist eine Frachtspedition in den **Vereinigten Staaten**. Im Code von Peek holt R+L die Fracht beim Versender ab, befördert sie von Terminal zu Terminal und stellt sie vom Zielterminal in den USA aus zu. Wenn eine größere Bestellung oder sonstige Fracht in den USA mit R+L zu dir unterwegs ist, verfolgst du sie über ihre PRO-Nummer, die dir der Onlineshop oder das beauftragende Unternehmen mitteilt: Füge sie oben in das Eingabefeld ein. Die eigene Sendungsverfolgung von R+L ist die Seite *Shipment Tracing* auf rlcarriers.com: Sie nimmt eine PRO-Nummer oder eine Abholauftragsnummer (*Pickup Request ID*) entgegen — bis zu 25 Nummern gleichzeitig — und mit einem MyRLC-Konto auch weitere Referenznummern.
@@ -55,7 +55,7 @@ Diese Seite enthält keine Angaben zu Zustellzeitfenstern, Avisierungen, Zustell
 
 **Prüfziffer stimmt nicht.** Geht die Prüfziffer einer PRO-Nummer nicht auf, antwortet R+L mit der PRO-Nummer gefolgt von `Pro number failed check digit validation.` Peek meldet daraufhin „Sendungsnummer prüfen“. Gleiche die Nummer Ziffer für Ziffer mit der E-Mail des Shops oder den Frachtpapieren ab.
 
-**Verspätet oder ohne neue Scans.** Nach `Shipment Delayed` belässt Peek die Sendung auf „Unterwegs“ samt dem von R+L genannten Zustelltag. Bleibt eine Sendung im Status „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neue Zeile, blendet Peek den Hinweis „Seit vier Tagen keine Aktualisierung“ ein. Wende dich an den Shop oder den Absender. Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Verspätet oder ohne neue Scans.** Nach `Shipment Delayed` belässt Peek die Sendung auf „Unterwegs“ samt dem von R+L genannten Zustelltag. Bleibt eine Sendung im Status „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neue Zeile, blendet Peek einen Hinweis mit dem Tag der letzten Zeile ein („Keine Aktualisierung seit Mo 12. Okt“). Wende dich an den Shop oder den Absender. Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Beschädigt, unvollständig oder verloren in den USA.** Informiere zuerst den Händler oder das absendende Unternehmen, das die Fracht beauftragt hat. Für Fracht, die ein Straßengüterverkehrsunternehmen **zwischen US-Bundesstaaten** befördert, schreibt das Bundesrecht der **Vereinigten Staaten** (`49 U.S.C. 14706` und `49 CFR Part 370`) folgende Regeln vor:
 

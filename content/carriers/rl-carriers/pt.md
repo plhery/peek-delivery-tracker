@@ -3,7 +3,7 @@ title: Seguimento R+L Carriers: número PRO, estados e reclamações
 description: Segue uma remessa de carga da R+L Carriers nos EUA: formato do número PRO, significado de cada linha de rastreio e prazos em caso de atraso, dano ou perda.
 slug: seguimento-rl-carriers
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 A R+L Carriers é uma transportadora rodoviária de mercadorias nos **Estados Unidos**. No código do Peek, recolhe a carga nas instalações do expedidor, transporta-a de terminal em terminal e entrega-a a partir do terminal de destino nos EUA. Se uma encomenda de grande porte ou outra carga te está a ser enviada nos Estados Unidos pela R+L, segues o envio pelo número PRO, indicado pela loja ou pela empresa que reservou o transporte: cola-o na caixa acima. O rastreador próprio da R+L é a página *Shipment Tracing* em rlcarriers.com: aceita um número PRO ou um identificador de pedido de recolha (*Pickup Request ID*), até 25 números de uma só vez, e, com uma conta MyRLC, também outras referências.
@@ -55,7 +55,7 @@ Esta página não indica janelas horárias, marcações de entrega, número de t
 
 **Algarismo errado.** Se o dígito de controlo de um PRO falhar a validação, o rastreador da R+L devolve o PRO seguido de `Pro number failed check digit validation.` O Peek apresenta nesse caso «Verifica o número de seguimento». Compara o código algarismo a algarismo com o e-mail da loja ou com os documentos de transporte.
 
-**Atrasada ou sem atualizações.** Após `Shipment Delayed`, o Peek mantém a remessa «Em trânsito» com o dia estimado pela R+L. Ao fim de quatro dias sem nova linha numa remessa em «Aceite pela transportadora» ou «Em trânsito», o Peek assinala «Sem atualizações há quatro dias». Fala com a loja ou com o remetente. Vê também [porque é que o seguimento não atualiza](guide:tracking-not-updating).
+**Atrasada ou sem atualizações.** Após `Shipment Delayed`, o Peek mantém a remessa «Em trânsito» com o dia estimado pela R+L. Ao fim de quatro dias sem nova linha numa remessa em «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia da última linha («Sem atualizações desde seg 12 out»). Fala com a loja ou com o remetente. Vê também [porque é que o seguimento não atualiza](guide:tracking-not-updating).
 
 **Mercadoria danificada, em falta ou perdida nos EUA.** Comunica primeiro à loja ou à empresa expedidora que contratou o transporte. Para carga transportada por rodovia **entre estados dos EUA**, a lei federal dos **Estados Unidos** (`49 U.S.C. 14706` e `49 CFR Part 370`) fixa estas regras:
 

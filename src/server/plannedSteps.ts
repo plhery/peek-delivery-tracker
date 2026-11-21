@@ -123,7 +123,7 @@ function servedStep(step: PlannedStep, time: { instant: number; day: string | nu
 const oldestFirst = (a: JsonObject, b: JsonObject) => String(a.occurred_at).localeCompare(String(b.occurred_at));
 
 /**
- * The planned steps a parcel's timeline shows, greyed under "Planned by the carrier", as the API serves them
+ * The planned steps a parcel's timeline folds, greyed, behind its line on predictions, as the API serves them
  * (`planned_events`): those its routing kept for the carrier tracking it now (`routing.planned`) and still ahead of
  * what happened and of `now`. They are never scans: nothing else reads them, so they set no stage, status line,
  * estimate, alert, email, count or drawing. A step goes once its time has passed (a step dated by its day alone, once
@@ -191,8 +191,8 @@ function atClock(value: string, clock: string): boolean {
 
 /**
  * The steps the carrier writing the timeline in advance (`servedWrittenAhead`) wrote and whose time has passed, as the
- * API serves them (`written_ahead_events`), oldest first. The timeline shows them greyed in the carrier's own words,
- * under "Written in advance by <carrier>", as its own page lists them. A step is one when that carrier listed it
+ * API serves them (`written_ahead_events`), oldest first. The timeline folds them, greyed, in the carrier's own words
+ * behind its line on predictions, as its own page lists them. A step is one when that carrier listed it
  * (`routing.planned`) at a clock it holds back as written ahead (`routing.written_ahead`, `atWrittenClock`): a scan
  * entered at its planned time that the carrier then shows as a scan frees its clock, and a step merely not due yet is
  * the carrier's scan once due. Until its time passes a step is planned (`servedPlannedSteps`). A step goes once a shown

@@ -3,7 +3,7 @@ title: Postes Canada (Canada Post) suivi : numéro, statuts, avis
 description: Suivre un colis Postes Canada : où trouver le numéro de repérage, ce que veulent dire les statuts, l'avis de livraison, le ramassage et la douane.
 slug: canada-post-suivi
 published: 2026-10-15
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Postes Canada, c'est la Société canadienne des postes, la société d'État fédérale qui exploite le service postal du Canada. Pour suivre ton colis, entre son numéro de repérage dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur, en général dans le courriel d'expédition de la boutique ; Postes Canada ne peut pas retrouver un colis à partir de ton nom ou de ton adresse. S'il finit par `CA` et que tu suis le colis depuis l'étranger, Peek peut aussi interroger la poste de ton pays avec le même numéro.
@@ -81,7 +81,7 @@ Postes Canada ne donne à Peek aucun pays de destination, alors c'est ton pays q
 
 ## Colis Postes Canada en retard, perdu, retourné ou introuvable
 
-**Plus de nouveaux scans.** Après quatre jours sans nouveau scan à « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche : « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Canada Post. » Il ajoute un lien vers l'aide du transporteur qui a le colis, comme « Demande de l’aide à Canada Post ». Selon l'ASFC, le courrier à la douane au Canada ne peut pas être suivi avec précision. Voir [suivi qui ne bouge plus](guide:tracking-not-updating).
+**Plus de nouveaux scans.** Après quatre jours sans nouveau scan à « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche : « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Canada Post. » Après trois semaines sans scan, il affiche plutôt : « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Canada Post. » Il ajoute un lien vers l'aide du transporteur qui a le colis, comme « Demande de l’aide à Canada Post ». Selon l'ASFC, le courrier à la douane au Canada ne peut pas être suivi avec précision. Voir [suivi qui ne bouge plus](guide:tracking-not-updating).
 
 **En retard ou perdu.** Selon Postes Canada, la plupart des colis en retard arrivent dans les cinq jours ouvrables suivant la date prévue. Passé ce délai, vérifie l'adresse et regarde autour de chez toi, puis demande une enquête en ouvrant un billet de service sur la page [Colis manquants](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/reclamations/colis-manquants.page) de Postes Canada (ouvre d'abord une session pour pouvoir le suivre), dans les 90 jours suivant l'expédition, ou dans les six mois pour un colis envoyé aux États-Unis ou à l'étranger. L'expéditeur peut aussi la demander, et lui seul peut être indemnisé : si le colis n'arrive pas au bout de quelques jours, Postes Canada ferme ta demande et c'est à toi de demander à l'expéditeur de faire une réclamation. Si tu as acheté en ligne, commence par la boutique. Voir [colis perdu](guide:lost-parcel).
 

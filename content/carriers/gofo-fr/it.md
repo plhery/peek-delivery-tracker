@@ -3,7 +3,7 @@ title: Tracciamento GOFO France: codici GFFR, stati e assistenza
 description: Segui il tuo pacco GOFO in Francia: formato dei codici GFFR e CIFR, significato degli stati in francese e a chi rivolgerti in caso di ritardo o smarrimento.
 slug: gofo-france-tracciamento
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 GOFO France è la rete francese di GOFO, un corriere attivo con reti proprie in diversi Paesi, e consegna pacchi all’interno della Francia. Nell’elenco dei corrieri di Peek la trovi anche come CIRRO Parcel France. I suoi codici di tracciamento iniziano con `GFFR` o `CIFR`: puoi seguire la spedizione sulla pagina francese di GOFO su gofo.com oppure incollare il codice nel riquadro qui sopra. Non hai ancora il codice? Leggi [come trovare un pacco senza numero di tracciamento](guide:find-tracking-number).
@@ -45,7 +45,7 @@ Il sistema di GOFO raggruppa inoltre le spedizioni in macrocategorie. `Alerte` i
 
 ## Pacco GOFO in ritardo, non consegnato, perso o danneggiato
 
-**Il tracciamento non avanza.** Peek continua a interrogare GOFO. Se passano quattro giorni senza nuove scansioni prima che il pacco esca in consegna, la scheda del pacco su Peek lo segnala («Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO France.») e rimanda alla pagina di assistenza con «Chiedi aiuto a GOFO France». Leggi anche [il tracciamento non si aggiorna](guide:tracking-not-updating).
+**Il tracciamento non avanza.** Peek continua a interrogare GOFO. Se passano quattro giorni senza nuove scansioni prima che il pacco esca in consegna, la scheda del pacco su Peek lo segnala («Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO France.») e rimanda alla pagina di assistenza con «Chiedi aiuto a GOFO France». Dopo tre settimane senza scansioni scrive invece «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a GOFO France.» Leggi anche [il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 **Tentativo di consegna fallito.** Dopo `Échec de la livraison, motif : Le destinataire n'est pas chez lui`, Peek mostra «Tentativo di consegna»; se dopo `motif :` GOFO indica una causale diversa, lo stato diventa «Problema segnalato». I passaggi successivi dipendono da GOFO; vedi cosa controllare in [consegna mancata](guide:missed-delivery).
 

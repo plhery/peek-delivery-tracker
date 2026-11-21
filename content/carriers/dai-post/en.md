@@ -3,7 +3,7 @@ title: DAI Post tracking: numbers, statuses and delivery help
 description: Track a DAI Post (Parcel Right) parcel in Australia, New Zealand or Singapore: its numbers, what each status means, authority to leave, pickup and contacts.
 slug: dai-post-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-21
 ---
 
 DAI Post is an Australian delivery company for online shops, started in Melbourne in 2000. It brings parcels from the US, the UK, Europe and Asia to buyers in Australia, New Zealand and Singapore. Its own final-mile delivery is called Parcel Right. Track a parcel on DAI Post's [tracking page](https://daipost.com/track), or paste the number in the box above. The number is in the shop's order confirmation. Can't find it? Ask the shop.
@@ -70,7 +70,7 @@ DAI Post's terms add that if you're not there, the parcel may be left in a secur
 
 ## DAI Post tracking not updating, lost or returned
 
-**No new line for days.** DAI Post scans parcels at key points only, and says a parcel still moves between them. On interstate or regional deliveries, it can seem to stand still for days. After four days without news, Peek flags it ("No tracking update for four days"). See [why tracking stops updating](guide:tracking-not-updating).
+**No new line for days.** DAI Post scans parcels at key points only, and says a parcel still moves between them. On interstate or regional deliveries, it can seem to stand still for days. After four days without news, Peek flags it with the day of the last line ("No tracking update since Mon 12 Oct"). See [why tracking stops updating](guide:tracking-not-updating).
 
 **Still "Label created".** DAI Post doesn't have the parcel yet. If it stays like this for days, ask the shop whether it really sent it.
 

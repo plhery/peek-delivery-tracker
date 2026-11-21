@@ -3,7 +3,7 @@ title: Transpress tracking (Транспрес): track a parcel in Bulgaria
 description: Track a Transpress (Транспрес) parcel in Bulgaria: how to add the number in Peek and pick Transpress, delivery attempts, returns, claims and contacts.
 slug: transpress-tracking
 published: 2026-11-13
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste a link to Transpress's tracker in the box above, or paste its number and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
@@ -63,7 +63,7 @@ If a delivery fails or the parcel waits for you, see [missed delivery](guide:mis
 
 **Nothing yet.** A tracking service may not know the number yet, or may not follow Transpress's parcels at all. Peek keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open Transpress's own tracker with "Open the Transpress website" and ask the shop whether the parcel was really sent.
 
-**No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag: "No tracking update for four days". See [why tracking stops updating](guide:tracking-not-updating).
+**No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of its latest line: "No tracking update since Mon 12 Oct". See [why tracking stops updating](guide:tracking-not-updating).
 
 **Sent back.** When Transpress can't deliver (you refused it, you're away for long or unknown at the address, or the address is wrong or incomplete), it tells the sender and returns the parcel within 14 days of that notice, the sender paying both ways. If the sender gives no instructions within 3 working days, or can't be reached, the parcel counts as unclaimed: Transpress keeps it 14 more days, then it becomes Transpress's property, which it may sell or destroy. See [returned to sender](guide:returned-to-sender).
 

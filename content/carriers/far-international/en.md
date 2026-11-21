@@ -3,7 +3,7 @@ title: FAR International tracking: numbers, statuses and contact
 description: Track a FAR International (泛远国际) parcel from China: what a FAR…YQ number looks like, what each status means, who delivers it and who to ask for help.
 slug: far-international-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 FAR International (泛远国际, FAR International Logistics) is a cross-border logistics company in Hangzhou, China, set up in 2004. Online shops and marketplaces book it to send parcels abroad. FAR collects and checks the parcels in China, and its partners carry them abroad, clear customs and give them to a carrier in your country for delivery. Track the number on [FAR's Track and Trace page](https://www.far800.com/en/logistics), in English, or paste it in the box above. The number comes from the shop, with your order's shipping details.
@@ -68,7 +68,7 @@ FAR works for the shops and marketplaces that book it, and its FAQ sends them to
 
 **Nothing yet.** If FAR's tracker has nothing for the number, Peek shows "Waiting for FAR International" and keeps checking. If nothing changes after a few days, check the number with the seller.
 
-**No update for days.** FAR's FAQ says flight tracking can come late. When a parcel on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** FAR's FAQ says flight tracking can come late. When a parcel on its way has had no new line for four days, Peek flags it with the day of that line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. After three weeks with no new line, that note becomes "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Delivered but not there.** FAR's FAQ says to look around your home: the corners, the entrance, a P.O. box, a storage locker, or anywhere it could be left. Then ask relatives and neighbours. If it's still missing, tell the seller at once: a claim investigation must start within 14 days after the date it was signed for, and the seller opens it with FAR. See [delivered but not received](guide:delivered-not-received).
 

@@ -3,7 +3,7 @@ title: Śledzenie R+L Carriers: numer PRO, statusy i reklamacje
 description: Śledź przesyłkę towarową R+L Carriers w USA: jak wygląda numer PRO, co oznacza każdy status śledzenia i jakie zasady obowiązują przy opóźnieniu lub szkodzie.
 slug: sledzenie-rl-carriers
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 R+L Carriers to drogowy przewoźnik ładunków towarowych w **Stanach Zjednoczonych**. W kodzie Peek odbiera towar od nadawcy, przewozi go między terminalami przeładunkowymi i doręcza z terminalu docelowego na terenie USA. Jeśli duże zamówienie albo inna przesyłka towarowa jedzie do Ciebie w Stanach Zjednoczonych za pośrednictwem R+L, sprawdzasz ją po numerze PRO otrzymanym ze sklepu lub od firmy zlecającej fracht: wklej go w polu powyżej. Własna wyszukiwarka R+L to strona *Shipment Tracing* w serwisie rlcarriers.com: przyjmuje numer PRO albo identyfikator zlecenia odbioru (*Pickup Request ID*), do 25 numerów naraz, a po zalogowaniu na konto MyRLC również inne numery referencyjne.
@@ -55,7 +55,7 @@ Na tej stronie nie podajemy przedziałów godzinowych dostaw, zasad umawiania aw
 
 **Błędna cyfra.** Jeżeli cyfra kontrolna numeru PRO się nie zgadza, wyszukiwarka R+L odpowiada numerem PRO z dopiskiem `Pro number failed check digit validation.` Peek pokazuje wtedy „Sprawdź numer śledzenia”. Zweryfikuj numer znak po znaku z potwierdzeniem wysyłki lub dokumentami przewozowymi.
 
-**Opóźnienie lub brak nowych skanów.** Po wpisie `Shipment Delayed` Peek utrzymuje status „W transporcie” wraz z dniem dostawy podanym przez R+L. Gdy przesyłka na etapie „Przyjęta przez przewoźnika” albo „W transporcie” nie ma nowego wiersza przez cztery dni, pojawia się oznaczenie „Brak aktualizacji od czterech dni”. Skontaktuj się ze sklepem lub nadawcą. Zobacz też [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+**Opóźnienie lub brak nowych skanów.** Po wpisie `Shipment Delayed` Peek utrzymuje status „W transporcie” wraz z dniem dostawy podanym przez R+L. Gdy przesyłka na etapie „Przyjęta przez przewoźnika” albo „W transporcie” nie ma nowego wiersza przez cztery dni, pojawia się oznaczenie z dniem ostatniego wiersza, np. „Brak aktualizacji od pon 12 paź”. Skontaktuj się ze sklepem lub nadawcą. Zobacz też [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 **Towar uszkodzony, niekompletny lub zagubiony w USA.** Najpierw powiadom sklep albo firmę wysyłającą, która zleciła fracht. W przypadku ładunków przewożonych transportem drogowym **między stanami USA** prawo federalne **Stanów Zjednoczonych** (`49 U.S.C. 14706` oraz `49 CFR Part 370`) określa następujące zasady:
 

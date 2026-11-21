@@ -3,7 +3,7 @@ title: Seguimiento J&T Express Alemania: número JTDE y estados
 description: Rastrea un paquete de J&T Express en Alemania: formato del código JTDE, qué significa cada estado en inglés y qué hacer si se retrasa, se pierde o no llega.
 slug: jt-express-alemania-seguimiento
 published: 2026-11-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Fráncfort del Meno) es la red alemana del grupo de paquetería J&T Express y reparte envíos dentro de Alemania. Si una tienda envió tu pedido a una dirección alemana con J&T, el número de seguimiento empieza por `JTDE`: pégalo en el cuadro de arriba o consúltalo en el [localizador de J&T en jtexpress.de](https://www.jtexpress.de/tracking). El código te lo facilita el comercio que expidió el pedido, en el correo de envío o en la página del pedido.
@@ -75,7 +75,7 @@ En los historiales que conoce el código de Peek, el repartidor de J&T carga el 
 
 La tienda eligió a J&T, así que en una compra online el vendedor es siempre tu primer contacto. Conforme a la legislación alemana (§ 475 del Código Civil alemán, BGB), cuando compras como consumidor a una empresa, el vendedor asume el riesgo de pérdida o daño durante el transporte, salvo que tú mismo hayas encargado el porte a un transportista que el vendedor no te hubiera propuesto antes.
 
-**Sin movimiento.** J&T no publica plazos de entrega para destinatarios. Si un paquete permanece en «Admitido por el transportista» o «En tránsito» durante cuatro días sin nuevas líneas, Peek lo marca («Sin novedades desde hace cuatro días») y añade el enlace «Pide ayuda a J&T Express Germany». Si sigue sin avanzar, escribe a la tienda o llama al teléfono de atención de J&T con tu código de seguimiento. Más detalles en [seguimiento que no se actualiza](guide:tracking-not-updating).
+**Sin movimiento.** J&T no publica plazos de entrega para destinatarios. Si un paquete permanece en «Admitido por el transportista» o «En tránsito» durante cuatro días sin nuevas líneas, Peek lo marca con el día de la última línea («Sin novedades desde el lun 12 oct») y añade el enlace «Pide ayuda a J&T Express Germany». Si sigue sin avanzar, escribe a la tienda o llama al teléfono de atención de J&T con tu código de seguimiento. Más detalles en [seguimiento que no se actualiza](guide:tracking-not-updating).
 
 **Aún sin registros.** Un número que el buscador de J&T todavía desconoce figura como «Esperando a J&T Express Germany». Es habitual que las tiendas generen el número antes de entregar físicamente el paquete. Si pasados dos días J&T sigue sin reconocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y, a partir de ahí, Peek pasa a comprobarlo una vez al día, y una vez por semana cuando se cumple una semana desde que lo añadiste. Confirma entonces el código con la tienda y pregunta si el envío salió realmente.
 

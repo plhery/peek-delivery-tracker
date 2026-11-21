@@ -3,7 +3,7 @@ title: Śledzenie Meiteshun (MTSCN): numery AMTS i statusy
 description: Śledź paczkę Meiteshun Logistics (美特顺) z Shenzhen: jak wygląda numer AMTS…FS, co znaczą etapy i dlaczego status Delivered bywa wpisany z wyprzedzeniem.
 slug: meiteshun-sledzenie
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, w katalogach występujący też pod skrótem MTSCN) to spedytor z Shenzhen w Chinach. Jego numery zaczynają się od `AMTS` i kończą na `FS`: jeśli sklep, w którym złożyłeś zamówienie, przekazał Ci taki kod, wklej go w pole powyżej. Historię Meiteshun czytaj jednak z rezerwą – system tej firmy potrafi zapisać całą trasę przesyłki, łącznie z doręczeniem (`Delivered`), już w chwili utworzenia zamówienia, więc sam wpis o doręczeniu nie stanowi dowodu, że paczka faktycznie dotarła.
@@ -65,7 +65,7 @@ Peek nie znalazł u Meiteshun żadnych opublikowanych terminów dostawy ani zasa
 
 **Każdy krok pojawia się punktualnie, a paczki brak.** Ponieważ etapy powstały w chwili utworzenia zlecenia, pokazują harmonogram, a nie rzeczywiste położenie przesyłki. Kieruj się terminem dostawy podanym przez sklep przy składaniu zamówienia i napisz do sprzedawcy, gdy ten termin upłynie.
 
-**W Peek paczka stoi w Shenzhen, choć link od sprzedawcy pokazuje więcej.** Jeśli Peek wyświetla tylko początkowe kroki w Shenzhen, podczas gdy zewnętrzny link pokazuje dalszą trasę, pominięte wiersze zostały zapisane z wyprzedzeniem lub noszą datę późniejszą niż chwila sprawdzenia (patrz niżej). Wstrzymany krok nie liczy się jako skan: nie zmienia statusu ani oczekiwanej daty i nie wywołuje powiadomienia. Gdy Peek wstrzyma takie etapy, pod statusem przesyłki wyświetla aż do doręczenia lub zwrotu uwagę: „Na stronie przewoźnika Meiteshun Logistics widać etapy zapisane z wyprzedzeniem, nawet doręczenie. Peek nie może ich potwierdzić, więc ich nie pokazuje. Poszukaj tam firmy, która doręcza w Twoim kraju, i jej numeru śledzenia; jeśli jej nie ma, zapytaj sprzedawcę.” Więcej w poradnikach [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating) oraz [śledzenie paczki z Chin](guide:tracking-from-china).
+**W Peek paczka stoi w Shenzhen, choć link od sprzedawcy pokazuje więcej.** Jeśli Peek wyświetla tylko początkowe kroki w Shenzhen, podczas gdy zewnętrzny link pokazuje dalszą trasę, wiersze, których brak wśród skanów Peek, zostały zapisane z wyprzedzeniem lub noszą datę późniejszą niż chwila sprawdzenia (patrz niżej). Wstrzymany krok nie liczy się jako skan: nie zmienia statusu ani oczekiwanej daty i nie wywołuje powiadomienia. Aż do doręczenia lub zwrotu Peek otwiera historię śledzenia przesyłki zdaniem „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a pod „Pokaż” wyświetla na szaro wstrzymane etapy, każdy z dopiskiem „Prognoza:” i dniem. Poszukaj na stronie Meiteshun firmy, która doręcza w Twoim kraju, i jej numeru śledzenia; jeśli jej nie ma, zapytaj sprzedawcę. Więcej w poradnikach [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating) oraz [śledzenie paczki z Chin](guide:tracking-from-china).
 
 **Brak wyników dla numeru.** Dla nieznanego numeru system Meiteshun pokazuje go wyłącznie jako numer referencyjny z pustymi pozostałymi polami. Peek traktuje taką odpowiedź jak zlecenie wpisane bez pierwszego skanu: sprawdza je dalej w rytmie przewidzianym dla etapów pisanych z wyprzedzeniem i wyświetla „Oczekiwanie na przewoźnika Meiteshun Logistics”, bez komunikatu proszącego o weryfikację numeru. Sprawdź więc numer bezpośrednio u sprzedawcy.
 

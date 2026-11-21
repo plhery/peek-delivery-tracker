@@ -3,7 +3,7 @@ title: TSJY tracking (通世集运): order numbers and statuses
 description: Track a TSJY (通世集运) consolidated parcel from China: what a TSJY…CN number looks like, what each Chinese status means, and when 17FEIA takes over.
 slug: tsjy-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 TSJY (通世集运) is a consolidation service in China, run by 苏州通世供应链有限公司, a supply chain company in Suzhou. You buy on Chinese shopping sites such as Taobao, Tmall, Pinduoduo, JD or Douyin, and the shops send your goods to TSJY's warehouse in Suzhou. TSJY stores them, packs them together and ships them abroad. Track your TSJY number on [TSJY's site](https://www.tsjy56.com/), under 订单查询 (order search), or paste it in the box above.
@@ -89,7 +89,7 @@ With TSJY you are usually the customer: you booked the shipment. So for a late, 
 
 **Stuck in the warehouse.** If TSJY's own steps stop for several days, ask its customer service.
 
-**Quiet after the flight.** After `Flight has departed.`, there may be nothing new until the landing or customs. When a parcel on its way has had no new line for four days, Peek flags it ("No tracking update for four days"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**Quiet after the flight.** After `Flight has departed.`, there may be nothing new until the landing or customs. When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Lost or damaged.** TSJY's site promises to pay in full for lost or damaged parcels (丢破必赔), but its public pages give no claim rules or deadlines: ask its customer service at once, and keep the box and the goods. See [lost parcels](guide:lost-parcel) and [damaged parcels](guide:damaged-parcel).
 

@@ -3,7 +3,7 @@ title: Suivi HuaHan Logistics : numéro HHW…YQ et livraison
 description: Suivez un colis HuaHan Logistics (华翰物流) depuis la Chine : format du numéro HHW…YQ, sens des statuts, transporteur final, douane et suivi dans Peek.
 slug: suivi-colis-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, également appelé HuaHan Express ou 华翰速递) est un transporteur chinois spécialisé dans la logistique e-commerce transfrontalière qui expédie les colis hors de Chine par avion ou par voie postale avant de les confier à un transporteur local dans le pays de destination pour la livraison finale. Si une boutique en ligne a expédié votre commande avec HuaHan, repérez un numéro commençant par `HHW` et se terminant par `YQ`, puis collez-le dans le champ ci-dessus. Le suivi public de HuaHan sur [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) permet aussi de voir le nom du transporteur local chargé du dernier kilomètre ainsi que son propre numéro de suivi.
@@ -114,7 +114,7 @@ HuaHan s’adresse aux vendeurs e-commerce et ses pages publiques ne précisent 
 
 **Plus rien après `Has been given to local carrier`.** Le transporteur local a pris le relais et son propre suivi est souvent plus détaillé. Relevez son nom et son numéro sur le suivi HuaHan ou sur la fiche du colis dans Peek.
 
-**Aucune mise à jour depuis plusieurs jours.** Lorsqu’un colis en cours d’acheminement n’a reçu aucun nouveau scan depuis quatre jours, Peek le signale (« Aucune mise à jour depuis quatre jours ») et rappelle qu’un colis reste souvent silencieux sur un vol long-courrier, en douane ou le week-end. Voir [pourquoi le suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
+**Aucune mise à jour depuis plusieurs jours.** Lorsqu’un colis en cours d’acheminement n’a reçu aucun nouveau scan depuis quatre jours, Peek le signale avec le jour du dernier scan (« Aucune mise à jour depuis lun 12 oct ») et rappelle qu’un colis reste souvent silencieux sur un vol long-courrier, en douane ou le week-end ; après trois semaines sans rien de nouveau, il conseille plutôt de contacter le vendeur. Voir [pourquoi le suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
 
 **Marqué livré, mais rien reçu.** Vérifiez votre boîte aux lettres, vos voisins et les points relais proches, puis contactez le transporteur local et le vendeur. Voir [colis indiqué livré mais non reçu](guide:delivered-not-received).
 

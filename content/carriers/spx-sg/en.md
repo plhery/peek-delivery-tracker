@@ -3,7 +3,7 @@ title: SPX Express Singapore tracking: Shopee parcels and statuses
 description: Track an SPX Express (Shopee Xpress) parcel in Singapore: what SPXSG and SG numbers look like, what each status means, GST on imports, and what to do if it stops.
 slug: spx-express-singapore-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 SPX Express Singapore, also called Shopee Xpress or Shopee Express, delivers parcels in Singapore. It carries Shopee orders, including parcels from sellers in China that pass through Shopee's sorting centre in Hong Kong. SPX's own tracker is at spx.sg. To follow a parcel here, paste its number in the box above. For a Shopee order, open the order in Shopee and copy the tracking number from its shipping information.
@@ -68,7 +68,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 
 **Stuck on `[China]Sender is preparing to ship your parcel`.** The seller hasn't shipped it yet. Ask the seller when it will.
 
-**No update for days.** Parcels often go quiet on long flights, at customs or over a weekend. When a parcel on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and keeps asking SPX. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** Parcels often go quiet on long flights, at customs or over a weekend. When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and keeps asking SPX. After three weeks with nothing new, it suggests asking the seller. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Delivered, but nothing came.** Look around your door and ask your household and neighbours. Then contact the seller, or Shopee. See [delivered but not received](guide:delivered-not-received).
 

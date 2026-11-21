@@ -3,7 +3,7 @@ title: Morning Global tracking: BR…MG numbers, statuses, contact
 description: Track a Morning Global parcel from Hong Kong or China: what its numbers look like, what each status means, who delivers it near you and who to contact.
 slug: morning-global-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Morning Global (MG), founded in 1987, is the international arm of Morning Express Group, a Hong Kong courier group. It ships parcels abroad for online shops and marketplaces, has offices in Hong Kong and across mainland China, and usually hands your parcel to a partner in your country for the delivery. Track the number the shop gives you on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/), in English, or paste it in the box above.
@@ -73,7 +73,7 @@ Morning Global's customers are the shops that book it. For a late, lost, damaged
 
 **At customs.** `Customs Clearance Begins` means your country's customs have the parcel. If you're asked to pay, see [parcels held at customs](guide:customs); if it stays there long, tell the shop.
 
-**No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. After `Handed Over for Delivery`, ask for the delivering partner's number. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. After `Handed Over for Delivery`, ask for the delivering partner's number. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Lost or damaged.** Act fast. Morning Global's terms give its customer, the shop, 30 days from the day Morning Global accepted the parcel to report a claim, and 90 days to send the documents. They cap compensation at the parcel's declared value, at most US$50 a parcel, when Morning Global was at fault. Ask the shop for a refund or a new parcel. See [lost parcels](guide:lost-parcel) and [damaged parcels](guide:damaged-parcel).
 

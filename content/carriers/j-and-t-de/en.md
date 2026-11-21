@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: JTDE numbers and statuses
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what each tracking line means, and what to do when your parcel is late, lost or missing.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) is the German network of the J&T Express parcel group: it delivers parcels in Germany. If a shop sent your order with J&T, the tracking number starts with `JTDE`: paste it in the box above, or look it up on [J&T's own tracker at jtexpress.de](https://www.jtexpress.de/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -75,7 +75,7 @@ In the histories Peek's code holds, J&T's courier loads the parcel for a deliver
 
 The shop chose J&T, so for an online order the shop is your first contact. Under German law, when you buy from a business as a consumer, the seller carries the risk of loss or damage in transit unless you hired the carrier yourself and the seller hadn't named that carrier to you beforehand.
 
-**Not moving.** J&T publishes no delivery times for recipients. A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days") and a "Get help from J&T Express Germany" link. If nothing moves after that, ask the shop, or call J&T's hotline with your number. More on [tracking that isn't updating](guide:tracking-not-updating).
+**Not moving.** J&T publishes no delivery times for recipients. A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek with the day of its latest line ("No tracking update since Mon 12 Oct") and a "Get help from J&T Express Germany" link. If nothing moves after that, ask the shop, or call J&T's hotline with your number. More on [tracking that isn't updating](guide:tracking-not-updating).
 
 **No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express Germany". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 

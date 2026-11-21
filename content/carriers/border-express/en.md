@@ -3,7 +3,7 @@ title: Border Express tracking: consignment numbers and statuses
 description: Track a Border Express (BEX) parcel in Australia: what its consignment numbers and label barcodes look like, what each status means and how Peek follows it.
 slug: border-express-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Border Express, or BEX, is a carrier that Peek's catalog lists in Australia only. If an online shop sent your order with Border Express, the number to track is its consignment number: paste it in the box above. The shop gives it in its shipping email or on your order page. Border Express's own tracker is Quick Track on BEX Online, at bexonline.borderexpress.com.au. Peek couldn't check Border Express's website for this page, so what follows is what Peek's code knows about that tracker.
@@ -50,7 +50,7 @@ This page gives no rules for delivery attempts, cards, safe drop, collecting fro
 
 **Stuck on "Label created".** Border Express has the parcel's details but no dated scan yet. Its tracker may show `Picked Up` without a time, which Peek leaves out, so look there first. If it still says only `Shipment Data Received`, ask the shop when it handed the parcel over.
 
-**No update for days.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new step for four days, Peek flags it: "No tracking update for four days". It keeps asking Border Express and shows the next step as soon as there is one. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new step for four days, Peek flags it with the day of that step: "No tracking update since Mon 12 Oct". It keeps asking Border Express and shows the next step as soon as there is one. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Partially delivered.** Check what came against your order. The rest of the consignment is still on its way, and Border Express's tracker shows each item's scans, which Peek leaves out.
 

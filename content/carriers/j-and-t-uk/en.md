@@ -3,7 +3,7 @@ title: J&T Express UK tracking: JTUK numbers and statuses
 description: Track a J&T Express UK parcel: what a JTUK number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-uk-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express UK delivers parcels in the United Kingdom. If a shop sent your order with J&T, the tracking number starts with `JTUK`: paste it in the box above, or look it up on J&T's own tracker at www.jtexpress.uk/tracking. The shop that sent your order has the number, in its shipping email or on your order page. Peek couldn't read J&T Express UK's website, so this page rests on what Peek's code knows about J&T's tracker and on official UK sources.
@@ -58,7 +58,7 @@ In the histories Peek's code holds, J&T's courier takes the parcel out and eithe
 
 The shop chose J&T, so for an online order the shop is your first contact. Under the Consumer Rights Act 2015, goods you buy from a business stay at the seller's risk until they're in your hands, or those of someone you named to take them. That changes only if you hired the carrier yourself and the seller hadn't offered it.
 
-**Not moving.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days"). If nothing moves after that, ask the shop. See [why tracking stops updating](guide:tracking-not-updating).
+**Not moving.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek with the day of its latest line ("No tracking update since Mon 12 Oct"). If nothing moves after that, ask the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
 **No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express UK". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 

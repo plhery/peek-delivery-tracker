@@ -3,7 +3,7 @@ title: J&T Express Sendungsverfolgung: JTDE-Nummer und Status
 description: J&T-Paket in Deutschland verfolgen: wie eine JTDE-Nummer aussieht, was jede Zeile der Sendungsverfolgung heißt und was du tust, wenn das Paket fehlt.
 slug: jt-express-sendungsverfolgung
 published: 2026-10-21
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) ist das deutsche Netz der Paketgruppe J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking) nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails.
@@ -75,7 +75,7 @@ In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket f
 
 Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine erste Adresse. Kaufst du als Verbraucher, trägt der Händler das Transportrisiko, außer du hast den Paketdienst selbst beauftragt und der Händler hatte ihn dir nicht vorher genannt (§ 475 BGB).
 
-**Keine Bewegung.** Laufzeiten für Empfänger nennt J&T nicht. Zeigt ein Paket „Beim Paketdienst eingegangen“ oder „Unterwegs“ und kommt vier Tage lang keine neue Zeile, markiert Peek es („Seit vier Tagen keine Aktualisierung“) und zeigt den Link „Hol dir Hilfe bei J&T Express Germany“. Tut sich danach nichts, frag den Shop oder ruf mit deiner Sendungsnummer bei der Hotline von J&T an. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Bewegung.** Laufzeiten für Empfänger nennt J&T nicht. Zeigt ein Paket „Beim Paketdienst eingegangen“ oder „Unterwegs“ und kommt vier Tage lang keine neue Zeile, markiert Peek es mit dem Tag der letzten Zeile („Keine Aktualisierung seit Mo 12. Okt“) und zeigt den Link „Hol dir Hilfe bei J&T Express Germany“. Tut sich danach nichts, frag den Shop oder ruf mit deiner Sendungsnummer bei der Hotline von J&T an. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Noch keine Sendungsverfolgung.** Kennt die Sendungsverfolgung von J&T die Nummer noch nicht, zeigt Peek „Warten auf J&T Express Germany“. Shops legen die Nummer oft an, bevor sie das Paket übergeben. Kennt J&T die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, zeigt Peek stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Bleibt es mehrere Tage dabei, lass dir die Nummer vom Shop bestätigen und frag, ob das Paket wirklich verschickt wurde.
 

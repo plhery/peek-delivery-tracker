@@ -3,7 +3,7 @@ title: JCEX śledzenie przesyłki: numer JCZ, statusy, kto doręcza
 description: Paczka JCEX z Chin: jak wygląda numer JCZ, co znaczą statusy po angielsku i chińsku, kto doręcza ją w Polsce i do kogo pisać, gdy utknie.
 slug: jcex-sledzenie
 published: 2026-10-23
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) to chińska firma logistyczna z Hangzhou, która wysyła za granicę paczki sprzedawców internetowych, a w kraju odbiorcy przekazuje je przewoźnikowi na ostatni odcinek. Paczkę śledzisz na stronie JCEX, [track.jcex.com](https://track.jcex.com/), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu, razem z danymi wysyłki zamówienia.
@@ -92,7 +92,7 @@ Strona kontaktowa wymienia też oddziały w całych Chinach, ale nie podaje żad
 
 [Peek](/) od razu rozpoznaje JCEX po numerze `JCZ…DH`: takich numerów nie ma żaden inny przewoźnik z jego katalogu. Zadziała też wklejony link z track.jcex.com z `?nums=` i numerem. Peek śledzi tylko numery JCZ: jeśli masz od JCEX inny numer, poproś sprzedawcę o numer listu przewozowego.
 
-Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów na mapie, godzinę doręczenia i kraj docelowy. Linie pokazuje w wersji angielskiej, jeśli JCEX ją ma, a linie przewoźnika doręczającego tak, jak je zapisał. `Delivered` pokazuje po swojemu, jako „Dostarczona”. `Arrive at the delivery point` i przekazanie do magazynu przewoźnika liczą się jako „W transporcie”, nie jako „Do odbioru” ani „Dostarczona”. Godzinę każdego skanu Peek odczytuje na zegarze, który podaje JCEX (chińskim albo kraju doręczenia), i pokazuje ją w Twojej strefie czasowej. Linie, które JCEX czasem zapisuje z wyprzedzeniem aż do przekazania paczki przewoźnikowi, nie są skanami: Peek je pomija. Gdy pominie takie linie, pisze o tym pod statusem paczki, dopóki nie nadejdzie ich godzina albo paczka nie zostanie doręczona lub zwrócona: „Na stronie przewoźnika JCEX widać etapy zapisane z wyprzedzeniem, nawet doręczenie. Peek nie może ich potwierdzić, więc ich nie pokazuje. Poszukaj tam firmy, która doręcza w Twoim kraju, i jej numeru śledzenia; jeśli jej nie ma, zapytaj sprzedawcę.” Takie linie nie zmieniają statusu paczki i nie wysyłają powiadomień.
+Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów na mapie, godzinę doręczenia i kraj docelowy. Linie pokazuje w wersji angielskiej, jeśli JCEX ją ma, a linie przewoźnika doręczającego tak, jak je zapisał. `Delivered` pokazuje po swojemu, jako „Dostarczona”. `Arrive at the delivery point` i przekazanie do magazynu przewoźnika liczą się jako „W transporcie”, nie jako „Do odbioru” ani „Dostarczona”. Godzinę każdego skanu Peek odczytuje na zegarze, który podaje JCEX (chińskim albo kraju doręczenia), i pokazuje ją w Twojej strefie czasowej. Linie, które JCEX czasem zapisuje z wyprzedzeniem aż do przekazania paczki przewoźnikowi, nie są skanami: Peek odkłada je na bok. Historia zaczyna się wtedy, aż do doręczenia lub zwrotu paczki, od zdania „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a „Pokaż” wyświetla te linie na szaro, każdą z dopiskiem „Prognoza:” i dniem. Takie linie nie zmieniają statusu paczki i nie wysyłają powiadomień.
 
 JCEX nie podaje nazwy przewoźnika doręczającego, a Peek nie odczytuje pola „跟踪单号”, więc śledzi paczkę numerem JCEX do końca i nie przełącza się na przewoźnika w Polsce. Nie pokazuje też przewidywanej daty doręczenia, nazwy usługi ani potwierdzenia doręczenia.
 

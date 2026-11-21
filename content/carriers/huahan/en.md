@@ -3,7 +3,7 @@ title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.
@@ -112,7 +112,7 @@ After `Has been given to local carrier`, a carrier in the destination country de
 
 **Nothing after `Has been given to local carrier`.** The local carrier has the parcel, and its own tracking may be ahead of HuaHan's. Find its name and number on HuaHan's tracker, or on Peek's parcel card when Peek knows that carrier, or ask the seller which carrier delivers.
 
-**No update for days.** When a parcel still on its way has had no new scan for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** When a parcel still on its way has had no new scan for four days, Peek flags it with the day of its latest scan ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend; after three weeks with nothing new, it says to ask the seller instead. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Delivered, but nothing came.** Check where it was left and ask neighbours, then the local carrier and the seller. See [delivered but not received](guide:delivered-not-received).
 

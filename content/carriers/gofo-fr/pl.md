@@ -3,7 +3,7 @@ title: Śledzenie GOFO France: numery GFFR, statusy i pomoc
 description: Śledź paczkę GOFO we Francji: jak wygląda numer GFFR lub CIFR, co oznaczają francuskie statusy GOFO i do kogo się zwrócić, gdy przesyłka się opóźnia lub ginie.
 slug: gofo-france-sledzenie
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 GOFO France to francuska sieć kurierska firmy GOFO, działającej w kilku krajach, która doręcza przesyłki na terenie Francji. Na liście przewoźników w Peek znajdziesz ją również pod nazwą CIRRO Parcel France. Jej numery śledzenia zaczynają się od `GFFR` lub `CIFR`: paczkę sprawdzisz na francuskiej stronie śledzenia GOFO w serwisie gofo.com albo wklejając numer w polu powyżej. Nie masz jeszcze numeru? Zobacz, [jak namierzyć przesyłkę bez numeru śledzenia](guide:find-tracking-number).
@@ -45,7 +45,7 @@ System GOFO dzieli ponadto przesyłki na ogólne kategorie. `Alerte` (alert) ozn
 
 ## Paczka GOFO opóźniona, niedoręczona, zagubiona lub uszkodzona
 
-**Brak nowych skanów.** Peek nadal odpytuje GOFO. Jeśli przed wydaniem paczki do doręczenia miną cztery dni bez nowego skanu, karta przesyłki w Peek informuje o tym („Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GOFO France.”) i odsyła do strony pomocy GOFO France przyciskiem „Poproś przewoźnika GOFO France o pomoc”. Zobacz też [dlaczego śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
+**Brak nowych skanów.** Peek nadal odpytuje GOFO. Jeśli przed wydaniem paczki do doręczenia miną cztery dni bez nowego skanu, karta przesyłki w Peek informuje o tym („Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GOFO France.”) i odsyła do strony pomocy GOFO France przyciskiem „Poproś przewoźnika GOFO France o pomoc”. Po trzech tygodniach bez skanu pojawia się zamiast tego: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika GOFO France.” Zobacz też [dlaczego śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
 
 **Nieudana próba doręczenia.** Po wpisie `Échec de la livraison, motif : Le destinataire n'est pas chez lui` Peek pokazuje „Próba doręczenia”; gdy po `motif :` widnieje inny powód, status zmienia się na „Zgłoszono problem”. O dalszych krokach decyduje GOFO; co warto sprawdzić, opisuje poradnik [nieudana próba doręczenia](guide:missed-delivery).
 

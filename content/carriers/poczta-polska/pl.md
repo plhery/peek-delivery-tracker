@@ -3,7 +3,7 @@ title: Poczta Polska śledzenie: numer, statusy, awizo i kontakt
 description: Śledzenie przesyłki Poczty Polskiej i Pocztex: jak wygląda numer, co znaczą statusy, ile czeka awizo, punkt i automat, reklamacje, cło i infolinia.
 slug: poczta-polska-sledzenie
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-21
 ---
 
 Poczta Polska to państwowy operator pocztowy, a Pocztex to jej usługa kurierska. Przesyłkę śledzisz w eMonitoringu Poczty Polskiej (ta sama wyszukiwarka jest na poczta-polska.pl i pocztex.pl) albo wklejając numer w pole powyżej. Numer jest na potwierdzeniu nadania, więc ma go sklep lub nadawca, a powtarzają go też SMS-y i e-maile z powiadomieniami Poczty Polskiej.
@@ -60,7 +60,7 @@ Paczka Pocztex w punkcie pokazuje „doręczono”, a nie masz jej w rękach? We
 
 ## Przesyłka nie dotarła, uszkodzona albo na cle
 
-Śledzenie Poczty Polskiej ma charakter informacyjny i nie może być podstawą roszczeń. Poczta Polska nie pisze, co robić, gdy status stoi w miejscu: zapytaj nadawcę i przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Gdy przesyłka jest zarejestrowana, przyjęta albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, Peek pokazuje na liście „Brak aktualizacji od czterech dni”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Poczta Polska.” z linkiem „Poproś przewoźnika Poczta Polska o pomoc” do strony kontaktowej Poczty Polskiej.
+Śledzenie Poczty Polskiej ma charakter informacyjny i nie może być podstawą roszczeń. Poczta Polska nie pisze, co robić, gdy status stoi w miejscu: zapytaj nadawcę i przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Gdy przesyłka jest zarejestrowana, przyjęta albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, Peek pokazuje na liście dzień ostatniego skanu, na przykład „Brak aktualizacji od pon 12 paź”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Poczta Polska.” z linkiem „Poproś przewoźnika Poczta Polska o pomoc” do strony kontaktowej Poczty Polskiej. Po trzech tygodniach bez nowego skanu notka brzmi: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika Poczta Polska.”
 
 **Kto składa reklamację.** Nadawca, a Ty, gdy przesyłkę Ci doręczono albo nadawca przekazał Ci roszczenie. Złożysz ją przez formularz online na poczta-polska.pl (eReklamacje), na piśmie lub ustnie w każdej placówce.
 

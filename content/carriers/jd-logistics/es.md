@@ -3,7 +3,7 @@ title: Seguimiento de JD Logistics: números JD, estados y contacto
 description: Rastrea un paquete de JD Logistics (京东物流): formatos JD y VG, significado de los estados en inglés y chino, almacenes en Europa, aduanas y atención al cliente.
 slug: seguimiento-jd-logistics
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) es la filial logística del grupo JD.com, cotizada en la Bolsa de Hong Kong (`HKEX: 2618`). Fuera de China opera bajo las marcas JoyLogistics y JoyExpress: envía mercancía almacenada por vendedores en sus centros logísticos de **Francia**, **Alemania**, **Países Bajos**, **Polonia**, **Reino Unido**, **Estados Unidos** o **Australia**, y transporta paquetes de comercio electrónico desde **China**. Puedes rastrear tu envío en inglés en el [localizador internacional de JD Logistics](https://www.jingdonglogistics.com/Tracking) o pegar el código en el buscador superior. El número te lo facilita la tienda que envió tu pedido.
@@ -66,7 +66,7 @@ Las normas del servicio exprés internacional de JD Logistics desde **China cont
 
 **Aún no aparece nada.** Si el buscador de JD todavía no devuelve datos para tu número, confírmalo con el vendedor. Peek muestra «Esperando a JD Logistics» y sigue comprobando; si pasados dos días sigue sin reconocerse, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.».
 
-**Sin novedades durante varios días.** Cuando un envío en camino lleva cuatro días sin escaneos nuevos, Peek muestra «Sin novedades desde hace cuatro días», recuerda que es habitual quedarse sin lecturas en vuelos largos, en aduanas o en fin de semana, y ofrece un enlace «Pide ayuda a JD Logistics» hacia su página de contacto (o hacia el transportista local cuando un operador como GOFO ya se ha hecho cargo). Más detalles en [por qué no se actualiza el seguimiento](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
+**Sin novedades durante varios días.** Cuando un envío en camino lleva cuatro días sin escaneos nuevos, Peek muestra el día del último escaneo («Sin novedades desde el lun 12 oct»), recuerda que es habitual quedarse sin lecturas en vuelos largos, en aduanas o en fin de semana (pasadas tres semanas sin escaneos, aconseja preguntar al vendedor), y ofrece un enlace «Pide ayuda a JD Logistics» hacia su página de contacto (o hacia el transportista local cuando un operador como GOFO ya se ha hecho cargo). Más detalles en [por qué no se actualiza el seguimiento](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
 
 **Retrasado o perdido.** Quien contrató a JD fue el comercio, así que reclama primero al vendedor. Para su exprés internacional desde **China continental**, el reglamento de JD advierte que el plazo estimado de entrega del albarán es únicamente orientativo: JD no devuelve los portes ni abona indemnización por demora. Consulta [paquetes perdidos](guide:lost-parcel).
 

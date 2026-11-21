@@ -3,7 +3,7 @@ title: GZYL tracking: YL…YQ numbers, scans and who to ask
 description: Track a GZYL (广州云链) parcel from Guangzhou: what a YL…YQ number looks like, what its scans mean and why its Delivered step can be written in advance.
 slug: gzyl-tracking
 published: 2026-10-30
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with GZYL, your number is YL, ten digits and YQ: paste it in the box above. GZYL's website, yunlianhouyun.com, is in Chinese, and its parcel search (小包查询) opens a tracker that runs on a bare server address. Read that tracker with care: GZYL writes much of a parcel's journey in advance, so a step there, even `Delivered`, isn't always a scan.
@@ -68,7 +68,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 **Stuck at customs.** If you're asked for import charges, see [parcels held at customs](guide:customs). In Ireland, since 1 November 2026, an EU handling fee of €2 per distinct item (two identical ones count as one), whatever the parcel's value, comes on top of the duty; if the shop didn't charge both at checkout, the delivery company can ask you for them before it delivers. If the parcel stays there for days, tell the seller.
 
-**GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. A step GZYL wrote ahead never counts as a scan: it changes no status or expected date and sends no alert. When it has held back steps GZYL wrote ahead, Peek says so under the parcel's status until the parcel is delivered or returned: "GZYL’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. A step GZYL wrote ahead never counts as a scan: it changes no status or expected date and sends no alert. When it has held back steps GZYL wrote ahead, Peek's tracking history opens with one line until the parcel is delivered or returned: "Other sites may show more steps, but they’re only predictions." "Show them", after it, lists those steps greyed, newest first, each with the day GZYL gave it ("Predicted for Mon 12 Oct"). Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 

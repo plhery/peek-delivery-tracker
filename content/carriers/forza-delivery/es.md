@@ -3,7 +3,7 @@ title: Forza Delivery rastreo: número de guía, estados y teléfono
 description: Rastrea tu paquete de Forza Delivery Express en Guatemala, El Salvador u Honduras: cómo es la guía FD, qué significa cada estado y a qué número llamar.
 slug: forza-delivery-rastreo
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-21
 ---
 
 Forza Delivery Express es una empresa de paquetería que trabaja en Guatemala, El Salvador y Honduras. Nació en Guatemala en 2020 y es parte de Grupo Forza Logistics. Hace envíos para tiendas en línea y emprendedores, entrega a domicilio o en una agencia Express Center y puede cobrarte el pedido contra entrega. Rastrea tu paquete en la [página de rastreo de Forza](https://rastreo.forzadelivery.com/) con el número de guía que te dio la tienda, o pégalo en la casilla de arriba.
@@ -62,7 +62,7 @@ Para un reembolso o un nuevo envío, habla primero con la tienda: ella eligió a
 
 **Se queda en `Generado` o `Solicitado`.** La tienda hizo la guía, pero Forza todavía no tiene el paquete. Pregúntale a la tienda cuándo se lo va a entregar a Forza.
 
-**Varios días sin movimiento.** Si un paquete en camino lleva cuatro días sin un escaneo nuevo, Peek lo marca («Sin novedades desde hace cuatro días»). Llama a Forza con tu guía a mano. Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Varios días sin movimiento.** Si un paquete en camino lleva cuatro días sin un escaneo nuevo, Peek lo marca con el día del último escaneo («Sin novedades desde el lun 12 oct»). Llama a Forza con tu guía a mano. Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 **Dañado o perdido.** Actúa de inmediato. Los términos de Forza le dan al remitente 48 horas desde que Forza aceptó el envío para reclamar por escrito, con un solo reclamo por envío. Sin seguro, Forza paga como máximo Q800 o su equivalente en moneda local (US$100 en los términos de El Salvador). El remitente es la tienda: avísale el mismo día. Mira [paquete dañado](guide:damaged-parcel) y [paquete perdido](guide:lost-parcel).
 

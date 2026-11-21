@@ -3,7 +3,7 @@ title: J&T Express Australia tracking: JTAU numbers and statuses
 description: Track a J&T Express Australia parcel: what a JTAU number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-australia-tracking
 published: 2026-10-21
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Australia (J&T Express Australia Pty Ltd, Villawood NSW) is the Australian arm of J&T Express, the parcel group behind J&T in South-East Asia and China. It delivers parcels in Australia for e-commerce platforms, brands and retailers, including orders from overseas once they've cleared customs. If a shop sent your order with J&T, the tracking number starts with `JTAU`: paste it in the box above, or look it up on [J&T's own tracker](https://www.jtexpress.au/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -73,7 +73,7 @@ J&T recruits delivery partners across Australia, companies that do its last-mile
 
 The shop chose J&T, so for an online order the shop is your first contact.
 
-**No new scans.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days") and a "Get help from J&T Express Australia" link. If nothing moves after that, ask the shop or J&T's customer service (below), with your tracking number. More on [tracking that isn't updating](guide:tracking-not-updating).
+**No new scans.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek with the day of its latest line ("No tracking update since Mon 12 Oct") and a "Get help from J&T Express Australia" link. If nothing moves after that, ask the shop or J&T's customer service (below), with your tracking number. More on [tracking that isn't updating](guide:tracking-not-updating).
 
 **No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express Australia". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 

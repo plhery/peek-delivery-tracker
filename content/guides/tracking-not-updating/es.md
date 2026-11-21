@@ -4,7 +4,7 @@ description: Por qué el seguimiento de un paquete deja de actualizarse, cuánto
 slug: seguimiento-no-se-actualiza
 picture: Un calendario con varios días tachados, una línea de progreso que se queda a medias y Pip esperando, un poco aburrido.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu paquete últimamente, no porque esté parado. Los transportistas lo escanean en sus centros y al cruzar fronteras, no en la carretera: un trayecto largo, un vuelo, la aduana o un fin de semana pueden dejarte días sin una línea nueva. Preocúpate solo cuando haya pasado el plazo del propio transportista ([Correos](carrier:correos-spain) acepta reclamaciones por un Paq Estándar a partir de 4 días desde que lo admitió; InPost, por demora, si el pedido tarda más de 5 días desde el aviso de envío), y aun entonces, escribe primero a la tienda: es ella quien contrató el envío.
@@ -31,7 +31,7 @@ Ningún transportista da una cifra de cuánto tiempo puede pasar el seguimiento 
 - home | Último tramo | En reparto y entregado: los escaneos vuelven a llegar seguidos.
 :::
 
-Cuando un paquete figura con la etiqueta creada, admitido o en tránsito y su último escaneo tiene cuatro días o más, [Peek](/) muestra «Sin novedades desde hace cuatro días» y la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Correos.» (por ejemplo, con Correos). Si el transportista y los servicios de seguimiento responden sin ningún escaneo (no encuentran el número, o lo tienen sin historial) cuando el paquete ya tenía escaneos, Peek conserva los que encontró y muestra en la página del paquete «El transportista no tiene escaneos nuevos por ahora. Los que ya se encontraron se guardan, y Peek sigue comprobando.»
+Cuando un paquete figura con la etiqueta creada, admitido o en tránsito y su último escaneo tiene cuatro días o más, [Peek](/) lo marca con el día de ese escaneo («Sin novedades desde el lun 12 oct») y muestra la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Correos.» (por ejemplo, con Correos). Tras tres semanas sin escaneos nuevos, la nota pasa a ser «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Correos.» Si el transportista y los servicios de seguimiento responden sin ningún escaneo (no encuentran el número, o lo tienen sin historial) cuando el paquete ya tenía escaneos, Peek conserva los que encontró y muestra en la página del paquete «El transportista no tiene escaneos nuevos por ahora. Los que ya se encontraron se guardan, y Peek sigue comprobando.»
 
 ### ¿Cuánto tarda en actualizarse un número de seguimiento nuevo?
 

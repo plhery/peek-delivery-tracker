@@ -3,7 +3,7 @@ title: DayOne tracking: DOT numbers, statuses and who delivers
 description: Track a DayOne parcel from China: what a DOT number looks like, what the statuses on DayOne's tracker mean, who delivers it and who to ask when it's late.
 slug: dayone-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 DayOne is the warehouse that sends out a shop's online orders from China. It is not a courier: it says it is "the order fulfillment warehouse, not a courier delivery service provider". Other companies carry the parcel, and DayOne's tracker, [DayOneTrack](https://www.dayonetrack.com/), in English and Chinese, shows their scans. Look up your DOT number there, or paste it in the box above. The shop gives you the number with your order's shipping details.
@@ -77,7 +77,7 @@ DayOne sends you to the shop. Its tracker says: "For all package logistics, lost
 
 **Only `Info received` or `Order processed by shipper`.** Nobody has scanned the parcel yet. If it stays like that for several days, ask the shop when it was sent.
 
-**No new scan for days.** Parcels often go quiet on long flights and at customs. When a parcel on its way has had no new scan for four days, Peek flags it ("No tracking update for four days"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No new scan for days.** Parcels often go quiet on long flights and at customs. When a parcel on its way has had no new scan for four days, Peek flags it with the day of that scan ("No tracking update since Mon 12 Oct"). After three weeks with no new scan, Peek says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **`Alert` or `Expired`.** Read the newest scans, then ask the shop for help, with your DOT number.
 

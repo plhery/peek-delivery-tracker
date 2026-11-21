@@ -3,7 +3,7 @@ title: Suivi Ciblex : numéro, statuts du colis et contact
 description: Suivi Ciblex Express en France et en Belgique : quel code-barres saisir, ce que veulent dire les statuts, livraison, relais C Dispo, réclamations et contact.
 slug: suivi-ciblex
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Ciblex, ou Ciblex Express, est un transporteur express français créé en 1977, spécialisé dans la livraison entre professionnels en France, en Belgique et à l'étranger, souvent tôt le matin. Pour suivre ton colis, saisis le code-barres de son étiquette sur [la page de suivi de Ciblex](https://ciblex.eu/suivi-colis-express/), gratuite, ou colle le numéro dans la case ci-dessus. Ce numéro vient de l'expéditeur : si tu ne l'as pas, demande-le au fournisseur ou à la boutique qui a envoyé le colis.
@@ -50,7 +50,7 @@ Avec SP8 et SP9, Ciblex livre avant 8 h ou 9 h en ton absence, du mardi au samed
 
 ## Colis Ciblex en retard, perdu ou abîmé
 
-Les conditions de Ciblex sont écrites pour son client, l'expéditeur, qui a le contrat. Aucune page de Ciblex ne dit quoi faire quand le suivi ne bouge plus : contacte d'abord l'expéditeur, et lis [pourquoi un suivi ne bouge plus](guide:tracking-not-updating). Dans Peek, quand le dernier scan (étiquette créée, prise en charge ou en transit) a quatre jours ou plus, ta liste affiche « Aucune mise à jour depuis quatre jours » et la page du colis ajoute « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Ciblex. »
+Les conditions de Ciblex sont écrites pour son client, l'expéditeur, qui a le contrat. Aucune page de Ciblex ne dit quoi faire quand le suivi ne bouge plus : contacte d'abord l'expéditeur, et lis [pourquoi un suivi ne bouge plus](guide:tracking-not-updating). Dans Peek, quand le dernier scan (étiquette créée, prise en charge ou en transit) a quatre jours ou plus, ta liste affiche le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct », et la page du colis ajoute « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Ciblex. » Après trois semaines sans nouveau scan, elle dit plutôt « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Ciblex. »
 
 Les conditions en vigueur depuis le 1er janvier 2026 fixent ces délais :
 

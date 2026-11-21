@@ -3,7 +3,7 @@ title: PostNL tracking: numbers, statuses and delivery abroad
 description: PostNL tracking outside the Netherlands: what NL and 3S numbers mean, what postnl.post's statuses say, who delivers in your country and who to ask when it stalls.
 slug: postnl-tracking
 published: 2026-10-22
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 PostNL is the Dutch post. It sends parcels and letters from Dutch shops abroad, and through Spring GDS, its international arm, it carries parcels for online sellers around the world. Both are tracked on PostNL's international site, [postnl.post](https://postnl.post/), or in the box above. In your country, a local carrier, often the national post, delivers the parcel. The number is in the shop's shipping email or on your order page.
@@ -67,7 +67,7 @@ Attempts, notice cards and how long a parcel waits follow your local carrier's r
 
 **No scans yet.** `Pre-advised` or `Preparing` means the seller has booked the shipment but may not have handed it over. Spring GDS says to allow 24 to 48 hours after you get the number for the first scan.
 
-**Stuck in transit.** After `Departed` or `Transit`, a parcel travelling by air or sea gets no scans until it arrives, and customs often holds parcels for several days. Then try the same number with your national post. After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update for four days" in your list and, on the parcel's page: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PostNL.", with a "Get help from PostNL" link to PostNL's customer service. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck in transit.** After `Departed` or `Transit`, a parcel travelling by air or sea gets no scans until it arrives, and customs often holds parcels for several days. Then try the same number with your national post. After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows the day of the latest scan in your list ("No tracking update since Mon 12 Oct") and, on the parcel's page: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PostNL.", with a "Get help from PostNL" link to PostNL's customer service. After three weeks without a scan, the page says instead: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PostNL." More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered but not there.** Spring GDS suggests checking with your neighbours, safe places such as a porch or garage, and any reception desk. It also says carriers sometimes mark an item delivered up to 24 hours before it actually arrives. After that, contact the seller. See [delivered but not received](guide:delivered-not-received).
 

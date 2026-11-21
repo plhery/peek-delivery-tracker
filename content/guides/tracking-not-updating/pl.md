@@ -4,7 +4,7 @@ description: Paczka stoi w miejscu? Sprawdź, dlaczego status przesyłki się ni
 slug: status-przesylki-sie-nie-zmienia
 picture: Kalendarz z kilkoma skreślonymi dniami, linia postępu urwana w połowie i Pip, który czeka, trochę znudzony.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował Twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
@@ -32,7 +32,7 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 - home | Ostatni odcinek | Wydana do doręczenia, potem doręczona: skany znów pojawiają się szybko.
 :::
 
-Gdy paczka jest zarejestrowana, przyjęta przez przewoźnika albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, [Peek](/) pokazuje na liście „Brak aktualizacji od czterech dni”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika InPost.” (tu na przykładzie InPost). Jeśli przewoźnik i serwisy śledzenia odpowiadają bez żadnego skanu (numeru nie znaleziono albo jest bez historii), a paczka ma już skany, Peek zachowuje te znalezione i pokazuje na stronie paczki „Przewoźnik nie ma na razie nowych skanów. Te już znalezione zostają, a Peek sprawdza dalej.”
+Gdy paczka jest zarejestrowana, przyjęta przez przewoźnika albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, [Peek](/) pokazuje na liście dzień tego skanu („Brak aktualizacji od pon 12 paź”), a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika InPost.” (tu na przykładzie InPost). Po trzech tygodniach bez nowego skanu notka zmienia się na „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika InPost.” Jeśli przewoźnik i serwisy śledzenia odpowiadają bez żadnego skanu (numeru nie znaleziono albo jest bez historii), a paczka ma już skany, Peek zachowuje te znalezione i pokazuje na stronie paczki „Przewoźnik nie ma na razie nowych skanów. Te już znalezione zostają, a Peek sprawdza dalej.”
 
 ### Ile trwa, zanim nowy numer przesyłki zacznie działać?
 

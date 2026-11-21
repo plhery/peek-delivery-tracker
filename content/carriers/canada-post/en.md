@@ -3,7 +3,7 @@ title: Canada Post tracking: numbers, statuses and notice cards
 description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and customs.
 slug: canada-post-tracking
 published: 2026-10-15
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Canada Post is the Canada Post Corporation, the federal Crown corporation that runs Canada's postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app, or paste the number in the box above. The number comes from the sender, usually in the shop's shipping email: Canada Post can't find a parcel by your name or address. If it ends in `CA` and you follow the parcel from outside Canada, Peek can also ask your country's post with the same number.
@@ -81,7 +81,7 @@ Canada Post gives Peek no destination country, so your country decides: in the i
 
 ## Canada Post parcel late, lost, returned or not there
 
-**No new scans.** After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update for four days" in your list and, on the parcel's page, says: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Canada Post." It adds a link to help from the carrier that has the parcel, such as "Get help from Canada Post". Mail at customs in Canada can't be tracked precisely, the CBSA says. More in [tracking that isn't updating](guide:tracking-not-updating).
+**No new scans.** After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows the day of the latest scan in your list ("No tracking update since Mon 12 Oct") and, on the parcel's page, says: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Canada Post." After three weeks without a scan, it says instead: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Canada Post." It adds a link to help from the carrier that has the parcel, such as "Get help from Canada Post". Mail at customs in Canada can't be tracked precisely, the CBSA says. More in [tracking that isn't updating](guide:tracking-not-updating).
 
 **Late or lost.** Canada Post says most late parcels arrive within 5 business days of the expected date. After that, check the address and around your home, then ask for an investigation with a support ticket on Canada Post's [missing packages page](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) (sign in first to follow it), within 90 days of shipping, or 6 months for a parcel sent to the US or abroad. The sender can ask too, and only the sender can be paid: if the parcel doesn't turn up within a few days, Canada Post closes your inquiry and you then ask the sender to claim. If you bought online, start with the shop. More in [lost parcel](guide:lost-parcel).
 

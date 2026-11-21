@@ -3,7 +3,7 @@ title: Suivi PostNL : numéros 3S et NL, statuts et livraison
 description: Suivi PostNL hors des Pays-Bas : format des numéros NL et 3S, sens des statuts sur postnl.post, qui livre le colis dans ton pays et qui contacter s'il bloque.
 slug: postnl-suivi
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 PostNL est l’opérateur postal néerlandais. Il achemine à l’étranger les colis et courriers des boutiques néerlandaises et, via sa filiale internationale Spring GDS, les commandes de vendeurs en ligne du monde entier. Dans les deux cas, tu peux suivre l’envoi sur le site international de PostNL, [postnl.post](https://postnl.post/) (en anglais), ou dans le champ ci-dessus. Une fois arrivé dans ton pays, le colis passe souvent au service postal local ou à un transporteur partenaire. Le numéro figure dans l’e-mail d’expédition ou sur ta page de commande ; sinon, lis [retrouver un numéro de suivi](guide:find-tracking-number).
@@ -63,7 +63,7 @@ Les avis de passage, nouvelles présentations et délais de garde suivent les r�
 
 **Aucun scan pour l’instant.** Avec `Pre-advised` ou `Preparing`, le vendeur a réservé l’expédition mais n’a peut-être pas encore remis le colis. Spring GDS conseille d’attendre 24 à 48 heures après réception du numéro pour voir apparaître le premier scan.
 
-**Immobile en transit.** Après `Departed` ou `Transit`, un envoi voyageant par avion ou par bateau ne reçoit aucun scan avant son arrivée, et le passage en douane (`Customs`) dure souvent plusieurs jours. Essaie ensuite le numéro `NL` chez ta poste nationale. Après quatre jours sans nouveau scan aux étapes « Étiquette créée », « Pris en charge » ou « En transit », Peek indique « Aucune mise à jour depuis quatre jours » dans ta liste et, sur la fiche du colis : « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger PostNL. », avec le lien « Demande de l’aide à PostNL ». Plus de détails dans [suivi qui ne bouge plus](guide:tracking-not-updating).
+**Immobile en transit.** Après `Departed` ou `Transit`, un envoi voyageant par avion ou par bateau ne reçoit aucun scan avant son arrivée, et le passage en douane (`Customs`) dure souvent plusieurs jours. Essaie ensuite le numéro `NL` chez ta poste nationale. Après quatre jours sans nouveau scan aux étapes « Étiquette créée », « Pris en charge » ou « En transit », Peek indique dans ta liste le jour du dernier scan (« Aucune mise à jour depuis lun 12 oct ») et, sur la fiche du colis : « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger PostNL. », avec le lien « Demande de l’aide à PostNL ». Au bout de trois semaines sans scan, la fiche dit plutôt : « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger PostNL. » Plus de détails dans [suivi qui ne bouge plus](guide:tracking-not-updating).
 
 **Marqué livré mais absent.** Spring GDS recommande d’interroger tes voisins, de vérifier les endroits abrités (porche, garage) et l’accueil ou le gardien, et note qu’un transporteur marque parfois un colis `Delivered` jusqu’à 24 heures avant sa remise effective. Si tu ne trouves toujours rien, contacte le vendeur et lis [colis livré mais non reçu](guide:delivered-not-received).
 

@@ -3,7 +3,7 @@ title: J&T Express Germany śledzenie: numer JTDE i statusy
 description: Śledź paczkę J&T Express w Niemczech: jak wygląda numer JTDE, co oznaczają angielskie statusy i co zrobić, gdy przesyłka stoi, ginie lub nie dociera.
 slug: jt-express-niemcy-sledzenie
 published: 2026-11-16
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt nad Menem) to niemiecka sieć grupy kurierskiej J&T Express: doręcza paczki na terenie Niemiec. Jeśli sklep wysłał Twoje zamówienie na niemiecki adres przez J&T, numer śledzenia zaczyna się od `JTDE`: wklej go w pole powyżej albo sprawdź bezpośrednio na [stronie śledzenia J&T pod adresem jtexpress.de](https://www.jtexpress.de/tracking). Numer przekazuje sklep, który wysłał zamówienie — znajdziesz go w wiadomości o wysyłce lub na stronie zamówienia.
@@ -75,7 +75,7 @@ W historiach przesyłek znanych kodowi Peek kurier J&T ładuje paczkę na trasę
 
 Przewoźnika wybrał sklep, dlatego przy zamówieniu internetowym pierwszym kontaktem zawsze jest sprzedawca. Zgodnie z prawem niemieckim (§ 475 niemieckiego kodeksu cywilnego, BGB), gdy kupujesz od przedsiębiorcy jako konsument, ryzyko przypadkowej utraty lub uszkodzenia rzeczy w transporcie ponosi sprzedawca — chyba że sam zleciłeś przewóz przewoźnikowi, którego sprzedawca wcześniej Ci nie wskazał.
 
-**Brak ruchu w śledzeniu.** J&T nie publikuje czasów doręczenia dla odbiorców. Gdy paczka ma status „Przyjęta przez przewoźnika” lub „W transporcie” i przez cztery dni nie pojawia się żaden nowy wpis, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” oraz pokazuje link „Poproś przewoźnika J&T Express Germany o pomoc”. Jeśli nadal nic się nie zmienia, skontaktuj się ze sklepem albo zadzwoń na infolinię J&T, podając numer `JTDE`. Więcej wskazówek znajdziesz w poradniku [śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
+**Brak ruchu w śledzeniu.** J&T nie publikuje czasów doręczenia dla odbiorców. Gdy paczka ma status „Przyjęta przez przewoźnika” lub „W transporcie” i przez cztery dni nie pojawia się żaden nowy wpis, Peek oznacza ją komunikatem z dniem ostatniego wpisu, np. „Brak aktualizacji od pon 12 paź”, oraz pokazuje link „Poproś przewoźnika J&T Express Germany o pomoc”. Jeśli nadal nic się nie zmienia, skontaktuj się ze sklepem albo zadzwoń na infolinię J&T, podając numer `JTDE`. Więcej wskazówek znajdziesz w poradniku [śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
 
 **Brak danych o numerze.** Numer, którego śledzenie J&T jeszcze nie zna, widnieje jako „Oczekiwanie na przewoźnika J&T Express Germany”. Sklepy często generują numer listu przewozowego, zanim fizycznie przekażą paczkę kurierowi. Jeśli po dwóch dniach J&T wciąż nie rozpoznaje numeru i żadne inne źródło dla niego nie odpowiedziało, Peek wyświetla komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a Peek sprawdza go odtąd raz dziennie, natomiast po tygodniu od dodania — raz w tygodniu. Potwierdź wtedy numer w sklepie i zapytaj, czy paczka faktycznie została wysłana.
 

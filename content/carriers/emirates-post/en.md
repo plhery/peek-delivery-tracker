@@ -3,7 +3,7 @@ title: Emirates Post tracking: AE numbers and statuses explained
 description: Track an Emirates Post item sent from or within the UAE: what an AE number looks like, what each status means and how Peek follows it to your country's post.
 slug: emirates-post-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Emirates Post (بريد الإمارات) is the post of the United Arab Emirates; Peek's catalog also knows it as Emirates Post Group. Its postal numbers end in `AE`, and its tracker names the place of most steps: in the UAE and, for an item sent abroad, in the destination country too. Paste the number in the box above, or look it up on Emirates Post's own tracker at emiratespost.ae. Peek couldn't check Emirates Post's website for this page, so what follows is what Peek's code knows about its tracker.
@@ -59,7 +59,7 @@ Emirates Post's steps name the office that has the item, such as a sorting centr
 
 ## Emirates Post tracking not updating, lost or returned
 
-**Quiet after it left the UAE.** The flight and customs take time. After four days without a new step, Peek flags the parcel ("No tracking update for four days"). Check your country's post with the same number; Peek does it for you where it can. More in [why tracking stops updating](guide:tracking-not-updating).
+**Quiet after it left the UAE.** The flight and customs take time. After four days without a new step, Peek flags the parcel with the day of the last step ("No tracking update since Mon 12 Oct"). Check your country's post with the same number; Peek does it for you where it can. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** Ask whoever delivered it in your country, and tell the sender. See [delivered but not received](guide:delivered-not-received).
 

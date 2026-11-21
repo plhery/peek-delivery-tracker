@@ -4,7 +4,7 @@ description: O seguimento da encomenda não atualiza há dias? Vê as causas mai
 slug: tracking-nao-atualiza-encomenda-parada
 picture: Um calendário com vários dias riscados, uma linha de progresso interrompida a meio e o Pip à espera, um pouco aborrecido.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta da tua encomenda nos últimos dias, não porque ela tenha parado. As transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada: uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Só vale a pena preocupares-te quando passar o prazo da própria transportadora (os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente; a [InPost](carrier:inpost) aceita uma reclamação por atraso passados mais de 5 dias desde a notificação de envio) e, mesmo assim, fala primeiro com a loja: foi ela que contratou a transportadora.
@@ -31,7 +31,7 @@ Nenhuma transportadora dá um número único para o tempo que o seguimento pode 
 - home | Último troço | Em entrega e depois entregue: as leituras voltam a ser rápidas.
 :::
 
-Quando uma encomenda está com a etiqueta criada, aceite pela transportadora ou em trânsito e a última leitura tem quatro dias ou mais, o [Peek](/) mostra «Sem atualizações há quatro dias» na tua lista e, na página da encomenda, a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana.», que diz também que o Peek continua a perguntar à transportadora. Se a transportadora e os serviços de seguimento responderem sem nenhuma leitura (número não encontrado, ou registado sem histórico) para uma encomenda que já tem leituras, o Peek guarda as que encontrou e mostra na página da encomenda «A transportadora não tem registos novos por agora. Os já encontrados ficam guardados, e o Peek continua a verificar.»
+Quando uma encomenda está com a etiqueta criada, aceite pela transportadora ou em trânsito e a última leitura tem quatro dias ou mais, o [Peek](/) assinala-a na tua lista com o dia dessa leitura («Sem atualizações desde seg 12 out») e mostra, na página da encomenda, a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana.», que diz também que o Peek continua a perguntar à transportadora. Ao fim de três semanas sem leituras novas, a nota passa a ser «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor.» Se a transportadora e os serviços de seguimento responderem sem nenhuma leitura (número não encontrado, ou registado sem histórico) para uma encomenda que já tem leituras, o Peek guarda as que encontrou e mostra na página da encomenda «A transportadora não tem registos novos por agora. Os já encontrados ficam guardados, e o Peek continua a verificar.»
 
 ### Número novo ou «Aguarda entrada nos CTT» há dias: quanto tempo demora?
 

@@ -3,7 +3,7 @@ title: Suivi R+L Carriers : numéro PRO, statuts et réclamations
 description: Suis un envoi de fret R+L Carriers aux États-Unis : format du numéro PRO, sens de chaque ligne de suivi et règles en cas de retard, d'avarie ou de perte.
 slug: suivi-rl-carriers
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 R+L Carriers est un transporteur de fret routier aux **États-Unis**. Dans le code de Peek, il enlève la marchandise chez l'expéditeur, l'achemine de terminal en terminal et la livre depuis le terminal de destination aux États-Unis. Si une commande volumineuse ou un autre envoi de fret t'est adressé aux États-Unis via R+L, tu le suis grâce à son numéro PRO, communiqué par la boutique ou l'entreprise qui a réservé le transport : colle-le dans le champ ci-dessus. Le propre outil de R+L est la page *Shipment Tracing* sur rlcarriers.com : elle accepte un numéro PRO ou un identifiant de demande d'enlèvement (*Pickup Request ID*), jusqu'à 25 numéros à la fois, ainsi que d'autres références si tu te connectes à un compte MyRLC.
@@ -55,7 +55,7 @@ Cette page ne précise ni créneaux horaires, ni prise de rendez-vous, ni nombre
 
 **Chiffre erroné.** Lorsqu'un numéro PRO échoue au contrôle de son dernier chiffre, le traceur de R+L renvoie le PRO suivi de `Pro number failed check digit validation.` Peek affiche alors « Numéro de suivi à vérifier ». Compare le numéro chiffre par chiffre avec le courriel de la boutique ou le bordereau d'expédition.
 
-**Retardé ou sans mise à jour.** Après `Shipment Delayed`, Peek maintient l'envoi « En transit » avec la date prévue par R+L. Au bout de quatre jours sans nouvelle ligne sur un envoi « Pris en charge » ou « En transit », Peek signale « Aucune mise à jour depuis quatre jours ». Renseigne-toi auprès de la boutique ou de l'expéditeur. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
+**Retardé ou sans mise à jour.** Après `Shipment Delayed`, Peek maintient l'envoi « En transit » avec la date prévue par R+L. Au bout de quatre jours sans nouvelle ligne sur un envoi « Pris en charge » ou « En transit », Peek le signale avec le jour de la dernière ligne (« Aucune mise à jour depuis lun 12 oct »). Renseigne-toi auprès de la boutique ou de l'expéditeur. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
 
 **Marchandise endommagée, manquante ou perdue aux États-Unis.** Préviens d'abord le vendeur ou l'entreprise expéditrice qui a commandé le transport. Pour du fret acheminé par un transporteur routier **entre États américains**, le droit fédéral des **États-Unis** (`49 U.S.C. 14706` et `49 CFR Part 370`) fixe les règles suivantes :
 

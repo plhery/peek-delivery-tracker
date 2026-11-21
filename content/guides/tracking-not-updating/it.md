@@ -4,7 +4,7 @@ description: Pacco fermo da giorni? Perché il tracking non si aggiorna, quanto 
 slug: tracking-non-si-aggiorna
 picture: Un calendario con diversi giorni barrati, una linea di avanzamento che si ferma a metà e Pip che aspetta, un po' annoiato.
 published: 2026-10-09
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Se il tracking non si aggiorna, di solito vuol dire solo che nessuno ha scansionato il pacco di recente, non che si è fermato. I corrieri lo scansionano nei centri di smistamento e alle frontiere, non lungo la strada: un viaggio lungo, un volo, la dogana o un fine settimana possono lasciarti per giorni senza aggiornamenti. Preoccupati solo quando è passato il termine del corriere (con Poste Delivery Standard il reclamo si può fare dal 6° giorno lavorativo dopo la spedizione; con la [Posta svizzera](carrier:swiss-post), per un invio nazionale, la ricerca si chiede quando il tempo di consegna abituale è superato di oltre due giorni). E anche allora scrivi prima al venditore: il cliente del corriere è lui.
@@ -31,7 +31,7 @@ Nessun corriere dice per quanti giorni, al massimo, il tracking può restare mut
 - home | Ultimo tratto | In consegna, poi consegnato: le scansioni tornano frequenti.
 :::
 
-Quando un pacco ha l'etichetta creata, è preso in carico o in transito e la sua ultima scansione ha quattro giorni o più, [Peek](/) mostra «Nessun aggiornamento da quattro giorni» nella tua lista e, sulla pagina del pacco, la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Poste Italiane.» (qui con Poste Italiane). Se il corriere e i servizi di tracciamento rispondono senza alcuna scansione (codice non trovato, o registrato senza cronologia) per un pacco che ne ha già, Peek tiene quelle trovate e mostra sulla pagina del pacco «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
+Quando un pacco ha l'etichetta creata, è preso in carico o in transito e la sua ultima scansione ha quattro giorni o più, [Peek](/) lo segnala nella tua lista con il giorno di quella scansione («Nessun aggiornamento da lun 12 ott») e mostra, sulla pagina del pacco, la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Poste Italiane.» (qui con Poste Italiane). Dopo tre settimane senza nuove scansioni, la nota diventa «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a Poste Italiane.» Se il corriere e i servizi di tracciamento rispondono senza alcuna scansione (codice non trovato, o registrato senza cronologia) per un pacco che ne ha già, Peek tiene quelle trovate e mostra sulla pagina del pacco «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
 
 ### Dopo quanto si aggiorna un codice di tracking nuovo?
 

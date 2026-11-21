@@ -3,7 +3,7 @@ title: HuaHan Logistics Sendungsverfolgung: HHW…YQ & Zusteller
 description: HuaHan Logistics (华翰物流) Paket aus China verfolgen: Aufbau der HHW…YQ-Nummer, Bedeutung aller Scans, lokaler Zusteller, Zoll und Tracking in Peek.
 slug: huahan-logistics-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, auch HuaHan Express oder 华翰速递) ist ein chinesischer Logistikdienstleister für den grenzüberschreitenden Onlinehandel, der Pakete per Luftfracht oder über den Postweg aus China ausfliegt und sie im Zielland an einen lokalen Paketdienst für die letzte Meile übergibt. Wenn ein Online-Shop deine Bestellung mit HuaHan verschickt hat, erkennst du die Sendung an einer Nummer, die mit `HHW` beginnt und mit `YQ` endet – füge sie einfach oben in das Suchfeld ein. HuaHans öffentlicher Tracker unter [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) zeigt bei vielen Sendungen auch den lokalen Zustelldienst sowie dessen eigene Sendungsnummer an.
@@ -114,7 +114,7 @@ HuaHan richtet sich an Online-Händler und gibt auf seinen Seiten nicht an, ob d
 
 **Keine Updates nach `Has been given to local carrier`.** Der lokale Paketdienst hat die Sendung übernommen; seine eigene Sendungsverfolgung ist oft aktueller als HuaHans Weiterleitung. Lies auf HuaHans Tracker oder auf der Paketkarte in Peek den Namen und die Nummer des lokalen Zustellers ab.
 
-**Tagelang keine Bewegung.** Bleibt ein unterwegs befindliches Paket vier Tage ohne neuen Scan, blendet Peek „Seit vier Tagen keine Aktualisierung“ ein – auf Langstreckenflügen, beim Zoll oder übers Wochenende ist Funkstille häufig normal. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
+**Tagelang keine Bewegung.** Bleibt ein unterwegs befindliches Paket vier Tage ohne neuen Scan, blendet Peek den Tag des letzten Scans ein („Keine Aktualisierung seit Mo 12. Okt“) – auf Langstreckenflügen, beim Zoll oder übers Wochenende ist Funkstille häufig normal. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
 **Als zugestellt markiert, aber nichts erhalten.** Prüfe Briefkasten, Ablageorte, Nachbarn und nahegelegene Paketshops und wende dich dann an den lokalen Zusteller sowie den Verkäufer. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

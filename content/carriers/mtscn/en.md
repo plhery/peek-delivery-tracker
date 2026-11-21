@@ -3,7 +3,7 @@ title: Meiteshun tracking: AMTS numbers, scans and who to ask
 description: Track a Meiteshun Logistics (美特顺) parcel from Shenzhen: what an AMTS number looks like, what its steps mean and why its Delivered step can be written in advance.
 slug: meiteshun-tracking
 published: 2026-10-28
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) is a forwarder in Shenzhen, China. Its numbers start with AMTS and end with FS: if the shop that sent your order gave you one, paste it in the box above. Read Meiteshun's tracking with care: its system writes a parcel's whole journey, delivery included, when the order is created, so a "Delivered" there doesn't prove your parcel arrived.
@@ -63,7 +63,7 @@ Peek found no delivery times from Meiteshun, and no rules for delivery attempts,
 
 **Every step on time, but no parcel.** The steps were written when the order was created, so they show the plan, not where the parcel is. Go by the delivery estimate the shop gave, and ask the seller once it passes.
 
-**Stuck in Shenzhen in Peek.** If Peek shows only the first steps in Shenzhen while a tracking link from the seller shows more, the steps Peek leaves out were written in advance or are dated after its check (below). A step written in advance never counts as a scan: it changes no status or expected date and sends no alert. When it has held back steps written in advance, Peek says so under the parcel's status until the parcel is delivered or returned: "Meiteshun Logistics’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck in Shenzhen in Peek.** If Peek shows only the first steps in Shenzhen while a tracking link from the seller shows more, the steps missing from Peek's scans were written in advance or are dated after its check (below). A step written in advance never counts as a scan: it changes no status or expected date and sends no alert. Until the parcel is delivered or returned, Peek opens its tracking history with "Other sites may show more steps, but they’re only predictions." and lists the steps it held back under "Show them", greyed, each with "Predicted for" and its day. Look on Meiteshun's tracking page for the company that delivers in your country and its tracking number; if there's none, ask the seller. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** For a number it doesn't know, Meiteshun's tracker shows the number as a reference with every other field empty. Peek takes that answer as Meiteshun listing the shipment without a scan yet: it keeps checking, at the pace given below for steps written in advance, and shows "Waiting for Meiteshun Logistics", with no request to check the number. So check it with the seller yourself.
 

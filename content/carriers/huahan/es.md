@@ -3,7 +3,7 @@ title: Seguimiento de HuaHan Logistics: número HHW…YQ y entrega
 description: Rastrea tu paquete de HuaHan Logistics (华翰物流) desde China: formato HHW…YQ, significado de cada estado, empresa de reparto local, aduanas y Peek.
 slug: seguimiento-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, también conocida como HuaHan Express o 华翰速递) es una empresa china de logística transfronteriza para comercio electrónico que envía paquetes desde China por vía aérea o postal y los entrega a un transportista local en el país de destino para el reparto final. Si una tienda online envió tu pedido con HuaHan, busca un número que empiece por `HHW` y termine en `YQ` y pégalo en el cuadro superior. El buscador público de HuaHan en [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) también puede indicar qué empresa reparte en tu zona y el número de seguimiento local asignado a tu paquete.
@@ -113,7 +113,7 @@ HuaHan trabaja para vendedores online y sus páginas no detallan si los tributos
 
 **Sin cambios tras `Has been given to local carrier`.** El transportista local ya tiene el paquete y su propio seguimiento suele ir por delante del de HuaHan. Busca su nombre y su código en el rastreador de HuaHan o en la tarjeta del envío en Peek.
 
-**Varios días sin novedades.** Cuando un paquete en tránsito lleva cuatro días sin escaneos nuevos, Peek lo señala («Sin novedades desde hace cuatro días») y recuerda que es habitual quedarse sin lecturas durante vuelos largos, en aduanas o en fin de semana. Consulta [por qué no se actualiza el seguimiento](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
+**Varios días sin novedades.** Cuando un paquete en tránsito lleva cuatro días sin escaneos nuevos, Peek lo señala con el día del último escaneo («Sin novedades desde el lun 12 oct») y recuerda que es habitual quedarse sin lecturas durante vuelos largos, en aduanas o en fin de semana; pasadas tres semanas sin nada nuevo, aconseja contactar con el vendedor. Consulta [por qué no se actualiza el seguimiento](guide:tracking-not-updating) y [seguimiento de paquetes desde China](guide:tracking-from-china).
 
 **Figura como entregado, pero no lo tienes.** Revisa buzón, conserjería, vecinos y puntos de recogida cercanos, y después contacta con el repartidor local y el vendedor. Consulta [entregado pero no recibido](guide:delivered-not-received).
 

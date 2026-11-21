@@ -146,7 +146,7 @@ export interface TrackingEvent {
 
 /**
  * A step the carrier listed before it happened, such as a script of the whole journey written when the order was
- * made: no scan. The timeline shows it greyed as planned and not confirmed; nothing else reads it.
+ * made: no scan. The timeline folds it, greyed, behind its line on predictions; nothing else reads it.
  */
 export interface PlannedEvent {
   expiresAt?: string;

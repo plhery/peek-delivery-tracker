@@ -3,7 +3,7 @@ title: Slovenská pošta tracking: Slovak Post numbers and statuses
 description: Track a Slovenská pošta (Slovak Post) item: what the number looks like, what the English statuses mean, BalíkoBOX pickup, claims and contacts.
 slug: slovenska-posta-tracking
 published: 2026-10-13
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Slovenská pošta (Slovak Post) is Slovakia's national post. Track an item on its English [Tracking of Items](https://www.posta.sk/en/tracking-of-items) page, in its app or by pasting the number in the box above. The number comes from the sender: the shop's shipping email or order page.
@@ -60,7 +60,7 @@ Slovak Post delivers at least once every working day. Items can go:
 
 ## Slovak Post parcel stuck, delayed or lost
 
-If nothing changes for days, Slovak Post says the item may still be in processing, waiting for customs or on its way to the destination country, and to contact customer service if it lasts. After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update for four days" in your list and, on the parcel's page: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Slovenská pošta.", with a "Get help from Slovenská pošta" link to its contacts page. More in [tracking that isn't updating](guide:tracking-not-updating).
+If nothing changes for days, Slovak Post says the item may still be in processing, waiting for customs or on its way to the destination country, and to contact customer service if it lasts. After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek shows the day of the latest scan in your list ("No tracking update since Mon 12 Oct") and, on the parcel's page: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Slovenská pošta.", with a "Get help from Slovenská pošta" link to its contacts page. After three weeks with no new scan, the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Slovenská pošta." More in [tracking that isn't updating](guide:tracking-not-updating).
 
 **Customs.** For items from outside the EU, Slovak Post can act as your customs declarant. It tells you by app, email or notice; you send documents through tracking, the app or email, pay duty to the Slovak Financial Administration and a declaration fee on collection. The item is stored 18 days from the notice, extendable up to 90 by email to the clearance office. Since 1 July 2025 the power of attorney must include your birth number (rodné číslo), or Slovak Post can't represent you, and since 13 April 2026 its clearance offices no longer hand items over in person. Since 1 November 2026, the EU's €2 handling fee per kind of product is owed by whoever declares the goods; Slovak Post's customs page doesn't yet say how it passes it on. See [parcels held at customs](guide:customs).
 

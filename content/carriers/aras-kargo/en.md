@@ -3,7 +3,7 @@ title: Aras Kargo tracking: numbers and statuses in English
 description: Track an Aras Kargo parcel: what its 13-digit number looks like, what Turkish statuses such as TESLİMAT ŞUBESİNDE mean in English, and how Peek follows it.
 slug: aras-kargo-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Aras Kargo (also written Aras Cargo) is a courier in Turkey. Aras's tracker, as Peek reads it, writes every step in Turkish. The shop or the sender gives you the tracking number: paste it in the box above. Aras Kargo's own tracker is at kargotakip.araskargo.com.tr. The tables below explain its Turkish statuses in English.
@@ -78,7 +78,7 @@ A parcel goes from the Aras branch that takes it in, through transfer centres (t
 
 **Stuck at `TESLİMAT ŞUBESİNDE`.** The delivery branch has the parcel, and the status stays the same after a failed delivery. If a reason is listed for a day (the table above), the parcel wasn't delivered that day, and the reason says why. Otherwise, it is waiting there for delivery. Peek knows no out-for-delivery step from Aras, so the parcel shows "In transit" until it is delivered or a delivery fails.
 
-**No update for days.** When a parcel on its way has had no new scan for four days, Peek flags it ("No tracking update for four days") and keeps asking Aras. Parcels often go quiet over a weekend. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** When a parcel on its way has had no new scan for four days, Peek flags it with the day of that scan ("No tracking update since Mon 12 Oct") and keeps asking Aras. Parcels often go quiet over a weekend. After three weeks with no new scan, Peek says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** Check with neighbours and anyone at your address. Aras's tracker shows who signed for the parcel: Peek leaves that name out, so look on Aras's tracker. Then contact the shop and Aras. More in [delivered but not received](guide:delivered-not-received).
 

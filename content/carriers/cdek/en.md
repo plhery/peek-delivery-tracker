@@ -3,7 +3,7 @@ title: CDEK tracking (СДЭК): order numbers and statuses in English
 description: Track a CDEK (СДЭК) parcel: what its order number looks like, what its Russian statuses mean in English, courier and pickup point steps, and how Peek follows it.
 slug: cdek-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan, Belarus and Serbia. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.
@@ -63,7 +63,7 @@ CDEK's order page on my.cdek.ru shows the pickup point, its address, contact det
 
 **Only `Создан`, or no steps.** The sender may not have handed the parcel over yet, or the number has a typo. Peek keeps asking. Check the number against the shop's message, digit by digit, and if nothing changes after a few days, ask the shop when it sent the parcel.
 
-**No new step for days.** If the newest step is four or more days old and the parcel hasn't yet gone out for delivery or reached your pickup point, Peek flags it: "No tracking update for four days". More in [why tracking stops updating](guide:tracking-not-updating).
+**No new step for days.** If the newest step is four or more days old and the parcel hasn't yet gone out for delivery or reached your pickup point, Peek flags it with that step's day: "No tracking update since Mon 12 Oct". More in [why tracking stops updating](guide:tracking-not-updating).
 
 **`Курьер не смог доставить заказ`.** The courier couldn't deliver. Another attempt shows as `Выдан курьеру` again. If none comes, ask the shop: it booked the delivery with CDEK.
 

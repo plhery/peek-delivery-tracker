@@ -3,7 +3,7 @@ title: Tracking Meiteshun: numero AMTS…FS, stati e chi contattare
 description: Tracciare un pacco Meiteshun Logistics (美特顺) da Shenzhen: com'è fatto il numero AMTS…FS, cosa significano i passaggi e perché la consegna è scritta prima.
 slug: meiteshun-tracking
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, indicata anche come MTSCN) è uno spedizioniere con sede a Shenzhen, in Cina. I suoi numeri di tracciamento iniziano con AMTS e finiscono con FS: se il negozio che ha spedito il tuo ordine te ne ha comunicato uno, incollalo nel box qui sopra. Leggi però il tracking di Meiteshun con cautela: il suo sistema registra l'intero percorso del pacco, consegna compresa, già al momento della creazione dell'ordine, quindi un `Delivered` lì non dimostra che il pacco sia davvero arrivato.
@@ -63,7 +63,7 @@ Peek non ha trovato tempi di consegna dichiarati da Meiteshun, né regole su ten
 
 **Tutti i passaggi puntuali, ma nessun pacco.** Poiché le tappe sono state scritte alla creazione dell'ordine, mostrano il programma e non dove si trova davvero la spedizione. Regolati sulla stima di consegna indicata dal negozio e contatta il venditore una volta scaduta.
 
-**Fermo a Shenzhen in Peek.** Se Peek mostra soltanto i primi passaggi a Shenzhen mentre un link del venditore ne elenca altri, le tappe omesse da Peek sono state scritte in anticipo oppure portano una data successiva al controllo (vedi sotto). Una tappa scritta in anticipo non conta mai come scansione: non modifica lo stato né la data prevista e non invia notifiche. Quando tiene da parte tappe scritte in anticipo, Peek lo segnala sotto lo stato del pacco fino alla consegna o al reso: «Il sito di Meiteshun Logistics riporta tappe scritte in anticipo, persino la consegna. Peek non può confermarle, quindi non le mostra. Cerca su quel sito il corriere che consegna nel tuo Paese e il suo numero di tracciamento; se non c’è, chiedi al venditore.» Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Fermo a Shenzhen in Peek.** Se Peek mostra soltanto i primi passaggi a Shenzhen mentre un link del venditore ne elenca altri, le tappe che mancano tra le scansioni di Peek sono state scritte in anticipo oppure portano una data successiva al controllo (vedi sotto). Una tappa scritta in anticipo non conta mai come scansione: non modifica lo stato né la data prevista e non invia notifiche. Fino alla consegna o al reso, Peek apre la cronologia del tracciamento con «Altri siti possono mostrare più passaggi, ma sono solo previsioni.» e, sotto «Mostrali», elenca in grigio le tappe che ha tenuto da parte, ognuna con «Previsto per» e il suo giorno. Cerca sul sito di Meiteshun il corriere che consegna nel tuo Paese e il suo numero di tracciamento; se non c'è, chiedi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Per un numero che non conosce, il sistema di Meiteshun mostra il codice sotto 参考号 (riferimento) lasciando vuoti tutti gli altri campi. Peek interpreta questa risposta come una spedizione già registrata da Meiteshun ma ancora senza scansioni: continua a controllare con la cadenza indicata più sotto per le tappe scritte in anticipo e mostra «In attesa di Meiteshun Logistics», senza chiederti di ricontrollare il numero. Verificalo quindi tu stesso con il messaggio del venditore.
 

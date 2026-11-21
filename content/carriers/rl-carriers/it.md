@@ -3,7 +3,7 @@ title: Tracciamento R+L Carriers: numero PRO, stati e reclami
 description: Traccia una spedizione merci R+L Carriers negli USA: formato del numero PRO, significato di ogni stato e regole federali per ritardi, danni o smarrimento.
 slug: tracciamento-rl-carriers
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 R+L Carriers è uno spedizioniere merci su strada negli **Stati Uniti**. Nel codice di Peek ritira la merce presso il mittente, la trasferisce da un terminal all'altro e la consegna a partire dal terminal di destinazione negli USA. Se un ordine ingombrante o un'altra spedizione merci ti sta arrivando negli Stati Uniti con R+L, la segui tramite il numero PRO comunicato dal negozio o dall'azienda che ha prenotato il trasporto: incollalo nel riquadro in alto. Il sistema di ricerca diretto di R+L è la pagina *Shipment Tracing* su rlcarriers.com: accetta un numero PRO o un identificativo di ritiro (*Pickup Request ID*), fino a 25 numeri contemporaneamente, e con un account MyRLC anche altri codici di riferimento.
@@ -55,7 +55,7 @@ Questa pagina non riporta fasce orarie, appuntamenti di scarico, numero di tenta
 
 **Cifra errata.** Se la cifra di controllo di un PRO non torna, il sistema di R+L restituisce il PRO seguito da `Pro number failed check digit validation.` Peek mostra quindi «Controlla il numero di tracciamento». Verifica il codice cifra per cifra con la conferma del negozio o i documenti di trasporto.
 
-**In ritardo o fermo.** Dopo `Shipment Delayed`, Peek lascia la spedizione «In transito» con la data stimata da R+L. Trascorsi quattro giorni senza nuove righe su una spedizione «Preso in carico» o «In transito», Peek segnala «Nessun aggiornamento da quattro giorni». Contatta il negozio o il mittente. Consulta anche [tracciamento che non si aggiorna](guide:tracking-not-updating).
+**In ritardo o fermo.** Dopo `Shipment Delayed`, Peek lascia la spedizione «In transito» con la data stimata da R+L. Trascorsi quattro giorni senza nuove righe su una spedizione «Preso in carico» o «In transito», Peek lo segnala con il giorno dell'ultima riga («Nessun aggiornamento da lun 12 ott»). Contatta il negozio o il mittente. Consulta anche [tracciamento che non si aggiorna](guide:tracking-not-updating).
 
 **Merce danneggiata, mancante o smarrita negli USA.** Avvisa per primo il venditore o l'azienda mittente che ha commissionato il trasporto. Per le merci trasportate su gomma **tra Stati degli USA**, la normativa federale degli **Stati Uniti** (`49 U.S.C. 14706` e `49 CFR Part 370`) stabilisce queste regole:
 

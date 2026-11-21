@@ -3,7 +3,7 @@ title: Canada Post Sendungsverfolgung: Paket aus Kanada, Status
 description: Canada-Post-Paket verfolgen: wie die Trackingnummer aussieht, was die Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Zoll.
 slug: canada-post-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Canada Post ist die Post Kanadas. Ein Paket verfolgst du in der Sendungsverfolgung von Canada Post auf canadapost-postescanada.ca oder hier: Füg die Trackingnummer oben ins Feld ein. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops. Endet sie auf `CA`, fragt Peek mit derselben Nummer auch die Post deines Landes.
@@ -72,7 +72,7 @@ Im Verlauf zeigt Peek einige Scans in eigenen Worten: Jede Zustellung heißt dor
 
 ## Canada-Post-Paket verspätet, verloren oder zurück
 
-**Keine neuen Scans.** Steht ein Paket vier Tage lang ohne neuen Scan auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, schreibt Peek: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Canada Post nach.“ Dazu kommt ein Link zur Hilfe des Paketdiensts, der das Paket gerade hat, etwa „Hol dir Hilfe bei Canada Post“. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine neuen Scans.** Steht ein Paket vier Tage lang ohne neuen Scan auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, schreibt Peek: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Canada Post nach.“ Nach drei Wochen ohne Scan schreibt Peek stattdessen: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Canada Post nach.“ Dazu kommt ein Link zur Hilfe des Paketdiensts, der das Paket gerade hat, etwa „Hol dir Hilfe bei Canada Post“. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Verloren.** Hast du online bestellt, wende dich zuerst an den Shop, der das Paket verschickt hat. Mehr in [Paket verloren](guide:lost-parcel).
 

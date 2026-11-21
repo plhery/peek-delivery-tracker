@@ -3,7 +3,7 @@ title: Stone3PL tracking: numbers, statuses and contact
 description: Track a Stone3PL parcel from China: what its number can look like, what each tracking line means, who delivers it in your country and how to reach Stone3PL.
 slug: stone3pl-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Stone3PL is a logistics company with its headquarters in Shenzhen, China, and part of the Stone Group. It ships goods for online sellers and other businesses from China to the world, together with other logistics companies. If a shop sent your order with Stone3PL, look up the number on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track), in English, or paste it in the box above. The number comes from the seller, with your order's shipping details.
@@ -67,7 +67,7 @@ Stone3PL works for the businesses that ship with it and has no help pages for re
 
 **Only `Order Submited.` or `Shipment information received`.** Stone3PL has the order's details, but maybe not the parcel. If nothing new comes for several days, ask the seller if the parcel was handed over.
 
-**No update for days.** When a parcel on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **"Needs attention".** Stone3PL marked a problem. Read the newest line, then ask the seller what happens next.
 

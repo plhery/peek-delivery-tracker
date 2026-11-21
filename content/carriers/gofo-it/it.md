@@ -3,7 +3,7 @@ title: GOFO Italy tracking: codici GFIT, stati e reclami
 description: Tracking GOFO in Italia: com'è fatto il codice GFIT o CIIT, cosa vogliono dire gli stati di GOFO e come fare reclamo se il pacco è in ritardo o smarrito.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 GOFO Italy è la rete italiana di GOFO, un corriere di pacchi presente in diversi Paesi, e consegna pacchi in Italia. Nell'elenco dei corrieri di Peek si chiama anche CIRRO Parcel Italy. I suoi codici di tracking iniziano con `GFIT` o `CIIT`: segui il pacco sulla pagina di tracciamento italiana di GOFO, su gofo.com, oppure incolla il codice nel campo qui sopra. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
@@ -46,7 +46,7 @@ Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracc
 
 ## Pacco GOFO in ritardo, non consegnato, smarrito o danneggiato
 
-**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, Peek lo segnala nell'elenco con «Nessun aggiornamento da quattro giorni» e nella sua pagina scrive «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Italy.», con un link alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
+**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, Peek lo segnala nell'elenco con il giorno dell'ultima scansione («Nessun aggiornamento da lun 12 ott») e nella sua pagina scrive «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Italy.», con un link alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Dopo tre settimane senza scansioni scrive invece «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a GOFO Italy.» Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
 **Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna»; un tentativo fallito con un altro motivo dopo `tipo:` appare come «Problema segnalato». Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
 

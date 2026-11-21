@@ -3,7 +3,7 @@ title: Quantium Solutions tracking: numbers, statuses and help
 description: Track a Quantium Solutions parcel: the numbers its tracker takes, what each status means, who delivers it, customs and how to reach Quantium's support.
 slug: quantium-solutions-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-21
 ---
 
 Quantium Solutions is an eCommerce logistics company with a presence in 10 countries in Asia Pacific. It carries online orders into, within and out of the region. Track a parcel on Quantium's [Track Your Shipments](https://track.quantiumworldwide.com/) page, or paste the number in the box above. The shop gives you the number, in its shipping email or on your order page.
@@ -75,7 +75,7 @@ On Q-Simple, Q-Smart and Q-Speed, Quantium lists duties and taxes as the receive
 
 **Only `Shipment created`.** The shop has booked the shipment but Quantium hasn't scanned the parcel yet. If it stays that way for days, ask the shop whether it really sent it.
 
-**Quiet in transit.** After four days without a new line, Peek flags the parcel ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. Quantium posts delay notices on its News page, such as the one on severe haze in Malaysia and Singapore of 7 October 2026. Its tracker can also list the partner's number for the parcel, under "Tracking No.": track it with that partner too. See [why tracking stops updating](guide:tracking-not-updating).
+**Quiet in transit.** After four days without a new line, Peek flags the parcel with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. Quantium posts delay notices on its News page, such as the one on severe haze in Malaysia and Singapore of 7 October 2026. Its tracker can also list the partner's number for the parcel, under "Tracking No.": track it with that partner too. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but not there.** Check around your home and with neighbours, then contact the shop and Quantium. See [delivered but not received](guide:delivered-not-received).
 

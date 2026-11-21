@@ -3,7 +3,7 @@ title: Meiteshun (MTSCN) Sendungsverfolgung: AMTS-Nummer, Status
 description: Meiteshun-Paket (美特顺) aus Shenzhen verfolgen: wie die AMTS-Nummer aussieht, was die Schritte bedeuten und warum Meiteshun es vorab als zugestellt anzeigen kann.
 slug: meiteshun-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, auch MTSCN) ist ein Spediteur aus Shenzhen in China. Hat ein Shop in China deine Bestellung mit Meiteshun verschickt, beginnt deine Sendungsnummer mit AMTS und endet auf FS: Füg sie oben ins Feld ein. Lies Meiteshuns Sendungsverfolgung aber mit Vorsicht: Das System trägt den ganzen Weg eines Pakets samt Zustellung schon ein, wenn die Bestellung angelegt wird. Ein `Delivered` dort beweist also nicht, dass dein Paket angekommen ist.
@@ -61,7 +61,7 @@ Lieferzeiten von Meiteshun hat Peek nicht gefunden, ebenso wenig Regeln zu Zuste
 
 **Jeder Schritt pünktlich, aber kein Paket.** Die Schritte wurden beim Anlegen der Bestellung geschrieben: Sie zeigen den Plan, nicht, wo das Paket gerade ist. Halte dich an die Lieferzeit, die der Shop genannt hat, und frag dort nach, wenn sie verstrichen ist.
 
-**In Peek hängt das Paket in Shenzhen.** Zeigt Peek nur die ersten Schritte in Shenzhen, ein Tracking-Link des Shops aber mehr, dann sind die Schritte, die Peek weglässt, vorab geschrieben oder auf einen Zeitpunkt nach Peeks Abfrage datiert (mehr unten). Hält Peek vorab geschriebene Schritte zurück, sagt es das auch unter dem Status des Pakets, bis es zugestellt oder zurückgeschickt ist: „Die Website von Meiteshun Logistics zeigt vorab eingetragene Schritte, sogar eine Zustellung. Peek kann sie nicht bestätigen und lässt sie deshalb weg. Such dort nach dem Paketdienst, der in deinem Land zustellt, und seiner Sendungsnummer; steht keiner da, frag den Verkäufer.“ Als Scan zählt ein solcher Schritt nie: Er ändert keinen Status und löst keine Benachrichtigung aus. Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
+**In Peek hängt das Paket in Shenzhen.** Zeigt Peek nur die ersten Schritte in Shenzhen, ein Tracking-Link des Shops aber mehr, dann sind die Schritte, die unter Peeks Scans fehlen, vorab geschrieben oder auf einen Zeitpunkt nach Peeks Abfrage datiert (mehr unten). Als Scan zählt ein solcher Schritt nie: Er ändert keinen Status und löst keine Benachrichtigung aus. Bis das Paket zugestellt oder zurückgeschickt ist, beginnt sein Sendungsverlauf in Peek mit „Andere Seiten zeigen vielleicht mehr Schritte, aber das sind nur Vorhersagen.“ Unter „Anzeigen“ listet Peek dort die zurückgehaltenen Schritte grau auf, jeden mit „Vorhergesagt für“ und seinem Tag. Such auf Meiteshuns Tracking-Seite nach dem Paketdienst, der in deinem Land zustellt, und seiner Sendungsnummer; steht keiner da, frag den Shop. Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
 **Nichts gefunden.** Kennt Meiteshuns Tracking-Seite eine Nummer nicht, zeigt sie deine Nummer unter 参考号 (Referenz), alle anderen Felder leer. Für Peek heißt diese Antwort, dass Meiteshun die Sendung schon erfasst, aber noch nicht gescannt hat: Peek fragt deshalb weiter nach, so oft wie unten für vorab geschriebene Schritte beschrieben, und zeigt „Warten auf Meiteshun Logistics“, ohne dich zu bitten, die Nummer zu prüfen. Vergleich sie also selbst mit der Nachricht des Shops.
 

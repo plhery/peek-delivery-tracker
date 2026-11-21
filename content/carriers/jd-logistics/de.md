@@ -3,7 +3,7 @@ title: JD Logistics Sendungsverfolgung: Nummern, Status & Kontakt
 description: JD Logistics (京东物流) Paket verfolgen: JD- und VG-Nummernformate, Bedeutung der englischen und chinesischen Scans, Lager in Deutschland, Zoll und Kontakt.
 slug: jd-logistics-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) ist die an der Hongkonger Börse notierte Logistiksparte von JD.com (`HKEX: 2618`). International tritt das Unternehmen unter den Marken JoyLogistics und JoyExpress auf: Es versendet Händlerware aus eigenen Lagern in **Deutschland**, **Frankreich**, den **Niederlanden**, **Polen**, **Großbritannien**, den **USA** und **Australien** und befördert E-Commerce-Pakete aus **China**. Verfolge dein Paket auf Englisch im [internationalen Tracker von JD Logistics](https://www.jingdonglogistics.com/Tracking) oder füge die Sendungsnummer direkt oben ins Suchfeld ein. Die Nummer erhältst du vom Online-Shop, der deine Bestellung verschickt hat.
@@ -67,7 +67,7 @@ Für seinen internationalen Expressversand ab **Festlandchina** hält JD Logisti
 
 **Noch kein Eintrag.** Findet JDs Tracker unter der Nummer noch nichts, prüfe sie beim Verkäufer. Peek zeigt „Warten auf JD Logistics“ und fragt weiter nach; bleibt die Nummer zwei Tage lang unbekannt, erscheint „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“.
 
-**Tagelang kein neuer Scan.** Hat ein Paket unterwegs seit vier Tagen keinen neuen Scan erhalten, zeigt Peek „Seit vier Tagen keine Aktualisierung“, weist darauf hin, dass Sendungen auf Langstreckenflügen, beim Zoll oder am Wochenende oft ruhen, und blendet den Link „Hol dir Hilfe bei JD Logistics“ zu JDs Kontaktseite ein (beziehungsweise zum lokalen Zusteller, sobald etwa GOFO übernommen hat). Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
+**Tagelang kein neuer Scan.** Hat ein Paket unterwegs seit vier Tagen keinen neuen Scan erhalten, zeigt Peek den Tag des letzten Scans („Keine Aktualisierung seit Mo 12. Okt“), weist darauf hin, dass Sendungen auf Langstreckenflügen, beim Zoll oder am Wochenende oft ruhen (nach drei Wochen ohne Scan rät es stattdessen, beim Verkäufer nachzufragen), und blendet den Link „Hol dir Hilfe bei JD Logistics“ zu JDs Kontaktseite ein (beziehungsweise zum lokalen Zusteller, sobald etwa GOFO übernommen hat). Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
 **Verspätet oder verloren.** Da der Händler JD Logistics gebucht hat, wende dich zuerst an den Shop. Für seinen internationalen Express ab **Festlandchina** bezeichnet JDs Regelwerk die auf dem Frachtbrief angegebene voraussichtliche Lieferzeit ausdrücklich als unverbindlichen Richtwert: Bei Überschreitung erstattet JD weder Versandkosten noch zahlt es Schadenersatz. Siehe [verlorene Pakete](guide:lost-parcel).
 

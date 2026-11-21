@@ -3,7 +3,7 @@ title: TForce Freight tracking: PRO numbers, statuses and claims
 description: Track a TForce Freight shipment in the US or Canada: what a PRO number looks like, what each tracking line means, home deliveries and freight claims.
 slug: tforce-freight-tracking
 published: 2026-11-03
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 TForce Freight is a less-than-truckload (LTL) carrier: it moves pallets and heavy freight between its service centers across the United States and all of Canada, and to more than 600 points in Mexico. If a large order or other freight is coming to you with TForce, track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. TForce's own tracker is the Tracking page on www.tforcefreight.com.
@@ -61,7 +61,7 @@ TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) se
 
 **A digit is wrong.** A PRO whose last digit fails the check isn't TForce's, and Peek never asks TForce about it. If you pick TForce Freight anyway, Peek says it "doesn’t issue numbers like this one", and the shipment shows "Check the tracking number".
 
-**Not updating.** After four days without a new line, a shipment showing "Received by carrier" or "In transit" gets a flag ("No tracking update for four days"). Ask the shop or the shipper. See [tracking that isn't updating](guide:tracking-not-updating).
+**Not updating.** After four days without a new line, a shipment showing "Received by carrier" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct"). Ask the shop or the shipper. See [tracking that isn't updating](guide:tracking-not-updating).
 
 **Missed delivery.** After a `Shipment not delivered.` line, Peek flags the shipment ("Check the carrier’s next steps"). Call TForce or ask whoever booked the freight to set a new delivery. More in [missed deliveries](guide:missed-delivery).
 

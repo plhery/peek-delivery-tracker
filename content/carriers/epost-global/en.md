@@ -3,7 +3,7 @@ title: ePost Global tracking: EPG numbers and who delivers
 description: Track an ePost Global parcel: what an EPG number looks like, what the lines on its tracker mean and how Peek follows the partner that delivers it.
 slug: epost-global-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.
@@ -75,7 +75,7 @@ ePost Global says its postal and final-mile carrier relationships span six conti
 
 **Nothing new after the handover.** The partner has the parcel, and its own tracking may be ahead of ePost Global's. Peek follows the parcel there when it can (see below). Otherwise, find the partner's name and number in the handover line.
 
-**No update for days.** After four days without a new line, Peek flags the parcel ("No tracking update for four days"), notes that parcels often go quiet on long flights, at customs or over a weekend, and adds a "Get help from ePost Global" link, or the partner's own once Peek follows the parcel with a partner whose help page it knows. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** After four days without a new line, Peek flags the parcel with the day of its latest line ("No tracking update since Mon 12 Oct"), notes that parcels often go quiet on long flights, at customs or over a weekend (after three weeks with nothing new, it says to ask the seller instead), and adds a "Get help from ePost Global" link, or the partner's own once Peek follows the parcel with a partner whose help page it knows. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** Ask the partner, then the shop. See [delivered but not received](guide:delivered-not-received).
 

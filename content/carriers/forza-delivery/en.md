@@ -3,7 +3,7 @@ title: Forza Delivery tracking: guía numbers, statuses, contact
 description: Track a Forza Delivery Express parcel in Guatemala, El Salvador or Honduras: what an FD guía looks like, what each Spanish status means and who to call.
 slug: forza-delivery-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-21
 ---
 
 Forza Delivery Express is a parcel courier in Guatemala, El Salvador and Honduras. It started in Guatemala in 2020 and is part of Grupo Forza Logistics. It ships for online shops and sellers, delivers to your door or to an Express Center agency, and can collect the price of the order on delivery. Track your parcel on [Forza's tracker](https://rastreo.forzadelivery.com/) with the guía number the shop gave you, or paste the number in the box above.
@@ -62,7 +62,7 @@ For a refund or a new parcel, talk to the shop first: it chose Forza, not you.
 
 **Stuck at `Generado` or `Solicitado`.** The shop has made the guía, but Forza doesn't have the parcel yet. Ask the shop when it will hand it over.
 
-**No new line for days.** When a parcel on its way has had no new scan for four days, Peek flags it ("No tracking update for four days"). Call Forza with your guía. See [why tracking stops updating](guide:tracking-not-updating).
+**No new line for days.** When a parcel on its way has had no new scan for four days, Peek flags it with the day of the latest scan ("No tracking update since Mon 12 Oct"). Call Forza with your guía. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Damaged or lost.** Act at once. Forza's terms give the sender 48 hours from when Forza accepted the parcel to claim in writing, one claim per parcel. Without insurance, they cap what Forza pays at Q800 or the same in local money (US$100 in El Salvador's terms). The sender is the shop: tell it the same day. See [damaged parcels](guide:damaged-parcel) and [lost parcels](guide:lost-parcel).
 

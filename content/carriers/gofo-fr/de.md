@@ -3,7 +3,7 @@ title: GOFO France Sendungsverfolgung: GFFR-Nummern, Status & Hilfe
 description: GOFO-Paket in Frankreich verfolgen: Aufbau von GFFR- und CIFR-Nummern, Bedeutung der französischen Statusmeldungen und an wen du dich bei Verspätung wendest.
 slug: gofo-france-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 GOFO France ist das französische Zustellnetz von GOFO, einem Paketdienst mit Netzen in mehreren Ländern, und stellt Sendungen innerhalb Frankreichs zu. In der Paketdienst-Auswahl von Peek findest du das Unternehmen auch unter dem Namen CIRRO Parcel France. Seine Sendungsnummern beginnen mit `GFFR` oder `CIFR`: Du kannst dein Paket auf der französischen Tracking-Seite von GOFO unter gofo.com verfolgen oder die Nummer oben ins Suchfeld einfügen. Noch keine Sendungsnummer erhalten? Lies [Paket ohne Sendungsnummer finden](guide:find-tracking-number).
@@ -45,7 +45,7 @@ Daneben gruppiert GOFO Sendungen in übergeordnete Kategorien. `Alerte` kennzeic
 
 ## GOFO-Paket verspätet, nicht zugestellt, verloren oder beschädigt
 
-**Keine Aktualisierung.** Peek fragt weiter bei GOFO nach. Vergehen vier Tage ohne neuen Scan, bevor das Paket in Zustellung geht, weist die Paketseite in Peek darauf hin („Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GOFO France nach.“) und verlinkt über „Hol dir Hilfe bei GOFO France“ auf die Hilfeseite von GOFO France. Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Aktualisierung.** Peek fragt weiter bei GOFO nach. Vergehen vier Tage ohne neuen Scan, bevor das Paket in Zustellung geht, weist die Paketseite in Peek darauf hin („Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GOFO France nach.“) und verlinkt über „Hol dir Hilfe bei GOFO France“ auf die Hilfeseite von GOFO France. Nach drei Wochen ohne Scan steht dort stattdessen: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei GOFO France nach.“ Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Fehlgeschlagener Zustellversuch.** Nach `Échec de la livraison, motif : Le destinataire n'est pas chez lui` zeigt Peek „Zustellversuch“; nennt GOFO hinter `motif :` einen anderen Grund, lautet der Status „Problem gemeldet“. Das weitere Vorgehen bestimmt GOFO; was du prüfen kannst, steht unter [Zustellung verpasst](guide:missed-delivery).
 

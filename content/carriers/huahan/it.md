@@ -3,7 +3,7 @@ title: Tracciamento HuaHan Logistics: codice HHW…YQ e consegna
 description: Traccia un pacco HuaHan Logistics (华翰物流) dalla Cina: formato del numero HHW…YQ, significato degli stati, corriere locale, dogana e verifica su Peek.
 slug: tracciamento-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 HuaHan Logistics (华翰物流, nota anche come HuaHan Express o 华翰速递) è un operatore logistico cinese per l’e-commerce transfrontaliero che spedisce i pacchi fuori dalla Cina per via aerea o postale e li affida a un corriere locale nel paese di destinazione per la consegna finale. Se un negozio online ha spedito il tuo ordine con HuaHan, cerca un codice che inizia con `HHW` e termina con `YQ` e incollalo nel riquadro in alto. Il sistema di tracciamento pubblico di HuaHan su [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) può indicare anche il corriere incaricato dell’ultimo miglio e il relativo numero di tracciamento locale.
@@ -114,7 +114,7 @@ HuaHan opera per i venditori e-commerce e le sue pagine non specificano se gli o
 
 **Nessun aggiornamento dopo `Has been given to local carrier`.** Il corriere locale ha preso in carico il pacco e il suo tracciamento diretto è spesso più aggiornato di quello di HuaHan. Controlla nome e codice locale sul sito di HuaHan o sulla scheda del pacco in Peek.
 
-**Nessuna novità da giorni.** Quando una spedizione in viaggio non riceve nuove scansioni da quattro giorni, Peek avvisa («Nessun aggiornamento da quattro giorni») ricordando che un silenzio è frequente durante i voli intercontinentali, in dogana o nel fine settimana. Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Nessuna novità da giorni.** Quando una spedizione in viaggio non riceve nuove scansioni da quattro giorni, Peek avvisa con il giorno dell’ultima scansione («Nessun aggiornamento da lun 12 ott») ricordando che un silenzio è frequente durante i voli intercontinentali, in dogana o nel fine settimana; dopo tre settimane senza novità consiglia invece di contattare il venditore. Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Risulta consegnato, ma non c’è.** Controlla cassetta postale, portineria, vicini e punti di ritiro vicini, poi senti il corriere locale e il venditore. Vedi [consegnato ma non ricevuto](guide:delivered-not-received).
 

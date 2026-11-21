@@ -3,7 +3,7 @@ title: Ozon tracking: order numbers and statuses in English
 description: Track an Ozon order: what its numbers look like, what the Russian steps on Ozon's tracker mean in English, and how Peek follows it.
 slug: ozon-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Ozon's delivery service carries the orders that sellers hand over to it, to your door or to a pickup point. Peek's catalog lists it in Russia, Belarus and Kazakhstan, also under the names Ozon Rocket and Ozon Доставка. Paste your number in the box above, with its dashes. Ozon's own tracker is tracking.ozon.ru, and Peek reads it for you, as explained below.
@@ -77,7 +77,7 @@ Peek couldn't read Ozon's website, so this page gives no delivery times, opening
 
 **Peek is behind Ozon's tracker.** When Ozon's tracker doesn't answer Peek, a tracking service fills in, and it can lag behind Ozon. Compare with tracking.ozon.ru before you worry.
 
-**No new step for days.** If the newest step is four or more days old while Peek shows "Label created", "Received by carrier" or "In transit", Peek flags it: "No tracking update for four days". More in [why tracking stops updating](guide:tracking-not-updating).
+**No new step for days.** If the newest step is four or more days old while Peek shows "Label created", "Received by carrier" or "In transit", Peek flags it with that step's day: "No tracking update since Mon 12 Oct". More in [why tracking stops updating](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** Customs is checking the order. Wait for `Заказ выпущен импортной таможней.` If nothing changes for a long time, ask Ozon about it.
 

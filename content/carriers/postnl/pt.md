@@ -3,7 +3,7 @@ title: Rastreio PostNL: códigos 3S e NL, estados e entrega
 description: Seguir encomenda PostNL fora dos Países Baixos: formato dos códigos NL e 3S, estados em postnl.post, quem entrega em Portugal ou no Brasil e como pedir ajuda.
 slug: postnl-rastreio
 published: 2026-11-17
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 A PostNL é o operador postal dos Países Baixos. Envia para o estrangeiro encomendas e correio de lojas neerlandesas e, através da Spring GDS, o seu braço internacional, transporta pedidos de lojas online de todo o mundo. Podes seguir uns e outros no site internacional da PostNL, [postnl.post](https://postnl.post/) (em inglês), ou na caixa de pesquisa acima. Quando entra no teu país, a encomenda passa muitas vezes para o serviço postal local ou para um parceiro de distribuição. O código vem no e-mail de expedição ou na página da encomenda; se não o encontrares, vê [como encontrar o número de seguimento](guide:find-tracking-number).
@@ -63,7 +63,7 @@ Novas tentativas, avisos na caixa de correio e prazos de levantamento seguem as 
 
 **Ainda sem leituras.** Com `Pre-advised` ou `Preparing`, o vendedor reservou o envio mas talvez ainda não tenha entregue o volume. A Spring GDS pede que aguardes 24 a 48 horas após receberes o código para aparecer a primeira leitura.
 
-**Parada em trânsito.** Depois de `Departed` ou `Transit`, uma encomenda que viaja de avião ou navio não recebe leituras até aterrar ou atracar, e a passagem pela alfândega (`Customs`) costuma demorar vários dias. Quando chegar ao destino, experimenta o código `NL` no operador postal nacional. Ao fim de quatro dias sem novas leituras em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações há quatro dias» na lista e, na página da encomenda: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a PostNL.», com a ligação «Pede ajuda a PostNL». Mais dicas em [seguimento sem atualizações](guide:tracking-not-updating).
+**Parada em trânsito.** Depois de `Departed` ou `Transit`, uma encomenda que viaja de avião ou navio não recebe leituras até aterrar ou atracar, e a passagem pela alfândega (`Customs`) costuma demorar vários dias. Quando chegar ao destino, experimenta o código `NL` no operador postal nacional. Ao fim de quatro dias sem novas leituras em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra na lista o dia da última leitura («Sem atualizações desde seg 12 out») e, na página da encomenda: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a PostNL.», com a ligação «Pede ajuda a PostNL». Ao fim de três semanas sem leituras, passa a dizer: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a PostNL.» Mais dicas em [seguimento sem atualizações](guide:tracking-not-updating).
 
 **Dada como entregue, mas não chegou.** A Spring GDS sugere perguntar aos vizinhos, procurar em locais abrigados (alpendre, garagem) e na portaria ou receção, notando que algumas transportadoras marcam o envio como `Delivered` até 24 horas antes da entrega real. Se continuar desaparecida, fala com o vendedor e lê [entregue mas não recebida](guide:delivered-not-received).
 

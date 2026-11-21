@@ -3,7 +3,7 @@ title: Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained
 description: Track a Pitney Bowes parcel, such as an eBay order sent abroad: what UPAA, UPBE and PBX numbers look like, what its tracker's lines mean and who delivers it.
 slug: pitney-bowes-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Pitney Bowes ships parcels to other countries: in Peek's code, its numbers belong to eBay parcels from the United States and the United Kingdom, and to its other parcels going abroad. In the histories Peek's code holds, the parcel goes through a Pitney Bowes shipping centre, then on to the buyer's country, where a partner, such as that country's post, delivers it. The number starts with UPAA, UPBE or PBX and comes from the seller or the marketplace: paste it in the box above. Pitney Bowes's own tracker is at trackpb.shipment.co.
@@ -86,7 +86,7 @@ Peek couldn't read Pitney Bowes's website, so this page has no list of its partn
 
 **Nothing new once the post has it.** After the post's first lines, its own tracking may be ahead of what Pitney Bowes passes on, and Peek doesn't switch to it by itself. Open the post's page from the line on Pitney Bowes's tracker, or add the post's number to Peek as a parcel of its own.
 
-**No update for days.** After four days without a new line, a parcel showing "Label created" or "In transit" gets a flag ("No tracking update for four days"), and Peek notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** After four days without a new line, a parcel showing "Label created" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct"), and Peek notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** Check where it was left and ask neighbours, then the delivering post and the seller. See [delivered but not received](guide:delivered-not-received).
 

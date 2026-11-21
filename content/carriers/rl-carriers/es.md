@@ -3,7 +3,7 @@ title: Seguimiento R+L Carriers: número PRO, estados y reclamos
 description: Sigue un envío de carga de R+L Carriers en EE. UU.: cómo es el número PRO, qué significa cada estado y qué hacer si la mercancía se retrasa o sufre daños.
 slug: seguimiento-rl-carriers
 published: 2026-11-18
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 R+L Carriers es un transportista de carga por carretera en los **Estados Unidos**. En el código de Peek, recoge la mercancía en las instalaciones del remitente, la traslada de terminal en terminal y la entrega desde la terminal de destino en EE. UU. Si esperas en Estados Unidos un pedido voluminoso u otra carga enviada con R+L, la rastreas mediante su número PRO, que te facilita la tienda o la empresa que contrató el porte: pégalo en el cuadro superior. El buscador propio de R+L es la página *Shipment Tracing* en rlcarriers.com: admite un número PRO o un identificador de solicitud de recogida (*Pickup Request ID*), hasta 25 números a la vez, y también otras referencias si inicias sesión en una cuenta MyRLC.
@@ -55,7 +55,7 @@ Esta página no detalla franjas horarias, citas de entrega, número de intentos 
 
 **Dígito incorrecto.** Si el dígito de control del PRO no cuadra, el buscador de R+L contesta con el número PRO seguido de `Pro number failed check digit validation.` Peek muestra en ese caso «Revisa el número de seguimiento». Contrasta cada cifra con el correo del comercio o la documentación de embarque.
 
-**Retrasado o sin actualizaciones.** Tras `Shipment Delayed`, Peek mantiene el envío «En tránsito» junto con el día previsto por R+L. Cuando una carga en «Admitido por el transportista» o «En tránsito» acumula cuatro días sin líneas nuevas, Peek muestra el aviso «Sin novedades desde hace cuatro días». Consulta a la tienda o al remitente. Lee también [por qué el seguimiento deja de actualizarse](guide:tracking-not-updating).
+**Retrasado o sin actualizaciones.** Tras `Shipment Delayed`, Peek mantiene el envío «En tránsito» junto con el día previsto por R+L. Cuando una carga en «Admitido por el transportista» o «En tránsito» acumula cuatro días sin líneas nuevas, Peek muestra un aviso con el día de la última línea («Sin novedades desde el lun 12 oct»). Consulta a la tienda o al remitente. Lee también [por qué el seguimiento deja de actualizarse](guide:tracking-not-updating).
 
 **Carga dañada, incompleta o perdida en EE. UU.** Avisa primero al comercio o a la empresa remitente que contrató el porte. Para cargas transportadas por carretera **entre estados de EE. UU.**, la legislación federal de los **Estados Unidos** (`49 U.S.C. 14706` y `49 CFR Part 370`) establece estas reglas:
 

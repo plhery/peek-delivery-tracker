@@ -3,7 +3,7 @@ title: SXW Express tracking: SXW numbers, scans and who delivers
 description: Track an SXW Express (Shengxingwang) parcel from Shenzhen: what an SXW number looks like, where SXW's own tracker is, what its steps mean and who to ask.
 slug: sxw-express-tracking
 published: 2026-11-14
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 SXW Express is the name Peek uses for Shenzhen Shengxingwang Supply Chain Management Co., Ltd. (深圳胜兴旺供应链管理有限公司), a logistics company in Shenzhen, China, that ships goods abroad for businesses and online sellers. If a Chinese shop sent your order with SXW, look for a number of SXW and twelve digits, the shape Peek knows as SXW's, and paste it in the box above. You can also check it yourself on SXW's own tracker, which opens from the "Express Tracking" box on sxwexpress.cn. Peek reads that same tracker for you.
@@ -84,7 +84,7 @@ SXW's customer is the seller, so ask the seller about your order first, and the 
 
 Peek asks SXW's own tracker, the one the box on sxwexpress.cn opens, with no account, postcode or phone number. It shows the status, each step with its place when the tracker gives one, and the destination country. It leaves out the names, address, postcodes, weight, number of pieces, customer reference, payment details, signature and proof of delivery the record can hold. SXW's tracker gives no delivery date, so Peek shows none.
 
-Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step: steps written ahead are plans, not scans. Peek shows them greyed: under "Planned by the carrier" while their time is still ahead, then under "Written in advance by SXW Express", with "… so it shows them greyed …" under the parcel's status, until the parcel is delivered or returned. While it shows none, it says: "SXW Express’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Such a step never counts as a scan: it changes no status and sends no alert. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
+Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step: steps written ahead are plans, not scans. The history then opens with "Other sites may show more steps, but they’re only predictions." until the parcel is delivered or returned, and "Show them" lists these steps, greyed, each with "Predicted for" and its day. Such a step never counts as a scan: it changes no status and sends no alert. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
 
 Apart from the GOFO Express and Swiss Post hand-overs above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
 

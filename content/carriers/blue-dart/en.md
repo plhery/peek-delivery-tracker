@@ -3,7 +3,7 @@ title: Blue Dart tracking: waybill numbers and statuses explained
 description: Track a Blue Dart shipment: what its 11-digit waybill looks like, what lines such as Shipment Further Connected mean, and how Peek follows it.
 slug: blue-dart-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Blue Dart is an Indian courier: Peek's catalog lists it for India and reads its scans on India time. A Blue Dart shipment goes by an 11-digit waybill number, which the sender gives you. For an online order, it's usually in the shop's shipping email or on your order page. Paste it in the box above, or enter it on Blue Dart's own tracker on bluedart.com. Peek couldn't check Blue Dart's website for this page, so what follows comes from what Peek's code knows of Blue Dart's tracker.
@@ -67,7 +67,7 @@ For a refund or a new shipment, the shop is your contact: it booked Blue Dart.
 
 **`Delivery Delayed` or `Delay Caused Beyond Control`.** Peek shows "Needs attention". If nothing moves after them, ask the shop.
 
-**No update for days.** When a shipment still on its way has had no new scan for four days, Peek flags it: "No tracking update for four days". See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** When a shipment still on its way has had no new scan for four days, Peek flags it with the day of that scan: "No tracking update since Mon 12 Oct". See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered but not there.** Ask your household or your building's reception, then the shop. See [delivered but not received](guide:delivered-not-received).
 

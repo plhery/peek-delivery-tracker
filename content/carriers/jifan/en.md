@@ -3,7 +3,7 @@ title: Jifan tracking: JFGJ numbers, scans and Beijing time
 description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
 slug: jifan-tracking
 published: 2026-11-02
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 
 Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.
@@ -71,7 +71,7 @@ Jifan's customers are the businesses that send parcels with it, not you. For a l
 
 **Only `Order information received`.** Jifan has the order's data, not the parcel. If nothing new comes for several days, ask the seller whether the parcel was handed over.
 
-**Quiet after the airport.** After `Arrival at domestic internationality airport`, there may be nothing new until the parcel lands or reaches customs in the US. Sea parcels take weeks, so long gaps are normal for them. When a parcel on its way has no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**Quiet after the airport.** After `Arrival at domestic internationality airport`, there may be nothing new until the parcel lands or reaches customs in the US. Sea parcels take weeks, so long gaps are normal for them. When a parcel on its way has no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend; after three weeks with nothing new, it says to ask the seller instead. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **At customs.** Jifan's tracker shows no duty or fee to pay. So it can't confirm a text or email asking you to pay for a Jifan parcel. Read [delivery scam texts](guide:delivery-scam-texts) before you pay anything.
 

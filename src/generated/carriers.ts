@@ -2908,6 +2908,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "17feia-sendungsverfolgung",
+      "title": "17FEIA Sendungsverfolgung: FEI…YQ-Nummern und Status",
+      "name": "17FEIA",
+      "color": "#00a9e4"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3902,6 +3910,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "suivi-17feia",
+      "title": "Suivi 17FEIA\u00a0: numéros FEI…YQ, statuts et livraison",
+      "name": "17FEIA",
+      "color": "#00a9e4"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -4814,6 +4830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento J&T Express China: numeri JT, stati e contatti",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "tracking-17feia",
+      "title": "Tracking 17FEIA: codici FEI…YQ, stati e consegna",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     },
     {
       "id": "xinghe-freight",
@@ -5730,6 +5754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "seguimiento-17feia",
+      "title": "Seguimiento 17FEIA: números FEI…YQ, estados y entrega",
+      "name": "17FEIA",
+      "color": "#00a9e4"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -6602,6 +6634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento J&T Express China: números JT, estados e ajuda",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "rastreio-17feia",
+      "title": "Rastreio 17FEIA: números FEI…YQ, estados e entrega",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     },
     {
       "id": "xinghe-freight",
@@ -7534,6 +7574,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express China: numery JT, statusy i kontakt",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "sledzenie-17feia",
+      "title": "Śledzenie 17FEIA: numery FEI…YQ, statusy i doręczenie",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     },
     {
       "id": "xinghe-freight",

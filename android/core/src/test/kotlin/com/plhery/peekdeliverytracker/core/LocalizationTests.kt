@@ -200,7 +200,7 @@ class LocalizationTests {
             AppLanguage.Fr to listOf("Chaque scan", "Étapes importantes", "Livraison seulement"),
             AppLanguage.It to listOf("Ogni scansione", "Passaggi importanti", "Solo la consegna"),
             AppLanguage.Es to listOf("Cada escaneo", "Pasos importantes", "Solo la entrega"),
-            AppLanguage.Pt to listOf("Todas as leituras", "Passos importantes", "Só a entrega"),
+            AppLanguage.Pt to listOf("Todos os registos", "Passos importantes", "Só a entrega"),
             AppLanguage.PtBr to listOf("Cada movimentação", "Etapas importantes", "Só a entrega"),
             AppLanguage.Pl to listOf("Każdy skan", "Ważne etapy", "Tylko doręczenie"),
             AppLanguage.Ru to listOf("Каждая отметка", "Важные этапы", "Только доставка"),

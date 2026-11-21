@@ -10,11 +10,11 @@ Econt Express (*Econt Express AD*) to założona w 1993 r. bułgarska firma kuri
 
 ## Numer śledzenia Econt: format i gdzie go znaleźć
 
-Econt nazywa go numerem przesyłki (*shipment number*) albo numerem listu przewozowego (*waybill number*). Powiadomienia e-mail (bezpłatne) i SMS (płatna opcja za `0,11 €`, którą aktywuje nadawca, więc nie każda paczka ją ma) zawierają bezpośredni link do śledzenia wraz z miejscem, terminem i ewentualną kwotą do zapłaty. Nie masz wiadomości od Econt? Zajrzyj do maila ze sklepu lub zobacz, [gdzie jeszcze szukać numeru śledzenia](guide:find-tracking-number).
+Econt nazywa go numerem przesyłki (*shipment number*) albo numerem listu przewozowego (*waybill number*). Powiadomienia e-mail (bezpłatne) i SMS (płatna opcja za `0,11 €` z VAT, którą aktywuje nadawca, więc nie każda paczka ją ma) zawierają bezpośredni link do śledzenia wraz z miejscem, terminem i ewentualną kwotą do zapłaty. Nie masz wiadomości od Econt? Zajrzyj do maila ze sklepu lub zobacz, [gdzie jeszcze szukać numeru śledzenia](guide:find-tracking-number).
 
 Econt nie publikuje oficjalnego wzorca dla odbiorców, ale przykładowe numery listów przewozowych w angielskiej instrukcji integracji XML mają **13 cyfr**, a system śledzenia Econt odczytuje je jako dodatnie 13-cyfrowe liczby całkowite niezaczynające się od `0`, jak wymyślony numer `1048291057364`.
 
-Trzynaście cyfr stosują również inni przewoźnicy — m.in. [DPD Polska](carrier:dpd-pl), DPD France, ukraińska Ukrposhta, rumuński FAN Courier czy indyjskie Delhivery — warto więc upewnić się, którą firmę podał sprzedawca. Jeśli wybierzesz Econt ręcznie dla numeru z zerem na początku albo o innej długości, Peek poinformuje, że przewoźnik „nie wydaje takich numerów”.
+Trzynaście cyfr stosują również inni przewoźnicy — m.in. DPD France, ukraińska Ukrposhta, rumuński FAN Courier czy indyjskie Delhivery — warto więc upewnić się, którą firmę podał sprzedawca. Jeśli wybierzesz Econt ręcznie dla numeru z zerem na początku albo o innej długości, Peek poinformuje, że przewoźnik „nie wydaje takich numerów”.
 
 ## Co oznaczają statusy śledzenia Econt
 
@@ -35,19 +35,19 @@ Strona `econt.com` otwiera się po bułgarsku (`Проследи пратка`) 
 | `Information` | Komunikat informacyjny bez zmiany etapu. | *(notatka bez etapu)* |
 | `Return receipt: Delivered` | Skan podpisanego zwrotnego potwierdzenia odbioru wracającego do nadawcy — nie dotyczy już Twojej paczki. | *(potwierdzenie, bez etapu)* |
 
-Zwróć uwagę na `Submitted to courier`: przed jakimkolwiek oddziałem lub trasą liniową oznacza odbiór od nadawcy, a później — ostatnią milę do odbiorcy.
+Zwróć uwagę na `Submitted to courier`: przed jakimkolwiek oddziałem, trasą liniową, przekierowaniem lub próbą doręczenia oznacza odbiór od nadawcy, a później — ostatnią milę do odbiorcy.
 
 Wyszukiwarka Econt zwraca też **bułgarski status zbiorczy**, z którego Peek ustala bieżący etap, gdy jest on jednoznaczny: `Очаква предаване към Еконт` i `Подготвена в eEcont` („Zarejestrowana”), `Приета в Еконт` i `Приета в офис` („Przyjęta przez przewoźnika”), `Пътува по линия` („W transporcie”), `В офис` i `Пристигнала в офис` („Do odbioru”, gdy tylko Econt wskaże oddział przechowujący przesyłkę), `Доставена` („Dostarczona”), `Върната` i `Върната и доставена към подател` („Zwrócona nadawcy”), a także `Връща се към подател`, `Анулирана след изпращане` i `Анулирана преди изпращане` („Zgłoszono problem”). Przy statusie `В куриер` (u kuriera) rozstrzyga najnowszy skan.
 
 ## Doręczenie pod adres, oddziały Econt i automaty Econtomat
 
-**Pod drzwi.** W miejscowościach z oddziałem Econt standardowe paczki (do `50 kg` i `90 x 90 x 90 cm`, dokumenty A4 do `0,5 kg`, przesyłki niepaletyzowane od `50` do `1000 kg`) docierają w następnym dniu roboczym — w obrębie miasta do `18:00` — a w miejscowościach bez oddziału w ciągu **3 dni roboczych** według harmonogramu. Nadawca może dobrać bezpłatne przedziały godzinowe (`Delivery Time Slots`), płatną stałą godzinę (`1,88 €`–`6,50 €`) lub doręczenie w sobotę (`1,88 €`).
+**Pod drzwi.** W miejscowościach z oddziałem Econt standardowe paczki (do `50 kg` i `90 x 90 x 90 cm`, dokumenty A4 do `0,5 kg`, przesyłki niepaletyzowane od `50` do `1000 kg`) docierają w następnym dniu roboczym — w obrębie miasta do `18:00` — a w miejscowościach bez oddziału w ciągu **3 dni roboczych** według harmonogramu. Nadawca może dobrać bezpłatne przedziały godzinowe (`Delivery Time Slots`), płatną stałą godzinę (`1,88 €`–`6,50 €`) lub doręczenie w sobotę (`1,88 €`); ceny z VAT.
 
-**W oddziale Econt.** Paczka nadana na następny dzień roboczy czeka wcześnie rano, zaraz po otwarciu placówki. Po **7. dniu** oczekiwania Econt nalicza opłatę magazynową **`3,78 €` dziennie za przesyłkę**.
+**W oddziale Econt.** Paczka nadana na następny dzień roboczy czeka wcześnie rano, zaraz po otwarciu placówki. Po **7. dniu** oczekiwania Econt nalicza opłatę magazynową **`3,78 €` dziennie za przesyłkę** (z VAT).
 
 **W automacie Econtomat (czynnym 24/7).** Automaty mieszczą paczki do **`61 x 44 x 37 cm`** i **`30,5 kg`** (trzy wysokości skrytek: `8 cm`, `18 cm`, `37 cm`), a czas dostawy z Econtomatu wynosi **1–2 dni robocze** zależnie od pory nadania. Aby odebrać przesyłkę: opłać z góry ewentualną należność w aplikacji Econt kartą bankową lub portfelem cyfrowym `ecoints`, wybierz `Receive a shipment`, zeskanuj kod QR albo wpisz `PIN 1` i `PIN 2` z aplikacji bądź SMS-a, wyjmij paczkę i zamknij drzwiczki.
 
-**Zmiana doręczenia i sprawdzenie zawartości.** Odbiorcę, miejsce (inny adres, inny oddział, pozostawienie u znajomego lub sąsiada, dosłanie do innego miasta) oraz termin zmienisz w każdej chwili telefonicznie, przez link w powiadomieniu e-mail (`instruction.econt.com`) lub w profilu `e-Econt` ([zmiana adresu dostawy](guide:change-delivery-address)). W cenniku Econt są też trzy bezpłatne opcje udostępniane przez sprzedawcę: `Review` (oględziny), `Review and Test` (oględziny i test) oraz `Review, Test and Select` (oględziny, test i wybór).
+**Zmiana doręczenia i sprawdzenie zawartości.** Odbiorcę, miejsce (inny adres, inny oddział, pozostawienie u znajomego lub sąsiada, dosłanie do innego miasta) oraz termin zmienisz w każdej chwili telefonicznie, przez link w powiadomieniu e-mail lub w profilu `e-Econt` ([zmiana adresu dostawy](guide:change-delivery-address)). W cenniku Econt są też trzy bezpłatne opcje udostępniane przez sprzedawcę: `Review` (oględziny), `Review and Test` (oględziny i test) oraz `Review, Test and Select` (oględziny, test i wybór).
 
 ## Opóźniona, uszkodzona lub zagubiona paczka Econt
 
@@ -67,11 +67,11 @@ Gdy podejrzany SMS żąda dopłaty poza oficjalną aplikacją lub domeną `econt
 
 ## Śledzenie przesyłek Econt w Peek
 
-Ponieważ 13 cyfr pasuje do wielu firm, po samym numerze [Peek](/) odpytuje Econt automatycznie tylko wtedy, gdy dodajesz go na stronie z Bułgarii lub w aplikacji na telefonie z regionem Bułgaria. Poza Bułgarią wybierz Econt przyciskiem „Zmień” — albo wklej link `econt.com` zawierający `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` lub `/tracking/?num=`, który od razu wskazuje Econt (dopóki Econt nie ma jeszcze wpisu lub gdy stara historia wygasła, Peek wyświetla „Oczekiwanie na przewoźnika Econt”).
+Ponieważ 13 cyfr pasuje do wielu firm, po samym numerze [Peek](/) odpytuje Econt automatycznie tylko wtedy, gdy dodajesz go na stronie z Bułgarii lub w aplikacji na telefonie z regionem Bułgaria. Poza Bułgarią wybierz Econt przyciskiem „Zmień” — albo wklej link `econt.com` zawierający `/services/track-shipment/`, `/en/services/track-shipment/`, `/tracking/` lub `/tracking/?num=`, który od razu wskazuje Econt (dopóki Econt nie ma jeszcze wpisu lub gdy stara historia wygasła, Peek wyświetla „Oczekiwanie na przewoźnika Econt”, a po dwóch dniach prosi o sprawdzenie numeru lub wybór innego przewoźnika).
 
 Peek pobiera dane z usługi śledzenia Econt bez konta i kodu pocztowego, pokazuje bieżący status, zaznacza oddziały na mapie, przy statusie „Do odbioru” podaje oddział przechowujący paczkę i zachowuje do 100 najnowszych skanów. Dla osoby, która dodała przesyłkę, widoczne pozostają nazwa odbiorcy i osoba kwitująca po `Delivered:` (ukryte pod udostępnionym linkiem), natomiast liczba paczek, nazwisko kuriera, nadawca i numery zleceń są pomijane; Econt nie udostępnia prognozy dnia doręczenia, wagi ani zdjęcia doręczenia.
 
-Godziny są odczytywane w strefie Sofii (`Europe/Sofia`, zimą `UTC+2`, latem `UTC+3`) i przeliczane na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”), z wyjątkiem godziny pominiętej lub powtórzonej przy zmianie czasu, zachowywanej jako czas lokalny. Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu sofijskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Econt (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie zmieni dyspozycji w Econt ani nie złoży reklamacji w Twoim imieniu.
+Godziny są odczytywane w strefie Sofii (`Europe/Sofia`, zimą `UTC+2`, latem `UTC+3`) i przeliczane na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu sofijskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Econt (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie zmieni dyspozycji w Econt ani nie złoży reklamacji w Twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie Econt
 

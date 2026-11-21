@@ -2652,6 +2652,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "globalpost-sendungsverfolgung",
+      "title": "GlobalPost Sendungsverfolgung: GP-Nummern, Status & Zoll",
+      "name": "GlobalPost",
+      "color": "#11003a"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -3422,6 +3430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "suivi-globalpost",
+      "title": "Suivi GlobalPost\u00a0: numéros GP, statuts et livraison",
+      "name": "GlobalPost",
+      "color": "#11003a"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -4094,6 +4110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento India Post e Speed Post: numeri, stati e dogana",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "tracciamento-globalpost",
+      "title": "Tracciamento GlobalPost: numeri GP, stati e consegna",
+      "name": "GlobalPost",
+      "color": "#11003a"
     },
     {
       "id": "rl-carriers",
@@ -4770,6 +4794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "seguimiento-globalpost",
+      "title": "Seguimiento GlobalPost: números GP, estados y entrega",
+      "name": "GlobalPost",
+      "color": "#11003a"
+    },
+    {
       "id": "forza-delivery",
       "catalog": "forza-delivery",
       "slug": "forza-delivery-rastreo",
@@ -5402,6 +5434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento India Post e Speed Post: números e estados",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "seguimento-globalpost",
+      "title": "Seguimento GlobalPost: números GP, estados e entrega",
+      "name": "GlobalPost",
+      "color": "#11003a"
     },
     {
       "id": "rl-carriers",
@@ -6094,6 +6134,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie India Post: numery Speed Post, statusy i cło",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "sledzenie-globalpost",
+      "title": "Śledzenie GlobalPost: numery GP, statusy i doręczenie",
+      "name": "GlobalPost",
+      "color": "#11003a"
     },
     {
       "id": "rl-carriers",

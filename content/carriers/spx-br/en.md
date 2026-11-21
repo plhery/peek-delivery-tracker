@@ -16,10 +16,10 @@ These are the shapes Peek knows (digits invented):
 
 | Shape | What it is |
 | --- | --- |
-| `BR0000000000000` | SPX Express: `BR`, 12 digits and a final digit. |
-| `BR000000000000X` | SPX Express: `BR`, 12 digits and a final letter. |
-| `BR000000000000XSPXLM00000000` | SPX Express: such a number followed by `SPXLM` and 8 digits, as on a marketplace label. |
-| `EA000000005BR` | Two letters, nine digits and `BR`: a [Correios](carrier:correios-br) code, not SPX's. |
+| `BR4829105736491` | SPX Express: `BR`, 12 digits and a final digit. |
+| `BR482910573649X` | SPX Express: `BR`, 12 digits and a final letter. |
+| `BR482910573649XSPXLM48291057` | SPX Express: such a number followed by `SPXLM` and 8 digits, as on a marketplace label. |
+| `EA482910576BR` | Two letters, nine digits and `BR`: a [Correios](carrier:correios-br) code, not SPX's. |
 
 The order ID ("ID do pedido") is not a tracking number, but Shopee may ask for it when you contact its Customer Service.
 
@@ -45,7 +45,7 @@ SPX writes its tracking in Portuguese; some lines end with the place after a col
 | `Pedido devolvido` | Returned to the seller. | "Returned to sender" |
 | `Pedido descartado` | After a failed delivery, the parcel was disposed of: it was neither delivered nor returned to the seller. Ask Shopee about it. | "Needs attention" |
 
-Some parcels get lines from SPX's delivery fleet instead, starting `Seu pacote`, among them `Seu pacote foi recebido pelo centro de triagem` (at a sorting centre), `Seu pacote foi recebido pelo centro de distribuição` (at the centre that delivers to you), `Seu pacote está sendo entregue pelo entregador` (out for delivery) and `Seu pacote foi entregue` (delivered). Peek shows the same stages for them, such as "Out for delivery".
+Some parcels get lines from SPX's delivery fleet instead, starting `Seu pacote`, among them `Seu pacote foi recebido pelo centro de triagem` (at a sorting centre), `Seu pacote foi recebido pelo centro de distribuição` (at the centre that delivers to you), `Seu pacote está sendo entregue pelo entregador` (out for delivery with its hub first; on its own, sent the day the order is created, it reads as in transit) and `Seu pacote foi entregue` (delivered). Peek shows the same stages for them, such as "Out for delivery".
 
 **Parcels from abroad.** Lines starting `[China]` are scans in China, such as `[China]O pedido foi liberado na alfândega de exportação` (it cleared export customs). Then come `Pedido chegou no Brasil` (it's in Brazil), `Pedido está na alfândega de importação` (at Brazilian import customs), `Pedido em inspeção na alfândega de importação` (being inspected) and `Import Customs Cleared`, in English: customs released it. Peek shows "At customs" for the two customs lines, then "In transit" again after `Import Customs Cleared`.
 
@@ -86,7 +86,7 @@ Shopee says an irregular CPF (taxpayer number) can block an international purcha
 
 ## SPX Express contact: go through Shopee
 
-Shopee says you can't contact the carrier directly about tracking or delivery: Shopee handles it, under its Garantia Shopee (Shopee guarantee). As read on 26 October 2026:
+Shopee says you can't contact the carrier directly about tracking or delivery: Shopee handles it, under its Garantia Shopee (Shopee guarantee). Ways to reach Shopee:
 
 - **Chat Shopee**: in the app, "Eu" > "Central de Ajuda" (Help Centre), scroll to "Atendimento ao Cliente" (Customer Service) and pick "Chat Shopee". Monday to Friday 8:00 to 22:00, weekends 8:00 to 20:00, Brasília time.
 - **Request form**: any time, from the [Customer Service hours page](https://help.shopee.com.br/portal/4/article/141507). Have the order ID ready.
@@ -99,11 +99,11 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 [Peek](/) names SPX Express Brazil straight away for a `BR` number with 12 digits and a final digit or letter. A tracking link from spx.com.br (`/track?` or `/detail/` with the number) names SPX too, even when a text message prints it without `https://`. Peek's SPX lookup takes only `BR` numbers, not Shopee order IDs.
 
-Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. It also shows some lines SPX's page hides, such as `Seu pedido chegou ao último centro logístico` (it reached the last logistics centre) or a failed pickup at the seller's ("Label created"). When the failed pickup comes after `Pedido postado …`, it was at the drop-off point: the parcel stays there and Peek shows "Received by carrier". There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
+Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. It also shows some lines SPX's page hides, such as `Seu pedido chegou ao último centro logístico` (it reached the last logistics centre) or a failed pickup at the seller's ("Label created"). When the failed pickup comes after `Pedido postado …`, it was at the drop-off point: the parcel stays there and Peek shows "Received by carrier". There's no expected delivery date, weight, pickup point or delivering partner. On a shared link, the delivery line shows only "Delivered", without the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
 
 While SPX doesn't know the number yet, Peek shows "Waiting for SPX Express Brazil" and keeps checking. If SPX still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If the parcel is still on its way and 4 days pass without a new scan, Peek shows "Get help from SPX Express Brazil", which opens Shopee's Customer Service hours page.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day SPX scans the parcel out for delivery, while SPX's own tracker answers (through tracking services, every 15 minutes). It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SPX or Shopee for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day SPX scans the parcel out for delivery, while SPX's own tracker answers; otherwise hourly. Through tracking services, hourly, and up to every 15 minutes on that day while you have it open or notifications are on. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SPX or Shopee for you.
 
 ## Questions about SPX Express Brazil tracking
 

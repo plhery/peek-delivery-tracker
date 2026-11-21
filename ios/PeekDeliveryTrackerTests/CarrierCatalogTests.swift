@@ -2493,6 +2493,24 @@ extension CarrierCatalogTests {
         }
     }
 
+    /// A link encoded inside another writes its "=" as "%3D": the escape is no part of the number after it, in the link or
+    /// in the rest of one wrapped onto the next line, while a number the encoded link names is still read, as on the web.
+    func testNoNumberIsReadOutOfAPercentEscapeInALink() {
+        let listed = { (text: String) in self.catalog.numbers(in: text).map(\.normalized) }
+        let two = "1Z999AA10123456784 and 1ZDEMO202600000001"
+        // A shop's help link inside its redirect: "%3D" then a nine-digit page id fits WeDo's digit, letter and nine digits.
+        let help = "https://shop.example/r?C=2AB3C&U=https%3A%2F%2Fshop.example%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000"
+        XCTAssertEqual(listed("Your parcels \(two)\nRead our help page\n\(help)\nThank you"),
+                       ["1Z999AA10123456784", "1ZDEMO202600000001"])
+        // The rest of such a link wrapped onto a line of its own.
+        XCTAssertEqual(listed("Your parcels \(two)\nSee help\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Fhelp\n%26nodeId%3D201234567%26qid\n"),
+                       ["1Z999AA10123456784", "1ZDEMO202600000001"])
+        // A number an encoded link names stays the link's.
+        XCTAssertEqual(listed("Track it\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Ftrack%3Fid%3D1ZDEMO202600000001\nAlso 1Z999AA10123456784"),
+                       ["1ZDEMO202600000001", "1Z999AA10123456784"])
+        XCTAssertEqual(listed("Your parcels \(two), 100% on time"), ["1Z999AA10123456784", "1ZDEMO202600000001"])
+    }
+
     /// The shared engine's patterns and separators are JavaScript's.
     func testPatternsAndSeparatorsReadAsInTheSharedEngine() {
         XCTAssertEqual(CarrierCatalog.normalize("\u{FEFF}ab 12.3-4\u{3000}5\u{0B}"), "AB12345")

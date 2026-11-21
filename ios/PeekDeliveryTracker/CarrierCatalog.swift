@@ -1071,7 +1071,8 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     /// Every number a text names with certainty, in the order written, when it names two or more: Add lists them
     /// to choose from, as the front door does (`numbersInText` in src/peek/lookup/reading.ts). Links count through
-    /// their own number; each line is read on its own, so numbers on neighbouring lines never run together.
+    /// their own number; each line is read on its own, so numbers on neighbouring lines never run together. A percent
+    /// escape is no part of a number, in a link read as text or in the rest of one an email's text wrapped onto the next line.
     func numbers(in raw: String) -> [NumberInText] {
         if let memo = numbersRead.object(forKey: raw as NSString) { return memo.value }
         var found: [NumberInText] = []
@@ -1083,9 +1084,10 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         for line in raw.components(separatedBy: "\n") {
             for link in Self.matches(in: line, pattern: Self.linkPattern, caseInsensitive: true) {
                 let match = parse(link)
-                if !match.trackingNumber.isEmpty { keep(match) }
+                if !match.trackingNumber.isEmpty, match.source == .link || Self.standsInLink(link, match.trackingNumber) { keep(match) }
             }
-            let prose = Self.blanking(Self.linkPattern, in: line, caseInsensitive: true)
+            let prose = Self.blanking(Self.percentEscapePattern,
+                                      in: Self.blanking(Self.linkPattern, in: line, caseInsensitive: true), caseInsensitive: true)
             var candidates: [(range: NSRange, number: String)] = []
             for shape in Self.candidatePatterns {
                 for hit in Self.hits(in: prose, pattern: shape.pattern, caseInsensitive: shape.caseInsensitive) {
@@ -1553,6 +1555,14 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     private static let numberWords = readingRules?.numberWords
 
     private static let linkPattern = "https?://[^\\s<>\\\"']+"
+    /// A percent escape, as a link encoded inside another prints its "=" ("%3D") or "/" ("%2F"). The two characters after
+    /// the "%" are no part of the number that follows: "%3D" before nine digits reads as WeDo's digit, letter and nine digits.
+    private static let percentEscapePattern = "%[0-9A-F]{2}"
+
+    /// Whether a number read out of a link's own text stands in it once its percent escapes are set apart.
+    private static func standsInLink(_ link: String, _ number: String) -> Bool {
+        blanking(percentEscapePattern, in: link, caseInsensitive: true).uppercased().contains(number.uppercased())
+    }
 
     /// Letters a scanner or a tired eye reads where a label prints a digit, and the other way around.
     private static let digitForLetter = characters(readingRules?.lookalikes.digitForLetter)

@@ -2,6 +2,7 @@ import 'server-only';
 
 import { SCHEDULED_DELIVERIES } from '../lib/carriers';
 import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
+import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
@@ -522,7 +523,9 @@ const DELIVERY_STEPS: ReadonlySet<string> = new Set(['out_for_delivery', 'delive
 /** Peek AI's estimate for the served row, or null; a failure leaves the parcel served without it, reported once. */
 function peekAi(row: JsonObject, served: JsonObject): ReturnType<typeof peekAiFor> {
   try {
-    return peekAiFor(row, served);
+    const ai = peekAiFor(row, served);
+    if (ai) recordPeekAiServed(ai.says);
+    return ai;
   } catch (error) {
     if (!peekAiReported) captureOperationalError(error, { component: 'api', operation: 'peek_ai' });
     peekAiReported = true;

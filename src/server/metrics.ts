@@ -43,7 +43,7 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 24;
+const RUNTIME_VERSION = 25;
 
 interface PrometheusRuntime {
   version: number;
@@ -64,6 +64,7 @@ interface PrometheusRuntime {
   publicLookupTotal: Counter<'outcome'>;
   publicDetectionTotal: Counter<'outcome'>;
   publicParcelReadTotal: Counter<'outcome'>;
+  peekAiServedTotal: Counter<'says'>;
   parcelClaimTotal: Counter<'outcome'>;
   parcelForgottenTotal: Counter<'kind' | 'reason'>;
   parcelShareTotal: Counter<'kind' | 'change'>;
@@ -209,6 +210,12 @@ function createRuntime(): PrometheusRuntime {
       name: 'public_parcel_read_total',
       help: 'Reads of a parcel link by outcome (ok, not_found, stopped).',
       labelNames: ['outcome'] as const,
+      registers: [registry],
+    }),
+    peekAiServedTotal: new Counter({
+      name: 'peek_ai_served_total',
+      help: 'Parcels served with a Peek AI estimate, by what it says.',
+      labelNames: ['says'] as const,
       registers: [registry],
     }),
     parcelClaimTotal: new Counter({
@@ -590,6 +597,11 @@ export function recordLookupProof(kind: 'lookup' | 'detection', proof: LookupPro
 
 export function recordPublicParcelRead(outcome: 'ok' | 'not_found' | 'stopped'): void {
   count(runtime.publicParcelReadTotal, 'public_parcel_read_total', { outcome });
+}
+
+/** A parcel served with Peek AI's estimate. */
+export function recordPeekAiServed(says: string): void {
+  count(runtime.peekAiServedTotal, 'peek_ai_served_total', { says });
 }
 
 export function recordParcelClaim(outcome: 'kept' | 'already' | 'quota' | 'unavailable'): void {

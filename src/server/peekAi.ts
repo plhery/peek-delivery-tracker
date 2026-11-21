@@ -60,16 +60,20 @@ const NOT_DUE: ReadonlySet<string> = new Set(['delivered', 'returned', 'ready_fo
 const SNAPSHOT_HOURS = [14, 8] as const;
 const CACHE_SIZE = 5000;
 
-let current: PeekAiBlob | null = null;
+// One model and cache per process: Next compiles the routes and the instrumentation that loads the model into different
+// module instances, so a module variable set at start would stay empty where the routes read it.
+const stateKey = Symbol.for('peek.peekAiModel');
+const processState = globalThis as typeof globalThis & { [stateKey]?: { blob: PeekAiBlob | null; placed: Map<string, Placed> } };
+const state = processState[stateKey] ??= { blob: null, placed: new Map() };
 
 /** The model Peek AI reads, or null while none is loaded. */
 export function peekAiBlob(): PeekAiBlob | null {
-  return current;
+  return state.blob;
 }
 
 /** Puts a model in place, or takes it away. Tests use it; the server keeps it with `keepPeekAiModel`. */
 export function setPeekAiBlob(blob: PeekAiBlob | null): void {
-  current = blob;
+  state.blob = blob;
   placedCache.clear();
 }
 
@@ -84,7 +88,7 @@ export function keepPeekAiModel(source: PeekAiModelSource, every = 3_600_000): (
     try {
       const version = await source.latestPeekAiModelVersion();
       if (version === null) return setPeekAiBlob(null);
-      if (current?.version === version) return;
+      if (state.blob?.version === version) return;
       const blob = peekAiBlobFrom(await source.peekAiModel(version));
       if (blob) setPeekAiBlob(blob);
       else captureOperationalError(new Error('Stored Peek AI model is malformed'), { component: 'api', operation: 'load_peek_ai_model' });
@@ -156,7 +160,7 @@ interface Placed {
   F: Map<string, number[] | null>;
 }
 
-const placedCache = new Map<string, Placed>();
+const placedCache = state.placed;
 
 const text = (value: unknown) => typeof value === 'string' ? value : null;
 
@@ -345,7 +349,7 @@ function namesHour(value: unknown): boolean {
  * delivered, returned, waiting at a pickup point or after a delivery attempt by the scans the apps show (`served`), and
  * whenever no hint is strong enough.
  */
-export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(), blob = current): PeekAi | null {
+export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(), blob = state.blob): PeekAi | null {
   if (!blob || row.archived_at || NOT_DUE.has(String(row.current_stage))) return null;
   const shown = toParcel(served as unknown as ApiPackageRow);
   const stage = currentEvent(shown.events, shown.returnHeld)?.stage;

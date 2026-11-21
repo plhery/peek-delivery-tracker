@@ -1,9 +1,13 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RateLimitedError } from 'universal-parcel-scraper';
+import * as scraper from 'universal-parcel-scraper';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { catalogRules, quietUntil, RoutingDeferred, routingState, TrackingRouter } from './trackingRouting';
 import type { JsonObject } from './types';
 import * as monitoring from './observability';
+
+// Keep the published plan configurable without changing the scraper's other exports.
+vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
 
 const HOUR = 3_600_000;
 const success = '2026-09-10T10:00:00.000Z';
@@ -30,6 +34,15 @@ async function missed(router: TrackingRouter, snapshot: JsonObject, scheduled = 
   throw new Error('Expected every source to fail');
 }
 afterEach(() => vi.restoreAllMocks());
+// These checks count La Poste and the providers its evidence named before Ordertracker joined them, whatever
+// release the app runs.
+beforeEach(() => {
+  const plan = scraper.universalPlan;
+  vi.spyOn(scraper, 'universalPlan').mockImplementation((options) => {
+    const planned = plan(options);
+    return { ...planned, sources: planned.sources.filter((source) => String(source) !== 'Ordertracker') };
+  });
+});
 
 it('keeps an hourly parcel clear after one missed check, shows the chip after two, and clears on recovery', async () => {
   const run = setup();

@@ -18,8 +18,14 @@ import { RoyalBrowserPaused } from './royalBrowserAdmission';
 import { ProviderRefusals } from './providerRefusals';
 import { ProviderMisses } from './providerMisses';
 
-// Keep the published plan configurable without changing the scraper's other exports.
-vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
+// Keep the published plan configurable without changing the scraper's other exports. Poste Italiane stands for a
+// carrier that allows an hour between two lookups of a number, whatever interval the release gives it.
+vi.mock(import('universal-parcel-scraper'), async importOriginal => {
+  const scraper = await importOriginal();
+  const poste = scraper.CARRIER_DEFINITIONS['poste-italiane'];
+  return { ...scraper, CARRIER_DEFINITIONS: { ...scraper.CARRIER_DEFINITIONS, 'poste-italiane': { ...poste,
+    tracking: { ...poste.tracking, refresh: { ...poste.tracking.refresh, minMinutes: 60 } } } } };
+});
 
 const time = new Date('2026-09-10T12:00:00Z');
 const history = (stamp = '2026-09-10T11:00:00Z'): CarrierResult => ({ status: 'in_transit', current_stage: 'in_transit',
@@ -56,7 +62,7 @@ describe('Track123 courier pages', () => {
   const fedex = (overrides: JsonObject = {}) => parcel({ carrier: 'fedex', tracking_number: '909876543210', ...overrides });
   // What the checks counted for FedEx: Track123 had every parcel, ParcelsApp half of them, the others next to none.
   const observed = () => ({ Track123: { history: 20, missed: 0 }, ParcelsApp: { history: 10, missed: 10 },
-    Ship24: { history: 1, missed: 19 }, '17TRACK': { history: 1, missed: 19 } });
+    Ship24: { history: 1, missed: 19 }, '17TRACK': { history: 1, missed: 19 }, Ordertracker: { history: 1, missed: 19 } });
 
   it('asks the HTTP providers that had as much before Track123, when someone waits for the answer', async () => {
     const { router, direct, universal } = setup(time, { enableTrack123: true });
@@ -2301,6 +2307,7 @@ describe('persistent tracking routing', () => {
     expect(starts).toEqual(['ParcelsApp', 'Ship24', '17TRACK', 'ParcelsApp']);
   });
   it('counts contacted providers so a check that reached nobody is not health evidence', async () => {
+    fixedPlan('Ship24', 'ParcelsApp', '17TRACK');
     const { router, direct, universal } = setup();
     direct.mockRejectedValue(new Error('carrier down'));
     universal.mockRejectedValue(new Error('down'));
@@ -3919,17 +3926,23 @@ describe('coverage-based provider order', () => {
     expect(sources(universal)).toEqual(['ParcelsApp']);
     expect(moved.result.routing).toMatchObject({ preferred_provider: 'ParcelsApp' });
     // Fuller providers without this parcel wait out their backoff while the parcel stays where it was.
-    universal.mockClear().mockRejectedValueOnce(new NoHistoryError('ParcelsApp', 'no history'))
-      .mockRejectedValueOnce(new NoHistoryError('17TRACK', 'no history'));
+    universal.mockClear().mockImplementation(async source => {
+      if (source !== 'Ship24') throw new NoHistoryError(source, 'no history');
+      return history();
+    });
     const kept = await router.fetch(pinned(), false);
-    expect(sources(universal)).toEqual(['ParcelsApp', '17TRACK', 'Ship24']);
+    const fuller = sources(universal).slice(0, -1);
+    expect(sources(universal).at(-1)).toBe('Ship24');
+    expect(fuller).toEqual(expect.arrayContaining(['ParcelsApp', '17TRACK']));
     expect(kept.result.routing).toMatchObject({ preferred_provider: 'Ship24', failures: {
-      ParcelsApp: { kind: 'no_history', retry_at: '2026-09-10T12:15:00.000Z' }, '17TRACK': { kind: 'no_history' } } });
+      ...Object.fromEntries(fuller.map((source) => [source, { kind: 'no_history' }])),
+      ParcelsApp: { kind: 'no_history', retry_at: '2026-09-10T12:15:00.000Z' } } });
     universal.mockClear();
     await router.fetch(parcel({ carrier: 'la-poste', carrier_data: kept.result }), false);
     expect(sources(universal)).toEqual(['Ship24']);
   });
   it('compares only with providers whose history for the carrier is as full', async () => {
+    const plan = scraper.universalPlan({ carriers: ['la-poste'], trackingNumber: 'TEST1234' });
     const { router, direct, universal } = setup();
     direct.mockRejectedValue(new Error('carrier down'));
     const routing = state({ configured_carrier: 'la-poste', preferred_provider: 'ParcelsApp', preferred_number: 'TEST1234',
@@ -3937,8 +3950,11 @@ describe('coverage-based provider order', () => {
     for (const cursor of [0, 1]) {
       universal.mockClear();
       await router.fetch(parcel({ carrier: 'la-poste', carrier_data: { routing: { ...routing, probe_cursor: cursor } } }), true);
-      // Never the label-only Ship24.
-      expect(sources(universal)).toEqual(['ParcelsApp', '17TRACK']);
+      // Never the label-only Ship24: a provider whose La Poste history is as full as ParcelsApp's.
+      const [preferred, compared, ...more] = sources(universal);
+      expect([preferred, more]).toEqual(['ParcelsApp', []]);
+      expect(compared).not.toBe('Ship24');
+      expect(plan.tier(compared)).toBe(plan.tier('ParcelsApp'));
     }
   });
   it('logs results that contradict the coverage evidence', async () => {

@@ -56,8 +56,14 @@ import { doubled, s10 } from '../test/trackingNumbers';
 import { withEventPlaces } from './eventPlaces';
 import { rememberPreflightRecognition } from './preflightRecognition';
 
-// Keep the published plan configurable without changing the scraper's other exports.
-vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
+// Keep the published plan configurable without changing the scraper's other exports. Poste Italiane stands for a
+// carrier that allows an hour between two lookups of a number, whatever interval the release gives it.
+vi.mock(import('universal-parcel-scraper'), async importOriginal => {
+  const scraper = await importOriginal();
+  const poste = scraper.CARRIER_DEFINITIONS['poste-italiane'];
+  return { ...scraper, CARRIER_DEFINITIONS: { ...scraper.CARRIER_DEFINITIONS, 'poste-italiane': { ...poste,
+    tracking: { ...poste.tracking, refresh: { ...poste.tracking.refresh, minMinutes: 60 } } } } };
+});
 
 afterEach(() => vi.restoreAllMocks());
 

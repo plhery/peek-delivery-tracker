@@ -65848,6 +65848,28 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://dragonflyshipping.nl/en/track-your-package/",
     "helpUrl": "https://dragonflyshipping.nl/en/support/"
+  },
+  "dora-gate": {
+    "displayName": "Dora Gate",
+    "aliases": [
+      "DoraGate",
+      "哆啦任意门",
+      "哆啦任意门科技"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#167ed4",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dora-gate"
+    },
+    "trackingUrlTemplate": "https://oms.anserx.com/tracking?nos={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://oms.anserx.com/tracking"
   }
 } as const;
 
@@ -67896,7 +67918,8 @@ export const CARRIER_IDS = [
   "cargolux",
   "copa-airlines-cargo",
   "daytona-express",
-  "dragonfly-nl"
+  "dragonfly-nl",
+  "dora-gate"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -595,7 +595,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "ES",
       "PT"
-    ]
+    ],
+    "helpUrl": "https://www.dachser.es/es/contacto-275"
   },
   "dhl": {
     "displayName": "DHL",
@@ -920,7 +921,8 @@ export const CARRIER_CAPABILITIES = {
       "MX",
       "AU",
       "BR"
-    ]
+    ],
+    "helpUrl": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV"
   },
   "amazon-shipping": {
     "displayName": "Amazon Shipping",
@@ -1775,7 +1777,8 @@ export const CARRIER_CAPABILITIES = {
       "BE",
       "LU"
     ],
-    "trackingSearchUrl": "https://www.heppner-group.com/destinataire-suivez-votre-marchandise/"
+    "trackingSearchUrl": "https://www.heppner-group.com/destinataire-suivez-votre-marchandise/",
+    "helpUrl": "https://www.heppner-group.com/contactez-nous/"
   },
   "ciblex": {
     "displayName": "Ciblex",
@@ -7199,7 +7202,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://track.mydynalogic.eu/track/login?ordernumber={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.mydynalogic.eu/track/login"
+    "trackingSearchUrl": "https://track.mydynalogic.eu/track/login",
+    "helpUrl": "https://www.dynalogic.eu/consumenten-contact/"
   },
   "envialia": {
     "displayName": "Envialia",
@@ -7417,7 +7421,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.gw-world.com/trackntrace/-/search/"
+    "trackingSearchUrl": "https://my.gw-world.com/trackntrace/-/search/",
+    "helpUrl": "https://www.gw-world.com/contact"
   },
   "geniki-taxydromiki": {
     "displayName": "Geniki Taxydromiki",
@@ -8517,7 +8522,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://shipper.ubismartparcel.com/#/ubi"
+    "trackingSearchUrl": "https://shipper.ubismartparcel.com/#/ubi",
+    "helpUrl": "https://www.ubismartparcel.com/contact.html"
   },
   "wanbexpress": {
     "displayName": "WanbExpress",
@@ -8903,7 +8909,8 @@ export const CARRIER_CAPABILITIES = {
         "rawPattern": "^\\d{9}-\\d$"
       }
     ],
-    "trackingSearchUrl": "https://apps.cdldelivers.com/Tracking-Page/track"
+    "trackingSearchUrl": "https://apps.cdldelivers.com/Tracking-Page/track",
+    "helpUrl": "https://cdldelivers.com/contact"
   },
   "dao": {
     "displayName": "DAO",
@@ -10104,7 +10111,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://stallion.ca/track/"
+    "trackingSearchUrl": "https://stallion.ca/track/",
+    "helpUrl": "https://stallion.ca/contact-us/"
   },
   "venipak": {
     "displayName": "Venipak",
@@ -10226,7 +10234,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cacesa.com/en/tracking"
+    "trackingSearchUrl": "https://www.cacesa.com/en/tracking",
+    "helpUrl": "https://www.cacesa.com/en/faqs"
   },
   "aramex-au": {
     "displayName": "Aramex Australia",
@@ -10623,7 +10632,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://tracking.apc-pli.com/"
+    "trackingSearchUrl": "https://tracking.apc-pli.com/",
+    "helpUrl": "https://www.apc-pli.com/consumer-tracking-support"
   },
   "arrow-xl": {
     "displayName": "ArrowXL",
@@ -10897,7 +10907,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bst.nu/"
+    "trackingSearchUrl": "https://bst.nu/",
+    "helpUrl": "https://www.besttransport.se/om-best/kontakta-best/"
   },
   "better-trucks": {
     "displayName": "Better Trucks",
@@ -11120,7 +11131,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://burd.dk/"
+    "trackingSearchUrl": "https://burd.dk/",
+    "helpUrl": "https://burd.dk/kundeservice"
   },
   "castores": {
     "displayName": "Transportes Castores",
@@ -11257,7 +11269,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cevalogistics.com/en/ceva-trak"
+    "trackingSearchUrl": "https://www.cevalogistics.com/en/ceva-trak",
+    "helpUrl": "https://www.cevalogistics.com/en/contact-us"
   },
   "chilexpress": {
     "displayName": "Chilexpress",
@@ -11751,7 +11764,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://tracktrace.cycloon.eu/"
+    "trackingSearchUrl": "https://tracktrace.cycloon.eu/",
+    "helpUrl": "https://www.cycloon.eu/klantenservice/ontvangen"
   },
   "d-express": {
     "displayName": "D Express",
@@ -11824,7 +11838,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://trace.fragt.dk/"
+    "trackingSearchUrl": "https://trace.fragt.dk/",
+    "helpUrl": "https://www.fragt.dk/kontakt/"
   },
   "dayton-freight": {
     "displayName": "Dayton Freight",
@@ -12216,7 +12231,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.forwardair.com/tracking"
+    "trackingSearchUrl": "https://www.forwardair.com/tracking",
+    "helpUrl": "https://www.forwardair.com/about/contact"
   },
   "fukuyama": {
     "displayName": "Fukuyama Transporting",
@@ -12559,7 +12575,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.icscourier.ca/online-services/parcel-tracking.aspx"
+    "trackingSearchUrl": "https://www.icscourier.ca/online-services/parcel-tracking.aspx",
+    "helpUrl": "https://www.icscourier.ca/about-us/contactics.aspx"
   },
   "ids-logistik": {
     "displayName": "IDS Logistik",
@@ -12603,7 +12620,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ids-logistik.de/de/sendungsverfolgung"
+    "trackingSearchUrl": "https://www.ids-logistik.de/de/sendungsverfolgung",
+    "helpUrl": "https://www.ids-logistik.de/de/hilfe"
   },
   "imile": {
     "displayName": "iMile",
@@ -12970,7 +12988,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://th.kex-express.com/en/track-parcel"
+    "trackingSearchUrl": "https://th.kex-express.com/en/track-parcel",
+    "helpUrl": "https://th.kex-express.com/en/faq"
   },
   "kolay-gelsin": {
     "displayName": "Kolay Gelsin",
@@ -13198,7 +13217,8 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.m-o.com/track/",
-    "trackingUrlTemplate": "https://www.m-o.com/track/?t={trackingNumber}"
+    "trackingUrlTemplate": "https://www.m-o.com/track/?t={trackingNumber}",
+    "helpUrl": "https://www.m-o.com/contact"
   },
   "naqel": {
     "displayName": "Naqel Express",
@@ -13576,7 +13596,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track2.palletways.com/"
+    "trackingSearchUrl": "https://track2.palletways.com/",
+    "helpUrl": "https://www.palletways.com/contact/"
   },
   "pecom": {
     "displayName": "PEC",
@@ -13657,7 +13678,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://delivers.maersk.com/tracking/"
+    "trackingSearchUrl": "https://delivers.maersk.com/tracking/",
+    "helpUrl": "https://delivers.maersk.com/contact/"
   },
   "pitt-ohio": {
     "displayName": "Pitt Ohio",
@@ -14202,7 +14224,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://freight.rrts.com/Tools/Tracking/Pages/default.aspx"
+    "trackingSearchUrl": "https://freight.rrts.com/Tools/Tracking/Pages/default.aspx",
+    "helpUrl": "https://www.shiproadrunnerfreight.com/contact/"
   },
   "saudi-post": {
     "displayName": "Saudi Post",
@@ -14283,7 +14306,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.seino.co.jp/"
+    "trackingSearchUrl": "https://www.seino.co.jp/",
+    "helpUrl": "https://www.seino.co.jp/seino/contactus/"
   },
   "seko": {
     "displayName": "SEKO Logistics",
@@ -14379,7 +14403,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sendex.coordi.com/rastreo/"
+    "trackingSearchUrl": "https://sendex.coordi.com/rastreo/",
+    "helpUrl": "https://sendex.coordi.com/contactenos/"
   },
   "sending": {
     "displayName": "Sending",
@@ -15256,7 +15281,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vaspexpresso.pt/pt/geral/track-and-trace/"
+    "trackingSearchUrl": "https://www.vaspexpresso.pt/pt/geral/track-and-trace/",
+    "helpUrl": "https://www.vaspexpresso.pt/pt/particulares/ajuda/"
   },
   "viettel-post": {
     "displayName": "Viettel Post",
@@ -15366,7 +15392,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://wardtlctools.com/wardtrucking/traceshipment/create"
+    "trackingSearchUrl": "https://wardtlctools.com/wardtrucking/traceshipment/create",
+    "helpUrl": "https://www.wardtlc.com/contact-ward-tlc/"
   },
   "aramex-nz": {
     "displayName": "Aramex New Zealand",
@@ -15494,7 +15521,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://celeritastransporte.com/seguimiento-paquete-pedidos/"
+    "trackingSearchUrl": "https://celeritastransporte.com/seguimiento-paquete-pedidos/",
+    "helpUrl": "https://celeritastransporte.com/contacto/"
   },
   "dhlink": {
     "displayName": "DHLink",
@@ -15971,7 +15999,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.asyadexpress.om/track-trace"
+    "trackingSearchUrl": "https://www.asyadexpress.om/track-trace",
+    "helpUrl": "https://www.asyadexpress.om/contact/contact_us"
   },
   "border-express": {
     "displayName": "Border Express",
@@ -16196,7 +16225,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dylt.com/"
+    "trackingSearchUrl": "https://www.dylt.com/",
+    "helpUrl": "https://www.dylt.com/contact-us/"
   },
   "deprisa": {
     "displayName": "Deprisa",
@@ -16348,7 +16378,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ship.midlandtransport.com/Tracking/TrackClientTrackings"
+    "trackingSearchUrl": "https://ship.midlandtransport.com/Tracking/TrackClientTrackings",
+    "helpUrl": "https://www.midlandtransport.com/en/help-center/contact-us/"
   },
   "oak-harbor": {
     "displayName": "Oak Harbor Freight Lines",
@@ -16378,7 +16409,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.oakh.com/page/tracing"
+    "trackingSearchUrl": "https://www.oakh.com/page/tracing",
+    "helpUrl": "https://www.oakh.com/page/contact"
   },
   "skroutz-last-mile": {
     "displayName": "Skroutz Last Mile",
@@ -16512,7 +16544,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.urbano.com.pe/tracking/"
+    "trackingSearchUrl": "https://www.urbano.com.pe/tracking/",
+    "helpUrl": "https://www.urbano.com.pe/contactanos"
   },
   "vrl-logistics": {
     "displayName": "VRL Logistics",
@@ -16566,7 +16599,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vrlgroup.in/Tracking/TrackShipment"
+    "trackingSearchUrl": "https://www.vrlgroup.in/Tracking/TrackShipment",
+    "helpUrl": "https://www.vrlgroup.in/ContactUs"
   },
   "mtscn": {
     "displayName": "Meiteshun Logistics",
@@ -16778,7 +16812,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.139express.com/Home/Search_Tracking"
+    "trackingSearchUrl": "https://www.139express.com/Home/Search_Tracking",
+    "helpUrl": "https://www.139express.com/home/sef/146"
   },
   "2go": {
     "displayName": "2GO Express",
@@ -16858,7 +16893,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://agcgroup.in/track-now/"
+    "trackingSearchUrl": "https://agcgroup.in/track-now/",
+    "helpUrl": "https://agcgroup.in/contact/"
   },
   "alem-tat": {
     "displayName": "Alem TAT",
@@ -16985,7 +17021,8 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://www.blue-ex.com/contact"
   },
   "buffalo-ex": {
     "displayName": "BUFFALO",
@@ -17069,7 +17106,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.chunil.co.kr/HTrace/HTrace.jsp"
+    "trackingSearchUrl": "https://www.chunil.co.kr/HTrace/HTrace.jsp",
+    "helpUrl": "https://www.chunil.co.kr/kor/mainsite/htmls/subPage.jsp?control=customer&pageNum=02"
   },
   "domex": {
     "displayName": "Domex",
@@ -17103,7 +17141,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.domex.lk/"
+    "trackingSearchUrl": "https://www.domex.lk/",
+    "helpUrl": "https://domex.lk/customer_support.php"
   },
   "dropp": {
     "displayName": "Dropp",
@@ -17247,7 +17286,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://ecourier.com.bd/tracking/"
+    "trackingSearchUrl": "https://ecourier.com.bd/tracking/",
+    "helpUrl": "https://ecourier.com.bd/contact-us/"
   },
   "energia-tk": {
     "displayName": "TK Energia",
@@ -17391,7 +17431,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.fargocourier.co.ke/"
+    "trackingSearchUrl": "https://www.fargocourier.co.ke/",
+    "helpUrl": "https://www.fargocourier.co.ke/contact-fargo-courier/"
   },
   "flash-express-ph": {
     "displayName": "Flash Express Philippines",
@@ -17479,7 +17520,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cvsnet.co.kr/reservation-inquiry/delivery/index.do"
+    "trackingSearchUrl": "https://www.cvsnet.co.kr/reservation-inquiry/delivery/index.do",
+    "helpUrl": "https://www.cvsnet.co.kr/customer-center/communityid/faq/list.do"
   },
   "hapdong": {
     "displayName": "Hapdong Express",
@@ -17501,7 +17543,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://hdexp.co.kr/index.do"
+    "trackingSearchUrl": "https://hdexp.co.kr/index.do",
+    "helpUrl": "https://hdexp.co.kr/cs/cs.do"
   },
   "hct-logistics": {
     "displayName": "HCT Logistics",
@@ -17640,7 +17683,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.internetexpress.co.za/track"
+    "trackingSearchUrl": "https://portal.internetexpress.co.za/track",
+    "helpUrl": "https://www.internetexpress.co.za/contact-details"
   },
   "j-and-t-cn": {
     "displayName": "J&T Express China",
@@ -17845,7 +17889,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kex.kln.com/en/track"
+    "trackingSearchUrl": "https://www.kex.kln.com/en/track",
+    "helpUrl": "https://www.kex.kln.com/en/contact"
   },
   "kit-tk": {
     "displayName": "TK KIT",
@@ -18285,7 +18330,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://paperfly.com.bd/"
+    "trackingSearchUrl": "https://paperfly.com.bd/",
+    "helpUrl": "https://paperfly.com.bd/contact"
   },
   "pathao-courier": {
     "displayName": "Pathao Courier",
@@ -18417,7 +18463,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://query2.e-can.com.tw/%E5%A4%9A%E7%AD%86%E6%9F%A5%E4%BB%B6A.htm"
+    "trackingSearchUrl": "https://query2.e-can.com.tw/%E5%A4%9A%E7%AD%86%E6%9F%A5%E4%BB%B6A.htm",
+    "helpUrl": "https://www.e-can.com.tw/aboutUs_contact.aspx"
   },
   "pfc-express": {
     "displayName": "PFC Express",
@@ -18488,7 +18535,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.pfctrack.com/"
+    "trackingSearchUrl": "https://www.pfctrack.com/",
+    "helpUrl": "https://www.pfcexpress.com/abouts/lianxiwomen.html"
   },
   "postex": {
     "displayName": "PostEx",
@@ -18522,7 +18570,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://postex.pk/tracking"
+    "trackingSearchUrl": "https://postex.pk/tracking",
+    "helpUrl": "https://postex.pk/contact-us"
   },
   "prompt-xpress": {
     "displayName": "Prompt Xpress",
@@ -18559,7 +18608,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://promptxpress.lk/TrackItem.aspx",
-    "trackingUrlTemplate": "https://web.promptxpress.lk/PublicTracking/TrackingStatus?trackingNo={trackingNumber}"
+    "trackingUrlTemplate": "https://web.promptxpress.lk/PublicTracking/TrackingStatus?trackingNo={trackingNumber}",
+    "helpUrl": "https://promptxpress.lk/ContactUs.aspx"
   },
   "pronto-lanka": {
     "displayName": "Pronto Lanka",
@@ -18716,7 +18766,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sapx.id/id/cek-awb"
+    "trackingSearchUrl": "https://www.sapx.id/id/cek-awb",
+    "helpUrl": "https://www.sapx.id/id/kontak-kami"
   },
   "sat-ukraine": {
     "displayName": "SAT",
@@ -18795,7 +18846,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.saqura-web.com/SBS_LTRC/"
+    "trackingSearchUrl": "https://www.saqura-web.com/SBS_LTRC/",
+    "helpUrl": "https://www.sbs-sokuhai.com/sbsskhi/contact/"
   },
   "seven-eleven-tw": {
     "displayName": "7-ELEVEN Taiwan",
@@ -18870,7 +18922,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.shreenandancourier.com/",
-    "trackingUrlTemplate": "https://connectingnandan.com/web-tracking/{trackingNumber}"
+    "trackingUrlTemplate": "https://connectingnandan.com/web-tracking/{trackingNumber}",
+    "helpUrl": "https://www.shreenandancourier.com/contact-us"
   },
   "slgtrax": {
     "displayName": "SLGTrax",
@@ -18927,7 +18980,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://sonic.pk/tracking",
-    "trackingUrlTemplate": "https://sonic.pk/tracking?tracking_number={trackingNumber}"
+    "trackingUrlTemplate": "https://sonic.pk/tracking?tracking_number={trackingNumber}",
+    "helpUrl": "https://slgtrax.com/contact"
   },
   "spx-br": {
     "displayName": "SPX Express Brazil",
@@ -19030,7 +19084,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.stcourier.com/"
+    "trackingSearchUrl": "https://www.stcourier.com/",
+    "helpUrl": "https://stcourier.com/corporate-office"
   },
   "steadfast": {
     "displayName": "Steadfast Courier",
@@ -19105,7 +19160,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://operation.sundarbancourierltd.com/"
+    "trackingSearchUrl": "https://operation.sundarbancourierltd.com/",
+    "helpUrl": "https://www.sundarbancourierltd.com/Support"
   },
   "t-cat": {
     "displayName": "T-CAT",
@@ -19171,7 +19227,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.taxydema.gr/track-and-trace.html"
+    "trackingSearchUrl": "https://www.taxydema.gr/track-and-trace.html",
+    "helpUrl": "https://www.taxydema.gr/epikoinonia.html"
   },
   "tcs-pakistan": {
     "displayName": "TCS",
@@ -19267,7 +19324,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shreetirupaticourier.net/"
+    "trackingSearchUrl": "https://www.shreetirupaticourier.net/",
+    "helpUrl": "https://www.shreetirupaticourier.net/contactUs.aspx"
   },
   "tracx-logis": {
     "displayName": "TracX Logis",
@@ -19319,7 +19377,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.tracxlogis.com/tracking"
+    "trackingSearchUrl": "https://www.tracxlogis.com/tracking",
+    "helpUrl": "https://www.tracxlogis.com/info/contact"
   },
   "wahana": {
     "displayName": "Wahana Express",
@@ -19420,7 +19479,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.winit.com/tracking/Mobile"
+    "trackingSearchUrl": "https://track.winit.com/tracking/Mobile",
+    "helpUrl": "https://www.winit.com/html/contact_us.html"
   },
   "xde-logistics": {
     "displayName": "XDE Logistics",
@@ -19639,7 +19699,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aks.rs/pracenje-posiljke/"
+    "trackingSearchUrl": "https://www.aks.rs/pracenje-posiljke/",
+    "helpUrl": "https://www.aks.rs/kontakt/"
   },
   "algerie-poste": {
     "displayName": "Algérie Poste",
@@ -19946,7 +20007,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://facts.dohrn.com/scripts/cgiip.exe/protraceext.htm"
+    "trackingSearchUrl": "https://facts.dohrn.com/scripts/cgiip.exe/protraceext.htm",
+    "helpUrl": "https://www.dohrn.com/about/contact-directory"
   },
   "ems-vietnam": {
     "displayName": "EMS Vietnam",
@@ -20042,7 +20104,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.euroexpress.ba/pracenje-posiljke"
+    "trackingSearchUrl": "https://www.euroexpress.ba/pracenje-posiljke",
+    "helpUrl": "https://www.euroexpress.ba/kontakt"
   },
   "followmont": {
     "displayName": "Followmont Transport",
@@ -20113,7 +20176,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://grguweb.tmwcloud.com/trace/external.msw"
+    "trackingSearchUrl": "https://grguweb.tmwcloud.com/trace/external.msw",
+    "helpUrl": "https://www.groupeguilbault.com/nous-joindre"
   },
   "haypost": {
     "displayName": "HayPost",
@@ -20405,7 +20469,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ncskurir.com/ncskurir/track"
+    "trackingSearchUrl": "https://ncskurir.com/ncskurir/track",
+    "helpUrl": "https://ncskurir.com/ncskurir/contact_us"
   },
   "nhat-tin": {
     "displayName": "Nhat Tin Logistics",
@@ -20444,7 +20509,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://ntlogistics.vn/tra-van-don.html"
+    "trackingSearchUrl": "https://ntlogistics.vn/tra-van-don.html",
+    "helpUrl": "https://ntlogistics.vn/lien-he.html"
   },
   "nim-express": {
     "displayName": "Nim Express",
@@ -20477,7 +20543,8 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://www.nimexpress.com/web/p/contactus"
   },
   "northline": {
     "displayName": "Northline",
@@ -20505,7 +20572,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.northline.com.au/"
+    "trackingSearchUrl": "https://track.northline.com.au/",
+    "helpUrl": "https://www.northline.com.au/contact-us/"
   },
   "ozon-logistics": {
     "displayName": "Ozon",
@@ -20693,7 +20761,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.pbt.nz/"
+    "trackingSearchUrl": "https://www.pbt.nz/",
+    "helpUrl": "https://www.pbt.nz/contact/"
   },
   "polaris-transport": {
     "displayName": "Polaris Transportation Group",
@@ -20920,7 +20989,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://rpx.co.id/tracking"
+    "trackingSearchUrl": "https://rpx.co.id/tracking",
+    "helpUrl": "https://rpx.co.id/contact-us"
   },
   "saee": {
     "displayName": "Saee",
@@ -21004,7 +21074,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "mod7"
       }
     ],
-    "trackingSearchUrl": "https://www.scgexpress.co.th/tracking/"
+    "trackingSearchUrl": "https://www.scgexpress.co.th/tracking/",
+    "helpUrl": "https://www.scgexpress.co.th/contact-us/"
   },
   "skynet-sa": {
     "displayName": "SkyNet South Africa",
@@ -21373,7 +21444,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://m.tst-cfexpress.com/tracing"
+    "trackingSearchUrl": "https://m.tst-cfexpress.com/tracing",
+    "helpUrl": "https://www.tst-cfexpress.com/contact-us"
   },
   "uzbekistan-post": {
     "displayName": "Uzbekistan Post",
@@ -21549,7 +21621,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aex.com.py/web/tracking.php"
+    "trackingSearchUrl": "https://www.aex.com.py/web/tracking.php",
+    "helpUrl": "https://www.aex.com.py/web/contactenos.php"
   },
   "ampm": {
     "displayName": "Grupo ampm",
@@ -21583,7 +21656,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://grupoampm.com/rastreador/"
+    "trackingSearchUrl": "https://grupoampm.com/rastreador/",
+    "helpUrl": "https://grupoampm.com/consulta-el-estatus-de-tus-envios-y-guias-2-2/"
   },
   "chazki": {
     "displayName": "Chazki",
@@ -21898,7 +21972,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pullmancargo.cl/seguimiento"
+    "trackingSearchUrl": "https://pullmancargo.cl/seguimiento",
+    "helpUrl": "https://pullmancargo.cl/contacto"
   },
   "tealca": {
     "displayName": "Tealca",
@@ -22243,7 +22318,8 @@ export const CARRIER_CAPABILITIES = {
         "rawPattern": "^810-\\d{8}$"
       }
     ],
-    "trackingSearchUrl": "https://amerijet.com/air-waybill-tracking/"
+    "trackingSearchUrl": "https://amerijet.com/air-waybill-tracking/",
+    "helpUrl": "https://amerijet.com/help-and-support-center/"
   },
   "anousith": {
     "displayName": "Anousith Logistics",
@@ -22302,7 +22378,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apcargo.com.ph/track/"
+    "trackingSearchUrl": "https://apcargo.com.ph/track/",
+    "helpUrl": "https://apcargo.com.ph/contact-us/"
   },
   "bookurier": {
     "displayName": "Bookurier",
@@ -22347,7 +22424,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://t.bookurier.ro/"
+    "trackingSearchUrl": "https://t.bookurier.ro/",
+    "helpUrl": "https://app.grupall.ro/contact"
   },
   "botswana-post": {
     "displayName": "Botswana Post",
@@ -22398,7 +22476,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bts.uz/uz/search-form"
+    "trackingSearchUrl": "https://bts.uz/uz/search-form",
+    "helpUrl": "https://bts.uz/uz/contact"
   },
   "budbee": {
     "displayName": "Budbee",
@@ -22565,7 +22644,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://selfservice.courierplus-ng.com/track-shipment"
+    "trackingSearchUrl": "https://selfservice.courierplus-ng.com/track-shipment",
+    "helpUrl": "https://www.courierplus-ng.com/contact-us/"
   },
   "credifin": {
     "displayName": "Credifin Logística",
@@ -22600,7 +22680,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://credifin.com.ar/seguimiento/"
+    "trackingSearchUrl": "https://credifin.com.ar/seguimiento/",
+    "helpUrl": "https://credifin.com.ar/faqs"
   },
   "daewoo-fastex": {
     "displayName": "Daewoo FastEx",
@@ -22632,7 +22713,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fastex.pk/trackingDetail"
+    "trackingSearchUrl": "https://fastex.pk/trackingDetail",
+    "helpUrl": "https://fastex.pk/contactUs/"
   },
   "dpd-za": {
     "displayName": "DPD South Africa",
@@ -22718,7 +22800,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trackntrace.easymail.gr/"
+    "trackingSearchUrl": "https://trackntrace.easymail.gr/",
+    "helpUrl": "https://www.easymail.gr/contact-us"
   },
   "evropat": {
     "displayName": "Evropat",
@@ -22750,7 +22833,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://evropat.bg/track/"
+    "trackingSearchUrl": "https://evropat.bg/track/",
+    "helpUrl": "https://evropat.bg/%d0%ba%d0%be%d0%bd%d1%82%d0%b0%d0%ba%d1%82%d0%b8/"
   },
   "exline-kz": {
     "displayName": "Exline",
@@ -22821,7 +22905,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fargo.uz/track"
+    "trackingSearchUrl": "https://fargo.uz/track",
+    "helpUrl": "https://fargo.uz/uz/contact"
   },
   "fastfrate": {
     "displayName": "Fastfrate",
@@ -22852,7 +22937,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracker.fastfrate.com/quick-track"
+    "trackingSearchUrl": "https://tracker.fastfrate.com/quick-track",
+    "helpUrl": "https://www.fastfrate.com/contact/"
   },
   "first-delivery-tn": {
     "displayName": "First Delivery",
@@ -22874,7 +22960,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.firstdeliverygroup.com/suivi-de-colis/"
+    "trackingSearchUrl": "https://www.firstdeliverygroup.com/suivi-de-colis/",
+    "helpUrl": "https://www.firstdeliverygroup.com/contact/"
   },
   "franch-express": {
     "displayName": "Franch Express",
@@ -22903,7 +22990,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://franchexpress.com/courier-tracking/"
+    "trackingSearchUrl": "https://franchexpress.com/courier-tracking/",
+    "helpUrl": "https://franchexpress.com/customer-service/"
   },
   "gel-express": {
     "displayName": "GEL Express",
@@ -22943,7 +23031,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.gel-express.de/de/sendungsverfolgung/"
+    "trackingSearchUrl": "https://www.gel-express.de/de/sendungsverfolgung/",
+    "helpUrl": "https://www.gel-express.de/de/kontakt/"
   },
   "gobolt": {
     "displayName": "GoBolt",
@@ -22974,7 +23063,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.gobolt.com/tracking"
+    "trackingSearchUrl": "https://track.gobolt.com/tracking",
+    "helpUrl": "https://help.gobolt.com/"
   },
   "gogo-xpress": {
     "displayName": "GoGo Xpress",
@@ -23045,7 +23135,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app3.horoz.com.tr/wsKurumsal/_genel/frmGonderiTakip.aspx"
+    "trackingSearchUrl": "https://app3.horoz.com.tr/wsKurumsal/_genel/frmGonderiTakip.aspx",
+    "helpUrl": "https://www.horoz.com.tr/iletisim"
   },
   "integral-pack": {
     "displayName": "Integral Pack",
@@ -23077,7 +23168,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.integralpack.com.ar/seguimiento"
+    "trackingSearchUrl": "https://www.integralpack.com.ar/seguimiento",
+    "helpUrl": "https://www.integralpack.com.ar/contacto"
   },
   "jeebly": {
     "displayName": "Jeebly",
@@ -23258,7 +23350,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://track.mailplus.com.au/"
+    "trackingSearchUrl": "https://track.mailplus.com.au/",
+    "helpUrl": "https://mailplus.com.au/support-ticket"
   },
   "major-express": {
     "displayName": "Major Express",
@@ -23299,7 +23392,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://major-express.ru/useful-services/track/"
+    "trackingSearchUrl": "https://major-express.ru/useful-services/track/",
+    "helpUrl": "https://major-express.ru/about/contacts/"
   },
   "mandae": {
     "displayName": "Mandaê",
@@ -23362,7 +23456,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.messenger.cz/"
+    "trackingSearchUrl": "https://tracking.messenger.cz/",
+    "helpUrl": "https://messenger.cz/cs/contact"
   },
   "nord-wheel": {
     "displayName": "Nord Wheel",
@@ -23395,7 +23490,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://nordw.ru/tracking/"
+    "trackingSearchUrl": "https://nordw.ru/tracking/",
+    "helpUrl": "https://nordw.ru/contacts/"
   },
   "ocasa": {
     "displayName": "OCASA",
@@ -23588,7 +23684,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://shipa.com/track/"
+    "trackingSearchUrl": "https://shipa.com/track/",
+    "helpUrl": "https://shipa.com/help-center/"
   },
   "shree-anjani": {
     "displayName": "Shree Anjani Courier",
@@ -23622,7 +23719,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://shreeanjani.co.in/tracking"
+    "trackingSearchUrl": "https://shreeanjani.co.in/tracking",
+    "helpUrl": "https://shreeanjani.co.in/contact/"
   },
   "ues-uy": {
     "displayName": "UES",
@@ -23699,7 +23797,8 @@ export const CARRIER_CAPABILITIES = {
         "rawPattern": "^[A-Z]{6}\\d{4,5}-\\d{7}$"
       }
     ],
-    "trackingSearchUrl": "https://upaya.com.np/track/"
+    "trackingSearchUrl": "https://upaya.com.np/track/",
+    "helpUrl": "https://upaya.com.np/contact/"
   },
   "vimenpaq": {
     "displayName": "Vimenpaq",
@@ -23773,7 +23872,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.x-express.ba/korisnicki-panel/pracenje-posiljke"
+    "trackingSearchUrl": "https://www.x-express.ba/korisnicki-panel/pracenje-posiljke",
+    "helpUrl": "https://www.x-express.ba/x-express/kontakt"
   },
   "packlink": {
     "displayName": "Packlink",
@@ -23806,7 +23906,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.packlink.es/seguimiento-envios/"
+    "trackingSearchUrl": "https://www.packlink.es/seguimiento-envios/",
+    "helpUrl": "https://support.packlink.com/hc/es-es"
   },
   "dpd-be": {
     "displayName": "DPD Belgium",
@@ -23918,7 +24019,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://relaytech.co/track-order"
+    "trackingSearchUrl": "https://relaytech.co/track-order",
+    "helpUrl": "https://www.relaytech.co/track-order-contact-form"
   },
   "dpd-nl": {
     "displayName": "DPD Netherlands",
@@ -24124,7 +24226,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.delnext.com/PT/track_your_parcel"
+    "trackingSearchUrl": "https://www.delnext.com/PT/track_your_parcel",
+    "helpUrl": "https://www.delnext.com/PT/contact_us"
   },
   "hispapost": {
     "displayName": "Hispapost",
@@ -24249,7 +24352,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tracking.kronosexpress.com/tracking_system_en.aspx",
-    "trackingUrlTemplate": "https://tracking.kronosexpress.com/tracking_system_en.aspx?tracking_number={trackingNumber}"
+    "trackingUrlTemplate": "https://tracking.kronosexpress.com/tracking_system_en.aspx?tracking_number={trackingNumber}",
+    "helpUrl": "https://www.kronosexpress.com/en/contactus/"
   },
   "m-one": {
     "displayName": "M-ONE",
@@ -24341,7 +24445,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pack-man.gr/anazitisi-apostolis.html"
+    "trackingSearchUrl": "https://pack-man.gr/anazitisi-apostolis.html",
+    "helpUrl": "https://pack-man.gr/contact-us.html"
   },
   "pannon-xp": {
     "displayName": "Pannon XP",
@@ -24367,7 +24472,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://mypxp.pannonxp.hu/csomagkovetes"
+    "trackingSearchUrl": "https://mypxp.pannonxp.hu/csomagkovetes",
+    "helpUrl": "https://mypxp.pannonxp.hu/kapcsolat"
   },
   "phlpost": {
     "displayName": "PHLPost",
@@ -24479,7 +24585,8 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^M001\\d{4}[0-9A-Z]\\d{11}$",
         "confidence": "high"
       }
-    ]
+    ],
+    "helpUrl": "https://www.torrestir.com/en/send-us-a-message/"
   },
   "afghan-post": {
     "displayName": "Afghan Post",
@@ -24943,7 +25050,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://direx.bg/track/"
+    "trackingSearchUrl": "https://direx.bg/track/",
+    "helpUrl": "https://direx.bg/contact/"
   },
   "fermopoint": {
     "displayName": "Fermopoint",
@@ -24978,7 +25086,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.fermopoint.it/traccia-un-ritiro"
+    "trackingSearchUrl": "https://www.fermopoint.it/traccia-un-ritiro",
+    "helpUrl": "https://www.fermopoint.it/contatti"
   },
   "fg-delivery": {
     "displayName": "FG Delivery",
@@ -25020,7 +25129,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://fgdelivery.it/tracciabilita/"
+    "trackingSearchUrl": "https://fgdelivery.it/tracciabilita/",
+    "helpUrl": "https://fgdelivery.it/contatti/"
   },
   "go4": {
     "displayName": "GO4",
@@ -25053,7 +25163,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://zona.go4.eu/status/"
+    "trackingSearchUrl": "https://zona.go4.eu/status/",
+    "helpUrl": "https://www.go4.sk/kontakt/"
   },
   "happy-post": {
     "displayName": "Happy-Post",
@@ -25094,7 +25205,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://uk.happy-post.com/track/"
+    "trackingSearchUrl": "https://uk.happy-post.com/track/",
+    "helpUrl": "https://happy-post.com/en/faq"
   },
   "hp-mostar": {
     "displayName": "Hrvatska pošta Mostar",
@@ -25166,7 +25278,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.hrparcel.com/traccia-spedizioni/"
+    "trackingSearchUrl": "https://www.hrparcel.com/traccia-spedizioni/",
+    "helpUrl": "https://www.hrparcel.com/contatti/"
   },
   "intex-paketdienst": {
     "displayName": "INTEX Paketdienst",
@@ -25206,7 +25319,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.intex-paketdienst.de/sendungsstatus/index.php"
+    "trackingSearchUrl": "https://www.intex-paketdienst.de/sendungsstatus/index.php",
+    "helpUrl": "https://www.intex-paketdienst.de/websitewp/kontakt/"
   },
   "liccardi": {
     "displayName": "Liccardi Express Courier",
@@ -25284,7 +25398,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.logoix.com/cgi-bin/tnt.pl"
+    "trackingSearchUrl": "https://www.logoix.com/cgi-bin/tnt.pl",
+    "helpUrl": "https://www.logoix.com/cgi-bin/kontakt.pl"
   },
   "nox": {
     "displayName": "nox",
@@ -25400,7 +25515,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.pigeonexpress.com/"
+    "trackingSearchUrl": "https://track.pigeonexpress.com/",
+    "helpUrl": "https://pigeonexpress.com/contact"
   },
   "posta-faroe": {
     "displayName": "Posta (Faroe Islands)",
@@ -25518,7 +25634,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://twsexpresscourier.it/traccia-spedizione/"
+    "trackingSearchUrl": "https://twsexpresscourier.it/traccia-spedizione/",
+    "helpUrl": "https://twsexpresscourier.it/contatti/"
   },
   "byhd": {
     "displayName": "BYHD",
@@ -25684,7 +25801,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.drop2shop.ie/tracking"
+    "trackingSearchUrl": "https://www.drop2shop.ie/tracking",
+    "helpUrl": "https://www.coll-8.com/contact/"
   },
   "eurodis": {
     "displayName": "EURODIS",
@@ -25938,7 +26056,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.paeckli-punkt.ch/paket-verfolgen/"
+    "trackingSearchUrl": "https://www.paeckli-punkt.ch/paket-verfolgen/",
+    "helpUrl": "https://www.paeckli-punkt.ch/kontakt/"
   },
   "parcelpoint": {
     "displayName": "ParcelPoint",
@@ -25987,7 +26106,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://parcelpoint.com.au/track-your-parcel/"
+    "trackingSearchUrl": "https://parcelpoint.com.au/track-your-parcel/",
+    "helpUrl": "https://parcelpoint.com.au/contact-us/"
   },
   "yilong-logistics": {
     "displayName": "Yilong Logistics",
@@ -26034,7 +26154,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cbd-tracking.locate2u.com/"
+    "trackingSearchUrl": "https://cbd-tracking.locate2u.com/",
+    "helpUrl": "https://www.codexpress.com.au/#/support"
   },
   "designer-transport": {
     "displayName": "Designer Transport",
@@ -26050,7 +26171,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.designertransport.com.au/"
+    "trackingSearchUrl": "https://track.designertransport.com.au/",
+    "helpUrl": "https://designertransport.com.au/pages/contact"
   },
   "direct-couriers": {
     "displayName": "Direct Couriers",
@@ -26067,7 +26189,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://appsrv.directcouriers.com.au/online/jobtrackgen.cl"
+    "trackingSearchUrl": "https://appsrv.directcouriers.com.au/online/jobtrackgen.cl",
+    "helpUrl": "https://www.directcouriers.com.au/resources/faqs"
   },
   "ewe": {
     "displayName": "EWE Group",
@@ -26119,7 +26242,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ewe.com.au/pages/tracking-order"
+    "trackingSearchUrl": "https://www.ewe.com.au/pages/tracking-order",
+    "helpUrl": "https://www.ewe.com.au/pages/contact"
   },
   "homexpress": {
     "displayName": "HOMEXPRESS",
@@ -26186,7 +26310,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://postmediaparcelservices.com/"
+    "trackingSearchUrl": "https://postmediaparcelservices.com/",
+    "helpUrl": "https://postmediaparcelservices.com/#/support"
   },
   "precision-deliveries": {
     "displayName": "Precision Deliveries",
@@ -26224,7 +26349,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.precisiondeliveries.com/"
+    "trackingSearchUrl": "https://track.precisiondeliveries.com/",
+    "helpUrl": "https://precisiondeliveries.com/contact/"
   },
   "transport-rdl": {
     "displayName": "Transport RDL",
@@ -26256,7 +26382,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://transportrdl.com/suivre-un-colis/"
+    "trackingSearchUrl": "https://transportrdl.com/suivre-un-colis/",
+    "helpUrl": "https://transportrdl.com/contact/"
   },
   "energo": {
     "displayName": "Energo Logistic",
@@ -26282,7 +26409,8 @@ export const CARRIER_CAPABILITIES = {
         "rawPattern": "^EN\\d{2}-\\d{6}-\\d$"
       }
     ],
-    "trackingSearchUrl": "https://www.energologistic.it/tracking/"
+    "trackingSearchUrl": "https://www.energologistic.it/tracking/",
+    "helpUrl": "https://www.energologistic.it/contatti/"
   },
   "method": {
     "displayName": "Method",
@@ -26303,7 +26431,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://method-logistics.com/localizador-de-envios/"
+    "trackingSearchUrl": "https://method-logistics.com/localizador-de-envios/",
+    "helpUrl": "https://method-logistics.com/contacto/"
   },
   "sailpost": {
     "displayName": "Sailpost",
@@ -26337,7 +26466,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.sailpost.it/traccia-il-pacco/",
-    "trackingUrlTemplate": "https://www.sailpost.it/traccia-il-pacco/?codice={trackingNumber}"
+    "trackingUrlTemplate": "https://www.sailpost.it/traccia-il-pacco/?codice={trackingNumber}",
+    "helpUrl": "https://www.sailpost.it/contattaci/informazioni-spedizioni/"
   },
   "t-group": {
     "displayName": "Tgroup",
@@ -26372,7 +26502,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.tgroupspa.com/"
+    "trackingSearchUrl": "https://www.tgroupspa.com/",
+    "helpUrl": "https://www.tgroupspa.com/contatti/"
   },
   "best-overnite-express": {
     "displayName": "Best Overnite Express",
@@ -26403,7 +26534,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bestovernite.com/shipment-tracking/"
+    "trackingSearchUrl": "https://www.bestovernite.com/shipment-tracking/",
+    "helpUrl": "https://www.bestovernite.com/contact-us/"
   },
   "estes-forwarding": {
     "displayName": "Estes Forwarding Worldwide",
@@ -26444,7 +26576,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://efwtrack.com/"
+    "trackingSearchUrl": "https://efwtrack.com/",
+    "helpUrl": "https://efwnow.com/services/get-the-efw-experience/"
   },
   "globalpost": {
     "displayName": "GlobalPost",
@@ -26659,7 +26792,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://aj-ex.com/shipment-tracking"
+    "trackingSearchUrl": "https://aj-ex.com/shipment-tracking",
+    "helpUrl": "https://aj-ex.com/help-and-support/contact-us-now"
   },
   "exelot": {
     "displayName": "Exelot",
@@ -26704,7 +26838,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.exelot.com/"
+    "trackingSearchUrl": "https://www.exelot.com/",
+    "helpUrl": "https://www.exelot.com/contact"
   },
   "gtl-goto": {
     "displayName": "GoTo Logistics",
@@ -26766,7 +26901,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kwick-box.com/"
+    "trackingSearchUrl": "https://www.kwick-box.com/",
+    "helpUrl": "https://www.kwick-box.com/en/contactUs/"
   },
   "labaih": {
     "displayName": "LaBaih",
@@ -26834,7 +26970,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://paxel.co/id/lacak-pengiriman"
+    "trackingSearchUrl": "https://paxel.co/id/lacak-pengiriman",
+    "helpUrl": "https://paxel.co/en/help-and-support"
   },
   "pickupp": {
     "displayName": "Pickupp",
@@ -26880,7 +27017,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://hk.pickupp.io/en/tracking"
+    "trackingSearchUrl": "https://hk.pickupp.io/en/tracking",
+    "helpUrl": "https://hk.pickupp.io/en/contact-us"
   },
   "pickupp-sg": {
     "displayName": "Pickupp Singapore",
@@ -26925,7 +27063,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://sg.pickupp.io/en/tracking"
+    "trackingSearchUrl": "https://sg.pickupp.io/en/tracking",
+    "helpUrl": "https://sg.pickupp.io/en/contact"
   },
   "shipblu": {
     "displayName": "ShipBlu",
@@ -26954,7 +27093,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://go.shipblu.com/en/"
+    "trackingSearchUrl": "https://go.shipblu.com/en/",
+    "helpUrl": "https://support.shipblu.com/en"
   },
   "spx-sg": {
     "displayName": "SPX Express Singapore",
@@ -27042,7 +27182,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.starlinks-me.com/tracking"
+    "trackingSearchUrl": "https://www.starlinks-me.com/tracking",
+    "helpUrl": "https://www.starlinks-me.com/support"
   },
   "ab-courier": {
     "displayName": "A&B Courier",
@@ -27082,7 +27223,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://abcourier.com/"
+    "trackingSearchUrl": "https://abcourier.com/",
+    "helpUrl": "https://abcourier.com/Forms/ContactUs.aspx"
   },
   "apple-express": {
     "displayName": "Apple Express",
@@ -27138,7 +27280,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.appleexpress.com/"
+    "trackingSearchUrl": "https://track.appleexpress.com/",
+    "helpUrl": "https://www.appleexpress.com/contact/"
   },
   "fleetoptics": {
     "displayName": "FleetOptics",
@@ -27194,7 +27337,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.fleetopticsinc.com/"
+    "trackingSearchUrl": "https://track.fleetopticsinc.com/",
+    "helpUrl": "https://fleetopticsinc.com/faq/"
   },
   "lightning-express": {
     "displayName": "Lightning Express",
@@ -27224,7 +27368,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.lightningexpressca.com/"
+    "trackingSearchUrl": "https://www.lightningexpressca.com/",
+    "helpUrl": "https://www.lightningexpressca.com/contact.html"
   },
   "straightship": {
     "displayName": "Straightship",
@@ -27348,7 +27493,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.sagawa-sgx.com/sgx/trackeng.asp"
+    "trackingSearchUrl": "https://tracking.sagawa-sgx.com/sgx/trackeng.asp",
+    "helpUrl": "https://www.sgh-globalj.com/support/"
   },
   "yc-delivery": {
     "displayName": "YC Delivery",
@@ -27423,7 +27569,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.copacourier.com/"
+    "trackingSearchUrl": "https://www.copacourier.com/",
+    "helpUrl": "https://www.copacourier.com/AtencionCliente"
   },
   "hound-express": {
     "displayName": "Hound Express",
@@ -27443,7 +27590,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hound-express.com/tracking.html"
+    "trackingSearchUrl": "https://www.hound-express.com/tracking.html",
+    "helpUrl": "https://www.hound-express.com/hx/contactanos/"
   },
   "pdq-chile": {
     "displayName": "PDQ Cargo Trader",
@@ -27477,7 +27625,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.pdq.cl/tracking"
+    "trackingSearchUrl": "https://www.pdq.cl/tracking",
+    "helpUrl": "https://www.pdq.cl/contacto"
   },
   "skyking": {
     "displayName": "SkyKing",
@@ -27509,7 +27658,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://skyking.co/track"
+    "trackingSearchUrl": "https://skyking.co/track",
+    "helpUrl": "https://skyking.co/contact-us"
   },
   "veloces": {
     "displayName": "Veloces",
@@ -27593,7 +27743,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bombinoexp.com/track"
+    "trackingSearchUrl": "https://www.bombinoexp.com/track",
+    "helpUrl": "https://www.bombinoexp.com/contact"
   },
   "icc-worldwide": {
     "displayName": "ICC Worldwide",
@@ -27639,7 +27790,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.iccworld.com/"
+    "trackingSearchUrl": "https://www.iccworld.com/",
+    "helpUrl": "https://www.iccworld.com/contact.html"
   },
   "maruti-air": {
     "displayName": "Maruti Air Couriers & Cargo",
@@ -27745,7 +27897,8 @@ export const CARRIER_CAPABILITIES = {
         "fragment": "^/trackconsignment/([^/?#]+)"
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://mahindralogistics.com/contact-us/"
   },
   "shree-mahavir": {
     "displayName": "Shree Mahavir Express Services",
@@ -27784,7 +27937,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shreemahavircourier.com/"
+    "trackingSearchUrl": "https://www.shreemahavircourier.com/",
+    "helpUrl": "https://www.shreemahavircourier.com/contact-us.aspx"
   },
   "tccs": {
     "displayName": "TCCS",
@@ -27815,7 +27969,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tccs.in/tracking/"
+    "trackingSearchUrl": "https://tccs.in/tracking/",
+    "helpUrl": "https://tccs.in/contact"
   },
   "tej-couriers": {
     "displayName": "Tej Couriers",
@@ -27836,7 +27991,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tejcouriers.com/shipment-tracking.php"
+    "trackingSearchUrl": "https://www.tejcouriers.com/shipment-tracking.php",
+    "helpUrl": "https://www.tejcouriers.com/contact.php"
   },
   "valmo": {
     "displayName": "Valmo",
@@ -27921,7 +28077,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://track.bjshomedelivery.com/"
+    "trackingSearchUrl": "https://track.bjshomedelivery.com/",
+    "helpUrl": "https://www.bjshomedelivery.com/en-gb/help"
   },
   "norsk-global": {
     "displayName": "Norsk Global",
@@ -27955,7 +28112,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://norsk.trackmyparcel.info/"
+    "trackingSearchUrl": "https://norsk.trackmyparcel.info/",
+    "helpUrl": "https://norsk.global/contact/contact-us.html"
   },
   "one-world-express": {
     "displayName": "One World Express",
@@ -27995,7 +28153,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.oneworldexpress.com/tracking"
+    "trackingSearchUrl": "https://www.oneworldexpress.com/tracking",
+    "helpUrl": "https://www.oneworldexpress.com/contact-us"
   },
   "packs": {
     "displayName": "Packs",
@@ -28037,7 +28196,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.packs.nl/track-trace/"
+    "trackingSearchUrl": "https://www.packs.nl/track-trace/",
+    "helpUrl": "https://www.packs.nl/contact/"
   },
   "transmission": {
     "displayName": "TransMission",
@@ -28084,7 +28244,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://api.trans-mission.nl/Search-shipment"
+    "trackingSearchUrl": "https://api.trans-mission.nl/Search-shipment",
+    "helpUrl": "https://www.trans-mission.nl/nl/onze-vestigingen"
   },
   "xlcourier": {
     "displayName": "XLCourier",
@@ -28157,7 +28318,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingUrlTemplate": "https://clientes.cbl-logistica.com/public/consultaenvio.aspx?id={trackingNumber}",
-    "trackingSearchUrl": "https://clientes.cbl-logistica.com/public/consultaenvio.aspx"
+    "trackingSearchUrl": "https://clientes.cbl-logistica.com/public/consultaenvio.aspx",
+    "helpUrl": "https://www.cbl-logistica.com/formulario-de-contacto"
   },
   "connect-couriers": {
     "displayName": "Connect Couriers",
@@ -28191,7 +28353,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.connectcouriers.eu/tracking/"
+    "trackingSearchUrl": "https://www.connectcouriers.eu/tracking/",
+    "helpUrl": "https://www.connectcouriers.eu/contact-us/"
   },
   "dragon-star-curier": {
     "displayName": "Dragon Star Curier",
@@ -28227,7 +28390,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dragonstarcurier.ro/tracking-awb"
+    "trackingSearchUrl": "https://dragonstarcurier.ro/tracking-awb",
+    "helpUrl": "https://dragonstarcurier.ro/contact"
   },
   "fastdrop": {
     "displayName": "Fastdrop",
@@ -28257,7 +28421,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.fastdrop.mt/"
+    "trackingSearchUrl": "https://tracking.fastdrop.mt/",
+    "helpUrl": "https://fastdrop.mt/contact/"
   },
   "inter-courier": {
     "displayName": "Intercourier",
@@ -28339,7 +28504,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://sp.express/tt"
+    "trackingSearchUrl": "https://sp.express/tt",
+    "helpUrl": "https://sp.express/w2/site/contact"
   },
   "tdn": {
     "displayName": "TDN",
@@ -28383,7 +28549,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tdn.es/tracking/"
+    "trackingSearchUrl": "https://www.tdn.es/tracking/",
+    "helpUrl": "https://www.tdn.es/contacto"
   },
   "a-tu-hora-express": {
     "displayName": "A Tu Hora Express",
@@ -28533,7 +28700,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.cstitaliascarl.it/tracking/"
+    "trackingSearchUrl": "https://www.cstitaliascarl.it/tracking/",
+    "helpUrl": "https://www.cstitaliascarl.it/servizio-clienti/"
   },
   "pro-carrier": {
     "displayName": "Pro Carrier",
@@ -28572,7 +28740,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://tracking.weareprocarrier.com/"
+    "trackingSearchUrl": "https://tracking.weareprocarrier.com/",
+    "helpUrl": "https://www.weareprocarrier.com/contact-us"
   },
   "teleship": {
     "displayName": "Teleship",
@@ -28610,7 +28779,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://teleship.com/tracking"
+    "trackingSearchUrl": "https://teleship.com/tracking",
+    "helpUrl": "https://teleship.com/faqs"
   },
   "transaher": {
     "displayName": "Transaher",
@@ -28644,7 +28814,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://transaher.es/"
+    "trackingSearchUrl": "https://transaher.es/",
+    "helpUrl": "https://transaher.es/contacto/"
   },
   "urvaam": {
     "displayName": "Urvaam",
@@ -28714,7 +28885,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.gofo.com/nl/tracking-results/"
+    "trackingSearchUrl": "https://www.gofo.com/nl/tracking-results/",
+    "helpUrl": "https://www.gofo.com/nl/contact-us/"
   },
   "next-level-delivery": {
     "displayName": "Next Level",
@@ -28753,7 +28925,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://nextlevel.delivery/"
+    "trackingSearchUrl": "https://nextlevel.delivery/",
+    "helpUrl": "https://nextlevel.delivery/contacts"
   },
   "tmm-express": {
     "displayName": "TMM Express",
@@ -28787,7 +28960,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ukr.tmm-express.com/en/callback"
+    "trackingSearchUrl": "https://ukr.tmm-express.com/en/callback",
+    "helpUrl": "https://ukr.tmm-express.com/uk/content/kontakty-ukr"
   },
   "j-and-t-middle-east": {
     "displayName": "J&T Express Middle East",
@@ -28863,7 +29037,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hovership.com/track/"
+    "trackingSearchUrl": "https://www.hovership.com/track/",
+    "helpUrl": "https://www.hovership.com/contact/"
   },
   "pdn-express": {
     "displayName": "PDN Express",
@@ -28899,7 +29074,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://pdn.express/en/track/"
+    "trackingSearchUrl": "https://pdn.express/en/track/",
+    "helpUrl": "https://pdn.express/en/support/"
   },
   "x-trac": {
     "displayName": "X-TRAC",
@@ -28925,7 +29101,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.xtrac-express.com/tracking"
+    "trackingSearchUrl": "https://www.xtrac-express.com/tracking",
+    "helpUrl": "https://www.xtrac-express.com/contact"
   },
   "big-smart": {
     "displayName": "Big Smart",
@@ -28990,7 +29167,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.evdemolojistik.com/takip"
+    "trackingSearchUrl": "https://www.evdemolojistik.com/takip",
+    "helpUrl": "https://www.evdemolojistik.com/iletisim"
   },
   "gta-airskip": {
     "displayName": "GTA AirSkip",
@@ -29031,7 +29209,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://gtaairskip.com/tracking/"
+    "trackingSearchUrl": "https://gtaairskip.com/tracking/",
+    "helpUrl": "https://gtaairskip.com/contact/"
   },
   "nova-global": {
     "displayName": "Nova Global",
@@ -29116,7 +29295,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://proships.com/tracking/"
+    "trackingSearchUrl": "https://proships.com/tracking/",
+    "helpUrl": "https://proships.com/ayuda/"
   },
   "pts-worldwide-express": {
     "displayName": "PTS Worldwide Express",
@@ -29155,7 +29335,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://wp.pts.net/gonderi-takip",
-    "trackingUrlTemplate": "https://tracking.pts.net/{trackingNumber}"
+    "trackingUrlTemplate": "https://tracking.pts.net/{trackingNumber}",
+    "helpUrl": "https://wp.pts.net/iletisim/destek"
   },
   "shipentegra": {
     "displayName": "ShipEntegra",
@@ -29191,7 +29372,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.shipentegra.com/"
+    "trackingSearchUrl": "https://track.shipentegra.com/",
+    "helpUrl": "https://www.shipentegra.com/iletisim"
   },
   "bringer-parcel": {
     "displayName": "Bringer Parcel Xpress",
@@ -29227,7 +29409,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.bringerparcel.com/tracking"
+    "trackingSearchUrl": "https://www.bringerparcel.com/tracking",
+    "helpUrl": "https://www.bringerparcel.com/help"
   },
   "domain-logistics": {
     "displayName": "Domain Logistics",
@@ -29257,7 +29440,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://domainlogistics.ca/tracking/"
+    "trackingSearchUrl": "https://domainlogistics.ca/tracking/",
+    "helpUrl": "https://domainlogistics.ca/contact/"
   },
   "fleetex": {
     "displayName": "FleetExpress",
@@ -29343,7 +29527,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://post.plus/"
+    "trackingSearchUrl": "https://post.plus/",
+    "helpUrl": "https://post.plus/contact"
   },
   "4sides": {
     "displayName": "4Sides",
@@ -29377,7 +29562,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://4sides.ru/tracking"
+    "trackingSearchUrl": "https://4sides.ru/tracking",
+    "helpUrl": "https://4sides.ru/contacts"
   },
   "dobropost": {
     "displayName": "DobroPost",
@@ -29454,7 +29640,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://flippost.com/instruments/online/"
+    "trackingSearchUrl": "https://flippost.com/instruments/online/",
+    "helpUrl": "https://flippost.com/about/coordinates/"
   },
   "jet-logistic": {
     "displayName": "Jet Logistic",
@@ -29479,7 +29666,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jetlogistic.kz/"
+    "trackingSearchUrl": "https://jetlogistic.kz/",
+    "helpUrl": "https://jetlogistic.kz/%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B.html"
   },
   "l-post": {
     "displayName": "L-POST",
@@ -29518,7 +29706,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://l-post.ru/tracking"
+    "trackingSearchUrl": "https://l-post.ru/tracking",
+    "helpUrl": "https://l-post.ru/support"
   },
   "mongol-infinity-post": {
     "displayName": "Mongol Infinity Post",
@@ -29541,7 +29730,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mypost.mn/"
+    "trackingSearchUrl": "https://mypost.mn/",
+    "helpUrl": "https://mypost.mn/contact"
   },
   "peqasus-az": {
     "displayName": "Peqasus",
@@ -29611,7 +29801,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://starexglobal.com/az/"
+    "trackingSearchUrl": "https://starexglobal.com/az/",
+    "helpUrl": "https://starexglobal.com/az/contact"
   },
   "vestovoy": {
     "displayName": "Vestovoy",
@@ -29631,7 +29822,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://vestovoi.ru/monitoring_dostavki/"
+    "trackingSearchUrl": "https://vestovoi.ru/monitoring_dostavki/",
+    "helpUrl": "https://vestovoi.ru/kontakti/"
   },
   "air-star-xpress": {
     "displayName": "Air Star Xpress",
@@ -29652,7 +29844,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://authorcodesoftware.in/airstarxpresscourier/newmastertracking.aspx"
+    "trackingSearchUrl": "https://authorcodesoftware.in/airstarxpresscourier/newmastertracking.aspx",
+    "helpUrl": "https://www.airstarxpress.com/Home/contact"
   },
   "c3x": {
     "displayName": "C3X",
@@ -29673,7 +29866,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://c3xpress.com/"
+    "trackingSearchUrl": "https://c3xpress.com/",
+    "helpUrl": "https://c3xpress.com/Contact"
   },
   "eco-express-ae": {
     "displayName": "Eco Express",
@@ -29701,7 +29895,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.ecofreight.ae/en/tracking"
+    "trackingSearchUrl": "https://app.ecofreight.ae/en/tracking",
+    "helpUrl": "https://ecofreight.ae/contact.php"
   },
   "first-fly-express": {
     "displayName": "First Fly Express",
@@ -29717,7 +29912,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://firstflyexpress.com/track.asp"
+    "trackingSearchUrl": "https://firstflyexpress.com/track.asp",
+    "helpUrl": "https://firstflyexpress.com/cntactus.html"
   },
   "flyking": {
     "displayName": "Flyking Courier Services",
@@ -29801,7 +29997,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.grandslamexpress.in/Web/Track"
+    "trackingSearchUrl": "https://www.grandslamexpress.in/Web/Track",
+    "helpUrl": "https://www.grandslamexpress.in/contact"
   },
   "jetline-couriers": {
     "displayName": "Jetline Couriers",
@@ -29822,7 +30019,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jetlinecouriers.in/"
+    "trackingSearchUrl": "https://www.jetlinecouriers.in/",
+    "helpUrl": "https://www.jetlinecouriers.in/customercare.aspx"
   },
   "logistiq": {
     "displayName": "Logistiq",
@@ -29849,7 +30047,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://logistiq.io/track/"
+    "trackingSearchUrl": "https://logistiq.io/track/",
+    "helpUrl": "https://logistiq.io/contact-us/"
   },
   "pavan-courier": {
     "displayName": "Pavan Courier Service",
@@ -29890,7 +30089,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pavancourierservice.com/Home/Tracking"
+    "trackingSearchUrl": "https://pavancourierservice.com/Home/Tracking",
+    "helpUrl": "https://pavancourierservice.com/Home/Contact"
   },
   "quicksilver-sa": {
     "displayName": "Quicksilver",
@@ -29937,7 +30137,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://quick-silver.express/Tracking"
+    "trackingSearchUrl": "https://quick-silver.express/Tracking",
+    "helpUrl": "https://quick-silver.express/ContactUs"
   },
   "sahara-express": {
     "displayName": "Sahara Express",
@@ -29979,7 +30180,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://saharaexpress.com/"
+    "trackingSearchUrl": "https://saharaexpress.com/",
+    "helpUrl": "https://saharaexpress.com/contact.php"
   },
   "shree-mahabali-express": {
     "displayName": "Shree Mahabali Express",
@@ -30044,7 +30246,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://skyexpressinternational.com/Home/Tracking"
+    "trackingSearchUrl": "https://skyexpressinternational.com/Home/Tracking",
+    "helpUrl": "https://skyexpressinternational.com/Home/Contact"
   },
   "speed-and-safe": {
     "displayName": "Gokulam Speed & Safe",
@@ -30096,7 +30299,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://teamexpressme.com/tracking"
+    "trackingSearchUrl": "https://teamexpressme.com/tracking",
+    "helpUrl": "https://teamexpressme.com/contact"
   },
   "tfm-express": {
     "displayName": "TFM Express",
@@ -30128,7 +30332,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://customer.tfmex.com/Skybill/TrackSkybill",
-    "trackingUrlTemplate": "https://customer.tfmex.com/Skybill/TrackSkybill?awb={trackingNumber}"
+    "trackingUrlTemplate": "https://customer.tfmex.com/Skybill/TrackSkybill?awb={trackingNumber}",
+    "helpUrl": "https://tfmex.com/contact-us/"
   },
   "transcorp": {
     "displayName": "Transcorp",
@@ -30177,7 +30382,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.elite-co.com/shipments/track"
+    "trackingSearchUrl": "https://app.elite-co.com/shipments/track",
+    "helpUrl": "https://transcorp-intl.com/contact-us/"
   },
   "atlantic-courier": {
     "displayName": "Atlantic International Express",
@@ -30215,7 +30421,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://atlanticcourier.net/track/"
+    "trackingSearchUrl": "https://atlanticcourier.net/track/",
+    "helpUrl": "https://atlanticcourier.net/contact/"
   },
   "daily-xpress": {
     "displayName": "Daily Xpress",
@@ -30247,7 +30454,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dailyxpress.in/"
+    "trackingSearchUrl": "https://www.dailyxpress.in/",
+    "helpUrl": "https://www.dailyxpress.in/contact.php"
   },
   "dnx-cargo": {
     "displayName": "DNX Cargo",
@@ -30266,7 +30474,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dnxerp.in/NewPages/Tracking/Website_Tracking_New.aspx"
+    "trackingSearchUrl": "https://dnxerp.in/NewPages/Tracking/Website_Tracking_New.aspx",
+    "helpUrl": "https://dnxindia.com/contact/"
   },
   "gms-worldwide": {
     "displayName": "GMS Worldwide Express",
@@ -30300,7 +30509,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.gmsworldwide.com/"
+    "trackingSearchUrl": "https://www.gmsworldwide.com/",
+    "helpUrl": "https://www.gmsworldwide.com/contact-us/"
   },
   "icl-express": {
     "displayName": "ICL Express",
@@ -30332,7 +30542,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://iclexpress.in/tracking/"
+    "trackingSearchUrl": "https://iclexpress.in/tracking/",
+    "helpUrl": "https://iclexpress.in/contact/"
   },
   "ocs-ana": {
     "displayName": "OCS ANA Group",
@@ -30375,7 +30586,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://webcsw.ocs.co.jp/csw/ECSWG0201R00003P.do"
+    "trackingSearchUrl": "https://webcsw.ocs.co.jp/csw/ECSWG0201R00003P.do",
+    "helpUrl": "https://www.ocs.co.jp/contact"
   },
   "pushpak-courier": {
     "displayName": "Pushpak Courier",
@@ -30395,7 +30607,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pushpakcourier.net/query.php"
+    "trackingSearchUrl": "https://pushpakcourier.net/query.php",
+    "helpUrl": "https://pushpakcourier.net/contact-us.html"
   },
   "united-worldwide-couriers": {
     "displayName": "United Worldwide Couriers",
@@ -30425,7 +30638,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.unitedcouriers.biz/tracking"
+    "trackingSearchUrl": "https://www.unitedcouriers.biz/tracking",
+    "helpUrl": "https://unitedcouriers.biz/contact-us"
   },
   "airpak-express": {
     "displayName": "Airpak Express",
@@ -30583,7 +30797,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://indahonline.com/tracking/cek-resi"
+    "trackingSearchUrl": "https://indahonline.com/tracking/cek-resi",
+    "helpUrl": "https://indahonline.com/company/contact"
   },
   "makati-express": {
     "displayName": "Makati Express Cargo",
@@ -30649,7 +30864,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://netpost.vn/Home/tra_cuu_van_don"
+    "trackingSearchUrl": "https://netpost.vn/Home/tra_cuu_van_don",
+    "helpUrl": "https://netpost.vn/Lien_He"
   },
   "pandu-logistics": {
     "displayName": "Pandu Logistics",
@@ -30672,7 +30888,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pandulogistics.com/track/"
+    "trackingSearchUrl": "https://pandulogistics.com/track/",
+    "helpUrl": "https://pandulogistics.com/contact/"
   },
   "pcp-express": {
     "displayName": "PCP Express",
@@ -30706,7 +30923,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.pcpexpress.com/"
+    "trackingSearchUrl": "https://www.pcpexpress.com/",
+    "helpUrl": "https://www.pcpexpress.com/hubungi"
   },
   "pcs-logistics-vn": {
     "displayName": "PCS Logistics",
@@ -30739,7 +30957,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pcs-logistics.com/en/track-trace"
+    "trackingSearchUrl": "https://pcs-logistics.com/en/track-trace",
+    "helpUrl": "https://pcs-logistics.com/en/contact"
   },
   "royal-express-mm": {
     "displayName": "Royal Express Myanmar",
@@ -30756,7 +30975,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://royalx.net/tracking"
+    "trackingSearchUrl": "https://royalx.net/tracking",
+    "helpUrl": "https://royalx.net/contact-us"
   },
   "rr-express-sg": {
     "displayName": "RR Express",
@@ -30778,7 +30998,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://tracking.frontierforce.com/tracking.aspx?cn={trackingNumber}&stid=rr",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.rrexpress.com.sg/tracking.aspx"
+    "trackingSearchUrl": "https://www.rrexpress.com.sg/tracking.aspx",
+    "helpUrl": "https://www.rrexpress.com.sg/contacts.aspx"
   },
   "tp-logistics-th": {
     "displayName": "TP Logistics",
@@ -30821,7 +31042,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://tptrack.info/ecom/dtrack.php"
+    "trackingSearchUrl": "https://tptrack.info/ecom/dtrack.php",
+    "helpUrl": "https://thaiparcels.com/contact/"
   },
   "aci-express-kr": {
     "displayName": "ACI Express",
@@ -30910,7 +31132,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aciexpress.net/delivery/"
+    "trackingSearchUrl": "https://www.aciexpress.net/delivery/",
+    "helpUrl": "https://www.aciexpress.net/customer/board_list.html"
   },
   "eparcel-kr": {
     "displayName": "eParcel Korea",
@@ -31060,7 +31283,8 @@ export const CARRIER_CAPABILITIES = {
         "query": "(?:^|&)cd=81118&id=02116&number01=(\\d{12})(?:&|$)"
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://lastonemile.org/contact-informations/"
   },
   "today-kr": {
     "displayName": "To-Day",
@@ -31091,7 +31315,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.amazing.today/track"
+    "trackingSearchUrl": "https://my.amazing.today/track",
+    "helpUrl": "https://amazing.today/help"
   },
   "winion-logis": {
     "displayName": "WINION LOGIS",
@@ -31134,7 +31359,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://winionlogistics.com/home.html"
+    "trackingSearchUrl": "https://winionlogistics.com/home.html",
+    "helpUrl": "https://winionlogistics.com/pages/cs/counsel.html"
   },
   "dpex": {
     "displayName": "DPEX Worldwide",
@@ -31197,7 +31423,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dpex.com/track-and-trace/"
+    "trackingSearchUrl": "https://dpex.com/track-and-trace/",
+    "helpUrl": "https://dpex.com/contact/"
   },
   "fliway": {
     "displayName": "Fliway",
@@ -31234,7 +31461,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.fliway.com/"
+    "trackingSearchUrl": "https://www.fliway.com/",
+    "helpUrl": "https://www.fliway.com/services/contact-support"
   },
   "morning-global": {
     "displayName": "Morning Global",
@@ -31314,7 +31542,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.mrlglobal.com/tracking/"
+    "trackingSearchUrl": "https://www.mrlglobal.com/tracking/",
+    "helpUrl": "https://www.mrlglobal.com/contact-us/"
   },
   "montenegro-post": {
     "displayName": "Pošta Crne Gore",
@@ -31392,7 +31621,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://tracking.rpxonline.com/"
+    "trackingSearchUrl": "https://tracking.rpxonline.com/",
+    "helpUrl": "https://www.rpxonline.com/network/"
   },
   "vitran-express": {
     "displayName": "Vitran Express",
@@ -31461,7 +31691,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.amtrucking.com/tracking.php"
+    "trackingSearchUrl": "https://www.amtrucking.com/tracking.php",
+    "helpUrl": "https://www.amtrucking.com/contact.php"
   },
   "american-west-express": {
     "displayName": "American West",
@@ -31492,7 +31723,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://awest.freightgate.com/awestTrack.html"
+    "trackingSearchUrl": "https://awest.freightgate.com/awestTrack.html",
+    "helpUrl": "https://www.awest.com/contact-us/"
   },
   "ccfs": {
     "displayName": "CrossCountry Freight Solutions",
@@ -31522,7 +31754,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://auth.ccfs.com/track/search"
+    "trackingSearchUrl": "https://auth.ccfs.com/track/search",
+    "helpUrl": "https://www.ccfs.com/contact.html"
   },
   "custom-companies": {
     "displayName": "The Custom Companies",
@@ -31562,7 +31795,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.customco.com/"
+    "trackingSearchUrl": "https://www.customco.com/",
+    "helpUrl": "https://www.customco.com/contact/"
   },
   "hercules-freight": {
     "displayName": "Hercules Freight",
@@ -31598,7 +31832,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://herculesfreight.com/Forms/TrackShipment"
+    "trackingSearchUrl": "https://herculesfreight.com/Forms/TrackShipment",
+    "helpUrl": "https://herculesfreight.com/Pages/ContactUs"
   },
   "gaash": {
     "displayName": "GAASH Worldwide",
@@ -31633,7 +31868,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gaashwd.com/track-parcel/"
+    "trackingSearchUrl": "https://gaashwd.com/track-parcel/",
+    "helpUrl": "https://gaashwd.com/contact-us/"
   },
   "orian": {
     "displayName": "Orian",
@@ -31677,7 +31913,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking-ecom.orian.com/CargoTracking/public-tracking/search"
+    "trackingSearchUrl": "https://tracking-ecom.orian.com/CargoTracking/public-tracking/search",
+    "helpUrl": "https://www.orian.com/menu/TopMenu/%D7%A6%D7%95%D7%A8-%D7%A7%D7%A9%D7%A8/"
   },
   "fedex-freight": {
     "displayName": "FedEx Freight",
@@ -31742,7 +31979,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fastrak.aitworldwide.com/"
+    "trackingSearchUrl": "https://fastrak.aitworldwide.com/",
+    "helpUrl": "https://www.aitworldwide.com/contact-us/"
   },
   "qwintry": {
     "displayName": "Qwintry",
@@ -31780,7 +32018,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://logistics.qwintry.com/"
+    "trackingSearchUrl": "https://logistics.qwintry.com/",
+    "helpUrl": "https://logistics.qwintry.com/contact"
   },
   "skypostal": {
     "displayName": "SkyPostal",
@@ -31870,7 +32109,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.teamww.com/tracking/team-trac/"
+    "trackingSearchUrl": "https://www.teamww.com/tracking/team-trac/",
+    "helpUrl": "https://www.teamww.com/company/contact/"
   },
   "dpd-ro": {
     "displayName": "DPD Romania",
@@ -32085,7 +32325,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://tracking.jumppoint.io/"
+    "trackingSearchUrl": "https://tracking.jumppoint.io/",
+    "helpUrl": "https://www.jumppoint.io/contact-us"
   },
   "ycs-logistics": {
     "displayName": "YCS Logistics",
@@ -32949,7 +33190,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://receiver.castleparcels.co.nz/"
+    "trackingSearchUrl": "https://receiver.castleparcels.co.nz/",
+    "helpUrl": "https://posthaste.co.nz/about-us/contact/"
   },
   "now-couriers": {
     "displayName": "Now Couriers",
@@ -33016,7 +33258,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://receiver.nowcouriers.co.nz/"
+    "trackingSearchUrl": "https://receiver.nowcouriers.co.nz/",
+    "helpUrl": "https://nowcouriers.co.nz/contact/"
   },
   "intel-valley": {
     "displayName": "Intel-Valley",
@@ -33298,7 +33541,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.tusklogistics.com/track-your-shipment"
+    "trackingSearchUrl": "https://www.tusklogistics.com/track-your-shipment",
+    "helpUrl": "https://www.tusklogistics.com/help-desk"
   },
   "gofo-ca": {
     "displayName": "GOFO Canada",
@@ -33403,7 +33647,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yfhex.com/"
+    "trackingSearchUrl": "https://www.yfhex.com/",
+    "helpUrl": "https://www.yfhex.com/tsjy/"
   },
   "eushipments": {
     "displayName": "euShipments",
@@ -33427,7 +33672,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://eushipments.com/tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://eushipments.com/tracking"
+    "trackingSearchUrl": "https://eushipments.com/tracking",
+    "helpUrl": "https://eushipments.com/contact"
   },
   "no-limit": {
     "displayName": "No Limit",
@@ -33453,7 +33699,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://follow.nolimit.pl/"
+    "trackingSearchUrl": "https://follow.nolimit.pl/",
+    "helpUrl": "https://nolimit.pl/kontakt"
   },
   "starlinks-global": {
     "displayName": "Starlinks Global",
@@ -33532,7 +33779,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://timelytitan.com/tracking.html"
+    "trackingSearchUrl": "https://timelytitan.com/tracking.html",
+    "helpUrl": "https://timelytitan.com/contact.html"
   },
   "boxtal": {
     "displayName": "Boxtal",
@@ -33570,7 +33818,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://shipping.boxtal.com/fr/fr/suivi/suivre-mon-envoi"
+    "trackingSearchUrl": "https://shipping.boxtal.com/fr/fr/suivi/suivre-mon-envoi",
+    "helpUrl": "https://help.boxtal.com/fr/fr/"
   },
   "e-commerce-international": {
     "displayName": "E-Commerce International",
@@ -33766,7 +34015,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://dealer-send.com/en-US/track-my-shipment"
+    "trackingSearchUrl": "https://dealer-send.com/en-US/track-my-shipment",
+    "helpUrl": "https://dealer-send.com/en-US/contact"
   },
   "express-one-bg": {
     "displayName": "Express One Bulgaria",
@@ -33996,7 +34246,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.viadireta.pt/pt/tracking"
+    "trackingSearchUrl": "https://www.viadireta.pt/pt/tracking",
+    "helpUrl": "https://www.viadireta.pt/pt/contactos"
   },
   "meso-global": {
     "displayName": "Meso-global",
@@ -34142,7 +34393,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://fastbox.co.kr/en/"
+    "trackingSearchUrl": "https://fastbox.co.kr/en/",
+    "helpUrl": "https://fastbox.co.kr/en/introduction/contact.php"
   },
   "cheetah-delivery": {
     "displayName": "Cheetah Delivery",
@@ -34161,7 +34413,8 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://chitadelivery.co.il/%D7%A6%D7%A8%D7%95-%D7%A7%D7%A9%D7%A8-%D7%97%D7%93%D7%A9/"
   },
   "flyt-express": {
     "displayName": "Flyt Express",
@@ -34182,7 +34435,8 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://www.flytexpress.com/Home/Content?id=3a1341cb-42dd-e075-3b62-555dea451b2d&item=ContactUs&language=0"
   },
   "hfd": {
     "displayName": "HFD",
@@ -34422,7 +34676,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.dd.express/"
+    "trackingSearchUrl": "https://tracking.dd.express/",
+    "helpUrl": "https://dd.express/contact/"
   },
   "famafutar": {
     "displayName": "FámaFutár",
@@ -34457,7 +34712,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://famafutar.hu/tracking/"
+    "trackingSearchUrl": "https://famafutar.hu/tracking/",
+    "helpUrl": "https://famafutar.hu/kapcsolat/"
   },
   "first-flight-me": {
     "displayName": "First Flight (Middle East)",
@@ -34488,7 +34744,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://firstflightme.com/"
+    "trackingSearchUrl": "https://firstflightme.com/",
+    "helpUrl": "https://firstflightme.com/contactus"
   },
   "polonez": {
     "displayName": "Polonez",
@@ -34517,7 +34774,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://polonez.express/us-en/parcel-track"
+    "trackingSearchUrl": "https://polonez.express/us-en/parcel-track",
+    "helpUrl": "https://polonez.express/us-en/contact"
   },
   "post-one": {
     "displayName": "Post One",
@@ -34561,7 +34819,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://postone.eu/en/products/view/track"
+    "trackingSearchUrl": "https://postone.eu/en/products/view/track",
+    "helpUrl": "https://postone.eu/en/contact-us"
   },
   "tas-courier": {
     "displayName": "TAS Courier",
@@ -34594,7 +34853,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tascourier.gr/track"
+    "trackingSearchUrl": "https://www.tascourier.gr/track",
+    "helpUrl": "https://www.tascourier.gr/contact"
   },
   "wedo": {
     "displayName": "One by Allegro CZ",
@@ -34685,7 +34945,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yamatoamerica.com/tracking/"
+    "trackingSearchUrl": "https://www.yamatoamerica.com/tracking/",
+    "helpUrl": "https://www.yamatoamerica.com/contact/"
   },
   "boyuan": {
     "displayName": "Boyuan Supply Chain",
@@ -34723,7 +34984,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.boyuangyl.com/"
+    "trackingSearchUrl": "https://www.boyuangyl.com/",
+    "helpUrl": "https://www.boyuangyl.com/lianxiwomen/"
   },
   "asigna": {
     "displayName": "Asigna",
@@ -34780,7 +35042,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://logistics.costco.com/tracking"
+    "trackingSearchUrl": "https://logistics.costco.com/tracking",
+    "helpUrl": "https://customerservice.costco.com/"
   },
   "emex": {
     "displayName": "EMEX",
@@ -34815,7 +35078,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.emex.kz/otslezhivanie-po-kazahstanu"
+    "trackingSearchUrl": "https://www.emex.kz/otslezhivanie-po-kazahstanu",
+    "helpUrl": "https://www.emex.kz/about/contacts"
   },
   "interlogistica": {
     "displayName": "Interlogistica",
@@ -34837,7 +35101,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.interlogistica.bg/"
+    "trackingSearchUrl": "https://tracking.interlogistica.bg/",
+    "helpUrl": "https://www.interlogistica.bg/bg/contacts/"
   },
   "intime-bg": {
     "displayName": "In Time Bulgaria",
@@ -34878,7 +35143,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intime.bg/tracking/"
+    "trackingSearchUrl": "https://intime.bg/tracking/",
+    "helpUrl": "https://intime.bg/contacts/"
   },
   "pflogistics": {
     "displayName": "Parcel Freight Logistics",
@@ -34918,7 +35184,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://pflogistics.com.au/tracking"
+    "trackingSearchUrl": "https://pflogistics.com.au/tracking",
+    "helpUrl": "https://pflogistics.com.au/contact"
   },
   "quality-post": {
     "displayName": "Quality Post",
@@ -34959,7 +35226,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.qualitypost.com.mx/"
+    "trackingSearchUrl": "https://www.qualitypost.com.mx/",
+    "helpUrl": "https://www.qualitypost.com.mx/contactanos"
   },
   "runner-express": {
     "displayName": "Runner Express",
@@ -34992,7 +35260,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://runnerexpress.co.il/track/"
+    "trackingSearchUrl": "https://runnerexpress.co.il/track/",
+    "helpUrl": "https://runnerexpress.co.il/contact/"
   },
   "rxo": {
     "displayName": "RXO",
@@ -35028,7 +35297,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.rxo.com/"
+    "trackingSearchUrl": "https://track.rxo.com/",
+    "helpUrl": "https://rxo.com/contact-us/"
   },
   "3pe-express": {
     "displayName": "3PE Express",
@@ -35050,7 +35320,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.3peex.com/tracking.html"
+    "trackingSearchUrl": "https://www.3peex.com/tracking.html",
+    "helpUrl": "https://www.3peex.com/contact.html"
   },
   "ait-home-delivery": {
     "displayName": "AIT Home Delivery",
@@ -35074,7 +35345,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aithomedelivery.com/en-gb/"
+    "trackingSearchUrl": "https://aithomedelivery.com/en-gb/",
+    "helpUrl": "https://aithomedelivery.com/en-gb/contact-us/"
   },
   "ambro-express": {
     "displayName": "Ambro Express",
@@ -35109,7 +35381,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ambroexpress.pl/sledzenie-przesylek"
+    "trackingSearchUrl": "https://ambroexpress.pl/sledzenie-przesylek",
+    "helpUrl": "https://ambroexpress.pl/kontakt"
   },
   "ameriship": {
     "displayName": "AmeriShip",
@@ -35154,7 +35427,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ameriship.com/track/"
+    "trackingSearchUrl": "https://ameriship.com/track/",
+    "helpUrl": "https://ameriship.com/contact/"
   },
   "cargoline": {
     "displayName": "CargoLine",
@@ -35185,7 +35459,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trackandtrace.cepra.de/Track"
+    "trackingSearchUrl": "https://trackandtrace.cepra.de/Track",
+    "helpUrl": "https://www.cargoline.de/kontakt/"
   },
   "city-air-express": {
     "displayName": "City Air Express",
@@ -35225,7 +35500,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.cityairexpress.com/track-my-parcel"
+    "trackingSearchUrl": "https://www.cityairexpress.com/track-my-parcel",
+    "helpUrl": "https://www.cityairexpress.com/contact"
   },
   "gio-express": {
     "displayName": "GIO Express",
@@ -35258,7 +35534,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gioexpress.com/tracking/"
+    "trackingSearchUrl": "https://gioexpress.com/tracking/",
+    "helpUrl": "https://gioexpress.com/contact/"
   },
   "jp-home": {
     "displayName": "JP HOME",
@@ -35305,7 +35582,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jphome.eu/suivi-de-livraison/"
+    "trackingSearchUrl": "https://jphome.eu/suivi-de-livraison/",
+    "helpUrl": "https://jphome.eu/faq-consommateur/"
   },
   "overnite": {
     "displayName": "OVERNITE",
@@ -35423,7 +35701,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://avislogistics.kz/"
+    "trackingSearchUrl": "https://avislogistics.kz/",
+    "helpUrl": "https://avislogistics.kz/pages/contacts/"
   },
   "dakota-cargo": {
     "displayName": "Dakota Cargo",
@@ -35452,7 +35731,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://dakotacargo.co.id/#lacak-kiriman"
+    "trackingSearchUrl": "https://dakotacargo.co.id/#lacak-kiriman",
+    "helpUrl": "https://dakotacargo.co.id/hubungi-kami.html"
   },
   "depo": {
     "displayName": "Depo",
@@ -35485,7 +35765,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://depo.sk/sledovanie-zasielky/"
+    "trackingSearchUrl": "https://depo.sk/sledovanie-zasielky/",
+    "helpUrl": "https://depo.sk/faq/"
   },
   "e-cargo": {
     "displayName": "e-Cargo",
@@ -35517,7 +35798,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.e-cargo.co.il/CargoTracking/public-tracking/search"
+    "trackingSearchUrl": "https://tracking.e-cargo.co.il/CargoTracking/public-tracking/search",
+    "helpUrl": "https://e-cargo.co.il/contact/"
   },
   "instapack": {
     "displayName": "Instapack",
@@ -35573,7 +35855,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://tracking.obibox.io/"
+    "trackingSearchUrl": "https://tracking.obibox.io/",
+    "helpUrl": "https://obibox.co/faq/"
   },
   "sentral-cargo": {
     "displayName": "Sentral Cargo",
@@ -35605,7 +35888,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sentralcargo.co.id/"
+    "trackingSearchUrl": "https://sentralcargo.co.id/",
+    "helpUrl": "https://sentralcargo.co.id/hubungi-kami"
   },
   "sengi-express": {
     "displayName": "Sengi Express",
@@ -35670,7 +35954,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.acelogistics.eu/lt/en/service/cargo-tracking/"
+    "trackingSearchUrl": "https://www.acelogistics.eu/lt/en/service/cargo-tracking/",
+    "helpUrl": "https://www.acelogistics.eu/lt/en/contacts/"
   },
   "ace-lv": {
     "displayName": "ACE Logistics Latvia",
@@ -35701,7 +35986,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.acelogistics.eu/lv/en/service/cargo-tracking/"
+    "trackingSearchUrl": "https://www.acelogistics.eu/lv/en/service/cargo-tracking/",
+    "helpUrl": "https://www.acelogistics.eu/lv/en/contacts/"
   },
   "airmee": {
     "displayName": "Airmee",
@@ -35757,7 +36043,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gapakisexpress.com/track-your-packages/"
+    "trackingSearchUrl": "https://gapakisexpress.com/track-your-packages/",
+    "helpUrl": "https://gapakisexpress.com/contact-us/"
   },
   "collicare": {
     "displayName": "ColliCare",
@@ -35801,7 +36088,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.collicare.no/kundeservice/sporing"
+    "trackingSearchUrl": "https://www.collicare.no/kundeservice/sporing",
+    "helpUrl": "https://www.collicare.no/kundeservice/kontakt-oss"
   },
   "fofr": {
     "displayName": "FOFR",
@@ -35835,7 +36123,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://objednavky.fofrcz.cz/sledovani-zasilek-fofr"
+    "trackingSearchUrl": "https://objednavky.fofrcz.cz/sledovani-zasilek-fofr",
+    "helpUrl": "https://www.fofrcz.cz/kontakt"
   },
   "islandwide-express": {
     "displayName": "Islandwide Express",
@@ -35870,7 +36159,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.islandwide.com/tracking"
+    "trackingSearchUrl": "https://www.islandwide.com/tracking",
+    "helpUrl": "https://www.islandwide.com/contact"
   },
   "kuayue-express": {
     "displayName": "Kuayue Express",
@@ -35930,7 +36220,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.ky-express.com/88.html"
+    "trackingSearchUrl": "https://www.ky-express.com/88.html",
+    "helpUrl": "https://www.ky-express.com/101.html"
   },
   "pallex": {
     "displayName": "Pall-Ex",
@@ -35960,7 +36251,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mynexus.pallex.com/tracking"
+    "trackingSearchUrl": "https://mynexus.pallex.com/tracking",
+    "helpUrl": "https://www.pallex.com/contact-us"
   },
   "piggy-express": {
     "displayName": "Piggy Express",
@@ -36004,7 +36296,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://piggyexp.com/track"
+    "trackingSearchUrl": "https://piggyexp.com/track",
+    "helpUrl": "https://piggyexp.com/contact"
   },
   "trans-ontario": {
     "displayName": "Trans-Ontario Express",
@@ -36026,7 +36319,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trace.transontario.com/"
+    "trackingSearchUrl": "https://trace.transontario.com/",
+    "helpUrl": "https://trans-ontario.com/contact-us/"
   },
   "western-bid": {
     "displayName": "Western Bid",
@@ -36069,7 +36363,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://track.westparcel.com/"
+    "trackingSearchUrl": "https://track.westparcel.com/",
+    "helpUrl": "https://westparcel.com/contacts"
   },
   "cargobus": {
     "displayName": "Cargobus",
@@ -36105,7 +36400,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargobusee.opter.cloud/tt"
+    "trackingSearchUrl": "https://cargobusee.opter.cloud/tt",
+    "helpUrl": "https://cargobus.ee/kontakt/"
   },
   "hrx": {
     "displayName": "HRX",
@@ -36145,7 +36441,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hrx.lv/en/track-trace/"
+    "trackingSearchUrl": "https://www.hrx.lv/en/track-trace/",
+    "helpUrl": "https://www.hrx.lv/en/kontakti/"
   },
   "jetpak": {
     "displayName": "Jetpak",
@@ -36210,7 +36507,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.okaken.co.jp/refer/"
+    "trackingSearchUrl": "https://www.okaken.co.jp/refer/",
+    "helpUrl": "https://www.okaken.co.jp/inquiry/"
   },
   "rozetka-delivery": {
     "displayName": "ROZETKA Delivery",
@@ -36275,7 +36573,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.savarexpress.com.pe/rastrea-un-envio/"
+    "trackingSearchUrl": "https://www.savarexpress.com.pe/rastrea-un-envio/",
+    "helpUrl": "https://www.savarexpress.com.pe/contactanos/"
   },
   "tonami": {
     "displayName": "Tonami Transportation",
@@ -36377,7 +36676,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xgsi.com/"
+    "trackingSearchUrl": "https://www.xgsi.com/",
+    "helpUrl": "https://www.xgsi.com/about-xgs/contact-us/"
   },
   "airroad": {
     "displayName": "AirRoad",
@@ -36401,7 +36701,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.airroad.com.au/quick-track/"
+    "trackingSearchUrl": "https://www.airroad.com.au/quick-track/",
+    "helpUrl": "https://www.airroad.com.au/support/"
   },
   "ats-healthcare": {
     "displayName": "ATS Healthcare",
@@ -36436,7 +36737,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.atshealthcare.ca/ShipTracking-en"
+    "trackingSearchUrl": "https://www.atshealthcare.ca/ShipTracking-en",
+    "helpUrl": "https://www.atshealthcare.ca/contact"
   },
   "centurion-transport": {
     "displayName": "Centurion",
@@ -36492,7 +36794,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cope.com.au/"
+    "trackingSearchUrl": "https://www.cope.com.au/",
+    "helpUrl": "https://www.cope.com.au/contact-us"
   },
   "inter-express-logistics": {
     "displayName": "Inter Express Logistics",
@@ -36532,7 +36835,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://iel.co.th/tracking/"
+    "trackingSearchUrl": "https://iel.co.th/tracking/",
+    "helpUrl": "https://iel.co.th/contact-us/"
   },
   "kiwi-express": {
     "displayName": "Kiwi Express",
@@ -36562,7 +36866,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kiwiexpress.co.nz/"
+    "trackingSearchUrl": "https://www.kiwiexpress.co.nz/",
+    "helpUrl": "https://www.kiwiexpress.co.nz/contact-us/"
   },
   "optima-overnight": {
     "displayName": "Optima Overnight",
@@ -36604,7 +36909,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.shipoptima.com/pages/tracking"
+    "trackingSearchUrl": "https://www.shipoptima.com/pages/tracking",
+    "helpUrl": "https://www.shipoptima.com/pages/contact"
   },
   "peninsula-truck-lines": {
     "displayName": "Peninsula Truck Lines",
@@ -36672,7 +36978,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.plyconvanlines.com/"
+    "trackingSearchUrl": "https://track.plyconvanlines.com/",
+    "helpUrl": "https://plycongroup.com/contact"
   },
   "ross-express": {
     "displayName": "Ross Express",
@@ -36713,7 +37020,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.rossexpress.com/"
+    "trackingSearchUrl": "https://www.rossexpress.com/",
+    "helpUrl": "https://www.rossexpress.com/contact/"
   },
   "whiz-delivery": {
     "displayName": "Whiz Delivery",
@@ -36747,7 +37055,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://track.whizdelivery.ca/track"
+    "trackingSearchUrl": "https://track.whizdelivery.ca/track",
+    "helpUrl": "https://www.whizdelivery.ca/contact"
   },
   "ets-express": {
     "displayName": "ETS Express",
@@ -36777,7 +37086,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.ets-express.com/inquiry.html"
+    "trackingSearchUrl": "https://www.ets-express.com/inquiry.html",
+    "helpUrl": "https://www.ets-express.com/contact.html"
   },
   "rincos": {
     "displayName": "Rincos",
@@ -36833,7 +37143,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.amsegroup.com.au/track-trace/"
+    "trackingSearchUrl": "https://www.amsegroup.com.au/track-trace/",
+    "helpUrl": "https://www.amsegroup.com.au/contact/"
   },
   "apg-ecommerce": {
     "displayName": "APG eCommerce Solutions",
@@ -36870,7 +37181,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apgecommerce.com/track/"
+    "trackingSearchUrl": "https://apgecommerce.com/track/",
+    "helpUrl": "https://apgecommerce.com/contact-us/"
   },
   "kec-ecommerce": {
     "displayName": "KEC eCommerce",
@@ -36906,7 +37218,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kec.kln.com/en/logistics-tracking/"
+    "trackingSearchUrl": "https://kec.kln.com/en/logistics-tracking/",
+    "helpUrl": "https://kec.kln.com/en/contact-us/"
   },
   "thelorry": {
     "displayName": "TheLorry",
@@ -36980,7 +37293,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.toyou.co.uk/track"
+    "trackingSearchUrl": "https://www.toyou.co.uk/track",
+    "helpUrl": "https://www.toyou.co.uk/help"
   },
   "wizmo": {
     "displayName": "Wizmo",
@@ -37018,7 +37332,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://shipwizmo.com/"
+    "trackingSearchUrl": "https://shipwizmo.com/",
+    "helpUrl": "https://shipwizmo.com/contact"
   },
   "alljoy": {
     "displayName": "AllJoy",
@@ -37087,7 +37402,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dpe.net.my/tracking.php"
+    "trackingSearchUrl": "https://www.dpe.net.my/tracking.php",
+    "helpUrl": "https://www.dpe.net.my/content.php?type=5"
   },
   "goodmaji": {
     "displayName": "Goodmaji",
@@ -37114,7 +37430,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://system.goodmaji.com/web/shipmenthistory.aspx"
+    "trackingSearchUrl": "https://system.goodmaji.com/web/shipmenthistory.aspx",
+    "helpUrl": "https://www.goodmaji.com/question/"
   },
   "profit-fields": {
     "displayName": "Profit Fields",
@@ -37161,7 +37478,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.8dt.com/tracking"
+    "trackingSearchUrl": "https://www.8dt.com/tracking",
+    "helpUrl": "https://www.8dt.com/faq"
   },
   "zes-express": {
     "displayName": "ZES Express",
@@ -37193,7 +37511,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.zes-express.com/"
+    "trackingSearchUrl": "https://www.zes-express.com/",
+    "helpUrl": "https://www.zes-express.com/language/en/contact-us-2/"
   },
   "dex-pk": {
     "displayName": "DEX Pakistan",
@@ -37230,7 +37549,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.dex.com.pk/tracking",
-    "trackingUrlTemplate": "https://www.dex.com.pk/tracking?references={trackingNumber}"
+    "trackingUrlTemplate": "https://www.dex.com.pk/tracking?references={trackingNumber}",
+    "helpUrl": "https://www.dex.com.pk/contact-us"
   },
   "efs-asia": {
     "displayName": "EFS Asia",
@@ -37263,7 +37583,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://web.efs.asia/script/users/tracking.php"
+    "trackingSearchUrl": "https://web.efs.asia/script/users/tracking.php",
+    "helpUrl": "https://efs.asia/customer_form.php"
   },
   "faster-ae": {
     "displayName": "Faster Express & Cargo",
@@ -37345,7 +37666,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://harttohart.couriernavigator-secure.com/tracking"
+    "trackingSearchUrl": "https://harttohart.couriernavigator-secure.com/tracking",
+    "helpUrl": "https://hart2hartexpress.co.uk/contact.php"
   },
   "kart2door": {
     "displayName": "Kart2Door",
@@ -37377,7 +37699,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kart2door.com/EcomTracking"
+    "trackingSearchUrl": "https://www.kart2door.com/EcomTracking",
+    "helpUrl": "https://www.kart2door.com/contactus"
   },
   "lex-my": {
     "displayName": "LEX Malaysia",
@@ -37485,7 +37808,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://shipglobal.in/tracking/"
+    "trackingSearchUrl": "https://shipglobal.in/tracking/",
+    "helpUrl": "https://shipglobal.in/contact/"
   },
   "top-logistics-au": {
     "displayName": "Top Logistics Australia",
@@ -37516,7 +37840,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://toplogistics.com.au/"
+    "trackingSearchUrl": "https://toplogistics.com.au/",
+    "helpUrl": "https://toplogistics.com.au/contact-us"
   },
   "ace-ee": {
     "displayName": "ACE Logistics Estonia",
@@ -37546,7 +37871,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.acelogistics.eu/ee/en/service/cargo-tracking/"
+    "trackingSearchUrl": "https://www.acelogistics.eu/ee/en/service/cargo-tracking/",
+    "helpUrl": "https://www.acelogistics.eu/ee/en/contacts/"
   },
   "deliverdirect": {
     "displayName": "DeliverDirect",
@@ -37579,7 +37905,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.deliverdirect.com/EcomTracking"
+    "trackingSearchUrl": "https://www.deliverdirect.com/EcomTracking",
+    "helpUrl": "https://www.deliverdirect.com/contactus"
   },
   "eac-cn": {
     "displayName": "EAC",
@@ -37623,7 +37950,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.myemons.de/public.html"
+    "trackingSearchUrl": "https://tracking.myemons.de/public.html",
+    "helpUrl": "https://www.emons.de/kontakt"
   },
   "lbtx": {
     "displayName": "LBTX",
@@ -37645,7 +37973,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.lbtxkd.com/search_kj.aspx"
+    "trackingSearchUrl": "https://www.lbtxkd.com/search_kj.aspx",
+    "helpUrl": "https://www.lbtxkd.com/Contact.aspx?ClassID=23"
   },
   "linear-logistics": {
     "displayName": "Linear Logistics",
@@ -37751,7 +38080,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.noerpel.de/tracking.html"
+    "trackingSearchUrl": "https://portal.noerpel.de/tracking.html",
+    "helpUrl": "https://noerpel.de/kontakt/"
   },
   "rhenus-it": {
     "displayName": "Rhenus Italia",
@@ -37782,7 +38112,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.rhenusitalia.it/rhenus/track.jsf"
+    "trackingSearchUrl": "https://tracking.rhenusitalia.it/rhenus/track.jsf",
+    "helpUrl": "https://tracking.rhenusitalia.it/rhenus/faq.jsf"
   },
   "shipter": {
     "displayName": "Shipter",
@@ -37861,7 +38192,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tarrive.com/track"
+    "trackingSearchUrl": "https://www.tarrive.com/track",
+    "helpUrl": "https://www.tarrive.com/contact"
   },
   "transnatur": {
     "displayName": "TransNatur",
@@ -37890,7 +38222,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transnatur.com/"
+    "trackingSearchUrl": "https://www.transnatur.com/",
+    "helpUrl": "https://www.transnatur.com/contacto/"
   },
   "gcx": {
     "displayName": "GCX",
@@ -37910,7 +38243,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gcx.co.il/%d7%9e%d7%a2%d7%a7%d7%91-%d7%9e%d7%a9%d7%9c%d7%95%d7%97%d7%99%d7%9d/"
+    "trackingSearchUrl": "https://gcx.co.il/%d7%9e%d7%a2%d7%a7%d7%91-%d7%9e%d7%a9%d7%9c%d7%95%d7%97%d7%99%d7%9d/",
+    "helpUrl": "https://gcx.co.il/he/%d7%a6%d7%a8%d7%95-%d7%a7%d7%a9%d7%a8/"
   },
   "onex": {
     "displayName": "Onex",
@@ -37933,7 +38267,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://onex.am/en/onextrack?track={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://onex.am/en/onextrack"
+    "trackingSearchUrl": "https://onex.am/en/onextrack",
+    "helpUrl": "https://onex.am/en/user/contact"
   },
   "rhenus-de": {
     "displayName": "Rhenus Germany",
@@ -37952,7 +38287,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://rhenusmydelivery.com/de"
+    "trackingSearchUrl": "https://rhenusmydelivery.com/de",
+    "helpUrl": "https://rhenusmydelivery.com/de/contact"
   },
   "super-parcel-track": {
     "displayName": "Super Parcel Track",
@@ -38060,7 +38396,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tmsplus.ilinexpress.com/#/track"
+    "trackingSearchUrl": "https://tmsplus.ilinexpress.com/#/track",
+    "helpUrl": "https://www.uralsvip.com/contact/"
   },
   "wise-express": {
     "displayName": "Wise Express",
@@ -38081,7 +38418,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shwise.cn/home/"
+    "trackingSearchUrl": "https://www.shwise.cn/home/",
+    "helpUrl": "https://www.shwise.cn/home/contact.html"
   },
   "aland-post": {
     "displayName": "Åland Post",
@@ -38152,7 +38490,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://online.amaldist.com.au/track/"
+    "trackingSearchUrl": "https://online.amaldist.com.au/track/",
+    "helpUrl": "https://www.amaldist.com.au/contact"
   },
   "aruba-post": {
     "displayName": "Post Aruba",
@@ -38214,7 +38553,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://appsrv.bondscouriers.com.au/bondsweb/track-job.htm"
+    "trackingSearchUrl": "https://appsrv.bondscouriers.com.au/bondsweb/track-job.htm",
+    "helpUrl": "https://bondscouriers.com.au/contact-us/"
   },
   "burundi-post": {
     "displayName": "Burundi Post",
@@ -38286,7 +38626,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://delivro.dsapp.io/customer"
+    "trackingSearchUrl": "https://delivro.dsapp.io/customer",
+    "helpUrl": "https://delivro.ca/page/contact"
   },
   "dg-transporte": {
     "displayName": "DG Transporte",
@@ -38306,7 +38647,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dg-transporte.de/empfangen/sendungsverfolgung/"
+    "trackingSearchUrl": "https://www.dg-transporte.de/empfangen/sendungsverfolgung/",
+    "helpUrl": "https://www.dg-transporte.de/kontakt/"
   },
   "gibraltar-post": {
     "displayName": "Royal Gibraltar Post Office",
@@ -38363,7 +38705,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://holisollogistics.com/track-shipment/"
+    "trackingSearchUrl": "https://holisollogistics.com/track-shipment/",
+    "helpUrl": "https://holisollogistics.com/contact-us/"
   },
   "inntralog": {
     "displayName": "Inntralog",
@@ -38384,7 +38727,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.inntralog.com/track/"
+    "trackingSearchUrl": "https://portal.inntralog.com/track/",
+    "helpUrl": "https://www.inntralog.de/kontakt/"
   },
   "samoa-post": {
     "displayName": "Samoa Post",
@@ -38442,7 +38786,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.skybox.net/TrackingInformation/IndexPublic"
+    "trackingSearchUrl": "https://www.skybox.net/TrackingInformation/IndexPublic",
+    "helpUrl": "https://www.skybox.net/Contact-us"
   },
   "tforce-integrated-solutions": {
     "displayName": "TForce Integrated Solutions",
@@ -38473,7 +38818,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tforce-solutions.com/"
+    "trackingSearchUrl": "https://tforce-solutions.com/",
+    "helpUrl": "https://tforce-solutions.com/contact-us/"
   },
   "ttk-europe": {
     "displayName": "TTK Europe",
@@ -38509,7 +38855,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ttkeu.com/tracking/"
+    "trackingSearchUrl": "https://ttkeu.com/tracking/",
+    "helpUrl": "https://ttkeu.com/contact/"
   },
   "ubx-uk": {
     "displayName": "UBX UK",
@@ -38545,7 +38892,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ubx.uk.net/tracking/"
+    "trackingSearchUrl": "https://www.ubx.uk.net/tracking/",
+    "helpUrl": "https://www.ubx.uk.net/contact-ubx/"
   },
   "victorian-freight-specialists": {
     "displayName": "Victorian Freight Specialists",
@@ -38608,7 +38956,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vtfe.com.au/"
+    "trackingSearchUrl": "https://www.vtfe.com.au/",
+    "helpUrl": "https://www.vtfe.com.au/contact-us/"
   },
   "airspeed": {
     "displayName": "Airspeed",
@@ -38643,7 +38992,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://airspeed.ph/track-cargo/"
+    "trackingSearchUrl": "https://airspeed.ph/track-cargo/",
+    "helpUrl": "https://airspeed.ph/contact-us/"
   },
   "ase-express": {
     "displayName": "ASE Express",
@@ -38692,7 +39042,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.ase.com.tr/cwb/trackshipment?lang=en"
+    "trackingSearchUrl": "https://tracking.ase.com.tr/cwb/trackshipment?lang=en",
+    "helpUrl": "https://online.ase.com.tr/contact?lang=en"
   },
   "best-express-th": {
     "displayName": "BEST Express Thailand",
@@ -38759,7 +39110,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://a.ctc-expresstms2.com.tw/"
+    "trackingSearchUrl": "https://a.ctc-expresstms2.com.tw/",
+    "helpUrl": "https://www.ctc-express.com.tw/location.html"
   },
   "egxpress": {
     "displayName": "EGXPRESS",
@@ -38799,7 +39151,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.egyptexpress.com.eg/en-us/tracking-shipment/"
+    "trackingSearchUrl": "https://www.egyptexpress.com.eg/en-us/tracking-shipment/",
+    "helpUrl": "https://www.egyptexpress.com.eg/en-us/customer-support"
   },
   "famiport": {
     "displayName": "FamilyMart Taiwan",
@@ -38844,7 +39197,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fmec.famiport.com.tw/FP_Entrance/QueryBox"
+    "trackingSearchUrl": "https://fmec.famiport.com.tw/FP_Entrance/QueryBox",
+    "helpUrl": "https://www.family.com.tw/Marketing/zh/ContactUs"
   },
   "fez-delivery": {
     "displayName": "Fez Delivery",
@@ -38916,7 +39270,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://rastreio.fmtransportes.com.br/"
+    "trackingSearchUrl": "https://rastreio.fmtransportes.com.br/",
+    "helpUrl": "https://fmtransportes.com.br/faq/"
   },
   "j-and-t-eg": {
     "displayName": "J&T Express Egypt",
@@ -39026,7 +39381,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.25431010.tw/tracking"
+    "trackingSearchUrl": "https://www.25431010.tw/tracking",
+    "helpUrl": "https://www.25431010.tw/contact_us"
   },
   "movin": {
     "displayName": "MOVIN",
@@ -39058,7 +39414,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.movin.in/shipment/track"
+    "trackingSearchUrl": "https://www.movin.in/shipment/track",
+    "helpUrl": "https://www.movin.in/contact-us"
   },
   "paket-cl": {
     "displayName": "Paket",
@@ -39283,7 +39640,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://x-cargo.co/"
+    "trackingSearchUrl": "https://x-cargo.co/",
+    "helpUrl": "https://x-cargo.co/contact/"
   },
   "zimpost": {
     "displayName": "Zimpost",
@@ -39340,7 +39698,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://airwingsindia.com/tracking.html"
+    "trackingSearchUrl": "https://airwingsindia.com/tracking.html",
+    "helpUrl": "https://airwingsindia.com/contact.html"
   },
   "apx-logistics": {
     "displayName": "APX Logistics",
@@ -39376,7 +39735,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.apxlog.com/index.php/en/"
+    "trackingSearchUrl": "https://www.apxlog.com/index.php/en/",
+    "helpUrl": "https://www.apxlog.com/index.php/en/contact-us"
   },
   "ark-express": {
     "displayName": "ARK Express",
@@ -39430,7 +39790,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://express.arkexpress.com.au/"
+    "trackingSearchUrl": "https://express.arkexpress.com.au/",
+    "helpUrl": "https://express.arkexpress.com.au/contact"
   },
   "chinz-logistics": {
     "displayName": "Chinz Logistics",
@@ -39490,7 +39851,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://chinzlogistics.com/en/consult"
+    "trackingSearchUrl": "https://chinzlogistics.com/en/consult",
+    "helpUrl": "https://chinzlogistics.com/en/contact"
   },
   "citi-sprint": {
     "displayName": "Citi-Sprint",
@@ -39533,7 +39895,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.citisprint.co.za/tracking/"
+    "trackingSearchUrl": "https://www.citisprint.co.za/tracking/",
+    "helpUrl": "https://www.citisprint.co.za/contact/"
   },
   "citymail-pk": {
     "displayName": "CityMail Pakistan",
@@ -39597,7 +39960,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://clc-express.com/track-delivery"
+    "trackingSearchUrl": "https://clc-express.com/track-delivery",
+    "helpUrl": "https://clc-express.com/contact-us"
   },
   "elog-luxembourg": {
     "displayName": "eLOG Luxembourg",
@@ -39631,7 +39995,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.elog-luxembourg.com/"
+    "trackingSearchUrl": "https://www.elog-luxembourg.com/",
+    "helpUrl": "https://www.elog-luxembourg.com/contact-us"
   },
   "fastgo": {
     "displayName": "Fastgo",
@@ -39675,7 +40040,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.fastgo.com.au/WaybillQuery/"
+    "trackingSearchUrl": "https://www.fastgo.com.au/WaybillQuery/",
+    "helpUrl": "https://www.fastgo.com.au/ContactUs/"
   },
   "fmx": {
     "displayName": "FMX",
@@ -39714,7 +40080,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.fmx.asia/"
+    "trackingSearchUrl": "https://www.fmx.asia/",
+    "helpUrl": "https://www.fmx.asia/contact_us.php"
   },
   "freightways-global": {
     "displayName": "Freightways Global",
@@ -39797,7 +40164,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://hitch.com.ph/tracking"
+    "trackingSearchUrl": "https://hitch.com.ph/tracking",
+    "helpUrl": "https://hitch.com.ph/contact-us"
   },
   "janco-express": {
     "displayName": "JANCO Express",
@@ -39843,7 +40211,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.jancoexpress.com/track-trace-2/"
+    "trackingSearchUrl": "https://www.jancoexpress.com/track-trace-2/",
+    "helpUrl": "https://www.jancoexpress.com/contact/"
   },
   "jcw-express": {
     "displayName": "JCW Express",
@@ -39873,7 +40242,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jcwexpress.com/tracking"
+    "trackingSearchUrl": "https://jcwexpress.com/tracking",
+    "helpUrl": "https://jcwexpress.com/contact"
   },
   "m-xpress": {
     "displayName": "M Xpress",
@@ -39896,7 +40266,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://goldv2.mxpress2u.net/goldv2webtracking/"
+    "trackingSearchUrl": "https://goldv2.mxpress2u.net/goldv2webtracking/",
+    "helpUrl": "https://www.mxpress2u.com/EnquiryPage"
   },
   "mark-express": {
     "displayName": "Mark Express",
@@ -39929,7 +40300,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://markexpress.co.in/"
+    "trackingSearchUrl": "https://markexpress.co.in/",
+    "helpUrl": "https://markexpress.co.in/contact-us"
   },
   "nege": {
     "displayName": "SST Express",
@@ -39962,7 +40334,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sst.lt/"
+    "trackingSearchUrl": "https://sst.lt/",
+    "helpUrl": "https://sst.lt/kontaktai"
   },
   "patuen": {
     "displayName": "Patuen",
@@ -40001,7 +40374,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://promeddel.e-courier.com/promeddel/home/wizard_tracking.asp"
+    "trackingSearchUrl": "https://promeddel.e-courier.com/promeddel/home/wizard_tracking.asp",
+    "helpUrl": "https://promeddel.e-courier.com/promeddel/home/AboutTemplate.asp?SubMenuID=0"
   },
   "shipx-asia": {
     "displayName": "ShipX",
@@ -40038,7 +40412,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://shipx.asia/toolkit/shipment-tracker"
+    "trackingSearchUrl": "https://shipx.asia/toolkit/shipment-tracker",
+    "helpUrl": "https://shipx.asia/contact-us"
   },
   "spt-logistics": {
     "displayName": "SPT Furniture Logistics",
@@ -40080,7 +40455,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://spt-logistics.eu/#sledzenie-przesylek"
+    "trackingSearchUrl": "https://spt-logistics.eu/#sledzenie-przesylek",
+    "helpUrl": "https://spt-logistics.eu/kontakt"
   },
   "sptexp": {
     "displayName": "SPT Express",
@@ -40162,7 +40538,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://crm.tapuzdelivery.co.il/Baldar/deliverystatus.aspx"
+    "trackingSearchUrl": "https://crm.tapuzdelivery.co.il/Baldar/deliverystatus.aspx",
+    "helpUrl": "https://www.tapuzdelivery.co.il/%D7%A6%D7%A8%D7%95-%D7%A7%D7%A9%D7%A8/%D7%A9%D7%99%D7%A8%D7%95%D7%AA-%D7%9C%D7%A7%D7%95%D7%97%D7%95%D7%AA/"
   },
   "thabit-logistics": {
     "displayName": "Thabit Logistics",
@@ -40195,7 +40572,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://thabit-logistics.com/track-shipment"
+    "trackingSearchUrl": "https://thabit-logistics.com/track-shipment",
+    "helpUrl": "https://thabit-logistics.com/contact-us"
   },
   "togo-post": {
     "displayName": "La Poste du Togo",
@@ -40269,7 +40647,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.tuodatong56.com/tms/trackIndex.htm"
+    "trackingSearchUrl": "https://www.tuodatong56.com/tms/trackIndex.htm",
+    "helpUrl": "https://www.tuodatong56.com/lxwm.html"
   },
   "turkmenpost": {
     "displayName": "Turkmenpost",
@@ -40339,7 +40718,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.usasd.com/"
+    "trackingSearchUrl": "https://www.usasd.com/",
+    "helpUrl": "https://www.usasd.com/index.php?id=contactus"
   },
   "v-xpress": {
     "displayName": "V-Xpress",
@@ -40360,7 +40740,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://vxpress.in/track-result-new/"
+    "trackingSearchUrl": "https://vxpress.in/track-result-new/",
+    "helpUrl": "https://vxpress.in/customer-care/"
   },
   "world-package": {
     "displayName": "World Package",
@@ -40391,7 +40772,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://wpl-uk.couriernavigator-secure.com/tracking.html"
+    "trackingSearchUrl": "https://wpl-uk.couriernavigator-secure.com/tracking.html",
+    "helpUrl": "https://www.worldpackage.co.uk/contact/"
   },
   "xd-express": {
     "displayName": "XD Express",
@@ -40412,7 +40794,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xdexpress.com.au/Express.aspx"
+    "trackingSearchUrl": "https://www.xdexpress.com.au/Express.aspx",
+    "helpUrl": "https://www.xdexpress.com.au/contact.aspx"
   },
   "xlmiles": {
     "displayName": "XLmiles",
@@ -40510,7 +40893,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yue777.com/genzong.php"
+    "trackingSearchUrl": "https://www.yue777.com/genzong.php",
+    "helpUrl": "https://www.yue777.com/contact.php"
   },
   "dex-i": {
     "displayName": "DEX-I",
@@ -40548,7 +40932,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dex-i.com/site/tracking"
+    "trackingSearchUrl": "https://www.dex-i.com/site/tracking",
+    "helpUrl": "https://www.dex-i.com/site/contact-us"
   },
   "jy-express": {
     "displayName": "JY Express",
@@ -40606,7 +40991,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://utec.ua/"
+    "trackingSearchUrl": "https://utec.ua/",
+    "helpUrl": "https://utec.ua/kontakty"
   },
   "arrow-express": {
     "displayName": "Arrow Express",
@@ -40627,7 +41013,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://arrow-express.eu/"
+    "trackingSearchUrl": "https://arrow-express.eu/",
+    "helpUrl": "https://arrow-express.eu/contact-us"
   },
   "citilogistics": {
     "displayName": "Citilogistics",
@@ -40648,7 +41035,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.citilogistics.ca/"
+    "trackingSearchUrl": "https://tracking.citilogistics.ca/",
+    "helpUrl": "https://citilogistics.ca/contact/"
   },
   "comone-express": {
     "displayName": "ComOne Express",
@@ -40719,7 +41107,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dpxlogistics.com/en/track/"
+    "trackingSearchUrl": "https://dpxlogistics.com/en/track/",
+    "helpUrl": "https://dpxlogistics.com/en/contact/"
   },
   "geswl": {
     "displayName": "GESWL Express",
@@ -40789,7 +41178,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.fastwl.com/suivre-un-colis/"
+    "trackingSearchUrl": "https://www.fastwl.com/suivre-un-colis/",
+    "helpUrl": "https://www.fastwl.com/contact/"
   },
   "tig-freight": {
     "displayName": "TIG Freight",
@@ -40818,7 +41208,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.open360.com/tracking/"
+    "trackingSearchUrl": "https://tracking.open360.com/tracking/",
+    "helpUrl": "https://tigfreight.com/contact/"
   },
   "uvan": {
     "displayName": "UVAN",
@@ -40877,7 +41268,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yha56.com/"
+    "trackingSearchUrl": "https://www.yha56.com/",
+    "helpUrl": "https://www.yha56.com/page/aboutYha/aboutYha6.html"
   },
   "bombax": {
     "displayName": "Bombax",
@@ -40908,7 +41300,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://book.bombax.in/Booking/Track"
+    "trackingSearchUrl": "https://book.bombax.in/Booking/Track",
+    "helpUrl": "https://bombax.in/support/"
   },
   "canada-air-express": {
     "displayName": "Canada Air Express",
@@ -40979,7 +41372,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://shipecom.com/track"
+    "trackingSearchUrl": "https://shipecom.com/track",
+    "helpUrl": "https://shipecom.com/support"
   },
   "fragilepak": {
     "displayName": "FragilePAK",
@@ -41016,7 +41410,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://fragilepak.com/expecting-a-delivery/"
+    "trackingSearchUrl": "https://fragilepak.com/expecting-a-delivery/",
+    "helpUrl": "https://fragilepak.com/contact/"
   },
   "hkd-express": {
     "displayName": "HKD Express",
@@ -41038,7 +41433,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hkdexpress.net/track"
+    "trackingSearchUrl": "https://www.hkdexpress.net/track",
+    "helpUrl": "https://www.hkdexpress.net/contact"
   },
   "sm-express": {
     "displayName": "SM Express",
@@ -41059,7 +41455,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.smexpress.in/Home/track"
+    "trackingSearchUrl": "https://www.smexpress.in/Home/track",
+    "helpUrl": "https://www.smexpress.in/home/contact"
   },
   "360lion": {
     "displayName": "360Lion",
@@ -41159,7 +41556,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.asiaflyexp.com/order-search.html"
+    "trackingSearchUrl": "https://www.asiaflyexp.com/order-search.html",
+    "helpUrl": "https://www.asiaflyexp.com/contact/"
   },
   "cititrans": {
     "displayName": "Cititrans",
@@ -41189,7 +41587,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cititrans.com/trajectory"
+    "trackingSearchUrl": "https://www.cititrans.com/trajectory",
+    "helpUrl": "https://www.cititrans.com/introduction"
   },
   "shunbang-express": {
     "displayName": "ShunBang Express",
@@ -41248,7 +41647,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.suyd56.com/Index.html"
+    "trackingSearchUrl": "https://www.suyd56.com/Index.html",
+    "helpUrl": "https://www.suyd56.com/Contact/"
   },
   "topex-logistics": {
     "displayName": "Topex Logistics",
@@ -41303,7 +41703,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vnlin.com/trackIndex.html"
+    "trackingSearchUrl": "https://www.vnlin.com/trackIndex.html",
+    "helpUrl": "https://www.vnlin.com/contact-109-1.html"
   },
   "we-world-express": {
     "displayName": "We World Express",
@@ -41330,7 +41731,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.weworldexpress.com/wwe/track"
+    "trackingSearchUrl": "https://www.weworldexpress.com/wwe/track",
+    "helpUrl": "https://www.weworldexpress.com/contact.html"
   },
   "xingyunyi": {
     "displayName": "XingYunYi",
@@ -41369,7 +41771,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xingyunyi.com/tracking"
+    "trackingSearchUrl": "https://www.xingyunyi.com/tracking",
+    "helpUrl": "https://www.xingyunyi.com/contactus"
   },
   "aquiline": {
     "displayName": "Aquiline",
@@ -41416,7 +41819,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://aq-track.com/"
+    "trackingSearchUrl": "https://aq-track.com/",
+    "helpUrl": "https://aq-track.com/contact"
   },
   "btd": {
     "displayName": "BTD",
@@ -41440,7 +41844,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.btdair.com/"
+    "trackingSearchUrl": "https://www.btdair.com/",
+    "helpUrl": "https://www.btdair.com/Article/detailbytype?type=%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC&index=5"
   },
   "ukp-worldwide": {
     "displayName": "UKP Worldwide",
@@ -41481,7 +41886,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.ukpworldwide.com/tracking/"
+    "trackingSearchUrl": "https://www.ukpworldwide.com/tracking/",
+    "helpUrl": "https://www.ukpworldwide.com/contact-us/"
   },
   "wiio": {
     "displayName": "Wiio",
@@ -41523,7 +41929,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://wiio.com/"
+    "trackingSearchUrl": "https://wiio.com/",
+    "helpUrl": "https://wiio.com/contact-wiio/"
   },
   "xyl": {
     "displayName": "XYL",
@@ -41558,7 +41965,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.816kf.com/"
+    "trackingSearchUrl": "https://www.816kf.com/",
+    "helpUrl": "https://www.816kf.com/comtact.html"
   },
   "bel": {
     "displayName": "BEL",
@@ -41595,7 +42003,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.8256ru.com/"
+    "trackingSearchUrl": "https://www.8256ru.com/",
+    "helpUrl": "https://www.8256ru.com/?Col8/"
   },
   "ecohai": {
     "displayName": "Ecohai",
@@ -41616,7 +42025,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://client.ecohai.co.jp/tracking"
+    "trackingSearchUrl": "https://client.ecohai.co.jp/tracking",
+    "helpUrl": "https://www.ecohai.co.jp/faq"
   },
   "komon-express": {
     "displayName": "Komon Express",
@@ -41715,7 +42125,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.parcelabc.com/content/tracking"
+    "trackingSearchUrl": "https://www.parcelabc.com/content/tracking",
+    "helpUrl": "https://www.parcelabc.com/page/faqs/1"
   },
   "safeway-express-cargo": {
     "displayName": "Safe Way Express Cargo",
@@ -41758,7 +42169,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.safewayxp.com/en/track/"
+    "trackingSearchUrl": "https://www.safewayxp.com/en/track/",
+    "helpUrl": "https://www.safewayxp.com/en/contact/"
   },
   "w-express-ph": {
     "displayName": "W Express",
@@ -41803,7 +42215,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wwwexpress.com.ph/track-and-trace/"
+    "trackingSearchUrl": "https://www.wwwexpress.com.ph/track-and-trace/",
+    "helpUrl": "https://www.wwwexpress.com.ph/contact-us/"
   },
   "e24metro-ca": {
     "displayName": "E24",
@@ -41874,7 +42287,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://expedico.eu/tracking"
+    "trackingSearchUrl": "https://expedico.eu/tracking",
+    "helpUrl": "https://expedico.eu/contact"
   },
   "frontier-ca": {
     "displayName": "Frontier Courier",
@@ -41999,7 +42413,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jaskipin.co.id/tracking"
+    "trackingSearchUrl": "https://jaskipin.co.id/tracking",
+    "helpUrl": "https://jaskipin.co.id/contact"
   },
   "letter-track": {
     "displayName": "LetterTrack",
@@ -42137,7 +42552,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://flashbird.ca/tracking"
+    "trackingSearchUrl": "https://flashbird.ca/tracking",
+    "helpUrl": "https://flashbird.ca/contact-us"
   },
   "emirates-courier-express": {
     "displayName": "Emirates Courier Express",
@@ -42168,7 +42584,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.emiratescx.com/en/tracking"
+    "trackingSearchUrl": "https://www.emiratescx.com/en/tracking",
+    "helpUrl": "https://www.emiratescx.com/en/supportcenter"
   },
   "espoirer": {
     "displayName": "ESPOIRER",
@@ -42190,7 +42607,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.console.espoirer.com/express-tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.console.espoirer.com/express-tracking"
+    "trackingSearchUrl": "https://www.console.espoirer.com/express-tracking",
+    "helpUrl": "https://espoirer.com/contact/index.html"
   },
   "lm-parcel": {
     "displayName": "LM Parcel",
@@ -42261,7 +42679,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://vietanexpress.com/tracking-2"
+    "trackingSearchUrl": "https://vietanexpress.com/tracking-2",
+    "helpUrl": "https://vietanexpress.com/ho-tro-khach-hang"
   },
   "performance-freight": {
     "displayName": "Performance Freight",
@@ -42367,7 +42786,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fro.pol/facts.htm"
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fro.pol/facts.htm",
+    "helpUrl": "https://www.stgltl.com/contact/"
   },
   "tsb-es": {
     "displayName": "TSB",
@@ -42398,7 +42818,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.tsbconnect.net/app/tracking/public?search=true",
-    "trackingUrlTemplate": "https://www.tsbconnect.net/app/tracking/public/tracking/{trackingNumber}"
+    "trackingUrlTemplate": "https://www.tsbconnect.net/app/tracking/public/tracking/{trackingNumber}",
+    "helpUrl": "https://www.tsbtrans.com/contacto/"
   },
   "bfe-express": {
     "displayName": "BFE Express",
@@ -42462,7 +42883,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pod.diakinisis.gr/tnt.php"
+    "trackingSearchUrl": "https://pod.diakinisis.gr/tnt.php",
+    "helpUrl": "https://www.diakinisis.gr/epikoinonia-diakinisis.html"
   },
   "global-delivery-network": {
     "displayName": "Global Delivery Network",
@@ -42494,7 +42916,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gdnparcel.com/"
+    "trackingSearchUrl": "https://gdnparcel.com/",
+    "helpUrl": "https://gdnparcel.com/contactus"
   },
   "max-pakket": {
     "displayName": "MAX Pakket",
@@ -42513,7 +42936,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://emens.mendrix.cloud/TrackAndTrace"
+    "trackingSearchUrl": "https://emens.mendrix.cloud/TrackAndTrace",
+    "helpUrl": "https://maxpakket.nl/contact/"
   },
   "paisley-freight": {
     "displayName": "Paisley Freight",
@@ -42529,7 +42953,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.paisleyfreight.com/tracking"
+    "trackingSearchUrl": "https://www.paisleyfreight.com/tracking",
+    "helpUrl": "https://www.paisleyfreight.com/contact-us"
   },
   "sfyd-express": {
     "displayName": "SFYD Express",
@@ -42561,7 +42986,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sfydexpress.com/tracking.html"
+    "trackingSearchUrl": "https://sfydexpress.com/tracking.html",
+    "helpUrl": "https://sfydexpress.com/support/faq.html"
   },
   "vip-posta": {
     "displayName": "VIP Posta",
@@ -42659,7 +43085,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.360zebra.com/web/tracking"
+    "trackingSearchUrl": "https://www.360zebra.com/web/tracking",
+    "helpUrl": "https://www.360zebra.com/web/contact"
   },
   "ane-logistics": {
     "displayName": "ANE Logistics",
@@ -42716,7 +43143,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.auexpress.com/tracking"
+    "trackingSearchUrl": "https://www.auexpress.com/tracking",
+    "helpUrl": "https://www.auexpress.com/support"
   },
   "bqc-logistics": {
     "displayName": "BQC Logistics",
@@ -42738,7 +43166,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.1001000.com/newwl/unLogin/track"
+    "trackingSearchUrl": "https://www.1001000.com/newwl/unLogin/track",
+    "helpUrl": "https://www.1001000.com/newwl/bulletin/nbqInfo?gmCode=881"
   },
   "changjiang-express": {
     "displayName": "ChangJiang Express",
@@ -42759,7 +43188,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.changjiangexpress.com/Home/Query"
+    "trackingSearchUrl": "https://www.changjiangexpress.com/Home/Query",
+    "helpUrl": "https://www.changjiangexpress.com/Home/Contacts"
   },
   "china-railway-express": {
     "displayName": "China Railway Express",
@@ -42781,7 +43211,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.95572.com/"
+    "trackingSearchUrl": "https://www.95572.com/",
+    "helpUrl": "https://www.95572.com/zxjy/"
   },
   "elianpost": {
     "displayName": "Elianpost",
@@ -42834,7 +43265,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.espeedpost.com/html-tracking.html"
+    "trackingSearchUrl": "https://www.espeedpost.com/html-tracking.html",
+    "helpUrl": "https://www.espeedpost.com/html-company-contact.html"
   },
   "king-kong-express": {
     "displayName": "King Kong Express",
@@ -42856,7 +43288,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kke.com.hk/home/index/que"
+    "trackingSearchUrl": "https://www.kke.com.hk/home/index/que",
+    "helpUrl": "https://www.kke.com.hk/home/index/contact"
   },
   "lhtex": {
     "displayName": "LHT Express",
@@ -42878,7 +43311,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.lhtex.com.cn/"
+    "trackingSearchUrl": "https://www.lhtex.com.cn/",
+    "helpUrl": "https://www.lhtex.com.cn/abouts_36/"
   },
   "libang-logistics": {
     "displayName": "LiBang International Logistics",
@@ -42925,7 +43359,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.rrswl.com/order/searchLishi"
+    "trackingSearchUrl": "https://www.rrswl.com/order/searchLishi",
+    "helpUrl": "https://www.rrswl.com/front/prob/list"
   },
   "shipgce": {
     "displayName": "Feiyang GCEx",
@@ -42966,7 +43401,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://express.shipgce.com/postcheck.htm",
-    "trackingUrlTemplate": "https://express.shipgce.com/postcheck.htm?checkvalue={trackingNumber}&type=identity"
+    "trackingUrlTemplate": "https://express.shipgce.com/postcheck.htm?checkvalue={trackingNumber}&type=identity",
+    "helpUrl": "https://express.shipgce.com/news.htm?key=help17"
   },
   "showl": {
     "displayName": "Showl",
@@ -42987,7 +43423,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://oms.showl.com/tracking"
+    "trackingSearchUrl": "https://oms.showl.com/tracking",
+    "helpUrl": "https://www.showl.com/contact/"
   },
   "sumxpress": {
     "displayName": "Sumxpress",
@@ -43039,7 +43476,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://wuliu.suning.com/home/toLogisticsDetail.htm"
+    "trackingSearchUrl": "https://wuliu.suning.com/home/toLogisticsDetail.htm",
+    "helpUrl": "https://wuliu.suning.com/home/contact.htm"
   },
   "annto": {
     "displayName": "ANNTO",
@@ -43148,7 +43586,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bri-ems.com/query"
+    "trackingSearchUrl": "https://www.bri-ems.com/query",
+    "helpUrl": "https://www.bri-ems.com/contact-us"
   },
   "cel-changda": {
     "displayName": "CEL Changda",
@@ -43207,7 +43646,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cpszy.com/trace.html"
+    "trackingSearchUrl": "https://www.cpszy.com/trace.html",
+    "helpUrl": "https://www.cpszy.com/contact.html"
   },
   "jiachen-express": {
     "displayName": "Jiachen International Express",
@@ -43262,7 +43702,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jiufanglogistics.cn/shipmentQueryList"
+    "trackingSearchUrl": "https://www.jiufanglogistics.cn/shipmentQueryList",
+    "helpUrl": "https://www.jiufanglogistics.cn/contact"
   },
   "longcps": {
     "displayName": "LONGCPS",
@@ -43293,7 +43734,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.longcps.com/select.html"
+    "trackingSearchUrl": "https://www.longcps.com/select.html",
+    "helpUrl": "https://www.longcps.com/content.html?ParendID=271&CategoryID=302&ID=0"
   },
   "sxjd-freight": {
     "displayName": "SXJD Freight",
@@ -43315,7 +43757,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sxjdfreight.com/service/waybillList.html"
+    "trackingSearchUrl": "https://www.sxjdfreight.com/service/waybillList.html",
+    "helpUrl": "https://www.sxjdfreight.com/about/contact.html"
   },
   "valueway": {
     "displayName": "Valueway Express",
@@ -43338,7 +43781,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.valueway.net/main.html"
+    "trackingSearchUrl": "https://www.valueway.net/main.html",
+    "helpUrl": "https://www.valueway.net/Contact/index.html#office"
   },
   "banling": {
     "displayName": "Banling International Logistics",
@@ -43360,7 +43804,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://banlingwuliu.com/detail/track/transLogistic.html"
+    "trackingSearchUrl": "https://banlingwuliu.com/detail/track/transLogistic.html",
+    "helpUrl": "https://banlingwuliu.com/detail/Join/contact.html"
   },
   "go-world-express": {
     "displayName": "Go World Express",
@@ -43381,7 +43826,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.goworldexpress.cn/track.html"
+    "trackingSearchUrl": "https://www.goworldexpress.cn/track.html",
+    "helpUrl": "https://www.goworldexpress.cn/about/contact"
   },
   "hye": {
     "displayName": "HYE International Logistics",
@@ -43427,7 +43873,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://hztgjwl.com/query/"
+    "trackingSearchUrl": "https://hztgjwl.com/query/",
+    "helpUrl": "https://hztgjwl.com/contact/"
   },
   "jet-global": {
     "displayName": "Jet Global Logistics",
@@ -43462,7 +43909,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jetft.com/tracking.html"
+    "trackingSearchUrl": "https://www.jetft.com/tracking.html",
+    "helpUrl": "https://www.jetft.com/contact.html"
   },
   "jikuaida": {
     "displayName": "Jikuaida Logistics",
@@ -43531,7 +43979,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shenghanggj.com/checkexpress"
+    "trackingSearchUrl": "https://www.shenghanggj.com/checkexpress",
+    "helpUrl": "https://www.shenghanggj.com/help-20.html"
   },
   "too-express": {
     "displayName": "Too Express",
@@ -43589,7 +44038,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.wjdrop.com/tracking/index"
+    "trackingSearchUrl": "https://track.wjdrop.com/tracking/index",
+    "helpUrl": "https://wjdrop.com/contact/"
   },
   "wld-express": {
     "displayName": "WLD Express",
@@ -43687,7 +44137,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://2eboxcasilla.com/"
+    "trackingSearchUrl": "https://2eboxcasilla.com/",
+    "helpUrl": "https://2eboxcasilla.com/contacto"
   },
   "antaria": {
     "displayName": "Antaria Services",
@@ -43708,7 +44159,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.antariaclientes.com/seguimiento.php"
+    "trackingSearchUrl": "https://www.antariaclientes.com/seguimiento.php",
+    "helpUrl": "https://antariaservices.es/contacto/"
   },
   "bee-fast": {
     "displayName": "BeeFast",
@@ -43727,7 +44179,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.beefast.com.au/#/Tracking"
+    "trackingSearchUrl": "https://www.beefast.com.au/#/Tracking",
+    "helpUrl": "https://www.beefast.com.au/#/ContactUs"
   },
   "beexprss": {
     "displayName": "BeeXprss",
@@ -43758,7 +44211,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://beexprss.com/tracking"
+    "trackingSearchUrl": "https://beexprss.com/tracking",
+    "helpUrl": "https://beexprss.com/contact-us"
   },
   "carry-flap": {
     "displayName": "CARRY FLAP",
@@ -43788,7 +44242,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.carry-flap.com/#/home"
+    "trackingSearchUrl": "https://tracking.carry-flap.com/#/home",
+    "helpUrl": "https://www.carry-flap.com/contact"
   },
   "choir-express": {
     "displayName": "Choir Express",
@@ -43808,7 +44263,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://choirexpress.co.id/id/tracking"
+    "trackingSearchUrl": "https://choirexpress.co.id/id/tracking",
+    "helpUrl": "https://choirexpress.co.id/id/contact"
   },
   "ckeex": {
     "displayName": "CkeEx",
@@ -43842,7 +44298,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ckeex.com/track.html"
+    "trackingSearchUrl": "https://www.ckeex.com/track.html",
+    "helpUrl": "https://www.ckeex.com/contact.html"
   },
   "corporate-couriers": {
     "displayName": "Corporate Couriers",
@@ -43873,7 +44330,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://corporatecouriers.net/pages/online-order-login/"
+    "trackingSearchUrl": "https://corporatecouriers.net/pages/online-order-login/",
+    "helpUrl": "https://corporatecouriers.net/pages/contact-us/"
   },
   "correios-angola": {
     "displayName": "Correios de Angola",
@@ -43983,7 +44441,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ddu-express.com/track-shipment/"
+    "trackingSearchUrl": "https://ddu-express.com/track-shipment/",
+    "helpUrl": "https://ddu-express.com/contact/"
   },
   "dtd-pk": {
     "displayName": "DTD Worldwide Express",
@@ -44029,7 +44488,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://endeavourdelivery.com.au/track"
+    "trackingSearchUrl": "https://endeavourdelivery.com.au/track",
+    "helpUrl": "https://help.endeavourdelivery.com.au/hc/en-us/requests/new"
   },
   "etomars": {
     "displayName": "Etomars",
@@ -44090,7 +44550,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp"
+    "trackingSearchUrl": "https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp",
+    "helpUrl": "https://www.ezship.com.tw/service_message/service_message_main.jsp"
   },
   "fare-rata": {
     "displayName": "Fare Rata",
@@ -44111,7 +44572,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://espace-client.farerata.pf/suivre-un-envoi"
+    "trackingSearchUrl": "https://espace-client.farerata.pf/suivre-un-envoi",
+    "helpUrl": "https://www.farerata.pf/fr/p/contactez-nous"
   },
   "fasttrack-ar": {
     "displayName": "Fast Track",
@@ -44130,7 +44592,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fasttrack.com.ar/tracking/"
+    "trackingSearchUrl": "https://fasttrack.com.ar/tracking/",
+    "helpUrl": "https://fasttrack.com.ar/contacto/"
   },
   "fxdc-post": {
     "displayName": "FXDC Post",
@@ -44183,7 +44646,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://vip.global-business.com.tw/tracking/"
+    "trackingSearchUrl": "https://vip.global-business.com.tw/tracking/",
+    "helpUrl": "https://www.global-business.com.tw/contact_us.php"
   },
   "honducor": {
     "displayName": "Honducor",
@@ -44248,7 +44712,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://order.hy-express.com/track_query.aspx"
+    "trackingSearchUrl": "https://order.hy-express.com/track_query.aspx",
+    "helpUrl": "https://www.hy-express.com/index.php?case=archive&act=list&catid=238"
   },
   "indopaket": {
     "displayName": "Indopaket",
@@ -44268,7 +44733,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.indopaket.co.id/multi-tracking"
+    "trackingSearchUrl": "https://www.indopaket.co.id/multi-tracking",
+    "helpUrl": "https://www.indopaket.co.id/faq"
   },
   "ipostel": {
     "displayName": "IPOSTEL",
@@ -44365,7 +44831,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.mikropakket.nl/"
+    "trackingSearchUrl": "https://track.mikropakket.nl/",
+    "helpUrl": "https://www.mikropakket.nl/klantenservice/"
   },
   "mobi-logistica": {
     "displayName": "Mobi Logística",
@@ -44385,7 +44852,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.mobi.com.br/entrega"
+    "trackingSearchUrl": "https://www.mobi.com.br/entrega",
+    "helpUrl": "https://www.mobi.com.br/contato"
   },
   "myanmar-post": {
     "displayName": "Myanmar Post",
@@ -44465,7 +44933,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://redbox.mv/tracking"
+    "trackingSearchUrl": "https://redbox.mv/tracking",
+    "helpUrl": "https://redbox.mv/contact"
   },
   "royale-international": {
     "displayName": "Royale International",
@@ -44499,7 +44968,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.royaleinternational.com/tracking"
+    "trackingSearchUrl": "https://www.royaleinternational.com/tracking",
+    "helpUrl": "https://www.royaleinternational.com/help-center"
   },
   "shippify": {
     "displayName": "Shippify",
@@ -44555,7 +45025,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sut56.com/service-query"
+    "trackingSearchUrl": "https://www.sut56.com/service-query",
+    "helpUrl": "https://www.sut56.com/contact"
   },
   "swftbox": {
     "displayName": "swftbox",
@@ -44574,7 +45045,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://t.swftbox.com/"
+    "trackingSearchUrl": "https://t.swftbox.com/",
+    "helpUrl": "https://www.swftbox.com/contactus"
   },
   "tolos": {
     "displayName": "Tolos",
@@ -44652,7 +45124,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://viaxpress.es/envios/"
+    "trackingSearchUrl": "https://viaxpress.es/envios/",
+    "helpUrl": "https://viaxpressteam.freshdesk.com/support/tickets/new"
   },
   "wepost": {
     "displayName": "WePost",
@@ -44686,7 +45159,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wepost.com.my/tracking"
+    "trackingSearchUrl": "https://www.wepost.com.my/tracking",
+    "helpUrl": "https://www.wepost.com.my/contact"
   },
   "xpressen": {
     "displayName": "Xpressen",
@@ -44716,7 +45190,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.xpressen.dk/Tracking"
+    "trackingSearchUrl": "https://track.xpressen.dk/Tracking",
+    "helpUrl": "https://www.xpressen.dk/kontakt/"
   },
   "66post": {
     "displayName": "66Post",
@@ -44789,7 +45264,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bluestreakcouriersonline.net/clientportal"
+    "trackingSearchUrl": "https://www.bluestreakcouriersonline.net/clientportal",
+    "helpUrl": "https://www.bluestreakcouriers.com/contact/"
   },
   "branding-worldwide": {
     "displayName": "Branding Worldwide",
@@ -44825,7 +45301,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://brandingworldwide.com.au/track.html"
+    "trackingSearchUrl": "https://brandingworldwide.com.au/track.html",
+    "helpUrl": "https://brandingworldwide.com.au/contact.html"
   },
   "czl-express": {
     "displayName": "CZL Express",
@@ -44857,7 +45334,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://exp.czl.net/track"
+    "trackingSearchUrl": "https://exp.czl.net/track",
+    "helpUrl": "https://exp.czl.net/contact"
   },
   "dida-international": {
     "displayName": "DIDA International Logistics",
@@ -44942,7 +45420,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.expluslogistics.com/"
+    "trackingSearchUrl": "https://track.expluslogistics.com/",
+    "helpUrl": "https://expluslogistics.com/contact/"
   },
   "flickpost": {
     "displayName": "Flickpost",
@@ -44972,7 +45451,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://flickpost.com/tracking/"
+    "trackingSearchUrl": "https://flickpost.com/tracking/",
+    "helpUrl": "https://flickpost.com/contact-us/"
   },
   "go-rush": {
     "displayName": "Go Rush",
@@ -44991,7 +45471,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gorushbn.com/"
+    "trackingSearchUrl": "https://gorushbn.com/",
+    "helpUrl": "https://gorushbn.com/contact-us"
   },
   "jiehang": {
     "displayName": "Jiehang International Logistics",
@@ -45012,7 +45493,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://xt.jiehang.net/WebTrack"
+    "trackingSearchUrl": "https://xt.jiehang.net/WebTrack",
+    "helpUrl": "https://www.jiehang.net/index.php/about/11"
   },
   "junfeng-international": {
     "displayName": "JunFeng International",
@@ -45050,7 +45532,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.junfengfast.com/tracking.html"
+    "trackingSearchUrl": "https://www.junfengfast.com/tracking.html",
+    "helpUrl": "https://www.junfengfast.com/contact-us.html"
   },
   "ljx-express": {
     "displayName": "LJX Express",
@@ -45074,7 +45557,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ljxex.com/#/track"
+    "trackingSearchUrl": "https://www.ljxex.com/#/track",
+    "helpUrl": "https://www.ljxex.com/#/contact"
   },
   "maxzeego": {
     "displayName": "MaxzeeGo",
@@ -45096,7 +45580,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://maxzeego.com/"
+    "trackingSearchUrl": "https://maxzeego.com/",
+    "helpUrl": "https://maxzeego.com/contact-us"
   },
   "ondot-courier": {
     "displayName": "Ondot",
@@ -45128,7 +45613,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ondotcourier.in/tracking"
+    "trackingSearchUrl": "https://www.ondotcourier.in/tracking",
+    "helpUrl": "https://www.ondotcourier.in/contact"
   },
   "penguin-box": {
     "displayName": "Penguin Box",
@@ -45161,7 +45647,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.penguinbox.cz/sledovani-zasilky"
+    "trackingSearchUrl": "https://www.penguinbox.cz/sledovani-zasilky",
+    "helpUrl": "https://www.penguinbox.cz/faq"
   },
   "posta-e-kosoves": {
     "displayName": "Posta e Kosovës",
@@ -45208,7 +45695,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://rayspeed.com/en/track"
+    "trackingSearchUrl": "https://rayspeed.com/en/track",
+    "helpUrl": "https://rayspeed.com/en/faq"
   },
   "rex-indonesia": {
     "displayName": "REX Indonesia",
@@ -45247,7 +45735,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.rex.co.id/id"
+    "trackingSearchUrl": "https://www.rex.co.id/id",
+    "helpUrl": "https://www.rex.co.id/id/contact-us"
   },
   "ryder-last-mile": {
     "displayName": "Ryder Last Mile",
@@ -45268,7 +45757,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ryder.com/en-us/logistics/last-mile-delivery/tracking"
+    "trackingSearchUrl": "https://www.ryder.com/en-us/logistics/last-mile-delivery/tracking",
+    "helpUrl": "https://www.ryder.com/en-us/contact-us"
   },
   "shipglobal-us": {
     "displayName": "ShipGlobal US",
@@ -45308,7 +45798,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://shipglobal.us/track.html"
+    "trackingSearchUrl": "https://shipglobal.us/track.html",
+    "helpUrl": "https://shipglobal.us/contact-us.html"
   },
   "sjl-express": {
     "displayName": "SJL Express",
@@ -45364,7 +45855,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sol-track.com/"
+    "trackingSearchUrl": "https://www.sol-track.com/",
+    "helpUrl": "https://www.sol-track.com/contact"
   },
   "tiui": {
     "displayName": "Tiui",
@@ -45445,7 +45937,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.szlhyt.com/package-inquiry"
+    "trackingSearchUrl": "https://www.szlhyt.com/package-inquiry",
+    "helpUrl": "https://www.szlhyt.com/contact"
   },
   "uof-express": {
     "displayName": "UOF International",
@@ -45482,7 +45975,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.uofexp.com/search_order.aspx"
+    "trackingSearchUrl": "https://www.uofexp.com/search_order.aspx",
+    "helpUrl": "https://www.uofexp.com/company_show.aspx?id=194"
   },
   "yingtu": {
     "displayName": "Yingtu Supply Chain",
@@ -45516,7 +46010,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tms.yingtu56.com/trackIndex.htm"
+    "trackingSearchUrl": "https://tms.yingtu56.com/trackIndex.htm",
+    "helpUrl": "https://www.yingtu56.com/lianxifangshi/"
   },
   "cargo-expreso": {
     "displayName": "Cargo Expreso",
@@ -45618,7 +46113,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intellitrack.rtt.co.za/"
+    "trackingSearchUrl": "https://intellitrack.rtt.co.za/",
+    "helpUrl": "https://www.rtt.co.za/contact-us/"
   },
   "gofast": {
     "displayName": "GoFast",
@@ -45673,7 +46169,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hiyes.com.tw/CargoTracking"
+    "trackingSearchUrl": "https://www.hiyes.com.tw/CargoTracking",
+    "helpUrl": "https://www.hiyes.com.tw/Contact"
   },
   "htt-logistics": {
     "displayName": "HTT Logistics",
@@ -45715,7 +46212,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://online.nasxpress.com/track/"
+    "trackingSearchUrl": "https://online.nasxpress.com/track/",
+    "helpUrl": "https://www.nasxpress.com/contact.php"
   },
   "odm-express": {
     "displayName": "ODM Express",
@@ -45743,7 +46241,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://odmexpress.com.mx/rastreo/"
+    "trackingSearchUrl": "https://odmexpress.com.mx/rastreo/",
+    "helpUrl": "https://odmexpress.com.mx/contacto/"
   },
   "online-worldwide-logistics": {
     "displayName": "Online Worldwide",
@@ -45780,7 +46279,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.online56.com.cn/cargo-tracking/"
+    "trackingSearchUrl": "https://www.online56.com.cn/cargo-tracking/",
+    "helpUrl": "https://www.online56.com.cn/contact-us/"
   },
   "ontask-express": {
     "displayName": "Ontask Express",
@@ -45832,7 +46332,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://api.7hoursexpress.com/tracking/"
+    "trackingSearchUrl": "https://api.7hoursexpress.com/tracking/",
+    "helpUrl": "https://7hoursexpress.com/contact.html"
   },
   "a2b-express": {
     "displayName": "A2B Express Logistics",
@@ -45865,7 +46366,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://a2b.ba/pracenje/"
+    "trackingSearchUrl": "https://a2b.ba/pracenje/",
+    "helpUrl": "https://a2b.ba/kontakt/"
   },
   "acex": {
     "displayName": "ACEX+",
@@ -45929,7 +46431,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aics.in/tracking/"
+    "trackingSearchUrl": "https://aics.in/tracking/",
+    "helpUrl": "https://aics.in/contact-aics/"
   },
   "apg-global": {
     "displayName": "APG Global",
@@ -45959,7 +46462,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.apg-global.com/"
+    "trackingSearchUrl": "https://tracking.apg-global.com/",
+    "helpUrl": "https://apg-global.com/contact-us/"
   },
   "barq": {
     "displayName": "BARQ",
@@ -45991,7 +46495,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://web.barqfleet.com/en/tracking"
+    "trackingSearchUrl": "https://web.barqfleet.com/en/tracking",
+    "helpUrl": "https://barqapp-help.freshdesk.com/en/support/home"
   },
   "basic-shipping": {
     "displayName": "Basic Shipping",
@@ -46067,7 +46572,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://panelv2.boltkargo.com.tr/takip/"
+    "trackingSearchUrl": "https://panelv2.boltkargo.com.tr/takip/",
+    "helpUrl": "https://www.boltkargo.com.tr/iletisim.html"
   },
   "btc-logistic": {
     "displayName": "BTC Logistics",
@@ -46126,7 +46632,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://conveyoruniexpress.com/shipment.php"
+    "trackingSearchUrl": "https://conveyoruniexpress.com/shipment.php",
+    "helpUrl": "https://conveyoruniexpress.com/contact.php"
   },
   "coupang-logistics": {
     "displayName": "Coupang Logistics Services",
@@ -46168,7 +46675,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.derkurier.sk/"
+    "trackingSearchUrl": "https://tracking.derkurier.sk/",
+    "helpUrl": "https://derkurier.sk/kontakt.html"
   },
   "ecparcel": {
     "displayName": "ecParcel",
@@ -46200,7 +46708,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.ec-parcel.com/"
+    "trackingSearchUrl": "https://track.ec-parcel.com/",
+    "helpUrl": "https://www.ec-parcel.com/parcel-problem/"
   },
   "emiro": {
     "displayName": "Emiro",
@@ -46228,7 +46737,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.emiro.ae/tracking/"
+    "trackingSearchUrl": "https://www.emiro.ae/tracking/",
+    "helpUrl": "https://www.emiro.ae/contact/"
   },
   "fimile": {
     "displayName": "Fmile",
@@ -46258,7 +46768,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.fimile.com/website/tracking"
+    "trackingSearchUrl": "https://www.fimile.com/website/tracking",
+    "helpUrl": "https://www.fimile.com/website/contact"
   },
   "flipxpress": {
     "displayName": "Flip Xpress",
@@ -46278,7 +46789,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.flipxp.com/track"
+    "trackingSearchUrl": "https://www.flipxp.com/track",
+    "helpUrl": "https://www.flipxp.com/contact"
   },
   "frontdoor-collective": {
     "displayName": "The FRONTdoor Collective",
@@ -46328,7 +46840,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://furniturelogis.es/acceso-seguimiento-clientes/"
+    "trackingSearchUrl": "https://furniturelogis.es/acceso-seguimiento-clientes/",
+    "helpUrl": "https://furniturelogis.es/contacto/"
   },
   "go-logistics-au": {
     "displayName": "GO Logistics",
@@ -46360,7 +46873,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gologistics.com.au/track-your-parcel/"
+    "trackingSearchUrl": "https://gologistics.com.au/track-your-parcel/",
+    "helpUrl": "https://gologistics.com.au/company/contact/"
   },
   "golilla": {
     "displayName": "Golilla",
@@ -46445,7 +46959,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.logistaparcel.com/en/home/seguimiento-envios.html"
+    "trackingSearchUrl": "https://www.logistaparcel.com/en/home/seguimiento-envios.html",
+    "helpUrl": "https://www.logistaparcel.com/en/home/contacto.html"
   },
   "lucky-fast-express": {
     "displayName": "Lucky Fast Express",
@@ -46497,7 +47012,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://megacitycourier.in/Track.aspx"
+    "trackingSearchUrl": "https://megacitycourier.in/Track.aspx",
+    "helpUrl": "https://megacitycourier.in/Contactus.aspx"
   },
   "mgl-express": {
     "displayName": "MGL Express",
@@ -46531,7 +47047,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.mglexpress.com.mm/tracking"
+    "trackingSearchUrl": "https://www.mglexpress.com.mm/tracking",
+    "helpUrl": "https://www.mglexpress.com.mm/complain-form"
   },
   "miller-deliveries": {
     "displayName": "Miller Deliveries",
@@ -46562,7 +47079,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://status.millerdeliveries.co.il/"
+    "trackingSearchUrl": "https://status.millerdeliveries.co.il/",
+    "helpUrl": "https://millerdeliveries.co.il/%d7%a6%d7%a8%d7%95-%d7%a7%d7%a9%d7%a8/"
   },
   "mobel-services": {
     "displayName": "Möbel",
@@ -46583,7 +47101,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.mobelservices.com/"
+    "trackingSearchUrl": "https://tracking.mobelservices.com/",
+    "helpUrl": "https://www.mobelservices.com/contacto/"
   },
   "nk-logistic": {
     "displayName": "NK Logistic",
@@ -46619,7 +47138,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.nklogistic.pl/"
+    "trackingSearchUrl": "https://tracking.nklogistic.pl/",
+    "helpUrl": "https://tracking.nklogistic.pl/contact"
   },
   "penta-express": {
     "displayName": "Penta Express",
@@ -46680,7 +47200,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pacificexp.net/tracking-details.html"
+    "trackingSearchUrl": "https://pacificexp.net/tracking-details.html",
+    "helpUrl": "https://pacificexp.net/contact-us.html"
   },
   "servex": {
     "displayName": "Servex",
@@ -46712,7 +47233,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.servex.com.tr/tracking"
+    "trackingSearchUrl": "https://www.servex.com.tr/tracking",
+    "helpUrl": "https://www.servex.com.tr/servex-support"
   },
   "skladusa": {
     "displayName": "SkladUSA",
@@ -46749,7 +47271,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://skladusa.com/en/tracking/"
+    "trackingSearchUrl": "https://skladusa.com/en/tracking/",
+    "helpUrl": "https://skladusa.com/en/contacts/"
   },
   "tamex": {
     "displayName": "Tamex",
@@ -46808,7 +47331,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.transfera.com/"
+    "trackingSearchUrl": "https://tracking.transfera.com/",
+    "helpUrl": "https://transfera.com/kontakt/"
   },
   "u-envios": {
     "displayName": "U-ENVIOS",
@@ -46842,7 +47366,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://u-envios.com/ue-tracking"
+    "trackingSearchUrl": "https://u-envios.com/ue-tracking",
+    "helpUrl": "https://u-envios.com/contact"
   },
   "us-cargo": {
     "displayName": "US Cargo",
@@ -46874,7 +47399,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.us-cargo.com/track-your-shipment"
+    "trackingSearchUrl": "https://www.us-cargo.com/track-your-shipment",
+    "helpUrl": "https://www.us-cargo.com/contact/"
   },
   "vert-chez-vous": {
     "displayName": "Vert Chez Vous",
@@ -46931,7 +47457,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://wassel.ps/en/tracking"
+    "trackingSearchUrl": "https://wassel.ps/en/tracking",
+    "helpUrl": "https://wassel.ps/en/contact"
   },
   "widect": {
     "displayName": "Widect",
@@ -46950,7 +47477,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.widect.com/shipment-tracking"
+    "trackingSearchUrl": "https://www.widect.com/shipment-tracking",
+    "helpUrl": "https://www.widect.com/contact"
   },
   "xpress-courier-link": {
     "displayName": "ECL Express Courier Link",
@@ -46982,7 +47510,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://xpresscourierlink.com/tracking/"
+    "trackingSearchUrl": "https://xpresscourierlink.com/tracking/",
+    "helpUrl": "https://xpresscourierlink.com/contact-us/"
   },
   "zajel": {
     "displayName": "Zajel",
@@ -47012,7 +47541,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://zajel.com/track"
+    "trackingSearchUrl": "https://zajel.com/track",
+    "helpUrl": "https://zajel.com/support"
   },
   "ahamove": {
     "displayName": "Ahamove",
@@ -47075,7 +47605,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://ancdelivers.com.au/receiving/track-your-item"
+    "trackingSearchUrl": "https://ancdelivers.com.au/receiving/track-your-item",
+    "helpUrl": "https://ancdelivers.com.au/help-support/contact-us"
   },
   "bestfulfill": {
     "displayName": "BestFulfill Packet",
@@ -47150,7 +47681,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://c807xpress.com/tracking/"
+    "trackingSearchUrl": "https://c807xpress.com/tracking/",
+    "helpUrl": "https://c807xpress.com/sv/contacto/"
   },
   "cathedis": {
     "displayName": "Cathedis",
@@ -47177,7 +47709,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cathedis.ma/shipment/"
+    "trackingSearchUrl": "https://cathedis.ma/shipment/",
+    "helpUrl": "https://cathedis.ma/contacts/"
   },
   "cps-lastmile": {
     "displayName": "CPS Last Mile",
@@ -47223,7 +47756,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.daiichi-kamotsu.co.jp/chase/contact_num/"
+    "trackingSearchUrl": "https://www.daiichi-kamotsu.co.jp/chase/contact_num/",
+    "helpUrl": "https://www.daiichi-kamotsu.co.jp/inquiry/"
   },
   "deliveright": {
     "displayName": "Deliveright",
@@ -47251,7 +47785,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://deliveright.com/track-orders/"
+    "trackingSearchUrl": "https://deliveright.com/track-orders/",
+    "helpUrl": "https://deliveright.com/contact-us/"
   },
   "ecourier-uk": {
     "displayName": "eCourier UK",
@@ -47279,7 +47814,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ecourier.co.uk/tracking/"
+    "trackingSearchUrl": "https://www.ecourier.co.uk/tracking/",
+    "helpUrl": "https://www.ecourier.co.uk/contact-us/"
   },
   "gle-colombia": {
     "displayName": "G.L.E.",
@@ -47311,7 +47847,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.glecolombia.com/es/rastreo"
+    "trackingSearchUrl": "https://www.glecolombia.com/es/rastreo",
+    "helpUrl": "https://www.glecolombia.com/es/contactanos"
   },
   "greenway-vn": {
     "displayName": "Greenway",
@@ -47457,7 +47994,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://lms.m24logistics.com/track-order"
+    "trackingSearchUrl": "https://lms.m24logistics.com/track-order",
+    "helpUrl": "https://m24logistics.com/contact/"
   },
   "mensajeros-urbanos": {
     "displayName": "Mensajeros Urbanos",
@@ -47485,7 +48023,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mensajerosurbanos.com/"
+    "trackingSearchUrl": "https://mensajerosurbanos.com/",
+    "helpUrl": "https://pqrs.mensajerosurbanos.com/centro-de-ayuda"
   },
   "moova": {
     "displayName": "Moova",
@@ -47592,7 +48131,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://omlogisticssupplychain.com/track-shipment"
+    "trackingSearchUrl": "https://omlogisticssupplychain.com/track-shipment",
+    "helpUrl": "https://omlogisticssupplychain.com/contact"
   },
   "ots-chile": {
     "displayName": "OTS Chile",
@@ -47608,7 +48148,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.otschile.cl/tracking"
+    "trackingSearchUrl": "https://www.otschile.cl/tracking",
+    "helpUrl": "https://www.otschile.cl/preguntas-frecuentes"
   },
   "peru-box-air": {
     "displayName": "Perú Box Air",
@@ -47627,7 +48168,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.peruboxair.pe/seguimiento-de-envios/"
+    "trackingSearchUrl": "https://www.peruboxair.pe/seguimiento-de-envios/",
+    "helpUrl": "https://www.peruboxair.pe/contacto/"
   },
   "premier-deliveries-uk": {
     "displayName": "Premier Deliveries",
@@ -47662,7 +48204,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://myorder.productcaregroup.com/"
+    "trackingSearchUrl": "https://myorder.productcaregroup.com/",
+    "helpUrl": "https://www.productcaregroup.com/contact-us"
   },
   "rangel": {
     "displayName": "Rangel",
@@ -47689,7 +48232,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.rangel.com/track/search"
+    "trackingSearchUrl": "https://my.rangel.com/track/search",
+    "helpUrl": "https://www.rangel.com/pt/apoio-ao-cliente/"
   },
   "rodonaves": {
     "displayName": "Rodonaves",
@@ -47732,7 +48276,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://route1groupltd.co.uk/two-person-home-delivery/customer-hub/"
+    "trackingSearchUrl": "https://route1groupltd.co.uk/two-person-home-delivery/customer-hub/",
+    "helpUrl": "https://route1groupltd.co.uk/contact-us/"
   },
   "seabourne-logistics": {
     "displayName": "Seabourne Logistics",
@@ -47755,7 +48300,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://eutracking.seabournelogistics.com/UK-EN-1"
+    "trackingSearchUrl": "https://eutracking.seabournelogistics.com/UK-EN-1",
+    "helpUrl": "https://seabournelogistics.com/uk/contact-us/"
   },
   "sgk-home-delivery": {
     "displayName": "SGK Home Delivery",
@@ -47775,7 +48321,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sgkhomedelivery.co.uk/track-your-order"
+    "trackingSearchUrl": "https://sgkhomedelivery.co.uk/track-your-order",
+    "helpUrl": "https://sgkhomedelivery.co.uk/contact"
   },
   "shalom-pe": {
     "displayName": "Shalom",
@@ -47841,7 +48388,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://spfly.com.br/rastreamento/"
+    "trackingSearchUrl": "https://spfly.com.br/rastreamento/",
+    "helpUrl": "https://spfly.com.br/contato-2/"
   },
   "stop-start": {
     "displayName": "Stop Start",
@@ -47872,7 +48420,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track-my-order.co.uk/"
+    "trackingSearchUrl": "https://track-my-order.co.uk/",
+    "helpUrl": "https://www.stop-start.co.uk/contact-us/"
   },
   "svuum": {
     "displayName": "Svuum",
@@ -47903,7 +48452,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://svuum.gr/"
+    "trackingSearchUrl": "https://svuum.gr/",
+    "helpUrl": "https://svuum.gr/contact_form/"
   },
   "taqbin-sg": {
     "displayName": "Yamato Transport Singapore",
@@ -48003,7 +48553,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.uparcel.sg/track"
+    "trackingSearchUrl": "https://www.uparcel.sg/track",
+    "helpUrl": "https://www.uparcel.sg/contact-us"
   },
   "value-logistics": {
     "displayName": "Value Logistics",
@@ -48035,7 +48586,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://value.co.za/track/search.php"
+    "trackingSearchUrl": "https://value.co.za/track/search.php",
+    "helpUrl": "https://value.co.za/contact-us/"
   },
   "welivery": {
     "displayName": "Welivery",
@@ -48104,7 +48656,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alilpost.com/en/tracking/"
+    "trackingSearchUrl": "https://alilpost.com/en/tracking/",
+    "helpUrl": "https://alilpost.com/en/contacts/"
   },
   "dimex": {
     "displayName": "DIMEX",
@@ -48180,7 +48733,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dniprollc.com/en/packages-tracking/"
+    "trackingSearchUrl": "https://dniprollc.com/en/packages-tracking/",
+    "helpUrl": "https://dniprollc.com/en/contacts/"
   },
   "emu-express": {
     "displayName": "EMU Express",
@@ -48214,7 +48768,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://emu.uz/en/tracking"
+    "trackingSearchUrl": "https://emu.uz/en/tracking",
+    "helpUrl": "https://emu.uz/en/contact"
   },
   "express-ru": {
     "displayName": "Express.Ru",
@@ -48241,7 +48796,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.express.ru/office/tracking"
+    "trackingSearchUrl": "https://www.express.ru/office/tracking",
+    "helpUrl": "https://www.express.ru/contacts"
   },
   "flecha-amarilla": {
     "displayName": "Paquetería Flecha Amarilla",
@@ -48291,7 +48847,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://garantpost.ru/tracking/"
+    "trackingSearchUrl": "https://garantpost.ru/tracking/",
+    "helpUrl": "https://garantpost.ru/contact/"
   },
   "kargoturk": {
     "displayName": "KargoTurk",
@@ -48324,7 +48881,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kargoturk.com.tr/kargo-takip"
+    "trackingSearchUrl": "https://www.kargoturk.com.tr/kargo-takip",
+    "helpUrl": "https://www.kargoturk.com.tr/iletisim"
   },
   "korexgarant": {
     "displayName": "Korexgarant",
@@ -48346,7 +48904,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://korex.by/"
+    "trackingSearchUrl": "https://korex.by/",
+    "helpUrl": "https://korex.by/contacts"
   },
   "motorex": {
     "displayName": "Motorex",
@@ -48376,7 +48935,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.motorex.com.my/en/tracking-motorex"
+    "trackingSearchUrl": "https://www.motorex.com.my/en/tracking-motorex",
+    "helpUrl": "https://samedaydelivery.motorex.com.my/cont/contact-us"
   },
   "porlor": {
     "displayName": "PorLor Express",
@@ -48411,7 +48971,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.porlor.co.th/Tracking"
+    "trackingSearchUrl": "https://www.porlor.co.th/Tracking",
+    "helpUrl": "https://www.porlor.co.th/Contactus"
   },
   "spark-kz": {
     "displayName": "Spark",
@@ -48432,7 +48993,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://spark.kz/"
+    "trackingSearchUrl": "https://spark.kz/",
+    "helpUrl": "https://spark.kz/en/contacts"
   },
   "tinypack": {
     "displayName": "TinyPack",
@@ -48463,7 +49025,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tinypack.mx/rastreo/"
+    "trackingSearchUrl": "https://tinypack.mx/rastreo/",
+    "helpUrl": "https://tinypack.mx/contacto/"
   },
   "topdelivery": {
     "displayName": "TopDelivery",
@@ -48498,7 +49061,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.topdelivery.ru/tracking/"
+    "trackingSearchUrl": "https://www.topdelivery.ru/tracking/",
+    "helpUrl": "https://www.topdelivery.ru/contacts/"
   },
   "agt-kurye": {
     "displayName": "AGT Kurye",
@@ -48519,7 +49083,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://takip.agtkurye.com/"
+    "trackingSearchUrl": "https://takip.agtkurye.com/",
+    "helpUrl": "https://www.agtkurye.com.tr/bize-ulasin"
   },
   "aqx-logistics": {
     "displayName": "AQX Logistics",
@@ -48551,7 +49116,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aqxlogistics.com/track"
+    "trackingSearchUrl": "https://aqxlogistics.com/track",
+    "helpUrl": "https://aqxlogistics.com/faqs"
   },
   "domesa": {
     "displayName": "Domesa",
@@ -48572,7 +49138,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.portal.domesa.com.ve/"
+    "trackingSearchUrl": "https://www.portal.domesa.com.ve/",
+    "helpUrl": "https://www.portal.domesa.com.ve/contacto/"
   },
   "herona-express": {
     "displayName": "Herona Express",
@@ -48596,7 +49163,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://tracking.heronaexpress.co.id/lacak.php"
+    "trackingSearchUrl": "https://tracking.heronaexpress.co.id/lacak.php",
+    "helpUrl": "https://heronaexpress.co.id/kontak.php"
   },
   "hub-group-final-mile": {
     "displayName": "Hub Group Final Mile",
@@ -48630,7 +49198,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hubgroup.com/logistics-management/final-mile/"
+    "trackingSearchUrl": "https://www.hubgroup.com/logistics-management/final-mile/",
+    "helpUrl": "https://www.hubgroup.com/about-us/contact-us/"
   },
   "jetizz": {
     "displayName": "Jetizz",
@@ -48650,7 +49219,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.jetizz.com/gonderi-takip"
+    "trackingSearchUrl": "https://app.jetizz.com/gonderi-takip",
+    "helpUrl": "https://jetizz.com/iletisim"
   },
   "mailex": {
     "displayName": "Mailex",
@@ -48696,7 +49266,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jiayingex.com/track-help/"
+    "trackingSearchUrl": "https://www.jiayingex.com/track-help/",
+    "helpUrl": "https://www.jiayingex.com/contact-us/"
   },
   "ltl-kr": {
     "displayName": "LTL KR",
@@ -48718,7 +49289,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ltl.kr/order"
+    "trackingSearchUrl": "https://ltl.kr/order",
+    "helpUrl": "https://ltl.kr/contact-us"
   },
   "okay-parcel": {
     "displayName": "Okay Parcel",
@@ -48861,7 +49433,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://magic-trans.ru/otsledit-gruz/"
+    "trackingSearchUrl": "https://magic-trans.ru/otsledit-gruz/",
+    "helpUrl": "https://magic-trans.ru/kontakty/"
   },
   "red-express": {
     "displayName": "Red Express",
@@ -48886,7 +49459,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://redexpress.kg/"
+    "trackingSearchUrl": "https://redexpress.kg/",
+    "helpUrl": "https://redexpress.kg/support"
   },
   "qatar-post": {
     "displayName": "Qatar Post",
@@ -49001,7 +49575,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.goforgps.com/tracking"
+    "trackingSearchUrl": "https://www.goforgps.com/tracking",
+    "helpUrl": "https://www.goforgps.com/faq"
   },
   "logistics-solution": {
     "displayName": "Logistics Solution",
@@ -49030,7 +49605,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://logistics-solution.eu/de/"
+    "trackingSearchUrl": "https://logistics-solution.eu/de/",
+    "helpUrl": "https://logistics-solution.eu/de/contact"
   },
   "quick-fort": {
     "displayName": "Quick Fort",
@@ -49100,7 +49676,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wpglogis.com/tracking/"
+    "trackingSearchUrl": "https://www.wpglogis.com/tracking/",
+    "helpUrl": "https://www.wpglogis.com/support/"
   },
   "flight-logistics": {
     "displayName": "Flight Logistics",
@@ -49132,7 +49709,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking",
-    "trackingUrlTemplate": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking&consign_note={trackingNumber}"
+    "trackingUrlTemplate": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking&consign_note={trackingNumber}",
+    "helpUrl": "https://www.flightlg.com/contact-us/"
   },
   "peregrine-ship": {
     "displayName": "Peregrine Ship",
@@ -49181,7 +49759,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://profoundui.smtl.com/profoundui/start?pgm=profoundui/mwp705c&p1=0&l1=1&p2=none&l2=4&p3=none&l3=4"
+    "trackingSearchUrl": "https://profoundui.smtl.com/profoundui/start?pgm=profoundui/mwp705c&p1=0&l1=1&p2=none&l2=4&p3=none&l3=4",
+    "helpUrl": "https://www.smtl.com/contact-smt"
   },
   "crane-worldwide": {
     "displayName": "Crane Worldwide",
@@ -49221,7 +49800,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://magnumlog.com/track-shipment"
+    "trackingSearchUrl": "https://magnumlog.com/track-shipment",
+    "helpUrl": "https://magnumlog.com/contact"
   },
   "topnic": {
     "displayName": "Topnic",
@@ -49249,7 +49829,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://topnic.com.hk/order-tracking"
+    "trackingSearchUrl": "https://topnic.com.hk/order-tracking",
+    "helpUrl": "https://topnic.com.hk/contact-us"
   },
   "dhx": {
     "displayName": "DHX",
@@ -49270,7 +49851,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dhx.com/quicktrack.aspx"
+    "trackingSearchUrl": "https://www.dhx.com/quicktrack.aspx",
+    "helpUrl": "https://www.dhx.com/contact-help.aspx"
   },
   "jb-hunt": {
     "displayName": "J.B. Hunt",
@@ -49303,7 +49885,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jbhunt.com/shippers/final-mile-services/track-shipments/"
+    "trackingSearchUrl": "https://www.jbhunt.com/shippers/final-mile-services/track-shipments/",
+    "helpUrl": "https://www.jbhunt.com/contact-us"
   },
   "rohlig": {
     "displayName": "Röhlig Logistics",
@@ -49343,7 +49926,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://worldtrak.shipalliance.com/cvportal/shipinquiry/quicktrack.aspx"
+    "trackingSearchUrl": "https://worldtrak.shipalliance.com/cvportal/shipinquiry/quicktrack.aspx",
+    "helpUrl": "https://shipalliance.com/contact"
   },
   "matson": {
     "displayName": "Matson",
@@ -49365,7 +49949,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.matson.com/shipment-tracking.html"
+    "trackingSearchUrl": "https://www.matson.com/shipment-tracking.html",
+    "helpUrl": "https://www.matson.com/corporate/contactus"
   },
   "schneider": {
     "displayName": "Schneider",
@@ -49384,7 +49969,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://schneider.com/track"
+    "trackingSearchUrl": "https://schneider.com/track",
+    "helpUrl": "https://schneider.com/contact-us"
   },
   "wooliiporter": {
     "displayName": "WooliiPorter",
@@ -49419,7 +50005,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://woolii.com/track"
+    "trackingSearchUrl": "https://woolii.com/track",
+    "helpUrl": "https://woolii.com/contact"
   },
   "mountain-movers": {
     "displayName": "Mountain Movers",
@@ -49447,7 +50034,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://work.mymmtl.com/track"
+    "trackingSearchUrl": "https://work.mymmtl.com/track",
+    "helpUrl": "https://mymmtl.com/contact-us/"
   },
   "cargo-trans-logistik": {
     "displayName": "CTL Cargo Trans Logistik",
@@ -49479,7 +50067,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://ctl-partner.net/CTL-Onlineplattform/Tracking/Default.aspx",
-    "trackingUrlTemplate": "https://ctl-partner.net/CTL-Onlineplattform/Tracking/Default.aspx?snr={trackingNumber}"
+    "trackingUrlTemplate": "https://ctl-partner.net/CTL-Onlineplattform/Tracking/Default.aspx?snr={trackingNumber}",
+    "helpUrl": "https://ctl-ag.de/kontakt/"
   },
   "edi-express": {
     "displayName": "EDI Express",
@@ -49500,7 +50089,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.ediexpressinc.com/pro_pu_trace.asp"
+    "trackingSearchUrl": "https://my.ediexpressinc.com/pro_pu_trace.asp",
+    "helpUrl": "https://www.ediexpressinc.com/contact-us"
   },
   "fmd-distribution": {
     "displayName": "FMD Distribution",
@@ -49568,7 +50158,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jas.com/"
+    "trackingSearchUrl": "https://www.jas.com/",
+    "helpUrl": "https://www.jas.com/contact/"
   },
   "tiptop": {
     "displayName": "TipTop",
@@ -49663,7 +50254,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bigpost.com.au/tracking/"
+    "trackingSearchUrl": "https://bigpost.com.au/tracking/",
+    "helpUrl": "https://bigpost.com.au/contact-us/"
   },
   "coship": {
     "displayName": "COSHIP",
@@ -49696,7 +50288,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.coship.ca/tracking/"
+    "trackingSearchUrl": "https://www.coship.ca/tracking/",
+    "helpUrl": "https://www.coship.ca/contact/"
   },
   "apd-parcel": {
     "displayName": "APD",
@@ -49717,7 +50310,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://online.apdparcel.com.au/track"
+    "trackingSearchUrl": "https://online.apdparcel.com.au/track",
+    "helpUrl": "https://apdparcel.com.au/contact-us/"
   },
   "bigfoot-express": {
     "displayName": "Bigfoot Express Freight",
@@ -49743,7 +50337,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bigfootexpress.pperfect.com/"
+    "trackingSearchUrl": "https://bigfootexpress.pperfect.com/",
+    "helpUrl": "https://www.bigfootexpress.co.za/contact/"
   },
   "brink-transport": {
     "displayName": "Brink Transport",
@@ -49773,7 +50368,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://brinkdk.opter.cloud/tt"
+    "trackingSearchUrl": "https://brinkdk.opter.cloud/tt",
+    "helpUrl": "https://www.brinktransport.dk/kontakt.aspx"
   },
   "campos-cadilhe": {
     "displayName": "Campos&Cadilhe",
@@ -49834,7 +50430,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://carrybee.com/track"
+    "trackingSearchUrl": "https://carrybee.com/track",
+    "helpUrl": "https://carrybee.com/contact-us"
   },
   "express-freight-ni": {
     "displayName": "Express Freight",
@@ -49863,7 +50460,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.expressfreight.co.uk/track"
+    "trackingSearchUrl": "https://www.expressfreight.co.uk/track",
+    "helpUrl": "https://www.expressfreight.co.uk/contact"
   },
   "faster-shipe": {
     "displayName": "Faster Shipe",
@@ -49953,7 +50551,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.garudavega.com/track/"
+    "trackingSearchUrl": "https://www.garudavega.com/track/",
+    "helpUrl": "https://www.garudavega.com/contact-us"
   },
   "gruber-logistics": {
     "displayName": "GRUBER Logistics",
@@ -49985,7 +50584,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://glapptracking.gruber-logistics.com/search-tracking-number"
+    "trackingSearchUrl": "https://glapptracking.gruber-logistics.com/search-tracking-number",
+    "helpUrl": "https://www.gruber-logistics.com/contatti/"
   },
   "huuneh": {
     "displayName": "Huuneh",
@@ -50013,7 +50613,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://huuneh.com/dashboard/tracking.php"
+    "trackingSearchUrl": "https://huuneh.com/dashboard/tracking.php",
+    "helpUrl": "https://huuneh.com/contact/"
   },
   "intertown-transport": {
     "displayName": "Intertown Transport",
@@ -50032,7 +50633,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intertown.pperfect.com/"
+    "trackingSearchUrl": "https://intertown.pperfect.com/",
+    "helpUrl": "https://www.intertown.co.za/contact/"
   },
   "king-solutions": {
     "displayName": "King Solutions",
@@ -50063,7 +50665,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kingsolutionsglobal.com/track/"
+    "trackingSearchUrl": "https://kingsolutionsglobal.com/track/",
+    "helpUrl": "https://kingsolutionsglobal.com/contact-us/"
   },
   "lafasta": {
     "displayName": "Lafasta",
@@ -50091,7 +50694,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://c.lafasta.sa.com/Track/"
+    "trackingSearchUrl": "https://c.lafasta.sa.com/Track/",
+    "helpUrl": "https://lafasta.sa.com/Contact"
   },
   "laser-logistics": {
     "displayName": "Laser Logistics",
@@ -50119,7 +50723,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.laserlogistics.co.za/parcel-tracking/"
+    "trackingSearchUrl": "https://www.laserlogistics.co.za/parcel-tracking/",
+    "helpUrl": "https://www.laserlogistics.co.za/contact/"
   },
   "moran-transportation": {
     "displayName": "Moran Transportation",
@@ -50158,7 +50763,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/mor.pol/facts.htm"
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/mor.pol/facts.htm",
+    "helpUrl": "https://www.moranltl.com/contact_main/"
   },
   "mte-xpress": {
     "displayName": "MTE Xpress",
@@ -50189,7 +50795,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.mtexpress.co.za/track"
+    "trackingSearchUrl": "https://portal.mtexpress.co.za/track",
+    "helpUrl": "https://mtexpress.co.za/contacts"
   },
   "nova-kargo": {
     "displayName": "Nova Kargo",
@@ -50219,7 +50826,8 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://novakargo.com/iletisim/"
   },
   "oxperta-express": {
     "displayName": "Oxperta Express",
@@ -50249,7 +50857,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://express.oxperta.com/seguimiento-de-envio/"
+    "trackingSearchUrl": "https://express.oxperta.com/seguimiento-de-envio/",
+    "helpUrl": "https://express.oxperta.com/contactanos/"
   },
   "puntopost": {
     "displayName": "PuntoPost",
@@ -50310,7 +50919,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://rika.kz/en/tracking/"
+    "trackingSearchUrl": "https://rika.kz/en/tracking/",
+    "helpUrl": "https://rika.kz/en/contact/"
   },
   "rocket-shipping": {
     "displayName": "Rocket Shipping",
@@ -50369,7 +50979,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.southpost.com.ar/"
+    "trackingSearchUrl": "https://www.southpost.com.ar/",
+    "helpUrl": "https://www.southpost.com.ar/#/Q&A"
   },
   "tma-companies": {
     "displayName": "TMA",
@@ -50389,7 +51000,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tmacompanies.com/Tracking/default.aspx"
+    "trackingSearchUrl": "https://www.tmacompanies.com/Tracking/default.aspx",
+    "helpUrl": "https://www.tmacompanies.com/ContactUs.aspx"
   },
   "total-transportation": {
     "displayName": "Total Transportation & Distribution",
@@ -50430,7 +51042,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/tot.pol/facts.htm"
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/tot.pol/facts.htm",
+    "helpUrl": "https://ttdwest.com/contact-us/"
   },
   "transportes-rapex": {
     "displayName": "Transportes Rapex",
@@ -50485,7 +51098,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://velexp.com/home-tracking"
+    "trackingSearchUrl": "https://velexp.com/home-tracking",
+    "helpUrl": "https://velexp.com/contact-us"
   },
   "walker-logistics": {
     "displayName": "Walker Logistics",
@@ -50545,7 +51159,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://xfm.com.au/xpress-track/"
+    "trackingSearchUrl": "https://xfm.com.au/xpress-track/",
+    "helpUrl": "https://xfm.com.au/get-started-with-us/"
   },
   "yuexi-logistics": {
     "displayName": "YXL Logistics",
@@ -50588,7 +51203,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yxlg.com/track.html"
+    "trackingSearchUrl": "https://www.yxlg.com/track.html",
+    "helpUrl": "https://www.yxlg.com/contact.html"
   },
   "dongdu": {
     "displayName": "Dongdu Logistics",
@@ -50776,7 +51392,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hubdelivery.com/HubDelivery/PackageTracking.html"
+    "trackingSearchUrl": "https://www.hubdelivery.com/HubDelivery/PackageTracking.html",
+    "helpUrl": "https://www.hubdelivery.com/HubDelivery/contacts.html"
   },
   "kuqi": {
     "displayName": "Kuqi Supply Chain",
@@ -50827,7 +51444,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ndsweb.tmwcloud.com/trace/external.msw"
+    "trackingSearchUrl": "https://ndsweb.tmwcloud.com/trace/external.msw",
+    "helpUrl": "https://national-delivery.com/Contact_Us"
   },
   "best-express-kh": {
     "displayName": "BEST Express Cambodia",
@@ -50916,7 +51534,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.firstlogistics.co.id/trace/"
+    "trackingSearchUrl": "https://www.firstlogistics.co.id/trace/",
+    "helpUrl": "https://www.firstlogistics.co.id/contact.html"
   },
   "flash-express-la": {
     "displayName": "Flash Express Laos",
@@ -51026,7 +51645,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wmg-group.com/"
+    "trackingSearchUrl": "https://www.wmg-group.com/",
+    "helpUrl": "https://www.wmg-group.com/contact"
   },
   "yto-ph": {
     "displayName": "YTO Express Philippines",
@@ -51067,7 +51687,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aeronet.com/tracking/"
+    "trackingSearchUrl": "https://www.aeronet.com/tracking/",
+    "helpUrl": "https://www.aeronet.com/national-control-center-24-7-customer-support/"
   },
   "arco-spedizioni": {
     "displayName": "Arco Spedizioni",
@@ -51087,7 +51708,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.arcospedizioni.it/"
+    "trackingSearchUrl": "https://www.arcospedizioni.it/",
+    "helpUrl": "https://www.arcospedizioni.it/contatti/"
   },
   "boxc": {
     "displayName": "BoxC",
@@ -51118,7 +51740,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://boxc.com/track"
+    "trackingSearchUrl": "https://boxc.com/track",
+    "helpUrl": "https://support.boxc.com/support/home"
   },
   "brauns-express": {
     "displayName": "Braun's Express",
@@ -51150,7 +51773,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.braunsexpress.com/tracking/"
+    "trackingSearchUrl": "https://www.braunsexpress.com/tracking/",
+    "helpUrl": "https://www.braunsexpress.com/contact-us/"
   },
   "crossflight": {
     "displayName": "Crossflight",
@@ -51189,7 +51813,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.crossflight.com/shipping/tracking/tracking.jsp"
+    "trackingSearchUrl": "https://my.crossflight.com/shipping/tracking/tracking.jsp",
+    "helpUrl": "https://www.crossflight.com/contact-us"
   },
   "doora-logistics": {
     "displayName": "Doora Logistics",
@@ -51228,7 +51853,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.doora.co.kr/?p=43bf98f0-5801-4251-89ff-f22199d58dff"
+    "trackingSearchUrl": "https://www.doora.co.kr/?p=43bf98f0-5801-4251-89ff-f22199d58dff",
+    "helpUrl": "https://www.doora.co.kr/?p=331528ee-9145-4fc5-a4c2-5b54b585de76"
   },
   "fastship-th": {
     "displayName": "FastShip",
@@ -51261,7 +51887,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://track.fastship.co/"
+    "trackingSearchUrl": "https://track.fastship.co/",
+    "helpUrl": "https://fastship.co/help"
   },
   "meitetsu-unyu": {
     "displayName": "Meitetsu NX Unyu",
@@ -51283,7 +51910,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ap.meitetsuunyu.co.jp/webtrace/webtsuiseki/webtsuiseki.aspx"
+    "trackingSearchUrl": "https://ap.meitetsuunyu.co.jp/webtrace/webtsuiseki/webtsuiseki.aspx",
+    "helpUrl": "https://www.meitetsuunyu.co.jp/store/"
   },
   "runforint": {
     "displayName": "Runforint Logistics",
@@ -51315,7 +51943,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=137"
+    "trackingSearchUrl": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=137",
+    "helpUrl": "https://www.runforint.com/index.php?m=home&c=Lists&a=index&tid=107"
   },
   "the-delivery-group": {
     "displayName": "The Delivery Group",
@@ -51352,7 +51981,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://tracking.dockethub.com/shipment/{trackingNumber}?style=TDG",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.dockethub.com/shipment/?style=TDG"
+    "trackingSearchUrl": "https://tracking.dockethub.com/shipment/?style=TDG",
+    "helpUrl": "https://thedeliverygroup.co.uk/contact/"
   },
   "trumpcard": {
     "displayName": "TrumpCard",
@@ -51383,7 +52013,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill"
+    "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill",
+    "helpUrl": "https://trumpcardinc.com/contact-us/"
   },
   "blitznow": {
     "displayName": "Blitz",
@@ -51450,7 +52081,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://borzodelivery.com/in/track"
+    "trackingSearchUrl": "https://borzodelivery.com/in/track",
+    "helpUrl": "https://borzodelivery.com/in/contacts"
   },
   "fillo": {
     "displayName": "Fillo",
@@ -51472,7 +52104,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://takip.fillo.com.tr/"
+    "trackingSearchUrl": "https://takip.fillo.com.tr/",
+    "helpUrl": "https://www.fillo.com.tr/iletisim.html"
   },
   "hlog-transportes": {
     "displayName": "HLOG",
@@ -51497,7 +52130,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://hlogtransportes.com.br/buscar"
+    "trackingSearchUrl": "https://hlogtransportes.com.br/buscar",
+    "helpUrl": "https://hlogtransportes.com.br/faleconosco"
   },
   "international-bridge": {
     "displayName": "International Bridge",
@@ -51529,7 +52163,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.myib.com/"
+    "trackingSearchUrl": "https://tracking.myib.com/",
+    "helpUrl": "https://myib.com/contact-us"
   },
   "kunzendorf": {
     "displayName": "Kunzendorf Spedition",
@@ -51572,7 +52207,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.sent24.de/index.php/tracking/search"
+    "trackingSearchUrl": "https://portal.sent24.de/index.php/tracking/search",
+    "helpUrl": "https://mzz-briefdienst.de/kontakt-37"
   },
   "post-modern": {
     "displayName": "PostModern",
@@ -51591,7 +52227,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.post-modern.de/tracking/"
+    "trackingSearchUrl": "https://www.post-modern.de/tracking/",
+    "helpUrl": "https://www.post-modern.de/kontakt/"
   },
   "qwqer": {
     "displayName": "QWQER",
@@ -51612,7 +52249,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://qwqer.eu/lv/en/sutijumu-izsekosana"
+    "trackingSearchUrl": "https://qwqer.eu/lv/en/sutijumu-izsekosana",
+    "helpUrl": "https://qwqer.eu/lv/en/kontakti"
   },
   "shopini-world": {
     "displayName": "ShopiniWorld",
@@ -51634,7 +52272,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shopiniworld.com/track-shipments"
+    "trackingSearchUrl": "https://www.shopiniworld.com/track-shipments",
+    "helpUrl": "https://www.shopiniworld.com/contact-us"
   },
   "wpx": {
     "displayName": "WPX Delivery Solutions",
@@ -51712,7 +52351,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.dagoexpress.com/find-order"
+    "trackingSearchUrl": "https://app.dagoexpress.com/find-order",
+    "helpUrl": "https://dagoexpress.com/kontakt/"
   },
   "f2-logistics": {
     "displayName": "F2 Logistics",
@@ -51732,7 +52372,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.f2logistics.com/tnt/"
+    "trackingSearchUrl": "https://www.f2logistics.com/tnt/",
+    "helpUrl": "https://www.f2logistics.com/contact/"
   },
   "jlog": {
     "displayName": "JLog",
@@ -51762,7 +52403,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jlog.co.za/tracking/"
+    "trackingSearchUrl": "https://jlog.co.za/tracking/",
+    "helpUrl": "https://jlog.co.za/contact-us/"
   },
   "lexship": {
     "displayName": "LEXSHIP",
@@ -51792,7 +52434,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.lexship.biz/"
+    "trackingSearchUrl": "https://track.lexship.biz/",
+    "helpUrl": "https://www.lexship.com/contact"
   },
   "makesend": {
     "displayName": "MAKESEND",
@@ -51825,7 +52468,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.makesend.asia/tracking"
+    "trackingSearchUrl": "https://app.makesend.asia/tracking",
+    "helpUrl": "https://www.makesend.asia/contact/"
   },
   "navata": {
     "displayName": "Navata Road Transport",
@@ -51844,7 +52488,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://navata.com/track-consignment"
+    "trackingSearchUrl": "https://navata.com/track-consignment",
+    "helpUrl": "https://navata.com/faq"
   },
   "tci-freight": {
     "displayName": "TCI Freight",
@@ -51863,7 +52508,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tcifreight.in/tracking-consignment/"
+    "trackingSearchUrl": "https://tcifreight.in/tracking-consignment/",
+    "helpUrl": "https://tcifreight.in/contact-us/"
   },
   "teleport": {
     "displayName": "Teleport",
@@ -51897,7 +52543,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.teleport.asia/track"
+    "trackingSearchUrl": "https://www.teleport.asia/track",
+    "helpUrl": "https://help.teleport.it/"
   },
   "time-matters": {
     "displayName": "time:matters",
@@ -51925,7 +52572,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://booking.time-matters.com/en-US/tracking"
+    "trackingSearchUrl": "https://booking.time-matters.com/en-US/tracking",
+    "helpUrl": "https://www.time-matters.com/customer-service/"
   },
   "vichare": {
     "displayName": "Vichare Loginext",
@@ -51946,7 +52594,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vichareloginext.com/track-shipment"
+    "trackingSearchUrl": "https://www.vichareloginext.com/track-shipment",
+    "helpUrl": "https://www.vichareloginext.com/contact"
   },
   "alphastline": {
     "displayName": "Alphastline",
@@ -52055,7 +52704,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://integraa.net/gestione/tracking.php"
+    "trackingSearchUrl": "https://integraa.net/gestione/tracking.php",
+    "helpUrl": "https://www.integraaposta.it/supporto-integraa/"
   },
   "csomagpiac": {
     "displayName": "Csomagpiac",
@@ -52139,7 +52789,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://homedt.hu/nyomonkovetes"
+    "trackingSearchUrl": "https://homedt.hu/nyomonkovetes",
+    "helpUrl": "https://homedt.hu/kapcsolat"
   },
   "mixpakk": {
     "displayName": "Mixpakk",
@@ -52172,7 +52823,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mixpakk.hu/nyomkovetes/"
+    "trackingSearchUrl": "https://mixpakk.hu/nyomkovetes/",
+    "helpUrl": "https://mixpakk.hu/kapcsolat/"
   },
   "qt-express": {
     "displayName": "QT Express",
@@ -52202,7 +52854,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.qtlogistics.eu/hu"
+    "trackingSearchUrl": "https://tracking.qtlogistics.eu/hu",
+    "helpUrl": "https://qtlogistics.eu/contact/"
   },
   "szami-group": {
     "displayName": "SZAMI Group",
@@ -52221,7 +52874,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.szamigroup.hu/nyomonkovetes/"
+    "trackingSearchUrl": "https://www.szamigroup.hu/nyomonkovetes/",
+    "helpUrl": "https://www.szamigroup.hu/kapcsolat/"
   },
   "trans-pack": {
     "displayName": "Trans-Pack",
@@ -52252,7 +52906,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://partner.trans-pack.hu/csomagkovetes"
+    "trackingSearchUrl": "https://partner.trans-pack.hu/csomagkovetes",
+    "helpUrl": "https://trans-pack.hu/kapcsolat"
   },
   "xls-futar": {
     "displayName": "XLS Futár",
@@ -52304,7 +52959,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=13"
+    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=13",
+    "helpUrl": "https://24curier.ro/contact/"
   },
   "albatomi": {
     "displayName": "Albatomi",
@@ -52324,7 +52980,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.albatomi.ro/"
+    "trackingSearchUrl": "https://www.albatomi.ro/",
+    "helpUrl": "https://www.albatomi.ro/contact"
   },
   "best-courier-ro": {
     "displayName": "Best Courier",
@@ -52345,7 +53002,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=12"
+    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=12",
+    "helpUrl": "https://www.bestcourier.ro/contact.php"
   },
   "cautcurier": {
     "displayName": "CautCurier",
@@ -52413,7 +53071,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.corlanpostexpress.ro/"
+    "trackingSearchUrl": "https://track.corlanpostexpress.ro/",
+    "helpUrl": "https://corlanpostexpress.ro/contact/"
   },
   "curiera": {
     "displayName": "Curiera",
@@ -52432,7 +53091,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.curiera.ro/cscourier/Main?tracking=true&appcont=4416"
+    "trackingSearchUrl": "https://app.curiera.ro/cscourier/Main?tracking=true&appcont=4416",
+    "helpUrl": "https://curiera.ro/contact/"
   },
   "intelligent-logistik": {
     "displayName": "Intelligent Logistik",
@@ -52451,7 +53111,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=1311"
+    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=1311",
+    "helpUrl": "https://intelligentlogistik.ro/contact/"
   },
   "irs-romexpress": {
     "displayName": "International Romexpress Service",
@@ -52470,7 +53131,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.irs.ro/"
+    "trackingSearchUrl": "https://www.irs.ro/",
+    "helpUrl": "https://www.irs.ro/contact"
   },
   "maty-express": {
     "displayName": "Maty Express",
@@ -52488,7 +53150,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://matyexpress.com/tracking/"
+    "trackingSearchUrl": "https://matyexpress.com/tracking/",
+    "helpUrl": "https://matyexpress.com/contact/"
   },
   "optimus-courier": {
     "displayName": "Optimus Courier",
@@ -52519,7 +53182,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://optimuscourier.ro/tracking/"
+    "trackingSearchUrl": "https://optimuscourier.ro/tracking/",
+    "helpUrl": "https://optimuscourier.ro/contact/"
   },
   "pink-post": {
     "displayName": "Pink Post",
@@ -52588,7 +53252,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=17"
+    "trackingSearchUrl": "https://app.couriermanager.eu/cscourier/Main?tracking=true&appcont=17",
+    "helpUrl": "https://sinapseria.ro/contact/"
   },
   "time-critical-line": {
     "displayName": "Time Critical Line",
@@ -52606,7 +53271,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.time-critical-line.com/track-order"
+    "trackingSearchUrl": "https://www.time-critical-line.com/track-order",
+    "helpUrl": "https://www.time-critical-line.com/contact"
   },
   "transilvania-post": {
     "displayName": "Transilvania Post",
@@ -52632,7 +53298,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transilvaniapost.ro/awb"
+    "trackingSearchUrl": "https://www.transilvaniapost.ro/awb",
+    "helpUrl": "https://www.transilvaniapost.ro/pagini/contact.html"
   },
   "world-courier": {
     "displayName": "World Courier",
@@ -52648,7 +53315,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.worldcourier.com/en/FastTrack-Shipment"
+    "trackingSearchUrl": "https://portal.worldcourier.com/en/FastTrack-Shipment",
+    "helpUrl": "https://www.worldcourier.com/contact-us-home"
   },
   "xpedist": {
     "displayName": "Xpedist",
@@ -52676,7 +53344,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xpedist.ro/awb"
+    "trackingSearchUrl": "https://www.xpedist.ro/awb",
+    "helpUrl": "https://www.xpedist.ro/contact"
   },
   "act-argos": {
     "displayName": "Argos S.A.",
@@ -52695,7 +53364,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.argoscom.gr/index.php?page=55"
+    "trackingSearchUrl": "https://www.argoscom.gr/index.php?page=55",
+    "helpUrl": "https://www.argoscom.gr/index.php?page=18"
   },
   "aetos-courier": {
     "displayName": "Aetos Courier",
@@ -52753,7 +53423,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aioloscourier.gr/track-trace/"
+    "trackingSearchUrl": "https://aioloscourier.gr/track-trace/",
+    "helpUrl": "https://aioloscourier.gr/network/"
   },
   "ant-courier": {
     "displayName": "ANT Logistics & Forwarding",
@@ -52773,7 +53444,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ant-vl.com/%CE%B1%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7-%CE%B1%CF%80%CE%BF%CF%83%CF%84%CE%BF%CE%BB%CE%AE%CF%82/"
+    "trackingSearchUrl": "https://ant-vl.com/%CE%B1%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7-%CE%B1%CF%80%CE%BF%CF%83%CF%84%CE%BF%CE%BB%CE%AE%CF%82/",
+    "helpUrl": "https://ant-vl.com/%ce%b5%cf%80%ce%b9%ce%ba%ce%bf%ce%b9%ce%bd%cf%89%ce%bd%ce%af%ce%b1/"
   },
   "asap-couriers": {
     "displayName": "ASAP Couriers",
@@ -52805,7 +53477,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://asapcouriers.gr/tracking"
+    "trackingSearchUrl": "https://asapcouriers.gr/tracking",
+    "helpUrl": "https://asapcouriers.gr/contact"
   },
   "athinaiki": {
     "displayName": "Athinaiki",
@@ -52856,7 +53529,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bcscourier.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+    "trackingSearchUrl": "https://www.bcscourier.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html",
+    "helpUrl": "https://www.bcscourier.gr/el/%CE%95%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1.htm"
   },
   "biz-courier": {
     "displayName": "BIZ Courier",
@@ -52890,7 +53564,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://trackit.bizcourier.eu/app/en"
+    "trackingSearchUrl": "https://trackit.bizcourier.eu/app/en",
+    "helpUrl": "https://www.bizcourier.eu/en/ContactUs.htm"
   },
   "city-courier-gr": {
     "displayName": "City Courier",
@@ -52922,7 +53597,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.citycourier.gr/anazitisi-apostolis"
+    "trackingSearchUrl": "https://www.citycourier.gr/anazitisi-apostolis",
+    "helpUrl": "https://www.citycourier.gr/el/%CE%95%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1.htm"
   },
   "cityxpress": {
     "displayName": "CityXpress",
@@ -52953,7 +53629,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cityxpress.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+    "trackingSearchUrl": "https://cityxpress.gr/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html",
+    "helpUrl": "https://cityxpress.gr/%CE%95%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1.htm"
   },
   "direct-courier-gr": {
     "displayName": "Direct Courier",
@@ -52972,7 +53649,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.directcourier.gr/"
+    "trackingSearchUrl": "https://www.directcourier.gr/",
+    "helpUrl": "https://www.directcourier.gr/contact.php"
   },
   "dk-express-gr": {
     "displayName": "DK Express Courier",
@@ -53002,7 +53680,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dkexpresscourier.gr/anazitisi-apostolis/"
+    "trackingSearchUrl": "https://dkexpresscourier.gr/anazitisi-apostolis/",
+    "helpUrl": "https://dkexpresscourier.gr/epikoinonia/"
   },
   "happy-courier-gr": {
     "displayName": "Happy Courier",
@@ -53029,7 +53708,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://happycourier.e-anaptixi.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html"
+    "trackingSearchUrl": "https://happycourier.e-anaptixi.gr/el/courier/voucher/%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7Voucher.html",
+    "helpUrl": "https://happycourier.gr/contact/"
   },
   "icc-courier-gr": {
     "displayName": "ICC Courier",
@@ -53061,7 +53741,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://icccourier.gr/voucher/search"
+    "trackingSearchUrl": "https://icccourier.gr/voucher/search",
+    "helpUrl": "https://icccourier.gr/contact"
   },
   "kanga-services": {
     "displayName": "Kanga Services",
@@ -53082,7 +53763,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kanga.gr/epikoinonia/anazitisi-apostolis/"
+    "trackingSearchUrl": "https://kanga.gr/epikoinonia/anazitisi-apostolis/",
+    "helpUrl": "https://kanga.gr/epikoinonia/"
   },
   "mvp-courier": {
     "displayName": "MVP Courier",
@@ -53131,7 +53813,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.prismacourier.gr/parcel-tracking"
+    "trackingSearchUrl": "https://www.prismacourier.gr/parcel-tracking",
+    "helpUrl": "https://www.prismacourier.gr/contact-us"
   },
   "rapid-courier-gr": {
     "displayName": "Rapid Courier",
@@ -53159,7 +53842,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://rapidcourier.gr/anazhthsh-apostolhs/"
+    "trackingSearchUrl": "https://rapidcourier.gr/anazhthsh-apostolhs/",
+    "helpUrl": "https://rapidcourier.gr/epikoinonia/"
   },
   "red-courier-gr": {
     "displayName": "Red Courier",
@@ -53186,7 +53870,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://redcourier.gr/track-and-trace/"
+    "trackingSearchUrl": "https://redcourier.gr/track-and-trace/",
+    "helpUrl": "https://redcourier.gr/epikoinonia/"
   },
   "skyex-gr": {
     "displayName": "Skyex Bioex",
@@ -53213,7 +53898,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://skyex.gr/el/entopismos"
+    "trackingSearchUrl": "https://skyex.gr/el/entopismos",
+    "helpUrl": "https://skyex.gr/el/epikoinonia"
   },
   "spourgitis": {
     "displayName": "Spourgitis Trans",
@@ -53244,7 +53930,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://spourgitis.gr/entopismos-apostolon/"
+    "trackingSearchUrl": "https://spourgitis.gr/entopismos-apostolon/",
+    "helpUrl": "https://spourgitis.gr/contact/"
   },
   "west-postal": {
     "displayName": "West Postal Services",
@@ -53264,7 +53951,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wps.com.gr/trackshipment"
+    "trackingSearchUrl": "https://www.wps.com.gr/trackshipment",
+    "helpUrl": "https://www.wps.com.gr/%CE%B5%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1"
   },
   "xp-courier": {
     "displayName": "XP Courier",
@@ -53292,7 +53980,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xpcourier.gr/track"
+    "trackingSearchUrl": "https://www.xpcourier.gr/track",
+    "helpUrl": "https://www.xpcourier.gr/contact"
   },
   "olza-logistic": {
     "displayName": "Olza Logistic",
@@ -53328,7 +54017,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.olzalogistic.com/"
+    "trackingSearchUrl": "https://tracking.olzalogistic.com/",
+    "helpUrl": "https://www.olzalogistic.com/kontakt/"
   },
   "pointpack": {
     "displayName": "Pointpack",
@@ -53357,7 +54047,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.pointpack.pl/sledz-przesylke"
+    "trackingSearchUrl": "https://www.pointpack.pl/sledz-przesylke",
+    "helpUrl": "https://www.pointpack.pl/pomoc"
   },
   "quriers": {
     "displayName": "Quriers",
@@ -53373,7 +54064,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.quriers.pl/sledz-przesylke"
+    "trackingSearchUrl": "https://www.quriers.pl/sledz-przesylke",
+    "helpUrl": "https://www.quriers.pl/kontakt"
   },
   "rgw-express": {
     "displayName": "RGW Express",
@@ -53400,7 +54092,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trace.rgw-express.pl/search2/"
+    "trackingSearchUrl": "https://trace.rgw-express.pl/search2/",
+    "helpUrl": "https://rgw-express.pl/kontakt/"
   },
   "riders-express": {
     "displayName": "Riders Express",
@@ -53416,7 +54109,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.riders.com.pl/monitoruj-przesylke/"
+    "trackingSearchUrl": "https://www.riders.com.pl/monitoruj-przesylke/",
+    "helpUrl": "https://www.riders.com.pl/kontakt/"
   },
   "crosswin": {
     "displayName": "Crosswin",
@@ -53489,7 +54183,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.emole-express.com/pl/tracking"
+    "trackingSearchUrl": "https://www.emole-express.com/pl/tracking",
+    "helpUrl": "https://www.emole-express.com/pl/contact"
   },
   "jet-dp": {
     "displayName": "JET DP",
@@ -53506,7 +54201,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jet-dp.pl/pl/jetdp/tracking.html"
+    "trackingSearchUrl": "https://jet-dp.pl/pl/jetdp/tracking.html",
+    "helpUrl": "https://jet-dp.pl/pl/skontaktuj-si%C4%99-z-nami"
   },
   "maraton": {
     "displayName": "Maraton",
@@ -53545,7 +54241,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gordomlogistika.hr/tracking/"
+    "trackingSearchUrl": "https://gordomlogistika.hr/tracking/",
+    "helpUrl": "https://gordomlogistika.hr/kontakt/"
   },
   "intime-hr": {
     "displayName": "In Time Croatia",
@@ -53576,7 +54273,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.in-time.hr/pracenje"
+    "trackingSearchUrl": "https://www.in-time.hr/pracenje",
+    "helpUrl": "https://www.in-time.hr/podrska"
   },
   "webrinq": {
     "displayName": "WebrinQ",
@@ -53613,7 +54311,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.webrinq.com/"
+    "trackingSearchUrl": "https://tracking.webrinq.com/",
+    "helpUrl": "https://webrinq.com/faq/"
   },
   "jiayang": {
     "displayName": "Jiayang International",
@@ -53698,7 +54397,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.upost.com.ua/tracking/"
+    "trackingSearchUrl": "https://www.upost.com.ua/tracking/",
+    "helpUrl": "https://www.upost.com.ua/contact/"
   },
   "bh-posta": {
     "displayName": "BH Pošta",
@@ -53785,7 +54485,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://transpress.bg/bg/prosledjavane"
+    "trackingSearchUrl": "https://transpress.bg/bg/prosledjavane",
+    "helpUrl": "https://transpress.bg/bg/kontakti"
   },
   "gls-us": {
     "displayName": "GLS US",
@@ -53887,7 +54588,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trustexpress.bg/tracking"
+    "trackingSearchUrl": "https://trustexpress.bg/tracking",
+    "helpUrl": "https://trustexpress.bg/kontakti"
   },
   "sxw-express": {
     "displayName": "SXW Express",
@@ -53960,7 +54662,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dkl.ee/en/menu/4-TRACK_TRACE.html"
+    "trackingSearchUrl": "https://www.dkl.ee/en/menu/4-TRACK_TRACE.html",
+    "helpUrl": "https://www.dkl.ee/en/menu/6-CONTACTS.html"
   },
   "jet-express-ee": {
     "displayName": "Jet Express",
@@ -53990,7 +54693,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.kuller.ee/opter/TT"
+    "trackingSearchUrl": "https://portal.kuller.ee/opter/TT",
+    "helpUrl": "https://kuller.ee/kontakt/"
   },
   "samus": {
     "displayName": "SAMUS",
@@ -54020,7 +54724,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.samus.lt/siuntu-sekimas/"
+    "trackingSearchUrl": "https://www.samus.lt/siuntu-sekimas/",
+    "helpUrl": "https://www.samus.lt/kontaktai/"
   },
   "siuntos-autobusais": {
     "displayName": "Siuntos autobusais",
@@ -54040,7 +54745,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.siuntosautobusais.lt/siuntos-lietuvoje/siuntos-sekimas/"
+    "trackingSearchUrl": "https://www.siuntosautobusais.lt/siuntos-lietuvoje/siuntos-sekimas/",
+    "helpUrl": "https://www.siuntosautobusais.lt/kontaktai/siuntos-autobusais-terminalai-lietuvoje/"
   },
   "zipasgo": {
     "displayName": "ZipasGo",
@@ -54071,7 +54777,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://zipasgo.com/lt/siuntimas"
+    "trackingSearchUrl": "https://zipasgo.com/lt/siuntimas",
+    "helpUrl": "https://zipasgo.com/lt/pagalba"
   },
   "fan-courier-international": {
     "displayName": "FAN Courier International",
@@ -54118,7 +54825,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://adex.al/gjurmo/"
+    "trackingSearchUrl": "https://adex.al/gjurmo/",
+    "helpUrl": "https://adex.al/kontakto/"
   },
   "bypost": {
     "displayName": "Bypost",
@@ -54145,7 +54853,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bypost.no/spor/"
+    "trackingSearchUrl": "https://bypost.no/spor/",
+    "helpUrl": "https://bypost.no/kontakt/"
   },
   "cargo-express-mk": {
     "displayName": "Cargo Express",
@@ -54248,7 +54957,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://elitpost.com/en/tracking"
+    "trackingSearchUrl": "https://elitpost.com/en/tracking",
+    "helpUrl": "https://elitpost.com/en/support"
   },
   "elite-post-al": {
     "displayName": "Elite Post",
@@ -54298,7 +55008,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://europoshta.com.ua/tracking/"
+    "trackingSearchUrl": "https://europoshta.com.ua/tracking/",
+    "helpUrl": "https://europoshta.com.ua/kontakty/"
   },
   "express-one-me": {
     "displayName": "Express One Montenegro",
@@ -54317,7 +55028,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://expressone.me/pracenje-posiljke"
+    "trackingSearchUrl": "https://expressone.me/pracenje-posiljke",
+    "helpUrl": "https://expressone.me/kontakt"
   },
   "fan-courier-md": {
     "displayName": "FAN Courier Moldova",
@@ -54409,7 +55121,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hopexpress.rs/pracenje-posiljaka"
+    "trackingSearchUrl": "https://www.hopexpress.rs/pracenje-posiljaka",
+    "helpUrl": "https://www.hopexpress.rs/kontakt"
   },
   "ics-couriers-ua": {
     "displayName": "ICS Couriers",
@@ -54430,7 +55143,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ics-couriers.com/uslugi/%d0%b2%d1%96%d0%b4%d1%81%d1%82%d0%b5%d0%b6%d0%b8%d1%82%d0%b8-%d0%b2%d1%96%d0%b4%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%bd%d1%8f/"
+    "trackingSearchUrl": "https://ics-couriers.com/uslugi/%d0%b2%d1%96%d0%b4%d1%81%d1%82%d0%b5%d0%b6%d0%b8%d1%82%d0%b8-%d0%b2%d1%96%d0%b4%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%bd%d1%8f/",
+    "helpUrl": "https://ics-couriers.com/info/kontakty/"
   },
   "intex-courier": {
     "displayName": "Intex Courier",
@@ -54460,7 +55174,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intexcourier.al/gjurmo.html"
+    "trackingSearchUrl": "https://intexcourier.al/gjurmo.html",
+    "helpUrl": "https://intexcourier.al/kontakt.html"
   },
   "jakeluyhtio-suomi": {
     "displayName": "Jakeluyhtiö Suomi",
@@ -54508,7 +55223,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mrcourier.al/gjurmo-dergesen/"
+    "trackingSearchUrl": "https://mrcourier.al/gjurmo-dergesen/",
+    "helpUrl": "https://mrcourier.al/kontakt/"
   },
   "ntc-express": {
     "displayName": "NTC Express",
@@ -54539,7 +55255,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ntclog.me/?page=shipment-tracking&lang=me"
+    "trackingSearchUrl": "https://ntclog.me/?page=shipment-tracking&lang=me",
+    "helpUrl": "https://ntclog.me/kontakt?lang=me"
   },
   "post-international": {
     "displayName": "Post-International",
@@ -54559,7 +55276,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://post-int.com/"
+    "trackingSearchUrl": "https://post-int.com/",
+    "helpUrl": "https://post-int.com/home/kontakti/"
   },
   "sofex-post": {
     "displayName": "SofEx Post",
@@ -54581,7 +55299,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sofexpost.md/"
+    "trackingSearchUrl": "https://sofexpost.md/",
+    "helpUrl": "https://sofexpost.md/ro/contacte/"
   },
   "tribex-courier": {
     "displayName": "Tribex Courier",
@@ -54600,7 +55319,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.tribexcourier.al/apps/package-tracking"
+    "trackingSearchUrl": "https://app.tribexcourier.al/apps/package-tracking",
+    "helpUrl": "https://tribexcourier.al/kontakt/"
   },
   "unipost-express": {
     "displayName": "Unipost-Express",
@@ -54620,7 +55340,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.unipost.md/"
+    "trackingSearchUrl": "https://www.unipost.md/",
+    "helpUrl": "https://www.unipost.md/ru/contacts"
   },
   "x-express-rs": {
     "displayName": "X Express Serbia",
@@ -54656,7 +55377,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.xpress-logistics.lu/suivi-colis/"
+    "trackingSearchUrl": "https://www.xpress-logistics.lu/suivi-colis/",
+    "helpUrl": "https://www.xpress-logistics.lu/contact/"
   },
   "fudu-logistics": {
     "displayName": "Fudu Logistics",
@@ -54719,7 +55441,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.baikalsr.ru/tools/tracking/"
+    "trackingSearchUrl": "https://www.baikalsr.ru/tools/tracking/",
+    "helpUrl": "https://www.baikalsr.ru/company/feedback/"
   },
   "citytrans": {
     "displayName": "Citytrans",
@@ -54739,7 +55462,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.citytrans.ch/"
+    "trackingSearchUrl": "https://www.citytrans.ch/",
+    "helpUrl": "https://www.citytrans.ch/kontakt/"
   },
   "dalli-service": {
     "displayName": "Dalli",
@@ -54761,7 +55485,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dalli-service.com/tracking/"
+    "trackingSearchUrl": "https://dalli-service.com/tracking/",
+    "helpUrl": "https://dalli-service.com/support/"
   },
   "der-kurier": {
     "displayName": "DER KURIER",
@@ -54793,7 +55518,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://derkurier.de/sendungsverfolgung/"
+    "trackingSearchUrl": "https://derkurier.de/sendungsverfolgung/",
+    "helpUrl": "https://derkurier.de/kontakt/"
   },
   "kurierzentrale": {
     "displayName": "KurierZentrale",
@@ -54813,7 +55539,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://crm.kuz.ch/"
+    "trackingSearchUrl": "https://crm.kuz.ch/",
+    "helpUrl": "https://www.kurierzentrale.ch/uberuns"
   },
   "logsis": {
     "displayName": "Logsis",
@@ -54833,7 +55560,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://logsis.ru/traking"
+    "trackingSearchUrl": "https://logsis.ru/traking",
+    "helpUrl": "https://logsis.ru/contacts"
   },
   "lvz-post": {
     "displayName": "LVZ Post",
@@ -54852,7 +55580,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://lvz-post.de/privatkunden/sendungsverfolgung/"
+    "trackingSearchUrl": "https://lvz-post.de/privatkunden/sendungsverfolgung/",
+    "helpUrl": "https://lvz-post.de/privatkunden/kontakt/"
   },
   "magnit-post": {
     "displayName": "Magnit Post",
@@ -54872,7 +55601,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://post.magnit.ru/tracking/"
+    "trackingSearchUrl": "https://post.magnit.ru/tracking/",
+    "helpUrl": "https://post.magnit.ru/contacts/"
   },
   "night-star-express": {
     "displayName": "Night Star Express",
@@ -54900,7 +55630,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://customer.night-star-express.de/"
+    "trackingSearchUrl": "https://customer.night-star-express.de/",
+    "helpUrl": "https://www.night-star-express.de/de/kontakt.html"
   },
   "nordbrief": {
     "displayName": "NordBrief",
@@ -54919,7 +55650,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://paketportal.nordbrief-ostsee.de/index.php/tracking/search"
+    "trackingSearchUrl": "https://paketportal.nordbrief-ostsee.de/index.php/tracking/search",
+    "helpUrl": "https://www.nordbrief-ostsee.de/hilfe_kontakt/"
   },
   "peshkariki": {
     "displayName": "Peshkariki",
@@ -54939,7 +55671,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://peshkariki.ru/tracking"
+    "trackingSearchUrl": "https://peshkariki.ru/tracking",
+    "helpUrl": "https://peshkariki.ru/kontakty"
   },
   "rail-continent": {
     "displayName": "Rail Continent",
@@ -54960,7 +55693,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.railcontinent.ru/tracking/"
+    "trackingSearchUrl": "https://www.railcontinent.ru/tracking/",
+    "helpUrl": "https://www.railcontinent.ru/contacts/"
   },
   "skif-cargo": {
     "displayName": "Skif-Cargo",
@@ -54988,7 +55722,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.skif-cargo.ru/tracking/",
-    "trackingUrlTemplate": "https://www.skif-cargo.ru/tracking/{trackingNumber}"
+    "trackingUrlTemplate": "https://www.skif-cargo.ru/tracking/{trackingNumber}",
+    "helpUrl": "https://www.skif-cargo.ru/contacts/"
   },
   "swissconnect": {
     "displayName": "swissconnect",
@@ -55027,7 +55762,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://veloblitz.kuz.ch/"
+    "trackingSearchUrl": "https://veloblitz.kuz.ch/",
+    "helpUrl": "https://www.veloblitz.ch/faq"
   },
   "yandex-delivery": {
     "displayName": "Yandex Delivery",
@@ -55115,7 +55851,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.brics56.com/track.html"
+    "trackingSearchUrl": "https://www.brics56.com/track.html",
+    "helpUrl": "https://www.brics56.com/contact.html"
   },
   "cargomini": {
     "displayName": "CargoMini",
@@ -55192,7 +55929,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ghapex.com/public-tracking"
+    "trackingSearchUrl": "https://ghapex.com/public-tracking",
+    "helpUrl": "https://ghapex.com/contact"
   },
   "ruiqi": {
     "displayName": "Ruiqi Logistics",
@@ -55239,7 +55977,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://santosevale.pt/track/"
+    "trackingSearchUrl": "https://santosevale.pt/track/",
+    "helpUrl": "https://santosevale.pt/contatos/"
   },
   "xinsu": {
     "displayName": "Xinsu International",
@@ -55377,7 +56116,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cms.4aexpress.com/Query/TrackAwbNoQuery.aspx"
+    "trackingSearchUrl": "https://cms.4aexpress.com/Query/TrackAwbNoQuery.aspx",
+    "helpUrl": "https://4aexpress.com/%ce%b5%cf%80%ce%b9%ce%ba%ce%bf%ce%b9%ce%bd%cf%89%ce%bd%ce%af%ce%b1/"
   },
   "a2b-fi": {
     "displayName": "A2B",
@@ -55407,7 +56147,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://a2bfi.opter.cloud/TT"
+    "trackingSearchUrl": "https://a2bfi.opter.cloud/TT",
+    "helpUrl": "https://a2b.fi/yhteystiedot/"
   },
   "a3-transport": {
     "displayName": "A3 Transport",
@@ -55437,7 +56178,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://a3transportno.opter.cloud/tt"
+    "trackingSearchUrl": "https://a3transportno.opter.cloud/tt",
+    "helpUrl": "https://a3transport.no/kontakt-oss/"
   },
   "afimex": {
     "displayName": "Afimex",
@@ -55457,7 +56199,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://afimex.net/rastrea-envio"
+    "trackingSearchUrl": "https://afimex.net/rastrea-envio",
+    "helpUrl": "https://afimex.net/contacto"
   },
   "airtrans": {
     "displayName": "Airtrans",
@@ -55489,7 +56232,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.airtransgroup.com/"
+    "trackingSearchUrl": "https://www.airtransgroup.com/",
+    "helpUrl": "https://www.airtransgroup.com/contact/"
   },
   "apollo-budbiler": {
     "displayName": "Apollo Budbiler",
@@ -55519,7 +56263,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apollono.opter.cloud/TT"
+    "trackingSearchUrl": "https://apollono.opter.cloud/TT",
+    "helpUrl": "https://apollobud.no/om-oss/#kontakt"
   },
   "bla-kurer": {
     "displayName": "Blå Kurér",
@@ -55637,7 +56382,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.courierexpressmalta.com/"
+    "trackingSearchUrl": "https://track.courierexpressmalta.com/",
+    "helpUrl": "https://www.courierexpressmalta.com/contact"
   },
   "duxiuexp": {
     "displayName": "DuXiuExp",
@@ -55667,7 +56413,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.duxiuexp.com/track/"
+    "trackingSearchUrl": "https://www.duxiuexp.com/track/",
+    "helpUrl": "https://www.duxiuexp.com/contact.html"
   },
   "dylo-express": {
     "displayName": "Dylo Express",
@@ -55686,7 +56433,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://dashboard-parner.dylo.com/rastreo"
+    "trackingSearchUrl": "https://dashboard-parner.dylo.com/rastreo",
+    "helpUrl": "https://dylo.com/overland-2/"
   },
   "easycourier": {
     "displayName": "easyCourier",
@@ -55718,7 +56466,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.easycourier.com.cy/"
+    "trackingSearchUrl": "https://www.easycourier.com.cy/",
+    "helpUrl": "https://support.easycourier.com.cy/"
   },
   "enset": {
     "displayName": "Enset",
@@ -55748,7 +56497,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ensetfi.opter.cloud/TT"
+    "trackingSearchUrl": "https://ensetfi.opter.cloud/TT",
+    "helpUrl": "https://enset.fi/yhteystiedot"
   },
   "enviopack-ar": {
     "displayName": "Envíopack Argentina",
@@ -55775,7 +56525,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.enviopack.com.ar/"
+    "trackingSearchUrl": "https://tracking.enviopack.com.ar/",
+    "helpUrl": "https://ayuda.enviopack.com/es/articles/10581745-soy-consumidor-final"
   },
   "enviopack-mx": {
     "displayName": "Envíopack México",
@@ -55802,7 +56553,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.enviopack.com.mx/"
+    "trackingSearchUrl": "https://tracking.enviopack.com.mx/",
+    "helpUrl": "https://ayuda.enviopack.com/es/articles/10581745-soy-consumidor-final"
   },
   "esbjerg-gods": {
     "displayName": "Esbjerg Gods",
@@ -55822,7 +56574,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://t.alicetms.dk/#/Esbjerg-gods/TrackAndTrace/{trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://esbjerg-gods.dk/"
+    "trackingSearchUrl": "https://esbjerg-gods.dk/",
+    "helpUrl": "https://esbjerg-gods.dk/kontakt/"
   },
   "freja": {
     "displayName": "FREJA",
@@ -55847,7 +56600,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://en.freja.com/online-services/track-and-trace-road/?{trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://en.freja.com/online-services/track-and-trace-road/"
+    "trackingSearchUrl": "https://en.freja.com/online-services/track-and-trace-road/",
+    "helpUrl": "https://en.freja.com/contact-us/"
   },
   "gf-logistikk": {
     "displayName": "GF Logistikk",
@@ -55875,7 +56629,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://gfas.no/"
+    "trackingSearchUrl": "https://gfas.no/",
+    "helpUrl": "https://gfas.no/kontakt-oss/"
   },
   "gls-ca": {
     "displayName": "GLS Canada",
@@ -55949,7 +56704,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cp.hartmann-international.de/Track"
+    "trackingSearchUrl": "https://cp.hartmann-international.de/Track",
+    "helpUrl": "https://www.hartmann-international.de/kontakt/"
   },
   "hss-transport": {
     "displayName": "HSS Transport",
@@ -55979,7 +56735,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://hssno.opter.cloud/TT"
+    "trackingSearchUrl": "https://hssno.opter.cloud/TT",
+    "helpUrl": "https://hss.no/om-oss/"
   },
   "hurtig-gutta": {
     "displayName": "Hurtig-Gutta",
@@ -56009,7 +56766,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://hurtigguttano.opter.cloud/tt"
+    "trackingSearchUrl": "https://hurtigguttano.opter.cloud/tt",
+    "helpUrl": "https://hurtig-gutta.no/kontakt/"
   },
   "interfjord": {
     "displayName": "Interfjord",
@@ -56041,7 +56799,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.interfjord.dk/"
+    "trackingSearchUrl": "https://tracking.interfjord.dk/",
+    "helpUrl": "https://www.interfjord.dk/kontakt/"
   },
   "itc-delivery": {
     "displayName": "ITC Delivery",
@@ -56057,7 +56816,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.itcdelivery.com/track/"
+    "trackingSearchUrl": "https://www.itcdelivery.com/track/",
+    "helpUrl": "https://www.itcdelivery.com/contact-us/"
   },
   "itide": {
     "displayName": "itide",
@@ -56087,7 +56847,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://itideno.opter.cloud/tt"
+    "trackingSearchUrl": "https://itideno.opter.cloud/tt",
+    "helpUrl": "https://itide.no/kontakt-oss/"
   },
   "kaukokiito": {
     "displayName": "Kaukokiito",
@@ -56148,7 +56909,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://opter.kurer.no/opter/tt"
+    "trackingSearchUrl": "https://opter.kurer.no/opter/tt",
+    "helpUrl": "https://kurer.no/kontakt/"
   },
   "leman": {
     "displayName": "LEMAN",
@@ -56167,7 +56929,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.leman.com/"
+    "trackingSearchUrl": "https://track.leman.com/",
+    "helpUrl": "https://leman.com/contact/"
   },
   "lillebil": {
     "displayName": "Lillebil",
@@ -56197,7 +56960,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kundportal.lillebil.se/opter/TT"
+    "trackingSearchUrl": "https://kundportal.lillebil.se/opter/TT",
+    "helpUrl": "https://www.lillebil.se/kontakt/"
   },
   "mebel-taxi": {
     "displayName": "Mebel Taxi",
@@ -56249,7 +57013,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kundeportal.meyership.no/ms/opter/TT"
+    "trackingSearchUrl": "https://kundeportal.meyership.no/ms/opter/TT",
+    "helpUrl": "https://meyership.no/kontakt-oss"
   },
   "miles-express": {
     "displayName": "Miles Express",
@@ -56281,7 +57046,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://booking.milesxp.com/tracking"
+    "trackingSearchUrl": "https://booking.milesxp.com/tracking",
+    "helpUrl": "https://www.milesxp.com/contact/"
   },
   "ock-cn": {
     "displayName": "OCK",
@@ -56302,7 +57068,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ock56.com/track.php"
+    "trackingSearchUrl": "https://www.ock56.com/track.php",
+    "helpUrl": "https://www.ock56.com/contact.php"
   },
   "ocolchonespack": {
     "displayName": "Ocolchonespack",
@@ -56344,7 +57111,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://shipping.oohpod.com/tracking"
+    "trackingSearchUrl": "https://shipping.oohpod.com/tracking",
+    "helpUrl": "https://help.oohpod.com/"
   },
   "pakettipiste": {
     "displayName": "Pakettipiste",
@@ -56374,7 +57142,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://pakettipisteseuranta.r2web.fi/"
+    "trackingSearchUrl": "https://pakettipisteseuranta.r2web.fi/",
+    "helpUrl": "https://www.pakettipiste.fi/tuki/"
   },
   "premo": {
     "displayName": "Premo",
@@ -56404,7 +57173,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.premo.se/paketsparning"
+    "trackingSearchUrl": "https://www.premo.se/paketsparning",
+    "helpUrl": "https://www.premo.se/fragor-svar"
   },
   "primewell": {
     "displayName": "Primewell",
@@ -56424,7 +57194,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.primewell.cy/OD_WEB_APP_EX/Track.aspx"
+    "trackingSearchUrl": "https://tracking.primewell.cy/OD_WEB_APP_EX/Track.aspx",
+    "helpUrl": "https://primewell.cy/epikoinonia/"
   },
   "quick-couriers-pk": {
     "displayName": "Quick Couriers Service",
@@ -56503,7 +57274,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ramberg.no/sporing/"
+    "trackingSearchUrl": "https://www.ramberg.no/sporing/",
+    "helpUrl": "https://www.ramberg.no/kontakt-ramberg/"
   },
   "sandahls": {
     "displayName": "Sandahls",
@@ -56535,7 +57307,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.sandahlsbolagen.se/opter/TT"
+    "trackingSearchUrl": "https://portal.sandahlsbolagen.se/opter/TT",
+    "helpUrl": "https://sandahls.com/kontakta-oss/"
   },
   "senda-insular": {
     "displayName": "Senda Insular",
@@ -56551,7 +57324,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://clientes.sendainsular.com/DlWebTrackingVWE/"
+    "trackingSearchUrl": "https://clientes.sendainsular.com/DlWebTrackingVWE/",
+    "helpUrl": "https://sendainsular.com/contacto/"
   },
   "shiplowcost": {
     "displayName": "ShipLowCost",
@@ -56572,7 +57346,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shiplowcost.com/"
+    "trackingSearchUrl": "https://www.shiplowcost.com/",
+    "helpUrl": "https://www.shiplowcost.com/contact-us"
   },
   "smafrakt": {
     "displayName": "Småfrakt",
@@ -56599,7 +57374,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://smafraktse.opter.cloud/TT"
+    "trackingSearchUrl": "https://smafraktse.opter.cloud/TT",
+    "helpUrl": "https://www.smafrakt.se/web/kontakta-oss/"
   },
   "tjw-fragt": {
     "displayName": "TJW Fragt",
@@ -56620,7 +57396,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://t.alicetms.dk/#/romming/TrackAndTrace/{trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tjwfragt.dk/track-trace/"
+    "trackingSearchUrl": "https://tjwfragt.dk/track-trace/",
+    "helpUrl": "https://tjwfragt.dk/kontakt/"
   },
   "tmg-jp": {
     "displayName": "T.M.G",
@@ -56661,7 +57438,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transgo.mx/"
+    "trackingSearchUrl": "https://www.transgo.mx/",
+    "helpUrl": "https://www.transgo.mx/contacto.html"
   },
   "transportes-condesa": {
     "displayName": "Transportes Condesa",
@@ -56677,7 +57455,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tcondesa.com.mx/Home/Support"
+    "trackingSearchUrl": "https://www.tcondesa.com.mx/Home/Support",
+    "helpUrl": "https://www.tcondesa.com.mx/Home/Contact"
   },
   "transports-besson": {
     "displayName": "Transports Besson",
@@ -56697,7 +57476,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.reseaubesson.com/"
+    "trackingSearchUrl": "https://www.reseaubesson.com/",
+    "helpUrl": "https://www.reseaubesson.com/Lug?controller=Contacts"
   },
   "travel-express": {
     "displayName": "Travel & Express",
@@ -56729,7 +57509,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.travelexpress.com.cy/system/"
+    "trackingSearchUrl": "https://portal.travelexpress.com.cy/system/",
+    "helpUrl": "https://www.travelexpresscourier.com/support.html"
   },
   "trobud": {
     "displayName": "Trobud",
@@ -56779,7 +57560,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://login.smartsys.no/smartTrackAndTrace/PublicTrackAndTrace?TenantGUID=ad936210-03b6-4ca7-9776-a491c03d4ba6&SearchFor={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://login.smartsys.no/smartTrackAndTrace/PublicTrackAndTrace?TenantGUID=ad936210-03b6-4ca7-9776-a491c03d4ba6"
+    "trackingSearchUrl": "https://login.smartsys.no/smartTrackAndTrace/PublicTrackAndTrace?TenantGUID=ad936210-03b6-4ca7-9776-a491c03d4ba6",
+    "helpUrl": "https://www.veoy.no/kontakt"
   },
   "xwwt": {
     "displayName": "XWWT",
@@ -56831,7 +57613,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tzg-infocenter.com/easytrack/"
+    "trackingSearchUrl": "https://www.tzg-infocenter.com/easytrack/",
+    "helpUrl": "https://www.zieglergroup.com/contact/"
   },
   "zufall": {
     "displayName": "ZUFALL",
@@ -56851,7 +57634,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://connect.zufall.de/Track/"
+    "trackingSearchUrl": "https://connect.zufall.de/Track/",
+    "helpUrl": "https://www.zufall.de/kontakt/"
   },
   "doobalhero": {
     "displayName": "Doobalhero",
@@ -56912,7 +57696,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://todaypickup-partners.kakaomobility.com/front/delivery/list"
+    "trackingSearchUrl": "https://todaypickup-partners.kakaomobility.com/front/delivery/list",
+    "helpUrl": "https://www.kakaomobility.com/customer-support"
   },
   "kurly-nextmile": {
     "displayName": "Kurly Next Mile",
@@ -56943,7 +57728,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kurlynextmile.com/information/invoice"
+    "trackingSearchUrl": "https://www.kurlynextmile.com/information/invoice",
+    "helpUrl": "https://www.kurlynextmile.com/customer/inquiry_write"
   },
   "lx-pantos": {
     "displayName": "LX Pantos",
@@ -56976,7 +57762,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.epantos.com/ecp/web/pr/dt/popup/dlvChaseInqPopup.do?locale=en"
+    "trackingSearchUrl": "https://www.epantos.com/ecp/web/pr/dt/popup/dlvChaseInqPopup.do?locale=en",
+    "helpUrl": "https://voc-ext.lxpantos.com/jsp/pc/en/util/customer-voice.jsp"
   },
   "slx-kr": {
     "displayName": "SLX",
@@ -57072,7 +57859,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.birgundekargo.com/",
-    "trackingUrlTemplate": "https://takip.birgundekargo.com/intranet/Tracking_kargo.asp?bgk_barkod={trackingNumber}"
+    "trackingUrlTemplate": "https://takip.birgundekargo.com/intranet/Tracking_kargo.asp?bgk_barkod={trackingNumber}",
+    "helpUrl": "https://www.birgundekargo.com/iletisim"
   },
   "cargox": {
     "displayName": "Cargo X",
@@ -57103,7 +57891,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cargox.com.tr/"
+    "trackingSearchUrl": "https://www.cargox.com.tr/",
+    "helpUrl": "https://www.cargox.com.tr/pages/contact"
   },
   "etkin-dagitim": {
     "displayName": "Etkin Dağıtım",
@@ -57123,7 +57912,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://musteri.etkindagitim.com/"
+    "trackingSearchUrl": "https://musteri.etkindagitim.com/",
+    "helpUrl": "https://www.etkindagitim.com/iletisim/"
   },
   "inter-global-kargo": {
     "displayName": "İnter Global Kargo",
@@ -57154,7 +57944,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.globalkargo.com/tr"
+    "trackingSearchUrl": "https://www.globalkargo.com/tr",
+    "helpUrl": "https://www.globalkargo.com/tr/Kurumsal/Iletisim"
   },
   "pamukkale-kargo": {
     "displayName": "Pamukkale Kargo",
@@ -57236,7 +58027,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://yolkargo.com.tr/"
+    "trackingSearchUrl": "https://yolkargo.com.tr/",
+    "helpUrl": "https://yolkargo.com.tr/iletisim"
   },
   "gls-nl": {
     "displayName": "GLS Netherlands",
@@ -57320,7 +58112,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intranet.akropost.com/tracking"
+    "trackingSearchUrl": "https://intranet.akropost.com/tracking",
+    "helpUrl": "https://akropost.com/es/contacto/"
   },
   "altcamp-express": {
     "displayName": "Altcamp Express",
@@ -57340,7 +58133,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://valls.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://valls.factapp.es/IRIS/Seguimiento",
+    "helpUrl": "https://www.altcampexpress.com/contacto/"
   },
   "fiscourier": {
     "displayName": "Fiscourier",
@@ -57359,7 +58153,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fiscourier.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://fiscourier.factapp.es/IRIS/Seguimiento",
+    "helpUrl": "https://fiscourier.com/contacto/"
   },
   "kaizen-express": {
     "displayName": "Kaizen Express",
@@ -57379,7 +58174,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.kaizenexpres.com/seguimiento/"
+    "trackingSearchUrl": "https://www.kaizenexpres.com/seguimiento/",
+    "helpUrl": "https://kaizenexpress.es/contacto/"
   },
   "kilbourne": {
     "displayName": "Kilbourne",
@@ -57458,7 +58254,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://maycouriermadrid.com/consulta-tu-envio/"
+    "trackingSearchUrl": "https://maycouriermadrid.com/consulta-tu-envio/",
+    "helpUrl": "https://maycouriermadrid.com/contacto/"
   },
   "mundi-express": {
     "displayName": "Mundi Express",
@@ -57600,7 +58397,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trablisa.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://trablisa.factapp.es/IRIS/Seguimiento",
+    "helpUrl": "https://www.trablisa.es/area-negocio/trablisa-expres#datos-de-contacto"
   },
   "alfta-frakt": {
     "displayName": "Alfta Frakt",
@@ -57630,7 +58428,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alftafraktse.opter.cloud/tt"
+    "trackingSearchUrl": "https://alftafraktse.opter.cloud/tt",
+    "helpUrl": "https://www.alftafrakt.se/kontakta-oss/"
   },
   "bergen-transport-sentral": {
     "displayName": "Bergen Transport Sentral",
@@ -57661,7 +58460,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bergentsno.opter.cloud/tt"
+    "trackingSearchUrl": "https://bergentsno.opter.cloud/tt",
+    "helpUrl": "https://bergentransportsentral.no/kontakt-oss/"
   },
   "bft-logistik": {
     "displayName": "BFT Logistik",
@@ -57689,7 +58489,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://t.bftlogistik.dk/"
+    "trackingSearchUrl": "https://t.bftlogistik.dk/",
+    "helpUrl": "https://bftlogistik.dk/kontakt/"
   },
   "bhs-logistics": {
     "displayName": "BHS Logistics",
@@ -57710,7 +58511,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bhslogistics.dk/track-and-trace/"
+    "trackingSearchUrl": "https://bhslogistics.dk/track-and-trace/",
+    "helpUrl": "https://bhslogistics.dk/kontakt-bhs-logistics/"
   },
   "cts-group": {
     "displayName": "CTS Group",
@@ -57726,7 +58528,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ctsgroup.nl/track-trace/"
+    "trackingSearchUrl": "https://www.ctsgroup.nl/track-trace/",
+    "helpUrl": "https://www.ctsgroup.nl/contact/"
   },
   "diera": {
     "displayName": "DIERA",
@@ -57745,7 +58548,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.diera.pl/"
+    "trackingSearchUrl": "https://tracking.diera.pl/",
+    "helpUrl": "https://diera.pl/kontakt/"
   },
   "eek-logistikk": {
     "displayName": "Eek Logistikk",
@@ -57775,7 +58579,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://eek.driftcentral.net/opter/tt"
+    "trackingSearchUrl": "https://eek.driftcentral.net/opter/tt",
+    "helpUrl": "https://eeklogistikk.no/web-agency-gb-contact-us/"
   },
   "em-distribusjon": {
     "displayName": "EM Distribusjon",
@@ -57806,7 +58611,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://emdno.opter.cloud/tt"
+    "trackingSearchUrl": "https://emdno.opter.cloud/tt",
+    "helpUrl": "https://emd.as/kontakt-oss/"
   },
   "fennoroad": {
     "displayName": "FennoRoad",
@@ -57826,7 +58632,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.kuljetusvelho.fi/webtrack.php?env=froad&lang=fi"
+    "trackingSearchUrl": "https://app.kuljetusvelho.fi/webtrack.php?env=froad&lang=fi",
+    "helpUrl": "https://fennoroad.fi/yhteystiedot/"
   },
   "hadeland-bud": {
     "displayName": "Hadeland Bud",
@@ -57887,7 +58694,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://loadmasterno.opter.cloud/tt"
+    "trackingSearchUrl": "https://loadmasterno.opter.cloud/tt",
+    "helpUrl": "https://www.loadmaster.no/kontakt-oss"
   },
   "parts-express": {
     "displayName": "Parts Express",
@@ -57908,7 +58716,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tnt.partsexpress.nl/"
+    "trackingSearchUrl": "https://tnt.partsexpress.nl/",
+    "helpUrl": "https://partsexpress.eu/contact/"
   },
   "scan-global-logistics": {
     "displayName": "Scan Global Logistics",
@@ -57932,7 +58741,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.scangl.com/"
+    "trackingSearchUrl": "https://tracking.scangl.com/",
+    "helpUrl": "https://www.scangl.com/contact/"
   },
   "sped-trans": {
     "displayName": "Sped Trans",
@@ -57963,7 +58773,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://amp.andmork.com/opter/tt"
+    "trackingSearchUrl": "https://amp.andmork.com/opter/tt",
+    "helpUrl": "https://spedtrans.no/kontakt-oss/"
   },
   "svenns-transport": {
     "displayName": "Svenns Transport",
@@ -57994,7 +58805,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://svennsno.opter.cloud/TT"
+    "trackingSearchUrl": "https://svennsno.opter.cloud/TT",
+    "helpUrl": "https://www.svenns.no/ac/kontakt-oss"
   },
   "toten-transport": {
     "displayName": "Toten Transport",
@@ -58025,7 +58837,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sporing.toten-transport.no/"
+    "trackingSearchUrl": "https://sporing.toten-transport.no/",
+    "helpUrl": "https://www.toten-transport.no/finn-naermeste-kontor/"
   },
   "tromso-budbil-sentral": {
     "displayName": "Tromsø Budbil Sentral",
@@ -58055,7 +58868,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tbsno.opter.cloud/tt"
+    "trackingSearchUrl": "https://tbsno.opter.cloud/tt",
+    "helpUrl": "https://tbs.no/kontakt/"
   },
   "tsn-groen": {
     "displayName": "TSN Groen",
@@ -58071,7 +58885,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cptsngroen.dirextion.nl/"
+    "trackingSearchUrl": "https://cptsngroen.dirextion.nl/",
+    "helpUrl": "https://tsngroen.nl/mijn-bezorging/"
   },
   "ubsend": {
     "displayName": "UBsend",
@@ -58101,7 +58916,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ui.ubsend.io/track-and-trace"
+    "trackingSearchUrl": "https://ui.ubsend.io/track-and-trace",
+    "helpUrl": "https://ubsend.com/contact-us/"
   },
   "varubud": {
     "displayName": "Varubud",
@@ -58132,7 +58948,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://varubudse.opter.cloud/tt"
+    "trackingSearchUrl": "https://varubudse.opter.cloud/tt",
+    "helpUrl": "https://varubud.se/kontakt/"
   },
   "aeropaq": {
     "displayName": "Aeropaq",
@@ -58148,7 +58965,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aeropaq.com/"
+    "trackingSearchUrl": "https://aeropaq.com/",
+    "helpUrl": "https://aeropaq.com/contacto/"
   },
   "alfa-transportes": {
     "displayName": "Alfa Transportes",
@@ -58167,7 +58985,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alfatransportes.com.br/"
+    "trackingSearchUrl": "https://alfatransportes.com.br/",
+    "helpUrl": "https://alfatransportes.com.br/central-de-duvidas/"
   },
   "andesmar-cargas": {
     "displayName": "Andesmar Cargas",
@@ -58216,7 +59035,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ativalog.com.br/"
+    "trackingSearchUrl": "https://ativalog.com.br/",
+    "helpUrl": "https://ativalog.com.br/contato/"
   },
   "bauer-express": {
     "displayName": "Bauer Express",
@@ -58232,7 +59052,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.bauerexpress.com.br/area-do-cliente/rastreamento-de-encomenda/"
+    "trackingSearchUrl": "https://www.bauerexpress.com.br/area-do-cliente/rastreamento-de-encomenda/",
+    "helpUrl": "https://www.bauerexpress.com.br/sac"
   },
   "bm-cargo": {
     "displayName": "BM Cargo",
@@ -58262,7 +59083,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://bmcargo-online.iplus.com.do/lg-es/ut/Estatus.aspx"
+    "trackingSearchUrl": "https://bmcargo-online.iplus.com.do/lg-es/ut/Estatus.aspx",
+    "helpUrl": "https://www.bmcargo.com/contacto"
   },
   "brazil-border": {
     "displayName": "Brazil Border",
@@ -58349,7 +59171,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargo.civa.com.pe/"
+    "trackingSearchUrl": "https://cargo.civa.com.pe/",
+    "helpUrl": "https://civa.com.pe/es/contact"
   },
   "correos-panama": {
     "displayName": "Correos Panamá",
@@ -58401,7 +59224,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cot.com.uy/encomiendas"
+    "trackingSearchUrl": "https://www.cot.com.uy/encomiendas",
+    "helpUrl": "https://www.cot.com.uy/contacto"
   },
   "cruz-del-sur-pe": {
     "displayName": "Cruz del Sur Cargo",
@@ -58421,7 +59245,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://venta.cruzdelsurcargo.com.pe/home-filtro-busqueda"
+    "trackingSearchUrl": "https://venta.cruzdelsurcargo.com.pe/home-filtro-busqueda",
+    "helpUrl": "https://www.cruzdelsurcargo.com.pe/servicio-al-cliente/"
   },
   "dac-uy": {
     "displayName": "DAC",
@@ -58489,7 +59314,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://domex.do/rastreo"
+    "trackingSearchUrl": "https://domex.do/rastreo",
+    "helpUrl": "https://domex.do/ayuda"
   },
   "e-pick": {
     "displayName": "E-Pick",
@@ -58518,7 +59344,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.e-pick.com.ar/seguimiento"
+    "trackingSearchUrl": "https://app.e-pick.com.ar/seguimiento",
+    "helpUrl": "https://app.e-pick.com.ar/faq"
   },
   "eu-entrego": {
     "displayName": "Eu Entrego",
@@ -58553,7 +59380,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cliente.favorita.com.br/rastreamento"
+    "trackingSearchUrl": "https://cliente.favorita.com.br/rastreamento",
+    "helpUrl": "https://favorita.com.br/fale-conosco"
   },
   "flash-courier": {
     "displayName": "Flash Courier",
@@ -58597,7 +59425,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.flechacarga.com/segui-tu-envio/"
+    "trackingSearchUrl": "https://www.flechacarga.com/segui-tu-envio/",
+    "helpUrl": "https://www.flechacarga.com/asistencia/"
   },
   "gollog": {
     "displayName": "GOLLOG",
@@ -58633,7 +59462,8 @@ export const CARRIER_CAPABILITIES = {
         "rawPattern": "^127-\\d{4} ?\\d{4}$"
       }
     ],
-    "trackingSearchUrl": "https://servicos.gollog.com.br/app/site/tracking"
+    "trackingSearchUrl": "https://servicos.gollog.com.br/app/site/tracking",
+    "helpUrl": "https://www.gollog.com.br/atendimento/canais-de-atendimento"
   },
   "hop-envios": {
     "displayName": "HOP Envíos",
@@ -58663,7 +59493,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://hopenvios.com.ar/segui-tu-envio"
+    "trackingSearchUrl": "https://hopenvios.com.ar/segui-tu-envio",
+    "helpUrl": "https://hopenvios.com.ar/contacto"
   },
   "iflow": {
     "displayName": "iFLOW",
@@ -58696,7 +59527,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://tracking.iflow21.com/"
+    "trackingSearchUrl": "https://tracking.iflow21.com/",
+    "helpUrl": "https://customer.iflow21.com/portal/es/home"
   },
   "j-and-t-cargo-br": {
     "displayName": "J&T Cargo Brasil",
@@ -58753,7 +59585,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.latamcargo.com/en/trackshipment"
+    "trackingSearchUrl": "https://www.latamcargo.com/en/trackshipment",
+    "helpUrl": "https://www.latamcargo.com/en/customercare"
   },
   "liberty-express": {
     "displayName": "Liberty Express",
@@ -58770,7 +59603,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://iqpack.libertyexpress.com/SearchGuide"
+    "trackingSearchUrl": "https://iqpack.libertyexpress.com/SearchGuide",
+    "helpUrl": "https://libertyexpress.com/es-us/contacto/"
   },
   "liftit": {
     "displayName": "Liftit",
@@ -58814,7 +59648,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.expresomarvisur.com/seccion/consulta-gret"
+    "trackingSearchUrl": "https://www.expresomarvisur.com/seccion/consulta-gret",
+    "helpUrl": "https://www.expresomarvisur.com/contacto"
   },
   "mira-transportes": {
     "displayName": "Mira Transportes",
@@ -58830,7 +59665,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cliente.mira.com.br/rastreamento"
+    "trackingSearchUrl": "https://cliente.mira.com.br/rastreamento",
+    "helpUrl": "https://mira.com.br/faq/"
   },
   "movvi": {
     "displayName": "Movvi",
@@ -58846,7 +59682,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://movvi.com.br/ferramentas/rastreio"
+    "trackingSearchUrl": "https://movvi.com.br/ferramentas/rastreio",
+    "helpUrl": "https://movvi.com.br/central-de-ajuda"
   },
   "mrw-ve": {
     "displayName": "MRW Venezuela",
@@ -58944,7 +59781,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://encomendas.princesadoscampos.com.br/rastreio/"
+    "trackingSearchUrl": "https://encomendas.princesadoscampos.com.br/rastreio/",
+    "helpUrl": "https://encomendas.princesadoscampos.com.br/contato/"
   },
   "rapiboy": {
     "displayName": "Rapiboy",
@@ -59024,7 +59862,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.recibelo.cl/seguimiento/"
+    "trackingSearchUrl": "https://www.recibelo.cl/seguimiento/",
+    "helpUrl": "https://www.recibelo.cl/contacto/"
   },
   "samex": {
     "displayName": "Samex",
@@ -59051,7 +59890,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.samex.cl/wp-content/rastreo/rastreo/v1/rastreo_form.php"
+    "trackingSearchUrl": "https://www.samex.cl/wp-content/rastreo/rastreo/v1/rastreo_form.php",
+    "helpUrl": "https://www.samex.cl/contactanos/"
   },
   "sharf": {
     "displayName": "Sharf",
@@ -59119,7 +59959,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tracopacr.com/Servicios_encomiendas"
+    "trackingSearchUrl": "https://www.tracopacr.com/Servicios_encomiendas",
+    "helpUrl": "https://www.tracopacr.com/Contactenos"
   },
   "tramaco": {
     "displayName": "Tramaco Express",
@@ -59172,7 +60013,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tbl.com.br/RastreamentoCarga"
+    "trackingSearchUrl": "https://tbl.com.br/RastreamentoCarga",
+    "helpUrl": "https://tbl.com.br/fale-conosco"
   },
   "treggo": {
     "displayName": "Treggo",
@@ -59191,7 +60033,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ar.treggo.co/tracking/"
+    "trackingSearchUrl": "https://ar.treggo.co/tracking/",
+    "helpUrl": "https://ar.treggo.co/preguntas.html"
   },
   "tupaq": {
     "displayName": "Tupaq Courier",
@@ -59221,7 +60064,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.iplus.com.do/tupaq/fe/lg-es/ut/Estatus.aspx"
+    "trackingSearchUrl": "https://app.iplus.com.do/tupaq/fe/lg-es/ut/Estatus.aspx",
+    "helpUrl": "https://www.tupaq.com.do/contacto"
   },
   "uello": {
     "displayName": "Uello",
@@ -59240,7 +60084,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://uello.com.br/consulta-do-pedido/"
+    "trackingSearchUrl": "https://uello.com.br/consulta-do-pedido/",
+    "helpUrl": "https://uello.com.br/canais/"
   },
   "urbano-ar": {
     "displayName": "Urbano Argentina",
@@ -59280,7 +60125,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://abccargoxpress.com/"
+    "trackingSearchUrl": "https://abccargoxpress.com/",
+    "helpUrl": "https://abccargoxpress.com/contact"
   },
   "breaze": {
     "displayName": "Breaze",
@@ -59307,7 +60153,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.breaze.co.za/track-order"
+    "trackingSearchUrl": "https://portal.breaze.co.za/track-order",
+    "helpUrl": "https://www.breaze.co.za/contact/"
   },
   "celero": {
     "displayName": "Celero",
@@ -59328,7 +60175,8 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://celerogroup.com/",
-    "trackingUrlTemplate": "https://celerogroup.com/"
+    "trackingUrlTemplate": "https://celerogroup.com/",
+    "helpUrl": "https://celerogroup.com/contact/"
   },
   "chark-express": {
     "displayName": "Chark Express",
@@ -59457,7 +60305,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ctm-messagerie.ma/fr/suivi-du-colis"
+    "trackingSearchUrl": "https://ctm-messagerie.ma/fr/suivi-du-colis",
+    "helpUrl": "https://ctm-messagerie.ma/fr/contact"
   },
   "fastway-za": {
     "displayName": "Fastway South Africa",
@@ -59539,7 +60388,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://intigo.net/"
+    "trackingSearchUrl": "https://intigo.net/",
+    "helpUrl": "https://intigo.net/contact/"
   },
   "maystro-delivery": {
     "displayName": "Maystro Delivery",
@@ -59558,7 +60408,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://maystro-delivery.com/trackingSD.html"
+    "trackingSearchUrl": "https://maystro-delivery.com/trackingSD.html",
+    "helpUrl": "https://maystro-delivery.com/ContactUS.html"
   },
   "mm-cargo-services": {
     "displayName": "MM Cargo Services",
@@ -59590,7 +60441,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mmcargoservices.co.za/track"
+    "trackingSearchUrl": "https://mmcargoservices.co.za/track",
+    "helpUrl": "https://mmcargoservices.co.za/contact"
   },
   "ozon-express-ma": {
     "displayName": "Ozon Express",
@@ -59618,7 +60470,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ozonexpress.ma/"
+    "trackingSearchUrl": "https://ozonexpress.ma/",
+    "helpUrl": "https://ozonexpress.ma/contact"
   },
   "paps": {
     "displayName": "Paps",
@@ -59651,7 +60504,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://papslogistics.com/tracking/"
+    "trackingSearchUrl": "https://papslogistics.com/tracking/",
+    "helpUrl": "https://papslogistics.com/contact/"
   },
   "pickup-mtaani": {
     "displayName": "Pickup Mtaani",
@@ -59681,7 +60535,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://new.pickupmtaani.com/track-package"
+    "trackingSearchUrl": "https://new.pickupmtaani.com/track-package",
+    "helpUrl": "https://new.pickupmtaani.com/support"
   },
   "postnet-za": {
     "displayName": "PostNet",
@@ -59734,7 +60589,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://redstarplc.com/tracker/"
+    "trackingSearchUrl": "https://redstarplc.com/tracker/",
+    "helpUrl": "https://redstarplc.com/contact-us/"
   },
   "alfa-delivery-kz": {
     "displayName": "Alfa Delivery Services",
@@ -59814,7 +60670,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.citypak.lk/"
+    "trackingSearchUrl": "https://track.citypak.lk/",
+    "helpUrl": "https://www.citypak.lk/contact-us/"
   },
   "fardar-express-lk": {
     "displayName": "Fardar Express Domestic",
@@ -59864,7 +60721,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://delivery.gaaubesi.com/orders/track-order/"
+    "trackingSearchUrl": "https://delivery.gaaubesi.com/orders/track-order/",
+    "helpUrl": "https://gaaubesi.com/contact"
   },
   "georgian-post": {
     "displayName": "Georgian Post",
@@ -59980,7 +60838,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://jananiexpress.com/tracking"
+    "trackingSearchUrl": "https://jananiexpress.com/tracking",
+    "helpUrl": "https://jananiexpress.com/contact"
   },
   "koombiyo": {
     "displayName": "Koombiyo Delivery",
@@ -60011,7 +60870,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://koombiyodelivery.lk/track"
+    "trackingSearchUrl": "https://koombiyodelivery.lk/track",
+    "helpUrl": "https://koombiyodelivery.lk/contact"
   },
   "kuwait-post": {
     "displayName": "Kuwait Post",
@@ -60047,7 +60907,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mahex.com/tracking"
+    "trackingSearchUrl": "https://mahex.com/tracking",
+    "helpUrl": "https://mahex.com/customer-support"
   },
   "mnpost-mn": {
     "displayName": "MNPOST",
@@ -60079,7 +60940,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://mnpost.mn/tracking"
+    "trackingSearchUrl": "https://mnpost.mn/tracking",
+    "helpUrl": "https://mnpost.mn/contact"
   },
   "mongol-post": {
     "displayName": "Mongol Post",
@@ -60127,7 +60989,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.nepalcanmove.com/track/"
+    "trackingSearchUrl": "https://portal.nepalcanmove.com/track/",
+    "helpUrl": "https://nepalcanmove.com/contact"
   },
   "nomex-kg": {
     "displayName": "Nomex",
@@ -60159,7 +61022,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://nomex.kg/"
+    "trackingSearchUrl": "https://nomex.kg/",
+    "helpUrl": "https://nomex.kg/contact.html"
   },
   "onway-ge": {
     "displayName": "OnWay",
@@ -60178,7 +61042,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://onway.ge/"
+    "trackingSearchUrl": "https://onway.ge/",
+    "helpUrl": "https://onway.ge/contact"
   },
   "quickbox-kg": {
     "displayName": "QuickBox",
@@ -60229,7 +61094,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sendoexpress.net/tracking.html"
+    "trackingSearchUrl": "https://www.sendoexpress.net/tracking.html",
+    "helpUrl": "https://www.sendoexpress.net/about.html"
   },
   "tipax": {
     "displayName": "Tipax",
@@ -60281,7 +61147,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tmcargo.net/track.php"
+    "trackingSearchUrl": "https://www.tmcargo.net/track.php",
+    "helpUrl": "https://www.tmcargo.net/contact-us"
   },
   "trackings-ge": {
     "displayName": "Trackings.GE",
@@ -60309,7 +61176,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://trackings.ge/en/track"
+    "trackingSearchUrl": "https://trackings.ge/en/track",
+    "helpUrl": "https://trackings.ge/en/contacts"
   },
   "trans-express-lk": {
     "displayName": "Trans Express",
@@ -60329,7 +61197,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.transexpress.lk/tracking"
+    "trackingSearchUrl": "https://tracking.transexpress.lk/tracking",
+    "helpUrl": "https://transexpress.lk/about-us/our-company/contact/"
   },
   "turbo-eg": {
     "displayName": "Turbo",
@@ -60358,7 +61227,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://turbo.info/en/track"
+    "trackingSearchUrl": "https://turbo.info/en/track",
+    "helpUrl": "https://turbo.info/en/contact"
   },
   "united-az": {
     "displayName": "United.az",
@@ -60394,7 +61264,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cui.united.az/tracking-code"
+    "trackingSearchUrl": "https://cui.united.az/tracking-code",
+    "helpUrl": "https://cui.united.az/contact"
   },
   "wakilni": {
     "displayName": "Wakilni",
@@ -60588,7 +61459,8 @@ export const CARRIER_CAPABILITIES = {
         "keepsCapabilityUrl": true
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://www.amazon.com/gp/help/customer/contact-us"
   },
   "atual-cargas": {
     "displayName": "Atual Cargas",
@@ -60607,7 +61479,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cliente.atualcargas.com.br/rastreamento"
+    "trackingSearchUrl": "https://cliente.atualcargas.com.br/rastreamento",
+    "helpUrl": "https://www.atualcargas.com.br/fale-conosco/"
   },
   "azems": {
     "displayName": "Azer Express Post",
@@ -60639,7 +61512,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.azems.az/az/gonderis-izle"
+    "trackingSearchUrl": "https://www.azems.az/az/gonderis-izle",
+    "helpUrl": "https://www.azems.az/az/elaqe"
   },
   "best-freight-cn": {
     "displayName": "BEST Freight China",
@@ -60661,7 +61535,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.800best.com/freight/track"
+    "trackingSearchUrl": "https://www.800best.com/freight/track",
+    "helpUrl": "https://www.800best.com/best/tel"
   },
   "domina": {
     "displayName": "Domina",
@@ -60681,7 +61556,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.domina.com.co/"
+    "trackingSearchUrl": "https://tracking.domina.com.co/",
+    "helpUrl": "https://domina.com.co/contactanos/"
   },
   "g4s-kenya": {
     "displayName": "G4S Courier Kenya",
@@ -60853,7 +61729,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cliente.viapajucara.com.br/rastrear"
+    "trackingSearchUrl": "https://cliente.viapajucara.com.br/rastrear",
+    "helpUrl": "https://www.viapajucara.com.br/fale-conosco/"
   },
   "ftd-nz": {
     "displayName": "FTD New Zealand",
@@ -60888,7 +61765,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ftd.nz/query/"
+    "trackingSearchUrl": "https://www.ftd.nz/query/",
+    "helpUrl": "https://www.ftd.nz/public/contact/"
   },
   "ader": {
     "displayName": "ADER",
@@ -60908,7 +61786,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aderonline.com/contacto/informacion-de-pedidos/"
+    "trackingSearchUrl": "https://aderonline.com/contacto/informacion-de-pedidos/",
+    "helpUrl": "https://aderonline.com/contacto/"
   },
   "aparcels": {
     "displayName": "AParcels",
@@ -60933,7 +61812,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aparcels.com/"
+    "trackingSearchUrl": "https://www.aparcels.com/",
+    "helpUrl": "https://www.aparcels.com/contact.html"
   },
   "cargo-international": {
     "displayName": "Cargo International",
@@ -60961,7 +61841,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cargointernational.de/versandrechner/tracking"
+    "trackingSearchUrl": "https://www.cargointernational.de/versandrechner/tracking",
+    "helpUrl": "https://hilfe.cargointernational.de/de/"
   },
   "cargoboard": {
     "displayName": "Cargoboard",
@@ -60980,7 +61861,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.cargoboard.com/tracking"
+    "trackingSearchUrl": "https://my.cargoboard.com/tracking",
+    "helpUrl": "https://cargoboard.com/contact/customer-support"
   },
   "colis-gros-volume": {
     "displayName": "Colis Gros Volume",
@@ -61059,7 +61941,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.ecnetwork.co.uk/order-tracking-shortcode"
+    "trackingSearchUrl": "https://www.ecnetwork.co.uk/order-tracking-shortcode",
+    "helpUrl": "https://www.ecnetwork.co.uk/contact"
   },
   "expressgodo": {
     "displayName": "Expressgodo Logistics",
@@ -61090,7 +61973,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://expressgodo.com/track.php"
+    "trackingSearchUrl": "https://expressgodo.com/track.php",
+    "helpUrl": "https://expressgodo.com/contact.html"
   },
   "fiege-netherlands": {
     "displayName": "Fiege Netherlands",
@@ -61117,7 +62001,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://websped-netherlands.fiege.com/"
+    "trackingSearchUrl": "https://websped-netherlands.fiege.com/",
+    "helpUrl": "https://www.fiege.com/en/contact"
   },
   "furdeco": {
     "displayName": "Furdeco",
@@ -61136,7 +62021,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://furdeco.co.uk/track-your-order"
+    "trackingSearchUrl": "https://furdeco.co.uk/track-your-order",
+    "helpUrl": "https://furdeco.co.uk/contact-furdeco"
   },
   "guernsey-post": {
     "displayName": "Guernsey Post",
@@ -61183,7 +62069,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hellmann.com/en/track-trace"
+    "trackingSearchUrl": "https://www.hellmann.com/en/track-trace",
+    "helpUrl": "https://www.hellmann.com/en/contact"
   },
   "hintzen": {
     "displayName": "Hintzen Logistik",
@@ -61203,7 +62090,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.hintzen.de/orderx/aordata.aspx"
+    "trackingSearchUrl": "https://tracking.hintzen.de/orderx/aordata.aspx",
+    "helpUrl": "https://www.hintzen.de/kontakt/"
   },
   "isle-of-man-post": {
     "displayName": "Isle of Man Post",
@@ -61263,7 +62151,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://mms.intelink.net.cn/oms/#/logisticsTracking?companyId=10355&nos={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.11000miles.com/"
+    "trackingSearchUrl": "https://www.11000miles.com/",
+    "helpUrl": "https://www.11000miles.com/detail.html?&backend_env=narongliebiao&backend_section=guanyuwomen&content_id=14"
   },
   "kdz-express": {
     "displayName": "KDZ Express",
@@ -61294,7 +62183,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kdz.com/track-trace/"
+    "trackingSearchUrl": "https://kdz.com/track-trace/",
+    "helpUrl": "https://kdz.com/contact/"
   },
   "kleine-spedition": {
     "displayName": "Kleine Spedition",
@@ -61324,7 +62214,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tt.kleine.eu/tracking/home.jsf"
+    "trackingSearchUrl": "https://tt.kleine.eu/tracking/home.jsf",
+    "helpUrl": "https://kleine.eu/kontakt"
   },
   "lionwheel": {
     "displayName": "LionWheel",
@@ -61381,7 +62272,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://extranet.mazet.fr/suiviexpedition?lang=fr"
+    "trackingSearchUrl": "https://extranet.mazet.fr/suiviexpedition?lang=fr",
+    "helpUrl": "https://www.mazet.com/contact/"
   },
   "meyer-jumbo": {
     "displayName": "Meyer-Jumbo",
@@ -61436,7 +62328,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.palletforce.com/en/track-my-pallet/"
+    "trackingSearchUrl": "https://www.palletforce.com/en/track-my-pallet/",
+    "helpUrl": "https://www.palletforce.com/en/contact/"
   },
   "palletonline": {
     "displayName": "PalletOnline",
@@ -61467,7 +62360,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://palletonline.co.uk/track"
+    "trackingSearchUrl": "https://palletonline.co.uk/track",
+    "helpUrl": "https://palletonline.co.uk/help/"
   },
   "pds-direct": {
     "displayName": "PDS Direct",
@@ -61495,7 +62389,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://webportal.pdsdirect.co.uk/tracktrace"
+    "trackingSearchUrl": "https://webportal.pdsdirect.co.uk/tracktrace",
+    "helpUrl": "https://www.pdsdirect.co.uk/contact-us/"
   },
   "poste-san-marino": {
     "displayName": "Poste San Marino",
@@ -61568,7 +62463,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.schaeflein.de/Track"
+    "trackingSearchUrl": "https://my.schaeflein.de/Track",
+    "helpUrl": "https://www.schaeflein.de/kontakt"
   },
   "tdv-group": {
     "displayName": "TDV Group",
@@ -61593,7 +62489,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.tdv-group.com/tracktrace"
+    "trackingSearchUrl": "https://portal.tdv-group.com/tracktrace",
+    "helpUrl": "https://tdv-group.com/contacts/"
   },
   "transnet-couriers": {
     "displayName": "Transnet Couriers",
@@ -61623,7 +62520,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transnetservices.co.uk/login.html"
+    "trackingSearchUrl": "https://www.transnetservices.co.uk/login.html",
+    "helpUrl": "https://www.transnetservices.co.uk/contact.html"
   },
   "trusk": {
     "displayName": "Trusk",
@@ -61674,7 +62572,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tuffnells.co.uk/track"
+    "trackingSearchUrl": "https://www.tuffnells.co.uk/track",
+    "helpUrl": "https://www.tuffnells.co.uk/contact"
   },
   "united-pallet-network": {
     "displayName": "United Pallet Network",
@@ -61695,7 +62594,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.upn.co.uk/"
+    "trackingSearchUrl": "https://www.upn.co.uk/",
+    "helpUrl": "https://www.upn.co.uk/get-in-touch"
   },
   "walkers-transport": {
     "displayName": "Walkers Transport",
@@ -61715,7 +62615,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tracking.walkers-transport.co.uk/"
+    "trackingSearchUrl": "https://tracking.walkers-transport.co.uk/",
+    "helpUrl": "https://walkers-transport.co.uk/contact-us/"
   },
   "altex-curier": {
     "displayName": "Altex Curier",
@@ -61734,7 +62635,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://curier.altex.ro/"
+    "trackingSearchUrl": "https://curier.altex.ro/",
+    "helpUrl": "https://altex.ro/contacts"
   },
   "atc-express": {
     "displayName": "ATC Express",
@@ -61800,7 +62702,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://gbs.ru/track/"
+    "trackingSearchUrl": "https://gbs.ru/track/",
+    "helpUrl": "https://gbs.ru/help/"
   },
   "rohlig-suus": {
     "displayName": "Rohlig SUUS Logistics",
@@ -61829,7 +62732,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.suus.com/visibility"
+    "trackingSearchUrl": "https://portal.suus.com/visibility",
+    "helpUrl": "https://suus.com/pl/kontakt"
   },
   "szendex": {
     "displayName": "Szendex",
@@ -61859,7 +62763,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://erp.szendex.com/DlWebTrackingVWE/"
+    "trackingSearchUrl": "https://erp.szendex.com/DlWebTrackingVWE/",
+    "helpUrl": "https://www.szendex.com/contacto"
   },
   "unitrade": {
     "displayName": "Unitrade",
@@ -61929,7 +62834,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.alohafreight.com/portal/"
+    "trackingSearchUrl": "https://www.alohafreight.com/portal/",
+    "helpUrl": "https://www.alohafreight.com/company-directory"
   },
   "two-day-transportation": {
     "displayName": "2 Day Transportation",
@@ -61956,7 +62862,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.2daytranspo.com/"
+    "trackingSearchUrl": "https://www.2daytranspo.com/",
+    "helpUrl": "https://www.2daytranspo.com/contactus"
   },
   "western-post": {
     "displayName": "Western Post",
@@ -61977,7 +62884,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wpglb.com/"
+    "trackingSearchUrl": "https://www.wpglb.com/",
+    "helpUrl": "https://www.wpglb.com/about/contact/"
   },
   "act-logistics": {
     "displayName": "ACT Logistics",
@@ -61996,7 +62904,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://actlogistics.pperfect.com/"
+    "trackingSearchUrl": "https://actlogistics.pperfect.com/",
+    "helpUrl": "https://act-logistics.co.za/contact/"
   },
   "ads-intl": {
     "displayName": "ADS International",
@@ -62025,7 +62934,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ads-intl.com/track-shipment/"
+    "trackingSearchUrl": "https://ads-intl.com/track-shipment/",
+    "helpUrl": "https://ads-intl.com/contact/"
   },
   "airways-courier-in": {
     "displayName": "Airways Courier",
@@ -62054,7 +62964,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://airwayscourier.co.in/Tracking_new.aspx"
+    "trackingSearchUrl": "https://airwayscourier.co.in/Tracking_new.aspx",
+    "helpUrl": "https://airwayscourier.co.in/contact.aspx"
   },
   "alpha-cargo-th": {
     "displayName": "Alpha Cargo",
@@ -62138,7 +63049,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.chemcouriers.com/tracking"
+    "trackingSearchUrl": "https://www.chemcouriers.com/tracking",
+    "helpUrl": "https://www.chemcouriers.com/company-directory"
   },
   "cristao-shipping": {
     "displayName": "Cristao Shipping & Marine Logistics",
@@ -62229,7 +63141,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dbox.co.kr/delivery.php"
+    "trackingSearchUrl": "https://www.dbox.co.kr/delivery.php",
+    "helpUrl": "https://www.dbox.co.kr/shipping/shipping.php"
   },
   "dpd-hk": {
     "displayName": "DPD Hong Kong",
@@ -62292,7 +63205,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.fastexpresscargo.com/tracking.html"
+    "trackingSearchUrl": "https://www.fastexpresscargo.com/tracking.html",
+    "helpUrl": "https://www.fastexpresscargo.com/contact.html"
   },
   "fast-express-tr": {
     "displayName": "Fast Express",
@@ -62317,7 +63231,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.fast-express.com/en/"
+    "trackingSearchUrl": "https://www.fast-express.com/en/",
+    "helpUrl": "https://www.fast-express.com/en/pages/iletisim"
   },
   "focus-logistics-il": {
     "displayName": "Focus Logistics",
@@ -62357,7 +63272,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://fynexcourierdubai.com/tracking/"
+    "trackingSearchUrl": "https://fynexcourierdubai.com/tracking/",
+    "helpUrl": "https://fynexcourierdubai.com/contacts/"
   },
   "gk-global-kr": {
     "displayName": "GK Global",
@@ -62449,7 +63365,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://run10.kexpress.co.il/RunCom.Server/www/pub/pub_random_form.htm"
+    "trackingSearchUrl": "https://run10.kexpress.co.il/RunCom.Server/www/pub/pub_random_form.htm",
+    "helpUrl": "https://kexpress.co.il/%D7%A6%D7%95%D7%A8-%D7%A7%D7%A9%D7%A8/"
   },
   "khubani-air-pack": {
     "displayName": "Khubani Air Pack",
@@ -62481,7 +63398,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.khubaniairpack.com/tracking.html"
+    "trackingSearchUrl": "https://www.khubaniairpack.com/tracking.html",
+    "helpUrl": "https://www.khubaniairpack.com/contactus.html"
   },
   "lex-th": {
     "displayName": "LEX Thailand",
@@ -62538,7 +63456,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.line-1.com.au/tracking"
+    "trackingSearchUrl": "https://www.line-1.com.au/tracking",
+    "helpUrl": "https://www.line-1.com.au/contact/"
   },
   "litexpress": {
     "displayName": "LiteXpress",
@@ -62557,7 +63476,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://litexpress.com.ph/track-and-trace/"
+    "trackingSearchUrl": "https://litexpress.com.ph/track-and-trace/",
+    "helpUrl": "https://www.litexpress.com.ph/contactus"
   },
   "m5-continent": {
     "displayName": "M5 Continent",
@@ -62577,7 +63497,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://m5clogs.com/track.aspx"
+    "trackingSearchUrl": "https://m5clogs.com/track.aspx",
+    "helpUrl": "https://m5clogs.com/contact.aspx"
   },
   "max-express-ae": {
     "displayName": "MAX Express",
@@ -62596,7 +63517,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://maxexuae.com/tracking/"
+    "trackingSearchUrl": "https://maxexuae.com/tracking/",
+    "helpUrl": "https://maxexuae.com/contact/"
   },
   "movicarga": {
     "displayName": "Movicarga",
@@ -62635,7 +63557,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://newaytransport.com.au/track/"
+    "trackingSearchUrl": "https://newaytransport.com.au/track/",
+    "helpUrl": "https://newaytransport.com.au/contact/"
   },
   "pml-tw": {
     "displayName": "PML",
@@ -62686,7 +63609,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://chintongex.com/"
+    "trackingSearchUrl": "https://chintongex.com/",
+    "helpUrl": "https://chintongex.com/#/help"
   },
   "relay-express": {
     "displayName": "Relay Express",
@@ -62702,7 +63626,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://scm.relayexpress.in/DocketTrack"
+    "trackingSearchUrl": "https://scm.relayexpress.in/DocketTrack",
+    "helpUrl": "https://www.relayexpress.in/contact.html"
   },
   "sgxpress": {
     "displayName": "SGXpress",
@@ -62729,7 +63654,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.sgxpress.com/query/"
+    "trackingSearchUrl": "https://www.sgxpress.com/query/",
+    "helpUrl": "https://www.sgxpress.com/contact/"
   },
   "shipways-in": {
     "displayName": "ShipWays",
@@ -62782,7 +63708,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shivaicl.net/track.html"
+    "trackingSearchUrl": "https://www.shivaicl.net/track.html",
+    "helpUrl": "https://www.shivaicl.net/contact.html"
   },
   "usea-express": {
     "displayName": "USEA EXPRESS",
@@ -62821,7 +63748,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://wyngs-my.com/trackingDetails"
+    "trackingSearchUrl": "https://wyngs-my.com/trackingDetails",
+    "helpUrl": "https://wyngs-my.com/support"
   },
   "xindus": {
     "displayName": "Xindus",
@@ -62952,7 +63880,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.jetspeed-express.com/"
+    "trackingSearchUrl": "https://www.jetspeed-express.com/",
+    "helpUrl": "https://www.jetspeed-express.com/cms/c/contactus"
   },
   "pdu": {
     "displayName": "PDU",
@@ -63161,7 +64090,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ttsecure.hartrodt.com/pserv/tt/open?sep=1"
+    "trackingSearchUrl": "https://ttsecure.hartrodt.com/pserv/tt/open?sep=1",
+    "helpUrl": "https://www.hartrodt.com/contact"
   },
   "aerolineas-argentinas-cargo": {
     "displayName": "Aerolíneas Argentinas Cargo",
@@ -63183,7 +64113,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://aerolineas.smartkargo.com/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://aerolineas.smartkargo.com/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://aerolineas.smartkargo.com/FrmAWBTracking.aspx",
+    "helpUrl": "https://cargo.aerolineas.com.ar/es-ar/contactenos"
   },
   "air-europa-cargo": {
     "displayName": "Air Europa Cargo",
@@ -63204,7 +64135,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.uxtracking.com/tracking.asp"
+    "trackingSearchUrl": "https://www.uxtracking.com/tracking.asp",
+    "helpUrl": "https://www.uxtracking.com/Contact.asp"
   },
   "air-greenland": {
     "displayName": "Air Greenland Cargo",
@@ -63225,7 +64157,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://airgreenland.com/cargo/tracking-awb/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://airgreenland.com/cargo/tracking-awb/"
+    "trackingSearchUrl": "https://airgreenland.com/cargo/tracking-awb/",
+    "helpUrl": "https://airgreenland.com/cargo/contact-air-greenland-cargo/"
   },
   "akasa-air-cargo": {
     "displayName": "Akasa Air Cargo",
@@ -63246,7 +64179,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://cargo.akasaair.com/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargo.akasaair.com/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://cargo.akasaair.com/FrmAWBTracking.aspx",
+    "helpUrl": "https://www.akasaair.com/quick-links/cargo"
   },
   "alfa-mensajes": {
     "displayName": "Alfa Mensajes",
@@ -63268,7 +64202,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://alfamensajes.com/consulta/{trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alfamensajes.com/"
+    "trackingSearchUrl": "https://alfamensajes.com/",
+    "helpUrl": "https://alfamensajes.com/pqrs"
   },
   "astral-aviation": {
     "displayName": "Astral Aviation Cargo",
@@ -63291,7 +64226,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://astral.fr8booking.com/trackAndTrace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://astral.fr8booking.com/trackAndTrace"
+    "trackingSearchUrl": "https://astral.fr8booking.com/trackAndTrace",
+    "helpUrl": "https://astral-aviation.com/contact"
   },
   "atlantic-container-line": {
     "displayName": "Atlantic Container Line",
@@ -63316,7 +64252,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "ACL Track & Trace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.aclcargo.com/track-trace/"
+    "trackingSearchUrl": "https://www.aclcargo.com/track-trace/",
+    "helpUrl": "https://www.aclcargo.com/contacts/"
   },
   "benben": {
     "displayName": "Benben International",
@@ -63358,7 +64295,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://neptunebermuda.com/track-shipment/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://neptunebermuda.com/track-shipment/"
+    "trackingSearchUrl": "https://neptunebermuda.com/track-shipment/",
+    "helpUrl": "https://neptunebermuda.com/contact-us/"
   },
   "bob-go": {
     "displayName": "Bob Go",
@@ -63385,7 +64323,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.bobgo.co.za/"
+    "trackingSearchUrl": "https://track.bobgo.co.za/",
+    "helpUrl": "https://help.bobgo.co.za/portal/en/home"
   },
   "cadena-courier": {
     "displayName": "Cadena Courier",
@@ -63407,7 +64346,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://guias.cadena.com.co/tracking/consulta.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://guias.cadena.com.co/tracking/consulta.aspx"
+    "trackingSearchUrl": "https://guias.cadena.com.co/tracking/consulta.aspx",
+    "helpUrl": "https://www.cadena.com.co/contacto/"
   },
   "calidex-courier": {
     "displayName": "Calidex Courier",
@@ -63452,7 +64392,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://certipostal.fivesoftcolombia.com/tag_detail_v1.html?d={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://certipostal.com/seguimientos/fivepostal/"
+    "trackingSearchUrl": "https://certipostal.com/seguimientos/fivepostal/",
+    "helpUrl": "https://certipostal.com/contacto/"
   },
   "cesco-logistics": {
     "displayName": "CESCO Logistics",
@@ -63474,7 +64415,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://cesco-logistics.com/tracking.php",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cesco-logistics.com/tracking.php"
+    "trackingSearchUrl": "https://cesco-logistics.com/tracking.php",
+    "helpUrl": "https://cesco-logistics.com/contactus.php"
   },
   "citilink-cargo": {
     "displayName": "Citilink Cargo",
@@ -63495,7 +64437,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://cargo.garuda-indonesia.com/Search",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search"
+    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search",
+    "helpUrl": "https://cargo.garuda-indonesia.com/Contact-Us"
   },
   "conexiones-empresariales": {
     "displayName": "Conexiones Empresariales",
@@ -63516,7 +64459,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://app.conexionesempresariales.com/rastreo/?txtguia={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.conexionesempresariales.com/rastreo/"
+    "trackingSearchUrl": "https://app.conexionesempresariales.com/rastreo/",
+    "helpUrl": "https://conexionesempresariales.com/Contactenos"
   },
   "cootranstame": {
     "displayName": "CootransTame",
@@ -63537,7 +64481,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.cootranstame.com/rastreo-envios",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cootranstame.com/rastreo-envios"
+    "trackingSearchUrl": "https://www.cootranstame.com/rastreo-envios",
+    "helpUrl": "https://www.cootranstame.com/Medios-de-contacto"
   },
   "cordelia-shipping": {
     "displayName": "Cordelia Container Shipping Line",
@@ -63560,7 +64505,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Cordelia Track Shipment",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cordelialine.com/"
+    "trackingSearchUrl": "https://cordelialine.com/",
+    "helpUrl": "https://cordelialine.com/contact/"
   },
   "cotaxi": {
     "displayName": "COTAXI",
@@ -63581,7 +64527,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.cotaxi.com.co/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cotaxi.com.co/"
+    "trackingSearchUrl": "https://www.cotaxi.com.co/",
+    "helpUrl": "https://www.cotaxi.com.co/servicio-al-cliente/"
   },
   "courierit-nz": {
     "displayName": "Courierit New Zealand",
@@ -63603,7 +64550,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.courierit.net.nz/Home/Track",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.courierit.net.nz/Home/Track"
+    "trackingSearchUrl": "https://www.courierit.net.nz/Home/Track",
+    "helpUrl": "https://www.courierit.co.nz/contact.html"
   },
   "dongjin-shipping": {
     "displayName": "Dongjin Shipping",
@@ -63626,7 +64574,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Dongjin Shipping Cargo Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://esvc.djship.co.kr/gnoss/CUP_HOM_3301.do?sessLocale=en"
+    "trackingSearchUrl": "https://esvc.djship.co.kr/gnoss/CUP_HOM_3301.do?sessLocale=en",
+    "helpUrl": "https://www.djship.co.kr/en/cs/person.asp"
   },
   "dpd-by": {
     "displayName": "DPD Belarus",
@@ -63713,7 +64662,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.dypaq.com/"
+    "trackingSearchUrl": "https://www.dypaq.com/",
+    "helpUrl": "https://www.dypaq.com/dudas-frecuentes-2/"
   },
   "eimskip": {
     "displayName": "Eimskip",
@@ -63736,7 +64686,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Eimskip Find Shipment",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.eimskip.com/find-shipment/"
+    "trackingSearchUrl": "https://www.eimskip.com/find-shipment/",
+    "helpUrl": "https://www.eimskip.com/contact-us/"
   },
   "ellerman-city-liners": {
     "displayName": "Ellerman City Liners",
@@ -63759,7 +64710,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Ellerman Container Track & Trace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ellerman.orcapayments.app/container-tracking/"
+    "trackingSearchUrl": "https://ellerman.orcapayments.app/container-tracking/",
+    "helpUrl": "https://ellermanlines.com/contact-us/"
   },
   "enviamos-comunicaciones": {
     "displayName": "Enviamos Comunicaciones",
@@ -63781,7 +64733,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.enviamoscym.com/rastreo-envios-mensajeria.php?codigo={trackingNumber}&tipo-codigo=cod-principal",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.enviamoscym.com/rastreo-envios-mensajeria.php"
+    "trackingSearchUrl": "https://www.enviamoscym.com/rastreo-envios-mensajeria.php",
+    "helpUrl": "https://www.enviamoscym.com/pqr-crear.php"
   },
   "epex-colombia": {
     "displayName": "EPEX Colombia",
@@ -63803,7 +64756,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://epex.com.co/rastrea/?id={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://epex.com.co/rastrea/"
+    "trackingSearchUrl": "https://epex.com.co/rastrea/",
+    "helpUrl": "https://epex.com.co/epex-soporte-al-cliente/"
   },
   "esm-logistica": {
     "displayName": "ESM Logística",
@@ -63825,7 +64779,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://clientes.esmlogistica.com/seguimiento?guia={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://clientes.esmlogistica.com/seguimiento"
+    "trackingSearchUrl": "https://clientes.esmlogistica.com/seguimiento",
+    "helpUrl": "https://esmlogistica.com/pqrs"
   },
   "ethiopian-cargo": {
     "displayName": "Ethiopian Cargo",
@@ -63848,7 +64803,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Ethiopian Cargo Track Your Shipment",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargo.ethiopianairlines.com/my-cargo/track-your-shipment"
+    "trackingSearchUrl": "https://cargo.ethiopianairlines.com/my-cargo/track-your-shipment",
+    "helpUrl": "https://cargo.ethiopianairlines.com/customer-care/contact-us"
   },
   "evergreen-line": {
     "displayName": "Evergreen Line",
@@ -63872,7 +64828,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "ShipmentLink",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ct.shipmentlink.com/servlet/TDB1_CargoTracking.do"
+    "trackingSearchUrl": "https://ct.shipmentlink.com/servlet/TDB1_CargoTracking.do",
+    "helpUrl": "https://www.shipmentlink.com/tcc1/jsp/TCC1_Contact.jsp"
   },
   "feima": {
     "displayName": "Feima",
@@ -63937,7 +64894,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.flowpl.com/order-tracking/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.flowpl.com/order-tracking/"
+    "trackingSearchUrl": "https://www.flowpl.com/order-tracking/",
+    "helpUrl": "https://www.flowpl.com/contact-us/"
   },
   "freight-club": {
     "displayName": "Freight Club",
@@ -63963,7 +64921,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.freightclub.com/Tracking"
+    "trackingSearchUrl": "https://app.freightclub.com/Tracking",
+    "helpUrl": "https://www.freightclub.com/contact-us"
   },
   "g2-ocean": {
     "displayName": "G2 Ocean",
@@ -63985,7 +64944,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "MyG2 Cargo Tracker",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://myg2.g2ocean.com/cargo-tracking"
+    "trackingSearchUrl": "https://myg2.g2ocean.com/cargo-tracking",
+    "helpUrl": "https://www.g2ocean.com/offices/"
   },
   "garuda-indonesia-cargo": {
     "displayName": "Garuda Indonesia Cargo",
@@ -64007,7 +64967,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://cargo.garuda-indonesia.com/Search",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search"
+    "trackingSearchUrl": "https://cargo.garuda-indonesia.com/Search",
+    "helpUrl": "https://cargo.garuda-indonesia.com/Contact-Us"
   },
   "genei": {
     "displayName": "Genei",
@@ -64038,7 +64999,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.genei.es/seguimiento-envios/"
+    "trackingSearchUrl": "https://www.genei.es/seguimiento-envios/",
+    "helpUrl": "https://soporte.genei.es/"
   },
   "globkurier": {
     "displayName": "GlobKurier",
@@ -64058,7 +65020,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.globkurier.pl/tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.globkurier.pl/tracking"
+    "trackingSearchUrl": "https://www.globkurier.pl/tracking",
+    "helpUrl": "https://www.globkurier.pl/kontakt"
   },
   "hecny-shipping": {
     "displayName": "Hecny Shipping",
@@ -64081,7 +65044,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Hecny Track and Trace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hecny.com/en/track-and-trace"
+    "trackingSearchUrl": "https://www.hecny.com/en/track-and-trace",
+    "helpUrl": "https://www.hecny.com/en/contact"
   },
   "hede-shipping": {
     "displayName": "Hede Shipping",
@@ -64131,7 +65095,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Heung-A e-Service Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ebiz.heungaline.com/Tracking"
+    "trackingSearchUrl": "https://ebiz.heungaline.com/Tracking",
+    "helpUrl": "https://www.heungaline.com/en/contact_01.html"
   },
   "hgd": {
     "displayName": "HGD International",
@@ -64175,7 +65140,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.hoeghautoliners.com/my-cargo",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hoeghautoliners.com/my-cargo"
+    "trackingSearchUrl": "https://www.hoeghautoliners.com/my-cargo",
+    "helpUrl": "https://www.hoeghautoliners.com/contact-us"
   },
   "honour-lane-shipping": {
     "displayName": "Honour Lane Shipping",
@@ -64197,7 +65163,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://tracking.cargolane.net/tracking/ShipmentInfo?paramType=ctn_no&paramNo={trackingNumber}",
     "trackingSiteName": "HLS Online Service",
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [],
+    "helpUrl": "https://www.hlsholding.com/contactus"
   },
   "hua-express": {
     "displayName": "HUA Express",
@@ -64258,7 +65225,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://integracargo.com/rastreo/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://integracargo.com/rastreo/"
+    "trackingSearchUrl": "https://integracargo.com/rastreo/",
+    "helpUrl": "https://integracargo.com/contacto/"
   },
   "indigo-cargo": {
     "displayName": "IndiGo CarGo",
@@ -64279,7 +65247,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://6ecargo.goindigo.in/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://6ecargo.goindigo.in/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://6ecargo.goindigo.in/FrmAWBTracking.aspx",
+    "helpUrl": "https://www.goindigo.in/cargo/frequently-asked-questions.html"
   },
   "k-line-roro": {
     "displayName": "K Line Global RoRo",
@@ -64303,7 +65272,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://apps.klineglobalroro.com/tracking/search?q={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apps.klineglobalroro.com/tracking/search"
+    "trackingSearchUrl": "https://apps.klineglobalroro.com/tracking/search",
+    "helpUrl": "https://www.kline.co.jp/en/contact.html"
   },
   "kenya-airways-cargo": {
     "displayName": "Kenya Airways Cargo",
@@ -64347,7 +65317,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://lmtco.com/tracking-serices.html",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://lmtco.com/tracking-serices.html"
+    "trackingSearchUrl": "https://lmtco.com/tracking-serices.html",
+    "helpUrl": "https://lmtco.com/contact.html"
   },
   "lerdex": {
     "displayName": "Lerdex",
@@ -64391,7 +65362,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://visible.leschaco.com/?forwarderRef={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://visible.leschaco.com/"
+    "trackingSearchUrl": "https://visible.leschaco.com/",
+    "helpUrl": "https://www.leschaco.com/en/service/contact.html"
   },
   "marken": {
     "displayName": "Marken",
@@ -64425,7 +65397,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.marken.com/track-shipment"
+    "trackingSearchUrl": "https://www.marken.com/track-shipment",
+    "helpUrl": "https://www.marken.com/contact"
   },
   "mol-ace": {
     "displayName": "MOL Auto Carrier Express",
@@ -64478,7 +65451,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://app.navex.tn/track.php"
+    "trackingSearchUrl": "https://app.navex.tn/track.php",
+    "helpUrl": "https://navex.tn/a-propos/#formulaire"
   },
   "navlungo": {
     "displayName": "Navlungo",
@@ -64507,7 +65481,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://domestic-track.navlungo.com/en/"
+    "trackingSearchUrl": "https://domestic-track.navlungo.com/en/",
+    "helpUrl": "https://support.navlungo.com/support/home"
   },
   "ots-astracon": {
     "displayName": "O.T.S. ASTRACON",
@@ -64528,7 +65503,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www-oaoosf.wisegrid.net/Portals/NEO/Desktop"
+    "trackingSearchUrl": "https://www-oaoosf.wisegrid.net/Portals/NEO/Desktop",
+    "helpUrl": "https://www.astracon.com/kontakt-anfrage/"
   },
   "pacific-international-lines": {
     "displayName": "Pacific International Lines",
@@ -64551,7 +65527,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "PIL Container T&T",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.pilship.com/digital-solutions/?tab=customer&id=track-trace"
+    "trackingSearchUrl": "https://www.pilship.com/digital-solutions/?tab=customer&id=track-trace",
+    "helpUrl": "https://www.pilship.com/contact-us/"
   },
   "paqmex": {
     "displayName": "PaqMex",
@@ -64594,7 +65571,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.grupovencedor.com/paqueteria",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.grupovencedor.com/paqueteria"
+    "trackingSearchUrl": "https://www.grupovencedor.com/paqueteria",
+    "helpUrl": "https://www.grupovencedor.com/contacto"
   },
   "parcel2go": {
     "displayName": "Parcel2Go",
@@ -64622,7 +65600,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.parcel2go.com/tracking"
+    "trackingSearchUrl": "https://www.parcel2go.com/tracking",
+    "helpUrl": "https://www.parcel2go.com/help-centre"
   },
   "parcelninja": {
     "displayName": "Parcelninja",
@@ -64665,7 +65644,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://cmsfreight.com/tracking/public-tracking/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://cmsfreight.com/tracking/public-tracking/"
+    "trackingSearchUrl": "https://cmsfreight.com/tracking/public-tracking/",
+    "helpUrl": "https://cmsfreight.com/contact/"
   },
   "pronto-envios": {
     "displayName": "Pronto Envíos",
@@ -64709,7 +65689,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Qatar Airways Cargo Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.qrcargo.com/s/track-your-shipment"
+    "trackingSearchUrl": "https://www.qrcargo.com/s/track-your-shipment",
+    "helpUrl": "https://www.qrcargo.com/s/help-centre/contact-us"
   },
   "redecarga": {
     "displayName": "Redecarga",
@@ -64793,7 +65774,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://sacoshipping.com/track/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sacoshipping.com/track/"
+    "trackingSearchUrl": "https://sacoshipping.com/track/",
+    "helpUrl": "https://sacoshipping.com/kontakt/"
   },
   "salam-pacific-indonesia-lines": {
     "displayName": "Salam Pacific Indonesia Lines",
@@ -64816,7 +65798,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "mySPIL Track & Trace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://myspil.com/"
+    "trackingSearchUrl": "https://myspil.com/",
+    "helpUrl": "https://www.spil.co.id/id/kontak"
   },
   "sallaum-lines": {
     "displayName": "Sallaum Lines",
@@ -64838,7 +65821,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://sallaumlines.com/track-shipment/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://sallaumlines.com/track-shipment/"
+    "trackingSearchUrl": "https://sallaumlines.com/track-shipment/",
+    "helpUrl": "https://sallaumlines.com/contact/"
   },
   "sea-legend-line": {
     "displayName": "Sea Legend Line",
@@ -64862,7 +65846,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Sea Legend Cargo Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.slg-shipping.com/#/home/tracking"
+    "trackingSearchUrl": "https://www.slg-shipping.com/#/home/tracking",
+    "helpUrl": "https://www.slg-shipping.com/#/home/contact"
   },
   "sfl-worldwide": {
     "displayName": "SFL Worldwide",
@@ -64884,7 +65869,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://track.sflworldwide.com/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.sflworldwide.com/"
+    "trackingSearchUrl": "https://track.sflworldwide.com/",
+    "helpUrl": "https://www.sflworldwide.com/contact-us"
   },
   "sheensync": {
     "displayName": "SheenSync",
@@ -64940,7 +65926,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Sinokor E-Biz Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ebiz.sinokor.co.kr/Tracking"
+    "trackingSearchUrl": "https://ebiz.sinokor.co.kr/Tracking",
+    "helpUrl": "https://www.sinokor.co.kr/en/net_01kr.html"
   },
   "sm-line": {
     "displayName": "SM Line",
@@ -64963,7 +65950,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "SM Line e-Service",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://esvc.smlines.com/smline/CUP_HOM_3301.do?sessLocale=en"
+    "trackingSearchUrl": "https://esvc.smlines.com/smline/CUP_HOM_3301.do?sessLocale=en",
+    "helpUrl": "https://esvc.smlines.com/smline/CUP_HOM_1614.do?sessLocale=en"
   },
   "spedition-moeller": {
     "displayName": "Artur Möller",
@@ -64985,7 +65973,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://portal.spedition-moeller.com/tracking.html",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.spedition-moeller.com/tracking.html"
+    "trackingSearchUrl": "https://portal.spedition-moeller.com/tracking.html",
+    "helpUrl": "https://portal.spedition-moeller.com/tickets.html"
   },
   "tailwind-shipping-lines": {
     "displayName": "Tailwind Shipping Lines",
@@ -65029,7 +66018,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSiteName": "Tanto Container Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.tantonet.com/"
+    "trackingSearchUrl": "https://www.tantonet.com/",
+    "helpUrl": "https://www.tantonet.com/contact.php"
   },
   "thai-airways-cargo": {
     "displayName": "THAI Cargo",
@@ -65050,7 +66040,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://chorus.thaicargo.com/skychain/app?service=page%2Fnwp%3ATrackshipmt",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://chorus.thaicargo.com/skychain/app?service=page%2Fnwp%3ATrackshipmt"
+    "trackingSearchUrl": "https://chorus.thaicargo.com/skychain/app?service=page%2Fnwp%3ATrackshipmt",
+    "helpUrl": "https://www.thaicargo.com/en/contact"
   },
   "transdirect": {
     "displayName": "Transdirect",
@@ -65078,7 +66069,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transdirect.com.au/education/tracking/"
+    "trackingSearchUrl": "https://www.transdirect.com.au/education/tracking/",
+    "helpUrl": "https://www.transdirect.com.au/contact-us/"
   },
   "translink-shipping": {
     "displayName": "Translink Shipping",
@@ -65122,7 +66114,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://chevalier.fivesoft.com.co/tag_detail_v1.html?d={trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transporteschevalier.com/consulttag.html"
+    "trackingSearchUrl": "https://www.transporteschevalier.com/consulttag.html",
+    "helpUrl": "https://www.transporteschevalier.com/contact.html"
   },
   "tuomeida": {
     "displayName": "Tuomeida Logistics",
@@ -65166,7 +66159,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.umaccargo.net/track-your-box-new.html",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.umaccargo.net/track-your-box-new.html"
+    "trackingSearchUrl": "https://www.umaccargo.net/track-your-box-new.html",
+    "helpUrl": "https://www.umaccargo.net/contact-us.html"
   },
   "united-africa-feeder-line": {
     "displayName": "United Africa Feeder Line",
@@ -65212,7 +66206,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://volarisy4.smartkargo.com/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://volarisy4.smartkargo.com/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://volarisy4.smartkargo.com/FrmAWBTracking.aspx",
+    "helpUrl": "https://cms.volaris.com/es/informacion-util/carga-y-mensajeria/"
   },
   "wallenius-wilhelmsen": {
     "displayName": "Wallenius Wilhelmsen",
@@ -65235,7 +66230,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.walleniuswilhelmsen.com/track-trace",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.walleniuswilhelmsen.com/track-trace"
+    "trackingSearchUrl": "https://www.walleniuswilhelmsen.com/track-trace",
+    "helpUrl": "https://www.walleniuswilhelmsen.com/ocean-support/customer-service"
   },
   "westjet-cargo": {
     "displayName": "WestJet Cargo",
@@ -65255,7 +66251,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://westjet.smartkargo.com/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://westjet.smartkargo.com/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://westjet.smartkargo.com/FrmAWBTracking.aspx",
+    "helpUrl": "https://www.westjetcargo.com/en-ca/help-center/contact-us"
   },
   "whwdt": {
     "displayName": "Wuhan Wodetong",
@@ -65441,7 +66438,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://acplcargo.com/tracking"
+    "trackingSearchUrl": "https://acplcargo.com/tracking",
+    "helpUrl": "https://acplcargo.com/customer-care"
   },
   "air-inuit": {
     "displayName": "Air Inuit",
@@ -65460,7 +66458,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.airinuit.com/en/cargo/follow-up/shipment-tracking"
+    "trackingSearchUrl": "https://www.airinuit.com/en/cargo/follow-up/shipment-tracking",
+    "helpUrl": "https://www.airinuit.com/en/about-air-inuit/contact-us"
   },
   "cosco-shipping-lines": {
     "displayName": "COSCO SHIPPING Lines",
@@ -65477,7 +66476,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://elines.coscoshipping.com/scct/public/ct"
+    "trackingSearchUrl": "https://elines.coscoshipping.com/scct/public/ct",
+    "helpUrl": "https://lines.coscoshipping.com/home/Contact/global"
   },
   "hmm": {
     "displayName": "HMM",
@@ -65494,7 +66494,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hmm21.com/e-service/general/trackNTrace/TrackNTrace.do"
+    "trackingSearchUrl": "https://www.hmm21.com/e-service/general/trackNTrace/TrackNTrace.do",
+    "helpUrl": "https://www.hmm21.com/company/faq.do"
   },
   "jtl-express-id": {
     "displayName": "JTL Express",
@@ -65514,7 +66515,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.jtlexpress.co.id/Tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jtlexpress.co.id/Tracking"
+    "trackingSearchUrl": "https://www.jtlexpress.co.id/Tracking",
+    "helpUrl": "https://www.jtlexpress.co.id/contact_us"
   },
   "kmtc": {
     "displayName": "KMTC",
@@ -65557,7 +66559,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.maersk.com/tracking/"
+    "trackingSearchUrl": "https://www.maersk.com/tracking/",
+    "helpUrl": "https://www.maersk.com/contact"
   },
   "msc": {
     "displayName": "MSC",
@@ -65574,7 +66577,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.msc.com/en/track-a-shipment"
+    "trackingSearchUrl": "https://www.msc.com/en/track-a-shipment",
+    "helpUrl": "https://www.msc.com/en/contact-us"
   },
   "ocean-network-express": {
     "displayName": "Ocean Network Express",
@@ -65591,7 +66595,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.one-line.com/one-ecom/manage-shipment/cargo-tracking"
+    "trackingSearchUrl": "https://www.one-line.com/one-ecom/manage-shipment/cargo-tracking",
+    "helpUrl": "https://www.one-line.com/en/contact-us"
   },
   "oocl": {
     "displayName": "OOCL",
@@ -65607,7 +66612,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.oocl.com/eng/ourservices/eservices/cargotracking/Pages/cargotracking.aspx"
+    "trackingSearchUrl": "https://www.oocl.com/eng/ourservices/eservices/cargotracking/Pages/cargotracking.aspx",
+    "helpUrl": "https://www.oocl.com/eng/contactus/Pages/default.aspx"
   },
   "spedire": {
     "displayName": "Spedire",
@@ -65637,7 +66643,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.spedire.com/traccia-spedizione"
+    "trackingSearchUrl": "https://www.spedire.com/traccia-spedizione",
+    "helpUrl": "https://www.spedire.com/serve-aiuto"
   },
   "swire-shipping": {
     "displayName": "Swire Shipping",
@@ -65654,7 +66661,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://online.swireshipping.com/tracking"
+    "trackingSearchUrl": "https://online.swireshipping.com/tracking",
+    "helpUrl": "https://www.swireshipping.com/information/offices/"
   },
   "wan-hai": {
     "displayName": "Wan Hai",
@@ -65671,7 +66679,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wanhai.com/views/cargoTrack/CargoTrack.xhtml"
+    "trackingSearchUrl": "https://www.wanhai.com/views/cargoTrack/CargoTrack.xhtml",
+    "helpUrl": "https://www.wanhai.com/views/faq/Faq.xhtml?file_num=67064&parent_id=67334&top_file_num=64735"
   },
   "yang-ming": {
     "displayName": "Yang Ming",
@@ -65700,7 +66709,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yangming.com/en/ebusiness/cargo_tracking"
+    "trackingSearchUrl": "https://www.yangming.com/en/ebusiness/cargo_tracking",
+    "helpUrl": "https://www.yangming.com/en/contact/headquarter"
   },
   "zim": {
     "displayName": "ZIM",
@@ -65728,7 +66738,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.zim.com/tools/track-a-shipment"
+    "trackingSearchUrl": "https://www.zim.com/tools/track-a-shipment",
+    "helpUrl": "https://www.zim.com/contact-us/customer-service-form"
   },
   "amass": {
     "displayName": "AMASS",
@@ -65800,7 +66811,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://login.danx.com/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://login.danx.com/"
+    "trackingSearchUrl": "https://login.danx.com/",
+    "helpUrl": "https://danx.com/contact/"
   },
   "gaint-logistic": {
     "displayName": "Gaint Logistic",
@@ -65945,7 +66957,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://topparcel.com/parcels/tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://topparcel.com/parcels/tracking"
+    "trackingSearchUrl": "https://topparcel.com/parcels/tracking",
+    "helpUrl": "https://topparcel.com/contacts"
   },
   "usend-chile": {
     "displayName": "USEND Chile",
@@ -66026,7 +67039,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://apmlogistics.id/cek-resi"
+    "trackingSearchUrl": "https://apmlogistics.id/cek-resi",
+    "helpUrl": "https://apmlogistics.id/contact"
   },
   "biman-bangladesh": {
     "displayName": "Biman Bangladesh Airlines",
@@ -66095,7 +67109,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.hapag-lloyd.com/solutions/tracking/#/{trackingNumber}",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.hapag-lloyd.com/solutions/tracking/"
+    "trackingSearchUrl": "https://www.hapag-lloyd.com/solutions/tracking/",
+    "helpUrl": "https://www.hapag-lloyd.com/en/services-information/offices-localinfo/europe/germany/local-info/customer-service.html"
   },
   "transglobal-express": {
     "displayName": "Transglobal Express",
@@ -66115,7 +67130,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://www.transglobalexpress.co.uk/track-shipment/",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.transglobalexpress.co.uk/track-shipment/"
+    "trackingSearchUrl": "https://www.transglobalexpress.co.uk/track-shipment/",
+    "helpUrl": "https://www.transglobalexpress.co.uk/contact-us/"
   },
   "turkon-line": {
     "displayName": "Turkon Line",
@@ -66135,7 +67151,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://myturkonline.turkon.com/tracking",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://myturkonline.turkon.com/tracking"
+    "trackingSearchUrl": "https://myturkonline.turkon.com/tracking",
+    "helpUrl": "https://turkon.com/en/contact"
   },
   "airasia-cargo": {
     "displayName": "AirAsia Cargo",
@@ -66156,7 +67173,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingUrlTemplate": "https://airasia.smartkargo.com/FrmAWBTracking.aspx",
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://airasia.smartkargo.com/FrmAWBTracking.aspx"
+    "trackingSearchUrl": "https://airasia.smartkargo.com/FrmAWBTracking.aspx",
+    "helpUrl": "https://help.teleport.it/category/cargo/cargo-knowledgebase"
   },
   "cargolux": {
     "displayName": "Cargolux",
@@ -66178,7 +67196,8 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.cargolux.com/track-and-trace/"
+    "trackingSearchUrl": "https://www.cargolux.com/track-and-trace/",
+    "helpUrl": "https://www.cargolux.com/customer-service/"
   },
   "copa-airlines-cargo": {
     "displayName": "Copa Airlines Cargo",

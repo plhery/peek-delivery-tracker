@@ -12,7 +12,7 @@ Econt Express is a Bulgarian courier, founded in 1993, that delivers to your doo
 
 Econt calls it the shipment number or waybill number. Econt's emails and SMS carry a link that opens the tracking; SMS is an option the sender pays for, so not every parcel gets one. No message? Ask the shop, or see [where else to find a tracking number](guide:find-tracking-number).
 
-Econt publishes no format, but the sample waybill numbers in its XML integration manual have 13 digits, and Peek reads Econt's shipment numbers as 13 digits too, like the invented `1111111111111`.
+Econt publishes no format, but the sample waybill numbers in its XML integration manual have 13 digits, and Peek reads Econt's shipment numbers as 13 digits too, like the invented `1048291057364`.
 
 Thirteen digits also fit other carriers, among them [DPD France](carrier:dpd-fr), Ukraine's [Ukrposhta](carrier:ukrposhta) and Romania's [FAN Courier](carrier:fan-courier), so check which carrier the shop's email or the SMS names.
 
@@ -58,7 +58,7 @@ Econt gives the next working day for places with an Econt office, up to three wo
 
 ## Econt contact number and customer service
 
-Econt's channels, as read on 12 October 2026 on its [customer service page](https://www.econt.com/en/client-center):
+Econt's channels, on its [customer service page](https://www.econt.com/en/client-center):
 
 - **From Bulgaria or Greece:** 0 7001 7300, at the price of a local call or as your phone plan charges.
 - **From other countries:** +359 88 565 43 21, as your phone plan charges.
@@ -69,9 +69,9 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 [Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to other carriers, such as Delhivery, and asks Econt itself only when you add the number on the website from Bulgaria, or in the app on a phone whose region is Bulgaria. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
 
-It then shows its own status, set from Econt's summary when that settles one, the history with the office of each office scan on a map (an office Econt names in Bulgarian shows as its town where Peek can place it), and the delivery time. While the parcel waits, it shows the name of the Econt office storing it. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
+It then shows its own status, set from Econt's summary when that settles one, the history with the office of each office scan on a map (an office Econt names in Bulgarian shows as its town where Peek can place it), and the delivery time. While the parcel waits, it shows the name of the Econt office storing it. Econt gives no expected delivery day or weight. The parcel count, the courier's name, sender and order references are left out; the recipient's name shows to whoever added the parcel, as "Recipient", and a shared parcel link hides it.
 
-Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October shows in the history once a later scan arrives, in order, though not at its exact time. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. Sofia time on the day Econt scans the parcel out for delivery, while Econt's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It can notify you of every scan, important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Scans keep the English labels above; a delivery Econt signs with a name shows as `Delivered: <name>` to whoever added the parcel, and in Peek's own words without a name or on a shared link; `Return receipt: …` lines change nothing. Times are read as Sofia time. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. Sofia time on the day Econt scans the parcel out for delivery, while Econt's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It can notify you of every scan, important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Econt tracking
 

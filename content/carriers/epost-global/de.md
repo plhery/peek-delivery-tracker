@@ -18,7 +18,7 @@ Peek kennt genau ein eigenes Nummernformat für ePost Global: `EPG` gefolgt von 
 | `EPG4829105736` | `EPG` und 10 Ziffern: ebenfalls ePost Global, die kürzeste von Peek akzeptierte Länge. |
 | `EPG482910573` | Nur 9 Ziffern: kein ePost-Global-Format. Drei Buchstaben und neun Ziffern passen zu Colis Privé, Purolator und TNT Australia, bei denen Peek deshalb nachfragt. Wählst du ePost Global manuell aus, meldet Peek, dass der Dienst „vergibt keine Nummern wie diese“. Prüfe, ob eine Ziffer fehlt. |
 | `EPG4829105736491827` | 16 Ziffern, eine zu viel: Peek erkennt keinen Paketdienst. Prüfe auf eine überzählige Ziffer. |
-| `LZ482910576US` | Zwei Buchstaben, neun Ziffern und `US`: eine US-Postnummer. Bei den meisten Codes mit `C`, `E`, `L` oder `R` am Anfang nennt Peek [USPS](carrier:usps) (laut ePost Globals FAQ lassen sich seine USPS-Produkte über PPX- und USPS-Portale verfolgen). Um in Peek auch die US-Zentrumszeilen von ePost Global zu sehen, füge die `EPG`-Nummer hinzu. |
+| `LZ482910576US` | Zwei Buchstaben, neun Ziffern und `US`: eine US-Postnummer. Bei den meisten Codes mit `C`, `E`, `L` oder `R` am Anfang nennt Peek [USPS](carrier:usps) (laut ePost Globals FAQ läuft die Sendungsverfolgung je nach Produkt über das PPX- oder das USPS-Portal). Um in Peek auch die US-Zentrumszeilen von ePost Global zu sehen, füge die `EPG`-Nummer hinzu. |
 
 Leerzeichen, Bindestriche und Kleinschreibung spielen beim Einfügen in Peek keine Rolle. Auf `epgtrack.com` lassen sich bis zu 20 Nummern auf einmal abfragen, auf `ppxtrack.com` bis zu 10.
 
@@ -86,24 +86,24 @@ ePost Global arbeitet auf sechs Kontinenten mit über 100 Post- und Zustelldiens
 
 ## ePost Global Kundenservice und Kontakt
 
-Stand 21. November 2026 laut `epostglobalshipping.com`:
+Laut `epostglobalshipping.com`:
 
 - **Telefon (USA)**: `+1 866-784-8444` (gebührenfrei innerhalb der USA) sowie `+1 310-784-8485` (Ortsnetz), ohne veröffentlichte Sprechzeiten oder Support-E-Mail-Adresse.
 - **Online-Assistent ePost Assist**: unter `epostassist.epgtrack.com` (über *Track a package* oder *Chat with our online support*) mit den Punkten *Check package status*, *Create a support ticket* und *Get support ticket status*.
 - **Kontaktformular**: unter `epostglobalshipping.com/contact-support` (*Looking for support beyond tracking a package?*) mit optionalem Feld für die Sendungsnummer.
 - **Hauptsitz**: `11137 Warland Drive, Cypress, CA 90630, USA`.
 
-**Vorsicht vor Phishing-SMS.** Offizielle Adressen von ePost Global für Sendungsverfolgung und Hilfe sind `epgtrack.com`, `epostassist.epgtrack.com`, `ppxtrack.com` und `epostglobalshipping.com`. Bei einer `DDU`-Sendung kommt eine echte Zahlungsaufforderung für Zoll oder Einfuhrsteuer vom Zusteller vor Ort – prüfe verdächtige Links anhand von [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
+**Vorsicht vor Phishing-SMS.** Offizielle Adressen von ePost Global für Sendungsverfolgung und Hilfe sind `epgtrack.com`, `epostassist.epgtrack.com`, `ppxtrack.com` und `epostglobalshipping.com`. Bei einer `DDU`-Sendung nach Österreich oder in die Schweiz kommt eine echte Zahlungsaufforderung für Zoll oder Einfuhrsteuer vom Zusteller vor Ort – prüfe verdächtige Links anhand von [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## ePost-Global-Pakete mit Peek verfolgen
 
 [Peek](/) erkennt `EPG` mit 10 bis 15 Ziffern sofort („Erkannter Paketdienst“) und fragt `epgtrack.com` ohne Konto oder Postleitzahl ab. Auch ein Tracking-Link von `epgtrack.com` oder `ppxtrack.com` funktioniert direkt: Peek liest die Nummer aus (bei mehreren Einträgen in `?id=` die erste). Hast du nur die Nummer des Zustellpartners, füge sie trotzdem ein – Peek unterstützt mehr als 3.500 Paketdienste.
 
-Peek zeigt den Status, jeden Scan mit Ort und Land, das Zielland sowie den benannten Partner samt Partnernummer. Fortschrittsbalken, Postleitzahlen, Depot- oder Hausnummern, Kundenreferenz und Luftfrachtbriefnummern (`MAWB`) lässt Peek weg; voraussichtliches Lieferdatum, Gewicht oder Zustellnachweis liefert `epgtrack.com` nicht. Über „Website von ePost Global öffnen“ gelangst du direkt zu deiner Sendung auf `epgtrack.com`.
+Peek zeigt den Status, jeden Scan mit seinem Ort, das Zielland sowie den benannten Partner samt Partnernummer. Fortschrittsbalken, Postleitzahlen, Depot- oder Hausnummern, Kundenreferenz und Luftfrachtbriefnummern (`MAWB`) lässt Peek weg; voraussichtliches Lieferdatum, Gewicht oder Zustellnachweis liefert `epgtrack.com` nicht. Über „Website von ePost Global öffnen“ gelangst du direkt zu deiner Sendung auf `epgtrack.com`.
 
 Die Zeitstempel des Trackers enthalten keine Zeitzone. Peek liest `Parcel Received and Processing` und `Parcel Shipped` in der Zeitzone des jeweiligen US-Bundesstaats (sofern der gesamte Staat eine einheitliche Zeit hat), länderlose PostNL-Einträge auf der Uhr von PostNL, Zeilen des europäischen GLS-Netzes in mitteleuropäischer Zeit und Zeilen des britischen Royal-Mail-Partners in britischer Zeit; übrige Zeilen werden über ihren Ort oder den Transportabschnitt eingeordnet. Alle Zeiten erscheinen in der Zeitzone deines Geräts; auf `peektracker.com` sowie in der iPhone- und Android-App endet der Verlauf mit „Uhrzeiten in deiner Zeitzone: …“.
 
-Nennt ePost Global einen Partner, den Peek kennt, steht auf der Paketkarte etwa „Zustellung durch PostNL“ – oder „Bei PostNL angekündigt, noch nicht eingetroffen“, solange der Partner die Sendung erst ohne eigenen Scan führt – samt Partnernummer hinter der `EPG`-Nummer. Peek fragt diesen Partner ebenfalls ab (unter dessen Nummer oder, falls keine angegeben ist, unter der `EPG`-Nummer); ohne benannten Partner prüft Peek bei einer gültigen Postnummer die Post des Ziellands oder den einzelnen Paketdienst, auf den das Nummernformat eindeutig verweist (sofern Peek dessen eigenes Tracking ohne Zusatzangaben liest). Sobald dort ein Scan vorliegt, der mindestens so aktuell ist wie der jüngste von ePost Global, wechselt Peek dorthin und behält die Vorgeschichte von ePost Global (für das europäische GLS-Netz bleibt Peek bei den über ePost Global weitergeleiteten Zeilen, da es kein eigener Katalogeintrag ist).
+Nennt ePost Global einen Partner, den Peek kennt, steht auf der Paketkarte etwa „Zustellung durch PostNL“ – oder „Bei PostNL angekündigt, noch nicht eingetroffen“, solange der Partner die Sendung erst ohne eigenen Scan führt – samt Partnernummer hinter der `EPG`-Nummer. Peek fragt diesen Partner ebenfalls ab (unter dessen Nummer oder, falls keine angegeben ist, unter der `EPG`-Nummer); ohne benannten Partner prüft Peek bei einer gültigen Postnummer die Post des Ziellands oder den einzelnen Paketdienst, auf den das Nummernformat eindeutig verweist (sofern Peek dessen eigenes Tracking ohne Zusatzangaben liest). Sobald dort ein Scan vorliegt, der mindestens so aktuell ist wie der jüngste von ePost Global, wechselt Peek dorthin und behält die Vorgeschichte von ePost Global (für das europäische GLS-Netz bleibt Peek bei den über ePost Global weitergeleiteten Zeilen, da ePost Global nicht angibt, welche nationale GLS-Gesellschaft zustellt).
 
 Solange du das Paket geöffnet hast oder am Liefertag Mitteilungen aktiviert sind, prüft Peek bis zu alle 10 Minuten – und ab 6 Uhr Ortszeit am Tag mit Status „In Zustellung“ bis zu alle 2 Minuten, solange der Tracker von ePost Global antwortet (übernimmt ein Zustellpartner, folgt Peek dessen Takt; über Tracking-Dienste allein: stündlich, alle 3 Stunden nach einem ruhigen Tag und bis zu alle 15 Minuten am Liefertag bei geöffnetem Paket oder aktiven Mitteilungen). Sonst sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. ePost Global oder den Händler kontaktieren kann Peek nicht.
 
@@ -123,7 +123,7 @@ Der Online-Shop hat die elektronischen Auftragsdaten an ePost Global gesendet, a
 
 ### Wer stellt ePost-Global-Pakete in Deutschland, Österreich und der Schweiz zu?
 
-Ein lokaler Post- oder Paketpartner aus der Übergabezeile – in Peeks Daten etwa das europäische GLS-Netz, PostNL über Spring oder bei internationalen Postnummern die jeweilige Landespost (DHL in Deutschland, Österreichische Post in Österreich, Schweizerische Post in der Schweiz).
+Ein lokaler Post- oder Paketpartner aus der Übergabezeile – in Peeks Daten etwa das europäische GLS-Netz oder PostNL über Spring. Bei internationalen Postnummern ohne benannten Partner fragt Peek die jeweilige Landespost ab (DHL in Deutschland, Österreichische Post in Österreich, Schweizerische Post in der Schweiz).
 
 ### Wie erreiche ich den Support von ePost Global?
 

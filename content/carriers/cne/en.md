@@ -46,7 +46,7 @@ CNE's tracker puts a status above each parcel's lines. In English, as CNE labels
 | `Picked Up by Courier` | CNE collected the parcel from the seller in China. | "Received by carrier" |
 | `Arrived at CNE Facility`, `Inbound scan`, `Shipment Processed`, `Shipment Loaded` | At a CNE facility: scanned in, sorted, loaded. | "In transit" |
 | `Departed CNE Facility`, `Departure Scan`, `Depart From Local Facility` | It left a facility. | "In transit" |
-| `Arrived Export Airport`, `Released From Export Customs` | At the airport in China, then through China's export customs. Not your country's customs. | "In transit" |
+| `Arrived Export Airport`, `Released From Export Customs` | At the airport in China, then through mainland China's export customs. Not your country's customs. | "In transit" |
 | `Shipment Departed From Original Country` | The flight has left China. | "In transit" |
 | `Arrived At Transit Airport`, `Shipment Depart From Transit Airport` | A stop on the way. | "In transit" |
 | `Arrived at Import Airport`, `Arrived at destination` | It landed in your country. Sorting and customs are still to come: it isn't at your local delivery office. | "In transit" |
@@ -70,7 +70,7 @@ Peek reads three of the codes CNE gives its last-mile suppliers: DHL in Germany 
 
 CNE publishes no rules for delivery attempts, notice cards or pickup points: those are the delivering carrier's. See its page, such as [Evri](carrier:evri), [La Poste / Colissimo](carrier:la-poste), [Correos](carrier:correos-spain), [Poste Italiane](carrier:poste-italiane), [Austrian Post](carrier:austrian-post) or [POST Luxembourg](carrier:post-luxembourg), and [missed a delivery](guide:missed-delivery).
 
-**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. CNE told its sellers on 22 October 2026 that on its EU routes it collects the €2 fee from them in advance from 26 October, for each tariff code in each parcel, on top of the €3 duty it has charged the same way since July, and that it clears customs on the details the seller declares. Its notice says nothing about VAT, or about anything the delivering carrier may ask you for. Elsewhere, what you owe depends on your country: see [parcels held at customs](guide:customs).
+**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. In the EU's VAT area, import VAT is due as well, unless it was charged at purchase through IOSS. CNE told its sellers on 22 October 2026 that on its EU routes it collects the €2 fee from them in advance from 26 October, for each tariff code in each parcel, on top of the €3 duty it has charged the same way since July, and that it clears customs on the details the seller declares. Its notice says nothing about VAT, or about anything the delivering carrier may ask you for. Elsewhere, what you owe depends on your country: see [parcels held at customs](guide:customs).
 
 **Delays.** CNE posts route delays, such as strikes or bad weather abroad, on its news page in Chinese (新闻公告).
 
@@ -78,7 +78,7 @@ CNE publishes no rules for delivery attempts, notice cards or pickup points: tho
 
 CNE's customers are the sellers who book it: for a late, lost, damaged or returned parcel, contact the seller or the marketplace first.
 
-**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for CNE Express" and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
+**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for CNE Express" and keeps checking. If CNE still doesn't know the number after two days and no tracking service finds it either, Peek says: "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
 
 **No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. While Peek follows the parcel on CNE's tracker, the note adds a "Get help from CNE Express" link to CNE's Contact us page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
@@ -90,7 +90,7 @@ CNE's customers are the sellers who book it: for a late, lost, damaged or return
 
 ## CNE Express customer service and contact
 
-As read on 31 October 2026 on CNE's [Contact us page](https://www.cne.com/en/about/contact):
+On CNE's [Contact us page](https://www.cne.com/en/about/contact):
 
 - **Hotline**: 400-021-5600, a Chinese service number, which CNE calls its National Service Hotline.
 - **Shanghai main office**: 021-5109 6677, 15/F, Block G, Lane 1777, Hualong Road, Qingpu District, Shanghai.
@@ -107,7 +107,7 @@ Peek reads CNE's own tracking: the status, each line with its place, the destina
 
 When CNE names the delivering carrier and gives its number, Peek asks that carrier too: one of the three above, your country's post for a postal number (two letters, nine digits, two letters), or the one carrier that number's shape points to. Once that carrier shows a scan at least as recent as CNE's newest, Peek follows the parcel there and keeps CNE's history.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day CNE scans the parcel out for delivery, while CNE's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day CNE scans the parcel out for delivery, while CNE's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. When another carrier takes over the delivery, Peek follows that carrier's pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
 
 ## Questions about CNE Express tracking
 

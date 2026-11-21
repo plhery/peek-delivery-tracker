@@ -84,6 +84,23 @@ fun parcelPeekAi(parcel: Parcel, now: Instant = AppClock.now()): PeekAi? {
     return currentPeekAi(parcel.peekAi, now)
 }
 
+/**
+ * When what Peek AI says of the parcel on a card can next change, for a list left open: the hour or the midnight its
+ * estimate ends ([peekAiUntil]), and each midnight before it, when "today" moves on, a week of them at most. None while
+ * it says nothing.
+ */
+fun peekAiChanges(parcel: Parcel, now: Instant = AppClock.now()): List<Instant> {
+    val ai = parcelPeekAi(parcel, now) ?: return emptyList()
+    val zone = ZoneId.systemDefault()
+    val end = peekAiUntil(ai, zone)?.takeIf { it > now }
+    val midnights = generateSequence(now.atZone(zone).toLocalDate().plusDays(1)) { it.plusDays(1) }
+        .map { it.atStartOfDay(zone).toInstant() }
+        .takeWhile { end == null || it < end }
+        .take(7)
+        .toList()
+    return midnights + listOfNotNull(end)
+}
+
 /** A wall clock Peek AI names ("15:30"), or the hour on a time it gives with its offset, as the reader writes times. */
 private fun Localizer.peekAiClock(value: String): String =
     deliveryWallClock(if (value.length > 5) value.substring(11, 16) else value)

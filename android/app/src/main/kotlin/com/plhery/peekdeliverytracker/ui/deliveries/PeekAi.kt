@@ -22,8 +22,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -51,12 +53,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import com.plhery.peekdeliverytracker.core.PeekAiStrip
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PeekAi
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.parcelPeekAi
 import com.plhery.peekdeliverytracker.core.peekAiCarrierWord
+import com.plhery.peekdeliverytracker.core.peekAiChanges
 import com.plhery.peekdeliverytracker.core.peekAiClaim
 import com.plhery.peekdeliverytracker.core.peekAiHeading
 import com.plhery.peekdeliverytracker.core.peekAiRecord
@@ -78,6 +83,10 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
+import java.time.Duration
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+import kotlinx.coroutines.delay
 
 // Peek AI (core PeekAi.kt): Peek's own estimate, always named as Peek's, never the carrier's. The web's is
 // src/components/PeekAi.tsx.
@@ -158,10 +167,49 @@ internal fun PeekAiPhrase(
 }
 
 /**
+ * The time a card is drawn at ([LocalNow]), drawn again where what Peek AI says of its parcel can change while `shown`
+ * ([peekAiChanges]), as the iPhone's `PeekAiClock`: on a list left open, "by 16:00" goes at 16:00, and a day's estimate
+ * the midnight after it. A card without an estimate keeps no clock.
+ */
+@Composable
+internal fun peekAiNow(parcel: Parcel, shown: Boolean): Instant =
+    peekAiClock(shown) { now -> peekAiChanges(parcel, now).firstOrNull() }
+
+/**
+ * The time the parcel's page draws Peek AI at, looked at again each minute while `watching` and its estimate holds, as
+ * the iPhone's `PeekAiPageCard`: the card goes once its hour or day has passed, and "5 hours ago" moves on.
+ */
+@Composable
+private fun peekAiMinute(parcel: Parcel, watching: Boolean): Instant =
+    peekAiClock(watching) { now -> if (parcelPeekAi(parcel, now) != null) now.truncatedTo(ChronoUnit.MINUTES).plusSeconds(60) else null }
+
+/**
+ * The app's time, read again at the `next` moment after it while `watching`, and as the app comes back from the
+ * background, as the phone may have slept past that moment (a wait stands still while it sleeps). The caller is drawn
+ * again each time.
+ */
+@Composable
+private fun peekAiClock(watching: Boolean, next: (Instant) -> Instant?): Instant {
+    val clock = LocalNow.current
+    var looks by remember { mutableIntStateOf(0) }
+    val now = clock()
+    val at = if (watching) next(now) else null
+    if (at != null) {
+        LaunchedEffect(at, looks) {
+            // A little past it, as the web's timer: drawn a moment early, the card would wait for the same moment again.
+            delay(Duration.between(clock(), at).toMillis().coerceAtLeast(0) + 20)
+            looks++
+        }
+        LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { looks++ }
+    }
+    return now
+}
+
+/**
  * Peek AI on the parcel's page, under its pass while Peek AI is on and its call holds: "✦ Peek AI likely by Thu 26 Nov"
- * with the (i) at its end, and why under it, on the secondary grey at 8 % in 16-point corners. The (i) opens its sheet
- * ([PeekAiSheet]), counted (`peek-ai-open`), which stays while it is open: switching Peek AI off there does not pull it
- * away.
+ * with the (i) at its end, and why under it, on the secondary grey at 8 % in 16-point corners, looked at again each
+ * minute ([peekAiMinute]). The (i) opens its sheet ([PeekAiSheet]), counted (`peek-ai-open`), which stays while it is
+ * open: switching Peek AI off there does not pull it away. It goes with the estimate, once its hour or day has passed.
  */
 @Composable
 internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Modifier = Modifier) {
@@ -169,11 +217,14 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
     val language = LocalLanguage.current
     val identities = LocalCarrierIdentities.current ?: return
     val shown by state.source.showPeekAi.collectAsState()
-    val now = LocalNow.current()
-    val ai = if (shown) parcelPeekAi(parcel, now) else null
     var open by rememberSaveable(parcel.id) { mutableStateOf(false) }
-    // The call the sheet opened on, kept while it is up.
+    val now = peekAiMinute(parcel, shown || open)
+    // The estimate while it holds, which the sheet keeps showing once Peek AI is switched off there.
+    val current = parcelPeekAi(parcel, now)
+    val ai = if (shown) current else null
+    // The call the sheet opened on, kept while it goes.
     var kept by remember(parcel.id) { mutableStateOf<PeekAi?>(null) }
+    LaunchedEffect(current == null) { if (current == null) open = false }
     val carrier = identities.displayName(parcel.displayedCarrier, language)
     if (ai != null) {
         val colors = PeekTheme.colors
@@ -213,9 +264,9 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
             )
         }
     }
-    val sheet = kept ?: ai
+    val sheet = current ?: kept
     Sheet(
-        visible = open && sheet != null,
+        visible = open && current != null,
         onDismiss = { open = false },
         paneTitle = localizer.text("peekAi.name"),
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
@@ -223,7 +274,7 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
         lit = true,
     ) {
         if (sheet != null) {
-            PeekAiSheet(parcel, sheet, carrier, shown, onShow = { on ->
+            PeekAiSheet(parcel, sheet, carrier, shown, now, onShow = { on ->
                 state.source.setShowPeekAi(on)
                 state.source.action(if (on) "peek-ai-on" else "peek-ai-off")
             }, close = { open = false })
@@ -234,15 +285,15 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
 /**
  * Peek AI's sheet, as the alerts' ([ParcelAlertSwitches]): "Peek AI" with the close button; what it expects on a card in
  * the carrier's livery, the heading over the carrier's own word, with the parcel; the days or hours ([PeekAiStrip]); why
- * and how often it was right; the switch that shows it (`shown`, `onShow`); and what it is, centred in caption.
+ * and how often it was right; the switch that shows it (`shown`, `onShow`); and what it is, centred in caption. It is
+ * drawn at `now`, the page's time.
  */
 @Composable
-internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boolean, onShow: (Boolean) -> Unit, close: () -> Unit) {
+internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boolean, now: Instant, onShow: (Boolean) -> Unit, close: () -> Unit) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val now = LocalNow.current()
     val bottom = sheetBottomInset()
     val identity = shownCarrierIdentity(parcel, localizer, language)
     val estimate = localizer.parcelDeliveryEstimate(parcel, now)

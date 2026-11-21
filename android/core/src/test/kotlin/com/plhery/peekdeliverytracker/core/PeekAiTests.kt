@@ -194,6 +194,21 @@ class PeekAiTests {
         assertNull(parcelPeekAi(parcel(TrackingStage.InTransit, sooner, archivedAt = "2026-11-24T08:00:00Z"), now))
     }
 
+    /**
+     * A list left open draws a card again where its words can change: at the hour named, and at each midnight until the
+     * day's estimate ends.
+     */
+    @Test
+    fun aCardIsDrawnAgainWhereItsWordsCanChange() {
+        assertEquals("None while it says nothing", emptyList<Instant>(), peekAiChanges(parcel(TrackingStage.OutForDelivery, null), now))
+        assertEquals(listOf(at(24, 16)), peekAiChanges(parcel(TrackingStage.OutForDelivery, byTime), now))
+        assertEquals(listOf(at(25, 0), at(26, 0), at(27, 0)), peekAiChanges(parcel(TrackingStage.InTransit, noDate), now))
+        val week = noDate.copy(says = PeekAiSays.ThisWeek, day = null)
+        assertEquals((25..30).map { at(it, 0) } + LocalDateTime.of(2026, 12, 1, 0, 0).atZone(zone).toInstant(), peekAiChanges(parcel(TrackingStage.InTransit, week), now))
+        assertEquals("None once it has gone", emptyList<Instant>(), peekAiChanges(parcel(TrackingStage.OutForDelivery, byTime), at(24, 16)))
+        assertEquals("None once delivered", emptyList<Instant>(), peekAiChanges(parcel(TrackingStage.Delivered, noDate), now))
+    }
+
     @Test
     fun aCardSaysUnlikelyBesideTheCarriersTodayAndNothingWhenSwitchedOff() {
         assertEquals("unlikely", english.parcelPeekAiWords(parcel(TrackingStage.InTransit, notToday, expectedDelivery = "2026-11-24"), show = true, now))

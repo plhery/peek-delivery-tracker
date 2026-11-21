@@ -47,7 +47,6 @@ import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
-import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -88,7 +87,8 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `swipeAction`: the list's swipe to archive, offered to TalkBack; the swipe's row then draws the card's shadow.
  * - `onTap`: what a finger's tap does, `onOpen` unless the swipe closes the card first; TalkBack's double tap opens it.
  * - `newUpdate`: a scan the reader hasn't seen (#72), a [NewUpdateDot] first on the status line, read first by TalkBack.
- * - `peekAi`: Peek AI on, whose words ([PeekAiPhrase]) follow the status, after a dot, or under it where they don't fit.
+ * - `peekAi`: Peek AI on, whose words ([PeekAiPhrase]) follow the status, after a dot, or under it where they don't fit;
+ *   the card is drawn again where they can change ([peekAiNow]).
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -113,7 +113,8 @@ fun NextDeliveryPass(
     LocalUse24HourTime.current
     val identity = shownCarrierIdentity(parcel, localizer, language) ?: return
     val identities = LocalCarrierIdentities.current ?: return
-    val now = LocalNow.current()
+    // Drawn again where Peek AI's words can change.
+    val now = peekAiNow(parcel, peekAi)
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion

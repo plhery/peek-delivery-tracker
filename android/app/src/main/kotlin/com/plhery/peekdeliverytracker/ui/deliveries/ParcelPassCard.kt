@@ -41,7 +41,6 @@ import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
-import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -75,8 +74,8 @@ import kotlin.math.roundToInt
  * [NewUpdateDot] before the status, and TalkBack says so first. `frozen`, a copy the service forgot, still on its way
  * reads "No longer updated" after its status in place of its date or its problem (`frozenOnTheWay`), as neither may
  * hold any more; delivered, it needs no mark. While `peekAi` is on, Peek AI's words ([PeekAiPhrase]) go under the
- * carrier's date, or in its place, and TalkBack reads them after the status. Nothing is drawn until the carriers'
- * liveries are read.
+ * carrier's date, or in its place, and TalkBack reads them after the status; the card is drawn again where they can
+ * change ([peekAiNow]). Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -100,13 +99,14 @@ fun ParcelPassCard(
     LocalUse24HourTime.current
     val identity = shownCarrierIdentity(parcel, localizer, language) ?: return
     val identities = LocalCarrierIdentities.current ?: return
-    val now = LocalNow.current()
-    val colors = PeekTheme.colors
-    val type = PeekTheme.type
-    val reduceMotion = PeekTheme.reduceMotion
     val stage = parcel.currentStage
     // A forgotten copy still on its way: its last answer stays, but not its estimate or its problem.
     val stale = frozen && stage?.isFinal != true
+    // Drawn again where Peek AI's words can change.
+    val now = peekAiNow(parcel, peekAi && !stale)
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val reduceMotion = PeekTheme.reduceMotion
 
     val date = if (stale) null else localizer.parcelDeliveryEstimate(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
     val peekAiWords = if (stale) null else localizer.parcelPeekAiWords(parcel, peekAi, now)

@@ -2932,6 +2932,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "jt-express-uk-sendungsverfolgung",
+      "title": "J&T Express UK Sendungsverfolgung: JTUK-Nummern und Status",
+      "name": "J&T Express UK",
+      "color": "#e60000"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3950,6 +3958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "suivi-jt-express-uk",
+      "title": "Suivi J&T Express UK\u00a0: numéros JTUK et statuts",
+      "name": "J&T Express UK",
+      "color": "#e60000"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -4878,6 +4894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking 17FEIA: codici FEI…YQ, stati e consegna",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "tracking-jt-express-uk",
+      "title": "Tracking J&T Express UK: codici JTUK e stati",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     },
     {
       "id": "xinghe-freight",
@@ -5810,6 +5834,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "seguimiento-jt-express-uk",
+      "title": "Seguimiento J&T Express UK: números JTUK y estados",
+      "name": "J&T Express UK",
+      "color": "#e60000"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -6698,6 +6730,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 17FEIA: números FEI…YQ, estados e entrega",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "rastreio-jt-express-uk",
+      "title": "Rastreio J&T Express UK: números JTUK e estados",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     },
     {
       "id": "xinghe-freight",
@@ -7654,6 +7694,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 17FEIA: numery FEI…YQ, statusy i doręczenie",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "sledzenie-jt-express-uk",
+      "title": "Śledzenie J&T Express UK: numery JTUK i statusy",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     },
     {
       "id": "xinghe-freight",

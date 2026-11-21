@@ -2708,6 +2708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#12823d"
     },
     {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Chunghwa Post (Taiwan Post) Tracking: TW-Nummern & Status",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "jd-logistics-sendungsverfolgung",
@@ -3636,6 +3644,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi ECMS Express\u00a0: numéros à 16 caractères et statuts",
       "name": "ECMS Express",
       "color": "#12823d"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Suivi Chunghwa Post (Taiwan Post)\u00a0: numéro TW et statuts",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
     },
     {
       "id": "jd-logistics",
@@ -5290,6 +5306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#12823d"
     },
     {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Seguimiento Chunghwa Post: número TW, estados y aduanas",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "seguimiento-jd-logistics",
@@ -6082,6 +6106,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento ECMS Express: códigos de 16 caracteres e entrega",
       "name": "ECMS Express",
       "color": "#12823d"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Seguimento Chunghwa Post: código TW, estados e alfândega",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
     },
     {
       "id": "jd-logistics",
@@ -6926,6 +6958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie ECMS Express: 16-znakowe numery, cło i statusy",
       "name": "ECMS Express",
       "color": "#12823d"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Śledzenie Chunghwa Post: numer TW, statusy i odprawa celna",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
     },
     {
       "id": "jd-logistics",

@@ -18,9 +18,9 @@ OnTrac publishes no lengths. The shapes Peek knows, with invented digits:
 | --- | --- |
 | `C11234567890124` | C and 14 digits, ending in a check digit |
 | `D10000000000003` | D and 14 digits, ending in a check digit |
-| `LX12345678` | LaserShip: L, then A, E, H, I, N or X, and 8 digits |
+| `LX48291057` | LaserShip: L, then A, E, H, I, N or X, and 8 digits |
 | `1LS123456789012` | LaserShip: 1LS and 12 to 14 letters or digits |
-| `AD123456789` | A shipper's reference, not OnTrac's own number |
+| `AD482910573` | A shipper's reference, not OnTrac's own number |
 
 LaserShip's website now redirects to ontrac.com, so a LaserShip number is tracked there too. A number starting `D` with only 10 digits, or a plain 12-digit number, belongs to other carriers: check which carrier the shop's email names.
 
@@ -41,8 +41,8 @@ OnTrac's site is in English only. Its tracking page shows a headline (such as `D
 | `Package Delivered` | Delivered. |
 | `Delivery Pending` | The driver tried but didn't leave it, often for a security concern or a signature. OnTrac will try again. |
 | `Business closed. Please provide hours` | The business was closed. OnTrac reattempts up to 3 times and wants your opening hours. |
-| `Incomplete address. Please contact us` | OnTrac needs more address details within 3 business days, or the parcel may go back. |
-| `Details needed. Please contact us` | The parcel is held until you give details, also within 3 business days. |
+| `Incomplete address. Please contact us` | OnTrac needs more address details, or the parcel may go back. |
+| `Details needed. Please contact us` | The parcel is held until you give details. |
 | `Order has been transferred to another carrier` | OnTrac passed it to another carrier, which it doesn't name. |
 
 Two lines confuse people. `LABEL CREATED, TRACKING DETAILS WILL BE AVAILABLE ONCE THE PACKAGE ARRIVES AT THE ONTRAC FACILITY` and `Waiting for package from shipper.` both mean OnTrac hasn't received the parcel: the shop has made a label, nothing more. And for `Order has been transferred to another carrier`, OnTrac's headline says Delivered, yet the parcel has only gone to another carrier. After `Delivery Pending`, the headline reads `Delayed` with a date.
@@ -51,7 +51,7 @@ Two lines confuse people. `LABEL CREATED, TRACKING DETAILS WILL BE AVAILABLE ONC
 
 OnTrac usually delivers to homes between 8 a.m. and 9 p.m. local time on the scheduled day, and some service areas get deliveries on Saturdays and Sundays in the same hours.
 
-**Missed delivery.** OnTrac makes up to three attempts, then returns the parcel to the sender. The next try should come within 1 to 2 business days, never the same day.
+**Missed delivery.** OnTrac makes up to three attempts, then handles the parcel under its package return guidelines. The next try should come within 1 to 2 business days, never the same day.
 
 **"Attempted" but you were home.** Check the ship-to address on the retailer's site, then send corrections, delivery instructions or a gate or access code to Wink, OnTrac's virtual chat assistant, with your tracking number. Instructions sent once the parcel is out for delivery may only apply to the next attempt.
 
@@ -71,7 +71,7 @@ OnTrac usually delivers to homes between 8 a.m. and 9 p.m. local time on the sch
 
 ## OnTrac customer service: chat, text and hours
 
-OnTrac's channels for recipients, as listed on its FAQ and support pages on October 15, 2026:
+OnTrac's channels for recipients, as listed on its FAQ and support pages:
 
 - **Chat** with Wink, the red chat icon at the bottom right of [ontrac.com](https://www.ontrac.com/support/). You need a valid tracking number.
 - **Text** "start" to 703-348-8441 to track a parcel or open a case. Text only; rates may apply.
@@ -82,9 +82,9 @@ OnTrac lists no phone line to call and no customer email.
 
 ## Tracking OnTrac parcels with Peek
 
-[Peek](/) names OnTrac at once for numbers starting `C1` or `D10` that pass OnTrac's check digit, and for LaserShip's `LX`-style and `1LS` numbers. For other `C` or `D` numbers with 14 digits, Peek asks OnTrac and names it when OnTrac knows the number. Peek doesn't recognise OnTrac's `LS` and `BN` numbers: choose OnTrac with "Change". An `AD` shipper reference is offered to GLS Italy; pick OnTrac with "Change", and OnTrac finds the parcel, which Peek then shows under OnTrac's own number. A link from ontrac.com with the number in it works too.
+[Peek](/) names OnTrac at once for numbers starting `C1` or `D10` that pass OnTrac's check digit, and for LaserShip's `LX`-style and `1LS` numbers. For other `C` or `D` numbers with 14 digits, Peek asks OnTrac and names it when OnTrac knows the number. Peek doesn't recognise OnTrac's `LS` and `BN` numbers, and refuses them for OnTrac if you pick it with "Change": track those on ontrac.com. An `AD` shipper reference is offered to GLS Italy; pick OnTrac with "Change", and OnTrac finds the parcel; Peek also shows OnTrac's own number ("OnTrac tracks this as"). A link from ontrac.com with the number in it works too.
 
-Peek reads the tracking service behind OnTrac's page and shows the status, each scan with its town and state on a map, the expected delivery, the delivery time, the weight and the dimensions. Times are exact. It leaves out the recipient, the signature and the delivery photo. Statuses appear as OnTrac writes them. `Order has been transferred to another carrier` stays in transit in Peek rather than delivered, and as OnTrac names no next carrier, Peek can't follow the parcel there. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day OnTrac scans the parcel out for delivery, while OnTrac's own tracking answers (through tracking services such as 17TRACK, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek reads the tracking service behind OnTrac's page and shows the status, each scan with its town and state on a map, the expected delivery, the delivery time, the weight and the dimensions. Times are exact. It leaves out the recipient, the signature and the delivery photo. Statuses appear as OnTrac writes them. `Order has been transferred to another carrier` stays in transit in Peek rather than delivered, and as OnTrac names no next carrier, Peek can't follow the parcel there. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day OnTrac scans the parcel out for delivery, while OnTrac's own tracking answers (through tracking services such as 17TRACK, every 15 minutes); otherwise hourly. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about OnTrac tracking
 
@@ -114,7 +114,6 @@ Yes. OnTrac started in 1991 as California Overnight, merged with LaserShip in 20
 - [OnTrac: Tracking](https://www.ontrac.com/tracking/) – tracking form, waiting for package text, delivery photo link, question form
 - [OnTrac: Tracking page script](https://www.ontrac.com/wp-content/themes/ontrac/assets/js/ontrac-package-status.js) – headline labels, history columns, form reasons
 - [OnTrac: Status codes](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – meaning of attempts, transfers, holds for pickup
-- [OnTrac: Tracking service](https://webtrack.ontrac.com/PackageServices/tracking/) – event wordings and their explanations
 - [OnTrac: Additional Terms & Conditions](https://www.ontrac.com/terms-conditions-additional/) – three attempts, returns, claims by the shipper
 - [OnTrac: About OnTrac](https://www.ontrac.com/about/) – history, LaserShip merger, English-only site
 - [OnTrac: Residential e-commerce delivery](https://www.ontrac.com/residential-e-commerce-delivery/) – 35 states and D.C., proof of delivery

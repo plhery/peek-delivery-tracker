@@ -74943,7 +74943,7 @@
           "usedToday": {
             "type": "integer",
             "minimum": 0,
-            "description": "Emails counted today (UTC) against the daily allowance."
+            "description": "Emails read today (UTC), counted against the daily allowance; one ignored for its subject is not."
           },
           "lastMailAt": {
             "type": [
@@ -75081,7 +75081,7 @@
           "dailyLimit": {
             "type": "integer",
             "minimum": 0,
-            "description": "Emails the address takes per UTC day."
+            "description": "Emails the address reads per UTC day."
           }
         }
       },

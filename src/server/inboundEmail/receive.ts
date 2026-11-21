@@ -88,10 +88,11 @@ async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Ar
 
 /**
  * Takes one email the Worker passed on: finds the account its address names and, when that account takes email,
- * counts it against the allowances and adds the numbers it holds, labelled with its sender, or with the shop a
- * carrier's email names. A followed parcel without a name takes that name. An email that says its parcel was
- * delivered adds none. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
- * emails are dropped. An email whose subject and sender are about no parcel is ignored, unread. What an email did is
+ * counts it against the address's allowance of emails received, then adds the numbers it holds, labelled with its
+ * sender, or with the shop a carrier's email names, once it is counted against the allowances of emails read. A
+ * followed parcel without a name takes that name. An email that says its parcel was delivered adds none. Gmail's
+ * request to confirm forwarding is kept for the owner instead, and the server's own emails are dropped. An email
+ * whose subject and sender are about no parcel is ignored, unread, and counts only as received. What an email did is
  * noted with its sender's name, and the email itself is kept 30 days, but for one ignored, one an allowance or the
  * parcel limit stopped and Gmail's request, which holds a code.
  */
@@ -111,13 +112,13 @@ export async function receiveInboundMail(
     if (!account || !inboundEmailOpenTo(settings, { id: userId, email })) return finish('dropped', 'closed');
   }
   // The server's own email about a parcel names one the account follows already: a filter that sends it back adds
-  // nothing, and spends no allowance. Its header is read first; the parsed email is checked again below.
+  // nothing, and spends no allowance. Its header is read first; the parsed email is checked again below, before it
+  // spends an allowance of emails read.
   const own = ownSenderAddress();
   if (own && headerFromAddress(raw) === own) return finish('dropped', 'own');
-  const claim = await service.claimInboundMail(userId, { perAccount: settings.perAccountPerDay, overall: settings.perHour });
-  if (!claim.allowed) {
+  if (!await service.claimReceivedInboundMail(userId, settings.receivedPerAccountPerDay)) {
     await service.recordInboundMail(userId, 'limited', 0);
-    return finish('limited', claim.scope ?? 'account');
+    return finish('limited', 'received');
   }
 
   let mail: InboundMail;
@@ -144,6 +145,13 @@ export async function receiveInboundMail(
   if (!carriers.length && !delivered && !shippingSubject(mail.subject)) {
     await service.recordInboundMail(userId, 'ignored', 0, null, shopNameOf(mail.sender));
     return finish('ignored', 'subject');
+  }
+  // Only an email read spends the allowances of emails read: a reader who forwards all their mail keeps them for the
+  // shipping ones.
+  const claim = await service.claimInboundMail(userId, { perAccount: settings.perAccountPerDay, overall: settings.perHour });
+  if (!claim.allowed) {
+    await service.recordInboundMail(userId, 'limited', 0);
+    return finish('limited', claim.scope ?? 'account');
   }
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered, retryEligibility: true });

@@ -346,7 +346,7 @@ function assistantIssue(value: unknown): AssistantIssue | null {
 export interface InboundMailbox {
   token: string;
   createdAt: string;
-  /** Emails counted today (UTC), against the daily allowance. */
+  /** Emails read today (UTC), counted against the daily allowance. */
   usedToday: number;
   lastMailAt: string | null;
   lastResult: InboundMailResult | null;
@@ -1491,8 +1491,21 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * Counts one email to the account against the hour's allowance for every address and the account's own for today
-   * (UTC), unless one is used up.
+   * Counts one email to the account against its allowance of emails received today (UTC), read or not, unless it is
+   * used up.
+   */
+  async claimReceivedInboundMail(userId: string, limit: number): Promise<boolean> {
+    const result = await this.request('/rest/v1/rpc/claim_received_inbound_mail', {
+      method: 'POST',
+      body: { p_user_id: userId, p_limit: limit },
+    });
+    if (typeof result !== 'boolean') throw new SupabaseError('Supabase did not return the email allowance');
+    return result;
+  }
+
+  /**
+   * Counts one email the server reads for the account against the hour's allowance for every address and the
+   * account's own for today (UTC), unless one is used up.
    */
   async claimInboundMail(userId: string, limits: { perAccount: number; overall: number }): Promise<InboundMailClaim> {
     const result = await this.request('/rest/v1/rpc/claim_inbound_mail', {

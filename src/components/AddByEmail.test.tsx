@@ -227,7 +227,7 @@ describe('adding parcels by email in Settings', () => {
       'Named ShopAlready in your deliveries: shop name added', 'CarrierAlready delivered: not added',
     ]);
     expect(screen.getByText('Some shops, like Amazon, put no tracking number in their emails.')).toBeInTheDocument();
-    expect(screen.getByText('15 of 30 emails today')).toBeInTheDocument();
+    expect(screen.getByText('15 of 30 emails read today')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Get a new address' }));
     expect(openAddByEmail).not.toHaveBeenCalled();

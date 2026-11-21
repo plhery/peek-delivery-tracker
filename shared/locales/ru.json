@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Код подтверждения Gmail",
   "inbox.result.ignored": "Письмо не о посылке: не прочитано",
   "inbox.noNumber": "Некоторые магазины, например Amazon, не указывают трек-номер в письмах.",
-  "inbox.usage": "Сегодня {{used}} из {{limit}} писем",
+  "inbox.usage": "Сегодня прочитано {{used}} из {{limit}} писем",
   "inbox.renew": "Получить новый адрес",
   "inbox.renewNote": "Текущий адрес сразу перестанет работать.",
   "inbox.off": "Отключить",

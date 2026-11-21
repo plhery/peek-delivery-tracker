@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Bestätigungscode von Gmail",
   "inbox.result.ignored": "Keine Versand-E-Mail: nicht gelesen",
   "inbox.noNumber": "Manche Shops, etwa Amazon, schreiben keine Sendungsnummer in ihre E-Mails.",
-  "inbox.usage": "{{used}} von {{limit}} E-Mails heute",
+  "inbox.usage": "{{used}} von {{limit}} E-Mails heute gelesen",
   "inbox.renew": "Neue Adresse erstellen",
   "inbox.renewNote": "Die jetzige Adresse funktioniert dann sofort nicht mehr.",
   "inbox.off": "Ausschalten",

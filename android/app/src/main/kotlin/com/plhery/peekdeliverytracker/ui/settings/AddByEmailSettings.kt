@@ -247,7 +247,7 @@ private fun share(context: Context, text: String) {
 
 /**
  * "inbox.recent": the last emails, each its own row, then 9 under them in caption secondary why some shops' emails add
- * nothing, where one did, and how many emails today took, once half the day's allowance is used.
+ * nothing, where one did, and how many emails it read today, once half the day's allowance is used.
  */
 @Composable
 private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse, linkBaseUrl: String) {

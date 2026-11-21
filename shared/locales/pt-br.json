@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Código de confirmação do Gmail",
   "inbox.result.ignored": "Não é um e-mail de envio: não lido",
   "inbox.noNumber": "Algumas lojas, como a Amazon, não colocam código de rastreamento nos e-mails.",
-  "inbox.usage": "{{used}} de {{limit}} e-mails hoje",
+  "inbox.usage": "{{used}} de {{limit}} e-mails lidos hoje",
   "inbox.renew": "Obter um novo endereço",
   "inbox.renewNote": "O endereço atual para de funcionar na hora.",
   "inbox.off": "Desativar",

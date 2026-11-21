@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Code de confirmation de Gmail",
   "inbox.result.ignored": "Pas un e-mail de livraison : non lu",
   "inbox.noNumber": "Certaines boutiques, comme Amazon, ne mettent pas de numéro de suivi dans leurs e-mails.",
-  "inbox.usage": "{{used}} e-mails sur {{limit}} aujourd’hui",
+  "inbox.usage": "{{used}} e-mails lus sur {{limit}} aujourd’hui",
   "inbox.renew": "Obtenir une nouvelle adresse",
   "inbox.renewNote": "L’adresse actuelle cesse aussitôt de fonctionner.",
   "inbox.off": "Désactiver",

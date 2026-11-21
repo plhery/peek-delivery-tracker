@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Gmail’s confirmation code",
   "inbox.result.ignored": "Not a shipping email: not read",
   "inbox.noNumber": "Some shops, like Amazon, put no tracking number in their emails.",
-  "inbox.usage": "{{used}} of {{limit}} emails today",
+  "inbox.usage": "{{used}} of {{limit}} emails read today",
   "inbox.renew": "Get a new address",
   "inbox.renewNote": "The current address stops working at once.",
   "inbox.off": "Turn off",

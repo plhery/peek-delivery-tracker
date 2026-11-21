@@ -12,6 +12,7 @@ begin
     foreach function_name in array array[
       'public.inbound_mailbox(uuid)', 'public.open_inbound_mailbox(uuid,text)', 'public.close_inbound_mailbox(uuid)',
       'public.inbound_mailbox_owner(text)', 'public.claim_inbound_mail(uuid,integer,integer)',
+      'public.claim_received_inbound_mail(uuid,integer)',
       'public.record_inbound_mail(uuid,text,integer,text,text,text)'
     ] loop
       if has_function_privilege(role_name, function_name, 'EXECUTE') then
@@ -97,6 +98,21 @@ begin
     raise exception 'The hourly allowance was not enforced: %', claim;
   end if;
 
+  -- Every email an address receives counts against an allowance of its own, read or not; only one read is used.
+  if not public.claim_received_inbound_mail(two, 2) or not public.claim_received_inbound_mail(two, 2)
+      or public.claim_received_inbound_mail(two, 2) or public.claim_received_inbound_mail(one, 0) then
+    raise exception 'The allowance of emails received was not enforced';
+  end if;
+  if (public.inbound_mailbox(two)->>'used_today')::int <> 0 then
+    raise exception 'An email received but not read was counted as used';
+  end if;
+  if not (public.claim_inbound_mail(two, 5, 100)->>'allowed')::boolean then
+    raise exception 'An email received was refused the allowance of emails read';
+  end if;
+  if (public.inbound_mailbox(two)->>'used_today')::int <> 1 then
+    raise exception 'An email read after it was received was not counted as used';
+  end if;
+
   if not public.close_inbound_mailbox(one) then raise exception 'The address was not closed'; end if;
 end;
 $$;
@@ -116,6 +132,13 @@ begin
 end;
 $$;
 reset role;
+do $$
+begin
+  if (select received from private.inbound_mail_days where user_id = 'e9000000-0000-4000-8000-000000000002') <> 2 then
+    raise exception 'Reading an email counted it as received again';
+  end if;
+end;
+$$;
 
 -- A later email drops a confirmation older than the three days it is shown.
 do $$

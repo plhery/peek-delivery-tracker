@@ -15,9 +15,11 @@ export interface InboundEmailSettings {
   secret: string;
   /** Who sees the setting: everyone, or the accounts named by id or email. */
   accounts: AccountList;
-  /** Emails one address takes per UTC day. */
+  /** Emails one address reads per UTC day; one ignored for its subject is not counted. */
   perAccountPerDay: number;
-  /** Emails every address together takes per UTC hour. */
+  /** Emails one address takes per UTC day, read or not. */
+  receivedPerAccountPerDay: number;
+  /** Emails every address together reads per UTC hour. */
   perHour: number;
 }
 
@@ -51,6 +53,7 @@ export function inboundEmailSettings(env: NodeJS.ProcessEnv = process.env): Inbo
     secret,
     accounts: accountList(env.INBOUND_EMAIL_ACCOUNTS, 'INBOUND_EMAIL_ACCOUNTS'),
     perAccountPerDay: count(env.INBOUND_EMAILS_PER_ACCOUNT_PER_DAY, 30, 'INBOUND_EMAILS_PER_ACCOUNT_PER_DAY'),
+    receivedPerAccountPerDay: count(env.INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY, 300, 'INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY'),
     perHour: count(env.INBOUND_EMAILS_PER_HOUR, 200, 'INBOUND_EMAILS_PER_HOUR'),
   };
 }

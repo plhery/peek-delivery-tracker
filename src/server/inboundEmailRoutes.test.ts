@@ -11,6 +11,7 @@ import { HttpError } from './api';
 import * as parcels from './parcelsFromText';
 import { SupabaseAuthenticator } from './auth';
 import * as background from './background';
+import * as inboundMail from './inboundEmail/mail';
 import { mailResult } from './inboundEmail/receive';
 import * as monitoring from './observability';
 import { addParcelsFromText, trackingNumbersInText, type ParcelAddition } from './parcelsFromText';
@@ -234,6 +235,9 @@ describe('emails in the shapes readers forward', () => {
     expect(db.create).not.toHaveBeenCalled();
     expect(db.keep).not.toHaveBeenCalled();
     expect(db.record.mock.calls).toEqual(Array.from({ length: 3 }, () => [userId, 'ignored', 0, null, 'Example Shop']));
+    // They count only as received: the allowance of emails read stays for the shipping ones.
+    expect(db.claimReceived).toHaveBeenCalledTimes(3);
+    expect(db.claimMail).not.toHaveBeenCalled();
   });
 
   it('reads a shipping subject in any language, a carrier\'s email whatever its subject, and a delivered one', async () => {
@@ -287,6 +291,7 @@ function account(options: { known?: string[]; allowance?: number } = {}) {
   const known = new Map((options.known ?? []).map((number) => [number, `known-${number}`]));
   return {
     owner: vi.spyOn(service, 'inboundMailboxOwner').mockResolvedValue(userId),
+    claimReceived: vi.spyOn(service, 'claimReceivedInboundMail').mockResolvedValue(true),
     claimMail: vi.spyOn(service, 'claimInboundMail').mockResolvedValue({ allowed: true, scope: null }),
     record: vi.spyOn(service, 'recordInboundMail').mockResolvedValue(undefined),
     known: vi.spyOn(service, 'accountTrackingNumbers').mockImplementation(async (_, numbers) => new Map(numbers.filter((n) => known.has(n)).map((n) => [n, known.get(n)!]))),
@@ -312,6 +317,7 @@ describe('an email to a forwarding address', () => {
     const response = await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Your parcels ${UPS} and ${DHL} are on their way.`));
     expect(response.status).toBe(202);
     expect(db.owner).toHaveBeenCalledWith(token);
+    expect(db.claimReceived).toHaveBeenCalledWith(userId, 300);
     expect(db.claimMail).toHaveBeenCalledWith(userId, { perAccount: 30, overall: 200 });
     expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([[UPS, 'Example Shop', 'ups'], [DHL, 'Example Shop', 'dhl']]);
     expect(db.queue).toHaveBeenCalledWith({ userId, packageId: `new-${UPS}`, reason: 'added' });
@@ -558,6 +564,7 @@ describe('an email to a forwarding address', () => {
     await posted(mail('Peek <hello@peek.example>', 'Delivered: Example Shop', `Your parcel ${UPS} was delivered.`));
     // A From line that goes on over two lines, with an encoded name and the address in capitals: read from the header too.
     await posted(mail('=?utf-8?q?Peek?=\r\n <HELLO@peek.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));
+    expect(db.claimReceived).not.toHaveBeenCalled();
     expect(db.claimMail).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
@@ -595,18 +602,34 @@ describe('an email to a forwarding address', () => {
     expect(db.create).not.toHaveBeenCalled();
   });
 
-  it('is dropped, with the same answer, when its address names nobody or its allowance is used up', async () => {
+  it('is dropped, with the same answer, when its address names nobody or an allowance is used up', async () => {
     const db = account();
     db.owner.mockResolvedValue(null);
-    expect((await posted(mail('a@example.com', 'x', UPS))).status).toBe(202);
-    expect((await posted(mail('a@example.com', 'x', UPS), 'other@in.example.com')).status).toBe(202);
-    expect(db.claimMail).not.toHaveBeenCalled();
+    expect((await posted(mail('a@example.com', 'Shipped', UPS))).status).toBe(202);
+    expect((await posted(mail('a@example.com', 'Shipped', UPS), 'other@in.example.com')).status).toBe(202);
+    expect(db.claimReceived).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
     db.owner.mockResolvedValue(userId);
     db.claimMail.mockResolvedValue({ allowed: false, scope: 'account' });
-    expect((await posted(mail('a@example.com', 'x', UPS))).status).toBe(202);
-    expect(db.record).toHaveBeenCalledWith(userId, 'limited', 0);
+    expect((await posted(mail('a@example.com', 'Shipped', UPS))).status).toBe(202);
+    expect(db.record).toHaveBeenLastCalledWith(userId, 'limited', 0);
+    // An email ignored for its subject needs no allowance of emails read.
+    await posted(mail('a@example.com', 'Our autumn collection', UPS));
+    expect(db.record).toHaveBeenLastCalledWith(userId, 'ignored', 0, null, expect.any(String));
     expect(db.create).not.toHaveBeenCalled();
+  });
+
+  it('stops at the address\'s allowance of emails received, read or not, before reading one', async () => {
+    const db = account();
+    db.claimReceived.mockResolvedValue(false);
+    const read = vi.spyOn(inboundMail, 'readInboundMail');
+    expect((await posted(mail('a@example.com', 'Our autumn collection', UPS))).status).toBe(202);
+    expect((await posted(mail('a@example.com', 'Shipped', UPS))).status).toBe(202);
+    expect(read).not.toHaveBeenCalled();
+    expect(db.claimMail).not.toHaveBeenCalled();
+    expect(db.record.mock.calls).toEqual([[userId, 'limited', 0], [userId, 'limited', 0]]);
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.keep).not.toHaveBeenCalled();
   });
 
   it('counts nothing for an account the setting is not open to, by id or by confirmed email', async () => {
@@ -615,10 +638,10 @@ describe('an email to a forwarding address', () => {
     const auth = vi.spyOn(SupabaseServiceClient.prototype, 'getAuthAccount')
       .mockResolvedValue({ email: 'alex@example.com', emailConfirmed: false, locale: null });
     expect((await posted(mail('a@example.com', 'x', UPS))).status).toBe(202);
-    expect(db.claimMail).not.toHaveBeenCalled();
+    expect(db.claimReceived).not.toHaveBeenCalled();
     auth.mockResolvedValue({ email: 'alex@example.com', emailConfirmed: true, locale: null });
     await posted(mail('a@example.com', 'x', UPS));
-    expect(db.claimMail).toHaveBeenCalledOnce();
+    expect(db.claimReceived).toHaveBeenCalledOnce();
   });
 
   it('records an email it cannot read as naming nothing, and takes it', async () => {

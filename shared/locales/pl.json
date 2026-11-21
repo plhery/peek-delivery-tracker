@@ -1373,7 +1373,7 @@
   "inbox.result.confirmation": "Kod potwierdzający z Gmaila",
   "inbox.result.ignored": "To nie e-mail o wysyłce: nie przeczytano",
   "inbox.noNumber": "Niektóre sklepy, np. Amazon, nie podają numeru śledzenia w e-mailach.",
-  "inbox.usage": "Dziś {{used}} z {{limit}} e-maili",
+  "inbox.usage": "Dziś przeczytano {{used}} z {{limit}} e-maili",
   "inbox.renew": "Utwórz nowy adres",
   "inbox.renewNote": "Obecny adres od razu przestanie działać.",
   "inbox.off": "Wyłącz",

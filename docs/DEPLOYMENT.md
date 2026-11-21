@@ -305,8 +305,10 @@ in the app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and 
   lists the accounts that see the setting, by id or email, or `*` for everyone; with none
   listed, nobody does. A partial or malformed set stops the server at startup.
 - **Allowances**: `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` (default 30) and
-  `INBOUND_EMAILS_PER_HOUR` (default 200, every address together). Parcels an email adds
-  also count against the account's daily lookups, as the Add sheet's do.
+  `INBOUND_EMAILS_PER_HOUR` (default 200, every address together) count the emails read;
+  `INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY` (default 300) counts every email an address
+  takes, ignored ones too. Parcels an email adds also count against the account's daily
+  lookups, as the Add sheet's do.
 - **Receiving**: Cloudflare Email Routing on the address's domain. A subdomain keeps the
   main domain's mail apart: add it under Email Routing › Settings › Subdomains, which adds
   its MX and SPF records, and turn on Subaddressing, so `add+<token>@` reaches the rule for

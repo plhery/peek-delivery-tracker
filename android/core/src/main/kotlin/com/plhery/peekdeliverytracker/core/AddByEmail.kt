@@ -127,7 +127,7 @@ val AddByEmailEntry.heldNumberInAmazonAccount: Boolean
 val AddByEmail.notifies: Boolean
     get() = notify ?: true
 
-/** Whether Settings says how many emails today took: once half the day's allowance is used. */
+/** Whether Settings says how many emails were read today: once half the day's allowance is used. */
 val AddByEmailResponse.showsUsage: Boolean
     get() = inbox?.let { it.usedToday * 2 >= dailyLimit } ?: false
 

@@ -466,8 +466,10 @@ Key server modules:
   - The server's own emails (`EMAIL_FROM`) are dropped, read from their From header before
     they count against the allowances: a delivery email that a filter sends back names a
     parcel the account follows already.
-  - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
-    them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` and the kept
+  - Each address reads `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
+    them together `INBOUND_EMAILS_PER_HOUR` an hour; an email ignored for its subject is not
+    counted. Each address takes `INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY` emails a UTC
+    day, read or not, counted before the email is parsed. `inbound_mailboxes` and the kept
     emails are service-role only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
   assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it beta and

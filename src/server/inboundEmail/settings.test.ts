@@ -34,6 +34,13 @@ describe('the settings', () => {
     expect(inboundEmailOpenTo(everyone, { id: '5a000000-0000-4000-a000-000000000002' })).toBe(true);
     expect(inboundEmailOpenTo(inboundEmailSettings(env({ INBOUND_EMAIL_ADDRESS: 'add+{token}@in.example.com' }))!, { id: 'x' })).toBe(false);
   });
+
+  it('read 30 emails a day per address and take 300, read or not, unless set otherwise', () => {
+    const address = 'add+{token}@in.example.com';
+    expect(inboundEmailSettings(env({ INBOUND_EMAIL_ADDRESS: address }))).toMatchObject({ perAccountPerDay: 30, receivedPerAccountPerDay: 300, perHour: 200 });
+    expect(inboundEmailSettings(env({ INBOUND_EMAIL_ADDRESS: address, INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY: '500' }))?.receivedPerAccountPerDay).toBe(500);
+    expect(() => inboundEmailSettings(env({ INBOUND_EMAIL_ADDRESS: address, INBOUND_EMAILS_RECEIVED_PER_ACCOUNT_PER_DAY: 'lots' }))).toThrow(/RECEIVED/);
+  });
 });
 
 describe('addresses', () => {

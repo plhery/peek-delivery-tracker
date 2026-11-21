@@ -85,7 +85,7 @@ extension AddByEmailEntry {
 }
 
 extension AddByEmailResponse {
-    /// Whether the page says how many emails today took: once half the day's allowance is used.
+    /// Whether the page says how many emails were read today: once half the day's allowance is used.
     var showsUsage: Bool {
         guard let inbox else { return false }
         return inbox.usedToday * 2 >= dailyLimit

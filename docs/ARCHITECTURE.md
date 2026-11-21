@@ -175,8 +175,7 @@ Key server modules:
     out the destination country (`hidesDestinationLeg`). After three weeks the note says to ask
     the seller if it hasn't arrived. A label alone gets no such note: the card says the sender
     still has the parcel, or nothing when its carrier wrote the rest of its timeline ahead. An
-    account's parcel shows the same; the iPhone app shows the note without the day or the
-    three-week line.
+    account's parcel and the iPhone and Android apps show the same.
   - Opening a lookup's link queues a check once its cadence has come round, and the answer
     says so (`checkQueued`): the page reads again after 2 s, then more slowly up to 10 s, for a
     minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone
@@ -758,12 +757,11 @@ and nothing typed is sent.
   once a shown scan tells it in the same words, is as late or has come further, or once its
   time has passed (a wall clock in no zone, its time or `local_time`, on the carrier's clock; a step dated by its
   day alone, once that day has), and every step goes
-  once the parcel is delivered or returned. The web folds them behind one line at the top of the
+  once the parcel is delivered or returned. The apps fold them behind one line at the top of the
   history, saying other sites may show more steps but they're only predictions; opened, they
-  list greyed, each with the day it was predicted for. The iPhone and Android apps list them
-  greyed above the scans, under "Planned by the carrier". The apps hide one whose time passes
-  while it is shown. They are never scans: they set no stage, status, estimate, alert, email,
-  count, map or drawing, and a wrapped gift's link shows none.
+  list greyed, each with the day it was predicted for, and one whose time passes while it is
+  shown goes. They are never scans: they set no stage, status, estimate, alert, email, count,
+  map or drawing, and a wrapped gift's link shows none.
 - **A timeline written ahead**: when a carrier's answers for the number held rows back as
   written ahead of their own clocks (the scraper's `written_ahead`, kept in
   `routing.written_ahead`), the row names that carrier as `written_ahead_by`, the carrier
@@ -773,14 +771,10 @@ and nothing typed is sent.
   or dated by its day alone with a clock on that day. A step goes once a shown carrier scan
   tells it at the same minute, or in the same words within a day of it, and all go once a
   carrier scan says delivered or returned. A row the carrier later shows as a scan frees its
-  clock, so it is told once, as a scan. The web lists these steps among the planned ones,
-  behind the same line, which it shows alone while the carrier names no step in words. The
-  iPhone and Android apps list them greyed after the planned ones, under "Written in advance
-  by" the carrier, say in one line under the status that its site shows steps written in
-  advance, and, while the carrier's scans tell nothing past the label, say under such a
-  delivery that nothing confirms it and to ask the seller. They are never scans either: a
-  written "Delivered" sets no stage, status, estimate, alert, email, count, map or drawing. A
-  wrapped gift's link shows neither the line nor the steps.
+  clock, so it is told once, as a scan. The apps list these steps among the planned ones,
+  behind the same line, which they show alone while the carrier names no step in words. They
+  are never scans either: a written "Delivered" sets no stage, status, estimate, alert, email,
+  count, map or drawing. A wrapped gift's link shows neither the line nor the steps.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

@@ -191,6 +191,27 @@ final class ParcelShareTests: XCTestCase {
         XCTAssertNil(try fixture().publicParcel.gift)
     }
 
+    // As src/peek/ParcelPage.tsx: a gift on its way shows nothing of the steps its carrier predicts, nor the line about them.
+    func testAWrappedGiftShowsNoPredictedStepsNorTheLineThatSaysOtherSitesShowThem() throws {
+        var answer = try fixture().publicGiftParcel
+        let now = try XCTUnwrap(DateParser.date("2026-10-02T12:00:00Z"))
+        let planned = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-10-04T07:00:00Z")
+        let written = PlannedTrackingEvent(description: "Departed the origin facility", stage: .inTransit, occurredAt: "2026-09-28T07:00:00Z")
+        answer.package.plannedEvents = [planned]
+        answer.package.writtenAheadBy = .gzyl
+        answer.package.writtenAheadEvents = [written]
+        XCTAssertEqual(answer.gift, .wrapped)
+        XCTAssertNil(answer.shownParcel.predictedLine(now: now))
+        answer.package.plannedEvents = nil
+        answer.package.writtenAheadEvents = nil
+        XCTAssertNil(answer.shownParcel.predictedLine(now: now), "nor the line alone")
+        // Its sender's own view shows them.
+        answer.package.plannedEvents = [planned]
+        answer.package.writtenAheadEvents = [written]
+        answer.link.role = .owner
+        XCTAssertEqual(answer.shownParcel.predictedLine(now: now), .steps([planned, written]))
+    }
+
     func testBlurredRowsThatFollowOneAnotherAreToldOnce() throws {
         let fixture = try fixture().publicGiftParcel.package.trackingEvents
         let collapsed = fixture.collapsingGiftRows()

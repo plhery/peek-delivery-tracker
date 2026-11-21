@@ -75,7 +75,9 @@ import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeededField
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.attention
+import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.currentStage
+import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -674,7 +676,9 @@ class LivePassTest {
         }
         show(parcels = parcels)
         open("Cat tree")
-        assertTrue(textExists("written in advance"))
+        // Only the history's line, that other sites' further steps are predictions.
+        assertTrue(textExists("Other sites may show more steps, but they’re only predictions."))
+        assertFalse(textExists("written in advance"))
         assertFalse(textExists("hasn’t handed it"))
         assertFalse(exists(PAGE_QUIET))
     }
@@ -695,6 +699,33 @@ class LivePassTest {
     }
 
     private val helpLink get() = compose.onNode(hasText("Get help from", substring = true) and hasClickAction())
+
+    @Test
+    fun threeWeeksAfterItsLastScanTheQuietNoteSaysToAskTheSellerItsHelpStill() {
+        val quiet = quietParcels().first { it.label.startsWith("Cat tree") }
+        val last = DateParser.date(quiet.currentEvent!!.occurredAt)!!
+        /** Cat tree with its scans moved back, its last one `ago` before the captures. */
+        fun lastScanned(ago: Duration): Parcel {
+            val shift = Duration.between(CAPTURED.minus(ago), last)
+            return quiet.copy(
+                trackingEvents = quiet.trackingEvents.map { it.copy(occurredAt = DateParser.isoString(DateParser.date(it.occurredAt)!!.minus(shift))) },
+            )
+        }
+        val carrier = DemoCards.identities.displayName(quiet.displayedCarrier, AppLanguage.En)
+        var noted by mutableStateOf(lastScanned(Duration.ofDays(21)))
+        compose.setContent {
+            CardHost { ParcelQuietNote(noted, Color.Blue, {}, Modifier.testTag(PAGE_QUIET)) }
+        }
+        compose.waitForIdle()
+        assertTrue(textExists("Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking $carrier."))
+        assertFalse(textExists("Parcels often go quiet"))
+        assertTrue(textExists("Get help from"))
+        // A minute short of three weeks, it may still be on its way.
+        noted = lastScanned(Duration.ofDays(21).minusMinutes(1))
+        compose.waitForIdle()
+        assertTrue(textExists("Parcels often go quiet"))
+        assertFalse(textExists("three weeks"))
+    }
 
     @Test
     fun aCarrierThatLeavesOutTheJourneyAbroadIsSaidToAndItsHelpIsOffered() {

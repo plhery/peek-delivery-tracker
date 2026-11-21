@@ -17,6 +17,7 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -175,14 +176,18 @@ class JournalDaysAfterMidnightTest {
         val step = PlannedTrackingEvent(description = "Arrives at the delivery depot", stage = TrackingStage.InTransit, occurredAt = "2026-10-29T08:00:00Z")
         shown = first.copy(plannedEvents = listOf(step))
         show()
-        assertEquals(1, compose.onAllNodes(hasTestTag(JOURNAL_PLANNED_ROW)).fetchSemanticsNodes().size)
+        compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
+        compose.waitForIdle()
+        assertEquals(1, compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED_ROW)).fetchSemanticsNodes().size)
         clock = Instant.parse("2026-10-29T09:00:00Z")
         compose.mainClock.advanceTimeBy(4 * 3_600_000L)
         compose.waitForIdle()
         assertEquals(
             "At 10:00, a page open since 06:11 still shows the step planned for 09:00",
             0,
-            compose.onAllNodes(hasTestTag(JOURNAL_PLANNED_ROW)).fetchSemanticsNodes().size,
+            compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED_ROW)).fetchSemanticsNodes().size,
         )
+        // With no other step to list, the line it was folded behind goes too.
+        assertEquals(0, compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED)).fetchSemanticsNodes().size)
     }
 }

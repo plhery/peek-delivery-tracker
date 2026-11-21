@@ -58,10 +58,11 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The parcel page's journal (`ParcelJournal`, B-S14 to B-S16, B-ST16, B-AN10, B-G15, B-SE11, B-S78): its header's
- * count and toggle and what TalkBack hears of it, its empty states, its days' headings and order, its rows' times and
- * words, the syncing words, the copies' words, the places without their flags in what TalkBack reads, the same
- * carrier's repeat folded into its scan, the state kept through a window made again, and the days going and coming at
- * once under Reduce Motion or fading over 0.2 s otherwise. Seen from Zurich at the captures' moment.
+ * count and toggle and what TalkBack hears of it, the line the carrier's predicted steps are folded behind and those
+ * steps, its empty states, its days' headings and order, its rows' times and words, the syncing words, the copies'
+ * words, the places without their flags in what TalkBack reads, the same carrier's repeat folded into its scan, the
+ * state kept through a window made again, and the days going and coming at once under Reduce Motion or fading over
+ * 0.2 s otherwise. Seen from Zurich at the captures' moment.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -265,52 +266,104 @@ class ParcelJournalTest {
         assertFalse(textExists(zoneLine))
     }
 
+    /** The line the predicted steps are folded behind, or the line alone. */
+    private fun predictedLine(): SemanticsNode = compose.onNodeWithTag(JOURNAL_PREDICTED).fetchSemanticsNode()
+
+    /** What TalkBack reads of each predicted step, in their order. */
+    private fun predictedRows(): List<String> = compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED_ROW)).fetchSemanticsNodes()
+        .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
+
+    private val predictedNote = "Other sites may show more steps, but they’re only predictions."
+
+    /** The line's words as TalkBack reads them, its no-break spaces read as spaces. */
+    private fun lineWords(): String = texts(predictedLine()).joinToString().replace(Char(0x00A0), ' ')
+
+    /** A step planned still ahead, and two the carrier wrote in advance whose time has passed. */
+    private val ahead = PlannedTrackingEvent(description = "Proof of delivery filed", stage = TrackingStage.InTransit, occurredAt = "2026-10-30T09:00:00Z")
+    private val wroteAhead = listOf(
+        PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T01:00:00Z"),
+        PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z"),
+    )
+
     @Test
-    fun theStepsACarrierWroteInAdvanceShowGreyedUnderItsNameAfterThePlannedOnesADeliveryAmongThem() {
-        val planned = PlannedTrackingEvent(description = "Proof of delivery filed", stage = TrackingStage.InTransit, occurredAt = "2026-10-30T09:00:00Z")
-        val written = listOf(
-            PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T01:00:00Z"),
-            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z"),
-        )
-        val scripted = parcel(emptyList()).copy(carrier = CarrierId.Gzyl, plannedEvents = listOf(planned), writtenAheadEvents = written)
-        // Without the carrier named as writing ahead, its steps are not shown.
-        show(scripted)
-        assertTrue(compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN)).fetchSemanticsNodes().isEmpty())
-        show(scripted.copy(writtenAheadBy = CarrierId.Gzyl))
-        val section = compose.onNodeWithTag(JOURNAL_WRITTEN).fetchSemanticsNode()
-        assertTrue(compose.onAllNodes(hasText("Written in advance by ", substring = true), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty())
-        assertTrue(textExists("No scan confirms them."))
-        val labels = compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes()
-            .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
-        assertEquals(2, labels.size)
-        assertTrue(labels[0], labels[0].startsWith("Written in advance, not confirmed: Delivered"))
-        assertTrue(labels[1], labels[1].startsWith("Written in advance, not confirmed: Departed the origin facility"))
-        // The planned step still ahead comes first, and no scan is counted.
-        val plannedSection = compose.onNodeWithTag(JOURNAL_PLANNED).fetchSemanticsNode()
-        assertTrue(plannedSection.boundsInRoot.bottom <= section.boundsInRoot.top)
-        assertTrue(rows().isEmpty())
-        assertTrue(textExists(zoneLine))
+    fun thePredictedStepsAreFoldedBehindOneLineThatStartsClosed() {
+        val label = scan(1, "2026-10-20T12:30:00Z", "The sender created a shipping label", TrackingStage.Registered)
+        show(parcel(listOf(label)).copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, plannedEvents = listOf(ahead), writtenAheadEvents = wroteAhead))
+        assertEquals("$predictedNote Show them", lineWords())
+        assertTrue(predictedRows().isEmpty())
+        // Before the days, in the secondary grey; no heading of its own, and no scan counted.
+        val line = predictedLine()
+        assertTrue(line.boundsInRoot.bottom <= compose.onAllNodes(hasTestTag(JOURNAL_DAY)).fetchSemanticsNodes().first().boundsInRoot.top)
+        assertFalse(SemanticsProperties.Heading in line.config)
+        assertEquals(listOf("Tracking history", "1 update"), texts(header()))
+        // A button TalkBack can expand, then collapse.
+        assertEquals(Role.Button, line.config[SemanticsProperties.Role])
+        assertTrue(SemanticsActions.Expand in line.config)
+        assertFalse(SemanticsActions.Collapse in line.config)
+        with(compose.density) { assertTrue(line.boundsInRoot.height.toDp().value >= 44f - 0.5f) }
     }
 
     @Test
-    fun aDeliveryTheCarrierWroteInAdvanceSaysNothingConfirmsItWhileTheOnlyScanIsTheLabel() {
-        val advice = "Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number."
-        val written = listOf(
-            PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T01:00:00Z"),
-            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z"),
+    fun openedThePlannedAndWrittenStepsListTogetherNewestFirstEachWithTheDayItWasPredictedFor() {
+        show(parcel(emptyList()).copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, plannedEvents = listOf(ahead), writtenAheadEvents = wroteAhead))
+        compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
+        compose.waitForIdle()
+        assertEquals("$predictedNote Hide them", lineWords())
+        assertTrue(SemanticsActions.Collapse in predictedLine().config)
+        // No "not confirmed" before the words: the line says what they are.
+        assertEquals(
+            listOf(
+                "Proof of delivery filed, Predicted for tomorrow, 10:00",
+                "Delivered, Predicted for yesterday, 08:00",
+                "Departed the origin facility, Predicted for Tue 27 Oct, 02:00",
+            ),
+            predictedRows(),
         )
+        assertTrue(textExists("Predicted for Tue 27 Oct, 02:00"))
+        assertEquals(secondary, color("Delivered"))
+        assertTrue(rows().isEmpty())
+        assertTrue(textExists(zoneLine))
+        // And closed again.
+        compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
+        compose.waitForIdle()
+        assertTrue(predictedRows().isEmpty())
+        assertEquals("$predictedNote Show them", lineWords())
+    }
+
+    @Test
+    fun theStepsACarrierWroteInAdvanceShowWhetherOrNotItIsNamedAsWritingAhead() {
+        show(parcel(emptyList()).copy(carrier = CarrierId.Gzyl, writtenAheadEvents = wroteAhead))
+        compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
+        compose.waitForIdle()
+        assertEquals(2, predictedRows().size)
+    }
+
+    @Test
+    fun aCarrierThatWritesItsRouteAheadWithNoStepToListGetsTheLineAlone() {
         val label = scan(1, "2026-10-20T12:30:00Z", "The sender created a shipping label", TrackingStage.Registered)
-        show(parcel(listOf(label)).copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = written))
-        assertTrue(textExists(advice))
-        // Under the delivery alone, and TalkBack reads it after the step.
-        val labels = compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes()
-            .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
-        assertTrue(labels[0], labels[0].startsWith("Written in advance, not confirmed: Delivered") && labels[0].endsWith(". $advice"))
-        assertFalse(labels[1], labels[1].contains(advice))
-        // A scan past the label: the steps stay, the line goes.
-        show(shown.copy(trackingEvents = listOf(label, scan(2, "2026-10-21T08:00:00Z", "Departed the origin facility"))))
-        assertEquals(2, compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes().size)
-        assertFalse(textExists(advice))
+        show(parcel(listOf(label)).copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl))
+        assertEquals(predictedNote, lineWords())
+        assertFalse(SemanticsActions.OnClick in predictedLine().config)
+        assertTrue(predictedRows().isEmpty())
+        // Another carrier's parcel has no line.
+        show(parcel(listOf(label)))
+        assertTrue(compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED)).fetchSemanticsNodes().isEmpty())
+        // Nor has one whose planned steps have all gone by.
+        show(parcel(listOf(label)).copy(plannedEvents = listOf(ahead.copy(occurredAt = "2026-10-28T09:00:00Z"))))
+        assertTrue(compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED)).fetchSemanticsNodes().isEmpty())
+    }
+
+    @Test
+    fun theOpenedStepsStayOpenThroughAWindowMadeAgain() {
+        shown = parcel(emptyList()).copy(carrier = CarrierId.Gzyl, writtenAheadEvents = wroteAhead)
+        val recreation = Recreation(compose)
+        recreation.setContent(content(reduceMotion = true))
+        compose.waitForIdle()
+        compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
+        compose.waitForIdle()
+        recreation.recreate()
+        assertEquals(2, predictedRows().size)
+        compose.mainClock.autoAdvance = true
     }
 
     // The rows.

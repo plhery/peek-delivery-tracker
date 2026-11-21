@@ -35,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.util.Locale
 import java.util.UUID
 import kotlinx.serialization.builtins.ListSerializer
@@ -1270,6 +1271,41 @@ class ParcelLogicTests {
             }
         }
         assertEquals(600, count)
+    }
+
+    // As src/App.test.tsx: a parcel gone quiet for a month doesn't read as four days.
+    @Test
+    fun aStalledFlagNamesTheDayOfTheCurrentScanWithItsYearWhenItIsNotNows() {
+        val zone = ZoneId.systemDefault()
+        val now = ZonedDateTime.of(2026, 11, 19, 12, 0, 0, 0, zone).toInstant()
+        fun at(year: Int, month: Int, day: Int) = DateParser.isoString(ZonedDateTime.of(year, month, day, 9, 30, 0, 0, zone).toInstant())
+        val id = UUID.randomUUID()
+        val english = Localizer(AppLanguage.En)
+        val stalled = makeParcel(id, events = listOf(event(id, TrackingStage.Accepted, at(2026, 10, 5)), event(id, TrackingStage.InTransit, at(2026, 10, 12))))
+        assertEquals(ParcelAttention.Stalled, stalled.attention(now))
+        assertEquals("No tracking update since Mon 12 Oct", ParcelAttention.Stalled.label(stalled, english, now))
+        assertEquals("Aucune mise à jour depuis lun 12 oct", ParcelAttention.Stalled.label(stalled, Localizer(AppLanguage.Fr), now))
+        val lastYear = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, at(2025, 12, 29))))
+        assertEquals("No tracking update since Mon 29 Dec 2025", ParcelAttention.Stalled.label(lastYear, english, now))
+        // A scan its carrier dated by its day alone names that day.
+        val dayOnly = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-10-11T22:00:00Z").copy(day = "2026-10-12")))
+        assertEquals("No tracking update since Mon 12 Oct", ParcelAttention.Stalled.label(dayOnly, english, now))
+        // Any other flag keeps its words.
+        assertEquals(english.text("attention.customs"), ParcelAttention.Customs.label(stalled, english, now))
+    }
+
+    // As src/peek/ParcelPage.test.tsx: three weeks after the current scan, the quiet note says to ask the seller.
+    @Test
+    fun theQuietNoteSaysToAskTheSellerFrom21DaysAfterTheCurrentScan() {
+        val now = DateParser.date("2026-11-19T12:00:00Z")!!
+        val id = UUID.randomUUID()
+        fun quietFor(seconds: Long) =
+            makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, DateParser.isoString(now.minusSeconds(seconds))))).quietNoteKey(now)
+        assertEquals("link.quiet", quietFor(5 * 86_400L))
+        assertEquals("link.quiet", quietFor(21 * 86_400L - 1))
+        assertEquals("link.quietLong", quietFor(21 * 86_400L))
+        assertEquals("link.quietLong", quietFor(40 * 86_400L))
+        assertEquals("link.quiet", makeParcel(id).quietNoteKey(now))
     }
 
     @Test

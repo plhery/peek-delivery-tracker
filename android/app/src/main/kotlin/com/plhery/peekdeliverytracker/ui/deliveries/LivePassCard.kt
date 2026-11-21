@@ -87,7 +87,6 @@ import com.plhery.peekdeliverytracker.core.refusedPostcode
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
-import com.plhery.peekdeliverytracker.core.writtenAheadNoteKey
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -412,7 +411,7 @@ internal fun LivePassCard(
             }
             val displayed = identities.displayName(parcel.displayedCarrier, language)
             // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then; unless
-            // the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
+            // the carrier wrote the rest of its timeline ahead, whose line in the history says the rest are predictions.
             if (!parcel.isArchived && parcel.awaitingHandover(now) && parcel.writtenAheadBy == null) {
                 Text(
                     localizer.text("parcel.awaitingHandover", mapOf("carrier" to displayed)),
@@ -432,16 +431,6 @@ internal fun LivePassCard(
             if (!parcel.isArchived && parcel.heldReturn) {
                 Text(
                     localizer.text("parcel.returnUnderWay", mapOf("carrier" to displayed)),
-                    color = secondary,
-                    style = type.caption.sfLines(),
-                )
-            }
-            // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
-            val ahead = parcel.writtenAheadBy
-            val aheadNote = parcel.writtenAheadNoteKey
-            if (ahead != null && aheadNote != null) {
-                Text(
-                    localizer.text(aheadNote, mapOf("carrier" to identities.displayName(ahead, language))),
                     color = secondary,
                     style = type.caption.sfLines(),
                 )

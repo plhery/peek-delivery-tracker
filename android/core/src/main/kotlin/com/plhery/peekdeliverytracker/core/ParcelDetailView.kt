@@ -207,8 +207,8 @@ val TrackingEvent.journalLocation: String?
     get() = location?.trimmingWhitespacesAndNewlines()?.nonEmpty
 
 /**
- * The steps the carrier planned as the journal lists them (`PlannedSteps`), newest first; steps without a readable
- * date last, and steps of the same moment in their order.
+ * The steps the carrier planned or wrote in advance as the journal lists them (`PredictedSteps`), newest first; steps
+ * without a readable date last, and steps of the same moment in their order.
  */
 fun plannedNewestFirst(steps: List<PlannedTrackingEvent>): List<PlannedTrackingEvent> =
     steps.sortedByDescending { it.displayDate ?: distantPast }
@@ -241,12 +241,20 @@ val PlannedTrackingEvent.journalLocation: String?
     get() = location?.trimmingWhitespacesAndNewlines()?.nonEmpty
 
 /**
- * What TalkBack reads of a planned step's row: "Planned, not confirmed: " and its words, its day ([Localizer.plannedDate])
- * and where it will be as the location row reads it (the town its place names, for one written in another script),
- * without the flag, joined by ", ". A step written in advance whose time has passed reads `timeline.writtenAhead.step`
- * ("Written in advance, not confirmed: ") instead, as `key`.
+ * The day a step the carrier's site shows was predicted for, as its row says it: "Predicted for" and its day
+ * ([Localizer.plannedDate]), "Predicted for Mon 16 Nov, 09:00". Nothing for a date that doesn't read.
  */
-fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now(), key: String = "timeline.planned.step"): String {
+fun Localizer.predictedDate(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
+    val day = plannedDate(step, now)
+    return if (day.isEmpty()) "" else text("timeline.predicted.when", mapOf("when" to day))
+}
+
+/**
+ * What TalkBack reads of a predicted step's row: its words, the day it was predicted for ([Localizer.predictedDate])
+ * and where it will be as the location row reads it (the town its place names, for one written in another script),
+ * without the flag, joined by ", ".
+ */
+fun Localizer.predictedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
     val place = step.journalLocation?.let { location ->
         val place = TrackingLocation.place(location, step.place, language)
         val country = place.country
@@ -256,8 +264,7 @@ fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClo
             else -> "${place.name}, ${TrackingLocation.countryName(country, language)}"
         }
     }
-    val parts = listOfNotNull(plannedWording(step), plannedDate(step, now), place).filter { it.isNotEmpty() }
-    return text(key, mapOf("step" to parts.joinToString(", ")))
+    return listOfNotNull(plannedWording(step), predictedDate(step, now), place).filter { it.isNotEmpty() }.joinToString(", ")
 }
 
 /**

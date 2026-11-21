@@ -61,6 +61,7 @@ import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.masked
@@ -82,6 +83,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_YES
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.GlassOverlayLayer
 import com.plhery.peekdeliverytracker.ui.deliveries.INLINE_TOAST
+import com.plhery.peekdeliverytracker.ui.deliveries.JOURNAL_PREDICTED
+import com.plhery.peekdeliverytracker.ui.deliveries.JOURNAL_TOGGLE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ADD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ALREADY
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ANNOUNCEMENT
@@ -936,6 +939,23 @@ class ParcelLinkSheetTest {
         assertFalse(exists(LINK_SIGN_IN))
         assertFalse(exists(LINK_GIFT_NOTE))
         assertFalse("The words wait for the delivery", shows("Happy birthday"))
+    }
+
+    @Test
+    fun aGiftOnItsWaySaysNothingOfTheStepsItsCarrierPredicts() {
+        val planned = PlannedTrackingEvent(description = "Out for delivery", stage = TrackingStage.OutForDelivery, occurredAt = "2026-10-30T07:00:00Z")
+        val written = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z")
+        fun PublicParcelResponse.predicting() = copy(
+            parcel = parcel.copy(plannedEvents = listOf(planned), writtenAheadBy = parcel.carrier, writtenAheadEvents = listOf(written)),
+        )
+        show(FakeParcelLinks().apply { read = { id, _ -> if (id == giftId) LinkFixtures.wrappedGift().predicting() else LinkFixtures.viewer().predicting() } })
+        open()
+        assertTrue(exists(JOURNAL_PREDICTED))
+        open(giftId)
+        check(exists(LINK_SURPRISE))
+        check(exists(JOURNAL_TOGGLE))
+        assertFalse(exists(JOURNAL_PREDICTED))
+        assertFalse(shows(text("timeline.predicted.note")))
     }
 
     @Test

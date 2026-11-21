@@ -7,7 +7,6 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
 import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.Parcel
-import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -564,28 +563,16 @@ val Parcel.scheduledDelivery: Boolean
     get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES &&
         (deliveringCarrier == null || deliveryOnlyAnnounced)
 
-/**
- * The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page lists
- * steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words (`writtenAheadEvents`,
- * or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
- */
-val Parcel.writtenAheadNoteKey: String?
-    get() {
-        if (writtenAheadBy == null) return null
-        val shown = !writtenAheadEvents.isNullOrEmpty() || !plannedEvents.isNullOrEmpty()
-        return if (shown) "parcel.writtenAheadShown" else "parcel.writtenAhead"
-    }
+/** A parcel this long without a scan may be lost: its quiet note says to ask the seller. */
+private const val LONG_QUIET_SECONDS = 21 * 86_400
 
 /**
- * The delivery the carrier writing the timeline in advance wrote (`writtenAheadEvents`) whose time has passed while its
- * own scans tell nothing past the label, Peek's "added" row aside: nothing confirms it, and readers take it for real. The
- * journal says so under it, and whom to ask if nothing came. The newest such step, or null.
+ * The words of the note a parcel that went quiet is told (`quietNote`): why parcels go quiet, or, 21 days or more after
+ * its current scan, to ask the seller if it still hasn't arrived.
  */
-fun Parcel.unconfirmedWrittenDelivery(now: Instant = AppClock.now()): PlannedTrackingEvent? {
-    if (writtenAheadBy == null || trackingEvents.any { it.stage != TrackingStage.Pending && it.stage != TrackingStage.Registered }) return null
-    return writtenAheadEvents.orEmpty()
-        .filter { step -> step.stage == TrackingStage.Delivered && step.aheadUntil?.let { it <= now } == true }
-        .maxByOrNull { DateParser.date(it.occurredAt) ?: Instant.MIN }
+fun Parcel.quietNoteKey(now: Instant = AppClock.now()): String {
+    val latest = currentEvent?.let { DateParser.date(it.occurredAt) }
+    return if (latest != null && now.timeIntervalSince(latest) >= LONG_QUIET_SECONDS) "link.quietLong" else "link.quiet"
 }
 
 /**
@@ -778,6 +765,19 @@ enum class ParcelAttention(val rawValue: String) {
     NotAnnounced("not_announced");
 
     val localizationKey: String get() = "attention.$rawValue"
+
+    /**
+     * What `parcel`'s flag says (`attentionLabel`). One that went quiet names the day of its current scan, with the year
+     * when it isn't `now`'s ("No tracking update since Mon 12 Oct"), so a parcel silent for a month doesn't read as
+     * four days.
+     */
+    fun label(parcel: Parcel, localizer: Localizer, now: Instant = AppClock.now()): String {
+        val latest = if (this == Stalled) parcel.currentEvent?.displayDate else null
+        if (latest == null) return localizer.text(localizationKey)
+        val zone = ZoneId.systemDefault()
+        val withYear = FoundationDates.dateFields(latest, zone).yearOfEra != FoundationDates.dateFields(now, zone).yearOfEra
+        return localizer.text("attention.stalledSince", mapOf("date" to localizer.shortDate(latest, withYear)))
+    }
 
     companion object {
         /** What customs asks the recipient for before it lets the parcel go. */

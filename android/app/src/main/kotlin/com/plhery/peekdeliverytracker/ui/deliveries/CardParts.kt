@@ -79,6 +79,7 @@ import com.plhery.peekdeliverytracker.core.core
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.localizationKey
 import com.plhery.peekdeliverytracker.core.metadata
+import com.plhery.peekdeliverytracker.core.quietNoteKey
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -345,7 +346,8 @@ private class RailStep(var current: Int)
 
 /**
  * `ParcelQuietNote` (B-S75): what a parcel that stopped moving is told, on the secondary grey at 8 % in 16-point
- * corners: why parcels go quiet, that its carrier leaves out its journey in the destination country where it does
+ * corners: why parcels go quiet, or, three weeks after its current scan, to ask the seller if it still hasn't arrived
+ * ([quietNoteKey]); that its carrier leaves out its journey in the destination country where it does
  * (`hidesDestinationLeg`), and where to ask the carrier (`helpLink`) in `tint`, which opens in the browser after
  * `onHelp`. No link where neither the carrier that has it nor the one it is filed under has a help page.
  */
@@ -357,6 +359,7 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val uriHandler = LocalUriHandler.current
+    val now = LocalNow.current
     val carrier = identities.displayName(parcel.displayedCarrier, language)
     val active = identities.displayName(parcel.activeTrackingCarrier, language)
     val abroad = if (identities.catalog.hidesDestinationLeg(parcel)) {
@@ -377,7 +380,7 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
     ) {
         PeekSymbol("hourglass", font = type.fixed(17f), tint = secondary)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(localizer.text("link.quiet", mapOf("carrier" to carrier)) + abroad, color = secondary, style = type.footnote.sfLines())
+            Text(localizer.text(parcel.quietNoteKey(now()), mapOf("carrier" to carrier)) + abroad, color = secondary, style = type.footnote.sfLines())
             if (help != null) {
                 Row(
                     Modifier

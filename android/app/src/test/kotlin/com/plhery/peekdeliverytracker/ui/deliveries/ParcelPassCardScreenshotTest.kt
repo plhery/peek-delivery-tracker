@@ -3,11 +3,12 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
-import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.ui.screenshot
+import java.time.Duration
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -105,12 +106,12 @@ class ParcelPassCardScreenshotTest {
     @Test
     fun increasedContrastDark() = shot("card_transit_dark_contrast", dark = true, highContrast = true) { DemoCards.parcel("Moon lamp") }
 
-    /** Its scans unchanged for days: the list's notice, with a clock, beside the status. */
+    /** Its scans unchanged for days: the list's notice naming the day of the last, with a clock, beside the status. */
     @Test
-    fun stalledLight() = shot("card_stalled_light", notice = "attention.stalled") { DemoCards.parcel("Kind of Blue") }
+    fun stalledLight() = shot("card_stalled_light", noticed = true) { stalled() }
 
     @Test
-    fun stalledDark() = shot("card_stalled_dark", dark = true, notice = "attention.stalled") { DemoCards.parcel("Kind of Blue") }
+    fun stalledDark() = shot("card_stalled_dark", dark = true, noticed = true) { stalled() }
 
     /** A missed delivery: the carrier waits on the reader, with a warning sign. */
     @Test
@@ -156,10 +157,14 @@ class ParcelPassCardScreenshotTest {
 
     private fun failed(): Parcel = DemoCards.parcel("Moon lamp").copy(syncStatus = SyncStatus.Error)
 
-    /**
-     * `noticed`: in the list's attention section, where the card says what the parcel needs; `notice`, a notice's key
-     * the demo has no parcel for.
-     */
+    /** The vinyl, its scans five days older: none for over four days. */
+    private fun stalled(): Parcel = DemoCards.parcel("Kind of Blue").let { vinyl ->
+        vinyl.copy(
+            trackingEvents = vinyl.trackingEvents.map { it.copy(occurredAt = DateParser.isoString(DateParser.date(it.occurredAt)!!.minus(Duration.ofDays(5)))) },
+        )
+    }
+
+    /** `noticed`: in the list's attention section, where the card says what the parcel needs. */
     private fun shot(
         name: String,
         language: AppLanguage = AppLanguage.En,
@@ -167,7 +172,6 @@ class ParcelPassCardScreenshotTest {
         fontScale: Float = 1f,
         highContrast: Boolean = false,
         noticed: Boolean = false,
-        notice: String? = null,
         arrived: Boolean = false,
         selected: Boolean = false,
         newUpdate: Boolean = false,
@@ -175,7 +179,7 @@ class ParcelPassCardScreenshotTest {
     ) {
         compose.waitsForMaps()
         val shown = parcel()
-        val said = notice?.let { Localizer(language, variant = "android").text(it) } ?: if (noticed) DemoCards.notice(shown, language) else null
+        val said = if (noticed) DemoCards.notice(shown, language) else null
         compose.setContent {
             CardHost(language, dark, fontScale, highContrast) {
                 ParcelPassCard(shown, notice = said, onOpen = {}, arrived = arrived, selected = selected, newUpdate = newUpdate)

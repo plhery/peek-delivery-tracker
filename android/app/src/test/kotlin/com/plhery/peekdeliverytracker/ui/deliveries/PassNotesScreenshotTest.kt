@@ -219,7 +219,7 @@ class PassNotesScreenshotTest {
         )
     }
 
-    // A carrier that writes the whole timeline in advance.
+    // A carrier that writes the whole timeline in advance: the pass adds no line, the history says the rest are predictions.
 
     @Test
     fun aTimelineWrittenAhead() = pass("pass_written_ahead_light") {

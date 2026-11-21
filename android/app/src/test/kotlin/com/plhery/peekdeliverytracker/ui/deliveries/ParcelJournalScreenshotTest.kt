@@ -24,8 +24,8 @@ import org.robolectric.annotation.GraphicsMode
  * The parcel page's journal on the page's paper, on the iPhone the captures were taken on, at the captures' moment
  * ([JournalFixtures.journey]): three days, the current scan's time in Swiss Post's ink, a place with its flag, a copy's
  * words under its scan and the carrier's repeat folded into its own; light and dark, collapsed, and at the first
- * accessibility size, the times over the words. And the demo's vinyl, the steps its carrier planned over its scans,
- * light and dark.
+ * accessibility size, the times over the words. And the demo's vinyl, the line its carrier's predicted steps are folded
+ * behind over its scans: closed in light, opened in dark.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -42,6 +42,7 @@ class ParcelJournalScreenshotTest {
         dark: Boolean = false,
         fontScale: Float = 1f,
         collapsed: Boolean = false,
+        predictedOpen: Boolean = false,
         parcel: Parcel = JournalFixtures.journey(),
     ) {
         compose.setContent {
@@ -53,6 +54,7 @@ class ParcelJournalScreenshotTest {
             }
         }
         if (collapsed) compose.onNodeWithTag(JOURNAL_TOGGLE).performClick()
+        if (predictedOpen) compose.onNodeWithTag(JOURNAL_PREDICTED).performClick()
         compose.screenshot(name)
     }
 
@@ -70,18 +72,21 @@ class ParcelJournalScreenshotTest {
     @Test
     fun atAnAccessibilitySize() = shot("journal_accessibility_light", fontScale = 1.5f)
 
+    /** The steps the carrier planned, folded behind one line above the scans that says they're only predictions. */
+    @Test
+    fun withThePredictedLine() = shot("journal_planned_light", parcel = DemoCards.parcel("Kind of Blue"))
+
     /**
-     * The steps the carrier wrote ahead, greyed on dashed marks joined by a dashed rail under their heading and note,
-     * newest first, then a dashed line and the scans.
+     * The line opened: the steps greyed on dashed marks joined by a dashed rail, newest first, each with the day it was
+     * predicted for, then a dashed line and the scans.
      */
     @Test
-    fun withThePlannedSteps() = shot("journal_planned_light", parcel = DemoCards.parcel("Kind of Blue"))
-
-    @Test
-    fun withThePlannedStepsInDark() = shot("journal_planned_dark", dark = true, parcel = DemoCards.parcel("Kind of Blue"))
+    fun withThePredictedStepsShownInDark() =
+        shot("journal_planned_dark", dark = true, predictedOpen = true, parcel = DemoCards.parcel("Kind of Blue"))
 
     /** At Android's largest font scale, in dark: the marks and their rail grow with the words, beside them. */
     @Test
-    fun withThePlannedStepsAtTheLargestFontScaleInDark() =
-        shot("journal_planned_accessibility_dark", dark = true, fontScale = 2f, parcel = DemoCards.parcel("Kind of Blue"))
+    fun withThePredictedStepsShownAtTheLargestFontScaleInDark() = shot(
+        "journal_planned_accessibility_dark", dark = true, fontScale = 2f, predictedOpen = true, parcel = DemoCards.parcel("Kind of Blue"),
+    )
 }

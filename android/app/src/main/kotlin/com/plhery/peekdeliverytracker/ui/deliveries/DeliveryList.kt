@@ -819,7 +819,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     val notice = if (!item.attention || arrived) {
         null
     } else {
-        remember(shown, localizer, language) { shown.notice(now())?.let { localizer.text(it.localizationKey) } }
+        remember(shown, localizer, language) { shown.notice(now())?.label(shown, localizer, now()) }
     }
     val place = state.cardPlace(parcel.id)
     val onName = state.names(parcel.id)
@@ -869,7 +869,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
         }
         else -> {
             val notice = if (item.kind != ParcelSectionKind.Attention) null else remember(parcel, localizer, language) {
-                parcel.notice(now())?.let { localizer.text(it.localizationKey) }
+                parcel.notice(now())?.label(parcel, localizer, now())
             }
             // An archived parcel found here isn't archived again by a swipe; its menu restores it.
             ArrivalCelebration(state, parcel.id) {

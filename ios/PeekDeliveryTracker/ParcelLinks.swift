@@ -85,6 +85,18 @@ enum ParcelLinkGift: Equatable, Sendable {
 
 extension PublicParcelResponse {
     var gift: ParcelLinkGift? { ParcelLinkGift(link: link, stage: Parcel(shared: package).currentStage) }
+
+    /// The parcel as the link shows it. A gift on its way tells its hidden beginning once, and nothing of the steps its
+    /// carrier planned or wrote ahead, nor the line in its history that says other sites show them.
+    var shownParcel: Parcel {
+        var parcel = Parcel(shared: package)
+        guard gift == .wrapped else { return parcel }
+        parcel.trackingEvents = parcel.trackingEvents.collapsingGiftRows()
+        parcel.plannedEvents = nil
+        parcel.writtenAheadBy = nil
+        parcel.writtenAheadEvents = nil
+        return parcel
+    }
 }
 
 extension TrackingEvent {

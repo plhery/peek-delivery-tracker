@@ -762,19 +762,32 @@ final class Localizer: ObservableObject {
         return dayAndTime(shortDate(date), clockTime(date))
     }
 
+    /// The journal's short date, with its year when it isn't `now`'s: "Mon 12 Oct", "Fri 8 Jan 2027".
+    func calendarDate(_ date: Date, now: Date = Date()) -> String {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        return shortDate(date) + (year == calendar.component(.year, from: now) ? "" : " \(year)")
+    }
+
     /// When the carrier planned a step: "today", "tomorrow", "yesterday" or the journal's short date, with its year
     /// when it isn't this one, then its clock time unless the carrier dated it by its day alone: "Fri 6 Nov, 07:54".
     func plannedDate(_ step: PlannedTrackingEvent, now: Date = Date()) -> String {
         guard let date = step.displayDate else { return "" }
         let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
         let day = switch calendar.dateComponents([.day], from: calendar.startOfDay(for: now), to: calendar.startOfDay(for: date)).day {
         case 0: text("time.today")
         case 1: text("time.tomorrow")
         case -1: text("time.yesterday")
-        default: shortDate(date) + (year == calendar.component(.year, from: now) ? "" : " \(year)")
+        default: calendarDate(date, now: now)
         }
         return step.calendarDay == nil ? dayAndTime(day, clockTime(date)) : day
+    }
+
+    /// What a step the carrier's site shows that no scan confirms was predicted for: "Predicted for Fri 6 Nov, 07:54".
+    /// Nothing for a step with no readable date.
+    func predictedDate(_ step: PlannedTrackingEvent, now: Date = Date()) -> String {
+        let when = plannedDate(step, now: now)
+        return when.isEmpty ? "" : text("timeline.predicted.when", ["when": when])
     }
 
     /// A moment as a notice gives it: its clock time today, else its day and time ("yesterday, 14:02").

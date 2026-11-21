@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -367,23 +368,24 @@ class PassNotesTest {
     }
 
     @Test
-    fun aCarrierWritingItsTimelineAheadIsSaidOnce() {
-        val lamp = DemoCards.parcel("Moon lamp")
-        val gzyl = identities.displayName(CarrierId.Gzyl, AppLanguage.En)
-        val line = "$gzyl’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller."
-        pass(lamp.copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl))
-        assertTrue(textExists(line))
+    fun aCarrierWritingItsTimelineAheadAddsNoLineToThePass() {
+        // The history's line says the rest are predictions; the pass, moving, says the same with or without them.
+        val lamp = DemoCards.parcel("Moon lamp").copy(carrier = CarrierId.Gzyl)
+        fun words(): List<String> =
+            compose.onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsProperties.Text), useUnmergedTree = true).fetchSemanticsNodes().flatMap(::texts)
+        pass(lamp)
+        val plain = words()
+        assertTrue(plain.isNotEmpty())
 
-        passParcel = lamp.copy(carrier = CarrierId.Gzyl)
+        passParcel = lamp.copy(writtenAheadBy = CarrierId.Gzyl)
         compose.waitForIdle()
-        assertFalse(textExists(line))
+        assertEquals(plain, words())
 
-        // Once the carrier names its steps in words, the timeline shows them greyed, and the line says so.
         val written = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z")
-        passParcel = lamp.copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(written))
+        passParcel = lamp.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(written))
         compose.waitForIdle()
-        assertFalse(textExists(line))
-        assertTrue(textExists(line.replace("so it leaves them out", "so it shows them greyed")))
+        assertEquals(plain, words())
+        assertFalse(textExists("predictions"))
     }
 
     @Test

@@ -54,7 +54,7 @@ object DemoCards {
 
     /** What the list's attention section says `parcel` needs. */
     fun notice(parcel: Parcel, language: AppLanguage = AppLanguage.En): String? =
-        parcel.notice(CAPTURED)?.let { Localizer(language, variant = "android").text(it.localizationKey) }
+        parcel.notice(CAPTURED)?.label(parcel, Localizer(language, variant = "android"), CAPTURED)
 
     /** Birthday gift handed over by its carrier to Swiss Post, which delivers it: its pass carries both marks. */
     fun handover(): Parcel {

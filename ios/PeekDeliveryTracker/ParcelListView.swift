@@ -1415,7 +1415,7 @@ private struct DeliveryListView: View {
                         ExperimentalParcelPassCard(
                             parcel: parcel,
                             notice: section.kind == .attention && !frozen
-                                ? parcel.notice().map { localizer.text($0.localizationKey) }
+                                ? parcel.notice().map { $0.text(for: parcel, localizer) }
                                 : nil,
                             transition: parcelTransition,
                             frozen: frozen,
@@ -1449,7 +1449,8 @@ private struct DeliveryListView: View {
     /// A parcel on its way. A flagged one says what it needs now, which is nothing once it has arrived.
     private func card(_ parcel: Parcel, flagged: Bool, leaving: Set<UUID>) -> some View {
         let arrived = delivered.holds(parcel.id)
-        let notice = flagged && !arrived ? shown(parcel).notice().map { localizer.text($0.localizationKey) } : nil
+        let current = shown(parcel)
+        let notice = flagged && !arrived ? current.notice().map { $0.text(for: current, localizer) } : nil
         return ExperimentalParcelPassCard(
             parcel: shown(parcel), notice: notice, transition: parcelTransition,
             arrived: arrived, frozen: store.isFrozen(parcel), onName: { places.name(parcel.id, at: $0) },

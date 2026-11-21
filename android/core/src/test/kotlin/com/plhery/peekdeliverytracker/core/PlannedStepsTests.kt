@@ -191,17 +191,18 @@ class PlannedStepsTests {
         // The stage speaks for a step without words, and a carrier's wording reads as a scan's.
         assertEquals(localizer.text("stage.out_for_delivery"), localizer.plannedWording(steps[1]))
         assertEquals(localizer.eventDescription("Delivered"), localizer.plannedWording(steps[2]))
+        // No "not confirmed" before the words: the line the steps are folded behind says they're only predictions.
         assertEquals(
-            "Planned, not confirmed: ${localizer.text("stage.out_for_delivery")}, tomorrow, 07:54, Zürich, Switzerland",
-            localizer.plannedStepLabel(steps[1], now),
+            "${localizer.text("stage.out_for_delivery")}, Predicted for tomorrow, 07:54, Zürich, Switzerland",
+            localizer.predictedStepLabel(steps[1], now),
         )
-        assertEquals("Planned, not confirmed: ${localizer.eventDescription("Delivered")}", localizer.plannedStepLabel(steps[2], now))
+        assertEquals(localizer.eventDescription("Delivered"), localizer.predictedStepLabel(steps[2], now))
         // A town written in another script is named by the place the server found for it, as a scan's.
         val guangzhou = EventPlace(latitude = 23.13, longitude = 113.26, precision = EventPlacePrecision.City, country = "CN", name = "Guangzhou")
         val placed = steps[1].copy(location = "广州市", place = guangzhou)
         assertEquals(
-            "Planned, not confirmed: ${localizer.text("stage.out_for_delivery")}, tomorrow, 07:54, Guangzhou, China",
-            localizer.plannedStepLabel(placed, now),
+            "${localizer.text("stage.out_for_delivery")}, Predicted for tomorrow, 07:54, Guangzhou, China",
+            localizer.predictedStepLabel(placed, now),
         )
     }
 
@@ -230,61 +231,34 @@ class PlannedStepsTests {
         assertEquals(written, linked.writtenAheadEvents)
         assertNull(linked.plannedEvents)
         assertTrue(linked.trackingEvents.isEmpty())
-        assertEquals("parcel.writtenAheadShown", linked.writtenAheadNoteKey)
     }
 
     @Test
-    fun theWrittenAheadNoteSaysTheCarriersStepsShowGreyedOnceItNamesThem() {
+    fun aDeliveryTheCarrierWroteInAdvanceIsNoScan() {
         val step = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-08-09T07:00:00Z")
-        val parcel = makeParcel().copy(carrier = CarrierId.Gzyl)
-        assertNull(parcel.writtenAheadNoteKey)
-        assertEquals("parcel.writtenAhead", parcel.copy(writtenAheadBy = CarrierId.Gzyl).writtenAheadNoteKey)
         // A "Delivered" the carrier wrote in advance, before any real scan, is no scan: the parcel is not delivered.
-        val written = parcel.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(step))
-        assertEquals("parcel.writtenAheadShown", written.writtenAheadNoteKey)
+        val written = makeParcel().copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(step))
         assertNull(written.currentEvent)
         assertFalse(written.currentStage == TrackingStage.Delivered)
         assertFalse(written.scheduledDelivery)
-        val planned = parcel.copy(writtenAheadBy = CarrierId.Gzyl, plannedEvents = listOf(step.copy(occurredAt = "2026-08-20T07:00:00Z")))
-        assertEquals("parcel.writtenAheadShown", planned.writtenAheadNoteKey)
     }
 
-    // As src/components/TrackingJournal.test.tsx: the line under a written delivery nothing confirms.
+    // As src/components/TrackingJournal.test.tsx: each step says the day it was predicted for, gone by or ahead.
     @Test
-    fun aWrittenDeliveryWhoseTimeHasPassedIsUnconfirmedWhileTheScansTellNothingPastTheLabel() {
-        val id = UUID.randomUUID()
-        val now = DateParser.date("2026-08-20T00:00:00Z")!!
-        val departed = PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-08-08T01:00:00Z")
-        val delivered = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-08-15T07:00:00Z")
-        val labelled = makeParcel(id = id, events = listOf(event(id, TrackingStage.Pending, "2026-08-01T10:00:00Z"), event(id, TrackingStage.Registered, "2026-08-02T10:00:00Z")))
-            .copy(carrier = CarrierId.Gzyl, writtenAheadEvents = listOf(departed, delivered))
-        // Not without the carrier named as writing ahead.
-        assertNull(labelled.unconfirmedWrittenDelivery(now))
-        val parcel = labelled.copy(writtenAheadBy = CarrierId.Gzyl)
-        assertEquals(delivered, parcel.unconfirmedWrittenDelivery(now))
-        // The newest of two written deliveries.
-        val later = delivered.copy(occurredAt = "2026-08-16T07:00:00Z")
-        assertEquals(later, parcel.copy(writtenAheadEvents = listOf(later, delivered)).unconfirmedWrittenDelivery(now))
-
-        // A scan past the label.
-        assertNull(parcel.copy(trackingEvents = parcel.trackingEvents + event(id, TrackingStage.InTransit, "2026-08-03T10:00:00Z")).unconfirmedWrittenDelivery(now))
-        // A delivery whose time is still ahead, a day-only one through its day.
-        assertNull(parcel.copy(writtenAheadEvents = listOf(delivered.copy(occurredAt = "2026-08-21T07:00:00Z"))).unconfirmedWrittenDelivery(now))
-        assertNull(parcel.copy(writtenAheadEvents = listOf(delivered.copy(occurredAt = "2026-08-19T16:00:00Z", day = "2026-08-20"))).unconfirmedWrittenDelivery(now))
-        // No written delivery.
-        assertNull(parcel.copy(writtenAheadEvents = listOf(departed)).unconfirmedWrittenDelivery(now))
-    }
-
-    @Test
-    fun aStepWrittenInAdvanceIsReadAsSuch() {
+    fun aPredictedStepSaysTheDayItWasPredictedFor() {
         val zone = ZoneId.systemDefault()
         val now = ZonedDateTime.of(2026, 11, 4, 12, 0, 0, 0, zone).toInstant()
-        val yesterday = DateParser.isoString(ZonedDateTime.of(2026, 11, 3, 7, 54, 0, 0, zone).toInstant())
-        val step = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = yesterday)
+        fun at(month: Int, day: Int, year: Int = 2026) = DateParser.isoString(ZonedDateTime.of(year, month, day, 7, 54, 0, 0, zone).toInstant())
+        fun step(occurredAt: String, day: String? = null) =
+            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = occurredAt, day = day)
         val localizer = Localizer(AppLanguage.En)
+        assertEquals("Predicted for yesterday, 07:54", localizer.predictedDate(step(at(11, 3)), now))
+        assertEquals("Predicted for Mon 16 Nov, 07:54", localizer.predictedDate(step(at(11, 16)), now))
+        assertEquals("Predicted for Sun 8 Sep 2024", localizer.predictedDate(step(at(9, 7, year = 2024), day = "2024-09-08"), now))
+        assertEquals("", localizer.predictedDate(step("not a date"), now))
         assertEquals(
-            "Written in advance, not confirmed: ${localizer.eventDescription("Delivered")}, yesterday, 07:54",
-            localizer.plannedStepLabel(step, now, "timeline.writtenAhead.step"),
+            "${localizer.eventDescription("Delivered")}, Predicted for yesterday, 07:54",
+            localizer.predictedStepLabel(step(at(11, 3)), now),
         )
     }
 }

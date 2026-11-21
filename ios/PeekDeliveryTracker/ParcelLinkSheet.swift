@@ -104,13 +104,7 @@ struct ParcelLinkSheet: View {
     private func shared(_ response: PublicParcelResponse) -> some View {
         let gift = response.gift
         let wrapped = gift == .wrapped
-        var parcel = Parcel(shared: response.package)
-        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned or wrote ahead.
-        if wrapped {
-            parcel.trackingEvents = parcel.trackingEvents.collapsingGiftRows()
-            parcel.plannedEvents = nil
-            parcel.writtenAheadEvents = nil
-        }
+        let parcel = response.shownParcel
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let tint = wrapped || gift == .opened ? ExperimentalPalette.lilac : identity.ink
         return ScrollView {
@@ -542,7 +536,8 @@ private struct SharedParcelCard: View {
                         .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they
-                    // hand it over; unless the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
+                    // hand it over; unless the carrier wrote the rest of its timeline ahead, whose line in the history says the
+                    // rest are predictions.
                     if !gift, parcel.awaitingHandover(), parcel.writtenAheadBy == nil {
                         Text(localizer.text("parcel.awaitingHandover",
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
@@ -558,12 +553,6 @@ private struct SharedParcelCard: View {
                     if !gift, parcel.heldReturn {
                         Text(localizer.text("parcel.returnUnderWay",
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
-                            .font(.caption).foregroundStyle(Brand.secondaryText)
-                    }
-                    // A carrier that writes the whole timeline in advance: its page lists steps Peek can't confirm, greyed here.
-                    if !gift, let ahead = parcel.writtenAheadBy, let note = parcel.writtenAheadNoteKey {
-                        Text(localizer.text(note,
-                                            ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
                     // The carrier's own site is down for every parcel; its page for the number, when the link shows it.

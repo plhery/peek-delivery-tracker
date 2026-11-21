@@ -2028,21 +2028,25 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(moving.scheduledDelivery)
     }
 
-    func testTheWrittenAheadNoteSaysTheCarriersStepsShowGreyedOnceItNamesThem() {
+    // As src/components/TrackingJournal.test.tsx: a carrier that writes its route ahead gets the line even with no step to list.
+    func testACarrierThatWritesItsRouteAheadGetsThePredictionsLineAloneUntilItNamesAStep() {
+        let now = DateParser.date("2026-08-20T00:00:00Z")!
         var parcel = makeParcel()
         parcel.carrier = .gzyl
-        XCTAssertNil(parcel.writtenAheadNoteKey)
+        XCTAssertNil(parcel.predictedLine(now: now))
         parcel.writtenAheadBy = .gzyl
-        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAhead")
+        XCTAssertEqual(parcel.predictedLine(now: now), .note)
         // A "Delivered" the carrier wrote in advance, before any real scan, is no scan: the parcel is not delivered.
-        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-09T07:00:00Z")]
-        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+        let delivered = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-09T07:00:00Z")
+        parcel.writtenAheadEvents = [delivered]
+        XCTAssertEqual(parcel.predictedLine(now: now), .steps([delivered]))
         XCTAssertNil(parcel.currentEvent)
         XCTAssertNotEqual(parcel.currentStage, .delivered)
         XCTAssertFalse(parcel.scheduledDelivery)
+        // A planned step whose time has passed is no longer listed, and the line stands alone again.
         parcel.writtenAheadEvents = nil
-        parcel.plannedEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-20T07:00:00Z")]
-        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+        parcel.plannedEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-19T07:00:00Z")]
+        XCTAssertEqual(parcel.predictedLine(now: now), .note)
     }
 
     // As src/components/CarrierOutage.test.tsx: the carrier's site down, as the API serves it, until the parcel ends.
@@ -2069,36 +2073,79 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertTrue(parcel.updateFailed)
     }
 
-    // As src/components/TrackingJournal.test.tsx: the line under a written delivery nothing confirms.
-    func testAWrittenDeliveryWhoseTimeHasPassedIsUnconfirmedWhileTheScansTellNothingPastTheLabel() {
+    // As src/components/TrackingJournal.test.tsx: the steps planned and those written ahead are one list behind the line.
+    @MainActor func testThePredictionsLineListsThePlannedAndWrittenStepsTogetherNewestFirst() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let calendar = Calendar.current
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 11, day: 12, hour: 12)))
+        func at(month: Int, day: Int, hour: Int) throws -> String {
+            DateParser.isoString(try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: month, day: day, hour: hour))))
+        }
         let id = UUID()
-        let now = DateParser.date("2026-08-20T00:00:00Z")!
-        let departed = PlannedTrackingEvent(description: "Departed the origin facility", stage: .inTransit, occurredAt: "2026-08-08T01:00:00Z")
-        let delivered = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-15T07:00:00Z")
-        var parcel = makeParcel(id: id, events: [event(id, .pending, "2026-08-01T10:00:00Z"), event(id, .registered, "2026-08-02T10:00:00Z")])
+        let ahead = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: try at(month: 11, day: 16, hour: 9))
+        let gone = PlannedTrackingEvent(description: "Out for delivery", stage: .outForDelivery, occurredAt: try at(month: 11, day: 11, hour: 8))
+        let departed = PlannedTrackingEvent(description: "Departed the origin facility", stage: .inTransit,
+                                            location: "Guangzhou, China", occurredAt: try at(month: 11, day: 2, hour: 1))
+        let arrived = PlannedTrackingEvent(description: "Arrived at the destination hub", stage: .inTransit,
+                                           occurredAt: try at(month: 11, day: 9, hour: 6), day: "2026-11-09")
+        var parcel = makeParcel(id: id, events: [event(id, .registered, "2026-11-01T10:00:00Z")])
         parcel.carrier = .gzyl
-        parcel.writtenAheadEvents = [departed, delivered]
-        // Not without the carrier named as writing ahead.
-        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
-        parcel.writtenAheadBy = .gzyl
-        XCTAssertEqual(parcel.unconfirmedWrittenDelivery(now: now), delivered)
-        // The newest of two written deliveries.
-        let later = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-16T07:00:00Z")
-        parcel.writtenAheadEvents = [later, delivered]
-        XCTAssertEqual(parcel.unconfirmedWrittenDelivery(now: now), later)
+        parcel.plannedEvents = [gone, ahead]
+        // The written steps count without the carrier named beside them.
+        parcel.writtenAheadEvents = [departed, arrived]
+        XCTAssertEqual(parcel.predictedLine(now: now), .steps([ahead, arrived, departed]))
+        XCTAssertEqual(localizer.predictedDate(ahead, now: now), "Predicted for Mon 16 Nov, 09:00")
+        XCTAssertEqual(localizer.predictedDate(arrived, now: now), "Predicted for Mon 9 Nov")
+        XCTAssertEqual(localizer.predictedDate(gone, now: now), "Predicted for yesterday, 08:00")
+        XCTAssertEqual(localizer.predictedDate(PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "soon"), now: now), "")
+        // They are no scans: they count as no update and move the parcel nowhere.
+        XCTAssertEqual(parcel.journalEntries.count, 1)
+        XCTAssertEqual(parcel.currentStage, .registered)
+        XCTAssertEqual(localizer.text("timeline.predicted.note"), "Other sites may show more steps, but they’re only predictions.")
+        XCTAssertEqual(localizer.text("timeline.predicted.show"), "Show them")
+        XCTAssertEqual(localizer.text("timeline.predicted.hide"), "Hide them")
+    }
 
-        // A scan past the label.
-        var moving = parcel
-        moving.trackingEvents.append(event(id, .inTransit, "2026-08-03T10:00:00Z"))
-        XCTAssertNil(moving.unconfirmedWrittenDelivery(now: now))
-        // A delivery whose time is still ahead, a day-only one through its day.
-        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-21T07:00:00Z")]
-        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
-        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-19T16:00:00Z", day: "2026-08-20")]
-        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
-        // No written delivery.
-        parcel.writtenAheadEvents = [departed]
-        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
+    // As src/peek/ParcelPage.test.tsx: a flag that went quiet names the day of its current scan.
+    @MainActor func testTheStaleFlagNamesTheDayOfTheCurrentScan() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let now = DateParser.date("2026-11-21T12:00:00Z")!
+        let id = UUID()
+        let parcel = makeParcel(id: id, events: [event(id, .accepted, "2026-10-09T12:00:00Z"), event(id, .inTransit, "2026-10-12T12:00:00Z")])
+        XCTAssertEqual(parcel.notice(now: now), .stalled)
+        XCTAssertEqual(ParcelAttention.stalled.text(for: parcel, localizer, now: now), "No tracking update since Mon 12 Oct")
+        // Its year when it isn't this one.
+        let lastYear = makeParcel(id: id, events: [event(id, .inTransit, "2025-12-29T12:00:00Z")])
+        XCTAssertEqual(ParcelAttention.stalled.text(for: lastYear, localizer, now: now), "No tracking update since Mon 29 Dec 2025")
+        localizer.language = .fr
+        XCTAssertEqual(ParcelAttention.stalled.text(for: parcel, localizer, now: now), "Aucune mise à jour depuis lun 12 oct")
+        // Other flags keep their words; so does a quiet one with no scan to date it.
+        localizer.language = .en
+        XCTAssertEqual(ParcelAttention.customs.text(for: parcel, localizer, now: now), localizer.text("attention.customs"))
+        XCTAssertEqual(ParcelAttention.stalled.text(for: makeParcel(), localizer, now: now), localizer.text("attention.stalled"))
+    }
+
+    // As src/peek/ParcelPage.test.tsx: after three weeks without a scan, the quiet note says to ask the seller.
+    @MainActor func testTheQuietNoteSaysToAskTheSellerOnceThreeWeeksPass() {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let id = UUID()
+        let parcel = makeParcel(id: id, events: [event(id, .inTransit, "2026-10-31T12:00:00Z")])
+        let scanned = DateParser.date("2026-10-31T12:00:00Z")!
+        XCTAssertEqual(parcel.quietNoteKey(now: scanned.addingTimeInterval(21 * 86_400 - 60)), "link.quiet")
+        XCTAssertEqual(parcel.quietNoteKey(now: scanned.addingTimeInterval(21 * 86_400)), "link.quietLong")
+        XCTAssertEqual(parcel.quietNoteKey(now: scanned.addingTimeInterval(40 * 86_400)), "link.quietLong")
+        XCTAssertEqual(localizer.text(parcel.quietNoteKey(now: scanned.addingTimeInterval(30 * 86_400)), ["carrier": "DHL"]),
+                       "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DHL.")
+        XCTAssertEqual(makeParcel().quietNoteKey(now: scanned), "link.quiet")
     }
 
     // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.
@@ -5970,38 +6017,48 @@ extension ParcelLogicTests {
         XCTAssertNil(parcel.plannedEvents)
         XCTAssertTrue(parcel.trackingEvents.isEmpty)
         XCTAssertNotEqual(parcel.currentStage, .delivered)
-        XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
+        XCTAssertEqual(parcel.predictedLine(now: now), .steps(written))
     }
 
-    /// The journal of the demo's vinyl, with the steps its carrier planned over the scans, at regular type in light and
-    /// at large type in dark, each picture kept with the test's results.
-    @MainActor func testTheJournalDrawsThePlannedStepsOverTheScans() async throws {
-        try await draw(.en, named: "journal-planned", in: [CGSize(width: 390, height: 1000)]) { store in
+    /// The journal of the demo's vinyl, its planned steps folded behind the line that says they're only predictions, at
+    /// regular type in light and at large type in dark, each picture kept with the test's results.
+    @MainActor func testTheJournalFoldsThePlannedStepsBehindOneLine() async throws {
+        try await draw(.en, named: "journal-predicted", in: [CGSize(width: 390, height: 1000)]) { store in
             let vinyl = try XCTUnwrap(store.parcels.first { $0.label == Self.vinyl })
             ScrollView { ParcelJournal(parcel: vinyl, tint: .orange).padding(16) }
         }
     }
 
-    /// The same journal once its carrier's pre-written steps have passed: greyed under "Written in advance by", a
-    /// delivery among them, over the scans.
-    @MainActor func testTheJournalDrawsTheStepsWrittenInAdvanceOverTheScans() async throws {
-        try await draw(.en, named: "journal-written", in: [CGSize(width: 390, height: 1000)]) { store in
-            let vinyl = try XCTUnwrap(store.parcels.first { $0.label == Self.vinyl })
-            let written: [PlannedTrackingEvent] = (vinyl.plannedEvents ?? []).enumerated().map { index, step in
-                var past = step
-                past.occurredAt = DateParser.isoString(Date().addingTimeInterval(-3_600 * Double(10 - index)))
-                past.day = nil
-                return past
-            }
-            let scripted: Parcel = {
-                var parcel = vinyl
-                parcel.plannedEvents = nil
-                parcel.writtenAheadBy = .gzyl
-                parcel.writtenAheadEvents = written
-                return parcel
-            }()
-            ScrollView { ParcelJournal(parcel: scripted, tint: .orange).padding(16) }
+    /// The line starts closed: a journal with steps behind it stands about as tall as one with the line alone, which
+    /// stands taller than one with no line at all.
+    @MainActor func testThePredictionsLineStartsClosed() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let id = UUID()
+        let now = Date()
+        let iso = { (hours: Double) in DateParser.isoString(now.addingTimeInterval(hours * 3_600)) }
+        let scan = TrackingEvent(id: UUID(), packageID: id, stage: .accepted, description: "Picked up", location: "Shenzhen, China",
+                                 occurredAt: iso(-200))
+        func height(_ parcel: Parcel) -> CGFloat {
+            let host = UIHostingController(rootView: ParcelJournal(parcel: parcel, tint: .orange).environmentObject(localizer))
+            return host.sizeThatFits(in: CGSize(width: 390, height: CGFloat.greatestFiniteMagnitude)).height
         }
+        let plain = makeParcel(id: id, events: [scan])
+        var alone = plain
+        alone.writtenAheadBy = .gzyl
+        var folded = alone
+        folded.plannedEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: iso(50))]
+        folded.writtenAheadEvents = [
+            PlannedTrackingEvent(description: "Departed the origin facility", stage: .inTransit, location: "Guangzhou, China", occurredAt: iso(-150)),
+            PlannedTrackingEvent(description: "Customs cleared", stage: .customs, occurredAt: iso(-30)),
+        ]
+        XCTAssertEqual(alone.predictedLine(now: now), .note)
+        XCTAssertNotNil(folded.predictedLine(now: now))
+        XCTAssertGreaterThan(height(alone), height(plain) + 20, "the line shows")
+        // The words to open them may take a line of their own; one step shown would take more than that.
+        XCTAssertLessThan(height(folded), height(alone) + 40, "its steps stay folded")
     }
 }
 

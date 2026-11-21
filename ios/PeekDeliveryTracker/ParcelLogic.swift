@@ -481,23 +481,28 @@ extension Parcel {
             && (deliveringCarrier == nil || deliveryOnlyAnnounced)
     }
 
-    /// The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page
-    /// lists steps Peek can't confirm, which the timeline shows greyed once the carrier names them in words
-    /// (`writtenAheadEvents`, or still ahead `plannedEvents`), and leaves out until then. None for another carrier.
-    var writtenAheadNoteKey: String? {
-        guard writtenAheadBy != nil else { return nil }
-        let shown = !(writtenAheadEvents ?? []).isEmpty || !(plannedEvents ?? []).isEmpty
-        return shown ? "parcel.writtenAheadShown" : "parcel.writtenAhead"
+    /// What the history opens with when the carrier's site shows steps no scan confirms: those it planned whose time is
+    /// still ahead (`plannedEvents`), and those it wrote in advance whose time has passed (`writtenAheadEvents`), newest
+    /// first behind one line that says they're only predictions. A carrier that writes its route ahead (`writtenAheadBy`)
+    /// gets the line even with no step to list; another carrier with none, nothing.
+    func predictedLine(now: Date = Date()) -> PredictedLine? {
+        let planned = (plannedEvents ?? []).filter { $0.isAhead(of: now) }
+        let steps = (planned + (writtenAheadEvents ?? [])).enumerated().sorted { a, b in
+            let (first, second) = (a.element.displayDate ?? .distantPast, b.element.displayDate ?? .distantPast)
+            return first != second ? first > second : a.offset < b.offset
+        }.map(\.element)
+        if !steps.isEmpty { return .steps(steps) }
+        return writtenAheadBy == nil ? nil : .note
     }
 
-    /// The delivery the carrier writing the timeline in advance wrote (`writtenAheadEvents`) whose time has passed while
-    /// its own scans tell nothing past the label, Peek's "added" row aside: nothing confirms it, and readers take it for
-    /// real. The journal says so under it, and whom to ask if nothing came. The newest such step, or nil.
-    func unconfirmedWrittenDelivery(now: Date = Date()) -> PlannedTrackingEvent? {
-        guard writtenAheadBy != nil, trackingEvents.allSatisfy({ $0.stage == .pending || $0.stage == .registered }) else { return nil }
-        return (writtenAheadEvents ?? [])
-            .filter { step in step.stage == .delivered && step.aheadUntil.map { $0 <= now } == true }
-            .max { (DateParser.date($0.occurredAt) ?? .distantPast) < (DateParser.date($1.occurredAt) ?? .distantPast) }
+    /// A parcel this long without a scan may be lost: its quiet note says to ask the seller.
+    static let longQuiet: TimeInterval = 21 * 86_400
+
+    /// The words of the note for a parcel that went quiet: why parcels go quiet, or, three weeks on, to ask the seller
+    /// if it hasn't arrived.
+    func quietNoteKey(now: Date = Date()) -> String {
+        let latest = currentEvent.flatMap { DateParser.date($0.occurredAt) }
+        return latest.map { now.timeIntervalSince($0) >= Self.longQuiet } == true ? "link.quietLong" : "link.quiet"
     }
 
     /// Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way
@@ -676,6 +681,21 @@ enum ParcelAttention: String, Sendable {
     }
 
     var localizationKey: String { "attention.\(rawValue)" }
+
+    /// What a card's flag says of `parcel`. One that went quiet names the day of its current scan ("No tracking update
+    /// since Mon 12 Oct"), so a parcel silent for a month doesn't read as four days.
+    @MainActor func text(for parcel: Parcel, _ localizer: Localizer, now: Date = Date()) -> String {
+        guard self == .stalled, let latest = parcel.currentEvent?.displayDate else { return localizer.text(localizationKey) }
+        return localizer.text("attention.stalledSince", ["date": localizer.calendarDate(latest, now: now)])
+    }
+}
+
+/// The line that opens a parcel's history when its carrier's site shows steps that are no scans.
+enum PredictedLine: Equatable {
+    /// The line, with these steps behind it, newest first.
+    case steps([PlannedTrackingEvent])
+    /// The line alone: the carrier writes its route ahead but names no step in words.
+    case note
 }
 
 enum ParcelStatusFilter: String, CaseIterable, Identifiable {

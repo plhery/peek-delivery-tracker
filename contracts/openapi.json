@@ -4432,7 +4432,9 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "zto"
+        "adapter": "zto",
+        "browserRecognitionRank": 800,
+        "browserRecognitionPattern": "^73\\d{12}$"
       },
       "linkRules": [],
       "detectionRules": [
@@ -54944,7 +54946,12 @@
         "adapter": "yusuda"
       },
       "linkRules": [],
-      "detectionRules": []
+      "detectionRules": [
+        {
+          "pattern": "^SYD\\d{10}YQ$",
+          "confidence": "high"
+        }
+      ]
     },
     "memphis-courier": {
       "displayName": "Memphis Courier",
@@ -65578,6 +65585,145 @@
       "detectionRules": [],
       "trackingSearchUrl": "https://www.vascomaritime.com/track",
       "helpUrl": "https://www.vascomaritime.com/"
+    },
+    "apm-logistics": {
+      "displayName": "APM Logistics",
+      "aliases": [
+        "PT APM Logistics"
+      ],
+      "countries": [
+        "ID"
+      ],
+      "color": "#132f5e",
+      "selectable": true,
+      "timezone": "Asia/Jakarta",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "apm-logistics"
+      },
+      "trackingUrlTemplate": "https://apmlogistics.id/cek-resi?resi={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "apmlogistics.id"
+          ],
+          "pathPattern": "^/cek-resi/?$",
+          "params": [
+            "resi"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://apmlogistics.id/cek-resi"
+    },
+    "biman-bangladesh": {
+      "displayName": "Biman Bangladesh Airlines",
+      "aliases": [
+        "Biman",
+        "Biman Cargo",
+        "Biman Bangladesh Cargo"
+      ],
+      "countries": [
+        "BD"
+      ],
+      "color": "#E31E24",
+      "selectable": true,
+      "timezone": "Asia/Dhaka",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "biman-bangladesh"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.freight.aero/tracking.asp"
+    },
+    "gintracom": {
+      "displayName": "Gintracom",
+      "countries": [
+        "EC"
+      ],
+      "color": "#E53025",
+      "selectable": true,
+      "timezone": "America/Guayaquil",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "gintracom"
+      },
+      "trackingUrlTemplate": "https://ec.gintracom.site/tracking?guia={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ec.gintracom.site"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "guia"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ec.gintracom.site/tracking"
+    },
+    "hapag-lloyd": {
+      "displayName": "Hapag-Lloyd",
+      "aliases": [
+        "Hapag Lloyd",
+        "HLAG"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#FF6600",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hapag-lloyd"
+      },
+      "trackingUrlTemplate": "https://www.hapag-lloyd.com/solutions/tracking/#/{trackingNumber}",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hapag-lloyd.com/solutions/tracking/"
+    },
+    "transglobal-express": {
+      "displayName": "Transglobal Express",
+      "aliases": [
+        "Transglobal"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#02548F",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "transglobal-express"
+      },
+      "trackingUrlTemplate": "https://www.transglobalexpress.co.uk/track-shipment/",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.transglobalexpress.co.uk/track-shipment/"
+    },
+    "turkon-line": {
+      "displayName": "Turkon Line",
+      "aliases": [
+        "Turkon"
+      ],
+      "countries": [
+        "TR"
+      ],
+      "color": "#264493",
+      "selectable": true,
+      "timezone": "Europe/Istanbul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "turkon-line"
+      },
+      "trackingUrlTemplate": "https://myturkonline.turkon.com/tracking",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://myturkonline.turkon.com/tracking"
     }
   },
   "servers": [
@@ -71347,7 +71493,13 @@
           "sarjak-container-lines",
           "topparcel",
           "usend-chile",
-          "vasco-maritime"
+          "vasco-maritime",
+          "apm-logistics",
+          "biman-bangladesh",
+          "gintracom",
+          "hapag-lloyd",
+          "transglobal-express",
+          "turkon-line"
         ]
       },
       "Stage": {

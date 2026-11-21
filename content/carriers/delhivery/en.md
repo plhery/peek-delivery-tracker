@@ -25,12 +25,15 @@ Delhivery's tracking has a progress bar of steps, and the scans so far with thei
 
 | Delhivery says | What it means for you |
 | --- | --- |
+| `WAITING_PICKUP` | Booked but not collected yet (shown as `Waiting pickup` while there is no scan). |
 | `Picked Up` | Delhivery has collected the shipment from the sender. |
+| `PROD_REPLACED` | On a replacement order, the courier has picked up the item being replaced. |
 | `In Transit`, `IN_TRANSIT`, `On the Way` | On its way through Delhivery's network. `IN_TRANSIT` is the same status written as a code. |
 | `Dispatched` | The scan that sends it out for delivery: it should reach you soon. |
 | `Out for Delivery` | Out for delivery, as Delhivery names the step on its progress bar. |
 | `Undelivered` | Not delivered, and going back to the seller. On a freight shipment, Delhivery gives this name to the "On the Way" step and keeps that step's date, so the date isn't that of a delivery attempt. |
 | `Delivered` | Delivered. On a parcel going back, it means delivered back to the seller. |
+| `REACHED_SEL_CITY` | A parcel going back has reached the seller's city. |
 | `RTO` | Returned to origin: the parcel went back and has reached the seller. |
 | `DELIVERED_SELLER` | A return has reached the seller. |
 | `DTO` | A customer return, a parcel you sent back, has reached the seller. |
@@ -55,7 +58,7 @@ Delhivery's tracking has a progress bar of steps, and the scans so far with thei
 
 **Who delivers.** Delhivery names FedEx and Aramex among its strategic partners abroad, without saying which one carries your parcel. Peek follows the AWB on Delhivery's tracking. If the shop gives you another carrier's number for the last leg, paste that one too.
 
-**Customs.** Delhivery promises shops full visibility on duties and taxes, but doesn't say there who pays them: ask the shop whether your price included them. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere your own country's rules apply: see [parcels held at customs](guide:customs).
+**Customs.** Delhivery promises shops full visibility on duties and taxes, but doesn't say there who pays them: ask the shop whether your price included them. In Ireland and the rest of the EU's customs territory (which leaves out places such as Heligoland, Büsingen, Livigno, Ceuta and Melilla), goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere your own country's rules apply: see [parcels held at customs](guide:customs).
 
 ## Delhivery tracking not updating, lost or returned
 
@@ -71,7 +74,7 @@ For a refund or a new parcel, the shop is your contact: it booked Delhivery.
 
 ## Delhivery customer care and fraud warnings
 
-Peek can't contact Delhivery or the shop for you. As read on 31 October 2026:
+Peek can't contact Delhivery or the shop for you. What Delhivery says:
 
 - **Support:** Delhivery says its customer support is reachable only through its website or app. Log in on its [support page](https://www.delhivery.com/support) with your mobile number and a one-time code (OTP), then raise a query; or raise it in the Delhivery app.
 - **Complaints:** the support page's shipment topics include "Report Issues", "Grievance Officer" and "Report on-field staff issues", next to "Destination and Contact details" and "Returns".

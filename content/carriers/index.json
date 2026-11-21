@@ -183,7 +183,7 @@
   { "id": "jd-logistics", "catalog": "jd-logistics", "name": "JD Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "singapore-post", "catalog": "singapore-post", "name": "Singapore Post", "languages": ["en"] },
   { "id": "zto", "catalog": "zto", "name": "ZTO Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en"] },
+  { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "japan-post", "catalog": "japan-post", "name": "Japan Post", "languages": ["en"] },
   { "id": "russian-post", "catalog": "russian-post", "name": "Russian Post", "languages": ["en", "ru"] },
   { "id": "huahan", "catalog": "huahan", "name": "HuaHan Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

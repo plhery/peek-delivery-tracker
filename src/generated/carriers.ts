@@ -2628,6 +2628,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0279ff"
     },
     {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "cne-express-sendungsverfolgung",
+      "title": "CNE Express Sendungsverfolgung: 3A5V-Nummern & Status",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-logistics-sendungsverfolgung",
@@ -3414,6 +3422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0279ff"
     },
     {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "suivi-cne-express",
+      "title": "Suivi CNE Express\u00a0: numéros 3A5V, statuts et livraison",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "suivi-colis-huahan-logistics",
@@ -4102,6 +4118,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento ZTO Express: numeri 中通快递, stati e contatti",
       "name": "ZTO Express",
       "color": "#0279ff"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "tracciamento-cne-express",
+      "title": "Tracciamento CNE Express: numeri 3A5V, stati e consegna",
+      "name": "CNE Express",
+      "color": "#e83828"
     },
     {
       "id": "huahan",
@@ -4794,6 +4818,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0279ff"
     },
     {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "seguimiento-cne-express",
+      "title": "Seguimiento CNE Express: números 3A5V, estados y entrega",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "seguimiento-huahan-logistics",
@@ -5442,6 +5474,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento ZTO Express: números 中通快递, estados e apoio",
       "name": "ZTO Express",
       "color": "#0279ff"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "seguimento-cne-express",
+      "title": "Seguimento CNE Express: números 3A5V, estados e entrega",
+      "name": "CNE Express",
+      "color": "#e83828"
     },
     {
       "id": "huahan",
@@ -6150,6 +6190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie ZTO Express: numery 中通快递, statusy i kontakt",
       "name": "ZTO Express",
       "color": "#0279ff"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "sledzenie-cne-express",
+      "title": "Śledzenie CNE Express: numery 3A5V, statusy i doręczenie",
+      "name": "CNE Express",
+      "color": "#e83828"
     },
     {
       "id": "huahan",

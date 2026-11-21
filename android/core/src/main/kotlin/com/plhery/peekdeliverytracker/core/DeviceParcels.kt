@@ -1160,6 +1160,12 @@ class DeviceParcels(
     fun isArchived(linkId: String): Boolean = entries.firstOrNull { it.linkId.equalsCanonically(linkId) }?.archivedAt != null
 
     /**
+     * Whether the parcel behind this link had its notifications turned off here with its bell, for the account that takes
+     * it over.
+     */
+    fun isMuted(linkId: String): Boolean = entries.firstOrNull { it.linkId.equalsCanonically(linkId) }?.isMuted == true
+
+    /**
      * What an account needs to take the device's parcels over: its own with their keys, those whose saved copy was lost
      * included, and someone else's that the link lets an account keep. Never a link still to be forgotten.
      */

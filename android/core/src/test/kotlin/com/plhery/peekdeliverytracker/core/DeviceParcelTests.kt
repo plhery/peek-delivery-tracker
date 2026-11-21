@@ -1706,6 +1706,8 @@ class DeviceParcelTests {
         account: AccountRoom,
         scope: CoroutineScope,
         pendingForgets: Map<String, String> = emptyMap(),
+        archived: Set<String> = emptySet(),
+        muted: Set<String> = emptySet(),
     ): SigningIn {
         val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
         val signedIn = JsonEncoder.deliveryTracker.encode(
@@ -1730,7 +1732,10 @@ class DeviceParcelTests {
         val storage = Memory()
         storage.keys = links.associateWith { key }
         storage.parcels = links.mapIndexed { index, link ->
-            UUID.randomUUID().let { parcel(link, "", it, pkg = pkg(it, number = "TESTPARCEL12300$index")) }
+            UUID.randomUUID().let { parcel(link, "", it, pkg = pkg(it, number = "TESTPARCEL12300$index")) }.copy(
+                archivedAt = if (link in archived) "2026-11-01T08:00:00Z" else null,
+                muted = if (link in muted) true else null,
+            )
         }
         storage.pendingForgets = pendingForgets
         val calls = Calls()
@@ -1769,6 +1774,28 @@ class DeviceParcelTests {
             phone.calls.all,
         )
         assertEquals(emptyMap<String, String>(), phone.storage.pendingForgets)
+        session.forceSignOut()
+    }
+
+    @Test
+    fun signingInKeepsAParcelArchivedHereArchivedAndOneTurnedOffHereQuiet() = runTest {
+        val phone = signingIn(
+            listOf("22222222222A", "22222222222B", "22222222222C"), AccountRoom(3), backgroundScope,
+            archived = setOf("22222222222A"), muted = setOf("22222222222B"),
+        )
+        val session = phone.session(backgroundScope)
+        session.showWelcome()
+        val store = phone.store(session, backgroundScope)
+
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.start()
+
+        assertEquals(emptyList<ClaimParcelLink>(), phone.device.claims)
+        // The archived one is archived in the account, the one turned off with its bell is muted there, and the third is
+        // left as it comes.
+        val sent = phone.transport.requests.filter { it.path?.startsWith("/api/packages/") == true && it.path != "/api/packages/claim" }
+            .map { request -> "${request.method} " + if (request.path?.endsWith("/notifications") == true) "notifications ${request.body?.decodeToString()}" else "parcel" }
+        assertEquals(listOf("DELETE parcel", "PATCH notifications {\"muted\":true}"), sent.sorted())
         session.forceSignOut()
     }
 

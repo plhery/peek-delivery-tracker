@@ -203,6 +203,9 @@ object NotificationDeviceKeys {
 
     /** The account that last turned them on ([NotificationDevicePolicy.belongs]). */
     const val OWNER = "sdt.notificationsOwner.v1"
+
+    /** A token the account that signed out could not take off the service (`ParcelStore.settleNativePushRevocation`). */
+    const val REVOCATION = "sdt.notificationsRevocationPending.v1"
     const val DEMO = "sdt.demoNotificationsEnabled"
     const val OPT_OUT_REPAIRED = "sdt.notificationsOptOutRepaired.v1"
 

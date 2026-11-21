@@ -548,6 +548,7 @@ class ParcelStore(
     private val notificationOptOutKey = NotificationDeviceKeys.OPT_OUT
     private val nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
     private val notificationOwnerKey = NotificationDeviceKeys.OWNER
+    private val nativePushRevocationKey = NotificationDeviceKeys.REVOCATION
     private val demoNotificationsKey = NotificationDeviceKeys.DEMO
 
     init {
@@ -1437,7 +1438,7 @@ class ParcelStore(
         jobMonitoringTask = null
         pendingJobIds.clear()
         val token = notifications.currentDeviceToken
-        if (token != null && !isDemo) tryQuietly { api.unregisterNativePushToken(token) }
+        if (token != null && !isDemo) revokeNativePushToken(token)
         session.checkGeneration(generation)
         if (!isDemo) liveActivityRevocations.drain()
         stopDeliveryLiveActivityObservers()
@@ -1469,6 +1470,47 @@ class ParcelStore(
     private val notificationOwner: UUID?
         get() = defaults.string(forKey = notificationOwnerKey)?.let(::uuid)
 
+    /**
+     * Takes the phone's token off the account signing out. When the service can't be reached, the token is kept until it
+     * is off ([settleNativePushRevocation]): Firebase, offline too, keeps handing the same one out, and it would otherwise
+     * still bring that account's notifications, under the next account too.
+     */
+    private suspend fun revokeNativePushToken(token: String) {
+        try {
+            api.unregisterNativePushToken(token)
+            if (defaults.string(forKey = nativePushRevocationKey) == token) defaults.removeObject(forKey = nativePushRevocationKey)
+        } catch (error: Exception) {
+            if (error is CancellationException) currentCoroutineContext().ensureActive()
+            defaults.set(token, forKey = nativePushRevocationKey)
+        }
+    }
+
+    /**
+     * Settles a token the account that signed out could not take off the service, and says whether none is left. That
+     * account signing in again has its notifications back as its own. Another account takes the token over, which moves
+     * it to that account on the service, then takes it off: the service lets an account remove only its own tokens.
+     * Without an account signed in, the token waits; the parcels this phone follows itself still sign up for their own
+     * alerts meanwhile.
+     */
+    private suspend fun settleNativePushRevocation(): Boolean {
+        val token = defaults.string(forKey = nativePushRevocationKey) ?: return true
+        if (isDemo || !session.isAuthenticated) return false
+        val user = session.user?.id ?: return false
+        if (notificationOwner == user) {
+            defaults.removeObject(forKey = nativePushRevocationKey)
+            return true
+        }
+        try {
+            api.registerNativePushToken(token, installationId, localizer.language, sendTest = false)
+            api.unregisterNativePushToken(token)
+        } catch (error: Exception) {
+            if (error is CancellationException) currentCoroutineContext().ensureActive()
+            return false
+        }
+        if (defaults.string(forKey = nativePushRevocationKey) == token) defaults.removeObject(forKey = nativePushRevocationKey)
+        return true
+    }
+
     suspend fun refreshNotificationState() {
         val generation = session.generation
         val status = notifications.authorizationStatus()
@@ -1491,9 +1533,12 @@ class ParcelStore(
         if (notificationsEnabledOnDevice != enabled) notificationsEnabledOnDevice = enabled
         if (!notificationStateLoaded) notificationStateLoaded = true
         // Allowed again in Android's settings, a guest's parcels are signed up as the token comes back, with nothing to tap.
-        if (NotificationDevicePolicy.shouldRegisterForRemoteNotifications(notificationStatus, optedOut)) {
-            notifications.registerForRemoteNotifications()
-        }
+        if (!NotificationDevicePolicy.shouldRegisterForRemoteNotifications(notificationStatus, optedOut)) return
+        // Another account signed in brings the phone back to Firebase only once the token of the account before is off
+        // the service, so that account's notifications can't come in under this one.
+        val settled = settleNativePushRevocation()
+        if (!stillCurrent(generation) || (!settled && session.isAuthenticated)) return
+        notifications.registerForRemoteNotifications()
     }
 
     suspend fun enableNotifications(language: AppLanguage): Boolean {
@@ -1684,7 +1729,7 @@ class ParcelStore(
         if (markNewUpdatesFlow.value == enabled) return
         keepMarkNewUpdates(enabled)
         if (isDemo) return
-        markNewUpdatesChoice.unsaved = true
+        markNewUpdatesChoice.unsaved = MarkNewUpdatesChoice.Unsaved(session.user?.id, enabled)
         saveMarkNewUpdates(enabled)?.join()
     }
 
@@ -1710,10 +1755,10 @@ class ParcelStore(
             try {
                 previous?.join()
                 if (generation != session.generation) return@launch
-                var saved = api.saveDisplayPreferences(markNewUpdates = enabled)
+                var saved = api.saveDisplayPreferences(markNewUpdates = enabled, timezone = ZoneId.systemDefault().id)
                 if (generation != session.generation) return@launch
                 if (choice == markNewUpdatesChoices) {
-                    markNewUpdatesChoice.unsaved = false
+                    markNewUpdatesChoice.unsaved = null
                 } else {
                     // Switched again meanwhile: that choice stands, and its own save is on its way.
                     saved = saved.copy(markNewUpdates = markNewUpdatesFlow.value)
@@ -1729,13 +1774,16 @@ class ParcelStore(
     }
 
     /**
-     * The account's choice, as read or saved, unless one made on this phone has not been saved: that one stands and
-     * goes to the account, or, the account holding it already, follows the account again.
+     * The account's choice, as read or saved, unless one made on this phone for this account, or without one, has not
+     * been saved: that one stands and goes to the account, or, the account holding it already, follows the account again.
+     * One another account made here waits for that account.
      */
     private fun followMarkNewUpdates(stored: Boolean) {
-        if (!markNewUpdatesChoice.unsaved) return keepMarkNewUpdates(stored)
+        val unsaved = markNewUpdatesChoice.unsaved
+        if (unsaved == null || (unsaved.owner != null && unsaved.owner != session.user?.id)) return keepMarkNewUpdates(stored)
         if (markNewUpdatesSaving > 0) return
-        if (stored == markNewUpdatesFlow.value) markNewUpdatesChoice.unsaved = false else saveMarkNewUpdates(markNewUpdatesFlow.value)
+        keepMarkNewUpdates(unsaved.enabled)
+        if (stored == unsaved.enabled) markNewUpdatesChoice.unsaved = null else saveMarkNewUpdates(unsaved.enabled)
     }
 
     /**
@@ -1754,7 +1802,10 @@ class ParcelStore(
         val generation = session.generation
         scope.launch {
             try {
-                val saved = api.saveDisplayPreferences(clock = clock.takeIf { it != stored.clock }, distance = distance.takeIf { it != stored.distance })
+                val saved = api.saveDisplayPreferences(
+                    clock = clock.takeIf { it != stored.clock }, distance = distance.takeIf { it != stored.distance },
+                    timezone = ZoneId.systemDefault().id,
+                )
                 if (generation != session.generation) return@launch
                 // Kept: should another device change them, the next difference read here is sent again.
                 if (unitsSent == sent && saved.clock == clock && saved.distance == distance) unitsSent = null
@@ -2135,10 +2186,11 @@ class ParcelStore(
     }
 
     /**
-     * The parcels followed on this phone before signing in join the account, under the names they had here, each time
-     * the account's list starts: at sign-in, at each launch and as an invitation comes or goes. The device lets go of
-     * each one the account now has. One the account has no room for stays here, and the list says how many stayed once
-     * a sign-in, and again only when that number changes; a claim cut short says nothing.
+     * The parcels followed on this phone before signing in join the account, under the names they had here, and archived
+     * or quiet as they were here, each time the account's list starts: at sign-in, at each launch and as an invitation
+     * comes or goes. The device lets go of each one the account now has. One the account has no room for stays here, and
+     * the list says how many stayed once a sign-in, and again only when that number changes; a claim cut short says
+     * nothing.
      */
     private suspend fun claimDeviceParcels() {
         val user = session.user ?: return
@@ -2156,9 +2208,11 @@ class ParcelStore(
             if (generation != session.generation) return
             for (result in response.results) {
                 if (result.outcome != ClaimParcelResultOutcome.Kept) continue
-                // What was archived here stays archived there.
-                val id = result.packageId
-                if (id != null && device.isArchived(result.id)) tryQuietly { api.archive(id) }
+                val id = result.packageId ?: continue
+                // What was archived here stays archived there, and a parcel whose notifications were turned off here
+                // stays quiet there.
+                if (device.isArchived(result.id)) tryQuietly { api.archive(id) }
+                if (device.isMuted(result.id)) tryQuietly { api.setMuted(id, muted = true) }
             }
             // A parcel the account has no room for stays on the device, and so does someone else's that it could not keep.
             device.release(

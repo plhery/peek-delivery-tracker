@@ -21,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.UserDefaults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -68,11 +69,17 @@ class FirebaseSettings private constructor(
  * Firebase Cloud Messaging's tokens, where the iPhone registers with APNs. The app starts Firebase itself ([start]),
  * from the build's settings: the manifest removes Firebase's own start-up, which would look for google-services.json's
  * resources, and turns its automatic token off, so nothing reaches Google before the app asks for a token. A token
- * asked for while a deletion is under way waits for it, so the answer is the new one. FirebaseMessaging's token calls
- * are deprecated for its installation registrations (`register()`), which this version of the service doesn't use.
+ * asked for while a deletion is under way waits for it, so the answer is the new one. A deletion that can't reach
+ * Google's servers, offline, leaves Firebase handing out the same token: [defaults] remembers it, and it is tried again
+ * as the app next starts, before any token is asked for. FirebaseMessaging's token calls are deprecated for its
+ * installation registrations (`register()`), which this version of the service doesn't use.
  */
-class FirebasePushTokens private constructor() : PushTokens {
+class FirebasePushTokens private constructor(private val defaults: UserDefaults) : PushTokens {
     private var deletion: Task<Void>? = null
+
+    init {
+        if (defaults.bool(forKey = DELETION_PENDING)) delete()
+    }
 
     @Suppress("DEPRECATION")
     override fun token(answer: (Result<String>) -> Unit) {
@@ -91,10 +98,16 @@ class FirebasePushTokens private constructor() : PushTokens {
 
     @Suppress("DEPRECATION")
     override fun delete() {
-        deletion = FirebaseMessaging.getInstance().deleteToken()
+        defaults.set(true, forKey = DELETION_PENDING)
+        val task = FirebaseMessaging.getInstance().deleteToken()
+        deletion = task
+        task.addOnCompleteListener { if (it.isSuccessful && deletion === task) defaults.removeObject(forKey = DELETION_PENDING) }
     }
 
     companion object {
+        /** Set while a deletion of the token hasn't gone through. */
+        private const val DELETION_PENDING = "sdt.firebaseTokenDeletionPending.v1"
+
         /**
          * Starts Firebase with [settings], once for the process: from [PeekApplication.onCreate], before a push or a
          * new token can reach [PeekMessagingService].
@@ -112,7 +125,7 @@ class FirebasePushTokens private constructor() : PushTokens {
             settings ?: return null
             if (!playServices(context)) return null
             start(context.applicationContext, settings)
-            return FirebasePushTokens()
+            return FirebasePushTokens(PreferencesDefaults.standard(context))
         }
 
         /**

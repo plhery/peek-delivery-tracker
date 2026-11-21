@@ -527,13 +527,19 @@ class DeliveryApiClient(
     suspend fun notificationPreferences(): NotificationPreferences =
         request("/api/push/preferences", NotificationPreferences.serializer())
 
+    /**
+     * Saves the display choices that changed, and the phone's time zone (`timezone`), which the delivery email and the
+     * notifications write their times in, as the web's saves do.
+     */
     suspend fun saveDisplayPreferences(
         markNewUpdates: Boolean? = null, clock: NotificationPreferencesClock? = null, distance: NotificationPreferencesDistance? = null,
+        timezone: String,
     ): NotificationPreferences {
         val patch = kotlinx.serialization.json.buildJsonObject {
             markNewUpdates?.let { put("markNewUpdates", JsonPrimitive(it)) }
             clock?.let { put("clock", JsonPrimitive(it.rawValue)) }
             distance?.let { put("distance", JsonPrimitive(it.rawValue)) }
+            put("timezone", JsonPrimitive(timezone))
         }
         return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", patch.toString().encodeToByteArray())
     }

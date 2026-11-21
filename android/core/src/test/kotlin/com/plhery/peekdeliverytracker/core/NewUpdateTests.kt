@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
 import java.time.Instant
+import java.time.ZoneId
 import java.util.Locale
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
@@ -129,11 +130,12 @@ class NewUpdateTests {
 
     /** A device signed in to the account the server holds, with its own session, settings and cache. */
     private suspend fun TestScope.signedIn(
-        server: Server, defaults: UserDefaults = MemoryDefaults(), localizer: Localizer = Localizer(AppLanguage.En), widgetCenter: WidgetCenter = WidgetCenter {},
+        server: Server, defaults: UserDefaults = MemoryDefaults(), localizer: Localizer = Localizer(AppLanguage.En), account: UUID = accountId,
+        widgetCenter: WidgetCenter = WidgetCenter {},
     ): ParcelStore {
         val transport = RecordingTransport()
         val session = testSessionStore(configuration, backgroundScope, transport = transport, now = { now })
-        val user = AuthUser(id = accountId, email = "reader@example.com", isAnonymous = false)
+        val user = AuthUser(id = account, email = "reader@example.com", isAnonymous = false)
         val auth = AuthSession(
             accessToken = "token-${UUID.randomUUID()}", tokenType = "bearer", expiresIn = 3600, expiresAt = now.epochSecond + 3600,
             refreshToken = "refresh", user = user,
@@ -487,6 +489,7 @@ class NewUpdateTests {
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), server.preferenceCalls.map { it.first })
         assertEquals(false, server.preferenceCalls.last().second?.get("markNewUpdates")?.jsonPrimitive?.boolean)
+        assertEquals(ZoneId.systemDefault().id, server.preferenceCalls.last().second?.get("timezone")?.jsonPrimitive?.content)
         assertEquals(false, store.notificationPreferences?.markNewUpdates)
 
         // Saved, it follows the account again.
@@ -512,6 +515,35 @@ class NewUpdateTests {
         assertEquals("PATCH", server.preferenceCalls.last().first)
         assertEquals(false, server.preferenceCalls.last().second?.get("markNewUpdates")?.jsonPrimitive?.boolean)
         assertEquals(false, store.notificationPreferences?.markNewUpdates)
+    }
+
+    @Test
+    fun aMarkChoiceAnAccountCouldNotSaveWaitsForThatAccountAndNotTheNextOne() = runTest {
+        val defaults = MemoryDefaults()
+        val reader = Server()
+        val first = signedIn(reader, defaults)
+        first.loadNotificationPreferences()
+        // Switched off while the server cannot take it.
+        reader.beforePreferences = { throw IOException("The Internet connection appears to be offline.") }
+        first.setMarkNewUpdates(false)
+        reader.beforePreferences = {}
+
+        // Another account signed in on this phone keeps its own choice, and the first one's isn't saved to it.
+        val other = Server()
+        val second = signedIn(other, defaults, account = UUID.randomUUID())
+        second.loadNotificationPreferences()
+        runCurrent()
+        assertTrue(second.markNewUpdatesFlow.value)
+        assertTrue(other.preferenceCalls.none { it.second?.containsKey("markNewUpdates") == true })
+
+        // The first account back: its choice stands, and goes to it.
+        reader.preferenceCalls.clear()
+        val back = signedIn(reader, defaults)
+        back.loadNotificationPreferences()
+        runCurrent()
+        assertFalse(back.markNewUpdatesFlow.value)
+        assertEquals(false, reader.preferenceCalls.last().second?.get("markNewUpdates")?.jsonPrimitive?.boolean)
+        assertEquals(false, back.notificationPreferences?.markNewUpdates)
     }
 
     @Test
@@ -544,11 +576,13 @@ class NewUpdateTests {
         fun methods() = server.preferenceCalls.map { it.first }
         fun lastSent(name: String) = server.preferenceCalls.last().second?.get(name)?.jsonPrimitive?.content
 
-        // Read without any: this phone's go to the account, the rest as stored and the email choice left out.
+        // Read without any: this phone's go to the account with its time zone, the rest as stored and the email choice
+        // left out.
         store.loadNotificationPreferences()
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), methods())
-        assertEquals(setOf("clock", "distance"), server.preferenceCalls.last().second?.keys)
+        assertEquals(setOf("clock", "distance", "timezone"), server.preferenceCalls.last().second?.keys)
+        assertEquals(ZoneId.systemDefault().id, lastSent("timezone"))
         assertEquals("24", lastSent("clock"))
         assertEquals("km", lastSent("distance"))
         assertEquals(NotificationPreferencesClock.TwentyFour, store.notificationPreferences?.clock)

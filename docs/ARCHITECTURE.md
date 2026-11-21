@@ -237,8 +237,8 @@ Key server modules:
     account's list starts, at sign-in and at each launch, but not on a refresh. One a full
     account refuses stays on the phone, and the list says how many stayed once a sign-in,
     then again only when that number changes. A parcel archived on the phone is archived in
-    the account, and the iPhone, like the web, also keeps a parcel quiet there when its bell
-    was turned off on the phone. The Android app's sign-in opened from that
+    the account, and, as on the web, one whose bell was turned off on the phone stays quiet
+    there. The Android app's sign-in opened from that
     list leaves it in the widget and its shortcut until someone signs in, and a relaunch
     meanwhile opens on the list.
   - The iPhone and Android apps keep the owner keys apart from the last answers, which only

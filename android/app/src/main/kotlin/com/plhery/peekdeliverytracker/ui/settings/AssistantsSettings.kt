@@ -44,6 +44,7 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
@@ -179,7 +180,10 @@ private fun AddressGroup(state: AccountHost, address: String) {
     }
 }
 
-/** "assistants.setup": each assistant's steps folded under its name, one open at a time, then a note for any other assistant. */
+/**
+ * "assistants.setup": each assistant's name with the one thing to do under it, its steps folded beneath, one open at a
+ * time, then a note for any other assistant.
+ */
 @Composable
 private fun Setups(address: String) {
     val setups = remember { AssistantSetups.bundled }
@@ -197,7 +201,8 @@ private fun Setups(address: String) {
 }
 
 /**
- * One assistant (`setupRow`): its name in subheadline, and a chevron that turns down as its steps open under it;
+ * One assistant (`setupRow`): its name in subheadline over the one thing to do in caption secondary, and a chevron that
+ * turns down as its steps open under it;
  * TalkBack reads it as one button that expands and collapses. Open, the plans and places that can in caption
  * secondary, the steps numbered with signing in to Peek as the one before the last, then what to do where they don't
  * apply, 12 apart and 15 in.
@@ -236,7 +241,10 @@ private fun SetupRow(setup: AssistantSetup, address: String, shown: Boolean, onT
             horizontalArrangement = Arrangement.spacedBy(11.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(setup.name, Modifier.weight(1f), color = colors.ink, style = type.subheadline.sfLines())
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Text(setup.name, color = colors.ink, style = type.subheadline.sfLines())
+                setup.lead?.let { Text(setupText(it, address), color = colors.secondaryText, style = type.caption.sfLines()) }
+            }
             PeekSymbol("chevron.right", Modifier.rotate(turn), font = type.fixed(10f, FontWeight.Light), tint = colors.secondaryText)
         }
         AnimatedVisibility(
@@ -272,15 +280,29 @@ private fun SetupRow(setup: AssistantSetup, address: String, shown: Boolean, onT
  */
 @Composable
 private fun SetupText(line: SetupLine, address: String, modifier: Modifier = Modifier, secondary: Boolean = false) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val text = setupText(line, address)
+    SelectionContainer(modifier) {
+        Text(
+            text, Modifier.fillMaxWidth(),
+            color = if (secondary) colors.secondaryText else colors.ink,
+            style = (if (secondary) type.caption else type.subheadline).sfLines(),
+        )
+    }
+}
+
+/** A setup line's text, in the reader's language, with its menus and buttons in bold, its pages linked and commands in monospace. */
+@Composable
+private fun setupText(line: SetupLine, address: String): AnnotatedString {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val colors = PeekTheme.colors
-    val type = PeekTheme.type
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
     val pieces = remember(line, address, localizer, language) { line.pieces(localizer, address) }
     val ink = colors.ink
-    val text = remember(pieces, ink, context, uriHandler) {
+    return remember(pieces, ink, context, uriHandler) {
         buildAnnotatedString {
             for (piece in pieces) {
                 when (piece) {
@@ -296,13 +318,6 @@ private fun SetupText(line: SetupLine, address: String, modifier: Modifier = Mod
                 }
             }
         }
-    }
-    SelectionContainer(modifier) {
-        Text(
-            text, Modifier.fillMaxWidth(),
-            color = if (secondary) colors.secondaryText else colors.ink,
-            style = (if (secondary) type.caption else type.subheadline).sfLines(),
-        )
     }
 }
 

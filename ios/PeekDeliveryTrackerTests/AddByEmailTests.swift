@@ -590,7 +590,8 @@ final class AssistantsTests: XCTestCase {
         for language in AppLanguage.allCases {
             localizer.language = language
             for setup in setups {
-                let lines = [setup.who] + setup.stepsWithSignIn(localizer) + (setup.fallback.map { [$0] } ?? [])
+                XCTAssertNotNil(setup.lead, setup.name)
+                let lines = (setup.lead.map { [$0] } ?? []) + [setup.who] + setup.stepsWithSignIn(localizer) + (setup.fallback.map { [$0] } ?? [])
                 for line in lines {
                     let text = String(line.text(localizer, address: address).characters)
                     XCTAssertFalse(text.contains("{{"), "\(language.rawValue): \(line.key)")

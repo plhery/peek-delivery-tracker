@@ -11,18 +11,22 @@ import { Icon } from './Icon';
 import { PipPerch } from './PipPerch';
 
 /**
- * Each assistant's steps to add Peek, folded under its name with what to do where they don't apply, then a line for any
- * other assistant. Signing in to Peek is the step before the last: the assistant asks for it when the connector is added
- * or first used. A command to type holds `address`, Peek's address for assistants.
+ * Each assistant's name with the one thing to do under it, and folded beneath, which plans and places can, the steps and
+ * what to do where they don't apply; then a line for any other assistant. Signing in to Peek is the step before the
+ * last: the assistant asks for it when the connector is added or first used. A command to type holds `address`, Peek's
+ * address for assistants.
  */
 function Setups({ address }: { address: string }) {
   const { t } = useI18n();
   return <section className="settings-group" aria-labelledby="assistants-setup"><h3 className="settings-group__title" id="assistants-setup">{t('assistants.setup')}</h3>
     <div className="settings-box">
-      {ASSISTANT_SETUPS.map(({ name, who, steps, fallback }) => {
+      {ASSISTANT_SETUPS.map(({ name, lead, who, steps, fallback }) => {
         const lines = setupSteps(t, steps);
         return <details key={name} className="assistants__setup">
-          <summary className="settings-row"><span translate="no">{name}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
+          <summary className="settings-row">
+            <span className="assistants__head"><span translate="no">{name}</span><span className="assistants__lead"><SetupText text={t(lead[0])} labels={lead[1]} address={address} /></span></span>
+            <span className="settings-chevron" aria-hidden="true">›</span>
+          </summary>
           <div className="assistants__setup-body">
             <p className="assistants__who"><SetupText text={t(who[0])} labels={who[1]} address={address} /></p>
             <ol className="add-by-email__steps">{lines.map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} address={address} /></li>)}</ol>

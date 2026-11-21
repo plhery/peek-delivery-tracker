@@ -48,6 +48,8 @@ extension AssistantConnection {
 /// line is a copy key and the assistant's own names its `{{…}}` stand for, in English as its help pages give them.
 struct AssistantSetup: Decodable, Identifiable, Sendable {
     let name: String
+    /// The one thing to do, shown under the name.
+    let lead: Line?
     /// Which plans and places can.
     let who: Line
     let steps: [Line]

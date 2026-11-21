@@ -72,8 +72,9 @@ export function AssistantsGuide({ t, mcpUrl, privacy = null, help = null }: {
         <p>{t('assistants.page.account')}</p>
 
         {heading('setup')}
-        {ASSISTANT_SETUPS.map(({ name, who, steps, fallback }) => <Fragment key={name}>
+        {ASSISTANT_SETUPS.map(({ name, lead, who, steps, fallback }) => <Fragment key={name}>
           <h3 translate="no">{name}</h3>
+          <p><strong><SetupText text={t(lead[0])} labels={lead[1]} address={mcpUrl} /></strong></p>
           <p><SetupText text={t(who[0])} labels={who[1]} address={mcpUrl} /></p>
           <ol>{setupSteps(t, steps).map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} address={mcpUrl} /></li>)}</ol>
           {fallback && <p><SetupText text={t(fallback[0])} labels={fallback[1]} address={mcpUrl} /></p>}

@@ -2,6 +2,12 @@
   "setups": [
     {
       "name": "Claude",
+      "lead": [
+        "assistants.setup.claude.lead",
+        {
+          "listing": "Peek Parcel Tracker"
+        }
+      ],
       "who": [
         "assistants.setup.claude.who",
         {
@@ -49,6 +55,12 @@
     },
     {
       "name": "ChatGPT",
+      "lead": [
+        "assistants.setup.chatgpt.lead",
+        {
+          "plugins": "Plugins"
+        }
+      ],
       "who": [
         "assistants.setup.chatgpt.who"
       ],
@@ -80,6 +92,9 @@
     },
     {
       "name": "Gemini",
+      "lead": [
+        "assistants.setup.gemini.lead"
+      ],
       "who": [
         "assistants.setup.gemini.who"
       ],
@@ -120,6 +135,17 @@
     },
     {
       "name": "OpenClaw",
+      "lead": [
+        "assistants.setup.openclaw.lead",
+        {
+          "set": {
+            "command": "openclaw mcp set"
+          },
+          "login": {
+            "command": "openclaw mcp login"
+          }
+        }
+      ],
       "who": [
         "assistants.setup.openclaw.who"
       ],
@@ -158,6 +184,12 @@
     },
     {
       "name": "Home Assistant",
+      "lead": [
+        "assistants.setup.homeAssistant.lead",
+        {
+          "marketplace": "Settings › Marketplace"
+        }
+      ],
       "who": [
         "assistants.setup.homeAssistant.who"
       ],

@@ -54,7 +54,8 @@ class AssistantsTests {
         for (language in AppLanguage.entries) {
             val localizer = Localizer(language)
             for (setup in setups) {
-                val lines = listOf(setup.who) + setup.stepsWithSignIn(localizer) + listOfNotNull(setup.fallback)
+                assertNotNull(setup.name, setup.lead)
+                val lines = listOfNotNull(setup.lead, setup.who) + setup.stepsWithSignIn(localizer) + listOfNotNull(setup.fallback)
                 for (line in lines) {
                     val text = line.text(localizer, address)
                     assertFalse("${language.rawValue}: ${line.key}", text.contains("{{"))
@@ -131,6 +132,7 @@ class AssistantsTests {
         val setup = setups.single()
         assertEquals("Synthetic", setup.name)
         assertNull(setup.fallback)
+        assertNull(setup.lead)
         assertEquals(listOf("assistants.setup.claude.open", "assistants.setup.claude.use"), setup.steps.map { it.key })
         // The link without a web address and the label of another kind drop out, their `{{…}}` staying.
         assertEquals(mapOf("plus" to SetupLabel.Name("+")), setup.steps[0].labels)

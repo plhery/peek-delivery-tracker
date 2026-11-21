@@ -2,6 +2,7 @@
   "setups": [
     {
       "name": "Claude",
+      "lead": ["assistants.setup.claude.lead", { "listing": "Peek Parcel Tracker" }],
       "who": ["assistants.setup.claude.who", { "organization": "Organization settings › Connectors", "browse": "Browse connectors", "team": "Add to your team" }],
       "steps": [
         ["assistants.setup.claude.open", {
@@ -22,6 +23,7 @@
     },
     {
       "name": "ChatGPT",
+      "lead": ["assistants.setup.chatgpt.lead", { "plugins": "Plugins" }],
       "who": ["assistants.setup.chatgpt.who"],
       "steps": [
         ["assistants.setup.chatgpt.open", { "plugins": "Plugins", "page": "chatgpt.com/plugins", "plus": "+", "custom": "Add custom MCP server" }],
@@ -31,6 +33,7 @@
     },
     {
       "name": "Gemini",
+      "lead": ["assistants.setup.gemini.lead"],
       "who": ["assistants.setup.gemini.who"],
       "steps": [
         ["assistants.setup.gemini.open", { "settings": "Settings", "apps": "Connected Apps" }],
@@ -49,6 +52,7 @@
     },
     {
       "name": "OpenClaw",
+      "lead": ["assistants.setup.openclaw.lead", { "set": { "command": "openclaw mcp set" }, "login": { "command": "openclaw mcp login" } }],
       "who": ["assistants.setup.openclaw.who"],
       "steps": [
         ["assistants.setup.openclaw.open", {
@@ -62,6 +66,7 @@
     },
     {
       "name": "Home Assistant",
+      "lead": ["assistants.setup.homeAssistant.lead", { "marketplace": "Settings › Marketplace" }],
       "who": ["assistants.setup.homeAssistant.who"],
       "steps": [
         ["assistants.setup.homeAssistant.open", {

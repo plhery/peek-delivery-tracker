@@ -90,7 +90,8 @@ struct AssistantsPage: View {
         }
     }
 
-    /// Each assistant's steps, folded under its name, then a line for any other assistant.
+    /// Each assistant's name with the one thing to do under it, its steps folded beneath, then a line for any other
+    /// assistant.
     private func steps(_ address: String) -> some View {
         VStack(alignment: .leading, spacing: 9) {
             SettingsGroup(title: localizer.text("assistants.setup")) {
@@ -109,8 +110,15 @@ struct AssistantsPage: View {
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { open = shown ? nil : setup.name }
         } label: {
             HStack(spacing: 11) {
-                Text(verbatim: setup.name).font(.subheadline).foregroundStyle(Brand.ink)
-                Spacer(minLength: 4)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(verbatim: setup.name).font(.subheadline).foregroundStyle(Brand.ink)
+                    if let lead = setup.lead {
+                        Text(lead.text(localizer, address: address)).font(.caption).foregroundStyle(Brand.secondaryText)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Image(systemName: "chevron.right").font(.system(size: 10, weight: .light))
                     .foregroundStyle(Brand.secondaryText)
                     .rotationEffect(.degrees(shown ? 90 : 0))

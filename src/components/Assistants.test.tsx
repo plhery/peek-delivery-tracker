@@ -74,10 +74,19 @@ describe('assistants in Settings', () => {
     const user = userEvent.setup();
     render(<AssistantsPage apiAuth={apiAuth} offer={offer([])} onChange={vi.fn()} />);
     const setup = screen.getByRole('region', { name: 'Add Peek to your assistant' });
-    const names = Array.from(setup.querySelectorAll('summary')).map((summary) => summary.textContent);
-    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›', 'OpenClaw›', 'Home Assistant›']);
+    const rows = Array.from(setup.querySelectorAll('details'));
+    const named = (name: string) => rows.find((details) => details.querySelector('.assistants__head > span')?.textContent === name);
+    expect(rows.map((details) => details.querySelector('.assistants__head > span')?.textContent)).toEqual(['Claude', 'ChatGPT', 'Gemini', 'OpenClaw', 'Home Assistant']);
+    // Each row says the one thing to do; the rest folds under it.
+    expect(rows.map((details) => details.querySelector('.assistants__lead')?.textContent)).toEqual([
+      'Add Peek Parcel Tracker from Claude’s connector directory.',
+      'In Plugins, add the address above as a custom MCP server.',
+      'On gemini.google.com, add the address above as a custom app.',
+      'From a terminal, add the address above with openclaw mcp set, then sign in with openclaw mcp login.',
+      'Install the Peek integration from Settings › Marketplace.',
+    ]);
     // Claude finds Peek in its connector directory, with a custom connector where it doesn't list it.
-    const claudeSetup = setup.querySelector('details');
+    const claudeSetup = named('Claude');
     expect(Array.from(claudeSetup?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
       'Open Peek Parcel Tracker in Claude’s connector directory, or in Claude open Customize › Connectors, select + and search for Peek.',
       'Select Connect.',
@@ -100,7 +109,7 @@ describe('assistants in Settings', () => {
       'In a chat, type @ and pick Peek.',
     ]);
     // Outside the US, Gemini's Settings have no Connected Apps: its Developer Mode adds Peek, linked to its own page.
-    const gemini = Array.from(setup.querySelectorAll('details')).find((details) => details.querySelector('summary')?.textContent === 'Gemini›');
+    const gemini = named('Gemini');
     expect(gemini?.querySelector('.assistants__fallback')).toHaveTextContent(
       'Outside the US, Settings has no Connected Apps: open Developer Mode instead and select Create new. Paste the address '
       + 'above and select Next, tick the box to accept the risks, then select Connect and Agree and continue. Once you’ve '
@@ -109,7 +118,7 @@ describe('assistants in Settings', () => {
     expect(screen.getByRole('link', { name: 'Developer Mode' })).toHaveAttribute('href', 'https://gemini.google.com/devmode');
     // OpenClaw saves Peek from a terminal while its Gateway is stopped, with the address in the command to type.
     await user.click(screen.getByText('OpenClaw'));
-    const openClaw = Array.from(setup.querySelectorAll('details')).find((details) => details.querySelector('summary')?.textContent === 'OpenClaw›');
+    const openClaw = named('OpenClaw');
     expect(Array.from(openClaw?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
       'Stop OpenClaw’s Gateway with openclaw gateway stop, then add Peek with openclaw mcp set peek '
       + '\'{"url":"https://peek.example/mcp","transport":"streamable-http","auth":"oauth"}\'.',
@@ -126,7 +135,7 @@ describe('assistants in Settings', () => {
     expect(login).toHaveAttribute('translate', 'no');
     // Home Assistant connects through Peek's integration, and its card shows once the page is reloaded.
     await user.click(screen.getByText('Home Assistant'));
-    const homeAssistant = Array.from(setup.querySelectorAll('details')).at(-1);
+    const homeAssistant = named('Home Assistant');
     expect(Array.from(homeAssistant?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
       'Open Settings › Marketplace, search for Peek, open it and select Install, then Set up. If Peek isn’t listed, select Add from link, paste https://github.com/plhery/peek-ha and select Add.',
       'Sign in to Peek when it asks, then select Allow.',

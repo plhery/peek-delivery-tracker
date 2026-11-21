@@ -7,7 +7,7 @@ const locales = path.resolve(import.meta.dirname, '../../shared/locales');
 const catalogs = Object.fromEntries(readdirSync(locales).filter((file) => file.endsWith('.json'))
   .map((file) => [file.replace(/\.json$/, ''), JSON.parse(readFileSync(path.join(locales, file), 'utf8')) as Record<string, string>]));
 
-const lines = ASSISTANT_SETUPS.flatMap(({ who, steps, fallback }): SetupLine[] => [who, ...steps, ...(fallback ? [fallback] : [])]);
+const lines = ASSISTANT_SETUPS.flatMap(({ lead, who, steps, fallback }): SetupLine[] => [lead, who, ...steps, ...(fallback ? [fallback] : [])]);
 
 describe('the assistants’ setups (shared/assistant-setups.json)', () => {
   it('name a copy key every language has, with a label for each of its {{…}}', () => {
@@ -19,6 +19,10 @@ describe('the assistants’ setups (shared/assistant-setups.json)', () => {
         expect(names, `${language}: ${key}`).toEqual(Object.keys(labels).sort());
       }
     }
+  });
+
+  it('give each assistant one thing to do, under its name', () => {
+    for (const { name, lead } of ASSISTANT_SETUPS) expect(lead?.[0], name).toMatch(/\.lead$/);
   });
 
   it('give each label a name, a page or a command', () => {

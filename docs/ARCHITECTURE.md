@@ -541,7 +541,8 @@ Key server modules:
     names in English as its help pages give them and the plans and places that can, and to
     Home Assistant through Peek's integration ([peek-ha](https://github.com/plhery/peek-ha)),
     and what to ask a connected assistant, first to add the tracking numbers in the user's
-    emails. The steps are copy keys with those names, in `shared/assistant-setups.json`, which
+    emails. Each assistant's row says the one thing to do under its name; the plans and
+    places, the steps and what to do where they don't apply fold under it. The steps are copy keys with those names, in `shared/assistant-setups.json`, which
     the website, `/assistants` and the apps read (as `AssistantSetups.json` in the iPhone, iPad
     and Mac app's generated resources and in the Android app's shared data).
   - The tools work on the token's account alone, through the owner-checked functions the

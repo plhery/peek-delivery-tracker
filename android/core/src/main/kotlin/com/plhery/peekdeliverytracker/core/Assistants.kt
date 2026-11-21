@@ -171,6 +171,8 @@ data class AssistantSetup(
     val steps: List<SetupLine>,
     /** What to do where the steps don't apply. */
     val fallback: SetupLine? = null,
+    /** The one thing to do, shown under the name. */
+    val lead: SetupLine? = null,
 ) {
     /**
      * The steps with signing in to Peek as the one before the last: the assistant asks for it when the connector is
@@ -207,7 +209,7 @@ object AssistantSetups {
         val name = setup["name"]?.string() ?: return null
         val who = setup["who"]?.let(::line) ?: return null
         val steps = (setup["steps"] as? JsonArray)?.mapNotNull(::line).orEmpty()
-        return AssistantSetup(name, who, steps, setup["fallback"]?.let(::line))
+        return AssistantSetup(name, who, steps, setup["fallback"]?.let(::line), setup["lead"]?.let(::line))
     }
 
     /** Written as `[key]` or `[key, {labels}]`. */

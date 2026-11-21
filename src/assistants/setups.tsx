@@ -11,8 +11,11 @@ export type SetupLabel = string | { readonly text: string; readonly href: string
 /** A line of a setup: its text, and the names of the assistant's menus and buttons its `{{…}}` stand for. */
 export type SetupLine = readonly [MessageKey, Readonly<Record<string, SetupLabel>>?];
 
-/** An assistant's setup: which plans and places can, its steps, and what to do where they don't apply. */
-export interface AssistantSetup { name: string; who: SetupLine; steps: readonly SetupLine[]; fallback?: SetupLine }
+/**
+ * An assistant's setup: the one thing to do, shown under its name, then, folded, which plans and places can, its steps
+ * and what to do where they don't apply.
+ */
+export interface AssistantSetup { name: string; lead: SetupLine; who: SetupLine; steps: readonly SetupLine[]; fallback?: SetupLine }
 
 /**
  * How to add Peek to each assistant, from shared/assistant-setups.json, which the apps read too. Its steps come from
@@ -24,9 +27,9 @@ export interface AssistantSetup { name: string; who: SetupLine; steps: readonly 
  * Developer Mode that adds Peek outside the US; and OpenClaw's "Transports and OAuth" and "Manage saved MCP servers"
  * (docs.openclaw.ai/cli/mcp), whose commands its released CLI runs only while the Gateway is stopped. Home Assistant
  * connects through Peek's integration (github.com/plhery/peek-ha), whose README gives its steps, named as Home
- * Assistant 2026.11 does. Their menus, buttons and commands are named in English, as those pages give them; `who` says
- * which plans and places can, and `fallback` what to do where the steps don't apply. Settings shows them, and so does
- * the page on connecting an assistant.
+ * Assistant 2026.11 does. Their menus, buttons and commands are named in English, as those pages give them; `lead` says
+ * the one thing to do, `who` which plans and places can, and `fallback` what to do where the steps don't apply.
+ * Settings shows them, and so does the page on connecting an assistant.
  */
 export const ASSISTANT_SETUPS = setups.setups as unknown as readonly AssistantSetup[];
 

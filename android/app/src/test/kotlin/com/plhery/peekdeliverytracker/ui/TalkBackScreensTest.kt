@@ -358,7 +358,7 @@ class TalkBackScreensTest {
                 "https://example.com/mcp",
                 "Copy address [button]",
                 "ADD PEEK TO YOUR ASSISTANT [heading]",
-                "Claude [button, selected]",
+                "Claude, Add Peek Parcel Tracker from Claude’s connector directory. [button, selected]",
                 "On claude.ai, in the Claude desktop app and in the Claude app for iPhone or Android, on any plan. On a Team or " +
                     "Enterprise plan, an owner adds Peek first: Organization settings › Connectors, Browse connectors, then Add to your team.",
                 "Open Peek Parcel Tracker in Claude’s connector directory, or in Claude open Customize › Connectors, select + and " +
@@ -366,10 +366,6 @@ class TalkBackScreensTest {
                 "Select Connect.",
                 "Sign in to Peek when it asks, then select Allow.",
                 "In a chat, select + at the bottom left, then Connectors, and turn Peek on.",
-                "If Claude doesn’t list Peek Parcel Tracker, add Peek as a custom connector instead, on claude.ai or in the desktop " +
-                    "app (not in the phone apps; the Free plan allows one custom connector): open Customize › Connectors, select + " +
-                    "Add, then Add custom connector. Name it Peek, paste the address above and select Continue. Keep the sign-in " +
-                    "settings Claude finds: select Continue, then Add.",
             ),
         )
     }

@@ -163,6 +163,10 @@
 .assistants__setup > summary::-webkit-details-marker { display: none; }
 .assistants__setup > summary .settings-chevron { transition: transform .15s ease; }
 .assistants__setup[open] > summary .settings-chevron { transform: rotate(90deg); }
+/* The assistant's name, and the one thing to do under it. */
+.assistants__head { display: grid; gap: 3px; min-width: 0; }
+.assistants__lead { color: var(--ink-soft); font-size: 12px; font-weight: 400; line-height: 1.45; }
+.assistants__setup > summary .settings-chevron { margin-left: auto; }
 .assistants__setup-body { padding: 0 14px 4px; }
 .assistants__who { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
 .assistants__fallback { margin: -4px 0 14px; }

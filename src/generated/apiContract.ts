@@ -4665,7 +4665,7 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "australia-post",
       "recognitionRank": 500,
       "browserRecognitionRank": 500,
-      "browserRecognitionPattern": "^(?:\\d{2}(?!\\d{3})[A-Z0-9]{3}\\d{7}|(?=[A-Z0-9]{0,2}[A-Z])[A-Z0-9]{3}Z\\d{8}|R\\d{24})$"
+      "browserRecognitionPattern": "^(?:\\d{2}(?!\\d{3})[A-Z0-9]{3}\\d{7}|(?=[A-Z0-9]{0,2}[A-Z])[A-Z0-9]{3}Z\\d{8}|R\\d{24}|0[0-3]\\d{20})$"
     },
     "linkRules": [
       {
@@ -30487,7 +30487,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Bangkok",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tp-logistics-th"
     },
     "trackingUrlTemplate": "https://tptrack.info/ecom/dtrack.php?id={trackingNumber}&type=a1",
     "linkRules": [
@@ -64903,6 +64903,36 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "pigeonship": {
+    "displayName": "PigeonShip",
+    "countries": [
+      "US",
+      "CA"
+    ],
+    "color": "#f2b02c",
+    "selectable": true,
+    "timezone": "America/Denver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pigeonship",
+      "recognitionRank": 22
+    },
+    "trackingUrlTemplate": "https://admin.pigeonship.com/shipping/tracking/package/{trackingNumber}/",
+    "linkRules": [
+      {
+        "domains": [
+          "admin.pigeonship.com"
+        ],
+        "path": "^/shipping/tracking/package/([A-Za-z0-9]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^\\d[A-Z]\\d[A-Z]\\d{3}[A-Z]\\d{3}[A-Z]\\d{2}[A-Z]\\d[A-Z]{2}$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -66912,7 +66942,8 @@ export const CARRIER_IDS = [
   "xingyou",
   "yitu",
   "yuanpeng",
-  "ywd"
+  "ywd",
+  "pigeonship"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

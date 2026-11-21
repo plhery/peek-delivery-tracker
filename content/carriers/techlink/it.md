@@ -16,7 +16,7 @@ Techlink non pubblica il formato dei suoi numeri. Le sue lettere di vettura hann
 | --- | --- |
 | `ZHPHD260101000000ML` | ZHPHD, una data, sei cifre e ML: una lettera di vettura Techlink. |
 | `ZHPHD261301000000ML` | Il mese 13 non esiste: non è un numero Techlink. Controlla di averlo scritto bene. |
-| `RR000000005CN` | Due lettere, nove cifre e CN: un numero di [China Post](carrier:china-post), non di Techlink. |
+| `RR482910576CN` | Due lettere, nove cifre e CN: un numero di [China Post](carrier:china-post), non di Techlink. |
 
 In Peek spazi e minuscole non contano. Hai un numero di un'altra forma? Leggi [come capire il corriere dal numero](guide:tracking-number-formats).
 
@@ -36,7 +36,7 @@ Techlink non pubblica un elenco delle sue scansioni. Le registra in inglese e in
 | `Parcel has been received and processed at original facility` (仓库入库) | Il pacco è entrato nel magazzino di Techlink in Cina. |
 | `Parcel has been packed and is ready for outbound shipping` (包裹装箱) | È imballato per la linea verso l'estero, pronto a partire. |
 | `Departed from the original facility` | Ha lasciato il magazzino di Techlink in Cina. |
-| `Export customs declaration completed` | La dichiarazione di esportazione dalla Cina, registrata dopo l'uscita dal magazzino. Il pacco non è fermo in dogana. |
+| `Export customs declaration completed` | La dichiarazione di esportazione dalla Cina continentale, registrata dopo l'uscita dal magazzino. Il pacco non è fermo in dogana. |
 | `Parcel is in transit to origin airport` | In viaggio su strada in Cina, dal magazzino all'aeroporto di partenza. |
 | `Depart from the original airport` | Il volo è partito dall'aeroporto in Cina. |
 | `Arrive at the destination airport` | Il volo è atterrato nel Paese di destinazione. La dogana d'importazione viene dopo. |
@@ -71,7 +71,7 @@ Il servizio espresso porta a porta di Techlink è DDP (dazi pagati) o DDU (dazi 
 
 ## Techlink contatti: telefono e assistenza clienti
 
-Al 27 ottobre 2026 il sito di Techlink, www.techlinksz.cn, non riporta telefono, e-mail né indirizzo. Il link 联系我们 (contattaci) non porta da nessuna parte, e il sito non ha chat né moduli di contatto.
+Il sito di Techlink, www.techlinksz.cn, non riporta telefono, e-mail né indirizzo. Il link 联系我们 (contattaci) non porta da nessuna parte, e il sito non ha chat né moduli di contatto.
 
 Per l'ordine, chiedi al venditore. Per un problema di consegna in Italia, chiedi al corriere locale, quando sai qual è.
 
@@ -83,7 +83,7 @@ Peek legge lo stesso tracking che usa la pagina di Techlink e mostra lo stato, o
 
 Quando i dati di Techlink contengono il numero del corriere che consegna, Peek ne guarda la forma. Un numero postale internazionale (due lettere, nove cifre e due lettere) rimanda alla posta del Paese di destinazione: per un pacco diretto in Italia, Peek interroga [Poste Italiane](carrier:poste-italiane). Un altro numero rimanda al corriere che, nel catalogo di Peek, è l'unico a usare quella forma, e Peek lo interroga se ne legge il tracking. Appena il corriere mostra novità recenti quanto quelle di Techlink, Peek passa a lui: il pacco tiene il numero ZHPHD e mostra l'altro accanto. Altrimenti Peek resta sul tracking di Techlink: aspettati che la cronologia si fermi all'arrivo all'aeroporto di destinazione o qualche passo dopo, nel Paese di destinazione.
 
-Peek controlla fino a ogni 10 minuti. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Techlink o il venditore al posto tuo.
+Finché hai il pacco aperto, o nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti; altrimenti ogni ora. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Techlink o il venditore al posto tuo.
 
 ## Domande sul tracking Techlink
 

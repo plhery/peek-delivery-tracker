@@ -16,7 +16,7 @@ Techlink publishes no number format. Its waybills are 19 characters: ZHPHD, six 
 | --- | --- |
 | `ZHPHD260101000000ML` | ZHPHD, a date, six digits, ML: a Techlink waybill. |
 | `ZHPHD261301000000ML` | Month 13 isn't a date: not a Techlink shape. Check for a typo. |
-| `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Techlink's. |
+| `RR482910576CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Techlink's. |
 
 Lower case and spaces don't matter when you paste the number into Peek. If you have a number of another shape, see [tracking number formats](guide:tracking-number-formats).
 
@@ -36,7 +36,7 @@ Techlink publishes no list of its scans. It records each one in English and Chin
 | `Parcel has been received and processed at original facility` (仓库入库) | The parcel has been booked in at Techlink's warehouse in China. |
 | `Parcel has been packed and is ready for outbound shipping` (包裹装箱) | It's packed for the line abroad and about to leave China. |
 | `Departed from the original facility` | It has left Techlink's warehouse in China. |
-| `Export customs declaration completed` | China's export declaration, written after the parcel left the warehouse. The parcel isn't held in customs. |
+| `Export customs declaration completed` | Mainland China's export declaration, written after the parcel left the warehouse. The parcel isn't held in customs. |
 | `Parcel is in transit to origin airport` | On the road in China, from the warehouse to the airport of departure. |
 | `Depart from the original airport` | The flight has left the airport in China. |
 | `Arrive at the destination airport` | The flight has landed in the destination country. Import clearance comes next. |
@@ -73,7 +73,7 @@ Techlink's door-to-door express service comes duties paid (DDP) or duties unpaid
 
 ## Techlink contact number and customer service
 
-As read on 27 October 2026, Techlink's site, www.techlinksz.cn, lists no phone number, email address or office address. Its 联系我们 (contact us) link leads nowhere, and the site has no chat or contact form.
+Techlink's site, www.techlinksz.cn, lists no phone number, email address or office address. Its 联系我们 (contact us) link leads nowhere, and the site has no chat or contact form.
 
 For anything about your order, the seller is the one to ask. For a delivery problem in your country, ask the local carrier once you know which one it is.
 
@@ -85,7 +85,7 @@ Peek reads Techlink's own tracker, the same one its tracking page uses, and show
 
 When Techlink's record holds the delivering carrier's number, Peek looks at its shape. An international postal number (two letters, nine digits, two letters) points to the post of the destination country; a number only one carrier in Peek's catalog uses points to that carrier. When Peek reads that carrier's own tracking, it asks it and switches to it once it shows progress as recent as Techlink's. The parcel keeps its ZHPHD number and shows the other one with it. Otherwise Peek stays on Techlink's tracker, whose lines seen so far end at `Arrive at the destination airport` or a few steps later, in the destination country: expect its history to end there.
 
-Peek checks up to every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Techlink or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day it goes out for delivery while Techlink's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. For notifications, choose "Every scan", "Important steps" or "Delivery only". It can't contact Techlink or the seller for you.
 
 ## Questions about Techlink tracking
 

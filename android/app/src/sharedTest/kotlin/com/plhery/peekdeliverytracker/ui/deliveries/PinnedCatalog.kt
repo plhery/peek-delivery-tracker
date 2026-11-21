@@ -18,6 +18,16 @@ internal val pinnedIdentities: CarrierIdentities by lazy {
     CarrierIdentities(CarrierCatalog(JSONObject().put("x-carriers", pinned).toString().toByteArray()))
 }
 
+/**
+ * The bundled catalog as a server that serves its guides and carrier pages sends it (`guidePages`), as Peek's own does.
+ * The bundled one alone says nothing of them, so the screens it draws link no guide.
+ */
+internal val guideCatalogData: ByteArray
+    get() = ("{\"guidePages\": true," + SharedResources.text("CarrierCatalog.json").substringAfter('{')).toByteArray()
+
+/** The bundled catalog's carriers from a server that serves its guides ([guideCatalogData]). */
+internal val guideIdentities: CarrierIdentities by lazy { CarrierIdentities(CarrierCatalog(guideCatalogData)) }
+
 private val PINNED_CARRIERS = listOf(
     "139express", "a-tu-hora-express", "ab-courier", "a-duie-pyle", "a1-post", "aaa-cooper", "abf-freight", "ace-ee",
     "ace-lv", "ace-lt", "aci-express-kr", "acs-courier", "aeropost", "aex-paraguay", "afghan-post", "air-star-xpress",

@@ -36,6 +36,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.deliveries.guideIdentities
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.screenshot
 import androidx.test.core.app.ApplicationProvider
@@ -74,6 +75,7 @@ class SettingsScreenshotTest {
     /** The window's bars in points: the status bar at the top, the gesture bar at the bottom. */
     private class Bars(val top: Int = 62, val bottom: Int = 24)
 
+    /** Settings from a server that serves its guides ([guideIdentities]), as Peek's does. */
     private fun show(
         session: AuthenticationState = reader,
         dark: Boolean = false,
@@ -90,7 +92,7 @@ class SettingsScreenshotTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = session, dark = dark, source = source)
+                    RootHost(state = session, dark = dark, source = source, identities = guideIdentities)
                 }
             }
         }

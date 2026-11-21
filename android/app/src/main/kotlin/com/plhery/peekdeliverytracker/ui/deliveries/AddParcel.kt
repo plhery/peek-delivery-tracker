@@ -187,6 +187,7 @@ import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
+import com.plhery.peekdeliverytracker.ui.theme.guidePages
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
@@ -1060,10 +1061,12 @@ private fun AmazonOrdersLink(number: String) {
 
 /**
  * "Amazon parcels can be tracked: here's how to find the number", a link to the guide on the site at [linkBaseUrl] that
- * shows where an Amazon order's carrier and tracking number are, opened as Amazon's orders are.
+ * shows where an Amazon order's carrier and tracking number are, opened as Amazon's orders are. Nothing where the server
+ * serves no guides ([guidePages]).
  */
 @Composable
 private fun AmazonGuideLink(linkBaseUrl: String) {
+    if (!guidePages()) return
     val uriHandler = LocalUriHandler.current
     val language = LocalLanguage.current
     TintedButton(AnnotatedString(localized("add.amazonGuide")), { uriHandler.openUri(CarrierCatalog.amazonGuideUrl(linkBaseUrl, language)) }, ADD_AMAZON_GUIDE)

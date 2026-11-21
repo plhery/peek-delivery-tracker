@@ -109,6 +109,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.button
+import com.plhery.peekdeliverytracker.ui.theme.guidePages
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -120,7 +121,8 @@ import kotlin.math.max
 
 /**
  * The forwarding address's page, pushed in Settings for [account]: the "Beta" badge over the intro in
- * subheadline secondary and its link to the whole guide, in the language the guides are read in, then "inbox.start"
+ * subheadline secondary and its link to the whole guide, in the language the guides are read in, where the server
+ * serves its guides ([guidePages]), then "inbox.start"
  * while the account has no address yet. Forwarding one email by hand is all
  * it asks then: the address to copy or share, and what the last emails did, with what a few of them call for; then
  * whether each parcel an email adds is notified, on unless switched off; having the mail service forward by itself,
@@ -166,10 +168,12 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             SettingsBadge(localized("inbox.experimental"))
             Text(localized("inbox.intro"), color = colors.secondaryText, style = type.subheadline.sfLines())
-            StepLink(
-                CarrierCatalog.guideUrl("add-parcels-by-email", source.linkBaseUrl, LocalLanguage.current), "inbox.guide",
-                Modifier.testTag(ADD_BY_EMAIL_GUIDE),
-            )
+            if (guidePages()) {
+                StepLink(
+                    CarrierCatalog.guideUrl("add-parcels-by-email", source.linkBaseUrl, LocalLanguage.current), "inbox.guide",
+                    Modifier.testTag(ADD_BY_EMAIL_GUIDE),
+                )
+            }
         }
         if (failure != null) {
             Text(
@@ -247,11 +251,13 @@ private fun share(context: Context, text: String) {
 
 /**
  * "inbox.recent": the last emails, each its own row, then 9 under them in caption secondary why some shops' emails add
- * nothing, where one did, and how many emails it read today, once half the day's allowance is used.
+ * nothing, where one did, the Amazon guide where an email's number is only in the Amazon account and the server serves
+ * its guides ([guidePages]), and how many emails it read today, once half the day's allowance is used.
  */
 @Composable
 private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse, linkBaseUrl: String) {
     val localizer = LocalLocalizer.current
+    val guides = guidePages()
     val emails = inbox.recentEmails()
     if (emails.isEmpty()) return
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
@@ -262,7 +268,7 @@ private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse, linkBaseU
             }
         }
         if (emails.any { it.heldNoNumberUnexplained }) Note(localized("inbox.noNumber"))
-        if (emails.any { it.heldNumberInAmazonAccount }) {
+        if (guides && emails.any { it.heldNumberInAmazonAccount }) {
             StepLink(
                 CarrierCatalog.amazonGuideUrl(linkBaseUrl, LocalLanguage.current), "add.amazonGuide",
                 Modifier.testTag(ADD_BY_EMAIL_AMAZON_GUIDE),

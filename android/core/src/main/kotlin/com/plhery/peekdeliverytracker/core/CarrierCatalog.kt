@@ -28,11 +28,13 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.jsonObject
 
 /**
  * The carrier catalog: the shared engine's carriers, their tracking-number shapes and links, read from the
- * bundled CarrierCatalog.json and refreshed from /api/carriers. `definitionsFlow` publishes each change.
+ * bundled CarrierCatalog.json and refreshed from /api/carriers. `definitionsFlow` publishes each change, and
+ * `guidePagesFlow` whether the server serves its guides and carrier pages.
  */
 class CarrierCatalog private constructor(
     initial: Initial,
@@ -50,23 +52,26 @@ class CarrierCatalog private constructor(
         fun header(name: String): String? = headers.entries.firstOrNull { it.key.equals(name, ignoreCase = true) }?.value
     }
 
-    private class Initial(val definitions: Map<CarrierId, CarrierDefinition>, val etag: String?)
+    private class Initial(val definitions: Map<CarrierId, CarrierDefinition>, val etag: String?, val guidePages: Boolean)
 
     private class Contract(
         val carriers: Map<String, CarrierDefinition>,
         /** Carriers this build cannot read, such as one asking for an input it does not know. */
         val unreadable: Set<String>,
+        /** Whether the server serves its guides and carrier pages: not where it says nothing, as an older server and the
+         * bundled catalog don't. */
+        val guidePages: Boolean,
     )
 
     private class CatalogException : Exception("Invalid carrier catalog")
 
-    /** The bundled catalog, or the one cached by a refresh in `cacheFile`. */
+    /** The bundled catalog, which links no guide, or the one cached by a refresh in `cacheFile`. */
     constructor(cacheFile: File? = null, loader: Loader? = null) :
-        this(cachedContract(cacheFile) ?: Initial(bundledDefinitions(), null), cacheFile, loader)
+        this(cachedContract(cacheFile) ?: Initial(bundledDefinitions(), null, guidePages = false), cacheFile, loader)
 
-    /** A catalog read from `data`; throws when it is not one. */
+    /** A catalog read from `data`, with its `guidePages`; throws when it is not one. */
     constructor(data: ByteArray, cacheFile: File? = null, loader: Loader? = null) :
-        this(Initial(validatedDefinitions(decodeContract(data).carriers), null), cacheFile, loader)
+        this(decodeContract(data).let { Initial(validatedDefinitions(it.carriers), null, it.guidePages) }, cacheFile, loader)
 
     private val state = MutableStateFlow(initial.definitions)
 
@@ -74,6 +79,16 @@ class CarrierCatalog private constructor(
     val definitionsFlow: StateFlow<Map<CarrierId, CarrierDefinition>> = state.asStateFlow()
 
     val definitions: Map<CarrierId, CarrierDefinition> get() = state.value
+
+    private val guidePagesState = MutableStateFlow(initial.guidePages)
+
+    /**
+     * Whether the server serves its guides and carrier pages (`guidePages` in /api/carriers), kept with the cached
+     * catalog. Without them those addresses are the site's 404 page, so no screen links one.
+     */
+    val guidePagesFlow: StateFlow<Boolean> = guidePagesState.asStateFlow()
+
+    val guidePages: Boolean get() = guidePagesState.value
 
     private fun publish(definitions: Map<CarrierId, CarrierDefinition>) {
         state.value = definitions
@@ -140,8 +155,9 @@ class CarrierCatalog private constructor(
             val refreshed = validatedDefinitions(carriers)
             val etag = response.header("ETag")
             publish(refreshed)
+            guidePagesState.value = contract.guidePages
             cachedETag = etag
-            saveCache(carriers, etag)
+            saveCache(carriers, etag, contract.guidePages)
             CarrierCatalogRefreshResult.Updated
         } catch (cancellation: CancellationException) {
             throw cancellation
@@ -934,12 +950,12 @@ class CarrierCatalog private constructor(
             detect(value).confidence != CarrierMatch.Confidence.None
     }
 
-    private fun saveCache(carriers: Map<String, CarrierDefinition>, etag: String?) {
+    private fun saveCache(carriers: Map<String, CarrierDefinition>, etag: String?, guidePages: Boolean) {
         val cacheFile = cacheFile ?: return
         try {
             val record = buildMap<String, JsonElement> {
                 etag?.let { put("etag", JsonPrimitive(it)) }
-                put("contract", JsonObject(mapOf("x-carriers" to encodeCarriers(carriers))))
+                put("contract", JsonObject(mapOf("guidePages" to JsonPrimitive(guidePages), "x-carriers" to encodeCarriers(carriers))))
             }
             val directory = cacheFile.absoluteFile.parentFile
             directory.mkdirs()
@@ -1033,7 +1049,7 @@ class CarrierCatalog private constructor(
          * decoded classes, so a file written by a build that did not know a catalog field has lost it. Bump
          * the name when one is added. */
         fun cacheFile(cachesDirectory: File): File =
-            File(File(cachesDirectory, "delivery-tracker"), "carrier-catalog-v7.json")
+            File(File(cachesDirectory, "delivery-tracker"), "carrier-catalog-v8.json")
 
         /** Carriers the detect route asks at once. */
         const val maximumRecognitions = 5
@@ -1076,7 +1092,8 @@ class CarrierCatalog private constructor(
 
         /**
          * Peek's guide [id] on the site at [apiBaseUrl], in the language the guides are read in (`catalogLanguage`). The
-         * site leads the guide's id to its address in that language; English has no prefix.
+         * site leads the guide's id to its address in that language; English has no prefix. Only a server whose catalog
+         * says `guidePages` serves it.
          */
         fun guideUrl(id: String, apiBaseUrl: String, language: AppLanguage): String {
             val guideLanguage = language.catalogLanguage
@@ -1436,7 +1453,7 @@ class CarrierCatalog private constructor(
                     else -> throw CatalogException()
                 }
                 val contract = contract(record.getValue("contract").jsonObject)
-                Initial(validatedDefinitions(contract.carriers), etag)
+                Initial(validatedDefinitions(contract.carriers), etag, contract.guidePages)
             } catch (_: Exception) {
                 null
             }
@@ -1465,7 +1482,9 @@ class CarrierCatalog private constructor(
                     unreadable += key
                 }
             }
-            return Contract(carriers, unreadable)
+            // Only `true` itself turns them on.
+            val guidePages = (json["guidePages"] as? JsonPrimitive)?.takeIf { !it.isString }?.booleanOrNull == true
+            return Contract(carriers, unreadable, guidePages)
         }
 
         private fun encodeCarriers(carriers: Map<String, CarrierDefinition>): JsonObject =

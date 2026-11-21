@@ -123,8 +123,12 @@ class PassNotesTest {
         return DemoCards.parcels().map { if (it.id == id) change(it) else it }
     }
 
-    /** The demo's `parcels` in the app, as `prepare` sets the stores up. */
-    private fun show(parcels: List<Parcel> = DemoCards.parcels(), prepare: FakeDeliveries.() -> Unit = {}) {
+    /** The demo's `parcels` in the app, its carriers [identities]', as `prepare` sets the stores up. */
+    private fun show(
+        parcels: List<Parcel> = DemoCards.parcels(),
+        identities: CarrierIdentities = DemoCards.identities,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
         source = FakeDeliveries(parcels, AuthenticationState.Demo).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
@@ -133,7 +137,7 @@ class PassNotesTest {
                 LocalDensity provides Density(density.density, fontScale),
                 LocalDeliveriesState provides { deliveries = it },
             ) {
-                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = true)
+                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = true, identities = identities)
             }
         }
         compose.waitForIdle()
@@ -744,6 +748,18 @@ class PassNotesTest {
         assertEquals(0, buttons("Change carrier"))
         // The hint, rather than why the last check failed.
         assertFalse(exists(PAGE_SYNC_ERROR))
+        // The bundled catalog says nothing of the guides: the hint alone.
+        assertFalse(exists(PAGE_AMAZON_GUIDE))
+    }
+
+    /** Where the server serves its guides, the Amazon guide under the hint. */
+    @Test
+    fun anAmazonLogisticsParcelLinksTheGuideWhereTheServerServesIt() {
+        show(demo("Moon lamp") { it.copy(carrier = CarrierId.AmazonLogistics) }, identities = guideIdentities)
+        open(id("Moon lamp"))
+        compose.onNodeWithTag(PAGE_CARRIER_HINT).performScrollTo()
+        assertTrue(textExists("Amazon Logistics deliveries are usually tracked in Your Orders on Amazon."))
+        assertTrue(exists(PAGE_AMAZON_GUIDE))
     }
 
     @Test

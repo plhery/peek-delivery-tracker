@@ -93,7 +93,10 @@ class PassNotesScreenshotTest {
         )
     }
 
-    /** The demo's `parcels` as the page shots show them, with the iPhone's status bar 62 tall and gesture bar 24. */
+    /**
+     * The demo's `parcels` as the page shots show them, with the iPhone's status bar 62 tall and gesture bar 24, from a
+     * server that serves its guides ([guideIdentities]), as Peek's does.
+     */
     private fun show(parcels: List<Parcel>, dark: Boolean = false) {
         val source = FakeDeliveries(parcels, AuthenticationState.Demo)
         compose.waitsForMaps()
@@ -101,7 +104,7 @@ class PassNotesScreenshotTest {
             view = LocalView.current
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
+                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source, identities = guideIdentities)
                 }
             }
         }

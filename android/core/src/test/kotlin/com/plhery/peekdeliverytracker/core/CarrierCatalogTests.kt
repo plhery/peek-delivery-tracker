@@ -28,6 +28,8 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -1977,6 +1979,80 @@ class CarrierCatalogTests {
         }
     }
 
+    /** The future catalog as a server answers it, with `guidePages` set to [value], or without it where null. */
+    private fun withGuidePages(value: Boolean?): ByteArray {
+        val contract = Json.parseToJsonElement(futureCatalogData.decodeToString()).jsonObject
+        return (if (value == null) contract else JsonObject(contract + ("guidePages" to JsonPrimitive(value)))).toString().toByteArray()
+    }
+
+    /** The bundled catalog says nothing of the guides, so a fresh install links none until a server says it serves them. */
+    @Test
+    fun theBundledCatalogLinksNoGuide() {
+        assertFalse(catalog.guidePages)
+        assertFalse(CarrierCatalog(bundledCatalogData).guidePages)
+    }
+
+    /** `guidePages` from /api/carriers: only `true` turns the guides on; an older server sends nothing, which is off. */
+    @Test
+    fun aRefreshReadsWhetherTheServerServesItsGuides() = runTest {
+        for ((sent, read) in listOf(true to true, false to false, null to false)) {
+            val catalog = CarrierCatalog(
+                withGuidePages(true),
+                loader = { CarrierCatalog.Response(200, headers = mapOf("ETag" to "\"guides-$sent\""), body = withGuidePages(sent)) },
+            )
+            assertTrue(catalog.guidePagesFlow.value)
+            assertEquals(CarrierCatalogRefreshResult.Updated, catalog.refresh("https://delivery.example", force = true))
+            assertEquals("$sent", read, catalog.guidePages)
+            assertEquals("$sent", read, catalog.guidePagesFlow.value)
+            assertEquals("$sent", read, CarrierCatalog(withGuidePages(sent)).guidePages)
+        }
+    }
+
+    /**
+     * The setting is cached with the catalog: a restart keeps it, a 304 (the ETag covers it) leaves it as it is, and a
+     * failed refresh too. A later answer that turns the guides off is cached as well.
+     */
+    @Test
+    fun whetherTheServerServesItsGuidesIsCachedWithTheCatalog() = runTest {
+        val folder = File(System.getProperty("java.io.tmpdir"), "carrier-catalog-${UUID.randomUUID()}")
+        val cacheFile = CarrierCatalog.cacheFile(folder)
+        try {
+            val first = CarrierCatalog(
+                bundledCatalogData,
+                cacheFile = cacheFile,
+                loader = { CarrierCatalog.Response(200, headers = mapOf("ETag" to "\"guides-on\""), body = withGuidePages(true)) },
+            )
+            assertFalse(first.guidePages)
+            assertEquals(CarrierCatalogRefreshResult.Updated, first.refresh("https://delivery.example", force = true))
+            assertTrue(first.guidePages)
+
+            var answer = CarrierCatalog.Response(304, body = ByteArray(0))
+            val requests = mutableListOf<CarrierCatalog.Request>()
+            val restarted = CarrierCatalog(
+                cacheFile = cacheFile,
+                loader = { request ->
+                    requests += request
+                    answer
+                },
+            )
+            assertTrue(restarted.guidePages)
+            assertEquals(CarrierCatalogRefreshResult.NotModified, restarted.refresh("https://delivery.example", force = true))
+            assertEquals("\"guides-on\"", requests.last().headers["If-None-Match"])
+            assertTrue(restarted.guidePages)
+
+            answer = CarrierCatalog.Response(500, body = ByteArray(0))
+            assertEquals(CarrierCatalogRefreshResult.Failed, restarted.refresh("https://delivery.example", force = true))
+            assertTrue(restarted.guidePages)
+
+            answer = CarrierCatalog.Response(200, headers = mapOf("ETag" to "\"guides-off\""), body = withGuidePages(false))
+            assertEquals(CarrierCatalogRefreshResult.Updated, restarted.refresh("https://delivery.example", force = true))
+            assertFalse(restarted.guidePagesFlow.value)
+            assertFalse(CarrierCatalog(cacheFile = cacheFile).guidePages)
+        } finally {
+            folder.deleteRecursively()
+        }
+    }
+
     @Test
     fun refreshedDefinitionsReplaceRememberedDetections() = runTest {
         val catalog = CarrierCatalog(
@@ -2064,7 +2140,7 @@ class CarrierCatalogTests {
         val folder = File(System.getProperty("java.io.tmpdir"), "carrier-catalog-${UUID.randomUUID()}")
         val cacheFile = CarrierCatalog.cacheFile(folder)
         try {
-            assertEquals("carrier-catalog-v7.json", cacheFile.name)
+            assertEquals("carrier-catalog-v8.json", cacheFile.name)
             val catalog = CarrierCatalog(
                 bundledCatalogData,
                 cacheFile = cacheFile,

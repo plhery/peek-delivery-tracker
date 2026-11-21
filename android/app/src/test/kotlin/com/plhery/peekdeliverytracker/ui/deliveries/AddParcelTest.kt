@@ -92,6 +92,7 @@ import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.sheet.COVER_PANEL
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_GRABBER
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
@@ -155,6 +156,7 @@ class AddParcelTest {
         ticking: View? = null,
         inbox: DeliveriesInbox? = null,
         scanner: LabelScanner = NoLabelScanner,
+        identities: CarrierIdentities = DemoCards.identities,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         source = FakeDeliveries(list, session).apply {
@@ -166,7 +168,7 @@ class AddParcelTest {
             val density = LocalDensity.current
             val root = @Composable {
                 CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
-                    RootHost(state = session, source = source, reduceMotion = reduceMotion, inbox = inbox, scanner = scanner)
+                    RootHost(state = session, source = source, reduceMotion = reduceMotion, inbox = inbox, scanner = scanner, identities = identities)
                 }
             }
             if (ticking != null) CompositionLocalProvider(LocalView provides ticking, content = root) else root()
@@ -816,7 +818,7 @@ class AddParcelTest {
 
     @Test
     fun numbersHeldBackSayWhyOnceSettledAndAddWaits() {
-        show()
+        show(identities = guideIdentities)
         open()
         type("hello there")
         assertTrue(exists(ADD_NOT_FOUND))
@@ -939,12 +941,31 @@ class AddParcelTest {
     @Test
     fun anAmazonNumberOnlyAnAccountFollowsOffersItsOrdersAndNoAdd() {
         val number = "FR4829173650"
-        show { detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.AmazonLogistics) }
+        show(identities = guideIdentities) { detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.AmazonLogistics) }
         open()
         type(number)
         settle()
         assertTrue(exists(ADD_AMAZON_ORDERS))
         assertTrue(exists(ADD_AMAZON_GUIDE))
+        node(ADD_SAVE).assertIsNotEnabled()
+    }
+
+    /** A server that serves no guides, as the bundled catalog says nothing of them: Amazon's orders alone. */
+    @Test
+    fun withoutTheServersGuidesAmazonsOrdersStandAlone() {
+        val number = "FR4829173650"
+        show { detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.AmazonLogistics) }
+        open()
+        type("402-9182736-4554637")
+        leave()
+        assertTrue(exists(ADD_ORDER))
+        assertTrue(exists(ADD_AMAZON_ORDERS))
+        assertFalse(exists(ADD_AMAZON_GUIDE))
+
+        type(number)
+        settle()
+        assertTrue(exists(ADD_AMAZON_ORDERS))
+        assertFalse(exists(ADD_AMAZON_GUIDE))
         node(ADD_SAVE).assertIsNotEnabled()
     }
 

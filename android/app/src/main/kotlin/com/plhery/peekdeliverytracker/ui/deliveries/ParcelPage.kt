@@ -116,6 +116,7 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.button
+import com.plhery.peekdeliverytracker.ui.theme.guidePages
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -509,7 +510,8 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
  * its switch moves the parcel to the carrier its number names, where the parcel is the reader's to change rather than
  * the sample, followed through someone else's link or a copy the service forgot. Its Delete asks as the ••• menu's
  * does, wherever the page has one: not on the sample's. The carrier's page it opens while the carrier's site is down
- * is counted, and the page's question hears of the visit, as for the pages under the number.
+ * is counted, and the page's question hears of the visit, as for the pages under the number. Amazon's guide is linked
+ * only where the server serves its guides ([guidePages]).
  */
 @Composable
 private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -526,7 +528,7 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
             state.source.action("parcel-carrier-link")
             state.source.feedbacks.of(pageId)?.visited(name)
         },
-        amazonGuideUrl = CarrierCatalog.amazonGuideUrl(state.source.linkBaseUrl, LocalLanguage.current),
+        amazonGuideUrl = if (guidePages()) CarrierCatalog.amazonGuideUrl(state.source.linkBaseUrl, LocalLanguage.current) else null,
     )
 }
 

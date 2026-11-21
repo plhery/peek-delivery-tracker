@@ -25,6 +25,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.card
 import com.plhery.peekdeliverytracker.ui.deliveries.cardNamed
+import com.plhery.peekdeliverytracker.ui.deliveries.guideIdentities
 import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures
@@ -57,10 +58,11 @@ class TalkBackScreensTest {
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(ZurichTime()).around(compose)
 
+    /** The app as [state], from a server that serves its guides ([guideIdentities]), as Peek's does. */
     private fun show(state: AuthenticationState, parcels: List<Parcel> = DemoCards.parcels(), prepare: FakeDeliveries.() -> Unit = {}) {
         val source = FakeDeliveries(parcels, state).apply(prepare)
         compose.waitsForMaps()
-        compose.setContent { RootHost(state = state, source = source) }
+        compose.setContent { RootHost(state = state, source = source, identities = guideIdentities) }
         settle()
     }
 

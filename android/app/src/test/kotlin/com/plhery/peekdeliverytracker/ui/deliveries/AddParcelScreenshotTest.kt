@@ -181,8 +181,8 @@ class AddParcelScreenshotTest {
 
     @Test
     fun amazonUnableToAnswer() {
-        // The bundled catalog, which knows Amazon's numbers: no picker shows here.
-        show(identities = DemoCards.identities)
+        // The bundled catalog, which knows Amazon's numbers: no picker shows here. From a server that serves the guide.
+        show(identities = guideIdentities)
         typeAndLeave("FR4829173650")
         compose.screenshot("add_parcel_amazon_light")
     }

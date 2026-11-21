@@ -27,6 +27,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.CarrierCatalogRefreshResult
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResult
@@ -37,7 +39,10 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
+import com.plhery.peekdeliverytracker.ui.deliveries.guideCatalogData
+import com.plhery.peekdeliverytracker.ui.deliveries.guideIdentities
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures.ADDRESS
 import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures.RENEWED
 import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures.mailbox
@@ -45,6 +50,7 @@ import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures.offer
 import java.io.IOException
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -78,12 +84,17 @@ class AddByEmailSettingsTest {
         }
     }
 
-    private fun show(session: AuthenticationState = reader, prepare: FakeDeliveries.() -> Unit = {}) {
+    /** The app as [session], its carriers [identities]': the bundled catalog's, which says nothing of the guides. */
+    private fun show(
+        session: AuthenticationState = reader,
+        identities: CarrierIdentities = DemoCards.identities,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
         source = FakeDeliveries(DemoCards.parcels(), session).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalUriHandler provides links) {
-                RootHost(state = session, dark = false, source = source)
+                RootHost(state = session, dark = false, source = source, identities = identities)
             }
         }
         settle()
@@ -173,14 +184,29 @@ class AddByEmailSettingsTest {
         assertEquals(emptyList<String>(), source.addByEmailClient.requests)
     }
 
-    /** Under the intro, the guide on the site in the language the guides are read in. */
+    /** Under the intro, the guide on the site in the language the guides are read in, where the server serves it. */
     @Test
     fun theIntroLinksTheWholeGuide() {
-        show { addByEmailClient.offer = offer(inbox = null) }
+        show(identities = guideIdentities) { addByEmailClient.offer = offer(inbox = null) }
         tap(SETTINGS_ADD_BY_EMAIL)
         assertTrue(shows(text("inbox.guide")))
         tap(ADD_BY_EMAIL_GUIDE)
         assertEquals(listOf("https://example.com/guides/add-parcels-by-email"), opened)
+    }
+
+    /** A server that serves no guides: the intro alone, until a refreshed catalog says it serves them. */
+    @Test
+    fun theIntroLinksNoGuideUntilTheServerServesThem() {
+        val catalog = CarrierCatalog(loader = { CarrierCatalog.Response(200, body = guideCatalogData) })
+        show(identities = CarrierIdentities(catalog)) { addByEmailClient.offer = offer(inbox = null) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        assertTrue(shows(text("inbox.intro")))
+        assertFalse(exists(ADD_BY_EMAIL_GUIDE))
+        assertFalse(shows(text("inbox.guide")))
+
+        assertEquals(CarrierCatalogRefreshResult.Updated, runBlocking { catalog.refresh("https://example.com", force = true) })
+        settle()
+        assertTrue(exists(ADD_BY_EMAIL_GUIDE))
     }
 
     @Test
@@ -265,6 +291,18 @@ class AddByEmailSettingsTest {
         assertTrue(shows("Amazon.it"))
         assertTrue(shows(localizer.text("inbox.result.account", mapOf("shop" to "Amazon"))))
         assertFalse(shows(text("inbox.noNumber")))
+        // The bundled catalog says nothing of the guides: the row alone says where the number is.
+        assertFalse(exists(ADD_BY_EMAIL_AMAZON_GUIDE))
+    }
+
+    /** Where the server serves its guides, the Amazon guide under the last emails. */
+    @Test
+    fun anEmailWhoseNumberIsInTheAmazonAccountLinksTheGuide() {
+        val amazon = AddByEmailEntry(at = "2026-10-29T04:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
+        show(identities = guideIdentities) { addByEmailClient.offer = offer(mailbox(recent = listOf(amazon))) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        tap(ADD_BY_EMAIL_AMAZON_GUIDE)
+        assertEquals(listOf("https://example.com/guides/amazon-orders"), opened)
     }
 
     /**

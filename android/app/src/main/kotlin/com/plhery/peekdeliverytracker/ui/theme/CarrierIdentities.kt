@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.theme
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -94,6 +95,17 @@ fun rememberCarrierIdentities(catalog: CarrierCatalog?): CarrierIdentities? {
         catalog.definitionsFlow.collect { value = CarrierIdentities.load(catalog, it) }
     }
     return identities
+}
+
+/**
+ * Whether the server serves its guides and carrier pages, as the app's catalog last heard (`guidePagesFlow`): without
+ * them those addresses are the site's 404 page, so a screen links no guide.
+ */
+@Composable
+fun guidePages(): Boolean {
+    val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
+    val served by catalog.guidePagesFlow.collectAsState()
+    return served
 }
 
 /** A carrier's identity for a screen, or null while the identities are loading. */

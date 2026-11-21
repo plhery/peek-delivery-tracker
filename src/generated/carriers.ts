@@ -2700,6 +2700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "jt-express-middle-east-sendungsverfolgung",
+      "title": "J&T Express Middle East Tracking: JTE-Nummern & Status",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "globalpost-sendungsverfolgung",
@@ -3542,6 +3550,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "suivi-jt-express-middle-east",
+      "title": "Suivi J&T Express Middle East\u00a0: numéros JTE et statuts",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "suivi-globalpost",
@@ -4286,6 +4302,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Delhivery: numeri AWB, stati e assistenza",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "tracciamento-jt-express-middle-east",
+      "title": "Tracciamento J&T Express Middle East: codici JTE e stati",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
     },
     {
       "id": "globalpost",
@@ -5034,6 +5058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "seguimiento-jt-express-middle-east",
+      "title": "Seguimiento J&T Express Middle East: códigos JTE y estados",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "seguimiento-globalpost",
@@ -5738,6 +5770,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Delhivery: números AWB, estados e apoio",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "seguimento-jt-express-middle-east",
+      "title": "Seguimento J&T Express Middle East: códigos JTE e estados",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
     },
     {
       "id": "globalpost",
@@ -6502,6 +6542,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Delhivery: numery AWB, statusy i pomoc",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "sledzenie-jt-express-middle-east",
+      "title": "Śledzenie J&T Express Middle East: numery JTE i statusy",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
     },
     {
       "id": "globalpost",

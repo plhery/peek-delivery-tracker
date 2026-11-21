@@ -14,8 +14,8 @@ J&T calls it the waybill number (`运单号`). Peek knows one shape for J&T Expr
 
 | Number | What it is |
 | --- | --- |
-| `JT0000000000000` | JT and 13 digits. J&T Express, the group's network in Southeast Asia, has the same shape in Peek's catalog, so Peek doesn't name J&T China on its own (below). |
-| `0000000000000` | The 13 digits without JT. J&T's own tracker adds the JT itself. In Peek, these digits fit other carriers, such as DPD France and Yunda, not J&T: type the JT. |
+| `JT4829105736491` | JT and 13 digits. J&T Express, the group's network in Southeast Asia, has the same shape in Peek's catalog, so Peek doesn't name J&T China on its own (below). |
+| `0148291057364` | The 13 digits without JT. J&T's own tracker adds the JT itself. In Peek, these digits fit other carriers, such as DPD France and Yunda, not J&T: type the JT. |
 
 Lower case, spaces and dashes don't matter in Peek.
 
@@ -56,7 +56,7 @@ J&T's waybill terms let it deliver a parcel in one of four ways:
 
 If you ask or agree, the courier can also leave it at another address you name, or at a parcel point set up by the local government, the residents' committee or the building's management. Once the parcel is left one of these ways with its outer packaging intact, J&T counts its service as done.
 
-China's Express Market Administration Measures, in force since 1 March 2024, add three rules. A parcel goes into a smart locker or a parcel station only with your consent, and the courier company may not confirm receipt for you without it. And you can check the parcel against the waybill when it's handed over, looking inside or refusing it if the packaging is visibly damaged or the contents are fragile.
+Mainland China's Express Market Administration Measures, in force since 1 March 2024, add three rules. A parcel goes into a smart locker or a parcel station only with your consent, and the courier company may not confirm receipt for you without it. And you can check the parcel against the waybill when it's handed over, looking inside or refusing it if the packaging is visibly damaged or the contents are fragile.
 
 ## J&T parcel not updating, lost or returned
 
@@ -64,15 +64,15 @@ China's Express Market Administration Measures, in force since 1 March 2024, add
 
 **No update.** When a parcel still on its way has had no new step for 4 days, Peek flags it: "No tracking update for four days". It notes that parcels often go quiet and keeps asking. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
-**Lost or damaged.** Ask the seller first: the seller booked J&T, not you. Under J&T's waybill terms, the sender claims within a 30-day claim period, with proof of the parcel's value. Without insurance (`保价`), J&T pays the actual loss up to ten times the shipping fee; an insured parcel is paid up to its declared value. If the parcel is late, J&T only waives the shipping fee. These rules cover parcels collected and delivered within China. See [lost parcels](guide:lost-parcel).
+**Lost or damaged.** Ask the seller first: the seller booked J&T, not you. Under J&T's waybill terms, the sender claims within a 30-day claim period, with proof of the parcel's value. Without insurance (`保价`), J&T pays the actual loss up to ten times the shipping fee; an insured parcel is paid up to its declared value. If the parcel is late, J&T only waives the shipping fee. These rules cover parcels collected and delivered within mainland China. See [lost parcels](guide:lost-parcel).
 
 **Returned.** J&T may send a parcel back, or handle it as the sender reasonably asks, when the address is unclear, the recipient refuses it (`已拒收`) or delivery fails through no fault of J&T's. The sender pays. See [returned to sender](guide:returned-to-sender).
 
-**Delivered but not there.** Check collection points and lockers near the address, your building's reception and, if the parcel went to one, the forwarder. Then call J&T on 956025 or use its online customer service, with the waybill number. If J&T's answer doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal authorities. See [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** Check collection points and lockers near the address, your building's reception and, if the parcel went to one, the forwarder. Then call J&T on 956025 or use its online customer service, with the waybill number. If J&T's answer doesn't satisfy you, or doesn't come in time, mainland China's rules let you appeal to the postal authorities. See [delivered but not received](guide:delivered-not-received).
 
 ## J&T Express China contact and customer service
 
-As read on 1 November 2026, J&T Express China lists:
+J&T Express China lists:
 
 - **956025**: its customer service hotline (`服务热线`). People answer from 08:30 to 20:00 in China.
 - **Online customer service** (`在线客服`) on jtexpress.com.cn: people answer from 08:30 to 21:00. J&T also lists an automated customer service, around the clock.
@@ -89,13 +89,13 @@ Its shape alone doesn't tell Peek that a JT number is J&T China's rather than J&
 - **Picked by you.** Tap "Change" and pick J&T Express China under "Fits this number", or search for J&T or 极兔 under "All carriers". On a parcel you've already added, use "Change carrier". Do the same if Peek ever files a J&T China parcel under J&T Express.
 - **A link.** Paste a J&T China tracking link (jtexpress.com.cn with `indexIpt=` and the number), and Peek files the parcel under J&T Express China at once ("Detected carrier").
 
-**Where the steps come from.** J&T's tracker shows a parcel only with the last four digits of the recipient's or sender's phone. Once J&T Express China is the parcel's carrier, type them under "Last 4 digits of the phone number" when you add the parcel or change its carrier, or tap "Add the digits" on the parcel's page: Peek then reads J&T's tracker and shows the steps in J&T's Chinese words. Peek keeps the digits with the parcel and sends them only to J&T. Without them, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the status and history of the first one that has the parcel, in that service's words. They may not match J&T's Chinese statuses above, and they can be behind J&T's own tracker.
+**Where the steps come from.** J&T's tracker shows a parcel only with the last four digits of the recipient's or sender's phone. Once J&T Express China is the parcel's carrier, type them under "Last 4 digits of the phone number" when you add the parcel or change its carrier, or tap "Add the digits" on the parcel's page: Peek then reads J&T's tracker and shows the steps in J&T's Chinese words. Peek keeps the digits with the parcel and sends them only to J&T. Without them, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK, in an order that varies, and shows the status and history of the first one that has the parcel, in that service's words. They may not match J&T's Chinese statuses above, and they can be behind J&T's own tracker.
 
 **The link on the parcel's page.** Until a service has the parcel, "Open the J&T Express China website" opens the number on J&T's tracker. Once a service has it, the link opens that service instead, such as "Open the ParcelsApp website".
 
 **Another carrier delivering.** If a tracking service names another carrier for your parcel, with that carrier's number, and Peek reads that carrier's own tracking, Peek asks it too. Once that carrier shows a scan at least as recent as the service's latest, Peek follows the parcel there. A forwarder's number is another parcel to add.
 
-**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, every 3 hours once a day passes without a new step, and up to every 15 minutes on the day it's out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". For a parcel that may wait at a collection point or locker, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact J&T, the forwarder or the seller for you.
+**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, every 3 hours once a day passes without a new step, and up to every 15 minutes on the day it's out for delivery, only while you have it open or notifications are on. It can notify you of "Every scan", "Important steps" or "Delivery only". For a parcel that may wait at a collection point or locker, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact J&T, the forwarder or the seller for you.
 
 ## Questions about J&T Express China tracking
 
@@ -105,7 +105,7 @@ Yes. J&T Express was founded in Indonesia in August 2015 and started operating i
 
 ### What does a J&T Express China tracking number look like?
 
-JT and 13 digits, such as `JT0000000000000`. Keep the JT in Peek: the 13 digits alone fit other carriers.
+JT and 13 digits, such as `JT4829105736491`. Keep the JT in Peek: the 13 digits alone fit other carriers.
 
 ### What does 已签收 mean on J&T tracking?
 

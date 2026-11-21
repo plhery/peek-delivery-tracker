@@ -36,8 +36,8 @@ Le site d'OnTrac est uniquement en anglais. Voici les libellés d'événements e
 | `Package Delivered` | Colis livré. | « Livré » |
 | `Delivery Pending` | Le chauffeur n'a pas pu laisser le colis (accès sécurisé, signature requise, etc.) ; nouvelle tentative prévue. | « Tentative de livraison » |
 | `Business closed. Please provide hours` | Commerce fermé lors du passage ; OnTrac retente jusqu'à 3 fois et demande tes horaires d'ouverture. | « Tentative de livraison » |
-| `Incomplete address. Please contact us` | Adresse incomplète lors de la tournée ; fournis le complément sous 3 jours ouvrés pour éviter le retour. | « Tentative de livraison » |
-| `Details needed. Please contact us` | Colis retenu au centre en attente de précisions d'adresse ou d'accès (sous 3 jours ouvrés). | « Problème signalé » |
+| `Incomplete address. Please contact us` | Adresse incomplète lors de la tournée ; fournis le complément pour éviter le retour. | « Tentative de livraison » |
+| `Details needed. Please contact us` | Colis retenu au centre en attente de précisions d'adresse ou d'accès. | « Problème signalé » |
 | `Order has been transferred to another carrier` | OnTrac a remis le colis à un transporteur tiers non nommé (le titre sur `ontrac.com` affiche pourtant *Delivered*). | « En transit » |
 | `Delivery Delay`, `Delayed. Delivery date updated`, `Delayed by road closure`, `Delayed. Could not reach delivery area` | Retard d'acheminement, route fermée ou zone inaccessible ; une nouvelle date de livraison est calculée. | « En transit » |
 | `Weather delay. Delivery date updated`, `Weather delay. See service alerts` | Retard météorologique sur le réseau OnTrac. | « En transit » |
@@ -47,13 +47,13 @@ Consulte aussi notre guide général sur [le sens des statuts de suivi](guide:tr
 
 ## Horaires de livraison OnTrac et livraisons manquées
 
-**Horaires.** OnTrac livre habituellement à domicile entre **`08:00` et `21:00`** (heure locale) à la date prévue, et assure aussi des livraisons le **samedi et le dimanche** sur les mêmes horaires dans une partie de ses zones de desserte (gabarit standard dans les conditions complémentaires : jusqu'à `50 lbs`, longueur `48 in`, deuxième côté `30 in`, volume `8 640 po³`).
+**Horaires.** OnTrac livre habituellement à domicile entre **`08:00` et `21:00`** (heure locale) à la date prévue, et assure aussi des livraisons le **samedi et le dimanche** sur les mêmes horaires dans une partie de ses zones de desserte (gabarit standard dans les conditions complémentaires : poids facturable jusqu'à `50 lbs`, longueur `48 in`, deuxième côté `30 in`, volume `8 640 po³`).
 
-**Livraison manquée.** OnTrac effectue jusqu'à **3 tentatives de livraison** (la suivante sous **1 à 2 jours ouvrés**, jamais le jour même), puis renvoie ou traite le colis selon les instructions de l'expéditeur ([livraison manquée](guide:missed-delivery)).
+**Livraison manquée.** OnTrac effectue jusqu'à **3 tentatives de livraison** (la suivante sous **1 à 2 jours ouvrés**, jamais le jour même), puis renvoie ou traite le colis selon ses règles pour les envois non livrables ([livraison manquée](guide:missed-delivery)).
 
 **Ajouter un code d'accès ou modifier l'adresse.** Si une tentative échoue alors que tu étais présent, vérifie l'adresse sur ta commande puis transmets un digicode ou des instructions au chatbot **Wink** avec ton numéro de suivi (si le colis est déjà en tournée, la consigne ne s'appliquera qu'au passage suivant sous 1 à 2 jours ouvrés). En revanche, tout **changement d'adresse** doit être approuvé par le vendeur ([modifier une adresse de livraison](guide:change-delivery-address)).
 
-**Retrait en centre et alertes SMS.** OnTrac ne propose ni points relais ni consignes propres, et ne garde un colis en agence locale que sur demande préalable (apporte le numéro de suivi et une pièce d'identité avec photo). Sur `ontrac.com/tracking/`, le bouton `Get Text Alerts` (`NotifyMe`) permet de recevoir un SMS lors de la mise en livraison, d'une tentative ou de la remise (désinscription en répondant `STOP` au `(469) 529-1133`), et d'afficher la photo de livraison (`VPOD`).
+**Retrait en centre et alertes SMS.** Le site d'OnTrac ne mentionne ni points relais ni consignes propres, et OnTrac ne garde un colis en agence locale que sur demande préalable (apporte le numéro de suivi et une pièce d'identité avec photo). Sur `ontrac.com/tracking/`, le bouton `Get Text Alerts` (`NotifyMe`) permet de recevoir un SMS lors de la mise en livraison, d'une tentative ou de la remise (désinscription en répondant `STOP` au `(469) 529-1133`) ; la page peut aussi afficher la photo de livraison (`VPOD`).
 
 ## Colis OnTrac en retard, bloqué ou livré mais introuvable
 
@@ -74,9 +74,9 @@ Pour éviter les faux messages imitant une alerte de livraison, consulte [reconn
 
 ## Suivre un colis OnTrac avec Peek
 
-[Peek](/) reconnaît immédiatement OnTrac (« Transporteur détecté ») pour les numéros `C1` et `D10` validés par la clé de contrôle d'OnTrac, les codes LaserShip `LX` et `1LS`, ainsi que les liens `ontrac.com` comportant `number=`. Pour les autres codes `C` ou `D` à 14 chiffres valides, Peek affiche « Vérification des services de suivi… » puis « OnTrac a ce colis. » dès qu'OnTrac renvoie des scans. Pour une référence expéditeur `AD` à 9 chiffres, appuie sur « Changer » et choisis OnTrac : Peek remplace alors la référence par le vrai numéro OnTrac du colis (avant le premier scan, l'envoi affiche « En attente de OnTrac »).
+[Peek](/) reconnaît immédiatement OnTrac (« Transporteur détecté ») pour les numéros `C1` et `D10` validés par la clé de contrôle d'OnTrac, les codes LaserShip `LX` et `1LS`, ainsi que les liens `ontrac.com` comportant `number=`. Pour les autres codes `C` ou `D` à 14 chiffres valides, Peek affiche « Vérification des services de suivi… » puis « OnTrac a ce colis. » dès qu'OnTrac renvoie des scans. Pour une référence expéditeur `AD` à 9 chiffres, appuie sur « Changer » et choisis OnTrac : OnTrac retrouve le colis et Peek affiche aussi son numéro OnTrac (« OnTrac le suit sous le numéro ») (avant le premier scan, l'envoi affiche « En attente de OnTrac »).
 
-Peek interroge directement le service JSON d'OnTrac et affiche l'état, chaque scan avec sa ville et son État sur la carte (jusqu'aux 100 plus récents), la date de livraison prévue, l'heure de livraison, le poids et les dimensions, tout en omettant le destinataire, la signature et la photo de livraison. Lorsqu'OnTrac fournit un décalage horaire, l'heure est convertie dans le fuseau de ton appareil (« Heures dans ton fuseau horaire : … ») ; sinon, l'heure locale de l'étape est conservée telle quelle. `Order has been transferred to another carrier` reste « En transit » dans Peek, sans suivi ultérieur puisque OnTrac ne nomme pas le transporteur relais.
+Peek interroge directement le service JSON d'OnTrac et affiche l'état, chaque scan avec sa ville et son État sur la carte (jusqu'aux 100 plus récents), la date de livraison prévue, l'heure de livraison, le poids et les dimensions, tout en omettant le destinataire, la signature et la photo de livraison. Lorsqu'OnTrac fournit un décalage horaire, l'heure est convertie dans le fuseau de ton appareil (« Heures dans ton fuseau horaire : … ») ; sinon, Peek la lit sur l'heure de l'État de l'étape et la convertit de même. `Order has been transferred to another carrier` reste « En transit » dans Peek, sans suivi ultérieur puisque OnTrac ne nomme pas le transporteur relais.
 
 Tant que tu gardes le colis ouvert ou le jour de livraison avec notifications actives, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès `06:00` heure locale le jour du scan `Out for Delivery` tant que le service d'OnTrac répond ; sinon, et après 12 h sur « Étiquette créée » / « Pris en charge » ou deux jours sans nouveauté, toutes les heures (« Chaque scan », « Étapes importantes » ou « Livraison seulement »). Peek ne peut contacter ni OnTrac ni le marchand pour toi.
 
@@ -88,7 +88,7 @@ Par `C`, `D`, `1LS`, `LS`, `LX` ou `BN` selon OnTrac ; les numéros `C` et `D` s
 
 ### Pourquoi mon suivi OnTrac ne bouge-t-il pas ?
 
-Compte d'abord 1 à 3 jours après l'e-mail d'expédition pour que le colis arrive en centre OnTrac. Si un colis déjà actif n'a plus évolué depuis 3 jours ouvrés, contacte le vendeur puis l'assistant Wink.
+Compte d'abord 1 à 3 jours après l'e-mail d'expédition pour que les premières mises à jour apparaissent. Si un colis déjà actif n'a plus évolué depuis 3 jours ouvrés, contacte le vendeur puis l'assistant Wink.
 
 ### À quelle heure livre OnTrac ?
 
@@ -107,7 +107,7 @@ Oui : fondé en 1991 sous le nom *California Overnight* et fusionné en 2021 ave
 - [OnTrac : Support](https://www.ontrac.com/support/) – délai initial de 1 à 3 jours, enquête sous 48 heures, NotifyMe et horaires/fermetures (dont le 26 décembre)
 - [OnTrac : Tracking](https://www.ontrac.com/tracking/) – formulaire de suivi, photo de livraison et formulaire Have a question?
 - [OnTrac : Script de la page de suivi](https://www.ontrac.com/wp-content/themes/ontrac/assets/js/ontrac-package-status.js) – titres d'état, colonnes d'historique et motifs de demande
-- [OnTrac : Codes de statut](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – signification des tentatives, retenues sous 3 jours ouvrés, transferts et retards
+- [OnTrac : Codes de statut](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – signification des tentatives, retenues, transferts et retards
 - [OnTrac : Additional Terms & Conditions](https://www.ontrac.com/terms-conditions-additional/) – 3 tentatives, limites de 50 lbs / 48 in et réclamations déposées par l'expéditeur
 - [OnTrac : About OnTrac](https://www.ontrac.com/about/) – création de LaserShip en 1986 et d'OnTrac en 1991, fusion en 2021 et réseau transcontinental
 - [OnTrac : Residential E-Commerce Delivery](https://www.ontrac.com/residential-e-commerce-delivery/) – 35 États et Washington, D.C., 70 % de la population américaine et preuve photo VPOD

@@ -36,8 +36,8 @@ O site da OnTrac está apenas em inglês. Estas são as leituras e mensagens de 
 | `Package Delivered` | Entregue. | «Entregue» |
 | `Delivery Pending` | O motorista tentou entregar sem deixar o volume (segurança ou assinatura); a OnTrac voltará a tentar. | «Tentativa de entrega» |
 | `Business closed. Please provide hours` | Estabelecimento encerrado; até 3 tentativas, a OnTrac pede o horário de funcionamento. | «Tentativa de entrega» |
-| `Incomplete address. Please contact us` | Morada incompleta na distribuição; indica os dados em 3 dias úteis para evitar devolução. | «Tentativa de entrega» |
-| `Details needed. Please contact us` | Encomenda retida a aguardar detalhes de morada ou acesso (em 3 dias úteis). | «Problema reportado» |
+| `Incomplete address. Please contact us` | Morada incompleta na distribuição; indica os dados para evitar devolução. | «Tentativa de entrega» |
+| `Details needed. Please contact us` | Encomenda retida a aguardar detalhes de morada ou acesso. | «Problema reportado» |
 | `Order has been transferred to another carrier` | Transferida para outra transportadora não identificada (embora o cabeçalho em `ontrac.com` diga *Delivered*). | «Em trânsito» |
 | `Delivery Delay`, `Delayed. Delivery date updated`, `Delayed by road closure`, `Delayed. Could not reach delivery area` | Atraso operacional, estrada cortada ou área inacessível, com data de entrega atualizada. | «Em trânsito» |
 | `Weather delay. Delivery date updated`, `Weather delay. See service alerts` | Atraso meteorológico na rede da OnTrac. | «Em trânsito» |
@@ -47,13 +47,13 @@ Mais detalhes em [o que significam os estados de seguimento](guide:tracking-stat
 
 ## Horários de entrega da OnTrac e entregas falhadas
 
-**Horários.** A OnTrac entrega habitualmente em residências entre as **`08:00` e as `21:00`** (hora local) na data prevista, incluindo **sábados e domingos** nesse mesmo horário em várias áreas servidas (limites standard nos termos adicionais: até `50 lbs`, comprimento `48 in`, segundo lado `30 in` e volume `8 640 polegadas cúbicas`).
+**Horários.** A OnTrac entrega habitualmente em residências entre as **`08:00` e as `21:00`** (hora local) na data prevista, incluindo **sábados e domingos** nesse mesmo horário em várias áreas servidas (limites standard nos termos adicionais: peso faturável até `50 lbs`, comprimento `48 in`, segundo lado `30 in` e volume `8 640 polegadas cúbicas`).
 
 **Entrega falhada.** A OnTrac faz até **3 tentativas de entrega** (a seguinte em **1 a 2 dias úteis**, nunca no próprio dia) e depois devolve ou trata o pacote conforme as regras de remessas não entregáveis ([falha na entrega](guide:missed-delivery)).
 
 **Instruções de acesso e alteração de morada.** Se surgir uma tentativa quando estavas em casa, confirma a morada na loja e envia códigos de acesso ou instruções ao assistente virtual **Wink** com o teu número de seguimento (se já estiver em distribuição, só deverão aplicar-se na tentativa seguinte). Qualquer **alteração de morada** tem de ser aprovada pelo vendedor ([alterar a morada de entrega](guide:change-delivery-address)).
 
-**Levantamento em centro e alertas SMS.** A OnTrac não tem pontos de recolha nem cacifos próprios e só retém um pacote no centro local mediante pedido prévio (leva o número de seguimento e identificação com fotografia). Em `ontrac.com/tracking/`, o botão `Get Text Alerts` (`NotifyMe`) envia SMS na saída para entrega, tentativa e entrega concluída (cancela respondendo `STOP` para `(469) 529-1133`), mostrando também a foto de entrega (`VPOD`).
+**Levantamento em centro e alertas SMS.** O site da OnTrac não indica pontos de recolha nem cacifos próprios e a OnTrac só retém um pacote no centro local mediante pedido prévio (leva o número de seguimento e identificação com fotografia). Em `ontrac.com/tracking/`, o botão `Get Text Alerts` (`NotifyMe`) envia SMS na saída para entrega, tentativa e entrega concluída (cancela respondendo `STOP` para `(469) 529-1133`); a página pode também mostrar a foto de entrega (`VPOD`).
 
 ## Encomenda OnTrac atrasada, parada ou dada como entregue
 
@@ -74,9 +74,9 @@ Para detetares mensagens fraudulentas, lê [mensagens falsas de entregas](guide:
 
 ## Seguir encomendas OnTrac com o Peek
 
-O [Peek](/) identifica logo a OnTrac («Transportadora detetada») para números `C1` e `D10` que passam o dígito de controlo da OnTrac, códigos LaserShip `LX` e `1LS` e ligações de `ontrac.com` com `number=`. Noutros `C` ou `D` válidos de 14 algarismos mostra «A verificar serviços de seguimento…» e depois «OnTrac tem esta encomenda.». Para uma referência `AD` de 9 algarismos, toca em «Alterar» e escolhe a OnTrac: o Peek substitui a referência pelo número próprio da OnTrac (antes da primeira leitura surge «À espera de OnTrac»).
+O [Peek](/) identifica logo a OnTrac («Transportadora detetada») para números `C1` e `D10` que passam o dígito de controlo da OnTrac, códigos LaserShip `LX` e `1LS` e ligações de `ontrac.com` com `number=`. Noutros `C` ou `D` válidos de 14 algarismos mostra «A verificar serviços de seguimento…» e depois «OnTrac tem esta encomenda.». Para uma referência `AD` de 9 algarismos, toca em «Alterar» e escolhe a OnTrac: a OnTrac encontra o pacote e o Peek mostra também o número próprio da OnTrac («OnTrac segue a encomenda com o número») (antes da primeira leitura surge «À espera de OnTrac»).
 
-O Peek lê o serviço JSON da OnTrac e apresenta o estado, cada leitura com cidade e estado no mapa (até às 100 mais recentes), entrega prevista, hora de entrega, peso e dimensões, deixando de fora destinatário, assinatura e fotografia de entrega. Quando o evento inclui fuso horário, o instante é convertido para o fuso do teu dispositivo («Horas no teu fuso horário: …»); sem fuso, mantém a hora local da leitura. `Order has been transferred to another carrier` permanece «Em trânsito» no Peek, sem transição adicional porque a OnTrac não nomeia o operador seguinte.
+O Peek lê o serviço JSON da OnTrac e apresenta o estado, cada leitura com cidade e estado no mapa (até às 100 mais recentes), entrega prevista, hora de entrega, peso e dimensões, deixando de fora destinatário, assinatura e fotografia de entrega. Quando o evento inclui fuso horário, o instante é convertido para o fuso do teu dispositivo («Horas no teu fuso horário: …»); sem fuso, o Peek lê-a na hora do estado norte-americano da leitura e converte-a da mesma forma. `Order has been transferred to another carrier` permanece «Em trânsito» no Peek, sem transição adicional porque a OnTrac não nomeia o operador seguinte.
 
 Com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos desde as `06:00` locais no dia da leitura `Out for Delivery` enquanto o serviço da OnTrac responder; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a OnTrac nem a loja por ti.
 
@@ -88,7 +88,7 @@ Por `C`, `D`, `1LS`, `LS`, `LX` ou `BN`, segundo a OnTrac; os números `C` e `D`
 
 ### Porque é que o meu seguimento da OnTrac não atualiza?
 
-Aguarda 1 a 3 dias após o e-mail de envio para que o pacote dê entrada na OnTrac. Se uma encomenda em curso não mudar de estado durante 3 dias úteis, fala com a loja e depois com o Wink.
+Aguarda 1 a 3 dias após o e-mail de envio para que surjam as primeiras atualizações. Se uma encomenda em curso não mudar de estado durante 3 dias úteis, fala com a loja e depois com o Wink.
 
 ### A que horas entrega a OnTrac?
 
@@ -107,7 +107,7 @@ Sim: começou em 1991 como *California Overnight*, fundiu-se em 2021 com a Laser
 - [OnTrac: Support](https://www.ontrac.com/support/) – prazo inicial de 1 a 3 dias, averiguação em 48 horas, NotifyMe e horários/feriados (incluindo 26 de dezembro)
 - [OnTrac: Tracking](https://www.ontrac.com/tracking/) – formulário de seguimento, foto de entrega e formulário Have a question?
 - [OnTrac: Script da página de seguimento](https://www.ontrac.com/wp-content/themes/ontrac/assets/js/ontrac-package-status.js) – títulos de estado, colunas e motivos de pedido
-- [OnTrac: Códigos de estado](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – significado de tentativas, retenções de 3 dias úteis, transferências e atrasos
+- [OnTrac: Códigos de estado](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – significado de tentativas, retenções, transferências e atrasos
 - [OnTrac: Additional Terms & Conditions](https://www.ontrac.com/terms-conditions-additional/) – 3 tentativas, limites de 50 lbs / 48 in e reclamações apresentadas pelo expedidor
 - [OnTrac: About OnTrac](https://www.ontrac.com/about/) – fundação da LaserShip em 1986 e da OnTrac em 1991, fusão em 2021 e rede transcontinental
 - [OnTrac: Residential E-Commerce Delivery](https://www.ontrac.com/residential-e-commerce-delivery/) – 35 estados e D.C., cobertura de 70 % dos EUA e comprovativo fotográfico VPOD

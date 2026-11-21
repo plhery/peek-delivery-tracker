@@ -36,8 +36,8 @@ OnTracs Website ist ausschließlich auf Englisch verfügbar. Diese Ereignisse un
 | `Package Delivered` | Zugestellt. | „Zugestellt“ |
 | `Delivery Pending` | Zustellversuch ohne Ablage (z. B. Sicherheitsbedenken oder fehlende Unterschrift); OnTrac versucht es erneut. | „Zustellversuch“ |
 | `Business closed. Please provide hours` | Geschäftsadresse geschlossen; bis zu 3 Versuche, OnTrac bittet um Öffnungszeiten. | „Zustellversuch“ |
-| `Incomplete address. Please contact us` | Unvollständige Adresse bei der Zustellung; Details binnen 3 Werktagen nachreichen, sonst droht Rücksendung. | „Zustellversuch“ |
-| `Details needed. Please contact us` | Paket im Depot zurückgehalten, bis du binnen 3 Werktagen Adress- oder Zugangshinweise gibst. | „Problem gemeldet“ |
+| `Incomplete address. Please contact us` | Unvollständige Adresse bei der Zustellung; Details nachreichen, sonst droht Rücksendung. | „Zustellversuch“ |
+| `Details needed. Please contact us` | Paket im Depot zurückgehalten, bis du Adress- oder Zugangshinweise gibst. | „Problem gemeldet“ |
 | `Order has been transferred to another carrier` | An einen nicht genannten Drittzusteller übergeben (obwohl die Überschrift auf `ontrac.com` *Delivered* lautet). | „Unterwegs“ |
 | `Delivery Delay`, `Delayed. Delivery date updated`, `Delayed by road closure`, `Delayed. Could not reach delivery area` | Verzögerung im Lauf, Straßensperrung oder Gebiet nicht erreichbar; Lieferdatum aktualisiert. | „Unterwegs“ |
 | `Weather delay. Delivery date updated`, `Weather delay. See service alerts` | Wetterbedingte Verzögerung im OnTrac-Netz. | „Unterwegs“ |
@@ -47,13 +47,13 @@ Allgemeine Hintergründe findest du unter [Tracking-Status verstehen](guide:trac
 
 ## Lieferzeiten, Wochenendzustellung und verpasste Pakete
 
-**Zustellfenster.** OnTrac liefert an Wohnadressen in der Regel zwischen **`08:00` und `21:00` Uhr** Ortszeit am geplanten Tag – in ausgewählten Gebieten auch **samstags und sonntags** zur selben Zeit (Standardgrenzen laut Zusatzbedingungen: bis `50 lbs`, Länge `48 in`, zweitlängste Seite `30 in`, Volumen `8.640 Kubikzoll`).
+**Zustellfenster.** OnTrac liefert an Wohnadressen in der Regel zwischen **`08:00` und `21:00` Uhr** Ortszeit am geplanten Tag – in ausgewählten Gebieten auch **samstags und sonntags** zur selben Zeit (Standardgrenzen laut Zusatzbedingungen: abrechenbares Gewicht bis `50 lbs`, Länge `48 in`, zweitlängste Seite `30 in`, Volumen `8.640 Kubikzoll`).
 
-**Verpasste Zustellung.** OnTrac unternimmt bis zu **3 Zustellversuche** (der nächste folgt binnen **1 bis 2 Werktagen**, nie noch am selben Tag) und schickt unzustellbare Sendungen danach gemäß Versandvorgabe zurück ([Zustellung verpasst](guide:missed-delivery)).
+**Verpasste Zustellung.** OnTrac unternimmt bis zu **3 Zustellversuche** (der nächste folgt binnen **1 bis 2 Werktagen**, nie noch am selben Tag) und schickt unzustellbare Sendungen danach zurück oder verfährt nach seinen Regeln für unzustellbare Sendungen ([Zustellung verpasst](guide:missed-delivery)).
 
 **Zustellhinweise und Adressänderung.** Warst du trotz Fehlversuch zu Hause, prüfe die Lieferadresse im Shop-Konto und übermittle Zugangscodes oder Hinweise mit deiner Sendungsnummer über den Chat-Assistenten **Wink** (ist das Paket schon auf Tour, greifen Hinweise meist erst beim nächsten Versuch). Eine **Adressänderung** muss zwingend der Händler freigeben ([Lieferadresse ändern](guide:change-delivery-address)).
 
-**Depotabholung und SMS-Alarme.** Eigene Paketshops oder Packstationen betreibt OnTrac nicht; eine Abholung im lokalen Depot ist nur nach vorheriger Anfrage möglich (Sendungsnummer und Lichtbildausweis mitbringen). Über `Get Text Alerts` (`NotifyMe`) auf `ontrac.com/tracking/` erhältst du SMS bei Zustellstart, Fehlversuch und Ablieferung (Abmeldung per `STOP` an `(469) 529-1133`); dort wird häufig auch ein Zustellfoto (`VPOD`) angezeigt.
+**Depotabholung und SMS-Alarme.** Eigene Paketshops oder Packstationen nennt OnTracs Website nicht; eine Abholung im lokalen Depot ist nur nach vorheriger Anfrage möglich (Sendungsnummer und Lichtbildausweis mitbringen). Über `Get Text Alerts` (`NotifyMe`) auf `ontrac.com/tracking/` erhältst du SMS bei Zustellstart, Fehlversuch und Ablieferung (Abmeldung per `STOP` an `(469) 529-1133`); dort kann auch ein Zustellfoto (`VPOD`) angezeigt werden.
 
 ## OnTrac-Paket verspätet, ohne Update oder unauffindbar
 
@@ -74,9 +74,9 @@ Wie du gefälschte Benachrichtigungen erkennst, zeigt [Gefälschte Paket-SMS erk
 
 ## OnTrac-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt OnTrac sofort („Erkannter Paketdienst“) bei `C1`- und `D10`-Nummern mit gültiger Prüfziffer, bei LaserShip-Codes mit `LX` und `1LS` sowie bei `ontrac.com`-Links mit `number=`. Bei anderen gültigen 14-ziffrigen `C`- oder `D`-Nummern zeigt Peek „Tracking-Dienste werden geprüft…“ und nach Antwort „OnTrac hat dieses Paket.“. Für eine `AD`-Absenderreferenz wählst du OnTrac über „Ändern“ aus, woraufhin Peek automatisch auf OnTracs eigene Sendungsnummer umstellt (vor dem ersten Scan steht dort „Warten auf OnTrac“).
+[Peek](/) erkennt OnTrac sofort („Erkannter Paketdienst“) bei `C1`- und `D10`-Nummern mit gültiger Prüfziffer, bei LaserShip-Codes mit `LX` und `1LS` sowie bei `ontrac.com`-Links mit `number=`. Bei anderen gültigen 14-ziffrigen `C`- oder `D`-Nummern zeigt Peek „Tracking-Dienste werden geprüft…“ und nach Antwort „OnTrac hat dieses Paket.“. Für eine `AD`-Absenderreferenz wählst du OnTrac über „Ändern“ aus, woraufhin OnTrac das Paket findet und Peek zusätzlich OnTracs eigene Sendungsnummer zeigt („OnTrac führt die Sendung unter“) (vor dem ersten Scan steht dort „Warten auf OnTrac“).
 
-Peek liest den JSON-Dienst hinter `ontrac.com` aus und zeigt Status, jeden Scan mit Ort und US-Bundesstaat auf der Karte (bis zu 100 Einträge), das voraussichtliche Lieferdatum, Lieferzeitpunkt, Gewicht und Maße – ohne Empfängerdaten, Unterschrift oder Zustellfoto. Enthält ein Scanzeitpunkt einen UTC-Offset, rechnet Peek ihn in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“); ohne Offset bleibt die Ortszeit des Scans erhalten. `Order has been transferred to another carrier` bleibt in Peek „Unterwegs“ statt zugestellt; mangels Angabe des Folgezustellers endet der Abruf dort.
+Peek liest den JSON-Dienst hinter `ontrac.com` aus und zeigt Status, jeden Scan mit Ort und US-Bundesstaat auf der Karte (bis zu 100 Einträge), das voraussichtliche Lieferdatum, Lieferzeitpunkt, Gewicht und Maße – ohne Empfängerdaten, Unterschrift oder Zustellfoto. Enthält ein Scanzeitpunkt einen UTC-Offset, rechnet Peek ihn in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“); ohne Offset liest Peek die Uhrzeit auf der Uhr des US-Bundesstaats des Scans und rechnet sie ebenso um. `Order has been transferred to another carrier` bleibt in Peek „Unterwegs“ statt zugestellt; mangels Angabe des Folgezustellers kann Peek ihm nicht folgen.
 
 Bei geöffnetem Paket oder am Liefertag mit aktiven Mitteilungen prüft Peek bis zu alle 10 Minuten, und ab `06:00` Uhr Ortszeit am Tag des Scans `Out for Delivery` bis zu alle 2 Minuten, solange OnTracs Dienst antwortet; sonst sowie nach 12 Stunden auf „Etikett erstellt“ / „Beim Paketdienst eingegangen“ oder zwei ruhigen Tagen stündlich („Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“). OnTrac oder den Shop kontaktieren kann Peek nicht.
 
@@ -88,7 +88,7 @@ Laut OnTrac mit `C`, `D`, `1LS`, `LS`, `LX` oder `BN`; die von Peek erkannten `C
 
 ### Warum aktualisiert sich mein OnTrac-Tracking nicht?
 
-Plane nach der Versandmail zunächst 1 bis 3 Tage ein, bis das Paket bei OnTrac eintrifft. Bewegt sich ein aktives Paket 3 Werktage lang nicht, wende dich an den Händler und bei Bedarf an Wink.
+Plane nach der Versandmail zunächst 1 bis 3 Tage ein, bis erste Updates erscheinen. Bewegt sich ein aktives Paket 3 Werktage lang nicht, wende dich an den Händler und bei Bedarf an Wink.
 
 ### Wann stellt OnTrac zu?
 
@@ -107,7 +107,7 @@ Ja: OnTrac startete 1991 als *California Overnight*, fusionierte 2021 mit LaserS
 - [OnTrac: Support](https://www.ontrac.com/support/) – 1–3 Tage Vorlauf, 48-Stunden-Nachforschung, NotifyMe sowie Zeiten und Feiertage (inkl. 26. Dezember)
 - [OnTrac: Tracking](https://www.ontrac.com/tracking/) – Suchmaske, Zustellfoto-Link und Formular Have a question?
 - [OnTrac: Tracking-Skript](https://www.ontrac.com/wp-content/themes/ontrac/assets/js/ontrac-package-status.js) – Statusüberschriften, Verlaufsspalten und Anfragegründe
-- [OnTrac: Statuscodes](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – Bedeutung von Versuchen, 3-Tage-Rückhalten, Übergaben und Verzögerungen
+- [OnTrac: Statuscodes](https://www.ontrac.com/wp-content/themes/ontrac/assets/data/statusCodes.json) – Bedeutung von Versuchen, Rückhalten, Übergaben und Verzögerungen
 - [OnTrac: Additional Terms & Conditions](https://www.ontrac.com/terms-conditions-additional/) – 3 Versuche, Maße bis 50 lbs / 48 in und Schadensmeldung durch den Versender
 - [OnTrac: About OnTrac](https://www.ontrac.com/about/) – Gründung von LaserShip 1986 und OnTrac 1991, Fusion 2021 und Küste-zu-Küste-Netz
 - [OnTrac: Residential E-Commerce Delivery](https://www.ontrac.com/residential-e-commerce-delivery/) – 35 US-Staaten und D.C., 70 % Bevölkerungsabdeckung und Foto-Nachweis VPOD

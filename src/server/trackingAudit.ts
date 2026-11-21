@@ -15,7 +15,7 @@ import {
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 import { healthMessage, healthReviewSignal, observeTrackingHealth, type HealthSample } from './trackingHealth';
 import { lookupVerdict, withLookupVerdicts } from './stepRecorder';
-import { SupabaseError, type SupabaseServiceClient } from './supabase';
+import { SupabaseError, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 import { ABSTAINED_REASONS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
 import { trackingSupportGap, trackingSupportStart } from './trackingSupport';
@@ -666,7 +666,8 @@ export class TrackingSyncAudit {
       // Shutdown may already have closed the audit and fenced this worker out.
       if (this.context.signal?.aborted) return;
       // The audit went with its parcel: the row this write refers to is deleted.
-      if (error instanceof SupabaseError && error.code === '23503') {
+      // A leased write whose job went with its parcel, or that a carrier change took, reads as a lost lease.
+      if ((error instanceof SupabaseError && error.code === '23503') || await this.withdrawn(error)) {
         logOperationalEvent('tracking_sync_audit_skipped', { ...this.logContext(), operation });
         return;
       }
@@ -687,6 +688,16 @@ export class TrackingSyncAudit {
           trigger: this.context.trigger,
         });
       }
+    }
+  }
+
+  /** Whether a write lost its job's lease because the job was withdrawn: deleted with its parcel, or superseded. */
+  private async withdrawn(error: unknown): Promise<boolean> {
+    if (!(error instanceof SyncJobLeaseLost) || !this.context.lease) return false;
+    try {
+      return await this.client.syncJobWithdrawn(this.context.lease.jobId);
+    } catch {
+      return false;
     }
   }
 }

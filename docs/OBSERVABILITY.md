@@ -837,7 +837,8 @@ Key JSON events:
 - `sync_job_dropped` (by `job_id`): a package job had nothing left to finish, with the
   `reason`: `parcel_deleted` before its check, or `job_withdrawn` when a deletion or a
   carrier change took the job during it. `tracking_sync_audit_skipped` (by `attempt_id`):
-  an audit write found its rows deleted with the parcel. Neither is a failure;
+  an audit write found its rows deleted with the parcel, or its job's lease gone with a
+  deleted or withdrawn job. Neither is a failure;
 - `http_request` (by `request_id`, matching Sentry for server errors): `method`, `status`,
   `duration_ms`, the signed-in account's `user_id`, the client's address as `client_ip`
   behind a trusted proxy, and the endpoint as `route`, the path with each id as `/:id` and a

@@ -193,6 +193,28 @@ describe('tracking support audit persistence', () => {
   });
 });
 
+describe('a leased start whose job is gone', () => {
+  const start = async (job: JsonObject[]) => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(client, 'request').mockImplementation(async (path: string) => (path.startsWith('/rest/v1/sync_jobs') ? job : false));
+    const lease = { jobId: 'synthetic-job', workerId: 'synthetic-worker' };
+    await new TrackingSyncAudit(client, 'synthetic-package', 'SYNTHETIC0001', 'unknown', 'pending',
+      { trigger: 'added', jobId: lease.jobId, lease }, new Date('2026-09-10T12:00:00Z')).start();
+  };
+
+  it('is skipped without a report when the job went with its parcel or was superseded', async () => {
+    await start([]);
+    await start([{ state: 'failed', last_error: 'Superseded by a newer check' }]);
+    expect(captureOperationalError).not.toHaveBeenCalled();
+    expect(vi.mocked(logOperationalEvent).mock.calls.filter(([name]) => name === 'tracking_sync_audit_skipped')).toHaveLength(2);
+  });
+
+  it('is reported when the job is still there under another lease', async () => {
+    await start([{ state: 'running', last_error: null }]);
+    expect(captureOperationalError).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe('a check that found nothing new', () => {
   it('is recorded unchanged with its count of new scans, and still speaks for its carrier', async () => {
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),

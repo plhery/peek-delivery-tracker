@@ -865,6 +865,10 @@ final class DeviceParcels {
     /// Whether any of the device's parcels is archived, for the account that takes them over.
     func isArchived(linkID: String) -> Bool { entries.first { $0.linkID == linkID }?.archivedAt != nil }
 
+    /// Whether the parcel behind this link had its notifications turned off here with its bell, for the account that
+    /// takes it over.
+    func isMuted(linkID: String) -> Bool { entries.first { $0.linkID == linkID }?.isMuted == true }
+
     /// What an account needs to take the device's parcels over: its own with their keys, those whose
     /// saved copy was lost included, and someone else's that the link lets an account keep. Never a
     /// link still to be forgotten, nor a copy no longer updated: neither has a key.

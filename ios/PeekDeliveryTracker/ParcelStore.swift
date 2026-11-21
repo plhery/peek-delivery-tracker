@@ -2307,8 +2307,8 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    /// The parcels followed on this iPhone before signing in join the account, under the names
-    /// they had here, each time the account's list starts: at sign-in, at each launch and as an
+    /// The parcels followed on this iPhone before signing in join the account, under the names they had here, and
+    /// archived or quiet as they were here, each time the account's list starts: at sign-in, at each launch and as an
     /// invitation comes or goes. The device lets go of each one the account now has. One the account
     /// has no room for stays here, and the list says how many stayed once a sign-in, and again only
     /// when that number changes; a claim cut short says nothing. Tests call it directly: the rest of
@@ -2323,8 +2323,11 @@ final class ParcelStore: ObservableObject {
             guard let response = try? await api.claimParcels(ClaimParcelsRequest(links: batch)),
                   generation == session.generation else { return }
             for result in response.results where result.outcome == .kept {
-                // What was archived here stays archived there.
-                if let id = result.packageID, device.isArchived(linkID: result.id) { try? await api.archive(id: id) }
+                guard let id = result.packageID else { continue }
+                // What was archived here stays archived there, and a parcel whose notifications were turned off here
+                // stays quiet there.
+                if device.isArchived(linkID: result.id) { try? await api.archive(id: id) }
+                if device.isMuted(linkID: result.id) { _ = try? await api.setMuted(id: id, muted: true) }
             }
             // A parcel the account has no room for stays on the device, and so does someone else's that it could not keep.
             device.release(Set(response.results.filter { result in

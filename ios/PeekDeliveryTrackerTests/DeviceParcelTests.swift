@@ -1601,7 +1601,8 @@ final class DeviceParcelTests: XCTestCase {
 
     /// This iPhone following `links` as its own, a store on it and a session that signs into `account`, whose list is
     /// empty. The session's saved sign-in is `persistence`'s, for a relaunch to reopen.
-    private func signingIn(_ links: [String], into account: AccountRoom, storage: Memory = Memory(), calls: Calls = Calls())
+    private func signingIn(_ links: [String], into account: AccountRoom, storage: Memory = Memory(), calls: Calls = Calls(),
+                           archived: Set<String> = [], muted: Set<String> = [])
         throws -> (store: ParcelStore, session: SessionStore, device: DeviceParcels, persistence: PostcodeTestSessionPersistence) {
         let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
         let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
@@ -1622,8 +1623,10 @@ final class DeviceParcelTests: XCTestCase {
         }
         storage.keys = Dictionary(uniqueKeysWithValues: links.map { ($0, key) })
         storage.parcels = links.enumerated().map { index, link in
-            DeviceParcel(linkID: link, label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL12300\(index)")),
-                         checkedAt: Date())
+            var entry = DeviceParcel(linkID: link, label: "", archivedAt: archived.contains(link) ? "2026-11-01T08:00:00Z" : nil,
+                                     parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL12300\(index)")), checkedAt: Date())
+            if muted.contains(link) { entry.muted = true }
+            return entry
         }
         let device = DeviceParcels(client: client(calls), storage: storage)
         let persistence = PostcodeTestSessionPersistence()
@@ -1715,6 +1718,31 @@ final class DeviceParcelTests: XCTestCase {
         await store.claimDeviceParcels()
         XCTAssertEqual(device.claims, [])
         XCTAssertNil(store.leftOnDevice)
+    }
+
+    func testSigningInKeepsAParcelArchivedHereArchivedAndOneTurnedOffHereQuiet() async throws {
+        let account = AccountRoom(3)
+        let (store, session, device, _) = try signingIn(["22222222222A", "22222222222B", "22222222222C"], into: account,
+                                                        archived: ["22222222222A"], muted: ["22222222222B"])
+        defer { session.forceSignOut() }
+        let answer = PostcodeTestURLProtocol.handler
+        let sent = Calls()
+        PostcodeTestURLProtocol.handler = { request in
+            if let path = request.url?.path, path.hasPrefix("/api/packages/"), path != "/api/packages/claim" {
+                let body = String(data: PostcodeTestURLProtocol.body(of: request), encoding: .utf8) ?? ""
+                sent.add("\(request.httpMethod ?? "") \(path.hasSuffix("/notifications") ? "notifications \(body)" : "parcel")")
+                return (200, Data())
+            }
+            return answer?(request) ?? (404, Data())
+        }
+
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        await store.claimDeviceParcels()
+
+        XCTAssertEqual(device.claims, [])
+        // The archived one is archived in the account, the one turned off with its bell is muted there, and the third
+        // is left as it comes.
+        XCTAssertEqual(sent.all.sorted(), ["DELETE parcel", "PATCH notifications {\"muted\":true}"])
     }
 
     func testARefreshOrARelaunchWhileTheAccountIsStillFullSaysNothingAgain() async throws {

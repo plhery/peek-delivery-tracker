@@ -22,7 +22,7 @@ Uma carta de porte (*waybill*) australiana da J&T tem `JTAU` seguido de 12 algar
 
 Espaços, traços e minúsculas não afetam a leitura no Peek (`jtau 4829 1057 3649` funciona da mesma forma); o catálogo também reconhece os nomes *J&T Express (AU)*, *J&T Express AU*, *J&T Australia* e *JT Express Australia*.
 
-**Onde encontrar.** A J&T recebe o teu nome, morada e contactos através do remetente ou marketplace: procura no e-mail de expedição ou nos detalhes da compra ([como encontrar o número de seguimento](guide:find-tracking-number)). Em `jtexpress.au/tracking` podes introduzir até 10 números separados por espaços ou vírgulas; se o número não existir, surge `No tracking records yet`.
+**Onde encontrar.** A J&T recebe o teu nome, morada e contactos através do remetente ou marketplace: procura no e-mail de expedição ou nos detalhes da compra ([como encontrar o número de seguimento](guide:find-tracking-number)). Em `jtexpress.au/tracking`, se o número não existir, surge `No tracking records yet`.
 
 ## Estados de seguimento da J&T Express Australia explicados
 
@@ -72,11 +72,11 @@ Como a loja escolheu a J&T, numa compra online contacta primeiro o vendedor.
 Na [página de contactos da J&T Australia](https://www.jtexpress.au/contact) constam:
 
 - **Telefone:** `13 18 18`, horário de funcionamento `08:00-20:00` (sem indicação de dias).
-- **E-mail de apoio:** `service@jtexpress.au` (`business@jtexpress.au` e `partner@jtexpress.au` destinam-se a empresas e parceiros de entrega, e `dataprotection@jtexpress.au` à privacidade na sede `10/2 Christina Road, Villawood NSW 2163`).
+- **E-mail de apoio:** `service@jtexpress.au` (`business@jtexpress.au` e `partner@jtexpress.au` destinam-se a empresas e parceiros de entrega, e, segundo o aviso de privacidade, `dataprotection@jtexpress.au` à privacidade na sede `10/2 Christina Road, Villawood NSW 2163`).
 
 O aviso de privacidade refere que os prestadores de centro de atendimento e apoio ao cliente estão na Malásia e nas Filipinas.
 
-Um SMS da J&T com ligação para a foto de entrega pode ser verdadeiro; se porém pedir pagamentos ou dados pessoais, confirma o domínio `www.jtexpress.au` (`jtexpress.au`) e lê [mensagens falsas de entregas](guide:delivery-scam-texts).
+Um SMS da J&T com ligação para a foto de entrega pode ser verdadeiro; se porém pedir pagamentos ou dados pessoais, lê primeiro [mensagens falsas de entregas](guide:delivery-scam-texts).
 
 ## Seguir encomendas da J&T Express Australia com o Peek
 
@@ -84,13 +84,13 @@ O [Peek](/) identifica logo a J&T Express Australia a partir de um número `JTAU
 
 O Peek interroga o localizador oficial em `UTC` (`GMT+0000`) e converte o momento exato de cada leitura para o fuso do teu dispositivo («Horas no teu fuso horário: …»), guardando até às 100 mais recentes, sem mapa, data prevista, peso, contactos de agência nem foto de entrega (acessível pela ligação no SMS). Se o localizador da J&T falhar ou ainda não conhecer o número, o Peek recorre a serviços de seguimento.
 
-O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas, e até a cada 2 minutos desde as `06:00` locais no dia em que a J&T regista «Em distribuição» enquanto o localizador da J&T responder (por serviços de seguimento: de hora a hora, a cada 3 h após um dia calmo e até a cada 15 minutos no dia da entrega com a encomenda aberta ou alertas ativos); nos restantes casos, e após 12 horas em «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a J&T ou a loja nem alterar a morada.
+O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas, e até a cada 2 minutos desde as `06:00` locais no dia em que a J&T regista «Em distribuição» enquanto o localizador da J&T responder (por serviços de seguimento: de hora a hora, a cada 3 h após um dia calmo e até a cada 15 minutos no dia da entrega com a encomenda aberta ou alertas ativos); nos restantes casos, e após 12 horas em «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora. Notificações à escolha: «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a J&T ou a loja nem alterar a morada.
 
 ## Perguntas frequentes sobre o seguimento da J&T Express Australia
 
 ### A J&T Express Australia é fidedigna?
 
-Sim. O *Australian Business Register* inscreve a *J&T EXPRESS AUSTRALIA PTY LTD* como sociedade privada australiana com ABN ativo desde 4 de junho de 2026 (`18 698 743 609`, ACN `698 743 609`, localização principal `NSW 2163`, sede registada em `10/2 Christina Road, Villawood NSW 2163`), integrada no grupo J&T Express (`01519.HK`) fundado na Indonésia em 2015.
+Sim. O *Australian Business Register* inscreve a *J&T EXPRESS AUSTRALIA PTY LTD* como sociedade privada australiana com ABN ativo desde 4 de junho de 2026 (`18 698 743 609`, ACN `698 743 609`, localização principal `NSW 2163`; sede registada em `10/2 Christina Road, Villawood NSW 2163` segundo o aviso de privacidade), integrada no grupo J&T Express (`01519.HK`) fundado na Indonésia em 2015.
 
 ### O que significa `picked up from customs clearance` no seguimento da J&T?
 

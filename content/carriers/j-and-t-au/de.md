@@ -22,7 +22,7 @@ Ein australischer Frachtbrief (*waybill*) von J&T besteht aus `JTAU` und 12 Ziff
 
 Leerzeichen, Bindestriche und Kleinschreibung spielen in Peek keine Rolle; im Katalog ist der Dienst auch als *J&T Express (AU)*, *J&T Express AU*, *J&T Australia* und *JT Express Australia* hinterlegt.
 
-**Wo du sie findest.** J&T erhält Name, Adresse und Kontaktdaten vom Absender oder Marktplatz – prüfe daher Versandmail oder Bestellkonto ([Sendungsnummer finden](guide:find-tracking-number)). Auf `jtexpress.au/tracking` lassen sich bis zu 10 Nummern (getrennt durch Leerzeichen oder Kommas) abfragen; für unbekannte Nummern meldet die Seite `No tracking records yet`.
+**Wo du sie findest.** J&T erhält Name, Adresse und Kontaktdaten vom Absender oder Marktplatz – prüfe daher Versandmail oder Bestellkonto ([Sendungsnummer finden](guide:find-tracking-number)). Auf `jtexpress.au/tracking` meldet die Seite für unbekannte Nummern `No tracking records yet`.
 
 ## Tracking-Status von J&T Express Australia erklärt
 
@@ -47,7 +47,7 @@ Auf J&Ts Tracker enden manche Sätze mit der Servicenummer oder der Bitte anzuru
 
 J&T arbeitet landesweit mit Zustellpartnern für Abholung und letzte Meile zusammen, übergibt Sendungen im Code aber keinem Fremddienst mit Zweitnummer: Die `JTAU`-Nummer gilt bis an deine Tür.
 
-**Sendungen internationaler Linien.** Internationale Versender übergeben Pakete in Australien teils gesammelt am Ankunftshafen an J&T – etwa [Yanwen](carrier:yanwen), dessen eigenes Tracking danach J&Ts englische Sätze übernimmt (dort stuft Peek J&Ts Übernahme als „Unterwegs“ ein, da Yanwen das Paket bereits zuvor führte).
+**Sendungen internationaler Linien.** Internationale Versender übergeben Pakete in Australien teils gesammelt am Ankunftshafen an J&T – etwa [Yanwen](carrier:yanwen), dessen eigenes Tracking danach J&Ts Sätze übernimmt (dort stuft Peek J&Ts Übernahme als „Unterwegs“ ein, da Yanwen das Paket bereits zuvor führte).
 
 **Gebäude geschlossen oder Adressfehler.** Nach `The building was closed when we arrived. We'll try again.` folgt ein neuer Zustellversuch; bei `We couldn't deliver - the address details appear to be incorrect. Please update your delivery address.` prüfe sofort Wohnungsnummer und Postleitzahl mit dem Shop ([Lieferadresse ändern](guide:change-delivery-address), [Zustellung verpasst](guide:missed-delivery)). Wie viele Versuche J&T macht oder wie lange unzustellbare Pakete lagern, nennt die Website nicht; Paketshops oder Packstationen kommen in den bekannten Statuszeilen nicht vor.
 
@@ -72,11 +72,11 @@ Da der Shop J&T beauftragt hat, wende dich bei Online-Käufen zuerst an den Hän
 Auf [J&Ts Kontaktseite](https://www.jtexpress.au/contact) stehen:
 
 - **Telefon:** `13 18 18`, Arbeitszeiten `08:00-20:00` (ohne Angabe von Wochentagen).
-- **E-Mail Kundenservice:** `service@jtexpress.au` (`business@jtexpress.au` und `partner@jtexpress.au` gelten für Geschäftskunden und Zustellpartner; Datenschutzanfragen gehen an `dataprotection@jtexpress.au`, Sitz `10/2 Christina Road, Villawood NSW 2163`).
+- **E-Mail Kundenservice:** `service@jtexpress.au` (`business@jtexpress.au` und `partner@jtexpress.au` gelten für Geschäftskunden und Zustellpartner; Datenschutzanfragen gehen laut Datenschutzerklärung an `dataprotection@jtexpress.au`, Sitz `10/2 Christina Road, Villawood NSW 2163`).
 
 Laut Datenschutzerklärung sitzen J&Ts Callcenter- und Kundendienstleister in Malaysia und auf den Philippinen.
 
-Eine SMS mit Zustellfoto-Link von J&T kann echt sein; fordert eine Nachricht jedoch Zahlungen oder sensible Daten an, prüfe die offizielle Domain `www.jtexpress.au` (`jtexpress.au`) und lies [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
+Eine SMS mit Zustellfoto-Link von J&T kann echt sein; fordert eine Nachricht jedoch Zahlungen oder sensible Daten an, lies zuerst [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## J&T Express Australia mit Peek verfolgen
 
@@ -84,13 +84,13 @@ Eine SMS mit Zustellfoto-Link von J&T kann echt sein; fordert eine Nachricht jed
 
 Peek fragt J&Ts Tracker in `UTC` (`GMT+0000`) ab und stellt jeden Scanzeitpunkt in deiner Gerätezeitzone dar („Uhrzeiten in deiner Zeitzone: …“), begrenzt auf die neuesten 100 Scans, ohne Karte, Lieferprognose, Gewicht, Stationskontakte oder Zustellfoto (das über den SMS-Link abrufbar ist). Ist J&Ts Tracker nicht erreichbar oder kennt die Nummer noch nicht, zieht Peek Tracking-Dienste heran.
 
-Peek prüft bis zu alle 10 Minuten bei geöffnetem Paket oder am Liefertag mit aktiven Mitteilungen, und am „In Zustellung“-Tag ab `06:00` Uhr Ortszeit bis zu alle 2 Minuten, solange J&Ts Tracker antwortet (über Tracking-Dienste: stündlich, alle 3 Stunden nach einem ruhigen Tag und am Liefertag bis zu alle 15 Minuten bei geöffnetem Paket oder aktiven Mitteilungen); sonst sowie nach 12 Stunden auf „Beim Paketdienst eingegangen“ oder zwei ruhigen Tagen stündlich („Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“). J&T oder den Shop kontaktieren oder Adressen ändern kann Peek nicht.
+Peek prüft bis zu alle 10 Minuten bei geöffnetem Paket oder am Liefertag mit aktiven Mitteilungen, und am „In Zustellung“-Tag ab `06:00` Uhr Ortszeit bis zu alle 2 Minuten, solange J&Ts Tracker antwortet (über Tracking-Dienste: stündlich, alle 3 Stunden nach einem ruhigen Tag und am Liefertag bis zu alle 15 Minuten bei geöffnetem Paket oder aktiven Mitteilungen); sonst sowie nach 12 Stunden auf „Beim Paketdienst eingegangen“ oder zwei ruhigen Tagen stündlich. Mitteilungen wahlweise: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. J&T oder den Shop kontaktieren oder Adressen ändern kann Peek nicht.
 
 ## Häufige Fragen zu J&T Express Australia
 
 ### Ist J&T Express Australia seriös?
 
-Ja. Im *Australian Business Register* ist *J&T EXPRESS AUSTRALIA PTY LTD* als australische Privatgesellschaft mit aktiver ABN seit dem 4. Juni 2026 eingetragen (`18 698 743 609`, ACN `698 743 609`, Standort `NSW 2163`, eingetragener Sitz `10/2 Christina Road, Villawood NSW 2163`) und gehört zur 2015 in Indonesien gegründeten J&T-Express-Gruppe (`01519.HK`).
+Ja. Im *Australian Business Register* ist *J&T EXPRESS AUSTRALIA PTY LTD* als australische Privatgesellschaft mit aktiver ABN seit dem 4. Juni 2026 eingetragen (`18 698 743 609`, ACN `698 743 609`, Standort `NSW 2163`; eingetragener Sitz laut Datenschutzerklärung `10/2 Christina Road, Villawood NSW 2163`) und gehört zur 2015 in Indonesien gegründeten J&T-Express-Gruppe (`01519.HK`).
 
 ### Was bedeutet `picked up from customs clearance` im J&T-Tracking?
 

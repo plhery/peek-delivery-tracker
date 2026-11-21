@@ -22,7 +22,7 @@ Australijski list przewozowy (*waybill*) J&T składa się z liter `JTAU` i 12 cy
 
 Spacje, myślniki i małe litery nie przeszkadzają w Peek (`jtau 4829 1057 3649` działa tak samo); katalog zna też nazwy *J&T Express (AU)*, *J&T Express AU*, *J&T Australia* oraz *JT Express Australia*.
 
-**Gdzie go znaleźć.** J&T otrzymuje Twoje imię, adres i dane kontaktowe od nadawcy lub platformy zakupowej — zajrzyj do e-maila o wysyłce lub szczegółów zamówienia ([jak znaleźć numer śledzenia](guide:find-tracking-number)). Na `jtexpress.au/tracking` można wpisać do 10 numerów oddzielonych spacjami lub przecinkami; dla nieznanego numeru strona zwraca `No tracking records yet`.
+**Gdzie go znaleźć.** J&T otrzymuje Twoje imię, adres i dane kontaktowe od nadawcy lub platformy zakupowej — zajrzyj do e-maila o wysyłce lub szczegółów zamówienia ([jak znaleźć numer śledzenia](guide:find-tracking-number)). Na `jtexpress.au/tracking` dla nieznanego numeru strona zwraca `No tracking records yet`.
 
 ## Statusy śledzenia J&T Express Australia — co oznaczają
 
@@ -47,7 +47,7 @@ W wyszukiwarce J&T część zdań kończy się numerem infolinii — Peek usuwa 
 
 J&T współpracuje z firmami partnerskimi w całej Australii przy odbiorach i ostatniej mili, nie przekazując paczki innemu przewoźnikowi z drugim numerem: kod `JTAU` prowadzi aż pod Twoje drzwi.
 
-**Paczki z linii międzynarodowych.** Międzynarodowi operatorzy przekazują przesyłki do J&T zbiorczo w porcie wejścia — np. [Yanwen](carrier:yanwen), którego własne śledzenie powtarza potem angielskie zdania J&T (tam Peek oznacza przyjęcie przez J&T jako „W transporcie”, bo Yanwen prowadził paczkę wcześniej).
+**Paczki z linii międzynarodowych.** Międzynarodowi operatorzy mogą przekazywać przesyłki do J&T zbiorczo w porcie wejścia — np. [Yanwen](carrier:yanwen), którego własne śledzenie powtarza potem zdania J&T (tam Peek oznacza przyjęcie przez J&T jako „W transporcie”, bo Yanwen prowadził paczkę wcześniej).
 
 **Zamknięty budynek lub błędny adres.** Po `The building was closed when we arrived. We'll try again.` J&T podejmie kolejną próbę; po `We couldn't deliver - the address details appear to be incorrect. Please update your delivery address.` od razu sprawdź numer lokalu i kod pocztowy ze sklepem ([zmiana adresu dostawy](guide:change-delivery-address), [nieudane doręczenie](guide:missed-delivery)). Strona J&T nie podaje liczby prób ani czasu przechowywania, a wśród znanych statusów nie ma punktów odbioru ani automatów paczkowych.
 
@@ -72,25 +72,25 @@ Sklep wybrał J&T, więc w sprawie zamówienia internetowego najpierw pisz do sp
 Na [stronie kontaktowej J&T Australia](https://www.jtexpress.au/contact) podano:
 
 - **Telefon:** `13 18 18`, godziny pracy `08:00-20:00` (bez wskazania dni tygodnia).
-- **E-mail obsługi klienta:** `service@jtexpress.au` (`business@jtexpress.au` i `partner@jtexpress.au` służą firmom oraz partnerom doręczającym, a `dataprotection@jtexpress.au` sprawom prywatności pod adresem rejestrowym `10/2 Christina Road, Villawood NSW 2163`).
+- **E-mail obsługi klienta:** `service@jtexpress.au` (`business@jtexpress.au` i `partner@jtexpress.au` służą firmom oraz partnerom doręczającym, a według informacji o prywatności `dataprotection@jtexpress.au` sprawom prywatności pod adresem rejestrowym `10/2 Christina Road, Villawood NSW 2163`).
 
 Nota prywatności informuje, że dostawcy call center i wsparcia klienta działają w Malezji oraz na Filipinach.
 
-SMS od J&T z linkiem do zdjęcia doręczenia bywa prawdziwy; jeśli jednak wiadomość żąda dopłaty lub danych karty, sprawdź domenę `www.jtexpress.au` (`jtexpress.au`) i przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
+SMS od J&T z linkiem do zdjęcia doręczenia bywa prawdziwy; jeśli jednak wiadomość żąda dopłaty lub danych karty, najpierw przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
 ## Śledzenie paczek J&T Express Australia w Peek
 
 [Peek](/) rozpoznaje J&T Express Australia natychmiast po numerze `JTAU` („Wykryty przewoźnik”) albo linku `www.jtexpress.au/tracking` z parametrem `?q=` i numerem `JTAU` (inny numer w `?q=` sprawdza tak, jakby wklejono go osobno; przy ręcznym wyborze dla innego układu informuje, że przewoźnik „nie wydaje takich numerów”). Dla 13-cyfrowych numerów `JT` Peek odpytuje J&T Express i serwisy śledzące.
 
-Peek pobiera dane z oficjalnej wyszukiwarki w strefie `UTC` (`GMT+0000`) i przelicza dokładny moment każdego skanu na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”), zachowując do 100 najnowszych wpisów, bez mapy, prognozy dostawy, wagi, danych oddziałów ani zdjęcia doręczenia (dostępnego pod linkiem z SMS-a). Gdy wyszukiwarka J&T nie odpowiada lub nie zna jeszcze numeru, Peek odpytuje serwisy śledzące.
+Peek pobiera dane z oficjalnej wyszukiwarki w strefie `UTC` (`GMT+0000`) i przelicza dokładny moment każdego skanu na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”), zachowując do 100 najnowszych wpisów, bez mapy, prognozy dostawy, wagi, danych oddziałów ani zdjęcia doręczenia (dostępnego pod linkiem z SMS-a). Gdy wyszukiwarka J&T nie odpowiada lub nie zna jeszcze numeru, Peek odpytuje serwisy śledzące.
 
-Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami, a w dniu skanu „W doręczeniu” od `06:00` czasu lokalnego nawet co 2 minuty, dopóki odpowiada wyszukiwarka J&T (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się z J&T ani sklepem i nie zmieni adresu.
+Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami, a w dniu skanu „W doręczeniu” od `06:00` czasu lokalnego nawet co 2 minuty, dopóki odpowiada wyszukiwarka J&T (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę. Powiadomienia do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się z J&T ani sklepem i nie zmieni adresu.
 
 ## Najczęstsze pytania o śledzenie J&T Express Australia
 
 ### Czy J&T Express Australia to wiarygodna firma?
 
-Tak. W rejestrze *Australian Business Register* spółka *J&T EXPRESS AUSTRALIA PTY LTD* widnieje jako australijska spółka prywatna z aktywnym numerem ABN od 4 czerwca 2026 r. (`18 698 743 609`, ACN `698 743 609`, główna lokalizacja `NSW 2163`, siedziba `10/2 Christina Road, Villawood NSW 2163`), należąca do powstałej w 2015 r. w Indonezji grupy J&T Express (`01519.HK`).
+Tak. W rejestrze *Australian Business Register* spółka *J&T EXPRESS AUSTRALIA PTY LTD* widnieje jako australijska spółka prywatna z aktywnym numerem ABN od 4 czerwca 2026 r. (`18 698 743 609`, ACN `698 743 609`, główna lokalizacja `NSW 2163`; siedziba `10/2 Christina Road, Villawood NSW 2163` według informacji o prywatności), należąca do powstałej w 2015 r. w Indonezji grupy J&T Express (`01519.HK`).
 
 ### Co oznacza `picked up from customs clearance` w śledzeniu J&T?
 

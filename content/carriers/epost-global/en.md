@@ -14,11 +14,11 @@ Peek knows one shape for ePost Global: EPG and 10 to 15 digits. With invented di
 
 | Number (invented) | What it is |
 | --- | --- |
-| `EPG000000000000000` | EPG and 15 digits: an ePost Global number. |
-| `EPG0000000000` | EPG and 10 digits: also ePost Global's, the shortest Peek takes. |
-| `EPG000000000` | Only nine digits: not ePost Global's shape. Three letters and nine digits fit [Purolator](carrier:purolator) and other carriers, TNT Australia among them, so Peek asks Purolator, [Colis Privé](carrier:colis-prive) and TNT Australia which one knows the number. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
-| `EPG0000000000000000` | 16 digits, one too many: Peek recognises no carrier. Check for an extra digit. |
-| `LZ000000005US` | Two letters, nine digits and US: a US postal number. Peek names [USPS](carrier:usps) for most starting with C, E, L or R. To see ePost Global's own lines as well, add the EPG number. |
+| `EPG482910573649182` | EPG and 15 digits: an ePost Global number. |
+| `EPG4829105736` | EPG and 10 digits: also ePost Global's, the shortest Peek takes. |
+| `EPG482910573` | Only nine digits: not ePost Global's shape. Three letters and nine digits fit [Purolator](carrier:purolator) and other carriers, TNT Australia among them, so Peek asks Purolator, [Colis Privé](carrier:colis-prive) and TNT Australia which one knows the number. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
+| `EPG4829105736491827` | 16 digits, one too many: Peek recognises no carrier. Check for an extra digit. |
+| `LZ482910576US` | Two letters, nine digits and US: a US postal number. Peek names [USPS](carrier:usps) for most starting with C, E, L or R. To see ePost Global's own lines as well, add the EPG number. |
 
 Spaces, dashes and lower case don't matter when you paste a number into Peek.
 
@@ -63,15 +63,15 @@ A partner's receipt after `Parcel Shipped` counts as in transit, not as a new st
 
 ## Who delivers ePost Global parcels
 
-Peek couldn't read ePost Global's website, so this page has no list of its partners. In the histories Peek's code holds, they include OSM Worldwide, DAI Post for New Zealand, ECMS Express, GLS's European network, Royal Mail in the UK and [PostNL](carrier:postnl) through Spring, with [La Poste](carrier:la-poste) taking over in France after PostNL. When ePost Global names no partner but gives a postal number (two letters, nine digits, two letters), Peek asks the post of the destination country, such as [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post): see below.
+ePost Global says its postal and final-mile carrier relationships span six continents. In the histories Peek's code holds, its partners include OSM Worldwide, DAI Post for New Zealand, ECMS Express, GLS's European network, Royal Mail in the UK and [PostNL](carrier:postnl) through Spring, with [La Poste](carrier:la-poste) taking over in France after PostNL. When ePost Global names no partner but gives a postal number (two letters, nine digits, two letters), Peek asks the post of the destination country, such as [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post): see below.
 
 **Delivery attempts and pickup.** Attempts and where a missed parcel waits follow the partner's rules: ask the partner, with its number. See [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
-**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. Peek couldn't check how these are charged on an ePost Global parcel: ask the shop whether your price included them. Elsewhere, what you owe depends on your country. See [parcels held at customs](guide:customs).
+**Customs in the EU.** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. In the EU's VAT area, import VAT is due as well, unless it was charged at purchase through IOSS. ePost Global says DDP and DDU shipments owe the duty and the fee alike: under DDP the shipper pays the charges before the parcel arrives, so you pay nothing at delivery; under DDU you pay them on delivery. Germany no longer accepts DDU shipments, and ePost turned off DDU routing there on 26 October. Elsewhere, what you owe depends on your country. See [parcels held at customs](guide:customs).
 
 ## ePost Global parcel not updating, lost or returned
 
-**Nothing yet.** When ePost Global's tracker has no update for the number, Peek shows "Waiting for ePost Global" and keeps checking. Check the number: EPG and 10 to 15 digits. If nothing comes after a few days, ask the shop whether the parcel was really sent.
+**Nothing yet.** When ePost Global's tracker has no update for the number, Peek shows "Waiting for ePost Global" and keeps checking. Check the number: EPG and 10 to 15 digits. If ePost Global still doesn't know the number after two days and no tracking service finds it either, Peek says: "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." If nothing comes after a few days, ask the shop whether the parcel was really sent.
 
 **Nothing new after the handover.** The partner has the parcel, and its own tracking may be ahead of ePost Global's. Peek follows the parcel there when it can (see below). Otherwise, find the partner's name and number in the handover line.
 
@@ -83,7 +83,7 @@ Peek couldn't read ePost Global's website, so this page has no list of its partn
 
 ## ePost Global customer service and contact
 
-As of 31 October 2026, Peek couldn't read ePost Global's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. For a parcel that has stopped moving, Peek links ePost Global's contact-support page as "Get help from ePost Global".
+On epostglobalshipping.com, ePost Global gives a toll-free number, +1 866-784-8444, and a local one, +1 310-784-8485, with no hours and no support email. Its online assistant, ePost Assist, is at epostassist.epgtrack.com, and its contact-support page has a support form. For a parcel that has stopped moving, Peek links ePost Global's contact-support page as "Get help from ePost Global".
 
 For an order from a shop, ask the shop first: it booked the delivery. Once a partner has the parcel, ask the partner about the delivery itself.
 
@@ -95,9 +95,9 @@ Peek shows the status, each line with its place, the destination country, and th
 
 The tracker prints times without a time zone. Peek reads `Parcel Received and Processing` and `Parcel Shipped` on the clock of the centre's state, when the whole state keeps one time, GLS's lines on Central European time and Royal Mail's on UK time, and other lines on the clock of their place or of the leg the parcel was on. Every time is shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name.
 
-When ePost Global names a partner Peek knows, the parcel card says so ("Delivery with PostNL", for example, or "Announced to PostNL, not received yet" while that partner has only the announcement of the parcel, with no scan of its own) and lists the partner's number after the EPG number, if ePost Global gives one. Peek then asks that partner too: under its number, or under the EPG number if ePost Global gives none. With no partner named, Peek asks the destination country's post for a postal number, as above, and for another number the one carrier its shape points to. Peek asks only carriers whose own tracking it reads. Once that carrier shows a scan at least as recent as ePost Global's newest, Peek follows the parcel there and keeps ePost Global's history. Otherwise, Peek stays with ePost Global's tracker and its copies of the partner's lines. That is also the case for a parcel GLS's European network delivers: Peek doesn't know that partner by name.
+When ePost Global names a partner Peek knows, the parcel card says so ("Delivery with PostNL", for example, or "Announced to PostNL, not received yet" while that partner has only the announcement of the parcel, with no scan of its own) and lists the partner's number after the EPG number, if ePost Global gives one. Peek then asks that partner too: under its number, or under the EPG number if ePost Global gives none. With no partner named, Peek asks the destination country's post for a postal number, as above, and for another number the one carrier its shape points to. Peek asks only carriers whose own tracking it reads. Once that carrier shows a scan at least as recent as ePost Global's newest, Peek follows the parcel there and keeps ePost Global's history. Otherwise, Peek stays with ePost Global's tracker and its copies of the partner's lines. That is also the case for a parcel GLS's European network delivers: ePost Global doesn't say which national GLS company delivers it.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ePost Global's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact ePost Global or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ePost Global's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. When another carrier takes over the delivery, Peek follows that carrier's pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact ePost Global or the shop for you.
 
 ## Questions about ePost Global tracking
 

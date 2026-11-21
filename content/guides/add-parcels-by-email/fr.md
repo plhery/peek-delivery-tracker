@@ -4,7 +4,7 @@ description: Transfère un e-mail d'expédition à ton adresse Peek et Peek ajou
 slug: suivre-colis-depuis-e-mail
 picture: Une enveloppe glisse d'une boîte de réception vers une liste de colis sur un téléphone, et Pip, le colis avec un visage, fait coucou en haut de la liste.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Transfère l'e-mail d'expédition à ta propre adresse e-mail Peek, et Peek ajoute le colis à tes livraisons. Tu trouves cette adresse dans « Réglages » → « Livraisons » → « Ajouter des colis par e-mail », et tu peux transférer un e-mail à la main ou laisser ta messagerie transférer d'elle-même les e-mails d'expédition.
@@ -50,6 +50,8 @@ Tu as déjà un e-mail d'expédition dans ta boîte de réception ? Transfère-l
 
 ## Que lit Peek dans mes e-mails, et que garde-t-il ?
 
+Peek ne lit que les e-mails qui parlent d'un colis : ceux dont l'objet contient un mot d'expédition, dans l'une des langues de Peek, ou qui viennent d'un transporteur. Tout autre e-mail, comme une newsletter, est ignoré : ni lu ni gardé.
+
 Peek lit l'objet, le texte et les liens d'un e-mail, jamais ses pièces jointes. Il prend les numéros de suivi dont la forme appartient clairement à un transporteur, comme quand tu colles du texte, et tout numéro que l'e-mail présente comme un numéro de suivi, jamais un numéro de commande : 10 au maximum par e-mail.
 
 Son [avis de confidentialité](https://peektracker.com/privacy.html) liste ce qu'il garde :
@@ -58,7 +60,7 @@ Son [avis de confidentialité](https://peektracker.com/privacy.html) liste ce qu
 - Pour les vingt derniers e-mails : quand chacun est arrivé, le nom de l'expéditeur et ce qu'il a donné.
 - Chaque e-mail qu'il lit, avec l'identifiant de ton compte et l'heure d'arrivée, pour apprendre à mieux lire ce genre d'e-mails : pendant 30 jours, ou jusqu'à l'arrivée de 100 e-mails plus récents.
 
-Un e-mail retenu par une limite n'est pas gardé, pas plus que la confirmation de Gmail. Peek peut envoyer certains e-mails gardés à Anthropic, aux États-Unis, dont le modèle d'IA Claude les lit pour vérifier et améliorer la lecture ; Anthropic les garde environ 30 jours.
+Un e-mail ignoré n'est pas gardé, pas plus qu'un e-mail retenu par une limite ou la confirmation de Gmail. Peek peut envoyer certains e-mails gardés à Anthropic, aux États-Unis, dont le modèle d'IA Claude les lit pour vérifier et améliorer la lecture ; Anthropic les garde environ 30 jours.
 
 ## Pourquoi mon colis n'a-t-il pas été ajouté ?
 
@@ -71,6 +73,7 @@ Regarde sous « Derniers e-mails » : chaque e-mail indique ce qu'il a donné.
 | « Déjà dans tes livraisons » | Tu suis déjà ce colis : il n'est jamais ajouté deux fois |
 | « Déjà dans tes livraisons : nom de la boutique ajouté » | Pareil, et le colis sans nom a pris celui de la boutique. Un nom que tu as donné reste |
 | « Déjà livré : pas ajouté » | L'objet dit qu'il a été livré. Une livraison ratée, ou une livraison en point de retrait ou en consigne, compte comme en route |
+| « Pas un e-mail de livraison : non lu » | Son objet ne contient de mot d'expédition dans aucune langue, et il ne vient pas d'un transporteur : une newsletter, une facture. Peek ne le lit pas et ne le garde pas. Plusieurs à la suite tiennent sur une ligne |
 | « Non lu : limite du jour atteinte » | Une limite quotidienne est atteinte : sur les e-mails envoyés à ton adresse (par jour UTC), ou sur les colis que ton compte ajoute, par e-mail ou à la main. À partir de la moitié de la limite d'e-mails, la page affiche combien tu en as utilisé |
 | « Non ajouté : tes livraisons sont pleines » | Ton compte contient 50 colis actifs, 500 avec les colis archivés |
 

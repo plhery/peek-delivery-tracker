@@ -4961,6 +4961,7 @@ enum class AddByEmailResult(val rawValue: String) {
     @SerialName("limited") Limited("limited"),
     @SerialName("full") Full("full"),
     @SerialName("confirmation") Confirmation("confirmation"),
+    @SerialName("ignored") Ignored("ignored"),
     ;
 
     companion object {

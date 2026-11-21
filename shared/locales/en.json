@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "Not read: today’s limit is reached",
   "inbox.result.full": "Not added: your deliveries are full",
   "inbox.result.confirmation": "Gmail’s confirmation code",
+  "inbox.result.ignored": "Not a shipping email: not read",
   "inbox.noNumber": "Some shops, like Amazon, put no tracking number in their emails.",
   "inbox.usage": "{{used}} of {{limit}} emails today",
   "inbox.renew": "Get a new address",

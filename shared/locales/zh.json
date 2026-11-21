@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "未读取：今天的额度已用完",
   "inbox.result.full": "未添加：你的包裹列表已满",
   "inbox.result.confirmation": "Gmail 的验证码",
+  "inbox.result.ignored": "与包裹无关：未读取",
   "inbox.noNumber": "有些商店（例如亚马逊）的邮件里没有运单号。",
   "inbox.usage": "今天 {{used}} / {{limit}} 封邮件",
   "inbox.renew": "换一个新地址",

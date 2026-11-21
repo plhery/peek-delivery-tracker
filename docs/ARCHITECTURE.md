@@ -401,6 +401,13 @@ Key server modules:
     counted. When Amazon Shipping's check can't answer twice in a row for a number in the
     email, the server answers 503 and records nothing: the Worker fails, so the sender tries
     again later.
+  - An email about no parcel is ignored, unread and unkept (`ignored`): its subject holds
+    no word of the filter's lists in any language (`inboundEmail/shippingSubject.ts`, case
+    and accents aside, a word that goes on counts), it says no delivery, and its sender is
+    no carrier. A reader may forward all their mail, and a newsletter's codes and encoded
+    links read as tracking numbers. A run of ignored emails is one entry of the log, the
+    newest. They still count against the allowances, which are claimed before an email is
+    parsed.
   - The server reads the subject, the text part (else the HTML's text) and the links of
     both, a carrier's site first, never an attachment. The text part's addresses are read as
     links, not as text: a hand-forwarded email inlines every one, and they would fill the
@@ -451,8 +458,8 @@ Key server modules:
     `inbound_mailboxes.notify_added`). A parcel already followed, a delivered email and a
     limit add nothing, so nothing is sent.
   - Each email read is kept as it came for 30 days (`private.inbound_mail_kept`), the
-    account's newest 100 at most, to learn to read emails better; not one an allowance or the parcel limit stopped, nor
-    Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
+    account's newest 100 at most, to learn to read emails better; not one ignored, nor one an allowance or the parcel
+    limit stopped, nor Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
     the address off or deleting the account deletes the account's. A failure to keep one is
     reported and changes nothing else.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in

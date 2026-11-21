@@ -109,6 +109,7 @@ fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
     AddByEmailResult.Limited -> localizer.text("inbox.result.limited")
     AddByEmailResult.Full -> localizer.text("inbox.result.full")
     AddByEmailResult.Confirmation -> localizer.text("inbox.result.confirmation")
+    AddByEmailResult.Ignored -> localizer.text("inbox.result.ignored")
 }
 
 /** Whether the email held no number and its row doesn't say where it is, which Settings' note then explains. */

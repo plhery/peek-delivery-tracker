@@ -5042,6 +5042,7 @@ enum AddByEmailResult: String, Codable, CaseIterable, Hashable, Sendable, Identi
     case limited
     case full
     case confirmation
+    case ignored
 
     var id: String { rawValue }
 }

@@ -160,7 +160,7 @@ function rows(value: unknown): JsonObject[] {
   return Array.isArray(value) ? value.filter(isRecord) : [];
 }
 
-const INBOUND_MAIL_RESULTS = new Set(['added', 'known', 'named', 'delivered', 'none', 'limited', 'full', 'confirmation']);
+const INBOUND_MAIL_RESULTS = new Set(['added', 'known', 'named', 'delivered', 'none', 'limited', 'full', 'confirmation', 'ignored']);
 
 function inboundMailbox(value: unknown): InboundMailbox | null {
   const row = Array.isArray(value) ? value[0] : value;
@@ -358,7 +358,7 @@ export interface InboundMailbox {
   notify: boolean;
 }
 
-export type InboundMailResult = 'added' | 'known' | 'named' | 'delivered' | 'none' | 'limited' | 'full' | 'confirmation';
+export type InboundMailResult = 'added' | 'known' | 'named' | 'delivered' | 'none' | 'limited' | 'full' | 'confirmation' | 'ignored';
 
 /** One email to a forwarding address: when it came, who sent it and what it did. */
 export interface InboundMailEntry {

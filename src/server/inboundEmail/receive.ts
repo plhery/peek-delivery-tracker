@@ -10,6 +10,7 @@ import { carrierNames, carriersOfAddress } from './carrierSender';
 import { deliveredSubject } from './delivered';
 import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
 import { shopNameOf, shopNamedIn } from './shopName';
+import { shippingSubject } from './shippingSubject';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
 
 /** What an email did; `dropped` when its address names nobody who takes email. */
@@ -90,8 +91,9 @@ async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Ar
  * counts it against the allowances and adds the numbers it holds, labelled with its sender, or with the shop a
  * carrier's email names. A followed parcel without a name takes that name. An email that says its parcel was
  * delivered adds none. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
- * emails are dropped. What an email did is noted with its sender's name, and the email itself is kept 30 days,
- * but for one an allowance or the parcel limit stopped and Gmail's request, which holds a code.
+ * emails are dropped. An email whose subject and sender are about no parcel is ignored, unread. What an email did is
+ * noted with its sender's name, and the email itself is kept 30 days, but for one ignored, one an allowance or the
+ * parcel limit stopped and Gmail's request, which holds a code.
  */
 export async function receiveInboundMail(
   service: SupabaseServiceClient,
@@ -135,9 +137,15 @@ export async function receiveInboundMail(
   // carries for, or none. The carrier's mailbox name ("Info", "noreply") says nothing of the parcel. A shop's own
   // email takes the shop's name, tidied the same way.
   const carriers = carriersOfAddress(mail.origin);
-  const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   // A delivery confirmation comes too late for following its parcel to help: it names one already followed, if any.
   const delivered = deliveredSubject(mail.subject);
+  // An email about no parcel, by its subject and sender, is neither read nor kept: a reader may forward all their
+  // mail, and a newsletter's links and codes look like tracking numbers.
+  if (!carriers.length && !delivered && !shippingSubject(mail.subject)) {
+    await service.recordInboundMail(userId, 'ignored', 0, null, shopNameOf(mail.sender));
+    return finish('ignored', 'subject');
+  }
+  const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered, retryEligibility: true });
   const named = await nameFollowedParcels(service, userId, additions, label);
   await announce(service, userId, additions);

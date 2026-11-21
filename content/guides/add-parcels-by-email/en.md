@@ -4,7 +4,7 @@ description: Forward a shipping email to your own Peek address and Peek adds the
 slug: add-parcels-by-email
 picture: An envelope sliding out of an inbox into a list of parcels on a phone, with Pip, the parcel with a face, waving from the top of the list.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Forward the shipping email to your own Peek email address, and Peek adds the parcel to your deliveries. You find that address under "Settings" → "Deliveries" → "Add parcels by email", and you can forward one email by hand or have your mail app forward shipping emails by itself.
@@ -50,6 +50,8 @@ Already have a shipping email in your inbox? Forward that one by hand.
 
 ## What does Peek read in my emails, and what does it keep?
 
+Peek reads only an email about a parcel: one with a shipping word in its subject, in any of Peek's languages, or one from a carrier. Any other email, such as a newsletter, is ignored: neither read nor kept.
+
 Peek reads an email's subject, text and links, never its attachments. It takes the tracking numbers whose shape clearly belongs to a carrier, as when you paste text, and any number the email labels as a tracking number, never an order number: at most 10 per email.
 
 Its [privacy notice](https://peektracker.com/privacy.html) lists what it keeps:
@@ -58,7 +60,7 @@ Its [privacy notice](https://peektracker.com/privacy.html) lists what it keeps:
 - For the last twenty emails: when each came, the sender's name and what it did.
 - Each email it reads, with your account's id and arrival time, to learn to read such emails better: for 30 days, or until 100 newer ones have come.
 
-An email a limit held back isn't kept, nor Gmail's confirmation. Peek may send some kept emails to Anthropic, in the United States, whose AI model Claude reads them to check and improve the reading; Anthropic keeps them about 30 days.
+An ignored email isn't kept, nor one a limit held back, nor Gmail's confirmation. Peek may send some kept emails to Anthropic, in the United States, whose AI model Claude reads them to check and improve the reading; Anthropic keeps them about 30 days.
 
 ## Why wasn't my parcel added?
 
@@ -71,6 +73,7 @@ Look under "Recent emails": each email says what it did.
 | "Already in your deliveries" | You already follow that parcel: it's never added twice |
 | "Already in your deliveries: shop name added" | The same, and the unnamed parcel took the shop's name. A name you gave stays |
 | "Already delivered: not added" | The subject says it was delivered. A failed delivery, or one at a pickup point or locker, counts as on its way |
+| "Not a shipping email: not read" | Its subject has no shipping word in any language, and it doesn't come from a carrier: a newsletter, a bill. Peek neither reads nor keeps it. Several in a row take one line |
 | "Not read: today’s limit is reached" | A daily limit was reached: on emails to your address (by UTC day), or on parcels your account adds, by email or by hand. From half the email limit, the page shows how many you've used |
 | "Not added: your deliveries are full" | Your account holds 50 active parcels, 500 with archived ones |
 

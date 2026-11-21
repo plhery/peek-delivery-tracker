@@ -4,7 +4,7 @@ description: Leite eine Versandmail an deine eigene Peek-Adresse weiter, und Pee
 slug: versandmail-weiterleiten-paket-verfolgen
 picture: Ein Briefumschlag gleitet aus einem Posteingang in eine Paketliste auf einem Handy, und Pip, das Paket mit Gesicht, winkt oben aus der Liste.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Leite die Versandmail an deine eigene Peek-E-Mail-Adresse weiter, und Peek fügt das Paket deinen Sendungen hinzu. Die Adresse findest du unter „Einstellungen“ → „Sendungen“ → „Pakete per E-Mail hinzufügen“, und du kannst eine einzelne E-Mail von Hand weiterleiten oder dein Mailprogramm Versandmails von selbst weiterleiten lassen.
@@ -50,6 +50,8 @@ Hast du schon eine Versandmail im Posteingang? Leite diese von Hand weiter.
 
 ## Was liest Peek in meinen E-Mails, und was speichert es?
 
+Peek liest nur E-Mails zu einem Paket: solche mit einem Versandwort im Betreff, in einer der Sprachen von Peek, oder solche von einem Paketdienst. Jede andere E-Mail, etwa ein Newsletter, wird ignoriert: weder gelesen noch gespeichert.
+
 Peek liest Betreff, Text und Links einer E-Mail, nie ihre Anhänge. Es übernimmt die Sendungsnummern, deren Aufbau eindeutig zu einem Paketdienst gehört, wie wenn du Text einfügst, und jede Nummer, die die E-Mail als Sendungsnummer bezeichnet, nie eine Bestellnummer: höchstens 10 pro E-Mail.
 
 Peeks [Datenschutzhinweis](https://peektracker.com/privacy.html) nennt, was gespeichert wird:
@@ -58,7 +60,7 @@ Peeks [Datenschutzhinweis](https://peektracker.com/privacy.html) nennt, was gesp
 - Für die letzten zwanzig E-Mails: wann jede kam, der Name des Absenders und was sie bewirkt hat.
 - Jede gelesene E-Mail, mit der ID deines Kontos und der Ankunftszeit, damit Peek lernt, solche E-Mails besser zu lesen: 30 Tage lang oder bis 100 neuere angekommen sind.
 
-Eine E-Mail, die ein Limit zurückgehalten hat, wird nicht gespeichert, die Bestätigung von Gmail ebenso wenig. Peek kann einige gespeicherte E-Mails an Anthropic in den USA schicken, dessen KI-Modell Claude sie liest, um das Auslesen zu prüfen und zu verbessern; Anthropic speichert sie etwa 30 Tage.
+Eine ignorierte E-Mail wird nicht gespeichert, eine, die ein Limit zurückgehalten hat, und die Bestätigung von Gmail ebenso wenig. Peek kann einige gespeicherte E-Mails an Anthropic in den USA schicken, dessen KI-Modell Claude sie liest, um das Auslesen zu prüfen und zu verbessern; Anthropic speichert sie etwa 30 Tage.
 
 ## Warum wurde mein Paket nicht hinzugefügt?
 
@@ -71,6 +73,7 @@ Sieh unter „Letzte E-Mails“ nach: Bei jeder E-Mail steht, was sie bewirkt ha
 | „Schon in deinen Sendungen“ | Du verfolgst dieses Paket schon: Es wird nie doppelt hinzugefügt |
 | „Schon in deinen Sendungen: Shopname ergänzt“ | Dasselbe, und das Paket ohne Namen hat den Namen des Shops bekommen. Einen Namen, den du vergeben hast, behält es |
 | „Schon zugestellt: nicht hinzugefügt“ | Laut Betreff wurde es schon zugestellt. Eine gescheiterte Zustellung oder eine Zustellung an eine Abholstelle oder einen Paketautomaten gilt als unterwegs |
+| „Keine Versand-E-Mail: nicht gelesen“ | Der Betreff hat in keiner Sprache ein Versandwort, und sie kommt nicht von einem Paketdienst: ein Newsletter, eine Rechnung. Peek liest und speichert sie nicht. Mehrere hintereinander stehen in einer Zeile |
 | „Nicht gelesen: Tageslimit erreicht“ | Ein Tageslimit ist erreicht: bei den E-Mails an deine Adresse (pro Tag nach UTC) oder bei den Paketen, die dein Konto hinzufügt, per E-Mail oder von Hand. Ab der Hälfte des E-Mail-Limits zeigt die Seite, wie viele du verbraucht hast |
 | „Nicht hinzugefügt: Deine Sendungen sind voll“ | Dein Konto hat 50 aktive Pakete, 500 mit den archivierten |
 

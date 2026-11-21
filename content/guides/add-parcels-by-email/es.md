@@ -4,7 +4,7 @@ description: Reenvía un correo de envío a tu propia dirección de Peek y Peek 
 slug: seguimiento-paquetes-por-correo
 picture: Un sobre sale de una bandeja de entrada y entra en una lista de paquetes en un móvil, y Pip, el paquete con cara, saluda desde lo alto de la lista.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Reenvía el correo de envío a tu propia dirección de correo de Peek, y Peek añade el paquete a tus entregas. Esa dirección está en «Ajustes» → «Entregas» → «Añadir paquetes por correo», y puedes reenviar un correo a mano o hacer que tu app de correo reenvíe sola los correos de envío.
@@ -50,6 +50,8 @@ Para Yahoo Mail, Peek explica que los filtros de Yahoo solo pueden mover correos
 
 ## ¿Qué lee Peek en mis correos y qué guarda?
 
+Peek solo lee los correos sobre un paquete: los que tienen una palabra de envío en el asunto, en cualquiera de los idiomas de Peek, o los que vienen de un transportista. Cualquier otro correo, como un boletín, se ignora: ni se lee ni se guarda.
+
 Peek lee el asunto, el texto y los enlaces de un correo, nunca sus archivos adjuntos. Toma los números de seguimiento cuyo formato pertenece claramente a un transportista, como cuando pegas un texto, y cualquier número que el correo presente como número de seguimiento, nunca un número de pedido: como mucho 10 por correo.
 
 Su [aviso de privacidad](https://peektracker.com/privacy.html) enumera lo que guarda:
@@ -58,7 +60,7 @@ Su [aviso de privacidad](https://peektracker.com/privacy.html) enumera lo que gu
 - De los últimos veinte correos: cuándo llegó cada uno, el nombre del remitente y qué hizo.
 - Cada correo que lee, con el identificador de tu cuenta y la hora de llegada, para aprender a leer mejor este tipo de correos: durante 30 días, o hasta que hayan llegado 100 más recientes.
 
-No se guarda un correo que un límite dejó sin leer, ni la confirmación de Gmail. Peek puede enviar algunos de los correos guardados a Anthropic, en Estados Unidos, cuyo modelo de IA Claude los lee para comprobar y mejorar la lectura; Anthropic los guarda unos 30 días.
+No se guarda un correo ignorado, ni uno que un límite dejó sin leer, ni la confirmación de Gmail. Peek puede enviar algunos de los correos guardados a Anthropic, en Estados Unidos, cuyo modelo de IA Claude los lee para comprobar y mejorar la lectura; Anthropic los guarda unos 30 días.
 
 ## ¿Por qué no se ha añadido mi paquete?
 
@@ -71,6 +73,7 @@ Mira en «Últimos correos»: cada correo dice qué hizo.
 | «Ya en tus entregas» | Ya sigues ese paquete: nunca se añade dos veces |
 | «Ya en tus entregas: se añadió el nombre de la tienda» | Lo mismo, y el paquete sin nombre tomó el de la tienda. Un nombre que le hayas puesto tú se mantiene |
 | «Ya entregado: no se añadió» | El asunto dice que se entregó. Una entrega fallida, o en un punto de recogida o una taquilla, cuenta como en camino |
+| «No es un correo de envío: no leído» | El asunto no tiene ninguna palabra de envío en ningún idioma y no viene de un transportista: un boletín, una factura. Peek ni lo lee ni lo guarda. Varios seguidos ocupan una sola línea |
 | «No leído: límite de hoy alcanzado» | Se alcanzó un límite diario: el de correos a tu dirección (por día UTC) o el de paquetes que añade tu cuenta, por correo o a mano. A partir de la mitad del límite de correos, la página muestra cuántos has usado |
 | «No añadido: tus entregas están llenas» | Tu cuenta tiene 50 paquetes activos, 500 contando los archivados |
 

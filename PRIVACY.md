@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 20 November 2026
+Effective: 21 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -42,10 +42,13 @@ using Peek involves.
   name and what it did. You can see the code and link of a Gmail forwarding
   confirmation for three days. They stay stored until a newer confirmation
   replaces them, another email is recorded after those three days, or you
-  renew or delete the forwarding address or delete your account. Each email the service reads is kept as it
+  renew or delete the forwarding address or delete your account. An email
+  whose subject and sender are about no parcel, such as a newsletter, is
+  ignored: only that it came, its sender's name and that it was ignored are
+  recorded. Each email the service reads is kept as it
   came, with your account's id and when it came, for 30 days. It is used to
-  learn to read such emails better. An email a limit held back and Gmail's
-  forwarding confirmation are not kept.
+  learn to read such emails better. An ignored email, one a limit held back
+  and Gmail's forwarding confirmation are not kept.
 - When you connect an assistant or make a personal token: its name, the site
   or app it answers to, what you allowed it (to see your parcels, to add and
   archive them, to edit them), when you connected it and when it last used Peek, and

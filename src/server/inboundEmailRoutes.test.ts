@@ -213,7 +213,7 @@ describe('emails in the shapes readers forward', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
   });
 
-  it('adds nothing from a shop\'s note on a price that fell, whose encoded help links hold page ids after "%3D"', async () => {
+  it('ignores a shop\'s note on a price that fell, unread, though its encoded help links hold page ids after "%3D"', async () => {
     const db = account();
     const help = 'https://www.example-market.com/r?C=2AB3C&U=https%3A%2F%2Fwww.example-market.com%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000';
     await posted(mail('Example Market <store-news@example-market.com>', 'Good news: you saved on your pre-order', [
@@ -222,7 +222,28 @@ describe('emails in the shapes readers forward', () => {
       help,
     ].join('\n')));
     expect(db.create).not.toHaveBeenCalled();
-    expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
+    expect(db.keep).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'ignored', 0, null, 'Example Market');
+  });
+
+  it('ignores an email whose subject is about no parcel, unread and unkept, though it holds a tracking number', async () => {
+    const db = account();
+    for (const subject of ['Our autumn collection is here', 'Votre facture de novembre', 'Willkommen in der Community']) {
+      await posted(mail('"Example Shop™" <news@example-shop.com>', subject, `Tracking: ${UPS}`));
+    }
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.keep).not.toHaveBeenCalled();
+    expect(db.record.mock.calls).toEqual(Array.from({ length: 3 }, () => [userId, 'ignored', 0, null, 'Example Shop']));
+  });
+
+  it('reads a shipping subject in any language, a carrier\'s email whatever its subject, and a delivered one', async () => {
+    const db = account();
+    await posted(mail('Example Shop <orders@example-shop.com>', 'Fwd: Twoja przesyłka jest w drodze', `Numer: ${UPS}`));
+    await posted(mail('DHL <noreply@dhl.com>', 'Information', 'Sendungsnummer 4612345678.'));
+    await posted(mail('Example Shop <orders@example-shop.com>', 'Delivered: your order', `Tracking: ${DHL}`));
+    expect(db.create.mock.calls.map(([, number]) => number)).toEqual([UPS, '4612345678']);
+    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['added', 'added', 'delivered']);
+    expect(db.keep).toHaveBeenCalledTimes(3);
   });
 
   it('adds a Colissimo number after its label, named after the shop without its trademark sign or capitals', async () => {
@@ -472,16 +493,17 @@ describe('an email to a forwarding address', () => {
     expect(db.record).toHaveBeenLastCalledWith(userId, 'added', 1, null, 'Example Shop');
   });
 
-  it('keeps the email it read, as it came, and none an allowance stopped, Gmail\'s request or an unknown address', async () => {
+  it('keeps the email it read, as it came, and none it ignored, an allowance stopped, Gmail\'s request or an unknown address', async () => {
     let db = account({ known: [DHL] });
     const raw = mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`);
     await posted(raw);
     await posted(mail('"Example Shop" <orders@example-shop.com>', 'Delivered', `Tracking: ${DHL}`));
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Your parcel', 'Nothing to track.'));
     await posted(mail('"Example Shop" <orders@example-shop.com>', 'Thanks', 'Nothing to track.'));
     expect(db.keep).toHaveBeenCalledTimes(3);
     expect(db.keep.mock.calls[0]![0]).toBe(userId);
     expect(Buffer.from(db.keep.mock.calls[0]![1]).equals(Buffer.from(raw))).toBe(true);
-    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['added', 'known', 'none']);
+    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['added', 'known', 'none', 'ignored']);
 
     vi.restoreAllMocks();
     vi.spyOn(console, 'log').mockImplementation(() => undefined);

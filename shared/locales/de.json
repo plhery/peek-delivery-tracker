@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "Nicht gelesen: Tageslimit erreicht",
   "inbox.result.full": "Nicht hinzugefügt: Deine Sendungen sind voll",
   "inbox.result.confirmation": "Bestätigungscode von Gmail",
+  "inbox.result.ignored": "Keine Versand-E-Mail: nicht gelesen",
   "inbox.noNumber": "Manche Shops, etwa Amazon, schreiben keine Sendungsnummer in ihre E-Mails.",
   "inbox.usage": "{{used}} von {{limit}} E-Mails heute",
   "inbox.renew": "Neue Adresse erstellen",

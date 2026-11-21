@@ -74826,9 +74826,10 @@
           "none",
           "limited",
           "full",
-          "confirmation"
+          "confirmation",
+          "ignored"
         ],
-        "description": "added: it added a parcel; known: its parcels were already followed; named: its parcels were already followed, and one without a name took the shop's; delivered: it said its parcel was delivered, which adds none; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding."
+        "description": "added: it added a parcel; known: its parcels were already followed; named: its parcels were already followed, and one without a name took the shop's; delivered: it said its parcel was delivered, which adds none; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding; ignored: its subject and sender were about no parcel, so it was not read (a run of them is one entry, the newest)."
       },
       "AssistantScope": {
         "type": "string",

@@ -4,7 +4,7 @@ description: Reencaminha um e-mail de envio para o teu próprio endereço Peek e
 slug: seguir-encomendas-por-email
 picture: Um envelope sai de uma caixa de entrada e entra numa lista de encomendas num telemóvel, e o Pip, a encomenda com cara, acena do topo da lista.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Reencaminha o e-mail de envio para o teu próprio endereço de e-mail Peek, e o Peek adiciona a encomenda às tuas entregas. Encontras esse endereço em «Definições» → «Entregas» → «Adicionar encomendas por e-mail», e podes reencaminhar um e-mail à mão ou pôr a tua app de e-mail a reencaminhar sozinha os e-mails de envio.
@@ -50,6 +50,8 @@ Já tens um e-mail de envio na tua caixa de entrada? Reencaminha-o à mão.
 
 ## O que lê o Peek nos meus e-mails e o que guarda?
 
+O Peek só lê os e-mails sobre uma encomenda: os que têm uma palavra de envio no assunto, em qualquer uma das línguas do Peek, ou os que vêm de uma transportadora. Qualquer outro e-mail, como uma newsletter, é ignorado: nem é lido nem guardado.
+
 O Peek lê o assunto, o texto e as ligações de um e-mail, nunca os anexos. Fica com os números de seguimento cujo formato pertence claramente a uma transportadora, como quando colas um texto, e com qualquer número que o e-mail indique como número de seguimento, nunca um número de pedido: no máximo 10 por e-mail.
 
 O seu [aviso de privacidade](https://peektracker.com/privacy.html) lista o que guarda:
@@ -58,7 +60,7 @@ O seu [aviso de privacidade](https://peektracker.com/privacy.html) lista o que g
 - Dos últimos vinte e-mails: quando chegou cada um, o nome do remetente e o que fez.
 - Cada e-mail que lê, com o identificador da tua conta e a hora de chegada, para aprender a ler melhor e-mails deste tipo: durante 30 dias, ou até chegarem 100 mais recentes.
 
-Um e-mail retido por um limite não é guardado, nem a confirmação do Gmail. O Peek pode enviar alguns dos e-mails guardados à Anthropic, nos Estados Unidos, cujo modelo de IA Claude os lê para verificar e melhorar a leitura; a Anthropic guarda-os cerca de 30 dias.
+Um e-mail ignorado não é guardado, nem um retido por um limite, nem a confirmação do Gmail. O Peek pode enviar alguns dos e-mails guardados à Anthropic, nos Estados Unidos, cujo modelo de IA Claude os lê para verificar e melhorar a leitura; a Anthropic guarda-os cerca de 30 dias.
 
 ## Porque é que a minha encomenda não foi adicionada?
 
@@ -71,6 +73,7 @@ Vê em «Últimos e-mails»: cada e-mail diz o que fez.
 | «Já nas tuas entregas» | Já segues essa encomenda: nunca é adicionada duas vezes |
 | «Já nas tuas entregas: nome da loja adicionado» | O mesmo, e a encomenda sem nome ficou com o nome da loja. Um nome que lhe tenhas dado mantém-se |
 | «Já entregue: não adicionada» | O assunto diz que foi entregue. Uma entrega falhada, ou num ponto de levantamento ou num cacifo, conta como a caminho |
+| «Não é um e-mail de envio: não lido» | O assunto não tem nenhuma palavra de envio em nenhuma língua e não vem de uma transportadora: uma newsletter, uma fatura. O Peek nem o lê nem o guarda. Vários seguidos ocupam uma linha |
 | «Não lido: limite de hoje atingido» | Foi atingido um limite diário: o de e-mails para o teu endereço (por dia UTC) ou o de encomendas que a tua conta adiciona, por e-mail ou à mão. A partir de metade do limite de e-mails, a página mostra quantos já usaste |
 | «Não adicionado: as tuas entregas estão cheias» | A tua conta tem 50 encomendas ativas, 500 contando com as arquivadas |
 

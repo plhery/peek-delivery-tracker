@@ -4,7 +4,7 @@ description: Przekaż e-mail o wysyłce na swój własny adres Peek, a Peek doda
 slug: sledzenie-przesylek-z-e-maila
 picture: Koperta wysuwa się ze skrzynki odbiorczej prosto na listę przesyłek w telefonie, a Pip, paczka z buzią, macha ze szczytu listy.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Przekaż e-mail o wysyłce na swój własny adres e-mail w Peek, a Peek doda przesyłkę do Twoich dostaw. Ten adres znajdziesz w menu „Ustawienia” → „Dostawy” → „Dodawaj przesyłki e-mailem”. Możesz przekazać jeden e-mail ręcznie albo ustawić aplikację pocztową tak, żeby sama przekazywała e-maile o wysyłce.
@@ -50,6 +50,8 @@ Masz już e-mail o wysyłce w skrzynce odbiorczej? Przekaż go ręcznie.
 
 ## Co Peek czyta w moich e-mailach i co przechowuje?
 
+Peek czyta tylko e-maile o przesyłce: takie, które mają w temacie słowo o wysyłce w którymś z języków Peek, albo takie od przewoźnika. Każdy inny e-mail, na przykład newsletter, jest pomijany: Peek go nie czyta ani nie przechowuje.
+
 Peek czyta temat, treść i linki e-maila, nigdy załączniki. Bierze numery przesyłek, których format wyraźnie należy do przewoźnika, tak jak przy wklejaniu tekstu, oraz każdy numer, który e-mail sam opisuje jako numer przesyłki, nigdy numer zamówienia: najwyżej 10 z jednego e-maila.
 
 Jego [informacja o prywatności](https://peektracker.com/privacy.html) wymienia, co przechowuje:
@@ -58,7 +60,7 @@ Jego [informacja o prywatności](https://peektracker.com/privacy.html) wymienia,
 - Dla ostatnich dwudziestu e-maili: kiedy przyszedł każdy z nich, nazwę nadawcy i to, z jakim skutkiem.
 - Każdy przeczytany e-mail, z identyfikatorem Twojego konta i godziną nadejścia, żeby uczyć się lepiej czytać takie e-maile: przez 30 dni albo do nadejścia 100 nowszych.
 
-E-maila zatrzymanego przez limit Peek nie przechowuje, tak samo jak potwierdzenia z Gmaila. Peek może wysłać część przechowywanych e-maili do firmy Anthropic w Stanach Zjednoczonych, której model AI Claude czyta je, żeby sprawdzić i poprawić odczytywanie; Anthropic przechowuje je około 30 dni.
+Pominiętego e-maila Peek nie przechowuje, tak samo jak e-maila zatrzymanego przez limit i potwierdzenia z Gmaila. Peek może wysłać część przechowywanych e-maili do firmy Anthropic w Stanach Zjednoczonych, której model AI Claude czyta je, żeby sprawdzić i poprawić odczytywanie; Anthropic przechowuje je około 30 dni.
 
 ## Dlaczego moja przesyłka nie została dodana?
 
@@ -71,6 +73,7 @@ Zajrzyj do sekcji „Ostatnie e-maile”: przy każdym e-mailu widać, z jakim s
 | „Już w twoich dostawach” | Już śledzisz tę przesyłkę: nigdy nie jest dodawana dwa razy |
 | „Już w twoich dostawach: dodano nazwę sklepu” | To samo, a przesyłka bez nazwy dostała nazwę sklepu. Nazwa nadana przez Ciebie zostaje |
 | „Już doręczona: nie dodano” | Temat mówi, że przesyłka została doręczona. Nieudane doręczenie albo doręczenie do punktu odbioru czy automatu paczkowego liczy się jako przesyłka w drodze |
+| „To nie e-mail o wysyłce: nie przeczytano” | Temat nie ma słowa o wysyłce w żadnym języku, a e-mail nie pochodzi od przewoźnika: newsletter, rachunek. Peek go nie czyta i nie przechowuje. Kilka z rzędu zajmuje jeden wiersz |
 | „Nie przeczytano: dzisiejszy limit wyczerpany” | Osiągnięto dzienny limit: e-maili na Twój adres (według doby UTC) albo przesyłek dodawanych przez Twoje konto, e-mailem lub ręcznie. Od połowy limitu e-maili strona pokazuje, ile już wykorzystano |
 | „Nie dodano: twoje dostawy są pełne” | Twoje konto ma 50 aktywnych przesyłek, 500 razem z zarchiwizowanymi |
 

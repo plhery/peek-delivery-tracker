@@ -4,7 +4,7 @@ description: Inoltra un'e-mail di spedizione al tuo indirizzo Peek e Peek aggiun
 slug: tracciare-pacchi-dalle-email
 picture: Una busta scivola fuori da una casella di posta in un elenco di pacchi su un telefono, e Pip, il pacco con la faccia, saluta dalla cima dell'elenco.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 
 Inoltra l'e-mail di spedizione al tuo indirizzo e-mail Peek personale e Peek aggiunge il pacco alle tue consegne. L'indirizzo lo trovi in «Impostazioni» → «Consegne» → «Aggiungi pacchi via email», e puoi inoltrare un'e-mail a mano oppure lasciare che la tua app di posta inoltri da sola le e-mail di spedizione.
@@ -50,6 +50,8 @@ Hai già un'e-mail di spedizione nella posta in arrivo? Inoltra quella a mano.
 
 ## Cosa legge Peek nelle mie e-mail, e cosa conserva?
 
+Peek legge solo le e-mail che riguardano un pacco: quelle con una parola di spedizione nell'oggetto, in una delle lingue di Peek, o quelle di un corriere. Ogni altra e-mail, come una newsletter, viene ignorata: né letta né conservata.
+
 Peek legge l'oggetto, il testo e i link di un'e-mail, mai gli allegati. Prende i codici tracking la cui forma appartiene chiaramente a un corriere, come quando incolli un testo, e ogni numero che l'e-mail indica come codice tracking, mai un numero d'ordine: al massimo 10 per e-mail.
 
 La sua [informativa sulla privacy](https://peektracker.com/privacy.html) elenca cosa conserva:
@@ -58,7 +60,7 @@ La sua [informativa sulla privacy](https://peektracker.com/privacy.html) elenca 
 - Per le ultime venti e-mail: quando è arrivata ciascuna, il nome del mittente e l'esito.
 - Ogni e-mail che legge, con l'id del tuo account e l'ora di arrivo, per imparare a leggere meglio e-mail di questo tipo: per 30 giorni, o finché non ne arrivano 100 più recenti.
 
-Un'e-mail bloccata da un limite non viene conservata, e nemmeno la conferma di Gmail. Peek può inviare alcune e-mail conservate ad Anthropic, negli Stati Uniti, il cui modello di IA Claude le legge per controllare e migliorare la lettura; Anthropic le conserva circa 30 giorni.
+Un'e-mail ignorata non viene conservata, e nemmeno una bloccata da un limite o la conferma di Gmail. Peek può inviare alcune e-mail conservate ad Anthropic, negli Stati Uniti, il cui modello di IA Claude le legge per controllare e migliorare la lettura; Anthropic le conserva circa 30 giorni.
 
 ## Perché il mio pacco non è stato aggiunto?
 
@@ -71,6 +73,7 @@ Guarda in «Ultime email»: per ogni e-mail c'è l'esito.
 | «Già tra le tue consegne» | Segui già quel pacco: non viene mai aggiunto due volte |
 | «Già tra le tue consegne: aggiunto il nome del negozio» | Lo stesso, e il pacco senza nome ha preso quello del negozio. Un nome che hai dato tu resta |
 | «Già consegnato: non aggiunto» | L'oggetto dice che è stato consegnato. Una consegna fallita, o una consegna in un punto di ritiro o in un locker, conta come in viaggio |
+| «Non è un’email di spedizione: non letta» | L'oggetto non ha parole di spedizione in nessuna lingua e non arriva da un corriere: una newsletter, una fattura. Peek non la legge e non la conserva. Più e-mail di fila stanno su una riga |
 | «Non letta: limite di oggi raggiunto» | È stato raggiunto un limite giornaliero: sulle e-mail al tuo indirizzo (per giorno UTC) o sui pacchi che il tuo account aggiunge, via e-mail o a mano. Da metà del limite di e-mail, la pagina mostra quante ne hai usate |
 | «Non aggiunto: le tue consegne sono al completo» | Il tuo account ha 50 pacchi attivi, 500 contando quelli archiviati |
 

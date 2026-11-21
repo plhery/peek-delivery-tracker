@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "Не прочитано: дневной лимит исчерпан",
   "inbox.result.full": "Не добавлено: список доставок заполнен",
   "inbox.result.confirmation": "Код подтверждения Gmail",
+  "inbox.result.ignored": "Письмо не о посылке: не прочитано",
   "inbox.noNumber": "Некоторые магазины, например Amazon, не указывают трек-номер в письмах.",
   "inbox.usage": "Сегодня {{used}} из {{limit}} писем",
   "inbox.renew": "Получить новый адрес",

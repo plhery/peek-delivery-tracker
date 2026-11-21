@@ -153,6 +153,30 @@ begin
 end;
 $$;
 
+-- A run of ignored emails takes one line, the newest one's sender; the next shipping email starts a new line.
+do $$
+declare
+  one constant uuid := 'e9000000-0000-4000-8000-000000000001';
+  recent jsonb;
+begin
+  update private.inbound_mailboxes set recent = '[]' where user_id = one;
+  perform public.record_inbound_mail(one, 'added', 1, null, null, 'Example Shop');
+  perform public.record_inbound_mail(one, 'ignored', 0, null, null, 'Newsletter One');
+  perform public.record_inbound_mail(one, 'ignored', 0, null, null, 'Newsletter Two');
+  recent := public.inbound_mailbox(one)->'recent';
+  if jsonb_array_length(recent) <> 2 or recent->0->>'result' <> 'ignored' or recent->0->>'sender' <> 'Newsletter Two'
+      or recent->1->>'sender' <> 'Example Shop' or public.inbound_mailbox(one)->>'last_result' <> 'ignored' then
+    raise exception 'Ignored emails were not folded into one line: %', recent;
+  end if;
+  perform public.record_inbound_mail(one, 'known', 0, null, null, 'Example Post');
+  perform public.record_inbound_mail(one, 'ignored', 0, null, null, 'Newsletter Three');
+  recent := public.inbound_mailbox(one)->'recent';
+  if jsonb_array_length(recent) <> 4 or recent->0->>'sender' <> 'Newsletter Three' or recent->1->>'result' <> 'known' then
+    raise exception 'An ignored email after a shipping one did not start a new line: %', recent;
+  end if;
+end;
+$$;
+
 -- A new day gives a new allowance, and the first email of an hour forgets counts of over a week ago.
 update private.inbound_mail_days set day = day - 1;
 insert into private.inbound_mail_days (user_id, day, used)

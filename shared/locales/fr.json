@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "Non lu : limite du jour atteinte",
   "inbox.result.full": "Non ajouté : tes livraisons sont pleines",
   "inbox.result.confirmation": "Code de confirmation de Gmail",
+  "inbox.result.ignored": "Pas un e-mail de livraison : non lu",
   "inbox.noNumber": "Certaines boutiques, comme Amazon, ne mettent pas de numéro de suivi dans leurs e-mails.",
   "inbox.usage": "{{used}} e-mails sur {{limit}} aujourd’hui",
   "inbox.renew": "Obtenir une nouvelle adresse",

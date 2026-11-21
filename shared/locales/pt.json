@@ -1379,6 +1379,7 @@
   "inbox.result.limited": "Não lido: limite de hoje atingido",
   "inbox.result.full": "Não adicionado: as tuas entregas estão cheias",
   "inbox.result.confirmation": "Código de confirmação do Gmail",
+  "inbox.result.ignored": "Não é um e-mail de envio: não lido",
   "inbox.noNumber": "Algumas lojas, como a Amazon, não põem número de seguimento nos e-mails.",
   "inbox.usage": "{{used}} de {{limit}} e-mails hoje",
   "inbox.renew": "Obter um endereço novo",

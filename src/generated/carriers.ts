@@ -2668,6 +2668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "jifan-sendungsverfolgung",
+      "title": "Jifan Sendungsverfolgung: JFGJ-Nummern & Pekinger Zeit",
+      "name": "Jifan",
+      "color": "#c81011"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3446,6 +3454,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "suivi-jifan",
+      "title": "Suivi Jifan\u00a0: numéros JFGJ, statuts et heure de Pékin",
+      "name": "Jifan",
+      "color": "#c81011"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -4126,6 +4142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento R+L Carriers: numero PRO, stati e reclami",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "tracciamento-jifan",
+      "title": "Tracciamento Jifan: numeri JFGJ, stati e ora di Pechino",
+      "name": "Jifan",
+      "color": "#c81011"
     },
     {
       "id": "xinghe-freight",
@@ -4818,6 +4842,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "seguimiento-jifan",
+      "title": "Seguimiento Jifan: números JFGJ, estados y hora de Pekín",
+      "name": "Jifan",
+      "color": "#c81011"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -5450,6 +5482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento R+L Carriers: número PRO, estados e reclamações",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "seguimento-jifan",
+      "title": "Seguimento Jifan: números JFGJ, estados e hora de Pequim",
+      "name": "Jifan",
+      "color": "#c81011"
     },
     {
       "id": "xinghe-freight",
@@ -6150,6 +6190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie R+L Carriers: numer PRO, statusy i reklamacje",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "sledzenie-jifan",
+      "title": "Śledzenie Jifan: numery JFGJ, statusy i czas pekiński",
+      "name": "Jifan",
+      "color": "#c81011"
     },
     {
       "id": "xinghe-freight",

@@ -58,12 +58,13 @@ export function reportProviderSetting(setting = process.env.TRACKING_UNIVERSAL_P
  * a burst and a busy one settles at its limit; a lookup it refuses asks the next provider.
  *
  * ParcelsApp refuses an address that asks it too much, for every carrier, and several carriers have no other source:
- * its limit keeps well under what it has refused. 17TRACK's, Track123's and Postal Ninja's lookups are browser reads,
- * the last two the slowest. Ship24 could be lost with the least harm and takes the most. UPU, the posts' own feed,
- * has none.
+ * its limit keeps well under what it has refused. Ordertracker is asked through its app's own endpoint, whose
+ * tolerance is unknown, about a few carriers others also track: it takes less. 17TRACK's, Track123's and Postal
+ * Ninja's lookups are browser reads, the last two the slowest. Ship24 could be lost with the least harm and takes the
+ * most. UPU, the posts' own feed, has none.
  */
 export const PROVIDER_HOURLY_LIMITS: Readonly<Record<string, number>> = {
-  Ship24: 180, '17TRACK': 120, ParcelsApp: 90, 'Postal Ninja': 40, Track123: 30,
+  Ship24: 180, '17TRACK': 120, ParcelsApp: 90, Ordertracker: 60, 'Postal Ninja': 40, Track123: 30,
 };
 
 /**

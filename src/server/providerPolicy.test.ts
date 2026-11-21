@@ -30,6 +30,7 @@ describe('hourly limits', () => {
     const providers = new Set<string>([...UNIVERSAL_SOURCES, ...BROWSER_SOURCES]);
     expect(Object.keys(PROVIDER_HOURLY_LIMITS).filter((provider) => !providers.has(provider))).toEqual([]);
     expect(PROVIDER_HOURLY_LIMITS.ParcelsApp).toBeLessThan(PROVIDER_HOURLY_LIMITS.Ship24!);
+    expect(PROVIDER_HOURLY_LIMITS.Ordertracker).toBeLessThan(PROVIDER_HOURLY_LIMITS.ParcelsApp!);
   });
   it('leave a reserve only on checks nobody waits for, one the database accepts', () => {
     expect(providerLimit('ParcelsApp', false)).toEqual({ limit: 90, reserve: 0 });

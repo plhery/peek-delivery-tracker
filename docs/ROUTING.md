@@ -1292,8 +1292,8 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   otherwise the check records it and moves on;
 - an hourly limit per provider, stated with each lease
   ([providerPolicy.ts](../src/server/providerPolicy.ts)): ParcelsApp's well under what it
-  has refused an address for, Ship24's the highest, the browser-service providers' by what
-  their reads cost, none for UPU. The allowance fills at that rate and holds half an hour of
+  has refused an address for, Ordertracker's below it, Ship24's the highest, the
+  browser-service providers' by what their reads cost, none for UPU. The allowance fills at that rate and holds half an hour of
   it, so a quiet provider takes a burst, such as a carrier's outage sending its parcels
   over, and a busy one settles at its limit. A check nobody waits for leaves a third of the
   allowance to the Adds and refreshes someone does wait for. A lookup the allowance refuses

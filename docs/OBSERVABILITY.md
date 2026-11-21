@@ -615,7 +615,7 @@ where signal = 'SIGNAL' and carrier = 'CARRIER_ID' and subject = 'SUBJECT' and r
 
 The carrier dashboard starts with its goals: few errors a reader sees, good tracking, and
 parcels answered by their carrier's own tracking rather than a universal provider
-(ParcelsApp, 17TRACK, Ship24, Postal Ninja, UPU, Track718, Track123). `metrics.goals_daily`
+(ParcelsApp, 17TRACK, Ship24, Ordertracker, Postal Ninja, UPU, Track718, Track123). `metrics.goals_daily`
 counts them per UTC day; `record_usage_metrics` rewrites today's row at most every ten
 minutes and yesterday's once more as of its end.
 

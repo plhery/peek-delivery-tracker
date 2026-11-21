@@ -112,9 +112,9 @@ helps, and `proxy_refused` for any other.
    - Providers of one tier share the carrier's numbers, each number keeping its order from
      one check to the next. Ship24 leads the largest part, since losing it would cost least;
      ParcelsApp, the only source of several carriers, half as many; the browser-service
-     providers fewer still. A check someone waits for asks the HTTP providers (ParcelsApp,
-     Ship24) before the browser-service ones of the same tier, which answer seconds later; a
-     check nobody waits for shares the numbers among them all.
+     providers fewer still. A check someone waits for asks ParcelsApp and Ship24 before
+     Ordertracker and the browser-service providers of the same tier, which answer seconds
+     later; a check nobody waits for shares the numbers among them all.
    - A carrier's tiers come from its results in [coverage.json](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/coverage.json),
      listed in [COVERAGE.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COVERAGE.md),
      and, from ten parcels on, from what each provider had for the carrier's parcels here
@@ -147,6 +147,11 @@ helps, and `proxy_refused` for any other.
      browser-service provider. The Add preflight and discovery for a number with no carrier
      don't ask it. When it fails, refuses or answers behind the parcel's stored progress, the
      other providers are asked in the same check.
+   - Ordertracker is asked only about the carrier a lookup is filed under, when the scraper
+     compared the feeds Ordertracker relays that carrier through with the carrier's own
+     tracking (UPS, FedEx and La Poste among them). It answers over HTTP, but reads the
+     carrier while the check waits unless it already holds the parcel. The Add preflight and
+     discovery for a number with no carrier don't ask it.
    - Exception: checksum-valid China Post `C…CN` and `L…CN` numbers try 17TRACK first,
      because it returns much richer history for them (see
      [COMPARISON.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COMPARISON.md)), and ten-digit
@@ -181,8 +186,9 @@ direct lookup follows the normal provider fallback route (see its
 In one check, every eligible universal provider is tried once, stopping at the first
 usable answer with movement if the parcel already has some. Budgets per provider: 45 s
 for ParcelsApp (slow first lookups, one network retry), 30 s for the others, plus 5 s
-transport allowance each. That's 120 s in total by default, 155 s with Postal Ninja,
-less when a carrier's order leaves a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
+transport allowance each. That's 120 s in total by default, 35 s more with Postal Ninja
+and 35 s more for a carrier Ordertracker is asked about, less when a carrier's order leaves
+a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
 attempt doesn't eat into this budget. If the budget runs out first, the discovery cursor
 moves on so the next check starts with another of the providers whose history for the
 carrier is equally full. Postal Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its

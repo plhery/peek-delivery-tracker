@@ -478,7 +478,7 @@
           "editorMode": "code",
           "rawQuery": true,
           "format": "time_series",
-          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  coalesce(sum(requests) filter (where provider = 'ParcelsApp'), 0) as \"ParcelsApp\",\n  coalesce(sum(requests) filter (where provider = '17TRACK'), 0) as \"17TRACK\",\n  coalesce(sum(requests) filter (where provider = 'Ship24'), 0) as \"Ship24\",\n  coalesce(sum(requests) filter (where provider = 'Postal Ninja'), 0) as \"Postal Ninja\",\n  coalesce(sum(requests) filter (where provider = 'Track123'), 0) as \"Track123\",\n  coalesce(sum(requests) filter (where provider not in ('ParcelsApp', '17TRACK', 'Ship24', 'Postal Ninja', 'Track123')), 0) as \"Other providers\"\nfrom metrics.provider_requests_daily\nwhere $__timeFilter(day) and day < (now() at time zone 'UTC')::date\ngroup by day\norder by 1"
+          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  coalesce(sum(requests) filter (where provider = 'ParcelsApp'), 0) as \"ParcelsApp\",\n  coalesce(sum(requests) filter (where provider = '17TRACK'), 0) as \"17TRACK\",\n  coalesce(sum(requests) filter (where provider = 'Ship24'), 0) as \"Ship24\",\n  coalesce(sum(requests) filter (where provider = 'Postal Ninja'), 0) as \"Postal Ninja\",\n  coalesce(sum(requests) filter (where provider = 'Track123'), 0) as \"Track123\",\n  coalesce(sum(requests) filter (where provider = 'Ordertracker'), 0) as \"Ordertracker\",\n  coalesce(sum(requests) filter (where provider not in ('ParcelsApp', '17TRACK', 'Ship24', 'Postal Ninja', 'Track123', 'Ordertracker')), 0) as \"Other providers\"\nfrom metrics.provider_requests_daily\nwhere $__timeFilter(day) and day < (now() at time zone 'UTC')::date\ngroup by day\norder by 1"
         }
       ],
       "fieldConfig": {
@@ -522,6 +522,10 @@
           {
             "matcher": {"id": "byName", "options": "Track123"},
             "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "#0ca30c"}}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Ordertracker"},
+            "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "#1f9bb4"}}]
           },
           {
             "matcher": {"id": "byName", "options": "Other providers"},

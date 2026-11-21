@@ -39102,7 +39102,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Pacific/Auckland",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "chinz-logistics"
     },
     "trackingUrlTemplate": "https://chinzlogistics.com/en/consult?keywords={trackingNumber}",
     "linkRules": [
@@ -59844,7 +59844,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Tbilisi",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "trackings-ge"
     },
     "trackingUrlTemplate": "https://trackings.ge/en/track?track_num={trackingNumber}",
     "linkRules": [
@@ -61758,7 +61758,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "delibox"
     },
     "trackingUrlTemplate": "https://www.dbox.co.kr/delivery.php?laasInvcNo={trackingNumber}",
     "linkRules": [

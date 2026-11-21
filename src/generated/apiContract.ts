@@ -4407,6 +4407,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^G\\d{11}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^YTG\\d{12}$",
+        "confidence": "high"
       }
     ],
     "trackingUrlTemplate": "https://www.yto.net.cn/ytoExpress/waybill/search",
@@ -65301,6 +65305,274 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.zim.com/tools/track-a-shipment"
+  },
+  "amass": {
+    "displayName": "AMASS",
+    "aliases": [
+      "AMASS Freight",
+      "美设国际",
+      "美设国际物流集团股份有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#182689",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "amass"
+    },
+    "trackingSiteName": "订单状态跟踪",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.amassfreight.com/trace/",
+    "helpUrl": "https://www.amassfreight.com/"
+  },
+  "ck-line": {
+    "displayName": "CK Line",
+    "aliases": [
+      "Chun Kyung",
+      "CK Line Co., Ltd.",
+      "천경해운"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#003f87",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ck-line"
+    },
+    "trackingSiteName": "CK Line E-Service",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://es.ckline.co.kr/?cmd=TRK",
+    "helpUrl": "https://www.ckline.co.kr/en/"
+  },
+  "danx": {
+    "displayName": "DANX",
+    "aliases": [
+      "Danx A/S",
+      "DANX Carousel"
+    ],
+    "countries": [
+      "DK",
+      "SE",
+      "NO",
+      "FI",
+      "EE",
+      "LV"
+    ],
+    "color": "#003D7D",
+    "selectable": true,
+    "timezone": "Europe/Copenhagen",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "danx"
+    },
+    "trackingUrlTemplate": "https://login.danx.com/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://login.danx.com/"
+  },
+  "gaint-logistic": {
+    "displayName": "Gaint Logistic",
+    "aliases": [
+      "Gaint Logistic Private Limited",
+      "Gaint Logistic Pvt Ltd"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#4f46e5",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gaint-logistic"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gaintlogistic.com/track",
+    "helpUrl": "https://gaintlogistic.com/contact"
+  },
+  "milaha": {
+    "displayName": "Milaha",
+    "aliases": [
+      "Qatar Navigation",
+      "Qatar Navigation Lines",
+      "QNL",
+      "Milaha Container Shipping"
+    ],
+    "countries": [
+      "QA"
+    ],
+    "color": "#00467f",
+    "selectable": true,
+    "timezone": "Asia/Qatar",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "milaha"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://erp-qnl.solverminds.net/ecomonline/",
+    "helpUrl": "https://www.milaha.com/en/business-area/container-shipping"
+  },
+  "phantom-couriers": {
+    "displayName": "Phantom Couriers",
+    "aliases": [
+      "Phantom Courier",
+      "Phantom Couriers Ltd."
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#ff5c00",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "phantom-couriers"
+    },
+    "trackingUrlTemplate": "https://portal.courie.ai/phantom/trackshipment?trackingNumber={trackingNumber}",
+    "trackingSiteName": "Courie",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.courie.ai"
+        ],
+        "pathPattern": "^/phantom/trackshipment/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.courie.ai/phantom/trackshipment",
+    "helpUrl": "https://phantomcouriers.com/contact/"
+  },
+  "romocean": {
+    "displayName": "Romocean",
+    "aliases": [
+      "Romocean S.L."
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#30336d",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "romocean"
+    },
+    "trackingSiteName": "Romocean Container Tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://romocean.com/container-tracking/",
+    "helpUrl": "https://romocean.com/"
+  },
+  "sarjak-container-lines": {
+    "displayName": "Sarjak Container Lines",
+    "aliases": [
+      "Sarjak",
+      "SCL",
+      "Sarjak Container Lines Pvt Ltd"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#0b3b6f",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "sarjak-container-lines"
+    },
+    "trackingSiteName": "iTrack",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.sarjak.com/",
+    "helpUrl": "https://www.sarjak.com/"
+  },
+  "topparcel": {
+    "displayName": "Topparcel",
+    "aliases": [
+      "Topparcel.com"
+    ],
+    "countries": [
+      "GB",
+      "IT",
+      "FR",
+      "ES",
+      "DE"
+    ],
+    "color": "#F2590C",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "topparcel"
+    },
+    "trackingUrlTemplate": "https://topparcel.com/parcels/tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://topparcel.com/parcels/tracking"
+  },
+  "usend-chile": {
+    "displayName": "USEND Chile",
+    "aliases": [
+      "USEND",
+      "Usend Courier",
+      "Usend Logistics Chile"
+    ],
+    "countries": [
+      "CL"
+    ],
+    "color": "#273BA5",
+    "selectable": true,
+    "timezone": "America/Santiago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "usend-chile"
+    },
+    "trackingUrlTemplate": "https://portal.usend.cl/rastrear-shipper/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.usend.cl"
+        ],
+        "path": "^/rastrear-shipper/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://usend.cl/"
+  },
+  "vasco-maritime": {
+    "displayName": "Vasco Maritime",
+    "aliases": [
+      "VASCO",
+      "Vasco Maritime Pte Ltd"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#2f2483",
+    "selectable": true,
+    "timezone": "Asia/Singapore",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "vasco-maritime"
+    },
+    "trackingSiteName": "Vasco Maritime Track",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.vascomaritime.com/track",
+    "helpUrl": "https://www.vascomaritime.com/"
   }
 } as const;
 
@@ -67327,7 +67599,18 @@ export const CARRIER_IDS = [
   "swire-shipping",
   "wan-hai",
   "yang-ming",
-  "zim"
+  "zim",
+  "amass",
+  "ck-line",
+  "danx",
+  "gaint-logistic",
+  "milaha",
+  "phantom-couriers",
+  "romocean",
+  "sarjak-container-lines",
+  "topparcel",
+  "usend-chile",
+  "vasco-maritime"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

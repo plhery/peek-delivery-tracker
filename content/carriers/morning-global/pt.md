@@ -65,7 +65,7 @@ Os clientes da Morning Global são as lojas expedidoras: em caso de atraso, perd
 
 **Ainda não encontrada.** Se a transportadora ainda não estiver definida mas o número seguir o formato `BR…MG` (sem dígito de controlo postal), o Peek mostra «Provavelmente Morning Global» e «À espera do primeiro registo de Morning Global»; se também passar o dígito de controlo postal (`BR482910576MG`), o Peek consulta a Morning Global e a [Chronopost](carrier:chronopost) e escolhe a que reconhecer o volume. Já arquivada na Morning Global, mostra «À espera de Morning Global». Se nada surgir após uma semana, confirma o código com a loja.
 
-**Parada em `Order Created` ou sem avanços.** `Order Created` indica que a loja ainda não entregou o pacote à transportadora. Em viagem, após quatro dias sem nova linha, o Peek assinala «Sem atualizações há quatro dias»; depois de `Handed Over for Delivery`, pede o número do parceiro local ([porque é que o seguimento não atualiza](guide:tracking-not-updating)).
+**Parada em `Order Created` ou sem avanços.** `Order Created` indica que a loja ainda não entregou o pacote à transportadora. Em viagem, após quatro dias sem nova linha, o Peek mostra o dia da última linha («Sem atualizações desde seg 12 out»); depois de `Handed Over for Delivery`, pede o número do parceiro local ([porque é que o seguimento não atualiza](guide:tracking-not-updating)).
 
 **Perdida, danificada, recusada ou entregue sem aparecer.** Os termos da Morning Global dão à loja 30 dias desde a aceitação para participar uma reclamação e 90 dias para enviar documentos, limitando a indemnização ao valor declarado e no máximo a 50 US$ por encomenda quando haja culpa da Morning Global; falhas por morada errada ou incompleta, ausência ou recusa contam como encomenda concluída perante a loja ([encomenda perdida](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel), [devolvida ao remetente](guide:returned-to-sender)). Se constar `Delivered` mas nada chegou, vê `Signed By` no localizador da Morning Global (omitido pelo Peek), pergunta aos vizinhos e avisa a loja ([entregue mas não recebido](guide:delivered-not-received)).
 
@@ -88,7 +88,7 @@ O [Peek](/) não atribui a Morning Global apenas pelo formato `BR…MG`, mas seg
 
 O Peek lê o localizador próprio da Morning Global sem código postal: mostra o estado, cada linha com o local, o país de destino e a hora de entrega, lê a hora pelo fuso UTC indicado junto ao país (e sem ele, pelo relógio do local, de uma linha vizinha ou de Hong Kong) e converte tudo para o fuso do teu dispositivo («Horas no teu fuso horário: …»). Deixa de fora origem, `Estimated Delivery`, peso, volumes, `Reference` e `Signed By` (sem data prevista de entrega) e acompanha a encomenda na Morning Global até ao fim sem perguntar aos correios do teu país.
 
-O Peek verifica no máximo uma vez por hora (também em «Em distribuição») e aguarda 2 horas após uma falha de consulta (o mesmo numa atualização manual). Podes escolher «Todas as leituras», «Passos importantes» (`Customs Clearance Begins`, `Out for Delivery` e `Delivered`) ou «Só a entrega». O Peek não pode contactar a Morning Global nem a loja por ti.
+O Peek verifica no máximo uma vez por hora (também em «Em distribuição») e aguarda 2 horas após uma falha de consulta (o mesmo numa atualização manual). Podes escolher «Todos os registos», «Passos importantes» (`Customs Clearance Begins`, `Out for Delivery` e `Delivered`) ou «Só a entrega». O Peek não pode contactar a Morning Global nem a loja por ti.
 
 ## Perguntas frequentes sobre o seguimento da Morning Global
 

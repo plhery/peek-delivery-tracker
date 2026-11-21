@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-Morning Global (MG), założone w 1987 roku, to międzynarodowe ramię hongkońskiej grupy kurierskiej Morning Express Group. Wysyła paczki za granicę dla sklepów internetowych i platform zakupowych, ma biura w Hongkongu oraz w całych Chinach kontynentalnych, a doręczenie końcowe powierza zazwyczaj partnerowi w Twoim kraju. Sprawdź numer przekazany przez sklep na angielskiej [stronie Trace & Track Morning Global](https://www.morninglobal.com/trace-track/) albo wklej go w polu powyżej.
+Morning Global (MG), założone w 1987 roku, to międzynarodowe ramię hongkońskiej grupy kurierskiej Morning Express Group. Wysyła paczki za granicę dla sklepów internetowych i platform zakupowych, ma biura w Hongkongu oraz w całych Chinach kontynentalnych, a doręczenie końcowe powierza zazwyczaj partnerowi w twoim kraju. Sprawdź numer przekazany przez sklep na angielskiej [stronie Trace & Track Morning Global](https://www.morninglobal.com/trace-track/) albo wklej go w polu powyżej.
 
 ## Numer śledzenia Morning Global: jak wygląda
 
@@ -29,19 +29,19 @@ Małe litery, spacje i myślniki są w Peek ignorowane. Wyszukiwarka Morning Glo
 
 Wyszukiwarka Morning Global pokazuje historię w sekcji `Shipment Journey`: każdy wpis ma status, często dodatkowy opis, datę, godzinę i miejsce — nierzadko kod kraju ze strefą UTC lokalnego zegara, np. `CA (UTC-4)`. W typowej kolejności:
 
-| Morning Global podaje | Co to oznacza dla Ciebie | Peek pokazuje |
+| Morning Global podaje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Order Created` | Sklep zarejestrował wysyłkę; Morning Global nie ma jeszcze paczki. | „Zarejestrowana” |
 | `Collection` | Morning Global odebrał przesyłkę ze sklepu. | „Przyjęta przez przewoźnika” |
 | `Arrive Hub` | Paczka dotarła do sortowni Morning Global. | „W transporcie” |
 | `Depart Origin` | Opuściła węzeł początkowy. | „W transporcie” |
 | `Depart Hub` | Opuściła sortownię (komunikat ze starszej wyszukiwarki Morning Global). | „W transporcie” |
-| `Ready for Departure` | Gotowa do wylotu do Twojego kraju. | „W transporcie” |
-| `Flight Departure to Destination` | Samolot do Twojego kraju wystartował. | „W transporcie” |
-| `Arrive Destination` | Dotarła do Twojego kraju; przed nią jeszcze odprawa celna i przekazanie partnerowi doręczającemu. | „W transporcie” |
-| `Customs Clearance Begins` | Paczką zajmuje się urząd celny Twojego kraju. | „W urzędzie celnym” |
+| `Ready for Departure` | Gotowa do wylotu do twojego kraju. | „W transporcie” |
+| `Flight Departure to Destination` | Samolot do twojego kraju wystartował. | „W transporcie” |
+| `Arrive Destination` | Dotarła do twojego kraju; przed nią jeszcze odprawa celna i przekazanie partnerowi doręczającemu. | „W transporcie” |
+| `Customs Clearance Begins` | Paczką zajmuje się urząd celny twojego kraju. | „W urzędzie celnym” |
 | `Customs Cleared` | Urząd celny zwolnił przesyłkę. | „W transporcie” |
-| `Handed Over for Delivery` | Przekazana partnerowi doręczającemu w Twoim kraju; nie wyjechała jeszcze w trasę kurierską. | „W transporcie” |
+| `Handed Over for Delivery` | Przekazana partnerowi doręczającemu w twoim kraju; nie wyjechała jeszcze w trasę kurierską. | „W transporcie” |
 | `Out for Delivery` | Dziś w trasie doręczeniowej. | „W doręczeniu” |
 | `Delivered` | Doręczona. | „Dostarczona” |
 
@@ -51,7 +51,7 @@ Gdy opis wnosi więcej niż sam status, Peek pokazuje `status: opis`, usuwając 
 
 ## Kto doręcza paczki Morning Global?
 
-Wraz ze statusem `Handed Over for Delivery` Morning Global przekazuje przesyłkę partnerowi doręczającemu w Twoim kraju. Strona przewoźnika nie wymienia lokalnych partnerów, a wyszukiwarka nie przekazuje do Peek ani nazwy tej firmy, ani jej własnego numeru śledzenia — aby zmienić termin doręczenia, poproś o ten numer sklep lub wsparcie Morning Global.
+Wraz ze statusem `Handed Over for Delivery` Morning Global przekazuje przesyłkę partnerowi doręczającemu w twoim kraju. Strona przewoźnika nie wymienia lokalnych partnerów, a wyszukiwarka nie przekazuje do Peek ani nazwy tej firmy, ani jej własnego numeru śledzenia — aby zmienić termin doręczenia, poproś o ten numer sklep lub wsparcie Morning Global.
 
 **Własne oddziały.** Wśród własnych lokalizacji Morning Global wymienia Wielką Brytanię i USA, z centralami regionalnymi w Londynie (Wielka Brytania i Europa), Los Angeles (Ameryki) i Kantonie w Chinach kontynentalnych oraz oddziałem w Amsterdamie; Kanada widnieje wśród kluczowych rynków obok USA, a Australia w sieci partnerskiej. Morning Global nie publikuje własnych zasad prób doręczenia ani odbioru w punktach: obowiązują reguły firmy końcowej ([nieudane doręczenie](guide:missed-delivery), [nieodebrana paczka](guide:uncollected-parcel)).
 
@@ -65,7 +65,7 @@ Klientami Morning Global są sklepy zlecające wysyłkę — w razie opóźnieni
 
 **Jeszcze nie znaleziono.** Gdy przewoźnik nie jest jeszcze ustalony, ale numer ma postać `BR…MG` (bez pocztowej cyfry kontrolnej), Peek pokazuje „Prawdopodobnie Morning Global” i „Oczekiwanie na pierwszy skan przewoźnika Morning Global”; jeśli numer przechodzi także pocztową cyfrę kontrolną (`BR482910576MG`), Peek odpytuje Morning Global i [Chronopost](carrier:chronopost), wskazując tego, który zna przesyłkę. Dla paczki przypisanej do Morning Global widać „Oczekiwanie na przewoźnika Morning Global”. Gdy po tygodniu nadal brak wpisów, sprawdź numer ze sklepem.
 
-**Zatrzymana na `Order Created` lub brak skanów.** `Order Created` oznacza, że sprzedawca nie przekazał jeszcze paczki. W drodze po czterech dniach bez nowego wpisu Peek wyświetla „Brak aktualizacji od czterech dni”; po `Handed Over for Delivery` poproś o numer lokalnego doręczyciela ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating)).
+**Zatrzymana na `Order Created` lub brak skanów.** `Order Created` oznacza, że sprzedawca nie przekazał jeszcze paczki. W drodze po czterech dniach bez nowego wpisu Peek pokazuje dzień ostatniego wpisu („Brak aktualizacji od pon 12 paź”); po `Handed Over for Delivery` poproś o numer lokalnego doręczyciela ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating)).
 
 **Zagubiona, uszkodzona, odrzucona lub doręczona bez śladu.** Regulamin Morning Global daje sklepowi 30 dni od przyjęcia paczki na zgłoszenie roszczenia i 90 dni na dosłanie dokumentów, ograniczając odszkodowanie z winy Morning Global do zadeklarowanej wartości i maksymalnie 50 USD za paczkę; niedoręczenie z powodu błędnego lub niepełnego adresu, braku odbiorcy czy odmowy przyjęcia liczy się wobec sklepu jako zrealizowane zlecenie ([zagubiona paczka](guide:lost-parcel), [uszkodzona paczka](guide:damaged-parcel), [zwrot do nadawcy](guide:returned-to-sender)). Jeśli widnieje `Delivered`, lecz paczki nie ma, sprawdź pole `Signed By` w wyszukiwarce Morning Global (pomijane przez Peek), popytaj sąsiadów i zgłoś sprawę sklepowi ([dostarczona, ale nieotrzymana](guide:delivered-not-received)).
 
@@ -86,9 +86,9 @@ W sprawach przesyłek na [stronie kontaktowej Morning Global](https://www.mornin
 
 Sam kształt `BR…MG` nie wystarcza, by [Peek](/) od razu wskazał Morning Global, ale aplikacja śledzi ponad 3 500 przewoźników: wklej numer, zobaczysz „Sprawdzanie usług śledzenia…” i „Morning Global ma tę przesyłkę.”, gdy wyszukiwarka Morning Global ją rozpozna. Link z `www.morninglobal.com` zawierający `tracking_number=` lub `ydh=` od razu zapisuje paczkę pod Morning Global („Wykryty przewoźnik”). W przeciwnym razie stuknij „Zmień” i wybierz Morning Global w sekcji „Pasują do numeru” lub „Wszyscy przewoźnicy” (albo „Zmień przewoźnika” przy dodanej paczce).
 
-Peek odczytuje wyszukiwarkę Morning Global bez kodu pocztowego: pokazuje status, każdy krok z miejscem, kraj docelowy i czas doręczenia, odczytuje godzinę według przesunięcia UTC przy kodzie kraju (a bez niego według zegara miejsca, sąsiedniego wpisu lub Hongkongu) i przelicza wszystko na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Pomija miejsce nadania, `Estimated Delivery`, wagę, liczbę sztuk, `Reference` oraz `Signed By` (nie wyświetla prognozowanej daty dostawy) i śledzi przesyłkę w Morning Global do końca bez odpytywania poczty w Twoim kraju.
+Peek odczytuje wyszukiwarkę Morning Global bez kodu pocztowego: pokazuje status, każdy krok z miejscem, kraj docelowy i czas doręczenia, odczytuje godzinę według przesunięcia UTC przy kodzie kraju (a bez niego według zegara miejsca, sąsiedniego wpisu lub Hongkongu) i przelicza wszystko na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”). Pomija miejsce nadania, `Estimated Delivery`, wagę, liczbę sztuk, `Reference` oraz `Signed By` (nie wyświetla prognozowanej daty dostawy) i śledzi przesyłkę w Morning Global do końca bez odpytywania poczty w twoim kraju.
 
-Peek sprawdza zmiany najwyżej raz na godzinę (również w dniu „W doręczeniu”), a po nieudanym sprawdzeniu odczekuje 2 godziny (tak samo przy ręcznym odświeżeniu). Możesz włączyć „Każdy skan”, „Ważne etapy” (`Customs Clearance Begins`, `Out for Delivery` i `Delivered`) lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Morning Global ani ze sklepem.
+Peek sprawdza zmiany najwyżej raz na godzinę (również w dniu „W doręczeniu”), a po nieudanym sprawdzeniu odczekuje 2 godziny (tak samo przy ręcznym odświeżeniu). Możesz włączyć „Każdy skan”, „Ważne etapy” (`Customs Clearance Begins`, `Out for Delivery` i `Delivered`) lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Morning Global ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie Morning Global
 
@@ -102,11 +102,11 @@ Wklej numer otrzymany od sklepu w polu u góry strony albo wpisz go na `morningl
 
 ### Co oznacza status `Handed Over for Delivery` w Morning Global?
 
-Morning Global przekazało paczkę po odprawie celnej partnerowi doręczającemu w Twoim kraju. Przesyłka nie jest jeszcze w aucie kuriera — kolejnym krokiem będzie `Out for Delivery`.
+Morning Global przekazało paczkę po odprawie celnej partnerowi doręczającemu w twoim kraju. Przesyłka nie jest jeszcze w aucie kuriera — kolejnym krokiem będzie `Out for Delivery`.
 
 ### Kto doręcza paczki Morning Global?
 
-Lokalny przewoźnik partnerski w Twoim kraju, którego strona ani wyszukiwarka Morning Global nie wymieniają z nazwy. O jego numer śledzenia zapytaj sklep lub wsparcie Morning Global.
+Lokalny przewoźnik partnerski w twoim kraju, którego strona ani wyszukiwarka Morning Global nie wymieniają z nazwy. O jego numer śledzenia zapytaj sklep lub wsparcie Morning Global.
 
 ### Jak skontaktować się z Morning Global?
 

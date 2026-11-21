@@ -14,14 +14,14 @@ Morning Global publishes no number format. Peek's catalog knows one shape for it
 
 | Number | What it is |
 | --- | --- |
-| `BR000000000MG` | BR, nine digits and MG: a Morning Global number. The same layout fits postal numbers too, so Peek checks the number with Morning Global before naming it. |
-| `BR00000000MG` | Only eight digits: not Morning Global's shape. Peek doesn't point to Morning Global. Check for a missing digit. |
+| `BR482910573MG` | BR, nine digits and MG: a Morning Global number. The same layout fits postal numbers too, so Peek checks the number with Morning Global before naming it. |
+| `BR48291057MG` | Only eight digits: not Morning Global's shape. Peek doesn't point to Morning Global. Check for a missing digit. |
 
 Lower case, spaces and dashes don't matter in Peek. Morning Global's tracker takes up to 20 numbers at once, separated by commas.
 
 **Where to find it.** In the shop's shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number) and [tracking parcels from China](guide:tracking-from-china).
 
-**A number in another shape.** Once you choose Morning Global, Peek asks its tracker about any number of 8 to 40 letters and digits.
+**A number in another shape.** Once you choose Morning Global, Peek asks its tracker about any number of 8 to 40 characters that mixes letters and digits.
 
 **Two services.** Morning Global sells MG International Express (MGIE), which it runs itself, door to door, and the cheaper MG International Postal (MGIP), through postal hubs around the world. Between them, MGIE and MGIP cover more than 220 destinations and take parcels up to 30 kg.
 
@@ -45,7 +45,7 @@ Morning Global's tracker lists the parcel's lines under `Shipment Journey`, each
 | `Out for Delivery` | On the delivery run. | "Out for delivery" |
 | `Delivered` | Delivered. | "Delivered" |
 
-When a line's description says more than its status, Peek shows the status, a colon, then the description, without the name of whoever signed and without phone numbers. Wording that isn't on this list is read by Peek's general rules, or shown with no step of its own.
+When a line's description says more than its status, Peek shows the status, a colon, then the description, without phone numbers. Wording that isn't on this list is read by Peek's general rules, or shown with no step of its own.
 
 **Not found.** For a number it doesn't know, Morning Global's tracker answers `No shipment record was found for this tracking number.`
 
@@ -57,7 +57,7 @@ With `Handed Over for Delivery`, Morning Global hands the parcel to the partner 
 
 **Delivery attempts and pickup.** Morning Global publishes no rules for delivery attempts, notice cards or pickup points: they're the delivering partner's. See [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
-**Customs in the EU (Ireland).** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. An item is the goods sharing a tariff classification, description and, where required, origin. On 22 October 2026, Morning Global told the shops that ship with it that from 1 November a EUR 2 Customs Handling Fee is charged for each customs declaration line, whatever the parcel's value, plus VAT on the fee where the destination country requires it. Its notice doesn't say whether shops pass the fee on to you. In the UK, the US, Canada and Australia, what you owe depends on your country: see [parcels held at customs](guide:customs).
+**Customs in the EU (Ireland).** Goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026, plus import VAT unless it was collected at checkout through IOSS. An item is the goods sharing a tariff classification, description and, where required, origin. On 22 October 2026, Morning Global told the shops that ship with it that from 1 November a EUR 2 Customs Handling Fee is charged for each customs declaration line, whatever the parcel's value, plus VAT on the fee where the destination country requires it. Its notice doesn't say whether shops pass the fee on to you. In the UK, the US, Canada and Australia, what you owe depends on your country: see [parcels held at customs](guide:customs).
 
 **Customs documents.** When customs need an ID copy, an invoice or another document, Morning Global's site has an Upload Clearance Documents form, which asks for the tracking number. Use it only on morninglobal.com: a text asking you to pay or send ID through another link may be a scam (see [delivery scam texts](guide:delivery-scam-texts)).
 
@@ -83,7 +83,7 @@ Morning Global's customers are the shops that book it. For a late, lost, damaged
 
 ## Morning Global customer service and contact
 
-As read on 17 November 2026 on Morning Global's [Contact page](https://www.morninglobal.com/contact/), for shipment enquiries:
+On Morning Global's [Contact page](https://www.morninglobal.com/contact/), for shipment enquiries:
 
 - **United States**: cs.mgus@morninglobal.com, +1 888 981 8688.
 - **United Kingdom**: cs.mgeu@morninglobal.com, +44 20 7019 9035.
@@ -96,9 +96,9 @@ Morning Global gives no opening hours. Its tracker asks you to give your trackin
 
 ## Track a Morning Global parcel with Peek
 
-[Peek](/) doesn't name Morning Global from a BR…MG number alone. Paste it all the same: Peek follows more than 4,500 carriers. It checks the number ("Checking tracking services…") and says "Morning Global has this parcel." when Morning Global's tracker knows it. A morninglobal.com tracking link with `tracking_number=` files the parcel under Morning Global at once ("Detected carrier"). If Peek doesn't find it, tap "Change" and pick Morning Global under "Fits this number" or "All carriers", or use "Change carrier" on a parcel you've already added.
+[Peek](/) doesn't name Morning Global from a BR…MG number alone. Paste it all the same: Peek follows more than 4,500 carriers. It checks the number ("Checking tracking services…") and says "Morning Global has this parcel." when Morning Global's tracker knows it. A www.morninglobal.com tracking link with `tracking_number=` or `ydh=` files the parcel under Morning Global at once ("Detected carrier"). If Peek doesn't find it, tap "Change" and pick Morning Global under "Fits this number" or "All carriers", or use "Change carrier" on a parcel you've already added.
 
-Peek reads Morning Global's own tracker by the number alone, with no postcode. It shows the status, each line with its place, the destination country and the delivery time. It reads a line's time on the UTC offset given beside the country, a line without one on the clock of its place, a neighbouring line's, your country's or Hong Kong's, and shows every time in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It leaves out the origin, the `Estimated Delivery`, the weight, the pieces, the `Reference` and who signed, so it shows no expected delivery date.
+Peek reads Morning Global's own tracker by the number alone, with no postcode. It shows the status, each line with its place, the destination country and the delivery time. It reads a line's time on the UTC offset given beside the country, a line without one on the clock of its place, a neighbouring line's or Hong Kong's, and shows every time in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It leaves out the origin, the `Estimated Delivery`, the weight, the pieces, the `Reference` and the `Signed By` field, so it shows no expected delivery date.
 
 As Morning Global names no delivering partner, Peek follows the parcel on Morning Global's tracker to the end, even when the number also passes the check digit postal numbers carry: it doesn't ask your country's post about it.
 
@@ -132,7 +132,7 @@ Email cs.mgus@morninglobal.com in the US, cs.mgeu@morninglobal.com in the UK, or
 - [Morning Global: About Us](https://www.morninglobal.com/about-us/) – international division of Morning Express Group, Hong Kong, brands, retailers and marketplaces
 - [Morning Global: Services](https://www.morninglobal.com/services/) – MGIE and MGIP, more than 220 destinations, up to 30 kg
 - [Morning Global: Global Network](https://www.morninglobal.com/global-network/) – self-operated locations (UK, USA), partner networks (Australia), United States & Canada
-- [Morning Global: Contact](https://www.morninglobal.com/contact/) – regional teams' mailboxes and phones, worldwide team and its WhatsApp number, form, global and regional headquarters, offices across mainland China (read 17 November 2026)
+- [Morning Global: Contact](https://www.morninglobal.com/contact/) – regional teams' mailboxes and phones, worldwide team and its WhatsApp number, form, global and regional headquarters, offices across mainland China
 - [Morning Global: Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) – customs documents form
 - [Morning Global: Terms and Conditions (Privacy Policy page)](https://www.morninglobal.com/privacy-policy/) – failed deliveries, claim deadlines, US$50 cap
 - [Morning Global: EUR 2 Customs Handling Fee for EU-bound B2C Shipments](https://www.morninglobal.com/morning-global-service-update-introduction-of-eur-2-customs-handling-fee-for-eu-bound-b2c-shipments-from-1-november-2026/) – EUR 2 per declaration line since 1 November 2026, VAT on the fee

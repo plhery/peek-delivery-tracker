@@ -14,7 +14,7 @@ Delhivery nazywa swój numer śledzenia **AWB** (*airway bill number*, numer lis
 
 | Numer (zmyślony) | Co oznacza |
 | --- | --- |
-| `1482910573642` | **13 cyfr**: numer AWB Delhivery. Trzynaście cyfr stosują również m.in. [DPD Polska](carrier:dpd-pl), [Econt](carrier:econt), DPD France, FAN Courier czy Korea Post. |
+| `1482910573642` | **13 cyfr**: numer AWB Delhivery. Trzynaście cyfr stosują również m.in. [Econt](carrier:econt), DPD France, FAN Courier czy Korea Post. |
 | `14829105736492` | **14 cyfr**: także numer AWB Delhivery — z tej samej długości korzystają [DPD](carrier:dpd-de), [SEUR](carrier:seur), [BRT](carrier:brt) czy Xpressbees. |
 
 Sama liczba cyfr nie przesądza więc o przewoźniku: sprawdź w SMS-ie lub e-mailu od sklepu, z kim nadano zamówienie. Na `delhivery.com/tracking` wyszukasz paczkę również po `Order Id`, `LRN` (fracht B2B) albo zalogujesz się numerem telefonu i kodem `OTP`, aby zobaczyć wszystkie swoje przesyłki; w Peek potrzebny jest 13- lub 14-cyfrowy **AWB** ([jak znaleźć numer śledzenia](guide:find-tracking-number)).
@@ -34,7 +34,7 @@ Wyszukiwarka Delhivery łączy pasek postępu ze spisem dotychczasowych skanów 
 | `Undelivered` | Niedoręczona i skierowana z powrotem do sprzedawcy; we frachcie Delhivery przemianowuje tak etap `On the Way` z jego pierwotną datą, więc data nie oznacza próby doręczenia. | „Zgłoszono problem” |
 | `REACHED_SEL_CITY` | Zwracana przesyłka dotarła do miasta sprzedawcy. | „W transporcie” |
 | `RTO`, `DELIVERED_SELLER` | *Return to Origin*: niedoręczona paczka wróciła do sprzedawcy. | „Zwrócona nadawcy” |
-| `DTO` | *Deliver to Origin*: zwrot konsumencki nadany przez Ciebie dotarł do sprzedawcy. | „Zwrócona nadawcy” |
+| `DTO` | Zwrot konsumencki nadany przez Ciebie dotarł do sprzedawcy. | „Zwrócona nadawcy” |
 | `LOST` | Delhivery oznaczyło przesyłkę jako zagubioną. | „Zgłoszono problem” |
 | `CANCELLED`, `Canceled` | Przesyłka lub zlecenie odbioru zwrotu zostało anulowane. | „Zgłoszono problem” |
 
@@ -44,9 +44,9 @@ Więcej o etapach podróży paczki znajdziesz w poradniku [co oznaczają statusy
 
 **Sieć.** Delhivery dysponuje `50` zautomatyzowanymi sortowniami, `123` węzłami przeładunkowymi i ponad `4 500` bezpośrednimi centrami doręczeń we wszystkich indyjskich stanach, obsługując `99,5 %` kodów PIN (w tym północno-wschodnie Indie oraz Dżammu i Kaszmir) przez całą dobę, 365 dni w roku.
 
-**Telefony i WhatsApp.** Zgodnie z regulaminem kurierzy i partnerzy Delhivery mogą dzwonić, pisać SMS-y oraz kontaktować się przez WhatsApp (rozmowy mogą być nagrywane), by ustalić doręczenie. Dla sklepów dostępny jest system `Smart NDR` z połączeniami AI i potwierdzeniami na WhatsAppie, jednak Delhivery **nigdy** nie prosi o kod `OTP`, `PIN` ani hasła w celu potwierdzenia adresu.
+**Telefony i WhatsApp.** Zgodnie z regulaminem kurierzy i partnerzy Delhivery mogą dzwonić, pisać SMS-y oraz kontaktować się przez WhatsApp (rozmowy mogą być nagrywane), by ustalić doręczenie. Dla sklepów dostępny jest system `Smart NDR` z połączeniami AI i potwierdzeniami na WhatsAppie, jednak Delhivery **nigdy** nie prosi o kod `OTP` ani hasła w celu potwierdzenia adresu.
 
-**Nieudane próby i zasady Direct.** W usłudze dla osób prywatnych *Delhivery Direct* (do `50 kg` wagi rozliczeniowej, w trybie ekspresowym maks. `10 kg` i `50 cm` boku; brak skrytek pocztowych) po **3 nieudanych próbach doręczenia** zlecenie jest anulowane bez zwrotu opłaty (zwrot paczki możliwy na koszt nadawcy). Za zgodą Delhivery można wskazać sąsiada, recepcję budynku, skrzynkę/automat lub odbiór w zatwierdzonym punkcie, przy czym zmiana kodu PIN może spotkać się z odmową ([nieudane doręczenie](guide:missed-delivery)). Przy zakupach w sklepie obowiązują warunki sprzedawcy.
+**Nieudane próby i zasady Direct.** W usłudze dla osób prywatnych *Delhivery Direct* (do `50 kg` wagi rozliczeniowej, w trybie ekspresowym maks. `10 kg` i `50 cm` boku; brak skrytek pocztowych) po **3 nieudanych próbach doręczenia** zlecenie jest anulowane bez zwrotu opłaty (zwrot paczki możliwy na koszt nadawcy). Za zgodą Delhivery można wskazać sąsiada, skrzynkę/automat lub odbiór w zatwierdzonym punkcie, przy czym zmiana kodu PIN może spotkać się z odmową ([nieudane doręczenie](guide:missed-delivery)). Przy zakupach w sklepie obowiązują warunki sprzedawcy.
 
 ## Paczki z Indii za granicę i odprawa celna
 
@@ -64,9 +64,9 @@ W sprawie zwrotu pieniędzy lub ponownej wysyłki zamówienia ze sklepu internet
 
 ## Obsługa klienta Delhivery i ostrzeżenia przed oszustwami
 
-- **Wsparcie wyłącznie przez stronę lub aplikację:** Delhivery informuje, że dział obsługi klienta jest dostępny **tylko** na [stronie pomocy](https://www.delhivery.com/support) (logowanie numerem telefonu i kodem `OTP` w `Raise a Query`) albo w aplikacji *Delhivery Direct* (sekcje `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`).
+- **Wsparcie wyłącznie przez stronę lub aplikację:** Delhivery informuje, że dział obsługi klienta jest dostępny **tylko** na [stronie pomocy](https://www.delhivery.com/support) (logowanie numerem telefonu i kodem `OTP` w `Raise a Query`; sekcje `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`) albo w aplikacji *Delhivery Direct*.
 - **Brak publicznej infolinii:** numery telefonów znajdowane w innych miejscach w sieci mogą należeć do oszustów. Oficjalne wiadomości przychodzą wyłącznie z domeny `@delhivery.com`, a w mediach społecznościowych Delhivery pomaga tylko z oficjalnych profili na Facebooku, X i Instagramie.
-- **Fałszywe SMS-y:** uważaj na wiadomości o rzekomo nieudanym doręczeniu prowadzące do podrobionych domen (`delhiveryu.top`, `delhiveryma.top`); Delhivery nigdy nie żąda kodu `PIN` ani `OTP` do płatności ani potwierdzenia adresu. W Indiach przy stracie finansowej zadzwoń pod `1930` lub zgłoś sprawę na `cybercrime.gov.in` (a podejrzane połączenia/SMS-y w ciągu 3 dni na `sancharsaathi.gov.in`); zobacz też [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
+- **Fałszywe SMS-y:** uważaj na wiadomości o rzekomo nieudanym doręczeniu prowadzące do podrobionych domen (`delhiveryu.top`, `delhiveryma.top`); Delhivery nigdy nie żąda kodu `PIN` ani `OTP` do płatności ani kodu `OTP` czy haseł do potwierdzenia adresu. W Indiach przy stracie finansowej zadzwoń pod `1930` lub zgłoś sprawę na `cybercrime.gov.in` (a podejrzane połączenia/SMS-y w ciągu 3 dni na `sancharsaathi.gov.in`); zobacz też [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
 ## Śledzenie przesyłek Delhivery w Peek
 

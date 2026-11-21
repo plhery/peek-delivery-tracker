@@ -34,7 +34,7 @@ El seguimiento de Delhivery combina una barra de etapas con la lista de escaneos
 | `Undelivered` | No entregado y de regreso al vendedor; en carga, Delhivery renombra así el paso `On the Way` conservando su fecha original, por lo que no fecha un intento de entrega. | «Incidencia» |
 | `REACHED_SEL_CITY` | Un envío en devolución ha llegado a la ciudad del vendedor. | «En tránsito» |
 | `RTO`, `DELIVERED_SELLER` | *Return to Origin*: el paquete devuelto llegó de vuelta al comercio. | «Devuelto al remitente» |
-| `DTO` | *Deliver to Origin*: una devolución enviada por el comprador llegó al vendedor. | «Devuelto al remitente» |
+| `DTO` | Una devolución enviada por el comprador llegó al vendedor. | «Devuelto al remitente» |
 | `LOST` | Delhivery ha dado el envío por perdido. | «Incidencia» |
 | `CANCELLED`, `Canceled` | El envío o la recogida de devolución se canceló. | «Incidencia» |
 
@@ -44,9 +44,9 @@ Más detalles sobre cada fase en [qué significan los estados de seguimiento](gu
 
 **Red propia.** Delhivery cuenta con `50` centros automatizados de clasificación, `123` nodos y más de `4.500` centros de reparto directo en todos los estados indios, cubriendo el `99,5 %` de los códigos PIN (incluidos el noreste de la India y Jammu y Cachemira) las 24 horas, los 365 días del año.
 
-**Llamadas y WhatsApp.** Sus condiciones prevén que Delhivery o sus repartidores te llamen, te envíen SMS o te escriban y llamen por WhatsApp (las llamadas pueden grabarse) para coordinar la entrega. Para tiendas online ofrece gestión de incidencias (`Smart NDR`) mediante WhatsApp y llamadas con IA, pero **nunca** pide códigos `OTP`, `PIN` ni credenciales para confirmar tu dirección.
+**Llamadas y WhatsApp.** Sus condiciones prevén que Delhivery o sus repartidores te llamen, te envíen SMS o te escriban y llamen por WhatsApp (las llamadas pueden grabarse) para coordinar la entrega. Para tiendas online ofrece gestión de incidencias (`Smart NDR`) mediante WhatsApp y llamadas con IA, pero **nunca** pide códigos `OTP` ni credenciales para confirmar tu dirección.
 
-**Ausencias y condiciones Direct.** En su servicio para particulares *Delhivery Direct* (hasta `50 kg` de peso tasable, o `10 kg` y `50 cm` por lado en modo exprés; sin apartados postales), la entrega se cancela tras **3 intentos fallidos** sin reembolso del porte (el remitente puede pedir la devolución a su costa). Se puede autorizar entrega a vecino, recepción centralizada, buzón/taquilla o recogida en punto aprobado si Delhivery acepta, aunque puede rechazar un cambio de código PIN ([entrega fallida](guide:missed-delivery)). En compras de tienda rigen las condiciones del vendedor.
+**Ausencias y condiciones Direct.** En su servicio para particulares *Delhivery Direct* (hasta `50 kg` de peso tasable, o `10 kg` y `50 cm` por lado en modo exprés; sin apartados postales), la entrega se cancela tras **3 intentos fallidos** sin reembolso del porte (el remitente puede pedir la devolución a su costa). Se puede autorizar entrega a vecino, buzón/taquilla o recogida en punto aprobado si Delhivery acepta, aunque puede rechazar un cambio de código PIN ([entrega fallida](guide:missed-delivery)). En compras de tienda rigen las condiciones del vendedor.
 
 ## Paquetes de Delhivery enviados al extranjero y aduanas
 
@@ -64,9 +64,9 @@ Para reembolsos o reenvíos de un pedido online, contacta primero con la tienda 
 
 ## Atención al cliente de Delhivery y avisos antifraude
 
-- **Soporte exclusivo por web o app:** Delhivery advierte que su atención al cliente **solo** es accesible desde su [página de soporte](https://www.delhivery.com/support) (iniciando sesión con teléfono y `OTP` en `Raise a Query`) o desde la app *Delhivery Direct* (apartados `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`).
+- **Soporte exclusivo por web o app:** Delhivery advierte que su atención al cliente **solo** es accesible desde su [página de soporte](https://www.delhivery.com/support) (iniciando sesión con teléfono y `OTP` en `Raise a Query`; apartados `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`) o desde la app *Delhivery Direct*.
 - **Sin teléfono público de atención:** otros teléfonos de soporte que aparezcan en Internet pueden ser fraudulentos. Los correos oficiales proceden siempre de `@delhivery.com`, y en redes sociales solo atiende desde sus cuentas oficiales de Facebook, X e Instagram.
-- **SMS falsos:** alerta ante mensajes de entrega fallida que redirigen a dominios falsos (`delhiveryu.top`, `delhiveryma.top`); Delhivery nunca pide `PIN` ni `OTP` para pagos ni para confirmar tu dirección. En la India, ante pérdidas económicas llama al `1930` o denuncia en `cybercrime.gov.in` (y reporta llamadas/SMS spam en 3 días en `sancharsaathi.gov.in`); consulta también [mensajes falsos de entrega](guide:delivery-scam-texts).
+- **SMS falsos:** alerta ante mensajes de entrega fallida que redirigen a dominios falsos (`delhiveryu.top`, `delhiveryma.top`); Delhivery nunca pide `PIN` ni `OTP` para pagos, ni `OTP` o credenciales para confirmar tu dirección. En la India, ante pérdidas económicas llama al `1930` o denuncia en `cybercrime.gov.in` (y reporta llamadas/SMS spam en 3 días en `sancharsaathi.gov.in`); consulta también [mensajes falsos de entrega](guide:delivery-scam-texts).
 
 ## Seguir un paquete de Delhivery con Peek
 

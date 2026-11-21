@@ -34,7 +34,7 @@ Delhiverys Sendungsverfolgung zeigt eine Fortschrittsleiste sowie die bisherigen
 | `Undelivered` | Nicht zugestellt und auf dem Rückweg zum Händler; bei Frachtsendungen benennt Delhivery den Schritt `On the Way` unter Beibehaltung seines Datums so um – das Datum ist also kein Zustellversuch. | „Problem gemeldet“ |
 | `REACHED_SEL_CITY` | Eine Rücksendung hat die Stadt des Verkäufers erreicht. | „Unterwegs“ |
 | `RTO`, `DELIVERED_SELLER` | *Return to Origin*: Das unzustellbare Paket ist wieder beim Verkäufer angekommen. | „Zurück an Absender“ |
-| `DTO` | *Deliver to Origin*: Eine von dir aufgegebene Kundenretoure hat den Händler erreicht. | „Zurück an Absender“ |
+| `DTO` | Eine von dir aufgegebene Kundenretoure hat den Händler erreicht. | „Zurück an Absender“ |
 | `LOST` | Delhivery hat die Sendung als verloren markiert. | „Problem gemeldet“ |
 | `CANCELLED`, `Canceled` | Sendung oder Rückholauftrag wurde storniert. | „Problem gemeldet“ |
 
@@ -44,7 +44,7 @@ Mehr zu den allgemeinen Versandphasen liest du unter [Tracking-Status verstehen]
 
 **Netzwerk.** Delhivery betreibt `50` automatisierte Sortierzentren, `123` Gateways und über `4.500` direkte Zustellzentren in allen indischen Bundesstaaten und deckt rund um die Uhr `99,5 %` aller PIN-Codes ab, einschließlich Nordostindien sowie Jammu und Kaschmir.
 
-**Anrufe und WhatsApp.** Laut Nutzungsbedingungen dürfen Delhivery und seine Zustellpartner dich per Telefon, SMS oder WhatsApp kontaktieren (Gespräche können aufgezeichnet werden), um die Übergabe abzustimmen. Für Online-Shops bietet Delhivery `Smart NDR` mit KI-Anrufen und WhatsApp-Bestätigungen für neue Zustellversuche an – fragt zur Adressbestätigung aber **niemals** nach einem `OTP`, einer `PIN` oder Zugangsdaten.
+**Anrufe und WhatsApp.** Laut Nutzungsbedingungen dürfen Delhivery und seine Zustellpartner dich per Telefon, SMS oder WhatsApp kontaktieren (Gespräche können aufgezeichnet werden), um die Übergabe abzustimmen. Für Online-Shops bietet Delhivery `Smart NDR` mit KI-Anrufen und WhatsApp-Bestätigungen für neue Zustellversuche an – fragt zur Adressbestätigung aber **niemals** nach einem `OTP` oder Zugangsdaten.
 
 **Verpasste Zustellung und Direct-Regeln.** Beim Privatkundenservice *Delhivery Direct* (bis `50 kg` Abrechnungsgewicht, im Express-Modus maximal `10 kg` und `50 cm` Kantenlänge, keine Postfächer) bricht Delhivery die Zustellung nach **3 erfolglosen Versuchen** ohne Kostenerstattung ab (Rücksendung auf Kosten des Absenders möglich). Nachbarschaftsabgabe, Briefkasten-/Paketfachzustellung oder Abholung an einem genehmigten Ort sind mit Zustimmung von Delhivery möglich, ein Wechsel des PIN-Codes kann jedoch abgelehnt werden ([Zustellung verpasst](guide:missed-delivery)). Bei Shop-Bestellungen gelten die Vereinbarungen des Händlers.
 
@@ -64,9 +64,9 @@ Für Erstattung oder Ersatzlieferung bei Online-Käufen ist immer der Shop dein 
 
 ## Delhivery-Kundenservice und Betrugswarnungen
 
-- **Support nur über Website oder App:** Laut Delhivery ist der Kundendienst **ausschließlich** über die [Support-Seite](https://www.delhivery.com/support) (Login per Telefonnummer und `OTP`, dann `Raise a Query`) oder die *Delhivery Direct*-App erreichbar (Themen u. a. `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`).
+- **Support nur über Website oder App:** Laut Delhivery ist der Kundendienst **ausschließlich** über die [Support-Seite](https://www.delhivery.com/support) (Login per Telefonnummer und `OTP`, dann `Raise a Query`; Themen u. a. `Report Issues`, `Grievance Officer`, `Report on-field staff issues`, `Returns`) oder die *Delhivery Direct*-App erreichbar.
 - **Keine öffentliche Support-Rufnummer:** Delhivery warnt ausdrücklich, dass im Internet kursierende Kundenservice-Nummern betrügerisch sein können. Offizielle E-Mails stammen nur von `@delhivery.com`, offizielle Social-Media-Hilfe nur von den verifizierten Konten auf Facebook, X und Instagram.
-- **Phishing-Warnung:** Gefälschte SMS behaupten fehlgeschlagene Zustellversuche und führen auf Tippfehler-Domains (wie `delhiveryu.top` oder `delhiveryma.top`); Delhivery verlangt niemals `PIN` oder `OTP` für Zahlungen oder Adressbestätigungen. In Indien: Bei finanziellem Schaden Notruf `1930` wählen oder auf `cybercrime.gov.in` melden (Spam-Anrufe/SMS binnen 3 Tagen auf `sancharsaathi.gov.in`); siehe auch [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
+- **Phishing-Warnung:** Gefälschte SMS behaupten fehlgeschlagene Zustellversuche und führen auf Tippfehler-Domains (wie `delhiveryu.top` oder `delhiveryma.top`); Delhivery verlangt niemals `PIN` oder `OTP` für Zahlungen und weder `OTP` noch Zugangsdaten für Adressbestätigungen. In Indien: Bei finanziellem Schaden Notruf `1930` wählen oder auf `cybercrime.gov.in` melden (Spam-Anrufe/SMS binnen 3 Tagen auf `sancharsaathi.gov.in`); siehe auch [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## Delhivery-Pakete mit Peek verfolgen
 

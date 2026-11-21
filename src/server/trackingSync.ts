@@ -48,7 +48,7 @@ import { PushDispatchError, type CompositePushNotificationService, type PushChan
 import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient, type Waiting } from './supabase';
 import { providerAllowed } from './providerPolicy';
 import { CheckHolds, type CheckHold } from './checkHolds';
-import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, supersededSnapshots, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -4165,8 +4165,12 @@ function storedRowMatches(events: readonly JsonObject[], stored: readonly JsonOb
   // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
   adopt(rewordedScans(events, stored, reworded));
   const shared = sharedScans(events.filter((event) => !relays.has(String(event.provider_event_id))), stored, reworded, relaying);
-  const retimed = retimeFor === null ? new Map<string, string>()
-    : retimedScans(events, stored, retimeFor, new Map([...reworded, ...shared.reused, ...shared.skipped]));
+  const matched = new Map([...reworded, ...shared.reused, ...shared.skipped]);
+  const retimed = retimeFor === null ? new Map<string, string>() : retimedScans(events, stored, retimeFor, matched);
+  // So does its status snapshot restated later in the same words, however much later.
+  if (retimeFor !== null) {
+    for (const [id, saved] of supersededSnapshots(events, stored, retimeFor, new Map([...matched, ...retimed]))) retimed.set(id, saved);
+  }
   return { reworded, held, shared, retimed, matches: { reused: new Map([...reworded, ...shared.reused, ...retimed]), skipped: shared.skipped } };
 }
 

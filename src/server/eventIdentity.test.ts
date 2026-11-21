@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, supersededSnapshots, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -2635,5 +2635,40 @@ describe('a provider\'s copies a carrier\'s answer cannot tell from its own scan
     const ahead = [office, { ...copy, occurred_at: '2026-01-04T14:00:00+00:00' }];
     expect(withoutCopyDrift(at('2026-01-04T12:00:00Z'), [], ahead, none, { withStored: true, misdated: misdatedCopies([], ahead, checked) }))
       .toBe(at('2026-01-04T10:05:00Z'));
+  });
+});
+
+describe('a status snapshot its carrier restates later', () => {
+  // A carrier dates its status by its own time beside its scans, and restates the same status later with no scan
+  // between (synthetic wording and times).
+  const at = (time: string, id: string, description = 'Manifested', extra: JsonObject = {}) => ({
+    provider_event_id: id, occurred_at: new Date(time).toISOString(), stage: 'registered', description, location: null,
+    raw_data: { time, summary_snapshot: true }, ...extra,
+  });
+  const first = at('2026-11-19T22:40:56+05:30', 'delhivery:first');
+  const again = at('2026-11-20T09:54:32+05:30', 'delhivery:again');
+
+  it('takes over the earlier snapshot\'s row, however much later', () => {
+    expect(pairs(supersededSnapshots([again], [first], 'delhivery'))).toEqual([['delhivery:again', 'delhivery:first']]);
+    // As the sync loads stored rows: the flag beside the row, not in its raw data.
+    const loaded = { ...first, raw_data: undefined, summary_snapshot: true };
+    expect(pairs(supersededSnapshots([again], [loaded], 'delhivery'))).toEqual([['delhivery:again', 'delhivery:first']]);
+  });
+
+  it('keeps the earlier row past a scan of the carrier between, or in other words, stage or leg', () => {
+    const scan = at('2026-11-20T02:00:00+05:30', 'delhivery:scan', 'Shipment picked up', { stage: 'accepted', raw_data: { time: '2026-11-20T02:00:00+05:30' } });
+    expect(supersededSnapshots([again], [first, scan], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([again, scan], [first], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([{ ...again, description: 'In transit', stage: 'in_transit' }], [first], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([{ ...again, stage: 'accepted' }], [first], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([{ ...again, raw_data: { ...again.raw_data, provider_leg: 'return' } }], [first], 'delhivery').size).toBe(0);
+  });
+
+  it('keeps an earlier row that is no snapshot, one the answer still lists, and another source\'s', () => {
+    expect(supersededSnapshots([again], [{ ...first, raw_data: { time: first.raw_data.time } }], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([first, again], [first], 'delhivery').size).toBe(0);
+    expect(supersededSnapshots([again], [first], 'dhl').size).toBe(0);
+    // Nor does an earlier snapshot take over a later row.
+    expect(supersededSnapshots([first], [again], 'delhivery').size).toBe(0);
   });
 });

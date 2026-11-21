@@ -34,7 +34,9 @@
  *   that the answer no longer lists (`retimedScans`). The row keeps that old
  *   time as the one it was first stored with (`RETIMED_FROM`). A scan later
  *   than the row was first stored is the next scan, and gets a row of its own,
- *   except a USPS departure, which USPS re-dates up to a day on.
+ *   except a USPS departure, which USPS re-dates up to a day on. A carrier's
+ *   status snapshot restated later in the same words takes over its earlier
+ *   snapshot's row the same way, however much later (`supersededSnapshots`).
  * - A row taken over keeps its old identity while its strings follow the
  *   scan. When a later check meets the scan again, a policy that matched the
  *   old strings (AliExpress's town in brackets) no longer matches, so a scan
@@ -1117,6 +1119,37 @@ export function retimedScans(
     retimed.set(identity(scan), identity(row));
   }
   return retimed;
+}
+
+/**
+ * Maps the computed identity of each new status snapshot of `source`, a carrier (`summary_snapshot`: Delhivery's
+ * status dated by its own time, beside or instead of its scans), to the stored snapshot of that source it restates
+ * later: the same wording, place, stage and leg, which the answer no longer lists, with no scan of the source, in the
+ * answer or stored, between the two. The status is one row at its latest time, not a row for each time the carrier
+ * restated it. Scans and rows another rule matched and observations are left out, and the match is one to one.
+ */
+export function supersededSnapshots(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+  source: string,
+  matched: ReadonlyMap<string, string> = new Map(),
+): Map<string, string> {
+  const superseded = new Map<string, string>();
+  if (source === '' || source === UNIVERSAL || source === 'app') return superseded;
+  const own = (row: JsonObject) => sourceOf(identity(row)) === source && !observedOnly(row) && Number.isFinite(instantOf(row));
+  const snapshot = (row: JsonObject) => own(row) && rawOf(row, 'summary_snapshot') === true;
+  const leg = (row: JsonObject) => String(rawOf(row, 'provider_leg') ?? '');
+  const storedIds = new Set(stored.map(identity));
+  const listed = new Set([...events.map(identity), ...matched.values()]);
+  const held = [...events.filter(own), ...stored.filter(own)];
+  const scans = events.filter((scan) => snapshot(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
+  const rows = stored.filter((row) => snapshot(row) && !listed.has(identity(row)));
+  matchLeft(superseded, new Map([[0, scans]]), new Map([[0, rows]]), (scan, row) => {
+    const [from, to] = [instantOf(row), instantOf(scan)];
+    return to > from && wordingOf(scan) !== '' && wordingOf(scan) === wordingOf(row) && placeOf(scan) === placeOf(row)
+      && stageOf(scan) === stageOf(row) && leg(scan) === leg(row) && !held.some((other) => instantOf(other) > from && instantOf(other) < to);
+  });
+  return superseded;
 }
 
 /**

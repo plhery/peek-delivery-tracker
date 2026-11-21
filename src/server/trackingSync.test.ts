@@ -9517,6 +9517,8 @@ function eventStore() {
       time_provenance: (row.raw_data as JsonObject | undefined)?.time_provenance,
       provider_time_iso: (row.raw_data as JsonObject | undefined)?.provider_time_iso,
       retimed_from: (row.raw_data as JsonObject | undefined)?.retimed_from,
+      summary_snapshot: (row.raw_data as JsonObject | undefined)?.summary_snapshot,
+      provider_leg: (row.raw_data as JsonObject | undefined)?.provider_leg,
       created_at: row.created_at,
     })),
     batch: () => (client.applyTrackingSync.mock.calls.at(-1)?.[2] ?? []) as JsonObject[],
@@ -9907,6 +9909,35 @@ it('rewrites in place a scan its carrier rewords once the old words leave its an
       { id: first!.id, provider_event_id: first!.provider_event_id, stage: 'failed_attempt', description: reworded.description },
       { id: expect.any(String), provider_event_id: expect.stringMatching(/^dpd-uk:/), stage: 'delivered', description: delivered.description },
     ]);
+});
+
+it('moves the row of a status its carrier restates later in the same words, and keeps a status in other words', async () => {
+  const store = eventStore();
+  // A carrier gives its status dated by its own time and no scan, restates the same status half a day later, then
+  // gives the next status (synthetic wording and times).
+  const status = (time: string, description: string, stage: string) => ({ status: stage, current_stage: stage, last_update: time,
+    last_status_text: description, events: [{ time, stage, description, summary_snapshot: true }] });
+  const first = status('2026-11-19T22:40:56+05:30', 'Manifested', 'registered');
+  const again = status('2026-11-20T09:54:32+05:30', 'Manifested', 'registered');
+  const next = status('2026-11-20T14:18:28+05:30', 'Picked up', 'accepted');
+  const adapter = { fetch: vi.fn().mockResolvedValueOnce(first).mockResolvedValueOnce(again).mockResolvedValue(next) };
+  const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+    () => new Date('2026-11-20T12:00:00Z'));
+  const load = () => ({ id: 'snapshot-parcel', user_id: 'owner', carrier: 'delhivery', tracking_number: 'TEST1234',
+    current_stage: store.rows.size ? 'registered' : 'pending', [STORED_EVENT_IDENTITIES]: store.identities() });
+  const rows = () => [...store.rows.values()].map(({ id, occurred_at, description, raw_data }) => ({ id, description,
+    at: new Date(String(occurred_at)).toISOString(), ...((raw_data as JsonObject).retimed_from ? { first: (raw_data as JsonObject).retimed_from } : {}) }));
+
+  await service.syncPackage(load());
+  expect(rows()).toEqual([{ id: 'row-1', description: 'Manifested', at: '2026-11-19T17:10:56.000Z' }]);
+  // One row for the status, at its latest time, keeping the time it was first stored with: nothing announced again.
+  await service.syncPackage(load());
+  expect(rows()).toEqual([{ id: 'row-1', description: 'Manifested', at: '2026-11-20T04:24:32.000Z', first: first.last_update }]);
+  await service.syncPackage(load());
+  expect(rows()).toEqual([
+    { id: 'row-1', description: 'Manifested', at: '2026-11-20T04:24:32.000Z', first: first.last_update },
+    { id: 'row-2', description: 'Picked up', at: '2026-11-20T08:48:28.000Z' },
+  ]);
 });
 
 it('moves the row of a scan its carrier restates a little later, and keeps the next day\'s scan in the same words', async () => {

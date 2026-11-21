@@ -2740,6 +2740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "ekart-sendungsverfolgung",
+      "title": "Ekart Sendungsverfolgung: Tracking-ID, Status & RTO erklärt",
+      "name": "Ekart",
+      "color": "#0074D9"
+    },
+    {
       "id": "j-and-t-middle-east",
       "catalog": "j-and-t-middle-east",
       "slug": "jt-express-middle-east-sendungsverfolgung",
@@ -3630,6 +3638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "suivi-ekart",
+      "title": "Suivi Ekart\u00a0: identifiants, statuts InscannedAtDH et RTO",
+      "name": "Ekart",
+      "color": "#0074D9"
+    },
+    {
       "id": "j-and-t-middle-east",
       "catalog": "j-and-t-middle-east",
       "slug": "suivi-jt-express-middle-east",
@@ -4414,6 +4430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Delhivery: numeri AWB, stati e assistenza",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "tracciamento-ekart",
+      "title": "Tracciamento Ekart: codici ID, stati InscannedAtDH e RTO",
+      "name": "Ekart",
+      "color": "#0074D9"
     },
     {
       "id": "j-and-t-middle-east",
@@ -5210,6 +5234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "seguimiento-ekart",
+      "title": "Seguimiento Ekart: códigos, estados InscannedAtDH y RTO",
+      "name": "Ekart",
+      "color": "#0074D9"
+    },
+    {
       "id": "j-and-t-middle-east",
       "catalog": "j-and-t-middle-east",
       "slug": "seguimiento-jt-express-middle-east",
@@ -5962,6 +5994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Delhivery: números AWB, estados e apoio",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "seguimento-ekart",
+      "title": "Seguimento Ekart: códigos ID, estados InscannedAtDH e RTO",
+      "name": "Ekart",
+      "color": "#0074D9"
     },
     {
       "id": "j-and-t-middle-east",
@@ -6774,6 +6814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Delhivery: numery AWB, statusy i pomoc",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "sledzenie-ekart",
+      "title": "Śledzenie Ekart: numery ID, statusy InscannedAtDH i RTO",
+      "name": "Ekart",
+      "color": "#0074D9"
     },
     {
       "id": "j-and-t-middle-east",

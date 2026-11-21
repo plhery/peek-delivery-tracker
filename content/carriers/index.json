@@ -196,7 +196,7 @@
   { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en"] },
   { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en"] },
   { "id": "blue-dart", "catalog": "blue-dart", "name": "Blue Dart", "languages": ["en"] },
-  { "id": "ekart", "catalog": "ekart", "name": "Ekart", "languages": ["en"] },
+  { "id": "ekart", "catalog": "ekart", "name": "Ekart", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "j-and-t-middle-east", "catalog": "j-and-t-middle-east", "name": "J&T Express Middle East", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en"] },
   { "id": "globalpost", "catalog": "globalpost", "name": "GlobalPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

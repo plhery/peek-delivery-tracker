@@ -50025,6 +50025,17 @@
     ]
   },
   {
+    "input": "47529414",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner",
+      "tforce-freight"
+    ]
+  },
+  {
     "input": "47679405752325",
     "carrier": "unknown",
     "confidence": "low",
@@ -52315,6 +52326,17 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "50479601",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner",
+      "tforce-freight"
     ]
   },
   {

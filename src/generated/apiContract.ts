@@ -4663,7 +4663,9 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "australia-post",
-      "recognitionRank": 500
+      "recognitionRank": 500,
+      "browserRecognitionRank": 500,
+      "browserRecognitionPattern": "^(?:\\d{2}(?!\\d{3})[A-Z0-9]{3}\\d{7}|(?=[A-Z0-9]{0,2}[A-Z])[A-Z0-9]{3}Z\\d{8}|R\\d{24})$"
     },
     "linkRules": [
       {
@@ -22029,7 +22031,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Manila",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ap-cargo"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -31094,7 +31096,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "vitran-express"
     },
     "trackingUrlTemplate": "https://www.vitran.com/quicktrack.aspx?p={trackingNumber}",
     "linkRules": [

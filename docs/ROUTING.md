@@ -185,10 +185,10 @@ direct lookup follows the normal provider fallback route (see its
 
 In one check, every eligible universal provider is tried once, stopping at the first
 usable answer with movement if the parcel already has some. Budgets per provider: 45 s
-for ParcelsApp (slow first lookups, one network retry), 30 s for the others, plus 5 s
-transport allowance each. That's 120 s in total by default, 35 s more with Postal Ninja
-and 35 s more for a carrier Ordertracker is asked about, less when a carrier's order leaves
-a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
+for ParcelsApp (slow first lookups, one network retry), 50 s for Ordertracker (up to 45 s
+before it says it has nothing), 30 s for the others, plus 5 s transport allowance each.
+That's 120 s in total by default, 35 s more with Postal Ninja and 55 s more for a carrier
+Ordertracker is asked about, less when a carrier's order leaves a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
 attempt doesn't eat into this budget. If the budget runs out first, the discovery cursor
 moves on so the next check starts with another of the providers whose history for the
 carrier is equally full. Postal Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its

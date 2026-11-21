@@ -2612,6 +2612,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "zto-express-sendungsverfolgung",
+      "title": "ZTO Express Sendungsverfolgung: 中通快递-Nummer und Status",
+      "name": "ZTO Express",
+      "color": "#0279ff"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-logistics-sendungsverfolgung",
@@ -3358,6 +3366,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "suivi-zto-express",
+      "title": "Suivi ZTO Express\u00a0: numéros 中通快递, statuts et contact",
+      "name": "ZTO Express",
+      "color": "#0279ff"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "suivi-colis-huahan-logistics",
@@ -4006,6 +4022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento JD Logistics: codici JD, stati e contatti",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "tracciamento-zto-express",
+      "title": "Tracciamento ZTO Express: numeri 中通快递, stati e contatti",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     },
     {
       "id": "huahan",
@@ -4658,6 +4682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "seguimiento-zto-express",
+      "title": "Seguimiento de ZTO Express: números 中通快递 y estados",
+      "name": "ZTO Express",
+      "color": "#0279ff"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "seguimiento-huahan-logistics",
@@ -5266,6 +5298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento JD Logistics: códigos JD, estados e contactos",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "seguimento-zto-express",
+      "title": "Seguimento ZTO Express: números 中通快递, estados e apoio",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     },
     {
       "id": "huahan",
@@ -5934,6 +5974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek JD Logistics: numery, statusy i kontakt",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "sledzenie-zto-express",
+      "title": "Śledzenie ZTO Express: numery 中通快递, statusy i kontakt",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     },
     {
       "id": "huahan",

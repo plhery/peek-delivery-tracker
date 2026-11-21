@@ -2212,6 +2212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdc00"
     },
     {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "tipsa-sendungsverfolgung",
+      "title": "TIPSA Sendungsverfolgung: 22-stellige Nummer und Status",
+      "name": "TIPSA",
+      "color": "#001e62"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "yanwen-sendungsverfolgung",
@@ -3180,6 +3188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS France suivi colis\u00a0: statuts, relais et contact",
       "name": "GLS France",
       "color": "#ffdd00"
+    },
+    {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "suivi-tipsa",
+      "title": "Suivi TIPSA\u00a0: numéro à 22 chiffres, statuts et livraisons",
+      "name": "TIPSA",
+      "color": "#001e62"
     },
     {
       "id": "yanwen",
@@ -4166,6 +4182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS Italy tracking: pacco, stati, giacenza e contatti",
       "name": "GLS Italy",
       "color": "#ffdd00"
+    },
+    {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "tracking-tipsa",
+      "title": "Tracking TIPSA: codice a 22 cifre, stati e consegne",
+      "name": "TIPSA",
+      "color": "#001e62"
     },
     {
       "id": "yanwen",
@@ -6910,6 +6934,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ORLEN Paczka śledzenie: numer, statusy i odbiór paczki",
       "name": "ORLEN Paczka",
       "color": "#db3830"
+    },
+    {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "sledzenie-tipsa",
+      "title": "Śledzenie TIPSA: 22-cyfrowy numer, statusy i doręczenia",
+      "name": "TIPSA",
+      "color": "#001e62"
     },
     {
       "id": "yanwen",

@@ -33,7 +33,7 @@
   { "id": "poczta-polska", "catalog": "poczta-polska", "name": "Poczta Polska", "languages": ["en", "pl"] },
   { "id": "orlen-paczka", "catalog": "orlen-paczka", "name": "ORLEN Paczka", "languages": ["en", "pl"] },
   { "id": "austrian-post", "catalog": "austrian-post", "name": "Austrian Post", "languages": ["en", "de"] },
-  { "id": "tipsa", "catalog": "tipsa", "name": "TIPSA", "languages": ["en", "es", "pt"] },
+  { "id": "tipsa", "catalog": "tipsa", "name": "TIPSA", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "yanwen", "catalog": "yanwen", "name": "Yanwen", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "an-post", "catalog": "an-post", "name": "An Post", "languages": ["en"] },
   { "id": "vinted-go", "catalog": "vinted-go", "name": "Vinted Go", "languages": ["en", "fr", "es", "pt", "nl", "it", "de", "pl"] },

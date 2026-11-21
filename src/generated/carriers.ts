@@ -2468,6 +2468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0171bb"
     },
     {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "jt-express-australia-sendungsverfolgung",
+      "title": "J&T Express Australia Tracking: JTAU-Nummern und Status",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-sendungsverfolgung",
@@ -3318,6 +3326,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0171bb"
     },
     {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "suivi-jt-express-australia",
+      "title": "Suivi J&T Express Australia\u00a0: numéros JTAU et statuts",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-suivi",
@@ -4046,6 +4062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Lingdong International: numero SZLD e stati",
       "name": "Lingdong International",
       "color": "#0171bb"
+    },
+    {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "tracciamento-jt-express-australia",
+      "title": "Tracciamento J&T Express Australia: codici JTAU e stati",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
     },
     {
       "id": "china-post",
@@ -4810,6 +4834,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0171bb"
     },
     {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "seguimiento-jt-express-australia",
+      "title": "Seguimiento J&T Express Australia: códigos JTAU y estados",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-seguimiento",
@@ -5538,6 +5570,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Lingdong International: número SZLD e estados",
       "name": "Lingdong International",
       "color": "#0171bb"
+    },
+    {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "seguimento-jt-express-australia",
+      "title": "Seguimento J&T Express Australia: códigos JTAU e estados",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
     },
     {
       "id": "china-post",
@@ -6310,6 +6350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Lingdong International: numer SZLD i statusy",
       "name": "Lingdong International",
       "color": "#0171bb"
+    },
+    {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "sledzenie-jt-express-australia",
+      "title": "Śledzenie J&T Express Australia: numery JTAU i statusy",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
     },
     {
       "id": "china-post",

@@ -2452,6 +2452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "speedx-sendungsverfolgung",
+      "title": "SpeedX Sendungsverfolgung: SPX-Nummer, Status & Kontakt",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",
@@ -3358,6 +3366,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "suivi-speedx",
+      "title": "Suivi SpeedX\u00a0: numéros SPX, statuts et livraison manquée",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-allemagne-suivi",
@@ -4142,6 +4158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GOFO Express: numero GFUS, stati e aiuto",
       "name": "GOFO Express",
       "color": "#fc4c02"
+    },
+    {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "tracciamento-speedx",
+      "title": "Tracciamento SpeedX: numeri SPX, stati e assistenza",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
     },
     {
       "id": "j-and-t-de",
@@ -5740,6 +5764,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "seguimento-speedx",
+      "title": "Seguimento SpeedX: números SPX, estados e contactos",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-alemanha-rastreio",
@@ -6558,6 +6590,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GOFO Express śledzenie: numer GFUS, statusy i dostawa w USA",
       "name": "GOFO Express",
       "color": "#fc4c02"
+    },
+    {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "sledzenie-speedx",
+      "title": "Śledzenie SpeedX: numery SPX, statusy i obsługa klienta",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
     },
     {
       "id": "j-and-t-de",

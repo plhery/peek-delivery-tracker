@@ -207,8 +207,8 @@ Key server modules:
     its actions once the journey is over, and at its foot before then. The list folds the
     archived parcels at its end, never leads with one and doesn't read them in the
     background; their alerts stay as they were, but turning alerts on for every parcel
-    passes them over. Kept in an account, a parcel archived here is archived there too,
-    unless the account had it already. From five parcels on, the list can be searched as
+    passes them over. Kept in an account, a parcel archived here is archived there too, and
+    one whose alerts were turned off here is muted there, unless the account had it already. From five parcels on, the list can be searched as
     the account's is, by name, number, carrier, status and scans, archived parcels included.
     Its download button saves the list as a JSON file, as the apps do for a guest: each parcel
     as last shown, with its name, link and archive date, and never its owner key. "Open them
@@ -237,8 +237,8 @@ Key server modules:
     account's list starts, at sign-in and at each launch, but not on a refresh. One a full
     account refuses stays on the phone, and the list says how many stayed once a sign-in,
     then again only when that number changes. A parcel archived on the phone is archived in
-    the account, and the iPhone also keeps a parcel quiet there when its bell was turned off
-    on the phone. The Android app's sign-in opened from that
+    the account, and the iPhone, like the web, also keeps a parcel quiet there when its bell
+    was turned off on the phone. The Android app's sign-in opened from that
     list leaves it in the widget and its shortcut until someone signs in, and a relaunch
     meanwhile opens on the list.
   - The iPhone and Android apps keep the owner keys apart from the last answers, which only

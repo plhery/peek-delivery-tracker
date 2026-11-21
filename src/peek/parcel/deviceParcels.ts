@@ -1,5 +1,6 @@
 import { authenticatedFetch, type ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
+import { linkNote } from '../deviceNotes';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
 import { forgetRecent, recentFor, type RecentParcel } from '../recents';
 
@@ -70,11 +71,20 @@ async function archiveKept(packageId: string, auth: ApiAuth): Promise<void> {
     .catch(() => undefined);
 }
 
+/** Mutes a parcel the account has just taken whose alerts were turned off here. A failure leaves its alerts on. */
+async function muteKept(packageId: string, auth: ApiAuth): Promise<void> {
+  await authenticatedFetch(`/api/packages/${encodeURIComponent(packageId)}/notifications`, auth, {
+    method: 'PATCH',
+    body: JSON.stringify({ muted: true }),
+    signal: auth.signal,
+  }).catch(() => undefined);
+}
+
 /**
  * Keeps several of the device's parcels in the account, twenty to a request. A
  * parcel the account now has leaves the device as soon as its request answers,
- * archived in the account when it was archived here and the account did not
- * have it already.
+ * archived in the account when it was archived here, and muted there when its
+ * alerts were turned off here, unless the account had it already.
  */
 export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<BroughtAlong> {
   const outcome: BroughtAlong = { brought: 0, refused: [] };
@@ -86,8 +96,10 @@ export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth
         outcome.refused.push({ id: result.id, reason: result.outcome });
         continue;
       }
-      const archived = batch.find((recent) => recent.id === result.id)?.archivedAt;
-      if (result.outcome === 'kept' && archived && result.packageId) await archiveKept(result.packageId, auth);
+      if (result.outcome === 'kept' && result.packageId) {
+        if (batch.find((recent) => recent.id === result.id)?.archivedAt) await archiveKept(result.packageId, auth);
+        if (linkNote(result.id).muted) await muteKept(result.packageId, auth);
+      }
       forgetRecent(result.id);
       outcome.brought += 1;
     }
@@ -107,6 +119,7 @@ export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: P
     try {
       const added = repo.adopt ? await repo.adopt(read.parcel, recent.name ?? '')
         : await repo.add({ trackingNumber: read.parcel.trackingNumber, label: recent.name ?? '', carrier: read.parcel.carrier });
+      if (linkNote(recent.id).muted) await repo.setNotificationsMuted?.(added.id, true);
       if (recent.archivedAt) await repo.remove(added.id);
     } catch (error) {
       if (!(error instanceof ParcelAlreadyExistsError)) throw error;

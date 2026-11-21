@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAuth } from '../../lib/apiClient';
 import { createDemoRepo } from '../../store/demoRepo';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLinks';
+import { noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
 import { archiveRecent, forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
@@ -287,6 +288,28 @@ describe('the device’s parcels to bring along', () => {
     expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 2, refused: [] });
     expect(mocks.fetch).toHaveBeenCalledExactlyOnceWith('/api/packages/p1', auth, { method: 'DELETE', signal: undefined });
     expect(recentFor(LINK_ID)).toBeNull();
+  });
+
+  it('mute in the account a parcel whose alerts were turned off on this device that it took, not one it already had', async () => {
+    noteLink(LINK_ID, { muted: true });
+    noteLink(OTHER_LINK_ID, { muted: true });
+    mocks.fetch.mockRejectedValue(new Error('offline'));
+    mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'already', packageId: 'p2' }]);
+    // A mute that fails still brings the parcel: the account lists it.
+    expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 2, refused: [] });
+    expect(mocks.fetch).toHaveBeenCalledExactlyOnceWith('/api/packages/p1/notifications', auth, {
+      method: 'PATCH', body: JSON.stringify({ muted: true }), signal: undefined,
+    });
+    expect(recentFor(LINK_ID)).toBeNull();
+  });
+
+  it('in the demo, mute a parcel whose alerts were turned off on this device', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    noteLink(OTHER_LINK_ID, { muted: true });
+    mocks.read.mockResolvedValueOnce(ups(OTHER_LINK_ID));
+    expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [] });
+    const kept = (await repo.list()).find((parcel) => parcel.trackingNumber === '1ZDEMO202600000009');
+    expect(kept?.notificationsMuted).toBe(true);
   });
 
   it('in the demo, archive a parcel archived on this device', async () => {

@@ -11,6 +11,7 @@ extension Parcel {
             carrier: package.carrier,
             createdAt: package.createdAt,
             expectedDelivery: package.expectedDelivery,
+            expectedDeliveryPassed: package.expectedDeliveryPassed,
             lastStatusText: package.lastStatusText,
             lastSyncedAt: package.lastSyncedAt,
             syncStatus: package.syncStatus,

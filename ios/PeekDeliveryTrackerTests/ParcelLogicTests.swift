@@ -2284,6 +2284,63 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     @MainActor
+    func testThePageAloneSaysWhenAParcelWasExpectedForAWeekAfterThatDay() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let now = try XCTUnwrap(Calendar.current.date(bySettingHour: 12, minute: 0, second: 0,
+                                                      of: try XCTUnwrap(DateParser.deliveryDate("2026-11-20"))))
+        let id = UUID()
+        var parcel = makeParcel(id: id, events: [event(id, .inTransit, "2026-11-15T10:00:00Z")])
+        parcel.expectedDeliveryPassed = "2026-11-17"
+        XCTAssertEqual(localizer.parcelPassedEstimate(parcel, now: now), "Was expected Tue 17 Nov")
+        let page = try XCTUnwrap(localizer.parcelPageDate(parcel, frozen: false, now: now))
+        XCTAssertEqual(page.text, "Was expected Tue 17 Nov")
+        XCTAssertTrue(page.passed, "The passed day is quieter than an estimate still to come")
+        // A copy no longer updated gives no day it was expected.
+        XCTAssertNil(localizer.parcelPageDate(parcel, frozen: true, now: now))
+
+        // Only the page says it: the card, the widget and the shared lines stay as they were.
+        XCTAssertNil(localizer.parcelDeliveryEstimate(parcel, now: now))
+        XCTAssertNil(localizer.sharedParcelDetail(parcel, now: now))
+        XCTAssertNil(localizer.giftDetail(parcel, opened: false, now: now))
+        let widget = try XCTUnwrap(ParcelStore.nextDeliveries(of: [parcel], localizer: localizer, now: now).first)
+        XCTAssertFalse(widget.detail.contains("Was expected"))
+
+        localizer.language = .fr
+        XCTAssertEqual(localizer.parcelPassedEstimate(parcel, now: now), "Devait arriver le mar 17 nov")
+        localizer.language = .en
+
+        // A day the server's clock has passed but the device's has not yet says nothing.
+        parcel.expectedDeliveryPassed = "2026-11-20"
+        XCTAssertNil(localizer.parcelPassedEstimate(parcel, now: now))
+        // For a week after that day, and no longer, which a kept copy no check updates relies on.
+        parcel.expectedDeliveryPassed = "2026-11-13"
+        XCTAssertEqual(localizer.parcelPassedEstimate(parcel, now: now), "Was expected Fri 13 Nov")
+        parcel.expectedDeliveryPassed = "2026-11-12"
+        XCTAssertNil(localizer.parcelPassedEstimate(parcel, now: now))
+
+        // An estimate of its own still to come shows instead, as it did.
+        parcel.expectedDeliveryPassed = "2026-11-17"
+        parcel.expectedDelivery = "2026-11-22"
+        XCTAssertNil(localizer.parcelPassedEstimate(parcel, now: now))
+        XCTAssertEqual(localizer.parcelPageDate(parcel, frozen: false, now: now)?.passed, false)
+        // An archived parcel says nothing of it.
+        parcel.expectedDelivery = nil
+        parcel.archivedAt = "2026-11-19T10:00:00Z"
+        XCTAssertNil(localizer.parcelPassedEstimate(parcel, now: now))
+    }
+
+    func testAParcelReadThroughALinkKeepsTheDayItWasExpected() {
+        let id = UUID()
+        let shared = Parcel(shared: PublicPackage(
+            id: id, trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, createdAt: "2026-11-10T08:00:00Z",
+            expectedDeliveryPassed: "2026-11-17", syncStatus: .ok, carrierData: PublicPackageCarrierData(), notificationsMuted: false,
+            trackingEvents: [TrackingEvent(id: UUID(), packageID: id, stage: .inTransit, description: "", occurredAt: "2026-11-15T08:00:00Z")]
+        ))
+        XCTAssertEqual(shared.expectedDeliveryPassed, "2026-11-17")
+    }
+
+    @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()
         localizer.language = .en

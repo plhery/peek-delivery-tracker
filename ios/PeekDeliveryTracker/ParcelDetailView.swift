@@ -487,9 +487,13 @@ struct ParcelDetailView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(localizer.parcelStatus(parcel))
                         .font(.subheadline)
-                    // A copy no longer updated has no estimate left to give.
-                    if let date = localizer.parcelCompletionDate(parcel) ?? (frozen ? nil : localizer.parcelDeliveryWindow(parcel)) {
-                        Text(date).font(.caption)
+                    if let date = localizer.parcelPageDate(parcel, frozen: frozen) {
+                        if date.passed {
+                            Text(date.text).font(.caption).foregroundStyle(Brand.secondaryText)
+                                .accessibilityIdentifier("parcel.wasExpected")
+                        } else {
+                            Text(date.text).font(.caption)
+                        }
                     }
                 }
                 .foregroundStyle(branding.ink)

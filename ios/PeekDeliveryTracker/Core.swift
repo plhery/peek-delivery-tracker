@@ -817,6 +817,35 @@ final class Localizer: ObservableObject {
         return deliveryWindow(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
     }
 
+    /// The date under the status on a parcel's page: the day it ended, else the window still to come, else, quieter
+    /// (`passed`), when it was expected. A copy no longer updated (`frozen`) has no estimate left to give, nor a day it
+    /// was expected.
+    func parcelPageDate(_ parcel: Parcel, frozen: Bool, now: Date = Date()) -> (text: String, passed: Bool)? {
+        if let date = parcelCompletionDate(parcel, now: now) ?? (frozen ? nil : parcelDeliveryWindow(parcel, now: now)) {
+            return (date, false)
+        }
+        guard !frozen, let passed = parcelPassedEstimate(parcel, now: now) else { return nil }
+        return (passed, true)
+    }
+
+    /// How many days after its expected day the parcel's page still says when the parcel was expected.
+    static let passedEstimateDays = 7
+
+    /// When the parcel was expected, on its page alone, once that day has passed and no estimate of its own shows:
+    /// "Was expected Tue 17 Nov". The server names the day (`expectedDeliveryPassed`) for a week after it on the
+    /// carrier's clock, while the parcel is still on its way. The day must also be before today here, which a server
+    /// clock ahead of the device's may not be, and within the week, which a copy no check updates may not be, as on the web.
+    func parcelPassedEstimate(_ parcel: Parcel, now: Date = Date()) -> String? {
+        guard let value = parcel.expectedDeliveryPassed, !parcel.isArchived, shownEstimate(parcel, now: now) == nil,
+              let date = DateParser.deliveryDate(value) else { return nil }
+        let calendar = Calendar.current
+        let day = calendar.startOfDay(for: date)
+        let today = calendar.startOfDay(for: now)
+        guard day < today, let oldest = calendar.date(byAdding: .day, value: -Self.passedEstimateDays, to: today),
+              day >= oldest else { return nil }
+        return text("parcel.wasExpected", ["date": shortDate(day)])
+    }
+
     /// The carrier's estimate while the parcel is on its way and the estimate's last day has not passed.
     private func liveEstimate(_ parcel: Parcel, now: Date) -> (value: String, date: Date)? {
         guard let value = parcel.expectedDelivery,

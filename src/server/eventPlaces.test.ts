@@ -522,6 +522,24 @@ describe('withEventPlaces', () => {
     });
   });
 
+  it('shows once La Poste\'s two wordings of a scan read in two stages, as first stored', () => {
+    const scan = (id: string, stage: string, occurredAt: string, description: string, storedAt: string) => ({
+      ...event(id, 'Wissous', occurredAt), stage, description, provider_event_id: `la-poste:${id}`, stored_at: storedAt,
+    });
+    const row = {
+      id: 'parcel', carrier: 'la-poste', carrier_data: {}, tracking_events: [
+        // The next check stores the other wording, read as the acceptance.
+        scan('colis', 'accepted', '2026-11-21T05:22:22+00:00', 'Votre colis est en transit sur nos plateformes logistiques.', '2026-11-21T07:00:08Z'),
+        scan('colissimo', 'in_transit', '2026-11-21T05:22:22+00:00', 'Votre Colissimo est en transit sur nos plateformes logistiques.', '2026-11-21T06:00:18Z'),
+        // In other words, a scan of another stage at that instant is one of its own.
+        scan('sorted', 'accepted', '2026-11-20T09:00:00+00:00', 'Votre colis a été déposé.', '2026-11-20T10:00:00Z'),
+        scan('moving', 'in_transit', '2026-11-20T09:00:00+00:00', 'Votre colis est en transit sur nos plateformes logistiques.', '2026-11-20T10:00:00Z'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, stage }) => [id, stage]))).toEqual({ colissimo: 'in_transit', moving: 'in_transit', sorted: 'accepted' });
+  });
+
   it('serves a scan that names only a country under the copy that names a town in it, unless the scan is the tracking carrier\'s', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, location, occurredAt), stage: 'in_transit', description: `Fixture ${id}`, provider_event_id: `${source}:${id}`, ...extra,

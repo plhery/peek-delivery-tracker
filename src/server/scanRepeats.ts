@@ -36,11 +36,13 @@ function repeatScan(event: JsonObject): RepeatScan {
 }
 
 /**
- * Peek's own rows repeat nothing. At one instant, La Poste's two wordings of a scan are its words too (`wordingTwins`).
+ * Peek's own rows repeat nothing. At one instant, La Poste's two wordings of a scan are its words too, in whichever
+ * stage each was read (`wordingTwins`).
  */
 const repeats = (first: RepeatScan, scan: RepeatScan) => first.source !== '' && first.source !== 'app'
-  && scan.source === first.source && scan.stage === first.stage
-  && (scan.description === first.description || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
+  && scan.source === first.source
+  && ((scan.stage === first.stage && scan.description === first.description)
+    || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
   && scan.location === first.location && scan.at - first.at <= RUN_MS;
 
 /**
@@ -104,10 +106,11 @@ function productWords(description: unknown): string {
 
 /**
  * The rows the timeline leaves out as twins of another: La Poste can list one scan twice at one instant, once
- * "votre colis" and once "votre Colissimo", and a carrier that copies its scans copies both. Of the rows of one
- * source at one instant, in one stage and in words that differ only so, with one place or none, the timeline keeps
- * the one with a place, then the first stored, so the parcel's news keeps its time, then the one the source listed
- * last (`tie_order`). A row in the kept one's very words stays, a repeat (`repeatLeads`).
+ * "votre colis" and once "votre Colissimo", and a carrier that copies its scans copies both, at times reading the two
+ * in different stages. Of the rows of one source at one instant, in words that differ only so, with one place or
+ * none, the timeline keeps the one with a place, then the first stored, so the parcel's news keeps its time, then the
+ * one the source listed last (`tie_order`). A row in the kept one's very words and stage stays, a repeat
+ * (`repeatLeads`).
  */
 export function wordingTwins(events: readonly JsonObject[]): Set<string> {
   const groups = new Map<string, JsonObject[]>();
@@ -116,7 +119,7 @@ export function wordingTwins(events: readonly JsonObject[]): Set<string> {
     const at = Date.parse(String(event.occurred_at));
     const words = productWords(event.description);
     if (!source || source === 'app' || !Number.isFinite(at) || !words) continue;
-    const key = JSON.stringify([source, at, String(event.stage ?? ''), words]);
+    const key = JSON.stringify([source, at, words]);
     groups.set(key, [...groups.get(key) ?? [], event]);
   }
   const place = (event: JsonObject) => typeof event.location === 'string' ? event.location.trim() : '';
@@ -126,7 +129,9 @@ export function wordingTwins(events: readonly JsonObject[]): Set<string> {
     if (group.length < 2 || new Set(group.map(place).filter(Boolean)).size > 1) continue;
     const kept = [...group].sort((a, b) => Number(place(b) !== '') - Number(place(a) !== '')
       || String(a.stored_at ?? '').localeCompare(String(b.stored_at ?? '')) || tie(b) - tie(a) || String(b.id).localeCompare(String(a.id)))[0]!;
-    for (const event of group) if (readWords(event.description) !== readWords(kept.description)) left.add(String(event.id));
+    for (const event of group) {
+      if (readWords(event.description) !== readWords(kept.description) || event.stage !== kept.stage) left.add(String(event.id));
+    }
   }
   return left;
 }

@@ -229,6 +229,19 @@ describe('what an alert announces', () => {
     expect(send).toHaveBeenCalledTimes(2);
   });
 
+  it('handles La Poste\'s other wording of a scan it had sent, at the same instant, silently, though read in another stage', async () => {
+    const scan = (id: string, stage: 'accepted' | 'in_transit', description: string) => ({ id, stage,
+      location: 'Wissous', occurredAt: '2026-11-21T05:22:22Z', description, source: 'la-poste' });
+    pending([row({ stage: 'accepted', occurred_at: '2026-11-21T05:22:22Z' })]);
+    vi.mocked(client.recentScans).mockResolvedValue(new Map([['package-1', [
+      scan('event-1', 'accepted', 'Votre colis est en transit sur nos plateformes logistiques.'),
+      scan('earlier', 'in_transit', 'Votre Colissimo est en transit sur nos plateformes logistiques.'),
+    ]]]));
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(send).not.toHaveBeenCalled();
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
+  });
+
   it('handles what the parcel already showed when it was added silently, as for accounts', async () => {
     pending([row({ stage: 'customs', occurred_at: '2026-10-04T18:00:00Z', event_created_at: '2026-10-05T10:00:01Z' })]);
     vi.mocked(client.packageJoinTimes).mockResolvedValue(new Map([['package-1', '2026-10-05T10:00:00Z']]));

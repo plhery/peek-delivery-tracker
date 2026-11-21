@@ -2009,6 +2009,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let yuanpeng = CarrierID(rawValue: "yuanpeng")
     static let ywd = CarrierID(rawValue: "ywd")
     static let pigeonship = CarrierID(rawValue: "pigeonship")
+    static let twentyOneExpressID = CarrierID(rawValue: "21-express-id")
+    static let acplCargo = CarrierID(rawValue: "acpl-cargo")
+    static let airInuit = CarrierID(rawValue: "air-inuit")
+    static let coscoShippingLines = CarrierID(rawValue: "cosco-shipping-lines")
+    static let hmm = CarrierID(rawValue: "hmm")
+    static let jtlExpressID = CarrierID(rawValue: "jtl-express-id")
+    static let kmtc = CarrierID(rawValue: "kmtc")
+    static let maersk = CarrierID(rawValue: "maersk")
+    static let msc = CarrierID(rawValue: "msc")
+    static let oceanNetworkExpress = CarrierID(rawValue: "ocean-network-express")
+    static let oocl = CarrierID(rawValue: "oocl")
+    static let spedire = CarrierID(rawValue: "spedire")
+    static let swireShipping = CarrierID(rawValue: "swire-shipping")
+    static let wanHai = CarrierID(rawValue: "wan-hai")
+    static let yangMing = CarrierID(rawValue: "yang-ming")
+    static let zim = CarrierID(rawValue: "zim")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3968,6 +3984,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .yuanpeng,
         .ywd,
         .pigeonship,
+        .twentyOneExpressID,
+        .acplCargo,
+        .airInuit,
+        .coscoShippingLines,
+        .hmm,
+        .jtlExpressID,
+        .kmtc,
+        .maersk,
+        .msc,
+        .oceanNetworkExpress,
+        .oocl,
+        .spedire,
+        .swireShipping,
+        .wanHai,
+        .yangMing,
+        .zim,
     ]
 
     init(from decoder: Decoder) throws {

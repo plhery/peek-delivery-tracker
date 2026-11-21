@@ -19916,7 +19916,7 @@
       "timezone": "Australia/Sydney",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "hi-trans"
       },
       "trackingUrlTemplate": "https://online.hi-trans.com.au/Connotes/ShowConsignmentSummary.aspx?Number={trackingNumber}",
       "linkRules": [
@@ -46009,11 +46009,22 @@
       "timezone": "Europe/Rome",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "golilla"
       },
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "my.golilla.it"
+          ],
+          "pathPattern": "^/segui/?$",
+          "params": [
+            "ldv"
+          ]
+        }
+      ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://my.golilla.it/segui"
+      "trackingSearchUrl": "https://my.golilla.it/segui",
+      "trackingUrlTemplate": "https://my.golilla.it/segui?ldv={trackingNumber}"
     },
     "hey-couriers": {
       "displayName": "Hey Couriers",
@@ -48976,7 +48987,7 @@
       "timezone": "Pacific/Honolulu",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "matson"
       },
       "linkRules": [],
       "detectionRules": [],
@@ -54574,11 +54585,19 @@
       "timezone": "Europe/Moscow",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "skif-cargo"
       },
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "skif-cargo.ru"
+          ],
+          "path": "^/tracking/([^/?#]+)/?$"
+        }
+      ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.skif-cargo.ru/tracking/"
+      "trackingSearchUrl": "https://www.skif-cargo.ru/tracking/",
+      "trackingUrlTemplate": "https://www.skif-cargo.ru/tracking/{trackingNumber}"
     },
     "swissconnect": {
       "displayName": "swissconnect",
@@ -56636,11 +56655,23 @@
       "timezone": "Europe/Istanbul",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "bir-gunde-kargo"
       },
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "takip.birgundekargo.com"
+          ],
+          "pathPattern": "^/intranet/Tracking_kargo\\.asp$",
+          "params": [
+            "bgk_barkod",
+            "alici_musteri_kodu"
+          ]
+        }
+      ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.birgundekargo.com/"
+      "trackingSearchUrl": "https://www.birgundekargo.com/",
+      "trackingUrlTemplate": "https://takip.birgundekargo.com/intranet/Tracking_kargo.asp?bgk_barkod={trackingNumber}"
     },
     "cargox": {
       "displayName": "Cargo X",
@@ -56788,7 +56819,7 @@
       "timezone": "Europe/Istanbul",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "yol-kargo"
       },
       "trackingUrlTemplate": "https://yolkargo.com.tr/kargo.php?q={trackingNumber}",
       "linkRules": [
@@ -64932,6 +64963,343 @@
           "confidence": "low"
         }
       ]
+    },
+    "21-express-id": {
+      "displayName": "21 Express",
+      "countries": [
+        "ID"
+      ],
+      "color": "#DC4B57",
+      "selectable": true,
+      "timezone": "Asia/Jakarta",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "21-express-id"
+      },
+      "trackingUrlTemplate": "https://21express.co.id/track",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://21express.co.id/track"
+    },
+    "acpl-cargo": {
+      "displayName": "ACPL Cargo",
+      "aliases": [
+        "Avinash Cargo",
+        "Avinash Cargo Pvt. Ltd."
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#101B33",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "acpl-cargo"
+      },
+      "trackingUrlTemplate": "https://acplcargo.com/tracking?gcNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "acplcargo.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "gcNumber",
+            "gc",
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://acplcargo.com/tracking"
+    },
+    "air-inuit": {
+      "displayName": "Air Inuit",
+      "aliases": [
+        "Air Inuit Cargo"
+      ],
+      "countries": [
+        "CA"
+      ],
+      "color": "#d71920",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "air-inuit"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.airinuit.com/en/cargo/follow-up/shipment-tracking"
+    },
+    "cosco-shipping-lines": {
+      "displayName": "COSCO SHIPPING Lines",
+      "aliases": [
+        "COSCO",
+        "COSCO Shipping"
+      ],
+      "color": "#004b8d",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "cosco-shipping-lines"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://elines.coscoshipping.com/scct/public/ct"
+    },
+    "hmm": {
+      "displayName": "HMM",
+      "aliases": [
+        "Hyundai Merchant Marine",
+        "HMM Co., Ltd."
+      ],
+      "color": "#f26522",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hmm"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hmm21.com/e-service/general/trackNTrace/TrackNTrace.do"
+    },
+    "jtl-express-id": {
+      "displayName": "JTL Express",
+      "aliases": [
+        "PT Jagad Total Logistic Express"
+      ],
+      "countries": [
+        "ID"
+      ],
+      "color": "#FF0000",
+      "selectable": true,
+      "timezone": "Asia/Jakarta",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "jtl-express-id"
+      },
+      "trackingUrlTemplate": "https://www.jtlexpress.co.id/Tracking",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jtlexpress.co.id/Tracking"
+    },
+    "kmtc": {
+      "displayName": "KMTC",
+      "aliases": [
+        "KMTC Line",
+        "Korea Marine Transport",
+        "Korea Marine Transport Co."
+      ],
+      "color": "#075bb9",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "kmtc"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.ekmtc.com/index.html#/cargo-tracking"
+    },
+    "maersk": {
+      "displayName": "Maersk",
+      "aliases": [
+        "Maersk Line",
+        "A.P. Moller - Maersk"
+      ],
+      "color": "#42b0d5",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "maersk"
+      },
+      "trackingUrlTemplate": "https://www.maersk.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.maersk.com"
+          ],
+          "path": "^/tracking/([A-Za-z0-9]{9}|[A-Za-z]{3}[UJZujz]\\d{7})/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.maersk.com/tracking/"
+    },
+    "msc": {
+      "displayName": "MSC",
+      "aliases": [
+        "Mediterranean Shipping Company",
+        "MSC Cargo"
+      ],
+      "color": "#a48b5f",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "msc"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.msc.com/en/track-a-shipment"
+    },
+    "ocean-network-express": {
+      "displayName": "Ocean Network Express",
+      "aliases": [
+        "ONE",
+        "ONE Line"
+      ],
+      "color": "#e5007e",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "ocean-network-express"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.one-line.com/one-ecom/manage-shipment/cargo-tracking"
+    },
+    "oocl": {
+      "displayName": "OOCL",
+      "aliases": [
+        "Orient Overseas Container Line"
+      ],
+      "color": "#00205b",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "oocl"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.oocl.com/eng/ourservices/eservices/cargotracking/Pages/cargotracking.aspx"
+    },
+    "spedire": {
+      "displayName": "Spedire",
+      "aliases": [
+        "spedire by alsendo",
+        "spedire pro",
+        "spedire pro by alsendo",
+        "Spedire.com"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#0F3460",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "spedire"
+      },
+      "trackingUrlTemplate": "https://www.spedire.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "spedire.com"
+          ],
+          "path": "^/tracking/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.spedire.com/traccia-spedizione"
+    },
+    "swire-shipping": {
+      "displayName": "Swire Shipping",
+      "aliases": [
+        "Swire",
+        "The China Navigation Company"
+      ],
+      "color": "#1e4f98",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "swire-shipping"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://online.swireshipping.com/tracking"
+    },
+    "wan-hai": {
+      "displayName": "Wan Hai",
+      "aliases": [
+        "Wan Hai Lines",
+        "WHL"
+      ],
+      "color": "#00449e",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "wan-hai"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.wanhai.com/views/cargoTrack/CargoTrack.xhtml"
+    },
+    "yang-ming": {
+      "displayName": "Yang Ming",
+      "aliases": [
+        "Yang Ming Marine Transport",
+        "Yang Ming Marine Transport Corporation",
+        "YML"
+      ],
+      "color": "#e60012",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "yang-ming"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "www.yangming.com",
+            "yangming.com"
+          ],
+          "pathPattern": "^/(?:en|zh|zh-Hant)/ebusiness/tracking/cargo_tracking_detail/?$",
+          "params": [
+            "trackNo"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.yangming.com/en/ebusiness/cargo_tracking"
+    },
+    "zim": {
+      "displayName": "ZIM",
+      "aliases": [
+        "ZIM Integrated Shipping Services",
+        "Zim Lines"
+      ],
+      "color": "#1a2b5f",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "zim"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "www.zim.com",
+            "zim.com"
+          ],
+          "pathPattern": "^/tools/track-a-shipment/?$",
+          "params": [
+            "consnumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.zim.com/tools/track-a-shipment"
     }
   }
 }

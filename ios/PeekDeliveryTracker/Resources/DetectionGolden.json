@@ -18554,6 +18554,56 @@
     "candidates": []
   },
   {
+    "input": "123220046997",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t"
+    ]
+  },
+  {
+    "input": "123220047073",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t"
+    ]
+  },
+  {
     "input": "123416227171",
     "carrier": "unknown",
     "confidence": "low",
@@ -24074,6 +24124,21 @@
     "candidates": [
       "dpd-fr",
       "correos-chile",
+      "yunda",
+      "korea-post",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ]
+  },
+  {
+    "input": "1706262087963",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "correos-chile",
+      "delhivery",
       "yunda",
       "korea-post",
       "econt",
@@ -61146,6 +61211,23 @@
       "dhl-ecommerce-es",
       "box-now",
       "cdl"
+    ]
+  },
+  {
+    "input": "6538262000059",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "aras-kargo"
     ]
   },
   {

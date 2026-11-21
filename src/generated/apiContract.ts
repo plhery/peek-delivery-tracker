@@ -18620,7 +18620,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shree-nandan"
     },
     "linkRules": [
       {
@@ -18640,7 +18640,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.shreenandancourier.com/"
+    "trackingSearchUrl": "https://www.shreenandancourier.com/",
+    "trackingUrlTemplate": "https://connectingnandan.com/web-tracking/{trackingNumber}"
   },
   "slgtrax": {
     "displayName": "SLGTrax",
@@ -27457,9 +27458,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shree-mahavir"
     },
-    "trackingUrlTemplate": "https://www.shreemahavircourier.com/Frm_DocTrack.aspx?docno={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -27467,9 +27467,7 @@ export const CARRIER_CAPABILITIES = {
           "shreemahavircourier.com"
         ],
         "pathPattern": "^/Frm_DocTrack\\.aspx$",
-        "params": [
-          "docno"
-        ]
+        "query": "^(?:.*&)?docno=(\\d{12})(?=&|$)"
       },
       {
         "domains": [
@@ -27477,9 +27475,7 @@ export const CARRIER_CAPABILITIES = {
           "smespl.in"
         ],
         "pathPattern": "^/Frm_DocTrackWeb\\.aspx$",
-        "params": [
-          "docno"
-        ]
+        "query": "^(?:.*&)?docno=(\\d{12})(?=&|$)"
       }
     ],
     "detectionRules": [],

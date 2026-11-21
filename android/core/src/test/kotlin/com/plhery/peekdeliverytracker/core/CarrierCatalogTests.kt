@@ -2091,12 +2091,12 @@ class CarrierCatalogTests {
 
     /**
      * The server sends the bundled catalog without indentation. It must stay far below the limit, or every refresh
-     * fails and the app keeps the catalog it has.
+     * fails and the app keeps the catalog it has: half of it, as the server's route test checks.
      */
     @Test
     fun theCatalogStaysFarBelowTheRefreshLimit() {
         val compact = Json.parseToJsonElement(bundledCatalogData.decodeToString()).toString().toByteArray()
-        assertTrue(compact.size < CarrierCatalog.maximumResponseBytes / 4)
+        assertTrue(compact.size < CarrierCatalog.maximumResponseBytes / 2)
     }
 
     /** Link rules read as in the shared engine's `parseTrackingInput`. */

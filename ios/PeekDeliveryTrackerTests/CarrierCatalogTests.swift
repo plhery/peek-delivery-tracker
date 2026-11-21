@@ -1995,10 +1995,11 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     /// The server sends the bundled catalog without indentation. It must stay far below the
-    /// limit, or every refresh fails and the app keeps the catalog it has.
+    /// limit, or every refresh fails and the app keeps the catalog it has: half of it, as the
+    /// server's route test checks.
     func testTheCatalogStaysFarBelowTheRefreshLimit() throws {
         let compact = try JSONSerialization.data(withJSONObject: JSONSerialization.jsonObject(with: Self.bundledCatalogData))
-        XCTAssertLessThan(compact.count, CarrierCatalog.maximumResponseBytes / 4)
+        XCTAssertLessThan(compact.count, CarrierCatalog.maximumResponseBytes / 2)
     }
 
     /// Link rules read as in the shared engine's `parseTrackingInput`.

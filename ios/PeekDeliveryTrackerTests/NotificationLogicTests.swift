@@ -281,6 +281,12 @@ final class NotificationLogicTests: XCTestCase {
         }
         // A parcel no carrier has announced yet is still on its way.
         XCTAssertTrue(on.bellOpensAlerts(for: parcel(nil)))
+        // So is a held return, which the carrier still scans on its way back; one that is over is not.
+        var held = parcel(.returned)
+        held.carrierData = CarrierData(returnHeld: true)
+        XCTAssertTrue(on.bellOpensAlerts(for: held))
+        XCTAssertFalse(off.bellOpensAlerts(for: held))
+        XCTAssertFalse(on.bellOpensAlerts(for: parcel(.returned)))
     }
 
     func testEmailIsOfferedOnlyOnADeliveredParcelWhileTheAccountHasNeverChosen() throws {

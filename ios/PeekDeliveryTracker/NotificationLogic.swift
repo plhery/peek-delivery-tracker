@@ -91,9 +91,10 @@ struct DeliveryEmail: Equatable {
     var isOn: Bool { choice == true }
 
     /// While the email is on and the parcel is still on its way, the parcel's bell opens
-    /// its alerts. Otherwise one tap mutes or unmutes its notifications.
+    /// its alerts. Otherwise one tap mutes or unmutes its notifications. A held return is still
+    /// on its way back, and keeps both, as the server keeps sending them, as on the web and Android.
     func bellOpensAlerts(for parcel: Parcel) -> Bool {
-        isOn && parcel.currentStage?.isFinal != true
+        isOn && (parcel.currentStage?.isFinal != true || parcel.heldReturn)
     }
 
     /// Offered once, on a delivered parcel, while the account has never chosen.

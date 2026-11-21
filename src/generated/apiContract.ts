@@ -221,11 +221,17 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^DOFR\\d{13}HD$",
-        "confidence": "high"
+        "pattern": "^DOFR901\\d{10}HD$",
+        "confidence": "high",
+        "checksum": "cainiao-hd"
       },
       {
-        "pattern": "^CNFR\\d{13}HD$",
+        "pattern": "^CNFR901\\d{10}HD$",
+        "confidence": "high",
+        "checksum": "cainiao-hd"
+      },
+      {
+        "pattern": "^(?:DOFR|CNFR)(?!901)\\d{13}HD$",
         "confidence": "high"
       },
       {
@@ -294,6 +300,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^SK0SCZD\\d{10}N$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^R[NS]\\d{10}Y$",
         "confidence": "low"
       },
       {
@@ -4049,11 +4059,13 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^4PX\\d{13}CN$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "gs1-digits"
       },
       {
         "pattern": "^4XP\\d{13}CN$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "gs1-digits"
       },
       {
         "pattern": "^LP\\d{13}CN$",
@@ -4731,7 +4743,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^(?!MA\\d{19}$|JJD\\d{18}$)(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "australia-post"
       },
       {
         "pattern": "^\\d{2}(?!\\d{3})[A-Z0-9]{3}\\d{7}$",
@@ -4927,15 +4940,18 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^ZS\\d{11}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "s10-serial"
       },
       {
         "pattern": "^ZC\\d{11}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "s10-serial"
       },
       {
         "pattern": "^ZA\\d{11}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "s10-serial"
       }
     ],
     "trackingUrlTemplate": "https://www.ems.com.cn/mailtracking/you_jian_cha_xun.html",
@@ -5040,7 +5056,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^PX\\d{10}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "poczta-polska-px"
       },
       {
         "pattern": "^(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$",
@@ -5381,7 +5398,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "j-and-t",
-      "recognitionRank": 530
+      "recognitionRank": 530,
+      "recognitionPattern": "^J[DOPXY]\\d{10}$"
     },
     "linkRules": [
       {
@@ -6525,7 +6543,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:GF|CI)FR\\d{13,14}$",
+        "pattern": "^GFFR\\d{14}$",
+        "confidence": "high",
+        "checksum": "gofo-europe"
+      },
+      {
+        "pattern": "^(?:(?:GF|CI)FR\\d{13}|CIFR\\d{14})$",
         "confidence": "high"
       },
       {
@@ -6575,7 +6598,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:GF|CI)IT\\d{13,14}$",
+        "pattern": "^GFIT\\d{14}$",
+        "confidence": "high",
+        "checksum": "gofo-europe"
+      },
+      {
+        "pattern": "^(?:(?:GF|CI)IT\\d{13}|CIIT\\d{14})$",
         "confidence": "high"
       }
     ],
@@ -14742,7 +14770,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "smsa-express",
-      "recognitionRank": 448
+      "recognitionRank": 448,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -14767,7 +14796,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^2[1239]\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.smsaexpress.com/",
     "trackingUrlTemplate": "https://www.smsaexpress.com/sa/trackingdetails?tracknumbers={trackingNumber}",
     "helpUrl": "https://www.smsaexpress.com/sa/contact-us"
@@ -27398,8 +27432,13 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^STR(?:TD\\d{9}|TD\\d{16,17}|CA\\d{13})$",
+        "pattern": "^STRTD(?:\\d{9}|\\d{16,17})$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^STRCA\\d{13}$",
+        "confidence": "high",
+        "checksum": "luhn-digits"
       },
       {
         "pattern": "^STSH[A-Z]{2}\\d{11}$",
@@ -28881,7 +28920,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:GF|CI)NL\\d{13,14}$",
+        "pattern": "^GFNL\\d{14}$",
+        "confidence": "high",
+        "checksum": "gofo-europe"
+      },
+      {
+        "pattern": "^(?:(?:GF|CI)NL\\d{13}|CINL\\d{14})$",
         "confidence": "high"
       }
     ],
@@ -32578,7 +32622,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^JTDE\\d{12}$",
+        "pattern": "^JTDE\\d{2}00\\d{8}$",
+        "confidence": "high",
+        "checksum": "j-and-t-de"
+      },
+      {
+        "pattern": "^JTDE(?!\\d{2}00)\\d{12}$",
         "confidence": "high"
       }
     ],
@@ -33079,7 +33128,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^YWE\\d{14}$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "gs1-digits"
       }
     ],
     "trackingSearchUrl": "https://www.yanwenexpress.com/tracking.html",
@@ -33468,7 +33518,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^ZXA\\d{9}PY$",
-        "confidence": "high"
+        "confidence": "high",
+        "checksum": "s10-serial"
       }
     ]
   },
@@ -34128,7 +34179,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:GF|CI)ES\\d{13,14}$",
+        "pattern": "^GFES\\d{14}$",
+        "confidence": "high",
+        "checksum": "gofo-europe"
+      },
+      {
+        "pattern": "^(?:(?:GF|CI)ES\\d{13}|CIES\\d{14})$",
         "confidence": "high"
       }
     ],

@@ -2484,6 +2484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "techlink-sendungsverfolgung",
+      "title": "Techlink Sendungsverfolgung: ZHPHD…ML-Nummer und Status",
+      "name": "Techlink",
+      "color": "#e73547"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-sendungsverfolgung",
@@ -3348,6 +3356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi China Post\u00a0: numéro, statuts chinois et livraison",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "suivi-techlink",
+      "title": "Suivi Techlink\u00a0: numéros ZHPHD…ML, statuts et livraison",
+      "name": "Techlink",
+      "color": "#e73547"
     },
     {
       "id": "imile",
@@ -4874,6 +4890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "seguimiento-techlink",
+      "title": "Seguimiento de Techlink: números ZHPHD…ML y estados",
+      "name": "Techlink",
+      "color": "#e73547"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-seguimiento",
@@ -5618,6 +5642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "China Post rastreio: número, estados e entrega em Portugal",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "seguimento-techlink",
+      "title": "Seguimento Techlink: números ZHPHD…ML, estados e entrega",
+      "name": "Techlink",
+      "color": "#e73547"
     },
     {
       "id": "imile",
@@ -6414,6 +6446,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FedEx Polska śledzenie przesyłki krajowej: numer i statusy",
       "name": "FedEx Poland",
       "color": "#4d148c"
+    },
+    {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "sledzenie-techlink",
+      "title": "Śledzenie Techlink: numery ZHPHD…ML, statusy i dostawa",
+      "name": "Techlink",
+      "color": "#e73547"
     },
     {
       "id": "imile",

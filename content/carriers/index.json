@@ -137,7 +137,7 @@
   { "id": "j-and-t-au", "catalog": "j-and-t-au", "name": "J&T Express Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "china-post", "catalog": "china-post", "name": "China Post", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "ru"] },
   { "id": "fedex-pl", "catalog": "fedex-pl", "name": "FedEx Poland", "languages": ["en", "pl"] },
-  { "id": "techlink", "catalog": "techlink", "name": "Techlink", "languages": ["en", "it"] },
+  { "id": "techlink", "catalog": "techlink", "name": "Techlink", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
   { "id": "z-leading", "catalog": "z-leading", "name": "Z-Leading", "languages": ["en"] },
   { "id": "imile", "catalog": "imile", "name": "iMile", "languages": ["en", "es", "it", "de", "fr", "pt", "pl"] },
   { "id": "postnl", "catalog": "spring-gds", "name": "PostNL", "languages": ["en", "nl", "it", "pl", "es", "fr", "de", "pt"] },

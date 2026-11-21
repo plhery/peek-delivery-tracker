@@ -151,6 +151,7 @@
     "carrier": "chronopost",
     "senderName": "Mamie",
     "weightKg": 1.2,
+    "peekAi": "by_day",
     "events": [
       {
         "stage": "registered",
@@ -192,6 +193,7 @@
     "expectedInDays": 0,
     "senderName": "Chocolaterie Discrète",
     "weightKg": 0.8,
+    "peekAi": "by_time",
     "events": [
       {
         "stage": "registered",

@@ -8,6 +8,7 @@ import type { Rect } from '../components/map/WorldMap';
 // The journal and the pickup card keep their styles with the deliveries' detail.
 import '../components/ParcelDetail.css';
 import { PeekLockup } from '../components/PeekMark';
+import { PeekAiCard } from '../components/PeekAi';
 import { PickupPointCard } from '../components/PickupPointCard';
 import { stampOrigin } from '../components/ParcelStamp';
 import { TrackingJournal } from '../components/TrackingJournal';
@@ -568,6 +569,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           gift={wrapped ? 'wrapped' : opened ? 'opened' : link.gift ? 'own' : undefined}
           map={figure === 'map' ? (covered, room) => map('card', covered, room) : undefined}
           bell={bell} />
+        <PeekAiCard parcel={parcel} />
         <p className="sr-only" role="status">{checked}</p>
         {wrapped && <GiftSurprise />}
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}

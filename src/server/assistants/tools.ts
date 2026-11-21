@@ -5,7 +5,7 @@ import { DateTime, IANAZone } from 'luxon';
 import { z } from 'zod';
 import en from '../../../shared/locales/en.json';
 import type {
-  ApiPackageRow, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse,
+  ApiPackageRow, ApiPeekAi, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse, ApiTokenPeekAi,
 } from '../../generated/apiContract';
 import { guideHref } from '../../guides/paths';
 import { AMAZON_GUIDE_URL } from '../../lib/amazon';
@@ -78,12 +78,21 @@ function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParc
     ...(parcel.servedElsewhere ? { carrierWarning: ENGLISH['detail.pickedCarrierSilent']!
       .replace('{{picked}}', carrierInfo(parcel.carrier).name).replace('{{carrier}}', carrierInfo(parcel.servedElsewhere).name) } : {}),
     expectedDelivery: parcel.expectedDelivery ?? null,
+    ...(parcel.peekAi ? { peekAi: tokenPeekAi(parcel.peekAi) } : {}),
     deliveredAt: delivered ? delivered.day ?? delivered.occurredAt : null,
     lastUpdate: latest ? { time: latest.day ?? latest.occurredAt, description: latest.description, location: latest.location ?? null } : null,
     pickupPoint: parcel.pickupPoint ?? null,
     sender: parcel.senderName ?? null,
     archived: Boolean(parcel.archivedAt),
     addedAt: parcel.createdAt,
+  };
+}
+
+/** Peek AI's estimate as an assistant reads it: what its words say, without the page's strips of days and hours. */
+function tokenPeekAi(ai: ApiPeekAi): ApiTokenPeekAi {
+  return {
+    says: ai.says, why: ai.why, sure: ai.sure, ...ai.day ? { day: ai.day } : {}, ...ai.time ? { time: ai.time } : {},
+    ...ai.carrier_day ? { carrierDay: ai.carrier_day } : {}, ...ai.out_since ? { outSince: ai.out_since } : {},
   };
 }
 
@@ -597,7 +606,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   server.registerTool('list_parcels', {
     title: 'List parcels',
     description: 'The user\'s parcels in Peek, with each one\'s status, expected delivery day (expectedDelivery), delivery '
-      + 'time once delivered (deliveredAt) and latest scan. Choose the status, sort and search that answer the question, '
+      + 'time once delivered (deliveredAt) and latest scan, and, when Peek has a strong hint, Peek AI\'s own estimate of when '
+      + 'it will come (peekAi): Peek\'s, not the carrier\'s, so say it as Peek AI\'s. Choose the status, sort and search that answer the question, '
       + 'and a small limit when one parcel will do; total says how many match. For example: the latest delivered parcel '
       + 'is status "delivered" with limit 1; what arrives this week is status "week"; the parcel from IKEA is search "IKEA".',
     inputSchema: z.object({

@@ -13,6 +13,7 @@ import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedCarrierOutage } from './carrierOutages';
 import { passedEstimateDay } from './passedEstimate';
+import { peekAiFor } from './peekAi';
 import { datedAfterCheck } from './futureScans';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
@@ -21,9 +22,9 @@ import { isRecord, type JsonObject } from './types';
 let reported = false;
 
 /**
- * The stored point only feeds the place, and the source, provider and stage source only tell
- * Peek's own rows, relay copies, provider copies and notices apart: the API returns none
- * of them. A row of a relay pair names the other row instead (`relayLeads`),
+ * The stored point only feeds the place, the source, provider and stage source only tell
+ * Peek's own rows, relay copies, provider copies and notices apart, and the status code and the time the carrier's
+ * system wrote the scan only feed Peek AI (peekAi.ts): the API returns none of them. A row of a relay pair names the other row instead (`relayLeads`),
  * a carrier's repeat of a scan the newest of its run (scanRepeats.ts), and a
  * carrier's notice in the stage of its scan before it that scan (stageNotices.ts). A
  * scan dated by its day alone names that day. A scan or stage change its source
@@ -43,6 +44,8 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.stage_source;
   delete rest.kept_stage;
   delete rest.recipient_action;
+  delete rest.provider_code;
+  delete rest.written_at;
   if (tieOrder(rest.tie_order) < 0) delete rest.tie_order;
   return action ? { ...rest, recipient_action: action } : rest;
 }
@@ -490,8 +493,9 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
  * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
  * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`). A parcel whose carrier's
- * site is down says so (`carrier_outage`, carrierOutages.ts), and one whose expected day passed up to a week ago names
- * it (`expected_delivery_passed`, passedEstimate.ts).
+ * site is down says so (`carrier_outage`, carrierOutages.ts), one whose expected day passed up to a week ago names
+ * it (`expected_delivery_passed`, passedEstimate.ts), and one Peek has a strong hint for says when Peek thinks it will
+ * come (`peek_ai`, peekAi.ts), unless its carrier has planned the delivery among its steps.
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const shown = shownEvents(row);
@@ -504,10 +508,26 @@ export function withEventPlaces(row: JsonObject): JsonObject {
   const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
   const outage = servedCarrierOutage(row, shown);
   const passed = passedEstimateDay(row, served);
-  if (!planned.length && !ahead && !outage && !passed) return served;
+  // A carrier that has planned the delivery has given its word: Peek AI's calls are made against the carrier's date.
+  const ai = planned.some((step) => DELIVERY_STEPS.has(String(step.stage))) ? null : peekAi(row, served);
+  if (!planned.length && !ahead && !outage && !passed && !ai) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
     ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {},
-    ...passed ? { expected_delivery_passed: passed } : {} };
+    ...passed ? { expected_delivery_passed: passed } : {}, ...ai ? { peek_ai: ai as unknown as JsonObject } : {} };
+}
+
+let peekAiReported = false;
+const DELIVERY_STEPS: ReadonlySet<string> = new Set(['out_for_delivery', 'delivered']);
+
+/** Peek AI's estimate for the served row, or null; a failure leaves the parcel served without it, reported once. */
+function peekAi(row: JsonObject, served: JsonObject): ReturnType<typeof peekAiFor> {
+  try {
+    return peekAiFor(row, served);
+  } catch (error) {
+    if (!peekAiReported) captureOperationalError(error, { component: 'api', operation: 'peek_ai' });
+    peekAiReported = true;
+    return null;
+  }
 }
 
 /**

@@ -3,17 +3,21 @@ import { trackAction } from '../lib/analytics';
 import { useAppearance, type Appearance } from '../lib/appearance';
 import type { ApiAuth } from '../lib/apiClient';
 import { useMarkNewUpdatesChoice } from '../lib/newUpdate';
+import { useShowPeekAiChoice } from '../lib/peekAi';
 import { clockPreference, distancePreference, weightPreference } from '../lib/units';
+import { PeekAiSparkle } from './PeekAi';
 import './Settings.css';
 
 /**
- * The reader’s preferences: appearance, time format, distance and weight units, and the new-update mark, kept in this browser.
- * With `apiAuth`, the mark's choice follows the account to its other devices; with `language`, the language too.
+ * The reader’s preferences: appearance, time format, distance and weight units, the new-update mark and Peek AI, kept in
+ * this browser. With `apiAuth`, the mark's and Peek AI's choices follow the account to its other devices; with `language`,
+ * the language too.
  */
 export function PreferenceSettings({ apiAuth, language = false }: { apiAuth?: ApiAuth; language?: boolean }) {
   const { t, clock, setClock, distance, setDistance, weight, setWeight, automatic } = useI18n();
   const [appearance, setAppearance] = useAppearance();
   const [markNewUpdates, setMarkNewUpdates] = useMarkNewUpdatesChoice(apiAuth);
+  const [showPeekAi, setShowPeekAi] = useShowPeekAiChoice(apiAuth);
   return <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
     <div className="settings-box"><fieldset className="settings-appearance"><legend>{t('native.appearance.title')}</legend>
       <div>{(['system', 'light', 'dark'] as Appearance[]).map((option) => <button type="button" key={option} aria-pressed={appearance === option} onClick={() => { setAppearance(option); trackAction('appearance-change'); }}><span className={`settings-mini-screen settings-mini-screen--${option}`} aria-hidden="true"><i /><i /></span>{t(`native.appearance.${option}`)}</button>)}</div>
@@ -46,6 +50,11 @@ export function PreferenceSettings({ apiAuth, language = false }: { apiAuth?: Ap
       <button className="settings-row settings-mark" type="button" role="switch" aria-checked={markNewUpdates} aria-labelledby="settings-mark-label" aria-describedby="settings-mark-hint"
         onClick={() => setMarkNewUpdates(!markNewUpdates)}>
         <span className="settings-mark__text"><span id="settings-mark-label">{t('settings.markNewUpdates')}</span><small id="settings-mark-hint">{t('settings.markNewUpdatesHint')}</small></span>
+        <span className="settings-switch" aria-hidden="true" />
+      </button>
+      <button className="settings-row settings-mark" type="button" role="switch" aria-checked={showPeekAi} aria-labelledby="settings-peek-ai-label" aria-describedby="settings-peek-ai-hint"
+        onClick={() => { setShowPeekAi(!showPeekAi); trackAction(showPeekAi ? 'peek-ai-off' : 'peek-ai-on'); }}>
+        <span className="settings-mark__text"><span id="settings-peek-ai-label" className="settings-peek-ai"><PeekAiSparkle />{t('peekAi.name')}</span><small id="settings-peek-ai-hint">{t('settings.peekAiHint')}</small></span>
         <span className="settings-switch" aria-hidden="true" />
       </button>
     </div>

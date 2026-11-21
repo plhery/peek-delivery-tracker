@@ -1,0 +1,276 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+
+vi.mock('./observability', async (original) => ({
+  ...await original<typeof import('./observability')>(), captureOperationalError: vi.fn(),
+}));
+
+import { withEventPlaces } from './eventPlaces';
+import { captureOperationalError } from './observability';
+import { keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, shortestRange, type PeekAiBlob } from './peekAi';
+import type { PeekAiTree } from './peekAiModel';
+import type { JsonObject } from './types';
+
+const logit = (p: number) => Math.log(p / (1 - p));
+
+/** One tree whose chance of arrival within h delivery days is F[h], whatever the scans tell. */
+function curve(F: readonly number[]): PeekAiTree {
+  const last = F.length - 1;
+  const tree = { f: [] as number[], t: [] as number[], d: [] as number[], m: [] as number[], l: [] as number[], r: [] as number[], v: F.map(logit) };
+  for (let i = 0; i < last; i++) {
+    tree.f.push(0); tree.t.push(i + 0.5); tree.d.push(1); tree.m.push(0); tree.l.push(~i); tree.r.push(i + 1 < last ? i + 1 : ~last);
+  }
+  return tree;
+}
+
+let versions = 0;
+/** A synthetic Peek AI: its rules as trained, with a model that gives every parcel the chances F. */
+function blob(F: readonly number[] = [0.1, 0.85, 0.95, 0.99]): PeekAiBlob {
+  return {
+    version: `test-${++versions}`, trainedThrough: '2026-11-19', parcels: 1000,
+    deliveryDays: { 'swiss-post': [0, 1, 2, 3, 4, 5], dpd: [0, 1, 2, 3, 4] }, homeCountries: { 'swiss-post': ['CH'], dpd: ['DE'] },
+    offsets: { CH: 1, US: -6 }, defaultOffset: 1,
+    notToday: { default: { from: 14, sure: { 14: 0.84, 15: 0.875, 16: 0.915, 19: 1 } }, gofo: { from: null } },
+    byTime: { 'swiss-post': { by: '15:30', sure: 0.946, days: 300, shares: [0.02, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 0.9, 0.95, 0.97, 0.98, 0.99, 1, 1] } },
+    lateOut: { default: { from: 20, sure: 0.885 } },
+    ofdUnreliable: ['china-post'],
+    claims: { tau: 0.8, byDayWidth: 2, weekTau: 0.8, soonerLead: 2, soonerTau: 0.8, recentCheckHours: 3 },
+    sure: { today_or_tomorrow: 0.89, by_day: 0.85, this_week: 0.91, by_end_of_next_week: 0.91, sooner: 0.88, missed_date: 0.89 },
+    model: { horizon: F.length - 1, features: ['h'], categories: {}, targetEncoding: { prior: [3, 0.3], k: 8, cap: 12, keys: {} }, trees: [curve(F)] },
+  };
+}
+
+const scan = (stage: string, occurred_at: string, fields: JsonObject = {}): JsonObject => ({
+  id: `e-${stage}-${occurred_at}`, package_id: 'p1', stage, description: stage, location: null, occurred_at, stored_at: occurred_at,
+  provider_event_id: `swiss-post:${stage}:${occurred_at}`, ...fields,
+});
+const ACCEPTED = scan('accepted', '2026-11-18T09:00:00Z');
+const IN_TRANSIT = scan('in_transit', '2026-11-19T18:00:00Z');
+
+/** A Swiss Post parcel on Zurich's clock, checked at 15:00 on Friday 20 November. */
+function row(fields: JsonObject = {}, events: JsonObject[] = [ACCEPTED, IN_TRANSIT]): JsonObject {
+  return {
+    id: 'p1', carrier: 'swiss-post', tracking_number: 'TEST00000001', expected_delivery: null, archived_at: null,
+    last_synced_at: '2026-11-20T14:00:00Z', carrier_data: { timezone: 'Europe/Zurich' }, tracking_events: events, ...fields,
+  };
+}
+const ai = (parcel: JsonObject, now: string, model: PeekAiBlob | null = blob()) => peekAiFor(parcel, parcel, new Date(now), model);
+
+afterEach(() => {
+  setPeekAiBlob(null);
+  vi.useRealTimers();
+  vi.mocked(captureOperationalError).mockClear();
+});
+
+describe('the carrier says today', () => {
+  it('says not today once nothing has gone out for delivery in the afternoon, a check having just looked', () => {
+    const today = row({ expected_delivery: '2026-11-20' });
+    expect(ai(today, '2026-11-20T14:30:00Z')).toEqual({ says: 'not_today', why: 'no_out_for_delivery', carrier_day: '2026-11-20', sure: 0.875 });
+    // Late in the evening: right every time it said so, shown as at most 95 in 100.
+    expect(ai(row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T19:00:00Z' }), '2026-11-20T19:30:00Z')?.sure).toBe(0.95);
+    // Too early, or no recent check.
+    expect(ai(today, '2026-11-20T12:30:00Z')).toBeNull();
+    expect(ai(row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T10:00:00Z' }), '2026-11-20T14:30:00Z')).toBeNull();
+    // A carrier for which it never held.
+    expect(ai(row({ carrier: 'gofo', expected_delivery: '2026-11-20' }), '2026-11-20T14:30:00Z')).toBeNull();
+  });
+
+  it("counts the hours on the destination's clock when no scan or carrier names a zone", () => {
+    // 15:30 in the United States' middle: 22:30 in Zurich would be "19:00 and after".
+    const american = row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T21:00:00Z', carrier_data: { destination_country: 'US' } });
+    expect(ai(american, '2026-11-20T21:30:00Z')?.sure).toBe(0.875);
+  });
+});
+
+describe('out for delivery', () => {
+  const OUT = scan('out_for_delivery', '2026-11-20T07:10:00Z');
+  const out = (fields: JsonObject = {}) => row(fields, [ACCEPTED, IN_TRANSIT, OUT]);
+
+  it("says by the hour the carrier's deliveries mostly come by, with the share of each hour", () => {
+    const said = ai(out(), '2026-11-20T09:00:00Z')!;
+    expect(said).toMatchObject({ says: 'by_time', why: 'out_for_delivery', time: '15:30', sure: 0.946, out_since: '2026-11-20T08:10:00+01:00' });
+    expect(said.hours).toHaveLength(13);
+    expect(said.hours![0]).toEqual({ time: '08:00', share: 0.1 });
+    expect(said.hours!.at(-1)).toEqual({ time: '20:00', share: 0 });
+  });
+
+  it('says nothing once the hour has passed, when the carrier names its own hour, or for a carrier whose rounds seldom end in a delivery', () => {
+    expect(ai(out(), '2026-11-20T14:45:00Z')).toBeNull();
+    expect(ai(out({ expected_delivery: '2026-11-20T13:00:00+01:00' }), '2026-11-20T09:00:00Z')).toBeNull();
+    expect(ai(out({ carrier: 'china-post' }), '2026-11-20T09:00:00Z')).toBeNull();
+    // Out after the hour: no hour to say.
+    expect(ai(row({}, [ACCEPTED, scan('out_for_delivery', '2026-11-20T14:40:00Z')]), '2026-11-20T14:50:00Z')).toBeNull();
+  });
+
+  it('says not today when still out late in the evening', () => {
+    expect(ai(out(), '2026-11-20T19:15:00Z')).toEqual({ says: 'not_today', why: 'late_out', sure: 0.885, out_since: '2026-11-20T08:10:00+01:00' });
+  });
+});
+
+describe("the carrier's day has passed", () => {
+  const missed = (fields: JsonObject = {}) => row({ expected_delivery: '2026-11-19', ...fields }, [ACCEPTED, scan('in_transit', '2026-11-20T06:00:00Z')]);
+
+  it('says today or tomorrow when a scan came since, by the next day the carrier delivers on', () => {
+    expect(ai(missed(), '2026-11-20T14:30:00Z')).toEqual({
+      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89,
+    });
+    // DPD does not deliver on Saturdays.
+    expect(ai(missed({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23' });
+  });
+
+  it('says nothing without a scan in the day since, or once the day is further back', () => {
+    expect(ai(row({ expected_delivery: '2026-11-19' }), '2026-11-20T20:30:00Z')).toBeNull();
+    expect(ai(missed({ expected_delivery: '2026-11-17' }), '2026-11-20T14:30:00Z')).toBeNull();
+  });
+});
+
+describe('the model', () => {
+  it('names a day when the carrier gives none, from the latest morning or afternoon it was trained at', () => {
+    const said = ai(row(), '2026-11-20T14:30:00Z');
+    expect(said).toEqual({
+      says: 'today_or_tomorrow', why: 'no_date', day: '2026-11-21', sure: 0.89, last: { kind: 'scan', at: '2026-11-19T19:00:00+01:00' },
+      days: [{ day: '2026-11-20', p: 0.1 }, { day: '2026-11-21', p: 0.75 }, { day: '2026-11-23', p: 0.1 }, { day: '2026-11-24', p: 0.04 }],
+    });
+    expect(ai(row({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23', sure: 0.85 });
+  });
+
+  it('says this week, or by the end of next week, when no shorter run of days is likely enough', () => {
+    const tuesday = (F: number[]) => ai(row({ last_synced_at: '2026-11-17T08:30:00Z' }, [scan('accepted', '2026-11-16T09:00:00Z'),
+      scan('in_transit', '2026-11-16T18:00:00Z')]), '2026-11-17T09:00:00Z', blob(F));
+    expect(tuesday([0.15, 0.3, 0.45, 0.6, 0.88, 0.93, 0.96, 0.99])).toMatchObject({ says: 'this_week', day: '2026-11-22', sure: 0.91 });
+    expect(tuesday([0.02, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0.95, 0.97, 0.98]))
+      .toMatchObject({ says: 'by_end_of_next_week', day: '2026-11-29', sure: 0.91 });
+    expect(tuesday([0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.65, 0.7, 0.75])).toBeNull();
+  });
+
+  it("says maybe sooner when parcels like it usually come well before the carrier's day", () => {
+    const later = (expected_delivery: string, F: number[]) => ai(row({ expected_delivery }), '2026-11-20T14:30:00Z', blob(F));
+    expect(later('2026-11-24', [0.02, 0.85, 0.95, 0.99])).toMatchObject({
+      says: 'sooner', why: 'ahead', carrier_day: '2026-11-24', day: '2026-11-21', sure: 0.88,
+    });
+    // Not two days ahead, or not likely enough before it.
+    expect(later('2026-11-21', [0.02, 0.85, 0.95, 0.99])).toBeNull();
+    expect(later('2026-11-24', [0.02, 0.3, 0.6, 0.99])).toBeNull();
+  });
+
+  it("places the scans to tell how far the parcel has come, on the clock of the destination it reached", () => {
+    const placed = row({ carrier_data: { destination_country: 'CH' } }, [
+      scan('accepted', '2026-11-17T09:00:00Z', { location: 'Paris, France' }),
+      scan('customs', '2026-11-18T09:00:00Z', { location: 'Basel, Switzerland', description: 'Import customs clearance' }),
+      scan('in_transit', '2026-11-19T18:00:00Z', { location: 'Zürich, Switzerland', description: 'Arrived at the delivery depot' }),
+    ]);
+    expect(ai(placed, '2026-11-20T14:30:00Z')?.last).toEqual({ kind: 'depot', at: '2026-11-19T19:00:00+01:00' });
+    const customs = row({ carrier_data: { destination_country: 'CH' } }, [
+      scan('accepted', '2026-11-17T09:00:00Z', { location: 'Paris, France' }),
+      scan('customs', '2026-11-19T18:00:00Z', { location: 'Basel, Switzerland', description: 'Import customs clearance' }),
+    ]);
+    expect(ai(customs, '2026-11-20T14:30:00Z')?.last).toEqual({ kind: 'customs', at: '2026-11-19T19:00:00+01:00' });
+    const reached = row({ carrier_data: { destination_country: 'CH' } }, [
+      scan('accepted', '2026-11-17T09:00:00Z', { location: 'Paris, France' }),
+      scan('in_transit', '2026-11-19T18:00:00Z', { location: 'Basel, Switzerland' }),
+    ]);
+    expect(ai(reached, '2026-11-20T14:30:00Z')?.last).toEqual({ kind: 'country', at: '2026-11-19T19:00:00+01:00', country: 'CH' });
+  });
+
+  it('waits for a check when the last one is more than a day and a half old', () => {
+    expect(ai(row({ last_synced_at: '2026-11-18T12:00:00Z' }), '2026-11-20T14:30:00Z')).toBeNull();
+  });
+});
+
+describe('parcels Peek AI says nothing of', () => {
+  it('leaves out a parcel archived, arrived, waiting at a pickup point or returned, and says nothing with no model', () => {
+    const now = '2026-11-20T14:30:00Z';
+    expect(ai(row(), now, null)).toBeNull();
+    expect(ai(row({ archived_at: '2026-11-20T10:00:00Z' }), now)).toBeNull();
+    expect(ai(row({ current_stage: 'delivered' }), now)).toBeNull();
+    expect(ai(row({}, [ACCEPTED, IN_TRANSIT, scan('delivered', '2026-11-20T10:00:00Z')]), now)).toBeNull();
+    expect(ai(row({}, [ACCEPTED, IN_TRANSIT, scan('ready_for_pickup', '2026-11-20T10:00:00Z')]), now)).toBeNull();
+    expect(ai(row({}, [ACCEPTED, scan('returned', '2026-11-19T10:00:00Z'), IN_TRANSIT]), now)).toBeNull();
+  });
+
+  it("reads only the carrier's own dated scans, as the model was trained on them", () => {
+    const now = '2026-11-20T14:30:00Z';
+    // Peek's own row and a scan stamped with when the carrier's system wrote it are not the carrier's journey.
+    expect(ai(row({}, [scan('accepted', '2026-11-18T09:00:00Z', { provider_event_id: 'app:added' })]), now)).toBeNull();
+    expect(ai(row({}, [scan('accepted', '2026-11-18T09:00:00Z', { written_at: '2026-11-18T09:00:00Z' })]), now)).toBeNull();
+    expect(ai(row({}, [scan('accepted', '2026-11-18T09:00:00Z', { observed: true })]), now)).toBeNull();
+  });
+});
+
+describe('served', () => {
+  it("serves Peek AI's word on the parcel, never the scans' status codes or written times", () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-20T14:30:00Z'));
+    setPeekAiBlob(blob());
+    const served = withEventPlaces(row({}, [ACCEPTED, scan('in_transit', '2026-11-19T18:00:00Z', { provider_code: '13', written_at: null })]));
+    expect(served.peek_ai).toMatchObject({ says: 'today_or_tomorrow', why: 'no_date' });
+    for (const event of served.tracking_events as JsonObject[]) {
+      expect(event).not.toHaveProperty('provider_code');
+      expect(event).not.toHaveProperty('written_at');
+    }
+    setPeekAiBlob(null);
+    expect(withEventPlaces(row())).not.toHaveProperty('peek_ai');
+  });
+
+  it('says nothing once the carrier has planned the delivery among its steps', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-20T14:30:00Z'));
+    setPeekAiBlob(blob());
+    const planned = (stage: string) => row({ carrier_data: { timezone: 'Europe/Zurich', routing: { version: 1, planned: {
+      number: 'TEST00000001', carriers: { 'swiss-post': [{ time: '2026-11-21T09:00:00+01:00', description: 'Planned step', stage }] },
+    } } } });
+    expect(withEventPlaces(planned('in_transit')).peek_ai).toMatchObject({ says: 'today_or_tomorrow' });
+    expect(withEventPlaces(planned('out_for_delivery'))).not.toHaveProperty('peek_ai');
+    expect(withEventPlaces(planned('delivered'))).not.toHaveProperty('peek_ai');
+  });
+});
+
+describe('the stored model', () => {
+  it('loads the newest, keeps it while its version stands and drops it when none is stored', async () => {
+    const stored = blob();
+    const source = { latestPeekAiModelVersion: vi.fn().mockResolvedValue(stored.version), peekAiModel: vi.fn().mockResolvedValue(stored) };
+    vi.useFakeTimers();
+    const stop = keepPeekAiModel(source, 1000);
+    await vi.advanceTimersByTimeAsync(0);
+    expect(peekAiBlob()?.version).toBe(stored.version);
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(source.peekAiModel).toHaveBeenCalledTimes(1);
+    source.latestPeekAiModelVersion.mockResolvedValue(null);
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(peekAiBlob()).toBeNull();
+    stop();
+  });
+
+  it('reports a model it cannot read and keeps the one in place', async () => {
+    const kept = blob();
+    setPeekAiBlob(kept);
+    const source = { latestPeekAiModelVersion: vi.fn().mockResolvedValue('next'), peekAiModel: vi.fn().mockResolvedValue({ version: 'next' }) };
+    vi.useFakeTimers();
+    const stop = keepPeekAiModel(source, 1000);
+    await vi.advanceTimersByTimeAsync(0);
+    expect(peekAiBlob()).toBe(kept);
+    expect(captureOperationalError).toHaveBeenCalledWith(expect.any(Error), { component: 'api', operation: 'load_peek_ai_model' });
+    source.latestPeekAiModelVersion.mockRejectedValue(new Error('down'));
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(peekAiBlob()).toBe(kept);
+    expect(captureOperationalError).toHaveBeenCalledTimes(2);
+    stop();
+  });
+
+  it('accepts only a document with every part Peek AI reads', () => {
+    expect(peekAiBlobFrom(blob())).not.toBeNull();
+    expect(peekAiBlobFrom(null)).toBeNull();
+    expect(peekAiBlobFrom({ ...blob(), claims: { tau: 'high' } })).toBeNull();
+    expect(peekAiBlobFrom({ ...blob(), lateOut: {} })).toBeNull();
+    const noModel: Record<string, unknown> = { ...blob() };
+    delete noModel.model;
+    expect(peekAiBlobFrom(noModel)).toBeNull();
+  });
+});
+
+describe('the shortest likely run of days', () => {
+  it('is the narrowest run holding enough of the chance, the likeliest of its width', () => {
+    expect(shortestRange([0.1, 0.85, 0.95], 0.8)).toEqual({ a: 0, b: 1 });
+    expect(shortestRange([0.02, 0.85, 0.95], 0.8)).toEqual({ a: 1, b: 1 });
+    expect(shortestRange([0.1, 0.2], 0.8)).toBeNull();
+  });
+});

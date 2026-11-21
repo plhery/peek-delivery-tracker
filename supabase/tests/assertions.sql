@@ -249,7 +249,7 @@ begin
       ) then
     raise exception 'the delivery email ledger is readable through row level security';
   end if;
-  if has_function_privilege('anon', 'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean,text,text)', 'EXECUTE')
+  if has_function_privilege('anon', 'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean,text,text,boolean)', 'EXECUTE')
       or has_function_privilege('anon', 'public.set_owned_package_email_muted(uuid,boolean)', 'EXECUTE')
       or has_function_privilege('anon', 'public.owned_delivery_emails()', 'EXECUTE') then
     raise exception 'anonymous callers can execute the delivery email RPCs of an account';
@@ -263,7 +263,7 @@ begin
   end if;
   if not has_function_privilege(
     'authenticated',
-    'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean,text,text)',
+    'public.set_owned_notification_preferences(text[],time,time,text,boolean,boolean,text,text,boolean)',
     'EXECUTE'
   ) or not has_function_privilege(
     'authenticated',
@@ -782,6 +782,22 @@ begin
       and enabled_stages = array['customs', 'out_for_delivery', 'delivered']
       and quiet_hours_start = '22:00' and quiet_hours_end = '08:00'
   ) then raise exception 'A clock patch overwrote unrelated notification settings'; end if;
+
+  -- Peek AI is on until switched off, and a save that leaves it out keeps the choice.
+  if (select show_peek_ai from public.notification_preferences where user_id = auth.uid()) is not true then
+    raise exception 'Peek AI did not start on';
+  end if;
+  perform public.patch_owned_notification_preferences(false, p_show_peek_ai => false);
+  perform public.patch_owned_notification_preferences(false, p_clock => '24');
+  if not exists (
+    select 1 from public.notification_preferences where user_id = auth.uid() and show_peek_ai is false and clock = '24'
+      and enabled_stages = array['customs', 'out_for_delivery', 'delivered']
+  ) then raise exception 'Peek AI could not be switched off, or a later save switched it back on'; end if;
+  perform public.patch_owned_notification_preferences(false, p_show_peek_ai => true, p_clock => '12');
+  if not has_column_privilege('authenticated', 'public.notification_preferences', 'show_peek_ai', 'SELECT')
+      or (select show_peek_ai from public.notification_preferences where user_id = auth.uid()) is not true then
+    raise exception 'Peek AI could not be switched back on, or its owner cannot read it';
+  end if;
 
   -- The delivery email is not chosen until asked for. A server from before it
   -- sends four arguments by name, as PostgREST calls them: they keep the choice.

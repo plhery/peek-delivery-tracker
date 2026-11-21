@@ -53,7 +53,8 @@ describe('createDemoRepo', () => {
     expect(reset.filter((parcel) => parcel.archivedAt).map((parcel) => parcel.label))
       .toEqual(original.filter((parcel) => parcel.archivedAt).map((parcel) => parcel.label));
     expect(Date.parse(reset[0].createdAt) - Date.parse(original[0].createdAt)).toBe(86_400_000);
-    expect(await createDemoRepo(window.localStorage).list()).toEqual(reset);
+    // On the same clock: Peek AI's words follow the time they are shown at.
+    expect(await createDemoRepo(window.localStorage, () => now).list()).toEqual(reset);
     expect(window.localStorage.getItem('unrelated-setting')).toBe('keep');
   });
 

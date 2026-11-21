@@ -44,14 +44,16 @@ begin
   insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
   values (parcel, 'in_transit', 'Scan', now() - interval '1 day', 'unknown:copy', jsonb_build_object(
     'universal_provider', '17TRACK', 'time', '2026-11-14', 'local_time', '2026-11-14', 'observed_without_provider_timestamp', true,
-    'tie_order', 2, 'stage_source', 'none', 'retimed_from', '2026-11-14T08:00:00Z'));
+    'tie_order', 2, 'stage_source', 'none', 'retimed_from', '2026-11-14T08:00:00Z', 'provider_code', 'IT13',
+    'written_at', '2026-11-14T07:00:00Z'));
   if not exists (
     select 1 from jsonb_array_elements(public.parcel_link_view(link_id)#>'{package,tracking_events}') as event
     where event->>'provider_event_id' = 'unknown:copy' and event->>'universal_provider' = '17TRACK'
       and event->>'time' = '2026-11-14' and event->>'local_time' = '2026-11-14' and event->'observed' = 'true'::jsonb
       and event->'tie_order' = '2'::jsonb and event->>'stage_source' = 'none' and event->>'retimed_from' = '2026-11-14T08:00:00Z'
+      and event->>'provider_code' = 'IT13' and event->>'written_at' = '2026-11-14T07:00:00Z'
   ) then
-    raise exception 'A link''s events do not carry their provider, times, order, stage source and first time';
+    raise exception 'A link''s events do not carry their provider, times, order, stage source, first time, code and written time';
   end if;
 end;
 $$;

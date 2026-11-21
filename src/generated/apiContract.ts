@@ -68010,6 +68010,49 @@ export interface ApiCarrierOutage {
   "tracking_url"?: string;
 }
 
+export type ApiPeekAiSays = "not_today" | "by_time" | "by_day" | "today_or_tomorrow" | "this_week" | "by_end_of_next_week" | "sooner";
+
+export type ApiPeekAiWhy = "no_out_for_delivery" | "out_for_delivery" | "late_out" | "missed_date" | "ahead" | "no_date";
+
+export interface ApiPeekAi {
+  "says": ApiPeekAiSays;
+  "why": ApiPeekAiWhy;
+  "sure": number;
+  "day"?: string;
+  "time"?: string;
+  "carrier_day"?: string;
+  "out_since"?: string;
+  "last"?: ApiPeekAiStep;
+  "days"?: Array<ApiPeekAiDay>;
+  "hours"?: Array<ApiPeekAiHour>;
+}
+
+export interface ApiPeekAiStep {
+  "kind": "depot" | "customs" | "country" | "scan";
+  "at": string;
+  "country"?: string;
+}
+
+export interface ApiPeekAiDay {
+  "day": string;
+  "p": number;
+}
+
+export interface ApiPeekAiHour {
+  "time": string;
+  "share": number;
+}
+
+export interface ApiTokenPeekAi {
+  "says": ApiPeekAiSays;
+  "why": ApiPeekAiWhy;
+  "sure": number;
+  "day"?: string;
+  "time"?: string;
+  "carrierDay"?: string;
+  "outSince"?: string;
+}
+
 export interface ApiPackageRow {
   "id": string;
   "tracking_number": string;
@@ -68018,6 +68061,7 @@ export interface ApiPackageRow {
   "created_at": string;
   "expected_delivery": string | null;
   "expected_delivery_passed"?: string;
+  "peek_ai"?: ApiPeekAi;
   "last_status_text": string | null;
   "last_synced_at": string | null;
   "sync_status": ApiSyncStatus;
@@ -68173,6 +68217,7 @@ export interface ApiNotificationPreferences {
   "emailOnDelivery"?: boolean | null;
   "emailAvailable"?: boolean;
   "markNewUpdates"?: boolean;
+  "showPeekAi"?: boolean;
   "clock"?: "24" | "12";
   "distance"?: "km" | "mi";
 }
@@ -68434,6 +68479,7 @@ export interface ApiPublicPackage {
   "created_at": string;
   "expected_delivery": string | null;
   "expected_delivery_passed"?: string;
+  "peek_ai"?: ApiPeekAi;
   "last_status_text": string | null;
   "last_synced_at": string | null;
   "sync_status": ApiSyncStatus;
@@ -68708,6 +68754,7 @@ export interface ApiTokenParcel {
   "needsAttention": string | null;
   "carrierWarning"?: string;
   "expectedDelivery": string | null;
+  "peekAi"?: ApiTokenPeekAi;
   "deliveredAt": string | null;
   "lastUpdate": ApiTokenParcelUpdate | null;
   "pickupPoint": string | null;

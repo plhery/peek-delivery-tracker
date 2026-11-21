@@ -66712,6 +66712,10 @@
                     "type": "boolean",
                     "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Dot on updated parcels\" in Settings, on until switched off). A request that leaves it out keeps the stored choice."
                   },
+                  "showPeekAi": {
+                    "type": "boolean",
+                    "description": "Whether cards and parcel pages show Peek AI's own estimates (\"Peek AI\" in Settings, on until switched off). Left out, the stored choice stays."
+                  },
                   "clock": {
                     "type": "string",
                     "enum": [
@@ -71971,6 +71975,204 @@
           }
         }
       },
+      "PeekAiSays": {
+        "type": "string",
+        "enum": [
+          "not_today",
+          "by_time",
+          "by_day",
+          "today_or_tomorrow",
+          "this_week",
+          "by_end_of_next_week",
+          "sooner"
+        ],
+        "description": "What Peek AI says. not_today: it will not come today (beside a carrier's today: \"unlikely\"). by_time: out for delivery, it comes by `time`. by_day: by `day`. today_or_tomorrow: today or tomorrow, by `day`. this_week: by Sunday `day`. by_end_of_next_week: by next week's Sunday `day`. sooner: before the carrier's day (`carrier_day`), from `day` when set."
+      },
+      "PeekAiWhy": {
+        "type": "string",
+        "enum": [
+          "no_out_for_delivery",
+          "out_for_delivery",
+          "late_out",
+          "missed_date",
+          "ahead",
+          "no_date"
+        ],
+        "description": "The hint behind it. no_out_for_delivery: the carrier says today and nothing has gone out for delivery this afternoon. out_for_delivery: out for delivery since `out_since`, and the carrier's deliveries mostly come by `time`. late_out: out for delivery since `out_since` and still not there late in the day. missed_date: the carrier's day (`carrier_day`) passed yesterday and a scan came since. ahead: parcels like it usually come before the carrier's day. no_date: the carrier gives no date; `last` names how far it has come."
+      },
+      "PeekAi": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "says",
+          "why",
+          "sure"
+        ],
+        "description": "Peek AI: Peek's own estimate of when the parcel will come, learned from the parcels Peek has followed, set only when Peek has a strong hint; most parcels have none. It is never the carrier's word: the apps name it \"Peek AI\" with a sparkle, beside the carrier's date and after it. Days are on the parcel's clock. Absent on a wrapped gift, an archived parcel and one delivered, returned, waiting at a pickup point or after a delivery attempt.",
+        "properties": {
+          "says": {
+            "$ref": "#/components/schemas/PeekAiSays"
+          },
+          "why": {
+            "$ref": "#/components/schemas/PeekAiWhy"
+          },
+          "sure": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "How often Peek AI was right when it said this, measured on parcels it had not learned from; at most 0.95. The apps say it as times in 10, rounded down."
+          },
+          "day": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the words name (YYYY-MM-DD): the last day of by_day, today_or_tomorrow and the week calls, the first of sooner."
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+            "description": "by_time: the hour on the parcel's clock (HH:MM)."
+          },
+          "carrier_day": {
+            "type": "string",
+            "format": "date",
+            "description": "The carrier's day the words comment on (YYYY-MM-DD)."
+          },
+          "out_since": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the parcel went out for delivery, on the parcel's clock."
+          },
+          "last": {
+            "$ref": "#/components/schemas/PeekAiStep"
+          },
+          "days": {
+            "type": "array",
+            "maxItems": 7,
+            "items": {
+              "$ref": "#/components/schemas/PeekAiDay"
+            },
+            "description": "The parcel's likeliest days from today, as the sheet behind the (i) shows them."
+          },
+          "hours": {
+            "type": "array",
+            "maxItems": 13,
+            "items": {
+              "$ref": "#/components/schemas/PeekAiHour"
+            },
+            "description": "by_time: the share of the carrier's deliveries in each hour from 08:00, as the sheet shows them."
+          }
+        }
+      },
+      "PeekAiStep": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "at"
+        ],
+        "description": "How far a parcel with no carrier date has come, for Peek AI's second sentence: the delivery depot, customs or the destination country it reached first (on a way from another country), else its last scan.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "depot",
+              "customs",
+              "country",
+              "scan"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When, on the parcel's clock."
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "country: the destination country it reached."
+          }
+        }
+      },
+      "PeekAiDay": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "day",
+          "p"
+        ],
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "p": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The chance it comes that day."
+          }
+        }
+      },
+      "PeekAiHour": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "time",
+          "share"
+        ],
+        "properties": {
+          "time": {
+            "type": "string",
+            "pattern": "^[0-2][0-9]:00$",
+            "description": "The hour it starts."
+          },
+          "share": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "TokenPeekAi": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "says",
+          "why",
+          "sure"
+        ],
+        "description": "Peek AI's estimate as an assistant reads it: Peek's own, learned from the parcels Peek has followed, never the carrier's word. Say it as Peek's (\"Peek AI thinks…\"). Fields as PeekAi's.",
+        "properties": {
+          "says": {
+            "$ref": "#/components/schemas/PeekAiSays"
+          },
+          "why": {
+            "$ref": "#/components/schemas/PeekAiWhy"
+          },
+          "sure": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "How often it was right when it said this."
+          },
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^[0-2][0-9]:[0-5][0-9]$"
+          },
+          "carrierDay": {
+            "type": "string",
+            "format": "date"
+          },
+          "outSince": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "PackageRow": {
         "type": "object",
         "additionalProperties": false,
@@ -72023,6 +72225,10 @@
             "type": "string",
             "format": "date",
             "description": "The day the carrier last expected to deliver the parcel (YYYY-MM-DD), once it has passed: from the day after it through the seventh day after, on the clock of the carrier delivering it, while the parcel is not delivered, returned, archived or waiting at a pickup point; absent otherwise. It is `expected_delivery`'s day once that has passed, or the day a check stopped keeping because the carrier's answer named none. The parcel's page shows it muted, \"Was expected Tue 17 Nov\", where it shows no estimate of its own; cards, widgets, share lines and the sort by delivery date do not."
+          },
+          "peek_ai": {
+            "description": "Set when Peek AI has a strong hint of when the parcel will come (see PeekAi); absent otherwise, and on a wrapped gift.",
+            "$ref": "#/components/schemas/PeekAi"
           },
           "last_status_text": {
             "type": [
@@ -72796,6 +73002,10 @@
           "markNewUpdates": {
             "type": "boolean",
             "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Dot on updated parcels\" in Settings, on until switched off). A request that leaves it out keeps the stored choice."
+          },
+          "showPeekAi": {
+            "type": "boolean",
+            "description": "Whether cards and parcel pages show Peek AI's own estimates (\"Peek AI\" in Settings, on until switched off)."
           },
           "clock": {
             "type": "string",
@@ -73945,6 +74155,10 @@
             "type": "string",
             "format": "date",
             "description": "The day the carrier last expected to deliver the parcel (YYYY-MM-DD), once it has passed: from the day after it through the seventh day after, on the clock of the carrier delivering it, while the parcel is not delivered, returned, archived or waiting at a pickup point; absent otherwise. It is `expected_delivery`'s day once that has passed, or the day a check stopped keeping because the carrier's answer named none. The parcel's page shows it muted, \"Was expected Tue 17 Nov\", where it shows no estimate of its own; cards, widgets, share lines and the sort by delivery date do not. Not on a wrapped gift."
+          },
+          "peek_ai": {
+            "description": "Set when Peek AI has a strong hint of when the parcel will come (see PeekAi); absent otherwise, and on a wrapped gift.",
+            "$ref": "#/components/schemas/PeekAi"
           },
           "last_status_text": {
             "type": [
@@ -75165,6 +75379,10 @@
               "null"
             ],
             "description": "The day the carrier expects to deliver it (YYYY-MM-DD)."
+          },
+          "peekAi": {
+            "description": "Only when Peek AI has a strong hint: Peek's own estimate of when the parcel will come (see TokenPeekAi).",
+            "$ref": "#/components/schemas/TokenPeekAi"
           },
           "deliveredAt": {
             "type": [

@@ -97,6 +97,15 @@ export async function saveMarkNewUpdates(enabled: boolean, auth: ApiAuth): Promi
   return save({ markNewUpdates: enabled }, auth);
 }
 
+/**
+ * Switches Peek AI's own estimates on or off for the account, and nothing else: the events and the other choices go as
+ * they were last saved.
+ */
+export async function saveShowPeekAi(enabled: boolean, auth: ApiAuth): Promise<NotificationPreferences> {
+  await loadNotificationPreferences(auth, { once: true });
+  return save({ showPeekAi: enabled }, auth);
+}
+
 /** How the app writes a time and a distance here. */
 export interface ShownUnits {
   clock: '24' | '12';

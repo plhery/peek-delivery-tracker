@@ -581,6 +581,8 @@ export interface NotificationPreferencesValues {
   /** How the account's app shows a time and a distance, which its emails follow. Null keeps the stored one. */
   clock: '24' | '12' | null;
   distance: 'km' | 'mi' | null;
+  /** Peek AI's own estimates on cards and pages, switched on or off. Null keeps the stored choice. */
+  showPeekAi: boolean | null;
 }
 
 export function notificationPreferences(payload: JsonObject): NotificationPreferencesValues {
@@ -637,6 +639,9 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
   if (clock !== null && clock !== '24' && clock !== '12') throw new HttpError(400, 'Clock must be 24 or 12');
   const distance = payload.distance ?? null;
   if (distance !== null && distance !== 'km' && distance !== 'mi') throw new HttpError(400, 'Distance must be km or mi');
+  // And Peek AI.
+  const showPeekAi = payload.showPeekAi ?? null;
+  if (showPeekAi !== null && typeof showPeekAi !== 'boolean') throw new HttpError(400, 'Peek AI must be true or false');
   return {
     enabledStages,
     quietHoursStart: quietHoursStart as string | null,
@@ -646,6 +651,7 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
     markNewUpdates,
     clock,
     distance,
+    showPeekAi,
   };
 }
 
@@ -660,6 +666,7 @@ export function notificationPreferencesResponse(row: JsonObject, emailAvailable:
     emailOnDelivery: typeof row.email_on_delivery === 'boolean' ? row.email_on_delivery : null,
     emailAvailable,
     markNewUpdates: row.mark_new_updates !== false,
+    showPeekAi: row.show_peek_ai !== false,
     // None until an app has sent them.
     ...(row.clock === '24' || row.clock === '12' ? { clock: row.clock } : {}),
     ...(row.distance === 'km' || row.distance === 'mi' ? { distance: row.distance } : {}),

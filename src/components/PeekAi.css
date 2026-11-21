@@ -1,0 +1,44 @@
+/* Peek AI: its name in a pill a shade darker than what it sits on, in that surface's own ink. */
+.peek-ai-phrase { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.peek-ai-sig { display: inline-flex; align-items: center; flex: none; gap: 3px; height: 15px; padding: 0 6px 0 4px; border-radius: 999px;
+  background: color-mix(in srgb, currentColor 14%, transparent); font-size: .92em; font-weight: 650; letter-spacing: .1px; line-height: 1; white-space: nowrap; }
+.peek-ai-sparkle { display: block; flex: none; width: 11px; height: 11px; }
+.peek-ai-phrase__words { font-weight: 400; }
+
+/* On a card: under the carrier's date, or in its place. */
+.parcel-card__top > .parcel-card__dates { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex: 0 1 auto; max-width: 62%;
+  font-size: 11px; line-height: 1.4; color: var(--tone); text-align: right; }
+.parcel-card__dates > .parcel-card__eta { font-size: 11px; }
+
+/* On the parcel's page: a short card under the parcel's. */
+.peekp-note.peek-ai-card { display: block; padding: 11px 14px 12px; }
+/* Above .peekp-note > div, which lays a note's text out as a grid. */
+.peek-ai-card > .peek-ai-card__head { display: flex; align-items: center; gap: 6px; color: var(--ink); font-size: 13px; line-height: 1.35; }
+.peek-ai-card__head .peek-ai-phrase { flex-wrap: wrap; white-space: normal; }
+.peek-ai-card__head .peek-ai-phrase__words { font-weight: 600; }
+.peek-ai-card .peek-ai-sparkle { width: 12px; height: 12px; }
+.peek-ai-card__info { display: grid; place-items: center; flex: none; width: 32px; height: 32px; margin: -8px -8px -8px auto; padding: 0;
+  border: 0; border-radius: 50%; background: none; color: var(--ink-soft); cursor: pointer; }
+.peek-ai-card__info svg { width: 15px; height: 15px; }
+.peek-ai-card__info:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.peekp-note.peek-ai-card p { margin: 2px 0 0; }
+
+/* Its sheet. */
+.peek-ai-strip { margin: 12px 0 4px; padding: 12px 14px; border-radius: 16px; background: var(--control); color: var(--ink); }
+.peek-ai-strip__cells { display: grid; grid-auto-columns: 1fr; grid-auto-flow: column; gap: 4px; }
+.peek-ai-strip__cells > span { display: grid; justify-items: center; gap: 1px; padding: 5px 0 6px; border-radius: 9px; color: var(--ink-soft); font-size: 10px; line-height: 1.25; }
+.peek-ai-strip__cells b { color: var(--ink); font-size: 12px; font-weight: 500; }
+.peek-ai-strip__cells > [data-likely] { background: color-mix(in srgb, var(--ink) 13%, transparent); }
+.peek-ai-strip__cells > [data-maybe] { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.peek-ai-strip__cells > [data-carrier] { box-shadow: inset 0 0 0 1.2px var(--ink-soft); }
+.peek-ai-strip__cells > [data-past] { opacity: .45; }
+.peek-ai-strip__key { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; color: var(--ink-soft); font-size: 10.5px; line-height: 1.4; }
+.peek-ai-strip__key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 3px; vertical-align: -1px; }
+.peek-ai-strip__key i[data-likely] { background: color-mix(in srgb, currentColor 30%, transparent); }
+.peek-ai-strip__key i[data-carrier] { box-shadow: inset 0 0 0 1.2px currentColor; }
+.peek-ai-fact > div { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 13px 14px; }
+.peek-ai-sheet__trained { margin: 12px 2px 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; text-align: center; }
+
+/* Its switch in Settings. */
+.settings-peek-ai { display: inline-flex; align-items: center; gap: 5px; }
+.settings-peek-ai .peek-ai-sparkle { width: 12px; height: 12px; }

@@ -193,6 +193,7 @@
       "expectedInDays": 0,
       "senderName": "Chocolaterie Discrète",
       "weightKg": 0.8,
+      "peekAi": "by_time",
       "events": [
         {
           "stage": "registered",
@@ -287,6 +288,7 @@
       "carrier": "ups",
       "senderName": "Round Midnight Records",
       "weightKg": 0.4,
+      "peekAi": "by_day",
       "events": [
         {
           "stage": "registered",

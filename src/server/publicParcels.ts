@@ -11,6 +11,7 @@ import type {
   ApiPlannedTrackingEvent,
   ApiPublicPackage,
   ApiCarrierOutage,
+  ApiPeekAi,
   ApiPublicParcelResponse,
   ApiSyncStatus,
   ApiTrackingEventRow,
@@ -616,6 +617,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       expected_delivery: optionalText(row.expected_delivery),
       // A wrapped gift says nothing of a day it missed.
       ...(!wrapped && typeof row.expected_delivery_passed === 'string' ? { expected_delivery_passed: row.expected_delivery_passed } : {}),
+      // Nor when Peek thinks it will come.
+      ...(!wrapped && isRecord(row.peek_ai) ? { peek_ai: row.peek_ai as unknown as ApiPeekAi } : {}),
       // The carrier's status line can name the place the newest scan was made.
       last_status_text: wrapped ? null : owner ? toldText(row.last_status_text)
         : viewerStatusText(toldText(row.last_status_text), row.current_stage, recipient),

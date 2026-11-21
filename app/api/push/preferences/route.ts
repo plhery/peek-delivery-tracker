@@ -36,6 +36,7 @@ export const PATCH = apiRoute(async (context) => {
     values.markNewUpdates,
     values.clock,
     values.distance,
+    values.showPeekAi,
   );
   return json(notificationPreferencesResponse(row, available));
 }, { serviceRequired: true });

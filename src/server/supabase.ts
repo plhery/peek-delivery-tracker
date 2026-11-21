@@ -45,9 +45,10 @@ const PACKAGE_COLUMNS = [
  * provider_event_id tells Peek's own rows from the carrier's: the response
  * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`), nor the time a
  * carrier re-dated it from (`retimed_from`), which tells its own re-dating from a row stored ahead (`shownEvents`).
- * The scraper's `recipient_action` and `tie_order` are served as they were stored.
+ * The scraper's `recipient_action` and `tie_order` are served as they were stored. Peek AI reads a scan's status code
+ * (`provider_code`) and when the carrier's system wrote it (`written_at`), which the response leaves out too (peekAi.ts).
  */
-const PACKAGE_EVENTS = 'tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage,retimed_from:raw_data->>retimed_from)';
+const PACKAGE_EVENTS = 'tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage,retimed_from:raw_data->>retimed_from,provider_code:raw_data->>provider_code,written_at:raw_data->>written_at)';
 const PACKAGE_SELECT = `${PACKAGE_COLUMNS},${PACKAGE_EVENTS}`;
 /**
  * What a shared Passport is worked out from (`withSharedPassports` in friends.ts): the parcel's account, its scans
@@ -2978,6 +2979,22 @@ export class SupabaseServiceClient extends SupabaseClient {
     });
   }
 
+  /** The version of the newest stored Peek AI model, or null when none is stored. */
+  async latestPeekAiModelVersion(): Promise<string | null> {
+    const [row] = rows(await this.request(`/rest/v1/peek_ai_models?${query([
+      ['select', 'version'], ['order', 'created_at.desc'], ['limit', '1'],
+    ])}`));
+    return row && typeof row.version === 'string' ? row.version : null;
+  }
+
+  /** A stored Peek AI model's document, or null when its version is gone. */
+  async peekAiModel(version: string): Promise<unknown> {
+    const [row] = rows(await this.request(`/rest/v1/peek_ai_models?${query([
+      ['select', 'model'], ['version', `eq.${version}`], ['limit', '1'],
+    ])}`));
+    return row?.model ?? null;
+  }
+
   /**
    * Forgets the lookups past their forget date and the one-off parcels left
    * without a link, the links from accounts stopped 30 days ago (`stopped`),
@@ -3182,7 +3199,7 @@ export class SupabaseUserClient extends SupabaseClient {
 
   async getNotificationPreferences(): Promise<JsonObject> {
     const params = query({
-      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates,clock,distance',
+      select: 'enabled_stages,quiet_hours_start,quiet_hours_end,timezone,email_on_delivery,mark_new_updates,clock,distance,show_peek_ai',
       limit: '1',
     });
     const result = rows(await this.request(`/rest/v1/notification_preferences?${params}`));
@@ -3193,13 +3210,14 @@ export class SupabaseUserClient extends SupabaseClient {
       timezone: 'Europe/Zurich',
       email_on_delivery: null,
       mark_new_updates: true,
+      show_peek_ai: true,
     };
   }
 
   /**
    * `emailOnDelivery` switches the delivery email, `markNewUpdates` the list's mark on a parcel with
-   * news, and `clock` and `distance` are how the account's app shows a time and a distance; left out
-   * or null, the stored choice stays.
+   * news, `showPeekAi` Peek AI's own estimates, and `clock` and `distance` are how the account's app shows
+   * a time and a distance; left out or null, the stored choice stays.
    */
   async setNotificationPreferences(
     enabledStages: string[] | undefined,
@@ -3210,6 +3228,7 @@ export class SupabaseUserClient extends SupabaseClient {
     markNewUpdates: boolean | null = null,
     clock: '24' | '12' | null = null,
     distance: 'km' | 'mi' | null = null,
+    showPeekAi: boolean | null = null,
   ): Promise<JsonObject> {
     // Every save patches the row, so it records whether the save sent a time zone (`timezone_chosen`).
     let result = await this.request('/rest/v1/rpc/patch_owned_notification_preferences', {
@@ -3224,6 +3243,7 @@ export class SupabaseUserClient extends SupabaseClient {
         ...(markNewUpdates === null ? {} : { p_mark_new_updates: markNewUpdates }),
         ...(clock === null ? {} : { p_clock: clock }),
         ...(distance === null ? {} : { p_distance: distance }),
+        ...(showPeekAi === null ? {} : { p_show_peek_ai: showPeekAi }),
       },
     });
     if (Array.isArray(result) && result.length === 1) [result] = result;

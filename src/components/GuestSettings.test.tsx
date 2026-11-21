@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { I18nProvider } from '../i18n';
 import { APPEARANCE_STORAGE_KEY } from '../lib/appearance';
 import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
+import { SHOW_PEEK_AI_STORAGE_KEY } from '../lib/peekAi';
 import { GuestSettings } from './GuestSettings';
 
 afterEach(() => {
@@ -12,7 +13,7 @@ afterEach(() => {
 });
 
 describe('GuestSettings', () => {
-  it('keeps a visitor’s appearance, units and new-update mark in this browser, without asking the server', async () => {
+  it('keeps a visitor’s appearance, units, new-update mark and Peek AI in this browser, without asking the server', async () => {
     const fetch = vi.fn();
     vi.stubGlobal('fetch', fetch);
     const user = userEvent.setup();
@@ -40,8 +41,14 @@ describe('GuestSettings', () => {
     await user.click(mark);
     expect(mark).not.toBeChecked();
     expect(window.localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBe('off');
-    // Usage statistics have no switch: the dot is the only one.
-    expect(within(sheet).getAllByRole('switch')).toEqual([mark]);
+    const peekAi = within(sheet).getByRole('switch', { name: 'Peek AI' });
+    expect(peekAi).toBeChecked();
+    expect(peekAi).toHaveAccessibleDescription('When Peek has a strong hint, it says when it thinks a parcel will come.');
+    await user.click(peekAi);
+    expect(peekAi).not.toBeChecked();
+    expect(window.localStorage.getItem(SHOW_PEEK_AI_STORAGE_KEY)).toBe('off');
+    // Usage statistics have no switch: the dot and Peek AI are the only ones.
+    expect(within(sheet).getAllByRole('switch')).toEqual([mark, peekAi]);
     expect(within(sheet).queryByText(/usage statistics/i)).not.toBeInTheDocument();
     expect(fetch).not.toHaveBeenCalled();
 

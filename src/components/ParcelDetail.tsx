@@ -62,6 +62,7 @@ import { parcelTone } from '../lib/parcelDesign';
 import { HANDOVER_ROOM, ParcelMapSheet, RouteEngraving, useCoveredBox, useParcelRoute } from './ParcelMap';
 import { ProgressTrack } from './ProgressTrack';
 import { PickupPointCard } from './PickupPointCard';
+import { PeekAiCard } from './PeekAi';
 import { pickupPoint } from '../lib/pickupPoint';
 import { importChargesLine } from '../lib/importCharges';
 import type { CardOrigin } from '../lib/cardTransition';
@@ -700,6 +701,7 @@ export function ParcelDetail({
         {passedDay && <p className="detail__arrival detail__arrival--passed">{t('parcel.wasExpected', { date: localizedCalendarDate(passedDay, languageTag) })}</p>}
         <div className="detail__progress"><ProgressTrack stage={current?.stage ?? null} /></div>
       </section>
+      <PeekAiCard parcel={parcel} auth={apiAuth} className="detail__quiet" />
       {waitingAt && <PickupPointCard point={waitingAt} />}
       {carrierWaits?.description.trim() && <div className="peekp-note peekp-note--paper detail__carrier-says" role="note">
         <span className="peekp-note__icon" aria-hidden="true"><Glyph name="info" /></span>

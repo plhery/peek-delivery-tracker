@@ -4177,6 +4177,68 @@ struct CarrierOutage: Codable, Equatable, Hashable, Sendable {
     }
 }
 
+enum PeekAiSays: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case notToday = "not_today"
+    case byTime = "by_time"
+    case byDay = "by_day"
+    case todayOrTomorrow = "today_or_tomorrow"
+    case thisWeek = "this_week"
+    case byEndOfNextWeek = "by_end_of_next_week"
+    case sooner
+
+    var id: String { rawValue }
+}
+
+enum PeekAiWhy: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case noOutForDelivery = "no_out_for_delivery"
+    case outForDelivery = "out_for_delivery"
+    case lateOut = "late_out"
+    case missedDate = "missed_date"
+    case ahead
+    case noDate = "no_date"
+
+    var id: String { rawValue }
+}
+
+struct PeekAi: Codable, Equatable, Hashable, Sendable {
+    var says: PeekAiSays
+    var why: PeekAiWhy
+    var sure: Double
+    var day: String? = nil
+    var time: String? = nil
+    var carrierDay: String? = nil
+    var outSince: String? = nil
+    var last: PeekAiStep? = nil
+    var days: [PeekAiDay]? = nil
+    var hours: [PeekAiHour]? = nil
+}
+
+struct PeekAiStep: Codable, Equatable, Hashable, Sendable {
+    var kind: PeekAiStepKind
+    var at: String
+    var country: String? = nil
+}
+
+struct PeekAiDay: Codable, Equatable, Hashable, Sendable {
+    var day: String
+    var p: Double
+}
+
+struct PeekAiHour: Codable, Equatable, Hashable, Sendable {
+    var time: String
+    var share: Double
+}
+
+struct TokenPeekAi: Codable, Equatable, Hashable, Sendable {
+    var says: PeekAiSays
+    var why: PeekAiWhy
+    var sure: Double
+    var day: String? = nil
+    var time: String? = nil
+    var carrierDay: String? = nil
+    var outSince: String? = nil
+}
+
 struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var id: UUID
     var trackingNumber: String
@@ -4185,6 +4247,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var createdAt: String
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
+    var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
     var syncStatus: SyncStatus
@@ -4212,6 +4275,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case createdAt
         case expectedDelivery
         case expectedDeliveryPassed
+        case peekAi
         case lastStatusText
         case lastSyncedAt
         case syncStatus
@@ -4372,6 +4436,7 @@ struct NotificationPreferences: Codable, Equatable, Hashable, Sendable {
     var emailOnDelivery: Bool? = nil
     var emailAvailable: Bool? = nil
     var markNewUpdates: Bool? = nil
+    var showPeekAi: Bool? = nil
     var clock: NotificationPreferencesClock? = nil
     var distance: NotificationPreferencesDistance? = nil
 }
@@ -4774,6 +4839,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var createdAt: String
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
+    var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
     var syncStatus: SyncStatus
@@ -4799,6 +4865,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case createdAt
         case expectedDelivery
         case expectedDeliveryPassed
+        case peekAi
         case lastStatusText
         case lastSyncedAt
         case syncStatus
@@ -5136,6 +5203,7 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var needsAttention: String? = nil
     var carrierWarning: String? = nil
     var expectedDelivery: String? = nil
+    var peekAi: TokenPeekAi? = nil
     var deliveredAt: String? = nil
     var lastUpdate: TokenParcelUpdate? = nil
     var pickupPoint: String? = nil
@@ -5201,6 +5269,15 @@ struct AccountExportAccount: Codable, Equatable, Hashable, Sendable, Identifiabl
 enum EventPlacePrecision: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case city
     case country
+
+    var id: String { rawValue }
+}
+
+enum PeekAiStepKind: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case depot
+    case customs
+    case country
+    case scan
 
     var id: String { rawValue }
 }
@@ -5470,6 +5547,7 @@ extension Parcel {
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
+        peekAi = try values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
         syncStatus = try values.decode(SyncStatus.self, forKey: .syncStatus)

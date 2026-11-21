@@ -3,6 +3,7 @@ import type {
   ApiCarrierId,
   ApiEventPlace,
   ApiImportCharges,
+  ApiPeekAi,
   ApiRecipientAction,
   ApiStage,
   ApiSyncStatus,
@@ -11,6 +12,12 @@ import type {
 export type CarrierId = ApiCarrierId;
 
 export type SyncStatus = ApiSyncStatus;
+
+/**
+ * Peek AI: Peek's own estimate of when a parcel will come, served only when Peek has a strong hint (`peek_ai`,
+ * peekAi.ts). Never the carrier's word: it is shown under the carrier's date, named as Peek's.
+ */
+export type PeekAi = ApiPeekAi;
 
 /** The duties, taxes and fees the carrier lists for importing a parcel. */
 export type ImportCharges = ApiImportCharges;
@@ -38,6 +45,8 @@ export interface Parcel {
    * the day after through the seventh, while the parcel is still due (`expected_delivery_passed`, passedEstimate.ts).
    */
   expectedDeliveryPassed?: string;
+  /** Peek AI's estimate, when Peek has a strong hint (`peek_ai`). */
+  peekAi?: PeekAi;
   pickupPoint?: string;
   receiverName?: string;
   weightKg?: number;

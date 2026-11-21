@@ -14,6 +14,7 @@ import {
   type ParcelCarrierInput,
   type ParcelRepo,
   type ParcelWithEvents,
+  type PeekAi,
   type Stage,
   type TrackingEvent,
 } from '../types';
@@ -33,6 +34,8 @@ interface DemoSample {
   events: { stage: string; hoursAgo: number; description: string; location?: string; place?: unknown }[];
   /** Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come. */
   plannedEvents?: { stage: string; hoursAgo: number; description: string; location?: string }[];
+  /** What Peek AI says of it, worked out when it is shown (`demoPeekAi`): `by_time` out for delivery, `by_day` with no date and no planned steps. */
+  peekAi?: string;
 }
 
 const demoCatalog: DemoSample[] = demoSamples;
@@ -274,7 +277,58 @@ function withDemoPlaces(parcels: ParcelWithEvents[]): ParcelWithEvents[] {
 }
 
 function save(storage: Storage, parcels: ParcelWithEvents[]): void {
-  storage.setItem(DEMO_STORAGE_KEY, JSON.stringify(parcels));
+  // Peek AI is worked out each time the parcels are shown, never kept.
+  storage.setItem(DEMO_STORAGE_KEY, JSON.stringify(parcels.map(withoutPeekAi)));
+}
+
+function withoutPeekAi(parcel: ParcelWithEvents): ParcelWithEvents {
+  const kept = { ...parcel };
+  delete kept.peekAi;
+  return kept;
+}
+
+const DEMO_PEEK_AI = new Map(demoCatalog.flatMap((sample) => sample.peekAi ? [[sample.trackingNumber, sample.peekAi] as const] : []));
+/** The share of a courier's deliveries in each hour of its day. */
+const DEMO_HOURS = [0.03, 0.07, 0.12, 0.16, 0.17, 0.14, 0.11, 0.09, 0.05, 0.03, 0.02, 0.01];
+const pad = (value: number) => String(value).padStart(2, '0');
+const calendarDay = (date: Date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+/** A time on this device's clock, with its offset, as the server writes a scan's local time. */
+function withOffset(date: Date): string {
+  const offset = -date.getTimezoneOffset();
+  const hours = Math.floor(Math.abs(offset) / 60);
+  return `${calendarDay(date)}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}${offset < 0 ? '-' : '+'}${pad(hours)}:${pad(Math.abs(offset) % 60)}`;
+}
+
+/**
+ * What Peek AI says of a sample parcel that shows it, at `now`, in the shapes the server gives (peekAi.ts): out for
+ * delivery today, by 16:00 until then; on its way with no carrier date, by the third delivery day from today.
+ */
+export function demoPeekAi(parcel: ParcelWithEvents, now: number): PeekAi | undefined {
+  const kind = DEMO_PEEK_AI.get(parcel.trackingNumber);
+  const latest = latestEvent(parcel.events);
+  if (!kind || !latest || parcel.archivedAt) return undefined;
+  const at = new Date(now);
+  if (kind === 'by_time') {
+    const out = new Date(latest.occurredAt);
+    if (latest.stage !== 'out_for_delivery' || calendarDay(out) !== calendarDay(at) || out.getHours() >= 16 || at.getHours() >= 16) return undefined;
+    return { says: 'by_time', why: 'out_for_delivery', time: '16:00', sure: 0.86, out_since: withOffset(out),
+      hours: DEMO_HOURS.map((share, index) => ({ time: `${pad(8 + index)}:00`, share })) };
+  }
+  if (parcel.expectedDelivery || parcel.plannedEvents?.length || !['accepted', 'in_transit', 'customs'].includes(latest.stage)) return undefined;
+  // The next delivery days, from today; no courier comes on Sundays.
+  const days: string[] = [];
+  for (const day = new Date(at); days.length < 5; day.setDate(day.getDate() + 1)) if (day.getDay() !== 0) days.push(calendarDay(day));
+  return { says: 'by_day', why: 'no_date', day: days[2]!, sure: 0.81, last: { kind: latest.stage === 'customs' ? 'customs' : 'scan', at: latest.occurredAt },
+    days: days.map((day, index) => ({ day, p: [0.04, 0.27, 0.41, 0.18, 0.06][index]! })) };
+}
+
+/** The parcels as they are shown: the samples that show Peek AI say what it expects now. */
+function withPeekAi(parcels: ParcelWithEvents[], now: number): ParcelWithEvents[] {
+  return parcels.map((parcel) => {
+    const rest = withoutPeekAi(parcel);
+    const ai = demoPeekAi(rest, now);
+    return ai ? { ...rest, peekAi: ai } : rest;
+  });
 }
 
 /**
@@ -318,7 +372,7 @@ export function createDemoRepo(
     const wanted = await demoDictionary(target);
     const written = storage.getItem(LANGUAGE_KEY);
     const from = isLocale(written) ? written : 'en';
-    if (from === target) return saved();
+    if (from === target) return withPeekAi(saved(), now());
     const english = new Map(Object.entries(await demoDictionary(from)).map(([text, translated]) => [translated, text]));
     const say = (text: string) => {
       const original = english.get(text) ?? text;
@@ -336,7 +390,7 @@ export function createDemoRepo(
     }));
     save(storage, parcels);
     storage.setItem(LANGUAGE_KEY, target);
-    return parcels;
+    return withPeekAi(parcels, now());
   }
 
   /** A simulated scan, said in the language the demo is written in. */
@@ -543,7 +597,7 @@ export function createDemoRepo(
     async refresh() {
       const advanced = (await getAll()).map(advance);
       save(storage, advanced);
-      return sortNewestFirst(advanced);
+      return sortNewestFirst(withPeekAi(advanced, now()));
     },
 
     async refreshParcel(id: string) {
@@ -555,7 +609,7 @@ export function createDemoRepo(
         storage,
         parcels.map((candidate) => candidate.id === id ? advanced : candidate),
       );
-      return advanced;
+      return withPeekAi([advanced], now())[0]!;
     },
   };
 }

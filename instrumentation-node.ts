@@ -4,6 +4,7 @@ import { keepAdapterHolds, warmDpdSession } from 'universal-parcel-scraper/node'
 import { preloadPlaces } from 'universal-parcel-scraper/places';
 import { hostAdapterEnvironment } from './src/server/adapterRegistry';
 import { adapterHoldStore, logAdapterHoldsTakenUp } from './src/server/adapterHolds';
+import { keepPeekAiModel } from './src/server/peekAi';
 import { dpdSessionStore, logDpdSession } from './src/server/dpdSessions';
 import { serviceClient } from './src/server/runtime';
 import { installShutdownHandlers } from './src/server/shutdown';
@@ -50,6 +51,8 @@ if (process.env.NODE_ENV === 'production' && canonicalOrigin()) {
   // The adapters' pauses and pacing (a direct step's rest, USPS's outage pause, Correios's read
   // window) outlive the deploy in the database, in the module instance the registries use.
   if (client) void logAdapterHoldsTakenUp(keepAdapterHolds(adapterHoldStore(client)));
+  // Peek AI's model is trained apart and stored in the database: read now and every hour.
+  if (client) keepPeekAiModel(client);
 }
 // Half a second of parsing belongs before the first parcel list, not in it.
 if (process.env.NODE_ENV === 'production') setTimeout(() => {

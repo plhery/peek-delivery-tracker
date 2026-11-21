@@ -4174,6 +4174,81 @@ data class CarrierOutage(
 )
 
 @Serializable
+enum class PeekAiSays(val rawValue: String) {
+    @SerialName("not_today") NotToday("not_today"),
+    @SerialName("by_time") ByTime("by_time"),
+    @SerialName("by_day") ByDay("by_day"),
+    @SerialName("today_or_tomorrow") TodayOrTomorrow("today_or_tomorrow"),
+    @SerialName("this_week") ThisWeek("this_week"),
+    @SerialName("by_end_of_next_week") ByEndOfNextWeek("by_end_of_next_week"),
+    @SerialName("sooner") Sooner("sooner"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): PeekAiSays? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class PeekAiWhy(val rawValue: String) {
+    @SerialName("no_out_for_delivery") NoOutForDelivery("no_out_for_delivery"),
+    @SerialName("out_for_delivery") OutForDelivery("out_for_delivery"),
+    @SerialName("late_out") LateOut("late_out"),
+    @SerialName("missed_date") MissedDate("missed_date"),
+    @SerialName("ahead") Ahead("ahead"),
+    @SerialName("no_date") NoDate("no_date"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): PeekAiWhy? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+data class PeekAi(
+    val says: PeekAiSays,
+    val why: PeekAiWhy,
+    val sure: Double,
+    val day: String? = null,
+    val time: String? = null,
+    @SerialName("carrier_day") val carrierDay: String? = null,
+    @SerialName("out_since") val outSince: String? = null,
+    val last: PeekAiStep? = null,
+    val days: List<PeekAiDay>? = null,
+    val hours: List<PeekAiHour>? = null,
+)
+
+@Serializable
+data class PeekAiStep(
+    val kind: PeekAiStepKind,
+    val at: String,
+    val country: String? = null,
+)
+
+@Serializable
+data class PeekAiDay(
+    val day: String,
+    val p: Double,
+)
+
+@Serializable
+data class PeekAiHour(
+    val time: String,
+    val share: Double,
+)
+
+@Serializable
+data class TokenPeekAi(
+    val says: PeekAiSays,
+    val why: PeekAiWhy,
+    val sure: Double,
+    val day: String? = null,
+    val time: String? = null,
+    val carrierDay: String? = null,
+    val outSince: String? = null,
+)
+
+@Serializable
 data class Parcel(
     val id: UUID,
     @SerialName("tracking_number") val trackingNumber: String,
@@ -4182,6 +4257,7 @@ data class Parcel(
     @SerialName("created_at") val createdAt: String,
     @SerialName("expected_delivery") val expectedDelivery: String? = null,
     @SerialName("expected_delivery_passed") val expectedDeliveryPassed: String? = null,
+    @SerialName("peek_ai") val peekAi: PeekAi? = null,
     @SerialName("last_status_text") val lastStatusText: String? = null,
     @SerialName("last_synced_at") val lastSyncedAt: String? = null,
     @SerialName("sync_status") val syncStatus: SyncStatus,
@@ -4316,6 +4392,7 @@ data class NotificationPreferences(
     val emailOnDelivery: Boolean? = null,
     val emailAvailable: Boolean? = null,
     val markNewUpdates: Boolean? = null,
+    val showPeekAi: Boolean? = null,
     val clock: NotificationPreferencesClock? = null,
     val distance: NotificationPreferencesDistance? = null,
 )
@@ -4694,6 +4771,7 @@ data class PublicPackage(
     @SerialName("created_at") val createdAt: String,
     @SerialName("expected_delivery") val expectedDelivery: String? = null,
     @SerialName("expected_delivery_passed") val expectedDeliveryPassed: String? = null,
+    @SerialName("peek_ai") val peekAi: PeekAi? = null,
     @SerialName("last_status_text") val lastStatusText: String? = null,
     @SerialName("last_synced_at") val lastSyncedAt: String? = null,
     @SerialName("sync_status") val syncStatus: SyncStatus,
@@ -5073,6 +5151,7 @@ data class TokenParcel(
     val needsAttention: String? = null,
     val carrierWarning: String? = null,
     val expectedDelivery: String? = null,
+    val peekAi: TokenPeekAi? = null,
     val deliveredAt: String? = null,
     val lastUpdate: TokenParcelUpdate? = null,
     val pickupPoint: String? = null,
@@ -5142,6 +5221,19 @@ enum class EventPlacePrecision(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): EventPlacePrecision? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class PeekAiStepKind(val rawValue: String) {
+    @SerialName("depot") Depot("depot"),
+    @SerialName("customs") Customs("customs"),
+    @SerialName("country") Country("country"),
+    @SerialName("scan") Scan("scan"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): PeekAiStepKind? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

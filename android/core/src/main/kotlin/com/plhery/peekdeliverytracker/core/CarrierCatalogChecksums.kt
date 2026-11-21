@@ -43,6 +43,14 @@ fun CarrierCatalog.Companion.checksumPasses(checksum: String, number: String): B
     "poste-italiane" -> isValidPosteItalianeRegisteredNumber(number)
     "frankier-id" -> isValidFrankierId(number)
     "dhl-ecommerce-pl" -> isValidDhlEcommercePolandNumber(number)
+    "gs1-digits" -> hasGs1CheckDigitInDigits(number)
+    "luhn-digits" -> hasLuhnCheckDigitInDigits(number)
+    "s10-serial" -> startsWithS10Serial(number)
+    "gofo-europe" -> isValidGofoEuropeWaybill(number)
+    "j-and-t-de" -> isValidJAndTGermanyNumber(number)
+    "cainiao-hd" -> isValidCainiaoHdNumber(number)
+    "australia-post" -> isValidAustraliaPostArticleId(number)
+    "poczta-polska-px" -> isValidPocztaPolskaPxNumber(number)
     else -> null
 }
 
@@ -210,6 +218,34 @@ fun CarrierCatalog.Companion.hasLuhnCheckDigit(value: String): Boolean {
     }
     return sum % 10 == 0
 }
+
+/** The longest run of ASCII digits in the value, the first of them when two are as long. */
+private fun longestDigitRun(value: String): String {
+    var longest = ""
+    var start = 0
+    while (start < value.length) {
+        if (value[start] !in '0'..'9') {
+            start++
+            continue
+        }
+        var end = start
+        while (end < value.length && value[end] in '0'..'9') end++
+        if (end - start > longest.length) longest = value.substring(start, end)
+        start = end
+    }
+    return longest
+}
+
+/**
+ * GS1 mod 10 over the longest run of digits, for a number that keeps its check digit inside letters: 4PX's
+ * `4PX…CN` and YWE's `YWE…`.
+ */
+fun CarrierCatalog.Companion.hasGs1CheckDigitInDigits(value: String): Boolean =
+    hasGs1CheckDigit(longestDigitRun(value))
+
+/** Luhn over the longest run of digits: Straightship's `STRCA` numbers. */
+fun CarrierCatalog.Companion.hasLuhnCheckDigitInDigits(value: String): Boolean =
+    hasLuhnCheckDigit(longestDigitRun(value))
 
 /**
  * FedEx 12-digit numbers: the first eleven digits weigh 3, 1, 7, … from the left, and the sum mod 11 mod 10
@@ -380,6 +416,89 @@ fun CarrierCatalog.Companion.isValidS10(raw: String): Boolean {
  */
 fun CarrierCatalog.Companion.isValidPosLajuConsignment(value: String): Boolean =
     matches(value, "^[A-Z]{3}[0-9]{9}MY$") && hasS10CheckDigit(value.drop(3).take(9))
+
+/** S10's way to close a weighted sum: 11 minus the sum mod 11, where 10 is written 0 and 11 is written 5. */
+private fun s10Closing(sum: Int): Int {
+    val digit = 11 - sum % 11
+    return if (digit == 10) 0 else if (digit == 11) 5 else digit
+}
+
+/**
+ * The nine digits after the leading letters are an S10 serial, eight digits and their check digit: China
+ * Post's `ZA`, `ZC` and `ZS` numbers, which add two digits, and Pengyou's `ZXA…PY`.
+ */
+fun CarrierCatalog.Companion.startsWithS10Serial(value: String): Boolean =
+    hasS10CheckDigit(value.dropWhile { it in 'A'..'Z' }.take(9))
+
+/**
+ * GOFO's European waybills: GF, a country and fourteen digits. The second, fourth, … twelfth digits from the
+ * left are doubled, nine less above nine, and the fourteenth brings the sum to a multiple of ten. This is
+ * Luhn's sum anchored at the left. GOFO's American `GFUS` waybills carry no such digit.
+ */
+fun CarrierCatalog.Companion.isValidGofoEuropeWaybill(value: String): Boolean {
+    if (!matches(value, "^GF[A-Z]{2}[0-9]{14}$")) return false
+    val digits = value.drop(4).digits()
+    val sum = (0 until 13).sumOf {
+        val counted = digits[it] * (if (it % 2 == 0) 1 else 2)
+        if (counted > 9) counted - 9 else counted
+    }
+    return (10 - sum % 10) % 10 == digits[13]
+}
+
+/**
+ * J&T Express Germany: JTDE and twelve digits whose third and fourth are 0. The second, fifth, sixth, eighth,
+ * tenth and eleventh digits weigh 1, 5, 8, 6, 7 and 3; the twelfth is 5 minus their sum, mod 11, and a result
+ * of 10 is written 5. The weights fit the numbers and are not a published algorithm, so a number with another
+ * third or fourth digit is not checked.
+ */
+fun CarrierCatalog.Companion.isValidJAndTGermanyNumber(value: String): Boolean {
+    if (!matches(value, "^JTDE[0-9]{2}00[0-9]{8}$")) return false
+    val digits = value.drop(4).digits()
+    val weights = intArrayOf(0, 1, 0, 0, 5, 8, 0, 6, 0, 7, 3)
+    val sum = weights.indices.sumOf { weights[it] * digits[it] }
+    val check = ((5 - sum) % 11 + 11) % 11
+    return digits[11] == (if (check == 10) 5 else check)
+}
+
+/**
+ * Cainiao's French home-delivery numbers: four letters, thirteen digits and HD. The fourth to twelfth digits
+ * weigh 8, 6, 4, 2, 3, 5, 9, 7, 1 and the thirteenth closes their sum as S10's check digit does. The first
+ * three digits are outside the sum.
+ */
+fun CarrierCatalog.Companion.isValidCainiaoHdNumber(value: String): Boolean {
+    if (!matches(value, "^[A-Z]{4}[0-9]{13}HD$")) return false
+    val digits = value.substring(4, 17).digits()
+    val weights = intArrayOf(8, 6, 4, 2, 3, 5, 9, 7, 1)
+    val sum = weights.indices.sumOf { weights[it] * digits[3 + it] }
+    return s10Closing(sum) == digits[12]
+}
+
+/**
+ * Australia Post's article ids: GS1 mod 10 over every character before the last, in which a letter counts as
+ * its ASCII code (A is 65). On a number without letters it is the GS1 check digit.
+ */
+fun CarrierCatalog.Companion.isValidAustraliaPostArticleId(value: String): Boolean {
+    if (!matches(value, "^[0-9A-Z]+[0-9]$")) return false
+    var sum = 0
+    for (offset in 0 until value.length - 1) {
+        val character = value[value.length - 2 - offset]
+        val counted = if (character in '0'..'9') character - '0' else character.code
+        sum += counted * (if (offset % 2 == 0) 3 else 1)
+    }
+    return (10 - sum % 10) % 10 == value.last() - '0'
+}
+
+/**
+ * Poczta Polska's PX and ten digits: the first nine weigh 8, 6, 4, 2, 3, 5, 9, 7, 8, S10's weights starting
+ * over at the ninth, and the tenth closes their sum as S10's check digit does.
+ */
+fun CarrierCatalog.Companion.isValidPocztaPolskaPxNumber(value: String): Boolean {
+    if (!matches(value, "^PX[0-9]{10}$")) return false
+    val digits = value.drop(2).digits()
+    val weights = intArrayOf(8, 6, 4, 2, 3, 5, 9, 7, 8)
+    val sum = weights.indices.sumOf { weights[it] * digits[it] }
+    return s10Closing(sum) == digits[9]
+}
 
 fun CarrierCatalog.Companion.supportsSwissPostHandoff(raw: String): Boolean {
     val value = normalize(raw)

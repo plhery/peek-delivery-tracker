@@ -1551,6 +1551,107 @@ class CarrierCatalogTests {
         }
     }
 
+    /** Public 4PX and YWE numbers: GS1 mod 10 over the longest run of digits. */
+    @Test
+    fun gs1DigitsCheckTheLongestRunOfDigits() {
+        for (number in listOf("4PX3001521662170CN", "4PX3002555003946CN", "YWE00001563351639")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("gs1-digits", number))
+        }
+        for (number in listOf("4PX3001521662171CN", "YWE00001563351630", "4PX300152 1662170CN", "4PXCN")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("gs1-digits", number))
+        }
+    }
+
+    /** Public Straightship numbers: Luhn over the longest run of digits. */
+    @Test
+    fun luhnDigitsCheckTheLongestRunOfDigits() {
+        for (number in listOf("STRCA6096486792700", "STRCA3666462053476")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("luhn-digits", number))
+        }
+        for (number in listOf("STRCA6096486792701", "STRCA3666462053477", "STRCA")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("luhn-digits", number))
+        }
+    }
+
+    /** Constructed numbers: the nine digits after the leading letters are an S10 serial. */
+    @Test
+    fun s10SerialChecksTheNineDigitsAfterTheLetters() {
+        for (number in listOf("ZXA999999995PY", "ZC00000000500")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("s10-serial", number))
+        }
+        for (number in listOf("ZXA999999970PY", "ZC00000000000", "ZC0000000", "ZC-00000000500")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("s10-serial", number))
+        }
+    }
+
+    /** Public GOFO waybills from France, Italy, the Netherlands and Spain. */
+    @Test
+    fun gofoEuropeWaybillsCheckTheirLastDigit() {
+        for (number in listOf("GFFR26162070068751", "GFIT26104011851374", "GFNL26142036286842", "GFES26222137816984")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("gofo-europe", number))
+        }
+        for (
+            number in listOf(
+                "GFFR26162070068752", "GFIT26104011851375", "GFFR2616207006875", "gffr26162070068751", "GFFR26162070068751\n",
+            )
+        ) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("gofo-europe", number))
+        }
+    }
+
+    /** Public J&T Express Germany numbers. */
+    @Test
+    fun jAndTGermanyNumbersCheckTheirLastDigit() {
+        for (number in listOf("JTDE900000979616", "JTDE100027319088", "JTDE100007312985")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("j-and-t-de", number))
+        }
+        for (number in listOf("JTDE900000979617", "JTDE100027319089", "JTDE901000979616", "JTDE90000097961")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("j-and-t-de", number))
+        }
+    }
+
+    /** Public Cainiao home-delivery numbers from France. */
+    @Test
+    fun cainiaoHdNumbersCheckTheirLastDigit() {
+        for (number in listOf("DOFR9010192105464HD", "DOFR9010202101005HD", "CNFR9010497138847HD", "CNFR9010496456407HD")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("cainiao-hd", number))
+        }
+        for (number in listOf("DOFR9010192105465HD", "CNFR9010497138848HD", "DOFR9010192105464", "DOF9010192105464HD")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("cainiao-hd", number))
+        }
+    }
+
+    /** Public Australia Post article ids, with and without letters. */
+    @Test
+    fun australiaPostArticleIdsCheckTheirLastDigit() {
+        for (
+            number in listOf(
+                "7T2514965601000935102", "36GMB353861501000935107", "ST2273888401000960300",
+                "99722999536301000830908", "33QAG752421901000931500",
+            )
+        ) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("australia-post", number))
+        }
+        for (
+            number in listOf(
+                "7T2514965601000935103", "36GMB353861501000935108", "7t2514965601000935102", "ST2273888401000960300\n",
+            )
+        ) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("australia-post", number))
+        }
+    }
+
+    /** Public Poczta Polska PX numbers. */
+    @Test
+    fun pocztaPolskaPxNumbersCheckTheirLastDigit() {
+        for (number in listOf("PX0000000013", "PX7678676761", "PX2121532015", "PX2140553297")) {
+            assertEquals(number, true, CarrierCatalog.checksumPasses("poczta-polska-px", number))
+        }
+        for (number in listOf("PX0000000014", "PX7678676762", "PX000000001", "px0000000013", "PX0000000013\n")) {
+            assertEquals(number, false, CarrierCatalog.checksumPasses("poczta-polska-px", number))
+        }
+    }
+
     /**
      * Constructed twelve-digit numbers: the Identcode weighs 4 and 9 from the left. Passing it suggests DHL, which
      * is never selected or listed first, and recognition asks it first.

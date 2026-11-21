@@ -1497,6 +1497,93 @@ final class CarrierCatalogTests: XCTestCase {
         }
     }
 
+    /// Public 4PX and YWE numbers: GS1 mod 10 over the longest run of digits.
+    func testGs1DigitsCheckTheLongestRunOfDigits() {
+        for number in ["4PX3001521662170CN", "4PX3002555003946CN", "YWE00001563351639"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("gs1-digits", number), true, number)
+        }
+        for number in ["4PX3001521662171CN", "YWE00001563351630", "4PX300152 1662170CN", "4PXCN"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("gs1-digits", number), false, number)
+        }
+    }
+
+    /// Public Straightship numbers: Luhn over the longest run of digits.
+    func testLuhnDigitsCheckTheLongestRunOfDigits() {
+        for number in ["STRCA6096486792700", "STRCA3666462053476"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("luhn-digits", number), true, number)
+        }
+        for number in ["STRCA6096486792701", "STRCA3666462053477", "STRCA"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("luhn-digits", number), false, number)
+        }
+    }
+
+    /// Constructed numbers: the nine digits after the leading letters are an S10 serial.
+    func testS10SerialChecksTheNineDigitsAfterTheLetters() {
+        for number in ["ZXA999999995PY", "ZC00000000500"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("s10-serial", number), true, number)
+        }
+        for number in ["ZXA999999970PY", "ZC00000000000", "ZC0000000", "ZC-00000000500"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("s10-serial", number), false, number)
+        }
+    }
+
+    /// Public GOFO waybills from France, Italy, the Netherlands and Spain.
+    func testGofoEuropeWaybillsCheckTheirLastDigit() {
+        for number in ["GFFR26162070068751", "GFIT26104011851374", "GFNL26142036286842", "GFES26222137816984"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("gofo-europe", number), true, number)
+        }
+        for number in [
+            "GFFR26162070068752", "GFIT26104011851375", "GFFR2616207006875", "gffr26162070068751", "GFFR26162070068751\n",
+        ] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("gofo-europe", number), false, number)
+        }
+    }
+
+    /// Public J&T Express Germany numbers.
+    func testJAndTGermanyNumbersCheckTheirLastDigit() {
+        for number in ["JTDE900000979616", "JTDE100027319088", "JTDE100007312985"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("j-and-t-de", number), true, number)
+        }
+        for number in ["JTDE900000979617", "JTDE100027319089", "JTDE901000979616", "JTDE90000097961"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("j-and-t-de", number), false, number)
+        }
+    }
+
+    /// Public Cainiao home-delivery numbers from France.
+    func testCainiaoHdNumbersCheckTheirLastDigit() {
+        for number in ["DOFR9010192105464HD", "DOFR9010202101005HD", "CNFR9010497138847HD", "CNFR9010496456407HD"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("cainiao-hd", number), true, number)
+        }
+        for number in ["DOFR9010192105465HD", "CNFR9010497138848HD", "DOFR9010192105464", "DOF9010192105464HD"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("cainiao-hd", number), false, number)
+        }
+    }
+
+    /// Public Australia Post article ids, with and without letters.
+    func testAustraliaPostArticleIdsCheckTheirLastDigit() {
+        for number in [
+            "7T2514965601000935102", "36GMB353861501000935107", "ST2273888401000960300",
+            "99722999536301000830908", "33QAG752421901000931500",
+        ] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("australia-post", number), true, number)
+        }
+        for number in [
+            "7T2514965601000935103", "36GMB353861501000935108", "7t2514965601000935102", "ST2273888401000960300\n",
+        ] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("australia-post", number), false, number)
+        }
+    }
+
+    /// Public Poczta Polska PX numbers.
+    func testPocztaPolskaPxNumbersCheckTheirLastDigit() {
+        for number in ["PX0000000013", "PX7678676761", "PX2121532015", "PX2140553297"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("poczta-polska-px", number), true, number)
+        }
+        for number in ["PX0000000014", "PX7678676762", "PX000000001", "px0000000013", "PX0000000013\n"] {
+            XCTAssertEqual(CarrierCatalog.checksumPasses("poczta-polska-px", number), false, number)
+        }
+    }
+
     /// Constructed twelve-digit numbers: the Identcode weighs 4 and 9 from the left. Passing it
     /// suggests DHL, which is never selected or listed first, and recognition asks it first.
     func testTheIdentcodeCheckSuggestsDHLWithoutSelectingIt() {

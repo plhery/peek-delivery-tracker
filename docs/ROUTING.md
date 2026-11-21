@@ -158,8 +158,8 @@ helps, and `proxy_refused` for any other.
      numbers try Ship24 first, for its fuller Express histories. Dedicated adapters such as EMS
      still go first, and a provider the carrier's order leaves out stays out.
 
-For new lookups, the iPhone's device region takes precedence over a trusted Cloudflare
-`CF-IPCountry` header as a country hint.
+For new lookups, the device region the iPhone and Android apps send takes precedence over a
+trusted Cloudflare `CF-IPCountry` header as a country hint.
 A destination reported by a carrier takes precedence. The hint puts that country's carriers
 first when recognition asks carriers whether they know the number. It does not establish
 the carrier, set the delivery destination or change scan clocks, though it can name the post a

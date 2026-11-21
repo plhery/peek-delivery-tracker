@@ -1762,6 +1762,14 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         case "poste-italiane": isValidPosteItalianeRegisteredNumber(number)
         case "frankier-id": isValidFrankierId(number)
         case "dhl-ecommerce-pl": isValidDhlEcommercePolandNumber(number)
+        case "gs1-digits": hasGs1CheckDigitInDigits(number)
+        case "luhn-digits": hasLuhnCheckDigitInDigits(number)
+        case "s10-serial": startsWithS10Serial(number)
+        case "gofo-europe": isValidGofoEuropeWaybill(number)
+        case "j-and-t-de": isValidJAndTGermanyNumber(number)
+        case "cainiao-hd": isValidCainiaoHdNumber(number)
+        case "australia-post": isValidAustraliaPostArticleId(number)
+        case "poczta-polska-px": isValidPocztaPolskaPxNumber(number)
         default: nil
         }
     }
@@ -1903,6 +1911,32 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             return total + (doubled > 9 ? doubled - 9 : doubled)
         }
         return sum % 10 == 0
+    }
+
+    /// The longest run of ASCII digits in the value, the first of them when two are as long.
+    private static func longestDigitRun(_ value: String) -> String {
+        var longest = ""
+        var run = ""
+        for scalar in value.unicodeScalars {
+            guard ("0"..."9").contains(scalar) else {
+                run = ""
+                continue
+            }
+            run.unicodeScalars.append(scalar)
+            if run.unicodeScalars.count > longest.unicodeScalars.count { longest = run }
+        }
+        return longest
+    }
+
+    /// GS1 mod 10 over the longest run of digits, for a number that keeps its check digit inside
+    /// letters: 4PX's `4PX…CN` and YWE's `YWE…`.
+    static func hasGs1CheckDigitInDigits(_ value: String) -> Bool {
+        hasGs1CheckDigit(longestDigitRun(value))
+    }
+
+    /// Luhn over the longest run of digits: Straightship's `STRCA` numbers.
+    static func hasLuhnCheckDigitInDigits(_ value: String) -> Bool {
+        hasLuhnCheckDigit(longestDigitRun(value))
     }
 
     /// FedEx 12-digit numbers: the first eleven digits weigh 3, 1, 7, … from the left, and the
@@ -2056,6 +2090,81 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// check digit of the eight before it; the extra letter is outside the check.
     static func isValidPosLajuConsignment(_ value: String) -> Bool {
         matches(value, pattern: "^[A-Z]{3}[0-9]{9}MY$") && hasS10CheckDigit(value.dropFirst(3).prefix(9))
+    }
+
+    /// S10's way to close a weighted sum: 11 minus the sum mod 11, where 10 is written 0 and 11 is written 5.
+    private static func s10Closing(_ sum: Int) -> Int {
+        let digit = 11 - sum % 11
+        return digit == 10 ? 0 : (digit == 11 ? 5 : digit)
+    }
+
+    /// The nine digits after the leading letters are an S10 serial, eight digits and their check
+    /// digit: China Post's `ZA`, `ZC` and `ZS` numbers, which add two digits, and Pengyou's `ZXA…PY`.
+    static func startsWithS10Serial(_ value: String) -> Bool {
+        let serial = value.unicodeScalars.drop(while: { ("A"..."Z").contains($0) }).prefix(9)
+        guard serial.count == 9, serial.allSatisfy({ ("0"..."9").contains($0) }) else { return false }
+        return hasS10CheckDigit(Substring(serial))
+    }
+
+    /// GOFO's European waybills: GF, a country and fourteen digits. The second, fourth, … twelfth
+    /// digits from the left are doubled, nine less above nine, and the fourteenth brings the sum to
+    /// a multiple of ten. This is Luhn's sum anchored at the left. GOFO's American `GFUS` waybills
+    /// carry no such digit.
+    static func isValidGofoEuropeWaybill(_ value: String) -> Bool {
+        guard matches(value, pattern: "^GF[A-Z]{2}[0-9]{14}$") else { return false }
+        let digits = value.dropFirst(4).compactMap(\.wholeNumberValue)
+        let sum = digits[0..<13].enumerated().reduce(0) { total, item in
+            let counted = item.element * (item.offset % 2 == 0 ? 1 : 2)
+            return total + (counted > 9 ? counted - 9 : counted)
+        }
+        return (10 - sum % 10) % 10 == digits[13]
+    }
+
+    /// J&T Express Germany: JTDE and twelve digits whose third and fourth are 0. The second, fifth,
+    /// sixth, eighth, tenth and eleventh digits weigh 1, 5, 8, 6, 7 and 3; the twelfth is 5 minus
+    /// their sum, mod 11, and a result of 10 is written 5. The weights fit the numbers and are not a
+    /// published algorithm, so a number with another third or fourth digit is not checked.
+    static func isValidJAndTGermanyNumber(_ value: String) -> Bool {
+        guard matches(value, pattern: "^JTDE[0-9]{2}00[0-9]{8}$") else { return false }
+        let digits = value.dropFirst(4).compactMap(\.wholeNumberValue)
+        let weights = [0, 1, 0, 0, 5, 8, 0, 6, 0, 7, 3]
+        let sum = zip(weights, digits).reduce(0) { $0 + $1.0 * $1.1 }
+        let check = ((5 - sum) % 11 + 11) % 11
+        return digits[11] == (check == 10 ? 5 : check)
+    }
+
+    /// Cainiao's French home-delivery numbers: four letters, thirteen digits and HD. The fourth to
+    /// twelfth digits weigh 8, 6, 4, 2, 3, 5, 9, 7, 1 and the thirteenth closes their sum as S10's
+    /// check digit does. The first three digits are outside the sum.
+    static func isValidCainiaoHdNumber(_ value: String) -> Bool {
+        guard matches(value, pattern: "^[A-Z]{4}[0-9]{13}HD$") else { return false }
+        let digits = value.dropFirst(4).prefix(13).compactMap(\.wholeNumberValue)
+        let weights = [8, 6, 4, 2, 3, 5, 9, 7, 1]
+        let sum = zip(weights, digits[3..<12]).reduce(0) { $0 + $1.0 * $1.1 }
+        return s10Closing(sum) == digits[12]
+    }
+
+    /// Australia Post's article ids: GS1 mod 10 over every character before the last, in which a
+    /// letter counts as its ASCII code (A is 65). On a number without letters it is the GS1 check digit.
+    static func isValidAustraliaPostArticleId(_ value: String) -> Bool {
+        guard matches(value, pattern: "^[0-9A-Z]+[0-9]$") else { return false }
+        let codes = value.utf8.map { Int($0) }
+        let zero = Int(UInt8(ascii: "0"))
+        let sum = codes.dropLast().reversed().enumerated().reduce(0) { total, item in
+            let counted = item.element < zero + 10 ? item.element - zero : item.element
+            return total + counted * (item.offset % 2 == 0 ? 3 : 1)
+        }
+        return (10 - sum % 10) % 10 == codes[codes.count - 1] - zero
+    }
+
+    /// Poczta Polska's PX and ten digits: the first nine weigh 8, 6, 4, 2, 3, 5, 9, 7, 8, S10's weights
+    /// starting over at the ninth, and the tenth closes their sum as S10's check digit does.
+    static func isValidPocztaPolskaPxNumber(_ value: String) -> Bool {
+        guard matches(value, pattern: "^PX[0-9]{10}$") else { return false }
+        let digits = value.dropFirst(2).compactMap(\.wholeNumberValue)
+        let weights = [8, 6, 4, 2, 3, 5, 9, 7, 8]
+        let sum = zip(weights, digits).reduce(0) { $0 + $1.0 * $1.1 }
+        return s10Closing(sum) == digits[9]
     }
 
     static func supportsSwissPostHandoff(_ raw: String) -> Bool {

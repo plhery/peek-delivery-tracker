@@ -1,10 +1,12 @@
 import { useEffect, useRef, type MouseEvent } from 'react';
 import { CarrierTruck } from '../../components/CarrierMark';
 import { Icon } from '../../components/Icon';
+import { PeekAiPhrase, useParcelPeekAi } from '../../components/PeekAi';
 import { localizedDeliveryEstimate, useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, displayedCarrierId } from '../../lib/carriers';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
+import { peekAiCardWords } from '../../lib/peekAi';
 import { maskedNumber } from '../links';
 import { shortNumber } from '../lookup/DeviceParcels';
 import { watchDeviceParcels } from '../lookup/deviceList';
@@ -21,6 +23,8 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
   const stale = frozenOnTheWay(recent);
   const estimate = stale ? null : parcelDeliveryEstimate(parcel);
   const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const peekAi = useParcelPeekAi(parcel);
+  const peekAiWords = peekAi && !stale ? peekAiCardWords(peekAi, estimate, { t, languageTag, use24HourTime }) : null;
   const number = parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel');
   function open(event: MouseEvent) {
@@ -35,7 +39,8 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
     <CarrierTruck carrier={carrier} />
     <span>
       <strong>{recent.name ?? number}</strong>
-      <small>{[parcelStatusLabel(parcel, t, locale), stale ? t('link.frozen.label') : when].filter(Boolean).join(' · ')}</small>
+      <small>{[parcelStatusLabel(parcel, t, locale), stale ? t('link.frozen.label') : when].filter(Boolean).join(' · ')}
+        {peekAiWords && <>{' · '}<PeekAiPhrase words={peekAiWords} /></>}</small>
     </span>
     <Icon name="chevron" />
   </a>;

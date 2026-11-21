@@ -69508,6 +69508,7 @@ export interface ApiPeekAi {
   "time"?: string;
   "carrier_day"?: string;
   "out_since"?: string;
+  "ends_at"?: string;
   "last"?: ApiPeekAiStep;
   "days"?: Array<ApiPeekAiDay>;
   "hours"?: Array<ApiPeekAiHour>;

@@ -6,6 +6,7 @@ import { pipMood } from '../../components/map/Pip';
 import { defaultMode } from '../../components/map/route';
 import { WorldMap } from '../../components/map/WorldMap';
 import { CardRoute, useParcelRoute } from '../../components/ParcelMap';
+import { PeekAiPhrase, useParcelPeekAi } from '../../components/PeekAi';
 import { ProgressTrack } from '../../components/ProgressTrack';
 import { localizedDeliveryEstimate, useI18n, type Locale } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
@@ -16,6 +17,7 @@ import { useMarkNewUpdates } from '../../lib/newUpdate';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { trackAction } from '../../lib/analytics';
 import { parcelMatchesSearch } from '../../lib/parcelView';
+import { peekAiCardWords } from '../../lib/peekAi';
 import type { Translate } from '../../lib/messages';
 import { pickupPoint } from '../../lib/pickupPoint';
 import { isFinal } from '../../lib/stages';
@@ -83,9 +85,14 @@ function DeviceParcel({ recent, arrived = false, archived = false }: { recent: R
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
   const news = useNewUpdate(recent);
+  // Peek AI's own estimate, as on the account's cards: under the carrier's date, or in its place.
+  const peekAi = useParcelPeekAi(parcel);
+  const peekAiWords = peekAi && !stale ? peekAiCardWords(peekAi, estimate, { t, languageTag, use24HourTime }) : null;
   return <a className={`door-parcel${placed ? ' door-parcel--route' : ''}`} style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>
     {placed && <CardRoute route={route} />}
-    <span className="door-parcel__top">{news.said}<CarrierMark carrier={carrier} />{when && <span className="door-parcel__when">{when}</span>}</span>
+    <span className="door-parcel__top">{news.said}<CarrierMark carrier={carrier} />{peekAiWords
+      ? <span className="door-parcel__dates">{when && <span className="door-parcel__when">{when}</span>}<PeekAiPhrase words={peekAiWords} /></span>
+      : when && <span className="door-parcel__when">{when}</span>}</span>
     <strong>{title}</strong>
     <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}{stale && ` · ${t('link.frozen.label')}`}{archived && ` · ${t('app.archived')}`}</span>
   </a>;
@@ -123,6 +130,9 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
   const detail = parcelDetail(parcel, wording) ?? (stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint)?.name : null);
   const mood = pipMood(stage ?? undefined);
   const news = useNewUpdate(recent);
+  const peekAi = useParcelPeekAi(parcel);
+  const estimate = parcelDeliveryEstimate(parcel, now);
+  const peekAiWords = peekAi && !frozenOnTheWay(recent) ? peekAiCardWords(peekAi, estimate, { t, languageTag, use24HourTime, now }) : null;
   return <a className="door-nextup" style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>
     <span className="door-nextup__map" aria-hidden="true">
       {route && <WorldMap route={route} mode={defaultMode(route, stage ?? undefined)} time={time} look="tint" labels="ends" context={false}
@@ -138,6 +148,7 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
       <span className="door-nextup__name">{title}</span>
       <strong>{news.dot}{parcelHeadline(parcel, t)}</strong>
       {detail && <span className="door-nextup__detail">{detail}</span>}
+      {peekAiWords && <PeekAiPhrase words={peekAiWords} className="door-nextup__ai" />}
     </span>
     {/* The headline already says how far the parcel is. */}
     <div className="door-nextup__progress" aria-hidden="true"><ProgressTrack stage={stage} /></div>

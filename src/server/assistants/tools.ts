@@ -64,8 +64,11 @@ function displayReference(parcel: { carrier: string; trackingNumber: string }): 
     : parcel.trackingNumber;
 }
 
-/** A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode. */
-function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParcel {
+/**
+ * A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode, and
+ * without Peek AI's estimate when the account switched it off (`showPeekAi`).
+ */
+function parcelSummary(parcel: ParcelWithEvents, showPeekAi: boolean, now = Date.now()): ApiTokenParcel {
   const latest = currentEvent(parcel.events, parcel.returnHeld);
   const delivered = latest?.stage === 'delivered' ? latest : null;
   return {
@@ -81,7 +84,7 @@ function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParc
     ...(parcel.servedElsewhere ? { carrierWarning: ENGLISH['detail.pickedCarrierSilent']!
       .replace('{{picked}}', carrierInfo(parcel.carrier).name).replace('{{carrier}}', carrierInfo(parcel.servedElsewhere).name) } : {}),
     expectedDelivery: parcel.expectedDelivery ?? null,
-    ...(parcel.peekAi ? { peekAi: tokenPeekAi(parcel.peekAi) } : {}),
+    ...(parcel.peekAi && showPeekAi ? { peekAi: tokenPeekAi(parcel.peekAi) } : {}),
     deliveredAt: delivered ? delivered.day ?? delivered.occurredAt : null,
     lastUpdate: latest ? { time: latest.day ?? latest.occurredAt, description: latest.description, location: latest.location ?? null } : null,
     pickupPoint: parcel.pickupPoint ?? null,
@@ -175,11 +178,14 @@ export async function listParcels(
   // "Today" is the user's: the timezone given, else the one the account chose for its notifications.
   const timeZone = status === 'today' || status === 'week' ? query.timeZone ?? await service.accountTimeZone(userId) : null;
   const days = daysAhead(now, timeZone && knownTimeZone(timeZone) ? timeZone : DEFAULT_TIME_ZONE);
-  const parcels = (await service.listAccountPackages(userId)).map(asParcel)
+  const [stored, showPeekAi] = await Promise.all([service.listAccountPackages(userId), service.accountShowsPeekAi(userId)]);
+  const parcels = stored.map(asParcel)
     .filter((parcel) => hasStatus(parcel, status, now, days))
     .filter((parcel) => !words || parcelMatchesSearch(parcel, words) || (parcel.senderName ?? '').toLocaleLowerCase().includes(words))
     .sort(ORDERS[sort]);
-  return { total: parcels.length, status, sort, parcels: parcels.slice(0, query.limit ?? 20).map((parcel) => parcelSummary(parcel, now)) };
+  return {
+    total: parcels.length, status, sort, parcels: parcels.slice(0, query.limit ?? 20).map((parcel) => parcelSummary(parcel, showPeekAi, now)),
+  };
 }
 
 const ENGLISH: Record<string, string> = en;
@@ -710,8 +716,9 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   server.registerTool('list_parcels', {
     title: 'List parcels',
     description: 'The user\'s parcels in Peek, with each one\'s status, expected delivery day (expectedDelivery), delivery '
-      + 'time once delivered (deliveredAt) and latest scan, and, when Peek has a strong hint, Peek AI\'s own estimate of when '
-      + 'it will come (peekAi): Peek\'s, not the carrier\'s, so say it as Peek AI\'s. Choose the status, sort and search that answer the question, '
+      + 'time once delivered (deliveredAt) and latest scan, and, when Peek has a strong hint and the account shows it, '
+      + 'Peek AI\'s own estimate of when it will come (peekAi): Peek\'s, not the carrier\'s, so say it as Peek AI\'s. '
+      + 'Choose the status, sort and search that answer the question, '
       + 'and a small limit when one parcel will do; total says how many match. For example: the latest delivered parcel '
       + 'is status "delivered" with limit 1; what arrives this week is status "week"; the parcel from IKEA is search "IKEA".',
     inputSchema: z.object({
@@ -742,7 +749,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('get_parcel'),
   }, allowed('get_parcel', async ({ parcel: named }: { parcel: string }) => {
-    const parcel = await ownedParcel(service, caller.userId, named);
+    const [parcel, showPeekAi] = await Promise.all([ownedParcel(service, caller.userId, named), service.accountShowsPeekAi(caller.userId)]);
     if (!parcel) return refusal('No such parcel in this Peek account.');
     // Each scan once, as the journal lists it: another carrier's copy of a scan, its repeat or its notice is that scan,
     // and its words come as `also` when they are other words.
@@ -758,7 +765,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         ...also.length ? { also } : {},
       };
     });
-    return answer({ ...parcelSummary(parcel), history });
+    return answer({ ...parcelSummary(parcel, showPeekAi), history });
   }));
 
   server.registerTool('find_carriers', {

@@ -53,6 +53,8 @@ export interface PeekAiBlob extends ModelContext {
 
 /** A call right at most this often, for Peek's word: a measured "10 in 10" comes from too few parcels. */
 const MAX_SURE = 0.95;
+/** A call right less often than this is not said: a model whose measure slipped below 8 in 10 stays quiet. */
+const MIN_SURE = 0.8;
 /** Hours since a check after which the model's calls wait for the next one: the scans may be behind the carrier's. */
 const FRESH_HOURS = 36;
 const DEFAULT_DELIVERY_DAYS: readonly number[] = [0, 1, 2, 3, 4, 5];
@@ -103,6 +105,9 @@ export function keepPeekAiModel(source: PeekAiModelSource, every = 3_600_000): (
 }
 
 const numbers = (value: unknown) => isRecord(value) && Object.values(value).every((item) => typeof item === 'number');
+const CLAIMS = ['tau', 'byDayWidth', 'weekTau', 'soonerLead', 'soonerTau', 'recentCheckHours'] as const;
+const SURE = ['missed_date', 'sooner', 'today_or_tomorrow', 'by_day', 'this_week', 'by_end_of_next_week'] as const;
+const has = (value: Record<string, unknown>, keys: readonly string[]) => keys.every((key) => typeof value[key] === 'number');
 
 /** The stored document as a model, or null when it lacks what Peek AI reads. */
 export function peekAiBlobFrom(value: unknown): PeekAiBlob | null {
@@ -115,7 +120,8 @@ export function peekAiBlobFrom(value: unknown): PeekAiBlob | null {
     && typeof encoding.k === 'number' && isRecord(value.deliveryDays) && isRecord(value.homeCountries)
     && numbers(value.offsets) && typeof value.defaultOffset === 'number' && isRecord(value.notToday)
     && isRecord(value.notToday.default) && isRecord(value.byTime) && isRecord(value.lateOut) && isRecord(value.lateOut.default)
-    && Array.isArray(value.ofdUnreliable) && claims !== null && numbers(claims) && numbers(value.sure);
+    && has(value.lateOut.default, ['from', 'sure']) && Array.isArray(value.ofdUnreliable) && claims !== null && numbers(claims)
+    && has(claims, CLAIMS) && numbers(value.sure) && has(value.sure as Record<string, unknown>, SURE);
   return ok ? value as unknown as PeekAiBlob : null;
 }
 
@@ -356,26 +362,57 @@ export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(),
   if (stage && NOT_DUE.has(stage)) return null;
   const c = modelCarrier(row);
   const placed = placedScans(row, c);
-  const nowS = now.getTime() / 1000;
+  const zone = parcelClock(row, placed.scans, blob);
+  const local = DateTime.fromJSDate(now, { zone });
+  const ai = call(row, c, placed, local, blob);
+  if (!ai || !(ai.sure >= MIN_SURE)) return null;
+  const ends = endsAt(ai, local);
+  return ends ? { ...ai, ends_at: ends } : ai;
+}
+
+/** When a call stops holding, with the parcel's offset: so the apps drop it then, whatever their own clock. */
+function endsAt(ai: PeekAi, local: DateTime): string | null {
+  const day = (iso: string | undefined) => iso ? DateTime.fromISO(iso, { zone: local.zone }) : null;
+  const [hour, minute] = (ai.time ?? '').split(':').map(Number);
+  const end = ai.says === 'not_today' ? local.startOf('day').plus({ days: 1 })
+    : ai.says === 'by_time' ? (ai.time ? local.set({ hour, minute, second: 0, millisecond: 0 }) : null)
+    : ai.says === 'sooner' ? day(ai.carrier_day)
+    : day(ai.day)?.plus({ days: 1 }) ?? null;
+  return end?.isValid ? end.toISO({ suppressMilliseconds: true }) : null;
+}
+
+/** When the hour or slot the carrier names ends, or null when it names only a day. */
+function slotEnd(value: unknown, zone: Zone): DateTime | null {
+  if (typeof value !== 'string' || !namesHour(value)) return null;
+  const wall = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(value.trim());
+  const end = wall ? DateTime.fromISO(`${wall[1]}T${wall[3] ?? wall[2]}`, { zone }) : DateTime.fromISO(value.trim(), { setZone: true });
+  return end.isValid ? end : null;
+}
+
+/** What the hints say at `local`, the moment on the parcel's clock, before how often they were right is checked. */
+function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob: PeekAiBlob): PeekAi | null {
+  const nowS = local.toSeconds();
   const past = placed.scans.filter((scan) => scan.ts <= nowS);
   const newest = past.at(-1);
   if (!newest || !past.some((scan) => PHYSICAL_STAGES.has(scan.stage)) || ARRIVAL_STAGES.has(newest.stage)
     || past.some((scan) => scan.stage === 'returned')) return null;
-  const zone = parcelClock(row, placed.scans, blob);
-  const local = DateTime.fromJSDate(now, { zone });
+  const zone = local.zone;
   const today = ordinal(local);
   const days = blob.deliveryDays[c]?.length ? blob.deliveryDays[c]! : DEFAULT_DELIVERY_DAYS;
   const estimate = /^\d{4}-\d{2}-\d{2}/.exec(typeof row.expected_delivery === 'string' ? row.expected_delivery.trim() : '')?.[0];
   const carrierDay = estimate ? dayOf(estimate) : null;
   const checked = Date.parse(String(row.last_synced_at));
-  const checkedHours = Number.isFinite(checked) ? (now.getTime() - checked) / 3_600_000 : Infinity;
+  const checkedHours = Number.isFinite(checked) ? (local.toMillis() - checked) / 3_600_000 : Infinity;
   const localIso = (scan: PlacedScan) => DateTime.fromSeconds(scan.ts, { zone }).toISO({ suppressMilliseconds: true })!;
   const hourNow = local.hour + local.minute / 60;
+  // Not today never contradicts an hour or slot the carrier names for today before it has passed.
+  const slot = slotEnd(row.expected_delivery, zone);
+  const slotOpen = slot !== null && slot > local && ordinal(slot.setZone(zone)) === today;
 
   // Out for delivery today: by the carrier's usual hour, or not today once it is late.
   const out = [...past].reverse().find((scan) => scan.stage === 'out_for_delivery');
   if (out && ordinal(DateTime.fromSeconds(out.ts, { zone })) === today) {
-    if (blob.ofdUnreliable.includes(c)) return null;
+    if (blob.ofdUnreliable.includes(c) || slotOpen) return null;
     const late = blob.lateOut[c] ?? blob.lateOut.default!;
     if (hourNow >= late.from && (newest.stage === 'out_for_delivery' || newest.stage === 'exception')) {
       return { says: 'not_today', why: 'late_out', sure: capped(late.sure), out_since: localIso(out) };
@@ -393,7 +430,7 @@ export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(),
   // The carrier says today and nothing has gone out for delivery by the afternoon.
   if (carrierDay === today) {
     const rule = blob.notToday[c] ?? blob.notToday.default!;
-    if (rule.from === null || local.hour < rule.from || checkedHours > blob.claims.recentCheckHours) return null;
+    if (rule.from === null || local.hour < rule.from || checkedHours > blob.claims.recentCheckHours || slotOpen) return null;
     const hours = Object.keys(rule.sure ?? {}).map(Number).filter((hour) => hour <= local.hour);
     const sure = hours.length ? rule.sure![String(Math.max(...hours))]! : null;
     return sure === null ? null : { says: 'not_today', why: 'no_out_for_delivery', carrier_day: isoDay(today), sure: capped(sure) };
@@ -420,11 +457,14 @@ export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(),
   const range = shortestRange(F, tau);
 
   if (carrierDay !== null) {
+    // Sooner than a window of days the carrier gives would only repeat its first day.
+    const from = /^\d{4}-\d{2}-\d{2}/.exec(text(isRecord(row.carrier_data) ? row.carrier_data.expected_delivery_from : null) ?? '')?.[0];
+    if (from && dayOf(from) < carrierDay) return null;
     const before = deliveryDaysBetween(days, snapDay, carrierDay);
     if (carrierDay - snapDay < soonerLead || before < 1 || F[Math.min(before - 1, H)]! < soonerTau) return null;
-    const from = range && range.a >= 1 ? endDay(days, snapDay, range.a) : null;
+    const first = range && range.a >= 1 ? endDay(days, snapDay, range.a) : null;
     return { says: 'sooner', why: 'ahead', carrier_day: isoDay(carrierDay), sure: capped(blob.sure.sooner!), days: strip,
-      ...from !== null && from > today && from < carrierDay ? { day: isoDay(from) } : {} };
+      ...first !== null && first > today && first < carrierDay ? { day: isoDay(first) } : {} };
   }
 
   const dest = text(isRecord(row.carrier_data) ? row.carrier_data.destination_country : null);

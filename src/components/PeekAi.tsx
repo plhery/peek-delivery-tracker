@@ -6,7 +6,8 @@ import { carrierBrand } from '../lib/carrierBrand';
 import { carrierInfo, displayedCarrierId } from '../lib/carriers';
 import { parcelDeliveryEstimate } from '../lib/parcelStatus';
 import {
-  parcelPeekAi, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiWhy, useShowPeekAi, useShowPeekAiChoice,
+  parcelPeekAi, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiStripSpoken, peekAiWhy, useShowPeekAi,
+  useShowPeekAiChoice,
   type PeekAiWording,
 } from '../lib/peekAi';
 import type { ParcelWithEvents, PeekAi } from '../types';
@@ -83,14 +84,16 @@ function PeekAiStrip({ ai, carrier, wording }: { ai: PeekAi; carrier: string; wo
   const { t } = wording;
   const strip = peekAiStrip(ai, wording);
   if (!strip) return null;
+  // Its tints and ring say which days are likely and which is the carrier's: a screen reader hears them in words.
   return <div className="peek-ai-strip">
-    <div className="peek-ai-strip__cells">
+    <p className="sr-only">{peekAiStripSpoken(strip, carrier, wording)}</p>
+    <div className="peek-ai-strip__cells" aria-hidden="true">
       {strip.cells.map((cell) => <span key={cell.key} data-likely={cell.likely || undefined} data-maybe={cell.maybe || undefined}
         data-carrier={cell.carrier || undefined} data-past={cell.past || undefined}>
         {cell.over && <span>{cell.over}</span>}<b>{cell.main}</b>
       </span>)}
     </div>
-    <div className="peek-ai-strip__key">
+    <div className="peek-ai-strip__key" aria-hidden="true">
       <span><i data-likely="" />{t(strip.kind === 'hours' ? 'peekAi.sheet.hours' : 'peekAi.sheet.days')}</span>
       {strip.cells.some((cell) => cell.carrier) && <span><i data-carrier="" />{t('peekAi.sheet.carrierDate', { carrier })}</span>}
     </div>

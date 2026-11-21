@@ -64,7 +64,9 @@ afterEach(() => {
 describe('the carrier says today', () => {
   it('says not today once nothing has gone out for delivery in the afternoon, a check having just looked', () => {
     const today = row({ expected_delivery: '2026-11-20' });
-    expect(ai(today, '2026-11-20T14:30:00Z')).toEqual({ says: 'not_today', why: 'no_out_for_delivery', carrier_day: '2026-11-20', sure: 0.875 });
+    expect(ai(today, '2026-11-20T14:30:00Z')).toEqual({
+      says: 'not_today', why: 'no_out_for_delivery', carrier_day: '2026-11-20', sure: 0.875, ends_at: '2026-11-21T00:00:00+01:00',
+    });
     // Late in the evening: right every time it said so, shown as at most 95 in 100.
     expect(ai(row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T19:00:00Z' }), '2026-11-20T19:30:00Z')?.sure).toBe(0.95);
     // Too early, or no recent check.
@@ -72,6 +74,14 @@ describe('the carrier says today', () => {
     expect(ai(row({ expected_delivery: '2026-11-20', last_synced_at: '2026-11-20T10:00:00Z' }), '2026-11-20T14:30:00Z')).toBeNull();
     // A carrier for which it never held.
     expect(ai(row({ carrier: 'gofo', expected_delivery: '2026-11-20' }), '2026-11-20T14:30:00Z')).toBeNull();
+  });
+
+  it('says nothing while a slot the carrier names for today is still open', () => {
+    const slot = (expected_delivery: string) => ai(row({ expected_delivery, last_synced_at: '2026-11-20T18:00:00Z' }), '2026-11-20T18:30:00Z');
+    expect(slot('2026-11-20 19:00-21:00')).toBeNull();
+    expect(slot('2026-11-20T21:00:00+01:00')).toBeNull();
+    // Once it has passed, the hint holds again.
+    expect(slot('2026-11-20 16:00-18:00')).toMatchObject({ says: 'not_today', why: 'no_out_for_delivery' });
   });
 
   it("counts the hours on the destination's clock when no scan or carrier names a zone", () => {
@@ -87,7 +97,9 @@ describe('out for delivery', () => {
 
   it("says by the hour the carrier's deliveries mostly come by, with the share of each hour", () => {
     const said = ai(out(), '2026-11-20T09:00:00Z')!;
-    expect(said).toMatchObject({ says: 'by_time', why: 'out_for_delivery', time: '15:30', sure: 0.946, out_since: '2026-11-20T08:10:00+01:00' });
+    expect(said).toMatchObject({
+      says: 'by_time', why: 'out_for_delivery', time: '15:30', sure: 0.946, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-20T15:30:00+01:00',
+    });
     expect(said.hours).toHaveLength(13);
     expect(said.hours![0]).toEqual({ time: '08:00', share: 0.1 });
     expect(said.hours!.at(-1)).toEqual({ time: '20:00', share: 0 });
@@ -102,7 +114,12 @@ describe('out for delivery', () => {
   });
 
   it('says not today when still out late in the evening', () => {
-    expect(ai(out(), '2026-11-20T19:15:00Z')).toEqual({ says: 'not_today', why: 'late_out', sure: 0.885, out_since: '2026-11-20T08:10:00+01:00' });
+    expect(ai(out(), '2026-11-20T19:15:00Z')).toEqual({
+      says: 'not_today', why: 'late_out', sure: 0.885, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-21T00:00:00+01:00',
+    });
+    // Not inside the carrier's own slot, and again once it has passed.
+    expect(ai(out({ expected_delivery: '2026-11-20 19:00-21:00' }), '2026-11-20T19:15:00Z')).toBeNull();
+    expect(ai(out({ expected_delivery: '2026-11-20 17:00-19:00' }), '2026-11-20T19:15:00Z')).toMatchObject({ why: 'late_out' });
   });
 });
 
@@ -111,7 +128,7 @@ describe("the carrier's day has passed", () => {
 
   it('says today or tomorrow when a scan came since, by the next day the carrier delivers on', () => {
     expect(ai(missed(), '2026-11-20T14:30:00Z')).toEqual({
-      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89,
+      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89, ends_at: '2026-11-22T00:00:00+01:00',
     });
     // DPD does not deliver on Saturdays.
     expect(ai(missed({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23' });
@@ -129,6 +146,7 @@ describe('the model', () => {
     expect(said).toEqual({
       says: 'today_or_tomorrow', why: 'no_date', day: '2026-11-21', sure: 0.89, last: { kind: 'scan', at: '2026-11-19T19:00:00+01:00' },
       days: [{ day: '2026-11-20', p: 0.1 }, { day: '2026-11-21', p: 0.75 }, { day: '2026-11-23', p: 0.1 }, { day: '2026-11-24', p: 0.04 }],
+      ends_at: '2026-11-22T00:00:00+01:00',
     });
     expect(ai(row({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23', sure: 0.85 });
   });
@@ -145,11 +163,14 @@ describe('the model', () => {
   it("says maybe sooner when parcels like it usually come well before the carrier's day", () => {
     const later = (expected_delivery: string, F: number[]) => ai(row({ expected_delivery }), '2026-11-20T14:30:00Z', blob(F));
     expect(later('2026-11-24', [0.02, 0.85, 0.95, 0.99])).toMatchObject({
-      says: 'sooner', why: 'ahead', carrier_day: '2026-11-24', day: '2026-11-21', sure: 0.88,
+      says: 'sooner', why: 'ahead', carrier_day: '2026-11-24', day: '2026-11-21', sure: 0.88, ends_at: '2026-11-24T00:00:00+01:00',
     });
     // Not two days ahead, or not likely enough before it.
     expect(later('2026-11-21', [0.02, 0.85, 0.95, 0.99])).toBeNull();
     expect(later('2026-11-24', [0.02, 0.3, 0.6, 0.99])).toBeNull();
+    // The carrier gives a window of days: sooner would only repeat its first.
+    const window = row({ expected_delivery: '2026-11-24', carrier_data: { timezone: 'Europe/Zurich', expected_delivery_from: '2026-11-21' } });
+    expect(ai(window, '2026-11-20T14:30:00Z', blob([0.02, 0.85, 0.95, 0.99]))).toBeNull();
   });
 
   it("places the scans to tell how far the parcel has come, on the clock of the destination it reached", () => {
@@ -264,6 +285,19 @@ describe('the stored model', () => {
     const noModel: Record<string, unknown> = { ...blob() };
     delete noModel.model;
     expect(peekAiBlobFrom(noModel)).toBeNull();
+    // A part missing would serve "right NaN times in 10", or say sooner of every parcel.
+    const sure: Record<string, number> = { ...blob().sure };
+    delete sure.today_or_tomorrow;
+    expect(peekAiBlobFrom({ ...blob(), sure })).toBeNull();
+    const claims: Record<string, number> = { ...blob().claims };
+    delete claims.soonerTau;
+    expect(peekAiBlobFrom({ ...blob(), claims })).toBeNull();
+  });
+
+  it('says nothing a model measured right less than 8 times in 10', () => {
+    const weak = blob();
+    weak.sure.today_or_tomorrow = 0.6;
+    expect(ai(row(), '2026-11-20T14:30:00Z', weak)).toBeNull();
   });
 });
 

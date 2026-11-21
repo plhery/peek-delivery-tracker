@@ -807,17 +807,20 @@ and nothing typed is sent.
   count, map or drawing. A wrapped gift's link shows neither the line nor the steps.
 - **Peek AI**: when Peek has a strong hint of when a parcel will come, its row is served with
   `peek_ai` (`src/server/peekAi.ts`), Peek's own estimate beside the carrier's: not today, by
-  an hour, a day, today or tomorrow, this week, by the end of next week or maybe sooner, with
-  why and how often such a call came true. Each kind of call was right at least 8 times in 10
-  on the parcels Peek has followed; below that, or once the carrier has planned the delivery
-  among its steps, it says nothing. The model and its tables are trained in private on
-  production data and kept in `peek_ai_models`, which only the service role reads; the server
-  loads the newest at start and every hour, and with none loaded says nothing. A wrapped
-  gift's link shows none, and an assistant's `list_parcels` gives it as `peekAi`. Cards show
-  one line under the carrier's date, and the parcel's page a short card that opens what Peek
-  AI expects, why and how sure; both drop it once its hour or day has passed, even on a
-  screen left open. Settings can switch it off: the device keeps the choice, and
-  an account's follows it to its other devices (`show_peek_ai`).
+  a time, by a day, today or tomorrow, this week, by the end of next week or maybe sooner,
+  with why and how often such a call came true. Each kind of call was right at least 8 times
+  in 10 on the parcels Peek has followed; below that, once the carrier has planned the
+  delivery among its steps, while an hour or slot it names for today is still to come, or
+  against a window of days it gives, it says nothing. The model and its tables are trained in
+  private on production data and kept in `peek_ai_models`, which only the service role reads;
+  the server loads the newest at start and every hour, and with none loaded says nothing. A
+  wrapped gift's link shows none, and an assistant's `list_parcels` and `get_parcel` give it
+  as `peekAi` unless the account switched it off. Cards show one line under the carrier's
+  date or in its place (beside the status on Next up), guests' lists too, and the parcel's
+  page a short card that opens what Peek AI expects, why and how sure. Each estimate ends at
+  `ends_at`, a moment on the parcel's clock, and the apps drop it then, even on a screen left
+  open and whatever the device's zone. Settings can switch it off: the device keeps the
+  choice, and an account's follows it to its other devices (`show_peek_ai`).
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

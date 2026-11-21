@@ -73580,6 +73580,11 @@
             "format": "date-time",
             "description": "When the parcel went out for delivery, on the parcel's clock."
           },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the estimate stops holding, as a moment with the parcel's offset: the hour by_time names, the end of the day not_today speaks of, the start of the carrier's day for sooner, the end of `day` for the others. The apps drop the estimate then, whatever the device's clock."
+          },
           "last": {
             "$ref": "#/components/schemas/PeekAiStep"
           },

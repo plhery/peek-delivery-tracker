@@ -1146,6 +1146,16 @@ describe('delivery emails', () => {
     expect(new Set(request.mock.calls.map(([path]) => path))).toEqual(new Set(['/rest/v1/rpc/patch_owned_notification_preferences']));
   });
 
+  it('reads Peek AI as shown until the account switches it off', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ show_peek_ai: false }]).mockResolvedValueOnce([{ show_peek_ai: true }])
+      .mockResolvedValueOnce([]);
+    await expect(client.accountShowsPeekAi('account')).resolves.toBe(false);
+    await expect(client.accountShowsPeekAi('account')).resolves.toBe(true);
+    await expect(client.accountShowsPeekAi('account')).resolves.toBe(true);
+    expect(new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams.get('user_id')).toBe('eq.account');
+  });
+
   it('reads no time zone for an account whose saves sent none', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     vi.spyOn(client, 'request').mockResolvedValueOnce([{ timezone: 'America/New_York', timezone_chosen: true }])

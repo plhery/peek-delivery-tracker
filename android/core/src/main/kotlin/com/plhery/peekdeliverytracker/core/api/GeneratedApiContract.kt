@@ -4213,6 +4213,7 @@ data class PeekAi(
     val time: String? = null,
     @SerialName("carrier_day") val carrierDay: String? = null,
     @SerialName("out_since") val outSince: String? = null,
+    @SerialName("ends_at") val endsAt: String? = null,
     val last: PeekAiStep? = null,
     val days: List<PeekAiDay>? = null,
     val hours: List<PeekAiHour>? = null,

@@ -4208,6 +4208,7 @@ struct PeekAi: Codable, Equatable, Hashable, Sendable {
     var time: String? = nil
     var carrierDay: String? = nil
     var outSince: String? = nil
+    var endsAt: String? = nil
     var last: PeekAiStep? = nil
     var days: [PeekAiDay]? = nil
     var hours: [PeekAiHour]? = nil

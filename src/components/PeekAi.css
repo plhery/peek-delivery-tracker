@@ -1,13 +1,20 @@
 /* Peek AI: its name in a pill a shade darker than what it sits on, in that surface's own ink. */
-.peek-ai-phrase { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+/* The words wrap under the name where a narrow card has no room for both; the name never breaks. */
+.peek-ai-phrase { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 1px 4px; min-width: 0; max-width: 100%; }
 .peek-ai-sig { display: inline-flex; align-items: center; flex: none; gap: 3px; height: 15px; padding: 0 6px 0 4px; border-radius: 999px;
   background: color-mix(in srgb, currentColor 14%, transparent); font-size: .92em; font-weight: 650; letter-spacing: .1px; line-height: 1; white-space: nowrap; }
 .peek-ai-sparkle { display: block; flex: none; width: 11px; height: 11px; }
 .peek-ai-phrase__words { font-weight: 400; }
 
 /* On a card: under the carrier's date, or in its place. */
-.parcel-card__top > .parcel-card__dates { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex: 0 1 auto; max-width: 62%;
-  font-size: 11px; line-height: 1.4; color: var(--tone); text-align: right; }
+.parcel-card__top > .parcel-card__dates { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex: 0 1 auto; min-width: 0;
+  max-width: 62%; font-size: 11px; line-height: 1.4; color: var(--tone); text-align: right; }
+.parcel-card__dates .peek-ai-phrase { justify-content: flex-end; }
+/* On a guest's list of the parcels this browser follows. */
+.door-parcel__top > .door-parcel__dates { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; min-width: 0; max-width: 62%;
+  color: var(--tone); font-size: 11px; line-height: 1.4; text-align: end; }
+.door-parcel__dates .peek-ai-phrase { justify-content: flex-end; }
+.door-nextup__text > .door-nextup__ai { margin-top: 4px; color: var(--tone); font-size: 13px; line-height: 1.35; }
 .parcel-card__dates > .parcel-card__eta { font-size: 11px; }
 
 /* On the parcel's page: a short card under the parcel's. */

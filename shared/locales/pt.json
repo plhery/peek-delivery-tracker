@@ -1529,7 +1529,7 @@
   "peekAi.last.depot": "Chegou ao centro de distribuição {{ago}}.",
   "peekAi.last.customs": "Chegou à alfândega {{ago}}.",
   "peekAi.last.country": "Chegou ao país de destino {{ago}}.",
-  "peekAi.last.scan": "Última atualização: {{ago}}.",
+  "peekAi.last.scan": "Último registo: {{ago}}.",
   "peekAi.carrier.saysToday": "{{carrier}} diz hoje",
   "peekAi.carrier.saysDate": "{{carrier}} diz {{date}}",
   "peekAi.carrier.noDate": "{{carrier}} não indica data",

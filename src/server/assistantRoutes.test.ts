@@ -30,6 +30,12 @@ vi.mock('./parcelsFromText', async (importOriginal) => ({
   ...await importOriginal<typeof import('./parcelsFromText')>(),
   addParcelsFromText: vi.fn(),
 }));
+// What Peek AI says of every parcel, null for nothing: its own rules are tested in peekAi.test.ts.
+const peekAiSays = vi.hoisted(() => ({ value: null as Record<string, unknown> | null }));
+vi.mock('./peekAi', async (importOriginal) => ({
+  ...await importOriginal<typeof import('./peekAi')>(),
+  peekAiFor: () => peekAiSays.value,
+}));
 
 // Synthetic identifiers, addresses and numbers only: UPS's published sample number and made-up ids.
 const userId = '5b000000-0000-4000-a000-0000000000a1';
@@ -82,6 +88,8 @@ beforeEach(() => {
   vi.spyOn(service, 'assistantAddedNotify').mockResolvedValue(true);
   // The account's days are this machine's, as `dayFromToday` counts them.
   vi.spyOn(service, 'accountTimeZone').mockResolvedValue(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  vi.spyOn(service, 'accountShowsPeekAi').mockResolvedValue(true);
+  peekAiSays.value = null;
   vi.mocked(addParcelsFromText).mockReset();
   forgetAssistantEmails();
   owners.clear();
@@ -446,6 +454,18 @@ describe('the MCP endpoint', () => {
     const parcels = answer.result!.structuredContent!.parcels as Array<{ id: string }>;
     expect(parcels.find((parcel) => parcel.id === handedOver.id)).toMatchObject({ statusText: 'Latest scan', lastUpdate: { description: 'Latest scan' } });
     expect(parcels.find((parcel) => parcel.id === unscanned.id)).toMatchObject({ statusText: 'Label created', lastUpdate: null });
+  });
+
+  it("gives Peek AI's estimate as Peek AI's, and none to an account that switched it off", async () => {
+    peekAiSays.value = { says: 'by_day', why: 'no_date', day: '2026-11-24', sure: 0.85, days: [{ day: '2026-11-24', p: 0.6 }] };
+    const parcel = stored(7, 'in_transit');
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([parcel]);
+    vi.spyOn(service, 'getOwnedPackage').mockResolvedValue(parcel);
+    const listed = async () => (await call(connect(['parcels:read']), 'list_parcels')).result!.structuredContent!.parcels as Record<string, unknown>[];
+    expect((await listed())[0]!.peekAi).toEqual({ says: 'by_day', why: 'no_date', sure: 0.85, day: '2026-11-24' });
+    vi.mocked(service.accountShowsPeekAi).mockResolvedValue(false);
+    expect((await listed())[0]).not.toHaveProperty('peekAi');
+    expect((await call(connect(['parcels:read']), 'get_parcel', { parcel: parcel.id })).result!.structuredContent).not.toHaveProperty('peekAi');
   });
 
   it('answers "my latest delivered parcel", "what arrives this week" and "the one from a shop" in one call each', async () => {

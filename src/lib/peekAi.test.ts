@@ -6,7 +6,8 @@ import type { Locale } from './locale';
 import type { Messages, Translate } from './messages';
 import type { PeekAi } from '../types';
 import {
-  currentPeekAi, peekAiCardWords, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiWhy, type PeekAiWording,
+  currentPeekAi, peekAiCardWords, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiStripSpoken, peekAiWhy,
+  type PeekAiWording,
 } from './peekAi';
 
 // Tuesday 24 November 2026, 15:30 on this device's clock.
@@ -25,7 +26,7 @@ const NO_DATE: PeekAi = {
   says: 'by_day', why: 'no_date', day: '2026-11-26', sure: 0.81, last: { kind: 'depot', at: new Date(NOW - 2 * 86_400_000 - 3_600_000).toISOString() },
   days: [{ day: '2026-11-24', p: 0.05 }, { day: '2026-11-25', p: 0.34 }, { day: '2026-11-26', p: 0.41 }, { day: '2026-11-27', p: 0.12 }],
 };
-const SOONER: PeekAi = { says: 'sooner', why: 'ahead', day: '2026-11-25', carrier_day: '2026-11-27', sure: 0.71 };
+const SOONER: PeekAi = { says: 'sooner', why: 'ahead', day: '2026-11-25', carrier_day: '2026-11-27', sure: 0.88 };
 
 describe('Peek AI on this device’s clock', () => {
   it('says not today only on the carrier’s day, or the day the parcel went out', () => {
@@ -42,12 +43,22 @@ describe('Peek AI on this device’s clock', () => {
     expect(currentPeekAi(BY_TIME, new Date(2026, 10, 25, 9).getTime())).toBeNull();
   });
 
-  it('holds a day until it has passed, and sooner until the carrier’s own day', () => {
+  it('holds a day until it has passed, and sooner until the carrier’s own day comes', () => {
     expect(currentPeekAi(NO_DATE, new Date(2026, 10, 26, 23, 59).getTime())).toBe(NO_DATE);
     expect(currentPeekAi(NO_DATE, new Date(2026, 10, 27, 0, 1).getTime())).toBeNull();
-    expect(currentPeekAi(SOONER, new Date(2026, 10, 27, 12).getTime())).toBe(SOONER);
-    expect(currentPeekAi(SOONER, new Date(2026, 10, 28, 8).getTime())).toBeNull();
+    expect(currentPeekAi(SOONER, new Date(2026, 10, 26, 23, 59).getTime())).toBe(SOONER);
+    expect(currentPeekAi(SOONER, new Date(2026, 10, 27, 0, 1).getTime())).toBeNull();
     expect(currentPeekAi(undefined, NOW)).toBeNull();
+  });
+
+  it('ends at the moment the server gives, whatever this device’s zone', () => {
+    const zurich: PeekAi = { ...BY_TIME, ends_at: '2026-11-24T16:00:00+01:00' };
+    expect(currentPeekAi(zurich, Date.parse('2026-11-24T14:59:00Z'))).toBe(zurich);
+    expect(currentPeekAi(zurich, Date.parse('2026-11-24T15:00:00Z'))).toBeNull();
+    // A copy kept from yesterday: the moment holds, not this device's day.
+    const tonight: PeekAi = { ...NOT_TODAY, ends_at: '2026-11-25T00:00:00+01:00' };
+    expect(currentPeekAi(tonight, Date.parse('2026-11-24T22:59:00Z'))).toBe(tonight);
+    expect(currentPeekAi(tonight, Date.parse('2026-11-24T23:00:00Z'))).toBeNull();
   });
 });
 
@@ -76,6 +87,8 @@ describe('Peek AI’s words', () => {
     expect(peekAiCarrierWord(NOT_TODAY, 'DPD', 'Today', words())).toBe('DPD says today');
     expect(peekAiCarrierWord(SOONER, 'DPD', 'Fri 27 Nov', words())).toBe('DPD says Fri 27 Nov');
     expect(peekAiCarrierWord(NO_DATE, 'UPS', null, words())).toBe('UPS gives no date');
+    // Still out late: the carrier set out to deliver it today, though its date is hidden while out for delivery.
+    expect(peekAiCarrierWord({ says: 'not_today', why: 'late_out', sure: 0.88 }, 'DPD', null, words())).toBe('DPD says today');
     expect(peekAiWhy(NOT_TODAY, 'DPD', words())).toBe('DPD says today, but it hasn’t gone out for delivery.');
     expect(peekAiWhy(BY_TIME, 'FedEx', words())).toBe('Out for delivery since 08:12. FedEx names no hour.');
     expect(peekAiWhy(NO_DATE, 'UPS', words())).toBe('UPS gives no date. It reached the delivery depot 2 days ago.');
@@ -108,6 +121,8 @@ describe('the strip in Peek AI’s sheet', () => {
     expect(strip.cells.map(({ likely, maybe, carrier }) => [likely, maybe, carrier])).toEqual([
       [false, false, false], [true, false, false], [true, false, false], [false, true, true],
     ]);
+    // What its tints and ring show, in words.
+    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27');
   });
 
   it('shows the hours out for delivery two to a cell, the past ones faded', () => {
@@ -117,6 +132,7 @@ describe('the strip in Peek AI’s sheet', () => {
     expect(strip.cells.map(({ likely, maybe, past }) => [likely, maybe, past])).toEqual([
       [false, true, true], [true, false, true], [true, false, true], [true, false, false], [false, true, false],
     ]);
+    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Most likely hours: 14:00');
     expect(peekAiStrip(NOT_TODAY, words())).toBeNull();
   });
 });

@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { I18nProvider } from './i18n';
 import { MARK_NEW_UPDATES_STORAGE_KEY } from './lib/newUpdate';
+import { SHOW_PEEK_AI_STORAGE_KEY } from './lib/peekAi';
 import { getNotificationPreferences, inspectPushState, saveNotificationPreferences } from './lib/pushNotifications';
 import { createDemoRepo } from './store/demoRepo';
 import { ParcelsProvider } from './store/ParcelsContext';
@@ -109,11 +110,14 @@ describe('the delivery email in the deliveries', () => {
     expect(saveNotificationPreferences).not.toHaveBeenCalled();
   });
 
-  it('takes the account’s choice to mark new updates from its other devices without Settings opening', async () => {
-    vi.mocked(getNotificationPreferences).mockResolvedValue({ ...EMAIL_ON, enabledStages: [...EMAIL_ON.enabledStages], markNewUpdates: false });
+  it('takes the account’s choices to mark new updates and show Peek AI from its other devices without Settings opening', async () => {
+    vi.mocked(getNotificationPreferences).mockResolvedValue({
+      ...EMAIL_ON, enabledStages: [...EMAIL_ON.enabledStages], markNewUpdates: false, showPeekAi: false,
+    });
     render(<I18nProvider initialLocale="en"><ParcelsProvider repo={accountRepo().repo}><App apiAuth={session()} accountEmail="alex@example.com" /></ParcelsProvider></I18nProvider>);
     expect(await screen.findByText('Belgian chocolate 🍫')).toBeVisible();
     await waitFor(() => expect(localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBe('off'));
+    await waitFor(() => expect(localStorage.getItem(SHOW_PEEK_AI_STORAGE_KEY)).toBe('off'));
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 

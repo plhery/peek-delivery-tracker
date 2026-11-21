@@ -43,11 +43,14 @@ function addDays(day: string, days: number): string {
 }
 
 /**
- * Peek AI's estimate while it still holds on this device's clock: none once its day has passed, or the hour it named.
- * A page left open, or kept for a while without a connection, would otherwise go on saying it.
+ * Peek AI's estimate while it still holds: none from the moment the server gives (`ends_at`), whatever this device's
+ * zone, else once its day or hour has passed on this device's clock. A page left open, or kept for a while without a
+ * connection, would otherwise go on saying it.
  */
 export function currentPeekAi(ai: PeekAi | undefined, now = Date.now()): PeekAi | null {
   if (!ai) return null;
+  const ends = ai.ends_at ? Date.parse(ai.ends_at) : NaN;
+  if (Number.isFinite(ends)) return now < ends ? ai : null;
   const today = isoDay(new Date(now));
   if (ai.says === 'not_today') return (ai.carrier_day ?? dayOf(ai.out_since)) === today ? ai : null;
   if (ai.says === 'by_time') {
@@ -55,9 +58,9 @@ export function currentPeekAi(ai: PeekAi | undefined, now = Date.now()): PeekAi 
     const at = new Date(now);
     return `${pad(at.getHours())}:${pad(at.getMinutes())}` < ai.time ? ai : null;
   }
-  // Earlier than the carrier's date holds until that date; the other days, until their own.
-  const until = ai.says === 'sooner' ? ai.carrier_day : ai.day;
-  return !until || until >= today ? ai : null;
+  // Earlier than the carrier's date holds until that date comes; the other days, until their own has passed.
+  if (ai.says === 'sooner') return !ai.carrier_day || ai.carrier_day > today ? ai : null;
+  return !ai.day || ai.day >= today ? ai : null;
 }
 
 /** Stages after which a parcel is no longer on its way to the door, as the server has them (peekAi.ts). */
@@ -129,12 +132,15 @@ export function peekAiHeading(ai: PeekAi, wording: PeekAiWording): string {
   return claim.charAt(0).toLocaleUpperCase(wording.languageTag) + claim.slice(1);
 }
 
-/** What the carrier says, under Peek AI's heading in its sheet: "DPD says today", "UPS gives no date". */
+/**
+ * What the carrier says, under Peek AI's heading in its sheet: "DPD says today", "UPS gives no date". A parcel still out
+ * late is one the carrier set out to deliver today.
+ */
 export function peekAiCarrierWord(ai: PeekAi, carrier: string, estimate: string | null, wording: PeekAiWording): string {
   const { t } = wording;
   if (ai.why === 'missed_date') return t('peekAi.carrier.wasDue', { carrier });
   if (ai.why === 'out_for_delivery') return t('peekAi.carrier.noHour', { carrier });
-  if (ai.why === 'no_out_for_delivery') return t('peekAi.carrier.saysToday', { carrier });
+  if (ai.why === 'no_out_for_delivery' || ai.why === 'late_out') return t('peekAi.carrier.saysToday', { carrier });
   if (ai.why === 'ahead' && ai.carrier_day) return t('peekAi.carrier.saysDate', { carrier, date: calendar(ai.carrier_day, wording) });
   return estimate ? t('peekAi.carrier.saysDate', { carrier, date: estimate }) : t('peekAi.carrier.noDate', { carrier });
 }
@@ -193,6 +199,17 @@ export interface PeekAiCell {
   maybe: boolean;
   carrier: boolean;
   past: boolean;
+}
+
+/** The strip as a screen reader says it: "Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27". */
+export function peekAiStripSpoken(strip: { kind: 'days' | 'hours'; cells: PeekAiCell[] }, carrier: string, { t, languageTag }: PeekAiWording): string {
+  const named = (cell: PeekAiCell) => [cell.over, cell.main].filter(Boolean).join(' ');
+  const likely = strip.cells.filter((cell) => cell.likely && !cell.past).map(named);
+  const ringed = strip.cells.find((cell) => cell.carrier);
+  return [
+    likely.length ? `${t(strip.kind === 'hours' ? 'peekAi.sheet.hours' : 'peekAi.sheet.days')}: ${new Intl.ListFormat(languageTag, { style: 'short', type: 'unit' }).format(likely)}` : '',
+    ringed ? `${t('peekAi.sheet.carrierDate', { carrier })}: ${named(ringed)}` : '',
+  ].filter(Boolean).join('. ');
 }
 
 /** Days with their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */

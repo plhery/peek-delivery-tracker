@@ -1775,6 +1775,12 @@ export class SupabaseServiceClient extends SupabaseClient {
     return saved?.timezone_chosen !== false && typeof saved?.timezone === 'string' && saved.timezone ? saved.timezone : null;
   }
 
+  /** Whether the account shows Peek AI's estimates: on until switched off. */
+  async accountShowsPeekAi(userId: string): Promise<boolean> {
+    const params = query({ select: 'show_peek_ai', user_id: `eq.${userId}`, limit: '1' });
+    return rows(await this.request(`/rest/v1/notification_preferences?${params}`))[0]?.show_peek_ai !== false;
+  }
+
   /** An account's parcels as its apps read them, archived ones included. */
   async listAccountPackages(userId: string): Promise<JsonObject[]> {
     const params = query({ select: PACKAGE_SELECT, user_id: `eq.${userId}`, order: 'created_at.desc' });

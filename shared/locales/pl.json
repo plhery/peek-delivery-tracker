@@ -1520,7 +1520,7 @@
   "peekAi.claim.soonerTomorrow": "może wcześniej, już od jutra",
   "peekAi.claim.soonerFrom": "może wcześniej, od {{date}}",
   "peekAi.claim.sooner": "może wcześniej",
-  "peekAi.why.noOutForDelivery": "Przewoźnik {{carrier}} podaje dziś, ale przesyłka nie wyjechała jeszcze do doręczenia.",
+  "peekAi.why.noOutForDelivery": "Przewoźnik {{carrier}} podaje dzisiejszą datę, ale przesyłka nie jest jeszcze w doręczeniu.",
   "peekAi.why.outForDelivery": "W doręczeniu od {{time}}. Przewoźnik {{carrier}} nie podaje godziny.",
   "peekAi.why.lateOut": "O tej porze wciąż w doręczeniu. U przewoźnika {{carrier}} niewiele przesyłek dociera tak późno.",
   "peekAi.why.missedDate": "Przewoźnik {{carrier}} podawał wczorajszą datę, ale przesyłka znów jest w drodze.",
@@ -1530,8 +1530,8 @@
   "peekAi.last.customs": "Dotarła do urzędu celnego {{ago}}.",
   "peekAi.last.country": "Dotarła do kraju docelowego {{ago}}.",
   "peekAi.last.scan": "Ostatnia aktualizacja: {{ago}}.",
-  "peekAi.carrier.saysToday": "Przewoźnik {{carrier}} podaje dziś",
-  "peekAi.carrier.saysDate": "Przewoźnik {{carrier}} podaje {{date}}",
+  "peekAi.carrier.saysToday": "Według przewoźnika {{carrier}}: dziś",
+  "peekAi.carrier.saysDate": "Według przewoźnika {{carrier}}: {{date}}",
   "peekAi.carrier.noDate": "Przewoźnik {{carrier}} nie podaje daty",
   "peekAi.carrier.noHour": "Przewoźnik {{carrier}} nie podaje godziny",
   "peekAi.carrier.wasDue": "Przewoźnik {{carrier}} podawał wczorajszą datę",
@@ -1545,5 +1545,5 @@
   "peekAi.sure.parcels": "Przy podobnych przesyłkach trafia {{n}} razy na 10.",
   "peekAi.sheet.show": "Pokazuj Peek AI",
   "peekAi.sheet.showHint": "Tylko gdy Peek ma mocną wskazówkę. Większość przesyłek nie pokazuje nic.",
-  "peekAi.sheet.trained": "Peek AI uczy się na tysiącach przesyłek śledzonych przez Peek. To szacunek samego Peeka: przewoźnik {{carrier}} go nie obiecał."
+  "peekAi.sheet.trained": "Peek AI uczy się na tysiącach przesyłek śledzonych przez Peek. To prognoza samego Peeka: przewoźnik {{carrier}} jej nie obiecał."
 }

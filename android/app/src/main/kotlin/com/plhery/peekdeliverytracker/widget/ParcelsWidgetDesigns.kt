@@ -198,18 +198,21 @@ private fun ThreeCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetPar
         Column(GlanceModifier.fillMaxSize().padding(PAGE_MARGIN)) {
             parcels.zip(art).forEachIndexed { index, (parcel, pictures) ->
                 if (index > 0) Spacer(GlanceModifier.height(CARD_GAP))
-                Box(GlanceModifier.fillMaxWidth().defaultWeight()) { ListCard(parcel, pictures, size.width - PAGE_MARGIN * 2, type, list.languageCode) }
+                val height = (size.height - PAGE_MARGIN * 2 - CARD_GAP * (parcels.size - 1)) / parcels.size
+                Box(GlanceModifier.fillMaxWidth().defaultWeight()) { ListCard(parcel, pictures, DpSize(size.width - PAGE_MARGIN * 2, height), type, list.languageCode) }
             }
         }
     }
 }
 
 /**
- * `ParcelPassCard` made small, `width` wide: the carrier's mark and the day at the top, the name and the status at the
- * bottom, the status after the new-update dot where the parcel has one (#72), the half route at the end.
+ * `ParcelPassCard` made small, `size` big: the carrier's mark and the day at the top, Peek AI's phrase under the day,
+ * or in its place, where the card holds it beside the whole mark; the name and the status at the bottom, the status
+ * after the new-update dot where the parcel has one (#72), the half route at the end.
  */
 @Composable
-private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp, type: WidgetText, languageCode: String) {
+private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, size: DpSize, type: WidgetText, languageCode: String) {
+    val width = size.width
     val context = LocalContext.current
     val card = parcel.card ?: return
     val locale = ExtensionLocalizer.locale(languageCode)
@@ -217,7 +220,11 @@ private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp
     val caption = type.points(IosTextStyle.Caption)
     val inner = width - LIST_CARD_PADDING * 2
     val day = parcel.listDay?.openingLine(locale)
-    val dayWidth = day?.let { type.width(it, caption, FontWeight.Medium) + 8.dp } ?: 0.dp
+    val dayHeight = if (day != null) type.lineHeight(caption, FontWeight.Medium) else 0.dp
+    val bottom = type.lineHeight(type.points(IosTextStyle.Headline), FontWeight.Medium) + 2.dp + type.lineHeight(caption, FontWeight.Normal)
+    val peekAi = type.peekAiFit(parcel, languageCode, caption, inner - markWidth(art, LIST_CARD_MARK) - PEEK_AI_GAP)
+        ?.takeIf { LIST_CARD_PADDING_VERTICAL * 2 + dayHeight + (if (day != null) 2.dp else 0.dp) + it.height + bottom <= size.height }
+    val dayWidth = maxOf(day?.let { type.width(it, caption, FontWeight.Medium) } ?: 0.dp, peekAi?.width ?: 0.dp).let { if (it > 0.dp) it + 8.dp else it }
     Box(
         GlanceModifier.fillMaxSize().cornerRadius(16.dp).background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))
             .semantics { contentDescription = spokenRow(parcel, languageCode) },
@@ -229,11 +236,17 @@ private fun ListCard(parcel: DeliveryWidgetParcel, art: WidgetCardArt, width: Dp
                 DayNightPicture(faded, R.layout.widget_route, GlanceModifier.width(frame.size.width.dp).height(frame.size.height.dp), description = null)
             }
         }
-        Column(GlanceModifier.fillMaxSize().padding(horizontal = LIST_CARD_PADDING, vertical = 12.dp)) {
-            Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Column(GlanceModifier.fillMaxSize().padding(horizontal = LIST_CARD_PADDING, vertical = LIST_CARD_PADDING_VERTICAL)) {
+            Row(GlanceModifier.fillMaxWidth(), verticalAlignment = if (peekAi != null) Alignment.Top else Alignment.CenterVertically) {
                 DayNightPicture(art.mark, R.layout.widget_mark, markSize(art, LIST_CARD_MARK, inner - dayWidth), description = parcel.carrier)
                 Spacer(GlanceModifier.defaultWeight())
-                if (day != null) Text(day, maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption), fontWeight = FontWeight.Medium))
+                Column(horizontalAlignment = Alignment.End) {
+                    if (day != null) Text(day, maxLines = 1, style = TextStyle(color = ink, fontSize = type.sp(caption), fontWeight = FontWeight.Medium))
+                    if (peekAi != null) {
+                        if (day != null) Spacer(GlanceModifier.height(2.dp))
+                        PeekAiLine(peekAi, ink, WidgetCardColors.pair(card.ink, PEEK_AI_PILL), type)
+                    }
+                }
             }
             Spacer(GlanceModifier.defaultWeight())
             Column(GlanceModifier.width(minOf(inner, LIST_CARD_WORDS))) {
@@ -312,7 +325,7 @@ internal fun Passes(list: DeliveryWidgetList, art: List<WidgetCardArt>, size: Dp
  * A parcel's pass, `width` wide, in its carrier's colours: the mark at the top, then the name, over the day, or the
  * stage and day where both fit; in a large widget the day at the top's end, then the name and the stage on one line.
  * The stage or day starts with the new-update dot where the parcel has one (#72), and keeps to the room left to it,
- * at a smaller size where it must ([lineFit]).
+ * at a smaller size where it must ([lineFit]). Peek AI's phrase follows the day where the room left holds it.
  */
 @Composable
 private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: PassMetrics, width: Dp, type: WidgetText, languageCode: String) {
@@ -329,11 +342,15 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
             .semantics { contentDescription = spokenRow(parcel, languageCode) }.padding(horizontal = PASS_PADDING, vertical = PASS_PADDING_VERTICAL),
     ) {
         val day = if (metrics.oneLine) parcel.listDay?.openingLine(locale) else null
+        val dayWidth = day?.let { width(it) + 6.dp } ?: 0.dp
+        val topPeekAi = if (metrics.oneLine) type.peekAiFit(parcel, languageCode, metrics.caption2, words - markWidth(art, PASS_MARK) - dayWidth - PEEK_AI_GAP) else null
         Row(GlanceModifier.fillMaxWidth().height(metrics.top), verticalAlignment = Alignment.CenterVertically) {
-            DayNightPicture(art.mark, R.layout.widget_mark, markSize(art, PASS_MARK, words - (day?.let { width(it) + 6.dp } ?: 0.dp)), description = parcel.carrier)
-            if (day != null) {
-                Spacer(GlanceModifier.defaultWeight())
-                Text(day, maxLines = 1, style = lineStyle)
+            DayNightPicture(art.mark, R.layout.widget_mark, markSize(art, PASS_MARK, words - dayWidth - (topPeekAi?.let { it.width + PEEK_AI_GAP } ?: 0.dp)), description = parcel.carrier)
+            if (day != null || topPeekAi != null) Spacer(GlanceModifier.defaultWeight())
+            if (day != null) Text(day, maxLines = 1, style = lineStyle)
+            if (topPeekAi != null) {
+                if (day != null) Spacer(GlanceModifier.width(PEEK_AI_GAP))
+                PeekAiLine(topPeekAi, WidgetCardColors.pair(card.ink), WidgetCardColors.pair(card.ink, PEEK_AI_PILL), type)
             }
         }
         Spacer(GlanceModifier.height(PASS_SPACING))
@@ -355,10 +372,18 @@ private fun Pass(parcel: DeliveryWidgetParcel, art: WidgetCardArt, metrics: Pass
             val whole = parcel.listLine.openingLine(locale)
             val room = words - parcel.dotRoom
             val line = if (width(whole) <= room) whole else parcel.listDay?.openingLine(locale) ?: type.fittingStatus(parcel, locale, metrics.caption2, room)
+            val points = type.lineFit(line, metrics.caption2, room)
+            val peekAi = type.peekAiFit(parcel, languageCode, metrics.caption2, room - type.width(line, points, FontWeight.Normal) - PEEK_AI_GAP)
             Text(parcel.listName, maxLines = 1, style = nameStyle)
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 dot?.let { NewUpdateDot(it) }
-                Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(type.lineFit(line, metrics.caption2, room))))
+                if (peekAi == null) {
+                    Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(points)))
+                } else {
+                    Text(line, maxLines = 1, style = lineStyle.copy(fontSize = type.sp(points)))
+                    Spacer(GlanceModifier.width(PEEK_AI_GAP))
+                    PeekAiLine(peekAi, WidgetCardColors.pair(card.ink), WidgetCardColors.pair(card.ink, PEEK_AI_PILL), type)
+                }
             }
         }
     }
@@ -550,7 +575,10 @@ private fun MoreLine(copy: Localizer, count: Int, type: WidgetText, modifier: Gl
  * an image view sized by its height alone can keep the picture's own width and push what follows out.
  */
 private fun markSize(art: WidgetCardArt, height: Dp, room: Dp): GlanceModifier =
-    GlanceModifier.height(height).width(minOf(height * (art.mark.first.width.toFloat() / art.mark.first.height), room.coerceAtLeast(0.dp)))
+    GlanceModifier.height(height).width(minOf(markWidth(art, height), room.coerceAtLeast(0.dp)))
+
+/** How wide a carrier's mark `height` tall stands whole. */
+private fun markWidth(art: WidgetCardArt, height: Dp): Dp = height * (art.mark.first.width.toFloat() / art.mark.first.height)
 
 /** How many items `item` tall, `gap` apart, stand in `height`. */
 private fun fitting(height: Dp, item: Dp, gap: Dp): Int = if (height < item) 0 else 1 + floor((height - item) / (item + gap)).toInt()
@@ -561,6 +589,7 @@ private val PAGE_MARGIN = 16.dp
 private val CARD_GAP = 8.dp
 private val WIDE_CARD_PADDING = 14.dp
 private val LIST_CARD_PADDING = 14.dp
+private val LIST_CARD_PADDING_VERTICAL = 12.dp
 private val LIST_CARD_MARK = 14.dp
 private val LIST_CARD_WORDS = 200.dp
 private val STEP_TOP = 4.dp

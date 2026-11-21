@@ -40,6 +40,46 @@ object Icu {
 
     /** Time zones' names, which Foundation's `TimeZone.localizedName(for:locale:)` reads from ICU. */
     val zoneNames: ZoneNamer = packages.firstNotNullOfOrNull { IcuZoneNames.from(it) } ?: JdkZoneNames
+
+    /** How long ago in words, as the web's `Intl.RelativeTimeFormat` writes it; none on a JVM without ICU. */
+    val relativeTimes: RelativeTimes? = packages.firstNotNullOfOrNull { IcuRelativeTimes.from("$it.text") }
+}
+
+/** The units a relative time is counted in. */
+enum class RelativeUnit { Minute, Hour, Day, Week }
+
+/**
+ * A time before or after now in a locale's words, a word where it has one: "5 hours ago", "yesterday", "2 weeks ago",
+ * as `Intl.RelativeTimeFormat` writes them with `numeric: 'auto'`.
+ */
+fun interface RelativeTimes {
+    fun format(offset: Int, unit: RelativeUnit, locale: Locale): String
+}
+
+/** ICU's `RelativeDateTimeFormatter` (android.icu.text, com.ibm.icu.text) with its `RelativeDateTimeUnit`, found by name. */
+internal class IcuRelativeTimes private constructor(packageName: String) : RelativeTimes {
+    private val formatterClass = Class.forName("$packageName.RelativeDateTimeFormatter")
+    private val unitClass = Class.forName("$packageName.RelativeDateTimeFormatter\$RelativeDateTimeUnit")
+    private val getInstance = formatterClass.getMethod("getInstance", Locale::class.java)
+    private val format = formatterClass.getMethod("format", Double::class.javaPrimitiveType, unitClass)
+    private val units = RelativeUnit.entries.associateWith { unitClass.getField(it.name.uppercase(Locale.ROOT)).get(null) }
+    private val formatters = ConcurrentHashMap<Locale, Any>()
+
+    override fun format(offset: Int, unit: RelativeUnit, locale: Locale): String {
+        val formatter = formatters.getOrPut(locale) { getInstance.invoke(null, locale) }
+        // A formatter keeps a number format, which is not safe to share between threads.
+        return synchronized(formatter) { format.invoke(formatter, offset.toDouble(), units.getValue(unit)) as String }
+    }
+
+    companion object {
+        fun from(packageName: String): IcuRelativeTimes? = try {
+            IcuRelativeTimes(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
 }
 
 /**

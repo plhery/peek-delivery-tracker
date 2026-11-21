@@ -56,14 +56,23 @@ data class DeliveryWidgetParcel(
      * parcel opened on any of the account's devices, or the setting off. None from an app that didn't publish it.
      */
     val newUpdate: Boolean? = null,
+    /**
+     * Peek AI's words as its card in the app's list gives them ("by 16:00", [peekAiCardWords]), and when they stop
+     * holding, as the iPhone app publishes them. None while Settings has Peek AI off, or from an app that didn't publish
+     * them.
+     */
+    val peekAi: String? = null,
+    @Serializable(with = ReferenceDateSerializer::class) val peekAiUntil: Instant? = null,
 ) {
     /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
     val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
 
     /** The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it. */
     fun worded(at: Instant): DeliveryWidgetParcel {
-        val wording = later?.lastOrNull { it.midnight() <= at } ?: return this
-        return copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
+        // Peek AI's call goes once its day or hour has passed, as it goes from the app's card.
+        val held = if (peekAiUntil?.let { at >= it } == true) copy(peekAi = null) else this
+        val wording = later?.lastOrNull { it.midnight() <= at } ?: return held
+        return held.copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
     }
 }
 
@@ -127,13 +136,14 @@ object DeliveryWidgetDays {
     }
 
     /**
-     * When the parcels' words change after `now`, and the midnight after each of their steps, from which a step's time
-     * names its weekday: a widget is drawn again at each.
+     * When the parcels' words change after `now`, Peek AI's calls among them, and the midnight after each of their steps,
+     * from which a step's time names its weekday: a widget is drawn again at each.
      */
     fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant, zone: ZoneId = ZoneId.systemDefault()): List<Instant> {
         val worded = `in`.flatMap { it.later.orEmpty() }.map { it.midnight(zone) }
         val stepped = `in`.flatMap { it.steps.orEmpty() }.map { midnights(after = it.at, count = 1, zone = zone).first() }
-        return (worded + stepped).filter { it > after }.toSortedSet().toList()
+        val called = `in`.mapNotNull { it.peekAiUntil }
+        return (worded + stepped + called).filter { it > after }.toSortedSet().toList()
     }
 }
 

@@ -433,7 +433,7 @@ class SettingsTest {
 
     /**
      * The deliveries' group holds the account's updates and no switch for the widget, which a reader removes from the
-     * home screen instead: the new-update dot's is Settings' only switch.
+     * home screen instead: the new-update dot's and Peek AI's are Settings' only switches.
      */
     @Test
     fun theDeliveriesHaveNoWidgetSwitch() {
@@ -443,7 +443,7 @@ class SettingsTest {
         assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
         assertFalse(exists("$SETTINGS_SHEET.widgets"))
         val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
-        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES, SETTINGS_PEEK_AI), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
     /**
@@ -568,29 +568,62 @@ class SettingsTest {
         assertTrue(marked())
     }
 
-    /** No Usage statistics row, for an account, a guest or the demo: the new-update dot's is the page's only switch. */
+    /**
+     * A guest's Peek AI switch, under the dot's: on by default, turned off it takes Peek AI's words off Birthday gift's
+     * card and counts `peek-ai-off`; turned on again from TalkBack, it has them back and counts `peek-ai-on`.
+     */
+    @Test
+    fun aGuestsPeekAiSwitchTakesItsWordsAwayAndBack() {
+        show(AuthenticationState.Welcome) { isGuest = true }
+        val card = cardNamed("Birthday gift") and hasAnyAncestor(hasTestTag(PARCEL_LIST))
+        fun says(): Boolean {
+            node(PARCEL_LIST).performScrollToNode(card)
+            val said = compose.onNode(card).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].joinToString()
+            return said.contains(text("peekAi.says").substringBefore("{{"))
+        }
+        assertTrue(says())
+        open()
+        node(SETTINGS_PEEK_AI).assert(hasText(text("peekAi.name"))).assert(hasText(text("settings.peekAiHint")))
+        assertEquals(ToggleableState.On, toggled(SETTINGS_PEEK_AI))
+        flip(SETTINGS_PEEK_AI)
+        assertFalse(source.showPeekAi.value)
+        assertEquals("peek-ai-off", source.actions.last())
+        assertEquals(ToggleableState.Off, toggled(SETTINGS_PEEK_AI))
+        press(SETTINGS_CLOSE)
+        assertFalse(says())
+
+        open()
+        node(SETTINGS_PEEK_AI).performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(source.showPeekAi.value)
+        assertEquals("peek-ai-on", source.actions.last())
+        press(SETTINGS_CLOSE)
+        assertTrue(says())
+    }
+
+    /** No Usage statistics row, for an account, a guest or the demo: the new-update dot's and Peek AI's are the page's only switches. */
     @Test
     fun anAccountHasNoUsageStatisticsSwitch() {
         show()
-        theDotIsTheOnlySwitch()
+        theDotAndPeekAiAreTheOnlySwitches()
     }
 
     @Test
     fun aGuestHasNoUsageStatisticsSwitch() {
         show(AuthenticationState.Welcome) { isGuest = true }
-        theDotIsTheOnlySwitch()
+        theDotAndPeekAiAreTheOnlySwitches()
     }
 
     @Test
     fun theDemoHasNoUsageStatisticsSwitch() {
         show(AuthenticationState.Demo)
-        theDotIsTheOnlySwitch()
+        theDotAndPeekAiAreTheOnlySwitches()
     }
 
-    private fun theDotIsTheOnlySwitch() {
+    private fun theDotAndPeekAiAreTheOnlySwitches() {
         open()
         val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
-        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES, SETTINGS_PEEK_AI), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
     @Test

@@ -270,14 +270,23 @@ private fun AlertsHeader(parcel: Parcel, close: () -> Unit) {
 }
 
 /**
- * A switch of the sheet (`switchRow`): the symbol, 16 in the secondary grey 22 wide (none at the accessibility sizes,
+ * A switch of the sheet (`switchRow`): the symbol, 16 in the secondary grey 22 wide, or its own `icon` (none at the accessibility sizes,
  * where the words need the room), 12 from the title in subheadline semibold over what it does in caption secondary,
  * and the switch at the trailing end, in the delivered green while on; 14 and 12 in, raised, 60 tall at least,
  * with 14-point continuous corners. A tap on the switch flips it (`flip`); TalkBack reads the row as one switch, its
  * words and its state, as iOS's `Toggle` with its label.
  */
 @Composable
-private fun SwitchRow(tag: String, symbol: String, title: String, hint: String, on: Boolean, enabled: Boolean, flip: (Boolean) -> Unit) {
+internal fun SwitchRow(
+    tag: String,
+    symbol: String?,
+    title: String,
+    hint: String,
+    on: Boolean,
+    enabled: Boolean,
+    icon: (@Composable () -> Unit)? = null,
+    flip: (Boolean) -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
@@ -302,7 +311,7 @@ private fun SwitchRow(tag: String, symbol: String, title: String, hint: String, 
     ) {
         if (!large) {
             Box(Modifier.size(width = 22.dp, height = 22.dp).wrapContentSize(unbounded = true), contentAlignment = Alignment.Center) {
-                PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
+                if (icon != null) icon() else if (symbol != null) PeekSymbol(symbol, font = type.fixed(16f), tint = colors.secondaryText)
             }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {

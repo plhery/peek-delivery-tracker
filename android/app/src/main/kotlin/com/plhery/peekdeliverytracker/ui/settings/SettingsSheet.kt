@@ -395,6 +395,7 @@ private fun SettingsRootPage(
     val deliveryEmail by source.deliveryEmail.collectAsState()
     val devicePreset by source.deviceAlertPreset.collectAsState()
     val markNewUpdates by source.markNewUpdates.collectAsState()
+    val showPeekAi by source.showPeekAi.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
     val guest = source.isGuest
@@ -493,6 +494,17 @@ private fun SettingsRootPage(
                         SettingsToggleRow(
                             markNewUpdates, source::setMarkNewUpdates, localized("settings.markNewUpdates"), SETTINGS_MARK_NEW_UPDATES,
                             detail = localized("settings.markNewUpdatesHint"),
+                        )
+                        SettingsDivider()
+                        // Peek AI's own estimates on cards, pages and widgets, kept the same way as the dot.
+                        SettingsToggleRow(
+                            showPeekAi,
+                            {
+                                source.setShowPeekAi(it)
+                                source.action(if (it) "peek-ai-on" else "peek-ai-off")
+                            },
+                            localized("peekAi.name"), SETTINGS_PEEK_AI,
+                            detail = localized("settings.peekAiHint"),
                         )
                     }
                     SettingsGroup {
@@ -868,6 +880,7 @@ internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_ADD_BY_EMAIL = "$SETTINGS_SHEET.addByEmail"
 internal const val SETTINGS_ASSISTANTS = "$SETTINGS_SHEET.assistants"
 internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
+internal const val SETTINGS_PEEK_AI = "$SETTINGS_SHEET.peekAi"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"
 internal const val SETTINGS_RATE = "$SETTINGS_SHEET.rate"

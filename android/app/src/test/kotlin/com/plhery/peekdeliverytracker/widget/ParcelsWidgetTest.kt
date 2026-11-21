@@ -373,25 +373,25 @@ class ParcelsWidgetTest {
         }
         // Two in a small widget: passes, each opening its parcel and read as one.
         show(some(2), LIST_SMALL, source::read) {
-            for (parcel in some(2).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in some(2).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
         }
         // Three: rows, under no headings.
         show(some(3), LIST_SMALL, source::read) {
-            for (parcel in sections(some(3), LIST_SMALL).rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in sections(some(3), LIST_SMALL).rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
         }
         // Two in a medium widget: the cards, the Next up first; four: passes in two columns; five: the sections.
         show(some(2), LIST_MEDIUM, source::read) {
             for (parcel in some(2).parcels) onNode(hasTextEqualTo(parcel.label)).assertExists()
         }
         show(some(4), LIST_MEDIUM, source::read) {
-            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
         }
         val five = sections(some(5), LIST_MEDIUM)
         val headings = five.columns.flatten().filterIsInstance<DeliveryWidgetList.Line.Heading>()
         assertTrue(headings.isNotEmpty())
         show(some(5), LIST_MEDIUM, source::read) {
             for (heading in headings) onAllNodes(hasTextEqualTo(english.text(sectionTitleKey(heading.kind))))[0].assertExists()
-            for (parcel in five.rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in five.rows) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
         }
         // A large widget: one card over its last steps, then two and three cards, six passes, seven rows.
         val steps = requireNotNull(one.steps)
@@ -403,7 +403,7 @@ class ParcelsWidgetTest {
             for (parcel in some(count).parcels) onAllNodes(opens(parcel))[0].assertExists()
         }
         show(some(6), LIST_LARGE, source::read) {
-            for (parcel in some(6).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in some(6).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
         }
         // Without the pictures, the rows, whatever their number.
         show(some(2), LIST_SMALL) {
@@ -446,7 +446,7 @@ class ParcelsWidgetTest {
         assertTrue(six.layout.lineRows)
         show(some(6), LIST_FOUR_BY_THREE, source::read) {
             for (parcel in some(6).parcels) {
-                onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+                onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
                 // A large pass has the day at its top and the stage beside the name; a row, both at its end.
                 onAllNodes(hasTextEqualTo(lineRowEnd(parcel, six.layout).line))[0].assertExists()
             }
@@ -466,7 +466,7 @@ class ParcelsWidgetTest {
         assertTrue(down.layout.lineRows)
         assertTrue(down.layout.metrics.compact)
         show(some(4), side, source::read) {
-            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(rowDescription(parcel))).assertExists()
+            for (parcel in some(4).parcels) onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
             for (kind in ParcelSectionKind.entries) onNode(hasTextEqualTo(english.text(sectionTitleKey(kind)))).assertDoesNotExist()
             onNode(hasTextEqualTo(moreParcels(english, 1))).assertDoesNotExist()
         }
@@ -625,8 +625,7 @@ class ParcelsWidgetTest {
         val some = sample.copy(parcels = sample.parcels.mapIndexed { index, parcel -> if (index % 2 == 0) parcel.copy(newUpdate = true) else parcel })
         show(some, LIST_MEDIUM) {
             for (parcel in sections(some, LIST_MEDIUM).rows) {
-                val said = if (parcel.newUpdate == true) "New update. ${rowDescription(parcel)}" else rowDescription(parcel)
-                onNode(hasContentDescriptionEqualTo(said) and opens(parcel)).assertExists()
+                onNode(hasContentDescriptionEqualTo(said(parcel)) and opens(parcel)).assertExists()
             }
         }
         val first = some.parcels.first()
@@ -637,6 +636,21 @@ class ParcelsWidgetTest {
             assertEquals(language.rawValue, Localizer(language).text("parcel.newUpdate") + ".", said)
         }
         assertEquals(null, newUpdateSpoken(first.copy(newUpdate = null), "en"))
+    }
+
+    /** Peek AI's words, last in what TalkBack reads, after "New update." and the row, in the widget's language. */
+    @Test
+    fun peekAisWordsAreReadLast() {
+        val first = sample.parcels.first().copy(newUpdate = true, peekAi = "by 16:00")
+        assertEquals("New update. ${rowDescription(first)}. Peek AI: by 16:00", spokenRow(first, "en"))
+        assertEquals("Nouvelle mise à jour. ${rowDescription(first)}. ${Localizer(AppLanguage.Fr).text("peekAi.says", mapOf("words" to "avant 16:00"))}", spokenRow(first.copy(peekAi = "avant 16:00"), "fr"))
+        assertEquals(rowDescription(first), spokenRow(first.copy(newUpdate = null, peekAi = null), "en"))
+    }
+
+    /** What TalkBack reads for `parcel`: "New update." first while it has the dot, Peek AI's words last while it has them. */
+    private fun said(parcel: DeliveryWidgetParcel): String {
+        val row = if (parcel.newUpdate == true) "New update. ${rowDescription(parcel)}" else rowDescription(parcel)
+        return parcel.peekAi?.let { "$row. Peek AI: $it" } ?: row
     }
 
     /**
@@ -747,8 +761,7 @@ class ParcelsWidgetTest {
             val list = some(count)
             show(list, size, source::read) {
                 for (parcel in list.parcels) {
-                    val said = if (parcel.newUpdate == true) "New update. ${rowDescription(parcel)}" else rowDescription(parcel)
-                    onNode(opens(parcel) and hasContentDescriptionEqualTo(said)).assertExists()
+                    onNode(opens(parcel) and hasContentDescriptionEqualTo(said(parcel))).assertExists()
                 }
             }
         }
@@ -771,7 +784,7 @@ class ParcelsWidgetTest {
     fun eachRowOpensItsParcelAndReadsAsOne() = show(sample, LIST_MEDIUM) {
         for (parcel in sections(sample, LIST_MEDIUM).rows) {
             onNode(opens(parcel) and hasAnyDescendant(hasTextEqualTo(parcel.listName))).assertExists()
-            onNode(hasContentDescriptionEqualTo(rowDescription(parcel)) and opens(parcel)).assertExists()
+            onNode(hasContentDescriptionEqualTo(said(parcel)) and opens(parcel)).assertExists()
         }
         val vinyl = sample.parcels[2]
         assertEquals("Vintage vinyl records, ${vinyl.carrier}, ${vinyl.listStatus}, ${vinyl.detail}", rowDescription(vinyl))

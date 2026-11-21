@@ -212,16 +212,22 @@ internal fun rowDescription(parcel: DeliveryWidgetParcel): String =
 /** The size of a row's `line`, `room` wide: the layout's, smaller where it takes that to fit ([lineFit]). */
 internal fun linePoints(layout: ListLayout, line: String, room: Dp): Float = layout.type.lineFit(line, layout.statusPoints, room)
 
-/** What TalkBack reads for a row, a pass or a card of the list: "New update." first while it shows the dot (#72). */
-internal fun spokenRow(parcel: DeliveryWidgetParcel, languageCode: String): String =
-    newUpdateSpoken(parcel, languageCode)?.let { "$it ${rowDescription(parcel)}" } ?: rowDescription(parcel)
+/**
+ * What TalkBack reads for a row, a pass or a card of the list: "New update." first while it shows the dot (#72), and
+ * Peek AI's words last while the parcel has them ([peekAiSpoken]).
+ */
+internal fun spokenRow(parcel: DeliveryWidgetParcel, languageCode: String): String {
+    val row = newUpdateSpoken(parcel, languageCode)?.let { "$it ${rowDescription(parcel)}" } ?: rowDescription(parcel)
+    return peekAiSpoken(parcel, languageCode)?.let { "$row. $it" } ?: row
+}
 
 /**
  * The stage and day a large widget's row ends in, `ParcelListLineRow`'s: the whole line where it fits beside the name,
  * else what fits beside the name kept to [NAME_SHARE] of the widget ([fittingLine]); its width, its size ([linePoints]),
- * and the gap before it, and before the line the new-update dot where the parcel has one ([dotRoom]).
+ * and the gap before it, and before the line the new-update dot where the parcel has one ([dotRoom]). Peek AI's phrase
+ * follows the whole line where the room left holds it.
  */
-internal class LineRowEnd(val line: String, val width: Dp, val gap: Dp, val points: Float)
+internal class LineRowEnd(val line: String, val width: Dp, val gap: Dp, val points: Float, val peekAi: PeekAiFit? = null)
 
 internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineRowEnd {
     val type = layout.type
@@ -232,7 +238,10 @@ internal fun lineRowEnd(parcel: DeliveryWidgetParcel, layout: ListLayout): LineR
     val dot = parcel.dotRoom
     // The name, a spacer at least END_GAP wide and the line, spaced as the symbol and the name.
     val apart = spacing * 2 + END_GAP
-    if (name + apart + dot + wholeWidth <= layout.words) return LineRowEnd(whole, wholeWidth, apart, layout.statusPoints)
+    if (name + apart + dot + wholeWidth <= layout.words) {
+        val peekAi = type.peekAiFit(parcel, layout.languageCode, layout.statusPoints, layout.words - name - apart - dot - wholeWidth - PEEK_AI_GAP)
+        return LineRowEnd(whole, wholeWidth, apart, layout.statusPoints, peekAi)
+    }
     val room = (layout.words - spacing - END_GAP - layout.room.width * NAME_SHARE - dot).coerceAtLeast(0.dp)
     val line = fittingLine(parcel, layout, room)
     val points = linePoints(layout, line, room)
@@ -273,14 +282,26 @@ internal fun ListRow(
             Spacer(GlanceModifier.width(end.gap))
             dot?.let { NewUpdateDot(it) }
             Text(end.line, GlanceModifier.width(end.width), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(end.points), textAlign = TextAlign.End))
+            end.peekAi?.let {
+                Spacer(GlanceModifier.width(PEEK_AI_GAP))
+                PeekAiLine(it, ListColors.of(lineColor), ListColors.of(lineColor, PEEK_AI_PILL), type)
+            }
         } else {
             Column(GlanceModifier.defaultWeight()) {
                 Text(name, maxLines = 1, style = nameStyle)
                 Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     val room = layout.words - parcel.dotRoom
                     val line = fittingLine(parcel, layout, room)
+                    val points = linePoints(layout, line, room)
+                    val peekAi = type.peekAiFit(parcel, layout.languageCode, layout.statusPoints, room - type.width(line, points, FontWeight.Normal) - PEEK_AI_GAP)
                     dot?.let { NewUpdateDot(it) }
-                    Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(linePoints(layout, line, room))))
+                    if (peekAi == null) {
+                        Text(line, GlanceModifier.defaultWeight(), maxLines = 1, style = lineStyle.copy(fontSize = type.sp(points)))
+                    } else {
+                        Text(line, maxLines = 1, style = lineStyle.copy(fontSize = type.sp(points)))
+                        Spacer(GlanceModifier.width(PEEK_AI_GAP))
+                        PeekAiLine(peekAi, ListColors.of(lineColor), ListColors.of(lineColor, PEEK_AI_PILL), type)
+                    }
                 }
             }
         }

@@ -8,13 +8,23 @@ import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PeekAi
+import com.plhery.peekdeliverytracker.core.api.PeekAiDay
+import com.plhery.peekdeliverytracker.core.api.PeekAiHour
+import com.plhery.peekdeliverytracker.core.api.PeekAiSays
+import com.plhery.peekdeliverytracker.core.api.PeekAiStep
+import com.plhery.peekdeliverytracker.core.api.PeekAiStepKind
+import com.plhery.peekdeliverytracker.core.api.PeekAiWhy
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.PostcodeCountry
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.DayOfWeek
 import java.time.Instant
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import java.util.UUID
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -60,7 +70,7 @@ class DemoRepository(
 
     fun list(): List<Parcel> {
         val parcels = load().sortedByDescending { it.createdAt }
-        return ImportChargesPreview.charging(parcels, importCharges())
+        return ImportChargesPreview.charging(parcels, importCharges()).map(::withPeekAi)
     }
 
     fun add(request: CreatePackageRequest): Parcel {
@@ -147,7 +157,7 @@ class DemoRepository(
     fun refreshAll(): List<Parcel> {
         val updated = load().map(::advance)
         save(updated)
-        return updated.sortedByDescending { it.createdAt }
+        return updated.sortedByDescending { it.createdAt }.map(::withPeekAi)
     }
 
     fun refresh(id: UUID): Parcel = update(id, ::advance)
@@ -246,8 +256,11 @@ class DemoRepository(
         if (index < 0) throw DeliveryApiError.ParcelMissing()
         all[index] = change(all[index])
         save(all)
-        return all[index]
+        return withPeekAi(all[index])
     }
+
+    /** The parcel as it is shown: a sample that shows Peek AI says what it expects now. Peek AI is never kept. */
+    private fun withPeekAi(parcel: Parcel): Parcel = parcel.copy(peekAi = peekAi(parcel, now()))
 
     private fun advance(parcel: Parcel): Parcel {
         val stage = parcel.currentStage
@@ -291,6 +304,8 @@ class DemoRepository(
             val senderName: String? = null,
             val pickupPoint: String? = null,
             val weightKg: Double? = null,
+            /** What Peek AI says of it, worked out when it is shown ([peekAi]): `by_time` out for delivery, `by_day` with no date. */
+            val peekAi: String? = null,
             val events: List<Event>,
             /** Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come. */
             val plannedEvents: List<Event>? = null,
@@ -427,6 +442,47 @@ class DemoRepository(
                 (latest == null || date > latest) && (stage < 0 || stage >= reached)
             }
             return parcel.copy(plannedEvents = kept.ifEmpty { null })
+        }
+
+        /** The samples that show Peek AI, by tracking number, and what it says of them. */
+        private val peekAiSamples: Map<String, String> by lazy {
+            catalog.parcels.mapNotNull { sample -> sample.peekAi?.let { sample.trackingNumber.nfc() to it } }.toMap()
+        }
+
+        /** The share of a courier's deliveries in each hour of its day, from 08:00. */
+        private val demoHours = listOf(0.03, 0.07, 0.12, 0.16, 0.17, 0.14, 0.11, 0.09, 0.05, 0.03, 0.02, 0.01)
+
+        /** A time on this phone's clock with its offset, as the server writes a scan's local time. */
+        private val withOffset = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx", Locale.ROOT)
+
+        /**
+         * What Peek AI says of a sample parcel that shows it, at `now`, in the shapes the server gives: out for delivery
+         * today, by 16:00 until then; on its way with no carrier date, by the third delivery day from today. The web's is
+         * `demoPeekAi` (src/store/demoRepo.ts).
+         */
+        fun peekAi(parcel: Parcel, now: Instant = AppClock.now()): PeekAi? {
+            val kind = peekAiSamples[parcel.trackingNumber.nfc()] ?: return null
+            val latest = parcel.currentEvent ?: return null
+            if (parcel.isArchived) return null
+            val zone = ZoneId.systemDefault()
+            val at = now.atZone(zone)
+            if (kind == "by_time") {
+                val out = DateParser.date(latest.occurredAt)?.atZone(zone) ?: return null
+                if (latest.stage != TrackingStage.OutForDelivery || out.toLocalDate() != at.toLocalDate() || out.hour >= 16 || at.hour >= 16) return null
+                return PeekAi(
+                    says = PeekAiSays.ByTime, why = PeekAiWhy.OutForDelivery, time = "16:00", sure = 0.86,
+                    outSince = withOffset.format(out), hours = demoHours.mapIndexed { index, share -> PeekAiHour("%02d:00".format(Locale.ROOT, 8 + index), share) },
+                )
+            }
+            if (parcel.expectedDelivery != null || !parcel.plannedEvents.isNullOrEmpty()) return null
+            if (latest.stage !in setOf(TrackingStage.Accepted, TrackingStage.InTransit, TrackingStage.Customs)) return null
+            // The next delivery days, from today; no courier comes on Sundays.
+            val days = generateSequence(at.toLocalDate()) { it.plusDays(1) }.filter { it.dayOfWeek != DayOfWeek.SUNDAY }.take(5).map { it.toString() }.toList()
+            return PeekAi(
+                says = PeekAiSays.ByDay, why = PeekAiWhy.NoDate, day = days[2], sure = 0.81,
+                last = PeekAiStep(kind = if (latest.stage == TrackingStage.Customs) PeekAiStepKind.Customs else PeekAiStepKind.Scan, at = latest.occurredAt),
+                days = days.zip(listOf(0.04, 0.27, 0.41, 0.18, 0.06)) { day, p -> PeekAiDay(day, p) },
+            )
         }
 
         /** The sample parcels in English; `list()` writes them in the app's language. */

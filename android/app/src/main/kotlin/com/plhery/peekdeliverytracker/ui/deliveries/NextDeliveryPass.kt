@@ -5,6 +5,7 @@ import androidx.compose.animation.core.snap
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +41,7 @@ import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
 import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
+import com.plhery.peekdeliverytracker.core.parcelPeekAiWords
 import com.plhery.peekdeliverytracker.core.pickupPlace
 import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
@@ -86,6 +88,7 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `swipeAction`: the list's swipe to archive, offered to TalkBack; the swipe's row then draws the card's shadow.
  * - `onTap`: what a finger's tap does, `onOpen` unless the swipe closes the card first; TalkBack's double tap opens it.
  * - `newUpdate`: a scan the reader hasn't seen (#72), a [NewUpdateDot] first on the status line, read first by TalkBack.
+ * - `peekAi`: Peek AI on, whose words ([PeekAiPhrase]) follow the status, after a dot, or under it where they don't fit.
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -103,6 +106,7 @@ fun NextDeliveryPass(
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
     newUpdate: Boolean = false,
+    peekAi: Boolean = false,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -138,6 +142,7 @@ fun NextDeliveryPass(
         parcel.pickupPlace,
         localizer.parcelDeliveryEstimate(parcel, now) ?: if (arrived) localizer.parcelCompletionDate(parcel, now) else null,
     ).joinToString(" · ")
+    val peekAiWords = localizer.parcelPeekAiWords(parcel, peekAi, now)
     // The carrier's site down for every parcel says so calmly, in place of the failed update.
     val outage = parcel.shownCarrierOutage?.let {
         localizer.text("attention.carrier_outage", mapOf("carrier" to identities.displayName(it.carrier, language)))
@@ -153,7 +158,10 @@ fun NextDeliveryPass(
                 decorative = decorative,
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate },
-                    cardLabel(identity.fullName, nextUp.takeUnless { arrived }, name, notice, delivering, status, flag),
+                    cardLabel(
+                        identity.fullName, nextUp.takeUnless { arrived }, name, notice, delivering, status,
+                        peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
+                    ),
                 ),
                 hint = localizer.text("detail.label"),
                 selected = selected,
@@ -220,11 +228,19 @@ fun NextDeliveryPass(
             }
             if (notice != null) Text(notice, color = colors.secondaryText, style = type.caption.sfLines())
             if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                NewUpdateDot(newUpdate, ink)
-                Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-                    if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
-                    Text(status, color = ink, style = type.caption.sfLines())
+            FlowRow(itemVerticalAlignment = Alignment.CenterVertically, verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    NewUpdateDot(newUpdate, ink)
+                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                        if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                        Text(status, color = ink, style = type.caption.sfLines())
+                    }
+                }
+                if (peekAiWords != null) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(" · ", color = ink, style = type.caption.sfLines())
+                        PeekAiPhrase(peekAiWords, ink, type.caption)
+                    }
                 }
             }
             if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp), calm = outage != null)

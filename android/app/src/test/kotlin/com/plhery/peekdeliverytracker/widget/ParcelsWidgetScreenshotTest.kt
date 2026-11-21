@@ -39,7 +39,8 @@ import org.robolectric.annotation.GraphicsMode
  * The "Parcels" widget as a launcher shows it, its RemoteViews applied on a wallpaper: its three sizes with the sample
  * (two cells by two and four by two side by side, four by four under them), beside nothing on its way and the widget
  * switched off; light and dark; the largest text; the sizes between; the cards and passes a few of the demo's
- * parcels take at each size; and where passes that don't all fit are rows, at default and larger text.
+ * parcels take at each size; and where passes that don't all fit are rows, at default and larger text; the new-update
+ * dot and Peek AI's words.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -72,10 +73,17 @@ class ParcelsWidgetScreenshotTest {
         widgetSource(app, folder, store)
     }
 
-    /** The demo's first `count` parcels at `size`, those `marked` with the new-update dot. */
-    private fun demo(size: DpSize, count: Int, marked: (Int) -> Boolean = { false }): Shown {
+    /**
+     * The demo's first `count` parcels at `size`, those `marked` with the new-update dot, and Peek AI's words where
+     * `peekAi` gives some.
+     */
+    private fun demo(size: DpSize, count: Int, marked: (Int) -> Boolean = { false }, peekAi: (Int) -> String? = { null }): Shown {
         val list = demoSource.list(CAPTURED)
-        return widget(size, list.copy(parcels = list.parcels.take(count).mapIndexed { index, parcel -> if (marked(index)) parcel.copy(newUpdate = true) else parcel }), demoSource::read)
+        val parcels = list.parcels.take(count).mapIndexed { index, parcel ->
+            val dotted = if (marked(index)) parcel.copy(newUpdate = true) else parcel
+            peekAi(index)?.let { dotted.copy(peekAi = it) } ?: dotted
+        }
+        return widget(size, list.copy(parcels = parcels), demoSource::read)
     }
 
     private fun none() = DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
@@ -211,6 +219,33 @@ class ParcelsWidgetScreenshotTest {
     @Test
     @Config(qualifiers = "w1220dp-h1360dp-night-xhdpi")
     fun newUpdatesDark() = newUpdates("new_updates_dark", dark = true)
+
+    /**
+     * Peek AI's words on two parcels in three, as the app's cards write them: the sample's rows at each size, two cells
+     * by four for its two-line rows; the demo's card, passes and cards two cells by two and four by two; a card over its
+     * steps, three cards and six passes four by four. The demo's first parcel has the dot too.
+     */
+    private fun peekAi(name: String, dark: Boolean) {
+        val words = { index: Int -> listOf("by 16:00", "today or tomorrow", "by Fri 30 Oct")[index % 3].takeIf { index % 3 != 1 } }
+        val rows = sampleList().let { list -> list.copy(parcels = list.parcels.mapIndexed { index, parcel -> words(index)?.let { parcel.copy(peekAi = it) } ?: parcel }) }
+        val dot = { index: Int -> index == 0 }
+        shoot(
+            name, dark,
+            listOf(
+                listOf(listOf(widget(LIST_SMALL, rows)), listOf(widget(LIST_MEDIUM, rows)), listOf(widget(LIST_LARGE, rows)), listOf(widget(LIST_TWO_BY_FOUR, rows))),
+                listOf(listOf(demo(LIST_SMALL, 1, dot, words)), listOf(demo(LIST_SMALL, 2, dot, words)), listOf(demo(LIST_MEDIUM, 2, dot, words)), listOf(demo(LIST_MEDIUM, 4, dot, words))),
+                listOf(listOf(demo(LIST_LARGE, 1, dot, words)), listOf(demo(LIST_LARGE, 3, dot, words)), listOf(demo(LIST_LARGE, 6, dot, words))),
+            ),
+        )
+    }
+
+    @Test
+    @Config(qualifiers = "w1220dp-h1360dp-xhdpi")
+    fun peekAiLight() = peekAi("peek_ai_light", dark = false)
+
+    @Test
+    @Config(qualifiers = "w1220dp-h1360dp-night-xhdpi")
+    fun peekAiDark() = peekAi("peek_ai_dark", dark = true)
 
     /**
      * Between the three: three cells by two (two columns), two by three and two by four (one column of two-line rows),

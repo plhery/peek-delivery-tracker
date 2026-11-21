@@ -301,10 +301,18 @@ class ParcelStore(
      * is signed up with; null until one is chosen there, and each parcel keeps the one it was first given.
      */
     val deviceAlertPresetFlow: StateFlow<ParcelAlertPreset?> = deviceAlertPresetState.asStateFlow()
-    private val markNewUpdatesChoice = MarkNewUpdatesChoice(defaults)
+    private val markNewUpdates = AccountSwitch(MarkNewUpdatesChoice(defaults), { api.saveDisplayPreferences(markNewUpdates = it, timezone = ZoneId.systemDefault().id) }) {
+        preferences, enabled -> preferences.copy(markNewUpdates = enabled)
+    }
+    private val showPeekAi = AccountSwitch(ShowPeekAiChoice(defaults), { api.saveDisplayPreferences(showPeekAi = it, timezone = ZoneId.systemDefault().id) }) {
+        preferences, enabled -> preferences.copy(showPeekAi = enabled)
+    }
 
     /** Whether cards mark their parcel's new updates (#72), "Dot on updated parcels" in Settings. */
-    val markNewUpdatesFlow: StateFlow<Boolean> = markNewUpdatesChoice.enabled
+    val markNewUpdatesFlow: StateFlow<Boolean> = markNewUpdates.choice.enabled
+
+    /** Whether cards, pages and widgets show Peek AI's estimates, "Peek AI" in Settings. */
+    val showPeekAiFlow: StateFlow<Boolean> = showPeekAi.choice.enabled
     val notificationErrorFlow: StateFlow<String?> = notificationErrorState.asStateFlow()
 
     /** The last try to register this phone's token, with Firebase or with the server, failed: the invitation offers it again. */
@@ -442,8 +450,9 @@ class ParcelStore(
         get() = notificationPreferencesState.value
         private set(value) {
             notificationPreferencesState.value = value
-            // An account's choice about the list's mark follows it here from its other devices (#72).
-            value?.markNewUpdates?.let(::followMarkNewUpdates)
+            // An account's choices about the list's mark (#72) and Peek AI follow it here from its other devices.
+            value?.markNewUpdates?.let(markNewUpdates::follow)
+            value?.showPeekAi?.let(showPeekAi::follow)
             saveShownUnits()
         }
 
@@ -532,9 +541,6 @@ class ParcelStore(
     /** Counts saved preferences: the answer to a read that began before a save is older than it. */
     private var notificationPreferenceSaves = 0
 
-    /** The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken. */
-    private var markNewUpdatesSaving = 0
-
     /**
      * The clock and units sent with the account's preferences and not yet kept, so a server that does not keep them is
      * not asked again and again.
@@ -581,7 +587,8 @@ class ParcelStore(
         pendingMutations.clear()
         pendingJobIds.clear()
         seenHere.clear()
-        markNewUpdatesSaving = 0
+        markNewUpdates.saving = 0
+        showPeekAi.saving = 0
         unitsSent = null
         nativePushGeneration += 1
         stopDeliveryLiveActivityObservers()
@@ -1725,65 +1732,87 @@ class ParcelStore(
      * saved with its preferences. A choice the account has not taken, made without one or while the server could not
      * take it, stands on this phone until it is saved, and goes to the account when its preferences are next read.
      */
-    suspend fun setMarkNewUpdates(enabled: Boolean) {
-        if (markNewUpdatesFlow.value == enabled) return
-        keepMarkNewUpdates(enabled)
-        if (isDemo) return
-        markNewUpdatesChoice.unsaved = MarkNewUpdatesChoice.Unsaved(session.user?.id, enabled)
-        saveMarkNewUpdates(enabled)?.join()
-    }
+    suspend fun setMarkNewUpdates(enabled: Boolean) = markNewUpdates.set(enabled)
 
-    /** The choices made about "Dot on updated parcels", counted: the answer to an earlier one does not undo a later one. */
-    private var markNewUpdatesWrite: Job? = null
-    private var markNewUpdatesChoices = 0
+    /** Switches Peek AI on cards, pages and widgets, as [setMarkNewUpdates] switches the list's mark. */
+    suspend fun setShowPeekAi(enabled: Boolean) = showPeekAi.set(enabled)
 
     /**
-     * Saves "Dot on updated parcels" with the account's preferences as stored and this phone's time zone. Taken, the choice
-     * follows the account again.
+     * A display choice an account keeps with its preferences ([AccountChoice]), switched on this phone and saved with the
+     * account's preferences as stored and this phone's time zone (`save`); `taking` writes it into an answer.
      */
-    private fun saveMarkNewUpdates(enabled: Boolean): Job? {
-        if (!session.isAuthenticated || isDemo || isGuest) return null
-        // A read of the preferences that lands before the answer leaves the choice standing (followMarkNewUpdates), and
-        // the answer's count turns away one that lands after it. Counting here too would turn away the launch's read
-        // when this save fails.
-        markNewUpdatesChoices += 1
-        markNewUpdatesSaving += 1
-        val choice = markNewUpdatesChoices
-        val generation = session.generation
-        val previous = markNewUpdatesWrite
-        return scope.launch {
-            try {
-                previous?.join()
-                if (generation != session.generation) return@launch
-                var saved = api.saveDisplayPreferences(markNewUpdates = enabled, timezone = ZoneId.systemDefault().id)
-                if (generation != session.generation) return@launch
-                if (choice == markNewUpdatesChoices) {
-                    markNewUpdatesChoice.unsaved = null
-                } else {
-                    // Switched again meanwhile: that choice stands, and its own save is on its way.
-                    saved = saved.copy(markNewUpdates = markNewUpdatesFlow.value)
+    private inner class AccountSwitch(
+        val choice: AccountChoice,
+        private val save: suspend (Boolean) -> NotificationPreferences,
+        private val taking: (NotificationPreferences, Boolean) -> NotificationPreferences,
+    ) {
+        /** The saves on their way: an answer meanwhile does not say whether the latest choice was taken. */
+        var saving = 0
+
+        /** The choices made, counted: the answer to an earlier one does not undo a later one. */
+        private var write: Job? = null
+        private var choices = 0
+
+        suspend fun set(enabled: Boolean) {
+            if (choice.enabled.value == enabled) return
+            keep(enabled)
+            if (isDemo) return
+            choice.unsaved = AccountChoice.Unsaved(session.user?.id, enabled)
+            saveChoice(enabled)?.join()
+        }
+
+        /** Saves the choice. Taken, it follows the account again. */
+        private fun saveChoice(enabled: Boolean): Job? {
+            if (!session.isAuthenticated || isDemo || isGuest) return null
+            // A read of the preferences that lands before the answer leaves the choice standing (follow), and the
+            // answer's count turns away one that lands after it. Counting here too would turn away the launch's read
+            // when this save fails.
+            choices += 1
+            saving += 1
+            val made = choices
+            val generation = session.generation
+            val previous = write
+            return scope.launch {
+                try {
+                    previous?.join()
+                    if (generation != session.generation) return@launch
+                    var saved = save(enabled)
+                    if (generation != session.generation) return@launch
+                    if (made == choices) {
+                        choice.unsaved = null
+                    } else {
+                        // Switched again meanwhile: that choice stands, and its own save is on its way.
+                        saved = taking(saved, choice.enabled.value)
+                    }
+                    notificationPreferenceSaves += 1
+                    notificationPreferences = saved
+                } catch (error: Exception) {
+                    currentCoroutineContext().ensureActive()
+                } finally {
+                    if (generation == session.generation) saving -= 1
                 }
-                notificationPreferenceSaves += 1
-                notificationPreferences = saved
-            } catch (error: Exception) {
-                currentCoroutineContext().ensureActive()
-            } finally {
-                if (generation == session.generation) markNewUpdatesSaving -= 1
-            }
-        }.also { markNewUpdatesWrite = it }
-    }
+            }.also { write = it }
+        }
 
-    /**
-     * The account's choice, as read or saved, unless one made on this phone for this account, or without one, has not
-     * been saved: that one stands and goes to the account, or, the account holding it already, follows the account again.
-     * One another account made here waits for that account.
-     */
-    private fun followMarkNewUpdates(stored: Boolean) {
-        val unsaved = markNewUpdatesChoice.unsaved
-        if (unsaved == null || (unsaved.owner != null && unsaved.owner != session.user?.id)) return keepMarkNewUpdates(stored)
-        if (markNewUpdatesSaving > 0) return
-        keepMarkNewUpdates(unsaved.enabled)
-        if (stored == unsaved.enabled) markNewUpdatesChoice.unsaved = null else saveMarkNewUpdates(unsaved.enabled)
+        /**
+         * The account's choice, as read or saved, unless one made on this phone for this account, or without one, has
+         * not been saved: that one stands and goes to the account, or, the account holding it already, follows the
+         * account again. One another account made here waits for that account.
+         */
+        fun follow(stored: Boolean) {
+            val unsaved = choice.unsaved
+            if (unsaved == null || (unsaved.owner != null && unsaved.owner != session.user?.id)) return keep(stored)
+            if (saving > 0) return
+            keep(unsaved.enabled)
+            if (stored == unsaved.enabled) choice.unsaved = null else saveChoice(unsaved.enabled)
+        }
+
+        /** The choice as this phone or the account made it: the widgets follow the cards. */
+        private fun keep(enabled: Boolean) {
+            if (choice.enabled.value == enabled) return
+            choice.keep(enabled)
+            if (!holdingDeliverySurfaces) publishDeliveryWidget()
+        }
     }
 
     /**
@@ -1816,13 +1845,6 @@ class ParcelStore(
                 if (generation == session.generation && unitsSent == sent) unitsSent = null
             }
         }
-    }
-
-    /** "Dot on updated parcels" as this phone or the account chose it: the widgets show their dots as the cards do. */
-    private fun keepMarkNewUpdates(enabled: Boolean) {
-        if (markNewUpdatesFlow.value == enabled) return
-        markNewUpdatesChoice.keep(enabled)
-        if (!holdingDeliverySurfaces) publishDeliveryWidget()
     }
 
     /**
@@ -1979,7 +2001,7 @@ class ParcelStore(
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = carded(widgetOrder(followed, localizer, now(), markNewUpdatesFlow.value)),
+                parcels = carded(widgetOrder(followed, localizer, now(), markNewUpdatesFlow.value, showPeekAiFlow.value)),
             )
         } else {
             null
@@ -2302,15 +2324,19 @@ class ParcelStore(
         }
 
         /** The first [DeliveryWidgetSelection.limit] parcels in the widget's order ([widgetOrder]). */
-        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> =
-            widgetOrder(parcels, localizer, now, markNewUpdates).take(DeliveryWidgetSelection.limit)
+        fun widgetDeliveries(
+            parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true, showPeekAi: Boolean = true,
+        ): List<DeliveryWidgetParcel> = widgetOrder(parcels, localizer, now, markNewUpdates, showPeekAi).take(DeliveryWidgetSelection.limit)
 
         /**
          * The widget's parcels, in its order ([DeliveryWidgetSelection.ordered]): those on their way, then those
          * delivered within the last day, the latest first. Their details are also worded for the next midnights. Each
-         * carries the dot its card in the app shows while "Dot on updated parcels" is on ([DeliveryWidgetParcel.newUpdate]).
+         * carries the dot its card in the app shows while "Dot on updated parcels" is on ([DeliveryWidgetParcel.newUpdate]),
+         * and Peek AI's words while Peek AI is on ([DeliveryWidgetParcel.peekAi]).
          */
-        fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
+        fun widgetOrder(
+            parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true, showPeekAi: Boolean = true,
+        ): List<DeliveryWidgetParcel> {
             val zone = ZoneId.systemDefault()
             val midnights = DeliveryWidgetDays.midnights(after = now, zone = zone).toSortedSet()
             for (parcel in parcels) {
@@ -2347,6 +2373,7 @@ class ParcelStore(
                 val parcel = byId[item.id] ?: return@mapIndexed item
                 val section = sections[item.id]
                 val nextUp = item.id == next
+                val peekAi = localizer.parcelPeekAiWords(parcel, showPeekAi, now)
                 val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), days) { midnight ->
                     val at = days.indexOf(midnight)
                     DeliveryWidgetWording(midnight, item.worded(midnight).detail, sectionsLater[at][item.id], item.id == nextLater[at])
@@ -2355,6 +2382,7 @@ class ParcelStore(
                     later = later, section = section, nextUp = nextUp, carrierId = parcel.displayedCarrier.rawValue,
                     steps = if (index < DeliveryWidgetSelection.limit) widgetSteps(parcel, localizer).ifEmpty { null } else null,
                     newUpdate = true.takeIf { parcel.marksNewUpdate(markNewUpdates) },
+                    peekAi = peekAi, peekAiUntil = peekAi?.let { parcelPeekAi(parcel, now)?.let(::peekAiUntil) },
                 )
             }
         }

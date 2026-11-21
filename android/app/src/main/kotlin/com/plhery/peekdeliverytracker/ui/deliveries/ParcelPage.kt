@@ -376,10 +376,10 @@ private fun showsHistory(parcel: Parcel): Boolean =
     CarrierCatalog.shared.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate
 
 /**
- * `liveParcelPass`: the pass and the offer of the delivery email ([EmailOfferSlot]), then what the parcel waits for
- * and what its carrier says, then its numbers, links and details, then what the page says where no carrier is asked or
- * why the last check failed, 12 apart, a line under them where the history stands under the pass (`divided`). TalkBack
- * goes through its parts before it leaves them (`.accessibilityElement(children: .contain)`).
+ * `liveParcelPass`: the pass and the offer of the delivery email ([EmailOfferSlot]), then Peek AI ([PeekAiPageCard]),
+ * then what the parcel waits for and what its carrier says, then its numbers, links and details, then what the page says
+ * where no carrier is asked or why the last check failed, 12 apart, a line under them where the history stands under the
+ * pass (`divided`). TalkBack goes through its parts before it leaves them (`.accessibilityElement(children: .contain)`).
  */
 @Composable
 private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID, divided: Boolean, modifier: Modifier) {
@@ -389,6 +389,7 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
             PassHeader(state, parcel, pageId)
             EmailOfferSlot(state, parcel, pageId, Modifier.padding(top = PASS_SPACING))
         }
+        PeekAiPageCard(state, parcel)
         PickupPoint(state, parcel)
         CarrierNotes(state, parcel)
         ShipmentIdentity(state, parcel, pageId)

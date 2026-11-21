@@ -134,6 +134,12 @@ it when the card does: once it is opened on any of the account's devices, or whe
 (`DeliveryWidgetParcel.newUpdate`). The line keeps to the room the dot leaves, so every size keeps its rows. TalkBack
 reads "New update." first.
 
+Peek AI's words on a parcel's card in the app show in the widget too, as "✦ Peek AI" in a pill and the words
+(`WidgetPeekAi.kt`): under the status line on a card tall enough, under the day or in its place on a large widget's
+list cards, and after the day on passes and rows where the room left holds them, so that no size gives a parcel up for
+them. They go when they stop holding (`DeliveryWidgetParcel.peekAiUntil`) or Peek AI is switched off in Settings, and TalkBack
+reads them last.
+
 Its gallery picture shows invented parcels in the phone's language (`DeliveryWidgetListSample`), never the reader's.
 
 ## Release bundle

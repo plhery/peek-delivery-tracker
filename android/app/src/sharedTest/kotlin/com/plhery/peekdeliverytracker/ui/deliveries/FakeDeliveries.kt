@@ -355,6 +355,12 @@ class FakeDeliveries(
         markNewUpdates.value = enabled
     }
 
+    override val showPeekAi = MutableStateFlow(true)
+
+    override fun setShowPeekAi(enabled: Boolean) {
+        showPeekAi.value = enabled
+    }
+
     /** The parcels the pages saw (#72), in order; each is seen at once, as the store marks it. */
     val seen = mutableListOf<UUID>()
 

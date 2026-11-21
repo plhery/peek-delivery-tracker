@@ -36,7 +36,8 @@ import org.robolectric.annotation.GraphicsMode
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark and in Russian and
  * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark, at an accessibility text
  * size and under Reduce Transparency light and dark, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
- * page beside the list on a tablet on its side, the history beside the pass. Then a guest's page of a parcel Peek forgot. The page dragged down, under its bar, is
+ * page beside the list on a tablet on its side, the history beside the pass. Then a guest's page of a parcel Peek forgot, and
+ * Peek AI's sheet light and dark, with the hours, and on a tablet. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -270,5 +271,46 @@ class ParcelPageScreenshotTest {
         }
         open()
         compose.screenshot("page_frozen_light")
+    }
+
+    /** `name`'s page with Peek AI's sheet open over it from the (i) on its card. */
+    private fun peekAiSheet(name: String = "Birthday gift") {
+        compose.openCard(DemoCards.parcel(name).label)
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(PEEK_AI_INFO).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+    }
+
+    /** Birthday gift's Peek AI sheet: what it expects over the carrier's word, the likely days, why, how sure, the switch. */
+    @Test
+    fun peekAisSheet() {
+        show()
+        peekAiSheet()
+        compose.screenshot("page_peek_ai_light")
+    }
+
+    @Test
+    fun peekAisSheetInDark() {
+        show(dark = true)
+        peekAiSheet()
+        compose.screenshot("page_peek_ai_dark")
+    }
+
+    /** Belgian chocolate's, out for delivery: the likely hours. */
+    @Test
+    fun peekAisSheetWithTheHours() {
+        show()
+        peekAiSheet("Belgian chocolate")
+        compose.screenshot("page_peek_ai_hours_light")
+    }
+
+    /** On a tablet on its side, the sheet over the list and the page. */
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun peekAisSheetOnATablet() {
+        show(top = 24, bottom = 24)
+        peekAiSheet()
+        compose.screenshot("page_peek_ai_tablet_light")
     }
 }

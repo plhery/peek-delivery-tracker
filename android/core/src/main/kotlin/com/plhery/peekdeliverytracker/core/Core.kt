@@ -520,7 +520,7 @@ class Localizer(
         return if (language == AppLanguage.Zh) "$period$time" else "$time $period"
     }
 
-    private fun deliveryWallClock(value: String): String {
+    internal fun deliveryWallClock(value: String): String {
         if (use24HourTime) return value
         val hour = value.take(2).toInt()
         val minute = value.takeLast(2).toInt()
@@ -723,7 +723,7 @@ class Localizer(
      * passed. Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are kept,
      * not a day, nor the last day of a window.
      */
-    private fun shownEstimate(parcel: Parcel, now: Instant): String? {
+    internal fun shownEstimate(parcel: Parcel, now: Instant): String? {
         val (value, date) = liveEstimate(parcel, now) ?: return null
         if (parcel.currentStage == TrackingStage.OutForDelivery) {
             val zone = ZoneId.systemDefault()

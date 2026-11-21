@@ -35,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.core.isFinal
+import com.plhery.peekdeliverytracker.core.parcelPeekAiWords
 import com.plhery.peekdeliverytracker.core.pickupPlace
 import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
@@ -73,7 +74,9 @@ import kotlin.math.roundToInt
  * an arrived card swells a little as the news lands. `newUpdate`, a scan the reader hasn't seen (#72), puts a
  * [NewUpdateDot] before the status, and TalkBack says so first. `frozen`, a copy the service forgot, still on its way
  * reads "No longer updated" after its status in place of its date or its problem (`frozenOnTheWay`), as neither may
- * hold any more; delivered, it needs no mark. Nothing is drawn until the carriers' liveries are read.
+ * hold any more; delivered, it needs no mark. While `peekAi` is on, Peek AI's words ([PeekAiPhrase]) go under the
+ * carrier's date, or in its place, and TalkBack reads them after the status. Nothing is drawn until the carriers'
+ * liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -90,6 +93,7 @@ fun ParcelPassCard(
     onTap: () -> Unit = onOpen,
     newUpdate: Boolean = false,
     frozen: Boolean = false,
+    peekAi: Boolean = false,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -105,6 +109,7 @@ fun ParcelPassCard(
     val stale = frozen && stage?.isFinal != true
 
     val date = if (stale) null else localizer.parcelDeliveryEstimate(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
+    val peekAiWords = if (stale) null else localizer.parcelPeekAiWords(parcel, peekAi, now)
     // Scans with places are drawn as a small route at the end of the card; at the largest text sizes the words take
     // the whole card, and the route goes.
     val placed = parcel.hasMappedPlace
@@ -159,7 +164,10 @@ fun ParcelPassCard(
                 decorative = decorative,
                 label = newUpdateLabel(
                     localizer.text("parcel.newUpdate").takeIf { newUpdate && showsStatus },
-                    cardLabel(identity.fullName, date, name, carrierNotice, delivering, status.takeIf { showsStatus }, flag),
+                    cardLabel(
+                        identity.fullName, date, name, carrierNotice, delivering, status.takeIf { showsStatus },
+                        peekAiWords?.let { localizer.text("peekAi.says", mapOf("words" to it)) }, flag,
+                    ),
                 ),
                 hint = null,
                 selected = selected,
@@ -200,7 +208,10 @@ fun ParcelPassCard(
         ) {
             CardHeader(
                 mark = { CarrierFleetMark(identity) },
-                date = date?.let { { Text(it, color = ink, style = type.caption.sfLines()) } },
+                dates = listOfNotNull(
+                    date?.let { @Composable { Text(it, color = ink, style = type.caption.sfLines()) } },
+                    peekAiWords?.let { @Composable { PeekAiPhrase(it, ink, type.caption) } },
+                ),
                 modifier = Modifier.padding(bottom = 3.dp),
             )
             Column(
@@ -244,33 +255,44 @@ private fun androidx.compose.ui.layout.MeasureScope.trailingRoute(
 }
 
 /**
- * `ViewThatFits(in: .horizontal)`: the carrier and the date on one row, the date at the trailing end and both on top,
- * when the two fit at their own widths with 12 points either side of the space between; else the date under the
- * carrier, 6 points down.
+ * `ViewThatFits(in: .horizontal)`: the carrier and the dates on one row, the dates at the trailing end, the carrier's
+ * over Peek AI's 2 points apart, and all on top, when they fit at their own widths with 12 points either side of the
+ * space between; else the dates under the carrier, 6 points down.
  */
 @Composable
-private fun CardHeader(mark: @Composable () -> Unit, date: (@Composable () -> Unit)?, modifier: Modifier = Modifier) {
-    Layout(content = { mark(); date?.invoke() }, modifier = modifier) { measurables, constraints ->
+private fun CardHeader(mark: @Composable () -> Unit, dates: List<@Composable () -> Unit>, modifier: Modifier = Modifier) {
+    Layout(content = { mark(); dates.forEach { it() } }, modifier = modifier) { measurables, constraints ->
         val spacing = 12.dp.roundToPx()
+        val between = 2.dp.roundToPx()
         val markIdeal = measurables[0].maxIntrinsicWidth(Constraints.Infinity)
-        val dateIdeal = measurables.getOrNull(1)?.maxIntrinsicWidth(Constraints.Infinity)
-        val row = markIdeal + spacing + (dateIdeal?.let { it + spacing } ?: 0)
+        val dated = measurables.drop(1)
+        val datesIdeal = dated.map { it.maxIntrinsicWidth(Constraints.Infinity) }
+        val row = markIdeal + spacing + (datesIdeal.maxOrNull()?.let { it + spacing } ?: 0)
         val loose = constraints.copy(minWidth = 0, minHeight = 0)
         if (row <= constraints.maxWidth) {
             val markPlaced = measurables[0].measure(loose.copy(maxWidth = markIdeal))
-            val datePlaced = dateIdeal?.let { measurables[1].measure(loose.copy(maxWidth = it)) }
-            val height = maxOf(markPlaced.height, datePlaced?.height ?: 0)
-            layout(constraints.maxWidth, height) {
+            val datesPlaced = dated.mapIndexed { index, it -> it.measure(loose.copy(maxWidth = datesIdeal[index])) }
+            val datesHeight = datesPlaced.sumOf { it.height } + between * (datesPlaced.size - 1).coerceAtLeast(0)
+            layout(constraints.maxWidth, maxOf(markPlaced.height, datesHeight)) {
                 markPlaced.place(0, 0)
-                datePlaced?.place(constraints.maxWidth - datePlaced.width, 0)
+                var y = 0
+                for (placed in datesPlaced) {
+                    placed.place(constraints.maxWidth - placed.width, y)
+                    y += placed.height + between
+                }
             }
         } else {
             val markPlaced = measurables[0].measure(loose)
-            val datePlaced = measurables.getOrNull(1)?.measure(loose)
-            val gap = if (datePlaced != null) 6.dp.roundToPx() else 0
-            layout(constraints.maxWidth, markPlaced.height + gap + (datePlaced?.height ?: 0)) {
+            val datesPlaced = dated.map { it.measure(loose) }
+            val gap = if (datesPlaced.isNotEmpty()) 6.dp.roundToPx() else 0
+            val datesHeight = datesPlaced.sumOf { it.height } + between * (datesPlaced.size - 1).coerceAtLeast(0)
+            layout(constraints.maxWidth, markPlaced.height + gap + datesHeight) {
                 markPlaced.place(0, 0)
-                datePlaced?.place(0, markPlaced.height + gap)
+                var y = markPlaced.height + gap
+                for (placed in datesPlaced) {
+                    placed.place(0, y)
+                    y += placed.height + between
+                }
             }
         }
     }
@@ -291,9 +313,10 @@ fun DeliveredParcelCard(
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
     newUpdate: Boolean = false,
+    peekAi: Boolean = false,
 ) {
     ParcelPassCard(
         parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected, onLongClick = onLongClick,
-        swipeAction = swipeAction, onTap = onTap, newUpdate = newUpdate,
+        swipeAction = swipeAction, onTap = onTap, newUpdate = newUpdate, peekAi = peekAi,
     )
 }

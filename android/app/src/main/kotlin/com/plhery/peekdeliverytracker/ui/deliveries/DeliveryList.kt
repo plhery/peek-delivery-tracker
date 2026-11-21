@@ -788,13 +788,14 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val onName = state.names(parcel.id)
     val sight = remember(state, parcel.id) { { pip: () -> Rect? -> state.places.see(pip, parcel.id) } }
     val markNew by state.source.markNewUpdates.collectAsState()
+    val peekAi by state.source.showPeekAi.collectAsState()
     CardComposed(parcel.id)
     ArrivalCelebration(state, parcel.id, place, ParcelArrival.NEXT_STUB_INSET) {
         SwipeableCard(state, shown, Radii.nextUp, shadow = true, pictured = true) { moved, open, tap, menu, archive ->
             CompositionLocalProvider(LocalPipSight provides sight) {
                 NextDeliveryPass(
                     shown, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected, onLongClick = menu,
-                    swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew),
+                    swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew), peekAi = peekAi,
                 )
             }
         }
@@ -815,6 +816,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     val arrived = state.holds(parcel.id).value
     val selected = state.selects(parcel.id).value
     val markNew by state.source.markNewUpdates.collectAsState()
+    val peekAi by state.source.showPeekAi.collectAsState()
     CardComposed(parcel.id)
     val notice = if (!item.attention || arrived) {
         null
@@ -828,7 +830,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
             ParcelPassCard(
                 shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
                 onLongClick = menu, swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew),
-                frozen = state.source.isFrozen(shown),
+                frozen = state.source.isFrozen(shown), peekAi = peekAi,
             )
         }
     }
@@ -843,6 +845,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
     val now = LocalNow.current
     val selected = state.selects(parcel.id).value
     val markNew by state.source.markNewUpdates.collectAsState()
+    val peekAi by state.source.showPeekAi.collectAsState()
     // An archived parcel found here carries no dot, as the archive's rows carry none.
     val newUpdate = !parcel.isArchived && parcel.marksNewUpdate(markNew)
     CardComposed(parcel.id)
@@ -854,7 +857,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
                 SwipeableCard(state, parcel, Radii.card, shadow = false, pictured = true) { moved, open, tap, menu, archive ->
                     DeliveredParcelCard(
                         parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap, newUpdate = newUpdate,
+                        onTap = tap, newUpdate = newUpdate, peekAi = peekAi,
                     )
                 }
             }
@@ -863,7 +866,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
             SwipeableCard(state, parcel, Radii.nextUp, shadow = true) { moved, open, tap, menu, archive ->
                 NextDeliveryPass(
                     parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive, onTap = tap,
-                    newUpdate = newUpdate,
+                    newUpdate = newUpdate, peekAi = peekAi,
                 )
             }
         }
@@ -876,7 +879,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
                 SwipeableCard(state, parcel, Radii.card, shadow = false, swipes = !parcel.isArchived) { moved, open, tap, menu, archive ->
                     ParcelPassCard(
                         parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap, newUpdate = newUpdate, frozen = state.source.isFrozen(parcel),
+                        onTap = tap, newUpdate = newUpdate, frozen = state.source.isFrozen(parcel), peekAi = peekAi,
                     )
                 }
             }

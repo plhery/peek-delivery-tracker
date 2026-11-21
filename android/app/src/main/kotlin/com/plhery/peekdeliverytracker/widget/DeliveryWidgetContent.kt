@@ -162,7 +162,8 @@ internal fun OneOrTwoCards(
 /**
  * A card's words as they fit `room`, the card inside its padding: the label on two lines where the card is tall enough
  * for them, else one, shrunk to 0.82 of its style to fit them, and the status line shrunk to 0.8 to fit its one, past
- * the new-update dot where the parcel has one ([newUpdate]).
+ * the new-update dot where the parcel has one ([newUpdate]); under it Peek AI's phrase ([peekAi]) where the card holds
+ * it with the label on one line at least.
  */
 internal class CardWords(
     parcel: DeliveryWidgetParcel,
@@ -179,15 +180,26 @@ internal class CardWords(
     /** Whether the status line starts with the new-update dot (#72). */
     val newUpdate = parcel.newUpdate == true
     private val statusWidth = room.width - if (newUpdate) parcel.dotRoom else 0.dp
-    val statusPoints = type.fit(status, type.points(if (half) IosTextStyle.Caption2 else IosTextStyle.Caption), FontWeight.Normal, statusWidth, 1, 0.8f)
+    private val statusStyle = type.points(if (half) IosTextStyle.Caption2 else IosTextStyle.Caption)
+    val statusPoints = type.fit(status, statusStyle, FontWeight.Normal, statusWidth, 1, 0.8f)
     val spacing = if (half) 2.dp else 3.dp
     private val labelStyle = if (half) IosTextStyle.Subheadline else if (shape == DeliveryWidgetPicture.Wide) IosTextStyle.Title3 else IosTextStyle.Headline
     private val statusHeight = type.height(status, statusPoints, FontWeight.Normal, statusWidth, 1)
 
     /** What TalkBack reads for the mark, the card's first words: "New update." before the carrier while the dot shows. */
     val markDescription: String = newUpdateSpoken(parcel, languageCode)?.takeIf { newUpdate }?.let { "$it ${parcel.carrier}" } ?: parcel.carrier
-    val label: FittedLine = listOf(2, 1).map { lines -> FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, lines, 0.82f, type) }
-        .firstOrNull { markHeight + 4.dp + it.height + spacing + statusHeight <= room.height } ?: FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, 1, 0.82f, type)
+    private val laid: Pair<FittedLine, PeekAiFit?> = run {
+        val labels = listOf(2, 1).map { lines -> FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, lines, 0.82f, type) }
+        val peekAi = type.peekAiFit(parcel, languageCode, statusStyle, room.width)
+        val tries = peekAi?.let { fit -> labels.map { it to fit } }.orEmpty() + labels.map { it to null }
+        tries.firstOrNull { (label, fit) ->
+            markHeight + 4.dp + label.height + spacing + statusHeight + (fit?.let { spacing + it.height } ?: 0.dp) <= room.height
+        } ?: (labels.last() to null)
+    }
+    val label: FittedLine = laid.first
+
+    /** Peek AI's phrase under the status line, where the card holds it. */
+    val peekAi: PeekAiFit? = laid.second
 
     /** The width the top row leaves the mark, which shrinks to it as `scaledToFit` shrinks the iPhone's. */
     val markRoom = room.width
@@ -239,7 +251,7 @@ internal fun fadedSides(picture: Bitmap, points: Double): Bitmap {
 
 /**
  * `DeliveryWidgetCardView`: a parcel's card as the app's list shows it, in its carrier's colours: the mark at the top,
- * over the route, and the parcel's name and status at the bottom.
+ * over the route, and the parcel's name and status at the bottom, then Peek AI's phrase where the card holds it.
  */
 @Composable
 internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, art: WidgetCardArt, words: CardWords) {
@@ -261,6 +273,10 @@ internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, ar
         Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             if (words.newUpdate) NewUpdateDot(WidgetCardColors.pair(card.ink, NEW_UPDATE_OPACITY))
             Text(words.status, GlanceModifier.defaultWeight(), maxLines = 1, style = TextStyle(color = WidgetCardColors.pair(card.ink), fontSize = type.sp(words.statusPoints)))
+        }
+        words.peekAi?.let {
+            Spacer(GlanceModifier.height(words.spacing))
+            PeekAiLine(it, WidgetCardColors.pair(card.ink), WidgetCardColors.pair(card.ink, PEEK_AI_PILL), type)
         }
     }
 }

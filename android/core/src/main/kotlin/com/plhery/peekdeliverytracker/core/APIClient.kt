@@ -533,10 +533,11 @@ class DeliveryApiClient(
      */
     suspend fun saveDisplayPreferences(
         markNewUpdates: Boolean? = null, clock: NotificationPreferencesClock? = null, distance: NotificationPreferencesDistance? = null,
-        timezone: String,
+        timezone: String, showPeekAi: Boolean? = null,
     ): NotificationPreferences {
         val patch = kotlinx.serialization.json.buildJsonObject {
             markNewUpdates?.let { put("markNewUpdates", JsonPrimitive(it)) }
+            showPeekAi?.let { put("showPeekAi", JsonPrimitive(it)) }
             clock?.let { put("clock", JsonPrimitive(it.rawValue)) }
             distance?.let { put("distance", JsonPrimitive(it.rawValue)) }
             put("timezone", JsonPrimitive(timezone))

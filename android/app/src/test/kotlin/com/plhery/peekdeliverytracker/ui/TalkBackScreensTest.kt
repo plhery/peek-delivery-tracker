@@ -149,8 +149,8 @@ class TalkBackScreensTest {
                 "Sort & filter [button]",
                 "Search parcels [button]",
                 "DHL, Next up, New trainers 👟, Ready for pickup · Kiosk im Hauptbahnhof [button]",
-                "Chronopost, Birthday gift 🎁, At customs [button]",
-                "FedEx, Belgian chocolate 🍫, Out for delivery [button]",
+                "Chronopost, Birthday gift 🎁, At customs, Peek AI: by Sat 31 Oct [button]",
+                "FedEx, Belgian chocolate 🍫, Out for delivery, Peek AI: by 16:00 [button]",
                 "DPD Switzerland, tomorrow, Trail weekend kit 🏕️, Received by carrier [button]",
                 "GLS Germany, Sat 31 Oct, Moon lamp 🌙, In transit [button]",
                 "An Post, Sun 1 Nov, 35mm film rolls 🎞️, Label created [button]",
@@ -196,6 +196,9 @@ class TalkBackScreensTest {
                 "From Mamie",
                 "At customs",
                 "Delivery progress [Step 4 of 6: At customs]",
+                "Peek AI, likely by Sat 31 Oct",
+                "About Peek AI [button]",
+                "Chronopost gives no date. It reached customs 12 hours ago.",
                 "Tracking number",
                 "LX123456789DE",
                 "Copy tracking number [button]",
@@ -206,8 +209,6 @@ class TalkBackScreensTest {
                 "yesterday [heading]",
                 "18:11, Customs is taking a look. No peeking., Basel, Switzerland",
                 "Tue 27 Oct [heading]",
-                "10:11, Handed over at the post office counter, Lyon, France",
-                "04:11, A little surprise is on its way",
             ),
         )
 
@@ -247,7 +248,7 @@ class TalkBackScreensTest {
     }
 
     @Test
-    fun settingsDownToAccountAndData() {
+    fun settingsDownToPeekAi() {
         show(READER)
         compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
         settle()
@@ -272,7 +273,7 @@ class TalkBackScreensTest {
                 "Distance [dropdownlist, Automatic (km)]",
                 "Weight [dropdownlist, Automatic (kg)]",
                 "Dot on updated parcels, A dot appears on a parcel with a new update since you last opened it. [switch, on]",
-                "Account & data [button]",
+                "Peek AI, When Peek has a strong hint, it says when it thinks a parcel will come. [switch, on]",
             ),
         )
     }

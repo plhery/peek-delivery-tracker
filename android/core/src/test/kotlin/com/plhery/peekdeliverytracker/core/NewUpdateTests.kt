@@ -61,6 +61,7 @@ class NewUpdateTests {
         var newsAt: String? = scanned
         var seenAt: String = opened
         var markNewUpdates = true
+        var showPeekAi = true
         var seenFails = false
         val seenCalls = mutableListOf<String>()
         val preferenceSaves = mutableListOf<Boolean?>()
@@ -86,7 +87,7 @@ class NewUpdateTests {
 
         private fun preferences() = NotificationPreferences(
             enabledStages = NotificationPreset.Important.stages, timezone = "Europe/Paris", emailOnDelivery = emailOnDelivery,
-            emailAvailable = emailAvailable, markNewUpdates = markNewUpdates, clock = clock, distance = distance,
+            emailAvailable = emailAvailable, markNewUpdates = markNewUpdates, clock = clock, distance = distance, showPeekAi = showPeekAi,
         )
 
         suspend fun answer(request: HttpRequest): HttpResponse = when {
@@ -112,6 +113,7 @@ class NewUpdateTests {
                 val choice = sent?.get("markNewUpdates")?.jsonPrimitive?.boolean
                 preferenceSaves += choice
                 choice?.let { markNewUpdates = it }
+                sent?.get("showPeekAi")?.jsonPrimitive?.boolean?.let { showPeekAi = it }
                 sent?.get("emailOnDelivery")?.jsonPrimitive?.boolean?.let { emailOnDelivery = it }
                 if (keepsUnits) {
                     sent?.get("clock")?.jsonPrimitive?.content?.let { clock = NotificationPreferencesClock.fromRawValue(it) }
@@ -472,6 +474,53 @@ class NewUpdateTests {
         assertTrue(parcel.hasNewUpdate)
         assertFalse(parcel.marksNewUpdate(MarkNewUpdatesChoice(guestDefaults).enabled.value))
     }
+    @Test
+    fun peekAiIsTheAccountsChoiceAsTheMarkIs() = runTest {
+        val server = Server()
+        val store = signedIn(server)
+        store.loadNotificationPreferences()
+        assertTrue(store.showPeekAiFlow.value)
+
+        store.setShowPeekAi(false)
+        assertFalse(store.showPeekAiFlow.value)
+        assertFalse("The account keeps it with its preferences", server.showPeekAi)
+        assertEquals(false, server.preferenceCalls.last().second?.get("showPeekAi")?.jsonPrimitive?.boolean)
+        assertNull("Peek AI's save leaves the mark alone", server.preferenceCalls.last().second?.get("markNewUpdates"))
+        assertTrue(store.markNewUpdatesFlow.value)
+
+        // A choice made on another device arrives with the account's preferences.
+        server.showPeekAi = true
+        store.loadNotificationPreferences()
+        assertTrue(store.showPeekAiFlow.value)
+
+        // Switched off while the server cannot take it: the next read, which still says on, leaves it off and saves it.
+        server.beforePreferences = { throw IOException("The Internet connection appears to be offline.") }
+        store.setShowPeekAi(false)
+        server.beforePreferences = {}
+        store.loadNotificationPreferences()
+        assertFalse(store.showPeekAiFlow.value)
+        runCurrent()
+        assertFalse(server.showPeekAi)
+    }
+
+    @Test
+    fun aPeekAiChoiceMadeWithoutAnAccountGoesToTheAccountSignedInTo() = runTest {
+        val defaults = MemoryDefaults()
+        val guestSession = testSessionStore(configuration, backgroundScope, transport = RecordingTransport(), now = { now })
+        guestSession.bootstrap()
+        val guest = testParcelStore(configuration, guestSession, RecordingTransport(), backgroundScope, defaults, now = { now })
+        guest.setShowPeekAi(false)
+        assertFalse("A guest's choice is this phone's, and outlasts a relaunch", ShowPeekAiChoice(defaults).enabled.value)
+
+        val server = Server()
+        val store = signedIn(server, defaults)
+        store.loadNotificationPreferences()
+        assertFalse(store.showPeekAiFlow.value)
+        runCurrent()
+        assertFalse(server.showPeekAi)
+        assertTrue("The mark stays as it was", store.markNewUpdatesFlow.value)
+    }
+
     @Test
     fun aMarkChoiceTheServerCouldNotTakeStandsUntilItIsSaved() = runTest {
         val server = Server()

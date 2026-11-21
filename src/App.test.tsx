@@ -7,7 +7,7 @@ import { rememberPostcode } from './lib/postcodeMemory';
 import { announceKeepOutcome } from './peek/pending';
 import { createDemoRepo } from './store/demoRepo';
 import { ParcelsProvider } from './store/ParcelsContext';
-import { carrierPicker, everyCarrierListed, pickCarrier } from './test/carrierPicker';
+import { carrierPicker, everyCarrierListed, listedCarriers, pickCarrier } from './test/carrierPicker';
 import { shutOff } from './test/modalBackground';
 import { RefreshTimeoutError, type ParcelRepo, type ParcelWithEvents } from './types';
 import { rememberPendingAdd } from './peek/pendingAdd';
@@ -921,8 +921,8 @@ describe('App', () => {
     await user.type(within(sheet).getByLabelText(/tracking number/i), '76434219');
 
     await user.click(within(sheet).getByRole('button', { name: /^Detect automatically/ }));
-    await everyCarrierListed();
     const carrier = within(carrierPicker()).getByRole('group', { name: 'All carriers' });
+    await everyCarrierListed();
     const regional = [
       'DPD France',
       'Mondial Relay',
@@ -941,16 +941,11 @@ describe('App', () => {
       'Paack',
       'Asendia',
     ];
-    // One query for them all: a query per carrier named each of the ~580
-    // options again, which held this test near its time limit under load.
-    const names = new Map<Element, string>();
-    const offered = within(carrier).getAllByRole('option', {
-      name: (name, option) => { names.set(option!, name); return regional.includes(name); },
-    });
-    const offeredNames = offered.map((option) => names.get(option));
-    expect([...offeredNames].sort()).toEqual([...regional].sort());
+    const offered = listedCarriers(carrier).filter(({ name }) => regional.includes(name));
+    expect(offered.map(({ name }) => name).sort()).toEqual([...regional].sort());
+    for (const { name, row } of offered) expect(row).toHaveAccessibleName(name);
 
-    await user.click(offered[offeredNames.indexOf('Mondial Relay')]);
+    await user.click(offered.find(({ name }) => name === 'Mondial Relay')!.row);
     const postcode = within(sheet).getByLabelText(/delivery postcode/i);
     // Mondial Relay delivers across Europe and needs a postcode: it starts from the DPD Germany parcel's, a German one.
     expect(postcode).toBeRequired();

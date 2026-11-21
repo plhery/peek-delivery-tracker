@@ -25,21 +25,22 @@ afterEach(() => vi.restoreAllMocks());
 describe('carrier picker', () => {
   it('leads with automatic detection, then the sections, then every carrier from A to Z', async () => {
     const { picker } = renderPicker();
-    await everyCarrierListed(picker);
+    // Found while few rows are drawn: a role query walks every row.
     const list = within(picker).getByRole('listbox', { name: 'Carrier' });
-    const auto = within(list).getAllByRole('option')[0];
+    const fits = within(list).getByRole('group', { name: 'Fits this number' });
+    const all = within(list).getByRole('group', { name: 'All carriers' });
+    const rail = within(picker).getByRole('navigation', { name: 'Jump to a letter' });
+    await everyCarrierListed(picker);
+    const auto = list.querySelector('[role="option"]');
     expect(auto).toHaveAccessibleName(/^Detect automatically/);
     expect(auto).toHaveAttribute('aria-selected', 'true');
     expect(auto).toHaveTextContent('Recommended');
-    expect(within(within(list).getByRole('group', { name: 'Fits this number' })).getAllByRole('option').map((option) => option.id.split('-').at(-1)))
-      .toEqual(['dpd', 'ciblex']);
-    const all = within(list).getByRole('group', { name: 'All carriers' });
-    // Counted and found without a role query, which names every row.
+    expect(within(fits).getAllByRole('option').map((option) => option.id.split('-').at(-1))).toEqual(['dpd', 'ciblex']);
     expect(all.querySelectorAll('[role="option"]')).toHaveLength(SELECTABLE_CARRIERS.length);
     const swissPost = all.querySelector('[role="option"][id$="-all-swiss-post"]');
     expect(swissPost).toHaveAccessibleName('Swiss Post');
     expect(swissPost).toHaveAccessibleDescription('Switzerland · Liechtenstein');
-    expect(within(picker).getByRole('navigation', { name: 'Jump to a letter' })).toHaveTextContent(/^AB.*#$/);
+    expect(rail).toHaveTextContent(/^AB.*#$/);
   });
 
   it('starts in the search field and picks with the keyboard', async () => {
@@ -106,7 +107,10 @@ describe('carrier picker', () => {
     const user = userEvent.setup();
     const { picker, onSelect, onClose } = renderPicker({ selected: 'dhl', auto: undefined });
     expect(within(picker).queryByRole('option', { name: /^Detect automatically/ })).not.toBeInTheDocument();
-    // DHL's row in the A to Z list, found by its id once drawn: a role query names every row, and the list keeps growing.
+    // Found while few rows are drawn: a role query walks every row, and the list fills in as the test goes on.
+    const ciblex = within(within(picker).getByRole('group', { name: 'Fits this number' })).getByRole('option', { name: 'Ciblex' });
+    const cancel = within(picker).getByRole('button', { name: 'Cancel' });
+    // DHL's row in the A to Z list, found by its id once drawn.
     const dhl = await waitFor(() => {
       const row = picker.querySelector('[data-letter] > [role="option"][id$="-all-dhl"]');
       if (!row) throw new Error('DHL is not listed yet.');
@@ -114,9 +118,9 @@ describe('carrier picker', () => {
     }, { timeout: 15_000 });
     expect(dhl).toHaveAccessibleName('DHL');
     expect(dhl).toHaveAttribute('aria-selected', 'true');
-    await user.click(within(within(picker).getByRole('group', { name: 'Fits this number' })).getByRole('option', { name: 'Ciblex' }));
+    await user.click(ciblex);
     expect(onSelect).toHaveBeenCalledWith('ciblex');
-    await user.click(within(picker).getByRole('button', { name: 'Cancel' }));
+    await user.click(cancel);
     expect(onClose).toHaveBeenCalled();
   });
 

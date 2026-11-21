@@ -21,7 +21,7 @@ describe('the listing files', () => {
       }
       assert.doesNotMatch(listing.keywords, /\s/, listing.locale);
     }
-    assert.equal(english.name, 'Peek: Parcel Tracker');
+    assert.equal(english.name, 'Peek: Parcel Delivery Tracker');
     assert.match(english.description, /^Where’s my parcel\?[\s\S]+Their names belong to their owners\.$/);
   });
 
@@ -29,7 +29,7 @@ describe('the listing files', () => {
     assert.deepEqual(listings.map(listing => listing.locale), LOCALES);
     const [gb, us] = ['en-GB', 'en-US'].map(locale => listings.find(listing => listing.locale === locale));
     assert.deepEqual({ ...gb, locale: undefined }, { ...english, locale: undefined });
-    assert.equal(us.name, 'Peek: Package Tracker');
+    assert.equal(us.name, 'Peek: Package Delivery Tracker');
     for (const field of ['promotionalText', 'description']) {
       assert.doesNotMatch(gb[field], /package/i, `en-GB ${field}`);
       assert.doesNotMatch(us[field], /parcel/i, `en-US ${field}`);

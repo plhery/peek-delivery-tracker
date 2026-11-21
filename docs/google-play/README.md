@@ -9,7 +9,8 @@ What Play Console asks for Peek's Android app, where it differs from the
 the App Store listing. `en-US.md` is English (United States), the default language, with
 “package”; `en-GB.md` has “parcel”. The titles are the App Store names. The descriptions are the
 App Store's, for what the Android app does: it signs in with Google or a code sent by email, and its
-notifications come through Firebase Cloud Messaging.
+notifications come through Firebase Cloud Messaging. Play has no keywords and searches the title and
+both descriptions, so the English ones also say “track”, “order” and “shipment”.
 
 Play takes 30 characters for a title, 80 for a short description and 4,000 for a full description,
 which it shows as plain text with its line breaks. A short description has no emoji, capitals for

@@ -63,7 +63,7 @@ Peek è indipendente dai corrieri che consulta. I loro nomi appartengono ai risp
 ## Keywords
 
 ```text
-pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,poste,codice,mappa
+pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,poste,codice,stato
 ```
 
 (95 bytes)

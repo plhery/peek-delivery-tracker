@@ -3,10 +3,10 @@
 ## Name
 
 ```text
-Peek: Sendungsverfolgung
+Peek: Paket-Sendungsverfolgung
 ```
 
-(24 characters)
+(30 characters)
 
 ## Subtitle
 
@@ -63,10 +63,10 @@ Peek ist unabhängig von den Paketdiensten, deren Sendungsverfolgung die App abf
 ## Keywords
 
 ```text
-paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,versand,bestellung
+pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,versand,bestellung,zoll
 ```
 
-(97 bytes)
+(96 bytes)
 
 ## What's new
 

@@ -12,14 +12,14 @@ Peek für iPhone, iPad und Mac ist eine kostenlose App, die Pakete von mehr als 
 Füge eine Sendungsnummer, einen Link vom Paketdienst oder eine ganze Versandmail ein, und [Peek](/) findet den Paketdienst und zeigt die Reise auf einer Karte. Es gibt keine In-App-Käufe und keine Werbung.
 
 :::steps
-- Hol dir die App | Öffne auf deinem iPhone oder iPad [peektracker.com/app](https://peektracker.com/app): Die Seite führt zu „Peek: Sendungsverfolgung“ im App Store.
+- Hol dir die App | Öffne auf deinem iPhone oder iPad [peektracker.com/app](https://peektracker.com/app): Die Seite führt zu „Peek: Paket-Sendungsverfolgung“ im App Store.
 - Füge ein Paket hinzu | Füge auf dem ersten Bildschirm eine Nummer, einen Link oder eine Nachricht ins Sendungsfeld ein. Peek findet den Paketdienst.
 - Schick ihr Links | Teile eine Sendungsnummer, einen Link oder eine Seite aus einer anderen App und wähle „Zu Peek hinzufügen“.
 :::
 
 ## Gibt es eine Peek-App für iPhone und iPad?
 
-Ja: „Peek: Sendungsverfolgung“ im App Store, auf deinem Home-Bildschirm einfach „Peek“. Sie braucht iOS 18 oder neuer auf dem iPhone und iPadOS 18 oder neuer auf dem iPad und ist für beide gemacht: Auf dem iPad dreht sie sich in alle vier Richtungen und versteht Tastenkürzel wie ⌘N, um ein Paket hinzuzufügen.
+Ja: „Peek: Paket-Sendungsverfolgung“ im App Store, auf deinem Home-Bildschirm einfach „Peek“. Sie braucht iOS 18 oder neuer auf dem iPhone und iPadOS 18 oder neuer auf dem iPad und ist für beide gemacht: Auf dem iPad dreht sie sich in alle vier Richtungen und versteht Tastenkürzel wie ⌘N, um ein Paket hinzuzufügen.
 
 Du bekommst sie im [App Store](https://apps.apple.com/app/id6823615370); am Computer zeigt peektracker.com/app unter „Mit dem Handy scannen“ einen Code. Ist Peek installiert, öffnen sich seine Paketlinks (peektracker.com/p/…) in der App. Für Android siehe [Peek für Android](guide:android-app).
 

@@ -5,10 +5,10 @@ Adapted from the App Store's [de.md](../../app-store/listing/de.md).
 ## Title
 
 ```text
-Peek: Sendungsverfolgung
+Peek: Paket-Sendungsverfolgung
 ```
 
-(24 characters)
+(30 characters)
 
 ## Short description
 

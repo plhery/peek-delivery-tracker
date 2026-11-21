@@ -63,10 +63,10 @@ Peek jest niezależny od przewoźników, których dane odczytuje. Ich nazwy nale
 ## Keywords
 
 ```text
-paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa,zamówienie,mapa
+paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa,zamówienie,numer
 ```
 
-(97 bytes)
+(98 bytes)
 
 ## What's new
 

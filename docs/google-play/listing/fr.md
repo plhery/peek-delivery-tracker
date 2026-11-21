@@ -5,10 +5,10 @@ The description uses a narrow no-break space before `:`, `;`, `?` and `!`, as th
 ## Title
 
 ```text
-Peek : suivi de colis
+Peek : suivi colis & livraison
 ```
 
-(21 characters)
+(30 characters)
 
 ## Short description
 

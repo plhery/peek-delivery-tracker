@@ -5,10 +5,10 @@ The text uses a narrow no-break space before `:`, `;`, `?` and `!`, as the app d
 ## Name
 
 ```text
-Peek : suivi de colis
+Peek : suivi colis & livraison
 ```
 
-(21 characters)
+(30 characters)
 
 ## Subtitle
 
@@ -65,10 +65,10 @@ Peek est indépendant des transporteurs qu’il consulte. Leurs noms appartienne
 ## Keywords
 
 ```text
-livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,lettre,numéro,chine
+suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,lettre,numéro,chine,douane
 ```
 
-(98 bytes)
+(95 bytes)
 
 ## What's new
 

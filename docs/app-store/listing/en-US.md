@@ -5,18 +5,18 @@ The primary language. U.S. spelling and “package”; [en-GB.md](en-GB.md) is t
 ## Name
 
 ```text
-Peek: Package Tracker
+Peek: Package Delivery Tracker
 ```
 
-(21 characters)
+(30 characters)
 
 ## Subtitle
 
 ```text
-Any carrier, no account needed
+Track any order, no account
 ```
 
-(30 characters)
+(27 characters)
 
 ## Promotional text
 
@@ -65,10 +65,10 @@ Peek is independent of the carriers it reads. Their names belong to their owners
 ## Keywords
 
 ```text
-delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map,postal,where,scan
+parcel,tracking,shipment,shipping,courier,carrier,mail,post,postal,number,where,international,china
 ```
 
-(98 bytes)
+(99 bytes)
 
 ## What's new
 

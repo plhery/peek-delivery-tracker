@@ -12,14 +12,14 @@ Peek pour iPhone, iPad et Mac est une app gratuite qui suit les colis de plus de
 Colle un numéro de suivi, le lien d'un transporteur ou tout un e-mail d'expédition, et [Peek](/) trouve le transporteur et affiche le trajet sur une carte. Pas d'achats intégrés, pas de pub.
 
 :::steps
-- Télécharge l'app | Sur ton iPhone ou ton iPad, ouvre [peektracker.com/app](https://peektracker.com/app) : la page mène à « Peek : suivi de colis » sur l'App Store.
+- Télécharge l'app | Sur ton iPhone ou ton iPad, ouvre [peektracker.com/app](https://peektracker.com/app) : la page mène à « Peek : suivi colis & livraison » sur l'App Store.
 - Ajoute un colis | Sur le premier écran, colle un numéro, un lien ou un message dans le champ de suivi. Peek trouve le transporteur.
 - Envoie-lui des liens | Partage un numéro de suivi, un lien ou une page depuis une autre app et choisis « Ajouter à Peek ».
 :::
 
 ## Existe-t-il une app Peek pour iPhone et iPad ?
 
-Oui : « Peek : suivi de colis » sur l'App Store, qui s'appelle « Peek » sur ton écran d'accueil. Elle demande iOS 18 ou plus récent sur iPhone et iPadOS 18 ou plus récent sur iPad, et elle est conçue pour les deux : sur iPad, elle pivote dans les quatre sens et comprend des raccourcis clavier comme ⌘N pour ajouter un colis.
+Oui : « Peek : suivi colis & livraison » sur l'App Store, qui s'appelle « Peek » sur ton écran d'accueil. Elle demande iOS 18 ou plus récent sur iPhone et iPadOS 18 ou plus récent sur iPad, et elle est conçue pour les deux : sur iPad, elle pivote dans les quatre sens et comprend des raccourcis clavier comme ⌘N pour ajouter un colis.
 
 Télécharge-la sur l'[App Store](https://apps.apple.com/app/id6823615370) ; sur un ordinateur, peektracker.com/app affiche un code sous « Scanne avec ton téléphone ». Une fois Peek installé, ses liens de colis (peektracker.com/p/…) s'ouvrent dans l'app. Pour Android, voir [Peek pour Android](guide:android-app).
 

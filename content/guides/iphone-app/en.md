@@ -12,14 +12,14 @@ Peek for iPhone, iPad and Mac is a free app that tracks parcels from more than 3
 Paste a tracking number, a carrier's link or a whole shipping email, and [Peek](/) finds the carrier and shows the journey on a map. There are no in-app purchases and no ads.
 
 :::steps
-- Get the app | On your iPhone or iPad, open [peektracker.com/app](https://peektracker.com/app): it leads to "Peek: Parcel Tracker" on the App Store.
+- Get the app | On your iPhone or iPad, open [peektracker.com/app](https://peektracker.com/app): it leads to "Peek: Parcel Delivery Tracker" on the App Store.
 - Add a parcel | On the first screen, paste a number, link or message into the tracking field. Peek finds the carrier.
 - Send it links | Share a tracking number, link or page from another app and choose "Add to Peek".
 :::
 
 ## Is there a Peek app for iPhone and iPad?
 
-Yes: "Peek: Parcel Tracker" on the App Store, called "Peek" on your Home Screen. It needs iOS 18 or later on an iPhone and iPadOS 18 or later on an iPad, and it's made for both: on an iPad it turns in all four directions and takes keyboard shortcuts such as ⌘N to add a parcel.
+Yes: "Peek: Parcel Delivery Tracker" on the App Store, called "Peek" on your Home Screen. It needs iOS 18 or later on an iPhone and iPadOS 18 or later on an iPad, and it's made for both: on an iPad it turns in all four directions and takes keyboard shortcuts such as ⌘N to add a parcel.
 
 Get it from the [App Store](https://apps.apple.com/app/id6823615370); on a computer, peektracker.com/app shows a code under "Scan with your phone". Once Peek is installed, its parcel links (peektracker.com/p/…) open in the app. For Android, see [Peek for Android](guide:android-app).
 

@@ -864,6 +864,30 @@ describe('a scan a release reads on another clock', () => {
     expect(rezonedScans([town], [beijing], 'huaya-express', new Map([['huaya-express:other', 'huaya-express:beijing']])).size).toBe(0);
   });
 
+  it('takes over the row of a release that also gave or dropped the place, or misread the offset it turned the clock with', () => {
+    // China Post's scan read on the place's zone with the place, then on the carrier's without it.
+    expect([...rezonedScans([{ ...beijing, location: null }], [{ ...town, provider_event_id: 'huaya-express:town-placed' }], 'huaya-express')])
+      .toEqual([['huaya-express:beijing', 'huaya-express:town-placed']]);
+    expect([...rezonedScans([town], [{ ...beijing, location: '' }], 'huaya-express')]).toEqual([['huaya-express:town', 'huaya-express:beijing']]);
+    // JRT's partner departure read on Beijing time an hour early, then on the town's zone; and an hour and a half apart.
+    const early = at('2026-11-06T20:42:39+08:00', 'huaya-express:early');
+    expect([...rezonedScans([town], [early], 'huaya-express')]).toEqual([['huaya-express:town', 'huaya-express:early']]);
+    expect(rezonedScans([town], [at('2026-11-06T20:12:39+08:00', 'huaya-express:early')], 'huaya-express').size).toBe(1);
+  });
+
+  it('leaves a re-read row of another place, wording or code, not in whole quarter hours, over three hours apart, or on one offset', () => {
+    const early = at('2026-11-06T20:42:39+08:00', 'huaya-express:early');
+    expect(rezonedScans([{ ...town, location: 'OTHER TOWN, US' }], [early], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, location: null }], [early], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, description: 'Departed facility' }], [early], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, provider_code: 'B' }], [{ ...early, provider_code: 'A' }], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([town], [at('2026-11-06T20:43:39+08:00', 'huaya-express:early')], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([town], [at('2026-11-06T17:42:39+08:00', 'huaya-express:early')], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([town], [at('2026-11-06T07:42:39-05:00', 'huaya-express:early')], 'huaya-express').size).toBe(0);
+    // Both with a place, or both without, at one wall clock: another place is another scan.
+    expect(rezonedScans([{ ...town, location: 'OTHER TOWN, US' }], [beijing], 'huaya-express').size).toBe(0);
+  });
+
   it('matches one to one', () => {
     const twin = at('2026-11-06T08:42:39-06:00', 'huaya-express:twin');
     expect(rezonedScans([town, twin], [beijing], 'huaya-express').size).toBe(0);

@@ -25,7 +25,9 @@
  *   milliseconds takes over the row of that second (Royal Mail's locker drop-off).
  *   Whatever the policy, a carrier's scan a release reads on another clock,
  *   its wall clock under another offset with the same wording, place and
- *   stage, takes over the row stored under the old offset (`rezonedScans`).
+ *   stage, takes over the row stored under the old offset (`rezonedScans`),
+ *   as does one a release also gave or dropped the place of, or moved a
+ *   whole number of quarter hours, up to three hours (`rereadClock`).
  *   No scan that takes a row over, by any rule here, moves the row later than
  *   it was first stored: it keeps the row's time (`heldPastFirstStored`,
  *   `withHeldClocks`), but for a scan the carrier re-dated (below).
@@ -1159,9 +1161,10 @@ export function supersededSnapshots(
  * offset, with the same wording, place and stage, codes that agree when both carry one
  * (`sameWallClock`), and no scan of the answer carries it. Whatever the source's policy: a scan
  * whose only change is its offset is the one stored, and a row of its own would announce it again.
- * Scans and rows another rule matched, observations and universal or app rows are left out, and
- * the match is one to one. With `held`, a scan dated past when the row was first stored keeps the
- * row's time (`withHeldClocks`).
+ * A release that also gave or dropped the scan's place, or read its wall clock as well, is matched
+ * too (`rereadClock`). Scans and rows another rule matched, observations and universal or app rows
+ * are left out, and the match is one to one. With `held`, a scan dated past when the row was first
+ * stored keeps the row's time (`withHeldClocks`).
  */
 export function rezonedScans(
   events: readonly JsonObject[],
@@ -1178,8 +1181,26 @@ export function rezonedScans(
   const scans = events.filter((scan) => own(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
   const rows = stored.filter((row) => own(row) && !listed.has(identity(row)));
   matchLeft(rezoned, new Map([[0, scans]]), new Map([[0, rows]]),
-    (scan, row) => stageOf(scan) === stageOf(row) && sameWallClock(scan, row), held);
+    (scan, row) => stageOf(scan) === stageOf(row) && (sameWallClock(scan, row) || rereadClock(scan, row)), held);
   return rezoned;
+}
+
+/**
+ * One scan of a carrier two releases read under different offsets, with the same wording and codes that agree when both
+ * carry one: at the same wall clock, to the second, where one release gave the scan's place and the other none (China
+ * Post's scans read on the place's zone, then on the carrier's without the place), or at the same place a whole number
+ * of quarter hours apart, up to three hours, where a release misread the offset it turned the wall clock with (JRT's
+ * partner departure, read on Beijing time an hour early, then on the town's zone). Further apart, it is another scan.
+ */
+function rereadClock(scan: JsonObject, row: JsonObject): boolean {
+  const shown = labelledTime(scan);
+  const saved = labelledTime(row);
+  if (!shown || !saved || shown.offset === saved.offset || !codesAgree(scan, row)
+    || wordingOf(scan) === '' || wordingOf(scan) !== wordingOf(row)) return false;
+  const [place, savedPlace] = [placeOf(scan), placeOf(row)];
+  if (shown.toFormat(WALL_CLOCK) === saved.toFormat(WALL_CLOCK)) return (place === '') !== (savedPlace === '');
+  const apart = Math.abs(instantOf(scan) - instantOf(row));
+  return place === savedPlace && apart > 0 && apart <= RETIMED_WITHIN_MS && apart % QUARTER_HOUR_MS === 0;
 }
 
 /**

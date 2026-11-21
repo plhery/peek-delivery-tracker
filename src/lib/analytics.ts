@@ -1,6 +1,6 @@
 import catalog from '../../shared/analytics.json';
 import { countBrowser, forgetCountingId } from './counting';
-import { pageLocale, SUPPORTED_LOCALES } from './locale';
+import { PAGE_LANGUAGES, pageLocale, SUPPORTED_LOCALES } from './locale';
 
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
 type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string; androidWebsite?: string };
@@ -178,9 +178,11 @@ async function flush() {
 
 /**
  * A guides page counts under its language and the guide's id, never its address: `guides/fr`, `guides/fr/<id>`.
- * A carrier's page does the same: `carriers/fr`, `carriers/fr/<id>`; and the page on connecting an assistant, `assistants/fr`.
+ * A carrier's page does the same, in any language a page is written in: `carriers/fr`, `carriers/fr/<id>`,
+ * `carriers/nl/<id>`; and the page on connecting an assistant, `assistants/fr`.
  */
-const GUIDE_SCREEN = new RegExp(`^(?:(?:guides|carriers)/(?:${SUPPORTED_LOCALES.join('|')})(?:/[a-z0-9]+(?:-[a-z0-9]+)*)?|assistants/(?:${SUPPORTED_LOCALES.join('|')}))$`);
+const PAGE_ID = '(?:/[a-z0-9]+(?:-[a-z0-9]+)*)?';
+const GUIDE_SCREEN = new RegExp(`^(?:guides/(?:${SUPPORTED_LOCALES.join('|')})${PAGE_ID}|carriers/(?:${PAGE_LANGUAGES.join('|')})${PAGE_ID}|assistants/(?:${SUPPORTED_LOCALES.join('|')}))$`);
 
 export function trackScreen(next: string, nextMode: Event['mode'] = mode) {
   if (!catalog.screens.includes(next) && !GUIDE_SCREEN.test(next)) return;

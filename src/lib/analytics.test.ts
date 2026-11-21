@@ -101,15 +101,17 @@ describe('safe analytics collection', () => {
     const [{ id }] = CARRIER_LINKS.en;
     const a = await import('./analytics');
     a.trackScreen('carriers/de');
+    a.trackScreen(`carriers/nl/${id}`);
     a.trackScreen(`carriers/en/${id}`);
     a.trackScreen(`carriers/en/${id}/../secret`);
     a.trackScreen('carriers/xx');
+    a.trackScreen(`guides/nl/${id}`);
     a.trackScreen('carriers');
     a.trackScreen('/carriers');
     a.trackScreen('carrier/en');
     await a.startAnalytics(); await settle();
     const urls = requests.filter((r) => r.url === config.endpoint).map((r) => JSON.parse(r.init!.body as string).payload.url);
-    expect(urls).toEqual(['/carriers/de', `/carriers/en/${id}`, `/carriers/en/${id}`]);
+    expect(urls).toEqual(['/carriers/de', `/carriers/nl/${id}`, `/carriers/en/${id}`, `/carriers/en/${id}`]);
   });
 
   it.each(['opt-out', 'dnt', 'gpc', 'webdriver'])('honors %s without fetching configuration', async (kind) => {

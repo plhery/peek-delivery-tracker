@@ -152,6 +152,7 @@
       "carrier": "chronopost",
       "senderName": "Mamie",
       "weightKg": 1.2,
+      "peekAi": "by_day",
       "events": [
         {
           "stage": "registered",
@@ -288,7 +289,6 @@
       "carrier": "ups",
       "senderName": "Round Midnight Records",
       "weightKg": 0.4,
-      "peekAi": "by_day",
       "events": [
         {
           "stage": "registered",

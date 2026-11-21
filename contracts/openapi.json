@@ -1609,7 +1609,7 @@
         ],
         "recognitionRank": 740
       },
-      "trackingUrlTemplate": "https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis={trackingNumber}&lang=fr",
+      "trackingUrlTemplate": "https://www.colisprive.com/moncolis/pages/DetailColis.aspx?numColis={trackingNumber}&lang=fr",
       "linkRules": [
         {
           "domains": [
@@ -1639,7 +1639,7 @@
         "BE",
         "LU"
       ],
-      "trackingSearchUrl": "https://colisprive.com/moncolis/pages/DetailColis.aspx",
+      "trackingSearchUrl": "https://www.colisprive.com/moncolis/pages/DetailColis.aspx",
       "helpUrl": "https://colisprive.fr/aide/mon-colis-a-du-retard/"
     },
     "geodis": {
@@ -4474,7 +4474,7 @@
         "mode": "automatic",
         "adapter": "zto",
         "browserRecognitionRank": 800,
-        "browserRecognitionPattern": "^73\\d{12}$"
+        "browserRecognitionPattern": "^7[39]\\d{12}$"
       },
       "linkRules": [],
       "detectionRules": [
@@ -67361,6 +67361,34 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://oms.anserx.com/tracking"
+    },
+    "huiyu": {
+      "displayName": "Huiyu International",
+      "aliases": [
+        "HYGJWL",
+        "辉宇国际",
+        "辉宇国际货运代理有限公司",
+        "深圳市辉宇国际货运代理有限公司",
+        "Shenzhen Huiyu International Freight Forwarding Co., Ltd."
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#213071",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "huiyu",
+        "recognitionRank": 24
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^HY\\d{13}YQ$",
+          "confidence": "low"
+        }
+      ]
     }
   },
   "servers": [
@@ -73198,7 +73226,8 @@
           "copa-airlines-cargo",
           "daytona-express",
           "dragonfly-nl",
-          "dora-gate"
+          "dora-gate",
+          "huiyu"
         ]
       },
       "Stage": {

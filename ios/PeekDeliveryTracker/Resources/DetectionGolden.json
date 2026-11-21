@@ -69521,6 +69521,36 @@
     ]
   },
   {
+    "input": "79990000000005",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "zto",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
     "input": "7999980",
     "carrier": "unknown",
     "confidence": "low",
@@ -96028,6 +96058,17 @@
     ],
     "asked": [
       "c-chez-vous"
+    ]
+  },
+  {
+    "input": "HY9999999999980YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "huiyu"
+    ],
+    "asked": [
+      "huiyu"
     ]
   },
   {

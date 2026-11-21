@@ -1,0 +1,4 @@
+A parcel past the day its carrier expected says on its page when it was expected.
+When the carrier you picked doesn't know the number but another one has news of it, the parcel's page says so.
+Signing out while offline finishes once the phone is back online.
+A parcel you silenced before signing in stays silent in your account.

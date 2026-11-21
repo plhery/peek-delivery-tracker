@@ -14,9 +14,9 @@ Jifan's site doesn't describe its numbers, but they have one fixed shape. JFGJ i
 
 | Number | What it is |
 | --- | --- |
-| `JFGJ000000000CN` | JFGJ, nine digits and CN: a Jifan number. |
-| `JFGJ00000000CN` | Only eight digits: not Jifan's shape, and Peek doesn't name Jifan. Check for a missing digit. |
-| `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Jifan's, despite the same CN ending. |
+| `JFGJ482910573CN` | JFGJ, nine digits and CN: a Jifan number. |
+| `JFGJ48291057CN` | Only eight digits: not Jifan's shape, and Peek doesn't name Jifan. Check for a missing digit. |
+| `RR482910576CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Jifan's, despite the same CN ending. |
 
 On peektracker.com, a JFGJ…CN number one digit short gets a note: "This starts like a Jifan tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." In Peek, lower case, spaces and dashes don't matter. On Jifan's tracker, type the number in capital letters, without spaces.
 
@@ -81,7 +81,7 @@ Jifan's customers are the businesses that send parcels with it, not you. For a l
 
 ## Jifan contact
 
-As read on 10 November 2026 on Jifan's [home page](https://www.szjf56.cn/), in the 联系我们 (contact us) section:
+On Jifan's [home page](https://www.szjf56.cn/), in the 联系我们 (contact us) section:
 
 - **Hotline**: 400-186-0001, for enquiries (咨询电话), a Chinese service number. Jifan gives no opening hours and doesn't say whether it answers from abroad or in English.
 - **Email**: 925930140@qq.com, a QQ Mail address. Jifan doesn't say who reads it or in which language.
@@ -101,7 +101,7 @@ Peek's status follows the newest line it understands, and the summary status (`�
 
 Jifan's tracker shows no delivery date, weight, service name, delivering company or second number, so Peek has none either. It keeps following the JFGJ number on Jifan's tracker to the end.
 
-While Jifan's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, on the day Jifan reports the delivery round, using Beijing time, checks can run every 2 minutes with the parcel on screen or alerts on. If the carrier gives a delivery window, the faster checks start half an hour before it opens at the earliest. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, or every 15 minutes on the day it goes out for delivery. For checks with the carrier itself, after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
+While Jifan's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, on the day Jifan reports the delivery round, using Beijing time, checks can run every 2 minutes with the parcel on screen or alerts on. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, and up to every 15 minutes on the day it goes out for delivery, only while you have it open or notifications are on. For checks with the carrier itself, after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
 
 ## Questions about Jifan tracking
 

@@ -2340,6 +2340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "econt-sendungsverfolgung",
+      "title": "Econt Sendungsverfolgung: Nummer, Status und Büros",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-sendungsverfolgung",
@@ -3110,6 +3118,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "suivi-econt",
+      "title": "Suivi Econt\u00a0: numéro d'envoi, statuts et agences",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "lietuvos-pastas-suivi",
@@ -3856,6 +3872,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "tracciamento-econt",
+      "title": "Tracciamento Econt: numero di spedizione, stati e uffici",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
@@ -4562,6 +4586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "seguimiento-econt",
+      "title": "Seguimiento de Econt: número de envío, estados y oficinas",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-seguimiento",
@@ -5266,6 +5298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Dachser tracking: rastrear encomenda, estados e contactos",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "seguimento-econt",
+      "title": "Seguimento Econt: número de envio, estados e balcões",
+      "name": "Econt",
+      "color": "#234182"
     },
     {
       "id": "ups",
@@ -5990,6 +6030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "sledzenie-econt",
+      "title": "Śledzenie przesyłek Econt: numer, statusy i oddziały",
+      "name": "Econt",
+      "color": "#234182"
     },
     {
       "id": "ups",

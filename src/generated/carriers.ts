@@ -2348,6 +2348,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "elta-hellenic-post-sendungsverfolgung",
+      "title": "ELTA Hellenic Post Sendungsverfolgung: Status & Abholung",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-sendungsverfolgung",
@@ -3190,6 +3198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "suivi-elta-hellenic-post",
+      "title": "Suivi ELTA Hellenic Post\u00a0: statuts, retrait et contacts",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-suivi-colis",
@@ -3992,6 +4008,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "tracciamento-elta-hellenic-post",
+      "title": "Tracciamento ELTA Hellenic Post: stati, ritiro e contatti",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
@@ -4752,6 +4776,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de Econt: número de envío, estados y oficinas",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "seguimiento-elta-hellenic-post",
+      "title": "Seguimiento ELTA Hellenic Post: estados, recogida y ayuda",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
     },
     {
       "id": "ups",
@@ -5522,6 +5554,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Econt: número de envio, estados e balcões",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "seguimento-elta-hellenic-post",
+      "title": "Seguimento ELTA Hellenic Post: estados, recolha e apoio",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
     },
     {
       "id": "ups",
@@ -6310,6 +6350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Econt: numer, statusy i oddziały",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "elta",
+      "catalog": "elta",
+      "slug": "sledzenie-elta-hellenic-post",
+      "title": "Śledzenie ELTA Hellenic Post: statusy, odbiór i kontakt",
+      "name": "ELTA Hellenic Post",
+      "color": "#0063a9"
     },
     {
       "id": "ups",

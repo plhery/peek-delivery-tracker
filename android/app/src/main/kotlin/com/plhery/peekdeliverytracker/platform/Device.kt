@@ -46,7 +46,11 @@ object Device {
     fun distanceUnit(locale: Locale = region()): DistanceUnit =
         if (measurementSystem(locale) == LocaleData.MeasurementSystem.SI) DistanceUnit.Kilometres else DistanceUnit.Miles
 
-    /** The unit the phone's [region] weighs in: pounds where it measures in US units (the US, Liberia, Myanmar), else kilograms. */
+    /**
+     * The unit the phone's [region] weighs in: pounds where it measures in US units (the US and Liberia), else kilograms,
+     * the UK's included, and Myanmar's, which ICU's data measures as the UK does: miles, but kilograms. The iPhone and
+     * the web do the same.
+     */
     fun weightUnit(locale: Locale = region()): WeightUnit =
         if (measurementSystem(locale) == LocaleData.MeasurementSystem.US) WeightUnit.Pounds else WeightUnit.Kilograms
 

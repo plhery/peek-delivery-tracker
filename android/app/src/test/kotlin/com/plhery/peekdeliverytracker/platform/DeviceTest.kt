@@ -51,5 +51,9 @@ class DeviceTest {
         assertEquals(DistanceUnit.Miles to WeightUnit.Kilograms, units("en-GB"))
         assertEquals(DistanceUnit.Miles to WeightUnit.Pounds, units("en-US-u-ms-other"))
         assertEquals(DistanceUnit.Kilometres to WeightUnit.Kilograms, units("de-CH-u-mu-fahrenhe"))
+        // Pounds in the United States and Liberia; kilograms in Myanmar, whose roads go in miles as the UK's do.
+        assertEquals(DistanceUnit.Miles to WeightUnit.Pounds, units("en-LR"))
+        assertEquals(DistanceUnit.Miles to WeightUnit.Kilograms, units("my-MM"))
+        assertEquals(DistanceUnit.Miles to WeightUnit.Kilograms, units("en-MM"))
     }
 }

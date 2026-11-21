@@ -19,7 +19,7 @@ Numer China Post ma dwie litery, dziewięć cyfr i `CN`. To międzynarodowy form
 | `CP000000005CN` | C: paczka pocztowa. |
 | `EA000000005CN` | E: EMS, ekspresowa usługa China Post. |
 | `UA000000005CN` | U: mała paczka z towarem, według UPU bez śledzenia dla klienta. Nie licz na skany w Polsce. |
-| `ZS12345678901` | ZS, ZC lub ZA i 11 cyfr: takie numery też zna śledzenie China Post. Numery La Poste mają tę samą długość, ale żaden znany nie zaczyna się w ten sposób. |
+| `ZS12345678501` | ZS, ZC lub ZA i 11 cyfr: takie numery też zna śledzenie China Post. Numery La Poste mają tę samą długość, ale żaden znany nie zaczyna się w ten sposób. |
 | `LP12345678901234` | To nie China Post, tylko numer logistyczny [Cainiao](carrier:cainiao) (AliExpress). |
 | `YT1234567890123456` | To nie China Post, tylko [YunExpress](carrier:yunexpress). |
 

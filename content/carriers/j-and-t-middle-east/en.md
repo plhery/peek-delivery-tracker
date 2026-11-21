@@ -16,7 +16,7 @@ A J&T Express Middle East waybill number is `JTE` followed by 12 digits. With in
 | --- | --- |
 | `JTE000000000001` | `JTE` and 12 digits: a J&T Express Middle East waybill. Peek names J&T Express Middle East at once. |
 | `JTE00000000001` | `JTE` with 11 digits (or 13): not a J&T Middle East number. Peek recognises no carrier, so check for a missing or extra digit. |
-| `JTDE000000000001` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de). `JTAU` is [J&T Express Australia](carrier:j-and-t-au) and `JTUK` is [J&T Express UK](carrier:j-and-t-uk). |
+| `JTDE000000000005` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de). `JTAU` is [J&T Express Australia](carrier:j-and-t-au) and `JTUK` is [J&T Express UK](carrier:j-and-t-uk). |
 
 Spaces and lower case don't matter when you paste a number into Peek. Can't find yours? See [how to find a tracking number](guide:find-tracking-number). For an order shipped from China, [tracking parcels from China](guide:tracking-from-china) explains the first days, before J&T has the parcel.
 

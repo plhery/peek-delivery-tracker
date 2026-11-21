@@ -14,7 +14,7 @@ Os números da YWE têm 17 caracteres no total: o prefixo YWE e 14 algarismos. E
 
 | Número | O que é |
 | --- | --- |
-| `YWE48291057364918` | YWE e 14 dígitos: um número de seguimento da YWE. |
+| `YWE48291057364911` | YWE e 14 dígitos: um número de seguimento da YWE. |
 | `YWE4829105736491` | Apenas 13 dígitos: não corresponde ao formato da YWE. Confirma se falta um algarismo; se nenhuma transportadora responder por ele, a respetiva página em peektracker.com mostra «Começa como um número de seguimento de YWE, mas falta-lhe um carácter: pode estar mal escrito. Compara-o com a tua mensagem de envio.» |
 | `YWLAX482910573649` | YW, três letras e 12 dígitos: um número da [Yanwen](carrier:yanwen), não da YWE. |
 

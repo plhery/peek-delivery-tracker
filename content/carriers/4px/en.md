@@ -14,7 +14,7 @@ updated: 2026-11-17
 
 | Number | Whose it is |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, then 13 digits, then CN: 4PX's own number. |
+| `4PX1234567890128CN` | 4PX, then 13 digits, then CN: 4PX's own number. |
 | `LP1234567890123CN` | LP, 13 digits and CN: likely 4PX. |
 | `LP12345678901234` | LP and 14 digits, no CN: [Cainiao](carrier:cainiao), AliExpress's logistics reference. |
 | `RR000000005GB` | A [postal number](guide:tracking-number-formats) ending in a country code: the post of that country, here Royal Mail. |

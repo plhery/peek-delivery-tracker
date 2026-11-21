@@ -14,13 +14,13 @@ updated: 2026-11-17
 
 | Numéro | À qui il appartient |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 chiffres, puis CN : le numéro de 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 chiffres, puis CN : le numéro de 4PX. |
 | `LP1234567890123CN` | LP, 13 chiffres et CN : peut-être 4PX. |
 | `LP12345678901234` | LP et 14 chiffres, sans CN : la référence logistique de [Cainiao](carrier:cainiao) et AliExpress. |
 | `RR000000005CN` | Un [numéro postal](guide:tracking-number-formats) terminé par un code pays : la poste de ce pays, ici China Post. |
 | `YT1234567890123456` | Pas 4PX, mais [YunExpress](carrier:yunexpress). |
 
-Dans le champ ci-dessus, minuscules et espaces passent aussi (`4PX 1234567890123 CN`). En français, la page de résultat de 4PX peut afficher deux numéros : le « Numéro 4px » et le « Numéro de suivi », qui est celui du transporteur qui livre dans ton pays. La boutique te donne parfois ce numéro local plutôt que celui de 4PX ; le site de 4PX en reconnaît aussi certains. Une commande en plusieurs colis apparaît en « Sous-package ».
+Dans le champ ci-dessus, minuscules et espaces passent aussi (`4PX 1234567890128 CN`). En français, la page de résultat de 4PX peut afficher deux numéros : le « Numéro 4px » et le « Numéro de suivi », qui est celui du transporteur qui livre dans ton pays. La boutique te donne parfois ce numéro local plutôt que celui de 4PX ; le site de 4PX en reconnaît aussi certains. Une commande en plusieurs colis apparaît en « Sous-package ».
 
 ## Suivi colis 4PX : ce que veulent dire les statuts
 

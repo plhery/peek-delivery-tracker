@@ -14,7 +14,7 @@ Pengyou veröffentlicht kein Nummernformat, und auf keiner öffentlichen Seite i
 
 | Nummer | Was das ist |
 | --- | --- |
-| `ZXA246813579PY` | `ZXA`, neun Ziffern und `PY`: eine Nummernserie, auf die Pengyous eigener Tracker antwortet und die Peek sofort erkennt. |
+| `ZXA246813576PY` | `ZXA`, neun Ziffern und `PY`: eine Nummernserie, auf die Pengyous eigener Tracker antwortet und die Peek sofort erkennt. |
 | `ZZZ999999980PY` | Drei andere Buchstaben, neun Ziffern und `PY`: das Pengyou zugeordnete Muster (nur eine schwache Übereinstimmung, bis der Tracker antwortet). |
 | `ZZZ24681357PY` | Nur acht Ziffern: passt nicht zu diesem Aufbau. Prüfe, ob eine Ziffer fehlt. |
 | `RR246813576PY` | Zwei Buchstaben, neun Ziffern und `PY`: eine internationale Postsendungsnummer, nicht von Pengyou. |

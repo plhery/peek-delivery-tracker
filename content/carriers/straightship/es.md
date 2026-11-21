@@ -16,7 +16,7 @@ Straightship no publica una guía de formatos. Los códigos que reconoce Peek ti
 | --- | --- |
 | `STRTD482910573` | `STRTD` y 9 dígitos. |
 | `STRTD4829105736491827` | `STRTD` y 16 dígitos (también existen de 17). |
-| `STRCA4829105736491` | `STRCA` y 13 dígitos. |
+| `STRCA4829105736498` | `STRCA` y 13 dígitos. |
 | `STSHYW48291057364` | `STSH`, dos letras y 11 dígitos. |
 
 Las minúsculas y los espacios no importan en Peek. Cuando el rastreador de Straightship no tiene registrado un número, responde `No results found!`: compruébalo con el correo de confirmación de la tienda. ¿No encuentras el número por ninguna parte? Consulta [cómo encontrar tu número de seguimiento](guide:find-tracking-number) y, si es una compra de SHEIN, [seguimiento de pedidos SHEIN](guide:shein-orders).

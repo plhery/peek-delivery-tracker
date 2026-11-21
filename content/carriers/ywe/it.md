@@ -14,7 +14,7 @@ Un numero di tracciamento YWE conta 17 caratteri in tutto: il prefisso YWE segui
 
 | Numero | Che cos’è |
 | --- | --- |
-| `YWE48291057364918` | YWE e 14 cifre: un numero di tracciamento YWE valido. |
+| `YWE48291057364911` | YWE e 14 cifre: un numero di tracciamento YWE valido. |
 | `YWE4829105736491` | Solo 13 cifre: non rispetta il formato di YWE. Controlla se manca una cifra; se nessun corriere riconosce il codice, la sua pagina su peektracker.com mostra «Inizia come un numero di tracciamento di YWE, ma manca un carattere: forse c’è un errore di battitura. Confrontalo con il messaggio di spedizione.» |
 | `YWLAX482910573649` | YW, tre lettere e 12 cifre: un numero [Yanwen](carrier:yanwen), non un numero YWE. |
 

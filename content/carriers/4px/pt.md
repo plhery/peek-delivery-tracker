@@ -14,7 +14,7 @@ A 4PX não publica nenhum número de exemplo. O site aceita de 5 a 50 letras e a
 
 | Número | De quem é |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 algarismos e CN: o número da própria 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 algarismos e CN: o número da própria 4PX. |
 | `LP1234567890123CN` | LP, 13 algarismos e CN: muito provavelmente 4PX. |
 | `LP12345678901234` | LP e 14 algarismos, sem CN: costuma ser da [Cainiao](carrier:cainiao), a logística do AliExpress, e não da 4PX. |
 | `RR000000005CN` | Um [número postal](guide:tracking-number-formats) com o código do país no fim, aqui da China Post. |

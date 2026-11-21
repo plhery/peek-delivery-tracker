@@ -14,7 +14,7 @@ Numer śledzenia YWE liczy dokładnie 17 znaków: prefiks YWE i 14 cyfr. Przykł
 
 | Numer | Co oznacza |
 | --- | --- |
-| `YWE48291057364918` | YWE i 14 cyfr: prawidłowy numer przesyłki YWE. |
+| `YWE48291057364911` | YWE i 14 cyfr: prawidłowy numer przesyłki YWE. |
 | `YWE4829105736491` | Tylko 13 cyfr: to nie jest układ numeru YWE. Sprawdź, czy nie brakuje jednej cyfry; jeśli żaden przewoźnik go nie rozpozna, jego strona na peektracker.com pokaże komunikat „Zaczyna się jak numer śledzenia przewoźnika YWE, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.” |
 | `YWLAX482910573649` | YW, trzy litery i 12 cyfr: numer przewoźnika [Yanwen](carrier:yanwen), a nie YWE. |
 

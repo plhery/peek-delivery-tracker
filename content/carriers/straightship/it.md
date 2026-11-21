@@ -16,7 +16,7 @@ Straightship non pubblica specifiche ufficiali sui propri codici. I formati rico
 | --- | --- |
 | `STRTD482910573` | `STRTD` seguito da 9 cifre. |
 | `STRTD4829105736491827` | `STRTD` seguito da 16 cifre (esistono anche da 17). |
-| `STRCA4829105736491` | `STRCA` seguito da 13 cifre. |
+| `STRCA4829105736498` | `STRCA` seguito da 13 cifre. |
 | `STSHYW48291057364` | `STSH`, due lettere e 11 cifre. |
 
 Lettere minuscole e spazi non fanno differenza in Peek. Quando il tracker di Straightship non riconosce un codice, risponde `No results found!`: controlla il numero nell’e-mail del negozio. Non trovi affatto il codice? Leggi [come trovare il numero di tracciamento](guide:find-tracking-number) e, per un ordine SHEIN, [tracciare gli ordini SHEIN](guide:shein-orders).

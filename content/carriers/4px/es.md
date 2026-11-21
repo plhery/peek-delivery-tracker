@@ -14,7 +14,7 @@ updated: 2026-11-17
 
 | Número | De quién es |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 cifras y CN: el número propio de 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 cifras y CN: el número propio de 4PX. |
 | `LP1234567890123CN` | LP, 13 cifras y CN: probablemente de 4PX. |
 | `LP12345678901234` | LP y 14 cifras, sin CN: referencia logística de AliExpress, mira [Cainiao](carrier:cainiao). |
 | `RR000000005ES` | Un [número postal](guide:tracking-number-formats) que acaba en ES: es de [Correos](carrier:correos-spain). |

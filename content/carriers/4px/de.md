@@ -14,7 +14,7 @@ Ein Beispiel veröffentlicht 4PX nicht. Seine Tracking-Seite nimmt 5 bis 50 Buch
 
 | Nummer | Wem sie gehört |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 Ziffern, dann CN: die eigene Nummer von 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 Ziffern, dann CN: die eigene Nummer von 4PX. |
 | `LP1234567890123CN` | LP, 13 Ziffern und CN: wahrscheinlich 4PX. |
 | `LP12345678901234` | LP und 14 Ziffern ohne CN: die Logistiknummer von AliExpress bei [Cainiao](carrier:cainiao). |
 | `RR000000005CN` | Eine internationale Postnummer, hier von China Post. |

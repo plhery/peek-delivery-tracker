@@ -22,9 +22,9 @@ Australia Post publishes no number format. These are the shapes Peek knows, with
 
 | Shape (example) | What it is |
 | --- | --- |
-| `ABC123456789000123456` | Article ID, 21 characters: 3 letters or digits, 9 digits, `000`, 6 digits. |
-| `12ABC123456789000123456` | The same with 2 digits in front (23 characters). |
-| `94001234567890000123456` | 23 digits starting `9400`: still Australia Post. |
+| `ABC123456789000123452` | Article ID, 21 characters: 3 letters or digits, 9 digits, `000`, 6 digits. |
+| `12ABC123456789000123455` | The same with 2 digits in front (23 characters). |
+| `94001234567890000123451` | 23 digits starting `9400`: still Australia Post. |
 | `12ABC1234567` | Consignment number, 12 characters. |
 | `ABC1234567` | Consignment number, 10 characters. |
 | `ABCZ12345678` | StarTrack consignment number: 3 letters or digits, `Z`, 8 digits. |

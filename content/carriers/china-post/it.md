@@ -19,7 +19,7 @@ Un codice China Post ha due lettere, nove cifre e `CN`: è il formato postale in
 | `CP000000005CN` | C: un pacco. |
 | `EA000000005CN` | E: EMS, il servizio espresso di China Post. |
 | `UA000000005CN` | U: un piccolo pacchetto con merce che, per l'UPU, non ha un tracciamento per il cliente. Non contare su scansioni in Italia. |
-| `ZS12345678901` | ZS, ZC o ZA e 11 cifre: anche questi codici li conosce il tracking di China Post. I codici di La Poste hanno la stessa lunghezza, ma non se ne conosce nessuno che inizi così. |
+| `ZS12345678501` | ZS, ZC o ZA e 11 cifre: anche questi codici li conosce il tracking di China Post. I codici di La Poste hanno la stessa lunghezza, ma non se ne conosce nessuno che inizi così. |
 | `LP12345678901234` | Non è China Post, ma un riferimento logistico di [Cainiao](carrier:cainiao) (AliExpress). |
 | `YT1234567890123456` | Non è China Post, ma [YunExpress](carrier:yunexpress). |
 

@@ -14,7 +14,7 @@ YWE's numbers are YWE and 14 digits, 17 characters in all. With invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `YWE48291057364918` | YWE and 14 digits: a YWE number. |
+| `YWE48291057364911` | YWE and 14 digits: a YWE number. |
 | `YWE4829105736491` | Only 13 digits: not YWE's layout. Check for a missing digit; if no carrier answers for it, its page on peektracker.com says "This starts like a YWE tracking number but is one character short, so it may be mistyped." |
 | `YWLAX482910573649` | YW, three letters and 12 digits: a [Yanwen](carrier:yanwen) number, not a YWE one. |
 

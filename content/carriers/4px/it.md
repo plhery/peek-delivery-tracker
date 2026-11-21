@@ -14,7 +14,7 @@ updated: 2026-11-17
 
 | Numero | Di chi è |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 cifre e CN: il numero di 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 cifre e CN: il numero di 4PX. |
 | `LP1234567890123CN` | LP, 13 cifre e CN: probabilmente 4PX. |
 | `LP12345678901234` | LP e 14 cifre, senza CN: è il riferimento logistico di AliExpress, da tracciare come [Cainiao](carrier:cainiao). |
 | `RR000000005CN` | Un numero postale che finisce con la sigla di un Paese: qui China Post. |

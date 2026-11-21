@@ -15,7 +15,7 @@ These are the shapes Peek files under GOFO Italy, in capitals or not:
 | Shape | Invented example |
 | --- | --- |
 | GFIT and 13 digits | `GFIT1234567890123` |
-| GFIT and 14 digits | `GFIT12345678901234` |
+| GFIT and 14 digits | `GFIT12345678901235` |
 | CIIT and 13 digits | `CIIT1234567890123` |
 | CIIT and 14 digits | `CIIT12345678901234` |
 

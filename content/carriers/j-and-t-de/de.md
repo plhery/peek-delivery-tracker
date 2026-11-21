@@ -14,7 +14,7 @@ Laut FAQ von J&T beginnt die Sendungsnummer mit JTDE. Peek kennt dafür nur eine
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` und 12 Ziffern: ein Paket von J&T Express Germany. Peek erkennt J&T Express Germany sofort. |
+| `JTDE000000000005` | `JTDE` und 12 Ziffern: ein Paket von J&T Express Germany. Peek erkennt J&T Express Germany sofort. |
 | `JTDE00000000000` | Eine Ziffer zu wenig: keine Nummer von J&T Express Germany, und Peek erkennt keinen Paketdienst. Prüf, ob eine Ziffer fehlt. |
 
 Hat eine Nummer nach `JTDE` eine Ziffer zu wenig oder zu viel und antwortet kein Paketdienst, weist dich die Seite des Pakets auf peektracker.com darauf hin („Das beginnt wie eine Sendungsnummer von J&T Express Germany, aber ein Zeichen fehlt.“ bzw. „…, hat aber ein Zeichen zu viel.“) und rät dir, sie mit deiner Versandnachricht zu vergleichen.

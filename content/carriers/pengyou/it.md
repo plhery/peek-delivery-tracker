@@ -14,7 +14,7 @@ Pengyou non pubblica alcun formato ufficiale e nessuna pagina pubblica mostra pe
 
 | Numero | Cos'è |
 | --- | --- |
-| `ZXA246813579PY` | `ZXA`, nove cifre e `PY`: una serie a cui risponde il tracker di Pengyou e che Peek riconosce subito. |
+| `ZXA246813576PY` | `ZXA`, nove cifre e `PY`: una serie a cui risponde il tracker di Pengyou e che Peek riconosce subito. |
 | `ZZZ999999980PY` | Tre lettere diverse da `ZXA`, nove cifre e `PY`: lo schema associato a Pengyou (corrispondenza debole finché il tracker non risponde). |
 | `ZZZ24681357PY` | Solo otto cifre: non rispetta quello schema. Controlla se manca una cifra. |
 | `RR246813576PY` | Due lettere, nove cifre e `PY`: un numero postale internazionale, non di Pengyou. |

@@ -14,7 +14,7 @@ Prema J&T-ovim čestim pitanjima, broj pošiljke počinje s JTDE. Peek poznaje s
 
 | Broj (izmišljen) | Što je to |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` i 12 znamenki: paket J&T Express Germany. Peek odmah prepoznaje J&T Express Germany. |
+| `JTDE000000000005` | `JTDE` i 12 znamenki: paket J&T Express Germany. Peek odmah prepoznaje J&T Express Germany. |
 | `JTDE00000000000` | Jedna znamenka manje: to nije oblik J&T Express Germany i Peek ne prepoznaje nijednog prijevoznika. Provjeri nedostaje li znamenka. |
 
 **Gdje ga naći.** Prema J&T-u, broj ti daje pošiljatelj, a nalazi se na stranici narudžbe u web-trgovini, u e-poruci s potvrdom narudžbe, u e-poruci ili SMS-u o slanju, u e-porukama koje najavljuju ili potvrđuju dostavu i na naljepnici paketa. Ako ga ne nađeš, J&T te upućuje na pošiljatelja ili na službu za korisnike platforme na kojoj si kupio.

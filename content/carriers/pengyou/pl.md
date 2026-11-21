@@ -14,7 +14,7 @@ Pengyou nie publikuje oficjalnego formatu numeracji, a na żadnej publicznej str
 
 | Numer | Co oznacza |
 | --- | --- |
-| `ZXA246813579PY` | `ZXA`, dziewięć cyfr i `PY`: seria, na którą odpowiada wyszukiwarka Pengyou i którą Peek rozpoznaje od razu. |
+| `ZXA246813576PY` | `ZXA`, dziewięć cyfr i `PY`: seria, na którą odpowiada wyszukiwarka Pengyou i którą Peek rozpoznaje od razu. |
 | `ZZZ999999980PY` | Trzy inne litery, dziewięć cyfr i `PY`: ogólny układ powiązany z Pengyou (słabe dopasowanie do czasu odpowiedzi wyszukiwarki). |
 | `ZZZ24681357PY` | Tylko osiem cyfr: nie pasuje do tego układu. Sprawdź, czy nie brakuje jednej cyfry. |
 | `RR246813576PY` | Dwie litery, dziewięć cyfr i `PY`: międzynarodowy numer pocztowy, a nie numer Pengyou. |

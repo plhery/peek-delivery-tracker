@@ -14,7 +14,7 @@ Un numéro YWE compte 17 caractères au total : le préfixe YWE suivi de 14 chif
 
 | Numéro | Ce que c’est |
 | --- | --- |
-| `YWE48291057364918` | YWE et 14 chiffres : un numéro de suivi YWE. |
+| `YWE48291057364911` | YWE et 14 chiffres : un numéro de suivi YWE. |
 | `YWE4829105736491` | Seulement 13 chiffres : ce n’est pas le format de YWE. Vérifie s’il manque un chiffre ; si aucun transporteur n’en répond, sa page sur peektracker.com affiche « Ça commence comme un numéro de suivi YWE, mais il manque un caractère : il y a peut-être une faute de frappe. Compare-le avec ton message d’expédition. » |
 | `YWLAX482910573649` | YW, trois lettres et 12 chiffres : un numéro [Yanwen](carrier:yanwen), pas un numéro YWE. |
 

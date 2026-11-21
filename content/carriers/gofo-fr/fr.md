@@ -15,7 +15,7 @@ Voici les formes que Peek attribue à GOFO France, en majuscules ou non :
 | Forme | Exemple inventé |
 | --- | --- |
 | GFFR et 13 chiffres | `GFFR1234567890123` |
-| GFFR et 14 chiffres | `GFFR12345678901234` |
+| GFFR et 14 chiffres | `GFFR12345678901235` |
 | CIFR et 13 chiffres | `CIFR1234567890123` |
 | CIFR et 14 chiffres | `CIFR12345678901234` |
 

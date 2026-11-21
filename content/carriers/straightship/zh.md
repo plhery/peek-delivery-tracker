@@ -16,7 +16,7 @@ Straightship 没有公布单号格式。Peek 认得的单号有以下几种（�
 | --- | --- |
 | `STRTD482910573` | STRTD 加 9 位数字。 |
 | `STRTD4829105736491827` | STRTD 加 16 位数字（也有 17 位的）。 |
-| `STRCA4829105736491` | STRCA 加 13 位数字。 |
+| `STRCA4829105736498` | STRCA 加 13 位数字。 |
 | `STSHYW48291057364` | STSH 加两个字母和 11 位数字。 |
 
 在 Peek 里，大小写和空格都不影响查询。Straightship 的查询页面查不到某个单号时，会显示 `No results found!`：请对照商家的邮件核对单号。SHEIN 订单的单号在哪里、包裹怎么跟踪，见 [SHEIN 订单跟踪指南](guide:shein-orders)（英文）。

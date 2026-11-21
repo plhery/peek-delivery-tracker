@@ -14,7 +14,7 @@ J&T's FAQ says its tracking numbers start with JTDE. Peek knows only one shape f
 
 | Number (invented) | What it is |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` and 12 digits: a J&T Express Germany parcel. Peek names J&T Express Germany at once. |
+| `JTDE000000000005` | `JTDE` and 12 digits: a J&T Express Germany parcel. Peek names J&T Express Germany at once. |
 | `JTDE00000000000` | One digit short: not J&T Express Germany's shape, and Peek recognises no carrier. Check for a missing digit. |
 
 If a number has one digit too few or too many after `JTDE` and no carrier answers for it, the parcel's page on peektracker.com says so ("This starts like a J&T Express Germany tracking number but is one character short, so it may be mistyped." or "… but has one character too many, so it may be mistyped.") and asks you to compare it with your shipping message.

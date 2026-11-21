@@ -15,7 +15,7 @@ Queste sono le forme che Peek attribuisce a GOFO Italy, in maiuscolo o in minusc
 | Forma | Esempio inventato |
 | --- | --- |
 | GFIT e 13 cifre | `GFIT1234567890123` |
-| GFIT e 14 cifre | `GFIT12345678901234` |
+| GFIT e 14 cifre | `GFIT12345678901235` |
 | CIIT e 13 cifre | `CIIT1234567890123` |
 | CIIT e 14 cifre | `CIIT12345678901234` |
 

@@ -14,7 +14,7 @@ Pengyou no publica ninguna guía sobre el formato de sus códigos, ni muestra ni
 
 | Número | Qué es |
 | --- | --- |
-| `ZXA482910573PY` | `ZXA`, nueve cifras y `PY`: una serie que responde en el propio rastreador de Pengyou y que Peek identifica al instante. |
+| `ZXA482910576PY` | `ZXA`, nueve cifras y `PY`: una serie que responde en el propio rastreador de Pengyou y que Peek identifica al instante. |
 | `QXB482910573PY` | Tres letras distintas de `ZXA`, nueve cifras y `PY`: el formato general asociado a Pengyou (coincidencia débil hasta comprobar el rastreador). |
 | `QXB48291057PY` | Solo ocho cifras: no encaja con ese formato. Revisa si falta algún dígito. |
 | `RR482910576PY` | Dos letras, nueve cifras y `PY`: un número postal internacional estándar, no de Pengyou. |

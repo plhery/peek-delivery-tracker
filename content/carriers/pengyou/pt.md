@@ -14,7 +14,7 @@ A Pengyou não publica nenhum formato de numeração e nenhuma página pública 
 
 | Número | O que é |
 | --- | --- |
-| `ZXA246813579PY` | `ZXA`, nove algarismos e `PY`: uma série a que o rastreador da Pengyou responde e que o Peek identifica de imediato. |
+| `ZXA246813576PY` | `ZXA`, nove algarismos e `PY`: uma série a que o rastreador da Pengyou responde e que o Peek identifica de imediato. |
 | `ZZZ999999980PY` | Outras três letras, nove algarismos e `PY`: a estrutura associada à Pengyou (correspondência fraca enquanto o rastreador não responder). |
 | `ZZZ24681357PY` | Apenas oito algarismos: não corresponde a essa estrutura. Verifica se falta um dígito. |
 | `RR246813576PY` | Duas letras, nove algarismos e `PY`: um número postal internacional, não da Pengyou. |

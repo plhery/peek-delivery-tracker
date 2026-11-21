@@ -14,7 +14,7 @@ Pengyou ne publie aucun format de numéro et aucune page publique ne montre un n
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `ZXA246813579PY` | `ZXA`, neuf chiffres et `PY` : une série à laquelle le suivi de Pengyou répond et que Peek identifie immédiatement. |
+| `ZXA246813576PY` | `ZXA`, neuf chiffres et `PY` : une série à laquelle le suivi de Pengyou répond et que Peek identifie immédiatement. |
 | `ZZZ999999980PY` | Trois autres lettres, neuf chiffres et `PY` : le format rattaché à Pengyou (correspondance faible tant que le suivi n'a pas répondu). |
 | `ZZZ24681357PY` | Huit chiffres seulement : ce n'est pas ce format. Vérifie s'il manque un chiffre. |
 | `RR246813576PY` | Deux lettres, neuf chiffres et `PY` : un numéro postal international, pas un numéro Pengyou. |

@@ -14,7 +14,7 @@ Secondo le FAQ di J&T, il numero di spedizione inizia con JTDE. Peek ne conosce 
 
 | Numero (inventato) | Cos'è |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` e 12 cifre: un pacco J&T Express Germany. Peek riconosce subito J&T Express Germany. |
+| `JTDE000000000005` | `JTDE` e 12 cifre: un pacco J&T Express Germany. Peek riconosce subito J&T Express Germany. |
 | `JTDE00000000000` | Una cifra in meno: non ha la forma di un numero J&T Express Germany, e Peek non riconosce nessun corriere. Controlla di non aver saltato una cifra. |
 
 **Dove lo trovi.** Secondo J&T te lo dà il mittente, e lo trovi nella pagina dell'ordine del negozio online, nell'e-mail di conferma dell'ordine, nell'e-mail o nell'SMS di spedizione, nelle e-mail che annunciano o confermano la consegna e sull'etichetta del pacco. Se non lo trovi, J&T ti rimanda al mittente o al servizio clienti della piattaforma su cui hai comprato. Vedi anche [dove trovare il codice di tracking](guide:find-tracking-number).

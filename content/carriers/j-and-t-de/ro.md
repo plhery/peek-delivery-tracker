@@ -14,7 +14,7 @@ Potrivit FAQ-ului J&T, numărul de urmărire J&T Express Germany (AWB-ul) încep
 
 | Număr (inventat) | Ce este |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` și 12 cifre: un colet J&T Express Germany. Peek recunoaște imediat J&T Express Germany. |
+| `JTDE000000000005` | `JTDE` și 12 cifre: un colet J&T Express Germany. Peek recunoaște imediat J&T Express Germany. |
 | `JTDE00000000000` | Lipsește o cifră: nu are forma unui număr J&T Express Germany, iar Peek nu recunoaște niciun curier. Verifică dacă n-ai sărit o cifră. |
 
 **Unde îl găsești.** Potrivit J&T, ți-l dă expeditorul și îl găsești pe pagina comenzii din magazinul online, în emailul de confirmare a comenzii, în emailul sau SMS-ul de expediere, în emailurile care anunță sau confirmă livrarea și pe eticheta coletului. Dacă nu-l găsești, J&T te trimite la expeditor sau la serviciul clienți al platformei de pe care ai cumpărat.

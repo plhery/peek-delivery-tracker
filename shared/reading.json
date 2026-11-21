@@ -106,7 +106,7 @@
     { "text": "PO-000-000000000000000000", "shop": null, "why": "A digit too many or too few, or no PO, is no Temu order number." },
     { "text": "000-00000000000000000", "shop": null },
     { "text": "XPO-000-00000000000000000", "shop": null },
-    { "text": "PO0000000000000000000", "shop": null, "carrier": "australia-post", "why": "A carrier's number that starts with PO stays a tracking number: here Australia Post's, a digit short of Temu's." },
+    { "text": "PO0000000000000000003", "shop": null, "carrier": "australia-post", "why": "A carrier's number that starts with PO stays a tracking number: here Australia Post's, a digit short of Temu's." },
     { "text": "Order PO-000-00000000000000000, tracking 1ZDEMO202600000001", "shop": null, "carrier": "ups" },
     { "text": "2000012345678901", "shop": "mercadolibre" },
     { "text": "Compra #2000012345678901", "shop": "mercadolibre" },

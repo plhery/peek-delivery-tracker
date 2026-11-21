@@ -16,7 +16,7 @@ Straightship veröffentlicht keine offizielle Formatbeschreibung. Die Nummernfor
 | --- | --- |
 | `STRTD482910573` | `STRTD` und 9 Ziffern. |
 | `STRTD4829105736491827` | `STRTD` und 16 Ziffern (auch 17 Ziffern kommen vor). |
-| `STRCA4829105736491` | `STRCA` und 13 Ziffern. |
+| `STRCA4829105736498` | `STRCA` und 13 Ziffern. |
 | `STSHYW48291057364` | `STSH`, zwei Buchstaben und 11 Ziffern. |
 
 Kleinbuchstaben und Leerzeichen spielen beim Einfügen in Peek keine Rolle. Kennt Straightships Tracker eine Nummer nicht, antwortet er mit `No results found!`: Vergleiche die Nummer dann mit der E-Mail des Online-Shops. Du findest überhaupt keine Nummer? Sieh unter [Sendungsnummer finden](guide:find-tracking-number) nach – und bei einer SHEIN-Bestellung unter [SHEIN-Bestellungen verfolgen](guide:shein-orders).

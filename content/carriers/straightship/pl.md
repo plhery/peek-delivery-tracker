@@ -16,7 +16,7 @@ Straightship nie publikuje zestawienia formatów swoich numerów. Kody rozpoznaw
 | --- | --- |
 | `STRTD482910573` | `STRTD` i 9 cyfr. |
 | `STRTD4829105736491827` | `STRTD` i 16 cyfr (występują też numery z 17 cyframi). |
-| `STRCA4829105736491` | `STRCA` i 13 cyfr. |
+| `STRCA4829105736498` | `STRCA` i 13 cyfr. |
 | `STSHYW48291057364` | `STSH`, dwie litery i 11 cyfr. |
 
 Małe litery i spacje nie mają znaczenia w Peek. Gdy wyszukiwarka Straightship nie ma numeru w bazie, zwraca komunikat `No results found!`: porównaj wtedy kod z potwierdzeniem wysyłki ze sklepu. Nie możesz nigdzie znaleźć numeru? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number), a w przypadku zakupów na SHEIN sprawdź [śledzenie zamówień SHEIN](guide:shein-orders).

@@ -16,7 +16,7 @@ Straightship publishes no number format. The numbers Peek knows look like this, 
 | --- | --- |
 | `STRTD482910573` | STRTD and 9 digits. |
 | `STRTD4829105736491827` | STRTD and 16 digits (17 also occur). |
-| `STRCA4829105736491` | STRCA and 13 digits. |
+| `STRCA4829105736498` | STRCA and 13 digits. |
 | `STSHYW48291057364` | STSH, two letters and 11 digits. |
 
 Lower case and spaces don't matter in Peek. Straightship's tracker answers a number it doesn't hold with `No results found!`: check the number against the shop's email. Can't find the number at all? See [how to find your tracking number](guide:find-tracking-number) and, for a SHEIN order, [tracking SHEIN orders](guide:shein-orders).

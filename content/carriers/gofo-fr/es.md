@@ -15,7 +15,7 @@ Estas son las formas que Peek asigna a GOFO France, en mayúsculas o en minúscu
 | Forma | Ejemplo inventado |
 | --- | --- |
 | GFFR y 13 cifras | `GFFR1234567890123` |
-| GFFR y 14 cifras | `GFFR12345678901234` |
+| GFFR y 14 cifras | `GFFR12345678901235` |
 | CIFR y 13 cifras | `CIFR1234567890123` |
 | CIFR y 14 cifras | `CIFR12345678901234` |
 

@@ -14,7 +14,7 @@ Eine YWE-Sendungsnummer hat genau 17 Zeichen: das Präfix YWE gefolgt von 14 Zif
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `YWE48291057364918` | YWE und 14 Ziffern: eine gültige YWE-Sendungsnummer. |
+| `YWE48291057364911` | YWE und 14 Ziffern: eine gültige YWE-Sendungsnummer. |
 | `YWE4829105736491` | Nur 13 Ziffern: kein gültiges YWE-Format. Prüf, ob eine Ziffer fehlt; kennt kein Paketdienst diese Nummer, zeigt ihre Seite auf peektracker.com „Das beginnt wie eine Sendungsnummer von YWE, aber ein Zeichen fehlt. Vielleicht ist es ein Tippfehler: Vergleiche die Nummer mit deiner Versandnachricht.“ |
 | `YWLAX482910573649` | YW, drei Buchstaben und 12 Ziffern: eine Nummer von [Yanwen](carrier:yanwen), nicht von YWE. |
 

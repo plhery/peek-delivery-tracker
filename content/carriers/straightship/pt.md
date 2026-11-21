@@ -16,7 +16,7 @@ A Straightship não publica um guia de formatos. Os códigos que o Peek reconhec
 | --- | --- |
 | `STRTD482910573` | `STRTD` e 9 algarismos. |
 | `STRTD4829105736491827` | `STRTD` e 16 algarismos (também existem com 17). |
-| `STRCA4829105736491` | `STRCA` e 13 algarismos. |
+| `STRCA4829105736498` | `STRCA` e 13 algarismos. |
 | `STSHYW48291057364` | `STSH`, duas letras e 11 algarismos. |
 
 Minúsculas e espaços não importam no Peek. Quando o rastreador da Straightship não conhece um número, responde `No results found!`: confirma-o no e-mail de envio da loja. Não encontras o código em lado nenhum? Consulta [como encontrar o teu número de seguimento](guide:find-tracking-number) e, se for uma compra da SHEIN, [seguimento de encomendas SHEIN](guide:shein-orders).

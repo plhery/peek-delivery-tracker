@@ -15,7 +15,7 @@ These are the shapes Peek files under GOFO France, in capitals or not:
 | Shape | Invented example |
 | --- | --- |
 | GFFR and 13 digits | `GFFR1234567890123` |
-| GFFR and 14 digits | `GFFR12345678901234` |
+| GFFR and 14 digits | `GFFR12345678901235` |
 | CIFR and 13 digits | `CIFR1234567890123` |
 | CIFR and 14 digits | `CIFR12345678901234` |
 

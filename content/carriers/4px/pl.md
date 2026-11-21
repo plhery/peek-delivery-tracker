@@ -14,7 +14,7 @@ updated: 2026-11-17
 
 | Numer | Czyj to numer |
 | --- | --- |
-| `4PX1234567890123CN` | 4PX, 13 cyfr i CN: własny numer 4PX. |
+| `4PX1234567890128CN` | 4PX, 13 cyfr i CN: własny numer 4PX. |
 | `LP1234567890123CN` | LP, 13 cyfr i CN: prawdopodobnie 4PX. |
 | `LP12345678901234` | LP i 14 cyfr, bez CN: [Cainiao](carrier:cainiao), numer logistyczny AliExpress. |
 | `RR000000005CN` | [Numer pocztowy](guide:tracking-number-formats) z kodem kraju na końcu, tu China Post. |

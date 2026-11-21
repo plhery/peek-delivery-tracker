@@ -180,14 +180,18 @@ parcels by email, assistants (MCP), usage analytics (Umami), Sentry, Turnstile, 
 FlareSolverr and tracking proxies for the carriers whose sites turn servers away.
 Each one is off until its settings are there; `.env.example` lists them.
 
-**Off by default.** A copy starts neutral: a site named "Parcel Tracker" with no App
-Store or Android app, no author links, and none of Peek's own pages. Name yours with
-`SITE_NAME`, add your apps with `APP_STORE_ID` and `ANDROID_APP_PACKAGE`, and link your
-own privacy notice with `PRIVACY_URL`. Peek's privacy notice, terms, help and accessibility
-pages (`LEGAL_PAGES`) name Peek's operator, and its guides and carrier pages
-(`GUIDE_PAGES`) are not licensed with the code, so a copy keeps both off and nothing
+**Off by default.** A copy starts with no App Store or Android app, no author links and
+none of Peek's own pages, and where the code names the site it says "Parcel Tracker".
+Name yours with `SITE_NAME`, add your apps with `APP_STORE_ID` and `ANDROID_APP_PACKAGE`,
+and link your own privacy notice with `PRIVACY_URL`. Peek's privacy notice, terms, help
+and accessibility pages (`LEGAL_PAGES`) name Peek's operator, and its guides and carrier
+pages (`GUIDE_PAGES`) are not licensed with the code, so a copy keeps both off and nothing
 links them ([Trademarks and content](#trademarks-and-content)). [Deployment](docs/DEPLOYMENT.md)
 describes each setting.
+
+**Rename before you publish.** The app's words (`shared/locales`), the sign-in email
+(`public/auth-emails/`) and the logo and icons (`public/icons/`) still say Peek. A fork
+replaces them before it is published or run as a public service.
 
 ## Under the hood
 

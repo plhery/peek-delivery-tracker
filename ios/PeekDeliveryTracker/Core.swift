@@ -681,7 +681,8 @@ final class Localizer: ObservableObject {
         return dayAndTime(day, clockTime(date))
     }
 
-    private func deliveryWallClock(_ value: Substring) -> String {
+    /// A carrier's wall clock ("16:00"), which has no zone, as the reader writes times.
+    func deliveryWallClock(_ value: Substring) -> String {
         guard !use24HourTime, let hour = Int(value.prefix(2)), let minute = Int(value.suffix(2)),
               minute < 60, hour < 24 || hour == 24 && minute == 0 else { return String(value) }
         // A carrier's wall clock has no zone. Use UTC to preserve its hours.
@@ -734,12 +735,17 @@ final class Localizer: ObservableObject {
     /// Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept". Names keep the
     /// language's own case, since the date often sits mid-sentence, and the day keeps the period German writes after it.
     func shortDate(_ date: Date) -> String {
-        let weekday = formatter("EEE", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
+        let weekday = shortWeekday(date)
         let day = formatter("d", gregorian: true).string(from: date)
         let month = formatter("MMM", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
         // Chinese puts the month first and the weekday last, as the web and Android write it: "9月12日周六".
         if language == .zh { return "\(month)\(day)日\(weekday)" }
         return "\(weekday) \(day)\(dayPeriod) \(month)"
+    }
+
+    /// A weekday's short name without its period, as `shortDate` writes it: "Thu", "jeu", "Do".
+    func shortWeekday(_ date: Date) -> String {
+        formatter("EEE", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
     }
 
     /// The period the language's own day-and-month pattern puts after the day, as German "12. Sept" does.
@@ -874,7 +880,7 @@ final class Localizer: ObservableObject {
     /// The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed.
     /// Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are kept, not a
     /// day, nor the last day of a window.
-    private func shownEstimate(_ parcel: Parcel, now: Date) -> String? {
+    func shownEstimate(_ parcel: Parcel, now: Date) -> String? {
         guard let (value, date) = liveEstimate(parcel, now: now) else { return nil }
         if parcel.currentStage == .outForDelivery {
             let calendar = Calendar.current

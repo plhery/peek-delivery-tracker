@@ -405,15 +405,17 @@ final class DeliveryAPIClient {
     }
 
     func saveDisplayPreferences(
-        markNewUpdates: Bool? = nil, clock: NotificationPreferencesClock? = nil, distance: NotificationPreferencesDistance? = nil
+        markNewUpdates: Bool? = nil, showPeekAi: Bool? = nil, clock: NotificationPreferencesClock? = nil,
+        distance: NotificationPreferencesDistance? = nil
     ) async throws -> NotificationPreferences {
         struct Patch: Encodable {
             let markNewUpdates: Bool?
+            let showPeekAi: Bool?
             let clock: NotificationPreferencesClock?
             let distance: NotificationPreferencesDistance?
         }
         return try await request("/api/push/preferences", method: "PATCH",
-                                 body: Patch(markNewUpdates: markNewUpdates, clock: clock, distance: distance))
+                                 body: Patch(markNewUpdates: markNewUpdates, showPeekAi: showPeekAi, clock: clock, distance: distance))
     }
 
     /// Saves the events alone, and clears the retired quiet hours: the delivery email and the display choices save

@@ -35,6 +35,10 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// Whether the app's list marks it with the dot for updates since it was last opened (`showsNewUpdate`), which the
     /// Parcels widget shows too. None while Settings has the mark off, or from an app that didn't publish it.
     var newUpdate: Bool? = nil
+    /// Peek AI's words as the app's cards give them ("by 16:00"), and when they stop holding, which the widgets show
+    /// after the carrier's date. None while Settings has Peek AI off, or from an app that didn't publish them.
+    var peekAi: String? = nil
+    var peekAiUntil: Date? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
@@ -129,7 +133,8 @@ enum DeliveryWidgetDays {
     static func changes(in parcels: [DeliveryWidgetParcel], after now: Date, calendar: Calendar = .current) -> [Date] {
         let worded = parcels.flatMap { $0.later ?? [] }.map { $0.midnight(in: calendar.timeZone) }
         let stepped = parcels.flatMap { $0.steps ?? [] }.compactMap { midnights(after: $0.at, count: 1, calendar: calendar).first }
-        return Set((worded + stepped).filter { $0 > now }).sorted()
+        let guessed = parcels.compactMap(\.peekAiUntil)
+        return Set((worded + stepped + guessed).filter { $0 > now }).sorted()
     }
 }
 
@@ -444,10 +449,12 @@ extension String {
 }
 
 extension DeliveryWidgetParcel {
-    /// The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it.
+    /// The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it, without Peek
+    /// AI's words once they no longer hold.
     func worded(at date: Date) -> DeliveryWidgetParcel {
-        guard let wording = later?.last(where: { $0.midnight() <= date }) else { return self }
         var parcel = self
+        if let until = peekAiUntil, until <= date { parcel.peekAi = nil }
+        guard let wording = later?.last(where: { $0.midnight() <= date }) else { return parcel }
         parcel.detail = wording.detail
         parcel.section = wording.section ?? section
         parcel.nextUp = wording.nextUp ?? nextUp

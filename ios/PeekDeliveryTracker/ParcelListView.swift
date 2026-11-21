@@ -22,6 +22,7 @@ struct ParcelListView: View {
             DeliveryListView(isSelected: selection == 0, firstParcel: $firstParcel, adding: $adding) { selection = 0 }
                 .environment(\.keyboardInFront, inFront(0))
                 .environment(\.marksNewUpdates, store.markNewUpdates)
+                .environment(\.showsPeekAi, store.showPeekAi)
                 .tag(0)
                 .tabItem {
                     Label(localizer.text("native.deliveries"), systemImage: "shippingbox.fill")
@@ -1774,6 +1775,7 @@ private struct ExperimentalNextDeliveryPass: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.marksNewUpdates) private var marksNewUpdates
+    @Environment(\.showsPeekAi) private var showsPeekAi
     @State private var appeared = false
     @State private var atlas: WorldAtlas?
     @ObservedObject private var catalog = CarrierCatalog.shared
@@ -1847,9 +1849,25 @@ private struct ExperimentalNextDeliveryPass: View {
                 NewUpdateDot(shown: marked)
                 HStack(spacing: 5) {
                     if arrived { Image(systemName: "checkmark").font(.caption2.weight(.light)).accessibilityHidden(true) }
-                    Text([localizer.parcelStatus(parcel), parcel.pickupPlace,
-                          localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
+                    let status = Text([localizer.parcelStatus(parcel), parcel.pickupPlace,
+                                       localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
                         .compactMap { $0 }.joined(separator: " · "))
+                    // Peek AI's own estimate beside the status, or under it where the line has no room.
+                    if let words = localizer.parcelPeekAiWords(parcel, shown: showsPeekAi) {
+                        ViewThatFits(in: .horizontal) {
+                            HStack(spacing: 5) {
+                                status.fixedSize()
+                                Text(verbatim: "·").accessibilityHidden(true)
+                                localizer.peekAiCopy.phrase(words).fixedSize()
+                            }
+                            VStack(alignment: .leading, spacing: 4) {
+                                status
+                                localizer.peekAiCopy.phrase(words)
+                            }
+                        }
+                    } else {
+                        status
+                    }
                 }
             }
                 .font(.caption)
@@ -1917,6 +1935,7 @@ private struct ExperimentalParcelPassCard: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(\.marksNewUpdates) private var marksNewUpdates
+    @Environment(\.showsPeekAi) private var showsPeekAi
     @State private var atlas: WorldAtlas?
     @ObservedObject private var catalog = CarrierCatalog.shared
 
@@ -1930,6 +1949,8 @@ private struct ExperimentalParcelPassCard: View {
         if frozen, parcel.currentStage?.isFinal != true { return localizer.text("link.frozen.label") }
         return localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel)
     }
+    /// Peek AI's own estimate, under the carrier's date or in its place; none on a copy no longer updated.
+    private var peekAi: String? { frozen ? nil : localizer.parcelPeekAiWords(parcel, shown: showsPeekAi) }
     /// Scans with places are drawn as a small route at the end of the card.
     private var placed: Bool { parcel.hasMappedPlace }
     /// At the largest text sizes the words take the whole card, and the route goes.
@@ -1988,11 +2009,15 @@ private struct ExperimentalParcelPassCard: View {
                 HStack(alignment: .top, spacing: 12) {
                     CarrierFleetMark(identity: identity).fixedSize()
                     Spacer(minLength: 0)
-                    if let date { dateLabel(date).fixedSize() }
+                    VStack(alignment: .trailing, spacing: 3) {
+                        if let date { dateLabel(date).fixedSize() }
+                        if let peekAi { peekAiLabel(peekAi).fixedSize() }
+                    }
                 }
                 VStack(alignment: .leading, spacing: 6) {
                     CarrierFleetMark(identity: identity)
                     if let date { dateLabel(date) }
+                    if let peekAi { peekAiLabel(peekAi) }
                 }
             }
             .padding(.bottom, 3)
@@ -2060,6 +2085,10 @@ private struct ExperimentalParcelPassCard: View {
     private func dateLabel(_ date: String) -> some View {
         Text(date).font(.caption).foregroundStyle(identity.ink)
             .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func peekAiLabel(_ words: String) -> some View {
+        localizer.peekAiCopy.phrase(words).font(.caption).foregroundStyle(identity.ink)
     }
 }
 

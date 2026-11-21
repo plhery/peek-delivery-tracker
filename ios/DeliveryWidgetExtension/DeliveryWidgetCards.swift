@@ -115,6 +115,7 @@ struct DeliveryWidgetCardView: View {
     var marked = false
 
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.peekAiCopy) private var peekAiCopy
 
     private var ink: Color { DeliveryWidgetCardColors.color(card.ink, scheme) }
     private var status: String { card.status == parcel.detail ? card.status : "\(card.status) · \(parcel.detail)" }
@@ -130,6 +131,13 @@ struct DeliveryWidgetCardView: View {
                     .frame(height: Self.markHeight(shape))
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
+                // Peek AI's own estimate at the top, as on the app's cards, where a whole medium widget has the room.
+                if shape == .wide, let words = parcel.peekAi {
+                    ViewThatFits(in: .horizontal) {
+                        peekAiCopy.phrase(words).font(.caption).foregroundStyle(ink)
+                        EmptyView()
+                    }
+                }
             }
             Spacer(minLength: 4)
             VStack(alignment: .leading, spacing: shape == .half ? 2 : 3) {
@@ -146,6 +154,15 @@ struct DeliveryWidgetCardView: View {
                 .foregroundStyle(ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
+                // Under the status line on a smaller card, where it fits.
+                if shape != .wide, let words = parcel.peekAi {
+                    ViewThatFits(in: .horizontal) {
+                        peekAiCopy.phrase(words)
+                        EmptyView()
+                    }
+                    .font(shape == .half ? .caption2 : .caption)
+                    .foregroundStyle(ink)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -194,4 +211,84 @@ private struct WidgetNewUpdateSaidFirst: ViewModifier {
             label
         }
     }
+}
+
+/// Peek AI's sparkle: a four-pointed star and a smaller one, as the web draws it on a 24-point grid.
+struct PeekAiSparkle: Shape {
+    func path(in rect: CGRect) -> Path {
+        let scale = min(rect.width, rect.height) / 24
+        func point(_ x: CGFloat, _ y: CGFloat) -> CGPoint { CGPoint(x: rect.minX + x * scale, y: rect.minY + y * scale) }
+        func star(_ points: [(CGFloat, CGFloat)], into path: inout Path) {
+            path.move(to: point(points[0].0, points[0].1))
+            // Each arm: two controls, then its end.
+            for index in stride(from: 1, to: points.count, by: 3) {
+                path.addCurve(to: point(points[index + 2].0, points[index + 2].1),
+                              control1: point(points[index].0, points[index].1),
+                              control2: point(points[index + 1].0, points[index + 1].1))
+            }
+            path.closeSubpath()
+        }
+        var path = Path()
+        star([(10, 2.5), (10.5, 7.1), (12.4, 9), (17, 9.5), (12.4, 10), (10.5, 11.9), (10, 16.5),
+              (9.5, 11.9), (7.6, 10), (3, 9.5), (7.6, 9), (9.5, 7.1), (10, 2.5)], into: &path)
+        star([(18.5, 13.5), (18.8, 15.8), (19.7, 16.7), (22, 17), (19.7, 17.3), (18.8, 18.2), (18.5, 20.5),
+              (18.2, 18.2), (17.3, 17.3), (15, 17), (17.3, 16.7), (18.2, 15.8), (18.5, 13.5)], into: &path)
+        return path
+    }
+}
+
+/// "✦ Peek AI" in a pill a shade darker than what it sits on, in the words' own colour: Peek's, never the carrier's.
+struct PeekAiPill: View {
+    let name: String
+    @ScaledMetric(relativeTo: .caption) private var sparkle: CGFloat = 10
+
+    var body: some View {
+        HStack(spacing: 3) {
+            PeekAiSparkle().frame(width: sparkle, height: sparkle)
+            Text(name).fontWeight(.semibold)
+        }
+        .lineLimit(1)
+        .fixedSize()
+        .padding(.leading, 4)
+        .padding(.trailing, 6)
+        .padding(.vertical, 1)
+        .background(.foreground.opacity(0.14), in: Capsule())
+    }
+}
+
+/// The pill, then Peek AI's words, which VoiceOver reads as one: "Peek AI: by 16:00".
+struct PeekAiPhrase: View {
+    let name: String
+    let words: String
+    /// What VoiceOver reads.
+    let spoken: String
+    var weight: Font.Weight = .regular
+
+    var body: some View {
+        HStack(spacing: 4) {
+            PeekAiPill(name: name)
+            Text(words).fontWeight(weight)
+        }
+        .lineLimit(1)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(spoken)
+    }
+}
+
+/// Peek AI's name and how VoiceOver reads its words, in the widget's language.
+struct PeekAiCopy: Equatable {
+    var name = "Peek AI"
+    /// "Peek AI: {{words}}".
+    var says = "Peek AI: {{words}}"
+
+    /// "Peek AI: by 16:00".
+    func spoken(_ words: String) -> String { says.replacingOccurrences(of: "{{words}}", with: words) }
+
+    func phrase(_ words: String, weight: Font.Weight = .regular) -> PeekAiPhrase {
+        PeekAiPhrase(name: name, words: words, spoken: spoken(words), weight: weight)
+    }
+}
+
+extension EnvironmentValues {
+    @Entry var peekAiCopy = PeekAiCopy()
 }

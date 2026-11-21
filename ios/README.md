@@ -84,6 +84,13 @@ questioned, never refused: Add offers the number a lookalike letter suggests, wi
 changes marked, and adding the parcel takes it as typed. A text that names several numbers lists
 them in the order written, and Add adds the first unless another is chosen.
 
+Peek AI, the server's `peekAi` on a parcel ([ARCHITECTURE.md](../docs/ARCHITECTURE.md)), is worded
+as the web words it (`PeekAi.swift`): a line on the card, beside the status on Next up, and on the
+parcel's page a short card whose (i) opens the likely days or hours, why, how sure and its switch
+(`PeekAiViews.swift`). It shows only while the parcel is on its way and its call still holds. Settings
+has the same switch: the device keeps the choice, and an account's follows it (`showPeekAi`). The
+demo works out its two samples' calls for the moment they show, as the web's does.
+
 With a keyboard, ⌘N adds a parcel, ⌘F searches, ⌘R refreshes where its button shows, ⌘1 to ⌘3
 choose the tabs and ⌘, opens Settings. On the parcel shown, beside the list or over it, ⇧⌘C
 copies its tracking number, ⌃⌘A archives it or brings it back and ⌘⌫ deletes it once confirmed;
@@ -196,7 +203,8 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   in a shorter widget, the parcels are rows, in a medium widget down one column without headings before one is left
   out (`DeliveryWidgetList.fits`). The small widget and that line open the list (`peekdeliverytracker://parcels`);
   in the medium and large ones, a card, pass or row opens its parcel. A card, pass or row carries the list's dot for
-  new updates, which VoiceOver reads first; "Dot on updated parcels" hides it, and opening the parcel clears it. Its kind
+  new updates, which VoiceOver reads first; "Dot on updated parcels" hides it, and opening the parcel clears it. Where
+  it fits, each also says what Peek AI expects, until that stops holding, unless Peek AI is switched off. Its kind
   is `NextDeliveryWidget`, the name of the widget it replaced, which the widgets readers placed carry. On the iPhone
   and iPad it also answers to `ParcelListWidget`, the kind it had while it stood beside Next delivery, so the widgets
   placed then keep updating; that one is disfavored everywhere a widget is chosen, which keeps it out of the gallery

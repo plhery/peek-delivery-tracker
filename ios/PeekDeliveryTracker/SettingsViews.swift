@@ -561,6 +561,8 @@ struct AccountView: View {
                         SettingsWeightRow()
                         settingsDivider
                         SettingsMarkNewUpdatesRow()
+                        settingsDivider
+                        SettingsPeekAiRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -1030,6 +1032,35 @@ private struct SettingsMarkNewUpdatesRow: View {
     }
 }
 
+/// Peek AI's own estimates on cards, pages and the widgets: on or off, for the account where there is one.
+private struct SettingsPeekAiRow: View {
+    @EnvironmentObject private var store: ParcelStore
+    @EnvironmentObject private var localizer: Localizer
+    @ScaledMetric(relativeTo: .subheadline) private var sparkle: CGFloat = 12
+
+    var body: some View {
+        Toggle(isOn: Binding(get: { store.showPeekAi }, set: { shown in
+            store.setShowPeekAi(shown)
+            DeliveryAnalytics.shared.action(shown ? "peek-ai-on" : "peek-ai-off")
+        })) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 5) {
+                    PeekAiSparkle().frame(width: sparkle, height: sparkle).accessibilityHidden(true)
+                    Text(localizer.text("peekAi.name")).font(.subheadline)
+                }
+                .foregroundStyle(Brand.ink)
+                Text(localizer.text("settings.peekAiHint")).font(.caption).foregroundStyle(Brand.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .rowToggle()
+        .tint(settingsGreen)
+        .padding(15)
+        .accessibilityIdentifier("settings.peekAi")
+    }
+}
+
 /// The picker sits under its label at the largest text sizes. Closed, it shows the choice in a word or two (`shown`) in
 /// the rows' small grey, on one line, as other rows show their value; its menu names each choice in full, and VoiceOver
 /// reads the full name (`spoken`). A Mac's pop-up button shows the full name.
@@ -1259,6 +1290,8 @@ private struct GeneralSettings: View {
                 SettingsWeightRow()
                 settingsDivider
                 SettingsMarkNewUpdatesRow()
+                settingsDivider
+                SettingsPeekAiRow()
             }
             SettingsGroup {
                 Toggle(isOn: $menuBarShown) {

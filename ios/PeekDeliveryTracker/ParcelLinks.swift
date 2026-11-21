@@ -12,6 +12,7 @@ extension Parcel {
             createdAt: package.createdAt,
             expectedDelivery: package.expectedDelivery,
             expectedDeliveryPassed: package.expectedDeliveryPassed,
+            peekAi: package.peekAi,
             lastStatusText: package.lastStatusText,
             lastSyncedAt: package.lastSyncedAt,
             syncStatus: package.syncStatus,
@@ -95,6 +96,7 @@ extension PublicParcelResponse {
         parcel.plannedEvents = nil
         parcel.writtenAheadBy = nil
         parcel.writtenAheadEvents = nil
+        parcel.peekAi = nil
         return parcel
     }
 }

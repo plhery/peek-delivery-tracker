@@ -74,19 +74,50 @@ final class ParcelStore: ObservableObject {
         UserDefaults.standard.string(forKey: NotificationDeviceKeys.deviceAlertPreset).flatMap(ParcelAlertPreset.init(rawValue:))
     @Published private(set) var notificationPreferences: NotificationPreferences? {
         didSet {
-            // An account's choice about the list's mark follows it here from its other devices.
-            if let chosen = notificationPreferences?.markNewUpdates { followMarkNewUpdates(chosen) }
+            // An account's choices about the list's mark and Peek AI follow it here from its other devices.
+            for choice in DisplayChoice.allCases {
+                if let chosen = notificationPreferences?[keyPath: choice.field] { follow(choice, chosen) }
+            }
             saveShownUnits()
         }
     }
-    /// Whether the list marks the parcels with updates since they were last opened. On until switched off. An
-    /// account's choice is stored with its preferences; this device keeps its copy, and the choice of someone
-    /// without an account.
+    /// A choice about what the list shows that follows the account: on until switched off. An account's choice is
+    /// stored with its preferences; this device keeps its copy, and the choice of someone without an account.
+    enum DisplayChoice: CaseIterable {
+        /// The mark on parcels with updates since they were last opened.
+        case markNewUpdates
+        /// Peek AI's own estimates (PeekAi.swift).
+        case showPeekAi
+
+        var offKey: String {
+            switch self {
+            case .markNewUpdates: "sdt.markNewUpdatesOff.v1"
+            case .showPeekAi: "sdt.showPeekAiOff.v1"
+            }
+        }
+
+        /// Set while a choice made on this device, without an account or while the server could not take it, has not
+        /// been saved to the account: it stands over the account's until it is.
+        var unsavedKey: String {
+            switch self {
+            case .markNewUpdates: "sdt.markNewUpdatesUnsaved.v1"
+            case .showPeekAi: "sdt.showPeekAiUnsaved.v1"
+            }
+        }
+
+        var field: WritableKeyPath<NotificationPreferences, Bool?> {
+            switch self {
+            case .markNewUpdates: \.markNewUpdates
+            case .showPeekAi: \.showPeekAi
+            }
+        }
+    }
+    /// Whether the list marks the parcels with updates since they were last opened.
     @Published private(set) var markNewUpdates = !UserDefaults.standard.bool(forKey: ParcelStore.markNewUpdatesOffKey)
-    static let markNewUpdatesOffKey = "sdt.markNewUpdatesOff.v1"
-    /// Set while a choice made on this device, without an account or while the server could not take it, has not been
-    /// saved to the account: it stands over the account's until it is.
-    static let markNewUpdatesUnsavedKey = "sdt.markNewUpdatesUnsaved.v1"
+    static let markNewUpdatesOffKey = DisplayChoice.markNewUpdates.offKey
+    static let markNewUpdatesUnsavedKey = DisplayChoice.markNewUpdates.unsavedKey
+    /// Whether cards, pages and the widgets show Peek AI's estimates.
+    @Published private(set) var showPeekAi = !UserDefaults.standard.bool(forKey: DisplayChoice.showPeekAi.offKey)
     @Published private(set) var notificationError: String?
     /// The last try to register this device's token, with Apple or with the server, failed: the invitation offers it again.
     @Published private var nativePushRegistrationFailed = false
@@ -151,11 +182,17 @@ final class ParcelStore: ObservableObject {
     private var nativePushGeneration = 0
     /// Counts saved preferences: the answer to a read that began before a save is older than it.
     private var notificationPreferenceSaves = 0
-    /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
-    private var markNewUpdatesWrite: Task<Void, Never>?
-    private var markNewUpdatesChoices = 0
-    /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
-    private(set) var markNewUpdatesSaving = 0
+    /// Each display choice's saves: the last on its way, how many choices were made, so the answer to an earlier one
+    /// does not undo a later one, and how many saves are on their way, while an answer does not say whether the latest
+    /// choice was taken.
+    private struct DisplayChoiceSaves {
+        var write: Task<Void, Never>?
+        var choices = 0
+        var saving = 0
+    }
+    private var displayChoiceSaves: [DisplayChoice: DisplayChoiceSaves] = [:]
+    var markNewUpdatesSaving: Int { displayChoiceSaves[.markNewUpdates]?.saving ?? 0 }
+    var showPeekAiSaving: Int { displayChoiceSaves[.showPeekAi]?.saving ?? 0 }
     /// The clock and units sent with the account's preferences and not yet kept, so a server that does not keep them
     /// is not asked again and again.
     private var unitsSent: String?
@@ -230,7 +267,7 @@ final class ParcelStore: ObservableObject {
         pendingMutations.removeAll()
         pendingJobIDs.removeAll()
         seenHere.removeAll()
-        markNewUpdatesSaving = 0
+        for choice in DisplayChoice.allCases { displayChoiceSaves[choice]?.saving = 0 }
         unitsSent = nil
         nativePushGeneration += 1
         deliveryLiveActivityGeneration += 1
@@ -306,60 +343,79 @@ final class ParcelStore: ObservableObject {
         parcels.contains { $0.syncStatus == .pending || $0.syncStatus == .syncing }
     }
 
-    /// Switches the list's mark on parcels with new updates. What was seen is kept either way. An account's choice
-    /// is saved with its preferences. A choice the account has not taken, made without one or while the server could
-    /// not take it, stands on this device until it is saved, and goes to the account when its preferences are next
-    /// read.
-    func setMarkNewUpdates(_ enabled: Bool) {
-        guard markNewUpdates != enabled else { return }
-        keepMarkNewUpdates(enabled)
-        guard !isDemo else { return }
-        UserDefaults.standard.set(true, forKey: Self.markNewUpdatesUnsavedKey)
-        saveMarkNewUpdates(enabled)
+    /// Switches the list's mark on parcels with new updates. What was seen is kept either way.
+    func setMarkNewUpdates(_ enabled: Bool) { set(.markNewUpdates, enabled) }
+
+    /// Shows or hides Peek AI's estimates on cards, pages and the widgets.
+    func setShowPeekAi(_ enabled: Bool) { set(.showPeekAi, enabled) }
+
+    func value(of choice: DisplayChoice) -> Bool {
+        switch choice {
+        case .markNewUpdates: markNewUpdates
+        case .showPeekAi: showPeekAi
+        }
     }
 
-    /// Saves the list's mark with the account's preferences, the rest as stored. Taken, the choice follows the account
-    /// again.
-    private func saveMarkNewUpdates(_ enabled: Bool) {
+    /// An account's choice is saved with its preferences. A choice the account has not taken, made without one or while
+    /// the server could not take it, stands on this device until it is saved, and goes to the account when its
+    /// preferences are next read.
+    private func set(_ choice: DisplayChoice, _ enabled: Bool) {
+        guard value(of: choice) != enabled else { return }
+        keep(choice, enabled)
+        guard !isDemo else { return }
+        UserDefaults.standard.set(true, forKey: choice.unsavedKey)
+        save(choice, enabled)
+    }
+
+    /// Saves the choice with the account's preferences, the rest as stored. Taken, the choice follows the account again.
+    private func save(_ choice: DisplayChoice, _ enabled: Bool) {
         guard session.isAuthenticated, !isDemo, !isGuest else { return }
-        // A read of the preferences that lands before the answer leaves the choice standing (followMarkNewUpdates), and
-        // the answer's count turns away one that lands after it. Counting here too would turn away the launch's read
-        // when this save fails.
-        markNewUpdatesChoices += 1
-        markNewUpdatesSaving += 1
-        let choice = markNewUpdatesChoices
+        // A read of the preferences that lands before the answer leaves the choice standing (follow), and the answer's
+        // count turns away one that lands after it. Counting here too would turn away the launch's read when this save
+        // fails.
+        var saves = displayChoiceSaves[choice] ?? DisplayChoiceSaves()
+        saves.choices += 1
+        saves.saving += 1
+        let made = saves.choices
         let generation = session.generation
-        let previous = markNewUpdatesWrite
-        markNewUpdatesWrite = Task {
-            defer { if generation == session.generation { markNewUpdatesSaving -= 1 } }
+        let previous = saves.write
+        saves.write = Task {
+            defer { if generation == session.generation { displayChoiceSaves[choice]?.saving -= 1 } }
             await previous?.value
             guard generation == session.generation else { return }
-            guard var saved = try? await api.saveDisplayPreferences(markNewUpdates: enabled),
-                  generation == session.generation else { return }
-            if choice == markNewUpdatesChoices { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
+            let answer = switch choice {
+            case .markNewUpdates: try? await api.saveDisplayPreferences(markNewUpdates: enabled)
+            case .showPeekAi: try? await api.saveDisplayPreferences(showPeekAi: enabled)
+            }
+            guard var saved = answer, generation == session.generation else { return }
+            if made == displayChoiceSaves[choice]?.choices { UserDefaults.standard.removeObject(forKey: choice.unsavedKey) }
             // Switched again meanwhile: that choice stands, and its own save is on its way.
-            else { saved.markNewUpdates = markNewUpdates }
+            else { saved[keyPath: choice.field] = value(of: choice) }
             notificationPreferenceSaves += 1
             notificationPreferences = saved
         }
+        displayChoiceSaves[choice] = saves
     }
 
     /// The account's choice, as read or saved, unless one made on this device has not been saved: that one stands and
     /// goes to the account, or, the account holding it already, follows the account again.
-    private func followMarkNewUpdates(_ stored: Bool) {
-        guard UserDefaults.standard.bool(forKey: Self.markNewUpdatesUnsavedKey) else { return keepMarkNewUpdates(stored) }
-        guard markNewUpdatesSaving == 0 else { return }
-        if stored == markNewUpdates { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
-        else { saveMarkNewUpdates(markNewUpdates) }
+    private func follow(_ choice: DisplayChoice, _ stored: Bool) {
+        guard UserDefaults.standard.bool(forKey: choice.unsavedKey) else { return keep(choice, stored) }
+        guard (displayChoiceSaves[choice]?.saving ?? 0) == 0 else { return }
+        if stored == value(of: choice) { UserDefaults.standard.removeObject(forKey: choice.unsavedKey) }
+        else { save(choice, value(of: choice)) }
     }
 
-    private func keepMarkNewUpdates(_ enabled: Bool) {
-        if markNewUpdates != enabled {
-            markNewUpdates = enabled
-            // The Parcels widget shows the list's mark.
+    private func keep(_ choice: DisplayChoice, _ enabled: Bool) {
+        if value(of: choice) != enabled {
+            switch choice {
+            case .markNewUpdates: markNewUpdates = enabled
+            case .showPeekAi: showPeekAi = enabled
+            }
+            // The Parcels widget shows the list's mark and Peek AI.
             publishDeliveryWidget()
         }
-        UserDefaults.standard.set(!enabled, forKey: Self.markNewUpdatesOffKey)
+        UserDefaults.standard.set(!enabled, forKey: choice.offKey)
     }
 
     /// The delivery email writes a time and a distance as the app last opened does: the account learns this device's
@@ -1644,8 +1700,11 @@ final class ParcelStore: ObservableObject {
     /// What the Parcels widget shows besides: where the app's list puts each parcel and which is its Next up, also for
     /// those midnights, the carrier shown, and the last steps of the first parcels. Whichever ends up alone in the widget
     /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads. Which
-    /// parcels the list marks with the dot for new updates, `marking` as Settings has it.
-    static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, marking: Bool = true, now: Date = Date()) -> [DeliveryWidgetParcel] {
+    /// parcels the list marks with the dot for new updates, `marking` as Settings has it, and Peek AI's words while they
+    /// hold, where Settings shows them (`peekAi`).
+    static func widgetDeliveries(
+        of parcels: [Parcel], localizer: Localizer, marking: Bool = true, peekAi: Bool = false, now: Date = Date()
+    ) -> [DeliveryWidgetParcel] {
         let calendar = Calendar.current
         var transitions = Set(DeliveryWidgetDays.midnights(after: now))
         for parcel in parcels {
@@ -1689,6 +1748,8 @@ final class ParcelStore: ObservableObject {
             item.carrierId = parcel.displayedCarrier.rawValue
             item.steps = index < DeliveryWidgetSelection.limit ? widgetSteps(parcel, localizer: localizer) : nil
             item.newUpdate = parcel.showsNewUpdate(marking: marking) ? true : nil
+            item.peekAi = localizer.parcelPeekAiWords(parcel, shown: peekAi, now: now)
+            item.peekAiUntil = item.peekAi == nil ? nil : parcel.shownPeekAi(at: now)?.endsAt(after: now)
             let first = DeliveryWidgetWording(from: now, detail: item.detail, section: item.section, nextUp: item.nextUp)
             item.later = DeliveryWidgetDays.later(than: first, at: midnights) { midnight in
                 let at = midnights.firstIndex(of: midnight) ?? 0
@@ -1754,7 +1815,7 @@ final class ParcelStore: ObservableObject {
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
                 parcels: carded(Self.widgetDeliveries(of: parcels.filter { !frozen.contains($0.id) },
-                                                      localizer: localizer, marking: markNewUpdates))
+                                                      localizer: localizer, marking: markNewUpdates, peekAi: showPeekAi))
             )
         } else {
             snapshot = nil
@@ -2533,8 +2594,8 @@ final class DemoRepository {
         return value
     }
 
-    func list() -> [Parcel] {
-        let parcels = load().sorted { $0.createdAt > $1.createdAt }
+    func list(now: Date = Date()) -> [Parcel] {
+        let parcels = Self.withPeekAi(load().sorted { $0.createdAt > $1.createdAt }, now: now)
         #if DEBUG
         return ImportChargesPreview.charging(parcels)
         #else
@@ -2643,7 +2704,7 @@ final class DemoRepository {
     func refreshAll() -> [Parcel] {
         let updated = load().map { advance($0) }
         save(updated)
-        return updated.sorted { $0.createdAt > $1.createdAt }
+        return Self.withPeekAi(updated.sorted { $0.createdAt > $1.createdAt }, now: Date())
     }
 
     func refresh(id: UUID) throws -> Parcel {
@@ -2733,8 +2794,14 @@ final class DemoRepository {
         return seeded
     }
 
+    /// Peek AI is worked out when the parcels are shown, never kept.
     private func save(_ parcels: [Parcel]) {
-        defaults.set(try? JSONEncoder.deliveryTracker.encode(parcels), forKey: key)
+        let kept = parcels.map { parcel in
+            var copy = parcel
+            copy.peekAi = nil
+            return copy
+        }
+        defaults.set(try? JSONEncoder.deliveryTracker.encode(kept), forKey: key)
         defaults.set(true, forKey: catalogKey)
         defaults.set(true, forKey: placesKey)
     }
@@ -2766,7 +2833,59 @@ final class DemoRepository {
         }
         change(&all[index])
         save(all)
-        return all[index]
+        return Self.withPeekAi([all[index]], now: Date())[0]
+    }
+
+    /// The samples that show Peek AI, by number, and what they show: `by_time` out for delivery, `by_day` with no date.
+    private static let peekAiKinds: [String: String] = Dictionary(
+        catalog.parcels.compactMap { sample in sample.peekAi.map { (sample.trackingNumber, $0) } }
+    ) { first, _ in first }
+
+    /// The share of a courier's deliveries in each hour of its day, from 08:00.
+    private static let peekAiHours = [0.03, 0.07, 0.12, 0.16, 0.17, 0.14, 0.11, 0.09, 0.05, 0.03, 0.02, 0.01]
+
+    /// The parcels as they are shown: the samples that show Peek AI say what it expects at `now`.
+    static func withPeekAi(_ parcels: [Parcel], now: Date) -> [Parcel] {
+        parcels.map { parcel in
+            var shown = parcel
+            shown.peekAi = peekAi(of: parcel, now: now)
+            return shown
+        }
+    }
+
+    /// What Peek AI says of a sample parcel that shows it, at `now`, in the shapes the server gives, as the web's demo
+    /// works it out: out for delivery today, by 16:00 until then; on its way with no carrier date, by the third delivery
+    /// day from today.
+    static func peekAi(of parcel: Parcel, now: Date) -> PeekAi? {
+        guard let kind = peekAiKinds[parcel.trackingNumber], let latest = parcel.currentEvent, !parcel.isArchived else { return nil }
+        let calendar = Calendar.current
+        if kind == PeekAiSays.byTime.rawValue {
+            guard latest.stage == .outForDelivery, let out = DateParser.date(latest.occurredAt), calendar.isDate(out, inSameDayAs: now),
+                  calendar.component(.hour, from: out) < 16, calendar.component(.hour, from: now) < 16 else { return nil }
+            let local = DateFormatter()
+            local.locale = Locale(identifier: "en_US_POSIX")
+            local.calendar = Calendar(identifier: .gregorian)
+            local.dateFormat = "yyyy-MM-dd'T'HH:mm:ssxxxxx"
+            return PeekAi(
+                says: .byTime, why: .outForDelivery, sure: 0.86, time: "16:00", outSince: local.string(from: out),
+                hours: peekAiHours.enumerated().map { PeekAiHour(time: String(format: "%02d:00", 8 + $0.offset), share: $0.element) }
+            )
+        }
+        guard parcel.expectedDelivery == nil, parcel.plannedEvents?.isEmpty ?? true,
+              [.accepted, .inTransit, .customs].contains(latest.stage) else { return nil }
+        // The next delivery days, from today; no courier comes on Sundays.
+        var days: [String] = []
+        var day = calendar.startOfDay(for: now)
+        while days.count < 5 {
+            if calendar.component(.weekday, from: day) != 1 { days.append(PeekAi.day(of: day)) }
+            day = calendar.date(byAdding: .day, value: 1, to: day) ?? day.addingTimeInterval(86_400)
+        }
+        let chances = [0.04, 0.27, 0.41, 0.18, 0.06]
+        return PeekAi(
+            says: .byDay, why: .noDate, sure: 0.81, day: days[2],
+            last: PeekAiStep(kind: latest.stage == .customs ? .customs : .scan, at: latest.occurredAt),
+            days: days.enumerated().map { PeekAiDay(day: $0.element, p: chances[$0.offset]) }
+        )
     }
 
     private func advance(_ parcel: Parcel) -> Parcel {
@@ -2869,6 +2988,8 @@ final class DemoRepository {
             let events: [Event]
             /// Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come.
             let plannedEvents: [Event]?
+            /// What Peek AI shows of it, worked out when it is shown (`peekAi(of:now:)`).
+            let peekAi: String?
         }
         let parcels: [Sample]
         let translations: [String: [String: String]]

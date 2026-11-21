@@ -18,6 +18,7 @@ struct ParcelLinkSheet: View {
     @State private var refreshing = false
     @State private var errorMessage: String?
     @State private var unlock: UnlockReason?
+    @State private var peekAiSheet: PeekAiSheetRequest?
     @StateObject private var feedback = ParcelFeedbackModel()
 
     var body: some View {
@@ -51,6 +52,11 @@ struct ParcelLinkSheet: View {
         .environment(\.locale, localizer.language.locale)
         .interactiveDismissDisabled(adding)
         .unlockSheet($unlock)
+        .sheet(item: $peekAiSheet) { request in
+            PeekAiSheet(request: request)
+                .environmentObject(parcels)
+                .environmentObject(localizer)
+        }
         .task(id: links.presentationID) {
             errorMessage = nil
             await links.load()
@@ -118,6 +124,10 @@ struct ParcelLinkSheet: View {
                                      gift: gift == .own, refreshing: refreshing) {
                         Task { await refresh() }
                     }
+                }
+                // Peek AI's own estimate while it holds; a wrapped gift's link has none.
+                if !wrapped, parcels.showPeekAi, let ai = parcel.shownPeekAi() {
+                    PeekAiCard(parcel: parcel, ai: ai) { peekAiSheet = $0 }
                 }
                 if let failure = links.refreshFailure {
                     note(localizer.text(failure.messageKey))

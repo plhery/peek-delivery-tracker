@@ -4736,6 +4736,141 @@ extension SessionIsolationTests {
         UserDefaults.standard.removeObject(forKey: ParcelStore.markNewUpdatesUnsavedKey)
     }
 
+    private func forgetPeekAiChoice() {
+        UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.showPeekAi.offKey)
+        UserDefaults.standard.removeObject(forKey: ParcelStore.DisplayChoice.showPeekAi.unsavedKey)
+    }
+
+    @MainActor func testPeekAiShowsUntilSwitchedOffAndTheChoiceFollowsTheAccount() async throws {
+        forgetPeekAiChoice()
+        defer { forgetPeekAiChoice() }
+        forgetMarkNewUpdatesChoice()
+        defer { forgetMarkNewUpdatesChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        XCTAssertTrue(store.showPeekAi)
+
+        var saved = emailPreferences
+        saved.showPeekAi = true
+        respond(try JSONEncoder.deliveryTracker.encode(saved))
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.showPeekAi)
+
+        // Switched off here: hidden at once, and saved for the account alone, the mark for new updates left as it is.
+        var answer = saved
+        answer.showPeekAi = false
+        let log = RequestLog()
+        respond(try JSONEncoder.deliveryTracker.encode(answer), recording: log)
+        store.setShowPeekAi(false)
+        XCTAssertFalse(store.showPeekAi)
+        XCTAssertTrue(store.markNewUpdates)
+        for _ in 0..<300 where store.notificationPreferences?.showPeekAi != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(store.notificationPreferences?.showPeekAi, false)
+        XCTAssertEqual(log.requests.map(\.method), ["PATCH"])
+        XCTAssertEqual(log.requests.first?.path, "/api/push/preferences")
+        let sent = try XCTUnwrap(log.requests.first?.body)
+        XCTAssertEqual(Set(sent.keys), ["showPeekAi"])
+        XCTAssertEqual(sent["showPeekAi"] as? Bool, false)
+        // The next launch starts from it, before the account's preferences are read.
+        XCTAssertFalse(self.store(session, transport).showPeekAi)
+
+        // Another save says nothing of it, so the server keeps the account's choice.
+        var emailed = answer
+        emailed.emailOnDelivery = true
+        respond(try JSONEncoder.deliveryTracker.encode(emailed), recording: log)
+        try await store.setEmailOnDelivery(true)
+        XCTAssertNil(log.requests.last?.body["showPeekAi"])
+        XCTAssertFalse(store.showPeekAi)
+
+        // Switched back on from another device: the next read of the preferences brings it here.
+        respond(try JSONEncoder.deliveryTracker.encode(saved))
+        await store.loadNotificationPreferences()
+        XCTAssertTrue(store.showPeekAi)
+    }
+
+    @MainActor func testWithoutAnAccountThePeekAiSwitchStaysOnThisDevice() async throws {
+        forgetPeekAiChoice()
+        defer { forgetPeekAiChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        let store = store(session, transport)
+        let log = RequestLog()
+        respond(Data("{}".utf8), recording: log)
+
+        store.setShowPeekAi(false)
+
+        XCTAssertFalse(store.showPeekAi)
+        XCTAssertFalse(self.store(session, transport).showPeekAi)
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertTrue(log.requests.isEmpty)
+        store.setShowPeekAi(true)
+        XCTAssertTrue(self.store(session, transport).showPeekAi)
+    }
+
+    @MainActor func testAPeekAiChoiceMadeWithoutAnAccountGoesToTheAccountSignedInTo() async throws {
+        forgetPeekAiChoice()
+        defer { forgetPeekAiChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        store(session, transport).setShowPeekAi(false)
+
+        try await authorize(session, email: "alex@example.com")
+        let store = store(session, transport)
+        var on = emailPreferences
+        on.showPeekAi = true
+        var off = on
+        off.showPeekAi = false
+        let log = RequestLog()
+        SessionTestURLProtocol.handler = { request, complete in
+            log.record(request)
+            complete(.success((200, try! JSONEncoder.deliveryTracker.encode(request.httpMethod == "PATCH" ? off : on))))
+        }
+        await store.loadNotificationPreferences()
+        XCTAssertFalse(store.showPeekAi)
+        for _ in 0..<300 where store.notificationPreferences?.showPeekAi != false { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(log.requests.last?.method, "PATCH")
+        XCTAssertEqual(log.requests.last?.body["showPeekAi"] as? Bool, false)
+        XCTAssertNil(log.requests.last?.body["markNewUpdates"])
+    }
+
+    /// The Parcels widget shows Peek AI's words where the list does, and none while Settings has it off.
+    @MainActor func testTheParcelsWidgetShowsPeekAiWhereTheListDoes() async throws {
+        forgetPeekAiChoice()
+        defer { forgetPeekAiChoice() }
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
+        var guessed = parcel()
+        guessed.peekAi = PeekAi(says: .thisWeek, why: .noDate, sure: 0.84)
+        let quiet = parcel()
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [guessed, quiet])))
+        await store.load()
+        func words() -> [UUID: String] {
+            Dictionary((shared.snapshot?.parcels ?? []).compactMap { parcel in parcel.peekAi.map { (parcel.id, $0) } }) { first, _ in first }
+        }
+        // In the app's language, as the store's localizer has it.
+        let thisWeek = Localizer().text("peekAi.card.thisWeek")
+        XCTAssertEqual(shared.snapshot?.parcels.count, 2)
+        XCTAssertEqual(words(), [guessed.id: thisWeek])
+
+        respond(Data("{}".utf8))
+        store.setShowPeekAi(false)
+        XCTAssertEqual(words(), [:])
+        store.setShowPeekAi(true)
+        XCTAssertEqual(words(), [guessed.id: thisWeek])
+    }
+
     @MainActor func testReturningToTheAppReadsTheEmailChoiceAgain() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

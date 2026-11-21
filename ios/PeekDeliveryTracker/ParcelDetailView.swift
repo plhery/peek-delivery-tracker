@@ -47,6 +47,7 @@ struct ParcelDetailView: View {
     @State private var showingMap = false
     @State private var showingShare = false
     @State private var showingAlerts = false
+    @State private var peekAiSheet: PeekAiSheetRequest?
     @State private var emailOffer = DeliveryEmailOffer.Phase.open
     @State private var atlas: WorldAtlas?
     /// Where the delivering carrier's mark stands on the card, which the map keeps clear of.
@@ -201,6 +202,11 @@ struct ParcelDetailView: View {
                     .environmentObject(store)
                     .environmentObject(localizer)
             }
+        }
+        .sheet(item: $peekAiSheet) { request in
+            PeekAiSheet(request: request)
+                .environmentObject(store)
+                .environmentObject(localizer)
         }
         #if DEBUG
         .task {
@@ -553,6 +559,11 @@ struct ParcelDetailView: View {
             }
             .cardEdge(RoundedRectangle(cornerRadius: 18))
             .background(branding.surface, in: RoundedRectangle(cornerRadius: 18))
+
+            // Peek AI's own estimate while it holds; none on a copy no longer updated.
+            if store.showPeekAi, !frozen, let ai = parcel.shownPeekAi() {
+                PeekAiCard(parcel: parcel, ai: ai) { peekAiSheet = $0 }
+            }
 
             // Offered once, on a delivered parcel. Accepted, it stays as one line until the parcel is closed.
             if sample == nil, let email, emailOffer == .accepted || email.isOffered(on: parcel) {

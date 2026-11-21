@@ -126,6 +126,7 @@ private struct ParcelListWidgetView: View {
         let content = design
             .environment(\.locale, ExtensionLocalizer.locale(for: entry.languageCode))
             .environment(\.widgetNewUpdateWords, copy.text("parcel.newUpdate") + ".")
+            .environment(\.peekAiCopy, PeekAiCopy(name: copy.text("peekAi.name"), says: copy.text("peekAi.says")))
         // WidgetKit redacts a placeholder; the gallery's sample shows the widget as it will look.
         if entry.isSample { content.unredacted() } else { content }
     }
@@ -274,9 +275,8 @@ private struct ParcelListCard: View {
                 look.mark.resizable().scaledToFit().frame(height: 14)
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
-                if let day = parcel.listLine.day {
-                    Text(day.openingLine(in: locale)).font(.caption).foregroundStyle(ink).lineLimit(1)
-                }
+                ParcelListDay(day: parcel.listLine.day, peekAi: parcel.peekAi)
+                    .font(.caption).foregroundStyle(ink)
             }
             Spacer(minLength: 2)
             Group {
@@ -397,6 +397,7 @@ private struct ParcelPass: View {
     let mark: DeliveryWidgetCardArt?
     let wide: Bool
 
+    @Environment(\.peekAiCopy) private var peekAiCopy
     @Environment(\.colorScheme) private var scheme
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.locale) private var locale
@@ -410,8 +411,9 @@ private struct ParcelPass: View {
             HStack(alignment: .center, spacing: 6) {
                 markView(ink)
                 Spacer(minLength: 0)
-                if wide, let day = line.day {
-                    Text(day.openingLine(in: locale)).font(.caption2).foregroundStyle(ink).lineLimit(1)
+                if wide {
+                    ParcelListDay(day: line.day, peekAi: parcel.peekAi)
+                        .font(.caption2).foregroundStyle(ink)
                 }
             }
             Spacer(minLength: 0)
@@ -430,6 +432,13 @@ private struct ParcelPass: View {
                 HStack(spacing: 0) {
                     NewUpdateDot(shown: marked)
                     ViewThatFits(in: .horizontal) {
+                        if let words = parcel.peekAi {
+                            HStack(spacing: 4) {
+                                Text(ParcelListStatus.whole(parcel, locale: locale))
+                                Text(verbatim: "·")
+                                peekAiCopy.phrase(words)
+                            }
+                        }
                         Text(ParcelListStatus.whole(parcel, locale: locale))
                         if let day = line.day {
                             Text(day.openingLine(in: locale))
@@ -448,7 +457,7 @@ private struct ParcelPass: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(colored ? surface : Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(listAccessibilityLabel(parcel))
+        .accessibilityLabel(listAccessibilityLabel(parcel, peekAiCopy))
         .widgetNewUpdateSaidFirst(marked)
     }
 
@@ -666,17 +675,39 @@ private struct ParcelListMark: View {
     }
 }
 
-/// What VoiceOver reads for a row or a pass: the parcel's name, its carrier, its stage and its day.
-private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel) -> String {
+/// What VoiceOver reads for a row or a pass: the parcel's name, its carrier, its stage, its day and Peek AI's words.
+private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel, _ peekAi: PeekAiCopy) -> String {
     let line = parcel.listLine
-    return ([parcel.listName, parcel.named == false ? nil : parcel.carrier, line.status, line.day] as [String?])
+    return ([parcel.listName, parcel.named == false ? nil : parcel.carrier, line.status, line.day, parcel.peekAi.map(peekAi.spoken)] as [String?])
         .compactMap { $0 }.joined(separator: ", ")
+}
+
+/// The day at the top of a card or a large widget's pass, then Peek AI's words where they fit beside it, as the app's
+/// cards write them under the day.
+private struct ParcelListDay: View {
+    let day: String?
+    let peekAi: String?
+    @Environment(\.peekAiCopy) private var copy
+    @Environment(\.locale) private var locale
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 6) {
+                if let day { Text(day.openingLine(in: locale)) }
+                if let peekAi { copy.phrase(peekAi) }
+            }
+            if let day { Text(day.openingLine(in: locale)) }
+            EmptyView()
+        }
+        .lineLimit(1)
+    }
 }
 
 /// The stage, then the day, in the warning colour where the parcel needs the reader, after the list's dot where it marks
 /// the parcel. Where the line can't hold both, the day stays, as the mark still names the carrier; VoiceOver reads both.
 private struct ParcelListStatus: View {
     let parcel: DeliveryWidgetParcel
+    @Environment(\.peekAiCopy) private var peekAiCopy
     @Environment(\.locale) private var locale
     @Environment(\.colorScheme) private var scheme
 
@@ -691,6 +722,13 @@ private struct ParcelListStatus: View {
         HStack(spacing: 0) {
             NewUpdateDot(shown: parcel.newUpdate == true)
             ViewThatFits(in: .horizontal) {
+                if let words = parcel.peekAi {
+                    HStack(spacing: 4) {
+                        Text(Self.whole(parcel, locale: locale))
+                        Text(verbatim: "·")
+                        peekAiCopy.phrase(words)
+                    }
+                }
                 Text(Self.whole(parcel, locale: locale))
                 if let day = line.day {
                     Text(day.openingLine(in: locale))
@@ -706,6 +744,7 @@ private struct ParcelListStatus: View {
 /// A row of a small or medium widget in two columns: the mark beside the name, over the stage and the day.
 private struct ParcelListStackedRow: View {
     let parcel: DeliveryWidgetParcel
+    @Environment(\.peekAiCopy) private var peekAiCopy
     let truck: ParcelListTruck?
     let metrics: ParcelListMetrics
 
@@ -723,7 +762,7 @@ private struct ParcelListStackedRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(listAccessibilityLabel(parcel))
+        .accessibilityLabel(listAccessibilityLabel(parcel, peekAiCopy))
         .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 }
@@ -733,6 +772,7 @@ private struct ParcelListStackedRow: View {
 /// hold them whole, the name keeps at least two fifths of it.
 private struct ParcelListLineRow: View {
     let parcel: DeliveryWidgetParcel
+    @Environment(\.peekAiCopy) private var peekAiCopy
     let truck: ParcelListTruck?
     let metrics: ParcelListMetrics
     /// The widget's width.
@@ -759,7 +799,7 @@ private struct ParcelListLineRow: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(listAccessibilityLabel(parcel))
+        .accessibilityLabel(listAccessibilityLabel(parcel, peekAiCopy))
         .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 

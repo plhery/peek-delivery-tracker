@@ -1,0 +1,251 @@
+import XCTest
+@testable import PeekDeliveryTracker
+
+/// Peek AI's rules and words, as the web's tests (src/lib/peekAi.test.ts) have them.
+@MainActor
+final class PeekAiTests: XCTestCase {
+    /// Tuesday 24 November 2026, 15:30 on this device's clock.
+    private let now = PeekAiTests.local(2026, 11, 24, 15, 30)
+    private var suite = ""
+    private var defaults: UserDefaults!
+    private var english: Localizer!
+    private var originalLanguage: AppLanguage = .en
+
+    private static func local(_ year: Int, _ month: Int, _ day: Int, _ hour: Int = 0, _ minute: Int = 0) -> Date {
+        Calendar.current.date(from: DateComponents(year: year, month: month, day: day, hour: hour, minute: minute))!
+    }
+
+    private func at(_ year: Int, _ month: Int, _ day: Int, _ hour: Int = 0, _ minute: Int = 0) -> Date {
+        Self.local(year, month, day, hour, minute)
+    }
+
+    override func setUp() async throws {
+        suite = "peek-ai-tests-\(UUID().uuidString)"
+        defaults = UserDefaults(suiteName: suite)
+        english = Localizer(defaults: defaults, systemUses24HourTime: { true })
+        originalLanguage = english.language
+        english.language = .en
+    }
+
+    override func tearDown() async throws {
+        english.language = originalLanguage
+        defaults.removePersistentDomain(forName: suite)
+    }
+
+    private let notToday = PeekAi(says: .notToday, why: .noOutForDelivery, sure: 0.82, carrierDay: "2026-11-24")
+    private let byTime = PeekAi(
+        says: .byTime, why: .outForDelivery, sure: 0.86, time: "16:00", outSince: "2026-11-24T08:12:00+01:00",
+        hours: zip(["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"],
+                   [0.02, 0.05, 0.12, 0.2, 0.22, 0.16, 0.1, 0.06, 0.04, 0.03]).map { PeekAiHour(time: $0, share: $1) }
+    )
+    private var noDate: PeekAi {
+        PeekAi(
+            says: .byDay, why: .noDate, sure: 0.81, day: "2026-11-26",
+            last: PeekAiStep(kind: .depot, at: DateParser.isoString(now.addingTimeInterval(-2 * 86_400 - 3_600))),
+            days: [("2026-11-24", 0.05), ("2026-11-25", 0.34), ("2026-11-26", 0.41), ("2026-11-27", 0.12)].map { PeekAiDay(day: $0, p: $1) }
+        )
+    }
+    private let sooner = PeekAi(says: .sooner, why: .ahead, sure: 0.71, day: "2026-11-25", carrierDay: "2026-11-27")
+
+    private func with(_ ai: PeekAi, _ change: (inout PeekAi) -> Void) -> PeekAi {
+        var copy = ai
+        change(&copy)
+        return copy
+    }
+
+    // MARK: On this device's clock
+
+    func testItSaysNotTodayOnlyOnTheCarriersDayOrTheDayTheParcelWentOut() {
+        XCTAssertEqual(notToday.current(at: now), notToday)
+        XCTAssertNil(notToday.current(at: at(2026, 11, 25, 9)))
+        let late = PeekAi(says: .notToday, why: .lateOut, sure: 0.9, outSince: "2026-11-24T08:12:00+01:00")
+        XCTAssertEqual(late.current(at: now), late)
+        XCTAssertNil(late.current(at: at(2026, 11, 25, 0, 5)))
+    }
+
+    func testItNamesAnHourUntilItComesOnTheDayTheParcelWentOut() {
+        XCTAssertEqual(byTime.current(at: now), byTime)
+        XCTAssertNil(byTime.current(at: at(2026, 11, 24, 16, 0)))
+        XCTAssertNil(byTime.current(at: at(2026, 11, 25, 9)))
+    }
+
+    func testItHoldsADayUntilItHasPassedAndSoonerUntilTheCarriersOwnDay() {
+        XCTAssertEqual(noDate.current(at: at(2026, 11, 26, 23, 59)), noDate)
+        XCTAssertNil(noDate.current(at: at(2026, 11, 27, 0, 1)))
+        XCTAssertEqual(sooner.current(at: at(2026, 11, 27, 12)), sooner)
+        XCTAssertNil(sooner.current(at: at(2026, 11, 28, 8)))
+    }
+
+    /// A widget, unseen, drops the words when they stop holding: at the hour named, or the midnight after the day.
+    func testItKnowsWhenItStopsHolding() {
+        XCTAssertEqual(byTime.endsAt(after: now), at(2026, 11, 24, 16))
+        XCTAssertEqual(notToday.endsAt(after: now), at(2026, 11, 25))
+        XCTAssertEqual(noDate.endsAt(after: now), at(2026, 11, 27))
+        XCTAssertEqual(sooner.endsAt(after: now), at(2026, 11, 28))
+        XCTAssertNil(with(noDate) { $0.says = .thisWeek; $0.day = nil }.endsAt(after: now))
+    }
+
+    func testAParcelShowsItOnlyOnItsWayToTheDoor() {
+        var parcel = Parcel(id: UUID(), trackingNumber: "TEST0000000001", label: "Test parcel", carrier: .unknown,
+                            createdAt: "2026-11-20T08:00:00Z", syncStatus: .ok, notificationsMuted: false)
+        parcel.peekAi = noDate
+        parcel.trackingEvents = [event(parcel, .inTransit)]
+        XCTAssertEqual(parcel.shownPeekAi(at: now), noDate)
+        parcel.trackingEvents.append(event(parcel, .delivered))
+        XCTAssertNil(parcel.shownPeekAi(at: now), "A copy kept from before the scan that delivered it says none")
+        parcel.trackingEvents.removeLast()
+        parcel.archivedAt = "2026-11-24T10:00:00Z"
+        XCTAssertNil(parcel.shownPeekAi(at: now))
+    }
+
+    private func event(_ parcel: Parcel, _ stage: TrackingStage) -> TrackingEvent {
+        TrackingEvent(id: UUID(), packageID: parcel.id, stage: stage, description: "", occurredAt: DateParser.isoString(now.addingTimeInterval(-3_600)))
+    }
+
+    // MARK: Its words
+
+    func testItCommentsOnTheCarriersTodayOnACardAndSaysNotTodayWhereItStandsAlone() {
+        XCTAssertEqual(english.peekAiCardWords(notToday, estimate: "2026-11-24", now: now), "unlikely")
+        XCTAssertEqual(english.peekAiCardWords(notToday, estimate: nil, now: now), "not today")
+        XCTAssertEqual(english.peekAiCardWords(notToday, estimate: "2026-11-25", now: now), "not today")
+        XCTAssertEqual(english.peekAiCardWords(byTime, estimate: nil, now: now), "by 16:00")
+        XCTAssertEqual(english.peekAiCardWords(noDate, estimate: nil, now: now), "by Thu 26 Nov")
+        XCTAssertEqual(english.peekAiCardWords(with(noDate) { $0.says = .thisWeek }, estimate: nil, now: now), "this week")
+        XCTAssertEqual(english.peekAiCardWords(sooner, estimate: "2026-11-27", now: now), "maybe sooner")
+
+        let twelve = Localizer(defaults: defaults, systemUses24HourTime: { false })
+        let words = twelve.peekAiCardWords(byTime, estimate: nil, now: now)
+        XCTAssertNotNil(words.range(of: #"^by 4:00\sPM$"#, options: .regularExpression), words)
+    }
+
+    func testItSaysOnThePageWhatItExpectsFromTomorrowOrANamedDay() {
+        XCTAssertEqual(english.peekAiClaim(notToday, now: now), "today is unlikely")
+        XCTAssertEqual(english.peekAiHeading(notToday, now: now), "Today is unlikely")
+        XCTAssertEqual(english.peekAiClaim(byTime, now: now), "likely by 16:00")
+        XCTAssertEqual(english.peekAiClaim(sooner, now: now), "maybe sooner, from tomorrow")
+        XCTAssertEqual(english.peekAiClaim(with(sooner) { $0.day = "2026-11-26" }, now: now), "maybe sooner, from Thu 26 Nov")
+        XCTAssertEqual(english.peekAiClaim(with(noDate) { $0.says = .byEndOfNextWeek }, now: now), "likely by the end of next week")
+    }
+
+    func testItNamesTheCarriersWordUnderItsHeadingAndSaysWhy() {
+        XCTAssertEqual(english.peekAiCarrierWord(notToday, carrier: "DPD", estimate: "Today"), "DPD says today")
+        XCTAssertEqual(english.peekAiCarrierWord(sooner, carrier: "DPD", estimate: "Fri 27 Nov"), "DPD says Fri 27 Nov")
+        XCTAssertEqual(english.peekAiCarrierWord(noDate, carrier: "UPS", estimate: nil), "UPS gives no date")
+        XCTAssertEqual(english.peekAiWhy(notToday, carrier: "DPD", now: now), "DPD says today, but it hasn’t gone out for delivery.")
+        XCTAssertEqual(english.peekAiWhy(byTime, carrier: "FedEx", now: now), "Out for delivery since 08:12. FedEx names no hour.")
+        XCTAssertEqual(english.peekAiWhy(noDate, carrier: "UPS", now: now), "UPS gives no date. It reached the delivery depot 2 days ago.")
+        func scanned(hoursAgo: Double) -> PeekAi {
+            with(noDate) { $0.last = PeekAiStep(kind: .scan, at: DateParser.isoString(now.addingTimeInterval(-hoursAgo * 3_600))) }
+        }
+        XCTAssertEqual(english.peekAiWhy(scanned(hoursAgo: 5), carrier: "UPS", now: now), "UPS gives no date. Its last scan was 5 hours ago.")
+        // A day or more: by the calendar, then in weeks.
+        XCTAssertEqual(english.peekAiWhy(scanned(hoursAgo: 24), carrier: "UPS", now: now), "UPS gives no date. Its last scan was yesterday.")
+        XCTAssertEqual(english.peekAiWhy(scanned(hoursAgo: 24 * 20), carrier: "UPS", now: now), "UPS gives no date. Its last scan was 2 weeks ago.")
+    }
+
+    func testItCountsHowOftenItWasRightRoundedDown() {
+        XCTAssertEqual(english.peekAiRecord(notToday), "Right 8 times in 10 at this hour.")
+        XCTAssertEqual(english.peekAiRecord(noDate), "Right 8 times in 10 on parcels like this one.")
+        XCTAssertEqual(english.peekAiRecord(with(noDate) { $0.sure = 0.95 }), "Right 9 times in 10 on parcels like this one.")
+    }
+
+    func testItWritesTheReadersLanguageWithChineseSentencesJoinedWithoutASpace() {
+        english.language = .fr
+        let claim = english.peekAiClaim(notToday, now: now)
+        XCTAssertEqual(claim, english.text("peekAi.claim.notToday"))
+        XCTAssertNotEqual(claim, "today is unlikely")
+        english.language = .zh
+        let why = english.peekAiWhy(noDate, carrier: "UPS", now: now)
+        XCTAssertTrue(why.hasPrefix(english.text("peekAi.why.noDate", ["carrier": "UPS"])), why)
+        XCTAssertFalse(why.contains("。 "), why)
+    }
+
+    // MARK: The strip in its sheet
+
+    func testTheStripShowsTheDaysWithTheirChanceTheCarriersDayRinged() throws {
+        let strip = try XCTUnwrap(english.peekAiStrip(with(noDate) { $0.carrierDay = "2026-11-27" }, now: now))
+        XCTAssertEqual(strip.kind, .days)
+        XCTAssertEqual(strip.cells.map { "\($0.over) \($0.main)" }, ["Tue 24", "Wed 25", "Thu 26", "Fri 27"])
+        XCTAssertEqual(strip.cells.map { [$0.likely, $0.maybe, $0.carrier] }, [
+            [false, false, false], [true, false, false], [true, false, false], [false, true, true],
+        ])
+    }
+
+    func testTheStripShowsTheHoursOutForDeliveryTwoToACellThePastOnesFaded() throws {
+        let strip = try XCTUnwrap(english.peekAiStrip(byTime, now: now))
+        XCTAssertEqual(strip.kind, .hours)
+        XCTAssertEqual(strip.cells.map(\.main), ["08:00", "10:00", "12:00", "14:00", "16:00"])
+        XCTAssertEqual(strip.cells.map { [$0.likely, $0.maybe, $0.past] }, [
+            [false, true, true], [true, false, true], [true, false, true], [true, false, false], [false, true, false],
+        ])
+        XCTAssertNil(english.peekAiStrip(notToday, now: now))
+    }
+
+    // MARK: Cards and the widgets
+
+    /// A card shows the words only where Settings shows Peek AI, and never beside the day a parcel's journey ended.
+    func testACardShowsTheWordsWhereSettingsShowsThem() {
+        var parcel = Parcel(id: UUID(), trackingNumber: "TEST0000000002", label: "Test parcel", carrier: .unknown,
+                            createdAt: "2026-11-20T08:00:00Z", syncStatus: .ok, notificationsMuted: false)
+        parcel.peekAi = noDate
+        parcel.trackingEvents = [event(parcel, .inTransit)]
+        XCTAssertEqual(english.parcelPeekAiWords(parcel, shown: true, now: now), "by Thu 26 Nov")
+        XCTAssertNil(english.parcelPeekAiWords(parcel, shown: false, now: now))
+        XCTAssertNil(english.parcelPeekAiWords(parcel, shown: true, now: at(2026, 11, 27, 9)))
+    }
+
+    /// The Parcels widget shows the card's words while they hold, with an entry in its timeline where they stop.
+    func testTheWidgetShowsTheWordsUntilTheyStopHolding() throws {
+        var parcel = Parcel(id: UUID(), trackingNumber: "TEST0000000003", label: "Test parcel", carrier: .unknown,
+                            createdAt: "2026-11-20T08:00:00Z", syncStatus: .ok, notificationsMuted: false)
+        parcel.peekAi = noDate
+        parcel.trackingEvents = [event(parcel, .inTransit)]
+        let hidden = ParcelStore.widgetDeliveries(of: [parcel], localizer: english, now: now)
+        XCTAssertNil(hidden.first?.peekAi, "Off unless Settings shows it")
+        let shown = try XCTUnwrap(ParcelStore.widgetDeliveries(of: [parcel], localizer: english, peekAi: true, now: now).first)
+        XCTAssertEqual(shown.peekAi, "by Thu 26 Nov")
+        XCTAssertEqual(shown.peekAiUntil, at(2026, 11, 27))
+        XCTAssertTrue(DeliveryWidgetDays.changes(in: [shown], after: now).contains(at(2026, 11, 27)))
+        XCTAssertEqual(shown.worded(at: at(2026, 11, 26, 23, 59)).peekAi, "by Thu 26 Nov")
+        XCTAssertNil(shown.worded(at: at(2026, 11, 27)).peekAi)
+    }
+
+    // MARK: The demo
+
+    /// The demo works it out as the web's does: the chocolate out for delivery today, by 16:00 until then; the gift in
+    /// customs with no date, by the third delivery day from today, Sundays skipped.
+    func testTheDemoSaysWhatPeekAiWouldOfItsTwoSamples() throws {
+        let suite = "peek-ai-demo-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let parcels = DemoRepository(defaults: defaults, language: { .en }).list()
+
+        var chocolate = try XCTUnwrap(parcels.first { $0.trackingNumber == "DEMOCHOC20260001" })
+        XCTAssertEqual(chocolate.currentStage, .outForDelivery)
+        let morning = at(2026, 11, 24, 9, 40)
+        chocolate.trackingEvents[chocolate.trackingEvents.count - 1].occurredAt = DateParser.isoString(morning)
+        let out = try XCTUnwrap(DemoRepository.peekAi(of: chocolate, now: at(2026, 11, 24, 11)))
+        XCTAssertEqual(out.says, .byTime)
+        XCTAssertEqual(out.time, "16:00")
+        XCTAssertEqual(english.peekAiWhy(out, carrier: "FedEx", now: at(2026, 11, 24, 11)), "Out for delivery since 09:40. FedEx names no hour.")
+        XCTAssertNotNil(out.current(at: at(2026, 11, 24, 11)))
+        XCTAssertNil(DemoRepository.peekAi(of: chocolate, now: at(2026, 11, 24, 16, 5)), "Past the hour it named")
+
+        let gift = try XCTUnwrap(parcels.first { $0.trackingNumber == "LX123456789DE" })
+        XCTAssertEqual(gift.currentStage, .customs)
+        // Saturday 21 November: the next delivery days skip the Sunday.
+        let saturday = at(2026, 11, 21, 10)
+        let held = try XCTUnwrap(DemoRepository.peekAi(of: gift, now: saturday))
+        XCTAssertEqual(held.says, .byDay)
+        XCTAssertEqual(held.why, .noDate)
+        XCTAssertEqual(held.days?.map(\.day), ["2026-11-21", "2026-11-23", "2026-11-24", "2026-11-25", "2026-11-26"])
+        XCTAssertEqual(held.day, "2026-11-24")
+        XCTAssertEqual(held.last?.kind, .customs)
+        XCTAssertEqual(english.peekAiCardWords(held, estimate: nil, now: saturday), "by Tue 24 Nov")
+
+        // The other samples say nothing.
+        let others = parcels.filter { !["DEMOCHOC20260001", "LX123456789DE"].contains($0.trackingNumber) }
+        XCTAssertFalse(others.isEmpty)
+        XCTAssertTrue(others.allSatisfy { DemoRepository.peekAi(of: $0, now: saturday) == nil && DemoRepository.peekAi(of: $0, now: Date()) == nil })
+    }
+}

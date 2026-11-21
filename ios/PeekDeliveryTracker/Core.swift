@@ -271,7 +271,8 @@ enum WeightUnit: String, CaseIterable {
     case kilograms = "kg"
     case pounds = "lb"
 
-    /// Pounds where the system measures in US units (the United States, Liberia, Myanmar), else kilograms, the UK's included.
+    /// Pounds where the system measures in US units (the United States and Liberia), else kilograms, the UK's included,
+    /// and Myanmar's, which Apple's data measures as the UK does: miles, but kilograms. The web does the same.
     static func system(_ locale: Locale = .autoupdatingCurrent) -> WeightUnit {
         locale.measurementSystem == .us ? .pounds : .kilograms
     }

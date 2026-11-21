@@ -1947,11 +1947,13 @@ final class ParcelLogicTests: XCTestCase {
             XCTAssertEqual(Localizer(defaults: defaults, systemWeightUnit: { .kilograms }).weight, weight)
         }
 
-        // Pounds in the United States, Liberia and Myanmar; kilograms in the UK and elsewhere.
+        // Pounds in the United States and Liberia; kilograms in the UK, Myanmar and elsewhere.
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_US")), .pounds)
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "es_US")), .pounds)
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_LR")), .pounds)
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_GB")), .kilograms)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "my_MM")), .kilograms)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_MM")), .kilograms)
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "fr_FR")), .kilograms)
 
         // Kilograms to three decimals, pounds to one, or to three under a tenth of a pound, in the language's digits.

@@ -4240,6 +4240,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-tracking",
+      "title": "Tracking Canada Post: codici, stati, avviso e dogana",
+      "name": "Canada Post",
+      "color": "#e4002b"
+    },
+    {
       "id": "ontrac",
       "catalog": "ontrac",
       "slug": "tracciamento-ontrac",
@@ -5072,6 +5080,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "USPS seguimiento: estados, reintento de entrega y envíos",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-tracking",
+      "title": "Seguimiento Canada Post: números, estados y aviso postal",
+      "name": "Canada Post",
+      "color": "#e4002b"
     },
     {
       "id": "ontrac",
@@ -5914,6 +5930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento USPS: número, estados e encomendas dos EUA",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-tracking",
+      "title": "Seguimento Canada Post: códigos, estados e alfândega",
+      "name": "Canada Post",
+      "color": "#e4002b"
     },
     {
       "id": "ontrac",
@@ -6766,6 +6790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek USPS: numer, statusy i paczki z USA",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-tracking",
+      "title": "Śledzenie Canada Post: numery, statusy, awizo i cło",
+      "name": "Canada Post",
+      "color": "#e4002b"
     },
     {
       "id": "ontrac",

@@ -6268,6 +6268,25 @@ describe('TrackingSyncService', () => {
     expect(await sync()).toEqual({ stage: 'in_transit', anomalies: [] });
   });
 
+  it('records no step back when the delivery partner\'s first answer brings its acceptance and its next scan', async () => {
+    // The partner's summary stays at acceptance though its next receipt is already in transit (synthetic wording and times).
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    const moved = { time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' };
+    const origin: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
+      last_update: moved.time, events: [moved] };
+    const posted = { time: '2026-01-12T10:00:00Z', description: 'Item posted', stage: 'accepted' };
+    const received = { time: '2026-01-12T10:02:00Z', description: 'Received at depot', stage: 'in_transit' };
+    const delivery: CarrierResult = { status: 'in_transit', current_stage: 'accepted', last_update: received.time, events: [received, posted] };
+    const adapter = { fetch: vi.fn(async (carrier: string) => carrier === 'posti' ? delivery : origin), fetchUniversal: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-01-12T10:30:00Z'));
+    const parcel: JsonObject = { id: 'partner-first-answer', carrier: 'la-poste', tracking_number: 'CW123456785FR', current_stage: 'in_transit',
+      [STORED_EVENT_IDENTITIES]: [{ stage: moved.stage, description: moved.description, occurred_at: moved.time,
+        provider_event_id: providerEventId('la-poste', moved.time, '', moved.description) }] };
+    await service.syncPackage(parcel);
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'in_transit', carrier_data: { active_tracking_carrier: 'posti' } });
+    expect((client.completeSyncAttempt.mock.calls.at(-1)![1] as JsonObject).anomaly_codes).toEqual([]);
+  });
+
   it.each([
     ['a scan of its own in transit', {}],
     ['the stage its summary showed', { observed_without_provider_timestamp: true }],

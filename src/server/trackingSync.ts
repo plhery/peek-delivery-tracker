@@ -1754,18 +1754,24 @@ export function stageShown(stage: string, rows: readonly JsonObject[], now: Date
  * already moved (Poczta Polska's posting scan in the minute 4PX hands the parcel over). So does
  * the parcel's own carrier after another carrier's scans held the stage (Swiss Post's posting
  * scan once AliExpress's leg left the transit country). That is no step back. One the
- * partner's own rows had passed is, as is one on a parcel loaded without its rows.
+ * partner's own rows had passed before its newest announcement or acceptance is, as is one on a
+ * parcel loaded without its rows. The partner's scans after it are its leg going on, as when its
+ * first answer brings its acceptance and the next receipt (Royal Mail after JS Express).
  */
 function partnerStartsLeg(parcel: JsonObject, carrierData: JsonObject, sourceCarrierId: string,
   selectedStage: string, keptStage: string, rows: readonly JsonObject[]): boolean {
   const source = (row: JsonObject) => String(row.provider_event_id).split(':')[0]!;
   const past = (row: JsonObject) => stageRank(String(row.stage ?? '')) >= stageRank(keptStage);
+  const time = (row: JsonObject) => Date.parse(String(row.occurred_at ?? ''));
   const handedOver = typeof carrierData.handed_over_at === 'string' && carrierData.active_tracking_carrier === sourceCarrierId;
   const afterAnother = parcel.carrier === sourceCarrierId
     && rows.some((row) => past(row) && !['', 'app', 'unknown', sourceCarrierId].includes(source(row)));
+  const own = rows.filter((row) => source(row) === sourceCarrierId);
+  const starts = own.filter((row) => ['registered', 'accepted'].includes(String(row.stage))).map(time).filter(Number.isFinite);
+  const startedAt = starts.length ? Math.max(...starts) : Infinity;
   return (handedOver || afterAnother)
     && ['registered', 'accepted'].includes(selectedStage) && Array.isArray(parcel[STORED_EVENT_IDENTITIES])
-    && !rows.some((row) => source(row) === sourceCarrierId && past(row));
+    && !own.some((row) => past(row) && !(time(row) > startedAt));
 }
 
 /**

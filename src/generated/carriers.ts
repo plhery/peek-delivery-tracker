@@ -2676,6 +2676,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "delhivery-sendungsverfolgung",
+      "title": "Delhivery Sendungsverfolgung: AWB, Status und Support",
+      "name": "Delhivery",
+      "color": "#ed4136"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "globalpost-sendungsverfolgung",
@@ -3494,6 +3502,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "suivi-delhivery",
+      "title": "Suivi Delhivery\u00a0: numéros AWB, statuts et assistance",
+      "name": "Delhivery",
+      "color": "#ed4136"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "suivi-globalpost",
@@ -4214,6 +4230,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento India Post e Speed Post: numeri, stati e dogana",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "tracciamento-delhivery",
+      "title": "Tracciamento Delhivery: numeri AWB, stati e assistenza",
+      "name": "Delhivery",
+      "color": "#ed4136"
     },
     {
       "id": "globalpost",
@@ -4938,6 +4962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b82025"
     },
     {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "seguimiento-delhivery",
+      "title": "Seguimiento de Delhivery: números AWB, estados y soporte",
+      "name": "Delhivery",
+      "color": "#ed4136"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "seguimiento-globalpost",
@@ -5618,6 +5650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento India Post e Speed Post: números e estados",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "seguimento-delhivery",
+      "title": "Seguimento Delhivery: números AWB, estados e apoio",
+      "name": "Delhivery",
+      "color": "#ed4136"
     },
     {
       "id": "globalpost",
@@ -6358,6 +6398,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie India Post: numery Speed Post, statusy i cło",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "sledzenie-delhivery",
+      "title": "Śledzenie przesyłek Delhivery: numery AWB, statusy i pomoc",
+      "name": "Delhivery",
+      "color": "#ed4136"
     },
     {
       "id": "globalpost",

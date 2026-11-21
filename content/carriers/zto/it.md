@@ -48,7 +48,7 @@ Le regole seguenti riguardano le consegne effettuate nella **Cina continentale**
 
 Il corriere ZTO recapita all'indirizzo oppure deposita il pacco in una stazione di quartiere (`驿站`), un punto di raccolta (`代收点`) o un armadietto automatico (`智能快件箱`) nelle vicinanze, modalità previste dal contratto di servizio ZTO. Le *Misure di amministrazione del mercato espresso* cinesi (`快递市场管理办法`), in vigore dal 1° marzo 2024, stabiliscono però che per armadietti e stazioni serve il tuo consenso e che alla consegna puoi controllare il pacco rispetto alla lettera di vettura, aprendolo o rifiutandolo se l'imballaggio esterno è visibilmente danneggiato o il contenuto è fragile.
 
-Per i pacchi non consegnati a mano (porta, locker, stazione), il contratto ZTO invita a registrare un video (`录制视频`) del ritiro, dell'apertura e della verifica del contenuto; una consegna eseguita come pattuito si considera confermata in assenza di contestazioni scritte entro tre giorni (`三日`).
+Per i pacchi non consegnati a mano (porta, locker, stazione), il contratto ZTO chiede di registrare un video (`录制视频`) del ritiro, dell'apertura e della verifica del contenuto; una consegna eseguita come pattuito si considera confermata in assenza di contestazioni scritte entro tre giorni (`三日`).
 
 Dalle FAQ ufficiali di ZTO in Cina:
 

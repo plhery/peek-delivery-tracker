@@ -48,7 +48,7 @@ Les règles ci-dessous s'appliquent aux livraisons effectuées en **Chine contin
 
 Un livreur ZTO remet le colis à l'adresse, ou le dépose dans une station de quartier (`驿站`), un point de collecte (`代收点`) ou une consigne automatique (`智能快件箱`) à proximité : le contrat de service de ZTO conclu avec les expéditeurs prévoit ces modes de remise. Les *Mesures d'administration du marché de l'express* en Chine (`快递市场管理办法`), en vigueur depuis le 1er mars 2024, exigent toutefois votre accord préalable avant tout dépôt en consigne ou en station et vous autorisent à vérifier l'envoi à la livraison — voire à l'ouvrir ou à le refuser si l'emballage extérieur est visiblement endommagé ou si le contenu est fragile.
 
-Pour les colis non remis en main propre (porte, consigne, station), le contrat de ZTO invite le destinataire à filmer (`录制视频`) le retrait, l'ouverture et la vérification du contenu à titre de preuve ; une livraison effectuée comme convenu est réputée confirmée faute d'objection écrite dans les trois jours (`三日`).
+Pour les colis non remis en main propre (porte, consigne, station), le contrat de ZTO demande au destinataire de filmer (`录制视频`) le retrait, l'ouverture et la vérification du contenu à titre de preuve ; une livraison effectuée comme convenu est réputée confirmée faute d'objection écrite dans les trois jours (`三日`).
 
 D'après la FAQ officielle de ZTO en Chine :
 

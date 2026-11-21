@@ -14,7 +14,7 @@ ZTO calls it the waybill number (`运单号`). Peek knows two shapes. With inven
 
 | Number | What it is |
 | --- | --- |
-| `000000000000` | 12 digits: a ZTO Express waybill, but [FedEx](carrier:fedex), [SF Express](carrier:sf-express) and others use 12 digits too. |
+| `784920573280` | 12 digits: a ZTO Express waybill, but [FedEx](carrier:fedex), [SF Express](carrier:sf-express) and others use 12 digits too. |
 | `70000000000000` | 14 digits starting with 7: ZTO Express too, a shape DPD, SEUR, BRT and others share. |
 | `77100000000000` | 771 and 11 more digits: ZTO International's shape. Peek asks ZTO International first. |
 
@@ -40,11 +40,11 @@ Each scan has a short step name in Chinese. Peek shows it in English:
 
 Other steps, such as a return or a redirection, keep ZTO's Chinese words in Peek.
 
-**Sent to a forwarder?** Then `已签收` means the forwarder's warehouse signed for it and ZTO's part is over: the forwarder's own number takes over. ZTO also runs an international consolidation service (`中通国际集运`), which packs parcels together at a warehouse and sends them on as one; for it, call 95311 and ask for international.
+**Sent to a forwarder?** Then `已签收` means the forwarder's warehouse signed for it and ZTO's part is over: the forwarder's own number takes over. ZTO also runs an international consolidation service (`中通国际集运`), which packs parcels together at a warehouse and sends them on as one; for it, call 95311 in mainland China and ask for international.
 
 ## ZTO Express delivery in China: couriers, stations and lockers
 
-A ZTO courier brings the parcel, or it waits at a parcel station (`驿站`), a collection point or a smart locker (`智能快件箱`) near the address: ZTO's service agreement with senders allows all of these. China's Express Market Administration Measures, in force since 1 March 2024, say a locker or station needs your consent, and that you can check the parcel against the waybill on delivery, looking inside or refusing it if the packaging is visibly damaged or the contents are fragile.
+In mainland China, a ZTO courier brings the parcel, or it waits at a parcel station (`驿站`), a collection point or a smart locker (`智能快件箱`) near the address: ZTO's service agreement with senders allows all of these. China's Express Market Administration Measures, in force since 1 March 2024, say a locker or station needs your consent, and that you can check the parcel against the waybill on delivery, looking inside or refusing it if the packaging is visibly damaged or the contents are fragile.
 
 ZTO's agreement also asks you to film yourself collecting and opening a parcel left at the door, in a locker or at a station, as evidence. A delivery made as agreed counts as confirmed if nobody objects in writing within three days.
 
@@ -62,17 +62,17 @@ From ZTO's FAQ:
 
 **No update.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet and adds a "Get help from ZTO Express" link to ZTO's contact page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
-**Lost or damaged.** Ask the seller: under ZTO's agreement, the sender claims in writing within 30 days of learning of the loss or damage. Without insurance (`保价`), ZTO pays at most 500 yuan; an insured parcel, up to its declared value. Contents missing or damaged inside intact packaging are excluded, so check the parcel when you get it. See [lost parcels](guide:lost-parcel).
+**Lost or damaged (in mainland China).** Ask the seller: under ZTO's agreement, the sender claims in writing within 30 days of learning of the loss or damage. Without insurance (`保价`), ZTO pays at most 500 yuan; an insured parcel, up to its declared value. Contents missing or damaged inside intact packaging are excluded, so check the parcel when you get it. See [lost parcels](guide:lost-parcel).
 
-**Returned.** ZTO may send a parcel back when the address is unclear, you refuse it, or two delivery attempts fail through no fault of ZTO's. See [returned to sender](guide:returned-to-sender).
+**Returned.** In mainland China, ZTO may send a parcel back when the address is unclear, you refuse it, or two delivery attempts fail through no fault of ZTO's. See [returned to sender](guide:returned-to-sender).
 
-**Delivered but not there.** `已代收` means a collection point holds it for you, and `已签收` that someone signed, not always you. Check parcel stations and lockers near you, your building's reception, and the forwarder if it went to one. To complain, give the waybill number to ZTO's customer service on 95311, or use its complaint form (`投诉反馈`), which needs a login. If ZTO's answer doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal authorities. See [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** `已代收` means a collection point holds it for you, and `已签收` that someone signed, not always you. Check parcel stations and lockers near you, your building's reception, and the forwarder if it went to one. To complain in mainland China, give the waybill number to ZTO's customer service on 95311, or use its complaint form (`投诉反馈`), which needs a login. If ZTO's answer doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal authorities. See [delivered but not received](guide:delivered-not-received).
 
 ## ZTO Express contact number and customer service
 
 As read on 31 October 2026, ZTO lists:
 
-- **95311**: its national customer service hotline (`全国统一客服热线`), 08:30 to 17:30, its FAQ says. ZTO's English site calls it the "Customer Service Hotline".
+- **95311**: its national customer service hotline in mainland China (`全国统一客服热线`), 08:30 to 17:30, its FAQ says. ZTO's English site calls it the "Customer Service Hotline".
 - **95720**: the number ZTO's couriers call you from (`中通业务员专属外呼号码`).
 - **Online customer service** (`在线客服`) on zto.com, plus ZTO's WeChat mini program and app.
 
@@ -84,7 +84,7 @@ Paste the number in [Peek](/): it follows more than 3,500 carriers. A ZTO number
 
 Peek reads ZTO's own tracker, and opens a browser when ZTO asks for a check. For each scan it shows the step (table above), the town of the ZTO site that made it (the site's Chinese name where Peek can't place it) and the exact time, in your device's time zone (on peektracker.com and in the iPhone and Android apps, a line under the history names that zone). It leaves out ZTO's full line of each scan and, with it, couriers' contacts, phone numbers and the recipient's name and address, and shows no expected delivery date. ZTO's public tracker can leave out a parcel's earliest scans, and so can Peek. Peek follows the ZTO number only: a forwarder's number is another parcel to add.
 
-It checks up to every 10 minutes, and up to every 2 minutes (every 5 when its ZTO lookup opened a browser) from 6 a.m. local time on the day ZTO scans the parcel out for delivery, while ZTO's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZTO, the forwarder or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, and up to every 2 minutes (every 5 when its ZTO lookup opened a browser) from 6 a.m. local time on the day ZTO scans the parcel out for delivery, while ZTO's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZTO, the forwarder or the seller for you.
 
 ## Questions about ZTO Express tracking
 
@@ -106,7 +106,7 @@ Signed for: Peek shows it as "Signed for", Delivered. You, someone for you or a 
 
 ### What is ZTO Express's phone number?
 
-95311, its national customer service hotline, from 08:30 to 17:30 China time. Calls from 95720 come from ZTO's couriers.
+95311, its national customer service hotline in mainland China, from 08:30 to 17:30 China time. Calls from 95720 come from ZTO's couriers.
 
 :::sources
 - [ZTO Express: 运单查询 (waybill search)](https://www.zto.com/check) – Chinese tracker, up to 10 numbers, WeChat updates

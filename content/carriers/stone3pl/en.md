@@ -14,8 +14,8 @@ Stone3PL doesn't publish a number format. Peek links one shape to Stone3PL: the 
 
 | Number | What it is |
 | --- | --- |
-| `S000000000000000000` | S and 18 digits. Peek asks Stone3PL about numbers of this shape. The shape alone doesn't prove that Stone3PL has the parcel. |
-| `S00000000000000000` | Only 17 digits: not the shape Peek links to Stone3PL. Check for a missing digit, or paste it all the same. |
+| `S482917365428193642` | S and 18 digits. Peek asks Stone3PL about numbers of this shape. The shape alone doesn't prove that Stone3PL has the parcel. |
+| `S48291736542819364` | Only 17 digits: not the shape Peek links to Stone3PL. Check for a missing digit, or paste it all the same. |
 
 In Peek, small letters, spaces and dashes don't matter. Stone3PL's tracker takes up to 40 numbers at once, one per line. It keeps only letters, digits and dashes, and changes small letters to capitals.
 
@@ -31,7 +31,7 @@ Stone3PL's tracking lines are in English, with a date and time but no place. Its
 | --- | --- | --- |
 | `Order Submited.` | The seller sent the order to Stone3PL. Stone3PL may not have the parcel yet. The spelling is Stone3PL's own. | "Label created" |
 | `Shipment information received` | Stone3PL has the parcel's details. | "Label created" |
-| `Processing information input` | Stone3PL is entering the parcel's details. | "Label created" |
+| `Processing information input` | Stone3PL is entering the parcel's details. | "Label created", or "In transit" after `Pickup Scan` |
 | `Pickup Scan` | The parcel was collected and scanned. It is on its way now. | "Received by carrier" |
 | `facility - Outbound` | The parcel left a warehouse or sorting centre. | "In transit" |
 | `Arrived at domestic terminal station` | It reached a terminal. The line doesn't say in which country. | "In transit" |
@@ -47,7 +47,7 @@ Lines from the destination country can use other words. Peek reads common words 
 
 **Overall status.** Stone3PL's tracker also gives each parcel an overall status. When that status means ready for pickup, delivered or a problem, Peek shows "Ready for pickup", "Delivered" or "Needs attention", even before a line says so.
 
-**Times.** Stone3PL gives times without a time zone. Peek reads them all as China time (UTC+8) and shows them in your device's time zone, so a line from your own country may show at the wrong hour. Go by the order of the lines.
+**Times.** Stone3PL gives times without a time zone. Peek reads the lines from the start of the trip as China time (UTC+8), and the destination country's lines and `International shipment release - Import` on that country's time (on one of its zones if it has several), and shows them in your device's time zone.
 
 ## Who delivers Stone3PL parcels
 
@@ -67,7 +67,7 @@ Stone3PL works for the businesses that ship with it and has no help pages for re
 
 **Only `Order Submited.` or `Shipment information received`.** Stone3PL has the order's details, but maybe not the parcel. If nothing new comes for several days, ask the seller if the parcel was handed over.
 
-**No update for days.** When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **"Needs attention".** Stone3PL marked a problem. Read the newest line, then ask the seller what happens next.
 
@@ -79,7 +79,7 @@ Stone3PL works for the businesses that ship with it and has no help pages for re
 
 ## Stone3PL contact
 
-As read on 1 November 2026 on [Stone3PL's contact page](https://stone3pl.com/index.php?route=services/contact_us), for its Shenzhen headquarters ("STONE3PL Marketing Dpt"):
+On [Stone3PL's contact page](https://stone3pl.com/index.php?route=services/contact_us), for its Shenzhen headquarters ("STONE3PL Marketing Dpt"):
 
 - **Email**: support@stone3pl.com. Stone3PL's privacy policy gives the same address.
 - **Phone**: 86-0755-81466633, a number in Shenzhen, China. Stone3PL gives no opening hours and doesn't say which languages it speaks.
@@ -93,11 +93,11 @@ About your order, ask the seller first: the seller booked Stone3PL, not you.
 
 For any other number, paste it all the same: Peek follows more than 4,500 carriers. When a shape fits some carriers only weakly, Peek shows "Checking tracking services…" while it asks them; a number that fits no shape is looked up once you add it. If Peek doesn't name the carrier, tap "Change" and pick Stone3PL under "All carriers", or use "Change carrier" on a parcel you've already added.
 
-Peek reads the overall status, each line with its time, the countries the parcel leaves from and goes to, and the delivering company and its number when given. It drops phone numbers and the names of people who signed. Stone3PL gives no expected delivery date, weight, scan places or proof of delivery.
+Peek reads the overall status, each line with its time, the countries the parcel leaves from and goes to, and the delivering company and its number when given. It drops phone numbers. Stone3PL gives no expected delivery date, weight, scan places or proof of delivery.
 
 When Stone3PL names the delivering company and gives its number, Peek asks that company. With a postal number (two letters, nine digits, two letters) and no company named, Peek asks the post of the destination country, such as [USPS](carrier:usps) in the US, [Royal Mail](carrier:royal-mail) in the UK, [An Post](carrier:an-post) in Ireland, [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post). With another number, it asks the one carrier that number's shape belongs to, if there is one. Once that carrier shows a scan at least as recent as Stone3PL's newest, Peek follows the parcel there and keeps Stone3PL's history. A company Stone3PL names shows on the parcel even before that ("Delivery with USPS", for example). While that company has only the announcement of the parcel, with no scan of its own, the parcel shows "Announced to …, not received yet" instead. Without such a carrier, Peek stays on Stone3PL's tracking.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Stone3PL's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Stone3PL or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. destination-country time on the day the parcel goes out for delivery, while Stone3PL's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created", every 6 hours. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Stone3PL or the seller for you.
 
 ## Questions about Stone3PL tracking
 

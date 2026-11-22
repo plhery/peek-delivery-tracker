@@ -75,7 +75,7 @@ If a signature was needed and nobody was there, the delivery goes back to the sh
 
 ## Roadie customer service and contact
 
-As read on Roadie's support site on 30 October 2026:
+On Roadie's support site:
 
 - **Chat**: click the robot icon in the bottom right corner of the Roadie Support Center to reach a support specialist.
 - **Email**: write through Roadie's contact form, which the "Contact Support" link on Roadie's tracker opens. It asks for your name, email and phone, and offers "Track My Delivery" under "How can we help?".
@@ -87,13 +87,13 @@ Have the tracking number ready. For a refund, a replacement or a new delivery da
 
 [Peek](/) names Roadie at once from a number of either shape: `1R` and 14 digits or letters a to f, or `1R` and 26 letters or digits. Links from track.roadie.com work too: `/id/…`, `/track/…` and `/track?tracking_number=…`, also with a partner's name in front.
 
-Peek reads Roadie's own tracker and shows its steps in Roadie's words, as in the table above. It can also show the driver's progress, such as `Driver at pickup` or `Driver approaching delivery`; once the driver is approaching or at your address, the delivery shows as "Out for delivery". Roadie gives no place for a step, so there's no map, and Peek doesn't show the estimated delivery time. Until Roadie knows the number, Peek shows "Waiting for Roadie". When Roadie's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the delivery, in that service's words.
+Peek reads Roadie's own tracker and shows its steps in Roadie's words, as in the table above. It can also show the driver's progress, such as `Driver at pickup` or `Driver approaching delivery`; once the driver is approaching or at your address, the delivery shows as "Out for delivery". Roadie gives no place for a step, so there's no map, and Peek doesn't show the estimated delivery time. Until Roadie knows the number, Peek shows "Waiting for Roadie"; two days after Roadie answers that it can't find it, Peek asks you to check the number. When Roadie's tracker doesn't answer Peek, Peek asks tracking services instead and shows the history of the first one that has the delivery, in that service's words.
 
 Peek doesn't show the delivery photo, the driver or anything else behind Roadie's ZIP code lock: "Open the Roadie website" on the parcel's page opens Roadie's tracker for your number. If a tracking service filled in, that link goes to the service's page instead, such as "Open the ParcelsApp website": for the photo, open track.roadie.com yourself.
 
 Peek doesn't get the number of the carrier Roadie hands a delivery to from Roadie's tracker. After `Transferred to Carrier`, unlock that number on Roadie's tracker with your ZIP code and add it to Peek: it names UPS at once for a `1Z` number whose check digit is right.
 
-Peek checks Roadie's tracker up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the delivery turns "Out for delivery", while Roadie's own tracker answers; while a service has the delivery, it checks hourly, and up to every 15 minutes on the day it's out for delivery. After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks Roadie's tracker up to every 10 minutes, and up to every 2 minutes from 6 a.m. in the time zone of Roadie's latest time stamp on the day the delivery turns "Out for delivery", while Roadie's own tracker answers. Otherwise, and after two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
 
 ## Questions about Roadie tracking
 

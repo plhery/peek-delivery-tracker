@@ -14,9 +14,9 @@ Tianhui Hengyuan's waybills are AT, ten digits and TH, 14 characters in all. The
 
 | Number | What it is |
 | --- | --- |
-| `AT0000000017TH` | AT, ten digits and TH: the layout of Tianhui Hengyuan's waybills. Peek checks it with Tianhui Hengyuan's tracker (below). |
-| `AT000000005TH` | Only nine digits. Two letters, nine digits and TH is the layout of an international postal number from Thailand Post, not Tianhui Hengyuan's. |
-| `AT00000000017TH` | Eleven digits: no carrier in Peek's catalog uses this layout. Check for a digit too many. |
+| `AT4829173654TH` | AT, ten digits and TH: the layout of Tianhui Hengyuan's waybills. Peek checks it with Tianhui Hengyuan's tracker (below). |
+| `AT482917367TH` | Only nine digits. Two letters, nine digits and TH is the layout of an international postal number from Thailand Post, not Tianhui Hengyuan's. |
+| `AT48291736542TH` | Eleven digits: no carrier in Peek's catalog uses this layout. Check for a digit too many. |
 
 Spaces and lower case don't matter when you paste the number into Peek.
 
@@ -65,7 +65,7 @@ Peek found no delivery times from Tianhui Hengyuan, and no rules for delivery at
 
 **The tracker shows your parcel further along than Peek.** Peek holds those lines back: they're the scripted ones (above), or lines written ahead of the time they carry (below). Go by the delivery estimate the shop gave, and ask the seller once it has passed.
 
-**Nothing found.** For a number it doesn't know, Tianhui Hengyuan's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek takes that answer as Tianhui Hengyuan listing the shipment without a scan yet: it keeps checking, at the pace given below for lines written ahead, and shows "Waiting for Tianhui Hengyuan", with no request to check the number. So compare the number with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, Tianhui Hengyuan's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek shows "Waiting for Tianhui Hengyuan", then, two days after the tracker first said it doesn't know the number, if nothing else answers for it, asks you to check the number, choose another carrier or delete the parcel. So compare the number with the seller's message, character by character.
 
 **Delivered, but nothing came.** A delivered scan comes from the company that delivers, not from Tianhui Hengyuan's own lines: ask that company first, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
 
@@ -73,7 +73,7 @@ Peek found no delivery times from Tianhui Hengyuan, and no rules for delivery at
 
 ## Tianhui Hengyuan contact number and customer service
 
-As of 29 October 2026, Peek found no contact details for Tianhui Hengyuan: it knows of no website for the company, and no phone number or email for recipients. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
+Peek found no contact details for Tianhui Hengyuan: it knows of no website for the company, and no phone number or email for recipients. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
 
 ## Track a Tianhui Hengyuan parcel with Peek
 
@@ -81,11 +81,11 @@ As of 29 October 2026, Peek found no contact details for Tianhui Hengyuan: it kn
 
 Peek reads Tianhui Hengyuan's own tracker and shows the status, each line with its place, and the destination country when Tianhui Hengyuan's record gives it. The two Chinese lines show in the English the platform's other forwarders give them: `Goods leave the operation center` and `The electronic cargo information has been received`. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery Tianhui Hengyuan's record can hold, and shows no expected delivery date: Tianhui Hengyuan gives none.
 
-From Tianhui Hengyuan's tracker, Peek holds back the scripted lines, any line written more than twelve hours before the time it carries or, in the same second as such a line, more than six hours before its own, and any line dated after the moment it checks, on Beijing time. It goes by the lines it keeps, not by the record's summary status. An order whose lines are all held back has no tracking history in Peek yet. Peek then shows "Waiting for Tianhui Hengyuan", with no request to check the number: it counts lines written ahead as Tianhui Hengyuan having the order, as it does a shipment Tianhui Hengyuan lists without a scan yet, and keeps asking Tianhui Hengyuan's tracker, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. Until the parcel is delivered or returned, Peek opens its tracking history with "Other sites may show more steps, but they’re only predictions." and lists the scripted lines and those written ahead under "Show them", greyed, each with "Predicted for" and its day. Such a line never counts as a scan: it changes no status and sends no alert. Whether Peek holds back some lines or all of them, it also sets aside tracking services' copies of those lines. When the tracker can't be reached, though, Peek turns to tracking services, and their copies can include the scripted lines.
+From Tianhui Hengyuan's tracker, Peek holds back the scripted lines, any line written more than twelve hours before the time it carries or, in the same second as such a line, more than six hours before its own, and any line dated after the moment it checks, on Beijing time. It goes by the lines it keeps, not by the record's summary status. An order whose lines are all held back has no tracking history in Peek yet. Peek then shows "Waiting for Tianhui Hengyuan", with no request to check the number: it counts lines written ahead as Tianhui Hengyuan having the order, as it does a shipment Tianhui Hengyuan lists without a scan yet, and keeps asking Tianhui Hengyuan's tracker as it does for a parcel that shows only its label. Until the parcel is delivered or returned, Peek opens its tracking history with "Tianhui Hengyuan’s site lists the whole route in advance, delivery included. Those steps aren’t real scans." and lists the scripted lines and those written ahead under "Show them", greyed, each with "Predicted for" or "Written in advance for" and its day. Such a line never counts as a scan: it changes no status and sends no alert. Whether Peek holds back some lines or all of them, it also sets aside tracking services' copies of those lines. When the tracker can't be reached, though, Peek turns to tracking services, and their copies can include the scripted lines.
 
 **Swiss Post.** Peek hands a parcel over only when Tianhui Hengyuan's record names Swiss Post as its channel, holds a Swiss Post number and names no destination outside Switzerland and Liechtenstein. The parcel then shows "Delivery with Swiss Post" and that number (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and once Swiss Post shows a scan at least as recent as Tianhui Hengyuan's latest, Peek follows the parcel there and keeps Tianhui Hengyuan's lines in the history. Otherwise Peek stays with Tianhui Hengyuan's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own.
 
-Peek checks up to every 10 minutes, and hourly once Tianhui Hengyuan goes quiet: 12 hours with nothing past its first line or first scan, or two days with nothing new later on. Tianhui Hengyuan's own lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps. Peek can't contact Tianhui Hengyuan or the seller for you.
+While you have the parcel open in Peek, it checks up to every 10 minutes, and hourly once Tianhui Hengyuan goes quiet: 12 hours with nothing past its first line or first scan, or two days with nothing new later on; otherwise hourly. A parcel waiting, or at "Label created", with nothing new for seven days is checked only every 6 hours. Tianhui Hengyuan's own lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps. Peek can't contact Tianhui Hengyuan or the seller for you.
 
 ## Questions about Tianhui Hengyuan tracking
 

@@ -14,11 +14,11 @@ Look in the shop's order confirmation email, or ask the shop. Lost it? See [how 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `EA000000005GB` | Two letters (`E` and a letter, or `CP` or `GI`), nine digits and `GB`, with a check digit before `GB`. |
-| `PBAB1234567890` | A 14-character parcel number: `PB`, the consignment number and the parcel's place in it. |
-| `AB1234567` | A consignment number on its own: Royal Mail's tracker asks for each parcel's own number instead. |
+| `EA482917367GB` | Two letters (`E` and a letter, or `CP` or `GI`), nine digits and `GB`, with a check digit before `GB`. |
+| `PBTR4829173654` | A 14-character parcel number: `PB`, the consignment number and the parcel's place in it. |
+| `TR4829173` | A consignment number on its own: Royal Mail's tracker asks for each parcel's own number instead. |
 
-The 13-character shape is also Royal Mail's (`RR000000005GB` is Royal Mail, not Parcelforce), and some express48 parcels carry a Royal Mail number. Both are tracked on the same page, so that changes little for you.
+The 13-character shape is also Royal Mail's (`RR482917367GB` is Royal Mail, not Parcelforce), and some express48 parcels carry a Royal Mail number. Both are tracked on the same page, so that changes little for you.
 
 ## Parcelforce tracking statuses explained
 
@@ -35,7 +35,7 @@ Royal Mail's tracker shows these lines in English. In the order a parcel usually
 | `Received at Delivery Depot` | At your local depot. It isn't ready to pick up yet. |
 | `Out for delivery` | With the driver today. |
 | `Delivery attempted` | The driver couldn't deliver it. |
-| `Delivered by` | Delivered. The line goes on to name who signed. |
+| `Delivered by` | Delivered. The line can name the office that delivered it. |
 | `Delivered to Neighbour/Reception by` | Left with a neighbour or a reception desk, named in the line. |
 | `Returned to sender` | Going back to the sender. |
 
@@ -61,18 +61,18 @@ On parcels sent abroad, the history goes on with lines such as `Item Leaving the
 
 Citizens Advice sends Parcelforce customers to Royal Mail for delivery needs and safe places:
 
-- **Royal Mail Customer Services:** 03457 740 740, Monday to Friday 8am to 6.30pm, Saturday 8am to 3pm and Sunday 9am to 2pm. **Relay UK:** 18001 then 0345 266 0075.
+- **Royal Mail Customer Services:** 03457 740 740, Monday to Friday 8am to 6.30pm, Saturday 8am to 3pm and Sunday 9am to 2pm (UK time). **Relay UK:** 18001 then 0345 266 0075.
 - **Royal Mail app:** delivery date, neighbour, safe place and delivery needs for Parcelforce parcels too.
 
 For a claim or a complaint, go through Parcelforce's own website.
 
 ## Tracking Parcelforce parcels with Peek
 
-[Peek](/) names Parcelforce at once for `EA000000005GB`-style numbers with a valid check digit and for 14-character `PB` numbers. A consignment number on its own isn't tracked. A Parcelforce tracking link with `trackNumber=` works, and so does a Royal Mail link ending `#/tracking-results/` and a Parcelforce number.
+[Peek](/) names Parcelforce at once for `EA482917367GB`-style numbers with a valid check digit and for 14-character `PB` numbers. A consignment number on its own isn't tracked. A Parcelforce tracking link with `trackNumber=` works, and so does a Royal Mail link ending `#/tracking-results/` and a Parcelforce number.
 
 Peek reads Parcelforce on Royal Mail's tracking site by opening it in a real browser on its server, so a check takes longer and can fail when the site blocks automated visits. Peek then tries universal tracking services, which hold little for Parcelforce.
 
-Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. It checks up to every 10 minutes (every 5 minutes from 6 a.m. local time or, when Parcelforce gives a time window, from half an hour before it opens, on the day Parcelforce scans the parcel out for delivery, while Parcelforce's own tracker answers; every 15 minutes through tracking services), puts each scan on a map and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Statuses keep Royal Mail's English wording, and every delivered line shows as "Delivered", without the name of who signed. A scan from abroad that comes without a time zone isn't dated. For some destinations, an export with an `EA000000005GB`-style number can be followed to that country's national post once it shows progress there.
+Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes (up to every 5 minutes from 6 a.m. UK time or, when Parcelforce gives a time window, from half an hour before it opens, on the day Parcelforce scans the parcel out for delivery, while Parcelforce's own tracker answers). Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". It puts each scan on a map and can notify you when the status changes. Statuses keep Royal Mail's English wording. A scan from abroad that comes without a time zone isn't dated. For an export with an `EA482917367GB`-style number, Peek can also ask the national post of the destination Parcelforce reports (if it reports none, that of the country Peek places you in, other than the UK) and follow it once it shows a scan no older than Parcelforce's newest.
 
 ## Questions about Parcelforce tracking
 

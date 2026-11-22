@@ -14,7 +14,7 @@ DPD calls it the parcel number. It is in the email DPD sends you, and DPD's trac
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000000000` | 14 digits: a DPD parcel number. |
+| `05284917365428` | 14 digits: a DPD parcel number. |
 
 DPD's tracker also takes a reference number, such as the one on the driver's not-at-home notice. Peek doesn't: it needs the 14-digit parcel number.
 
@@ -85,9 +85,9 @@ For a missing or damaged parcel, DPD sends you to the shop or sender, which then
 
 ## DPD Netherlands contact and customer service
 
-Peek can't contact DPD or the shop for you. As read on 1 November 2026, on DPD Netherlands' English contact page:
+Peek can't contact DPD or the shop for you. On DPD Netherlands' English contact page:
 
-- **Phone:** 085-0022222 (local rate) for a parcel delivered in the Netherlands, Monday to Friday from 8 am to 5.30 pm, Saturday from 9 am to 5 pm. Have your 14-digit parcel number ready.
+- **Phone:** 085-0022222 (local rate) for a parcel delivered in the Netherlands, Monday to Friday from 8 am to 5.30 pm, Saturday from 9 am to 5 pm, Dutch time. Have your 14-digit parcel number ready.
 - **Form:** the contact form for recipients, on the same page. It asks for the parcel number, your name, your postcode, your house number and your email.
 - **Parcel delivered in another country:** DPD Netherlands can't give information about it. Contact DPD in the country where it is delivered.
 
@@ -101,11 +101,11 @@ Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek a
 
 Paste the 14 digits alone: with a character added after them, Peek's carrier check leaves DPD Netherlands out. A myDPD link from www.dpdgroup.com/nl/ with `parcelNumber=` works too, and names DPD Netherlands straight away.
 
-Peek shows DPD's status, its steps in the words of the table above, the expected delivery day (with a time window when DPD gives one) and the delivery time. DPD asks for your postcode to show more, and Peek doesn't send one, so DPD gives Peek its short summary. Peek therefore also asks tracking services, and shows their fuller history when one has it.
+Peek shows DPD's status, its steps in the words of the table above, the expected delivery day and the delivery time. DPD asks for your postcode to show more, and Peek doesn't send one, so DPD gives Peek its short summary. Peek therefore also asks tracking services, and shows their fuller history when one has it.
 
 Sometimes DPD Netherlands hands a parcel to DPD's company in another country: [DPD Germany](carrier:dpd-de), [DPD France](carrier:dpd-fr), [DPD UK](carrier:dpd-uk), [DPD Ireland](carrier:dpd-ie), [DPD Poland](carrier:dpd-pl), [DPD Portugal](carrier:dpd-pt), DPD Austria, [DPD Switzerland](carrier:dpd-ch), [SEUR](carrier:seur) in Spain or [BRT](carrier:brt) in Italy. Once DPD says the parcel is at a delivery depot in one of these countries, or further on, Peek asks that company with the same number. It follows that company once it has a scan as recent as DPD Netherlands' latest. Until then, Peek follows DPD Netherlands, and the parcel's card already names the company that delivers.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery (when DPD gives a time window, from half an hour before it opens), while DPD's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". To change the delivery, use myDPD.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks DPD up to every 10 minutes, and up to every 2 minutes from 6 a.m. Dutch time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". To change the delivery, use myDPD.
 
 ## Questions about DPD tracking in the Netherlands
 
@@ -127,7 +127,7 @@ Yes. In myDPD, up to 30 minutes before delivery, you can choose another day, ano
 
 ### What is the DPD Netherlands phone number?
 
-085-0022222 (local rate) for a parcel delivered in the Netherlands, Monday to Friday from 8 am to 5.30 pm and Saturday from 9 am to 5 pm. For a parcel delivered abroad, ask DPD in that country.
+085-0022222 (local rate) for a parcel delivered in the Netherlands, Monday to Friday from 8 am to 5.30 pm and Saturday from 9 am to 5 pm, Dutch time. For a parcel delivered abroad, ask DPD in that country.
 
 :::sources
 - [DPD Netherlands: Receiving parcels](https://www.dpd.com/nl/en/receiving/) – myDPD, changes up to 30 minutes before, permission to leave, age check, import payment requests, objections

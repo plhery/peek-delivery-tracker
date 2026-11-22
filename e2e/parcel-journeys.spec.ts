@@ -361,6 +361,8 @@ test('navigates nested carrier dialogs entirely by keyboard', async ({ page }) =
 });
 
 test('keeps translated add-parcel guidance readable in every app language', async ({ page }) => {
+  // Ten languages, each through the settings and the add sheet: more than the default 30 s on a busy runner.
+  test.setTimeout(90_000);
   // Change away from the initial English value first: selecting an unchanged
   // option does not emit a change event or save a language preference.
   for (const [locale, action, title, close] of [

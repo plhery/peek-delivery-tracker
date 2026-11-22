@@ -46,7 +46,7 @@ L’app XDP usa formulazioni leggermente diverse (`Delivery scheduled`). Dopo `C
 
 ## Consegna XDP: fasce orarie, consegne mancate e ritiro
 
-XDP invia una fascia di consegna di due ore il giorno stesso una volta caricato il furgone, di solito entro mezzogiorno (ora del Regno Unito). Nei periodi intensi un deposito può pianificarla 24 ore o più prima. Segue un messaggio «You Are Next» via SMS, e-mail e app. Per le consegne con due operatori (2Man), XDP ti contatta prima per la data e invia la fascia di due ore il giorno stesso. Con i servizi 1+ e 2Man l’autista può portare l’articolo nella stanza che scegli, previa firma di una liberatoria inviata prima da XDP.
+XDP invia una fascia di consegna di due ore il giorno stesso una volta caricato il furgone, di solito entro mezzogiorno (ora del Regno Unito). Nei periodi intensi un deposito può pianificarla 24 ore o più prima. Segue un messaggio «You Are Next» via SMS, e-mail e app. Per le consegne con due operatori (2Man), XDP ti contatta prima per la data e invia la fascia di due ore il giorno stesso. Con il servizio 1+ l’autista può portare l’articolo nella stanza che scegli al piano terra, previa firma di una liberatoria inviata prima da XDP; con 2Man, fino a un piano di scale interne (gli attrezzi da palestra solo al piano terra).
 
 Nell’app XDP puoi:
 

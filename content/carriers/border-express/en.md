@@ -14,9 +14,9 @@ Border Express tracks a delivery by its consignment number. Peek's code knows th
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000` | 8 digits: a consignment number. |
-| `ABCD000000` | 4 letters, the sender's prefix, then digits: also a consignment number. Peek takes 5 to 8 digits after the letters. |
-| `ABCDBX00000000000001` | 20 characters: the barcode on one item's label. The sender's 4 letters, BX, the consignment's digits padded with zeros to 11, and a 3-digit item number. |
+| `48291736` | 8 digits: a consignment number. |
+| `KLMN482917` | 4 letters, the sender's prefix, then digits: also a consignment number. Peek takes 5 to 8 digits after the letters. |
+| `KLMNBX00000482917001` | 20 characters: the barcode on one item's label. The sender's 4 letters, BX, the consignment's digits padded with zeros to 11, and a 3-digit item number. |
 
 A consignment can hold several items, each with a label barcode of its own. Every label starts with the same letters and digits, and the consignment number ties them together: that's what Border Express's tracker looks up, and it doesn't take a label barcode. Peek does take one, and works the consignment number out from it (see below).
 
@@ -60,7 +60,7 @@ This page gives no rules for delivery attempts, cards, safe drop, collecting fro
 
 ## Border Express contact and customer service
 
-As of 31 October 2026, Peek couldn't check Border Express's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. The shop booked the delivery, so ask it first.
+Peek couldn't check Border Express's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. The shop booked the delivery, so ask it first.
 
 On the parcel's page in Peek, "Open the Border Express website" opens your number on Border Express's tracker. Before you pay anything a parcel text asks for, read [delivery scam texts](guide:delivery-scam-texts).
 
@@ -68,15 +68,15 @@ On the parcel's page in Peek, "Open the Border Express website" opens your numbe
 
 Paste the number in [Peek](/), which follows more than 4,500 carriers. It may show "Checking tracking services…" while it asks around. Then press "Change" and pick Border Express: type Border Express in the search. BEX finds it too, but lists BEX Express, a carrier in Serbia, first. For a label barcode, Border Express is listed under "Fits this number". On a parcel you've already added, use "Change carrier". You need no account, postcode or phone number.
 
-If you add the number without picking a carrier, Peek asks only tracking services, never Border Express's tracker, and shows "No tracking history yet" until one of them knows the parcel. Only if a tracking service names Border Express does Peek go on to ask Border Express. Picking Border Express yourself is the way to get its tracker's steps.
+If you add the number without picking a carrier, Peek never asks Border Express's tracker: it asks tracking services (and Colis Privé for 4 letters with 8 digits), and shows "No tracking history yet" until one of them knows the parcel. Only if a tracking service names Border Express does Peek go on to ask Border Express. Picking Border Express yourself is the way to get its tracker's steps.
 
 A tracking link from Border Express works too and names Border Express at once ("Detected carrier"): borderexpress.com.au/tracking with `cn=` in it, or a bexonline.borderexpress.com.au/bxo/track link. If you pick Border Express for a number of another shape, Peek says it "doesn’t issue numbers like this one", and once added, unless a tracking service has the parcel, it shows "Check the tracking number": look for a missing or extra character.
 
 **Label barcodes.** Border Express's tracker doesn't take them, so Peek works the consignment number out of the barcode: the four letters, then the 11 digits after BX without the zeros in front, kept to at least six digits. The last 3 digits, the item number, drop out. The parcel's page shows that number under "Border Express tracks this as". The "Open the Border Express website" link opens Border Express's tracker with that consignment number too. If Border Express doesn't find the parcel by it, use the consignment number from the shop's email.
 
-**What you see.** Peek shows the status, each step with its suburb and state, the expected delivery day until the parcel is out for delivery, and the time of delivery. It leaves out the progress bar, the despatch date, the number of items and each item's scans, the sender's and your town and postcode, and the name of whoever signed. Peek shows no weight or proof of delivery for Border Express. Each step carries the clock of its state, so steps in states on different time zones fall in the right order.
+**What you see.** Peek shows the status, each step with its suburb and state, the expected delivery day until delivery, and the time of delivery. It leaves out the progress bar, the despatch date, the number of items and each item's scans, the sender's town and postcode, your postcode and the name of whoever signed; while the parcel is on its way, your map shows the town it's going to. Peek shows no weight or proof of delivery for Border Express. Each step carries the clock of its state, so steps in states on different time zones fall in the right order.
 
-**How often.** Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Border Express scans the parcel out for delivery, while Border Express's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
+**How often.** While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. on the clock of the state of its latest step on the day Border Express scans the parcel out for delivery, while Border Express's own tracker answers; otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), hourly, and every 6 hours after seven days at "Label created" with nothing new. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
 
 ## Questions about Border Express tracking
 

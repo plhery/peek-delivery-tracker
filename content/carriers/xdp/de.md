@@ -46,7 +46,7 @@ Die XDP-App formuliert manches anders (`Delivery scheduled`). Nach `Consignment 
 
 ## XDP Zustellung: Zeitfenster, verpasste Zustellungen und Abholung
 
-XDP sendet am Liefertag ein Zweistunden-Zeitfenster, sobald der Fahrer den Wagen beladen hat, in der Regel bis 12:00 Uhr britischer Zeit. In Spitzenzeiten plant ein Depot teils 24 Stunden oder mehr im Voraus. Danach folgt eine „You Are Next“-Meldung per SMS, E-Mail und App. Bei Zweimann-Lieferungen (2Man) nennt XDP zunächst ein Datum und am Tag selbst das Zweistundenfenster. Bei den Services 1+ und 2Man trägt das Team den Artikel in einen Raum deiner Wahl, nachdem du eine vorab von XDP gesendete Verzichtserklärung unterschrieben hast.
+XDP sendet am Liefertag ein Zweistunden-Zeitfenster, sobald der Fahrer den Wagen beladen hat, in der Regel bis 12:00 Uhr britischer Zeit. In Spitzenzeiten plant ein Depot teils 24 Stunden oder mehr im Voraus. Danach folgt eine „You Are Next“-Meldung per SMS, E-Mail und App. Bei Zweimann-Lieferungen (2Man) nennt XDP zunächst ein Datum und am Tag selbst das Zweistundenfenster. Beim Service 1+ bringt der Fahrer den Artikel in einen Raum deiner Wahl im Erdgeschoss, nachdem du eine vorab von XDP gesendete Verzichtserklärung unterschrieben hast; bei 2Man trägt das Team ihn bis zu ein Stockwerk über die Innentreppe hinauf (Fitnessgeräte nur ins Erdgeschoss).
 
 In der XDP-App kannst du:
 

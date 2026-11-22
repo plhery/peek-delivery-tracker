@@ -46,7 +46,7 @@ The XDP app words some differently (`Delivery scheduled`). After `Consignment Sp
 
 ## XDP delivery: time slots, missed deliveries and collection
 
-XDP sends a two-hour delivery window on the day of delivery once the driver has loaded the van, usually by 12 noon. At busy times a depot may plan ahead and send it 24 hours or more in advance. A "You Are Next" message follows by text, email and the app. For two-person (2Man) deliveries, XDP first contacts you with a date, then sends the two-hour slot on the day. With 1+ and 2Man services the driver can take the item to a room of your choice, after you sign a waiver form XDP sends beforehand.
+XDP sends a two-hour delivery window on the day of delivery once the driver has loaded the van, usually by 12 noon. At busy times a depot may plan ahead and send it 24 hours or more in advance. A "You Are Next" message follows by text, email and the app. For two-person (2Man) deliveries, XDP first contacts you with a date, then sends the two-hour slot on the day. With 1+ the driver can take the item to a room of your choice on the ground floor, after you sign a waiver form XDP sends beforehand; with 2Man, up one flight of internal stairs (gym equipment to the ground floor only).
 
 In the XDP app you can:
 
@@ -56,9 +56,9 @@ In the XDP app you can:
 
 XDP warns that by asking for an item to be "Left Safe" you accept full responsibility for it from the moment it's delivered.
 
-**Missed deliveries.** `Carded` means the driver found nobody in. XDP says it will try to deliver three times before the item goes back to the sender. If no card was left, the driver can't try again that day: rearrange it with Change Delivery Date.
+**Missed deliveries.** `Carded` means the driver found nobody in. XDP says it will try to deliver again three times before the item goes back to the sender. If no card was left, the driver can't try again that day: rearrange it with Change Delivery Date.
 
-**No pickup points or depot collection.** XDP has no parcel shops or lockers, and its app says it doesn't offer collection from its depots or hubs. The FAQ sends you to the shop if you want to collect.
+**No depot collection.** XDP's app says it doesn't offer collection from its depots or hubs. The FAQ sends you to the shop if you want to collect.
 
 ## XDP parcel not delivered, late or damaged
 
@@ -74,7 +74,7 @@ XDP works for the sender, not for you. Its advice for any delivery issue is to t
 
 ## XDP contact number and customer service
 
-XDP's channels for recipients, as read on 13 October 2026:
+XDP's channels for recipients:
 
 - **Delivery Query form** on XDP's [contact page](https://xdp.co.uk/contact/). The "New Business Enquiry" form there is for sales only.
 - **Email** trackingupdates@xdp.co.uk.
@@ -87,9 +87,9 @@ XDP's website gives no phone number. Its app mentions calls charged at a premium
 
 [Peek](/) recognises a `ZDB` number straight away as XDP's. Links from xdp.co.uk (`/track/` followed by the number, or `track.php?c=`) work too, though a postcode inside the link isn't taken.
 
-Peek shows an optional "Delivery or collection postcode" field for XDP. Without a postcode, XDP isn't asked at all and the parcel is followed only through [universal tracking services](guide:universal-tracker). With it, Peek reads XDP's tracking page; the postcode is sent to XDP and, when needed, to tracking services. A wrong postcode reads as not found, just like on XDP's site: fix it with "Change".
+Peek shows an optional "Delivery or collection postcode" field for XDP. Without a postcode, XDP isn't asked at all and the parcel is followed only through [universal tracking services](guide:universal-tracker). With it, Peek reads XDP's tracking page; the postcode is sent to XDP and, when needed, to tracking services. XDP answers a wrong postcode as it does an unknown number, so check both.
 
-XDP's scan times carry no time zone: Peek reads them on UK time and lists XDP's own history. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`.
+XDP's scan times carry no time zone: Peek reads them on UK time and lists XDP's own history. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`. While you have the parcel open, or on its delivery day with notifications on, Peek checks XDP up to every 10 minutes (up to every 2 minutes from 6 a.m. UK time on the day it's out for delivery, while XDP's tracker answers); otherwise, and after two days without news (12 hours at "Label created" or "Received by carrier"), hourly. Without a postcode, through tracking services alone: hourly, every 3 hours after a quiet day, and up to every 15 minutes on the delivery day while the parcel is open or notifications are on. In both cases, every 6 hours after seven days without news at "Label created".
 
 ## Questions about XDP tracking
 

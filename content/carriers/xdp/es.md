@@ -46,7 +46,7 @@ La app de XDP redacta algunos estados de forma distinta (`Delivery scheduled`). 
 
 ## Entrega de XDP: franjas horarias, entregas fallidas y recogida
 
-XDP envía una franja de entrega de dos horas el día de la entrega cuando el conductor carga la furgoneta, por lo general antes del mediodía (hora del Reino Unido). En épocas de mucha carga un centro puede planificarlo con 24 horas o más de antelación. Luego llega un aviso «You Are Next» por SMS, correo y la app. En entregas de dos personas (2Man), XDP contacta primero con una fecha y envía la franja de dos horas ese día. En los servicios 1+ y 2Man, el repartidor puede subir el artículo a la habitación que elijas tras firmar una exención que XDP envía antes.
+XDP envía una franja de entrega de dos horas el día de la entrega cuando el conductor carga la furgoneta, por lo general antes del mediodía (hora del Reino Unido). En épocas de mucha carga un centro puede planificarlo con 24 horas o más de antelación. Luego llega un aviso «You Are Next» por SMS, correo y la app. En entregas de dos personas (2Man), XDP contacta primero con una fecha y envía la franja de dos horas ese día. En el servicio 1+, el repartidor puede llevar el artículo a la habitación que elijas en la planta baja, tras firmar una exención que XDP envía antes; en 2Man, hasta un piso por la escalera interior (el material de gimnasio, solo a la planta baja).
 
 En la app de XDP puedes:
 

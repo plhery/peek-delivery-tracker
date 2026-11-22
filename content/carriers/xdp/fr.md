@@ -46,7 +46,7 @@ L’application XDP formule certains statuts différemment (`Delivery scheduled`
 
 ## Livraison XDP : créneaux horaires, absences et retrait
 
-XDP envoie un créneau de livraison de deux heures le jour même une fois le camion chargé, généralement avant midi (heure du Royaume-Uni). En période chargée, un dépôt peut planifier plus tôt et l’envoyer 24 heures à l’avance ou davantage. Un message « You Are Next » suit par SMS, e-mail et dans l’application. Pour les livraisons à deux personnes (2Man), XDP te contacte d’abord avec une date, puis envoie le créneau de deux heures le jour J. Avec les services 1+ et 2Man, le livreur peut déposer l’article dans la pièce de ton choix, après signature d’une décharge envoyée au préalable par XDP.
+XDP envoie un créneau de livraison de deux heures le jour même une fois le camion chargé, généralement avant midi (heure du Royaume-Uni). En période chargée, un dépôt peut planifier plus tôt et l’envoyer 24 heures à l’avance ou davantage. Un message « You Are Next » suit par SMS, e-mail et dans l’application. Pour les livraisons à deux personnes (2Man), XDP te contacte d’abord avec une date, puis envoie le créneau de deux heures le jour J. Avec le service 1+, le livreur peut déposer l’article dans la pièce de ton choix au rez-de-chaussée, après signature d’une décharge envoyée au préalable par XDP ; avec 2Man, jusqu’à un étage par l’escalier intérieur (les équipements de sport restent au rez-de-chaussée).
 
 Dans l’application XDP, tu peux :
 

@@ -14,9 +14,9 @@ STO's numbers (`快递单号`) are digits only. Peek's STO lookup takes 12, 13 o
 
 | Number | What it is |
 | --- | --- |
-| `770000000000000` | 77 and 13 more digits: an STO Express waybill. [BRT](carrier:brt) and Yunda also use 15 digits, so Peek checks with STO. |
-| `000000000000` | 12 digits: an older STO shape, shared by [FedEx](carrier:fedex), [SF Express](carrier:sf-express), [ZTO Express](carrier:zto) and many others. |
-| `0000000000000` | 13 digits: an older STO shape too, which Peek doesn't link to STO on its own. |
+| `774829173654281` | 77 and 13 more digits: an STO Express waybill. [BRT](carrier:brt) and Yunda also use 15 digits, so Peek checks with STO. |
+| `482917365420` | 12 digits: an older STO shape, shared by [FedEx](carrier:fedex), [SF Express](carrier:sf-express), [ZTO Express](carrier:zto) and many others. |
+| `4829173654281` | 13 digits: an older STO shape too, which Peek doesn't link to STO on its own. |
 
 Spaces don't matter in Peek.
 
@@ -58,9 +58,9 @@ To change the recipient's details, STO's online customer service has a topic for
 
 ## STO parcel not updating, lost or returned
 
-**Nothing yet.** STO's tracking answers nothing for a number it doesn't know yet, and nothing for one past its one-year limit. If it stays empty, check the number with the seller. Meanwhile, a parcel filed under STO Express shows "Waiting for STO Express".
+**Nothing yet.** STO's tracking answers nothing for a number it doesn't know yet, and nothing for one past its one-year limit. If it stays empty, check the number with the seller. Meanwhile, a parcel filed under STO Express shows "Waiting for STO Express"; two days after STO first answers with nothing, Peek asks you to check the number, choose another carrier or delete the parcel.
 
-**No update.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet, and keeps asking STO. No tracking update (`快递单号没有记录更新`) is one of the topics in STO's online customer service. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new scan for 4 days, Peek shows the day of the last scan ("No tracking update since …") and "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking STO Express.", with "Get help from STO Express" to STO's online customer service. No tracking update (`快递单号没有记录更新`) is one of the topics in STO's online customer service. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Lost or damaged.** Ask the seller first: the seller booked STO, not you. Under STO's service agreement, the sender, or someone the sender names, claims within 30 days of learning of the loss or damage, with proof. Without insurance (`保价`), STO pays the actual loss up to 500 yuan, or up to 100 yuan for documents. An insured parcel is paid up to its declared value. Without insurance or proof of value, STO pays three times the shipping fee. If STO is late through its own fault, it waives the shipping fee. See [lost parcels](guide:lost-parcel).
 
@@ -70,7 +70,7 @@ To change the recipient's details, STO's online customer service has a topic for
 
 ## STO Express contact and customer service
 
-As read on 1 November 2026, STO lists:
+STO lists:
 
 - **Online customer service** on page.sto.cn, linked from sto.cn as `在线咨询` (online enquiry): a chat assistant, with people answering from 8:30 to 22:00 in China. It has buttons to send a parcel, check prices and complain (`投诉反馈`).
 - **WeChat**: a service account and a mini program for sending parcels. STO is on Douyin too. All three are at the foot of sto.cn.
@@ -83,13 +83,13 @@ An STO number's shape alone doesn't tell Peek it's STO's. Paste it all the same:
 
 For a 77 number with 15 digits, Peek asks STO Express and BRT at once, and shows "Checking tracking services…" meanwhile. If STO has the parcel, the line under the number names STO Express and says "has this parcel", and Peek files it there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably STO Express" and "Waiting for STO Express’s first scan", and Peek keeps asking STO, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
 
-Peek asks STO about 77 numbers only. For a 12-digit number, it asks some of the other carriers that use the shape (DHL and BRT among them), then tracking services. If they have the parcel and name STO Express, Peek files it there and asks STO at its next check.
+Peek asks STO about 77 numbers only. For a 12-digit number, it asks some of the other carriers that use the shape (BRT among them) and tracking services. If they have the parcel and name STO Express, Peek files it there and asks STO at its next check.
 
 To have Peek read STO's own tracking from the start, tap "Change" and pick STO Express under "Fits this number" (12 digits, or 15 starting with 77). For 13 digits, or 15 not starting with 77, pick it under "All carriers" or search for STO or 申通. On a parcel you've already added, use "Change carrier". Peek's STO lookup takes only 12, 13 or 15 digits: pick STO Express for any other number, and the line under the number says STO Express "doesn’t issue numbers like this one".
 
 Peek reads STO's own tracking, the one behind its online customer service. For each scan it shows the step (table above), the city of the STO site that made it (the site's Chinese name where Peek can't place it), and the time, read on China's clock and shown in your device's time zone. It shows a repeated scan once, and the parcel's weight when STO's scales recorded it. It leaves out STO's full line for each scan and, with it, couriers' and stations' names and phone numbers, pickup addresses and codes, and who signed. STO gives no expected delivery date, so Peek shows none. Peek follows the STO number only: a forwarder's number is another parcel to add.
 
-It checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day STO scans the parcel out for delivery, while STO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Beijing time on the day STO scans the parcel out for delivery, while STO's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
 
 ## Questions about STO Express tracking
 

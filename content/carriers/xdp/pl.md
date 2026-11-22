@@ -46,7 +46,7 @@ Aplikacja XDP nazywa część statusów inaczej (`Delivery scheduled`). Po `Cons
 
 ## Dostawa XDP: okna czasowe, nieudane doręczenia i odbiór
 
-XDP wysyła dwugodzinne okno dostawy w dniu doręczenia po załadowaniu auta, zwykle do południa (czasu brytyjskiego). W okresach szczytu oddział może zaplanować je 24 godziny lub więcej wcześniej. Potem przychodzi wiadomość „You Are Next” SMS-em, e-mailem i w aplikacji. Przy dostawach dwuosobowych (2Man) XDP najpierw ustala datę, a dwugodzinne okno wysyła w dniu dostawy. W usługach 1+ i 2Man kierowca może wnieść towar do wybranego pokoju po podpisaniu oświadczenia wysłanego wcześniej przez XDP.
+XDP wysyła dwugodzinne okno dostawy w dniu doręczenia po załadowaniu auta, zwykle do południa (czasu brytyjskiego). W okresach szczytu oddział może zaplanować je 24 godziny lub więcej wcześniej. Potem przychodzi wiadomość „You Are Next” SMS-em, e-mailem i w aplikacji. Przy dostawach dwuosobowych (2Man) XDP najpierw ustala datę, a dwugodzinne okno wysyła w dniu dostawy. W usłudze 1+ kierowca może wnieść towar do wybranego pokoju na parterze po podpisaniu oświadczenia wysłanego wcześniej przez XDP; w usłudze 2Man – do pokoju najwyżej jedno piętro wyżej po schodach wewnętrznych (sprzęt do ćwiczeń tylko na parter).
 
 W aplikacji XDP możesz:
 

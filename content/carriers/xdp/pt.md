@@ -46,7 +46,7 @@ A app XDP redige alguns estados de forma diferente (`Delivery scheduled`). Após
 
 ## Entrega XDP: janelas horárias, falhas e levantamento
 
-A XDP envia uma janela de entrega de duas horas no próprio dia assim que o motorista carrega a carrinha, geralmente até ao meio-dia (hora do Reino Unido). Em períodos movimentados, um depósito pode planear com 24 horas ou mais de antecedência. Segue-se um aviso «You Are Next» por SMS, e-mail e app. Para entregas com duas pessoas (2Man), a XDP contacta primeiro para definir a data e envia a janela de duas horas no dia. Nos serviços 1+ e 2Man o motorista pode levar o artigo para a divisão que escolheres, após assinares um termo de responsabilidade enviado antes pela XDP.
+A XDP envia uma janela de entrega de duas horas no próprio dia assim que o motorista carrega a carrinha, geralmente até ao meio-dia (hora do Reino Unido). Em períodos movimentados, um depósito pode planear com 24 horas ou mais de antecedência. Segue-se um aviso «You Are Next» por SMS, e-mail e app. Para entregas com duas pessoas (2Man), a XDP contacta primeiro para definir a data e envia a janela de duas horas no dia. No serviço 1+ o motorista pode levar o artigo para a divisão que escolheres no rés-do-chão, após assinares um termo de responsabilidade enviado antes pela XDP; no 2Man, até um andar acima pela escada interior (equipamento de ginásio só no rés-do-chão).
 
 Na app XDP podes:
 

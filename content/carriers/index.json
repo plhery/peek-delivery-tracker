@@ -173,7 +173,7 @@
   { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en", "de", "pl", "ru", "fr", "es", "nl", "bg", "el", "sk", "hr", "hu", "it", "pt"] },
   { "id": "shouwu", "catalog": "shouwu", "name": "Shouwu International", "languages": ["en", "it", "de", "fr", "es", "pt", "pl"] },
   { "id": "geodis-pl", "catalog": "geodis-pl", "name": "GEODIS Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
-  { "id": "sending", "catalog": "sending", "name": "Sending", "languages": ["en", "es"] },
+  { "id": "sending", "catalog": "sending", "name": "Sending", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "hywl", "catalog": "hywl", "name": "Huiyi Logistics", "languages": ["en", "it", "fr"] },
   { "id": "ywe", "catalog": "ywe", "name": "YWE", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] },

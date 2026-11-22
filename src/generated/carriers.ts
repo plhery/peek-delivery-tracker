@@ -2844,6 +2844,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "sending-sendungsverfolgung",
+      "title": "Sending Sendungsverfolgung: Nummer, Status und Telefon",
+      "name": "Sending",
+      "color": "#e52021"
+    },
+    {
       "id": "ywe",
       "catalog": "ywe",
       "slug": "ywe-sendungsverfolgung",
@@ -3950,6 +3958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "suivi-sending",
+      "title": "Suivi Sending en Espagne\u00a0: numéro, statuts et téléphone",
+      "name": "Sending",
+      "color": "#e52021"
+    },
+    {
       "id": "hywl",
       "catalog": "hywl",
       "slug": "hywl-suivi-colis",
@@ -4990,6 +5006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GEODIS Polonia: numero PL, stati e consegna",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "tracciamento-sending",
+      "title": "Tracciamento Sending in Spagna: numero, stati e telefono",
+      "name": "Sending",
+      "color": "#e52021"
     },
     {
       "id": "hywl",
@@ -7036,6 +7060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "seguimento-sending",
+      "title": "Seguimento Sending: número, estados e contacto telefónico",
+      "name": "Sending",
+      "color": "#e52021"
+    },
+    {
       "id": "ywe",
       "catalog": "ywe",
       "slug": "seguimento-ywe",
@@ -8102,6 +8134,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "sledzenie-sending",
+      "title": "Sending śledzenie w Hiszpanii: numer, statusy i telefon",
+      "name": "Sending",
+      "color": "#e52021"
     },
     {
       "id": "ywe",

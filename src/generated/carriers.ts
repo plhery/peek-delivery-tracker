@@ -2372,6 +2372,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "posta-srbije-sendungsverfolgung",
+      "title": "Pošta Srbije Sendungsverfolgung: Status, Fristen & Kontakt",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "elta-hellenic-post-sendungsverfolgung",
@@ -3286,6 +3294,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "suivi-posta-srbije",
+      "title": "Suivi Pošta Srbije\u00a0: poste serbe, statuts et contacts",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "lietuvos-pastas-suivi",
@@ -4176,6 +4192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "tracciamento-posta-srbije",
+      "title": "Tracciamento Pošta Srbije: poste serbe, stati e contatti",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "tracciamento-elta-hellenic-post",
@@ -5024,6 +5048,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de Econt: número de envío, estados y oficinas",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "seguimiento-posta-srbije",
+      "title": "Seguimiento Pošta Srbije: estados, taquillas y contacto",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
     },
     {
       "id": "elta",
@@ -5882,6 +5914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Econt: número de envio, estados e balcões",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "rastreio-posta-srbije",
+      "title": "Rastreio Pošta Srbije: correios da Sérvia, estados e ajuda",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
     },
     {
       "id": "elta",
@@ -6750,6 +6790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Econt: numer, statusy i oddziały",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "sledzenie-posta-srbije",
+      "title": "Śledzenie Pošta Srbije: Poczta Serbska, statusy i kontakt",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
     },
     {
       "id": "elta",

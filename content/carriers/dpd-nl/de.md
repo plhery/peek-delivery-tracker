@@ -33,7 +33,7 @@ Peek liest die Schritte von DPD auf Englisch aus. In typischer Reihenfolge:
 | `Parcel out for delivery` | Heute beim Fahrer auf Tour. |
 | `Unsuccessful delivery attempt` | Der Fahrer konnte nicht zustellen. Siehe „Nicht zu Hause“ unten. |
 | `Ready for collection` | Wartet in einem Parcel Point oder einem Locker auf dich. |
-| `Delivered` | Zugestellt. Nicht da? Siehe unten. |
+| `Zugestellt` | Zugestellt. Nicht da? Siehe unten. |
 | `Return to sender` | Das Paket geht zurück an den Absender. |
 | `Other tracking update` | Eine Meldung von DPD ohne eigenen Schritt. Das Paket bleibt auf dem vorherigen Schritt. |
 
@@ -105,7 +105,7 @@ Peek zeigt den DPD-Status, die Schritte gemäß Tabelle oben, den voraussichtlic
 
 Manchmal übergibt DPD Niederlande ein Paket an eine DPD-Gesellschaft im Ausland: [DPD Deutschland](carrier:dpd-de), DPD Frankreich, [DPD UK](carrier:dpd-uk), DPD Irland, [DPD Polen](carrier:dpd-pl), [DPD Portugal](carrier:dpd-pt), DPD Österreich, [DPD Schweiz](carrier:dpd-ch), [SEUR](carrier:seur) in Spanien oder [BRT](carrier:brt) in Italien. Sobald DPD das Paket in einem Zustelldepot eines dieser Länder oder weiter meldet, fragt Peek dort mit derselben Nummer nach und übernimmt den Verlauf, sobald ein mindestens ebenso aktueller Scan vorliegt; bis dahin nennt die Paketkarte den Zusteller bereits vorab.
 
-Solange du das Paket in Peek geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek direkt bei DPD bis zu alle 10 Minuten, und ab 6:00 Uhr niederländischer Zeit am Tag, an dem DPD es in Zustellung scannt, bis zu alle 2 Minuten, solange DPDs eigener Tracker antwortet; sonst, und nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“), stündlich. Soweit Tracking-Dienste den ausführlicheren Verlauf ergänzen, prüft Peek stündlich, nach einem ruhigen Tag alle 3 Stunden und am Zustelltag bis zu alle 15 Minuten, solange das Paket in Peek geöffnet ist oder Benachrichtigungen an sind. Bleibt ein laufendes Paket vier Tage ohne neuen Scan, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) und „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DPD Netherlands nach.“ samt dem Link „Hol dir Hilfe bei DPD Netherlands“ zur Kontaktseite. Benachrichtigungen lassen sich für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Änderungen an der Lieferung nimmst du in myDPD vor.
+Solange du das Paket in Peek geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek direkt bei DPD bis zu alle 10 Minuten, und ab 6:00 Uhr niederländischer Zeit am Tag, an dem DPD es in Zustellung scannt, bis zu alle 2 Minuten, solange DPDs eigener Tracker antwortet; sonst, und nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“), stündlich. Bleibt ein Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) und „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DPD Netherlands nach.“ samt dem Link „Hol dir Hilfe bei DPD Netherlands“ zur Kontaktseite. Benachrichtigungen lassen sich für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Änderungen an der Lieferung nimmst du in myDPD vor.
 
 ## Fragen zur DPD Sendungsverfolgung in den Niederlanden
 

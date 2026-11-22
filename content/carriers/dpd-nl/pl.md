@@ -33,7 +33,7 @@ Peek odczytuje etapy DPD po angielsku. W typowej kolejności:
 | `Parcel out for delivery` | Dziś u kuriera. |
 | `Unsuccessful delivery attempt` | Kurier nie zdołał doręczyć. Zobacz „Nieobecność w domu” niżej. |
 | `Ready for collection` | Czeka na ciebie w punkcie Parcel Point lub automacie. |
-| `Delivered` | Doręczona. Brak paczki? Zobacz niżej. |
+| `Dostarczona` | Doręczona. Brak paczki? Zobacz niżej. |
 | `Return to sender` | Paczka wraca do nadawcy. |
 | `Other tracking update` | Komunikat DPD bez osobnego etapu. Paczka pozostaje na dotychczasowym etapie. |
 
@@ -105,7 +105,7 @@ Peek pokazuje status DPD, jego etapy zgodnie z tabelą wyżej, przewidywany dzie
 
 Czasami DPD Holandia przekazuje przesyłkę spółce DPD w innym kraju: [DPD Niemcy](carrier:dpd-de), DPD Francja, [DPD Wielka Brytania](carrier:dpd-uk), DPD Irlandia, [DPD Polska](carrier:dpd-pl), [DPD Portugalia](carrier:dpd-pt), DPD Austria, [DPD Szwajcaria](carrier:dpd-ch), [SEUR](carrier:seur) w Hiszpanii lub [BRT](carrier:brt) we Włoszech. Gdy DPD wskaże paczkę w oddziale doręczeń któregoś z tych krajów lub dalej, Peek pyta tamtą spółkę pod tym samym numerem i przejmuje śledzenie, gdy ma ona skan co najmniej tak świeży jak ostatni z DPD Holandia; wcześniej karta paczki już podaje przewoźnika doręczającego.
 
-Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio DPD nawet co 10 minut, a od 6:00 czasu holenderskiego w dniu skanu w doręczenie nawet co 2 minuty, dopóki tracker DPD odpowiada; poza tym, oraz po dwóch dniach bez wiadomości (12 godzin przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”), sprawdza co godzinę. Gdy historię uzupełniają usługi śledzenia, sprawdza co godzinę, co 3 godziny po dniu bez skanów oraz nawet co 15 minut w dniu doręczenia, jeśli paczka jest otwarta w Peek lub powiadomienia są włączone. Po czterech dniach bez nowego skanu dla przesyłki w drodze Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika DPD Netherlands.” z linkiem „Poproś przewoźnika DPD Netherlands o pomoc” do strony kontaktowej. Powiadamia według wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dostawę zmienisz w myDPD.
+Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio DPD nawet co 10 minut, a od 6:00 czasu holenderskiego w dniu skanu w doręczenie nawet co 2 minuty, dopóki tracker DPD odpowiada; poza tym, oraz po dwóch dniach bez wiadomości (12 godzin przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”), sprawdza co godzinę. Po czterech dniach bez nowego skanu dla przesyłki w stanie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika DPD Netherlands.” z linkiem „Poproś przewoźnika DPD Netherlands o pomoc” do strony kontaktowej. Powiadamia według wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dostawę zmienisz w myDPD.
 
 ## Pytania o śledzenie DPD w Holandii
 

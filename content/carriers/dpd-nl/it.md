@@ -33,7 +33,7 @@ Peek legge i passaggi DPD in inglese. Nell’ordine abituale:
 | `Parcel out for delivery` | Con l’autista oggi. |
 | `Unsuccessful delivery attempt` | Il corriere non è riuscito a consegnare. Vedi «Assente in casa» sotto. |
 | `Ready for collection` | Ti aspetta in un Parcel Point o in un locker. |
-| `Delivered` | Consegnato. Non c’è? Vedi sotto. |
+| `Consegnato` | Consegnato. Non c’è? Vedi sotto. |
 | `Return to sender` | Il pacco sta tornando al mittente. |
 | `Other tracking update` | Un messaggio DPD senza passaggio dedicato. Il pacco rimane al passaggio precedente. |
 
@@ -105,7 +105,7 @@ Peek mostra lo stato DPD, i suoi passaggi come in tabella, il giorno di consegna
 
 Talvolta DPD Paesi Bassi affida un pacco a un’altra società DPD: [DPD Germania](carrier:dpd-de), DPD Francia, [DPD Regno Unito](carrier:dpd-uk), DPD Irlanda, [DPD Polonia](carrier:dpd-pl), [DPD Portogallo](carrier:dpd-pt), DPD Austria, [DPD Svizzera](carrier:dpd-ch), [SEUR](carrier:seur) in Spagna o [BRT](carrier:brt) in Italia. Non appena DPD indica il pacco in un deposito di consegna di uno di questi paesi o oltre, Peek interroga quella società con lo stesso numero e la segue appena mostra una scansione recente almeno quanto l’ultima di DPD Paesi Bassi; prima di allora la scheda del pacco nomina già il corriere che consegna.
 
-Mentre tieni il pacco aperto in Peek — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente DPD fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora dei Paesi Bassi nel giorno in cui DPD lo scansiona in consegna, finché il tracker di DPD risponde; altrimenti, e dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Quando i servizi di tracciamento completano la cronologia, Peek controlla ogni ora, ogni 3 ore dopo un giorno senza scansioni e fino a ogni 15 minuti il giorno della consegna se il pacco è aperto in Peek o le notifiche sono attive. Dopo quattro giorni senza nuove scansioni su un pacco in viaggio, Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DPD Netherlands.», insieme al link «Chiedi aiuto a DPD Netherlands» verso la pagina contatti. Puoi scegliere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Per modificare la consegna usa myDPD.
+Mentre tieni il pacco aperto in Peek — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente DPD fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora dei Paesi Bassi nel giorno in cui DPD lo scansiona in consegna, finché il tracker di DPD risponde; altrimenti, e dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Dopo quattro giorni senza nuove scansioni su un pacco in «Etichetta creata», «Preso in carico» o «In transito», Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DPD Netherlands.», insieme al link «Chiedi aiuto a DPD Netherlands» verso la pagina contatti. Puoi scegliere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Per modificare la consegna usa myDPD.
 
 ## Domande sul tracciamento DPD nei Paesi Bassi
 

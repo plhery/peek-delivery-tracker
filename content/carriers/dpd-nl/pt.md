@@ -33,7 +33,7 @@ O Peek lê os passos da DPD em inglês. Pela ordem habitual:
 | `Parcel out for delivery` | Com o motorista hoje. |
 | `Unsuccessful delivery attempt` | O motorista não conseguiu entregar. Vê «Ausente em casa» abaixo. |
 | `Ready for collection` | À tua espera num Parcel Point ou cacifo. |
-| `Delivered` | Entregue. Não está cá? Vê abaixo. |
+| `Entregue` | Entregue. Não está cá? Vê abaixo. |
 | `Return to sender` | A encomenda está a voltar ao remetente. |
 | `Other tracking update` | Mensagem da DPD sem passo próprio. A encomenda mantém-se no passo anterior. |
 
@@ -105,7 +105,7 @@ O Peek mostra o estado DPD, os passos conforme a tabela acima, o dia previsto de
 
 Por vezes a DPD Países Baixos entrega a encomenda a outra empresa DPD: [DPD Alemanha](carrier:dpd-de), DPD França, [DPD Reino Unido](carrier:dpd-uk), DPD Irlanda, [DPD Polónia](carrier:dpd-pl), [DPD Portugal](carrier:dpd-pt), DPD Áustria, [DPD Suíça](carrier:dpd-ch), [SEUR](carrier:seur) em Espanha ou [BRT](carrier:brt) em Itália. Assim que a DPD indica a encomenda num depósito de entrega de um desses países ou mais adiante, o Peek pergunta a essa empresa com o mesmo número e passa a segui-la quando tiver um registo tão recente quanto o último da DPD Países Baixos; até lá o cartão já mostra a transportadora de entrega.
 
-Enquanto mantiveres a encomenda aberta no Peek — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a DPD até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora dos Países Baixos) no dia em que a DPD a regista em distribuição, enquanto o rastreador da DPD responder; fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Quando serviços de seguimento completam o histórico, verifica de hora em hora, de 3 em 3 horas após um dia sem registos e até de 15 em 15 minutos no dia da entrega se a encomenda estiver aberta no Peek ou as notificações estiverem ligadas. Após quatro dias sem novos registos numa encomenda em curso, o Peek mostra a data do último registo («Sem atualizações desde …») e «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a DPD Netherlands.», com a ligação «Pede ajuda a DPD Netherlands» para a página de contactos. Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Para alterar a entrega usa o myDPD.
+Enquanto mantiveres a encomenda aberta no Peek — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a DPD até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora dos Países Baixos) no dia em que a DPD a regista em distribuição, enquanto o rastreador da DPD responder; fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Após quatro dias sem novos registos numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra a data do último registo («Sem atualizações desde …») e «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a DPD Netherlands.», com a ligação «Pede ajuda a DPD Netherlands» para a página de contactos. Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Para alterar a entrega usa o myDPD.
 
 ## Perguntas sobre o seguimento DPD nos Países Baixos
 

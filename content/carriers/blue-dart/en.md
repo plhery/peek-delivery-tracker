@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-21
 ---
 
-Blue Dart is an Indian courier: Peek's catalog lists it for India and reads its scans on India time. A Blue Dart shipment goes by an 11-digit waybill number, which the sender gives you. For an online order, it's usually in the shop's shipping email or on your order page. Paste it in the box above, or enter it on Blue Dart's own tracker on bluedart.com. Peek couldn't check Blue Dart's website for this page, so what follows comes from what Peek's code knows of Blue Dart's tracker.
+Blue Dart is an Indian courier: Peek's catalog lists it for India and reads its scans on India time. A Blue Dart shipment goes by an 11-digit waybill number, which the sender gives you. For an online order, it can be in the shop's shipping email or on your order page, for example. Paste it in the box above, or enter it on Blue Dart's own tracker on bluedart.com. Peek couldn't check Blue Dart's website for this page, so what follows comes from what Peek's code knows of Blue Dart's tracker.
 
 ## Blue Dart waybill number: what it looks like
 
@@ -51,7 +51,7 @@ A message about a failed delivery asks you to pay or share a code through a link
 
 ## Blue Dart shipments: who delivers and customs
 
-**A Blue Dart waybill.** Peek knows no carrier that Blue Dart hands its shipments on to, in India or abroad, and asks no other carrier about a Blue Dart waybill. If the shop gives you another carrier's number as well, add that one too.
+**A Blue Dart waybill.** Peek knows no carrier that Blue Dart hands its shipments on to, in India or abroad. If the shop gives you another carrier's number as well, add that one too.
 
 **Sent with ICC Worldwide.** ICC Worldwide's tracker can name Blue Dart beside a Blue Dart number. Peek follows the shipment on to Blue Dart only when that number has 11 digits: it asks Blue Dart with it, and once Blue Dart shows a scan at least as recent as ICC Worldwide's newest, follows the shipment there, keeping ICC Worldwide's history. With any other number, Peek stays with ICC Worldwide. Add the shipment by ICC Worldwide's own number, then press "Change" and search for ICC Worldwide: Peek doesn't suggest it from the number.
 
@@ -75,7 +75,7 @@ For a refund or a new shipment, the shop is your contact: it booked Blue Dart.
 
 ## Blue Dart customer care and contact
 
-As of 31 October 2026, Peek couldn't check Blue Dart's website, so this page lists no phone number or email for Blue Dart: Peek gives only contacts read on a carrier's own pages.
+Peek couldn't check Blue Dart's website, so this page lists no phone number or email for Blue Dart: Peek gives only contacts read on a carrier's own pages.
 
 For an online order, ask the shop first: it booked Blue Dart. Peek can't contact Blue Dart or the shop for you.
 
@@ -88,9 +88,9 @@ Paste the waybill in [Peek](/). Several carriers use 11 digits, so Peek doesn't 
 
 If no carrier knows the number yet, add it all the same, or pick Blue Dart yourself: Peek follows more than 4,500 carriers. Peek lists Blue Dart only when the check digit adds up. If yours doesn't and you're sure of the number, search the carrier list for Blue Dart: Peek asks it all the same. A bluedart.com tracking link with the waybill in it (`trackNo=`) works too: Peek takes the number from it and names Blue Dart at once ("Detected carrier").
 
-Filed under Blue Dart, a shipment shows "Waiting for Blue Dart" until its first scan; added without a carrier, "No tracking history yet". Peek reads Blue Dart's public tracker by the waybill alone, with no account: the status Blue Dart gives the shipment, then each scan in Blue Dart's words with its place, read on India time. It leaves out the recipient's details and shows no expected delivery date. The link on the parcel's page, "Open the Blue Dart website", opens the waybill on Blue Dart's tracker.
+Filed under Blue Dart, a shipment shows "Waiting for Blue Dart" until its first scan, or "Check the tracking number" if Blue Dart still doesn't know the number after two days; added without a carrier, "No tracking history yet". Peek reads Blue Dart's public tracker by the waybill alone, with no account: the status Blue Dart gives the shipment, then each scan in Blue Dart's words with its place, read on India time. It leaves out the recipient's details and shows no expected delivery date. The link on the parcel's page, "Open the Blue Dart website", opens the waybill on Blue Dart's tracker.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Blue Dart scans the shipment out for delivery, while Blue Dart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only".
+While you have the shipment open, or on its delivery day with notifications on, and Blue Dart's own tracker answers, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Blue Dart scans the shipment out for delivery; otherwise hourly. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. When only tracking services answer, it checks hourly, every 3 hours once the newest scan is a day old, and up to every 15 minutes on the day the shipment is out for delivery while you have it open or notifications are on. Alerts: "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Blue Dart tracking
 

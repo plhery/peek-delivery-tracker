@@ -14,10 +14,10 @@ With invented digits:
 
 | Number (invented) | What it is |
 | --- | --- |
-| `RR000000005RU` | Two letters, nine digits and `RU`: the international shape, ending in the code for Russia. The last of the nine digits is a check digit. Peek shows it as "Unknown postal carrier" and, when it starts with C, E, L or R, asks Russian Post's tracker about it (see below). |
+| `RR482910576RU` | Two letters, nine digits and `RU`: the international shape, ending in the code for Russia. The last of the nine digits is a check digit. With a right check digit, Peek names Russian Post at once when the number starts with C, E, L or R, and shows "Unknown postal carrier" otherwise (see below). |
 | `80000000000006` | 14 digits starting with `80`, the last one a check digit. Peek links it to Russian Post only as a weak match: DPD, SEUR, BRT, Delhivery and other carriers have numbers of this shape too. |
 | `80000000000001` | The same shape with a wrong check digit. Peek doesn't suggest Russian Post for it, only the other carriers: if yours is a Russian Post number, check for a typo. |
-| `RR000000005CN` | A number another post issued, here [China Post](carrier:china-post). Peek follows it with that post, also when it travels to Russia. |
+| `RR482910576CN` | A number another post issued, here [China Post](carrier:china-post). Peek follows it with that post, also when it travels to Russia. |
 
 Spaces and lower case don't matter when you paste a number into Peek. If you can't find yours, see [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
@@ -69,7 +69,7 @@ Peek found no delivery times, holding periods or rules for delivery attempts tha
 
 ## Russian Post customer service and contact
 
-As of 31 October 2026, Peek couldn't read Russian Post's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. Russian Post's help pages are on info.pochta.ru. For a parcel that has stopped moving, Peek links Russian Post's help page on tracking as "Get help from Russian Post".
+Peek couldn't read Russian Post's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. Russian Post's help pages are on info.pochta.ru. For a parcel that has stopped moving, Peek links Russian Post's help page on tracking as "Get help from Russian Post".
 
 For an order from a shop, ask the shop first: it booked the delivery.
 
@@ -78,11 +78,11 @@ For an order from a shop, ask the shop first: it booked the delivery.
 [Peek](/) can't be sure of a Russian Post number by its shape alone. Paste it all the same: Peek follows more than 4,500 carriers. While you add it, Peek shows "Checking tracking services…".
 
 - **14 digits starting with 80, with a valid check digit.** Peek asks Russian Post's tracker, with DPD and other carriers whose numbers fit, whether it has the parcel. If only Russian Post has it, Peek says "Russian Post has this parcel." and files it there. If not, press "Change": Russian Post is under "Fits this number", with DPD and other carriers whose numbers fit, those based in your country first. Pick it there. On a parcel you've already added, use "Change carrier".
-- **An RU number.** Peek shows it as "Unknown postal carrier". When the number starts with C, E, L or R, Peek also asks Russian Post's tracker whether it has the parcel: if it does, Peek says "Russian Post has this parcel." and files it there. Otherwise press "Change", or "Change carrier" later, and pick Russian Post: typing Почта России finds it. Peek then names Russian Post. Either way, Peek can follow the parcel to the post in your country (below).
+- **An RU number.** When it starts with C, E, L or R and its check digit is right, Peek names Russian Post at once. Another RU number with a right check digit shows as "Unknown postal carrier": press "Change", or "Change carrier" later, and pick Russian Post: typing Почта России finds it. Peek then names Russian Post. Either way, Peek can follow the parcel to the post in your country (below).
 
 Peek reads Russian Post's own tracker, which answers it in English. It shows each step in Russian Post's words, mostly English, such as `Sorting`, `Arrived at the local distribution center` or `Forwarded to the postman` ("Out for delivery"), with its time, its town and country, and the country the parcel is going to. `Available for pickup at the Post Office` shows as "Ready for pickup" and `Handed over for temporary storage` as "Needs attention". After `Returned to the sender`, also "Needs attention", the parcel is on its way back, and its delivery then shows as "Returned to sender". Russian Post gives no expected delivery date. Until its tracker knows the number, Peek shows "Waiting for Russian Post", or "Waiting for Russian Post’s first scan" for an 80 number added without a carrier. When Russian Post's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and for an RU number the Universal Postal Union's tracking last, and shows the history of the first one that has the parcel, in that service's words, which can lag behind pochta.ru. A service that didn't know the number is asked again a day later.
 
-For an 80 number added without a carrier, or an RU number shown as "Unknown postal carrier", Peek also asks, in the parcel's first 30 days and before the tracking services, the carriers that may have it: Russian Post first (for an RU number, if it starts with C, E, L or R), and DPD and others for an 80 number. If one of them shows the parcel moving, Peek moves the parcel there. If you added an 80 number without a carrier and a tracking service names Russian Post as its only carrier, with dated steps, Peek files the parcel under Russian Post by itself. For an RU number shown as "Unknown postal carrier", a tracking service naming Russian Post isn't enough: Peek needs Russian Post's tracker to show the parcel, or you pick Russian Post yourself.
+For an 80 number added without a carrier, or an RU number shown as "Unknown postal carrier", Peek also asks, in the parcel's first 30 days and before the tracking services, the carriers that may have it: for an 80 number, Russian Post first, then DPD and others. If one of them shows the parcel moving, Peek moves the parcel there. If you added an 80 number without a carrier and a tracking service names Russian Post as its only carrier, with dated steps, Peek files the parcel under Russian Post by itself. For an RU number shown as "Unknown postal carrier", a tracking service naming Russian Post isn't enough: Peek needs Russian Post's tracker to show the parcel, or you pick Russian Post yourself.
 
 Peek has no link to Russian Post's tracker. If a tracking service has filled in, the link on the parcel's page opens that service, such as "Open the ParcelsApp website". For pochta.ru, open it yourself.
 
@@ -90,7 +90,7 @@ Peek has no link to Russian Post's tracker. If a tracking service has filled in,
 
 **The post in your country.** For an RU number filed under Russian Post, Russian Post's tracker names the country the parcel is going to, and Peek asks that country's post too, with the RU number, if it reads that post's own tracking, as it does for [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post) and [Australia Post](carrier:australia-post). For a parcel shown as "Unknown postal carrier", a tracking service that names the post that delivers it, with its number, or for an RU number the country it is going to, is enough: Peek asks that post the same way. Once the post shows a scan at least as recent as Russian Post's or the service's latest, Peek follows the parcel there.
 
-While a service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it's out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Russian Post or the sender for you.
+While you have the parcel open, or on its delivery day with notifications on, and Russian Post's tracker answers, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Russian Post scans the parcel out for delivery; otherwise hourly. When only tracking services answer, it checks hourly, every 3 hours once the newest scan is a day old, and up to every 15 minutes on the day the parcel is out for delivery while you have it open or notifications are on. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Russian Post or the sender for you.
 
 ## Questions about Russian Post tracking
 
@@ -100,7 +100,7 @@ Russian Post. It is also written Pochta Rossii. Its website is pochta.ru.
 
 ### What does a Russian Post tracking number look like?
 
-An international one is two letters, nine digits and `RU`, such as `RR000000005RU`. Peek also links 14 digits starting with `80` to Russian Post, when the check digit is right.
+An international one is two letters, nine digits and `RU`, such as `RR482910576RU`. Peek also links 14 digits starting with `80` to Russian Post, when the check digit is right.
 
 ### Why don't the steps in Peek match pochta.ru?
 
@@ -113,5 +113,5 @@ Yes. Paste the number the sender gave you. Peek follows it under the carrier tha
 :::sources
 - [Universal Parcel Scraper: Russian Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/russian-post) – names, the 80 and RU number shapes with their check digits and weak matches, the tracker Peek reads and its English steps, places, destination and stages, help page
 - [Universal Parcel Scraper: Qwintry](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/qwintry) – Russian Post's steps as Qwintry's tracker shows them and their stages, the office as the place, the QR number and the RU numbers it takes, the pochta.ru link
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – RU numbers as an unknown postal carrier, carriers asked first, order of tracking services, hand-overs to the post in your country and to Russian Post
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – RU numbers not starting with C, E, L or R as an unknown postal carrier, carriers asked first, order of tracking services, hand-overs to the post in your country and to Russian Post
 :::

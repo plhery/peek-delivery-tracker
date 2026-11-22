@@ -14,9 +14,9 @@ Look in the seller's purchase confirmation email first. If the sender booked GLS
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00ABC123` | 8 letters and digits, often starting `00`: the parcel number. |
-| `12345678901` | 11 digits: the other form of the parcel number. |
-| `001234567801` | 12 digits: the 11-digit number plus a check digit printed on labels. |
+| `00K4829M` | 8 letters and digits: the parcel number. |
+| `48291057362` | 11 digits: the other form of the parcel number. |
+| `004829105730` | 12 digits: the 11-digit number plus a check digit printed on labels. |
 | 5 or 6 characters | The reference on GLS's delivery notice. |
 
 After a missed delivery, GLS leaves a notice (avis de passage) or sends it by SMS or email, with a reference GLS France calls the Track-ID. It works in GLS's tracking to follow or reschedule the parcel. GLS Germany uses "Track ID" for the 8-character code instead.
@@ -66,7 +66,7 @@ GLS France's contract is with the sender, so compensation, refunds and complaint
 
 ## GLS France contact number and customer service
 
-As listed on GLS France's pages on 11 October 2026:
+As listed on GLS France's pages:
 
 - **Phone:** 09 74 910 910, the recipient line, at standard rate. GLS gives no opening hours and only this French format.
 - **Contact form** for recipients on the [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/) page.
@@ -76,7 +76,7 @@ As listed on GLS France's pages on 11 October 2026:
 
 ## Tracking a GLS France parcel with Peek
 
-[Peek](/) names GLS France at once for an 8-character number starting `00` and mixing letters and digits. For other 8-character codes, 11 digits and 12 digits with GLS's check digit, it asks the likely carriers, GLS France first, and GLS France wins when it knows the parcel ("GLS France has this parcel."). No postcode is needed. Links from moncolis.gls-france.com, gls-france.com and gls-group pages with /FR/ work too; the notice reference doesn't.
+[Peek](/) asks GLS France first, with GLS Germany and GLS Switzerland, for an 8-character number starting `00` and mixing letters and digits. For other 8-character codes, 11 digits and 12 digits with GLS's check digit, it asks the likely carriers, GLS France first when you're in France, and GLS France wins when it knows the parcel ("GLS France has this parcel."). No postcode is needed. Links from moncolis.gls-france.com, gls-france.com and gls-group pages with /FR/ work too; the notice reference doesn't.
 
 Peek shows the status, the history, the expected day (until the parcel is out for delivery, waiting at a pickup point or held up by a problem), the sender's name, the delivery time and, while the parcel waits, the shop, locker or depot's name and address. GLS's scans carry facility codes such as `FR0012`, not towns, so nothing appears on the map. GLS France sends only status codes, so the wordings are Peek's own. Your name, address, contact details, signature and instructions are dropped; there's no weight. Peek checks GLS about once an hour, or 4 hours after a failed check, and can notify you of each change. Old parcels drop out of GLS's tracking, and Peek doesn't follow a parcel to another carrier.
 

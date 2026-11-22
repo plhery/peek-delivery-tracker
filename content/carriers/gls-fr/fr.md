@@ -14,9 +14,9 @@ Regarde d'abord dans l'e-mail de confirmation d'achat envoyé par le vendeur. Si
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `00ABC123` | 8 lettres et chiffres, souvent en commençant par `00` : le numéro de colis. |
-| `12345678901` | 11 chiffres : l'autre forme du numéro de colis. |
-| `001234567801` | 12 chiffres : les 11 chiffres suivis d'une clé de contrôle imprimée sur l'étiquette. |
+| `00K4829M` | 8 lettres et chiffres : le numéro de colis. |
+| `48291057362` | 11 chiffres : l'autre forme du numéro de colis. |
+| `004829105730` | 12 chiffres : les 11 chiffres suivis d'une clé de contrôle imprimée sur l'étiquette. |
 | 5 ou 6 caractères | La référence de l'avis de passage, que GLS France appelle Track-ID. |
 
 Après une livraison manquée, GLS laisse un avis de passage dans ta boîte aux lettres, ou l'envoie par SMS ou e-mail si le problème vient d'ailleurs (une adresse incomplète, par exemple). Sa référence, le Track-ID, sert dans le suivi de GLS pour suivre ou reprogrammer le colis. Attention : GLS Germany appelle Track ID le code à 8 caractères, pas cette référence.
@@ -72,7 +72,7 @@ Le contrat de transport lie GLS France à l'expéditeur : indemnisation, rembour
 
 ## GLS contact : téléphone et service client
 
-Relevé sur les pages de GLS France le 11 octobre 2026 :
+Relevé sur les pages de GLS France :
 
 - **Téléphone :** 09 74 910 910, le service client destinataire, numéro non surtaxé. GLS n'indique pas d'horaires.
 - **Formulaire** pour les particuliers sur la page [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/).
@@ -82,7 +82,7 @@ Relevé sur les pages de GLS France le 11 octobre 2026 :
 
 ## Suivre un colis GLS avec Peek
 
-[Peek](/) reconnaît tout de suite GLS France pour un numéro de 8 caractères formé de `00` puis de six lettres et chiffres mêlés. Pour les autres codes à 8 caractères, les 11 chiffres et les 12 chiffres avec la clé de GLS, il interroge les transporteurs probables, GLS France en premier, et retient GLS France dès qu'il connaît le colis (« GLS France a ce colis. »). GLS France ne demande aucun code postal ; si c'est GLS Germany ou GLS Suisse qui connaît le numéro, Peek te demande le code postal de livraison. Les liens de moncolis.gls-france.com, de gls-france.com et des pages gls-group en /FR/ marchent aussi ; la référence de l'avis de passage, non.
+[Peek](/) interroge GLS France en premier, avec GLS Germany et GLS Suisse, pour un numéro de 8 caractères formé de `00` puis de six lettres et chiffres mêlés. Pour les autres codes à 8 caractères, les 11 chiffres et les 12 chiffres avec la clé de GLS, il interroge les transporteurs probables, GLS France en premier si tu es en France, et retient GLS France dès qu'il connaît le colis (« GLS France a ce colis. »). GLS France ne demande aucun code postal ; si c'est GLS Germany ou GLS Suisse qui connaît le numéro, Peek te demande le code postal de livraison. Les liens de moncolis.gls-france.com, de gls-france.com et des pages gls-group en /FR/ marchent aussi ; la référence de l'avis de passage, non.
 
 Tu vois le statut, l'historique, le jour de livraison prévu (jusqu'à la livraison, l'arrivée en point de retrait ou un problème), le nom de l'expéditeur, l'heure de livraison et, pendant que le colis attend, le nom et l'adresse du relais, du locker ou de l'agence. GLS nomme ses sites par des codes comme `FR0012`, pas par des villes : rien ne s'affiche sur la carte. GLS France n'envoie que des codes de statut, donc les libellés sont ceux de Peek, en français. Ton nom, ton adresse, tes coordonnées, ta signature et tes instructions ne sont pas gardés, et il n'y a pas de poids.
 

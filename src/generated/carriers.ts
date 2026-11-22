@@ -3076,6 +3076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#050059"
     },
     {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "border-express-sendungsverfolgung",
+      "title": "Border Express (BEX) Sendungsverfolgung: Nummern & Status",
+      "name": "Border Express",
+      "color": "#cc092f"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "delhivery-sendungsverfolgung",
@@ -4374,6 +4382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#050059"
     },
     {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "suivi-border-express",
+      "title": "Suivi Border Express (BEX)\u00a0: numéros d’envoi et statuts",
+      "name": "Border Express",
+      "color": "#cc092f"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "suivi-delhivery",
@@ -5624,6 +5640,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#050059"
     },
     {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "tracciamento-border-express",
+      "title": "Tracciamento Border Express (BEX): codici e stati",
+      "name": "Border Express",
+      "color": "#cc092f"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "tracciamento-delhivery",
@@ -6866,6 +6890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#050059"
     },
     {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "seguimiento-border-express",
+      "title": "Seguimiento Border Express (BEX): números y estados",
+      "name": "Border Express",
+      "color": "#cc092f"
+    },
+    {
       "id": "delhivery",
       "catalog": "delhivery",
       "slug": "seguimiento-delhivery",
@@ -8082,6 +8114,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Morning Global: números BR…MG, estados e apoio",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "seguimento-border-express",
+      "title": "Seguimento Border Express (BEX): números e estados",
+      "name": "Border Express",
+      "color": "#cc092f"
     },
     {
       "id": "delhivery",
@@ -9358,6 +9398,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Morning Global: numery BR…MG, statusy i kontakt",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "sledzenie-border-express",
+      "title": "Śledzenie Border Express (BEX): numery przesyłek i statusy",
+      "name": "Border Express",
+      "color": "#cc092f"
     },
     {
       "id": "delhivery",

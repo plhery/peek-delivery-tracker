@@ -191,7 +191,7 @@
   { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en"] },
   { "id": "india-post", "catalog": "india-post", "name": "India Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en"] },
+  { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "delhivery", "catalog": "delhivery", "name": "Delhivery", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en"] },

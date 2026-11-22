@@ -1208,7 +1208,9 @@ function rereadClock(scan: JsonObject, row: JsonObject): boolean {
  * rewords a scan it lists and no longer lists the old words (DPD UK rewrote a failed attempt
  * when it delivered the parcel). The row is of the same source, at the same instant and in the
  * same stage, or in any stage when it had none of its own (a release that gives a carrier's
- * words in English and maps them), with codes that agree when both carry one, and no scan of
+ * words in English and maps them) or when both carry the same code (InPost's acceptance at its
+ * logistics centre, stored in English as a transit scan, then in Polish as the acceptance a
+ * newer release reads that code as), with codes that agree when both carry one, and no scan of
  * the answer carries it.
  * Scans and rows another rule matched, observations, scans dated by their day alone and
  * universal or app rows are left out, and the match is one to one: two new scans, or two rows,
@@ -1230,7 +1232,8 @@ export function rewordedScans(
   const scans = events.filter((scan) => own(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
   const rows = stored.filter((row) => own(row) && !listed.has(identity(row)));
   const alike = (scan: JsonObject, row: JsonObject) => sourceOf(identity(scan)) === sourceOf(identity(row))
-    && instantOf(scan) === instantOf(row) && (stageOf(scan) === stageOf(row) || stageless(row)) && codesAgree(scan, row);
+    && instantOf(scan) === instantOf(row) && codesAgree(scan, row)
+    && (stageOf(scan) === stageOf(row) || stageless(row) || (providerCode(scan) !== '' && providerCode(scan) === providerCode(row)));
   for (const scan of scans) {
     const matching = rows.filter((row) => alike(scan, row));
     if (matching.length !== 1) continue;

@@ -808,6 +808,20 @@ describe('a scan its source rewords', () => {
     }
   });
 
+  it('takes over, in another stage, a row of the same code: a scan read in another language that a newer release stages anew', () => {
+    // Stored in English as a transit scan; a later check in Polish reads the same code as the acceptance (synthetic wording).
+    const english = at('inpost:english', '2026-11-10T18:25:58.561Z', 'Accepted at the logistics centre', 'in_transit',
+      { raw_data: { time: '2026-11-10T18:25:58.561Z', provider_code: 'MMD.1001' } });
+    const polish = at('inpost:polish', '2026-11-10T18:25:58.561Z', 'Przyjeta w centrum logistycznym', 'accepted',
+      { raw_data: { time: '2026-11-10T18:25:58.561Z', provider_code: 'MMD.1001' } });
+    expect(pairs(rewordedScans([polish], [english]))).toEqual([['inpost:polish', 'inpost:english']]);
+    expect(withIdentities([polish], rewordedScans([polish], [english]), [english])[0])
+      .toMatchObject({ provider_event_id: 'inpost:english', stage: 'accepted', description: polish.description });
+    // Without a code on both, or with another one, a scan in another stage is a scan of its own.
+    expect(rewordedScans([{ ...polish, raw_data: { time: polish.raw_data.time } }], [english]).size).toBe(0);
+    expect(rewordedScans([{ ...polish, raw_data: { ...polish.raw_data, provider_code: 'MMD.1002' } }], [english]).size).toBe(0);
+  });
+
   it('takes over, in any stage, a row that had no stage of its own: a release gives the words in English and maps them', () => {
     // Stored as the fallback while no map read the carrier's words; the next release renders and stages them.
     const unread = at('meso:unread', '2026-10-27T15:18:00Z', '等待清关', 'in_transit', { stage_source: 'none' });

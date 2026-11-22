@@ -43,7 +43,7 @@ translating it (not implemented).
   scans, so translation has to happen at display time. A stored scan is only reworded in
   place, when another source reports the same scan, Swiss Post or Poczta Polska words it in
   the parcel's language (the same provider code, instant and place), or its source rewords it and no
-  longer gives the old words (the same instant and stage)
+  longer gives the old words (the same instant, and the same stage or the same provider code)
   ([`eventIdentity.ts`](../src/server/eventIdentity.ts), [ROUTING.md](ROUTING.md)).
 - Pick tracking sources for coverage, freshness and identity, never for language. A handoff
   can bring English destination scans but never translates earlier origin scans.

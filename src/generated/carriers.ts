@@ -2436,6 +2436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "hrvatska-posta-sendungsverfolgung",
+      "title": "Hrvatska pošta Sendungsverfolgung: Status, Locker & Kontakt",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "posta-srbije-sendungsverfolgung",
@@ -3478,6 +3486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "suivi-hrvatska-posta",
+      "title": "Suivi Hrvatska pošta\u00a0: statuts, paketomat et contacts",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "suivi-posta-srbije",
@@ -4504,6 +4520,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "tracciamento-hrvatska-posta",
+      "title": "Tracciamento Hrvatska pošta: stati, locker e contatti",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "tracciamento-posta-srbije",
@@ -5482,6 +5506,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "seguimiento-hrvatska-posta",
+      "title": "Seguimiento Hrvatska pošta: estados, taquillas y contacto",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "seguimiento-posta-srbije",
@@ -6458,6 +6490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Slovenská pošta: números, estados e BalíkoBOX",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "rastreio-hrvatska-posta",
+      "title": "Rastreio Hrvatska pošta: estados, cacifos e contactos",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
     },
     {
       "id": "posta-srbije",
@@ -7470,6 +7510,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Slovenská pošta: numery, statusy i BalíkoBOX",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "hrvatska-posta",
+      "catalog": "hrvatska-posta",
+      "slug": "sledzenie-hrvatska-posta",
+      "title": "Śledzenie Hrvatska pošta: statusy, automaty i kontakt",
+      "name": "Hrvatska pošta",
+      "color": "#ffd100"
     },
     {
       "id": "posta-srbije",

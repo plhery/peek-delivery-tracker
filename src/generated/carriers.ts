@@ -2212,6 +2212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "poczta-polska-sendungsverfolgung",
+      "title": "Poczta Polska Sendungsverfolgung: Nummern, Status, Abholung",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "austrian-post-sendungsverfolgung",
@@ -3292,6 +3300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS France suivi colis\u00a0: statuts, relais et contact",
       "name": "GLS France",
       "color": "#ffdd00"
+    },
+    {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "suivi-poczta-polska",
+      "title": "Suivi Poczta Polska\u00a0: numéros, statuts et points relais",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
     },
     {
       "id": "austrian-post",
@@ -4400,6 +4416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "tracciamento-poczta-polska",
+      "title": "Tracciamento Poczta Polska: numeri, stati e ritiri",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "tracciamento-austrian-post",
@@ -5416,6 +5440,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GLS France: estados, Relais GLS y contacto",
       "name": "GLS France",
       "color": "#ffdd00"
+    },
+    {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "seguimiento-poczta-polska",
+      "title": "Seguimiento Poczta Polska: números, estados y recogidas",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
     },
     {
       "id": "austrian-post",
@@ -6458,6 +6490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento GLS France: estados, Relais GLS e contactos",
       "name": "GLS France",
       "color": "#ffdd00"
+    },
+    {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "seguimento-poczta-polska",
+      "title": "Seguimento Poczta Polska: números, estados e levantamentos",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
     },
     {
       "id": "austrian-post",

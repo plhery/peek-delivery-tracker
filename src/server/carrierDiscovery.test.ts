@@ -2,7 +2,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { detectCarrierMatch, IndeterminateError, MAX_RECOGNITIONS, recognitionCandidates, type RecognitionCandidate, type RecognitionOptions } from 'universal-parcel-scraper';
 import { detectCarrier } from './carrierDetection';
 import { SupabaseServiceClient } from './supabase';
-import { outsideCountry } from './trackingRouting';
+import { lastResort } from './trackingRouting';
 
 type Candidates = (number: string, options?: RecognitionOptions) => RecognitionCandidate[];
 const mocks = vi.hoisted(() => ({ http: vi.fn(), browser: vi.fn(), candidates: undefined as ((original: Candidates) => Candidates) | undefined }));
@@ -28,10 +28,10 @@ beforeEach(() => {
 // Twelve digits whose GLS and Japan Post checks hold, so GLS's networks and Japan Post are asked too and a
 // second batch is left, and FedEx's: the scraper ranks FedEx first.
 const FEDEX_NUMBER = '100000001010';
-const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).filter((candidate) => !outsideCountry(candidate))
+const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).filter((candidate) => !lastResort(candidate))
   .slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
-/** The carriers outside the country, asked once all the others have missed the number. */
-const outsideBatch = () => recognitionCandidates(FEDEX_NUMBER).filter(outsideCountry).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+/** The last resorts, asked once all the others have missed the number. */
+const outsideBatch = () => recognitionCandidates(FEDEX_NUMBER).filter(lastResort).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
 /** Detection without the answers an earlier test left in its cache. */
 async function freshDetection() {
   vi.resetModules();
@@ -61,20 +61,22 @@ it('asks the next five when FedEx does not know the number either, and FedEx onl
   expect(mocks.browser).toHaveBeenCalledOnce();
 });
 
-it('asks the carriers outside the country last, once every other has missed the number, while time is left', async () => {
+it('asks the last resorts once every other has missed the number, while time is left', async () => {
   // Econt stands for a carrier whose numbers are another's abroad: the scraper offers it last, outside its countries.
+  // TNT stands for one only a rule too weak to ask it beside the others offers.
   const econt = { carrier: 'econt', needsInput: null, preferred: false, outsideCountry: true } as RecognitionCandidate;
-  mocks.candidates = (original) => (number, options) => [...original(number, options).filter((candidate) => !outsideCountry(candidate)),
-    ...(options?.phase === 'browser' ? [] : [econt])];
+  const tnt = { carrier: 'tnt', needsInput: null, preferred: false, lastResort: true } as RecognitionCandidate;
+  mocks.candidates = (original) => (number, options) => [...original(number, options).filter((candidate) => !lastResort(candidate)),
+    ...(options?.phase === 'browser' ? [] : [econt, tnt])];
   mocks.browser.mockResolvedValue({ known: false });
   mocks.http.mockImplementation(async (carrier: string) => ({ known: carrier === 'econt' }));
   const http = httpBatches();
   const log = vi.mocked(console.log);
   expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
-    trackingNumber: FEDEX_NUMBER, carrier: 'econt', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS), 'econt'],
+    trackingNumber: FEDEX_NUMBER, carrier: 'econt', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS), 'econt', 'tnt'],
   });
   expect(log.mock.calls.map(([line]) => JSON.parse(String(line)) as Record<string, unknown>)
-    .find((line) => line.event === 'carrier_recognition')).toMatchObject({ outside_country: true, settled: 'econt' });
+    .find((line) => line.event === 'carrier_recognition')).toMatchObject({ last_resort: true, settled: 'econt' });
 
   // Not when FedEx knows it, nor past the detection's deadline.
   mocks.browser.mockResolvedValue({ known: true, lastActivityAt: new Date().toISOString() });

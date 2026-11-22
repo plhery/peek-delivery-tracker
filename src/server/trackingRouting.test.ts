@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, outsideCountry, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, lastResort, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { AUTOMATIC_CARRIER_IDS, carrierAdapter } from './carriers';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
@@ -1232,17 +1232,27 @@ describe('persistent tracking routing', () => {
       expect(direct).not.toHaveBeenCalled();
     });
 
-    // A carrier whose numbers are another's abroad, which the scraper offers last for a lookup outside its countries.
-    const outsider = (carrier: string) => ({ carrier, needsInput: null, preferred: false, outsideCountry: true }) as scraper.RecognitionCandidate;
-    it('asks a carrier outside the country only once every other candidate has missed the number', async () => {
-      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) =>
-        options?.phase === 'browser' ? [] : [...twoBatches, outsider('econt')].filter(({ carrier }) => !options?.skip?.(carrier)));
+    // A carrier whose numbers are another's abroad, which the scraper offers last for a lookup outside its countries,
+    // flagged as a last resort or, before the scraper had the flag, outside the country alone.
+    const outsider = (carrier: string, flags: object = { outsideCountry: true, lastResort: true }) =>
+      ({ carrier, needsInput: null, preferred: false, ...flags }) as scraper.RecognitionCandidate;
+    // A carrier only a rule too weak to ask it beside the others offers the number.
+    const weak = (carrier: string) => ({ carrier, needsInput: null, preferred: false, lastResort: true }) as scraper.RecognitionCandidate;
+    it('reads a last resort by either flag', () => {
+      expect(lastResort(outsider('econt'))).toBe(true);
+      expect(lastResort(outsider('econt', { outsideCountry: true }))).toBe(true);
+      expect(lastResort(weak('tnt'))).toBe(true);
+      expect(lastResort({ carrier: 'dpd', needsInput: null, preferred: false })).toBe(false);
+    });
+    it('asks the last resorts only once every other candidate has missed the number', async () => {
+      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) => options?.phase === 'browser' ? []
+        : [...twoBatches, outsider('econt', { outsideCountry: true }), weak('tnt')].filter(({ carrier }) => !options?.skip?.(carrier)));
       const number = '00000000000005';
       const added = setup();
       added.recognize.mockImplementation(knows('econt'));
       added.direct.mockResolvedValue(directValue('econt'));
       const result = await added.router.fetch(parcel({ tracking_number: number }), false, undefined, true);
-      expect(asked(added.recognize)).toEqual([...twoBatches.map(({ carrier }) => carrier), 'econt']);
+      expect(asked(added.recognize)).toEqual([...twoBatches.map(({ carrier }) => carrier), 'econt', 'tnt']);
       expect(result.correction?.carrier).toBe('econt');
       // One of the others that knows the number keeps it from being asked.
       const known = setup();
@@ -1261,7 +1271,7 @@ describe('persistent tracking routing', () => {
       expect(asked(held.recognize)).toEqual(twoBatches.slice(1).map(({ carrier }) => carrier));
     });
 
-    it('asks a carrier outside the country after the browser confirmations, over HTTP then in a browser', async () => {
+    it('asks the last resorts after the browser confirmations, over HTTP then in a browser', async () => {
       vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) => (options?.phase === 'browser'
         ? [{ carrier: 'fedex', needsInput: null, preferred: false }, outsider('ozon-logistics')]
         : [...twoBatches.slice(0, 2), outsider('econt')]).filter(({ carrier }) => !options?.skip?.(carrier)));
@@ -1315,8 +1325,8 @@ describe('persistent tracking routing', () => {
       const hinted = setup();
       await hinted.router.fetch(parcel({ tracking_number: '12345678901',
         carrier_data: { routing: state({ discovered_carrier: 'gls-de' }) } }), false);
-      // With every other carrier asked, those outside the country follow.
-      const outside = scraper.recognitionCandidates('12345678901', { hint: 'gls-de' }).filter(outsideCountry)
+      // With every other carrier asked, the last resorts follow.
+      const outside = scraper.recognitionCandidates('12345678901', { hint: 'gls-de' }).filter(lastResort)
         .slice(0, scraper.MAX_RECOGNITIONS).map(({ carrier }) => carrier);
       expect(asked(hinted.recognize)).toEqual([...recognitionAskedCarriers('12345678901', { hint: 'gls-de' }), ...outside]);
       expect(asked(hinted.recognize)[0]).toBe('gls-de');
@@ -1329,7 +1339,7 @@ describe('persistent tracking routing', () => {
       const austria = setup();
       await austria.router.fetch(parcel({ tracking_number: '1000000000000000000001' }), false);
       // Austrian Post first; a carrier serving other countries, as Estafeta, only once it has missed.
-      const abroad = scraper.recognitionCandidates('1000000000000000000001', {}).filter(outsideCountry)
+      const abroad = scraper.recognitionCandidates('1000000000000000000001', {}).filter(lastResort)
         .slice(0, scraper.MAX_RECOGNITIONS).map(({ carrier }) => carrier);
       expect(asked(austria.recognize)).toEqual(['austrian-post', ...abroad]);
       expect(austria.direct).not.toHaveBeenCalled();

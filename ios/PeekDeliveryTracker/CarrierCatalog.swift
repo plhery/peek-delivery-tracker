@@ -202,6 +202,8 @@ struct CarrierDefinition: Codable, Sendable {
         let preferred: Bool?
         /// A low-confidence shape that names its carrier only for a number given on its own, never one read out of a text.
         let standalone: Bool?
+        /// A low-confidence shape too weak to ask its carrier beside the others: it is asked once they have all missed it.
+        let lastResort: Bool?
     }
 
     var displayName: String
@@ -737,11 +739,21 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         }.compactMap(Self.networkBrand))
         // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
         let bareRun = !number.isEmpty && number.allSatisfy { $0.isASCII && $0.isNumber }
+        // A carrier only rules too weak to ask it beside the others offer the number is asked once they have all
+        // missed it: TNT France's sixteen digits from 17 or 18 sit among Vinted Go's.
+        func lastResort(_ definition: CarrierDefinition) -> Bool {
+            let fitting = definition.detectionRules.filter { rule in
+                Self.matches(number, pattern: rule.pattern)
+                    && (rule.rawPattern.map { Self.matches(printed, pattern: $0) } ?? true)
+            }
+            return !fitting.isEmpty && fitting.allSatisfy { $0.lastResort == true }
+        }
         let eligible = candidates.filter { carrier in
             guard let definition = definitions[carrier], rank(carrier) != nil,
                   definition.tracking.mode == "automatic", definition.tracking.adapter != "universal" else { return false }
             if !browser, let pattern = definition.tracking.recognitionPattern, !Self.matches(number, pattern: pattern) { return false }
             if !browser, bareRun, definition.tracking.recognitionServedCountriesOnly == true { return false }
+            if lastResort(definition) { return false }
             if browser && requirements(for: carrier, trackingNumber: raw).contains(where: { $0.optional != true }) { return false }
             return Self.networkBrand(carrier).map { !shadowed.contains($0) } ?? true
         }

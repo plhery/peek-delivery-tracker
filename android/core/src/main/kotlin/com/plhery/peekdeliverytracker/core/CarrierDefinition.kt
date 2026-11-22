@@ -204,6 +204,8 @@ data class CarrierDefinition(
         val preferred: Boolean? = null,
         /** A low-confidence shape that names its carrier only for a number given on its own, never one read out of a text. */
         val standalone: Boolean? = null,
+        /** A low-confidence shape too weak to ask its carrier beside the others: it is asked once they have all missed it. */
+        val lastResort: Boolean? = null,
     )
 }
 

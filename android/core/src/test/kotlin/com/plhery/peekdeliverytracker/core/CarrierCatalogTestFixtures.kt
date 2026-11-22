@@ -102,6 +102,35 @@ internal object CarrierCatalogTestFixtures {
     }
     """.trimIndent().toByteArray()
 
+    /** A carrier whose rule for 17 and 18 is a last resort, beside one that takes any sixteen digits. */
+    val lastResortCatalogData: ByteArray = """
+    {
+      "x-carriers": {
+        "weak-express": {
+          "displayName": "Weak Express", "color": "#123456", "selectable": true, "timezone": "UTC",
+          "tracking": { "mode": "automatic", "adapter": "weak-express", "recognitionRank": 2 },
+          "linkRules": [],
+          "detectionRules": [
+            { "pattern": "^(?!1[78])\\d{16}$", "confidence": "low" },
+            { "pattern": "^1[78]\\d{14}$", "confidence": "low", "lastResort": true }
+          ]
+        },
+        "plain-post": {
+          "displayName": "Plain Post", "color": "#123456", "selectable": true, "timezone": "UTC",
+          "tracking": { "mode": "automatic", "adapter": "plain-post", "recognitionRank": 1 },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^\\d{16}$", "confidence": "low" }]
+        },
+        "unknown": {
+          "displayName": "Carrier", "color": "#8e8e93", "selectable": false, "timezone": "UTC",
+          "tracking": { "mode": "link-only", "adapter": null },
+          "linkRules": [],
+          "detectionRules": []
+        }
+      }
+    }
+    """.trimIndent().toByteArray()
+
     val recognitionPatternCatalogData: ByteArray = """
     {
       "x-carriers": {

@@ -12,7 +12,7 @@ import { SupabaseAuthenticator } from './auth';
 import * as metrics from './metrics';
 import * as observability from './observability';
 import { SupabaseServiceClient } from './supabase';
-import { outsideCountry } from './trackingRouting';
+import { lastResort } from './trackingRouting';
 
 vi.mock('./trackingPreflight', () => ({ preflightTracking: vi.fn().mockResolvedValue(undefined) }));
 
@@ -57,12 +57,12 @@ afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); 
 const fourteen = recognitionAskedCarriers('06080000000002');
 // When none of the first five knows a number, the next five are asked too.
 const bothBatches = (number: string, options?: RecognitionOptions) => recognitionCandidates(number, options)
-  .filter((candidate) => !outsideCountry(candidate)).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
-// Then, when no other carrier was left out of those ten, five of the carriers outside the country.
+  .filter((candidate) => !lastResort(candidate)).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+// Then, when no other carrier was left out of those ten, five of the last resorts.
 const outsideBatch = (number: string, options?: RecognitionOptions) => {
   const candidates = recognitionCandidates(number, options);
-  return candidates.filter((candidate) => !outsideCountry(candidate)).length > 2 * MAX_RECOGNITIONS ? []
-    : candidates.filter(outsideCountry).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+  return candidates.filter((candidate) => !lastResort(candidate)).length > 2 * MAX_RECOGNITIONS ? []
+    : candidates.filter(lastResort).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
 };
 
 // Answers are cached per number for a few minutes, so every test uses its own numbers.
@@ -438,7 +438,7 @@ it('keeps unrelated BRT and Colis Privé answers ambiguous', async () => {
     recognized: ['brt', 'colis-prive'], asked: recognitionAskedCarriers(number) });
 });
 
-it.each(['06080000000076', '19999999999980', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five and those outside the country', async (number) => {
+it.each(['06080000000076', '19999999999980', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five and the last resorts', async (number) => {
   const response = await (await request(number)).json();
   const named = recognitionAskedCarriers(number);
   expect(asked().slice(0, named.length)).toEqual(named);

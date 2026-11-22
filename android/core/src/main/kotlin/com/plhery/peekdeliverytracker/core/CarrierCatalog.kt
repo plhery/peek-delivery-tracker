@@ -235,6 +235,14 @@ class CarrierCatalog private constructor(
         }.mapNotNull { networkBrand(it) }.toSet()
         // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
         val bareRun = number.isNotEmpty() && number.all { it in '0'..'9' }
+        // A carrier only rules too weak to ask it beside the others offer the number is asked once they have all missed
+        // it: TNT France's sixteen digits from 17 or 18 sit among Vinted Go's.
+        fun lastResort(definition: CarrierDefinition): Boolean {
+            val fitting = definition.detectionRules.filter { rule ->
+                matches(number, rule.pattern) && (rule.rawPattern?.let { matches(printed, it) } ?: true)
+            }
+            return fitting.isNotEmpty() && fitting.all { it.lastResort == true }
+        }
         val eligible = candidates.filter { carrier ->
             val definition = definitions[carrier] ?: return@filter false
             if (rank(carrier) == null || definition.tracking.mode != "automatic" || definition.tracking.adapter == "universal") {
@@ -243,6 +251,7 @@ class CarrierCatalog private constructor(
             val pattern = definition.tracking.recognitionPattern
             if (!browser && pattern != null && !matches(number, pattern)) return@filter false
             if (!browser && bareRun && definition.tracking.recognitionServedCountriesOnly == true) return@filter false
+            if (lastResort(definition)) return@filter false
             if (browser && requirements(carrier, raw).any { it.optional != true }) return@filter false
             networkBrand(carrier)?.let { it !in shadowed } ?: true
         }

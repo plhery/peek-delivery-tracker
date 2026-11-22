@@ -14,6 +14,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingProviderCheck
 import com.plhery.peekdeliverytracker.core.api.TrackingProviderCheckOutcome
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.bundledCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.futureCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.lastResortCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.linkRulesCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.phoneDigitsCatalogData
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.recognitionPatternCatalogData
@@ -2048,6 +2049,18 @@ class CarrierCatalogTests {
         // A postal number recovers the rules S10 vouches for, not one behind another check.
         assertEquals(CarrierId.InternationalPost, dynamic.detect("RA999999987CH").carrier)
         assertEquals(listOf(plain), dynamic.recognitionCandidates("RA999999987CH"))
+    }
+
+    @Test
+    fun aCarrierOnlyALastResortRuleOffersIsNotAskedFirst() {
+        val dynamic = CarrierCatalog(lastResortCatalogData)
+        val weak = CarrierId("weak-express")
+        val plain = CarrierId("plain-post")
+
+        // Its rule for 17 and 18 still suggests it; recognition asks it only once the others have missed the number.
+        assertEquals(listOf(plain, weak), dynamic.detect("1700000000000001").candidates.sortedBy { it.rawValue })
+        assertEquals(listOf(plain), dynamic.recognitionCandidates("1700000000000001"))
+        assertEquals(listOf(weak, plain), dynamic.recognitionCandidates("1300000000000000"))
     }
 
     @Test

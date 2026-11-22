@@ -2016,6 +2016,17 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(dynamic.recognitionCandidates(for: "RA999999987CH"), [plain])
     }
 
+    func testACarrierOnlyALastResortRuleOffersIsNotAskedFirst() throws {
+        let dynamic = try CarrierCatalog(data: Self.lastResortCatalogData)
+        let weak = CarrierID(rawValue: "weak-express")
+        let plain = CarrierID(rawValue: "plain-post")
+
+        // Its rule for 17 and 18 still suggests it; recognition asks it only once the others have missed the number.
+        XCTAssertEqual(dynamic.detect("1700000000000001").candidates.sorted { $0.rawValue < $1.rawValue }, [plain, weak])
+        XCTAssertEqual(dynamic.recognitionCandidates(for: "1700000000000001"), [plain])
+        XCTAssertEqual(dynamic.recognitionCandidates(for: "1300000000000000"), [weak, plain])
+    }
+
     func testACarrierIsOnlySuggestedForANumberItsRecognitionCannotAnswer() throws {
         let dynamic = try CarrierCatalog(data: Self.recognitionPatternCatalogData)
         let freight = CarrierID(rawValue: "pro-freight")
@@ -2394,6 +2405,35 @@ final class CarrierCatalogTests: XCTestCase {
           "tracking": { "mode": "automatic", "adapter": "universal" },
           "linkRules": [],
           "detectionRules": [{ "pattern": "^[A-Z]{2}\\d{9}[A-Z]{2}$", "confidence": "high", "checksum": "s10" }]
+        },
+        "unknown": {
+          "displayName": "Carrier", "color": "#8e8e93", "selectable": false, "timezone": "UTC",
+          "tracking": { "mode": "link-only", "adapter": null },
+          "linkRules": [],
+          "detectionRules": []
+        }
+      }
+    }
+    """#.utf8)
+
+    /// A carrier whose rule for 17 and 18 is a last resort, beside one that takes any sixteen digits.
+    private static let lastResortCatalogData = Data(#"""
+    {
+      "x-carriers": {
+        "weak-express": {
+          "displayName": "Weak Express", "color": "#123456", "selectable": true, "timezone": "UTC",
+          "tracking": { "mode": "automatic", "adapter": "weak-express", "recognitionRank": 2 },
+          "linkRules": [],
+          "detectionRules": [
+            { "pattern": "^(?!1[78])\\d{16}$", "confidence": "low" },
+            { "pattern": "^1[78]\\d{14}$", "confidence": "low", "lastResort": true }
+          ]
+        },
+        "plain-post": {
+          "displayName": "Plain Post", "color": "#123456", "selectable": true, "timezone": "UTC",
+          "tracking": { "mode": "automatic", "adapter": "plain-post", "recognitionRank": 1 },
+          "linkRules": [],
+          "detectionRules": [{ "pattern": "^\\d{16}$", "confidence": "low" }]
         },
         "unknown": {
           "displayName": "Carrier", "color": "#8e8e93", "selectable": false, "timezone": "UTC",

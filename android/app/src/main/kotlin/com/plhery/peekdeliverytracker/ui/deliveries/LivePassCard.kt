@@ -87,6 +87,7 @@ import com.plhery.peekdeliverytracker.core.refusedPostcode
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.showsMoreWithPhoneDigits
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
+import com.plhery.peekdeliverytracker.core.writtenDelivery
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -423,6 +424,14 @@ internal fun LivePassCard(
             if (parcel.scheduledDelivery) {
                 Text(
                     localizer.text("parcel.scheduledDelivery", mapOf("carrier" to displayed)),
+                    color = secondary,
+                    style = type.caption.sfLines(),
+                )
+            }
+            // A delivery its carrier wrote in advance, which its site now shows: no real scan, and the seller is who to ask.
+            parcel.writtenAheadBy?.takeIf { !parcel.isArchived && parcel.writtenDelivery }?.let { writer ->
+                Text(
+                    localizer.text("parcel.writtenAheadDelivered", mapOf("carrier" to identities.displayName(writer, language))),
                     color = secondary,
                     style = type.caption.sfLines(),
                 )

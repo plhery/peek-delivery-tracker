@@ -28,6 +28,7 @@ import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -1471,6 +1472,25 @@ class ParcelLogicTests {
         parcel = parcel.copy(carrier = CarrierId.Inpost, carrierData = parcel.carrierData?.copy(routing = null))
         assertNull(parcel.servedElsewhere)
         assertEquals(CarrierId.Aliexpress, parcel.activeTrackingCarrier)
+    }
+
+    // As src/lib/carriers.test.ts.
+    @Test
+    fun writtenDeliveryMatchesWebApp() {
+        val id = UUID.randomUUID()
+        val step = { stage: TrackingStage -> PlannedTrackingEvent(description = "", stage = stage, occurredAt = "2026-08-08T12:00:00Z") }
+        val label = makeParcel(id, events = listOf(event(id, TrackingStage.Registered, "2026-08-01T12:00:00Z")))
+            .copy(carrier = CarrierId.XingheFreight, writtenAheadBy = CarrierId.XingheFreight,
+                writtenAheadEvents = listOf(step(TrackingStage.InTransit), step(TrackingStage.Delivered)))
+        // The carrier's site shows a delivery it wrote in advance, and no scan says the parcel arrived.
+        assertTrue(label.writtenDelivery)
+        assertFalse(label.scheduledDelivery)
+        // Steps written in advance short of the delivery, or a carrier that writes nothing ahead: nothing to say.
+        assertFalse(label.copy(writtenAheadEvents = listOf(step(TrackingStage.InTransit))).writtenDelivery)
+        assertFalse(label.copy(writtenAheadBy = null).writtenDelivery)
+        // A scan that says the parcel arrived or went back.
+        assertFalse(label.copy(trackingEvents = listOf(event(id, TrackingStage.Delivered, "2026-08-09T12:00:00Z"))).writtenDelivery)
+        assertFalse(label.copy(trackingEvents = listOf(event(id, TrackingStage.Returned, "2026-08-09T12:00:00Z"))).writtenDelivery)
     }
 
     @Test

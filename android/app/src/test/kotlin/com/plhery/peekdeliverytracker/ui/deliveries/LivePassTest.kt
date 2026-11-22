@@ -71,6 +71,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.LikelyCarrier
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeededField
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -680,7 +681,27 @@ class LivePassTest {
         assertTrue(textExists("GZYL’s site lists the whole route in advance, delivery included. Those steps aren’t real scans."))
         assertFalse(textExists("Written in advance for"))
         assertFalse(textExists("hasn’t handed it"))
+        assertFalse(textExists("ask the seller"))
         assertFalse(exists(PAGE_QUIET))
+    }
+
+    @Test
+    fun aDeliveryTheCarrierWroteAheadSaysToAskTheSeller() {
+        val written = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-01T07:00:00Z")
+        val parcels = quietParcels().map { parcel ->
+            if (!parcel.label.startsWith("Cat tree")) {
+                parcel
+            } else {
+                parcel.copy(
+                    trackingEvents = parcel.trackingEvents.map { it.copy(stage = TrackingStage.Registered) },
+                    writtenAheadBy = CarrierId.Gzyl,
+                    writtenAheadEvents = listOf(written),
+                )
+            }
+        }
+        show(parcels = parcels)
+        open("Cat tree")
+        assertTrue(textExists("GZYL’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller."))
     }
 
     @Test

@@ -481,6 +481,14 @@ extension Parcel {
             && (deliveringCarrier == nil || deliveryOnlyAnnounced)
     }
 
+    /// Whether the carrier that writes the parcel's route ahead (`writtenAheadBy`) shows on its site a delivery it wrote
+    /// in advance whose time has come (`writtenAheadEvents`), while no scan says the parcel arrived or went back: the
+    /// reader is told it is no real scan, and to ask the seller if nothing came, as for a scheduled delivery.
+    var writtenDelivery: Bool {
+        writtenAheadBy != nil && currentStage != .delivered && currentStage != .returned
+            && (writtenAheadEvents ?? []).contains { $0.stage == .delivered }
+    }
+
     /// What the history opens with when the carrier's site shows steps no scan confirms: those it planned whose time is
     /// still ahead (`plannedEvents`), and those it wrote in advance whose time has passed (`writtenAheadEvents`), newest
     /// first behind one line that says they're only predictions. A carrier that writes its route ahead (`writtenAheadBy`)

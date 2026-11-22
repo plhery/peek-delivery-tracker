@@ -132,6 +132,7 @@ import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
 import com.plhery.peekdeliverytracker.core.shownCarrierOutage
+import com.plhery.peekdeliverytracker.core.writtenDelivery
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -1083,6 +1084,14 @@ private fun SharedParcelCard(
                     if (!gift && parcel.scheduledDelivery) {
                         Text(
                             localizer.text("parcel.scheduledDelivery", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
+                            color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
+                        )
+                    }
+                    // A delivery its carrier wrote in advance, which its site now shows: no real scan, and the seller is
+                    // who to ask.
+                    parcel.writtenAheadBy?.takeIf { !gift && parcel.writtenDelivery }?.let { writer ->
+                        Text(
+                            localizer.text("parcel.writtenAheadDelivered", mapOf("carrier" to identities.displayName(writer, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }

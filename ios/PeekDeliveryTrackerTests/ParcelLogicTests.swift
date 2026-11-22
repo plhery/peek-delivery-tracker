@@ -1999,6 +1999,38 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(parcel.activeTrackingCarrier, .aliexpress)
     }
 
+    /// As src/lib/carriers.test.ts.
+    @MainActor func testWrittenDeliveryMatchesWebApp() {
+        let id = UUID()
+        let step = { (stage: TrackingStage) in PlannedTrackingEvent(description: "", stage: stage, occurredAt: "2026-08-08T12:00:00Z") }
+        var label = makeParcel(id: id, events: [event(id, .registered, "2026-08-01T12:00:00Z")])
+        label.carrier = .xingheFreight
+        label.writtenAheadBy = .xingheFreight
+        label.writtenAheadEvents = [step(.inTransit), step(.delivered)]
+        // The carrier's site shows a delivery it wrote in advance, and no scan says the parcel arrived.
+        XCTAssertTrue(label.writtenDelivery)
+        XCTAssertFalse(label.scheduledDelivery)
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(localizer.text("parcel.writtenAheadDelivered", ["carrier": "Xinghe Freight"]),
+                       "Xinghe Freight’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller.")
+        // Steps written in advance short of the delivery, or a carrier that writes nothing ahead: nothing to say.
+        var short = label
+        short.writtenAheadEvents = [step(.inTransit)]
+        XCTAssertFalse(short.writtenDelivery)
+        var plain = label
+        plain.writtenAheadBy = nil
+        XCTAssertFalse(plain.writtenDelivery)
+        // A scan that says the parcel arrived or went back.
+        for stage in [TrackingStage.delivered, .returned] {
+            var scanned = label
+            scanned.trackingEvents = [event(id, stage, "2026-08-09T12:00:00Z")]
+            XCTAssertFalse(scanned.writtenDelivery)
+        }
+    }
+
     func testScheduledDeliveryMatchesWebApp() {
         let id = UUID()
         var delivered = makeParcel(id: id, events: [event(id, .delivered, "2026-08-08T12:00:00Z")])

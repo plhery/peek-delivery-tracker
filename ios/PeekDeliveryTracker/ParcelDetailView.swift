@@ -520,6 +520,14 @@ struct ParcelDetailView: View {
                         .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                // A delivery its carrier wrote in advance, which its site now shows: no real scan, and the seller is who to ask.
+                if !parcel.isArchived, !frozen, parcel.writtenDelivery, let writer = parcel.writtenAheadBy {
+                    Text(localizer.text("parcel.writtenAheadDelivered",
+                                        ["carrier": catalog.info(for: writer, language: localizer.language).displayName]))
+                        .font(.caption).foregroundStyle(Brand.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("parcel.writtenAheadDelivered")
+                }
                 // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
                 if !parcel.isArchived, !frozen, parcel.heldReturn {
                     Text(localizer.text("parcel.returnUnderWay",

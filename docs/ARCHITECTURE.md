@@ -811,8 +811,8 @@ and nothing typed is sent.
   says its site lists the whole route in advance, delivery included, so those steps are no
   real scans; they show the line alone while the carrier names no step in words. They
   are never scans either: a written "Delivered" sets no stage, status, estimate, alert, email,
-  count, map or drawing. Once one has come while no scan says the parcel arrived, the web page
-  says under the status that the carrier's site shows a delivery written in advance and to ask
+  count, map or drawing. Once one has come while no scan says the parcel arrived, the apps say
+  under the status that the carrier's site shows a delivery written in advance and to ask
   the seller if nothing came (`writtenDelivery`). A wrapped gift's link shows neither the line
   nor the steps.
 - **Peek AI**: when Peek has a strong hint of when a parcel will come, its row is served with

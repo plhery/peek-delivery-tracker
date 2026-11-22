@@ -563,6 +563,15 @@ val Parcel.scheduledDelivery: Boolean
     get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES &&
         (deliveringCarrier == null || deliveryOnlyAnnounced)
 
+/**
+ * Whether the carrier that writes the parcel's route ahead (`writtenAheadBy`) shows on its site a delivery it wrote in
+ * advance whose time has come (`writtenAheadEvents`), while no scan says the parcel arrived or went back: the reader is
+ * told it is no real scan, and to ask the seller if nothing came, as for a scheduled delivery.
+ */
+val Parcel.writtenDelivery: Boolean
+    get() = writtenAheadBy != null && currentStage != TrackingStage.Delivered && currentStage != TrackingStage.Returned &&
+        writtenAheadEvents.orEmpty().any { it.stage == TrackingStage.Delivered }
+
 /** A parcel this long without a scan may be lost: its quiet note says to ask the seller. */
 private const val LONG_QUIET_SECONDS = 21 * 86_400
 

@@ -194,7 +194,7 @@
   { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "delhivery", "catalog": "delhivery", "name": "Delhivery", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en"] },
+  { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "blue-dart", "catalog": "blue-dart", "name": "Blue Dart", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ekart", "catalog": "ekart", "name": "Ekart", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "j-and-t-middle-east", "catalog": "j-and-t-middle-east", "name": "J&T Express Middle East", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

@@ -3180,6 +3180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0812"
     },
     {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "emirates-post-sendungsverfolgung",
+      "title": "Emirates Post Sendungsverfolgung: AE-Nummern und Status",
+      "name": "Emirates Post",
+      "color": "#004a98"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "blue-dart-sendungsverfolgung",
@@ -4582,6 +4590,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0812"
     },
     {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "suivi-emirates-post",
+      "title": "Suivi Emirates Post\u00a0: numéros AE et statuts expliqués",
+      "name": "Emirates Post",
+      "color": "#004a98"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "suivi-blue-dart",
@@ -5944,6 +5960,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0812"
     },
     {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "tracciamento-emirates-post",
+      "title": "Tracciamento Emirates Post: codici AE e stati spiegati",
+      "name": "Emirates Post",
+      "color": "#004a98"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "tracciamento-blue-dart",
@@ -7282,6 +7306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0812"
     },
     {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "seguimiento-emirates-post",
+      "title": "Seguimiento Emirates Post: números AE y estados",
+      "name": "Emirates Post",
+      "color": "#004a98"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "seguimiento-blue-dart",
@@ -8602,6 +8634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Aras Kargo: números e estados em português",
       "name": "Aras Kargo",
       "color": "#dc0812"
+    },
+    {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "seguimento-emirates-post",
+      "title": "Seguimento Emirates Post: números AE e estados",
+      "name": "Emirates Post",
+      "color": "#004a98"
     },
     {
       "id": "blue-dart",
@@ -9982,6 +10022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Aras Kargo: numery i statusy po polsku",
       "name": "Aras Kargo",
       "color": "#dc0812"
+    },
+    {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "sledzenie-emirates-post",
+      "title": "Śledzenie Emirates Post: numery AE i statusy",
+      "name": "Emirates Post",
+      "color": "#004a98"
     },
     {
       "id": "blue-dart",

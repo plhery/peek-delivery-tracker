@@ -2572,6 +2572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "matkahuolto-sendungsverfolgung",
+      "title": "Matkahuolto Sendungsverfolgung: Status, Abholung, Kontakt",
+      "name": "Matkahuolto",
+      "color": "#001e60"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "ukrposhta-sendungsverfolgung",
@@ -3964,6 +3972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Helthjem\u00a0: statuts, points de retrait et contact",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "suivi-matkahuolto",
+      "title": "Suivi Matkahuolto\u00a0: statuts, points relais et contact",
+      "name": "Matkahuolto",
+      "color": "#001e60"
     },
     {
       "id": "ukrposhta",
@@ -5376,6 +5392,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "tracciamento-matkahuolto",
+      "title": "Tracciamento Matkahuolto: stati, ritiro e contatti",
+      "name": "Matkahuolto",
+      "color": "#001e60"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "tracciamento-ukrposhta",
@@ -6746,6 +6770,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "seguimiento-matkahuolto",
+      "title": "Seguimiento Matkahuolto: estados, recogida y contacto",
+      "name": "Matkahuolto",
+      "color": "#001e60"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "seguimiento-ukrposhta",
@@ -8098,6 +8130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Helthjem: estados, pontos de recolha e contacto",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "seguimento-matkahuolto",
+      "title": "Seguimento Matkahuolto: estados, pontos e contacto",
+      "name": "Matkahuolto",
+      "color": "#001e60"
     },
     {
       "id": "ukrposhta",
@@ -9494,6 +9534,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Helthjem: statusy, punkty odbioru i kontakt",
       "name": "Helthjem",
       "color": "#ffb202"
+    },
+    {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "sledzenie-matkahuolto",
+      "title": "Śledzenie Matkahuolto: statusy, punkty odbioru i kontakt",
+      "name": "Matkahuolto",
+      "color": "#001e60"
     },
     {
       "id": "ukrposhta",

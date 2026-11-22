@@ -899,6 +899,18 @@ function statesWallClock(copy: JsonObject, scan: JsonObject): boolean {
 }
 
 /**
+ * A provider's copy whose zone was guessed (`time_zone` on a `time_zone_basis` other than `stated`) that shows,
+ * read in that zone, a carrier's scan's wall clock to the minute under another offset: Ship24 dated TopYou's
+ * relayed scans on Shanghai time, which TopYou labels UTC.
+ */
+function guessedWallClock(copy: JsonObject, scan: JsonObject): boolean {
+  const [zone, basis, own] = [rawOf(copy, 'time_zone'), rawOf(copy, 'time_zone_basis'), labelledTime(scan)];
+  if (typeof zone !== 'string' || typeof basis !== 'string' || basis === STATED || own === null) return false;
+  const guessed = DateTime.fromMillis(instantOf(copy), { zone });
+  return guessed.isValid && guessed.offset !== own.offset && guessed.toFormat(MINUTE_CLOCK) === own.toFormat(MINUTE_CLOCK);
+}
+
+/**
  * The providers whose copies read two or more of a parcel's carrier scans that way, each copy the
  * one scan it reads (`readsWallClock`): the provider's clock, not two scans of one minute by chance.
  */
@@ -1731,15 +1743,20 @@ export function sharedScans(
       return offset === null ? [] : (learned?.zones ?? []).map((zone) =>
         offset * MINUTE_MS - DateTime.fromMillis(instantOf(copy), { zone }).offset * MINUTE_MS);
     };
+    // No shift is none: a row on the misread zone's own offset (TopYou's +08:00 scans beside Ship24's Shanghai
+    // reading) is not on the clock at every gap.
     const onClock = (row: JsonObject) => {
       const shift = zoneShift(instantOf(copy), instantOf(row));
-      return shifts.includes(shift) || zoned(row).includes(shift);
+      return shift !== 0 && (shifts.includes(shift) || zoned(row).includes(shift));
     };
     // A carrier's scan past when the copy was stored is a later one, not the scan the copy misread.
     const misread = among.filter((row) => own(row) && !(pastFirstStored(row, copy) && !misreadOffset(copy, row)) && (learned === undefined
       ? sameScan(copy, row) && hoursApart(instantOf(copy), instantOf(row))
       : placeOf(row) === placeOf(copy) && codesAgree(copy, row) && onClock(row)));
-    const apart = misread.length > 0 ? misread : among.filter((row) => own(row) && readsClock(copy, row));
+    // Of several, the one the copy's guessed zone reads it on (`guessedWallClock`).
+    const guessed = misread.length > 1 ? misread.filter((row) => guessedWallClock(copy, row)) : [];
+    const apart = guessed.length === 1 ? guessed
+      : misread.length > 0 ? misread : among.filter((row) => own(row) && readsClock(copy, row));
     if (apart.length !== 1) return undefined;
     const carrier = apart[0]!;
     const at = (row: JsonObject, instant: number) => placeOf(row) === placeOf(copy) && minute(instantOf(row)) === minute(instant);

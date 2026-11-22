@@ -2177,6 +2177,46 @@ describe('a provider\'s copies on a clock read in another zone', () => {
   });
 });
 
+describe('a provider\'s copies on a zone it guessed for a carrier\'s wall clocks', () => {
+  // A carrier labels a relayed scan's wall clock UTC and its own scans +08:00; a provider guessed Shanghai for the
+  // relayed clock, 8 h early, beside a later scan in the same words.
+  const wording = 'The Shipment Is In Transit';
+  const own = (id: string, at: string, time: string, description = wording) =>
+    ({ ...row(`topyou:${id}`, `${at}+00:00`, description, 'in_transit'), time });
+  const carrier = [
+    own('customs', '2026-03-04T13:56:39', '2026-03-04T21:56:39+08:00', 'Departed from customs'),
+    own('earlier', '2026-03-04T17:06:00', '2026-03-05T01:06:00+08:00'),
+    own('transit', '2026-03-06T04:02:00', '2026-03-06T04:02:00Z'),
+    own('next', '2026-03-06T06:02:00', '2026-03-06T06:02:00Z'),
+  ];
+  const guessed = { universal_provider: 'Ship24', time_zone: 'Asia/Shanghai', time_zone_basis: 'carrier' };
+  const copy = (id: string, at: string) => ({ ...row(`unknown:${id}`, `${at}+00:00`, wording, 'in_transit'), time: `${at}.000Z`, ...guessed });
+  const copies = [copy('transit', '2026-03-05T20:02:00'), copy('next', '2026-03-05T22:02:00')];
+  const direct = carrier.map((item) => ({ ...item, package_id: 'package-1', occurred_at: item.occurred_at.replace('+00:00', 'Z') }));
+  const answer = (items: readonly JsonObject[]) => items.map(({ time_zone, time_zone_basis, universal_provider, ...item }) => ({
+    ...item, package_id: 'package-1', occurred_at: String(item.occurred_at).replace('+00:00', 'Z'),
+    raw_data: { universal_provider, time_zone, time_zone_basis },
+  }));
+
+  it('go beside the carrier\'s scans on the guessed zone\'s own offset, and stay out', () => {
+    expect([...sharedScans(direct, [...carrier, ...copies]).absorbed].sort()).toEqual(['unknown:next', 'unknown:transit']);
+    expect(pairs(sharedScans(answer(copies), carrier).skipped)).toEqual([['unknown:next', 'topyou:next'], ['unknown:transit', 'topyou:transit']]);
+    // Copies that name no zone go at the shift both show, which the carrier's +08:00 scans are not at.
+    const unzoned = copies.map((item) => ({ ...item, time_zone: undefined, time_zone_basis: undefined }));
+    expect([...sharedScans(direct, [...carrier, ...unzoned]).absorbed].sort()).toEqual(['unknown:next', 'unknown:transit']);
+  });
+
+  it('pair one copy with the row a whole number of hours away that the guessed zone reads it on', () => {
+    const [only] = copies;
+    expect([...sharedScans(direct, [...carrier, only!]).absorbed]).toEqual(['unknown:transit']);
+    expect(pairs(sharedScans(answer([only!]), carrier).skipped)).toEqual([['unknown:transit', 'topyou:transit']]);
+    // A zone the provider stated, or none, leaves two rows in the copy's words a whole number of hours away.
+    for (const basis of [{ time_zone_basis: 'stated' }, { time_zone: undefined }]) {
+      expect(sharedScans(direct, [...carrier, { ...only!, ...basis }]).absorbed.size).toBe(0);
+    }
+  });
+});
+
 describe('a provider\'s copies on a carrier\'s wall clocks under another offset', () => {
   // A carrier gives its US scans their own offsets, its town in brackets; a provider gave the wall clocks as UTC, in its own words and places.
   const own = (id: string, at: string, time: string, description: string, values: JsonObject = {}) =>

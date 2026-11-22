@@ -2548,6 +2548,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "helthjem-sendungsverfolgung",
+      "title": "Helthjem Sendungsverfolgung: Status, Abholstellen, Kontakt",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "ukrposhta-sendungsverfolgung",
@@ -3860,6 +3868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis Lietuvos paštas\u00a0: poste lituanienne, LP EXPRESS",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "suivi-helthjem",
+      "title": "Suivi Helthjem\u00a0: statuts, points de retrait et contact",
+      "name": "Helthjem",
+      "color": "#ffb202"
     },
     {
       "id": "ukrposhta",
@@ -5184,6 +5200,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "tracciamento-helthjem",
+      "title": "Tracciamento Helthjem: stati, ritiro e contatti",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "tracciamento-ukrposhta",
@@ -6466,6 +6490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "seguimiento-helthjem",
+      "title": "Seguimiento Helthjem: estados, recogida y contacto",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "seguimiento-ukrposhta",
@@ -7730,6 +7762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Lietuvos paštas (Correios da Lituânia)",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "seguimento-helthjem",
+      "title": "Seguimento Helthjem: estados, pontos de recolha e contacto",
+      "name": "Helthjem",
+      "color": "#ffb202"
     },
     {
       "id": "ukrposhta",
@@ -9038,6 +9078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Lietuvos paštas (Poczta Litewska) i LP Express",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "sledzenie-helthjem",
+      "title": "Śledzenie Helthjem: statusy, punkty odbioru i kontakt",
+      "name": "Helthjem",
+      "color": "#ffb202"
     },
     {
       "id": "ukrposhta",

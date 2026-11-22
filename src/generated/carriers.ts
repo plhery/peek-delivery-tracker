@@ -2916,6 +2916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#043a82"
     },
     {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "linhan-sendungsverfolgung",
+      "title": "LinHan International Sendungsverfolgung: LHGJ und Status",
+      "name": "LinHan International",
+      "color": "#eb5c20"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-sendungsverfolgung",
@@ -4326,6 +4334,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#043a82"
     },
     {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "suivi-linhan",
+      "title": "Suivi LinHan International\u00a0: numéros LHGJ et statuts",
+      "name": "LinHan International",
+      "color": "#eb5c20"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-suivi-colis",
@@ -5704,6 +5720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#043a82"
     },
     {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "tracciamento-linhan",
+      "title": "Tracciamento LinHan International: codici LHGJ e stati",
+      "name": "LinHan International",
+      "color": "#eb5c20"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-tracking",
@@ -7058,6 +7082,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#043a82"
     },
     {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "seguimiento-linhan",
+      "title": "Seguimiento LinHan International: números LHGJ y estados",
+      "name": "LinHan International",
+      "color": "#eb5c20"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-seguimiento",
@@ -8402,6 +8434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Pengyou: números PY, estados e contactos",
       "name": "Pengyou",
       "color": "#043a82"
+    },
+    {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "seguimento-linhan",
+      "title": "Seguimento LinHan International: números LHGJ e estados",
+      "name": "LinHan International",
+      "color": "#eb5c20"
     },
     {
       "id": "mtscn",
@@ -9798,6 +9838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Pengyou: numery PY, statusy i kontakt",
       "name": "Pengyou",
       "color": "#043a82"
+    },
+    {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "sledzenie-linhan",
+      "title": "Śledzenie LinHan International: numery LHGJ i statusy",
+      "name": "LinHan International",
+      "color": "#eb5c20"
     },
     {
       "id": "mtscn",

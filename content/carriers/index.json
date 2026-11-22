@@ -153,7 +153,7 @@
   { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] },
   { "id": "pengyou", "catalog": "pengyou", "name": "Pengyou", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
-  { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] },
+  { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en", "pt", "es", "de", "fr", "it", "pl"] },
   { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

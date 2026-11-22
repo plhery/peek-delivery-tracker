@@ -5248,7 +5248,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^\\d{16}$",
+        "pattern": "^(?!1[78])\\d{16}$",
         "confidence": "low"
       }
     ],

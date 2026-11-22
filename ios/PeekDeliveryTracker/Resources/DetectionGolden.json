@@ -20077,6 +20077,19 @@
     ]
   },
   {
+    "input": "1345002597163697",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
     "input": "1349107274",
     "carrier": "unknown",
     "confidence": "low",
@@ -24522,15 +24535,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -24539,11 +24550,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "asked": [
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -24999,11 +25008,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "asked": [
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -25031,15 +25038,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -25049,15 +25054,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -25067,15 +25070,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -25138,15 +25139,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -25156,15 +25155,13 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce",
-      "tnt"
+      "dhl-ecommerce"
     ],
     "preferred": [
       "vinted-go"
     ],
     "asked": [
       "vinted-go",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -26039,14 +26036,12 @@
       "dhl-ecommerce",
       "correos-express",
       "canada-post",
-      "tnt",
       "evri-uk"
     ],
     "asked": [
       "correos-express",
       "evri-uk",
       "canada-post",
-      "tnt",
       "dhl-ecommerce"
     ]
   },
@@ -57330,6 +57325,19 @@
     ]
   },
   {
+    "input": "5723194821645717",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
     "input": "572473116",
     "carrier": "unknown",
     "confidence": "low",
@@ -60624,6 +60632,35 @@
     ]
   },
   {
+    "input": "61526800118472",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
     "input": "615653863084",
     "carrier": "unknown",
     "confidence": "low",
@@ -61034,6 +61071,36 @@
     ]
   },
   {
+    "input": "62215165320638",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "62255281389100",
     "carrier": "unknown",
     "confidence": "low",
@@ -61227,6 +61294,37 @@
     ],
     "asked": [
       "fedex-pl"
+    ]
+  },
+  {
+    "input": "62348144320661",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -62361,6 +62459,36 @@
       "gls-ch",
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "64265104040002",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -63906,6 +64034,36 @@
     ]
   },
   {
+    "input": "67017189116335",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "6702307",
     "carrier": "unknown",
     "confidence": "low",
@@ -64249,6 +64407,36 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "68329181039314",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -67935,6 +68123,19 @@
     ]
   },
   {
+    "input": "7518422001036679",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
     "input": "75210166320964",
     "carrier": "unknown",
     "confidence": "low",
@@ -68192,6 +68393,19 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "7643807655856551",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
     ]
   },
   {
@@ -70289,6 +70503,19 @@
     ]
   },
   {
+    "input": "7918482008818817",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
     "input": "79295181100841",
     "carrier": "unknown",
     "confidence": "low",
@@ -72271,6 +72498,35 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "82100085452006",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -77850,6 +78106,19 @@
       "correos-express",
       "evri-uk",
       "canada-post",
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "9319570003042763",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
       "tnt",
       "dhl-ecommerce"
     ]

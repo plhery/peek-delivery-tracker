@@ -2444,6 +2444,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "ceska-posta-sendungsverfolgung",
+      "title": "Česká pošta (Tschechische Post): Sendungsverfolgung",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-sendungsverfolgung",
@@ -3574,6 +3582,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "suivi-ceska-posta",
+      "title": "Suivi Česká pošta (Poste tchèque)\u00a0: numéros et statuts",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "suivi-slovenska-posta",
@@ -4696,6 +4712,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "tracciamento-ceska-posta",
+      "title": "Tracciamento Česká pošta (Poste Ceche) e Balíkovna",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "tracciamento-slovenska-posta",
@@ -5762,6 +5786,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "seguimiento-ceska-posta",
+      "title": "Seguimiento Česká pošta (Correos Checos) y Balíkovna",
+      "name": "Česká pošta",
+      "color": "#002776"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "seguimiento-slovenska-posta",
@@ -6818,6 +6850,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Econt: número de envio, estados e balcões",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "rastreio-ceska-posta",
+      "title": "Rastreio Česká pošta (Correios Checos) e Balíkovna",
+      "name": "Česká pošta",
+      "color": "#002776"
     },
     {
       "id": "slovenska-posta",
@@ -7910,6 +7950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Econt: numer, statusy i oddziały",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "ceska-posta",
+      "catalog": "ceska-posta",
+      "slug": "sledzenie-ceska-posta",
+      "title": "Śledzenie Česká pošta (Poczta Czeska) i Balíkovna",
+      "name": "Česká pošta",
+      "color": "#002776"
     },
     {
       "id": "slovenska-posta",

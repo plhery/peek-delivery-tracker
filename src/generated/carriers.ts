@@ -2844,6 +2844,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "byhd-sendungsverfolgung",
+      "title": "BYHD Sendungsverfolgung: Nummern, Status und Zusteller",
+      "name": "BYHD",
+      "color": "#084282"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "mayi-yinfu-sendungsverfolgung",
@@ -4038,6 +4046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "suivi-byhd",
+      "title": "Suivi BYHD\u00a0: numéros BYHD, statuts et transporteur final",
+      "name": "BYHD",
+      "color": "#084282"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "suivi-mayi-yinfu",
@@ -5176,6 +5192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "tracciamento-byhd",
+      "title": "Tracciamento BYHD: codici BYHD, stati e corriere finale",
+      "name": "BYHD",
+      "color": "#084282"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "tracciamento-mayi-yinfu",
@@ -6306,6 +6330,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "seguimiento-byhd",
+      "title": "Seguimiento BYHD: números BYHD, estados y quién entrega",
+      "name": "BYHD",
+      "color": "#084282"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "seguimiento-mayi-yinfu",
@@ -7402,6 +7434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou rastreio: número TYZR…YQ, estados e entrega",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "rastreio-byhd",
+      "title": "Rastreio BYHD: números BYHD, estados e quem entrega",
+      "name": "BYHD",
+      "color": "#084282"
     },
     {
       "id": "mayiyinfu",
@@ -8566,6 +8606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou śledzenie przesyłki: numer TYZR, statusy",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "sledzenie-byhd",
+      "title": "Śledzenie BYHD: numery BYHD, statusy i doręczyciel",
+      "name": "BYHD",
+      "color": "#084282"
     },
     {
       "id": "mayiyinfu",

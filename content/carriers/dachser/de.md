@@ -22,10 +22,10 @@ Allein eingegeben sieht eine Dachser-Nummer wie die Nummern vieler anderer Paket
 
 | Nummer | Wofür ein Tracker sie hält |
 | --- | --- |
-| `4829105736` | 10 Ziffern: [DHL](carrier:dhl-express), [Mondial Relay](carrier:mondial-relay) und andere. |
+| `4829105736` | 10 Ziffern: [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay) und andere. |
 | `48291057362` | 11 Ziffern: GLS und andere. |
-| `482910573621` | 12 Ziffern: [FedEx](carrier:fedex), [MRW](carrier:mrw), BRT und andere. |
-| `4829105736214` | 13 Ziffern: DPD France, Delhivery und andere. |
+| `482910573621` | 12 Ziffern: [MRW](carrier:mrw), BRT und andere. |
+| `4829105736214` | 13 Ziffern: Delhivery und andere. |
 | `48291057362148` | 14 Ziffern: [SEUR](carrier:seur), DPD und andere. |
 
 Nennt deine Nachricht Dachser, verlass dich darauf und nicht auf die Ziffernlänge.
@@ -57,7 +57,7 @@ Die leicht missverständlichen Punkte:
 
 **Termine.** Laut den spanischen Geschäftsbedingungen von Dachser haben targo-on-site-Lieferungen keine feste Lieferfrist und werden üblicherweise telefonisch mit dem Empfänger vereinbart: Rechne also mit einem Anruf. Dachser beschreibt targo on-site als Lieferung nach Terminvereinbarung frei Bordsteinkante am Vor- oder Nachmittag. Mit targo on-site plus wird die Ware bis zur Verwendungsstelle getragen, und in einigen Ländern ist auch Abend- oder Samstagszustellung möglich. Bei targo on-site fix vereinbarst du bereits bei der Bestellung mit dem Shop ein festes Lieferdatum.
 
-**Datum online wählen.** Manche Sendungsseiten zeigen eine Schaltfläche „Arrange delivery date.“ (spanisch „Concertar Fecha“), über die du Lieferdatum und Zeitfenster wählen und bestätigen kannst. Siehst du sie nicht, warte auf den Anruf von Dachser oder frage beim Shop nach.
+**Datum online wählen.** Manche Sendungsseiten zeigen eine Schaltfläche „Arrange date.“ (spanisch „Concertar Fecha“), über die du Lieferdatum und Zeitfenster wählen und bestätigen kannst. Siehst du sie nicht, warte auf den Anruf von Dachser oder frage beim Shop nach.
 
 **Tage und Laufzeiten.** Dachser ist nicht verpflichtet, an Sonn- oder Feiertagen zuzustellen. Samstagszustellung gibt es nur bei den Diensten targospeed 10 und targofix 10 nach Absprache mit der Niederlassung. Alle Laufzeiten sind unverbindliche Richtwerte: Sie zählen ab dem Werktag nach der Abholung, ohne Wochenenden und Feiertage.
 
@@ -84,7 +84,7 @@ Bewahre die Ware in der Originalverpackung für eine Prüfung durch Dachser auf 
 
 Dachser veröffentlicht keine eigene Empfänger-Hotline. Auf den offiziellen spanischen, portugiesischen und internationalen Seiten stehen diese Kontakte:
 
-- **Spanien:** DACHSER Spain, S.A., Regional Head Office Madrid, Coslada: +34 916 60 65 78, dachser-spain.iberia@dachser.com. Öffnungszeiten oder Gesprächskosten sind nicht angegeben.
+- **Spanien:** DACHSER Spain, S.A., Zubieta (Guipúzcoa): +34 916 60 65 78, dachser-spain.iberia@dachser.com. Öffnungszeiten oder Gesprächskosten sind nicht angegeben.
 - **Portugal:** DACHSER Portugal, Vila do Conde: +351 221 210 500 (Anruf ins nationale Festnetz), dieselbe E-Mail-Adresse. Keine Öffnungszeiten genannt.
 - **Formulare und Niederlassungen:** dachser.es und dachser.pt bieten jeweils ein Kontaktformular, dachser.es zusätzlich eine Standortsuche.
 - **Beschwerden in Portugal:** dachser.pt verlinkt auf das offizielle Beschwerdebuch (*Livro de Reclamações*).
@@ -92,17 +92,17 @@ Dachser veröffentlicht keine eigene Empfänger-Hotline. Auf den offiziellen spa
 
 ## Eine Dachser-Lieferung mit Peek verfolgen
 
-[Peek](/) verfolgt mehr als 4500 Paketdienste, kann eine Dachser-Nummer aber weder an ihren Ziffern erkennen noch ohne Schlüssel abfragen: Füge daher den vollständigen Link aus deiner Nachricht ein – Peek erkennt ihn als Dachser-Link und speichert ihn. Hast du nur die Nummer eingegeben, tippe auf „Ändern“ (oder „Paketdienst ändern“), wähle Dachser und füge den Link im Feld „Vollständiger Tracking-Link“ ein. Ein Link mit anderer Adresse, fehlendem Schlüssel, unbekanntem Parameter oder anderer Nummer wird abgewiesen mit „Nutze den vollständigen Tracking-Link aus deiner Versandmail.“.
+[Peek](/) verfolgt mehr als 4500 Paketdienste, kann eine Dachser-Nummer aber weder an ihren Ziffern erkennen noch ohne Schlüssel abfragen: Füge daher den vollständigen Link aus deiner Nachricht ein – Peek erkennt ihn als Dachser-Link und speichert ihn. Hast du nur die Nummer eingegeben, tippe auf „Ändern“ (oder „Paketdienst ändern“), wähle Dachser und füge den Link im Feld „Vollständiger Tracking-Link“ ein. Ein Link mit anderer Adresse, fehlendem Schlüssel, unbekanntem Parameter oder anderer Nummer wird abgewiesen; fehlt der Link, zeigt Peek „Nutze den vollständigen Tracking-Link aus deiner Versandmail.“.
 
-Peek liest ausschließlich die Seite Customer Iberia und deckt somit Dachser-Lieferungen in Spanien und Portugal ab. Es zeigt den Status, den Verlauf und das voraussichtliche Lieferdatum, bis die Sendung in Zustellung ist. Jeder Schritt erscheint im eigenen Wortlaut von Peek – etwa „Sendungsdaten erhalten“, „Sendung übernommen“, „Sendung in einem Dachser-Depot eingetroffen“, „In Zustellung“, „Liefertermin aktualisiert“ oder „Zugestellt“ – ohne Dachsers Originaltext zu speichern. Uhrzeiten werden in der von Dachser angegebenen Zeitzone gelesen, sonst als Madrider Zeit, und in der Zeitzone deines Geräts angezeigt. Da Dachser keine Orte liefert, erscheint kaum etwas auf der Karte. Absender, Kontaktdaten und Unterschrift werden verworfen (und Peek zeigt keine personenbezogenen Empfängerdaten an). Bleibt eine Sendung stehen, verlinkt Peek die Kontaktseite unter „Hol dir Hilfe bei Dachser“.
+Peek liest ausschließlich die Seite Customer Iberia und deckt somit Dachser-Lieferungen in Spanien und Portugal ab. Es zeigt den Status, den Verlauf und das voraussichtliche Lieferdatum, bis die Sendung in Zustellung ist. Jeder Schritt erscheint im eigenen Wortlaut von Peek – etwa „Sendungsdaten erhalten“, „Sendung übernommen“, „Sendung in einem Dachser-Depot eingetroffen“, „In Zustellung“, „Liefertermin aktualisiert“ oder „Zugestellt“ – ohne Dachsers Originaltext zu speichern. Uhrzeiten werden in der von Dachser angegebenen Zeitzone gelesen, sonst als Madrider Zeit, und in der Zeitzone deines Geräts angezeigt. Da Dachser keine Orte liefert, erscheint kaum etwas auf der Karte. Absender, Kontaktdaten und Unterschrift werden verworfen. Bleibt eine Sendung stehen, verlinkt Peek die Kontaktseite unter „Hol dir Hilfe bei Dachser“.
 
-Solange Dachsers Tracker antwortet, prüft Peek bis zu alle 10 Minuten, wenn du die Sendung auf dem Bildschirm geöffnet hast oder am erwarteten Liefertag Benachrichtigungen aktiv sind. Ab 6:00 Uhr auf der Uhr des Paketdienstes am Tag der Zustellung können Prüfungen alle 2 Minuten laufen, solange die Sendung geöffnet ist oder Mitteilungen eingeschaltet sind (bei angegebenem Zeitfenster frühestens eine halbe Stunde vor dessen Beginn). Im Hintergrund ohne Mitteilungen sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange der Status auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Antwortet nur ein Tracking-Dienst, prüft Peek stündlich (alle 3 Stunden, sobald der letzte Scan einen Tag alt ist) oder bis zu alle 15 Minuten am Tag der Zustellung bei geöffneter Ansicht oder aktiven Mitteilungen. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Eine unbekannte Sendung oder ein defekter Link kann als nicht gefunden oder als fehlgeschlagene Abfrage erscheinen.
+Solange Dachsers Tracker antwortet, prüft Peek bis zu alle 10 Minuten, wenn du die Sendung auf dem Bildschirm geöffnet hast oder am erwarteten Liefertag Benachrichtigungen aktiv sind. Ab 6:00 Uhr auf der Uhr des Paketdienstes am Tag der Zustellung können Prüfungen alle 2 Minuten laufen, solange die Sendung geöffnet ist oder Mitteilungen eingeschaltet sind. Im Hintergrund ohne Mitteilungen sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange der Status auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Antwortet nur ein Tracking-Dienst, prüft Peek stündlich (alle 3 Stunden, sobald der letzte Scan einen Tag alt ist) oder bis zu alle 15 Minuten am Tag der Zustellung bei geöffneter Ansicht oder aktiven Mitteilungen. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Eine unbekannte Sendung oder ein defekter Link kann als nicht gefunden oder als fehlgeschlagene Abfrage erscheinen.
 
 ## Fragen zur Dachser-Sendungsverfolgung
 
 ### Wo hat Dachser seinen Sitz?
 
-In Kempten, Deutschland: Die DACHSER SE ist ein Familienunternehmen, das 1930 von Thomas Dachser gegründet wurde. Der regionale Hauptsitz von DACHSER Spain liegt in Coslada bei Madrid, DACHSER Portugal in Vila do Conde.
+In Kempten, Deutschland: Die DACHSER SE ist ein Familienunternehmen, das 1930 von Thomas Dachser gegründet wurde. Der Sitz der DACHSER Spain, S.A. liegt in Zubieta (Guipúzcoa), DACHSER Portugal in Vila do Conde.
 
 ### Liefert Dachser an Privatadressen?
 
@@ -110,7 +110,7 @@ Ja, wenn der Shop das bucht: targo on-site liefert an Privatkunden nach Terminve
 
 ### Kann ich einen Dachser-Liefertermin ändern?
 
-Manchmal. Zeigt die Customer-Iberia-Seite die Schaltfläche zum Festlegen des Lieferdatums („Arrange delivery date.“ / „Concertar Fecha“), wähle dort Tag und Zeitfenster; sonst nimm den Anruf von Dachser entgegen oder frage den Shop.
+Manchmal. Zeigt die Customer-Iberia-Seite die Schaltfläche zum Festlegen des Lieferdatums („Arrange date.“ / „Concertar Fecha“), wähle dort Tag und Zeitfenster; sonst nimm den Anruf von Dachser entgegen oder frage den Shop.
 
 :::sources
 - [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – telefonische Terminabsprache, Sonn- und Samstage, Richtlaufzeiten, Kosten bei fehlgeschlagener Zustellung, Zusatzleistungen, Reklamationen
@@ -118,7 +118,7 @@ Manchmal. Zeigt die Customer-Iberia-Seite die Schaltfläche zum Festlegen des Li
 - [DACHSER Spain: targo on-site fix permite fijar una fecha de entrega al realizar un pedido](https://www.dachser.es/es/mediaroom/DACHSER-amplia-su-cartera-de-servicios-para-entregas-B2C-24216) – targo on-site, Bordsteinkante, plus, fix
 - [DACHSER Portugal: DACHSER disponibiliza serviço entargo em Portugal e Espanha](https://www.dachser.pt/pt/mediaroom/DACHSER-disponibiliza-servico-entargo-em-Portugal-e-Espanha-16917) – Terminlieferung vormittags und nachmittags
 - [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116) – Tracking-Link für Kunden
-- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273) – Gesellschaft, Coslada, Telefon, E-Mail, DACHSER SE
+- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273) – Gesellschaft, Zubieta, Telefon, E-Mail, DACHSER SE
 - [DACHSER Portugal: Aviso legal](https://www.dachser.pt/pt/aviso-legal-273) – Gesellschaft, Vila do Conde, Telefon, E-Mail
 - [DACHSER Spain: Contacto](https://www.dachser.es/es/contacto-275) – Kontaktformular
 - [DACHSER Portugal: Contacto](https://www.dachser.pt/pt/contacto-275) – Kontaktformular

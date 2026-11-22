@@ -61,7 +61,7 @@
   { "id": "amazon-shipping", "catalog": "amazon-shipping", "name": "Amazon Shipping", "languages": ["en", "de", "fr", "it", "es", "pl", "pt"] },
   { "id": "postnord", "catalog": "postnord", "name": "PostNord", "languages": ["en", "da", "sv", "nb", "fi"] },
   { "id": "bring", "catalog": "bring-posten", "name": "Bring", "languages": ["en", "nb", "sv", "da"] },
-  { "id": "posti", "catalog": "posti", "name": "Posti", "languages": ["en", "fi", "et", "sv"] },
+  { "id": "posti", "catalog": "posti", "name": "Posti", "languages": ["en", "fi", "et", "sv", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "omniva", "catalog": "omniva", "name": "Omniva", "languages": ["en", "lt", "et", "lv", "pl"] },
   { "id": "ppl", "catalog": "ppl", "name": "PPL", "languages": ["en", "cs"] },
   { "id": "box-now", "catalog": "box-now", "name": "BOX NOW", "languages": ["en", "el", "bg", "hr", "sl"] },

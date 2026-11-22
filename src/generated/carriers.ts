@@ -2356,6 +2356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "posti-sendungsverfolgung",
+      "title": "Posti Sendungsverfolgung: JJFI-Code, Status & Kontakt",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
+    {
       "id": "heppner",
       "catalog": "heppner",
       "slug": "heppner-sendungsverfolgung",
@@ -3340,6 +3348,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping suivi\u00a0: numéro de suivi et colis non reçu",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "suivi-posti",
+      "title": "Suivi Posti\u00a0: code JJFI, statuts, consignes et contact",
+      "name": "Posti",
+      "color": "#ff8000"
     },
     {
       "id": "dhl-ecommerce-nl",
@@ -4344,6 +4360,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "tracciamento-posti",
+      "title": "Tracciamento Posti: codice JJFI, stati, locker e contatti",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-tracciamento",
@@ -5274,6 +5298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "seguimiento-posti",
+      "title": "Seguimiento Posti: código JJFI, estados y contacto",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-seguimiento",
@@ -6202,6 +6234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping seguimento: número PT ou ES e o que fazer",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "rastreio-posti",
+      "title": "Rastreio Posti: código JJFI, estados, cacifos e contactos",
+      "name": "Posti",
+      "color": "#ff8000"
     },
     {
       "id": "geodis",
@@ -7150,6 +7190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping śledzenie: numer przesyłki, statusy i pomoc",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "sledzenie-posti",
+      "title": "Śledzenie Posti: kod JJFI, statusy, automaty i kontakt",
+      "name": "Posti",
+      "color": "#ff8000"
     },
     {
       "id": "omniva",

@@ -4,7 +4,7 @@ description: Suivre un colis Vinted, acheteur ou vendeur : qui le livre en Franc
 slug: suivi-colis-vinted
 picture: Deux téléphones, celui d'une vendeuse et celui d'un acheteur, entre lesquels un colis voyage en camionnette, et un Pip tout joyeux.
 published: 2026-10-16
-updated: 2026-11-09
+updated: 2026-11-22
 ---
 
 Sur Vinted, c'est l'acheteur qui choisit le transporteur et paie le bordereau en commandant ; le vendeur le reçoit sous forme de bordereau prépayé ou de code, et a 5 jours ouvrés pour déposer le colis. Tous deux suivent le colis dans la conversation de la commande, avec « Suivre le colis », où l'on peut aussi copier le numéro du transporteur. Le suivi peut mettre jusqu'à 48 h à apparaître après le dépôt, et le vendeur n'est payé qu'une fois que l'acheteur a confirmé que tout est en ordre, ou 2 jours après la livraison.
@@ -131,7 +131,7 @@ La politique de remboursement de Vinted couvre les achats faits avec le bouton �
 
 ## Peut-on suivre un colis Vinted en dehors de l'appli ?
 
-Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). Un numéro Vinted Go qui commence par `VGS` et un lien de suivi vintedgo.com sont reconnus tout de suite ; pour un numéro à 16 chiffres, Peek demande à Vinted Go, à DHL eCommerce et à TNT lequel le connaît. Peek reconnaît aussi les autres transporteurs à leur numéro ; pour une forme partagée, comme 8 ou 14 chiffres, appuie sur « Changer » et choisis le transporteur que Vinted indique. Un numéro Mondial Relay à 8 chiffres demande en plus le code postal de livraison. Peek ne peut pas signaler un problème à ta place : ça se passe dans la conversation.
+Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). Un numéro Vinted Go qui commence par `VGS` et un lien de suivi vintedgo.com sont reconnus tout de suite ; pour un numéro à 16 chiffres, Peek demande à Vinted Go et à DHL eCommerce lequel le connaît. Peek reconnaît aussi les autres transporteurs à leur numéro ; pour une forme partagée, comme 8 ou 14 chiffres, appuie sur « Changer » et choisis le transporteur que Vinted indique. Un numéro Mondial Relay à 8 chiffres demande en plus le code postal de livraison. Peek ne peut pas signaler un problème à ta place : ça se passe dans la conversation.
 
 :::sources
 - [Vinted : Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.fr/help/234) – transporteurs en France, pays reliés, bordereau ou code, annulation

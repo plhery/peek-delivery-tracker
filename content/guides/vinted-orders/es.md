@@ -4,7 +4,7 @@ description: Sigue un paquete de Vinted como comprador o vendedor: qué empresa 
 slug: seguimiento-envio-vinted
 picture: Dos móviles, el de una vendedora y el de un comprador, entre los que viaja un paquete en una furgoneta, y un Pip muy contento.
 published: 2026-10-16
-updated: 2026-11-09
+updated: 2026-11-22
 ---
 
 En Vinted, el comprador elige la empresa de paquetería y paga el envío al comprar; el vendedor recibe una etiqueta prepagada o un código, y tiene 5 días laborables para enviar el paquete. Los dos lo siguen en la conversación del pedido con «Rastrear paquete», donde también puedes copiar el número de seguimiento. El seguimiento puede tardar hasta 48 horas en aparecer, y el vendedor cobra cuando el comprador pulsa «Todo está bien» o 2 días después de la entrega.
@@ -134,7 +134,7 @@ La política de reembolso de Vinted cubre las compras hechas con «Comprar» a m
 
 ## ¿Se puede seguir un paquete de Vinted fuera de la app?
 
-Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Un número de Vinted Go que empieza por `VGS` y un enlace de vintedgo.com se reconocen al momento; con un número de 16 cifras, Peek pregunta a Vinted Go, a DHL eCommerce y a TNT cuál lo conoce. Peek también reconoce Correos, SEUR y DHL Express por su número; con una forma compartida, como 10 o 14 cifras, pulsa «Cambiar» y elige la empresa que indica Vinted. Un número de InPost de 8 cifras lo reconoce como Mondial Relay y pide además el código postal de entrega; si no aparece, síguelo en Vinted. Con GLS y con Ontime, si Peek no da con la empresa, pulsa «Cambiar» y búscala por su nombre; GLS pide además el código postal de entrega. Los problemas se avisan en la conversación del pedido, no en Peek.
+Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Un número de Vinted Go que empieza por `VGS` y un enlace de vintedgo.com se reconocen al momento; con un número de 16 cifras, Peek pregunta a Vinted Go y a DHL eCommerce cuál lo conoce. Peek también reconoce Correos, SEUR y DHL Express por su número; con una forma compartida, como 10 o 14 cifras, pulsa «Cambiar» y elige la empresa que indica Vinted. Un número de InPost de 8 cifras lo reconoce como Mondial Relay y pide además el código postal de entrega; si no aparece, síguelo en Vinted. Con GLS y con Ontime, si Peek no da con la empresa, pulsa «Cambiar» y búscala por su nombre; GLS pide además el código postal de entrega. Los problemas se avisan en la conversación del pedido, no en Peek.
 
 :::sources
 - [Vinted: Enviar en Vinted](https://www.vinted.es/help/234) – empresas, países conectados, etiqueta o código, cancelación

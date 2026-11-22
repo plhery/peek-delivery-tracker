@@ -4,7 +4,7 @@ description: Seguir uma encomenda Vinted em Portugal, a comprar ou a vender: que
 slug: seguimento-encomenda-vinted
 picture: Dois telemóveis, o de quem vende e o de quem compra, com uma encomenda a viajar entre eles numa carrinha, e um Pip bem-disposto.
 published: 2026-10-16
-updated: 2026-11-09
+updated: 2026-11-22
 ---
 
 Na Vinted, é quem compra que escolhe a transportadora e paga a etiqueta; quem vende recebe-a como etiqueta pré-paga ou código QR e tem 5 dias úteis para enviar a encomenda. Os dois seguem-na no ecrã da conversa do pedido, em «Acompanhar encomenda», onde também podes copiar o código de acompanhamento da transportadora. O acompanhamento pode demorar até 48 horas a aparecer depois do envio, e quem vende só recebe o pagamento quando quem compra confirma que está tudo OK, ou 2 dias depois da entrega.
@@ -133,7 +133,7 @@ A Política de Reembolso da Vinted cobre as compras feitas com o botão de compr
 
 ## Posso seguir uma encomenda Vinted fora da app?
 
-Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um número Vinted Go que comece por `VGS` e um link de acompanhamento do vintedgo.com são reconhecidos logo; num número de 16 algarismos, o Peek pergunta à Vinted Go, à DHL eCommerce e à TNT qual delas o conhece. O Peek também reconhece pela forma os outros números da tabela; numa forma partilhada, como 10 algarismos, pode ser preciso pressionar «Alterar» e escolher a transportadora que a Vinted indica. Um número de 8 algarismos pede ainda o código postal de entrega. Os 14 algarismos da DPD Portugal são uma forma partilhada: se o Peek não a indicar, pressiona «Alterar» e escolhe a DPD Portugal. E não pode comunicar um problema por ti: isso faz-se na conversa do pedido.
+Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um número Vinted Go que comece por `VGS` e um link de acompanhamento do vintedgo.com são reconhecidos logo; num número de 16 algarismos, o Peek pergunta à Vinted Go e à DHL eCommerce qual delas o conhece. O Peek também reconhece pela forma os outros números da tabela; numa forma partilhada, como 10 algarismos, pode ser preciso pressionar «Alterar» e escolher a transportadora que a Vinted indica. Um número de 8 algarismos pede ainda o código postal de entrega. Os 14 algarismos da DPD Portugal são uma forma partilhada: se o Peek não a indicar, pressiona «Alterar» e escolhe a DPD Portugal. E não pode comunicar um problema por ti: isso faz-se na conversa do pedido.
 
 :::sources
 - [Vinted: Envio na Vinted](https://www.vinted.pt/help/234) – transportadoras, países ligados, cancelamento, transportadoras padrão

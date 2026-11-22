@@ -3148,6 +3148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "dpd-niederlande-sendungsverfolgung",
+      "title": "DPD Niederlande Sendungsverfolgung: Status & Kontakt",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "ozon-sendungsverfolgung",
@@ -4414,6 +4422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "suivi-dpd-pays-bas",
+      "title": "Suivi DPD Pays-Bas\u00a0: statuts, livraison et contact",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "suivi-ozon",
@@ -5630,6 +5646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Jifan: numeri JFGJ, stati e ora di Pechino",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "tracciamento-dpd-paesi-bassi",
+      "title": "Tracciamento DPD Paesi Bassi: stati, consegna e contatti",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
     },
     {
       "id": "ozon-logistics",
@@ -6850,6 +6874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "seguimiento-dpd-paises-bajos",
+      "title": "Seguimiento DPD Países Bajos: estados, entrega y contacto",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "seguimiento-ozon",
@@ -8026,6 +8058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Jifan: números JFGJ, estados e hora de Pequim",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "seguimento-dpd-paises-baixos",
+      "title": "Seguimento DPD Países Baixos: estados, entrega e contacto",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
     },
     {
       "id": "ozon-logistics",
@@ -9270,6 +9310,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jifan: numery JFGJ, statusy i czas pekiński",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "sledzenie-dpd-holandia",
+      "title": "Śledzenie DPD Holandia: statusy, doręczenie i kontakt",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
     },
     {
       "id": "ozon-logistics",

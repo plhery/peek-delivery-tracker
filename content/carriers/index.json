@@ -213,7 +213,7 @@
   { "id": "far-international", "catalog": "far-international", "name": "FAR International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en"] },
-  { "id": "dpd-nl", "catalog": "dpd-nl", "name": "DPD Netherlands", "languages": ["en"] },
+  { "id": "dpd-nl", "catalog": "dpd-nl", "name": "DPD Netherlands", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en"] },
   { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "citymail", "catalog": "citymail", "name": "CityMail", "languages": ["en"] },

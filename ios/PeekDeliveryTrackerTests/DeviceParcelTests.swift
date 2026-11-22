@@ -734,13 +734,24 @@ final class DeviceParcelTests: XCTestCase {
         }
     }
 
+    /// Waits for work the store starts on its own, such as asking `/maintenance.json`, for up to two seconds. A test
+    /// whose store found the server down waits for that before its transport goes: a request made on a transport
+    /// already gone stops the whole run.
+    @MainActor private func waitUntil(_ condition: () -> Bool) async {
+        for _ in 0..<100 where !condition() { try? await Task.sleep(for: .milliseconds(20)) }
+    }
+
     /// Without an account, the list keeps the device's parcels through the server down and says how old they are; the
     /// next round that reads one takes the notice away.
     @MainActor func testAGuestsListKeepsItsParcelsThroughTheServerDownAndSaysSo() async throws {
         let transport = PostcodeTestURLProtocol.transport()
         defer { transport.invalidateAndCancel() }
         // /maintenance.json is the app's own 404 page before the edge is in front.
-        PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
+        nonisolated(unsafe) var asked: [String] = []
+        PostcodeTestURLProtocol.handler = { request in
+            asked.append(request.url?.path ?? "")
+            return (404, Data("<!doctype html><title>Not found</title>".utf8))
+        }
         let id = UUID()
         let checkedAt = Date().addingTimeInterval(-5)
         let storage = Memory()
@@ -767,6 +778,8 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(store.errorMessage)
         XCTAssertEqual(store.listReadAt, checkedAt)
         XCTAssertEqual(storage.keys, ["22222222222A": key])
+        await waitUntil { asked.contains("/maintenance.json") }
+        XCTAssertTrue(asked.contains("/maintenance.json"))
 
         down = false
         await store.load()
@@ -780,7 +793,11 @@ final class DeviceParcelTests: XCTestCase {
     @MainActor func testAGuestWhoRemovedTheirLastParcelLosesTheNoticeOnceTheServiceForgetsIt() async throws {
         let transport = PostcodeTestURLProtocol.transport()
         defer { transport.invalidateAndCancel() }
-        PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
+        nonisolated(unsafe) var asked: [String] = []
+        PostcodeTestURLProtocol.handler = { request in
+            asked.append(request.url?.path ?? "")
+            return (404, Data("<!doctype html><title>Not found</title>".utf8))
+        }
         let id = UUID()
         let storage = Memory()
         storage.keys = ["22222222222A": key]
@@ -801,6 +818,8 @@ final class DeviceParcelTests: XCTestCase {
         try await store.refreshAll()
         await store.load()
         XCTAssertEqual(store.serverDown, .unannounced)
+        await waitUntil { asked.contains("/maintenance.json") }
+        XCTAssertTrue(asked.contains("/maintenance.json"))
         try await store.permanentlyDelete(XCTUnwrap(store.parcels.first))
         XCTAssertTrue(store.parcels.isEmpty)
         XCTAssertEqual(store.serverDown, .unannounced)

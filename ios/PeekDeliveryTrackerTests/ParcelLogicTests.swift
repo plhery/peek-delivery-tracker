@@ -3911,10 +3911,18 @@ extension SessionIsolationTests {
         let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
         try await authorize(session)
         let store = store(session, transport)
-        respond(Data("{\"error\":\"Authentication temporarily unavailable\"}".utf8), status: 503)
+        nonisolated(unsafe) var asked: [String] = []
+        SessionTestURLProtocol.handler = { request, complete in
+            asked.append(request.url?.path ?? "")
+            complete(.success((503, Data("{\"error\":\"Authentication temporarily unavailable\"}".utf8))))
+        }
         await store.load()
         XCTAssertNotNil(session.user)
         XCTAssertFalse(store.authenticationRequired)
+        // The server down, the store asks /maintenance.json on its own: asked on the transport once it is gone, it
+        // would stop the whole run.
+        await waitUntil { asked.contains("/maintenance.json") }
+        XCTAssertTrue(asked.contains("/maintenance.json"))
     }
 
     func testEqualTimeEventsPreferDeliveryProgressRegardlessOfUUIDOrTimeZone() {

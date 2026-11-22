@@ -577,14 +577,15 @@ Each row names the lane that acts on it:
 - **carriers**: an unknown or ambiguous number format, one that repeats, a detection rule that missed, a
   carrier missing from the catalog, a reader's answer about a parcel with no carrier or the
   wrong one;
-- **adapters**: a carrier without an adapter, a failing adapter or provider, an adapter that
-  refuses a number its carrier issues or answers it only in part with no provider filling in
+- **adapters**: a carrier without an adapter, a failing adapter or provider (asked at the latest
+  check and ended without history: `adapter` and how its lookup ended, such as `rate_limited` or
+  `not_found`), an adapter that refuses a number its carrier issues or answers it only in part with no provider filling in
   the rest, without movement, on
   local clocks only, without dates or behind a provider's delivered or returned stage, a scan dated in the future, wording no map reads, a reader's answer that a carrier's status, steps,
   times or places are off;
 - **captcha**: an adapter stopped by a verification or captcha page;
 - **delivery-tracker**: the app's routing, such as parcels left with a provider although
-  their carrier's adapter answers other parcels and was not asked for them (for a parcel
+  their carrier's adapter answers other parcels and was not asked for them at the latest check (for a parcel
   filed under a carrier only providers track, the carrier a provider names as delivering it) or had its answer
   set aside as older than the parcel's newest scan without the parcel showing that answer's
   newest scan, a check whose worker died, a generated track (`looping_track`), a stage that went

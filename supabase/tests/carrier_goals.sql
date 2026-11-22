@@ -478,6 +478,39 @@ begin
 end;
 $$;
 
+-- asked: La Poste was asked at the latest check and rate-limited it, and routing keeps no failure of it, as when a
+-- provider's answer served that check (iMile at a parcel's first check); missing: La Poste was asked and had no such
+-- parcel, with no trail to read.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-0000000000ff', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0035', 'la-poste',
+    'in_transit', 'ok', now() - interval '1 hour', now() - interval '6 minutes', '{"tracking_provider": "ParcelsApp"}'),
+  ('f4000000-0000-4000-8000-000000000100', 'f4000000-0000-4000-8000-000000000001', false, 'GOALS0036', 'la-poste',
+    'in_transit', 'ok', now() - interval '1 hour', now() - interval '6 minutes', '{"tracking_provider": "ParcelsApp"}');
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome, lookups, started_at, completed_at)
+values
+  ('f4000000-0000-4000-8000-0000000000c7', 'f4000000-0000-4000-8000-0000000000ff', 'added', 'la-poste', 'unknown',
+    'updated', '{"la-poste": "error", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes'),
+  ('f4000000-0000-4000-8000-0000000000c8', 'f4000000-0000-4000-8000-000000000100', 'added', 'la-poste', 'unknown',
+    'updated', '{"la-poste": "not_found", "ParcelsApp": "success"}', now() - interval '6 minutes', now() - interval '6 minutes');
+insert into public.tracking_sync_steps (attempt_id, sequence, step, status, details)
+values ('f4000000-0000-4000-8000-0000000000c7', 3, 'fetch', 'succeeded',
+  '{"lookup_trail": "la-poste direct:ok>direct:rate_limited; ParcelsApp api:ok"}');
+
+-- A carrier the latest check asked is not "not asked": its lookup says how it ended.
+do $$
+begin
+  if (select array_agg(row(tracking_number, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number in ('GOALS0035', 'GOALS0036'))
+      is distinct from array[
+        row('GOALS0035', 'adapter rate_limited', 'transport', 'adapters')::text,
+        row('GOALS0036', 'adapter not_found', 'adapter refuses', 'adapters')::text] then
+    raise exception 'A carrier the latest check asked was misread: %', (select array_agg(row(tracking_number, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number in ('GOALS0035', 'GOALS0036'));
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

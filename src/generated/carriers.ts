@@ -3116,6 +3116,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "quantium-solutions-sendungsverfolgung",
+      "title": "Quantium Solutions Sendungsverfolgung: Nummern & Hilfe",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -4374,6 +4382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "suivi-quantium-solutions",
+      "title": "Suivi Quantium Solutions\u00a0: numéros, statuts et assistance",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -5582,6 +5598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento CDEK (СДЭК): codici e stati in italiano",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "tracciamento-quantium-solutions",
+      "title": "Tracciamento Quantium Solutions: codici, stati e supporto",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     },
     {
       "id": "rl-carriers",
@@ -6794,6 +6818,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ea5c1d"
     },
     {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "seguimiento-quantium-solutions",
+      "title": "Seguimiento Quantium Solutions: números, estados y ayuda",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "seguimiento-rl-carriers",
@@ -7962,6 +7994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio CDEK (СДЭК): números e estados em português",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "seguimento-quantium-solutions",
+      "title": "Seguimento Quantium Solutions: números, estados e apoio",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     },
     {
       "id": "rl-carriers",
@@ -9198,6 +9238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CDEK (СДЭК): numery zamówień i statusy",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "sledzenie-quantium-solutions",
+      "title": "Śledzenie Quantium Solutions: numery, statusy i pomoc",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     },
     {
       "id": "rl-carriers",

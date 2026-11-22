@@ -2476,6 +2476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "lietuvos-pastas-sendungsverfolgung",
+      "title": "Lietuvos paštas: Litauische Post & LP Express Tracking",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "ukrposhta-sendungsverfolgung",
@@ -4744,6 +4752,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "tracciamento-lietuvos-pastas",
+      "title": "Tracciamento Lietuvos paštas (Poste Lituane) e LP Express",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "tracciamento-ukrposhta",
@@ -5818,6 +5834,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "seguimiento-lietuvos-pastas",
+      "title": "Seguimiento Lietuvos paštas (Correos de Lituania)",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "ukrposhta",
       "catalog": "ukrposhta",
       "slug": "seguimiento-ukrposhta",
@@ -6882,6 +6906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Pošta Srbije: correios da Sérvia, estados e ajuda",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "rastreio-lietuvos-pastas",
+      "title": "Rastreio Lietuvos paštas (Correios da Lituânia)",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
     },
     {
       "id": "ukrposhta",
@@ -7982,6 +8014,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Pošta Srbije: Poczta Serbska, statusy i kontakt",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "sledzenie-lietuvos-pastas",
+      "title": "Śledzenie Lietuvos paštas (Poczta Litewska) i LP Express",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
     },
     {
       "id": "ukrposhta",

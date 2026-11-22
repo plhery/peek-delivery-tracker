@@ -32,7 +32,7 @@ A página mostra uma barra de passos com títulos em francês e uma frase por ba
 | `En attente` | Em espera: a encomenda segue para a rede da C Chez Vous. Ainda sem data de entrega. |
 | `Prise de rendez-vous` | Marcação de entrega: a C Chez Vous não te consegue contactar para marcar data e pede que ligues. |
 | `En préparation` | A encomenda está na rede da C Chez Vous e a tua data de entrega está marcada. |
-| `En livraison` | A caminho da plataforma regional da C Chez Vous, mantendo a data de entrega marcada. |
+| `En livraison` | A caminho da plataforma regional da C Chez Vous, com a data de entrega marcada. |
 | `Livré` | Entregue em tua casa. |
 | `Annulée` | Há um problema com a encomenda. Liga para o apoio ao cliente. |
 
@@ -99,7 +99,7 @@ O estado no Peek lê «Etiqueta criada» enquanto o pedido está registado e a e
 
 Alguns limites. `En livraison` permanece «Em trânsito» no Peek, pois o próprio texto da C Chez Vous indica que o pedido ainda segue para a plataforma regional e a página não tem passo de distribuição. O Peek não lê `Annulée`: uma encomenda cancelada simplesmente deixa de avançar.
 
-O Peek deixa de fora a loja, os teus contactos (telefone e e-mail) e os artigos encomendados. Enquanto mantiveres a encomenda aberta no Peek, consulta diretamente a C Chez Vous até de 10 em 10 minutos; fora disso, e após dois dias sem novidades (ou 12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Sem passo de distribuição, nunca passa às verificações de 2 em 2 minutos no dia da entrega. Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega» — «Só a entrega» envia apenas o alerta «Entregue», enquanto «Passos importantes» também avisa quando uma encomenda no ponto de levantamento fica pronta. Após quatro dias sem novidades numa encomenda em curso, o Peek mostra na tua lista a data do último estado («Sem atualizações desde …») e no ecrã da encomenda «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a C Chez Vous.», com a ligação «Pede ajuda a C Chez Vous» para as perguntas frequentes. Não consegue alterar a tua marcação.
+O Peek deixa de fora a loja, os teus contactos (telefone e e-mail) e os artigos encomendados. Enquanto mantiveres a encomenda aberta no Peek, ou no dia da entrega com os alertas ativados, consulta diretamente a C Chez Vous até de 10 em 10 minutos; fora disso, e após dois dias sem novidades (ou 12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas, exceto no dia da entrega. Sem passo de distribuição, nunca passa às verificações de 2 em 2 minutos no dia da entrega. Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega» — «Só a entrega» envia apenas o alerta «Entregue», enquanto «Passos importantes» também avisa quando uma encomenda no ponto de levantamento fica pronta. Após quatro dias sem novidades numa encomenda em curso, o Peek mostra na tua lista a data do último estado («Sem atualizações desde …») e no ecrã da encomenda «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a C Chez Vous.», com a ligação «Pede ajuda a C Chez Vous» para as perguntas frequentes. Não consegue alterar a tua marcação.
 
 ## Perguntas sobre o seguimento C Chez Vous
 

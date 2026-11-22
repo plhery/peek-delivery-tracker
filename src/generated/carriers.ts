@@ -2756,6 +2756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "yilong-logistics-sendungsverfolgung",
+      "title": "Yilong Logistics Sendungsverfolgung: YIL-Nummern & Status",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "huaya-express-sendungsverfolgung",
@@ -3862,6 +3870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "suivi-yilong-logistics",
+      "title": "Suivi Yilong Logistics\u00a0: numéros YIL…WL et statuts",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "suivi-huaya-express",
@@ -4896,6 +4912,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "tracciamento-yilong-logistics",
+      "title": "Tracciamento Yilong Logistics: codici YIL…WL e stati",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "tracciamento-huaya-express",
@@ -5914,6 +5938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "seguimiento-yilong-logistics",
+      "title": "Seguimiento Yilong Logistics: códigos YIL…WL y estados",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
+    },
+    {
       "id": "quick-rabbit",
       "catalog": "quick-rabbit",
       "slug": "quick-rabbit-seguimiento",
@@ -6922,6 +6954,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Speedaf Express: número, estados e apoio",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "rastreio-yilong-logistics",
+      "title": "Rastreio Yilong Logistics: códigos YIL…WL e estados",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
     },
     {
       "id": "huaya-express",
@@ -7982,6 +8022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Speedaf Express: numery i statusy",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "sledzenie-yilong-logistics",
+      "title": "Śledzenie Yilong Logistics: numery YIL…WL i statusy",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
     },
     {
       "id": "huaya-express",

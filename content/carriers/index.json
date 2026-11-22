@@ -157,7 +157,7 @@
   { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en", "pt", "es", "de", "fr", "it", "pl"] },
   { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] },
+  { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en", "es"] },
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en"] },

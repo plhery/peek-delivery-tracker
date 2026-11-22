@@ -22,10 +22,10 @@ Typed on its own, a Dachser number looks like many other carriers' numbers (digi
 
 | Number | What a tracker makes of it |
 | --- | --- |
-| `1234567890` | 10 digits: [DHL](carrier:dhl-express), Mondial Relay and others. |
-| `12345678901` | 11 digits: GLS and others. |
-| `123456789012` | 12 digits: [FedEx](carrier:fedex), MRW, BRT and others. |
-| `1234567890123` | 13 digits: [DPD France](carrier:dpd-fr), Delhivery and others. |
+| `4829105736` | 10 digits: [DHL](carrier:dhl), Mondial Relay and others. |
+| `48291057362` | 11 digits: GLS and others. |
+| `482910573621` | 12 digits: MRW, BRT and others. |
+| `4829105736214` | 13 digits: Delhivery and others. |
 | `19999999999980` | 14 digits: SEUR, DPD and others. |
 
 If your message names Dachser, trust that over the length of the number.
@@ -57,7 +57,7 @@ The confusing ones:
 
 **Appointments.** Dachser's Spanish terms say targo on-site deliveries have no set delivery time and are usually arranged by phone with the recipient, so expect a call. Dachser describes targo on-site as delivery by appointment, at the kerb, in the morning or the afternoon. With targo on-site plus, the goods are carried to where you'll use them, and in some countries evening or Saturday delivery is possible. With targo on-site fix, you agree a delivery date with the shop when you order.
 
-**Choosing a date.** Some shipments' pages may offer an "Arrange delivery date." button, with a "Delivery date" and a "Time range" to pick and a confirmation to accept. If you don't see it, wait for Dachser's call or ask the shop.
+**Choosing a date.** Some shipments' pages may offer an "Arrange date." button, with a "Delivery date" and a "Time range" to pick and a confirmation to accept. If you don't see it, wait for Dachser's call or ask the shop.
 
 **Days and times.** Dachser has no duty to deliver on Sundays or public holidays. Saturday delivery is only possible with the targospeed 10 and targofix 10 services, arranged with the Dachser branch. Its delivery times are indicative only: they count from the working day after collection, without weekends and holidays.
 
@@ -82,9 +82,9 @@ Keep the goods in their original packaging for Dachser to see, and tell the shop
 
 ## Dachser contact number and customer service
 
-Dachser lists no customer line for recipients. As shown on its Spanish and Portuguese pages on 12 October 2026:
+Dachser lists no customer line for recipients. As shown on its Spanish and Portuguese pages:
 
-- **Spain:** DACHSER Spain, S.A., Regional Head Office Madrid, Coslada: +34 916 60 65 78, dachser-spain.iberia@dachser.com. No hours or call cost are given.
+- **Spain:** DACHSER Spain, S.A., Zubieta (Guipúzcoa): +34 916 60 65 78, dachser-spain.iberia@dachser.com. No hours or call cost are given.
 - **Portugal:** DACHSER Portugal, Vila do Conde: +351 221 210 500 (a national landline call), the same email address. No hours are given.
 - **Forms and branches:** dachser.es and dachser.pt each have a contact form, and dachser.es has a branch finder.
 - **Complaints in Portugal:** dachser.pt links the official complaints book, the Livro de Reclamações.
@@ -92,17 +92,17 @@ Dachser lists no customer line for recipients. As shown on its Spanish and Portu
 
 ## Tracking a Dachser delivery with Peek
 
-[Peek](/) can't tell a Dachser number from its digits or look one up without the key, so paste the complete link from your message: Peek recognises it as Dachser's and keeps it. If you typed the number, press "Change", pick Dachser and paste the link in the "Complete tracking link" field. A link with another address, a missing key, an unknown parameter or a different number is refused with "Use the complete tracking link from your shipping email."
+[Peek](/) can't tell a Dachser number from its digits or look one up without the key, so paste the complete link from your message: Peek recognises it as Dachser's and keeps it. If you typed the number, press "Change", pick Dachser and paste the link in the "Complete tracking link" field. A link with another address, a missing key, an unknown parameter or a different number is refused; without a link, Peek shows "Use the complete tracking link from your shipping email."
 
-It reads the Customer Iberia page only, so it covers Dachser deliveries in Spain and Portugal. It shows the status, the history and the expected delivery day until the parcel is out for delivery. Each step appears in Peek's own words, such as Shipment information received, Shipment collected, Shipment arrived at a Dachser facility, Out for delivery, Delivery appointment updated or Delivered; Dachser's own text isn't kept. Times are read in the time zone Dachser gives, else as Madrid time, and shown in your device's time zone. Dachser gives no places, so there's little to pin on the map. The sender, your name, address, contact details and signature are left out.
+It reads the Customer Iberia page only, so it covers Dachser deliveries in Spain and Portugal. It shows the status, the history and the expected delivery day until the parcel is out for delivery. Each step appears in Peek's own words, such as Shipment information received, Shipment collected, Shipment arrived at a Dachser facility, Out for delivery, Delivery appointment updated or Delivered; Dachser's own text isn't kept. Times are read in the time zone Dachser gives, else as Madrid time, and shown in your device's time zone. Dachser gives no places, so there's little to pin on the map. The sender, your contact details and the signature are left out.
 
-While Dachser's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, on the day the shipment goes out for delivery, checks can run every 2 minutes with the parcel on screen or alerts on. If the carrier gives a delivery window, the faster checks start half an hour before it opens at the earliest. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, or every 15 minutes on the day it goes out for delivery. For checks with the carrier itself, after two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of every scan, important steps or delivery day only. An unknown shipment or a broken link may show as not found or as a failed check.
+While Dachser's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, on the day the shipment goes out for delivery, checks can run every 2 minutes with the parcel on screen or alerts on. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, or up to every 15 minutes on the day it goes out for delivery, with the parcel on screen or alerts on. For checks with the carrier itself, after two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of every scan, important steps or delivery day only. An unknown shipment or a broken link may show as not found or as a failed check.
 
 ## Questions about Dachser tracking
 
 ### Where is Dachser based?
 
-In Kempten, Germany: DACHSER SE is a family-owned group founded by Thomas Dachser in 1930. DACHSER Spain's regional head office is in Coslada, Madrid, and DACHSER Portugal is in Vila do Conde.
+In Kempten, Germany: DACHSER SE is a family-owned group founded by Thomas Dachser in 1930. DACHSER Spain, S.A.'s registered office is in Zubieta (Guipúzcoa), and DACHSER Portugal is in Vila do Conde.
 
 ### Does Dachser deliver to homes?
 
@@ -110,16 +110,16 @@ Yes, when the shop books it: targo on-site delivers to private customers by appo
 
 ### Can I change a Dachser delivery date?
 
-Sometimes. If the Customer Iberia page shows the "Arrange delivery date." button, pick a day and a time range there; otherwise answer Dachser's call or ask the shop.
+Sometimes. If the Customer Iberia page shows the "Arrange date." button, pick a day and a time range there; otherwise answer Dachser's call or ask the shop.
 
 :::sources
 - [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – phone appointments, Sundays, Saturdays, indicative times, missed delivery costs, extras, claims
 - [DACHSER Portugal: Condições gerais de transporte](https://www.dachser.pt/downloads/Portugal/Portugal_Terms_Conditions.zip) – indicative times, missed delivery costs, extras, claims
 - [DACHSER Spain: targo on-site fix permite fijar una fecha de entrega al realizar un pedido](https://www.dachser.es/es/mediaroom/DACHSER-amplia-su-cartera-de-servicios-para-entregas-B2C-24216) – targo on-site, kerbside, plus, fix
 - [DACHSER Portugal: DACHSER disponibiliza serviço entargo em Portugal e Espanha](https://www.dachser.pt/pt/mediaroom/DACHSER-disponibiliza-servico-entargo-em-Portugal-e-Espanha-16917) – appointment delivery, mornings and afternoons
-- [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116.php) – tracking link shared with customers
-- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273.php) – company, Coslada, phone, email, DACHSER SE
-- [DACHSER Portugal: Aviso legal](https://www.dachser.pt/pt/aviso-legal-273.php) – company, Vila do Conde, phone, email
+- [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116) – tracking link shared with customers
+- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273) – company, Zubieta, phone, email, DACHSER SE
+- [DACHSER Portugal: Aviso legal](https://www.dachser.pt/pt/aviso-legal-273) – company, Vila do Conde, phone, email
 - [DACHSER Spain: Contacto](https://www.dachser.es/es/contacto-275) – contact form
 - [DACHSER Portugal: Contacto](https://www.dachser.pt/pt/contacto-275) – contact form
 - [DACHSER Spain: Home](https://www.dachser.es/es/) – Track & Trace opens shipmentpointer
@@ -129,6 +129,6 @@ Sometimes. If the Customer Iberia page shows the "Arrange delivery date." button
 - [Dachser Customer Iberia: Spanish page texts](https://customeriberia.dachser.com/customerarea/assets/i18n/common/es.json) – N.º Único, Historial de Incidencias
 - [Dachser: shipmentpointer help (English)](https://elogistics.dachser.com/help/en/shp.html) – English status texts
 - [Dachser: shipmentpointer, ayuda](https://elogistics.dachser.com/help/es/shp.html) – status examples, tracking link
-- [Dachser: Company](https://www.dachser.com/en/company-10.php) – Kempten, 1930, family-owned
+- [Dachser: Company](https://www.dachser.com/en/company-10) – Kempten, 1930, family-owned
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
 :::

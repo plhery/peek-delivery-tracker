@@ -22,10 +22,10 @@ Escrito sozinho, um número Dachser parece-se com os de muitas outras transporta
 
 | Número | Com que se parece |
 | --- | --- |
-| `1234567890` | 10 algarismos: [DHL](carrier:dhl-express), Mondial Relay e outras. |
-| `12345678901` | 11 algarismos: GLS e outras. |
-| `123456789012` | 12 algarismos: [FedEx](carrier:fedex), MRW, BRT e outras. |
-| `1234567890123` | 13 algarismos: DPD France, Delhivery e outras. |
+| `4829105736` | 10 algarismos: [DHL](carrier:dhl), Mondial Relay e outras. |
+| `48291057362` | 11 algarismos: GLS e outras. |
+| `482910573621` | 12 algarismos: MRW, BRT e outras. |
+| `4829105736214` | 13 algarismos: Delhivery e outras. |
 | `19999999999980` | 14 algarismos: SEUR, DPD e outras. |
 
 Se a mensagem fala da Dachser, confia nela e não no comprimento do número.
@@ -57,7 +57,7 @@ Os que confundem:
 
 **Marcação.** A Dachser descreve o targo on-site como um serviço para envios a particulares entregues sempre com marcação prévia com o destinatário, de manhã ou à tarde, pelo motorista no passeio à porta. Com o targo on-site plus, a entrega é feita no local de utilização. Com o targo on-site fix, combinas com a loja uma data de entrega fixa quando compras. As condições espanholas da Dachser acrescentam que o targo on-site não tem prazo de entrega e que, em geral, a entrega é combinada por telefone com o destinatário: conta com uma chamada.
 
-**Escolher a data.** A página de algumas remessas pode mostrar «Concertar data de entrega», com um «Dia de entrega» e uma «Janela horário» para escolher e uma confirmação. Se não vires essa opção, espera pela chamada da Dachser ou fala com a loja.
+**Escolher a data.** A página de algumas remessas pode mostrar o botão «Concertar Fecha», que abre «Concertar data de entrega», com um «Dia de entrega» e uma «Janela horário» para escolher e uma confirmação. Se não vires essa opção, espera pela chamada da Dachser ou fala com a loja.
 
 **Dias e prazos.** Nas condições espanholas, a Dachser não é obrigada a entregar aos domingos nem feriados, e ao sábado só entrega com os serviços targospeed 10 e targofix 10, combinados com a delegação. Nas condições portuguesas, os prazos de entrega são meramente indicativos: contam a partir do dia útil seguinte ao da recolha da mercadoria, sem sábados, domingos e feriados.
 
@@ -82,21 +82,21 @@ Guarda os volumes na embalagem original, à disposição da Dachser, e avisa a l
 
 ## Dachser contactos em Portugal
 
-A Dachser não publica uma linha de apoio para destinatários. Estes são os contactos que as páginas portuguesa e espanhola da Dachser indicavam a 12 de outubro de 2026:
+A Dachser não publica uma linha de apoio para destinatários. Estes são os contactos que as páginas portuguesa e espanhola da Dachser indicam:
 
 - **Portugal:** DACHSER Portugal, S.U. Lda, Rua Agra Nova 120, Aveleda, 4485-040 Vila do Conde. Telefone +351 221 210 500 (chamada para a rede fixa nacional), e-mail dachser-spain.iberia@dachser.com. Não há horário publicado.
 - **Formulário:** o dachser.pt tem uma página de contacto com formulário.
 - **Reclamações:** o dachser.pt liga ao Livro de Reclamações oficial.
-- **Espanha:** DACHSER Spain, S.A., sede regional de Madrid, em Coslada: +34 916 60 65 78, o mesmo e-mail. Sem horário nem custo da chamada.
+- **Espanha:** DACHSER Spain, S.A., Zubieta (Guipúzcoa): +34 916 60 65 78, o mesmo e-mail. Sem horário nem custo da chamada.
 - **Alemanha:** DACHSER SE, Kempten: +49 831 5916 0, info@dachser.com.
 
 ## Seguir encomenda Dachser com o Peek
 
-O [Peek](/) não reconhece um número Dachser pelos algarismos nem o consegue procurar sem a chave, por isso cola a ligação completa da tua mensagem: o Peek reconhece-a como da Dachser e guarda-a. Se escreveste o número, toca em «Alterar», escolhe Dachser e cola a ligação no campo «Ligação de seguimento completa». Uma ligação com outro endereço, sem chave, com um parâmetro desconhecido ou de outro número é recusada com «Usa a ligação de seguimento completa do e-mail de envio.»
+O [Peek](/) não reconhece um número Dachser pelos algarismos nem o consegue procurar sem a chave, por isso cola a ligação completa da tua mensagem: o Peek reconhece-a como da Dachser e guarda-a. Se escreveste o número, toca em «Alterar», escolhe Dachser e cola a ligação no campo «Ligação de seguimento completa». Uma ligação com outro endereço, sem chave, com um parâmetro desconhecido ou de outro número é recusada; sem ligação, o Peek mostra «Usa a ligação de seguimento completa do e-mail de envio.»
 
-O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até à entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas são lidas no fuso horário que trazem ou, quando não o têm, como hora de Madrid, e mostradas no fuso horário do teu dispositivo. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, o teu nome, a morada, os contactos e a assinatura ficam de fora.
+O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até a encomenda sair para entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas são lidas no fuso horário que trazem ou, quando não o têm, como hora de Madrid, e mostradas no fuso horário do teu dispositivo. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, os teus contactos e a assinatura ficam de fora.
 
-O Peek verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da Dachser a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações em «Todos os registos», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
+Com a encomenda aberta, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos, e até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da Dachser a responder); caso contrário, de hora a hora. Através de serviços de seguimento, verifica de hora a hora, de 3 em 3 horas quando o último registo já tem um dia e até de 15 em 15 minutos no dia em que a encomenda sai para entrega, com a encomenda aberta ou as notificações ativas. Pode enviar-te notificações em «Todos os registos», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
 
 ## Perguntas sobre o Dachser tracking
 
@@ -114,12 +114,12 @@ A DACHSER Portugal está na Rua Agra Nova 120, em Aveleda, Vila do Conde. O grup
 
 ### Posso mudar a data de entrega da Dachser?
 
-Às vezes. Se a página Customer Iberia mostrar «Concertar data de entrega», escolhe ali o dia e a janela horária; se não, atende a chamada da Dachser ou fala com a loja.
+Às vezes. Se a página Customer Iberia mostrar «Concertar Fecha», escolhe ali o dia e a janela horária; se não, atende a chamada da Dachser ou fala com a loja.
 
 :::sources
 - [DACHSER Portugal: Condições gerais de transporte](https://www.dachser.pt/downloads/Portugal/Portugal_Terms_Conditions.zip) – prazos indicativos, entrega falhada, serviços extra, reclamações em 7 e 21 dias
 - [DACHSER Portugal: DACHSER disponibiliza serviço entargo em Portugal e Espanha](https://www.dachser.pt/pt/mediaroom/DACHSER-disponibiliza-servico-entargo-em-Portugal-e-Espanha-16917) – targo on-site com marcação prévia, manhã e tarde, passeio, local de utilização
-- [DACHSER Portugal: Aviso legal](https://www.dachser.pt/pt/aviso-legal-273.php) – empresa, morada em Vila do Conde, telefone, e-mail
+- [DACHSER Portugal: Aviso legal](https://www.dachser.pt/pt/aviso-legal-273) – empresa, morada em Vila do Conde, telefone, e-mail
 - [DACHSER Portugal: Contacto](https://www.dachser.pt/pt/contacto-275) – formulário de contacto
 - [DACHSER Portugal: página inicial](https://www.dachser.pt/pt/) – Track & Trace abre o shipmentpointer, Livro de Reclamações
 - [Dachser Customer Iberia: textos da página em português](https://customeriberia.dachser.com/customerarea/assets/i18n/common/pt.json) – Número Único, Histórico de Incidências, Concertar data de entrega
@@ -129,7 +129,7 @@ A DACHSER Portugal está na Rua Agra Nova 120, em Aveleda, Vila do Conde. O grup
 - [Dachser Customer Iberia: textos da página em espanhol](https://customeriberia.dachser.com/customerarea/assets/i18n/common/es.json) – N.º Expedición, idiomas da página
 - [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – marcação por telefone, domingos, sábados, transporte internacional
 - [DACHSER Spain: targo on-site fix permite fijar una fecha de entrega al realizar un pedido](https://www.dachser.es/es/mediaroom/DACHSER-amplia-su-cartera-de-servicios-para-entregas-B2C-24216) – targo on-site fix e plus
-- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273.php) – Coslada, telefone, DACHSER SE
-- [Dachser: Company](https://www.dachser.com/en/company-10.php) – Kempten, 1930, empresa familiar
+- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273) – Zubieta, telefone, DACHSER SE
+- [Dachser: Company](https://www.dachser.com/en/company-10) – Kempten, 1930, empresa familiar
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

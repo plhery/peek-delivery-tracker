@@ -22,9 +22,9 @@ Escrito solo, un número de Dachser se parece a los de muchas otras empresas. To
 
 | Número | Con quién se confunde |
 | --- | --- |
-| `1234567890` | 10 cifras: [DHL](carrier:dhl-express), Mondial Relay, DHL eCommerce y otras. |
-| `12345678901` | 11 cifras: GLS y otras. |
-| `123456789012` | 12 cifras: [FedEx](carrier:fedex), MRW, BRT y otras. |
+| `4829105736` | 10 cifras: [DHL](carrier:dhl), Mondial Relay, DHL eCommerce y otras. |
+| `48291057362` | 11 cifras: GLS y otras. |
+| `482910573621` | 12 cifras: MRW, BRT y otras. |
 | `19999999999980` | 14 cifras: [SEUR](carrier:seur), DPD y otras. |
 
 Si el mensaje dice Dachser, fíate de eso y no de la longitud del número.
@@ -82,9 +82,9 @@ Pasados esos plazos, se presume que la mercancía se entregó en buen estado sal
 
 ## Dachser España: teléfono y contacto
 
-Dachser no tiene una línea de atención para destinatarios. Esto es lo que publica dachser.es, consultado el 12 de octubre de 2026:
+Dachser no tiene una línea de atención para destinatarios. Esto es lo que publica dachser.es:
 
-- **Oficina central:** DACHSER Spain, S.A., Regional Head Office Madrid, Avda. Europa 1, 28821 Coslada (Madrid). Teléfono +34 916 60 65 78, correo dachser-spain.iberia@dachser.com. No indica horario ni coste de la llamada.
+- **Domicilio social:** DACHSER Spain, S.A., Centro de Transportes de Zubieta (Guipúzcoa), Calle Etzabal n.º 1, C.P. 20160. Teléfono +34 916 60 65 78, correo dachser-spain.iberia@dachser.com. No indica horario ni coste de la llamada.
 - **Formulario:** la página [Contacto](https://www.dachser.es/es/contacto-275) tiene un formulario con temas como «Servicios», «eLogistics» o «Ubicaciones».
 - **Delegaciones:** dachser.es tiene un buscador de centros, «Localizaciones en el mundo».
 - **Correos falsos:** en octubre de 2024 Dachser avisó de correos de phishing con un PDF adjunto que imitaba un formulario de DACHSER. Su consejo: no hagas clic en enlaces ni descargas y consulta a tu interlocutor habitual de DACHSER.
@@ -93,11 +93,11 @@ Dachser no publica ningún teléfono gratuito. Para un pedido, lo más rápido s
 
 ## Seguimiento de Dachser con Peek
 
-[Peek](/) no puede reconocer un número de Dachser por sus cifras ni consultarlo sin la clave, así que pega el enlace completo de tu mensaje: Peek lo reconoce como de Dachser y lo guarda. Si escribiste el número, pulsa «Cambiar transportista», elige Dachser y pega el enlace en el campo «Enlace de seguimiento completo». Un enlace con otra dirección, sin clave, con un parámetro desconocido o de otro número se rechaza con «Usa el enlace de seguimiento completo del correo de envío.»
+[Peek](/) no puede reconocer un número de Dachser por sus cifras ni consultarlo sin la clave, así que pega el enlace completo de tu mensaje: Peek lo reconoce como de Dachser y lo guarda. Si escribiste el número, pulsa «Cambiar transportista», elige Dachser y pega el enlace en el campo «Enlace de seguimiento completo». Un enlace con otra dirección, sin clave, con un parámetro desconocido o de otro número se rechaza; sin enlace, Peek muestra «Usa el enlace de seguimiento completo del correo de envío.»
 
-Peek lee solo la página Customer Iberia, así que cubre las entregas de Dachser en España y Portugal. Muestra el estado, el historial y el día de entrega previsto hasta que sale a reparto. Cada paso sale con las palabras de Peek, como «Información del envío recibida», «Envío admitido», «Llegada a un centro de Dachser», «En reparto», «Cita de entrega actualizada» o «Entregado»; el texto propio de Dachser no se guarda. Las horas se leen en la zona horaria que da Dachser o, si no la traen, como hora de Madrid, y se muestran en la zona horaria de tu dispositivo. Dachser no da lugares, así que en el mapa hay poco que situar. El remitente, tu nombre, tu dirección, tus datos de contacto y la firma se quedan fuera.
+Peek lee solo la página Customer Iberia, así que cubre las entregas de Dachser en España y Portugal. Muestra el estado, el historial y el día de entrega previsto hasta que sale a reparto. Cada paso sale con las palabras de Peek, como «Información del envío recibida», «Envío admitido», «Llegada a un centro de Dachser», «En reparto», «Cita de entrega actualizada» o «Entregado»; el texto propio de Dachser no se guarda. Las horas se leen en la zona horaria que da Dachser o, si no la traen, como hora de Madrid, y se muestran en la zona horaria de tu dispositivo. Dachser no da lugares, así que en el mapa hay poco que situar. El remitente, tus datos de contacto y la firma se quedan fuera.
 
-Peek consulta el seguimiento hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el envío está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Dachser; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el envío sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Un envío desconocido o un enlace roto puede aparecer como no encontrado o como una consulta fallida.
+Mientras tienes el envío abierto, o el día de entrega con las notificaciones activadas, Peek consulta el seguimiento hasta una vez cada 10 minutos, y hasta una vez cada 2 cuando el envío está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Dachser); si no, una vez por hora. Mediante servicios de seguimiento, consulta cada hora, cada 3 horas tras un día sin escaneos nuevos y hasta cada 15 minutos el día en que sale a reparto, mientras lo tienes abierto o con las notificaciones activadas. Puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el envío sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Un envío desconocido o un enlace roto puede aparecer como no encontrado o como una consulta fallida.
 
 ## Preguntas sobre el seguimiento de Dachser
 
@@ -111,7 +111,7 @@ Solo con targospeed 10 y targofix 10, y coordinándolo con la delegación de Dac
 
 ### ¿Tiene Dachser un teléfono gratuito de atención al cliente?
 
-No publica ninguno. El número de su oficina central de Coslada es el +34 916 60 65 78, sin horario indicado; para un pedido, empieza por la tienda.
+No publica ninguno. El número que da DACHSER Spain en su información legal es el +34 916 60 65 78, sin horario indicado; para un pedido, empieza por la tienda.
 
 ### ¿Puedo cambiar la fecha de entrega de Dachser?
 
@@ -120,14 +120,14 @@ A veces. Si la página de tu enlace muestra «Concertar Fecha», elige allí el 
 :::sources
 - [DACHSER Spain: Condiciones generales European Logistics](https://www.dachser.es/downloads/Spain/Spain_Terms_Conditions.zip) – cita por teléfono, domingos, sábados, plazos orientativos, entrega fallida, segundas entregas, reclamaciones
 - [DACHSER Spain: targo on-site fix permite fijar una fecha de entrega al realizar un pedido](https://www.dachser.es/es/mediaroom/DACHSER-amplia-su-cartera-de-servicios-para-entregas-B2C-24216) – targo on-site, acera, plus, fix
-- [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116.php) – enlace de seguimiento compartido con clientes
-- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273.php) – empresa, Coslada, teléfono, correo
+- [DACHSER Spain: eLogistics](https://www.dachser.es/es/elogistics-116) – enlace de seguimiento compartido con clientes
+- [DACHSER Spain: Información legal](https://www.dachser.es/es/informacion-legal-273) – empresa, Zubieta, teléfono, correo
 - [DACHSER Spain: Contacto](https://www.dachser.es/es/contacto-275) – formulario, localizaciones
 - [DACHSER Spain: Inicio](https://www.dachser.es/es/) – Track & Trace abre shipmentpointer
 - [DACHSER Spain: Aumento del número de correos electrónicos de phishing](https://www.dachser.es/es/mediaroom/Aumento-del-numero-de-correos-electronicos-de-phishing-a-clientes-y-partners-de-DACHSER-26725) – aviso de correos falsos
 - [Dachser Customer Iberia: página de seguimiento público](https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle) – la página que abre el enlace
 - [Dachser Customer Iberia: textos de la página en español](https://customeriberia.dachser.com/customerarea/assets/i18n/common/es.json) – N.º Único, Historial de Incidencias, Concertar fecha de entrega
 - [Dachser: ayuda de shipmentpointer](https://elogistics.dachser.com/help/es/shp.html) – textos de los estados, ejemplos, enlace de seguimiento
-- [Dachser: Company](https://www.dachser.com/en/company-10.php) – grupo familiar, Kempten
+- [Dachser: Company](https://www.dachser.com/en/company-10) – grupo familiar, Kempten
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – qué lee y muestra Peek
 :::

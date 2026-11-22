@@ -14,18 +14,18 @@ El buscador de Sending pide «el código de tu envío» y también acepta tu ref
 
 | Número | Qué es |
 | --- | --- |
-| `000000000000` | 12 cifras, incluidos los ceros iniciales: un número de envío de Sending. [MRW](carrier:mrw), [FedEx](carrier:fedex), [Mondial Relay](carrier:mondial-relay) y otros también usan 12 cifras. |
+| `048291057362` | 12 cifras, incluidos los ceros iniciales: un número de envío de Sending. [MRW](carrier:mrw), [FedEx](carrier:fedex), [Mondial Relay](carrier:mondial-relay) y otros también usan 12 cifras. |
 | Una referencia de la tienda o del remitente | El buscador de Sending encuentra el envío con ella; Peek no, necesita las 12 cifras. |
 
 Como 12 cifras encajan con tantos transportistas, comprueba que el correo de la tienda nombra a Sending. Si el buscador responde `LO SENTIMOS, NO HEMOS ENCONTRADO TU ENVIO.`, revisa las cifras y, si están bien, pide a la tienda que te confirme el número y el transportista. ¿No tienes ningún número? Mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 ## Estados del seguimiento de Sending: qué significa cada uno
 
-Arriba, una barra de progreso pasa por `En preparación`, `Tránsito` y `Reparto`, y termina en `Entregada` o en `FALTA DEFINITIVA`. Debajo van los escaneos, del más reciente al más antiguo, agrupados por día, con la hora y la población de la delegación de Sending. Los textos de los escaneos van sin tildes; estos son los que se conocen, en el orden en que suele encontrarlos un paquete:
+Arriba, una barra de progreso pasa por `En preparación`, `Tránsito` y `Reparto`, y termina en `Entregada` o en `FALTA DEFINITIVA`. Debajo van los escaneos, del más reciente al más antiguo, agrupados por día, con la hora y la población de la delegación de Sending. Los textos de los escaneos van sin tildes; estos son los que se conocen, más o menos en el orden en que los encuentra un paquete:
 
 | Estado | Qué significa para ti |
 | --- | --- |
-| `Mercancia recogida` | Sending ya ha recogido el paquete del remitente. |
+| `Mercancia recogida` | Sending ya ha recogido el paquete del remitente; tras un tramo internacional, una delegación de Sending lo ha recibido. |
 | `En transito internacional / in international transit` | Va en un tramo internacional del viaje. |
 | `Salida en ruta nacional` | Ha salido hacia la delegación que reparte en tu zona. |
 | `El envio ha llegado a tu delegacion mas cercana` | Ya está en la delegación que te lo va a entregar. |
@@ -59,7 +59,7 @@ Sending lleva el paquete por encargo de la tienda, así que el reembolso o un nu
 
 ## Sending teléfono y atención al cliente
 
-Así lo indicaba la web de Sending el 30 de octubre de 2026:
+Así lo indica la web de Sending:
 
 - **Teléfono:** +34 919 012 048, para consultas sobre el estado de un envío. No publica horario.
 - **Formulario de contacto:** en su [página de contacto](https://www.sending.es/formulario-contacto/), con cuatro motivos: «Consultas relacionadas con el estado de mi envío», «Condiciones generales del envío y otras consultas», «Solicitud de cambio de dirección y/o datos» y «Quiero presentar el desistimiento de compra». El del estado del envío pide el nombre completo o apodo del remitente, el número de expedición, tu correo, el contenido del paquete con detalle (si es ropa, color, marca y talla) y tu consulta, y admite un adjunto de hasta 3 MB.
@@ -73,13 +73,13 @@ Peek solo acepta las 12 cifras del número de envío: si eliges Sending con otro
 
 Verás el estado y el historial con las palabras de Sending, cada escaneo con la población de su delegación; si un escaneo solo tiene fecha, aparece solo el día. Peek toma la hora de cada escaneo como hora local de su población (hora de Canarias, si la delegación está allí) y la muestra en la zona horaria de tu dispositivo; en peektracker.com y en las apps para iPhone y Android, una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Cuando la barra termina en `Entregada`, Peek da el paquete por entregado aunque los escaneos se queden antes, y con `FALTA DEFINITIVA` lo marca como «Incidencia». Peek deja fuera la referencia del remitente, la franja de entrega, los códigos postales y poblaciones de remitente y destinatario, la delegación de reparto, las opciones de entrega y el nombre de quien firmó, y no muestra peso ni fecha prevista de entrega: la franja, mírala en sending.es.
 
-Mientras tienes el paquete abierto, o el día de entrega con las notificaciones activadas, Peek consulta el seguimiento hasta una vez cada 10 minutos, y hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Sending; a través de servicios de seguimiento, cada 15 minutos). El resto del tiempo, y tras dos días sin novedades (12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista»), Peek consulta una vez por hora. Puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
+Mientras tienes el paquete abierto, o el día de entrega con las notificaciones activadas, Peek consulta el seguimiento hasta una vez cada 10 minutos, y hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Sending). El resto del tiempo, y tras dos días sin novedades (12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista»), Peek consulta una vez por hora. Mediante servicios de seguimiento, consulta cada hora, cada 3 horas tras un día sin escaneos nuevos y hasta cada 15 minutos el día en que sale a reparto, mientras lo tienes abierto o con las notificaciones activadas. Puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
 
 ## Preguntas sobre el seguimiento de Sending
 
 ### ¿Sending es de InPost?
 
-Sí, según InPost: InPost España cuenta que en 2021 sumó Mondial Relay y en 2025 Sending, y la web de Sending lleva ya el logo «Sending by InPost». Los envíos de Sending se siguen en sending.es. La sociedad que figura en su política de privacidad es Sending Transporte y Comunicación, S.A., en Coslada (Madrid). Para los paquetes de InPost España (Locker y Punto Pack), mira [InPost](carrier:inpost).
+Sí, según InPost: InPost España cuenta que en 2021 sumó Mondial Relay y en 2025 Sending, y la web de Sending lleva ya el logo «Sending by InPost». Los envíos de Sending se siguen en sending.es. La sociedad que figura en su política de privacidad es Sending Transporte y Comunicación, S.A., en Coslada (Madrid). Para los paquetes de InPost España (Locker y Punto Pack), que Peek sigue como Mondial Relay, mira [Mondial Relay](carrier:mondial-relay).
 
 ### ¿Cuánto tarda Sending en entregar un paquete?
 

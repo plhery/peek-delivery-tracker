@@ -14,10 +14,10 @@ Type it without spaces or brackets. Tracking covers every item posted with proof
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `PX1234567890` | PX and 10 digits. |
+| `PX4829105734` | PX and 10 digits. |
 | `0015900773123456789` | 19 digits. |
 | `00159007731234567899` | 20 digits, with 5900773 after the first three. |
-| `RR000000005PL` | The international postal format: two letters, nine digits, PL. |
+| `RR482910576PL` | The international postal format: two letters, nine digits, PL. |
 
 Where it turns up:
 
@@ -76,11 +76,11 @@ Poczta Polska's tracking is information only, not a basis for a claim, and it pu
 
 International items: within six months from the day after posting.
 
-**Customs.** Since 1 July 2026, items from outside the EU worth up to €150 carry an EU duty of €3 per type of product, collected by Poczta Polska; gifts between private people up to €45 are exempt. VAT, if unpaid, and Poczta Polska's PLN 20 customs declaration fee (PLN 25 if you handle customs yourself) may be added, payable at delivery or before pickup. You may refuse the item. More in [parcels held at customs](guide:customs).
+**Customs.** Since 1 July 2026, items from outside the EU worth up to €150 carry an EU duty of €3 per type of product, collected by Poczta Polska; gifts between private people up to €45 are exempt. Since 1 November 2026, goods bought online and sent from outside the EU also carry an EU handling fee of €2 per item (identical products can count as one): Poczta Polska collects it from the recipient and passes it to Poland's tax administration (KAS). VAT, if unpaid, and Poczta Polska's PLN 20 customs declaration fee (PLN 25 if you handle customs yourself) may be added, payable at delivery or before pickup. You may refuse the item. More in [parcels held at customs](guide:customs).
 
 ## Poczta Polska contact number and customer service
 
-As read on 11 October 2026 on Poczta Polska's English and Polish pages:
+From Poczta Polska's English and Polish pages:
 
 - **Hotline** +48 438 420 600, Monday to Friday 8:00 to 20:00, at your operator's rates, plus an online inquiry form on the [contact page](https://www.poczta-polska.pl/en/kontakt/).
 - **Pocztex** 804 104 104 from Polish landlines, +48 43 842 0 842 from mobiles and from abroad, Monday to Friday 8:00 to 20:00 and Saturday 8:00 to 16:00.
@@ -91,11 +91,11 @@ As read on 11 October 2026 on Poczta Polska's English and Polish pages:
 
 ## Tracking Poczta Polska parcels with Peek
 
-[Peek](/) recognises `PX` numbers at once, and 20-digit ones with 5900773 after the first three and a valid check digit. It asks Poczta Polska alone about 19-digit numbers starting `00`, adding the check digit as Poczta Polska's site does. A valid international number ending in PL that starts with R, E, L or C (CV aside), such as `RR`, `EE` or `CP`, goes straight to Poczta Polska; another valid one, such as a `VV` number, shows as "Unknown postal carrier" while Peek asks Poczta Polska and Chronopost, and Poczta Polska wins when it knows it. eMonitoring links with `numer=` work too; no postcode is needed.
+[Peek](/) recognises `PX` numbers with a valid check digit at once, and 20-digit ones with 5900773 after the first three and a valid check digit. It asks Poczta Polska alone about 19-digit numbers starting `00`, adding the check digit as Poczta Polska's site does. A valid international number ending in PL that starts with R, E, L or C (CV aside), such as `RR`, `EE` or `CP`, goes straight to Poczta Polska; another valid one, such as a `VV` number, shows as "Unknown postal carrier" while Peek asks Poczta Polska and Chronopost, and Poczta Polska wins when it knows it. eMonitoring links with `numer=` work too; no postcode is needed.
 
 Peek shows the English wordings as written (Poczta Polska's Polish ones if you use Peek in Polish), each post office on a map, the weight, the destination country and the office holding a parcel for pickup. There is no expected delivery date. It drops office addresses, opening hours, payment documents and extra services. Scans relayed from abroad carry no time zone: Peek reads them on the clock of the country they come from. Pallets, grouped consignments and unregistered mail can't be tracked.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Poczta Polska scans the parcel out for delivery, while Poczta Polska's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. A parcel posted abroad to Poland can be followed to Poczta Polska.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Poczta Polska scans the parcel out for delivery, while Poczta Polska's own tracker answers; otherwise hourly. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When only tracking services answer, it checks hourly, every 3 hours once the newest scan is a day old, and up to every 15 minutes on the day the parcel is out for delivery while you have it open or notifications are on. A parcel posted abroad to Poland can be followed to Poczta Polska.
 
 ## Questions about Poczta Polska tracking
 
@@ -133,6 +133,7 @@ Not as the recipient. Poczta Polska's terms leave changes of address or recipien
 - [Poczta Polska: Beware of fake "Pocztex" messages](https://www.poczta-polska.pl/en/news/uwaga-na-falszywe-wiadomosci-pocztex-grozna-kampania-phishingowa/) – fake SMS, 8080
 - [Poczta Polska: Uwaga na fałszywe wiadomości „Pocztex”](https://www.poczta-polska.pl/news/uwaga-na-falszywe-wiadomosci-pocztex-grozna-kampania-phishingowa/) – the same in Polish, Contact Center numbers
 - [Poczta Polska: Changes in fees for shipments from outside the EU](https://www.poczta-polska.pl/en/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – €3 duty, €45 gifts, refusal
+- [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE (in Polish)](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – €2 EU handling fee per item since 1 November 2026, paid by the recipient, passed to KAS
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – customs declaration fees
 - [Poczta Polska: Poczta Polska SA Group](https://www.poczta-polska.pl/en/grupa-pp/poczta-polska/) – state-owned
 - [Pocztex Mobile on the App Store](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – the app

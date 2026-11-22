@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-21
 ---
 
-Ekart (also eKart Logistics) is an Indian courier. It collects online orders from the seller, moves them through its hubs and delivers them to you. The seller or shop gives you the tracking ID: look in its shipping message, or ask it, then paste the ID in the box above. Ekart's own tracker is on ekartlogistics.in. Peek couldn't check Ekart's website for this page, so what follows comes from Peek's own code, which reads Ekart's tracker for you.
+Ekart (also eKart Logistics) is an Indian courier. It collects online orders from the seller, moves them through its hubs and delivers them to you. The seller or shop gives you the tracking ID: look in its shipping message, or ask it, then paste the ID in the box above. Ekart's own tracker is on ekartlogistics.in.
 
 ## Ekart tracking ID: what it looks like
 
@@ -14,8 +14,8 @@ Peek's code knows Ekart's tracking IDs as three letters, then `C`, `P` or `R`, t
 
 | Tracking ID (invented) | What it is |
 | --- | --- |
-| `FMPP0000000000` | One of the letter groups Peek ties to Ekart (listed below), then `C`, `P` or `R` and ten digits. Peek names Ekart from the shape alone. |
-| `ABCP0000000000` | Other letters in front, same layout. It may be Ekart's, but Peek can't tell from the shape alone, so it asks Ekart (see below). |
+| `FMPP4829105736` | One of the letter groups Peek ties to Ekart (listed below), then `C`, `P` or `R` and ten digits. Peek names Ekart from the shape alone. |
+| `ABCP4829105736` | Other letters in front, same layout. It may be Ekart's, but Peek can't tell from the shape alone, so it asks Ekart (see below). |
 
 The letter groups Peek ties to Ekart are `AMI`, `BAL`, `BGS`, `BSI`, `DEL`, `FLO`, `FMP`, `GLA`, `LUA`, `MYE`, `MYN`, `MYS`, `SDL`, `SHO`, `SPO`, `SRT` and `TEL`. Spaces and lower case don't matter when you paste the ID into Peek. Two exceptions: an ID that starts with `PB` in this layout is read as [Parcelforce](carrier:parcelforce)'s, the UK courier, and one that starts with `HRBC` isn't offered as Ekart's, as it fits an AliExpress shape. If yours came from an Indian shop, press "Change" and pick Ekart.
 
@@ -72,7 +72,7 @@ This page gives no delivery times, attempt rules or ways to reschedule, and Peek
 
 ## Ekart customer care and contact
 
-As of 31 October 2026, Peek couldn't check Ekart's website, so this page lists no Ekart phone number or email: Peek gives only contacts read on a carrier's own pages. For an order, ask the shop or marketplace you bought from first: it booked Ekart, and a refund or a new parcel comes from it.
+Ekart's website lists no phone number or email for recipients; its FAQ sends sellers to a ticket on its portal, answered within 24 hours. For an order, ask the shop or marketplace you bought from first: it booked Ekart, and a refund or a new parcel comes from it.
 
 Before you pay anything a parcel text asks for, read [delivery scam texts](guide:delivery-scam-texts).
 
@@ -82,9 +82,9 @@ Paste the tracking ID in [Peek](/). With one of the letter groups above, then `C
 
 Pasting Ekart's tracking link (ekartlogistics.com, then shipmenttrack and the ID) works too: Peek takes the ID from it and names Ekart, whatever its letters. If the seller sent a shiprocket.co tracking link instead, you can paste that: Peek then follows the parcel on [Shiprocket](carrier:shiprocket)'s tracking page, not Ekart's. Ekart picked by hand for anything other than four letters and ten digits shows "doesn’t issue numbers like this one".
 
-Filed under Ekart, a parcel shows "Waiting for Ekart" until Ekart's first scan. One added without a carrier shows "No tracking history yet". Peek reads Ekart's own tracker, with no account or phone number: each line in Ekart's words, codes included, with its exact time and the city Ekart gives, newest first and without repeats. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It shows Ekart's expected delivery date while the parcel is on its way to you, and drops it once the parcel is delivered or heads back.
+Filed under Ekart, a parcel shows "Waiting for Ekart" until Ekart's first scan. Two days after Ekart first says it doesn't know the number, Peek asks you to check it, choose another carrier or delete the parcel. One added without a carrier shows "No tracking history yet". Peek reads Ekart's own tracker, with no account or phone number: each line in Ekart's words, codes included, with its exact time and the city Ekart gives, newest first and without repeats. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It shows Ekart's expected delivery date while the parcel is on its way to you, and drops it once the parcel is delivered or heads back.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Ekart scans the parcel out for delivery, while Ekart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. India time on the day Ekart scans the parcel out for delivery, while Ekart's own tracker answers (through tracking services, up to every 15 minutes that day while you have it open or notifications are on); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
 
 ## Questions about Ekart tracking
 
@@ -94,7 +94,7 @@ Paste the tracking ID from the shop's shipping message into Peek, or enter it on
 
 ### What does an Ekart tracking ID look like?
 
-Three letters, then `C`, `P` or `R`, then ten digits, such as `FMPP0000000000` (invented).
+Three letters, then `C`, `P` or `R`, then ten digits, such as `FMPP4829105736` (invented).
 
 ### What does RTO mean in Ekart tracking?
 
@@ -106,9 +106,10 @@ The parcel has reached an Ekart delivery hub: on its way to you, the hub that de
 
 ### Who do I contact about a missing Ekart parcel?
 
-The shop or marketplace you ordered from: it booked Ekart. Peek couldn't check Ekart's website, so this page gives no Ekart customer care number.
+The shop or marketplace you ordered from: it booked Ekart. Ekart's website gives no customer care number for recipients.
 
 :::sources
+- [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – support for sellers by a ticket on the portal, answered within 24 hours
 - [Universal Parcel Scraper: Ekart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ekart) – names, tracking ID shapes and how Peek detects them, tracking links, Ekart's tracker, scan wordings and codes with their stages, RTO, expected delivery date
 - [Universal Parcel Scraper: Shiprocket](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shiprocket) – Shiprocket's tracking links
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Parcelforce's PB and AliExpress's HRBC shapes, carriers recognition asks, hand-offs

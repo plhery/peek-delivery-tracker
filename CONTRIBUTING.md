@@ -58,5 +58,14 @@ elsewhere, run `:app:testDebugUnitTest` instead of `:app:verifyRoborazziDebug` a
   It writes `public/accessibility.html`.
 - Keep commits small enough to review on their own.
 
-By contributing, you agree that your contribution is licensed under the
-repository's Apache License 2.0.
+By contributing, you agree that your contribution is licensed under the GNU
+Affero General Public License, version 3 only, with the additional term in
+[NOTICE](NOTICE), as the rest of the code is. You also give Paul-Louis Hery a
+perpetual, worldwide, non-exclusive, royalty-free and irrevocable license to
+use, change and distribute your contribution under other terms too, so that
+Peek's iPhone and Android apps can still go out on the App Store and Google
+Play: those stores' terms clash with GPL-family licenses for code that anyone
+but the copyright holder wrote. You keep the copyright of your contribution. If
+you can't agree to this, open an issue rather than a pull request.
+Contributions made before under the Apache License 2.0 stay under it
+([NOTICE](NOTICE)).

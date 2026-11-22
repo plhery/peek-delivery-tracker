@@ -12,7 +12,7 @@ Peek finds the carrier, draws the journey, notifies you when the parcel moves.
 <sub>The carriers are read by our engine, <a href="https://github.com/plhery/universal-parcel-scraper">Universal Parcel Scraper</a>.</sub>
 
 [![CI](https://github.com/plhery/peek-delivery-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/plhery/peek-delivery-tracker/actions/workflows/ci.yml)
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 
 [Try it: peektracker.com](https://peektracker.com) · [Run it locally](#run-it-locally) · [iPhone app](#iphone-app) · [Run your own](#run-your-own)
 
@@ -139,6 +139,13 @@ short path; [Deployment](docs/DEPLOYMENT.md) has every step in full.
 - HTTPS in front of the container's port 3000;
 - SMTP with an authenticated domain, for sign-in by email.
 
+**The scraper.** Peek reads carriers through
+[Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), which `npm ci`
+installs. From version 0.1294.0 its licence,
+[PolyForm Noncommercial 1.0.0](https://github.com/plhery/universal-parcel-scraper/blob/main/LICENSE),
+allows noncommercial use only, so a Peek of your own may only run for noncommercial purposes,
+as that licence defines them.
+
 **The database.** Apply every file in [`supabase/migrations`](supabase/migrations) in
 filename order, each in its own transaction, stopping at the first error. To try them
 first, point `TEST_DATABASE_URL` at a throwaway Postgres 16 and run
@@ -219,8 +226,13 @@ Found a security problem? [Report it privately](SECURITY.md).
 
 ## Trademarks and content
 
-The code is licensed under [Apache 2.0](LICENSE). Its [NOTICE](NOTICE) names Peek and its
-copyright holder, Paul-Louis Hery, and a copy or fork keeps it. The name "Peek", its logo
+The code is licensed under the [GNU Affero General Public License, version 3 only](LICENSE),
+with one additional term under its section 7(b) ([NOTICE](NOTICE)): copies and modified
+versions keep the credit "Based on Peek by Paul-Louis Hery", with a link to
+<https://github.com/plhery/peek-delivery-tracker>, among the legal notices they show, such as
+the website's footer or an app's About screen. Once, where a user can find it, is enough. The
+parts Andrew Gable, Marc Went and Lewis Carter contributed under Apache 2.0 stay available
+under it, as the NOTICE lists. The name "Peek", its logo
 and app icon, the App Store and Google Play assets, and the guides and carrier pages (the
 texts under `content/`) are not licensed: Paul-Louis Hery keeps all rights to them. A copy
 or fork may not publish them or use the name "Peek", and a fork must rename itself before

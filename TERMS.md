@@ -12,7 +12,7 @@ why.
 
 Peek is a personal, non-commercial project run by Paul-Louis Hery, in
 Switzerland. It is free: no fees, no subscription and no advertising. Its code
-is open source under the Apache License 2.0, on
+is open source under the GNU Affero General Public License 3.0, on
 [GitHub](https://github.com/plhery/peek-delivery-tracker).
 
 ## Using Peek

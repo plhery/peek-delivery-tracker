@@ -1,5 +1,46 @@
 Peek
-Copyright 2026 Paul-Louis Hery
+Copyright (C) 2026 Paul-Louis Hery
 
-This product includes software developed by Paul-Louis Hery for Peek
-(https://github.com/plhery/peek-delivery-tracker).
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 only (LICENSE), with the additional term below.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+
+Additional term, under section 7(b) of the GNU Affero General Public License
+
+Copies and modified versions of this program, and works containing it, must
+keep the author attribution "Based on Peek by Paul-Louis Hery", with a link to
+https://github.com/plhery/peek-delivery-tracker, among the Appropriate Legal
+Notices they display. Showing it once is enough, where a user can find it
+without searching: for example in the website's footer, in an app's About,
+settings or licences screen, or beside the link to the source code. It need
+not be more prominent than the work's own name, and where a link cannot be
+made, the address written out will do.
+
+
+Contributions under the Apache License 2.0
+
+These contributions were made under the Apache License 2.0
+(LICENSES/Apache-2.0.txt), which is compatible with version 3 of the GNU
+Affero General Public License, and remain available under it:
+- Andrew Gable: the 24-hour clock and distance unit preferences, and the clock
+  preference in push notifications and the Android app (e948734e4, 88ebdaca0,
+  c753b930a, 8e7babd23)
+- Marc Went: OpenID Connect sign-in and normalized OCI repository names
+  (f02e6974d, 89ed8a5d0)
+- Lewis Carter: Stone3PL parcels before the scraper adopted them (316e5b82c)
+
+
+Earlier versions
+
+Versions published before this notice, up to and including commit
+278769e4203b, were published under the Apache License 2.0 and stay under it.
+
+The name "Peek", its logo and app icon, its store assets and the texts of its
+guides and carrier pages are not licensed under the GNU Affero General Public
+License or the Apache License: see TRADEMARKS.md.

@@ -1,13 +1,13 @@
 ---
 title: Open-Source-Sendungsverfolgung: Peeks Code und Engine
-description: Peek ist Open Source unter Apache 2.0. Hoste es selbst, starte es lokal oder verfolge Pakete aus deinem Code mit Universal Parcel Scraper: CLI, Node oder HTTP.
+description: Peek ist Open Source unter AGPL-3.0. Hoste es selbst, starte es lokal oder verfolge Pakete aus deinem Code mit Universal Parcel Scraper: CLI, Node oder HTTP.
 slug: open-source-sendungsverfolgung
 picture: Pip, das Paket mit Gesicht, sitzt auf einem aufgeklappten Laptop, dessen Terminal die Scans eines Pakets Zeile für Zeile ausgibt.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-22
 ---
 
-[Peek](/) ist eine kostenlose Open-Source-Sendungsverfolgung: Web-App, API sowie iPhone- und Android-App liegen unter der Apache License 2.0 auf GitHub, und die Abfrage der Paketdienste übernimmt eine eigenständige Open-Source-Engine, Universal Parcel Scraper. Eine öffentliche API mit Keys hat Peek nicht. Um Pakete aus deinem eigenen Code zu verfolgen, nimm deshalb den Scraper, als Befehl, als Node-Bibliothek oder als HTTP-Server, ohne Konto und ohne API-Key. Du kannst Peek auch selbst hosten oder es mit erfundenen Paketen auf deinem Rechner starten.
+[Peek](/) ist eine kostenlose Open-Source-Sendungsverfolgung: Web-App, API sowie iPhone- und Android-App liegen unter der GNU AGPL 3.0 auf GitHub, und die Abfrage der Paketdienste übernimmt eine eigenständige Engine, Universal Parcel Scraper, frei für nicht kommerzielle Zwecke. Eine öffentliche API mit Keys hat Peek nicht. Um Pakete aus deinem eigenen Code zu verfolgen, nimm deshalb den Scraper, als Befehl, als Node-Bibliothek oder als HTTP-Server, ohne Konto und ohne API-Key. Du kannst Peek auch selbst hosten oder es mit erfundenen Paketen auf deinem Rechner starten.
 
 So probierst du den Scraper im Terminal aus:
 
@@ -19,7 +19,7 @@ So probierst du den Scraper im Terminal aus:
 
 ## Ist Peek Open Source, und unter welcher Lizenz?
 
-Ja. Peeks Code ist öffentlich auf [github.com/plhery/peek-delivery-tracker](https://github.com/plhery/peek-delivery-tracker) und steht unter der Apache License 2.0: die Web-App und die API (Next.js, React, TypeScript), die native SwiftUI-App für iPhone, iPad und Mac und die Android-App. [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), den Peek über npm installiert, steht ebenfalls unter Apache 2.0; nur sein optionales TRAWL-Browser-Image steht unter AGPL-3.0.
+Ja. Peeks Code ist öffentlich auf [github.com/plhery/peek-delivery-tracker](https://github.com/plhery/peek-delivery-tracker) und steht unter der GNU Affero General Public License 3.0 (AGPL-3.0): die Web-App und die API (Next.js, React, TypeScript), die native SwiftUI-App für iPhone, iPad und Mac und die Android-App. Eine Kopie oder veränderte Version behält den Hinweis „Based on Peek by Paul-Louis Hery“ mit seinem Link. [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), den Peek über npm installiert, steht ab Version 0.1294.0 unter der PolyForm Noncommercial License 1.0.0, die nur nicht kommerzielle Zwecke erlaubt; ältere Versionen bleiben unter Apache 2.0. Sein optionales TRAWL-Browser-Image steht unter AGPL-3.0.
 
 Peek ist ein nicht kommerzielles Projekt ohne Werbung; [Paketverfolgung aller Anbieter](guide:universal-tracker) vergleicht es mit anderen Trackern.
 
@@ -94,7 +94,7 @@ Ein Mensch liest diese Antworten, aber niemand kann dir zurückschreiben: Wenn d
 
 :::sources
 - [Peek auf GitHub: README (auf Englisch)](https://github.com/plhery/peek-delivery-tracker) – was das Repository enthält, Paketdienste im Scraper, lokal starten, selbst hosten, der Build der iPhone-App
-- [Peek auf GitHub: LICENSE (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/LICENSE) – Apache License 2.0
+- [Peek auf GitHub: LICENSE (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/LICENSE) – GNU Affero General Public License 3.0
 - [Universal Parcel Scraper auf GitHub (auf Englisch)](https://github.com/plhery/universal-parcel-scraper) – Befehle, Optionen, Node, Browser, HTTP und Docker, Chromium im Image, Fallbacks, Datenschutz, Zahl der Paketdienste, Benchmark, Lizenzen, einen Paketdienst hinzufügen
 - [Universal Parcel Scraper: neues Issue (auf Englisch)](https://github.com/plhery/universal-parcel-scraper/issues/new/choose) – die Formulare „Add a carrier“ und „A carrier stopped working“
 - [Universal Parcel Scraper auf npm (auf Englisch)](https://www.npmjs.com/package/universal-parcel-scraper) – das Paket und die Node.js-Version, die es braucht

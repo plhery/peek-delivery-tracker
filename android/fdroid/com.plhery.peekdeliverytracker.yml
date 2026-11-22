@@ -1,7 +1,7 @@
 # The app's entry in the F-Droid repository of the Android beta, which scripts/publish-fdroid.sh copies there.
 Categories:
   - Internet
-License: Apache-2.0
+License: AGPL-3.0-only
 AuthorName: Peek
 WebSite: https://peektracker.com
 SourceCode: https://github.com/plhery/peek-delivery-tracker
@@ -10,9 +10,9 @@ Changelog: https://github.com/plhery/peek-delivery-tracker/releases
 
 AntiFeatures:
   NonFreeNet:
-    en-US: A package's scans come from carriers' sites and from tracking services such as 17TRACK, through Peek's own server, which is free software. A new lookup can need Cloudflare's Turnstile check, sign-in can use Google, and directions to a pickup point open Google Maps.
+    en-US: A package's scans come from carriers' sites and from tracking services such as 17TRACK, through Peek's own server, whose code is free software but reads carriers with Universal Parcel Scraper, licensed for noncommercial use only. A new lookup can need Cloudflare's Turnstile check, sign-in can use Google, and directions to a pickup point open Google Maps.
   TetheredNet:
-    en-US: Works only with peektracker.com. Its server is free software that anyone can host, but the app has no setting to use another one.
+    en-US: Works only with peektracker.com. Its server is free software that anyone can host for noncommercial purposes (its carrier engine is licensed for noncommercial use only), but the app has no setting to use another one.
   Tracking:
     en-US: Sends which screens and actions are used to the project's own Umami analytics, with no setting to turn it off. A new lookup can need Cloudflare's Turnstile check, which reads browser and network signals.
 

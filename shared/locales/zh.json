@@ -388,7 +388,7 @@
   "landing.more.qr.body": "在你的手机上打开 Peek，iPhone 和 Android 都行。",
   "phoneApp.title": "下载 App",
   "landing.who.title": "Peek 是谁做的？",
-  "landing.who.source": "每一行代码都以 Apache-2.0 许可证公开在 GitHub 上。你可以阅读代码、添加快递公司，或运行你自己的 Peek。",
+  "landing.who.source": "每一行代码都以 AGPL-3.0 许可证公开在 GitHub 上。你可以阅读代码、添加快递公司，或运行你自己的 Peek。",
   "landing.who.account.title": "无需账号",
   "landing.who.account.body": "粘贴、跟踪、收通知。只有想把包裹集中保存时才需要登录。",
   "landing.who.forgets.title": "自动清除",

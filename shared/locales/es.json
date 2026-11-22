@@ -388,7 +388,7 @@
   "landing.more.qr.body": "Abre Peek para tu móvil, iPhone o Android.",
   "phoneApp.title": "Descarga la app",
   "landing.who.title": "¿Quién está detrás de Peek?",
-  "landing.who.source": "Todo el código está en GitHub con licencia Apache-2.0. Léelo, añade un transportista o monta tu propio Peek.",
+  "landing.who.source": "Todo el código está en GitHub con licencia AGPL-3.0. Léelo, añade un transportista o monta tu propio Peek.",
   "landing.who.account.title": "No hace falta cuenta",
   "landing.who.account.body": "Pega, sigue, recibe notificaciones. Inicia sesión solo para tener tus paquetes juntos.",
   "landing.who.forgets.title": "Olvida por sí solo",

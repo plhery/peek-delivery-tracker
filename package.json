@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "An open-source native iPhone app and PWA for following parcel deliveries.",
-  "license": "Apache-2.0",
+  "license": "AGPL-3.0-only",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plhery/peek-delivery-tracker.git"

@@ -1,13 +1,13 @@
 ---
 title: Open-source parcel tracking: Peek's code and engine
-description: Peek is open source under Apache 2.0. Host your own, run it locally, or track parcels from your own code with Universal Parcel Scraper: CLI, Node or HTTP.
+description: Peek is open source under the AGPL-3.0. Host your own, run it locally, or track parcels from your own code with Universal Parcel Scraper: CLI, Node or HTTP.
 slug: open-source-parcel-tracking
 picture: Pip, the parcel with a face, perched on an open laptop whose terminal prints a parcel's scans line by line.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-22
 ---
 
-[Peek](/) is a free, open-source parcel tracker: its web app, API and iPhone and Android apps are on GitHub under the Apache License 2.0, and its carriers are read by a separate open-source engine, Universal Parcel Scraper. Peek has no public API with keys, so to track parcels from your own code, use the scraper, as a command, a Node library or an HTTP server, with no account and no API key. You can also host your own Peek, or run it on your computer with made-up parcels.
+[Peek](/) is a free, open-source parcel tracker: its web app, API and iPhone and Android apps are on GitHub under the GNU AGPL 3.0, and its carriers are read by a separate engine, Universal Parcel Scraper, free for noncommercial use. Peek has no public API with keys, so to track parcels from your own code, use the scraper, as a command, a Node library or an HTTP server, with no account and no API key. You can also host your own Peek, or run it on your computer with made-up parcels.
 
 To try the scraper from your terminal:
 
@@ -19,7 +19,7 @@ To try the scraper from your terminal:
 
 ## Is Peek open source, and under what licence?
 
-Yes. Peek's code is public at [github.com/plhery/peek-delivery-tracker](https://github.com/plhery/peek-delivery-tracker), under the Apache License 2.0: the web app and API (Next.js, React, TypeScript), the native SwiftUI app for iPhone, iPad and Mac, and the Android app. [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), which Peek installs from npm, is under Apache 2.0 too; only its optional TRAWL browser image is under AGPL-3.0.
+Yes. Peek's code is public at [github.com/plhery/peek-delivery-tracker](https://github.com/plhery/peek-delivery-tracker), under the GNU Affero General Public License 3.0 (AGPL-3.0): the web app and API (Next.js, React, TypeScript), the native SwiftUI app for iPhone, iPad and Mac, and the Android app. A copy or modified version keeps the credit "Based on Peek by Paul-Louis Hery", with its link. [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper), which Peek installs from npm, is under the PolyForm Noncommercial License 1.0.0 from version 0.1294.0, which allows noncommercial use only; earlier versions stay under Apache 2.0. Its optional TRAWL browser image is under AGPL-3.0.
 
 Peek is a non-commercial project with no ads; [universal parcel tracking](guide:universal-tracker) compares it with other trackers.
 
@@ -94,7 +94,7 @@ A person reads these answers, but nobody can write back: for a reply, write to h
 
 :::sources
 - [Peek on GitHub: README](https://github.com/plhery/peek-delivery-tracker) – what the repository holds, carriers in the scraper, run it locally, host your own, the iPhone build
-- [Peek on GitHub: LICENSE](https://github.com/plhery/peek-delivery-tracker/blob/main/LICENSE) – Apache License 2.0
+- [Peek on GitHub: LICENSE](https://github.com/plhery/peek-delivery-tracker/blob/main/LICENSE) – GNU Affero General Public License 3.0
 - [Universal Parcel Scraper on GitHub](https://github.com/plhery/universal-parcel-scraper) – commands, options, Node, browser, HTTP and Docker, Chromium in the image, fallbacks, privacy, carrier count, benchmark, licences, adding a carrier
 - [Universal Parcel Scraper: new issue](https://github.com/plhery/universal-parcel-scraper/issues/new/choose) – the "Add a carrier" and "A carrier stopped working" forms
 - [Universal Parcel Scraper on npm](https://www.npmjs.com/package/universal-parcel-scraper) – the package and its Node.js requirement

@@ -388,7 +388,7 @@
   "landing.more.qr.body": "Откроет Peek для вашего телефона: iPhone или Android.",
   "phoneApp.title": "Скачайте приложение",
   "landing.who.title": "Кто стоит за Peek?",
-  "landing.who.source": "Весь код лежит на GitHub под лицензией Apache-2.0. Загляните в него, добавьте службу доставки или запустите свой Peek.",
+  "landing.who.source": "Весь код лежит на GitHub под лицензией AGPL-3.0. Загляните в него, добавьте службу доставки или запустите свой Peek.",
   "landing.who.account.title": "Аккаунт не нужен",
   "landing.who.account.body": "Вставляйте, отслеживайте, получайте уведомления. Входить нужно, только чтобы хранить посылки вместе.",
   "landing.who.forgets.title": "Сам всё забывает",

@@ -52855,7 +52855,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Budapest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "home-delivery-team"
     },
     "trackingUrlTemplate": "https://homedt.hu/nyomonkovetes?track_number={trackingNumber}",
     "linkRules": [
@@ -52864,7 +52864,7 @@ export const CARRIER_CAPABILITIES = {
           "homedt.hu",
           "www.homedt.hu"
         ],
-        "pathPattern": "^/nyomonkovetes/?$",
+        "pathPattern": "^/(?:nyomonkovetes|track)/?$",
         "params": [
           "track_number"
         ]
@@ -53100,7 +53100,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Bucharest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cautcurier"
     },
     "trackingUrlTemplate": "https://tracking.cautcurier.ro/?awb={trackingNumber}",
     "linkRules": [
@@ -55354,7 +55354,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Kyiv",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "post-international"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -55418,7 +55418,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Chisinau",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "unipost-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -55438,12 +55438,21 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Belgrade",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "x-express-rs"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "www.x-express.rs",
+          "x-express.rs"
+        ],
+        "path": "^/korisnicki-panel/pracenje-posiljke/(\\d{2}-\\d{10})/?$"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.x-express.rs/korisnicki-panel/pracenje-posiljke",
-    "helpUrl": "https://www.x-express.rs/kontakt"
+    "helpUrl": "https://www.x-express.rs/kontakt",
+    "trackingUrlTemplate": "https://www.x-express.rs/korisnicki-panel/pracenje-posiljke/{trackingNumber}"
   },
   "xpress-logistics-lu": {
     "displayName": "Xpress Logistics",
@@ -62884,7 +62893,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Skopje",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "viapost"
     },
     "trackingUrlTemplate": "https://www.viapost.solutions/Order/Track/{trackingNumber}",
     "linkRules": [
@@ -68016,6 +68025,58 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "fsqh": {
+    "displayName": "Foshan Qianhe",
+    "aliases": [
+      "FSQH",
+      "Qianhe",
+      "乾和",
+      "佛山乾和",
+      "佛山乾和国际供应链有限公司",
+      "Foshan Qianhe International Supply Chain Co., Ltd."
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#083870",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "fsqh",
+      "recognitionRank": 31
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^QH\\d{12}FS$",
+        "confidence": "low",
+        "preferred": true
+      }
+    ]
+  },
+  "leda-express": {
+    "displayName": "Leda Express",
+    "aliases": [
+      "乐达全球速递",
+      "樂達全球速遞",
+      "乐达全球速运"
+    ],
+    "countries": [
+      "US",
+      "CN",
+      "HK"
+    ],
+    "color": "#138ac8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "leda-express"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -70090,7 +70151,9 @@ export const CARRIER_IDS = [
   "huaqi-express",
   "lindao-express",
   "riyu-logistics",
-  "wanjia-logistics"
+  "wanjia-logistics",
+  "fsqh",
+  "leda-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

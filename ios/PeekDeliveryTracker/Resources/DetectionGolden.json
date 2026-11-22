@@ -12841,6 +12841,14 @@
     ]
   },
   {
+    "input": "1000814",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "10008230099342",
     "carrier": "unknown",
     "confidence": "low",
@@ -12907,6 +12915,14 @@
     ]
   },
   {
+    "input": "1001228",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "100125712721",
     "carrier": "unknown",
     "confidence": "low",
@@ -12928,6 +12944,22 @@
     "asked": [
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "1001419",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
+    "input": "1001427",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -35858,6 +35890,31 @@
     ]
   },
   {
+    "input": "26-0001234567",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "poste-italiane",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "26-00101122648",
     "carrier": "unknown",
     "confidence": "low",
@@ -36891,6 +36948,12 @@
       "brt",
       "colis-prive"
     ]
+  },
+  {
+    "input": "269793",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "269900580926",
@@ -42561,6 +42624,14 @@
     ]
   },
   {
+    "input": "3320041",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "3321798333",
     "carrier": "unknown",
     "confidence": "low",
@@ -43792,6 +43863,14 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "3527375",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
     ]
   },
   {
@@ -51480,6 +51559,12 @@
     "candidates": [
       "dpd-ie"
     ]
+  },
+  {
+    "input": "489581",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "49-55636302",
@@ -90337,6 +90422,12 @@
     ]
   },
   {
+    "input": "DE2142001481122UA",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "DE30493380",
     "carrier": "unknown",
     "confidence": "low",
@@ -100975,6 +101066,12 @@
     ]
   },
   {
+    "input": "LD89581317335286",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "LD999999987FR",
     "carrier": "la-poste",
     "confidence": "high",
@@ -108182,13 +108279,34 @@
     "candidates": []
   },
   {
+    "input": "QH000000271828FS",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fsqh",
+      "dhlink"
+    ],
+    "preferred": [
+      "fsqh"
+    ],
+    "asked": [
+      "fsqh",
+      "dhlink"
+    ]
+  },
+  {
     "input": "QH999999999980FS",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fsqh",
       "dhlink"
     ],
+    "preferred": [
+      "fsqh"
+    ],
     "asked": [
+      "fsqh",
       "dhlink"
     ]
   },
@@ -111347,6 +111465,28 @@
   },
   {
     "input": "RR737228767HU",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RR745733230HU",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RR746486733HU",
     "carrier": "intl-post",
     "confidence": "high",
     "candidates": [

@@ -10,7 +10,7 @@ Nova Poshta – auf der englischen Website „Nova Post“ genannt – ist ein u
 
 ## Nova-Poshta-Sendungsnummer: die EW-Nummer
 
-Nova Poshta bezeichnet die Sendungsnummer als Express Waybill, kurz EW (ЕН oder ТТН auf Ukrainisch); internationale Sendungen erhalten eine IEW. Die SMS oder Push-Nachricht bei Ankunft nennt die Filialnummer und die EW.
+Nova Poshta bezeichnet die Sendungsnummer als Express Waybill, kurz EW (ЕН auf Ukrainisch). Die SMS oder Push-Nachricht bei Ankunft nennt die Filialnummer und die EW.
 
 Nova Poshta veröffentlicht weder feste Länge noch Format. Die Nummern im Katalog von Peek sehen so aus:
 
@@ -59,7 +59,7 @@ novaposhta.ua verfolgt Sendungen auf Ukrainisch oder Englisch, der neueste Scan 
 
 **Weiterleitung** an eine andere Filiale ist kostenlos, solange das Paket sein Ziel noch nicht erreicht hat (60 ₴ an eine Adresse); danach wird eine neue Sendung berechnet.
 
-**In Polen** liefert Nova Post an Filialen, [InPost](carrier:inpost)-Paczkomat-Stationen, Abholpunkte oder an die Haustür. Der Abholcode kommt per SMS und E-Mail. Im Paczkomat wartet das Paket 2 Kalendertage, bevor Nova Post es in eine eigene Filiale bringt und dich benachrichtigt; wurde ein Paket bereits aus dem Paczkomat entnommen, erreichst du +48 573 504 069.
+**In Polen** liefert Nova Post an Filialen, [InPost](carrier:inpost)-Paczkomat-Stationen, Abholpunkte oder an die Haustür. Der Abholcode kommt per SMS und E-Mail. Im Paczkomat wartet das Paket 2 Kalendertage, bevor Nova Post es in eine eigene Filiale bringt und dich benachrichtigt; um ein so weitergeleitetes Paket abzuholen, wende dich an +48 573 504 069.
 
 ## Nova-Poshta-Paket verspätet, verloren oder beschädigt
 
@@ -69,7 +69,7 @@ Bei Sendungen in die Ukraine erklärt Nova Poshta, dass der Empfänger eventuell
 
 Bei Verlust oder Schaden in der Ukraine reklamierst du in der App oder auf der Tracking-Seite („Manage Parcel“, dann „Submit a Report“), telefonisch oder in einer Filiale mit Steuernummer oder Reisepass. Nova Poshta antwortet innerhalb von 3 Werktagen und ersetzt bis zum angegebenen Wert.
 
-In Polen reicht der Absender die Reklamation ein; du kannst nur reklamieren, wenn das Paket an dich zugestellt wurde oder der Absender dir das Recht abtritt. Die Bedingungen von Nova Post Polen sehen 12 Monate ab Versand vor (2 Monate bei Verlust oder Schaden einer Kuriersendung).
+In Polen reicht der Absender die Reklamation ein; du kannst nur reklamieren, wenn das Paket an dich zugestellt wurde oder der Absender dir das Recht abtritt. Die Bedingungen von Nova Post Polen sehen 12 Monate ab Versand vor (2 Monate bei Fehlmenge oder Schaden einer Kuriersendung).
 
 ## Nova Poshta Kundenservice und Telefonnummer
 
@@ -77,18 +77,18 @@ Auf den Websites von Nova Poshta und Nova Post Polen genannte Kontakte:
 
 - **Ukraine, rund um die Uhr:** +38 098 450 0609, +38 050 450 0609, +38 093 450 0609 oder +38 044 450 0609.
 - **Kontaktcenter:** 0 800 500 609, angegeben auf den FAQ- und Paketstationsseiten.
-- **E-Mail:** support_ua@novaposhta.ua sowie ein Telegram-Bot und Viber über die Fußzeile von [novaposhta.ua](https://novaposhta.ua/).
+- **E-Mail:** support_ua@novaposhta.ua sowie ein Telegram-Bot von [novaposhta.ua](https://novaposhta.ua/).
 - **Polen:** +48 182 111 609, täglich 8:00 bis 20:00 Uhr polnischer Zeit, oder support@novapost.pl.
 
-> Nova Poshta warnt vor gefälschten E-Mails, die angeblich offene Forderungen verlangen; das Unternehmen verschickt keine Nachrichten zu „Reliable Purchase“ und keine Links zu Formularen, die Kartendaten abfragen.
+> Nova Poshta warnt vor gefälschten E-Mails, die angeblich offene Forderungen verlangen; das Unternehmen verschickt keine Nachrichten zu „Safe purchase“ und keine Links zu Formularen, die Kartendaten abfragen.
 
 ## Nova-Poshta-Pakete mit Peek verfolgen
 
-Andere Paketdienste teilen sich die 14-stelligen Formate, daher legt [Peek](/) Nova Poshta nie allein anhand der Nummer fest. Stattdessen fragt Peek die passenden Dienste an, darunter Nova Poshta: zuerst, wenn du aus der Ukraine oder Moldau suchst oder die Nummer mit 595000 beginnt, sonst sobald die zuerst gefragten Dienste sie nicht kennen. Bei einer internationalen SH- oder TN-Nummer (teils nach RS) fragt Peek ausschließlich Nova Poshta. Kennt Nova Poshta sie, zeigt Peek „Nova Poshta (Ukraine) hat dieses Paket.“. Andernfalls tippst du auf „Ändern“ und wählst „Nova Poshta (Ukraine)“. Ein Tracking-Link von novaposhta.ua oder novapost.com funktioniert ebenfalls. Abgedeckt sind ukrainische Frachtbriefe – auch aus Nova-Post-Filialen im Ausland – sowie internationale SH- und TN-Nummern von Nova Post, nicht jedoch Referenzen von Nova Poshta Global.
+Andere Paketdienste teilen sich die 14-stelligen Formate, daher legt [Peek](/) Nova Poshta nie allein anhand der Nummer fest. Stattdessen fragt Peek die passenden Dienste an: Nova Poshta zuerst, wenn du aus der Ukraine oder Moldau suchst oder die Nummer mit 595000 beginnt, sonst andere Dienste, Nova Poshta aber nicht. Bei einer internationalen SH- oder TN-Nummer (teils nach RS) fragt Peek ausschließlich Nova Poshta. Kennt Nova Poshta sie, zeigt Peek „Nova Poshta (Ukraine) hat dieses Paket.“. Andernfalls tippst du auf „Ändern“ und wählst „Nova Poshta (Ukraine)“. Ein Tracking-Link von novaposhta.ua oder novapost.com funktioniert ebenfalls. Abgedeckt sind ukrainische Frachtbriefe – auch aus Nova-Post-Filialen im Ausland – sowie internationale SH- und TN-Nummern von Nova Post, nicht jedoch Referenzen von Nova Poshta Global.
 
 Peek zeigt Nova Poshtas englische Statustexte, den Ort jedes Scans auf einer Karte, die erwartete Ankunft, das Gewicht, die Maße bei Einzelpaketen, Empfängerort und Zielland (außer bei Rücksendungen), die abholbereite Filiale oder Paketstation und die Zustellzeit; Namen, vollständige Adressen und Zahlungsdaten bleiben außen vor. Zeiten werden in deine Zeitzone umgerechnet („Uhrzeiten in deiner Zeitzone:“). Nennt eine Exportsendung ihren Zustellpartner im Ausland, [UPS](carrier:ups) oder [GOFO Express](carrier:gofo), kann Peek das Paket dort weiterverfolgen und übernimmt dann das Abfrageintervall des zustellenden Paketdienstes.
 
-Peek fragt Nova Poshta direkt bis zu alle 10 Minuten ab – oder ab 6:00 Uhr Kyiver Zeit alle 2 Minuten an dem Tag, an dem Nova Poshta das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Nova Poshta (Ukraine) nach.“ und bietet „Hol dir Hilfe bei Nova Poshta (Ukraine)“.
+Peek fragt Nova Poshta direkt bis zu alle 10 Minuten ab – oder ab 6:00 Uhr Kyiver Zeit alle 2 Minuten an dem Tag, an dem Nova Poshta das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen; sonst stündlich. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Nova Poshta (Ukraine) nach.“ und bietet „Hol dir Hilfe bei Nova Poshta (Ukraine)“.
 
 ## Häufige Fragen zur Nova-Poshta-Sendungsverfolgung
 
@@ -120,7 +120,7 @@ In der Ukraine 5 Tage kostenlos ab dem Tag nach der Ankunft, danach gegen eine T
 - [Nova Post: Forwarding](https://novaposhta.ua/en/receive/additional-services/redirection) – Weiterleitungsregeln und Kosten
 - [Nova Post: Customs clearance in Ukraine](https://novaposhta.ua/en/receive/international-delivery/customs-clearance) – Zahlungspflicht, 150-€-Grenze, Benachrichtigungen
 - [Нова пошта: Правила надання послуг](https://static.novaposhta.ua/sitecard/misc/doc/Rules_for_providing_postal_services.pdf) – Haftung
-- [Нова пошта: Startseite](https://novaposhta.ua/) – Telefonnummern im Footer, rund um die Uhr, E-Mail, Telegram, Viber
+- [Нова пошта: Startseite](https://novaposhta.ua/) – Telefonnummern im Footer, rund um die Uhr, E-Mail, Telegram
 - [Nova Post: Caution, cyber attack](https://novaposhta.ua/en/caution-cyber-attack) – gefälschte Zahlungs-E-Mails
 - [Нова пошта: Надійна покупка](https://novaposhta.ua/receive/additional-services/safe-purchase/) – Warnung vor betrügerischen Nachrichten
 - [Nova Post Poland: Startseite](https://novapost.com/pl-pl/) – Telefon, Zeiten, E-Mail

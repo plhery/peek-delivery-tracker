@@ -59,8 +59,8 @@ CACESA nie obsługuje zwrotów od osób prywatnych. Zwrot trzeba ustalić ze skl
 **E-mail lub SMS od CACESA.** Wiadomość o paczce oczekującej na odprawę oznacza, że urząd celny wymaga dodatkowych informacji albo zapłaty należności. CACESA prosi o przesłanie na adres atc@cacesa.com następujących danych:
 
 - faktury lub dowodu zakupu (np. zrzutu ekranu strony zamówienia z numerem paczki, artykułem i ceną oraz zdjęcia towaru);
-- potwierdzenia płatności (zrzutu ekranu obciążenia karty lub potwierdzenia przelewu);
-- informacji, jeśli prowadzisz jednoosobową działalność (autónomo), aby naliczyć hiszpańską dopłatę wyrównawczą VAT (0,5 % przy stawce 4 %, 1,4 % przy 10 %, 5,2 % przy 21 %).
+- potwierdzenia płatności (zrzutu ekranu obciążenia karty lub pokwitowania);
+- informacji, jeśli prowadzisz jednoosobową działalność (autónomo), aby naliczyć hiszpańską dopłatę wyrównawczą VAT (0,5 % przy stawce 4 %, 1,4 % przy 10 %, 5,2 % przy 21 %), związaną z hiszpańskim VAT, który nie obowiązuje na Wyspach Kanaryjskich, w Ceucie i Melilli.
 
 Możesz też przeprowadzić odprawę samodzielnie w serwisie hiszpańskiego urzędu skarbowego (AEAT) — CACESA prosi wtedy o powiadomienie na atc@cacesa.com.
 
@@ -70,7 +70,7 @@ Możesz też przeprowadzić odprawę samodzielnie w serwisie hiszpańskiego urz�
 
 **Pismo z urzędu skarbowego (AEAT).** Jeśli dostaniesz zawiadomienie „Decomiso - Depósito temporal” (z numerami HB i AEAT) albo „Validación de datos”, zeskanuj je i wyślij na atc@cacesa.com. CACESA poinformuje, czy paczkę można jeszcze odzyskać, czy została już zniszczona.
 
-Ogólne zasady opisuje poradnik [paczka zatrzymana na cle](guide:customs). Od 1 lipca 2026 roku Unia Europejska pobiera tymczasowe zryczałtowane cło 3 € za każdą zadeklarowaną pozycję towarową (kod HS 6-cyfrowy) w zakupach online do 150 € spoza UE: FAQ CACESA wyjaśnia, że identyczne produkty o tym samym kodzie HS na jednej linii liczone są raz, a jeśli VAT i cło zapłacono już przy zakupie, przy doręczeniu nie ma dalszych opłat. Od 1 listopada 2026 roku obowiązuje też unijna opłata manipulacyjna 2 € za artykuł; strony CACESA nie określają jeszcze, jak jest przenoszona na odbiorcę.
+Ogólne zasady opisuje poradnik [paczka zatrzymana na cle](guide:customs). Od 1 lipca 2026 roku Unia Europejska pobiera tymczasowe zryczałtowane cło 3 € za każdą zadeklarowaną pozycję towarową (kod HS 6-cyfrowy) w zakupach online do 150 € spoza UE: FAQ CACESA wyjaśnia, że identyczne produkty o tym samym kodzie HS na jednej linii liczone są raz, a jeśli VAT i cło zapłacono już przy zakupie, przy doręczeniu nie ma dalszych opłat. Od 1 listopada 2026 roku obowiązuje też unijna opłata manipulacyjna 2 € za artykuł; strony CACESA o niej nie wspominają.
 
 **Opóźnienie, zaginięcie lub uszkodzenie.** W sprawach innych niż sama płatność należności celnych CACESA odsyła do sprzedawcy, z którym zawarto umowę dostawy. Jeśli przesyłka została zwolniona bez zatrzymania i bez kontaktu ze strony CACESA, a nie dotarła, napisz do sklepu. Więcej wskazówek znajdziesz w [śledzenie nie aktualizuje się](guide:tracking-not-updating).
 
@@ -91,9 +91,9 @@ CACESA nie ma portugalskiej wersji serwisu ani biura w Portugalii; dla Hiszpanii
 
 Peek wyświetla angielskie komunikaty CACESA w oryginalnym brzmieniu, odczytuje godziny według czasu madryckiego i przelicza je na twoją strefę czasową (na dole historii widnieje napis „Godziny w twojej strefie czasowej:” wraz z jej nazwą). Wpis o doręczeniu pojawia się jako doręczony, `Start Custom clearance Process` jako etap celny, a zwolnienie na zielonym kanale jako dalszy transport; Peek nie pokazuje jednak kwot należności celnych i nie umożliwia ich opłacenia. Ponieważ CACESA nie przekazuje lokalizacji, brakuje punktów na mapie, a także przewidywanej daty doręczenia, wagi, nadawcy i odbiorcy.
 
-CACESA nie podaje nazwy firmy doręczającej, więc paczka jedzie dalej pod tym samym numerem. Peek może przejąć dalsze śledzenie tylko wtedy, gdy numer jednoznacznie pasuje do innego przewoźnika: [Ecoscooting](carrier:ecoscooting) dla `CNESP` i `CNPRT`, [Correos](carrier:correos-spain) dla numeru pocztowego kończącego się na `ES`, [CTT](carrier:ctt) dla końcówki `PT` lub [CTT Express](carrier:ctt-express) dla własnych numerów tej firmy. Numery `CNES` i `LP` nie są przekazywane dalej.
+CACESA nie podaje nazwy firmy doręczającej, więc paczka jedzie dalej pod tym samym numerem. Peek może przejąć dalsze śledzenie tylko wtedy, gdy numer jednoznacznie pasuje do innego przewoźnika: [Ecoscooting](carrier:ecoscooting) dla `CNESP` i `CNPRT`, dla numeru pocztowego poczta kraju, w którym Peek cię umiejscawia (region telefonu lub kraj połączenia na peektracker.com), np. [Correos](carrier:correos-spain) w Hiszpanii lub [CTT](carrier:ctt) w Portugalii, albo [CTT Express](carrier:ctt-express) dla własnych numerów tej firmy. Numery `CNES` i `LP` nie są przekazywane dalej.
 
-Gdy masz aplikację Peek otwartą na ekranie — albo w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje CACESA bezpośrednio nawet co 10 minut (co 15 minut przez zewnętrzne serwisy śledzące). W pozostałym czasie oraz po dwóch dniach bez zmian (lub po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po czterech dniach bez nowego skanu Peek pokazuje „Brak aktualizacji od czterech dni” oraz „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika CACESA.” z linkiem „Poproś przewoźnika CACESA o pomoc” prowadzącym do FAQ.
+Gdy masz aplikację Peek otwartą na ekranie — albo w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje CACESA bezpośrednio nawet co 10 minut (przez same zewnętrzne serwisy śledzące co godzinę, a po dniu bez skanu co 3 godziny). W pozostałym czasie oraz po dwóch dniach bez zmian (lub po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Gdy ostatni skan ma co najmniej cztery dni i nie jest etapem celnym ani zgłoszeniem problemu, Peek pokazuje „Brak aktualizacji od” z dniem tego skanu oraz „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika CACESA.” z linkiem „Poproś przewoźnika CACESA o pomoc” prowadzącym do FAQ.
 
 ## Pytania o śledzenie CACESA
 
@@ -124,5 +124,6 @@ W przypadku zatrzymanej paczki CACESA potrzebuje 3 do 4 dni od zwolnienia do prz
 - [CACESA: teksty aplikacji webowej](https://www.cacesa.com/main.40b62b43302d800a.js) – komunikaty śledzenia, kroki płatności, FAQ o unijnej opłacie 3 €, ostrzeżenie przed oszustwami
 - [ECO: wyniki CTT do września 2025](https://eco.sapo.pt/2025/10/30/lucro-dos-ctt-sobe-184-para-328-milhoes-ate-setembro-com-integracao-da-espanhola-cacesa/) – przejęcie CACESA przez CTT w 2025 roku
 - [Komisja Europejska: reforma celna UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tymczasowe cło 3 € (od 1 lipca 2026) i opłata manipulacyjna 2 € (od 1 listopada 2026)
+- [Komisja Europejska: Zakres terytorialny VAT i ceł](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Wyspy Kanaryjskie, Ceuta i Melilla poza obszarem VAT UE
 - [Universal Parcel Scraper: adapter CACESA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cacesa) – zakres danych odczytywanych przez Peek i reguły wykrywania
 :::

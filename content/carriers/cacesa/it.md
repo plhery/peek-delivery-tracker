@@ -60,7 +60,7 @@ CACESA non gestisce resi da privati: per restituire un ordine devi accordarti co
 
 - fattura o prova d’acquisto (ad esempio uno screenshot della pagina dell’ordine con numero del pacco, articolo e prezzo, più una foto della merce);
 - prova di pagamento (screenshot dell’addebito su carta o ricevuta);
-- l’indicazione se sei lavoratore autonomo, per calcolare la maggiorazione di equivalenza spagnola (0,5 % su IVA al 4 %, 1,4 % su IVA al 10 %, 5,2 % su IVA al 21 %).
+- l’indicazione se sei lavoratore autonomo, per calcolare la maggiorazione di equivalenza spagnola (0,5 % su IVA al 4 %, 1,4 % su IVA al 10 %, 5,2 % su IVA al 21 %), legata all’IVA spagnola, che non si applica alle Canarie, a Ceuta e a Melilla.
 
 Puoi anche gestire lo sdoganamento in autonomia sul sito dell’AEAT; in quel caso CACESA chiede di avvisarla scrivendo a atc@cacesa.com.
 
@@ -70,7 +70,7 @@ Puoi anche gestire lo sdoganamento in autonomia sul sito dell’AEAT; in quel ca
 
 **Lettera dell’Agenzia fiscale (AEAT).** Se ricevi «Decomiso - Depósito temporal» (con riferimenti HB e AEAT) o «Validación de datos», scansiona il documento e invialo a atc@cacesa.com. CACESA ti comunicherà se il pacco è ancora recuperabile o se è stato distrutto.
 
-Le regole generali sono spiegate in [pacco fermo in dogana](guide:customs). Dal 1° luglio 2026 l’Unione europea applica un dazio temporaneo fisso di 3 € per tipologia di prodotto dichiarata (codice SA a 6 cifre) sugli acquisti online fino a 150 € provenienti da fuori UE: le FAQ di CACESA chiariscono che articoli identici dichiarati sulla stessa riga contano una volta sola e che, se IVA e dazi sono già stati pagati al checkout, non è dovuto altro alla consegna. Dal 1° novembre 2026 si aggiunge anche il contributo UE di gestione di 2 € per articolo; le pagine di CACESA non indicano ancora come venga addebitato al destinatario.
+Le regole generali sono spiegate in [pacco fermo in dogana](guide:customs). Dal 1° luglio 2026 l’Unione europea applica un dazio temporaneo fisso di 3 € per tipologia di prodotto dichiarata (codice SA a 6 cifre) sugli acquisti online fino a 150 € provenienti da fuori UE: le FAQ di CACESA chiariscono che articoli identici dichiarati sulla stessa riga contano una volta sola e che, se IVA e dazi sono già stati pagati al checkout, non è dovuto altro alla consegna. Dal 1° novembre 2026 si aggiunge anche il contributo UE di gestione di 2 € per articolo; le pagine di CACESA non lo menzionano.
 
 **Ritardo, smarrimento o danni.** Per tutto ciò che non riguarda il pagamento delle imposte doganali, CACESA rimanda al venditore con cui è stato concluso l’acquisto. Se il pacco è stato svincolato senza fermi né contatti da CACESA ma non è mai arrivato, contatta il negozio. Altri consigli sono in [tracciamento che non si aggiorna](guide:tracking-not-updating).
 
@@ -91,9 +91,9 @@ CACESA non ha un sito in portoghese né una sede in Portogallo; valgono gli stes
 
 Peek mostra le diciture inglesi di CACESA così come sono, interpretando gli orari sull’ora di Madrid e mostrandoli nel tuo fuso orario (in fondo alla cronologia compare «Orari nel tuo fuso orario:» con il suo nome). Una riga di consegna risulta come consegnato, `Start Custom clearance Process` come passaggio doganale e lo svincolo su canale verde come proseguimento, ma Peek non mostra importi doganali né consente di pagarli. Poiché CACESA non fornisce località, non ci sono punti sulla mappa, né data prevista di consegna, peso, mittente o destinatario.
 
-CACESA non indica il corriere finale e il pacco prosegue con lo stesso numero. Peek può continuare a seguirlo solo se quel numero appartiene chiaramente a un altro corriere: [Ecoscooting](carrier:ecoscooting) per `CNESP` e `CNPRT`, [Correos](carrier:correos-spain) per un codice postale che termina in `ES`, [CTT](carrier:ctt) per uno che termina in `PT`, oppure [CTT Express](carrier:ctt-express) per i propri codici. I numeri `CNES` e `LP` non vengono passati ad altri corrieri.
+CACESA non indica il corriere finale e il pacco prosegue con lo stesso numero. Peek può continuare a seguirlo solo se quel numero appartiene chiaramente a un altro corriere: [Ecoscooting](carrier:ecoscooting) per `CNESP` e `CNPRT`, per un codice postale, la posta del paese in cui Peek ti colloca (regione del telefono o paese da cui ti connetti su peektracker.com), come [Correos](carrier:correos-spain) in Spagna o [CTT](carrier:ctt) in Portogallo, oppure [CTT Express](carrier:ctt-express) per i propri codici. I numeri `CNES` e `LP` non vengono passati ad altri corrieri.
 
-Mentre tieni aperto Peek sullo schermo — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente CACESA fino a ogni 10 minuti (ogni 15 minuti tramite servizi di tracciamento terzi). Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Puoi scegliere gli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a CACESA.», con il link «Chiedi aiuto a CACESA» verso le FAQ.
+Mentre tieni aperto Peek sullo schermo — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente CACESA fino a ogni 10 minuti (tramite i soli servizi di tracciamento terzi ogni ora, e ogni 3 ore dopo un giorno senza scansioni). Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Puoi scegliere gli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Quando l’ultima scansione risale ad almeno quattro giorni prima e non è un passaggio doganale né la segnalazione di un problema, Peek mostra «Nessun aggiornamento da» seguito dal giorno di quella scansione e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a CACESA.», con il link «Chiedi aiuto a CACESA» verso le FAQ.
 
 ## Domande sul tracciamento CACESA
 
@@ -124,5 +124,6 @@ Per un pacco fermo in dogana, CACESA impiega 3 o 4 giorni dallo svincolo alla co
 - [CACESA: testi dell’app web](https://www.cacesa.com/main.40b62b43302d800a.js) – testi del tracker, pagamento imposte, FAQ sulla regola UE dei 3 €, avviso antifrode
 - [ECO: risultati CTT fino a settembre 2025](https://eco.sapo.pt/2025/10/30/lucro-dos-ctt-sobe-184-para-328-milhoes-ate-setembro-com-integracao-da-espanhola-cacesa/) – acquisizione da parte di CTT nel 2025
 - [Commissione europea: riforma doganale UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € (1° luglio 2026) e contributo di gestione di 2 € (1° novembre 2026)
+- [Commissione europea: Ambito territoriale IVA e dogane](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Canarie, Ceuta e Melilla fuori dal territorio IVA dell’UE
 - [Universal Parcel Scraper: adattatore CACESA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cacesa) – cosa legge Peek e regole di rilevamento
 :::

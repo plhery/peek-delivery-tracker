@@ -60,7 +60,7 @@ CACESA bearbeitet keine Rücksendungen von Privatpersonen. Kläre eine Retoure d
 
 - Rechnung oder Kaufbeleg (z. B. ein Screenshot der Bestellseite mit Paketnummer, Artikel und Preis sowie ein Foto der Ware);
 - Zahlungsnachweis (Screenshot der Kartenabbuchung oder Beleg);
-- Hinweis, falls du selbstständig bist, damit der spanische Ausgleichszuschlag (recargo de equivalencia: 0,5 % bei 4 % MwSt., 1,4 % bei 10 % MwSt., 5,2 % bei 21 % MwSt.) berechnet werden kann.
+- Hinweis, falls du selbstständig bist, damit der spanische Ausgleichszuschlag (recargo de equivalencia: 0,5 % bei 4 % MwSt., 1,4 % bei 10 % MwSt., 5,2 % bei 21 % MwSt.) berechnet werden kann; er hängt an der spanischen MwSt., die auf den Kanaren, in Ceuta und Melilla nicht gilt.
 
 Du kannst die Sendung auch selbst über das Portal der spanischen Steuerbehörde (AEAT) verzollen; informiere CACESA in diesem Fall per E-Mail an atc@cacesa.com.
 
@@ -70,7 +70,7 @@ Du kannst die Sendung auch selbst über das Portal der spanischen Steuerbehörde
 
 **Schreiben der Steuerbehörde (AEAT).** Bei einem Bescheid mit „Decomiso - Depósito temporal“ (samt HB- und AEAT-Referenz) oder „Validación de datos“ scanne das Dokument und maile es an atc@cacesa.com. CACESA prüft, ob die Sendung noch freigegeben werden kann oder bereits vernichtet wurde.
 
-Die allgemeinen Regeln findest du unter [Paket hängt beim Zoll](guide:customs). Seit dem 1. Juli 2026 erhebt die EU auf Online-Bestellungen bis 150 € aus Nicht-EU-Ländern einen vorübergehenden pauschalen Zoll von 3 € pro deklarierter Warenart (6-stelliger HS-Code): Laut CACESA-FAQ zählen identische Artikel auf einer Zolllinie nur einmal, und wenn MwSt. und Zölle schon beim Kauf bezahlt wurden, fällt bei der Lieferung nichts mehr an. Seit dem 1. November 2026 gilt außerdem die EU-Bearbeitungsgebühr von 2 € pro Artikel; auf den Seiten von CACESA steht bislang nicht, wie sie an Empfänger weitergegeben wird.
+Die allgemeinen Regeln findest du unter [Paket hängt beim Zoll](guide:customs). Seit dem 1. Juli 2026 erhebt die EU auf Online-Bestellungen bis 150 € aus Nicht-EU-Ländern einen vorübergehenden pauschalen Zoll von 3 € pro deklarierter Warenart (6-stelliger HS-Code): Laut CACESA-FAQ zählen identische Artikel auf einer Zolllinie nur einmal, und wenn MwSt. und Zölle schon beim Kauf bezahlt wurden, fällt bei der Lieferung nichts mehr an. Seit dem 1. November 2026 gilt außerdem die EU-Bearbeitungsgebühr von 2 € pro Artikel; auf den Seiten von CACESA wird sie nicht erwähnt.
 
 **Verspätung, Verlust oder Schaden.** Für alles außer Zollzahlungen verweist CACESA an den Verkäufer, mit dem der Liefervertrag besteht. Wurde das Paket ohne Zollstopp und ohne Nachricht von CACESA freigegeben, kam aber nie an, wende dich an den Händler. Hilfe bei ruhiger Sendungsverfolgung bietet [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
@@ -91,9 +91,9 @@ CACESA hat weder eine portugiesische Website noch ein Büro in Portugal; für Sp
 
 Peek zeigt die englischen Statustexte von CACESA unverändert an, liest die Zeiten in Madrider Ortszeit und rechnet sie in deine Zeitzone um (am Ende des Verlaufs steht „Uhrzeiten in deiner Zeitzone:“ mit ihrem Namen). Ein Zustell-Eintrag erscheint als zugestellt, `Start Custom clearance Process` als Zollschritt und die Freigabe im grünen Kanal als Weitertransport; Zollbeträge zeigt Peek nicht an und Zahlungen sind darüber nicht möglich. Da CACESA keine Orte übermittelt, gibt es keine Kartenpunkte, ebenso wenig Lieferprognose, Gewicht, Absender oder Empfänger.
 
-Weil CACESA den Zustelldienst nicht nennt, läuft das Paket unter derselben Nummer weiter. Peek kann es nur weiterverfolgen, wenn diese Nummer eindeutig zu einem anderen Paketdienst passt: [Ecoscooting](carrier:ecoscooting) für `CNESP` und `CNPRT`, [Correos](carrier:correos-spain) für eine Postnummer mit Endung `ES`, [CTT](carrier:ctt) für Endung `PT` oder [CTT Express](carrier:ctt-express) für eigene Nummern. `CNES`- und `LP`-Nummern werden nicht weitergereicht.
+Weil CACESA den Zustelldienst nicht nennt, läuft das Paket unter derselben Nummer weiter. Peek kann es nur weiterverfolgen, wenn diese Nummer eindeutig zu einem anderen Paketdienst passt: [Ecoscooting](carrier:ecoscooting) für `CNESP` und `CNPRT`, für eine Postnummer die Post des Landes, in dem Peek dich verortet (Region des Telefons oder Land der Verbindung auf peektracker.com), etwa [Correos](carrier:correos-spain) in Spanien oder [CTT](carrier:ctt) in Portugal, oder [CTT Express](carrier:ctt-express) für eigene Nummern. `CNES`- und `LP`-Nummern werden nicht weitergereicht.
 
-Solange du Peek auf dem Bildschirm geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — fragt Peek CACESA direkt bis zu alle 10 Minuten ab (über Tracking-Dienste alle 15 Minuten). Sonst sowie nach zwei Tagen ohne Neuigkeiten (oder nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen. Nach vier Tagen ohne neuen Scan zeigt Peek „Seit vier Tagen keine Aktualisierung“ sowie „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei CACESA nach.“ samt Link „Hol dir Hilfe bei CACESA“ zur FAQ-Seite.
+Solange du Peek auf dem Bildschirm geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — fragt Peek CACESA direkt bis zu alle 10 Minuten ab (nur über Tracking-Dienste stündlich, nach einem Tag ohne Scan alle 3 Stunden). Sonst sowie nach zwei Tagen ohne Neuigkeiten (oder nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen. Ist der letzte Scan mindestens vier Tage alt und weder ein Zollschritt noch eine Problemmeldung, zeigt Peek „Keine Aktualisierung seit“ mit dem Tag dieses Scans sowie „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei CACESA nach.“ samt Link „Hol dir Hilfe bei CACESA“ zur FAQ-Seite.
 
 ## Häufige Fragen zu CACESA
 
@@ -124,5 +124,6 @@ Bei einem festgehaltenen Paket braucht CACESA nach der Zollfreigabe 3 bis 4 Tage
 - [CACESA: Web-App-Texte](https://www.cacesa.com/main.40b62b43302d800a.js) – Tracker-Texte, Zahlungsschritte, FAQ zur 3-€-EU-Regel, Betrugswarnung
 - [ECO: CTT-Ergebnisse bis September 2025](https://eco.sapo.pt/2025/10/30/lucro-dos-ctt-sobe-184-para-328-milhoes-ate-setembro-com-integracao-da-espanhola-cacesa/) – Abschluss der Übernahme durch CTT 2025
 - [Europäische Kommission: EU-Zollreform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – vorübergehender 3-€-Zoll (ab 1. Juli 2026) und 2-€-Bearbeitungsgebühr (ab 1. November 2026)
+- [Europäische Kommission: Territorialer Geltungsbereich von MwSt. und Zoll](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – Kanaren, Ceuta und Melilla außerhalb des EU-Mehrwertsteuergebiets
 - [Universal Parcel Scraper: CACESA-Adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cacesa) – was Peek ausliest und Erkennungsregeln
 :::

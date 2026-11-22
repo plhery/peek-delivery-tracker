@@ -44,9 +44,9 @@ I risultati di Ciblex sono solo in francese: anche i moduli inglese e olandese s
 
 ## Consegna Ciblex: firme, luoghi sicuri e punti C Dispo
 
-Ciblex opera per mittenti aziendali. I servizi H8, H9 e H12 consegnano il giorno seguente entro le 8:00, le 9:00 o mezzogiorno, dal lunedì al venerdì (sabato mattina su opzione), di persona con firma. Nei comuni serviti regolarmente Ciblex consegna al piano terra o nel cortile di sedi industriali o commerciali, e le sue condizioni considerano la firma digitalizzata prova di consegna.
+Ciblex opera per mittenti aziendali. I servizi H8, H9 e H12 consegnano nella Francia metropolitana il giorno seguente entro le 8:00, le 9:00 o mezzogiorno, dal lunedì al venerdì (sabato mattina su opzione), di persona con firma. Nei comuni serviti regolarmente Ciblex consegna al piano terra o nel cortile di sedi industriali o commerciali, e le sue condizioni considerano la firma digitalizzata prova di consegna.
 
-Con SP8 e SP9, Ciblex consegna dal martedì al sabato entro le 8:00 o le 9:00 anche in assenza di personale, in un luogo sicuro concordato con il mittente (come un box o un'anticamera).
+Con SP8 e SP9, Ciblex consegna nella Francia metropolitana dal martedì al sabato entro le 8:00 o le 9:00 anche in assenza di personale, in un luogo sicuro registrato da Ciblex (come un box o un'anticamera).
 
 **Punti C Dispo.** Ciblex dispone di 300 punti relais per professionisti, scelti dal mittente. I pacchi sono pronti dalle 8:00 e consegnati esibendo un documento d'identità o badge aziendale; ricevi un SMS all'arrivo e, dopo tre giorni senza ritiro, un promemoria via SMS o e-mail.
 
@@ -66,7 +66,7 @@ La responsabilità di Ciblex in Francia è limitata a 23 € per kg e 750 € pe
 
 ## Contatti Ciblex: telefono, e-mail e agenzie
 
-Canali pubblicati su ciblex.eu, validi per Francia e Belgio:
+Canali pubblicati su ciblex.eu:
 
 - **Telefono:** 08 26 82 69 99, numero riportato nelle note legali di Ciblex.
 - **E-mail:** ciblex@ciblex.fr.
@@ -77,11 +77,11 @@ Il modulo di contatto su ciblex.eu è riservato a richieste commerciali aziendal
 
 ## Tracciare un pacco Ciblex con Peek
 
-[Peek](/) riconosce i numeri Ciblex a 14 e 24 cifre, ma altri corrieri condividono entrambi i formati, quindi interroga subito i candidati probabili (Peek traccia oltre 4.500 corrieri). Per 14 cifre in Francia interroga per primi Chronopost e Ciblex (dopo DPD, DHL o un'altra rete solo se le prime cifre la indicano); altrove Ciblex compare dall'undicesima posizione in poi e viene quindi interrogata solo dopo il salvataggio. Fa eccezione un numero a 14 cifre iniziato per 10, in Francia o altrove: Peek chiede a Ciblex, SEUR e BRT, non a Chronopost, e solo se né loro né i servizi di tracciamento lo conoscono interroga DPD France tramite browser. Per 24 cifre chiede a Ciblex, Austrian Post e InPost, e a bpost per prima solo per numeri che iniziano per 3232 o 3299. Se due corrieri riconoscono il numero, scegli con «Cambia». Funzionano anche i link `secure.extranet.ciblex.fr` con `colis=`; le pagine `ciblex.eu` no.
+[Peek](/) riconosce i numeri Ciblex a 14 e 24 cifre, ma altri corrieri condividono entrambi i formati, quindi interroga subito i candidati probabili (Peek traccia oltre 4.500 corrieri). Per 14 cifre in Francia interroga per primi Chronopost e Ciblex (dopo DPD, DHL o un'altra rete solo se le prime cifre la indicano); altrove Ciblex compare dall'undicesima posizione in poi e può quindi essere interrogata solo dopo il salvataggio. Fa eccezione un numero a 14 cifre iniziato per 10, in Francia o altrove: Peek chiede a Ciblex, SEUR e BRT, non a Chronopost, e solo se né loro né i servizi di tracciamento lo conoscono interroga DPD France tramite browser. Per 24 cifre chiede a Ciblex, Austrian Post e InPost, e a bpost per prima solo per numeri che iniziano per 3232 o 3299. Se due corrieri riconoscono il numero, Peek ti chiede di scegliere. Funzionano anche i link `secure.extranet.ciblex.fr` con `colis=`; le pagine `ciblex.eu` no.
 
-Peek mostra stato, cronologia con la città di ogni deposito sulla mappa e ora di consegna, leggendo gli orari sull'ora di Parigi e mostrandoli nel fuso del tuo dispositivo (su peektracker.com e nelle app per iPhone e Android la cronologia termina con «Orari nel tuo fuso orario:» e il suo nome). Le voci note appaiono in testi chiari come «Consegnato», «In consegna», «Pronto per il ritiro», «Problema di consegna», «Problema con la spedizione» (per `PROBLEME DESTINATAIRE` o `COMPLEMENT ADRESSE`) o «Pacco elaborato in una sede Ciblex»; altre righe come `COLIS NON REMIS` e quella delle 48 ore restano nel francese originale. Mancano data prevista, nome o indirizzo del relais e peso, e il tuo indirizzo viene scartato se Ciblex lo inserisce nella colonna del luogo. Una cronologia vuota non viene trattata come «non trovato»: Peek continua a chiedere.
+Peek mostra stato, cronologia con la città di ogni deposito sulla mappa e ora di consegna, leggendo gli orari sull'ora di Parigi e mostrandoli nel fuso del tuo dispositivo (su peektracker.com e nelle app per iPhone e Android la cronologia termina con «Orari nel tuo fuso orario:» e il suo nome). Le voci note appaiono in testi chiari come «Consegnato», «In consegna», «Pronto per il ritiro», «Problema di consegna», «Problema con la spedizione» (per `PROBLEME DESTINATAIRE` o `COMPLEMENT ADRESSE`) o «Pacco elaborato in una sede Ciblex»; altre righe come `COLIS NON REMIS` e quella delle 48 ore restano nel francese originale. Mancano data prevista, nome o indirizzo del relais e peso, e il tuo indirizzo viene scartato se Ciblex lo inserisce nella colonna del luogo.
 
-Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 ora di Parigi nel giorno in cui Ciblex scansiona il pacco in consegna finché il tracking di Ciblex risponde (ogni 15 minuti tramite servizi di tracciamento). Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi attivare le notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
+Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Parigi nel giorno in cui Ciblex scansiona il pacco in consegna finché il tracking di Ciblex risponde. Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi attivare le notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
 ## Domande sul tracciamento Ciblex
 
@@ -112,6 +112,9 @@ Sì. Ciblex ha una sede a Zaventem e depositi in Belgio — tra cui Schaerbeek, 
 - [Ciblex: E-Commerce – The Express Service for Private Individuals](https://ciblex.eu/en/services/e-commerce-the-express-service-for-private-individuals/) – consegne ai privati via Relais Colis
 - [Ciblex: Agences](https://ciblex.eu/agences/) – sedi, depositi, orari, 166 paesi
 - [Ciblex: Contact](https://ciblex.eu/en/contact/) – modulo commerciale
+- [Ciblex: H8 – L'express avant 8h](https://ciblex.eu/offres-de-livraison-express/h8-livraison-demain-8h/) – giorno seguente entro le 8:00, dal lunedì al venerdì, Francia metropolitana
+- [Ciblex: H9 – L'express avant 9h](https://ciblex.eu/offres-de-livraison-express/h9-livraison-demain-9h/) – giorno seguente entro le 9:00, dal lunedì al venerdì, Francia metropolitana
+- [Ciblex: SP8 – Livraison en SAS avant 8h](https://ciblex.eu/offres-de-livraison-express/sp8-livraison-sas-avant-8h/) – consegna in luogo sicuro entro le 8:00, dal martedì al sabato
 - [Ciblex: SP9 – Livraison en SAS avant 9h](https://ciblex.eu/offres-de-livraison-express/sp9-livraison-sas-avant-9h/) – consegna in luogo sicuro
 - [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – entro mezzogiorno, firma
 - [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – sabato mattina

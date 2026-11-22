@@ -44,9 +44,9 @@ Os resultados da Ciblex surgem apenas em francês: os formulários em inglês e 
 
 ## Entrega Ciblex: assinaturas, locais seguros e pontos C Dispo
 
-A Ciblex trabalha para expedidores empresariais. Os serviços H8, H9 e H12 entregam no dia seguinte antes das 8h00, 9h00 ou meio-dia, de segunda a sexta (sábado de manhã por opção), em mão mediante assinatura. Nas localidades servidas regularmente entrega no rés do chão ou pátio de instalações industriais ou comerciais, e as suas condições aceitam a assinatura digitalizada como prova de entrega.
+A Ciblex trabalha para expedidores empresariais. Os serviços H8, H9 e H12 entregam na França metropolitana no dia seguinte antes das 8h00, 9h00 ou meio-dia, de segunda a sexta (sábado de manhã por opção), em mão mediante assinatura. Nas localidades servidas regularmente entrega no rés do chão ou pátio de instalações industriais ou comerciais, e as suas condições aceitam a assinatura digitalizada como prova de entrega.
 
-Com SP8 e SP9, a Ciblex entrega de terça a sábado antes das 8h00 ou 9h00 mesmo sem ninguém presente, num local seguro acordado com o remetente, como uma caixa ou antecâmara.
+Com SP8 e SP9, a Ciblex entrega na França metropolitana de terça a sábado antes das 8h00 ou 9h00 mesmo sem ninguém presente, num local seguro registado pela Ciblex, como uma caixa ou antecâmara.
 
 **Pontos C Dispo.** A Ciblex tem 300 pontos relais para profissionais, escolhidos pelo remetente. As encomendas ficam disponíveis a partir das 8h00 mediante documento de identificação ou cartão de empresa; recebes um SMS à chegada e, após três dias sem levantamento, um lembrete por SMS ou email.
 
@@ -66,7 +66,7 @@ A responsabilidade da Ciblex em França tem limite de 23 € por kg e 750 € po
 
 ## Contactos Ciblex: telefone, email e agências
 
-Canais indicados em ciblex.eu, tanto para França como para a Bélgica:
+Canais indicados em ciblex.eu:
 
 - **Telefone:** 08 26 82 69 99, número do aviso legal da Ciblex.
 - **Email:** ciblex@ciblex.fr.
@@ -77,11 +77,11 @@ O formulário de contacto em ciblex.eu destina-se a pedidos comerciais de empres
 
 ## Seguir uma encomenda Ciblex com o Peek
 
-O [Peek](/) conhece os números de 14 e 24 algarismos da Ciblex, mas outras transportadoras partilham ambos os formatos, pelo que pergunta às mais prováveis ao mesmo tempo (o Peek segue mais de 4500 transportadoras). Para 14 algarismos em França consulta primeiro Chronopost e Ciblex (após DPD, DHL ou outra rede só se o início do número apontar para ela); fora de França a Ciblex aparece em décimo primeiro ou depois, sendo consultada apenas depois de guardares a encomenda. A exceção é um número de 14 algarismos começado por 10, em França ou fora: o Peek pergunta a Ciblex, SEUR e BRT, não à Chronopost, e só recorre à DPD France num navegador se nenhum deles nem os serviços de seguimento o conhecerem. Para 24 algarismos pergunta a Ciblex, Austrian Post e InPost, e à bpost em primeiro apenas para números começados por 3232 ou 3299. Se duas transportadoras o conhecerem, escolhes em «Alterar». Links de `secure.extranet.ciblex.fr` com `colis=` também funcionam; páginas de `ciblex.eu` não.
+O [Peek](/) conhece os números de 14 e 24 algarismos da Ciblex, mas outras transportadoras partilham ambos os formatos, pelo que pergunta às mais prováveis ao mesmo tempo (o Peek segue mais de 4500 transportadoras). Para 14 algarismos em França consulta primeiro Chronopost e Ciblex (após DPD, DHL ou outra rede só se o início do número apontar para ela); fora de França a Ciblex aparece em décimo primeiro ou depois, pelo que só pode ser consultada depois de guardares a encomenda. A exceção é um número de 14 algarismos começado por 10, em França ou fora: o Peek pergunta a Ciblex, SEUR e BRT, não à Chronopost, e só recorre à DPD France num navegador se nenhum deles nem os serviços de seguimento o conhecerem. Para 24 algarismos pergunta a Ciblex, Austrian Post e InPost, e à bpost em primeiro apenas para números começados por 3232 ou 3299. Se duas transportadoras o conhecerem, o Peek pede-te que escolhas. Links de `secure.extranet.ciblex.fr` com `colis=` também funcionam; páginas de `ciblex.eu` não.
 
-O Peek mostra estado, histórico com a localidade de cada depósito no mapa e hora de entrega, lendo as horas em hora de Paris e convertendo para o fuso do teu dispositivo (em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» e o respetivo nome). As linhas conhecidas surgem em termos claros como «Entregue», «Em distribuição», «Pronta para levantamento», «Problema de entrega», «Problema com a encomenda» (para `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`) ou «Encomenda processada num centro Ciblex»; outras linhas, incluindo `COLIS NON REMIS` e a das 48 horas, mantêm o francês original. Faltam data prevista, nome ou morada do relais e peso, e a tua morada é descartada quando a Ciblex a coloca na coluna de local. Um histórico vazio não conta como «não encontrada»: o Peek continua a verificar.
+O Peek mostra estado, histórico com a localidade de cada depósito no mapa e hora de entrega, lendo as horas em hora de Paris e convertendo para o fuso do teu dispositivo (em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» e o respetivo nome). As linhas conhecidas surgem em termos claros como «Entregue», «Em distribuição», «Pronta para levantamento», «Problema de entrega», «Problema com a encomenda» (para `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`) ou «Encomenda processada num centro Ciblex»; outras linhas, incluindo `COLIS NON REMIS` e a das 48 horas, mantêm o francês original. Faltam data prevista, nome ou morada do relais e peso, e a tua morada é descartada quando a Ciblex a coloca na coluna de local.
 
-Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, e a cada 2 minutos a partir das 6h00 hora de Paris no dia em que a Ciblex regista a encomenda em distribuição enquanto o rastreio da Ciblex responder (e a cada 15 minutos através de serviços de seguimento). Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
+Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h00 hora de Paris no dia em que a Ciblex regista a encomenda em distribuição enquanto o rastreio da Ciblex responder. Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas sobre o rastreio Ciblex
 
@@ -112,6 +112,9 @@ Sim. A Ciblex tem uma agência em Zaventem e depósitos na Bélgica — entre el
 - [Ciblex: E-Commerce – The Express Service for Private Individuals](https://ciblex.eu/en/services/e-commerce-the-express-service-for-private-individuals/) – entregas a particulares via Relais Colis
 - [Ciblex: Agences](https://ciblex.eu/agences/) – agências, depósitos, horários, 166 países
 - [Ciblex: Contact](https://ciblex.eu/en/contact/) – formulário comercial
+- [Ciblex: H8 – L'express avant 8h](https://ciblex.eu/offres-de-livraison-express/h8-livraison-demain-8h/) – dia seguinte antes das 8h00, de segunda a sexta, França metropolitana
+- [Ciblex: H9 – L'express avant 9h](https://ciblex.eu/offres-de-livraison-express/h9-livraison-demain-9h/) – dia seguinte antes das 9h00, de segunda a sexta, França metropolitana
+- [Ciblex: SP8 – Livraison en SAS avant 8h](https://ciblex.eu/offres-de-livraison-express/sp8-livraison-sas-avant-8h/) – entrega em local seguro antes das 8h00, de terça a sábado
 - [Ciblex: SP9 – Livraison en SAS avant 9h](https://ciblex.eu/offres-de-livraison-express/sp9-livraison-sas-avant-9h/) – entrega em local seguro
 - [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – antes do meio-dia, assinatura
 - [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – sábados de manhã

@@ -44,9 +44,9 @@ Die Ergebnisse von Ciblex erscheinen nur auf Französisch: Auch die englische un
 
 ## Ciblex Zustellung: Unterschrift, sichere Ablage und C Dispo
 
-Ciblex arbeitet für gewerbliche Versender. Die Dienste H8, H9 und H12 liefern am nächsten Tag vor 8:00, 9:00 oder 12:00 Uhr, Montag bis Freitag (optional Samstagmorgen), persönlich gegen Unterschrift. In regelmäßig angefahrenen Orten liefert Ciblex im Erdgeschoss oder im Hof von Gewerbe- oder Industriebetrieben, und seine Bedingungen erkennen die digitale Unterschrift als Zustellnachweis an.
+Ciblex arbeitet für gewerbliche Versender. Die Dienste H8, H9 und H12 liefern im europäischen Frankreich am nächsten Tag vor 8:00, 9:00 oder 12:00 Uhr, Montag bis Freitag (optional Samstagmorgen), persönlich gegen Unterschrift. In regelmäßig angefahrenen Orten liefert Ciblex im Erdgeschoss oder im Hof von Gewerbe- oder Industriebetrieben, und seine Bedingungen erkennen die digitale Unterschrift als Zustellnachweis an.
 
-Mit SP8 und SP9 liefert Ciblex Dienstag bis Samstag vor 8:00 oder 9:00 Uhr auch ohne Anwesenheit an einen mit dem Absender vereinbarten sicheren Ort wie eine Box oder Schleuse.
+Mit SP8 und SP9 liefert Ciblex im europäischen Frankreich Dienstag bis Samstag vor 8:00 oder 9:00 Uhr auch ohne Anwesenheit an einen sicheren, bei Ciblex hinterlegten Ort wie eine Box oder Schleuse.
 
 **C-Dispo-Relais.** Ciblex betreibt 300 Relais-Punkte für Geschäftskunden; die Auswahl trifft der Absender. Pakete sind ab 8:00 Uhr abholbereit und werden gegen Ausweis oder Firmenausweis ausgehändigt; bei Ankunft kommt eine SMS und nach drei Tagen ohne Abholung eine Erinnerung per SMS oder E-Mail.
 
@@ -66,7 +66,7 @@ Die Haftung von Ciblex ist in Frankreich auf 23 € pro kg und 750 € pro Paket
 
 ## Ciblex Kontakt: Telefon, E-Mail und Agenturen
 
-Die auf ciblex.eu genannten Kanäle gelten für Frankreich und Belgien gleichermaßen:
+Auf ciblex.eu genannte Kanäle:
 
 - **Telefon:** 08 26 82 69 99 (aus Ciblex' Impressum).
 - **E-Mail:** ciblex@ciblex.fr.
@@ -77,11 +77,11 @@ Das Kontaktformular auf ciblex.eu dient Vertriebsanfragen von Unternehmen, nicht
 
 ## Ciblex-Paket mit Peek verfolgen
 
-[Peek](/) kennt Ciblex' 14- und 24-stellige Nummern, doch teilen andere Dienste beide Längen, sodass Peek passende Paketdienste parallel abfragt (Peek verfolgt über 4500 Paketdienste). Bei 14 Ziffern in Frankreich fragt es Chronopost und Ciblex zuerst, nach DPD, DHL oder anderen Netzen nur, wenn der Nummernbeginn darauf hindeutet; außerhalb Frankreichs steht Ciblex erst ab Rang elf und wird daher erst nach dem Speichern geprüft. Ausnahme ist eine 14-stellige Nummer mit Anfangsziffern 10, in Frankreich wie anderswo: Peek fragt Ciblex, SEUR und BRT (nicht Chronopost) und greift erst dann auf DPD France per Browser zurück, wenn weder diese noch Tracking-Dienste die Nummer kennen. Bei 24 Ziffern fragt Peek Ciblex, Austrian Post und InPost sowie bpost zuerst nur bei Beginn 3232 oder 3299. Kennen zwei Dienste die Nummer, wählst du über „Ändern“. Links von `secure.extranet.ciblex.fr` mit `colis=` funktionieren ebenfalls; Seiten auf `ciblex.eu` nicht.
+[Peek](/) kennt Ciblex' 14- und 24-stellige Nummern, doch teilen andere Dienste beide Längen, sodass Peek passende Paketdienste parallel abfragt (Peek verfolgt über 4500 Paketdienste). Bei 14 Ziffern in Frankreich fragt es Chronopost und Ciblex zuerst, nach DPD, DHL oder anderen Netzen nur, wenn der Nummernbeginn darauf hindeutet; außerhalb Frankreichs steht Ciblex erst ab Rang elf und kann daher erst nach dem Speichern geprüft werden. Ausnahme ist eine 14-stellige Nummer mit Anfangsziffern 10, in Frankreich wie anderswo: Peek fragt Ciblex, SEUR und BRT (nicht Chronopost) und greift erst dann auf DPD France per Browser zurück, wenn weder diese noch Tracking-Dienste die Nummer kennen. Bei 24 Ziffern fragt Peek Ciblex, Austrian Post und InPost sowie bpost zuerst nur bei Beginn 3232 oder 3299. Kennen zwei Dienste die Nummer, lässt Peek dich wählen. Links von `secure.extranet.ciblex.fr` mit `colis=` funktionieren ebenfalls; Seiten auf `ciblex.eu` nicht.
 
-Peek zeigt Status, Verlauf mit jedem Depot-Ort auf der Karte und die Zustellzeit; Zeiten wertet Peek als Pariser Zeit und zeigt sie in deiner Gerätezeitzone (auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen). Bekannte Einträge übersetzt Peek in eigene Begriffe wie „Zugestellt“, „In Zustellung“, „Abholbereit“, „Zustellproblem“, „Problem mit der Sendung“ (für `PROBLEME DESTINATAIRE` oder `COMPLEMENT ADRESSE`) oder „Sendung in einem Ciblex-Depot bearbeitet“; andere Zeilen wie `COLIS NON REMIS` und die 48-Stunden-Zeile bleiben auf Französisch. Erwartetes Lieferdatum, Relais-Name oder -Adresse und Gewicht fehlen, und deine Adresse wird ausgeblendet, falls Ciblex sie in der Ortsspalte ausgibt. Ein leerer Verlauf gilt nicht als „nicht gefunden“: Peek fragt weiter ab.
+Peek zeigt Status, Verlauf mit jedem Depot-Ort auf der Karte und die Zustellzeit; Zeiten wertet Peek als Pariser Zeit und zeigt sie in deiner Gerätezeitzone (auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen). Bekannte Einträge übersetzt Peek in eigene Begriffe wie „Zugestellt“, „In Zustellung“, „Abholbereit“, „Zustellproblem“, „Problem mit der Sendung“ (für `PROBLEME DESTINATAIRE` oder `COMPLEMENT ADRESSE`) oder „Sendung in einem Ciblex-Depot bearbeitet“; andere Zeilen wie `COLIS NON REMIS` und die 48-Stunden-Zeile bleiben auf Französisch. Erwartetes Lieferdatum, Relais-Name oder -Adresse und Gewicht fehlen, und deine Adresse wird ausgeblendet, falls Ciblex sie in der Ortsspalte ausgibt.
 
-Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag, an dem Ciblex das Paket in Zustellung scannt, ab 6:00 Uhr Pariser Zeit alle 2 Minuten, solange Ciblex' eigener Tracker antwortet (über Tracking-Dienste alle 15 Minuten). Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag, an dem Ciblex das Paket in Zustellung scannt, ab 6:00 Uhr Pariser Zeit bis zu alle 2 Minuten, solange Ciblex' eigener Tracker antwortet. Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Fragen zur Ciblex-Sendungsverfolgung
 
@@ -112,6 +112,9 @@ Ja. Ciblex hat eine Agentur in Zaventem und Depots in Belgien, darunter Schaerbe
 - [Ciblex: E-Commerce – The Express Service for Private Individuals](https://ciblex.eu/en/services/e-commerce-the-express-service-for-private-individuals/) – Privatkundenzustellung über Relais Colis
 - [Ciblex: Agences](https://ciblex.eu/agences/) – Agenturen, Depots, Öffnungszeiten, 166 Länder
 - [Ciblex: Contact](https://ciblex.eu/en/contact/) – Vertriebsformular
+- [Ciblex: H8 – L'express avant 8h](https://ciblex.eu/offres-de-livraison-express/h8-livraison-demain-8h/) – nächster Tag vor 8 Uhr, Montag bis Freitag, europäisches Frankreich
+- [Ciblex: H9 – L'express avant 9h](https://ciblex.eu/offres-de-livraison-express/h9-livraison-demain-9h/) – nächster Tag vor 9 Uhr, Montag bis Freitag, europäisches Frankreich
+- [Ciblex: SP8 – Livraison en SAS avant 8h](https://ciblex.eu/offres-de-livraison-express/sp8-livraison-sas-avant-8h/) – sichere Ablage vor 8 Uhr, Dienstag bis Samstag
 - [Ciblex: SP9 – Livraison en SAS avant 9h](https://ciblex.eu/offres-de-livraison-express/sp9-livraison-sas-avant-9h/) – sichere Ablage vor 9 Uhr
 - [Ciblex: H12 – L'express avant midi](https://ciblex.eu/offres-de-livraison-express/h12-livraison-24h/) – vor Mittag, Unterschrift
 - [Ciblex: Livraison samedi matin](https://ciblex.eu/offres-de-livraison-express/livraison-samedi-matin/) – Samstagmorgen

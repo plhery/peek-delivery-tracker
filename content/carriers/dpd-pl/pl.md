@@ -14,9 +14,9 @@ DPD pisze o „14-znakowym numerze przesyłki” i nie wyjaśnia, z czego się s
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `1234567890123A` | 13 cyfr i litera: numer paczki DPD Polska. |
+| `4829105736491A` | 13 cyfr i litera: numer paczki DPD Polska. |
 | `13000000000000` | 14 cyfr zaczynających się od 13: też numer DPD Polska. |
-| `123456789` | 9-znakowy kod nadania: służy nadawcy, na przykład przy automacie. |
+| `482910573` | 9-znakowy kod nadania: służy nadawcy, na przykład przy automacie. |
 
 Czternaście cyfr mają też numery DPD w Niemczech, Szwajcarii, Wielkiej Brytanii i Francji oraz SEUR czy BRT, więc sprawdź, którego przewoźnika wymienia e-mail ze sklepu. Jeśli strona DPD odpowiada `Wprowadzono błędny numer przesyłki`, numer jest błędny albo nie trafił jeszcze do systemu DPD: DPD prosi, by wpisać go ponownie następnego dnia po nadaniu, w godzinach porannych. Paczki Allegro Delivery widać tylko w narzędziach Allegro, nie w DPD Mobile.
 
@@ -65,7 +65,7 @@ DPD wydaje decyzję w ciągu 30 dni kalendarzowych od złożenia kompletnej rekl
 
 ## DPD infolinia i kontakt z konsultantem
 
-Według strony DPD Polska (stan na 11 października 2026):
+Według strony DPD Polska:
 
 - **Contact Center:** 801 400 373 lub 22 577 55 55, opłata według cennika operatora. Poniedziałek–piątek 9:00–17:00, sobota 8:00–14:00.
 - **Automaty DPD Pickup (pomoc techniczna):** 22 571 52 52, poniedziałek–piątek 8:00–20:00, sobota 8:00–14:00.
@@ -78,7 +78,7 @@ Według strony DPD Polska (stan na 11 października 2026):
 
 [Peek](/) od razu rozpoznaje DPD Poland po 13 cyfrach i literze. Przy 14 cyfrach zaczynających się od 13 pyta naraz kilku przewoźników, z DPD Poland jako najbardziej prawdopodobnym, i pokazuje „DPD Poland ma tę przesyłkę.”, gdy numer zna tylko DPD Poland. Jeśli zna go kilku przewoźników albo żaden, a także przy innych 14-cyfrowych numerach, wybierz DPD Poland przyciskiem „Zmień”. Zadziała też link z tracktrace.dpd.com.pl lub tt.dpd.com.pl z `p1=`; kodu nadania, numeru referencyjnego ani numeru zlecenia nie rozpoznaje.
 
-Gdy korzystasz z Peek po polsku, Peek czyta polską stronę DPD (a całą historię po angielsku, gdy trafi na polski komunikat, którego jeszcze nie zna), w innych językach angielską, i pokazuje status, historię i godzinę doręczenia, z komunikatami takimi, jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Peek odczytuje wszystkie skany w czasie warszawskim, także rejestrację, odbiór bez kodu oddziału i skany za granicą. Peek sprawdza DPD nawet co 10 minut, a od wydania do doręczenia nawet co 2 minuty (tylko w dniu wydania, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie DPD; przez serwisy śledzenia przesyłek co 15 minut), i może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki po `Przekazano za granicę` (`Sent outside Poland`) i nie zapamiętuje nowego numeru zwrotu.
+Gdy korzystasz z Peek po polsku, Peek czyta polską stronę DPD (a całą historię po angielsku, gdy trafi na polski komunikat, którego jeszcze nie zna), w innych językach angielską, i pokazuje status, historię i godzinę doręczenia, z komunikatami takimi, jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Peek odczytuje wszystkie skany w czasie warszawskim, także rejestrację, odbiór bez kodu oddziału i skany za granicą. Gdy masz paczkę otwartą albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza DPD nawet co 10 minut, a od wydania do doręczenia nawet co 2 minuty (tylko w dniu wydania, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie DPD; przez serwisy śledzenia przesyłek nawet co 15 minut tego dnia); w przeciwnym razie co godzinę. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Po `Przekazano za granicę` (`Sent outside Poland`) Peek dalej czyta śledzenie DPD Polska, które pokazuje skany DPD w kraju docelowym aż do doręczenia, bez pytania tamtejszego DPD; nie zapamiętuje nowego numeru zwrotu.
 
 ## Pytania o śledzenie paczki DPD
 

@@ -14,11 +14,11 @@ An international item from Taiwan has 13 characters: two letters, nine digits an
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `EE000000005TW` | E: EMS, the international express service. |
-| `RR000000005TW` | R: an international registered letter. |
-| `LX000000005TW` | L: an international ePacket, a small packet. |
-| `CP000000005TW` | C: an international parcel. |
-| `00000000000000` | 14 digits (or 20): an item sent within Taiwan, on Chunghwa Post's domestic tracker. |
+| `EE482910576TW` | E: EMS, the international express service. |
+| `RR482910576TW` | R: an international registered letter. |
+| `LX482910576TW` | L: an international ePacket, a small packet. |
+| `CP482910576TW` | C: an international parcel. |
+| `48291057364918` | 14 digits (or 20): an item sent within Taiwan, on Chunghwa Post's domestic tracker. |
 
 Chunghwa Post says ordinary small packets with a number starting with U can't be tracked online. See [how to find a tracking number](guide:find-tracking-number) if you don't have it.
 
@@ -90,7 +90,7 @@ Taipei Customs also warns that some goods are restricted or banned from import, 
 
 ## Chunghwa Post customer service and contact number
 
-Chunghwa Post's channels, as read on 30 October 2026:
+Chunghwa Post's channels:
 
 - **Customer service line**, 24 hours: 0800-700-365, then press 3 for English. From a mobile, call the paid number (04) 2354-2030.
 - **Items coming into Taiwan**: (03) 3180-700, extension 2431 for EMS, 2432 for parcels, 2430 for letters. Monday to Friday except holidays, 8:00 to 12:00 and 13:30 to 16:30 (letters 13:00 to 16:00), Taiwan time.
@@ -105,9 +105,9 @@ From abroad, dial +886 and drop the first 0 of the (03) and (04) numbers, as Chu
 
 Peek reads Chunghwa Post's international tracker and shows each scan in Chinese, as Chunghwa Post wrote it, with the office that made it (an office written in Chinese is named by its town where Peek can place it). It knows the stages of the lines in the table above. Peek reads Chunghwa Post's own scans on Taiwan time, and scans made abroad on the local time of the post that made them. Chunghwa Post gives no expected delivery date or weight, and Peek leaves out the remarks beside each scan.
 
-For a number ending in `TW`, Peek also asks the national post of the country you track it from, with the same number: Poste Italiane from Italy, DHL from Germany, Correos from Spain, Royal Mail from the UK. It switches to that post once it shows fresh scans, and keeps Chunghwa Post's history. The other way round, when your post's tracking names Taiwan as the destination, Peek asks Chunghwa Post with your post's number, unless it starts with U.
+For a number ending in `TW`, Peek also asks the national post of the country you track it from, with the same number: Poste Italiane from Italy, DHL from Germany, Correos from Spain, Royal Mail from the UK (Parcelforce for EMS). It switches to that post once it shows fresh scans, and keeps Chunghwa Post's history. The other way round, when your post's tracking names Taiwan as the destination, Peek asks Chunghwa Post with your post's number, unless it starts with U.
 
-While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes once the parcel is out for delivery; otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while Chunghwa Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes); through tracking services, it's up to every 15 minutes that day, and otherwise hourly, or every 3 hours after a day without news. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes once the parcel is out for delivery; otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while Chunghwa Post's or your post's own tracker answers (after the hand-over, at your post's own pace); through tracking services, it's up to every 15 minutes that day, and otherwise hourly, or every 3 hours after a day without news. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
 
 ## Questions about Chunghwa Post tracking
 

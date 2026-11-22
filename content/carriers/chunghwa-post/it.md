@@ -14,11 +14,11 @@ Un invio internazionale da Taiwan ha un codice di 13 caratteri: due lettere, nov
 
 | Codice (inventato) | Cos'è |
 | --- | --- |
-| `EE000000005TW` | E: EMS, il servizio espresso internazionale. |
-| `RR000000005TW` | R: una raccomandata internazionale. |
-| `LX000000005TW` | L: un ePacket internazionale, cioè un piccolo pacchetto. |
-| `CP000000005TW` | C: un pacco internazionale. |
-| `00000000000000` | 14 cifre (o 20): un invio spedito dentro Taiwan, che si segue sul tracker nazionale di Chunghwa Post. |
+| `EE482910576TW` | E: EMS, il servizio espresso internazionale. |
+| `RR482910576TW` | R: una raccomandata internazionale. |
+| `LX482910576TW` | L: un ePacket internazionale, cioè un piccolo pacchetto. |
+| `CP482910576TW` | C: un pacco internazionale. |
+| `48291057364918` | 14 cifre (o 20): un invio spedito dentro Taiwan, che si segue sul tracker nazionale di Chunghwa Post. |
 
 Chunghwa Post dice che i piccoli pacchetti ordinari con un codice che inizia con U non si possono tracciare online. Se il codice non ce l'hai, vedi [dove trovare il codice di tracking](guide:find-tracking-number).
 
@@ -81,7 +81,7 @@ La dogana di Taipei avverte anche che alcune merci sono soggette a restrizioni o
 
 ## Chunghwa Post contatti: numero di telefono e assistenza
 
-Al 31 ottobre 2026 Chunghwa Post indica questi canali. Gli orari sono quelli di Taiwan, che è 7 ore avanti rispetto all'Italia con l'ora solare e 6 con l'ora legale.
+Chunghwa Post indica questi canali. Gli orari sono quelli di Taiwan, che è 7 ore avanti rispetto all'Italia con l'ora solare e 6 con l'ora legale.
 
 - **Servizio clienti**, 24 ore su 24: 0800-700-365, poi il 3 per l'inglese. Da cellulare si chiama il numero a pagamento (04) 2354-2030.
 - **Invii in arrivo a Taiwan**: (03) 3180-700, interno 2431 per EMS e 2432 per i pacchi, dal lunedì al venerdì, festivi esclusi, dalle 8:00 alle 12:00 e dalle 13:30 alle 16:30; interno 2430 per le raccomandate, dalle 8:00 alle 12:00 e dalle 13:00 alle 16:00.
@@ -98,7 +98,7 @@ Peek legge il tracker internazionale di Chunghwa Post e mostra ogni scansione in
 
 Per un codice che finisce con `TW`, quando lo segui dall'Italia Peek chiede anche a Poste Italiane, con lo stesso codice. Appena Poste mostra una scansione non più vecchia dell'ultima di Chunghwa Post, Peek segue il pacco su Poste e tiene la cronologia di Chunghwa Post. Al contrario, un pacco che spedisci a Taiwan con Poste Italiane non passa da solo a Chunghwa Post, perché il tracking di Poste non indica la destinazione. Per seguirlo a Taiwan, cerca il codice di Poste sul tracker di Chunghwa Post, che segue la posta dall'estero con il codice della posta di partenza, per sei mesi.
 
-Mentre hai il pacco aperto sullo schermo, o nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Chunghwa Post; quando rispondono i servizi di tracciamento, fino a ogni 15 minuti; quando Peek lo segue su Poste Italiane, ogni ora); altrimenti, e dopo due giorni senza novità, ogni ora. Quando Peek lo segue tramite i servizi di tracciamento, dopo un giorno senza novità controlla ogni 3 ore. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Chunghwa Post, Poste o il negozio al posto tuo.
+Mentre hai il pacco aperto sullo schermo, o nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Chunghwa Post; quando rispondono i servizi di tracciamento, fino a ogni 15 minuti); altrimenti, e dopo due giorni senza novità, ogni ora. Quando Peek lo segue tramite i servizi di tracciamento, dopo un giorno senza novità controlla ogni 3 ore. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Chunghwa Post, Poste o il negozio al posto tuo.
 
 ## Domande sul tracking Chunghwa Post
 

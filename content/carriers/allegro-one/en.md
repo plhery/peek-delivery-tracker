@@ -20,10 +20,10 @@ Peek can track these shapes with Allegro One (characters invented):
 
 | Shape | Whose it is |
 | --- | --- |
-| `A000000000` | Allegro One: `A0` and 8 letters or digits, 10 characters. |
-| `AD000000000000000` | Allegro Delivery: `AD0` and 14 digits or consonants, 17 characters, named Allegro One too. |
-| `AD00000000` | An earlier Allegro Delivery form, still on some returns: `AD` and 8 letters or digits. |
-| `ALE000000000000` | An older Allegro One form: `ALE` and 12 digits. |
+| `A0K4829105` | Allegro One: `A0` and 8 letters or digits, 10 characters. |
+| `AD0K4829105736491` | Allegro Delivery: `AD0` and 14 digits or consonants, 17 characters, named Allegro One too. |
+| `ADK4829105` | An earlier Allegro Delivery form, still on some returns: `AD` and 8 letters or digits. |
+| `ALE482910573649` | An older Allegro One form: `ALE` and 12 digits. |
 
 No number yet? The seller adds it to the order, unless Allegro receives it automatically from a carrier integrated with it. See [how to find your tracking number](guide:find-tracking-number).
 
@@ -86,7 +86,7 @@ Allegro handles customer service for Allegro Delivery parcels, Allegro One's inc
 
 It reads Allegro's tracking in English, or in Polish if you use Peek in Polish, and shows the wordings as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender.
 
-It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Allegro One scans the parcel out for delivery, while Allegro One's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps only, or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Allegro One scans the parcel out for delivery, while Allegro One's own tracker answers (through tracking services, up to every 15 minutes that day); otherwise hourly. It can notify you of every scan, important steps only, or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Allegro One tracking
 

@@ -20,10 +20,10 @@ Takie kształty numerów Peek może śledzić w Allegro One (numery wymyślone):
 
 | Kształt | Co to jest |
 | --- | --- |
-| `A000000000` | Allegro One: `A0` i 8 liter lub cyfr, razem 10 znaków. |
-| `AD000000000000000` | Allegro Delivery: `AD0` i 14 cyfr lub spółgłosek, razem 17 znaków, też przypisany do Allegro One. |
-| `AD00000000` | Wcześniejszy format Allegro Delivery, wciąż na niektórych zwrotach: `AD` i 8 liter lub cyfr. |
-| `ALE000000000000` | Starszy format numeru Allegro One: `ALE` i 12 cyfr. |
+| `A0K4829105` | Allegro One: `A0` i 8 liter lub cyfr, razem 10 znaków. |
+| `AD0K4829105736491` | Allegro Delivery: `AD0` i 14 cyfr lub spółgłosek, razem 17 znaków, też przypisany do Allegro One. |
+| `ADK4829105` | Wcześniejszy format Allegro Delivery, wciąż na niektórych zwrotach: `AD` i 8 liter lub cyfr. |
+| `ALE482910573649` | Starszy format numeru Allegro One: `ALE` i 12 cyfr. |
 
 Nie widzisz numeru? Dodaje go sprzedający, chyba że Allegro pobiera go automatycznie od przewoźnika zintegrowanego z Allegro. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -88,9 +88,9 @@ Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi A
 
 [Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi oraz po 17-znakowym numerze `AD0`. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tych kształtów. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
 
-Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia, w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
+Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia, w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacjach na iPhone'a i Androida historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 
-Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Allegro One; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
+Gdy masz paczkę otwartą albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Allegro One; przez serwisy śledzenia przesyłek nawet co 15 minut tego dnia); w przeciwnym razie co godzinę. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 
 ## Pytania o śledzenie Allegro One
 
@@ -111,11 +111,11 @@ Do One Boxa i One Punktu trafiają paczki do 20 kg i do 64 × 41 × 38 cm. One K
 Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a w śledzeniu pojawia się `Skończył się czas na odbiór przesyłki`.
 
 :::sources
-- [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, kto wozi paczki do One Punktu i One Boxa, dostawa tego samego dnia do One Boxa (odbiór 16:00–22:00), czas na odbiór, zaginięcie po 30 dniach, odpowiedź na reklamację zwykle w 7 dni, najpóźniej w 30, infolinia automatu, obsługa klienta, cena dostawy, wymiary (odczyt 14 listopada 2026)
+- [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, kto wozi paczki do One Punktu i One Boxa, dostawa tego samego dnia do One Boxa (odbiór 16:00–22:00), czas na odbiór, zaginięcie po 30 dniach, odpowiedź na reklamację zwykle w 7 dni, najpóźniej w 30, infolinia automatu, obsługa klienta, cena dostawy, wymiary
 - [Allegro: Jak poprawnie nadawać przesyłki z zamówieniami](https://help.allegro.com/pl/sell/a/jak-poprawnie-nadawac-przesylki-z-zamowieniami-poradnik-dla-sprzedajacych-AgbzAwmGMcY) – gdzie kupujący widzi przesyłkę, numery pobierane automatycznie, śledzenie u przewoźnika
 - [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – e-mail z przewoźnikiem, numerem i linkiem do śledzenia
 - [Allegro: Regulamin Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – dostawa jutro przesyłki kurierskiej (najbliższy dzień roboczy albo sobota, gwarancja 3 dni robocze), strona śledzenia Allegro Delivery, powiadomienie, kod, QR i aplikacja, automat zastępczy, przedłużenie, przekierowanie, awizo, zwrot do sprzedającego, protokół szkody, przesyłka utracona po 30 dniach, reklamacje
-- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, od godziny do 2 lat, 24 godziny na pierwszą wiadomość bez sobót, niedziel i dni wolnych od pracy, przycisk Pomoc Allegro, 7 dni przy opóźnieniu, zagubieniu i braku produktu w przesyłce, wniosek w ramach Allegro Ochrony Kupujących, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro (odczyt 14 listopada 2026)
-- [Allegro: Zmieniliśmy regulamin Allegro Smart! dla kupujących](https://help.allegro.com/pl/sell/a/zmienilismy-regulamin-allegro-smart-dla-kupujacych-GREoO0LKbfg) – darmowa dostawa od 49,90 zł u jednego sprzedającego (odczyt 14 listopada 2026)
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, od godziny do 2 lat, 24 godziny na pierwszą wiadomość bez sobót, niedziel i dni wolnych od pracy, przycisk Pomoc Allegro, 7 dni przy opóźnieniu, zagubieniu i braku produktu w przesyłce, wniosek w ramach Allegro Ochrony Kupujących, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro
+- [Allegro: Zmieniliśmy regulamin Allegro Smart! dla kupujących](https://help.allegro.com/pl/sell/a/zmienilismy-regulamin-allegro-smart-dla-kupujacych-GREoO0LKbfg) – darmowa dostawa od 49,90 zł u jednego sprzedającego
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształty numerów, brzmienie i języki statusów, paczki partnerów pod numerem Allegro, co Peek odczytuje
 :::

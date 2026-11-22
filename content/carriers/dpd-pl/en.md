@@ -14,9 +14,9 @@ DPD says its parcel numbers have 14 characters: in practice 13 digits and a lett
 
 | Number (invented) | What it is |
 | --- | --- |
-| `1234567890123A` | 13 digits and a letter: a DPD Poland parcel number. |
+| `4829105736491A` | 13 digits and a letter: a DPD Poland parcel number. |
 | `13000000000000` | 14 digits starting 13: also DPD Poland's. |
-| `123456789` | A 9-character sending code, used by senders: not a tracking number. |
+| `482910573` | A 9-character sending code, used by senders: DPD's tracking accepts it; Peek doesn't. |
 
 Fourteen digits also fit [DPD Germany](carrier:dpd-de), [DPD Switzerland](carrier:dpd-ch), [DPD UK](carrier:dpd-uk), SEUR, BRT and others, so check which carrier the shop's email names. If DPD replies `There is no trace for this parcel`, the number is wrong or not in DPD's system yet: DPD asks you to try again the morning after posting.
 
@@ -49,7 +49,7 @@ DPD's tracking site opens in Polish; switch to "English" for these wordings. In 
 
 **Pickup points and lockers.** DPD counts over 35,000 Pickup points and lockers, including Żabka, Lidl and Auchan shops. A parcel waits two full working days; the exact deadline is in DPD's notification and in DPD Mobile. It can't be extended: then the parcel goes back to the sender. Pick it up with DPD Mobile or the collection code from DPD's email, typed on the locker's keypad. Someone else can use your code if no documents need signing. If your point is full, DPD sends the parcel to a nearby one and tells you.
 
-Saturday delivery happens only when the sender booked it. Allegro Delivery parcels show only in Allegro's tools, not in DPD Mobile.
+Saturday delivery happens only when the sender booked it.
 
 ## DPD parcel not delivered, lost or damaged
 
@@ -65,7 +65,7 @@ DPD decides within 30 calendar days of a complete claim. For postal services, a 
 
 ## DPD Poland customer service and contact number
 
-As listed on DPD Poland's Polish pages on 11 October 2026:
+As listed on DPD Poland's Polish pages:
 
 - **Contact Center:** 801 400 373 or 22 577 55 55 (+48 22 577 55 55 from abroad), at your operator's rates. Monday to Friday 9:00 to 17:00, Saturday 8:00 to 14:00.
 - **DPD Pickup lockers:** +48 22 571 52 52, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00.
@@ -73,13 +73,13 @@ As listed on DPD Poland's Polish pages on 11 October 2026:
 
 DPD's English contact page lists no phone numbers, and no page says the Contact Center speaks English.
 
-> DPD Poland warns about fake SMS and emails in its name, such as requests for an extra payment for overweight or an address error. DPD never sends payment links by SMS or email. If you clicked, change your passwords, call your bank and tell DPD's Contact Center.
+> DPD Poland warns about fake SMS and emails in its name, such as requests for an extra payment for overweight or an address error. DPD Poland never sends links for extra payments by SMS or email. If you clicked, change your passwords, call your bank and tell DPD's Contact Center.
 
 ## Tracking a DPD Poland parcel with Peek
 
 [Peek](/) names DPD Poland at once for 13 digits and a letter. For 14 digits starting 13, Peek asks the likely carriers, DPD Poland first, and shows "DPD Poland has this parcel." when DPD knows the number. For other 14-digit numbers, pick DPD Poland with "Change". A tracktrace.dpd.com.pl or tt.dpd.com.pl link with `p1=` works too; sending codes, reference and order numbers don't.
 
-Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. Peek checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers; through tracking services, every 15 minutes) and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow the parcel after `Sent outside Poland` or keep a return's new number.
+Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers; through tracking services, up to every 15 minutes that day); otherwise hourly. It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After `Sent outside Poland`, Peek keeps reading DPD Poland's tracking, which shows the destination DPD network's scans up to delivery, without asking that country's DPD tracker; it doesn't keep a return's new number.
 
 ## Questions about DPD tracking in Poland
 
@@ -102,7 +102,7 @@ Yes, in DPD Mobile, which lists parcels linked to your account's phone number or
 - [DPD Poland: Track the parcel](https://tracktrace.dpd.com.pl/EN/findParcel) – search, unknown-number reply
 - [DPD Poland: Receive your parcel](https://www.dpd.com/pl/en/receive-your-parcel/) – DPD Predict, notices
 - [DPD Poland: DPD Pickup](https://www.dpd.com/pl/pl/dpd-pickup/) – network, partner shops
-- [DPD Poland: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – keypad code, Allegro Delivery
+- [DPD Poland: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – keypad code
 - [DPD Poland: Submit a claim](https://www.dpd.com/pl/en/moje-dpd/submit-a-claim-at-dpd/) – lost parcels, damage, 30-day decision
 - [DPD Poland: Fałszywe SMS-y i e-maile](https://www.dpd.com/pl/pl/o-dpd/falszywe-maile/) – fake message warning
 - [DPD Poland: O DPD Polska](https://www.dpd.com/pl/pl/o-dpd/o-dpd-polska/) – Geopost, La Poste

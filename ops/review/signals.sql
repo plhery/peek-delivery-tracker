@@ -339,25 +339,41 @@ order by e.created_at desc;
 
 \echo '== Support cases: opened in the window, or held until then, and still open with a reason'
 \echo '   repeats: cases of the same number typed again with a character more or less, counted under the first'
-select configured_carrier as carrier, detection_carrier as detected, array_to_string(reasons, ',') as reasons,
-       array_to_string(array_remove(array[
-         case when reasons && array['unknown_shape', 'ambiguous_shape', 'generic_postal', 'carrier_mismatch',
-           'recognition_unknown', 'recognition_choice'] then 'carriers' end,
-         case when 'no_direct_adapter' = any(reasons) then 'adapters' end], null), '+') as lane,
-       count(*) as cases,
-       sum((select count(*) from public.tracking_support_cases r where r.duplicate_of = c.id and r.fix_status = 'open')) as repeats,
-       array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
-from public.tracking_support_cases c
--- A case held for a carrier recognition asks only through a browser waits until its hold ends.
--- One whose parcel's latest check left no reason, its carrier having confirmed the number, needs
--- no work: the next release's replay marks it fixed (reviewQueues.ts).
-where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
-  and cardinality(reasons) > 0
-  -- One whose filed carrier tracked the number is in the next list.
-  and direct_verified_carrier is distinct from configured_carrier
-  -- A repeat counts under its first case while that is open, and stands on its own once it is closed.
-  and (duplicate_of is null or not exists (
-    select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
+\echo '   same_shape: for each of the patterns in turn, other numbers of that shape filed in the 30 days before the window'
+with cases as (
+  select configured_carrier as carrier, detection_carrier as detected, array_to_string(reasons, ',') as reasons,
+         array_to_string(array_remove(array[
+           case when reasons && array['unknown_shape', 'ambiguous_shape', 'generic_postal', 'carrier_mismatch',
+             'recognition_unknown', 'recognition_choice'] then 'carriers' end,
+           case when 'no_direct_adapter' = any(reasons) then 'adapters' end], null), '+') as lane,
+         (select count(*) from public.tracking_support_cases r where r.duplicate_of = c.id and r.fix_status = 'open') as repeats,
+         private.tracking_number_pattern(tracking_number) as pattern
+  from public.tracking_support_cases c
+  -- A case held for a carrier recognition asks only through a browser waits until its hold ends.
+  -- One whose parcel's latest check left no reason, its carrier having confirmed the number, needs
+  -- no work: the next release's replay marks it fixed (reviewQueues.ts).
+  where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
+    and cardinality(reasons) > 0
+    -- One whose filed carrier tracked the number is in the next list.
+    and direct_verified_carrier is distinct from configured_carrier
+    -- A repeat counts under its first case while that is open, and stands on its own once it is closed.
+    and (duplicate_of is null or not exists (
+      select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
+), shapes as (
+  select carrier, detected, reasons, lane, pattern, count(*) as cases, sum(repeats) as repeats from cases group by 1, 2, 3, 4, 5
+), earlier as (
+  -- A shape whose earlier cases were all ignored is still listed: the count says how often it came before.
+  select private.tracking_number_pattern(tracking_number) as pattern, count(*) as filed,
+         count(*) filter (where fix_status = 'ignored') as ignored
+  from public.tracking_support_cases
+  where first_seen >= :since - interval '30 days' and first_seen < :since and duplicate_of is null
+  group by 1
+)
+select carrier, detected, reasons, lane, sum(s.cases) as cases, sum(repeats) as repeats,
+       array_to_string((array_agg(s.pattern order by s.pattern))[1:3], '; ') as patterns,
+       array_to_string((array_agg(coalesce(e.filed, 0) || case when e.ignored > 0 then ' (' || e.ignored || ' ignored)' else '' end
+         order by s.pattern))[1:3], '; ') as same_shape
+from shapes s left join earlier e using (pattern)
 group by 1, 2, 3, 4
 order by cases desc, carrier;
 

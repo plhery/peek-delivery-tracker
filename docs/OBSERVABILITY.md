@@ -549,7 +549,8 @@ whenever it falls; a carrier and stage whose drops all passed or were held is le
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a
 wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once
-the scraper's rule is fixed), new open support cases that still give a reason (apart, the ones whose filed carrier
+the scraper's rule is fixed), new open support cases that still give a reason (with, for each shape, how many numbers of it
+were filed in the 30 days before and how many of those were ignored; apart, the ones whose filed carrier
 tracked the number with dated scans of its own: the parcel is tracked, and only detection has the shape to learn), health incidents notified in the
 window or open and failing in it, lookups and refreshes only (an open one nothing checked, or
 whose checks answered, waits unlisted until it fails, recovers or closes), carriers whose direct step failed ten times

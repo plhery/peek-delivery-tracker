@@ -195,19 +195,27 @@ class CarrierCatalog private constructor(
     fun recognitionCandidates(raw: String, browser: Boolean = false): List<CarrierId> {
         val match = detect(raw)
         val unknownPostalCarrier = match.carrier == CarrierId.InternationalPost
-        if (match.confidence != CarrierMatch.Confidence.Low && !unknownPostalCarrier) return emptyList()
         val definitions = definitions
+        // A carrier only universal providers track names its own numbers, but a carrier carrying some of them
+        // under that number can still know one: DHLink, on four of Juxi Express's lines.
+        val untrackedIssuer = match.confidence == CarrierMatch.Confidence.High && !unknownPostalCarrier &&
+            definitions[match.carrier]?.tracking?.adapter == "universal"
+        if (match.confidence != CarrierMatch.Confidence.Low && !unknownPostalCarrier && !untrackedIssuer) return emptyList()
         var candidates = match.candidates
         var preferred = match.preferred
         val number = normalize(raw)
         val printed = raw.trimmingWhitespacesAndNewlines().uppercase()
-        if (unknownPostalCarrier) {
+        if (unknownPostalCarrier || untrackedIssuer) {
             // The generic postal match already checked S10. Recover low rules it hid; each carrier still has
             // to confirm the whole identity. A rule gated by another check, known to this build or not, stays
-            // out, as in the shared engine: S10 does not vouch for it.
+            // out, as in the shared engine: S10 does not vouch for it. Beside an untracked issuer, only a
+            // preferred rule that names the layout without a check digit does.
             val postalMatches = definitions.mapNotNull { (carrier, definition) ->
+                if (carrier == match.carrier) return@mapNotNull null
                 val rule = definition.detectionRules.firstOrNull { rule ->
-                    rule.confidence == "low" && (rule.checksum == null || rule.checksum == "s10") &&
+                    rule.confidence == "low" &&
+                        (if (unknownPostalCarrier) rule.checksum == null || rule.checksum == "s10"
+                        else rule.preferred == true && rule.checksum == null) &&
                         matches(number, rule.pattern) &&
                         (rule.rawPattern?.let { matches(printed, it) } ?: true)
                 } ?: return@mapNotNull null

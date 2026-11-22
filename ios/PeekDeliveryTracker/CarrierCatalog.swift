@@ -673,19 +673,29 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     func recognitionCandidates(for raw: String, browser: Bool = false) -> [CarrierID] {
         let match = detect(raw)
         let unknownPostalCarrier = match.carrier == .internationalPost
-        guard match.confidence == .low || unknownPostalCarrier else { return [] }
+        // A carrier only universal providers track names its own numbers, but a
+        // carrier carrying some of them under that number can still know one:
+        // DHLink, on four of Juxi Express's lines.
+        let untrackedIssuer = match.confidence == .high && !unknownPostalCarrier
+            && definitions[match.carrier]?.tracking.adapter == "universal"
+        guard match.confidence == .low || unknownPostalCarrier || untrackedIssuer else { return [] }
         var candidates = match.candidates
         var preferred = match.preferred
         let number = Self.normalize(raw)
         let printed = raw.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        if unknownPostalCarrier {
+        if unknownPostalCarrier || untrackedIssuer {
             // The generic postal match already checked S10. Recover low rules
             // it hid; each carrier still has to confirm the whole identity. A rule
             // gated by another check, known to this build or not, stays out, as in
-            // the shared engine: S10 does not vouch for it.
+            // the shared engine: S10 does not vouch for it. Beside an untracked
+            // issuer, only a preferred rule that names the layout without a check
+            // digit does.
             let postalMatches = definitions.compactMap { carrier, definition -> (CarrierID, Bool)? in
+                guard carrier != match.carrier else { return nil }
                 guard let rule = definition.detectionRules.first(where: { rule in
-                    rule.confidence == "low" && (rule.checksum == nil || rule.checksum == "s10")
+                    rule.confidence == "low"
+                        && (unknownPostalCarrier ? rule.checksum == nil || rule.checksum == "s10"
+                            : rule.preferred == true && rule.checksum == nil)
                         && Self.matches(number, pattern: rule.pattern)
                         && (rule.rawPattern.map { Self.matches(printed, pattern: $0) } ?? true)
                 }) else { return nil }

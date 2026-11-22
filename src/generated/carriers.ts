@@ -2588,6 +2588,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004fa0"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "cyprus-post-sendungsverfolgung",
+      "title": "Cyprus Post Sendungsverfolgung: Nummern, Status & Zoll",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-sendungsverfolgung",
@@ -3932,6 +3940,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Geniki Taxydromiki\u00a0: numéros, statuts et contacts",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "suivi-cyprus-post",
+      "title": "Suivi Cyprus Post\u00a0: numéros, statuts et douane",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
     },
     {
       "id": "post-luxembourg",
@@ -5296,6 +5312,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004fa0"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "tracciamento-cyprus-post",
+      "title": "Tracciamento Cyprus Post: numeri, stati e dogana",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "tracciamento-maltapost",
@@ -6618,6 +6642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004fa0"
     },
     {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "seguimiento-cyprus-post",
+      "title": "Seguimiento Cyprus Post: números, estados y aduanas",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "seguimiento-maltapost",
@@ -7922,6 +7954,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Geniki Taxydromiki: estados, entregas e contacto",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "seguimento-cyprus-post",
+      "title": "Seguimento Cyprus Post: números, estados e alfândega",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
     },
     {
       "id": "maltapost",
@@ -9270,6 +9310,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Geniki Taxydromiki: numery, statusy i kontakt",
       "name": "Geniki Taxydromiki",
       "color": "#004fa0"
+    },
+    {
+      "id": "cyprus-post",
+      "catalog": "cyprus-post",
+      "slug": "sledzenie-cyprus-post",
+      "title": "Śledzenie Cyprus Post: numery, statusy i cło",
+      "name": "Cyprus Post",
+      "color": "#e4a50e"
     },
     {
       "id": "maltapost",

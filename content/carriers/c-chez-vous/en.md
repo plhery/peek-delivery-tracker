@@ -16,10 +16,10 @@ The page shows two shapes of reference. Here they are with invented characters:
 
 | Shape | What it is |
 | --- | --- |
-| `ABCD12EF34` | 10 characters: four letters, two digits, four letters or digits. |
-| `1ABCD123456--75001` | 11 characters, two dashes, then the delivery postcode. |
+| `TRXN54BD83` | 10 characters: four letters, two digits, four letters or digits. |
+| `1TRXN482917--69002` | 11 characters, two dashes, then the delivery postcode. |
 
-Some other carriers' numbers look similar. A number starting `1G`, such as `1G1234567890`, is [GEODIS](carrier:geodis). Eight digits, such as `12345678`, are also used by [Heppner](carrier:heppner), [Colisweb](carrier:colisweb) and [Mondial Relay](carrier:mondial-relay).
+Some other carriers' numbers look similar. A number starting `1G`, such as `1G4829173654`, is [GEODIS](carrier:geodis). Eight digits, such as `48291736`, are also used by [Heppner](carrier:heppner), [Colisweb](carrier:colisweb) and [Mondial Relay](carrier:mondial-relay).
 
 If the page answers `La commande est introuvable` (order not found), check the characters, then the email: another carrier may have your order.
 
@@ -81,9 +81,9 @@ Your contract is with the shop. C Chez Vous publishes no claim form or deadline,
 
 ## C Chez Vous contact and customer service
 
-As listed on C Chez Vous's pages on 12 October 2026:
+As listed on C Chez Vous's pages:
 
-- **Phone:** 09 70 17 05 58, Monday to Friday 8:00 to 18:00 and Saturday 9:00 to 13:00. It's a 09 number, not an 0800 freephone; the site doesn't state the cost.
+- **Phone:** 09 70 17 05 58, Monday to Friday 8:00 to 18:00 and Saturday 9:00 to 13:00, Paris time. It's a 09 number, not an 0800 freephone; the site doesn't state the cost.
 - **Deaf or hard of hearing:** through Acceo, linked from the FAQ.
 - **Tracking page:** "Modifier la livraison" to change the delivery, and a button to call.
 
@@ -93,13 +93,13 @@ C Chez Vous is not part of GEODIS. Geopost, of the La Poste group, holds 80% of 
 
 ## Tracking a C Chez Vous order with Peek
 
-Paste an order number shaped like `ABCD12EF34` and [Peek](/) names C Chez Vous at once. A link from cchezvous.fr (`/suivi-colis/` followed by the reference) works for any reference. Other references, including the long one with your postcode, get no carrier when typed: press "Change" and pick C Chez Vous, or paste the link.
+Paste an order number shaped like `TRXN54BD83` and [Peek](/) asks C Chez Vous's order page, then shows "C Chez Vous has this parcel." once C Chez Vous knows the order. A link from cchezvous.fr (`/suivi-colis/` followed by the reference) works for any reference. Other references, including the long one with your postcode, get no carrier when typed: press "Change" and pick C Chez Vous, or paste the link.
 
 Peek's status reads Label created while the order is registered and its appointment being booked, In transit while it is prepared and on its way to the regional depot, then Delivered. Its history adds a line each time the status changes, named after the step showing then: Order registered or Scheduling delivery, then Order being prepared or Order on its way to the regional depot, and Delivered. A pickup-point order's history reads Order on its way to the pickup point, then Order ready at the pickup point as its status turns Ready for pickup, and Order collected from the pickup point as it turns Delivered. When an order has several parcels, Peek shows the least advanced one. Your appointment day appears as the expected delivery until the order is delivered, with its time slot when the tracking page gives one. C Chez Vous gives no history, places or times, so each line is dated when Peek first saw it.
 
 Some limits. `En livraison` stays In transit in Peek, since C Chez Vous's own text says the order is still heading to the regional depot, and the tracking page has no out-for-delivery step. Peek doesn't read `Annulée`: a cancelled order simply stops moving.
 
-It leaves out the shop, your name, address and contacts, and the items ordered. Peek checks up to every 10 minutes and can notify you of "Every scan", "Important steps" or "Delivery only". With no out-for-delivery step, it never switches to its 2-minute delivery-day checks, and "Delivery only" brings just the Delivered alert; "Important steps" also tells you when a pickup-point order is ready. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't move your appointment.
+It reads your name (under "Recipient") and delivery address, and leaves out the shop, your phone and email, and the items ordered. While you have the order open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, otherwise hourly, and can notify you of "Every scan", "Important steps" or "Delivery only". With no out-for-delivery step, it never switches to its 2-minute delivery-day checks, and "Delivery only" brings just the Delivered alert; "Important steps" also tells you when a pickup-point order is ready. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days on "Label created" without news, every 6 hours except on the delivery day. It can't move your appointment.
 
 ## Questions about C Chez Vous tracking
 

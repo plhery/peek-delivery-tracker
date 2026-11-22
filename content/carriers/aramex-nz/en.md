@@ -16,11 +16,11 @@ Aramex doesn't publish a format. The labels seen in its tracking are 12 characte
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `AB1234567890` | Two letters and 10 digits: the usual label number. |
-| `2X1234567890` | A digit, a letter, then 10 digits. |
-| `A91234567890` | A letter, a digit, then 10 digits. |
+| `KM4829173654` | Two letters and 10 digits: the usual label number. |
+| `2X4829173654` | A digit, a letter, then 10 digits. |
+| `A94829173654` | A letter, a digit, then 10 digits. |
 
-Lookalikes: [Aramex Australia](carrier:aramex-au) uses exactly the same shape but is a separate network with its own tracking, and Colis Privé in France has 12-character numbers too. A number like `RR000000005NZ` (two letters, nine digits, NZ) is a postal item: track it with [NZ Post](carrier:nz-post).
+Lookalikes: [Aramex Australia](carrier:aramex-au) uses exactly the same shape but is a separate network with its own tracking, and Colis Privé in France has 12-character numbers too. A number like `RR482917367NZ` (two letters, nine digits, NZ) is a postal item: track it with [NZ Post](carrier:nz-post).
 
 ## What Aramex NZ tracking statuses mean
 
@@ -34,7 +34,6 @@ Aramex New Zealand's site is in English only. These are the headings you're most
 | `Awaiting customs clearance` | It's lodged with customs, a required step for parcels from abroad. |
 | `Cleared by customs` | Customs has released it and it's heading to Aramex. |
 | `In transit` | It has left a depot for the next one. |
-| `Your parcel is in our care` | It has arrived at an Aramex depot. |
 | `Onboard for delivery` | It's with your local courier, on the way to your address. |
 | `Attempted delivery` | The courier couldn't deliver it and left a calling card. |
 | `Delivery onforwarded` | Your address is rural: Aramex has handed the parcel to NZ Post. |
@@ -77,16 +76,16 @@ The shop holds the invoices a claim needs, so in practice the shop claims. Arame
 
 ## Aramex NZ contact number and enquiries
 
-As read on 15 October 2026, Aramex New Zealand's Contact page lists no national phone number, no 0800 line and no customer service email. It points to:
+Aramex New Zealand's Contact page lists no national phone number, no 0800 line and no customer service email. It points to:
 
 - **Online enquiry form** (Submit enquiry on the Contact page).
-- **Your local Courier Franchisee or depot**, which Aramex calls your day-to-day contact. Depots open Monday to Friday, mostly 8am to 5pm: Auckland 09 634 3704; Wellington 04 576 0296; Canterbury 03 341 1090; Waikato (07) 847 8210; Tauranga 07 541 0100; Dunedin 03 477 4040.
+- **Your local Courier Franchisee or depot**, which Aramex calls your day-to-day contact. Depots open Monday to Friday, mostly 8am to 5pm New Zealand time: Auckland 09 634 3704; Wellington 04 576 0296; Canterbury 03 341 1090; Waikato (07) 847 8210; Tauranga 07 541 0100; Dunedin 03 477 4040.
 
 > Aramex says it never asks for card details by SMS. Fake messages come from international numbers and ask you to click a link or pay "unpaid customs charges"; genuine links go only to aramex.co.nz or aramex.com.au. Report phishing to the Department of Internal Affairs.
 
 ## Tracking Aramex NZ parcels with Peek
 
-[Peek](/) reads Aramex New Zealand's own tracking. The 12-character shape is shared with Aramex Australia and Colis Privé (and J&T for labels starting `JT`), so it asks them at once and names the one that has the parcel; if both Aramex networks know it, you choose with "Change carrier". A label starting with a letter then a digit isn't offered as Aramex: paste its aramex.co.nz tracking link or pick Aramex New Zealand with "Change carrier". Old fastway.co.nz links work too. The sender's long SSCC barcode number (`00` and 18 digits) doesn't work for Aramex New Zealand: use the label number.
+[Peek](/) reads Aramex New Zealand's own tracking. A label starting `MX` is named Aramex New Zealand at once. Otherwise the 12-character shape is shared with Aramex Australia and Colis Privé, so it asks them at once and names the one that has the parcel; if both Aramex networks know it, you choose with "Change carrier". A label starting with a letter then a digit isn't offered as Aramex: paste its aramex.co.nz tracking link (`?l=` followed by the label) or pick Aramex New Zealand with "Change carrier". Old fastway.co.nz links work too. The sender's long SSCC barcode number (`00` and 18 digits) doesn't work for Aramex New Zealand: use the label number.
 
 It shows the status, the depot of each scan and an expected day when Aramex knows both depots. `Delivered` and `In transit` appear in its own words, `In transit with our freight partners` as out for delivery, the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
 
@@ -96,7 +95,7 @@ For rural parcels handed to NZ Post, it can follow the NZ Post label ("Delivery 
 
 ### What do Aramex NZ tracking numbers start with?
 
-Usually two letters, sometimes a digit and a letter or a letter and a digit, followed by 10 digits, such as the invented `AB1234567890`.
+Usually two letters, sometimes a digit and a letter or a letter and a digit, followed by 10 digits, such as the invented `KM4829173654`.
 
 ### How long does Aramex take to deliver in New Zealand?
 

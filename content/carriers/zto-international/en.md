@@ -14,8 +14,8 @@ A ZTO International waybill is 771 and 11 more digits. With invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `77100000000017` | 771 and 11 digits: a ZTO International waybill. |
-| `73000000000017` | 14 digits starting with 7, but not 771: not ZTO International. ZTO Express numbers inside China can look like this. |
+| `77148291736542` | 771 and 11 digits: a ZTO International waybill. |
+| `73482917365428` | 14 digits starting with 7, but not 771: not ZTO International. ZTO Express numbers inside China can look like this. |
 
 The shape alone doesn't prove it's ZTO International: ZTO Express, DPD and other carriers use 14-digit numbers too. No number? See [how to find a tracking number](guide:find-tracking-number). Got an earlier number for the same parcel? ZTO's tracker finds the waybill under it and shows its 771 number: use that one in Peek.
 
@@ -70,13 +70,13 @@ Cross-border e-commerce orders (customs codes 9610 and 1210) go "up to CNY 5,000
 
 **Lost or damaged.** ZTO's claim rules are for the sender: on its exclusive routes, a request within 40 days of shipment, paid up to the declared value, at most USD 30. So ask the shop; see [lost parcels](guide:lost-parcel).
 
-**Delivered but not there.** In China, ZTO's Chinese line names the station and who signed, a family member or a parcel station for instance. China's Express Market Administration Measures forbid leaving a parcel in a smart locker or parcel station without your consent, and let you appeal to the postal authorities if a complaint isn't settled to your satisfaction or in time. See [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** In China, ZTO's Chinese line names the station and who signed, a family member or a parcel station for instance. Mainland China's Express Market Administration Measures forbid leaving a parcel in a smart locker or parcel station without your consent, and let you appeal to the postal authorities if a complaint isn't settled to your satisfaction or in time. See [delivered but not received](guide:delivered-not-received).
 
 ## ZTO International contact number and customer service
 
-As read on 28 October 2026, ZTO International lists:
+ZTO International lists:
 
-- **China:** 95311; after the voice prompt, ask for international queries. Business line 021-59804505. Monday to Sunday, 8:30 to 17:30.
+- **Mainland China:** 95311; after the voice prompt, ask for international queries. Business line 021-59804505. Monday to Sunday, 8:30 to 17:30 Beijing time.
 - **Vietnam:** 95311, international channel, or ztoglobal@zto.com.
 - **Cambodia:** service hotline 85566666088.
 - **Thailand:** service hotline 02-182-2181.
@@ -92,7 +92,7 @@ Paste the number in [Peek](/): it follows more than 4,500 carriers. It puts ZTO 
 
 Peek reads ZTO International's own tracker; each scan's place comes from ZTO's Chinese line, and Peek names it by its town where it can place it, otherwise in Chinese as ZTO wrote it. ZTO dates every scan on China's clock, even in your country, an hour ahead of Thailand, Vietnam, Cambodia and Laos; Peek shows each in your device's time zone. It leaves out couriers', scanners' and signers' names, phone numbers, bag numbers and the parcel station, and gives no expected delivery date, weight or proof of delivery. It follows the 771 number to the end, with no second carrier.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ZTO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't upload an ID, pay duty, or contact ZTO or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. Beijing time on the day the parcel goes out for delivery, while ZTO's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't upload an ID, pay duty, or contact ZTO or the shop for you.
 
 ## Questions about ZTO International tracking
 
@@ -110,7 +110,7 @@ Your parcel left a ZTO station or hub. It's not a customs step: ZTO words every 
 
 ### What is ZTO International's phone number?
 
-95311 in China: ask for international queries after the voice prompt. Other countries' lines are listed above.
+95311 in mainland China: ask for international queries after the voice prompt. Other countries' lines are listed above.
 
 :::sources
 - [ZTO Global Logistics: Home](https://www.ztoglobal.com/) – ZTO Express's international window, set up in 2014

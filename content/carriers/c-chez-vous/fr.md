@@ -16,10 +16,10 @@ Sous la case, la page montre deux formes de référence. Les voici avec des cara
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
-| `ABCD12EF34` | 10 caractères : quatre lettres, deux chiffres, quatre lettres ou chiffres. |
-| `1ABCD123456--75001` | 11 caractères, deux tirets, puis le code postal de livraison. |
+| `TRXN54BD83` | 10 caractères : quatre lettres, deux chiffres, quatre lettres ou chiffres. |
+| `1TRXN482917--69002` | 11 caractères, deux tirets, puis le code postal de livraison. |
 
-D'autres numéros se ressemblent. Un numéro qui commence par `1G`, comme `1G1234567890`, est un numéro [GEODIS](carrier:geodis). Huit chiffres, comme `12345678`, sont aussi la forme de [Heppner](carrier:heppner), de [Colisweb](carrier:colisweb) et de [Mondial Relay](carrier:mondial-relay). En cas de doute, regarde qui signe l'e-mail, et lis [à quel transporteur appartient un numéro](guide:tracking-number-formats).
+D'autres numéros se ressemblent. Un numéro qui commence par `1G`, comme `1G4829173654`, est un numéro [GEODIS](carrier:geodis). Huit chiffres, comme `48291736`, sont aussi la forme de [Heppner](carrier:heppner), de [Colisweb](carrier:colisweb) et de [Mondial Relay](carrier:mondial-relay). En cas de doute, regarde qui signe l'e-mail, et lis [à quel transporteur appartient un numéro](guide:tracking-number-formats).
 
 Si la page répond `La commande est introuvable`, vérifie chaque caractère, puis l'e-mail : ta commande est peut-être chez un autre transporteur.
 
@@ -81,9 +81,9 @@ Ton contrat est avec le magasin. C Chez Vous ne publie ni formulaire de réclama
 
 ## C Chez Vous contact : téléphone et service client
 
-Relevé sur les pages de C Chez Vous le 12 octobre 2026 :
+Relevé sur les pages de C Chez Vous :
 
-- **Téléphone :** 09 70 17 05 58, du lundi au vendredi de 8 h à 18 h et le samedi de 9 h à 13 h. C'est un numéro en 09, pas un 0800 ; le site n'en donne pas le coût.
+- **Téléphone :** 09 70 17 05 58, du lundi au vendredi de 8 h à 18 h et le samedi de 9 h à 13 h, heure de Paris. C'est un numéro en 09, pas un 0800 ; le site n'en donne pas le coût.
 - **Personnes sourdes ou malentendantes :** via Acceo, depuis la FAQ.
 - **Page de suivi :** « Modifier la livraison » pour changer la livraison et un bouton pour appeler.
 
@@ -93,13 +93,13 @@ C Chez Vous ne fait pas partie de GEODIS. Geopost, du groupe La Poste, en détie
 
 ## Suivre une commande C Chez Vous avec Peek
 
-Colle un numéro de la forme `ABCD12EF34` et [Peek](/) reconnaît C Chez Vous tout de suite. Un lien cchezvous.fr (`/suivi-colis/` suivi de la référence) marche pour n'importe quelle référence. Les autres références, dont la longue avec ton code postal, ne trouvent aucun transporteur quand tu les tapes : appuie sur « Changer de transporteur » et choisis C Chez Vous, ou colle le lien.
+Colle un numéro de la forme `TRXN54BD83` et [Peek](/) interroge la page de commande de C Chez Vous, puis affiche « C Chez Vous a ce colis. » dès que C Chez Vous connaît la commande. Un lien cchezvous.fr (`/suivi-colis/` suivi de la référence) marche pour n'importe quelle référence. Les autres références, dont la longue avec ton code postal, ne trouvent aucun transporteur quand tu les tapes : appuie sur « Changer de transporteur » et choisis C Chez Vous, ou colle le lien.
 
 Le statut de Peek indique « Étiquette créée » à l'enregistrement de la commande et pendant la prise de rendez-vous, « En transit » pendant la préparation et le trajet vers la plateforme régionale, puis « Livré ». Son historique ajoute une ligne à chaque changement de statut, avec le nom de l'étape affichée à ce moment-là : « Commande enregistrée » ou « Prise de rendez-vous », puis « Commande en préparation » ou « Commande en route vers la plateforme régionale », enfin « Livré ». Une commande en point retrait passe à « Prêt à être retiré » avec « Commande disponible au point de retrait », puis à « Livré » avec « Commande retirée au point de retrait ». Pour une commande en plusieurs colis, Peek montre le moins avancé. Ton jour de rendez-vous apparaît comme date de livraison prévue jusqu'à la livraison, avec ton créneau horaire quand la page de suivi l'indique. C Chez Vous ne donne ni historique, ni lieux, ni heures : chaque ligne est datée du moment où Peek l'a vue.
 
 Quelques limites. `En livraison` reste « En transit » dans Peek, puisque la phrase de C Chez Vous parle encore de la plateforme régionale, et la page de suivi n'a pas d'étape « en cours de livraison ». Il ne lit pas `Annulée` : une commande annulée cesse simplement d'avancer.
 
-Il laisse de côté le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie jusqu'à toutes les 10 minutes et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Sans étape « en cours de livraison », il ne passe jamais aux vérifications toutes les 2 minutes du jour de livraison, et « Livraison seulement » ne t'envoie que l'alerte « Livré » ; les étapes importantes te préviennent aussi quand une commande en point retrait est disponible. Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas déplacer ton rendez-vous.
+Il lit ton nom (sous « Destinataire ») et ton adresse de livraison, et laisse de côté le magasin, ton téléphone, ton e-mail et les articles commandés. Tant que tu as la commande ouverte, ou le jour de la livraison avec les notifications activées, il vérifie jusqu'à toutes les 10 minutes et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Sans étape « en cours de livraison », il ne passe jamais aux vérifications toutes les 2 minutes du jour de livraison, et « Livraison seulement » ne t'envoie que l'alerte « Livré » ; les étapes importantes te préviennent aussi quand une commande en point retrait est disponible. Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures, et après sept jours sans nouvelles à « Étiquette créée », toutes les 6 heures sauf le jour de la livraison. Il ne peut pas déplacer ton rendez-vous.
 
 ## Questions sur le suivi C Chez Vous
 

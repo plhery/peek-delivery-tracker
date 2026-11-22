@@ -12883,6 +12883,30 @@
     ]
   },
   {
+    "input": "100125712721",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "1001921334250001000300779017972697",
     "carrier": "fedex",
     "confidence": "high",
@@ -26563,6 +26587,28 @@
     ]
   },
   {
+    "input": "19810291",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner",
+      "tforce-freight"
+    ]
+  },
+  {
+    "input": "19811573",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner",
+      "tforce-freight"
+    ]
+  },
+  {
     "input": "1990472488",
     "carrier": "unknown",
     "confidence": "low",
@@ -36152,6 +36198,22 @@
     ]
   },
   {
+    "input": "262753872",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "262776663",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "262780949064",
     "carrier": "unknown",
     "confidence": "low",
@@ -39758,6 +39820,35 @@
     ]
   },
   {
+    "input": "302364189245",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "poste-italiane",
+      "japan-post",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "3024338844",
     "carrier": "unknown",
     "confidence": "low",
@@ -41291,6 +41382,29 @@
     ]
   },
   {
+    "input": "320104477919",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "3201059972",
     "carrier": "unknown",
     "confidence": "low",
@@ -41531,6 +41645,56 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "3228340140",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
+    "input": "3228514575",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
   },
   {
     "input": "322951077763",
@@ -69990,6 +70154,33 @@
     ]
   },
   {
+    "input": "800225895921",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "8002510848",
     "carrier": "unknown",
     "confidence": "low",
@@ -71379,6 +71570,61 @@
   },
   {
     "input": "819642999269",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "820161562297",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-nl",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "820161769316",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -73646,6 +73892,33 @@
     ]
   },
   {
+    "input": "880013649535",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "8800145352",
     "carrier": "unknown",
     "confidence": "low",
@@ -73664,6 +73937,29 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "880029136122",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -74103,6 +74399,75 @@
     "confidence": "high",
     "candidates": [
       "j-and-t-br"
+    ]
+  },
+  {
+    "input": "888079291662",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "888079392918",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "888079420751",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -80404,6 +80769,33 @@
       "metropolitan-warehouse",
       "paquetexpress",
       "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "999064586261",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
     ],
     "asked": [
       "brt",
@@ -89915,6 +90307,22 @@
     ],
     "asked": [
       "la-poste"
+    ]
+  },
+  {
+    "input": "DTW006301648614",
+    "carrier": "datian-logistics",
+    "confidence": "high",
+    "candidates": [
+      "datian-logistics"
+    ]
+  },
+  {
+    "input": "DTW016528697471",
+    "carrier": "datian-logistics",
+    "confidence": "high",
+    "candidates": [
+      "datian-logistics"
     ]
   },
   {
@@ -119857,6 +120265,22 @@
     "confidence": "high",
     "candidates": [
       "lso"
+    ]
+  },
+  {
+    "input": "ZY202471580728",
+    "carrier": "zto-freight",
+    "confidence": "high",
+    "candidates": [
+      "zto-freight"
+    ]
+  },
+  {
+    "input": "ZY202472654496",
+    "carrier": "zto-freight",
+    "confidence": "high",
+    "candidates": [
+      "zto-freight"
     ]
   },
   {

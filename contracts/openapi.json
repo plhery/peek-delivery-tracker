@@ -52748,7 +52748,7 @@
         }
       ],
       "trackingSearchUrl": "https://client.duopudaexpress.com/track_query.aspx",
-      "trackingUrlTemplate": "https://client.duopudaexpress.com/track_query.aspx?track_number={trackingNumber}"
+      "trackingUrlTemplate": "https://client.duopudaexpress.com/track_query.aspx"
     },
     "crc-post": {
       "displayName": "CRC Post",
@@ -67659,6 +67659,184 @@
       },
       "linkRules": [],
       "detectionRules": []
+    },
+    "datian-logistics": {
+      "displayName": "DTW Logistics",
+      "aliases": [
+        "Datian Logistics",
+        "Datian W. Logistics",
+        "大田物流",
+        "大田"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#f39626",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "datian-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^DTW\\d{12}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://owtrack.dtw.com.cn/"
+    },
+    "hongtai-logistics": {
+      "displayName": "Hongtai Logistics",
+      "aliases": [
+        "鸿泰物流",
+        "河南省鸿泰物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#f08200",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hongtai-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.ht56.com/orderSearch.html"
+    },
+    "jingguang-logistics": {
+      "displayName": "Jingguang Logistics",
+      "aliases": [
+        "JGWL",
+        "景光物流",
+        "景光快运"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#3b1d86",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "jingguang-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jgwl.cn/service/querybill"
+    },
+    "padtf": {
+      "displayName": "PAD Express",
+      "aliases": [
+        "Pingan Da Tengfei Express",
+        "平安达腾飞",
+        "平安达腾飞快递",
+        "深圳市平安达腾飞快递有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#d7000f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "padtf"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.padtf.com/express-tracking.html"
+    },
+    "suteng-express": {
+      "displayName": "Suteng Express",
+      "aliases": [
+        "STE Express",
+        "速腾快递",
+        "速腾物流",
+        "广东速腾物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1b64b3",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "suteng-express"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.ste56.com/"
+    },
+    "yaoqi-logistics": {
+      "displayName": "Yaoqi Logistics",
+      "aliases": [
+        "耀奇物流",
+        "深圳市耀奇物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#d7000f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "yaoqi-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "yuxin-logistics": {
+      "displayName": "Yuxin Logistics",
+      "aliases": [
+        "宇鑫物流",
+        "宇鑫物流集团",
+        "Shandong Yuxin Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#f08300",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "yuxin-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "zto-freight": {
+      "displayName": "ZTO Freight",
+      "aliases": [
+        "ZTO Freight Express",
+        "ZTO Kuaiyun",
+        "中通快运",
+        "中通快运股份有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1e50a2",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "zto-freight"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^ZY\\d{12}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.zto56.com/billsearch.html"
     }
   },
   "servers": [
@@ -73508,7 +73686,15 @@
           "good-express-us",
           "swiss-universal-express",
           "konga-kxpress",
-          "woori-taekbae"
+          "woori-taekbae",
+          "datian-logistics",
+          "hongtai-logistics",
+          "jingguang-logistics",
+          "padtf",
+          "suteng-express",
+          "yaoqi-logistics",
+          "yuxin-logistics",
+          "zto-freight"
         ]
       },
       "Stage": {

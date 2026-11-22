@@ -2204,6 +2204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "gls-france-sendungsverfolgung",
+      "title": "GLS France Sendungsverfolgung: Status, Relais GLS, Kontakt",
+      "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "austrian-post-sendungsverfolgung",
@@ -4264,6 +4272,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "tracciamento-gls-france",
+      "title": "Tracciamento GLS France: stati, Relais GLS e contatti",
+      "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
       "id": "gls-it",
       "catalog": "gls-it",
       "slug": "gls-italy-tracking",
@@ -5216,6 +5232,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTT Express seguimiento: número, estados y teléfono",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "seguimiento-gls-france",
+      "title": "Seguimiento GLS France: estados, Relais GLS y contacto",
+      "name": "GLS France",
+      "color": "#ffdd00"
     },
     {
       "id": "austrian-post",
@@ -6196,6 +6220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "seguimento-gls-france",
+      "title": "Seguimento GLS France: estados, Relais GLS e contactos",
+      "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "rastreio-austrian-post",
@@ -7150,6 +7182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CTT Express: statusy po polsku, punkty i kontakt",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "gls-fr",
+      "catalog": "gls-fr",
+      "slug": "sledzenie-gls-france",
+      "title": "GLS France śledzenie: statusy, Relais GLS i kontakt",
+      "name": "GLS France",
+      "color": "#ffdd00"
     },
     {
       "id": "poczta-polska",

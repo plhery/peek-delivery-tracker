@@ -2284,6 +2284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "dhl-ecommerce-iberia-sendungsverfolgung",
+      "title": "DHL eCommerce Iberia Sendungsverfolgung: Status & Paketshops",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-uk",
       "catalog": "dhl-ecommerce-uk",
       "slug": "dhl-ecommerce-uk-sendungsverfolgung",
@@ -3596,6 +3604,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "bpost suivi\u00a0: code-barres, statuts et point relais",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "suivi-dhl-ecommerce-iberia",
+      "title": "Suivi DHL eCommerce Iberia\u00a0: statuts et ServicePoints",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
     },
     {
       "id": "dhl-ecommerce-uk",
@@ -4918,6 +4934,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento bpost: codice a barre, stati e punti di ritiro",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "tracciamento-dhl-ecommerce-iberia",
+      "title": "Tracciamento DHL eCommerce Iberia: stati e ServicePoint",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
     },
     {
       "id": "dhl-ecommerce-uk",
@@ -8742,6 +8766,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie bpost: kod kreskowy, statusy i punkty odbioru",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dhl-ecommerce-es",
+      "catalog": "dhl-ecommerce-es",
+      "slug": "sledzenie-dhl-ecommerce-iberia",
+      "title": "Śledzenie DHL eCommerce Iberia: statusy i ServicePoint",
+      "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
     },
     {
       "id": "dhl-ecommerce-pl",

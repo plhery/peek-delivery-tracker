@@ -43,7 +43,7 @@
   { "id": "bpost", "catalog": "bpost", "name": "bpost", "languages": ["en", "fr", "nl", "de", "pt", "es", "it", "pl"] },
   { "id": "dpd-ie", "catalog": "dpd-ie", "name": "DPD Ireland", "languages": ["en"] },
   { "id": "gls-es", "catalog": "gls-es", "name": "GLS Spain", "languages": ["en", "es"] },
-  { "id": "dhl-ecommerce-es", "catalog": "dhl-ecommerce-es", "name": "DHL eCommerce Iberia", "languages": ["en", "es", "pt"] },
+  { "id": "dhl-ecommerce-es", "catalog": "dhl-ecommerce-es", "name": "DHL eCommerce Iberia", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "dhl-ecommerce-pl", "catalog": "dhl-ecommerce-pl", "name": "DHL eCommerce Poland", "languages": ["en", "pl"] },
   { "id": "dhl-ecommerce-uk", "catalog": "dhl-ecommerce-uk", "name": "DHL eCommerce UK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gofo-fr", "catalog": "gofo-fr", "name": "GOFO France", "languages": ["en", "fr", "es", "de", "it", "pt", "pl"] },

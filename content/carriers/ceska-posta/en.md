@@ -14,9 +14,9 @@ Czech Post describes its numbers as a prefix of usually two letters for the type
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `DR1234567890E` | A domestic parcel: two letters, 10 digits, a letter. Czech Post's own example. |
-| `RR000000005CZ` | An international number posted in Czechia: two letters, 9 digits, `CZ`. |
-| `RR000000005CN` | An item coming from abroad: it keeps the foreign post's number, ending in the country it came from. |
+| `DR4829173654E` | A domestic parcel: two letters, 10 digits, a letter. |
+| `RR482917367CZ` | An international number posted in Czechia: two letters, 9 digits, `CZ`. |
+| `RR482917367CN` | An item coming from abroad: it keeps the foreign post's number, ending in the country it came from. |
 
 If the shop passed on your contact details, Czech Post notifies you by email or SMS, and the email links to Track & Trace. The six-character pickup code in that message isn't a tracking number. Can't find any of these? See [where else to find a tracking number](guide:find-tracking-number).
 
@@ -30,14 +30,11 @@ Track & Trace comes in Czech and English. These are its English wordings; place 
 | --- | --- |
 | `Receipt of data about consignment.` | The sender has [sent the parcel's details](guide:tracking-statuses); Czech Post doesn't have it yet. |
 | `The consignment was sent for transportation.` | Posted: the first line with a post office or depot. |
-| `The consignment was accepted by post office of exchange.` | At Czech Post's international exchange office in Prague: arrived from abroad, or about to leave the country. |
-| `The consignment is being prepared for customs clearance.` | It's from outside the EU and going through customs. |
 | `The consignment is transported.` | On its way through Czech Post's network. |
 | `The consignment is being prepared for delivery.` | At the post office or depot that delivers it. |
 | `The consignment is being delivered.` | Out for delivery today. |
 | `The consignment was deposited - addressee not at home.` | Nobody was in: it waits at the post office named in the line. |
 | `The consignment was deposited to Balíkovna.` | Waiting at the Balíkovna point or box named in the line. |
-| `The consignment was delivered.` | Delivered. |
 | `The consignment was sent back to the sender - the consignment was not picked up by the addressee in the set Collection Time.` | Not picked up in time: it's going back. |
 | `The consignment was returned to the sender.` | It's back with the sender. |
 
@@ -45,9 +42,9 @@ Track & Trace comes in Czech and English. These are its English wordings; place 
 
 ## Missed delivery, Balíkovna and post office pickup
 
-**Post office.** If you're out, the item is stored at the post office and you get a notice, on paper, by SMS or by email. Czech Post keeps it the usual 15 days, unless the sender shortened that to 10 days. With "Change Delivery Online" on postaonline.cz, the Pošta Online app, or the post office's number on the notice, you can, free unless noted:
+**Post office.** If you're out, the item is stored at the post office and you get a notice, on paper, by SMS or by email. Czech Post keeps it the usual 15 days, unless the sender shortened that to 10 days. With "Change Delivery Online" on postaonline.cz or the post office's number on the notice, you can, free unless noted (the first two also in the Pošta Online app):
 
-- ask for redelivery on a business day between 8 a.m. and 4 p.m., at least three business days ahead;
+- ask for redelivery on a business day between 8 a.m. and 4 p.m. (Prague time), at least three business days ahead;
 - extend storage up to one month from the day it was ready, unless the sender ruled that out (not for Balík Do ruky);
 - move it to another post office;
 - have it forwarded to another Czech address, for a fee.
@@ -64,9 +61,9 @@ A lost or late item is the sender's claim: one year from posting within Czechia,
 
 ## Česká pošta contact and customer service
 
-Czech Post's channels, as listed on its sites in October 2026:
+Czech Post's channels, as listed on its sites:
 
-- **Phone** +420 210 123 456, Monday to Friday, 8 a.m. to 6 p.m. A voice assistant, Eliška, answers first and passes you to an operator if she can't help.
+- **Phone** +420 210 123 456, Monday to Friday, 8 a.m. to 6 p.m. (Prague time). A voice assistant, Eliška, answers first and passes you to an operator if she can't help.
 - **Email** info@cpost.cz, for questions and complaints.
 - **In person** at any Czech Post office.
 - **Balíkovna**: the contact form on balikovna.cz.
@@ -75,9 +72,9 @@ Czech Post's channels, as listed on its sites in October 2026:
 
 ## Tracking Česká pošta parcels with Peek
 
-[Peek](/) recognises Czech Post's domestic numbers starting with `B` or `D` straight away. Other letters in that shape name no carrier: pick "Česká pošta" with "Change". For international numbers ending `CZ` with a valid check digit, Peek asks Czech Post (and [Chronopost](carrier:chronopost)) and shows "Česká pošta has this parcel." when it knows the number, or "Not found at … yet" until it does. A number from another country's post stays with that post and is handed to Czech Post only when the carrier abroad names it, which not every parcel gets: use "Change". Links from postaonline.cz with `/trackandtrace/-/zasilka/` and the number can be pasted too.
+[Peek](/) recognises Czech Post's domestic numbers starting with `B` or `D`, or with `NB`, `NP` or `NR`, straight away. Other letters in that shape name no carrier: pick "Česká pošta" with "Change". For international numbers ending `CZ` with a valid check digit, Peek asks Czech Post (and [Chronopost](carrier:chronopost)) and shows "Česká pošta has this parcel." when it knows the number, or "Not found at … yet" until it does. A number from another country's post stays with that post and is handed to Czech Post once the post abroad gives Czechia as the destination (or gives none and you're in Czechia) and Czech Post shows a dated scan no older than that post's newest; otherwise use "Change". Links from postaonline.cz with `/trackandtrace/-/zasilka/` and the number can be pasted too.
 
-Czech Post dates each step by its day, with no time. Peek first looks for a history with times at [universal tracking services](guide:universal-tracker) and, when one has the parcel, asks Czech Post again every 6 hours; when none has it, Peek lists Czech Post's own steps, each under its day with no time. Statuses keep Czech Post's English wording. Peek can show the post office or Balíkovna point where the parcel waits (by name, not address) and the weight. Czech Post gives no expected delivery day. Peek leaves out postcodes, cash-on-delivery details and the parcel count, and can notify you when the status changes.
+Czech Post dates each step by its day, with no time. Peek asks Czech Post and also looks for a history with times at [universal tracking services](guide:universal-tracker): when one adds steps or another status, Peek shows it and asks Czech Post again every 6 hours; when one only dates the same steps, Peek shows those times and still asks Czech Post first; when none has it, Peek lists Czech Post's own steps, each under its day with no time. Statuses keep Czech Post's English wording. Peek can show the post office or Balíkovna point where the parcel waits (by name, not address) and the weight. Czech Post gives no expected delivery day. Peek leaves out postcodes, cash-on-delivery details and the parcel count, and can notify you when the status changes.
 
 ## Questions about Czech Post tracking
 

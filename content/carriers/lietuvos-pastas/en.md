@@ -14,15 +14,15 @@ A Lithuania Post number has 13 characters in the [international postal format](g
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RR000000005LT` | A postal item posted in Lithuania. |
-| `CC000000005LT` | An LP Express parcel going to a parcel locker. |
-| `CH000000005LT` | An LP Express parcel a courier brings to an address in Lithuania or abroad. |
+| `RR482917367LT` | A postal item posted in Lithuania. |
+| `CC482917367LT` | An LP Express parcel going to a parcel locker. |
+| `CH482917367LT` | An LP Express parcel a courier brings to an address in Lithuania or abroad. |
 
 When a parcel reaches a locker, Lietuvos paštas sends an SMS and/or email with the number, the locker's address and a PIN.
 
 Genuine messages come from the sender name `LPASTAS` or `LP_EXPRESS`, never from a phone number.
 
-Other country letters mean another post: `…LV` is [Latvijas Pasts](carrier:latvijas-pasts), `…EE` is [Omniva](carrier:omniva). An item from abroad keeps the number its own post gave it. [Venipak](carrier:venipak), another courier in Lithuania, uses a different shape (`V00000E0000000`). Lost it? See [how to find a tracking number](guide:find-tracking-number).
+Other country letters mean another post: `…LV` is [Latvijas Pasts](carrier:latvijas-pasts), `…EE` is [Omniva](carrier:omniva). An item from abroad keeps the number its own post gave it. [Venipak](carrier:venipak), another courier in Lithuania, uses a different shape (`V48291E7365428`). Lost it? See [how to find a tracking number](guide:find-tracking-number).
 
 ## What Lithuania Post tracking statuses mean
 
@@ -69,7 +69,7 @@ If tracking hasn't moved for days, see [tracking that isn't updating](guide:trac
 
 ## Lietuvos paštas contact and customer service
 
-The channels as post.lt listed them on 13 October 2026 (the contact pages are in Lithuanian):
+The channels as post.lt lists them (the contact pages are in Lithuanian):
 
 - **Phone from Lithuania:** 1842 or +370 700 554 00, at your operator's rate plus a connection fee.
 - **Phone from abroad:** +370 5 233 3060.
@@ -81,13 +81,13 @@ The channels as post.lt listed them on 13 October 2026 (the contact pages are in
 
 ## Tracking Lietuvos paštas with Peek
 
-[Peek](/) recognises a number ending `LT` with a valid check digit by its shape if it starts with `C`, `E` or `HC`, and shows Lietuvos paštas with "Detected carrier". Most `CC`, `CH` and `HC` numbers fail the check digit, though: Peek then says "This number’s check digit doesn’t add up.", and "Track it as typed" asks Lietuvos paštas only. For any other postal number ending `LT` with a valid check digit, Peek asks Lietuvos paštas and [Chronopost](carrier:chronopost) at once and shows "Lietuvos paštas has this parcel." when it knows the number. If not yet, you're told it hasn't been found yet and that Peek will keep checking after you add it. Links from lpexpress.lt and post.lt tracking work too.
+[Peek](/) recognises a number ending `LT` with a valid check digit by its shape if it starts with `C`, `E` or `HC`, and shows Lietuvos paštas with "Detected carrier". Many `CC`, `CH` and `HC` numbers fail the check digit, though: Peek then says "This number’s check digit doesn’t add up.", and "Track it as typed" asks Lietuvos paštas only. For any other postal number ending `LT` with a valid check digit, Peek asks Lietuvos paštas and [Chronopost](carrier:chronopost) at once and shows "Lietuvos paštas has this parcel." when it knows the number. If not yet, you're told it hasn't been found yet and that Peek will keep checking after you add it. Links from lpexpress.lt and post.lt tracking work too.
 
 An item from abroad with an international-format number is first followed at the sending country's post. When that post says the item is going to Lithuania, or names no country and you're in Lithuania, Peek can also ask Lietuvos paštas; once Lietuvos paštas shows new steps, Peek follows the parcel there and keeps the earlier ones. Otherwise pick "Lietuvos paštas" with "Change". A [DHL Paket](carrier:dhl) number that starts with C and ends in DE is never handed to Lietuvos paštas.
 
-Peek does the same for an item posted in Lithuania whose number has a valid check digit: it also asks the destination's post once Lietuvos paštas shows a sorting centre in the recipient's or a transit country or, until then, the post of the country you look it up from, if that isn't Lithuania. Russia, Kazakhstan and some other countries have no post Peek can ask.
+Peek does the same for an item posted in Lithuania whose number has a valid check digit: it also asks the destination's post once Lietuvos paštas shows a sorting centre in the recipient's or a transit country or, until then, the post of the country you look it up from, if that isn't Lithuania. For items to Russia, Kazakhstan, China and some other countries, Peek doesn't ask the destination's post.
 
-Peek reads the service behind lpexpress.lt/track in English and can notify you when the status changes. It checks up to every 10 minutes, and up to every 2 from 06:00 Lithuanian time on the day Lietuvos paštas sends the parcel out for delivery in Lithuania, while Lietuvos paštas's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows "Needs attention", then "Returned to sender" once it's back.
+Peek reads the service behind lpexpress.lt/track in English and can notify you when the status changes. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, and up to every 2 from 06:00 Lithuanian time on the day Lietuvos paštas sends the parcel out for delivery in Lithuania, while Lietuvos paštas's own tracker answers. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail, up to every 30 minutes for Poste Italiane, PostNL and USPS, out for delivery too. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows "Needs attention", then "Returned to sender" once it's back.
 
 ## Questions about Lithuania Post tracking
 

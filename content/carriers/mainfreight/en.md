@@ -14,7 +14,7 @@ With invented digits:
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000000` | 11 digits: a road consignment in New Zealand, Australia or the United States, the one shape Peek's catalog gives Mainfreight. |
+| `48291736542` | 11 digits: a road consignment in New Zealand, Australia or the United States, the one shape Peek's catalog gives Mainfreight. |
 | Letters and digits | A job number, a house bill or the sender's own reference. Peek asks Mainfreight with 4 to 40 letters and digits once you pick it. |
 | A master bill | An air waybill's 11 digits or an ocean master bill of lading: Peek finds the air or ocean job, if only one job carries it. |
 
@@ -100,23 +100,23 @@ If tracking says `Delivered` and nothing came, see [delivered but not received](
 
 ## Mainfreight customer service and contact
 
-As of 1 November 2026, Peek couldn't read Mainfreight's website, so this page lists no phone number, email or branch: Peek gives only contacts read on a carrier's own pages.
+Peek couldn't read Mainfreight's website, so this page lists no phone number, email or branch: Peek gives only contacts read on a carrier's own pages.
 
 Ask whoever booked the freight first: the shop or supplier for an order, the sending business otherwise. They hold the booking and can take it up with Mainfreight.
 
 ## Track a Mainfreight consignment with Peek
 
-From New Zealand, Australia or the United States, Peek asks Mainfreight first about 11 digits while you add them ("Checking tracking services…") and names Mainfreight when its tracker has the shipment. From other countries, it doesn't ask Mainfreight while you add them: pick it as below.
+From New Zealand, Australia or the United States, Peek asks Mainfreight about 11 digits while you add them, at once with GLS France, GLS Germany, GLS Switzerland and PostLogistics ("Checking tracking services…"), and names Mainfreight when only its tracker has the shipment; if several have it, Peek asks you to choose. From other countries, it doesn't ask Mainfreight while you add them: pick it as below.
 
-Any other number doesn't tell Peek it's Mainfreight. Paste it all the same: Peek follows more than 4,500 carriers. Then press "Change" and pick Mainfreight: for 11 digits it's under "Fits this number"; otherwise, search for it by name. On a shipment you've already added, use "Change carrier". A link to Mainfreight's tracker with the number in it names Mainfreight at once ("Detected carrier").
+Any other number doesn't tell Peek it's Mainfreight. Paste it all the same: Peek follows more than 4,500 carriers. Then press "Change" and pick Mainfreight: for 11 digits it's under "Fits this number"; otherwise, search for it by name. On a shipment you've already added, use "Change carrier". A link to Mainfreight's tracker (mainfreight.com/tracking with `trackingnumber=`, or mainfreight.com/track/…) with the number in it names Mainfreight at once ("Detected carrier").
 
 Peek needs no account or postcode. When Mainfreight's search doesn't find 11 digits, Peek tries its New Zealand, Australian and American services at once; if more than one knows the number, Peek can't tell which shipment is yours. For a house bill, a master bill or the sender's reference, Peek shows the number Mainfreight answers under as "Mainfreight tracks this as".
 
 Peek shows the status, each step in Mainfreight's wording with its place, and the weight in your own units when the tracker gives it. It leaves out branch contacts, postcodes, the sender's reference and documents. "Open the Mainfreight website" opens the number on Mainfreight's tracker. When that tracker can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
-Road steps that name a New Zealand, Australian or US time zone (`NZDT`, `AEST`, `PST` and the like) give their exact time. Others, such as air and ocean milestones, have no zone: Peek reads them on the clock of the step's place, the steps around it or the destination, else New Zealand's, so now and then one can be off.
+Road steps that name a New Zealand, Australian or US time zone (`NZDT`, `AEST`, `PST` and the like) give their exact time. Others have no zone: Peek reads them on the clock of the step's place or the steps around it when it knows one, else on New Zealand time, as for European road scans and air and ocean milestones, whose hour can then be several hours off.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Mainfreight scans the shipment out for delivery, while Mainfreight's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
+While you have the shipment open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. on the clock of Mainfreight's latest scan on the day Mainfreight scans the shipment out for delivery, while Mainfreight's own tracker answers. Otherwise, and after two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
 
 ## Questions about Mainfreight tracking
 

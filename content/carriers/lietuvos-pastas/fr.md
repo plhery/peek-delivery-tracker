@@ -14,11 +14,11 @@ Un numéro Lietuvos paštas compte 13 caractères au [format postal internationa
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `RR000000005LT` | Un envoi postal déposé en Lituanie. |
-| `CC000000005LT` | Un colis LP EXPRESS de consigne à consigne. |
-| `CH000000005LT` | Un colis LP EXPRESS livré par coursier, en Lituanie ou à l'étranger. |
+| `RR482917367LT` | Un envoi postal déposé en Lituanie. |
+| `CC482917367LT` | Un colis LP EXPRESS de consigne à consigne. |
+| `CH482917367LT` | Un colis LP EXPRESS livré par coursier, en Lituanie ou à l'étranger. |
 
-`…LV` désigne Latvijas Pasts, `…EE` Omniva, en Estonie. Un envoi venu d'ailleurs garde le numéro de sa poste d'origine. Venipak, autre transporteur lituanien, a une autre forme (`V00000E0000000`). Pas de numéro ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
+`…LV` désigne Latvijas Pasts, `…EE` Omniva, en Estonie. Un envoi venu d'ailleurs garde le numéro de sa poste d'origine. Venipak, autre transporteur lituanien, a une autre forme (`V48291E7365428`). Pas de numéro ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
 
 ## Statuts du suivi Lietuvos paštas
 
@@ -75,13 +75,13 @@ Relevé sur post.lt le 30 octobre 2026 (pages en lituanien) :
 
 ## Suivre un colis Lietuvos paštas avec Peek
 
-Un numéro `CC`, `CH` ou `HC` finissant par `LT` avec une clé de contrôle valide est reconnu à sa forme : [Peek](/) affiche Lietuvos paštas et « Transporteur détecté ». Mais la plupart de ces numéros ne suivent pas la clé de contrôle postale, et Peek affiche « Le chiffre de contrôle de ce numéro ne correspond pas. » Copié du SMS ? Choisis « Suivre tel quel » : Peek interroge Lietuvos paštas seul et affiche « En attente du premier scan de Lietuvos paštas » tant que celui-ci ne connaît pas le numéro.
+Un numéro `CC`, `CH` ou `HC` finissant par `LT` avec une clé de contrôle valide est reconnu à sa forme : [Peek](/) affiche Lietuvos paštas et « Transporteur détecté ». Mais beaucoup de ces numéros ne suivent pas la clé de contrôle postale, et Peek affiche « Le chiffre de contrôle de ce numéro ne correspond pas. » Copié du SMS ? Choisis « Suivre tel quel » : Peek interroge Lietuvos paštas seul et affiche « En attente du premier scan de Lietuvos paštas » tant que celui-ci ne connaît pas le numéro.
 
-Un numéro postal en `LT` à clé valide, comme `RR000000005LT`, ne dit pas son transporteur ; Peek, qui suit plus de 4 500 transporteurs, interroge Lietuvos paštas et [Chronopost](carrier:chronopost), affiche « Lietuvos paštas a ce colis. » s'il le trouve, sinon continue de vérifier après l'ajout. Les liens lpexpress.lt et post.lt marchent aussi.
+Un numéro postal en `LT` à clé valide, comme `RR482917367LT`, ne dit pas son transporteur ; Peek, qui suit plus de 4 500 transporteurs, interroge Lietuvos paštas et [Chronopost](carrier:chronopost), affiche « Lietuvos paštas a ce colis. » s'il le trouve, sinon continue de vérifier après l'ajout. Les liens lpexpress.lt et post.lt marchent aussi.
 
 Si Lietuvos paštas donne la France comme destination d'un colis à clé valide (ou aucune, et que Peek te situe en France), Peek interroge aussi [La Poste](carrier:la-poste) et y suit le colis dès qu'elle montre une étape au moins aussi récente, en gardant les étapes lituaniennes. Idem avec [bpost](carrier:bpost) en Belgique et [la Poste suisse](carrier:swiss-post) en Suisse ; pour le Sénégal, Peek reste chez Lietuvos paštas. L'inverse vaut pour un colis parti de France, de Belgique ou du Sénégal vers la Lituanie.
 
-Peek lit le suivi de lpexpress.lt/track en anglais et vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h, heure de Lituanie, le jour où Lietuvos paštas met le colis en livraison en Lituanie, tant que c'est le suivi de Lietuvos paštas qui répond ; via des services de suivi, toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il montre le lieu de chaque étape (ville, centre de tri ou pays), la douane, l'heure de livraison et la consigne ou le bureau de poste où attend le colis, avec sa ville. Ni date prévue ni poids. Un retour donne « Problème signalé », puis « Retourné à l’expéditeur » une fois le colis revenu.
+Peek lit le suivi de lpexpress.lt/track en anglais et, tant que tu as le colis ouvert ou le jour de sa livraison avec les notifications activées, vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h, heure de Lituanie, le jour où Lietuvos paštas met le colis en livraison en Lituanie, tant que c'est le suivi de Lietuvos paštas qui répond. Sinon, et après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il montre le lieu de chaque étape (ville, centre de tri ou pays), la douane, l'heure de livraison et la consigne ou le bureau de poste où attend le colis, avec sa ville. Ni date prévue ni poids. Un retour donne « Problème signalé », puis « Retourné à l’expéditeur » une fois le colis revenu.
 
 Les heures lituaniennes (UTC+2, UTC+3 en été) s'affichent dans le fuseau de ton appareil : 10 h à Vilnius donne 9 h à Paris toute l'année, 8 h à Dakar en hiver et 7 h en été.
 

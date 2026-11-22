@@ -14,9 +14,9 @@ updated: 2026-10-22
 
 | Tvar (vymyšlený) | Co to je |
 | --- | --- |
-| `DR1234567890E` | Vnitrostátní balík: dvě písmena, 10 číslic a písmeno. Tenhle příklad uvádí sama Česká pošta. |
-| `RR000000005CZ` | Zásilka podaná v Česku: dvě písmena, 9 číslic a `CZ`. Takové číslo mají zásilky do zahraničí (RR je doporučená zásilka), ale `CZ` na konci může mít i doporučené psaní nebo EMS v rámci Česka. |
-| `RR000000005CN` | Zásilka ze zahraničí. Má číslo zahraniční pošty s kódem země původu na konci (tady Čína), případně i úplně jiný formát. |
+| `DR4829173654E` | Vnitrostátní balík: dvě písmena, 10 číslic a písmeno. |
+| `RR482917367CZ` | Zásilka podaná v Česku: dvě písmena, 9 číslic a `CZ`. Takové číslo mají zásilky do zahraničí (RR je doporučená zásilka), ale `CZ` na konci může mít i doporučené psaní nebo EMS v rámci Česka. |
+| `RR482917367CN` | Zásilka ze zahraničí. Má číslo zahraniční pošty s kódem země původu na konci (tady Čína), případně i úplně jiný formát. |
 
 Šestimístný kód pro vyzvednutí, který ti přijde v SMS nebo e-mailu, podací číslo není: slouží jen k vyzvednutí balíku.
 
@@ -80,9 +80,9 @@ Když s vyřízením reklamace nejsi spokojený, můžeš podat návrh u ČTÚ n
 
 ## Kontakt na Českou poštu
 
-Kontakty, jak je Česká pošta uváděla na svých webech v říjnu 2026:
+Kontakty, jak je Česká pošta uvádí na svých webech:
 
-- **Zákaznická linka** +420 210 123 456, v pracovní dny od 8:00 do 18:00. Nejdřív se ozve hlasová asistentka Eliška; když dotaz nevyřeší, přepojí tě na operátora.
+- **Zákaznická linka** +420 210 123 456, v pracovní dny od 8:00 do 18:00 pražského času. Nejdřív se ozve hlasová asistentka Eliška; když dotaz nevyřeší, přepojí tě na operátora.
 - **E-mail** info@cpost.cz, pro dotazy i stížnosti.
 - **Balíkovna**: linka 218 218 218.
 
@@ -90,9 +90,9 @@ Kontakty, jak je Česká pošta uváděla na svých webech v říjnu 2026:
 
 ## Sledování zásilek České pošty v Peeku
 
-[Peek](/) pozná vnitrostátní čísla České pošty, která začínají `B` nebo `D` (dvě písmena, 10 číslic, písmeno), hned podle tvaru. Číslo stejného tvaru s jinými písmeny na začátku žádnému dopravci nepřiřadí. I tak ho vlož (Peek sleduje přes 4 500 dopravců) a Českou poštu vyber přes „Change“.
+[Peek](/) pozná vnitrostátní čísla České pošty, která začínají `B`, `D`, `NB`, `NP` nebo `NR` (dvě písmena, 10 číslic, písmeno), hned podle tvaru. Číslo stejného tvaru s jinými písmeny na začátku žádnému dopravci nepřiřadí. I tak ho vlož (Peek sleduje přes 4 500 dopravců) a Českou poštu vyber přes „Change“.
 
-U mezinárodních čísel končících `CZ` se správnou kontrolní číslicí se Peek zeptá České pošty (a [Chronopostu](carrier:chronopost)). Když pošta číslo zná, uvidíš „Česká pošta has this parcel.“, jinak „Not found at … yet. Peek will keep checking after you add it.“ S chybnou kontrolní číslicí se České pošty neptá: zkontroluj číslo, nebo ji vyber přes „Change“. Číslo zahraniční pošty, třeba končící `CN`, Peek přiřadí poště země původu, i když zásilka míří do Česka. České poště zásilku předá, jen když ji zahraniční dopravce jmenuje, a to se nestane u každé zásilky; jakmile je zásilka v Česku, můžeš Českou poštu vybrat přes „Change“. Vložit můžeš i odkaz z postaonline.cz, který obsahuje `/trackandtrace/-/zasilka/` a číslo.
+U mezinárodních čísel končících `CZ` se správnou kontrolní číslicí se Peek zeptá České pošty (a [Chronopostu](carrier:chronopost)). Když pošta číslo zná, uvidíš „Česká pošta has this parcel.“, jinak „Not found at … yet. Peek will keep checking after you add it.“ S chybnou kontrolní číslicí se České pošty neptá, ani když ji vybereš přes „Change“: zkontroluj číslo. Číslo zahraniční pošty, třeba končící `CN`, Peek přiřadí poště země původu, i když zásilka míří do Česka. České poště zásilku předá, když zahraniční pošta uvede Česko jako cíl (nebo cíl neuvede a ty jsi v Česku) a Česká pošta ukáže datovaný sken ne starší než poslední sken zahraniční pošty, a to se nestane u každé zásilky; jakmile je zásilka v Česku, můžeš Českou poštu vybrat přes „Change“. Vložit můžeš i odkaz z postaonline.cz, který obsahuje `/trackandtrace/-/zasilka/` a číslo.
 
 Česká pošta dává každému kroku jen datum, bez času. Peek proto hledá historii s přesnými časy i u univerzálních sledovacích služeb; když ji žádná nemá, ukáže kroky České pošty, každý jen s datem. Kroky jsou anglicky, jak je píše Česká pošta. Peek ukáže poštu nebo místo Balíkovny, kde zásilka čeká (název, ne adresu), a hmotnost. Odhad doručení od České pošty nemá a PSČ, údaje o dobírce ani počet kusů neukazuje. Když se stav změní, může ti poslat upozornění.
 

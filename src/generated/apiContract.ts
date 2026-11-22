@@ -63954,7 +63954,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jetspeed",
+      "recognitionRank": 34
     },
     "trackingUrlTemplate": "https://www.jetspeed-express.com/search_kuai_di/search/orderid/{trackingNumber}",
     "linkRules": [
@@ -68077,6 +68078,35 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "qlgj": {
+    "displayName": "Qilin International",
+    "aliases": [
+      "QLGJ",
+      "Qi Lin Guo ji",
+      "琪林国际",
+      "琪林国际物流",
+      "广州市琪林国际物流有限公司",
+      "Qilin International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1F6BD6",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "qlgj",
+      "recognitionRank": 32
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^QL\\d{13}YQ$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -70153,7 +70183,8 @@ export const CARRIER_IDS = [
   "riyu-logistics",
   "wanjia-logistics",
   "fsqh",
-  "leda-express"
+  "leda-express",
+  "qlgj"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

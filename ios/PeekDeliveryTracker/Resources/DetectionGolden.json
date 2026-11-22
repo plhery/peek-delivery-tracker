@@ -99388,6 +99388,20 @@
     "confidence": "low",
     "candidates": [
       "jetspeed"
+    ],
+    "asked": [
+      "jetspeed"
+    ]
+  },
+  {
+    "input": "JSD663050036173",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "jetspeed"
+    ],
+    "asked": [
+      "jetspeed"
     ]
   },
   {
@@ -108316,6 +108330,14 @@
     "confidence": "high",
     "candidates": [
       "correios-br"
+    ]
+  },
+  {
+    "input": "QL0000000271828YQ",
+    "carrier": "qlgj",
+    "confidence": "high",
+    "candidates": [
+      "qlgj"
     ]
   },
   {

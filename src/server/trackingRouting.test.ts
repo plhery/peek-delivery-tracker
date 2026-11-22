@@ -1328,7 +1328,10 @@ describe('persistent tracking routing', () => {
       expect(tnt.direct).not.toHaveBeenCalled();
       const austria = setup();
       await austria.router.fetch(parcel({ tracking_number: '1000000000000000000001' }), false);
-      expect(asked(austria.recognize)).toEqual(['austrian-post']);
+      // Austrian Post first; a carrier serving other countries, as Estafeta, only once it has missed.
+      const abroad = scraper.recognitionCandidates('1000000000000000000001', {}).filter(outsideCountry)
+        .slice(0, scraper.MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+      expect(asked(austria.recognize)).toEqual(['austrian-post', ...abroad]);
       expect(austria.direct).not.toHaveBeenCalled();
       // A number no recognizable carrier fits asks nobody.
       const other = setup();

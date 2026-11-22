@@ -3790,6 +3790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62337"
     },
     {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "suivi-dhl-ecommerce",
+      "title": "Suivi DHL eCommerce\u00a0: numéros GM, statuts et contacts",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "suivi-allegro-one",
@@ -5224,6 +5232,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62337"
     },
     {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "tracciamento-dhl-ecommerce",
+      "title": "Tracciamento DHL eCommerce: codici GM, stati e contatti",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "tracciamento-allegro-one",
@@ -6618,6 +6634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62337"
     },
     {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "seguimiento-dhl-ecommerce",
+      "title": "Seguimiento DHL eCommerce: números GM, estados y contacto",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "seguimiento-allegro-one",
@@ -7994,6 +8018,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Landmark Global: estados, parceiros e alfândega",
       "name": "Landmark Global",
       "color": "#e62337"
+    },
+    {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "seguimento-dhl-ecommerce",
+      "title": "Seguimento DHL eCommerce: números GM, estados e contacto",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
     },
     {
       "id": "allegro-one",
@@ -9398,6 +9430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Landmark Global śledzenie przesyłek: LTN, statusy i cło",
       "name": "Landmark Global",
       "color": "#e62337"
+    },
+    {
+      "id": "dhl-ecommerce",
+      "catalog": "dhl-ecommerce",
+      "slug": "sledzenie-dhl-ecommerce",
+      "title": "Śledzenie DHL eCommerce: numery GM, statusy i kontakt",
+      "name": "DHL eCommerce",
+      "color": "#ffcc00"
     },
     {
       "id": "allegro-one",

@@ -32,7 +32,7 @@
   { "id": "gls-it", "catalog": "gls-it", "name": "GLS Italy", "languages": ["en", "it"] },
   { "id": "poczta-polska", "catalog": "poczta-polska", "name": "Poczta Polska", "languages": ["en", "pl"] },
   { "id": "orlen-paczka", "catalog": "orlen-paczka", "name": "ORLEN Paczka", "languages": ["en", "pl"] },
-  { "id": "austrian-post", "catalog": "austrian-post", "name": "Austrian Post", "languages": ["en", "de"] },
+  { "id": "austrian-post", "catalog": "austrian-post", "name": "Austrian Post", "languages": ["en", "de", "fr", "es", "it", "pt", "pl"] },
   { "id": "tipsa", "catalog": "tipsa", "name": "TIPSA", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "yanwen", "catalog": "yanwen", "name": "Yanwen", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "an-post", "catalog": "an-post", "name": "An Post", "languages": ["en"] },

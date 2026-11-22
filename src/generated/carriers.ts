@@ -3222,6 +3222,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "suivi-austrian-post",
+      "title": "Suivi Austrian Post\u00a0: numéros, statuts et retrait",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "suivi-tipsa",
@@ -4248,6 +4256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "tracciamento-austrian-post",
+      "title": "Tracciamento Austrian Post: numeri, stati e ritiro",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tracking-tipsa",
@@ -5176,6 +5192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTT Express seguimiento: número, estados y teléfono",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "seguimiento-austrian-post",
+      "title": "Seguimiento Austrian Post: números, estados y recogida",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
     },
     {
       "id": "tipsa",
@@ -6140,6 +6164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "rastreio-austrian-post",
+      "title": "Rastreio Austrian Post: números, estados e levantamento",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tipsa-rastreio",
@@ -7094,6 +7126,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ORLEN Paczka śledzenie: numer, statusy i odbiór paczki",
       "name": "ORLEN Paczka",
       "color": "#db3830"
+    },
+    {
+      "id": "austrian-post",
+      "catalog": "austrian-post",
+      "slug": "sledzenie-austrian-post",
+      "title": "Śledzenie Austrian Post: numery, statusy i odbiór",
+      "name": "Austrian Post",
+      "color": "#ffdc00"
     },
     {
       "id": "tipsa",

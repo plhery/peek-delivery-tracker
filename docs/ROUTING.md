@@ -140,7 +140,9 @@ helps, and `proxy_refused` for any other.
    - UPU is only for checksum-valid postal S10 numbers, always last, never remembered as
      the preferred source and never used for shadow checks.
    - Postal Ninja is off by default. `TRACKING_ENABLE_POSTAL_NINJA=true` adds it after the
-     other aggregators, whatever its tier, before UPU, when the list above allows it.
+     other aggregators, whatever its tier, before UPU, when the list above allows it. For a
+     parcel filed under no carrier, it is asked only once ParcelsApp and 17TRACK have both
+     found nothing for the number in the same check, unless it already tracks the parcel.
    - Track123 is asked through a courier's own page, so only about the carrier a lookup is
      filed under, when the scraper lists a page that answered that carrier's public numbers
      (FedEx, UPS and DHL among them). It then takes its place in the carrier's order like any

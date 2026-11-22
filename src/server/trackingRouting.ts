@@ -1922,8 +1922,14 @@ export class TrackingRouter {
       const asks = (carrier: string) => (directCarrier(carrier) || (handedOver && carrier === declared))
         && (carrier === declared || (state.confirmed_carrier === carrier && state.confirmed_number === number)
           || !requiredRequirements(carrier, number).length);
-      const turns = everyProvider.filter((source) => !awaitsInput(source)).map((source) => millis(state.failures[source]?.retry_at));
+      const turns = everyProvider.filter((source) => !awaitsInput(source) && !(source === 'Postal Ninja' && ninjaAfter.length))
+        .map((source) => millis(state.failures[source]?.retry_at));
       const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider && !servedBy ? millis(state.direct_retry_at) : 0,
+    // A parcel filed under no carrier asks Postal Ninja only once ParcelsApp and 17TRACK have both found nothing for the
+    // number in the same check: it rarely knows a number they don't, and its lookups are slow. Its turn comes with theirs.
+    // One that tracks the parcel is asked as usual.
+    const ninjaAfter = declared === 'unknown' && preferred !== 'Postal Ninja'
+      ? (['ParcelsApp', '17TRACK'] as const).filter((other) => sources.includes(other)) : [];
         askableAt(filed)) : null;
       if (own !== null) turns.push(own);
       for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {
@@ -2019,6 +2025,7 @@ export class TrackingRouter {
       if (!reused && scheduled && !tracked && this.options.misses?.spent(source, now().getTime())) {
         report('provider_budget_held', source); return null;
       }
+      if (source === 'Postal Ninja' && ninjaAfter.some((other) => !answeredEmpty.includes(other))) return null;
       const acquire = async () => {
         try { return await this.options.health.acquireTrackingProvider(source, scheduled); }
         catch {

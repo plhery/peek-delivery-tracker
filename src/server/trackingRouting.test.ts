@@ -2321,7 +2321,7 @@ describe('persistent tracking routing', () => {
   });
   it('tries every enabled provider only once and includes Postal Ninja only when enabled', async () => {
     const { direct, universal, health } = setup();
-    universal.mockRejectedValue(new Error('down'));
+    universal.mockImplementation(async (source: string) => { throw new NoHistoryError(source, 'No history'); });
     for (const enablePostalNinja of [false, true]) {
       universal.mockClear();
       const router = new TrackingRouter({ direct, universal, health, now: () => time, enablePostalNinja });
@@ -2330,6 +2330,40 @@ describe('persistent tracking routing', () => {
       expect(universal.mock.calls.map(([source]) => source).sort()).toEqual(
         ['17TRACK', 'ParcelsApp', ...(enablePostalNinja ? ['Postal Ninja'] : []), 'Ship24']);
     }
+  });
+  it('asks Postal Ninja about a parcel filed under no carrier only once ParcelsApp and 17TRACK both found nothing', async () => {
+    const { direct, universal, health } = setup();
+    const router = new TrackingRouter({ direct, universal, health, now: () => time, enablePostalNinja: true });
+    const asked = () => universal.mock.calls.map(([source]) => source);
+    // ParcelsApp down: Postal Ninja waits for a check where both answer without history.
+    universal.mockImplementation(async (source: string) => {
+      throw source === 'ParcelsApp' ? new TransportError(source, 'down') : new NoHistoryError(source, 'No history');
+    });
+    const deferred = await router.fetch(parcel(), false).catch((error: unknown) => error);
+    expect(deferred).toBeInstanceOf(RoutingDeferred);
+    expect(asked()).not.toContain('Postal Ninja');
+    // 17TRACK waiting its turn from an earlier answer counts as not asked.
+    universal.mockClear();
+    universal.mockImplementation(async (source: string) => { throw new NoHistoryError(source, 'No history'); });
+    await router.fetch(parcel({ carrier_data: { routing: state({ failures: {
+      '17TRACK': { kind: 'no_history', count: 1, retry_at: new Date(time.getTime() + 3_600_000).toISOString() } } }) } }), false)
+      .catch(() => undefined);
+    expect(asked()).not.toContain('Postal Ninja');
+    // While they wait their turns, a check asks nobody, and Postal Ninja's turn doesn't bring one sooner.
+    universal.mockClear();
+    const later = new Date(time.getTime() + 5 * 3_600_000).toISOString();
+    const waiting = await router.fetch(parcel({ carrier_data: { routing: state({ failures: Object.fromEntries(
+      ['ParcelsApp', '17TRACK', 'Ship24'].map((source) => [source, { kind: 'no_history', count: 6, retry_at: later }])) }) } }), false)
+      .catch((error: unknown) => error);
+    expect(asked()).toEqual([]);
+    expect((waiting as RoutingDeferred).routing).toMatchObject({ quiet_until: later });
+    // A parcel filed under a carrier, or one Postal Ninja tracks, asks it as before.
+    universal.mockClear();
+    universal.mockImplementation(async (source: string) => {
+      throw source === 'ParcelsApp' ? new TransportError(source, 'down') : new NoHistoryError(source, 'No history');
+    });
+    await router.fetch(parcel({ carrier_data: { routing: state({ preferred_provider: 'Postal Ninja' }) } }), false).catch(() => undefined);
+    expect(asked()).toContain('Postal Ninja');
   });
   it('asks only the providers the setting allows, and none once it stops them', async () => {
     const { direct, universal, health } = setup();

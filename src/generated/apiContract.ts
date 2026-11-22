@@ -1892,7 +1892,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^[CE]2\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{8}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "aliases": [
@@ -3243,7 +3244,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^[CE]2\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{8}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "trackingUrlTemplate": "https://ecoscooting.com/tracking/{trackingNumber}",
@@ -3583,7 +3585,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "ontrac"
       },
       {
-        "pattern": "^[CD]\\d{14}$",
+        "pattern": "^(?!C2\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01]))[CD]\\d{14}$",
         "confidence": "low",
         "checksum": "ontrac"
       },

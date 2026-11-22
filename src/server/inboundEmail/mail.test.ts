@@ -65,6 +65,25 @@ describe('reading a forwarded shipping email', () => {
     expect(mail.sender).toBe('Example Shop');
   });
 
+  it('labels a message forwarded whole under its own subject with the sender on its opening dated line', async () => {
+    const mail = await readInboundMail(mime(
+      { From: 'Alex Example <alex@example.com>', Subject: 'Alex: Parcel 1234: at the sorting centre' },
+      `01.11.2026 09:15:42 Example Shop <notice@mail.example-shop.com>:\n\n\nYour parcel ${UPS} is at the sorting centre.`,
+    ));
+    expect(mail.sender).toBe('Example Shop');
+    expect(mail.origin).toBe('notice@mail.example-shop.com');
+    expect(mail.from).toBe('alex@example.com');
+  });
+
+  it.each([
+    ['further down the message', `Your parcel ${UPS} is on its way.\nThanks for your order.\nSee you soon.\n01.11.2026 09:15 Example Shop <notice@example-shop.com>:`],
+    ['with the forwarder\'s own address', `2026-11-01 09:15 Alex Example <ALEX@example.com>:\nYour parcel ${UPS} is on its way.`],
+    ['without a time', `01.11.2026 Example Shop <notice@example-shop.com>:\nYour parcel ${UPS} is on its way.`],
+  ])('keeps the From\'s name for a dated sender line %s', async (_, body) => {
+    const mail = await readInboundMail(mime({ From: 'Alex Example <alex@example.com>', Subject: 'Your parcel' }, body));
+    expect(mail.sender).toBe('Alex Example');
+  });
+
   it('keeps a long sender name within a parcel name\'s 80 characters', async () => {
     const mail = await readInboundMail(mime({ From: `"${'Shop '.repeat(30)}" <a@example.com>`, Subject: 'x' }, UPS));
     expect([...mail.sender].length).toBeLessThanOrEqual(80);

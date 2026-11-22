@@ -51,6 +51,13 @@ const GMAIL_CONFIRMATION_HOSTS = new Set(['mail-settings.google.com', 'mail.goog
 const FORWARDED_SUBJECT = /^\s*(?:fwd?|fw|tr|wg|rv|enc|i|vs|doorst|pd|пер|переслать|转发|轉寄)\s*:/i;
 /** The line a forwarded message's own sender is on, below the forward's marker. */
 const FORWARDED_FROM = /^[\s>*]*(?:from|von|de|da|van|od|от|från|fra|lähettäjä|发件人|寄件者)\s*:([^]*)$/i;
+/**
+ * The line some mail apps open a message forwarded whole with, under its own subject: its date and time, then its
+ * sender ("22.11.2026 17:43:04 Example Shop <notice@example-shop.com>:").
+ */
+const DATED_SENDER = /^[\s>*]*(?:\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{1,2}-\d{1,2})[,\s]+\d{1,2}:\d{2}(?::\d{2})?\s+([^<>]+<[^\s<>]+@[^\s<>]+>)\s*:\s*$/;
+/** That line opens the forwarded message: it is among the body's first lines with words. */
+const DATED_SENDER_LINES = 3;
 /** Parts of a sender's domain that name the mail system rather than the shop. */
 const MAIL_SUBDOMAINS = /^(?:mail|email|e|em|info|news|newsletter|notify|notifications?|noreply|no-reply|delivery|shipping|track|tracking|orders?|mailer|bounce|post)$/i;
 
@@ -170,7 +177,9 @@ function senderOfLine(line: string): { name: string; address: string } {
 
 /**
  * Who wrote the email. Forwarding by a rule keeps the shop's own From; forwarding by hand puts the forwarder there
- * and the shop's on the first From line of the forwarded part, which is read instead.
+ * and the shop's on the first From line of the forwarded part, which is read instead. Some mail apps forward a
+ * message whole under its own subject, opened by a line with its date and sender: that sender is read too, unless it
+ * is the forwarder's own address.
  */
 function senderOf(email: Email, text: string): { name: string; address: string } {
   if (FORWARDED_SUBJECT.test((email.subject ?? '').slice(0, MOST_SUBJECT_LENGTH))) {
@@ -183,6 +192,13 @@ function senderOf(email: Email, text: string): { name: string; address: string }
     }
   }
   const from = mailbox(email.from);
+  const opening = text.split('\n', MOST_FORWARD_LINES).filter((line) => line.trim()).slice(0, DATED_SENDER_LINES);
+  for (const line of opening) {
+    const found = DATED_SENDER.exec(line.slice(0, MOST_LINE_LENGTH));
+    if (!found) continue;
+    const sender = senderOfLine(found[1]!);
+    if (sender.name && sender.address !== from?.address.trim().toLowerCase()) return sender;
+  }
   if (!from) return { name: '', address: '' };
   return { name: cleanLabel(from.name) || domainName(from.address), address: from.address.trim().toLowerCase() };
 }

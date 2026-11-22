@@ -2756,6 +2756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "fedex-polen-sendungsverfolgung",
+      "title": "FedEx Polen Sendungsverfolgung: 13-stellige Nummern & Status",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
+    },
+    {
       "id": "techlink",
       "catalog": "techlink",
       "slug": "techlink-sendungsverfolgung",
@@ -4062,6 +4070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "suivi-fedex-pologne",
+      "title": "Suivi FedEx Pologne\u00a0: numéros à 13 chiffres et statuts",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
+    },
+    {
       "id": "techlink",
       "catalog": "techlink",
       "slug": "suivi-techlink",
@@ -5318,6 +5334,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking China Post: codice, stati in cinese e consegna",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "tracciamento-fedex-polonia",
+      "title": "Tracciamento FedEx Polonia: codici a 13 cifre e stati",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
     },
     {
       "id": "techlink",
@@ -6578,6 +6602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "seguimiento-fedex-polonia",
+      "title": "Seguimiento FedEx Polonia: números de 13 cifras y estados",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
+    },
+    {
       "id": "techlink",
       "catalog": "techlink",
       "slug": "seguimiento-techlink",
@@ -7826,6 +7858,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "China Post rastreio: número, estados e entrega em Portugal",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "fedex-pl",
+      "catalog": "fedex-pl",
+      "slug": "seguimento-fedex-polonia",
+      "title": "Seguimento FedEx Polónia: números de 13 dígitos e estados",
+      "name": "FedEx Poland",
+      "color": "#4d148c"
     },
     {
       "id": "techlink",

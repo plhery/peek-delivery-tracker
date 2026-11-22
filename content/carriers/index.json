@@ -136,7 +136,7 @@
   { "id": "lingdong", "catalog": "lingdong", "name": "Lingdong International", "languages": ["en", "es", "de", "fr", "it", "pt", "pl"] },
   { "id": "j-and-t-au", "catalog": "j-and-t-au", "name": "J&T Express Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "china-post", "catalog": "china-post", "name": "China Post", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "ru"] },
-  { "id": "fedex-pl", "catalog": "fedex-pl", "name": "FedEx Poland", "languages": ["en", "pl"] },
+  { "id": "fedex-pl", "catalog": "fedex-pl", "name": "FedEx Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
   { "id": "techlink", "catalog": "techlink", "name": "Techlink", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
   { "id": "z-leading", "catalog": "z-leading", "name": "Z-Leading", "languages": ["en"] },
   { "id": "imile", "catalog": "imile", "name": "iMile", "languages": ["en", "es", "it", "de", "fr", "pt", "pl"] },

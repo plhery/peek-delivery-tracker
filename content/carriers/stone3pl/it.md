@@ -31,7 +31,7 @@ Le righe di tracciamento di Stone3PL sono in inglese, con data e ora ma senza lu
 | --- | --- | --- |
 | `Order Submited.` | Il venditore ha inviato l’ordine a Stone3PL. Stone3PL potrebbe non avere ancora il pacco. La grafia è quella di Stone3PL. | «Etichetta creata» |
 | `Shipment information received` | Stone3PL ha ricevuto i dati del pacco. | «Etichetta creata» |
-| `Processing information input` | Stone3PL sta registrando i dati del pacco. | «Etichetta creata» |
+| `Processing information input` | Stone3PL sta registrando i dati del pacco. | «Etichetta creata», o «In transito» dopo `Pickup Scan` |
 | `Pickup Scan` | Il pacco è stato ritirato e scansionato. Ora è in viaggio. | «Preso in carico» |
 | `facility - Outbound` | Il pacco ha lasciato un magazzino o centro di smistamento. | «In transito» |
 | `Arrived at domestic terminal station` | Arrivato a un terminal. La riga non indica in quale paese. | «In transito» |
@@ -47,7 +47,7 @@ Le righe del paese di destinazione possono usare parole diverse. Peek riconosce 
 
 **Stato complessivo.** Il tracker di Stone3PL assegna anche uno stato generale a ogni pacco. Quando indica pronto per il ritiro, consegnato o un problema, Peek mostra «Pronto per il ritiro», «Consegnato» o «Problema segnalato», anche prima che una singola riga lo riporti.
 
-**Orari.** Stone3PL fornisce orari privi di fuso orario. Peek li data su un fuso dedotto (di norma l’ora cinese, UTC+8) e li mostra nel fuso del tuo dispositivo («Orari nel tuo fuso orario:»), per cui una riga del tuo paese può comparire sfasata di qualche ora. Segui l’ordine delle righe.
+**Orari.** Stone3PL fornisce orari privi di fuso orario. Peek data le righe dell’inizio del viaggio sull’ora cinese (UTC+8), quelle del paese di destinazione e `International shipment release - Import` sull’ora di quel paese (su uno solo dei suoi fusi se ne ha diversi), e mostra gli orari nel fuso del tuo dispositivo («Orari nel tuo fuso orario:»).
 
 ## Chi consegna i pacchi Stone3PL
 
@@ -67,7 +67,7 @@ Stone3PL lavora per le aziende che spediscono con lui e non offre pagine di assi
 
 **Solo `Order Submited.` o `Shipment information received`.** Stone3PL ha i dati dell’ordine, ma forse non ancora il pacco. Se non cambia per diversi giorni, chiedi al venditore se lo ha consegnato.
 
-**Nessun aggiornamento da giorni.** Quando un pacco in viaggio resta quattro giorni senza nuove righe, Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e il messaggio «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Stone3PL.», insieme al link «Chiedi aiuto a Stone3PL» verso la pagina contatti. Vedi [perché il tracciamento si ferma](guide:tracking-not-updating) e [tracciare pacchi dalla Cina](guide:tracking-from-china).
+**Nessun aggiornamento da giorni.** Quando un pacco su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza nuove righe, Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e il messaggio «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Stone3PL.», insieme al link «Chiedi aiuto a Stone3PL» verso la pagina contatti. Vedi [perché il tracciamento si ferma](guide:tracking-not-updating) e [tracciare pacchi dalla Cina](guide:tracking-from-china).
 
 **«Problema segnalato».** Stone3PL ha indicato un’anomalia. Leggi la riga più recente e chiedi al venditore cosa succede ora.
 
@@ -93,11 +93,11 @@ Per il tuo ordine chiedi prima al venditore: è lui ad aver affidato la spedizio
 
 Per qualsiasi altro codice, incollalo lo stesso: Peek segue oltre 4.500 corrieri. Quando una forma corrisponde debolmente ad alcuni corrieri, Peek mostra «Verifica dei servizi di tracciamento…» mentre li interroga; un numero che non corrisponde a nessuna forma viene cercato dopo l’aggiunta. Se Peek non nomina il corriere, tocca «Cambia» e scegli Stone3PL sotto «Tutti i corrieri», oppure usa «Cambia corriere» su un pacco già aggiunto.
 
-Peek legge lo stato complessivo, ogni riga con il suo orario, i paesi di partenza e destinazione, il servizio di spedizione, nonché il corriere finale e il relativo codice quando forniti. Rimuove i numeri di telefono, ma conserva il nome del firmatario quando una scansione di consegna lo indica. Stone3PL non fornisce data prevista di consegna, peso, luoghi delle scansioni né prova di consegna.
+Peek legge lo stato complessivo, ogni riga con il suo orario, i paesi di partenza e destinazione, il servizio di spedizione, nonché il corriere finale e il relativo codice quando forniti. Rimuove i numeri di telefono. Stone3PL non fornisce data prevista di consegna, peso, luoghi delle scansioni né prova di consegna.
 
 Quando Stone3PL nomina il corriere finale e ne fornisce il codice, Peek interroga quel corriere. Con un codice postale (due lettere, nove cifre, due lettere) senza corriere nominato, Peek interroga le poste del paese di destinazione, come [USPS](carrier:usps) negli Stati Uniti, [Royal Mail](carrier:royal-mail) nel Regno Unito, An Post in Irlanda, [Canada Post](carrier:canada-post) o [Australia Post](carrier:australia-post). Con un altro codice interroga l’unico corriere a cui quella forma appartiene, se esiste. Non appena quel corriere mostra una scansione almeno recente quanto l’ultima di Stone3PL, Peek segue il pacco lì conservando la cronologia di Stone3PL. Il corriere nominato da Stone3PL appare sul pacco già prima («Consegna con USPS», per esempio); finché quel corriere ha solo l’annuncio senza scansioni proprie, il pacco mostra «Annunciato a …, non ancora ricevuto». Senza tale corriere, Peek resta sul tracciamento di Stone3PL.
 
-Mentre tieni il pacco aperto in Peek — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente Stone3PL fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Pechino nel giorno in cui il pacco passa in consegna, finché il tracker di Stone3PL risponde; altrimenti, e dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Quando subentra un altro corriere, Peek segue il ritmo del corriere che effettua la consegna. Puoi scegliere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Stone3PL né il venditore per te.
+Mentre tieni il pacco aperto in Peek — oppure il giorno della consegna con le notifiche attive — Peek interroga direttamente Stone3PL fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora del paese di destinazione nel giorno in cui il pacco passa in consegna, finché il tracker di Stone3PL risponde; altrimenti, e dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora; dopo sette giorni senza novità su «Etichetta creata», ogni 6 ore. Quando subentra un altro corriere, Peek segue il ritmo del corriere che effettua la consegna. Puoi scegliere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Stone3PL né il venditore per te.
 
 ## Domande sul tracciamento Stone3PL
 
@@ -129,5 +129,5 @@ Via e-mail a support@stone3pl.com o per telefono allo 86-0755-81466633 (numero a
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – e-mail di supporto
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € per articolo fino a 150 € dal 1° luglio 2026, tariffa unionale di gestione di 2 € dal 1° novembre 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € per articolo a prescindere dal valore, definizione di articolo
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato codice, diciture e fasi, stato complessivo, ora cinese, firmatario, corriere finale e passaggio
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato codice, diciture e fasi, stato complessivo, ora cinese, corriere finale e passaggio
 :::

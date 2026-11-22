@@ -31,7 +31,7 @@ Wpisy śledzenia Stone3PL są po angielsku, z datą i godziną, lecz bez lokaliz
 | --- | --- | --- |
 | `Order Submited.` | Sprzedawca przesłał zlecenie do Stone3PL. Stone3PL może jeszcze nie mieć paczki. Pisownia pochodzi ze Stone3PL. | „Zarejestrowana” |
 | `Shipment information received` | Stone3PL otrzymał dane przesyłki. | „Zarejestrowana” |
-| `Processing information input` | Stone3PL wprowadza dane przesyłki. | „Zarejestrowana” |
+| `Processing information input` | Stone3PL wprowadza dane przesyłki. | „Zarejestrowana”, a po `Pickup Scan` „W transporcie” |
 | `Pickup Scan` | Przesyłka została odebrana i zeskanowana. Jest już w drodze. | „Przyjęta przez przewoźnika” |
 | `facility - Outbound` | Paczka opuściła magazyn lub sortownię. | „W transporcie” |
 | `Arrived at domestic terminal station` | Dotarła do terminalu. Wpis nie podaje, w którym kraju. | „W transporcie” |
@@ -47,7 +47,7 @@ Wpisy z kraju docelowego mogą używać innych sformułowań. Peek rozpoznaje w 
 
 **Status ogólny.** Tracker Stone3PL podaje też dla każdej paczki status zbiorczy. Gdy oznacza on gotowość do odbioru, doręczenie lub problem, Peek pokazuje „Do odbioru”, „Dostarczona” albo „Zgłoszono problem”, nawet zanim wspomni o tym pojedyncza linia.
 
-**Godziny.** Stone3PL podaje godziny bez strefy czasowej. Peek datuje je w wywnioskowanej strefie (domyślnie czas chiński, UTC+8) i wyświetla w strefie czasowej twojego urządzenia („Godziny w twojej strefie czasowej:”), więc wpis z twojego kraju może wyglądać na przesunięty o kilka godzin. Kieruj się kolejnością wpisów.
+**Godziny.** Stone3PL podaje godziny bez strefy czasowej. Peek datuje wpisy z początku trasy według czasu chińskiego (UTC+8), a wpisy z kraju docelowego oraz `International shipment release - Import` według czasu tego kraju (przy kilku strefach według jednej z nich), i wyświetla godziny w strefie czasowej twojego urządzenia („Godziny w twojej strefie czasowej:”).
 
 ## Kto doręcza paczki Stone3PL
 
@@ -67,7 +67,7 @@ Stone3PL obsługuje firmy nadające paczki i nie prowadzi stron pomocy dla odbio
 
 **Tylko `Order Submited.` lub `Shipment information received`.** Stone3PL ma dane zamówienia, ale być może jeszcze nie samą paczkę. Jeśli przez kilka dni nic się nie zmienia, zapytaj sprzedawcę, czy nadał paczkę.
 
-**Brak aktualizacji od kilku dni.** Gdy przesyłka w drodze nie ma nowego wpisu przez cztery dni, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Stone3PL.” z linkiem „Poproś przewoźnika Stone3PL o pomoc” do strony kontaktu. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
+**Brak aktualizacji od kilku dni.** Gdy przesyłka w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego wpisu przez cztery dni, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Stone3PL.” z linkiem „Poproś przewoźnika Stone3PL o pomoc” do strony kontaktu. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
 
 **„Zgłoszono problem”.** Stone3PL oznaczył usterkę. Przeczytaj najnowszy wpis i zapytaj sprzedawcę, co dalej.
 
@@ -93,11 +93,11 @@ W sprawie zamówienia zapytaj najpierw sprzedawcę — to on wynajął Stone3PL,
 
 Każdy inny numer również wklej: Peek obsługuje ponad 4500 przewoźników. Gdy układ słabo pasuje do kilku firm, Peek wyświetla „Sprawdzanie usług śledzenia…” podczas zapytań; numer niepasujący do żadnego wzorca jest wyszukiwany po dodaniu. Jeśli Peek nie wskaże przewoźnika, stuknij „Zmień” i wybierz Stone3PL w sekcji „Wszyscy przewoźnicy”, albo użyj „Zmień przewoźnika” w już dodanej paczce.
 
-Peek odczytuje status ogólny, każdy wpis z godziną, kraje nadania i docelowy, usługę wysyłki oraz przewoźnika końcowego i jego numer, jeśli zostały podane. Usuwa numery telefonów, zachowując jednak nazwisko osoby podpisującej, gdy podaje je skan doręczenia. Stone3PL nie podaje przewidywanej daty dostawy, wagi, lokalizacji skanów ani potwierdzenia odbioru.
+Peek odczytuje status ogólny, każdy wpis z godziną, kraje nadania i docelowy, usługę wysyłki oraz przewoźnika końcowego i jego numer, jeśli zostały podane. Usuwa numery telefonów. Stone3PL nie podaje przewidywanej daty dostawy, wagi, lokalizacji skanów ani potwierdzenia odbioru.
 
 Gdy Stone3PL wskaże firmę doręczającą i jej numer, Peek odpytuje tego przewoźnika. Przy numerze pocztowym (dwie litery, dziewięć cyfr, dwie litery) bez podanej nazwy firmy Peek pyta pocztę kraju docelowego — m.in. [USPS](carrier:usps) w USA, [Royal Mail](carrier:royal-mail) w Wielkiej Brytanii, An Post w Irlandii, [Canada Post](carrier:canada-post) czy [Australia Post](carrier:australia-post). Przy innym numerze pyta jedynego przewoźnika, do którego pasuje taki format, jeśli istnieje. Gdy tylko ten przewoźnik pokaże skan co najmniej tak świeży jak najnowszy ze Stone3PL, Peek śledzi przesyłkę tam, zachowując historię ze Stone3PL. Nazwa wskazanego przewoźnika widnieje już wcześniej (np. „Doręcza: USPS”); dopóki ma jedynie zapowiedź bez własnego skanu, widać „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Bez takiego przewoźnika Peek pozostaje przy śledzeniu Stone3PL.
 
-Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio Stone3PL nawet co 10 minut, a od 6:00 czasu pekińskiego w dniu przejścia w doręczenie nawet co 2 minuty, dopóki tracker Stone3PL odpowiada; poza tym, oraz po dwóch dniach bez wieści (12 godzin, dopóki status to „Zarejestrowana” lub „Przyjęta przez przewoźnika”), sprawdza co godzinę. Gdy doręczenie przejmie inny przewoźnik, Peek stosuje rytm tego przewoźnika. Może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie ze Stone3PL ani ze sprzedawcą.
+Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio Stone3PL nawet co 10 minut, a od 6:00 czasu kraju docelowego w dniu przejścia w doręczenie nawet co 2 minuty, dopóki tracker Stone3PL odpowiada; poza tym, oraz po dwóch dniach bez wieści (12 godzin, dopóki status to „Zarejestrowana” lub „Przyjęta przez przewoźnika”), sprawdza co godzinę; po siedmiu dniach bez wieści w statusie „Zarejestrowana” co 6 godzin. Gdy doręczenie przejmie inny przewoźnik, Peek stosuje rytm tego przewoźnika. Może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie ze Stone3PL ani ze sprzedawcą.
 
 ## Pytania o śledzenie Stone3PL
 
@@ -129,5 +129,5 @@ E-mailem na support@stone3pl.com lub telefonicznie pod numerem 86-0755-81466633 
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – e-mail wsparcia
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – cło 3 € za pozycję do 150 € od 1 lipca 2026 r., unijna opłata manipulacyjna 2 € od 1 listopada 2026 r.
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € za pozycję niezależnie od wartości, definicja pozycji
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – układ numeru, opisy i etapy, status ogólny, czas chiński, podpisujący, firma doręczająca i przekazanie
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – układ numeru, opisy i etapy, status ogólny, czas chiński, firma doręczająca i przekazanie
 :::

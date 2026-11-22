@@ -31,7 +31,7 @@ Les lignes de suivi de Stone3PL sont en anglais, avec une date et une heure mais
 | --- | --- | --- |
 | `Order Submited.` | Le vendeur a transmis la commande à Stone3PL. Stone3PL n’a peut-être pas encore le colis. L’orthographe vient de Stone3PL. | « Étiquette créée » |
 | `Shipment information received` | Stone3PL a reçu les données du colis. | « Étiquette créée » |
-| `Processing information input` | Stone3PL enregistre les données du colis. | « Étiquette créée » |
+| `Processing information input` | Stone3PL enregistre les données du colis. | « Étiquette créée », ou « En transit » après `Pickup Scan` |
 | `Pickup Scan` | Le colis a été collecté et scanné. Il est désormais en route. | « Pris en charge » |
 | `facility - Outbound` | Le colis a quitté un entrepôt ou un centre de tri. | « En transit » |
 | `Arrived at domestic terminal station` | Arrivé à un terminal. La ligne ne précise pas le pays. | « En transit » |
@@ -47,7 +47,7 @@ Les lignes issues du pays de destination peuvent employer d’autres termes. Pee
 
 **Statut global.** Le suivi de Stone3PL attribue aussi un statut général à chaque colis. Lorsque ce statut indique un colis prêt au retrait, livré ou en incident, Peek affiche « Prêt à être retiré », « Livré » ou « Problème signalé », même avant qu’une ligne précise ne le dise.
 
-**Heures.** Stone3PL fournit les heures sans fuseau horaire. Peek les date sur un fuseau déduit (par défaut l’heure de Chine, UTC+8) et les affiche dans ton fuseau horaire (« Heures dans ton fuseau horaire : » suivi de son nom) ; une ligne issue de ton pays peut donc apparaître décalée de quelques heures. Fie-toi à l’ordre des lignes.
+**Heures.** Stone3PL fournit les heures sans fuseau horaire. Peek date les lignes du début du trajet à l’heure de Chine (UTC+8), et celles du pays de destination ainsi que `International shipment release - Import` à l’heure de ce pays (sur un seul de ses fuseaux s’il en a plusieurs), puis les affiche dans ton fuseau horaire (« Heures dans ton fuseau horaire : » suivi de son nom).
 
 ## Qui livre les colis Stone3PL
 
@@ -67,7 +67,7 @@ Stone3PL travaille pour les entreprises qui expédient avec lui et ne publie auc
 
 **Uniquement `Order Submited.` ou `Shipment information received`.** Stone3PL a les données de la commande, mais peut-être pas encore le colis. Si rien ne bouge au bout de plusieurs jours, demande au vendeur si le colis a bien été remis.
 
-**Aucune mise à jour depuis des jours.** Lorsqu’un colis en route n’a aucun nouveau scan depuis quatre jours, Peek affiche la date du dernier scan (« Aucune mise à jour depuis … ») ainsi que « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Stone3PL. », avec le lien « Demande de l’aide à Stone3PL » vers sa page de contact. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre des colis venant de Chine](guide:tracking-from-china).
+**Aucune mise à jour depuis des jours.** Lorsqu’un colis en « Étiquette créée », « Pris en charge » ou « En transit » n’a aucun nouveau scan depuis quatre jours, Peek affiche la date du dernier scan (« Aucune mise à jour depuis … ») ainsi que « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Stone3PL. », avec le lien « Demande de l’aide à Stone3PL » vers sa page de contact. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre des colis venant de Chine](guide:tracking-from-china).
 
 **« Problème signalé ».** Stone3PL a signalé une anomalie. Lis la dernière ligne, puis demande au vendeur quelle est la suite.
 
@@ -93,11 +93,11 @@ Pour ta commande, adresse-toi d’abord au vendeur : c’est lui qui a contract�
 
 Pour tout autre numéro, colle-le quand même : Peek suit plus de 4 500 transporteurs. Quand une forme correspond faiblement à certains transporteurs, Peek affiche « Vérification des services de suivi… » pendant qu’il les interroge ; un numéro ne correspondant à aucune forme est recherché une fois ajouté. Si Peek ne nomme pas le transporteur, appuie sur « Changer » et choisis Stone3PL sous « Tous les transporteurs », ou utilise « Changer de transporteur » sur un colis déjà ajouté.
 
-Peek lit le statut global, chaque ligne avec son heure, les pays d’origine et de destination, le service d’expédition, ainsi que le transporteur final et son numéro lorsqu’ils sont indiqués. Il supprime les numéros de téléphone, tout en conservant le nom du signataire lorsqu’une ligne de livraison l’indique. Stone3PL ne donne ni date de livraison prévue, ni poids, ni lieux de scan, ni preuve de livraison.
+Peek lit le statut global, chaque ligne avec son heure, les pays d’origine et de destination, le service d’expédition, ainsi que le transporteur final et son numéro lorsqu’ils sont indiqués. Il supprime les numéros de téléphone. Stone3PL ne donne ni date de livraison prévue, ni poids, ni lieux de scan, ni preuve de livraison.
 
 Lorsque Stone3PL nomme le transporteur final et donne son numéro, Peek interroge ce transporteur. Avec un numéro postal (deux lettres, neuf chiffres, deux lettres) sans transporteur nommé, Peek interroge la poste du pays de destination, comme [USPS](carrier:usps) aux États-Unis, [Royal Mail](carrier:royal-mail) au Royaume-Uni, An Post en Irlande, [Canada Post](carrier:canada-post) ou [Australia Post](carrier:australia-post). Avec un autre numéro, il interroge le transporteur unique auquel ce format appartient, s’il existe. Dès que ce transporteur affiche un scan au moins aussi récent que le dernier de Stone3PL, Peek suit le colis chez lui en gardant l’historique de Stone3PL. Un transporteur nommé par Stone3PL s’affiche même avant cela (« Livraison par USPS », par exemple) ; tant que ce transporteur n’a que l’annonce sans scan propre, le colis indique « Annoncé à …, pas encore reçu ». Faute d’un tel relais, Peek reste sur le suivi de Stone3PL.
 
-Tant que tu as le colis ouvert dans Peek — ou le jour de la livraison si les notifications sont activées — Peek interroge directement Stone3PL jusqu’à toutes les 10 minutes, et jusqu’à toutes les 2 minutes dès 6 h, heure de Pékin, le jour où le colis passe en livraison, tant que le suivi de Stone3PL répond ; sinon, et après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures. Dès qu’un autre transporteur prend le relais, Peek adopte le rythme du transporteur chargé de la livraison. Tu peux choisir les notifications « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut pas contacter Stone3PL ni le vendeur pour toi.
+Tant que tu as le colis ouvert dans Peek — ou le jour de la livraison si les notifications sont activées — Peek interroge directement Stone3PL jusqu’à toutes les 10 minutes, et jusqu’à toutes les 2 minutes dès 6 h, heure du pays de destination, le jour où le colis passe en livraison, tant que le suivi de Stone3PL répond ; sinon, et après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures ; après sept jours sans nouveauté sur « Étiquette créée », toutes les 6 heures. Dès qu’un autre transporteur prend le relais, Peek adopte le rythme du transporteur chargé de la livraison. Tu peux choisir les notifications « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut pas contacter Stone3PL ni le vendeur pour toi.
 
 ## Questions sur le suivi Stone3PL
 
@@ -129,5 +129,5 @@ Par e-mail à support@stone3pl.com, ou par téléphone au 86-0755-81466633 (num�
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – adresse e-mail d’assistance
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droit de douane de 3 € par article jusqu’à 150 € depuis le 1er juillet 2026, frais de traitement de l’Union de 2 € depuis le 1er novembre 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article quelle que soit la valeur, définition d’un article
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – format du numéro, libellés et étapes, statut global, heure de Chine, signataire, transporteur final et relais
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – format du numéro, libellés et étapes, statut global, heure de Chine, transporteur final et relais
 :::

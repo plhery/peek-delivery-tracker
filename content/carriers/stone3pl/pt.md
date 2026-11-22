@@ -31,7 +31,7 @@ As linhas de seguimento da Stone3PL estão em inglês, com data e hora mas sem l
 | --- | --- | --- |
 | `Order Submited.` | O vendedor enviou o pedido à Stone3PL. A Stone3PL pode ainda não ter a encomenda. A grafia é da própria Stone3PL. | «Etiqueta criada» |
 | `Shipment information received` | A Stone3PL recebeu os dados da encomenda. | «Etiqueta criada» |
-| `Processing information input` | A Stone3PL está a registar os dados da encomenda. | «Etiqueta criada» |
+| `Processing information input` | A Stone3PL está a registar os dados da encomenda. | «Etiqueta criada», ou «Em trânsito» depois de `Pickup Scan` |
 | `Pickup Scan` | A encomenda foi recolhida e registada. Já está a caminho. | «Aceite pela transportadora» |
 | `facility - Outbound` | A encomenda saiu de um armazém ou centro de triagem. | «Em trânsito» |
 | `Arrived at domestic terminal station` | Chegou a um terminal. A linha não diz em que país. | «Em trânsito» |
@@ -47,7 +47,7 @@ As linhas do país de destino podem usar outras palavras. O Peek reconhece termo
 
 **Estado geral.** O rastreador da Stone3PL dá também um estado global a cada encomenda. Quando esse estado indica pronta para levantamento, entregue ou problema, o Peek mostra «Pronta para levantamento», «Entregue» ou «Problema reportado», mesmo antes de uma linha o dizer.
 
-**Horas.** A Stone3PL fornece horas sem fuso horário. O Peek data-as num fuso deduzido (por defeito hora da China, UTC+8) e apresenta-as no teu fuso horário («Horas no teu fuso horário:»), pelo que uma linha do teu país pode surgir desfasada algumas horas. Guia-te pela ordem das linhas.
+**Horas.** A Stone3PL fornece horas sem fuso horário. O Peek data as linhas do início do percurso na hora da China (UTC+8), e as do país de destino e `International shipment release - Import` na hora desse país (num só dos seus fusos, se tiver vários), e apresenta as horas no teu fuso horário («Horas no teu fuso horário:»).
 
 ## Quem entrega as encomendas Stone3PL
 
@@ -67,7 +67,7 @@ A Stone3PL trabalha para as empresas que expedem consigo e não tem páginas de 
 
 **Apenas `Order Submited.` ou `Shipment information received`.** A Stone3PL tem os dados do pedido, mas talvez ainda não tenha a encomenda. Se não mudar durante vários dias, pergunta ao vendedor se a entregou.
 
-**Dias sem atualização.** Quando uma encomenda em curso passa quatro dias sem novas linhas, o Peek mostra a data do último registo («Sem atualizações desde …») e indica «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Stone3PL.», com a ligação «Pede ajuda a Stone3PL» para a página de contactos. Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
+**Dias sem atualização.** Quando uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passa quatro dias sem novas linhas, o Peek mostra a data do último registo («Sem atualizações desde …») e indica «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Stone3PL.», com a ligação «Pede ajuda a Stone3PL» para a página de contactos. Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
 
 **«Problema reportado».** A Stone3PL assinalou um problema. Lê a linha mais recente e pergunta ao vendedor o que acontece a seguir.
 
@@ -93,11 +93,11 @@ O [Peek](/) acompanha encomendas Stone3PL, mas não consegue confirmar a Stone3P
 
 Para qualquer outro número, cola-o na mesma: o Peek acompanha mais de 4500 transportadoras. Quando um formato corresponde fracamente a algumas transportadoras, o Peek mostra «A verificar serviços de seguimento…» enquanto lhes pergunta; um número que não corresponde a nenhum formato é pesquisado após adicionares. Se o Peek não indicar a transportadora, toca em «Alterar» e escolhe Stone3PL em «Todas as transportadoras», ou usa «Alterar transportadora» numa encomenda já adicionada.
 
-O Peek lê o estado global, cada linha com a hora, os países de origem e destino, o serviço de envio e a empresa que entrega com o respetivo número quando indicados. Remove números de telefone, mas conserva o nome de quem assinou quando uma linha de entrega o indica. A Stone3PL não fornece data prevista de entrega, peso, locais de registo nem comprovativo de entrega.
+O Peek lê o estado global, cada linha com a hora, os países de origem e destino, o serviço de envio e a empresa que entrega com o respetivo número quando indicados. Remove números de telefone. A Stone3PL não fornece data prevista de entrega, peso, locais de registo nem comprovativo de entrega.
 
 Quando a Stone3PL nomeia a empresa que entrega e dá o número, o Peek pergunta a essa empresa. Com um número postal (duas letras, nove dígitos, duas letras) sem empresa nomeada, o Peek pergunta aos correios do país de destino, como [USPS](carrier:usps) nos EUA, [Royal Mail](carrier:royal-mail) no Reino Unido, An Post na Irlanda, [Canada Post](carrier:canada-post) ou [Australia Post](carrier:australia-post). Com outro número, pergunta à única transportadora a que esse formato pertence, se existir. Assim que essa transportadora mostrar um registo pelo menos tão recente como o último da Stone3PL, o Peek segue a encomenda lá mantendo o histórico da Stone3PL. A empresa indicada pela Stone3PL surge mesmo antes disso («Entrega: USPS», por exemplo); enquanto tiver apenas o anúncio sem registo próprio, surge «Anunciada a …, ainda não recebida». Sem essa transportadora, o Peek continua no seguimento da Stone3PL.
 
-Enquanto mantiveres a encomenda aberta no Peek — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a Stone3PL até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora de Pequim) no dia em que sai para distribuição, enquanto o rastreador da Stone3PL responder; fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Quando outra transportadora assume a entrega, o Peek segue o ritmo da transportadora que entrega a encomenda. Podes receber alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Não consegue contactar a Stone3PL nem o vendedor por ti.
+Enquanto mantiveres a encomenda aberta no Peek — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a Stone3PL até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora do país de destino) no dia em que sai para distribuição, enquanto o rastreador da Stone3PL responder; fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Quando outra transportadora assume a entrega, o Peek segue o ritmo da transportadora que entrega a encomenda. Podes receber alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Não consegue contactar a Stone3PL nem o vendedor por ti.
 
 ## Perguntas sobre o seguimento Stone3PL
 
@@ -129,5 +129,5 @@ Por e-mail para support@stone3pl.com ou por telefone para 86-0755-81466633 (núm
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – e-mail de apoio
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – direitos de 3 € por artigo até 150 € desde 1 de julho de 2026, taxa de gestão da União de 2 € desde 1 de novembro de 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo qualquer que seja o valor, definição de artigo
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato do número, textos e etapas, estado global, hora da China, assinante, transportadora final e transferência
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato do número, textos e etapas, estado global, hora da China, transportadora final e transferência
 :::

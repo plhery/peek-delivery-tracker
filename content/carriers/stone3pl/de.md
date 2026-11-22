@@ -31,7 +31,7 @@ Die Tracking-Zeilen von Stone3PL sind auf Englisch, mit Datum und Uhrzeit, aber 
 | --- | --- | --- |
 | `Order Submited.` | Der Verkäufer hat den Auftrag an Stone3PL übermittelt. Stone3PL hat das Paket womöglich noch nicht. Die Schreibweise stammt von Stone3PL. | „Etikett erstellt“ |
 | `Shipment information received` | Stone3PL liegen die Sendungsdaten vor. | „Etikett erstellt“ |
-| `Processing information input` | Stone3PL erfasst die Daten des Pakets. | „Etikett erstellt“ |
+| `Processing information input` | Stone3PL erfasst die Daten des Pakets. | „Etikett erstellt“, nach `Pickup Scan` „Unterwegs“ |
 | `Pickup Scan` | Das Paket wurde abgeholt und gescannt. Es ist jetzt unterwegs. | „Beim Paketdienst eingegangen“ |
 | `facility - Outbound` | Das Paket hat ein Lager oder Sortierzentrum verlassen. | „Unterwegs“ |
 | `Arrived at domestic terminal station` | An einem Terminal eingetroffen. Die Zeile nennt kein Land. | „Unterwegs“ |
@@ -47,7 +47,7 @@ Zeilen aus dem Zielland können andere Formulierungen nutzen. Peek erkennt gebr�
 
 **Gesamtstatus.** Der Tracker von Stone3PL vergibt zudem einen übergeordneten Status. Bedeutet dieser abholbereit, zugestellt oder ein Problem, zeigt Peek „Abholbereit“, „Zugestellt“ oder „Problem gemeldet“, selbst wenn noch keine einzelne Zeile dies nennt.
 
-**Uhrzeiten.** Stone3PL liefert Uhrzeiten ohne Zeitzone. Peek datiert sie auf einer abgeleiteten Zeitzone (standardmäßig chinesische Zeit, UTC+8) und rechnet sie in deine Geräte-Zeitzone um („Uhrzeiten in deiner Zeitzone:“). Eine Zeile aus deinem Land kann daher um einige Stunden verschoben erscheinen — orientiere dich an der Reihenfolge der Einträge.
+**Uhrzeiten.** Stone3PL liefert Uhrzeiten ohne Zeitzone. Peek datiert die Zeilen vom Beginn der Reise auf chinesische Zeit (UTC+8), die Zeilen aus dem Zielland und `International shipment release - Import` auf die Zeit dieses Landes (bei mehreren Zeitzonen auf eine davon), und rechnet sie in deine Geräte-Zeitzone um („Uhrzeiten in deiner Zeitzone:“).
 
 ## Wer Stone3PL-Pakete zustellt
 
@@ -67,7 +67,7 @@ Stone3PL arbeitet für versendende Unternehmen und bietet keine Hilfeseiten für
 
 **Nur `Order Submited.` oder `Shipment information received`.** Stone3PL hat die Auftragsdaten, das Paket aber möglicherweise noch nicht. Tut sich mehrere Tage nichts, frag den Verkäufer, ob es übergeben wurde.
 
-**Seit Tagen kein Update.** Bleibt ein Paket unterwegs vier Tage ohne neue Zeile, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) und den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Stone3PL nach.“ samt dem Link „Hol dir Hilfe bei Stone3PL“ zur Kontaktseite. Siehe [warum die Sendungsverfolgung stoppt](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
+**Seit Tagen kein Update.** Bleibt ein Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neue Zeile, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) und den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Stone3PL nach.“ samt dem Link „Hol dir Hilfe bei Stone3PL“ zur Kontaktseite. Siehe [warum die Sendungsverfolgung stoppt](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
 
 **„Problem gemeldet“.** Stone3PL hat eine Störung vermerkt. Lies die neueste Zeile und frag den Verkäufer, wie es weitergeht.
 
@@ -93,11 +93,11 @@ Bei Fragen zu deiner Bestellung wende dich zuerst an den Verkäufer: Er hat Ston
 
 Jede andere Nummer kannst du ebenfalls einfügen: Peek verfolgt über 4500 Paketdienste. Passt eine Form nur schwach zu bestimmten Diensten, zeigt Peek „Tracking-Dienste werden geprüft…“, während es dort nachfragt; eine Nummer ohne bekannte Form wird nach dem Hinzufügen gesucht. Nennt Peek keinen Paketdienst, tippe auf „Ändern“ und wähle Stone3PL unter „Alle Paketdienste“, oder nutze „Paketdienst ändern“ bei einem bereits gespeicherten Paket.
 
-Peek liest Gesamtstatus, jede Zeile samt Uhrzeit, Abgangs- und Zielland, Versandart sowie den Zustelldienst und dessen Nummer, sofern angegeben. Telefonnummern entfernt Peek; nennt eine Zustellzeile den Unterzeichner, bleibt dieser erhalten. Einen voraussichtlichen Liefertermin, Gewicht, Scan-Orte oder einen Zustellnachweis liefert Stone3PL nicht.
+Peek liest Gesamtstatus, jede Zeile samt Uhrzeit, Abgangs- und Zielland, Versandart sowie den Zustelldienst und dessen Nummer, sofern angegeben. Telefonnummern entfernt Peek. Einen voraussichtlichen Liefertermin, Gewicht, Scan-Orte oder einen Zustellnachweis liefert Stone3PL nicht.
 
 Nennt Stone3PL den Zustelldienst samt Nummer, fragt Peek bei diesem nach. Bei einer internationalen Postnummer (zwei Buchstaben, neun Ziffern, zwei Buchstaben) ohne genannten Dienst fragt Peek die Post des Ziellands an — etwa [USPS](carrier:usps) in den USA, [Royal Mail](carrier:royal-mail) im Vereinigten Königreich, An Post in Irland, [Canada Post](carrier:canada-post) oder [Australia Post](carrier:australia-post). Bei einer anderen Nummer fragt Peek den einzigen Paketdienst an, zu dem diese Form eindeutig gehört, sofern es einen gibt. Sobald dieser Paketdienst einen mindestens so aktuellen Scan wie Stone3PL zeigt, folgt Peek dem Paket dort und behält Stone3PLs Verlauf bei. Ein von Stone3PL genannter Zustelldienst erscheint sogar schon vorher („Zustellung durch USPS“ zum Beispiel); liegt dort erst die Ankündigung ohne eigenen Scan vor, zeigt das Paket „Bei … angekündigt, noch nicht eingetroffen“. Ohne passenden Anschlussdienst bleibt Peek beim Tracking von Stone3PL.
 
-Solange du das Paket in Peek geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek direkt bei Stone3PL bis zu alle 10 Minuten, und ab 6:00 Uhr Pekinger Zeit am Tag, an dem das Paket in Zustellung geht, bis zu alle 2 Minuten, solange Stone3PLs eigener Tracker antwortet; sonst, sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange das Paket auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht), prüft Peek stündlich. Übernimmt ein anderer Paketdienst die Zustellung, folgt Peek dem Abfragetakt dieses Zustelldienstes. Du kannst Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. Stone3PL oder den Verkäufer kann Peek nicht für dich kontaktieren.
+Solange du das Paket in Peek geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek direkt bei Stone3PL bis zu alle 10 Minuten, und ab 6:00 Uhr Zeit des Ziellands am Tag, an dem das Paket in Zustellung geht, bis zu alle 2 Minuten, solange Stone3PLs eigener Tracker antwortet; sonst, sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange das Paket auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht), prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten auf „Etikett erstellt“ alle 6 Stunden. Übernimmt ein anderer Paketdienst die Zustellung, folgt Peek dem Abfragetakt dieses Zustelldienstes. Du kannst Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. Stone3PL oder den Verkäufer kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur Stone3PL Sendungsverfolgung
 
@@ -129,5 +129,5 @@ Per E-Mail an support@stone3pl.com oder telefonisch unter 86-0755-81466633 (Rufn
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – Support-E-Mail
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll pro Artikel bis 150 € seit 1. Juli 2026, 2 € EU-Bearbeitungsgebühr seit 1. November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Artikel unabhängig vom Wert, Definition eines Artikels
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Status-Wortlaute und Stufen, Gesamtstatus, chinesische Zeit, Unterzeichner, Zustelldienst und Übergabe
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernform, Status-Wortlaute und Stufen, Gesamtstatus, chinesische Zeit, Zustelldienst und Übergabe
 :::

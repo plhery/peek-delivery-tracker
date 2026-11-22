@@ -14,10 +14,10 @@ Peek associe ces deux formes à Postes Canada, ici avec des chiffres inventés :
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `1234 5678 9012 3452` | 16 chiffres ; le dernier est un chiffre de contrôle. DHL eCommerce, Correos Express, [TNT](carrier:tnt) et Evri UK ont aussi des numéros de 16 chiffres. |
-| `RR000000005CA` | Un numéro postal international : 2 lettres, 9 chiffres, `CA`. Le dernier chiffre avant `CA` est un chiffre de contrôle. |
+| `4018 2930 5746 1826` | 16 chiffres ; le dernier est un chiffre de contrôle. DHL eCommerce, Correos Express, [TNT](carrier:tnt) et Evri UK ont aussi des numéros de 16 chiffres. |
+| `RR482910576CA` | Un numéro postal international : 2 lettres, 9 chiffres, `CA`. Le dernier chiffre avant `CA` est un chiffre de contrôle. |
 
-Postes Canada retrouve aussi un colis avec le numéro à 15 chiffres d'un avis de livraison, ou avec une référence faite seulement de chiffres. Pour ces numéros-là, choisis toi-même le transporteur dans Peek, comme expliqué plus bas.
+Postes Canada retrouve aussi un colis avec le numéro à 15 chiffres d'un avis de livraison, ou avec une référence faite seulement de chiffres (au moins 11). Pour ces numéros-là, choisis toi-même le transporteur dans Peek, comme expliqué plus bas.
 
 [Purolator](carrier:purolator), un autre transporteur canadien, a ses propres numéros : 12 chiffres, ou 3 lettres et 9 chiffres. Pour ceux-là, Peek n'interroge pas Postes Canada de lui-même. Si Postes Canada ne connaît pas ton numéro, regarde quel transporteur nomme le courriel de la boutique. Plus de détails dans [où trouver son numéro de suivi](guide:find-tracking-number) et [à quel transporteur appartient un numéro](guide:tracking-number-formats).
 
@@ -104,7 +104,7 @@ Une fois qu'un colis parti du Canada est entre les mains de la poste de ton pays
 
 Peek interroge Postes Canada directement, sans navigateur. Tu vois le statut, l'historique avec le lieu de chaque scan (ville et province au Canada), le jour de livraison prévu, une plage horaire une fois le colis en livraison au Canada si Postes Canada en donne une, l'heure de livraison et, quand Postes Canada l'affiche en entier, le nom de l'expéditeur. Peek laisse de côté les options de livraison, les adresses, les signatures et les photos de livraison.
 
-Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès que Postes Canada elle-même indique que le colis est en livraison ce jour-là, à partir de 6 h, heure locale, ou, si Postes Canada donne une plage horaire, à partir d'une demi-heure avant son début ; via des services de suivi, toutes les 15 minutes. Après 12 heures sans nouveau scan à « Étiquette créée » ou « Pris en charge », ou 48 heures à toute autre étape, il vérifie toutes les heures. Pour les notifications, choisis « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Quand tu as le colis ouvert, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès que Postes Canada elle-même indique que le colis est en livraison ce jour-là, à partir de 6 h, heure locale, ou, si Postes Canada donne une plage horaire, à partir d'une demi-heure avant son début ; via des services de suivi, jusqu'à toutes les 15 minutes ce jour-là ; sinon, toutes les heures. Après 12 heures sans nouveau scan à « Étiquette créée » ou « Pris en charge », ou 48 heures à toute autre étape, il vérifie toutes les heures. Pour les notifications, choisis « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 **Vers le Canada.** Pour un colis posté à l'étranger avec un numéro postal international, Peek interroge aussi Postes Canada avec le même numéro dès que la poste d'origine nomme le Canada comme destination ou, si elle n'en nomme aucune, si tu suis le colis depuis le Canada. Dès que Postes Canada montre un scan au moins aussi récent que le dernier de la poste d'origine, Peek suit le colis chez elle et garde l'historique précédent. Un numéro qui commence par `L` et finit par `CH`, que Peek suit chez La Poste suisse, n'est jamais passé à Postes Canada.
 

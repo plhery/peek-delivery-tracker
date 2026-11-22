@@ -18,13 +18,13 @@ Les formes qu'on rencontre, avec des chiffres inventés :
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
-| `UUS0000000000000000` | `UUS` suivi de 16 lettres ou chiffres. |
-| `UUSC000000000000` | `UUSC` suivi de 12 chiffres. |
+| `UUS4829K10573649182` | `UUS` suivi de 16 lettres ou chiffres. |
+| `UUSC482910573649` | `UUSC` suivi de 12 chiffres. |
 | `4C000000000US` | `4C`, 9 chiffres, puis `US`. |
-| `U000000000000000` | `U` suivi de 15 chiffres, `U9999…` compris. |
+| `U482910573649182` | `U` suivi de 15 chiffres, `U9999…` compris. |
 | `AA00CAA0U000000000` | 2 lettres, 2 chiffres, `CAA0` ou `USA0`, une lettre et 9 chiffres. |
 | `JY00CA00A000000000` | `JY`, 2 chiffres, `CA`, 2 chiffres, `A` et 9 chiffres. |
-| `UR00000000000000000` | `UR` et 17 chiffres, un numéro de la plateforme d'UniUni pour les expéditeurs. |
+| `UR48291057364918273` | `UR` et 17 chiffres, un numéro de la plateforme d'UniUni pour les expéditeurs. |
 
 Une référence qui commence par `UNI` est un numéro de commande, et `URB` suivi de 16 chiffres un numéro de lot : ni l'un ni l'autre n'est le numéro de suivi du colis. La page de suivi d'UniUni accepte jusqu'à 25 numéros à la fois, séparés par des virgules.
 
@@ -90,7 +90,7 @@ Les pages d'UniUni ne parlent ni de droits de douane ni de taxes. Selon l'OPC, l
 
 ## Service à la clientèle UniUni : téléphone et chatbot
 
-Les canaux qu'UniUni affiche sur son site en français, lus le 17 novembre 2026 :
+Les canaux qu'UniUni affiche sur son site en français :
 
 - **Téléphone, Canada** : 1 604 229-2007 pour les fuseaux horaires du Pacifique et des Rocheuses ; 1 647 360-4178 pour ceux du Centre, de l'Est et de l'Atlantique.
 - **Téléphone, États-Unis** : 1 424 284-2432 pour les fuseaux du Pacifique et des Rocheuses ; 1 315 533-4690 pour ceux du Centre et de l'Est.
@@ -129,9 +129,9 @@ Non. UniUni, c'est Uni Express inc., une entreprise de livraison fondée à Vanc
 Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date estimée n'apparaît qu'une fois le colis arrivé dans ses installations : écris d'abord au marchand.
 
 :::sources
-- [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, informations pour une nouvelle livraison, boîte postale USPS, photos, récupération, boîtes postales (relu le 17 novembre 2026)
-- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada ou USPS, Shein, Temu et TikTok, photos floues, chatbot, commentaires sur un livreur (relu le 17 novembre 2026)
-- [UniUni : Accueil](https://www.uniuni.com/fr/home-fr/) – téléphones au Canada et aux États-Unis, heures (relu le 17 novembre 2026)
+- [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, informations pour une nouvelle livraison, boîte postale USPS, photos, récupération, boîtes postales
+- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada ou USPS, Shein, Temu et TikTok, photos floues, chatbot, commentaires sur un livreur
+- [UniUni : Accueil](https://www.uniuni.com/fr/home-fr/) – téléphones au Canada et aux États-Unis, heures
 - [UniUni : Services](https://www.uniuni.com/fr/services-fr/) – livraison le lendemain, photos de preuve, textos et courriels
 - [UniUni : En savoir plus](https://www.uniuni.com/fr/en-savoir-plus/) – fondée à Vancouver en 2019
 - [UniUni : Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express inc., Richmond (C.-B.)

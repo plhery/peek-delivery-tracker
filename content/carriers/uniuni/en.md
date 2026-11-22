@@ -16,13 +16,13 @@ Parcels reach UniUni already labelled by the seller, so the number is in your or
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `UUS0000000000000000` | UUS followed by 16 letters and digits |
-| `UUSC000000000000` | UUSC followed by 12 digits |
+| `UUS4829K10573649182` | UUS followed by 16 letters and digits |
+| `UUSC482910573649` | UUSC followed by 12 digits |
 | `4C000000000US` | 4C, 9 digits, then US |
-| `U000000000000000` | U followed by 15 digits |
+| `U482910573649182` | U followed by 15 digits |
 | `AA00CAA0U000000000` | 2 letters, 2 digits, CAA0 or USA0, a letter and 9 digits |
 | `JY00CA00A000000000` | JY, 2 digits, CA, 2 digits, A and 9 digits |
-| `UR00000000000000000` | UR and 17 digits, from UniUni's seller platform |
+| `UR48291057364918273` | UR and 17 digits, from UniUni's seller platform |
 
 A reference starting with `UNI` is an order number, and `URB` with 16 digits a batch ID: neither is the parcel's tracking number. UniUni's tracker takes up to 25 numbers at once, separated by commas.
 
@@ -47,9 +47,9 @@ These are the lines a parcel usually meets on UniUni's English tracking page, in
 | `The parcel will be transferred to a third-party courier for delivery.` | UniUni is giving the parcel to another courier to finish the job. |
 | `Parcel has been handed over to a third-party courier` | The other courier has it now. |
 
-Wordings vary: `Label Created` means the same as `Order received`, and so does `Shipping information received. Your parcel is on its way to UniUni for delivery to you`, which some cross-border shippers use; `Parcel received by UniUni` means UniUni physically has it, and `Parcel has been delivered` can stand for `Delivered`. UniUni's page can add where the parcel was left, as in `Delivered. (Recipient's front door)`.
+Wordings vary: `Shipping information received. Your parcel is on its way to UniUni for delivery to you`, which some cross-border shippers use, means the same as `Order received`; `Parcel received by UniUni` means UniUni physically has it, and `Parcel has been delivered` can stand for `Delivered`. UniUni's page can add where the parcel was left, as in `Delivered. (Recipient's front door)`.
 
-A failed attempt on UniUni's page carries the reason in brackets, such as no safe place to leave the parcel, a business closed at delivery time or a failed contact attempt. After a second failed attempt the status becomes `storage`. Once a parcel goes to a third-party courier, that courier's own scans follow in its own wording, such as `Item out for delivery` or `Parcel is ready for pickup`.
+A failed attempt on UniUni's page carries the reason in brackets. After a second failed attempt the status becomes `storage`. Once a parcel goes to a third-party courier, that courier's own scans follow in its own wording, such as `Item out for delivery` or `Parcel is ready for pickup`.
 
 ## UniUni delivery, pickup and missed deliveries
 
@@ -77,7 +77,7 @@ No updates at all usually means the seller hasn't handed the parcel over yet. Un
 
 ## UniUni customer service phone number
 
-UniUni's channels, as listed on its website on November 14, 2026:
+UniUni's channels:
 
 - **Chat** with UniUni support through the UniUni Chatbot on the [support page](https://www.uniuni.com/support/).
 - **Phone, Canada:** 1-604-229-2007 for the Pacific and Mountain time zones; 1-647-360-4178 for Central, Eastern and Atlantic.

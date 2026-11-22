@@ -10,7 +10,7 @@ Delivengo is [La Poste](carrier:la-poste)'s export service for small internation
 
 ## Your Delivengo tracking number
 
-Delivengo numbers are international postal numbers: two letters, nine digits and `FR`, such as `LD000000005FR` (invented).
+Delivengo numbers are international postal numbers: two letters, nine digits and `FR`, such as `LD482910576FR` (invented).
 
 **Where it comes from.** The shop gives it to you, usually in its shipping email. The MyDelivengo site, mydelivengo.laposte.fr, is the shop's account area, not a place for you to look it up. If you can't find the number, see [how to find your tracking number](guide:find-tracking-number).
 
@@ -18,8 +18,8 @@ Delivengo numbers are international postal numbers: two letters, nine digits and
 
 | Shape | Whose it is |
 | --- | --- |
-| `LD000000005FR` | La Poste: Delivengo, Colissimo and other French postal items share this shape. |
-| `LD000000005GB` | The same shape with another country's letters belongs to that country's post (here [Royal Mail](carrier:royal-mail)), not to Delivengo. |
+| `LD482910576FR` | La Poste: Delivengo, Colissimo and other French postal items share this shape. |
+| `LD482910576GB` | The same shape with another country's letters belongs to that country's post (here [Royal Mail](carrier:royal-mail)), not to Delivengo. |
 
 The last two letters say which post issued the number. Nothing in a `…FR` number tells Delivengo apart from any other La Poste item, and that doesn't matter: the tracking is the same. The numbers carry a check digit, so one wrong digit makes the number invalid, and Peek doesn't recognise it. Copy the number rather than typing it.
 
@@ -71,7 +71,7 @@ Peek shows what La Poste publishes: the status, the history with the country of 
 
 When La Poste gives the destination country, Peek can also ask the post it follows there, and switches to it once it shows newer progress. It does so for every EU country, the UK, Switzerland, Norway, the US, Canada, Australia and Japan, among others. La Poste's history can still go quiet after export, so the last leg doesn't always show.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while La Poste's or the destination post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes; through tracking services, every 15 minutes). Its notifications can cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while La Poste's own tracker answers (after the hand-over, at the destination post's own pace; through tracking services, up to every 15 minutes that day); otherwise hourly. Its notifications can cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Delivengo tracking
 

@@ -10,7 +10,7 @@ Delivengo est le service d'export de [La Poste](carrier:la-poste) pour les petit
 
 ## Numéro de suivi Delivengo : où le trouver
 
-Les numéros Delivengo ont la forme postale internationale : deux lettres, neuf chiffres et `FR`, par exemple `LD000000005FR` (inventé).
+Les numéros Delivengo ont la forme postale internationale : deux lettres, neuf chiffres et `FR`, par exemple `LD482910576FR` (inventé).
 
 **D'où il vient.** C'est la boutique qui te le donne, en général dans son e-mail d'expédition. Le site MyDelivengo, mydelivengo.laposte.fr, est l'espace client de la boutique, pas une page où tu peux le retrouver. Si tu ne le trouves pas, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -18,10 +18,10 @@ Les numéros Delivengo ont la forme postale internationale : deux lettres, neuf 
 
 | Numéro | À qui il appartient |
 | --- | --- |
-| `LD000000005FR` | La Poste : Delivengo, mais aussi les autres envois de La Poste ou de Colissimo qui ont cette forme. |
-| `RR000000005BE` | Un numéro de [bpost](carrier:bpost) : la poste belge, pas Delivengo. |
-| `LL000000005CH` | Un numéro de la [Poste suisse](carrier:swiss-post), pas Delivengo. |
-| `LD000000005GB` | Un numéro de Royal Mail, la poste britannique. |
+| `LD482910576FR` | La Poste : Delivengo, mais aussi les autres envois de La Poste ou de Colissimo qui ont cette forme. |
+| `RR482910576BE` | Un numéro de [bpost](carrier:bpost) : la poste belge, pas Delivengo. |
+| `LL482910576CH` | Un numéro de la [Poste suisse](carrier:swiss-post), pas Delivengo. |
+| `LD482910576GB` | Un numéro de Royal Mail, la poste britannique. |
 
 Les deux dernières lettres disent quelle poste a créé le numéro. Rien dans un numéro en `…FR` ne distingue Delivengo d'un autre envoi de La Poste, et ce n'est pas grave : le suivi est le même. Ces numéros ont une clé de contrôle : si un chiffre est faux, le numéro n'est plus valable et Peek ne le reconnaît plus. Copie-le plutôt que de le retaper.
 
@@ -73,7 +73,7 @@ Peek affiche ce que La Poste affiche : le statut, l'historique avec le pays de c
 
 Quand La Poste nomme un partenaire ou donne le pays de destination, Peek interroge aussi la poste qu'il suit dans ce pays et passe sur elle dès qu'elle montre une étape plus récente. Il le fait pour la Belgique, le Luxembourg, la Suisse et le Canada, comme pour tous les pays de l'UE, le Royaume-Uni ou les États-Unis. L'historique de La Poste peut toutefois rester muet après l'export : la dernière étape n'apparaît donc pas toujours.
 
-Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de La Poste ou de la poste du pays de destination qui répond ; Royal Mail et Poste Italiane sont interrogés toutes les heures, PostNL et USPS toutes les 30 minutes ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Quand tu as le colis ouvert, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que le suivi de La Poste répond ; après le relais, au rythme de la poste du pays de destination ; via des services de suivi, jusqu'à toutes les 15 minutes ce jour-là) ; sinon, toutes les heures. Il peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Delivengo
 

@@ -14,10 +14,10 @@ Diese zwei Formen ordnet Peek Canada Post zu, hier mit erfundenen Ziffern:
 
 | Nummer (erfunden) | Was es ist |
 | --- | --- |
-| `1234 5678 9012 3452` | 16 Ziffern, die letzte ist eine Prüfziffer. 16 Ziffern haben auch Nummern von DHL eCommerce, TNT, Correos Express und Evri UK. |
-| `RR000000005CA` | Eine internationale Postnummer: 2 Buchstaben, 9 Ziffern, `CA`. Die letzte Ziffer vor `CA` ist eine Prüfziffer. Mit dieser Nummer fragt Peek auch die Post deines Landes. |
+| `4018 2930 5746 1826` | 16 Ziffern, die letzte ist eine Prüfziffer. 16 Ziffern haben auch Nummern von DHL eCommerce, TNT, Correos Express und Evri UK. |
+| `RR482910576CA` | Eine internationale Postnummer: 2 Buchstaben, 9 Ziffern, `CA`. Die letzte Ziffer vor `CA` ist eine Prüfziffer. Mit dieser Nummer fragt Peek auch die Post deines Landes. |
 
-Canada Post findet ein Paket auch über die 15-stellige Nummer der Benachrichtigungskarte (delivery notice card), die ein Zusteller in Kanada hinterlässt, und über Referenznummern, die nur aus Ziffern bestehen. Peek nutzt beide, wenn du Canada Post selbst auswählst; wie, steht weiter unten.
+Canada Post findet ein Paket auch über die 15-stellige Nummer der Benachrichtigungskarte (delivery notice card), die ein Zusteller in Kanada hinterlässt, und über Referenznummern, die nur aus Ziffern bestehen (mindestens 11). Peek nutzt beide, wenn du Canada Post selbst auswählst; wie, steht weiter unten.
 
 Purolator, ein anderer Paketdienst aus Kanada, vergibt eigene Nummern: 12 Ziffern oder 3 Buchstaben und 9 Ziffern. Bei solchen Nummern fragt Peek von sich aus nicht Canada Post. Findet Canada Post nichts, schau, welchen Paketdienst die Versand-E-Mail nennt. Mehr in [Sendungsnummer finden](guide:find-tracking-number) und [Sendungsnummer: Welcher Paketdienst steckt dahinter?](guide:tracking-number-formats)
 
@@ -90,7 +90,7 @@ Für ein Paket aus Kanada ist meist der Absender oder der Shop dein erster Anspr
 
 Peek fragt Canada Post direkt, ohne Browser. Du siehst den Status, den Verlauf mit dem Ort jedes Scans (in Kanada mit Provinz), den voraussichtlichen Liefertag, ein Zeitfenster, sobald das Paket in Kanada in Zustellung ist und Canada Post eines nennt, die Uhrzeit der Zustellung und, wenn Canada Post ihn nennt, den Namen der Firma, die das Paket verschickt hat. Scans in Kanada liest Peek mit der Uhrzeit, die Canada Post angibt, Scans aus Ländern mit nur einer Zeitzone, etwa Deutschland, Österreich oder der Schweiz, in deren Ortszeit; angezeigt werden alle in der Zeitzone deines Geräts. Zustelloptionen, Empfängerdaten, Adressen, Unterschriften und Zustellfotos lässt Peek weg.
 
-Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist und Canada Post selbst antwortet: am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn Canada Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn; über Tracking-Dienste alle 15 Minuten. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, schaut Peek bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist und Canada Post selbst antwortet: am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn Canada Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn; über Tracking-Dienste an diesem Tag bis zu alle 15 Minuten; sonst stündlich. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 **Von dir nach Kanada.** Geht ein Paket mit internationaler Postnummer auf `DE`, `AT` oder `CH` nach Kanada, fragt Peek mit derselben Nummer auch Canada Post: sobald DHL oder die Schweizerische Post Kanada als Ziel nennt, oder wenn dein Land für Peek Kanada ist, etwa beim Empfänger dort. Die Österreichische Post nennt kein Ziel; bei ihr zählt nur dein Land. Für Nummern der Schweizerischen Post, die mit `L` beginnen, fragt Peek Canada Post nicht. Kontaktieren kann Peek Canada Post oder den Shop nicht für dich.
 

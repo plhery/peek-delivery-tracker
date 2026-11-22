@@ -51,7 +51,7 @@
   { "id": "speedpak", "catalog": "speedpak", "name": "SpeedPAK", "languages": ["en", "de", "fr", "it", "es", "pl"] },
   { "id": "asendia", "catalog": "asendia", "name": "Asendia", "languages": ["en", "fr", "de", "it", "pt", "es", "pl"] },
   { "id": "colisweb", "catalog": "colisweb", "name": "Colisweb", "languages": ["en", "fr"] },
-  { "id": "ciblex", "catalog": "ciblex", "name": "Ciblex", "languages": ["en", "fr"] },
+  { "id": "ciblex", "catalog": "ciblex", "name": "Ciblex", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "hermes-einrichtungs-service", "catalog": "hermes", "name": "Hermes Einrichtungs-Service", "languages": ["en", "de"] },
   { "id": "landmark-global", "catalog": "landmark-global", "name": "Landmark Global", "languages": ["en", "de", "fr", "es", "pt", "it", "pl"] },
   { "id": "dhl-ecommerce", "catalog": "dhl-ecommerce", "name": "DHL eCommerce", "languages": ["en", "de"] },

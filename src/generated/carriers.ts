@@ -2276,6 +2276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "ciblex-sendungsverfolgung",
+      "title": "Ciblex Sendungsverfolgung: Nummern, Status & Kontakt",
+      "name": "Ciblex",
+      "color": "#0160ab"
+    },
+    {
       "id": "hermes-einrichtungs-service",
       "catalog": "hermes",
       "slug": "hermes-einrichtungs-service-sendungsverfolgung",
@@ -4152,6 +4160,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "tracciamento-ciblex",
+      "title": "Tracciamento Ciblex: numeri, stati in francese e contatti",
+      "name": "Ciblex",
+      "color": "#0160ab"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-tracking",
@@ -5016,6 +5032,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Asendia: estados, reparto en España y aduanas",
       "name": "Asendia",
       "color": "#005d69"
+    },
+    {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "seguimiento-ciblex",
+      "title": "Seguimiento Ciblex: números, estados en francés y contacto",
+      "name": "Ciblex",
+      "color": "#0160ab"
     },
     {
       "id": "landmark-global",
@@ -5890,6 +5914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Asendia: estados, entrega em Portugal e alfândega",
       "name": "Asendia",
       "color": "#005d69"
+    },
+    {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "rastreio-ciblex",
+      "title": "Rastreio Ciblex: números, estados em francês e contactos",
+      "name": "Ciblex",
+      "color": "#0160ab"
     },
     {
       "id": "landmark-global",
@@ -6774,6 +6806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Asendia śledzenie przesyłek: statusy, doręczenie i cło",
       "name": "Asendia",
       "color": "#005d69"
+    },
+    {
+      "id": "ciblex",
+      "catalog": "ciblex",
+      "slug": "sledzenie-ciblex",
+      "title": "Śledzenie Ciblex: numery, francuskie statusy i kontakt",
+      "name": "Ciblex",
+      "color": "#0160ab"
     },
     {
       "id": "landmark-global",

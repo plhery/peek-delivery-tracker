@@ -264,9 +264,10 @@ settings with `node scripts/check-mac-entitlements.mjs`; before uploading a Mac 
 signed app too with `node scripts/check-mac-entitlements.mjs --app PATH`. Change the list in the
 same commit as an entitlement.
 
-To run the unit tests, swap `build` for `test` and name a real simulator, for example
-`-destination 'platform=iOS Simulator,name=iPhone 18 Pro'`. Push itself can only be tried
-with a signed build on a real phone.
+To run the unit tests, swap `build` for `test`, name a real simulator, for example
+`-destination 'platform=iOS Simulator,name=iPhone 18 Pro'`, and add
+`-parallel-testing-enabled NO`: parallel testing boots a clone of the simulator for each
+worker. Push itself can only be tried with a signed build on a real phone.
 
 Analytics (optional) follows [ANALYTICS.md](../docs/ANALYTICS.md). Simulator and demo
 builds never send events.

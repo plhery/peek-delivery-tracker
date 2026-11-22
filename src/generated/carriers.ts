@@ -2908,6 +2908,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "blue-dart-sendungsverfolgung",
+      "title": "Blue Dart Sendungsverfolgung: Nummern und Status erklärt",
+      "name": "Blue Dart",
+      "color": "#0059a9"
+    },
+    {
       "id": "ekart",
       "catalog": "ekart",
       "slug": "ekart-sendungsverfolgung",
@@ -3974,6 +3982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "suivi-blue-dart",
+      "title": "Suivi Blue Dart\u00a0: numéros de lettre de transport et statuts",
+      "name": "Blue Dart",
+      "color": "#0059a9"
+    },
+    {
       "id": "ekart",
       "catalog": "ekart",
       "slug": "suivi-ekart",
@@ -4960,6 +4976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "tracciamento-blue-dart",
+      "title": "Tracciamento Blue Dart: numeri waybill e stati spiegati",
+      "name": "Blue Dart",
+      "color": "#0059a9"
+    },
+    {
       "id": "ekart",
       "catalog": "ekart",
       "slug": "tracciamento-ekart",
@@ -5938,6 +5962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "seguimiento-blue-dart",
+      "title": "Seguimiento Blue Dart: números de guía y estados explicados",
+      "name": "Blue Dart",
+      "color": "#0059a9"
+    },
+    {
       "id": "ekart",
       "catalog": "ekart",
       "slug": "seguimiento-ekart",
@@ -6890,6 +6922,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Delhivery: números AWB, estados e apoio",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "seguimento-blue-dart",
+      "title": "Seguimento Blue Dart: números waybill e estados explicados",
+      "name": "Blue Dart",
+      "color": "#0059a9"
     },
     {
       "id": "ekart",
@@ -7902,6 +7942,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Delhivery: numery AWB, statusy i pomoc",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "sledzenie-blue-dart",
+      "title": "Blue Dart śledzenie: numery listów przewozowych i statusy",
+      "name": "Blue Dart",
+      "color": "#0059a9"
     },
     {
       "id": "ekart",

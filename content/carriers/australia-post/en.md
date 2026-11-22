@@ -26,13 +26,13 @@ Australia Post publishes no number format. These are the shapes Peek knows, with
 | `12ABC123456789000123455` | The same with 2 digits in front (23 characters). |
 | `94001234567890000123451` | 23 digits starting `9400`: still Australia Post. |
 | `12ABC1234567` | Consignment number, 12 characters. |
-| `ABC1234567` | Consignment number, 10 characters. |
-| `ABCZ12345678` | StarTrack consignment number: 3 letters or digits, `Z`, 8 digits. |
+| `ABC4829105` | Consignment number, 10 characters. |
+| `ABCZ48291057` | StarTrack consignment number: 3 letters or digits, `Z`, 8 digits. |
 | `0012345678901234567890` | Prepaid barcode: 22 digits starting `00` to `03`. |
-| `EE000000005AU` | EMS, parcel or tracked-letter number: `C`, `E` or `L`, a letter, 9 digits, `AU`. |
-| `RR000000005AU` | Other international postal number ending `AU`, such as registered mail. |
+| `EE482910576AU` | EMS, parcel or tracked-letter number: `C`, `E` or `L`, a letter, 9 digits, `AU`. |
+| `RR482910576AU` | Other international postal number ending `AU`, such as registered mail. |
 
-Lookalikes: 2 letters and 10 digits (`AB1234567890`) belong to [Aramex Australia](carrier:aramex-au) or [Aramex New Zealand](carrier:aramex-nz); a 22-digit `9400` number is USPS's. Number not found? It may be wrong or not scanned yet: Australia Post suggests trying again in 24 hours. More in [tracking number formats](guide:tracking-number-formats).
+Lookalikes: 2 letters and 10 digits (`AB4829105736`) belong to [Aramex Australia](carrier:aramex-au) or [Aramex New Zealand](carrier:aramex-nz); a 22-digit `9400` number is USPS's. Number not found? It may be wrong or not scanned yet: Australia Post suggests trying again in 24 hours. More in [tracking number formats](guide:tracking-number-formats).
 
 ## What Australia Post tracking statuses mean
 
@@ -79,7 +79,7 @@ Marked delivered but not there? Check safe places, your household and the mailro
 
 ## Australia Post contact number and help
 
-As listed on auspost.com.au on 9 November 2026:
+As listed on auspost.com.au:
 
 - Phone: 13 76 78 (13POST) in Australia, +61 3 8340 7239 from overseas, 8am to 6pm Monday to Friday except national public holidays.
 - Online: the late or missing item and delivery issue forms, and a chat with a bot or live agent, on [auspost.com.au/help](https://auspost.com.au/help).
@@ -97,7 +97,7 @@ If Australia Post refuses Peek's plain request, a browser on Peek's server opens
 
 Peek shows the status, each scan with its place on a map, the time of delivery, the destination country and the name of the Post Office or Parcel Locker holding the parcel. Statuses stay in Australia Post's English; delivered ones read "Delivered". Peek drops the recipient, the address and delivery photos. While the parcel is on its way, it shows Australia Post's expected delivery date, or its range of days, until that date has passed, and on the day the delivery time slot when Australia Post gives one; it hides the date after a failed delivery or a problem, and once the parcel is delivered, returned or waiting for collection. When Australia Post gives no date, as for a parcel posted in a street posting box or with a hand-written address, Peek shows none either; Australia Post's own tracking tool can still estimate one from your postcode. It can't redirect a parcel or change a locker.
 
-It checks up to every 10 minutes, and up to every 2 minutes (every 5 while it needs the browser) once Australia Post scans the parcel out for delivery: on that day, from 6 a.m. local time or, when Australia Post gives a delivery window, from half an hour before it opens, while Australia Post's own tracker answers. Through tracking services it checks hourly, and up to every 15 minutes on the delivery day. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
+While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, and up to every 2 minutes (every 5 while it needs the browser) once Australia Post scans the parcel out for delivery: on that day, from 6 a.m. local time or, when Australia Post gives a delivery window, from half an hour before it opens, while Australia Post's own tracker answers; otherwise hourly. Through tracking services it checks hourly, and up to every 15 minutes on the delivery day while you have it open or notifications are on. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
 
 ## Questions about Australia Post tracking
 

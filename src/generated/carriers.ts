@@ -2972,6 +2972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "aras-kargo-sendungsverfolgung",
+      "title": "Aras Kargo Sendungsverfolgung: Nummern und Status",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "blue-dart-sendungsverfolgung",
@@ -4126,6 +4134,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "suivi-aras-kargo",
+      "title": "Suivi Aras Kargo\u00a0: numéros et statuts en français",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "suivi-blue-dart",
@@ -5208,6 +5224,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "tracciamento-aras-kargo",
+      "title": "Tracciamento Aras Kargo: numeri e stati in italiano",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "tracciamento-blue-dart",
@@ -6266,6 +6290,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed4136"
     },
     {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "seguimiento-aras-kargo",
+      "title": "Seguimiento Aras Kargo: números y estados en español",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
+    },
+    {
       "id": "blue-dart",
       "catalog": "blue-dart",
       "slug": "seguimiento-blue-dart",
@@ -7298,6 +7330,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Delhivery: números AWB, estados e apoio",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "rastreio-aras-kargo",
+      "title": "Rastreio Aras Kargo: números e estados em português",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
     },
     {
       "id": "blue-dart",
@@ -8398,6 +8438,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Delhivery: numery AWB, statusy i pomoc",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "sledzenie-aras-kargo",
+      "title": "Śledzenie Aras Kargo: numery i statusy po polsku",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
     },
     {
       "id": "blue-dart",

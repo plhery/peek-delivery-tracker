@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-22
 ---
 
-A Blue Dart é uma transportadora indiana: o catálogo do Peek lista-a para a Índia e lê os seus registos segundo a hora da Índia. Um envio Blue Dart usa um número de guia (*waybill*) de 11 algarismos fornecido pelo remetente. Numa compra online costuma aparecer no e-mail de envio da loja ou na página da encomenda. Cola-o na caixa acima ou escreve-o no seguimento em bluedart.com. Como o Peek não conseguiu consultar o site da Blue Dart para esta página, tudo o que se segue vem do que o código do Peek conhece do seguimento da Blue Dart.
+A Blue Dart é uma transportadora indiana: o catálogo do Peek lista-a para a Índia e lê os seus registos segundo a hora da Índia. Um envio Blue Dart usa um número de guia (*waybill*) de 11 algarismos fornecido pelo remetente. Numa compra online pode aparecer, por exemplo, no e-mail de envio da loja ou na página da encomenda. Cola-o na caixa acima ou escreve-o no seguimento em bluedart.com. Como o Peek não conseguiu consultar o site da Blue Dart para esta página, tudo o que se segue vem do que o código do Peek conhece do seguimento da Blue Dart.
 
 ## Número waybill da Blue Dart: que aspeto tem
 
@@ -22,7 +22,7 @@ As guias de 11 algarismos da Aramex e o correio registado da Japan Post usam o m
 
 ## Estados de seguimento da Blue Dart explicados
 
-O seguimento da Blue Dart mostra o estado atual do envio e abaixo os registos, do mais recente ao mais antigo, cada um com local, data e hora. Estas são as linhas que o Peek conhece no seguimento da Blue Dart, aproximadamente pela ordem habitual:
+O seguimento da Blue Dart mostra o estado atual do envio e abaixo os registos, do mais recente ao mais antigo, cada um com local, data e hora. Estas são as linhas que o Peek conhece no seguimento da Blue Dart, aproximadamente pela ordem em que um envio as encontra:
 
 | A Blue Dart diz | O que significa para ti | O Peek mostra |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ Uma mensagem sobre uma entrega falhada pede-te para pagar ou partilhar um códig
 
 ## Envios Blue Dart: quem entrega e alfândega
 
-**Uma guia Blue Dart.** O Peek não conhece nenhuma transportadora para a qual a Blue Dart transfira os seus envios, na Índia ou no estrangeiro, e não consulta nenhuma outra transportadora por uma guia Blue Dart. Se a loja te der também o número de outra transportadora, adiciona esse igualmente.
+**Uma guia Blue Dart.** O Peek não conhece nenhuma transportadora para a qual a Blue Dart transfira os seus envios, na Índia ou no estrangeiro. Se a loja te der também o número de outra transportadora, adiciona esse igualmente.
 
 **Enviado com a ICC Worldwide.** O seguimento da ICC Worldwide pode referir a Blue Dart junto a um número Blue Dart. O Peek só acompanha o envio na Blue Dart quando esse número tem 11 algarismos: consulta a Blue Dart e, assim que esta mostrar um registo pelo menos tão recente como o último da ICC Worldwide, passa a seguir o envio lá, mantendo o histórico da ICC Worldwide. Com qualquer outro número, o Peek fica na ICC Worldwide. Adiciona o envio com o número da ICC Worldwide, toca em «Alterar» e procura ICC Worldwide: o Peek não a sugere a partir do número.
 
@@ -67,7 +67,7 @@ Para um reembolso ou novo envio, fala com a loja: foi ela quem contratou a Blue 
 
 **`Delivery Delayed` ou `Delay Caused Beyond Control`.** O Peek mostra «Problema reportado». Se nada mudar depois, fala com a loja.
 
-**Dias sem atualizações.** Quando um envio a caminho fica quatro dias sem novo registo, o Peek assinala «Sem atualizações há quatro dias». Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating).
+**Dias sem atualizações.** Quando um envio a caminho fica quatro dias sem novo registo, o Peek assinala-o com o dia desse registo: «Sem atualizações desde seg 12 out». Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating).
 
 **Entregue mas não chegou.** Pergunta em casa ou na receção do prédio e depois avisa a loja. Vê [encomenda dada como entregue mas não recebida](guide:delivered-not-received).
 
@@ -75,7 +75,7 @@ Para um reembolso ou novo envio, fala com a loja: foi ela quem contratou a Blue 
 
 ## Apoio ao cliente e contactos da Blue Dart
 
-Como o Peek não conseguiu verificar o site da Blue Dart, esta página não apresenta número de telefone nem endereço de e-mail: só publicamos contactos lidos nas páginas da própria transportadora. Quando um envio fica parado, o Peek liga à página de contacto da Blue Dart como «Pede ajuda a Blue Dart».
+Como o Peek não conseguiu verificar o site da Blue Dart, esta página não apresenta número de telefone nem endereço de e-mail: só publicamos contactos lidos nas páginas da própria transportadora. Quando um envio fica parado, o Peek liga à página de ajuda da Blue Dart como «Pede ajuda a Blue Dart».
 
 Numa compra online, fala primeiro com a loja que contratou a Blue Dart. O Peek não pode contactar a Blue Dart nem a loja por ti.
 
@@ -88,9 +88,9 @@ Cola a guia no [Peek](/). Como várias transportadoras usam 11 algarismos, o Pee
 
 Se nenhuma transportadora conhecer ainda o número, adiciona-o mesmo assim ou escolhe Blue Dart tu mesmo: o Peek segue mais de 4500 transportadoras. O Peek só sugere a Blue Dart quando o dígito de controlo bate certo. Se o teu não bater mas tiveres a certeza do número, procura Blue Dart na lista de transportadoras: o Peek consulta-a na mesma. Uma ligação de seguimento de bluedart.com com a guia (`trackNo=`) também funciona: o Peek extrai o número e identifica logo a Blue Dart («Transportadora detetada»).
 
-Associado à Blue Dart, um envio mostra «À espera de Blue Dart» até ao primeiro registo; adicionado sem transportadora, «Ainda sem histórico de seguimento». O Peek lê o seguimento público da Blue Dart apenas com a guia, sem conta: o estado geral e cada registo nas palavras da Blue Dart com o respetivo local, lido na hora da Índia. Deixa de fora os dados do destinatário e não mostra data prevista de entrega. A ligação «Abrir o site de Blue Dart» na página da encomenda abre a guia no seguimento da Blue Dart.
+Associado à Blue Dart, um envio mostra «À espera de Blue Dart» até ao primeiro registo, ou «Verifica o número de seguimento» se ao fim de dois dias a Blue Dart ainda não conhecer o número; adicionado sem transportadora, «Ainda sem histórico de seguimento». O Peek lê o seguimento público da Blue Dart apenas com a guia, sem conta: o estado geral e cada registo nas palavras da Blue Dart com o respetivo local, lido na hora da Índia. Deixa de fora os dados do destinatário e não mostra data prevista de entrega. A ligação «Abrir o site de Blue Dart» na página da encomenda abre a guia no seguimento da Blue Dart.
 
-Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que a Blue Dart a coloca em distribuição — enquanto o seguimento próprio da Blue Dart responder; através de serviços de seguimento, até de 15 em 15 minutos. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega».
+Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que a Blue Dart a coloca em distribuição — enquanto o seguimento próprio da Blue Dart responder. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Enquanto um serviço de seguimento acompanhar o envio, o Peek verifica de hora a hora, até de 15 em 15 minutos no dia da distribuição enquanto o tens aberto ou com notificações ativas, e de 3 em 3 horas após um dia sem novo registo. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas sobre o seguimento Blue Dart
 
@@ -115,6 +115,6 @@ Uma entrega falhada por recusa do destinatário ou por um documento de identific
 A loja ou o remetente que contratou a Blue Dart. Como o Peek não pôde verificar o site da Blue Dart, esta página não lista contactos da Blue Dart.
 
 :::sources
-- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Índia, guia de 11 algarismos e dígito de controlo, seguimento e mensagem de ausência de dados, textos e etapas, hora da Índia, dados omitidos, ligações de seguimento e página de contacto
+- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Índia, guia de 11 algarismos e dígito de controlo, seguimento e mensagem de ausência de dados, textos e etapas, hora da Índia, dados omitidos, ligações de seguimento e página de ajuda
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – outras transportadoras de 11 algarismos, dígito de controlo da Aramex e Japan Post, transportadoras consultadas na Índia e no estrangeiro, ligação ICC Worldwide–Blue Dart e regra dos 11 algarismos, sem transferências a partir da Blue Dart
 :::

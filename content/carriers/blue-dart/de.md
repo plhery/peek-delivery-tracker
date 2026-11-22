@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-22
 ---
 
-Blue Dart ist ein indischer Kurierdienst: Der Katalog von Peek führt ihn für Indien und liest seine Scans nach indischer Ortszeit. Eine Blue-Dart-Sendung hat eine 11-stellige Frachtbriefnummer (*Waybill*), die du vom Absender bekommst. Bei einer Online-Bestellung steht sie meist in der Versandmail des Shops oder auf der Bestellseite. Füge sie oben ins Feld ein oder gib sie im Tracking auf bluedart.com ein. Da Peek die Website von Blue Dart für diese Seite nicht abrufen konnte, stammen alle Angaben hier aus dem, was der Code von Peek über das Blue-Dart-Tracking weiß.
+Blue Dart ist ein indischer Kurierdienst: Der Katalog von Peek führt ihn für Indien und liest seine Scans nach indischer Ortszeit. Eine Blue-Dart-Sendung hat eine 11-stellige Frachtbriefnummer (*Waybill*), die du vom Absender bekommst. Bei einer Online-Bestellung steht sie zum Beispiel in der Versandmail des Shops oder auf der Bestellseite. Füge sie oben ins Feld ein oder gib sie im Tracking auf bluedart.com ein. Da Peek die Website von Blue Dart für diese Seite nicht abrufen konnte, stammen alle Angaben hier aus dem, was der Code von Peek über das Blue-Dart-Tracking weiß.
 
 ## Blue Dart Waybill-Nummer: wie sie aussieht
 
@@ -51,7 +51,7 @@ Fordert eine Nachricht über eine verpasste Zustellung dich auf, über einen Lin
 
 ## Blue-Dart-Sendungen: Zusteller und Zoll
 
-**Eine Blue-Dart-Waybill.** Peek kennt keinen Paketdienst, an den Blue Dart Sendungen im In- oder Ausland übergibt, und fragt bei einer Blue-Dart-Waybill keinen anderen Dienst an. Nennt der Shop zusätzlich die Nummer eines anderen Paketdienstes, füge auch diese hinzu.
+**Eine Blue-Dart-Waybill.** Peek kennt keinen Paketdienst, an den Blue Dart Sendungen im In- oder Ausland übergibt. Nennt der Shop zusätzlich die Nummer eines anderen Paketdienstes, füge auch diese hinzu.
 
 **Versendet mit ICC Worldwide.** Der Tracker von ICC Worldwide kann neben einer Blue-Dart-Nummer Blue Dart nennen. Peek wechselt nur dann zu Blue Dart, wenn diese Nummer 11 Ziffern hat: Es fragt Blue Dart damit an und übernimmt die Sendung dorthin, sobald Blue Dart einen mindestens ebenso aktuellen Scan zeigt, während der Verlauf von ICC Worldwide erhalten bleibt. Bei jeder anderen Nummer bleibt Peek bei ICC Worldwide. Füge die Sendung mit der ICC-Worldwide-Nummer hinzu, tippe auf „Ändern“ und suche nach ICC Worldwide – anhand der Nummer allein schlägt Peek es nicht vor.
 
@@ -67,7 +67,7 @@ Für eine Erstattung oder Ersatzlieferung ist der Shop dein Ansprechpartner: Er 
 
 **`Delivery Delayed` oder `Delay Caused Beyond Control`.** Peek zeigt „Problem gemeldet“. Bewegt sich danach nichts mehr, kontaktiere den Shop.
 
-**Tagelang kein Update.** Wenn eine Sendung unterwegs vier Tage lang keinen neuen Scan erhält, kennzeichnet Peek sie mit „Seit vier Tagen keine Aktualisierung“. Siehe [wenn sich das Tracking nicht aktualisiert](guide:tracking-not-updating).
+**Tagelang kein Update.** Wenn eine Sendung unterwegs vier Tage lang keinen neuen Scan erhält, kennzeichnet Peek sie mit dem Tag dieses Scans: „Keine Aktualisierung seit Mo 12. Okt“. Siehe [wenn sich das Tracking nicht aktualisiert](guide:tracking-not-updating).
 
 **Zugestellt, aber nicht da.** Frage im Haushalt oder am Empfang des Gebäudes nach und wende dich dann an den Shop. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -75,7 +75,7 @@ Für eine Erstattung oder Ersatzlieferung ist der Shop dein Ansprechpartner: Er 
 
 ## Blue Dart Kundenservice und Kontakt
 
-Da Peek die Website von Blue Dart nicht abrufen konnte, nennt diese Seite weder Telefonnummer noch E-Mail-Adresse: Wir zeigen nur Kontakte, die auf den Seiten des Paketdienstes selbst geprüft wurden. Bleibt eine Sendung stehen, verlinkt Peek die Kontaktseite von Blue Dart unter „Hol dir Hilfe bei Blue Dart“.
+Da Peek die Website von Blue Dart nicht abrufen konnte, nennt diese Seite weder Telefonnummer noch E-Mail-Adresse: Wir zeigen nur Kontakte, die auf den Seiten des Paketdienstes selbst geprüft wurden. Bleibt eine Sendung stehen, verlinkt Peek die Hilfeseite von Blue Dart unter „Hol dir Hilfe bei Blue Dart“.
 
 Bei einer Online-Bestellung wende dich zuerst an den Shop, der Blue Dart beauftragt hat. Peek kann weder Blue Dart noch den Shop für dich kontaktieren.
 
@@ -88,9 +88,9 @@ Füge die Waybill-Nummer in [Peek](/) ein. Da mehrere Paketdienste 11 Ziffern nu
 
 Kennt noch kein Paketdienst die Nummer, füge sie trotzdem hinzu oder wähle Blue Dart direkt aus: Peek verfolgt mehr als 4500 Paketdienste. Peek listet Blue Dart automatisch nur bei gültiger Prüfziffer. Stimmt sie nicht, du bist aber sicher, suche Blue Dart in der Paketdienstliste: Peek fragt trotzdem nach. Ein Tracking-Link von bluedart.com mit der Waybill (`trackNo=`) funktioniert ebenfalls: Peek liest die Nummer aus und erkennt Blue Dart sofort („Erkannter Paketdienst“).
 
-Unter Blue Dart angelegt, zeigt eine Sendung bis zum ersten Scan „Warten auf Blue Dart“; ohne Paketdienst hinzugefügt „Noch kein Sendungsverlauf“. Peek liest den öffentlichen Tracker von Blue Dart allein über die Waybill, ohne Konto: den Gesamtstatus und jeden Scan im Wortlaut von Blue Dart samt Ort, gelesen nach indischer Ortszeit. Empfängerdaten werden weggelassen, ein voraussichtliches Lieferdatum gibt es nicht. Der Link „Website von Blue Dart öffnen“ auf der Paketseite öffnet die Waybill direkt im Blue-Dart-Tracker.
+Unter Blue Dart angelegt, zeigt eine Sendung bis zum ersten Scan „Warten auf Blue Dart“ oder „Sendungsnummer prüfen“, wenn Blue Dart die Nummer nach zwei Tagen noch nicht kennt; ohne Paketdienst hinzugefügt „Noch kein Sendungsverlauf“. Peek liest den öffentlichen Tracker von Blue Dart allein über die Waybill, ohne Konto: den Gesamtstatus und jeden Scan im Wortlaut von Blue Dart samt Ort, gelesen nach indischer Ortszeit. Empfängerdaten werden weggelassen, ein voraussichtliches Lieferdatum gibt es nicht. Der Link „Website von Blue Dart öffnen“ auf der Paketseite öffnet die Waybill direkt im Blue-Dart-Tracker.
 
-Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Liefertag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag, an dem Blue Dart die Sendung in Zustellung scannt, bis zu alle 2 Minuten –, solange der eigene Tracker von Blue Dart antwortet; über Tracking-Dienste bis zu alle 15 Minuten. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange die Sendung auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Liefertag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag, an dem Blue Dart die Sendung in Zustellung scannt, bis zu alle 2 Minuten –, solange der eigene Tracker von Blue Dart antwortet. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange die Sendung auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Solange ein Tracking-Dienst die Sendung führt, prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten (solange sie geöffnet ist oder Benachrichtigungen aktiv sind), und alle 3 Stunden nach einem Tag ohne neuen Scan. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Fragen zur Blue-Dart-Sendungsverfolgung
 
@@ -115,6 +115,6 @@ Eine fehlgeschlagene Zustellung wegen Annahmeverweigerung durch den Empfänger o
 Den Shop oder Absender, der Blue Dart beauftragt hat. Da Peek die Website von Blue Dart nicht prüfen konnte, führt diese Seite keine Blue-Dart-Kontaktdaten auf.
 
 :::sources
-- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Indien, 11-stellige Waybill mit Prüfziffer, Tracker und Nicht-gefunden-Meldung, Wortlaute und Stufen, indische Ortszeit, weggelassene Daten, Tracking-Links und Kontaktseite
+- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Indien, 11-stellige Waybill mit Prüfziffer, Tracker und Nicht-gefunden-Meldung, Wortlaute und Stufen, indische Ortszeit, weggelassene Daten, Tracking-Links und Hilfeseite
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – andere 11-stellige Paketdienste, Prüfziffer von Aramex und Japan Post, angefragte Dienste in Indien und im Ausland, Übergabe von ICC Worldwide zu Blue Dart und 11-Ziffern-Regel, keine Weitergabe durch Blue Dart
 :::

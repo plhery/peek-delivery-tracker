@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-22
 ---
 
-Blue Dart to indyjska firma kurierska: katalog Peek przypisuje ją do Indii i odczytuje skany według czasu indyjskiego. Przesyłka Blue Dart ma 11-cyfrowy numer listu przewozowego (*waybill*), który dostajesz od nadawcy. Przy zamówieniu online znajdziesz go zwykle w mailu o wysyłce ze sklepu albo na stronie zamówienia. Wklej go w pole powyżej albo wpisz na stronie śledzenia bluedart.com. Ponieważ Peek nie mógł sprawdzić strony internetowej Blue Dart na potrzeby tej strony, poniższe informacje pochodzą z tego, co kod Peek wie o śledzeniu Blue Dart.
+Blue Dart to indyjska firma kurierska: katalog Peek przypisuje ją do Indii i odczytuje skany według czasu indyjskiego. Przesyłka Blue Dart ma 11-cyfrowy numer listu przewozowego (*waybill*), który dostajesz od nadawcy. Przy zamówieniu online znajdziesz go na przykład w mailu o wysyłce ze sklepu albo na stronie zamówienia. Wklej go w pole powyżej albo wpisz na stronie śledzenia bluedart.com. Ponieważ Peek nie mógł sprawdzić strony internetowej Blue Dart na potrzeby tej strony, poniższe informacje pochodzą z tego, co kod Peek wie o śledzeniu Blue Dart.
 
 ## Numer waybill Blue Dart: jak wygląda
 
@@ -51,7 +51,7 @@ Wiadomość o nieudanej dostawie każe ci zapłacić lub podać kod przez link? 
 
 ## Przesyłki Blue Dart: doręczenie i cło
 
-**Numer waybill Blue Dart.** Peek nie zna żadnego przewoźnika, któremu Blue Dart przekazywałby przesyłki w Indiach lub za granicą, i nie pyta innych przewoźników o numer Blue Dart. Jeśli sklep podał też numer innego przewoźnika, dodaj również tamten.
+**Numer waybill Blue Dart.** Peek nie zna żadnego przewoźnika, któremu Blue Dart przekazywałby przesyłki w Indiach lub za granicą. Jeśli sklep podał też numer innego przewoźnika, dodaj również tamten.
 
 **Wysłane przez ICC Worldwide.** Śledzenie ICC Worldwide może wskazać Blue Dart obok numeru Blue Dart. Peek przechodzi na śledzenie w Blue Dart tylko wtedy, gdy ten numer ma 11 cyfr: pyta wtedy Blue Dart i przenosi tam przesyłkę, gdy tylko pojawi się skan co najmniej tak świeży jak ostatni z ICC Worldwide, zachowując wcześniejszą historię ICC Worldwide. Przy każdym innym numerze Peek pozostaje przy ICC Worldwide. Dodaj przesyłkę numerem ICC Worldwide, kliknij „Zmień” i wyszukaj ICC Worldwide — Peek nie podpowiada go z samego numeru.
 
@@ -67,7 +67,7 @@ W sprawie zwrotu pieniędzy lub nowej wysyłki skontaktuj się ze sklepem: to on
 
 **`Delivery Delayed` lub `Delay Caused Beyond Control`.** Peek wyświetla „Zgłoszono problem”. Jeśli potem nic się nie zmienia, skontaktuj się ze sklepem.
 
-**Dni bez aktualizacji.** Gdy przesyłka w drodze nie ma nowego skanu od czterech dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni”. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+**Dni bez aktualizacji.** Gdy przesyłka w drodze nie ma nowego skanu od czterech dni, Peek oznacza ją komunikatem z dniem tego skanu: „Brak aktualizacji od pon 12 paź”. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 **Doręczona, ale jej nie ma.** Zapytaj domowników lub recepcję budynku, a potem powiadom sklep. Zobacz [paczka doręczona, ale nieodebrana](guide:delivered-not-received).
 
@@ -75,7 +75,7 @@ W sprawie zwrotu pieniędzy lub nowej wysyłki skontaktuj się ze sklepem: to on
 
 ## Obsługa klienta i kontakt z Blue Dart
 
-Ponieważ Peek nie mógł sprawdzić strony Blue Dart, ta strona nie podaje numeru telefonu ani adresu e-mail: zamieszczamy tylko dane odczytane ze stron samego przewoźnika. Gdy przesyłka utknie, Peek pokazuje link do strony kontaktowej Blue Dart jako „Poproś przewoźnika Blue Dart o pomoc”.
+Ponieważ Peek nie mógł sprawdzić strony Blue Dart, ta strona nie podaje numeru telefonu ani adresu e-mail: zamieszczamy tylko dane odczytane ze stron samego przewoźnika. Gdy przesyłka utknie, Peek pokazuje link do strony pomocy Blue Dart jako „Poproś przewoźnika Blue Dart o pomoc”.
 
 W przypadku zamówienia online najpierw napisz do sklepu, który zamówił Blue Dart. Peek nie może skontaktować się za ciebie z Blue Dart ani ze sklepem.
 
@@ -88,9 +88,9 @@ Wklej numer waybill w [Peek](/). Ponieważ wielu przewoźników używa 11 cyfr, 
 
 Jeśli żaden przewoźnik nie zna jeszcze numeru, dodaj go mimo to lub wybierz Blue Dart ręcznie: Peek śledzi ponad 4500 przewoźników. Peek podpowiada Blue Dart tylko przy poprawnej cyfrze kontrolnej. Jeśli cyfra się nie zgadza, ale jesteś pewien numeru, wyszukaj Blue Dart na liście przewoźników — Peek i tak zapyta. Link śledzenia z bluedart.com zawierający numer (`trackNo=`) także działa: Peek wyciąga z niego numer i od razu wskazuje Blue Dart („Wykryty przewoźnik”).
 
-Przesyłka przypisana do Blue Dart pokazuje „Oczekiwanie na przewoźnika Blue Dart” do pierwszego skanu, a dodana bez przewoźnika — „Brak historii śledzenia”. Peek czyta publiczne śledzenie Blue Dart po samym numerze waybill, bez logowania: status przesyłki i każdy skan w brzmieniu z Blue Dart wraz z miejscowością, odczytany w czasie indyjskim. Pomija dane odbiorcy i nie podaje planowanej daty doręczenia. Link „Otwórz stronę przewoźnika Blue Dart” na stronie paczki otwiera numer w śledzeniu Blue Dart.
+Przesyłka przypisana do Blue Dart pokazuje „Oczekiwanie na przewoźnika Blue Dart” do pierwszego skanu (lub „Sprawdź numer śledzenia”, jeśli po dwóch dniach Blue Dart nadal nie zna numeru), a dodana bez przewoźnika — „Brak historii śledzenia”. Peek czyta publiczne śledzenie Blue Dart po samym numerze waybill, bez logowania: status przesyłki i każdy skan w brzmieniu z Blue Dart wraz z miejscowością, odczytany w czasie indyjskim. Pomija dane odbiorcy i nie podaje planowanej daty doręczenia. Link „Otwórz stronę przewoźnika Blue Dart” na stronie paczki otwiera numer w śledzeniu Blue Dart.
 
-Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza nawet co 10 minut — a od 6:00 czasu lokalnego w dniu wyjścia do doręczenia w Blue Dart nawet co 2 minuty — dopóki odpowiada własne śledzenie Blue Dart; przez usługi śledzenia sprawdza nawet co 15 minut. Poza tym oraz po dwóch dniach bez nowych informacji (po 12 godzinach, gdy przesyłka ma wciąż status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza nawet co 10 minut — a od 6:00 czasu lokalnego w dniu wyjścia do doręczenia w Blue Dart nawet co 2 minuty — dopóki odpowiada własne śledzenie Blue Dart. Poza tym oraz po dwóch dniach bez nowych informacji (po 12 godzinach, gdy przesyłka ma wciąż status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Gdy przesyłkę prowadzi usługa śledzenia, Peek sprawdza co godzinę, w dniu doręczenia nawet co 15 minut (dopóki masz ją otwartą lub włączone powiadomienia), a po dniu bez nowego skanu co 3 godziny. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Pytania o śledzenie Blue Dart
 
@@ -115,6 +115,6 @@ Nieudaną próbę doręczenia z powodu odmowy odbiorcy lub niepodania albo błę
 Ze sklepem albo nadawcą, który zlecił przewóz Blue Dart. Ponieważ Peek nie mógł sprawdzić strony Blue Dart, ta strona nie podaje danych kontaktowych Blue Dart.
 
 :::sources
-- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Indie, 11-cyfrowy numer waybill z cyfrą kontrolną, śledzenie i komunikat o braku danych, opisy i etapy, czas indyjski, pomijane dane, linki śledzenia i strona kontaktowa
+- [Universal Parcel Scraper: Blue Dart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/blue-dart) – Indie, 11-cyfrowy numer waybill z cyfrą kontrolną, śledzenie i komunikat o braku danych, opisy i etapy, czas indyjski, pomijane dane, linki śledzenia i strona pomocy
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – inni przewoźnicy z 11 cyframi, cyfra kontrolna Aramex i Japan Post, przewoźnicy odpytywani w Indiach i za granicą, przekazanie z ICC Worldwide do Blue Dart i reguła 11 cyfr, brak przekazywania z Blue Dart
 :::

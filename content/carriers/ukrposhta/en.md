@@ -14,9 +14,9 @@ Ukrposhta's numbers come in two shapes, and a 13-digit one ends in a check digit
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `0500000000003` | A domestic item, within Ukraine: 13 digits. |
-| `RR000000005UA` | An international item posted in Ukraine: two letters, nine digits, `UA`. |
-| `RR000000005US` | An item coming into Ukraine keeps the sending post's number, ending in that country's code. |
+| `0548291736543` | A domestic item, within Ukraine: 13 digits. |
+| `RR482917367UA` | An international item posted in Ukraine: two letters, nine digits, `UA`. |
+| `RR482917367US` | An item coming into Ukraine keeps the sending post's number, ending in that country's code. |
 
 No number? Ask the sender, or see [how to find a tracking number](guide:find-tracking-number).
 
@@ -63,13 +63,13 @@ For problems with the app, Ukrposhta's Google Play listing gives mobile-app@ukrp
 
 ## Tracking Ukrposhta with Peek
 
-For 13 digits with Ukrposhta's check digit, [Peek](/) asks Ukrposhta, along with Delhivery for a number that also fits Delhivery's shape (first digit 1 to 9, last 0 to 6), and shows Ukrposhta, marked "has this parcel", when only Ukrposhta knows it; if Delhivery knows it too, you choose between them. A 13-digit number with a wrong check digit isn't offered to Ukrposhta: pick Ukrposhta with "Change". A number starting C, E, L or R and ending `UA` is named as Ukrposhta's straight away when its check digit is valid; for a valid one starting with another letter, Peek asks Ukrposhta and [Chronopost](carrier:chronopost), and if neither knows it yet, keeps checking after you add it. A track.ukrposhta.ua link with the number in it always names Ukrposhta.
+For 13 digits with Ukrposhta's check digit, [Peek](/) asks Ukrposhta, along with FAN Courier or iMile for a number that also fits their shape, and shows Ukrposhta, marked "has this parcel", when only Ukrposhta knows it; if another carrier knows it too, you choose between them. A 13-digit number with a wrong check digit isn't offered to Ukrposhta: pick Ukrposhta with "Change". A number starting C, E, L or R and ending `UA` is named as Ukrposhta's straight away when its check digit is valid; for a valid one starting with another letter, Peek asks Ukrposhta and [Chronopost](carrier:chronopost), and if neither knows it yet, keeps checking after you add it. A track.ukrposhta.ua link with the number in it always names Ukrposhta.
 
 A number from another country's post isn't offered to Ukrposhta. When the item is heading to Ukraine, Peek can follow it to Ukrposhta, or you can pick "Ukrposhta" with "Change".
 
 It reads the service behind Ukrposhta's app; when that service fails or doesn't know an item to or from abroad, Peek opens Ukrposhta's tracking page in a browser on its server. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Ukrposhta gives its times without a time zone: Peek reads a step in Ukraine on Kyiv time and works out the zone of a step abroad from its place or the steps around it, so that time can be off; it shows each in your device's time zone. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
 
-Peek checks up to every 10 minutes. Once the item is out for delivery, it checks up to every 2 minutes, or every 5 when its last check had to open that browser: on that day, from 6 a.m. Kyiv time, while Ukrposhta's own service or page answers. Through tracking services, it checks hourly, and up to every 15 minutes on that day. After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you when the status changes.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes. Once the item is out for delivery, it checks up to every 2 minutes, or every 5 when its last check had to open that browser: on that day, from 6 a.m. on the clock of its latest scan (Kyiv time in Ukraine), while Ukrposhta's own service or page answers. Otherwise, and after two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you when the status changes.
 
 ## Questions about Ukrposhta tracking
 

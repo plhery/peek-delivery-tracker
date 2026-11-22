@@ -14,9 +14,9 @@ CDEK calls each shipment an order (заказ), so its tracking number is an ord
 
 | Number (invented) | What it is |
 | --- | --- |
-| `10000000000` | 11 digits starting with `10`: the only shape Peek links to CDEK, and only as a weak match. [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), [GLS Austria](carrier:gls-at), GLS Poland, PostLogistics, Coordinadora and Mainfreight have 11-digit numbers too. |
-| `00000000000` | 11 digits not starting with `10`. Peek doesn't suggest CDEK for it: check the number, or pick CDEK yourself (below). |
-| `RR000000005CN` | A postal number from abroad, here from [China Post](carrier:china-post). Peek follows it with that post. If CDEK has linked it to an order, pick CDEK to see CDEK's steps. |
+| `10482917365` | 11 digits starting with `10`: the only shape Peek links to CDEK, and only as a weak match. [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), [GLS Austria](carrier:gls-at), GLS Poland, PostLogistics, Coordinadora and Mainfreight have 11-digit numbers too. |
+| `48291736548` | 11 digits not starting with `10`. Peek doesn't suggest CDEK for it: check the number, or pick CDEK yourself (below). |
+| `RR482917367CN` | A postal number from abroad, here from [China Post](carrier:china-post). Peek follows it with that post. If CDEK has linked it to an order, pick CDEK to see CDEK's steps. |
 
 Can't find yours? See [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
@@ -75,7 +75,7 @@ CDEK's order page on my.cdek.ru shows the pickup point, its address, contact det
 
 ## CDEK customer service and contact
 
-As of 1 November 2026, Peek couldn't read CDEK's main website, cdek.ru, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. CDEK's tracker and order pages are on my.cdek.ru.
+Peek can't read CDEK's main website, cdek.ru, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. CDEK's tracker and order pages are on my.cdek.ru.
 
 For an order from a shop, ask the shop first: it booked the delivery.
 
@@ -83,23 +83,23 @@ For an order from a shop, ask the shop first: it booked the delivery.
 
 [Peek](/) can't be sure of a CDEK number by its shape alone. Paste it all the same: Peek follows more than 4,500 carriers.
 
-- **11 digits starting with 10.** Peek asks carriers whose numbers have this shape whether they have the parcel, five at a time, and shows "Checking tracking services…" meanwhile. If you look it up from Russia, Kazakhstan, Belarus or Serbia (your phone's region, or on the web where you connect from), CDEK is asked first. From elsewhere, it is still among the first five asked. If CDEK knows the number, Peek names CDEK and says it "has this parcel". If several carriers know it, Peek asks you to choose. If none knows it yet, you see "not found yet · Peek keeps checking". You can also press "Change" and pick CDEK under "Fits this number".
+- **11 digits starting with 10.** Peek asks carriers whose numbers have this shape whether they have the parcel, five at a time, and shows "Checking tracking services…" meanwhile. If you look it up from Russia, Kazakhstan, Belarus or Serbia (your phone's region, or on the web where you connect from), CDEK is asked first. From elsewhere, it is among the first five asked or the five after them. If CDEK knows the number, Peek names CDEK and says it "has this parcel". If several carriers know it, Peek asks you to choose. If none knows it yet, you see "not found yet · Peek keeps checking". You can also press "Change" and pick CDEK under "Fits this number".
 - **Another shape.** Press "Change" and search for CDEK: typing СДЭК or SDEK finds it too.
 - **A link.** Paste a my.cdek.ru order link, and Peek tracks the order in it with CDEK.
 
-On a parcel you've already added, use "Change carrier". A parcel added without a carrier, before anyone has it, shows "No tracking history yet". If you filed it under CDEK, it shows "Waiting for CDEK" until CDEK lists the number.
+On a parcel you've already added, use "Change carrier". A parcel added without a carrier, before anyone has it, shows "No tracking history yet". If you filed it under CDEK, it shows "Waiting for CDEK" until CDEK knows the number. If CDEK still doesn't know it two days later, Peek asks you to check it, choose another carrier or delete the parcel.
 
-**What Peek shows.** Peek reads CDEK's own tracking with the number alone: no account and no phone confirmation. You see the status, each step in CDEK's words and the city it happened in, at its exact time. Peek never reads your name, address, phone or pickup code, and gets no weight or expected delivery date from CDEK. It links CDEK's order page as "Open the CDEK website".
+**What Peek shows.** Peek reads CDEK's own tracking with the number alone: no account and no phone confirmation. You see the status, each step in CDEK's words and the city it happened in, at its exact time. CDEK's anonymous reply hides the pickup code meant for signed-in recipients, and Peek leaves out the sender's address, the pickup point's details, the storage deadline and payments, and gets no weight or expected delivery date from CDEK. It links CDEK's order page as "Open the CDEK website".
 
 **Another number for the same order.** If you track a number CDEK has linked to an order, such as a postal number from abroad, CDEK answers with its own order number. Peek lists that one last, as "CDEK tracks this as".
 
-**When CDEK doesn't answer.** CDEK's sites can block automated lookups. Then Peek asks tracking services: ParcelsApp, Ship24 and 17TRACK in turn. ParcelsApp's copy of CDEK's scans names the legs of the trip rather than CDEK's steps, and may give only each scan's day. When CDEK answers again, Peek goes back to it.
+**When CDEK doesn't answer.** CDEK's sites can block automated lookups. Then Peek asks tracking services: ParcelsApp, Ship24 and 17TRACK. ParcelsApp's copy of CDEK's scans names the legs of the trip rather than CDEK's steps, and may give only each scan's day. When CDEK answers again, Peek goes back to it.
 
 **A number another carrier has.** If you filed an 11-digit number under CDEK and CDEK doesn't know it, Peek asks other carriers whose numbers have this shape, in the parcel's first 30 days. If one of them shows the parcel moving, Peek moves it there and shows "Swapped automatically from CDEK".
 
-**Parcels handed to CDEK.** Qwintry, a parcel forwarder, hands some parcels to CDEK. When Qwintry's tracker names CDEK with CDEK's number, the parcel shows "Delivery with CDEK" (or "Announced to CDEK, not received yet" while CDEK has only the announcement of the parcel, with no scan of its own) and that number. Peek then asks CDEK too, and follows the parcel there once CDEK shows a step at least as recent as Qwintry's newest. DobroPost, which brings orders from China, shows CDEK's steps in its own tracker when CDEK delivers the last part: Peek follows such a parcel there, by its DBRPST number. For a postal number from abroad filed under CDEK and looked up from Belarus, Peek may also ask Belpost, the same way.
+**Parcels handed to CDEK.** Qwintry, a parcel forwarder, hands some parcels to CDEK. When Qwintry's tracker names CDEK with CDEK's number, the parcel shows "Delivery with CDEK" (or "Announced to CDEK, not received yet" while CDEK has only the announcement of the parcel, with no scan of its own) and that number. Peek then asks CDEK too, and follows the parcel there once CDEK shows a step at least as recent as Qwintry's newest. DobroPost, which brings orders from China, shows CDEK's steps in its own tracker when CDEK delivers the last part: Peek follows such a parcel there, by its DBRPST number. For a postal number from abroad filed under CDEK, Peek may also ask the post of the country you look it up from, the same way: Belpost from Belarus, Royal Mail from the UK or USPS from the US, for example, but none from Russia or Kazakhstan.
 
-**Checks and alerts.** Peek checks CDEK up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day CDEK scans the parcel out for delivery, while CDEK's own tracker answers (through tracking services, every 15 minutes). After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact CDEK or the shop for you.
+**Checks and alerts.** While you have the parcel open, or on its delivery day with notifications on, Peek checks CDEK up to every 10 minutes, or up to every 2 minutes from 6 a.m. Moscow time on the day CDEK scans the parcel out for delivery, while CDEK's own tracker answers. Otherwise, and after two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact CDEK or the shop for you.
 
 ## Questions about CDEK tracking
 
@@ -109,7 +109,7 @@ CDEK. It is also written SDEK, and sometimes CDEK Express. Its tracker is on my.
 
 ### What does a CDEK tracking number look like?
 
-Peek links 11 digits starting with `10` to CDEK, such as `10000000000`, but other carriers have 11-digit numbers too.
+Peek links 11 digits starting with `10` to CDEK, such as `10482917365`, but other carriers have 11-digit numbers too.
 
 ### What does "Поступил. Заберите заказ" mean on CDEK tracking?
 

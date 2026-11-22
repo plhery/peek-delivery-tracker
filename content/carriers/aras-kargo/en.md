@@ -14,12 +14,12 @@ Peek's code knows Aras Kargo's tracking numbers as 13 digits. The ones it links 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `6000000000000` | 13 digits starting with 60: the shape Peek links to Aras Kargo. [Delhivery](carrier:delhivery), Correos Chile, Yunda and Korea Post have numbers of this shape too. |
-| `6500000000000` | 13 digits starting with 65: the same. |
-| `1000000000000` | 13 digits starting with other digits: Peek doesn't link them to Aras. If the shop says Aras Kargo, pick Aras Kargo yourself (see below). |
-| `600000000000` | Only 12 digits. If you choose Aras Kargo for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
+| `6048291736542` | 13 digits starting with 60: the shape Peek links to Aras Kargo. [Delhivery](carrier:delhivery), Correos Chile, Yunda and Korea Post have numbers of this shape too. |
+| `6548291736542` | 13 digits starting with 65: the same. |
+| `1482917365482` | 13 digits starting with other digits: Peek doesn't link them to Aras. If the shop says Aras Kargo, pick Aras Kargo yourself (see below). |
+| `604829173654` | Only 12 digits. If you choose Aras Kargo for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
 
-Spaces don't matter when you paste a number into Peek. A link to Aras's tracker with the number in it (kargotakip.araskargo.com.tr, with `code=` and the number) works too.
+Spaces don't matter when you paste a number into Peek. A link to Aras's tracker with the number in it (kargotakip.araskargo.com.tr/mainpage.aspx, with `code=` and the number) works too.
 
 **Where to find it.** In the shop's shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
@@ -31,6 +31,7 @@ Aras's tracker shows the parcel's current status (`Son Durum`), a planned delive
 
 | Aras says | What it means for you | Peek shows |
 | --- | --- | --- |
+| `ÇIKIŞ ŞUBESİNDE` | At the branch that took the parcel in. | "Received by carrier" |
 | `YOLDA` | On the way, between Aras's transfer centres. | "In transit" |
 | `TESLİMAT ŞUBESİNDE` | At the delivery branch, the one that brings the parcel to you. It stays like this after a failed delivery too. | "In transit" |
 | `TESLİM EDİLDİ` | Delivered. Aras gives the day and time. | "Delivered" |
@@ -86,7 +87,7 @@ A parcel goes from the Aras branch that takes it in, through transfer centres (t
 
 ## Aras Kargo customer service and contact
 
-As of 31 October 2026, Peek couldn't read Aras Kargo's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
+Peek couldn't read Aras Kargo's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
 
 For an order from a shop, ask the shop first: it booked the delivery. On Peek, the place of each movement names the branch or transfer centre, and the delivery's place is the branch that delivered it: give that name when you ask.
 
@@ -94,17 +95,17 @@ For an order from a shop, ask the shop first: it booked the delivery. On Peek, t
 
 [Peek](/) can't be sure of an Aras Kargo number by its shape alone: other carriers use 13 digits too. Paste it all the same: Peek follows more than 4,500 carriers.
 
-- **13 digits starting with 60 or 65.** Peek asks Aras Kargo and Delhivery at once whether they have the parcel. While it asks, you see "Checking tracking services…". If Aras has it, Peek says "Aras Kargo has this parcel." and files it there.
+- **13 digits starting with 60 or 65.** Peek asks Aras Kargo at once with the other carriers it can ask about the number (Ukrposhta for some numbers starting with 60, FedEx Poland for some starting with 65). While it asks, you see "Checking tracking services…". If only Aras has it, Peek says "Aras Kargo has this parcel." and files it there; if several have it, Peek asks you to choose one.
 - **Other 13 digits, or no carrier has it yet.** Press "Change" and pick Aras Kargo (type Aras). Peek then asks Aras's tracker for that number. On a parcel you've already added, use "Change carrier".
 - **A link to Aras's tracker.** Peek takes the number from it and names Aras Kargo at once ("Detected carrier").
 
 Added without a carrier, a parcel shows "No tracking history yet" while Peek keeps asking carriers and tracking services. If a tracking service names Aras Kargo as the parcel's only carrier, with dated steps, Peek files it under Aras.
 
-**What Peek shows.** The current status, each movement with its time and place (the branch or transfer centre and its province), the days a delivery was not made, redirections, the planned delivery day, and the delivery time with the branch. It leaves out the names, who signed, the delivery code, payment and invoice details, the parcel's volume and count, the progress bar, and the notes and messages. Peek reads Aras's times as Turkish time. The link on the parcel's page, "Open the Aras Kargo website", opens the number on Aras's tracker.
+**What Peek shows.** The current status, each movement with its time and place (the branch or transfer centre and its province), the days a delivery was not made, redirections, the planned delivery day, and the delivery time with the branch. It shows the recipient's name, masked as Aras gives it, and leaves out the sender's name, who signed, the delivery code, payment and invoice details, the parcel's volume and count, the progress bar, and the notes and messages. Peek reads Aras's times as Turkish time. The link on the parcel's page, "Open the Aras Kargo website", opens the number on Aras's tracker.
 
 When Aras's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their own words.
 
-Peek checks Aras up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Aras Kargo or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks Aras up to every 10 minutes; otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Aras Kargo or the shop for you.
 
 ## Questions about Aras Kargo tracking
 
@@ -118,7 +119,7 @@ It means on the way: the parcel is travelling between Aras's transfer centres, t
 
 ### What does an Aras Kargo tracking number look like?
 
-13 digits, in Peek's code. Peek links the ones starting with 60 or 65 to Aras Kargo, such as `6000000000000`. For other 13 digits, pick Aras Kargo yourself.
+13 digits, in Peek's code. Peek links the ones starting with 60 or 65 to Aras Kargo, such as `6048291736542`. For other 13 digits, pick Aras Kargo yourself.
 
 ### Why can't Aras Kargo find my tracking number?
 

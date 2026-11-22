@@ -20,7 +20,7 @@ import type { JsonObject } from './types';
 import { PLACEHOLDER_MESSAGE } from './validation';
 import { getRecognitionPriorities } from './recognitionRanking';
 import { reviewDemoCarrier } from './reviewDemo';
-import { suggestedPostcodeCarrier } from './trackingRouting';
+import { outsideCountry, suggestedPostcodeCarrier } from './trackingRouting';
 
 /** The Add sheet waits this long for each batch of carriers it asks; the first sync asks again after saving. */
 const RECOGNITION_BUDGET_MS = 3_000;
@@ -62,8 +62,17 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   const cached = answers.get(cacheKey);
   if (cached && Date.now() - cached.at < (cached.answer.carrier === 'unknown' ? 30_000 : ANSWER_TTL_MS)) return cached.answer;
   const offered = recognitionCandidates(typed, ordering);
-  const candidates = [...hintedCandidate(hint, trackingNumber, offered), ...offered].slice(0, 2 * MAX_RECOGNITIONS);
-  const browserCandidates = recognitionCandidates(typed, { ...ordering, phase: 'browser' }).slice(0, MAX_BROWSER_RECOGNITIONS);
+  // Carriers whose numbers are another carrier's outside their countries come once every other candidate has missed the
+  // number, never beside them: after the ten below, the providers and the browser confirmations. The carrier whose page
+  // the number was typed on is asked first all the same.
+  const hinted = hintedCandidate(hint, trackingNumber, offered.filter((candidate) => !outsideCountry(candidate)));
+  const later = (candidate: RecognitionCandidate) => outsideCountry(candidate) && candidate.carrier !== hinted[0]?.carrier;
+  const inside = [...hinted, ...offered.filter((candidate) => !outsideCountry(candidate))];
+  const candidates = inside.slice(0, 2 * MAX_RECOGNITIONS);
+  const offeredBrowser = recognitionCandidates(typed, { ...ordering, phase: 'browser' });
+  const browserCandidates = offeredBrowser.filter((candidate) => !outsideCountry(candidate)).slice(0, MAX_BROWSER_RECOGNITIONS);
+  const outside = inside.length <= candidates.length ? offered.filter(later).slice(0, MAX_RECOGNITIONS) : [];
+  const outsideBrowser = inside.length <= candidates.length ? offeredBrowser.filter(later).slice(0, MAX_BROWSER_RECOGNITIONS) : [];
   const deadline = performance.now() + 25_000;
   await beforeAsking?.();
   const errors = new Map<string, unknown>();
@@ -106,6 +115,15 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
     retried = due.some(({ carrier }) => early.some((asked) => asked.carrier === carrier));
     outcomes.push(...await recognizeAll(due, askBrowser, browserBudget(), signal));
   }
+  // The carriers outside the country, while the detection's 25 seconds last: over HTTP, then in a browser those HTTP
+  // could not answer.
+  const outsideDue = missed() && !preflight?.trackingFound && performance.now() < deadline ? outside : [];
+  if (outsideDue.length) {
+    outcomes.push(...await recognizeAll(outsideDue, ask, Math.min(RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())), signal));
+    const due = missed() && performance.now() < deadline ? outsideBrowser.filter(({ carrier }) =>
+      !outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed')) : [];
+    outcomes.push(...await recognizeAll(due, askBrowser, browserBudget(), signal));
+  }
   const { carrier, choices } = settleRecognition(outcomes);
   // Who was asked, and who could not answer, tells "nobody knows it yet" from "could not check".
   const asked = [...new Set(outcomes.map((candidate) => candidate.carrier as ApiCarrierId))];
@@ -126,6 +144,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
       second_batch: Boolean(next?.length),
       ...(early.length ? { fedex_early: true } : {}),
       ...(retried ? { fedex_retried: true } : {}),
+      ...(outsideDue.length ? { outside_country: true } : {}),
       known: outcomes.filter((outcome) => outcome.status === 'known').length,
       failed: unanswered.length,
       unanswered_carriers: unanswered.join(','),

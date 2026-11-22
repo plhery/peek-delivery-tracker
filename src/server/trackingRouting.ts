@@ -26,7 +26,7 @@ import { plannedClocks } from './futureScans';
 import { atWrittenClock, plannedStepsOf, type PlannedStep } from './plannedSteps';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
-import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
+import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition, type RecognitionCandidate } from 'universal-parcel-scraper';
 import { BROWSER_RECOGNITION_BUDGET_MS, browserRecognitionWorkBudget, BrowserRecognitionBusy, MAX_BROWSER_RECOGNITIONS } from './browserRecognition';
 import { namesBrandOf, providerCarrier } from './providerCarrier';
 import { normalizedLookupCountry } from './lookupCountry';
@@ -265,6 +265,15 @@ export function minimumInterval(carrier: string): number {
 const BROWSER_CARRIERS = new Set(Object.entries(CARRIER_DEFINITIONS).filter(([, carrier]) => carrier.tracking.browser).map(([id]) => id));
 export function opensBrowser(carrier: string): boolean {
   return BROWSER_CARRIERS.has(carrier);
+}
+
+/**
+ * Whether recognition asks a candidate only once every other candidate has missed the number, never beside them: its
+ * numbers are another carrier's outside its countries, and the lookup country is none of them, or unknown (the scraper's
+ * `outsideCountry`; a release without it offers no such candidate).
+ */
+export function outsideCountry(candidate: RecognitionCandidate): boolean {
+  return 'outsideCountry' in candidate && candidate.outsideCountry === true;
 }
 
 /** The carriers recognition can ask about a number, over HTTP or in a browser. */
@@ -1772,6 +1781,11 @@ export class TrackingRouter {
     };
     const recognitionOrder = (skip: (candidate: string) => boolean) => ({ hint: state.discovered_carrier, countryHint,
       priorities: getRecognitionPriorities(number), skip });
+    // Another of the `candidates` knew the number without the progress that files the parcel under it, or asks the owner
+    // for an input: those outside the country are not asked.
+    const heldInside = (candidates: readonly RecognitionCandidate[]) => Boolean(state.input_needed)
+      || Object.entries(state.candidate_probes ?? {}).some(([carrier, probe]) => probe.known
+        && !candidates.some((candidate) => candidate.carrier === carrier && outsideCountry(candidate)));
     if (!prefetchedUniversal.size && recognizes(primary)) {
       const excluded = ownBrand(primary);
       const skip = (candidate: string) => excluded(candidate) || attemptedDirect.has(candidate)
@@ -1779,8 +1793,14 @@ export class TrackingRouter {
           || millis(state.failures[candidate]?.retry_at) > now().getTime() || pacedOut(candidate);
       const ordering = recognitionOrder(skip);
       const eligible = recognize ? recognitionCandidates(number, ordering) : [];
-      const due = eligible.slice(0, MAX_RECOGNITIONS);
-      const next = addition ? eligible.slice(MAX_RECOGNITIONS, 2 * MAX_RECOGNITIONS) : [];
+      const inside = eligible.filter((candidate) => !outsideCountry(candidate));
+      const due = inside.slice(0, MAX_RECOGNITIONS);
+      const next = addition ? inside.slice(MAX_RECOGNITIONS, 2 * MAX_RECOGNITIONS) : [];
+      // The carriers outside the country come once every other candidate has had its turn, in this check or one before,
+      // and missed the number: after the HTTP batches and the browser confirmations.
+      const outsideTurn = inside.length <= due.length + next.length
+        && !heldInside(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []);
+      const outside = outsideTurn ? eligible.filter(outsideCountry).slice(0, MAX_RECOGNITIONS) : [];
       const recognitionDeadline = performance.now() + RECOGNITION_BUDGET_MS;
       const errors = new Map<string, unknown>();
       // Carriers whose last read our own pacing refused before any request: not asked, so their interval does not start.
@@ -1794,17 +1814,19 @@ export class TrackingRouter {
         catch (error) { errors.set(candidate, error); settled(candidate, error); throw error; }
       };
       const outcomes = due.length ? await recognizeAll(due, ask,
-        next.length ? Math.floor(RECOGNITION_BUDGET_MS / 2) : RECOGNITION_BUDGET_MS, signal) : [];
-      const first = settleRecognition(outcomes, now());
+        next.length || outside.length ? Math.floor(RECOGNITION_BUDGET_MS / 2) : RECOGNITION_BUDGET_MS, signal) : [];
+      const missed = () => { const found = settleRecognition(outcomes, now()); return !found.carrier && !found.choices.length; };
       const remaining = Math.floor(recognitionDeadline - performance.now());
-      if (next.length && !first.carrier && !first.choices.length && remaining > 0) {
+      if (next.length && missed() && remaining > 0) {
         outcomes.push(...await recognizeAll(next, ask, remaining, signal));
       }
-      const cheap = settleRecognition(outcomes, now());
-      if (this.options.recognizeBrowser && !cheap.carrier && !cheap.choices.length) {
+      // The HTTP batches share the budget; the browser's time does not count against it.
+      const httpLeft = Math.floor(recognitionDeadline - performance.now());
+      // Browser confirmation of the candidates HTTP could not answer, those outside the country apart.
+      const readInBrowser = async (outsideOnly: boolean) => {
         const browserDue = recognitionCandidates(number, { ...ordering, phase: 'browser',
           skip: (candidate) => skip(candidate) || outcomes.some((outcome) => outcome.carrier === candidate && outcome.status !== 'failed'),
-        }).slice(0, MAX_BROWSER_RECOGNITIONS);
+        }).filter((candidate) => outsideCountry(candidate) === outsideOnly).slice(0, MAX_BROWSER_RECOGNITIONS);
         // A browser read turned away before it opened (every slot taken, or the browser paused) asked nothing:
         // it neither starts the carrier's interval nor counts as a probe.
         const turnedAway = new Set<string>();
@@ -1818,6 +1840,11 @@ export class TrackingRouter {
             throw error;
           }), browserBudget, signal);
         outcomes.push(...read.filter((outcome) => !(outcome.status === 'failed' && turnedAway.has(outcome.carrier))));
+      };
+      if (this.options.recognizeBrowser && missed()) await readInBrowser(false);
+      if (outsideTurn && missed()) {
+        if (outside.length && httpLeft > 0) outcomes.push(...await recognizeAll(outside, ask, httpLeft, signal));
+        if (this.options.recognizeBrowser && missed()) await readInBrowser(true);
       }
       for (const outcome of outcomes) if (!refused.has(outcome.carrier)) noteAsk(outcome.carrier);
       signal?.throwIfAborted();
@@ -1958,8 +1985,11 @@ export class TrackingRouter {
       }
       if (recognizes(filed)) {
         const ordering = recognitionOrder(ownBrand(filed));
-        for (const { carrier } of [...(recognize ? recognitionCandidates(number, ordering) : []),
-          ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...ordering, phase: 'browser' }) : [])]) {
+        const asked = recognize ? recognitionCandidates(number, ordering) : [];
+        const held = heldInside(asked);
+        for (const candidate of [...asked, ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...ordering, phase: 'browser' }) : [])]) {
+          if (held && outsideCountry(candidate)) continue;
+          const { carrier } = candidate;
           turns.push(Math.max(millis(state.candidate_probes?.[carrier]?.retry_at), millis(state.failures[carrier]?.retry_at), askableAt(carrier)));
         }
       }

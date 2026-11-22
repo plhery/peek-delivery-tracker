@@ -878,7 +878,8 @@ Key JSON events:
 - `carrier_recognition`: the `tracking_number`, how many carriers the Add sheet's recognition asked and which
   (`asked_carriers`, ids in the order asked), whether it asked a `second_batch` because none
   of the first five knew the number, whether it asked FedEx right after them (`fedex_early`) and
-  again with the browser confirmations because that read did not answer (`fedex_retried`), how many
+  again with the browser confirmations because that read did not answer (`fedex_retried`), whether it
+  asked the carriers outside the country once all the others had missed the number (`outside_country`), how many
   knew the number or failed (`unanswered_carriers` names those), and what it settled on (a carrier,
   `choice` or `none`).
 - `typo_candidate`: the number of a parcel just added or looked up reads as a digit typed

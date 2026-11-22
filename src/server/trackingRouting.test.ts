@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { directCarrier, earlierParcelRows, foreignHistory, minimumInterval, opensBrowser, outsideCountry, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { AUTOMATIC_CARRIER_IDS, carrierAdapter } from './carriers';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
@@ -1231,6 +1231,47 @@ describe('persistent tracking routing', () => {
       expect(candidates).toHaveBeenCalledWith('00000000000004', expect.objectContaining({ countryHint: 'FR' }));
       expect(direct).not.toHaveBeenCalled();
     });
+
+    // A carrier whose numbers are another's abroad, which the scraper offers last for a lookup outside its countries.
+    const outsider = (carrier: string) => ({ carrier, needsInput: null, preferred: false, outsideCountry: true }) as scraper.RecognitionCandidate;
+    it('asks a carrier outside the country only once every other candidate has missed the number', async () => {
+      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) =>
+        options?.phase === 'browser' ? [] : [...twoBatches, outsider('econt')].filter(({ carrier }) => !options?.skip?.(carrier)));
+      const number = '00000000000005';
+      const added = setup();
+      added.recognize.mockImplementation(knows('econt'));
+      added.direct.mockResolvedValue(directValue('econt'));
+      const result = await added.router.fetch(parcel({ tracking_number: number }), false, undefined, true);
+      expect(asked(added.recognize)).toEqual([...twoBatches.map(({ carrier }) => carrier), 'econt']);
+      expect(result.correction?.carrier).toBe('econt');
+      // One of the others that knows the number keeps it from being asked.
+      const known = setup();
+      known.recognize.mockImplementation(knows('hermes-de'));
+      known.direct.mockResolvedValue(directValue('hermes-de'));
+      await known.router.fetch(parcel({ tracking_number: number }), false, undefined, true);
+      expect(asked(known.recognize)).toEqual(twoBatches.map(({ carrier }) => carrier));
+      // A check that asks five of the six leaves it for one where the sixth has had its turn too.
+      const refresh = setup();
+      await refresh.router.fetch(parcel({ tracking_number: number }), false);
+      expect(asked(refresh.recognize)).toEqual(twoBatches.slice(0, 5).map(({ carrier }) => carrier));
+      // Nor is it asked while one of the others knew the number in an earlier check without the progress to keep it.
+      const held = setup();
+      const probes = { dpd: { count: 1, retry_at: '2026-09-10T13:00:00.000Z', known: true } };
+      await held.router.fetch(parcel({ tracking_number: number, carrier_data: { routing: state({ candidate_probes: probes }) } }), false);
+      expect(asked(held.recognize)).toEqual(twoBatches.slice(1).map(({ carrier }) => carrier));
+    });
+
+    it('asks a carrier outside the country after the browser confirmations, over HTTP then in a browser', async () => {
+      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) => (options?.phase === 'browser'
+        ? [{ carrier: 'fedex', needsInput: null, preferred: false }, outsider('ozon-logistics')]
+        : [...twoBatches.slice(0, 2), outsider('econt')]).filter(({ carrier }) => !options?.skip?.(carrier)));
+      const { router, recognize, recognizeBrowser } = setup();
+      const order: string[] = [];
+      recognize.mockImplementation(async (carrier: string) => { order.push(carrier); return { known: false }; });
+      recognizeBrowser.mockImplementation(async (carrier: string) => { order.push(`${carrier} in a browser`); return { known: false }; });
+      await router.fetch(parcel({ tracking_number: '00000000000006' }), false);
+      expect(order).toEqual(['dpd', 'seur', 'fedex in a browser', 'econt', 'ozon-logistics in a browser']);
+    });
     it('recovers an already saved compact PostLogistics number filed as unknown', async () => {
       const { router, direct, universal, recognize } = setup();
       recognize.mockImplementation(knows('postlogistics'));
@@ -1274,7 +1315,10 @@ describe('persistent tracking routing', () => {
       const hinted = setup();
       await hinted.router.fetch(parcel({ tracking_number: '12345678901',
         carrier_data: { routing: state({ discovered_carrier: 'gls-de' }) } }), false);
-      expect(asked(hinted.recognize)).toEqual(recognitionAskedCarriers('12345678901', { hint: 'gls-de' }));
+      // With every other carrier asked, those outside the country follow.
+      const outside = scraper.recognitionCandidates('12345678901', { hint: 'gls-de' }).filter(outsideCountry)
+        .slice(0, scraper.MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+      expect(asked(hinted.recognize)).toEqual([...recognitionAskedCarriers('12345678901', { hint: 'gls-de' }), ...outside]);
       expect(asked(hinted.recognize)[0]).toBe('gls-de');
       // Newly supported number shapes follow the same popularity order.
       const tnt = setup();

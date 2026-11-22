@@ -1,9 +1,17 @@
 import { beforeEach, expect, it, vi } from 'vitest';
-import { detectCarrierMatch, IndeterminateError, MAX_RECOGNITIONS, recognitionCandidates } from 'universal-parcel-scraper';
+import { detectCarrierMatch, IndeterminateError, MAX_RECOGNITIONS, recognitionCandidates, type RecognitionCandidate, type RecognitionOptions } from 'universal-parcel-scraper';
 import { detectCarrier } from './carrierDetection';
 import { SupabaseServiceClient } from './supabase';
+import { outsideCountry } from './trackingRouting';
 
-const mocks = vi.hoisted(() => ({ http: vi.fn(), browser: vi.fn() }));
+type Candidates = (number: string, options?: RecognitionOptions) => RecognitionCandidate[];
+const mocks = vi.hoisted(() => ({ http: vi.fn(), browser: vi.fn(), candidates: undefined as ((original: Candidates) => Candidates) | undefined }));
+// A test can stand in for the scraper's candidates.
+vi.mock(import('universal-parcel-scraper'), async (importOriginal) => {
+  const scraper = await importOriginal();
+  return { ...scraper, recognitionCandidates: (number: string, options?: RecognitionOptions) =>
+    (mocks.candidates?.(scraper.recognitionCandidates) ?? scraper.recognitionCandidates)(number, options) };
+});
 vi.mock('./adapterRegistry', () => ({ createAdapterRegistry: () => ({ for: (carrier: string) => ({
   recognize: (number: string, context: unknown) => mocks.http(carrier, number, context),
 }) }) }));
@@ -11,6 +19,7 @@ vi.mock('./browserRecognition', () => ({ BROWSER_RECOGNITION_BUDGET_MS: 20_000, 
   recognizeBrowser: (...args: unknown[]) => mocks.browser(...args) }));
 beforeEach(() => {
   vi.unstubAllEnvs();
+  mocks.candidates = undefined;
   mocks.http.mockReset().mockResolvedValue({ known: false });
   mocks.browser.mockReset().mockResolvedValue({ known: true, lastActivityAt: new Date().toISOString() });
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
@@ -19,7 +28,10 @@ beforeEach(() => {
 // Twelve digits whose GLS and Japan Post checks hold, so GLS's networks and Japan Post are asked too and a
 // second batch is left, and FedEx's: the scraper ranks FedEx first.
 const FEDEX_NUMBER = '100000001010';
-const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).filter((candidate) => !outsideCountry(candidate))
+  .slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+/** The carriers outside the country, asked once all the others have missed the number. */
+const outsideBatch = () => recognitionCandidates(FEDEX_NUMBER).filter(outsideCountry).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
 /** Detection without the answers an earlier test left in its cache. */
 async function freshDetection() {
   vi.resetModules();
@@ -43,9 +55,39 @@ it('asks the next five when FedEx does not know the number either, and FedEx onl
   mocks.browser.mockResolvedValue({ known: false });
   const http = httpBatches();
   expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
-    trackingNumber: FEDEX_NUMBER, carrier: 'unknown', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS)],
+    trackingNumber: FEDEX_NUMBER, carrier: 'unknown',
+    asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS), ...outsideBatch()],
   });
   expect(mocks.browser).toHaveBeenCalledOnce();
+});
+
+it('asks the carriers outside the country last, once every other has missed the number, while time is left', async () => {
+  // Econt stands for a carrier whose numbers are another's abroad: the scraper offers it last, outside its countries.
+  const econt = { carrier: 'econt', needsInput: null, preferred: false, outsideCountry: true } as RecognitionCandidate;
+  mocks.candidates = (original) => (number, options) => [...original(number, options).filter((candidate) => !outsideCountry(candidate)),
+    ...(options?.phase === 'browser' ? [] : [econt])];
+  mocks.browser.mockResolvedValue({ known: false });
+  mocks.http.mockImplementation(async (carrier: string) => ({ known: carrier === 'econt' }));
+  const http = httpBatches();
+  const log = vi.mocked(console.log);
+  expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
+    trackingNumber: FEDEX_NUMBER, carrier: 'econt', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS), 'econt'],
+  });
+  expect(log.mock.calls.map(([line]) => JSON.parse(String(line)) as Record<string, unknown>)
+    .find((line) => line.event === 'carrier_recognition')).toMatchObject({ outside_country: true, settled: 'econt' });
+
+  // Not when FedEx knows it, nor past the detection's deadline.
+  mocks.browser.mockResolvedValue({ known: true, lastActivityAt: new Date().toISOString() });
+  expect((await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).asked).not.toContain('econt');
+  let clock = performance.now();
+  mocks.browser.mockReset().mockImplementation(async () => {
+    clock += 26_000;
+    return { known: false };
+  });
+  const now = vi.spyOn(performance, 'now').mockImplementation(() => clock);
+  try {
+    expect((await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).asked).not.toContain('econt');
+  } finally { now.mockRestore(); }
 });
 
 it('asks FedEx again with the browser confirmations when its early read found the browsers busy, while time is left', async () => {

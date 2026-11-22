@@ -12,6 +12,7 @@ import { SupabaseAuthenticator } from './auth';
 import * as metrics from './metrics';
 import * as observability from './observability';
 import { SupabaseServiceClient } from './supabase';
+import { outsideCountry } from './trackingRouting';
 
 vi.mock('./trackingPreflight', () => ({ preflightTracking: vi.fn().mockResolvedValue(undefined) }));
 
@@ -55,8 +56,14 @@ afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); 
 // these tests need several of them, DPD first for its Swiss depot prefix.
 const fourteen = recognitionAskedCarriers('06080000000002');
 // When none of the first five knows a number, the next five are asked too.
-const bothBatches = (number: string, options?: RecognitionOptions) =>
-  recognitionCandidates(number, options).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+const bothBatches = (number: string, options?: RecognitionOptions) => recognitionCandidates(number, options)
+  .filter((candidate) => !outsideCountry(candidate)).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+// Then, when no other carrier was left out of those ten, five of the carriers outside the country.
+const outsideBatch = (number: string, options?: RecognitionOptions) => {
+  const candidates = recognitionCandidates(number, options);
+  return candidates.filter((candidate) => !outsideCountry(candidate)).length > 2 * MAX_RECOGNITIONS ? []
+    : candidates.filter(outsideCountry).slice(0, MAX_RECOGNITIONS).map(({ carrier }) => carrier);
+};
 
 // Answers are cached per number for a few minutes, so every test uses its own numbers.
 
@@ -154,11 +161,12 @@ it('detects with the number as typed, whose dash tells an R+L PRO number, and as
   await expect((await typed('314159265', '31415926-5')).json())
     .resolves.toEqual({ trackingNumber: '314159265', carrier: 'rl-carriers', asked: ['rl-carriers'] });
   expect(recognize.mock.calls.map(([carrier, number]) => [carrier, number])).toEqual([['rl-carriers', '314159265']]);
-  // The bare digits fit no carrier's rule, and a typed form of another number is not read.
+  // The bare digits fit only the rules of carriers outside the country, and a typed form of another number is not read.
   recognize.mockClear();
   await expect((await typed('314159265')).json()).resolves.toMatchObject({ trackingNumber: '314159265', carrier: 'unknown' });
   await expect((await typed('314159265', '31415926-4')).json()).resolves.toMatchObject({ trackingNumber: '314159265', carrier: 'unknown' });
-  expect(asked()).toEqual([]);
+  expect(asked()).toEqual(outsideBatch('314159265'));
+  expect(asked()).not.toContain('rl-carriers');
 });
 
 it('offers a carrier that needs a postcode so the sheet can ask for it', async () => {
@@ -428,11 +436,12 @@ it('keeps unrelated BRT and Colis Privé answers ambiguous', async () => {
     recognized: ['brt', 'colis-prive'], asked: recognitionAskedCarriers(number) });
 });
 
-it.each(['06080000000076', '19999999999980', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five', async (number) => {
+it.each(['06080000000076', '19999999999980', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five and those outside the country', async (number) => {
   const response = await (await request(number)).json();
-  expect(asked().slice(0, MAX_RECOGNITIONS)).toEqual(recognitionAskedCarriers(number));
-  expect(asked()).toEqual(bothBatches(number));
-  expect(response.asked ?? []).toEqual(bothBatches(number));
+  const named = recognitionAskedCarriers(number);
+  expect(asked().slice(0, named.length)).toEqual(named);
+  expect(asked()).toEqual([...bothBatches(number), ...outsideBatch(number)]);
+  expect(response.asked ?? []).toEqual([...bothBatches(number), ...outsideBatch(number)]);
 });
 
 it('counts served detections by confidence, including a recognized carrier', async () => {

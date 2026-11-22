@@ -2388,6 +2388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "bring-sendungsverfolgung",
+      "title": "Bring Sendungsverfolgung (Posten): Nummern, Status, Fristen",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "posti",
       "catalog": "posti",
       "slug": "posti-sendungsverfolgung",
@@ -3660,6 +3668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping suivi\u00a0: numéro de suivi et colis non reçu",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "suivi-bring",
+      "title": "Suivi Bring (Posten)\u00a0: numéros, statuts et délais de retrait",
+      "name": "Bring",
+      "color": "#56b529"
     },
     {
       "id": "posti",
@@ -4944,6 +4960,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "tracciamento-bring",
+      "title": "Tracciamento Bring (Posten): codici, stati e ritiro",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "posti",
       "catalog": "posti",
       "slug": "tracciamento-posti",
@@ -6194,6 +6218,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "seguimiento-bring",
+      "title": "Seguimiento Bring (Posten): números, estados y plazos",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "posti",
       "catalog": "posti",
       "slug": "seguimiento-posti",
@@ -7434,6 +7466,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping seguimento: número PT ou ES e o que fazer",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "seguimento-bring",
+      "title": "Seguimento Bring (Posten): números, estados e prazos",
+      "name": "Bring",
+      "color": "#56b529"
     },
     {
       "id": "posti",
@@ -8686,6 +8726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping śledzenie: numer przesyłki, statusy i pomoc",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "sledzenie-bring",
+      "title": "Śledzenie Bring (Posten): numery, statusy i odbiór",
+      "name": "Bring",
+      "color": "#56b529"
     },
     {
       "id": "posti",

@@ -15,7 +15,7 @@ Un numero di spedizione DHL eCommerce UK è composto da 14 cifre. La maggior par
 | Numero (inventato) | Che cos'è |
 | --- | --- |
 | `60124829173648` | Un numero di spedizione UK: 14 cifre, qui con prefisso `6012`. |
-| `4829173` | Il codice sull'avviso di passaggio dell'autista, per il campo «Card number». |
+| `4829173` | Il codice a 7 cifre sull'avviso di passaggio dell'autista, per il campo «Card number». |
 | `948291736` | Il numero a 9 cifre di una spedizione di reso. |
 
 Il tracker accetta anche un riferimento cliente. Il numero dell'avviso di passaggio o il riferimento individuano il pacco solo inserendo anche il codice postale di consegna.
@@ -77,11 +77,11 @@ Recapiti presenti sulla pagina contatti di DHL eCommerce UK:
 
 ## Tracciare pacchi DHL eCommerce UK con Peek
 
-[Peek](/) riconosce il formato a 14 cifre, ma poiché è condiviso interroga i corrieri più probabili. Un codice che inizia con `6012` va per primo a DHL eCommerce UK ovunque. Anche i numeri che iniziano per 31, 41 o 55 vengono chiesti a DHL eCommerce UK, subito dopo [DPD UK](carrier:dpd-uk), per chi cerca dal Regno Unito; altrove Peek non li chiede a DHL eCommerce UK: sceglilo tu. Se un'altra rete riconosce lo stesso numero, scegli DHL eCommerce UK con «Cambia». Funzionano anche i link da track.dhlecommerce.co.uk (con `con=`) o track.dhlparcel.co.uk (con `consignmentnumber=`). Un numero di reso a 9 cifre che inizia con 9 viene tracciato dopo che hai scelto tu DHL eCommerce UK; i codici degli avvisi di passaggio e i riferimenti cliente non sono tracciati perché richiedono il codice postale.
+[Peek](/) riconosce il formato a 14 cifre, ma poiché è condiviso interroga i corrieri più probabili. Un codice che inizia con `6012` va per primo a DHL eCommerce UK ovunque. Anche i numeri che iniziano per 31, 41 o 55 vengono chiesti a DHL eCommerce UK, subito dopo [DPD UK](carrier:dpd-uk), per chi cerca dal Regno Unito; altrove Peek non li chiede a DHL eCommerce UK: sceglilo tu. Se un'altra rete riconosce lo stesso numero, scegli DHL eCommerce UK con «Cambia». Funzionano anche i link da track.dhlecommerce.co.uk (con `con=`) o track.dhlparcel.co.uk (con `consignmentnumber=`). Un numero di reso a 9 cifre che inizia con 9 viene tracciato dopo aver scelto DHL eCommerce UK con «Cambia»; i codici da 7 cifre degli avvisi di passaggio e i riferimenti cliente non sono tracciati perché richiedono il codice postale.
 
 Mostra stato, cronologia dal più recente al più vecchio con i messaggi inglesi scritti da DHL, giorno previsto di consegna (solo finché il pacco è in viaggio, prima dell'uscita in consegna, e rimosso dopo la scadenza) e ora di consegna. Gli orari sono letti sull'ora britannica e mostrati nel tuo fuso orario («Orari nel tuo fuso orario:»). Omette firmatario e riferimento del mittente; DHL non fornisce luoghi per le scansioni, quindi sulla mappa non compare nulla. Le spedizioni spariscono dal tracker di DHL qualche tempo dopo la consegna, e Peek non segue il pacco verso un altro corriere.
 
-Peek interroga direttamente il tracker DHL fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 (ora del Regno Unito) del giorno in cui DHL scansiona il pacco in consegna, mentre il pacco è aperto in Peek o nel giorno di consegna con le notifiche attive. Dopo due giorni senza novità (12 ore mentre il pacco mostra ancora «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Per le notifiche puoi scegliere «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Dopo quattro giorni senza scansioni in transito, fuori da dogana o problemi segnalati, Peek mostra «Nessun aggiornamento da…», ricorda che «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DHL eCommerce UK.» e propone «Chiedi aiuto a DHL eCommerce UK».
+Peek interroga direttamente il tracker DHL fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 (ora del Regno Unito) del giorno in cui DHL scansiona il pacco in consegna, mentre il pacco è aperto in Peek o nel giorno di consegna con le notifiche attive; altrimenti ogni ora. Dopo due giorni senza novità (12 ore mentre il pacco mostra ancora «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Per le notifiche puoi scegliere «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni in transito, fuori da dogana o problemi segnalati, Peek mostra «Nessun aggiornamento da…», ricorda che «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DHL eCommerce UK.» e propone «Chiedi aiuto a DHL eCommerce UK».
 
 ## Domande frequenti su DHL eCommerce UK
 
@@ -108,5 +108,5 @@ Fai attenzione. Citizens Advice segnala che un SMS che chiede denaro per ricever
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – responsabilità del venditore, sollecito al corriere, 30 giorni, luogo concordato, SMS truffa
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – fattura del corriere, circa 3 settimane di giacenza, reso al mittente
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – inoltro SMS sospetti al 7726
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dati letti da Peek: 14 cifre e prefissi, avvisi di passaggio, resi a 9 cifre, messaggi di stato, più recente prima, ex DHL Parcel UK e UK Mail
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dati letti da Peek: 14 cifre e prefissi, avvisi a 7 cifre, resi a 9 cifre, messaggi di stato, più recente prima, ex DHL Parcel UK e UK Mail
 :::

@@ -18,11 +18,11 @@ Express One publishes no format. Package IDs seen so far come in two shapes (dig
 
 | Number | Whose it is |
 | --- | --- |
-| `0000000000000` | 13 digits: an Express One package ID, but [DPD France](carrier:dpd-fr) and other carriers use this length too. |
-| `100000000000000000001011` | 24 digits, ending in a Hungarian postcode: Express One. Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) also use 24 digits. |
-| `00000000000000` | 14 digits: DPD, never Express One. |
-| `00000000000` | 11 or 12 digits: GLS, never Express One. |
-| `RR000000005HU` | Two letters, 9 digits, `HU`: [Magyar Posta](carrier:magyar-posta), never Express One. |
+| `0482917364829` | 13 digits: an Express One package ID, but [DPD France](carrier:dpd-fr) and other carriers use this length too. |
+| `148291736482917364821011` | 24 digits, ending in a Hungarian postcode: Express One. Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) also use 24 digits. |
+| `48291736482917` | 14 digits: DPD, never Express One. |
+| `48291736482` | 11 or 12 digits: GLS, never Express One. |
+| `RR482917367HU` | Two letters, 9 digits, `HU`: [Magyar Posta](carrier:magyar-posta), never Express One. |
 
 Go by the carrier the shop's email names; more in [tracking number formats](guide:tracking-number-formats).
 
@@ -69,7 +69,7 @@ EXOHU is Express One Hungary: the first status means only the label exists. The 
 
 ## Express One contact number and customer service
 
-As listed on Express One's English contact page on 12 October 2026, on working days from 8 am to 5 pm (the FAQ says until 6 pm):
+As listed on Express One's English contact page, on working days from 8 am to 5 pm Hungarian time (the FAQ says until 6 pm):
 
 - **Customer service:** +36 1 8 777 400, ugyfelszolgalat@expressone.hu, also if your courier doesn't answer. In busy periods Express One suggests writing.
 - **International customer service:** +36 1 8 777 410, intcs@expressone.hu; complaints intcsreklamacio@expressone.hu.
@@ -80,7 +80,7 @@ Express One's Parcel Tracking page also lists +36 1 8 777 444 and a chatbot.
 
 ## Tracking Express One parcels with Peek
 
-[Peek](/) can't tell an Express One number from its digits. A 13-digit number is offered to other carriers, a 24-digit one to Austrian Post, InPost and Ciblex. When none knows it you'll see "not found yet · Peek keeps checking": pick "Express One" with "Change". Or paste a tracking.expressone.hu link with `?plc_number=`, which names Express One whatever the number.
+[Peek](/) doesn't ask Express One about a 13-digit number on its own: it offers it to other carriers. A 24-digit number goes to Express One first when you search from Hungary, ahead of Austrian Post, InPost and Ciblex; elsewhere Peek asks those three first, then Express One. When none knows it you'll see "not found yet · Peek keeps checking": pick "Express One" with "Change". Or paste a tracking.expressone.hu link with `?plc_number=`, which names Express One whatever the number.
 
 Express One's scans carry a time without a time zone: Peek reads them on the clock of the scan's place, Hungarian time for scans in Hungary, and lists Express One's own history. From Express One it reads the status and, for hub scans, the town and country. Wordings stay as Express One writes them, except `Out for delivery`; `Successful delivery` counts as delivered and a return trip as returned. A scan Peek doesn't know shows Express One's wording without a stage. You can be notified when the status changes. There's no expected delivery, weight or pickup point, and the progress bar and signature are left out.
 
@@ -112,7 +112,7 @@ No. They also belong to Austrian Post but are separate companies; this page and 
 - [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – opening hours, 3, 2 and 7 days
 - [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 hours in a locker
 - [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – notification contents, none for export, 250,000 Ft cash at an Exopoint
-- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – wholly owned subsidiary
+- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – subsidiary
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – Express One companies in other countries
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

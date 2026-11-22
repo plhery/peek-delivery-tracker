@@ -14,10 +14,10 @@ Track en trace vraagt een "Zendingsnummer" en de "Postcode ontvanger". In Nederl
 
 | Vorm (verzonnen) | Wat het is |
 | --- | --- |
-| `JVGL0000000000` | JVGL en minstens acht letters of cijfers: het gewone nummer, onder de barcode op het label. |
+| `JVGL4829173648` | JVGL en minstens acht letters of cijfers: het gewone nummer, onder de barcode op het label. |
 | `3SABC00000000` | 3S, drie letters en 8 tot 10 cijfers: een andere barcode van DHL eCommerce. |
 | `JJD00009012345678901234` | JJD000090 en 14 tot 16 cijfers: een JJD-label van het Nederlandse DHL-netwerk. |
-| `MDP12345678` | MDP en 8 tekens (cijfers 1 tot en met 9 en bepaalde hoofdletters): een vorm die de catalogus van Peek aan DHL eCommerce Netherlands toekent. |
+| `MDP48291736` | MDP en 8 tekens (cijfers 1 tot en met 9 en bepaalde hoofdletters): een vorm die de catalogus van Peek aan DHL eCommerce Netherlands toekent. |
 | Code op de gele kaart | Niet thuis? Met de niet-thuiscode (in België de leveringscode) of de QR-code zie je waar je pakket heen gaat. |
 
 **Nummers die erop lijken.** Een 3S-code met vier letters is meestal van [PostNL](carrier:postnl), andere JJD-nummers hebben doorgaans de vorm van [DHL Paket](carrier:dhl) uit Duitsland en sommige 3S-codes van twaalf tekens passen bij [Colis Privé](carrier:colis-prive). [DHL Express](carrier:dhl-express) is een ander netwerk: zijn pakketten hebben een Waybill-nummer onder de barcode. Twijfel je, kijk dan welke vervoerder de webshop noemt.
@@ -86,7 +86,7 @@ Je betaalt btw (in Nederland meestal 21%). Sinds 1 juli 2026 gelden ook onder �
 
 ## Contact met DHL eCommerce
 
-Zo stond het op 26 oktober 2026 op de Nederlandstalige pagina's van DHL eCommerce:
+Zo staat het op de Nederlandstalige pagina's van DHL eCommerce:
 
 - **Chat:** voor [Nederland](https://www.dhlecommerce.nl/nl/consument/klantenservice) en voor [België](https://www.dhlecommerce.be/nl/particulieren/klantendienst). Eerst helpt digitale collega Tracy; komt ze er niet uit, dan kijkt ze of er een collega klaarzit. Houd je zendingsnummer bij de hand.
 - **Telefoon:** de consumentenpagina's geven in geen van beide landen een nummer.
@@ -98,7 +98,7 @@ Zo stond het op 26 oktober 2026 op de Nederlandstalige pagina's van DHL eCommerc
 
 Peek vraagt het pakket zonder postcode op bij DHL, dus zie je geen ontvanger, adres, handtekening of afhaalpunt. Je ziet de status, de scans (zonder plaats), de verwachte bezorging (een tijdvak of moment, als DHL er een plant) en het tijdstip van bezorging. Peek toont de scans met de Engelse teksten van DHL, zoals `Delivered at DHL ServicePoint` voor `Bezorgd bij DHL ServicePoint`, en zet er een eigen kop boven, zoals 'Ready for pickup' of 'Delivered'. Bij een vertraging (`Delivery interrupted, delivery date changed`) staat er 'Needs attention', ook al hoef je volgens DHL meestal alleen te wachten.
 
-Peek kijkt hoogstens elke 10 minuten, en hoogstens elke 2 minuten zodra de bezorger onderweg is: op die dag, vanaf 6 uur 's ochtends plaatselijke tijd (met een tijdvak pas vanaf een halfuur ervoor) en zolang de tracking van DHL zelf antwoordt. Via trackingdiensten kijkt Peek elk uur, en hoogstens elke 15 minuten op de dag dat de bezorger onderweg is. Komt er twee dagen lang niets nieuws binnen (of 12 uur, zolang je pakket alleen nog is aangemeld of door de vervoerder is ontvangen), dan kijkt Peek nog maar één keer per uur. Meldingen kies je zelf: 'Every scan', 'Important steps' of 'Delivery only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
+Zolang je het pakket open hebt, of op de bezorgdag met meldingen aan, kijkt Peek hoogstens elke 10 minuten, en hoogstens elke 2 minuten zodra de bezorger onderweg is: op die dag, vanaf 6 uur 's ochtends Nederlandse tijd (met een tijdvak pas vanaf een halfuur ervoor) en zolang de tracking van DHL zelf antwoordt; anders elk uur. Via trackingdiensten kijkt Peek elk uur, elke 3 uur na een dag zonder nieuwe scan, en hoogstens elke 15 minuten op de dag dat de bezorger onderweg is, zolang je het pakket open hebt of meldingen aan staan. Komt er twee dagen lang niets nieuws binnen (of 12 uur, zolang je pakket alleen nog is aangemeld of door de vervoerder is ontvangen), dan kijkt Peek nog maar één keer per uur. Meldingen kies je zelf: 'Every scan', 'Important steps' of 'Delivery only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
 
 ## Vragen over DHL eCommerce track en trace
 

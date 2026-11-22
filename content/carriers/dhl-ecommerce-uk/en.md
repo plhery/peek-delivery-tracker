@@ -14,9 +14,9 @@ A DHL eCommerce UK shipment number has 14 digits. Most of those the tracker show
 
 | Number (invented) | What it is |
 | --- | --- |
-| `60120000000000` | A UK shipment number: 14 digits, here starting `6012`. |
-| `1234567` | The 7-digit number on a driver's calling card, for the tracker's "Card number" box. |
-| `912345678` | A return shipment's 9-digit number. |
+| `60124829173648` | A UK shipment number: 14 digits, here starting `6012`. |
+| `4829173` | The 7-digit number on a driver's calling card, for the tracker's "Card number" box. |
+| `948291736` | A return shipment's 9-digit number. |
 
 The tracker also takes a customer reference. A calling-card number or a reference only finds the parcel with the delivery postcode.
 
@@ -67,7 +67,7 @@ Tracking says delivered but there's nothing? See [delivered but not received](gu
 
 ## DHL eCommerce UK contact number and customer service
 
-As listed on DHL eCommerce UK's contact page on 11 October 2026:
+As listed on DHL eCommerce UK's contact page:
 
 - **Phone:** 02476 937770, Monday to Friday 7am to 8pm, Saturday 8am to 6pm.
 - **Online:** the "Send us a message" form on the [contact page](https://track.dhlecommerce.co.uk/contact-us?nav=1), choosing "Help with my parcel delivery". Outside opening hours, an advisor replies on the next working day.
@@ -77,9 +77,9 @@ As listed on DHL eCommerce UK's contact page on 11 October 2026:
 
 ## Tracking DHL eCommerce UK parcels with Peek
 
-[Peek](/) recognises a 14-digit number but the shape is shared, so it asks the likely carriers at once. A number starting `6012` goes to DHL eCommerce UK first, and so does any 14-digit number for readers in the UK. If a DPD network also knows the number, you pick the carrier with "Change". A link from track.dhlecommerce.co.uk (with `con=`) or track.dhlparcel.co.uk (with `consignmentnumber=`) can be pasted too. A 9-digit return number is tracked once you pick DHL eCommerce UK with "Change"; calling-card numbers and references aren't tracked, because they need a postcode.
+[Peek](/) recognises a 14-digit number but the shape is shared, so it asks the likely carriers at once. A number starting `6012` goes to DHL eCommerce UK first everywhere. For readers in the UK, a number starting 31, 41 or 55 goes to [DPD UK](carrier:dpd-uk) first and DHL eCommerce UK next; elsewhere Peek doesn't ask DHL eCommerce UK about it, so pick it yourself. If a DPD network also knows the number, you pick the carrier with "Change". A link from track.dhlecommerce.co.uk (with `con=`) or track.dhlparcel.co.uk (with `consignmentnumber=`) can be pasted too. A 9-digit return number is tracked once you pick DHL eCommerce UK with "Change"; calling-card numbers and references aren't tracked, because they need a postcode.
 
-Peek checks DHL's tracker up to every 10 minutes, or every 2 minutes from 6 a.m. UK time on the day DHL scans the parcel out for delivery, while DHL's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history, the expected delivery day and the delivery time, with DHL's English messages as DHL writes them. Times are read on UK time and shown in your device's time zone. It leaves out who signed and the sender's reference. DHL gives no place for its scans, so nothing appears on the map. Shipments drop out of DHL's tracking some time after delivery, and Peek doesn't follow a parcel to another carrier.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks DHL's tracker up to every 10 minutes, or every 2 minutes from 6 a.m. UK time on the day DHL scans the parcel out for delivery, while DHL's own tracker answers; otherwise hourly. Through tracking services, it checks hourly, every 3 hours after a day without a new scan, and up to every 15 minutes on the day the parcel is out for delivery, under the same condition. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history, the expected delivery day (until the parcel goes out for delivery) and the delivery time, with DHL's English messages as DHL writes them. Times are read on UK time and shown in your device's time zone. It leaves out who signed and the sender's reference. DHL gives no place for its scans, so nothing appears on the map. Shipments drop out of DHL's tracking some time after delivery, and Peek doesn't follow a parcel to another carrier.
 
 ## Questions about DHL eCommerce UK tracking
 

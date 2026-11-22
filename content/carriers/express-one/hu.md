@@ -16,10 +16,10 @@ A Csomagkövetés háromféle azonosítót fogad el: a csomagazonosítót (a von
 
 | Szám (kitalált példa) | Mit jelent |
 | --- | --- |
-| `0000000000000` | 13 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú a DPD France és más szállítók száma is. |
-| `000000000000000000000000` | 24 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú az Osztrák Posta, az [InPost](carrier:inpost) és a [Ciblex](carrier:ciblex) száma is. |
-| `00000000000000` | 14 számjegy: többnyire DPD-csomagszám; az Express One-nál a Peek nem követi. |
-| `RR000000005HU` | Két betű, 9 számjegy és `HU`: a [Magyar Posta](carrier:magyar-posta) nemzetközi azonosítója. |
+| `0482917364829` | 13 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú a DPD France és más szállítók száma is. |
+| `148291736482917364821011` | 24 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú az Osztrák Posta, az [InPost](carrier:inpost) és a [Ciblex](carrier:ciblex) száma is. |
+| `48291736482917` | 14 számjegy: többnyire DPD-csomagszám; az Express One-nál a Peek nem követi. |
+| `RR482917367HU` | Két betű, 9 számjegy és `HU`: a [Magyar Posta](carrier:magyar-posta) nemzetközi azonosítója. |
 
 ## Mit jelentenek az Express One státuszai?
 
@@ -68,7 +68,7 @@ Az átütemezést jelző lépések, például `Delivery schedule updated` vagy `
 
 ## Az Express One elérhetőségei
 
-Az elérhetőségek így szerepeltek az expressone.hu Kapcsolat oldalán 2026. október 26-án. Az ügyfélszolgálat munkanapokon 8 és 17 óra között érhető el (a GYIK szerint 8 és 18 óra között):
+Az elérhetőségek az expressone.hu Kapcsolat oldalán így szerepelnek. Az ügyfélszolgálat munkanapokon 8 és 17 óra között érhető el (a GYIK szerint 8 és 18 óra között):
 
 - **Belföldi ügyfélszolgálat és reklamáció:** +36 1 8 777 400, ugyfelszolgalat@expressone.hu; akkor is ide forduljon, ha a futár nem veszi fel a telefont. Ha a telefonos ügyfélszolgálat túlterhelt, az Express One az e-mailt javasolja.
 - **Nemzetközi ügyfélszolgálat:** +36 1 8 777 410, intcs@expressone.hu; reklamáció: intcsreklamacio@expressone.hu.
@@ -82,11 +82,11 @@ A Csomagkövetés oldal a +36 1 8 777 444-es számot és egy Messenger-chatbotot
 
 ## Express One-csomagok követése a Peekkel
 
-A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Express One-csomagról van szó: a 13 jegyű számmal más szállítókat, például a Delhiveryt vagy az ukrán postát kérdezi meg, a 24 jegyűvel az Osztrák Postát, az InPostot és a Ciblexet. Illessze be így is: a Peek több mint 4500 szállítót követ. Ha egyik sem ismeri, ezt látja: „not found yet · Peek keeps checking”; ilyenkor a „Change” gombbal válassza ki az Express One-t. Ha a tracking.expressone.hu `plc_number=` részt tartalmazó linkjét illeszti be, a Peek abból tudja, hogy Express One-csomagról van szó.
+A [Peek](/) felülete angol nyelvű. A 13 jegyű számot a Peek magától nem az Express One-nál nézi meg, hanem más szállítóknál; a 24 jegyűt magyarországi keresésnél elsőként az Express One-nál, az Osztrák Posta, az InPost és a Ciblex előtt, máshonnan e három után. Illessze be így is: a Peek több mint 4500 szállítót követ. Ha egyik sem ismeri, ezt látja: „not found yet · Peek keeps checking”; ilyenkor a „Change” gombbal válassza ki az Express One-t. Ha a tracking.expressone.hu `plc_number=` részt tartalmazó linkjét illeszti be, a Peek abból tudja, hogy Express One-csomagról van szó.
 
-A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat magyar idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
+A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat a beolvasás helyének ideje szerint (Magyarországon magyar idő szerint) értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
 
-Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek akár 10 percenként ellenőrzi, `Out for delivery` állapotban akár 2 percenként (aznap, reggel 6-tól magyar idő szerint, amíg az Express One saját nyomkövetése válaszol; nyomkövető szolgáltatásokon keresztül 15 percenként); egyébként óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+Amíg a csomag nyitva van, vagy a kézbesítés napján be vannak kapcsolva az értesítések, a Peek akár 10 percenként ellenőrzi, `Out for delivery` állapotban akár 2 percenként (aznap, reggel 6-tól magyar idő szerint, amíg az Express One saját nyomkövetése válaszol); egyébként óránként. Nyomkövető szolgáltatásokon keresztül óránként ellenőriz, egy nap csend után 3 óránként, a kiszállítás napján pedig akár 15 percenként, amíg a csomag nyitva van vagy be vannak kapcsolva az értesítések. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések az Express One-csomagkövetésről
 

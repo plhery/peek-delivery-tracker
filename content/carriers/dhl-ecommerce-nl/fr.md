@@ -14,10 +14,10 @@ DHL rappelle que le numéro vient de l'expéditeur : c'est « le numéro de suiv
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
-| `JVGL1234567890` | JVGL suivi d'au moins 8 lettres et chiffres : le numéro habituel d'un colis DHL eCommerce. |
+| `JVGL4829173648` | JVGL suivi d'au moins 8 lettres et chiffres : le numéro habituel d'un colis DHL eCommerce. |
 | `3SABC12345678` | 3S, trois lettres, puis 8 à 10 chiffres : un autre code-barres de DHL eCommerce. |
 | `JJD00009012345678901234` | JJD000090 suivi de 14 à 16 chiffres : une étiquette JJD du réseau néerlandais de DHL. |
-| `MDP12345678` | MDP suivi de 8 caractères (chiffres de 1 à 9 et certaines lettres majuscules) : une forme que le catalogue de Peek attribue à DHL eCommerce Netherlands. |
+| `MDP48291736` | MDP suivi de 8 caractères (chiffres de 1 à 9 et certaines lettres majuscules) : une forme que le catalogue de Peek attribue à DHL eCommerce Netherlands. |
 | Code de l'avis de passage | Le code de livraison imprimé en bas à droite de l'avis. Saisis-le avec ton code postal dans le Track & Trace. |
 
 **Attention aux numéros qui se ressemblent.** Un code 3S suivi de quatre lettres est en général celui de PostNL. Les autres numéros JJD ont le plus souvent la forme de DHL en Allemagne, même si le suivi néerlandais de DHL peut les connaître. Un colis [DHL Express](carrier:dhl-express) porte un numéro Waybill sous son code-barres : c'est un autre réseau. Certains codes 3S à 12 caractères ont aussi la forme d'un numéro [Colis Privé](carrier:colis-prive). En cas de doute, regarde quel transporteur l'e-mail de la boutique cite.
@@ -69,7 +69,7 @@ Pour `Le colis ne peut pas être livré actuellement. La livraison sera retardé
 
 ## Contacter DHL Parcel Belgique
 
-Relevé sur les pages françaises de DHL eCommerce Belgique le 12 octobre 2026 :
+Relevé sur les pages françaises de DHL eCommerce Belgique :
 
 - **Chat en direct :** sur la [page Service Clientèle](https://www.dhlecommerce.be/fr/particuliers/service-clientele). Tracy, une assistante numérique, vérifie si un collègue est disponible.
 - **Téléphone :** les pages de DHL pour les particuliers n'en donnent pas.
@@ -83,9 +83,9 @@ Garde ton numéro de suivi sous la main. Pour une réclamation, passe par la bou
 
 [Peek](/) reconnaît tout de suite DHL eCommerce Netherlands pour un numéro JVGL, pour 3S suivi de trois lettres et de 8 à 10 chiffres, pour JJD000090 suivi de 14 à 16 chiffres, et pour les codes MDP de la forme du tableau plus haut. Les autres codes 3S avec deux ou trois lettres et 7 à 12 chiffres sont demandés à DHL eCommerce Netherlands, avec Colis Privé pour certaines longueurs. Certains ont aussi la forme d'un numéro PostNL, que Peek ne peut pas interroger. Un code-barres DHL avec quatre lettres après 3S passe pour un numéro PostNL ou ne correspond à rien : choisis alors DHL eCommerce Netherlands avec « Changer ». Les autres numéros JJD sont en général attribués à DHL, sauf si tu changes de transporteur. Tu peux aussi coller un lien my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be ou dhlparcel.be en `/home/tracktrace/` suivi du numéro.
 
-Peek interroge DHL sans ton code postal : DHL n'affiche alors ni le destinataire, ni l'adresse, ni la signature, ni le point de retrait. Tu vois le statut, l'historique, la livraison prévue (un créneau ou un moment, quand DHL en planifie une) et l'heure de livraison. L'historique n'indique pas le lieu des scans. Le colis est vérifié jusqu'à toutes les 10 minutes, puis jusqu'à toutes les 2 minutes quand il est en cours de livraison (le jour même, dès 6 h, heure locale, ou, quand DHL planifie un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi de DHL qui répond ; via des services de suivi, toutes les 15 minutes) ; les notifications te préviennent quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Peek interroge DHL sans ton code postal : DHL n'affiche alors ni le destinataire, ni l'adresse, ni la signature, ni le point de retrait. Tu vois le statut, l'historique, la livraison prévue (un créneau ou un moment, quand DHL en planifie une) et l'heure de livraison. L'historique n'indique pas le lieu des scans. Tant que tu as le colis ouvert, ou le jour de sa livraison avec les notifications activées, il est vérifié jusqu'à toutes les 10 minutes, puis jusqu'à toutes les 2 minutes quand il est en cours de livraison (le jour même, dès 6 h, heure néerlandaise, ou, quand DHL planifie un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi de DHL qui répond ; via des services de suivi, toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour où il est en cours de livraison, aux mêmes conditions) ; sinon, toutes les heures ; les notifications te préviennent quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
-Peek affiche les scans avec les libellés anglais de DHL, pas les français : `Delivered at DHL ServicePoint` plutôt que `Livré au DHL ServicePoint`, par exemple. Au-dessus, le titre est toujours celui de Peek, comme « En transit » ou « Prêt à être retiré ». Peek compte `Delivered at DHL ServicePoint` comme prêt à être retiré. Quand un colis belge passe chez bpost, Peek ne le suit pas chez bpost.
+Peek affiche les scans avec les libellés anglais de DHL, pas les français (sauf `Delivered` et `Returned to sender`, affichés « Livré » et « Retourné à l’expéditeur ») : `Delivered at DHL ServicePoint` plutôt que `Livré au DHL ServicePoint`, par exemple. Au-dessus, le titre est toujours celui de Peek, comme « En transit » ou « Prêt à être retiré ». Peek compte `Delivered at DHL ServicePoint` comme prêt à être retiré. Quand un colis belge passe chez bpost, Peek ne le suit pas chez bpost.
 
 ## Questions sur le suivi DHL eCommerce Netherlands
 

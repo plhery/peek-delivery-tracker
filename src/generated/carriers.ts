@@ -2468,6 +2468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "ukrposhta-sendungsverfolgung",
+      "title": "Ukrposhta Sendungsverfolgung: Nummern, Status & Abholung",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "elta-hellenic-post-sendungsverfolgung",
@@ -3590,6 +3598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "suivi-ukrposhta",
+      "title": "Suivi Ukrposhta\u00a0: numéros, statuts et retrait en bureau",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "suivi-elta-hellenic-post",
@@ -4688,6 +4704,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "tracciamento-ukrposhta",
+      "title": "Tracciamento Ukrposhta: numeri, stati e ritiro in ufficio",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "tracciamento-elta-hellenic-post",
@@ -5738,6 +5762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "seguimiento-ukrposhta",
+      "title": "Seguimiento Ukrposhta: números, estados y recogida",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "seguimiento-elta-hellenic-post",
@@ -6778,6 +6810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Pošta Srbije: correios da Sérvia, estados e ajuda",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "rastreio-ukrposhta",
+      "title": "Rastreio Ukrposhta: números, estados e levantamento",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
     },
     {
       "id": "elta",
@@ -7854,6 +7894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Pošta Srbije: Poczta Serbska, statusy i kontakt",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "sledzenie-ukrposhta",
+      "title": "Śledzenie Ukrposhta: numery, statusy i odbiór w placówce",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
     },
     {
       "id": "elta",

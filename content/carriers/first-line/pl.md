@@ -33,7 +33,7 @@ Tracker FIRST LINE jest po chińsku, ale same skany są po angielsku. Wpisy FIRS
 | `Shipment arrived` | Również pierwszy skan w Shenzhen, nie przylot do Twojego kraju. |
 | `Packaged` | Spakowana do wysyłki zagranicznej. |
 | `Leaving Scan` | Opuściła magazyn. |
-| `Export customs declaration completed` | Chińska odprawa eksportowa w Shenzhen przed lotem. Paczka nie jest zatrzymana na cle. |
+| `Export customs declaration completed` | Odprawa eksportowa Chin kontynentalnych w Shenzhen przed lotem. Paczka nie jest zatrzymana na cle. |
 | `Depart from facility to service provider` | W drodze z FIRST LINE do firmy przejmującej dalszy etap. |
 | `Hand over to airline` | Przekazana linii lotniczej na lotnisku w Hongkongu po odprawie eksportowej. |
 | `Next stop destination airport` | W locie na lotnisko docelowe. Jako miejsce nadal widnieje lotnisko w Hongkongu. |
@@ -66,9 +66,9 @@ FIRST LINE nie publikuje zasad prób doręczenia, awiz ani punktów odbioru — 
 
 **Brak wpisów po eksporcie.** Przed paczką lot i odprawa importowa, więc historia może stać przez kilka dni. Gdy czas wyraźnie przekracza powyższe widełki, skontaktuj się ze sprzedawcą. Więcej w [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 
-**Doręczona, ale jej nie ma.** Gdy lokalny przewoźnik pokazuje doręczenie, którego nie otrzymałeś, warunki FIRST LINE przewidują pomoc w wyjaśnieniu, ale bez odszkodowania. Zacznij od przewoźnika lokalnego i sprzedawcy — zobacz [doręczona, ale nieodebrana](guide:delivered-not-received).
+**Doręczona, ale jej nie ma.** Gdy lokalny przewoźnik pokazuje doręczenie, którego nie otrzymałeś, warunki FIRST LINE dla USA i Kanady przewidują pomoc w wyjaśnieniu, ale bez odszkodowania. Zacznij od przewoźnika lokalnego i sprzedawcy — zobacz [doręczona, ale nieodebrana](guide:delivered-not-received).
 
-**Zagubiona lub uszkodzona.** Reklamacje składa sprzedawca w ciągu 60 dni od nadania, a FIRST LINE nie wypłaca odszkodowań za uszkodzenia w transporcie ani opóźnienia. Poproś sprzedawcę lub platformę o zwrot pieniędzy albo nową przesyłkę. Przy uszkodzeniu FAQ grupy prosi odbiorcę o zgłoszenie go najpierw lokalnie i zachowanie numeru zgłoszenia oraz zdjęć opakowania. Zobacz [zagubiona paczka](guide:lost-parcel).
+**Zagubiona lub uszkodzona.** Reklamacje składa sprzedawca (na liniach do USA i Kanady w ciągu 60 dni od nadania), a FIRST LINE nie wypłaca odszkodowań za uszkodzenia w transporcie ani opóźnienia. Poproś sprzedawcę lub platformę o zwrot pieniędzy albo nową przesyłkę. Przy uszkodzeniu FAQ grupy prosi odbiorcę o zgłoszenie go najpierw lokalnie i zachowanie numeru zgłoszenia oraz zdjęć opakowania. Zobacz [zagubiona paczka](guide:lost-parcel).
 
 **Zwrócona.** Na liniach amerykańskich niedoręczalna paczka nie wraca do Chin: trafia do zagranicznego magazynu FIRST LINE i jeśli sprzedawca w ciągu 14 dni nie opłaci ponownego doręczenia, zostaje zniszczona. Gdy śledzenie pokazuje zwrot, natychmiast powiadom sprzedawcę. Więcej w [zwrot do nadawcy](guide:returned-to-sender).
 
@@ -84,7 +84,7 @@ Kanały te służą sprzedawcom będącym klientami FIRST LINE; nie ma publiczne
 
 Peek odczytuje tracker FIRST LINE i wyświetla status, historię (do 100 skanów), miejsce każdego skanu bez kodu pocztowego oraz czas odczytany według lokalnego zegara miejsca i przeliczony na strefę Twojego urządzenia; na peektracker.com oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej:” z jej nazwą. Opisy pozostają dokładnie takie, jak podaje FIRST LINE — łącznie z przekazywanymi skanami USPS, GOFO czy UniUni — poza dokładnym `Delivered`, które Peek wyświetla własnymi słowami. Ponieważ tracker nie podaje kraju docelowego, firmy doręczającej, numeru ostatniej mili ani dowodu doręczenia, Peek ich nie pokazuje. Jedyną prognozą jest przekazany skan USPS „Out for Delivery, Expected Delivery …”: dopóki jest najnowszy, Peek pokazuje podane okno czasowe na ten dzień. Peek nie przełącza się automatycznie na USPS, GOFO ani UniUni — jeśli sprzedawca poda Ci lokalny numer, dodaj go osobno (Peek śledzi ponad 4500 przewoźników).
 
-Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a w dniu wyjścia do doręczenia od 6:00 czasu lokalnego (lub od pół godziny przed początkiem okna czasowego, jeśli jest podane) co 2 minuty, dopóki odpowiada własny tracker FIRST LINE; przez usługi śledzenia co 15 minut. Poza tym oraz po dwóch dniach bez nowych zdarzeń (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza raz na godzinę. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się za Ciebie z FIRST LINE ani ze sprzedawcą.
+Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a w dniu wyjścia do doręczenia od 6:00 czasu lokalnego co 2 minuty, dopóki odpowiada własny tracker FIRST LINE (przez zewnętrzne serwisy śledzenia same: co godzinę, co 3 godziny po spokojnym dniu i do co 15 minut w dniu doręczenia przy otwartej paczce lub włączonych alertach). Poza tym oraz po dwóch dniach bez nowych zdarzeń (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza raz na godzinę. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się za Ciebie z FIRST LINE ani ze sprzedawcą.
 
 ## Pytania o śledzenie FIRST LINE
 

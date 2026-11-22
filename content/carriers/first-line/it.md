@@ -33,7 +33,7 @@ Il tracker di FIRST LINE è in cinese, ma le scansioni sono in inglese. Le dicit
 | `Shipment arrived` | Anche questa è la prima scansione a Shenzhen, non un arrivo nel tuo paese. |
 | `Packaged` | Imballato per il viaggio all'estero. |
 | `Leaving Scan` | Ha lasciato il magazzino. |
-| `Export customs declaration completed` | Dichiarazione doganale di esportazione cinese completata a Shenzhen prima del volo. Il pacco non è fermo in dogana. |
+| `Export customs declaration completed` | Dichiarazione doganale di esportazione dalla Cina continentale completata a Shenzhen prima del volo. Il pacco non è fermo in dogana. |
 | `Depart from facility to service provider` | In transito da FIRST LINE all'operatore successivo. |
 | `Hand over to airline` | Consegnato alla compagnia aerea all'aeroporto di Hong Kong dopo la dichiarazione di esportazione. |
 | `Next stop destination airport` | In volo verso l'aeroporto di destinazione. La località mostra ancora l'aeroporto di Hong Kong. |
@@ -66,9 +66,9 @@ FIRST LINE non pubblica regole su tentativi di consegna, avvisi o punti di ritir
 
 **Nessun aggiornamento dopo l'esportazione.** Seguono il volo e lo sdoganamento, e la cronologia può restare ferma per giorni. Se supera nettamente i tempi indicati, contatta il venditore. Vedi [perché il tracciamento si ferma](guide:tracking-not-updating).
 
-**Consegnato ma non c'è.** Se il corriere finale indica una consegna che non hai ricevuto, le condizioni di FIRST LINE prevedono assistenza nella verifica ma nessun indennizzo. Parti dal corriere locale e dal venditore: vedi [consegnato ma non ricevuto](guide:delivered-not-received).
+**Consegnato ma non c'è.** Se il corriere finale indica una consegna che non hai ricevuto, le condizioni di FIRST LINE per Stati Uniti e Canada prevedono assistenza nella verifica ma nessun indennizzo. Parti dal corriere locale e dal venditore: vedi [consegnato ma non ricevuto](guide:delivered-not-received).
 
-**Smarrito o danneggiato.** I reclami spettano al venditore entro 60 giorni dalla spedizione, e FIRST LINE non rimborsa danni in transito né ritardi. Chiedi rimborso o sostituzione al venditore o marketplace. In caso di danni, le FAQ del gruppo chiedono al destinatario di segnalarli prima localmente conservando riferimento della pratica e foto dell'imballo. Vedi [pacco smarrito](guide:lost-parcel).
+**Smarrito o danneggiato.** I reclami spettano al venditore (per Stati Uniti e Canada entro 60 giorni dalla spedizione), e FIRST LINE non rimborsa danni in transito né ritardi. Chiedi rimborso o sostituzione al venditore o marketplace. In caso di danni, le FAQ del gruppo chiedono al destinatario di segnalarli prima localmente conservando riferimento della pratica e foto dell'imballo. Vedi [pacco smarrito](guide:lost-parcel).
 
 **Restituito.** Sulle linee statunitensi un pacco non consegnabile non torna in Cina: finisce nel magazzino estero di FIRST LINE e, se il venditore non paga una nuova consegna entro 14 giorni, viene distrutto. Se compare un reso, contatta subito il venditore. Approfondisci in [restituito al mittente](guide:returned-to-sender).
 
@@ -84,7 +84,7 @@ Questi canali servono i venditori, clienti di FIRST LINE; non viene offerto supp
 
 Peek legge il tracker di FIRST LINE e mostra stato, cronologia (fino a 100 scansioni), località di ogni scansione senza CAP e orario letto sull'ora locale del luogo e mostrato nel fuso del tuo dispositivo; su peektracker.com e nelle app per iPhone e Android la cronologia termina con «Orari nel tuo fuso orario:» e il suo nome. Le righe restano nel testo di FIRST LINE, incluse le scansioni inoltrate di USPS, GOFO o UniUni, tranne un `Delivered` esatto che appare nelle parole di Peek. Il tracker non fornisce paese di destinazione, corriere finale, numero locale né prova di consegna, quindi Peek non li mostra. L'unica stima deriva da una scansione USPS inoltrata «Out for Delivery, Expected Delivery …»: finché resta l'ultima, Peek mostra la fascia oraria di quel giorno se indicata. Non passa automaticamente a USPS, GOFO o UniUni: se il venditore ti dà il codice locale, aggiungilo come spedizione separata (Peek traccia oltre 4.500 corrieri).
 
-Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 ora locale nel giorno di uscita in consegna (o da mezz'ora prima della fascia oraria se presente), finché risponde il tracker di FIRST LINE; tramite servizi di tracciamento ogni 15 minuti. Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi attivare le notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare FIRST LINE né il venditore al posto tuo.
+Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 ora locale nel giorno di uscita in consegna, finché risponde il tracker di FIRST LINE (tramite i soli servizi di tracciamento esterni: ogni ora, ogni 3 ore dopo una giornata senza novità e fino a ogni 15 minuti il giorno della consegna a pacco aperto o con notifiche attive). Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi attivare le notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare FIRST LINE né il venditore al posto tuo.
 
 ## Domande sul tracciamento FIRST LINE
 

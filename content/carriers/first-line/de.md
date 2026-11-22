@@ -33,7 +33,7 @@ FIRST LINEs Tracker ist auf Chinesisch, die Scans erscheinen jedoch auf Englisch
 | `Shipment arrived` | Ebenfalls der erste Scan in Shenzhen, keine Ankunft in deinem Land. |
 | `Packaged` | Für den Auslandstransport verpackt. |
 | `Leaving Scan` | Hat das Lager verlassen. |
-| `Export customs declaration completed` | Chinesische Ausfuhranmeldung in Shenzhen vor dem Flug. Das Paket hängt nicht im Zoll fest. |
+| `Export customs declaration completed` | Ausfuhranmeldung Festlandchinas in Shenzhen vor dem Flug. Das Paket hängt nicht im Zoll fest. |
 | `Depart from facility to service provider` | Unterwegs von FIRST LINE zum weiterführenden Dienstleister. |
 | `Hand over to airline` | Nach der Ausfuhranmeldung am Flughafen Hongkong an die Fluggesellschaft übergeben. |
 | `Next stop destination airport` | Auf dem Flug zum Zielflughafen. Als Ort steht weiter der Flughafen Hongkong. |
@@ -66,9 +66,9 @@ FIRST LINE veröffentlicht keine Regeln für Zustellversuche, Benachrichtigungsk
 
 **Keine Updates nach dem Export.** Flug und Einfuhrverzollung folgen, sodass der Verlauf tagelang ruhen kann. Überschreitet die Wartezeit die genannten Spannen deutlich, melde dich beim Verkäufer. Mehr unter [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
-**Als zugestellt markiert, aber nicht da.** Zeigt der Zustelldienst eine Zustellung an, die du nicht erhalten hast, hilft FIRST LINE laut Bedingungen bei der Klärung, zahlt aber keine Entschädigung. Beginne beim Zustelldienst und beim Verkäufer: siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Als zugestellt markiert, aber nicht da.** Zeigt der Zustelldienst eine Zustellung an, die du nicht erhalten hast, hilft FIRST LINE laut Bedingungen für die USA und Kanada bei der Klärung, zahlt aber keine Entschädigung. Beginne beim Zustelldienst und beim Verkäufer: siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Verloren oder beschädigt.** Reklamationen reichen Verkäufer innerhalb von 60 Tagen ab Versand ein; FIRST LINE erstattet weder Transportschäden noch Verspätungen. Fordere beim Verkäufer oder Marktplatz Erstattung oder Ersatz an. Bei Schäden bittet die Gruppen-FAQ den Empfänger, den Schaden zuerst lokal zu melden und Referenznummer samt Fotos der Verpackung aufzubewahren. Siehe [Paket verloren](guide:lost-parcel).
+**Verloren oder beschädigt.** Reklamationen reichen Verkäufer ein (für die USA und Kanada innerhalb von 60 Tagen ab Versand); FIRST LINE erstattet weder Transportschäden noch Verspätungen. Fordere beim Verkäufer oder Marktplatz Erstattung oder Ersatz an. Bei Schäden bittet die Gruppen-FAQ den Empfänger, den Schaden zuerst lokal zu melden und Referenznummer samt Fotos der Verpackung aufzubewahren. Siehe [Paket verloren](guide:lost-parcel).
 
 **Zurückgesendet.** Auf den US-Linien geht ein unzustellbares Paket nicht nach China zurück: Es landet in FIRST LINEs Auslandslager und wird vernichtet, wenn der Verkäufer nicht binnen 14 Tagen eine neue Zustellung bezahlt. Meldet das Tracking eine Rücksendung, kontaktiere sofort den Verkäufer. Mehr in [Zurück an Absender](guide:returned-to-sender).
 
@@ -84,7 +84,7 @@ Diese Kanäle richten sich an Verkäufer als Kunden von FIRST LINE; für Empfän
 
 Peek ruft FIRST LINEs Tracker ab und zeigt Status, Verlauf (bis zu 100 Scans), Scan-Ort ohne Postleitzahl sowie jede Scan-Zeit nach der Ortszeit des Standorts, umgerechnet in die Zeitzone deines Geräts; auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen. Die Einträge bleiben im Wortlaut von FIRST LINE – einschließlich weitergeleiteter USPS-, GOFO- oder UniUni-Scans –, außer einem exakten `Delivered`, das in Peeks eigenen Worten erscheint. Da der Tracker weder Zielland noch Zusteller, Letzte-Meile-Nummer oder Zustellnachweis liefert, zeigt Peek keine an. Einzige Schätzung ist ein weitergeleiteter USPS-Scan „Out for Delivery, Expected Delivery …“: Solange er der neueste ist, zeigt Peek das dort genannte Zeitfenster des Tages. Peek wechselt nicht automatisch zu USPS, GOFO oder UniUni: Bekommst du vom Verkäufer die lokale Nummer, füge sie als eigenes Paket hinzu (Peek verfolgt über 4500 Paketdienste).
 
-Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag der Zustellung ab 6:00 Uhr Ortszeit (oder ab einer halben Stunde vor einem genannten Tageszeitfenster) alle 2 Minuten, solange FIRST LINEs eigener Tracker antwortet; über Tracking-Dienste alle 15 Minuten. Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. Weder FIRST LINE noch den Verkäufer kann Peek für dich kontaktieren.
+Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag der Zustellung ab 6:00 Uhr Ortszeit alle 2 Minuten, solange FIRST LINEs eigener Tracker antwortet (über externe Trackingdienste allein stündlich, alle 3 Stunden nach einem ruhigen Tag und am Zustelltag bei geöffnetem Paket oder aktiven Mitteilungen bis zu alle 15 Minuten). Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. Weder FIRST LINE noch den Verkäufer kann Peek für dich kontaktieren.
 
 ## Fragen zur FIRST-LINE-Sendungsverfolgung
 

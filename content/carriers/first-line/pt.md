@@ -33,7 +33,7 @@ O rastreio da FIRST LINE está em chinês, mas os registos aparecem em inglês. 
 | `Shipment arrived` | Também o primeiro registo em Shenzhen, não uma chegada ao teu país. |
 | `Packaged` | Embalada para a viagem internacional. |
 | `Leaving Scan` | Saiu do armazém. |
-| `Export customs declaration completed` | Declaração de exportação chinesa concluída em Shenzhen antes do voo. Não está retida na alfândega. |
+| `Export customs declaration completed` | Declaração de exportação da China continental concluída em Shenzhen antes do voo. Não está retida na alfândega. |
 | `Depart from facility to service provider` | A caminho desde a FIRST LINE até ao operador seguinte. |
 | `Hand over to airline` | Entregue à companhia aérea no aeroporto de Hong Kong após a declaração de exportação. |
 | `Next stop destination airport` | Em voo para o aeroporto de destino. O local ainda mostra o aeroporto de Hong Kong. |
@@ -66,9 +66,9 @@ A FIRST LINE não publica regras para tentativas de entrega, avisos ou pontos de
 
 **Sem novidades após a exportação.** Seguem-se o voo e a alfândega, podendo o histórico ficar parado vários dias. Se ultrapassar claramente os prazos acima, fala com o vendedor. Mais em [porque o rastreio deixa de atualizar](guide:tracking-not-updating).
 
-**Entregue mas não chegou.** Quando a transportadora local mostra entrega sem a teres recebido, os termos da FIRST LINE dizem que ajuda a averiguar mas não indemniza. Começa pela transportadora local e pelo vendedor: vê [entregue mas não recebida](guide:delivered-not-received).
+**Entregue mas não chegou.** Quando a transportadora local mostra entrega sem a teres recebido, os termos da FIRST LINE para os EUA e o Canadá dizem que ajuda a averiguar mas não indemniza. Começa pela transportadora local e pelo vendedor: vê [entregue mas não recebida](guide:delivered-not-received).
 
-**Perdida ou danificada.** As reclamações cabem ao vendedor no prazo de 60 dias desde o envio, e a FIRST LINE não indemniza danos em trânsito nem atrasos. Pede reembolso ou novo envio ao vendedor ou marketplace. Em caso de dano, as FAQ do grupo pedem ao destinatário que o reporte primeiro localmente e guarde a referência do relatório e fotos da embalagem. Vê [encomenda perdida](guide:lost-parcel).
+**Perdida ou danificada.** As reclamações cabem ao vendedor (para os EUA e o Canadá, no prazo de 60 dias desde o envio), e a FIRST LINE não indemniza danos em trânsito nem atrasos. Pede reembolso ou novo envio ao vendedor ou marketplace. Em caso de dano, as FAQ do grupo pedem ao destinatário que o reporte primeiro localmente e guarde a referência do relatório e fotos da embalagem. Vê [encomenda perdida](guide:lost-parcel).
 
 **Devolvida.** Nas linhas dos EUA, uma encomenda não entregável não regressa à China: vai para o armazém da FIRST LINE no estrangeiro e, se o vendedor não pagar nova entrega em 14 dias, é destruída. Se aparecer devolução, avisa logo o vendedor. Mais em [devolvida ao remetente](guide:returned-to-sender).
 
@@ -84,7 +84,7 @@ O [Peek](/) identifica logo como FIRST LINE um número `1ST` com 11 algarismos, 
 
 O Peek consulta o rastreio da FIRST LINE e mostra o estado, o histórico (até 100 registos), o local de cada leitura sem código postal e cada hora lida no relógio local do sítio e apresentada no fuso do teu dispositivo; em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» e o respetivo nome. As linhas mantêm o texto da FIRST LINE, incluindo registos retransmitidos de USPS, GOFO ou UniUni, exceto um `Delivered` exato que surge nas palavras do Peek. Como o rastreio não fornece país de destino, transportadora final, número local nem prova de entrega, o Peek não os mostra. A única previsão vem de um registo USPS retransmitido «Out for Delivery, Expected Delivery …»: enquanto for o mais recente, o Peek mostra a janela horária desse dia quando indicada. Não muda sozinho para USPS, GOFO ou UniUni: se o vendedor te der o número local, adiciona-o como encomenda separada (o Peek segue mais de 4500 transportadoras).
 
-Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h00 hora local no dia em que sai para distribuição (ou meia hora antes da janela horária quando existir), enquanto o rastreio da FIRST LINE responder; através de serviços de seguimento, a cada 15 minutos. Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes receber alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a FIRST LINE nem o vendedor por ti.
+Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h00 hora local no dia em que sai para distribuição, enquanto o rastreio da FIRST LINE responder (através apenas de serviços de seguimento externos: de hora a hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega com a encomenda aberta ou alertas ligados). Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes receber alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a FIRST LINE nem o vendedor por ti.
 
 ## Perguntas sobre o rastreio FIRST LINE
 

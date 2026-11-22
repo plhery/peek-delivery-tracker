@@ -5546,6 +5546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "gls-ch",
+      "catalog": "gls-ch",
+      "slug": "seguimiento-gls-suiza",
+      "title": "Seguimiento GLS Suiza: estados, Swiss Post y contacto",
+      "name": "GLS Switzerland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "dpd-suiza-seguimiento",
@@ -6668,6 +6676,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0091cd"
     },
     {
+      "id": "gls-ch",
+      "catalog": "gls-ch",
+      "slug": "rastreio-gls-suica",
+      "title": "Rastreio GLS Suíça: estados, Swiss Post e contactos",
+      "name": "GLS Switzerland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "rastreio-dpd-suica",
@@ -7766,6 +7782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Hermes Niemcy: statusy po polsku i doręczenie",
       "name": "Hermes",
       "color": "#0091cd"
+    },
+    {
+      "id": "gls-ch",
+      "catalog": "gls-ch",
+      "slug": "sledzenie-gls-szwajcaria",
+      "title": "Śledzenie GLS Szwajcaria: statusy, Swiss Post i kontakt",
+      "name": "GLS Switzerland",
+      "color": "#ffdd00"
     },
     {
       "id": "dpd-ch",

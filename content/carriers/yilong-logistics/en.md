@@ -14,9 +14,9 @@ Yilong publishes no number format. The waybills its tracker answers are YIL, nin
 
 | Number | What it is |
 | --- | --- |
-| `YIL000000017WL` | YIL, nine digits, WL: a Yilong Logistics waybill. |
-| `YIL00000001WL` | Eight digits instead of nine: a digit has probably been dropped. |
-| `RR000000005CN` | Two letters, nine digits, CN: a [China Post](carrier:china-post) number, not one of Yilong's. |
+| `YIL482917365WL` | YIL, nine digits, WL: a Yilong Logistics waybill. |
+| `YIL48291736WL` | Eight digits instead of nine: a digit has probably been dropped. |
+| `RR482917367CN` | Two letters, nine digits, CN: a [China Post](carrier:china-post) number, not one of Yilong's. |
 
 Peek takes the number in lower case or with spaces too. If the seller hasn't sent you one, see [how to find your tracking number](guide:find-tracking-number).
 
@@ -53,13 +53,13 @@ Yilong's tracking record holds no delivery company and no second tracking number
 
 **Only the Chinese line.** The seller has created the order, but Yilong hasn't received the parcel. No warehouse scan after a few days? Check with the seller that the parcel was really sent.
 
-**Nothing found.** When Yilong's tracker doesn't know a number, its result holds only that number, under 参考号 (reference). Peek takes that answer as Yilong listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Yilong Logistics", with no request to check the number. So compare it with the seller's message yourself, character by character.
+**Nothing found.** When Yilong's tracker doesn't know a number, its result holds only that number, under 参考号 (reference). Peek shows "Waiting for Yilong Logistics" and, if Yilong still doesn't know the number two days later, asks you to check it, choose another carrier or delete the parcel. So compare it with the seller's message yourself, character by character.
 
 **Lost, damaged or returned.** Yilong's site has no claim form and no terms. The seller is Yilong's customer, so the refund or replacement is the seller's to arrange; if the seller goes quiet, open a case with the marketplace. [Lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender) cover the next steps.
 
 ## Yilong Logistics contact number and customer service
 
-Read on yxhlexpress.com on 28 October 2026, all in Chinese:
+On yxhlexpress.com, all in Chinese:
 
 - **Pages**: 联系我们 (contact), 客服中心 (customer service) and 公司介绍 (company profile) show their title and nothing more.
 - **WeChat**: a QR code headed 官网微信二维码 (the site's WeChat QR code), in the side panel on every page and in the footer.
@@ -71,11 +71,11 @@ There's no email address, no street address and nothing addressed to recipients:
 
 Paste a YIL…WL number into [Peek](/) and it goes straight to Yilong Logistics: no other carrier Peek knows issues that layout. Peek follows more than 4,500 carriers, but a seller's order reference has no shape to go by. Add it anyway, press "Change" and choose Yilong Logistics (searching 一龙物流 or YXHL finds it too), or pick "Change carrier" on a parcel already in your list. If Yilong's tracker knows the reference, Peek also shows the order's YIL number. Peek drops dashes, though, so look up a reference with dashes in Yilong's own box.
 
-Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the Chinese one included, the place on the two warehouse lines, and the destination country when the record holds it. The warehouse receipt counts as received by the carrier; the lines from the departure to the delivering company's warehouse count as in transit, `Shipping Label Created` as label created, `Out for Delivery` as out for delivery and `Delivery failed` as a delivery attempt. Yilong's Beijing times appear in your device's time zone. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery on the record stay out of Peek, and there's no expected delivery date, as Yilong gives none.
+Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the Chinese one included, the place on the two warehouse lines, and the destination country when the record holds it. The warehouse receipt counts as received by the carrier; the lines from the departure to the delivering company's warehouse, `Shipping Label Created` included (dated after the warehouse scan), count as in transit, `Out for Delivery` as out for delivery and `Delivery failed` as a delivery attempt. Yilong's Beijing times appear in your device's time zone. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery on the record stay out of Peek, and there's no expected delivery date, as Yilong gives none.
 
-A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Peek also holds back a line the record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line: a forecast, not a scan. Until the parcel is delivered or returned, Peek opens its tracking history with "Other sites may show more steps, but they’re only predictions." and lists the lines written ahead under "Show them", greyed, each with "Predicted for" and its day. Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes. When the seller gives you the delivering company's number, add it as a separate parcel.
+A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Peek also holds back a line the record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line: a forecast, not a scan. Until the parcel is delivered or returned, Peek says above its history "Yilong Logistics’s site lists the whole route in advance, delivery included. Those steps aren’t real scans." and lists those lines greyed with their day; once a delivery written ahead has come and no scan says the parcel arrived, it adds under the status "Yilong Logistics’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller." Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes. When the seller gives you the delivering company's number, add it as a separate parcel.
 
-While the parcel moves, Peek checks Yilong up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day it goes out for delivery, while Yilong's own tracker answers (through tracking services, every 15 minutes); after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Yilong's own lines, import customs included, are steps on the way, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings start with the delivering company's `Out for Delivery`. Peek can't chase Yilong or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks Yilong up to every 10 minutes, and up to every 2 minutes from 6 a.m. Beijing time on the day it goes out for delivery, while Yilong's own tracker answers; otherwise, and after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Yilong's own lines, import customs included, are steps on the way, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings start with the delivering company's `Out for Delivery`. Peek can't chase Yilong or the seller for you.
 
 ## Questions about Yilong Logistics tracking
 

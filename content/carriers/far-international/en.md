@@ -14,8 +14,8 @@ FAR publishes no number format. The shape Peek knows as FAR's, with invented dig
 
 | Number | What it is |
 | --- | --- |
-| `FARAA0000000001YQ` | FAR, two letters, 10 digits, then YQ: a FAR International number. |
-| `FARAA000000001YQ` | Only 9 digits: not FAR's shape. Peek doesn't name FAR International for it. Check for a missing digit. |
+| `FARAA4829173654YQ` | FAR, two letters, 10 digits, then YQ: a FAR International number. |
+| `FARAA482917365YQ` | Only 9 digits: not FAR's shape. Peek doesn't name FAR International for it. Check for a missing digit. |
 
 Small letters, spaces and dashes don't matter in Peek. FAR's tracker wants the full number, and takes up to 50 at once, one per line.
 
@@ -78,7 +78,7 @@ FAR works for the shops and marketplaces that book it, and its FAQ sends them to
 
 ## FAR International customer service and contact
 
-As read on 1 November 2026 on [FAR's English site](https://www.far800.com/en):
+On [FAR's English site](https://www.far800.com/en):
 
 - **Global hotline**: 400-128-5656, a Chinese service number. FAR's service page says its clients can reach it any time through a 24/7 customer service hotline. It doesn't say whether the number works from abroad or which languages are spoken.
 - **Email**: csc@far800.com.
@@ -90,11 +90,11 @@ About your order, ask the seller first: it booked FAR, not you.
 
 [Peek](/) names FAR International at once from a FAR…YQ number ("Detected carrier"). Pasting a far800.com result link with `key=` and a FAR number works too. For any other number, such as the last-mile one, paste it all the same: Peek follows more than 4,500 carriers and names the carrier when the number's shape is its own. When the shape fits several carriers, Peek shows "Checking tracking services…" while it asks around; when it fits none, Peek looks the number up once you add it. If Peek doesn't name the carrier, tap "Change" and pick it under "All carriers", or use "Change carrier" on a parcel you've already added. FAR International answers only for FAR…YQ numbers.
 
-Peek reads FAR's own tracking: the status, each line with its place and time, the delivery time and the last-mile number. Where FAR gives a line's time zone, Peek reads the time in that zone and shows it in your device's time zone. It leaves out who signed for a delivered parcel. FAR gives no expected delivery date or weight.
+Peek reads FAR's own tracking: the status, each line with its place and time, the delivery time and the last-mile number. Where FAR gives a line's time zone, Peek reads the time in that zone and shows it in your device's time zone. When FAR's delivery line names who signed, Peek shows that name. FAR gives no expected delivery date or weight.
 
 When FAR gives a last-mile number, Peek asks the carrier it belongs to: the post of the country you're looking it up from for a postal number (two letters, nine digits, two letters), such as [Correos](carrier:correos-spain) in Spain, or the one carrier the number's shape points to. Once that carrier shows a scan at least as recent as FAR's newest, Peek follows the parcel there and keeps FAR's history, and the parcel shows who delivers it ("Delivery with Correos", for example). Without such a carrier, Peek stays on FAR's tracking.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while FAR's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact FAR or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while FAR's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact FAR or the seller for you.
 
 ## Questions about FAR International tracking
 

@@ -14,8 +14,8 @@ Geniki calls it the shipment number of the courier consignment note (ΣΥ.ΔΕ.�
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `0000000000` | A Geniki Taxydromiki voucher: 10 digits, no letters. |
-| `RR000000005GR` | Not Geniki: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
+| `4829173650` | A Geniki Taxydromiki voucher: 10 digits, no letters. |
+| `RR482917367GR` | Not Geniki: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
 
 Geniki doesn't say where recipients get it: look in the shop's shipping email or order page, or ask the shop. See [how to find your tracking number](guide:find-tracking-number).
 
@@ -52,7 +52,7 @@ A voucher Geniki doesn't find gives a notice in Greek only, even on the English 
 
 **Changing the address.** You can ask by phone or in writing, for example by email, to deliver to another address; extra charges may apply if it's in a different service area. Delivery without a signature is the sender's option: you then confirm receipt with a PIN Geniki gives you or a digital message.
 
-**Stores and lockers.** With Door 2 Service Point (D2SP), the parcel goes to a Geniki store instead of your door; in Cyprus, to a Geniki office. That's chosen when the delivery is booked. In Greece, Geniki also delivers to [BOX NOW](carrier:box-now) lockers; of the 2,621 lockers on Geniki's locker finder, 42 are Geniki's own, 33 in Greece and 9 in Cyprus. A parcel sent to a locker stays there 48 hours after you're notified. Geniki's site also has a store finder. Geniki doesn't publish how long a store keeps a parcel.
+**Stores and lockers.** With Door 2 Service Point (D2SP), the parcel goes to a Geniki store instead of your door; in Cyprus, to a Geniki office. That's chosen when the delivery is booked. In Greece, Geniki also delivers to [BOX NOW](carrier:box-now) lockers; its locker finder covers Greece and Cyprus. A parcel sent to a locker stays there 48 hours after you're notified. Geniki's site also has a store finder. Geniki doesn't publish how long a store keeps a parcel.
 
 **Never collected.** A refused or undeliverable parcel goes back to the sender. Geniki keeps undeliverable items six months after the last failed attempt.
 
@@ -68,23 +68,23 @@ A voucher Geniki doesn't find gives a notice in Greek only, even on the English 
 
 ## Geniki Taxydromiki customer service and address
 
-As listed on taxydromiki.com on 13 October 2026:
+Geniki's channels on taxydromiki.com:
 
-- **Call Center (Greece):** +30 210 4851100, Monday to Friday 08:00 to 20:00, Saturday 09:00 to 14:00. Geniki has no office in the UK, Luxembourg or Malta, so use this number from there too.
+- **Call Center (Greece):** +30 210 4851100, Monday to Friday 08:00 to 20:00, Saturday 09:00 to 14:00, Greek time. Geniki has no office in the UK, Luxembourg or Malta, so use this number from there too.
 - **Email:** info@taxydromiki.gr, or the contact form ("Having an issue with your shipment?").
 - **Complaints:** the Complaint Submission form on taxydromiki.com.
-- **Head office:** 81 Makrigianni Str., Ag. I. Rentis, Attica, 18233; Monday to Friday 09:00 to 20:00, Saturday 09:00 to 14:00.
+- **Head office:** 81 Makrigianni Str., Ag. I. Rentis, Attica, 18233; Monday to Friday 09:00 to 20:00, Saturday 09:00 to 14:00, Greek time.
 - **Cyprus:** 72 Digeni Akrita Av., 1061 Nicosia, tel. +357 22002146 or 77770727. No hours given.
 
 > Geniki warns of fake emails, SMS and Viber messages asking for a small shipping, reshipping or storage fee, an address update through a link, or card details. It never asks for card payments through links in SMS, email or Viber, and its real emails come only from addresses ending @taxydromiki.gr.
 
 ## Tracking a Geniki Taxydromiki parcel with Peek
 
-[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express and the digits are typed without spaces or dashes, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change": searching Bulgaria, Cyprus or Romania finds it too, as does its Bulgarian name, Геники Тахидромики. Or paste a full tracking link such as `https://taxydromiki.com/track/0000000000` (or `/en/track/`, `/bg/track/`, `/ro/track/`), which names Geniki at once. Under "Fits this number", a reader in Greece, Bulgaria, Cyprus or Romania sees Geniki ahead of carriers that, in Peek's catalog, don't cover that country. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
+[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change": searching Bulgaria, Cyprus or Romania finds it too, as does its Bulgarian name, Геники Тахидромики. Or paste a full tracking link such as `https://taxydromiki.com/track/4829173650` (or `/en/track/`, `/bg/track/`, `/ro/track/`), which names Geniki at once. Under "Fits this number", a reader in Greece, Bulgaria, Cyprus or Romania sees Geniki ahead of carriers that, in Peek's catalog, don't cover that country. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
 
 Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. A scan the table doesn't list keeps Geniki's wording, without a stage of its own. A scan Geniki cancelled is hidden together with its cancellation.
 
-Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day it goes `Out for Delivery`, while Geniki's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier").
+Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. Greek time on the day it goes `Out for Delivery`, while Geniki's own tracker answers; otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier").
 
 ## Questions about Geniki Taxydromiki tracking
 
@@ -118,6 +118,6 @@ info@taxydromiki.gr. Treat any email from an address not ending @taxydromiki.gr 
 - [Geniki Taxydromiki: Attempted Fraud Using the Brand Name Geniki Taxydromiki](https://taxydromiki.com/en/announcements/prospatheia-eksapatisis-me-chrisi-tis-eponymias-geniki-tachydromiki/) – fake SMS, email and Viber messages, official email addresses
 - [Geniki Taxydromiki: Office Network](https://taxydromiki.com/en/diktyo-katastimaton/) – store finder
 - [Geniki Taxydromiki: Automated Lockers Network](https://taxydromiki.com/en/lockers/) – locker finder, BOX NOW and Geniki lockers
-- [Γενική Ταχυδρομική: Χάρτης Υποχρεώσεων Καταναλωτή](https://taxydromiki.com/hartis-ypohreoseon-katanaloti/) – Greek charter: household member («σύνοικο πρόσωπο»)
+- [Γενική Ταχυδρομική: Χάρτης Υποχρεώσεων Καταναλωτή](https://taxydromiki.com/chartis-ypochreoseon-katanaloti/) – Greek charter: household member («σύνοικο πρόσωπο»)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

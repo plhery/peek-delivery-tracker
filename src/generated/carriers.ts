@@ -3228,6 +3228,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00474f"
     },
     {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "correos-chile-sendungsverfolgung",
+      "title": "Correos de Chile Sendungsverfolgung: Nummern und Status",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -4622,6 +4630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00474f"
     },
     {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "suivi-correos-chile",
+      "title": "Suivi Correos de Chile\u00a0: numéros et statuts expliqués",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -5976,6 +5992,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00474f"
     },
     {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "tracciamento-correos-chile",
+      "title": "Tracciamento Correos de Chile: codici e stati spiegati",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "tracciamento-rl-carriers",
@@ -7314,6 +7338,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00474f"
     },
     {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "seguimiento-correos-chile",
+      "title": "Seguimiento Correos de Chile: números y estados",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "seguimiento-rl-carriers",
@@ -8618,6 +8650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Quantium Solutions: números, estados e apoio",
       "name": "Quantium Solutions",
       "color": "#00474f"
+    },
+    {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "seguimento-correos-chile",
+      "title": "Seguimento Correos de Chile: números e estados",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
     },
     {
       "id": "rl-carriers",
@@ -9990,6 +10030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Quantium Solutions: numery, statusy i pomoc",
       "name": "Quantium Solutions",
       "color": "#00474f"
+    },
+    {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "sledzenie-correos-chile",
+      "title": "Śledzenie Correos de Chile: numery i statusy",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
     },
     {
       "id": "rl-carriers",

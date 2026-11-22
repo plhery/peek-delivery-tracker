@@ -16,10 +16,10 @@ O código do Peek reconhece os números da Aras Kargo como códigos de 13 dígit
 | --- | --- |
 | `6048291736542` | 13 dígitos começados por 60: o formato que o Peek associa à Aras Kargo. Outras transportadoras, incluindo [Delhivery](carrier:delhivery), Econt, Ozon Logistics, Paquetexpress, Correos Chile, Yunda e Korea Post, também usam 13 dígitos. |
 | `6548291736542` | 13 dígitos começados por 65: o mesmo. |
-| `1482917365482` | 13 dígitos começados por outros algarismos: o Peek não os liga por defeito à Aras, mas o rastreio da Aras aceita 13 dígitos. Se a loja indicar Aras Kargo, seleciona Aras Kargo manualmente (ver abaixo). |
+| `1482917365482` | 13 dígitos começados por outros algarismos: o Peek não os liga por defeito à Aras, mas o Peek consulta o rastreio da Aras para qualquer número de 13 dígitos. Se a loja indicar Aras Kargo, seleciona Aras Kargo manualmente (ver abaixo). |
 | `604829173654` | Apenas 12 dígitos. Se escolheres Aras Kargo para este número, o Peek indica que «não emite números como este». Confirma se falta algum dígito. |
 
-Os espaços não interferem ao colar o número no Peek. Uma ligação para o rastreio da Aras com o código (kargotakip.araskargo.com.tr com `code=` e o número) também funciona.
+Os espaços não interferem ao colar o número no Peek. Uma ligação para o rastreio da Aras com o código (kargotakip.araskargo.com.tr/mainpage.aspx com `code=` e o número) também funciona.
 
 **Onde encontrar.** No email de envio da loja ou na página da encomenda. Se não o encontrares, consulta [como encontrar o número de seguimento](guide:find-tracking-number) e [formatos de números de seguimento](guide:tracking-number-formats).
 
@@ -81,7 +81,7 @@ A encomenda segue da delegação da Aras que a recebe (`ÇIKIŞ ŞUBESİNDE`), p
 
 **Dias sem atualizações.** Após quatro dias sem novos registos numa encomenda em movimento, o Peek mostra na tua lista o dia do último registo («Sem atualizações desde …») e no ecrã da encomenda «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Aras Kargo.», com a ligação «Pede ajuda a Aras Kargo» para a página de contactos apenas nesse aviso. Ao fim de semana é comum não haver novidades. Ver [porque o rastreio não atualiza](guide:tracking-not-updating).
 
-**Marcada como entregue mas não chegou.** Confirma com vizinhos e com quem vive contigo. O Peek apresenta o nome ocultado de quem recebeu a encomenda (`Teslim Alan`) tal como aparece no resumo da Aras; podes também consultar diretamente o rastreio da Aras. Depois contacta a loja e a Aras. Ver [entregue mas não recebida](guide:delivered-not-received).
+**Marcada como entregue mas não chegou.** Confirma com vizinhos e com quem vive contigo. O rastreio da Aras indica, ocultado, quem recebeu a encomenda (`Teslim Alan`): o Peek não mostra esse nome, por isso consulta o rastreio da Aras. Depois contacta a loja e a Aras. Ver [entregue mas não recebida](guide:delivered-not-received).
 
 **Perdida ou devolvida.** O Peek ainda não tem mapeada uma mensagem de devolução específica da Aras. Como foi a loja que contratou o transporte, pede primeiro à loja um reembolso ou novo envio. Ver [encomenda perdida](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
@@ -95,17 +95,17 @@ Numa compra online, fala primeiro com a loja que reservou o envio. No Peek, o lo
 
 O [Peek](/) não consegue ter a certeza de um número Aras Kargo só pelo formato, pois outras transportadoras também usam 13 dígitos. Cola-o na mesma: o Peek acompanha mais de 4500+ transportadoras.
 
-- **13 dígitos começados por 60 ou 65.** O Peek pergunta em simultâneo à Aras Kargo e às outras transportadoras compatíveis com esse padrão de 13 dígitos (como [Delhivery](carrier:delhivery), Econt, Ozon Logistics e Paquetexpress); se a pesquisa for feita a partir da Turquia, consulta primeiro a Aras Kargo. Enquanto verifica, vês «A verificar serviços de seguimento…». Se apenas a Aras Kargo confirmar a encomenda, o Peek diz «Aras Kargo tem esta encomenda.» e associa-a lá; se mais de uma a conhecer, o Peek pergunta-te qual escolher.
+- **13 dígitos começados por 60 ou 65.** O Peek pergunta em simultâneo à Aras Kargo e às outras transportadoras que pode consultar sobre esse número (Ukrposhta para `6048291736542`, FedEx Poland para `6548291736542`). Enquanto verifica, vês «A verificar serviços de seguimento…». Se apenas a Aras Kargo confirmar a encomenda, o Peek diz «Aras Kargo tem esta encomenda.» e associa-a lá; se mais de uma a conhecer, o Peek pergunta-te qual escolher.
 - **Outros 13 dígitos ou ainda sem resultado.** Muda de transportadora e escolhe Aras Kargo (escreve Aras) para o Peek consultar diretamente o rastreio da Aras. Numa encomenda já adicionada, podes alterar a transportadora na respetiva página.
 - **Ligação para o rastreio da Aras.** O Peek lê o código na ligação e identifica logo a Aras Kargo («Transportadora detetada»).
 
 Adicionada sem transportadora, a encomenda mostra «Ainda sem histórico de seguimento» enquanto o Peek continua a consultar transportadoras e serviços de seguimento. Se um serviço de seguimento apontar a Aras Kargo como única transportadora com registos datados, o Peek associa-a à Aras.
 
-**O que o Peek mostra.** O estado atual, cada movimento com hora e local (delegação ou centro de transferência e província), os dias sem entrega, redirecionamentos, o dia previsto de entrega, a hora e delegação de entrega, bem como os nomes ocultados do destinatário e de quem recebeu a encomenda (`Teslim Alan`) mostrados no resumo. Ficam de fora o nome completo escondido na página, o remetente, o código de entrega, a verificação de identidade, dados de pagamento e fatura, volume e número de volumes, barra de progresso, notas livres e separador de SMS. O Peek lê as horas da Aras na hora da Turquia e converte-as para o teu fuso horário (o histórico termina com «Horas no teu fuso horário:» seguido do nome). A ligação «Abrir o site de Aras Kargo» abre o número diretamente no rastreio da Aras.
+**O que o Peek mostra.** O estado atual, cada movimento com hora e local (delegação ou centro de transferência e província), os dias sem entrega, redirecionamentos, o dia previsto de entrega, a hora e delegação de entrega, bem como o nome ocultado do destinatário mostrado no resumo, mas não o de quem recebeu a encomenda (`Teslim Alan`). Ficam de fora o nome completo escondido na página, o remetente, o código de entrega, a verificação de identidade, dados de pagamento e fatura, volume e número de volumes, barra de progresso, notas livres e separador de SMS. O Peek lê as horas da Aras na hora da Turquia e converte-as para o teu fuso horário (o histórico termina com «Horas no teu fuso horário:» seguido do nome). A ligação «Abrir o site de Aras Kargo» abre o número diretamente no rastreio da Aras.
 
 Quando o rastreio da Aras não responde, o Peek consulta serviços de seguimento e mostra o histórico que estes devolvem, nas suas próprias palavras.
 
-Enquanto mantiveres a encomenda aberta no ecrã — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a Aras Kargo até de 10 em 10 minutos (sem ritmo de 2 minutos, pois a Aras não envia etapa de saída para entrega). Fora disso, e após dois dias sem novidades (12 horas enquanto estiver em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Só através de serviços de seguimento verifica de hora em hora, de 3 em 3 horas após um dia sem registos e até de 15 em 15 minutos no dia da entrega se tiveres a encomenda aberta no ecrã ou as notificações ligadas. Escolhe «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Aras Kargo nem a loja por ti.
+Enquanto mantiveres a encomenda aberta no ecrã — ou no dia da entrega com as notificações ligadas — o Peek consulta diretamente a Aras Kargo até de 10 em 10 minutos (sem ritmo de 2 minutos, pois a Aras não envia etapa de saída para entrega). Fora disso, e após dois dias sem novidades (12 horas enquanto estiver em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora. Nas notificações, escolhe «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Aras Kargo nem a loja por ti.
 
 ## Perguntas sobre o rastreio Aras Kargo
 

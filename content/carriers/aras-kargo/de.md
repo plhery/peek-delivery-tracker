@@ -16,10 +16,10 @@ Peeks Code kennt Sendungsnummern von Aras Kargo als 13 Ziffern. Nummern, die Pee
 | --- | --- |
 | `6048291736542` | 13 Ziffern mit 60 am Anfang: das Format, das Peek mit Aras Kargo verknüpft. Auch andere Paketdienste wie [Delhivery](carrier:delhivery), Econt, Ozon Logistics, Paquetexpress, Correos Chile, Yunda und Korea Post nutzen 13-stellige Nummern. |
 | `6548291736542` | 13 Ziffern mit 65 am Anfang: dasselbe. |
-| `1482917365482` | 13 Ziffern mit anderem Anfang: Peek ordnet sie Aras nicht automatisch zu, doch das Aras-Tracking nimmt 13 Ziffern an. Wenn der Shop Aras Kargo nennt, wähle Aras Kargo selbst aus (siehe unten). |
+| `1482917365482` | 13 Ziffern mit anderem Anfang: Peek ordnet sie Aras nicht automatisch zu, doch Peek fragt das Aras-Tracking für beliebige 13 Ziffern ab. Wenn der Shop Aras Kargo nennt, wähle Aras Kargo selbst aus (siehe unten). |
 | `604829173654` | Nur 12 Ziffern. Wählst du dafür Aras Kargo, meldet Peek, Aras Kargo „vergibt keine Nummern wie diese“. Prüfe, ob eine Ziffer fehlt. |
 
-Leerzeichen stören beim Einfügen in Peek nicht. Auch ein Link zum Aras-Tracking mit der Nummer (kargotakip.araskargo.com.tr mit `code=` und der Nummer) funktioniert.
+Leerzeichen stören beim Einfügen in Peek nicht. Auch ein Link zum Aras-Tracking mit der Nummer (kargotakip.araskargo.com.tr/mainpage.aspx mit `code=` und der Nummer) funktioniert.
 
 **Wo du sie findest.** In der Versandbestätigung des Shops oder auf deiner Bestellseite. Falls du sie nicht findest, schau unter [Sendungsnummer finden](guide:find-tracking-number) und [Sendungsnummer-Formate](guide:tracking-number-formats).
 
@@ -81,7 +81,7 @@ Ein Paket läuft von der annehmenden Aras-Filiale (`ÇIKIŞ ŞUBESİNDE`) über 
 
 **Tagelang keine Aktualisierung.** Nach vier Tagen ohne neuen Scan bei einem Paket auf dem Weg zeigt Peek in deiner Liste den Tag des letzten Scans („Keine Aktualisierung seit …“) und auf der Paketseite „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Aras Kargo nach.“, erst dann samt Link „Hol dir Hilfe bei Aras Kargo“ zur Kontaktseite. Übers Wochenende pausieren Scans häufig. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Als zugestellt markiert, aber nichts angekommen.** Frage Nachbarn und Mitbewohner. Peek zeigt den maskierten Namen des Übernehmers (`Teslim Alan`), wie die Übersicht von Aras ihn anzeigt; schau bei Bedarf auch direkt im Aras-Tracking nach. Wende dich danach an Shop und Aras. Mehr unter [Zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Als zugestellt markiert, aber nichts angekommen.** Frage Nachbarn und Mitbewohner. Das Aras-Tracking nennt den Übernehmer (`Teslim Alan`) maskiert: Peek zeigt diesen Namen nicht, schau also im Aras-Tracking nach. Wende dich danach an Shop und Aras. Mehr unter [Zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 **Verloren oder zurückgeschickt.** Ein eigener Retouren-Status von Aras ist in Peek noch nicht hinterlegt. Da der Shop den Versand beauftragt hat, wende dich zuerst an den Shop für Erstattung oder Ersatzlieferung. Siehe [Verlorenes Paket](guide:lost-parcel) und [An Absender zurückgesendet](guide:returned-to-sender).
 
@@ -95,17 +95,17 @@ Bei Onlinebestellungen frage zuerst den Shop als Auftraggeber. In Peek nennt der
 
 [Peek](/) kann eine Nummer von Aras Kargo nicht allein an der Form sicher erkennen, weil auch andere Dienste 13 Ziffern verwenden. Füge sie trotzdem ein: Peek unterstützt über 4500+ Paketdienste.
 
-- **13 Ziffern ab 60 oder 65.** Peek fragt Aras Kargo zusammen mit weiteren Paketdiensten an, die zu diesem 13-stelligen Muster passen (darunter [Delhivery](carrier:delhivery), Econt, Ozon Logistics und Paquetexpress); bei einer Abfrage aus der Türkei fragt Peek zuerst bei Aras Kargo nach. Währenddessen erscheint „Tracking-Dienste werden geprüft…“. Bestätigt nur Aras Kargo das Paket, meldet Peek „Aras Kargo hat dieses Paket.“ und legt es dort ab; kennen es mehrere Dienste, fragt Peek nach dem richtigen.
+- **13 Ziffern ab 60 oder 65.** Peek fragt Aras Kargo gleichzeitig mit den anderen Paketdiensten an, die es zu dieser Nummer fragen kann (Ukrposhta bei `6048291736542`, FedEx Poland bei `6548291736542`). Währenddessen erscheint „Tracking-Dienste werden geprüft…“. Bestätigt nur Aras Kargo das Paket, meldet Peek „Aras Kargo hat dieses Paket.“ und legt es dort ab; kennen es mehrere Dienste, fragt Peek nach dem richtigen.
 - **Andere 13 Ziffern oder noch nicht gefunden.** Wechsle den Paketdienst und wähle Aras Kargo (tippe Aras), damit Peek direkt das Aras-Tracking abfragt. Auch bei einem bereits gespeicherten Paket kannst du den Paketdienst wechseln.
 - **Link zum Aras-Tracking.** Peek liest die Nummer aus dem Link und erkennt Aras Kargo sofort („Erkannter Paketdienst“).
 
 Ohne Paketdienst hinzugefügt, zeigt eine Sendung „Noch kein Sendungsverlauf“, während Peek weiter Paketdienste und Tracking-Dienste prüft. Nennt ein Tracking-Dienst Aras Kargo als einzigen Paketdienst mit datierten Schritten, ordnet Peek sie Aras zu.
 
-**Was Peek anzeigt.** Den aktuellen Status, jede Bewegung mit Zeit und Ort (Filiale oder Umschlagzentrum samt Provinz), Tage ohne Zustellung, Weiterleitungen, den geplanten Zustelltag, Zustellzeit und Zustellfiliale sowie die maskierten Namen von Empfänger und Übernehmer (`Teslim Alan`) aus der Übersicht. Weggelassen werden die verborgene ungekürzte Schreibweise, der Absendername, der Zustellcode, die Ausweisprüfung, Zahlungs- und Rechnungsdaten, Volumen und Paketanzahl, die Fortschrittsleiste, freie Zustellnotizen und der SMS-Reiter. Peek liest Aras-Zeiten als türkische Zeit und rechnet sie in deine Zeitzone um (der Verlauf endet mit „Uhrzeiten in deiner Zeitzone:“ samt ihrem Namen). Über „Website von Aras Kargo öffnen“ öffnest du die Sendung direkt im Aras-Tracking.
+**Was Peek anzeigt.** Den aktuellen Status, jede Bewegung mit Zeit und Ort (Filiale oder Umschlagzentrum samt Provinz), Tage ohne Zustellung, Weiterleitungen, den geplanten Zustelltag, Zustellzeit und Zustellfiliale sowie den maskierten Namen des Empfängers aus der Übersicht, nicht aber den des Übernehmers (`Teslim Alan`). Weggelassen werden die verborgene ungekürzte Schreibweise, der Absendername, der Zustellcode, die Ausweisprüfung, Zahlungs- und Rechnungsdaten, Volumen und Paketanzahl, die Fortschrittsleiste, freie Zustellnotizen und der SMS-Reiter. Peek liest Aras-Zeiten als türkische Zeit und rechnet sie in deine Zeitzone um (der Verlauf endet mit „Uhrzeiten in deiner Zeitzone:“ samt ihrem Namen). Über „Website von Aras Kargo öffnen“ öffnest du die Sendung direkt im Aras-Tracking.
 
 Ist das Tracking von Aras nicht erreichbar, fragt Peek stattdessen Tracking-Dienste ab und zeigt deren Verlauf in deren Wortlaut.
 
-Solange das Paket auf dem Bildschirm geöffnet ist — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek Aras Kargo direkt bis zu alle 10 Minuten (ohne 2-Minuten-Takt, da Aras keinen Schritt für die Zustelltour sendet). Sonst sowie nach zwei Tagen ohne neuen Schritt (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Über Tracking-Dienste allein prüft es stündlich, nach einem Tag ohne Scan alle 3 Stunden und am Zustelltag bis zu alle 15 Minuten, sofern das Paket geöffnet ist oder Benachrichtigungen aktiv sind. Wähle „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann Aras Kargo oder den Shop nicht für dich kontaktieren.
+Solange das Paket auf dem Bildschirm geöffnet ist — oder am Zustelltag mit aktivierten Benachrichtigungen — prüft Peek Aras Kargo direkt bis zu alle 10 Minuten (ohne 2-Minuten-Takt, da Aras keinen Schritt für die Zustelltour sendet). Sonst sowie nach zwei Tagen ohne neuen Schritt (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Für Benachrichtigungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann Aras Kargo oder den Shop nicht für dich kontaktieren.
 
 ## Fragen zur Aras Kargo Sendungsverfolgung
 

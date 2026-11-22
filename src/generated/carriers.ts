@@ -2972,6 +2972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "far-international-sendungsverfolgung",
+      "title": "FAR International Sendungsverfolgung: Status und Kontakt",
+      "name": "FAR International",
+      "color": "#003b75"
+    },
+    {
       "id": "jifan",
       "catalog": "jifan",
       "slug": "jifan-sendungsverfolgung",
@@ -4070,6 +4078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "suivi-far-international",
+      "title": "Suivi FAR International\u00a0: numéros, statuts et contact",
+      "name": "FAR International",
+      "color": "#003b75"
+    },
+    {
       "id": "jifan",
       "catalog": "jifan",
       "slug": "suivi-jifan",
@@ -5094,6 +5110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento R+L Carriers: numero PRO, stati e reclami",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "tracciamento-far-international",
+      "title": "Tracciamento FAR International: numeri, stati e contatti",
+      "name": "FAR International",
+      "color": "#003b75"
     },
     {
       "id": "jifan",
@@ -6122,6 +6146,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "seguimiento-far-international",
+      "title": "Seguimiento FAR International: números, estados y contacto",
+      "name": "FAR International",
+      "color": "#003b75"
+    },
+    {
       "id": "jifan",
       "catalog": "jifan",
       "slug": "seguimiento-jifan",
@@ -7098,6 +7130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento R+L Carriers: número PRO, estados e reclamações",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "rastreio-far-international",
+      "title": "Rastreio FAR International: números, estados e contacto",
+      "name": "FAR International",
+      "color": "#003b75"
     },
     {
       "id": "jifan",
@@ -8150,6 +8190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie R+L Carriers: numer PRO, statusy i reklamacje",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "sledzenie-far-international",
+      "title": "Śledzenie FAR International: numery, statusy i kontakt",
+      "name": "FAR International",
+      "color": "#003b75"
     },
     {
       "id": "jifan",

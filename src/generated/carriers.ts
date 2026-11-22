@@ -2828,6 +2828,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#6aae66"
     },
     {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "correios-brasilien-sendungsverfolgung",
+      "title": "Correios Brasilien Sendungsverfolgung: Codes, Status, Zoll",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "yto-express-sendungsverfolgung",
@@ -4142,6 +4150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#6aae66"
     },
     {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "suivi-correios-bresil",
+      "title": "Suivi Correios Brésil\u00a0: codes, statuts et douane",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "suivi-yto-express",
@@ -5414,6 +5430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Straightship: codici STRTD, stati e consegna",
       "name": "Straightship",
       "color": "#6aae66"
+    },
+    {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "tracciamento-correios-brasile",
+      "title": "Tracciamento Correios Brasile: codici, stati e dogana",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
     },
     {
       "id": "yto",
@@ -7932,6 +7956,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#6aae66"
     },
     {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "seguimento-correios-brasil",
+      "title": "Seguimento Correios Brasil: códigos, estados e alfândega",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "seguimento-yto-express",
@@ -9222,6 +9254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Straightship: numery STRTD i doręczenia",
       "name": "Straightship",
       "color": "#6aae66"
+    },
+    {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "sledzenie-correios-brazylia",
+      "title": "Śledzenie Correios Brazylia: kody, statusy i cło",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
     },
     {
       "id": "yto",

@@ -147,7 +147,7 @@
   { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es", "pl", "it"] },
   { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "straightship", "catalog": "straightship", "name": "Straightship", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es"] },
+  { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en", "ru", "zh", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "spx-br", "catalog": "spx-br", "name": "SPX Express Brazil", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en"] },

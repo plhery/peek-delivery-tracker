@@ -34,7 +34,7 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | `Shipment arrived` | También el primer escaneo en Shenzhen; no es la llegada a tu país. |
 | `Packaged` | Empaquetado para el viaje al extranjero. |
 | `Leaving Scan` | Ha salido del almacén. |
-| `Export customs declaration completed` | La declaración de exportación, hecha en Shenzhen antes del vuelo; el paquete no está retenido en la aduana. |
+| `Export customs declaration completed` | La declaración de exportación de China continental, hecha en Shenzhen antes del vuelo; el paquete no está retenido en la aduana. |
 | `Depart from facility to service provider` | Va de FIRST LINE a la empresa que se encarga del siguiente tramo. |
 | `Hand over to airline` | Entregado a la aerolínea en el aeropuerto de Hong Kong, tras la declaración de exportación. |
 | `Next stop destination airport` | En vuelo hacia el aeropuerto de destino. El lugar sigue siendo el aeropuerto de Hong Kong. |
@@ -69,7 +69,7 @@ Las normas sobre intentos de entrega, avisos y puntos de recogida son las del tr
 
 **Sin novedades tras la exportación.** Faltan el vuelo y la aduana de importación, y el historial puede quedarse quieto varios días. Si se alarga mucho más allá de los plazos de arriba, pregúntale al vendedor. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
-**Entregado, pero no lo tienes.** Si la empresa que reparte lo marca como entregado y no te ha llegado, FIRST LINE dice que ayuda a investigarlo, pero no paga nada. Empieza por el transportista y el vendedor: mira [paquete entregado pero no recibido](guide:delivered-not-received).
+**Entregado, pero no lo tienes.** Si la empresa que reparte lo marca como entregado y no te ha llegado, FIRST LINE dice, para las líneas a Estados Unidos y Canadá, que ayuda a investigarlo, pero no paga nada. Empieza por el transportista y el vendedor: mira [paquete entregado pero no recibido](guide:delivered-not-received).
 
 **Perdido o dañado.** En las líneas a Estados Unidos y Canadá reclama el vendedor, en los 60 días siguientes al envío; FIRST LINE no paga por daños en el transporte, y el grupo no acepta reclamaciones por retrasos. Pídele al vendedor o al marketplace un reembolso o un nuevo envío. Si llega dañado, el grupo pide comunicarlo primero en tu país, dejarlo registrado y guardar la referencia y fotos del embalaje. Mira [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
@@ -77,7 +77,7 @@ Las normas sobre intentos de entrega, avisos y puntos de recogida son las del tr
 
 ## Teléfono y contacto de FIRST LINE
 
-El 30 de octubre de 2026, la web de FIRST LINE, en chino, no daba ningún teléfono ni horario para destinatarios: su página de contacto solo tenía números de móvil y una línea de personal y administración (人事及行政部). Su dirección, al pie de cada página: 3.ª planta, edificio 36, zona 5, parque industrial Cuigang, Huaide, Fuyong, distrito de Bao'an, Shenzhen (China). La web del grupo 1ST tiene un formulario de quejas y sugerencias (投诉建议) que pide teléfono, correo y mensaje.
+La web de FIRST LINE, en chino, no da ningún teléfono ni horario para destinatarios: su página de contacto solo tiene números de móvil y una línea de personal y administración (人事及行政部). Su dirección, al pie de cada página: 3.ª planta, edificio 36, zona 5, parque industrial Cuigang, Huaide, Fuyong, distrito de Bao'an, Shenzhen (China). La web del grupo 1ST tiene un formulario de quejas y sugerencias (投诉建议) que pide teléfono, correo y mensaje.
 
 Son canales para los vendedores que contratan a FIRST LINE: pregúntale al vendedor por el pedido y al transportista que reparte por la entrega.
 
@@ -89,7 +89,7 @@ Peek muestra el estado, el historial (hasta 100 escaneos) y el lugar de cada esc
 
 La web no da país de destino, empresa que reparte, número del último tramo ni prueba de entrega, así que Peek tampoco los muestra. Su única previsión de entrega es un escaneo de USPS reenviado, «Out for Delivery, Expected Delivery …»: mientras sea el más reciente, Peek muestra la franja horaria de ese día si el escaneo la indica; si solo da una hora límite, Peek no añade previsión, porque «En reparto» ya quiere decir hoy. Peek no pasa a USPS, a GOFO ni a UniUni: si el vendedor te da el número del último tramo, añádelo como otro paquete.
 
-Peek consulta la web hasta una vez cada 10 minutos y hasta una vez cada 2 minutos cuando el paquete va en reparto ese día, desde las 6:00, hora local (si el escaneo indica una franja horaria, desde media hora antes de que empiece), y mientras responda la propia web de FIRST LINE; a través de servicios de seguimiento, cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
+Mientras tengas el paquete abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek consulta la web hasta una vez cada 10 minutos y hasta una vez cada 2 minutos cuando el paquete va en reparto ese día, desde las 6:00, hora local, mientras responda la propia web de FIRST LINE (a través de servicios de seguimiento solos: cada hora, cada 3 horas tras un día sin novedades y hasta cada 15 minutos el día de la entrega con el paquete abierto o las notificaciones activadas); si no, una vez por hora. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de FIRST LINE
 

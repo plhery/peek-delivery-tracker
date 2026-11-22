@@ -14,13 +14,13 @@ Svaka pošiljka koja se prati ima svoj prijemni (identifikacioni) broj: dve slov
 
 | Broj (izmišljen) | Šta je to |
 | --- | --- |
-| `PE000000005RS` | Post-ekspres pošiljka: `PE`. |
-| `CP000000005RS` | Paket: prvo slovo je `C`. |
-| `RE000000005RS` | Preporučena pošiljka u unutrašnjem saobraćaju: `RE`. |
-| `RR000000005RS` | Preporučena pošiljka za inostranstvo: prvo slovo je `R`. |
-| `EE000000005RS` | EMS pošiljka: prvo slovo je `E`. |
-| `VV000000005RS` | Vrednosno pismo: prvo slovo je `V`. |
-| `RR000000005CN` | Pošiljka iz inostranstva zadržava broj strane pošte, sa oznakom zemlje na kraju (ovde Kine). |
+| `PE482917367RS` | Post-ekspres pošiljka: `PE`. |
+| `CP482917367RS` | Paket: prvo slovo je `C`. |
+| `RE482917367RS` | Preporučena pošiljka u unutrašnjem saobraćaju: `RE`. |
+| `RR482917367RS` | Preporučena pošiljka za inostranstvo: prvo slovo je `R`. |
+| `EE482917367RS` | EMS pošiljka: prvo slovo je `E`. |
+| `VV482917367RS` | Vrednosno pismo: prvo slovo je `V`. |
+| `RR482917367CN` | Pošiljka iz inostranstva zadržava broj strane pošte, sa oznakom zemlje na kraju (ovde Kine). |
 
 Ako ste primalac, broj tražite od prodavnice ili pošiljaoca. Isti oblik sa drugom oznakom na kraju pripada drugoj pošti: `…SI` je [Pošta Slovenije](carrier:posta-slovenije), a `…HR` [Hrvatska pošta](carrier:hrvatska-posta) (stranice na engleskom).
 
@@ -66,7 +66,7 @@ Pošiljku mogu da podignu primalac, ovlašćeno lice ili odrasli član porodičn
 
 ## Kada pošiljka kasni, nestane ili stigne oštećena
 
-Paket u Srbiji stiže za najviše 5 radnih dana, ne računajući dan prijema; ako je izveštaj ostavljen pre isteka tog roka, smatra se da je Pošta obavezu ispunila. Za pošiljke iz inostranstva nema garantovanih rokova, a za međunarodne pakete Pošta navodi od 7 do 15 dana. Pošiljka koju šaljete u inostranstvo prati se do izmenične pošte, odnosno dok ne napusti Srbiju. Ako se status danima ne menja, pogledajte vodič [kada se praćenje ne ažurira](guide:tracking-not-updating) (na engleskom).
+Paket u Srbiji stiže za najviše 5 radnih dana, ne računajući dan prijema; ako je izveštaj ostavljen pre isteka tog roka, smatra se da je Pošta obavezu ispunila. Za pošiljke iz inostranstva nema garantovanih rokova, a za međunarodne pakete Pošta navodi od 7 do 15 dana. Na posta.rs se pošiljka koju šaljete u inostranstvo prati do izmenične pošte, odnosno dok ne napusti Srbiju; servis aplikacije, koji Peek čita, prenosi i korake strane pošte. Ako se status danima ne menja, pogledajte vodič [kada se praćenje ne ažurira](guide:tracking-not-updating) (na engleskom).
 
 **Gubitak ili kašnjenje.** Reklamaciju pokreće pošiljalac, uz potvrdu o prijemu pošiljke, u bilo kojoj pošti (po pravilu u onoj u kojoj je pošiljku predao). Pre isteka 10 dana od predaje to nije moguće; za ekspres pošiljke može čim istekne rok za uručenje, a za međunarodne ekspres pošiljke posle 3 radna dana. Rok je 60 dana od predaje u unutrašnjem i 6 meseci u međunarodnom saobraćaju; ko ga propusti, gubi pravo na naknadu. Za neregistrovane pošiljke reklamacija nije moguća.
 
@@ -92,7 +92,7 @@ Sumnjivu poruku prijavite na it.bezbednost@posta.rs (za SMS pošaljite snimak ek
 
 ## Kontakt Pošte Srbije i Post-ekspresa
 
-Podaci sa sajta posta.rs, 26. oktobra 2026:
+Podaci sa sajta posta.rs:
 
 - **Kontakt centar Pošte Srbije:** 0700 100 300 iz fiksne mreže Telekoma Srbije, 011 3607 788 iz drugih fiksnih i svih mobilnih mreža (iz inostranstva +381 11 3607 788). Radnim danima od 8 do 20, vikendom od 8 do 15 časova.
 - **Kontakt centar Post-ekspresa:** 0800 100 808 i 011 3607 607, radnim danima od 8 do 18, subotom od 8 do 15 časova.
@@ -103,9 +103,9 @@ Podaci sa sajta posta.rs, 26. oktobra 2026:
 
 [Peek](/) po obliku prepoznaje broj Pošte Srbije kada počinje slovom `C`, `E`, `L` ili `R`, završava se sa `RS` i ima ispravnu kontrolnu cifru. Za druga slova, kao `PE` ili `V`, oblik ne otkriva prevoznika: svejedno nalepite broj, Peek prati više od 4.500 prevoznika. Tada pita Poštu Srbije, M-ONE i [Chronopost](carrier:chronopost) i, kad Pošta zna broj, piše „Pošta Srbije has this parcel.”, a ako još ne zna, „Not found at … yet. Peek will keep checking after you add it.” Prevoznika uvek možete izabrati i sami, preko „Change”.
 
-Ako kontrolna cifra nije ispravna, Peek ne pita nijednog prevoznika i javlja „This number’s check digit doesn’t add up.” Uporedite broj sa porukom o slanju: ni kod Pošte Srbije Peek ne prati broj sa pogrešnom kontrolnom cifrom, pa izbor preko „Change” tu ne pomaže. Link za praćenje sa posta.rs Peek uvek vezuje za Poštu Srbije. Pošiljku iz inostranstva Peek prati kod strane pošte, a kod Pošte Srbije je traži kad strana pošta kao odredište navede Srbiju ili kao partnera navede „Serbian Post” ili „Post Express”. Pošta Srbije prima i brojeve stranih pošta, pa je možete izabrati i sami.
+Ako kontrolna cifra nije ispravna, Peek ne pita nijednog prevoznika i javlja „This number’s check digit doesn’t add up.” Uporedite broj sa porukom o slanju: ni kod Pošte Srbije Peek ne prati broj sa pogrešnom kontrolnom cifrom, pa izbor preko „Change” tu ne pomaže. Link za praćenje sa posta.rs Peek uvek vezuje za Poštu Srbije. Pošiljku iz inostranstva Peek prati kod strane pošte, a kod Pošte Srbije je traži kad strana pošta kao odredište navede Srbiju. Pošta Srbije prima i brojeve stranih pošta, pa je možete izabrati i sami.
 
-Peek proverava pošiljku najviše jednom u 10 minuta, a posle 48 sati bez promene jednom na sat. Nijedan od ovih statusa ne znači da je pošiljka kod dostavljača, pa češćih provera pred dostavu nema. Obaveštenja dobijate za promene koje izaberete u „Which updates?”. Svaki korak Peek prikazuje na mapi sa imenom pošte, a u inostranstvu samo sa zemljom; vreme Peek čita kao beogradsko, odnosno kao vreme te zemlje, a prikazuje ga u vremenskoj zoni vašeg uređaja. Uz to stoje težina i vreme uručenja. Pošta Srbije ne daje očekivani dan dostave ni mesto preuzimanja, a ko je potpisao, poštanske brojeve i podatke o plaćanju Peek izostavlja.
+Dok imate pošiljku otvorenu na ekranu, ili na dan dostave sa uključenim obaveštenjima, Peek je proverava najviše jednom u 10 minuta; inače, kao i posle 48 sati bez promene, jednom na sat. Nijedan od ovih statusa ne znači da je pošiljka kod dostavljača, pa češćih provera pred dostavu nema. Obaveštenja dobijate za promene koje izaberete u „Which updates?”. Svaki korak Peek prikazuje na mapi sa imenom pošte, a u inostranstvu samo sa zemljom; vreme Peek čita kao beogradsko, odnosno kao vreme te zemlje, a prikazuje ga u vremenskoj zoni vašeg uređaja. Uz to stoje težina i vreme uručenja. Pošta Srbije ne daje očekivani dan dostave ni mesto preuzimanja, a ko je potpisao, poštanske brojeve i podatke o plaćanju Peek izostavlja.
 
 ## Pitanja o praćenju pošiljke Pošte Srbije
 

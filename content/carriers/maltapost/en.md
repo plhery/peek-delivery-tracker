@@ -12,13 +12,13 @@ MaltaPost is Malta's national post, delivering to every address in Malta and Goz
 
 MaltaPost's own registered items carry 13 characters: [two letters, nine digits](guide:tracking-number-formats) and `MT`. Its redelivery form names the local prefixes RH, RR, RT and RI.
 
-:::anatomy RR 000000005 MT
+:::anatomy RR 482917367 MT
 - RR | Item type: RR, RH, RT or RI for local registered items
-- 000000005 | Nine digits, the last one a check digit
+- 482917367 | Nine digits, the last one a check digit
 - MT | Posted in Malta
 :::
 
-An item from abroad keeps the number the foreign post gave it (`RR000000005GB`, `CP000000005CN` or another shape), and MaltaPost's tracking takes it. The page can then show both a "Foreign Barcode" and a "Local Barcode". SendOn parcels can be tracked by either barcode.
+An item from abroad keeps the number the foreign post gave it (`RR482917367GB`, `CP482917367CN` or another shape), and MaltaPost's tracking takes it. The page can then show both a "Foreign Barcode" and a "Local Barcode". SendOn parcels can be tracked by either barcode.
 
 MaltaPost's FAQ asks for the number in capital letters. If the page answers "Tracking number not recognised.", check the number with the sender. Some numbers, such as those starting with U, can't be tracked in Malta, or another local company is delivering the item. An item sent without a tracking number can't be tracked or located. Lost the number? See [where to find a tracking number](guide:find-tracking-number).
 
@@ -51,7 +51,7 @@ MaltaPost tries to deliver registered items to your door. If nobody is in, it po
 
 **Picking up:** bring the notice and an original ID (ID card, passport, driving licence, residence card or single work permit). Someone picking up for you needs the notice with your original ID and their own, or a power of attorney. Post offices generally open Monday to Saturday from 7.30am to 1pm; some differ.
 
-**Missed a delivery?** The [Missed a Delivery form](https://www.maltapost.com/delivery/missed-delivery) asks for the notice's colour, the tracking number and a photo of the notice. You can have the item redelivered to an address, another (Sub) Post Office or an Easipik locker, or kept at the office past the standard 12 working days. A second tracked delivery costs €5.50 for one item. After the redelivery window, MaltaPost can keep an item for up to 12 weeks. Items left uncollected go back to the sender.
+**Missed a delivery?** The [Missed a Delivery form](https://www.maltapost.com/delivery/missed-delivery) asks for the notice's colour, the tracking number and a photo of the notice. You can have the item redelivered to an address, another (Sub) Post Office or an Easipik locker, or kept at the office past the standard 12 working days. A second delivery by courier to an address costs €5.50 for one tracked item. After the redelivery window, MaltaPost can keep an item for up to 12 weeks. Items left uncollected go back to the sender.
 
 **Easipik lockers:** 24/7 parcel lockers across Malta and Gozo, for parcels up to 40x40x60 cm and 30 kg. MaltaPost sends the locker code by SMS and email; the parcel stays 72 hours after the code, then goes to the local post office counter. Easipik is free for MaltaPost deliveries; other couriers' parcels cost €3.50.
 
@@ -65,7 +65,7 @@ MaltaPost tries to deliver registered items to your door. If nobody is in, it po
 
 ## MaltaPost customer care number and contact
 
-MaltaPost's customer service page, read on 10 November 2026, lists:
+MaltaPost's customer service page lists:
 
 - **Phone:** (+356) 2122 4421, or freephone 800 722 44, free from a fixed line. Monday to Friday 8.30am to 2.30pm, Saturday 7.30am to 12.30pm, not on public holidays.
 - **Email:** info@maltapost.com, also for clearing customs yourself or through your own agent.
@@ -83,7 +83,7 @@ Peek follows a number from abroad at its own post first. When that post says the
 
 MaltaPost's times carry no time zone: Peek reads them on the clock of the scan's place, Maltese time for scans in Malta, and lists MaltaPost's own history. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
 
-While MaltaPost's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, when MaltaPost scans "Item scheduled for physical delivery" that day, checks can run every 2 minutes with the parcel on screen or alerts on. If the carrier gives a delivery window, the faster checks start half an hour before it opens at the earliest. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, or every 15 minutes on the day it goes out for delivery. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. For checks with the carrier itself, after two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. An item at "Label created", "Received by carrier" or "In transit" that goes four days without a new scan shows the day of its latest scan in your list ("No tracking update since Mon 12 Oct").
+While MaltaPost's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, when MaltaPost scans "Item scheduled for physical delivery" that day, checks can run every 2 minutes with the parcel on screen or alerts on. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, and up to every 15 minutes on the day it goes out for delivery while you have it open or notifications are on. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. For checks with the carrier itself, after two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. An item at "Label created", "Received by carrier" or "In transit" that goes four days without a new scan shows the day of its latest scan in your list ("No tracking update since Mon 12 Oct").
 
 ## Questions about MaltaPost tracking
 
@@ -101,12 +101,12 @@ No. Customer care answers on weekdays from 8.30am to 2.30pm and on Saturday morn
 
 ### What does an international MaltaPost tracking number look like?
 
-An item sent from Malta abroad has two letters, nine digits and `MT`, such as `RR000000005MT`. An item coming to Malta keeps its foreign number, which MaltaPost's tracking accepts.
+An item sent from Malta abroad has two letters, nine digits and `MT`, such as `RR482917367MT`. An item coming to Malta keeps its foreign number, which MaltaPost's tracking accepts.
 
 :::sources
 - [MaltaPost: Tracking](https://www.maltapost.com/tracking) – tracking field, scan columns, progress stages, foreign and local barcodes, not-recognised reasons, customs buttons
-- [MaltaPost: Frequently Asked Questions](https://www.maltapost.com/faqs?l=1) – capital letters, notices, post office hours, Easipik 72 hours and care line, customs payment, next-day processing, items from abroad, SendOn times from the UK, Germany, Italy and the USA (read 10 November 2026)
-- [MaltaPost: Missed a Delivery?](https://www.maltapost.com/delivery/missed-delivery) – redelivery options, 12 working days, 12 weeks, redelivery fee, local prefixes (read 10 November 2026)
+- [MaltaPost: Frequently Asked Questions](https://www.maltapost.com/faqs?l=1) – capital letters, notices, post office hours, Easipik 72 hours and care line, customs payment, next-day processing, items from abroad, SendOn times from the UK, Germany, Italy and the USA
+- [MaltaPost: Missed a Delivery?](https://www.maltapost.com/delivery/missed-delivery) – redelivery options, 12 working days, 12 weeks, redelivery fee, local prefixes
 - [MaltaPost: Packet Collection](https://www.maltapost.com/packets) – ID and notice to collect, collecting for someone else
 - [MaltaPost: courier it](https://www.maltapost.com/courier) – delivery attempt and notice
 - [MaltaPost: Easipik](https://www.maltapost.com/easipik) – lockers, code by SMS and email, sizes, third-party fee
@@ -115,7 +115,7 @@ An item sent from Malta abroad has two letters, nine digits and `MT`, such as `R
 - [MaltaPost: Customs](https://www.maltapost.com/customs) – declaration, payment, clearing via info@maltapost.com
 - [MaltaPost: How to lodge an Enquiry](https://www.maltapost.com/how-to-lodge-an-enquiry?l=1) – delay definition, six-month limit, 7 and 90 days
 - [MaltaPost: Committed to Deliver](https://www.maltapost.com/committed-to-deliver) – compensation to the sender, inspection on receipt
-- [MaltaPost: Customer Service](https://www.maltapost.com/customers-service?l=1) – phone, freephone, hours, email, head office (read 10 November 2026)
+- [MaltaPost: Customer Service](https://www.maltapost.com/customers-service?l=1) – phone, freephone, hours, email, head office
 - [MaltaPost: Scam Protection](https://www.maltapost.com/scamprotection?l=1) – fake SMS and email warning
 - [MaltaPost: SendOn](https://www.maltapost.com/sendon) – forwarding service, delivery to door or Easipik
 - [MaltaPost: About us](https://www.maltapost.com/about-us) – national postal operator, six days a week

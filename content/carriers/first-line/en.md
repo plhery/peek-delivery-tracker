@@ -33,7 +33,7 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Shipment arrived` | Also the first scan in Shenzhen, not an arrival in your country. |
 | `Packaged` | Packed for the trip abroad. |
 | `Leaving Scan` | It left the warehouse. |
-| `Export customs declaration completed` | China's export declaration, made in Shenzhen before the flight. The parcel isn't held at customs. |
+| `Export customs declaration completed` | Mainland China's export declaration, made in Shenzhen before the flight. The parcel isn't held at customs. |
 | `Depart from facility to service provider` | On its way from FIRST LINE to the company that takes it on. |
 | `Hand over to airline` | Handed to the airline at Hong Kong's airport, after the export declaration. |
 | `Next stop destination airport` | On the flight to the destination airport. The place still reads Hong Kong's airport. |
@@ -66,15 +66,15 @@ FIRST LINE publishes no rules for delivery attempts, notice cards or pickup poin
 
 **No news after the export lines.** The flight and import clearance come next, and the history can stay still for days. If it stays still well past the times above, ask the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
-**Delivered but not there.** When the delivering company shows a delivery that didn't reach you, FIRST LINE's terms say it helps look into it but pays nothing. Start with the carrier that delivered and the seller: see [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** When the delivering company shows a delivery that didn't reach you, FIRST LINE's terms for the US and Canada say it helps look into it but pays nothing. Start with the carrier that delivered and the seller: see [delivered but not received](guide:delivered-not-received).
 
-**Lost or damaged.** Claims are the seller's, within 60 days of dispatch, and FIRST LINE pays nothing for damage in transit or delays. Ask the seller or marketplace for a refund or a new parcel. For damage, the group's FAQ asks the recipient to report it locally first and keep that report's reference and photos of the packaging. See [lost parcels](guide:lost-parcel).
+**Lost or damaged.** Claims are the seller's (within 60 days of dispatch on the US and Canada lines), and FIRST LINE pays nothing for damage in transit or delays. Ask the seller or marketplace for a refund or a new parcel. For damage, the group's FAQ asks the recipient to report it locally first and keep that report's reference and photos of the packaging. See [lost parcels](guide:lost-parcel).
 
 **Returned.** On the US lines, a parcel that can't be delivered isn't sent back to China: it goes to FIRST LINE's warehouse abroad, and unless the seller pays for a new delivery within 14 days, it is destroyed. If the tracking shows a return, contact the seller straight away. More in [returned to sender](guide:returned-to-sender).
 
 ## FIRST LINE contact and customer service
 
-As read on 27 October 2026 on FIRST LINE's website, in Chinese, its contact page lists a customer service centre (客维中心) and its office: 3rd floor, Building 36, Zone 5, Cuigang Industrial Park, Huaide, Fuyong, Bao'an District, Shenzhen, China. No hours or languages are given. The 1ST group's site has a complaints form (投诉建议) asking for a phone number, an email address and the message.
+FIRST LINE's contact page, in Chinese, lists a customer service centre (客维中心) and its office: 3rd floor, Building 36, Zone 5, Cuigang Industrial Park, Huaide, Fuyong, Bao'an District, Shenzhen, China. No hours or languages are given. The 1ST group's site has a complaints form (投诉建议) asking for a phone number, an email address and the message.
 
 These channels serve the sellers, FIRST LINE's customers; it publishes no help for recipients. Ask the seller about the order and the delivering carrier about the delivery.
 
@@ -84,7 +84,7 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS, GOFO or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. It doesn't switch to USPS, GOFO or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while FIRST LINE's own tracker answers; through tracking services, every 15 minutes. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
+While the parcel is open on screen, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day it goes out for delivery, while FIRST LINE's own tracker answers (through tracking services alone: hourly, every 3 hours after a quiet day, and up to every 15 minutes on the delivery day while the parcel is open or notifications are on); otherwise hourly. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
 
 ## Questions about FIRST LINE tracking
 

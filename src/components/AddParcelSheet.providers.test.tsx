@@ -389,11 +389,12 @@ describe('a carrier that may have the number', () => {
     const postcode = await screen.findByRole('textbox', { name: /^Delivery postcode/ });
     expect(postcode).not.toBeRequired();
     expect(screen.getByText('Mondial Relay may have this parcel. Add the delivery postcode to track it.')).toBeInTheDocument();
-    // From the device's country, Switzerland here, as for a carrier picked by hand.
-    await user.type(postcode, '1201');
+    // With its country, as for a carrier picked by hand.
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Delivery country' }), 'BE');
+    await user.type(postcode, '1000');
     await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
     expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({
-      trackingNumber: number, carrier: 'mondial-relay', dpdPostcode: '1201', dpdPostcodeCountry: 'CH',
+      trackingNumber: number, carrier: 'mondial-relay', dpdPostcode: '1000', dpdPostcodeCountry: 'BE',
     }));
   });
 

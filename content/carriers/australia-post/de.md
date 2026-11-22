@@ -13,7 +13,7 @@ Australia Post ist der staatliche Postdienst **Australiens**. Ein Paket lässt s
 Australia Post bezeichnet den Code als Sendungsnummer oder Artikelnummer (*tracking number, or article ID*). Du findest ihn hier:
 
 - **Onlinekauf:** in der Bestellbestätigung oder Rechnung des Händlers; hat der Absender deine E-Mail-Adresse übermittelt, schickt Australia Post Nummer und Statusupdates selbst per E-Mail.
-- **Einlieferung in einer Postfiliale in Australien:** auf dem Kassenbeleg.
+- **Einlieferung in einer Postfiliale in Australien:** oft auf dem Kassenbeleg.
 - **Vorfrankierte Versandtasche (*prepaid satchel*):** auf dem Barcode und dem abziehbaren Aufkleber.
 
 Australia Post kann Sendungen weder über den Namen noch über die Adresse suchen – fehlt die Nummer, frage beim Absender nach. Sendungen, die mit der E-Mail-Adresse oder Mobilnummer deines MyPost-Kontos verknüpft sind, erscheinen dort und in der App automatisch. Auf `auspost.com.au/mypost/track` lassen sich bis zu 10 Nummern gleichzeitig abfragen.
@@ -22,9 +22,9 @@ Ein offizielles Formatblatt veröffentlicht Australia Post nicht; Peek kennt fol
 
 | Aufbau (Beispiel) | Bedeutung |
 | --- | --- |
-| `33X482910573000482910` | Artikel-ID mit 21 Zeichen: 3 Buchstaben oder Ziffern, 9 Ziffern, `000` und 6 Ziffern. |
-| `2933X482910573000482910` | Dieselbe Artikel-ID mit 2 vorangestellten Ziffern (23 Zeichen). |
-| `94004829105736000482910` | 23 Ziffern beginnend mit `9400` und `000` vor den letzten 6 Ziffern: ebenfalls Australia Post. |
+| `33X482910573000482913` | Artikel-ID mit 21 Zeichen: 3 Buchstaben oder Ziffern, 9 Ziffern, `000` und 6 Ziffern. |
+| `2933X482910573000482914` | Dieselbe Artikel-ID mit 2 vorangestellten Ziffern (23 Zeichen). |
+| `94004829105736000482916` | 23 Ziffern beginnend mit `9400` und `000` vor den letzten 6 Ziffern: ebenfalls Australia Post. |
 | `29ABC4829105` | Fracht-/Sendungsnummer (*consignment number*) mit 12 Zeichen. |
 | `ABC4829105` | Sendungsnummer mit 10 Zeichen. |
 | `ABCZ48291057` | StarTrack-Sendungsnummer (12 Zeichen): 3 Buchstaben oder Ziffern, `Z` und 8 Ziffern. |
@@ -46,18 +46,18 @@ Verwechslungsgefahr: 2 Buchstaben und 10 Ziffern (`AB4829105736`) gehören zu Ar
 | `We've got it` | Australia Post hat die Sendung übernommen. | „Beim Paketdienst eingegangen“ |
 | `It's on its way` | Eingeliefert, bearbeitet und unterwegs zwischen den Sortierzentren. | „Unterwegs“ |
 | `International arrival - awaiting clearance` | Auslandssendung nach Australien: wartet auf die australische Zollabfertigung. | „Beim Zoll“ |
-| `Possible delay` | Wetter, Störungen, Adressfehler oder Zoll verzögern den Transport; das Paket bleibt unterwegs. | „Unterwegs“ / „Problem gemeldet“ je nach Ereigniscode |
+| `Possible delay` | Wetter, Störungen, Adressfehler oder Zoll verzögern den Transport; das Paket bleibt unterwegs. | Je nach Ereigniscode des Scans, etwa „Unterwegs“ |
 | `It's coming today` / `Onboard for delivery` | Heute im Zustellfahrzeug unterwegs. | „In Zustellung“ |
 | `Attempted delivery` | Niemand war anzutreffen oder der Zugang war versperrt. | „Zustellversuch“ |
 | `Awaiting collection` | Abholbereit in der im Scan genannten Postfiliale oder *Parcel Locker*-Packstation. | „Abholbereit“ |
 | `Delivered` / `Delivered - Left in a safe place` | Zugestellt oder an einem sicheren Ablageort (*Safe Drop*) hinterlegt. | „Zugestellt“ |
-| `Returning to sender` | Nicht abgeholt, Empfänger unbekannt, Annahme verweigert oder beschädigt: Rücksendung an den Absender. | „Zurück an Absender“ |
+| `Returning to sender` | Nicht abgeholt, Empfänger unbekannt, Annahme verweigert oder beschädigt: Rücksendung an den Absender. | Je nach Ereigniscode des Scans |
 
 Steht `Pending` oder `Ready for processing` länger als eine Woche unverändert, frage beim Absender nach, ob das Paket tatsächlich verschickt wurde. Sendungen zwischen australischen Bundesstaaten laufen über große Verteilzentren wie Redbank (QLD), Chullora (NSW) oder Sunshine West (VIC) – ein Scan weit abseits von Start- und Zielort ist normal. Bei Paketen aus dem Ausland nach Australien zeigt `It's on its way` die Ankunft in Australien an und bleibt stehen, bis die Sendung auf das Zustellfahrzeug geladen wird.
 
 In Australien stellen Zusteller in der Regel Montag bis Freitag zwischen 7:00 und 17:00 Uhr zu; kommt ein Paket bis 17:00 Uhr nicht an, wird es meist am nächsten Werktag bevorzugt ausgeliefert. Bei `It's coming today` verschickt Australia Post in manchen Gebieten eine SMS mit einem 2-Stunden-Zeitfenster.
 
-`Contact sender` bedeutet, dass die Sendung wegen unvollständiger oder falscher Angaben oder nach 10 Werktagen ohne Abholung zurückging; `Returned` bestätigt die Rückgabe an den Absender, der allein einen Neuversand veranlassen kann.
+`Contact sender` bedeutet, dass die Sendung wegen unvollständiger oder falscher Angaben oder nach 10 Werktagen ohne Abholung zurückging; `Returned` bestätigt die Rückgabe an den Absender, den du für einen Neuversand kontaktierst.
 
 ## Verpasste Zustellung, Postfiliale und Parcel Lockers in Australien
 
@@ -77,7 +77,7 @@ Bleiben neue Scans einige Tage aus, bewegt sich das Paket laut Australia Post de
 
 Australia Post verweist Empfänger zuerst an den Absender, um Nummer und Adresse abzugleichen und eine Nachforschung anzustoßen. Hilft das nicht, nutze nach **10 Werktagen** über dem voraussichtlichen Lieferdatum das Onlineformular für verspätete oder vermisste Sendungen (kostenloses MyPost-Konto erforderlich). Sendungen aus Übersee können bis zu **15 Tage** beim australischen Zoll liegen – länger, falls Einfuhrabgaben anfallen –; bei längerer Verwahrung durch Zoll oder Quarantäne schreiben die Behörden den Empfänger an. Nachforschungen zu internationalen Verzögerungen müssen über die Aufgabepost des Absenderlands gestellt werden. Siehe auch [Paket beim Zoll](guide:customs).
 
-**Status zugestellt, aber Paket fehlt.** Prüfe geschützte Stellen am Grundstück, Haushaltsmitglieder und die Hausverwaltung, sieh dir in der App oder im Onlineformular das Zustellfoto an und reiche dann eine Meldung ein; zeigt das Foto die korrekte Ablage an deiner Adresse und die Sendung ist verschwunden, erstatte Anzeige bei der Polizei. Beschädigte Pakete in Australien bringst du samt Verpackung zur Schadensprüfung in eine dafür ausgestattete Postfiliale. Die meisten Inlandstarife beinhalten bis zu **100 AU$** Haftung bei Verlust oder Beschädigung (bei Inlandsverlust in der Regel an den Absender, bei Beschädigung an den Empfänger), geltend zu machen binnen **6 Monaten** ab Einlieferung; bei Onlinekäufen wende dich zuerst an den Händler. Mehr unter [zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Status zugestellt, aber Paket fehlt.** Prüfe geschützte Stellen am Grundstück, Haushaltsmitglieder und die Hausverwaltung, sieh dir in der App oder im Onlineformular das Zustellfoto an und reiche dann eine Meldung ein; zeigt das Foto die korrekte Ablage an deiner Adresse und die Sendung ist verschwunden, erstatte Anzeige bei der Polizei. Beschädigte Pakete in Australien bringst du samt Verpackung zur Schadensprüfung in eine dafür ausgestattete Postfiliale. Die meisten Tarife beinhalten bis zu **100 AU$** Haftung bei Verlust oder Beschädigung (bei Inlandsverlust in der Regel an den Absender, bei Beschädigung an den Empfänger), geltend zu machen binnen **6 Monaten** ab Einlieferung; bei Onlinekäufen wende dich zuerst an den Händler. Mehr unter [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 ## Australia Post Kontakt und Hilfe
 
@@ -97,7 +97,7 @@ StarTrack, die Kurier- und Frachtsparte von Australia Post, hat eine eigene Rufn
 
 Lehnt die Schnittstelle von Australia Post Peeks direkte Anfrage ab, öffnet ein Browser auf Peeks Server `auspost.com.au`; da externe Trackingdienste kaum Verlaufsdaten von Australia Post führen, bleibt der Verlauf knapp, falls auch der Browser abgewiesen wird.
 
-Peek zeigt den Status, jeden Scan mit Ort auf der Karte, die Produktbezeichnung (etwa `Parcel Post Large Satchel`), den Zustellzeitpunkt, das Zielland sowie den Namen der Postfiliale oder des *Parcel Locker*, in dem die Sendung abholbereit liegt; Empfängername, Straßenadresse und Zustellfotos lässt Peek weg (über einen geteilten Link steht bei einer Zustellung nur `Delivered`). Eigene Scans von Australia Post tragen ihren australischen Zeitzonenversatz, weitergeleitete Scans ausländischer Postdienste die Uhrzeit des jeweiligen Landes – alle umgerechnet in die Zeitzone deines Geräts („Uhrzeiten in deiner Zeitzone: …“ unter dem Verlauf auf `peektracker.com` sowie in der iPhone- und Android-App). Solange das Paket unterwegs ist, zeigt Peek das voraussichtliche Lieferdatum oder die Datumsspanne von Australia Post – und am Liefertag das Zeitfenster, solange es noch nicht verstrichen ist – und blendet die Schätzung aus, sobald das Paket zugestellt, zurückgesandt oder abholbereit ist. Liefert Australia Post kein Datum (etwa bei Einwurf in einen Straßenbriefkasten oder handschriftlicher Adresse), kann das eigene Webtool von Australia Post anhand der Postleitzahl dennoch eines schätzen. Umleitungen oder Fachwechsel kann Peek nicht vornehmen.
+Peek zeigt den Status, jeden Scan mit Ort auf der Karte, den Zustellzeitpunkt, das Zielland sowie den Namen der Postfiliale oder des *Parcel Locker*, in dem die Sendung abholbereit liegt; Empfängername, Straßenadresse und Zustellfotos lässt Peek weg (bei einer Zustellung steht nur `Delivered`). Eigene Scans von Australia Post tragen ihren australischen Zeitzonenversatz – umgerechnet in die Zeitzone deines Geräts („Uhrzeiten in deiner Zeitzone: …“ unter dem Verlauf auf `peektracker.com` sowie in der iPhone- und Android-App). Solange das Paket unterwegs ist, zeigt Peek das voraussichtliche Lieferdatum oder die Datumsspanne von Australia Post, bis sie verstrichen ist – und am Liefertag das Zeitfenster, solange es noch nicht verstrichen ist – und blendet die Schätzung nach einem gescheiterten Zustellversuch oder einem Problem aus, ebenso sobald das Paket zugestellt, zurückgesandt oder abholbereit ist. Liefert Australia Post kein Datum (etwa bei Einwurf in einen Straßenbriefkasten oder handschriftlicher Adresse), kann das eigene Webtool von Australia Post anhand der Postleitzahl dennoch eines schätzen. Umleitungen oder Fachwechsel kann Peek nicht vornehmen.
 
 Kennt Australia Post die Nummer noch nicht, zeigt Peek „Warten auf Australia Post“; bleibt sie zwei Tage lang überall unbekannt, erscheint „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und nach vier Tagen ohne neuen Scan auf dem Transportweg blendet Peek „Hol dir Hilfe bei Australia Post“ ein.
 

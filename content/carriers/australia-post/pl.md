@@ -13,7 +13,7 @@ Australia Post to narodowy operator pocztowy **Australii**. Przesyłkę sprawdzi
 Australia Post używa określenia numer śledzenia lub identyfikator przesyłki (*tracking number, or article ID*). Znajdziesz go w jednym z tych miejsc:
 
 - **Zakup przez internet:** w potwierdzeniu zamówienia lub na fakturze ze sklepu; jeśli nadawca przekazał Australia Post Twój adres e-mail, operator sam wysyła numer i powiadomienia o drodze paczki.
-- **Nadanie na poczcie w Australii:** na potwierdzeniu lub paragonie z okienka.
+- **Nadanie na poczcie w Australii:** często na potwierdzeniu lub paragonie z okienka.
 - **Opłacona koperta kurierska (*prepaid satchel*):** przy kodzie kreskowym oraz na odklejanym pasku.
 
 Australia Post nie wyszukuje paczek po nazwisku ani adresie — jeśli nie masz numeru, poproś o niego nadawcę. Przesyłki powiązane z adresem e-mail lub numerem telefonu konta MyPost pojawiają się na koncie i w aplikacji automatycznie. Na stronie `auspost.com.au/mypost/track` można wpisać jednocześnie do 10 numerów.
@@ -22,9 +22,9 @@ Australia Post nie publikuje oficjalnego wykazu formatów; oto układy rozpoznaw
 
 | Układ (przykład) | Co oznacza |
 | --- | --- |
-| `33X482910573000482910` | Identyfikator artykułu (21 znaków): 3 litery lub cyfry, 9 cyfr, `000` oraz 6 cyfr. |
-| `2933X482910573000482910` | Ten sam identyfikator poprzedzony 2 cyframi (23 znaki). |
-| `94004829105736000482910` | 23 cyfry zaczynające się od `9400` z `000` przed ostatnimi 6 cyframi: również Australia Post. |
+| `33X482910573000482913` | Identyfikator artykułu (21 znaków): 3 litery lub cyfry, 9 cyfr, `000` oraz 6 cyfr. |
+| `2933X482910573000482914` | Ten sam identyfikator poprzedzony 2 cyframi (23 znaki). |
+| `94004829105736000482916` | 23 cyfry zaczynające się od `9400` z `000` przed ostatnimi 6 cyframi: również Australia Post. |
 | `29ABC4829105` | Numer listu przewozowego (*consignment number*), 12 znaków. |
 | `ABC4829105` | Numer listu przewozowego, 10 znaków. |
 | `ABCZ48291057` | Numer przesyłki StarTrack (12 znaków): 3 litery lub cyfry, `Z` i 8 cyfr. |
@@ -46,18 +46,18 @@ Nad listą szczegółowych skanów Australia Post wyświetla skrócony etap po a
 | `We've got it` | Australia Post przyjęła paczkę. | „Przyjęta przez przewoźnika” |
 | `It's on its way` | Nadana, opracowana i w drodze między sortowniami. | „W transporcie” |
 | `International arrival - awaiting clearance` | Przesyłka z zagranicy: oczekuje na australijską odprawę celną. | „W urzędzie celnym” |
-| `Possible delay` | Pogoda, sytuacja nadzwyczajna, błąd nadawcy lub cło spowalniają przewóz, ale paczka jedzie dalej. | „W transporcie” / „Zgłoszono problem” zależnie od kodu |
+| `Possible delay` | Pogoda, sytuacja nadzwyczajna, błąd nadawcy lub cło spowalniają przewóz, ale paczka jedzie dalej. | Zależnie od kodu skanu, np. „W transporcie” |
 | `It's coming today` / `Onboard for delivery` | Załadowana do pojazdu kurierskiego na dzisiejsze doręczenie. | „W doręczeniu” |
 | `Attempted delivery` | Nikogo nie zastano lub doręczyciel nie miał dostępu pod adres. | „Próba doręczenia” |
 | `Awaiting collection` | Czeka na odbiór w urzędzie pocztowym lub automacie *Parcel Locker* wskazanym w skanie. | „Do odbioru” |
 | `Delivered` / `Delivered - Left in a safe place` | Doręczona pod adres lub pozostawiona w bezpiecznym miejscu (*Safe Drop*). | „Dostarczona” |
-| `Returning to sender` | Nieodebrana w terminie, adresat nieznany, odmowa przyjęcia lub uszkodzenie: wraca do nadawcy. | „Zwrócona nadawcy” |
+| `Returning to sender` | Nieodebrana w terminie, adresat nieznany, odmowa przyjęcia lub uszkodzenie: wraca do nadawcy. | Zależnie od kodu skanu |
 
 Jeśli `Pending` albo `Ready for processing` utrzymuje się dłużej niż tydzień, zapytaj nadawcę, czy paczka faktycznie została wysłana. W Australii przesyłki międzystanowe przechodzą przez główne sortownie w Redbank (QLD), Chullora (NSW) lub Sunshine West (VIC), więc skan daleko od nadawcy i odbiorcy jest normalny. Dla przesyłki z zagranicy do Australii `It's on its way` oznacza dotarcie do Australii i widnieje aż do wydania paczki kurierowi.
 
 W Australii listonosze i kurierzy doręczają zazwyczaj od poniedziałku do piątku w godz. 7:00–17:00; paczka niedoręczona do 17:00 otrzymuje zwykle priorytet następnego dnia roboczego. Przy statusie `It's coming today` w części rejonów przychodzi SMS z 2-godzinnym oknem doręczenia.
 
-`Contact sender` oznacza zwrot z powodu błędnych lub niepełnych danych adresowych albo nieodebrania paczki przez 10 dni roboczych; `Returned` potwierdza zwrot do nadawcy, który jako jedyny może zlecić ponowną wysyłkę.
+`Contact sender` oznacza zwrot z powodu błędnych lub niepełnych danych adresowych albo nieodebrania paczki przez 10 dni roboczych; `Returned` potwierdza zwrot do nadawcy, z którym trzeba się skontaktować w sprawie ponownej wysyłki.
 
 ## Nieudane doręczenie, odbiór na poczcie i Parcel Lockers w Australii
 
@@ -97,7 +97,7 @@ StarTrack, oddział kurierski i frachtowy Australia Post, ma własną infolinię
 
 Gdy bramka Australia Post odrzuca bezpośrednie zapytanie Peek, przeglądarka na serwerze Peek otwiera `auspost.com.au`; ponieważ zewnętrzne serwisy śledzenia przechowują bardzo niewiele zdarzeń Australia Post, w razie zablokowania także przeglądarki historia może być skąpa.
 
-Peek prezentuje aktualny status, każdy skan z miejscowością na mapie, nazwę usługi (np. `Parcel Post Large Satchel`), godzinę doręczenia, kraj docelowy oraz nazwę urzędu pocztowego lub automatu *Parcel Locker*, w którym paczka czeka na odbiór, pomijając nazwisko odbiorcy, ulicę i zdjęcia doręczenia (pod udostępnionym linkiem doręczenie wyświetla wyłącznie `Delivered`). Własne skany Australia Post mają australijskie przesunięcie czasowe, a skany przekazane od zagranicznych operatorów pocztowych odczytywane są według zegara danego kraju i przeliczane na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …” pod historią na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida). Dopóki paczka jest w drodze, Peek wyświetla przewidywaną datę lub przedział dni z Australia Post — a w dniu dostawy okno godzinowe, dopóki nie minie — i ukrywa prognozę, gdy przesyłka zostanie doręczona, zwrócona albo trafi do odbioru. Jeśli Australia Post nie podaje terminu (np. dla przesyłki wrzuconej do skrzynki ulicznej lub zaadresowanej odręcznie), narzędzie na stronie Australia Post potrafi nadal oszacować go po kodzie pocztowym. Peek nie przekieruje paczki ani nie zmieni automatu.
+Peek prezentuje aktualny status, każdy skan z miejscowością na mapie, godzinę doręczenia, kraj docelowy oraz nazwę urzędu pocztowego lub automatu *Parcel Locker*, w którym paczka czeka na odbiór, pomijając nazwisko odbiorcy, ulicę i zdjęcia doręczenia (doręczenie wyświetla się wyłącznie jako `Delivered`). Własne skany Australia Post mają australijskie przesunięcie czasowe i są przeliczane na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …” pod historią na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida). Dopóki paczka jest w drodze, Peek wyświetla przewidywaną datę lub przedział dni z Australia Post do jego upływu — a w dniu dostawy okno godzinowe, dopóki nie minie — i ukrywa prognozę po nieudanej próbie doręczenia lub problemie, a także gdy przesyłka zostanie doręczona, zwrócona albo trafi do odbioru. Jeśli Australia Post nie podaje terminu (np. dla przesyłki wrzuconej do skrzynki ulicznej lub zaadresowanej odręcznie), narzędzie na stronie Australia Post potrafi nadal oszacować go po kodzie pocztowym. Peek nie przekieruje paczki ani nie zmieni automatu.
 
 Dopóki numer nie jest jeszcze znany, Peek wyświetla „Oczekiwanie na przewoźnika Australia Post”; jeśli po dwóch dniach nie rozpozna go ani Australia Post, ani inne źródło, pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a po czterech dniach bez nowego skanu w drodze udostępnia link „Poproś przewoźnika Australia Post o pomoc”.
 

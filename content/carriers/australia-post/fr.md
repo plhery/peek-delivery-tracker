@@ -13,7 +13,7 @@ Australia Post est l'opérateur postal national de l'**Australie**. Tu peux suiv
 Australia Post l'appelle le numéro de suivi ou identifiant d'article (*tracking number, or article ID*). Il figure selon le cas :
 
 - **Achat en ligne :** dans la confirmation de commande ou la facture du marchand ; si l'expéditeur a transmis ton adresse e-mail à Australia Post, celle-ci t'envoie directement le numéro et les étapes.
-- **Dépôt en bureau de poste en Australie :** sur le reçu d'affranchissement.
+- **Dépôt en bureau de poste en Australie :** souvent sur le reçu d'affranchissement.
 - **Pochette prépayée (*prepaid satchel*) :** sous le code-barres et sur la vignette détachable.
 
 Australia Post ne peut pas rechercher un envoi par nom ni par adresse : sans numéro, demande-le à l'expéditeur. Les colis rattachés à l'adresse e-mail ou au mobile d'un compte MyPost s'ajoutent automatiquement dans le compte et l'application. Sur `auspost.com.au/mypost/track`, tu peux saisir jusqu'à 10 numéros à la fois.
@@ -22,9 +22,9 @@ Australia Post ne publie pas de liste de formats, mais voici les structures que 
 
 | Format (exemple) | Ce que c'est |
 | --- | --- |
-| `33X482910573000482910` | Identifiant d'article de 21 caractères : 3 lettres ou chiffres, 9 chiffres, `000` et 6 chiffres. |
-| `2933X482910573000482910` | Même identifiant précédé de 2 chiffres (23 caractères). |
-| `94004829105736000482910` | 23 chiffres commençant par `9400` avec `000` avant les 6 derniers chiffres : encore Australia Post. |
+| `33X482910573000482913` | Identifiant d'article de 21 caractères : 3 lettres ou chiffres, 9 chiffres, `000` et 6 chiffres. |
+| `2933X482910573000482914` | Même identifiant précédé de 2 chiffres (23 caractères). |
+| `94004829105736000482916` | 23 chiffres commençant par `9400` avec `000` avant les 6 derniers chiffres : encore Australia Post. |
 | `29ABC4829105` | Numéro d'expédition (*consignment number*) à 12 caractères. |
 | `ABC4829105` | Numéro d'expédition à 10 caractères. |
 | `ABCZ48291057` | Numéro StarTrack à 12 caractères : 3 lettres ou chiffres, `Z` et 8 chiffres. |
@@ -46,18 +46,18 @@ Au-dessus des scans détaillés, Australia Post affiche un jalon récapitulatif 
 | `We've got it` | Australia Post a pris le colis en charge. | « Pris en charge » |
 | `It's on its way` | Déposé, trié et en acheminement entre centres. | « En transit » |
 | `International arrival - awaiting clearance` | Envoi venu de l'étranger : en attente du dédouanement australien. | « À la douane » |
-| `Possible delay` | Météo, incident, erreur d'adressage ou douane ralentissent l'envoi, qui reste en route. | « En transit » / « Problème signalé » selon le code |
+| `Possible delay` | Météo, incident, erreur d'adressage ou douane ralentissent l'envoi, qui reste en route. | Selon le code du scan, par exemple « En transit » |
 | `It's coming today` / `Onboard for delivery` | Chargé dans le véhicule pour une livraison aujourd'hui. | « En livraison » |
 | `Attempted delivery` | Personne n'était disponible ou l'accès à l'adresse était impossible. | « Tentative de livraison » |
 | `Awaiting collection` | En attente de retrait dans le bureau de poste ou le *Parcel Locker* nommé par le scan. | « Prêt à être retiré » |
 | `Delivered` / `Delivered - Left in a safe place` | Livré à l'adresse ou déposé dans un endroit sûr (*Safe Drop*). | « Livré » |
-| `Returning to sender` | Non retiré à temps, destinataire inconnu, refusé ou endommagé : retour vers l'expéditeur. | « Retourné à l’expéditeur » |
+| `Returning to sender` | Non retiré à temps, destinataire inconnu, refusé ou endommagé : retour vers l'expéditeur. | Selon le code du scan |
 
 Si `Pending` ou `Ready for processing` persiste plus d'une semaine, demande à l'expéditeur si le colis a bien été confié. En Australie, les colis inter-États transitent par de grands centres de tri comme Redbank (QLD), Chullora (NSW) ou Sunshine West (VIC) : un scan éloigné du départ comme de l'arrivée est normal. Pour un colis venu de l'étranger vers l'Australie, `It's on its way` signifie qu'il est arrivé en Australie et demeure affiché jusqu'au chargement pour la tournée finale.
 
 En Australie, les facteurs livrent habituellement entre 7 h et 17 h du lundi au vendredi ; un colis non remis à 17 h est en principe prioritaire le jour ouvré suivant. Avec `It's coming today`, certaines zones reçoivent un SMS indiquant un créneau de 2 heures.
 
-`Contact sender` signale un renvoi dû à une adresse erronée ou incomplète, ou à un avis de retrait resté sans suite pendant 10 jours ouvrés ; `Returned` confirme que l'envoi a été rendu à l'expéditeur, seul habilité à organiser un nouvel envoi.
+`Contact sender` signale un renvoi dû à une adresse erronée ou incomplète, ou à un avis de retrait resté sans suite pendant 10 jours ouvrés ; `Returned` confirme que l'envoi a été rendu à l'expéditeur, à contacter pour organiser un nouvel envoi.
 
 ## Livraison manquée, retrait en bureau de poste et Parcel Lockers en Australie
 
@@ -77,7 +77,7 @@ L'absence de nouveau scan pendant quelques jours ne veut pas dire que le colis e
 
 Australia Post oriente d'abord le destinataire vers l'expéditeur afin de vérifier le numéro et l'adresse et de lui laisser ouvrir une réclamation. À défaut, tu peux remplir le formulaire d'objet en retard ou manquant (compte gratuit MyPost requis) une fois passés **10 jours ouvrés** après la date attendue. En Australie, les colis venus de l'étranger peuvent passer jusqu'à **15 jours** à la douane australienne — davantage si des droits sont dus — et les autorités douanières ou de biosécurité écrivent directement au destinataire en cas de retenue prolongée ; une enquête sur un retard international s'ouvre auprès de l'opérateur postal d'origine par l'expéditeur. Voir aussi [colis retenu en douane](guide:customs).
 
-**Marqué livré mais introuvable.** Inspecte les abris autour du domicile, interroge les membres du foyer ou la conciergerie, vérifie la photo de livraison dans l'application ou via le formulaire en ligne, puis dépose une réclamation ; si la photo atteste une remise à ton adresse et que le colis a disparu, signale le vol à la police. En cas d'avarie en Australie, présente le colis et son emballage dans un bureau de poste habilité à constater les dommages. La plupart des services nationaux incluent jusqu'à **100 AU$** d'indemnisation pour perte ou avarie (versée en général à l'expéditeur en cas de perte nationale et au destinataire en cas d'avarie), dans un délai de **6 mois** à compter du dépôt ; pour un achat en ligne, contacte d'abord le vendeur. Voir [colis livré mais non reçu](guide:delivered-not-received).
+**Marqué livré mais introuvable.** Inspecte les abris autour du domicile, interroge les membres du foyer ou la conciergerie, vérifie la photo de livraison dans l'application ou via le formulaire en ligne, puis dépose une réclamation ; si la photo atteste une remise à ton adresse et que le colis a disparu, signale le vol à la police. En cas d'avarie en Australie, présente le colis et son emballage dans un bureau de poste habilité à constater les dommages. La plupart des services incluent jusqu'à **100 AU$** d'indemnisation pour perte ou avarie (versée en général à l'expéditeur en cas de perte nationale et au destinataire en cas d'avarie), dans un délai de **6 mois** à compter du dépôt ; pour un achat en ligne, contacte d'abord le vendeur. Voir [colis livré mais non reçu](guide:delivered-not-received).
 
 ## Contacter Australia Post et aide
 
@@ -97,11 +97,11 @@ StarTrack, la branche messagerie express et fret d'Australia Post, dispose de sa
 
 Si la passerelle d'Australia Post refuse la requête directe de Peek, un navigateur sur le serveur de Peek ouvre `auspost.com.au` pour lire le suivi ; les services de suivi tiers ne détenant qu'une infime partie des étapes d'Australia Post, l'historique peut rester limité si ce navigateur est lui aussi bloqué.
 
-Peek affiche le statut, chaque scan avec sa localité sur la carte, le nom de l'offre (`Parcel Post Large Satchel`, etc.), l'heure exacte de livraison, le pays de destination et le nom du bureau de poste ou du *Parcel Locker* où attend le colis, tout en écartant le nom du destinataire, l'adresse complète et les photos de livraison (sur un lien partagé, une livraison affiche uniquement `Delivered`). Les scans propres à Australia Post portent leur fuseau australien et ceux relayés depuis un opérateur postal étranger l'horloge du pays concerné, tous convertis dans le fuseau de ton appareil — sur `peektracker.com` et dans les applications iPhone et Android, le bas de l'historique précise « Heures dans ton fuseau horaire : … ». Tant que l'envoi est en cours, Peek affiche la date ou la fourchette de livraison annoncée par Australia Post — et, le jour même, le créneau horaire tant qu'il n'est pas dépassé —, puis masque cette estimation dès que le colis est livré, retourné ou prêt à être retiré. Lorsqu'Australia Post ne fournit aucune date (envoi déposé en boîte de rue ou adresse manuscrite), son propre outil web peut néanmoins en estimer une à partir du code postal. Peek ne peut ni rediriger un colis ni modifier une consigne.
+Peek affiche le statut, chaque scan avec sa localité sur la carte, l'heure exacte de livraison, le pays de destination et le nom du bureau de poste ou du *Parcel Locker* où attend le colis, tout en écartant le nom du destinataire, l'adresse complète et les photos de livraison (une livraison s'affiche simplement `Delivered`). Les scans propres à Australia Post portent leur fuseau australien, convertis dans le fuseau de ton appareil — sur `peektracker.com` et dans les applications iPhone et Android, le bas de l'historique précise « Heures dans ton fuseau horaire : … ». Tant que l'envoi est en cours, Peek affiche la date ou la fourchette de livraison annoncée par Australia Post jusqu'à ce qu'elle soit passée — et, le jour même, le créneau horaire tant qu'il n'est pas dépassé —, puis masque cette estimation après une tentative de livraison manquée ou un problème, et dès que le colis est livré, retourné ou prêt à être retiré. Lorsqu'Australia Post ne fournit aucune date (envoi déposé en boîte de rue ou adresse manuscrite), son propre outil web peut néanmoins en estimer une à partir du code postal. Peek ne peut ni rediriger un colis ni modifier une consigne.
 
 Tant que le numéro n'est pas encore connu, Peek affiche « En attente de Australia Post » ; après deux jours sans reconnaissance par Australia Post ni par une autre source, il affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. », et après quatre jours sans nouveau scan en cours d'acheminement, il propose « Demande de l’aide à Australia Post ».
 
-Tant que tu gardes le colis ouvert à l'écran, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes (toutes les 5 minutes lorsqu'il doit passer par le navigateur) le jour où Australia Post scanne le colis en livraison, à partir de 6 h heure locale ou une demi-heure avant l'ouverture du créneau annoncé, tant que le suivi d'Australia Post répond (via des services de suivi seuls : toutes les heures, toutes les 3 heures après une journée calme et jusqu'à toutes les 15 minutes le jour de la livraison si le colis est ouvert ou si les notifications sont activées ; lorsqu'un opérateur étranger assure la livraison finale, Peek suit la cadence de cet opérateur) — ; le reste du temps, ainsi qu'après deux jours sans nouvelle étape (ou 12 heures sur « Étiquette créée » ou « Pris en charge »), le contrôle est horaire. Tu peux choisir entre « Chaque scan », « Étapes importantes » et « Livraison seulement ». Un envoi expédié depuis l'étranger vers l'Australie avec un numéro postal international bascule vers Australia Post dès que celle-ci publie une progression.
+Tant que tu gardes le colis ouvert à l'écran, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes (toutes les 5 minutes lorsqu'il doit passer par le navigateur) le jour où Australia Post scanne le colis en livraison, à partir de 6 h heure locale ou une demi-heure avant l'ouverture du créneau annoncé, tant que le suivi d'Australia Post répond (via des services de suivi seuls : toutes les heures, toutes les 3 heures après une journée calme et jusqu'à toutes les 15 minutes le jour de la livraison si le colis est ouvert ou si les notifications sont activées ; lorsqu'un opérateur étranger assure la livraison finale, Peek suit la cadence de cet opérateur) — ; le reste du temps, ainsi qu'après deux jours sans nouvelle étape (ou 12 heures sur « Étiquette créée » ou « Pris en charge »), le contrôle est horaire. Pour les notifications, tu peux choisir entre « Chaque scan », « Étapes importantes » et « Livraison seulement ». Un envoi expédié depuis l'étranger vers l'Australie avec un numéro postal international bascule vers Australia Post dès que celle-ci publie une progression.
 
 ## Questions fréquentes sur le suivi Australia Post
 

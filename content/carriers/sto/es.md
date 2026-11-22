@@ -15,7 +15,7 @@ Los números de STO (`快递单号`) contienen únicamente dígitos. La consulta
 | Número (inventado) | Qué es |
 | --- | --- |
 | `774829173654281` | `77` y 13 dígitos más: una guía de STO Express. [BRT](carrier:brt) y Yunda también usan 15 dígitos, así que Peek consulta a STO. |
-| `482917365428` | 12 dígitos: un formato antiguo de STO, compartido con [FedEx](carrier:fedex), [SF Express](carrier:sf-express), [ZTO Express](carrier:zto) y muchos otros. |
+| `482917365420` | 12 dígitos: un formato antiguo de STO, compartido con [FedEx](carrier:fedex), [SF Express](carrier:sf-express), [ZTO Express](carrier:zto) y muchos otros. |
 | `4829173654281` | 13 dígitos: otro formato antiguo de STO, que Peek no vincula automáticamente a STO. |
 
 Los espacios no importan en Peek.
@@ -26,18 +26,18 @@ Los espacios no importan en Peek.
 
 ## Estados de seguimiento de STO Express explicados
 
-Cada escaneo del seguimiento de STO incluye un tipo en chino, una hora en hora de China (UTC+8) y la instalación de STO que lo registró. Peek muestra estos tipos en inglés:
+Cada escaneo del seguimiento de STO incluye un tipo en chino, una hora en hora de China (UTC+8) y la instalación de STO que lo registró. Peek muestra la mayoría de estos tipos en inglés:
 
 | Escaneo de STO | En Peek | Estado en Peek | Qué significa para ti |
 | --- | --- | --- | --- |
 | `收件` | `Picked up` | Admitido por el transportista | STO recogió el paquete al remitente. |
 | `发件` | `Departed`, con `for` y el siguiente centro cuando STO lo nombra | En tránsito | Salió de una instalación de STO rumbo a la siguiente. |
 | `到件` | `Arrived` | En tránsito | Llegó a un centro de clasificación o delegación. |
-| `派件` | `Out for delivery` | En reparto | Un mensajero lo lleva en ruta. |
+| `派件` | «En reparto» | En reparto | Un mensajero lo lleva en ruta. |
 | `驿站代收` | `At a parcel station for collection` | Listo para recoger | Una estación de paquetería (`驿站`) lo recibió por ti. Ve a recogerlo. |
 | `柜机代收` | `In a parcel locker for collection` | Listo para recoger | Está en una taquilla automática. Ve a recogerlo. |
-| `客户签收` | `Delivered` | Entregado | Alguien firmó la recepción. STO también registra esto cuando firma una estación o taquilla. |
-| `签收` | `Delivered` | Entregado | Firmado. |
+| `客户签收` | «Entregado» | Entregado | Alguien firmó la recepción. STO también registra esto cuando firma una estación o taquilla. |
+| `签收` | «Entregado» | Entregado | Firmado. |
 
 Otros tipos de escaneo mantienen en Peek el texto en chino de STO. Un tipo que indique devolución (`退回` o `退件`) aparece como `Return to the sender started` («Incidencia»). Los escaneos de entrega posteriores corresponden al viaje de vuelta: `Out for delivery back to the sender`, `In a parcel locker or station on its way back` y `Returned to the sender`.
 
@@ -52,15 +52,15 @@ STO indica que su red alcanza el 99,7 % de los municipios chinos. Su contrato de
 - en un punto de recogida (`代收点`) o taquilla (`自提柜`) en la zona de la dirección;
 - de otro modo solicitado por ti o por el remitente.
 
-Una vez entregado el paquete de alguna de estas formas con el embalaje exterior intacto, el contrato da por cumplido el servicio de STO. Por eso «Listo para recoger» en Peek es normal: el paquete espera en una estación o taquilla cercana. La dirección exacta de la estación aparece en el seguimiento propio de STO; mientras el paquete aguarda allí, Peek extrae el código de recogida (`取件码`) cuando figura en el último escaneo.
+Una vez entregado el paquete de alguna de estas formas con el embalaje exterior intacto, el contrato da por cumplido el servicio de STO. Por eso «Listo para recoger» en Peek es normal: el paquete espera en una estación o taquilla cercana. El código de recogida (`取件码`) y la dirección exacta de la estación aparecen en el seguimiento propio de STO, no en Peek.
 
 Para modificar los datos del destinatario, la atención online de STO tiene una opción específica (`修改收件人信息`): solicítalo ahí (contacto abajo) o pídeselo al vendedor.
 
 ## Paquete STO sin actualizar, perdido o devuelto
 
-**Nada todavía.** El seguimiento de STO no responde nada ante un número que aún no conoce ni ante uno que haya superado el límite de un año. Si sigue vacío, comprueba el número con el vendedor. Mientras tanto, un paquete asignado a STO Express muestra «Esperando a STO Express».
+**Nada todavía.** El seguimiento de STO no responde nada ante un número que aún no conoce ni ante uno que haya superado el límite de un año. Si sigue vacío, comprueba el número con el vendedor. Mientras tanto, un paquete asignado a STO Express muestra «Esperando a STO Express»; dos días después de la primera respuesta vacía de STO, Peek te pide comprobar el número, elegir otro transportista o eliminar el paquete.
 
-**Sin actualización.** Cuando un paquete aún en camino lleva 4 días sin nuevos escaneos, Peek muestra la fecha del último escaneo («Sin novedades desde el …») y «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a STO Express.», junto al enlace «Pide ayuda a STO Express» hacia la atención online de STO, donde la falta de actualizaciones (`快递单号没有记录更新`) es uno de los temas disponibles. Ver [por qué deja de actualizarse el seguimiento](guide:tracking-not-updating) y [seguir paquetes desde China](guide:tracking-from-china).
+**Sin actualización.** Cuando un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» lleva 4 días sin nuevos escaneos, Peek muestra la fecha del último escaneo («Sin novedades desde el …») y «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a STO Express.», junto al enlace «Pide ayuda a STO Express» hacia la atención online de STO, donde la falta de actualizaciones (`快递单号没有记录更新`) es uno de los temas disponibles. Ver [por qué deja de actualizarse el seguimiento](guide:tracking-not-updating) y [seguir paquetes desde China](guide:tracking-from-china).
 
 **Perdido o dañado.** Pregunta primero al vendedor: fue él quien contrató a STO, no tú. Según el contrato de STO, el remitente — o quien este designe — reclama en un plazo de 30 días desde conocer la pérdida o daño, con justificantes. Sin seguro (`保价`), STO abona la pérdida real hasta 500 yuanes, o hasta 100 yuanes en documentos. Un envío asegurado se indemniza hasta el valor declarado. Sin seguro ni prueba de valor, STO paga tres veces la tarifa de envío. Si el retraso es culpa de STO, condona los gastos de envío. Ver [paquetes perdidos](guide:lost-parcel).
 
@@ -83,13 +83,13 @@ La forma de un número STO por sí sola no permite a Peek asegurar que pertenece
 
 Con un número de 15 dígitos empezado por `77`, Peek consulta al instante a STO Express y a BRT mostrando «Comprobando servicios de seguimiento…». Si STO tiene el paquete, aparece «STO Express tiene este paquete.» y Peek lo asigna ahí. Si no, indica «aún no encontrado · Peek seguirá comprobando». Añádelo de todos modos: el paquete mostrará «Probablemente STO Express» y «Esperando el primer escaneo de STO Express», y Peek seguirá preguntando a STO cada 6 horas pasadas las primeras horas en la app de iPhone o Android o en tu cuenta. En una consulta sin cuenta, Peek comprueba durante las primeras 6 horas, luego al abrir el enlace (como máximo cada 6 horas, y una vez al día tras dos días) y, con notificaciones activas, una vez al día durante 30 días. Tras una semana sin resultados, te pide revisar el número con el remitente o elegir otro transportista.
 
-Peek solo consulta automáticamente a STO con números empezados por `77`. Con uno de 12 dígitos consulta primero a otros transportistas con ese formato (como DHL y BRT) y después a servicios de seguimiento; si encuentran el paquete y nombran a STO Express, Peek lo asigna a STO y le pregunta en la siguiente comprobación.
+Peek solo consulta automáticamente a STO con números empezados por `77`. Con uno de 12 dígitos consulta a otros transportistas con ese formato (como BRT) y a servicios de seguimiento; si encuentran el paquete y nombran a STO Express, Peek lo asigna a STO y le pregunta en la siguiente comprobación.
 
 Para que Peek lea el seguimiento propio de STO desde el principio, pulsa «Cambiar» y elige STO Express en «Encaja con este número» (12 dígitos, o 15 empezados por `77`). Para 13 dígitos o 15 que no empiecen por `77`, elígelo en «Todos los transportistas» o busca `STO` o `申通`. En un paquete ya añadido usa «Cambiar transportista». La consulta STO de Peek solo admite 12, 13 o 15 dígitos: para cualquier otra longitud avisa «no emite números como este».
 
-Peek lee el seguimiento propio de STO, el mismo que usa su atención online. En cada escaneo muestra el paso (tabla superior), la ciudad del centro STO (su nombre en chino si Peek no puede ubicarla) y la hora, leída en hora de China y mostrada en tu zona horaria («Horas en tu zona horaria:»). Un escaneo repetido se muestra una sola vez, y aparece el peso cuando las básculas de STO lo registraron. También lee el código de recogida (`取件码`) del último escaneo de estación o taquilla mientras el paquete espera allí y el nombre de quien firmó la entrega, pero omite el texto completo de STO, nombres y teléfonos de repartidores y estaciones y las direcciones de recogida. STO no ofrece fecha estimada de entrega, por lo que Peek no la muestra. Peek sigue solo el número de STO: el del transitario se añade aparte.
+Peek lee el seguimiento propio de STO, el mismo que usa su atención online. En cada escaneo muestra el paso (tabla superior), la ciudad del centro STO (su nombre en chino si Peek no puede ubicarla) y la hora, leída en hora de China y mostrada en tu zona horaria («Horas en tu zona horaria:»). Un escaneo repetido se muestra una sola vez, y aparece el peso cuando las básculas de STO lo registraron. Omite el texto completo de STO y, con él, nombres y teléfonos de repartidores y estaciones, direcciones y códigos de recogida y el nombre de quien firmó. STO no ofrece fecha estimada de entrega, por lo que Peek no la muestra. Peek sigue solo el número de STO: el del transitario se añade aparte.
 
-Mientras tengas el paquete abierto en Peek — o el día de la entrega con las notificaciones activadas — Peek consulta directamente a STO hasta cada 10 minutos, y hasta cada 2 minutos a partir de las 6:00 (hora de Pekín) el día en que STO lo escanea en reparto, mientras el rastreador de STO responda; fuera de ese caso, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora. Puede enviarte avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con STO, el transitario ni el vendedor por ti.
+Mientras tengas el paquete abierto en Peek — o el día de la entrega con las notificaciones activadas — Peek consulta directamente a STO hasta cada 10 minutos, y hasta cada 2 minutos a partir de las 6:00 (hora de Pekín) el día en que STO lo escanea en reparto, mientras el rastreador de STO responda; fuera de ese caso, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora; tras siete días sin novedades en «Etiqueta creada», cada 6 horas. Puede enviarte avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con STO, el transitario ni el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de STO Express
 
@@ -107,7 +107,7 @@ STO aún no ha escaneado el paquete, el número es erróneo o el envío tiene m�
 
 ### ¿Dónde está el código de recogida de mi paquete STO?
 
-Mientras el paquete espera en una estación o taquilla, Peek lee el código de recogida (`取件码`) del último escaneo cuando consta en él, y muestra `At a parcel station for collection` o `In a parcel locker for collection`. La dirección exacta de la estación o taquilla está en el seguimiento de STO en `sto.cn`.
+En el seguimiento propio de STO en `sto.cn`, con la estación o taquilla que guarda el paquete. Peek no muestra el código de recogida (`取件码`) ni la dirección; muestra `At a parcel station for collection` o `In a parcel locker for collection` cuando el paquete te espera.
 
 ### ¿Cómo contacto con STO Express?
 

@@ -36,7 +36,7 @@ Tracker Border Express wyświetla pasek postępu i listę etapów od najnowszego
 | `Partially Delivered - Final` | Doręczenie zakończone: przesyłka zamyka się sztukami, które dotarły. Jeśli czegoś brakuje, zapytaj nadawcę. | „Dostarczona” |
 | `Delivered` | Doręczona. | „Dostarczona” |
 
-Peek zachowuje angielskie nazwy Border Express z własnym statusem powyżej. Etap spoza tej tabeli wyświetla się tak, jak go zapisano, a Peek odczytuje status ze słów, gdy to możliwe.
+Peek zachowuje angielskie nazwy Border Express z własnym statusem powyżej, poza `Delivered`, które Peek tłumaczy („Dostarczona”). Etap spoza tej tabeli wyświetla się tak, jak go zapisano, a Peek odczytuje status ze słów, gdy to możliwe.
 
 ## Dostawa Border Express w Australii
 
@@ -50,11 +50,11 @@ Ta strona nie podaje zasad prób doręczenia, awiz, pozostawiania bez podpisu, o
 
 **Stoi na „Zarejestrowana”.** Border Express ma dane przesyłki, ale jeszcze żaden skan nie ma daty. Jego tracker może pokazywać `Picked Up` bez godziny, co Peek pomija — sprawdź tam najpierw. Jeśli wciąż widnieje samo `Shipment Data Received`, zapytaj sklep o moment przekazania paczki.
 
-**Brak aktualizacji od dni.** Gdy przesyłka w drodze nie ma nowego etapu przez cztery dni, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Border Express.” z linkiem „Poproś przewoźnika Border Express o pomoc” do strony obsługi klienta. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
+**Brak aktualizacji od dni.** Gdy przesyłka w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego etapu przez cztery dni, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Border Express.” z linkiem „Poproś przewoźnika Border Express o pomoc” do strony obsługi klienta. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 
 **Częściowo dostarczona.** Porównaj otrzymane rzeczy z zamówieniem. Reszta przesyłki jest jeszcze w drodze, a tracker Border Express pokazuje skany poszczególnych sztuk, których Peek nie wyświetla.
 
-**Dostarczona, ale nic nie przyszło.** Sprawdź okolice adresu i zapytaj sąsiadów. Po doręczeniu Peek odczytuje również nazwisko podpisującego, jeśli widnieje w trackerze Border Express. Następnie skontaktuj się ze sklepem. Więcej w [dostarczona, ale nieotrzymana](guide:delivered-not-received).
+**Dostarczona, ale nic nie przyszło.** Sprawdź okolice adresu i zapytaj sąsiadów. Tracker Border Express podaje nazwisko osoby, która podpisała odbiór; Peek go nie pokazuje. Następnie skontaktuj się ze sklepem. Więcej w [dostarczona, ale nieotrzymana](guide:delivered-not-received).
 
 **Zaginiona, uszkodzona lub zwrócona.** Przewóz przez Border Express zlecił sklep, więc to sklep prosisz o zwrot pieniędzy lub nową paczkę. Zobacz [zaginione przesyłki](guide:lost-parcel), [uszkodzone przesyłki](guide:damaged-parcel) i [zwrócona nadawcy](guide:returned-to-sender).
 
@@ -68,15 +68,15 @@ Na ekranie przesyłki w Peek link „Otwórz stronę przewoźnika Border Express
 
 Wklej numer w [Peek](/), który obsługuje ponad 4500 przewoźników. Podczas sprawdzania może pojawić się „Sprawdzanie usług śledzenia…”. Następnie stuknij „Zmień” i wybierz Border Express, wpisując w wyszukiwarkę `Border Express` (`BEX` również go znajduje, ale najpierw pokazuje serbskiego przewoźnika BEX Express). Przy kodzie kreskowym etykiety Border Express widnieje w sekcji „Pasują do numeru”. W już dodanej paczce użyj „Zmień przewoźnika”. Konto, kod pocztowy ani telefon nie są potrzebne.
 
-Jeśli dodasz numer bez wyboru przewoźnika, Peek zapyta wyłącznie usługi śledzenia, nigdy Border Express, i wyświetli „Brak historii śledzenia”, dopóki któraś z nich nie rozpozna paczki. Dopiero gdy usługa śledzenia wskaże Border Express, Peek zacznie odpytywać Border Express. Ręczny wybór Border Express od razu daje dostęp do jego własnych etapów.
+Jeśli dodasz numer bez wyboru przewoźnika, Peek nigdy nie zapyta Border Express, tylko usługi śledzenia (a przy 4 literach z 8 cyframi także Colis Privé), i wyświetli „Brak historii śledzenia”, dopóki któraś z nich nie rozpozna paczki. Dopiero gdy usługa śledzenia wskaże Border Express, Peek zacznie odpytywać Border Express. Ręczny wybór Border Express od razu daje dostęp do jego własnych etapów.
 
 Link śledzenia Border Express też działa i natychmiast wskazuje Border Express („Wykryty przewoźnik”): `borderexpress.com.au/tracking` z parametrem `cn=` albo link `bexonline.borderexpress.com.au/bxo/track`. Jeśli wybierzesz Border Express dla numeru w innym formacie, Peek poinformuje „nie wydaje takich numerów”, a po dodaniu (jeśli żadna usługa śledzenia nie ma przesyłki) wyświetli „Sprawdź numer śledzenia” — poszukaj brakującego lub zbędnego znaku.
 
 **Kody kreskowe z etykiet.** Ponieważ tracker Border Express ich nie przyjmuje, Peek wylicza z kodu numer przesyłki: cztery litery, następnie 11 cyfr po `BX` bez początkowych zer (zachowując co najmniej sześć cyfr) i z odrzuceniem ostatnich 3 cyfr numeru sztuki. Na ekranie przesyłki numer ten figuruje pod „Border Express śledzi przesyłkę pod numerem”, a „Otwórz stronę przewoźnika Border Express” otwiera Quick Track od razu pod tym numerem. Jeśli Border Express go tak nie znajdzie, użyj numeru przesyłki z e-maila sklepu.
 
-**Co widzisz.** Peek pokazuje status, każdy datowany etap z miejscowością i stanem, przewidywany dzień doręczenia aż do dostawy, godzinę doręczenia, miejscowość odbiorcy (dzielnicę/miejscowość, stan i kod pocztowy) oraz osobę podpisującą po doręczeniu. Pomija pasek postępu, datę nadania, liczbę sztuk oraz skany pojedynczych etykiet, a także miejscowość nadawcy; nie pokazuje wagi ani potwierdzenia odbioru. Każdy etap zachowuje strefę czasową swojego stanu, dzięki czemu etapy ze stanów w różnych strefach układają się we właściwej kolejności i wyświetlają w twojej strefie („Godziny w twojej strefie czasowej:”).
+**Co widzisz.** Peek pokazuje status, każdy datowany etap z miejscowością i stanem, przewidywany dzień doręczenia aż do dostawy oraz godzinę doręczenia. Pomija pasek postępu, datę nadania, liczbę sztuk oraz skany pojedynczych etykiet, miejscowość nadawcy i nazwisko podpisującego; nie pokazuje wagi ani potwierdzenia odbioru. Każdy etap zachowuje strefę czasową swojego stanu, dzięki czemu etapy ze stanów w różnych strefach układają się we właściwej kolejności i wyświetlają w twojej strefie („Godziny w twojej strefie czasowej:”).
 
-**Jak często.** Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio Border Express nawet co 10 minut, a od 6:00 czasu w Sydney w dniu zeskanowania w doręczenie nawet co 2 minuty, dopóki tracker Border Express odpowiada; poza tym, oraz po dwóch dniach bez wiadomości (12 godzin przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”), co godzinę. Jeśli tracker Border Express jest nieosiągalny, Peek pyta usługi śledzenia i pokazuje ich zapis ich własnymi słowami. Może wysyłać alerty „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Border Express ani ze sklepem.
+**Jak często.** Dopóki masz przesyłkę otwartą w Peek — lub w dniu doręczenia z włączonymi powiadomieniami — Peek odpytuje bezpośrednio Border Express nawet co 10 minut, a od 6:00 czasu stanu jej ostatniego etapu w dniu zeskanowania w doręczenie nawet co 2 minuty, dopóki tracker Border Express odpowiada; poza tym, oraz po dwóch dniach bez wiadomości (12 godzin przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”), co godzinę; po siedmiu dniach bez wiadomości przy statusie „Zarejestrowana” co 6 godzin. Jeśli tracker Border Express jest nieosiągalny, Peek pyta usługi śledzenia i pokazuje ich zapis ich własnymi słowami. Może wysyłać alerty „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Border Express ani ze sklepem.
 
 ## Pytania o śledzenie Border Express
 

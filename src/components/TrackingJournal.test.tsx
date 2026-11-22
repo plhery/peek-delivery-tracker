@@ -94,30 +94,35 @@ describe('TrackingJournal', () => {
     ]} written={[
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T01:00:00Z', location: 'Guangzhou, China' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' },
-    ]} writtenAhead />);
+    ]} writtenAheadBy="GZYL" />);
     expect(screen.getByText('0 updates')).toBeInTheDocument();
     expect(screen.getByText('No tracking updates yet.')).toBeInTheDocument();
     const predicted = container.querySelector('.tracking-journal__predicted')!;
-    // Those still ahead and those gone by are one list, newest first, each with the day it was predicted for.
+    // The line names the carrier and says its site lists the whole route in advance.
+    expect(predicted.querySelector('summary')).toHaveTextContent(
+      /^GZYL’s site lists the whole route in advance, delivery included\. Those steps aren’t real scans\. Show themHide them$/u);
+    // Those still ahead and those gone by are one list, newest first: the day each was predicted for, or written in advance
+    // for once it has passed.
     expect([...predicted.querySelectorAll('li p')].map(line => line.textContent))
       .toEqual(['Proof of delivery filed', 'Delivered', 'Departed the origin facility']);
     expect([...predicted.querySelectorAll('time')].map(time => time.textContent)).toEqual([
       expect.stringMatching(/^Predicted for Wed 25 Sep, \d\d:\d\d$/u),
-      expect.stringMatching(/^Predicted for Sun 15 Sep, \d\d:\d\d$/u),
-      expect.stringMatching(/^Predicted for Sun 8 Sep, \d\d:\d\d$/u),
+      expect.stringMatching(/^Written in advance for Sun 15 Sep, \d\d:\d\d$/u),
+      expect.stringMatching(/^Written in advance for Sun 8 Sep, \d\d:\d\d$/u),
     ]);
     expect(predicted.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Guangzhou, China$/u);
-    expect(screen.queryByText(/written in advance|Nothing confirms/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Nothing confirms|only predictions/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('list', { name: 'Tracking history' })).not.toBeInTheDocument();
   });
 
-  it('says a carrier that writes its route ahead shows predictions on its site, even with none to list, and says nothing for another carrier', () => {
+  it('says a carrier that writes its route ahead lists the whole route on its site, even with none to list, and says nothing for another carrier', () => {
     const scans = [event('picked', '2024-09-07T10:00:00Z', 'Picked up')];
-    const { container, rerender } = render(<TrackingJournal events={scans} writtenAhead />);
-    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toHaveClass('tracking-journal__predicted-note');
+    const { container, rerender } = render(<TrackingJournal events={scans} writtenAheadBy="Xinghe Freight" />);
+    expect(screen.getByText('Xinghe Freight’s site lists the whole route in advance, delivery included. Those steps aren’t real scans.'))
+      .toHaveClass('tracking-journal__predicted-note');
     expect(container.querySelector('.tracking-journal__predicted')).toBeNull();
     rerender(<TrackingJournal events={scans} />);
-    expect(screen.queryByText(/only predictions/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/whole route in advance|only predictions/)).not.toBeInTheDocument();
   });
 
   it('says under the history that its times are the reader’s, and names the reader’s zone', () => {

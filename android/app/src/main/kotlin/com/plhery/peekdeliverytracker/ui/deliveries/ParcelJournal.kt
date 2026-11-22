@@ -86,6 +86,7 @@ import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.button
@@ -107,8 +108,8 @@ import kotlinx.coroutines.delay
  * hears the heading as one, as written rather than in capitals. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
  * Before the days, apart from the scans, one line says the carrier's site shows steps that are only predictions, and
  * keeps them folded behind it ([PredictedSteps]): those it planned and has not confirmed, and those it wrote in advance
- * whose time has passed (`writtenAheadEvents`). A carrier that writes its route ahead (`writtenAheadBy`) gets the line
- * even with no step to list ([PredictedNote]). Where a scan or such a step shows a time of day, a line in caption2 in
+ * whose time has passed (`writtenAheadEvents`). A carrier that writes its route ahead (`writtenAheadBy`) is named in the
+ * line, which says its site lists the whole route in advance, and gets it even with no step to list ([PredictedNote]). Where a scan or such a step shows a time of day, a line in caption2 in
  * the opaque secondary grey, 22 under the last row, says the times are the phone's and names its zone as the app
  * language names it all year ([Localizer.timeZoneName]).
  */
@@ -147,6 +148,11 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
     // The steps the carrier's site shows that no scan confirms: those still ahead, and those it wrote in advance.
     val predicted = planned + parcel.writtenAheadEvents.orEmpty()
     var predictedOpen by rememberSaveable { mutableStateOf(false) }
+    // A carrier that writes its route ahead is named: its site lists the whole route in advance, delivery included.
+    val identities = LocalCarrierIdentities.current
+    val predictedNote = parcel.writtenAheadBy?.let { identities?.displayName(it, language) }
+        ?.let { localizer.text("timeline.writtenAhead.note", mapOf("carrier" to it)) }
+        ?: localizer.text("timeline.predicted.note")
     // A copy the journal shows under its scan is current through that scan.
     val currentId = remember(parcel, entries) {
         parcel.currentEvent?.let { current -> entries.firstOrNull { it.id == current.id || current in it.relays }?.id }
@@ -164,9 +170,9 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
         ) {
             Column(Modifier.fillMaxWidth()) {
                 if (predicted.isNotEmpty()) {
-                    PredictedSteps(predicted, moment, open = predictedOpen) { predictedOpen = !predictedOpen }
+                    PredictedSteps(predicted, moment, predictedNote, open = predictedOpen) { predictedOpen = !predictedOpen }
                 } else if (parcel.writtenAheadBy != null) {
-                    PredictedNote()
+                    PredictedNote(predictedNote)
                 }
                 if (days.isEmpty()) {
                     Text(
@@ -228,18 +234,18 @@ private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modif
 
 /**
  * `PredictedSteps`: the steps the carrier's site shows that no scan confirms, folded behind one line that says they're
- * only predictions ([PredictedLine]), closed at first. Open, 8 under it, they list newest first ([plannedNewestFirst]),
+ * only predictions (`note`, [PredictedLine]), closed at first. Open, 8 under it, they list newest first ([plannedNewestFirst]),
  * 18 apart ([PredictedStepRow]), and a dashed line in the separator's colour, 1 high, closes them 18 under the last.
  * They fade in and out over 0.2 s easeInOut as the history's days do, at once under Reduce Motion. They are no scans
  * and count as no update.
  */
 @Composable
-private fun PredictedSteps(steps: List<PlannedTrackingEvent>, now: Instant, open: Boolean, onToggle: () -> Unit) {
+private fun PredictedSteps(steps: List<PlannedTrackingEvent>, now: Instant, note: String, open: Boolean, onToggle: () -> Unit) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
     val ordered = remember(steps) { plannedNewestFirst(steps) }
     Column(Modifier.fillMaxWidth()) {
-        PredictedLine(open, onToggle)
+        PredictedLine(note, open, onToggle)
         AnimatedVisibility(
             visible = open,
             enter = if (reduceMotion) EnterTransition.None else
@@ -270,17 +276,16 @@ private fun PredictedSteps(steps: List<PlannedTrackingEvent>, now: Instant, open
 }
 
 /**
- * The line the predicted steps are folded behind, in caption2 in the opaque secondary grey: `timeline.predicted.note`,
+ * The line the predicted steps are folded behind, in caption2 in the opaque secondary grey: `note`,
  * then "Show them", or "Hide them" while they show, in semibold in the primary colour, kept on one line and underlined
  * 3 under its baseline in the separator's colour. The whole line is a plain button 44 tall at least, its words in the
  * middle, which TalkBack reads as one that expands and collapses.
  */
 @Composable
-private fun PredictedLine(open: Boolean, onToggle: () -> Unit) {
+private fun PredictedLine(note: String, open: Boolean, onToggle: () -> Unit) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val note = localizer.text("timeline.predicted.note")
     // Kept on one line, as the web's `white-space: nowrap`.
     val action = localizer.text(if (open) "timeline.predicted.hide" else "timeline.predicted.show").replace(' ', NO_BREAK_SPACE)
     val words = buildAnnotatedString {
@@ -339,9 +344,9 @@ private fun PredictedLine(open: Boolean, onToggle: () -> Unit) {
  * the opaque secondary grey, without its button.
  */
 @Composable
-private fun PredictedNote() {
+private fun PredictedNote(note: String) {
     Text(
-        LocalLocalizer.current.text("timeline.predicted.note"),
+        note,
         Modifier
             .padding(top = 10.dp)
             .testTag(JOURNAL_PREDICTED),

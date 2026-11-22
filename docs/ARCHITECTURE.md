@@ -807,7 +807,9 @@ and nothing typed is sent.
   tells it at the same minute, or in the same words within a day of it, and all go once a
   carrier scan says delivered or returned. A row the carrier later shows as a scan frees its
   clock, so it is told once, as a scan. The apps list these steps among the planned ones,
-  behind the same line, which they show alone while the carrier names no step in words. They
+  each with the day it was written in advance for, behind a line that names the carrier and
+  says its site lists the whole route in advance, delivery included, so those steps are no
+  real scans; they show the line alone while the carrier names no step in words. They
   are never scans either: a written "Delivered" sets no stage, status, estimate, alert, email,
   count, map or drawing. A wrapped gift's link shows neither the line nor the steps.
 - **Peek AI**: when Peek has a strong hint of when a parcel will come, its row is served with

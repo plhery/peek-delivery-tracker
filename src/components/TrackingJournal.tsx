@@ -18,11 +18,12 @@ const LISTED_DAYS = 3;
  * carrier's site shows steps that are no scans: those it planned (`planned`)
  * and those it wrote in advance whose time has passed (`written`). It says
  * they're only predictions and keeps them folded behind it, apart from the
- * scans. A carrier that writes its route ahead (`writtenAhead`) gets the line
- * even with no step to list.
+ * scans. For a carrier that writes its route ahead (`writtenAheadBy`, its name),
+ * the line names it and says its site lists the whole route in advance, delivery
+ * included, and it shows even with no step to list.
  */
-export function TrackingJournal({ events: allEvents, planned = [], written = [], writtenAhead = false, syncing = false, fold = false, returnHeld = false }: {
-  events: TrackingEvent[]; planned?: PlannedEvent[]; written?: PlannedEvent[]; writtenAhead?: boolean; syncing?: boolean; fold?: boolean;
+export function TrackingJournal({ events: allEvents, planned = [], written = [], writtenAheadBy, syncing = false, fold = false, returnHeld = false }: {
+  events: TrackingEvent[]; planned?: PlannedEvent[]; written?: PlannedEvent[]; writtenAheadBy?: string; syncing?: boolean; fold?: boolean;
   /** The server holds the parcel's return (`currentEvent`). */
   returnHeld?: boolean;
 }) {
@@ -40,6 +41,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
   }
   const now = new Date();
   const predicted = [...planned.filter((step) => plannedAhead(step, now.getTime())), ...written];
+  const note = writtenAheadBy ? t('timeline.writtenAhead.note', { carrier: writtenAheadBy }) : t('timeline.predicted.note');
   const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
@@ -82,8 +84,8 @@ export function TrackingJournal({ events: allEvents, planned = [], written = [],
 
   return <details className={use24HourTime ? 'tracking-journal' : 'tracking-journal tracking-journal--am-pm'} open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
-    {predicted.length > 0 ? <PredictedSteps steps={predicted} />
-      : writtenAhead && <p className="tracking-journal__predicted-note">{t('timeline.predicted.note')}</p>}
+    {predicted.length > 0 ? <PredictedSteps steps={predicted} note={note} />
+      : writtenAheadBy && <p className="tracking-journal__predicted-note">{note}</p>}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -127,11 +129,11 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day' | 'ex
 }
 
 /**
- * The steps the carrier's site shows that no scan confirms, behind one line that says they're only predictions:
- * opened, they list newest first, greyed, each on a dashed mark instead of a time, with the day it was predicted for.
- * They are no scans and count as no update.
+ * The steps the carrier's site shows that no scan confirms, behind one line (`note`) that says they're only predictions:
+ * opened, they list newest first, greyed, each on a dashed mark instead of a time, with the day it was predicted for,
+ * or, once that day has passed, the day it was written in advance for. They are no scans and count as no update.
  */
-function PredictedSteps({ steps }: { steps: PlannedEvent[] }) {
+function PredictedSteps({ steps, note }: { steps: PlannedEvent[]; note: string }) {
   const { languageTag, t, use24HourTime } = useI18n();
   const now = new Date();
   const offset = (days: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + days).toDateString();
@@ -141,11 +143,12 @@ function PredictedSteps({ steps }: { steps: PlannedEvent[] }) {
     const { date, timed } = scan;
     const day = date.toDateString() === offset(0) ? t('time.today') : date.toDateString() === offset(1) ? t('time.tomorrow')
       : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
-    return t('timeline.predicted.when', { when: timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day });
+    return t(plannedAhead(step, now.getTime()) ? 'timeline.predicted.when' : 'timeline.writtenAhead.when',
+      { when: timed ? dayAndTime(day, localizedClockTime(date, languageTag, use24HourTime), languageTag) : day });
   };
   const newestFirst = [...steps].sort((a, b) => (scanDate(b)?.date.getTime() ?? 0) - (scanDate(a)?.date.getTime() ?? 0));
   return <details className="tracking-journal__predicted">
-    <summary><span className="tracking-journal__predicted-note">{t('timeline.predicted.note')}</span>{' '}
+    <summary><span className="tracking-journal__predicted-note">{note}</span>{' '}
       <span className="tracking-journal__predicted-show">{t('timeline.predicted.show')}</span>
       <span className="tracking-journal__predicted-hide">{t('timeline.predicted.hide')}</span></summary>
     <ol className="tracking-journal__events">

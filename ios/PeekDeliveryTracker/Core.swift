@@ -789,11 +789,12 @@ final class Localizer: ObservableObject {
         return step.calendarDay == nil ? dayAndTime(day, clockTime(date)) : day
     }
 
-    /// What a step the carrier's site shows that no scan confirms was predicted for: "Predicted for Fri 6 Nov, 07:54".
-    /// Nothing for a step with no readable date.
+    /// What a step the carrier's site shows that no scan confirms was predicted for: "Predicted for Fri 6 Nov, 07:54"; once
+    /// that time has passed, what it was written in advance for: "Written in advance for Fri 6 Nov, 07:54". Nothing for a
+    /// step with no readable date.
     func predictedDate(_ step: PlannedTrackingEvent, now: Date = Date()) -> String {
         let when = plannedDate(step, now: now)
-        return when.isEmpty ? "" : text("timeline.predicted.when", ["when": when])
+        return when.isEmpty ? "" : text(step.isAhead(of: now) ? "timeline.predicted.when" : "timeline.writtenAhead.when", ["when": when])
     }
 
     /// A moment as a notice gives it: its clock time today, else its day and time ("yesterday, 14:02").

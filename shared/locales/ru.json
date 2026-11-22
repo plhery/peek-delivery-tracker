@@ -870,6 +870,8 @@
   "timeline.predicted.when": "Прогноз: {{when}}",
   "timeline.syncing": "Проверяем обновления…",
   "timeline.timeZone": "Время указано в вашем часовом поясе: {{zone}}.",
+  "timeline.writtenAhead.note": "{{carrier}} заранее выкладывает на сайте весь маршрут, включая вручение. Эти этапы — не настоящие отметки.",
+  "timeline.writtenAhead.when": "Записано заранее: {{when}}",
   "view.allCarriers": "Все службы доставки",
   "view.carrier": "Служба доставки",
   "view.clear": "Сбросить фильтры",

@@ -243,7 +243,8 @@ class PlannedStepsTests {
         assertFalse(written.scheduledDelivery)
     }
 
-    // As src/components/TrackingJournal.test.tsx: each step says the day it was predicted for, gone by or ahead.
+    // As src/components/TrackingJournal.test.tsx: each step says the day it was predicted for, or written in advance for
+    // once it has gone by.
     @Test
     fun aPredictedStepSaysTheDayItWasPredictedFor() {
         val zone = ZoneId.systemDefault()
@@ -252,12 +253,12 @@ class PlannedStepsTests {
         fun step(occurredAt: String, day: String? = null) =
             PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = occurredAt, day = day)
         val localizer = Localizer(AppLanguage.En)
-        assertEquals("Predicted for yesterday, 07:54", localizer.predictedDate(step(at(11, 3)), now))
+        assertEquals("Written in advance for yesterday, 07:54", localizer.predictedDate(step(at(11, 3)), now))
         assertEquals("Predicted for Mon 16 Nov, 07:54", localizer.predictedDate(step(at(11, 16)), now))
-        assertEquals("Predicted for Sun 8 Sep 2024", localizer.predictedDate(step(at(9, 7, year = 2024), day = "2024-09-08"), now))
+        assertEquals("Written in advance for Sun 8 Sep 2024", localizer.predictedDate(step(at(9, 7, year = 2024), day = "2024-09-08"), now))
         assertEquals("", localizer.predictedDate(step("not a date"), now))
         assertEquals(
-            "${localizer.eventDescription("Delivered")}, Predicted for yesterday, 07:54",
+            "${localizer.eventDescription("Delivered")}, Written in advance for yesterday, 07:54",
             localizer.predictedStepLabel(step(at(11, 3)), now),
         )
     }

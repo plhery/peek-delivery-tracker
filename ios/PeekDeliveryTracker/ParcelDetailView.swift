@@ -1771,6 +1771,7 @@ struct ParcelJournal: View {
     let tint: Color
 
     @EnvironmentObject private var localizer: Localizer
+    @ObservedObject private var catalog = CarrierCatalog.shared
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showingFullJourney = true
     /// Whether the steps behind the line that says they're only predictions are shown: not until the reader asks.
@@ -1792,6 +1793,10 @@ struct ParcelJournal: View {
         // The steps the carrier's site shows that no scan confirms: those it planned and those it wrote in advance.
         let predicted = parcel.predictedLine(now: now)
         let predictedSteps = if case .steps(let steps) = predicted { steps } else { [PlannedTrackingEvent]() }
+        // A carrier that writes its route ahead is named: its site lists the whole route in advance, delivery included.
+        let predictedNote = parcel.writtenAheadBy.map {
+            localizer.text("timeline.writtenAhead.note", ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
+        } ?? localizer.text("timeline.predicted.note")
         // The times are the device's, wherever the carrier scanned: one quiet line under the history says so.
         let timed = entries.contains { $0.event.showsTime } || predictedSteps.contains { $0.showsTime }
         return VStack(alignment: .leading, spacing: 0) {
@@ -1814,9 +1819,9 @@ struct ParcelJournal: View {
             if showingFullJourney {
                 switch predicted {
                 case .steps(let steps):
-                    PredictedSteps(steps: steps, open: $showingPredictions)
+                    PredictedSteps(steps: steps, note: predictedNote, open: $showingPredictions)
                 case .note:
-                    Text(localizer.text("timeline.predicted.note"))
+                    Text(predictedNote)
                         .font(.caption).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 10).padding(.bottom, 2)
@@ -1990,12 +1995,13 @@ private struct JournalEventRow: View {
     }
 }
 
-/// The steps the carrier's site shows that no scan confirms, behind one line that says they're only predictions, closed
-/// until the reader opens it (`open`). Opened, they list newest first, greyed, each on a dashed mark instead of a time and
-/// joined by a dashed rail, with the day it was predicted for, and a dashed line under them. They are no scans and count
-/// as no update.
+/// The steps the carrier's site shows that no scan confirms, behind one line that says they're only predictions (`note`),
+/// closed until the reader opens it (`open`). Opened, they list newest first, greyed, each on a dashed mark instead of a
+/// time and joined by a dashed rail, with the day it was predicted for, or written in advance for once it has passed, and a
+/// dashed line under them. They are no scans and count as no update.
 private struct PredictedSteps: View {
     let steps: [PlannedTrackingEvent]
+    let note: String
     @Binding var open: Bool
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -2005,7 +2011,7 @@ private struct PredictedSteps: View {
             Button {
                 withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.2)) { open.toggle() }
             } label: {
-                (Text(localizer.text("timeline.predicted.note")).foregroundStyle(Brand.secondaryText)
+                (Text(note).foregroundStyle(Brand.secondaryText)
                     + Text(verbatim: " ")
                     + Text(localizer.text(open ? "timeline.predicted.hide" : "timeline.predicted.show"))
                     .fontWeight(.semibold).foregroundStyle(.primary).underline(color: Brand.separator))

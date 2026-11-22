@@ -870,6 +870,8 @@
   "timeline.predicted.when": "Previsto para {{when}}",
   "timeline.syncing": "A procurar atualizações…",
   "timeline.timeZone": "Horas no teu fuso horário: {{zone}}.",
+  "timeline.writtenAhead.note": "O site de {{carrier}} mostra todo o percurso antecipadamente, entrega incluída. Esses passos não são registos reais.",
+  "timeline.writtenAhead.when": "Escrito antecipadamente para {{when}}",
   "view.allCarriers": "Todas as transportadoras",
   "view.carrier": "Transportadora",
   "view.clear": "Limpar filtros",

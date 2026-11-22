@@ -92,13 +92,15 @@ describe('shipment details', () => {
   });
 
   it('says in the history, not under the status, that the carrier writes its timeline ahead', () => {
+    const name = carrierInfo('gzyl', 'en').name;
     const view = show({ carrier: 'gzyl', writtenAheadBy: 'gzyl' });
     expect(document.querySelector('.detail__handover')).toBeNull();
-    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toHaveClass('tracking-journal__predicted-note');
+    expect(screen.getByText(`${name}’s site lists the whole route in advance, delivery included. Those steps aren’t real scans.`))
+      .toHaveClass('tracking-journal__predicted-note');
     view.unmount();
 
     show({ carrier: 'gzyl' });
-    expect(screen.queryByText(/only predictions/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/whole route in advance|only predictions/)).not.toBeInTheDocument();
   });
 
   it('folds a delivery the carrier wrote in advance, before any real scan, among the predictions, and the parcel stays undelivered', () => {
@@ -107,7 +109,7 @@ describe('shipment details', () => {
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2026-09-11T01:00:00Z' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2026-09-14T07:00:00Z' },
     ] });
-    expect(screen.queryByText(/written in advance|Nothing confirms/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Nothing confirms/i)).not.toBeInTheDocument();
     const predicted = document.querySelector<HTMLDetailsElement>('.tracking-journal__predicted')!;
     expect(predicted).not.toHaveAttribute('open');
     expect([...predicted.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Delivered', 'Departed the origin facility']);
@@ -234,9 +236,9 @@ describe('shipment details', () => {
     expect(document.querySelector('.detail__quiet')).toBeNull();
     view.unmount();
 
-    // A carrier that wrote the rest of its timeline ahead: its line in the history says the rest are predictions.
+    // A carrier that wrote the rest of its timeline ahead: its line in the history says its site lists the whole route.
     show({ carrier: 'gzyl', writtenAheadBy: 'gzyl', events: [...label] });
-    expect(screen.getByText(/only predictions/)).toBeVisible();
+    expect(screen.getByText(/whole route in advance/)).toBeVisible();
     expect(screen.queryByText(/hasn’t handed it/)).toBeNull();
     expect(document.querySelector('.detail__quiet')).toBeNull();
   });

@@ -273,7 +273,7 @@ class ParcelJournalTest {
     private fun predictedRows(): List<String> = compose.onAllNodes(hasTestTag(JOURNAL_PREDICTED_ROW)).fetchSemanticsNodes()
         .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
 
-    private val predictedNote = "Other sites may show more steps, but they’re only predictions."
+    private val predictedNote = "GZYL’s site lists the whole route in advance, delivery included. Those steps aren’t real scans."
 
     /** The line's words as TalkBack reads them, its no-break spaces read as spaces. */
     private fun lineWords(): String = texts(predictedLine()).joinToString().replace(Char(0x00A0), ' ')
@@ -314,12 +314,12 @@ class ParcelJournalTest {
         assertEquals(
             listOf(
                 "Proof of delivery filed, Predicted for tomorrow, 10:00",
-                "Delivered, Predicted for yesterday, 08:00",
-                "Departed the origin facility, Predicted for Tue 27 Oct, 02:00",
+                "Delivered, Written in advance for yesterday, 08:00",
+                "Departed the origin facility, Written in advance for Tue 27 Oct, 02:00",
             ),
             predictedRows(),
         )
-        assertTrue(textExists("Predicted for Tue 27 Oct, 02:00"))
+        assertTrue(textExists("Written in advance for Tue 27 Oct, 02:00"))
         assertEquals(secondary, color("Delivered"))
         assertTrue(rows().isEmpty())
         assertTrue(textExists(zoneLine))

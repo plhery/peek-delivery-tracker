@@ -600,7 +600,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         <ShipmentFacts parcel={parcel} stage={stage} />
         {carrierKnown && (automatic || moving) && <section className="peekp-journal">
           <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} planned={wrapped ? undefined : parcel.plannedEvents}
-            written={wrapped ? undefined : parcel.writtenAheadEvents} writtenAhead={!wrapped && !!parcel.writtenAheadBy} syncing={checking} fold />
+            written={wrapped ? undefined : parcel.writtenAheadEvents} writtenAheadBy={wrapped || !parcel.writtenAheadBy ? undefined : carrierInfo(parcel.writtenAheadBy, locale).name} syncing={checking} fold />
         </section>}
         {!final && !frozen && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
         <FeedbackQuestion feedback={feedback} />

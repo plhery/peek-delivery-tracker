@@ -2098,13 +2098,16 @@ final class ParcelLogicTests: XCTestCase {
         parcel.writtenAheadEvents = [departed, arrived]
         XCTAssertEqual(parcel.predictedLine(now: now), .steps([ahead, arrived, departed]))
         XCTAssertEqual(localizer.predictedDate(ahead, now: now), "Predicted for Mon 16 Nov, 09:00")
-        XCTAssertEqual(localizer.predictedDate(arrived, now: now), "Predicted for Mon 9 Nov")
-        XCTAssertEqual(localizer.predictedDate(gone, now: now), "Predicted for yesterday, 08:00")
+        // Once its time has passed, a step reads as written in advance.
+        XCTAssertEqual(localizer.predictedDate(arrived, now: now), "Written in advance for Mon 9 Nov")
+        XCTAssertEqual(localizer.predictedDate(gone, now: now), "Written in advance for yesterday, 08:00")
         XCTAssertEqual(localizer.predictedDate(PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "soon"), now: now), "")
         // They are no scans: they count as no update and move the parcel nowhere.
         XCTAssertEqual(parcel.journalEntries.count, 1)
         XCTAssertEqual(parcel.currentStage, .registered)
         XCTAssertEqual(localizer.text("timeline.predicted.note"), "Other sites may show more steps, but they’re only predictions.")
+        XCTAssertEqual(localizer.text("timeline.writtenAhead.note", ["carrier": "GZYL"]),
+                       "GZYL’s site lists the whole route in advance, delivery included. Those steps aren’t real scans.")
         XCTAssertEqual(localizer.text("timeline.predicted.show"), "Show them")
         XCTAssertEqual(localizer.text("timeline.predicted.hide"), "Hide them")
     }

@@ -358,7 +358,8 @@ describe('ParcelPage stages and troubles', () => {
   it('keeps the card quiet for a label whose carrier wrote the rest of its timeline ahead, and says so in the history', async () => {
     await shown(view([scan('registered', 140)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
     expect(screen.queryByText(/written in advance|hasn’t handed it|hasn’t scanned the parcel yet|go quiet on long flights/)).toBeNull();
-    expect(screen.getByText('Other sites may show more steps, but they’re only predictions.')).toBeVisible();
+    expect(screen.getByText(`${carrierInfo('gzyl', 'en').name}’s site lists the whole route in advance, delivery included. Those steps aren’t real scans.`))
+      .toBeVisible();
   });
 
   it('folds the steps the carrier wrote in advance whose time has passed behind the predictions line, and stays in transit', async () => {
@@ -371,6 +372,7 @@ describe('ParcelPage stages and troubles', () => {
     expect(predicted).not.toHaveAttribute('open');
     expect(within(predicted).getByText('Show them')).toBeVisible();
     expect([...predicted.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Delivered']);
+    expect(predicted.querySelector('time')).toHaveTextContent(/^Written in advance for /);
     expect(screen.queryByText(/Nothing confirms this delivery/)).toBeNull();
     expect(screen.getByText('1 update')).toBeVisible();
   });

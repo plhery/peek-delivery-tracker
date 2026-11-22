@@ -676,9 +676,9 @@ class LivePassTest {
         }
         show(parcels = parcels)
         open("Cat tree")
-        // Only the history's line, that other sites' further steps are predictions.
-        assertTrue(textExists("Other sites may show more steps, but they’re only predictions."))
-        assertFalse(textExists("written in advance"))
+        // Only the history's line, that the carrier's site lists the whole route in advance.
+        assertTrue(textExists("GZYL’s site lists the whole route in advance, delivery included. Those steps aren’t real scans."))
+        assertFalse(textExists("Written in advance for"))
         assertFalse(textExists("hasn’t handed it"))
         assertFalse(exists(PAGE_QUIET))
     }

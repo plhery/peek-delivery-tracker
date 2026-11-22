@@ -815,7 +815,7 @@ export function ParcelDetail({
       {(automaticTracking || parcelHasCarrierUpdate(parcel)) && (
         <section className="detail__timeline">
           <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} written={parcel.writtenAheadEvents}
-            writtenAhead={!!parcel.writtenAheadBy} syncing={status.syncing}
+            writtenAheadBy={parcel.writtenAheadBy ? carrierInfo(parcel.writtenAheadBy, locale).name : undefined} syncing={status.syncing}
             returnHeld={parcel.returnHeld} />
         </section>
       )}

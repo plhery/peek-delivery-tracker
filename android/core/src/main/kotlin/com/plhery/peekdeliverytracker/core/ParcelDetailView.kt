@@ -242,11 +242,13 @@ val PlannedTrackingEvent.journalLocation: String?
 
 /**
  * The day a step the carrier's site shows was predicted for, as its row says it: "Predicted for" and its day
- * ([Localizer.plannedDate]), "Predicted for Mon 16 Nov, 09:00". Nothing for a date that doesn't read.
+ * ([Localizer.plannedDate]), "Predicted for Mon 16 Nov, 09:00"; once that time has passed, what it was written in
+ * advance for, "Written in advance for Mon 16 Nov, 09:00". Nothing for a date that doesn't read.
  */
 fun Localizer.predictedDate(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
     val day = plannedDate(step, now)
-    return if (day.isEmpty()) "" else text("timeline.predicted.when", mapOf("when" to day))
+    val key = if (step.isAhead(now)) "timeline.predicted.when" else "timeline.writtenAhead.when"
+    return if (day.isEmpty()) "" else text(key, mapOf("when" to day))
 }
 
 /**

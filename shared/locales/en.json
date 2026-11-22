@@ -870,6 +870,8 @@
   "timeline.predicted.when": "Predicted for {{when}}",
   "timeline.syncing": "Checking for updates…",
   "timeline.timeZone": "Times are in your time zone: {{zone}}.",
+  "timeline.writtenAhead.note": "{{carrier}}’s site lists the whole route in advance, delivery included. Those steps aren’t real scans.",
+  "timeline.writtenAhead.when": "Written in advance for {{when}}",
   "view.allCarriers": "All carriers",
   "view.carrier": "Carrier",
   "view.clear": "Clear filters",

@@ -100,7 +100,7 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void, relinking?:
         const patience = setTimeout(() => { answer(); controller.abort(); }, ASK_PATIENCE_MS);
         asking.current = { number: ask, stop: () => { clearTimeout(patience); controller.abort(); } };
         // A refusal or a failure degrades quietly: the lookup works without the answer.
-        detectCarrierPublic(askTyped ?? ask, controller.signal, startsDeviceParcel(ask, live.current.device))
+        detectCarrierPublic(askTyped ?? ask, controller.signal, startsDeviceParcel(ask, live.current.device), next.hint ?? undefined)
           .then(answer, () => answer()).finally(() => clearTimeout(patience));
       }
     }

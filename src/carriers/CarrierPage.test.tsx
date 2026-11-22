@@ -92,7 +92,7 @@ describe('the carriers’ own page', () => {
 });
 
 describe('the tracker on a carrier’s page', () => {
-  const tracker = (locale: Locale = 'en') => render(<CarrierTracker locale={locale} color="#dc0032" label="Track a BRT parcel"
+  const tracker = (locale: Locale = 'en') => render(<CarrierTracker locale={locale} carrier="brt" color="#dc0032" label="Track a BRT parcel"
     placeholder="Paste a number, link, or message" action="Track your parcel" note="Peek is an independent tracker, not BRT." />);
 
   it('without a script, opens the landing of its language and sends nothing typed, since its field has no name', () => {
@@ -110,7 +110,7 @@ describe('the tracker on a carrier’s page', () => {
     await user.type(screen.getByRole('textbox'), '  0123456789012  ');
     await user.click(screen.getByRole('button', { name: 'Track your parcel' }));
     expect(assign).toHaveBeenCalledExactlyOnceWith('/it');
-    expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '0123456789012', at: expect.any(Number) });
+    expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '0123456789012', at: expect.any(Number), carrier: 'brt' });
   });
 
   it('tracks on Enter, and keeps Shift+Enter for a new line in a pasted message', async () => {

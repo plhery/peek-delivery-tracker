@@ -71266,6 +71266,10 @@
             "type": "string",
             "maxLength": 80,
             "description": "The number as the reader typed or pasted it, with its spaces and dashes: some carriers' numbers are told apart by them. Ignored unless it normalizes to trackingNumber."
+          },
+          "carrierHint": {
+            "description": "The carrier whose own page the number was typed on. Asked first among the carriers the number's shape leaves open, and asked alone about a number no carrier's shape takes, when it answers by itself without a postcode or other input. Ignored when the shape names a carrier.",
+            "$ref": "#/components/schemas/CarrierId"
           }
         }
       },

@@ -67613,6 +67613,7 @@ export interface ApiCarrierDetectionRequest {
   "lookupCountryHint"?: string;
   "prefixOfSaved"?: boolean;
   "typedNumber"?: string;
+  "carrierHint"?: ApiCarrierId;
 }
 
 export interface ApiCarrierDetectionResponse {

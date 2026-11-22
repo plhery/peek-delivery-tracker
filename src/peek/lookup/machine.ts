@@ -71,6 +71,11 @@ export interface LookupState {
   pick: string | null;
   /** A carrier chosen by hand. */
   carrier: CarrierId | 'auto';
+  /**
+   * The carrier whose own page handed the text over: asked first about a number its shape leaves to several
+   * carriers, and asked alone about one no carrier's shape takes.
+   */
+  hint: CarrierId | null;
   /** What the carriers asked for, kept apart so a postcode typed for one never goes to another. */
   inputs: Partial<Record<CarrierId, Partial<Record<CarrierInputField, string>>>>;
   /** The country each carrier's postcode is from, when the visitor named one. */
@@ -104,6 +109,7 @@ export type LookupEvent =
   | { type: 'answer'; answer: CarrierAnswer }
   | { type: 'pick'; number: string }
   | { type: 'choose'; carrier: CarrierId | 'auto' }
+  | { type: 'hint'; carrier: CarrierId }
   | { type: 'fill'; carrier: CarrierId; field: CarrierInputField; value: string }
   | { type: 'country'; carrier: CarrierId; country: string }
   | { type: 'asTyped' }
@@ -123,7 +129,7 @@ export type PasteFailure = 'blocked' | 'empty' | 'share-too-large' | 'share-fail
 
 export function initialLookup(text = '', region: string | null = null, dialling = region): LookupState {
   return {
-    text, settled: text, intent: 'none', pick: null, carrier: 'auto', inputs: {}, countries: {}, region, dialling, asked: null, answer: null,
+    text, settled: text, intent: 'none', pick: null, carrier: 'auto', hint: null, inputs: {}, countries: {}, region, dialling, asked: null, answer: null,
     asTyped: null, raised: false, offered: null, job: null, trouble: null, paste: null, halted: 0,
   };
 }
@@ -217,7 +223,9 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const amazon = Boolean(match) && isAmazonTrackingNumber(normalized);
   const answer = match && state.answer?.trackingNumber === normalized ? state.answer : undefined;
   const settledForAsking = Boolean(match) && state.asked === normalized;
-  const recognizable = Boolean(match) && !amazon && canAskCarrier(match!, normalized, state.dialling);
+  // A number no carrier's shape takes is asked about only when a carrier's page handed it over: that carrier may know it.
+  const recognizable = Boolean(match) && !amazon && (canAskCarrier(match!, normalized, state.dialling)
+    || (state.hint !== null && match!.carrier === 'unknown' && !notTrackingNumber(normalized, state.dialling)));
   // A carrier chosen by hand needs no asking; an answer that came before the choice still shows who knows the number.
   const check = carrierCheck({
     applies: recognizable && (state.carrier === 'auto' || answer !== undefined),
@@ -387,6 +395,8 @@ export function lookupStep(
       return state.job ? state : { ...state, pick: event.number, carrier: 'auto', asked: event.number, intent: 'none', trouble: lasting(state.trouble) };
     case 'choose':
       return state.job ? state : { ...state, carrier: event.carrier, intent: 'none', trouble: lasting(state.trouble) };
+    case 'hint':
+      return state.hint === event.carrier ? state : { ...state, hint: event.carrier };
     case 'fill':
       return state.job ? state : {
         ...state,

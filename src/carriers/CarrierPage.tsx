@@ -34,7 +34,7 @@ export function CarrierPage({ text, carrier, locale, language = locale, t, guide
         <h1 lang={language === locale ? undefined : documentLanguage(language)}>{text.title}</h1>
         <GuideMeta updated={text.updated} blocks={text.blocks} locale={locale} t={t} />
       </header>
-      <CarrierTracker locale={locale} color={carrier.color} label={t('carriers.track.label', { carrier: carrier.name })}
+      <CarrierTracker locale={locale} carrier={carrier.id} color={carrier.color} label={t('carriers.track.label', { carrier: carrier.name })}
         placeholder={t('add.trackingPlaceholder')} action={t('sample.yours.action')} note={t('carriers.independent', { carrier: carrier.name })} />
       <GuideText blocks={text.blocks} locale={locale} language={language} t={t} links={guides} />
       <GuideCta locale={locale} t={t} />

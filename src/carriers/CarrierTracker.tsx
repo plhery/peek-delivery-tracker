@@ -8,13 +8,16 @@ import { CarrierSwatch } from './CarrierIndex';
 /**
  * The tracker on a carrier's page: what is typed here is looked up on the
  * landing in the page's language, at the landing's own address (at `/`,
- * someone signed in sees their deliveries). What is typed never goes into an
+ * someone signed in sees their deliveries), which asks the page's carrier
+ * first about the number. What is typed never goes into an
  * address: the field has no name, so without a script the form opens the
  * landing alone; with one, the text waits for the landing in this tab's
  * session storage.
  */
-export function CarrierTracker({ locale, color, label, placeholder, action, note }: {
+export function CarrierTracker({ locale, carrier, color, label, placeholder, action, note }: {
   locale: Locale;
+  /** The page's carrier, handed to the landing with the text as a hint. */
+  carrier: string;
   /** The carrier's colour, beside its name. */
   color: string;
   label: string;
@@ -33,7 +36,7 @@ export function CarrierTracker({ locale, color, label, placeholder, action, note
       field.current?.focus();
       return;
     }
-    writeCarrierHandoff(text);
+    writeCarrierHandoff(text, Date.now(), { carrier });
     window.location.assign(landing);
   }
 

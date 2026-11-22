@@ -8,7 +8,8 @@ import { createAdapterRegistry } from './adapterRegistry';
 import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
 import { checkAmazonShipping } from './amazonShippingEligibility';
 import { HttpError } from './api';
-import { isPhoneNumber, isPlaceholderNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
+import { isPhoneNumber, isPlaceholderNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition, type RecognitionCandidate } from 'universal-parcel-scraper';
+import { AUTOMATIC_CARRIER_IDS, carrierAdapter, requiredRequirements } from './carriers';
 import { preflightTracking } from './trackingPreflight';
 import { rememberPreflightRecognition } from './preflightRecognition';
 import { recordDetection, withLookupPurpose } from './metrics';
@@ -41,14 +42,27 @@ export function fedexEarlyRecognition(env: Record<string, string | undefined> = 
 let registry: AdapterRegistry | undefined;
 const answers = new Map<string, { at: number; answer: ApiCarrierDetectionResponse }>();
 
-async function recognize(trackingNumber: string, typed: string, beforeAsking?: () => Promise<void>, signal?: AbortSignal, health?: SupabaseServiceClient, countryHint?: string | null): Promise<ApiCarrierDetectionResponse> {
+/**
+ * The carrier whose own page the number was typed on, to ask first when none of its rules offers the number: a reader
+ * on that page most likely holds its number. Only a carrier that answers by itself, with no postcode or other input.
+ * One its rules offer is already a candidate, which the hint ranks first.
+ */
+function hintedCandidate(hint: string | undefined, trackingNumber: string, offered: readonly RecognitionCandidate[]): RecognitionCandidate[] {
+  if (!hint || offered.some(({ carrier }) => carrier === hint) || !AUTOMATIC_CARRIER_IDS.has(hint)
+    || carrierAdapter(hint) === 'universal' || requiredRequirements(hint, trackingNumber).length > 0
+    || !(registry ??= createAdapterRegistry()).for(hint)?.recognize) return [];
+  return [{ carrier: hint, needsInput: null, preferred: false }];
+}
+
+async function recognize(trackingNumber: string, typed: string, beforeAsking?: () => Promise<void>, signal?: AbortSignal, health?: SupabaseServiceClient, countryHint?: string | null, hint?: string): Promise<ApiCarrierDetectionResponse> {
   const priorities = getRecognitionPriorities(trackingNumber);
-  const ordering = { countryHint, priorities };
+  const ordering = { countryHint, priorities, ...(hint ? { hint } : {}) };
   // The typed form picks the carriers asked, so it keys the answer; the carriers are asked about the number itself.
-  const cacheKey = `${typed.trim().toUpperCase()}:${countryHint ?? ''}:${JSON.stringify(priorities ?? {})}`;
+  const cacheKey = `${typed.trim().toUpperCase()}:${countryHint ?? ''}:${hint ?? ''}:${JSON.stringify(priorities ?? {})}`;
   const cached = answers.get(cacheKey);
   if (cached && Date.now() - cached.at < (cached.answer.carrier === 'unknown' ? 30_000 : ANSWER_TTL_MS)) return cached.answer;
-  const candidates = recognitionCandidates(typed, ordering).slice(0, 2 * MAX_RECOGNITIONS);
+  const offered = recognitionCandidates(typed, ordering);
+  const candidates = [...hintedCandidate(hint, trackingNumber, offered), ...offered].slice(0, 2 * MAX_RECOGNITIONS);
   const browserCandidates = recognitionCandidates(typed, { ...ordering, phase: 'browser' }).slice(0, MAX_BROWSER_RECOGNITIONS);
   const deadline = performance.now() + 25_000;
   await beforeAsking?.();
@@ -169,9 +183,11 @@ export async function detectCarrier(
   const typed = typeof body.typedNumber === 'string' && body.typedNumber.length <= 80
     && normalizeTrackingNumber(body.typedNumber) === trackingNumber ? body.typedNumber : trackingNumber;
   const detected = detectCarrierMatch(typed);
+  // The carrier whose page the number was typed on (`carrierHint`); the shape's own carrier, when it names one, prevails.
+  const hint = typeof body.carrierHint === 'string' && AUTOMATIC_CARRIER_IDS.has(body.carrierHint) ? body.carrierHint : undefined;
   // Shared shapes need shipment evidence; the shape alone remains a suggestion.
   const answer = detected.carrier === 'unknown' || recognitionCandidates(typed).length > 0 || recognitionCandidates(typed, { phase: 'browser' }).length > 0
-    ? await recognize(trackingNumber, typed, beforeAsking, signal, supportClient, countryHint).catch((error: unknown) => {
+    ? await recognize(trackingNumber, typed, beforeAsking, signal, supportClient, countryHint, hint).catch((error: unknown) => {
       if (signal?.aborted) throw new HttpError(499, 'Carrier check cancelled');
       throw error;
     })

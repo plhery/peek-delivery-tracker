@@ -98,8 +98,11 @@ export interface ParcelClaim {
 
 export interface ParcelLinksClient {
   readonly mode: 'api' | 'demo';
-  /** `prefixOfSaved`: the number is the start of a longer one this device follows, most likely that number typed again. */
-  detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean): Promise<CarrierAnswer>;
+  /**
+   * `prefixOfSaved`: the number is the start of a longer one this device follows, most likely that number typed again.
+   * `carrierHint`: the carrier whose own page handed the number over.
+   */
+  detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean, carrierHint?: CarrierId): Promise<CarrierAnswer>;
   lookupParcel(input: ParcelLookupInput, signal?: AbortSignal): Promise<ParcelLookup>;
   /**
    * `advance` is a manual refresh: the device demo moves its story one step, and the API asks the owner's lookup to

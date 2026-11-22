@@ -174,7 +174,7 @@ describe('FrontDoor', () => {
     const { user, field } = door();
     await user.click(field);
     await user.paste(SHARED);
-    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), true);
+    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), true, undefined);
   });
 
   it('asks the carriers about a pasted number of a shared shape, and goes on when one has it', async () => {
@@ -183,7 +183,7 @@ describe('FrontDoor', () => {
     const { user, field } = door();
     await user.click(field);
     await user.paste(`Good news, your order has shipped!\nTracking number: ${SHARED}`);
-    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), false);
+    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), false, undefined);
     const line = document.querySelector('.door-line')!;
     expect(line).toHaveAttribute('aria-live', 'polite');
     expect(line).toHaveAttribute('aria-busy', 'true');
@@ -762,6 +762,14 @@ describe('FrontDoor', () => {
     await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: UPS, carrier: 'ups' }, expect.any(AbortSignal)));
     act(() => root.unmount());
     container.remove();
+  });
+
+  it('asks the carrier whose page’s box the number was typed into, even about a number of no known shape', async () => {
+    mocks.detect.mockImplementation(async (trackingNumber: string) => ({ trackingNumber, carrier: 'mtscn', asked: ['mtscn'] }));
+    writeCarrierHandoff('DEMO4471203', Date.now(), { carrier: 'mtscn' });
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
+    expect(mocks.detect).toHaveBeenCalledWith('DEMO4471203', expect.any(AbortSignal), false, 'mtscn');
+    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'DEMO4471203', carrier: 'mtscn' }, expect.any(AbortSignal)));
   });
 
   it('looks up a number typed into a carrier’s page’s box once it opens, and only that once', async () => {

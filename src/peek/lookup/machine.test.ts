@@ -98,6 +98,14 @@ describe('asking the carriers', () => {
     expect(chosen.job).toEqual({ type: 'lookup', carrier: 'ups', input: { trackingNumber: number, carrier: 'ups' } });
   });
 
+  it('asks the carrier whose page handed the number over about a number of no known shape', () => {
+    const handed = run([{ type: 'hint', carrier: 'mtscn' }, pasted(SHAPELESS)]);
+    expect(handed.hint).toBe('mtscn');
+    expect(survey(handed)).toMatchObject({ ask: SHAPELESS, check: { status: 'asking', asked: [] } });
+    // A number whose shape names its carrier still needs nobody asked.
+    expect(survey(run([{ type: 'hint', carrier: 'mtscn' }, pasted(UPS)])).ask).toBeNull();
+  });
+
   it('asks on a paste, on leaving the field and on Track, never on a keystroke or a pause', () => {
     const typing = run([typed(SHARED), rested(SHARED)]);
     expect(survey(typing)).toMatchObject({ ask: null, check: { status: 'idle' } });

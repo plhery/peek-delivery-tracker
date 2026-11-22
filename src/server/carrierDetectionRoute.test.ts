@@ -304,6 +304,26 @@ it("keeps each carrier's answer for the saved parcel's first check, and nothing 
   expect(takePreflightRecognition(answered[0]!, number)).toBeUndefined();
 });
 
+it("asks the carrier whose page the number was typed on first, and alone about a number no carrier's shape takes", async () => {
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+  const hinted = (trackingNumber: string, carrierHint: string) => detectWithoutAccount(new NextRequest('https://delivery.example/api/public/detect', {
+    method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': '198.51.100.96' }, body: JSON.stringify({ trackingNumber, carrierHint }),
+  }), { params: Promise.resolve({}) });
+  recognize.mockImplementation(knows('mtscn'));
+  expect(await (await hinted('T12345ZYN', 'mtscn')).json()).toMatchObject({ trackingNumber: 'T12345ZYN', carrier: 'mtscn', asked: ['mtscn'] });
+  expect(asked()).toEqual(['mtscn']);
+  // Among the carriers a shared shape offers, it goes first.
+  recognize.mockReset().mockImplementation(knows());
+  const last = bothBatches('06080000000043').at(-1)!;
+  await hinted('06080000000043', last);
+  expect(asked()[0]).toBe(last);
+  expect(asked()).toHaveLength(bothBatches('06080000000043').length);
+  // A carrier outside the catalog is no hint: nobody is asked about a number no shape takes.
+  recognize.mockClear();
+  expect((await hinted('T12346ZYN', 'nobody')).status).toBe(200);
+  expect(asked()).toEqual([]);
+});
+
 it('asks the next five carriers only when none of the first five knows the number', async () => {
   // The carrier the scraper ranks sixth: SEUR, for many fourteen-digit numbers outside Spain and Portugal.
   const number = '12345678901262';

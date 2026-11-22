@@ -182,9 +182,10 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
   return {
     mode: 'api',
 
-    async detectCarrierPublic(number, signal, prefixOfSaved) {
+    async detectCarrierPublic(number, signal, prefixOfSaved, carrierHint) {
       const trackingNumber = normalizeTrackingNumber(number);
-      const body: ApiCarrierDetectionRequest = { trackingNumber, ...typedNumber(number, trackingNumber), ...(prefixOfSaved ? { prefixOfSaved } : {}) };
+      const body: ApiCarrierDetectionRequest = { trackingNumber, ...typedNumber(number, trackingNumber), ...(prefixOfSaved ? { prefixOfSaved } : {}),
+        ...(carrierHint ? { carrierHint } : {}) };
       const response = await protectedPost('/api/public/detect', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiCarrierDetectionResponse>(response);
@@ -346,8 +347,8 @@ export const parcelLinksMode = client.mode;
 export const demoAccountShare: ParcelShareClient | null = demo?.accountShare ?? null;
 
 /** Which carrier a number belongs to, asked before anyone signs in. */
-export function detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean): Promise<CarrierAnswer> {
-  return client.detectCarrierPublic(trackingNumber, signal, prefixOfSaved);
+export function detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean, carrierHint?: CarrierId): Promise<CarrierAnswer> {
+  return client.detectCarrierPublic(trackingNumber, signal, prefixOfSaved, carrierHint);
 }
 
 /** Follows one parcel without an account. The owner key in the answer is given this once. */

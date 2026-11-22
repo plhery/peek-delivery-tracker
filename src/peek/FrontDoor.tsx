@@ -10,7 +10,7 @@ import { takeCarrierHandoff } from '../lib/carrierHandoff';
 import { clearSharedParcelInput, readSharedParcel } from '../lib/shareTarget';
 import { carrierBrand } from '../lib/carrierBrand';
 import { carrierChoiceSections, carrierChoiceTags, shapeCarrier, usedCarrierIds } from '../lib/carrierPicker';
-import { carrierInfo, formatTrackingNumber, normalizeTrackingNumber } from '../lib/carriers';
+import { CARRIERS, carrierInfo, formatTrackingNumber, normalizeTrackingNumber } from '../lib/carriers';
 import { focusClickedButton } from '../lib/modal';
 import { useTabTitle } from '../lib/tabTitle';
 import { useSite } from '../SiteContext';
@@ -162,8 +162,12 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
     if (account === 'checking' || covered) return;
     const handed = takeCarrierHandoff();
     if (!handed) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
-    if (!handed.pick) return put(handed.text);
+    if (!handed.pick) {
+      // The page's carrier is asked first about the number, and alone about one no carrier's shape takes.
+      if (handed.carrier && Object.hasOwn(CARRIERS, handed.carrier)) send({ type: 'hint', carrier: handed.carrier as CarrierId });
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
+      return put(handed.text);
+    }
     relinking.current = handed.link && isParcelLinkId(handed.link) ? { id: handed.link, number: normalizeTrackingNumber(handed.text) } : null;
     if (field.current) field.current.value = handed.text;
     touch();

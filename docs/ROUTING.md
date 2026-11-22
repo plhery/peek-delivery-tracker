@@ -142,7 +142,9 @@ helps, and `proxy_refused` for any other.
    - Postal Ninja is off by default. `TRACKING_ENABLE_POSTAL_NINJA=true` adds it after the
      other aggregators, whatever its tier, before UPU, when the list above allows it. For a
      parcel filed under no carrier, it is asked only once ParcelsApp and 17TRACK have both
-     found nothing for the number in the same check, unless it already tracks the parcel.
+     found nothing for the number in the same check, unless it already tracks the parcel. One
+     of the two the check can't ask while its service pauses (a cooldown or rate limit, its
+     hourly lookups or its budget of answers without history spent) doesn't hold it back.
    - Track123 is asked through a courier's own page, so only about the carrier a lookup is
      filed under, when the scraper lists a page that answered that carrier's public numbers
      (FedEx, UPS and DHL among them). It then takes its place in the carrier's order like any

@@ -1926,7 +1926,9 @@ export class TrackingRouter {
     const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja' && source !== 'Track718');
     // A parcel filed under no carrier asks Postal Ninja only once ParcelsApp and 17TRACK have both found nothing for the
     // number in the same check: it rarely knows a number they don't, and its lookups are slow. Its turn comes with theirs.
-    // One that tracks the parcel is asked as usual.
+    // One of them the check can't ask while its service pauses (a cooldown or rate limit, its hourly lookups or its
+    // budget of answers without history spent) holds it back no longer: Postal Ninja stands in for it. One that tracks
+    // the parcel is asked as usual.
     const ninjaAfter = declared === 'unknown' && preferred !== 'Postal Ninja'
       ? (['ParcelsApp', '17TRACK'] as const).filter((other) => sources.includes(other)) : [];
     const offset = state.discovery_cursor % Math.max(1, rotation.length);
@@ -2014,6 +2016,11 @@ export class TrackingRouter {
     const heldUntil = new Map<UniversalSource, number>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
+    // Providers this check couldn't ask while their service paused: their cooldown, their hourly lookups or their budget of
+    // answers without history spent.
+    const paused = new Set<UniversalSource>();
+    const pausing = (source: UniversalSource) => paused.has(source)
+      || (state.failures[source]?.kind === 'rate_limited' && millis(state.failures[source]?.retry_at) > now().getTime());
     // Providers left while they read the carriers for the number, and when their read ends on the monotonic clock:
     // the check asks the next providers meanwhile and comes back for the answer.
     const reading = new Map<UniversalSource, number>();
@@ -2025,7 +2032,7 @@ export class TrackingRouter {
       const remaining = Math.floor(universalDeadline - performance.now());
       if ((visit !== 'again' && attemptedUniversal.has(source)) || remaining <= 5_000 || millis(state.failures[source]?.retry_at) > now().getTime()
         || (scheduled && awaitsInput(source)) || (sparse && attempts > 0)) return null;
-      if (source === 'Postal Ninja' && ninjaAfter.some((other) => !answeredEmpty.includes(other))) return null;
+      if (source === 'Postal Ninja' && ninjaAfter.some((other) => !answeredEmpty.includes(other) && !pausing(other))) return null;
       attemptedUniversal.add(source);
       // Asked now: what is recorded for it is what this ask finds.
       if (visit === 'again') heldUntil.delete(source);
@@ -2043,6 +2050,7 @@ export class TrackingRouter {
       // A check nobody asked for leaves a provider that spent its budget of answers without history
       // (providerMisses.ts) to the numbers it tracked: it asks the next provider, as after a cooldown.
       if (!reused && scheduled && !tracked && this.options.misses?.spent(source, now().getTime())) {
+        paused.add(source);
         report('provider_budget_held', source); return null;
       }
       const acquire = async () => {
@@ -2092,6 +2100,7 @@ export class TrackingRouter {
           // Still another check's when the wait would cut into its budget, or sent its lookups for the hour
           // (providerPolicy.ts): the check moves on to the next provider, and this one keeps no rest.
           heldUntil.set(source, millis(lease.retry_at));
+          if (lease.limited) paused.add(source);
           report(lease.limited ? 'provider_limited' : 'provider_held', source); return null;
         }
         if (!lease.token) {

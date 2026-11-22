@@ -2349,6 +2349,22 @@ describe('persistent tracking routing', () => {
       '17TRACK': { kind: 'no_history', count: 1, retry_at: new Date(time.getTime() + 3_600_000).toISOString() } } }) } }), false)
       .catch(() => undefined);
     expect(asked()).not.toContain('Postal Ninja');
+    // 17TRACK paused for every parcel (its cooldown, its hourly lookups spent, or its rate limit from an earlier check):
+    // Postal Ninja stands in for it once ParcelsApp has found nothing.
+    for (const pause of [{ token: null, retry_at: '2026-09-10T18:00:00Z' }, { token: null, retry_at: '2026-09-10T13:00:00Z', limited: true }]) {
+      universal.mockClear();
+      health.acquireTrackingProvider.mockImplementation(async (source: string) =>
+        source === '17TRACK' ? pause : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+      await router.fetch(parcel(), false).catch(() => undefined);
+      expect(asked()).not.toContain('17TRACK');
+      expect(asked()).toContain('Postal Ninja');
+    }
+    health.acquireTrackingProvider.mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+    universal.mockClear();
+    await router.fetch(parcel({ carrier_data: { routing: state({ failures: {
+      '17TRACK': { kind: 'rate_limited', count: 1, retry_at: new Date(time.getTime() + 3_600_000).toISOString() } } }) } }), false)
+      .catch(() => undefined);
+    expect(asked()).toEqual(expect.arrayContaining(['ParcelsApp', 'Postal Ninja']));
     // While they wait their turns, a check asks nobody, and Postal Ninja's turn doesn't bring one sooner.
     universal.mockClear();
     const later = new Date(time.getTime() + 5 * 3_600_000).toISOString();

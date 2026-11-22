@@ -2580,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "whistl-sendungsverfolgung",
+      "title": "Whistl Sendungsverfolgung: wer liefert und was tun",
+      "name": "Whistl",
+      "color": "#fd4f00"
+    },
+    {
       "id": "xdp",
       "catalog": "xdp",
       "slug": "xdp-sendungsverfolgung",
@@ -3876,6 +3884,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi MaltaPost\u00a0: numéros, statuts et retrait",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "suivi-whistl",
+      "title": "Suivi Whistl\u00a0: qui livre ton colis et que faire",
+      "name": "Whistl",
+      "color": "#fd4f00"
     },
     {
       "id": "xdp",
@@ -5176,6 +5192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "tracciamento-whistl",
+      "title": "Tracciamento Whistl: chi consegna il pacco e cosa fare",
+      "name": "Whistl",
+      "color": "#fd4f00"
+    },
+    {
       "id": "xdp",
       "catalog": "xdp",
       "slug": "tracciamento-xdp",
@@ -6450,6 +6474,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "seguimiento-whistl",
+      "title": "Seguimiento Whistl: quién entrega tu paquete y qué hacer",
+      "name": "Whistl",
+      "color": "#fd4f00"
+    },
+    {
       "id": "xdp",
       "catalog": "xdp",
       "slug": "seguimiento-xdp",
@@ -7706,6 +7738,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio MaltaPost: números, estados e levantamento",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "seguimento-whistl",
+      "title": "Seguimento Whistl: quem entrega a encomenda e o que fazer",
+      "name": "Whistl",
+      "color": "#fd4f00"
     },
     {
       "id": "xdp",
@@ -8998,6 +9038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie MaltaPost: numery, statusy i odbiór",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "whistl",
+      "catalog": "whistl",
+      "slug": "sledzenie-whistl",
+      "title": "Śledzenie Whistl: kto doręcza paczkę i co zrobić",
+      "name": "Whistl",
+      "color": "#fd4f00"
     },
     {
       "id": "xdp",

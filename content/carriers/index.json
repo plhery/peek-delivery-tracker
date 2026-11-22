@@ -101,7 +101,7 @@
   { "id": "cyprus-post", "catalog": "cyprus-post", "name": "Cyprus Post", "languages": ["en", "el"] },
   { "id": "post-luxembourg", "catalog": "post-luxembourg", "name": "POST Luxembourg", "languages": ["en", "fr", "de"] },
   { "id": "maltapost", "catalog": "maltapost", "name": "MaltaPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "whistl", "catalog": "whistl", "name": "Whistl", "languages": ["en"] },
+  { "id": "whistl", "catalog": "whistl", "name": "Whistl", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xdp", "catalog": "xdp", "name": "XDP", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "apc-overnight", "catalog": "apc-overnight", "name": "APC Overnight", "languages": ["en"] },
   { "id": "ups", "catalog": "ups", "name": "UPS", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },

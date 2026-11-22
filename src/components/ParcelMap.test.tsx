@@ -87,6 +87,18 @@ describe('parcel map', () => {
     expect(screen.queryByText(/ to go$/)).not.toBeInTheDocument();
   });
 
+  it('heads for the town where the account\'s parcels are usually delivered as an estimate, when the server named it', async () => {
+    const user = userEvent.setup();
+    const bern: EventPlace = { latitude: 46.948, longitude: 7.447, precision: 'city', country: 'CH', name: 'Bern' };
+    show({ usualPlace: bern, events: [event(18, 'in_transit', harkingen), event(14, 'in_transit', leipzig), event(11, 'in_transit', kyoto)] });
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Open the map' })).toBeEnabled());
+    await user.click(screen.getByRole('button', { name: 'Open the map' }));
+    const map = screen.getByRole('dialog', { name: 'Map of the journey from Kyoto, usually delivered near Bern' });
+    expect(within(map).getByText('Usually delivered near').nextElementSibling).toHaveTextContent(/^Bern$/);
+    expect(within(map).getByText(/^about .+ to go$/)).toBeInTheDocument();
+    expect(within(map).queryByText('To')).not.toBeInTheDocument();
+  });
+
   it('leaves the card as it was when no scan has a place', () => {
     show({ events: [event(11, 'in_transit')] });
     expect(document.querySelector('.detail__engraving')).toBeNull();

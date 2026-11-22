@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 21 November 2026
+Effective: 22 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -213,6 +213,14 @@ The Android app draws its map from data built into the app and fetches nothing
 for it. When you tap Directions or Show on map for a pickup point, in an app or
 in an email, Apple Maps or Google Maps receives that pickup point's name and
 address, and nothing else about the parcel.
+
+To estimate where a parcel is heading once it reaches your country, the service
+uses the towns of your past deliveries: when your apps read your parcels, it
+finds the town most of your delivered parcels were delivered near and draws the
+rest of the way there, marked as an estimate. It is worked out from your own
+parcels each time, kept on your account only and never taken from your network
+address or your device's clock; shared links, friends, emails and assistants
+never get it.
 
 The Android app from Google Play has a barcode scanner, which uses the camera
 only while it is open. Google's ML Kit model, built into the app, reads the

@@ -7,7 +7,7 @@ import { SupabaseClient, SupabaseError, SupabaseServiceClient, SupabaseUserClien
 
 // Synthetic identifiers only.
 const userId = '55000000-0000-4000-a000-000000000001';
-const parcel = { id: '55000000-0000-4000-a000-000000000002', tracking_number: 'TEST1234', events: [] };
+const parcel = { id: '55000000-0000-4000-a000-000000000002', tracking_number: 'TEST1234', carrier: 'swiss-post', carrier_data: {}, events: [] };
 
 function list(query = '') {
   return GET(new NextRequest(`https://delivery.example/api/packages${query}`, {
@@ -73,6 +73,23 @@ it('serves the carrier\'s scans without "Tracking added" once they reach back to
   const [served] = (await (await list()).json()).packages;
   expect(served.tracking_events).toEqual([expect.objectContaining({ id: 'delivered', place: null })]);
   expect(JSON.stringify(served)).not.toContain('provider_event_id');
+});
+
+it('heads a parcel in the account\'s country for the town its own deliveries usually reach, from the list itself', async () => {
+  const row = (id: string, scans: [stage: string, at: string, location: string][]) => ({
+    ...parcel, id, carrier: 'la-poste', tracking_events: scans.map(([stage, occurred_at, location], index) => ({
+      id: `${id}-${index}`, package_id: id, stage, description: stage, location, occurred_at, point: null })) });
+  const delivered = (id: string, day: string, town: string) => row(id, [['out_for_delivery', `${day}T07:00:00Z`, town], ['delivered', `${day}T11:00:00Z`, town]]);
+  vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([
+    delivered('d1', '2026-11-02', 'Lyon, FR'), delivered('d2', '2026-11-09', 'Villeurbanne, FR'),
+    row('open', [['accepted', '2026-11-20T08:00:00Z', 'Hong Kong, HK'], ['in_transit', '2026-11-21T08:00:00Z', 'Paris, FR']]),
+  ]);
+  vi.spyOn(SupabaseUserClient.prototype, 'recordOpened').mockResolvedValue(undefined);
+  const delivery = vi.spyOn(SupabaseUserClient.prototype, 'listDeliveredPackages');
+  const packages = (await (await list('?includeArchived=true')).json()).packages as Array<{ id: string; usual_place?: unknown }>;
+  expect(packages.find(({ id }) => id === 'open')?.usual_place).toMatchObject({ name: 'Villeurbanne', country: 'FR', precision: 'city' });
+  expect(packages.filter(({ usual_place }) => usual_place)).toHaveLength(1);
+  expect(delivery).not.toHaveBeenCalled();
 });
 
 it('answers 409 with the parcel when a second add of it races the first', async () => {

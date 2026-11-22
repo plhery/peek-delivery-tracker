@@ -56,6 +56,15 @@ describe('journeyMap', () => {
     expect(Math.round(map.route.km)).toBeGreaterThan(600);
   });
 
+  it('never heads for the town where the account’s parcels are usually delivered: an email can be forwarded', async () => {
+    const waiting = { ...parcel([['accepted', '2026-10-01T16:48:00Z', HAMBURG], ['ready_for_pickup', '2026-10-03T12:12:00Z', ZURICH]], 'CH'),
+      usualPlace: town('Bern', 'CH', 46.948, 7.447) };
+    const map = (await journeyMap(waiting, 'en-CH', SIZE, INSETS, TINT, { stage: 'ready_for_pickup' }))!;
+    expect(map.route.destination).toBeUndefined();
+    expect(map.labels.map(({ text }) => text)).not.toContain('Bern');
+    expect(map.svg).not.toContain('stroke-dasharray');
+  });
+
   it('keeps the route’s names and Pip off what the card writes over the map', async () => {
     const journey = parcel([['accepted', '2026-10-01T16:48:00Z', HAMBURG], ['delivered', '2026-10-03T12:12:00Z', ZURICH]]);
     const name = (await draw(journey))!.labels.find(({ text }) => text === 'Hamburg')!;

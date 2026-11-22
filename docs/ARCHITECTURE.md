@@ -84,8 +84,20 @@ Key server modules:
   the way still to go shows once the stroke has arrived. The way still to go leads to the
   town the parcel is addressed to when the carrier's address names one the resolver finds
   in the country the parcel is going to (`destination_place`, [destinationPlace.ts](../src/server/destinationPlace.ts),
-  served to the owner alone while the parcel is on its way), else to the destination
-  country, and ends once the newest scan is within 15 km of the town or in the country.
+  served to the owner alone while the parcel is on its way), else, once its newest placed
+  scan is in the country of the town where the account's parcels are usually delivered, to
+  that town (`usual_place`, [usualPlace.ts](../src/server/usualPlace.ts)), else to the
+  destination country, and ends once the newest scan is within 15 km of the town or in the country.
+  The usual town comes from the account's own delivered parcels: of its newest ten deliveries
+  placed in a town by a last-mile scan, at least two, the town more than half of them lie
+  within 50 km of. A parcel takes it while it is on its way, going to that country if the
+  carrier names one, more than 15 km from the town, with no town in its address and no pickup
+  point. It is worked out on each read and never stored, nor guessed from the reader's network
+  or clock: the list works it out from the parcels it serves with the archived ones, and a
+  route that serves one parcel reads the account's newest 50 delivered parcels, only when that
+  parcel could take it. Only the account's own parcel routes serve it. The apps draw the way
+  to it dotted and fainter than the way to an addressed town, to a dashed ring named "Near
+  Lyon", and the summary says "Usually delivered near Lyon, about 120 km to go".
   A card frames places a town or two apart as it frames a single place, and the opened
   map comes no closer than about 70 km across. Places too close to tell apart in a frame
   share one dot, the parcel's or else the first place's, and the route runs to it.
@@ -176,7 +188,8 @@ Key server modules:
     that names one is left out, and so are a place and a status line that do. A text names one
     when the scraper's `hasPrivateDeliveryDetails` matches it or it contains the signatory,
     recipient name, address or pickup code the parcel's carrier data holds (`privateDetails.ts`).
-    Nor does a viewer get the town the parcel is addressed to that the owner's map heads for.
+    Nor does a viewer get the town the parcel is addressed to that the owner's map heads for,
+    or the town the owner's parcels are usually delivered to; emails draw neither.
     A viewer's delivery alert names no place, and another alert no place that names one (with
     none when the parcel's details can't be read). The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.

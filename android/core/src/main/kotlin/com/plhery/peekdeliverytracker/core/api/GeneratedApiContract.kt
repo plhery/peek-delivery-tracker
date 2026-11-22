@@ -4330,6 +4330,7 @@ data class Parcel(
     @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("carrier_outage") val carrierOutage: CarrierOutage? = null,
     @SerialName("destination_place") val destinationPlace: EventPlace? = null,
+    @SerialName("usual_place") val usualPlace: EventPlace? = null,
     @SerialName("email_muted") val emailMuted: Boolean? = null,
     @SerialName("news_at") val newsAt: String? = null,
     @SerialName("seen_at") val seenAt: String? = null,

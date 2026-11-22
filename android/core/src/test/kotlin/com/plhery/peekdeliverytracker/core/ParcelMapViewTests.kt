@@ -41,6 +41,22 @@ class ParcelMapViewTests {
     }
 
     @Test
+    fun routeHeadsForTheTownWhereTheAccountsParcelsAreUsuallyDeliveredAsAnEstimate() {
+        val bern = EventPlace(latitude = 46.948, longitude = 7.447, precision = EventPlacePrecision.City, country = "CH", name = "Bern")
+        val usual = parcel("CH").copy(usualPlace = bern)
+        val destination = ParcelRoute(usual, atlas, AppLanguage.En).destination!!
+        assertEquals("Bern", destination.name)
+        assertEquals("Near Bern", destination.estimate)
+        assertEquals(listOf("Near Bern", "Near Bern"), listOf(destination.name(sites = false), destination.name(sites = true)))
+        assertEquals("Près de Bern", ParcelRoute(usual, atlas, AppLanguage.Fr).destination!!.estimate)
+        // The town it is addressed to comes before it.
+        val zurich = EventPlace(latitude = 47.367, longitude = 8.55, precision = EventPlacePrecision.City, country = "CH", name = "Zürich")
+        val addressed = ParcelRoute(usual.copy(destinationPlace = zurich), atlas, AppLanguage.En).destination!!
+        assertEquals("Zürich", addressed.name)
+        assertNull(addressed.estimate)
+    }
+
+    @Test
     fun routeWithoutADestinationOrAnUnknownCountryEndsAtItsLastScan() {
         assertNull(ParcelRoute(parcel(null), atlas, AppLanguage.En).destination)
         assertNull(ParcelRoute(parcel("XX"), atlas, AppLanguage.En).destination)

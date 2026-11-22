@@ -18,7 +18,7 @@ describe('the town the parcel is addressed to', () => {
     occurred_at, point: { latitude, longitude },
   });
   const served = (data: Record<string, unknown>, extra: Record<string, unknown> = {}, destination = true) => withEventPlaces({
-    id: 'parcel', carrier: 'la-poste', current_stage: 'in_transit', carrier_data: data,
+    id: 'parcel', carrier: 'la-poste', carrier_data: data,
     tracking_events: [scan('FR', 'Paris', 48.853, 2.349, '2026-11-20T08:00:00Z')], ...extra,
   }, { destination }) as { destination_place?: Record<string, unknown> };
 
@@ -37,12 +37,18 @@ describe('the town the parcel is addressed to', () => {
       .not.toHaveProperty('destination_place');
   });
 
-  it('is left out without a town, and once the parcel waits at a pickup point, is delivered or goes back', () => {
+  it('is left out without a town, and once the parcel waits at a pickup point, is delivered or goes back by its scans', () => {
     expect(served({ receiver_address: '69001', destination_country: 'FR' })).not.toHaveProperty('destination_place');
     expect(served({ destination_country: 'FR' })).not.toHaveProperty('destination_place');
-    for (const current_stage of ['ready_for_pickup', 'delivered', 'returned']) {
-      expect(served({ receiver_address: 'Lyon', destination_country: 'FR' }, { current_stage })).not.toHaveProperty('destination_place');
+    for (const stage of ['ready_for_pickup', 'delivered', 'returned']) {
+      const newest = { ...scan('FR', 'Paris', 48.853, 2.349, '2026-11-21T08:00:00Z'), id: 'newest', stage };
+      expect(served({ receiver_address: 'Lyon', destination_country: 'FR' }, {
+        tracking_events: [scan('FR', 'Paris', 48.853, 2.349, '2026-11-20T08:00:00Z'), newest],
+      })).not.toHaveProperty('destination_place');
     }
+    // The stage the parcel's row stores is not read: the account's routes don't select it, and the apps go by the scans.
+    expect(served({ receiver_address: 'Lyon', destination_country: 'FR' }, { current_stage: 'delivered' }).destination_place)
+      .toMatchObject({ name: 'Lyon' });
   });
 
   it('is left out when the gazetteer fails, reported once', () => {

@@ -15,6 +15,11 @@ export interface Place {
   country: string;
   coordinate: Coordinate;
   precision: Precision;
+  /**
+   * What the map writes beside a place it only estimates, the town where the account's parcels are usually delivered:
+   * "Near Lyon". The summary names the town itself.
+   */
+  estimate?: string;
 }
 
 export interface Scan {
@@ -80,8 +85,8 @@ export function placeFromEvent(place: EventPlace): Place {
   };
 }
 
-/** What to call a place: its town on a card, the facility itself on the opened map, which has the room. */
-export const placeName = (place: Place, sites: boolean) => (sites && place.site) || place.name;
+/** What to call a place: its town on a card, the facility itself on the opened map, which has the room; an estimate as such. */
+export const placeName = (place: Place, sites: boolean) => place.estimate ?? ((sites && place.site) || place.name);
 
 /** A country as a destination, drawn at its label point. */
 export function countryPlace(country: string, name: string, coordinate: Coordinate): Place {

@@ -19,17 +19,22 @@ import './ParcelMap.css';
  * A card that draws no map passes `wanted` as false, and never asks for the map data.
  */
 export function useParcelRoute(parcel: ParcelWithEvents, languageTag: string, wanted = true): { placed: boolean; route: Route | null } {
+  const { t } = useI18n();
   const placed = wanted && withoutGeneratedScans(parcel.events).some((event) => event.place);
   const ready = useWorld(placed);
+  const near = parcel.usualPlace ? t('map.usualPlace', { place: parcel.usualPlace.name }) : undefined;
   const route = useMemo(() => {
     if (!placed || !ready) return null;
-    // The town the parcel is addressed to says more than its country: "To Lyon, 340 km to go".
+    // The town the parcel is addressed to says more than its country: "To Lyon, 340 km to go". Without it, once the
+    // parcel is in the country of the town where the account's parcels are usually delivered, the server names that
+    // town, which the map heads for as an estimate: "Usually delivered near Lyon".
     const label = parcel.destinationCountry ? countryLabel(parcel.destinationCountry) : null;
     const destination = parcel.destinationPlace ? placeFromEvent(parcel.destinationPlace)
-      : parcel.destinationCountry && label
-        ? countryPlace(parcel.destinationCountry, countryName(parcel.destinationCountry, languageTag), label) : undefined;
+      : parcel.usualPlace ? { ...placeFromEvent(parcel.usualPlace), estimate: near }
+        : parcel.destinationCountry && label
+          ? countryPlace(parcel.destinationCountry, countryName(parcel.destinationCountry, languageTag), label) : undefined;
     return routeFromEvents(parcel.events, destination, (code) => countryName(code, languageTag));
-  }, [placed, ready, parcel.events, parcel.destinationCountry, parcel.destinationPlace, languageTag]);
+  }, [placed, ready, parcel.events, parcel.destinationCountry, parcel.destinationPlace, parcel.usualPlace, near, languageTag]);
   return { placed, route };
 }
 
@@ -37,6 +42,7 @@ export function useParcelRoute(parcel: ParcelWithEvents, languageTag: string, wa
 function useRouteLabel(route: Route): string {
   const { t } = useI18n();
   const origin = route.origin ? placeName(route.origin.place, true) : '';
+  if (route.destination?.estimate) return t('map.labelUsual', { from: origin, to: route.destination.name });
   const finish = route.destination ?? route.current?.place;
   const end = finish ? placeName(finish, true) : origin;
   return end === origin ? t('map.labelOne', { place: origin }) : t('map.label', { from: origin, to: end });
@@ -152,8 +158,10 @@ function RouteSummary({ route, stage }: { route: Route; stage?: Stage }) {
   const finished = delivered || stage === 'returned';
   const end = route.destination ?? current.place;
   // A delivery no scan places was in the destination country, which the route keeps; with none, the last stop is only where the parcel was last seen.
+  // A town the map only estimates says so: "Usually delivered near Lyon, about 120 km to go".
+  const estimate = Boolean(route.destination?.estimate);
   const endLabel = delivered && (route.latestLocated || route.destination) ? t('map.delivered')
-    : route.destination ? t('map.to') : route.latestLocated ? t('map.now') : t('map.lastSeen');
+    : estimate ? t('map.usually') : route.destination ? t('map.to') : route.latestLocated ? t('map.now') : t('map.lastSeen');
   const single = route.stops.length === 1 && !route.destination;
   return <div className="parcel-map__summary" data-single={single || undefined}>
     {!single && <div>
@@ -163,12 +171,12 @@ function RouteSummary({ route, stage }: { route: Route; stage?: Stage }) {
     </div>}
     <div data-end>
       <span>{endLabel}</span>
-      <strong>{placeName(end, true)}</strong>
+      <strong>{estimate ? end.name : placeName(end, true)}</strong>
       <small><span aria-hidden="true">{flag(end.country)}</span> {countryName(end.country, languageTag)}</small>
     </div>
     {!single && <p className="parcel-map__facts">
       {route.km >= 1 && <span>{finished ? formatKm(route.km, languageTag, distanceUnit) : t('map.soFar', { distance: formatKm(route.km, languageTag, distanceUnit) })}</span>}
-      {!finished && route.remainingKm !== undefined && <span>{t('map.toGo', { distance: formatKm(route.remainingKm, languageTag, distanceUnit) })}</span>}
+      {!finished && route.remainingKm !== undefined && <span>{t(estimate ? 'map.toGoAbout' : 'map.toGo', { distance: formatKm(route.remainingKm, languageTag, distanceUnit) })}</span>}
       {route.countries.length > 1 && <span>{t('map.countries.many', { count: route.countries.length })}</span>}
     </p>}
   </div>;

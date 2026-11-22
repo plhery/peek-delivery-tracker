@@ -126,11 +126,43 @@ final class ParcelRouteTests: XCTestCase {
             carrierData: CarrierData(destinationCountry: "CH"), notificationsMuted: false, trackingEvents: [scan]
         )
         XCTAssertEqual(ParcelRoute(parcel: parcel, atlas: atlas, language: .en).destination?.isCountry, true)
+        // The town where the account's parcels are usually delivered comes before the country, as an estimate.
+        parcel.usualPlace = EventPlace(latitude: 46.948, longitude: 7.447, precision: .city, country: "CH", name: "Bern")
+        let usual = ParcelRoute(parcel: parcel, atlas: atlas, language: .en)
+        XCTAssertEqual(usual.destination?.name, "Bern")
+        XCTAssertEqual(usual.destination?.estimate, "Near Bern")
+        XCTAssertEqual([usual.destination?.name(sites: false), usual.destination?.name(sites: true)], ["Near Bern", "Near Bern"])
+        XCTAssertEqual(ParcelRoute(parcel: parcel, atlas: atlas, language: .fr).destination?.estimate, "Près de Bern")
+        // The town it is addressed to comes before both.
         parcel.destinationPlace = EventPlace(latitude: 47.367, longitude: 8.55, precision: .city, country: "CH", name: "Zürich")
         let route = ParcelRoute(parcel: parcel, atlas: atlas, language: .en)
         XCTAssertEqual(route.destination?.name, "Zürich")
+        XCTAssertNil(route.destination?.estimate)
         XCTAssertEqual(route.destination?.isCountry, false)
         XCTAssertGreaterThan(route.remainingKilometres ?? 0, 400)
+    }
+
+    func testAnEstimatedTownIsDrawnFainterThanTheCarriersRoute() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "World", withExtension: "json"))
+        let atlas = try WorldAtlas(data: Data(contentsOf: url))
+        let size = CGSize(width: 400, height: 300)
+        func overlay(_ destination: RoutePlace) -> MapOverlay {
+            let route = ParcelRoute(places: [leipzig, basel], destination: destination)
+            let camera = GlobeCamera.fit(route.stops.map(\.place.point) + [destination.point], in: CGRect(x: 40, y: 40, width: 320, height: 220),
+                                         minimumKilometres: 260)
+            return MapOverlay(route: route, camera: camera, size: size, insets: EdgeInsets(), labels: .ends, mode: .journey,
+                              context: false, atlas: atlas, locale: Locale(identifier: "en"), countryName: { $0 })
+        }
+        var town = city("Bern", "CH", 7.447, 46.948)
+        let addressed = overlay(town)
+        XCTAssertEqual(addressed.legs.first?.kind, .remaining)
+        XCTAssertTrue(addressed.dots.contains { $0.kind == .destination })
+        town.estimate = "Near Bern"
+        let estimated = overlay(town)
+        XCTAssertEqual(estimated.legs.first?.kind, .estimate)
+        XCTAssertTrue(estimated.dots.contains { $0.kind == .estimate })
+        XCTAssertFalse(estimated.dots.contains { $0.kind == .destination })
+        XCTAssertTrue(estimated.labels.contains { $0.text == "Near Bern" })
     }
 
     func testScalesAndViews() {

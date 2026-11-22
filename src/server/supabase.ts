@@ -3102,6 +3102,16 @@ export class SupabaseUserClient extends SupabaseClient {
     return parcel ? withReviewDemo(parcel, this.ownerId) : null;
   }
 
+  /**
+   * The account's own newest delivered parcels, archived ones too, which tell the town its parcels are usually
+   * delivered to (usualPlace.ts) on a route that serves one parcel.
+   */
+  async listDeliveredPackages(): Promise<JsonObject[]> {
+    return rows(await this.request(`/rest/v1/packages?${query({
+      select: PACKAGE_SELECT, current_stage: 'eq.delivered', order: 'created_at.desc', limit: '50',
+    })}`)).map((parcel) => withReviewDemo(parcel, this.ownerId));
+  }
+
   override async getPackageByTrackingNumber(trackingNumber: string): Promise<JsonObject | null> {
     const parcel = await super.getPackageByTrackingNumber(trackingNumber);
     return parcel ? withReviewDemo(parcel, this.ownerId) : null;

@@ -1,11 +1,14 @@
 import 'server-only';
 
 import { locatePlace } from 'universal-parcel-scraper/places';
+import type { ApiPackageRow } from '../generated/apiContract';
+import { currentEvent } from '../lib/stages';
+import { toParcel } from '../store/apiRepo';
 import { captureOperationalError } from './observability';
 import { isRecord, type JsonObject } from './types';
 
 /** The stages of a parcel still on its way to the address: not one waiting at a pickup point, delivered or going back. */
-const ON_ITS_WAY: ReadonlySet<string> = new Set(['pending', 'registered', 'accepted', 'in_transit', 'customs', 'exception',
+export const ON_ITS_WAY: ReadonlySet<string> = new Set(['pending', 'registered', 'accepted', 'in_transit', 'customs', 'exception',
   'out_for_delivery', 'failed_attempt']);
 
 let reported = false;
@@ -17,12 +20,16 @@ let reported = false;
  * ParcelRoute). The address is the owner's (privateDetails.ts), so only the owner's routes ask for it. Only a town in
  * the country the parcel is going to, or, when the carrier names none, in the country of its newest placed scan: a town
  * of the same name elsewhere is no dot at all. Null when the carrier gives no town, once the parcel stops being on its
- * way, and without the gazetteer; the route keeps the destination's country.
+ * way by the scans the apps show (`served`, the row as withEventPlaces serves it, read by the apps' own `currentEvent`),
+ * and without the gazetteer; the route keeps the destination's country.
  */
-export function destinationPlace(row: JsonObject, events: readonly JsonObject[]): JsonObject | null {
+export function destinationPlace(row: JsonObject, served: JsonObject): JsonObject | null {
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
-  if (typeof data.receiver_address !== 'string' || !ON_ITS_WAY.has(String(row.current_stage))) return null;
+  if (typeof data.receiver_address !== 'string') return null;
+  const parcel = toParcel(served as unknown as ApiPackageRow);
+  if (!ON_ITS_WAY.has(currentEvent(parcel.events, parcel.returnHeld)?.stage ?? '')) return null;
   const town = data.receiver_address.split('\n').map((line) => line.trim()).filter(Boolean).at(-1);
+  const events = Array.isArray(served.tracking_events) ? served.tracking_events.filter(isRecord) : [];
   const country = typeof data.destination_country === 'string' && /^[A-Za-z]{2}$/.test(data.destination_country)
     ? data.destination_country.toUpperCase() : newestCountry(events);
   if (!town || !country) return null;

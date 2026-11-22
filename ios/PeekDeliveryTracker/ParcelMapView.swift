@@ -1,13 +1,18 @@
 import SwiftUI
 
 extension ParcelRoute {
-    /// A parcel's route, with the town it is addressed to when the server placed one (for its owner alone), else its
-    /// destination country when the carrier gave one: "To Lyon, 340 km to go".
+    /// A parcel's route, with the town it is addressed to when the server placed one (for its owner alone): "To Lyon,
+    /// 340 km to go". Else, once the parcel is in the country of the town where the account's parcels are usually
+    /// delivered, that town, which the server names for the owner alone and the map heads for as an estimate: "Usually
+    /// delivered near Lyon". Else its destination country when the carrier gave one.
     init(parcel: Parcel, atlas: WorldAtlas, language: AppLanguage) {
         let name = { (code: String) in TrackingLocation.countryName(code, language: language) }
-        let destination = parcel.destinationPlace.map { RoutePlace($0) } ?? parcel.carrierData?.destinationCountry.flatMap { code in
-            atlas.label(of: code).map { RoutePlace.country(code, name: name(code), at: $0) }
-        }
+        let near = ExtensionLocalizer(languageCode: language.rawValue).text("map.usualPlace")
+        let destination = parcel.destinationPlace.map { RoutePlace($0) }
+            ?? parcel.usualPlace.map { RoutePlace($0, estimate: near.replacingOccurrences(of: "{{place}}", with: $0.name)) }
+            ?? parcel.carrierData?.destinationCountry.flatMap { code in
+                atlas.label(of: code).map { RoutePlace.country(code, name: name(code), at: $0) }
+            }
         self.init(events: parcel.trackingEvents, destination: destination, countryName: name)
     }
 }
@@ -165,6 +170,9 @@ struct ParcelMapScreen: View {
     /// The opened map has room for a facility's own name, so it says "Zürich-Mülligen" where the card says "Zürich".
     private var label: String {
         let origin = route.origin?.place.name(sites: true) ?? ""
+        if let destination = route.destination, destination.estimate != nil {
+            return localizer.text("map.labelUsual", ["from": origin, "to": destination.name])
+        }
         let end = (route.destination ?? route.current?.place)?.name(sites: true) ?? origin
         return end == origin ? localizer.text("map.labelOne", ["place": origin]) : localizer.text("map.label", ["from": origin, "to": end])
     }
@@ -222,7 +230,9 @@ struct ParcelMapScreen: View {
             let finished = delivered || stage == .returned
             let end = route.destination ?? current.place
             // A delivery no scan places was in the destination country, which the route keeps; with none, the last stop is only where the parcel was last seen.
+            // A town the map only estimates says so: "Usually delivered near Lyon, about 120 km to go".
             let endLabel = delivered && (route.latestLocated || route.destination != nil) ? "map.delivered"
+                : route.destination?.estimate != nil ? "map.usually"
                 : route.destination != nil ? "map.to" : route.latestLocated ? "map.now" : "map.lastSeen"
             let single = route.stops.count == 1 && route.destination == nil
             // At the largest text sizes the two places stand one under the other.
@@ -256,7 +266,7 @@ struct ParcelMapScreen: View {
             Text(finished ? distance : localizer.text("map.soFar", ["distance": distance]))
         }
         if !finished, let remaining = route.remainingKilometres {
-            Text(localizer.text("map.toGo", ["distance": kilometres(remaining)]))
+            Text(localizer.text(route.destination?.estimate != nil ? "map.toGoAbout" : "map.toGo", ["distance": kilometres(remaining)]))
         }
         if route.countries.count > 1 {
             Text(localizer.text("map.countries.many", ["count": route.countries.count]))
@@ -269,7 +279,8 @@ struct ParcelMapScreen: View {
 
     private func endpoint(_ title: String, _ place: RoutePlace, alignment: HorizontalAlignment) -> some View {
         let country = TrackingLocation.countryName(place.country, language: localizer.language)
-        let name = place.name(sites: true)
+        // Under "Usually delivered near", a town the map only estimates is just its name.
+        let name = place.estimate != nil ? place.name : place.name(sites: true)
         // At the largest text sizes a long name wraps rather than end in "…".
         let lines: Int? = dynamicTypeSize.isAccessibilitySize ? nil : 1
         return VStack(alignment: alignment, spacing: 2) {

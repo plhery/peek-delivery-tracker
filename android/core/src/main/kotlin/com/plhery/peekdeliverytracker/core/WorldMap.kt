@@ -1302,6 +1302,14 @@ object MapPainter {
                 leg.path, palette.routeMuted,
                 StrokeStyle(if (quiet) 0.8 else 1.4, StrokeStyle.LineCap.Round, StrokeStyle.LineJoin.Round, dash = listOf(3.0, 5.0)),
             )
+            // Dotted, fainter than the carrier's own way.
+            MapOverlay.LegKind.Estimate -> MapDrawing.Stroke(
+                leg.path, palette.routeMuted,
+                StrokeStyle(
+                    if (quiet) 0.8 else 1.3, StrokeStyle.LineCap.Round, StrokeStyle.LineJoin.Round,
+                    dash = if (quiet) listOf(0.1, 3.0) else listOf(0.1, 4.5),
+                ),
+            )
         }
     }
 
@@ -1311,7 +1319,7 @@ object MapPainter {
             MapOverlay.DotKind.Current -> 5.0
             MapOverlay.DotKind.Origin -> 3.5
             MapOverlay.DotKind.Stop -> 2.6
-            MapOverlay.DotKind.LastKnown, MapOverlay.DotKind.Area, MapOverlay.DotKind.Destination -> 4.5
+            MapOverlay.DotKind.LastKnown, MapOverlay.DotKind.Area, MapOverlay.DotKind.Destination, MapOverlay.DotKind.Estimate -> 4.5
         }
         return if (quiet) radius * 0.64 else radius
     }
@@ -1345,6 +1353,10 @@ object MapPainter {
                 MapOverlay.DotKind.Destination -> {
                     context.add(MapDrawing.Fill(circle, palette.dotRing))
                     ring(palette.routeMuted, if (quiet) 1.1 else 1.5)
+                }
+                MapOverlay.DotKind.Estimate -> {
+                    context.add(MapDrawing.Fill(circle, palette.dotRing))
+                    context.add(MapDrawing.Stroke(circle, palette.routeMuted, StrokeStyle(if (quiet) 1.1 else 1.4, dash = listOf(1.6, 2.4))))
                 }
                 MapOverlay.DotKind.Area ->
                     context.add(MapDrawing.Stroke(circle, palette.route, StrokeStyle(if (quiet) 1.1 else 1.4, dash = listOf(1.6, 2.4))))
@@ -1427,8 +1439,9 @@ class MapOverlay(
     measurer: TextMeasurer,
     distanceUnit: DistanceUnit = DistanceUnit.Kilometres,
 ) {
-    enum class LegKind { Travelled, Approximate, Remaining }
-    enum class DotKind { Origin, Stop, Current, LastKnown, Area, Destination }
+    /** `Estimate`: the way still to go to a town the map only estimates. */
+    enum class LegKind { Travelled, Approximate, Remaining, Estimate }
+    enum class DotKind { Origin, Stop, Current, LastKnown, Area, Destination, Estimate }
     enum class LabelKind { Current, End, Stop, Area, Context, City }
 
     class Leg(val path: MapPath, val kind: LegKind)
@@ -1565,7 +1578,7 @@ class MapOverlay(
         val destinationPlace = route.destination
         if (currentStop != null && destinationPlace != null) {
             val drawn = legPath(currentStop.place.point, destinationPlace.point, route.remainingKilometres ?: 0.0)
-            legs.add(0, Leg(drawn.first, LegKind.Remaining))
+            legs.add(0, Leg(drawn.first, if (destinationPlace.estimate != null) LegKind.Estimate else LegKind.Remaining))
             tracks.add(drawn.second)
         }
         val routeTracks: List<List<Point>> = tracks
@@ -1579,7 +1592,7 @@ class MapOverlay(
             if (visible(stop.place.point) && shows(index)) dots.add(Dot(at(stop.place.point), kinds[index]))
         }
         if (destinationPlace != null && visible(destinationPlace.point)) {
-            dots.add(0, Dot(at(destinationPlace.point), DotKind.Destination))
+            dots.add(0, Dot(at(destinationPlace.point), if (destinationPlace.estimate != null) DotKind.Estimate else DotKind.Destination))
         }
 
         // Place names, most important first, skipping any that would collide.

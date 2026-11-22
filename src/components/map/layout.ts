@@ -190,10 +190,12 @@ export interface Overlay {
    * starts and how long it lasts, as shares of the whole stroke, and how much of the leg is left to draw once it enters
    * the frame. The way still to go has no turn.
    */
-  legs: { id: string; d: string; kind: 'travelled' | 'approximate' | 'remaining'; pen?: { from: number; share: number; reach: number } }[];
+  legs: { id: string; d: string; kind: 'travelled' | 'approximate' | 'remaining'; pen?: { from: number; share: number; reach: number };
+    /** The way still to go leads to a town the map only estimates. */
+    estimate?: true }[];
   /** How far the stroke runs in the frame, in pixels. */
   stroke: number;
-  dots: { id: string; x: number; y: number; kind: 'origin' | 'stop' | 'current' | 'last-known' | 'area' | 'destination' }[];
+  dots: { id: string; x: number; y: number; kind: 'origin' | 'stop' | 'current' | 'last-known' | 'area' | 'destination' | 'estimate' }[];
   /** Each name with the corner and the width of the box it found room for. */
   labels: { id: string; x: number; y: number; width: number; text: string; kind: 'current' | 'end' | 'stop' | 'area' | 'context' | 'city' }[];
   pointers: { id: string; x: number; y: number; angle: number; text: string; detail: string }[];
@@ -369,6 +371,7 @@ export function layout(route: Route, camera: Camera, size: Size, insets: Insets,
     id: `remaining-${route.destination.id}`,
     d: legPath(route.current.place.coordinate, route.destination.coordinate, route.remainingKm ?? 0).d,
     kind: 'remaining',
+    ...route.destination.estimate ? { estimate: true as const } : {},
   });
   /** Whether a leg passes through a box. */
   const onRoute = (box: Rect) => tracks.some(track => track.some(([x, y]) => x > box.x - 1 && x < box.x + box.width + 1
@@ -383,7 +386,7 @@ export function layout(route: Route, camera: Camera, size: Size, insets: Insets,
   });
   if (route.destination && visible(route.destination.coordinate)) {
     const [x, y] = at(route.destination.coordinate);
-    dots.unshift({ id: 'destination', x, y, kind: 'destination' });
+    dots.unshift({ id: 'destination', x, y, kind: route.destination.estimate ? 'estimate' : 'destination' });
   }
 
   // Place names, most important first, skipping any that would collide.

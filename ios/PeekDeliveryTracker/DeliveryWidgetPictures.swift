@@ -58,6 +58,7 @@ enum DeliveryWidgetPictures {
             localizer.language.rawValue, "\(scale)", parcel.currentStage?.rawValue ?? "", parcel.carrierData?.destinationCountry ?? "",
         ]
         if let town = parcel.destinationPlace { shown.append("\(town)") }
+        if let town = parcel.usualPlace { shown.append("usual \(town)") }
         if localizer.distanceUnit == .miles { shown.append(DistanceUnit.miles.rawValue) }
         shown += parcel.trackingEvents.map { "\($0.stage.rawValue) \($0.occurredAt) \($0.location ?? "") \($0.place.map { "\($0)" } ?? "")" }
         let digest = SHA256.hash(data: Data(shown.joined(separator: "\n").utf8)).prefix(8).map { String(format: "%02x", $0) }.joined()

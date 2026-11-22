@@ -83,19 +83,28 @@ data class RoutePlace(
     val country: String,
     val point: GeoPoint,
     val isCountry: Boolean,
+    /** What a town the map only estimates is called on it: "Near Lyon". */
+    val estimate: String? = null,
 ) {
-    /** A place the server found for a scan; scans a kilometre apart are the same stop. */
-    constructor(place: EventPlace) : this(
+    /**
+     * A place the server found for a scan; scans a kilometre apart are the same stop. `estimate` names a town the map
+     * only estimates.
+     */
+    constructor(place: EventPlace, estimate: String? = null) : this(
         id = "${fixed2(place.latitude)},${fixed2(place.longitude)}",
         name = place.name,
         site = place.site,
         country = place.country,
         point = GeoPoint(longitude = place.longitude, latitude = place.latitude),
         isCountry = place.precision == EventPlacePrecision.Country,
+        estimate = estimate,
     )
 
-    /** What to call the place: its town on a card, the facility itself on the opened map, which has the room. */
-    fun name(sites: Boolean): String = if (sites) site ?: name else name
+    /**
+     * What to call the place: its town on a card, the facility itself on the opened map, which has the room, and a town
+     * the map only estimates as such.
+     */
+    fun name(sites: Boolean): String = estimate ?: if (sites) site ?: name else name
 
     companion object {
         fun country(code: String, name: String, at: GeoPoint): RoutePlace =

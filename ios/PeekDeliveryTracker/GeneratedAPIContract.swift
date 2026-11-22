@@ -4320,6 +4320,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var writtenAheadEvents: [PlannedTrackingEvent]? = nil
     var carrierOutage: CarrierOutage? = nil
     var destinationPlace: EventPlace? = nil
+    var usualPlace: EventPlace? = nil
     var emailMuted: Bool? = nil
     var newsAt: String? = nil
     var seenAt: String? = nil
@@ -4349,6 +4350,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case writtenAheadEvents
         case carrierOutage
         case destinationPlace
+        case usualPlace
         case emailMuted
         case newsAt
         case seenAt
@@ -5636,6 +5638,7 @@ extension Parcel {
         writtenAheadEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .writtenAheadEvents)
         carrierOutage = try values.decodeIfPresent(CarrierOutage.self, forKey: .carrierOutage)
         destinationPlace = try values.decodeIfPresent(EventPlace.self, forKey: .destinationPlace)
+        usualPlace = try values.decodeIfPresent(EventPlace.self, forKey: .usualPlace)
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
         newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
         seenAt = try values.decodeIfPresent(String.self, forKey: .seenAt)

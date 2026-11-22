@@ -515,7 +515,7 @@ export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true, de
   const passed = passedEstimateDay(row, served);
   // A carrier that has planned the delivery has given its word: Peek AI's calls are made against the carrier's date.
   const ai = !withPeekAi || planned.some((step) => DELIVERY_STEPS.has(String(step.stage))) ? null : peekAi(row, served);
-  const town = withDestination ? destinationPlace(row, Array.isArray(served.tracking_events) ? served.tracking_events.filter(isRecord) : []) : null;
+  const town = withDestination ? destinationPlace(row, served) : null;
   if (!planned.length && !ahead && !outage && !passed && !ai && !town) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
     ...town ? { destination_place: town } : {},

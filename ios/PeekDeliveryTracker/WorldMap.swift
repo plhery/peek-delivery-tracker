@@ -560,8 +560,9 @@ enum MapLabels: Sendable { case all, ends, none }
 
 /// Everything drawn over the land: legs, stops, place names, pointers to far ends, and where Pip stands.
 struct MapOverlay {
-    enum LegKind { case travelled, approximate, remaining }
-    enum DotKind { case origin, stop, current, lastKnown, area, destination }
+    /// `estimate`: the way still to go to a town the map only estimates.
+    enum LegKind { case travelled, approximate, remaining, estimate }
+    enum DotKind { case origin, stop, current, lastKnown, area, destination, estimate }
     enum LabelKind { case current, end, stop, area, context, city }
 
     struct Leg { let path: Path; let kind: LegKind }
@@ -684,7 +685,7 @@ struct MapOverlay {
         }
         if let current = route.current, let destination = route.destination {
             let drawn = legPath(current.place.point, destination.point, route.remainingKilometres ?? 0)
-            legs.insert(Leg(path: drawn.path, kind: .remaining), at: 0)
+            legs.insert(Leg(path: drawn.path, kind: destination.estimate != nil ? .estimate : .remaining), at: 0)
             tracks.append(drawn.track)
         }
         let routeTracks = tracks
@@ -698,7 +699,7 @@ struct MapOverlay {
             dots.append(Dot(point: at(stop.place.point), kind: kinds[index]))
         }
         if let destination = route.destination, visible(destination.point) {
-            dots.insert(Dot(point: at(destination.point), kind: .destination), at: 0)
+            dots.insert(Dot(point: at(destination.point), kind: destination.estimate != nil ? .estimate : .destination), at: 0)
         }
 
         // Place names, most important first, skipping any that would collide.
@@ -1065,6 +1066,10 @@ enum MapPainter {
             case .remaining:
                 context.stroke(leg.path, with: .color(palette.routeMuted),
                                style: StrokeStyle(lineWidth: quiet ? 0.8 : 1.4, lineCap: .round, lineJoin: .round, dash: [3, 5]))
+            case .estimate:
+                // Dotted, fainter than the carrier's own way.
+                context.stroke(leg.path, with: .color(palette.routeMuted),
+                               style: StrokeStyle(lineWidth: quiet ? 0.8 : 1.3, lineCap: .round, lineJoin: .round, dash: quiet ? [0.1, 3] : [0.1, 4.5]))
             }
         }
     }
@@ -1075,7 +1080,7 @@ enum MapPainter {
         case .current: 5
         case .origin: 3.5
         case .stop: 2.6
-        case .lastKnown, .area, .destination: 4.5
+        case .lastKnown, .area, .destination, .estimate: 4.5
         }
         return quiet ? radius * 0.64 : radius
     }
@@ -1095,6 +1100,9 @@ enum MapPainter {
             case .destination:
                 context.fill(circle, with: .color(palette.dotRing))
                 context.stroke(circle, with: .color(palette.routeMuted), lineWidth: quiet ? 1.1 : 1.5)
+            case .estimate:
+                context.fill(circle, with: .color(palette.dotRing))
+                context.stroke(circle, with: .color(palette.routeMuted), style: StrokeStyle(lineWidth: quiet ? 1.1 : 1.4, dash: [1.6, 2.4]))
             case .area:
                 context.stroke(circle, with: .color(palette.route), style: StrokeStyle(lineWidth: quiet ? 1.1 : 1.4, dash: [1.6, 2.4]))
             case .origin, .stop:

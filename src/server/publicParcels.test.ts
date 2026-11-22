@@ -354,10 +354,15 @@ describe('what a link shows', () => {
       link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, show_number: true, ...link },
       package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'in_transit',
         created_at: '2026-10-02T08:00:00Z', carrier_data: { receiver_address: 'Sample Road 7\n3011 Bern', destination_country: 'CH' },
-        tracking_events: [] },
+        tracking_events: [{ id: 'sorted', package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: 'Zürich-Mülligen',
+          occurred_at: '2026-10-02T09:00:00Z' }],
+        // Only an account's own routes serve the town its parcels are usually delivered to: a link serves none, even stored.
+        usual_place: { latitude: 46.948, longitude: 7.447, precision: 'city', country: 'CH', name: 'Bern' } },
     }, alerts).package;
     expect(shown({ owner: true }).destination_place).toMatchObject({ name: 'Bern', country: 'CH', precision: 'city' });
     expect(shown({})).not.toHaveProperty('destination_place');
+    expect(shown({ owner: true })).not.toHaveProperty('usual_place');
+    expect(shown({})).not.toHaveProperty('usual_place');
   });
 
   it('says when its latest scan arrived, as the view stored its scans, except to whom a gift is still wrapped (#72)', () => {

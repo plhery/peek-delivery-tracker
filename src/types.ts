@@ -121,6 +121,8 @@ export interface Parcel {
   destinationCountry?: string;
   /** The town the parcel is addressed to, placed on the server from the carrier's address, for its owner alone. */
   destinationPlace?: EventPlace;
+  /** The town where the account's parcels are usually delivered, which the map heads for as an estimate, for its owner alone. */
+  usualPlace?: EventPlace;
 }
 
 /** Where a scan happened, located on the server from its free-text location. */

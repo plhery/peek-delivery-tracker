@@ -10,6 +10,7 @@ import {
   requireUserClient,
 } from '../../../src/server/api';
 import { withEventPlaces } from '../../../src/server/eventPlaces';
+import { servedOwnParcel, withUsualPlaces } from '../../../src/server/usualPlace';
 import { loadCarrierOutages } from '../../../src/server/carrierOutages';
 import { captureOperationalError } from '../../../src/server/observability';
 import { SupabaseError } from '../../../src/server/supabase';
@@ -40,7 +41,9 @@ export const GET = apiRoute(async (context) => {
       captureOperationalError(error, { component: 'packages', operation: 'record_account_opened' });
     }),
   ]);
-  return json({ packages: packages.map((row) => withEventPlaces(row, { destination: true })) });
+  const served = packages.map((row) => withEventPlaces(row, { destination: true }));
+  // With its archived parcels, the list holds every delivery the usual town is worked out from.
+  return json({ packages: await withUsualPlaces(client, served, { complete: includeArchived }) });
 }, { serviceRequired: true });
 
 export const POST = apiRoute(async (context) => {
@@ -84,10 +87,10 @@ export const POST = apiRoute(async (context) => {
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
-  if (demo) return json({ package: withEventPlaces(parcel, { destination: true }), jobIds: [] }, 201);
+  if (demo) return json({ package: await servedOwnParcel(client, parcel), jobIds: [] }, 201);
   await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));
   const jobIds = jobId ? [jobId] : [];
-  return json({ package: withEventPlaces(parcel, { destination: true }), jobIds }, 201);
+  return json({ package: await servedOwnParcel(client, parcel), jobIds }, 201);
 }, { serviceRequired: true });

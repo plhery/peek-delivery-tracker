@@ -12,7 +12,7 @@ import {
   type RouteParameters,
 } from '../../../../../src/server/api';
 import { queueCarrierCheck } from '../../../../../src/server/carrierCheck';
-import { withEventPlaces } from '../../../../../src/server/eventPlaces';
+import { servedOwnParcel } from '../../../../../src/server/usualPlace';
 import { recordProviderInput } from '../../../../../src/server/metrics';
 import { logOperationalEvent } from '../../../../../src/server/observability';
 import { holdsPostcodeCountry, savePostcodeCountry } from '../../../../../src/server/postcodeCountry';
@@ -58,7 +58,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     try { providerPostcode = normalizeDeliveryPostcode(body.providerPostcode); }
     catch { throw new HttpError(400, 'Invalid delivery postcode'); }
   }
-  if (unchanged && !providerPostcode) return json({ package: withEventPlaces(original, { destination: true }), jobIds: [] });
+  if (unchanged && !providerPostcode) return json({ package: await servedOwnParcel(client, original), jobIds: [] });
 
   await verifyAmazonShippingAddition(values.carrier, original.tracking_number);
   if (providerPostcode ? !await client.setProviderPostcode(packageId, providerPostcode) : !await client.changePackageCarrier(
@@ -88,5 +88,5 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
 
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json({ package: withEventPlaces(parcel, { destination: true }), jobIds });
+  return json({ package: await servedOwnParcel(client, parcel), jobIds });
 }, { serviceRequired: true });

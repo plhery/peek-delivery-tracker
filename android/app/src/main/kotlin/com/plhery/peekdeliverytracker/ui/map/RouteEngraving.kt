@@ -19,6 +19,7 @@ import com.plhery.peekdeliverytracker.core.PipMood
 import com.plhery.peekdeliverytracker.core.PipRequest
 import com.plhery.peekdeliverytracker.core.Rect
 import com.plhery.peekdeliverytracker.core.WorldAtlas
+import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -160,12 +161,21 @@ internal object WorldAtlases {
  */
 @Composable
 fun rememberParcelRoute(parcel: Parcel, atlas: WorldAtlas, language: AppLanguage): ParcelRoute {
-    val key = ParcelRoutes.Key(parcel.trackingEvents, parcel.carrierData?.destinationCountry, language, atlas)
+    val key = ParcelRoutes.Key(
+        parcel.trackingEvents, parcel.carrierData?.destinationCountry, parcel.destinationPlace, parcel.usualPlace, language, atlas,
+    )
     return remember(key) { ParcelRoutes.of(key, parcel) }
 }
 
 internal object ParcelRoutes {
-    data class Key(val events: List<TrackingEvent>, val destination: String?, val language: AppLanguage, val atlas: WorldAtlas)
+    data class Key(
+        val events: List<TrackingEvent>,
+        val destination: String?,
+        val town: EventPlace?,
+        val usualTown: EventPlace?,
+        val language: AppLanguage,
+        val atlas: WorldAtlas,
+    )
 
     private const val KEPT = 64
 

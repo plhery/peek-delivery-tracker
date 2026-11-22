@@ -290,6 +290,21 @@ describe('WorldMap', () => {
     });
   });
 
+  it('draws the way to a town it only estimates fainter than the carrier\'s route, named as an estimate', async () => {
+    const bern = { ...city('Bern', 'CH', 7.447, 46.948), estimate: 'Near Bern' };
+    const route = buildRoute([scan(kyoto), scan(zurich)], bern);
+    const { container } = render(<WorldMap route={route} mode="journey" time={time} labels="ends" />);
+    await waitFor(() => expect(container.querySelector('path[data-kind="remaining"]')).toHaveAttribute('data-estimate', 'true'));
+    expect(container.querySelector('g[data-kind="estimate"]')).not.toBeNull();
+    expect(container.querySelector('g[data-kind="destination"]')).toBeNull();
+    expect(screen.getByText('Near Bern')).toBeInTheDocument();
+    // The carrier's own town keeps its plain leg and dot.
+    const addressed = render(<WorldMap route={buildRoute([scan(kyoto), scan(zurich)], city('Bern', 'CH', 7.447, 46.948))} mode="journey" time={time} labels="ends" />).container;
+    await waitFor(() => expect(addressed.querySelector('path[data-kind="remaining"]')).not.toBeNull());
+    expect(addressed.querySelector('path[data-kind="remaining"]')).not.toHaveAttribute('data-estimate');
+    expect(addressed.querySelector('g[data-kind="destination"]')).not.toBeNull();
+  });
+
   it('marks the last known stop when the newest scan has no place', async () => {
     const route = buildRoute([scan(kyoto), scan(basel), scan()]);
     const { container } = render(<WorldMap route={route} mode="journey" time={time} labels="none" context={false} />);

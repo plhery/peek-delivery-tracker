@@ -284,6 +284,9 @@ internal fun ParcelMapScreen(
  */
 private fun mapLabel(route: ParcelRoute, localizer: Localizer): String {
     val origin = route.origin?.place?.name(sites = true) ?: ""
+    route.destination?.takeIf { it.estimate != null }?.let {
+        return localizer.text("map.labelUsual", mapOf("from" to origin, "to" to it.name))
+    }
     val end = (route.destination ?: route.current?.place)?.name(sites = true) ?: origin
     return if (end == origin) {
         localizer.text("map.labelOne", mapOf("place" to origin))
@@ -309,8 +312,11 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
     val finished = delivered || stage == TrackingStage.Returned
     val end = route.destination ?: current.place
     // A delivery no scan places was in the destination country, which the route keeps; with none, the last stop is only where the parcel was last seen.
+    // A town the map only estimates says so: "Usually delivered near Lyon, about 120 km to go".
+    val estimate = route.destination?.estimate != null
     val endLabel = when {
         delivered && (route.latestLocated || route.destination != null) -> "map.delivered"
+        estimate -> "map.usually"
         route.destination != null -> "map.to"
         route.latestLocated -> "map.now"
         else -> "map.lastSeen"
@@ -336,7 +342,9 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
                     add(if (finished) distance else localizer.text("map.soFar", mapOf("distance" to distance)))
                 }
                 val remaining = route.remainingKilometres
-                if (!finished && remaining != null) add(localizer.text("map.toGo", mapOf("distance" to distanceLabel(remaining))))
+                if (!finished && remaining != null) {
+                    add(localizer.text(if (estimate) "map.toGoAbout" else "map.toGo", mapOf("distance" to distanceLabel(remaining))))
+                }
                 if (route.countries.size > 1) add(localizer.text("map.countries.many", mapOf("count" to route.countries.size)))
             }
             if (figures.isNotEmpty()) {
@@ -365,7 +373,8 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
     val type = PeekTheme.type
     val language = LocalLanguage.current
     val country = TrackingLocation.countryName(place.country, language)
-    val name = place.name(sites = true)
+    // Under "Usually delivered near", a town the map only estimates is just its name.
+    val name = if (place.estimate != null) place.name else place.name(sites = true)
     val lines = if (large) Int.MAX_VALUE else 1
     val align = if (trailing) TextAlign.End else TextAlign.Start
     val spoken = if (name == country) "$title, $country" else "$title, $name, $country"

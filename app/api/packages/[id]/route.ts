@@ -7,7 +7,7 @@ import {
   requireUserClient,
   type RouteParameters,
 } from '../../../../src/server/api';
-import { withEventPlaces } from '../../../../src/server/eventPlaces';
+import { servedOwnParcel } from '../../../../src/server/usualPlace';
 import { packageLabel } from '../../../../src/server/validation';
 
 interface PackageParameters extends RouteParameters {
@@ -29,7 +29,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   await client.updatePackage(packageId, { label });
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json(withEventPlaces(parcel, { destination: true }));
+  return json(await servedOwnParcel(client, parcel));
 }, { serviceRequired: true });
 
 export const DELETE = apiRoute<PackageParameters>(async (context) => {

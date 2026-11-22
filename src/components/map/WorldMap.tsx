@@ -431,10 +431,10 @@ function Legs({ legs, stroke }: Pick<Overlay, 'legs' | 'stroke'>) {
   </g>;
 }
 
-function Leg({ leg: { d, kind, pen }, late }: { leg: Overlay['legs'][number]; late: boolean }) {
+function Leg({ leg: { d, kind, pen, estimate }, late }: { leg: Overlay['legs'][number]; late: boolean }) {
   // Whether the stroke had already ended when this leg came.
   const [after] = useState(late);
-  return <path d={d} className={styles.leg} data-kind={kind} data-late={after || undefined} pathLength={pen ? 1 : undefined}
+  return <path d={d} className={styles.leg} data-kind={kind} data-estimate={estimate} data-late={after || undefined} pathLength={pen ? 1 : undefined}
     style={pen && { '--pen-from': pen.from.toFixed(4), '--pen-share': pen.share.toFixed(4), '--pen-reach': pen.reach.toFixed(4) } as CSSProperties} />;
 }
 

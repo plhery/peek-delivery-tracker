@@ -197,6 +197,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     returnHeld: row.carrier_data?.return_held ?? undefined,
     destinationCountry: row.carrier_data?.destination_country ?? undefined,
     destinationPlace: row.destination_place ?? undefined,
+    usualPlace: row.usual_place ?? undefined,
     archivedAt: row.archived_at ?? undefined,
     newsAt: row.news_at ?? undefined,
     seenAt: row.seen_at ?? undefined,

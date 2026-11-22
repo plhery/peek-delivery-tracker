@@ -861,6 +861,29 @@ class ParcelRouteTests {
     }
 
     @Test
+    fun anEstimatedTownIsDrawnFainterThanTheCarriersRoute() {
+        val size = Size(400.0, 300.0)
+        fun overlay(destination: RoutePlace): MapOverlay {
+            val route = ParcelRoute(listOf(leipzig, basel), destination = destination)
+            val camera = GlobeCamera.fit(route.stops.map { it.place.point } + destination.point, Rect(40.0, 40.0, 320.0, 220.0), minimumKilometres = 260.0)
+            return MapOverlay(
+                route = route, camera = camera, size = size, insets = EdgeInsets(), labels = MapLabels.Ends, mode = ParcelRoute.Mode.Journey,
+                context = false, atlas = atlas, locale = Locale.forLanguageTag("en"), countryName = { it },
+                measurer = { text, _ -> text.length * 6.5 },
+            )
+        }
+        val town = city("Bern", "CH", 7.447, 46.948)
+        val addressed = overlay(town)
+        assertEquals(MapOverlay.LegKind.Remaining, addressed.legs.first().kind)
+        assertTrue(addressed.dots.any { it.kind == MapOverlay.DotKind.Destination })
+        val estimated = overlay(town.copy(estimate = "Near Bern"))
+        assertEquals(MapOverlay.LegKind.Estimate, estimated.legs.first().kind)
+        assertTrue(estimated.dots.any { it.kind == MapOverlay.DotKind.Estimate })
+        assertFalse(estimated.dots.any { it.kind == MapOverlay.DotKind.Destination })
+        assertTrue(estimated.labels.any { it.text == "Near Bern" })
+    }
+
+    @Test
     fun closeUpNamesThePlaceAndPointsToTheFarOrigin() {
         val route = ParcelRoute(listOf(kyoto, basel, zurich))
         val size = Size(400.0, 300.0)

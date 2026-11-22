@@ -7,7 +7,7 @@ import {
   requireUserClient,
   type RouteParameters,
 } from '../../../../../src/server/api';
-import { withEventPlaces } from '../../../../../src/server/eventPlaces';
+import { servedOwnParcel } from '../../../../../src/server/usualPlace';
 import { SupabaseError } from '../../../../../src/server/supabase';
 import { packageNotificationValues } from '../../../../../src/server/validation';
 
@@ -38,5 +38,5 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   }
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json(withEventPlaces(parcel, { destination: true }));
+  return json(await servedOwnParcel(client, parcel));
 }, { serviceRequired: true });

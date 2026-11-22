@@ -65,21 +65,26 @@ struct RoutePlace: Hashable, Sendable {
     let country: String
     let point: GeoPoint
     let isCountry: Bool
+    /// What a town the map only estimates is called on it: "Near Lyon".
+    var estimate: String? = nil
 
-    /// What to call the place: its town on a card, the facility itself on the opened map, which has the room.
-    func name(sites: Bool) -> String { sites ? site ?? name : name }
+    /// What to call the place: its town on a card, the facility itself on the opened map, which has the room, and a
+    /// town the map only estimates as such.
+    func name(sites: Bool) -> String { estimate ?? (sites ? site ?? name : name) }
 }
 
 extension RoutePlace {
-    /// A place the server found for a scan; scans a kilometre apart are the same stop.
-    init(_ place: EventPlace) {
+    /// A place the server found for a scan; scans a kilometre apart are the same stop. `estimate` names a town the map
+    /// only estimates.
+    init(_ place: EventPlace, estimate: String? = nil) {
         self.init(
             id: String(format: "%.2f,%.2f", place.latitude, place.longitude),
             name: place.name,
             site: place.site,
             country: place.country,
             point: GeoPoint(longitude: place.longitude, latitude: place.latitude),
-            isCountry: place.precision == .country
+            isCountry: place.precision == .country,
+            estimate: estimate
         )
     }
 

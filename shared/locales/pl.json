@@ -646,6 +646,7 @@
   "parcel.carrierOutage": "Śledzenie przesyłek u przewoźnika {{carrier}} ma teraz problemy. Status przesyłki zaktualizuje się, gdy tylko znów zadziała.",
   "parcel.carrierOutageLink": "Sprawdź na stronie przewoźnika {{carrier}}",
   "parcel.scheduledDelivery": "Statusy przewoźnika {{carrier}} pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.",
+  "parcel.writtenAheadDelivered": "Strona przewoźnika {{carrier}} pokazuje doręczenie wpisane z góry, a nie prawdziwy skan. Jeśli nic nie dotarło, zapytaj sprzedawcę.",
   "parcel.returnUnderWay": "Przewoźnik {{carrier}} wciąż skanuje ją w drodze powrotnej, więc Peek dalej ją śledzi.",
   "parcel.updated": "Aktualizacja: {{date}}",
   "peek.dailyLimit": "Na dziś nie ma już wyszukiwań. Zaloguj się, aby kontynuować.",

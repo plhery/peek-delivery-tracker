@@ -420,7 +420,7 @@ describe('a gift', () => {
     open({ ...shown, parcel: { ...shown.parcel, carrier: 'gzyl', writtenAheadBy: 'gzyl',
       writtenAheadEvents: [{ stage: 'delivered', description: 'Delivered', occurredAt: '2026-01-01T00:00:00Z' }] } }, { hash: words });
     await screen.findByRole('region', { name: 'Something’s on its way to you' });
-    expect(screen.queryByText(/only predictions|whole route in advance/)).toBeNull();
+    expect(screen.queryByText(/only predictions|whole route in advance|ask the seller/)).toBeNull();
     expect(document.querySelector('.tracking-journal__predicted')).toBeNull();
   });
 

@@ -646,6 +646,7 @@
   "parcel.carrierOutage": "Il tracciamento di {{carrier}} ha dei problemi in questo momento. Il tuo tracciamento si aggiornerà appena tornerà disponibile.",
   "parcel.carrierOutageLink": "Controlla sul sito di {{carrier}}",
   "parcel.scheduledDelivery": "{{carrier}} aggiorna secondo un calendario fisso, senza firma. Se non è arrivato nulla, contatta il venditore.",
+  "parcel.writtenAheadDelivered": "Il sito di {{carrier}} mostra una consegna scritta in anticipo, non una scansione reale. Se non è arrivato nulla, contatta il venditore.",
   "parcel.returnUnderWay": "{{carrier}} lo scansiona ancora sulla via del ritorno, quindi Peek continua a seguirlo.",
   "parcel.updated": "Aggiornato: {{date}}",
   "peek.dailyLimit": "Per oggi le ricerche sono finite. Accedi per continuare.",

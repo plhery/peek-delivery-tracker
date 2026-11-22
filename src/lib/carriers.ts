@@ -250,6 +250,17 @@ export function scheduledDelivery(parcel: Parameters<typeof deliveringCarrierId>
 }
 
 /**
+ * Whether the carrier that writes the parcel's route ahead (`writtenAheadBy`) shows on its site a delivery it wrote in
+ * advance whose time has come (`writtenAheadEvents`), while no scan says the parcel arrived or went back: the reader is
+ * told it is no real scan, and to ask the seller if nothing came, as for a scheduled delivery.
+ */
+export function writtenDelivery(parcel: { writtenAheadBy?: CarrierId; writtenAheadEvents?: readonly { stage: Stage }[] },
+  stage: Stage | null | undefined): boolean {
+  return !!parcel.writtenAheadBy && stage !== 'delivered' && stage !== 'returned'
+    && !!parcel.writtenAheadEvents?.some((step) => step.stage === 'delivered');
+}
+
+/**
  * Distinct numbers, the followed one first, then the named delivering carrier's own, and last the number the followed
  * carrier tracks the parcel by when it is none of them. That one is `tracksAs`: a reference the carrier's search
  * resolved to a parcel, or a number typed with more or less than the carrier's own, shown so the reader can tell

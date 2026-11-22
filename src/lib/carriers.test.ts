@@ -24,6 +24,7 @@ import {
   supportsSwissPostHandoff,
   trackingLinksByNumber,
   tracksAutomatically,
+  writtenDelivery,
 } from './carriers';
 import { DEFAULT_CARRIER_COLOR } from './carrierBrand';
 
@@ -2164,6 +2165,20 @@ describe('deliveringCarrierId', () => {
     const handed = { ...followed, originalCarrier: 'chronopost', trackingSource: 'dpd-de', deliveryCarrier: 'gls-de' } as const;
     expect(deliveringCarrierId(handed)).toBe('dpd-de');
     expect(parcelTrackingNumbers({ ...handed, deliveryTrackingNumber: '12345678901' })).toEqual(parcelTrackingNumbers(handed));
+  });
+});
+
+describe('writtenDelivery', () => {
+  const written = { writtenAheadBy: 'xinghe-freight', writtenAheadEvents: [{ stage: 'in_transit' }, { stage: 'delivered' }] } as const;
+  it('marks a delivery the carrier wrote in advance once its site shows it, while no scan says the parcel arrived', () => {
+    expect(writtenDelivery(written, 'registered')).toBe(true);
+    expect(writtenDelivery(written, undefined)).toBe(true);
+    expect(writtenDelivery(written, 'delivered')).toBe(false);
+    expect(writtenDelivery(written, 'returned')).toBe(false);
+  });
+  it('leaves steps written in advance short of the delivery, and a carrier that writes nothing ahead, alone', () => {
+    expect(writtenDelivery({ ...written, writtenAheadEvents: [{ stage: 'in_transit' }] }, 'registered')).toBe(false);
+    expect(writtenDelivery({ writtenAheadEvents: written.writtenAheadEvents }, 'registered')).toBe(false);
   });
 });
 

@@ -15,7 +15,7 @@ import { TrackingJournal } from '../components/TrackingJournal';
 import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
-import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, deliveryLineKey, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically } from '../lib/carriers';
+import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, deliveryLineKey, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically, writtenDelivery } from '../lib/carriers';
 import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
@@ -302,9 +302,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     deliveryNote,
     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over;
     // unless the carrier wrote the rest of its timeline ahead, whose line in the history says the rest are predictions.
-    // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
-    // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
-    checking ? null : awaitingHandover(parcel.events, now) ? (parcel.writtenAheadBy ? null : t('parcel.awaitingHandover', { carrier: displayed.name }))
+    // A delivery its carrier writes on a schedule, or wrote in advance and its site now shows: if nothing came, the
+    // seller is who to ask. A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+    checking ? null : !wrapped && writtenDelivery(parcel, stage)
+      ? t('parcel.writtenAheadDelivered', { carrier: carrierInfo(parcel.writtenAheadBy!, locale).name })
+      : awaitingHandover(parcel.events, now) ? (parcel.writtenAheadBy ? null : t('parcel.awaitingHandover', { carrier: displayed.name }))
       : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
         : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name })
           : heldReturn(parcel, stage) ? t('parcel.returnUnderWay', { carrier: displayed.name }) : null,

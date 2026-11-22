@@ -22,6 +22,7 @@ import {
   scheduledDelivery,
   trackingLinksByNumber,
   tracksAutomatically,
+  writtenDelivery,
   type ParcelTrackingLink,
 } from '../lib/carriers';
 import {
@@ -163,9 +164,11 @@ export function ParcelDetail({
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over;
   // unless the carrier wrote the rest of its timeline ahead, whose line in the history says the rest are predictions.
-  // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
-  // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
-  const stageNote = !parcel.archivedAt && awaitingHandover(parcel.events)
+  // A delivery its carrier writes on a schedule, or wrote in advance and its site now shows: if nothing came, the seller
+  // is who to ask. A return the carrier still scans on its way back stays returned, and Peek keeps following it.
+  const stageNote = !parcel.archivedAt && writtenDelivery(parcel, current?.stage)
+    ? t('parcel.writtenAheadDelivered', { carrier: carrierInfo(parcel.writtenAheadBy!, locale).name })
+    : !parcel.archivedAt && awaitingHandover(parcel.events)
     ? (parcel.writtenAheadBy ? null : t('parcel.awaitingHandover', { carrier: displayedCarrier.name }))
     : scheduledDelivery(parcel, current?.stage) ? t('parcel.scheduledDelivery', { carrier: displayedCarrier.name })
       : !parcel.archivedAt && heldReturn(parcel, current?.stage) ? t('parcel.returnUnderWay', { carrier: displayedCarrier.name }) : null;

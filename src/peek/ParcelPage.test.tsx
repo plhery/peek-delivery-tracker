@@ -373,6 +373,9 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(predicted).getByText('Show them')).toBeVisible();
     expect([...predicted.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Delivered']);
     expect(predicted.querySelector('time')).toHaveTextContent(/^Written in advance for /);
+    // The card says the carrier's site shows a delivery it wrote in advance, and the seller is who to ask.
+    expect(within(card()).getByText(
+      `${carrierInfo('gzyl', 'en').name}’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller.`)).toBeVisible();
     expect(screen.queryByText(/Nothing confirms this delivery/)).toBeNull();
     expect(screen.getByText('1 update')).toBeVisible();
   });

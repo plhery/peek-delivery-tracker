@@ -118,6 +118,16 @@ describe('shipment details', () => {
     expect(document.querySelector('.detail__state')).not.toHaveTextContent(/Delivered/);
     expect(screen.queryByText(/^Delivered (on|today|yesterday)/)).not.toBeInTheDocument();
     expect(screen.getByText('0 updates')).toBeInTheDocument();
+    // Under the status: the carrier's site shows a delivery it wrote in advance, and the seller is who to ask.
+    expect(screen.getByText(`${name}’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller.`))
+      .toHaveClass('detail__handover');
+  });
+
+  it('says nothing of the seller while the steps the carrier wrote in advance stop short of its delivery', () => {
+    show({ carrier: 'gzyl', writtenAheadBy: 'gzyl', writtenAheadEvents: [
+      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2026-09-11T01:00:00Z' },
+    ] });
+    expect(screen.queryByText(/ask the seller/)).not.toBeInTheDocument();
   });
 
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {

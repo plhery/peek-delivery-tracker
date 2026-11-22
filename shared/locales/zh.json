@@ -646,6 +646,7 @@
   "parcel.carrierOutage": "{{carrier}} 的物流查询目前出现问题。恢复后，你的物流信息会立即更新。",
   "parcel.carrierOutageLink": "在 {{carrier}} 网站上查看",
   "parcel.scheduledDelivery": "{{carrier}} 按固定时间表更新，不显示签收人。如果没有收到，请联系卖家。",
+  "parcel.writtenAheadDelivered": "{{carrier}} 网站上的签收是提前写好的，并非真实扫描。如果没有收到，请联系卖家。",
   "parcel.returnUnderWay": "{{carrier}} 仍在退回途中扫描这个包裹，所以 Peek 会继续跟踪。",
   "parcel.updated": "更新时间：{{date}}",
   "peek.dailyLimit": "今天的查询次数已用完。登录即可继续。",

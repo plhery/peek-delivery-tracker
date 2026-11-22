@@ -51,7 +51,7 @@ Solange lediglich `Shipping Label Created` (oder eine gescheiterte Abholung beim
 
 Ein Fehlversuch kann andere Gründe nennen, etwa `Attempted Delivery:Building Closed/Weekend/Holiday` bei geschlossenem Gewerbebetrieb („Zustellversuch“). Darunter ergänzt SpeedX einen Hinweis zum nächsten Schritt: `The package is undeliverable and schedule to redelivery` kündigt einen neuen Zustellversuch an, `The package is undeliverable and return to facility` die Rückkehr ins Depot. Peek zeigt diesen Zusatz hinter der Statuszeile an.
 
-Ist das jüngste Ereignis eine Störung (`Parcel Void`, `Parcel Disposal` oder nicht gefundenes Paket), wechselt die Überschrift auf SpeedX zu `Issue Reported` samt einer Kategorie wie `Last Mile Intercept` oder `Last Mile Undelivered`. SpeedX erläutert diese Kategorien nicht öffentlich – frage beim Verkäufer nach.
+Ist das jüngste Ereignis eine Störung (`Parcel Void`, `Parcel Disposal` oder nicht gefundenes Paket), ordnet SpeedX es einer Kategorie wie `Last Mile Intercept` oder `Last Mile Undelivered` zu. SpeedX erläutert diese Kategorien nicht öffentlich – frage beim Verkäufer nach.
 
 ## Zustellung in den USA, Fehlversuche und Abholung
 
@@ -75,7 +75,7 @@ Für Sendungen im US-Netz von SpeedX gilt:
 
 **Kein Fortschritt.** Ändert sich der Status drei Werktage lang nicht, bittet SpeedX darum, den Onlinehändler zu kontaktieren. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Als zugestellt markiert, aber unauffindbar.** SpeedX weist selbst darauf hin, dass Pakete mitunter kurz vor dem tatsächlichen Eintreffen als zugestellt gebucht oder an einer unerwarteten Stelle am Haus abgelegt werden. Prüfe in den USA das Zustellfoto sowie Vorder- und Hintereingang, Briefkasten oder Postraum (*mailroom*), Garage, Hausseiten und wettergeschützte Ecken und frage Mitbewohner oder Nachbarn. Informiere anschließend SpeedX über Miles und wende dich für Ersatz oder Erstattung an den Händler. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Als zugestellt markiert, aber unauffindbar.** SpeedX weist selbst darauf hin, dass Pakete mitunter vor dem tatsächlichen Eintreffen als zugestellt gebucht oder an einer unerwarteten Stelle am Haus abgelegt werden. Prüfe in den USA das Zustellfoto sowie Vorder- und Hintereingang, Briefkasten oder Postraum (*mailroom*), Garage, Hausseiten und wettergeschützte Ecken und frage Mitbewohner oder Nachbarn. Informiere anschließend SpeedX über Miles und wende dich für Ersatz oder Erstattung an den Händler. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 **Verlust, Beschädigung oder falsche Adresse.** SpeedX nimmt keine Schadens- oder Verlustmeldungen von Empfängern an. Wende dich mit Bestellnummer, Sendungsnummer und bisherigem Schriftverkehr an den Händler (bei Transportschäden ggf. mit Fotos); eine Ausschlussfrist nennt SpeedX nicht. Siehe [verlorenes Paket](guide:lost-parcel).
 
@@ -93,7 +93,7 @@ Auf der [Supportseite von SpeedX](https://speedx.io/customer-service-and-support
 
 [Peek](/) erkennt SpeedX sofort anhand eines `SPX`-Codes beider Längen (`SPX` + 3 Buchstaben + 12 oder 18 Ziffern) oder anhand eines Links von `tracking.speedx.io` mit der Nummer und zeigt „Erkannter Paketdienst“ samt „Ändern“.
 
-Peek liest direkt die Trackingseite von SpeedX und zeigt den aktuellen Status, jeden Scan mit Ort auf der Karte zum von SpeedX erfassten Zeitpunkt (umgerechnet in die Zeitzone deines Geräts, mit „Uhrzeiten in deiner Zeitzone: …“ unter dem Verlauf auf `peektracker.com` sowie in der iPhone- und Android-App) sowie den auf SpeedX angegebenen voraussichtlichen Zustelltag und die genaue Lieferzeit. Über einen geteilten Link erscheint bei einer Zustellung ausschließlich `Delivered`. Straßenadresse, Ablagehinweis und Zustellfoto übernimmt Peek nicht – das Foto rufst du mit deinem US-ZIP-Code direkt auf `speedx.io` ab. Eine Übergabe an einen anderen Paketdienst findet nicht statt.
+Peek liest direkt die Trackingseite von SpeedX und zeigt den aktuellen Status, jeden Scan mit Ort auf der Karte zum von SpeedX erfassten Zeitpunkt (umgerechnet in die Zeitzone deines Geräts, mit „Uhrzeiten in deiner Zeitzone: …“ unter dem Verlauf auf `peektracker.com` sowie in der iPhone- und Android-App) sowie die genaue Lieferzeit und, falls die Seite von SpeedX einen nennt, den voraussichtlichen Zustelltag. Straßenadresse und Zustellfoto übernimmt Peek nicht – das Foto rufst du mit deinem US-ZIP-Code direkt auf `speedx.io` ab. Fügt SpeedX einen Hinweis zum Ablageort hinzu, übernimmt die Zustellzeile ihn unverändert auf Englisch; über einen geteilten Link zeigt sie nur „Zugestellt“, ohne diesen Hinweis. Eine Übergabe an einen anderen Paketdienst findet nicht statt.
 
 Kennt SpeedX die Nummer noch nicht, zeigt Peek „Warten auf SpeedX“; bleibt sie zwei Tage lang sowohl bei SpeedX als auch anderswo unbekannt, erscheint „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ Vergehen auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, blendet Peek „Hol dir Hilfe bei SpeedX“ mit Link zur Supportseite ein.
 

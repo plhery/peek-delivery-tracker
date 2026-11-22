@@ -51,7 +51,7 @@ Dopóki w historii widnieje wyłącznie `Shipping Label Created` (albo nieudany 
 
 Nieudana próba doręczenia może mieć też inne powody, np. `Attempted Delivery:Building Closed/Weekend/Holiday` przy zamkniętej firmie („Próba doręczenia”). Pod wpisem SpeedX dodaje notatkę o kolejnym kroku: `The package is undeliverable and schedule to redelivery` zapowiada ponowne wydanie kurierowi, a `The package is undeliverable and return to facility` — powrót do oddziału. Peek wyświetla tę adnotację zaraz po treści statusu.
 
-Gdy ostatnie zdarzenie oznacza utrudnienie (`Parcel Void`, `Parcel Disposal` albo brak paczki w sortowni), nagłówek na stronie SpeedX zmienia się na `Issue Reported` z kategorią taką jak `Last Mile Intercept` lub `Last Mile Undelivered`. SpeedX nie objaśnia tych kategorii publicznie — wyjaśnij sprawę ze sklepem.
+Gdy ostatnie zdarzenie oznacza utrudnienie (`Parcel Void`, `Parcel Disposal` albo brak paczki w sortowni), SpeedX przypisuje je do kategorii takiej jak `Last Mile Intercept` lub `Last Mile Undelivered`. SpeedX nie objaśnia tych kategorii publicznie — wyjaśnij sprawę ze sklepem.
 
 ## Doręczenie SpeedX w USA, próby dostawy i odbiór
 
@@ -75,7 +75,7 @@ Dla przesyłek obsługiwanych przez SpeedX w **USA**:
 
 **Brak ruchu.** Gdy status nie zmienia się przez trzy dni robocze, SpeedX prosi o kontakt ze sklepem. Więcej w poradniku [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
-**Oznaczona jako doręczona, ale jej nie ma.** Sama strona pomocy SpeedX przyznaje, że paczka bywa oznaczana jako doręczona chwilę przed faktycznym przyjazdem kuriera albo zostawiana w mniej widocznym miejscu na posesji. W USA sprawdź najpierw zdjęcie doręczenia, a potem ganek z przodu i z tyłu domu, skrzynkę lub pokój pocztowy (*mailroom*), garaż, boki budynku i zadaszone zakamarki oraz zapytaj domowników lub sąsiadów. Daj znać SpeedX przez czatbota Miles, a w sprawie dalszych kroków skontaktuj się ze sprzedawcą. Przeczytaj też [dostarczona, ale nieodebrana](guide:delivered-not-received).
+**Oznaczona jako doręczona, ale jej nie ma.** Sama strona pomocy SpeedX przyznaje, że paczka bywa oznaczana jako doręczona, zanim faktycznie dotrze, albo zostawiana w nieoczekiwanym miejscu na posesji. W USA sprawdź najpierw zdjęcie doręczenia, a potem ganek z przodu i z tyłu domu, skrzynkę lub pokój pocztowy (*mailroom*), garaż, boki budynku i zadaszone zakamarki oraz zapytaj domowników lub sąsiadów. Daj znać SpeedX przez czatbota Miles, a w sprawie dalszych kroków skontaktuj się ze sprzedawcą. Przeczytaj też [dostarczona, ale nieodebrana](guide:delivered-not-received).
 
 **Zaginięcie, uszkodzenie lub błędny adres.** SpeedX nie przyjmuje reklamacji od odbiorców: o reklamację, zwrot pieniędzy lub ponowną wysyłkę wystąp do sprzedawcy, podając numer zamówienia, numer śledzenia i historię korespondencji (przy uszkodzeniu sklep może poprosić o zdjęcia). SpeedX nie publikuje terminu granicznego. Zobacz [zagubiona paczka](guide:lost-parcel).
 
@@ -93,7 +93,7 @@ Kanały kontaktu dla odbiorców w **USA** wymienione na [stronie wsparcia SpeedX
 
 [Peek](/) od razu rozpoznaje SpeedX po kodzie `SPX` w obu wariantach (`SPX` + 3 litery + 12 lub 18 cyfr) albo po linku z `tracking.speedx.io` zawierającym numer, wyświetlając „Wykryty przewoźnik” oraz przycisk „Zmień”.
 
-Peek odczytuje bezpośrednio stronę śledzenia SpeedX i pokazuje aktualny status, każdy skan z miejscowością na mapie o godzinie zapisanej przez SpeedX (przeliczonej na strefę Twojego urządzenia, z dopiskiem „Godziny w Twojej strefie czasowej: …” pod historią na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida), a także przewidywany dzień doręczenia ze strony SpeedX i dokładną godzinę dostarczenia. Pod udostępnionym linkiem skan doręczenia wyświetla wyłącznie `Delivered`. Peek pomija Twój adres, notatkę o miejscu pozostawienia paczki oraz zdjęcie z doręczenia — aby obejrzeć zdjęcie, wejdź na `speedx.io` i podaj swój amerykański kod ZIP. Przekazanie przesyłki kolejnemu przewoźnikowi nie występuje.
+Peek odczytuje bezpośrednio stronę śledzenia SpeedX i pokazuje aktualny status, każdy skan z miejscowością na mapie o godzinie zapisanej przez SpeedX (przeliczonej na strefę Twojego urządzenia, z dopiskiem „Godziny w twojej strefie czasowej: …” pod historią na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida), a także dokładną godzinę dostarczenia i, jeśli strona SpeedX go podaje, przewidywany dzień doręczenia. Peek pomija Twój adres oraz zdjęcie z doręczenia — aby obejrzeć zdjęcie, wejdź na `speedx.io` i podaj swój amerykański kod ZIP. Jeśli SpeedX doda notatkę o miejscu pozostawienia paczki, skan doręczenia zachowuje ją bez zmian, po angielsku; pod udostępnionym linkiem wyświetla wyłącznie „Dostarczona”, bez tej notatki. Przekazanie przesyłki kolejnemu przewoźnikowi nie występuje.
 
 Dopóki SpeedX nie zna jeszcze numeru, Peek wyświetla „Oczekiwanie na przewoźnika SpeedX”; jeśli po dwóch dniach nie rozpozna go ani SpeedX, ani żadne inne źródło, pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Gdy przez cztery dni nie pojawi się nowy skan na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek udostępnia link „Poproś przewoźnika SpeedX o pomoc” do strony wsparcia przewoźnika.
 

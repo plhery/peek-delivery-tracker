@@ -51,7 +51,7 @@ Finché compare soltanto `Shipping Label Created` (o un ritiro non riuscito pres
 
 Un tentativo fallito può indicare altri motivi, come `Attempted Delivery:Building Closed/Weekend/Holiday` per un'attività chiusa («Tentativo di consegna»). Sotto il tentativo SpeedX aggiunge una nota sul passo successivo: `The package is undeliverable and schedule to redelivery` indica un nuovo giro di consegna, mentre `The package is undeliverable and return to facility` segnala il rientro al deposito. Peek mostra questa nota subito dopo la descrizione.
 
-Quando l'ultimo evento è un problema (`Parcel Void`, `Parcel Disposal` o pacco non trovato), l'intestazione sulla pagina di SpeedX diventa `Issue Reported` con una categoria come `Last Mile Intercept` o `Last Mile Undelivered`. SpeedX non ne pubblica il significato: senti il venditore.
+Quando l'ultimo evento è un problema (`Parcel Void`, `Parcel Disposal` o pacco non trovato), SpeedX lo classifica in una categoria come `Last Mile Intercept` o `Last Mile Undelivered`. SpeedX non ne pubblica il significato: senti il venditore.
 
 ## Consegna SpeedX negli Stati Uniti, tentativi e ritiro
 
@@ -75,7 +75,7 @@ Per le spedizioni gestite da SpeedX negli **Stati Uniti**:
 
 **Nessun movimento.** SpeedX invita a contattare il venditore se lo stato non cambia per tre giorni lavorativi. Maggiori dettagli in [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
-**Segnato consegnato ma assente.** La stessa pagina di supporto di SpeedX spiega che a volte un pacco viene segnato consegnato poco prima di arrivare davvero, oppure lasciato in un punto poco visibile della proprietà. Negli Stati Uniti controlla prima la foto di consegna, poi portico anteriore e posteriore, cassetta o locale posta (*mailroom*), garage, lati della casa e punti riparati, chiedendo anche a familiari o vicini. Segnala quindi l'accaduto a SpeedX tramite Miles e contatta il venditore per i passi successivi. Consulta [consegnato ma non ricevuto](guide:delivered-not-received).
+**Segnato consegnato ma assente.** La stessa pagina di supporto di SpeedX spiega che a volte un pacco viene segnato consegnato prima di arrivare davvero, oppure lasciato in un punto inatteso della proprietà. Negli Stati Uniti controlla prima la foto di consegna, poi portico anteriore e posteriore, cassetta o locale posta (*mailroom*), garage, lati della casa e punti riparati, chiedendo anche a familiari o vicini. Segnala quindi l'accaduto a SpeedX tramite Miles e contatta il venditore per i passi successivi. Consulta [consegnato ma non ricevuto](guide:delivered-not-received).
 
 **Smarrimento, danni o indirizzo errato.** SpeedX non accetta reclami presentati dai destinatari: per chiedere un reclamo, un rimborso o una sostituzione rivolgiti al venditore con numero d'ordine, codice di tracciamento ed eventuali messaggi (oltre a foto in caso di danni). SpeedX non indica una scadenza pubblica. Vedi [pacco smarrito](guide:lost-parcel).
 
@@ -93,7 +93,7 @@ Recapiti per i destinatari negli **Stati Uniti** indicati nella [pagina di suppo
 
 [Peek](/) riconosce subito SpeedX da un codice `SPX` di entrambi i formati (`SPX` + 3 lettere + 12 o 18 cifre) o da un link `tracking.speedx.io` che contiene il numero, mostrando «Corriere rilevato» con «Cambia».
 
-Peek legge direttamente la pagina di tracciamento di SpeedX e mostra lo stato attuale, ogni scansione con la relativa località sulla mappa all'orario registrato da SpeedX (convertito nel fuso del tuo dispositivo, con «Orari nel tuo fuso orario: …» in fondo alla cronologia su `peektracker.com` e nelle app per iPhone e Android), oltre al giorno stimato di consegna pubblicato da SpeedX e all'ora esatta della consegna. Su un link condiviso, la scansione di consegna mostra soltanto `Delivered`. Peek scarta il tuo indirizzo, la nota su dove è stato lasciato il pacco e la foto di consegna: per vedere la foto entra su `speedx.io` inserendo il tuo codice ZIP statunitense. Non è previsto passaggio di consegna a un altro corriere.
+Peek legge direttamente la pagina di tracciamento di SpeedX e mostra lo stato attuale, ogni scansione con la relativa località sulla mappa all'orario registrato da SpeedX (convertito nel fuso del tuo dispositivo, con «Orari nel tuo fuso orario: …» in fondo alla cronologia su `peektracker.com` e nelle app per iPhone e Android), oltre all'ora esatta della consegna e, se la pagina di SpeedX ne indica uno, al giorno stimato di consegna. Peek scarta il tuo indirizzo e la foto di consegna: per vedere la foto entra su `speedx.io` inserendo il tuo codice ZIP statunitense. Se SpeedX aggiunge una nota su dove è stato lasciato il pacco, la scansione di consegna la riporta così com'è, in inglese; su un link condiviso mostra soltanto «Consegnato», senza la nota. Non è previsto passaggio di consegna a un altro corriere.
 
 Finché SpeedX non conosce ancora il codice, Peek mostra «In attesa di SpeedX»; se dopo due giorni né SpeedX né altre fonti rispondono, mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» Se passano quattro giorni senza nuove scansioni mentre il pacco è su «Etichetta creata», «Preso in carico» o «In transito», Peek propone «Chiedi aiuto a SpeedX» con link alla pagina di supporto.
 

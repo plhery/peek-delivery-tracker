@@ -3348,6 +3348,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "eurodis-sendungsverfolgung",
+      "title": "EURODIS Sendungsverfolgung: Nummern und Zustellpartner",
+      "name": "EURODIS",
+      "color": "#0b418b"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "17feia-sendungsverfolgung",
@@ -4782,6 +4790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "suivi-eurodis",
+      "title": "Suivi EURODIS\u00a0: numéros d’envoi et partenaires locaux",
+      "name": "EURODIS",
+      "color": "#0b418b"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "suivi-17feia",
@@ -6176,6 +6192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "tracciamento-eurodis",
+      "title": "Tracciamento EURODIS: codici spedizione e partner locali",
+      "name": "EURODIS",
+      "color": "#0b418b"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "tracking-17feia",
@@ -7554,6 +7578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "seguimiento-eurodis",
+      "title": "Seguimiento EURODIS: números de envío y socios locales",
+      "name": "EURODIS",
+      "color": "#0b418b"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "seguimiento-17feia",
@@ -8898,6 +8930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SPX Express Singapura: Shopee e estados",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "seguimento-eurodis",
+      "title": "Seguimento EURODIS: números de envio e parceiros locais",
+      "name": "EURODIS",
+      "color": "#0b418b"
     },
     {
       "id": "17feia",
@@ -10310,6 +10350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SPX Express Singapur: paczki Shopee i statusy",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "sledzenie-eurodis",
+      "title": "Śledzenie EURODIS: numery przesyłek i lokalni partnerzy",
+      "name": "EURODIS",
+      "color": "#0b418b"
     },
     {
       "id": "17feia",

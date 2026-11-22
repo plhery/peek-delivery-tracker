@@ -68,19 +68,21 @@ const GAP_REASONS = new Set(['ambiguous_shape', 'generic_postal']);
 
 /**
  * The context a check records when it begins. Whether a shape several carriers issue, or an S10 number detection
- * leaves to international post, leaves a gap depends on the check's answer, so those reasons wait for its end
- * (`trackingSupportGap`): a check whose carrier confirms the number opens no case. An open case keeps the reason
- * until a check ends: one cut short never does.
+ * leaves to international post, leaves a gap depends on the check's answer, and so does a carrier the shape does not
+ * fit (`carrier_mismatch`): a destination post filed for an S10 item that its own post confirms is where it belongs.
+ * Those reasons wait for its end (`trackingSupportGap`): a check whose carrier confirms the number opens no case. An
+ * open case keeps the reason until a check ends: one cut short never does.
  */
 export function trackingSupportStart(trackingNumber: string, configuredCarrier: string, answeredBy: string | null = null): JsonObject {
   const context = trackingSupportContext(trackingNumber, configuredCarrier, answeredBy);
-  context.reasons = (context.reasons as string[]).filter((reason) => !GAP_REASONS.has(reason));
+  context.reasons = (context.reasons as string[]).filter((reason) => !GAP_REASONS.has(reason) && reason !== 'carrier_mismatch');
   return context;
 }
 
 /**
- * The ambiguous shape or generic postal number a check leaves, from the carrier it filed the parcel under and the one
- * that confirmed the number. When a carrier that could have settled it failed its lookup in the check (`failed`: rate
+ * The ambiguous shape or generic postal number a check leaves, and a filed carrier the shape does not fit that nothing
+ * confirmed (`support_carrier_mismatch`), from the carrier it filed the parcel under and the one that confirmed the
+ * number. When a carrier that could have settled it failed its lookup in the check (`failed`: rate
  * limited or down), the gap is undecided: such a check opens no case for it, the outage being health monitoring's, and
  * a case already open keeps it. An S10 number is the filed carrier's to confirm; a shape several carriers issue, the
  * filed one's if the shape fits it, or else any carrier it fits.
@@ -89,12 +91,16 @@ export function trackingSupportGap(
   trackingNumber: string, filedCarrier: string, answeredBy: string | null, failed: (carrier: string) => boolean = () => false,
 ): JsonObject {
   const context = trackingSupportContext(trackingNumber, filedCarrier, answeredBy);
-  const reason = (context.reasons as string[]).find((tag) => GAP_REASONS.has(tag));
-  if (!reason) return {};
+  const reasons = context.reasons as string[];
+  const reason = reasons.find((tag) => GAP_REASONS.has(tag));
+  // The filed carrier the shape does not fit, which neither it nor a carrier the shape fits confirmed: either could.
+  const mismatch = reasons.includes('carrier_mismatch');
+  if (!reason && !mismatch) return {};
   const candidates = context.detection_candidates as string[];
-  const settling = reason === 'generic_postal' || candidates.includes(DETECTED_AS[filedCarrier] ?? filedCarrier)
-    ? [filedCarrier] : candidates;
-  return { support_gap_reason: reason, ...(settling.some(failed) ? { support_gap_undecided: true } : {}) };
+  const settling = !reason ? [filedCarrier, ...candidates]
+    : reason === 'generic_postal' || candidates.includes(DETECTED_AS[filedCarrier] ?? filedCarrier) ? [filedCarrier] : candidates;
+  return { ...(reason ? { support_gap_reason: reason } : {}), ...(mismatch ? { support_carrier_mismatch: true } : {}),
+    ...(settling.some(failed) ? { support_gap_undecided: true } : {}) };
 }
 
 /** Whether the Add sheet's recognition asks the carrier over plain HTTP; any other it asks through a browser, if at all. */

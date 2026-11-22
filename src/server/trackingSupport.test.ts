@@ -133,17 +133,29 @@ describe('tracking support context', () => {
     });
     expect(trackingSupportContext('HL123456789RV', 'dhl', 'dhl').reasons).toEqual(['ambiguous_shape']);
     expect(trackingSupportGap('HL123456789RV', 'dhl', 'dhl')).toEqual({ support_gap_reason: 'ambiguous_shape' });
-    expect(trackingSupportGap('HL123456789RV', 'dhl', null)).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportGap('HL123456789RV', 'dhl', null)).toEqual({ support_gap_reason: 'ambiguous_shape', support_carrier_mismatch: true });
   });
 
   it('leaves an ambiguous shape to the end of the check, which opens it only when the filed carrier did not confirm the number', () => {
     expect(trackingSupportStart('123456789012', 'fedex').reasons).toEqual([]);
-    expect(trackingSupportStart('HL123456789RV', 'dhl').reasons).toEqual(['carrier_mismatch']);
+    expect(trackingSupportStart('HL123456789RV', 'dhl').reasons).toEqual([]);
     expect(trackingSupportGap('123456789012', 'fedex', 'fedex')).toEqual({});
     expect(trackingSupportGap('123456789012', 'fedex', null)).toEqual({ support_gap_reason: 'ambiguous_shape' });
     // A parcel left under no carrier keeps it, whoever confirmed the number.
     expect(trackingSupportGap('123456789012', 'unknown', 'fedex')).toEqual({ support_gap_reason: 'ambiguous_shape' });
     expect(trackingSupportGap('ZZTEST1234', 'unknown', null)).toEqual({});
+  });
+
+  it('leaves a carrier the shape does not fit to the end of the check, which opens it only when nothing it fits confirmed the number', () => {
+    // A destination post filed for an S10 item its own post confirms is where it belongs.
+    expect(trackingSupportContext('RR123456785CN', 'montenegro-post').reasons).toContain('carrier_mismatch');
+    expect(trackingSupportStart('RR123456785CN', 'montenegro-post').reasons).not.toContain('carrier_mismatch');
+    expect(trackingSupportGap('RR123456785CN', 'montenegro-post', 'china-post')).not.toHaveProperty('support_carrier_mismatch');
+    expect(trackingSupportGap('RR123456785CN', 'montenegro-post', 'montenegro-post')).not.toHaveProperty('support_carrier_mismatch');
+    expect(trackingSupportGap('RR123456785CN', 'montenegro-post', null)).toMatchObject({ support_carrier_mismatch: true });
+    // China Post down in the check leaves it undecided.
+    expect(trackingSupportGap('RR123456785CN', 'montenegro-post', null, (carrier) => carrier === 'china-post'))
+      .toMatchObject({ support_carrier_mismatch: true, support_gap_undecided: true });
   });
 
   it('leaves the gap undecided when a carrier that could settle it failed its lookup in the check', () => {

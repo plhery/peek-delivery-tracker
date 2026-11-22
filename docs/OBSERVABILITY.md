@@ -236,14 +236,18 @@ learn. Nor is an S10 number generic postal once the carrier the parcel
 is filed under confirmed it, whether the post its suffix names or a courier that carries such
 numbers. A check settles both at its end, from the carrier it filed the parcel
 under and the one that confirmed the number, so a first check that its carrier answers
-opens no case. When the lookup of a carrier that could have settled it failed, rate limited
-or down (for an S10 number the filed carrier; for a shape several carriers issue the filed
-carrier if the shape fits it, else any carrier the shape fits), the gap is undecided
-(`support_gap_undecided`): the check opens no case for it, and a case already open keeps it.
+opens no case. It settles a number pointing elsewhere there too (`support_carrier_mismatch`):
+a destination post filed for an S10 item that its own post confirms opens none. When the
+lookup of a carrier that could have settled it failed, rate limited or down (for an S10
+number the filed carrier; for a shape several carriers issue the filed carrier if the shape
+fits it, else any carrier the shape fits; for a number pointing elsewhere the filed carrier
+or any carrier the shape fits), the gap is undecided (`support_gap_undecided`): the check
+opens no case for it, and a case already open keeps it.
 
 Each check computes the shape and carrier reasons afresh and replaces them on its case.
-The ambiguous shape and the generic postal number are replaced only at the check's end, so a
-check cut short (superseded, abandoned, interrupted) leaves them on the case. Recognition reasons from the Add sheet, gap
+The ambiguous shape, the generic postal number and a number pointing elsewhere are replaced
+only at the check's end, so a check cut short (superseded, abandoned, interrupted) leaves
+them on the case. Recognition reasons from the Add sheet, gap
 evidence, and sightings older than the case's latest still add to them, so a reason that no
 longer applies leaves with the next check.
 

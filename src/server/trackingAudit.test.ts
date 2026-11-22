@@ -46,7 +46,7 @@ describe('tracking support audit persistence', () => {
           package_id: 'synthetic-package', configured_carrier: 'dhl', started_at: '2026-09-10T12:00:00.000Z',
           support_context: expect.objectContaining({
             tracking_number: 'HL123456789RV', configured_carrier: 'dhl',
-            reasons: ['carrier_mismatch'],
+            reasons: [],
           }),
         }),
       },
@@ -59,6 +59,7 @@ describe('tracking support audit persistence', () => {
           step: 'complete', status: 'succeeded', details: {
             outcome: 'updated', support_lookup_number: 'HL123456789RV',
             support_provider: null, support_direct_progress: true, support_settled: false, support_gap_reason: 'ambiguous_shape',
+            support_carrier_mismatch: true,
           },
         })],
       },

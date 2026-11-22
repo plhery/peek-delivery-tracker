@@ -12,7 +12,7 @@ Noch keine Nummer zur Hand? Schau in den Bestelldetails beim Händler nach; zeig
 
 ## UniUni Sendungsnummer: Formate und Beispiele
 
-Da Pakete bereits vom Händler etikettiert bei UniUni eintreffen, steht der Code in deiner Versandbestätigung; weitere Tipps bietet [Sendungsnummer finden](guide:find-tracking-number). Diese Muster vergibt das UniUni-Netz (alle Ziffern frei erfunden):
+Da Pakete bereits vom Händler etikettiert bei UniUni eintreffen, steht der Code in deiner Versandbestätigung; weitere Tipps bietet [Sendungsnummer finden](guide:find-tracking-number). Diese Muster kommen vor (alle Ziffern frei erfunden):
 
 | Beispiel (erfunden) | Aufbau des Codes |
 | --- | --- |
@@ -45,14 +45,14 @@ Auf der englischen Tracking-Seite von UniUni durchläuft ein Paket typischerweis
 | `The parcel will be transferred to a third-party courier for delivery.` | UniUni übergibt das Paket für die Endzustellung an einen Drittkurier. |
 | `Parcel has been handed over to a third-party courier` | Der Partnerkurier hat die Sendung übernommen; dessen eigene Scans folgen im selben Verlauf. |
 
-Manche grenzüberschreitenden Versender nutzen `Label Created` oder `Shipping information received. Your parcel is on its way to UniUni for delivery to you`: Wie bei `Order received` liegen erst elektronische Daten vor. Bei einem Fehlversuch nennt UniUnis Website den Grund in Klammern (kein sicherer Ablageort, Geschäft geschlossen, Kontakt fehlgeschlagen); nach dem zweiten Fehlversuch wechselt der Status auf `storage`.
+Manche grenzüberschreitenden Versender nutzen `Shipping information received. Your parcel is on its way to UniUni for delivery to you`: Wie bei `Order received` liegen erst elektronische Daten vor. Bei einem Fehlversuch nennt UniUnis Website den Grund in Klammern; nach dem zweiten Fehlversuch wechselt der Status auf `storage`.
 
 ## Zustellung, Zustell-PIN, Fotos und verpasste Pakete
 
 UniUni nennt Händlern Laufzeiten vom nächsten Tag bis zu 7 Tagen und deckt 80 % Kanadas sowie 65 % der USA ab. Ein voraussichtliches Lieferdatum erscheint erst, sobald UniUni das Paket physisch im Haus hat – teils ergänzt um ein Zustellzeitfenster.
 
 - **Fehlversuch und Lagerung (`storage`)**: Nach einem ersten Fehlversuch unternimmt UniUni in den meisten Fällen innerhalb von **48 Stunden** automatisch einen zweiten Versuch. Scheitert auch dieser, geht das Paket ins Lager (`storage`) und wird dort **30 Tage** aufbewahrt: Beantrage über den Chatbot unter Angabe von Adresse, Kontaktdaten und Türhinweisen eine erneute Zustellung.
-- **Keine Postfächer, kaum Selbstabholung**: UniUni liefert ausschließlich an Hausadressen – weder an Postfilialen oder Postfächer (USPS PO Box / Postfach) noch an Militärbasen. Eine Selbstabholung im Lager gibt es nur in wenigen kanadischen Städten (etwa Montreal, Toronto und North York). Wohnungstür- oder Klingelcodes reichst du vor der Auslieferung über den Chatbot nach.
+- **Keine Postfächer, kaum Selbstabholung**: UniUni liefert ausschließlich an Hausadressen – weder an Postfilialen oder Postfächer (USPS PO Box / Postfach) noch an Militärbasen. Eine Selbstabholung gibt es nur in wenigen kanadischen Städten (etwa Montreal, Toronto und North York). Wohnungstür- oder Klingelcodes reichst du vor der Auslieferung über den Chatbot nach.
 - **Zustell-PIN in Kanada**: In Kanada kann der Absender eine PIN-Prüfung verlangen (Code per E-Mail und ggf. SMS). Der Fahrer kennt den Code nicht – du nennst ihn mündlich an der Tür, oder der Fahrer löst den erneuten Versand aus; ohne gültige PIN wird das Paket nicht abgestellt.
 - **Zustellfotos**: Fahrer machen laut UniUni drei Fotos am Ablageort. Öffne die Sendung auf `uniuni.com`, klicke auf `View Delivery Confirmation` und gib die Postleitzahl bzw. den ZIP-Code der Lieferadresse ein.
 
@@ -66,7 +66,7 @@ UniUni nennt Händlern Laufzeiten vom nächsten Tag bis zu 7 Tagen und deckt 80 
 
 ## UniUni Kundenservice und Telefonnummern
 
-- **Chatbot**: Rund um die Uhr erreichbar auf der [Support-Seite von UniUni](https://www.uniuni.com/support/).
+- **Chatbot**: auf der [Support-Seite von UniUni](https://www.uniuni.com/support/).
 - **Telefon Kanada**: `1-604-229-2007` (Zeitzonen Pacific und Mountain) sowie `1-647-360-4178` (Central, Eastern und Atlantic).
 - **Telefon USA**: `1-424-284-2432` (Pacific und Mountain) sowie `1-315-533-4690` (Central und Eastern).
 - **Sprechzeiten**: Montag bis Samstag, 10:00 bis 21:00 Uhr EST (auch in der Ergebnisansicht auf `uniuni.com` steht die passende Nummer zum Paket).
@@ -75,7 +75,7 @@ UniUni nennt Händlern Laufzeiten vom nächsten Tag bis zu 7 Tagen und deckt 80 
 
 [Peek](/) erkennt Nummern mit `UUS`, `UUSC`, `4C…US`, `U9999…`, `UR…` sowie `…CAA0U…` sofort als UniUni. Bei anderen `U`-Nummern mit 15 Ziffern, weiteren `CAA0`-/ `USA0`-Codes und dem `JY`-Muster fragt Peek bei UniUni nach und zeigt „UniUni hat dieses Paket.“, sobald der Tracker antwortet. Links von `uniuni.com` mit `no=` funktionieren ebenfalls; bei Mehrpaketsendungen muss jedes Einzelpaket separat hinzugefügt werden.
 
-Peek zeigt Status, Verlauf mit Ort und Provinz bzw. US-Bundesstaat, voraussichtliches Lieferdatum oder Zeitfenster sowie die Zustellzeit in deiner Zeitzone („Uhrzeiten in deiner Zeitzone: {{zone}}.“). Adressen, Fahrernamen, Klammerzusätze und Zustellfotos lässt Peek weg – Fotos siehst du auf `uniuni.com`. `Delivered` und `Out for delivery` übersetzt Peek in „Zugestellt“ und „In Zustellung“, alle übrigen Zeilen bleiben auf Englisch. Sendungen von [SpeedPAK](carrier:speedpak) oder [DHL eCommerce](carrier:dhl-ecommerce), die UniUni für die letzte Meile benennen, verfolgt Peek automatisch bei UniUni weiter; übergibt UniUni selbst an einen Drittkurier, erscheinen dessen Scans innerhalb der UniUni-Historie.
+Peek zeigt Status, Verlauf mit Ort und Provinz bzw. US-Bundesstaat, voraussichtliches Lieferdatum oder Zeitfenster sowie die Zustellzeit in deiner Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Adressen, Fahrernamen, Klammerzusätze und Zustellfotos lässt Peek weg – Fotos siehst du auf `uniuni.com`. `Delivered` und `Out for delivery` übersetzt Peek in „Zugestellt“ und „In Zustellung“, alle übrigen Zeilen bleiben auf Englisch. Sendungen von [SpeedPAK](carrier:speedpak) oder [DHL eCommerce](carrier:dhl-ecommerce), die UniUni für die letzte Meile benennen, verfolgt Peek automatisch bei UniUni weiter; übergibt UniUni selbst an einen Drittkurier, erscheinen dessen Scans innerhalb der UniUni-Historie.
 
 Solange du das Paket geöffnet hast oder am Liefertag mit eingeschalteten Mitteilungen, prüft Peek den direkten Tracker bis zu alle 10 Minuten und bis zu alle 2 Minuten, sobald UniUni das Paket an diesem Tag „In Zustellung“ meldet (ab 6 Uhr Ortszeit oder ab 30 Minuten vor Beginn eines angekündigten Zeitfensters); sonst sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) stündlich. Über Tracking-Dienste prüft Peek an diesem Zustelltag unter denselben Bedingungen bis zu alle 15 Minuten, sonst stündlich bzw. alle 3 Stunden nach einem Tag ohne Update. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen.
 

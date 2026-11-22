@@ -2764,6 +2764,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "shiprocket-sendungsverfolgung",
+      "title": "Shiprocket Sendungsverfolgung: AWB-Nummern, Status & RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "first-line-sendungsverfolgung",
@@ -4198,6 +4206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "suivi-shiprocket",
+      "title": "Suivi Shiprocket\u00a0: numéros AWB, statuts et RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "suivi-first-line",
@@ -5592,6 +5608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "tracciamento-shiprocket",
+      "title": "Tracciamento Shiprocket: codici AWB, stati e RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "tracciamento-first-line",
@@ -6978,6 +7002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "seguimiento-shiprocket",
+      "title": "Seguimiento Shiprocket: números AWB, estados y RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "first-line-seguimiento",
@@ -8346,6 +8378,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Aramex Nova Zelândia: números, estados, contactos",
       "name": "Aramex New Zealand",
       "color": "#dc291e"
+    },
+    {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "seguimento-shiprocket",
+      "title": "Seguimento Shiprocket: números AWB, estados e RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
     },
     {
       "id": "first-line",
@@ -9758,6 +9798,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Aramex Nowa Zelandia: numery, statusy i kontakt",
       "name": "Aramex New Zealand",
       "color": "#dc291e"
+    },
+    {
+      "id": "shiprocket",
+      "catalog": "shiprocket",
+      "slug": "sledzenie-shiprocket",
+      "title": "Śledzenie Shiprocket: numery AWB, statusy i RTO",
+      "name": "Shiprocket",
+      "color": "#735ae5"
     },
     {
       "id": "first-line",

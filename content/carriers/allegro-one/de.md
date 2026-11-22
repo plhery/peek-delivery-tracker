@@ -27,7 +27,7 @@ Diese Formate kann Peek bei Allegro One verfolgen (erfundene Zeichen):
 
 `AD` mit 12 Ziffern bezeichnet einen Kurier-Abholauftrag beim Verkäufer, kein Paket. Noch keine Nummer sichtbar? Der Verkäufer trägt sie nach, sofern Allegro sie nicht automatisch von einem angebundenen Paketdienst erhält. Mehr unter [Sendungsnummer finden](guide:find-tracking-number).
 
-In Allegro Delivery befördern auch Partner die Sendungen: DPD beliefert Allegro One Punkt; DPD, [DHL](carrier:dhl) und ORLEN Paczka beliefern Allegro One Box (in ausgewählten Städten auch One Kurier), ergänzt um Allegro DPD, Allegro DHL und Allegro ORLEN Paczka. Alle tragen eine Allegro-Nummer und werden bei Allegro mit denselben Statusmeldungen verfolgt. Versendet ein Verkäufer außerhalb von Allegro Delivery über seinen eigenen Vertrag mit [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL oder Poczta Polska, trägt das Paket deren Nummer und wird dort verfolgt. Nicht angebundene Dienste verfolgst du direkt beim jeweiligen Anbieter.
+In Allegro Delivery befördern auch Partner die Sendungen: DPD beliefert Allegro One Punkt; DPD, DHL und ORLEN Paczka beliefern Allegro One Box, ergänzt um Allegro DPD, Allegro DHL und Allegro ORLEN Paczka. Alle tragen eine Allegro-Nummer und werden bei Allegro mit denselben Statusmeldungen verfolgt. Versendet ein Verkäufer außerhalb von Allegro Delivery über seinen eigenen Vertrag mit [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL oder Poczta Polska, trägt das Paket deren Nummer und wird dort verfolgt. Nicht angebundene Dienste verfolgst du direkt beim jeweiligen Anbieter.
 
 ## Allegro One Statusmeldungen erklärt
 
@@ -54,7 +54,7 @@ Einen separaten Abhol-Status gibt es nicht: Auch nach deiner Abholung am Automat
 
 Allegro Delivery liefert ausschließlich innerhalb Polens für über Allegro gekaufte Waren.
 
-**Laufzeiten und Maße.** Beim Kurierdienst *Next Day* (*Dostawa jutro*) stellt Allegro am nächsten Werktag oder werktagsfreien Samstag nach Versand zu (garantiert binnen 3 Werktagen). Ausgewählte Verkäufer bieten in derselben Stadt wie ihr Lager *Same Day* (*Dostawa Dzisiaj*) an eine One Box mit Abholung am selben Tag zwischen 16:00 und 22:00 Uhr an (garantiert 2 Werktage). Für One Box und One Punkt gelten bis zu 20 kg (real oder Volumengewicht) und 64 × 41 × 38 cm (DPD-Pickup-Automat: 59 × 41 × 38 cm); für One Kurier 31,5 kg, 120 cm längste Seite und 220 cm Summe der drei Seiten.
+**Laufzeiten und Maße.** Beim Kurierdienst *Next Day* (*Dostawa jutro*) stellt Allegro am nächsten Werktag oder Samstag, der kein Feiertag ist, nach Versand zu (garantiert binnen 3 Werktagen). Ausgewählte Verkäufer bieten in derselben Stadt wie ihr Lager *Same Day* (*Dostawa Dzisiaj*) an eine One Box mit Abholung am selben Tag zwischen 16:00 und 22:00 Uhr an (garantiert 2 Werktage). Für One Box und One Punkt gelten bis zu 20 kg (real oder Volumengewicht) und 64 × 41 × 38 cm (DPD-Pickup-Automat: 59 × 41 × 38 cm); für One Kurier 31,5 kg, 120 cm längste Seite und 220 cm Summe der drei Seiten.
 
 **Abholung.** Bei Ankunft im Automaten oder Punkt informiert dich Allegro oder der Partner per E-Mail, SMS oder App-Mitteilung über Ort und Frist. An der **One Box** nutzt du den Abholcode (allein oder mit Telefonnummer), den QR-Code aus SMS/E-Mail oder die Allegro-App. Im **One Punkt** nennst du Paketnummer und Abholcode (bei technischen Störungen deinen Ausweis).
 
@@ -72,7 +72,7 @@ Allegro Delivery liefert ausschließlich innerhalb Polens für über Allegro gek
 
 **Zugestellt, aber nicht erhalten.** Frag Haushalt, Nachbarn oder Empfang und lies [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Reklamation.** Allegro nimmt Zustellreklamationen als Betreiber von Allegro Delivery elektronisch (über das Konto oder nach Bestätigung der Paketdaten) sowie nach polnischem Postrecht entgegen. Nach 30 Tagen ohne Zustellung oder Abholbenachrichtigung gilt das Paket als verloren. Empfänger dürfen reklamieren, wenn das Paket zugestellt wurde oder der Absender den Anspruch abtritt. Bei äußeren Schäden Annahme verweigern oder ein Schadensprotokoll (*Protokół szkody*) aufnehmen; verdeckte Schäden binnen 7 Tagen nach Annahme melden, sonst bis 12 Monate ab Versand. Antwort meist in 7 Tagen, spätestens in 30 Tagen (14 Tage Einspruchsfrist; Schlichtung beim UKE-Präsidenten). Siehe [Paket verloren](guide:lost-parcel) und [Paket beschädigt](guide:damaged-parcel).
+**Reklamation.** Allegro nimmt Zustellreklamationen als Betreiber von Allegro Delivery elektronisch (über das Konto oder nach Bestätigung der Paketdaten) sowie nach polnischem Postrecht entgegen. Nach 30 Tagen ohne Zustellung oder Abholbenachrichtigung gilt das Paket als verloren. Empfänger dürfen reklamieren, wenn das Paket zugestellt wurde oder der Absender den Anspruch abtritt. Bei äußeren Schäden bei der Annahme ein Schadensprotokoll (*Protokół szkody*) aufnehmen lassen oder den Schaden schriftlich festhalten; verdeckte Schäden binnen 7 Tagen nach Annahme melden, sonst bis 12 Monate ab Versand. Antwort meist in 7 Tagen, spätestens in 30 Tagen (14 Tage Einspruchsfrist; Schlichtung beim UKE-Präsidenten). Siehe [Paket verloren](guide:lost-parcel) und [Paket beschädigt](guide:damaged-parcel).
 
 ## Allegro One Kontakt
 

@@ -27,7 +27,7 @@ Questi sono i formati che Peek può seguire con Allegro One (caratteri inventati
 
 Un codice `AD` con 12 cifre indica un ordine di ritiro corriere presso il venditore, non un pacco. Non c'è ancora il codice? Lo inserisce il venditore, salvo invio automatico da un corriere integrato. Vedi [come trovare il numero di tracciamento](guide:find-tracking-number).
 
-In Allegro Delivery operano anche partner logistici: DPD consegna agli Allegro One Punkt; DPD, [DHL](carrier:dhl) e ORLEN Paczka agli Allegro One Box (con One Kurier in alcune città), oltre alle opzioni Allegro DPD, Allegro DHL e Allegro ORLEN Paczka. Tutti viaggiano con codice Allegro e si seguono su Allegro con le stesse diciture. Un pacco spedito fuori da Allegro Delivery sul contratto diretto del venditore con [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL o Poczta Polska porta il codice di quel corriere e si traccia sul suo sito. Se il corriere non è integrato con Allegro, lo segui direttamente presso il trasportatore.
+In Allegro Delivery operano anche partner logistici: DPD consegna agli Allegro One Punkt; DPD, DHL e ORLEN Paczka agli Allegro One Box, oltre alle opzioni Allegro DPD, Allegro DHL e Allegro ORLEN Paczka. Tutti viaggiano con codice Allegro e si seguono su Allegro con le stesse diciture. Un pacco spedito fuori da Allegro Delivery sul contratto diretto del venditore con [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL o Poczta Polska porta il codice di quel corriere e si traccia sul suo sito. Se il corriere non è integrato con Allegro, lo segui direttamente presso il trasportatore.
 
 ## Stati Allegro One: cosa significano
 
@@ -72,7 +72,7 @@ Allegro Delivery consegna solo in Polonia per acquisti effettuati su Allegro.
 
 **Consegnato ma assente.** Chiedi in famiglia, ai vicini o in portineria e segui [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-**Reclami.** Allegro riceve i reclami di Allegro Delivery online (dal conto o confermando i dati della spedizione) o secondo la legge postale polacca. Un pacco è considerato perso se non viene consegnato né avvisato entro 30 giorni dalla spedizione. Puoi reclamare se il pacco ti è stato consegnato o se il mittente ti cede il diritto. Per danni visibili rifiuta il pacco o fai redigere un verbale (*Protokół szkody*); i danni occulti vanno segnalati entro 7 giorni dall'accettazione, gli altri entro 12 mesi dalla spedizione. Risposta di solito in 7 giorni (massimo 30), ricorso entro 14 giorni e conciliazione presso il Presidente dell'UKE. Vedi [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
+**Reclami.** Allegro riceve i reclami di Allegro Delivery online (dal conto o confermando i dati della spedizione) o secondo la legge postale polacca. Un pacco è considerato perso se non viene consegnato né avvisato entro 30 giorni dalla spedizione. Puoi reclamare se il pacco ti è stato consegnato o se il mittente ti cede il diritto. Per danni visibili fai redigere un verbale (*Protokół szkody*) o segnala il danno per iscritto al momento del ritiro; i danni occulti vanno segnalati entro 7 giorni dall'accettazione, gli altri entro 12 mesi dalla spedizione. Risposta di solito in 7 giorni (massimo 30), ricorso entro 14 giorni e conciliazione presso il Presidente dell'UKE. Vedi [pacco smarrito](guide:lost-parcel) e [pacco danneggiato](guide:damaged-parcel).
 
 ## Contatti Allegro One
 

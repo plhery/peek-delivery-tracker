@@ -27,7 +27,7 @@ Voici les formes que Peek peut suivre chez Allegro One (caractères inventés) :
 
 Un code `AD` suivi de 12 chiffres désigne une commande d'enlèvement coursier chez le vendeur, pas un colis. Pas encore de numéro ? Le vendeur l'ajoute à la commande, sauf quand Allegro le reçoit automatiquement d'un transporteur intégré. Voir [où trouver son numéro de suivi](guide:find-tracking-number).
 
-Dans Allegro Delivery, des partenaires acheminent aussi les colis : DPD vers Allegro One Punkt ; DPD, [DHL](carrier:dhl) et ORLEN Paczka vers Allegro One Box (ainsi qu'One Kurier dans certaines villes), outre les options Allegro DPD, Allegro DHL et Allegro ORLEN Paczka. Tous portent un numéro Allegro et se suivent chez Allegro avec les mêmes libellés. Un colis envoyé hors d'Allegro Delivery, sur le contrat propre du vendeur avec [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL ou Poczta Polska, porte le numéro de ce transporteur et se suit chez lui. Si un transporteur n'est pas intégré à Allegro, tu le suis sur le site du transporteur.
+Dans Allegro Delivery, des partenaires acheminent aussi les colis : DPD vers Allegro One Punkt ; DPD, DHL et ORLEN Paczka vers Allegro One Box, outre les options Allegro DPD, Allegro DHL et Allegro ORLEN Paczka. Tous portent un numéro Allegro et se suivent chez Allegro avec les mêmes libellés. Un colis envoyé hors d'Allegro Delivery, sur le contrat propre du vendeur avec [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL ou Poczta Polska, porte le numéro de ce transporteur et se suit chez lui. Si un transporteur n'est pas intégré à Allegro, tu le suis sur le site du transporteur.
 
 ## Statuts de suivi Allegro One : signification
 
@@ -41,7 +41,7 @@ Le suivi d'Allegro existe en polonais et en anglais. En français, Peek lit les 
 | `Parcel has been dispatched to its destination point` | En route vers la consigne, le point ou l'agence qui te livre. | « En transit » |
 | `Parcel has been released for delivery` | En tournée de livraison, y compris vers une consigne One Box. | « En livraison » |
 | `No space in the parcel locker` | Consigne pleine : échec de dépose, le coursier reprend le colis. | « Tentative de livraison » |
-| `Notice` | Personne à l'adresse ; un avis (*Awizo*) a été envoyé. | « Tentative de livraison » |
+| `Notice` | Personne à l'adresse ; un avis (*Awizo*) a été laissé. | « Tentative de livraison » |
 | `Parcel is awaiting pick-up` | Disponible dans la One Box ou au One Punkt. | « Prêt à être retiré » |
 | `Parcel is awaiting pick-up — pick-up deadline is about to expire` | Ton délai de retrait expire bientôt (`Time for pick-up has been extended` s'il est prolongé). | « Prêt à être retiré » |
 | `Time for parcel pick-up has expired` | Non retiré à temps ; retour vers le vendeur. | « Problème signalé » |
@@ -72,7 +72,7 @@ Allegro Delivery livre uniquement sur le territoire polonais des biens vendus su
 
 **Livré mais absent.** Demande à ton entourage, aux voisins ou à l'accueil, puis consulte [colis livré mais non reçu](guide:delivered-not-received).
 
-**Réclamations.** Allegro traite les réclamations d'Allegro Delivery en ligne (connecté au compte ou après vérification des données du colis) ou selon les voies du droit postal polonais. Un colis est réputé perdu sans livraison ni avis sous 30 jours suivant l'expédition. Le destinataire peut réclamer si le colis lui a été livré ou si le vendeur lui a cédé son droit. À réception d'un colis abîmé, refuse-le ou fais établir un constat (*Protokół szkody*). Les dommages non visibles de l'extérieur se déclarent sous 7 jours après acceptation ; ailleurs, tu as jusqu'à 12 mois dès l'expédition. Allegro répond d'ordinaire sous 7 jours (maximum 30 jours), avec appel possible sous 14 jours et recours amiable devant le président de l'UKE. Voir [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
+**Réclamations.** Allegro traite les réclamations d'Allegro Delivery en ligne (connecté au compte ou après vérification des données du colis) ou selon les voies du droit postal polonais. Un colis est réputé perdu sans livraison ni avis sous 30 jours suivant l'expédition. Le destinataire peut réclamer si le colis lui a été livré ou si le vendeur lui a cédé son droit. À réception d'un colis abîmé, fais établir un constat (*Protokół szkody*) ou signale le dommage par écrit sur le moment. Les dommages non visibles de l'extérieur se déclarent sous 7 jours après acceptation ; ailleurs, tu as jusqu'à 12 mois dès l'expédition. Allegro répond d'ordinaire sous 7 jours (maximum 30 jours), avec appel possible sous 14 jours et recours amiable devant le président de l'UKE. Voir [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
 ## Contact et service client Allegro One
 

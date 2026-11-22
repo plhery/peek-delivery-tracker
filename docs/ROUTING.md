@@ -210,6 +210,7 @@ A failed source waits before it is retried for that parcel:
 | --- | --- | --- |
 | Transport, a bot check met by a carrier's own adapter (`challenge`), a missing input its owner can give, and `no_history` (a provider answered but has nothing, or the carrier lists the parcel without scans or does not know it yet; either answered with a reused number's earlier parcel); a passing not found (below) | 15 min | 6 h |
 | Other verification, schema, or a number or input the source refuses (`invalid_input`), as one it does not issue or one it finds several parcels under; not found by a carrier's own adapter | 1 h | 6 h |
+| A number a universal provider refuses (`invalid_input`), sent no postcode | 1 h, then 2 h, then 4 h | 24 h |
 | A carrier's own adapter asking for an input no field gives for the number | 6 h, then 12 h | 24 h |
 | Not found by a universal provider, or by a carrier a provider named that the parcel is neither filed under nor confirmed for | 24 h | 24 h |
 | `no_history` from a universal provider for a number nothing has answered for yet | 45 min, then 4 h, then 12 h | 24 h |
@@ -427,7 +428,10 @@ searches an hour or its pause after a CAPTCHA, a DHL Express key's turn, USPS's 
 both its routes meet its outage page) is no failure and no 429 of the carrier's. For the
 parcel's own carrier, the check is deferred to the refusal's `retryAfterMs`, when the next
 search frees up, with no provider asked meanwhile, so a busy hour's parcels spread over it; it
-ends `skipped`. Pauses can follow one another for hours, as through USPS's outage spells: an
+ends `skipped`. The deferral counts as the hour's check, so a parcel checked hourly or less often
+opens its later hours at the minute the search frees up (`routing.slot_minute`): the parcels a
+busy minute deferred don't meet there again each hour. Pauses can follow one another for hours,
+as through USPS's outage spells: an
 account's parcel that nothing has answered for an hour, as for a 429, asks the providers
 meanwhile, and a check they leave unanswered comes back when the carrier's search frees up. A
 provider's answer then leaves the carrier to be asked again once its search frees up too, not 6 h
@@ -479,7 +483,8 @@ from whichever asked the carrier about the number last, in this check or an earl
 own pacing refuses sends nothing and starts no wait.
 
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
-number gives, so those checks spread over the hour rather than all falling in its
+number gives, or the minute its carrier's search freed up after its pacing deferred a check
+(above), so those checks spread over the hour rather than all falling in its
 first runs. A carrier's own interval opens at the parcel's minute too, so a run does not
 ask it for all of its parcels at once. Copies of one number open together and share their lookups. A carrier tracked only through its own browser, such
 as Royal Mail, fails every parcel alike while that browser is down or times out: once it
@@ -538,7 +543,9 @@ before the carrier asked first waits for that carrier, so the check asks it too 
 provider alone and the carrier a turn later. Opening one of the
 parcel's links and a refresh by hand check it as before. Whatever ends a wait sooner ends this
 one too: the owner's postcode, link or phone digits, a postcode given to a provider, a new
-carrier, and a scraper release that ends a carrier's wait.
+carrier, and a scraper release that ends a carrier's wait: that of a carrier opening no browser
+that refused the number or gave an unreadable answer, or the wait such a carrier keeps while a
+provider serves the parcel, down to its failure's own. A release leaves every other wait as it was.
 
 **Someone is waiting** for a parcel while a notification can reach them: its account has
 browser or phone notifications or the delivery email on and the parcel is not muted for

@@ -144,6 +144,11 @@ export interface RoutingState extends JsonObject {
    * is not filed under, by recognition or a lookup: until the interval has passed, it is not asked again.
    */
   paced_asks?: Record<string, string>;
+  /**
+   * The minute the parcel's hour opens at (trackingSync's parcelWindowStart), once its own carrier's pacing deferred a
+   * check: the minute its next search freed up. Unset, its number gives the minute.
+   */
+  slot_minute?: number;
   /** A carrier that knows the number but cannot track it without the user's input. */
   input_needed?: { carrier: string; field: string };
   /** The filed carrier refused the delivery postcode stored for it, until it answers. */
@@ -287,13 +292,21 @@ export function serviceFailure(failure: { kind?: unknown } | undefined): boolean
  * Until when scheduled checks leave the parcel, as epoch milliseconds, zero when they don't: its
  * last check found every source they may ask waiting its turn (`quiet_until`). Whatever ends a
  * wait sooner ends it too: the owner's input and a new carrier drop `next_check_at`, and a scraper
- * release ends a carrier's wait (releaseLapses, `direct_retry_at`).
+ * release ends a carrier's wait (releaseLapses), and the wait a carrier that opens no browser keeps
+ * while a provider serves the parcel (`direct_retry_at`), down to its failure's turn. A release
+ * leaves every other wait, the turn's included, as it was.
  */
 export function quietUntil(parcel: JsonObject): number {
   const state = routingState(parcel);
   if (state.next_check_at === undefined) return 0;
-  if (state.rules !== catalogRules() && (state.direct_retry_at !== undefined
-    || Object.entries(state.failures).some(([carrier, failure]) => releaseLapses(carrier, failure)))) return 0;
+  if (state.rules === catalogRules()) return millis(state.quiet_until);
+  if (Object.entries(state.failures).some(([carrier, failure]) => releaseLapses(carrier, failure))) return 0;
+  const number = String(parcel.tracking_number ?? '');
+  const primary = state.confirmed_number === number && state.confirmed_carrier ? state.confirmed_carrier : String(parcel.carrier);
+  // As the check's next turn: the carrier's own wait counts only while a provider serves the parcel.
+  if (state.direct_retry_at !== undefined && state.preferred_provider && !opensBrowser(primary)) {
+    return Math.min(millis(state.quiet_until), millis(state.failures[primary]?.retry_at));
+  }
   return millis(state.quiet_until);
 }
 
@@ -1093,9 +1106,12 @@ export class TrackingRouter {
       const hourly = ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind) && !passing
         && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
       const base = daily ? DAY : unanswerable ? 6 * HOUR : hourly ? HOUR : 15 * 60_000;
+      // A provider that refused the number itself again, sent no postcode, refuses it the same way until the number
+      // changes: past three failures in a row (1 h, 2 h, 4 h for refusals), it waits a day.
+      const refused = universalSource && kind === 'invalid_input' && previous?.kind === 'invalid_input' && !providerPostcode && count > 3;
       const userError = trackingFailureCode(error);
       const wait = unanswered ? UNANSWERED_PROVIDER_WAITS[Math.min(count, UNANSWERED_PROVIDER_WAITS.length) - 1]!
-        : Math.min(daily || unanswerable ? DAY : 6 * HOUR, base * 2 ** (count - 1));
+        : refused ? DAY : Math.min(daily || unanswerable ? DAY : 6 * HOUR, base * 2 ** (count - 1));
       const retryAt = now().getTime() + Math.max(retryAfterMs, wait);
       const unseen = kind === 'no_history' || (kind === 'not_found' && !daily);
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
@@ -1518,6 +1534,9 @@ export class TrackingRouter {
             return null;
           }
           state.next_check_at = iso(free);
+          // The deferral counts as the hour's check, so the parcel's later hours open when the search freed up: the
+          // parcels a busy minute deferred no longer meet there each hour. Zurich's offsets are whole hours.
+          state.slot_minute = new Date(free).getUTCMinutes();
           report('paced_deferred', carrier, 'rate_limited', error);
           // Nobody answered, so the parcel's chip stays as the last answered checks left it.
           defer();
@@ -1905,6 +1924,11 @@ export class TrackingRouter {
     // equally full: one that had less is not asked before one that had more. Postal Ninja, Track718 (last in Juxi's
     // plan: a browser read that rarely holds a parcel the others lack) and UPU keep their place after the others.
     const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja' && source !== 'Track718');
+    // A parcel filed under no carrier asks Postal Ninja only once ParcelsApp and 17TRACK have both found nothing for the
+    // number in the same check: it rarely knows a number they don't, and its lookups are slow. Its turn comes with theirs.
+    // One that tracks the parcel is asked as usual.
+    const ninjaAfter = declared === 'unknown' && preferred !== 'Postal Ninja'
+      ? (['ParcelsApp', '17TRACK'] as const).filter((other) => sources.includes(other)) : [];
     const offset = state.discovery_cursor % Math.max(1, rotation.length);
     const turned = [...rotation.slice(offset), ...rotation.slice(0, offset)].sort((a, b) => plan.rank(a) - plan.rank(b));
     const everyProvider = [...new Set<UniversalSource>([...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...turned, ...sources])];
@@ -1925,11 +1949,6 @@ export class TrackingRouter {
       const turns = everyProvider.filter((source) => !awaitsInput(source) && !(source === 'Postal Ninja' && ninjaAfter.length))
         .map((source) => millis(state.failures[source]?.retry_at));
       const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider && !servedBy ? millis(state.direct_retry_at) : 0,
-    // A parcel filed under no carrier asks Postal Ninja only once ParcelsApp and 17TRACK have both found nothing for the
-    // number in the same check: it rarely knows a number they don't, and its lookups are slow. Its turn comes with theirs.
-    // One that tracks the parcel is asked as usual.
-    const ninjaAfter = declared === 'unknown' && preferred !== 'Postal Ninja'
-      ? (['ParcelsApp', '17TRACK'] as const).filter((other) => sources.includes(other)) : [];
         askableAt(filed)) : null;
       if (own !== null) turns.push(own);
       for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {
@@ -2006,6 +2025,7 @@ export class TrackingRouter {
       const remaining = Math.floor(universalDeadline - performance.now());
       if ((visit !== 'again' && attemptedUniversal.has(source)) || remaining <= 5_000 || millis(state.failures[source]?.retry_at) > now().getTime()
         || (scheduled && awaitsInput(source)) || (sparse && attempts > 0)) return null;
+      if (source === 'Postal Ninja' && ninjaAfter.some((other) => !answeredEmpty.includes(other))) return null;
       attemptedUniversal.add(source);
       // Asked now: what is recorded for it is what this ask finds.
       if (visit === 'again') heldUntil.delete(source);
@@ -2025,7 +2045,6 @@ export class TrackingRouter {
       if (!reused && scheduled && !tracked && this.options.misses?.spent(source, now().getTime())) {
         report('provider_budget_held', source); return null;
       }
-      if (source === 'Postal Ninja' && ninjaAfter.some((other) => !answeredEmpty.includes(other))) return null;
       const acquire = async () => {
         try { return await this.options.health.acquireTrackingProvider(source, scheduled); }
         catch {

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { RateLimitedError } from 'universal-parcel-scraper';
+import { InvalidInputError, RateLimitedError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { catalogRules, quietUntil, RoutingDeferred, routingState, TrackingRouter } from './trackingRouting';
@@ -120,7 +120,7 @@ it('defers a check our own pacing refused to when the next search frees up, aski
     { reason: 'self_paced' }));
   const paced = await missed(run.router(), parcel({ consecutive_failures: 1 }));
   expect(paced).toMatchObject({ stale: false, attempted: 0,
-    routing: { consecutive_failures: 1, next_check_at: '2026-09-10T11:20:00.000Z' } });
+    routing: { consecutive_failures: 1, next_check_at: '2026-09-10T11:20:00.000Z', slot_minute: 20 } });
   expect(paced.routing.failures).toEqual({});
   expect(run.direct).toHaveBeenCalledTimes(1);
   expect(run.universal).not.toHaveBeenCalled();
@@ -130,6 +130,7 @@ it('defers a check our own pacing refused to when the next search frees up, aski
   run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 20 * 60_000, 'Too many requests'));
   const limited = await missed(run.router(), parcel({ consecutive_failures: 1 }));
   expect(limited).toMatchObject({ attempted: 4, routing: { consecutive_failures: 2, failures: { 'la-poste': { kind: 'rate_limited' } } } });
+  expect(limited.routing.slot_minute).toBeUndefined();
   expect(run.universal).toHaveBeenCalled();
 });
 
@@ -272,8 +273,67 @@ describe('a check every source sits out', () => {
     // A release keeps it, unless it ends a carrier's wait.
     expect(quietUntil(parcel({ ...held, rules: 'older' }))).toBe(until);
     expect(quietUntil(parcel({ ...held, rules: 'older', failures: { ...held.failures, ...waiting({ 'la-poste': '2026-09-10T15:00:00Z' }, 'schema') } }))).toBe(0);
-    expect(quietUntil(parcel({ ...held, rules: 'older', direct_retry_at: '2026-09-10T15:00:00Z' }))).toBe(0);
+    // The carrier's own wait while a provider serves the parcel ends, down to its failure's turn.
+    const served = { ...held, rules: 'older', preferred_provider: 'Ship24', direct_retry_at: '2026-09-10T16:00:00Z' };
+    expect(quietUntil(parcel(served))).toBe(Date.parse('2026-09-10T14:30:00Z'));
+    expect(quietUntil(parcel({ ...served, failures: { ...held.failures, ...waiting({ 'la-poste': '2026-09-10T12:30:00Z' }) } })))
+      .toBe(Date.parse('2026-09-10T12:30:00Z'));
+    expect(quietUntil(parcel({ ...served, failures: { ...held.failures, 'la-poste': undefined } }))).toBe(0);
+    // A wait that no turn counted, or one a carrier opening a browser keeps, holds.
+    expect(quietUntil(parcel({ ...held, rules: 'older', direct_retry_at: '2026-09-10T15:00:00Z' }))).toBe(until);
+    expect(quietUntil({ ...parcel({ ...served, configured_carrier: 'fedex' }), carrier: 'fedex' })).toBe(until);
   });
+
+  it('holds a carrier\'s failed number through a release while every provider waits its turn', async () => {
+    // A FedEx parcel no source has answered for two days: FedEx's own lookup cannot place the
+    // number and every provider waits after finding nothing. Releases come between the checks.
+    const run = setup();
+    const router = new TrackingRouter({ direct: run.direct, universal: run.universal, health: run.health,
+      now: () => new Date('2026-09-10T11:00:00.000Z'), enablePostalNinja: true, enableTrack123: true });
+    const failures = {
+      fedex: { count: 12, kind: 'transport', user_error: 'carrier:indeterminate', retry_at: '2026-09-10T15:00:00Z' },
+      ...Object.fromEntries(Object.entries({ ParcelsApp: '2026-09-10T15:00:00Z', Track123: '2026-09-10T14:00:00Z',
+        '17TRACK': '2026-09-10T16:00:00Z', 'Postal Ninja': '2026-09-10T16:00:00Z', Ordertracker: '2026-09-10T16:00:00Z' })
+        .map(([source, retry]) => [source, { count: 12, kind: 'no_history', retry_at: retry }])),
+      Ship24: { count: 3, kind: 'not_found', retry_at: '2026-09-11T09:00:00Z' },
+    };
+    const fedex = (routing: JsonObject): JsonObject => ({ id: 'fedex', carrier: 'fedex', tracking_number: 'TEST1234',
+      current_stage: 'registered', sync_status: 'ok', last_synced_at: '2026-09-10T10:00:00.000Z',
+      carrier_data: { routing: { version: 1, configured_carrier: 'fedex', last_success_at: '2026-09-08T11:00:00.000Z',
+        consecutive_failures: 20, ...routing } } });
+    const held = await missed(router, fedex({ rules: catalogRules(), failures, direct_retry_at: '2026-09-10T15:00:00Z' }), true);
+    expect(held).toMatchObject({ attempted: 0, routing: { quiet_until: '2026-09-10T14:00:00.000Z' } });
+    expect(run.direct).not.toHaveBeenCalled();
+    expect(run.universal).not.toHaveBeenCalled();
+    expect(quietUntil(fedex({ ...held.routing, rules: 'older' }))).toBe(Date.parse('2026-09-10T14:00:00Z'));
+  });
+});
+
+it.each([
+  ['the number alone', {}, {}, [1, 2, 4, 24, 24]],
+  ['the number with a postcode', { dpd_postcode: '75001' }, {}, [1, 2, 4, 6, 6]],
+  // Its first refusal after five checks that found nothing waits as long as a sixth failure in a row.
+  ['the number after finding nothing for it', {}, { failures: { ParcelsApp: { count: 5, kind: 'no_history', retry_at: '2026-09-10T11:00:00Z' } } },
+    [6, 24]],
+])('backs a provider off to a day after it refused %s again', async (_, input: JsonObject, earlier: JsonObject, hours) => {
+  const run = setup();
+  run.universal.mockImplementation(async (source: string) => { throw new InvalidInputError(source, `Invalid ${source} tracking number`); });
+  let routing: JsonObject = earlier;
+  let at = Date.parse('2026-09-10T11:00:00Z');
+  const waits: number[] = [];
+  for (let check = 0; check < hours.length; check++) {
+    const snapshot = { ...parcel({ configured_carrier: 'unknown', last_success_at: undefined, ...routing }), carrier: 'unknown',
+      current_stage: 'pending', ...input };
+    routing = (await missed(run.router(), snapshot)).routing;
+    const failure = (routing.failures as Record<string, { kind: string; retry_at: string }>).ParcelsApp!;
+    expect(failure.kind).toBe('invalid_input');
+    const wait = Date.parse(failure.retry_at) - at;
+    waits.push(wait / HOUR);
+    // The next check comes at the provider's turn.
+    run.advance(wait);
+    at += wait;
+  }
+  expect(waits).toEqual(hours);
 });
 
 it.each([

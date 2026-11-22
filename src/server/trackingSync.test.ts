@@ -4012,8 +4012,8 @@ describe('TrackingSyncService', () => {
 
   it('counts a parcel whose wait a release ended as due since the service started, not since its wait began', async () => {
     // Its last check found every source waiting its turn until 14:00; the scraper release the server started
-    // with, under other catalog rules, ends the wait of the carrier it retries.
-    const routing = { version: 1, configured_carrier: 'swiss-post', failures: {}, rules: 'older-rules',
+    // with, under other catalog rules, ends the wait its carrier kept while a provider served the parcel.
+    const routing = { version: 1, configured_carrier: 'swiss-post', failures: {}, rules: 'older-rules', preferred_provider: 'Ship24',
       next_check_at: '2026-09-09T09:05:00Z', quiet_until: '2026-09-09T14:00:00Z', direct_retry_at: '2026-09-09T14:00:00Z' };
     const client = fakeClient([{ carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234', sync_status: 'ok',
       id: 'held', user_id: 'a', last_synced_at: '2026-09-09T09:00:00Z', carrier_data: { routing } }]);
@@ -4558,6 +4558,23 @@ describe('TrackingSyncService', () => {
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(`2026-09-09T${time}Z`));
     await service.sync();
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id).sort()).toEqual(checked.sort());
+  });
+
+  it.each([
+    // AliExpress's own pacing deferred the check at 10:48, the parcel's minute, to 11:10, when its next search frees up.
+    { last: '10:48:15', time: '11:05:00', checked: 0 },
+    { last: '10:48:15', time: '11:15:00', checked: 1 },
+    // Its hour now opens at :10, not at :48.
+    { last: '11:15:15', time: '11:50:00', checked: 0 },
+    { last: '11:15:15', time: '12:10:00', checked: 1 },
+  ])('opens the hour of a parcel its carrier\'s pacing deferred at the minute the search frees up: $checked checks at $time', async ({ last, time, checked }) => {
+    const client = fakeClient([{ id: 'paced', user_id: 'a', carrier: 'aliexpress', current_stage: 'in_transit', tracking_number: 'TEST1234',
+      last_synced_at: `2026-09-09T${last}Z`, sync_status: 'ok',
+      carrier_data: { routing: { version: 1, configured_carrier: 'aliexpress', next_check_at: '2026-09-09T11:10:00.000Z', slot_minute: 10 } } }]);
+    client.listUnwatchedPackageIds.mockResolvedValue(['paced']);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(`2026-09-09T${time}Z`));
+    await expect(service.sync()).resolves.toMatchObject({ checked });
   });
 
   // The longest due first: the lookup someone opened since 00:00, the account's parcel nobody reads

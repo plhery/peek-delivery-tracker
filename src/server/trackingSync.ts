@@ -792,11 +792,14 @@ export async function allRead<T extends readonly unknown[] | []>(reads: T): Prom
  * The start of the parcel's current window of `minutes`, an hour or a carrier's interval (`refreshLimit`), which opens
  * at a minute of its own: the parcels checked hourly or less often, and those of a carrier that spaces its lookups
  * out, are spread over the window rather than all due at its start, so no run takes them all or asks such a carrier
- * for all of its parcels at once. Copies of one number open at the same minute and still share their lookups.
+ * for all of its parcels at once. Copies of one number open at the same minute and still share their lookups. Once its
+ * carrier's pacing deferred a check, the parcel opens at the minute that carrier's search freed up (`slot_minute`).
  */
 function parcelWindowStart(parcel: JsonObject, local: DateTime, minutes = 60): DateTime {
   const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
-  const minute = createHash('sha256').update(number).digest().readUInt32BE(0) % 60 % minutes;
+  const slot = routingState(parcel).slot_minute;
+  const minute = (Number.isInteger(slot) && slot! >= 0 && slot! < 60 ? slot!
+    : createHash('sha256').update(number).digest().readUInt32BE(0) % 60) % minutes;
   const shifted = local.minus({ minutes: minute }).startOf('minute');
   return shifted.minus({ minutes: shifted.minute % minutes }).plus({ minutes: minute });
 }

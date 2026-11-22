@@ -14,8 +14,8 @@ Normalmente, a DPD manda-te um email com o número de cada encomenda. Se o estaf
 
 | Forma (inventada) | O que é |
 | --- | --- |
-| `09550000000000` | 14 algarismos começados entre 0955 e 0988: um número da DPD Portugal. |
-| `09550000000000I` | O mesmo número com o carácter de controlo no fim, como vem na etiqueta. |
+| `09558473629104` | 14 algarismos começados entre 0955 e 0988: um número da DPD Portugal. |
+| `09558473629104S` | O mesmo número com o carácter de controlo no fim, como vem na etiqueta. |
 
 Outros números de 14 algarismos, com ou sem carácter de controlo, podem ser da DPD de outro país, da Chronopost ou da [SEUR](carrier:seur). Confirma no email da loja quem leva a encomenda.
 
@@ -79,9 +79,9 @@ O Track & Trace abre em português e também tem versão inglesa e francesa. Cad
 
 ## DPD Portugal contactos: telefone e apoio ao cliente
 
-Segundo a [página de contactos](https://www.dpd.com/pt/pt/ajuda/contactos/) da DPD, consultada a 22 de outubro de 2026:
+Segundo a [página de contactos](https://www.dpd.com/pt/pt/ajuda/contactos/) da DPD:
 
-- **Telefone:** 21 854 6001 para particulares, de segunda a sexta das 8h30 às 19h30 e ao sábado das 9h às 13h. O 707 45 28 28 é a linha das empresas: até 0,09 € por minuto da rede fixa e 0,13 € das redes móveis, mais IVA.
+- **Telefone:** 21 854 6001 para particulares, de segunda a sexta das 8h30 às 19h30 e ao sábado das 9h às 13h (hora de Lisboa). O 707 45 28 28 é a linha das empresas: até 0,09 € por minuto da rede fixa e 0,13 € das redes móveis, mais IVA.
 - **Email e formulário:** suporte.cliente@dpd.pt, e o formulário de «Pedidos, sugestões e reclamações», com um campo para o número da encomenda.
 - **Maria:** a assistente virtual da DPD responde 24 horas por dia, todos os dias, a perguntas como onde está a encomenda, quando chega ou como mudar a data ou o local. Para alterar ou corrigir a morada, a página de contactos também te manda para ela.
 
@@ -89,9 +89,9 @@ Segundo a [página de contactos](https://www.dpd.com/pt/pt/ajuda/contactos/) da 
 
 ## Rastrear uma encomenda DPD Portugal com o Peek
 
-Com 14 algarismos começados entre 0955 e 0988, com ou sem o carácter de controlo, o [Peek](/) pergunta às transportadoras prováveis, a DPD Portugal primeiro, e mostra «DPD Portugal tem esta encomenda.» quando a DPD conhece o número. Com outro número da DPD, cola-o na mesma: o Peek segue mais de 4.500 transportadoras. Se a DPD Portugal não aparecer, escolhe-a em «Alterar» ou, na encomenda, em «Alterar transportadora». Um carácter de controlo errado é uma gralha: confirma a etiqueta. Os links do tracking.dpd.pt com `reference=` também funcionam.
+Com 14 algarismos começados entre 0955 e 0988, com ou sem o carácter de controlo, o [Peek](/) pergunta às transportadoras prováveis, a DPD Portugal primeiro, e mostra «DPD Portugal tem esta encomenda.» quando a DPD conhece o número. Com outro número da DPD, cola-o na mesma: o Peek segue mais de 4.500 transportadoras. Se a DPD Portugal não aparecer, escolhe-a em «Alterar» ou, na encomenda, em «Alterar transportadora». Um carácter de controlo errado é uma gralha: confirma a etiqueta. Os links tracking.dpd.pt/track-and-trace com `reference=` também funcionam.
 
-O Peek lê o rastreio da DPD em português. As horas vêm sem fuso horário: o Peek lê-as na hora do local de cada leitura e mostra-as no fuso horário do teu dispositivo. Quando um ponto Pickup recebe a encomenda, mostra o nome do ponto. No dia da entrega, mostra a janela horária enviada com `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` até a encomenda ser entregue, voltar ao depósito ou a entrega falhar. O mapa e o nome de quem assinou ficam no site da DPD. Consulta até a cada 10 minutos, até a cada 2 quando a encomenda está em distribuição (a cada 5 se tiver de abrir o rastreio da DPD num navegador), e avisa-te com «Todos os registos», «Passos importantes» ou «Só a entrega». Estas consultas mais seguidas só se fazem no dia em que a encomenda sai para distribuição, a partir das 6h00, hora local (se houver janela horária, a partir de meia hora antes de ela começar), e enquanto for o próprio rastreio da DPD a responder; através de serviços de rastreio, o Peek consulta a cada 15 minutos. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora.
+O Peek lê o rastreio da DPD em português. As horas vêm sem fuso horário: o Peek lê-as na hora de Lisboa e mostra-as no fuso horário do teu dispositivo. Quando um ponto Pickup recebe a encomenda, mostra o nome do ponto. No dia da entrega, mostra a janela horária enviada com `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` até a encomenda ser entregue, voltar ao depósito ou a entrega falhar. O mapa e o nome de quem assinou ficam no site da DPD. Enquanto tiveres a encomenda aberta, ou no dia da entrega com as notificações ligadas, consulta até a cada 10 minutos, até a cada 2 quando a encomenda está em distribuição (a cada 5 se tiver de abrir o rastreio da DPD num navegador), e avisa-te com «Todos os registos», «Passos importantes» ou «Só a entrega». Estas consultas mais seguidas só se fazem no dia em que a encomenda sai para distribuição, a partir das 6h00, hora de Lisboa (se houver janela horária, a partir de meia hora antes de ela começar), e enquanto for o próprio rastreio da DPD a responder. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora.
 
 Se o rastreio da La Poste disser que a encomenda passou para a DPD Portugal e der o número dela, o Peek pode passar a segui-la na DPD assim que esta mostrar movimento. O mesmo vale para uma encomenda da Chronopost: se o rastreio da Chronopost der o número da DPD e Portugal como país de entrega, o Peek indica a DPD Portugal como quem entrega, com esse número, e passa a segui-la na DPD assim que esta mostrar um evento tão recente como o último da Chronopost. O Peek não consegue mudar uma entrega nem reclamar por ti.
 

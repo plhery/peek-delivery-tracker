@@ -22,9 +22,9 @@ Ein Nummernformat veröffentlicht Heppner nicht. Peek nimmt für Heppner 8 Ziffe
 
 | Nummer | Wem sie gehören kann |
 | --- | --- |
-| `00000000` | Heppner, aber auch Mondial Relay und Colisweb vergeben 8 Ziffern. |
-| `0000000` | Nicht Heppner: 7 Ziffern passen zu SEUR. |
-| `0000000000` | Nicht Heppner: 10 Ziffern passen zu [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis und anderen. |
+| `84729163` | Heppner, aber auch Mondial Relay und Colisweb vergeben 8 Ziffern. |
+| `4829173` | Nicht Heppner: 7 Ziffern passen zu SEUR. |
+| `4829173654` | Nicht Heppner: 10 Ziffern passen zu [DHL](carrier:dhl), Mondial Relay, Relais Colis und anderen. |
 
 Welche Firma deine Bestellung hat, verraten 8 Ziffern allein also nicht. Schau, wer die SMS oder E-Mail geschickt hat, oder lies, [zu welchem Paketdienst eine Nummer passt](guide:tracking-number-formats). Meldet Heppner „Wir konnten Ihre Bestellung nicht finden“, rät es: „Überprüfen Sie die Übereinstimmung zwischen der eingegebenen Postleitzahl und der Sendungsverfolgungsnummer.“ Eine falsche Postleitzahl sieht dort also aus wie eine falsche Nummer.
 
@@ -87,7 +87,7 @@ Für Interneteinkäufe schreibt das Bundesamt für Zoll und Grenzsicherheit (BAZ
 
 ## Heppner Kontakt in der Schweiz: SAFRAM-Niederlassungen
 
-So stand es am 27. Oktober 2026 auf Heppners deutschen Seiten:
+So steht es auf Heppners deutschen Seiten:
 
 - **SAFRAM Genève:** Route des Moulieres 5, 1242 Satigny, Tel. +41 22 827 03 11.
 - **SAFRAM Basel:** Uferstrasse 90, 4057 Basel, Tel. +41 61 338 93 33.
@@ -99,13 +99,13 @@ So stand es am 27. Oktober 2026 auf Heppners deutschen Seiten:
 
 ## Heppner-Lieferung mit Peek verfolgen
 
-[Peek](/) kann Heppner, Mondial Relay oder Colisweb nicht fragen, ob sie eine 8-stellige Nummer kennen. Füg die Nummer trotzdem ein, denn Peek verfolgt mehr als 4.500 Paketdienste. Tipp dann auf „Ändern“ und wähle Heppner unter „Passt zu dieser Nummer“. Heppner-Links helfen Peek nicht weiter, gib die Ziffern ein.
+[Peek](/) kann Heppner, Mondial Relay oder Colisweb nicht fragen, ob sie eine 8-stellige Nummer kennen. Füg die Nummer trotzdem ein, denn Peek verfolgt mehr als 4.500 Paketdienste. Tipp dann auf „Ändern“ und wähle Heppner unter „Passt zu dieser Nummer“. Aus der Schweiz bietet Peek schon das Postleitzahlfeld von Heppner an, aus Frankreich, Belgien, Luxemburg, Spanien oder Portugal das von Mondial Relay: Wähle also zuerst Heppner. Heppner-Links helfen Peek nicht weiter, gib die Ziffern ein.
 
-Peek fragt dann nach der „Postleitzahl der Lieferadresse“ und verfolgt ohne sie nichts. Eine vierstellige Postleitzahl sucht es bei Heppner zuerst in der Schweiz, dann in Belgien und Luxemburg. Eine falsche Postleitzahl sieht aus wie eine unbekannte Nummer.
+Peek fragt dann nach der „Postleitzahl der Lieferadresse“ und kann Heppner ohne sie nicht fragen. Eine vierstellige Postleitzahl sucht es bei Heppner zuerst in der Schweiz, dann in Belgien und Luxemburg. Eine falsche Postleitzahl sieht aus wie eine unbekannte Nummer.
 
-Du siehst Status und Verlauf mit genauer Uhrzeit in der Zeitzone deines Geräts; auf peektracker.com und in den Apps für iPhone und Android nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Jeden Schritt zeigt Peek in eigenen Worten: „Sendung übernommen“, „Unterwegs“, „Sendung weitergeleitet“, „In Zustellung“, „Zugestellt“, „Zurück an Absender“, „Warten auf Zustellanweisungen“ oder „Problem mit der Sendung“. Eine stornierte Sendung erscheint auf Englisch als „Shipment cancelled“, die Lieferung an eine neue Adresse als „Forwarded to a new address under a new reference“. Wartet Heppner auf deine Anweisungen, meldet es eine Anomalie bei der Übernahme oder ist die Sendung storniert, steht das Paket bei Peek auf „Problem gemeldet“. Orte, einen erwarteten Liefertag oder die Abholstelle zeigt Peek nicht, und den Absender, deinen Namen, deine Adresse und deine Lieferanweisungen übernimmt es nicht.
+Du siehst Status und Verlauf mit genauer Uhrzeit in der Zeitzone deines Geräts; auf peektracker.com und in den Apps für iPhone und Android nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Jeden Schritt zeigt Peek in eigenen Worten: „Sendung übernommen“, „Unterwegs“, „Sendung weitergeleitet“, „In Zustellung“, „Zugestellt“, „Zurück an Absender“, „Warten auf Zustellanweisungen“ oder „Problem mit der Sendung“. Eine stornierte Sendung erscheint auf Englisch als „Shipment cancelled“, die Lieferung an eine neue Adresse als „Forwarded to a new address under a new reference“. Wartet Heppner auf deine Anweisungen, meldet es eine Anomalie bei der Übernahme oder ist die Sendung storniert, steht das Paket bei Peek auf „Problem gemeldet“. Orte, einen erwarteten Liefertag oder die Abholstelle zeigt Peek nicht, und den Absender, deine Adresse und deine Lieferanweisungen übernimmt es nicht.
 
-Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald die Bestellung in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Heppner selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang nichts Neues (solange die Bestellung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Einen Termin buchen oder Heppner kontaktieren kann Peek nicht, das erledigst du auf Heppners Seite.
+Solange du die Bestellung geöffnet hast oder am Zustelltag Mitteilungen aktiviert sind, schaut Peek bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald die Bestellung in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Heppner selbst antwortet), sonst stündlich. Kommt zwei Tage lang nichts Neues (solange die Bestellung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Einen Termin buchen oder Heppner kontaktieren kann Peek nicht, das erledigst du auf Heppners Seite.
 
 ## Fragen zur Heppner Sendungsverfolgung
 
@@ -126,18 +126,18 @@ Heppners Firma in der Schweiz: 1965 gegründet, heute Teil der Heppner-Gruppe, m
 Ein Transportunternehmen aus Straßburg: 1925 kaufte Jean Schmitt dort das Transportunternehmen „Jules Heppner Successeurs“. Heute hat Heppner Niederlassungen unter anderem in Frankreich, Deutschland, Belgien, Spanien, den Niederlanden und der Schweiz.
 
 :::sources
-- [Heppner: Empfänger, verfolgen Sie Ihre Bestellung](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) – Formularfelder, wo die Nummer steht, Fehlermeldungen, Lieferland (gelesen am 10. November 2026)
+- [Heppner: Empfänger, verfolgen Sie Ihre Bestellung](https://www.heppner-group.com/de/empfaenger-verfolgen-sie-ihre-bestellung/) – Formularfelder, wo die Nummer steht, Fehlermeldungen, Lieferland
 - [Heppner: Sendungsverfolgung, deutsche Texte](https://myportal.heppner-group.com/assets/i18n/de.json) – Schritte und Meldungen, Liefertermin, Zeitfenster, Abholung, Ihre Agentur
 - [Heppner: Sendungsverfolgung, französische Texte](https://myportal.heppner-group.com/assets/i18n/fr.json) – französische Originale der deutschen Meldungen
 - [Heppner: Heppner CONNECT](https://www.heppner-group.com/de/road-solutions/heppner-connect/) – Privatpersonen, 30 kg, rund um die Uhr, EXTENT, INHOME
-- [Heppner: Extent und Inhome](https://www.heppner-group.com/de/road-solutions/b2c-paketloesungen/) – Wochentage, Abend ab 18:30, Samstag, 11 statt 5 Zeitfenster, Lagerfrist, Gebäudetür, zwei Leute (gelesen am 10. November 2026)
+- [Heppner: Extent und Inhome](https://www.heppner-group.com/de/road-solutions/b2c-paketloesungen/) – Wochentage, Abend ab 18:30, Samstag, 11 statt 5 Zeitfenster, Lagerfrist, Gebäudetür, zwei Leute
 - [Heppner: Ihre Sendungen verfolgen](https://www.heppner-group.com/de/road-solutions/ihre-sendungen-verfolgen/) – E-Mail und SMS an Empfänger
 - [Heppner: Heppner in der Schweiz](https://www.heppner-group.com/de/die-heppner-gruppe/heppner-in-der-schweiz/) – SAFRAM seit 1965, 3 Niederlassungen, Zollgebühren
 - [Heppner: Heppner CUSTOMS](https://www.heppner-group.com/de/road-solutions/heppner-customs/) – Verzollung und MWST im Handel mit der Schweiz
 - [Heppner: Report a loss or a damage](https://www.heppner-group.com/wp-content/uploads/2024/10/Compensation_Heppner_EN.pdf) – auf Englisch, ein deutsches Merkblatt gibt es nicht: Vorbehalte, 60 Tage, Unterlagen, E-Mail
 - [Heppner: Mit uns Kontakt aufnehmen](https://www.heppner-group.com/de/mit-uns-kontakt-aufnehmen/) – Formular, Nachrichtenbetreff, Länderliste
 - [Heppner: Netzwerk](https://www.heppner-group.com/de/our-network/) – Standortsuche
-- [Heppner: SAFRAM Genève](https://www.heppner-group.com/de/store/safram-geneve/) – Adresse, Telefon, Öffnungszeiten (gelesen am 10. November 2026)
+- [Heppner: SAFRAM Genève](https://www.heppner-group.com/de/store/safram-geneve/) – Adresse, Telefon, Öffnungszeiten
 - [Heppner: SAFRAM Basel](https://www.heppner-group.com/de/store/safram-basel/) – Adresse, Telefon, Öffnungszeiten
 - [Heppner: SAFRAM Bardonnex](https://www.heppner-group.com/de/store/safram-bardonnex/) – Zollbüro, Telefon, Öffnungszeiten
 - [Heppner: Unsere Geschichte](https://www.heppner-group.com/de/die-heppner-gruppe/unsere-geschichte/) – Straßburg, 1925, SAFRAM, Niederlassungen

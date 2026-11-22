@@ -16,9 +16,9 @@ Heppner ne publie aucun format ; Peek attend 8 chiffres pour Heppner. Quelques e
 
 | Numéro (inventé) | À qui il peut appartenir |
 | --- | --- |
-| `12345678` | Heppner, ou un numéro [Mondial Relay](carrier:mondial-relay) ou [Colisweb](carrier:colisweb) de même longueur. |
-| `1234567` | Pas Heppner : 7 chiffres, c'est la forme de SEUR. |
-| `1234567890` | Pas Heppner : 10 chiffres correspondent à [DHL](carrier:dhl-express), Mondial Relay, Relais Colis et d'autres. |
+| `84729163` | Heppner, ou un numéro [Mondial Relay](carrier:mondial-relay) ou [Colisweb](carrier:colisweb) de même longueur. |
+| `4829173` | Pas Heppner : 7 chiffres, c'est la forme de SEUR. |
+| `4829173654` | Pas Heppner : 10 chiffres correspondent à [DHL](carrier:dhl), Mondial Relay, Relais Colis et d'autres. |
 
 Huit chiffres ne disent pas quelle entreprise a ta commande : regarde qui signe le SMS ou l'e-mail, et lis [à quel transporteur appartient un numéro](guide:tracking-number-formats). Si Heppner affiche « Nous n'avons pas pu retrouver votre commande », il ajoute : « Vérifiez la correspondance entre le code postal saisi et le numéro de suivi. » Un mauvais code postal ressemble donc à un mauvais numéro.
 
@@ -75,7 +75,7 @@ Ton contrat est avec le magasin : la fiche d'indemnisation et les conditions gé
 
 ## Heppner contact : téléphone, mail et agence
 
-Relevé sur les pages de Heppner le 12 octobre 2026 :
+Relevé sur les pages de Heppner :
 
 - **France :** pas de numéro national, d'adresse e-mail ni de chat pour les destinataires. Utilise le [formulaire Contactez-nous](https://www.heppner-group.com/contactez-nous/) avec l'objet « Suivi d’un transport en cours » et ton numéro de suivi.
 - **Ton agence :** la page de suivi affiche « Votre agence » avec ses horaires d'ouverture et son téléphone. Toutes les agences sont dans [le réseau Heppner](https://www.heppner-group.com/reseau/).
@@ -85,13 +85,13 @@ Relevé sur les pages de Heppner le 12 octobre 2026 :
 
 ## Suivre une livraison Heppner avec Peek
 
-[Peek](/) ne peut pas demander à Heppner, Mondial Relay ou Colisweb s'ils connaissent un numéro à 8 chiffres : ce numéro seul ne lui donne donc aucun transporteur. Si aucun service de suivi ne nomme Heppner, appuie sur « Changer » et choisis-le. Les liens Heppner ne lui apprennent rien : colle ou tape les chiffres.
+[Peek](/) ne peut pas demander à Heppner, Mondial Relay ou Colisweb s'ils connaissent un numéro à 8 chiffres : ce numéro seul ne lui donne donc aucun transporteur. Si aucun service de suivi ne nomme Heppner, appuie sur « Changer » et choisis-le. Depuis la Suisse, Peek propose déjà le champ de code postal de Heppner ; depuis la France, la Belgique, le Luxembourg, l'Espagne ou le Portugal, il propose celui de Mondial Relay : choisis donc d'abord Heppner. Les liens Heppner ne lui apprennent rien : colle ou tape les chiffres.
 
-Peek demande alors le code postal de livraison et ne suit rien sans lui : 5 chiffres sont cherchés en France ; 4 chiffres d'abord en Suisse, puis en Belgique et au Luxembourg. Un mauvais code postal ressemble à un numéro inconnu.
+Peek demande alors le code postal de livraison et ne peut pas interroger Heppner sans lui : 5 chiffres sont cherchés en France ; 4 chiffres d'abord en Suisse, puis en Belgique et au Luxembourg. Un mauvais code postal ressemble à un numéro inconnu.
 
-Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions, l'anomalie de prise en charge et une expédition annulée (« Shipment cancelled », en anglais) comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît en anglais (« Forwarded to a new address under a new reference ») et le colis reste en transit. Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton nom, ton adresse et les instructions de livraison ne sont pas repris.
+Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions, l'anomalie de prise en charge et une expédition annulée (« Shipment cancelled », en anglais) comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît en anglais (« Forwarded to a new address under a new reference ») et le colis reste en transit. Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton adresse et les instructions de livraison ne sont pas repris.
 
-Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois la commande en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Heppner qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
+Tant que tu as la commande ouverte, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois la commande en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Heppner qui répond), sinon toutes les heures, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
 
 ## Questions sur le suivi Heppner
 

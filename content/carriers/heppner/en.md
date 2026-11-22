@@ -16,9 +16,9 @@ Heppner publishes no format. Peek takes 8 digits for Heppner (digits invented):
 
 | Number | Whose it may be |
 | --- | --- |
-| `12345678` | Heppner, or a [Mondial Relay](carrier:mondial-relay) or [Colisweb](carrier:colisweb) number of the same length. |
-| `1234567` | Not Heppner: 7 digits point to SEUR. |
-| `1234567890` | Not Heppner: 10 digits fit [DHL](carrier:dhl-express), Mondial Relay, Relais Colis and others. |
+| `84729163` | Heppner, or a [Mondial Relay](carrier:mondial-relay) or [Colisweb](carrier:colisweb) number of the same length. |
+| `4829173` | Not Heppner: 7 digits point to SEUR. |
+| `4829173654` | Not Heppner: 10 digits fit [DHL](carrier:dhl), Mondial Relay, Relais Colis and others. |
 
 Eight digits don't say which company has your order: check the name in the SMS or email ([lookalike numbers](guide:tracking-number-formats)). If Heppner answers "We were unable to locate your order", it asks you to "Check the correspondence between the zip code entered and the tracking number": a wrong postcode looks like a wrong number.
 
@@ -74,22 +74,22 @@ Your contract is with the shop; Heppner's claims sheet and terms address senders
 
 ## Heppner contact and customer service
 
-As listed on Heppner's pages on 12 October 2026:
+As listed on Heppner's pages:
 
 - **France:** no national phone number, email or chat for recipients. Use the [Contactez-nous form](https://www.heppner-group.com/contactez-nous/) with the subject "Suivi d'un transport en cours" and your tracking number.
 - **Your branch:** the tracking page shows "Your branch" with its opening hours and phone number. Every branch is in [Heppner's network finder](https://www.heppner-group.com/reseau/).
-- **Switzerland (SAFRAM):** Geneva (Satigny) +41 22 827 03 11, Basel +41 61 338 93 33, Bardonnex customs office +41 22 771 43 13, each Monday to Friday 08:00 to 17:00.
+- **Switzerland (SAFRAM):** Geneva (Satigny) +41 22 827 03 11, Basel +41 61 338 93 33, Bardonnex customs office +41 22 771 43 13, each Monday to Friday 08:00 to 17:00 (Swiss time).
 - **Claims:** indemnisations.nationales@heppner-group.com for France, indemnisations.internationales@heppner-group.com for international transport. For the shop or sender.
 
 ## Tracking a Heppner delivery with Peek
 
-[Peek](/) can't ask Heppner, Mondial Relay or Colisweb whether they know an 8-digit number, so the number alone names no carrier: press "Change" and pick Heppner. Heppner links give it nothing; type the digits.
+[Peek](/) can't ask Heppner, Mondial Relay or Colisweb whether they know an 8-digit number, so the number alone names no carrier: press "Change" and pick Heppner. From Switzerland, Peek already offers Heppner's postcode field; from France, Belgium, Luxembourg, Spain or Portugal it offers Mondial Relay's, so pick Heppner first. Heppner links give it nothing; type the digits.
 
-It then asks for the delivery postcode and tracks nothing without it: 5 digits are looked up in France; 4 digits in Switzerland first, then in Belgium and Luxembourg. A wrong postcode reads like an unknown number.
+It then asks for the delivery postcode and can't ask Heppner without it: 5 digits are looked up in France; 4 digits in Switzerland first, then in Belgium and Luxembourg. A wrong postcode reads like an unknown number.
 
-It shows the status and history with exact times, every step in Peek's own words: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions, Shipment exception. Awaiting instructions, an inbound-scan issue and a cancelled shipment ("Shipment cancelled") count as problems. Heppner's message that your order will go to a new address under a new reference shows as "Forwarded to a new address under a new reference", still in transit. There are no scan places, expected date or pickup point, and it leaves out the sender, your name, address and delivery instructions.
+It shows the status and history with exact times, every step in Peek's own words: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions, Shipment exception. Awaiting instructions, an inbound-scan issue and a cancelled shipment ("Shipment cancelled") count as problems. Heppner's message that your order will go to a new address under a new reference shows as "Forwarded to a new address under a new reference", still in transit. There are no scan places, expected date or pickup point, and it leaves out the sender, your address and delivery instructions.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Heppner scans the order out for delivery, while Heppner's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't book your slot: do that on Heppner's page.
+While you have the order open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Heppner scans the order out for delivery, while Heppner's own tracker answers; otherwise hourly. It can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't book your slot: do that on Heppner's page.
 
 ## Questions about Heppner tracking
 

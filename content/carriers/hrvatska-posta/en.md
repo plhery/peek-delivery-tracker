@@ -14,8 +14,8 @@ Hrvatska pošta calls it the item number (*prijamni broj pošiljke*). Items post
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RR000000005HR` | A postal item from Croatia: 13 characters ending in `HR`. Spaces don't matter (`RR 123 456 785 HR`). |
-| `RR000000005CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
+| `RR482917367HR` | A postal item from Croatia: 13 characters ending in `HR`. Spaces don't matter (`RR 482 917 367 HR`). |
+| `RR482917367CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
 | Other barcodes | The form also takes other barcodes of at least 5 characters, such as `3S…` codes, 12-digit numbers and 20-digit SSCC codes. |
 
 You'll find it in the sender's message, and Hrvatska pošta's official messages carry it too: the arrival notice left in your letterbox (when the item has one) and the SMS and e-mail for parcel lockers. Lost it? See [how to find a tracking number](guide:find-tracking-number).
@@ -69,13 +69,13 @@ The notice gives the exact deadline, counted from the day on it. Away for a whil
 
 Hrvatska pošta aims to deliver 85% of domestic items in its fastest category the next working day; Paket 24 takes one to three working days (three for islands). If nothing moves for days, see [tracking that isn't updating](guide:tracking-not-updating).
 
-**Customs.** For goods from outside the EU, Hrvatska pošta acts as your customs representative and collects VAT (and duty where due) plus its fee on delivery: 2.46 € for items up to 150 € without an IOSS number, 4.91 € from 150 to 1,000 €. With an IOSS number the shop has charged the VAT already, so neither the VAT nor Hrvatska pošta's fee is charged again. Since 1 July 2026, though, each item in a parcel up to 150 € carries a flat customs duty of 3 €, IOSS or not, and since 1 November 2026 an EU handling fee of 2 € per kind of product applies too, whatever the value. See [parcels held at customs](guide:customs). Charged VAT you had already paid the shop? Send a complaint and refund request at a post office or with the web form, with proof of payment, Hrvatska pošta's receipt and the order invoice; the Contact Centre answers within 15 days.
+**Customs.** For goods from outside the EU, Hrvatska pošta acts as your customs representative and collects VAT (and duty where due) plus its fee on delivery: 2.46 € for items up to 150 € without an IOSS number, 4.91 € from 150 to 1,000 €. With an IOSS number the shop has charged the VAT already, so neither the VAT nor Hrvatska pošta's fee is charged again. Since 1 July 2026, though, each item in a parcel up to 150 € carries a flat customs duty of 3 €, IOSS or not, and since 1 November 2026 an EU handling fee of 2 € per kind of product applies too on online purchases, whatever the value. See [parcels held at customs](guide:customs). Charged VAT you had already paid the shop? Send a complaint and refund request at a post office or with the web form, with proof of payment, Hrvatska pošta's receipt and the order invoice; the Contact Centre answers within 15 days.
 
 **Complaints** (loss, delay, damage, missing contents): within 3 months of posting for domestic items, 6 months for international ones, at a post office or with the web form. Report damage when the item is handed over, so a report can be drawn up; for a locker parcel, within one hour of collection. Hrvatska pošta answers within 30 days (60 internationally); then the Consumer Complaints Committee and the regulator HAKOM. Compensation goes to the sender, so for an online order, the shop claims.
 
 ## Hrvatska pošta contact number and email
 
-Hrvatska pošta's channels, as posta.hr listed them on 9 November 2026:
+Hrvatska pošta's channels on posta.hr:
 
 - **Contact Centre:** 072 303 304 from Croatia, Monday to Friday 7:00 to 19:00, Saturday 7:00 to 15:00, at your operator's fixed-network rate. Have the item number ready.
 - **From abroad:** +385 1 6626 870.
@@ -94,7 +94,7 @@ You can't call post offices or postmen directly.
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Croatia (or names no destination and you're in Croatia), Peek also asks Hrvatska pošta with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Hrvatska pošta straight away, pick "Hrvatska pošta" with "Change".
 
-Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks up to every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser) and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one (in a country with several time zones, that of the place the scan names when Peek knows it, else Croatian time). Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser), otherwise hourly, and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Croatian Post tracking
 
@@ -104,7 +104,7 @@ Yes. posiljka.posta.hr opens in Croatian, but its EN switch, or the /en/tracking
 
 ### Can I track an international parcel to Croatia?
 
-Yes, with the postal number the sender gave you, which ends in the sending country's code. Hrvatska pošta's tracker accepts it. Peek follows it at the post abroad and moves to Hrvatska pošta once Hrvatska pošta has a fresh scan, or straight away if you pick Hrvatska pošta with "Change".
+Yes, with the postal number the sender gave you, which ends in the sending country's code. Hrvatska pošta's tracker accepts it. Peek follows it at the post abroad and, when that post says the item is going to Croatia (or names no destination and you're in Croatia), moves to Hrvatska pošta once Hrvatska pošta has a fresh scan, or straight away if you pick Hrvatska pošta with "Change".
 
 ### How long does Hrvatska pošta keep a parcel in a paketomat?
 

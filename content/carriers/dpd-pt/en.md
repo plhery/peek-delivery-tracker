@@ -14,8 +14,8 @@ DPD normally emails you the parcel number. Missed the driver? The number is also
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `09550000000000` | 14 digits starting 0955 to 0988: a DPD Portugal parcel number. |
-| `09550000000000I` | The same number with its check character, as printed on the label. |
+| `09558473629104` | 14 digits starting 0955 to 0988: a DPD Portugal parcel number. |
+| `09558473629104S` | The same number with its check character, as printed on the label. |
 
 Other 14-digit numbers, with or without a check character, also fit [DPD UK](carrier:dpd-uk), [DPD Germany](carrier:dpd-de), Chronopost and other DPD networks, so check which carrier the shop's email names.
 
@@ -79,9 +79,9 @@ DPD's tracker opens in Portuguese, with English and French versions. Peek shows 
 
 ## DPD Portugal contact number and customer service
 
-DPD Portugal's channels, as read on 22 October 2026 on its [contact page](https://www.dpd.com/pt/pt/ajuda/contactos/):
+DPD Portugal's channels on its [contact page](https://www.dpd.com/pt/pt/ajuda/contactos/):
 
-- **Phone** 21 854 6001 for private customers (+351 21 854 6001 from abroad), Monday to Friday 8:30am to 7:30pm and Saturday 9am to 1pm.
+- **Phone** 21 854 6001 for private customers (+351 21 854 6001 from abroad), Monday to Friday 8:30am to 7:30pm and Saturday 9am to 1pm (Lisbon time).
 - **Email** suporte.cliente@dpd.pt, and a **contact form** for requests and complaints, with a field for the parcel number.
 - **Maria**, DPD's chatbot, 24 hours a day, 7 days a week: where your parcel is, when it comes, a new date or place. The contact page also sends you to Maria to correct an address.
 
@@ -91,9 +91,9 @@ The contact page, in Portuguese or English, doesn't say which languages the line
 
 ## Tracking a DPD Portugal parcel with Peek
 
-For 14 digits starting 0955 to 0988, with or without the check character, [Peek](/) asks the likely carriers, DPD Portugal first, and shows "DPD Portugal has this parcel." when DPD knows it. For another DPD number, paste it all the same: Peek follows more than 4,500 carriers. If DPD Portugal doesn't come up, pick it with "Change", or "Change carrier" on the parcel. tracking.dpd.pt links with `reference=` work too.
+For 14 digits starting 0955 to 0988, with or without the check character, [Peek](/) asks the likely carriers, DPD Portugal first, and shows "DPD Portugal has this parcel." when DPD knows it. For another DPD number, paste it all the same: Peek follows more than 4,500 carriers. If DPD Portugal doesn't come up, pick it with "Change", or "Change carrier" on the parcel. tracking.dpd.pt/track-and-trace links with `reference=` work too, and dpd.com/pt/ or dpdgroup.com/pt/ links with `parcelNumber=`.
 
-Peek reads DPD's Portuguese tracking, so the wordings stay Portuguese. Once a Pickup point takes your parcel, Peek shows its name. On the delivery day, it shows the window sent with `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` until the parcel is delivered, goes back to the depot or a delivery fails. DPD's map and the name of whoever signed stay on DPD's page. Peek checks up to every 10 minutes, or every 2 once the parcel is out for delivery (every 5 when it has to open DPD's tracker in a browser), and can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run on the day DPD scans the parcel out for delivery, from 6 a.m. local time (once DPD has sent the window, from half an hour before it opens), and only while DPD's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek reads DPD's Portuguese tracking, so the wordings stay Portuguese. Once a Pickup point takes your parcel, Peek shows its name. On the delivery day, it shows the window sent with `HORÁRIO DE ENTREGA ENVIADA AO DESTINATÁRIO` until the parcel is delivered, goes back to the depot or a delivery fails. DPD's map and the name of whoever signed stay on DPD's page. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 once the parcel is out for delivery (every 5 when it has to open DPD's tracker in a browser), and can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run on the day DPD scans the parcel out for delivery, from 6 a.m. Lisbon time (once DPD has sent the window, from half an hour before it opens), and only while DPD's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 When La Poste's tracking names DPD Portugal and gives its number, Peek can follow the parcel there once DPD shows progress. The same goes for a Chronopost parcel: when Chronopost's tracking gives the DPD number and Portugal as the delivery country, Peek names DPD Portugal as the delivering carrier, with that number, and switches to DPD Portugal once DPD shows a scan at least as recent as Chronopost's latest. Peek can't change a delivery or claim for you.
 

@@ -22,9 +22,9 @@ Een nummerformaat publiceert Heppner niet. Peek verwacht voor Heppner 8 cijfers 
 
 | Nummer | Van wie het kan zijn |
 | --- | --- |
-| `00000000` | Heppner, maar ook [Mondial Relay](carrier:mondial-relay) en Colisweb gebruiken 8 cijfers. |
-| `0000000` | Niet van Heppner: 7 cijfers passen bij SEUR. |
-| `0000000000` | Niet van Heppner: 10 cijfers passen bij DHL Express, Mondial Relay, Relais Colis en andere. |
+| `84729163` | Heppner, maar ook [Mondial Relay](carrier:mondial-relay) en Colisweb gebruiken 8 cijfers. |
+| `4829173` | Niet van Heppner: 7 cijfers passen bij SEUR. |
+| `4829173654` | Niet van Heppner: 10 cijfers passen bij DHL, Mondial Relay, Relais Colis en andere. |
 
 Aan 8 cijfers alleen ziet u dus niet welk bedrijf uw bestelling heeft: kijk wie de e-mail of sms stuurde. Meldt Heppner "We hebben uw bestelling niet kunnen vinden", dan raadt het aan: "Controleer de overeenkomst tussen de ingevoerde postcode en het trackingnummer." Een verkeerde postcode, of een Belgische postcode met Nederland als land, ziet er dus uit als een verkeerd nummer.
 
@@ -90,7 +90,7 @@ Op een gekochte zending betaalt u altijd btw. Tot 150 euro komt er sinds 1 juli 
 
 ## Heppner contacteren in België
 
-Zo stond het op 27 oktober 2026 op de Nederlandstalige pagina's van Heppner:
+Zo staat het op de Nederlandstalige pagina's van Heppner:
 
 - **Heppner BRUSSELS:** Industrielaan 11, 1740 Ternat. De pagina vermeldt geen telefoonnummer of openingsuren.
 - **Uw vestiging:** de trackingpagina toont ze onder "Your branch", met de openingsuren. Is uw bestelling onderweg of vindt u geen tijdvak, dan geeft de pagina een telefoonnummer. Alle vestigingen vindt u in [het netwerk van Heppner](https://www.heppner-group.com/nl/our-network/).
@@ -99,13 +99,13 @@ Zo stond het op 27 oktober 2026 op de Nederlandstalige pagina's van Heppner:
 
 ## Een Heppner-levering volgen met Peek
 
-[Peek](/) kan Heppner, Mondial Relay of Colisweb niet vragen of ze een nummer van 8 cijfers kennen. Plak het nummer toch: Peek volgt meer dan 4.500 vervoerders. Noemt geen enkele trackingdienst Heppner, tik dan op "Change" en kies Heppner onder "Fits this number". Een trackinglink van Heppner helpt Peek niet: typ de cijfers over.
+[Peek](/) kan Heppner, Mondial Relay of Colisweb niet vragen of ze een nummer van 8 cijfers kennen. Plak het nummer toch: Peek volgt meer dan 4.500 vervoerders. Noemt geen enkele trackingdienst Heppner, tik dan op "Change" en kies Heppner onder "Fits this number". Vanuit Zwitserland biedt Peek al het postcodeveld van Heppner aan, vanuit Frankrijk, België, Luxemburg, Spanje of Portugal dat van Mondial Relay: kies dus eerst Heppner. Een trackinglink van Heppner helpt Peek niet: typ de cijfers over.
 
-Peek vraagt dan de "Delivery postcode": zonder die postcode volgt het niets. Een postcode van 4 cijfers vraagt Peek bij Heppner na in Zwitserland, dan in België en dan in Luxemburg, een van 5 cijfers in Frankrijk. Een verkeerde postcode ziet eruit als een onbekend nummer.
+Peek vraagt dan de "Delivery postcode": zonder die postcode kan het Heppner niet vragen. Een postcode van 4 cijfers vraagt Peek bij Heppner na in Zwitserland, dan in België en dan in Luxemburg, een van 5 cijfers in Frankrijk. Een verkeerde postcode ziet eruit als een onbekend nummer.
 
-Peek toont de status en de geschiedenis met het exacte uur, in de tijdzone van uw toestel, en noemt elke stap in zijn eigen Engelse woorden: "Shipment collected", "In transit", "Shipment forwarded", "Out for delivery", "Delivered", "Returned to sender", "Awaiting delivery instructions" of "Shipment exception". Een geannuleerde zending verschijnt als "Shipment cancelled", een levering op een nieuw adres onder een nieuwe referentie als "Forwarded to a new address under a new reference". Wacht Heppner op uw instructies of meldt het een probleem bij de afhaling bij de afzender, dan staat uw zending in Peek op "Needs attention". Plaatsen, een verwachte leveringsdag of een afhaaladres toont Peek niet, en de afzender, uw naam, adres en leveringsinstructies neemt het niet over.
+Peek toont de status en de geschiedenis met het exacte uur, in de tijdzone van uw toestel, en noemt elke stap in zijn eigen Engelse woorden: "Shipment collected", "In transit", "Shipment forwarded", "Out for delivery", "Delivered", "Returned to sender", "Awaiting delivery instructions" of "Shipment exception". Een geannuleerde zending verschijnt als "Shipment cancelled", een levering op een nieuw adres onder een nieuwe referentie als "Forwarded to a new address under a new reference". Wacht Heppner op uw instructies of meldt het een probleem bij de afhaling bij de afzender, dan staat uw zending in Peek op "Needs attention". Plaatsen, een verwachte leveringsdag of een afhaaladres toont Peek niet, en de afzender, uw adres en leveringsinstructies neemt het niet over.
 
-Peek kijkt hoogstens elke 10 minuten, en hoogstens elke 2 minuten zodra uw bestelling "Out for delivery" is: op die dag, vanaf 6 uur 's ochtends plaatselijke tijd en zolang de tracking van Heppner zelf antwoordt. Via trackingdiensten kijkt Peek elk uur, en hoogstens elke 15 minuten op de dag dat uw bestelling "Out for delivery" is. Komt er twee dagen lang niets nieuws binnen (of 12 uur, zolang uw bestelling alleen nog is aangemeld of door de vervoerder is ontvangen), dan kijkt Peek nog maar één keer per uur. Meldingen kiest u zelf: "Every scan", "Important steps" of "Delivery only". Een afspraak maken of Heppner contacteren kan Peek niet.
+Zolang u de bestelling open hebt, of op de leverdag met meldingen aan, kijkt Peek hoogstens elke 10 minuten, en hoogstens elke 2 minuten zodra uw bestelling "Out for delivery" is: op die dag, vanaf 6 uur 's ochtends plaatselijke tijd en zolang de tracking van Heppner zelf antwoordt. Anders kijkt Peek elk uur. Komt er twee dagen lang niets nieuws binnen (of 12 uur, zolang uw bestelling alleen nog is aangemeld of door de vervoerder is ontvangen), dan kijkt Peek nog maar één keer per uur. Meldingen kiest u zelf: "Every scan", "Important steps" of "Delivery only". Een afspraak maken of Heppner contacteren kan Peek niet.
 
 ## Vragen over Heppner zending volgen
 

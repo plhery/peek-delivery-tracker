@@ -77,7 +77,7 @@ Da Peek die Website von Ozon nicht auslesen konnte, nennt diese Seite weder Lief
 
 **Peek hinkt tracking.ozon.ru hinterher.** Antwortet der Ozon-Tracker Peek nicht, springt ein Tracking-Dienst ein, der hinterherhinken kann. Vergleiche zuerst mit tracking.ozon.ru.
 
-**Tagelang kein neuer Schritt.** Ist der letzte Eintrag mindestens vier Tage alt, während Peek „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt, meldet Peek das („Seit vier Tagen keine Aktualisierung“) und verlinkt auf die Ozon-Hilfeseite („Hol dir Hilfe bei Ozon“). Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Tagelang kein neuer Schritt.** Ist der letzte Eintrag mindestens vier Tage alt, während Peek „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt, meldet Peek das mit dem Tag dieses Eintrags („Keine Aktualisierung seit Mo 12. Okt“) und verlinkt auf die Ozon-Hilfeseite („Hol dir Hilfe bei Ozon“). Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** Der Zoll prüft die Bestellung. Warte auf `Заказ выпущен импортной таможней.`; ändert sich lange nichts, frage bei Ozon nach.
 
@@ -109,7 +109,7 @@ Bei einer direkt auf Ozon gekauften Bestellung kontaktiere Ozon. Stammt die Best
 
 **Zustellung durch einen anderen Dienst.** Nennt ein Tracking-Dienst einen anderen Paketdienst samt eigener Nummer und liest Peek dessen eigenes Tracking, fragt Peek auch dort nach; sobald ein mindestens gleich aktueller Scan erscheint, folgt Peek dem Paket dort weiter.
 
-**Prüftakt und Mitteilungen.** Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen und Ozons Tracker antwortet, prüft Peek bis zu alle 10 Minuten (und am Zustelltag ab 6 Uhr Moskauer Zeit bis zu alle 5 Minuten, wenn die Abfrage einen Browser öffnet); sonst stündlich. Solange ein Tracking-Dienst das Paket führt, prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten (solange es geöffnet ist oder Mitteilungen aktiv sind), und alle 3 Stunden nach einem Tag ohne neuen Schritt. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Für eine Abholstelle wähle „Wichtige Schritte“: „Nur die Zustellung“ meldet nicht, wenn das Paket abholbereit liegt. Peek kann weder Ozon noch den Verkäufer für dich kontaktieren.
+**Prüftakt und Mitteilungen.** Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen und Ozons Tracker antwortet, prüft Peek bis zu alle 10 Minuten; sonst stündlich. Solange ein Tracking-Dienst das Paket führt, prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten (solange es geöffnet ist oder Mitteilungen aktiv sind), und alle 3 Stunden nach einem Tag ohne neuen Schritt. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Für eine Abholstelle wähle „Wichtige Schritte“: „Nur die Zustellung“ meldet nicht, wenn das Paket abholbereit liegt. Peek kann weder Ozon noch den Verkäufer für dich kontaktieren.
 
 ## Fragen zur Ozon-Sendungsverfolgung
 

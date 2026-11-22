@@ -77,7 +77,7 @@ Peek n'ayant pas pu lire le site web d'Ozon, cette page ne fournit ni délais de
 
 **Peek a du retard sur tracking.ozon.ru.** Lorsque le suivi d'Ozon ne répond pas à Peek, un service de suivi prend le relais et peut avoir du retard. Compare avec tracking.ozon.ru avant de t'inquiéter.
 
-**Aucune nouvelle étape depuis plusieurs jours.** Si la dernière étape date de quatre jours ou plus alors que Peek affiche « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale (« Aucune mise à jour depuis quatre jours ») et propose un lien vers l'aide d'Ozon (« Demande de l’aide à Ozon »). Plus de détails dans [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating).
+**Aucune nouvelle étape depuis plusieurs jours.** Si la dernière étape date de quatre jours ou plus alors que Peek affiche « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de cette étape (« Aucune mise à jour depuis lun 12 oct ») et propose un lien vers l'aide d'Ozon (« Demande de l’aide à Ozon »). Plus de détails dans [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** La douane examine la commande. Attends `Заказ выпущен импортной таможней.` ; si la situation s'éternise, contacte Ozon.
 
@@ -109,7 +109,7 @@ Pour une commande achetée sur Ozon, contacte Ozon. Pour une commande passée da
 
 **Livraison par un autre transporteur.** Si un service de suivi indique un autre transporteur avec son propre numéro et que Peek lit son suivi direct, Peek l'interroge aussi ; dès que ce transporteur publie un scan au moins aussi récent que celui du service, Peek bascule le suivi chez lui.
 
-**Vérifications et alertes.** Tant que tu gardes le colis ouvert à l'écran ou le jour de la livraison avec les notifications activées et que le suivi d'Ozon répond, Peek vérifie jusqu'à toutes les 10 minutes (et jusqu'à toutes les 5 minutes dès 6 h, heure de Moscou, le jour de livraison lorsque la requête ouvre un navigateur) ; sinon, toutes les heures. Lorsque c'est un service de suivi qui suit le colis, Peek vérifie toutes les heures, jusqu'à toutes les 15 minutes le jour de la livraison tant que le colis est ouvert ou que les notifications sont activées, et toutes les 3 heures après une journée sans nouvelle étape. Tu peux choisir d'être prévenu pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Pour un point de retrait, choisis « Étapes importantes » : « Livraison seulement » ne prévient pas quand la commande arrive au point de retrait. Peek ne peut contacter ni Ozon ni le vendeur à ta place.
+**Vérifications et alertes.** Tant que tu gardes le colis ouvert à l'écran ou le jour de la livraison avec les notifications activées et que le suivi d'Ozon répond, Peek vérifie jusqu'à toutes les 10 minutes ; sinon, toutes les heures. Lorsque c'est un service de suivi qui suit le colis, Peek vérifie toutes les heures, jusqu'à toutes les 15 minutes le jour de la livraison tant que le colis est ouvert ou que les notifications sont activées, et toutes les 3 heures après une journée sans nouvelle étape. Tu peux choisir d'être prévenu pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Pour un point de retrait, choisis « Étapes importantes » : « Livraison seulement » ne prévient pas quand la commande arrive au point de retrait. Peek ne peut contacter ni Ozon ni le vendeur à ta place.
 
 ## Questions sur le suivi Ozon
 

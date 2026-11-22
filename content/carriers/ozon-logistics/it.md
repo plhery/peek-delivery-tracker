@@ -77,7 +77,7 @@ Poiché Peek non ha potuto leggere il sito web di Ozon, questa pagina non riport
 
 **Peek è indietro rispetto a tracking.ozon.ru.** Quando il portale di Ozon non risponde a Peek, interviene un servizio di tracciamento che può essere in ritardo. Confronta con tracking.ozon.ru prima di preoccuparti.
 
-**Nessuna nuova tappa da giorni.** Se l'ultimo aggiornamento risale a quattro o più giorni fa mentre Peek mostra «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala («Nessun aggiornamento da quattro giorni») e collega la guida di Ozon («Chiedi aiuto a Ozon»). Altro in [perché il tracking non si aggiorna](guide:tracking-not-updating).
+**Nessuna nuova tappa da giorni.** Se l'ultimo aggiornamento risale a quattro o più giorni fa mentre Peek mostra «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con il giorno di quella tappa («Nessun aggiornamento da lun 12 ott») e collega la guida di Ozon («Chiedi aiuto a Ozon»). Altro in [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** La dogana sta controllando l'ordine. Attendi `Заказ выпущен импортной таможней.`; se resta fermo a lungo, chiedi a Ozon.
 
@@ -109,7 +109,7 @@ Per un ordine acquistato su Ozon, contatta Ozon. Per un ordine fatto in un altro
 
 **Consegna con un altro corriere.** Se un servizio di tracciamento nomina un altro corriere con il relativo numero e Peek ne legge il tracciamento diretto, Peek interroga anche quello; appena registra una scansione recente almeno quanto quella del servizio, Peek prosegue lì.
 
-**Controlli e notifiche.** Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le notifiche attive e il portale di Ozon risponde, Peek controlla fino a ogni 10 minuti (e fino a ogni 5 minuti dalle 6:00 ora di Mosca il giorno della consegna quando apre un browser); altrimenti ogni ora. Quando il pacco è seguito da un servizio di tracciamento, Peek controlla ogni ora, fino a ogni 15 minuti il giorno della consegna finché lo tieni aperto o hai le notifiche attive, e ogni 3 ore dopo un giorno senza novità. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Per un punto di ritiro scegli «Passaggi importanti»: «Solo la consegna» non avvisa quando il pacco è pronto per il ritiro. Peek non può contattare Ozon o il venditore al posto tuo.
+**Controlli e notifiche.** Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le notifiche attive e il portale di Ozon risponde, Peek controlla fino a ogni 10 minuti; altrimenti ogni ora. Quando il pacco è seguito da un servizio di tracciamento, Peek controlla ogni ora, fino a ogni 15 minuti il giorno della consegna finché lo tieni aperto o hai le notifiche attive, e ogni 3 ore dopo un giorno senza novità. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Per un punto di ritiro scegli «Passaggi importanti»: «Solo la consegna» non avvisa quando il pacco è pronto per il ritiro. Peek non può contattare Ozon o il venditore al posto tuo.
 
 ## Domande sul tracking Ozon
 

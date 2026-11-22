@@ -77,7 +77,7 @@ Ponieważ Peek nie mógł odczytać strony internetowej Ozon, nie podaje tu czas
 
 **Peek jest opóźniony względem tracking.ozon.ru.** Gdy śledzenie Ozon nie odpowiada Peek, wchodzi usługa śledzenia, która może mieć opóźnienie. Porównaj z tracking.ozon.ru, zanim się zaniepokoisz.
 
-**Brak nowego kroku od kilku dni.** Jeśli najnowszy wpis ma co najmniej cztery dni, a Peek pokazuje „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, pojawia się oznaczenie „Brak aktualizacji od czterech dni” oraz link do pomocy Ozon („Poproś przewoźnika Ozon o pomoc”). Więcej w [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating).
+**Brak nowego kroku od kilku dni.** Jeśli najnowszy wpis ma co najmniej cztery dni, a Peek pokazuje „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, pojawia się oznaczenie z dniem tego wpisu („Brak aktualizacji od pon 12 paź”) oraz link do pomocy Ozon („Poproś przewoźnika Ozon o pomoc”). Więcej w [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** Urząd celny sprawdza zamówienie. Poczekaj na `Заказ выпущен импортной таможней.`; jeśli nic nie zmienia się przez dłuższy czas, zapytaj Ozon.
 
@@ -109,7 +109,7 @@ W sprawie zamówienia kupionego w Ozon skontaktuj się z Ozon. Jeśli kupowałe�
 
 **Doręczenie przez innego przewoźnika.** Jeśli usługa śledzenia wskaże innego przewoźnika wraz z jego numerem, a Peek obsługuje jego bezpośrednie śledzenie, pyta też tego przewoźnika; gdy tylko pojawi się jego skan nie starszy niż ostatni w usłudze, Peek przechodzi na niego.
 
-**Częstotliwość sprawdzeń i powiadomienia.** Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie Ozon odpowiada, Peek sprawdza ją nawet co 10 minut (a od godz. 6:00 czasu moskiewskiego w dniu doręczenia nawet co 5 minut, gdy sprawdzenie otwiera przeglądarkę); w pozostałym czasie co godzinę. Gdy przesyłkę prowadzi usługa śledzenia, Peek sprawdza co godzinę, w dniu doręczenia nawet co 15 minut (dopóki ją masz otwartą lub włączone powiadomienia), a po dniu bez nowego wpisu co 3 godziny. Możesz wybrać powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dla punktu odbioru wybierz „Ważne etapy”: „Tylko doręczenie” nie informuje, że paczka czeka już do odbioru. Peek nie skontaktuje się za ciebie z Ozon ani ze sprzedawcą.
+**Częstotliwość sprawdzeń i powiadomienia.** Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie Ozon odpowiada, Peek sprawdza ją nawet co 10 minut; w pozostałym czasie co godzinę. Gdy przesyłkę prowadzi usługa śledzenia, Peek sprawdza co godzinę, w dniu doręczenia nawet co 15 minut (dopóki ją masz otwartą lub włączone powiadomienia), a po dniu bez nowego wpisu co 3 godziny. Możesz wybrać powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dla punktu odbioru wybierz „Ważne etapy”: „Tylko doręczenie” nie informuje, że paczka czeka już do odbioru. Peek nie skontaktuje się za ciebie z Ozon ani ze sprzedawcą.
 
 ## Pytania o śledzenie Ozon
 

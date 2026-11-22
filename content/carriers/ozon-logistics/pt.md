@@ -77,7 +77,7 @@ Como o Peek não conseguiu ler o site da Ozon, esta página não indica prazos d
 
 **O Peek está atrás do tracking.ozon.ru.** Quando o rastreio da Ozon não responde ao Peek, entra um serviço de seguimento que pode estar atrasado. Compara com tracking.ozon.ru antes de te preocupares.
 
-**Dias sem um passo novo.** Se o passo mais recente tiver quatro dias ou mais enquanto o Peek mostra «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o («Sem atualizações há quatro dias») e inclui uma ligação para a ajuda da Ozon («Pede ajuda a Ozon»). Mais em [porque o seguimento não atualiza](guide:tracking-not-updating).
+**Dias sem um passo novo.** Se o passo mais recente tiver quatro dias ou mais enquanto o Peek mostra «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia desse passo («Sem atualizações desde seg 12 out») e inclui uma ligação para a ajuda da Ozon («Pede ajuda a Ozon»). Mais em [porque o seguimento não atualiza](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** A alfândega está a verificar a encomenda. Aguarda `Заказ выпущен импортной таможней.`; se demorar muito sem mudar, pergunta à Ozon.
 
@@ -109,7 +109,7 @@ O [Peek](/) segue um número Ozon apenas com o número: sem conta, telefone nem 
 
 **Entrega por outra transportadora.** Se um serviço de seguimento indicar outra transportadora com o respetivo número e o Peek ler o rastreio direto dela, consulta-a também; assim que mostrar um registo pelo menos tão recente como o do serviço, passa a segui-la lá.
 
-**Verificações e alertas.** Enquanto tens a encomenda aberta no ecrã ou no dia da entrega com as notificações ativas e o rastreio da Ozon responde, o Peek verifica até de 10 em 10 minutos (e até de 5 em 5 minutos a partir das 6h hora de Moscovo no dia da entrega quando abre um navegador); caso contrário, de hora a hora. Enquanto um serviço de seguimento acompanhar a encomenda, o Peek verifica de hora a hora, até de 15 em 15 minutos no dia da distribuição enquanto a tens aberta ou com notificações ativas, e de 3 em 3 horas após um dia sem novo passo. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». Para pontos de recolha escolhe «Passos importantes»: «Só a entrega» não avisa quando a encomenda fica pronta para levantar. O Peek não pode contactar a Ozon nem o vendedor por ti.
+**Verificações e alertas.** Enquanto tens a encomenda aberta no ecrã ou no dia da entrega com as notificações ativas e o rastreio da Ozon responde, o Peek verifica até de 10 em 10 minutos; caso contrário, de hora a hora. Enquanto um serviço de seguimento acompanhar a encomenda, o Peek verifica de hora a hora, até de 15 em 15 minutos no dia da distribuição enquanto a tens aberta ou com notificações ativas, e de 3 em 3 horas após um dia sem novo passo. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». Para pontos de recolha escolhe «Passos importantes»: «Só a entrega» não avisa quando a encomenda fica pronta para levantar. O Peek não pode contactar a Ozon nem o vendedor por ti.
 
 ## Perguntas sobre o rastreio Ozon
 

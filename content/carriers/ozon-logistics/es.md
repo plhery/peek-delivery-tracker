@@ -16,7 +16,7 @@ Peek conoce dos formatos para Ozon, ambos con guiones. Los guiones importan: sin
 | --- | --- |
 | `48291057-3628-1` | 8 cifras, 4 cifras y 1 cifra unidas por guiones. Peek identifica Ozon al instante. |
 | `4829105736-2841-2` | Igual con 10 cifras al principio. Peek también identifica Ozon. |
-| `4829105736281` | El primer número sin guiones, o con espacios en su lugar. DPD France, Ukrposhta y otros transportistas usan números de 13 cifras, por lo que las cifras sueltas no bastan para saber que es Ozon. Si lo añades desde Rusia, Bielorrusia o Kazajistán, Peek pregunta a Ozon entre otros transportistas; desde otros países no le pregunta automáticamente. Vuelve a escribir los guiones o elige Ozon a mano (abajo). Lo mismo ocurre con 15 cifras, longitud habitual en FedEx y otros. |
+| `4829105736281` | El primer número sin guiones, o con espacios en su lugar. DPD France, Ukrposhta y otros transportistas usan números de 13 cifras, por lo que las cifras sueltas no bastan para saber que es Ozon. Si lo añades desde Rusia, Bielorrusia o Kazajistán, Peek pregunta a Ozon entre otros transportistas; desde otros países no le pregunta automáticamente. Vuelve a escribir los guiones o elige Ozon a mano (abajo). Lo mismo ocurre con 15 cifras, longitud que usan FedEx y otros. |
 | `PL-482910-57362` | `PL`, 6 cifras y más letras o cifras, con guiones. Peek identifica Ozon. |
 | `PL-482910-5736` | `PL` con exactamente 10 cifras coincide con la forma de los números de [Amazon](carrier:amazon-logistics). Peek lo toma como número de Amazon y no permite elegir Ozon para él. |
 
@@ -77,7 +77,7 @@ Como Peek no pudo leer la web de Ozon, esta página no indica plazos de entrega,
 
 **Peek va detrás de tracking.ozon.ru.** Cuando el rastreador de Ozon no responde a Peek, un servicio de seguimiento cubre el hueco y puede ir con retraso. Compara con tracking.ozon.ru antes de alarmarte.
 
-**Varios días sin un paso nuevo.** Si el último paso tiene cuatro días o más mientras Peek muestra «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo avisa («Sin novedades desde hace cuatro días») y enlaza con la ayuda de Ozon («Pide ayuda a Ozon»). Más en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Varios días sin un paso nuevo.** Si el último paso tiene cuatro días o más mientras Peek muestra «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo avisa con el día de ese paso («Sin novedades desde el lun 12 oct») y enlaza con la ayuda de Ozon («Pide ayuda a Ozon»). Más en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 **`Импортная таможня задержала заказ`.** La aduana revisa el pedido. Espera a `Заказ выпущен импортной таможней.`; si tarda mucho sin cambiar, pregunta a Ozon.
 
@@ -109,7 +109,7 @@ Si compraste en Ozon, contacta con Ozon. Si compraste en otra tienda, habla prim
 
 **Otro transportista en el reparto.** Si un servicio de seguimiento nombra otro transportista con su número y Peek lee su rastreador directo, Peek le pregunta también; en cuanto tenga un escaneo al menos igual de reciente que el del servicio, Peek continúa allí.
 
-**Comprobaciones y avisos.** Mientras tienes el paquete abierto en pantalla o el día de la entrega con las notificaciones activadas y responde el rastreador de Ozon, Peek comprueba hasta cada 10 minutos (y hasta cada 5 minutos desde las 6:00 hora de Moscú el día de entrega cuando abre un navegador); el resto del tiempo, cada hora. Mientras un servicio de seguimiento lleve el paquete, Peek comprueba cada hora, hasta cada 15 minutos el día de reparto mientras lo tienes abierto o con notificaciones activadas, y cada 3 horas tras un día sin nuevos pasos. Puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Para puntos de recogida elige «Pasos importantes»: «Solo la entrega» no avisa cuando el pedido ya está disponible para recoger. Peek no puede contactar con Ozon ni con el vendedor por ti.
+**Comprobaciones y avisos.** Mientras tienes el paquete abierto en pantalla o el día de la entrega con las notificaciones activadas y responde el rastreador de Ozon, Peek comprueba hasta cada 10 minutos; el resto del tiempo, cada hora. Mientras un servicio de seguimiento lleve el paquete, Peek comprueba cada hora, hasta cada 15 minutos el día de reparto mientras lo tienes abierto o con notificaciones activadas, y cada 3 horas tras un día sin nuevos pasos. Puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Para puntos de recogida elige «Pasos importantes»: «Solo la entrega» no avisa cuando el pedido ya está disponible para recoger. Peek no puede contactar con Ozon ni con el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de Ozon
 

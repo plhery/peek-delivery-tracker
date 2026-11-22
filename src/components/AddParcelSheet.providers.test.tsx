@@ -373,3 +373,58 @@ describe('public Amazon Shipping discovery', () => {
     expect(screen.getByText('Amazon Logistics')).toBeInTheDocument();
   });
 });
+
+describe('a carrier that may have the number', () => {
+  // Eight digits are a Mondial Relay shipment number among others: Mondial Relay answers only with the delivery postcode.
+  const number = '30517294';
+  const suggesting: Awaited<ReturnType<typeof lookupCarrier>> = {
+    trackingNumber: number, carrier: 'unknown', asked: [], inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' },
+  };
+
+  it('asks for its postcode, optional, and names the carrier only with it', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue(suggesting);
+    const onAdd = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    const postcode = await screen.findByRole('textbox', { name: /^Delivery postcode/ });
+    expect(postcode).not.toBeRequired();
+    expect(screen.getByText('Mondial Relay may have this parcel. Add the delivery postcode to track it.')).toBeInTheDocument();
+    // From the device's country, Switzerland here, as for a carrier picked by hand.
+    await user.type(postcode, '1201');
+    await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
+    expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({
+      trackingNumber: number, carrier: 'mondial-relay', dpdPostcode: '1201', dpdPostcodeCountry: 'CH',
+    }));
+  });
+
+  it('adds the number as before without the postcode, and only offers one given before', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue(suggesting);
+    const onAdd = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number}
+      postcodes={[{ carrier: 'mondial-relay', postcode: '75001', country: 'FR' }]} />, { wrapper: servingGuides });
+    expect(await screen.findByRole('textbox', { name: /^Delivery postcode/ })).toHaveValue('');
+    expect(screen.getByRole('button', { name: 'Use 75001' })).toBeInTheDocument();
+    const add = screen.getByRole('button', { name: /^add parcel$/i });
+    expect(add).toBeEnabled();
+    await user.click(add);
+    expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ trackingNumber: number, carrier: 'unknown', dpdPostcode: undefined }));
+  });
+
+  it('gives way to a carrier chosen by hand, and asks nothing without a suggestion', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue(suggesting);
+    const user = userEvent.setup();
+    const { unmount } = render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    await screen.findByRole('textbox', { name: /^Delivery postcode/ });
+    await pickCarrier(user, carrierLine(/^Detect automatically/), 'UPS');
+    expect(screen.queryByRole('textbox', { name: /^Delivery postcode/ })).not.toBeInTheDocument();
+    expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
+    unmount();
+
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: number, carrier: 'unknown', asked: [] });
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledTimes(2));
+    expect(await screen.findByText('Peek looks it up after you add it')).toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /^Delivery postcode/ })).not.toBeInTheDocument();
+  });
+});

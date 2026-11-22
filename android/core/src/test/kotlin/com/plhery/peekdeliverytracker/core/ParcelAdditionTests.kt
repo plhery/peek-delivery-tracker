@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -310,6 +312,102 @@ class ParcelAdditionTests {
         // The last postcode given that fits fills a required field.
         val given = listOf(GivenPostcode(carrier = CarrierId.GlsCh, postcode = "3011"))
         assertEquals("3011", gls.previousPostcode(requirement, given))
+    }
+
+    /**
+     * Nobody knew an 8-digit number and the check suggests Mondial Relay, which nobody can ask without the delivery
+     * postcode: its postcode field shows, optional, with the country beside it, while the line still says nobody knows
+     * the number. The parcel goes to Mondial Relay with the postcode and its country once the field takes one, as if it
+     * had been picked and its field filled; otherwise it is added on automatic, as before (the web's `lookupInput`).
+     */
+    @Test
+    fun aCarrierTheCheckSuggestsShowsItsPostcodeFieldAndTakesTheParcelOnlyWithAPostcode() {
+        val number = "76434219"
+        val settled = addition(number, region = "BE").settling(number)
+        fun answered(answer: CarrierDetectionResponse) = settled.copy(recognition = settled.recognition.copy(answer = answer))
+        val relay = CarrierDetectionInputSuggested(CarrierId.MondialRelay, CarrierDetectionInputSuggestedField.DpdPostcode)
+        val form = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, inputSuggested = relay))
+        assertEquals(CarrierRecognition.Status.Unasked, form.recognitionStatus)
+        assertEquals(CarrierId.MondialRelay, form.suggestedCarrier)
+        assertEquals(CarrierId.MondialRelay, form.inputCarrier)
+        assertEquals(CarrierId.Unknown, form.resolvedCarrier)
+        assertEquals(localizer.text("add.detect"), form.lineName(localizer))
+        assertEquals(localizer.text("add.line.later"), form.lineDetail(localizer))
+        // Its postcode field alone, optional, with the country beside it, the reader's first.
+        assertEquals(listOf(CarrierRequirement.Field.DpdPostcode), form.requirements.map { it.field })
+        assertTrue(form.postcodeRequirement!!.isOptional)
+        assertTrue(form.needsRequiredDetails)
+        assertEquals("BE", form.offeredPostcodeCountry)
+        assertEquals(ParcelAddition.Field.DeliveryPostcode, form.nextField)
+
+        // Without a postcode the parcel is added on automatic, with nothing else.
+        assertTrue(form.canSave)
+        assertEquals(CarrierId.Unknown, form.sentCarrier)
+        assertNull(form.sentPostcode)
+        assertNull(form.sentPostcodeCountry)
+        // With one, Mondial Relay's, with the postcode and its country; the carrier's home country goes without saying.
+        val belgian = form.copy(deliveryPostcode = "1000")
+        assertTrue(belgian.canSave)
+        assertEquals(CarrierId.MondialRelay, belgian.sentCarrier)
+        assertEquals("1000", belgian.sentPostcode)
+        assertEquals("BE", belgian.sentPostcodeCountry)
+        val french = form.copy(chosenPostcodeCountry = "FR", deliveryPostcode = "75001")
+        assertEquals(CarrierId.MondialRelay, french.sentCarrier)
+        assertNull(french.sentPostcodeCountry)
+        // One the field doesn't take holds Add, as any optional field's does, and would never go with the parcel.
+        val half = form.copy(deliveryPostcode = "75")
+        assertFalse(half.canSave)
+        assertEquals(CarrierId.Unknown, half.sentCarrier)
+        assertNull(half.sentPostcode)
+        assertNull(half.sentPostcodeCountry)
+
+        // A postcode given before is offered, never filled in; one typed for Mondial Relay is its own.
+        val given = listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "BE"))
+        val (prepared, fills) = form.preparePostcode(CarrierPostcodes(), emptyMap(), given)
+        assertFalse(CarrierId.MondialRelay in prepared)
+        assertEquals("", form.withPostcode(prepared, fills).deliveryPostcode)
+        assertEquals(given.single(), form.offeredPostcode(given))
+        assertEquals("1000", form.withPostcode(CarrierPostcodes().with(CarrierId.MondialRelay, "1000")).sentPostcode)
+        assertNull(form.withPostcode(CarrierPostcodes().with(CarrierId.Dpd, "1000")).sentPostcode)
+
+        // Nobody knew it, or the check failed: the field shows too.
+        val none = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId("colisweb")), inputSuggested = relay))
+        assertEquals(CarrierId.MondialRelay, none.suggestedCarrier)
+        val unanswered = answered(
+            CarrierDetectionResponse(
+                number, carrier = CarrierId.Unknown, asked = listOf(CarrierId("colisweb")), unanswered = listOf(CarrierId("colisweb")),
+                inputSuggested = relay,
+            ),
+        )
+        assertTrue(unanswered.recognitionStatus is CarrierRecognition.Status.Failed)
+        assertEquals(CarrierId.MondialRelay, unanswered.suggestedCarrier)
+
+        // A carrier picked by hand, one found, several, a check still under way, an answer for another number or another
+        // spelling: no suggestion, and the fields are the carrier's own.
+        val picked = form.copy(carrierOverride = CarrierId("colisweb"))
+        assertNull(picked.suggestedCarrier)
+        assertEquals(CarrierId("colisweb"), picked.sentCarrier)
+        val pickedRelay = form.copy(carrierOverride = CarrierId.MondialRelay)
+        assertNull(pickedRelay.suggestedCarrier)
+        assertFalse(pickedRelay.postcodeRequirement!!.isOptional)
+        assertFalse(pickedRelay.canSave)
+        val found = answered(CarrierDetectionResponse(number, carrier = CarrierId("colisweb"), inputSuggested = relay))
+        assertNull(found.suggestedCarrier)
+        assertEquals(CarrierId("colisweb"), found.sentCarrier)
+        val several = answered(
+            CarrierDetectionResponse(
+                number, carrier = CarrierId.Unknown, recognized = listOf(CarrierId("colisweb"), CarrierId("heppner")), inputSuggested = relay,
+            ),
+        )
+        assertNull(several.suggestedCarrier)
+        assertNull(settled.suggestedCarrier)
+        assertNull(answered(CarrierDetectionResponse("76434218", carrier = CarrierId.Unknown, inputSuggested = relay)).suggestedCarrier)
+        assertNull(form.typing("7643 4219").suggestedCarrier)
+        // Without a suggestion, an 8-digit number left on automatic has no field.
+        val plain = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown))
+        assertNull(plain.suggestedCarrier)
+        assertNull(plain.postcodeRequirement)
+        assertFalse(plain.needsRequiredDetails)
     }
 
     /**

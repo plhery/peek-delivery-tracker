@@ -27,12 +27,13 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsFocused
-import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
@@ -54,6 +55,7 @@ import androidx.compose.ui.test.percentOffset
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
@@ -76,6 +78,8 @@ import com.plhery.peekdeliverytracker.core.DeviceLookupsSpent
 import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -586,6 +590,100 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", carrier, null, "1010", null)), source.additions)
+    }
+
+    /** The check's answer for [RELAY_NUMBER]: nobody knew it, and Mondial Relay may have it with the delivery postcode. */
+    private fun FakeDeliveries.suggestingMondialRelay(carrier: CarrierId = CarrierId.Unknown) {
+        detections[RELAY_NUMBER] = CarrierDetectionResponse(
+            RELAY_NUMBER, carrier = carrier,
+            inputSuggested = CarrierDetectionInputSuggested(CarrierId.MondialRelay, CarrierDetectionInputSuggestedField.DpdPostcode),
+        )
+    }
+
+    /**
+     * Nobody knew an 8-digit number, and the check suggests Mondial Relay, which nobody can ask without the delivery
+     * postcode: once it settles, Mondial Relay's postcode field shows, optional, with its country beside it and the line
+     * the parcel's page would show; a postcode given before is offered, not filled in. Filled, the parcel goes to Mondial
+     * Relay with the postcode and its country, as if it had been picked.
+     */
+    @Test
+    fun aCarrierTheCheckSuggestsAsksForItsPostcodeAndTakesTheParcelWithIt() {
+        show {
+            suggestingMondialRelay()
+            givenPostcodes = listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "BE"))
+        }
+        open()
+        type(RELAY_NUMBER)
+        assertFalse(exists(ADD_POSTCODE))
+        leave()
+        assertEquals("${text("add.detect")}, ${text("add.line.later")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertTrue(exists(ADD_POSTCODE))
+        assertEquals("", fieldText(ADD_POSTCODE))
+        assertTrue(exists(ADD_COUNTRY))
+        val name = CarrierCatalog.shared.info(CarrierId.MondialRelay, AppLanguage.En).displayName
+        compose.onNode(hasText(text("detail.inputSuggested", mapOf("carrier" to name)))).assertExists()
+        // "Optional" beside it, as beside the name.
+        compose.onAllNodes(hasText(text("add.optional"))).assertCountEquals(2)
+        // It never holds Add.
+        node(ADD_SAVE).assertIsEnabled()
+        node(ADD_USE_POSTCODE).assert(hasText(text("add.usePostcode", mapOf("postcode" to "1000")))).performClick()
+        settle()
+        assertEquals("1000", fieldText(ADD_POSTCODE))
+        assertEquals("Belgium", value(ADD_COUNTRY))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(RELAY_NUMBER, "", CarrierId.MondialRelay, null, "1000", "BE")), source.additions)
+    }
+
+    /** One its field doesn't take holds Add; without a postcode the suggested carrier's number is added on automatic. */
+    @Test
+    fun withoutAPostcodeTheNumberASuggestedCarrierMayHaveIsAddedOnAutomatic() {
+        show { suggestingMondialRelay() }
+        open()
+        type(RELAY_NUMBER)
+        leave()
+        assertTrue(exists(ADD_POSTCODE))
+        node(ADD_POSTCODE).performTextInput("75")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsNotEnabled()
+        node(ADD_POSTCODE).performTextClearance()
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(RELAY_NUMBER, "", CarrierId.Unknown, null, null, null)), source.additions)
+    }
+
+    /**
+     * A carrier picked by hand shows its own fields, whatever the check suggested: none for Colisweb, Mondial Relay's
+     * required postcode with its own help when it is picked.
+     */
+    @Test
+    fun aCarrierPickedByHandShowsItsOwnFieldsRatherThanTheSuggestedOnes() {
+        show { suggestingMondialRelay() }
+        open()
+        type(RELAY_NUMBER)
+        leave()
+        assertTrue(exists(ADD_POSTCODE))
+        pick(CarrierId("colisweb"), "Colisweb")
+        assertFalse(exists(ADD_POSTCODE))
+        pick(CarrierId.MondialRelay, "Mondial")
+        assertTrue(exists(ADD_POSTCODE))
+        compose.onNode(hasText(text("add.requirement.dpdPostcodeHelp"))).assertExists()
+        node(ADD_SAVE).assertIsNotEnabled()
+    }
+
+    /** A carrier the check found takes the parcel with its own fields: no suggested carrier's postcode. */
+    @Test
+    fun aCarrierTheCheckFoundShowsNoSuggestedPostcode() {
+        show { suggestingMondialRelay(carrier = CarrierId("colisweb")) }
+        open()
+        type(RELAY_NUMBER)
+        leave()
+        assertEquals("Colisweb, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertFalse(exists(ADD_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(RELAY_NUMBER, "", CarrierId("colisweb"), null, null, null)), source.additions)
     }
 
     /** J&T Express Mexico shows its scans with the last 4 digits of a phone: an optional field, sent with the parcel. */
@@ -2382,6 +2480,9 @@ private class FeelingView(context: Context) : View(context) {
 
 /** A synthetic 3S number: PostNL's, its postcode optional. */
 private const val POSTNL = "3SABCD826405193"
+
+/** A synthetic 8-digit number, the shape Mondial Relay can be asked about only with the delivery postcode. */
+private const val RELAY_NUMBER = "76434219"
 
 /** Packs, whose lookup needs the postcode. */
 private val PACKS = CarrierId("packs")

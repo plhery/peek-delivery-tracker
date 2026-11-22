@@ -300,7 +300,10 @@ internal class AddForm(
     var didFocus = didFocus
     var pasteFailed by mutableStateOf(pasteFailed)
 
-    /** The carrier whose details were last prepared (`onChange(of: resolvedCarrier, initial: true)`). */
+    /**
+     * The carrier whose details were last prepared (`onChange(of: resolvedCarrier, initial: true)`), or the one the
+     * check suggests ([ParcelAddition.inputCarrier]).
+     */
     var preparedFor = preparedFor
 
     fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?) = ParcelAddition(
@@ -427,13 +430,14 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     // focus, and with the keyboard coming up it goes back to the key it was last on.
     val titleFocus = remember { AccessibilityFocus() }
     LaunchedEffect(request.id) { titleFocus.request() }
-    // A carrier's postcode field shows what was given for it in Add; else a required one starts from the last one given
-    // that fits, and an optional one is only offered. The phone digits typed for one carrier don't go to the next, nor
-    // those typed for one number.
+    // A carrier's postcode field, the one in play's or the one the check suggests, shows what was given for it in Add;
+    // else a required one starts from the last one given that fits, and an optional one is only offered. The phone
+    // digits typed for one carrier don't go to the next, nor those typed for one number.
     val resolved = addition.resolvedCarrier
-    LaunchedEffect(resolved) {
-        if (form.preparedFor == resolved) return@LaunchedEffect
-        form.preparedFor = resolved
+    val detailsCarrier = addition.inputCarrier
+    LaunchedEffect(detailsCarrier) {
+        if (form.preparedFor == detailsCarrier) return@LaunchedEffect
+        form.preparedFor = detailsCarrier
         form.phoneDigits = ""
         prepareRequiredDetails(form, current(), source.givenPostcodes)
     }
@@ -1340,9 +1344,10 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
 
 /**
  * `requiredDetails`: the complete link where the carrier needs one and the text had none, and the delivery postcode
- * with its country beside it where it reads several; an optional postcode offered from those given before, and, for a
- * guest, the one filled in to forget; the last 4 digits of a phone where the carrier shows the parcel with them, and,
- * for a guest, that its link never shows them.
+ * with its country beside it where it reads several, or, optional, that of the carrier the check suggests while nobody
+ * knows the number; an optional postcode offered from those given before, and, for a guest, the one filled in to
+ * forget; the last 4 digits of a phone where the carrier shows the parcel with them, and, for a guest, that its link
+ * never shows them.
  */
 @Composable
 private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions) {
@@ -1372,15 +1377,16 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
         }
         val requirement = addition.postcodeRequirement
         if (requirement != null) {
-            val carrier = addition.resolvedCarrier
+            val carrier = addition.inputCarrier
             val carrierName = catalog.info(carrier, language).displayName
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 RequirementField(
                     localized("add.requirement.dpdPostcode"),
-                    if (requirement.isOptional) {
-                        localizer.text(catalog.optionalPostcodeHelpKey(addition.resolvedCarrier), mapOf("carrier" to carrierName))
-                    } else {
-                        localized("add.requirement.dpdPostcodeHelp")
+                    when {
+                        // The carrier the check suggests may have the parcel: its postcode is what it takes to ask it.
+                        addition.suggestedCarrier != null -> localizer.text("detail.inputSuggested", mapOf("carrier" to carrierName))
+                        requirement.isOptional -> localizer.text(catalog.optionalPostcodeHelpKey(carrier), mapOf("carrier" to carrierName))
+                        else -> localized("add.requirement.dpdPostcodeHelp")
                     },
                     optional = requirement.isOptional,
                 ) {
@@ -1388,7 +1394,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     val carrierRequirement = addition.carrierPostcodeRequirement
                     if (country != null && carrierRequirement != null) {
                         PostcodeCountryMenu(
-                            addition.resolvedCarrier, carrierRequirement, country, catalog,
+                            carrier, carrierRequirement, country, catalog,
                             Modifier.padding(start = 14.dp, top = 14.dp, bottom = 14.dp, end = 10.dp), ADD_COUNTRY,
                             enabled = LocalFormEnabled.current,
                         ) { form.postcodes = form.postcodes.withCountry(carrier, it) }

@@ -996,7 +996,8 @@ internal class DeliveriesState(
     }
 
     /**
-     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier, the link and the postcode it needs,
+     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier (the one the check suggests once its
+     * postcode is in, [ParcelAddition.sentCarrier]), the link and the postcode it needs,
      * the postcode's country and the phone digits its carrier asks for, goes to the store, in the app's scope while Add waits, which a window made again still
      * hears of ([PageWork.add], by the request's id).
      */
@@ -1004,7 +1005,7 @@ internal class DeliveriesState(
         if (!form.canSave || addition?.id != request.id) return
         source.pageWork.add(request.id, source.scope, source::errorMessage) {
             source.add(
-                form.parsed.trackingNumber, label, form.resolvedCarrier, form.sentTrackingUrl, form.sentPostcode, form.sentPostcodeCountry,
+                form.parsed.trackingNumber, label, form.sentCarrier, form.sentTrackingUrl, form.sentPostcode, form.sentPostcodeCountry,
                 form.sentPhoneDigits,
             ).id
         }

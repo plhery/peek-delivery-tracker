@@ -182,7 +182,7 @@ struct AddParcelView: View {
                 if scanning && scannerAvailable { showingScanner = true }
                 else { focusedField = .tracking }
             }
-            .onChange(of: resolvedCarrier, initial: true) { _, carrier in
+            .onChange(of: inputCarrier, initial: true) { _, carrier in
                 prepareRequiredDetails(for: carrier)
             }
             // A number that arrives while Add is open takes the field's place, as a paste does.
@@ -709,24 +709,26 @@ struct AddParcelView: View {
             }
 
             if let requirement = postcodeRequirement {
+                let carrierName = catalog.info(for: inputCarrier, language: localizer.language).displayName
                 VStack(alignment: .leading, spacing: 10) {
                     requirementField(
                         title: localizer.text("add.requirement.dpdPostcode"),
-                        help: requirement.isOptional
-                            ? localizer.text(catalog.optionalPostcodeHelpKey(resolvedCarrier), [
-                                "carrier": catalog.info(for: resolvedCarrier, language: localizer.language).displayName,
-                            ])
+                        // A suggested carrier's field says who may have the parcel, as its page does once it is added.
+                        help: suggestion != nil
+                            ? localizer.text("detail.inputSuggested", ["carrier": carrierName])
+                            : requirement.isOptional
+                            ? localizer.text(catalog.optionalPostcodeHelpKey(inputCarrier), ["carrier": carrierName])
                             : localizer.text("add.requirement.dpdPostcodeHelp"),
                         optional: requirement.isOptional
                     ) {
                         // Where no country is named beside the field, the example is the reader's.
-                        let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement,
+                        let example = catalog.postcodeExample(for: inputCarrier, requirement: requirement,
                                                               region: requirement.readsCountry == true ? postcodeCountry : CarrierCatalog.deviceCountry())
                         HStack(spacing: 0) {
                             if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
-                                PostcodeCountryMenu(carrier: resolvedCarrier, requirement: carrierRequirement, country: country,
+                                PostcodeCountryMenu(carrier: inputCarrier, requirement: carrierRequirement, country: country,
                                                     inset: EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 10)) {
-                                    postcodes.choose($0, for: resolvedCarrier)
+                                    postcodes.choose($0, for: inputCarrier)
                                 }
                                 Divider().padding(.vertical, 12)
                             }
@@ -748,17 +750,17 @@ struct AddParcelView: View {
                     }
                     // An optional postcode is offered, never filled in for the user.
                     if let base = carrierPostcodeRequirement,
-                       let suggestion = postcodes.offering(resolvedCarrier, requirement: base, among: store.givenPostcodes, catalog: catalog) {
-                        Button(localizer.text("add.usePostcode", ["postcode": suggestion.postcode])) {
-                            postcodes.use(suggestion.postcode, for: resolvedCarrier, country: suggestion.country)
+                       let given = postcodes.offering(inputCarrier, requirement: base, among: store.givenPostcodes, catalog: catalog) {
+                        Button(localizer.text("add.usePostcode", ["postcode": given.postcode])) {
+                            postcodes.use(given.postcode, for: inputCarrier, country: given.country)
                         }
                         .font(.subheadline)
                     }
                     // Without an account every suggestion is this iPhone's own, so it can forget them: no other carrier's
                     // field keeps it either.
-                    if store.isGuest, postcodes.holdsFill(resolvedCarrier) {
+                    if store.isGuest, postcodes.holdsFill(inputCarrier) {
                         Button(localizer.text("add.forgetPostcode")) {
-                            if let postcode = postcodes.forget(resolvedCarrier) { store.forgetPostcode(postcode) }
+                            if let postcode = postcodes.forget(inputCarrier) { store.forgetPostcode(postcode) }
                         }
                         .font(.subheadline)
                     }
@@ -1125,12 +1127,26 @@ struct AddParcelView: View {
         return carrier
     }
 
+    /// The carrier the settled check suggests for a number nobody knew, which cannot be asked without the delivery
+    /// postcode: its postcode field shows while the carrier is left automatic.
+    private var suggestion: SuggestedPostcodeCarrier? {
+        SuggestedPostcodeCarrier(picked: carrierOverride, shape: parsed.carrier, recognition: recognition, number: normalizedNumber,
+                                 spelling: typedSpelling, applies: recognizable, catalog: catalog)
+    }
+
+    /// The carrier the fields are for: the suggested one, otherwise the parcel's.
+    private var inputCarrier: CarrierID { suggestion?.carrier ?? resolvedCarrier }
+
+    /// The fields to show, before a country shapes the postcode's: the suggested carrier's postcode alone, otherwise
+    /// the carrier's own.
+    private var carrierRequirements: [CarrierRequirement] {
+        suggestion.map { [$0.requirement] } ?? catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber)
+    }
+
     /// The carrier's fields, the postcode's shaped for the country beside it.
     private var requirements: [CarrierRequirement] {
         let country = postcodeCountry
-        return catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber).map {
-            catalog.postcodeRequirement($0, for: resolvedCarrier, country: country)
-        }
+        return carrierRequirements.map { catalog.postcodeRequirement($0, for: inputCarrier, country: country) }
     }
 
     private var trackingURLRequirement: CarrierRequirement? {
@@ -1139,19 +1155,19 @@ struct AddParcelView: View {
 
     /// The carrier's postcode field, before the country beside it shapes it.
     private var carrierPostcodeRequirement: CarrierRequirement? {
-        catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber).first(where: { $0.field == .dpdPostcode })
+        carrierRequirements.first(where: { $0.field == .dpdPostcode })
     }
 
     /// The country the postcode is from: the one chosen for this carrier while its field takes it, otherwise where
     /// the field starts.
     private var postcodeCountry: String? {
-        carrierPostcodeRequirement.flatMap { postcodes.country(resolvedCarrier, requirement: $0, catalog: catalog) }
+        carrierPostcodeRequirement.flatMap { postcodes.country(inputCarrier, requirement: $0, catalog: catalog) }
     }
 
     /// The postcode's country, offered beside the field when it takes more than one.
     private var offeredPostcodeCountry: String? {
         guard let requirement = carrierPostcodeRequirement,
-              catalog.postcodeCountries(for: resolvedCarrier, requirement: requirement).count > 1 else { return nil }
+              catalog.postcodeCountries(for: inputCarrier, requirement: requirement).count > 1 else { return nil }
         return postcodeCountry
     }
 
@@ -1181,6 +1197,7 @@ struct AddParcelView: View {
                       url.scheme == "https",
                       url.host != nil else { return false }
             case .dpdPostcode:
+                // An optional postcode, a suggested carrier's too, holds the parcel back only while what is typed isn't one.
                 guard requirement.isSatisfied(by: deliveryPostcode) else { return false }
             case .phoneDigits:
                 guard requirement.isSatisfied(by: phoneDigits) else { return false }
@@ -1189,10 +1206,10 @@ struct AddParcelView: View {
         return true
     }
 
-    /// The postcode in the field: the current carrier's own, the one sent with the parcel.
+    /// The postcode in the field: the current carrier's own, or the suggested one's, the one sent with the parcel.
     private var deliveryPostcode: String {
-        get { postcodes[resolvedCarrier] }
-        nonmutating set { postcodes[resolvedCarrier] = newValue }
+        get { postcodes[inputCarrier] }
+        nonmutating set { postcodes[inputCarrier] = newValue }
     }
 
     /// A required postcode starts from the last one that fits; an optional one is
@@ -1234,7 +1251,7 @@ struct AddParcelView: View {
             phoneInput = ParcelPhoneInput()
         }
         recognition.settledNumber = Self.trackingNumber(in: draft.trackingInput)
-        prepareRequiredDetails(for: resolvedCarrier)
+        prepareRequiredDetails(for: inputCarrier)
     }
 
     private func selectCarrier(_ carrier: CarrierID?) {
@@ -1291,14 +1308,19 @@ struct AddParcelView: View {
         Task {
             do {
                 let postcode = postcodeRequirement?.normalizedValue(deliveryPostcode)
+                // A suggested carrier goes only with its postcode; without one the parcel is added as it would be.
+                let added: SuggestedPostcodeCarrier.Added = suggestion?.added(
+                    postcode: deliveryPostcode, country: postcodeCountry, otherwise: resolvedCarrier, catalog: catalog
+                ) ?? .init(carrier: resolvedCarrier, postcode: postcode,
+                           country: catalog.sentPostcodeCountry(postcodeCountry, postcode: postcode, for: resolvedCarrier))
                 let parcel = try await store.add(
                     trackingNumber: parsed.trackingNumber,
                     label: label,
-                    carrier: resolvedCarrier,
+                    carrier: added.carrier,
                     trackingURL: trackingURLRequirement != nil
                         ? (parsed.trackingURL ?? trackingURL) : nil,
-                    dpdPostcode: postcode,
-                    dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: postcode, for: resolvedCarrier),
+                    dpdPostcode: added.postcode,
+                    dpdPostcodeCountry: added.country,
                     // Only while the carrier asks for them.
                     phoneDigits: phoneDigitsRequirement.flatMap { $0.normalizedValue(phoneDigits).nonEmpty }
                 )
@@ -1439,6 +1461,52 @@ struct CarrierPostcodes {
 
     /// Chooses the country beside the carrier's field; the other carriers' stay as they are.
     mutating func choose(_ country: String, for carrier: CarrierID) { countries[carrier] = country }
+}
+
+/// The carrier the carrier check suggests for a number nobody knew: one that serves the reader's country and takes the
+/// delivery postcode and nothing else for this number (Mondial Relay's 8-digit numbers), so nobody could ask it. The add
+/// sheet shows its postcode field, optional, and the parcel goes to it only with a postcode the field takes, as if it
+/// had been picked and its field filled; otherwise the parcel is added as it would be without. Mirrors `suggested`
+/// and `lookupInput` in `src/peek/lookup/machine.ts`.
+struct SuggestedPostcodeCarrier: Equatable {
+    /// The carrier, and the postcode and its country sent with the parcel.
+    struct Added: Equatable {
+        var carrier: CarrierID
+        var postcode: String?
+        var country: String?
+    }
+
+    let carrier: CarrierID
+    /// The carrier's postcode field for the number, optional, before a country shapes it.
+    let requirement: CarrierRequirement
+
+    /// Only while the carrier is left automatic (`picked` nil) for a number whose shape names none (`shape`), once the
+    /// check has settled without a carrier: nobody knew the number, nothing could be asked, or the check failed.
+    /// `number`, `spelling` and `applies` are as `CarrierRecognition.status` takes them.
+    init?(picked: CarrierID?, shape: CarrierID, recognition: CarrierRecognition, number: String, spelling: String? = nil,
+          applies: Bool, catalog: CarrierCatalog = .shared) {
+        guard picked == nil, shape == .unknown, let answer = recognition.answer, answer.trackingNumber == number,
+              let suggested = answer.inputSuggested, suggested.field == .dpdPostcode else { return nil }
+        switch recognition.status(for: number, spelling: spelling, applies: applies) {
+        case .unasked, .notFound, .failed: break
+        case .idle, .asking, .recognized, .several: return nil
+        }
+        guard var field = catalog.requirements(for: suggested.carrier, trackingNumber: number)
+            .first(where: { $0.field == .dpdPostcode }) else { return nil }
+        field.optional = true
+        carrier = suggested.carrier
+        requirement = field
+    }
+
+    /// What the parcel is added with: this carrier, the postcode as its field takes it from `country` and that country
+    /// as it is sent, once the field takes what was typed; otherwise `otherwise` alone.
+    func added(postcode typed: String, country: String?, otherwise: CarrierID, catalog: CarrierCatalog = .shared) -> Added {
+        let field = catalog.postcodeRequirement(requirement, for: carrier, country: country)
+        guard field.accepts(typed) else { return Added(carrier: otherwise) }
+        let postcode = field.normalizedValue(typed)
+        return Added(carrier: carrier, postcode: postcode,
+                     country: catalog.sentPostcodeCountry(country, postcode: postcode, for: carrier))
+    }
 }
 
 /// The country a delivery postcode is from, beside its field: its flag and code, opening on the countries the

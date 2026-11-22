@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
@@ -423,11 +424,43 @@ data class ParcelAddition(
             return carrier.takeIf { it != override }
         }
 
+    /**
+     * The carrier the check suggests for a number nobody knew (`inputSuggested`): one that serves the reader's country
+     * and takes the delivery postcode and nothing else for the number, such as Mondial Relay for 8 digits, so nobody
+     * could ask it. Only while the carrier is left automatic, for a number whose shape names none and that isn't
+     * Amazon's, once the check has settled without a carrier: nobody knew it, nothing could be asked, or it failed.
+     * Its postcode field shows, optional, and the parcel goes to it only with a postcode the field takes (the web's
+     * `suggested` and `lookupInput`).
+     */
+    val suggestedCarrier: CarrierId? get() = suggestion?.first
+
+    /** The suggested carrier and its postcode field for the number, optional, before a country shapes it. */
+    private val suggestion: Pair<CarrierId, CarrierRequirement>?
+        get() {
+            if (carrierOverride != null || amazonNumber || parsed.carrier != CarrierId.Unknown) return null
+            val answer = recognition.answer?.takeIf { it.trackingNumber == normalizedNumber } ?: return null
+            val carrier = answer.inputSuggested?.takeIf { it.field == CarrierDetectionInputSuggestedField.DpdPostcode }?.carrier ?: return null
+            when (recognitionStatus) {
+                is CarrierRecognition.Status.NotFound, is CarrierRecognition.Status.Failed, CarrierRecognition.Status.Unasked -> Unit
+                else -> return null
+            }
+            val field = catalog.requirements(carrier, parsed.trackingNumber).firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
+                ?: return null
+            return carrier to field.copy(optional = true)
+        }
+
+    /** The carrier the fields are for: the one suggested ([suggestedCarrier]), otherwise the one in play. */
+    val inputCarrier: CarrierId get() = suggestedCarrier ?: resolvedCarrier
+
+    /** The fields before a country shapes the postcode's: the suggested carrier's postcode alone, otherwise the carrier's own. */
+    private val carrierRequirements: List<CarrierRequirement>
+        get() = suggestion?.let { listOf(it.second) } ?: catalog.requirements(resolvedCarrier, parsed.trackingNumber)
+
     /** The carrier's fields, the postcode's shaped for the country beside it. */
     val requirements: List<CarrierRequirement>
         get() {
             val country = postcodeCountry
-            return catalog.requirements(resolvedCarrier, parsed.trackingNumber).map { catalog.postcodeRequirement(it, resolvedCarrier, country) }
+            return carrierRequirements.map { catalog.postcodeRequirement(it, inputCarrier, country) }
         }
 
     val trackingUrlRequirement: CarrierRequirement?
@@ -435,7 +468,7 @@ data class ParcelAddition(
 
     /** The carrier's postcode field, before the country beside it shapes it. */
     val carrierPostcodeRequirement: CarrierRequirement?
-        get() = catalog.requirements(resolvedCarrier, parsed.trackingNumber).firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
+        get() = carrierRequirements.firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
 
     /**
      * The country the postcode is from: the one chosen while this field takes it, otherwise the one the postcode it was
@@ -444,16 +477,17 @@ data class ParcelAddition(
     val postcodeCountry: String?
         get() {
             val requirement = carrierPostcodeRequirement ?: return null
-            val takes = catalog.postcodeCountries(resolvedCarrier, requirement)
+            val carrier = inputCarrier
+            val takes = catalog.postcodeCountries(carrier, requirement)
             return chosenPostcodeCountry?.takeIf { it in takes } ?: filledPostcodeCountry?.takeIf { it in takes }
-                ?: catalog.initialPostcodeCountry(resolvedCarrier, requirement, region = region)
+                ?: catalog.initialPostcodeCountry(carrier, requirement, region = region)
         }
 
     /** The postcode's country, offered beside the field when it takes more than one. */
     val offeredPostcodeCountry: String?
         get() {
             val requirement = carrierPostcodeRequirement ?: return null
-            if (catalog.postcodeCountries(resolvedCarrier, requirement).size <= 1) return null
+            if (catalog.postcodeCountries(inputCarrier, requirement).size <= 1) return null
             return postcodeCountry
         }
 
@@ -471,7 +505,7 @@ data class ParcelAddition(
 
     /** The postcode field's example: the country's beside it where the field names one, else the reader's. */
     fun postcodeExample(requirement: CarrierRequirement): String? =
-        catalog.postcodeExample(resolvedCarrier, requirement, if (requirement.readsCountry == true) postcodeCountry else region)
+        catalog.postcodeExample(inputCarrier, requirement, if (requirement.readsCountry == true) postcodeCountry else region)
 
     /**
      * The number pad for a numeric field, the number keys first where the example is all digits, else the letters
@@ -495,6 +529,7 @@ data class ParcelAddition(
                         val url = Url.parse(value)
                         if (!requirement.accepts(value) || url == null || url.scheme != "https" || url.host == null) return false
                     }
+                    // An optional postcode, a suggested carrier's too, holds Add only while what is typed isn't one.
                     CarrierRequirement.Field.DpdPostcode -> if (!requirement.isSatisfied(deliveryPostcode)) return false
                     CarrierRequirement.Field.PhoneDigits -> if (!requirement.isSatisfied(phoneDigits)) return false
                 }
@@ -522,18 +557,29 @@ data class ParcelAddition(
     /** The link `save()` sends: the text's own, else the one typed, where the carrier needs one. */
     val sentTrackingUrl: String? get() = if (trackingUrlRequirement != null) parsed.trackingUrl ?: trackingUrl else null
 
-    /** The postcode `save()` sends, as the field takes it. */
-    val sentPostcode: String? get() = postcodeRequirement?.normalizedValue(deliveryPostcode)
+    /** The postcode `save()` sends, as the field takes it; a suggested carrier's only once its field takes it. */
+    val sentPostcode: String?
+        get() {
+            val requirement = postcodeRequirement ?: return null
+            if (suggestedCarrier != null && !requirement.accepts(deliveryPostcode)) return null
+            return requirement.normalizedValue(deliveryPostcode)
+        }
 
     /** The country sent with the postcode: none without one, nor for the carrier's home country. */
-    val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, sentPostcode, resolvedCarrier)
+    val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, sentPostcode, sentCarrier)
+
+    /**
+     * The carrier `save()` sends: the one suggested once its field takes the postcode, as if it had been picked and its
+     * field filled, otherwise the one in play (the web's `lookupInput`).
+     */
+    val sentCarrier: CarrierId get() = suggestedCarrier?.takeIf { sentPostcode != null } ?: resolvedCarrier
 
     /** The phone digits `save()` sends: only while the carrier asks for them, and none when empty. */
     val sentPhoneDigits: String? get() = phoneDigitsRequirement?.normalizedValue(phoneDigits)?.nonEmpty
 
     /** The last postcode given that fits the field, this carrier's first (`previousPostcode(for:requirement:)`). */
     fun previousPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): String? =
-        requirement.suggestedPostcode(resolvedCarrier, given)
+        requirement.suggestedPostcode(inputCarrier, given)
 
     /**
      * The postcode offered under the optional field while it is empty, filled in only at a tap, with the country it was
@@ -546,20 +592,23 @@ data class ParcelAddition(
 
     /** The postcode given before that fits the field, from the country chosen beside it once one is. */
     private fun rememberedPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): GivenPostcode? {
-        val chosen = chosenPostcodeCountry?.takeIf { it in catalog.postcodeCountries(resolvedCarrier, requirement) }
-        return catalog.rememberedPostcode(resolvedCarrier, requirement, given, chosen)
+        val carrier = inputCarrier
+        val chosen = chosenPostcodeCountry?.takeIf { it in catalog.postcodeCountries(carrier, requirement) }
+        return catalog.rememberedPostcode(carrier, requirement, given, chosen)
     }
 
     /**
-     * The postcode field holding what `postcodes` keeps for the carrier in play, beside the country chosen for it, or
-     * the one it was filled from while it holds that fill (`fills`), and nothing given for another.
+     * The postcode field holding what `postcodes` keeps for the carrier in play, or the one suggested, beside the
+     * country chosen for it, or the one it was filled from while it holds that fill (`fills`), and nothing given for
+     * another.
      */
     fun withPostcode(postcodes: CarrierPostcodes, fills: Map<CarrierId, PostcodeFill> = emptyMap()): ParcelAddition {
-        val field = postcodes[resolvedCarrier]
+        val carrier = inputCarrier
+        val field = postcodes[carrier]
         return copy(
             deliveryPostcode = field,
-            chosenPostcodeCountry = postcodes.country(resolvedCarrier),
-            filledPostcodeCountry = fills[resolvedCarrier]?.takeIf { it.holds(field) }?.country,
+            chosenPostcodeCountry = postcodes.country(carrier),
+            filledPostcodeCountry = fills[carrier]?.takeIf { it.holds(field) }?.country,
         )
     }
 
@@ -575,7 +624,7 @@ data class ParcelAddition(
         fills: Map<CarrierId, PostcodeFill>,
         given: List<GivenPostcode>,
     ): Pair<CarrierPostcodes, Map<CarrierId, PostcodeFill>> {
-        val carrier = resolvedCarrier
+        val carrier = inputCarrier
         val own = fills[carrier]?.prepare()
         val prepared = if (own != null) fills + (carrier to own) else fills
         val requirement = carrierPostcodeRequirement?.takeIf { !it.isOptional } ?: return postcodes to prepared

@@ -829,7 +829,10 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   files it there. The front door offers the same carrier when detection names it
   (`inputSuggested`, for an unknown answer without tracking history): the postcode field is
   optional, a paste stops once to show it, and the lookup names that carrier only with the
-  postcode, sent in the request body like any other.
+  postcode, sent in the request body like any other. The add sheets on the website and in the
+  apps do the same while the carrier is left automatic: the field is optional, a postcode given
+  before is offered, not filled in, and the parcel is added under that carrier only with a
+  postcode, otherwise automatic.
   An account's open parcel filed under a carrier that shows more with the delivery postcode
   (the catalog's `showsMore`: DPD's verified scans, the pages that show a shipment only with
   it), saved without one, is given the postcode its owner gave their latest parcel once a check

@@ -14,11 +14,11 @@ Peek knows two shapes for Ozon, and both are written with dashes. The dashes mat
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000-0000-0` | 8 digits, 4 digits and 1 digit, joined by dashes. Peek names Ozon from this shape at once. |
-| `0000000000-0000-0` | The same with 10 digits at the start. Peek names Ozon too. |
-| `0000000000000` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so the digits alone don't tell Peek it's Ozon. Added from Russia, Belarus or Kazakhstan, Peek asks Ozon among other carriers whether it knows the number; from elsewhere it doesn't ask Ozon. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
-| `PL-000000-00000` | PL, 6 digits, then more letters or digits, with dashes. Peek names Ozon. |
-| `PL-000000-0000` | PL with exactly 10 digits is also the shape of Amazon's numbers. Peek takes it for an [Amazon](carrier:amazon-logistics) number and doesn't let you pick Ozon for it, so it can't follow it with Ozon. |
+| `48291057-3628-1` | 8 digits, 4 digits and 1 digit, joined by dashes. Peek names Ozon from this shape at once. |
+| `4829105736-2841-2` | The same with 10 digits at the start. Peek names Ozon too. |
+| `4829105736281` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so the digits alone don't tell Peek it's Ozon. Added from Russia, Belarus or Kazakhstan, Peek asks Ozon among other carriers whether it knows the number; from elsewhere it doesn't ask Ozon. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
+| `PL-482910-57362` | PL, 6 digits, then more letters or digits, with dashes. Peek names Ozon. |
+| `PL-482910-5736` | PL with exactly 10 digits is also the shape of Amazon's numbers. Peek takes it for an [Amazon](carrier:amazon-logistics) number and doesn't let you pick Ozon for it, so it can't follow it with Ozon. |
 
 Lower case doesn't matter: `pl-` works like `PL-`. Can't find your number? See [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
@@ -89,7 +89,7 @@ Peek couldn't read Ozon's website, so this page gives no delivery times, opening
 
 ## Ozon customer service and contact
 
-As of 1 November 2026, Peek couldn't read Ozon's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. Ozon's tracker is tracking.ozon.ru.
+Peek couldn't read Ozon's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages. Ozon's tracker is tracking.ozon.ru.
 
 For an order you bought on Ozon, contact Ozon about it. For an order from another shop, ask that shop first: it booked the delivery.
 
@@ -101,7 +101,7 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 - **Without its dashes.** Peek can't tell the carrier by the digits alone. Paste it all the same: Peek follows more than 4,500 carriers. While it asks the carriers whose numbers have this shape, and tracking services, it shows "Checking tracking services…". Ozon is among those carriers only when you add the number from Russia, Belarus or Kazakhstan. If the tracking services name Ozon, with dated steps, Peek files the parcel under Ozon by itself. Or press "Change" and search for Ozon. On a parcel you've already added, use "Change carrier".
 - **A link.** Paste a tracking.ozon.ru link with the number in it (`track=`), or a rocket.ozon.ru tracking link (`SearchId=`), and Peek tracks that number with Ozon.
 
-**Where the steps come from.** Peek reads Ozon's tracker and shows each step in Ozon's Russian words, as in the tables above, with its time, and Ozon's expected delivery dates. Peek reads Ozon's times as Moscow time and shows them in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Ozon gives no place for a step, so there's no map. Until Ozon's tracker knows the number, Peek shows "Waiting for Ozon", or "No tracking history yet" for a number added without a carrier. When Ozon's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the parcel, in that service's words, which can be behind tracking.ozon.ru. Peek's Ozon lookup doesn't take a `PL-` number: Peek shows "Check the tracking number" for it until a tracking service has the parcel.
+**Where the steps come from.** Peek reads Ozon's tracker and shows each step in Ozon's Russian words, as in the tables above, with its time, and Ozon's expected delivery dates. Peek keeps the time zone Ozon gives with a time, reads a time without one as Moscow time, and shows them in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Ozon gives no place for a step, so there's no map. Until Ozon's tracker knows the number, Peek shows "Waiting for Ozon", or "No tracking history yet" for a number added without a carrier. When Ozon's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the parcel, in that service's words, which can be behind tracking.ozon.ru. Peek's Ozon lookup doesn't take a `PL-` number: Peek shows "Check the tracking number" for it until a tracking service has the parcel.
 
 **The link on the parcel's page.** "Open the Ozon website" opens the number on Ozon's tracker. If a tracking service filled in, the link opens that service instead, such as "Open the ParcelsApp website".
 
@@ -109,17 +109,17 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 
 **Another carrier delivering.** If a tracking service names another carrier for your parcel, with that carrier's number, and Peek reads that carrier's own tracking, Peek asks it too. Once it shows a scan at least as recent as the service's latest, Peek follows the parcel there.
 
-**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it is out for delivery while you have it open or notifications are on. Once a day passes without a new step, it checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
+**Checks and alerts.** While you have the parcel open, or on its delivery day with notifications on, and Ozon's tracker answers, Peek checks up to every 10 minutes; otherwise hourly. While a tracking service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it is out for delivery while you have it open or notifications are on. Once a day passes without a new step, it checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
 
 ## Questions about Ozon tracking
 
 ### What does an Ozon tracking number look like?
 
-Peek links two shapes to Ozon, both with dashes: digits in three groups, 8 or 10 digits, then 4, then 1, such as `00000000-0000-0`, and numbers starting with `PL-`, such as `PL-000000-00000`. Type the dashes: without them, Peek can't tell the number is Ozon's.
+Peek links two shapes to Ozon, both with dashes: digits in three groups, 8 or 10 digits, then 4, then 1, such as `48291057-3628-1`, and numbers starting with `PL-`, such as `PL-482910-57362`. Type the dashes: without them, Peek can't tell the number is Ozon's.
 
 ### Why doesn't Peek recognise my Ozon number?
 
-You probably typed it without its dashes, or with spaces. Type it again as `00000000-0000-0`, with your own digits, or press "Change" and pick Ozon.
+You probably typed it without its dashes, or with spaces. Type it again as `48291057-3628-1`, with your own digits, or press "Change" and pick Ozon.
 
 ### What does "Заказ в пункте выдачи" mean?
 

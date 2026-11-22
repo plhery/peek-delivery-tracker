@@ -14,14 +14,14 @@ J&T Express UK's waybill is `JTUK` followed by 12 digits, 16 characters in all. 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `JTUK000000000000` | `JTUK` and 12 digits: a J&T Express UK parcel. Peek names J&T Express UK at once. |
-| `JTUK00000000000` | One digit short. Not J&T Express UK's shape, and Peek recognises no carrier: check for a missing digit. |
+| `JTUK482910573628` | `JTUK` and 12 digits: a J&T Express UK parcel. Peek names J&T Express UK at once. |
+| `JTUK48291057362` | One digit short. Not J&T Express UK's shape, and Peek recognises no carrier: check for a missing digit. |
 | `JTDE000000000005` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de), not the UK network. |
-| `JTAU000000000000` | `JTAU` and 12 digits: [J&T Express Australia](carrier:j-and-t-au). |
-| `JTE000000000000` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east). |
-| `JT0000000000000` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |
+| `JTAU482910573628` | `JTAU` and 12 digits: [J&T Express Australia](carrier:j-and-t-au). |
+| `JTE482910573628` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east). |
+| `JT4829105736284` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |
 
-On peektracker.com, a `JTUK` number one digit short or over gets a note, such as "This starts like a J&T Express UK tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." Spaces, dashes and lower case don't matter in Peek: `jtuk 0000 0000 0000` reads the same as the first line. Peek's catalog also knows the carrier as J&T Express (UK), J&T Express UK Ltd and J&T UK.
+On peektracker.com, a `JTUK` number one digit short or over gets a note, such as "This starts like a J&T Express UK tracking number but is one character short, so it may be mistyped. Compare it with your shipping message." Spaces, dashes and lower case don't matter in Peek: `jtuk 4829 1057 3628` reads the same as the first line. Peek's catalog also knows the carrier as J&T Express (UK), J&T Express UK Ltd and J&T UK.
 
 **Where to find it.** In the shop's shipping email, on the order page of the shop or marketplace, or in any message about the delivery. If you can't find it, see [how to find your tracking number](guide:find-tracking-number), or ask the shop.
 
@@ -37,6 +37,7 @@ J&T's tracker shows each scan as a time and one sentence, with no place. These a
 | `The parcel has been collected and is on its way` | The courier has taken your parcel for the delivery round. Despite the words, this isn't the first pickup: J&T files it as a delivery scan. | "Out for delivery" |
 | `The parcel has been successfully delivered to the recipient` | Delivered. | "Delivered" |
 | `The delivery address is incomplete or incorrect.` | The round failed: the courier couldn't deliver to the address as it was written. In the history Peek's code holds, it came hours after the parcel went out, the same day. | "Delivery attempted" |
+| `Delivery was attempted, but no one was available to receive the package at the address; the package was taken to a pickup location for the customer to collect.` | No one was at the address to take the parcel, so it was taken to a pickup location for you to collect. | "Delivery attempted" |
 
 A sentence not in this table goes by the rules Peek uses for every carrier; one Peek doesn't recognise shows as J&T wrote it and counts as "In transit", unless the parcel is already out for delivery or past that point: then the status stays as it was.
 
@@ -44,7 +45,7 @@ If a sentence ends with a customer service number or an invitation to call it, P
 
 ## J&T Express UK delivery: what the tracking tells you
 
-In the histories Peek's code holds, J&T's courier takes the parcel out and either delivers it or reports a problem with the address. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door.
+In the histories Peek's code holds, J&T's courier takes the parcel out and delivers it, reports a problem with the address, or takes it to a pickup location when no one is in. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door.
 
 **Out for delivery.** `The parcel has been collected and is on its way` means your parcel is on today's round. J&T's tracker gives no delivery window or expected day, so Peek can't show one either.
 
@@ -60,7 +61,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 **Not moving.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek with the day of its latest line ("No tracking update since Mon 12 Oct"). If nothing moves after that, ask the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
-**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express UK". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
+**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express UK". A shop can create the number before it hands the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 
 **Delivered, but nothing came.** Check around your door, with your household and with neighbours. Then tell the shop: under that law the parcel stays at its risk until you, or someone you named, have it, so ask it for a refund or a new parcel. More in [delivered but not received](guide:delivered-not-received).
 
@@ -70,7 +71,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 ## J&T Express UK customer service and contact
 
-As of 10 November 2026, Peek couldn't read J&T Express UK's website, so this page lists no phone number, email or chat: Peek gives only contacts read on a carrier's own pages. Companies House lists its registered office as c/o TMF Group, 13th Floor, One Angel Court, London EC2R 7HJ: the company's legal address, in another firm's care, not a parcel desk.
+Peek couldn't read J&T Express UK's website, so this page lists no phone number, email or chat: Peek gives only contacts read on a carrier's own pages. Companies House lists its registered office as c/o TMF Group, 13th Floor, One Angel Court, London EC2R 7HJ: the company's legal address, in another firm's care, not a parcel desk.
 
 Start with the shop: it booked the delivery with J&T. For a marketplace order, use the help on the order's page. J&T's own tracker is at www.jtexpress.uk/tracking.
 
@@ -78,11 +79,11 @@ Start with the shop: it booked the delivery with J&T. For a marketplace order, u
 
 [Peek](/) names J&T Express UK at once from a `JTUK` number ("Detected carrier") and asks J&T's own tracker with the number alone: no postcode or account. A www.jtexpress.uk/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. If what you have isn't a `JTUK` number, paste it all the same: Peek follows more than 4,500 carriers. For a `JT` number with 13 digits, Peek shows "Checking tracking services…" while it checks the number. Picking J&T Express UK with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
 
-Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. On a very long history it keeps the newest 100 scans. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
+Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
 
 Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express UK" (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
+While you have the parcel open, or on its delivery day with notifications on, and J&T's own tracker answers, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery; otherwise hourly. Through tracking services, it checks hourly (every 3 hours after a quiet day), and up to every 15 minutes on the day the parcel is out for delivery while you have it open or notifications are on. After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
 ## Questions about J&T Express UK tracking
 
@@ -107,7 +108,7 @@ Check that it starts with `JTUK` and has 12 digits after it: numbers from J&T's 
 Ask the shop first: it booked the delivery. Peek couldn't read J&T Express UK's website, so this page gives no phone number or email.
 
 :::sources
-- [Universal Parcel Scraper: J&T Express UK](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-uk) – names, the JTUK shape, tracking links, the tracker's sentences and their stages, the delivery round and address scans, exact scan times, no place, expected day or weight, proof of delivery left out, newest 100 scans
+- [Universal Parcel Scraper: J&T Express UK](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-uk) – names, the JTUK shape, tracking links, the tracker's sentences and their stages, the delivery round and address scans, exact scan times, no place, expected day or weight, proof of delivery left out
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, customer service lines, bracketed text, names and phone numbers left out (J&T's shared lookup), no hand-over to another carrier, tracking services as a fallback
 - [Companies House: J&T EXPRESS UK LTD](https://find-and-update.company-information.service.gov.uk/company/16920174) – active private limited company, incorporated 18 December 2025, nature of business, registered office
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from the delivery company, held about 3 weeks, VAT at £135 or less and above, Customs Duty, Northern Ireland

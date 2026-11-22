@@ -6,23 +6,23 @@ published: 2026-10-11
 updated: 2026-11-20
 ---
 
-TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS. If you don't have it, ask the shop or the TIPSA agency that delivers in your area; find it by postcode in TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte). You also arrange delivery with that agency after an `Ausente`, or a collection if you'd rather pick the parcel up yourself; if it's lost or arrives damaged, tell the shop.
+TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, for example in the shipping email or SMS. If you don't have it, ask the shop or the TIPSA agency that delivers in your area; find it by postcode in TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte). You also arrange delivery with that agency after an `Ausente`, or a collection if you'd rather pick the parcel up yourself; if it's lost or arrives damaged, tell the shop.
 
 ## TIPSA tracking number: what it looks like
 
 TIPSA's locator asks for the 22-digit shipment number and marks the destination postcode as required too. The number is made of two agency codes followed by the waybill (albarán):
 
-:::anatomy 012345 012345 1234567890
-- 012345 | First agency code: a TIPSA agency handling the shipment
-- 012345 | Second agency code: another agency on the shipment
-- 1234567890 | Waybill (albarán): the shipment's own number
+:::anatomy 028145 028145 4829105736
+- 028145 | First agency code: a TIPSA agency handling the shipment
+- 028145 | Second agency code: another agency on the shipment
+- 4829105736 | Waybill (albarán): the shipment's own number
 :::
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `0123450123451234567890` | The full 22-digit TIPSA number. Use this one. |
-| `012345 012345 1234567890` | The same number with spaces. Peek reads it; TIPSA's locator field holds only 22 characters, so type it there without spaces. |
-| `1234567890` | The 10-digit waybill alone. TIPSA's locator doesn't take it, and Peek doesn't take it as a TIPSA number. |
+| `0281450281454829105736` | The full 22-digit TIPSA number. Use this one. |
+| `028145 028145 4829105736` | The same number with spaces. Peek reads it; TIPSA's locator field holds only 22 characters, so type it there without spaces. |
+| `4829105736` | The 10-digit waybill alone. TIPSA's locator doesn't take it, and Peek doesn't take it as a TIPSA number. |
 
 Shops can have TIPSA send emails and SMS when the parcel sets off, when it reaches the agency, after an incident and after delivery, and their tracking links lead to TIPSA's shipment page. Without the number, TIPSA's locator also searches by the shipment's reference, but then asks for an identifier (agency plus client) that you'd have to get from the sender. More places to look are in [how to find your tracking number](guide:find-tracking-number).
 
@@ -30,7 +30,7 @@ Twenty-two digits also fit Austrian Post, [USPS](carrier:usps) and Estafeta. A n
 
 ## What TIPSA's tracking statuses mean
 
-TIPSA's shipment page is in Spanish only, even when you open the locator from the English site. Its top part shows a short timeline with labels such as `Documentado`, `En camino`, `En reparto` and `Entregado`; below, a table lists each scan with date, time and town. These are the scan wordings, in the order a parcel usually meets them:
+TIPSA's shipment page is in Spanish only, even when you open the locator from the English site. Its top part shows a short timeline with labels such as `Documentado`, `En camino`, `En reparto` and `Entregado`; below, a table lists each scan with date, time and town. These are the scan wordings:
 
 | TIPSA's status | What it means for you |
 | --- | --- |
@@ -75,7 +75,7 @@ A parcel not collected within 15 days of dispatch is returned to the sender, so 
 
 ## TIPSA contact number and customer service
 
-TIPSA's channels, as listed on its English contact page and FAQ on 11 October 2026:
+TIPSA's channels, as listed on its English contact page and FAQ:
 
 - **Phone** 902 10 10 47 or 900 10 10 47. The Spanish FAQ gives only 900 10 10 47. TIPSA states no opening hours or call costs.
 - **Contact form** on [tip-sa.com/en/contact](https://www.tip-sa.com/en/contact), with the reason "I have a problem with my shipment" and your shipment number.
@@ -86,11 +86,11 @@ Portugal has no separate line: TIPSA's Portuguese contact page gives the same tw
 
 ## Tracking TIPSA parcels with Peek
 
-[Peek](/) takes the 22-digit number with or without spaces. Other carriers share that shape, so Peek asks the likely ones at once, TIPSA first; you see "asking…" and then "TIPSA has this parcel." when TIPSA knows it. A number whose agency codes both start with `00` is taken for CTT Express (unless it starts `00001000`); if your shop said TIPSA, press "Change" and pick it. No postcode is needed.
+[Peek](/) takes the 22-digit number with or without spaces. Other carriers share that shape, so Peek asks the likely ones at once, TIPSA first; you see "asking…" and then "TIPSA has this parcel." when TIPSA knows it. A number whose two agency codes both start with `00`, the second one among CTT Express's listed agencies, is taken for CTT Express; for other numbers whose two codes start with `00`, Peek asks TIPSA, CTT Express and Austrian Post at once, TIPSA first. If your shop said TIPSA, press "Change" and pick it. No postcode is needed.
 
 A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Peek doesn't suggest TIPSA for ten digits or ask it about them; if you pick TIPSA, Peek says TIPSA "doesn’t issue numbers like this one" and asks tracking services instead. Look for the full 22-digit number, or the tracking link, in the shop's shipping email or SMS, or ask the shop. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
 
-Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written, and Peek also sums each one up in its own words: `PENDIENTE DE ENTREGAR A TIPSA` shows as "Label created"; `REPARTO` as "Out for delivery"; `Ausente`, `Cerrado` and `Faltan Datos / Datos incorrectos` as "Delivery attempted"; `DISPONIBLE` and `Pendiente de recoger en Tipsa` as "Ready for pickup"; `Devolver a Origen` as "Needs attention"; `ENTREGADO` as "Delivered"; and the other scans as "In transit". Peek reads every scan time as Madrid time, Portuguese agencies included, and shows it in your time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Madrid time on the day TIPSA scans the parcel out for delivery, while TIPSA's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written, and Peek also sums each one up in its own words: `PENDIENTE DE ENTREGAR A TIPSA` shows as "Label created"; `REPARTO` as "Out for delivery"; `Ausente`, `Cerrado` and `Faltan Datos / Datos incorrectos` as "Delivery attempted"; `DISPONIBLE` and `Pendiente de recoger en Tipsa` as "Ready for pickup"; `Devolver a Origen` as "Needs attention"; `ENTREGADO` as "Delivered"; and the other scans as "In transit". Peek reads every scan time as Madrid time, Portuguese agencies included, and shows it in your time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. While you have the parcel open, or on its delivery day with notifications on, and TIPSA's own tracker answers, it checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Madrid time on the day TIPSA scans the parcel out for delivery; otherwise hourly. When only tracking services answer, it checks hourly, every 3 hours once the newest scan is a day old, and up to every 15 minutes on the day the parcel is out for delivery while you have it open or notifications are on. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about TIPSA tracking
 
@@ -129,7 +129,7 @@ Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – pickup point finder
 - [TIPSA: Contrarreembolso](https://www.tip-sa.com/es/envios-de-paquetes/reembolso) – amount collected at the destination on delivery, up to €1,000 per shipment
 - [TIPSA: Portes debidos](https://www.tip-sa.com/es/envios-de-paquetes/portes-debidos) – shipping cost collected at the destination
-- [TIPSA: Aviso legal](https://www.tip-sa.com/es/aviso-legal) – company name
+- [TIPSA: Aviso legal](https://www.tip-sa.com/es/tipsa-aviso-legal) – company name
 - [TIPSA: Contacto (Portugal)](https://www.tip-sa.com/pt/contacto) – same numbers for Portugal
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, `Cerrado`, each status's stage
 :::

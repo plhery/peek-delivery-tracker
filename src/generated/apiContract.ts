@@ -3902,7 +3902,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "UTC",
     "tracking": {
       "mode": "automatic",
-      "adapter": "estafeta"
+      "adapter": "estafeta",
+      "recognitionRank": 36,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -68229,6 +68231,47 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://www.justship.sg/tracking",
     "helpUrl": "https://www.justship.sg/contact-us"
+  },
+  "prd": {
+    "displayName": "Prime Express",
+    "aliases": [
+      "Prime",
+      "PRD",
+      "Prime Express Logistics",
+      "普瑞达国际",
+      "普瑞达国际物流",
+      "普瑞達國際",
+      "Puruida"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#10264a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "prd"
+    },
+    "trackingUrlTemplate": "https://www.primexpslogistics.com/",
+    "linkRules": [
+      {
+        "domains": [
+          "szprd.rtb56.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^PRD\\d{13}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://szprd.rtb56.com/track_query.aspx"
   }
 } as const;
 
@@ -70312,7 +70355,8 @@ export const CARRIER_IDS = [
   "warp",
   "atc-logistical",
   "correos-guatemala",
-  "just-ship-sg"
+  "just-ship-sg",
+  "prd"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

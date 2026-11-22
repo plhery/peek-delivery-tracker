@@ -34326,6 +34326,12 @@
     ]
   },
   {
+    "input": "240915A001R01",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "240915P11U",
     "carrier": "unknown",
     "confidence": "low",
@@ -87489,6 +87495,22 @@
     ]
   },
   {
+    "input": "CH220800969US",
+    "carrier": "usps",
+    "confidence": "high",
+    "candidates": [
+      "usps"
+    ]
+  },
+  {
+    "input": "CH259243263US",
+    "carrier": "usps",
+    "confidence": "high",
+    "candidates": [
+      "usps"
+    ]
+  },
+  {
     "input": "CH400397205DE",
     "carrier": "unknown",
     "confidence": "none",
@@ -109121,6 +109143,12 @@
     ]
   },
   {
+    "input": "R432490",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "R4864731P",
     "carrier": "unknown",
     "confidence": "low",
@@ -110783,6 +110811,14 @@
     ]
   },
   {
+    "input": "RN106781740JP",
+    "carrier": "japan-post",
+    "confidence": "high",
+    "candidates": [
+      "japan-post"
+    ]
+  },
+  {
     "input": "RN166688486IN",
     "carrier": "india-post",
     "confidence": "high",
@@ -111701,6 +111737,14 @@
     ]
   },
   {
+    "input": "RR658556014PL",
+    "carrier": "poczta-polska",
+    "confidence": "high",
+    "candidates": [
+      "poczta-polska"
+    ]
+  },
+  {
     "input": "RR690862966IL",
     "carrier": "intl-post",
     "confidence": "high",
@@ -112091,6 +112135,14 @@
     ]
   },
   {
+    "input": "RT631347091DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
+    ]
+  },
+  {
     "input": "RTA7000158609",
     "carrier": "unknown",
     "confidence": "none",
@@ -112165,6 +112217,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "RV253887486ES",
+    "carrier": "correos-spain",
+    "confidence": "high",
+    "candidates": [
+      "correos-spain"
+    ]
   },
   {
     "input": "RV293017307CN",

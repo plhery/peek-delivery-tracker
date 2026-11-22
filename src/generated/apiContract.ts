@@ -68155,6 +68155,80 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tracking.wearewarp.com/"
+  },
+  "atc-logistical": {
+    "displayName": "ATC Logistical Solutions",
+    "aliases": [
+      "ATC Logistical Solutions Pvt. Ltd.",
+      "ATCsure",
+      "ATCLS"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#46ADA2",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "atc-logistical"
+    },
+    "trackingUrlTemplate": "https://atcsure.com/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://atcsure.com/"
+  },
+  "correos-guatemala": {
+    "displayName": "Correos de Guatemala",
+    "aliases": [
+      "Correo de Guatemala",
+      "Dirección General de Correos y Telégrafos",
+      "Guatemala Post"
+    ],
+    "countries": [
+      "GT"
+    ],
+    "color": "#0f306d",
+    "selectable": true,
+    "timezone": "America/Guatemala",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "correos-guatemala"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "just-ship-sg": {
+    "displayName": "JustShip",
+    "aliases": [
+      "Just Ship",
+      "JustShip Singapore"
+    ],
+    "countries": [
+      "SG"
+    ],
+    "color": "#6211CB",
+    "selectable": true,
+    "timezone": "Asia/Singapore",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "just-ship-sg"
+    },
+    "trackingUrlTemplate": "https://www.justship.sg/tracking?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "justship.sg"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.justship.sg/tracking",
+    "helpUrl": "https://www.justship.sg/contact-us"
   }
 } as const;
 
@@ -70235,7 +70309,10 @@ export const CARRIER_IDS = [
   "leda-express",
   "qlgj",
   "coretrails",
-  "warp"
+  "warp",
+  "atc-logistical",
+  "correos-guatemala",
+  "just-ship-sg"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

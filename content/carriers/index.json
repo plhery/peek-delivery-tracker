@@ -150,7 +150,7 @@
   { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en", "ru", "zh", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "spx-br", "catalog": "spx-br", "name": "SPX Express Brazil", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en"] },
+  { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] },
   { "id": "pengyou", "catalog": "pengyou", "name": "Pengyou", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] },

@@ -2900,6 +2900,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "eushipments-sendungsverfolgung",
+      "title": "euShipments Sendungsverfolgung: Status und Zusteller",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-sendungsverfolgung",
@@ -4302,6 +4310,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "suivi-eushipments",
+      "title": "Suivi euShipments\u00a0: statuts et transporteur local",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "suivi-pengyou",
@@ -5672,6 +5688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "tracciamento-eushipments",
+      "title": "Tracciamento euShipments: stati e corriere locale",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "tracciamento-pengyou",
@@ -7018,6 +7042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "seguimiento-eushipments",
+      "title": "Seguimiento euShipments: estados y mensajería local",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-seguimiento",
@@ -8354,6 +8386,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SPX Express Brasil: encomendas Shopee e estados",
       "name": "SPX Express Brazil",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "seguimento-eushipments",
+      "title": "Seguimento euShipments: estados e estafeta local",
+      "name": "euShipments",
+      "color": "#0a8fcf"
     },
     {
       "id": "pengyou",
@@ -9742,6 +9782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SPX Express Brazylia: zamówienia Shopee i statusy",
       "name": "SPX Express Brazil",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "sledzenie-eushipments",
+      "title": "Śledzenie euShipments: statusy i lokalny kurier",
+      "name": "euShipments",
+      "color": "#0a8fcf"
     },
     {
       "id": "pengyou",

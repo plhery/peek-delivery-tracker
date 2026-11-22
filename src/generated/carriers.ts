@@ -2268,6 +2268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "parcelforce-worldwide-sendungsverfolgung",
+      "title": "Parcelforce Worldwide Sendungsverfolgung: Status & Zoll",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-sendungsverfolgung",
@@ -3516,6 +3524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi DPD UK\u00a0: numéros à 14 chiffres, statuts et contact",
       "name": "DPD UK",
       "color": "#dc0032"
+    },
+    {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "suivi-parcelforce-worldwide",
+      "title": "Suivi Parcelforce Worldwide\u00a0: statuts, douane et contact",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
     },
     {
       "id": "bpost",
@@ -4776,6 +4792,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "tracciamento-parcelforce-worldwide",
+      "title": "Tracciamento Parcelforce Worldwide: stati, dogana e aiuto",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-tracciamento",
@@ -5976,6 +6000,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de DPD UK: número de 14 dígitos y estados",
       "name": "DPD UK",
       "color": "#dc0032"
+    },
+    {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "seguimiento-parcelforce-worldwide",
+      "title": "Seguimiento Parcelforce Worldwide: estados y aduanas",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
     },
     {
       "id": "bpost",
@@ -7204,6 +7236,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "seguimento-parcelforce-worldwide",
+      "title": "Seguimento Parcelforce Worldwide: estados e alfândega",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-seguimento",
@@ -8414,6 +8454,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DPD UK: 14-cyfrowy numer, statusy i kontakt",
       "name": "DPD UK",
       "color": "#dc0032"
+    },
+    {
+      "id": "parcelforce",
+      "catalog": "parcelforce",
+      "slug": "sledzenie-parcelforce-worldwide",
+      "title": "Śledzenie Parcelforce Worldwide: statusy, cło i kontakt",
+      "name": "Parcelforce Worldwide",
+      "color": "#9d0f11"
     },
     {
       "id": "bpost",

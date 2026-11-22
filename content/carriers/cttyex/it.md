@@ -31,7 +31,7 @@ Il tracker è in cinese, ma le singole scansioni sono in inglese (dalla più rec
 | Riepilogo CTTYEX | Cosa significa per te | Peek mostra |
 | --- | --- | --- |
 | `运输途中` (`In Transit` in inglese) | In transito; può comparire anche quando esiste solo la registrazione dell'ordine: leggi le scansioni sotto. | «In transito» |
-| `查询不到` (`Not Found` in inglese) | Impossibile trovare: il tracker non conosce alcun pacco con questo codice e non elenca scansioni. | Non trovato |
+| `查询不到` (`Not Found` in inglese) | Impossibile trovare: il tracker non conosce alcun pacco con questo codice e non elenca scansioni. | «In attesa di CTTYEX» |
 
 Seguono anzitutto i passaggi nella Cina continentale, privi di località:
 
@@ -72,7 +72,7 @@ CTTYEX ritira il collo nella Cina continentale e lo spedisce per via aerea; dopo
 
 **Solo `Order information received`.** CTTYEX ha ricevuto i dati ma non ancora il collo, anche se il riepilogo segna `运输途中`. Se non cambia nulla per giorni, chiedi conferma al venditore.
 
-**Fermo dopo `Departure from the airport of origin domestic` o per quattro giorni.** Tra il decollo e l'atterraggio o la dogana nel tuo Paese non compaiono tappe intermedie; dopo quattro giorni in viaggio senza nuove scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» ([perché il tracciamento non si aggiorna](guide:tracking-not-updating), [tracciare pacchi dalla Cina](guide:tracking-from-china)).
+**Fermo dopo `Departure from the airport of origin domestic` o per quattro giorni.** Tra il decollo e l'atterraggio o la dogana nel tuo Paese non compaiono tappe intermedie; dopo quattro giorni in viaggio senza nuove scansioni, Peek mostra «Nessun aggiornamento da» seguito dalla data dell'ultima scansione ([perché il tracciamento non si aggiorna](guide:tracking-not-updating), [tracciare pacchi dalla Cina](guide:tracking-from-china)).
 
 **Fermo su `Import customs clearance`.** Il tracker non riporta importi né il nome del corriere locale, quindi non può confermare SMS o email che chiedano pagamenti per un pacco CTTYEX. Leggi prima [SMS truffa sulle consegne](guide:delivery-scam-texts) e consulta [pacchi fermi in dogana](guide:customs).
 
@@ -88,9 +88,9 @@ La [pagina 联系我们 (contatti) di CTTYEX](https://www.cttyvip888.com/assets/
 
 [Peek](/) riconosce CTTYEX all'istante da un numero `CTTY…CN` («Corriere rilevato»), usato solo da CTTYEX nel catalogo, oppure incollando un link `cttyvip888.com` con il codice dopo `nos=` (se selezioni CTTYEX a mano per un codice fuori da 8–40 lettere e cifre con almeno una cifra, avvisa che «non emette numeri come questo»).
 
-Peek legge stato, scansioni e Paese di destinazione dal tracker di CTTYEX: quando all'estero una riga si apre con la città (o città e Stato), ne fa il luogo della tappa rimuovendo il CAP, esclude duplicati, numeri di telefono e nome del firmatario e converte ogni orario dall'ora di Pechino (`UTC+8`) al fuso del tuo dispositivo («Orari nel tuo fuso orario: …»), allineando le date alla tua giornata. Lo stato segue la scansione riconosciuta più recente (e il riepilogo solo se nessuna ha una fase); non essendoci stima di consegna, peso né secondo corriere, Peek continua a seguire il collo su CTTYEX fino alla consegna.
+Peek legge stato, scansioni e Paese di destinazione dal tracker di CTTYEX: quando all'estero una riga si apre con la città (o città e Stato), ne fa il luogo della tappa rimuovendo il CAP, esclude duplicati e numeri di telefono e converte ogni orario dall'ora di Pechino (`UTC+8`) al fuso del tuo dispositivo («Orari nel tuo fuso orario: …»), allineando le date alla tua giornata. Lo stato segue la scansione riconosciuta più recente (e il riepilogo solo se nessuna ha una fase); non essendoci stima di consegna, peso né secondo corriere, Peek continua a seguire il collo su CTTYEX fino alla consegna.
 
-Peek controlla fino a ogni 10 minuti a pacco aperto o nel giorno di consegna con notifiche attive; altrimenti, e dopo 12 ore su «Etichetta creata» / «Preso in carico» o due giorni senza novità, ogni ora («Ogni scansione», «Passaggi importanti» o «Solo la consegna»). Peek non può contattare CTTYEX o il venditore per te.
+Peek controlla fino a ogni 10 minuti a pacco aperto o nel giorno di consegna con notifiche attive; altrimenti, e dopo 12 ore su «Etichetta creata» / «Preso in carico» o due giorni senza novità, ogni ora. Per le notifiche scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare CTTYEX o il venditore per te.
 
 ## Domande frequenti sul tracciamento CTTYEX
 

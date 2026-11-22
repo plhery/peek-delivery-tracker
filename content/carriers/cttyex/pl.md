@@ -31,7 +31,7 @@ Wyszukiwarka jest po chińsku, ale poszczególne skany wyświetlają się po ang
 | Podsumowanie CTTYEX | Co to oznacza dla Ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `运输途中` (ang. `In Transit`) | W drodze; potrafi widnieć już wtedy, gdy zapisano dopiero dane zamówienia — sprawdź szczegółowe skany niżej. | „W transporcie” |
-| `查询不到` (ang. `Not Found`) | Nie znaleziono: wyszukiwarka nie zna przesyłki o tym numerze i nie zwraca żadnych skanów. | Nie znaleziono |
+| `查询不到` (ang. `Not Found`) | Nie znaleziono: wyszukiwarka nie zna przesyłki o tym numerze i nie zwraca żadnych skanów. | „Oczekiwanie na przewoźnika CTTYEX” |
 
 Najpierw idą kroki w Chinach kontynentalnych, bez podanej miejscowości:
 
@@ -72,7 +72,7 @@ CTTYEX przyjmuje przesyłkę w Chinach kontynentalnych i wysyła ją samolotem; 
 
 **Tylko `Order information received`.** CTTYEX ma dane zamówienia, ale nie ma jeszcze samej paczki, nawet jeśli w nagłówku widnieje `运输途中`. Gdy przez kilka dni nic nie przybywa, poproś sprzedawcę o potwierdzenie nadania.
 
-**Cisza po `Departure from the airport of origin domestic` lub przez cztery dni.** Między wylotem a lądowaniem lub odprawą w Twoim kraju nie pojawiają się pośrednie wpisy; po czterech dniach w drodze bez nowego skanu Peek pokazuje „Brak aktualizacji od czterech dni” ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating), [śledzenie paczek z Chin](guide:tracking-from-china)).
+**Cisza po `Departure from the airport of origin domestic` lub przez cztery dni.** Między wylotem a lądowaniem lub odprawą w Twoim kraju nie pojawiają się pośrednie wpisy; po czterech dniach w drodze bez nowego skanu Peek pokazuje „Brak aktualizacji od” z datą ostatniego skanu ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating), [śledzenie paczek z Chin](guide:tracking-from-china)).
 
 **Zatrzymana na `Import customs clearance`.** Wyszukiwarka nie podaje kwot ani nazwy lokalnego doręczyciela, więc nie potwierdzi SMS-a ani e-maila z żądaniem dopłaty za paczkę CTTYEX. Najpierw przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts), a o opłatach sprawdź [paczka zatrzymana przez urząd celny](guide:customs).
 
@@ -88,9 +88,9 @@ Chińskojęzyczna [podstrona 联系我们 (kontakt) CTTYEX](https://www.cttyvip8
 
 [Peek](/) rozpoznaje CTTYEX od razu po samym numerze `CTTY…CN` („Wykryty przewoźnik”), nieużywanym przez żadnego innego przewoźnika w katalogu, albo po linku z `cttyvip888.com` zawierającym numer po `nos=` (przy ręcznym wyborze dla ciągu spoza 8–40 liter i cyfr zawierającego co najmniej jedną cyfrę informuje, że przewoźnik „nie wydaje takich numerów”).
 
-Peek pobiera z wyszukiwarki CTTYEX status, skany oraz kraj docelowy: gdy zagraniczny wiersz otwiera nazwa miasta (lub miasta i stanu), przenosi ją do pola miejsca bez kodu pocztowego, usuwa duplikaty, numery telefonów i nazwisko odbiorcy oraz przelicza każdą godzinę z czasu pekińskiego (`UTC+8`) na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”), dopasowując daty do Twojego dnia. O statusie decyduje najnowszy rozpoznany skan (podsumowanie tylko wtedy, gdy żaden nie ma przypisanego etapu); wobec braku prognozy dostawy, wagi i drugiego przewoźnika Peek śledzi paczkę pod numerem CTTY do samego doręczenia.
+Peek pobiera z wyszukiwarki CTTYEX status, skany oraz kraj docelowy: gdy zagraniczny wiersz otwiera nazwa miasta (lub miasta i stanu), przenosi ją do pola miejsca bez kodu pocztowego, usuwa duplikaty i numery telefonów oraz przelicza każdą godzinę z czasu pekińskiego (`UTC+8`) na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”), dopasowując daty do Twojego dnia. O statusie decyduje najnowszy rozpoznany skan (podsumowanie tylko wtedy, gdy żaden nie ma przypisanego etapu); wobec braku prognozy dostawy, wagi i drugiego przewoźnika Peek śledzi paczkę pod numerem CTTY do samego doręczenia.
 
-Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch spokojnych dniach — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z CTTYEX ani ze sprzedawcą.
+Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch spokojnych dniach — co godzinę. W powiadomieniach wybierasz „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z CTTYEX ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie CTTYEX
 

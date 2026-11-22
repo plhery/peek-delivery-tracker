@@ -31,7 +31,7 @@ O localizador está em chinês, mas cada leitura surge em inglês, da mais recen
 | Resumo CTTYEX | O que significa para ti | O Peek mostra |
 | --- | --- | --- |
 | `运输途中` (`In Transit` em inglês) | Em trânsito; pode aparecer quando ainda só existem os dados da encomenda: lê as leituras abaixo. | «Em trânsito» |
-| `查询不到` (`Not Found` em inglês) | Não encontrada: o localizador não conhece nenhuma encomenda com esse código nem lista leituras. | Não encontrada |
+| `查询不到` (`Not Found` em inglês) | Não encontrada: o localizador não conhece nenhuma encomenda com esse código nem lista leituras. | «À espera de CTTYEX» |
 
 Seguem-se primeiro os passos na China continental, sem indicação de localidade:
 
@@ -62,7 +62,7 @@ Depois do voo, as linhas vêm do agente da CTTYEX no teu país e da rede respons
 
 Nos EUA, as três linhas desde `Accepted at logistics carrier Regional Destination Facility` até `Leaving the sorting center` abrem com cidade, estado e código ZIP. Qualquer outra linha é mostrada tal como a CTTYEX a escreve.
 
-**Todas as horas são hora de Pequim.** O localizador imprime as horas sem fuso horário, mas cada uma está na hora de Pequim (`UTC+8`), **incluindo as leituras feitas no teu país**. Como em Pequim a data muda às `16:00 UTC`, uma leitura feita em Portugal continental após as `16:00` no inverno (ou `17:00` no verão) — ou no Brasil a partir do início da tarde — aparece já com a data do dia seguinte.
+**Todas as horas são hora de Pequim.** O localizador imprime as horas sem fuso horário, mas cada uma está na hora de Pequim (`UTC+8`), **incluindo as leituras feitas no teu país**. Como em Pequim a data muda às `16:00 UTC`, uma leitura feita em Portugal continental após as `16:00` no inverno (ou `17:00` no verão) — ou em Brasília a partir das `13:00` — aparece já com a data do dia seguinte.
 
 ## Quem entrega as encomendas da CTTYEX?
 
@@ -72,7 +72,7 @@ A CTTYEX recolhe a encomenda na China continental e envia-a de avião; após a a
 
 **Apenas `Order information received`.** A CTTYEX recebeu os dados mas ainda não tem o volume físico, mesmo que o resumo mostre `运输途中`. Se nada mudar durante dias, confirma o envio com o vendedor.
 
-**Sem novidades após `Departure from the airport of origin domestic` ou quatro dias parada.** Entre a descolagem e a aterragem ou alfândega no teu país não surgem passos novos; ao fim de quatro dias em viagem sem atualizações, o Peek mostra «Sem atualizações há quatro dias» ([porque é que o seguimento não atualiza](guide:tracking-not-updating), [seguir encomendas vindas da China](guide:tracking-from-china)).
+**Sem novidades após `Departure from the airport of origin domestic` ou quatro dias parada.** Entre a descolagem e a aterragem ou alfândega no teu país não surgem passos novos; ao fim de quatro dias em viagem sem atualizações, o Peek mostra «Sem atualizações desde» seguido da data da última leitura ([porque é que o seguimento não atualiza](guide:tracking-not-updating), [seguir encomendas vindas da China](guide:tracking-from-china)).
 
 **Retida em `Import customs clearance`.** O localizador não indica taxas nem empresa local, pelo que não confirma SMS ou e-mails a pedir pagamento por uma encomenda CTTYEX. Lê primeiro [mensagens falsas de entregas](guide:delivery-scam-texts) e consulta [encomendas retidas na alfândega](guide:customs).
 
@@ -88,9 +88,9 @@ A [página 联系我们 (contactos) da CTTYEX](https://www.cttyvip888.com/assets
 
 O [Peek](/) reconhece a CTTYEX logo pelo formato `CTTY…CN` («Transportadora detetada»), exclusivo da CTTYEX no catálogo, ou por uma ligação de `cttyvip888.com` com o código após `nos=` (se escolheres manualmente a CTTYEX para algo fora de 8 a 40 letras e algarismos com pelo menos um algarismo, indica que «não emite números como este»).
 
-O Peek lê o estado, as leituras e o país de destino no localizador da CTTYEX: quando no estrangeiro uma linha começa pela cidade (ou cidade e estado), transforma-a no local da etapa retirando o código postal, elimina repetidos, telefones e nome de quem assinou e converte cada hora da hora de Pequim (`UTC+8`) para o fuso do teu dispositivo («Horas no teu fuso horário: …»), alinhando as datas com o teu dia. O estado segue a leitura reconhecida mais recente (e o resumo apenas quando nenhuma tem etapa); como não há data prevista, peso nem segunda transportadora, o Peek acompanha sempre a encomenda na CTTYEX.
+O Peek lê o estado, as leituras e o país de destino no localizador da CTTYEX: quando no estrangeiro uma linha começa pela cidade (ou cidade e estado), transforma-a no local da etapa retirando o código postal, elimina repetidos e telefones e converte cada hora da hora de Pequim (`UTC+8`) para o fuso do teu dispositivo («Horas no teu fuso horário: …»), alinhando as datas com o teu dia. O estado segue a leitura reconhecida mais recente (e o resumo apenas quando nenhuma tem etapa); como não há data prevista, peso nem segunda transportadora, o Peek acompanha sempre a encomenda na CTTYEX.
 
-O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem novidades, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a CTTYEX nem o vendedor por ti.
+O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem novidades, de hora a hora. Nas notificações, escolhes «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a CTTYEX nem o vendedor por ti.
 
 ## Perguntas frequentes sobre o seguimento da CTTYEX
 

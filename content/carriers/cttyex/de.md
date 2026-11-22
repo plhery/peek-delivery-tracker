@@ -31,7 +31,7 @@ Die Oberfläche des Trackers ist chinesisch, die einzelnen Scans stehen jedoch a
 | CTTYEX-Kopfzeile | Was das für dich bedeutet | Peek zeigt |
 | --- | --- | --- |
 | `运输途中` (englisch `In Transit`) | Unterwegs; kann bereits stehen, solange nur Auftragsdaten vorliegen – lies daher die einzelnen Scans darunter. | „Unterwegs“ |
-| `查询不到` (englisch `Not Found`) | Nicht auffindbar: Der Tracker kennt kein Paket unter dieser Nummer und listet keine Scans. | Nicht gefunden |
+| `查询不到` (englisch `Not Found`) | Nicht auffindbar: Der Tracker kennt kein Paket unter dieser Nummer und listet keine Scans. | „Warten auf CTTYEX“ |
 
 Zuerst folgen CTTYEXs Schritte in Festlandchina, jeweils ohne Ortsangabe:
 
@@ -72,7 +72,7 @@ CTTYEX übernimmt das Paket in Festlandchina und fliegt es aus; nach der Landung
 
 **Nur `Order information received`.** CTTYEX hat bisher nur die Daten, auch wenn oben `运输途中` steht. Bleibt es tagelang dabei, frag beim Händler nach, ob das Paket übergeben wurde.
 
-**Ruhe nach `Departure from the airport of origin domestic` oder vier Tage Pause.** Zwischen Abflug und Landung bzw. Einfuhrzoll erscheint nichts Neues; nach vier Tagen ohne neuen Scan unterwegs meldet Peek „Seit vier Tagen keine Aktualisierung“ ([Warum sich das Tracking nicht aktualisiert](guide:tracking-not-updating), [Pakete aus China verfolgen](guide:tracking-from-china)).
+**Ruhe nach `Departure from the airport of origin domestic` oder vier Tage Pause.** Zwischen Abflug und Landung bzw. Einfuhrzoll erscheint nichts Neues; nach vier Tagen ohne neuen Scan unterwegs meldet Peek „Keine Aktualisierung seit“ mit dem Datum des letzten Scans ([Warum sich das Tracking nicht aktualisiert](guide:tracking-not-updating), [Pakete aus China verfolgen](guide:tracking-from-china)).
 
 **Hängt bei `Import customs clearance`.** Der Tracker nennt weder Gebühren noch den lokalen Zusteller und bestätigt daher keine Zahlungsaufforderung per SMS oder E-Mail. Lies zuerst [Gefälschte Paket-SMS erkennen](guide:delivery-scam-texts) sowie [Paket hängt beim Zoll](guide:customs).
 
@@ -88,9 +88,9 @@ CTTYEXs chinesischsprachige [Kontaktseite 联系我们](https://www.cttyvip888.c
 
 [Peek](/) erkennt CTTYEX sofort anhand einer `CTTY…CN`-Nummer („Erkannter Paketdienst“), die kein anderer Dienst im Katalog nutzt, oder über einen `cttyvip888.com`-Link mit `nos=` (bei manueller Wahl außerhalb von 8 bis 40 Buchstaben und Ziffern mit mindestens einer Ziffer meldet Peek, dass CTTYEX „vergibt keine Nummern wie diese“).
 
-Peek liest Status, Scans und Zielland aus CTTYEXs Tracker: Steht am Zeilenanfang im Ausland ein Ort (oder Ort und Bundesstaat), übernimmt Peek ihn als Scan-Ort ohne Postleitzahl, blendet Dubletten, Telefonnummern und Unterzeichnernamen aus und rechnet jede Uhrzeit von Pekinger Zeit (`UTC+8`) in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“), sodass das Datum zu deinem Tag passt. Maßgeblich für den Status ist der neueste erkannte Scan (die Kopfzeile nur, falls kein Scan erkannt wird); mangels Lieferprognose, Gewicht oder Zweitnummer verfolgt Peek das Paket durchgehend unter der CTTY-Nummer weiter.
+Peek liest Status, Scans und Zielland aus CTTYEXs Tracker: Steht am Zeilenanfang im Ausland ein Ort (oder Ort und Bundesstaat), übernimmt Peek ihn als Scan-Ort ohne Postleitzahl, blendet Dubletten und Telefonnummern aus und rechnet jede Uhrzeit von Pekinger Zeit (`UTC+8`) in deine Gerätezeitzone um („Uhrzeiten in deiner Zeitzone: …“), sodass das Datum zu deinem Tag passt. Maßgeblich für den Status ist der neueste erkannte Scan (die Kopfzeile nur, falls kein Scan erkannt wird); mangels Lieferprognose, Gewicht oder Zweitnummer verfolgt Peek das Paket durchgehend unter der CTTY-Nummer weiter.
 
-Peek prüft bis zu alle 10 Minuten bei geöffnetem Paket oder am Liefertag mit aktiven Mitteilungen; sonst sowie nach 12 Stunden auf „Etikett erstellt“ / „Beim Paketdienst eingegangen“ oder zwei ruhigen Tagen stündlich („Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“). CTTYEX oder den Verkäufer kontaktieren kann Peek nicht.
+Peek prüft bis zu alle 10 Minuten bei geöffnetem Paket oder am Liefertag mit aktiven Mitteilungen; sonst sowie nach 12 Stunden auf „Etikett erstellt“ / „Beim Paketdienst eingegangen“ oder zwei ruhigen Tagen stündlich. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. CTTYEX oder den Verkäufer kontaktieren kann Peek nicht.
 
 ## Häufige Fragen zur Sendungsverfolgung von CTTYEX
 

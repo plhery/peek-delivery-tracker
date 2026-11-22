@@ -31,7 +31,7 @@ El buscador está en chino, pero cada escaneo aparece en inglés (el más recien
 | Resumen CTTYEX | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
 | `运输途中` (`In Transit` en inglés) | En tránsito; puede figurar cuando aún solo constan los datos del pedido: fíjate en los escaneos inferiores. | «En tránsito» |
-| `查询不到` (`Not Found` en inglés) | No encontrado: el rastreador no conoce ningún envío con ese código ni lista escaneos. | No encontrado |
+| `查询不到` (`Not Found` en inglés) | No encontrado: el rastreador no conoce ningún envío con ese código ni lista escaneos. | «Esperando a CTTYEX» |
 
 Primero aparecen los pasos en China continental, sin localidad:
 
@@ -62,7 +62,7 @@ Tras el vuelo, las líneas proceden del agente de CTTYEX en tu país y de la red
 
 En Estados Unidos, las tres filas entre `Accepted at logistics carrier Regional Destination Facility` y `Leaving the sorting center` empiezan por ciudad, estado y código ZIP. Cualquier otra frase se muestra tal como la escribe CTTYEX.
 
-**Todas las horas son hora de Pekín.** El rastreador imprime las horas sin zona horaria, pero todas están en hora de Pekín (`UTC+8`), **incluidos los escaneos realizados en tu país**. Como en Pekín cambia el día a las `16:00 UTC`, un escaneo hecho en la España peninsular tras las `17:00` en invierno (o las `18:00` en verano) — o en América desde media mañana o mediodía — aparece en el buscador con fecha del día siguiente.
+**Todas las horas son hora de Pekín.** El rastreador imprime las horas sin zona horaria, pero todas están en hora de Pekín (`UTC+8`), **incluidos los escaneos realizados en tu país**. Como en Pekín cambia el día a las `16:00 UTC`, un escaneo hecho en la España peninsular tras las `17:00` en invierno (o las `18:00` en verano) — o en Ciudad de México desde las `10:00`, en Bogotá desde las `11:00` o en Buenos Aires desde las `13:00` — aparece en el buscador con fecha del día siguiente.
 
 ## Quién entrega los paquetes de CTTYEX
 
@@ -72,7 +72,7 @@ CTTYEX recoge el envío en China continental y lo despacha en avión; tras aterr
 
 **Solo `Order information received`.** CTTYEX recibió los datos pero aún no el paquete físico, aunque el resumen ponga `运输途中`. Si pasan varios días igual, pide confirmación al vendedor.
 
-**Silencio tras `Departure from the airport of origin domestic` o cuatro días parado.** Entre el despegue y el aterrizaje o la aduana en tu país no hay pasos intermedios; a los cuatro días en ruta sin novedades, Peek indica «Sin novedades desde hace cuatro días» ([por qué no se actualiza el seguimiento](guide:tracking-not-updating), [seguimiento de paquetes desde China](guide:tracking-from-china)).
+**Silencio tras `Departure from the airport of origin domestic` o cuatro días parado.** Entre el despegue y el aterrizaje o la aduana en tu país no hay pasos intermedios; a los cuatro días en ruta sin novedades, Peek indica «Sin novedades desde el» y la fecha del último escaneo ([por qué no se actualiza el seguimiento](guide:tracking-not-updating), [seguimiento de paquetes desde China](guide:tracking-from-china)).
 
 **En `Import customs clearance`.** El rastreador no indica tasas ni empresa local, por lo que no respalda SMS ni correos que pidan pagar por un envío de CTTYEX. Lee antes [mensajes falsos de entrega](guide:delivery-scam-texts) y consulta [paquetes retenidos en aduanas](guide:customs).
 
@@ -88,9 +88,9 @@ La [página 联系我们 (contacto) de CTTYEX](https://www.cttyvip888.com/assets
 
 [Peek](/) identifica a CTTYEX al instante por el formato `CTTY…CN` («Transportista detectado»), exclusivo de CTTYEX en su catálogo, o al pegar un enlace de `cttyvip888.com` con el número tras `nos=` (si eliges CTTYEX a mano para algo fuera de 8 a 40 letras y dígitos con al menos un dígito, indica que «no emite números como este»).
 
-Peek lee estado, escaneos y país de destino desde el rastreador de CTTYEX: cuando una fila en el extranjero empieza por ciudad (o ciudad y estado), la convierte en localidad del paso eliminando el código postal, omite duplicados, teléfonos y firmante, y convierte cada hora desde la hora de Pekín (`UTC+8`) a la zona de tu dispositivo («Horas en tu zona horaria: …») para cuadrar las fechas con tu día. El estado obedece al escaneo reconocido más reciente (y al resumen solo si ninguno tiene etapa); al no existir fecha estimada, peso ni segundo operador, Peek mantiene el seguimiento en CTTYEX hasta el final.
+Peek lee estado, escaneos y país de destino desde el rastreador de CTTYEX: cuando una fila en el extranjero empieza por ciudad (o ciudad y estado), la convierte en localidad del paso eliminando el código postal, omite duplicados y teléfonos, y convierte cada hora desde la hora de Pekín (`UTC+8`) a la zona de tu dispositivo («Horas en tu zona horaria: …») para cuadrar las fechas con tu día. El estado obedece al escaneo reconocido más reciente (y al resumen solo si ninguno tiene etapa); al no existir fecha estimada, peso ni segundo operador, Peek mantiene el seguimiento en CTTYEX hasta el final.
 
-Peek comprueba hasta cada 10 minutos con el paquete abierto o el día de entrega con notificaciones activas; el resto del tiempo, y tras 12 h en «Etiqueta creada» / «Admitido por el transportista» o dos días sin cambios, cada hora («Cada escaneo», «Pasos importantes» o «Solo la entrega»). Peek no puede contactar con CTTYEX ni con el vendedor por ti.
+Peek comprueba hasta cada 10 minutos con el paquete abierto o el día de entrega con notificaciones activas; el resto del tiempo, y tras 12 h en «Etiqueta creada» / «Admitido por el transportista» o dos días sin cambios, cada hora. Para las notificaciones, eliges «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con CTTYEX ni con el vendedor por ti.
 
 ## Preguntas frecuentes sobre el seguimiento de CTTYEX
 

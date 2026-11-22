@@ -8486,6 +8486,29 @@ describe('TrackingSyncService', () => {
     expect(unseenFor(parcel, now)).toBeNull();
   });
 
+  it.each([['2026-09-09 10:00:00', 'waiting'], ['2026-09-09 09:00:00', 'error']] as const)(
+    'files the check of a parcel whose progress is a stored row at %s, its carrier now holding a script back, as %s',
+    async (stored, outcome) => {
+      const client = { ...fakeClient(),
+        acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+      };
+      // An earlier release stored the script's first step as a scan; the carrier now holds every step back.
+      const adapter = { fetch: vi.fn(async (): Promise<never> => {
+        throw new NoHistoryError('GZYL', 'GZYL has no scans for the shipment yet', { reason: 'written_ahead',
+          writtenAhead: ['2026-09-09 10:00:00', '2026-09-12 08:00:00'] });
+      }), fetchUniversal: vi.fn(async (source: string) => { throw new NoHistoryError(source, `${source} has no usable shipment history`); }) };
+      const parcel = { id: 'scripted', carrier: 'gzyl', tracking_number: 'TEST12345678', current_stage: 'accepted',
+        created_at: '2026-09-09T12:00:00Z',
+        carrier_data: { routing: { version: 1, configured_carrier: 'gzyl', consecutive_failures: 1, probe_cursor: 0, discovery_cursor: 0 } },
+        [STORED_EVENT_IDENTITIES]: [{ provider_event_id: 'gzyl:accepted', occurred_at: '2026-09-09T02:00:00Z', stage: 'accepted',
+          description: 'Shipment accepted', time: stored }] };
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+      const waiting = outcome === 'waiting';
+      await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: waiting ? 1 : 0, errors: waiting ? 0 : 1 });
+      expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ sync_status: outcome });
+    });
+
   it('starts the two days again for another carrier', async () => {
     const now = new Date('2026-09-10T12:00:00Z');
     const client = { ...fakeClient(),

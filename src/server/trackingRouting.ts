@@ -545,16 +545,26 @@ export function hasRoutingProgress(result: CarrierResult): boolean {
  * must show. A row only a universal provider wrote is staged by its wording, which a scraper fix
  * can re-read as an earlier stage (ParcelsApp's relay of ePost Global's "in transit to the
  * processing center" is its label). Once no row reads past registration, neither does the parcel:
- * an answer without progress takes nothing back. A parcel loaded without its rows, whose saved
- * progress no row showed, or that is delivered, returned or held by an exception keeps its stage.
+ * an answer without progress takes nothing back. A row at a clock a carrier now holds back as
+ * written ahead of it (`routing.written_ahead`, by default the parcel's own) is no scan either: a
+ * release that did not yet hold a tracker's script back stored its first steps as scans. A parcel
+ * loaded without its rows, whose saved progress no row showed, or that is delivered, returned or
+ * held by an exception keeps its stage.
  */
-export function rereadStage(parcel: JsonObject): string {
+export function rereadStage(parcel: JsonObject,
+  routing: unknown = isRecord(parcel.carrier_data) ? parcel.carrier_data.routing : undefined): string {
   const saved = String(parcel.current_stage ?? 'pending');
   const stored = parcel[STORED_EVENT_IDENTITIES];
   if (!PROGRESS_STAGES.has(saved) || ['delivered', 'returned', 'exception'].includes(saved) || !Array.isArray(stored)) return saved;
   const rows = stored.filter(isRecord);
-  const read = rows.map((row) => typeof row.universal_provider === 'string'
-    ? inferStage(String(row.description ?? ''), String(row.stage ?? 'pending')) : String(row.stage ?? 'pending'));
+  const kept = isRecord(routing) && isRecord(routing.written_ahead) ? routing.written_ahead : null;
+  const held = kept && kept.number === parcel.tracking_number && isRecord(kept.carriers)
+    ? Object.values(kept.carriers).flatMap((clocks) => Array.isArray(clocks) ? clocks.filter((clock): clock is string => typeof clock === 'string') : [])
+    : [];
+  const clock = (value: unknown) => typeof value === 'string' ? value : undefined;
+  const read = rows.map((row) => held.length && atWrittenClock({ time: clock(row.time), local_time: clock(row.local_time) }, held) ? 'pending'
+    : typeof row.universal_provider === 'string'
+      ? inferStage(String(row.description ?? ''), String(row.stage ?? 'pending')) : String(row.stage ?? 'pending'));
   if (!rows.some((row) => PROGRESS_STAGES.has(String(row.stage ?? ''))) || read.some((stage) => PROGRESS_STAGES.has(stage))) return saved;
   return read.includes('registered') ? 'registered' : 'pending';
 }

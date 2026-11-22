@@ -2841,8 +2841,9 @@ export class TrackingSyncService {
         }
         // A label created is no progress either (routing's PROGRESS_STAGES): a parcel that only
         // ever showed one, such as a reused number's earlier label that has since dropped out,
-        // waits like a pending one while every source answers without data.
-        const hasProgress = !['pending', 'registered'].includes(previousStage);
+        // waits like a pending one while every source answers without data. So does one whose progress only rows read
+        // apart since showed (`rereadStage`), such as a script's first steps its carrier now holds back as written ahead.
+        const hasProgress = !['pending', 'registered'].includes(rereadStage(parcel, error instanceof RoutingDeferred ? error.routing : undefined));
         // The parcel's own carrier does not know it yet: fallback providers failing on the
         // same unannounced number is not an outage, and the routing state keeps their cooldowns.
         // Without a carrier to ask, every provider answering without history means the same.

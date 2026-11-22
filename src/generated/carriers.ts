@@ -2964,6 +2964,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "roadie-sendungsverfolgung",
+      "title": "Roadie Sendungsverfolgung: 1R-Nummern, Status & Fotos",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "ecms-express-sendungsverfolgung",
@@ -4214,6 +4222,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "suivi-roadie",
+      "title": "Suivi Roadie\u00a0: numéros 1R, statuts et photos de livraison",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "suivi-ecms-express",
@@ -5416,6 +5432,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "tracciamento-roadie",
+      "title": "Tracciamento Roadie: codici 1R, stati e foto di consegna",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "tracciamento-ecms-express",
@@ -6610,6 +6634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "seguimiento-roadie",
+      "title": "Seguimiento Roadie: números 1R, estados y foto de entrega",
+      "name": "Roadie",
+      "color": "#76cccd"
+    },
+    {
       "id": "ecms-express",
       "catalog": "ecms-express",
       "slug": "seguimiento-ecms-express",
@@ -7778,6 +7810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento YWE (YanwenExpress): número, estados e ajuda",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "seguimento-roadie",
+      "title": "Seguimento Roadie: números 1R, estados e fotos de entrega",
+      "name": "Roadie",
+      "color": "#76cccd"
     },
     {
       "id": "ecms-express",
@@ -9006,6 +9046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YWE (YanwenExpress): numer, statusy i pomoc",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "sledzenie-roadie",
+      "title": "Śledzenie Roadie: numery 1R, statusy i zdjęcia z doręczenia",
+      "name": "Roadie",
+      "color": "#76cccd"
     },
     {
       "id": "ecms-express",

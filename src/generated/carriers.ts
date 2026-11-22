@@ -2572,6 +2572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "xdp-sendungsverfolgung",
+      "title": "XDP Sendungsverfolgung: Sendungsnummer, Status & Kontakt",
+      "name": "XDP",
+      "color": "#53b6ed"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-sendungsverfolgung",
@@ -3828,6 +3836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi MaltaPost\u00a0: numéros, statuts et retrait",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "suivi-xdp",
+      "title": "Suivi XDP\u00a0: numéros d’envoi, statuts et livraison",
+      "name": "XDP",
+      "color": "#53b6ed"
     },
     {
       "id": "ups",
@@ -5088,6 +5104,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "tracciamento-xdp",
+      "title": "Tracciamento XDP: codici di spedizione, stati e consegna",
+      "name": "XDP",
+      "color": "#53b6ed"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
@@ -6322,6 +6346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d43b2c"
     },
     {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "seguimiento-xdp",
+      "title": "Seguimiento XDP: números de envío, estados y entrega",
+      "name": "XDP",
+      "color": "#53b6ed"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-seguimiento",
@@ -7546,6 +7578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio MaltaPost: números, estados e levantamento",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "seguimento-xdp",
+      "title": "Seguimento XDP: números de expedição, estados e entrega",
+      "name": "XDP",
+      "color": "#53b6ed"
     },
     {
       "id": "ups",
@@ -8798,6 +8838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie MaltaPost: numery, statusy i odbiór",
       "name": "MaltaPost",
       "color": "#d43b2c"
+    },
+    {
+      "id": "xdp",
+      "catalog": "xdp",
+      "slug": "sledzenie-xdp",
+      "title": "Śledzenie XDP: numery przesyłek, statusy i doręczenie",
+      "name": "XDP",
+      "color": "#53b6ed"
     },
     {
       "id": "ups",

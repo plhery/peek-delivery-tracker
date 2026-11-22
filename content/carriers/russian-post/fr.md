@@ -24,7 +24,7 @@ Les espaces et les minuscules ne gênent pas quand tu colles un numéro dans Pee
 
 ## Statuts de suivi Russian Post : ce qu'ils signifient
 
-Russian Post rédige ses étapes en russe. Peek les lit telles qu'elles figurent dans le tableau ci-dessous sur le suivi de Qwintry, un réexpéditeur qui confie une partie de ses colis à Russian Post : pour un colis ajouté avec son numéro Qwintry, ou ajouté avec son numéro RU et rattaché à Qwintry (voir « Colis venant de Qwintry » plus bas). Sur ce suivi, chaque étape Russian Post indique une opération, comme `обработка` (traitement), suivie d'un détail et du bureau de poste à la fin. S'il n'y a pas de détail, c'est l'opération qui fait office d'étape. Dans l'ordre habituel d'un trajet :
+Russian Post rédige ses étapes en russe. Peek les lit telles qu'elles figurent dans le tableau ci-dessous sur le suivi de Qwintry, un réexpéditeur qui confie une partie de ses colis à Russian Post : pour un colis ajouté avec son numéro Qwintry, ou ajouté avec son numéro RU et rattaché à Qwintry (voir « Colis venant de Qwintry » plus bas). Sur ce suivi, chaque étape Russian Post indique une opération, comme `обработка` (traitement), suivie d'un détail et du bureau de poste à la fin. S'il n'y a pas de détail, c'est l'opération qui fait office d'étape. À peu près dans l'ordre où un colis les reçoit :
 
 | Ce qu'affiche Russian Post | Ce que ça veut dire pour toi | Ce qu'affiche Peek |
 | --- | --- | --- |
@@ -92,13 +92,13 @@ Peek ne propose pas de lien direct vers le suivi de Russian Post. Si un service 
 
 **La poste de ton pays.** Pour un numéro RU classé sous Russian Post, le suivi de Russian Post indique le pays de destination, et Peek interroge aussi la poste de ce pays avec le numéro RU s'il lit directement son suivi, comme pour [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post) et Australia Post. Pour un colis affiché comme « Unknown postal carrier », il suffit qu'un service de suivi nomme la poste chargée de la livraison avec son numéro, ou le pays de destination pour un numéro RU : Peek interroge cette poste de la même manière. Dès qu'elle publie un scan au moins aussi récent que le dernier connu, Peek y poursuit le suivi.
 
-Quand tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie le suivi de Russian Post jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes à partir de 6 h (heure locale) le jour où le colis passe en livraison — tant que ce suivi répond ; via les services de suivi, c'est jusqu'à toutes les 15 minutes. Le reste du temps, ainsi qu'après deux jours sans nouvelle (12 heures tant que le colis reste en « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Les notifications sont réglables sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut pas contacter Russian Post ni l'expéditeur à ta place.
+Quand tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie le suivi de Russian Post jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes à partir de 6 h (heure locale) le jour où le colis passe en livraison — tant que ce suivi répond ; via les services de suivi, c'est toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour où le colis est en livraison. Le reste du temps, ainsi qu'après deux jours sans nouvelle (12 heures tant que le colis reste en « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Les notifications sont réglables sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut pas contacter Russian Post ni l'expéditeur à ta place.
 
 ## Questions sur le suivi Russian Post
 
 ### Que veut dire Почта России ?
 
-C'est le nom russe de Russian Post, souvent transcrit Pochta Rossii. Son site officiel est pochta.ru.
+C'est le nom russe de Russian Post, aussi transcrit Pochta Rossii. Son site officiel est pochta.ru.
 
 ### À quoi ressemble un numéro de suivi Russian Post ?
 
@@ -106,7 +106,7 @@ Un numéro international compte deux lettres, neuf chiffres et `RU`, comme `RR48
 
 ### Pourquoi les étapes dans Peek ne sont-elles pas identiques à pochta.ru ?
 
-Peek interroge le suivi de Russian Post en anglais, et affiche donc ses libellés anglais pour la plupart des étapes, plutôt que le texte russe. Quand ce suivi ne répond pas à Peek, un service de suivi prend le relais avec ses propres libellés et peut avoir du retard. Peek n'affiche les libellés russes du tableau ci-dessus que pour les colis suivis via le suivi de Qwintry.
+Peek interroge le suivi de Russian Post en anglais, et affiche donc ses libellés anglais pour la plupart des étapes, plutôt que le texte russe. Quand ce suivi ne répond pas à Peek, un service de suivi prend le relais avec ses propres libellés et peut avoir du retard. Peek affiche les libellés russes du tableau ci-dessus pour les colis suivis via le suivi de Qwintry.
 
 ### Peek peut-il suivre un colis envoyé vers la Russie depuis un autre pays ?
 

@@ -92,13 +92,13 @@ Peek bietet keinen direkten Link zum Tracker von Russian Post. Ist ein Tracking-
 
 **Die Post in deinem Land.** Bei einer unter Russian Post geführten `RU`-Nummer nennt der Russian-Post-Tracker das Zielland, und Peek fragt mit derselben Nummer auch die Post dieses Landes an, sofern es deren Tracking direkt liest – etwa [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, [Canada Post](carrier:canada-post) und Australia Post. Bei einem Paket unter „Unknown postal carrier“ reicht es, wenn ein Tracking-Dienst die zustellende Post samt Nummer – oder bei einer `RU`-Nummer das Zielland – nennt: Peek fragt diese Post genauso an und wechselt dorthin, sobald sie einen mindestens ebenso aktuellen Scan zeigt.
 
-Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, prüft Peek den Tracker von Russian Post bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag der Zustellung bis zu alle 2 Minuten –, solange dieser Tracker antwortet; über Tracking-Dienste prüft Peek bis zu alle 15 Minuten. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Peek kann weder Russian Post noch den Absender für dich kontaktieren.
+Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, prüft Peek den Tracker von Russian Post bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag der Zustellung bis zu alle 2 Minuten –, solange dieser Tracker antwortet; über Tracking-Dienste prüft Peek stündlich, nach einem Tag ohne neuen Scan alle 3 Stunden und am Tag der Zustellung bis zu alle 15 Minuten. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Peek kann weder Russian Post noch den Absender für dich kontaktieren.
 
 ## Fragen zur Sendungsverfolgung von Russian Post
 
 ### Was bedeutet Почта России auf Deutsch?
 
-Russische Post, international meist Russian Post oder in lateinischer Schrift Pochta Rossii. Die Website lautet pochta.ru.
+Russische Post, international Russian Post oder in lateinischer Schrift Pochta Rossii. Die Website lautet pochta.ru.
 
 ### Wie sieht eine Sendungsnummer von Russian Post aus?
 

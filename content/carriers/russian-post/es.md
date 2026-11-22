@@ -24,7 +24,7 @@ Los espacios y las minúsculas no importan al pegar un número en Peek. Si no en
 
 ## Estados del seguimiento de Russian Post explicados
 
-Russian Post escribe sus pasos en ruso. Peek los lee tal como aparecen en la tabla de abajo en el seguimiento de Qwintry, un reexpedidor que entrega parte de sus paquetes a Russian Post: para un paquete añadido con su número de Qwintry, o añadido con su número RU y asignado a Qwintry (mira «Paquetes de Qwintry» más abajo). Allí, cada paso de Russian Post tiene una operación, como `обработка` (procesamiento), una línea de detalle y la oficina postal al final. Si no hay línea de detalle, la propia operación figura como paso. Más o menos en el orden habitual:
+Russian Post escribe sus pasos en ruso. Peek los lee tal como aparecen en la tabla de abajo en el seguimiento de Qwintry, un reexpedidor que entrega parte de sus paquetes a Russian Post: para un paquete añadido con su número de Qwintry, o añadido con su número RU y asignado a Qwintry (mira «Paquetes de Qwintry» más abajo). Allí, cada paso de Russian Post tiene una operación, como `обработка` (procesamiento), una línea de detalle y la oficina postal al final. Si no hay línea de detalle, la propia operación figura como paso. Más o menos en el orden en que los recibe un paquete:
 
 | Russian Post indica | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
@@ -92,7 +92,7 @@ Peek no enlaza directamente al seguimiento de Russian Post. Si respondió un ser
 
 **El correo de tu país.** En un número RU asignado a Russian Post, el seguimiento de Russian Post indica el país de destino y Peek consulta también al correo de ese país con el número RU si lee directamente su seguimiento, como ocurre con [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, Canada Post y Australia Post. En un paquete mostrado como «Unknown postal carrier», basta con que un servicio de seguimiento indique el correo que lo entrega con su número, o el país de destino si es un número RU: Peek consulta a ese correo del mismo modo y continúa allí el seguimiento en cuanto muestre un escaneo al menos tan reciente como el último registrado.
 
-Mientras tienes el paquete abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek consulta el seguimiento de Russian Post hasta cada 10 minutos —y hasta cada 2 minutos a partir de las 6:00 (hora local) el día en que sale a reparto— mientras responda su propio seguimiento; a través de servicios de seguimiento, lo hace hasta cada 15 minutos. El resto del tiempo, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta una vez por hora. Puedes recibir alertas de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con Russian Post ni con el remitente por ti.
+Mientras tienes el paquete abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek consulta el seguimiento de Russian Post hasta cada 10 minutos —y hasta cada 2 minutos a partir de las 6:00 (hora local) el día en que sale a reparto— mientras responda su propio seguimiento; a través de servicios de seguimiento, lo hace cada hora, cada 3 horas tras un día sin escaneos nuevos y hasta cada 15 minutos el día en que sale a reparto. El resto del tiempo, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta una vez por hora. Puedes recibir alertas de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con Russian Post ni con el remitente por ti.
 
 ## Preguntas sobre el seguimiento de Russian Post
 
@@ -106,7 +106,7 @@ Uno internacional tiene dos letras, nueve cifras y `RU`, como `RR482910576RU`. P
 
 ### ¿Por qué los pasos en Peek no coinciden con pochta.ru?
 
-Peek consulta el seguimiento de Russian Post en inglés, por lo que muestra los textos en inglés de Russian Post en lugar de los rusos. Cuando ese seguimiento no responde, entra un servicio de seguimiento con sus propios textos, que puede ir retrasado. Peek muestra los pasos en ruso de la tabla superior en paquetes seguidos mediante Qwintry.
+Peek consulta el seguimiento de Russian Post en inglés, por lo que en la mayoría de los pasos muestra los textos en inglés de Russian Post en lugar de los rusos. Cuando ese seguimiento no responde, entra un servicio de seguimiento con sus propios textos, que puede ir retrasado. Peek muestra los pasos en ruso de la tabla superior en paquetes seguidos mediante Qwintry.
 
 ### ¿Puede Peek seguir un paquete enviado a Rusia desde otro país?
 

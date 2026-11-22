@@ -92,7 +92,7 @@ Peek non ha un link diretto al tracciamento di Russian Post. Se ha risposto un s
 
 **Le poste del tuo paese.** Per un codice RU associato a Russian Post, il tracciamento di Russian Post indica il paese di destinazione e Peek interroga con lo stesso codice RU anche le poste di quel paese se ne legge direttamente il tracciamento, come per [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, Canada Post e Australia Post. Per un pacco mostrato come «Unknown postal carrier», basta che un servizio di tracciamento indichi le poste incaricate con il loro numero, oppure il paese di destinazione per un codice RU: Peek interroga allo stesso modo quel servizio postale e prosegue lì appena mostra una scansione almeno recente quanto l'ultima nota.
 
-Finché tieni il pacco aperto sullo schermo, oppure nel giorno della consegna con le notifiche attive, Peek controlla il tracciamento di Russian Post fino a ogni 10 minuti — e fino a ogni 2 minuti dalle 6:00 ora locale nel giorno in cui passa in consegna — finché quel tracciamento risponde; tramite i servizi di tracciamento controlla fino a ogni 15 minuti. Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), controlla una volta all'ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Russian Post né il mittente al posto tuo.
+Finché tieni il pacco aperto sullo schermo, oppure nel giorno della consegna con le notifiche attive, Peek controlla il tracciamento di Russian Post fino a ogni 10 minuti — e fino a ogni 2 minuti dalle 6:00 ora locale nel giorno in cui passa in consegna — finché quel tracciamento risponde; tramite i servizi di tracciamento controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e fino a ogni 15 minuti nel giorno in cui passa in consegna. Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), controlla una volta all'ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Russian Post né il mittente al posto tuo.
 
 ## Domande sul tracciamento Russian Post
 
@@ -106,7 +106,7 @@ Un codice internazionale ha due lettere, nove cifre e `RU`, come `RR482910576RU`
 
 ### Perché i passaggi su Peek non corrispondono a pochta.ru?
 
-Peek legge il tracciamento di Russian Post in inglese, quindi mostra i testi inglesi di Russian Post invece di quelli russi. Quando quel tracciamento non risponde a Peek, subentra un servizio di tracciamento con parole proprie e possibile ritardo. Peek mostra i testi russi della tabella sopra per i pacchi seguiti tramite il tracciamento di Qwintry.
+Peek legge il tracciamento di Russian Post in inglese, quindi per la maggior parte dei passaggi mostra i testi inglesi di Russian Post invece di quelli russi. Quando quel tracciamento non risponde a Peek, subentra un servizio di tracciamento con parole proprie e possibile ritardo. Peek mostra i testi russi della tabella sopra per i pacchi seguiti tramite il tracciamento di Qwintry.
 
 ### Peek può tracciare un pacco spedito in Russia da un altro paese?
 

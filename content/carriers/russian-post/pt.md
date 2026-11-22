@@ -92,7 +92,7 @@ O Peek não tem ligação direta para o seguimento da Russian Post. Se um servi�
 
 **O correio do teu país.** Num número RU associado à Russian Post, o seguimento da Russian Post indica o país de destino e o Peek pergunta também ao correio desse país com o número RU, se ler diretamente o seu seguimento, como faz com a [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), An Post, Canada Post e Australia Post. Numa encomenda mostrada como «Unknown postal carrier», basta que um serviço de seguimento indique o correio de entrega com o respetivo número, ou o país de destino num número RU: o Peek consulta esse correio da mesma forma e passa a segui-la lá assim que mostrar um registo pelo menos tão recente como o último conhecido.
 
-Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica o seguimento da Russian Post até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que sai para distribuição — enquanto o próprio seguimento da Russian Post responder; através de serviços de seguimento, até de 15 em 15 minutos. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Russian Post nem o remetente por ti.
+Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica o seguimento da Russian Post até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que sai para distribuição — enquanto o próprio seguimento da Russian Post responder; através de serviços de seguimento, de hora a hora, de 3 em 3 horas após um dia sem novos registos e até de 15 em 15 minutos no dia em que sai para distribuição. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Russian Post nem o remetente por ti.
 
 ## Perguntas sobre o seguimento Russian Post
 
@@ -106,7 +106,7 @@ Um número internacional tem duas letras, nove algarismos e `RU`, como `RR482910
 
 ### Porque é que os passos no Peek não coincidem com pochta.ru?
 
-O Peek consulta o seguimento da Russian Post em inglês, pelo que mostra os textos ingleses da Russian Post em vez dos russos. Quando esse seguimento não responde ao Peek, entra um serviço de seguimento com os seus próprios textos e possível atraso. O Peek só mostra os passos em russo da tabela acima nas encomendas seguidas através da Qwintry.
+O Peek consulta o seguimento da Russian Post em inglês, pelo que na maioria dos passos mostra os textos ingleses da Russian Post em vez dos russos. Quando esse seguimento não responde ao Peek, entra um serviço de seguimento com os seus próprios textos e possível atraso. O Peek mostra os passos em russo da tabela acima nas encomendas seguidas através da Qwintry.
 
 ### O Peek consegue seguir uma encomenda enviada para a Rússia de outro país?
 

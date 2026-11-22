@@ -67,7 +67,7 @@
   { "id": "box-now", "catalog": "box-now", "name": "BOX NOW", "languages": ["en", "el", "bg", "hr", "sl"] },
   { "id": "dhl-ecommerce-nl", "catalog": "dhl-ecommerce-nl", "name": "DHL eCommerce Netherlands", "languages": ["en", "fr", "nl", "de", "es", "it", "pt", "pl"] },
   { "id": "heppner", "catalog": "heppner", "name": "Heppner", "languages": ["en", "fr", "de", "nl", "es", "it", "pt", "pl"] },
-  { "id": "c-chez-vous", "catalog": "c-chez-vous", "name": "C chez vous", "languages": ["en", "fr"] },
+  { "id": "c-chez-vous", "catalog": "c-chez-vous", "name": "C chez vous", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "geodis", "catalog": "geodis", "name": "GEODIS", "languages": ["en", "fr", "de", "es", "it", "pl", "pt"] },
   { "id": "delivengo", "catalog": "delivengo", "name": "Delivengo", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ecoscooting", "catalog": "ecoscooting", "name": "Ecoscooting", "languages": ["en", "es", "pt", "fr", "it", "de", "pl"] },

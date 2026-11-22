@@ -2404,6 +2404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "c-chez-vous-sendungsverfolgung",
+      "title": "C Chez Vous Sendungsverfolgung: Nummer, Status & Kontakt",
+      "name": "C chez vous",
+      "color": "#e50046"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-sendungsverfolgung",
@@ -4768,6 +4776,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "tracciamento-c-chez-vous",
+      "title": "Tracciamento C Chez Vous: numero d’ordine, stati e contatti",
+      "name": "C chez vous",
+      "color": "#e50046"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-tracciamento",
@@ -5914,6 +5930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "seguimiento-c-chez-vous",
+      "title": "Seguimiento C Chez Vous: número, estados y contacto",
+      "name": "C chez vous",
+      "color": "#e50046"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-seguimiento",
@@ -7050,6 +7074,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Heppner: número, código postal e entregas",
       "name": "Heppner",
       "color": "#005baa"
+    },
+    {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "seguimento-c-chez-vous",
+      "title": "Seguimento C Chez Vous: número, estados e contacto",
+      "name": "C chez vous",
+      "color": "#e50046"
     },
     {
       "id": "geodis",
@@ -8206,6 +8238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Heppner: numer, kod pocztowy i terminy dostawy",
       "name": "Heppner",
       "color": "#005baa"
+    },
+    {
+      "id": "c-chez-vous",
+      "catalog": "c-chez-vous",
+      "slug": "sledzenie-c-chez-vous",
+      "title": "Śledzenie C Chez Vous: numer zamówienia, statusy i kontakt",
+      "name": "C chez vous",
+      "color": "#e50046"
     },
     {
       "id": "geodis",

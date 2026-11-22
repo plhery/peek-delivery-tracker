@@ -10,7 +10,7 @@ Nova Poshta – auf der englischen Website „Nova Post“ genannt – ist ein u
 
 ## Nova-Poshta-Sendungsnummer: die EW-Nummer
 
-Nova Poshta bezeichnet die Sendungsnummer als Express Waybill, kurz EW (ЕН auf Ukrainisch). Die SMS oder Push-Nachricht bei Ankunft nennt die Filialnummer und die EW.
+Nova Poshta bezeichnet die Sendungsnummer als Express Waybill, kurz EW (ЕН oder ТТН auf Ukrainisch). Die SMS oder Push-Nachricht bei Ankunft nennt die Filialnummer und die EW.
 
 Nova Poshta veröffentlicht weder feste Länge noch Format. Die Nummern im Katalog von Peek sehen so aus:
 
@@ -80,7 +80,7 @@ Auf den Websites von Nova Poshta und Nova Post Polen genannte Kontakte:
 - **E-Mail:** support_ua@novaposhta.ua sowie ein Telegram-Bot von [novaposhta.ua](https://novaposhta.ua/).
 - **Polen:** +48 182 111 609, täglich 8:00 bis 20:00 Uhr polnischer Zeit, oder support@novapost.pl.
 
-> Nova Poshta warnt vor gefälschten E-Mails, die angeblich offene Forderungen verlangen; das Unternehmen verschickt keine Nachrichten zu „Safe purchase“ und keine Links zu Formularen, die Kartendaten abfragen.
+> Nova Poshta warnt vor gefälschten E-Mails, die angeblich offene Forderungen verlangen; das Unternehmen verschickt keine Nachrichten zu „Reliable Purchase“ und keine Links zu Formularen, die Kartendaten abfragen.
 
 ## Nova-Poshta-Pakete mit Peek verfolgen
 

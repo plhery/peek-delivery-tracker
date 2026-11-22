@@ -14,9 +14,9 @@ An international item from Japan has 13 characters: two letters, nine digits and
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `EN000000005JP` | An EMS, International Air Packet, international parcel or registered letter sent from Japan. |
-| `000000000000` | 12 digits: an item sent within Japan, such as a Yu-Pack parcel. |
-| `00000000000` | 11 digits: also domestic, the length Japan Post's tracker shows for mail and parcels. |
+| `EN482917367JP` | An EMS, International Air Packet, international parcel or registered letter sent from Japan. |
+| `482917364823` | 12 digits: an item sent within Japan, such as a Yu-Pack parcel. |
+| `48291736485` | 11 digits: also domestic, the length Japan Post's tracker shows for mail and parcels. |
 
 Japan Post's tracker takes only this shape for international mail, not numbers such as `CNG` or `LP` plus 14 digits. A barcode starting with U on a small packet or its customs form (CN22) isn't a tracking number either: that item goes without tracking. A number ending in other letters, such as `US`, is from another country's post. No number? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -74,7 +74,7 @@ After `Dispatch from outward office of exchange`, your country's post takes over
 
 ## Japan Post customer service and contact number
 
-Japan Post's lines, as read on 31 October 2026. They can't be called from abroad:
+Japan Post's lines. They can't be called from abroad:
 
 - **Customer Service Center:** 0120-5931-55 (free), or 0570-046-666 from a mobile (charged).
 - **In English:** 0570-046-111 (charged), also for redelivery.
@@ -86,13 +86,13 @@ From outside Japan, ask the sender or the shop, who can file a search at the pos
 
 [Peek](/) recognises two letters, nine digits and `JP` as Japan Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check your shipping message, or choose "Track it as typed". Links to Japan Post's tracker work too. A number starting with U isn't recognised as Japan Post's, and Peek doesn't look it up there: Japan Post doesn't track U numbers.
 
-A 12-digit domestic number isn't Japan Post's by shape alone. Paste it all the same: Peek follows more than 4,500 carriers. It asks those that use the shape, Japan Post first when you're in Japan, and shows "Japan Post has this parcel." when Japan Post knows it. When you paste an 11-digit number, Peek doesn't ask Japan Post: pick it with "Change". Filed under Japan Post, a parcel shows "Waiting for Japan Post" until its first scan.
+A 12-digit domestic number isn't Japan Post's by shape alone. Paste it all the same: Peek follows more than 4,500 carriers. It asks those that use the shape, Yamato and Japan Post first when you're in Japan, and shows "Japan Post has this parcel." when Japan Post knows it. When you paste an 11-digit number, Peek doesn't ask Japan Post: pick it with "Change". Filed under Japan Post, a parcel shows "Waiting for Japan Post" until its first scan, or "Check the tracking number" if Japan Post still doesn't know the number after two days.
 
 Peek shows each scan in Japan Post's English wording, with the office and place, and files the wordings in the table above under its own stages, such as "In transit" or "At customs". It leaves out Japan Post's Details column, which can give a reason such as an unknown address. Peek reads each scan on the local clock of the place it names, or of the scans around it. For a domestic item with a delivery day the sender chose, Peek shows that day and time slot as the expected delivery until it's delivered or the day has passed.
 
-From many countries, Peek also asks your national post with the same `JP` number: USPS from the US, [Royal Mail](carrier:royal-mail) from the UK (Parcelforce, which Japan Post names for EMS, for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France and every other EU country's post. It switches to that post once it has fresh scans and keeps Japan Post's history. From Korea, China, Hong Kong or Singapore it asks no other post. The other way round, when another post's tracking names Japan as the destination, or names none and you track from Japan, Peek asks Japan Post with that post's number, unless it starts with U.
+From many countries, Peek also asks your national post with the same `JP` number: USPS from the US, [Royal Mail](carrier:royal-mail) from the UK (Parcelforce, which Japan Post names for EMS, for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France and every other EU country's post except the Netherlands'. It switches to that post once it has fresh scans and keeps Japan Post's history. From Korea, China, Hong Kong or Singapore it asks no other post. The other way round, when another post's tracking names Japan as the destination, or names none and you track from Japan, Peek asks Japan Post with that post's number, unless it starts with U.
 
-Peek checks up to every 10 minutes, up to every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery (for a time slot the sender chose, from half an hour before it opens), while Japan Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes); through tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks Japan Post up to every 10 minutes, and up to every 2 minutes from 6 a.m. on the last scan's clock (Japan time in Japan; for a time slot the sender chose, from half an hour before it opens) on the day the parcel goes out for delivery, while Japan Post's own tracker answers; once your post takes over, Peek follows that post's own pace. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Through tracking services, it's hourly, every 3 hours after a quiet day and up to every 15 minutes on the delivery day under the same condition. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
 
 ## Questions about Japan Post tracking
 

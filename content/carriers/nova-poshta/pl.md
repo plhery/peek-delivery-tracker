@@ -20,15 +20,15 @@ Nova Post nie publikuje długości ani formatu numeru. Jej polska strona śledze
 
 | Numer | Co to jest |
 | --- | --- |
-| `20400000000000` | 14 cyfr zaczynających się od 204, 206, 207, 208, 590 albo 595 |
-| `51000000000000` | 14 cyfr zaczynających się od 21 albo 51 |
-| `SHPL0000000000` | numer międzynarodowy Nova Post: SH albo TN, dwuliterowy kod kraju i 10 cyfr, czasem z RS na początku |
+| `20404829173648` | 14 cyfr zaczynających się od 204, 206, 207, 208, 590 albo 595 |
+| `51482917364829` | 14 cyfr zaczynających się od 21 albo 51 |
+| `SHPL4829173648` | numer międzynarodowy Nova Post: SH albo TN, dwuliterowy kod kraju i 10 cyfr, czasem z RS na początku |
 
 Podobne numery, które nie są Nova Post:
 
-- **Na końcu `UA`**, na przykład `RR000000005UA`: międzynarodowy numer pocztowy, czyli Ukrposzta, państwowa poczta Ukrainy.
+- **Na końcu `UA`**, na przykład `RR482917367UA`: międzynarodowy numer pocztowy, czyli Ukrposzta, państwowa poczta Ukrainy.
 - **13 cyfr**: krajowy numer Ukrposzty.
-- **Na końcu `G`**, na przykład `AB1234567CD12345G`: to numer [Meest](carrier:meest).
+- **Na końcu `G`**, na przykład `KL4829173MN48291G`: to numer [Meest](carrier:meest).
 - **Inne 14 cyfr** mogą należeć do DPD, SEUR, BRT i innych firm: sprawdź, kogo wymienia SMS albo e-mail.
 
 Więcej o rozpoznawaniu numerów w poradniku [jaki kurier po numerze przesyłki](guide:tracking-number-formats). Gdy strona odpowiada „Nie znaleźliśmy przesyłki o tym numerze. Jeśli szukasz informacji o przesyłce starszej niż 3 miesiące, skontaktuj się z contact center”, sprawdź cyfry: starszych przesyłek strona już nie pokazuje.
@@ -60,7 +60,7 @@ Nova Post doręcza w Polsce kurierem pod adres, do swojego oddziału, do Paczkom
 
 **W oddziale** podajesz numer listu przewozowego i potwierdzasz odbiór w aplikacji, kodem z SMS-a albo dowodem tożsamości. Możesz obejrzeć paczkę na miejscu. Według regulaminu Nova Post Poland oddział trzyma paczkę bezpłatnie 7 dni kalendarzowych, od 8. do 30. dnia płacisz za przechowanie, a po 30 dniach paczka uchodzi za nieodebraną.
 
-**W Paczkomacie InPost** kod do skrytki przychodzi SMS-em i e-mailem od partnera. Paczka czeka tam 2 dni kalendarzowe, a potem Nova Post przewozi ją do swojego oddziału i cię o tym powiadamia: tak podają i strona o Paczkomatach, i regulamin. Jeśli paczkę już zabrano z Paczkomatu, zadzwoń pod +48 573 504 069.
+**W Paczkomacie InPost** kod do skrytki przychodzi SMS-em i e-mailem od partnera. Paczka czeka tam 2 dni kalendarzowe, a potem Nova Post przewozi ją do swojego oddziału i cię o tym powiadamia: tak podają i strona o Paczkomatach, i regulamin. Aby odebrać tak przewiezioną paczkę, zadzwoń pod +48 573 504 069.
 
 **W punkcie Nova Post** paczka czeka do 5 dni. W punkcie nie zapłacisz za przesyłkę ani nie sprawdzisz zawartości.
 
@@ -74,15 +74,15 @@ Nova Post nie mówi, co robić, gdy śledzenie stoi. W polskim FAQ jako przyczyn
 
 Za paczkę spoza UE, także z Ukrainy, cło i podatek płaci odbiorca. Nova Post powiadamia w aplikacji, SMS-em lub e-mailem i wysyła link do płatności; zapłacisz w aplikacji, przez link albo przy odbiorze. Zasady opisuje strona [opłaty celne za przesyłki z zagranicy](https://novapost.com/pl-pl/international/customs-clearance) i poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 
-Reklamację w Polsce składa według regulaminu nadawca. Ty możesz ją złożyć, gdy nadawca przeniesie na ciebie to prawo albo gdy paczkę ci doręczono. Składa się ją w oddziale, pisemnie, ustnie albo e-mailem na support@novapost.pl, w ciągu 12 miesięcy od nadania (2 miesiące przy utracie lub uszkodzeniu przesyłki kurierskiej). Nova Post odpowiada w ciągu 30 dni. Na stronie śledzenia jest też przycisk „Złożyć reklamację”.
+Reklamację w Polsce składa według regulaminu nadawca. Ty możesz ją złożyć, gdy nadawca przeniesie na ciebie to prawo albo gdy paczkę ci doręczono. Składa się ją w oddziale, pisemnie, ustnie albo e-mailem na support@novapost.pl, w ciągu 12 miesięcy od nadania (2 miesiące przy ubytku lub uszkodzeniu przesyłki kurierskiej). Nova Post odpowiada w ciągu 30 dni. Na stronie śledzenia jest też przycisk „Złożyć reklamację”.
 
 Na Ukrainie skargę składasz w aplikacji, na stronie śledzenia, telefonicznie albo w oddziale, z numerem podatkowym lub paszportem. Nova Poshta rozpatruje ją do 3 dni roboczych, a odszkodowanie wypłaca do wysokości zadeklarowanej wartości.
 
 ## Nova Post kontakt: infolinia i e-mail
 
-Stan na 22 października 2026, według stron Nova Post:
+Według stron Nova Post:
 
-- **Polska:** +48 182 111 609, od poniedziałku do niedzieli 8:00–20:00, e-mail support@novapost.pl.
+- **Polska:** +48 182 111 609, od poniedziałku do niedzieli 8:00–20:00 czasu polskiego, e-mail support@novapost.pl.
 - **Paczka z Paczkomatu po czasie przechowania:** +48 573 504 069.
 - **Ukraina:** +38 098 450 0609, +38 050 450 0609, +38 093 450 0609 albo +38 044 450 0609 (całą dobę), infolinia 0 800 500 609, e-mail support_ua@novaposhta.ua.
 
@@ -90,9 +90,9 @@ Stan na 22 października 2026, według stron Nova Post:
 
 ## Śledzenie paczki Nova Poshta w Peek
 
-Te same 14-cyfrowe kształty numerów mają inne firmy, a po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają, a wśród nich Nova Poshta: od razu, jeśli szukasz z Ukrainy albo numer zaczyna się od 595000, a w innym wypadku dopiero wtedy, gdy pierwsi przewoźnicy go nie znają. O numer zaczynający się od SH albo TN pyta tylko Nova Poshta. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua lub novapost.com. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą, i międzynarodowe numery Nova Post zaczynające się od SH albo TN. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
+Te same 14-cyfrowe kształty numerów mają inne firmy, a po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają: Nova Poshta najpierw, jeśli szukasz z Ukrainy lub Mołdawii albo numer zaczyna się od 595000, a w innym wypadku innych przewoźników, ale nie Nova Poshta. O numer zaczynający się od SH albo TN pyta tylko Nova Poshta. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua lub novapost.com. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą, i międzynarodowe numery Nova Post zaczynające się od SH albo TN. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
 
-Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GOFO Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Nova Poshta; przez serwisy śledzenia przesyłek co 15 minut), i powiadomi cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: w dniu doręczenia przez UPS co 5 minut zamiast co 2, bo śledzenie UPS otwiera się w przeglądarce, a u GOFO Express co 30 minut, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu dopiero po godzinie. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za ciebie z Nova Post ani nie złoży reklamacji.
+Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GOFO Express, Peek może przejść za nią do tego przewoźnika. Gdy masz przesyłkę otwartą w Peek albo w dniu dostawy przy włączonych powiadomieniach, sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu kijowskiego i dopóki odpowiada własne śledzenie Nova Poshta); w przeciwnym razie co godzinę. Przez serwisy śledzenia przesyłek sprawdza co godzinę, co 3 godziny po dniu bez zmian i nawet co 15 minut w dniu doręczenia, przy tym samym warunku. Powiadomi cię o każdym skanie, o ważnych etapach albo tylko o doręczeniu. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za ciebie z Nova Post ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Nova Post
 
@@ -133,5 +133,5 @@ W Polsce według regulaminu 7 dni bezpłatnie, potem płatnie do 30. dnia. Na Uk
 - [Нова пошта: strona główna](https://novaposhta.ua/) – telefony w stopce, całą dobę, e-mail
 - [Nova Post: Caution, cyber attack](https://novaposhta.ua/en/caution-cyber-attack) – fałszywe e-maile o długu
 - [Нова пошта: Надійна покупка](https://novaposhta.ua/receive/additional-services/safe-purchase/) – ostrzeżenie przed fałszywymi wiadomościami
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje; UPS i GOFO Express jako partnerzy doręczający, 30 minut u GOFO (stan na 9 listopada 2026)
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje; UPS i GOFO Express jako partnerzy doręczający
 :::

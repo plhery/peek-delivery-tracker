@@ -10,7 +10,7 @@ Nova Poshta, que aparece como «Nova Post» en su web en inglés, es una empresa
 
 ## Número de seguimiento de Nova Poshta: el EW
 
-Nova Poshta llama a este código «express waybill», abreviado EW (ЕН en ucraniano). El SMS o la notificación push que avisa de la llegada incluye el número de oficina y el EW.
+Nova Poshta llama a este código «express waybill», abreviado EW (ЕН o ТТН en ucraniano). El SMS o la notificación push que avisa de la llegada incluye el número de oficina y el EW.
 
 Nova Poshta no publica una longitud ni un formato fijos. Los números que reconoce el catálogo de Peek tienen estas formas:
 
@@ -80,7 +80,7 @@ Datos publicados en las webs de Nova Poshta y Nova Post Polonia:
 - **Correo electrónico:** support_ua@novaposhta.ua, además de un bot de Telegram de [novaposhta.ua](https://novaposhta.ua/).
 - **Polonia:** +48 182 111 609, todos los días de 8:00 a 20:00 (hora de Polonia), o support@novapost.pl.
 
-> Nova Poshta advierte de correos falsos que afirman que le debes dinero; no envía mensajes sobre «Safe purchase» ni enlaces a formularios que pidan datos de tarjeta.
+> Nova Poshta advierte de correos falsos que afirman que le debes dinero; no envía mensajes sobre «Reliable Purchase» ni enlaces a formularios que pidan datos de tarjeta.
 
 ## Seguir paquetes de Nova Poshta con Peek
 

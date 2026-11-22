@@ -2388,6 +2388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "slovenska-posta-sendungsverfolgung",
+      "title": "Slovenská pošta Sendungsverfolgung: Nummern und Status",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "posta-srbije-sendungsverfolgung",
@@ -3334,6 +3342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "suivi-slovenska-posta",
+      "title": "Suivi Slovenská pošta\u00a0: numéros, statuts et BalíkoBOX",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "suivi-posta-srbije",
@@ -4264,6 +4280,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "tracciamento-slovenska-posta",
+      "title": "Tracciamento Slovenská pošta: numeri, stati e BalíkoBOX",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "tracciamento-posta-srbije",
@@ -5146,6 +5170,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "seguimiento-slovenska-posta",
+      "title": "Seguimiento Slovenská pošta: números, estados y entrega",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
+    },
+    {
       "id": "posta-srbije",
       "catalog": "posta-srbije",
       "slug": "seguimiento-posta-srbije",
@@ -6026,6 +6058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Econt: número de envio, estados e balcões",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "rastreio-slovenska-posta",
+      "title": "Rastreio Slovenská pošta: números, estados e BalíkoBOX",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
     },
     {
       "id": "posta-srbije",
@@ -6934,6 +6974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Econt: numer, statusy i oddziały",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "slovenska-posta",
+      "catalog": "slovenska-posta",
+      "slug": "sledzenie-slovenska-posta",
+      "title": "Śledzenie Slovenská pošta: numery, statusy i BalíkoBOX",
+      "name": "Slovenská pošta",
+      "color": "#f9bb00"
     },
     {
       "id": "posta-srbije",

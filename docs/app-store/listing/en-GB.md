@@ -73,7 +73,13 @@ package,tracking,shipment,shipping,courier,carrier,mail,post,postal,number,where
 ## What's new
 
 ```text
-• When a carrier’s tracking site is down, your parcel says so calmly instead of showing a failed update, and its page links to the carrier’s own site to look the number up there.
-• In Settings › Assistants, Home Assistant’s steps now say to find Peek by searching for it in the Marketplace.
-• GLS Hungary parcels show GLS’s truck.
+• Peek AI: when Peek has a strong hint, a parcel’s card says when Peek thinks it will come, next to the carrier’s date, and the Parcels widget says it where it fits. On the parcel’s page, its card opens the likely days or hours, why, and how sure Peek is. Most parcels show none. Turn it off in Settings with “Peek AI”.
+• Steps some carriers list in advance are folded behind one line in the tracking history, “Other sites may show more steps, but they’re only predictions”; “Show them” lists each one, “Predicted for” its day. A parcel with no new scan names the day of its last one.
+• A parcel past its expected day says “Was expected” with that day, under its status. Once a carrier gives the address, the map heads for the town the parcel goes to. Otherwise, with a Peek account, a parcel already in the country of the town where yours usually arrive says “Usually delivered near” that town, and the map draws the rest of the way there as an estimate.
+• If you tell Peek a parcel’s page is wrong, you can now answer “I haven’t received it”, and Peek suggests what to do next: neighbours and your letterbox, the carrier, or the seller.
+• Assistants (beta, with a Peek account): each one’s row says the one thing to do, with the steps under it. ChatGPT Plus and Pro can add Peek too, and outside the US, Gemini adds Peek through its Developer Mode. Peek notifies you of each parcel an assistant adds, unless you turn off “Notify me when an assistant adds a parcel”.
+• Add parcels by email (beta): setting it up in Gmail takes four steps instead of seven.
+• Without an account, Settings has Notifications: turn them on or off and pick “All tracking updates”, “Important only” or “Delivery day only” for every parcel on this device. Signing in opens over what you were doing and brings you back to it. Changing a parcel’s carrier keeps its name and notifications, and a parcel Peek has forgotten stays, marked “No longer updated”.
+• When you add a parcel without picking a carrier and the carrier Peek suggests tracks with a postcode, its postcode field shows, optional. An Amazon number offers Peek’s guide to finding the tracking number.
+• Fixes: a gift sent yesterday and due tomorrow no longer says it arrives today; a delivered parcel names who delivered it; numbers in links are read correctly; DPD and other carriers are asked more accurately.
 ```

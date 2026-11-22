@@ -71,7 +71,13 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Gdy strona śledzenia przesyłek przewoźnika nie działa, twoja przesyłka spokojnie o tym informuje, zamiast pokazywać nieudaną aktualizację, a jej ekran ma link do strony samego przewoźnika, żeby sprawdzić tam numer.
-• W opcji Ustawienia › Asystenci kroki dla Home Assistant mówią teraz, żeby znaleźć Peek, wyszukując go w Marketplace.
-• Przesyłki GLS Hungary pokazują furgonetkę GLS.
+• Peek AI: gdy Peek ma mocną wskazówkę, karta przesyłki podaje obok daty przewoźnika, kiedy według Peek przesyłka dotrze, a widżet „Przesyłki” pokazuje to tam, gdzie jest miejsce. Na ekranie przesyłki jej karta otwiera prawdopodobne dni lub godziny, powód i to, na ile Peek jest pewny. Większość przesyłek nie pokazuje nic. Wyłączysz to w Ustawieniach opcją „Peek AI”.
+• Etapy, które niektórzy przewoźnicy wpisują z wyprzedzeniem, są zwinięte w historii śledzenia za jednym wierszem: „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy”; „Pokaż” wyświetla każdy z nich, a przy nim „Prognoza” i jego dzień. Przesyłka bez nowego skanu podaje dzień ostatniego.
+• Przesyłka po planowanym dniu dostawy pokazuje pod swoim statusem „Dostawa była planowana na” i ten dzień. Gdy przewoźnik poda adres, mapa kieruje się ku miejscowości, do której zmierza przesyłka. Jeśli nie poda, a masz konto Peek, przesyłka, która jest już w tym samym kraju co miejscowość, gdzie najczęściej odbierasz przesyłki, pokazuje „Zwykłe miejsce doręczeń” i tę miejscowość, a mapa szacunkowo rysuje resztę trasy do niej.
+• Gdy zgłosisz Peek, że ekran przesyłki jest błędny, możesz teraz odpowiedzieć „Przesyłka do mnie nie dotarła”, a Peek podpowie, co dalej: sąsiedzi i twoja skrzynka pocztowa, przewoźnik lub sprzedawca.
+• Asystenci (beta, z kontem Peek): wiersz każdego z nich podaje jedyną rzecz do zrobienia, a pod nią kroki. ChatGPT Plus i Pro też mogą dodać Peek, a poza USA Gemini dodaje Peek przez swój „Developer Mode”. Peek powiadamia cię o każdej przesyłce dodanej przez asystenta, chyba że wyłączysz „Powiadamiaj, gdy asystent doda przesyłkę”.
+• Dodawaj przesyłki e-mailem (beta): konfiguracja w Gmailu zajmuje cztery kroki zamiast siedmiu.
+• Bez konta w Ustawieniach są Powiadomienia: włącz je lub wyłącz i wybierz „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy” dla wszystkich przesyłek na tym urządzeniu. Logowanie otwiera się nad tym, co właśnie robisz, a potem cię do tego przywraca. Zmiana przewoźnika przesyłki zachowuje jej nazwę i powiadomienia, a przesyłka, o której Peek zapomniał, zostaje, oznaczona jako „Nie jest już aktualizowana”.
+• Gdy dodajesz przesyłkę bez wyboru przewoźnika, a przewoźnik zaproponowany przez Peek śledzi z użyciem kodu pocztowego, pojawia się jego opcjonalne pole na kod pocztowy. Przy numerze z Amazona Peek proponuje swój poradnik, jak znaleźć numer śledzenia.
+• Poprawki: prezent wysłany wczoraj i oczekiwany jutro nie informuje już, że dotrze dziś; doręczona przesyłka podaje, kto ją doręczył; numery w linkach są odczytywane poprawnie; DPD i inni przewoźnicy są odpytywani dokładniej.
 ```

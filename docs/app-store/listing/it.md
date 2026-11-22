@@ -71,7 +71,13 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Quando il sito di tracciamento di un corriere non funziona, il tuo pacco lo dice con calma invece di mostrare un aggiornamento non riuscito, e la sua pagina rimanda al sito del corriere stesso per cercare lì il numero.
-• In Impostazioni › Assistenti, i passaggi per Home Assistant ora dicono di trovare Peek cercandolo nel Marketplace.
-• I pacchi di GLS Hungary mostrano il furgone di GLS.
+• Peek IA: quando Peek ha un indizio forte, la scheda di un pacco dice quando Peek pensa che arriverà, accanto alla data del corriere, e il widget «Pacchi» lo dice dove c’è spazio. Nella pagina del pacco, la sua scheda apre i giorni o gli orari probabili, il perché e quanto Peek ne è sicuro. La maggior parte dei pacchi non mostra nulla. Puoi disattivarlo in Impostazioni con «Peek IA».
+• I passaggi che alcuni corrieri registrano in anticipo sono raccolti dietro un’unica riga nella cronologia del tracciamento, «Altri siti possono mostrare più passaggi, ma sono solo previsioni»; «Mostrali» li elenca uno per uno, ciascuno con «Previsto per» e il suo giorno. Un pacco senza nuove scansioni indica il giorno dell’ultima.
+• Un pacco che ha superato il giorno previsto mostra «Era previsto per» con quel giorno, sotto il suo stato. Quando un corriere fornisce l’indirizzo, la mappa punta verso la città a cui è diretto il pacco. Altrimenti, con un account Peek, un pacco già arrivato nel Paese della città in cui di solito ricevi i pacchi mostra «Di solito consegnato vicino a» con quella città, e la mappa disegna come stima il resto del percorso fin lì.
+• Se segnali a Peek che la pagina di un pacco è sbagliata, ora puoi rispondere «Non l’ho ricevuto», e Peek ti suggerisce cosa fare dopo: i vicini e la tua cassetta delle lettere, il corriere o il venditore.
+• Assistenti (beta, con un account Peek): la riga di ciascuno indica l’unica cosa da fare, con i passaggi sotto. Anche ChatGPT Plus e Pro possono aggiungere Peek e, fuori dagli Stati Uniti, Gemini aggiunge Peek tramite il suo «Developer Mode». Peek ti avvisa per ogni pacco aggiunto da un assistente, a meno che tu non disattivi «Avvisami quando un assistente aggiunge un pacco».
+• Aggiungi pacchi via e-mail (beta): configurarlo in Gmail richiede quattro passaggi invece di sette.
+• Senza account, in Impostazioni trovi Notifiche: attivale o disattivale e scegli «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna» per tutti i pacchi su questo dispositivo. L’accesso si apre sopra ciò che stavi facendo e poi ti riporta lì. Cambiare il corriere di un pacco ne mantiene il nome e le notifiche, e un pacco che Peek ha dimenticato resta, contrassegnato come «Non più aggiornato».
+• Quando aggiungi un pacco senza scegliere il corriere e il corriere suggerito da Peek usa il codice postale per il tracciamento, compare il suo campo per il codice postale, facoltativo. Un numero Amazon propone la guida di Peek per trovare il numero di tracciamento.
+• Correzioni: un regalo spedito ieri e previsto per domani non dice più che arriva oggi; un pacco consegnato indica chi l’ha consegnato; i numeri nei link vengono letti correttamente; DPD e altri corrieri vengono interrogati con più precisione.
 ```

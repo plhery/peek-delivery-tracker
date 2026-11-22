@@ -2852,6 +2852,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "russian-post-sendungsverfolgung",
+      "title": "Russian Post Sendungsverfolgung (Почта России)",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-logistics-sendungsverfolgung",
@@ -3910,6 +3918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "suivi-russian-post",
+      "title": "Suivi Russian Post (Почта России)\u00a0: numéros et statuts",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "suivi-colis-huahan-logistics",
@@ -4880,6 +4896,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "tracciamento-russian-post",
+      "title": "Tracciamento Russian Post (Почта России): numeri e stati",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "tracciamento-huahan-logistics",
@@ -5842,6 +5866,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "seguimiento-russian-post",
+      "title": "Seguimiento Russian Post (Почта России): números y estados",
+      "name": "Russian Post",
+      "color": "#1928dc"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "seguimiento-huahan-logistics",
@@ -6778,6 +6810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CNE Express: números 3A5V, estados e entrega",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "seguimento-russian-post",
+      "title": "Seguimento Russian Post (Почта России): números e estados",
+      "name": "Russian Post",
+      "color": "#1928dc"
     },
     {
       "id": "huahan",
@@ -7774,6 +7814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CNE Express: numery 3A5V, statusy i doręczenie",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "sledzenie-russian-post",
+      "title": "Russian Post śledzenie (Почта России): numery i statusy",
+      "name": "Russian Post",
+      "color": "#1928dc"
     },
     {
       "id": "huahan",

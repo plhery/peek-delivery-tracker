@@ -2532,6 +2532,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "posta-slovenije-sendungsverfolgung",
+      "title": "Pošta Slovenije Sendungsverfolgung: Status und Kontakt",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
+    },
+    {
       "id": "hrvatska-posta",
       "catalog": "hrvatska-posta",
       "slug": "hrvatska-posta-sendungsverfolgung",
@@ -3884,6 +3892,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Slovenská pošta\u00a0: numéros, statuts et BalíkoBOX",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "suivi-posta-slovenije",
+      "title": "Suivi Pošta Slovenije\u00a0: statuts, retrait et contacts",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
     },
     {
       "id": "hrvatska-posta",
@@ -5256,6 +5272,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "tracciamento-posta-slovenije",
+      "title": "Tracciamento Pošta Slovenije: stati, ritiro e contatti",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
+    },
+    {
       "id": "hrvatska-posta",
       "catalog": "hrvatska-posta",
       "slug": "tracciamento-hrvatska-posta",
@@ -6586,6 +6610,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     },
     {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "seguimiento-posta-slovenije",
+      "title": "Seguimiento Pošta Slovenije: estados, recogida y contacto",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
+    },
+    {
       "id": "hrvatska-posta",
       "catalog": "hrvatska-posta",
       "slug": "seguimiento-hrvatska-posta",
@@ -7898,6 +7930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Slovenská pošta: números, estados e BalíkoBOX",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "seguimento-posta-slovenije",
+      "title": "Seguimento Pošta Slovenije: estados, levantamento e contacto",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
     },
     {
       "id": "hrvatska-posta",
@@ -9254,6 +9294,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Slovenská pošta: numery, statusy i BalíkoBOX",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "sledzenie-posta-slovenije",
+      "title": "Śledzenie Pošta Slovenije: statusy, odbiór i kontakt",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
     },
     {
       "id": "hrvatska-posta",

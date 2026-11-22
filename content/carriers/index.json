@@ -167,7 +167,7 @@
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en", "pl", "it", "es", "de", "fr", "pt"] },
-  { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de"] },
+  { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de", "fr", "es", "it", "pt", "pl"] },
   { "id": "js-express", "catalog": "js-express", "name": "JS Express", "languages": ["en", "de", "fr", "pt", "es", "it", "pl"] },
   { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en", "de", "pl", "ru", "fr", "es", "nl", "bg", "el", "sk", "hr", "hu", "it", "pt"] },

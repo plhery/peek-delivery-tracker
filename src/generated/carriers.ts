@@ -4134,6 +4134,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "suivi-tianhui-hengyuan",
+      "title": "Suivi Tianhui Hengyuan (THHY)\u00a0: numéros AT et scans",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "js-express-suivi",
@@ -5318,6 +5326,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JRT tracking: numero JRT…MM, stati, dogana e DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "tracciamento-tianhui-hengyuan",
+      "title": "Tracciamento Tianhui Hengyuan (THHY): codici AT e scansioni",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
     },
     {
       "id": "js-express",
@@ -6506,6 +6522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "seguimiento-tianhui-hengyuan",
+      "title": "Seguimiento Tianhui Hengyuan (THHY): números AT y escaneos",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "js-express-seguimiento",
@@ -7658,6 +7682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio JRT: número JRT…MM, voos, alfândega e DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "seguimento-tianhui-hengyuan",
+      "title": "Seguimento Tianhui Hengyuan (THHY): números AT e registos",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
     },
     {
       "id": "js-express",
@@ -8870,6 +8902,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JRT śledzenie przesyłki: numer JRT…MM, statusy i DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "sledzenie-tianhui-hengyuan",
+      "title": "Śledzenie Tianhui Hengyuan (THHY): numery AT i skany",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
     },
     {
       "id": "js-express",

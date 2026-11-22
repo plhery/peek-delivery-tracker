@@ -2460,6 +2460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "geniki-taxydromiki-sendungsverfolgung",
+      "title": "Geniki Taxydromiki Sendungsverfolgung: Status & Kontakt",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-sendungsverfolgung",
@@ -3526,6 +3534,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "suivi-geniki-taxydromiki",
+      "title": "Suivi Geniki Taxydromiki\u00a0: numéros, statuts et contacts",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-suivi-colis",
@@ -4568,6 +4584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "tracciamento-geniki-taxydromiki",
+      "title": "Tracciamento Geniki Taxydromiki: stati, ritiro e contatti",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "tracciamento-maltapost",
@@ -5570,6 +5594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "seguimiento-geniki-taxydromiki",
+      "title": "Seguimiento Geniki Taxydromiki: estados y contacto",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "seguimiento-maltapost",
@@ -6570,6 +6602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento ELTA Hellenic Post: estados, recolha e apoio",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "rastreio-geniki-taxydromiki",
+      "title": "Rastreio Geniki Taxydromiki: estados, entregas e contacto",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
     },
     {
       "id": "maltapost",
@@ -7598,6 +7638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie ELTA Hellenic Post: statusy, odbiór i kontakt",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "sledzenie-geniki-taxydromiki",
+      "title": "Śledzenie Geniki Taxydromiki: numery, statusy i kontakt",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
     },
     {
       "id": "maltapost",

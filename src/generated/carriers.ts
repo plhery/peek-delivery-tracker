@@ -2404,6 +2404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "fan-courier-sendungsverfolgung",
+      "title": "FAN Courier Sendungsverfolgung: AWB, Status und FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "econt",
       "catalog": "econt",
       "slug": "econt-sendungsverfolgung",
@@ -3414,6 +3422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "suivi-fan-courier",
+      "title": "Suivi FAN Courier\u00a0: numéros AWB, statuts et FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "econt",
       "catalog": "econt",
       "slug": "suivi-econt",
@@ -4400,6 +4416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "tracciamento-fan-courier",
+      "title": "Tracciamento FAN Courier: codici AWB, stati e FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "econt",
       "catalog": "econt",
       "slug": "tracciamento-econt",
@@ -5338,6 +5362,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "seguimiento-fan-courier",
+      "title": "Seguimiento FAN Courier: números AWB, estados y FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "econt",
       "catalog": "econt",
       "slug": "seguimiento-econt",
@@ -6274,6 +6306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Dachser tracking: rastrear encomenda, estados e contactos",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "rastreio-fan-courier",
+      "title": "Rastreio FAN Courier: números AWB, estados e FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
     },
     {
       "id": "econt",
@@ -7246,6 +7286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "sledzenie-fan-courier",
+      "title": "Śledzenie FAN Courier: numery AWB, statusy i FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
     },
     {
       "id": "econt",

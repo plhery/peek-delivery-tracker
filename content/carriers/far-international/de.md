@@ -60,7 +60,7 @@ Regeln zu Zustellversuchen, Benachrichtigungen oder Abholstellen veröffentlicht
 
 **Zoll in der EU.** Online-Bestellungen von außerhalb der EU unterliegen seit dem 1. Juli 2026 einem Zoll von 3 € pro Warenart bei Sendungen bis 150 € sowie seit dem 1. November 2026 einer EU-Bearbeitungsgebühr von 2 € pro Warenart unabhängig vom Wert. Als eine Warenart gelten Güter mit gleicher Zolltarifnummer, Beschreibung und gegebenenfalls gleichem Ursprung. FAR beschreibt nicht, wie diese Beträge erhoben werden. Außerhalb der EU gelten die jeweiligen Landesregeln; mehr unter [Paket hängt beim Zoll](guide:customs).
 
-**Wenn der Zoll Unterlagen verlangt.** Laut FAR-FAQ erfordert eine Zollstörung im Zielland die Mitwirkung des Empfängers bei den örtlichen Behörden. Scheitert die Verzollung nach Fristablauf, wird die Sendung gemäß lokalen Vorschriften vernichtet oder zurückgesandt; die Kosten trägt der Absender.
+**Wenn der Zoll Unterlagen verlangt.** Laut FAR-FAQ erfordert eine Zollstörung im Zielland die Mitwirkung des Empfängers bei den örtlichen Behörden. Scheitert die Verzollung nach Fristablauf, wird die Sendung gemäß lokalen Vorschriften aufgegeben oder zurückgesandt; die Kosten trägt der Absender.
 
 ## FAR-International-Paket aktualisiert sich nicht, verloren oder zurück
 
@@ -94,7 +94,7 @@ Peek liest FARs eigenes Tracking direkt aus: Status, jede Zeile samt Ort und Zei
 
 Enthält FARs Tracking eine Last-Mile-Nummer, fragt Peek auch den zugehörigen Dienst ab: bei einer Postnummer (zwei Buchstaben, neun Ziffern, zwei Buchstaben) die Post deines Landes — etwa [Correos](carrier:correos-spain) in Spanien — oder den eindeutigen Dienst des Formats. Sobald dieser einen mindestens ebenso aktuellen Scan wie FAR zeigt, wechselt Peek unter Erhalt des Verlaufs dorthin und zeigt den Zusteller an (z. B. „Zustellung durch Correos“). Ohne solchen Dienst bleibt Peek bei FAR.
 
-Solange du Peek auf dem Bildschirm geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — fragt Peek direkt bei FAR bis zu alle 10 Minuten nach, und ab 6:00 Uhr Ortszeit am Zustelltag bis zu alle 2 Minuten; sonst sowie nach zwei Tagen ohne Neuigkeiten (oder 12 Stunden bei „Etikett erstellt“ bzw. „Beim Paketdienst eingegangen“) stündlich. Über Tracking-Dienste allein prüft es stündlich, nach einem Tag ohne Scan alle 3 Stunden und am Zustelltag bis zu alle 15 Minuten, sofern das Paket geöffnet ist oder Benachrichtigungen aktiv sind. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Kontakt zu FAR oder dem Verkäufer übernimmt Peek nicht.
+Solange du die Sendung in Peek geöffnet hast — oder am Zustelltag mit aktivierten Benachrichtigungen — fragt Peek direkt bei FAR bis zu alle 10 Minuten nach, und ab 6:00 Uhr Ortszeit am Zustelltag bis zu alle 2 Minuten; sonst sowie nach zwei Tagen ohne Neuigkeiten (oder 12 Stunden bei „Etikett erstellt“ bzw. „Beim Paketdienst eingegangen“) stündlich. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Kontakt zu FAR oder dem Verkäufer übernimmt Peek nicht.
 
 ## Häufige Fragen zu FAR International
 

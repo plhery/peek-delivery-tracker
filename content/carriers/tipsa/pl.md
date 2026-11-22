@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-TIPSA to hiszpańska firma kurierska należąca do grupy Geopost, z oddziałami w Hiszpanii, Portugalii i Andorze. Śledź paczkę za pomocą 22-cyfrowego numeru w [lokalizatorze przesyłek TIPSA](https://www.tip-sa.com/en/delivery-locator) albo wklej go w pole powyżej. Numer podaje sklep lub nadawca, zwykle w e-mailu albo SMS-ie o wysyłce. Jeśli go nie masz, zapytaj sklep lub oddział TIPSA obsługujący twój obszar – znajdziesz go po kodzie pocztowym w [wyszukiwarce oddziałów](https://www.tip-sa.com/es/agencias-de-transporte). Z tym samym oddziałem uzgodnisz doręczenie po statusie `Ausente` albo odbiór własny; w razie zaginięcia lub uszkodzenia powiadom sklep.
+TIPSA to hiszpańska firma kurierska należąca do grupy Geopost, z oddziałami w Hiszpanii, Portugalii i Andorze. Śledź paczkę za pomocą 22-cyfrowego numeru w [lokalizatorze przesyłek TIPSA](https://www.tip-sa.com/en/delivery-locator) albo wklej go w pole powyżej. Numer podaje sklep lub nadawca, na przykład w e-mailu albo SMS-ie o wysyłce. Jeśli go nie masz, zapytaj sklep lub oddział TIPSA obsługujący twój obszar – znajdziesz go po kodzie pocztowym w [wyszukiwarce oddziałów](https://www.tip-sa.com/es/agencias-de-transporte). Z tym samym oddziałem uzgodnisz doręczenie po statusie `Ausente` albo odbiór własny; w razie zaginięcia lub uszkodzenia powiadom sklep.
 
 ## Numer śledzenia TIPSA: jak wygląda
 
@@ -30,7 +30,7 @@ Dwadzieścia dwie cyfry pasują również do Austrian Post, [USPS](carrier:usps)
 
 ## Co oznaczają statusy śledzenia TIPSA
 
-Strona szczegółów przesyłki TIPSA jest dostępna wyłącznie po hiszpańsku, nawet jeśli otworzysz lokalizator z angielskiej wersji serwisu. U góry pokazuje skróconą oś (`Documentado`, `En camino`, `En reparto`, `Entregado`), a niżej tabelę ze wszystkimi skanami, datą, godziną i miejscowością. Typowe wpisy w kolejności występowania:
+Strona szczegółów przesyłki TIPSA jest dostępna wyłącznie po hiszpańsku, nawet jeśli otworzysz lokalizator z angielskiej wersji serwisu. U góry pokazuje skróconą oś (`Documentado`, `En camino`, `En reparto`, `Entregado`), a niżej tabelę ze wszystkimi skanami, datą, godziną i miejscowością. Wpisy:
 
 | Status TIPSA | Co to oznacza dla ciebie |
 | --- | --- |
@@ -86,13 +86,13 @@ Dla Portugalii nie ma osobnej infolinii: portugalska strona kontaktowa TIPSA pod
 
 ## Śledzenie przesyłki TIPSA w Peek
 
-[Peek](/) przyjmuje 22-cyfrowy numer ze spacjami lub bez nich. Ponieważ tę samą długość stosują inni przewoźnicy, Peek pyta jednocześnie pasujących przewoźników, zaczynając od TIPSA: zobaczysz „Peek pyta: …”, a gdy TIPSA rozpozna paczkę – „TIPSA ma tę przesyłkę.”. Jeśli oba kody oddziałów zaczynają się od `00`, a drugi pasuje do jednego z kodów oddziałów przypisanych do CTT Express, Peek kieruje numer bezpośrednio do CTT Express; dla pozostałych numerów `00…00…` pyta TIPSA (w pierwszej kolejności), Austrian Post, CTT Express, USPS i Estafetę. Jeśli sklep wskazał TIPSA, stuknij „Zmień” i wybierz go ręcznie. Kod pocztowy nie jest potrzebny.
+[Peek](/) przyjmuje 22-cyfrowy numer ze spacjami lub bez nich. Ponieważ tę samą długość stosują inni przewoźnicy, Peek pyta jednocześnie pasujących przewoźników, zaczynając od TIPSA: zobaczysz „Peek pyta: …”, a gdy TIPSA rozpozna paczkę – „TIPSA ma tę przesyłkę.”. Jeśli oba kody oddziałów zaczynają się od `00`, a drugi pasuje do jednego z kodów oddziałów przypisanych do CTT Express, Peek kieruje numer bezpośrednio do CTT Express; dla pozostałych numerów `00…00…` pyta jednocześnie TIPSA (w pierwszej kolejności), CTT Express i Austrian Post. Jeśli sklep wskazał TIPSA, stuknij „Zmień” i wybierz go ręcznie. Kod pocztowy nie jest potrzebny.
 
 Sam 10-cyfrowy list przewozowy nie daje się śledzić przez TIPSA, ani po „Zmień”, ani z linku. Peek nie podpowiada TIPSA dla 10 cyfr; jeśli wybierzesz TIPSA ręcznie, poinformuje, że TIPSA „nie wydaje takich numerów”, i zapyta usługi śledzenia. Poszukaj pełnych 22 cyfr lub linku w e-mailu albo SMS-ie ze sklepu. Peek odczytuje linki `tip-sa.com` z parametrem `id=` na stronach `datos_env.php`, `datos_prestashop.php`, `datos.php` oraz na głównej stronie `tip-sa.com`, lecz nie linki do lokalizatora ani do `tipsa-dinapaq.com`.
 
 Peek pokazuje status, historię z miejscowością każdego skanu na mapie, nazwę nadawcy (jeśli TIPSA jej nie ukrywa) oraz wagę. Opisy pozostają w hiszpańskim brzmieniu TIPSA, a Peek podsumowuje każdy etap: `PENDIENTE DE ENTREGAR A TIPSA` („Zarejestrowana”), `REPARTO` („W doręczeniu”, podobnie jak skan oddziału tego samego dnia po `REPARTO`), `Ausente`, `Cerrado` i `Faltan Datos / Datos incorrectos` („Próba doręczenia”), `DISPONIBLE` i `Pendiente de recoger en Tipsa` („Do odbioru”), `Devolver a Origen` („Zgłoszono problem”), `ENTREGADO` („Dostarczona”), a pozostałe skany („W transporcie”). Wszystkie godziny Peek odczytuje według czasu madryckiego – łącznie z oddziałami w Portugalii – i przelicza na twoją strefę czasową; na peektracker.com oraz w aplikacjach na iPhone’a i Androida pod historią widnieje wiersz „Godziny w twojej strefie czasowej:” z jej nazwą. Peek pomija dane odbiorcy, adres, kody pocztowe, referencję, liczbę paczek, objętość i potwierdzenie odbioru, nie podaje przewidywanej daty doręczenia i nie śledzi przekazania innemu przewoźnikowi.
 
-Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie TIPSA odpowiada, Peek sprawdza ją nawet co 10 minut, a od godz. 6:00 czasu madryckiego w dniu skanu `REPARTO` nawet co 2 minuty; w pozostałym czasie co godzinę. Przez usługi śledzenia sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut, dopóki masz ją otwartą lub włączone powiadomienia. Po dwóch dniach bez nowości (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza przesyłkę co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie TIPSA odpowiada, Peek sprawdza ją nawet co 10 minut, a od godz. 6:00 czasu madryckiego w dniu skanu `REPARTO` nawet co 2 minuty; w pozostałym czasie co godzinę. Gdy odpowiadają tylko usługi śledzenia, sprawdza co godzinę, co 3 godziny, gdy ostatni skan ma już dzień, a w dniu doręczenia nawet co 15 minut, dopóki masz ją otwartą lub włączone powiadomienia. Po dwóch dniach bez nowości (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza przesyłkę co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Pytania o śledzenie TIPSA
 

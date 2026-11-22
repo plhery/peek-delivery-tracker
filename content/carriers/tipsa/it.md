@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-TIPSA è un corriere espresso spagnolo parte del gruppo Geopost, con agenzie in Spagna, Portogallo e Andorra. Traccia il tuo pacco con il codice a 22 cifre sul [localizzatore spedizioni TIPSA](https://www.tip-sa.com/en/delivery-locator), oppure incollalo nel campo qui sopra. Il codice viene fornito dal negozio o dal mittente, di solito nell'e-mail o nell'SMS di spedizione. Se non lo hai, chiedilo al negozio o all'agenzia TIPSA che consegna nella tua zona, che trovi per CAP nel [trova agenzie](https://www.tip-sa.com/es/agencias-de-transporte). Con la stessa agenzia concordi la consegna dopo un `Ausente` o il ritiro diretto; in caso di smarrimento o danni, avvisa il negozio.
+TIPSA è un corriere espresso spagnolo parte del gruppo Geopost, con agenzie in Spagna, Portogallo e Andorra. Traccia il tuo pacco con il codice a 22 cifre sul [localizzatore spedizioni TIPSA](https://www.tip-sa.com/en/delivery-locator), oppure incollalo nel campo qui sopra. Il codice viene fornito dal negozio o dal mittente, ad esempio nell'e-mail o nell'SMS di spedizione. Se non lo hai, chiedilo al negozio o all'agenzia TIPSA che consegna nella tua zona, che trovi per CAP nel [trova agenzie](https://www.tip-sa.com/es/agencias-de-transporte). Con la stessa agenzia concordi la consegna dopo un `Ausente` o il ritiro diretto; in caso di smarrimento o danni, avvisa il negozio.
 
 ## Codice di tracking TIPSA: com'è fatto
 
@@ -30,7 +30,7 @@ Ventidue cifre corrispondono anche a Austrian Post, [USPS](carrier:usps) ed Esta
 
 ## Significato degli stati del tracking TIPSA
 
-La pagina di dettaglio TIPSA è solo in spagnolo, anche aprendo il localizzatore dal sito inglese. In alto mostra una barra sintetica (`Documentado`, `En camino`, `En reparto`, `Entregado`); sotto, una tabella elenca ogni scansione con data, ora e località. Le diciture nell'ordine abituale:
+La pagina di dettaglio TIPSA è solo in spagnolo, anche aprendo il localizzatore dal sito inglese. In alto mostra una barra sintetica (`Documentado`, `En camino`, `En reparto`, `Entregado`); sotto, una tabella elenca ogni scansione con data, ora e località. Le diciture:
 
 | Stato TIPSA | Cosa significa per te |
 | --- | --- |
@@ -86,13 +86,13 @@ Non esiste una linea dedicata al Portogallo: la pagina contatti portoghese di TI
 
 ## Tracciare un pacco TIPSA con Peek
 
-[Peek](/) accetta il codice a 22 cifre con o senza spazi. Poiché altri corrieri condividono questa lunghezza, Peek interroga contemporaneamente i candidati, TIPSA per primo: vedrai «verifica presso …» e poi «TIPSA ha questo pacco.» quando TIPSA lo riconosce. Un numero in cui entrambi i codici agenzia iniziano con `00` e il secondo corrisponde a una delle filiali elencate per CTT Express viene assegnato direttamente a CTT Express; per gli altri codici `00…00…`, Peek interroga TIPSA (preferito), Austrian Post, CTT Express, USPS ed Estafeta. Se il negozio ha indicato TIPSA, premi «Cambia» e selezionalo. Non serve il CAP.
+[Peek](/) accetta il codice a 22 cifre con o senza spazi. Poiché altri corrieri condividono questa lunghezza, Peek interroga contemporaneamente i candidati, TIPSA per primo: vedrai «verifica presso …» e poi «TIPSA ha questo pacco.» quando TIPSA lo riconosce. Un numero in cui entrambi i codici agenzia iniziano con `00` e il secondo corrisponde a una delle filiali elencate per CTT Express viene assegnato direttamente a CTT Express; per gli altri codici `00…00…`, Peek interroga contemporaneamente TIPSA (per primo), CTT Express e Austrian Post. Se il negozio ha indicato TIPSA, premi «Cambia» e selezionalo. Non serve il CAP.
 
 La lettera di vettura da 10 cifre non può essere seguita tramite TIPSA, nemmeno con «Cambia» o da un link. Peek non suggerisce TIPSA per 10 cifre; scegliendo TIPSA a mano, segnala che TIPSA «non emette numeri come questo» e interroga i servizi di tracciamento. Cerca il codice completo a 22 cifre o il link nell'e-mail o SMS del negozio. Peek legge i link `tip-sa.com` con `id=` su `datos_env.php`, `datos_prestashop.php`, `datos.php` e sulla home `tip-sa.com`, ma non i link al localizzatore né quelli su `tipsa-dinapaq.com`.
 
 Peek mostra lo stato, la cronologia con la località di ogni scansione sulla mappa, il nome del mittente (se non oscurato da TIPSA) e il peso. Le diciture restano nello spagnolo di TIPSA e Peek le riassume nelle proprie fasi: `PENDIENTE DE ENTREGAR A TIPSA` («Etichetta creata»), `REPARTO` («In consegna», inclusa una scansione di agenzia lo stesso giorno dopo `REPARTO`), `Ausente`, `Cerrado` e `Faltan Datos / Datos incorrectos` («Tentativo di consegna»), `DISPONIBLE` e `Pendiente de recoger en Tipsa` («Pronto per il ritiro»), `Devolver a Origen` («Problema segnalato»), `ENTREGADO` («Consegnato») e le altre scansioni («In transito»). Peek legge tutti gli orari sull'ora di Madrid, agenzie portoghesi incluse, e li mostra nel tuo fuso orario; su peektracker.com e nelle app iPhone e Android la cronologia si chiude con «Orari nel tuo fuso orario:» e il suo nome. Scarta destinatario, indirizzo, CAP, riferimento, numero di colli, volume e prova di consegna, non mostra una data di consegna prevista e non segue il passaggio ad altri corrieri.
 
-Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le notifiche attive, e mentre risponde il tracciamento di TIPSA, Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Madrid nel giorno in cui TIPSA registra `REPARTO`; altrimenti ogni ora. Tramite i servizi di tracciamento controlla ogni ora, e fino a ogni 15 minuti il giorno della consegna finché lo tieni aperto o hai le notifiche attive. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
+Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le notifiche attive, e mentre risponde il tracciamento di TIPSA, Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Madrid nel giorno in cui TIPSA registra `REPARTO`; altrimenti ogni ora. Quando rispondono solo i servizi di tracciamento controlla ogni ora, ogni 3 ore quando l'ultima scansione ha un giorno, e fino a ogni 15 minuti il giorno della consegna finché lo tieni aperto o hai le notifiche attive. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
 ## Domande sul tracking TIPSA
 
@@ -106,7 +106,7 @@ Dipende dal servizio scelto dal negozio. TIPSA vende ai negozi consegne in 24 or
 
 ### Posso tracciare un pacco TIPSA con 10 cifre?
 
-No: il localizzatore di TIPSA richiede il codice da 22 cifre, e nemmeno Peek accetta 10 cifre come numero TIPSA. Le 10 cifre sono solo la parte finale della lettera di vettura: chiedi il codice completo al mittente.
+No: il localizzatore di TIPSA richiede il codice da 22 cifre, e nemmeno Peek accetta 10 cifre come numero TIPSA. Le 10 cifre sono solo la lettera di vettura, la parte finale del codice: chiedi il codice completo al mittente.
 
 ### TIPSA dispone di punti di ritiro?
 

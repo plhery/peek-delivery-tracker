@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-TIPSA ist ein spanischer Express-Paketdienst aus dem Geopost-Verbund mit Filialen in Spanien, Portugal und Andorra. Verfolge deine Sendung mit der 22-stelligen Nummer im [TIPSA Delivery Locator](https://www.tip-sa.com/en/delivery-locator) oder füge sie oben ein. Die Nummer kommt vom Shop oder Absender, meist per Versandmail oder SMS. Hast du sie nicht, frage den Shop oder die für dein Gebiet zuständige TIPSA-Agentur; du findest sie per Postleitzahl im [Agenturfinder](https://www.tip-sa.com/es/agencias-de-transporte). Mit dieser Agentur vereinbarst du auch die Übergabe nach einem `Ausente` oder eine Selbstabholung; bei Verlust oder Schaden melde dich beim Shop.
+TIPSA ist ein spanischer Express-Paketdienst aus dem Geopost-Verbund mit Filialen in Spanien, Portugal und Andorra. Verfolge deine Sendung mit der 22-stelligen Nummer im [TIPSA Delivery Locator](https://www.tip-sa.com/en/delivery-locator) oder füge sie oben ein. Die Nummer kommt vom Shop oder Absender, etwa per Versandmail oder SMS. Hast du sie nicht, frage den Shop oder die für dein Gebiet zuständige TIPSA-Agentur; du findest sie per Postleitzahl im [Agenturfinder](https://www.tip-sa.com/es/agencias-de-transporte). Mit dieser Agentur vereinbarst du auch die Übergabe nach einem `Ausente` oder eine Selbstabholung; bei Verlust oder Schaden melde dich beim Shop.
 
 ## TIPSA-Sendungsnummer: So sieht sie aus
 
@@ -30,7 +30,7 @@ Shops können über TIPSA E-Mails und SMS beim Versand, bei Ankunft in der Agent
 
 ## Bedeutung der TIPSA-Tracking-Status
 
-Die Sendungsdetailseite von TIPSA ist ausschließlich auf Spanisch, selbst wenn du sie über die englische Website öffnest. Oben zeigt sie eine kurze Leiste mit Schritten wie `Documentado`, `En camino`, `En reparto` und `Entregado`; darunter listet eine Tabelle jeden Scan mit Datum, Uhrzeit und Ort. Die üblichen Meldungen in Reihenfolge:
+Die Sendungsdetailseite von TIPSA ist ausschließlich auf Spanisch, selbst wenn du sie über die englische Website öffnest. Oben zeigt sie eine kurze Leiste mit Schritten wie `Documentado`, `En camino`, `En reparto` und `Entregado`; darunter listet eine Tabelle jeden Scan mit Datum, Uhrzeit und Ort. Die Meldungen:
 
 | TIPSA-Status | Was das für dich bedeutet |
 | --- | --- |
@@ -61,7 +61,7 @@ TIPSA liefert über sein eigenes Netz auf dem spanischen Festland und in Portuga
 
 **Pickup-Punkte und Schließfächer.** TIPSA teilt sich mit [SEUR](carrier:seur) ein Netz aus Pickup-Shops und rund um die Uhr zugänglichen Schließfächern. Die meisten Shops öffnen mindestens sechs Tage die Woche, und die Abholfrist beträgt 7 Tage. Die Lieferung an einen Punkt muss der Shop beim Bestellen anbieten. Standorte findest du im [Pickup-Finder](https://aplicaciones.tip-sa.com/puntospickup/).
 
-Manche Shops buchen auch Samstagszustellung oder eine Vorankündigung per SMS und E-Mail für den Ankunftstag. Mit dem Premium-Service lässt sich zudem ein einstündiges Zeitfenster wählen; da TIPSA online nicht erklärt, wo man es auswählt, frage die Zielagentur.
+Manche Shops buchen auch Samstagszustellung oder eine Vorankündigung per SMS und E-Mail für den Ankunftstag. Mit dem Premium-Service lässt sich zudem ein Zeitfenster mit einer Stunde Spielraum wählen; da TIPSA online nicht erklärt, wo man es auswählt, frage die Zielagentur.
 
 **Zahlung bei Übergabe.** Bei Nachnahme (`contrarreembolso`) kassiert TIPSA bei der Übergabe den vom Shop festgelegten Betrag bis 1.000 € pro Sendung; bei unfreiem Versand (`portes debidos`) zieht TIPSA am Zielort die Versandkosten ein. Ob bar oder per Karte gezahlt wird, nennt TIPSA nicht: Frage den Shop oder die Agentur. Da beides erst bei der Übergabe kassiert wird, passt eine SMS oder E-Mail „von TIPSA“, die zu einer Zahlung über einen Link auffordert, zu keinem dieser Fälle: Zahle nicht und prüfe die Nummer im Locator auf tip-sa.com. Mehr in [gefälschte Paket-SMS](guide:delivery-scam-texts).
 
@@ -86,13 +86,13 @@ Für Portugal gibt es keine eigene Hotline: Die portugiesische Kontaktseite von 
 
 ## Ein TIPSA-Paket mit Peek verfolgen
 
-[Peek](/) nimmt die 22-stellige Nummer mit oder ohne Leerzeichen an. Da mehrere Paketdienste diese Länge nutzen, fragt Peek die möglichen Dienste gleichzeitig ab, TIPSA zuerst: Du siehst „Peek fragt bei … nach …“ und danach „TIPSA hat dieses Paket.“, sobald TIPSA es kennt. Beginnen beide Agenturcodes mit `00` und entspricht der zweite einer bei CTT Express hinterlegten Filialkennung, ordnet Peek die Nummer direkt CTT Express zu; bei anderen `00…00…`-Nummern fragt Peek TIPSA (bevorzugt), Austrian Post, CTT Express, USPS und Estafeta ab. Hat dein Shop TIPSA genannt, tippe auf „Ändern“ und wähle TIPSA. Eine Postleitzahl ist nicht nötig.
+[Peek](/) nimmt die 22-stellige Nummer mit oder ohne Leerzeichen an. Da mehrere Paketdienste diese Länge nutzen, fragt Peek die möglichen Dienste gleichzeitig ab, TIPSA zuerst: Du siehst „Peek fragt bei … nach …“ und danach „TIPSA hat dieses Paket.“, sobald TIPSA es kennt. Beginnen beide Agenturcodes mit `00` und entspricht der zweite einer bei CTT Express hinterlegten Filialkennung, ordnet Peek die Nummer direkt CTT Express zu; bei anderen `00…00…`-Nummern fragt Peek gleichzeitig TIPSA (zuerst), CTT Express und Austrian Post ab. Hat dein Shop TIPSA genannt, tippe auf „Ändern“ und wähle TIPSA. Eine Postleitzahl ist nicht nötig.
 
 Ein 10-stelliger Frachtbrief lässt sich nicht über TIPSA verfolgen, auch nicht nach „Ändern“ oder per Link. Peek schlägt TIPSA für 10 Ziffern nicht vor; wählst du TIPSA dennoch, meldet Peek, TIPSA „vergibt keine Nummern wie diese“, und fragt stattdessen Tracking-Dienste. Suche die vollständige 22-stellige Nummer oder den Tracking-Link in der Versandmail oder SMS des Shops. Peek liest `tip-sa.com`-Links mit `id=` auf `datos_env.php`, `datos_prestashop.php`, `datos.php` und der Startseite von `tip-sa.com`; Links auf den Locator oder `tipsa-dinapaq.com` werden nicht ausgewertet.
 
 Peek zeigt Status, Verlauf mit dem Ort jedes Scans auf einer Karte, den Absendernamen (sofern von TIPSA nicht maskiert) und das Gewicht. Die Meldungen bleiben in TIPSAs Spanisch, und Peek ordnet sie seinen Stufen zu: `PENDIENTE DE ENTREGAR A TIPSA` („Etikett erstellt“), `REPARTO` („In Zustellung“, ebenso ein Agenturscan am selben Tag nach `REPARTO`), `Ausente`, `Cerrado` und `Faltan Datos / Datos incorrectos` („Zustellversuch“), `DISPONIBLE` und `Pendiente de recoger en Tipsa` („Abholbereit“), `Devolver a Origen` („Problem gemeldet“), `ENTREGADO` („Zugestellt“), und sonstige Scans („Unterwegs“). Peek liest alle Uhrzeiten als Madrider Zeit – auch bei portugiesischen Agenturen – und zeigt sie in deiner Zeitzone an; auf peektracker.com sowie in den iPhone- und Android-Apps endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen. Empfänger, Adresse, Postleitzahlen, Referenz, Paketanzahl, Volumen und Zustellnachweis lässt Peek weg; ein Lieferdatum wird nicht gezeigt und eine Übergabe an andere Dienste nicht weiterverfolgt.
 
-Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, und solange TIPSAs eigener Tracker antwortet, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr Madrider Zeit am Tag eines `REPARTO`-Scans bis zu alle 2 Minuten; sonst stündlich. Über Tracking-Dienste prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten, solange du es geöffnet hast oder Mitteilungen aktiv sind. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, und solange TIPSAs eigener Tracker antwortet, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr Madrider Zeit am Tag eines `REPARTO`-Scans bis zu alle 2 Minuten; sonst stündlich. Über Tracking-Dienste allein prüft Peek stündlich, alle 3 Stunden, sobald der letzte Scan einen Tag alt ist, und am Zustelltag bis zu alle 15 Minuten, solange du es geöffnet hast oder Mitteilungen aktiv sind. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Fragen zur TIPSA-Sendungsverfolgung
 

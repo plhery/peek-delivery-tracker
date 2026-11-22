@@ -3164,6 +3164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "stone3pl-sendungsverfolgung",
+      "title": "Stone3PL Sendungsverfolgung: Nummern, Status & Kontakt",
+      "name": "Stone3PL",
+      "color": "#003d98"
+    },
+    {
       "id": "j-and-t-uk",
       "catalog": "j-and-t-uk",
       "slug": "jt-express-uk-sendungsverfolgung",
@@ -4406,6 +4414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "suivi-stone3pl",
+      "title": "Suivi Stone3PL\u00a0: numéros, statuts et contact",
+      "name": "Stone3PL",
+      "color": "#003d98"
+    },
+    {
       "id": "j-and-t-uk",
       "catalog": "j-and-t-uk",
       "slug": "suivi-jt-express-uk",
@@ -5598,6 +5614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking 17FEIA: codici FEI…YQ, stati e consegna",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "tracciamento-stone3pl",
+      "title": "Tracciamento Stone3PL: codici, stati e contatti",
+      "name": "Stone3PL",
+      "color": "#003d98"
     },
     {
       "id": "j-and-t-uk",
@@ -6794,6 +6818,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "seguimiento-stone3pl",
+      "title": "Seguimiento Stone3PL: números, estados y contacto",
+      "name": "Stone3PL",
+      "color": "#003d98"
+    },
+    {
       "id": "j-and-t-uk",
       "catalog": "j-and-t-uk",
       "slug": "seguimiento-jt-express-uk",
@@ -7946,6 +7978,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 17FEIA: números FEI…YQ, estados e entrega",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "seguimento-stone3pl",
+      "title": "Seguimento Stone3PL: números, estados e contacto",
+      "name": "Stone3PL",
+      "color": "#003d98"
     },
     {
       "id": "j-and-t-uk",
@@ -9166,6 +9206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 17FEIA: numery FEI…YQ, statusy i doręczenie",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "sledzenie-stone3pl",
+      "title": "Śledzenie Stone3PL: numery, statusy i kontakt",
+      "name": "Stone3PL",
+      "color": "#003d98"
     },
     {
       "id": "j-and-t-uk",

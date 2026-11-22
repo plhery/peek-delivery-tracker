@@ -231,7 +231,7 @@
   { "id": "chronodiali", "catalog": "chronodiali", "name": "Chronodiali", "languages": ["en"] },
   { "id": "17feia", "catalog": "17feia", "name": "17FEIA", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "tsjy", "catalog": "tsjy", "name": "TSJY", "languages": ["en"] },
-  { "id": "stone3pl", "catalog": "stone3pl", "name": "Stone3PL", "languages": ["en"] },
+  { "id": "stone3pl", "catalog": "stone3pl", "name": "Stone3PL", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "j-and-t-uk", "catalog": "j-and-t-uk", "name": "J&T Express UK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "m-one", "catalog": "m-one", "name": "M-ONE", "languages": ["en"] },
   { "id": "early-bird", "catalog": "early-bird", "name": "Early Bird", "languages": ["en"] },

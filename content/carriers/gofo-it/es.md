@@ -46,11 +46,11 @@ Si [YunExpress](carrier:yunexpress) entregó tu paquete a GOFO Italy, el seguimi
 
 ## Paquete GOFO retrasado, fallido, perdido o dañado
 
-**Sin movimiento.** Peek sigue preguntando a GOFO. Si pasan cuatro días sin nuevos escaneos antes de salir a reparto, Peek lo avisa («Sin novedades desde hace cuatro días») y enlaza a la página de ayuda de GOFO Italy («Pide ayuda a GOFO Italy»). Más en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Sin movimiento.** Peek sigue preguntando a GOFO. Si pasan cuatro días sin nuevos escaneos antes de salir a reparto, Peek lo avisa («Sin novedades desde el …», con el día del último escaneo) y enlaza a la página de ayuda de GOFO Italy («Pide ayuda a GOFO Italy»). Más en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 **Entrega fallida.** Tras cualquier línea `Consegna fallita` bajo el código de alerta de GOFO —sea `Destinatario assente`, `L'indirizzo è errato` u otro motivo tras `tipo:`— Peek muestra «Intento de entrega». Lo que ocurra después depende de GOFO: consulta [entrega fallida](guide:missed-delivery) para ver qué revisar.
 
-**Retrasado.** Según la normativa europea de consumo, la tienda debe entregar en 30 días salvo acuerdo distinto. Si no cumple, concédele un plazo adicional razonable; si también vence sin entrega, puedes cancelar el pedido y pedir el reembolso íntegro.
+**Retrasado.** Según la normativa europea de consumo, la tienda debe entregar en 30 días salvo acuerdo distinto. Si no cumple, concédele un plazo adicional razonable; si también vence sin entrega, puedes cancelar el pedido y pedir el reembolso.
 
 **Marca `Consegnato` pero no ha llegado.** La tienda responde de la entrega: le corresponde contactar con el transportista y demostrar que se entregó; si no puede, debe reenviar el artículo o reembolsarte. Qué comprobar primero cerca de casa: [entregado pero no recibido](guide:delivered-not-received).
 
@@ -64,7 +64,7 @@ Empieza por la tienda que envió el paquete, pues responde de la entrega. Para r
 2. Si la respuesta no te convence o no llega en 45 días, solicita conciliación al operador, que concluye en un plazo máximo de 60 días.
 3. Si tampoco prospera, dispones de 90 días para pedir a AGCOM la resolución de la disputa mediante el Formulario CP. AGCOM decide en un plazo de 150 días y su decisión vincula a ambas partes.
 
-AGCOM puede ordenar reembolsos o indemnizaciones reglamentarias, pero no daños y perjuicios; para eso, y en cualquier momento, puedes acudir a los tribunales. Si el operador no responde a tu reclamación o solicitud de conciliación, denúncialo en el Portale delle segnalazioni de AGCOM. El centro de contacto de AGCOM atiende de lunes a viernes, de 10:00 a 14:00, en el `800.185060` desde teléfono fijo italiano o en el `081.750750` desde móvil o desde el extranjero.
+AGCOM puede ordenar reembolsos o indemnizaciones reglamentarias, pero no daños y perjuicios; para eso, y en cualquier momento, puedes acudir a los tribunales. Si el operador no responde a tu reclamación o solicitud de conciliación, denúncialo en el Portale delle segnalazioni de AGCOM. El centro de contacto de AGCOM atiende de lunes a viernes, de 10:00 a 14:00, en el `800.185060` desde teléfono fijo o en el `081.750750` desde móvil o desde el extranjero.
 
 ## Atención al cliente de GOFO Italy
 
@@ -74,9 +74,9 @@ La página de ayuda de GOFO Italy está en su web italiana, gofo.com, y Peek la 
 
 [Peek](/) reconoce por sí solo los números `GFIT` y `CIIT` (verificando el dígito de control en los `GFIT` de 14 cifras). También puedes pegar un enlace de la página italiana de seguimiento de GOFO (en gofo.com o gofoexpress.it, con `id=` y el código).
 
-Mientras tienes el paquete abierto en pantalla o el día de la entrega con las notificaciones activadas, y mientras responde el seguimiento de GOFO, Peek consulta hasta cada 10 minutos, y hasta cada 2 minutos desde las 6:00 (hora italiana) el día en que GOFO lo escanea en reparto; el resto del tiempo, cada hora. A través de servicios de seguimiento comprueba cada hora, y hasta cada 15 minutos el día de reparto mientras lo tienes abierto o con notificaciones activadas. Tras dos días sin novedades (12 horas mientras sigue en «Etiqueta creada» o «Admitido por el transportista»), Peek consulta cada hora.
+Mientras tienes el paquete abierto en pantalla o el día de la entrega con las notificaciones activadas, y mientras responde el seguimiento de GOFO, Peek consulta hasta cada 10 minutos, y hasta cada 2 minutos desde las 6:00 (hora italiana) el día en que GOFO lo escanea en reparto; el resto del tiempo, cada hora. A través de servicios de seguimiento comprueba cada hora (cada 3 horas tras un día sin novedades), y hasta cada 15 minutos el día de reparto mientras lo tienes abierto o con notificaciones activadas. Tras dos días sin novedades (12 horas mientras sigue en «Etiqueta creada» o «Admitido por el transportista»), Peek consulta cada hora.
 
-Peek muestra el estado, el historial con el lugar que GOFO indica para cada escaneo, la hora de entrega y esos lugares en un mapa. Si GOFO solo da un código de depósito o el país, el escaneo aparece sin lugar. Las horas se leen en horario italiano y se muestran en tu zona horaria; en peektracker.com y en las apps para iPhone y Android, una línea al final del historial lo recuerda («Horas en tu zona horaria: …»). Puedes recibir notificaciones de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Hasta que GOFO publique un primer escaneo, Peek muestra «Esperando a GOFO Italy» y sigue consultando. Si tras dos días GOFO sigue sin reconocer el número y ninguna otra fuente ha respondido, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y pasa a comprobarlo a diario, y una vez a la semana pasada una semana desde que lo añadiste. Si GOFO registra el envío sin haberlo escaneado aún, Peek sigue consultando con «Esperando a GOFO Italy» sin pedirte revisar el número. Peek muestra la fecha de entrega prevista por GOFO hasta que el paquete se entrega, se devuelve o queda listo para recoger; no muestra el peso y descarta las fotos de entrega y los avisos de GOFO. No puede contactar con GOFO ni con la tienda por ti.
+Peek muestra el estado, el historial con el lugar que GOFO indica para cada escaneo, la hora de entrega y esos lugares en un mapa. Si GOFO solo da un código de depósito o el país, el escaneo aparece sin lugar. Las horas se leen en horario italiano y se muestran en tu zona horaria; en peektracker.com y en las apps para iPhone y Android, una línea al final del historial lo recuerda («Horas en tu zona horaria: …»). Puedes recibir notificaciones de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Hasta que GOFO publique un primer escaneo, Peek muestra «Esperando a GOFO Italy» y sigue consultando. Si tras dos días GOFO sigue sin reconocer el número y ninguna otra fuente ha respondido, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y pasa a comprobarlo a diario, y una vez a la semana pasada una semana desde que lo añadiste. Si GOFO registra el envío sin haberlo escaneado aún, Peek sigue consultando con «Esperando a GOFO Italy» sin pedirte revisar el número. Peek muestra la fecha de entrega prevista por GOFO hasta que el paquete sale a reparto, se entrega, se devuelve o queda listo para recoger; no muestra el peso y descarta las fotos de entrega y los avisos de GOFO. No puede contactar con GOFO ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de GOFO Italy
 
@@ -90,7 +90,7 @@ La sociedad italiana de GOFO es GOFO Italia s.r.l., con domicilio social en Lain
 
 ### ¿GOFO y CIRRO Parcel son lo mismo?
 
-En Italia, a efectos de seguimiento, sí: la lista de transportistas de Peek también incluye GOFO Italy como CIRRO Parcel Italy. Un rastreo que solo diga «Cirro» puede referirse a la red italiana, francesa o neerlandesa de GOFO, o a la línea transfronteriza de Cirro que entrega los paquetes a correos nacionales con sus propios códigos.
+En Italia, a efectos de seguimiento, sí: la lista de transportistas de Peek también incluye GOFO Italy como CIRRO Parcel Italy. Un rastreo que solo diga «Cirro» puede referirse a la red italiana, francesa o neerlandesa de GOFO.
 
 ### ¿Qué hago si mi paquete de GOFO se ha perdido?
 

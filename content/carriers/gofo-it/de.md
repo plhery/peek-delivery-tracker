@@ -46,7 +46,7 @@ Hat [YunExpress](carrier:yunexpress) das Paket an GOFO Italy übergeben, kann da
 
 ## GOFO-Paket verspätet, verpasst, verloren oder beschädigt
 
-**Keine Bewegung.** Peek fragt weiter bei GOFO nach. Vergehen vor der Zustelltour vier Tage ohne neuen Scan, meldet Peek das („Seit vier Tagen keine Aktualisierung“) und verlinkt auf die Hilfeseite von GOFO Italy („Hol dir Hilfe bei GOFO Italy“). Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Bewegung.** Peek fragt weiter bei GOFO nach. Vergehen vor der Zustelltour vier Tage ohne neuen Scan, meldet Peek das („Keine Aktualisierung seit …“ mit dem Tag des letzten Scans) und verlinkt auf die Hilfeseite von GOFO Italy („Hol dir Hilfe bei GOFO Italy“). Siehe auch [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Verpasste Zustellung.** Nach einer Meldung mit `Consegna fallita` unter dem Hinweiscode von GOFO – ob `Destinatario assente`, `L'indirizzo è errato` oder ein anderer Grund nach `tipo:` – zeigt Peek „Zustellversuch“. Wie es weitergeht, liegt bei GOFO: Hinweise stehen unter [verpasste Zustellung](guide:missed-delivery).
 
@@ -64,7 +64,7 @@ Beginne beim Shop, der das Paket verschickt hat, da er für die Zustellung einst
 2. Befriedigt dich die Antwort nicht oder bleibt sie nach 45 Tagen aus, beantrage beim Betreiber eine Schlichtung. Sie endet innerhalb von 60 Tagen.
 3. Scheitert auch sie, hast du 90 Tage Zeit, bei der AGCOM mit dem Formulario CP eine Streitbeilegung zu beantragen. Die AGCOM entscheidet binnen 150 Tagen verbindlich für beide Seiten.
 
-Die AGCOM kann Erstattungen oder vorgesehene Entschädigungen anordnen, jedoch keinen Schadensersatz – dafür und jederzeit steht dir der ordentliche Rechtsweg offen. Antwortet der Betreiber nicht auf Beschwerde oder Schlichtungsantrag, melde ihn über das Portale delle segnalazioni der AGCOM. Das Kontaktcenter der AGCOM ist montags bis freitags von 10:00 bis 14:00 Uhr unter `800.185060` (italienisches Festnetz) oder `081.750750` (Mobilfunk oder Ausland) erreichbar.
+Die AGCOM kann Erstattungen oder vorgesehene Entschädigungen anordnen, jedoch keinen Schadensersatz – dafür und jederzeit steht dir der ordentliche Rechtsweg offen. Antwortet der Betreiber nicht auf Beschwerde oder Schlichtungsantrag, melde ihn über das Portale delle segnalazioni der AGCOM. Das Kontaktcenter der AGCOM ist montags bis freitags von 10:00 bis 14:00 Uhr unter `800.185060` (Festnetz) oder `081.750750` (Mobilfunk oder Ausland) erreichbar.
 
 ## GOFO Italy Kundenservice
 
@@ -74,9 +74,9 @@ Die Hilfeseite von GOFO Italy liegt auf der italienischen Website gofo.com; Peek
 
 [Peek](/) erkennt `GFIT`- und `CIIT`-Nummern direkt (bei 14-stelligen `GFIT`-Nummern samt Prüfziffer). Du kannst auch einen Link der italienischen Tracking-Seite von GOFO einfügen (auf gofo.com oder gofoexpress.it, mit `id=` und der Nummer).
 
-Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, und solange das Tracking von GOFO antwortet, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr italienischer Zeit am Tag, an dem GOFO das Paket in Zustellung scannt, bis zu alle 2 Minuten; sonst stündlich. Über Tracking-Dienste prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten, solange du es geöffnet hast oder Mitteilungen aktiv sind. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich.
+Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, und solange das Tracking von GOFO antwortet, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr italienischer Zeit am Tag, an dem GOFO das Paket in Zustellung scannt, bis zu alle 2 Minuten; sonst stündlich. Über Tracking-Dienste prüft Peek stündlich (nach einem Tag ohne Neuigkeiten alle 3 Stunden), am Zustelltag bis zu alle 15 Minuten, solange du es geöffnet hast oder Mitteilungen aktiv sind. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich.
 
-Peek zeigt den Status, den Verlauf mit dem von GOFO genannten Ort je Scan, die Zustellzeit und diese Orte auf einer Karte. Nennt GOFO nur einen Depotcode oder das Land, bleibt der Ort beim Scan leer. Die Zeiten werden nach italienischer Zeit gelesen und in deiner Zeitzone angezeigt; auf peektracker.com sowie in den iPhone- und Android-Apps erinnert eine Zeile unter dem Verlauf daran („Uhrzeiten in deiner Zeitzone: …“). Mitteilungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Bis GOFO einen ersten Scan führt, zeigt Peek „Warten auf GOFO Italy“ und fragt weiter nach. Kennt GOFO die Nummer nach zwei Tagen noch immer nicht und hat auch keine andere Quelle geantwortet, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und prüft ab dann täglich, nach einer Woche wöchentlich. Kennt GOFO die Sendung bereits ohne Scan, bleibt es bei „Warten auf GOFO Italy“ ohne Prüfhinweis. Peek zeigt GOFOs voraussichtliches Lieferdatum, bis das Paket zugestellt, zurückgesendet oder abholbereit ist; Gewicht, Zustellfotos und Hinweise von GOFO lässt es weg. Es kann weder GOFO noch den Shop für dich kontaktieren.
+Peek zeigt den Status, den Verlauf mit dem von GOFO genannten Ort je Scan, die Zustellzeit und diese Orte auf einer Karte. Nennt GOFO nur einen Depotcode oder das Land, bleibt der Ort beim Scan leer. Die Zeiten werden nach italienischer Zeit gelesen und in deiner Zeitzone angezeigt; auf peektracker.com sowie in den iPhone- und Android-Apps erinnert eine Zeile unter dem Verlauf daran („Uhrzeiten in deiner Zeitzone: …“). Mitteilungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Bis GOFO einen ersten Scan führt, zeigt Peek „Warten auf GOFO Italy“ und fragt weiter nach. Kennt GOFO die Nummer nach zwei Tagen noch immer nicht und hat auch keine andere Quelle geantwortet, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und prüft ab dann täglich, nach einer Woche wöchentlich. Kennt GOFO die Sendung bereits ohne Scan, bleibt es bei „Warten auf GOFO Italy“ ohne Prüfhinweis. Peek zeigt GOFOs voraussichtliches Lieferdatum, bis das Paket in Zustellung, zugestellt, zurückgesendet oder abholbereit ist; Gewicht, Zustellfotos und Hinweise von GOFO lässt es weg. Es kann weder GOFO noch den Shop für dich kontaktieren.
 
 ## Fragen zum GOFO-Italy-Tracking
 
@@ -90,7 +90,7 @@ Die italienische Gesellschaft ist GOFO Italia s.r.l. mit eingetragenem Sitz in L
 
 ### Sind GOFO und CIRRO Parcel dasselbe?
 
-In Italien für die Sendungsverfolgung ja: Peeks Paketdienstliste führt GOFO Italy auch unter dem Namen CIRRO Parcel Italy. Ein Tracking, das nur „Cirro“ nennt, kann jedoch GOFOs italienisches, französisches oder niederländisches Netz meinen oder Cirros eigene internationale Linie, die Pakete unter deren Nummern an nationale Postdienste übergibt.
+In Italien für die Sendungsverfolgung ja: Peeks Paketdienstliste führt GOFO Italy auch unter dem Namen CIRRO Parcel Italy. Ein Tracking, das nur „Cirro“ nennt, kann jedoch GOFOs italienisches, französisches oder niederländisches Netz meinen.
 
 ### Was kann ich tun, wenn mein GOFO-Paket verloren ist?
 

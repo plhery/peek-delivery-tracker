@@ -46,7 +46,7 @@ Jeśli [YunExpress](carrier:yunexpress) przekazał paczkę do GOFO Italy, śledz
 
 ## Paczka GOFO opóźniona, niedoręczona, zaginiona lub uszkodzona
 
-**Brak aktualizacji.** Peek nadal pyta GOFO. Jeśli przed wyjazdem do doręczenia miną cztery dni bez nowego skanu, Peek to sygnalizuje („Brak aktualizacji od czterech dni”) i wyświetla link do strony pomocy GOFO Italy („Poproś przewoźnika GOFO Italy o pomoc”). Zobacz też [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating).
+**Brak aktualizacji.** Peek nadal pyta GOFO. Jeśli przed wyjazdem do doręczenia miną cztery dni bez nowego skanu, Peek to sygnalizuje („Brak aktualizacji od …” z dniem ostatniego skanu) i wyświetla link do strony pomocy GOFO Italy („Poproś przewoźnika GOFO Italy o pomoc”). Zobacz też [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating).
 
 **Nieudane doręczenie.** Po każdym wpisie `Consegna fallita` z kodem alertu GOFO — niezależnie czy po `tipo:` widnieje `Destinatario assente`, `L'indirizzo è errato`, czy inny powód — Peek wyświetla „Próba doręczenia”. Dalsze kroki zależą od GOFO: sprawdź [nieudane doręczenie](guide:missed-delivery).
 
@@ -64,7 +64,7 @@ Zacznij od sklepu, który nadał paczkę, bo to on odpowiada za dostawę. W przy
 2. Jeśli odpowiedź cię nie satysfakcjonuje albo nie nadejdzie w ciągu 45 dni, wystąp do operatora o postępowanie pojednawcze (conciliazione), które kończy się w ciągu 60 dni.
 3. Jeśli to również nie pomoże, masz 90 dni na zwrócenie się do AGCOM o rozstrzygnięcie sporu za pomocą Formulario CP. AGCOM wydaje wiążącą obie strony decyzję w ciągu 150 dni.
 
-AGCOM może nakazać zwrot kosztów lub przewidziane przepisami odszkodowanie, ale nie odszkodowanie za szkody ogólne – w tej sprawie oraz na każdym etapie możesz wystąpić do sądu. Jeśli operator nie odpowie na reklamację ani na wniosek o pojednanie, zgłoś to przez Portale delle segnalazioni AGCOM. Centrum kontaktowe AGCOM działa od poniedziałku do piątku w godzinach 10:00–14:00 pod numerem `800.185060` (z włoskich telefonów stacjonarnych) lub `081.750750` (z telefonów komórkowych lub z zagranicy).
+AGCOM może nakazać zwrot kosztów lub przewidziane przepisami odszkodowanie, ale nie odszkodowanie za poniesione szkody – w tej sprawie oraz na każdym etapie możesz wystąpić do sądu. Jeśli operator nie odpowie na reklamację ani na wniosek o pojednanie, zgłoś to przez Portale delle segnalazioni AGCOM. Centrum kontaktowe AGCOM działa od poniedziałku do piątku w godzinach 10:00–14:00 pod numerem `800.185060` (z telefonów stacjonarnych) lub `081.750750` (z telefonów komórkowych lub z zagranicy).
 
 ## Obsługa klienta GOFO Italy
 
@@ -74,9 +74,9 @@ Strona pomocy GOFO Italy znajduje się na jej włoskim serwisie gofo.com, a Peek
 
 [Peek](/) samodzielnie rozpoznaje numery `GFIT` i `CIIT` (weryfikując cyfrę kontrolną przy 14-cyfrowych numerach `GFIT`). Możesz też wkleić link z włoskiej strony śledzenia GOFO (na gofo.com lub gofoexpress.it, z parametrem `id=` i numerem).
 
-Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie GOFO odpowiada, Peek sprawdza ją nawet co 10 minut, a od godz. 6:00 czasu włoskiego w dniu, gdy GOFO zeskanuje ją w doręczeniu, nawet co 2 minuty; w pozostałym czasie co godzinę. Przez usługi śledzenia sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut, dopóki masz ją otwartą lub włączone powiadomienia. Po dwóch dniach bez nowości (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza przesyłkę co godzinę.
+Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a śledzenie GOFO odpowiada, Peek sprawdza ją nawet co 10 minut, a od godz. 6:00 czasu włoskiego w dniu, gdy GOFO zeskanuje ją w doręczeniu, nawet co 2 minuty; w pozostałym czasie co godzinę. Przez usługi śledzenia sprawdza co godzinę (po dniu bez nowości co 3 godziny), a w dniu doręczenia nawet co 15 minut, dopóki masz ją otwartą lub włączone powiadomienia. Po dwóch dniach bez nowości (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza przesyłkę co godzinę.
 
-Peek pokazuje status, historię z miejscem podanym przez GOFO przy każdym skanie, godzinę doręczenia i te miejsca na mapie. Jeśli GOFO podaje tylko kod magazynu albo kraj, przy skanie nie wyświetla się żadna miejscowość. Godziny są odczytywane według czasu włoskiego i wyświetlane w twojej strefie czasowej; na peektracker.com oraz w aplikacjach na iPhone’a i Androida przypomina o tym wiersz pod historią („Godziny w twojej strefie czasowej: …”). Możesz ustawić powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dopóki GOFO nie pokaże pierwszego skanu, Peek wyświetla „Oczekiwanie na przewoźnika GOFO Italy” i pyta dalej. Jeśli po dwóch dniach GOFO wciąż nie zna numeru, a żadne inne źródło nie odpowiedziało, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i odtąd sprawdza go raz dziennie, a po tygodniu od dodania raz w tygodniu. Jeśli GOFO ma przesyłkę w systemie bez pierwszego skanu, Peek dalej wyświetla „Oczekiwanie na przewoźnika GOFO Italy” bez prośby o sprawdzenie numeru. Peek pokazuje przewidywaną datę doręczenia z GOFO, dopóki przesyłka nie zostanie dostarczona, zwrócona ani gotowa do odbioru; nie pokazuje wagi i pomija zdjęcia z doręczenia oraz komunikaty GOFO. Nie może kontaktować się w twoim imieniu z GOFO ani ze sklepem.
+Peek pokazuje status, historię z miejscem podanym przez GOFO przy każdym skanie, godzinę doręczenia i te miejsca na mapie. Jeśli GOFO podaje tylko kod magazynu albo kraj, przy skanie nie wyświetla się żadna miejscowość. Godziny są odczytywane według czasu włoskiego i wyświetlane w twojej strefie czasowej; na peektracker.com oraz w aplikacjach na iPhone’a i Androida przypomina o tym wiersz pod historią („Godziny w twojej strefie czasowej: …”). Możesz ustawić powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Dopóki GOFO nie pokaże pierwszego skanu, Peek wyświetla „Oczekiwanie na przewoźnika GOFO Italy” i pyta dalej. Jeśli po dwóch dniach GOFO wciąż nie zna numeru, a żadne inne źródło nie odpowiedziało, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i odtąd sprawdza go raz dziennie, a po tygodniu od dodania raz w tygodniu. Jeśli GOFO ma przesyłkę w systemie bez pierwszego skanu, Peek dalej wyświetla „Oczekiwanie na przewoźnika GOFO Italy” bez prośby o sprawdzenie numeru. Peek pokazuje przewidywaną datę doręczenia z GOFO, dopóki przesyłka nie wyjedzie w doręczenie, nie zostanie dostarczona, zwrócona ani nie będzie gotowa do odbioru; nie pokazuje wagi i pomija zdjęcia z doręczenia oraz komunikaty GOFO. Nie może kontaktować się w twoim imieniu z GOFO ani ze sklepem.
 
 ## Pytania o śledzenie GOFO Italy
 
@@ -90,7 +90,7 @@ Włoską spółką GOFO jest GOFO Italia s.r.l. z siedzibą w Lainate w prowincj
 
 ### Czy GOFO i CIRRO Parcel to to samo?
 
-We Włoszech w ramach śledzenia tak: lista przewoźników Peek podaje dla GOFO Italy również nazwę CIRRO Parcel Italy. Śledzenie z samym opisem „Cirro” może jednak oznaczać włoską, francuską lub holenderską sieć GOFO albo transgraniczną usługę Cirro przekazującą paczki pocztom narodowym pod ich numerami.
+We Włoszech w ramach śledzenia tak: lista przewoźników Peek podaje dla GOFO Italy również nazwę CIRRO Parcel Italy. Śledzenie z samym opisem „Cirro” może jednak oznaczać włoską, francuską lub holenderską sieć GOFO.
 
 ### Co zrobić, jeśli paczka GOFO zaginęła?
 

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { chmodSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 import { load } from 'js-yaml';
@@ -715,5 +717,135 @@ describe('waiting for the registry', () => {
       throw new Error(`attempt ${calls}`);
     }, { attempts: 3, pauseMs: 0, pause: async () => {} }), /attempt 3/);
     assert.equal(calls, 3);
+  });
+});
+
+describe('an adoption main moved under while it was tested', () => {
+  const workflow = load(readFileSync(new URL('../.github/workflows/adopt-scraper.yml', import.meta.url), 'utf8'));
+  const step = workflow.jobs.adopt.steps.find((candidate) => candidate.id === 'refresh');
+  const owned = workflow.env.ADOPTION_FILES.trim().split(/\s+/);
+  const git = (cwd, ...args) => execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.test', ...args],
+    { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  // Stands in for the app's generators: each output reads the pinned release, the installed one and a source file.
+  const npm = `#!/bin/bash
+set -e
+made="$(cat package.json) $(cat node_modules/release.txt)"
+case "$2" in
+  contract:generate) echo "$made $(cat api.txt)" > contracts/openapi.json ;;
+  ios:resources) echo "$made" > ios/PeekDeliveryTracker/Resources/CarrierCatalog.json ;;
+  guides) echo "$made $(cat guides.txt)" > src/generated/carriers.ts; if [ -n "$STRAY" ]; then echo stray > stray.txt; fi ;;
+esac
+`;
+
+  // main with every owned file, a work clone that prepared the adoption on it as the adopt job does, and a
+  // clone that commits to main meanwhile.
+  function prepared() {
+    const dir = mkdtempSync(path.join(os.tmpdir(), 'adopt-refresh-'));
+    const bin = path.join(dir, 'bin');
+    mkdirSync(bin);
+    writeFileSync(path.join(bin, 'npm'), npm);
+    chmodSync(path.join(bin, 'npm'), 0o755);
+    const env = { ...process.env, PATH: `${bin}${path.delimiter}${process.env.PATH}` };
+    const write = (root, file, text) => {
+      mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      writeFileSync(path.join(root, file), text);
+    };
+    const seed = path.join(dir, 'seed');
+    mkdirSync(seed);
+    git(seed, 'init', '--quiet', '-b', 'main');
+    for (const file of owned) write(seed, file, 'before\n');
+    write(seed, 'package.json', 'release-1\n');
+    write(seed, '.gitignore', 'node_modules/\n');
+    write(seed, 'api.txt', 'api-1\n');
+    write(seed, 'guides.txt', 'guides-1\n');
+    git(seed, 'add', '-A');
+    git(seed, 'commit', '--quiet', '-m', 'main');
+    const origin = path.join(dir, 'origin.git');
+    git(dir, 'clone', '--quiet', '--bare', seed, origin);
+    const other = path.join(dir, 'other');
+    git(dir, 'clone', '--quiet', `file://${origin}`, other);
+    const work = path.join(dir, 'work');
+    git(dir, 'clone', '--quiet', '--depth=1', `file://${origin}`, work);
+    const base = git(work, 'rev-parse', 'HEAD');
+    write(work, 'node_modules/release.txt', 'installed-2\n');
+    write(work, 'package.json', 'release-2\n');
+    for (const script of ['contract:generate', 'ios:resources', 'guides']) {
+      execFileSync('npm', ['run', script], { cwd: work, env });
+    }
+    git(work, 'add', '--', ...owned);
+    const temp = path.join(dir, 'temp');
+    mkdirSync(path.join(temp, 'adoption'), { recursive: true });
+    const patch = path.join(temp, 'adoption', 'adoption.patch');
+    writeFileSync(patch, execFileSync('git', ['diff', '--cached', '--binary', '--full-index'], { cwd: work }));
+    // A commit on main, as another change would push it, generating with the release main pins.
+    const commit = (changes) => {
+      for (const [file, text] of Object.entries(changes)) write(other, file, text);
+      git(other, 'add', '-A');
+      git(other, 'commit', '--quiet', '-m', 'meanwhile');
+      git(other, 'push', '--quiet', 'origin', 'HEAD:main');
+      return git(other, 'rev-parse', 'HEAD');
+    };
+    const refresh = (extra = {}) => {
+      const output = path.join(temp, 'output');
+      writeFileSync(output, '');
+      execFileSync('bash', ['--noprofile', '--norc', '-eo', 'pipefail', '-c', step.run], {
+        cwd: work, stdio: ['ignore', 'pipe', 'pipe'],
+        env: { ...env, ...extra, BASE: base, ADOPTION_FILES: workflow.env.ADOPTION_FILES, RUNNER_TEMP: temp, GITHUB_OUTPUT: output },
+      });
+      return readFileSync(output, 'utf8').match(/^base=(\w+)$/m)?.[1];
+    };
+    // The files main ends with once the push job applies the patch on `onto`.
+    const applied = (onto) => {
+      const check = path.join(dir, `check-${onto.slice(0, 7)}`);
+      git(dir, 'clone', '--quiet', `file://${origin}`, check);
+      git(check, 'checkout', '--quiet', '--detach', onto);
+      git(check, 'apply', '--index', patch);
+      return (file) => readFileSync(path.join(check, file), 'utf8');
+    };
+    return { dir, base, patch, commit, refresh, applied, cleanup: () => rmSync(dir, { recursive: true, force: true }) };
+  }
+
+  it('runs after the Android tests and hands its commit to the push job', () => {
+    const steps = workflow.jobs.adopt.steps.map((candidate) => candidate.id ?? candidate.name);
+    assert.ok(steps.indexOf('android') < steps.indexOf('refresh'));
+    assert.ok(steps.indexOf('refresh') < steps.indexOf('Hand the patch to the push job'));
+    assert.match(workflow.jobs.adopt.outputs.base, /steps\.refresh\.outputs\.base/);
+  });
+
+  it('keeps the adoption when main left its files alone', (t) => {
+    const repo = prepared();
+    t.after(repo.cleanup);
+    const before = readFileSync(repo.patch, 'utf8');
+    repo.commit({ 'README.md': 'docs\n' });
+    assert.equal(repo.refresh(), repo.base);
+    assert.equal(readFileSync(repo.patch, 'utf8'), before);
+  });
+
+  it('makes the adoption again on main when a commit regenerated one of its files', (t) => {
+    const repo = prepared();
+    t.after(repo.cleanup);
+    const latest = repo.commit({ 'guides.txt': 'guides-2\n', 'src/generated/carriers.ts': 'release-1 installed-1 guides-2\n' });
+    assert.equal(repo.refresh(), latest);
+    const read = repo.applied(latest);
+    assert.equal(read('src/generated/carriers.ts'), 'release-2 installed-2 guides-2\n');
+    assert.equal(read('contracts/openapi.json'), 'release-2 installed-2 api-1\n');
+    assert.equal(read('package.json'), 'release-2\n');
+  });
+
+  it('leaves a changed package.json or lockfile to a new run', (t) => {
+    const repo = prepared();
+    t.after(repo.cleanup);
+    repo.commit({ 'package-lock.json': 'another dependency\n', 'src/generated/carriers.ts': 'release-1 installed-1 guides-1 again\n' });
+    assert.equal(repo.refresh(), repo.base);
+  });
+
+  it('fails when making it again writes a file an adoption does not own', (t) => {
+    const repo = prepared();
+    t.after(repo.cleanup);
+    repo.commit({ 'contracts/openapi.json': 'release-1 installed-1 api-2\n', 'api.txt': 'api-2\n' });
+    assert.throws(() => repo.refresh({ STRAY: '1' }), (error) => {
+      assert.match(String(error.stdout), /::error::The release changed files an adoption does not own\.\n\?\? stray\.txt/);
+      return true;
+    });
   });
 });

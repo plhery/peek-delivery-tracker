@@ -149,10 +149,13 @@ of the release, pushes the result to `main` as one commit. CI validates that fin
 before deployment ([deployment](DEPLOYMENT.md)); adoption leaves the browser journeys, the
 production build and the iPhone app to it. A commit that reached `main` in the meantime is
 kept when it leaves the adoption's files alone. One that changed them, such as a carrier page
-that regenerates `src/generated/carriers.ts`, is never merged: the run starts a new one for the
-same release on `main` as it is now, which counts as its slot's adoption as this one would have,
-and ends without pushing or failing. The fourth such run in a row fails, and its summary gives
-the command that starts it again. When `main` already pins the release or a newer one,
+that regenerates `src/generated/carriers.ts`, is never merged. Once the tests pass, the run
+regenerates the adoption's files on `main` as it is then, with the release it installed, so
+only a commit in the minute before the push collides, or one that changes `package.json` or
+the lockfile, which needs another install. The run then starts a new one on `main` as it is
+now, for the release it was asked for or, when none was named, the newest, which counts as its
+slot's adoption as this one would have, and ends without pushing or failing. The fourth such
+run in a row fails, and its summary gives the command that starts it again. When `main` already pins the release or a newer one,
 such as after a second run for the same release, the run ends without pushing or failing.
 
 When the app fails its typecheck or unit tests, or the Android core its tests, with a

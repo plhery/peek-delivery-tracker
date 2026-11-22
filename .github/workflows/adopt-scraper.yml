@@ -136,7 +136,7 @@ jobs:
       blocked: ${{ steps.gate.outputs.blocked == 'true' }}
       version: ${{ steps.target.outputs.version }}
       current: ${{ steps.target.outputs.current }}
-      base: ${{ steps.target.outputs.base }}
+      base: ${{ steps.refresh.outputs.base || steps.target.outputs.base }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -286,6 +286,46 @@ jobs:
           TEST_TIME_ZONE: UTC
         run: ./gradlew :core:test
 
+      # The tests take minutes, and main can change a file the adoption owns
+      # meanwhile, such as a carrier page that regenerates
+      # src/generated/carriers.ts. The adoption is then made again on main as it
+      # is now, in a worktree, with the release this job installed and tested,
+      # so the push job finds main as it was prepared on unless main moves in
+      # the minute between. A change to package.json or the lockfile needs
+      # another install, which the push job leaves to the Again job.
+      - name: Prepare the adoption again on main as it is now
+        id: refresh
+        if: steps.android.outcome == 'success'
+        env:
+          BASE: ${{ steps.target.outputs.base }}
+        run: |
+          read -r -a files <<< "$ADOPTION_FILES"
+          git fetch --quiet --depth=1 origin main
+          latest=$(git rev-parse FETCH_HEAD)
+          changed=$(git diff --name-only "$BASE" "$latest" -- "${files[@]}")
+          if [ -z "$changed" ] || grep -qx -e package.json -e package-lock.json <<< "$changed"; then
+            echo "base=$BASE" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "main changed $(paste -sd ' ' - <<< "$changed") after the adoption was prepared: it is prepared again on $latest."
+          fresh="$RUNNER_TEMP/fresh"
+          git worktree add --quiet --detach "$fresh" "$latest"
+          cp package.json package-lock.json "$fresh/"
+          ln -s "$PWD/node_modules" "$fresh/node_modules"
+          cd "$fresh"
+          npm run contract:generate
+          npm run ios:resources
+          npm run guides
+          git add -- "${files[@]}"
+          unexpected=$(git status --porcelain -- . ':!node_modules' | grep -v '^M  ' || true)
+          if [ -n "$unexpected" ]; then
+            echo "::error::The release changed files an adoption does not own."
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+          git diff --cached --binary --full-index > "$RUNNER_TEMP/adoption/adoption.patch"
+          echo "base=$latest" >> "$GITHUB_OUTPUT"
+
       - name: Hand the patch to the push job
         if: steps.target.outputs.adopt == 'true' && steps.gate.outputs.blocked != 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -307,6 +347,7 @@ jobs:
             || steps.patch.outcome == 'failure' && 'The release changed files an adoption does not own.'
             || steps.tests.outcome == 'failure' && 'The app fails its typecheck or unit tests with this release.'
             || steps.android.outcome == 'failure' && 'The Android core fails its tests with this release.'
+            || steps.refresh.outcome == 'failure' && 'The adoption could not be prepared again on main as it is now.'
             || '' }}
         run: |
           if [ -n "$FAILED" ]; then
@@ -387,12 +428,12 @@ jobs:
           node-version: 26
 
       # A lockfile or a generated file is never merged: when main changed one
-      # since preparation, such as a carrier page that regenerates
-      # src/generated/carriers.ts, the Again job makes the adoption again on
-      # main as it is now, and this run ends without pushing or failing; after
-      # MAX_AGAIN such runs in a row, it fails. When main already pins the
-      # release or a newer one, another run or a commit by hand adopted it, and
-      # the run ends without pushing or failing.
+      # since preparation, in the minute after the adopt job prepared it again
+      # or in package.json or the lockfile, the Again job makes the adoption
+      # again on main as it is now, and this run ends without pushing or
+      # failing; after MAX_AGAIN such runs in a row, it fails. When main
+      # already pins the release or a newer one, another run or a commit by
+      # hand adopted it, and the run ends without pushing or failing.
       - name: Commit the adoption
         id: commit
         run: |
@@ -514,8 +555,10 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   # Makes the adoption again when main changed one of its files after it was
-  # prepared: a new run prepares the same release on main as it is now. It
-  # counts as its slot's adoption as this one would have, or is one by hand.
+  # prepared: a new run prepares it on main as it is now, for the release this
+  # one was asked for or, when none was named, the newest, so a release
+  # published meanwhile is not left to the next slot. It counts as its slot's
+  # adoption as this one would have, or is one by hand.
   again:
     name: Again
     needs: [adopt, push]
@@ -528,7 +571,7 @@ jobs:
       - name: Start the adoption again
         env:
           GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ needs.adopt.outputs.version }}
+          VERSION: ${{ inputs.version }}
           SLOT: ${{ github.event_name != 'workflow_dispatch' || inputs.slot == true }}
           DATABASE_READY: ${{ inputs.database_ready == true }}
           AGAIN: ${{ inputs.again || 0 }}

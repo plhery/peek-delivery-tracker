@@ -5914,6 +5914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "seguimiento-swiss-post-cargo",
+      "title": "Seguimiento Swiss Post Cargo: estados, entrega y contacto",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dachser",
       "catalog": "dachser",
       "slug": "dachser-seguimiento",
@@ -7034,6 +7042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ecoscooting rastreio: estados, pontos de recolha e contacto",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "rastreio-swiss-post-cargo",
+      "title": "Rastreio Swiss Post Cargo: estados, entrega e contactos",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
     },
     {
       "id": "dachser",
@@ -8174,6 +8190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ecoscooting śledzenie przesyłek: statusy, punkty i kontakt",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "swiss-post-cargo",
+      "catalog": "swiss-post-cargo",
+      "slug": "sledzenie-swiss-post-cargo",
+      "title": "Śledzenie Swiss Post Cargo: statusy, dostawa i kontakt",
+      "name": "Swiss Post Cargo",
+      "color": "#ffcc00"
     },
     {
       "id": "dachser",

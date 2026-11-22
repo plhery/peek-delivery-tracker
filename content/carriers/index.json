@@ -71,7 +71,7 @@
   { "id": "geodis", "catalog": "geodis", "name": "GEODIS", "languages": ["en", "fr", "de", "es", "it", "pl", "pt"] },
   { "id": "delivengo", "catalog": "delivengo", "name": "Delivengo", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ecoscooting", "catalog": "ecoscooting", "name": "Ecoscooting", "languages": ["en", "es", "pt", "fr", "it", "de", "pl"] },
-  { "id": "swiss-post-cargo", "catalog": "swiss-post-cargo", "name": "Swiss Post Cargo", "languages": ["en", "de", "fr", "it"] },
+  { "id": "swiss-post-cargo", "catalog": "swiss-post-cargo", "name": "Swiss Post Cargo", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "dachser", "catalog": "dachser", "name": "Dachser", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "meest", "catalog": "meest", "name": "Meest", "languages": ["en", "pl", "uk"] },
   { "id": "nova-poshta", "catalog": "nova-poshta", "name": "Nova Poshta", "languages": ["en", "pl", "uk"] },

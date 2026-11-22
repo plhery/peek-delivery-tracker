@@ -18,7 +18,7 @@ Heppner nie publikuje oficjalnego formatu. Peek przyjmuje dla Heppner 8 cyfr (pr
 | --- | --- |
 | `84729163` | Heppner albo numer [Mondial Relay](carrier:mondial-relay) lub Colisweb o tej samej długości. |
 | `4829173` | Nie Heppner: 7 cyfr wskazuje na [SEUR](carrier:seur). |
-| `4829173654` | Nie Heppner: 10 cyfr pasuje do [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis i innych. |
+| `4829173654` | Nie Heppner: 10 cyfr pasuje do [DHL](carrier:dhl), Mondial Relay, Relais Colis i innych. |
 
 Same osiem cyfr nie mówią, która firma wiezie przesyłkę — sprawdź nazwę w SMS-ie lub e-mailu ([formaty numerów przesyłek](guide:tracking-number-formats)). Jeśli Heppner wyświetli `We were unable to locate your order`, prosi o sprawdzenie zgodności kodu pocztowego z numerem śledzenia: błędny kod pocztowy wygląda jak błędny numer.
 
@@ -78,18 +78,18 @@ Kanały podane na stronach Heppner:
 
 - **Francja:** brak ogólnokrajowej infolinii, e-maila ani czatu dla odbiorców. Skorzystaj z [formularza Contactez-nous](https://www.heppner-group.com/contactez-nous/) z tematem „Suivi d'un transport en cours” i numerem śledzenia.
 - **Twój oddział:** strona śledzenia pokazuje „Your branch” z godzinami otwarcia i telefonem. Wszystkie oddziały są w [wyszukiwarce sieci Heppner](https://www.heppner-group.com/reseau/).
-- **Szwajcaria (SAFRAM):** Genewa (Satigny) +41 22 827 03 11, Bazylea +41 61 338 93 33, biuro celne Bardonnex +41 22 771 43 13, każde od poniedziałku do piątku 8:00–17:00.
+- **Szwajcaria (SAFRAM):** Genewa (Satigny) +41 22 827 03 11, Bazylea +41 61 338 93 33, biuro celne Bardonnex +41 22 771 43 13, każde od poniedziałku do piątku 8:00–17:00 (czasu szwajcarskiego).
 - **Reklamacje:** indemnisations.nationales@heppner-group.com dla Francji oraz indemnisations.internationales@heppner-group.com dla transportu międzynarodowego (dla sklepu lub nadawcy).
 
 ## Śledzenie dostawy Heppner w Peek
 
-[Peek](/) nie może zapytać Heppner, Mondial Relay ani Colisweb, czy znają 8-cyfrowy numer, więc sam numer nie wybiera przewoźnika. Wklej go mimo to (Peek śledzi ponad 4500 przewoźników), kliknij „Zmień” i wybierz Heppner w sekcji „Pasują do numeru”. Linki Heppner nie przekazują danych do Peek — wpisz cyfry.
+[Peek](/) nie może zapytać Heppner, Mondial Relay ani Colisweb, czy znają 8-cyfrowy numer, więc sam numer nie wybiera przewoźnika. Wklej go mimo to (Peek śledzi ponad 4500 przewoźników), kliknij „Zmień” i wybierz Heppner w sekcji „Pasują do numeru”. Jeśli sprawdzasz ze Szwajcarii, Peek od razu proponuje pole kodu pocztowego Heppner; z Francji, Belgii, Luksemburga, Hiszpanii lub Portugalii pole Mondial Relay, więc najpierw wybierz Heppner. Linki Heppner nie przekazują danych do Peek — wpisz cyfry.
 
-Następnie Peek poprosi o „Kod pocztowy odbiorcy” i bez niego niczego nie sprawdzi: 5 cyfr jest wyszukiwanych we Francji, a 4 cyfry najpierw w Szwajcarii, potem w Belgii i Luksemburgu. Błędny kod pocztowy wygląda jak nieznany numer.
+Następnie Peek poprosi o „Kod pocztowy odbiorcy” i bez niego nie może zapytać Heppner: 5 cyfr jest wyszukiwanych we Francji, a 4 cyfry najpierw w Szwajcarii, potem w Belgii i Luksemburgu. Błędny kod pocztowy wygląda jak nieznany numer.
 
-Peek pokazuje status i historię z dokładnymi godzinami w strefie czasowej Twojego urządzenia; na peektracker.com oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej:” z jej nazwą. Każdy krok używa nazw Peek: „Przesyłka przyjęta przez przewoźnika”, „W transporcie”, „Przesyłka przekazana dalej”, „W doręczeniu”, „Dostarczona”, „Zwrócona nadawcy”, „Oczekiwanie na instrukcje doręczenia” i „Problem z przesyłką”. Oczekiwanie na instrukcje, błąd przyjęcia i anulowanie („Shipment cancelled”) liczą się jako „Zgłoszono problem”. Komunikat Heppner o przekierowaniu pod nowy adres pod nowym numerem pojawia się po angielsku („Forwarded to a new address under a new reference”) i pozostaje w transporcie. Brak miejsc skanowania, planowanej daty i punktu odbioru; nie są pokazywane nadawca, Twoje dane, adres ani instrukcje doręczenia. Na ekranie przesyłki „Poproś przewoźnika Heppner o pomoc” otwiera formularz kontaktowy Heppner.
+Peek pokazuje status i historię z dokładnymi godzinami w strefie czasowej Twojego urządzenia; na peektracker.com oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej:” z jej nazwą. Każdy krok używa nazw Peek: „Przesyłka przyjęta przez przewoźnika”, „W transporcie”, „Przesyłka przekazana dalej”, „W doręczeniu”, „Dostarczona”, „Zwrócona nadawcy”, „Oczekiwanie na instrukcje doręczenia” i „Problem z przesyłką”. Oczekiwanie na instrukcje, błąd przyjęcia i anulowanie („Shipment cancelled”) liczą się jako „Zgłoszono problem”. Komunikat Heppner o przekierowaniu pod nowy adres pod nowym numerem pojawia się po angielsku („Forwarded to a new address under a new reference”) i pozostaje w transporcie. Brak miejsc skanowania, planowanej daty i punktu odbioru; nie są pokazywane nadawca, adres ani instrukcje doręczenia. Gdy przesyłka utknie bez nowych zdarzeń, notatka na jej ekranie zawiera „Poproś przewoźnika Heppner o pomoc”, który otwiera formularz kontaktowy Heppner.
 
-Gdy masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a w dniu zeskanowania w doręczeniu od 6:00 czasu lokalnego co 2 minuty, dopóki odpowiada własny system Heppner (przez usługi śledzenia co 15 minut). Poza tym oraz po dwóch dniach bez nowych zdarzeń (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza raz na godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie rezerwuje terminu dostawy — zrób to na stronie Heppner.
+Gdy masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a w dniu zeskanowania w doręczeniu od 6:00 czasu lokalnego co 2 minuty, dopóki odpowiada własny system Heppner. Poza tym oraz po dwóch dniach bez nowych zdarzeń (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza raz na godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie rezerwuje terminu dostawy — zrób to na stronie Heppner.
 
 ## Pytania o śledzenie Heppner
 

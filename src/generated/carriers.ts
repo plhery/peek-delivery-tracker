@@ -3060,6 +3060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e8171f"
     },
     {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "raben-sendungsverfolgung",
+      "title": "Raben Sendungsverfolgung: Nummer, Status & Lieferung",
+      "name": "Raben",
+      "color": "#df0020"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "jd-logistics-sendungsverfolgung",
@@ -4414,6 +4422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e8171f"
     },
     {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "suivi-raben",
+      "title": "Suivi Raben\u00a0: numéro d'envoi, statuts et livraison",
+      "name": "Raben",
+      "color": "#df0020"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "suivi-colis-jd-logistics",
@@ -5728,6 +5744,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e8171f"
     },
     {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "tracciamento-raben",
+      "title": "Tracciamento Raben: numero, stati e consegna",
+      "name": "Raben",
+      "color": "#df0020"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "tracciamento-jd-logistics",
@@ -7018,6 +7042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e8171f"
     },
     {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "seguimiento-raben",
+      "title": "Seguimiento Raben: número de envío, estados y entrega",
+      "name": "Raben",
+      "color": "#df0020"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "seguimiento-jd-logistics",
@@ -8290,6 +8322,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Chunghwa Post: código TW, estados e alfândega",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "seguimento-raben",
+      "title": "Seguimento Raben: número de envio, estados e entrega",
+      "name": "Raben",
+      "color": "#df0020"
     },
     {
       "id": "jd-logistics",
@@ -9622,6 +9662,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Chunghwa Post: numer TW, statusy i odprawa celna",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "sledzenie-raben",
+      "title": "Śledzenie Raben: numer przesyłki, statusy i dostawa",
+      "name": "Raben",
+      "color": "#df0020"
     },
     {
       "id": "jd-logistics",

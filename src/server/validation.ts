@@ -4,6 +4,7 @@ import {
   type ApiGiftWords,
   type ApiParcelAlertPreset,
   type ApiParcelFeedbackAnswer,
+  type ApiParcelFeedbackPageSaid,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
 import { carrierInfo, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
@@ -675,8 +676,9 @@ export function notificationPreferencesResponse(row: JsonObject, emailAvailable:
 }
 
 /** What to change about one parcel's notifications and delivery email: one of them, or both. */
-const FEEDBACK_ANSWERS: readonly ApiParcelFeedbackAnswer[] = ['right', 'wrong', 'found_elsewhere'];
+const FEEDBACK_ANSWERS: readonly ApiParcelFeedbackAnswer[] = ['right', 'wrong', 'found_elsewhere', 'not_received'];
 const FEEDBACK_REASONS: readonly ApiParcelFeedbackReason[] = ['arrived', 'status', 'steps', 'time_place', 'carrier', 'other'];
+const FEEDBACK_PAGES: readonly ApiParcelFeedbackPageSaid[] = ['delivered', 'written_ahead', 'in_transit'];
 
 export interface ParcelFeedbackValues {
   id: string;
@@ -685,6 +687,8 @@ export interface ParcelFeedbackValues {
   note: string | null;
   carrierName: string | null;
   trackingPage: string | null;
+  /** What the page said of a parcel its reader hasn't received; null for any other answer. */
+  pageSaid: ApiParcelFeedbackPageSaid | null;
   asked: 'page' | 'back';
   app: 'web' | 'ios' | 'android';
   locale: NativePushLocale;
@@ -702,7 +706,8 @@ function feedbackWords(value: unknown, limit: number, label: string): string | n
 /**
  * What a reader says of a parcel. Each answer carries only its own words:
  * `right` none, `wrong` reasons or a note, `found_elsewhere` a carrier or the
- * address of its tracking page.
+ * address of its tracking page, `not_received` what the page said of the
+ * parcel and maybe a note.
  */
 export function parcelFeedbackValues(payload: JsonObject): ParcelFeedbackValues {
   if (typeof payload.id !== 'string') throw new HttpError(400, 'Send a valid feedback id');
@@ -719,16 +724,22 @@ export function parcelFeedbackValues(payload: JsonObject): ParcelFeedbackValues 
   const note = feedbackWords(payload.note, 4_000, 'A note');
   const carrierName = feedbackWords(payload.carrierName, 120, 'A carrier name');
   const trackingPage = feedbackWords(payload.trackingPage, 500, 'A tracking page');
+  const pageSaid = payload.pageSaid == null ? null : FEEDBACK_PAGES.find((known) => known === payload.pageSaid);
+  if (pageSaid === undefined || (answer === 'not_received') !== (pageSaid !== null)) {
+    throw new HttpError(400, answer === 'not_received' ? 'Say what the page said of the parcel' : 'Only a parcel not received takes what the page said');
+  }
   if (payload.asked !== 'page' && payload.asked !== 'back') throw new HttpError(400, 'Say where the question was asked');
   if (payload.app !== 'web' && payload.app !== 'ios' && payload.app !== 'android') throw new HttpError(400, 'Say which app is asking');
   const said = reasons.length > 0 || note !== null;
   const found = carrierName !== null || trackingPage !== null;
-  if (answer === 'right' ? said || found : answer === 'wrong' ? !said || found : said || !found) {
+  if (answer === 'right' ? said || found : answer === 'wrong' ? !said || found
+    : answer === 'not_received' ? reasons.length > 0 || found : said || !found) {
     throw new HttpError(400, answer === 'right' ? 'This answer takes no words'
-      : answer === 'wrong' ? 'Say what is off' : 'Name the carrier or its tracking page');
+      : answer === 'wrong' ? 'Say what is off' : answer === 'not_received' ? 'This answer takes a note alone'
+        : 'Name the carrier or its tracking page');
   }
   return {
-    id, answer, reasons, note, carrierName, trackingPage,
+    id, answer, reasons, note, carrierName, trackingPage, pageSaid,
     asked: payload.asked, app: payload.app, locale: nativePushLocale(payload.locale),
   };
 }

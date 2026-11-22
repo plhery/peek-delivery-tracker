@@ -70854,7 +70854,9 @@ export interface ApiDeleteParcelAppAlertRequest {
   "transport"?: ApiNativePushTransport;
 }
 
-export type ApiParcelFeedbackAnswer = "right" | "wrong" | "found_elsewhere";
+export type ApiParcelFeedbackAnswer = "right" | "wrong" | "found_elsewhere" | "not_received";
+
+export type ApiParcelFeedbackPageSaid = "delivered" | "written_ahead" | "in_transit";
 
 export type ApiParcelFeedbackReason = "arrived" | "status" | "steps" | "time_place" | "carrier" | "other";
 
@@ -70865,6 +70867,7 @@ export interface ApiParcelFeedbackRequest {
   "note"?: string;
   "carrierName"?: string;
   "trackingPage"?: string;
+  "pageSaid"?: ApiParcelFeedbackPageSaid;
   "asked": "page" | "back";
   "app": "web" | "ios" | "android";
   "locale": ApiNativePushLocale;

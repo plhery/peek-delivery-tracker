@@ -363,7 +363,11 @@ Key server modules:
     day, on top of the per-client limit of the route.
   - The question stands on every visit until its reader says the page is right: then
     only "Report a problem" stays, until the next scan. A "wrong" answer leaves it
-    standing. The device remembers its answers for this, and so that the one asked on the
+    standing.
+  - A reader who hasn't received the parcel says so as an answer of its own
+    (`not_received`, with what the page said: delivered, written in advance or on its
+    way) and is told who to ask in words that fit it: the carrier, with its help page
+    when the catalog has one, and the seller. The device remembers its answers for this, and so that the one asked on the
     way back from the carrier's site is not asked twice about the same scan nor more than
     once a day; a browser keeps them beside a link's other notes, or under the parcel's id
     for an account. That memory never leaves the device.

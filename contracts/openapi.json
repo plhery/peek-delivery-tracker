@@ -77016,9 +77016,19 @@
         "enum": [
           "right",
           "wrong",
-          "found_elsewhere"
+          "found_elsewhere",
+          "not_received"
         ],
-        "description": "What the reader says of the parcel: what is shown is right, something is off, or the carrier's own site shows a parcel no carrier was found for."
+        "description": "What the reader says of the parcel: what is shown is right, something is off, the carrier's own site shows a parcel no carrier was found for, or the parcel hasn't come."
+      },
+      "ParcelFeedbackPageSaid": {
+        "type": "string",
+        "enum": [
+          "delivered",
+          "written_ahead",
+          "in_transit"
+        ],
+        "description": "What the page said of a parcel its reader hasn't received: delivered by a carrier's scan, delivered or on its way by steps its carrier writes in advance, or not delivered yet."
       },
       "ParcelFeedbackReason": {
         "type": "string",
@@ -77042,7 +77052,7 @@
           "app",
           "locale"
         ],
-        "description": "One answer about one parcel. `right` comes alone; `wrong` with reasons, a note or both; `found_elsewhere` with the carrier's name, its tracking page or both.",
+        "description": "One answer about one parcel. `right` comes alone; `wrong` with reasons, a note or both; `found_elsewhere` with the carrier's name, its tracking page or both; `not_received` with what the page said (`pageSaid`) and maybe a note.",
         "properties": {
           "id": {
             "type": "string",
@@ -77073,6 +77083,9 @@
             "type": "string",
             "maxLength": 500,
             "description": "Where the reader says the parcel is shown. Kept as written and never fetched."
+          },
+          "pageSaid": {
+            "$ref": "#/components/schemas/ParcelFeedbackPageSaid"
           },
           "asked": {
             "type": "string",

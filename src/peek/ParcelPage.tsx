@@ -36,7 +36,7 @@ import { deliveryCalendar, deliverySlot, downloadCalendar } from './parcel/calen
 import { CardBell, LinkCard } from './parcel/Card';
 import { carrierLinks, FreshnessLine, Notes, NumberSection, ShipmentFacts } from './parcel/Details';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from './parcel/Feedback';
-import { scanIdentity } from './parcel/feedbackModel';
+import { missingStep, scanIdentity } from './parcel/feedbackModel';
 import { linkFeedbackNotes } from './parcel/feedbackNotes';
 import { ForgetDialog, ForgetFooter, forgetParcel, removeSharedParcel } from './parcel/Forget';
 import { GiftNote, GiftSurprise } from './parcel/Gift';
@@ -526,6 +526,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       : !carrierKnown ? 'unknown' : automatic || moving ? 'found' : null,
     scan: scanIdentity(parcel),
     scanned: moving,
+    missing: missingStep(parcel, stage, displayed, locale),
     carrier: displayed.name,
     busy: !!word || sharing || alerting || !!keepSheet || !!forgetting || mapOpen || addingPostcode,
     notes: feedbackNotes,

@@ -564,3 +564,21 @@ closed=$(psql "$database_url" -X -At -v id="$feedback_id" -v note="Routed to the
 closed=$(psql "$database_url" -X -At -v id="$feedback_id" -v note="Again" -f "$repo_root/ops/review/close-feedback.sql")
 [[ -z "$closed" ]] || { echo "close-feedback.sql closed an answer twice: $closed" >&2; exit 1; }
 psql "$database_url" -X -q -c "delete from public.parcel_feedback where id = '$feedback_id'"
+
+# A parcel not received goes to a lane only when the page said a carrier's scan delivered it; the others are counted.
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "
+  insert into public.parcel_feedback (id, tracking_number, carrier, answer, page_said, asked, via, app, locale, shown, created_at)
+  values ('59000000-0000-4000-8000-000000000001', 'TEST000000002', 'dpd', 'not_received', 'delivered', 'page', 'link', 'web', 'en', '{}',
+      now() - interval '1 hour'),
+    ('59000000-0000-4000-8000-000000000002', 'TEST000000003', 'gzyl', 'not_received', 'written_ahead', 'page', 'link', 'web', 'en', '{}',
+      now() - interval '1 hour'),
+    ('59000000-0000-4000-8000-000000000003', 'TEST000000004', 'dpd', 'not_received', 'in_transit', 'page', 'link', 'web', 'en', '{}',
+      now() - interval '1 hour')"
+feedback=$(psql "$database_url" -X -A -F '|' -v hours=2 -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Reader feedback/ { section = 1; next } /^== / { section = 0 } section')
+psql "$database_url" -X -q -c "delete from public.parcel_feedback where id::text like '59000000-%'"
+listed=$(grep '^59000000-' <<< "$feedback" | awk -F '|' '{ print $1 "|" $5 "|" $NF }')
+if [[ "$listed" != "59000000-0000-4000-8000-000000000001|not_received|adapters" ]] || ! grep -q ', 3 not received' <<< "$feedback"; then
+  echo "reader feedback: parcels not received listed '$listed', counts '$(grep 'answers given' <<< "$feedback")'" >&2
+  exit 1
+fi

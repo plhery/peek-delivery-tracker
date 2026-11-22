@@ -4971,10 +4971,23 @@ enum class ParcelFeedbackAnswer(val rawValue: String) {
     @SerialName("right") Right("right"),
     @SerialName("wrong") Wrong("wrong"),
     @SerialName("found_elsewhere") FoundElsewhere("found_elsewhere"),
+    @SerialName("not_received") NotReceived("not_received"),
     ;
 
     companion object {
         fun fromRawValue(rawValue: String): ParcelFeedbackAnswer? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class ParcelFeedbackPageSaid(val rawValue: String) {
+    @SerialName("delivered") Delivered("delivered"),
+    @SerialName("written_ahead") WrittenAhead("written_ahead"),
+    @SerialName("in_transit") InTransit("in_transit"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ParcelFeedbackPageSaid? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 
@@ -5001,6 +5014,7 @@ data class ParcelFeedbackRequest(
     val note: String? = null,
     val carrierName: String? = null,
     val trackingPage: String? = null,
+    val pageSaid: ParcelFeedbackPageSaid? = null,
     val asked: ParcelFeedbackRequestAsked,
     val app: ParcelFeedbackRequestApp,
     val locale: NativePushLocale,

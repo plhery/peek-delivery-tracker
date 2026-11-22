@@ -43,6 +43,26 @@ test('asks where the history ends whether the page is right, takes a reason and 
   expect(sent).toEqual([]);
 });
 
+test('tells a reader who hasn’t received the parcel what to do, on a phone at 320 px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await track(page, '1ZDEMO202600000092');
+  await expect(status(page)).toHaveText('In transit');
+  const bubble = page.locator('.peekfb-bubble');
+  await bubble.getByRole('button', { name: 'Not quite' }).click();
+  await bubble.getByRole('button', { name: 'I haven’t received it' }).click();
+  await expect(bubble.getByRole('status')).toHaveText('UPS hasn’t delivered it yet. If it’s late, ask the seller or contact UPS.');
+  await expect(bubble.getByRole('link', { name: 'Get help from UPS' })).toHaveAttribute('href', /ups\.com/);
+  expect(await fits(page)).toBe(true);
+
+  await bubble.getByRole('button', { name: 'Add a note' }).click();
+  const sheet = page.getByRole('dialog', { name: 'Add a note' });
+  await sheet.getByLabel('Anything to add? Optional').fill('Nothing in the letterbox.');
+  await sheet.getByRole('button', { name: 'Send' }).click();
+  await expect(sheet).toHaveCount(0);
+  await expect(bubble.getByText('Thanks, noted.')).toBeVisible();
+  expect(await fits(page)).toBe(true);
+});
+
 test('asks once on the way back from the carrier’s own site, and not about the sample parcel', async ({ page }) => {
   await track(page, '1ZDEMO202600000092');
   await expect(status(page)).toHaveText('In transit');
@@ -91,7 +111,7 @@ test('fits a phone at 320 px, in German and in the dark', async ({ page }) => {
   await expect(bubble.getByText('Liege ich hier richtig?')).toBeVisible();
   expect(await fits(page)).toBe(true);
   await bubble.getByRole('button', { name: 'Nicht ganz' }).click();
-  await expect(bubble.getByRole('button')).toHaveCount(6);
+  await expect(bubble.getByRole('button')).toHaveCount(7);
   expect(await fits(page)).toBe(true);
   await bubble.getByRole('button', { name: 'Falscher Paketdienst' }).click();
   await bubble.getByRole('button', { name: 'Notiz hinzufügen' }).click();

@@ -5065,6 +5065,15 @@ enum ParcelFeedbackAnswer: String, Codable, CaseIterable, Hashable, Sendable, Id
     case right
     case wrong
     case foundElsewhere = "found_elsewhere"
+    case notReceived = "not_received"
+
+    var id: String { rawValue }
+}
+
+enum ParcelFeedbackPageSaid: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case delivered
+    case writtenAhead = "written_ahead"
+    case inTransit = "in_transit"
 
     var id: String { rawValue }
 }
@@ -5087,6 +5096,7 @@ struct ParcelFeedbackRequest: Codable, Equatable, Hashable, Sendable, Identifiab
     var note: String? = nil
     var carrierName: String? = nil
     var trackingPage: String? = nil
+    var pageSaid: ParcelFeedbackPageSaid? = nil
     var asked: ParcelFeedbackRequestAsked
     var app: ParcelFeedbackRequestApp
     var locale: NativePushLocale

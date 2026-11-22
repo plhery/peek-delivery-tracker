@@ -262,7 +262,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     parcelFeedbackTotal: new Counter({
       name: 'parcel_feedback_total',
-      help: 'What readers said of a parcel by answer (right, wrong, found_elsewhere), way in (account, link), app (web, ios, android) and outcome (stored, replaced, full, closed).',
+      help: 'What readers said of a parcel by answer (right, wrong, found_elsewhere, not_received), way in (account, link), app (web, ios, android) and outcome (stored, replaced, full, closed).',
       labelNames: ['answer', 'via', 'app', 'outcome'] as const,
       registers: [registry],
     }),
@@ -637,7 +637,7 @@ export function recordParcelAlertSet(outcome: ParcelAlertOutcome, app: ParcelAle
 
 /** A reader's answer about a parcel: kept, kept in place of its first words, or refused. */
 export function recordParcelFeedback(
-  answer: 'right' | 'wrong' | 'found_elsewhere',
+  answer: 'right' | 'wrong' | 'found_elsewhere' | 'not_received',
   via: 'account' | 'link',
   app: 'web' | 'ios' | 'android',
   outcome: 'stored' | 'replaced' | 'full' | 'closed',

@@ -75,7 +75,7 @@ import { createAccountFeedback, createAccountShare, demoAccountShare } from '../
 import { nonTrackingNote, nonTrackingShape } from '../peek/lookup/reading';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from '../peek/parcel/Feedback';
 import { NoteCard, quietNote } from '../peek/parcel/Details';
-import { scanIdentity } from '../peek/parcel/feedbackModel';
+import { missingStep, scanIdentity } from '../peek/parcel/feedbackModel';
 import { parcelFeedbackNotes } from '../peek/parcel/feedbackNotes';
 import { Glyph } from '../peek/parcel/glyphs';
 import { AccountShareSheet } from '../peek/parcel/ShareSheet';
@@ -267,6 +267,7 @@ export function ParcelDetail({
       : parcel.carrier === 'unknown' && !moving ? 'unknown' : automaticTracking || moving ? 'found' : null,
     scan: scanIdentity(parcel),
     scanned: moving,
+    missing: missingStep(parcel, current?.stage, displayedCarrier, locale),
     carrier: displayedCarrier.name,
     busy: sharing || alertsOpen || editingCarrier || confirmingDelete || mapOpen,
     notes: feedbackNotes,

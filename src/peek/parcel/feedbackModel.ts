@@ -1,10 +1,19 @@
-import type { ApiParcelFeedbackReason, ApiParcelFeedbackRequest } from '../../generated/apiContract';
+import type { ApiParcelFeedbackPageSaid, ApiParcelFeedbackReason, ApiParcelFeedbackRequest } from '../../generated/apiContract';
+import {
+  activeTrackingCarrierId,
+  carrierInfo,
+  localizedCarrierUrl,
+  scheduledDelivery,
+  writtenDelivery,
+  type CarrierInfo,
+} from '../../lib/carriers';
+import type { Locale } from '../../lib/locale';
 import { currentEvent } from '../../lib/stages';
-import type { ParcelWithEvents } from '../../types';
+import type { ParcelWithEvents, Stage } from '../../types';
 
 /**
  * What a reader says of a parcel: that what is shown is right, what is off,
- * or who carries a parcel no carrier was found for. The question stands on
+ * that it hasn't come, or who carries a parcel no carrier was found for. The question stands on
  * the page whenever there is something to judge, until its reader says it is
  * right: then only a way to report a problem stays, until the next scan. The
  * one asked on the way back from the carrier's site keeps quiet about what was
@@ -20,6 +29,37 @@ export const FEEDBACK_REASONS: readonly ApiParcelFeedbackReason[] = ['arrived', 
 /** The reasons offered: before the carrier's first scan, the page's only row is the app's own, with no time or place of the carrier's to be wrong. */
 export function feedbackReasons(scanned: boolean): readonly ApiParcelFeedbackReason[] {
   return scanned ? FEEDBACK_REASONS : FEEDBACK_REASONS.filter((reason) => reason !== 'time_place');
+}
+
+/** What the page said of a parcel its reader hasn't received. */
+export type FeedbackPage = ApiParcelFeedbackPageSaid;
+
+/** The next step for a reader who hasn't received the parcel. */
+export interface MissingStep {
+  /** What the page says of the parcel, sent with the answer. */
+  page: FeedbackPage;
+  /** The carrier the step names. */
+  carrier: string;
+  /** The help page of the carrier that has the parcel, else of the one it is filed under. */
+  help?: { carrier: string; href: string };
+}
+
+/**
+ * What the page says of the parcel for a reader who hasn't received it: delivered by its carrier's scan; delivered or
+ * on its way by steps its carrier writes in advance (a delivery on a schedule, or a route written ahead); or not
+ * delivered yet. The step names the carrier that writes the steps, else the one whose help page it links.
+ */
+export function missingStep(parcel: ParcelWithEvents, stage: Stage | null | undefined, displayed: CarrierInfo, locale: Locale): MissingStep {
+  const active = carrierInfo(activeTrackingCarrierId(parcel), locale);
+  const helper = [active, displayed].find((candidate) => candidate.helpUrl);
+  const help = helper?.helpUrl ? { carrier: helper.name, href: localizedCarrierUrl(helper.id, helper.helpUrl, locale) } : undefined;
+  const written = scheduledDelivery(parcel, stage) || writtenDelivery(parcel, stage) || (stage !== 'delivered' && !!parcel.writtenAheadBy);
+  const writer = written && parcel.writtenAheadBy ? carrierInfo(parcel.writtenAheadBy, locale).name : null;
+  return {
+    page: written ? 'written_ahead' : stage === 'delivered' ? 'delivered' : 'in_transit',
+    carrier: writer ?? help?.carrier ?? displayed.name,
+    ...help ? { help } : {},
+  };
 }
 
 /** What this browser remembers of the question, for one parcel. Nothing of it leaves the browser. */

@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, testParcel } from '../../test/parcelLinks';
 import { forgetAllLinkNotes, forgetLinkNote, linkNote, noteLink } from '../deviceNotes';
-import { asksOnReturn, feedbackMemory, scanIdentity } from './feedbackModel';
+import { carrierInfo } from '../../lib/carriers';
+import { asksOnReturn, feedbackMemory, missingStep, scanIdentity } from './feedbackModel';
 import { FEEDBACK_STORAGE_KEY, linkFeedbackNotes, parcelFeedbackNotes } from './feedbackNotes';
 
 const NOW = Date.parse('2026-10-08T12:00:00.000Z');
@@ -90,5 +91,31 @@ describe('where a browser remembers its answer', () => {
     // The next write that goes through is the memory again.
     parcelFeedbackNotes('package-1').write({ back: 'b' });
     expect(JSON.parse(localStorage.getItem(FEEDBACK_STORAGE_KEY)!)).toMatchObject({ 'package-1': { back: 'b' } });
+  });
+});
+
+describe('the next step for a reader who hasn’t received the parcel', () => {
+  const dhl = carrierInfo('dhl', 'en');
+  const help = { carrier: 'DHL', href: expect.stringContaining('dhl.de') };
+
+  it('says a carrier’s scan delivered it, and links the help page of the carrier that has it', () => {
+    expect(missingStep(testParcel({}, ['in_transit', 'delivered']), 'delivered', dhl, 'en')).toEqual({ page: 'delivered', carrier: 'DHL', help });
+  });
+
+  it('says it is on its way before a scan says delivered, and names the carrier the page shows without a help page', () => {
+    const gzyl = carrierInfo('gzyl', 'en');
+    expect(missingStep(testParcel({ carrier: 'gzyl' }), 'in_transit', gzyl, 'en')).toEqual({ page: 'in_transit', carrier: 'GZYL' });
+  });
+
+  it('says the steps are written in advance for a delivery on a schedule, a written delivery, or a route written ahead', () => {
+    const gzyl = carrierInfo('gzyl', 'en');
+    expect(missingStep(testParcel({ carrier: 'gzyl' }, ['in_transit', 'delivered']), 'delivered', gzyl, 'en'))
+      .toEqual({ page: 'written_ahead', carrier: 'GZYL' });
+    const written = testParcel({ writtenAheadBy: 'xinghe-freight', writtenAheadEvents: [{ stage: 'delivered', description: 'Delivered', occurredAt: hoursAgo(2) }] });
+    expect(missingStep(written, 'in_transit', dhl, 'en')).toEqual({ page: 'written_ahead', carrier: 'Xinghe Freight', help });
+    expect(missingStep(testParcel({ writtenAheadBy: 'xinghe-freight' }), 'in_transit', dhl, 'en').page).toBe('written_ahead');
+    // A carrier's scan that says delivered is one, whoever writes the rest ahead.
+    expect(missingStep(testParcel({ writtenAheadBy: 'xinghe-freight' }, ['in_transit', 'delivered']), 'delivered', dhl, 'en'))
+      .toEqual({ page: 'delivered', carrier: 'DHL', help });
   });
 });

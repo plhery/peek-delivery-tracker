@@ -193,7 +193,10 @@ describe('an answer through a link', () => {
     expect(counted).toHaveBeenCalledExactlyOnceWith('wrong', 'link', 'ios', 'stored');
     // The log names the number, the answer and the carrier; the words stay in the table.
     const event = logged.mock.calls.find((call: unknown[]) => call[0] === 'parcel_feedback');
-    expect(event?.[1]).toEqual({ tracking_number: trackingNumber, answer: 'wrong', reasons: 'status,steps', carrier: 'dpd', asked: 'back', via: 'link', app: 'ios', outcome: 'stored' });
+    expect(event?.[1]).toEqual({
+      tracking_number: trackingNumber, answer: 'wrong', reasons: 'status,steps', page_said: null, carrier: 'dpd', asked: 'back', via: 'link', app: 'ios', outcome: 'stored',
+    });
+    expect(stored.page_said).toBeNull();
   });
 
   it('names the carrier of a parcel no carrier was found for', async () => {
@@ -203,6 +206,32 @@ describe('an answer through a link', () => {
     expect(record.mock.calls[0][0]).toMatchObject({
       answer: 'found_elsewhere', reasons: [], note: null, carrier: 'unknown', carrier_name: 'Example Post', tracking_page: 'example.test/track',
     });
+  });
+
+  it('keeps a parcel its reader hasn\'t received as its own answer, with what the page said and a note', async () => {
+    found();
+    const counted = vi.spyOn(metrics, 'recordParcelFeedback');
+    const response = await viaLink(answer({ answer: 'not_received', reasons: undefined, pageSaid: 'delivered', note: ' Asked the neighbours ' }));
+    expect(response.status).toBe(204);
+    expect(record.mock.calls[0][0]).toMatchObject({
+      answer: 'not_received', reasons: [], note: 'Asked the neighbours', page_said: 'delivered', carrier_name: null, tracking_page: null,
+    });
+    expect(counted).toHaveBeenCalledExactlyOnceWith('not_received', 'link', 'web', 'stored');
+    const event = logged.mock.calls.find((call: unknown[]) => call[0] === 'parcel_feedback');
+    expect(event?.[1]).toMatchObject({ answer: 'not_received', page_said: 'delivered', reasons: null });
+  });
+
+  it('refuses a parcel not received without what the page said, with a reason, or what the page said with another answer', async () => {
+    found();
+    for (const refused of [
+      answer({ answer: 'not_received', reasons: undefined }),
+      answer({ answer: 'not_received', reasons: undefined, pageSaid: 'lost' }),
+      answer({ answer: 'not_received', reasons: ['status'], pageSaid: 'in_transit' }),
+      answer({ answer: 'not_received', reasons: undefined, pageSaid: 'in_transit', carrierName: 'Example Post' }),
+      answer({ pageSaid: 'delivered' }),
+    ]) expect((await viaLink(refused)).status).toBe(400);
+    expect(record).not.toHaveBeenCalled();
+    expect((await viaLink(answer({ answer: 'not_received', reasons: undefined, pageSaid: 'written_ahead' }))).status).toBe(204);
   });
 
   it('thanks the reader the same when the parcel had its day\'s answers', async () => {

@@ -343,8 +343,9 @@ needs no change; future sightings still accumulate.
 
 A parcel's page asks its reader whether it is right, or who carries a parcel no carrier
 was found for. `parcel_feedback` keeps one row per answer, service-role only: the
-tracking number, the carrier, the answer (`right`, `wrong` with its reasons and note, or
-`found_elsewhere` with a carrier name or tracking page), where it was asked, and `shown`,
+tracking number, the carrier, the answer (`right`, `wrong` with its reasons and note,
+`found_elsewhere` with a carrier name or tracking page, or `not_received` with what the
+page said of the parcel in `page_said` and maybe a note), where it was asked, and `shown`,
 what the service held about the parcel at that moment (status, last check, newest scans
 as its timeline shows them, the carrier the page says writes the timeline in advance, and
 the newest steps it wrote that the page shows greyed).
@@ -364,7 +365,10 @@ order by created_at desc;
 
 The hourly review ([ops/review/signals.sql](../ops/review/signals.sql)) lists every answer
 other than right that is still open, with the number's shape and a lane, `new` when it was
-given or completed with a note in the window, and counts the window's answers by kind. An
+given or completed with a note in the window, and counts the window's answers by kind. A
+`not_received` answer is listed, for the adapters lane, only when the page said a carrier's
+scan delivered the parcel (`page_said = 'delivered'`), which could be Peek's misreading;
+one on a parcel on its way or delivered by steps written in advance is only counted. An
 open answer comes back every hour until it is closed, so close each one as soon as it is
 routed or handled, with the outcome as its review note. A reader's note can hold personal
 details, so a review note says what was off in other words:
@@ -636,7 +640,7 @@ minutes and yesterday's once more as of its end.
   when it belongs to an account or had a check in the last 24 h other than a scraper
   release's, which nobody asked for; the others are not checked.
   A parcel without a scan waits for its carrier and is never stale.
-- **Readers who say it's right**: right answers among the last 7 days' answers, with their count.
+- **Readers who say it's right**: right answers among the last 7 days' answers, with their count. Answers that the parcel hasn't come are counted apart ("Not received") and left out of the share.
 - **Quality**: scans no map read or a wording rule read, new unmapped wording, checks with an
   anomaly, and parcels showing a provider's copy of a carrier's scan (counted live only).
 
@@ -675,7 +679,8 @@ select day, round(100.0 * (parcels_own_adapter + parcels_other_adapter) / nullif
        round(100.0 * direct_checks / nullif(answered_checks, 0), 1) as direct_checks,
        round(100.0 * failed_checks / nullif(checks, 0), 2) as failed,
        round(100.0 * stale_parcels / nullif(followed_parcels, 0), 1) as stale,
-       round(100.0 * feedback_right_7d / nullif(feedback_7d, 0), 1) as right, feedback_7d as answers
+       round(100.0 * feedback_right_7d / nullif(feedback_7d, 0), 1) as right, feedback_7d as answers,
+       feedback_not_received_7d as not_received
 from metrics.goals_daily where day > current_date - 7 order by day;
 
 select rank, carrier, reason, lane, parcels, cumulative_percent
@@ -905,8 +910,8 @@ Key JSON events:
 - `push_dispatch_skipped` (`reason`: `lease_held`): another server, or a dispatch still
   running here, holds the push dispatch lease ([DEPLOYMENT.md](DEPLOYMENT.md)); the scans
   wait for the next dispatch. Expected while a deploy's two containers overlap.
-- `parcel_feedback`: an answer about a parcel, with its `tracking_number`, the `answer`, its `reasons`, the
-  `carrier`, where it was `asked` (`page` or `back`, on the way back from the carrier's
+- `parcel_feedback`: an answer about a parcel, with its `tracking_number`, the `answer`, its `reasons`, what the
+  page said of a parcel not received (`page_said`), the `carrier`, where it was `asked` (`page` or `back`, on the way back from the carrier's
   site), `via` an `account` or a `link`, the `app` and the `outcome` as
   `parcel_feedback_total` counts it. The reader's words stay in the table.
   `parcel_feedback_forgotten` says how many old `answers` a maintenance pass deleted, and
@@ -1198,7 +1203,7 @@ dashboard's failure panels leave out.
 | `parcel_alert_sent_total` (outcome, app) | Batches of new scans per alert, to a browser (`web`), the iPhone app (`ios`) or the Android app (`android`): `sent`, `skipped` (not in its preset, backfilled, known when the parcel was added, more than a day old, a generated track's move, or a browser or phone an account with the parcel already notifies), `failed`, `expired` (the push service, APNs, FCM or a UnifiedPush distributor says the subscription, token or endpoint is gone) |
 | `account_push_sent_total` (outcome, app) | Batches of an account's new scans per browser (`web`), iPhone (`ios`) or Android phone (`android`) it gets notifications on: `sent`, `skipped` (repeats or copies of scans it had, backfilled, known when the parcel was added, more than a day old, a generated track's move, the parcel put away, or already shown by the iPhone's Live Activity), `failed` (tried again by the next check), `expired` (the push service, APNs, FCM or a UnifiedPush distributor says the subscription, token or endpoint is gone) |
 | `parcel_alert_removed_total` (reason) | Alerts ended: `asked`, `delivered` (journey over), `expired`, `failed` (three failed sends in a row) |
-| `parcel_feedback_total` (answer, via, app, outcome) | What readers say of a parcel: `right`, `wrong` or `found_elsewhere`, through an `account` or a `link`. `stored`, `replaced` (a note followed its reason), `full` (twenty answers for the number that day) or `closed` (too late to add to) |
+| `parcel_feedback_total` (answer, via, app, outcome) | What readers say of a parcel: `right`, `wrong`, `found_elsewhere` or `not_received`, through an `account` or a `link`. `stored`, `replaced` (a note followed its reason), `full` (twenty answers for the number that day) or `closed` (too late to add to) |
 | `provider_input_total` (provider, step) | Whether relaying a provider's postcode request pays off: a parcel starts asking its owner for a postcode, or to check the one it holds (`asked`), the owner gives one (`supplied`, at the next check when given in the carrier's field), then each lookup made with it, or with one given in the carrier's field that check's lookups: `history`, `still_required`, `no_history` or `failed`. Every provider receives the postcode; supported sources can submit it |
 | `dpd_app_session_total` (outcome, trigger) | DPD app sessions `taken_up` at start, and openings that ended `opened` or `failed`, by what began them: `start`, `retry`, `refused` or `lookup`. `refused` counts the sessions DPD stopped accepting, and openings by `lookup` mean lookups waited for one |
 | `delivery_email_total` (outcome, reason) | Delivery emails: `sent`; `failed` and tried again later (`smtp`, `content`, `account`, `parcel`, `interrupted`); `skipped` for good (`no_address`, `relay_address`, `parcel_gone`, `account_cap`, `service_cap`) |

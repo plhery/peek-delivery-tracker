@@ -137,6 +137,38 @@ begin
     raise exception 'The wrong answers were deleted';
   end if;
 
+  -- A parcel that hasn't come is its own answer, kept with what the page said of it, and a note may follow.
+  if pg_temp.answer('f4000000-0000-4000-8000-000000000401', 'FEEDBACKTEST0006', 'not_received', '{"page_said": "delivered"}') <> 'stored'
+      or pg_temp.answer('f4000000-0000-4000-8000-000000000401', 'FEEDBACKTEST0006', 'not_received', '{"note": "Asked the neighbours"}') <> 'replaced' then
+    raise exception 'An answer that the parcel has not come must be stored, and take a note';
+  end if;
+  select * into kept from public.parcel_feedback where id = 'f4000000-0000-4000-8000-000000000401';
+  if kept.page_said <> 'delivered' or kept.note <> 'Asked the neighbours' or kept.reasons <> '{}' then
+    raise exception 'A note must keep what the page said: %', to_jsonb(kept);
+  end if;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000402', 'FEEDBACKTEST0006', 'not_received');
+    raise exception 'An answer that the parcel has not come must say what the page said';
+  exception when check_violation then null;
+  end;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000402', 'FEEDBACKTEST0006', 'not_received', '{"page_said": "lost"}');
+    raise exception 'An unknown page must be refused';
+  exception when check_violation then null;
+  end;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000402', 'FEEDBACKTEST0006', 'not_received',
+      '{"page_said": "in_transit", "reasons": ["status"]}');
+    raise exception 'An answer that the parcel has not come takes no reason';
+  exception when check_violation then null;
+  end;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000402', 'FEEDBACKTEST0006', 'wrong',
+      '{"page_said": "delivered", "reasons": ["status"]}');
+    raise exception 'Only an answer that the parcel has not come says what the page said';
+  exception when check_violation then null;
+  end;
+
   -- The web, the iPhone app and the Android app answer; no other app.
   if pg_temp.answer('f4000000-0000-4000-8000-000000000301', 'FEEDBACKTEST0005', 'right', '{"app": "android"}') <> 'stored'
       or (select app from public.parcel_feedback where id = 'f4000000-0000-4000-8000-000000000301') <> 'android' then

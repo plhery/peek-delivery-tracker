@@ -655,6 +655,7 @@ class ParcelFeedbackModel(
             ParcelFeedbackAnswer.Right -> "parcel-feedback-right"
             ParcelFeedbackAnswer.Wrong -> "parcel-feedback-wrong"
             ParcelFeedbackAnswer.FoundElsewhere -> "parcel-feedback-carrier"
+            ParcelFeedbackAnswer.NotReceived -> "parcel-feedback-not-received"
         }
         try {
             val client = client ?: throw DeliveryApiError.ParcelMissing()

@@ -41,8 +41,17 @@
   background: var(--paper); box-shadow: 0 1px 2px rgb(0 0 0 / 3%); overflow: clip; transform-origin: 0 100%;
 }
 .peekfb-bubble .peekfb-pill { background: var(--control); border-color: transparent; }
-.peekfb-pip[data-moment=reasons] .peekfb-bubble { padding: 12px 12px 12px 14px; }
+.peekfb-pip:is([data-moment=reasons], [data-moment=missing], [data-moment=missing-noted]) .peekfb-bubble { padding: 12px 12px 12px 14px; }
 .peekfb-pip[data-moment=reasons] .peekfb-say { display: grid; gap: 10px; }
+/* The next step for a parcel that hasn't come: what to do, then the carrier's help page and a note. */
+.peekfb-pip:is([data-moment=missing], [data-moment=missing-noted]) .peekfb-say { display: grid; gap: 4px; }
+.peekfb-next { margin: 0; font-size: 13px; line-height: 1.45; }
+.peekfb-then { display: flex; flex-wrap: wrap; align-items: center; gap: 0 16px; }
+.peekfb-help {
+  display: inline-flex; align-items: center; gap: 4px; min-height: 36px; color: var(--ink); font-size: 12.5px; font-weight: 600;
+  text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); text-underline-offset: 3px;
+}
+.peekfb-help svg { width: 14px; height: 14px; flex: 0 0 auto; }
 /* An answer taken: his eyes smile. */
 .peekfb-pip :is(.parcel-illustration__eye, .parcel-illustration__happy-eye) { transition: opacity .16s .08s; }
 .peekfb-pip[data-mood=happy] .parcel-illustration__eye { opacity: 0; }

@@ -521,11 +521,14 @@ group by 1, 2
 order by parcels desc, carrier;
 
 \echo '== Reader feedback: answers other than right not reviewed yet (new: given or completed with a note in the window)'
-\echo '   carriers: no carrier found, or the wrong one; adapters: the carrier''s status, steps, times or places;'
-\echo '   delivery-tracker: no reason given. Close each one once it is routed or handled:'
+\echo '   carriers: no carrier found, or the wrong one; adapters: the carrier''s status, steps, times or places, or a parcel'
+\echo '   not received that the page said a carrier''s scan delivered; delivery-tracker: no reason given. A parcel not'
+\echo '   received that the page said is on its way, or delivered by steps written in advance, is only counted.'
+\echo '   Close each one once it is routed or handled:'
 \echo '   ops/review/close-feedback.sql with its id and a review note (docs/OBSERVABILITY.md)'
-select format('%s right, %s wrong, %s found elsewhere', count(*) filter (where answer = 'right'),
-         count(*) filter (where answer = 'wrong'), count(*) filter (where answer = 'found_elsewhere')) as counts
+select format('%s right, %s wrong, %s found elsewhere, %s not received', count(*) filter (where answer = 'right'),
+         count(*) filter (where answer = 'wrong'), count(*) filter (where answer = 'found_elsewhere'),
+         count(*) filter (where answer = 'not_received')) as counts
 from public.parcel_feedback
 where created_at >= :since and created_at < :upto \gset feedback_
 \echo '   answers given in the window:' :feedback_counts
@@ -541,7 +544,8 @@ select f.id, f.updated_at >= :since and f.updated_at < :upto as new, to_char(f.c
            from '^(?:[[:alpha:]][[:alnum:]+.-]*://)?(?:[^/?#@[:space:]]*@)?([[:alnum:]-]+(?:\.[[:alnum:]-]+)+)(?:[:/?#]|$)')),
          case when f.tracking_page is not null then '<page>' end, '-') as named,
        private.tracking_number_pattern(f.tracking_number) as pattern,
-       case when f.answer = 'found_elsewhere' or 'carrier' = any(f.reasons) or f.carrier in ('unknown', 'intl-post')
+       case when f.answer = 'not_received' then 'adapters'
+            when f.answer = 'found_elsewhere' or 'carrier' = any(f.reasons) or f.carrier in ('unknown', 'intl-post')
               then 'carriers'
             when f.reasons && array['arrived', 'status', 'steps', 'time_place'] then 'adapters'
             else 'delivery-tracker' end as lane
@@ -549,4 +553,6 @@ from public.parcel_feedback f
 -- An answer stays listed until it is closed, so one that was never routed comes back every
 -- hour. A note can follow its reason within the hour: updated_at marks it new again once it has.
 where f.answer <> 'right' and f.reviewed_at is null
+  -- A parcel not received is Peek's to check only when the page said a carrier's scan delivered it.
+  and (f.answer <> 'not_received' or f.page_said = 'delivered')
 order by new desc, f.created_at desc;

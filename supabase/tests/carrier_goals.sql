@@ -116,6 +116,9 @@ values
     now() - interval '1 day'),
   ('f4000000-0000-4000-8000-0000000000ab', 'GOALS0002', 'unknown', 'wrong', '{status}', 'page', 'link', 'web', 'fr', '{}',
     now() - interval '1 day');
+insert into public.parcel_feedback (id, tracking_number, carrier, answer, page_said, asked, via, app, locale, shown, created_at)
+values ('f4000000-0000-4000-8000-0000000000ac', 'GOALS0003', 'gzyl', 'not_received', 'written_ahead', 'page', 'link', 'web', 'en',
+  '{}', now() - interval '1 day');
 
 -- Each goal counts the parcels it is about: answered directly, by a provider, gone stale,
 -- shown with a copy; the waiting, delivered and dormant parcels count nowhere, and the
@@ -141,7 +144,9 @@ begin
   if after.copied_parcels - before.copied_parcels <> 1 then
     raise exception 'The universal copy shown beside its carrier''s scan was missed: % then %', before, after;
   end if;
-  if after.feedback_7d - before.feedback_7d <> 2 or after.feedback_right_7d - before.feedback_right_7d <> 1 then
+  -- A parcel that hasn't come is counted on its own, outside the answers whose share is right.
+  if after.feedback_7d - before.feedback_7d <> 2 or after.feedback_right_7d - before.feedback_right_7d <> 1
+      or after.feedback_not_received_7d - before.feedback_not_received_7d <> 1 then
     raise exception 'Readers'' answers were miscounted: % then %', before, after;
   end if;
   -- Late enough in the day that the scans and checks of the last minutes are today's.

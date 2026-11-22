@@ -104,6 +104,67 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     expect(mocks.track).toHaveBeenCalledTimes(1);
   });
 
+  it('tells a reader who hasn’t received the parcel what to do, sends it as its own answer, and lets a note follow', async () => {
+    const user = userEvent.setup();
+    const { send, notes } = open({ missing: { page: 'delivered', carrier: 'UPS', help: { carrier: 'UPS', href: 'https://ups.example/help' } } });
+    await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
+    expect(within(bubble()).getAllByRole('button').map((button) => button.textContent)).toEqual(
+      ['I haven’t received it', 'It has arrived', 'Wrong status', 'Missing steps', 'Wrong time or place', 'Wrong carrier', 'Something else']);
+
+    await user.click(within(bubble()).getByRole('button', { name: 'I haven’t received it' }));
+    expect(within(bubble()).getByRole('status')).toHaveTextContent(
+      'UPS says it was delivered. Check with your neighbours, your mailbox or reception. Still nothing? Contact UPS and ask the seller.');
+    const help = within(bubble()).getByRole('link', { name: 'Get help from UPS' });
+    expect(help).toHaveAttribute('href', 'https://ups.example/help');
+    expect(help).toHaveAttribute('target', '_blank');
+    expect(send).toHaveBeenCalledExactlyOnceWith({ id: expect.stringMatching(UUID), answer: 'not_received', pageSaid: 'delivered', asked: 'page', app: 'web', locale: 'en' });
+    const id = send.mock.calls[0][0].id;
+    await waitFor(() => expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-feedback-not-received', 'success'));
+    // Not a yes: the question stands on the next visit.
+    expect(notes.memory).toEqual({ at: expect.any(String), scan: SCAN, right: undefined });
+
+    await user.click(within(bubble()).getByRole('button', { name: 'Add a note' }));
+    const sheet = screen.getByRole('dialog', { name: 'Add a note' });
+    expect(within(sheet).queryByRole('button', { name: 'Wrong status' })).toBeNull();
+    expect(within(sheet).getByRole('button', { name: 'Send' })).toBeDisabled();
+    await user.type(within(sheet).getByLabelText('Anything to add? Optional'), ' Asked the neighbours. ');
+    await user.click(within(sheet).getByRole('button', { name: 'Send' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(send).toHaveBeenLastCalledWith({ id, answer: 'not_received', pageSaid: 'delivered', note: 'Asked the neighbours.', asked: 'page', app: 'web', locale: 'en' });
+    await waitFor(() => expect(within(bubble()).queryByRole('button', { name: 'Add a note' })).toBeNull());
+    expect(within(bubble()).getByText('Thanks, noted.')).toBeVisible();
+    expect(within(bubble()).getByText(/^UPS says it was delivered/)).toBeVisible();
+    expect(mocks.track).toHaveBeenCalledTimes(1);
+  });
+
+  it('words the next step for steps written in advance and for a parcel on its way, with no link where the carrier has no help page', async () => {
+    const user = userEvent.setup();
+    const ahead = open({ missing: { page: 'written_ahead', carrier: 'GZYL' } });
+    await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
+    await user.click(within(bubble()).getByRole('button', { name: 'I haven’t received it' }));
+    expect(within(bubble()).getByRole('status')).toHaveTextContent('GZYL writes these steps in advance, so they aren’t real scans. Ask the seller where your parcel is.');
+    expect(within(bubble()).queryByRole('link')).toBeNull();
+    expect(ahead.send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ answer: 'not_received', pageSaid: 'written_ahead' }));
+    ahead.unmount();
+
+    const moving = open({ missing: { page: 'in_transit', carrier: 'UPS' } });
+    await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
+    await user.click(within(bubble()).getByRole('button', { name: 'I haven’t received it' }));
+    expect(within(bubble()).getByRole('status')).toHaveTextContent('UPS hasn’t delivered it yet. If it’s late, ask the seller or contact UPS.');
+    expect(moving.send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ answer: 'not_received', pageSaid: 'in_transit' }));
+  });
+
+  it('puts the choices back when an answer that the parcel hasn’t come could not be sent', async () => {
+    const user = userEvent.setup();
+    const { notes } = open({ missing: { page: 'in_transit', carrier: 'UPS' }, send: vi.fn(async () => { throw new Error('offline'); }) });
+    await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
+    await user.click(within(bubble()).getByRole('button', { name: 'I haven’t received it' }));
+    expect(await screen.findByText('Couldn’t send that. Try again.')).toBeVisible();
+    expect(within(bubble()).getByRole('button', { name: 'I haven’t received it' })).toBeVisible();
+    expect(notes.memory).toEqual({});
+    expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-feedback-not-received', 'error');
+  });
+
   it('leaves out a wrong time or place before the carrier’s first scan, when the only row is the app’s own', async () => {
     const user = userEvent.setup();
     open({ scanned: false });

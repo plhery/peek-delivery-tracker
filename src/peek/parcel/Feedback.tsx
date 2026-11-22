@@ -7,6 +7,8 @@ import {
   asksOnReturn,
   feedbackReasons,
   type FeedbackNotes,
+  type FeedbackPage,
+  type MissingStep,
   type ParcelFeedback,
   type SendParcelFeedback,
 } from './feedbackModel';
@@ -23,7 +25,8 @@ import './Feedback.css';
  * shows it. Both stand on every visit, for what the reader tells only later,
  * except Pip's once its reader said he got it right: until the next scan only
  * a way to report a problem stays. An answer is given in place; a sheet takes
- * the words.
+ * the words. A reader who hasn't received the parcel is given the next step:
+ * who to ask, in the words that fit what the page says.
  */
 export interface FeedbackSubject {
   /** A carrier answers for the parcel, or none was found. Null asks nothing. */
@@ -34,6 +37,8 @@ export interface FeedbackSubject {
   carrier: string;
   /** The carrier has scanned the parcel; until then the reasons leave out a wrong time or place. */
   scanned?: boolean;
+  /** For a reader who hasn't received the parcel: what the page says and who to ask. Without it, that isn't offered. */
+  missing?: MissingStep;
   /** Something else is said or asked over the page: the question on the way back waits for another visit. */
   busy?: boolean;
   /** This browser's memory of the question; the same object for as long as the parcel is the same. */
@@ -41,14 +46,25 @@ export interface FeedbackSubject {
   send: SendParcelFeedback;
 }
 
-/** `quiet`: its reader said this scan is right, and only a way to report a problem stands. */
-type Moment = 'ask' | 'quiet' | 'reasons' | 'sent' | 'noted' | 'right' | 'early' | 'named';
+/**
+ * `quiet`: its reader said this scan is right, and only a way to report a problem stands. `missing`: its reader hasn't
+ * received the parcel and is shown the next step, until a note follows (`missing-noted`).
+ */
+type Moment = 'ask' | 'quiet' | 'reasons' | 'sent' | 'noted' | 'missing' | 'missing-noted' | 'right' | 'early' | 'named';
 type Open =
   | { sheet: 'wrong'; id: string; reasons: readonly ApiParcelFeedbackReason[]; asked: 'page' | 'back' }
+  | { sheet: 'missing'; id: string; page: FeedbackPage }
   | { sheet: 'carrier' };
 type Word = { say: 'back'; site: string } | { say: 'back-right' | 'back-sent' | 'failed' };
 
-const ACTIONS = { right: 'parcel-feedback-right', wrong: 'parcel-feedback-wrong', found_elsewhere: 'parcel-feedback-carrier' } as const;
+const ACTIONS = {
+  right: 'parcel-feedback-right', wrong: 'parcel-feedback-wrong', found_elsewhere: 'parcel-feedback-carrier', not_received: 'parcel-feedback-not-received',
+} as const;
+const MISSING_KEYS: Record<FeedbackPage, MessageKey> = {
+  delivered: 'feedback.missing.delivered',
+  written_ahead: 'feedback.missing.writtenAhead',
+  in_transit: 'feedback.missing.inTransit',
+};
 const REASON_KEYS: Record<ApiParcelFeedbackReason, MessageKey> = {
   arrived: 'feedback.reason.arrived',
   status: 'feedback.reason.status',
@@ -73,6 +89,8 @@ export interface ParcelFeedbackState {
   carrier: string;
   /** What a reader may say is off. */
   reasons: readonly ApiParcelFeedbackReason[];
+  /** The next step for a reader who hasn't received the parcel, when that is offered. */
+  missing?: MissingStep;
   moment: Moment;
   open: Open | null;
   word: Word | null;
@@ -83,6 +101,8 @@ export interface ParcelFeedbackState {
   right(asked: 'page' | 'back'): void;
   notQuite(): void;
   pick(reason: ApiParcelFeedbackReason): void;
+  /** The reader hasn't received the parcel. */
+  notReceived(): void;
   addNote(): void;
   wrongOnReturn(): void;
   elsewhere(): void;
@@ -92,7 +112,7 @@ export interface ParcelFeedbackState {
   close(): void;
 }
 
-export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = false, notes, send }: FeedbackSubject): ParcelFeedbackState {
+export function useParcelFeedback({ kind, scan, carrier, scanned = true, missing, busy = false, notes, send }: FeedbackSubject): ParcelFeedbackState {
   const { locale } = useI18n();
   // Said right about the scan the page ends on: the question keeps quiet until the next one.
   const quiet = useMemo(() => kind === 'found' && notes.read().right === scan, [kind, notes, scan]);
@@ -103,8 +123,8 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
   const go = (next: Moment) => setFlow({ notes, kind, scan, moment: next });
   const [open, setOpen] = useState<Open | null>(null);
   const [word, setWord] = useState<Word | null>(null);
-  // The answer whose reason was given in place, for the note that may follow it.
-  const given = useRef<{ id: string; reasons: readonly ApiParcelFeedbackReason[] } | null>(null);
+  // The answer given in place, for the note that may follow it.
+  const given = useRef<Exclude<Open, { sheet: 'carrier' }> | null>(null);
   const place = useRef<HTMLDivElement>(null);
   // What the question says once its sheet has closed. Said earlier, it would take away the button the sheet
   // hands the focus back to, and the page would jump to its first control instead.
@@ -156,6 +176,7 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
     kind,
     carrier,
     reasons: feedbackReasons(scanned),
+    missing,
     moment,
     open,
     word,
@@ -174,17 +195,28 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
     },
     notQuite: () => go('reasons'),
     pick(reason) {
-      const answer = { id: crypto.randomUUID(), reasons: [reason] };
-      given.current = answer;
+      const id = crypto.randomUUID();
+      given.current = { sheet: 'wrong', id, reasons: [reason], asked: 'page' };
       go('sent');
-      void deliver({ ...answer, answer: 'wrong', asked: 'page' }).then((sent) => {
+      void deliver({ id, answer: 'wrong', reasons: [reason], asked: 'page' }).then((sent) => {
+        if (sent) return;
+        go('reasons');
+        setWord({ say: 'failed' });
+      });
+    },
+    notReceived() {
+      if (!missing) return;
+      const id = crypto.randomUUID();
+      given.current = { sheet: 'missing', id, page: missing.page };
+      go('missing');
+      void deliver({ id, answer: 'not_received', pageSaid: missing.page, asked: 'page' }).then((sent) => {
         if (sent) return;
         go('reasons');
         setWord({ say: 'failed' });
       });
     },
     addNote() {
-      if (given.current) setOpen({ sheet: 'wrong', ...given.current, asked: 'page' });
+      if (given.current) setOpen(given.current);
     },
     wrongOnReturn() {
       // The question at the edge of the screen leaves with its buttons: the sheet returns to the standing one.
@@ -196,8 +228,13 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
     // Nothing to send: tomorrow the carrier's site may show it, and the row asks again.
     notYet: () => go('early'),
     async sendWords(reasons, note) {
-      if (open?.sheet !== 'wrong') return false;
       const words = note.trim();
+      if (open?.sheet === 'missing') {
+        if (!words || !await deliver({ id: open.id, answer: 'not_received', pageSaid: open.page, note: words, asked: 'page' }, false)) return false;
+        after.current = 'missing-noted';
+        return true;
+      }
+      if (open?.sheet !== 'wrong') return false;
       const sent = await deliver({ id: open.id, answer: 'wrong', reasons: [...reasons], ...(words ? { note: words } : {}), asked: open.asked }, open.asked === 'back');
       if (!sent) return false;
       after.current = 'noted';
@@ -230,6 +267,23 @@ function Answers({ yes, no, onYes, onNo }: { yes: string; no: string; onYes: () 
 
 function Said({ children }: { children: ReactNode }) {
   return <p className="peekfb-said" role="status"><Icon name="check" />{children}</p>;
+}
+
+/** What to do about a parcel that hasn't come, in the words that fit what the page says: who to ask, and a note after it. */
+function NextStep({ feedback }: { feedback: ParcelFeedbackState }) {
+  const { t } = useI18n();
+  const step = feedback.missing;
+  if (!step) return <Said>{t('feedback.pip.sent')}</Said>;
+  return <>
+    <p className="peekfb-next" role="status">{t(MISSING_KEYS[step.page], { carrier: step.carrier })}</p>
+    <span className="peekfb-then">
+      {step.help && <a className="peekfb-help" href={step.help.href} target="_blank" rel="noopener noreferrer"
+        onClick={() => trackAction('parcel-carrier-help')}><span>{t('link.help', { carrier: step.help.carrier })}</span><Icon name="arrow" /></a>}
+      {feedback.moment === 'missing'
+        ? <button type="button" className="peekfb-beside" onClick={feedback.addNote}>{t('feedback.addNote')}</button>
+        : <Said>{t('feedback.missing.noted')}</Said>}
+    </span>
+  </>;
 }
 
 const still = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -350,14 +404,17 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
       <div ref={place} className="peekfb-bubble" tabIndex={-1}>
         <div key={moment} className="peekfb-say" data-moved={moved}>
           {moment === 'right' ? <Said>{t('feedback.pip.right')}</Said>
+            : moment === 'missing' || moment === 'missing-noted' ? <NextStep feedback={feedback} />
             : moment === 'sent' || moment === 'noted' ? <>
               <Said>{t('feedback.pip.sent')}</Said>
               {moment === 'sent' && <button type="button" className="peekfb-beside" onClick={feedback.addNote}>{t('feedback.addNote')}</button>}
             </> : moment === 'reasons' ? <>
               <p className="peekfb-question">{t('feedback.whatsOff')}</p>
               <span className="peekfb-chips">
-                {feedback.reasons.map((reason, index) => <button key={reason} type="button" className="peekfb-pill" style={{ '--i': index } as CSSProperties}
-                  onClick={() => feedback.pick(reason)}>{t(REASON_KEYS[reason])}</button>)}
+                {feedback.missing && <button type="button" className="peekfb-pill" style={{ '--i': 0 } as CSSProperties}
+                  onClick={feedback.notReceived}>{t('feedback.reason.notReceived')}</button>}
+                {feedback.reasons.map((reason, index) => <button key={reason} type="button" className="peekfb-pill"
+                  style={{ '--i': index + (feedback.missing ? 1 : 0) } as CSSProperties} onClick={() => feedback.pick(reason)}>{t(REASON_KEYS[reason])}</button>)}
               </span>
             </> : <>
               <p className="peekfb-question">{t('feedback.pip.question')}</p>
@@ -369,7 +426,10 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
   </div>;
 }
 
-function WrongSheet({ feedback, initial, dismiss }: { feedback: ParcelFeedbackState; initial: readonly ApiParcelFeedbackReason[]; dismiss: () => void }) {
+/** The words of an answer: what is off, picked again, and a note; for a parcel that hasn't come, the note alone. */
+function WrongSheet({ feedback, initial, choose = true, dismiss }: {
+  feedback: ParcelFeedbackState; initial: readonly ApiParcelFeedbackReason[]; choose?: boolean; dismiss: () => void;
+}) {
   const { t } = useI18n();
   const field = useId();
   const [picked, setPicked] = useState(initial);
@@ -388,10 +448,10 @@ function WrongSheet({ feedback, initial, dismiss }: { feedback: ParcelFeedbackSt
     }
   }
   return <>
-    <div className="peekfb-chips">
+    {choose && <div className="peekfb-chips">
       {feedback.reasons.map((reason) => <button key={reason} type="button" className="peekfb-chip" aria-pressed={picked.includes(reason)} onClick={() => toggle(reason)}>{t(REASON_KEYS[reason])}</button>)}
-    </div>
-    <div className="peekfb-field">
+    </div>}
+    <div className={choose ? 'peekfb-field' : 'peekfb-field peekfb-field--first'}>
       <label htmlFor={field}>{t('feedback.note')}</label>
       <textarea id={field} rows={2} maxLength={NOTE_LIMIT} value={note} onChange={(event) => setNote(event.target.value)}
         aria-describedby={left <= NOTE_WARNING ? `${field}-left` : undefined} />
@@ -461,6 +521,9 @@ export function FeedbackOverlays({ feedback }: { feedback: ParcelFeedbackState }
     {word?.say === 'failed' && <Toast mark={<Glyph name="info" />}>{t('feedback.failed')}</Toast>}
     {open?.sheet === 'wrong' && <Sheet title={t('feedback.whatsOff')} className="peekfb-sheet" onClose={feedback.close}>
       {(dismiss) => <WrongSheet feedback={feedback} initial={open.reasons} dismiss={dismiss} />}
+    </Sheet>}
+    {open?.sheet === 'missing' && <Sheet title={t('feedback.addNote')} className="peekfb-sheet" onClose={feedback.close}>
+      {(dismiss) => <WrongSheet feedback={feedback} initial={[]} choose={false} dismiss={dismiss} />}
     </Sheet>}
     {open?.sheet === 'carrier' && <Sheet title={t('feedback.unknown.title')} className="peekfb-sheet" onClose={feedback.close}>
       {(dismiss) => <CarrierSheet feedback={feedback} dismiss={dismiss} />}

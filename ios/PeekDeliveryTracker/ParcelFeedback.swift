@@ -450,6 +450,7 @@ final class ParcelFeedbackModel: ObservableObject {
         case .right: "parcel-feedback-right"
         case .wrong: "parcel-feedback-wrong"
         case .foundElsewhere: "parcel-feedback-carrier"
+        case .notReceived: "parcel-feedback-not-received"
         }
         do {
             guard let client else { throw DeliveryAPIError.parcelMissing }

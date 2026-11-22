@@ -12,7 +12,8 @@ import type { ParcelFeedbackValues } from './validation';
 
 /**
  * What a reader says of a parcel: that what is shown is right, what is off,
- * or who carries a parcel no carrier was found for. An answer is kept with
+ * who carries a parcel no carrier was found for, or that it hasn't come and
+ * what the page said of it then. An answer is kept with
  * the parcel's number and what the service held about it, and with nothing
  * that says who gave it: no account, link, device or address.
  */
@@ -86,6 +87,7 @@ export async function keepParcelFeedback(
     note: values.note,
     carrier_name: values.carrierName,
     tracking_page: values.trackingPage,
+    page_said: values.pageSaid,
     asked: values.asked,
     via,
     app: values.app,
@@ -98,6 +100,7 @@ export async function keepParcelFeedback(
     tracking_number: String(row.tracking_number ?? ''),
     answer: values.answer,
     reasons: values.reasons.join(',') || null,
+    page_said: values.pageSaid,
     carrier,
     asked: values.asked,
     via,

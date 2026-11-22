@@ -219,7 +219,7 @@
       "type": "stat",
       "id": 38,
       "title": "Readers who say it's right",
-      "description": "Readers' answers over the past 7 days that say the parcel is right, as a share of all their answers, and how many answers there were. Few answers make the share swing. The figure is the latest count; the line shows each UTC day's end.",
+      "description": "Readers' answers over the past 7 days that say the parcel is right, as a share of their answers, and how many answers there were. Few answers make the share swing. \"Not received\" counts readers who said the parcel hasn't come: they are left out of the share. The figure is the latest count; the line shows each UTC day's end.",
       "datasource": {"type": "grafana-postgresql-datasource", "uid": "${metrics}"},
       "gridPos": {"x": 8, "y": 1, "w": 4, "h": 5},
       "targets": [
@@ -229,7 +229,7 @@
           "editorMode": "code",
           "rawQuery": true,
           "format": "time_series",
-          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  100.0 * feedback_right_7d / nullif(feedback_7d, 0) as \"Right\",\n  feedback_7d as \"Answers\"\nfrom metrics.goals_daily\nwhere $__timeFilter(day)\norder by 1"
+          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  100.0 * feedback_right_7d / nullif(feedback_7d, 0) as \"Right\",\n  feedback_7d as \"Answers\",\n  feedback_not_received_7d as \"Not received\"\nfrom metrics.goals_daily\nwhere $__timeFilter(day)\norder by 1"
         }
       ],
       "fieldConfig": {
@@ -243,6 +243,10 @@
         "overrides": [
           {
             "matcher": {"id": "byName", "options": "Answers"},
+            "properties": [{"id": "unit", "value": "none"}, {"id": "decimals", "value": 0}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Not received"},
             "properties": [{"id": "unit", "value": "none"}, {"id": "decimals", "value": 0}]
           }
         ]
@@ -1252,7 +1256,7 @@
       "type": "timeseries",
       "id": 92,
       "title": "Readers' answers, 7 days",
-      "description": "At each UTC day's end: how many readers answered whether their parcel was right in the 7 days before.",
+      "description": "At each UTC day's end: how many readers answered whether their parcel was right in the 7 days before, and apart, how many said it hasn't come (\"Not received\"), which the share of right answers leaves out.",
       "datasource": {"type": "grafana-postgresql-datasource", "uid": "${metrics}"},
       "gridPos": {"x": 8, "y": 65, "w": 8, "h": 7},
       "targets": [
@@ -1262,7 +1266,7 @@
           "editorMode": "code",
           "rawQuery": true,
           "format": "time_series",
-          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  feedback_7d as \"Answers\"\nfrom metrics.goals_daily\nwhere $__timeFilter(day)\norder by 1"
+          "rawSql": "select (day::timestamp at time zone 'UTC') as time,\n  feedback_7d as \"Answers\",\n  feedback_not_received_7d as \"Not received\"\nfrom metrics.goals_daily\nwhere $__timeFilter(day)\norder by 1"
         }
       ],
       "fieldConfig": {
@@ -1281,10 +1285,20 @@
           },
           "color": {"mode": "fixed", "fixedColor": "#3987e5"}
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "Not received"},
+            "properties": [
+              {"id": "color", "value": {"mode": "fixed", "fixedColor": "#898781"}},
+              {"id": "custom.drawStyle", "value": "line"},
+              {"id": "custom.lineWidth", "value": 2},
+              {"id": "custom.fillOpacity", "value": 0}
+            ]
+          }
+        ]
       },
       "options": {
-        "legend": {"showLegend": false, "displayMode": "list", "placement": "bottom"},
+        "legend": {"showLegend": true, "displayMode": "list", "placement": "bottom"},
         "tooltip": {"mode": "single", "sort": "none"}
       }
     },

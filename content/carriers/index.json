@@ -164,7 +164,7 @@
   { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] },
   { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de", "fr", "it", "ru", "es", "sv", "pt", "pl"] },
   { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en"] },
+  { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en", "pl", "it", "es", "de", "fr", "pt"] },
   { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de"] },

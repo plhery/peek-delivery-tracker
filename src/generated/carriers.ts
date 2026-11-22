@@ -2868,6 +2868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#084282"
     },
     {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "zto-international-sendungsverfolgung",
+      "title": "ZTO International Sendungsverfolgung: 771-Nummer & Status",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "mayi-yinfu-sendungsverfolgung",
@@ -4078,6 +4086,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#084282"
     },
     {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "suivi-zto-international",
+      "title": "Suivi ZTO International\u00a0: numéro 771, statuts et contact",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "suivi-mayi-yinfu",
@@ -5238,6 +5254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento BYHD: codici BYHD, stati e corriere finale",
       "name": "BYHD",
       "color": "#084282"
+    },
+    {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "tracciamento-zto-international",
+      "title": "Tracciamento ZTO International: numeri 771, stati e contatti",
+      "name": "ZTO International",
+      "color": "#3a8eff"
     },
     {
       "id": "mayiyinfu",
@@ -6402,6 +6426,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#084282"
     },
     {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "seguimiento-zto-international",
+      "title": "Seguimiento ZTO International: número 771 y estados",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
       "id": "mayiyinfu",
       "catalog": "mayiyinfu",
       "slug": "seguimiento-mayi-yinfu",
@@ -7530,6 +7562,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio BYHD: números BYHD, estados e quem entrega",
       "name": "BYHD",
       "color": "#084282"
+    },
+    {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "seguimento-zto-international",
+      "title": "Seguimento ZTO International: números 771, estados e ajuda",
+      "name": "ZTO International",
+      "color": "#3a8eff"
     },
     {
       "id": "mayiyinfu",
@@ -8726,6 +8766,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie BYHD: numery BYHD, statusy i doręczyciel",
       "name": "BYHD",
       "color": "#084282"
+    },
+    {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "sledzenie-zto-international",
+      "title": "Śledzenie ZTO International: numery 771, statusy i kontakt",
+      "name": "ZTO International",
+      "color": "#3a8eff"
     },
     {
       "id": "mayiyinfu",

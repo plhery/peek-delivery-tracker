@@ -2276,6 +2276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "dhl-ecommerce-uk-sendungsverfolgung",
+      "title": "DHL eCommerce UK Sendungsverfolgung: Status & Kontakt",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-sendungsverfolgung",
@@ -3428,6 +3436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "bpost suivi\u00a0: code-barres, statuts et point relais",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "suivi-dhl-ecommerce-uk",
+      "title": "Suivi DHL eCommerce UK\u00a0: statuts, ServicePoints, contact",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
     },
     {
       "id": "gofo-fr",
@@ -4592,6 +4608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "tracciamento-dhl-ecommerce-uk",
+      "title": "Tracciamento DHL eCommerce UK: stati e contatti",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracciamento",
@@ -5698,6 +5722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "seguimiento-dhl-ecommerce-uk",
+      "title": "Seguimiento DHL eCommerce UK: estados y contacto",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-seguimiento",
@@ -6796,6 +6828,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "seguimento-dhl-ecommerce-uk",
+      "title": "Seguimento DHL eCommerce UK: estados e contacto",
+      "name": "DHL eCommerce UK",
+      "color": "#ffcc00"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-rastreio",
@@ -7885,6 +7925,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "dhl-ecommerce-poland-sledzenie-przesylki",
       "title": "DHL eCommerce Poland śledzenie przesyłki: statusy i punkty",
       "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
+      "id": "dhl-ecommerce-uk",
+      "catalog": "dhl-ecommerce-uk",
+      "slug": "sledzenie-dhl-ecommerce-uk",
+      "title": "Śledzenie DHL eCommerce UK: statusy i kontakt",
+      "name": "DHL eCommerce UK",
       "color": "#ffcc00"
     },
     {

@@ -81,7 +81,7 @@
   { "id": "fan-courier", "catalog": "fan-courier", "name": "FAN Courier", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "econt", "catalog": "econt", "name": "Econt", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ceska-posta", "catalog": "ceska-posta", "name": "Česká pošta", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "express-one", "catalog": "express-one", "name": "Express One", "languages": ["en", "hu"] },
+  { "id": "express-one", "catalog": "express-one", "name": "Express One", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "foxpost", "catalog": "foxpost", "name": "Foxpost", "languages": ["en", "hu"] },
   { "id": "slovak-parcel-service", "catalog": "slovak-parcel-service", "name": "Slovak Parcel Service", "languages": ["en", "sk"] },
   { "id": "slovenska-posta", "catalog": "slovenska-posta", "name": "Slovenská pošta", "languages": ["en", "sk", "fr", "de", "es", "it", "pt", "pl"] },

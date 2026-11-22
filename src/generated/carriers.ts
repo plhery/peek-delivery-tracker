@@ -2468,6 +2468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "express-one-sendungsverfolgung",
+      "title": "Express One Sendungsverfolgung: Status & Kontakt",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-sendungsverfolgung",
@@ -3630,6 +3638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "suivi-express-one",
+      "title": "Suivi Express One\u00a0: statuts, points relais et contacts",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "suivi-slovenska-posta",
@@ -4784,6 +4800,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "tracciamento-express-one",
+      "title": "Tracciamento Express One: stati, punti e contatti",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "tracciamento-slovenska-posta",
@@ -5890,6 +5914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002776"
     },
     {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "seguimiento-express-one",
+      "title": "Seguimiento Express One: estados, puntos y contacto",
+      "name": "Express One",
+      "color": "#ec6500"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "seguimiento-slovenska-posta",
@@ -6986,6 +7018,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Česká pošta (Correios Checos) e Balíkovna",
       "name": "Česká pošta",
       "color": "#002776"
+    },
+    {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "seguimento-express-one",
+      "title": "Seguimento Express One: estados, pontos e contactos",
+      "name": "Express One",
+      "color": "#ec6500"
     },
     {
       "id": "slovenska-posta",
@@ -8118,6 +8158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Česká pošta (Poczta Czeska) i Balíkovna",
       "name": "Česká pošta",
       "color": "#002776"
+    },
+    {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "sledzenie-express-one",
+      "title": "Śledzenie Express One: statusy, punkty i kontakt",
+      "name": "Express One",
+      "color": "#ec6500"
     },
     {
       "id": "slovenska-posta",

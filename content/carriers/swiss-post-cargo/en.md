@@ -14,15 +14,15 @@ Swiss Post Cargo's tracker takes a barcode for one item or a reference from the 
 
 | Number | What it is |
 | --- | --- |
-| `00012345600000000005` | 20 digits starting `00`: a pallet or item barcode (an SSCC). The last digit is a check digit. |
-| `PL-99999981` | `PL-` and 8 digits: a customer reference. |
+| `00482917365428193648` | 20 digits starting `00`: a pallet or item barcode (an SSCC). The last digit is a check digit. |
+| `PL-48291736` | `PL-` and 8 digits: a customer reference. |
 
 Check the shop's emails, then ask the shop. [How to find your tracking number](guide:find-tracking-number) has more places to look. If the tracker finds nothing, check the digits, then ask the sender.
 
 Two kinds of number that aren't tracked as Swiss Post Cargo:
 
-- **Swiss Post parcels:** 18 digits starting `99` (printed `99.00.123456.12345678`) or two letters, nine digits and `CH` (`RR000000005CH`).
-- **PostLogistics references** like `12345678-123`: PostLogistics now trades as Swiss Post Cargo, and its old tracker, tracking.postlogistics.ch, no longer opens. Peek tracks these references as PostLogistics.
+- **Swiss Post parcels:** 18 digits starting `99` (printed `99.00.482917.36542819`) or two letters, nine digits and `CH` (`RR482917367CH`).
+- **PostLogistics references** like `48291736-542`: PostLogistics now trades as Swiss Post Cargo, and its old tracker, tracking.postlogistics.ch, no longer opens. Peek tracks these references as PostLogistics.
 
 ## Swiss Post Cargo track and trace statuses
 
@@ -41,7 +41,7 @@ Swiss Post Cargo words its scans in English, German, French or Italian. In Engli
 
 ## Swiss Post Cargo delivery: when, where and missed deliveries
 
-**When.** Swiss Post's freight brochure says freight is generally delivered on the next working day. In Switzerland and Liechtenstein, places a heavy goods vehicle can reach get it by 17:00 on the next working day. Hard-to-reach Alpine valleys and mountain areas (Valais, Ticino and Graubünden) get it by 17:00 on the second working day.
+**When.** Swiss Post's freight brochure says freight is generally delivered on the next working day. In Switzerland and Liechtenstein, places a heavy goods vehicle can reach get it by 17:00 Swiss time on the next working day. Hard-to-reach Alpine valleys and mountain areas (Valais, Ticino and Graubünden) get it by 17:00 on the second working day.
 
 **Where.** As standard, freight goes to the first door on the ground floor, the ramp or the kerb, during business hours, not upstairs. The driver expects access with a pallet truck, and unloading is the recipient's job: a driver who unloads does it on your behalf. The driver asks you to sign to confirm the delivery was correct.
 
@@ -63,15 +63,15 @@ The shop is Swiss Post Cargo's customer: businesses order its services, so a del
 
 Swiss Post Cargo works for the shop, so start there: the shop booked the transport. Swiss Post's freight brochure, dated April 2022, gives one contact, for business customers and without a phone number: Customer Service Transport CH, Lagerstrasse 12, 5606 Dintikon, sales.ls4@post.ch.
 
-For Swiss Post letters and parcels (not Cargo), Swiss Post's line is +41 848 888 888 (CHF 0.08 a minute from a Swiss landline), Monday to Friday 07:30 to 18:00 and Saturday 08:00 to 12:00.
+For Swiss Post letters and parcels (not Cargo), Swiss Post's line is +41 848 888 888 (CHF 0.08 a minute from a Swiss landline), Monday to Friday 07:30 to 18:00 and Saturday 08:00 to 12:00, Swiss time.
 
 ## Tracking a Swiss Post Cargo shipment with Peek
 
-A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carrier, so [Peek](/) shows "Checking tracking services…" and names Swiss Post Cargo only if Swiss Post Cargo knows the number. A `PL-99999981` reference is asked of Swiss Post Cargo and TNT Italy, whose numbers can take the same shape. For any other reference of 6 to 40 letters and digits, pick Swiss Post Cargo with "Change", or paste a tt.swisspost-cargo.com or apv.swisspost-cargo.com Track & Trace link. A Swiss Post parcel number in such a link is tracked as Swiss Post.
+A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carrier, so [Peek](/) shows "Checking tracking services…" and names Swiss Post Cargo only if Swiss Post Cargo knows the number. A `PL-48291736` reference is asked of Swiss Post Cargo and TNT Italy, whose numbers can take the same shape. For any other reference of 6 to 40 letters and digits, pick Swiss Post Cargo with "Change", or paste a tt.swisspost-cargo.com or apv.swisspost-cargo.com Track & Trace link (`/public/trackandtrace/` followed by the number). A Swiss Post parcel number in such a link is tracked as Swiss Post.
 
 Peek shows the status and the history with the town of each scan on a map, with the delivery time. Times are read on Zurich time and shown in your device's time zone. Wordings stay in English; `Loaded for Delivery` counts as out for delivery. The signature and photo rows fold into the delivery scan, without the picture. Peek leaves out your name and address and has no expected delivery, weight or pickup point.
 
-A reference shared by several shipments is read only while one of them has scans from the last 60 days; otherwise it reads as not found, so use the barcode. Peek checks up to every 10 minutes, or every 2 from 6 a.m. Swiss time on the day Swiss Post Cargo scans the shipment out for delivery, while Swiss Post Cargo's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly.
+A reference shared by several shipments is read only while just one of them has scans from the last 60 days; otherwise Swiss Post Cargo doesn't find it (Peek shows "Waiting for Swiss Post Cargo" and, after two days, asks you to check the number), so use the barcode. While you have the shipment open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. Swiss time on the day Swiss Post Cargo scans the shipment out for delivery, while Swiss Post Cargo's own tracker answers, and can notify you of every scan, important steps or delivery day only. Otherwise, and after two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Swiss Post Cargo tracking
 
@@ -81,7 +81,7 @@ It's the name Swiss Post's goods logistics has traded under since 1 March 2025: 
 
 ### Is PostLogistics the same as Swiss Post Cargo?
 
-Yes, PostLogistics now trades as Swiss Post Cargo. Its old tracker, tracking.postlogistics.ch, no longer opens; Swiss Post Cargo's tracker is tt.swisspost-cargo.com. Peek still tracks PostLogistics references like `12345678-123`.
+Yes, PostLogistics now trades as Swiss Post Cargo. Its old tracker, tracking.postlogistics.ch, no longer opens; Swiss Post Cargo's tracker is tt.swisspost-cargo.com. Peek still tracks PostLogistics references like `48291736-542`.
 
 ### Is there a Swiss Post Cargo email address?
 

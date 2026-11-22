@@ -14,10 +14,10 @@ Il tracking di GLS accetta numeri di pacco o Track ID. GLS stampa il Track ID su
 
 | Numero (inventato) | Che cos'è |
 | --- | --- |
-| `11111111111` | 11 cifre. Stessa forma di GLS Germany, GLS France, PostLogistics e DHL eCommerce Poland. |
-| `000000000009` | 12 cifre, l'ultima è una cifra di controllo. Stessa forma di BRT, Mondial Relay, Colis Privé e altri. |
-| `ABCD1234` | 8 lettere e cifre. Stessa forma di GLS Germany e GLS France. |
-| Sei lettere | Per esempio `ABCDEF`. Stessa forma di GLS Germany. |
+| `48291736542` | 11 cifre. Stessa forma di GLS Germany, GLS France, PostLogistics e DHL eCommerce Poland. |
+| `482917365424` | 12 cifre, l'ultima è una cifra di controllo. Stessa forma di BRT, Mondial Relay, Colis Privé e altri. |
+| `K7M4P9X2` | 8 lettere e cifre. Stessa forma di GLS Germany e GLS France. |
+| Sei lettere | Per esempio `HMPQRT`. Stessa forma di GLS Germany. |
 
 Copia il numero invece di riscriverlo: un numero di 12 cifre con l'ultima sbagliata, o uno di 11 a cui manca una cifra, non corrisponde più a GLS. Se l'e-mail del negozio nomina un altro corriere, come [BRT](carrier:brt), il numero è suo. Nessun numero? Leggi [dove si trova il codice tracking](guide:find-tracking-number).
 
@@ -34,8 +34,8 @@ Per i pacchi diretti in Svizzera la pagina di tracking di GLS offre solo l'ingle
 | `The parcel was released by customs.` | Sdoganato, riparte. |
 | `Final parcel center` | È all'ultimo centro pacchi: il passo successivo è la consegna. |
 | `In delivery`, `The parcel is in delivery.` | In consegna, previsto in giornata. |
-| `Not delivered` | Non consegnato, per esempio perché non c'era nessuno o mancano dati sull'indirizzo. |
-| `Stored` | In giacenza al deposito dopo una consegna non riuscita, per esempio perché non eri in casa. |
+| `The parcel could not be delivered as the consignee was absent` | Non consegnato perché non c'era nessuno. |
+| `The parcel is stored in the parcel center` | In giacenza al deposito dopo una consegna non riuscita, per esempio perché non eri in casa. |
 | `The parcel is ready for collection at the ParcelShop.` | Ti aspetta in un ParcelShop o in un locker. |
 | `The parcel has been delivered.`, `Delivered` | Consegnato. |
 
@@ -61,15 +61,15 @@ GLS l'ha scelto il mittente, che secondo le pagine GLS della Posta paga in ogni 
 
 **Dazio e IVA.** Chi paga dipende dall'Incoterm GLS scelto dal mittente. Con l'Incoterm 20 sdoganamento, dazio e IVA sono a carico dell'importatore; con il 30 e il 40 si dividono tra mittente e destinatario, e tu paghi almeno l'IVA. Per i pacchi GLS la Posta applica le stesse tariffe di sdoganamento degli altri pacchi: le cifre sono nella guida [pacco fermo in dogana](guide:customs). Se non sei d'accordo con i costi di sdoganamento, la Posta consiglia di contattare il suo Servizio clienti internazionale, al +41 848 48 48 47. Per correggere regime doganale, indirizzo o tributi hai 60 giorni dalla data della decisione d'imposizione, termine fissato dall'Ufficio federale della dogana e della sicurezza dei confini (UDSC).
 
-**Non consegnato.** Con `Not delivered` controlla con il negozio che l'indirizzo dell'ordine sia giusto e completo.
+**Non consegnato.** Se il pacco risulta non consegnato, controlla con il negozio che l'indirizzo dell'ordine sia giusto e completo.
 
 **Perso o rotto.** GLS non pubblica per la Svizzera né una procedura di reclamo né termini o limiti di risarcimento: rivolgiti al negozio, che ha il contratto con GLS.
 
 ## GLS Svizzera contatti: telefono ed e-mail
 
-GLS non ha un numero proprio per la Svizzera. La sua pagina contatti rimanda al sito della società GLS nazionale, che per la Svizzera e il Liechtenstein è Swiss Post GLS. Recapiti verificati il 10 ottobre 2026:
+GLS non ha un numero proprio per la Svizzera. La sua pagina contatti rimanda al sito della società GLS nazionale, che per la Svizzera e il Liechtenstein è Swiss Post GLS:
 
-- **Telefono:** +41 848 48 48 47, la linea «Importazione» di Swiss Post GLS, CHF 0.08 al minuto da rete fissa svizzera, dal lunedì al venerdì 8.00–12.00 e 13.30–17.30. La Posta la indica come «GLS (pacchi)» sulle pagine per le aziende e per lo sdoganamento, non come linea per il tracking. Il +41 848 454 454 è per chi spedisce dalla Svizzera.
+- **Telefono:** +41 848 48 48 47, la linea «Importazione» di Swiss Post GLS, CHF 0.08 al minuto da rete fissa svizzera, dal lunedì al venerdì 8.00–12.00 e 13.30–17.30 (ora svizzera). La Posta la indica come «GLS (pacchi)» sulle pagine per le aziende e per lo sdoganamento, non come linea per il tracking. Il +41 848 454 454 è per chi spedisce dalla Svizzera.
 - **E-mail:** infogls@posta.ch in italiano, oppure infogls@post.ch, infogls@poste.ch o infogls@swisspost.ch.
 - **Indirizzo:** Swiss Post GLS, Post-Passage 11, 4002 Basel.
 - **Gruppo GLS:** un [modulo di contatto](https://gls-group.com/GROUP/en/contact-form/) in inglese.
@@ -80,11 +80,11 @@ GLS non ha un numero proprio per la Svizzera. La sua pagina contatti rimanda al 
 
 [Peek](/) accetta tutte e quattro le forme e chiede ai corrieri probabili. GLS Germany e GLS Switzerland conoscono gli stessi numeri, quindi conta il tuo paese: la regione del tuo telefono o, sul web, il paese da cui ti colleghi. In Svizzera o nel Liechtenstein di solito vedi «GLS Switzerland ha questo pacco»; se il pacco va in Germania, premi «Cambia» e scegli GLS Germany. Altrove compare GLS Germany, che segue altrettanto bene i pacchi diretti in Svizzera, con l'NPA svizzero. Puoi incollare anche un link di tracking gls-group con /EU/ o /GROUP/: viene seguito con GLS Germany.
 
-GLS mostra la cronologia delle scansioni solo con l'NPA di consegna, quindi il campo «Codice postale di consegna» è obbligatorio: quattro cifre (il campo propone 8000 come esempio), e finché è vuoto Peek non segue il pacco. L'NPA va a GLS e, se serve, a servizi di tracciamento; uno sbagliato fa sembrare il numero sconosciuto. Se l'hai già inserito su questo dispositivo, il campo te lo ripropone.
+GLS mostra la cronologia delle scansioni solo con l'NPA di consegna, quindi il campo «Codice postale di consegna» è obbligatorio: quattro cifre (il campo propone 8000 come esempio), e finché è vuoto Peek non segue il pacco. L'NPA va a GLS e, se serve, a servizi di tracciamento; se non corrisponde al pacco, Peek te lo dice («GLS Switzerland non ha trovato questo pacco con il codice postale …») per correggerlo. Se l'hai già inserito su questo dispositivo, il campo te lo ripropone.
 
 Poi vedi lo stato, la città e il paese di ogni scansione su una mappa, il giorno di consegna previsto, il peso e l'ora di consegna, senza il tuo nome, indirizzo, recapiti o firma. Gli stati restano nell'inglese di GLS; quello del ParcelShop compare come «Pronto per il ritiro». Gli orari delle scansioni sono letti come ora svizzera. GLS viene controllato circa una volta all'ora, anche il giorno di consegna, e dopo un controllo non riuscito si riprova dopo 4 ore; aggiornare a mano non fa controllare GLS prima. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Puoi ricevere notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna».
 
-Quando GLS indica che a consegnare è la Posta, la pagina del pacco mostra «Consegna con Swiss Post» (o «Annunciato a Swiss Post, non ancora ricevuto» finché la Posta ha il pacco solo annunciato, senza una sua scansione), e Peek può seguire il pacco sul tracking della Posta con lo stesso numero, appena la Posta mostra un avanzamento più recente. Peek non può contattare GLS o la Posta al posto tuo.
+Quando GLS indica che a consegnare è la Posta, la pagina del pacco mostra «Consegna con Swiss Post» (o «Annunciato a Swiss Post, non ancora ricevuto» finché la Posta ha il pacco solo annunciato, senza una sua scansione), e Peek può seguire il pacco sul tracking della Posta con lo stesso numero, appena la Posta mostra una scansione recente almeno quanto l'ultima di GLS. Peek non può contattare GLS o la Posta al posto tuo.
 
 ## Domande sul tracking GLS in Svizzera
 
@@ -98,7 +98,7 @@ GLS dà una cifra solo per i pacchi dall'Austria: 2 giorni di spedizione, sia pe
 
 ### Pacco GLS non consegnato: cosa fare?
 
-Cerca nella bucalettere un invito di ritiro della Posta: indica dove ritirare il pacco. Se il tracking dice `Not delivered`, scrivi al negozio.
+Cerca nella bucalettere un invito di ritiro della Posta: indica dove ritirare il pacco. Se il tracking lo dà per non consegnato, scrivi al negozio.
 
 ### Quanto tempo ho per ritirare un pacco GLS?
 

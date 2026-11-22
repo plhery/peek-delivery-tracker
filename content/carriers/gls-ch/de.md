@@ -14,10 +14,10 @@ Die Sendungsverfolgung von GLS nimmt Paketnummern oder Track-IDs an, auch mehrer
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `11111111111` | 11 Ziffern. Passt auch zu [GLS Deutschland](carrier:gls-de), GLS Frankreich, PostLogistics und DHL eCommerce Polen. |
-| `000000000009` | 12 Ziffern, die letzte ist eine Prüfziffer. Passt auch zu BRT, Mondial Relay, Colis Privé und anderen. |
-| `ABCD1234` | 8 Zeichen, Buchstaben und Ziffern gemischt. Passt auch zu GLS Deutschland und GLS Frankreich. |
-| Sechs Buchstaben | Etwa `ABCDEF`. Passt auch zu GLS Deutschland. |
+| `48291736542` | 11 Ziffern. Passt auch zu [GLS Deutschland](carrier:gls-de), GLS Frankreich, PostLogistics und DHL eCommerce Polen. |
+| `482917365424` | 12 Ziffern, die letzte ist eine Prüfziffer. Passt auch zu BRT, Mondial Relay, Colis Privé und anderen. |
+| `K7M4P9X2` | 8 Zeichen, Buchstaben und Ziffern gemischt. Passt auch zu GLS Deutschland und GLS Frankreich. |
+| Sechs Buchstaben | Etwa `HMPQRT`. Passt auch zu GLS Deutschland. |
 
 Kopier die Nummer lieber, statt sie abzutippen: Mit einer falschen letzten Ziffer passt eine 12-stellige Nummer nicht mehr zu GLS, eine 11-stellige mit einer fehlenden Ziffer ebenso wenig. Nennt die E-Mail des Shops einen anderen Paketdienst, gehört die Nummer diesem. Gar keine Nummer bekommen? Lies, [wie du die Sendungsnummer findest](guide:find-tracking-number).
 
@@ -35,12 +35,12 @@ Die Sendungsverfolgung von GLS für Pakete in die Schweiz gibt es nur auf Englis
 | `The parcel was released by customs.` | Verzollt, es geht weiter. |
 | `Final parcel center` | Im letzten Paketzentrum, als Nächstes kommt die Zustellung. |
 | `In delivery`, `The parcel is in delivery.` | In Zustellung, es kommt voraussichtlich im Lauf des Tages. |
-| `Not delivered` | Nicht zugestellt, etwa weil niemand zu Hause war oder Angaben zur Adresse fehlen. |
-| `Stored` | Nach einer gescheiterten Zustellung im Depot eingelagert, etwa weil niemand zu Hause war. |
+| `The parcel could not be delivered as the consignee was absent` | Nicht zugestellt, weil niemand zu Hause war. |
+| `The parcel is stored in the parcel center` | Nach einer gescheiterten Zustellung im Depot eingelagert, etwa weil niemand zu Hause war. |
 | `The parcel is ready for collection at the ParcelShop.` | Liegt in einem ParcelShop oder einer Paketstation bereit, du holst es dort ab. |
 | `The parcel has been delivered.`, `Delivered` | Zugestellt. |
 
-`Preadvice` heißt nur, dass der Shop die Paketdaten im System von GLS erfasst hat. Bleibt es tagelang dabei, frag den Absender. `Delivered` schreibt GLS auch dann, wenn das Paket in einem GLS-ParcelShop angekommen ist, wo du es erst noch abholen musst. `Customs Consignment via Customs Portal` erklärt keine Seite von GLS, Peek zählt es zum Zoll. Die Gründe bei `Not delivered` und `Stored` stammen aus der Hilfe von GLS in den Niederlanden, wo GLS selbst zustellt. In der Schweiz stellt die Post zu.
+`Preadvice` heißt nur, dass der Shop die Paketdaten im System von GLS erfasst hat. Bleibt es tagelang dabei, frag den Absender. `Delivered` schreibt GLS auch dann, wenn das Paket in einem GLS-ParcelShop angekommen ist, wo du es erst noch abholen musst. `Customs Consignment via Customs Portal` erklärt keine Seite von GLS, Peek zählt es zum Zoll. Diese beiden Texte und ihre Gründe stammen aus der Hilfe von GLS in den Niederlanden, wo GLS selbst zustellt. In der Schweiz stellt die Post zu.
 
 ## GLS Zustellung in der Schweiz: Post, Paketshop und Abholungseinladung
 
@@ -68,9 +68,9 @@ Den Versand mit GLS hat der Absender gebucht, und laut den GLS-Seiten der Post b
 
 ## GLS Schweiz Kontakt: Telefonnummer, Hotline und E-Mail
 
-Eine eigene Schweizer Hotline hat GLS nicht. Für Telefonnummern verweist die Kontaktseite der GLS-Gruppe auf die Website der nationalen GLS-Gesellschaft, für die Schweiz und Liechtenstein also auf die Seite seines Partners Swiss Post GLS. So stand es am 10. Oktober 2026 auf den Seiten:
+Eine eigene Schweizer Hotline hat GLS nicht. Für Telefonnummern verweist die Kontaktseite der GLS-Gruppe auf die Website der nationalen GLS-Gesellschaft, für die Schweiz und Liechtenstein also auf die Seite seines Partners Swiss Post GLS:
 
-- **Telefon:** +41 848 48 48 47, die Importnummer von Swiss Post GLS, CHF 0.08/Min. vom Schweizer Festnetz, Montag bis Freitag 8.00–12.00 und 13.30–17.30 Uhr. Die Post führt sie auf Geschäfts- und Zollseiten als „GLS (Pakete)“, nicht als Nummer für die Sendungsverfolgung.
+- **Telefon:** +41 848 48 48 47, die Importnummer von Swiss Post GLS, CHF 0.08/Min. vom Schweizer Festnetz, Montag bis Freitag 8.00–12.00 und 13.30–17.30 Uhr Schweizer Zeit. Die Post führt sie auf Geschäfts- und Zollseiten als „GLS (Pakete)“, nicht als Nummer für die Sendungsverfolgung.
 - **E-Mail:** infogls@post.ch, auf Französisch infogls@poste.ch, auf Italienisch infogls@posta.ch, auf Englisch infogls@swisspost.ch.
 - **Postadresse:** Swiss Post GLS, Post-Passage 11, 4002 Basel.
 - **Für Versender:** Die Exportnummer +41 848 454 454 ist für Absender in der Schweiz gedacht, nicht für Empfänger.
@@ -82,7 +82,7 @@ Eine eigene Schweizer Hotline hat GLS nicht. Für Telefonnummern verweist die Ko
 
 [Peek](/) nimmt alle vier Formen an und fragt die wahrscheinlichen Paketdienste. GLS Germany und GLS Switzerland kennen dieselben Nummern, deshalb richtet es sich nach deinem Land: nach der Region deines Smartphones, im Web nach dem Land, aus dem du dich verbindest. In der Schweiz und in Liechtenstein siehst du meist „GLS Switzerland hat dieses Paket.“ Geht das Paket nach Deutschland, tippst du dann auf „Ändern“ und wählst GLS Germany. Anderswo siehst du GLS Germany, und auch damit verfolgst du Schweizer Pakete genauso gut, mit der Schweizer Postleitzahl. Einen Sendungslink von gls-group.com oder gls-group.eu mit /EU/ oder /GROUP/ im Pfad kannst du ebenfalls einfügen, er wird als GLS Germany verfolgt.
 
-Ohne Postleitzahl zeigt GLS keinen Sendungsverlauf, deshalb ist das Feld „Postleitzahl der Lieferadresse“ Pflicht: vier Ziffern, etwa 8000. Bis es ausgefüllt ist, wartet die Abfrage. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste, und eine falsche sieht aus wie eine unbekannte Nummer. Eine Schweizer Postleitzahl, die du auf diesem Gerät schon eingegeben hast, wird dir wieder vorgeschlagen.
+Ohne Postleitzahl zeigt GLS keinen Sendungsverlauf, deshalb ist das Feld „Postleitzahl der Lieferadresse“ Pflicht: vier Ziffern, etwa 8000. Bis es ausgefüllt ist, wartet die Abfrage. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste. Passt sie nicht zum Paket, sagt Peek es dir („GLS Switzerland hat dieses Paket mit der Postleitzahl … nicht gefunden.“), damit du sie korrigieren kannst. Eine Schweizer Postleitzahl, die du auf diesem Gerät schon eingegeben hast, wird dir wieder vorgeschlagen.
 
 Dann siehst du den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Zustelltag, das Gewicht und den Zeitpunkt der Zustellung, ohne deinen Namen, deine Adresse, Kontaktdaten, Unterschrift und Referenz. Die Scans behalten den englischen Text von GLS. Liegt das Paket in einem ParcelShop, steht es auf „Abholbereit“. GLS gibt seine Zeiten ohne Zeitzone an, sie werden als Schweizer Zeit gelesen. GLS wird etwa einmal pro Stunde abgefragt, auch am Liefertag, und nach einer fehlgeschlagenen Abfrage erst nach 4 Stunden wieder; auch wenn du von Hand aktualisierst, fragt Peek nicht früher nach. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Mitteilungen bekommst du auf Wunsch für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 

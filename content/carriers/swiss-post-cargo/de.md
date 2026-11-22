@@ -14,15 +14,15 @@ Das Tracking von Swiss Post Cargo akzeptiert einen Barcode für ein einzelnes St
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `00012345600000000005` | 20 Ziffern, beginnt mit 00: der Barcode einer Palette oder eines Stücks (eine SSCC). Die letzte Ziffer ist eine Prüfziffer. |
-| `PL-99999981` | PL- und 8 Ziffern: eine Kundenreferenz. |
+| `00482917365428193648` | 20 Ziffern, beginnt mit 00: der Barcode einer Palette oder eines Stücks (eine SSCC). Die letzte Ziffer ist eine Prüfziffer. |
+| `PL-48291736` | PL- und 8 Ziffern: eine Kundenreferenz. |
 
 Schau in die E-Mails des Shops und frag sonst dort nach. Weitere Stellen zeigt [Sendungsnummer finden](guide:find-tracking-number). Findet das Tracking nichts, prüf die Ziffern und frag dann den Absender.
 
 Diese Nummern werden nicht als Swiss Post Cargo verfolgt:
 
-- **Pakete der Post:** 18 Ziffern mit 99 am Anfang (gedruckt `99.00.123456.12345678`) oder zwei Buchstaben, neun Ziffern und CH (`RR000000005CH`).
-- **PostLogistics-Referenzen** wie `12345678-123`: PostLogistics tritt heute als Swiss Post Cargo auf, das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen. Peek verfolgt solche Referenzen als PostLogistics.
+- **Pakete der Post:** 18 Ziffern mit 99 am Anfang (gedruckt `99.00.482917.36542819`) oder zwei Buchstaben, neun Ziffern und CH (`RR482917367CH`).
+- **PostLogistics-Referenzen** wie `48291736-542`: PostLogistics tritt heute als Swiss Post Cargo auf, das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen. Peek verfolgt solche Referenzen als PostLogistics.
 
 ## Swiss Post Cargo Sendung verfolgen: was die Status bedeuten
 
@@ -63,15 +63,15 @@ Kunde von Swiss Post Cargo ist der Shop: Die Dienste bestellen Firmen. Verspätu
 
 Swiss Post Cargo arbeitet für den Shop, also fang dort an: Er hat den Transport gebucht. Die Stückgut-Broschüre der Post vom April 2022 nennt einen einzigen Kontakt, für Geschäftskunden und ohne Telefonnummer: Kundendienst Transporte CH, Lagerstrasse 12, 5606 Dintikon, sales.ls4@post.ch.
 
-Für Briefe und Pakete der Post (nicht Cargo) gilt +41 848 888 888 (CHF 0.08 pro Minute vom Schweizer Festnetz), Montag bis Freitag 7.30 bis 18 Uhr und Samstag 8 bis 12 Uhr, dazu ein Chat auf post.ch.
+Für Briefe und Pakete der Post (nicht Cargo) gilt +41 848 888 888 (CHF 0.08 pro Minute vom Schweizer Festnetz), Montag bis Freitag 7.30 bis 18 Uhr und Samstag 8 bis 12 Uhr (Schweizer Zeit), dazu ein Chat auf post.ch.
 
 ## Swiss Post Cargo mit Peek verfolgen
 
-Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Tracking-Dienste werden geprüft…“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-99999981` geht an Swiss Post Cargo und an TNT Italy, deren Nummern dieselbe Form haben können. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
+Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Tracking-Dienste werden geprüft…“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-48291736` geht an Swiss Post Cargo und an TNT Italy, deren Nummern dieselbe Form haben können. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein (`/public/trackandtrace/` und die Nummer). Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
 
 Du siehst den Status und den Verlauf mit dem Ort jedes Scans auf einer Karte und den Zeitpunkt der Zustellung. Die Uhrzeiten liest Peek als Schweizer Zeit und zeigt sie in der Zeitzone deines Geräts. Die Scan-Texte bleiben Englisch, weil die Abfrage auf Englisch läuft; `Loaded for Delivery` gilt als in Zustellung. Unterschrift und Foto gehen im Zustellscan auf, ohne das Bild. Dein Name und deine Adresse fehlen, eine voraussichtliche Zustellung, ein Gewicht oder eine Abholstelle gibt es nicht.
 
-Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange eine davon Scans aus den letzten 60 Tagen hat. Sonst gilt sie als nicht gefunden, nimm dann den Barcode. Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald die Ware in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Swiss Post Cargo selbst antwortet; über Tracking-Dienste alle 15 Minuten), und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
+Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange nur eine davon Scans aus den letzten 60 Tagen hat. Sonst findet Swiss Post Cargo sie nicht (Peek zeigt „Warten auf Swiss Post Cargo“ und bittet dich nach zwei Tagen, die Nummer zu prüfen), nimm dann den Barcode. Solange du die Sendung geöffnet hast, oder am Liefertag mit eingeschalteten Mitteilungen, schaut Peek bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald die Ware in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Schweizer Zeit und solange Swiss Post Cargo selbst antwortet), und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Sonst, und wenn zwei Tage lang nichts Neues kommt (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
 
 ## Fragen zum Swiss Post Cargo Tracking
 
@@ -81,7 +81,7 @@ So heißt die Güterlogistik der Post seit dem 1. März 2025: Logistik für Firm
 
 ### Ist PostLogistics jetzt Swiss Post Cargo?
 
-Ja, PostLogistics tritt heute als Swiss Post Cargo auf. Das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen, das Tracking von Swiss Post Cargo ist tt.swisspost-cargo.com. Referenzen wie `12345678-123` verfolgt Peek weiter als PostLogistics.
+Ja, PostLogistics tritt heute als Swiss Post Cargo auf. Das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen, das Tracking von Swiss Post Cargo ist tt.swisspost-cargo.com. Referenzen wie `48291736-542` verfolgt Peek weiter als PostLogistics.
 
 ### Hat Swiss Post Cargo eine E-Mail-Adresse?
 

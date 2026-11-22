@@ -14,10 +14,10 @@ GLS's tracking takes parcel numbers or Track IDs. GLS prints the Track ID on its
 
 | Number (invented) | What it is |
 | --- | --- |
-| `11111111111` | 11 digits. Also fits [GLS Germany](carrier:gls-de), [GLS France](carrier:gls-fr), PostLogistics and [DHL eCommerce Poland](carrier:dhl-ecommerce-pl). |
-| `000000000009` | 12 digits, the last a check digit. Also fits BRT, Mondial Relay, Colis Privé and others. |
-| `ABCD1234` | 8 letters and digits. Also fits GLS Germany and GLS France. |
-| Six letters | Such as `ABCDEF`. Also fits GLS Germany. |
+| `48291736542` | 11 digits. Also fits [GLS Germany](carrier:gls-de), [GLS France](carrier:gls-fr), PostLogistics and [DHL eCommerce Poland](carrier:dhl-ecommerce-pl). |
+| `482917365424` | 12 digits, the last a check digit. Also fits BRT, Mondial Relay, Colis Privé and others. |
+| `K7M4P9X2` | 8 letters and digits. Also fits GLS Germany and GLS France. |
+| Six letters | Such as `HMPQRT`. Also fits GLS Germany. |
 
 Copy the number rather than typing it: a 12-digit number with a wrong last digit, or an 11-digit one missing a digit, no longer matches GLS. If the shop's email names another carrier, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
@@ -34,12 +34,12 @@ GLS's tracking for Swiss parcels is in English only, and GLS publishes no Swiss 
 | `The parcel was released by customs.` | Cleared and moving again. |
 | `Final parcel center` | At the last centre: delivery comes next. |
 | `In delivery`, `The parcel is in delivery.` | Out for delivery, expected during the day. |
-| `Not delivered` | Not delivered, for example because no one was home or address details are missing. |
-| `Stored` | Kept at the depot after a failed delivery, for example because no one was home. |
+| `The parcel could not be delivered as the consignee was absent` | Not delivered because no one was home. |
+| `The parcel is stored in the parcel center` | Kept at the depot after a failed delivery, for example because no one was home. |
 | `The parcel is ready for collection at the ParcelShop.` | Waiting at a ParcelShop or locker for you to pick up. |
 | `The parcel has been delivered.`, `Delivered` | Delivered. |
 
-`Preadvice` only means the shop has entered the parcel's data in GLS's system: if it lasts for days, ask the sender. GLS also writes `Delivered` for a parcel left at a ParcelShop, which you still have to pick up. The reasons given for `Not delivered` and `Stored` come from GLS Netherlands, where GLS delivers itself; in Switzerland, Swiss Post delivers.
+`Preadvice` only means the shop has entered the parcel's data in GLS's system: if it lasts for days, ask the sender. GLS also writes `Delivered` for a parcel left at a ParcelShop, which you still have to pick up. These two wordings and their reasons come from GLS Netherlands, where GLS delivers itself; in Switzerland, Swiss Post delivers.
 
 ## GLS delivery in Switzerland: Swiss Post and collection notes
 
@@ -64,9 +64,9 @@ The sender chose GLS and, as Swiss Post's GLS pages say, always pays the transpo
 
 ## GLS Switzerland contact number and email
 
-GLS has no Swiss hotline of its own. Its contact page points to "the website of your GLS national company", which for Switzerland and Liechtenstein is Swiss Post GLS. As listed on 10 October 2026:
+GLS has no Swiss hotline of its own. Its contact page points to "the website of your GLS national company", which for Switzerland and Liechtenstein is Swiss Post GLS:
 
-- **Phone:** +41 848 48 48 47, Swiss Post GLS's import line, CHF 0.08 per minute from a Swiss landline, Monday to Friday 8 am to noon and 1.30 to 5.30 pm. Swiss Post lists it as "GLS (parcels)" on business and customs pages, not as a tracking line.
+- **Phone:** +41 848 48 48 47, Swiss Post GLS's import line, CHF 0.08 per minute from a Swiss landline, Monday to Friday 8 am to noon and 1.30 to 5.30 pm, Swiss time. Swiss Post lists it as "GLS (parcels)" on business and customs pages, not as a tracking line.
 - **Email:** infogls@swisspost.ch (English), infogls@post.ch, infogls@poste.ch or infogls@posta.ch.
 - **Post:** Swiss Post GLS, Post-Passage 11, 4002 Basel.
 - **GLS group:** a [contact form](https://gls-group.com/GROUP/en/contact-form/) in English.
@@ -77,11 +77,11 @@ GLS has no Swiss hotline of its own. Its contact page points to "the website of 
 
 [Peek](/) takes all four shapes and asks the likely carriers. GLS Germany and GLS Switzerland know the same numbers, so it goes by your country (your phone's region, or on the web where you connect from). In Switzerland or Liechtenstein you'll usually see "GLS Switzerland has this parcel"; for a parcel going to Germany, press "Change" and pick GLS Germany. Elsewhere you'll see GLS Germany, which tracks Swiss parcels just as well with the Swiss postcode. A pasted gls-group link with /EU/ or /GROUP/ is tracked as GLS Germany.
 
-GLS shows its scan history only with the delivery postcode, so the "Delivery postcode" field is required: four digits, like 8000. It goes to GLS and, when needed, to tracking services; a wrong one looks like an unknown number.
+GLS shows its scan history only with the delivery postcode, so the "Delivery postcode" field is required: four digits, like 8000. It goes to GLS and, when needed, to tracking services; if it doesn't match the parcel, Peek says so ("GLS Switzerland didn’t find this parcel with postcode …") so you can correct it.
 
 You then see the status, each scan's town and country on a map, the expected delivery day, the weight and the delivery time, without your name, address, contact details or signature. Statuses keep GLS's English wording; Peek shows the ParcelShop one as "Ready for pickup". GLS is checked about once an hour, delivery day included (4 hours after a failed check), and refreshing by hand doesn't make it check sooner. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. You can be notified of every scan, important steps or delivery day only.
 
-When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek can follow the parcel on Swiss Post's tracking with the same number once Swiss Post shows newer progress.
+When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek can follow the parcel on Swiss Post's tracking with the same number once Swiss Post shows a scan at least as recent as GLS's latest.
 
 ## Questions about GLS Switzerland tracking
 

@@ -14,10 +14,10 @@ Le suivi de GLS accepte des numéros de colis et des Track ID. GLS imprime le Tr
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `12345678901` | 11 chiffres. Même forme chez GLS Germany, [GLS France](carrier:gls-fr), PostLogistics et DHL eCommerce Poland. |
-| `000000000009` | 12 chiffres, dont le dernier est une clé de contrôle. Même forme chez BRT, Colis Privé, Mondial Relay, [DPD France](carrier:dpd-fr) et d'autres. |
-| `ABCD1234` | 8 lettres et chiffres. Même forme chez GLS Germany et GLS France. |
-| Six lettres | Comme `ABCDEF`. Même forme chez GLS Germany. |
+| `48291736542` | 11 chiffres. Même forme chez GLS Germany, [GLS France](carrier:gls-fr), PostLogistics et DHL eCommerce Poland. |
+| `482917365424` | 12 chiffres, dont le dernier est une clé de contrôle. Même forme chez BRT, Colis Privé, Mondial Relay, [DPD France](carrier:dpd-fr) et d'autres. |
+| `K7M4P9X2` | 8 lettres et chiffres. Même forme chez GLS Germany et GLS France. |
+| Six lettres | Comme `HMPQRT`. Même forme chez GLS Germany. |
 
 Copie-colle le numéro plutôt que de le taper : si le dernier chiffre d'un numéro de 12 chiffres est faux, ou s'il manque un chiffre à un numéro de 11 chiffres, il ne correspond plus à GLS. Si l'e-mail de la boutique nomme un autre transporteur, le numéro est le sien. Pas de numéro ? Lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -35,12 +35,12 @@ Pour les colis à destination de la Suisse, le suivi de GLS n'existe qu'en angla
 | `The parcel was released by customs.` | Dédouané, il reprend la route. |
 | `Final parcel center` | Il est au dernier centre : la livraison suit. |
 | `In delivery`, `The parcel is in delivery.` | Il est en livraison, attendu dans la journée. |
-| `Not delivered` | Pas livré, par exemple parce que personne n'était là ou qu'il manque des précisions sur l'adresse. |
-| `Stored` | Entreposé au dépôt après une livraison manquée, par exemple parce que personne n'était là. |
+| `The parcel could not be delivered as the consignee was absent` | Pas livré, parce que personne n'était là. |
+| `The parcel is stored in the parcel center` | Entreposé au dépôt après une livraison manquée, par exemple parce que personne n'était là. |
 | `The parcel is ready for collection at the ParcelShop.` | Il t'attend dans un ParcelShop ou une consigne GLS. |
 | `The parcel has been delivered.`, `Delivered` | Livré. |
 
-`Preadvice` veut seulement dire que la boutique a envoyé les données à GLS : s'il dure des jours, demande-lui où en est ton colis. GLS écrit aussi `Delivered` pour un colis déposé dans un ParcelShop, que tu dois encore aller retirer. Aucune page de GLS n'explique `Customs Consignment via Customs Portal` ; Peek le compte comme douane. Les raisons données pour `Not delivered` et `Stored` viennent de l'aide de GLS aux Pays-Bas, où GLS livre lui-même ; en Suisse, c'est La Poste qui livre.
+`Preadvice` veut seulement dire que la boutique a envoyé les données à GLS : s'il dure des jours, demande-lui où en est ton colis. GLS écrit aussi `Delivered` pour un colis déposé dans un ParcelShop, que tu dois encore aller retirer. Aucune page de GLS n'explique `Customs Consignment via Customs Portal` ; Peek le compte comme douane. Ces deux libellés et leurs raisons viennent de l'aide de GLS aux Pays-Bas, où GLS livre lui-même ; en Suisse, c'est La Poste qui livre.
 
 ## Livraison GLS en Suisse : La Poste, point relais et invitation à retirer
 
@@ -66,9 +66,9 @@ C'est l'expéditeur qui a choisi GLS, et « les frais de transport sont dans tou
 
 ## GLS Suisse contact : téléphone et e-mail
 
-GLS n'a pas de hotline suisse. Sa page de contact renvoie vers le site de la société GLS de ton pays, qui pour la Suisse et le Liechtenstein est la page de son partenaire Swiss Post GLS. Relevé le 10 octobre 2026 :
+GLS n'a pas de hotline suisse. Sa page de contact renvoie vers le site de la société GLS de ton pays, qui pour la Suisse et le Liechtenstein est la page de son partenaire Swiss Post GLS :
 
-- **Téléphone :** +41 848 48 48 47, la ligne Importation de Swiss Post GLS, CHF 0.08 la minute depuis le réseau fixe suisse, du lundi au vendredi de 8 h à 12 h et de 13 h 30 à 17 h 30. La Poste l'indique sous « GLS (colis) » sur ses pages de dédouanement pour les entreprises, pas comme une ligne de suivi.
+- **Téléphone :** +41 848 48 48 47, la ligne Importation de Swiss Post GLS, CHF 0.08 la minute depuis le réseau fixe suisse, du lundi au vendredi de 8 h à 12 h et de 13 h 30 à 17 h 30, heure suisse. La Poste l'indique sous « GLS (colis) » sur ses pages de dédouanement pour les entreprises, pas comme une ligne de suivi.
 - **E-mail :** infogls@poste.ch en français, ou infogls@post.ch, infogls@posta.ch ou infogls@swisspost.ch.
 - **Courrier :** Swiss Post GLS, Post-Passage 11, 4002 Bâle.
 - **Groupe GLS :** un [formulaire de contact](https://gls-group.com/GROUP/en/contact-form/), en anglais.
@@ -81,7 +81,7 @@ Au Liechtenstein, c'est le même partenaire, avec les mêmes contacts.
 
 [Peek](/) reconnaît les quatre formes et interroge les transporteurs probables. GLS Germany et GLS Switzerland connaissent les mêmes numéros, alors c'est ton pays qui tranche : la région de ton téléphone ou, sur le web, le pays d'où tu te connectes. En Suisse ou au Liechtenstein, tu verras en général « GLS Switzerland a ce colis » ; pour un colis livré en Allemagne, touche « Changer » et choisis GLS Germany. Ailleurs, ce sera GLS Germany, qui suit tout aussi bien les colis pour la Suisse avec le code postal suisse. Tu peux aussi coller un lien de suivi gls-group avec /EU/ ou /GROUP/ : le suivi passe alors par GLS Germany.
 
-GLS n'affiche son historique qu'avec le code postal : le champ « Code postal de livraison » est donc obligatoire (quatre chiffres, comme 8000), et le suivi attend qu'il soit rempli. Ce code est envoyé à GLS et, si besoin, à des services de suivi ; un code faux fait passer le colis pour un numéro inconnu.
+GLS n'affiche son historique qu'avec le code postal : le champ « Code postal de livraison » est donc obligatoire (quatre chiffres, comme 8000), et le suivi attend qu'il soit rempli. Ce code est envoyé à GLS et, si besoin, à des services de suivi ; s'il ne correspond pas au colis, Peek te le dit (« GLS Switzerland n’a pas trouvé ce colis avec le code postal … ») pour que tu le corriges.
 
 Tu vois ensuite le statut, la ville et le pays de chaque scan sur une carte, le jour de livraison prévu, le poids et l'heure de livraison, sans ton nom, ton adresse, tes coordonnées, ta signature ni la référence. Les statuts gardent l'anglais de GLS ; celui du ParcelShop s'affiche « Prêt à être retiré ». Les heures des scans sont interprétées comme heure suisse. GLS est consulté environ une fois par heure, jour de livraison compris, et de nouveau 4 heures après une consultation qui a échoué ; actualiser à la main ne fait pas consulter GLS plus tôt. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 

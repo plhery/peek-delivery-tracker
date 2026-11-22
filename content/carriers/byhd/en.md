@@ -14,9 +14,9 @@ BYHD publishes no number format. The waybills its tracker finds orders by are BY
 
 | Number | What it is |
 | --- | --- |
-| `BYHD000000017` | BYHD and nine digits: a BYHD waybill. |
-| `BYHD00000017` | Only eight digits: not BYHD's layout. Check for a missing digit. |
-| `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not BYHD's. |
+| `BYHD482917365` | BYHD and nine digits: a BYHD waybill. |
+| `BYHD48291736` | Only eight digits: not BYHD's layout. Check for a missing digit. |
+| `RR482917367CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not BYHD's. |
 
 Lower case and spaces don't matter when you paste it into Peek.
 
@@ -42,7 +42,7 @@ BYHD's times carry no time zone. They're Beijing time, so a line at 08:00 there 
 
 ## Who delivers BYHD parcels
 
-BYHD's tracker gives the number of the company that delivers in your country, but not its name, and its website names no delivery partner for any country. BYHD publishes no delivery times and no rules for delivery attempts, pickup points or how long a parcel is held: those are the delivering company's. If the number's shape doesn't tell you which company that is, ask the seller. Asked to pay import charges? See [parcels held at customs](guide:customs).
+BYHD's tracker gives the number of the company that delivers in your country, but not its name, and its website doesn't say which partner delivers in which country. BYHD publishes no delivery times and no rules for delivery attempts, pickup points or how long a parcel is held: those are the delivering company's. If the number's shape doesn't tell you which company that is, ask the seller. Asked to pay import charges? See [parcels held at customs](guide:customs).
 
 ## BYHD parcel not arriving or tracking stuck
 
@@ -50,25 +50,25 @@ BYHD's tracker gives the number of the company that delivers in your country, bu
 
 **Stuck on `Goods leaving the operation center`.** That's as far as BYHD's known lines go, so silence after it doesn't mean the parcel has stopped. Track it under the delivering company's number from BYHD's tracker, or ask the seller for it. More in [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
-**Nothing found.** For a number it doesn't know, BYHD's tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as BYHD listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for BYHD", with no request to check the number. So compare the number with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, BYHD's tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as an unknown number: it shows "Waiting for BYHD" and keeps checking, and two days after the first such answer asks you to check the number, choose another carrier or delete the parcel. Compare the number with the seller's message too, character by character.
 
 **Lost, damaged or returned.** BYHD publishes no claim process, and its legal notice page is empty. The seller booked the parcel with BYHD, so ask the seller or the marketplace for a refund or a new parcel. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 
 ## BYHD contact number and customer service
 
-BYHD lists no customer service line. As of 28 October 2026, its site, in Chinese only, gives a mobile number for a named contact person, with no hours, and an address in Longhua District, Shenzhen (深圳市龙华区). It lists no email address, contact form or office outside China. For anything about your order, the seller is the one to ask.
+BYHD lists no customer service line. Its site, in Chinese only, gives a mobile number for a named contact person, with no hours, and an address in Longhua District, Shenzhen (深圳市龙华区). It lists no email address, contact form or office outside China. For anything about your order, the seller is the one to ask.
 
 ## Track a BYHD parcel with Peek
 
 Paste a BYHD number into [Peek](/) and it goes straight to BYHD: no other carrier in Peek's catalog uses that layout. There's no BYHD tracking link to paste, as its tracker takes a form. A seller's reference has no shape to go by, but Peek follows more than 4,500 carriers: add it anyway, press "Change" and pick BYHD (typing 博益弘达 or Boyi Hongda finds it too), or use "Change carrier" on a parcel you already added. Peek drops dashes, though, so look up a reference with dashes in BYHD's own box.
 
-Peek reads BYHD's own tracker and shows each line in BYHD's words with its place when there is one, and the destination country when BYHD's record gives it. `The electronic cargo information has been received` shows as "Label created", `到达收货点` as "Received by carrier" and `Goods leaving the operation center` as "In transit". Times are read on Beijing's clock and shown in your device's time zone. A line dated after the moment Peek checks waits until then, and a line BYHD's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, is held back as a forecast, not a scan. Until the parcel is delivered or returned, Peek opens its tracking history with "Other sites may show more steps, but they’re only predictions." and lists the lines written ahead under "Show them", greyed, each with "Predicted for" and its day. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery stay out of Peek, and there's no expected delivery date: BYHD gives none.
+Peek reads BYHD's own tracker and shows each line in BYHD's words with its place when there is one, and the destination country when BYHD's record gives it. `The electronic cargo information has been received` shows as "Label created", `到达收货点` as "Received by carrier" and `Goods leaving the operation center` as "In transit". Times are read on Beijing's clock and shown in your device's time zone. A line dated after the moment Peek checks waits until then, and a line BYHD's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, is held back as a forecast, not a scan. Peek then notes "BYHD’s site lists the whole route in advance, delivery included. Those steps aren’t real scans." and lists those lines greyed under "Show them", each with "Written in advance for" and its day. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery stay out of Peek, and there's no expected delivery date: BYHD gives none.
 
 **The delivering company's number.** For an order BYHD hasn't scanned yet, Peek reads that number from BYHD's tracking page and asks one company whether it has the parcel: the post of the country the parcel is going to, such as [USPS](carrier:usps) or [Royal Mail](carrier:royal-mail), when it's an international postal number (two letters, nine digits and two letters); otherwise the one carrier whose layout the number fits, if Peek tracks that carrier directly. Once that company shows a scan at least as recent as BYHD's latest line, Peek follows the parcel there and keeps BYHD's lines in the history.
 
-Once BYHD lists scans of its own, Peek stays with BYHD and asks no other company. A second number in BYHD's record, which may be the delivering company's, shows in the parcel's details under "BYHD tracks this as": add it as a parcel of its own to follow the delivery. The one exception is a record that gives [Swiss Post](carrier:swiss-post) as its channel, with a Swiss Post number, for a parcel to Switzerland: Peek then shows "Delivery with Swiss Post" and that number (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and moves the parcel there the same way.
+Once BYHD lists scans of its own, Peek stays with BYHD and asks no other company. A second number in BYHD's record, which may be the delivering company's, shows in the parcel's details under "BYHD tracks this as": add it as a parcel of its own to follow the delivery.
 
-Peek checks BYHD up to every 10 minutes, and hourly once BYHD goes quiet: after 12 hours with nothing past the first line or first scan, or two days with nothing new later on. If BYHD's record still holds only its first line two days on, Peek also asks tracking services, and shows their history if it goes further. BYHD's known lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks BYHD up to every 10 minutes; otherwise, and once BYHD goes quiet, hourly: after 12 hours with nothing past the first line or first scan, or two days with nothing new later on. If BYHD's record still holds only its first line two days on, Peek also asks tracking services, and shows their history if it goes further. BYHD's known lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps.
 
 ## Questions about BYHD tracking
 
@@ -82,7 +82,7 @@ It's the delivering company's number, not BYHD's: the tracker finds your order b
 
 ### Who delivers BYHD parcels?
 
-BYHD doesn't say: its tracker gives no company's name, and its site names no delivery partner for any country. The number its tracker shows is the delivering company's; its shape, or the seller, tells you whose.
+BYHD doesn't say: its tracker gives no company's name, and its site doesn't say which partner delivers in which country. The number its tracker shows is the delivering company's; its shape, or the seller, tells you whose.
 
 ### How long does BYHD take to deliver?
 

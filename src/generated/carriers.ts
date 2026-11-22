@@ -2396,6 +2396,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#008736"
     },
     {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "maltapost-sendungsverfolgung",
+      "title": "MaltaPost Sendungsverfolgung: Nummern, Status & Abholung",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-sendungsverfolgung",
@@ -3326,6 +3334,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#008736"
     },
     {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "suivi-maltapost",
+      "title": "Suivi MaltaPost\u00a0: numéros, statuts et retrait",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking-suivi-colis",
@@ -4208,6 +4224,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063a9"
     },
     {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "tracciamento-maltapost",
+      "title": "Tracciamento MaltaPost: numeri, stati e ritiro",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
@@ -5064,6 +5088,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento ELTA Hellenic Post: estados, recogida y ayuda",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "seguimiento-maltapost",
+      "title": "Seguimiento MaltaPost: números, estados y recogida",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "ups",
@@ -5930,6 +5962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento ELTA Hellenic Post: estados, recolha e apoio",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "rastreio-maltapost",
+      "title": "Rastreio MaltaPost: números, estados e levantamento",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "ups",
@@ -6806,6 +6846,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie ELTA Hellenic Post: statusy, odbiór i kontakt",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "maltapost",
+      "catalog": "maltapost",
+      "slug": "sledzenie-maltapost",
+      "title": "Śledzenie MaltaPost: numery, statusy i odbiór",
+      "name": "MaltaPost",
+      "color": "#d43b2c"
     },
     {
       "id": "ups",

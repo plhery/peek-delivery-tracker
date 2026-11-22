@@ -23,7 +23,7 @@ Delivengo vergibt keine eigenen Sonderformate, sondern internationale Postnummer
 | `RR482910576AT` | [Österreichische Post](carrier:austrian-post) (Kennung `AT`), nicht Delivengo. |
 | `LL482910576CH` | [Schweizerische Post](carrier:swiss-post) (Kennung `CH`), nicht Delivengo. |
 
-Die letzten beiden Buchstaben verraten die ausgebende Post. Innerhalb einer `…FR`-Nummer lässt sich Delivengo äußerlich nicht von anderen La-Poste-Sendungen unterscheiden – für die Verfolgung spielt das keine Rolle, da derselbe Datenfeed antwortet. Wegen der Prüfziffer macht schon ein Zahlendreher die Nummer ungültig, sodass Peek sie ablehnt: kopiere sie am besten direkt.
+Die letzten beiden Buchstaben verraten die ausgebende Post. Innerhalb einer `…FR`-Nummer lässt sich Delivengo äußerlich nicht von anderen La-Poste-Sendungen unterscheiden – für die Verfolgung spielt das keine Rolle, da derselbe Datenfeed antwortet. Wegen der Prüfziffer macht schon ein Zahlendreher die Nummer ungültig, und Peek erkennt sie nicht mehr: kopiere sie am besten direkt.
 
 ## Delivengo Status: Was die Schritte von La Poste bedeuten
 
@@ -41,33 +41,33 @@ La Poste beantwortet Delivengo-Codes wie jede andere Postsendung. Peek ordnet je
 | „Problem gemeldet“ | Störung (Beschädigung, Annahmeverweigerung, unvollständige Adresse, abgelaufene Abholfrist) oder laufender Rücktransport zum Händler. |
 | „Zurück an Absender“ | Die Sendung ist wieder beim Shop eingetroffen. |
 
-Nach dem Export aus Frankreich übernimmt die Zielpost die Zustellung; der Verlauf auf `laposte.fr` bleibt ab dem Ausgangsscan oft ohne weitere Einträge.
+Nach dem Export aus Frankreich übernimmt die Zielpost die Zustellung; der Verlauf auf `laposte.fr` kann ab dem Ausgangsscan ohne weitere Einträge bleiben.
 
 ## Zustellung, Abwesenheit und Zoll in Deutschland, Österreich und der Schweiz
 
 **Wer zustellt und was bei Abwesenheit gilt.** Nicht La Poste klingelt bei dir, sondern deine Landespost ([DHL](carrier:dhl)/Deutsche Post, [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post)). Deren Regeln bestimmen Benachrichtigungskarte, Zweitzustellung und Lagerfrist in der Filiale; mehr unter [Zustellung verpasst](guide:missed-delivery).
 
-**Zoll und Einfuhrsteuer.** Zwischen dem französischen Mutterland, Deutschland und Österreich fallen innerhalb der EU-Zollunion keine Zölle an. Ausnahmen gelten für Gebiete außerhalb des EU-Zoll- oder Mehrwertsteuergebiets: Helgoland und Büsingen auf deutscher Seite sowie französische Überseegebiete (Guadeloupe, Martinique, Französisch-Guayana, Réunion, Mayotte und Saint-Martin liegen außerhalb des EU-MwSt.-Gebiets, französische Überseekollektive auch außerhalb des Zollgebiets). In der **Schweiz** erhebt das BAZG auf Importe aus Frankreich 8,1 % Mehrwertsteuer (2,6 % ermäßigt u. a. für Bücher, Lebensmittel und Medikamente), zieht Abgabenbeträge unter 5 CHF jedoch nicht ein; siehe [Paket hängt beim Zoll](guide:customs).
+**Zoll und Einfuhrsteuer.** Zwischen dem französischen Mutterland, Deutschland und Österreich fallen innerhalb der EU-Zollunion keine Zölle an. Ausnahmen gelten für Gebiete außerhalb des EU-Zoll- oder Mehrwertsteuergebiets: Helgoland und Büsingen auf deutscher Seite sowie französische Überseegebiete (Guadeloupe, Martinique, Französisch-Guayana, Réunion, Mayotte und Saint-Martin liegen außerhalb des EU-MwSt.-Gebiets, Frankreichs überseeische Länder und Gebiete auch außerhalb des Zollgebiets). In der **Schweiz** erhebt das BAZG auf Importe aus Frankreich 8,1 % Mehrwertsteuer (2,6 % ermäßigt u. a. für Bücher, Lebensmittel und Medikamente), zieht Abgabenbeträge bis 5 CHF jedoch nicht ein; siehe [Paket hängt beim Zoll](guide:customs).
 
 ## Delivengo-Sendung verspätet, steht still oder ging verloren
 
 Dein erster Ansprechpartner ist immer der Online-Shop, der den Versand über sein Delivengo-Konto beauftragt hat.
 
-**Tagelang kein Update.** Nach dem Export aus Frankreich schweigt La Postes Historie häufig, während deine Landespost weiterbefördert. Prüfe dieselbe `…FR`-Nummer bei deiner Post und lies [Sendungsverfolgung aktualisiert nicht](guide:tracking-not-updating).
+**Tagelang kein Update.** Nach dem Export aus Frankreich kann La Postes Historie verstummen, während deine Landespost weiterbefördert. Prüfe dieselbe `…FR`-Nummer bei deiner Post und lies [Sendungsverfolgung aktualisiert nicht](guide:tracking-not-updating).
 
 **Verloren, beschädigt oder zurückgesandt.** Bitte den Shop um Ersatz oder Erstattung. Für Käufer in der EU hält Your Europe fest, dass der Händler vom Versand bis zur Übergabe an dich für Transportschäden haftet; trifft die Ware nicht innerhalb von 30 Tagen (oder zum vereinbarten Termin) ein, setzt du eine angemessene Nachfrist und kannst danach vom Vertrag zurücktreten. Mehr unter [Paket verloren](guide:lost-parcel) und [zurück an den Absender](guide:returned-to-sender).
 
 ## Delivengo Kontakt
 
 - **Zuerst der Shop**: Er führt das MyDelivengo-Konto und kann Nachforschungen anstoßen.
-- **La Poste bei Beschwerden**: Laut der französischen Postregulierungsbehörde Arcep nimmt La Poste Reklamationen telefonisch unter `36 31` (Montag–Freitag 8:30–19:00 Uhr, Samstag 8:30–13:00 Uhr) oder aus dem Ausland unter `+33 810 821 821` (Montag–Freitag 8:00–19:00 Uhr französischer Zeit), über ihre Website, per Brief oder in einer Poststelle entgegen; Arcep weist darauf hin, dass Absender- und Empfängerrechte nicht identisch sind, und führt Delivengo nicht gesondert auf.
+- **La Poste bei Beschwerden**: Laut der französischen Postregulierungsbehörde Arcep nimmt La Poste Reklamationen telefonisch unter `36 31` (Montag–Freitag 8:30–19:00 Uhr, Samstag 8:30–13:00 Uhr) oder unter `+33 810 821 821` (Montag–Freitag 8:00–19:00 Uhr französischer Zeit), über ihre Website, per Brief oder in einer Poststelle entgegen; Arcep weist darauf hin, dass Absender- und Empfängerrechte nicht identisch sind, und führt Delivengo nicht gesondert auf.
 - **Deine Landespost**, sobald sich die Sendung mit derselben `…FR`-Nummer im Zielland befindet.
 
 ## Delivengo-Sendung mit Peek verfolgen
 
 [Peek](/) nutzt für Delivengo keinen separaten Zugang, sondern liest das gemeinsame Tracking von [La Poste](carrier:la-poste). Fügst du eine gültige `…FR`-Nummer ein, erkennt Peek sofort „La Poste / Colissimo“; über „Ändern“ bzw. „Paketdienst ändern“ kannst du „Delivengo“ wählen – das Ergebnis ist identisch. Auch Tracking-Links von `laposte.fr` (einschließlich Links aus `mydelivengo.laposte.fr`) werden erkannt.
 
-Peek zeigt Status, Verlauf mit dem Land jedes Scans sowie das voraussichtliche Lieferdatum, sofern La Poste eines angibt, und blendet deinen Namen sowie deine Adresse aus. Die Scan-Texte bleiben im französischen Wortlaut von La Poste; Uhrzeiten erscheinen in deiner Zeitzone („Uhrzeiten in deiner Zeitzone: {{zone}}.“). Sobald La Poste das Zielland oder einen Partner nennt, fragt Peek automatisch auch die dort unterstützte Post an – darunter [DHL](carrier:dhl), [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post), [USPS](carrier:usps) oder [Canada Post](carrier:canada-post) – und wechselt bei neueren Scans unter Erhalt der bisherigen Historie dorthin.
+Peek zeigt Status, Verlauf mit dem Land jedes Scans sowie das voraussichtliche Lieferdatum, sofern La Poste eines angibt, und blendet deinen Namen sowie deine Adresse aus. Die Scan-Texte bleiben im französischen Wortlaut von La Poste; Uhrzeiten erscheinen in deiner Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Sobald La Poste das Zielland oder einen Partner nennt, fragt Peek automatisch auch die dort unterstützte Post an – darunter [DHL](carrier:dhl), [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post), [USPS](carrier:usps) oder [Canada Post](carrier:canada-post) – und wechselt bei neueren Scans unter Erhalt der bisherigen Historie dorthin.
 
 Solange du das Paket geöffnet hast oder am Liefertag mit aktivierten Mitteilungen, prüft Peek den direkten Tracker bis zu alle 10 Minuten und bis zu alle 2 Minuten, sobald die Sendung „In Zustellung“ ist (an diesem Tag ab 6 Uhr Ortszeit, solange La Postes eigener Tracker antwortet); sonst sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) stündlich. Über Tracking-Dienste prüft Peek an diesem Zustelltag unter denselben Bedingungen bis zu alle 15 Minuten, sonst stündlich bzw. alle 3 Stunden nach einem Tag ohne Update. Nach der Übergabe an deine Landespost folgt Peek deren Abfragetakt. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 

@@ -22,7 +22,7 @@ I codici Delivengo hanno il formato postale internazionale di 13 caratteri: due 
 | `RR482910576IT` | [Poste Italiane](carrier:poste-italiane) (finale `IT`), non Delivengo. |
 | `LL482910576CH` | [Posta Svizzera](carrier:swiss-post) (finale `CH`), non Delivengo. |
 
-Le ultime due lettere indicano la posta emittente. In un codice che termina in `…FR` nulla distingue dall'esterno Delivengo da un altro invio La Poste, ma il sistema di tracciamento è lo stesso. Poiché è presente una cifra di controllo, basta un numero digitato male per renderlo non valido in Peek: copialo invece di riscriverlo.
+Le ultime due lettere indicano la posta emittente. In un codice che termina in `…FR` nulla distingue dall'esterno Delivengo da un altro invio La Poste, ma il sistema di tracciamento è lo stesso. Poiché è presente una cifra di controllo, basta un numero digitato male per renderlo non valido e Peek non lo riconosce più: copialo invece di riscriverlo.
 
 ## Stati Delivengo: cosa dicono le scansioni di La Poste
 
@@ -46,27 +46,27 @@ Dopo l'uscita dalla Francia, la posta del Paese di arrivo gestisce l'ultimo migl
 
 **Chi consegna e cosa succede se non ci sei.** L'ultimo tratto spetta a [Poste Italiane](carrier:poste-italiane) in Italia e alla [Posta Svizzera](carrier:swiss-post) in Svizzera, non a La Poste: avvisi di giacenza, riconsegne e tempi di ritiro allo sportello seguono le regole della tua posta nazionale. Vedi [consegna mancata](guide:missed-delivery).
 
-**Dogana.** Tra la Francia metropolitana e l'Italia non si pagano dazi grazie all'unione doganale UE. Fanno eccezione i territori fuori dal territorio doganale o IVA dell'UE: Livigno (fuori da dogana e IVA UE), Campione d'Italia e le acque italiane del Lago di Lugano (fuori dall'area IVA UE), nonché i dipartimenti e le collettività francesi d'oltremare (Guadalupa, Martinica, Guyana francese, Riunione, Mayotte e Saint-Martin sono fuori dall'area IVA UE). Verso la **Svizzera**, fuori dall'UE, l'UDSC (BAZG) applica l'IVA all'importazione dell'8,1 % (2,6 % ridotta per libri, generi alimentari o medicinali), ma non riscuote importi di dazio o IVA inferiori a 5 CHF; dettagli in [pacco fermo in dogana](guide:customs).
+**Dogana.** Tra la Francia metropolitana e l'Italia non si pagano dazi grazie all'unione doganale UE. Fanno eccezione i territori fuori dal territorio doganale o IVA dell'UE: Livigno (fuori da dogana e IVA UE), Campione d'Italia e le acque italiane del Lago di Lugano (fuori dall'area IVA UE), nonché i dipartimenti e le collettività francesi d'oltremare (Guadalupa, Martinica, Guyana francese, Riunione, Mayotte e Saint-Martin sono fuori dall'area IVA UE). Verso la **Svizzera**, fuori dall'UE, l'UDSC (BAZG) applica l'IVA all'importazione dell'8,1 % (2,6 % ridotta per libri, generi alimentari o medicinali), ma non riscuote importi di dazio o IVA fino a 5 CHF; dettagli in [pacco fermo in dogana](guide:customs).
 
 ## Pacco Delivengo in ritardo, bloccato o smarrito
 
 Rivolgiti per prima cosa al negozio online, titolare del contratto Delivengo.
 
-**Nessun aggiornamento da giorni.** Dopo l'esportazione dalla Francia è normale che `laposte.fr` non mostri tutti i passaggi locali: controlla lo stesso codice `…FR` su [Poste Italiane](carrier:poste-italiane) o sulla [Posta Svizzera](carrier:swiss-post) e consulta [tracking che non si aggiorna](guide:tracking-not-updating).
+**Nessun aggiornamento da giorni.** Dopo l'esportazione dalla Francia può capitare che `laposte.fr` non mostri tutti i passaggi locali: controlla lo stesso codice `…FR` su [Poste Italiane](carrier:poste-italiane) o sulla [Posta Svizzera](carrier:swiss-post) e consulta [tracking che non si aggiorna](guide:tracking-not-updating).
 
 **Smarrito, danneggiato o restituito.** Chiedi al venditore una nuova spedizione o il rimborso. Nell'UE, ricorda Your Europe, il venditore è responsabile di eventuali danni alla merce dalla spedizione fino alla consegna nelle tue mani; se non consegna entro 30 giorni (o entro la data pattuita), concedigli un termine supplementare ragionevole dopodiché puoi risolvere il contratto ed essere rimborsato. Leggi anche [pacco smarrito](guide:lost-parcel) e [pacco restituito al mittente](guide:returned-to-sender).
 
 ## Contatti Delivengo
 
 - **Prima il negozio**: ha spedito il pacco dal proprio account MyDelivengo.
-- **La Poste, per un reclamo**: secondo l'Arcep (il regolatore postale francese), un reclamo a La Poste può essere presentato al numero `36 31` (lunedì–venerdì 8:30–19:00, sabato 8:30–13:00) oppure dall'estero al `+33 810 821 821` (lunedì–venerdì 8:00–19:00 ora francese), sul sito web, per posta o in un punto postale; l'Arcep precisa che i diritti di mittente e destinatario non coincidono del tutto e non indica se questi canali trattino specificamente Delivengo.
+- **La Poste, per un reclamo**: secondo l'Arcep (il regolatore postale francese), un reclamo a La Poste può essere presentato al numero `36 31` (lunedì–venerdì 8:30–19:00, sabato 8:30–13:00) oppure al `+33 810 821 821` (lunedì–venerdì 8:00–19:00 ora francese), sul sito web, per posta o in un punto postale; l'Arcep precisa che i diritti di mittente e destinatario non coincidono del tutto e non indica se questi canali trattino specificamente Delivengo.
 - **La tua posta locale** quando il pacco è arrivato nel tuo Paese, con lo stesso numero `…FR`.
 
 ## Seguire un pacco Delivengo con Peek
 
 [Peek](/) non ha un canale separato per Delivengo: segue questi invii tramite il tracking di [La Poste](carrier:la-poste), esattamente come un Colissimo. Incollando un codice `…FR` valido, Peek propone subito «La Poste / Colissimo»; puoi selezionare «Delivengo» con «Cambia» o «Cambia corriere» e il risultato è identico. Funzionano anche i link di `laposte.fr` (compresi quelli provenienti da `mydelivengo.laposte.fr`).
 
-Peek mostra stato, cronologia con il Paese di ogni scansione e data di consegna prevista quando La Poste la fornisce, tralasciando nome e indirizzo del destinatario. Le descrizioni restano nel francese di La Poste e gli orari sono convertiti nel tuo fuso («Orari nel tuo fuso orario: {{zone}}.»). Quando La Poste indica il Paese di destinazione o il partner estero, Peek interroga anche la posta supportata sul posto — tra cui [Poste Italiane](carrier:poste-italiane), [Posta Svizzera](carrier:swiss-post), [USPS](carrier:usps) o Canada Post — passando a seguirla appena mostra progressi più recenti e conservando la cronologia francese.
+Peek mostra stato, cronologia con il Paese di ogni scansione e data di consegna prevista quando La Poste la fornisce, tralasciando nome e indirizzo del destinatario. Le descrizioni restano nel francese di La Poste e gli orari sono convertiti nel tuo fuso («Orari nel tuo fuso orario: …»). Quando La Poste indica il Paese di destinazione o il partner estero, Peek interroga anche la posta supportata sul posto — tra cui [Poste Italiane](carrier:poste-italiane), [Posta Svizzera](carrier:swiss-post), [USPS](carrier:usps) o Canada Post — passando a seguirla appena mostra progressi più recenti e conservando la cronologia francese.
 
 Mentre hai il pacco aperto sullo schermo, o nel giorno della consegna con notifiche attive, Peek controlla il tracking diretto fino a ogni 10 minuti, e fino a ogni 2 minuti quando il pacco entra «In consegna» (quel giorno dalle 6:00 ora locale finché risponde direttamente La Poste); negli altri momenti, e dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Tramite i servizi di tracciamento controlla fino a ogni 15 minuti in quel giorno «In consegna» alle stesse condizioni, altrimenti ogni ora, o ogni 3 ore dopo un giorno senza aggiornamenti. Una volta passato alla posta di destinazione, Peek adotta la cadenza di quell'operatore. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
@@ -82,7 +82,7 @@ Perché fuori dalla Francia la consegna passa alla posta locale e la cronologia 
 
 ### A chi chiedo il rimborso se un pacco Delivengo non arriva?
 
-Al negozio da cui hai acquistato, titolare dell'account MyDelivengo e responsabile della consegna fino al ricevimento della merce.
+Al negozio da cui hai acquistato, titolare dell'account MyDelivengo e, nell'UE, responsabile della consegna fino al ricevimento della merce.
 
 :::sources
 - [Universal Parcel Scraper: Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – servizio export di La Poste, ultimo miglio alla posta locale, area MyDelivengo e tracking condiviso

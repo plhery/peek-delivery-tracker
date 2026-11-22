@@ -46,27 +46,27 @@ Tras la exportación desde Francia, el correo de destino asume la entrega final 
 
 **Quién entrega y qué ocurre si no estás.** La entrega final la hace el correo nacional de tu país ([Correos](carrier:correos-spain) en España, o el operador postal oficial en Latinoamérica), no La Poste. Sus normas rigen los avisos de llegada, los nuevos intentos y los días de custodia en oficina; consulta [entrega fallida](guide:missed-delivery).
 
-**Aduanas.** Entre la Francia metropolitana y **España peninsular y Baleares** no hay aranceles aduaneros gracias a la unión aduanera de la UE. Sí existen trámites fiscales específicos si el envío procede de departamentos o colectividades francesas de ultramar (Guadalupe, Martinica, Guayana Francesa, Reunión, Mayotte y San Martín están fuera del área de IVA de la UE) o si va dirigido a **Canarias** (fuera del ámbito del IVA comunitario, con IGIC) o a **Ceuta y Melilla** (fuera del territorio aduanero y de IVA de la UE). En envíos hacia países de Latinoamérica se aplican las normas de importación postal de cada país; más detalles en [paquetes retenidos en aduanas](guide:customs).
+**Aduanas.** Entre la Francia metropolitana y **España peninsular y Baleares** no hay aranceles aduaneros gracias a la unión aduanera de la UE. Sí existen trámites fiscales específicos si el envío procede de departamentos o colectividades francesas de ultramar (Guadalupe, Martinica, Guayana Francesa, Reunión, Mayotte y San Martín están fuera del área de IVA de la UE) o si va dirigido a **Canarias** (fuera del ámbito del IVA comunitario) o a **Ceuta y Melilla** (fuera del territorio aduanero y de IVA de la UE). En envíos hacia países de Latinoamérica se aplican las normas de importación postal de cada país; más detalles en [paquetes retenidos en aduanas](guide:customs).
 
 ## Paquete Delivengo retrasado, parado o perdido
 
 Empieza siempre contactando con la tienda donde compraste, titular de la cuenta Delivengo.
 
-**Días sin actualizarse.** Al salir de Francia es frecuente que `laposte.fr` deje de añadir pasos mientras tu correo local encamina el paquete. Prueba el mismo código `…FR` en [Correos](carrier:correos-spain) (o tu correo nacional) y revisa [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Días sin actualizarse.** Al salir de Francia, `laposte.fr` puede dejar de añadir pasos mientras tu correo local encamina el paquete. Prueba el mismo código `…FR` en [Correos](carrier:correos-spain) (o tu correo nacional) y revisa [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 **Extraviado, dañado o devuelto.** Solicita al vendedor un reenvío o el reembolso. Si resides en la UE, Your Europe recuerda que el comerciante responde de cualquier daño sufrido por la mercancía desde la expedición hasta que la recibes; si no entrega en 30 días (o en el plazo acordado), debes darle un plazo adicional razonable y, si sigue sin cumplir, tienes derecho a resolver el contrato y recuperar tu dinero. Consulta [paquete perdido](guide:lost-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
 ## Contacto de Delivengo
 
 - **La tienda primero**: expidió el paquete desde su cuenta MyDelivengo.
-- **La Poste, para reclamaciones**: según Arcep (el regulador postal francés), puedes presentar una reclamación ante La Poste por teléfono en el `36 31` (lunes a viernes de 8:30 a 19:00 y sábados de 8:30 a 13:00) o desde fuera de Francia en el `+33 810 821 821` (lunes a viernes de 8:00 a 19:00 hora francesa), en su web, por carta o en un punto postal; Arcep advierte de que los derechos del remitente y del destinatario no son idénticos y no detalla si estos canales gestionan Delivengo por separado.
+- **La Poste, para reclamaciones**: según Arcep (el regulador postal francés), puedes presentar una reclamación ante La Poste por teléfono en el `36 31` (lunes a viernes de 8:30 a 19:00 y sábados de 8:30 a 13:00) o en el `+33 810 821 821` (lunes a viernes de 8:00 a 19:00 hora francesa), en su web, por carta o en un punto postal; Arcep advierte de que los derechos del remitente y del destinatario no son idénticos y no detalla si estos canales gestionan Delivengo por separado.
 - **Tu correo nacional** cuando el envío ya está en tu país, indicando el mismo número `…FR`.
 
 ## Seguir un paquete Delivengo con Peek
 
 [Peek](/) no usa una conexión aparte para Delivengo: lo rastrea mediante el seguimiento de [La Poste](carrier:la-poste), igual que cualquier Colissimo o carta certificada francesa. Al pegar un código `…FR` válido, Peek asigna al instante «La Poste / Colissimo»; puedes cambiarlo a «Delivengo» con «Cambiar» o «Cambiar transportista» y obtendrás los mismos datos. También acepta enlaces de seguimiento de `laposte.fr` (incluidos los procedentes de `mydelivengo.laposte.fr`).
 
-Peek muestra el estado, el historial con el país de cada evento y la fecha estimada de entrega cuando La Poste la publica, omitiendo tu nombre y dirección. Los mensajes conservan el francés de La Poste y las horas se adaptan a tu huso («Horas en tu zona horaria: {{zone}}.»). Cuando La Poste informa el país de destino o un socio extranjero, Peek consulta también al correo nacional compatible —como [Correos](carrier:correos-spain) en España, [USPS](carrier:usps) en EE. UU. o Canada Post en Canadá— y cambia a él en cuanto muestra avances más recientes, conservando el historial francés.
+Peek muestra el estado, el historial con el país de cada evento y la fecha estimada de entrega cuando La Poste la publica, omitiendo tu nombre y dirección. Los mensajes conservan el francés de La Poste y las horas se adaptan a tu huso («Horas en tu zona horaria: …»). Cuando La Poste informa el país de destino o un socio extranjero, Peek consulta también al correo nacional compatible —como [Correos](carrier:correos-spain) en España, [USPS](carrier:usps) en EE. UU. o Canada Post en Canadá— y cambia a él en cuanto muestra avances más recientes, conservando el historial francés.
 
 Mientras tienes el envío abierto en pantalla, o el día de reparto con notificaciones activas, Peek comprueba el seguimiento directo hasta cada 10 minutos, y hasta cada 2 minutos cuando pasa a «En reparto» (ese día desde las 6:00 hora local mientras responda directamente el seguimiento de La Poste); el resto del tiempo, y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Mediante servicios de seguimiento comprueba hasta cada 15 minutos ese día en «En reparto» bajo las mismas condiciones, y si no cada hora, o cada 3 horas tras un día sin cambios. Al pasar el relevo al correo de destino, Peek sigue la frecuencia de ese operador. Puedes configurar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
@@ -82,7 +82,7 @@ Porque el último kilómetro lo realiza el correo de tu país y el historial de 
 
 ### ¿A quién reclamo si mi pedido Delivengo no llega?
 
-A la tienda donde hiciste la compra, que contrató el envío en MyDelivengo y es responsable frente al consumidor de que el pedido llegue a tus manos.
+A la tienda donde hiciste la compra, que contrató el envío en MyDelivengo y, en la UE, es responsable frente al consumidor de que el pedido llegue a tus manos.
 
 :::sources
 - [Universal Parcel Scraper: Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – servicio de exportación de La Poste, entrega por el correo de destino, portal MyDelivengo y seguimiento compartido

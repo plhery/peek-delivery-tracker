@@ -37,8 +37,11 @@ export type Block =
   | { type: 'anatomy'; parts: { text: string; label: Inline[] }[] }
   /** A parcel's way, stop by stop. */
   | { type: 'journey'; stops: { icon: JourneyIcon; title: Inline[]; note: Inline[] }[] }
-  /** A field that names the carrier of a number as it is typed, and tracks it on the landing. */
-  | { type: 'checker' }
+  /**
+   * A field that names the carrier of a number as it is typed, and tracks it on the landing. A guide whose readers'
+   * numbers often come from a carrier no shape names can name it, by its id: the landing asks it first.
+   */
+  | { type: 'checker'; carrier?: string }
   /**
    * A picture in `public/guide-pictures`, such as a screenshot redrawn with sample values: its file, its size in
    * pixels as the page sets it, and what it shows, for readers who cannot see it.
@@ -66,6 +69,8 @@ const DIRECTIVES = ['steps', 'anatomy', 'journey', 'checker', 'picture', 'source
 type Directive = (typeof DIRECTIVES)[number];
 
 export const GUIDE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** A carrier's id, as the catalog writes it. */
+const CARRIER_ID = /^[a-z0-9][a-z0-9-]{0,62}$/;
 /** A picture's file below `public/guide-pictures`: its guide's id, then its name, in WebP. */
 export const PICTURE_FILE = /^[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*\.webp$/;
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
@@ -195,8 +200,10 @@ function listItems(lines: string[], mark: RegExp, where: string): string[] {
 
 function directive(name: Directive, argument: string, lines: string[], where: string): Block {
   if (name === 'checker') {
-    if (argument || lines.some((line) => line.trim())) throw new Error(`${where}: ":::checker" holds nothing: the field draws itself`);
-    return { type: 'checker' };
+    if (lines.some((line) => line.trim())) throw new Error(`${where}: ":::checker" holds nothing: the field draws itself`);
+    if (!argument) return { type: 'checker' };
+    if (!CARRIER_ID.test(argument)) throw new Error(`${where}: a checker names at most one carrier, by its id, as ":::checker celeritas", not ":::checker ${argument}"`);
+    return { type: 'checker', carrier: argument };
   }
   if (name === 'picture') {
     const [file, size, ...rest] = argument.split(/\s+/);
@@ -510,14 +517,14 @@ export function wordCount(blocks: readonly Block[]): number {
   return blocks.flatMap(runsOf).reduce((count, run) => count + plainText(run).split(/\s+/).filter(Boolean).reduce((words, token) => words + wordsIn(token), 0), 0);
 }
 
-/** The drawn blocks of a guide in order, which every translation shares: `steps:4`, `anatomy:RR 12345678 5 CH`, `picture`. */
+/** The drawn blocks of a guide in order, which every translation shares: `steps:4`, `anatomy:RR 12345678 5 CH`, `checker:celeritas`, `picture`. */
 export function figureShape(blocks: readonly Block[]): string[] {
   return blocks.flatMap((block) => {
     switch (block.type) {
       case 'steps': return [`steps:${block.items.length}`];
       case 'journey': return [`journey:${block.stops.map(({ icon }) => icon).join(',')}`];
       case 'anatomy': return [`anatomy:${block.parts.map(({ text }) => text).join(' ')}`];
-      case 'checker': return ['checker'];
+      case 'checker': return [block.carrier ? `checker:${block.carrier}` : 'checker'];
       case 'picture': return ['picture'];
       default: return [];
     }

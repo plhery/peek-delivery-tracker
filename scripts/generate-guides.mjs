@@ -134,6 +134,12 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
       for (const linked of linkedCarriers(guide.blocks)) {
         if (!carriers.find((carrier) => carrier.id === linked)?.languages.includes(locale)) throw new Error(`${where}: "carrier:${linked}" leads to no carrier's page in this language`);
       }
+      // The landing asks a checker's carrier first, which only a carrier Peek asks by itself can be.
+      for (const block of guide.blocks) {
+        if (block.type === 'checker' && block.carrier && (!Object.hasOwn(CARRIER_CATALOG, block.carrier) || CARRIER_CATALOG[block.carrier].tracking?.mode !== 'automatic')) {
+          throw new Error(`${where}: ":::checker ${block.carrier}" names no carrier Peek tracks by itself`);
+        }
+      }
       return [locale, guide];
     }));
     const english = languages.en;

@@ -127,6 +127,14 @@ test('a guide links a carrier’s page only in a language the carrier is written
   refusesWith(({ edit }) => edit('en', /\n## /, '\nAsk [nobody](carrier:no-such-carrier).\n\n## '), /en\.md: "carrier:no-such-carrier" leads to no carrier's page/);
 });
 
+test('a checker names only a carrier Peek tracks by itself, and every translation names the same one', () => {
+  const manual = Object.keys(CARRIER_CATALOG).find((id) => CARRIER_CATALOG[id].tracking?.mode !== 'automatic');
+  assert.ok(manual);
+  refuses(({ edit }) => edit('en', /^:::checker$/m, ':::checker no-such-carrier'), /en\.md: ":::checker no-such-carrier" names no carrier Peek tracks by itself/);
+  refuses(({ edit }) => edit('en', /^:::checker$/m, `:::checker ${manual}`), new RegExp(`en\\.md: ":::checker ${manual}" names no carrier Peek tracks by itself`));
+  refuses(({ edit }) => edit('en', /^:::checker$/m, ':::checker celeritas'), /differ from the English guide/);
+});
+
 test('French titles are listed as French guides are set, the no-break spaces written as their escapes', () => {
   const directory = copy(({ edit }) => edit('fr', /^title: .+$/m, 'title: Colis : où est-il ?'));
   try {

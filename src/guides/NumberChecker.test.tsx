@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import de from '../../shared/locales/de.json';
 import en from '../../shared/locales/en.json';
+import es from '../../shared/locales/es.json';
 import fr from '../../shared/locales/fr.json';
 import { CARRIER_LINKS } from '../generated/carriers';
 import { CARRIER_HANDOFF_STORAGE_KEY } from '../lib/carrierHandoff';
@@ -16,14 +17,15 @@ const analytics = vi.hoisted(() => ({ trackScreen: vi.fn(), startAnalytics: vi.f
 vi.mock('../lib/analytics', () => analytics);
 
 const t = (locale: Locale, messages: Messages): Translate => (key, variables) => translateMessage(locale, key, variables, messages);
-const guide = parseGuide([
+const guideSource = [
   '---', 'title: Tracking number formats', 'description: Which carrier a number belongs to.', 'slug: tracking-number-formats',
   'picture: Pip reads a label.', 'published: 2026-10-04', 'updated: 2026-10-10', '---', '',
   'The lead: letters and length tell the carrier.', '',
   ':::checker', ':::', '',
   '## Formats', '', 'A paragraph.', '',
   ':::sources', '- [UPU](https://www.upu.int/) – the standard', ':::', '',
-].join('\n'));
+].join('\n');
+const guide = parseGuide(guideSource);
 const page = (locale: GuideLanguage, messages: Messages) => render(<GuidePage guide={guide} id="tracking-number-formats" locale={locale} t={t(locale, messages)} links={[]} others={[]} />);
 const carrier = (locale: Locale, id: string) => CARRIER_LINKS[locale].find((link) => link.id === id)!;
 const yunexpress = (locale: Locale) => carrier(locale, 'yunexpress');
@@ -143,9 +145,19 @@ describe('the number checker in a guide', () => {
     await user.type(field, '1Z999AA10123456784{Enter}');
     expect(assign).toHaveBeenCalledExactlyOnceWith('/de');
     expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '1Z999AA10123456784' });
+    expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).not.toHaveProperty('carrier');
     // Without a script, the form opens the landing alone: the field has no name to send.
     expect(field.closest('form')).toHaveAttribute('action', '/de');
     expect(field).not.toHaveAttribute('name');
+  });
+
+  it('hands on the carrier the guide names as the landing’s hint', async () => {
+    const user = userEvent.setup();
+    const named = parseGuide(guideSource.replace(':::checker\n', ':::checker celeritas\n'));
+    render(<GuidePage guide={named} id="el-corte-ingles-orders" locale="es" t={t('es', es)} links={[]} others={[]} />);
+    await user.type(screen.getByRole('textbox', { name: es['guides.checker.label'] }), '1234567890123{Enter}');
+    expect(assign).toHaveBeenCalledExactlyOnceWith('/es');
+    expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '1234567890123', carrier: 'celeritas' });
   });
 
   it('leaves the Enter that picks an input method’s candidate to the input method', async () => {

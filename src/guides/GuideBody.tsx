@@ -132,7 +132,7 @@ export function GuideBody({ blocks, locale, language = locale, links, sources, c
           <span>{inline(note)}</span>
         </li>)}
       </ol>;
-      case 'checker': return <NumberChecker key={index} locale={locale} words={checker} />;
+      case 'checker': return <NumberChecker key={index} locale={locale} words={checker} carrier={block.carrier} />;
       case 'picture': return <figure key={index} className="guide-picture">
         {/* eslint-disable-next-line @next/next/no-img-element -- a small WebP already drawn at twice its size, fetched only where it shows */}
         <img src={`/guide-pictures/${block.file}`} alt={block.alt} width={block.width} height={block.height} loading="lazy" decoding="async" />

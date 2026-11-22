@@ -48,7 +48,7 @@ Si el pedido va a una oficina de [Correos](carrier:correos-spain), los números 
 
 ¿No sabes de quién es un número? Escríbelo aquí:
 
-:::checker
+:::checker celeritas
 :::
 
 ## ¿Por qué tarda mi pedido de El Corte Inglés o por qué no se mueve el seguimiento?

@@ -67,7 +67,7 @@ Le pagine non dicono dove compare il codice del corriere. Se lo trovi in un'emai
 
 Hai un codice e non sai di quale corriere è? Scrivilo qui:
 
-:::checker
+:::checker celeritas
 :::
 
 ## Perché il mio ordine El Corte Inglés è in ritardo o il tracciamento non si muove?

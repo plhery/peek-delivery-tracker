@@ -731,7 +731,8 @@ which notes the number in the tab's session storage for the landing to look up
 alone. A guide that places a number checker (`:::checker`) adds the same box, which also
 names the carrier of what is typed as the landing reads it: the carrier data it needs is
 fetched once the reader starts typing ([`numberReading.ts`](../src/guides/numberReading.ts)),
-and nothing typed is sent.
+and nothing typed is sent. A checker that names a carrier (`:::checker celeritas`) hands it
+to the landing as the hint a carrier's page hands on.
 
 ## Data lifecycle
 

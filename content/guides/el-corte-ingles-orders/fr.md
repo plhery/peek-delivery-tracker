@@ -59,7 +59,7 @@ Si la commande va dans un bureau de Correos, les numéros de Correos ont cette f
 
 Tu ne sais pas à qui est un numéro ? Tape-le ici :
 
-:::checker
+:::checker celeritas
 :::
 
 ## Pourquoi ma commande El Corte Inglés est-elle en retard, ou pourquoi le suivi ne bouge-t-il pas ?

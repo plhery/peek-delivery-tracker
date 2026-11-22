@@ -67,7 +67,7 @@ Strony nie mówią, gdzie pojawia się numer przewoźnika. Jeśli znajdziesz go 
 
 Masz numer i nie wiesz, czyj jest? Wpisz go tutaj:
 
-:::checker
+:::checker celeritas
 :::
 
 ## Dlaczego zamówienie z El Corte Inglés się spóźnia albo śledzenie stoi?

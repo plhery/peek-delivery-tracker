@@ -52,7 +52,7 @@ O número do pedido serve para falares com o El Corte Inglés e para levantares 
 
 Tens um número e não sabes de que transportadora é? Escreve-o aqui:
 
-:::checker
+:::checker celeritas
 :::
 
 ## Porque é que a minha encomenda El Corte Inglés está atrasada ou o seguimento não avança?

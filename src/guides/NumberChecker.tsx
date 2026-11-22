@@ -36,9 +36,10 @@ const loadReader = () => (reader ??= import('./numberReading'));
 
 /**
  * A field in a guide that names the carrier of a number as it is typed, from its shape alone, as the landing
- * reads it. Tracking it hands it to the landing the way a carrier's page does: never through an address.
+ * reads it. Tracking it hands it to the landing the way a carrier's page does: never through an address, and
+ * with the carrier the guide names, if any, as the hint that the landing asks first.
  */
-export function NumberChecker({ locale, words }: { locale: Locale; words: CheckerWords }) {
+export function NumberChecker({ locale, words, carrier }: { locale: Locale; words: CheckerWords; carrier?: string }) {
   const field = useRef<HTMLTextAreaElement>(null);
   const [text, setText] = useState('');
   const [check, setCheck] = useState<NumberCheck | null>(null);
@@ -64,7 +65,7 @@ export function NumberChecker({ locale, words }: { locale: Locale; words: Checke
       document.getElementById('number-checker')?.focus();
       return;
     }
-    writeCarrierHandoff(text);
+    writeCarrierHandoff(text, Date.now(), { carrier });
     window.location.assign(landing);
   }
 

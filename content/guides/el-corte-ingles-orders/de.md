@@ -69,7 +69,7 @@ Wo die Sendungsnummer des Paketdienstes steht, sagen die Seiten nicht. Findest d
 
 Du hast eine Nummer und weißt nicht, von welchem Paketdienst sie ist? Gib sie hier ein:
 
-:::checker
+:::checker celeritas
 :::
 
 ## Warum dauert meine El-Corte-Inglés-Bestellung so lange, oder warum bewegt sich die Sendungsverfolgung nicht?

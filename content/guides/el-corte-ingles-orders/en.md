@@ -59,7 +59,7 @@ If the order goes to a [Correos](carrier:correos-spain) post office, Correos num
 
 Not sure whose number it is? Type it here:
 
-:::checker
+:::checker celeritas
 :::
 
 ## Why is my El Corte Inglés order late, or why isn't tracking moving?

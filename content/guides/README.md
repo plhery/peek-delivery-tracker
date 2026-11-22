@@ -93,7 +93,10 @@ Amazon's Track package page: the carrier, then the tracking number. Sample value
 A journey's stops are `shop`, `label`, `warehouse`, `truck`, `plane`, `ship`, `customs`,
 `handover`, `locker` and `home`. `:::checker` holds nothing: it draws a field that names the
 carrier of a number as the reader types it, and tracks it on the landing, once per page at
-most. A `:::picture` names a WebP file in `public/guide-pictures/<id>/` and the size it is
+most. When the guide's readers often have numbers from a carrier that no shape names, the
+line can name it by its id, as `:::checker celeritas`, in every translation: the landing asks
+that carrier first, and alone about a number no carrier's shape takes. It must be a carrier
+Peek tracks by itself. A `:::picture` names a WebP file in `public/guide-pictures/<id>/` and the size it is
 shown at, and holds one line saying what it shows. The file is that size or twice it, and
 under 150 KB; each translation shows its own. A screenshot is redrawn with sample values:
 no real names, addresses, order or tracking numbers, products, prices or dates. Every guide

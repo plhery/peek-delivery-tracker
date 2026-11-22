@@ -108,8 +108,13 @@ describe('a guide’s Markdown', () => {
     expect(blocks.map((block) => block.type)).toEqual(['paragraph', 'checker', 'steps']);
     expect(figureShape(blocks)).toEqual(['checker', 'steps:1']);
     expect(wordCount(blocks)).toBe(5);
-    expect(() => parseBlocks(':::checker now\n:::')).toThrow(/":::checker" holds nothing/);
     expect(() => parseBlocks(':::checker\n- A number\n:::')).toThrow(/":::checker" holds nothing/);
+    // It may name the carrier the landing asks first, which every translation names too.
+    const named = parseBlocks(':::checker celeritas\n:::');
+    expect(named).toEqual([{ type: 'checker', carrier: 'celeritas' }]);
+    expect(figureShape(named)).toEqual(['checker:celeritas']);
+    expect(() => parseBlocks(':::checker celeritas correos-spain\n:::')).toThrow(/a checker names at most one carrier/);
+    expect(() => parseBlocks(':::checker Celeritas\n:::')).toThrow(/a checker names at most one carrier/);
     const head = ['---', 'title: Formats', 'description: Which carrier.', 'slug: formats', 'picture: Pip reads.', 'published: 2026-10-04', 'updated: 2026-10-04', '---', ''];
     expect(() => parseGuide([...head, 'The lead.', '', ':::checker', ':::', '', ':::checker', ':::'].join('\n'), 'content/guides/x/en.md'))
       .toThrow('content/guides/x/en.md: a guide holds one ":::checker" at most');

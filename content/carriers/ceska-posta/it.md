@@ -30,14 +30,11 @@ Track & Trace è disponibile in ceco e in inglese. Qui trovi le diciture inglesi
 | --- | --- |
 | `Receipt of data about consignment.` | Il mittente ha [inviato i dati del pacco](guide:tracking-statuses); Česká pošta non lo ha ancora ricevuto. |
 | `The consignment was sent for transportation.` | Accettato: la prima riga con un ufficio postale o un deposito. |
-| `The consignment was accepted by post office of exchange.` | All’ufficio di scambio internazionale di Praga: arrivato dall’estero o pronto a lasciare il paese. |
-| `The consignment is being prepared for customs clearance.` | Arriva da fuori UE ed è in preparazione per lo sdoganamento. |
 | `The consignment is transported.` | In transito nella rete Česká pošta. |
 | `The consignment is being prepared for delivery.` | Presso l’ufficio postale o il deposito incaricato della consegna. |
 | `The consignment is being delivered.` | In consegna oggi. |
 | `The consignment was deposited - addressee not at home.` | Nessuno in casa: il pacco attende nell’ufficio postale indicato nella riga. |
 | `The consignment was deposited to Balíkovna.` | Disponibile al punto o armadietto Balíkovna indicato nella riga. |
-| `The consignment was delivered.` | Consegnato. |
 | `The consignment was sent back to the sender - the consignment was not picked up by the addressee in the set Collection Time.` | Non ritirato in tempo: sta tornando al mittente. |
 | `The consignment was returned to the sender.` | Restituito al mittente. |
 
@@ -45,7 +42,7 @@ Track & Trace è disponibile in ceco e in inglese. Qui trovi le diciture inglesi
 
 ## Consegna mancata, Balíkovna e ritiro in ufficio postale
 
-**Ufficio postale.** Se sei assente, il pacco resta in giacenza all’ufficio postale e ricevi un avviso cartaceo, via SMS o email. Česká pošta lo conserva di norma 15 giorni, salvo riduzione a 10 giorni decisa dal mittente. Tramite «Change Delivery Online» su postaonline.cz, l’app Pošta Online o il telefono dell’ufficio sull’avviso puoi (gratuitamente salvo nota contraria):
+**Ufficio postale.** Se sei assente, il pacco resta in giacenza all’ufficio postale e ricevi un avviso cartaceo, via SMS o email. Česká pošta lo conserva di norma 15 giorni, salvo riduzione a 10 giorni decisa dal mittente. Tramite «Change Delivery Online» su postaonline.cz o il telefono dell’ufficio sull’avviso puoi (gratuitamente salvo nota contraria; le prime due opzioni anche nell’app Pošta Online):
 
 - richiedere una nuova consegna in un giorno lavorativo dalle 8:00 alle 16:00 (ora di Praga), con almeno tre giorni lavorativi di anticipo;
 - estendere la giacenza fino a un mese da quando è pronto, salvo divieto del mittente (non per Balík Do ruky);
@@ -54,7 +51,7 @@ Track & Trace è disponibile in ceco e in inglese. Qui trovi le diciture inglesi
 
 **Balíkovna.** I punti di ritiro includono sportelli postali, negozi partner e locker self-service come AlzaBox, OX Point e Penguin Box. Il pacco attende 7 giorni di calendario in ufficio o negozio e 2 giorni lavorativi in un locker. Il termine Balíkovna non è prorogabile; ricevi un avviso SMS o email prima della scadenza e i pacchi non ritirati tornano al mittente. Se un armadietto non si apre, chiama il numero indicato o Balíkovna al 218 218 218.
 
-**Consegna a domicilio.** Balíkovna invia un SMS in giornata e l’autista chiama prima; se non ci sei, il pacco va al punto di ritiro più vicino. Quasi tutti i pacchi nazionali registrati si ritirano in qualsiasi ufficio con il codice alfanumerico a sei caratteri e il tuo nome o numero di spedizione, senza documento d’identità — anche da parte di un’altra persona.
+**Consegna a domicilio.** Balíkovna invia un SMS in giornata e l’autista chiama prima; se non ci sei, il pacco va al punto di ritiro più vicino. La maggior parte dei pacchi nazionali registrati si ritira in qualsiasi ufficio con il codice alfanumerico a sei caratteri e il tuo nome o numero di spedizione, senza documento d’identità — anche da parte di un’altra persona.
 
 ## Pacco Česká pošta fermo, in ritardo, smarrito o danneggiato
 
@@ -75,11 +72,11 @@ Canali ufficiali pubblicati sui siti di Česká pošta e Balíkovna:
 
 ## Tracciare pacchi Česká pošta con Peek
 
-[Peek](/) riconosce subito i numeri nazionali di Česká pošta che iniziano con `B` o `D`, nonché `NB`, `NP` e `NR` seguiti da 10 cifre e una lettera. Altri prefissi con quella struttura non selezionano un corriere in automatico: scegli «Česká pošta» manualmente. Per i codici internazionali che finiscono con `CZ` e cifra di controllo valida, il formato resta associato al corriere postale generico, ma Peek interroga Česká pošta (e [Chronopost](carrier:chronopost), che accetta anch’essa codici S10) e mostra «Česká pošta ha questo pacco.» non appena lo conferma (o ti chiede di scegliere se più corrieri lo riconoscono). Un codice di poste estere resta presso quelle poste e passa a Česká pošta quando le poste estere indicano la Repubblica Ceca come destinazione, un servizio di tracciamento la segnala oppure scegli tu Česká pošta. Funzionano anche i link postaonline.cz con `/trackandtrace/-/zasilka/` o `parcelNumbers=` (con o senza `/en`).
+[Peek](/) riconosce subito i numeri nazionali di Česká pošta che iniziano con `B` o `D`, nonché `NB`, `NP` e `NR` seguiti da 10 cifre e una lettera. Altri prefissi con quella struttura non selezionano un corriere in automatico: scegli «Česká pošta» manualmente. Per i codici internazionali che finiscono con `CZ` e cifra di controllo valida, il formato resta associato al corriere postale generico, ma Peek interroga Česká pošta (e [Chronopost](carrier:chronopost), che accetta anch’essa codici S10) e mostra «Česká pošta ha questo pacco.» non appena lo conferma. Un codice di poste estere resta presso quelle poste e passa a Česká pošta quando le poste estere indicano la Repubblica Ceca come destinazione e Česká pošta mostra una scansione datata non più vecchia della loro ultima, un servizio di tracciamento la segnala oppure scegli tu Česká pošta. Funzionano anche i link postaonline.cz con `/trackandtrace/-/zasilka/` o `parcelNumbers=` (con o senza `/en`).
 
-Poiché Česká pošta riporta solo il giorno senza orario, Peek interroga Česká pošta e verifica anche se [servizi di tracciamento universali](guide:universal-tracker) dispongono di orari o nuovi passaggi: se un servizio fornisce orari o scansioni aggiuntive, Peek mostra quella cronologia e controlla di nuovo Česká pošta ogni 6 ore; altrimenti elenca i passaggi di Česká pošta giorno per giorno senza orario. Gli stati mantengono il testo inglese di Česká pošta. Peek mostra il nome dell’ufficio postale o del punto Balíkovna (senza indirizzo né scadenza) e il peso, ma nessuna data prevista. Esclude CAP, coordinate del corriere, telefono di contatto, contrassegno, numero di colli e nome del servizio.
+Poiché Česká pošta riporta solo il giorno senza orario, Peek interroga Česká pošta e verifica anche se [servizi di tracciamento universali](guide:universal-tracker) dispongono di orari o nuovi passaggi: se un servizio fornisce scansioni aggiuntive o un altro stato, Peek mostra quella cronologia e controlla di nuovo Česká pošta ogni 6 ore; se aggiunge solo gli orari agli stessi passaggi, Peek mostra quegli orari ma interroga sempre prima Česká pošta; altrimenti elenca i passaggi di Česká pošta giorno per giorno senza orario. Gli stati mantengono il testo inglese di Česká pošta. Peek mostra il nome dell’ufficio postale o del punto Balíkovna (senza indirizzo né scadenza) e il peso, ma nessuna data prevista. Esclude CAP, coordinate del corriere, telefono di contatto, contrassegno, numero di colli e nome del servizio.
 
-Mentre tieni il pacco aperto sullo schermo — oppure il giorno della consegna con notifiche attive — Peek controlla direttamente Česká pošta fino a ogni 10 minuti, e dalle 6:00 ora di Praga ogni 2 minuti quando è in consegna (`The consignment is being delivered.`). Altrimenti, e dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Solo tramite servizi di tracciamento controlla ogni ora, ogni 3 ore dopo un giorno senza scansioni e fino a ogni 15 minuti il giorno della consegna se hai il pacco aperto sullo schermo o le notifiche attive. Scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni su un pacco in transito, Peek mostra nella tua lista il giorno dell’ultima scansione («Nessun aggiornamento da …») e nella scheda «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Česká pošta.», con il link «Chiedi aiuto a Česká pošta» alla sua pagina contatti solo in quell’avviso.
+Mentre tieni il pacco aperto sullo schermo — oppure il giorno della consegna con notifiche attive — Peek controlla direttamente Česká pošta fino a ogni 10 minuti, e dalle 6:00 ora di Praga ogni 2 minuti quando è in consegna (`The consignment is being delivered.`). Altrimenti, e dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Per le notifiche, scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni su un pacco in transito, Peek mostra nella tua lista il giorno dell’ultima scansione («Nessun aggiornamento da …») e nella scheda «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Česká pošta.», con il link «Chiedi aiuto a Česká pošta» alla sua pagina contatti solo in quell’avviso.
 
 ## Domande sul tracciamento Česká pošta
 

@@ -2420,6 +2420,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "dachser-sendungsverfolgung",
+      "title": "Dachser Sendungsverfolgung Spanien & Portugal: Link, Status",
+      "name": "Dachser",
+      "color": "#005ca9"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "fan-courier-sendungsverfolgung",
@@ -3518,6 +3526,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "suivi-dachser",
+      "title": "Suivi Dachser en Espagne et au Portugal\u00a0: lien et statuts",
+      "name": "Dachser",
+      "color": "#005ca9"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "suivi-fan-courier",
@@ -4606,6 +4622,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Swiss Post Cargo tracking: stati, consegna e contatti",
       "name": "Swiss Post Cargo",
       "color": "#ffcc00"
+    },
+    {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "tracciamento-dachser",
+      "title": "Tracciamento Dachser in Spagna e Portogallo: link e stati",
+      "name": "Dachser",
+      "color": "#005ca9"
     },
     {
       "id": "fan-courier",
@@ -7726,6 +7750,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ecoscooting śledzenie przesyłek: statusy, punkty i kontakt",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "dachser",
+      "catalog": "dachser",
+      "slug": "sledzenie-dachser",
+      "title": "Dachser śledzenie Hiszpania i Portugalia: link i statusy",
+      "name": "Dachser",
+      "color": "#005ca9"
     },
     {
       "id": "meest",

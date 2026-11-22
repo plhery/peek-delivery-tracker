@@ -19,6 +19,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
 import com.plhery.peekdeliverytracker.ui.screenshot
 import org.junit.Rule
 import org.junit.Test
@@ -46,13 +47,17 @@ class ParcelZoomScreenshotTest {
     private lateinit var view: View
     private lateinit var deliveries: DeliveriesState
 
-    /** The demo's list with the iPhone's bars, the status bar 62 points tall, the gesture bar 24, its clock paused. */
+    /**
+     * The demo's list with the iPhone's bars, the status bar 62 points tall, the gesture bar 24, its clock paused. Every
+     * map's picture is made as its map is composed ([LocalMapsAtOnce]): made on another thread, the opening page's map
+     * came in a frame earlier or later from one run to the next.
+     */
     private fun show(dark: Boolean) {
         val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalMapsAtOnce provides true) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }

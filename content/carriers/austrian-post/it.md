@@ -25,25 +25,25 @@ Il codice CRN a 6 cifre su un'etichetta doganale non è il numero di tracciament
 
 ## Stati di tracciamento Austrian Post spiegati
 
-post.at mostra il tracking in tedesco e, con il selettore EN, in inglese. Ogni riga riporta la dicitura inglese seguita da quella tedesca.
+post.at mostra il tracking in tedesco e, con il selettore EN, in inglese. Ogni riga riporta la dicitura inglese, quando le pagine di aiuto di Austrian Post la citano, seguita da quella tedesca.
 
 | Stato Austrian Post | Cosa significa per te |
 | --- | --- |
-| `Sender is preparing the shipment for shipping`, `Versender*in bereitet die Sendung für den Versand vor` | Il negozio ha annunciato il pacco. Austrian Post non lo ha ancora ricevuto. |
-| `Item accepted`, `Zum Transport erhalten` | Austrian Post ha ricevuto il pacco per il trasporto. |
-| `Shipment being processed at the logistics center`, `Sendung im Logistikzentrum in Bearbeitung` | In lavorazione presso un centro logistico. |
+| `Versender*in bereitet die Sendung für den Versand vor` | Il negozio ha annunciato il pacco. Austrian Post non lo ha ancora ricevuto. |
+| `Zum Transport erhalten` | Austrian Post ha ricevuto il pacco per il trasporto. |
+| `Sendung im Logistikzentrum in Bearbeitung` | In lavorazione presso un centro logistico. |
 | `Item in distribution`, `Sendung in Verteilung` | In Austria e previsto nei prossimi giorni lavorativi. |
 | `Delay due to incorrect distribution`, `Verzögerung wegen Fehlverteilung` | Smistato nel posto sbagliato: lieve ritardo, non devi fare nulla. |
-| `Shipment out for delivery`, `Sendung in Zustellung` | Previsto in consegna oggi. |
-| `Item could not be delivered - consignee notified`, `Empfänger nicht angetroffen - brieflich benachrichtigt` | Non c'era nessuno. C'è un avviso nella cassetta delle lettere. |
+| `Sendung in Zustellung` | Previsto in consegna oggi. |
+| `Empfänger nicht angetroffen - brieflich benachrichtigt` | Non c'era nessuno. C'è un avviso nella cassetta delle lettere. |
 | `Item ready for pick-up`, `Sendung abholbereit` | Ti aspetta fino alla data indicata sull'avviso. |
 | `Item arrived in Austrian Post pick-up box`, `Sendung in Post Empfangsbox eingelangt` | Nel box pacchi del tuo condominio. |
-| `Item handed over to delivery partner`, `Übergabe an Zustellpartner` | Un altro corriere effettua la consegna. |
-| `Shipment delivered`, `Sendung wurde zugestellt` | Consegnato. |
+| `Übergabe an Zustellpartner` | Un altro corriere effettua la consegna. |
+| `Sendung wurde zugestellt` | Consegnato. |
 | `Sendung an Empfänger∗in übergeben` | Consegnato al destinatario. |
 | `Return/addressing error`, `Rücksendung/Adressierungsfehler` | L'indirizzo è errato o incompleto, quindi il pacco torna al mittente. |
 
-Le pagine di aiuto usano stati sintetici come `Item in distribution`, mentre le righe della cronologia recitano ad esempio `Shipment being processed at the logistics center`, perciò non vedrai tutte le righe. `Electronic order information was provided by the sender` indica che esiste solo l'etichetta, e un'e-mail del negozio «in viaggio» non significa che il pacco sia stato consegnato alle poste. Se non cambia entro pochi giorni lavorativi, chiedi al mittente. Per un pacco dall'estero, `Item received` indica che lo ha in mano il corriere del paese di partenza.
+Le pagine di aiuto usano stati sintetici come `Item in distribution`, mentre le righe della cronologia recitano ad esempio `Sendung im Logistikzentrum in Bearbeitung`, perciò non vedrai tutte le righe. `Electronic order information was provided by the sender` indica che esiste solo l'etichetta, e un'e-mail del negozio «in viaggio» non significa che il pacco sia stato consegnato alle poste. Se non cambia entro pochi giorni lavorativi, chiedi al mittente. Per un pacco dall'estero, `Item received` indica che lo ha in mano il corriere del paese di partenza.
 
 **Scansioni doganali.** Un pacco dall'estero può ricevere eventi doganali dopo l'arrivo in Austria. Peek li mostra in tedesco, così come li invia Austrian Post, sotto «In dogana»: `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` (dichiarazione doganale in corso), `Lagereingang - Zollanmeldungshindernis` (pacco in giacenza per un ostacolo alla dichiarazione; la pagina di tracking di Austrian Post richiede i documenti mancanti), `Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.` (ritardo in dogana, qui per valore dichiarato non plausibile; il motivo dopo «Grund:» cambia) e `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` (la tua risposta è arrivata; il pacco resta in dogana fino allo sdoganamento).
 
@@ -61,7 +61,7 @@ Le pagine di aiuto usano stati sintetici come `Item in distribution`, mentre le 
 
 **Post Empfangsbox.** Il corriere lascia un avviso il cui codice a barre apre una sola volta il box pacchi del tuo edificio: estrai quindi subito il pacco.
 
-**Dogana.** Austrian Post dichiara i pacchi provenienti da fuori UE e riscuote IVA all'importazione, dazi e la propria tariffa di importazione alla consegna o in filiale. Dal 1° luglio 2026 i pacchi fino a 150 € pagano un dazio forfettario di 3 € per tipo di prodotto, e dal 1° novembre 2026 è dovuta anche una tassa UE di gestione di 2 € per tipo di prodotto, a prescindere dal valore. Approfondisci in [pacchi fermi in dogana](guide:customs).
+**Dogana.** Austrian Post dichiara i pacchi provenienti da fuori UE e riscuote IVA all'importazione, dazi e la propria tariffa di importazione alla consegna o in filiale. Dal 1° luglio 2026 i pacchi fino a 150 € pagano un dazio forfettario di 3 € per tipo di prodotto, e dal 1° novembre 2026 è dovuta anche, per gli acquisti online, una tassa UE di gestione di 2 € per tipo di prodotto, a prescindere dal valore. Approfondisci in [pacchi fermi in dogana](guide:customs).
 
 ## Pacco Austrian Post in ritardo, smarrito o danneggiato
 
@@ -81,18 +81,17 @@ Canali indicati sulle pagine di Austrian Post:
 
 - **Hotline privati:** +43 800 010 100, dal lunedì al venerdì 7:00–19:00, sabato 8:00–13:00.
 - **Modulo di contatto:** sul [modulo di post.at](https://www.post.at/kontaktformular), attivo 24 ore su 24.
-- **Chat:** sullo stato di un pacco, direttamente nella pagina di tracciamento.
 - **E-mail:** nessuna per i destinatari.
 
 > Austrian Post mette in guardia contro SMS falsi su consegne mancate che invitano a confermare dati tramite un link e contro falsi avvisi gialli con codice QR. Le sue vere e-mail terminano con @post.at e non chiede mai l'IBAN per consegnare un pacco ordinario.
 
 ## Tracciare i pacchi Austrian Post con Peek
 
-[Peek](/) riconosce subito come Austrian Post un codice internazionale che termina in AT con cifra di controllo valida. Per i numeri a 22 cifre (o a 24 cifre), condivisi con altri corrieri, Peek interroga i corrieri compatibili — Austrian Post e [USPS](carrier:usps) per i 22 cifre, dando precedenza ad Austrian Post se inizia per 10 — e assegna Austrian Post quando solo essa lo conosce; se rispondono più corrieri o nessuno, selezionala con «Cambia» (Peek traccia oltre 4.500 corrieri). Un link post.at funziona solo se contiene un numero terminante in AT.
+[Peek](/) riconosce subito come Austrian Post un codice internazionale che termina in AT con cifra di controllo valida. Per un numero a 22 cifre, Peek interroga prima Austrian Post e la sceglie se conosce il numero; altrimenti consulta servizi di tracciamento e poi [USPS](carrier:usps). Se il numero ha anche la forma di uno di TIPSA o di [CTT Express](carrier:ctt-express), Peek li interroga insieme. Con 24 cifre interroga Austrian Post, [InPost](carrier:inpost) e [Ciblex](carrier:ciblex), e sceglie Austrian Post se solo essa conosce il numero. Se Peek non sceglie nessun corriere, selezionalo tu con «Cambia». Un link post.at viene riconosciuto solo se contiene un numero postale internazionale (due lettere, nove cifre, due lettere); con 22 o 24 cifre, incolla solo il numero.
 
-Peek mostra stato, cronologia con ogni impianto sulla mappa, peso, dimensioni, orario di consegna e una consegna prevista (giorno, intervallo di giorni o fascia oraria) finché il pacco è preso in carico o in distribuzione; una volta in consegna, solo la fascia oraria di quel giorno. Gli orari appaiono nel fuso del tuo dispositivo; su peektracker.com e nelle app per iPhone e Android la cronologia termina con «Orari nel tuo fuso orario:» e il suo nome. Segnala quando è pronto per il ritiro ma non dove, e non mostra il mittente. Le diciture di Austrian Post compaiono in tedesco così come le fornisce il sito, ad esempio `Sendung wurde zugestellt` per un pacco consegnato. Nella scheda del pacco, «Chiedi aiuto a Austrian Post» porta alla pagina di contatto di Austrian Post.
+Peek mostra stato, cronologia con ogni impianto sulla mappa, peso, dimensioni, orario di consegna e una consegna prevista (giorno, intervallo di giorni o fascia oraria) finché il pacco è preso in carico o in distribuzione; una volta in consegna, solo la fascia oraria di quel giorno. Gli orari appaiono nel fuso del tuo dispositivo; su peektracker.com e nelle app per iPhone e Android la cronologia termina con «Orari nel tuo fuso orario:» e il suo nome. Segnala quando è pronto per il ritiro ma non dove, e non mostra il mittente. Le diciture di Austrian Post compaiono in tedesco così come le fornisce il sito, ad esempio `Sendung wurde zugestellt` per un pacco consegnato.
 
-Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti nel giorno in cui Austrian Post scansiona il pacco in consegna, dalle 6:00 ora locale (o da mezz'ora prima della fascia oraria quando ne indica una), finché il tracking di Austrian Post risponde; tramite servizi di tracciamento ogni 15 minuti. Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi impostare le notifiche per «Ogni scansione», «Passaggi importanti» (inclusi gli eventi doganali) o «Solo la consegna». Dopo `Übergabe an Zustellpartner`, Peek non segue il partner e non trasferisce pacchi da un altro corriere ad Austrian Post.
+Finché tieni il pacco aperto sullo schermo, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti nel giorno in cui Austrian Post scansiona il pacco in consegna, dalle 6:00 ora locale (o da mezz'ora prima della fascia oraria quando ne indica una), finché il tracking di Austrian Post risponde. Altrimenti, e dopo due giorni senza novità (12 ore finché mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora. Puoi impostare le notifiche per «Ogni scansione», «Passaggi importanti» (inclusi gli eventi doganali) o «Solo la consegna». Dopo `Übergabe an Zustellpartner` su un numero a 22 cifre, Peek non segue il partner. Un numero postale internazionale che termina in AT e che segui dall'Italia passa a [Poste Italiane](carrier:poste-italiane) appena questa mostra una scansione recente almeno quanto l'ultima di Austrian Post; il numero postale di un'altra posta passa allo stesso modo ad Austrian Post quando la posta d'origine indica l'Austria come destinazione o, senza destinazione, quando lo segui dall'Austria. Peek segue allora il ritmo del corriere che consegna.
 
 ## Domande sul tracciamento Austrian Post
 
@@ -106,7 +105,7 @@ Il pacco potrebbe essere solo annunciato: finché il mittente non lo consegna c'
 
 ### Austrian Post ha un'e-mail di assistenza clienti?
 
-No per i destinatari. Usa il modulo di contatto, la chat nella pagina di tracciamento o la hotline.
+No per i destinatari. Usa il modulo di contatto o la hotline.
 
 ### Che cosa significa Zollanmeldungshindernis?
 
@@ -116,7 +115,7 @@ Qualcosa ostacola la dichiarazione doganale del tuo pacco. Austrian Post lo mett
 - [Austrian Post: FAQ](https://www.post.at/en/p/c/faq) – esempi di numeri, tempi di consegna, 14 giorni, dogana
 - [Austrian Post: Helpful information about your item status](https://www.post.at/en/p/c/helpful-information-item-status) – significati inglesi, ritiro
 - [Austrian Post: Contact us by phone](https://www.post.at/en/k/c/hotline) – hotline, orari, elenco stati
-- [Österreichische Post: Kontakt](https://www.post.at/k/c/kontakt) – hotline, modulo di contatto, chat
+- [Österreichische Post: Kontakt](https://www.post.at/k/c/kontakt) – hotline, modulo di contatto
 - [Österreichische Post: Kontaktformular](https://www.post.at/kontaktformular) – modulo di contatto online
 - [Austrian Post: Item inquiry](https://www.post.at/en/p/a/item-inquiry) – chi avvia una ricerca, termini
 - [Austrian Post: Damage report](https://www.post.at/en/p/a/damage-report) – 7 giorni

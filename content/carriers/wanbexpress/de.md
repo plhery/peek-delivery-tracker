@@ -29,7 +29,7 @@ Mehrere chinesische Dienstleister beenden ihre Nummern auf `YQ`, jeweils mit eig
 
 ## WanbExpress-Statusmeldungen erklärt
 
-Die Scans von WanbExpress erscheinen auf Englisch, jeweils mit Uhrzeit und manchmal einem Ort. Hier sind die im Peek-Code hinterlegten Meldungen in typischer Reihenfolge:
+Die Scans von WanbExpress erscheinen auf Englisch, jeweils mit Uhrzeit und manchmal einem Ort. Hier sind die im Peek-Code hinterlegten Meldungen:
 
 | Meldung von WanbExpress | Was das für dich bedeutet | Peek zeigt |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ Die Scans von WanbExpress erscheinen auf Englisch, jeweils mit Uhrzeit und manch
 | --- | --- | --- |
 | `Received.` | Das iMile-Zentrum im Zielland hat das Paket erhalten. | „Unterwegs“ |
 | `Arrived.` | In der Zustellbasis für dein Gebiet eingetroffen. | „Unterwegs“ |
-| `Dispatch task assigned to DA.` | Ein Fahrer (DA, Delivery Associate) wurde für die Tour eingeteilt, oft schon Stunden vor dem Start. | „Unterwegs“ |
+| `Dispatch task assigned to DA.` | Ein Fahrer (DA, Delivery Associate) wurde für die Tour eingeteilt, manchmal schon Stunden vor dem Start. | „Unterwegs“ |
 | `Shipment out for delivery.` | Auf der Zustelltour. | „In Zustellung“ |
 | `<Route not completed>`, `Back To DS.` | Die Tour endete ohne Zustellung, das Paket ging zurück an die Zustellbasis (DS). | „Zustellversuch“ (allein nach der Tour; nach einem bereits gemeldeten Versuch bleibt `Back To DS.` ein Hinweis, nach „Unterwegs“ bleibt es „Unterwegs“) |
 | `Scheduled to <2026-11-02> .` | Geplanter Tag für den nächsten Versuch nach Rückkehr zur Basis. | Weiterhin „Zustellversuch“ |
@@ -70,7 +70,7 @@ Schritte anderer Partner erscheinen auf dieselbe Weise. Bei Sendungen in die USA
 
 Die Scans von WanbExpress begleiten das Paket aus China durch den Zoll bis zu einem lokalen Paketdienst, der es zustellt. Der WanbExpress-Tracker kann diesen Dienstleister, seine Sendungsnummer und ein Zustellfoto anzeigen.
 
-**Was der Peek-Code zeigt.** Bei einer Sendung nach Deutschland nennt der Verlauf iMile als Zusteller, und ein Scan verweist auf das Netz von Poste Italiane. Bei einer Sendung ins Vereinigte Königreich erscheinen Zeilen von InPost. Zudem kennt der Code für Frankreich Umetikettierungen auf Cainiao-Express-Nummern (`DOFR…HD` oder `CNFR…HD`) und für Australien weitergeleitete Scans von J&T Express Australia. Für die USA, Irland oder Kanada nennt der Code keinen bestimmten Zusteller.
+**Was der Peek-Code zeigt.** Bei einer Sendung nach Deutschland nennt der Verlauf iMile als Zusteller, und ein Scan verweist auf das Netz von Poste Italiane. Bei einer Sendung ins Vereinigte Königreich erscheinen Zeilen von InPost. Zudem kennt der Code für Frankreich Umetikettierungen auf Cainiao-Express-Nummern (`DOFR…HD` oder `CNFR…HD`) und für Australien weitergeleitete Scans von J&T Express Australia.
 
 **Zustellversuche und Abholung.** Es gelten stets die Regeln des ausliefernden Dienstes: Zahl der Versuche, Benachrichtigungskarten, Lagerort und Lagerfrist. Eigene WanbExpress-Regeln hierzu konnte Peek nicht finden. Sobald du Zusteller und dessen Nummer kennst, prüfe sein eigenes Tracking und vereinbare dort eine neue Zustellung. Siehe auch [verpasste Zustellung](guide:missed-delivery).
 
@@ -100,7 +100,7 @@ Peek konnte die Website von WanbExpress nicht prüfen und nennt hier daher keine
 
 Da der Tracker von WanbExpress eine Prüfung verlangt, ruft Peek ihn über einen Browser ab. Antwortet der Tracker nicht, fragt Peek Tracking-Dienste ab und zeigt deren Verlauf in deren Worten an; dieser kann hinter WanbExpress zurückliegen.
 
-Aus dem WanbExpress-Tracker übernimmt Peek den Status, die bis zu 100 neuesten Scans mit Ortsangabe sowie Herkunfts- und Zielland. Meldet der Datensatz das Paket als unterwegs, in Zustellung oder zugestellt, richtet sich Peek danach, selbst wenn der letzte Scan weniger aussagt. Übermittelt WanbExpress zusätzlich eine Nummer des lokalen Zustellers und nennt das Last-Mile-Panel einen im Katalog bekannten Paketdienst, zu dem diese Nummer passt, kann Peek „Zustellung durch …“ (oder „Bei … angekündigt, noch nicht eingetroffen“) anzeigen und das Paket dort weiterverfolgen. Ein voraussichtliches Lieferdatum gibt Peek nicht an; Zustellfotos und Empfängeradresse lässt es weg – dafür schau auf tracking.wanbexpress.com nach oder füge die Nummer des Zustellers selbst in Peek hinzu. Peek verfolgt über 4500 Paketdienste.
+Aus dem WanbExpress-Tracker übernimmt Peek den Status, die Scans mit Ortsangabe sowie Herkunfts- und Zielland. Meldet der Datensatz das Paket als unterwegs, in Zustellung oder zugestellt, richtet sich Peek danach, selbst wenn der letzte Scan weniger aussagt. Übermittelt WanbExpress zusätzlich eine Nummer des lokalen Zustellers und nennt das Last-Mile-Panel einen im Katalog bekannten Paketdienst, zu dem diese Nummer passt, kann Peek „Zustellung durch …“ (oder „Bei … angekündigt, noch nicht eingetroffen“) anzeigen und das Paket dort weiterverfolgen. Ein voraussichtliches Lieferdatum gibt Peek nicht an; Zustellfotos und Empfängeradresse lässt es weg – dafür schau auf tracking.wanbexpress.com nach oder füge die Nummer des Zustellers selbst in Peek hinzu. Peek verfolgt über 4500 Paketdienste.
 
 Solange du das Paket geöffnet hast oder am Zustelltag mit aktivierten Mitteilungen, prüft Peek bei erreichbarem WanbExpress-Tracker bis zu alle 10 Minuten, und ab 6 Uhr in der Zeitzone des Paketdienstes am Tag der Zustellung bis zu alle 5 Minuten, wenn die Abfrage einen Browser öffnet; sonst stündlich. Über Tracking-Dienste prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten, solange das Paket geöffnet ist oder Mitteilungen aktiv sind. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Du kannst Mitteilungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. „Wichtige Schritte“ (Zustellung, Abholung, Zoll, verpasste Versuche und Rücksendungen) erfasst Zustelltour, Fehlversuch und Zustellung, nicht aber die Zollzeilen von WanbExpress, die Peek als „Unterwegs“ führt. Peek kann weder WanbExpress noch den Verkäufer für dich kontaktieren.
 
@@ -127,7 +127,7 @@ Ein lokaler Paketdienst, den der Tracker von WanbExpress samt eigener Sendungsnu
 Den Verkäufer, bei dem du bestellt hast: Er hat die Sendung bei WanbExpress gebucht. Da Peek die Website von WanbExpress nicht abrufen konnte, nennt diese Seite keine direkten Kontaktdaten von WanbExpress.
 
 :::sources
-- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – Namen, `WNB…YQ`-Format, Browser-Abruf, Scan-Wortlaute und Stufen (einschließlich `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, iMile-, InPost-, Poste-Italiane- und US-Partnerzeilen), UTC-Zeitstempel, Zusteller-Erkennung (`TrackLastMileCarrier`), verworfene Fotos und Adresse, 100 neueste Scans
+- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – Namen, `WNB…YQ`-Format, Browser-Abruf, Scan-Wortlaute und Stufen (einschließlich `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, iMile-, InPost-, Poste-Italiane- und US-Partnerzeilen), UTC-Zeitstempel, Zusteller-Erkennung (`TrackLastMileCarrier`), verworfene Fotos und Adresse
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – andere `YQ`-Formate (`JS Express`, `Juxi Express`), Tracking-Dienste als Rückfall und Übergabe an den Zusteller
 - [Europäische Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – vorübergehender Zoll von 3 € pro Artikel bis 150 € seit 1. Juli 2026, EU-Bearbeitungsgebühr von 2 € seit 1. November 2026
 - [Europäische Kommission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € Bearbeitungsgebühr pro Artikel unabhängig vom Wert

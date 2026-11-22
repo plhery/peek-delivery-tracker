@@ -29,7 +29,7 @@ Diversi spedizionieri cinesi chiudono i loro codici con `YQ`, ciascuno con un pr
 
 ## Stati del tracking WanbExpress spiegati
 
-Le scansioni di WanbExpress sono in inglese, ciascuna con l'orario e talvolta il luogo. Ecco le diciture presenti nel codice di Peek, nell'ordine tipico:
+Le scansioni di WanbExpress sono in inglese, ciascuna con l'orario e talvolta il luogo. Ecco le diciture presenti nel codice di Peek:
 
 | Cosa dice WanbExpress | Cosa significa per te | Peek mostra |
 | --- | --- | --- |
@@ -70,7 +70,7 @@ Anche gli spostamenti di altri partner arrivano così. Sui pacchi verso gli Stat
 
 Le scansioni di WanbExpress seguono il pacco fuori dalla Cina, attraverso la dogana e fino al corriere locale che lo consegna. Il portale di WanbExpress può indicare quel corriere, il suo codice e una foto di consegna.
 
-**Cosa mostra il codice di Peek.** Su un pacco verso la Germania, la cronologia mostra iMile in consegna, e una scansione cita la rete di Poste Italiane. Su un pacco per il Regno Unito compaiono le righe di InPost. Il codice contempla anche rietichettature su numeri Cainiao Express in Francia (`DOFR…HD` o `CNFR…HD`) e righe inoltrate da J&T Express Australia. Per Stati Uniti, Irlanda o Canada il codice di Peek non indica alcun corriere finale specifico.
+**Cosa mostra il codice di Peek.** Su un pacco verso la Germania, la cronologia mostra iMile in consegna, e una scansione cita la rete di Poste Italiane. Su un pacco per il Regno Unito compaiono le righe di InPost. Il codice contempla anche rietichettature su numeri Cainiao Express in Francia (`DOFR…HD` o `CNFR…HD`) e righe inoltrate da J&T Express Australia.
 
 **Tentativi di consegna e ritiro.** Valgono le regole del corriere che consegna: quanti tentativi fa, se lascia un avviso, dove custodisce il pacco e per quanto tempo. Peek non ha trovato regole proprie di WanbExpress su questi aspetti. Appena conosci corriere locale e codice, controlla il suo tracciamento e accordati con lui per la riconsegna. Vedi [consegna mancata](guide:missed-delivery).
 
@@ -100,7 +100,7 @@ Peek non ha potuto consultare il sito web di WanbExpress, quindi questa pagina n
 
 Poiché il portale di WanbExpress richiede una verifica prima di rispondere, Peek lo interroga tramite browser. Se il portale non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che possiedono, nelle loro parole; tale cronologia può essere indietro rispetto a WanbExpress.
 
-Dal tracciamento di WanbExpress, Peek mostra lo stato, fino alle 100 scansioni più recenti con il luogo, e i Paesi di origine e destinazione riportati nel record. Quando il record indica il pacco in transito, in consegna o consegnato, Peek segue quell'indicazione anche se l'ultima scansione dice meno. Se il tracciamento di WanbExpress fornisce il numero del corriere finale e il pannello dell'ultimo miglio individua un corriere in catalogo il cui formato corrisponde a quel numero, Peek può mostrare «Consegna con …» (o «Annunciato a …, non ancora ricevuto») e passare a seguirlo lì. Peek non mostra una data di consegna prevista e lascia fuori le foto di consegna e l'indirizzo del destinatario: per vederli usa tracking.wanbexpress.com, o aggiungi separatamente in Peek il codice del corriere finale. Peek traccia oltre 4.500 corrieri.
+Dal tracciamento di WanbExpress, Peek mostra lo stato, le scansioni con il luogo, e i Paesi di origine e destinazione riportati nel record. Quando il record indica il pacco in transito, in consegna o consegnato, Peek segue quell'indicazione anche se l'ultima scansione dice meno. Se il tracciamento di WanbExpress fornisce il numero del corriere finale e il pannello dell'ultimo miglio individua un corriere in catalogo il cui formato corrisponde a quel numero, Peek può mostrare «Consegna con …» (o «Annunciato a …, non ancora ricevuto») e passare a seguirlo lì. Peek non mostra una data di consegna prevista e lascia fuori le foto di consegna e l'indirizzo del destinatario: per vederli usa tracking.wanbexpress.com, o aggiungi separatamente in Peek il codice del corriere finale. Peek traccia oltre 4.500 corrieri.
 
 Finché tieni il pacco aperto sullo schermo o nel giorno della consegna con le notifiche attive, e mentre risponde il tracciamento di WanbExpress, Peek controlla fino a ogni 10 minuti, e fino a ogni 5 minuti dalle 6:00 nell'orario del corriere il giorno in cui entra in consegna quando la verifica apre un browser; altrimenti ogni ora. Tramite i servizi di tracciamento controlla ogni ora, e fino a ogni 15 minuti il giorno della consegna finché tieni il pacco aperto o hai le notifiche attive. Dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». «Passaggi importanti» (consegna, ritiro, dogana, tentativi falliti e resi) copre la messa in consegna, il tentativo fallito e la consegna, ma non le righe doganali di WanbExpress, che Peek classifica come «In transito». Peek non può contattare WanbExpress o il venditore al posto tuo.
 
@@ -127,7 +127,7 @@ Un corriere locale, che il sito di WanbExpress può indicare insieme al proprio 
 Il venditore da cui hai acquistato: è lui ad aver affidato il pacco a WanbExpress. Peek non ha potuto verificare il sito di WanbExpress per eventuali recapiti.
 
 :::sources
-- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nomi, formato `WNB…YQ`, controllo tramite browser, diciture delle scansioni e fasi (inclusi `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, righe di iMile, InPost, Poste Italiane e partner USA), orari con scarto UTC, riconoscimento del corriere finale (`TrackLastMileCarrier`), foto e indirizzo esclusi, ultime 100 scansioni
+- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nomi, formato `WNB…YQ`, controllo tramite browser, diciture delle scansioni e fasi (inclusi `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, righe di iMile, InPost, Poste Italiane e partner USA), orari con scarto UTC, riconoscimento del corriere finale (`TrackLastMileCarrier`), foto e indirizzo esclusi
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – altri formati che terminano in `YQ` (`JS Express`, `Juxi Express`), servizi di tracciamento di riserva e passaggio al corriere locale
 - [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio doganale temporaneo di 3 € per articolo fino a 150 € dal 1° luglio 2026, tariffa di gestione dell'Unione di 2 € dal 1° novembre 2026
 - [Commissione europea: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tariffa di gestione di 2 € per articolo, qualunque sia il valore

@@ -29,7 +29,7 @@ Wielu chińskich spedytorów kończy swoje numery na `YQ`, a każdy ma własny p
 
 ## Statusy śledzenia WanbExpress wyjaśnione
 
-Skany WanbExpress są po angielsku, każdy z godziną i czasem z miejscem. Oto wpisy znane kodowi Peek, w typowej kolejności:
+Skany WanbExpress są po angielsku, każdy z godziną i czasem z miejscem. Oto wpisy znane kodowi Peek:
 
 | Co podaje WanbExpress | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ Skany WanbExpress są po angielsku, każdy z godziną i czasem z miejscem. Oto w
 | --- | --- | --- |
 | `Received.` | Centrum iMile w kraju docelowym przyjęło paczkę. | „W transporcie” |
 | `Arrived.` | Dotarła do stacji doręczeń obsługującej twoją okolicę. | „W transporcie” |
-| `Dispatch task assigned to DA.` | Kierowca (DA, delivery associate) został przydzielony do trasy, często na kilka godzin przed wyjazdem. | „W transporcie” |
+| `Dispatch task assigned to DA.` | Kierowca (DA, delivery associate) został przydzielony do trasy, czasem na kilka godzin przed wyjazdem. | „W transporcie” |
 | `Shipment out for delivery.` | W trasie do doręczenia. | „W doręczeniu” |
 | `<Route not completed>`, `Back To DS.` | Trasa skończyła się bez doręczenia i paczka wróciła do stacji doręczeń (DS). | „Próba doręczenia” (samodzielnie po trasie; po nieudanej próbie `Back To DS.` zostaje komunikatem bez zmiany etapu, a po „W transporcie” pozostaje „W transporcie”) |
 | `Scheduled to <2026-11-02> .` | Dzień zaplanowany na kolejną próbę po powrocie na stację. | Nadal „Próba doręczenia” |
@@ -70,7 +70,7 @@ Zdarzenia innych partnerów pojawiają się tak samo. W przesyłkach do USA `Par
 
 Skany WanbExpress śledzą paczkę z Chin, przez odprawę celną, aż do lokalnego przewoźnika, który ją doręcza. Strona tracking.wanbexpress.com może podać jego nazwę, własny numer oraz zdjęcie z doręczenia.
 
-**Co wynika z kodu Peek.** W przesyłce do Niemiec historia WanbExpress pokazuje doręczenie przez iMile, a jeden ze skanów wskazuje sieć Poste Italiane. W paczce do Wielkiej Brytanii pojawiają się wpisy InPost. Kod uwzględnia też przepakowywanie na numery Cainiao Express we Francji (`DOFR…HD` lub `CNFR…HD`) oraz skany przekazywane od J&T Express Australia. Dla USA, Irlandii czy Kanady kod Peek nie wskazuje konkretnego przewoźnika doręczającego.
+**Co wynika z kodu Peek.** W przesyłce do Niemiec historia WanbExpress pokazuje doręczenie przez iMile, a jeden ze skanów wskazuje sieć Poste Italiane. W paczce do Wielkiej Brytanii pojawiają się wpisy InPost. Kod uwzględnia też przeetykietowanie na numery Cainiao Express we Francji (`DOFR…HD` lub `CNFR…HD`) oraz skany przekazywane od J&T Express Australia.
 
 **Próby doręczenia i odbiór.** Obowiązują zasady lokalnego przewoźnika: liczba prób, awizo, miejsce odbioru i czas przechowywania. Peek nie znalazł własnych zasad WanbExpress w tych sprawach. Gdy poznasz lokalnego przewoźnika i jego numer, sprawdź jego śledzenie i z nim ustal ponowne doręczenie. Zobacz [nieudane doręczenie](guide:missed-delivery).
 
@@ -100,7 +100,7 @@ Peek nie mógł sprawdzić strony internetowej WanbExpress, więc nie podaje tut
 
 Ponieważ strona śledzenia WanbExpress wymaga weryfikacji przed udzieleniem odpowiedzi, Peek sprawdza ją przez przeglądarkę. Gdy śledzenie WanbExpress nie odpowiada, Peek sięga po usługi śledzenia i pokazuje zgromadzoną przez nie historię, w ich własnym brzmieniu; może ona mieć opóźnienie względem WanbExpress.
 
-Ze śledzenia WanbExpress Peek pobiera status, do 100 najnowszych skanów wraz z miejscem oraz kraje nadania i przeznaczenia z rekordu. Gdy rekord oznacza przesyłkę jako będącą w transporcie, w doręczeniu lub dostarczoną, Peek trzyma się tego statusu, nawet jeśli treść ostatniego skanu mówi mniej. Jeśli WanbExpress zwraca numer lokalnego przewoźnika, a jego panel ostatniej mili wskazuje przewoźnika z katalogu, do którego pasuje ten numer, Peek może pokazać „Doręcza: …” (lub „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”) i przełączyć śledzenie na niego. Peek nie podaje przewidywanej daty doręczenia i pomija zdjęcia z doręczenia oraz adres odbiorcy – znajdziesz je na tracking.wanbexpress.com, a numer lokalnego przewoźnika możesz też dodać osobno w Peek. Peek śledzi ponad 4500 przewoźników.
+Ze śledzenia WanbExpress Peek pobiera status, skany wraz z miejscem oraz kraje nadania i przeznaczenia z rekordu. Gdy rekord oznacza przesyłkę jako będącą w transporcie, w doręczeniu lub dostarczoną, Peek trzyma się tego statusu, nawet jeśli treść ostatniego skanu mówi mniej. Jeśli WanbExpress zwraca numer lokalnego przewoźnika, a jego panel ostatniej mili wskazuje przewoźnika z katalogu, do którego pasuje ten numer, Peek może pokazać „Doręcza: …” (lub „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”) i przełączyć śledzenie na niego. Peek nie podaje przewidywanej daty doręczenia i pomija zdjęcia z doręczenia oraz adres odbiorcy – znajdziesz je na tracking.wanbexpress.com, a numer lokalnego przewoźnika możesz też dodać osobno w Peek. Peek śledzi ponad 4500 przewoźników.
 
 Dopóki masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, a strona WanbExpress odpowiada, Peek sprawdza ją nawet co 10 minut, a od godz. 6:00 czasu przewoźnika w dniu trafienia do doręczenia co 5 minut, gdy sprawdzenie otwiera przeglądarkę; w pozostałym czasie co godzinę. Przez usługi śledzenia sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut, dopóki masz ją otwartą lub włączone powiadomienia. Po dwóch dniach bez nowych wpisów (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza przesyłkę co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. „Ważne etapy” (dostawa, odbiór, odprawa celna, nieudane doręczenia i zwroty) obejmują wyjazd do doręczenia, nieudaną próbę i dostawę, lecz nie obejmują wpisów celnych WanbExpress, które Peek zalicza do etapu „W transporcie”. Peek nie skontaktuje się za ciebie z WanbExpress ani ze sprzedawcą.
 
@@ -127,7 +127,7 @@ Lokalny przewoźnik, którego nazwę i numer może podać strona tracking.wanbex
 Ze sprzedawcą, u którego złożono zamówienie: to on wykupił przesyłkę w WanbExpress. Peek nie mógł sprawdzić strony WanbExpress pod kątem danych kontaktowych.
 
 :::sources
-- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nazwy, format `WNB…YQ`, sprawdzanie przez przeglądarkę, treści skanów i ich etapy (w tym `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, wpisy iMile, InPost, Poste Italiane i partnerów w USA), godziny z przesunięciem UTC, rozpoznawanie przewoźnika doręczającego (`TrackLastMileCarrier`), pominięte zdjęcia i adres, 100 najnowszych skanów
+- [Universal Parcel Scraper: WanbExpress](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wanbexpress) – nazwy, format `WNB…YQ`, sprawdzanie przez przeglądarkę, treści skanów i ich etapy (w tym `Customs inspection has not yet released`, `A-Scan: shipment in international transit`, wpisy iMile, InPost, Poste Italiane i partnerów w USA), godziny z przesunięciem UTC, rozpoznawanie przewoźnika doręczającego (`TrackLastMileCarrier`), pominięte zdjęcia i adres
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – inne formaty zakończone na `YQ` (`JS Express`, `Juxi Express`), zapasowe usługi śledzenia i przejęcie przez przewoźnika lokalnego
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tymczasowe cło 3 € za pozycję do 150 € od 1 lipca 2026 r., unijna opłata manipulacyjna 2 € od 1 listopada 2026 r.
 - [Komisja Europejska: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata manipulacyjna 2 € za pozycję niezależnie od wartości

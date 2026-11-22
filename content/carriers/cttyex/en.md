@@ -16,7 +16,7 @@ CTTYEX's site says nothing about its number format, but the numbers its tracker 
 | --- | --- |
 | `CTTY6051827049CN` | CTTY, ten digits and CN: a CTTYEX number. |
 | `CTTY605182704CN` | Nine digits only: not a CTTYEX shape. A digit is missing; if no carrier answers for it, its page on peektracker.com says "This starts like a CTTYEX tracking number but is one character short, so it may be mistyped." |
-| `LX000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not CTTYEX's, despite the same CN ending. |
+| `LX482910576CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not CTTYEX's, despite the same CN ending. |
 
 Peek takes the number in lower case or with spaces. CTTYEX's site doesn't: its search box accepts only letters and digits, and its tracker only matches the number in capitals, so type it as CTTY…CN, without spaces.
 
@@ -84,19 +84,19 @@ CTTYEX publishes no rules for recipients on delivery attempts, notice cards, pic
 
 ## CTTYEX contact
 
-As read on 10 November 2026, CTTYEX's [联系我们 (contact us) page](https://www.cttyvip888.com/assets/html/contact.html) gives an address in Fuyong, Bao'an District, Shenzhen, and an email address. It lists no phone number, chat or contact form, is written in Chinese and has nothing for recipients. For your order, write to the seller.
+CTTYEX's [联系我们 (contact us) page](https://www.cttyvip888.com/assets/html/contact.html) gives an address in Fuyong, Bao'an District, Shenzhen, and an email address. It lists no phone number, chat or contact form, is written in Chinese and has nothing for recipients. For your order, write to the seller.
 
 ## Track a CTTYEX parcel with Peek
 
 [Peek](/) recognises CTTYEX from the number alone: CTTY, ten digits and CN is a shape no other carrier Peek follows uses. You can also paste a cttyvip888.com tracker link that holds the number after `nos=`.
 
-Peek reads the parcel from CTTYEX's tracker: its status, its scans and the country it's going to. Where a row opens with a town, or a town and state, Peek makes that the scan's place and drops the ZIP code; a processing centre's town stays in the wording. Peek also leaves out phone numbers, and on a delivery the name of whoever signed. Duplicate rows are shown once, and each scan stays in CTTYEX's English. Each time is read on Beijing time and shown in your device's time zone, so the dates line up with your day; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name.
+Peek reads the parcel from CTTYEX's tracker: its status, its scans and the country it's going to. Where a row opens with a town, or a town and state, Peek makes that the scan's place and drops the ZIP code; a processing centre's town stays in the wording. Peek also leaves out phone numbers. Duplicate rows are shown once, and each scan stays in CTTYEX's English. Each time is read on Beijing time and shown in your device's time zone, so the dates line up with your day; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name.
 
 Peek's status follows the newest scan it understands, and the summary only when it understands none. `Order information received` counts as "Label created", the two receiving-point lines as "Received by carrier", `Import customs clearance` as "At customs", `Accepted at logistics carrier Regional Destination Facility` and `Internationaliy Package received at processing center` as "In transit", and `Delivered` as "Delivered". A line Peek doesn't know is read by its words, so one saying the parcel was delivered counts as delivered.
 
 CTTYEX's tracker shows no delivery estimate, weight or service name, and names neither the delivering company nor a second number, so Peek has none of them either. It keeps asking CTTYEX's tracker under the CTTY number and never moves the parcel to another carrier.
 
-Peek checks up to every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact CTTYEX or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes; otherwise hourly. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact CTTYEX or the seller for you.
 
 ## Questions about CTTYEX tracking
 
@@ -122,7 +122,7 @@ Start with the seller: CTTYEX's customer is the shop that sent the parcel, not y
 
 :::sources
 - [CTTYEX: 深圳诚泰通运国际物流 (home)](https://www.cttyvip888.com/) – company name
-- [CTTYEX: 关于我们 (about us)](https://www.cttyvip888.com/assets/html/about_us.html) – founded in 2011, logistics for sellers on Amazon, Wish, Tophatter, VOVA and Shopify, charter flights to the US, UK, Canada, Germany and Australia (read 10 November 2026)
+- [CTTYEX: 关于我们 (about us)](https://www.cttyvip888.com/assets/html/about_us.html) – founded in 2011, logistics for sellers on Amazon, Wish, Tophatter, VOVA and Shopify, charter flights to the US, UK, Canada, Germany and Australia
 - [CTTYEX: 物流查询 (search)](https://www.cttyvip888.com/assets/html/search.html) – one number per line, letters and digits only, submit button
 - [CTTYEX: 快件跟踪 (tracking)](https://www.cttyvip888.com/index/tracknumber/track) – Chinese tracker powered by 诚泰通运国际物流, destination and status columns, parcels from the last two months
 - [CTTYEX: 联系我们 (contact us)](https://www.cttyvip888.com/assets/html/contact.html) – address in Fuyong, Bao'an District, Shenzhen, and an email address; no phone, chat or form

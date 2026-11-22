@@ -18,7 +18,7 @@ A Express One não publica um formato oficial. Os IDs vistos até agora surgem e
 
 | Número | A quem pertence |
 | --- | --- |
-| `4829173648291` | 13 dígitos: um ID de volume Express One, mas a DPD France e outras transportadoras também usam este comprimento. |
+| `0482917364829` | 13 dígitos: um ID de volume Express One, mas a DPD France e outras transportadoras também usam este comprimento. |
 | `148291736482917364821011` | 24 dígitos terminados num código postal húngaro: Express One. A Austrian Post, a [InPost](carrier:inpost), a [bpost](carrier:bpost) e a [Ciblex](carrier:ciblex) também usam 24 dígitos. |
 | `48291736482917` | 14 dígitos: DPD, nunca Express One. |
 | `48291736482` | 11 ou 12 dígitos: GLS, nunca Express One. |
@@ -28,7 +28,7 @@ Orienta-te pela transportadora indicada no e-mail da loja; mais em [formatos de 
 
 ## O que significam os estados da Express One
 
-tracking.expressone.hu aparece em inglês ou húngaro consoante o idioma do navegador, com botão EN/HU. Cada registo traz código, texto, data e hora, e os registos em hub ou depósito juntam o local entre parêntesis, como «(HU - Budapest)». Os textos em inglês, pela ordem habitual:
+tracking.expressone.hu aparece em inglês ou húngaro consoante o idioma do navegador, com botão EN/HU. Cada registo traz código, texto, data e hora, e os registos em hub ou depósito juntam o local entre parêntesis, como «(HU - Budapest)». Os textos em inglês:
 
 | Estado da Express One | O que significa para ti |
 | --- | --- |
@@ -80,11 +80,11 @@ A página Parcel Tracking da Express One indica também o +36 1 8 777 444 e um c
 
 ## Seguir encomendas Express One com o Peek
 
-Um número de 13 dígitos não é consultado automaticamente na Express One: o [Peek](/) testa-o primeiro noutras transportadoras. Quando nenhuma o conhece, surge «ainda não encontrada · o Peek continua a verificar»: carrega em «Alterar» e escolhe «Express One». Já para um número de 24 dígitos, o Peek consulta primeiro a Express One quando pesquisas a partir da Hungria, à frente de [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) e [Ciblex](carrier:ciblex); fora da Hungria consulta essas outras três transportadoras e basta escolher «Express One» em «Alterar». Ou cola um link tracking.expressone.hu com `?plc_number=`, que identifica diretamente a Express One em qualquer formato.
+Um número de 13 dígitos não é consultado automaticamente na Express One: o [Peek](/) testa-o primeiro noutras transportadoras. Quando nenhuma o conhece, surge «ainda não encontrada · o Peek continua a verificar»: carrega em «Alterar» e escolhe «Express One». Já para um número de 24 dígitos, o Peek consulta primeiro a Express One quando pesquisas a partir da Hungria, à frente de [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) e [Ciblex](carrier:ciblex); fora da Hungria consulta primeiro essas outras três transportadoras e depois a Express One. Ou cola um link tracking.expressone.hu com `?plc_number=`, que identifica diretamente a Express One em qualquer formato.
 
 Os registos da Express One trazem hora sem fuso horário: o Peek lê-os no relógio do local do registo (hora da Hungria nos registos na Hungria) e apresenta-os no teu fuso horário («Horas no teu fuso horário:»). Lê o estado e, nos registos de hub, a cidade e o país. Os textos mantêm-se como a Express One os escreve, exceto `Out for delivery`; `Successful delivery` conta como entregue e um trajeto de regresso como devolvida. Um registo desconhecido mostra o texto sem etapa. Não há previsão de entrega, peso, ponto de levantamento, barra de progresso nem assinatura.
 
-O Peek consulta diretamente a Express One até de 10 em 10 minutos, ou de 2 em 2 minutos a partir das 6:00 no relógio do último registo (hora da Hungria na Hungria) no dia em que a Express One regista a encomenda em distribuição, enquanto estiver aberta no Peek ou no dia da entrega com as notificações ligadas. Após dois dias sem novidades (12 horas enquanto mostrar «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora a hora. Para as notificações, podes escolher «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Após quatro dias sem registos em trânsito, fora de alfândega ou problema assinalado, o Peek mostra «Sem atualizações desde…», explica que «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Express One.» e disponibiliza «Pede ajuda a Express One».
+O Peek consulta diretamente a Express One até de 10 em 10 minutos, ou de 2 em 2 minutos a partir das 6:00 no relógio do último registo (hora da Hungria na Hungria) no dia em que a Express One regista a encomenda em distribuição, enquanto estiver aberta no Peek ou no dia da entrega com as notificações ligadas. Após dois dias sem novidades (12 horas enquanto mostrar «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora a hora. Para as notificações, podes escolher «Todos os registos», «Passos importantes» ou «Só a entrega». Após quatro dias sem registos em trânsito, fora de alfândega ou problema assinalado, o Peek mostra «Sem atualizações desde…», explica que «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Express One.» e disponibiliza «Pede ajuda a Express One».
 
 ## Perguntas frequentes sobre a Express One
 
@@ -114,7 +114,7 @@ Não. Também pertencem à Austrian Post, mas são empresas distintas; esta pág
 - [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – horários de abertura, 3, 2 e 7 dias
 - [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 horas em cacifo
 - [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – conteúdo das notificações, nenhuma na exportação, 250 000 Ft em dinheiro num Exopoint
-- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – subsidiária integral
+- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – subsidiária
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – empresas Express One noutros países
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dados lidos pelo Peek
 :::

@@ -18,7 +18,7 @@ Express One ne publie pas de format officiel. Les identifiants de colis observé
 
 | Numéro | À qui il appartient |
 | --- | --- |
-| `4829173648291` | 13 chiffres : un identifiant de colis Express One, mais [DPD France](carrier:dpd-fr) et d'autres transporteurs utilisent aussi cette longueur. |
+| `0482917364829` | 13 chiffres : un identifiant de colis Express One, mais [DPD France](carrier:dpd-fr) et d'autres transporteurs utilisent aussi cette longueur. |
 | `148291736482917364821011` | 24 chiffres se terminant par un code postal hongrois : Express One. Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) et [Ciblex](carrier:ciblex) utilisent aussi 24 chiffres. |
 | `48291736482917` | 14 chiffres : DPD, jamais Express One. |
 | `48291736482` | 11 ou 12 chiffres : GLS, jamais Express One. |
@@ -28,7 +28,7 @@ Fie-toi au transporteur nommé dans l'e-mail de la boutique ; plus de détails d
 
 ## Les statuts de suivi Express One expliqués
 
-tracking.expressone.hu s'affiche en anglais ou en hongrois selon la langue de ton navigateur, avec un sélecteur EN/HU. Chaque scan comporte un code, un libellé, une date et une heure, et les scans de hub ou de dépôt ajoutent le lieu entre parenthèses, par exemple « (HU - Budapest) ». Voici les libellés en anglais, dans l'ordre habituel :
+tracking.expressone.hu s'affiche en anglais ou en hongrois selon la langue de ton navigateur, avec un sélecteur EN/HU. Chaque scan comporte un code, un libellé, une date et une heure, et les scans de hub ou de dépôt ajoutent le lieu entre parenthèses, par exemple « (HU - Budapest) ». Voici les libellés en anglais :
 
 | Statut Express One | Ce qu'il signifie pour toi |
 | --- | --- |
@@ -80,11 +80,11 @@ La page Parcel Tracking d'Express One mentionne également le +36 1 8 777 444 et
 
 ## Suivre un colis Express One avec Peek
 
-Un numéro à 13 chiffres n'est pas interrogé automatiquement chez Express One : [Peek](/) le soumet d'abord à d'autres transporteurs. Si aucun ne le connaît, Peek affiche « pas encore trouvé · Peek continue de vérifier » : appuie sur « Changer » et choisis « Express One ». Pour un numéro à 24 chiffres, Peek interroge Express One en premier lorsque tu cherches depuis la Hongrie, avant [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) et [Ciblex](carrier:ciblex) ; en dehors de la Hongrie, Peek interroge ces trois autres transporteurs, et il suffit alors de choisir « Express One » avec « Changer ». Tu peux aussi coller un lien tracking.expressone.hu contenant `?plc_number=`, qui désigne directement Express One quel que soit le format.
+Un numéro à 13 chiffres n'est pas interrogé automatiquement chez Express One : [Peek](/) le soumet d'abord à d'autres transporteurs. Si aucun ne le connaît, Peek affiche « pas encore trouvé · Peek continue de vérifier » : appuie sur « Changer » et choisis « Express One ». Pour un numéro à 24 chiffres, Peek interroge Express One en premier lorsque tu cherches depuis la Hongrie, avant [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) et [Ciblex](carrier:ciblex) ; en dehors de la Hongrie, Peek interroge d'abord ces trois autres transporteurs, puis Express One. Tu peux aussi coller un lien tracking.expressone.hu contenant `?plc_number=`, qui désigne directement Express One quel que soit le format.
 
 Les scans d'Express One indiquent une heure sans fuseau horaire : Peek les lit sur l'horloge du lieu du scan (heure de Hongrie pour les scans en Hongrie) et les affiche dans ton fuseau horaire (« Heures dans ton fuseau horaire : »). Peek récupère le statut ainsi que, pour les scans de hub, la ville et le pays. Les libellés restent ceux d'Express One, sauf `Out for delivery` ; `Successful delivery` correspond à livré et un trajet retour à retourné. Un scan inconnu garde le libellé d'Express One sans étape. Il n'y a ni date de livraison prévue, ni poids, ni point relais, et la barre de progression comme la signature ne sont pas reprises.
 
-Peek interroge directement Express One jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h sur l'horloge du dernier scan (heure de Hongrie en Hongrie) le jour où Express One scanne le colis en livraison, tant que le colis est ouvert dans Peek ou le jour de la livraison avec les notifications activées. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Pour les notifications, choisis « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Après quatre jours sans scan en transit, hors douane ou incident signalé, Peek affiche « Aucune mise à jour depuis… », rappelle qu'« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Express One. » et propose « Demande de l’aide à Express One ».
+Peek interroge directement Express One jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h sur l'horloge du dernier scan (heure de Hongrie en Hongrie) le jour où Express One scanne le colis en livraison, tant que le colis est ouvert dans Peek ou le jour de la livraison avec les notifications activées. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Pour les notifications, choisis « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après quatre jours sans scan en transit, hors douane ou incident signalé, Peek affiche « Aucune mise à jour depuis… », rappelle qu'« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Express One. » et propose « Demande de l’aide à Express One ».
 
 ## Questions fréquentes sur Express One
 
@@ -114,7 +114,7 @@ Non. Elles appartiennent aussi à Austrian Post, mais ce sont des sociétés dis
 - [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – horaires d'ouverture, 3, 2 et 7 jours
 - [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 heures en consigne
 - [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – contenu des notifications, aucune pour l'export, 250 000 Ft en espèces en Exopoint
-- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – filiale à 100 %
+- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – filiale
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – sociétés Express One dans d'autres pays
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – données lues par Peek
 :::

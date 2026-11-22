@@ -18,7 +18,7 @@ Express One nie publikuje oficjalnego formatu. Spotykane dotąd identyfikatory m
 
 | Numer | Do kogo należy |
 | --- | --- |
-| `4829173648291` | 13 cyfr: identyfikator paczki Express One, choć taką długość stosują też DPD France i inni przewoźnicy. |
+| `0482917364829` | 13 cyfr: identyfikator paczki Express One, choć taką długość stosują też DPD France i inni przewoźnicy. |
 | `148291736482917364821011` | 24 cyfry zakończone węgierskim kodem pocztowym: Express One. 24 cyfry stosują też Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) i [Ciblex](carrier:ciblex). |
 | `48291736482917` | 14 cyfr: DPD, nigdy Express One. |
 | `48291736482` | 11 lub 12 cyfr: GLS, nigdy Express One. |
@@ -28,7 +28,7 @@ Kieruj się nazwą przewoźnika z e-maila od sklepu; więcej w [formatach numer�
 
 ## Co oznaczają statusy śledzenia Express One
 
-tracking.expressone.hu wyświetla się po angielsku lub węgiersku zależnie od języka przeglądarki, z przełącznikiem EN/HU. Każdy skan ma kod, opis, datę i godzinę, a skany w hubie lub oddziale dodają miejscowość w nawiasie, np. „(HU - Budapest)”. Angielskie komunikaty w typowej kolejności:
+tracking.expressone.hu wyświetla się po angielsku lub węgiersku zależnie od języka przeglądarki, z przełącznikiem EN/HU. Każdy skan ma kod, opis, datę i godzinę, a skany w hubie lub oddziale dodają miejscowość w nawiasie, np. „(HU - Budapest)”. Angielskie komunikaty:
 
 | Status Express One | Co oznacza dla ciebie |
 | --- | --- |
@@ -80,11 +80,11 @@ Strona Parcel Tracking podaje również numer +36 1 8 777 444 oraz chatbota.
 
 ## Śledzenie paczek Express One w Peek
 
-13-cyfrowy numer nie jest odpytywany w Express One automatycznie: [Peek](/) sprawdza najpierw innych przewoźników. Gdy żaden go nie zna, zobaczysz „jeszcze nie znaleziono · Peek sprawdza dalej” — kliknij „Zmień” i wybierz „Express One”. Przy numerze 24-cyfrowym Peek pyta Express One jako pierwszego, jeśli wyszukujesz z Węgier — przed [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) i [Ciblex](carrier:ciblex); poza Węgrami sprawdza pozostałych trzech przewoźników, więc wybierz „Express One” przyciskiem „Zmień”. Możesz też wkleić link tracking.expressone.hu z `?plc_number=`, który od razu wskazuje Express One niezależnie od formatu.
+13-cyfrowy numer nie jest odpytywany w Express One automatycznie: [Peek](/) sprawdza najpierw innych przewoźników. Gdy żaden go nie zna, zobaczysz „jeszcze nie znaleziono · Peek sprawdza dalej” — kliknij „Zmień” i wybierz „Express One”. Przy numerze 24-cyfrowym Peek pyta Express One jako pierwszego, jeśli wyszukujesz z Węgier — przed [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) i [Ciblex](carrier:ciblex); poza Węgrami pyta najpierw pozostałych trzech przewoźników, a potem Express One. Możesz też wkleić link tracking.expressone.hu z `?plc_number=`, który od razu wskazuje Express One niezależnie od formatu.
 
 Skany Express One podają godzinę bez strefy czasowej: Peek odczytuje je według zegara miejsca skanu (czasu węgierskiego na Węgrzech) i wyświetla w twojej strefie czasowej („Godziny w twojej strefie czasowej:”). Odczytuje status oraz przy skanach w hubach miasto i kraj. Opisy pozostają oryginalne, poza `Out for delivery`; `Successful delivery` oznacza doręczenie, a trasa zwrotna zwrot do nadawcy. Nieznany skan pokazuje opis bez etapu. Brak przewidywanego terminu, wagi, punktu odbioru, paska postępu oraz podpisu.
 
-Peek odpytuje Express One bezpośrednio nawet co 10 minut, a w dniu, gdy Express One zeskanuje paczkę w doręczeniu — co 2 minuty od 6:00 według zegara ostatniego skanu (czasu węgierskiego na Węgrzech), gdy paczka jest otwarta w Peek lub w dniu dostawy z włączonymi powiadomieniami. Po dwóch dniach bez zmian (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę. Dla powiadomień możesz wybrać „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po czterech dniach bez skanu w transporcie, poza odprawą celną i zgłoszonym problemem, Peek wyświetla „Brak aktualizacji od…”, przypomina, że „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Express One.” oraz podsuwa link „Poproś przewoźnika Express One o pomoc”.
+Peek odpytuje Express One bezpośrednio nawet co 10 minut, a w dniu, gdy Express One zeskanuje paczkę w doręczeniu — co 2 minuty od 6:00 według zegara ostatniego skanu (czasu węgierskiego na Węgrzech), gdy paczka jest otwarta w Peek lub w dniu dostawy z włączonymi powiadomieniami. Po dwóch dniach bez zmian (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę. Dla powiadomień możesz wybrać „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po czterech dniach bez skanu w transporcie, poza odprawą celną i zgłoszonym problemem, Peek wyświetla „Brak aktualizacji od…”, przypomina, że „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Express One.” oraz podsuwa link „Poproś przewoźnika Express One o pomoc”.
 
 ## Najczęstsze pytania o Express One
 
@@ -114,7 +114,7 @@ Nie. Również należą do Austrian Post, ale są osobnymi spółkami; ta strona
 - [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – godziny otwarcia, 3, 2 i 7 dni
 - [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 godziny w automacie
 - [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – treść powiadomień, brak przy eksporcie, 250 000 Ft gotówką w Exopoint
-- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – spółka w 100% zależna
+- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – spółka zależna
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – spółki Express One w innych krajach
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dane odczytywane przez Peek
 :::

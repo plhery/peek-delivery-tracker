@@ -18,7 +18,7 @@ Express One veröffentlicht kein festes Format. Bisher bekannte Paket-IDs treten
 
 | Nummer | Wozu sie gehört |
 | --- | --- |
-| `4829173648291` | 13 Ziffern: eine Express-One-Paket-ID, aber auch DPD France und andere Dienste nutzen diese Länge. |
+| `0482917364829` | 13 Ziffern: eine Express-One-Paket-ID, aber auch DPD France und andere Dienste nutzen diese Länge. |
 | `148291736482917364821011` | 24 Ziffern, die auf eine ungarische Postleitzahl enden: Express One. Auch Österreichische Post, [InPost](carrier:inpost), [bpost](carrier:bpost) und [Ciblex](carrier:ciblex) verwenden 24 Ziffern. |
 | `48291736482917` | 14 Ziffern: DPD, niemals Express One. |
 | `48291736482` | 11 oder 12 Ziffern: GLS, niemals Express One. |
@@ -28,7 +28,7 @@ Orientiere dich an dem Paketdienst aus der Shop-E-Mail; mehr unter [Sendungsnumm
 
 ## Bedeutung der Statusmeldungen von Express One
 
-tracking.expressone.hu erscheint je nach Browsersprache auf Englisch oder Ungarisch, mit einem EN/HU-Umschalter. Jeder Scan trägt Code, Text, Datum und Uhrzeit; Hub- und Depotscans ergänzen den Ort in Klammern, etwa „(HU - Budapest)“. Die englischen Texte in typischer Reihenfolge:
+tracking.expressone.hu erscheint je nach Browsersprache auf Englisch oder Ungarisch, mit einem EN/HU-Umschalter. Jeder Scan trägt Code, Text, Datum und Uhrzeit; Hub- und Depotscans ergänzen den Ort in Klammern, etwa „(HU - Budapest)“. Die englischen Texte:
 
 | Status von Express One | Bedeutung für dich |
 | --- | --- |
@@ -80,11 +80,11 @@ Die Parcel-Tracking-Seite von Express One nennt außerdem +36 1 8 777 444 und ei
 
 ## Express-One-Pakete mit Peek verfolgen
 
-Eine 13-stellige Nummer fragt [Peek](/) nicht automatisch bei Express One ab, sondern zuerst bei anderen Paketdiensten. Kennt keiner sie, erscheint „noch nicht gefunden · Peek prüft weiter“: wähle „Express One“ über „Ändern“. Bei einer 24-stelligen Nummer fragt Peek in Ungarn zuerst Express One – vor [Österreichischer Post](carrier:austrian-post), [InPost](carrier:inpost) und [Ciblex](carrier:ciblex); außerhalb Ungarns fragt Peek zunächst jene drei Dienste, und du wählst „Express One“ über „Ändern“. Oder füge einen Link von tracking.expressone.hu mit `?plc_number=` ein, der Express One unabhängig vom Format direkt erkennt.
+Eine 13-stellige Nummer fragt [Peek](/) nicht automatisch bei Express One ab, sondern zuerst bei anderen Paketdiensten. Kennt keiner sie, erscheint „noch nicht gefunden · Peek prüft weiter“: wähle „Express One“ über „Ändern“. Bei einer 24-stelligen Nummer fragt Peek in Ungarn zuerst Express One – vor [Österreichischer Post](carrier:austrian-post), [InPost](carrier:inpost) und [Ciblex](carrier:ciblex); außerhalb Ungarns fragt Peek zunächst jene drei Dienste und danach Express One. Oder füge einen Link von tracking.expressone.hu mit `?plc_number=` ein, der Express One unabhängig vom Format direkt erkennt.
 
 Scans von Express One enthalten Uhrzeiten ohne Zeitzone: Peek liest sie nach der Ortszeit des Scan-Orts (ungarische Zeit bei Scans in Ungarn) und zeigt sie in deiner Zeitzone an („Uhrzeiten in deiner Zeitzone:“). Peek liest Status sowie bei Hub-Scans Ort und Land. Formulierungen bleiben wie von Express One geschrieben, außer `Out for delivery`; `Successful delivery` zählt als zugestellt und eine Rücksendung als zurückgesendet. Ein unbekannter Scan behält den Text ohne Statusstufe. Lieferprognose, Gewicht, Abholpunkt, Fortschrittsbalken und Unterschrift werden nicht übernommen.
 
-Peek fragt Express One direkt bis zu alle 10 Minuten ab – oder alle 2 Minuten ab 6:00 Uhr nach der Uhr des letzten Scans (ungarische Zeit in Ungarn) an dem Tag, an dem Express One das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Express One nach.“ und bietet „Hol dir Hilfe bei Express One“.
+Peek fragt Express One direkt bis zu alle 10 Minuten ab – oder alle 2 Minuten ab 6:00 Uhr nach der Uhr des letzten Scans (ungarische Zeit in Ungarn) an dem Tag, an dem Express One das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Express One nach.“ und bietet „Hol dir Hilfe bei Express One“.
 
 ## Häufige Fragen zu Express One
 
@@ -114,7 +114,7 @@ Nein. Sie gehören ebenfalls zur Österreichischen Post, sind aber eigenständig
 - [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – Öffnungszeiten, 3, 2 und 7 Tage
 - [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 Stunden im Automaten
 - [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – Inhalt der Benachrichtigungen, keine bei Export, 250.000 Ft bar am Exopoint
-- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – hundertprozentige Tochtergesellschaft
+- [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – Tochtergesellschaft
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – Express-One-Gesellschaften in anderen Ländern
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – von Peek ausgelesene Daten
 :::

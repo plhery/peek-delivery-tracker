@@ -116,7 +116,7 @@ Something stands in the way of your parcel's customs declaration. Austrian Post 
 - [Austrian Post: FAQ](https://www.post.at/en/p/c/faq) – number examples, delivery times, 14 days, customs
 - [Austrian Post: Helpful information about your item status](https://www.post.at/en/p/c/helpful-information-item-status) – English status meanings, pickup
 - [Austrian Post: Contact us by phone](https://www.post.at/en/k/c/hotline) – hotline, hours, status list
-- [Austrian Post: Customer service](https://www.post.at/en/k/c/customer-service) – hotline, contact form, chat
+- [Austrian Post: Contact](https://www.post.at/en/k/c/contact-us) – hotline, contact form
 - [Austrian Post: Item inquiry](https://www.post.at/en/p/a/item-inquiry) – who starts a search, deadlines
 - [Austrian Post: Damage report](https://www.post.at/en/p/a/damage-report) – 7 days
 - [Austrian Post: Online risks](https://www.post.at/en/i/c/online-risks) – fake messages

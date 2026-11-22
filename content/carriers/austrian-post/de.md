@@ -127,7 +127,6 @@ Der Zollanmeldung deines Pakets steht etwas im Weg. Die Post lagert das Paket mi
 - [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Aufgabebeleg, Laufzeiten, 14 Tage in Filiale, Poststation und Empfangsbox, Wunsch-Poststation, CRN-Code, Zoll (gelesen am 17. November 2026)
 - [Österreichische Post: Sendungssuche](https://www.post.at/s/sendungssuche) – Sendungsverfolgung ohne Konto, Post Konto, Umschalter EN, Statustexte
 - [Österreichische Post: Kontaktieren Sie uns telefonisch](https://www.post.at/k/c/hotline) – Hotline, Zeiten, Statusliste, Nummernformen
-- [Österreichische Post: Aktuelle Informationen des Kundenservice](https://www.post.at/k/c/kundenservice) – Hotline, Kontaktformular, Chat
 - [Österreichische Post: Kontaktmöglichkeiten](https://www.post.at/k/c/kontakt) – Kontaktformular rund um die Uhr
 - [Österreichische Post: Zentrale Fragen zur Nachforschung](https://www.post.at/p/a/nachforschung) – wer sucht, Fristen, Schritte für Empfänger, derzeit kostenlos, Einschätzung durch den Kundenservice (gelesen am 17. November 2026)
 - [Österreichische Post: Schadensmeldung](https://www.post.at/p/a/schadensmeldung) – 7 Tage, Ablauf

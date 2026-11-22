@@ -112,7 +112,6 @@ Not on FAN's tracker, which needs the AWB or a reference. Ask the shop, open FAN
 :::sources
 - [FAN Courier: AWB Tracking](https://www.fancourier.ro/en/awb-track/) – form, messages, status labels, fraud warning
 - [FAN Courier: Tracking AWB](https://www.fancourier.ro/awb-tracking/) – Romanian labels, language switch, FANbox and Collect Point messages
-- [FAN Courier: tracking lookup](https://www.fancourier.ro/limit-tracking.php) – scan wordings in English and Romanian
 - [FAN Courier: tracking page script](https://www.fancourier.ro/wp-content/themes/fancourier/dist/tracking-DIhaHmX7.js) – milestones, status line, hidden steps, return AWB
 - [FAN Courier: F.A.Q.](https://www.fancourier.ro/en/faq/) – AWB, pickup order, SMS, redirection, same-day FANbox, PIN, payment, damage, MEEST, FANbox, Collect Point, locations, emails
 - [FAN Courier: F.A.Q. (Romanian)](https://www.fancourier.ro/f-a-q/) – Collect Point 7 days

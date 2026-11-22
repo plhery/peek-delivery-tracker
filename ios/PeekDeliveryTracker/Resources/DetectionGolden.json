@@ -93753,11 +93753,44 @@
     ]
   },
   {
+    "input": "GD16112381234US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "good-express-us"
+    ],
+    "asked": [
+      "good-express-us"
+    ]
+  },
+  {
     "input": "GD552162373CA",
     "carrier": "canada-post",
     "confidence": "high",
     "candidates": [
       "canada-post"
+    ]
+  },
+  {
+    "input": "GD64110500516US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "good-express-us"
+    ],
+    "asked": [
+      "good-express-us"
+    ]
+  },
+  {
+    "input": "GD66102101222US",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "good-express-us"
+    ],
+    "asked": [
+      "good-express-us"
     ]
   },
   {
@@ -100117,6 +100150,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "LIB999999999YN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
   },
   {
     "input": "LIN1000145402400",
@@ -112937,6 +112981,17 @@
     ]
   },
   {
+    "input": "SUE8910020752265FR",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "swiss-universal-express"
+    ],
+    "asked": [
+      "swiss-universal-express"
+    ]
+  },
+  {
     "input": "SUF2403231LW1003974",
     "carrier": "unknown",
     "confidence": "none",
@@ -119971,6 +120026,17 @@
     "confidence": "low",
     "candidates": [
       "shipgce"
+    ]
+  },
+  {
+    "input": "gd60032500427us",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "good-express-us"
+    ],
+    "asked": [
+      "good-express-us"
     ]
   },
   {

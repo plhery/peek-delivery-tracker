@@ -15652,6 +15652,10 @@
           "confidence": "low"
         },
         {
+          "pattern": "^LIB\\d{9}YN$",
+          "confidence": "low"
+        },
+        {
           "pattern": "^JXC(?:YI|ZO|US|ZI)\\d{10}YQ$",
           "confidence": "low",
           "preferred": true
@@ -67513,6 +67517,84 @@
       ],
       "trackingSearchUrl": "https://the-tracking.com/",
       "helpUrl": "https://polexp.com/contacts.html"
+    },
+    "good-express-us": {
+      "displayName": "GOOD Express",
+      "aliases": [
+        "GOOD快递",
+        "goodkuaidi"
+      ],
+      "countries": [
+        "US",
+        "CN"
+      ],
+      "color": "#a93734",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "good-express-us",
+        "recognitionRank": 27
+      },
+      "trackingUrlTemplate": "https://www.goodkuaidi.com/TrackingInfo?TrackginNO={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "goodkuaidi.com"
+          ],
+          "pathPattern": "^/TrackingInfo/?$",
+          "params": [
+            "TrackginNO"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^GD\\d{11}US$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.goodkuaidi.com/",
+      "helpUrl": "https://www.goodkuaidi.com/Help?GID=DA8E7BEC-EA26-4536-B76F-EF056C673D86"
+    },
+    "swiss-universal-express": {
+      "displayName": "Swiss Universal Express",
+      "countries": [
+        "CH",
+        "FR",
+        "DE",
+        "IT",
+        "AT",
+        "BE",
+        "NL",
+        "LU",
+        "ES",
+        "GB"
+      ],
+      "color": "#75b7e1",
+      "selectable": true,
+      "timezone": "Europe/Zurich",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "swiss-universal-express",
+        "recognitionRank": 29
+      },
+      "trackingUrlTemplate": "https://swiss-universal-express.ch/tracking/{trackingNumber}?lang=en",
+      "linkRules": [
+        {
+          "domains": [
+            "swiss-universal-express.ch"
+          ],
+          "path": "^/tracking/(SUE\\d{13}[A-Z]{2})/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^SUE\\d{13}FR$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://swiss-universal-express.ch/tracking/?lang=en"
     }
   }
 }

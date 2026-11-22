@@ -165,8 +165,14 @@ helps, and `proxy_refused` for any other.
      numbers try Ship24 first, for its fuller Express histories. Dedicated adapters such as EMS
      still go first, and a provider the carrier's order leaves out stays out.
 
-For new lookups, the device region the iPhone and Android apps send takes precedence over a
-trusted Cloudflare `CF-IPCountry` header as a country hint.
+For new lookups, the country the client sends takes precedence over a trusted Cloudflare `CF-IPCountry` header as a
+country hint: the device region on the iPhone and Android apps, and on the web the country of the browser's time zone
+when one country keeps it (`timeZoneRegion`; any US zone names the US). The detection answer names the country it ranked
+carriers for (`lookupCountry`), and the Add sheet shows it while carriers are asked or none knows the number. The
+reader can pick another country there for that number alone: recognition runs again with it, and the parcel added
+from that sheet keeps it as its hint. It is never saved as a setting. A parcel added from a forwarded email or by an
+assistant comes with no request of the reader's, so it takes the hint of the account's newest parcel that has one
+(`accountLookupCountry`).
 A destination reported by a carrier takes precedence. The hint puts that country's carriers
 first when recognition asks carriers whether they know the number. It does not establish
 the carrier, set the delivery destination or change scan clocks, though it can name the post a
@@ -302,7 +308,8 @@ or not a check ran since ([`eventPlaces.ts`](../src/server/eventPlaces.ts)); the
 stored. A mobile number as dialled in the reader's country (`isPhoneNumber`) is no carrier's
 either: detecting or adding one is refused with the placeholder's error, so no provider is
 asked about it, and the web and front-door Add hold it back too. The server takes the country from the request
-(`lookupCountry`), the browser from its clock or languages.
+(`lookupCountry`), or the account's for a parcel added from a text (`accountLookupCountry`); the browser takes it from
+its clock or languages.
 
 A scan an adapter dates by its day alone, with no clock (NACEX's history), is stored as a
 row of that day anyway, in the carrier's order: a second after the scan before it when that

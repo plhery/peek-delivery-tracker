@@ -79,7 +79,7 @@ class ForgetAllRaceTest {
             read = { linkId, _ -> if (linkId == "22222222222C") PublicParcelResponse(link = owner(linkId), parcel = pkg(lost)) else null },
             forget = { link, _ -> deleted += link },
             update = { _, _, _ -> throw IOException("unused") },
-            detect = { _, _, _ -> throw IOException("unused") },
+            detect = { _, _, _, _ -> throw IOException("unused") },
             removeAlert = { _, _ -> slowAlert.await() },
         )
         return Setup(storage, client, slowAlert, lost)

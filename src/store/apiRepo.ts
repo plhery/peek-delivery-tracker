@@ -1,5 +1,6 @@
 import { detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
+import { timeZoneRegion } from '../lib/postcodeExample';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import { announcedMaintenance, deviceOnline, ServerDownError, serverDown, unanswered } from '../lib/maintenance';
 import type {
@@ -454,6 +455,7 @@ export function createApiRepo(
         dpdPostcode: input.dpdPostcode?.trim() || undefined,
         dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
         phoneDigits: input.phoneDigits?.trim() || undefined,
+        lookupCountryHint: input.lookupCountry ?? timeZoneRegion() ?? undefined,
       };
       const payload = await request<ApiCreatePackageResponse>('/api/packages', auth, {
         method: 'POST',

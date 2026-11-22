@@ -25,6 +25,11 @@ data class CarrierRecognition(
      * dashes and spaces, so the same number typed otherwise is asked about again.
      */
     val askedSpelling: String? = null,
+    /**
+     * The country the answer, or the failure, was asked for (`lookupCountryHint`): it decides which carriers are asked,
+     * so the same number asked for another country is asked about again.
+     */
+    val askedCountry: String? = null,
 ) {
     sealed interface Status {
         /** Nothing to report: the number is not settled, or needs no check. */
@@ -54,18 +59,21 @@ data class CarrierRecognition(
 
     /**
      * The number to ask about: the settled one, while it is still the number in the field and has no answer
-     * yet for the way it is typed (`spelling`).
+     * yet for the way it is typed (`spelling`) and the country it is asked for (`country`).
      */
-    fun request(number: String, spelling: String? = null, applies: Boolean): String? {
+    fun request(number: String, spelling: String? = null, applies: Boolean, country: String? = null): String? {
         if (!applies || number.isEmpty() || settledNumber != number) return null
-        if (askedSpelling == spelling && (answer?.trackingNumber == number || failedNumber == number)) return null
+        if (asked(spelling, country) && (answer?.trackingNumber == number || failedNumber == number)) return null
         return number
     }
 
-    /** Carrier attempt lists come from the server's answer, for the number as it is typed now (`spelling`). */
-    fun status(number: String, spelling: String? = null, applies: Boolean): Status {
+    /**
+     * Carrier attempt lists come from the server's answer, for the number as it is typed now (`spelling`) and the
+     * country it is asked for now (`country`).
+     */
+    fun status(number: String, spelling: String? = null, applies: Boolean, country: String? = null): Status {
         if (!applies || number.isEmpty()) return Status.Idle
-        if (askedSpelling != spelling) return if (settledNumber == number) Status.Asking(emptyList()) else Status.Idle
+        if (!asked(spelling, country)) return if (settledNumber == number) Status.Asking(emptyList()) else Status.Idle
         if (failedNumber == number) return Status.Failed(emptyList())
         val answer = answer
         if (answer == null || answer.trackingNumber != number) {
@@ -90,6 +98,9 @@ data class CarrierRecognition(
         if ((answer.unanswered?.size ?: 0) >= answered.size) return Status.Failed(answered)
         return Status.NotFound(answered)
     }
+
+    /** Whether the answer, or the failure, was asked with `spelling` for `country`. */
+    fun asked(spelling: String?, country: String?): Boolean = askedSpelling == spelling && askedCountry == country
 
     companion object {
         /**

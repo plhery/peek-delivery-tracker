@@ -181,6 +181,8 @@ export interface NewParcelInput {
   /** The postcode's country, sent only when it is not the carrier's home country. */
   dpdPostcodeCountry?: string;
   phoneDigits?: string;
+  /** The country the Add sheet looked the number up for, when the reader picked one for it (`lookupCountryHint`). */
+  lookupCountry?: string;
 }
 
 export interface ParcelCarrierInput {

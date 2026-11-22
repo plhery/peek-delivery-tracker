@@ -38,6 +38,7 @@ data class CarrierDetectionResponse(
     val unanswered: List<CarrierId>? = null,
     val providers: List<TrackingProviderCheck>? = null,
     val trackingFound: Boolean? = null,
+    val lookupCountry: String? = null,
     val inputSuggested: CarrierDetectionInputSuggested? = null,
 )
 

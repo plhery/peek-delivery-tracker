@@ -60,7 +60,7 @@ class AlertRoundForgetRoutesTest {
                 alerts -= linkId
             },
             update = { _, _, _ -> throw IOException("offline") },
-            detect = { _, _, _ -> throw IOException("offline") },
+            detect = { _, _, _, _ -> throw IOException("offline") },
             setAlert = { linkId, _, _ ->
                 if (linkId == held && !gate.isCompleted) gate.await()
                 if (linkId in deleted) {

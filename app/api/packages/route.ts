@@ -48,7 +48,8 @@ export const GET = apiRoute(async (context) => {
 
 export const POST = apiRoute(async (context) => {
   const { raw, value: body } = await readJsonBody(context.request);
-  const values = newPackageValues(body, lookupCountry(context.request, body.lookupCountryHint));
+  const country = lookupCountry(context.request, body.lookupCountryHint);
+  const values = newPackageValues(body, country);
   await checkAccountRequest(context.request, requireService(context), raw, 'account_lookup');
   // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
   const demo = reviewDemoCarrier(requireUser(context).id, values.trackingNumber);
@@ -88,7 +89,7 @@ export const POST = apiRoute(async (context) => {
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
   if (demo) return json({ package: await servedOwnParcel(client, parcel), jobIds: [] }, 201);
-  await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
+  await rememberLookupCountry(service, parcel, country, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));
   const jobIds = jobId ? [jobId] : [];

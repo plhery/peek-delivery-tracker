@@ -25,8 +25,20 @@
 .add-parcel-carrier__identity strong { font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
 .add-parcel-carrier__identity small { color: var(--ink-soft); font-size: 12px; }
 .add-parcel-carrier__identity small.is-attention { color: var(--ochre); }
-.add-parcel-carrier__change { flex-shrink: 0; max-width: 42%; padding-left: 8px; color: var(--ink-soft); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
-@media (hover: hover) { .add-parcel-carrier__line:hover .add-parcel-carrier__change { color: var(--ink); } }
+.add-parcel-carrier__line .add-parcel-carrier__detect svg { display: block; }
+.add-parcel-carrier__change { flex-shrink: 0; max-width: 42%; padding: 0 0 0 8px; background: transparent; color: var(--ink-soft); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+/* The line opens the picker wherever it is tapped: Change stretches over it, and the country named in it sits above. */
+.add-parcel-carrier__line--picker { position: relative; cursor: pointer; }
+.add-parcel-carrier__line--picker .add-parcel-carrier__change::after { content: ''; position: absolute; inset: 0; border-radius: 10px; }
+.add-parcel-carrier__line--picker .add-parcel-carrier__change:focus-visible { outline: none; }
+.add-parcel-carrier__line--picker .add-parcel-carrier__change:focus-visible::after { outline: 3px solid var(--blue); outline-offset: 4px; }
+.lookup-country { position: relative; z-index: 1; padding-block: 8px; margin-block: -8px; text-decoration: underline dotted; text-underline-offset: 3px; cursor: pointer; }
+.lookup-country select { position: absolute; inset: 0; width: 100%; opacity: 0; font-size: 16px; cursor: pointer; }
+.lookup-country:has(select:focus-visible) { border-radius: 4px; outline: 3px solid var(--blue); outline-offset: 2px; }
+@media (hover: hover) {
+  .add-parcel-carrier__line:hover .add-parcel-carrier__change { color: var(--ink); }
+  .lookup-country:hover { color: var(--ink); }
+}
 @media (prefers-reduced-motion: reduce) { .add-parcel-carrier__detect.is-busy svg { animation: none; opacity: .6; } }
 .add-parcel-carrier__hint { font-size: 12px; color: var(--orange-text); margin: 4px 0 0; }
 .add-parcel-carrier--account .add-parcel-carrier__hint { color: var(--ink-soft); }

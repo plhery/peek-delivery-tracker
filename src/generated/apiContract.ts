@@ -68136,6 +68136,7 @@ export interface ApiCarrierDetectionResponse {
   "unanswered"?: Array<ApiCarrierId>;
   "providers"?: Array<ApiTrackingProviderCheck>;
   "trackingFound"?: boolean;
+  "lookupCountry"?: string;
   "inputSuggested"?: {
   "carrier": ApiCarrierId;
   "field": "dpdPostcode";

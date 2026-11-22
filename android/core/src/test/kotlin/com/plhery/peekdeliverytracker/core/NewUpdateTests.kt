@@ -184,7 +184,7 @@ class NewUpdateTests {
         read = { _, _ -> read() },
         forget = { _, _ -> throw AssertionError("Unexpected forget") },
         update = { _, _, _ -> throw AssertionError("Unexpected update") },
-        detect = { _, _, _ -> throw AssertionError("Unexpected detection") },
+        detect = { _, _, _, _ -> throw AssertionError("Unexpected detection") },
     )
 
     private fun guestDevice(storage: MemoryDeviceParcelStorage, scope: CoroutineScope, read: () -> PublicParcelResponse? = { null }) =

@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggested
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggestedField
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -141,6 +142,142 @@ class ParcelAdditionTests {
         )
         assertEquals(localizer.text("add.historyFound"), history.lineDetail(localizer))
         assertEquals(localizer.text("add.historyFound"), history.automaticDescription(localizer))
+    }
+
+    /** The web's `lineCountry` and `askedFor`: the country the carriers were asked for, while none has the number. */
+    @Test
+    fun theLineNamesTheCountryTheCarriersWereAskedFor() {
+        val number = "12345478901"
+        val form = addition(number).copy(deviceLookupCountry = "CH").settling(number)
+        assertEquals("CH", form.recognitionQuestion?.lookupCountryHint)
+        assertNull(form.pickedLookupCountry)
+        val checking = localizer.text("add.checkingServices")
+        // While they are asked: the country they are asked for, its name where a tap picks another.
+        assertEquals("Switzerland: $checking", form.lineDetail(localizer))
+        assertEquals(ParcelAddition.CountrySentence("Switzerland: $checking", 0 until 11), form.lineSentence(localizer))
+        assertEquals("Switzerland: $checking", form.automaticDescription(localizer))
+
+        // Answered: the country the server ranked the carriers for.
+        val asked = form.recognition.copy(askedCountry = "CH")
+        val gls = listOf(CarrierId.GlsCh)
+        val none = form.copy(
+            recognition = asked.copy(answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = gls, lookupCountry = "DE")),
+        )
+        assertNull(none.recognitionQuestion)
+        assertEquals("Germany: ${localizer.text("add.line.none")}", none.lineDetail(localizer))
+        val noneDescription = localizer.text("picker.auto.none", mapOf("carriers" to none.carrierNames(gls, localizer)))
+        assertEquals("Germany: $noneDescription", none.automaticDescription(localizer))
+        // An answer that names none has no country to show.
+        val unnamed = form.copy(recognition = asked.copy(answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = gls)))
+        assertEquals(localizer.text("add.line.none"), unnamed.lineDetail(localizer))
+        assertNull(unnamed.lineSentence(localizer))
+        assertEquals(noneDescription, unnamed.automaticDescription(localizer))
+        // Failed: the country asked for.
+        val failed = form.copy(recognition = asked.copy(failedNumber = number))
+        assertEquals("Switzerland: ${localizer.text("add.line.failed")}", failed.lineDetail(localizer))
+        assertEquals("Switzerland: ${localizer.text("add.line.failed")}", failed.automaticDescription(localizer))
+
+        // Found, known to several, or found by tracking services: the country says nothing more.
+        val found = form.copy(recognition = asked.copy(answer = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = gls, lookupCountry = "CH")))
+        assertEquals(localizer.text("add.line.found"), found.lineDetail(localizer))
+        assertNull(found.askedFor)
+        val several = form.copy(
+            recognition = asked.copy(
+                answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, recognized = listOf(CarrierId.GlsCh, CarrierId.GlsDe), lookupCountry = "CH"),
+            ),
+        )
+        assertNull(several.lineSentence(localizer))
+        val history = form.copy(
+            recognition = asked.copy(
+                answer = CarrierDetectionResponse(
+                    number, carrier = CarrierId.Unknown, trackingFound = true, lookupCountry = "CH",
+                    providers = listOf(TrackingProviderCheck(provider = "service", outcome = TrackingProviderCheckOutcome.NoHistory)),
+                ),
+            ),
+        )
+        assertEquals(localizer.text("add.historyFound"), history.lineDetail(localizer))
+        assertEquals(localizer.text("add.historyFound"), history.automaticDescription(localizer))
+
+        // A carrier picked by hand: the line says so, and the picker's automatic row still names the country.
+        val chosen = form.copy(carrierOverride = CarrierId.Dpd)
+        assertNull(chosen.lineSentence(localizer))
+        assertEquals(localizer.text("add.line.chosen"), chosen.lineDetail(localizer))
+        assertEquals("Switzerland: $checking", chosen.automaticDescription(localizer))
+        // No country known, as a phone whose region names none: nothing named.
+        val nowhere = addition(number).settling(number)
+        assertNull(nowhere.recognitionQuestion?.lookupCountryHint)
+        assertEquals(checking, nowhere.lineDetail(localizer))
+        assertEquals(checking, nowhere.automaticDescription(localizer))
+    }
+
+    @Test
+    fun aPostalNumberNamesTheCountryButAnAmazonOrAShapedOneDoesNot() {
+        val postal = "RR123436785FI"
+        val form = addition(postal).copy(deviceLookupCountry = "CH").settling(postal)
+        assertEquals(CarrierId.InternationalPost, form.lineCarrier)
+        assertEquals("Switzerland: ${localizer.text("add.checkingServices")}", form.lineDetail(localizer))
+        val amazon = addition("FR4829173650").copy(deviceLookupCountry = "CH").settling("FR4829173650")
+        assertNull(amazon.askedFor)
+        assertNull(amazon.lineSentence(localizer))
+        val ups = addition("1Z999AA10123456784").copy(deviceLookupCountry = "CH").settling("1Z999AA10123456784")
+        assertNull(ups.lineSentence(localizer))
+        assertEquals(localizer.text("add.detectedCarrier"), ups.lineDetail(localizer))
+    }
+
+    @Test
+    fun aCountryPickedForTheNumberAsksAgainForItAloneAndGoesWithTheParcel() {
+        val number = "12345478901"
+        val answered = addition(number).copy(deviceLookupCountry = "CH").settling(number).let {
+            it.copy(
+                recognition = it.recognition.copy(
+                    askedCountry = "CH", answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsCh), lookupCountry = "CH"),
+                ),
+            )
+        }
+        assertNull(answered.recognitionQuestion)
+        val picked = answered.pickingCountry("FR")
+        assertEquals(ParcelAddition.PickedCountry(number, "FR"), picked.pickedCountry)
+        assertEquals("FR", picked.pickedLookupCountry)
+        assertEquals("FR", picked.sentLookupCountry)
+        // The Swiss answer says nothing for France: asked again, and the line waits for it.
+        assertEquals(CarrierDetectionRequest(number, lookupCountryHint = "FR"), picked.recognitionQuestion)
+        assertTrue(picked.checking)
+        assertEquals("France: ${localizer.text("add.checkingServices")}", picked.lineDetail(localizer))
+        // Another number goes back to the phone's country, and nothing picked goes with it.
+        val other = picked.typing("98765478901")
+        assertNull(other.pickedLookupCountry)
+        assertEquals("CH", other.sentLookupCountry)
+        // The country picked for the device's own is still the one picked.
+        assertEquals("CH", answered.pickingCountry("CH").pickedLookupCountry)
+        assertNull(answered.pickingCountry("CH").recognitionQuestion)
+    }
+
+    @Test
+    fun theCountrysNameStandsWhereEachLanguagePutsIt() {
+        val number = "12345478901"
+        val form = addition(number).copy(deviceLookupCountry = "CH").settling(number)
+        for (language in AppLanguage.entries) {
+            val localizer = Localizer(language)
+            val sentence = form.lineSentence(localizer)
+            assertNotNull(language.rawValue, sentence)
+            val name = TrackingLocation.countryName("CH", language)
+            assertEquals(language.rawValue, name, sentence!!.text.substring(sentence.country.first, sentence.country.last + 1))
+            assertEquals(
+                language.rawValue,
+                localizer.text("add.line.country", mapOf("country" to name, "text" to localizer.text("add.checkingServices"))),
+                sentence.text,
+            )
+        }
+    }
+
+    @Test
+    fun theCountriesOfferedLeadWithThePhonesThenEveryOtherByName() {
+        val choices = ParcelLookupCountry.choices("CH", AppLanguage.En)
+        assertEquals("CH", choices.first())
+        assertEquals(1, choices.count { it == "CH" })
+        assertEquals(CarrierCatalog.countries.toSet(), choices.toSet())
+        assertEquals(CarrierCatalog.countriesByName(AppLanguage.En).filter { it != "CH" }, choices.drop(1))
+        assertEquals(CarrierCatalog.countriesByName(AppLanguage.Fr), ParcelLookupCountry.choices(null, AppLanguage.Fr))
     }
 
     @Test

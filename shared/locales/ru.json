@@ -1099,6 +1099,8 @@
   "add.line.later": "Peek поищет после добавления",
   "add.line.change": "Изменить",
   "add.line.choose": "Выбрать",
+  "add.line.country": "{{country}}: {{text}}",
+  "add.lookupCountry": "Страна, для которой Peek ищет номер",
   "picker.search": "Поиск по службам доставки ({{count}})",
   "picker.searchLabel": "Поиск службы доставки",
   "picker.clear": "Очистить поиск",

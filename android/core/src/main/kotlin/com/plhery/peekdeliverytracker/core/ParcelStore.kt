@@ -664,10 +664,13 @@ class ParcelStore(
         device.postcodes.forget(postcode)
     }
 
-    /** `typed`: the number as typed, its dashes and spaces kept, which both services read beside it when it differs. */
-    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse {
-        if (isGuest) return device.detect(trackingNumber, typed)
-        return api.detectCarrier(trackingNumber, typed)
+    /**
+     * `typed`: the number as typed, its dashes and spaces kept, which both services read beside it when it differs.
+     * `country`: the country to ask the carriers for, picked on the Add sheet; else the device's.
+     */
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null, country: String? = null): CarrierDetectionResponse {
+        if (isGuest) return device.detect(trackingNumber, typed, country)
+        return api.detectCarrier(trackingNumber, typed, country)
     }
 
     val activeCount: Int
@@ -855,6 +858,7 @@ class ParcelStore(
         }
     }
 
+    /** `lookupCountry`: the country picked on the Add sheet for the number, which its lookups keep; else the device's. */
     suspend fun add(
         trackingNumber: String,
         label: String,
@@ -863,6 +867,7 @@ class ParcelStore(
         dpdPostcode: String?,
         dpdPostcodeCountry: String? = null,
         phoneDigits: String? = null,
+        lookupCountry: String? = null,
     ): Parcel {
         val generation = session.generation
         val request = CreatePackageRequest(
@@ -873,7 +878,7 @@ class ParcelStore(
             dpdPostcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty,
             dpdPostcodeCountry = dpdPostcodeCountry,
             phoneDigits = phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty,
-            lookupCountryHint = ParcelLookupCountry.hint(region()),
+            lookupCountryHint = lookupCountry ?: ParcelLookupCountry.hint(region()),
         )
         val parcel: Parcel
         if (isDemo) {

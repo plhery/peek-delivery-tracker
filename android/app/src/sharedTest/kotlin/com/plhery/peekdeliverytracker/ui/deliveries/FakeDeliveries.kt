@@ -425,6 +425,9 @@ class FakeDeliveries(
     /** The number as typed that went beside each one [detected]. */
     val detectedAsTyped = mutableListOf<String?>()
 
+    /** The country picked for the carriers to be asked for, beside each one [detected]: none for the phone's. */
+    val detectedCountries = mutableListOf<String?>()
+
     override suspend fun add(
         trackingNumber: String,
         label: String,
@@ -433,11 +436,12 @@ class FakeDeliveries(
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         phoneDigits: String?,
+        lookupCountry: String?,
     ): Parcel {
         adding?.await()
         verification?.token(VERIFICATION_PAGE)
         failure?.let { throw it }
-        additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits)
+        additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits, lookupCountry)
         val parcel = Parcel(
             id = addedId ?: UUID.randomUUID(), trackingNumber = CarrierCatalog.normalize(trackingNumber), label = label.trim(),
             carrier = carrier, createdAt = DateParser.isoString(now), syncStatus = SyncStatus.Pending, notificationsMuted = false,
@@ -447,9 +451,10 @@ class FakeDeliveries(
         return parcel
     }
 
-    override suspend fun detectCarrier(trackingNumber: String, typed: String?): CarrierDetectionResponse {
+    override suspend fun detectCarrier(trackingNumber: String, typed: String?, country: String?): CarrierDetectionResponse {
         detected += trackingNumber
         detectedAsTyped += typed
+        detectedCountries += country
         detecting?.await()
         return typed?.let(detectionsAsTyped::get) ?: detections[trackingNumber] ?: throw DeliveryApiError.InvalidResponse()
     }
@@ -770,7 +775,10 @@ class FakeDeliveries(
         val phoneDigits: String? = null,
     )
 
-    /** What an addition sent: the number, the name, the carrier, the link, the postcode, its country and the phone digits. */
+    /**
+     * What an addition sent: the number, the name, the carrier, the link, the postcode, its country, the phone digits
+     * and the country picked to look the number up for.
+     */
     data class AdditionRequest(
         val trackingNumber: String,
         val label: String,
@@ -779,6 +787,7 @@ class FakeDeliveries(
         val dpdPostcode: String?,
         val dpdPostcodeCountry: String?,
         val phoneDigits: String? = null,
+        val lookupCountry: String? = null,
     )
 
     private companion object {

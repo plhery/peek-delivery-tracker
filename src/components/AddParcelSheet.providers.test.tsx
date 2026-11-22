@@ -21,7 +21,7 @@ describe('automatic unknown-carrier lookup', () => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
     render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={trackingNumber} />, { wrapper: servingGuides });
-    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith(trackingNumber, apiAuth, expect.anything()));
+    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith(trackingNumber, apiAuth, expect.anything(), null));
     expect(await screen.findByRole('button', { name: new RegExp(`^${name} has this parcel`) })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
     expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ trackingNumber, carrier }));
@@ -124,7 +124,7 @@ describe('DPD carrier lookup', () => {
     const user = userEvent.setup();
     render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="0608 0000 0000 02" />, { wrapper: servingGuides });
     // As typed: detection reads the spaces and dashes some carriers' numbers are told apart by.
-    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith('0608 0000 0000 02', apiAuth, expect.anything()));
+    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith('0608 0000 0000 02', apiAuth, expect.anything(), null));
     await screen.findByRole('textbox', { name: /^Delivery postcode/ });
     expect(screen.getByText('DPD Switzerland')).toBeInTheDocument();
     const button = screen.getByRole('button', { name: /^add parcel$/i });
@@ -144,7 +144,7 @@ describe('DPD carrier lookup', () => {
     // Leaving the field settles the number.
     await user.tab();
     await waitFor(() => expect(lookupCarrier).toHaveBeenCalledOnce());
-    expect(lookupCarrier).toHaveBeenCalledWith('06080000000002', apiAuth, expect.anything());
+    expect(lookupCarrier).toHaveBeenCalledWith('06080000000002', apiAuth, expect.anything(), null);
     expect(await screen.findByRole('button', { name: /^DPD Switzerland has this parcel/ })).toBeInTheDocument();
   });
 

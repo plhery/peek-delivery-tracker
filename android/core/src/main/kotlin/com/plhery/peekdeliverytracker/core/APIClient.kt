@@ -201,6 +201,13 @@ object ParcelLookupCountry {
         if (!country.all { it in 'A'..'Z' } || country !in countries) return null
         return country
     }
+
+    /**
+     * The countries the Add sheet offers to look a number up for: [home], the device's ([hint]), first, then every
+     * other country the service takes, by its name in the language (the web's `LookupCountrySentence`).
+     */
+    fun choices(home: String?, language: AppLanguage): List<String> =
+        listOfNotNull(home) + CarrierCatalog.countriesByName(language).filter { it != home }
 }
 
 /**
@@ -408,12 +415,13 @@ class DeliveryApiClient(
         request("/api/packages?includeArchived=true", PackageListResponse.serializer()).packages
 
     /** `typed`: the number as typed, which goes beside it when it differs ([typedTrackingNumber]). */
-    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse = request(
+    /** The carrier check for the number, asked for [country], the one picked on the Add sheet, else the device's. */
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null, country: String? = null): CarrierDetectionResponse = request(
         "/api/carriers/detect", CarrierDetectionResponse.serializer(), "POST",
         encode(
             CarrierDetectionRequest.serializer(),
             CarrierDetectionRequest(
-                trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region()),
+                trackingNumber = trackingNumber, lookupCountryHint = country ?: ParcelLookupCountry.hint(region()),
                 typedNumber = typedTrackingNumber(typed, trackingNumber),
             ),
         ),

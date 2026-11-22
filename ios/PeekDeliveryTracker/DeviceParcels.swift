@@ -141,9 +141,9 @@ struct DeviceParcelClient: Sendable {
     var changeCarrier: @Sendable (_ linkID: String, _ key: String, ParcelLinkCarrierRequest) async throws -> PublicParcelResponse? = { _, _, _ in nil }
     /// Changes what the link shows to others, or stops and resumes its sharing.
     var update: @Sendable (_ linkID: String, _ key: String, UpdateParcelLinkRequest) async throws -> PublicParcelResponse
-    /// `typedNumber`: the number as typed, when it differs from the number itself. `prefixOfSaved`: the number is the
-    /// start of a longer one this iPhone follows, most likely that number typed again.
-    var detect: @Sendable (_ trackingNumber: String, _ typedNumber: String?, _ prefixOfSaved: Bool) async throws -> CarrierDetectionResponse
+    /// Which carrier knows a number, with its country hint, the number as typed when it differs from the number itself,
+    /// and `prefixOfSaved` when it is the start of a longer one this iPhone follows, most likely that number typed again.
+    var detect: @Sendable (CarrierDetectionRequest) async throws -> CarrierDetectionResponse
     /// What a reader says of the parcel behind a link. The owner key goes along when this iPhone holds it.
     var feedback: @Sendable (_ linkID: String, _ key: String?, ParcelFeedbackRequest) async throws -> Void = { _, _, _ in }
     /// Turns this iPhone's notifications on for the parcel behind a link, with the owner key when this iPhone holds it.
@@ -224,11 +224,8 @@ struct DeviceParcelClient: Sendable {
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicParcelResponse.self, data)
             },
-            detect: { trackingNumber, typedNumber, prefixOfSaved in
-                let body = try JSONEncoder.deliveryTracker.encode(CarrierDetectionRequest(
-                    trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint(), prefixOfSaved: prefixOfSaved ? true : nil,
-                    typedNumber: typedNumber
-                ))
+            detect: { request in
+                let body = try JSONEncoder.deliveryTracker.encode(request)
                 let (data, response) = try await send("api/public/detect", method: "POST", body: body)
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(CarrierDetectionResponse.self, data)
@@ -463,12 +460,16 @@ final class DeviceParcels {
         !entry.isFrozen && (Self.waiting(entry.parcel) || checking.contains(entry.linkID))
     }
 
-    func detect(trackingNumber: String, typedNumber: String? = nil) async throws -> CarrierDetectionResponse {
+    /// `lookupCountry`: a country picked for this number, in place of the device's.
+    func detect(trackingNumber: String, typedNumber: String? = nil, lookupCountry: String? = nil) async throws -> CarrierDetectionResponse {
         guard let client else { throw DeliveryAPIError.serviceFailed(503) }
         let prefixOfSaved = entries.contains {
             $0.parcel.trackingNumber.count > trackingNumber.count && $0.parcel.trackingNumber.hasPrefix(trackingNumber)
         }
-        return try await client.detect(trackingNumber, typedNumber, prefixOfSaved)
+        return try await client.detect(CarrierDetectionRequest(
+            trackingNumber: trackingNumber, lookupCountryHint: lookupCountry ?? ParcelLookupCountry.hint(),
+            prefixOfSaved: prefixOfSaved ? true : nil, typedNumber: typedNumber
+        ))
     }
 
     func add(_ request: CreatePackageRequest) async throws -> Parcel {

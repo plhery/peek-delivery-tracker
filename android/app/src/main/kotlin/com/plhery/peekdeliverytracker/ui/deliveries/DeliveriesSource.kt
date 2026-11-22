@@ -199,7 +199,7 @@ interface DeliveriesSource {
 
     /**
      * `store.add(trackingNumber:label:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:phoneDigits:)`: the parcel
-     * added, once [parcels] holds it.
+     * added, once [parcels] holds it. `lookupCountry`: the country picked on Add for the number; none for the phone's.
      */
     suspend fun add(
         trackingNumber: String,
@@ -209,13 +209,15 @@ interface DeliveriesSource {
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         phoneDigits: String? = null,
+        lookupCountry: String? = null,
     ): Parcel
 
     /**
      * `store.detectCarrier(trackingNumber:)`: which carrier knows the number, the account's or this phone's lookup.
-     * `typed`: the number as typed, whose dashes and spaces tell some carriers' numbers apart.
+     * `typed`: the number as typed, whose dashes and spaces tell some carriers' numbers apart. `country`: the country
+     * to ask the carriers for, picked on Add; none for the phone's.
      */
-    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null, country: String? = null): CarrierDetectionResponse
 
     /** `store.givenPostcodes`: the postcodes Add and Change carrier suggest, the parcels' newest first, then this phone's. */
     val givenPostcodes: List<GivenPostcode>
@@ -574,10 +576,11 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         dpdPostcode: String?,
         dpdPostcodeCountry: String?,
         phoneDigits: String?,
-    ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits)
+        lookupCountry: String?,
+    ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, phoneDigits, lookupCountry)
 
-    override suspend fun detectCarrier(trackingNumber: String, typed: String?): CarrierDetectionResponse =
-        container.parcels.detectCarrier(trackingNumber, typed)
+    override suspend fun detectCarrier(trackingNumber: String, typed: String?, country: String?): CarrierDetectionResponse =
+        container.parcels.detectCarrier(trackingNumber, typed, country)
 
     override val givenPostcodes: List<GivenPostcode> get() = container.parcels.givenPostcodes
 

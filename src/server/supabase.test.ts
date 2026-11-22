@@ -1156,6 +1156,18 @@ describe('delivery emails', () => {
     expect(new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams.get('user_id')).toBe('eq.account');
   });
 
+  it('reads the lookup country of the account\'s newest parcel that has one', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ country: 'CH' }]).mockResolvedValueOnce([]);
+    await expect(client.latestLookupCountry('account')).resolves.toBe('CH');
+    await expect(client.latestLookupCountry('account')).resolves.toBeNull();
+    const search = new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams;
+    expect(Object.fromEntries(search)).toEqual({
+      select: 'country:carrier_data->>lookup_country_hint', user_id: 'eq.account',
+      'carrier_data->>lookup_country_hint': 'not.is.null', order: 'created_at.desc', limit: '1',
+    });
+  });
+
   it('reads no time zone for an account whose saves sent none', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     vi.spyOn(client, 'request').mockResolvedValueOnce([{ timezone: 'America/New_York', timezone_chosen: true }])

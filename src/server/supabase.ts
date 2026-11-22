@@ -1768,6 +1768,19 @@ export class SupabaseServiceClient extends SupabaseClient {
     return parcel ? withReviewDemo(parcel, userId) : null;
   }
 
+  /** The lookup country (`lookup_country_hint`) of the account's latest parcel that has one. */
+  async latestLookupCountry(userId: string): Promise<string | null> {
+    const params = query({
+      select: 'country:carrier_data->>lookup_country_hint',
+      user_id: `eq.${userId}`,
+      'carrier_data->>lookup_country_hint': 'not.is.null',
+      order: 'created_at.desc',
+      limit: '1',
+    });
+    const country = rows(await this.request(`/rest/v1/packages?${params}`))[0]?.country;
+    return typeof country === 'string' ? country : null;
+  }
+
   /** The timezone the account chose for its notifications, or null when it chose none. */
   async accountTimeZone(userId: string): Promise<string | null> {
     const params = query({ select: 'timezone,timezone_chosen', user_id: `eq.${userId}`, limit: '1' });

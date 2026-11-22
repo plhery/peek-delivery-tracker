@@ -81,7 +81,7 @@ class ForgottenFollowedParcelRoutesTest {
         read = { _, _ -> throw IOException("offline") },
         forget = { _, _ -> throw IOException("offline") },
         update = { _, _, _ -> throw IOException("offline") },
-        detect = { _, _, _ -> throw IOException("offline") },
+        detect = { _, _, _, _ -> throw IOException("offline") },
         removeAlert = { _, _ -> throw IOException("offline") },
     )
 
@@ -97,7 +97,7 @@ class ForgottenFollowedParcelRoutesTest {
         },
         forget = { _, _ -> },
         update = { _, _, _ -> throw IOException("unused") },
-        detect = { _, _, _ -> throw IOException("unused") },
+        detect = { _, _, _, _ -> throw IOException("unused") },
         removeAlert = { _, _ -> },
     )
 

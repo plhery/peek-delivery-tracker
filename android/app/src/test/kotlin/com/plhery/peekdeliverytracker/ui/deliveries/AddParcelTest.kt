@@ -17,6 +17,7 @@ import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.platform.LocalDensity
@@ -37,6 +38,7 @@ import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getAlignmentLinePosition
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -78,6 +80,8 @@ import com.plhery.peekdeliverytracker.core.DeviceLookupsSpent
 import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
+import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggested
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -86,6 +90,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -187,6 +192,13 @@ class AddParcelTest {
     }
 
     private fun text(key: String, variables: Map<String, Any> = emptyMap()) = localizer.text(key, variables)
+
+    /** The phone's country, which the carriers are asked for unless another is picked; none where its region names none. */
+    private val deviceCountry: String? get() = ParcelLookupCountry.hint(Device.region())
+
+    /** `detail` after `country`'s name, as the carrier line says what the carriers asked for it found. */
+    private fun asked(detail: String, country: String? = deviceCountry): String =
+        country?.let { text("add.line.country", mapOf("country" to TrackingLocation.countryName(it, AppLanguage.En), "text" to detail)) } ?: detail
 
     private fun exists(tag: String): Boolean = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
 
@@ -471,7 +483,7 @@ class AddParcelTest {
         leave()
         assertEquals(listOf(number), source.detected)
         assertTrue(exists(ADD_CHECKING))
-        assertEquals("${text("add.detect")}, ${text("add.checkingServices")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${asked(text("add.checkingServices"))}, ${text("add.line.change")}", description(ADD_CARRIER))
         // The check never holds Add.
         node(ADD_SAVE).assertIsEnabled()
         assertEquals(emptyList<Int>(), ticking.played)
@@ -488,6 +500,82 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", CarrierId.GlsCh, null, "8000", null)), source.additions)
+    }
+
+    /**
+     * The country the carriers were asked for, named on the line, picked as TalkBack does, from the line's actions: the
+     * carriers are asked again for it, for this number alone, it stays through the window made again with nothing asked
+     * twice, and the parcel added keeps it.
+     */
+    @Test
+    fun aCountryPickedOnTheLineAsksTheCarriersAgainForItAndGoesWithTheParcel() {
+        val number = "12345478901"
+        val recreation = Recreation(compose)
+        show(recreation = recreation) {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsCh), lookupCountry = "CH")
+        }
+        open()
+        type(number)
+        leave()
+        assertEquals(listOf(deviceCountry), source.detectedCountries)
+        assertEquals("${text("add.detect")}, ${asked(text("add.line.none"), "CH")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        val action = node(ADD_CARRIER).fetchSemanticsNode().config[SemanticsActions.CustomActions].single()
+        assertEquals(text("add.lookupCountry"), action.label)
+        compose.runOnUiThread { action.action() }
+        settle()
+        // The phone's country leads the menu.
+        deviceCountry?.let { assertTrue(exists(lookupCountryTag(it))) }
+        node(lookupCountryTag("DE")).performScrollTo().performClick()
+        settle()
+        assertFalse(exists(ADD_PICKER))
+        assertEquals(listOf(deviceCountry, "DE"), source.detectedCountries)
+
+        recreation.recreate(parceled = true)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(listOf(deviceCountry, "DE"), source.detectedCountries)
+        node(ADD_SAVE).performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.AdditionRequest(number, "", CarrierId.Unknown, null, null, null, lookupCountry = "DE")),
+            source.additions,
+        )
+    }
+
+    /** A tap on the country's name opens its menu; the rest of the line still opens the picker. */
+    @Test
+    fun aTapOnTheCountrysNameOpensItsMenuAndTheRestOfTheLineThePicker() {
+        val number = "12345478901"
+        show {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsCh), lookupCountry = "CH")
+        }
+        open()
+        type(number)
+        leave()
+        compose.onNodeWithTag(ADD_LINE_DETAIL, useUnmergedTree = true).performTouchInput { click(Offset(2f, height / 2f)) }
+        settle()
+        assertTrue(exists(lookupCountryTag("CH")))
+        assertFalse(exists(ADD_PICKER))
+        node(lookupCountryTag("FR")).performScrollTo().performClick()
+        settle()
+        assertEquals(listOf(deviceCountry, "FR"), source.detectedCountries)
+        assertFalse(exists(lookupCountryTag("CH")))
+
+        node(ADD_CARRIER).performClick()
+        settle()
+        assertTrue(exists(ADD_PICKER))
+    }
+
+    /** Nothing is picked for a number the line names no country for: the parcel goes with the phone's, as before. */
+    @Test
+    fun aParcelAddedWithNoCountryPickedSendsNone() {
+        show()
+        open()
+        type("1Z999AA10123456784")
+        assertFalse(exists(lookupCountryTag("CH")))
+        node(ADD_SAVE).performClick()
+        settle()
+        assertEquals(null, source.additions.single().lookupCountry)
     }
 
     /** As the web's sheet asks: the number as typed goes too, its dash telling an R+L PRO number apart. */
@@ -776,7 +864,7 @@ class AddParcelTest {
         open()
         type(number)
         leave()
-        assertEquals("${text("add.detect")}, ${text("add.line.failed")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${asked(text("add.line.failed"))}, ${text("add.line.change")}", description(ADD_CARRIER))
         assertEquals(text("add.line.change"), clickLabel(ADD_CARRIER))
         node(ADD_SAVE).assertIsEnabled()
         type("$number ")

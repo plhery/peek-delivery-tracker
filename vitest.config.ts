@@ -1,6 +1,10 @@
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
 
+// Tests run in UTC, as CI's runners do: the browser clock then names no country (timeZoneRegion) unless a test
+// sets a time zone.
+process.env.TZ = 'UTC';
+
 export default defineConfig({
   resolve: {
     // Next.js replaces this marker at build time. Tests intentionally exercise

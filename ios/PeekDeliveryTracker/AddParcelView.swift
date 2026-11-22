@@ -59,6 +59,9 @@ struct AddParcelView: View {
     @State private var lookupAttempt = 0
     @State private var verifiedCarrier: CarrierDetectionResponse?
     @State private var recognition: CarrierRecognition
+    /// The carriers are asked as from the device's region; the reader can pick another country for a number, and the
+    /// parcel added from here keeps it. It is never saved as a setting.
+    @State private var pickedCountry: (number: String, country: String)?
     @State private var refusedQuestion: NumberRefusalRequest?
     /// The number whose check digit was questioned and then added as typed.
     @State private var asTyped: String?
@@ -227,9 +230,11 @@ struct AddParcelView: View {
                 recognition.failedNumber = nil
                 recognition.answer = nil
                 recognition.askedSpelling = question.typedNumber
+                recognition.askedCountry = question.lookupCountryHint
                 do {
                     // As typed: its dashes and spaces tell some carriers' numbers apart.
-                    let result = try await store.detectCarrier(trackingNumber: number, typed: question.typedNumber)
+                    let result = try await store.detectCarrier(trackingNumber: number, typed: question.typedNumber,
+                                                               lookupCountry: question.lookupCountryHint)
                     guard !Task.isCancelled else { return }
                     guard result.trackingNumber == number else { throw DeliveryAPIError.invalidResponse }
                     recognition.answer = result
@@ -600,11 +605,13 @@ struct AddParcelView: View {
 
     /// One quiet line under the number: the carrier once one is known, and
     /// otherwise what the carrier check has found so far. It opens the picker.
+    /// While the line names the country the carriers are asked for, that country's menu sits beside its words.
     private var carrierLine: some View {
         let carrier = lineCarrier
         let name = carrier.map { catalog.info(for: $0, language: localizer.language).displayName }
             ?? localizer.text("add.detect")
         let detail = lineDetail
+        let country = detail == nil ? nil : lineCountry
         return Button {
             // Leaving the field settles the number, so the check starts as the picker opens.
             focusedField = nil
@@ -627,8 +634,15 @@ struct AddParcelView: View {
                 if dynamicTypeSize.isAccessibilitySize {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(name).font(.subheadline.weight(.medium))
-                        lineDetailText(detail)
+                        lineDetailText(detail, country: country)
                         lineAction
+                    }
+                } else if country != nil {
+                    // With the country's menu beside them, the words always go under the name: a line fitted one of
+                    // two ways would leave the menu's place uncertain.
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(name).font(.subheadline.weight(.medium))
+                        lineDetailText(detail, country: country)
                     }
                 } else {
                     ViewThatFits(in: .horizontal) {
@@ -659,6 +673,17 @@ struct AddParcelView: View {
         ].compactMap { $0 })
         .accessibilityIdentifier("addParcel.carrier")
         .disabled(amazonNumber)
+        // The menu is drawn over the button, at the place kept for it beside the words, rather than inside its label:
+        // a tap on it opens the menu, and anywhere else on the line the picker.
+        .overlayPreferenceValue(LookupCountryPlace.self) { place in
+            if let place, let country {
+                GeometryReader { geometry in
+                    let frame = geometry[place]
+                    LookupCountryMenu(country: country, home: ParcelLookupCountry.hint(), choose: pickCountry)
+                        .position(x: frame.midX, y: frame.midY)
+                }
+            }
+        }
     }
 
     /// Says that the line opens the picker. An Amazon number keeps its carrier.
@@ -672,13 +697,25 @@ struct AddParcelView: View {
         }
     }
 
+    /// The line's words, and before them the place kept for the menu of the `country` they name.
     @ViewBuilder
-    private func lineDetailText(_ detail: String?) -> some View {
+    private func lineDetailText(_ detail: String?, country: String? = nil) -> some View {
         if let detail {
-            Text(detail)
+            let text = Text(detail)
                 .font(.caption)
                 .foregroundStyle(choosingCarrier || refused ? ExperimentalPalette.ochre : Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
+            if let country {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    LookupCountryMenu.label(country)
+                        .anchorPreference(key: LookupCountryPlace.self, value: .bounds) { $0 }
+                        .opacity(0)
+                        .accessibilityHidden(true)
+                    text
+                }
+            } else {
+                text
+            }
         }
     }
 
@@ -976,15 +1013,23 @@ struct AddParcelView: View {
         CarrierDetectionRequest.typedNumber(parsed.trackingNumber, for: normalizedNumber)
     }
 
-    /// The check to run: the number, and its spelling, so that the same number typed otherwise is asked about again
-    /// and an answer for the earlier spelling never lands on it.
+    /// The country picked for the number in the field, which the parcel added from here keeps.
+    private var pickedLookupCountry: String? {
+        pickedCountry?.number == normalizedNumber ? pickedCountry?.country : nil
+    }
+
+    /// The country the carriers are asked for: the one picked for this number, else the device's region.
+    private var sentCountry: String? { pickedLookupCountry ?? ParcelLookupCountry.hint() }
+
+    /// The check to run: the number, its spelling and its country, so that the same number typed otherwise or asked
+    /// for another country is asked about again and an earlier answer never lands on it.
     private var recognitionQuestion: CarrierDetectionRequest? {
-        recognition.request(for: normalizedNumber, spelling: typedSpelling, applies: recognizable)
-            .map { CarrierDetectionRequest(trackingNumber: $0, typedNumber: typedSpelling) }
+        recognition.request(for: normalizedNumber, spelling: typedSpelling, country: sentCountry, applies: recognizable)
+            .map { CarrierDetectionRequest(trackingNumber: $0, lookupCountryHint: sentCountry, typedNumber: typedSpelling) }
     }
 
     private var recognitionStatus: CarrierRecognition.Status {
-        recognition.status(for: normalizedNumber, spelling: typedSpelling, applies: recognizable)
+        recognition.status(for: normalizedNumber, spelling: typedSpelling, country: sentCountry, applies: recognizable)
     }
 
     private var checking: Bool {
@@ -1010,7 +1055,7 @@ struct AddParcelView: View {
     /// What tracking services said about the number in the field while no carrier knows it.
     private var preflightDetail: String? {
         guard recognizable, let answer = recognition.answer, answer.trackingNumber == normalizedNumber,
-              recognition.askedSpelling == typedSpelling,
+              recognition.askedSpelling == typedSpelling, recognition.askedCountry == sentCountry,
               answer.carrier == .unknown else { return nil }
         if answer.trackingFound == true { return localizer.text("add.historyFound") }
         if answer.providers?.contains(where: { $0.outcome == .inputRequired }) == true { return localizer.text("add.providerInputNeeded") }
@@ -1028,12 +1073,32 @@ struct AddParcelView: View {
         refusalQuestion != nil && refusedQuestion == refusalQuestion
     }
 
+    /// The country the carriers are asked for while it decides what the check says, which the line and the picker name.
+    private var countryAskedFor: String? {
+        recognition.countryAsked(for: normalizedNumber, spelling: typedSpelling, country: sentCountry, applies: recognizable,
+                                 preflight: preflightDetail != nil)
+    }
+
+    /// The country the line names, with its menu to pick another: while the carrier is left automatic and the line shows
+    /// no carrier from the number's shape.
+    private var lineCountry: String? {
+        carrierOverride == nil && !amazonNumber && !(lineCarrier != nil && lineCarrier != .internationalPost) ? countryAskedFor : nil
+    }
+
+    /// The words with the country the carriers are asked for before them, when one is known.
+    private func withCountry(_ text: String, _ country: String?) -> String {
+        guard let country else { return text }
+        return localizer.text("add.line.country", [
+            "country": TrackingLocation.countryName(country, language: localizer.language), "text": text,
+        ])
+    }
+
     private var lineDetail: String? {
         if carrierOverride != nil { return localizer.text(refused ? "add.line.refused" : "add.line.chosen") }
         if case .recognized = recognitionStatus { return localizer.text("add.line.found") }
         if let preflightDetail { return preflightDetail }
         if amazonNumber || (lineCarrier != nil && lineCarrier != .internationalPost) { return localizer.text("add.detectedCarrier") }
-        return switch recognitionStatus {
+        let detail: String? = switch recognitionStatus {
         case .asking: localizer.text("add.checkingServices")
         case .several(let carriers): localizer.text("add.line.several", ["carriers": carrierNames(carriers)])
         case .notFound: localizer.text("add.line.none")
@@ -1041,9 +1106,12 @@ struct AddParcelView: View {
         case .unasked: localizer.text("add.line.later")
         case .idle, .recognized: nil
         }
+        return detail.map { withCountry($0, lineCountry) }
     }
 
-    private var automaticDescription: String {
+    private var automaticDescription: String { withCountry(statusDescription, countryAskedFor) }
+
+    private var statusDescription: String {
         if let preflightDetail { return preflightDetail }
         switch recognitionStatus {
         case .asking: return localizer.text("add.checkingServices")
@@ -1131,7 +1199,7 @@ struct AddParcelView: View {
     /// postcode: its postcode field shows while the carrier is left automatic.
     private var suggestion: SuggestedPostcodeCarrier? {
         SuggestedPostcodeCarrier(picked: carrierOverride, shape: parsed.carrier, recognition: recognition, number: normalizedNumber,
-                                 spelling: typedSpelling, applies: recognizable, catalog: catalog)
+                                 spelling: typedSpelling, country: sentCountry, applies: recognizable, catalog: catalog)
     }
 
     /// The carrier the fields are for: the suggested one, otherwise the parcel's.
@@ -1247,11 +1315,17 @@ struct AddParcelView: View {
             carrierOverride = nil
             asTyped = nil
             pick = nil
+            pickedCountry = nil
             postcodes = CarrierPostcodes()
             phoneInput = ParcelPhoneInput()
         }
         recognition.settledNumber = Self.trackingNumber(in: draft.trackingInput)
         prepareRequiredDetails(for: inputCarrier)
+    }
+
+    /// Asks the carriers about the number in the field again as from another country, for this number only.
+    private func pickCountry(_ country: String) {
+        pickedCountry = (normalizedNumber, country)
     }
 
     private func selectCarrier(_ carrier: CarrierID?) {
@@ -1322,7 +1396,8 @@ struct AddParcelView: View {
                     dpdPostcode: added.postcode,
                     dpdPostcodeCountry: added.country,
                     // Only while the carrier asks for them.
-                    phoneDigits: phoneDigitsRequirement.flatMap { $0.normalizedValue(phoneDigits).nonEmpty }
+                    phoneDigits: phoneDigitsRequirement.flatMap { $0.normalizedValue(phoneDigits).nonEmpty },
+                    lookupCountry: pickedLookupCountry
                 )
                 onAdded(parcel.id)
                 dismiss()
@@ -1482,12 +1557,12 @@ struct SuggestedPostcodeCarrier: Equatable {
 
     /// Only while the carrier is left automatic (`picked` nil) for a number whose shape names none (`shape`), once the
     /// check has settled without a carrier: nobody knew the number, nothing could be asked, or the check failed.
-    /// `number`, `spelling` and `applies` are as `CarrierRecognition.status` takes them.
+    /// `number`, `spelling`, `country` and `applies` are as `CarrierRecognition.status` takes them.
     init?(picked: CarrierID?, shape: CarrierID, recognition: CarrierRecognition, number: String, spelling: String? = nil,
-          applies: Bool, catalog: CarrierCatalog = .shared) {
+          country: String? = nil, applies: Bool, catalog: CarrierCatalog = .shared) {
         guard picked == nil, shape == .unknown, let answer = recognition.answer, answer.trackingNumber == number,
               let suggested = answer.inputSuggested, suggested.field == .dpdPostcode else { return nil }
-        switch recognition.status(for: number, spelling: spelling, applies: applies) {
+        switch recognition.status(for: number, spelling: spelling, country: country, applies: applies) {
         case .unasked, .notFound, .failed: break
         case .idle, .asking, .recognized, .several: return nil
         }
@@ -1554,6 +1629,66 @@ struct PostcodeCountryMenu: View {
         ForEach(countries, id: \.self) { code in
             Text(TrackingLocation.flag(code) + " " + TrackingLocation.countryName(code, language: localizer.language)).tag(code)
         }
+    }
+}
+
+/// The country the carriers are asked for, beside the words of the Add sheet's carrier line that name it: its flag,
+/// opening on the device's country, then every other by name. Picking one asks again, for this number only.
+struct LookupCountryMenu: View {
+    let country: String
+    /// The device's country, first in the list.
+    let home: String?
+    let choose: (String) -> Void
+
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        Menu {
+            Picker(localizer.text("add.lookupCountry"), selection: Binding(get: { country }, set: choose)) {
+                if let home { Section { option(home) } }
+                Section {
+                    ForEach(CarrierCatalog.countriesByName(in: localizer.language).filter { $0 != home }, id: \.self) { option($0) }
+                }
+            }
+        } label: {
+            // A larger target than the flag, centred on the place kept for it.
+            Self.label(country)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 8)
+                .contentShape(Rectangle())
+        }
+        .tint(Brand.secondaryText)
+        #if os(macOS)
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .menuIndicator(.hidden)
+        #endif
+        .accessibilityLabel(localizer.text("add.lookupCountry"))
+        .accessibilityValue(TrackingLocation.countryName(country, language: localizer.language))
+    }
+
+    /// The country's flag and the sign that it opens a list, as small and quiet as the words beside it.
+    static func label(_ country: String) -> some View {
+        HStack(spacing: 2) {
+            Text(TrackingLocation.flag(country))
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.caption2.weight(.semibold))
+        }
+        .font(.caption)
+        .foregroundStyle(Brand.secondaryText)
+    }
+
+    private func option(_ code: String) -> some View {
+        Text(TrackingLocation.flag(code) + " " + TrackingLocation.countryName(code, language: localizer.language)).tag(code)
+    }
+}
+
+/// Where the carrier line keeps room for the country's menu, which is drawn over the line rather than inside its button.
+private struct LookupCountryPlace: PreferenceKey {
+    static var defaultValue: Anchor<CGRect>? { nil }
+
+    static func reduce(value: inout Anchor<CGRect>?, nextValue: () -> Anchor<CGRect>?) {
+        value = value ?? nextValue()
     }
 }
 

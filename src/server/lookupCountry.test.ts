@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { lookupCountry, rememberLookupCountry } from './lookupCountry';
+import { accountLookupCountry, lookupCountry, rememberLookupCountry, withLookupCountry } from './lookupCountry';
 import * as observability from './observability';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -19,14 +19,12 @@ describe('lookup country hint', () => {
     expect(lookupCountry(request('FR'))).toBeNull();
   });
 
-  it('persists only the country before queueing, without setting the destination or retaining the IP', async () => {
-    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
+  it('persists only the country before queueing, without setting the destination', async () => {
     const updatePackage = vi.fn().mockResolvedValue(undefined);
     const service = { updatePackage } as unknown as SupabaseServiceClient;
     const parcel: JsonObject = { id: 'parcel', carrier_data: { routing: { version: 1 } } };
-    await rememberLookupCountry(service, parcel, request('FR'));
+    await rememberLookupCountry(service, parcel, 'FR');
     expect(updatePackage).toHaveBeenCalledExactlyOnceWith('parcel', { carrier_data: { routing: { version: 1 }, lookup_country_hint: 'FR', add_recognition_pending: true } });
-    expect(JSON.stringify(parcel)).not.toContain('198.51.100.7');
     expect(parcel.carrier_data).not.toHaveProperty('destination_country');
   });
 
@@ -41,17 +39,37 @@ describe('lookup country hint', () => {
   it('marks a new addition even when it has no country hint', async () => {
     const updatePackage = vi.fn().mockResolvedValue(undefined);
     const parcel: JsonObject = { id: 'parcel', carrier_data: {} };
-    await rememberLookupCountry({ updatePackage } as unknown as SupabaseServiceClient, parcel, request());
+    await rememberLookupCountry({ updatePackage } as unknown as SupabaseServiceClient, parcel, null);
     expect(updatePackage).toHaveBeenCalledExactlyOnceWith('parcel', { carrier_data: { add_recognition_pending: true } });
   });
 
   it('continues without a hint when the optional persistence fails', async () => {
-    vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
     const report = vi.spyOn(observability, 'captureOperationalError').mockImplementation(() => null);
     const service = { updatePackage: vi.fn().mockRejectedValue(new SupabaseError('unavailable')) } as unknown as SupabaseServiceClient;
     const parcel: JsonObject = { id: 'parcel', carrier_data: {} };
-    await rememberLookupCountry(service, parcel, request('FR'));
+    await rememberLookupCountry(service, parcel, 'FR');
     expect(parcel.carrier_data).toEqual({});
     expect(report).toHaveBeenCalledOnce();
+  });
+
+  it('names the country a detection answer ranked carriers for, when one is known', () => {
+    const answer = { trackingNumber: '1Z999AA10123456784', carrier: 'ups' as const };
+    expect(withLookupCountry(answer, 'CH')).toEqual({ ...answer, lookupCountry: 'CH' });
+    expect(withLookupCountry(answer, null)).toEqual(answer);
+  });
+
+  it('takes the country of the account\'s latest parcel that has one, and none when the read fails', async () => {
+    const latestLookupCountry = vi.fn().mockResolvedValueOnce('fr').mockResolvedValueOnce(null).mockResolvedValueOnce('EU');
+    const service = { latestLookupCountry } as unknown as SupabaseServiceClient;
+    expect(await accountLookupCountry(service, 'user')).toBe('FR');
+    expect(await accountLookupCountry(service, 'user')).toBeNull();
+    expect(await accountLookupCountry(service, 'user')).toBeNull();
+    expect(latestLookupCountry).toHaveBeenCalledWith('user');
+    const report = vi.spyOn(observability, 'captureOperationalError').mockImplementation(() => null);
+    latestLookupCountry.mockRejectedValueOnce(new SupabaseError('unavailable'));
+    expect(await accountLookupCountry(service, 'user')).toBeNull();
+    expect(report).toHaveBeenCalledOnce();
+    latestLookupCountry.mockRejectedValueOnce(new TypeError('bug'));
+    await expect(accountLookupCountry(service, 'user')).rejects.toThrow(TypeError);
   });
 });

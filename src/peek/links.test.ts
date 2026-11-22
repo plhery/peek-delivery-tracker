@@ -167,6 +167,22 @@ describe('the API backend', () => {
     expect(new Headers(init!.headers).has('X-Parcel-Key')).toBe(false);
   });
 
+  it('sends the browser clock\'s country with a lookup, a carrier change and a detection, when one country keeps that clock', async () => {
+    const clock = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'Europe/Zurich' });
+    onTestFinished(() => clock.mockRestore());
+    const { links, request } = api(json(owner, 201), json(owner), json({ trackingNumber: '1234567899', carrier: 'dhl' }));
+    await links.lookupParcel({ trackingNumber: 'TESTPARCEL983456' });
+    await links.changeParcelCarrier(ID, KEY, { trackingNumber: 'TESTPARCEL983456', carrier: 'ups' });
+    await links.detectCarrierPublic('1234567899');
+    expect(request.mock.calls.map(([, init]) => JSON.parse(String(init!.body)).lookupCountryHint)).toEqual(['CH', 'CH', 'CH']);
+    // A clock several countries keep names none: the server takes the IP's.
+    clock.mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'America/Toronto' });
+    const { links: other, request: otherRequest } = api(json(owner, 201));
+    await other.lookupParcel({ trackingNumber: 'TESTPARCEL983456' });
+    expect(JSON.parse(String(otherRequest.mock.calls[0][1]!.body))).not.toHaveProperty('lookupCountryHint');
+  });
+
   it('sends the carrier a number’s shape says when none was chosen', async () => {
     const { links, request } = api(json(owner, 201));
     await links.lookupParcel({ trackingNumber: '993411111122222222' });

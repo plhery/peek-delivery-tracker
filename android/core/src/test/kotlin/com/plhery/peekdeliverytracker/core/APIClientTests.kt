@@ -313,6 +313,22 @@ class APIClientTests {
         }
     }
 
+    /** The country picked on Add for the number replaces the device's, for that check alone. */
+    @Test
+    fun aDetectionSendsTheCountryPickedForTheNumberInsteadOfTheDevicesRegion() = runTest {
+        val transport = serving(
+            jsonResponse(200, """{"trackingNumber":"SYNTHETIC123","carrier":"unknown","lookupCountry":"FR"}"""),
+            jsonResponse(200, """{"trackingNumber":"SYNTHETIC123","carrier":"unknown","lookupCountry":"DE"}"""),
+        )
+        val client = client(transport, TestSession())
+        assertEquals("FR", client.detectCarrier("SYNTHETIC123", country = "FR").lookupCountry)
+        client.detectCarrier("SYNTHETIC123")
+        assertEquals(
+            listOf("""{"lookupCountryHint":"FR","trackingNumber":"SYNTHETIC123"}""", """{"lookupCountryHint":"DE","trackingNumber":"SYNTHETIC123"}"""),
+            transport.requests.map { it.body?.decodeToString() },
+        )
+    }
+
     /** As the web's Add sheets send it: the number as typed goes beside it, for the rules that read its dashes and spaces. */
     @Test
     fun aDetectionSendsTheNumberAsTypedWhenItDiffers() = runTest {

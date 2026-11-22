@@ -83,7 +83,7 @@ class ForgetAllReadUnderWayTest {
         },
         forget = { linkId, _ -> if (linkId == listedLink) slowForget.await() },
         update = { _, _, _ -> throw IOException("unused") },
-        detect = { _, _, _ -> throw IOException("unused") },
+        detect = { _, _, _, _ -> throw IOException("unused") },
         removeAlert = { _, _ -> },
     )
 

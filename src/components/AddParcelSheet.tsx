@@ -21,7 +21,8 @@ import {
   tracksAutomatically,
   typedRequirementValue,
 } from '../lib/carriers';
-import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
+import { countryName } from 'universal-parcel-scraper/app';
+import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample, timeZoneRegion } from '../lib/postcodeExample';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
 import { rememberedPostcodeField, type GivenPostcode } from '../lib/postcodeMemory';
 import { canAskCarrier, carrierCheck, carrierChoiceSections, carrierChoiceTags, carrierNameList, shapeCarrier } from '../lib/carrierPicker';
@@ -36,6 +37,7 @@ import { Icon } from './Icon';
 import { CarrierTruck } from './CarrierMark';
 import { CarrierPickerSheet } from './CarrierPickerSheet';
 import { PostcodeCountry } from './PostcodeCountry';
+import { LookupCountrySentence } from './LookupCountry';
 import './AddParcelSheet.css';
 import { useTypingPause } from '../lib/typingPause';
 import { FoundNumber } from '../peek/lookup/FoundNumber';
@@ -109,8 +111,13 @@ export function AddParcelSheet({
   // saving, the first sync asks the same carriers again.
   const [recognitionNumber, setRecognitionNumber] = useState(() =>
     normalizeTrackingNumber(parseTrackingInput(initialTrackingInput).trackingNumber));
-  const [recognition, setRecognition] = useState<ApiCarrierDetectionResponse>();
-  const [recognitionFailure, setRecognitionFailure] = useState<string>();
+  // Each answer and failure is for a number as asked from a country.
+  const [recognition, setRecognition] = useState<{ country: string | null; answer: ApiCarrierDetectionResponse }>();
+  const [recognitionFailure, setRecognitionFailure] = useState<{ number: string; country: string | null }>();
+  // The carriers are asked as from the browser clock's country, else the server takes the IP's; the reader can
+  // pick another for this number, and the parcel added from here keeps it. It is never saved as a setting.
+  const [clockCountry] = useState(timeZoneRegion);
+  const [pickedCountry, setPickedCountry] = useState<{ number: string; country: string }>();
   const [lookupAttempt, setLookupAttempt] = useState(0);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -183,12 +190,15 @@ export function AddParcelSheet({
   // The check keeps running when a carrier is picked by hand meanwhile: its
   // answer then only says when another carrier has the parcel.
   const recognizable = Boolean(apiAuth) && !amazonNumber && canAskCarrier(parsedTracking, normalizedNumber, dialling);
-  const currentRecognition = recognizable && recognition?.trackingNumber === normalizedNumber ? recognition : undefined;
+  const picked = pickedCountry?.number === normalizedNumber ? pickedCountry.country : undefined;
+  const sentCountry = picked ?? clockCountry;
+  const currentRecognition = recognizable && recognition?.answer.trackingNumber === normalizedNumber
+    && recognition.country === sentCountry ? recognition.answer : undefined;
   const check = carrierCheck({
     applies: recognizable,
     settled: recognitionNumber === normalizedNumber,
     answer: currentRecognition,
-    failed: recognitionFailure === normalizedNumber,
+    failed: recognitionFailure?.number === normalizedNumber && recognitionFailure.country === sentCountry,
   });
   const recognizing = check.status === 'asking';
   // In automatic mode the answer selects the carrier; for a picked one it stays a hint.
@@ -231,17 +241,17 @@ export function AddParcelSheet({
       setRecognition(undefined);
       setRecognitionFailure(undefined);
       // As typed: its dashes and spaces tell some carriers' numbers apart.
-      void lookupCarrier(trackingNumber, apiAuth, controller.signal).then((result) => {
-        if (!controller.signal.aborted) setRecognition(result);
+      void lookupCarrier(trackingNumber, apiAuth, controller.signal, sentCountry).then((answer) => {
+        if (!controller.signal.aborted) setRecognition({ country: sentCountry, answer });
       }).catch(() => {
         // No answer keeps the number a suggestion; the first sync asks again.
         if (!controller.signal.aborted) {
-          setRecognitionFailure(normalizedNumber);
+          setRecognitionFailure({ number: normalizedNumber, country: sentCountry });
         }
       });
     }, 200);
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [recognizable, recognitionNumber, normalizedNumber, trackingNumber, apiAuth, saving]);
+  }, [recognizable, recognitionNumber, normalizedNumber, trackingNumber, sentCountry, apiAuth, saving]);
   const knownElsewhere = selectedCarrier !== 'auto' && check.status === 'found' && check.carrier !== selectedCarrier
     ? carrierInfo(check.carrier, locale) : null;
   const carrier = trackingNumber ? carrierInfo(resolvedCarrier, locale) : null;
@@ -296,6 +306,11 @@ export function AddParcelSheet({
   // A carrier picked by hand that issues no number of this shape is pointed out before the parcel is added.
   const refused = useNumberRefusal(!automatic && !amazonNumber ? selectedCarrier : null,
     normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber ? normalizedNumber : null);
+  // The carriers asked, and so a number found nowhere, depend on the country: the line names it, and the reader can
+  // pick another for this number.
+  const askedFor = ['asking', 'none', 'failed'].includes(check.status) && !preflightDetail
+    ? currentRecognition ? currentRecognition.lookupCountry ?? null : sentCountry : null;
+  const lineCountry = automatic && !amazonNumber && !(lineCarrier && lineCarrier.id !== 'intl-post') ? askedFor : null;
   const lineDetail = automatic && preflightDetail ? preflightDetail : !automatic ? t(refused ? 'add.line.refused' : 'add.line.chosen')
     : check.status === 'found' ? t('add.line.found')
       : amazonNumber || (lineCarrier && lineCarrier.id !== 'intl-post') ? t('add.detectedCarrier')
@@ -308,7 +323,7 @@ export function AddParcelSheet({
   // The picker leads with the carriers that fit the number, then the ones used before.
   const pickerSections = carrierChoiceSections({ detection: parsedTracking, check, used: usedCarriers, t });
   const pickerTags = carrierChoiceTags(check, t);
-  const autoDescription = preflightDetail ?? (check.status === 'asking' ? t('add.checkingServices')
+  const statusDescription = preflightDetail ?? (check.status === 'asking' ? t('add.checkingServices')
     : check.status === 'found' ? t('add.recognized', { carrier: carrierInfo(check.carrier, locale).name })
       : check.status === 'several' ? t('picker.auto.several', { carriers: carrierNames(check.carriers) })
         : check.status === 'none' ? check.services ? t('picker.auto.servicesNone') : t('picker.auto.none', { carriers: carrierNames(check.asked) })
@@ -316,6 +331,11 @@ export function AddParcelSheet({
             : check.asked.length ? t('picker.auto.failed', { carriers: carrierNames(check.asked) }) : t('add.line.failed'))
             : numberCarrier ? t('picker.auto.detected', { carrier: carrierInfo(numberCarrier, locale).name })
               : t('picker.auto.later'));
+  const withCountry = (text: string, country: string | null) =>
+    country ? t('add.line.country', { country: countryName(country, languageTag), text }) : text;
+  const autoDescription = withCountry(statusDescription, askedFor);
+  const lineName = lineCarrier?.name ?? t('add.detect');
+  const changeLabel = t(choosing ? 'add.line.choose' : 'add.line.change');
 
   // iPhone Safari scrolls the page to center every newly focused field above
   // the keyboard. That animated scroll drags this fixed sheet away from the
@@ -376,6 +396,7 @@ export function AddParcelSheet({
         phoneDigits: requirements.some(({ field }) => field === 'phoneDigits')
           ? carrierInputValue('phoneDigits').trim() || undefined
           : undefined,
+        lookupCountry: picked,
       });
       if (!mounted.current) return;
       saved.current = parcel?.id ?? null;
@@ -495,21 +516,28 @@ export function AddParcelSheet({
                       </span>
                     </div>
                   ) : (
-                    <button
-                      type="button"
-                      className="add-parcel-carrier__line"
-                      aria-haspopup="dialog"
-                      onClick={() => setPickerOpen(true)}
-                    >
+                    // The whole line opens the picker; the country named in it is a control of its own above it.
+                    <div className="add-parcel-carrier__line add-parcel-carrier__line--picker">
                       {lineCarrier ? <CarrierTruck carrier={lineCarrier} /> : (
                         <span className={`add-parcel-carrier__detect${recognizing && automatic ? ' is-busy' : ''}`}><Icon name="detect" /></span>
                       )}
                       <span className="add-parcel-carrier__identity">
-                        <strong>{lineCarrier?.name ?? t('add.detect')}</strong>{' '}
-                        {lineDetail && <small className={choosing || refused ? 'is-attention' : undefined}>{lineDetail}</small>}
+                        <strong>{lineName}</strong>{' '}
+                        {lineDetail && <small className={choosing || refused ? 'is-attention' : undefined}>
+                          {lineCountry ? <LookupCountrySentence country={lineCountry} home={clockCountry} text={lineDetail}
+                            onChange={(country) => setPickedCountry({ number: normalizedNumber, country })} /> : lineDetail}
+                        </small>}
                       </span>{' '}
-                      <span className="add-parcel-carrier__change">{t(choosing ? 'add.line.choose' : 'add.line.change')}</span>
-                    </button>
+                      <button
+                        type="button"
+                        className="add-parcel-carrier__change"
+                        aria-haspopup="dialog"
+                        aria-label={[lineName, withCountry(lineDetail, lineCountry), changeLabel].filter(Boolean).join(' ')}
+                        onClick={() => setPickerOpen(true)}
+                      >
+                        {changeLabel}
+                      </button>
+                    </div>
                   )}
                   {(shippingConfirmed || requiresCarrierConfirmation || !tracksAutomatically(carrier.id)) && (
                     <p className="add-parcel-carrier__hint">{carrierHint}</p>

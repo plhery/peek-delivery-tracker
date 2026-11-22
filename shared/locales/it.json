@@ -1099,6 +1099,8 @@
   "add.line.later": "Peek lo cercherà dopo l’aggiunta",
   "add.line.change": "Cambia",
   "add.line.choose": "Scegli",
+  "add.line.country": "{{country}}: {{text}}",
+  "add.lookupCountry": "Paese per cui Peek cerca il numero",
   "picker.search": "Cerca tra {{count}} corrieri",
   "picker.searchLabel": "Cerca un corriere",
   "picker.clear": "Cancella la ricerca",

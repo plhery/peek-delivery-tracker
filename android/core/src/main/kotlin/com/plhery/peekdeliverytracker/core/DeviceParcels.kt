@@ -238,9 +238,10 @@ class DeviceParcelClient(
     val update: suspend (linkId: String, key: String, UpdateParcelLinkRequest) -> PublicParcelResponse,
     /**
      * `prefixOfSaved`: the number is the start of a longer one this phone follows, most likely that number typed again.
-     * `typedNumber`: the number as typed, when it differs ([typedTrackingNumber]).
+     * `typedNumber`: the number as typed, when it differs ([typedTrackingNumber]). `lookupCountry`: the country picked
+     * on the Add sheet for the carriers to be asked for; none for the phone's.
      */
-    val detect: suspend (trackingNumber: String, prefixOfSaved: Boolean, typedNumber: String?) -> CarrierDetectionResponse,
+    val detect: suspend (trackingNumber: String, prefixOfSaved: Boolean, typedNumber: String?, lookupCountry: String?) -> CarrierDetectionResponse,
     /** What a reader says of the parcel behind a link. The owner key goes along when this phone holds it. */
     val feedback: suspend (linkId: String, key: String?, ParcelFeedbackRequest) -> Unit = { _, _, _ -> },
     /** Turns this phone's notifications on for the parcel behind a link, with the owner key when this phone holds it. */
@@ -362,11 +363,11 @@ class DeviceParcelClient(
                     if (response.statusCode != 200) throw failure(response)
                     decode(PublicParcelResponse.serializer(), response)
                 },
-                detect = { trackingNumber, prefixOfSaved, typedNumber ->
+                detect = { trackingNumber, prefixOfSaved, typedNumber, lookupCountry ->
                     val body = encoder.encode(
                         CarrierDetectionRequest.serializer(),
                         CarrierDetectionRequest(
-                            trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region()),
+                            trackingNumber = trackingNumber, lookupCountryHint = lookupCountry ?: ParcelLookupCountry.hint(region()),
                             prefixOfSaved = if (prefixOfSaved) true else null, typedNumber = typedNumber,
                         ),
                     )
@@ -728,13 +729,14 @@ class DeviceParcels(
     }
 
     /** `typed`: the number as typed, which goes beside it when it differs ([typedTrackingNumber]). */
-    suspend fun detect(trackingNumber: String, typed: String? = null): CarrierDetectionResponse {
+    /** `country`: the country picked on the Add sheet for the carriers to be asked for; none for the phone's. */
+    suspend fun detect(trackingNumber: String, typed: String? = null, country: String? = null): CarrierDetectionResponse {
         val client = client ?: throw DeliveryApiError.ServiceFailed(503)
         val count = trackingNumber.characterCount
         val prefixOfSaved = entries.any {
             it.parcel.trackingNumber.characterCount > count && it.parcel.trackingNumber.hasCanonicalPrefix(trackingNumber)
         }
-        return client.detect(trackingNumber, prefixOfSaved, typedTrackingNumber(typed, trackingNumber))
+        return client.detect(trackingNumber, prefixOfSaved, typedTrackingNumber(typed, trackingNumber), country)
     }
 
     suspend fun add(request: CreatePackageRequest): Parcel = lookUp(request, replacing = null)

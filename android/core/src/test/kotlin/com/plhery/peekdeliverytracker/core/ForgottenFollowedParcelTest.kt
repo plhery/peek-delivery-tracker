@@ -60,7 +60,7 @@ class ForgottenFollowedParcelTest {
         read = { _, _ -> throw IOException("offline") },
         forget = { _, _ -> throw IOException("offline") },
         update = { _, _, _ -> throw IOException("offline") },
-        detect = { _, _, _ -> throw IOException("offline") },
+        detect = { _, _, _, _ -> throw IOException("offline") },
     )
 
     private fun device(storage: DeviceParcelStorage, scope: CoroutineScope) = DeviceParcels(

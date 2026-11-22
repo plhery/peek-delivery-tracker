@@ -2,6 +2,7 @@ import { timeZoneCountry } from 'universal-parcel-scraper';
 import postcodes from '../../shared/postcode-examples.json';
 import { carrierInfo, type CarrierInputRequirement } from './carriers';
 import type { CarrierId } from '../types';
+import { US_TIME_ZONE } from './units';
 
 const EXAMPLES: Readonly<Record<string, string>> = postcodes.examples;
 const TIME_ZONES: Readonly<Record<string, string>> = postcodes.timeZones;
@@ -22,15 +23,32 @@ export function deviceCountry(
   return null;
 }
 
+/** The names browsers give, after CLDR's, to zones the tz database has renamed since. */
+const RENAMED_ZONES: Readonly<Record<string, string>> = {
+  'Asia/Calcutta': 'Asia/Kolkata', 'Asia/Katmandu': 'Asia/Kathmandu', 'Asia/Rangoon': 'Asia/Yangon',
+  'Asia/Saigon': 'Asia/Ho_Chi_Minh', 'Atlantic/Faeroe': 'Atlantic/Faroe', 'Europe/Kiev': 'Europe/Kyiv',
+};
+
+/**
+ * The country of this browser's clock, when the zone is one country's: a country that keeps one civil time, or one of
+ * the United States' zones. None for UTC, an offset, or a zone of a country with several (the IP country then stands
+ * in). Sent as the lookup country, as the apps send their region.
+ */
+export function timeZoneRegion(timeZone: string | undefined = Intl.DateTimeFormat().resolvedOptions().timeZone): string | null {
+  if (!timeZone) return null;
+  const zone = RENAMED_ZONES[timeZone] ?? timeZone;
+  return timeZoneCountry(zone) ?? (US_TIME_ZONE.test(zone) ? 'US' : null);
+}
+
 /**
  * The country this device is set up for, whichever it is, where the reader dials a phone number: its clock's when one
- * country keeps that time, otherwise the first region its languages name.
+ * country keeps that time (`timeZoneRegion`), otherwise the first region its languages name.
  */
 export function deviceRegion(
   timeZone: string | undefined = Intl.DateTimeFormat().resolvedOptions().timeZone,
   languages: readonly string[] = typeof navigator === 'undefined' ? [] : navigator.languages ?? [navigator.language],
 ): string | null {
-  return (timeZone ? timeZoneCountry(timeZone) : null) ?? languages.map(languageRegion).find(Boolean) ?? null;
+  return timeZoneRegion(timeZone) ?? languages.map(languageRegion).find(Boolean) ?? null;
 }
 
 /** The region a language names ("en-US"). */

@@ -359,6 +359,9 @@ struct CarrierRecognition: Equatable, Sendable {
     /// The number as typed that the answer, or the failure, was asked with (`CarrierDetectionRequest.typedNumber`):
     /// detection reads its dashes and spaces, so the same number typed otherwise is asked about again.
     var askedSpelling: String?
+    /// The country the answer, or the failure, was asked for (`lookupCountryHint`): it decides which carriers are asked,
+    /// so the same number asked for another country is asked about again.
+    var askedCountry: String?
 
     /// Only a number no direct carrier claims with confidence is worth asking about. The
     /// check keeps running when a carrier is picked by hand meanwhile: its answer
@@ -370,17 +373,19 @@ struct CarrierRecognition: Equatable, Sendable {
     }
 
     /// The number to ask about: the settled one, while it is still the number in
-    /// the field and has no answer yet for the way it is typed (`spelling`).
-    func request(for number: String, spelling: String? = nil, applies: Bool) -> String? {
+    /// the field and has no answer yet for the way it is typed (`spelling`) and the country it is asked for (`country`).
+    func request(for number: String, spelling: String? = nil, country: String? = nil, applies: Bool) -> String? {
         guard applies, !number.isEmpty, settledNumber == number,
-              askedSpelling != spelling || (answer?.trackingNumber != number && failedNumber != number) else { return nil }
+              askedSpelling != spelling || askedCountry != country
+                || (answer?.trackingNumber != number && failedNumber != number) else { return nil }
         return number
     }
 
-    /// Carrier attempt lists come from the server's answer, for the number as it is typed now (`spelling`).
-    func status(for number: String, spelling: String? = nil, applies: Bool) -> Status {
+    /// Carrier attempt lists come from the server's answer, for the number as it is typed now (`spelling`) and asked for
+    /// `country`.
+    func status(for number: String, spelling: String? = nil, country: String? = nil, applies: Bool) -> Status {
         guard applies, !number.isEmpty else { return .idle }
-        guard askedSpelling == spelling else { return settledNumber == number ? .asking([]) : .idle }
+        guard askedSpelling == spelling, askedCountry == country else { return settledNumber == number ? .asking([]) : .idle }
         if failedNumber == number { return .failed([]) }
         guard let answer, answer.trackingNumber == number else {
             guard settledNumber == number else { return .idle }
@@ -396,6 +401,22 @@ struct CarrierRecognition: Equatable, Sendable {
         if answered.isEmpty { return .unasked }
         if (answer.unanswered?.count ?? 0) >= answered.count { return .failed(answered) }
         return .notFound(answered)
+    }
+
+    /// The country the Add sheet names with the check's words, as the carriers asked, and so a number found nowhere,
+    /// depend on it: while asking, once nobody knew the number, or when the check failed, unless tracking history or a
+    /// provider's question speaks instead (`preflight`). The answer's country when one is in for the number as asked
+    /// (the server's, from the IP when no country was sent), else `country`, the one sent; none when neither is known.
+    /// Mirrors `askedFor` in `src/components/AddParcelSheet.tsx`.
+    func countryAsked(for number: String, spelling: String? = nil, country: String?, applies: Bool,
+                      preflight: Bool = false) -> String? {
+        switch status(for: number, spelling: spelling, country: country, applies: applies) {
+        case .asking, .notFound, .failed: break
+        case .idle, .unasked, .recognized, .several: return nil
+        }
+        guard !preflight else { return nil }
+        if let answer, answer.trackingNumber == number, askedSpelling == spelling, askedCountry == country { return answer.lookupCountry }
+        return country
     }
 }
 

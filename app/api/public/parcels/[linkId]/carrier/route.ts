@@ -66,7 +66,7 @@ async function changeCarrier(context: ApiContext<LinkParameters>, progress: { st
   const keyHash = ownerKeyHash(context.request.headers.get('x-parcel-key'));
   const { raw, value: body } = await readJsonBody(context.request);
   // Read before anything is asked, as a lookup reads it.
-  lookupCountry(context.request, body.lookupCountryHint);
+  const country = lookupCountry(context.request, body.lookupCountryHint);
   const service = requireService(context);
   const found = isParcelLinkId(linkId) && keyHash ? await service.publicParcel(linkId, keyHash, false) : null;
   if (!found || found === 'stopped' || found.link.owner !== true || found.package.one_off !== true
@@ -103,7 +103,7 @@ async function changeCarrier(context: ApiContext<LinkParameters>, progress: { st
     return json(PARCEL_UNAVAILABLE, 404);
   }
   if (changed.created) {
-    await rememberLookupCountry(service, changed.package, context.request, body.lookupCountryHint, values.dpdPostcodeCountry, body.language);
+    await rememberLookupCountry(service, changed.package, country, values.dpdPostcodeCountry, body.language);
   }
   recordChange(changed.changed ? 'changed' : 'unchanged', context.requestId, progress.change);
   if (changed.changed) {

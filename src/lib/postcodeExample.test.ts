@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import postcodes from '../../shared/postcode-examples.json';
 import { carrierRequirements, requirementSatisfied, typedRequirementValue } from './carriers';
-import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from './postcodeExample';
+import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample, timeZoneRegion } from './postcodeExample';
 
 const dpd = carrierRequirements('dpd', '06080000000002')[0]!;
 const dpdGermany = carrierRequirements('dpd-de', '06080000000002')[0]!;
@@ -23,6 +23,16 @@ describe('postcode examples', () => {
     expect(deviceRegion('Etc/UTC', ['es', 'es-PY'])).toBe('PY');
     expect(deviceRegion('Europe/Zurich', ['fr-FR'])).toBe('CH');
     expect(deviceRegion('Etc/UTC', ['en'])).toBeNull();
+  });
+
+  it('names the country of a clock only one country keeps, under its old name too, and the US for any of its zones', () => {
+    expect(timeZoneRegion('Europe/Zurich')).toBe('CH');
+    for (const [zone, country] of [['Asia/Calcutta', 'IN'], ['Europe/Kiev', 'UA'], ['Asia/Saigon', 'VN'], ['Asia/Katmandu', 'NP']]) {
+      expect(timeZoneRegion(zone)).toBe(country);
+    }
+    expect(timeZoneRegion('America/Chicago')).toBe('US');
+    expect(timeZoneRegion('Pacific/Honolulu')).toBe('US');
+    for (const zone of ['America/Toronto', 'Australia/Sydney', 'Etc/UTC', 'UTC', '']) expect(timeZoneRegion(zone)).toBeNull();
   });
 
   it("shows the reader's country where a carrier takes any postcode", () => {

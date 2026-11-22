@@ -549,6 +549,95 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(recognition.status(for: number, applies: true), .asking([]))
     }
 
+    func testTheSameNumberAskedForAnotherCountryIsAskedAboutAgain() {
+        // Synthetic: a run of digits whose check may suggest Mondial Relay, asked for from France, then for Germany.
+        let number = "76434219"
+        var recognition = CarrierRecognition(settledNumber: number)
+        XCTAssertEqual(recognition.request(for: number, country: "FR", applies: true), number)
+        recognition.askedCountry = "FR"
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], lookupCountry: "FR")
+        XCTAssertNil(recognition.request(for: number, country: "FR", applies: true))
+        XCTAssertEqual(recognition.status(for: number, country: "FR", applies: true), .notFound([.glsDe]))
+
+        // Another country picked for the number: France's answer says nothing about it, so it is asked about.
+        XCTAssertEqual(recognition.request(for: number, country: "DE", applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, country: "DE", applies: true), .asking([]))
+        recognition.askedCountry = "DE"
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .glsDe, asked: [.glsDe], lookupCountry: "DE")
+        XCTAssertNil(recognition.request(for: number, country: "DE", applies: true))
+        XCTAssertEqual(recognition.status(for: number, country: "DE", applies: true), .recognized(.glsDe))
+        // And back to France, Germany's answer is not France's either.
+        XCTAssertEqual(recognition.request(for: number, country: "FR", applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, country: "FR", applies: true), .asking([]))
+        // With no country known, one asked for a country is not its answer.
+        XCTAssertEqual(recognition.request(for: number, applies: true), number)
+
+        // A failure is the country's too.
+        recognition.answer = nil
+        recognition.failedNumber = number
+        XCTAssertEqual(recognition.status(for: number, country: "DE", applies: true), .failed([]))
+        XCTAssertNil(recognition.request(for: number, country: "DE", applies: true))
+        XCTAssertEqual(recognition.request(for: number, country: "FR", applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, country: "FR", applies: true), .asking([]))
+
+        // A suggested postcode carrier comes only from the answer for the country asked.
+        let hint = CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
+        recognition.failedNumber = nil
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], inputSuggested: hint)
+        XCTAssertNotNil(SuggestedPostcodeCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "DE", applies: true))
+        XCTAssertNil(SuggestedPostcodeCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "FR", applies: true))
+    }
+
+    /// The Add sheet names the country the carriers are asked for while it decides what the check says: asking, nobody
+    /// knowing the number, or the check failing. The answer's country once one is in, which the server may have taken
+    /// from the IP, else the one sent.
+    func testTheCheckNamesTheCountryItAsksForWhileThatDecidesWhatItSays() {
+        let number = "12345678901"
+        var recognition = CarrierRecognition(settledNumber: number)
+        func asked(_ country: String?, applies: Bool = true, preflight: Bool = false, spelling: String? = nil) -> String? {
+            recognition.countryAsked(for: number, spelling: spelling, country: country, applies: applies, preflight: preflight)
+        }
+
+        // Asking: the country sent, or none when none is known.
+        XCTAssertEqual(asked("FR"), "FR")
+        XCTAssertNil(asked(nil))
+        XCTAssertNil(asked("FR", applies: false), "A number nobody is asked about names no country")
+        XCTAssertNil(CarrierRecognition().countryAsked(for: number, country: "FR", applies: true), "Nor one still being typed")
+
+        // Nobody knew it: the answer's country, even one the server chose itself.
+        recognition.askedCountry = "FR"
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], lookupCountry: "FR")
+        XCTAssertEqual(asked("FR"), "FR")
+        XCTAssertNil(asked("FR", preflight: true), "Tracking history or a provider's question speaks instead")
+        recognition.askedCountry = nil
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], lookupCountry: "CH")
+        XCTAssertEqual(asked(nil), "CH")
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe])
+        XCTAssertNil(asked(nil), "An answer that names none names none")
+        // Another country picked meanwhile: that one, while it is asked, rather than the earlier answer's.
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], lookupCountry: "CH")
+        XCTAssertEqual(asked("DE"), "DE")
+        XCTAssertNil(asked(nil, spelling: "1234567890-1"), "Another spelling is asked about with no country known")
+
+        // The check failed: the answer's country, or the one sent when no answer came.
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], unanswered: [.glsDe],
+                                                      lookupCountry: "CH")
+        XCTAssertEqual(asked(nil), "CH")
+        recognition.askedCountry = "DE"
+        recognition.answer = nil
+        recognition.failedNumber = number
+        XCTAssertEqual(asked("DE"), "DE")
+
+        // A carrier found, several, or nobody asked: the country no longer says anything.
+        recognition.failedNumber = nil
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .glsDe, asked: [.glsDe], lookupCountry: "DE")
+        XCTAssertNil(asked("DE"))
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, recognized: [.glsDe, .dpd], lookupCountry: "DE")
+        XCTAssertNil(asked("DE"))
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, lookupCountry: "DE")
+        XCTAssertNil(asked("DE"))
+    }
+
     func testRecognitionReportsOnlyTheCarriersInTheServerAnswer() {
         let number = "12345678901"
         let serverAsked: [CarrierID] = [.glsDe, .postlogistics]

@@ -60,13 +60,16 @@ export function localeWeightUnit(locale: string | undefined): WeightUnit {
   return US_UNIT_REGIONS.has(localeRegion(locale)) ? 'lb' : 'kg';
 }
 
+/** The United States' time zones. */
+const US_ZONES = '(America/(New_York|Detroit|Chicago|Menominee|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Metlakatla'
+  + '|Yakutat|Nome|Adak|Indianapolis|Fort_Wayne|Knox_IN|Louisville|(Indiana|Kentucky|North_Dakota)/.+)'
+  + '|Pacific/Honolulu|US/.+)';
+export const US_TIME_ZONE = new RegExp(`^${US_ZONES}$`);
 /**
  * The time zones of the regions that measure in US units; with the United Kingdom's, its Crown dependencies' and
  * Myanmar's, those that write miles.
  */
-const US_UNIT_ZONES = '(America/(New_York|Detroit|Chicago|Menominee|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Metlakatla'
-  + '|Yakutat|Nome|Adak|Indianapolis|Fort_Wayne|Knox_IN|Louisville|(Indiana|Kentucky|North_Dakota)/.+)'
-  + '|Pacific/Honolulu|US/.+|Africa/Monrovia)';
+const US_UNIT_ZONES = `(${US_ZONES}|Africa/Monrovia)`;
 const MILE_TIME_ZONE = new RegExp(`^(${US_UNIT_ZONES}|Europe/(London|Belfast|Guernsey|Isle_of_Man|Jersey)|Asia/(Yangon|Rangoon))$`);
 const US_UNIT_TIME_ZONE = new RegExp(`^${US_UNIT_ZONES}$`);
 

@@ -87,6 +87,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
@@ -99,18 +100,23 @@ import androidx.compose.ui.input.key.isShiftPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
@@ -118,9 +124,13 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -149,6 +159,7 @@ import com.plhery.peekdeliverytracker.core.ParcelAddition
 import com.plhery.peekdeliverytracker.core.ParcelLookupCountry
 import com.plhery.peekdeliverytracker.core.PostcodeFill
 import com.plhery.peekdeliverytracker.core.TrackingInputMatch
+import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -172,8 +183,11 @@ import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
+import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetMenus
+import com.plhery.peekdeliverytracker.ui.sheet.MenuOption
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
 import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
@@ -243,7 +257,7 @@ internal fun AddParcelHost(state: DeliveriesState) {
  * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the
  * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link and the phone digits
  * typed, each carrier's postcode and the country chosen beside it, the postcode filled in from those given before,
- * Amazon's check asked again,
+ * Amazon's check asked again, the country picked to look the number up for,
  * the picker or the scanner open, the keyboard or the scanner opened once, and a paste that found nothing. All of it
  * stays through a window made again, as the iPhone's `@State` does, so no check is asked again for what it answered.
  */
@@ -269,6 +283,7 @@ internal class AddForm(
     showingScanner: Boolean,
     phoneDigits: String,
     digitsNumber: String?,
+    pickedCountry: ParcelAddition.PickedCountry? = null,
 ) {
     var label by mutableStateOf(label)
     var trackingInput by mutableStateOf(trackingInput)
@@ -294,6 +309,9 @@ internal class AddForm(
 
     /** The number the phone digits go with: another one starts them empty (`ParcelPhoneInput`). */
     var digitsNumber = digitsNumber
+
+    /** The country picked for the carriers to be asked for, for one number: never kept beyond this Add. */
+    var pickedCountry by mutableStateOf(pickedCountry)
     var lookupAttempt by mutableIntStateOf(lookupAttempt)
     var showingPicker by mutableStateOf(showingPicker)
     var showingScanner by mutableStateOf(showingScanner)
@@ -306,9 +324,11 @@ internal class AddForm(
      */
     var preparedFor = preparedFor
 
-    fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?) = ParcelAddition(
+    /** `lookupCountry`: the country the carriers are asked for unless one is picked, the phone's (`ParcelLookupCountry.hint`). */
+    fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?, lookupCountry: String?) = ParcelAddition(
         trackingInput, pick, carrierOverride, asTyped, recognition, refusedQuestion, verifiedCarrier, trackingUrl,
-        phoneDigits = phoneDigits, demo = demo, catalog = catalog, region = region,
+        phoneDigits = phoneDigits, demo = demo, catalog = catalog, region = region, deviceLookupCountry = lookupCountry,
+        pickedCountry = pickedCountry,
     ).withPostcode(postcodes, postcodeFills)
 
     /** Takes the text, the number chosen, the carrier chosen and recognition from `addition`. */
@@ -341,7 +361,8 @@ internal class AddForm(
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
                     it.phoneDigits, it.digitsNumber ?: NONE, PostcodeFill.keptCountries(it.postcodeFills),
-                    recognition.askedSpelling ?: NONE,
+                    recognition.askedSpelling ?: NONE, recognition.askedCountry ?: NONE, it.pickedCountry?.number ?: NONE,
+                    it.pickedCountry?.country ?: NONE,
                 )
             },
             restore = {
@@ -350,12 +371,16 @@ internal class AddForm(
                 fun texts(index: Int) = (it[index] as List<*>).map { value -> value as String }
                 AddForm(
                     it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4),
-                    CarrierRecognition(kept(5), kept(16)?.let(ParcelAddition::answer), kept(15), if (it.size > 24) kept(24) else null),
+                    CarrierRecognition(
+                        kept(5), kept(16)?.let(ParcelAddition::answer), kept(15), if (it.size > 24) kept(24) else null,
+                        if (it.size > 25) kept(25) else null,
+                    ),
                     kept(18)?.let(ParcelAddition::question), kept(17)?.let(ParcelAddition::answer), kept(19),
                     it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
                     PostcodeFill.from(texts(9), if (it.size > 23) texts(23) else emptyList()), it[10] as Int,
                     it[11] as Boolean, it[12] as Boolean, it[13] as Boolean, kept(14)?.let(::CarrierId), it[20] as Boolean,
                     it[21] as String, kept(22),
+                    if (it.size > 27) kept(26)?.let { number -> kept(27)?.let { country -> ParcelAddition.PickedCountry(number, country) } } else null,
                 )
             },
         )
@@ -396,9 +421,10 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
     val region = remember { CarrierCatalog.deviceCountry() }
+    val lookupCountry = remember { ParcelLookupCountry.hint(Device.region()) }
     val demo = source.isDemo
-    val addition = form.addition(demo, catalog, region)
-    val current by rememberUpdatedState { form.addition(demo, catalog, region) }
+    val addition = form.addition(demo, catalog, region, lookupCountry)
+    val current by rememberUpdatedState { form.addition(demo, catalog, region, lookupCountry) }
     val work = source.pageWork
     // Read here rather than handed down through the overlay that hosts Add, a frame late: the save's end and its failure
     // come in the same update, as `saving = false` and `errorMessage` do.
@@ -473,15 +499,18 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         form.lookedUp = key
     }
     // The carriers asked about the settled number, given as typed too: its dashes and spaces tell some carriers'
-    // numbers apart. Asked once per number and spelling, as the iPhone's `.task(id: recognitionQuestion)`: the same
-    // number typed otherwise is asked about again, and an answer for the earlier spelling never lands on it.
+    // numbers apart. Asked once per number, spelling and country, as the iPhone's `.task(id: recognitionQuestion)`: the
+    // same number typed otherwise, or asked for another country, is asked about again, and an earlier answer never
+    // lands on it. The country is the one picked for the number, else the phone's, which the answer is kept for.
     val recognitionQuestion = addition.recognitionQuestion
     LaunchedEffect(recognitionQuestion) {
         val question = recognitionQuestion ?: return@LaunchedEffect
         val number = question.trackingNumber
-        form.recognition = form.recognition.copy(failedNumber = null, answer = null, askedSpelling = question.typedNumber)
+        form.recognition = form.recognition.copy(
+            failedNumber = null, answer = null, askedSpelling = question.typedNumber, askedCountry = question.lookupCountryHint,
+        )
         try {
-            val result = source.detectCarrier(number, question.typedNumber)
+            val result = source.detectCarrier(number, question.typedNumber, question.lookupCountryHint)
             ensureActive()
             if (result.trackingNumber != number) throw DeliveryApiError.InvalidResponse()
             form.recognition = form.recognition.copy(answer = result)
@@ -786,6 +815,12 @@ private class AddActions(
         // Leaving the field settles the number, so the check starts as the picker opens.
         focusManager.clearFocus()
         form.showingPicker = true
+    }
+
+    /** A country picked from the carrier line's: the carriers asked again for it, for this number alone. */
+    fun pickCountry(country: String) {
+        if (saving) return
+        form.pickedCountry = current().pickingCountry(country).pickedCountry
     }
 }
 
@@ -1123,7 +1158,7 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         if (addition.several.isEmpty()) {
-            CarrierLine(addition, actions::openPicker)
+            CarrierLine(addition, actions::openPicker, actions::pickCountry)
             val parsed = addition.parsed
             if (parsed.source == TrackingInputMatch.Source.Link || parsed.source == TrackingInputMatch.Source.Text) {
                 val number = CarrierCatalog.format(parsed.trackingNumber, addition.resolvedCarrier)
@@ -1172,10 +1207,12 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
  * spinner while the carriers are asked, else the wand; its name and what the check found, beside each other where they
  * fit, else one over the other, and "Change" or "Choose" underlined at its end, or under them at the accessibility
  * sizes. TalkBack reads the name, the finding and the action word, and what a tap does. An Amazon number keeps its
- * carrier.
+ * carrier. Where the finding names the country the carriers were asked for ([ParcelAddition.lineSentence]), the
+ * country's name is underlined and a tap on it opens the menu of countries, the phone's first, which asks again for
+ * the one picked, for this number alone ([LookupCountryMenu]); TalkBack offers the same as an action of the line.
  */
 @Composable
-private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
+private fun CarrierLine(addition: ParcelAddition, open: () -> Unit, pickCountry: (String) -> Unit) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val colors = PeekTheme.colors
@@ -1184,14 +1221,69 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val carrier = addition.lineCarrier
     val name = addition.lineName(localizer)
+    val sentence = addition.lineSentence(localizer)
     val detail = addition.lineDetail(localizer)
     val actionKey = if (addition.choosingCarrier) "add.line.choose" else "add.line.change"
     val action = localized(actionKey)
-    val enabled = !addition.amazonNumber && LocalFormEnabled.current
+    val formEnabled = LocalFormEnabled.current
+    val enabled = !addition.amazonNumber && formEnabled
     // Voice Access answers to the words on the line, "Change" or "Choose" with them.
     val description = listOfNotNull(name, detail, action.takeUnless { addition.amazonNumber }).joinToString(", ")
     val nameStyle = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines()
     val detailColor = if (addition.choosingCarrier || addition.refused) ochre else colors.secondaryText
+    val countries = remember { LookupCountryMenu() }
+    val countryLabel = localized("add.lookupCountry")
+    val countryEnabled = sentence != null && formEnabled
+    val menus = LocalSheetMenus.current
+    val openCountries = {
+        val home = addition.deviceLookupCountry
+        val codes = ParcelLookupCountry.choices(home, language)
+        val options = codes.mapIndexed { index, code ->
+            MenuOption(
+                "${TrackingLocation.flag(code)} ${TrackingLocation.countryName(code, language)}",
+                tag = lookupCountryTag(code),
+                startsSection = index == 1 && home != null,
+            )
+        }
+        val chosen = codes.indexOf(addition.lineCountry)
+        val bounds = countries.bounds(sentence?.country)
+        menus?.content = {
+            SheetMenu(
+                options, chosen, bounds, bounds.right,
+                onClose = {
+                    menus.content = null
+                    countries.returnFocus.request()
+                },
+                leading = bounds.left,
+                drop = 0.dp,
+                onSelect = { pickCountry(codes[it]) },
+            )
+        }
+    }
+    val detailText = if (sentence == null) null else buildAnnotatedString {
+        append(sentence.text)
+        val start = sentence.country.first
+        val end = sentence.country.last + 1
+        if (countryEnabled) {
+            val styles = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline), pressedStyle = SpanStyle(color = colors.ink))
+            addLink(LinkAnnotation.Clickable(ADD_LOOKUP_COUNTRY, styles) { openCountries() }, start, end)
+        } else {
+            addStyle(SpanStyle(textDecoration = TextDecoration.Underline), start, end)
+        }
+    }
+    val lineDetail = @Composable { modifier: Modifier ->
+        if (detailText != null) {
+            Text(
+                detailText,
+                modifier.testTag(ADD_LINE_DETAIL).onGloballyPositioned { countries.coordinates = it },
+                color = detailColor,
+                style = type.caption.sfLines(),
+                onTextLayout = { countries.layout = it },
+            )
+        } else if (detail != null) {
+            Text(detail, modifier.testTag(ADD_LINE_DETAIL), color = detailColor, style = type.caption.sfLines())
+        }
+    }
     val lineAction = @Composable {
         if (!addition.amazonNumber) {
             Text(action, color = colors.secondaryText, style = type.caption.copy(textDecoration = TextDecoration.Underline).sfLines())
@@ -1202,6 +1294,7 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
             .fillMaxWidth()
             .heightIn(min = 44.dp)
             .testTag(ADD_CARRIER)
+            .accessibilityFocus(countries.returnFocus)
             .button(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = open)
             .clearAndSetSemantics {
                 // The way to change it said once, as what a tap does (`accessibilityHint`).
@@ -1212,6 +1305,14 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
                         open()
                         true
                     }
+                }
+                if (countryEnabled) {
+                    customActions = listOf(
+                        CustomAccessibilityAction(countryLabel) {
+                            openCountries()
+                            true
+                        },
+                    )
                 }
             },
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -1229,7 +1330,7 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
         if (large) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(name, color = colors.ink, style = nameStyle)
-                if (detail != null) Text(detail, Modifier.testTag(ADD_LINE_DETAIL), color = detailColor, style = type.caption.sfLines())
+                lineDetail(Modifier)
                 lineAction()
             }
         } else {
@@ -1240,10 +1341,29 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 Text(name, Modifier.alignByBaseline().testTag(ADD_LINE_NAME), color = colors.ink, style = nameStyle)
-                if (detail != null) Text(detail, Modifier.alignByBaseline().testTag(ADD_LINE_DETAIL), color = detailColor, style = type.caption.sfLines())
+                lineDetail(Modifier.alignByBaseline())
             }
             lineAction()
         }
+    }
+}
+
+/**
+ * Where the carrier line's country stands, for the menu of countries to open on it, as a `Menu`'s label: the detail's
+ * text as last laid out and placed, and the line TalkBack goes back to once the menu has closed.
+ */
+private class LookupCountryMenu {
+    var layout: TextLayoutResult? = null
+    var coordinates: LayoutCoordinates? = null
+    val returnFocus = AccessibilityFocus()
+
+    /** The window's rectangle around the characters of `range` in the detail; the whole detail where none is laid out. */
+    fun bounds(range: IntRange?): Rect {
+        val coordinates = coordinates?.takeIf { it.isAttached } ?: return Rect.Zero
+        val layout = layout
+        if (range == null || layout == null || range.last >= layout.layoutInput.text.length) return coordinates.boundsInWindow()
+        val box = layout.getPathForRange(range.first, range.last + 1).getBounds()
+        return box.translate(coordinates.positionInWindow())
     }
 }
 
@@ -1953,6 +2073,7 @@ internal const val ADD_CARRIER_MARK = "addParcel.carrier.mark"
 internal const val ADD_CHECKING = "addParcel.carrier.checking"
 internal const val ADD_LINE_NAME = "addParcel.carrier.name"
 internal const val ADD_LINE_DETAIL = "addParcel.carrier.detail"
+internal const val ADD_LOOKUP_COUNTRY = "addParcel.carrier.country"
 internal const val ADD_SAVE = "addParcel.save"
 internal const val ADD_NUMBER = "addParcel.number"
 internal const val ADD_SEVERAL = "addParcel.several"
@@ -2024,3 +2145,6 @@ private val ROW_RISE = 6.dp
 
 /** `ProgressView().controlSize(.mini)`. */
 private val MINI_SPINNER: Dp = 12.dp
+
+/** The menu option for `code` among the countries to look the number up for. */
+internal fun lookupCountryTag(code: String) = "$ADD_LOOKUP_COUNTRY.$code"

@@ -334,10 +334,11 @@ final class ParcelStore: ObservableObject {
     }
 
     /// Which carrier knows the number. `typed`: the number as read from the field, dashes and spaces kept.
-    func detectCarrier(trackingNumber: String, typed: String? = nil) async throws -> CarrierDetectionResponse {
+    /// `lookupCountry`: a country picked for this number, in place of the device's.
+    func detectCarrier(trackingNumber: String, typed: String? = nil, lookupCountry: String? = nil) async throws -> CarrierDetectionResponse {
         let typedNumber = CarrierDetectionRequest.typedNumber(typed, for: trackingNumber)
-        if isGuest { return try await device.detect(trackingNumber: trackingNumber, typedNumber: typedNumber) }
-        return try await api.detectCarrier(trackingNumber: trackingNumber, typedNumber: typedNumber)
+        if isGuest { return try await device.detect(trackingNumber: trackingNumber, typedNumber: typedNumber, lookupCountry: lookupCountry) }
+        return try await api.detectCarrier(trackingNumber: trackingNumber, typedNumber: typedNumber, lookupCountry: lookupCountry)
     }
     var activeCount: Int { parcels.filter(\.isActive).count }
     var isSynchronizing: Bool {
@@ -671,6 +672,7 @@ final class ParcelStore: ObservableObject {
         }
     }
 
+    /// `lookupCountry`: a country picked for this number in the Add sheet, in place of the device's.
     @discardableResult
     func add(
         trackingNumber: String,
@@ -679,7 +681,8 @@ final class ParcelStore: ObservableObject {
         trackingURL: String?,
         dpdPostcode: String?,
         dpdPostcodeCountry: String? = nil,
-        phoneDigits: String? = nil
+        phoneDigits: String? = nil,
+        lookupCountry: String? = nil
     ) async throws -> Parcel {
         let generation = session.generation
         let request = CreatePackageRequest(
@@ -690,7 +693,7 @@ final class ParcelStore: ObservableObject {
             dpdPostcode: dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
             dpdPostcodeCountry: dpdPostcodeCountry,
             phoneDigits: phoneDigits?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
-            lookupCountryHint: ParcelLookupCountry.hint()
+            lookupCountryHint: lookupCountry ?? ParcelLookupCountry.hint()
         )
         let parcel: Parcel
         if isDemo {

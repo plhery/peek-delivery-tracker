@@ -77,6 +77,8 @@ it('uses the device region to order queries, partitions its cache and settles a 
   }), { params: Promise.resolve({}) });
   const german = await (await detect('DE')).json();
   expect(german.carrier).toBe('gls-de');
+  // The answer names the country it ranked the carriers for, which the Add sheet shows.
+  expect(german.lookupCountry).toBe('DE');
   expect(german.asked).toEqual(recognitionAskedCarriers(number, { countryHint: 'DE' }));
   expect(german.asked[0]).toBe('gls-de');
   const count = recognize.mock.calls.length;
@@ -490,7 +492,7 @@ it('suggests at the front door a carrier that cannot be asked without the postco
     method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': '198.51.100.32' }, body: JSON.stringify({ trackingNumber, lookupCountryHint }),
   }), { params: Promise.resolve({}) })).json();
   // An 8-digit shipment fits Mondial Relay, which recognition cannot ask without the recipient's postcode.
-  expect(await detect('12345670', 'FR')).toMatchObject({ carrier: 'unknown', inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } });
+  expect(await detect('12345670', 'FR')).toMatchObject({ carrier: 'unknown', inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' }, lookupCountry: 'FR' });
   // Not from a country the carrier does not serve, nor once a tracking service has the number's history.
   expect(await detect('12345671', 'DE')).not.toHaveProperty('inputSuggested');
   vi.mocked(preflightTracking).mockResolvedValue({ trackingFound: true, providers: [{ provider: 'Ship24', outcome: 'history' }] });

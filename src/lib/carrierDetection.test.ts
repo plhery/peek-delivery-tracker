@@ -36,3 +36,15 @@ it('rejects upstream lookup failures', async () => {
   vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 502 }));
   await expect(lookupCarrier('123456789018', auth)).rejects.toThrow('unavailable');
 });
+
+it('sends the country the carriers are asked for: the browser clock\'s, or the one given', async () => {
+  vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+    .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'Asia/Calcutta' });
+  const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(JSON.stringify({
+    trackingNumber: '123456789018', carrier: 'gls-de',
+  })));
+  await lookupCarrier('123456789018', auth);
+  await lookupCarrier('123456789018', auth, undefined, 'FR');
+  await lookupCarrier('123456789018', auth, undefined, null);
+  expect(fetcher.mock.calls.map(([, init]) => JSON.parse(String(init?.body)).lookupCountryHint)).toEqual(['IN', 'FR', undefined]);
+});

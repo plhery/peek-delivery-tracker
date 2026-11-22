@@ -71767,7 +71767,7 @@
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
-            "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+            "description": "Optional ISO country code: the device region on the apps, the country of the browser's time zone on the web when one country keeps it, or a country the reader picked for this number on the Add sheet. Sent, it replaces the visitor's IP country. A weak lookup-order hint, never a delivery destination."
           },
           "prefixOfSaved": {
             "type": "boolean",
@@ -71840,6 +71840,11 @@
           "trackingFound": {
             "type": "boolean",
             "description": "A universal provider returned tracking history; carrier identity can still need direct confirmation."
+          },
+          "lookupCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "The country the carriers were ranked for: the request's lookupCountryHint, else the visitor's IP country. Absent when neither is known. The Add sheet names it."
           },
           "inputSuggested": {
             "description": "When no carrier knows the number, a carrier its shape and the lookup country point to that answers only with the delivery postcode, which recognition cannot ask about it without. Nothing says that carrier has the parcel.",
@@ -75069,7 +75074,7 @@
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
-            "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+            "description": "Optional ISO country code: the device region on the apps, the country of the browser's time zone on the web when one country keeps it, or a country the reader picked for this number on the Add sheet. Sent, it replaces the visitor's IP country. A weak lookup-order hint, never a delivery destination."
           }
         }
       },
@@ -76727,7 +76732,7 @@
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
-            "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+            "description": "Optional ISO country code: the device region on the apps, the country of the browser's time zone on the web when one country keeps it, or a country the reader picked for this number on the Add sheet. Sent, it replaces the visitor's IP country. A weak lookup-order hint, never a delivery destination."
           },
           "language": {
             "type": "string",
@@ -77841,7 +77846,7 @@
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
-            "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+            "description": "Optional ISO country code: the device region on the apps, the country of the browser's time zone on the web when one country keeps it, or a country the reader picked for this number on the Add sheet. Sent, it replaces the visitor's IP country. A weak lookup-order hint, never a delivery destination."
           },
           "language": {
             "type": "string",

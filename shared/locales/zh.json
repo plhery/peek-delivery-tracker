@@ -1099,6 +1099,8 @@
   "add.line.later": "添加后 Peek 会查询",
   "add.line.change": "更换",
   "add.line.choose": "选择",
+  "add.line.country": "{{country}}：{{text}}",
+  "add.lookupCountry": "Peek 查询单号所用的国家/地区",
   "picker.search": "搜索 {{count}} 家快递公司",
   "picker.searchLabel": "搜索快递公司",
   "picker.clear": "清除搜索",

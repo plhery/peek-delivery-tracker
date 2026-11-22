@@ -1099,6 +1099,8 @@
   "add.line.later": "Peek prüft das nach dem Hinzufügen",
   "add.line.change": "Ändern",
   "add.line.choose": "Wählen",
+  "add.line.country": "{{country}}: {{text}}",
+  "add.lookupCountry": "Land, für das Peek die Nummer sucht",
   "picker.search": "{{count}} Paketdienste durchsuchen",
   "picker.searchLabel": "Paketdienste durchsuchen",
   "picker.clear": "Suche löschen",

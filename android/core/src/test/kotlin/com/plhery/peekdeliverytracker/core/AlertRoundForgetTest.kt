@@ -52,7 +52,7 @@ class AlertRoundForgetTest {
             read = { _, _ -> throw IOException("offline") },
             forget = { _, _ -> },
             update = { _, _, _ -> throw IOException("offline") },
-            detect = { _, _, _ -> throw IOException("offline") },
+            detect = { _, _, _, _ -> throw IOException("offline") },
             setAlert = { linkId, _, _ ->
                 if (linkId == held) gate.await()
                 alerts += linkId
@@ -146,7 +146,7 @@ class AlertRoundForgetTest {
             read = { _, _ -> throw IOException("offline") },
             forget = { _, _ -> },
             update = { _, _, _ -> throw IOException("offline") },
-            detect = { _, _, _ -> throw IOException("offline") },
+            detect = { _, _, _, _ -> throw IOException("offline") },
             setAlert = { linkId, _, request ->
                 pushes += "$linkId ${request.token}"
                 signUp.await()

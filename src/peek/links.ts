@@ -22,6 +22,7 @@ import { announcedMaintenance, deviceOnline, serverDown, unanswered, type Mainte
 import { typedNumber } from '../lib/carrierDetection';
 import { CARRIERS, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { pageLocale } from '../lib/locale';
+import { timeZoneRegion } from '../lib/postcodeExample';
 import { userErrorKey } from '../lib/userMessages';
 import type { CarrierId } from '../types';
 import { createDemoLinks } from './demoLinks';
@@ -115,7 +116,14 @@ function lookupDetails(input: ParcelLookupInput): ApiParcelLinkCarrierRequest {
     ...(input.phoneDigits?.trim() ? { phoneDigits: input.phoneDigits.trim() } : {}),
     // A carrier that words its scans in several languages answers the parcel in the page's.
     ...(language ? { language } : {}),
+    ...lookupCountryHint(),
   };
+}
+
+/** The browser clock's country, sent as the apps send their region (`timeZoneRegion`). */
+function lookupCountryHint(): { lookupCountryHint?: string } {
+  const country = timeZoneRegion();
+  return country ? { lookupCountryHint: country } : {};
 }
 
 /**
@@ -185,7 +193,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     async detectCarrierPublic(number, signal, prefixOfSaved, carrierHint) {
       const trackingNumber = normalizeTrackingNumber(number);
       const body: ApiCarrierDetectionRequest = { trackingNumber, ...typedNumber(number, trackingNumber), ...(prefixOfSaved ? { prefixOfSaved } : {}),
-        ...(carrierHint ? { carrierHint } : {}) };
+        ...(carrierHint ? { carrierHint } : {}), ...lookupCountryHint() };
       const response = await protectedPost('/api/public/detect', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiCarrierDetectionResponse>(response);

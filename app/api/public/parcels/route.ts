@@ -40,7 +40,8 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage; parce
   const service = requireService(context);
   // The name stays on the device: only the number, the carrier and its inputs are read.
   const { raw, value: body } = await readJsonBody(context.request);
-  const values = newPackageValues({ ...body, label: '' }, lookupCountry(context.request, body.lookupCountryHint));
+  const country = lookupCountry(context.request, body.lookupCountryHint);
+  const values = newPackageValues({ ...body, label: '' }, country);
   progress.parcel = { tracking_number: values.trackingNumber, carrier: values.carrier };
   progress.stage = 'verification';
   const verified = await verifyLookupRequest(context.request, service, raw);
@@ -61,7 +62,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage; parce
   const key = newOwnerKey();
   const created = await service.createOneOffParcel(values, ownerKeyHash(key)!);
   if (created.created) {
-    await rememberLookupCountry(service, created.package, context.request, body.lookupCountryHint, values.dpdPostcodeCountry, body.language);
+    await rememberLookupCountry(service, created.package, country, values.dpdPostcodeCountry, body.language);
   }
   await settleTypedSupportCases(service, values.trackingNumber);
   recordLookup(created.created ? 'created' : 'reused', context.requestId, progress.parcel);

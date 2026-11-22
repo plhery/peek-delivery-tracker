@@ -1099,6 +1099,8 @@
   "add.line.later": "Peek looks it up after you add it",
   "add.line.change": "Change",
   "add.line.choose": "Choose",
+  "add.line.country": "{{country}}: {{text}}",
+  "add.lookupCountry": "Country to look the number up for",
   "picker.search": "Search {{count}} carriers",
   "picker.searchLabel": "Search carriers",
   "picker.clear": "Clear search",

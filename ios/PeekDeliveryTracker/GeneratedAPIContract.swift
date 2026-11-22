@@ -28,6 +28,7 @@ struct CarrierDetectionResponse: Codable, Equatable, Hashable, Sendable {
     var unanswered: [CarrierID]? = nil
     var providers: [TrackingProviderCheck]? = nil
     var trackingFound: Bool? = nil
+    var lookupCountry: String? = nil
     var inputSuggested: CarrierDetectionInputSuggested? = nil
 }
 

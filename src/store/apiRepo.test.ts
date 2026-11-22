@@ -285,6 +285,22 @@ describe('createApiRepo', () => {
     expect(window.localStorage.getItem(`${API_CACHE_KEY}.user-2`)).toBe('second');
   });
 
+  it('adds a parcel as from the country picked for it, else the browser clock\'s', async () => {
+    // Fake timers replace the clock's Intl.DateTimeFormat.
+    vi.useRealTimers();
+    const fetch = vi.fn().mockImplementation(async () => response({ package: packageRow, jobIds: [] }));
+    vi.stubGlobal('fetch', fetch);
+    const clock = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'Europe/Paris' });
+    try {
+      await createApiRepo().add({ trackingNumber: '993412345699999980', label: '' });
+      await createApiRepo().add({ trackingNumber: '993412345699999980', label: '', lookupCountry: 'CH' });
+    } finally {
+      clock.mockRestore();
+    }
+    expect(fetch.mock.calls.map(([, init]) => JSON.parse(String(init.body)).lookupCountryHint)).toEqual(['FR', 'CH']);
+  });
+
   it('normalises additions and keeps explicit carrier choices', async () => {
     const fetch = vi.fn().mockResolvedValue(response({ package: packageRow, jobIds: [] }));
     vi.stubGlobal('fetch', fetch);

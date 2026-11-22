@@ -193,8 +193,8 @@ class DeviceParcelTests {
                 ),
             )
         },
-        detect = { number, prefixOfSaved, typed ->
-            calls.add("detect $number${if (prefixOfSaved) " prefix" else ""}${typed?.let { " as $it" } ?: ""}")
+        detect = { number, prefixOfSaved, typed, country ->
+            calls.add("detect $number${if (prefixOfSaved) " prefix" else ""}${typed?.let { " as $it" } ?: ""}${country?.let { " for $it" } ?: ""}")
             throw DeliveryApiError.ServiceFailed(503)
         },
         setAlert = { linkId, key, request ->
@@ -848,6 +848,33 @@ class DeviceParcelTests {
         runCatching { device.detect(trackingNumber = "314159265") }
 
         assertEquals(listOf("detect 314159265 as 31415926-5", "detect 314159265", "detect 314159265"), calls.all)
+    }
+
+    /** A guest's check goes for the country picked on Add for the number, else for the phone's region. */
+    @Test
+    fun aGuestsDetectionSendsTheCountryPickedElseThePhonesRegion() = runTest {
+        val calls = Calls()
+        val device = device(client(calls), Memory(), this)
+        runCatching { device.detect(trackingNumber = "314159265", country = "FR") }
+        runCatching { device.detect(trackingNumber = "314159265") }
+        assertEquals(listOf("detect 314159265 for FR", "detect 314159265"), calls.all)
+
+        val transport = RecordingTransport { jsonResponse(200, """{"trackingNumber":"314159265","carrier":"unknown"}""") }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val api = device(DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.forLanguageTag("fr-CH") }), Memory(), this)
+        api.detect(trackingNumber = "314159265", country = "FR")
+        api.detect(trackingNumber = "314159265")
+        assertEquals(
+            listOf(
+                """{"lookupCountryHint":"FR","trackingNumber":"314159265"}""",
+                """{"lookupCountryHint":"CH","trackingNumber":"314159265"}""",
+            ),
+            transport.requests.map { it.body?.decodeToString() },
+        )
+        assertEquals(listOf("/api/public/detect", "/api/public/detect"), transport.requests.map { it.path })
     }
 
     @Test
@@ -1534,6 +1561,56 @@ class DeviceParcelTests {
         device.forgetAll()
         assertTrue(storage.parcels.isEmpty())
         assertEquals(listOf(given(CarrierId.Dpd, "75001"), given(CarrierId.GlsCh, "8000")), memory.entries)
+    }
+
+    /** The country picked on Add goes with the parcel added, a guest's lookup and an account's alike; else the phone's. */
+    @Test
+    fun aParcelAddedKeepsTheCountryPickedForItsNumber() = runTest {
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
+            ),
+        ).decodeToString()
+        fun added(number: String) = JsonEncoder.deliveryTracker.encode(
+            CreatePackageResponse.serializer(),
+            CreatePackageResponse(
+                Parcel(
+                    id = UUID.randomUUID(), trackingNumber = number, label = "", carrier = CarrierId.Dhl, createdAt = "2026-10-02T08:00:00Z",
+                    syncStatus = SyncStatus.Pending, notificationsMuted = false,
+                ),
+                emptyList(),
+            ),
+        ).decodeToString()
+        val transport = RecordingTransport { request ->
+            when (request.method to request.path) {
+                "POST" to "/auth/v1/verify" -> jsonResponse(200, signedIn)
+                "POST" to "/api/packages" -> jsonResponse(
+                    201, added(Json.parseToJsonElement(request.body!!.decodeToString()).jsonObject["trackingNumber"]!!.jsonPrimitive.content),
+                )
+                else -> jsonResponse(404)
+            }
+        }
+        val calls = Calls()
+        val found = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID()))
+        val device = device(client(calls, lookup = found), Memory(), backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null, lookupCountry = "FR")
+        assertEquals(listOf<String?>("FR"), calls.lookupCountries)
+
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.add(trackingNumber = "TESTPARCEL456", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null, lookupCountry = "DE")
+        store.add(trackingNumber = "TESTPARCEL789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+        val sent = transport.requests.filter { it.method == "POST" && it.path == "/api/packages" }
+            .map { Json.parseToJsonElement(it.body!!.decodeToString()).jsonObject["lookupCountryHint"]?.jsonPrimitive?.content }
+        // The phone's region, the fixtures' UK, where none was picked.
+        assertEquals(listOf("DE", "GB"), sent)
     }
 
     @Test

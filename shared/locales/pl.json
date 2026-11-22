@@ -1099,6 +1099,8 @@
   "add.line.later": "Peek poszuka po dodaniu",
   "add.line.change": "Zmień",
   "add.line.choose": "Wybierz",
+  "add.line.country": "{{country}}: {{text}}",
+  "add.lookupCountry": "Kraj, dla którego Peek szuka numeru",
   "picker.search": "Szukaj wśród {{count}} przewoźników",
   "picker.searchLabel": "Szukaj przewoźnika",
   "picker.clear": "Wyczyść wyszukiwanie",

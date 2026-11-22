@@ -285,7 +285,7 @@ async function posted(raw: Uint8Array<ArrayBuffer>, to = recipient, secret = SEC
 }
 
 /** The account's parcels as the database would keep them, with its allowance. */
-function account(options: { known?: string[]; allowance?: number } = {}) {
+function account(options: { known?: string[]; allowance?: number; country?: string } = {}) {
   const service = SupabaseServiceClient.prototype;
   let allowance = options.allowance ?? 15;
   const known = new Map((options.known ?? []).map((number) => [number, `known-${number}`]));
@@ -294,6 +294,8 @@ function account(options: { known?: string[]; allowance?: number } = {}) {
     claimReceived: vi.spyOn(service, 'claimReceivedInboundMail').mockResolvedValue(true),
     claimMail: vi.spyOn(service, 'claimInboundMail').mockResolvedValue({ allowed: true, scope: null }),
     record: vi.spyOn(service, 'recordInboundMail').mockResolvedValue(undefined),
+    // The country the account's latest parcel was looked up from.
+    country: vi.spyOn(service, 'latestLookupCountry').mockResolvedValue(options.country ?? null),
     known: vi.spyOn(service, 'accountTrackingNumbers').mockImplementation(async (_, numbers) => new Map(numbers.filter((n) => known.has(n)).map((n) => [n, known.get(n)!]))),
     claim: vi.spyOn(service, 'claimAccountTracking').mockImplementation(async () => {
       allowance -= 1;
@@ -323,9 +325,17 @@ describe('an email to a forwarding address', () => {
     expect(db.queue).toHaveBeenCalledWith({ userId, packageId: `new-${UPS}`, reason: 'added' });
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
     // Each is new to recognition, as one added on the Add sheet is, before its first check is queued; an email gives
-    // no country of the reader's.
+    // no country of the reader's, and this account's parcels have none.
     expect(db.update.mock.calls).toEqual([UPS, DHL].map((number) => [`new-${number}`, { carrier_data: { add_recognition_pending: true } }]));
     expect(db.update.mock.invocationCallOrder[0]).toBeLessThan(db.queue.mock.invocationCallOrder[0]!);
+  });
+
+  it('adds the numbers as from the country the account\'s latest parcel was looked up from, read once', async () => {
+    const db = account({ country: 'CH' });
+    const response = await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Your parcels ${UPS} and ${DHL} are on their way.`));
+    expect(response.status).toBe(202);
+    expect(db.country).toHaveBeenCalledExactlyOnceWith(userId);
+    expect(db.update.mock.calls).toEqual([UPS, DHL].map((number) => [`new-${number}`, { carrier_data: { lookup_country_hint: 'CH', add_recognition_pending: true } }]));
   });
 
   it('still queues the first check of a parcel it could not mark new to recognition', async () => {

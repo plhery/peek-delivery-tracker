@@ -265,10 +265,12 @@ final class DeliveryAPIClient {
         return response.packages
     }
 
-    /// `typedNumber`: the number as typed, from `CarrierDetectionRequest.typedNumber(_:for:)`.
-    func detectCarrier(trackingNumber: String, typedNumber: String? = nil) async throws -> CarrierDetectionResponse {
+    /// `typedNumber`: the number as typed, from `CarrierDetectionRequest.typedNumber(_:for:)`. `lookupCountry`: a country
+    /// picked for this number, in place of the device's.
+    func detectCarrier(trackingNumber: String, typedNumber: String? = nil, lookupCountry: String? = nil) async throws -> CarrierDetectionResponse {
         try await request("/api/carriers/detect", method: "POST",
-                          body: CarrierDetectionRequest(trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint(),
+                          body: CarrierDetectionRequest(trackingNumber: trackingNumber,
+                                                        lookupCountryHint: lookupCountry ?? ParcelLookupCountry.hint(),
                                                         typedNumber: typedNumber))
     }
 

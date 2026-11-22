@@ -531,6 +531,36 @@ class CarrierCatalogTests {
         assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, applies = true))
     }
 
+    /** The carriers asked, and so a number found nowhere, depend on the country asked for: another one asks again. */
+    @Test
+    fun theSameNumberAskedForAnotherCountryIsAskedAboutAgain() {
+        val number = "12345478901"
+        var recognition = CarrierRecognition(settledNumber = number)
+        assertEquals(number, recognition.request(number, applies = true, country = "CH"))
+        recognition = recognition.copy(
+            askedCountry = "CH", answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsCh)),
+        )
+        assertNull(recognition.request(number, applies = true, country = "CH"))
+        assertEquals(CarrierRecognition.Status.NotFound(listOf(CarrierId.GlsCh)), recognition.status(number, applies = true, country = "CH"))
+        assertTrue(recognition.asked(null, "CH"))
+
+        // Asked for Germany, the Swiss answer says nothing: it is asked about, and the line waits for it.
+        assertEquals(number, recognition.request(number, applies = true, country = "DE"))
+        assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, applies = true, country = "DE"))
+        // Without a country, as a phone whose region names none asks, it is another question too.
+        assertEquals(number, recognition.request(number, applies = true))
+        assertFalse(recognition.asked(null, null))
+
+        // A failure is the country's too.
+        recognition = recognition.copy(answer = null, failedNumber = number, askedCountry = "DE")
+        assertNull(recognition.request(number, applies = true, country = "DE"))
+        assertEquals(CarrierRecognition.Status.Failed(emptyList()), recognition.status(number, applies = true, country = "DE"))
+        assertEquals(number, recognition.request(number, applies = true, country = "CH"))
+        assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, applies = true, country = "CH"))
+        // And the spelling still counts beside it.
+        assertEquals(number, recognition.request(number, "1234547890-1", applies = true, country = "DE"))
+    }
+
     @Test
     fun sixDigitsAreAPickupCodeNobodyIsAskedAbout() {
         assertTrue(CarrierCatalog.isPickupCode(CarrierCatalog.normalize("204 617")))

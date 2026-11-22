@@ -9,7 +9,7 @@ import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
 import { HttpError } from './api';
 import { wakeSyncWorker } from './background';
-import { rememberLookupCountry } from './lookupCountry';
+import { accountLookupCountry, rememberLookupCountry } from './lookupCountry';
 import { captureOperationalError } from './observability';
 import { reviewDemoCarrier, reviewDemoNumbersInText } from './reviewDemo';
 import { settleTypedSupportCases } from './reviewQueues';
@@ -105,7 +105,8 @@ export interface AddingOptions {
 /**
  * Adds the numbers to an account, each as the Add sheet would, with the same daily allowance, parcel limit and
  * first check. A number the account already follows is left as it is and costs nothing. Once the allowance or the
- * parcel limit stops one, the numbers after it are not tried.
+ * parcel limit stops one, the numbers after it are not tried. No request of the reader's comes with a text, so the
+ * numbers are added as from the country the account's latest parcel was looked up from (`accountLookupCountry`).
  */
 export async function addNumbersToAccount(
   service: SupabaseServiceClient,
@@ -117,6 +118,8 @@ export async function addNumbersToAccount(
   const known = await service.accountTrackingNumbers(userId, numbers.map(({ normalized }) => normalized));
   const additions: ParcelAddition[] = [];
   let stopped: ParcelAddition | null = null;
+  // Read once, for the first number to add.
+  let country: Promise<string | null> | undefined;
   for (const { normalized, match } of numbers) {
     // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
     const demo = reviewDemoCarrier(userId, normalized);
@@ -134,8 +137,10 @@ export async function addNumbersToAccount(
       continue;
     }
     let values;
+    country ??= accountLookupCountry(service, userId);
     try {
-      values = newPackageValues({ trackingNumber: match.trackingNumber, label, carrier, trackingUrl: demo ? '' : match.trackingUrl ?? '' });
+      values = newPackageValues({ trackingNumber: match.trackingNumber, label, carrier, trackingUrl: demo ? '' : match.trackingUrl ?? '' },
+        await country);
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push({ trackingNumber: normalized, carrier, outcome: 'refused', reason: error.message });
@@ -194,7 +199,7 @@ export async function addNumbersToAccount(
       captureOperationalError(error, { component: 'packages', operation: 'remember_lookup_country' });
       return null;
     });
-    if (parcel) await rememberLookupCountry(service, parcel, null);
+    if (parcel) await rememberLookupCountry(service, parcel, await country);
     await settleTypedSupportCases(service, trackingNumber);
     const jobId = await queueFirstCheck(service, userId, packageId);
     additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId });

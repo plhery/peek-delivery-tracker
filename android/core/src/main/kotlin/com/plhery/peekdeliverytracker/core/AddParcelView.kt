@@ -166,9 +166,10 @@ data class CarrierPostcodes(
 /**
  * What the Add sheet (`AddParcelView`) holds and works out from it: the field's text, the number chosen among several,
  * the carrier picked by hand, the number added as typed despite its check digit, the carrier check's answers, the
- * Amazon number's verification, the link, the postcode and the phone digits typed, and the postcode's country chosen. The view's own
- * state (focus, saving, the error) is the app's; this is its arithmetic, with [region] the phone's country
- * (`CarrierCatalog.deviceCountry()`).
+ * Amazon number's verification, the link, the postcode and the phone digits typed, the postcode's country chosen, and
+ * the country picked for the number to be looked up for. The view's own state (focus, saving, the error) is the app's;
+ * this is its arithmetic, with [region] the phone's country (`CarrierCatalog.deviceCountry()`) and
+ * [deviceLookupCountry] the one its lookups are sent for.
  */
 data class ParcelAddition(
     val trackingInput: String = "",
@@ -192,9 +193,26 @@ data class ParcelAddition(
     val demo: Boolean = false,
     val catalog: CarrierCatalog = CarrierCatalog.shared,
     val region: String? = CarrierCatalog.deviceCountry(),
+    /**
+     * The country the carriers are asked for unless the reader picks another, which the app gives: the phone's region,
+     * as every lookup sends it (`ParcelLookupCountry.hint`). None where the region names none: the server then takes
+     * the IP's.
+     */
+    val deviceLookupCountry: String? = null,
+    /** The country picked for a number (the web's `pickedCountry`), for that number alone; never kept as a setting. */
+    val pickedCountry: PickedCountry? = null,
 ) {
     /** The fields `submitTracking()` moves the focus between (`Field`). */
     enum class Field { Label, Tracking, TrackingUrl, DeliveryPostcode, PhoneDigits }
+
+    /** A country picked for the carriers to be asked for about [number], a normalized number. */
+    data class PickedCountry(val number: String, val country: String)
+
+    /**
+     * A sentence of the carrier line with the country the carriers are asked for in it (`add.line.country`): its
+     * [text], and where the country's name stands in it ([country], UTF-16 offsets), which picks another.
+     */
+    data class CountrySentence(val text: String, val country: IntRange)
 
     val cleanedInput: String get() = trackingInput.trimmingWhitespacesAndNewlines()
 
@@ -251,19 +269,36 @@ data class ParcelAddition(
     /** The number as typed, when its dashes or spaces spell it otherwise: detection reads them. */
     val typedSpelling: String? get() = typedTrackingNumber(parsed.trackingNumber, normalizedNumber)
 
+    /** The country picked for the number in play (the web's `picked`), which the parcel added from here keeps. */
+    val pickedLookupCountry: String? get() = pickedCountry?.takeIf { it.number == normalizedNumber }?.country
+
+    /** The country the carriers are asked for (`sentCountry`): the one picked for the number, else the phone's. */
+    val sentLookupCountry: String? get() = pickedLookupCountry ?: deviceLookupCountry
+
+    /** `country` picked for the number in play, the carriers to be asked again for it. */
+    fun pickingCountry(country: String): ParcelAddition = copy(pickedCountry = PickedCountry(normalizedNumber, country))
+
     /**
-     * The check to run: the number, and its spelling, so that the same number typed otherwise is asked about again and
-     * an answer for the earlier spelling never lands on it.
+     * The check to run: the number, its spelling and the country it is asked for, so that the same number typed
+     * otherwise, or asked for another country, is asked about again and an earlier answer never lands on it.
      */
     val recognitionQuestion: CarrierDetectionRequest?
         get() {
             val spelling = typedSpelling
-            return recognition.request(normalizedNumber, spelling, recognizable)?.let {
-                CarrierDetectionRequest(trackingNumber = it, typedNumber = spelling)
+            val country = sentLookupCountry
+            return recognition.request(normalizedNumber, spelling, recognizable, country)?.let {
+                CarrierDetectionRequest(trackingNumber = it, lookupCountryHint = country, typedNumber = spelling)
             }
         }
 
-    val recognitionStatus: CarrierRecognition.Status get() = recognition.status(normalizedNumber, typedSpelling, recognizable)
+    val recognitionStatus: CarrierRecognition.Status
+        get() = recognition.status(normalizedNumber, typedSpelling, recognizable, sentLookupCountry)
+
+    /** The check's answer for the question as it stands: the number in play, as typed now, for the country asked now. */
+    private val currentAnswer: CarrierDetectionResponse?
+        get() = recognition.answer?.takeIf {
+            recognizable && it.trackingNumber == normalizedNumber && recognition.asked(typedSpelling, sentLookupCountry)
+        }
 
     val checking: Boolean get() = carrierOverride == null && recognitionStatus is CarrierRecognition.Status.Asking
 
@@ -279,17 +314,44 @@ data class ParcelAddition(
         }
 
     /** What tracking services said about the number in the field while no carrier knows it. */
-    fun preflightDetail(localizer: Localizer): String? {
-        val answer = recognition.answer
-        if (!recognizable || answer == null || answer.trackingNumber != normalizedNumber || recognition.askedSpelling != typedSpelling ||
-            answer.carrier != CarrierId.Unknown
-        ) return null
-        if (answer.trackingFound == true) return localizer.text("add.historyFound")
-        if (answer.providers?.any { it.outcome == TrackingProviderCheckOutcome.InputRequired } == true) {
-            return localizer.text("add.providerInputNeeded")
+    fun preflightDetail(localizer: Localizer): String? = preflightKey?.let(localizer::text)
+
+    private val preflightKey: String?
+        get() {
+            val answer = currentAnswer?.takeIf { it.carrier == CarrierId.Unknown } ?: return null
+            if (answer.trackingFound == true) return "add.historyFound"
+            if (answer.providers?.any { it.outcome == TrackingProviderCheckOutcome.InputRequired } == true) return "add.providerInputNeeded"
+            return null
         }
-        return null
-    }
+
+    /**
+     * The country the carriers were asked for, which decides which carriers were asked and so what "not found" means:
+     * while they are asked, once none knows the number, or once none could answer, unless tracking services said more.
+     * The answer's, else the one asked for while it comes or after a failure; none where neither is known (the web's
+     * `askedFor`).
+     */
+    val askedFor: String?
+        get() {
+            when (recognitionStatus) {
+                is CarrierRecognition.Status.Asking, is CarrierRecognition.Status.NotFound, is CarrierRecognition.Status.Failed -> Unit
+                else -> return null
+            }
+            if (preflightKey != null) return null
+            val answer = currentAnswer
+            return if (answer != null) answer.lookupCountry else sentLookupCountry
+        }
+
+    /**
+     * The country the carrier line names before its detail, which picks another for the number: [askedFor], while the
+     * carrier is left automatic, for a number that isn't Amazon's and whose line shows no carrier from its shape (the
+     * web's `lineCountry`).
+     */
+    val lineCountry: String?
+        get() {
+            val carrier = lineCarrier
+            if (carrierOverride != null || amazonNumber || (carrier != null && carrier != CarrierId.InternationalPost)) return null
+            return askedFor
+        }
 
     /** A carrier picked by hand, once the number is settled. */
     val refusalQuestion: NumberRefusalRequest?
@@ -302,8 +364,20 @@ data class ParcelAddition(
     fun lineName(localizer: Localizer): String =
         lineCarrier?.let { catalog.info(it, localizer.language).displayName } ?: localizer.text("add.detect")
 
-    /** The carrier line's detail: what the carrier check has found so far, or how the carrier was given. */
-    fun lineDetail(localizer: Localizer): String? {
+    /**
+     * The carrier line's detail: what the carrier check has found so far, or how the carrier was given; after the
+     * country the carriers were asked for where the line names it ([lineCountry]).
+     */
+    fun lineDetail(localizer: Localizer): String? = lineSentence(localizer)?.text ?: statusDetail(localizer)
+
+    /** The carrier line's detail with the country it names, and where the country stands in it; none without one. */
+    fun lineSentence(localizer: Localizer): CountrySentence? {
+        val country = lineCountry ?: return null
+        val detail = statusDetail(localizer) ?: return null
+        return countrySentence(detail, country, localizer)
+    }
+
+    private fun statusDetail(localizer: Localizer): String? {
         if (carrierOverride != null) return localizer.text(if (refused) "add.line.refused" else "add.line.chosen")
         val status = recognitionStatus
         if (status is CarrierRecognition.Status.Recognized) return localizer.text("add.line.found")
@@ -320,8 +394,16 @@ data class ParcelAddition(
         }
     }
 
-    /** What automatic detection does, in the picker: what the check found, or the carrier the number names. */
+    /**
+     * What automatic detection does, in the picker: what the check found, or the carrier the number names; after the
+     * country the carriers were asked for where it is known ([askedFor]).
+     */
     fun automaticDescription(localizer: Localizer): String {
+        val description = automaticStatus(localizer)
+        return askedFor?.let { countrySentence(description, it, localizer).text } ?: description
+    }
+
+    private fun automaticStatus(localizer: Localizer): String {
         preflightDetail(localizer)?.let { return it }
         return when (val status = recognitionStatus) {
             is CarrierRecognition.Status.Asking -> localizer.text("add.checkingServices")
@@ -374,6 +456,14 @@ data class ParcelAddition(
     /** The carriers' names as a list in the app's language (`ListFormatter`). */
     fun carrierNames(carriers: List<CarrierId>, localizer: Localizer): String =
         Icu.lists.join(carriers.map { catalog.info(it, localizer.language).displayName }, localizer.language.locale)
+
+    /** `text` after `country`'s name in the app's language (`add.line.country`), with where the name stands. */
+    private fun countrySentence(text: String, country: String, localizer: Localizer): CountrySentence {
+        val name = TrackingLocation.countryName(country, localizer.language)
+        val parts = localizer.text("add.line.country", mapOf("country" to MARK, "text" to text)).split(MARK)
+        val before = parts.first()
+        return CountrySentence(before + name + parts.drop(1).joinToString(name), before.length until before.length + name.length)
+    }
 
     val shippingConfirmed: Boolean
         get() {
@@ -687,5 +777,8 @@ data class ParcelAddition(
         /** The question [keptQuestion] kept; none where it no longer reads. */
         fun question(kept: String): NumberRefusalRequest? =
             runCatching { ApiJson.decodeFromString(NumberRefusalRequest.serializer(), kept) }.getOrNull()
+
+        /** Where a value stands in a sentence before it takes its place. */
+        private const val MARK = "\u0000"
     }
 }

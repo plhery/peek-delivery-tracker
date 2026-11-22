@@ -27,16 +27,19 @@ final class DeviceParcelTests: XCTestCase {
         private let lock = NSLock()
         private var log: [String] = []
         private var countryHints: [String?] = []
+        private var detectHints: [String?] = []
         private var postcodes: [String?] = []
         private var languages: [String?] = []
         private var digits: [String?] = []
         func add(_ call: String) { lock.withLock { log.append(call) } }
         func lookupCountry(_ hint: String?) { lock.withLock { countryHints.append(hint) } }
+        func detectCountry(_ hint: String?) { lock.withLock { detectHints.append(hint) } }
         func lookupPostcode(_ postcode: String?) { lock.withLock { postcodes.append(postcode) } }
         func lookupLanguage(_ language: String?) { lock.withLock { languages.append(language) } }
         func lookupPhoneDigits(_ phoneDigits: String?) { lock.withLock { digits.append(phoneDigits) } }
         var all: [String] { lock.withLock { log } }
         var lookupCountries: [String?] { lock.withLock { countryHints } }
+        var detectCountries: [String?] { lock.withLock { detectHints } }
         var lookupPostcodes: [String?] { lock.withLock { postcodes } }
         var lookupLanguages: [String?] { lock.withLock { languages } }
         var lookupPhoneDigits: [String?] { lock.withLock { digits } }
@@ -77,6 +80,7 @@ final class DeviceParcelTests: XCTestCase {
     }
 
     private func client(_ calls: Calls, lookup: PublicLookupResponse? = nil,
+                        detect: CarrierDetectionResponse? = nil,
                         read: @escaping @Sendable (String) throws -> PublicParcelResponse? = { _ in nil },
                         alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on },
                         unalert: @escaping @Sendable (String) throws -> Void = { _ in },
@@ -120,9 +124,11 @@ final class DeviceParcelTests: XCTestCase {
                                             package: PublicPackage(id: UUID(), label: "", carrier: .dhl, createdAt: "2026-10-01T08:00:00Z", syncStatus: .ok,
                                                                    carrierData: PublicPackageCarrierData(), notificationsMuted: false, trackingEvents: []))
             },
-            detect: { number, typed, prefixOfSaved in
-                calls.add("detect \(number)\(typed.map { " as \($0)" } ?? "")\(prefixOfSaved ? " prefix" : "")")
-                throw DeliveryAPIError.serviceFailed(503)
+            detect: { request in
+                calls.add("detect \(request.trackingNumber)\(request.typedNumber.map { " as \($0)" } ?? "")\(request.prefixOfSaved == true ? " prefix" : "")")
+                calls.detectCountry(request.lookupCountryHint)
+                guard let detect else { throw DeliveryAPIError.serviceFailed(503) }
+                return detect
             },
             setAlert: { linkID, key, request in
                 calls.add("alert \(linkID) \((key ?? "-").prefix(1)) \(request.preset.rawValue) \(request.token) \(request.locale.rawValue) \(request.environment.rawValue)")
@@ -477,6 +483,61 @@ final class DeviceParcelTests: XCTestCase {
         _ = try? await device.detect(trackingNumber: "OTHERPARCEL1")
 
         XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dhl", "detect TESTPARCEL12 prefix", "detect TESTPARCEL123789", "detect OTHERPARCEL1"])
+    }
+
+    /// A country picked in the Add sheet for one number goes with its carrier check and with the parcel added from there,
+    /// without an account and with one; otherwise the device's region goes, as it always did.
+    func testACountryPickedForANumberGoesWithItsCheckAndItsParcel() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
+        let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
+            accessToken: "access", tokenType: "bearer", expiresIn: 3600,
+            expiresAt: Int(Date().timeIntervalSince1970) + 3600, refreshToken: "refresh", user: user
+        ))
+        let accountParcel = Parcel(id: UUID(), trackingNumber: "TESTPARCEL999", label: "", carrier: .dhl, createdAt: "2026-10-02T08:00:00Z",
+                                   syncStatus: .pending, notificationsMuted: false)
+        let added = try JSONEncoder.deliveryTracker.encode(CreatePackageResponse(package: accountParcel, jobIDs: []))
+        let answer = CarrierDetectionResponse(trackingNumber: "TESTPARCEL999", carrier: .unknown, asked: [.dhl], lookupCountry: "DE")
+        let detected = try JSONEncoder.deliveryTracker.encode(answer)
+        nonisolated(unsafe) var sent: [String] = []
+        PostcodeTestURLProtocol.handler = { request in
+            let body = (try? JSONSerialization.jsonObject(with: PostcodeTestURLProtocol.body(of: request))) as? [String: Any]
+            let country = body?["lookupCountryHint"] as? String ?? "-"
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/auth/v1/verify"): return (200, signedIn)
+            case ("POST", "/api/carriers/detect"): sent.append("detect \(country)"); return (200, detected)
+            case ("POST", "/api/packages"): sent.append("add \(country)"); return (201, added)
+            default: return (404, Data())
+            }
+        }
+        let calls = Calls()
+        let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: package(UUID()))
+        let device = DeviceParcels(client: client(calls, lookup: found, detect: answer), storage: Memory())
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        session.showWelcome()
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
+                                deviceNotifications: quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        let region = ParcelLookupCountry.hint()
+
+        // Without an account.
+        _ = try await store.detectCarrier(trackingNumber: "TESTPARCEL123789", lookupCountry: "DE")
+        _ = try await store.detectCarrier(trackingNumber: "TESTPARCEL123789")
+        XCTAssertEqual(calls.detectCountries, ["DE", region])
+        try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil,
+                            lookupCountry: "DE")
+        XCTAssertEqual(calls.lookupCountries, ["DE"])
+
+        // With one.
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        let checked = try await store.detectCarrier(trackingNumber: "TESTPARCEL999", lookupCountry: "DE")
+        XCTAssertEqual(checked.lookupCountry, "DE")
+        _ = try await store.detectCarrier(trackingNumber: "TESTPARCEL999")
+        try await store.add(trackingNumber: "TESTPARCEL999", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil, lookupCountry: "DE")
+        XCTAssertEqual(sent, ["detect DE", "detect \(region ?? "-")", "add DE"])
     }
 
     func testTheSameNumberIsNotLookedUpTwice() async throws {

@@ -872,7 +872,7 @@
   "timeline.syncing": "Sprawdzanie aktualizacji…",
   "timeline.timeZone": "Godziny w twojej strefie czasowej: {{zone}}.",
   "timeline.writtenAhead.note": "Strona przewoźnika {{carrier}} pokazuje z góry całą trasę, łącznie z doręczeniem. Te etapy to nie prawdziwe skany.",
-  "timeline.writtenAhead.when": "Wpisane z góry: {{when}}",
+  "timeline.writtenAhead.when": "Wpisane z góry na {{when}}",
   "view.allCarriers": "Wszyscy przewoźnicy",
   "view.carrier": "Przewoźnik",
   "view.clear": "Wyczyść filtry",

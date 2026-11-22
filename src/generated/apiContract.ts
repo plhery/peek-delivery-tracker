@@ -32702,7 +32702,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^JXC(?:YI|ZO|US|ZI)\\d{10}YQ$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ]
   },
@@ -67832,6 +67832,37 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.zto56.com/billsearch.html"
+  },
+  "activos24": {
+    "displayName": "Activos24",
+    "aliases": [
+      "Activos 24",
+      "Activos 24 - Distribuição, Eventos e Logística Lda"
+    ],
+    "countries": [
+      "PT"
+    ],
+    "color": "#ff7400",
+    "selectable": true,
+    "timezone": "Europe/Lisbon",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "activos24"
+    },
+    "trackingUrlTemplate": "https://activos24.com/pt/seguir-encomenda?tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "activos24.com"
+        ],
+        "pathPattern": "^/pt/seguir-encomenda/?$",
+        "params": [
+          "tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://activos24.com/pt/seguir-encomenda"
   }
 } as const;
 
@@ -69898,7 +69929,8 @@ export const CARRIER_IDS = [
   "suteng-express",
   "yaoqi-logistics",
   "yuxin-logistics",
-  "zto-freight"
+  "zto-freight",
+  "activos24"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -8834,6 +8834,30 @@
     ]
   },
   {
+    "input": "035065897641",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "035129052",
     "carrier": "unknown",
     "confidence": "low",
@@ -99099,14 +99123,10 @@
   },
   {
     "input": "JXCZO9999999990YQ",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "juxi-express",
+    "confidence": "high",
     "candidates": [
-      "dhlink",
       "juxi-express"
-    ],
-    "preferred": [
-      "dhlink"
     ],
     "asked": [
       "dhlink"

@@ -14,10 +14,10 @@ These are the shapes Peek files under GOFO Italy, in capitals or not:
 
 | Shape | Invented example |
 | --- | --- |
-| GFIT and 13 digits | `GFIT1234567890123` |
-| GFIT and 14 digits | `GFIT12345678901235` |
-| CIIT and 13 digits | `CIIT1234567890123` |
-| CIIT and 14 digits | `CIIT12345678901234` |
+| GFIT and 13 digits | `GFIT4829105736284` |
+| GFIT and 14 digits | `GFIT48291057362848` |
+| CIIT and 13 digits | `CIIT4829105736284` |
+| CIIT and 14 digits | `CIIT48291057362841` |
 
 GOFO's other networks follow the same pattern, with their own country after `GF` or `CI`. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFNL` to GOFO Netherlands and `GFES` to GOFO Spain. `GFUS` with 14 digits, `GF` with only 13, or `CR` with 12 belong to [GOFO Express](carrier:gofo) in the United States, a separate network, and `GFCA` with 14 digits to [GOFO Canada](carrier:gofo-ca). A number that starts with `GFIT` but has 12 or 15 digits isn't one Peek files under GOFO Italy: check it for a typo. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
 
@@ -48,7 +48,7 @@ If [YunExpress](carrier:yunexpress) handed your parcel to GOFO Italy, YunExpress
 
 **Not moving.** Peek keeps asking GOFO. If four days pass without a new scan before the parcel is out for delivery, Peek's parcel page says so and links to GOFO Italy's help page ("Get help from GOFO Italy"). See also [why tracking stops updating](guide:tracking-not-updating).
 
-**Missed delivery.** After `Consegna fallita, tipo:Destinatario assente` or `Consegna fallita, tipo:L'indirizzo è errato`, Peek shows "Delivery attempted"; a failed attempt with another reason after `tipo:` shows as "Needs attention". What happens next is up to GOFO: see [missed deliveries](guide:missed-delivery) for what to check.
+**Missed delivery.** After `Consegna fallita, tipo:Destinatario assente` or `Consegna fallita, tipo:L'indirizzo è errato`, Peek shows "Delivery attempted", and so does a failed attempt with any other reason after `tipo:`. What happens next is up to GOFO: see [missed deliveries](guide:missed-delivery) for what to check.
 
 **Late.** Under EU consumer rules, a shop must deliver within 30 days unless you agreed on another time. If it doesn't, give it an extra, reasonable deadline; if that passes too, you can cancel the order and get your money back.
 
@@ -74,7 +74,7 @@ GOFO Italy's help page is on its Italian site, gofo.com, and Peek links to it as
 
 [Peek](/) recognises `GFIT` and `CIIT` numbers by themselves. You can also paste a link from GOFO's Italian tracking page (on gofo.com or gofoexpress.it, with `id=` and the number).
 
-Peek reads GOFO's Italian tracking up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day GOFO scans the parcel out for delivery, while GOFO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with the place GOFO names for each scan, the delivery time and those places on a map, and it can notify you of every scan, important steps only or delivery day only. Where GOFO gives only a depot code or the country, the scan shows no place. Until GOFO lists a first scan, Peek shows "Waiting for GOFO Italy" and keeps asking rather than calling the number unknown at once. If GOFO still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If GOFO lists the shipment but hasn't scanned it yet, it knows the number: Peek keeps checking and shows "Waiting for GOFO Italy", with no request to check the number. Peek shows GOFO's expected delivery date until the parcel is out for delivery, delivered, returned or at a pickup point; it shows no weight and leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek reads GOFO's Italian tracking up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day GOFO scans the parcel out for delivery, while GOFO's own tracker answers (through tracking services, up to every 15 minutes that day); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with the place GOFO names for each scan, the delivery time and those places on a map, and it can notify you of every scan, important steps only or delivery day only. Where GOFO gives only a depot code or the country, the scan shows no place. Until GOFO lists a first scan, Peek shows "Waiting for GOFO Italy" and keeps asking rather than calling the number unknown at once. If GOFO still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If GOFO lists the shipment but hasn't scanned it yet, it knows the number: Peek keeps checking and shows "Waiting for GOFO Italy", with no request to check the number. Peek shows GOFO's expected delivery date until the parcel is out for delivery, delivered, returned or at a pickup point; it shows no weight and leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 
@@ -88,7 +88,7 @@ GOFO's Italian company is GOFO Italia s.r.l., with its registered office in Lain
 
 ### Is GOFO the same as CIRRO Parcel?
 
-In Italy, for tracking purposes, yes: Peek's carrier list gives GOFO Italy the other name CIRRO Parcel Italy. A tracker that says only "Cirro" may mean GOFO's Italian, French or Dutch network, or Cirro's own cross-border line, which hands parcels to national posts under their numbers.
+In Italy, for tracking purposes, yes: Peek's carrier list gives GOFO Italy the other name CIRRO Parcel Italy. A tracker that says only "Cirro" may mean GOFO's Italian, French or Dutch network.
 
 ### What can I do if my GOFO parcel is lost?
 

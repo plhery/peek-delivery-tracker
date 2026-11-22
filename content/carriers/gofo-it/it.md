@@ -14,10 +14,10 @@ Queste sono le forme che Peek attribuisce a GOFO Italy, in maiuscolo o in minusc
 
 | Forma | Esempio inventato |
 | --- | --- |
-| GFIT e 13 cifre | `GFIT1234567890123` |
-| GFIT e 14 cifre | `GFIT12345678901235` |
-| CIIT e 13 cifre | `CIIT1234567890123` |
-| CIIT e 14 cifre | `CIIT12345678901234` |
+| GFIT e 13 cifre | `GFIT4829105736284` |
+| GFIT e 14 cifre | `GFIT48291057362848` |
+| CIIT e 13 cifre | `CIIT4829105736284` |
+| CIIT e 14 cifre | `CIIT48291057362841` |
 
 Le altre reti di GOFO seguono lo stesso schema, con il proprio Paese dopo `GF` o `CI`. I codici `GFFR` e `CIFR` sono di GOFO France, `GFNL` di GOFO Paesi Bassi e `GFES` di GOFO Spagna. Un `GFUS` con 14 cifre, un `GF` con solo 13 o un `CR` con 12 sono di GOFO Express negli Stati Uniti, una rete diversa, e un `GFCA` con 14 cifre è di GOFO Canada. Se il tuo codice inizia con `GFIT` ma ha 12 o 15 cifre, Peek non lo attribuisce a GOFO Italy: controlla che non ci sia un errore di battitura. Per confrontare le forme: [formati dei codici di tracking](guide:tracking-number-formats).
 
@@ -48,7 +48,7 @@ Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracc
 
 **Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, Peek lo segnala nell'elenco con il giorno dell'ultima scansione («Nessun aggiornamento da lun 12 ott») e nella sua pagina scrive «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Italy.», con un link alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Dopo tre settimane senza scansioni scrive invece «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a GOFO Italy.» Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
-**Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna»; un tentativo fallito con un altro motivo dopo `tipo:` appare come «Problema segnalato». Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
+**Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna», e così un tentativo fallito con qualsiasi altro motivo dopo `tipo:`. Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
 
 **In ritardo.** Secondo le norme europee sui consumatori, il negozio deve consegnarti l'ordine entro 30 giorni, salvo una data diversa concordata. Se non lo fa, sollecitalo e concedigli un'ulteriore proroga ragionevole; se scade anche quella, puoi recedere dal contratto ed essere rimborsato.
 
@@ -74,7 +74,7 @@ La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, 
 
 [Peek](/) riconosce da solo i codici `GFIT` e `CIIT`. Puoi incollare anche un link della pagina di tracciamento italiana di GOFO (su gofo.com o gofoexpress.it, con `id=` e il codice).
 
-Peek controlla il tracciamento italiano di GOFO fino a ogni 10 minuti e fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di GOFO; quando rispondono i servizi di tracciamento, ogni 15 minuti). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e questi luoghi su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Se GOFO indica solo il codice di un deposito o il Paese, la scansione appare senza luogo. Gli orari di GOFO sono letti sull'ora italiana e mostrati nel tuo fuso orario: su peektracker.com e nelle app per iPhone e Android lo ricorda una riga sotto la cronologia («Orari nel tuo fuso orario: …»). Finché GOFO non elenca una prima scansione, Peek mostra «In attesa di GOFO Italy» e continua a chiedere. Se dopo due giorni GOFO non riconosce ancora il codice e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Se GOFO ha già registrato la spedizione ma non l'ha ancora scansionata, conosce il codice: Peek continua a controllare e mostra «In attesa di GOFO Italy», senza chiederti di verificare il codice. Peek mostra la data di consegna prevista da GOFO finché il pacco non viene consegnato, reso o lasciato in un punto di ritiro; non mostra il peso e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Quando hai il pacco aperto, o il giorno della consegna con le notifiche attive, Peek controlla il tracciamento italiano di GOFO fino a ogni 10 minuti e fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di GOFO; quando rispondono i servizi di tracciamento, fino a ogni 15 minuti quel giorno); altrimenti ogni ora. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e questi luoghi su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Se GOFO indica solo il codice di un deposito o il Paese, la scansione appare senza luogo. Gli orari di GOFO sono letti sull'ora italiana e mostrati nel tuo fuso orario: su peektracker.com e nelle app per iPhone e Android lo ricorda una riga sotto la cronologia («Orari nel tuo fuso orario: …»). Finché GOFO non elenca una prima scansione, Peek mostra «In attesa di GOFO Italy» e continua a chiedere. Se dopo due giorni GOFO non riconosce ancora il codice e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Se GOFO ha già registrato la spedizione ma non l'ha ancora scansionata, conosce il codice: Peek continua a controllare e mostra «In attesa di GOFO Italy», senza chiederti di verificare il codice. Peek mostra la data di consegna prevista da GOFO finché il pacco non parte per la consegna o non viene consegnato, reso o lasciato in un punto di ritiro; non mostra il peso e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 
@@ -88,7 +88,7 @@ Te lo dice l'ultima riga del tracciamento: `Arrivato alla struttura di destinazi
 
 ### GOFO e CIRRO Parcel sono la stessa cosa?
 
-In Italia, per il tracking, sì: l'elenco dei corrieri di Peek dà a GOFO Italy anche il nome CIRRO Parcel Italy. Un tracciamento che dice solo «Cirro» può indicare la rete italiana, francese o olandese di GOFO, oppure la linea internazionale di Cirro, che affida i pacchi alle poste nazionali con i loro codici.
+In Italia, per il tracking, sì: l'elenco dei corrieri di Peek dà a GOFO Italy anche il nome CIRRO Parcel Italy. Un tracciamento che dice solo «Cirro» può indicare la rete italiana, francese o olandese di GOFO.
 
 ### Cosa faccio se il mio pacco GOFO è smarrito?
 

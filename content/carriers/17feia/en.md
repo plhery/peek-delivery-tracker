@@ -10,14 +10,14 @@ updated: 2026-11-21
 
 ## 17FEIA tracking number: what it looks like
 
-Peek knows 17FEIA's numbers as FEI, two letters, ten digits and YQ: 17 characters in all. The two letters after FEI are 17FEIA's branch, such as SZ for Shenzhen or SH for Shanghai. Every example below is made up:
+Peek knows 17FEIA's numbers as FEI, two letters, ten digits and YQ: 17 characters in all. For departures from Shenzhen, the two letters after FEI are SZ. Every example below is made up:
 
 | Number | What it is |
 | --- | --- |
-| `FEISZ0000000000YQ` | FEI, two letters, ten digits and YQ: a 17FEIA number. Peek names 17FEIA from the number alone. |
-| `FEISZ000000000YQ` | Only nine digits: not 17FEIA's shape. Check for a missing digit. |
-| `FEISZ0000000000AB` | Two letters other than YQ at the end. Peek doesn't name 17FEIA from the number alone, but asks 17FEIA's tracker whether it has it. |
-| `HHWAA0000000000YQ` | YQ, but HHW in front: a [HuaHan Logistics](carrier:huahan) number. |
+| `FEISZ4829105736YQ` | FEI, two letters, ten digits and YQ: a 17FEIA number. Peek names 17FEIA from the number alone. |
+| `FEISZ482910573YQ` | Only nine digits: not 17FEIA's shape. Check for a missing digit. |
+| `FEISZ4829105736AB` | Two letters other than YQ at the end. Peek doesn't name 17FEIA from the number alone, but asks 17FEIA's tracker whether it has it. |
+| `HHWKG4829105736YQ` | YQ, but HHW in front: a [HuaHan Logistics](carrier:huahan) number. |
 
 In Peek, small letters, spaces and dashes don't matter.
 
@@ -79,7 +79,7 @@ After import customs, 17FEIA hands the parcel to a carrier that takes it on to y
 
 ## 17FEIA contact and customer service
 
-As of 1 November 2026, 17FEIA's website answered Peek with a bot check, so this page lists no contact details for 17FEIA. About your order, ask the seller or forwarder that booked the shipment: they are 17FEIA's customers. For the delivery, ask the delivering carrier.
+17FEIA's website answered Peek with a bot check, so this page lists no contact details for 17FEIA. About your order, ask the seller or forwarder that booked the shipment: they are 17FEIA's customers. For the delivery, ask the delivering carrier.
 
 ## Track a 17FEIA parcel with Peek
 
@@ -91,7 +91,7 @@ Peek shows the status, each line in 17FEIA's English with its place where it giv
 
 When 17FEIA names DPD Germany, DHL or FedEx with a number of that carrier's shape, the parcel card says so ("Delivery with DPD Germany", for example) and lists that number after 17FEIA's. While that carrier has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. Once that carrier shows a scan at least as recent as 17FEIA's newest, Peek follows the parcel there and keeps 17FEIA's history. When 17FEIA's tracker can't be reached, Peek asks tracking services instead and shows their history, in their words.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 17FEIA's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs at the clearance port, not the export declaration in China. Peek can't contact 17FEIA, the seller or your forwarder for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 17FEIA's own tracker answers (through tracking services, up to every 15 minutes that day); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs at the clearance port, not the export declaration in China. Peek can't contact 17FEIA, the seller or your forwarder for you.
 
 ## Questions about 17FEIA tracking
 
@@ -114,5 +114,5 @@ The carrier 17FEIA hands it to after import customs. 17FEIA's record can name it
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number shape and branches, tracker and link, labels, lines and stages (including the customs inspection), progress bar, warehouses, clocks, partners, destinations, what Peek reads, the hand-over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number shape and Shenzhen departures, tracker and link, labels, lines and stages (including the customs inspection), progress bar, warehouses, clocks, partners, destinations, what Peek reads, the hand-over
 :::

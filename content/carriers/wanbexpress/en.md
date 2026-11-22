@@ -14,10 +14,10 @@ WanbExpress's waybills are WNB, two letters, ten digits and YQ, 17 characters in
 
 | Number | What it is |
 | --- | --- |
-| `WNBAA0000000000YQ` | WNB, two letters, ten digits and YQ: a WanbExpress waybill. |
-| `WNBAA000000000YQ` | Only nine digits: not WanbExpress's layout. Check for a missing digit. |
-| `JSEAA0000000000YQ` | Also ends in YQ, but opens with JSE: a [JS Express](carrier:js-express) number. |
-| `JXCAA0000000000YQ` | JXC in front: a [Juxi Express](carrier:juxi-express) number. |
+| `WNBKG4829105736YQ` | WNB, two letters, ten digits and YQ: a WanbExpress waybill. |
+| `WNBKG482910573YQ` | Only nine digits: not WanbExpress's layout. Check for a missing digit. |
+| `JSEKG4829105736YQ` | Also ends in YQ, but opens with JSE: a [JS Express](carrier:js-express) number. |
+| `JXCKG4829105736YQ` | JXC in front: a [Juxi Express](carrier:juxi-express) number. |
 
 Several Chinese forwarders end their waybills in YQ, each with its own letters in front: WNB is what marks WanbExpress. Spaces, dashes and lower case don't matter when you paste the number into Peek.
 
@@ -68,7 +68,7 @@ Other partners' moves come through the same way. On parcels to the United States
 
 WanbExpress's scans follow the parcel out of China, through customs and on to a local carrier, which delivers it. WanbExpress's tracker can name that carrier, give its number for the parcel and show a delivery photo. Peek keeps none of these three, so for them look at WanbExpress's tracker, or ask the seller.
 
-**What Peek's code shows.** On a parcel to Germany, WanbExpress's history shows iMile delivering, and one WanbExpress scan names Poste Italiane's network. On a parcel to the UK, InPost's lines come through. For the United States, Ireland, Canada and Australia, Peek's code names no delivering carrier.
+**What Peek's code shows.** On a parcel to Germany, WanbExpress's history shows iMile delivering, and one WanbExpress scan names Poste Italiane's network. On a parcel to the UK, InPost's lines come through.
 
 **Delivery attempts and pickup.** Whoever delivers, its own rules apply: how many attempts it makes, whether it leaves a card, where a missed parcel waits and for how long. Peek found no WanbExpress rules for any of these. Once you know the carrier and its number, check its own tracking and ask it how to rearrange a delivery. See [missed delivery](guide:missed-delivery).
 
@@ -90,7 +90,7 @@ WanbExpress's scans follow the parcel out of China, through customs and on to a 
 
 ## WanbExpress contact number and customer service
 
-As of 30 October 2026, Peek couldn't check WanbExpress's website, so this page lists no contact details for WanbExpress. The seller booked the parcel with WanbExpress and is the one to ask about your order, and the marketplace if the seller doesn't answer. For the delivery itself, ask the delivering carrier.
+Peek couldn't check WanbExpress's website, so this page lists no contact details for WanbExpress. The seller booked the parcel with WanbExpress and is the one to ask about your order, and the marketplace if the seller doesn't answer. For the delivery itself, ask the delivering carrier.
 
 ## Track a WanbExpress parcel with Peek
 
@@ -100,9 +100,9 @@ WanbExpress's tracker won't answer until Google's reCAPTCHA has checked that a p
 
 From WanbExpress's tracker, Peek shows the status, each scan with its place, and the origin and destination countries on WanbExpress's record. When that record marks the parcel in transit, out for delivery or delivered, Peek goes by it, even if the last scan's words say less. Peek shows no expected delivery date.
 
-Peek leaves out the delivering carrier's name and number, the delivery photos and the recipient's address that WanbExpress's tracker can show. So it shows no "Delivery with" line and doesn't move the parcel over to the delivering carrier: for that carrier's own scans, add its number to Peek as well. Peek follows more than 4,500 carriers.
+Peek leaves out the delivery photos and the recipient's address that WanbExpress's tracker can show. When WanbExpress's tracker gives the delivering carrier's number and Peek can tell whose it is, Peek can show "Delivery with …" and follow the parcel on that carrier's tracking; otherwise, for that carrier's own scans, add its number to Peek as well. Peek follows more than 4,500 carriers.
 
-While WanbExpress's tracker answers, Peek checks up to every 10 minutes, or every few minutes from 6 a.m. local time on the day the parcel goes out for delivery. While tracking services answer instead, it checks hourly, and up to every 15 minutes on that day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) covers the delivery run, a missed attempt and the delivery, but not WanbExpress's customs lines, which Peek counts as "In transit". Peek can't contact WanbExpress or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, and WanbExpress's tracker answers, Peek checks up to every 10 minutes, or every few minutes from 6 a.m. local time on the day the parcel goes out for delivery; otherwise hourly. While tracking services answer instead, it checks hourly, and up to every 15 minutes on that day while you have it open or notifications are on. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) covers the delivery run, a missed attempt and the delivery, but not WanbExpress's customs lines, which Peek counts as "In transit". Peek can't contact WanbExpress or the seller for you.
 
 ## Questions about WanbExpress tracking
 
@@ -120,7 +120,7 @@ That a customs declaration for your parcel is done. The wording doesn't say whic
 
 ### Who delivers WanbExpress parcels in my country?
 
-A local carrier, which WanbExpress's tracker can name, with its number for the parcel. Peek's code shows iMile delivering on a parcel to Germany and InPost's lines on a parcel to the UK, but names none for the US, Ireland, Canada or Australia: check WanbExpress's tracker or ask the seller.
+A local carrier, which WanbExpress's tracker can name, with its number for the parcel. Peek's code shows iMile delivering on a parcel to Germany and InPost's lines on a parcel to the UK. When Peek can't tell which carrier delivers, check WanbExpress's tracker or ask the seller.
 
 ### Who do I contact about a missing WanbExpress parcel?
 

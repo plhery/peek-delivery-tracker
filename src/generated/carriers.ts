@@ -3268,6 +3268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "tforce-freight-sendungsverfolgung",
+      "title": "TForce Freight Sendungsverfolgung: PRO-Nummer & Status",
+      "name": "TForce Freight",
+      "color": "#0053a1"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "mainfreight-sendungsverfolgung",
@@ -4638,6 +4646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "suivi-tforce-freight",
+      "title": "Suivi TForce Freight\u00a0: numéros PRO, statuts et litiges",
+      "name": "TForce Freight",
+      "color": "#0053a1"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "suivi-mainfreight",
@@ -5968,6 +5984,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "tracciamento-tforce-freight",
+      "title": "Tracciamento TForce Freight: numeri PRO, stati e reclami",
+      "name": "TForce Freight",
+      "color": "#0053a1"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "tracciamento-mainfreight",
@@ -7282,6 +7306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "seguimiento-tforce-freight",
+      "title": "Seguimiento TForce Freight: números PRO y reclamaciones",
+      "name": "TForce Freight",
+      "color": "#0053a1"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "seguimiento-mainfreight",
@@ -8562,6 +8594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento J&T Express China: números JT, estados e ajuda",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "seguimento-tforce-freight",
+      "title": "Seguimento TForce Freight: números PRO e reclamações",
+      "name": "TForce Freight",
+      "color": "#0053a1"
     },
     {
       "id": "mainfreight",
@@ -9910,6 +9950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express China: numery JT, statusy i kontakt",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "sledzenie-tforce-freight",
+      "title": "Śledzenie TForce Freight: numery PRO, statusy i szkody",
+      "name": "TForce Freight",
+      "color": "#0053a1"
     },
     {
       "id": "mainfreight",

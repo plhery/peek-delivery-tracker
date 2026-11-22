@@ -50,7 +50,7 @@ As long as tracking shows only `Shipping Label Created`, SpeedX hasn't received 
 
 An attempt can carry other reasons too, such as `Attempted Delivery:Building Closed/Weekend/Holiday` for a business that was shut; Peek shows it as "Delivery attempted" too. Under an attempt, SpeedX adds a note saying what happens next: `The package is undeliverable and schedule to redelivery` means it goes out again, `The package is undeliverable and return to facility` that it goes back to the facility. Peek shows the note after the wording.
 
-When the latest event is a problem (`Parcel Void`, `Parcel Disposal`, a parcel not found), the page's headline turns to `Issue Reported`, with a category line such as `Last Mile Intercept` or `Last Mile Undelivered` above the wording. SpeedX doesn't explain these publicly: ask the shop.
+When the latest event is a problem (`Parcel Void`, `Parcel Disposal`, a parcel not found), SpeedX files it under a category such as `Last Mile Intercept` or `Last Mile Undelivered`. SpeedX doesn't explain these publicly: ask the shop.
 
 ## SpeedX delivery, attempted delivery and pickup
 
@@ -78,7 +78,7 @@ When the latest event is a problem (`Parcel Void`, `Parcel Disposal`, a parcel n
 
 ## SpeedX customer service number and chat
 
-SpeedX's channels for recipients in the US, as listed on its [support page](https://speedx.io/customer-service-and-support/) on November 6, 2026:
+SpeedX's channels for recipients in the US, as listed on its [support page](https://speedx.io/customer-service-and-support/):
 
 - **Chat:** Miles, SpeedX's chatbot, 8 am to 8 pm ET every day. Open tracking, enter your number and the chat appears in the bottom corner of the screen.
 - **Phone:** 1-949-667-6769, 9 am to 9 pm EST Monday to Friday and 11 am to 8 pm EST on weekends. The same page also says SpeedX has no phone number and points to Miles, so expect to be sent to the chat.
@@ -88,7 +88,7 @@ SpeedX's channels for recipients in the US, as listed on its [support page](http
 
 [Peek](/) names SpeedX at once from an SPX number of either shape, or from a tracking.speedx.io link with the number in it.
 
-It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time. It leaves out your address, the note on where the parcel was left and the delivery photo, so look at SpeedX's page for those. Peek shows the estimated delivery day from SpeedX's page. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
+It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time and, when SpeedX's page gives one, the estimated delivery day. It leaves out your address and the delivery photo, so look at SpeedX's page for the photo. When SpeedX adds a note on where the parcel was left, the delivery line keeps it as written; on a shared link it shows only "Delivered". Other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
 
 While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or up to every 2 minutes from 6 a.m. local time on the day SpeedX scans the parcel out for delivery, while SpeedX's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After four days with no new scan while the parcel shows "Label created", "Received by carrier" or "In transit", Peek says it has gone quiet and links to SpeedX's support page ("Get help from SpeedX"). If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
 
@@ -112,7 +112,7 @@ SpeedX's tracking page says the sender may not have sent it the parcel data yet,
 
 :::sources
 - [SpeedX: Customer Service and Support](https://speedx.io/customer-service-and-support/) – SPX prefix, glossary, SMS, weekends, signature, photos, instructions, address changes, no pickup, delays, parcels marked delivered early, claims, returns, phone, email, chatbot hours
-- [SpeedX: Tracking](https://tracking.speedx.io/) – status wordings, notes, Issue Reported, categories, unknown-number message, English only
+- [SpeedX: Tracking](https://tracking.speedx.io/) – status wordings, notes, categories, unknown-number message, English only
 - [SpeedX: Tech-Enabled Last Mile Delivery](https://speedx.io/) – last-mile provider, labels made by SpeedX, US ZIP code coverage, next-day and 2nd-day services, proof of delivery photos
 - [SpeedX: Cross-Border Shipping](https://speedx.io/cross-border-shipping/) – parcels from abroad at US airport hubs, customs brokerage, sorting into SpeedX's network
 - [SpeedX: About Us](https://speedx.io/about-us/) – founded 2022 in New York, US cities

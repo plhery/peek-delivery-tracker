@@ -67868,6 +67868,157 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://activos24.com/pt/seguir-encomenda"
+    },
+    "benniao-express": {
+      "displayName": "Benniao Express",
+      "aliases": [
+        "笨鸟速运",
+        "笨鸟快递",
+        "Benniao Suyun"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e00000",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "benniao-express"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^BN\\d{14}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.benniaosuyun.com/"
+    },
+    "disu-logistics": {
+      "displayName": "Disu Logistics",
+      "aliases": [
+        "D速物流",
+        "D速快递",
+        "山东递速物流有限公司",
+        "D-exp"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e4393c",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "disu-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "feibao-logistics": {
+      "displayName": "Feibao Logistics",
+      "aliases": [
+        "飞豹快运",
+        "中铁飞豹快运",
+        "飞豹物流",
+        "飞豹物流集团",
+        "飞豹智行供应链"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1d4f91",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "feibao-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "huaqi-express": {
+      "displayName": "Huaqi Express",
+      "aliases": [
+        "华企快运",
+        "华企物流",
+        "上海华企物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e7851a",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "huaqi-express"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.huaqiex.com/tracking"
+    },
+    "lindao-express": {
+      "displayName": "Lindao Express",
+      "aliases": [
+        "林道货运",
+        "林道国际货运",
+        "上海林道国际货运代理有限公司"
+      ],
+      "countries": [
+        "CN",
+        "JP"
+      ],
+      "color": "#1f5fa8",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "lindao-express"
+      },
+      "linkRules": [],
+      "detectionRules": []
+    },
+    "riyu-logistics": {
+      "displayName": "Riyu Logistics",
+      "aliases": [
+        "日昱物流",
+        "日昱物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e60012",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "riyu-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.rywl.cn/cargoTracking.html"
+    },
+    "wanjia-logistics": {
+      "displayName": "Wanjia Logistics",
+      "aliases": [
+        "万家物流",
+        "Manco Logistics",
+        "万家物流（上海）有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#d7261e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "wanjia-logistics"
+      },
+      "linkRules": [],
+      "detectionRules": []
     }
   },
   "servers": [
@@ -73726,7 +73877,14 @@
           "yaoqi-logistics",
           "yuxin-logistics",
           "zto-freight",
-          "activos24"
+          "activos24",
+          "benniao-express",
+          "disu-logistics",
+          "feibao-logistics",
+          "huaqi-express",
+          "lindao-express",
+          "riyu-logistics",
+          "wanjia-logistics"
         ]
       },
       "Stage": {

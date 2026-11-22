@@ -55813,7 +55813,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.skif-cargo.ru/tracking/",
-    "trackingUrlTemplate": "https://www.skif-cargo.ru/tracking/{trackingNumber}",
+    "trackingUrlTemplate": "https://www.skif-cargo.ru/tracking/",
     "helpUrl": "https://www.skif-cargo.ru/contacts/"
   },
   "swissconnect": {

@@ -219,10 +219,12 @@ Found a security problem? [Report it privately](SECURITY.md).
 
 ## Trademarks and content
 
-The code is licensed under [Apache 2.0](LICENSE). The name "Peek", its logo and app icon,
-the App Store and Google Play assets, and the guides and carrier pages (the texts under
-`content/`) are not: Paul-Louis Hery keeps all rights to them. A copy or fork may not
-publish them or use the name "Peek", and a fork must rename itself before it is published
-or run as a public service. [Trademarks and content](TRADEMARKS.md) has the details.
+The code is licensed under [Apache 2.0](LICENSE). Its [NOTICE](NOTICE) names Peek and its
+copyright holder, Paul-Louis Hery, and a copy or fork keeps it. The name "Peek", its logo
+and app icon, the App Store and Google Play assets, and the guides and carrier pages (the
+texts under `content/`) are not licensed: Paul-Louis Hery keeps all rights to them. A copy
+or fork may not publish them or use the name "Peek", and a fork must rename itself before
+it is published or run as a public service. [Trademarks and content](TRADEMARKS.md) has
+the details.
 
 Made by [@plhery](https://x.com/plhery).

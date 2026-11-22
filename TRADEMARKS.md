@@ -15,3 +15,7 @@ A copy keeps the guides and carrier pages off, as they are by default (`GUIDE_PA
 
 The Apache License says the same of the name: it gives no permission to use the
 licensor's trade names or marks (section 6).
+
+A copy or fork keeps the [NOTICE](NOTICE) file, which names Peek and its copyright holder,
+Paul-Louis Hery (section 4(d)). Saying the code comes from Peek, as the NOTICE does, is the
+only use of the name the licence allows (section 6).

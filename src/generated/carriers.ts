@@ -2452,6 +2452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "nova-poshta-sendungsverfolgung",
+      "title": "Nova Poshta Sendungsverfolgung: Nummern, Status & Filialen",
+      "name": "Nova Poshta",
+      "color": "#e30613"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "fan-courier-sendungsverfolgung",
@@ -3644,6 +3652,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Dachser en Espagne et au Portugal\u00a0: lien et statuts",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "suivi-nova-poshta",
+      "title": "Suivi Nova Poshta\u00a0: numéros, statuts et agences",
+      "name": "Nova Poshta",
+      "color": "#e30613"
     },
     {
       "id": "fan-courier",
@@ -4840,6 +4856,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "tracciamento-nova-poshta",
+      "title": "Tracciamento Nova Poshta: numeri, stati e filiali",
+      "name": "Nova Poshta",
+      "color": "#e30613"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "tracciamento-fan-courier",
@@ -6002,6 +6026,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "seguimiento-nova-poshta",
+      "title": "Seguimiento Nova Poshta: números, estados y oficinas",
+      "name": "Nova Poshta",
+      "color": "#e30613"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "seguimiento-fan-courier",
@@ -7154,6 +7186,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Dachser tracking: rastrear encomenda, estados e contactos",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "seguimento-nova-poshta",
+      "title": "Seguimento Nova Poshta: números, estados e balcões",
+      "name": "Nova Poshta",
+      "color": "#e30613"
     },
     {
       "id": "fan-courier",

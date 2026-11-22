@@ -70,13 +70,13 @@ Los pedidos de comercio electrónico transfronterizo (códigos aduaneros 9610 y 
 
 **Perdido o dañado.** Las normas de reclamación de ZTO van dirigidas al remitente: en sus rutas exclusivas, la solicitud debe presentarse dentro de los 40 días posteriores al envío y se indemniza hasta el valor declarado, con un tope de 30 USD. Contacta con la tienda; consulta [paquetes perdidos](guide:lost-parcel).
 
-**Entregado, pero no está.** En China, la línea en chino de ZTO nombra la estación y quién firmó, como un familiar o un punto de recogida. Las Medidas de Administración del Mercado de Mensajería Urgente de China prohíben dejar un paquete en una taquilla inteligente o punto de recogida sin tu consentimiento, y te permiten recurrir a las autoridades postales si una queja no se resuelve a tu satisfacción o en plazo. Consulta [entregado pero no recibido](guide:delivered-not-received).
+**Entregado, pero no está.** En China, la línea en chino de ZTO nombra la estación y quién firmó, como un familiar o un punto de recogida. Las Medidas de Administración del Mercado de Mensajería Urgente de China continental prohíben dejar un paquete en una taquilla inteligente o punto de recogida sin tu consentimiento, y te permiten recurrir a las autoridades postales si una queja no se resuelve a tu satisfacción o en plazo. Consulta [entregado pero no recibido](guide:delivered-not-received).
 
 ## Teléfonos de contacto y atención al cliente de ZTO International
 
 Contactos publicados por ZTO International:
 
-- **China:** 95311 (tras el mensaje de voz, solicita consultas internacionales). Línea comercial: 021-59804505. De lunes a domingo, de 8:30 a 17:30 (hora de Pekín).
+- **China continental:** 95311 (tras el mensaje de voz, solicita consultas internacionales). Línea comercial: 021-59804505. De lunes a domingo, de 8:30 a 17:30 (hora de Pekín).
 - **Vietnam:** 95311, canal internacional, o ztoglobal@zto.com.
 - **Camboya:** línea de atención 85566666088.
 - **Tailandia:** línea de atención 02-182-2181.
@@ -90,9 +90,9 @@ El pie de página de `www.ztoglobal.com` también incluye «Online Customer Serv
 
 Pega el número en [Peek](/), que sigue a más de 4500 transportistas. Sitúa a ZTO International primero entre los transportistas cuyos números tienen el mismo formato de 14 dígitos y muestra «ZTO International tiene este paquete.» cuando ZTO reconoce el número. Si ninguno lo reconoce, consulta servicios de seguimiento y puede mostrar «Aún no aparece en los servicios de seguimiento. Peek seguirá comprobando cuando lo añadas.». ¿Es un paquete nacional de ZTO Express dentro de China? Pulsa «Cambiar» y elige ZTO Express en «Encaja con este número». Un enlace de `m.ztoglobal.com` con `inputNo=` también señala a ZTO International.
 
-Peek lee directamente el rastreador de ZTO International. El lugar de cada escaneo procede de la línea china de ZTO, y Peek muestra el nombre de la localidad cuando puede ubicarla o el texto en chino tal como lo escribió ZTO. ZTO fecha todos los escaneos según la hora de China, incluso en tu país (una hora por delante de Tailandia, Vietnam, Camboya y Laos); Peek convierte cada hora a tu zona horaria («Horas en tu zona horaria:»). Cuando la línea china de entrega indica quién firmó, Peek la lee, pero omite nombres de repartidores, operarios o preparadores, números de teléfono, números de saca y el punto de recogida, y no ofrece fecha estimada de entrega, peso ni comprobante de entrega. Sigue el número `771` hasta el final, sin cambio a un segundo transportista.
+Peek lee directamente el rastreador de ZTO International. El lugar de cada escaneo procede de la línea china de ZTO, y Peek muestra el nombre de la localidad cuando puede ubicarla o el texto en chino tal como lo escribió ZTO. ZTO fecha todos los escaneos según la hora de China, incluso en tu país (una hora por delante de Tailandia, Vietnam, Camboya y Laos); Peek convierte cada hora a tu zona horaria («Horas en tu zona horaria:»). Peek omite nombres de firmantes, repartidores, operarios o preparadores, números de teléfono, números de saca y el punto de recogida, y no ofrece fecha estimada de entrega, peso ni comprobante de entrega. Sigue el número `771` hasta el final, sin cambio a un segundo transportista.
 
-Mientras mantengas el paquete abierto en Peek — o el día de la entrega con las notificaciones activadas — Peek consulta directamente a ZTO International hasta cada 10 minutos, y hasta cada 2 minutos a partir de las 6:00 (hora de Pekín) el día en que el paquete pasa a «En reparto», siempre que el rastreador de ZTO responda; fuera de ese caso, y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora. Tras cuatro días sin nuevos escaneos en un envío en marcha, Peek muestra la fecha del último escaneo («Sin novedades desde el …») y señala «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a ZTO International.». Puede enviarte avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede subir documentos de identidad, pagar aduanas ni contactar con ZTO o la tienda por ti.
+Mientras mantengas el paquete abierto en Peek — o el día de la entrega con las notificaciones activadas — Peek consulta directamente a ZTO International hasta cada 10 minutos, y hasta cada 2 minutos a partir de las 6:00 (hora de Pekín) el día en que el paquete pasa a «En reparto», siempre que el rastreador de ZTO responda; fuera de ese caso, y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora. Tras cuatro días sin nuevos escaneos en un envío en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra la fecha del último escaneo («Sin novedades desde el …») y señala «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a ZTO International.». Puede enviarte avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede subir documentos de identidad, pagar aduanas ni contactar con ZTO o la tienda por ti.
 
 ## Preguntas sobre el seguimiento de ZTO International
 
@@ -110,7 +110,7 @@ Que tu paquete salió de una estación o centro de ZTO. No es un trámite aduane
 
 ### ¿Cuál es el teléfono de ZTO International?
 
-En China, el 95311 (pide consultas internacionales tras el mensaje de voz, todos los días de 8:30 a 17:30, hora de Pekín). Los teléfonos de los demás países están arriba.
+En China continental, el 95311 (pide consultas internacionales tras el mensaje de voz, todos los días de 8:30 a 17:30, hora de Pekín). Los teléfonos de los demás países están arriba.
 
 :::sources
 - [ZTO Global Logistics: Home](https://www.ztoglobal.com/) – división internacional de ZTO Express, creada en 2014

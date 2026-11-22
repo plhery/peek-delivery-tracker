@@ -3172,6 +3172,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "sto-express-sendungsverfolgung",
+      "title": "STO Express Sendungsverfolgung: 申通快递 Nummern & Status",
+      "name": "STO Express",
+      "color": "#ff6700"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "jt-express-china-sendungsverfolgung",
@@ -4454,6 +4462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "suivi-sto-express",
+      "title": "Suivi STO Express\u00a0: numéros 申通快递, statuts et contact",
+      "name": "STO Express",
+      "color": "#ff6700"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "suivi-jt-express-china",
@@ -5686,6 +5702,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Ozon: codici d'ordine e stati in italiano",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "tracciamento-sto-express",
+      "title": "Tracciamento STO Express: numeri 申通快递, stati e contatti",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "j-and-t-cn",
@@ -6922,6 +6946,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "seguimiento-sto-express",
+      "title": "Seguimiento STO Express: números 申通快递, estados y contacto",
+      "name": "STO Express",
+      "color": "#ff6700"
+    },
+    {
       "id": "j-and-t-cn",
       "catalog": "j-and-t-cn",
       "slug": "seguimiento-jt-express-china",
@@ -8114,6 +8146,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Ozon: números de encomenda e estados em português",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "seguimento-sto-express",
+      "title": "Seguimento STO Express: números 申通快递, estados e contacto",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "j-and-t-cn",
@@ -9374,6 +9414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Ozon: numery zamówień i statusy po polsku",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "sledzenie-sto-express",
+      "title": "Śledzenie STO Express: numery 申通快递, statusy i kontakt",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "j-and-t-cn",

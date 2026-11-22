@@ -14,11 +14,11 @@ Slovenská pošta používa medzinárodný formát poštových čísel s 13 znak
 
 | Tvar (vymyslený) | Čo to je |
 | --- | --- |
-| `BA000000005SK` | Balík v rámci Slovenska: prefix začína na B, D alebo W. Balík od zmluvného zákazníka má prefix ZA až ZN. |
-| `RR000000005SK` | Doporučený list: prefix začína na R. |
-| `EK000000005SK` | Expres zásielka: prefix začína na E. |
-| `CP000000005SK` | Balík do zahraničia: prefix začína na C. |
-| `RR000000005CN` | Zásielka zo zahraničia. Má číslo zahraničnej pošty s kódom krajiny, odkiaľ prišla (tu Čína). |
+| `BA482917367SK` | Balík v rámci Slovenska: prefix začína na B, D alebo W. Balík od zmluvného zákazníka má prefix ZA až ZN. |
+| `RR482917367SK` | Doporučený list: prefix začína na R. |
+| `EK482917367SK` | Expres zásielka: prefix začína na E. |
+| `CP482917367SK` | Balík do zahraničia: prefix začína na C. |
+| `RR482917367CN` | Zásielka zo zahraničia. Má číslo zahraničnej pošty s kódom krajiny, odkiaľ prišla (tu Čína). |
 
 Nie každá zásielka má číslo, ktoré sa dá sledovať. Ak ste ho od odosielateľa nedostali, podľa Slovenskej pošty ju pravdepodobne sledovať nemožno. Ak odosielateľ zadal váš e-mail alebo telefón, zásielka sa vám zobrazí v mobilnej aplikácii, keď overíte, že ste adresát.
 
@@ -82,7 +82,7 @@ Ak sa stav niekoľko dní nemení, zásielka môže byť podľa Slovenskej pošt
 
 ## Kontakt na Slovenskú poštu
 
-Kontakty podľa posta.sk k 22. októbru 2026:
+Kontakty podľa posta.sk:
 
 - **Zo Slovenska:** Infolinka 0850 122 413, pracovné dni od 8:00 do 17:00.
 - **Zo zahraničia:** +421 48 437 87 77, pracovné dni od 8:00 do 16:00.
@@ -94,15 +94,15 @@ Kontakty podľa posta.sk k 22. októbru 2026:
 
 ## Sledovanie Slovenskej pošty v Peeku
 
-Pri poštovom čísle so `SK` na konci a správnou kontrolnou číslicou, ktorého prefix sa začína na C, E, L alebo R, určí [Peek](/) Slovenskú poštu priamo podľa čísla. Pri inom prefixe, napríklad pri vnútroštátnom balíku na B alebo D, sa Peek opýta Slovenskej pošty (a [Chronopostu](carrier:chronopost)): ak číslo pozná, ukáže „Slovenská pošta has this parcel.“, ak ešte nie, „Not found at … yet. Peek will keep checking after you add it.“ So zlou kontrolnou číslicou sa Slovenskej pošty nepýta, preto číslo skontrolujte. Číslo zahraničnej pošty Slovenskej pošte neodovzdá: vložte ho aj tak (Peek sleduje viac ako 4 500 prepravcov), kliknite na „Change“ a vyberte „Slovenská pošta“. Vložiť môžete aj odkaz z posta.sk/sledovanie-zasielok alebo z tandt.posta.sk.
+Pri poštovom čísle so `SK` na konci a správnou kontrolnou číslicou, ktorého prefix sa začína na C, E, L alebo R, určí [Peek](/) Slovenskú poštu priamo podľa čísla. Pri inom prefixe, napríklad pri vnútroštátnom balíku na B alebo D, sa Peek opýta Slovenskej pošty (a [Chronopostu](carrier:chronopost)): ak číslo pozná, ukáže „Slovenská pošta has this parcel.“, ak ešte nie, „Not found at … yet. Peek will keep checking after you add it.“ So zlou kontrolnou číslicou sa Slovenskej pošty nepýta, preto číslo skontrolujte. Číslo zahraničnej pošty odovzdá Slovenskej pošte, keď zahraničná pošta uvedie ako cieľ Slovensko (alebo žiadny cieľ, ak sledujete zo Slovenska); ak ho chcete sledovať u Slovenskej pošty hneď, kliknite na „Change“ a vyberte „Slovenská pošta“. Vložiť môžete aj odkaz z posta.sk/sledovanie-zasielok alebo z tandt.posta.sk.
 
-Peek kontroluje zásielku najviac každých 10 minút, v deň, keď ju doručovateľ vezie k vám, najviac každé 2 minúty (od 6:00 slovenského času a len kým odpovedá vlastné sledovanie Slovenskej pošty; cez sledovacie služby každých 15 minút), a pri zmene stavu vás môže upozorniť. Ak dva dni nepribudne nič nové (alebo 12 hodín, kým je zásielka len zaregistrovaná či prevzatá prepravcom), Peek ju kontroluje už len raz za hodinu. Každý krok ukáže na mape: poštu, BalíkoBOX alebo PoštaPOINT na Slovensku a krajinu v zahraničí. Ukáže aj hmotnosť, cieľovú krajinu, čas doručenia a názov miesta, kde zásielka čaká (nie jeho adresu ani dátum, dokedy čaká). Predpokladaný deň doručenia Slovenská pošta neuvádza. Časy krokov na Slovensku Peek číta podľa slovenského času a ukazuje ich v časovom pásme vášho zariadenia; krok v krajine s viacerými časovými pásmami sa nezobrazí. Udalosti majú anglické znenie Slovenskej pošty (slovenské, ak anglické chýba), okrem `In transit` a `Out for delivery`, ktoré Peek nahradí vlastným znením; `Picked up` sa počíta ako doručenie. Zásielku do krajiny, ktorej národná pošta je v zozname Peeku, môžete sledovať aj tam. Kontaktovať Slovenskú poštu ani podať reklamáciu za vás Peek nemôže.
+Kým máte zásielku otvorenú na obrazovke alebo v deň doručenia so zapnutými upozorneniami, Peek ju kontroluje najviac každých 10 minút (inak raz za hodinu), v deň, keď ju doručovateľ vezie k vám, najviac každé 2 minúty (od 6:00 slovenského času a len kým odpovedá vlastné sledovanie Slovenskej pošty; cez samotné sledovacie služby raz za hodinu, po dni bez skenu každé 3 hodiny a v deň doručenia najviac každých 15 minút, ak máte zásielku otvorenú alebo zapnuté upozornenia), a pri zmene stavu vás môže upozorniť. Ak dva dni nepribudne nič nové (alebo 12 hodín, kým je zásielka len zaregistrovaná či prevzatá prepravcom), Peek ju kontroluje už len raz za hodinu. Každý krok ukáže na mape: poštu, BalíkoBOX alebo PoštaPOINT na Slovensku a krajinu v zahraničí. Ukáže aj hmotnosť, cieľovú krajinu, čas doručenia a názov miesta, kde zásielka čaká (nie jeho adresu ani dátum, dokedy čaká). Predpokladaný deň doručenia Slovenská pošta neuvádza. Časy krokov na Slovensku Peek číta podľa slovenského času a ukazuje ich v časovom pásme vášho zariadenia; krok v zahraničí číta podľa času jeho krajiny (pri krajine s viacerými časovými pásmami podľa jedného z nich, napríklad pri USA podľa New Yorku). Udalosti majú anglické znenie Slovenskej pošty (slovenské, ak anglické chýba), okrem `In transit` a `Out for delivery`, ktoré Peek nahradí vlastným znením; `Picked up` sa počíta ako doručenie. Zásielku do krajiny, ktorej národná pošta je v zozname Peeku, môžete sledovať aj tam. Kontaktovať Slovenskú poštu ani podať reklamáciu za vás Peek nemôže.
 
 ## Časté otázky o sledovaní zásielok Slovenskej pošty
 
 ### Ako sledovať zásielku Slovenskej pošty?
 
-Zadajte podacie číslo, napríklad v tvare `RR000000005SK`, na posta.sk/sledovanie-zasielok, v aplikácii Slovenskej pošty alebo do poľa vyššie. Na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
+Zadajte podacie číslo, napríklad v tvare `RR482917367SK`, na posta.sk/sledovanie-zasielok, v aplikácii Slovenskej pošty alebo do poľa vyššie. Na posta.sk si po zadaní čísla môžete zapnúť upozornenia o každej zmene stavu.
 
 ### Dá sa sledovať aj zásielka zo zahraničia?
 

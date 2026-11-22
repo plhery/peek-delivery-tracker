@@ -17,7 +17,7 @@ The two shapes in use:
 | Shape | Invented example |
 | --- | --- |
 | 14 digits | `19999999999980` |
-| 24 digits, the full label barcode | `123456789012345678901234` |
+| 24 digits, the full label barcode | `482917365482917365482917` |
 
 On Ciblex's result page, the line above the history can add a shorter number and the sender's reference in brackets; neither is the tracking number.
 
@@ -44,9 +44,9 @@ Ciblex's tracking results are in French only: the English and Dutch forms on cib
 
 ## Ciblex delivery: signatures, safe places and C Dispo relays
 
-Ciblex works for business shippers. Its services H8, H9 and H12 deliver the next day before 8 am, 9 am or noon, Monday to Friday, with Saturday morning as an option, in person against a signature. In the towns it serves regularly, Ciblex delivers at ground-floor level or in the courtyard of industrial or commercial premises, and its terms treat your digitised signature as proof of delivery.
+Ciblex works for business shippers. Its services H8, H9 and H12 deliver the next day before 8 am, 9 am or noon in metropolitan France, Monday to Friday, with Saturday morning as an option, in person against a signature. In the towns it serves regularly, Ciblex delivers at ground-floor level or in the courtyard of industrial or commercial premises, and its terms treat your digitised signature as proof of delivery.
 
-With SP8 and SP9, Ciblex delivers before 8 or 9 am while nobody is there, Tuesday to Saturday, into a secure place agreed with the sender, such as a box or an airlock.
+With SP8 and SP9, Ciblex delivers in metropolitan France before 8 or 9 am while nobody is there, Tuesday to Saturday, into a secure place Ciblex has on record, such as a box or an airlock.
 
 **C Dispo relays.** Ciblex has 300 relay points for professionals. The sender chooses the relay. Parcels are available from 8 am and handed over when you show an ID or company badge; you get an SMS when the parcel arrives and, after three days without pickup, a reminder by SMS or email.
 
@@ -66,7 +66,7 @@ Ciblex's liability within France is limited to €23 per kg and €750 per parce
 
 ## Ciblex contact: phone, email and agencies
 
-As listed on ciblex.eu on 12 October 2026, for France and Belgium alike:
+As listed on ciblex.eu:
 
 - **Phone:** 08 26 82 69 99, the number on Ciblex's legal notice.
 - **Email:** ciblex@ciblex.fr.
@@ -77,11 +77,11 @@ The contact form on ciblex.eu is for companies' sales enquiries, not tracking qu
 
 ## Tracking a Ciblex parcel with Peek
 
-[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Chronopost and Ciblex first, after DPD, DHL or another network only when the number's start points to it; elsewhere Ciblex comes eleventh or later, after the ten carriers Peek can ask before you save, so it can only be asked once you save the parcel. A 14-digit number starting 10 is the exception, in France or elsewhere: Peek asks Ciblex, SEUR and BRT, not Chronopost, and only if none of them, nor the tracking services it checks next, knows the number does it ask [DPD France](carrier:dpd-fr), whose tracker it opens in a browser. For 24 digits it asks Ciblex, Austrian Post and InPost, and bpost, first, only for a number starting 3232 or 3299. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
+[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Chronopost and Ciblex first, after DPD, DHL or another network only when the number's start points to it; elsewhere Ciblex comes eleventh or later, after the ten carriers Peek can ask before you save, so it can only be asked once you save the parcel. A 14-digit number starting 10 is the exception, in France or elsewhere: Peek asks Ciblex, SEUR and BRT, not Chronopost, and only if none of them, nor the tracking services it checks next, knows the number does it ask [DPD France](carrier:dpd-fr), whose tracker it opens in a browser. For 24 digits it asks Ciblex, Austrian Post and InPost, and bpost, first, only for a number starting 3232 or 3299. If two carriers know the number, Peek asks you to choose. Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
 
-It checks Ciblex up to every 10 minutes, and up to every 2 minutes from 6 a.m. Paris time on the day Ciblex scans the parcel out for delivery, while Ciblex's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's depot town on a map, and the delivery time, with times read on Paris time and shown in your device's time zone. Lines Peek knows show in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue, "Shipment exception" (for `PROBLEME DESTINATAIRE` or `COMPLEMENT ADRESSE`) or "Parcel processed at a Ciblex facility"; other lines, `COLIS NON REMIS` and the 48-hour line included, keep Ciblex's French words. It can notify you of every scan, important steps only or delivery day only.
+While you have the parcel open, or on its delivery day with notifications on, it checks Ciblex up to every 10 minutes, and up to every 2 minutes from 6 a.m. Paris time on the day Ciblex scans the parcel out for delivery, while Ciblex's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's depot town on a map, and the delivery time, with times read on Paris time and shown in your device's time zone. Lines Peek knows show in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue, "Shipment exception" (for `PROBLEME DESTINATAIRE` or `COMPLEMENT ADRESSE`) or "Parcel processed at a Ciblex facility"; other lines, `COLIS NON REMIS` and the 48-hour line included, keep Ciblex's French words. It can notify you of every scan, important steps only or delivery day only.
 
-There's no expected delivery date, no relay name or address and no weight, and your address is dropped when Ciblex puts it in the place column. An empty history isn't treated as "not found": it keeps asking.
+There's no expected delivery date, no relay name or address and no weight, and your address is dropped when Ciblex puts it in the place column.
 
 ## Questions about Ciblex tracking
 

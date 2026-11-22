@@ -14,9 +14,9 @@ Slovak Post uses the [international postal format](guide:tracking-number-formats
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RR000000005SK` | An item posted in Slovakia: two letters, nine digits, `SK`. |
-| `CP000000005SK` | The same shape with another service code. |
-| `RR000000005CN` | An item coming from abroad keeps the foreign post's number, ending in the country it came from. |
+| `RR482917367SK` | An item posted in Slovakia: two letters, nine digits, `SK`. |
+| `CP482917367SK` | The same shape with another service code. |
+| `RR482917367CN` | An item coming from abroad keeps the foreign post's number, ending in the country it came from. |
 
 Not every item has a trackable number: if the sender didn't give you one, Slovak Post says it probably can't be tracked. If the sender entered your email or phone, the item appears in Slovak Post's app once you confirm you're the addressee. Can't find the number? See [where else to find a tracking number](guide:find-tracking-number).
 
@@ -70,7 +70,7 @@ If nothing changes for days, Slovak Post says the item may still be in processin
 
 ## Slovenská pošta contact and customer service
 
-Slovak Post's channels, as listed on posta.sk on 10 November 2026 (the contact pages are in Slovak only):
+Slovak Post's channels, as listed on posta.sk (the contact pages are in Slovak only):
 
 - **From Slovakia:** Infolinka 0850 122 413, working days 8 a.m. to 5 p.m.
 - **From abroad:** +421 48 437 87 77, working days 8 a.m. to 4 p.m.
@@ -82,9 +82,9 @@ Slovak Post's channels, as listed on posta.sk on 10 November 2026 (the contact p
 
 ## Tracking Slovenská pošta with Peek
 
-For a postal number ending `SK` with a valid check digit, [Peek](/) names Slovak Post from the number itself when the service code starts with C, E, L or R. With another first letter, such as a domestic parcel's B or D, it asks Slovak Post (and [Chronopost](carrier:chronopost)) and shows "Slovenská pošta has this parcel." when it knows the number. If it doesn't yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Slovak Post isn't asked: check the number. Another country's postal number isn't handed to Slovak Post; pick "Slovenská pošta" with "Change". Links from posta.sk/sledovanie-zasielok and tandt.posta.sk can be pasted too.
+For a postal number ending `SK` with a valid check digit, [Peek](/) names Slovak Post from the number itself when the service code starts with C, E, L or R. With another first letter, such as a domestic parcel's B or D, it asks Slovak Post (and [Chronopost](carrier:chronopost)) and shows "Slovenská pošta has this parcel." when it knows the number. If it doesn't yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Slovak Post isn't asked: check the number. Another country's postal number is handed to Slovak Post once the post abroad gives Slovakia as the destination (or none, while you follow it from Slovakia); to follow it there straight away, pick "Slovenská pošta" with "Change". Links from posta.sk/sledovanie-zasielok and tandt.posta.sk can be pasted too.
 
-It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Slovak Post scans the item out for delivery, while Slovak Post's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map, with the post office, BalíkoBOX or PoštaPOINT in Slovakia and the country abroad, plus the weight, destination country, delivery time and the name of the place where the item waits (not its address or pickup deadline). Slovak Post gives no expected delivery day. Times in Slovakia are read on Bratislava time and shown in your device's time zone (on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name); a step abroad in a country with several time zones doesn't appear. Statuses keep Slovak Post's English wording (its Slovak one for a step it gives only in Slovak), except `In transit` and `Out for delivery`, which Peek puts in its own words; `Picked up` still counts as delivered. An item going to a country whose national post is in Peek's list can be followed there. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+While you have the item open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Slovak Post scans the item out for delivery, while Slovak Post's own tracker answers; otherwise hourly. Through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the delivery day while the item is open or notifications are on. It can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map, with the post office, BalíkoBOX or PoštaPOINT in Slovakia and the country abroad, plus the weight, destination country, delivery time and the name of the place where the item waits (not its address or pickup deadline). Slovak Post gives no expected delivery day. Times in Slovakia are read on Bratislava time and shown in your device's time zone (on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name); a step abroad is read on its country's clock (one of its zones for a country with several, such as New York for the US) and shown in your time zone. Statuses keep Slovak Post's English wording (its Slovak one for a step it gives only in Slovak), except `In transit` and `Out for delivery`, which Peek puts in its own words; `Picked up` still counts as delivered. An item going to a country whose national post is in Peek's list can be followed there. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Slovenská pošta tracking
 

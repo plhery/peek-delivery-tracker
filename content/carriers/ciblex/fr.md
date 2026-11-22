@@ -17,7 +17,7 @@ Les deux formes utilisées :
 | Forme | Exemple inventé |
 | --- | --- |
 | 14 chiffres | `19999999999980` |
-| 24 chiffres, le code-barres complet de l'étiquette | `123456789012345678901234` |
+| 24 chiffres, le code-barres complet de l'étiquette | `482917365482917365482917` |
 
 Sur la page de résultat de Ciblex, la ligne au-dessus de l'historique peut ajouter un numéro plus court et la référence de l'expéditeur entre parenthèses : ni l'un ni l'autre n'est le numéro de suivi.
 
@@ -40,9 +40,9 @@ Les résultats du suivi Ciblex sont en français, quelle que soit la langue choi
 
 ## Livraison Ciblex : signature, livraison en SAS et relais C Dispo
 
-Ciblex travaille pour des expéditeurs professionnels. Ses services H8, H9 et H12 livrent le lendemain avant 8 h, 9 h ou midi, du lundi au vendredi, avec le samedi en option, en main propre et contre signature. Dans les villes desservies régulièrement, Ciblex livre au rez-de-chaussée ou dans la cour des établissements industriels ou commerciaux, et ses conditions font de ta signature numérisée la preuve de livraison. Avec H12, l'image de cette signature est visible en temps réel dans l'espace client de l'expéditeur : en cas de doute sur une livraison, demande-la-lui.
+Ciblex travaille pour des expéditeurs professionnels. Ses services H8, H9 et H12 livrent le lendemain avant 8 h, 9 h ou midi en France métropolitaine, du lundi au vendredi, avec le samedi en option, en main propre et contre signature. Dans les villes desservies régulièrement, Ciblex livre au rez-de-chaussée ou dans la cour des établissements industriels ou commerciaux, et ses conditions font de ta signature numérisée la preuve de livraison. Avec H12, l'image de cette signature est visible en temps réel dans l'espace client de l'expéditeur : en cas de doute sur une livraison, demande-la-lui.
 
-Avec SP8 et SP9, Ciblex livre avant 8 h ou 9 h en ton absence, du mardi au samedi, dans un lieu sécurisé convenu avec l'expéditeur : coffre, SAS ou autre lieu référencé.
+Avec SP8 et SP9, Ciblex livre en France métropolitaine avant 8 h ou 9 h en ton absence, du mardi au samedi, dans un lieu sécurisé référencé par Ciblex : coffre, SAS ou autre.
 
 **Relais C Dispo.** Ciblex a 300 points relais réservés aux professionnels, choisis par l'expéditeur. Le colis y est disponible dès 8 h et t'est remis sur présentation d'une pièce d'identité ou d'un badge d'entreprise. Tu reçois un SMS à son arrivée et, s'il n'est pas retiré au bout de trois jours, une nouvelle alerte par SMS ou e-mail.
 
@@ -62,7 +62,7 @@ En France, la responsabilité de Ciblex est limitée à 23 € par kilo et 750 �
 
 ## Contacter Ciblex : téléphone, e-mail et agences
 
-Les coordonnées sont les mêmes pour la France et la Belgique :
+Coordonnées publiées sur ciblex.eu :
 
 - **Téléphone :** 08 26 82 69 99, le numéro des mentions légales de Ciblex.
 - **E-mail :** ciblex@ciblex.fr.
@@ -73,11 +73,11 @@ Le formulaire de contact de ciblex.eu sert aux demandes commerciales des entrepr
 
 ## Suivre un colis Ciblex avec Peek
 
-[Peek](/) connaît les numéros Ciblex à 14 et 24 chiffres, mais d'autres transporteurs ont les mêmes formes : il interroge donc en même temps les transporteurs probables. Pour 14 chiffres en France, il demande d'abord à Chronopost et à Ciblex, après DPD, DHL ou un autre réseau seulement quand le début du numéro le désigne ; ailleurs, Ciblex vient en onzième position ou plus loin, après les dix transporteurs que Peek peut interroger avant l'enregistrement, et ne peut donc l'être qu'une fois le colis enregistré. Seule exception, en France comme ailleurs : pour 14 chiffres commençant par 10, Peek interroge Ciblex, SEUR et BRT, pas Chronopost, et ne demande à [DPD France](carrier:dpd-fr), dont il ouvre le suivi dans un navigateur, que si ni eux ni les services de suivi consultés ensuite ne connaissent le numéro. Pour 24 chiffres, il interroge Ciblex, Austrian Post et InPost, Ciblex en premier en France sauf quand le début du numéro désigne InPost, et bpost seulement pour un numéro qui commence par 3232 ou 3299, alors en premier. Si plusieurs transporteurs connaissent le numéro, ou aucun, c'est toi qui choisis avec « Changer ». Les liens de secure.extranet.ciblex.fr qui contiennent `colis=` fonctionnent aussi ; les pages de ciblex.eu, non.
+[Peek](/) connaît les numéros Ciblex à 14 et 24 chiffres, mais d'autres transporteurs ont les mêmes formes : il interroge donc en même temps les transporteurs probables. Pour 14 chiffres en France, il demande d'abord à Chronopost et à Ciblex, après DPD, DHL ou un autre réseau seulement quand le début du numéro le désigne ; ailleurs, Ciblex vient en onzième position ou plus loin, après les dix transporteurs que Peek peut interroger avant l'enregistrement, et ne peut donc l'être qu'une fois le colis enregistré. Seule exception, en France comme ailleurs : pour 14 chiffres commençant par 10, Peek interroge Ciblex, SEUR et BRT, pas Chronopost, et ne demande à [DPD France](carrier:dpd-fr), dont il ouvre le suivi dans un navigateur, que si ni eux ni les services de suivi consultés ensuite ne connaissent le numéro. Pour 24 chiffres, il interroge Ciblex, Austrian Post et InPost, Ciblex en premier en France sauf quand le début du numéro désigne InPost, et bpost seulement pour un numéro qui commence par 3232 ou 3299, alors en premier. Si plusieurs transporteurs connaissent le numéro, Peek te demande de choisir. Les liens de secure.extranet.ciblex.fr qui contiennent `colis=` fonctionnent aussi ; les pages de ciblex.eu, non.
 
-Peek vérifie le suivi Ciblex jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Ciblex qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il montre le statut, l'historique avec la ville du dépôt de chaque scan sur une carte, et l'heure de livraison. Les heures sont lues à l'heure de Paris et affichées dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les applications iPhone et Android, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Les lignes que Peek connaît s'affichent avec ses propres mots, comme Livré, En livraison, Prêt à être retiré, Problème de livraison, « Problème avec le colis » (pour `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`) ou « Colis traité dans un dépôt Ciblex » ; les autres, dont `COLIS NON REMIS` et celle des 48 heures, restent telles que Ciblex les écrit. Il peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou le jour de livraison uniquement.
+Tant que tu as le colis ouvert, ou le jour de sa livraison avec les notifications activées, Peek vérifie le suivi Ciblex jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Ciblex qui répond) ; sinon, toutes les heures. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il montre le statut, l'historique avec la ville du dépôt de chaque scan sur une carte, et l'heure de livraison. Les heures sont lues à l'heure de Paris et affichées dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les applications iPhone et Android, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Les lignes que Peek connaît s'affichent avec ses propres mots, comme Livré, En livraison, Prêt à être retiré, Problème de livraison, « Problème avec le colis » (pour `PROBLEME DESTINATAIRE` ou `COMPLEMENT ADRESSE`) ou « Colis traité dans un dépôt Ciblex » ; les autres, dont `COLIS NON REMIS` et celle des 48 heures, restent telles que Ciblex les écrit. Il peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou le jour de livraison uniquement.
 
-Pas de date de livraison prévue, ni de nom ou d'adresse de relais, ni de poids. Ton adresse n'est pas reprise quand Ciblex la met dans la colonne du lieu. Un historique vide n'est pas pris pour un numéro introuvable : Peek continue de demander.
+Pas de date de livraison prévue, ni de nom ou d'adresse de relais, ni de poids. Ton adresse n'est pas reprise quand Ciblex la met dans la colonne du lieu.
 
 ## Questions sur le suivi Ciblex
 

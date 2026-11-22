@@ -16,9 +16,9 @@ Shapes seen on CACESA's tracker (digits invented):
 
 | Shape | What it is |
 | --- | --- |
-| `CNES00000000000` | `CNES` and 11 digits. |
-| `CNESP00000000000000000000` | `CNESP` and 20 digits, a parcel for Spain. |
-| `CNPRT00000000000000000000` | `CNPRT` and 20 digits, a parcel for Portugal. |
+| `CNES48291736548` | `CNES` and 11 digits. |
+| `CNESP48291736548291736548` | `CNESP` and 20 digits, a parcel for Spain. |
+| `CNPRT48291736548291736548` | `CNPRT` and 20 digits, a parcel for Portugal. |
 
 Peek's catalog ties none of them to CACESA. `CNESP` and `CNPRT` numbers are also [Ecoscooting](carrier:ecoscooting)'s, Cainiao's delivery service in Spain and Portugal, and an `LP` number with 14 digits is AliExpress's logistics reference, tracked with [Cainiao](carrier:cainiao). If CACESA's tracker doesn't know your number, try the carrier the shop's email names. More in [tracking number formats](guide:tracking-number-formats).
 
@@ -68,7 +68,7 @@ CACESA doesn't handle returns from private buyers. Arrange a return with the sho
 
 **A letter from the Tax Agency.** For "Decomiso - Depósito temporal" or "Validación de datos", scan it and email it to atc@cacesa.com. CACESA tells you whether the parcel can still be recovered.
 
-What you owe depends on the rules covered in [parcel held at customs](guide:customs). CACESA's FAQ notes a €3 customs charge per kind of product on orders up to €150 since 1 July 2026, with identical items counted once; if the marketplace charged VAT and duties at checkout, nothing more is due on delivery.
+What you owe depends on the rules covered in [parcel held at customs](guide:customs). CACESA's FAQ notes a €3 customs charge per kind of product on orders up to €150 since 1 July 2026, items sharing the same 6-digit HS code paying it once; if the marketplace charged VAT and duties at checkout, nothing more is due on delivery.
 
 **Late, lost or damaged.** For anything other than customs payments, CACESA sends you to the seller, who agreed the delivery terms. The parcel was cleared but never arrived? If it was never held and CACESA never contacted you, ask the seller. Tips for a quiet tracker are in [tracking not updating](guide:tracking-not-updating).
 
@@ -76,7 +76,7 @@ What you owe depends on the rules covered in [parcel held at customs](guide:cust
 
 ## CACESA contact number and email
 
-As listed on cacesa.com on 12 October 2026. CACESA has no Portuguese site or Portugal office; the same channels apply.
+As listed on cacesa.com. CACESA has no Portuguese site or Portugal office; the same channels apply.
 
 - **Email** atc@cacesa.com, for held parcels, documents, payments and abandonment.
 - **Phone** +34 91 746 1860 (head office, Calle Golf 23, Madrid) or +34 91 333 54 50 (Madrid-Barajas air cargo office). CACESA gives no hours and no line for recipients.
@@ -89,7 +89,7 @@ No number shape is CACESA's, so [Peek](/) never names CACESA from a number. Add 
 
 Peek shows CACESA's English wordings as written, with the history's times read on Madrid time and shown in your device's time zone. A delivered line shows as delivered. `Start Custom clearance Process` shows as a customs step and the green-channel release as moving on, but Peek shows no duty amount and can't pay it. CACESA gives no places, so there's nothing to pin on the map, and no expected delivery, weight, sender or recipient.
 
-CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, [Correos](carrier:correos-spain) for a postal number ending `ES`, [CTT](carrier:ctt) for one ending `PT`, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. Peek checks up to every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, for a postal number, the post of the country Peek places you in (your phone's region, or on the web where you connect from), such as [Correos](carrier:correos-spain) in Spain or [CTT](carrier:ctt) in Portugal, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes (otherwise hourly), and it can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about CACESA tracking
 
@@ -117,8 +117,7 @@ For a held parcel, CACESA hands it on 3 to 4 days after release, plus the days d
 - [CACESA: Legal Warning](https://www.cacesa.com/en/legal-warning) – payments, no withdrawal, return if unpaid, other claims to the seller
 - [CACESA: Complaints](https://www.cacesa.com/en/legal-complaints) – complaints form
 - [CACESA: Quiénes somos](https://www.cacesa.com/es/quienes-somos) – full name, 1987, Iberia
-- [CACESA: site texts](https://www.cacesa.com/main.d099df250c97d3ce.js) – tracker labels, not-found text, payment steps, EU rules FAQ, fraud warning, China to Spain and Portugal
-- [CACESA: Tracking service](https://apiweb.cacesa.com/cacesa.api/api/Tracking) – wordings, headings, sequence, older parcels not found
+- [CACESA: site texts](https://www.cacesa.com/main.40b62b43302d800a.js) – tracker labels, not-found text, payment steps, EU rules FAQ, fraud warning, China to Spain and Portugal
 - [ECO: CTT results to September 2025](https://eco.sapo.pt/2025/10/30/lucro-dos-ctt-sobe-184-para-328-milhoes-ate-setembro-com-integracao-da-espanhola-cacesa/) – CTT's purchase completed
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

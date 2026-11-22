@@ -16,9 +16,9 @@ Formatos vistos en el localizador de CACESA (cifras inventadas):
 
 | Formato | Qué es |
 | --- | --- |
-| `CNES00000000000` | CNES y 11 cifras. |
-| `CNESP00000000000000000000` | CNESP y 20 cifras, un paquete para España. |
-| `CNPRT00000000000000000000` | CNPRT y 20 cifras, un paquete para Portugal. |
+| `CNES48291736548` | CNES y 11 cifras. |
+| `CNESP48291736548291736548` | CNESP y 20 cifras, un paquete para España. |
+| `CNPRT48291736548291736548` | CNPRT y 20 cifras, un paquete para Portugal. |
 
 El catálogo de Peek no asocia ninguno a CACESA. Los números CNESP y CNPRT son también de [Ecoscooting](carrier:ecoscooting), el servicio de reparto de Cainiao en España y Portugal, y un número LP con 14 cifras es la referencia logística de AliExpress, que se sigue con [Cainiao](carrier:cainiao). Si el localizador de CACESA no conoce tu número, prueba con la empresa que nombra el correo de la tienda. Más en [¿de qué empresa es este número de seguimiento?](guide:tracking-number-formats).
 
@@ -76,7 +76,7 @@ Lo que pagas depende de las normas que explica [paquete retenido en aduanas](gui
 
 ## CACESA teléfono y atención al cliente
 
-Según cacesa.com, consultada el 12 de octubre de 2026:
+Según cacesa.com:
 
 - **Correo** atc@cacesa.com, para paquetes retenidos, documentos, pagos y abandonos.
 - **Teléfono** +34 91 746 1860 (sede, Calle Golf 23, Madrid) o +34 91 333 54 50 (oficina de carga aérea de Madrid-Barajas). CACESA no da horario ni una línea para destinatarios.
@@ -89,7 +89,7 @@ Ningún formato de número es de CACESA, así que [Peek](/) nunca nombra a CACES
 
 Peek muestra los textos de CACESA en inglés, tal como los escribe: el primero es `Electronic notification of shipment received`. Lee las horas del historial en hora de Madrid y las muestra en la zona horaria de tu dispositivo. Una línea de entregado sale como entregado. `Start Custom clearance Process` aparece como paso de aduanas y `Customs cleared-Green channel` como que el paquete sigue su camino, pero Peek no muestra cuánto pagar ni permite pagarlo. CACESA no da lugares, así que no hay nada que marcar en el mapa; tampoco da fecha prevista, peso, remitente ni destinatario.
 
-CACESA no nombra a la empresa de reparto, y el paquete sigue con el mismo número. Peek solo puede seguirlo si ese número es claramente de otra empresa: Ecoscooting para CNESP y CNPRT, [Correos](carrier:correos-spain) para un número postal que acaba en ES o un número propio de Correos, CTT para uno que acaba en PT, o [CTT Express](carrier:ctt-express) para sus propios números. Con un número CNES o LP, el seguimiento acaba en CACESA. Peek consulta hasta una vez cada 10 minutos y puede enviarte una notificación cuando cambia el estado. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
+CACESA no nombra a la empresa de reparto, y el paquete sigue con el mismo número. Peek solo puede seguirlo si ese número es claramente de otra empresa: Ecoscooting para CNESP y CNPRT, [Correos](carrier:correos-spain) para un número propio de Correos, para un número postal el correo del país en que Peek te sitúa (la región de tu móvil o, en la web, el país desde el que te conectas), como Correos en España o CTT en Portugal, o [CTT Express](carrier:ctt-express) para sus propios números. Con un número CNES o LP, el seguimiento acaba en CACESA. Mientras tengas el paquete abierto, o el día de la entrega con las notificaciones activadas, Peek consulta hasta una vez cada 10 minutos (si no, una vez por hora) y puede enviarte una notificación cuando cambia el estado. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
 ## Preguntas sobre el seguimiento de CACESA
 
@@ -121,8 +121,7 @@ En su web no aparece ningún teléfono gratuito ni ninguno de Canarias; solo los
 - [CACESA: Reclamaciones](https://www.cacesa.com/es/reclamaciones-legal) – formulario de reclamaciones, adjuntos de 5 MB
 - [CACESA: Quiénes somos](https://www.cacesa.com/es/quienes-somos) – nombre completo, 1987, Iberia
 - [CACESA: Shipment tracking](https://www.cacesa.com/en/tracking) – los textos en inglés del localizador
-- [CACESA: textos de la web](https://www.cacesa.com/main.d099df250c97d3ce.js) – mensaje de no encontrado, pasos del pago, FAQ sobre las normas de la UE, aviso de fraude, China a España y Portugal
-- [CACESA: servicio de seguimiento](https://apiweb.cacesa.com/cacesa.api/api/Tracking) – textos en español e inglés, apartados, orden, paquetes antiguos no encontrados
+- [CACESA: textos de la web](https://www.cacesa.com/main.40b62b43302d800a.js) – mensaje de no encontrado, pasos del pago, FAQ sobre las normas de la UE, aviso de fraude, China a España y Portugal
 - [ECO: resultados de CTT hasta septiembre de 2025](https://eco.sapo.pt/2025/10/30/lucro-dos-ctt-sobe-184-para-328-milhoes-ate-setembro-com-integracao-da-espanhola-cacesa/) – compra de CACESA por CTT completada
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee Peek
 :::

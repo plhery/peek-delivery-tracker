@@ -16,7 +16,7 @@ Internationale Sendungen aus Taiwan tragen einen 13-stelligen Postcode aus zwei 
 | --- | --- |
 | `EE482910576TW` | `E`: EMS, der internationale Expressdienst (bzw. `EE`/`EZ` und `FT`/`FZ` wie `FT482910576TW` Richtung Festlandchina). |
 | `RR482910576TW` | `R`: internationaler eingeschriebener Brief. |
-| `LX482910576TW` | `L`: internationales ePacket (verfolgbare Kleinwarensendung bis 2 kg mit Briefkastenzustellung ohne Unterschrift). |
+| `LX482910576TW` | `L`: internationales ePacket (verfolgbare Kleinwarensendung bis 2 kg mit Zustellung an die Anschrift ohne Unterschrift). |
 | `CP482910576TW` | `C`: internationales Postpaket. |
 | `48291057364918` | 14 Ziffern (oder 20): Inlandssendung innerhalb Taiwans im nationalen Tracker von Chunghwa Post. |
 
@@ -61,8 +61,8 @@ Sobald `已出口－資料詳如右方` erscheint, kannst du dieselbe `TW`-Numme
 
 **Zoll und Einfuhrabgaben.** Taiwan gehört weder zur EU noch zum Schweizer Zollgebiet:
 
-- **Deutschland und Österreich (EU)**: Einfuhrumsatzsteuer fällt ab dem ersten Euro an (sofern sie nicht schon beim Kauf über IOSS eingezogen wurde). Seit dem 1. Juli 2026 gilt für Online-Bestellungen von außerhalb der EU bis 150 € ein pauschaler EU-Zollsatz von 3 € pro Warenart; seit dem 1. November 2026 kommt unabhängig vom Bestellwert eine EU-Bearbeitungsgebühr von 2 € pro Warenart hinzu, zuzüglich allfälliger Auslagenpauschalen der Post. Helgoland und Büsingen gehören weder zum Zoll- noch zum Mehrwertsteuergebiet der EU.
-- **Schweiz**: Laut Bundesamt für Zoll und Grenzsicherheit (BAZG) beträgt die Einfuhrsteuer 8,1 % (2,6 % reduzierter Satz etwa für Bücher, Lebensmittel oder Medikamente); Steuer- und Zollbeträge unter 5 CHF werden nicht erhoben (entspricht rund 62 CHF Warenwert inklusive Versand bei 8,1 % bzw. 193 CHF bei 2,6 %).
+- **Deutschland und Österreich (EU)**: Einfuhrumsatzsteuer fällt ab dem ersten Euro an (sofern sie nicht schon beim Kauf über IOSS eingezogen wurde). Seit dem 1. Juli 2026 gilt für Online-Bestellungen von außerhalb der EU bis 150 € ein pauschaler EU-Zollsatz von 3 € pro Warenart; seit dem 1. November 2026 kommt unabhängig vom Bestellwert eine EU-Bearbeitungsgebühr von 2 € pro Warenart hinzu. Helgoland und Büsingen gehören weder zum Zoll- noch zum Mehrwertsteuergebiet der EU.
+- **Schweiz**: Laut Bundesamt für Zoll und Grenzsicherheit (BAZG) beträgt die Einfuhrsteuer 8,1 % (2,6 % reduzierter Satz etwa für Bücher, Lebensmittel oder Medikamente); Steuer- und Zollbeträge bis 5 CHF werden nicht erhoben (entspricht rund 62 CHF Warenwert inklusive Versand bei 8,1 % bzw. 193 CHF bei 2,6 %).
 
 Details findest du unter [Paket hängt beim Zoll](guide:customs).
 
@@ -80,7 +80,7 @@ Streng reglementiert oder verboten sind laut Taipei Customs unter anderem Medizi
 
 **Keine neuen Scans nach `已出口－資料詳如右方`.** Die Sendung ist unterwegs ins Zielland oder liegt dort beim Eingangszoll; bei EMS nach Deutschland zeigt Chunghwa Post planmäßig keine weiteren Details an. Prüfe dieselbe Nummer bei [DHL](carrier:dhl), der [Österreichischen Post](carrier:austrian-post) oder der [Schweizerischen Post](carrier:swiss-post) und lies [Sendungsverfolgung aktualisiert nicht](guide:tracking-not-updating).
 
-**Nachforschung bei Verlust oder Verspätung.** Einen schriftlichen Nachforschungsantrag kann nur der Absender mit dem Original-Einlieferungsbeleg beim Aufgabepostamt stellen: bei EMS innerhalb von **4 Monaten** ab dem Folgetag der Einlieferung, bei Paketen und Einschreiben innerhalb von **6 Monaten**. Nach Ablauf dieser Frist lehnt Chunghwa Post Nachforschung und Entschädigung ab. Bitte daher den Verkäufer rechtzeitig darum und siehe [Paket verloren](guide:lost-parcel).
+**Nachforschung bei Verlust oder Verspätung.** Einen schriftlichen Nachforschungsantrag kann der Absender mit dem Original-Einlieferungsbeleg beim Aufgabepostamt stellen: bei EMS innerhalb von **4 Monaten** ab dem Folgetag der Einlieferung, bei Paketen und Einschreiben innerhalb von **6 Monaten**. Nach Ablauf dieser Frist kann Chunghwa Post die Nachforschung ablehnen und leistet keine Entschädigung. Bitte daher den Verkäufer rechtzeitig darum und siehe [Paket verloren](guide:lost-parcel).
 
 **Als zugestellt gemeldet, aber nicht da.** In Europa stellt deine Landespost zu – prüfe dort den Zustellnachweis (und beachte bei EMS nach Deutschland den Zoll-Hinweis oben). Weiteres unter [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ Streng reglementiert oder verboten sind laut Taipei Customs unter anderem Medizi
 
 Alle Uhrzeiten gelten in Taiwan-Zeit (`UTC+8`, ohne Sommerzeit):
 
-- **24-Stunden-Kundenservice**: `0800-700-365` (innerhalb Taiwans vom Festnetz, Taste `3` für Englisch). Vom Mobiltelefon oder aus dem Ausland gilt die kostenpflichtige Nummer `(04) 2354-2030` – international `+886 4 2354 2030` (ohne führende `0` der Ortsvorwahl).
+- **24-Stunden-Kundenservice**: `0800-700-365` (innerhalb Taiwans vom Festnetz, Taste `3` für Englisch). Vom Mobiltelefon gilt die kostenpflichtige Nummer `(04) 2354-2030` – international `+886 4 2354 2030` (ohne führende `0` der Ortsvorwahl).
 - **Eingehende Auslandspost nach Taiwan**: `(03) 3180-700`, Durchwahl `2431` (EMS) und `2432` (Pakete) Montag bis Freitag außer an Feiertagen von 8:00 bis 12:00 und 13:30 bis 16:30 Uhr; Durchwahl `2430` (Luftpost-Einschreiben) von 8:00 bis 12:00 und 13:00 bis 16:00 Uhr.
 - **Ausgehende Luftpostpakete ab Taiwan**: `(03) 383-3776`, Durchwahl `271` oder `272`, Montag bis Freitag außer an Feiertagen von 8:00 bis 16:30 Uhr.
 - **Online**: Formular *Opinion Box* auf [Contact Us](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601) mit Antwort innerhalb von 7 Tagen (Sendungsnummer sowie Namen und Anschriften von Absender und Empfänger angeben und die Bestätigungs-E-Mail anklicken).
@@ -97,7 +97,7 @@ Alle Uhrzeiten gelten in Taiwan-Zeit (`UTC+8`, ohne Sommerzeit):
 
 [Peek](/) erkennt 13-stellige Codes aus zwei Buchstaben, neun Ziffern und `TW` sofort als Chunghwa Post, wenn der erste Buchstabe `C`, `E`, `L` oder `R` ist (oder das Präfix `FT` bzw. `FZ` lautet) und die Prüfziffer stimmt; bei falscher Prüfziffer kontrolliere den Beleg. Tracking-Links mit `CSController?MAILNO=` funktionieren ebenfalls. Eine `UH…TW`-Nummer ordnet Peek anhand der Form der internationalen Briefpost zu (über „Ändern“ bzw. „Paketdienst ändern“ lässt sich Chunghwa Post manuell auswählen), während andere `U…TW`-Codes und 14- oder 20-stellige Inlandsnummern vom Chunghwa-Post-Adapter abgelehnt werden („vergibt keine Nummern wie diese“).
 
-Peek liest das internationale Tracking von Chunghwa Post und zeigt jeden Scan im chinesischen Originalwortlaut samt bearbeitendem Amt (chinesische Amtsnamen werden nach Möglichkeit dem Ort zugeordnet). Eigene Scans aus Taiwan interpretiert Peek in `Asia/Taipei` und rechnet sie in deine Zeitzone um („Uhrzeiten in deiner Zeitzone: {{zone}}.“); Auslandsscans behalten die Ortszeit der jeweiligen Post. Ein voraussichtliches Lieferdatum oder Gewicht liefert Chunghwa Post nicht, und die Bemerkungsspalte lässt Peek weg.
+Peek liest das internationale Tracking von Chunghwa Post und zeigt jeden Scan im chinesischen Originalwortlaut samt bearbeitendem Amt (chinesische Amtsnamen werden nach Möglichkeit dem Ort zugeordnet). Eigene Scans aus Taiwan interpretiert Peek in `Asia/Taipei` und rechnet sie in deine Zeitzone um („Uhrzeiten in deiner Zeitzone: {{zone}}.“); Auslandsscans liest Peek in der Ortszeit des angegebenen Landes und rechnet sie ebenfalls um. Ein voraussichtliches Lieferdatum oder Gewicht liefert Chunghwa Post nicht, und die Bemerkungsspalte lässt Peek weg.
 
 Bei einer `TW`-Nummer fragt Peek zusätzlich die Landespost des Landes ab, aus dem du nachsiehst – [DHL](carrier:dhl) aus Deutschland, die [Österreichische Post](carrier:austrian-post) aus Österreich, die [Schweizerische Post](carrier:swiss-post) aus der Schweiz – und wechselt unter Beibehaltung der bisherigen Historie dorthin, sobald aktuelle Scans vorliegen. Umgekehrt fragt Peek bei Sendungen mit Zielangabe Taiwan automatisch Chunghwa Post unter deiner Einlieferungsnummer an, sofern sie nicht mit `U` beginnt.
 

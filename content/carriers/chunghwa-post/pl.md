@@ -16,7 +16,7 @@ Przesyłka międzynarodowa nadana z Tajwanu ma 13 znaków: dwie litery, dziewię
 | --- | --- |
 | `EE482910576TW` | `E`: EMS, międzynarodowa przesyłka kurierska (albo `EE`/`EZ` i `FT`/`FZ`, np. `FT482910576TW`, do Chin kontynentalnych). |
 | `RR482910576TW` | `R`: międzynarodowy list polecony. |
-| `LX482910576TW` | `L`: międzynarodowy ePacket (rejestrowany mały pakiet do 2 kg, doręczany pod adres bez podpisu odbiorcy). |
+| `LX482910576TW` | `L`: międzynarodowy ePacket (śledzony mały pakiet do 2 kg, doręczany pod adres bez podpisu odbiorcy). |
 | `CP482910576TW` | `C`: międzynarodowa paczka pocztowa. |
 | `48291057364918` | 14 cyfr (lub 20): przesyłka krajowa na terenie Tajwanu, sprawdzana w krajowej zakładce Chunghwa Post. |
 
@@ -53,7 +53,7 @@ Chunghwa Post wywozi przesyłkę z Tajwanu, a po przylocie do Polski przejmuje j
 
 Po pojawieniu się statusu `已出口－資料詳如右方` wpisz ten sam numer `TW` w śledzeniu [Poczty Polskiej](carrier:poczta-polska). Zasady awizowania i terminy odbioru w placówce określa Poczta Polska; więcej w poradniku [nieudane doręczenie](guide:missed-delivery).
 
-**Cło i VAT w Polsce.** Tajwan leży poza Unią Europejską, więc przesyłki z towarami przechodzą odprawę celną. Od każdej przesyłki naliczany jest polski VAT od importu (chyba że sprzedawca pobrał go już przy zakupie w procedurze IOSS). Od 1 lipca 2026 r. zamówienia internetowe spoza UE o wartości do 150 € objęte są zryczałtowanym cłem UE w wysokości 3 € za każdą pozycję towarową, a od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna w wysokości 2 € za pozycję towarową niezależnie od wartości zamówienia – oprócz opłaty pocztowej za przedstawienie przesyłki do kontroli celnej. Szczegóły znajdziesz w artykule [paczka zatrzymana przez urząd celny](guide:customs).
+**Cło i VAT w Polsce.** Tajwan leży poza Unią Europejską, więc przesyłki z towarami przechodzą odprawę celną. Od każdej przesyłki naliczany jest polski VAT od importu (chyba że sprzedawca pobrał go już przy zakupie w procedurze IOSS). Od 1 lipca 2026 r. zamówienia internetowe spoza UE o wartości do 150 € objęte są zryczałtowanym cłem UE w wysokości 3 € za każdą pozycję towarową, a od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna w wysokości 2 € za pozycję towarową niezależnie od wartości zamówienia. Szczegóły znajdziesz w artykule [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Wysyłka paczki na Tajwan: doręczenie i przepisy celne
 
@@ -69,7 +69,7 @@ Taipei Customs przypomina też o towarach objętych ograniczeniami lub zakazem p
 
 **Cisza po statusie `已出口－資料詳如右方`.** Przesyłka opuściła już Tajwan i jest w transporcie lotniczym albo czeka na przyjęcie i kontrolę celną w Polsce. Sprawdź ten sam numer w [Poczcie Polskiej](carrier:poczta-polska) i przeczytaj [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating). (Przy przesyłkach EMS do Niemiec Chunghwa Post celowo ukrywa dalsze statusy z powodu opóźnień wymiany danych z Deutsche Post i odsyła na stronę [DHL](carrier:dhl)).
 
-**Reklamacja zagubionej lub opóźnionej przesyłki.** Pisemną reklamację może złożyć wyłącznie nadawca w tajwańskim urzędzie pocztowym nadania, okazując oryginał dowodu nadania: w ciągu **4 miesięcy** od dnia następującego po nadaniu dla EMS oraz w ciągu **6 miesięcy** dla paczek i przesyłek poleconych. Po upływie tego terminu Chunghwa Post może odmówić poszukiwań i nie wypłaca odszkodowania. Poproś sprzedawcę o złożenie wniosku w terminie i zobacz [zagubiona paczka](guide:lost-parcel).
+**Reklamacja zagubionej lub opóźnionej przesyłki.** Pisemną reklamację może złożyć nadawca w tajwańskim urzędzie pocztowym nadania, okazując oryginał dowodu nadania: w ciągu **4 miesięcy** od dnia następującego po nadaniu dla EMS oraz w ciągu **6 miesięcy** dla paczek i przesyłek poleconych. Po upływie tego terminu Chunghwa Post może odmówić poszukiwań i nie wypłaca odszkodowania. Poproś sprzedawcę o złożenie wniosku w terminie i zobacz [zagubiona paczka](guide:lost-parcel).
 
 **Status doręczono, ale paczki brak.** Ostatni odcinek w Polsce realizuje [Poczta Polska](carrier:poczta-polska) – zacznij od sprawdzenia jej śledzenia i potwierdzenia odbioru, a także poradnika [dostarczona, ale nieodebrana](guide:delivered-not-received).
 
@@ -77,7 +77,7 @@ Taipei Customs przypomina też o towarach objętych ograniczeniami lub zakazem p
 
 Godziny pracy podane są według czasu tajwańskiego (`UTC+8`, bez zmiany na czas letni):
 
-- **Całodobowa infolinia**: `0800-700-365` (bezpłatna z telefonów stacjonarnych na Tajwanie; wybierz `3`, aby połączyć się z obsługą po angielsku). Z telefonu komórkowego lub z zagranicy dzwoń pod płatny numer `(04) 2354-2030`, czyli z Polski `+886 4 2354 2030` (z pominięciem początkowego `0` w numerze kierunkowym).
+- **Całodobowa infolinia**: `0800-700-365` (bezpłatna z telefonów stacjonarnych na Tajwanie; wybierz `3`, aby połączyć się z obsługą po angielsku). Z telefonu komórkowego dzwoń pod płatny numer `(04) 2354-2030`, czyli z Polski `+886 4 2354 2030` (z pominięciem początkowego `0` w numerze kierunkowym).
 - **Przesyłki przychodzące na Tajwan**: `(03) 3180-700`, wew. `2431` (EMS) oraz `2432` (paczki) od poniedziałku do piątku z wyjątkiem świąt w godz. 8:00–12:00 i 13:30–16:30; wew. `2430` (listy polecone lotnicze) w godz. 8:00–12:00 i 13:00–16:00.
 - **Paczki lotnicze wychodzące z Tajwanu**: `(03) 383-3776`, wew. `271` lub `272`, od poniedziałku do piątku z wyjątkiem świąt w godz. 8:00–16:30.
 - **Online**: formularz *Opinion Box* na stronie [Contact Us](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601) z odpowiedzią w ciągu 7 dni (podaj numer przesyłki oraz imiona, nazwiska i adresy nadawcy i adresata, a następnie kliknij link potwierdzający w e-mailu).
@@ -86,11 +86,11 @@ Godziny pracy podane są według czasu tajwańskiego (`UTC+8`, bez zmiany na cza
 
 [Peek](/) od razu rozpoznaje jako Chunghwa Post 13-znakowy numer złożony z dwóch liter, dziewięciu cyfr i `TW`, gdy pierwszą literą jest `C`, `E`, `L` lub `R` (albo prefiksem `FT` bądź `FZ`) i zgadza się cyfra kontrolna; przy błędnej cyfrze sprawdź pokwitowanie. Działają też linki `CSController?MAILNO=`. Numer `UH…TW` jest po samym kształcie przypisywany do poczty międzynarodowej (Chunghwa Post możesz wskazać ręcznie przyciskiem „Zmień” lub „Zmień przewoźnika”), natomiast pozostałe kody `U…TW` oraz 14- i 20-cyfrowe numery krajowe są odrzucane przez adapter Chunghwa Post („nie wydaje takich numerów”).
 
-Peek odczytuje międzynarodową wyszukiwarkę Chunghwa Post i pokazuje każdy skan w oryginalnym zapisie chińskim wraz z urzędem (gdy to możliwe, chińska nazwa urzędu zostaje przypisana do miasta). Zdarzenia z tajwańskich jednostek są odczytywane w strefie `Asia/Taipei` i przeliczane na Twój czas lokalny („Godziny w Twojej strefie czasowej: {{zone}}.”), a skany z zagranicy zachowują czas lokalny tamtejszej poczty. Chunghwa Post nie podaje przewidywanej daty doręczenia ani wagi, a Peek pomija boczną kolumnę uwag.
+Peek odczytuje międzynarodową wyszukiwarkę Chunghwa Post i pokazuje każdy skan w oryginalnym zapisie chińskim wraz z urzędem (gdy to możliwe, chińska nazwa urzędu zostaje przypisana do miasta). Zdarzenia z tajwańskich jednostek są odczytywane w strefie `Asia/Taipei` i przeliczane na Twój czas lokalny („Godziny w twojej strefie czasowej: {{zone}}.”), a skany z zagranicy są odczytywane w czasie lokalnym wskazanego kraju i również przeliczane. Chunghwa Post nie podaje przewidywanej daty doręczenia ani wagi, a Peek pomija boczną kolumnę uwag.
 
 Dla numeru zakończonego na `TW` Peek odpytuje również operatora pocztowego kraju, z którego sprawdzasz przesyłkę – z Polski [Pocztę Polską](carrier:poczta-polska) – i przełącza na niego śledzenie po pojawieniu się aktualnych skanów, zachowując wcześniejszą historię z Tajwanu. W drugą stronę, gdy poczta nadania wskazuje Tajwan jako kraj docelowy, Peek pyta Chunghwa Post o ten sam numer pocztowy, o ile nie zaczyna się on na literę `U`.
 
-Gdy masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza bezpośredni serwis Chunghwa Post nawet co 10 minut, a po przejściu przesyłki w status „W doręczeniu” – nawet co 2 minuty (tego dnia od godz. 6:00 czasu lokalnego, dopóki odpowiada bezpośrednio serwis Chunghwa Post); w pozostałym czasie oraz po dwóch dniach bez nowych zdarzeń (12 godzinach, gdy widnieje „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Przez zewnętrzne serwisy śledzenia w dniu statusu „W doręczeniu” na tych samych warunkach odpytuje do 15 minut, poza tym co godzinę albo co 3 godziny po dobie bez zmian. Po przejęciu przesyłki przez pocztę docelową Peek stosuje częstotliwość właściwą dla tego operatora. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie składa reklamacji w Chunghwa Post ani w Poczcie Polskiej w Twoim imieniu.
+Gdy masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza bezpośredni serwis Chunghwa Post nawet co 10 minut, a po przejściu przesyłki w status „W doręczeniu” – nawet co 2 minuty (tego dnia od godz. 6:00 czasu lokalnego, dopóki odpowiada bezpośrednio serwis Chunghwa Post); w pozostałym czasie oraz po dwóch dniach bez nowych zdarzeń (12 godzinach, gdy widnieje „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Przez zewnętrzne serwisy śledzenia w dniu statusu „W doręczeniu” na tych samych warunkach odpytuje nawet co 15 minut, poza tym co godzinę albo co 3 godziny po dobie bez zmian. Po przejęciu przesyłki przez pocztę docelową Peek stosuje częstotliwość właściwą dla tego operatora. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie składa reklamacji w Chunghwa Post ani w Poczcie Polskiej w Twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie Chunghwa Post
 

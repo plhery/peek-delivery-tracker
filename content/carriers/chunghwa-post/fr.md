@@ -16,7 +16,7 @@ Un envoi international parti de Taïwan porte un code postal de 13 caractères :
 | --- | --- |
 | `EE482910576TW` | `E` : EMS, le service express international (ou `EE`/`EZ` et `FT`/`FZ`, comme `FT482910576TW`, vers la Chine continentale). |
 | `RR482910576TW` | `R` : envoi recommandé international. |
-| `LX482910576TW` | `L` : ePacket international (petit paquet suivi jusqu'à 2 kg, remis en boîte sans signature). |
+| `LX482910576TW` | `L` : ePacket international (petit paquet suivi jusqu'à 2 kg, remis à l'adresse sans signature). |
 | `CP482910576TW` | `C` : colis postal international. |
 | `48291057364918` | 14 chiffres (ou 20) : envoi intérieur à Taïwan, suivi sur l'onglet national de Chunghwa Post. |
 
@@ -51,7 +51,7 @@ Si le portail répond `查無此號碼資料！！` (« aucune donnée pour ce n
 
 Chunghwa Post achemine l'envoi hors de Taïwan, puis la poste du pays destinataire prend le relais avec le même code en `TW`. Le tableau des postes étrangères du portail Chunghwa Post renvoie vers ces sites :
 
-- **France** : [Chronopost](carrier:chronopost) pour les envois EMS et les colis internationaux, aucun lien pour les lettres (en pratique, [La Poste / Colissimo](carrier:la-poste) traite aussi les paquets `L` et colis postaux sur son suivi).
+- **France** : [Chronopost](carrier:chronopost) pour les envois EMS et les colis internationaux, aucun lien pour les lettres.
 - **Belgique** : [bpost](carrier:bpost) pour EMS, colis et lettres.
 - **Suisse** : [Poste suisse](carrier:swiss-post) pour EMS, colis et lettres.
 - **Luxembourg** : [POST Luxembourg](carrier:post-luxembourg) pour EMS, colis et lettres.
@@ -84,7 +84,7 @@ La douane de Taipei rappelle aussi que plusieurs marchandises sont interdites ou
 
 **Plus de nouvelles après `已出口－資料詳如右方`.** Le pli a quitté Taïwan et attend sa prise en charge à l'arrivée ou le passage en douane. Consultez le suivi de votre poste nationale avec le même numéro `TW` et voyez [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-**Envoi retardé ou égaré.** Seul l'expéditeur peut déposer une demande écrite de recherche au bureau de poste de dépôt, muni du récépissé original : dans les **4 mois** à compter du lendemain du dépôt pour un envoi EMS, et dans les **6 mois** pour un colis international ou un recommandé. Passé ce délai, Chunghwa Post peut refuser l'enquête et n'accorde aucune indemnisation. Contactez donc le vendeur à temps et consultez [colis perdu](guide:lost-parcel).
+**Envoi retardé ou égaré.** L'expéditeur peut déposer une demande écrite de recherche au bureau de poste de dépôt, muni du récépissé original : dans les **4 mois** à compter du lendemain du dépôt pour un envoi EMS, et dans les **6 mois** pour un colis international ou un recommandé. Passé ce délai, Chunghwa Post peut refuser l'enquête et n'accorde aucune indemnisation. Contactez donc le vendeur à temps et consultez [colis perdu](guide:lost-parcel).
 
 **Marqué livré mais introuvable.** En Europe ou au Canada, le dernier kilomètre relève de votre poste locale : vérifiez son suivi et sa preuve de remise, puis voyez [colis indiqué livré mais non reçu](guide:delivered-not-received).
 
@@ -92,7 +92,7 @@ La douane de Taipei rappelle aussi que plusieurs marchandises sont interdites ou
 
 Les horaires ci-dessous sont exprimés à l'heure de Taïwan (`UTC+8`, sans heure d'été) :
 
-- **Service client 24 h/24** : `0800-700-365` (gratuit depuis un poste fixe à Taïwan ; tapez `3` pour le service en anglais). Depuis un mobile ou l'étranger, composez le numéro payant `(04) 2354-2030`, soit `+886 4 2354 2030` hors de Taïwan (en retirant le `0` initial de l'indicatif régional).
+- **Service client 24 h/24** : `0800-700-365` (gratuit depuis un poste fixe à Taïwan ; tapez `3` pour le service en anglais). Depuis un mobile, composez le numéro payant `(04) 2354-2030`, soit `+886 4 2354 2030` hors de Taïwan (en retirant le `0` initial de l'indicatif régional).
 - **Courrier entrant à Taïwan** : `(03) 3180-700`, poste `2431` (EMS) ou `2432` (colis), du lundi au vendredi hors jours fériés de 8 h 00 à 12 h 00 et de 13 h 30 à 16 h 30 ; poste `2430` (recommandés avion) de 8 h 00 à 12 h 00 et de 13 h 00 à 16 h 00.
 - **Colis avion sortant de Taïwan** : `(03) 383-3776`, poste `271` ou `272`, du lundi au vendredi hors jours fériés de 8 h 00 à 16 h 30.
 - **En ligne** : formulaire *Opinion Box* sur la page [Contact Us](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601), avec réponse sous 7 jours (indiquez le numéro d'envoi ainsi que les noms et adresses de l'expéditeur et du destinataire, puis validez le courriel de confirmation).
@@ -101,7 +101,7 @@ Les horaires ci-dessous sont exprimés à l'heure de Taïwan (`UTC+8`, sans heur
 
 [Peek](/) identifie immédiatement comme Chunghwa Post un numéro de deux lettres, neuf chiffres et `TW` lorsque la première lettre est `C`, `E`, `L` ou `R` (ou que le préfixe est `FT` ou `FZ`) et que le chiffre de contrôle est exact ; avec un chiffre erroné, vérifiez le reçu. Les liens de suivi de la forme `CSController?MAILNO=` sont aussi reconnus. Un code `UH…TW` est classé par sa forme sous la poste internationale (vous pouvez choisir Chunghwa Post via `« Changer »` ou `« Changer de transporteur »`), tandis que les autres codes en `U…TW` et les numéros intérieurs de 14 ou 20 chiffres sont refusés par l'adaptateur Chunghwa Post (`« n’émet pas de numéros comme celui-ci »`).
 
-Peek interroge le suivi international de Chunghwa Post et affiche chaque scan en chinois tel qu'émis, avec le bureau correspondant (converti en nom de ville lorsque Peek peut le localiser). Les scans réalisés par les bureaux taïwanais sont lus sur le fuseau `Asia/Taipei` et convertis dans le vôtre (`« Heures dans ton fuseau horaire : {{zone}}. »`), tandis que les scans transmis depuis l'étranger gardent l'heure locale de la poste concernée. Chunghwa Post ne fournit ni date de livraison estimée ni poids, et Peek écarte la colonne de remarques.
+Peek interroge le suivi international de Chunghwa Post et affiche chaque scan en chinois tel qu'émis, avec le bureau correspondant (converti en nom de ville lorsque Peek peut le localiser). Les scans réalisés par les bureaux taïwanais sont lus sur le fuseau `Asia/Taipei` et convertis dans le vôtre (`« Heures dans ton fuseau horaire : {{zone}}. »`), tandis que les scans transmis depuis l'étranger sont lus à l'heure locale du pays indiqué, puis convertis eux aussi. Chunghwa Post ne fournit ni date de livraison estimée ni poids, et Peek écarte la colonne de remarques.
 
 Pour un numéro en `TW`, Peek interroge aussi la poste nationale du pays depuis lequel vous consultez le suivi ([La Poste / Colissimo](carrier:la-poste) depuis la France, [bpost](carrier:bpost) depuis la Belgique, [Poste suisse](carrier:swiss-post) depuis la Suisse, [POST Luxembourg](carrier:post-luxembourg) depuis le Luxembourg, [Postes Canada](carrier:canada-post) depuis le Canada) : dès qu'elle publie des scans récents, Peek bascule vers elle tout en conservant l'historique taïwanais. En sens inverse, lorsqu'une poste étrangère indique Taïwan comme destination, Peek interroge Chunghwa Post avec le même code, sauf s'il commence par `U`.
 
@@ -115,11 +115,11 @@ Oui. Chunghwa Post (中華郵政) est l'opérateur postal national de Taïwan, e
 
 ### Qui livre un colis Chunghwa Post en France, en Belgique ou en Suisse ?
 
-En France, Chunghwa Post renvoie vers [Chronopost](carrier:chronopost) pour les EMS et colis internationaux, et [La Poste / Colissimo](carrier:la-poste) assure la distribution postale courante ; en Belgique, c'est [bpost](carrier:bpost) et en Suisse la [Poste suisse](carrier:swiss-post), toujours avec le même numéro en `TW`.
+En France, Chunghwa Post renvoie vers [Chronopost](carrier:chronopost) pour les EMS et colis internationaux, et Peek interroge aussi [La Poste / Colissimo](carrier:la-poste) quand vous suivez l'envoi depuis la France ; en Belgique, c'est [bpost](carrier:bpost) et en Suisse la [Poste suisse](carrier:swiss-post), toujours avec le même numéro en `TW`.
 
 ### Pourquoi mon recommandé `RR…TW` vers la France ou le Canada ne bouge-t-il plus ?
 
-Chunghwa Post indique que la France et le Canada font partie des pays qui n'offrent plus de suivi en ligne pour les lettres recommandées internationales. Seul l'expéditeur peut demander une recherche écrite en bureau de poste à Taïwan dans un délai de 6 mois.
+Chunghwa Post indique que la France et le Canada font partie des pays qui n'offrent plus de suivi en ligne pour les lettres recommandées internationales. L'expéditeur peut demander une recherche écrite en bureau de poste à Taïwan dans un délai de 6 mois.
 
 ### Que veut dire le statut `海關查驗` ?
 

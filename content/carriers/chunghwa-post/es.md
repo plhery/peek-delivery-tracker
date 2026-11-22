@@ -16,7 +16,7 @@ Un envío internacional procedente de Taiwán lleva un código de 13 caracteres:
 | --- | --- |
 | `EE482910576TW` | `E`: EMS, servicio exprés internacional (o `EE`/`EZ` y `FT`/`FZ`, como `FT482910576TW`, hacia China continental). |
 | `RR482910576TW` | `R`: carta certificada internacional. |
-| `LX482910576TW` | `L`: ePacket internacional (pequeño paquete con seguimiento de hasta 2 kg, entregado en buzón sin firma). |
+| `LX482910576TW` | `L`: ePacket internacional (pequeño paquete con seguimiento de hasta 2 kg, entregado en la dirección sin firma). |
 | `CP482910576TW` | `C`: paquete postal internacional. |
 | `48291057364918` | 14 dígitos (o 20): envío nacional dentro de Taiwán, consultable en la pestaña doméstica de Chunghwa Post. |
 
@@ -53,11 +53,11 @@ Chunghwa Post saca el paquete de Taiwán y, a la llegada, el operador postal del
 
 - **España (incluida la mención a Ceuta y Melilla)**: [Correos](carrier:correos-spain) (`correos.es`) tanto para EMS como para paquetes internacionales y cartas certificadas.
 - **México y Chile**: Correos de México y CorreosChile para EMS, paquetes y cartas.
-- **Argentina**: la tabla de Chunghwa Post no ofrece enlace directo (aunque el correo designado es Correo Argentino).
+- **Argentina**: la tabla de Chunghwa Post no ofrece enlace directo.
 
 Cuando veas `已出口－資料詳如右方`, introduce ese mismo código `TW` en [Correos](carrier:correos-spain) o en el operador postal de tu país. España, México, Chile y Argentina no figuran en la lista de trece países que según Chunghwa Post dejaron de ofrecer seguimiento web para cartas certificadas internacionales (lista en la que sí están Estados Unidos, Canadá, Brasil, Francia, Italia, Países Bajos o Reino Unido). Los avisos de llegada y plazos de recogida en oficina dependen del correo local; consulta [entrega fallida](guide:missed-delivery).
 
-**Aduanas en España.** Taiwán está fuera de la Unión Europea, por lo que las compras con mercancías pasan despacho de importación. En **España peninsular y Baleares** se aplica el IVA de importación desde el primer euro (salvo que la tienda ya lo haya cobrado mediante ventanilla IOSS). Además, desde el 1 de julio de 2026 los pedidos comprados en línea fuera de la UE de hasta 150 € pagan un arancel aduanero de la UE de 3 € por categoría de artículo, y desde el 1 de noviembre de 2026 se suma una tasa de gestión de la Unión de 2 € por artículo cualquiera que sea el valor del pedido, aparte de la tarifa de tramitación aduanera del operador. Canarias forma parte del territorio aduanero de la UE pero queda fuera del ámbito del IVA comunitario (aplica IGIC), mientras que Ceuta y Melilla quedan fuera tanto del territorio aduanero como del área de IVA de la UE; en Latinoamérica cada país aplica sus propios tributos de importación. Más información en [paquetes retenidos en aduanas](guide:customs).
+**Aduanas en España.** Taiwán está fuera de la Unión Europea, por lo que las compras con mercancías pasan despacho de importación. En **España peninsular y Baleares** se aplica el IVA de importación desde el primer euro (salvo que la tienda ya lo haya cobrado mediante ventanilla IOSS). Además, desde el 1 de julio de 2026 los pedidos comprados en línea fuera de la UE de hasta 150 € pagan un arancel aduanero de la UE de 3 € por categoría de artículo, y desde el 1 de noviembre de 2026 se suma una tasa de gestión de la Unión de 2 € por artículo cualquiera que sea el valor del pedido. Canarias forma parte del territorio aduanero de la UE pero queda fuera del ámbito del IVA comunitario, mientras que Ceuta y Melilla quedan fuera tanto del territorio aduanero como del área de IVA de la UE; en Latinoamérica cada país aplica sus propios tributos de importación. Más información en [paquetes retenidos en aduanas](guide:customs).
 
 ## Enviar un paquete a Taiwán: reparto y normas aduaneras
 
@@ -73,7 +73,7 @@ La Aduana de Taipéi advierte también de mercancías prohibidas o restringidas 
 
 **Sin novedades tras `已出口－資料詳如右方`.** El envío ya salió de Taiwán y viaja hacia el país de destino o espera control aduanero. Consulta el mismo número en [Correos](carrier:correos-spain) (o tu correo nacional) y revisa [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
-**Paquete retrasado o perdido.** La reclamación escrita debe presentarla el remitente en la oficina postal de Taiwán donde depositó el envío, aportando el resguardo original: dispone de **4 meses** desde el día siguiente a la admisión para EMS y de **6 meses** para paquetes y correo certificado. Pasado ese plazo, Chunghwa Post puede rechazar la búsqueda y no abona indemnización. Pide al vendedor que la tramite a tiempo y consulta [paquete perdido](guide:lost-parcel).
+**Paquete retrasado o perdido.** La reclamación escrita puede presentarla el remitente en la oficina postal de Taiwán donde depositó el envío, aportando el resguardo original: dispone de **4 meses** desde el día siguiente a la admisión para EMS y de **6 meses** para paquetes y correo certificado. Pasado ese plazo, Chunghwa Post puede rechazar la búsqueda y no abona indemnización. Pide al vendedor que la tramite a tiempo y consulta [paquete perdido](guide:lost-parcel).
 
 **Consta como entregado pero no lo tienes.** En España o Latinoamérica la entrega final la efectúa tu correo nacional: revisa su justificante de entrega y consulta [entregado pero no recibido](guide:delivered-not-received).
 
@@ -81,7 +81,7 @@ La Aduana de Taipéi advierte también de mercancías prohibidas o restringidas 
 
 Los horarios corresponden a la hora oficial de Taiwán (`UTC+8`, sin cambio estacional):
 
-- **Línea de atención 24 horas**: `0800-700-365` (gratuita desde fijo en Taiwán; pulsa `3` para atención en inglés). Desde móvil o desde el extranjero hay que marcar el número de pago `(04) 2354-2030`, es decir, `+886 4 2354 2030` quitando el `0` inicial del prefijo.
+- **Línea de atención 24 horas**: `0800-700-365` (gratuita desde fijo en Taiwán; pulsa `3` para atención en inglés). Desde móvil hay que marcar el número de pago `(04) 2354-2030`, es decir, `+886 4 2354 2030` quitando el `0` inicial del prefijo.
 - **Envíos que entran en Taiwán**: `(03) 3180-700`, extensión `2431` (EMS) y `2432` (paquetes) de lunes a viernes no festivos de 8:00 a 12:00 y de 13:30 a 16:30; extensión `2430` (certificados por avión) de 8:00 a 12:00 y de 13:00 a 16:00.
 - **Paquetes aéreos que salen de Taiwán**: `(03) 383-3776`, extensión `271` o `272`, de lunes a viernes no festivos de 8:00 a 16:30.
 - **En línea**: formulario *Opinion Box* en [Contact Us](https://www.post.gov.tw/post/internet/U_english2/index.jsp?ID=35090601), con respuesta en un plazo de 7 días (indica el código del envío y nombre y dirección tanto del remitente como del destinatario, y confirma el enlace enviado a tu correo).
@@ -90,7 +90,7 @@ Los horarios corresponden a la hora oficial de Taiwán (`UTC+8`, sin cambio esta
 
 [Peek](/) reconoce al instante como Chunghwa Post cualquier código de dos letras, nueve dígitos y `TW` cuya primera letra sea `C`, `E`, `L` o `R` (o cuyo prefijo sea `FT` o `FZ`) siempre que el dígito de control sea válido; si falla, revisa el recibo. También admite enlaces `CSController?MAILNO=`. Un número `UH…TW` se clasifica por su forma bajo correo internacional (puedes elegir Chunghwa Post manualmente con «Cambiar» o «Cambiar transportista»), mientras que otros códigos `U…TW` y los números domésticos de 14 o 20 dígitos son rechazados por el adaptador de Chunghwa Post («no emite números como este»).
 
-Peek consulta el localizador internacional de Chunghwa Post y muestra cada escaneo en chino tal como lo publica el operador, junto con la oficina (convertida al nombre de su ciudad cuando Peek puede ubicarla). Los eventos registrados en oficinas taiwanesas se interpretan en `Asia/Taipei` y se pasan a tu huso («Horas en tu zona horaria: {{zone}}.»); los escaneos hechos en el extranjero conservan la hora local del correo correspondiente. Chunghwa Post no facilita fecha estimada de entrega ni peso, y Peek descarta la nota lateral de cada evento.
+Peek consulta el localizador internacional de Chunghwa Post y muestra cada escaneo en chino tal como lo publica el operador, junto con la oficina (convertida al nombre de su ciudad cuando Peek puede ubicarla). Los eventos registrados en oficinas taiwanesas se interpretan en `Asia/Taipei` y se pasan a tu huso («Horas en tu zona horaria: {{zone}}.»); los escaneos hechos en el extranjero se leen en la hora local del país indicado y también se convierten. Chunghwa Post no facilita fecha estimada de entrega ni peso, y Peek descarta la nota lateral de cada evento.
 
 Para un código acabado en `TW`, Peek consulta además al correo nacional del país desde el que miras el envío —por ejemplo [Correos](carrier:correos-spain) desde España o Correo Argentino desde Argentina— y pasa a seguirlo allí en cuanto publica eventos nuevos, conservando el historial de Taiwán. A la inversa, cuando tu correo indica Taiwán como destino, Peek consulta a Chunghwa Post con tu mismo número postal salvo que empiece por `U`.
 

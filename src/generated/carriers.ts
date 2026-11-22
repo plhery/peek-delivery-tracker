@@ -2012,6 +2012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "colis-prive-sendungsverfolgung",
+      "title": "Colis Privé Sendungsverfolgung: französische Status erklärt",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
+    {
       "id": "brt",
       "catalog": "brt",
       "slug": "brt-sendungsverfolgung",
@@ -4672,6 +4680,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "tracciamento-colis-prive",
+      "title": "Tracciamento Colis Privé: stati francesi e cosa fare",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
+    {
       "id": "brt",
       "catalog": "brt",
       "slug": "brt-tracking",
@@ -5961,6 +5977,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "es": [
+    {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "seguimiento-colis-prive",
+      "title": "Seguimiento Colis Privé: estados franceses y qué hacer",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
     {
       "id": "brt",
       "catalog": "brt",
@@ -7252,6 +7276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt": [
     {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "seguimento-colis-prive",
+      "title": "Seguimento Colis Privé: estados franceses e o que fazer",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
+    {
       "id": "brt",
       "catalog": "brt",
       "slug": "brt-rastreio",
@@ -8527,6 +8559,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "pl": [
+    {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "sledzenie-colis-prive",
+      "title": "Śledzenie Colis Privé: francuskie statusy i co zrobić",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
     {
       "id": "brt",
       "catalog": "brt",

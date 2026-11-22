@@ -34,12 +34,12 @@ Skopiuj numer zamiast przepisywać go ręcznie: 12-cyfrowy numer z błędną ost
 | `The parcel was released by customs.` | Zwolniona przez urząd celny i ponownie w drodze. |
 | `Final parcel center` | W ostatniej sortowni — kolejnym etapem jest doręczenie. |
 | `In delivery`, `The parcel is in delivery.` | W doręczeniu, przewidywana w ciągu dnia. |
-| `Not delivered` | Niedoręczona, np. z powodu nieobecności lub brakujących danych adresu. |
-| `Stored` | Przechowywana w oddziale po nieudanej próbie, np. z powodu nieobecności. |
+| `The parcel could not be delivered as the consignee was absent` | Niedoręczona z powodu nieobecności odbiorcy. |
+| `The parcel is stored in the parcel center` | Przechowywana w oddziale po nieudanej próbie, np. z powodu nieobecności. |
 | `The parcel is ready for collection at the ParcelShop.` | Czeka w punkcie ParcelShop lub automacie na odbiór. |
 | `The parcel has been delivered.`, `Delivered` | Doręczona. |
 
-`Preadvice` oznacza wyłącznie, że sklep przekazał dane do systemu GLS — jeśli trwa to dniami, zapytaj nadawcę. GLS wpisuje też `Delivered` dla paczki zostawionej w punkcie ParcelShop, którą nadal musisz odebrać. Podane przyczyny `Not delivered` i `Stored` pochodzą z GLS Holandia, gdzie GLS doręcza samodzielnie; w Szwajcarii doręcza Swiss Post.
+`Preadvice` oznacza wyłącznie, że sklep przekazał dane do systemu GLS — jeśli trwa to dniami, zapytaj nadawcę. GLS wpisuje też `Delivered` dla paczki zostawionej w punkcie ParcelShop, którą nadal musisz odebrać. Te dwa komunikaty o nieudanym doręczeniu i ich przyczyny pochodzą z GLS Holandia, gdzie GLS doręcza samodzielnie; w Szwajcarii doręcza Swiss Post.
 
 ## Doręczenia GLS w Szwajcarii: Swiss Post i awiza odbioru
 
@@ -75,13 +75,13 @@ GLS nie ma własnej szwajcarskiej infolinii. Jej strona kontaktu odsyła na stro
 
 ## Śledzenie paczki GLS Szwajcaria w Peek
 
-[Peek](/) przyjmuje wszystkie cztery formaty i pyta prawdopodobnych przewoźników. GLS Germany i GLS Switzerland znają te same numery, więc Peek kieruje się Twoim krajem (regionem telefonu lub krajem połączenia w przeglądarce). W Szwajcarii i Liechtensteinie zwykle zobaczysz „GLS Switzerland ma tę przesyłkę.”; jeśli paczka idzie do Niemiec, zmień przewoźnika i wybierz GLS Germany. Z innych krajów pojawi się GLS Germany, która równie dobrze śledzi szwajcarskie paczki ze szwajcarskim kodem pocztowym. Link gls-group z `/EU/` lub `/GROUP/` jest śledzony jako GLS Germany, a `/CH/` trafia do GLS Switzerland.
+[Peek](/) przyjmuje wszystkie cztery formaty i pyta prawdopodobnych przewoźników. GLS Germany i GLS Switzerland znają te same numery, więc Peek kieruje się Twoim krajem (regionem telefonu lub krajem połączenia w przeglądarce). W Szwajcarii i Liechtensteinie zwykle zobaczysz „GLS Switzerland ma tę przesyłkę.”; jeśli paczka idzie do Niemiec, zmień przewoźnika i wybierz GLS Germany. Z innych krajów pojawi się GLS Germany, która równie dobrze śledzi szwajcarskie paczki ze szwajcarskim kodem pocztowym. Link gls-group z `/EU/` lub `/GROUP/` jest śledzony jako GLS Germany, a link gls-group.eu z `/CH/` trafia do GLS Switzerland.
 
 GLS pokazuje historię skanów wyłącznie z kodem pocztowym doręczenia, więc pole „Kod pocztowy odbiorcy” jest wymagane: cztery cyfry, np. 8000. Kod trafia do GLS i w razie potrzeby do usług śledzenia; jeśli nie pasuje do przesyłki, Peek poinformuje Cię („GLS Switzerland nie znajduje tej przesyłki z kodem pocztowym …”), abyś mógł go poprawić.
 
 Zobaczysz wtedy status, miejscowość i kraj każdego skanu na mapie, przewidywany dzień doręczenia, wagę, punkt ParcelShop (gdy paczka tam czeka) oraz czas doręczenia — bez Twojego nazwiska, adresu, danych kontaktowych ani podpisu. Statusy zachowują angielskie brzmienie GLS; przybycie do ParcelShop Peek pokazuje jako „Do odbioru”. Godziny GLS są odczytywane według czasu zurychskiego i przeliczane na Twoją strefę czasową (historia kończy się dopiskiem „Godziny w twojej strefie czasowej:” z jej nazwą). Peek sprawdza GLS mniej więcej raz na godzinę, również w dniu doręczenia (co 4 godziny po nieudanej próbie), a ręczne odświeżanie nie przyspiesza sprawdzenia. Gdy doręczenie przejmie inny przewoźnik, Peek przyjmuje jego rytm. Możesz włączyć powiadomienia dla „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po czterech dniach bez nowego skanu w drodze Peek pokazuje na liście dzień ostatniego skanu („Brak aktualizacji od …”), a na karcie paczki „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GLS Switzerland.”.
 
-Gdy GLS wskaże Swiss Post jako doręczyciela, strona paczki pokazuje „Doręcza: Swiss Post” (albo „Zgłoszona przewoźnikowi Swiss Post, jeszcze nieprzyjęta”, gdy Swiss Post ma tylko zapowiedź bez własnego skanu), a Peek może przełączyć śledzenie na Swiss Post pod tym samym numerem, gdy Swiss Post pokaże nowsze postępy.
+Gdy GLS wskaże Swiss Post jako doręczyciela, strona paczki pokazuje „Doręcza: Swiss Post” (albo „Zgłoszona przewoźnikowi Swiss Post, jeszcze nieprzyjęta”, gdy Swiss Post ma tylko zapowiedź bez własnego skanu), a Peek może przełączyć śledzenie na Swiss Post pod tym samym numerem, gdy Swiss Post pokaże skan co najmniej tak świeży jak ostatni skan GLS.
 
 ## Pytania o śledzenie GLS Szwajcaria
 

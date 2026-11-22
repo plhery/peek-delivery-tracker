@@ -34,12 +34,12 @@ O rastreio da GLS para encomendas na Suíça existe apenas em inglês e a GLS n�
 | `The parcel was released by customs.` | Libertada pela alfândega e de novo em trânsito. |
 | `Final parcel center` | No último centro: segue-se a entrega. |
 | `In delivery`, `The parcel is in delivery.` | Em distribuição, prevista durante o dia. |
-| `Not delivered` | Não entregue, por exemplo por ausência ou dados em falta na morada. |
-| `Stored` | Guardada no depósito após entrega falhada, por exemplo por ausência. |
+| `The parcel could not be delivered as the consignee was absent` | Não entregue por ausência do destinatário. |
+| `The parcel is stored in the parcel center` | Guardada no depósito após entrega falhada, por exemplo por ausência. |
 | `The parcel is ready for collection at the ParcelShop.` | À espera num ParcelShop ou cacifo para levantamento. |
 | `The parcel has been delivered.`, `Delivered` | Entregue. |
 
-`Preadvice` significa apenas que a loja registou os dados no sistema da GLS: se ficar assim vários dias, pergunta ao remetente. A GLS também escreve `Delivered` para uma encomenda entregue num ParcelShop, que ainda tens de levantar. Os motivos indicados para `Not delivered` e `Stored` vêm da GLS Países Baixos, onde a GLS entrega diretamente; na Suíça entrega a Swiss Post.
+`Preadvice` significa apenas que a loja registou os dados no sistema da GLS: se ficar assim vários dias, pergunta ao remetente. A GLS também escreve `Delivered` para uma encomenda entregue num ParcelShop, que ainda tens de levantar. Estes dois textos de entrega falhada e os seus motivos vêm da GLS Países Baixos, onde a GLS entrega diretamente; na Suíça entrega a Swiss Post.
 
 ## Entrega da GLS na Suíça: Swiss Post e avisos de levantamento
 
@@ -75,13 +75,13 @@ A GLS não tem linha telefónica suíça própria. A sua página de contacto rem
 
 ## Seguir uma encomenda GLS Suíça com o Peek
 
-O [Peek](/) aceita os quatro formatos e pergunta às transportadoras prováveis. A GLS Germany e a GLS Switzerland reconhecem os mesmos números, pelo que o Peek decide pelo teu país (região do telemóvel ou país da ligação na web). Na Suíça ou no Liechtenstein verás normalmente «GLS Switzerland tem esta encomenda.»; para uma encomenda com destino à Alemanha, muda para GLS Germany. Noutros países verás GLS Germany, que também acompanha envios suíços com o código postal suíço. Uma ligação gls-group com `/EU/` ou `/GROUP/` é acompanhada como GLS Germany, enquanto `/CH/` vai para GLS Switzerland.
+O [Peek](/) aceita os quatro formatos e pergunta às transportadoras prováveis. A GLS Germany e a GLS Switzerland reconhecem os mesmos números, pelo que o Peek decide pelo teu país (região do telemóvel ou país da ligação na web). Na Suíça ou no Liechtenstein verás normalmente «GLS Switzerland tem esta encomenda.»; para uma encomenda com destino à Alemanha, muda para GLS Germany. Noutros países verás GLS Germany, que também acompanha envios suíços com o código postal suíço. Uma ligação gls-group com `/EU/` ou `/GROUP/` é acompanhada como GLS Germany, enquanto uma de gls-group.eu com `/CH/` vai para GLS Switzerland.
 
 A GLS só mostra o histórico de registos com o código postal de entrega, pelo que o campo «Código postal de entrega» é obrigatório: quatro dígitos, como 8000. É enviado à GLS e, quando necessário, a serviços de seguimento; se não corresponder ao envio, o Peek avisa («GLS Switzerland não encontrou esta encomenda com o código postal …») para que o possas corrigir.
 
 Vês então o estado, localidade e país de cada registo num mapa, o dia previsto de entrega, o peso, o ParcelShop (se estiver lá) e a hora de entrega, sem o teu nome, morada, contactos nem assinatura. Os estados mantêm o inglês da GLS; o Peek mostra a chegada ao ParcelShop como «Pronta para levantamento». As horas da GLS são lidas na hora de Zurique e convertidas para o teu fuso horário (o histórico termina com «Horas no teu fuso horário:» seguido do nome). A GLS é consultada cerca de uma vez por hora, incluindo no dia de entrega (4 horas após uma falha), e atualizar manualmente não antecipa a verificação. Quando outra transportadora assume a entrega, o Peek adota o ritmo dessa transportadora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Após quatro dias sem novidades em trânsito, o Peek mostra na tua lista o dia do último registo («Sem atualizações desde …») e no ecrã da encomenda «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a GLS Switzerland.».
 
-Quando a GLS indica a Swiss Post como distribuidora, a página da encomenda mostra «Entrega: Swiss Post» (ou «Anunciada a Swiss Post, ainda não recebida» enquanto a Swiss Post só tiver o pré-aviso sem registo próprio), e o Peek passa a acompanhar no rastreio da Swiss Post com o mesmo número assim que a Swiss Post mostrar progresso mais recente.
+Quando a GLS indica a Swiss Post como distribuidora, a página da encomenda mostra «Entrega: Swiss Post» (ou «Anunciada a Swiss Post, ainda não recebida» enquanto a Swiss Post só tiver o pré-aviso sem registo próprio), e o Peek passa a acompanhar no rastreio da Swiss Post com o mesmo número assim que a Swiss Post mostrar um registo tão recente como o último da GLS.
 
 ## Perguntas sobre o rastreio GLS Suíça
 

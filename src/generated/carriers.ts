@@ -2380,6 +2380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "dhl-ecommerce-netherlands-sendungsverfolgung",
+      "title": "DHL eCommerce Niederlande Sendungsverfolgung & Kontakt",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
+    },
+    {
       "id": "heppner",
       "catalog": "heppner",
       "slug": "heppner-sendungsverfolgung",
@@ -4672,6 +4680,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "tracciamento-dhl-ecommerce-netherlands",
+      "title": "Tracciamento DHL eCommerce Paesi Bassi: stati e contatti",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
+    },
+    {
       "id": "heppner",
       "catalog": "heppner",
       "slug": "tracciamento-heppner",
@@ -5770,6 +5786,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "seguimiento-dhl-ecommerce-netherlands",
+      "title": "Seguimiento DHL eCommerce Países Bajos: estados y contacto",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
+    },
+    {
       "id": "heppner",
       "catalog": "heppner",
       "slug": "seguimiento-heppner",
@@ -6850,6 +6874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Posti: código JJFI, estados, cacifos e contactos",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "seguimento-dhl-ecommerce-netherlands",
+      "title": "Seguimento DHL eCommerce Países Baixos: estados e contacto",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
     },
     {
       "id": "heppner",
@@ -7950,6 +7982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "sledzenie-dhl-ecommerce-netherlands",
+      "title": "Śledzenie DHL eCommerce Holandia: statusy i kontakt",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
     },
     {
       "id": "heppner",

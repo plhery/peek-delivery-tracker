@@ -77,7 +77,7 @@ MaltaPost's customer service page lists:
 
 ## Tracking MaltaPost items with Peek
 
-For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and [Chronopost](carrier:chronopost) at once and shows "MaltaPost has this parcel." when MaltaPost knows it, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit MaltaPost isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A maltapost.com tracking link with `barcode=` always names MaltaPost, whatever number it holds.
+For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and [Chronopost](carrier:chronopost) at once and shows "MaltaPost has this parcel." when MaltaPost knows it, or "Not found at … yet. Peek will keep checking after you add it." For five letters, nine digits and `MT`, Peek asks MaltaPost alone. With a wrong check digit MaltaPost isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A maltapost.com tracking link with `barcode=` always names MaltaPost, whatever number it holds.
 
 Peek follows a number from abroad at its own post first. When that post says the item is going to Malta (or names no destination and you're in Malta), Peek also asks MaltaPost with the same number, and moves to it once it has a fresh scan; the earlier history stays. MaltaPost's lookup takes such numbers, SendOn barcodes included: to follow one at MaltaPost straight away, pick "MaltaPost" with "Change", or paste a maltapost.com link.
 

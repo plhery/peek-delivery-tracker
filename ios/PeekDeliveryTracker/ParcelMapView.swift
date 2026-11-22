@@ -1,10 +1,11 @@
 import SwiftUI
 
 extension ParcelRoute {
-    /// A parcel's route, with its destination country when the carrier gave one.
+    /// A parcel's route, with the town it is addressed to when the server placed one (for its owner alone), else its
+    /// destination country when the carrier gave one: "To Lyon, 340 km to go".
     init(parcel: Parcel, atlas: WorldAtlas, language: AppLanguage) {
         let name = { (code: String) in TrackingLocation.countryName(code, language: language) }
-        let destination = parcel.carrierData?.destinationCountry.flatMap { code in
+        let destination = parcel.destinationPlace.map { RoutePlace($0) } ?? parcel.carrierData?.destinationCountry.flatMap { code in
             atlas.label(of: code).map { RoutePlace.country(code, name: name(code), at: $0) }
         }
         self.init(events: parcel.trackingEvents, destination: destination, countryName: name)

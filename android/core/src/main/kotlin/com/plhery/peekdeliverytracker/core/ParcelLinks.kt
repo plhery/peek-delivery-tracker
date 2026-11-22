@@ -90,6 +90,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         writtenAheadBy = shared.writtenAheadBy,
         writtenAheadEvents = shared.writtenAheadEvents,
         carrierOutage = shared.carrierOutage,
+        destinationPlace = shared.destinationPlace,
         // Its `seen_at` is the phone's to keep (DeviceParcel.seenNewsAt).
         newsAt = shared.newsAt,
     )

@@ -12,6 +12,54 @@ it('keeps addition-only query context out of client package data', () => {
   expect(row.carrier_data.add_recognition_pending).toBe(true);
 });
 
+describe('the town the parcel is addressed to', () => {
+  const scan = (country: string, name: string, latitude: number, longitude: number, occurred_at: string) => ({
+    id: `${name}-${occurred_at}`, package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: `${name}, ${country}`,
+    occurred_at, point: { latitude, longitude },
+  });
+  const served = (data: Record<string, unknown>, extra: Record<string, unknown> = {}, destination = true) => withEventPlaces({
+    id: 'parcel', carrier: 'la-poste', current_stage: 'in_transit', carrier_data: data,
+    tracking_events: [scan('FR', 'Paris', 48.853, 2.349, '2026-11-20T08:00:00Z')], ...extra,
+  }, { destination }) as { destination_place?: Record<string, unknown> };
+
+  it('is placed from the last line of the carrier\'s address, in the country the parcel is going to, for the owner\'s routes', () => {
+    const address = { receiver_address: '1 Sample Street\n69001 Lyon', destination_country: 'FR' };
+    expect(served(address).destination_place).toEqual({ latitude: expect.any(Number), longitude: expect.any(Number),
+      precision: 'city', country: 'FR', name: 'Lyon' });
+    // No one else's serving asks for it.
+    expect(served(address, {}, false)).not.toHaveProperty('destination_place');
+  });
+
+  it('takes the newest placed scan\'s country when the carrier names none, and places no town of that name elsewhere', () => {
+    expect(served({ receiver_address: 'Lyon' }).destination_place).toMatchObject({ country: 'FR', name: 'Lyon' });
+    expect(served({ receiver_address: 'Lyon', destination_country: 'US' })).not.toHaveProperty('destination_place');
+    expect(served({ receiver_address: 'Lyon' }, { tracking_events: [scan('CH', 'Bern', 46.948, 7.447, '2026-11-20T08:00:00Z')] }))
+      .not.toHaveProperty('destination_place');
+  });
+
+  it('is left out without a town, and once the parcel waits at a pickup point, is delivered or goes back', () => {
+    expect(served({ receiver_address: '69001', destination_country: 'FR' })).not.toHaveProperty('destination_place');
+    expect(served({ destination_country: 'FR' })).not.toHaveProperty('destination_place');
+    for (const current_stage of ['ready_for_pickup', 'delivered', 'returned']) {
+      expect(served({ receiver_address: 'Lyon', destination_country: 'FR' }, { current_stage })).not.toHaveProperty('destination_place');
+    }
+  });
+
+  it('is left out when the gazetteer fails, reported once', () => {
+    const capture = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+    vi.mocked(places.locatePlace).mockImplementation(() => { throw new Error('gazetteer down'); });
+    try {
+      expect(served({ receiver_address: 'Lyon', destination_country: 'FR' })).not.toHaveProperty('destination_place');
+      served({ receiver_address: 'Lyon', destination_country: 'FR' });
+      expect(capture).toHaveBeenCalledTimes(1);
+      expect(capture).toHaveBeenCalledWith(expect.any(Error), { component: 'api', operation: 'locate_destination_place' });
+    } finally {
+      vi.mocked(places.locatePlace).mockRestore();
+      capture.mockRestore();
+    }
+  });
+});
+
 it('says when the named delivering carrier lists the parcel without a scan of its own, until it is handed over', () => {
   const probe = { at: '2026-11-05T10:00:00Z', origin_update: null, carrier: 'dhl', number: 'TESTPARTNER001', listed: true };
   const served = (data: Record<string, unknown>) => (withEventPlaces({ carrier_data: data }) as { carrier_data: Record<string, unknown> }).carrier_data;

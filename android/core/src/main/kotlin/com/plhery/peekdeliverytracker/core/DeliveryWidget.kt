@@ -245,7 +245,8 @@ object DeliveryWidgetPictures {
         val shown = listOf(
             "$version", parcel.id.uuidString, identity.name, identity.family, identity.colors.joinToString(","), localizer.language.rawValue,
             "$scale", parcel.currentStage?.rawValue ?: "", parcel.carrierData?.destinationCountry ?: "",
-        ) + listOfNotNull(localizer.distanceUnit.takeIf { it == DistanceUnit.Miles }?.code) + parcel.trackingEvents.map { "${it.stage.rawValue} ${it.occurredAt} ${it.location ?: ""} ${it.place?.toString() ?: ""}" }
+        ) + listOfNotNull(parcel.destinationPlace?.toString(), localizer.distanceUnit.takeIf { it == DistanceUnit.Miles }?.code) +
+            parcel.trackingEvents.map { "${it.stage.rawValue} ${it.occurredAt} ${it.location ?: ""} ${it.place?.toString() ?: ""}" }
         val digest = MessageDigest.getInstance("SHA-256").digest(shown.joinToString("\n").toByteArray(Charsets.UTF_8))
             .take(8).joinToString("") { "%02x".format(it) }
         return DeliveryWidgetCard(

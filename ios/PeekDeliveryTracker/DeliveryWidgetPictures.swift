@@ -53,10 +53,13 @@ enum DeliveryWidgetPictures {
     /// A parcel's card, its pictures named after everything they show, so that a change to any of it draws them afresh.
     static func card(for parcel: Parcel, localizer: Localizer) -> DeliveryWidgetCard {
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
-        let shown = [
+        var shown: [String] = [
             "\(version)", parcel.id.uuidString, identity.name, identity.family, identity.colors.joined(separator: ","),
             localizer.language.rawValue, "\(scale)", parcel.currentStage?.rawValue ?? "", parcel.carrierData?.destinationCountry ?? "",
-        ] + (localizer.distanceUnit == .miles ? [DistanceUnit.miles.rawValue] : []) + parcel.trackingEvents.map { "\($0.stage.rawValue) \($0.occurredAt) \($0.location ?? "") \($0.place.map { "\($0)" } ?? "")" }
+        ]
+        if let town = parcel.destinationPlace { shown.append("\(town)") }
+        if localizer.distanceUnit == .miles { shown.append(DistanceUnit.miles.rawValue) }
+        shown += parcel.trackingEvents.map { "\($0.stage.rawValue) \($0.occurredAt) \($0.location ?? "") \($0.place.map { "\($0)" } ?? "")" }
         let digest = SHA256.hash(data: Data(shown.joined(separator: "\n").utf8)).prefix(8).map { String(format: "%02x", $0) }.joined()
         return DeliveryWidgetCard(
             surface: [identity.colors[0], identity.colors[1]], ink: [identity.colors[2], identity.colors[3]],

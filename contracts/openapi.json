@@ -74431,6 +74431,10 @@
             "description": "Set while the carrier tracking the parcel has an outage on its own site and the parcel waits for it: not once it is delivered or returned, not when another source answered for it since, and not on a wrapped gift.",
             "$ref": "#/components/schemas/CarrierOutage"
           },
+          "destination_place": {
+            "description": "The town the parcel is addressed to, placed from the address the carrier gives, for the parcel's owner alone: the map's route reads \"To <town>, 340 km to go\" until the newest scan is within 15 km of it, as it does with destination_country's country. Only a town in the country the parcel is going to (or, when the carrier names none, the country of its newest placed scan), and only while the parcel is on its way: absent once it waits at a pickup point, is delivered or returned, when the carrier gives no town, and to a link's viewers.",
+            "$ref": "#/components/schemas/EventPlace"
+          },
           "email_muted": {
             "type": "boolean",
             "description": "The account's delivery email is off for this parcel."
@@ -76112,6 +76116,10 @@
           "carrier_outage": {
             "description": "Set while the carrier tracking the parcel has an outage on its own site and the parcel waits for it: not once it is delivered or returned, not when another source answered for it since, and not on a wrapped gift.",
             "$ref": "#/components/schemas/CarrierOutage"
+          },
+          "destination_place": {
+            "description": "The town the parcel is addressed to, placed from the address the carrier gives, for the parcel's owner alone: the map's route reads \"To <town>, 340 km to go\" until the newest scan is within 15 km of it, as it does with destination_country's country. Only a town in the country the parcel is going to (or, when the carrier names none, the country of its newest placed scan), and only while the parcel is on its way: absent once it waits at a pickup point, is delivered or returned, when the carrier gives no town, and to a link's viewers.",
+            "$ref": "#/components/schemas/EventPlace"
           },
           "news_at": {
             "type": "string",

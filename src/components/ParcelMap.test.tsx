@@ -70,6 +70,23 @@ describe('parcel map', () => {
     expect(screen.getByRole('dialog', { name: /Map of the journey/ })).toBeInTheDocument();
   });
 
+  it('heads for the town the parcel is addressed to, when the server placed one, until it is within 15 km of it', async () => {
+    const user = userEvent.setup();
+    const bern: EventPlace = { latitude: 46.948, longitude: 7.447, precision: 'city', country: 'CH', name: 'Bern' };
+    const view = show({ destinationPlace: bern });
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Open the map' })).toBeEnabled());
+    await user.click(screen.getByRole('button', { name: 'Open the map' }));
+    const map = screen.getByRole('dialog', { name: 'Map of the journey from Kyoto to Bern' });
+    // Härkingen is in Switzerland, which ends the country's route, but some 45 km from Bern.
+    expect(within(map).getByText('To').nextElementSibling).toHaveTextContent('Bern');
+    expect(within(map).getByText(/ to go$/)).toBeInTheDocument();
+    view.unmount();
+    show({ destinationPlace: { ...bern, name: 'Oensingen', latitude: 47.288, longitude: 7.723 } });
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Open the map' })).toBeEnabled());
+    await user.click(screen.getByRole('button', { name: 'Open the map' }));
+    expect(screen.queryByText(/ to go$/)).not.toBeInTheDocument();
+  });
+
   it('leaves the card as it was when no scan has a place', () => {
     show({ events: [event(11, 'in_transit')] });
     expect(document.querySelector('.detail__engraving')).toBeNull();

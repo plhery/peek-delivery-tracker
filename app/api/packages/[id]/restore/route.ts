@@ -33,5 +33,5 @@ export const POST = apiRoute<PackageParameters>(async (context) => {
     }
     throw error;
   }
-  return json(withEventPlaces(await client.getPackage(packageId) ?? { ...original, archived_at: null }));
+  return json(withEventPlaces(await client.getPackage(packageId) ?? { ...original, archived_at: null }, { destination: true }));
 }, { serviceRequired: true });

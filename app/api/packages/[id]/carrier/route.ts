@@ -58,7 +58,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     try { providerPostcode = normalizeDeliveryPostcode(body.providerPostcode); }
     catch { throw new HttpError(400, 'Invalid delivery postcode'); }
   }
-  if (unchanged && !providerPostcode) return json({ package: withEventPlaces(original), jobIds: [] });
+  if (unchanged && !providerPostcode) return json({ package: withEventPlaces(original, { destination: true }), jobIds: [] });
 
   await verifyAmazonShippingAddition(values.carrier, original.tracking_number);
   if (providerPostcode ? !await client.setProviderPostcode(packageId, providerPostcode) : !await client.changePackageCarrier(
@@ -88,5 +88,5 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
 
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json({ package: withEventPlaces(parcel), jobIds });
+  return json({ package: withEventPlaces(parcel, { destination: true }), jobIds });
 }, { serviceRequired: true });

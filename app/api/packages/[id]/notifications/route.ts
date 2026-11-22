@@ -38,5 +38,5 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   }
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json(withEventPlaces(parcel));
+  return json(withEventPlaces(parcel, { destination: true }));
 }, { serviceRequired: true });

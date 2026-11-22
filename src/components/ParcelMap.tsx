@@ -8,7 +8,7 @@ import { countryName } from 'universal-parcel-scraper/app';
 import type { ParcelWithEvents, Stage } from '../types';
 import { Icon } from './Icon';
 import { countryLabel, useWorld } from './map/geography';
-import { countryPlace, defaultMode, flag, formatKm, hasNearView, placeName, routeFromEvents, type MapMode, type Route } from './map/route';
+import { countryPlace, defaultMode, flag, formatKm, hasNearView, placeFromEvent, placeName, routeFromEvents, type MapMode, type Route } from './map/route';
 import { pipMood } from './map/Pip';
 import { WorldMap, type PipPlacing, type Rect } from './map/WorldMap';
 import './ParcelMap.css';
@@ -23,11 +23,13 @@ export function useParcelRoute(parcel: ParcelWithEvents, languageTag: string, wa
   const ready = useWorld(placed);
   const route = useMemo(() => {
     if (!placed || !ready) return null;
+    // The town the parcel is addressed to says more than its country: "To Lyon, 340 km to go".
     const label = parcel.destinationCountry ? countryLabel(parcel.destinationCountry) : null;
-    const destination = parcel.destinationCountry && label
-      ? countryPlace(parcel.destinationCountry, countryName(parcel.destinationCountry, languageTag), label) : undefined;
+    const destination = parcel.destinationPlace ? placeFromEvent(parcel.destinationPlace)
+      : parcel.destinationCountry && label
+        ? countryPlace(parcel.destinationCountry, countryName(parcel.destinationCountry, languageTag), label) : undefined;
     return routeFromEvents(parcel.events, destination, (code) => countryName(code, languageTag));
-  }, [placed, ready, parcel.events, parcel.destinationCountry, languageTag]);
+  }, [placed, ready, parcel.events, parcel.destinationCountry, parcel.destinationPlace, languageTag]);
   return { placed, route };
 }
 

@@ -4276,6 +4276,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var writtenAheadBy: CarrierID? = nil
     var writtenAheadEvents: [PlannedTrackingEvent]? = nil
     var carrierOutage: CarrierOutage? = nil
+    var destinationPlace: EventPlace? = nil
     var emailMuted: Bool? = nil
     var newsAt: String? = nil
     var seenAt: String? = nil
@@ -4304,6 +4305,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case writtenAheadBy
         case writtenAheadEvents
         case carrierOutage
+        case destinationPlace
         case emailMuted
         case newsAt
         case seenAt
@@ -4867,6 +4869,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var writtenAheadBy: CarrierID? = nil
     var writtenAheadEvents: [PlannedTrackingEvent]? = nil
     var carrierOutage: CarrierOutage? = nil
+    var destinationPlace: EventPlace? = nil
     var newsAt: String? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -4893,6 +4896,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case writtenAheadBy
         case writtenAheadEvents
         case carrierOutage
+        case destinationPlace
         case newsAt
     }
 }
@@ -5578,6 +5582,7 @@ extension Parcel {
         writtenAheadBy = try values.decodeIfPresent(CarrierID.self, forKey: .writtenAheadBy)
         writtenAheadEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .writtenAheadEvents)
         carrierOutage = try values.decodeIfPresent(CarrierOutage.self, forKey: .carrierOutage)
+        destinationPlace = try values.decodeIfPresent(EventPlace.self, forKey: .destinationPlace)
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
         newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
         seenAt = try values.decodeIfPresent(String.self, forKey: .seenAt)
@@ -5610,6 +5615,7 @@ extension PublicPackage {
         writtenAheadBy = try values.decodeIfPresent(CarrierID.self, forKey: .writtenAheadBy)
         writtenAheadEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .writtenAheadEvents)
         carrierOutage = try values.decodeIfPresent(CarrierOutage.self, forKey: .carrierOutage)
+        destinationPlace = try values.decodeIfPresent(EventPlace.self, forKey: .destinationPlace)
         newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
     }
 }

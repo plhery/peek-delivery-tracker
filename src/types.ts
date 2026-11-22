@@ -119,6 +119,8 @@ export interface Parcel {
   emailMuted?: boolean;
   /** Where the carrier says the parcel is heading, when it says. */
   destinationCountry?: string;
+  /** The town the parcel is addressed to, placed on the server from the carrier's address, for its owner alone. */
+  destinationPlace?: EventPlace;
 }
 
 /** Where a scan happened, located on the server from its free-text location. */

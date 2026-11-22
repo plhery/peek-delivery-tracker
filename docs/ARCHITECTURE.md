@@ -81,7 +81,11 @@ Key server modules:
   deliver in or its other scans show. The scan keeps its own text and every other scan its place.
   Lines between recorded stops are solid; approximate areas have dotted markers.
   On the web the route is drawn as one stroke, from its first place to the parcel's, and
-  the way still to go shows once the stroke has arrived.
+  the way still to go shows once the stroke has arrived. The way still to go leads to the
+  town the parcel is addressed to when the carrier's address names one the resolver finds
+  in the country the parcel is going to (`destination_place`, [destinationPlace.ts](../src/server/destinationPlace.ts),
+  served to the owner alone while the parcel is on its way), else to the destination
+  country, and ends once the newest scan is within 15 km of the town or in the country.
   A card frames places a town or two apart as it frames a single place, and the opened
   map comes no closer than about 70 km across. Places too close to tell apart in a frame
   share one dot, the parcel's or else the first place's, and the route runs to it.
@@ -172,6 +176,7 @@ Key server modules:
     that names one is left out, and so are a place and a status line that do. A text names one
     when the scraper's `hasPrivateDeliveryDetails` matches it or it contains the signatory,
     recipient name, address or pickup code the parcel's carrier data holds (`privateDetails.ts`).
+    Nor does a viewer get the town the parcel is addressed to that the owner's map heads for.
     A viewer's delivery alert names no place, and another alert no place that names one (with
     none when the parcel's details can't be read). The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.

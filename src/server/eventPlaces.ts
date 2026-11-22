@@ -16,6 +16,7 @@ import { servedCarrierOutage } from './carrierOutages';
 import { passedEstimateDay } from './passedEstimate';
 import { peekAiFor } from './peekAi';
 import { datedAfterCheck } from './futureScans';
+import { destinationPlace } from './destinationPlace';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
@@ -497,9 +498,11 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * site is down says so (`carrier_outage`, carrierOutages.ts), one whose expected day passed up to a week ago names
  * it (`expected_delivery_passed`, passedEstimate.ts), and one Peek has a strong hint for says when Peek thinks it will
  * come (`peek_ai`, peekAi.ts), unless its carrier has planned the delivery among its steps or the caller shows no
- * estimate (`peekAi: false`: emails, friends' passports, a link's preview).
+ * estimate (`peekAi: false`: emails, friends' passports, a link's preview). The owner's own routes also name the town
+ * the parcel is addressed to (`destination: true`, `destination_place`, destinationPlace.ts), which no one else reads.
  */
-export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true }: { peekAi?: boolean } = {}): JsonObject {
+export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true, destination: withDestination = false }:
+  { peekAi?: boolean; destination?: boolean } = {}): JsonObject {
   const shown = shownEvents(row);
   const placed = placedEvents(row);
   const news = newsAt(shown, storedAsCopies(row), shownUnder(placed));
@@ -512,8 +515,10 @@ export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true }: 
   const passed = passedEstimateDay(row, served);
   // A carrier that has planned the delivery has given its word: Peek AI's calls are made against the carrier's date.
   const ai = !withPeekAi || planned.some((step) => DELIVERY_STEPS.has(String(step.stage))) ? null : peekAi(row, served);
-  if (!planned.length && !ahead && !outage && !passed && !ai) return served;
+  const town = withDestination ? destinationPlace(row, Array.isArray(served.tracking_events) ? served.tracking_events.filter(isRecord) : []) : null;
+  if (!planned.length && !ahead && !outage && !passed && !ai && !town) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
+    ...town ? { destination_place: town } : {},
     ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {},
     ...passed ? { expected_delivery_passed: passed } : {}, ...ai ? { peek_ai: ai as unknown as JsonObject } : {} };
 }

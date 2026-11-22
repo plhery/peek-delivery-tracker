@@ -113,6 +113,26 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertNil(ParcelRoute(places: [bern], destination: city("Bern centre", "CH", 7.451, 46.949)).destination)
     }
 
+    func testAParcelHeadsForTheTownItIsAddressedToBeforeItsCountry() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "World", withExtension: "json"))
+        let atlas = try WorldAtlas(data: Data(contentsOf: url))
+        let id = UUID()
+        let scan = TrackingEvent(
+            id: UUID(), packageID: id, stage: .inTransit, description: "Sorted", location: "Leipzig", occurredAt: "2026-08-02T10:00:00Z",
+            place: EventPlace(latitude: 51.34, longitude: 12.37, precision: .city, country: "DE", name: "Leipzig")
+        )
+        var parcel = Parcel(
+            id: id, trackingNumber: "TESTPARCEL001", label: "Tea", carrier: .dhl, createdAt: "2026-08-01T10:00:00Z", syncStatus: .ok,
+            carrierData: CarrierData(destinationCountry: "CH"), notificationsMuted: false, trackingEvents: [scan]
+        )
+        XCTAssertEqual(ParcelRoute(parcel: parcel, atlas: atlas, language: .en).destination?.isCountry, true)
+        parcel.destinationPlace = EventPlace(latitude: 47.367, longitude: 8.55, precision: .city, country: "CH", name: "Zürich")
+        let route = ParcelRoute(parcel: parcel, atlas: atlas, language: .en)
+        XCTAssertEqual(route.destination?.name, "Zürich")
+        XCTAssertEqual(route.destination?.isCountry, false)
+        XCTAssertGreaterThan(route.remainingKilometres ?? 0, 400)
+    }
+
     func testScalesAndViews() {
         XCTAssertEqual(ParcelRoute(places: []).scale, ParcelRoute.Scale.none)
         XCTAssertEqual(ParcelRoute(places: [zurich]).scale, .point)

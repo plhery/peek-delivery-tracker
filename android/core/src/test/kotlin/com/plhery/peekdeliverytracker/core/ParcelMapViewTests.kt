@@ -30,6 +30,17 @@ class ParcelMapViewTests {
     }
 
     @Test
+    fun routeHeadsForTheTownTheParcelIsAddressedToBeforeItsCountry() {
+        val zurich = EventPlace(latitude = 47.367, longitude = 8.55, precision = EventPlacePrecision.City, country = "CH", name = "Zürich")
+        val route = ParcelRoute(parcel("CH").copy(destinationPlace = zurich), atlas, AppLanguage.De)
+        val destination = route.destination!!
+        assertEquals("Zürich", destination.name)
+        assertEquals(8.55, destination.point.longitude, 0.0)
+        assertEquals(47.367, destination.point.latitude, 0.0)
+        assertEquals(false, destination.isCountry)
+    }
+
+    @Test
     fun routeWithoutADestinationOrAnUnknownCountryEndsAtItsLastScan() {
         assertNull(ParcelRoute(parcel(null), atlas, AppLanguage.En).destination)
         assertNull(ParcelRoute(parcel("XX"), atlas, AppLanguage.En).destination)

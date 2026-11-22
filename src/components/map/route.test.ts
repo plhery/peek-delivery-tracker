@@ -86,6 +86,15 @@ describe('buildRoute', () => {
     expect(buildRoute([scan(bern)], city('Bern centre', 'CH', 7.451, 46.949)).destination).toBeUndefined();
   });
 
+  it('draws the remaining leg to the town the parcel is addressed to until it is within 15 km of it', () => {
+    const lausanne = placeFromEvent({ latitude: 46.52, longitude: 6.633, precision: 'city', country: 'CH', name: 'Lausanne' });
+    // In the country already: the town still lies some 80 km on.
+    const travelling = buildRoute([scan(kyoto), scan(bern)], lausanne);
+    expect(travelling.destination).toBe(lausanne);
+    expect(travelling.remainingKm).toBeGreaterThan(60);
+    expect(buildRoute([scan(kyoto), scan(city('Renens', 'CH', 6.588, 46.539))], lausanne).destination).toBeUndefined();
+  });
+
   it('names the scale of each journey', () => {
     expect(buildRoute([]).scale).toBe('none');
     expect(buildRoute([scan(zurich)]).scale).toBe('point');

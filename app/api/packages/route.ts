@@ -40,7 +40,7 @@ export const GET = apiRoute(async (context) => {
       captureOperationalError(error, { component: 'packages', operation: 'record_account_opened' });
     }),
   ]);
-  return json({ packages: packages.map((row) => withEventPlaces(row)) });
+  return json({ packages: packages.map((row) => withEventPlaces(row, { destination: true })) });
 }, { serviceRequired: true });
 
 export const POST = apiRoute(async (context) => {
@@ -84,10 +84,10 @@ export const POST = apiRoute(async (context) => {
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
-  if (demo) return json({ package: withEventPlaces(parcel), jobIds: [] }, 201);
+  if (demo) return json({ package: withEventPlaces(parcel, { destination: true }), jobIds: [] }, 201);
   await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));
   const jobIds = jobId ? [jobId] : [];
-  return json({ package: withEventPlaces(parcel), jobIds }, 201);
+  return json({ package: withEventPlaces(parcel, { destination: true }), jobIds }, 201);
 }, { serviceRequired: true });

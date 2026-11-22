@@ -4,6 +4,7 @@ import { createHash, createHmac, randomBytes } from 'node:crypto';
 import { locatePlace } from 'universal-parcel-scraper/places';
 import type {
   ApiCarrierId,
+  ApiEventPlace,
   ApiImportCharges,
   ApiLikelyCarrier,
   ApiParcelAlerts,
@@ -536,7 +537,7 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * Nor does anyone but the owner read the recipient's details: a delivery
  * reads "Delivered", and a scan, place or status line that names who signed,
  * the recipient, a code that collects the parcel or the number of its door is
- * left out (`viewerScan`).
+ * left out (`viewerScan`), nor the town it is addressed to (`destination_place`).
  */
 export function publicParcelResponse(
   found: StoredParcelLink, alerts: ApiParcelAlerts, { peekAi = true }: { peekAi?: boolean } = {},
@@ -545,7 +546,7 @@ export function publicParcelResponse(
   const owner = link.owner === true;
   const wrapped = isWrappedGift(found);
   // As every client is served it: a placeholder number's parcel without what was stored from it, for one.
-  const row = withEventPlaces(found.package, { peekAi: peekAi && !wrapped });
+  const row = withEventPlaces(found.package, { peekAi: peekAi && !wrapped, destination: owner });
   const numberShown = owner || (link.show_number === true && !wrapped);
   const trackingNumber = String(row.tracking_number ?? '');
   const storedEvents = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
@@ -644,6 +645,7 @@ export function publicParcelResponse(
       ...(!wrapped && isRecord(row.carrier_outage) ? {
         carrier_outage: (numberShown ? row.carrier_outage : { carrier: row.carrier_outage.carrier, since: row.carrier_outage.since }) as unknown as ApiCarrierOutage,
       } : {}),
+      ...(owner && isRecord(row.destination_place) ? { destination_place: row.destination_place as unknown as ApiEventPlace } : {}),
     },
   };
 }

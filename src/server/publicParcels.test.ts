@@ -349,6 +349,17 @@ describe('what a link shows', () => {
     expect(owner.planned_events).toHaveLength(1);
   });
 
+  it('names the town the parcel is addressed to to its owner alone', () => {
+    const shown = (link: Record<string, unknown>) => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, show_number: true, ...link },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'in_transit',
+        created_at: '2026-10-02T08:00:00Z', carrier_data: { receiver_address: 'Sample Road 7\n3011 Bern', destination_country: 'CH' },
+        tracking_events: [] },
+    }, alerts).package;
+    expect(shown({ owner: true }).destination_place).toMatchObject({ name: 'Bern', country: 'CH', precision: 'city' });
+    expect(shown({})).not.toHaveProperty('destination_place');
+  });
+
   it('says when its latest scan arrived, as the view stored its scans, except to whom a gift is still wrapped (#72)', () => {
     // As parcel_link_view gives them: each with the time Peek stored it, Peek's own row too.
     const scan = { id: 'scan', package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: null,

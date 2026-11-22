@@ -69862,6 +69862,7 @@ export interface ApiPackageRow {
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
   "carrier_outage"?: ApiCarrierOutage;
+  "destination_place"?: ApiEventPlace;
   "email_muted"?: boolean;
   "news_at"?: string;
   "seen_at"?: string;
@@ -70251,6 +70252,7 @@ export interface ApiPublicPackage {
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
   "carrier_outage"?: ApiCarrierOutage;
+  "destination_place"?: ApiEventPlace;
   "news_at"?: string;
 }
 

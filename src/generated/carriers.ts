@@ -2516,6 +2516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "first-line-sendungsverfolgung",
+      "title": "FIRST LINE Sendungsverfolgung: 1ST-Nummern und Status",
+      "name": "FIRST LINE",
+      "color": "#55207a"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",
@@ -3478,6 +3486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "suivi-first-line",
+      "title": "Suivi FIRST LINE\u00a0: numéros 1ST, statuts et livraison",
+      "name": "FIRST LINE",
+      "color": "#55207a"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-allemagne-suivi",
@@ -4342,6 +4358,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Australia Post: codici, stati e locker",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "tracciamento-first-line",
+      "title": "Tracciamento FIRST LINE: codici 1ST, stati e consegna",
+      "name": "FIRST LINE",
+      "color": "#55207a"
     },
     {
       "id": "j-and-t-de",
@@ -6084,6 +6108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "rastreio-first-line",
+      "title": "Rastreio FIRST LINE: códigos 1ST, estados e entrega",
+      "name": "FIRST LINE",
+      "color": "#55207a"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-alemanha-rastreio",
@@ -6966,6 +6998,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Australia Post: numery, statusy i automaty",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "sledzenie-first-line",
+      "title": "Śledzenie FIRST LINE: numery 1ST, statusy i doręczenie",
+      "name": "FIRST LINE",
+      "color": "#55207a"
     },
     {
       "id": "j-and-t-de",

@@ -128,7 +128,7 @@
   { "id": "aramex-nz", "catalog": "aramex-nz", "name": "Aramex New Zealand", "languages": ["en"] },
   { "id": "magyar-posta", "catalog": "magyar-posta", "name": "Magyar Posta", "languages": ["en", "hu"] },
   { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en"] },
-  { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es"] },
+  { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "j-and-t-de", "catalog": "j-and-t-de", "name": "J&T Express Germany", "languages": ["en", "de", "ru", "ro", "hr", "it", "pl", "fr", "es", "pt"] },
   { "id": "kun-express", "catalog": "kun-express", "name": "Kun Express", "languages": ["en"] },
   { "id": "juxi-express", "catalog": "juxi-express", "name": "Juxi Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

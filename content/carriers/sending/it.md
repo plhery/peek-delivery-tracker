@@ -21,11 +21,11 @@ Poiché 12 cifre corrispondono a molti corrieri, controlla che l'e-mail del nego
 
 ## Cosa significano gli stati di tracciamento di Sending
 
-In alto una barra di avanzamento passa per `En preparación` (in preparazione), `Tránsito` (in transito) e `Reparto` (in consegna), fino a `Entregada` (consegnato) o `FALTA DEFINITIVA`. Sotto, le scansioni compaiono dalla più recente alla più vecchia raggruppate per giorno, con l'ora e la località della filiale Sending. Le diciture note, così come le scrive Sending (senza accenti), nell'ordine abituale:
+In alto una barra di avanzamento passa per `En preparación` (in preparazione), `Tránsito` (in transito) e `Reparto` (in consegna), fino a `Entregada` (consegnato) o `FALTA DEFINITIVA`. Sotto, le scansioni compaiono dalla più recente alla più vecchia raggruppate per giorno, con l'ora e la località della filiale Sending. Le diciture note, così come le scrive Sending (senza accenti), più o meno nell'ordine in cui un pacco le incontra:
 
 | Stato | Cosa significa per te |
 | --- | --- |
-| `Mercancia recogida` | «Merce ritirata»: Sending ha ritirato il pacco dal mittente. |
+| `Mercancia recogida` | «Merce ritirata»: Sending ha ritirato il pacco dal mittente; dopo una tratta internazionale, una filiale Sending l'ha ricevuto. |
 | `En transito internacional / in international transit` | Su una tratta internazionale del viaggio. |
 | `Salida en ruta nacional` | «Partito sulla tratta nazionale»: in viaggio verso la filiale che consegna nella tua zona. |
 | `El envio ha llegado a tu delegacion mas cercana` | «La tua spedizione è arrivata alla filiale più vicina»: la filiale di consegna ce l'ha. |
@@ -73,13 +73,13 @@ Peek accetta solo il numero di spedizione Sending di 12 cifre: se scegli Sending
 
 Peek mostra lo stato e la cronologia nel testo spagnolo di Sending, ogni scansione con la località della filiale Sending; una scansione con la sola data mostra soltanto il giorno. Peek legge ogni orario secondo l'ora locale della località della scansione (ora delle Canarie se la filiale è lì) e lo mostra nel fuso orario del tuo dispositivo; su peektracker.com e nelle app iPhone e Android la cronologia si chiude con «Orari nel tuo fuso orario:» e il nome del fuso. Quando la barra arriva a `Entregada`, Peek segna il pacco consegnato anche se le scansioni si fermano prima, mentre `FALTA DEFINITIVA` compare come «Problema segnalato». Peek omette il riferimento del mittente, la fascia di consegna, i CAP e le località di mittente e destinatario, la filiale di consegna, le opzioni di consegna e il nome di chi ha firmato, e non mostra peso né data di consegna prevista: per la fascia oraria guarda su sending.es.
 
-Finché tieni il pacco aperto sullo schermo, oppure nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti — e fino a ogni 2 minuti dalle 6:00 ora locale nel giorno in cui Sending scansiona il pacco in consegna — finché risponde il tracciamento di Sending; tramite i servizi di tracciamento, fino a ogni 15 minuti. Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Sending o il negozio al posto tuo né cambiare l'indirizzo.
+Finché tieni il pacco aperto sullo schermo, oppure nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti — e fino a ogni 2 minuti dalle 6:00 ora locale nel giorno in cui Sending scansiona il pacco in consegna — finché risponde il tracciamento di Sending. Altrimenti, e dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Quando il pacco è seguito da un servizio di tracciamento, Peek controlla ogni ora, fino a ogni 15 minuti il giorno della consegna finché lo tieni aperto o hai le notifiche attive, e ogni 3 ore dopo un giorno senza novità. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Sending o il negozio al posto tuo né cambiare l'indirizzo.
 
 ## Domande sul tracciamento Sending
 
 ### Sending fa parte di InPost?
 
-Sì, secondo InPost: InPost Spagna dichiara di aver integrato Mondial Relay nel 2021 e Sending nel 2025, e il sito di Sending riporta oggi il logo «Sending by InPost». Le spedizioni Sending si tracciano ancora su sending.es. La società indicata nella sua informativa sulla privacy è Sending Transporte y Comunicación, S.A., a Coslada (Madrid). Per i pacchi Locker e Punto Pack propri di InPost Spagna vedi [InPost](carrier:inpost).
+Sì, secondo InPost: InPost Spagna dichiara di aver integrato Mondial Relay nel 2021 e Sending nel 2025, e il sito di Sending riporta oggi il logo «Sending by InPost». Le spedizioni Sending si tracciano ancora su sending.es. La società indicata nella sua informativa sulla privacy è Sending Transporte y Comunicación, S.A., a Coslada (Madrid). Per i pacchi Locker e Punto Pack propri di InPost Spagna, che Peek segue come Mondial Relay, vedi [Mondial Relay](carrier:mondial-relay).
 
 ### Posso tracciare Sending in inglese o in italiano?
 

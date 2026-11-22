@@ -21,11 +21,11 @@ Como 12 algarismos encaixam em muitas transportadoras, confirma se o e-mail da l
 
 ## O que significam os estados de seguimento da Sending
 
-No topo, uma barra de progresso passa por `En preparación` (em preparação), `Tránsito` (em trânsito) e `Reparto` (em distribuição), terminando em `Entregada` (entregue) ou `FALTA DEFINITIVA`. Abaixo, os registos aparecem do mais recente ao mais antigo sob cada dia, com a hora e a localidade da delegação da Sending. Os textos conhecidos, tal como a Sending os escreve (sem acentos), pela ordem habitual:
+No topo, uma barra de progresso passa por `En preparación` (em preparação), `Tránsito` (em trânsito) e `Reparto` (em distribuição), terminando em `Entregada` (entregue) ou `FALTA DEFINITIVA`. Abaixo, os registos aparecem do mais recente ao mais antigo sob cada dia, com a hora e a localidade da delegação da Sending. Os textos conhecidos, tal como a Sending os escreve (sem acentos), mais ou menos pela ordem em que uma encomenda os encontra:
 
 | Estado | O que significa para ti |
 | --- | --- |
-| `Mercancia recogida` | «Mercadoria recolhida»: a Sending recolheu a encomenda no remetente. |
+| `Mercancia recogida` | «Mercadoria recolhida»: a Sending recolheu a encomenda no remetente; depois de uma etapa internacional, uma delegação da Sending recebeu-a. |
 | `En transito internacional / in international transit` | Numa etapa internacional do percurso. |
 | `Salida en ruta nacional` | «Saída em rota nacional»: a caminho da delegação que distribui na tua zona. |
 | `El envio ha llegado a tu delegacion mas cercana` | «O teu envio chegou à delegação mais próxima»: já está na delegação de entrega. |
@@ -73,13 +73,13 @@ O Peek aceita apenas o número de envio de 12 algarismos da Sending: se escolher
 
 O Peek mostra o estado e o histórico no texto em espanhol da Sending, cada registo com a localidade da respetiva delegação; um registo só com data mostra apenas o dia. O Peek lê cada hora no relógio local da localidade do registo (hora das Canárias para uma delegação lá) e mostra-a no fuso horário do teu dispositivo; em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» seguido do nome. Quando a barra de progresso termina em `Entregada`, o Peek marca a encomenda como entregue mesmo que os registos parem antes, e `FALTA DEFINITIVA` surge como «Problema reportado». O Peek deixa de fora a referência do remetente, a janela horária, os códigos postais e localidades de remetente e destinatário, a delegação de entrega, as opções de entrega e o nome de quem assinou, e não mostra peso nem data prevista de entrega: para ver a janela horária, consulta sending.es.
 
-Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que a Sending regista a encomenda em distribuição — enquanto o próprio seguimento da Sending responder; através de serviços de seguimento, até de 15 em 15 minutos. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a Sending nem a loja por ti, nem alterar a morada.
+Enquanto tens a encomenda aberta no ecrã, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos — e até de 2 em 2 minutos a partir das 6:00 (hora local) no dia em que a Sending regista a encomenda em distribuição — enquanto o próprio seguimento da Sending responder. Fora disso, e após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Enquanto um serviço de seguimento acompanhar a encomenda, o Peek verifica de hora a hora, até de 15 em 15 minutos no dia da distribuição enquanto a tens aberta ou com notificações ativas, e de 3 em 3 horas após um dia sem novo registo. Pode notificar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a Sending nem a loja por ti, nem alterar a morada.
 
 ## Perguntas sobre o seguimento Sending
 
 ### A Sending faz parte da InPost?
 
-Sim, segundo a InPost: a InPost Espanha indica que integrou a Mondial Relay em 2021 e a Sending em 2025, e o site da Sending exibe hoje o logótipo «Sending by InPost». As encomendas Sending continuam a ser seguidas em sending.es. A sociedade indicada na política de privacidade é Sending Transporte y Comunicación, S.A., em Coslada (Madrid). Para encomendas próprias Locker e Punto Pack da InPost, vê [InPost](carrier:inpost).
+Sim, segundo a InPost: a InPost Espanha indica que integrou a Mondial Relay em 2021 e a Sending em 2025, e o site da Sending exibe hoje o logótipo «Sending by InPost». As encomendas Sending continuam a ser seguidas em sending.es. A sociedade indicada na política de privacidade é Sending Transporte y Comunicación, S.A., em Coslada (Madrid). Para encomendas Locker e Punto Pack da própria InPost Espanha, que o Peek segue como Mondial Relay, vê [Mondial Relay](carrier:mondial-relay).
 
 ### Consigo seguir a Sending em português ou inglês?
 

@@ -21,11 +21,11 @@ Comme 12 chiffres correspondent à de nombreux transporteurs, vérifie que l'e-m
 
 ## Ce que signifient les statuts de suivi Sending
 
-En haut, une barre de progression passe par `En preparación` (en préparation), `Tránsito` (en transit) et `Reparto` (en livraison), puis se termine sur `Entregada` (livré) ou `FALTA DEFINITIVA`. En dessous, les scans apparaissent du plus récent au plus ancien sous chaque date, avec l'heure et la ville de l'agence Sending. Les libellés connus, tels que Sending les écrit (sans accents), dans l'ordre habituel d'un colis :
+En haut, une barre de progression passe par `En preparación` (en préparation), `Tránsito` (en transit) et `Reparto` (en livraison), puis se termine sur `Entregada` (livré) ou `FALTA DEFINITIVA`. En dessous, les scans apparaissent du plus récent au plus ancien sous chaque date, avec l'heure et la ville de l'agence Sending. Les libellés connus, tels que Sending les écrit (sans accents), à peu près dans l'ordre où un colis les rencontre :
 
 | Statut | Ce que ça veut dire pour toi |
 | --- | --- |
-| `Mercancia recogida` | « Marchandise collectée » : Sending a récupéré le colis chez l'expéditeur. |
+| `Mercancia recogida` | « Marchandise collectée » : Sending a récupéré le colis chez l'expéditeur ; après une étape internationale, une agence Sending l'a reçu. |
 | `En transito internacional / in international transit` | Sur une étape internationale du trajet. |
 | `Salida en ruta nacional` | « Parti sur la ligne nationale » : en route vers l'agence chargée de livrer ta zone. |
 | `El envio ha llegado a tu delegacion mas cercana` | « Ton envoi est arrivé à ton agence la plus proche » : l'agence de livraison l'a reçu. |
@@ -73,13 +73,13 @@ Peek n'accepte que le numéro d'envoi à 12 chiffres de Sending : si tu sélecti
 
 Peek affiche le statut et l'historique dans le texte espagnol de Sending, chaque scan avec la ville de son agence Sending ; un scan daté uniquement par son jour n'affiche que la date. Peek lit chaque heure sur l'horloge locale de la ville du scan (heure des Canaries pour une agence située là-bas) et l'affiche dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les apps iPhone et Android, l'historique se termine par « Heures dans ton fuseau horaire : » suivi de son nom. Quand la barre de progression arrive sur `Entregada`, Peek marque le colis livré même si les scans s'arrêtent avant, et `FALTA DEFINITIVA` apparaît comme « Problème signalé ». Peek écarte la référence de l'expéditeur, le créneau de livraison, les codes postaux et villes d'origine et de destination, l'agence de livraison, les options de livraison et le nom du signataire, et n'affiche ni poids ni date prévue de livraison : pour le créneau horaire, regarde sur sending.es.
 
-Quand tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes à partir de 6 h (heure locale) le jour où Sending scanne le colis en livraison — tant que le suivi de Sending répond ; via les services de suivi, c'est jusqu'à toutes les 15 minutes. Le reste du temps, et après deux jours sans nouvelle (12 heures tant que le colis reste en « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Les notifications sont réglables sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut ni contacter Sending ou la boutique à ta place, ni modifier l'adresse.
+Quand tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et jusqu'à toutes les 2 minutes à partir de 6 h (heure locale) le jour où Sending scanne le colis en livraison — tant que le suivi de Sending répond. Le reste du temps, et après deux jours sans nouvelle (12 heures tant que le colis reste en « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Lorsque c'est un service de suivi qui suit le colis, Peek vérifie toutes les heures, jusqu'à toutes les 15 minutes le jour de la livraison tant que le colis est ouvert ou que les notifications sont activées, et toutes les 3 heures après une journée sans nouveau scan. Les notifications sont réglables sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut ni contacter Sending ou la boutique à ta place, ni modifier l'adresse.
 
 ## Questions sur le suivi Sending
 
 ### Sending fait-il partie d'InPost ?
 
-Oui, d'après InPost : InPost Espagne indique avoir intégré Mondial Relay en 2021 et Sending en 2025, et le site de Sending arbore désormais le logo « Sending by InPost ». Les colis Sending restent suivis sur sending.es. La société mentionnée dans sa politique de confidentialité est Sending Transporte y Comunicación, S.A., à Coslada (Madrid). Pour les colis Locker et Punto Pack propres à InPost, voir [InPost](carrier:inpost).
+Oui, d'après InPost : InPost Espagne indique avoir intégré Mondial Relay en 2021 et Sending en 2025, et le site de Sending arbore désormais le logo « Sending by InPost ». Les colis Sending restent suivis sur sending.es. La société mentionnée dans sa politique de confidentialité est Sending Transporte y Comunicación, S.A., à Coslada (Madrid). Pour les colis Locker et Punto Pack d'InPost Espagne, que Peek suit sous Mondial Relay, voir [Mondial Relay](carrier:mondial-relay).
 
 ### Peut-on suivre Sending dans une autre langue que l'espagnol ?
 

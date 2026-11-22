@@ -6,7 +6,7 @@ published: 2026-11-22
 updated: 2026-11-22
 ---
 
-Um ein Paket von Sending zu verfolgen, gib den 12-stelligen Sendungscode oder deine Referenz auf der Seite [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) ein oder füge die Nummer oben ins Feld ein. Die Scans erscheinen auf Spanisch; die Tabelle unten erklärt jeden einzelnen. Bei Fragen zu einer Sendung nennt Sending +34 919 012 048 für Spanien und +351 211 252 884 für Portugal. Sending (Sending Transporte Urgente) ist ein spanischer Express- und Logistikdienstleister, der in ganz Spanien und Portugal zustellt. Laut InPost wurde Sending 2025 übernommen, und auf der Sending-Website steht heute das Logo „Sending by InPost“. Empfänger erhalten den Code laut Sending per E-Mail, SMS oder App.
+Um ein Paket von Sending zu verfolgen, gib den 12-stelligen Sendungscode oder deine Referenz auf der Seite [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) ein oder füge die Nummer oben ins Feld ein. Die Scans erscheinen auf Spanisch; die Tabelle unten erklärt jeden einzelnen. Bei Fragen zu einer Sendung nennt Sending +34 919 012 048 für Spanien und +351 211 252 884 für Portugal. Sending (Sending Transporte Urgente) ist ein spanischer Express- und Logistikdienstleister, der in ganz Spanien und Portugal zustellt. Laut InPost kam Sending 2025 zu InPost hinzu, und auf der Sending-Website steht heute das Logo „Sending by InPost“. Empfänger erhalten den Code laut Sending per E-Mail, SMS oder App.
 
 ## Deine Sending-Sendungsnummer
 
@@ -21,11 +21,11 @@ Da 12 Ziffern zu vielen Paketdiensten passen, prüfe, ob die E-Mail des Shops wi
 
 ## Was Sendings Statusmeldungen bedeuten
 
-Oben läuft ein Fortschrittsbalken über `En preparación` (in Vorbereitung), `Tránsito` (unterwegs) und `Reparto` (Zustellung) und endet bei `Entregada` (zugestellt) oder `FALTA DEFINITIVA`. Darunter stehen die Scans nach Tagen gruppiert, der neueste zuerst, mit Uhrzeit und dem Ort der jeweiligen Sending-Niederlassung. Die bekannten Texte, wie Sending sie (ohne Akzente) schreibt, in üblicher Reihenfolge:
+Oben läuft ein Fortschrittsbalken über `En preparación` (in Vorbereitung), `Tránsito` (unterwegs) und `Reparto` (Zustellung) und endet bei `Entregada` (zugestellt) oder `FALTA DEFINITIVA`. Darunter stehen die Scans nach Tagen gruppiert, der neueste zuerst, mit Uhrzeit und dem Ort der jeweiligen Sending-Niederlassung. Die bekannten Texte, wie Sending sie (ohne Akzente) schreibt, ungefähr in der Reihenfolge, in der ein Paket sie durchläuft:
 
 | Status | Was das für dich bedeutet |
 | --- | --- |
-| `Mercancia recogida` | „Ware abgeholt“: Sending hat das Paket beim Absender übernommen. |
+| `Mercancia recogida` | „Ware abgeholt“: Sending hat das Paket beim Absender übernommen; nach einem internationalen Abschnitt hat eine Sending-Niederlassung es erhalten. |
 | `En transito internacional / in international transit` | Auf einem internationalen Transportabschnitt. |
 | `Salida en ruta nacional` | „Auf nationaler Strecke abgegangen“: unterwegs zur zustellenden Niederlassung in deiner Region. |
 | `El envio ha llegado a tu delegacion mas cercana` | „Deine Sendung hat deine nächste Niederlassung erreicht“: Das Zustelldepot hat sie. |
@@ -73,13 +73,13 @@ Peek akzeptiert nur Sendings 12-stellige Sendungsnummer: Wählst du Sending für
 
 Peek zeigt Status und Verlauf im spanischen Wortlaut von Sending, jeden Scan mit dem Ort der Sending-Niederlassung; ein Scan ohne Uhrzeit zeigt nur den Tag. Peek liest jede Uhrzeit als Ortszeit der jeweiligen Niederlassung (Kanarenzeit bei einer Niederlassung dort) und rechnet sie in die Zeitzone deines Geräts um; auf peektracker.com sowie in den iPhone- und Android-Apps endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen. Endet der Fortschrittsbalken auf `Entregada`, markiert Peek das Paket als zugestellt, selbst wenn die Scans vorher enden; `FALTA DEFINITIVA` erscheint als „Problem gemeldet“. Peek übernimmt weder Absenderreferenz noch Zeitfenster, Postleitzahlen und Orte von Absender und Empfänger, Zustellniederlassung, Lieferoptionen oder Namen des Unterzeichners und zeigt weder Gewicht noch voraussichtliches Lieferdatum: Für das Zeitfenster schau auf sending.es.
 
-Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Liefertag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag, an dem Sending das Paket in Zustellung scannt, bis zu alle 2 Minuten –, solange der eigene Tracker von Sending antwortet; über Tracking-Dienste bis zu alle 15 Minuten. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Peek kann weder Sending noch den Shop kontaktieren oder deine Adresse ändern.
+Solange du das Paket auf dem Bildschirm geöffnet hast, oder am Liefertag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr Ortszeit am Tag, an dem Sending das Paket in Zustellung scannt, bis zu alle 2 Minuten –, solange der eigene Tracker von Sending antwortet. Ansonsten sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Solange ein Tracking-Dienst das Paket führt, prüft Peek stündlich, am Zustelltag bis zu alle 15 Minuten (solange es geöffnet ist oder Benachrichtigungen aktiv sind), und alle 3 Stunden nach einem Tag ohne neuen Scan. Benachrichtigungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einstellen. Peek kann weder Sending noch den Shop kontaktieren oder deine Adresse ändern.
 
 ## Fragen zur Sending-Sendungsverfolgung
 
 ### Gehört Sending zu InPost?
 
-Ja, laut InPost: InPost Spanien gibt an, 2021 Mondial Relay und 2025 Sending übernommen zu haben, und auf Sendings Website steht heute das Logo „Sending by InPost“. Sending-Pakete werden weiterhin auf sending.es verfolgt. In der Datenschutzerklärung ist die Sending Transporte y Comunicación, S.A. in Coslada (Madrid) genannt. Für InPosts eigene Locker- und Punto-Pack-Sendungen in Spanien siehe [InPost](carrier:inpost).
+Ja, laut InPost: InPost Spanien gibt an, 2021 Mondial Relay und 2025 Sending hinzugenommen zu haben, und auf Sendings Website steht heute das Logo „Sending by InPost“. Sending-Pakete werden weiterhin auf sending.es verfolgt. In der Datenschutzerklärung ist die Sending Transporte y Comunicación, S.A. in Coslada (Madrid) genannt. Für InPosts eigene Locker- und Punto-Pack-Sendungen in Spanien, die Peek unter Mondial Relay verfolgt, siehe [Mondial Relay](carrier:mondial-relay).
 
 ### Kann ich Sending auf Englisch oder Deutsch verfolgen?
 

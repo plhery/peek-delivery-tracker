@@ -21,11 +21,11 @@ Ponieważ 12 cyfr pasuje do wielu przewoźników, sprawdź, czy e-mail ze sklepu
 
 ## Co oznaczają statusy śledzenia Sending
 
-U góry pasek postępu przechodzi przez `En preparación` (w przygotowaniu), `Tránsito` (w transporcie) i `Reparto` (doręczenie), a kończy się na `Entregada` (doręczona) lub `FALTA DEFINITIVA`. Poniżej wyświetlane są skany od najnowszego pod każdym dniem, z godziną i miejscowością oddziału Sending. Znane komunikaty, w pisowni Sending (bez akcentów), w typowej kolejności:
+U góry pasek postępu przechodzi przez `En preparación` (w przygotowaniu), `Tránsito` (w transporcie) i `Reparto` (doręczenie), a kończy się na `Entregada` (doręczona) lub `FALTA DEFINITIVA`. Poniżej wyświetlane są skany od najnowszego pod każdym dniem, z godziną i miejscowością oddziału Sending. Znane komunikaty, w pisowni Sending (bez akcentów), mniej więcej w kolejności, w jakiej paczka je napotyka:
 
 | Status | Co to oznacza dla ciebie |
 | --- | --- |
-| `Mercancia recogida` | „Towar odebrany”: Sending odebrał paczkę od nadawcy. |
+| `Mercancia recogida` | „Towar odebrany”: Sending odebrał paczkę od nadawcy; po odcinku międzynarodowym oznacza, że paczkę przyjął oddział Sending. |
 | `En transito internacional / in international transit` | Na międzynarodowym odcinku podróży. |
 | `Salida en ruta nacional` | „Wyjazd na trasę krajową”: w drodze do oddziału doręczającego w twojej okolicy. |
 | `El envio ha llegado a tu delegacion mas cercana` | „Twoja przesyłka dotarła do najbliższego oddziału”: ma ją oddział doręczający. |
@@ -73,13 +73,13 @@ Peek przyjmuje wyłącznie 12-cyfrowy numer przesyłki Sending: jeśli wybierzes
 
 Peek wyświetla status i historię w hiszpańskim brzmieniu Sending, a przy każdym skanie miejscowość oddziału Sending; skan z samą datą pokazuje tylko dzień. Peek odczytuje każdą godzinę według czasu lokalnego miejscowości skanu (czasu Wysp Kanaryjskich dla tamtejszego oddziału) i przelicza ją na strefę czasową twojego urządzenia; na peektracker.com oraz w aplikacjach na iPhone'a i Androida historię kończy napis „Godziny w twojej strefie czasowej:” z jej nazwą. Gdy pasek postępu kończy się na `Entregada`, Peek oznacza paczkę jako dostarczoną, nawet jeśli skany kończą się wcześniej, a `FALTA DEFINITIVA` pojawia się jako „Zgłoszono problem”. Peek pomija numer referencyjny nadawcy, przedział godzinowy dostawy, kody pocztowe i miejscowości nadawcy i odbiorcy, oddział doręczający, opcje doręczenia oraz nazwisko osoby podpisującej odbiór, i nie pokazuje wagi ani planowanej daty dostawy: przedział godzinowy sprawdź na sending.es.
 
-Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza nawet co 10 minut — a od 6:00 czasu lokalnego w dniu wyjścia do doręczenia w Sending nawet co 2 minuty — dopóki odpowiada własne śledzenie Sending; przez usługi śledzenia sprawdza nawet co 15 minut. Poza tym oraz po dwóch dniach bez nowych informacji (po 12 godzinach, gdy paczka ma wciąż status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może skontaktować się z Sending ani ze sklepem za ciebie ani zmienić adresu.
+Gdy masz paczkę otwartą na ekranie albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza nawet co 10 minut — a od 6:00 czasu lokalnego w dniu wyjścia do doręczenia w Sending nawet co 2 minuty — dopóki odpowiada własne śledzenie Sending. Poza tym oraz po dwóch dniach bez nowych informacji (po 12 godzinach, gdy paczka ma wciąż status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Gdy przesyłkę prowadzi usługa śledzenia, Peek sprawdza co godzinę, w dniu doręczenia nawet co 15 minut (dopóki masz ją otwartą lub włączone powiadomienia), a po dniu bez nowego skanu co 3 godziny. Może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może skontaktować się z Sending ani ze sklepem za ciebie ani zmienić adresu.
 
 ## Pytania o śledzenie Sending
 
 ### Czy Sending należy do InPost?
 
-Tak, według InPost: InPost Hiszpania informuje, że w 2021 roku dołączył Mondial Relay, a w 2025 roku Sending, i strona Sending nosi dziś logo „Sending by InPost”. Przesyłki Sending nadal śledzi się na sending.es. Spółka wskazana w polityce prywatności to Sending Transporte y Comunicación, S.A. z siedzibą w Cosladzie (Madryt). Dla własnych przesyłek Locker i Punto Pack InPost zobacz [InPost](carrier:inpost).
+Tak, według InPost: InPost Hiszpania informuje, że w 2021 roku dołączył Mondial Relay, a w 2025 roku Sending, i strona Sending nosi dziś logo „Sending by InPost”. Przesyłki Sending nadal śledzi się na sending.es. Spółka wskazana w polityce prywatności to Sending Transporte y Comunicación, S.A. z siedzibą w Cosladzie (Madryt). Dla własnych przesyłek Locker i Punto Pack InPost Hiszpania, które Peek śledzi jako Mondial Relay, zobacz [Mondial Relay](carrier:mondial-relay).
 
 ### Czy mogę śledzić Sending po angielsku lub polsku?
 

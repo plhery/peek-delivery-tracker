@@ -3004,6 +3004,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "japan-post-sendungsverfolgung",
+      "title": "Japan Post Sendungsverfolgung: EMS-Nummern und Status",
+      "name": "Japan Post",
+      "color": "#cc0000"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "russian-post-sendungsverfolgung",
@@ -4230,6 +4238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "suivi-japan-post",
+      "title": "Suivi Japan Post\u00a0: numéros EMS et statuts expliqués",
+      "name": "Japan Post",
+      "color": "#cc0000"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "suivi-russian-post",
@@ -5408,6 +5424,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "tracciamento-japan-post",
+      "title": "Tracciamento Japan Post: codici EMS e stati spiegati",
+      "name": "Japan Post",
+      "color": "#cc0000"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "tracciamento-russian-post",
@@ -6578,6 +6602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e83828"
     },
     {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "seguimiento-japan-post",
+      "title": "Seguimiento Japan Post: números EMS y estados explicados",
+      "name": "Japan Post",
+      "color": "#cc0000"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "seguimiento-russian-post",
@@ -7722,6 +7754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CNE Express: números 3A5V, estados e entrega",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "seguimento-japan-post",
+      "title": "Seguimento Japan Post: números EMS e estados explicados",
+      "name": "Japan Post",
+      "color": "#cc0000"
     },
     {
       "id": "russian-post",
@@ -8926,6 +8966,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CNE Express: numery 3A5V, statusy i doręczenie",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "sledzenie-japan-post",
+      "title": "Śledzenie Japan Post: numery EMS i znaczenie statusów",
+      "name": "Japan Post",
+      "color": "#cc0000"
     },
     {
       "id": "russian-post",

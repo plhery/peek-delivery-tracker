@@ -2996,6 +2996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#11003a"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "cdek-sendungsverfolgung",
+      "title": "CDEK Sendungsverfolgung (СДЭК): Nummern und Status",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -4134,6 +4142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#11003a"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "suivi-cdek",
+      "title": "Suivi CDEK (СДЭК)\u00a0: numéros de commande et statuts",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -5200,6 +5216,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#11003a"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "tracciamento-cdek",
+      "title": "Tracciamento CDEK (СДЭК): codici e stati in italiano",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "tracciamento-rl-carriers",
@@ -6242,6 +6266,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#11003a"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "seguimiento-cdek",
+      "title": "Seguimiento CDEK (СДЭК): números y estados en español",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
       "id": "forza-delivery",
       "catalog": "forza-delivery",
       "slug": "forza-delivery-rastreo",
@@ -7258,6 +7290,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento GlobalPost: números GP, estados e entrega",
       "name": "GlobalPost",
       "color": "#11003a"
+    },
+    {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "rastreio-cdek",
+      "title": "Rastreio CDEK (СДЭК): números e estados em português",
+      "name": "CDEK",
+      "color": "#00b33c"
     },
     {
       "id": "rl-carriers",
@@ -8342,6 +8382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GlobalPost: numery GP, statusy i doręczenie",
       "name": "GlobalPost",
       "color": "#11003a"
+    },
+    {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "sledzenie-cdek",
+      "title": "Śledzenie CDEK (СДЭК): numery zamówień i statusy",
+      "name": "CDEK",
+      "color": "#00b33c"
     },
     {
       "id": "rl-carriers",

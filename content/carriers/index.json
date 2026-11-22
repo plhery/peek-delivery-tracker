@@ -200,7 +200,7 @@
   { "id": "j-and-t-middle-east", "catalog": "j-and-t-middle-east", "name": "J&T Express Middle East", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en"] },
   { "id": "globalpost", "catalog": "globalpost", "name": "GlobalPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en"] },
+  { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es"] },
   { "id": "quantium-solutions", "catalog": "quantium-solutions", "name": "Quantium Solutions", "languages": ["en"] },
   { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en"] },

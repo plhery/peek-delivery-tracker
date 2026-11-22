@@ -14,10 +14,10 @@ Posti calls the number the "item ID" (sometimes "shipment ID"). For Posti's own 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `JJFI12345678901234567` | A Posti parcel: `JJFI` and 17 digits, 21 characters in all. |
-| `RR000000005FI` | A registered or tracked item posted in Finland, in the international format: two letters, nine digits, `FI`. |
-| `RR000000005CN` | A parcel from abroad keeps the sender's number. This one ends `CN`, so it was posted with China Post; Posti tracks it under the same number. |
-| `00064000000000000002` | A 20-digit SSCC barcode; `64` after the first three digits is Finland's prefix. |
+| `JJFI63482917465283914` | A Posti parcel: `JJFI` and 17 digits, 21 characters in all. |
+| `RR482917367FI` | A registered or tracked item posted in Finland, in the international format: two letters, nine digits, `FI`. |
+| `RR482917367CN` | A parcel from abroad keeps the sender's number. This one ends `CN`, so it was posted with China Post; Posti tracks it under the same number. |
+| `00064382917465283912` | A 20-digit SSCC barcode; `64` after the first three digits is Finland's prefix. |
 
 If the sender gave Posti your phone number, the parcel appears in OmaPosti by itself; otherwise add it by hand. Posti's tracking only answers an exact code, never a name or address.
 
@@ -68,13 +68,13 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 
 **Damaged.** Tell the driver at handover, take photos, use Posti's damaged item form and tell the sender.
 
-**Customs.** A parcel from outside the EU may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. Since 1 November 2026 Finnish Customs also charges €2 per goods item. For a purchase under €150 whose VAT the shop charged at checkout (IOSS), the sender clears customs and you pay nothing on arrival; if the payment details for the duty and fee are missing, Posti returns the parcel to the sender. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
+**Customs.** A parcel from outside the EU (or from EU territories outside its tax area, such as the Åland Islands or the Canary Islands) may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. Since 1 November 2026 Finnish Customs also charges €2 per goods item on online purchases. For a purchase under €150 whose VAT the shop charged at checkout (IOSS), the sender clears customs and you pay nothing on arrival; if the payment details for the duty and fee are missing, Posti returns the parcel to the sender. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
 
 > Posti never sends a link to pay customs or a handling fee. A fake message can even contain a genuine tracking code: delete it without opening the link.
 
 ## Posti customer service and contact number
 
-As listed on posti.fi on 12 October 2026:
+As listed on posti.fi:
 
 - **Phone:** 0100 5577, or +358 100 5577 from abroad. Calls cost a mobile or local network charge. Posti's [customer service page](https://www.posti.fi/en/customer-service) gives the opening hours.
 - **Chat:** in the OmaPosti app.
@@ -86,11 +86,11 @@ Posti lists no customer email address.
 
 [Peek](/) names a `JJFI` number as Posti's straight away. A posti.fi tracking link (`/tracking/`, `/seuranta/` or `/uppfoljning/` followed by the number, also after a language such as `/en/`) names Posti for any number. No postcode needed.
 
-For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Added to a Peek account, the parcel is then checked hourly for 6 hours, then less and less often; without an account, checks stop after 6 hours unless you turn on "Notify me when it’s found", which keeps a daily check going until 30 days after you added it. For an SSCC of the shape above, Peek asks Posti, Matkahuolto, Swiss Post Cargo, PostNord and NZ Post. With a wrong check digit, or for an SSCC that several carriers know, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link. Otherwise Peek follows it at the sending post first; when that post says the parcel is going to Finland (or names no destination and you follow it from Finland), Peek also asks Posti with the same number and, once Posti shows a scan at least as new as the sending post's newest, follows it there, keeping the earlier history.
+For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Added to a Peek account, the parcel is then checked hourly for 6 hours, then less and less often; without an account, checks stop after 6 hours unless you turn on "Notify me when it’s found", which keeps a daily check going until 30 days after you added it. For an SSCC of the shape above, Peek asks Posti, Matkahuolto, Swiss Post Cargo, PostNord and NZ Post. With a wrong check digit, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link. Otherwise Peek follows it at the sending post first; when that post says the parcel is going to Finland (or names no destination and you follow it from Finland), Peek also asks Posti with the same number and, once Posti shows a scan at least as new as the sending post's newest, follows it there, keeping the earlier history.
 
 In Estonia, Latvia and Lithuania, Posti goes by SmartPosti: Peek's carrier search finds Posti under that name ("Also called SmartPosti"), and tracking links from smartposti.ee or itella.ee (or their .lv and .lt sites) name Posti for any code. Peek keeps Posti's answer only when exactly one shipment carries the exact code you typed, so for a SmartPosti code it may find nothing; then look the parcel up on smartposti.ee.
 
-Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks up to every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
+Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes (every 2 from 6 a.m. local time on the day Posti scans the parcel out for delivery, while Posti's own tracker answers), otherwise hourly. It draws each scan on a map and can notify you of changes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
 
 ## Questions about Posti tracking
 
@@ -111,11 +111,11 @@ A Small parcel arrives 2 to 5 business days after Posti receives it. Otherwise, 
 Yes, in the OmaPosti app.
 
 :::sources
-- [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage (14 days from abroad, 9 days with a letter notice), extension, lockers, codes, power of attorney, returns, phone, chat (read 10 November 2026)
-- [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day (read 10 November 2026)
+- [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage (14 days from abroad, 9 days with a letter notice), extension, lockers, codes, power of attorney, returns, phone, chat
+- [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day
 - [Posti: Track item](https://www.posti.fi/en/tracking) – status wordings, explanation lines, ULKOMAILLA, languages
 - [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – missed delivery, Small parcel, delivery times, delivered not received
-- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee since 1 November 2026, IOSS clearance by the sender, returns when payment details are missing (read 10 November 2026)
+- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee since 1 November 2026, IOSS clearance by the sender, returns when payment details are missing
 - [Posti: Ordering from abroad and customs clearance](https://www.posti.fi/en/receiving/customs-clearance/ordering-from-abroard-and-custom-clearance) – 20 days in the warehouse, OmaPosti
 - [Posti: What does Posti compensate for and to whom](https://www.posti.fi/en/customer-service/damage-situations/what-does-posti-compensate-for-and-to-whom) – clarification request, compensation, damage steps
 - [Posti: Claim for compensation](https://www.posti.fi/en/customer-service/damage-situations/claim-for-compensation) – claim form

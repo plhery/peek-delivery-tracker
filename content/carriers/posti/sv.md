@@ -14,10 +14,10 @@ I Postis uppföljning heter numret försändelsekod. Postis egna paket har en ko
 
 | Kod (påhittad) | Vad det är |
 | --- | --- |
-| `JJFI00000000000000000` | Ett Posti-paket: `JJFI` och 17 siffror, 21 tecken sammanlagt. |
-| `RR000000005FI` | Två bokstäver, nio siffror och `FI`: en spårbar postförsändelse som lämnats in i Finland, i det internationella formatet. |
-| `RR000000005CN` | Ett paket från utlandet behåller koden från avsändarlandet. Den här slutar på `CN` och lämnades alltså in hos [China Post](carrier:china-post). Tills paketet har kommit till Finland står det `Paketet är utomlands` i Postis uppföljning. |
-| `00064000000000000002` | En SSCC-streckkod på 20 siffror. `64` efter de tre första siffrorna är Finlands prefix. |
+| `JJFI63482917465283914` | Ett Posti-paket: `JJFI` och 17 siffror, 21 tecken sammanlagt. |
+| `RR482917367FI` | Två bokstäver, nio siffror och `FI`: en spårbar postförsändelse som lämnats in i Finland, i det internationella formatet. |
+| `RR482917367CN` | Ett paket från utlandet behåller koden från avsändarlandet. Den här slutar på `CN` och lämnades alltså in hos [China Post](carrier:china-post). Tills paketet har kommit till Finland står det `Paketet är utomlands` i Postis uppföljning. |
+| `00064382917465283912` | En SSCC-streckkod på 20 siffror. `64` efter de tre första siffrorna är Finlands prefix. |
 
 **OmaPosti.** OmaPosti visar försändelser utifrån telefonnumret. Har avsändaren gett Posti ditt nummer dyker paketet upp av sig självt, annars lägger du till det själv. I Postis uppföljning kan du bara söka med den exakta försändelsekoden, inte med namn eller adress.
 
@@ -91,13 +91,13 @@ Postis uppföljning på svenska visar överst en rubrik för det steg paketet ä
 
 **Tidsfrist.** Paketet väntar i Postis lager medan du förtullar det, i högst 20 dygn från att det kom till Finland. Förtullar du inte inom den tiden skickas det tillbaka till avsändaren, och mer tid kan du inte få.
 
-**Avgifter.** Sedan den 1 juli 2026 betalas tullavgift på alla köp från länder utanför EU: för köp på högst 150 euro är den 3 euro per varupost. Sedan den 1 november 2026 tar Tullen också ut en behandlingsavgift på 2 euro per varupost. Har du betalat skatt vid förtullningen tar Posti dessutom ut en behandlingsavgift på 3,10 €, som du betalar på Postis webbplats med försändelsekoden, eller 3,30 € på ett serviceställe.
+**Avgifter.** Sedan den 1 juli 2026 betalas tullavgift på alla köp från länder utanför EU: för köp på högst 150 euro är den 3 euro per varupost. Sedan den 1 november 2026 tar Tullen också ut en behandlingsavgift på 2 euro per varupost för köp på nätet. Har du betalat skatt vid förtullningen tar Posti dessutom ut en behandlingsavgift på 3,10 €, som du betalar på Postis webbplats med försändelsekoden, eller 3,30 € på ett serviceställe.
 
 > Bluffmeddelanden i Postis namn kan innehålla en äkta försändelsekod och dyka upp i samma meddelandekedja som Postis riktiga ankomstavier. De ber dig boka en leveranstid, bekräfta adressen, förtulla paketet eller betala en transportavgift. Posti skickar inga länkar för förtullning eller betalning av behandlingsavgifter och ber dig aldrig identifiera dig med Apple ID. Ankomstavier för postförskott har däremot en länk för betalningen. Radera meddelandet utan att öppna det eller länken. Har du lämnat ut dina bankuppgifter, kontakta genast banken och gör sedan en polisanmälan.
 
 ## Postis kundtjänst
 
-Så når du Posti enligt Postis svenska sidor den 26 oktober 2026:
+Så når du Posti enligt Postis svenska sidor:
 
 - **Telefon:** 0100 5577. Samtalet kostar lokalnätsavgift eller mobilsamtalsavgift, också under kötiden. Öppettiderna står bland kontaktuppgifterna på [Postis kundtjänst](https://www.posti.fi/sv/kundtjanst).
 - **Chatt:** i OmaPosti-appen.
@@ -107,9 +107,9 @@ Så når du Posti enligt Postis svenska sidor den 26 oktober 2026:
 
 [Peek](/) ser direkt att en kod som börjar på `JJFI` är Postis. Klistrar du in en länk från Postis uppföljning, med `/uppfoljning/`, `/seuranta/` eller `/tracking/` följt av koden (också efter en språkdel som `/sv/`), vet Peek att det är Posti, oavsett kod. Du behöver inget postnummer.
 
-För en kod med två bokstäver, nio siffror och `FI` frågar Peek Posti först, och även [Chronopost](carrier:chronopost), och väljer Posti om Posti känner till koden. Känner Posti inte till den ännu ser du "Not found at … yet. Peek will keep checking after you add it." Har du lagt till paketet i ett Peek-konto kollar Peek sedan koden varje timme de första 6 timmarna och därefter allt glesare. Utan konto upphör kontrollerna efter 6 timmar, om du inte slår på "Notify me when it’s found": då kollar Peek en gång om dagen tills 30 dagar har gått sedan du lade till koden. Stämmer kontrollsiffran inte frågar Peek inte Posti, så välj Posti med "Change". För en SSCC-kod på 20 siffror frågar Peek Posti och andra transportörer som koden passar, till exempel [Matkahuolto](carrier:matkahuolto) och [PostNord](carrier:postnord). Känner flera av dem till koden väljer du själv. En utländsk kod spårar du hos Posti med "Change" eller via en länk från posti.fi, och vissa internationella paket följer Peek själv vidare till Posti.
+För en kod med två bokstäver, nio siffror och `FI` frågar Peek Posti först, och även [Chronopost](carrier:chronopost), och väljer Posti om Posti känner till koden. Känner Posti inte till den ännu ser du "Not found at … yet. Peek will keep checking after you add it." Har du lagt till paketet i ett Peek-konto kollar Peek sedan koden varje timme de första 6 timmarna och därefter allt glesare. Utan konto upphör kontrollerna efter 6 timmar, om du inte slår på "Notify me when it’s found": då kollar Peek en gång om dagen tills 30 dagar har gått sedan du lade till koden. Stämmer kontrollsiffran inte frågar Peek inte Posti, så välj Posti med "Change". För en SSCC-kod på 20 siffror frågar Peek Posti och andra transportörer som koden passar, till exempel [Matkahuolto](carrier:matkahuolto) och [PostNord](carrier:postnord). En utländsk kod spårar du hos Posti med "Change" eller via en länk från posti.fi, och vissa internationella paket följer Peek själv vidare till Posti.
 
-Peek läser Postis uppföljning på engelska, så du ser Postis engelska händelserader, till exempel `Item is ready for a pick up` (paketet väntar på dig) och `Item accepted from transport` (paketet är fortfarande på väg, trots ordalydelsen). Förklarar Posti en händelse står förklaringen efter raden. Peek visar orten för varje skanning på en karta, paketets vikt och mått och, när paketet väntar på ett uthämtningsställe eller har hämtats där, ställets namn och adress. Ortsangivelsen `ULKOMAILLA`, finska för utomlands, tar Peek bort. Uthämtningskoden och din adress tar Peek inte med, och Peek visar varken beräknad leveranstid eller avsändare. En kod som gäller flera paket spårar Peek inte, och gamla försändelser hittas inte. Peek kollar paketet upp till var tionde minut och upp till varannan minut när det är ute för leverans (bara samma dag, från klockan 6 finsk tid och så länge Postis egen uppföljning svarar; via spårningstjänster var femtonde minut), och Peek kan meddela dig när något händer. Peek kan inte kontakta Posti eller webbutiken åt dig.
+Peek läser Postis uppföljning på engelska, så du ser Postis engelska händelserader, till exempel `Item is ready for a pick up` (paketet väntar på dig) och `Item accepted from transport` (paketet är fortfarande på väg, trots ordalydelsen). Förklarar Posti en händelse står förklaringen efter raden. Peek visar orten för varje skanning på en karta, paketets vikt och mått och, när paketet väntar på ett uthämtningsställe eller har hämtats där, ställets namn och adress. Ortsangivelsen `ULKOMAILLA`, finska för utomlands, tar Peek bort. Uthämtningskoden och din adress tar Peek inte med, och Peek visar varken beräknad leveranstid eller avsändare. En kod som gäller flera paket spårar Peek inte, och gamla försändelser hittas inte. Medan du har paketet öppet, eller på leveransdagen med aviseringar påslagna, kollar Peek paketet upp till var tionde minut och upp till varannan minut när det är ute för leverans (bara samma dag, från klockan 6 finsk tid och så länge Postis egen uppföljning svarar), annars en gång i timmen. Peek kan meddela dig när något händer. Peek kan inte kontakta Posti eller webbutiken åt dig.
 
 ## Frågor om att spåra Posti-paket
 

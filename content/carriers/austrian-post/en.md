@@ -14,14 +14,14 @@ Austrian Post's help pages give two shapes for an item number (digits invented h
 
 | Shape | What it is |
 | --- | --- |
-| `1012345678901234567890` | Austrian Post's own number: 22 digits starting 10. |
-| `RR000000005AT` | An international postal number: two letters, nine digits, two letters. Ending in AT, it is Austrian Post's. |
+| `1048291736548291736482` | Austrian Post's own number: 22 digits starting 10. |
+| `RR482917367AT` | An international postal number: two letters, nine digits, two letters. Ending in AT, it is Austrian Post's. |
 
 **Where it turns up.** In the shop's shipping email; in Austrian Post's e-notification (email or Post App), if you have a free Post Account and the sender sent its shipping data; and on the yellow notice after a missed delivery.
 
 The 6-digit CRN code on a customs sticker is not the tracking number.
 
-**Lookalikes.** Many carriers use 22 digits. `0123450123451234567890` has TIPSA's shape and `0012340012345678901234` belongs to [CTT Express](carrier:ctt-express); `RR000000005DE` is a postal number from another country's post. If post.at doesn't know your number, check which carrier the shop named.
+**Lookalikes.** Many carriers use 22 digits. `0123450123451234567890` has TIPSA's shape and `0012340012345678901234` belongs to [CTT Express](carrier:ctt-express); `RR482917367DE` is a postal number from another country's post. If post.at doesn't know your number, check which carrier the shop named.
 
 ## Austrian Post tracking statuses explained
 
@@ -61,7 +61,7 @@ The help pages use summary statuses such as `Item in distribution`, while histor
 
 **Post Empfangsbox.** The courier leaves a notice whose barcode opens your building's parcel box once only, so take the parcel out at once.
 
-**Customs.** Austrian Post declares parcels from outside the EU and collects import VAT, duty and its own import fee on delivery or at the branch. Since 1 July 2026, parcels worth up to €150 pay a flat €3 customs duty per kind of product, and since 1 November 2026, a €2 Union handling fee per kind of product is due as well, whatever the value. More in [parcels held at customs](guide:customs).
+**Customs.** Austrian Post declares parcels from outside the EU and collects import VAT, duty and its own import fee on delivery or at the branch. Since 1 July 2026, parcels worth up to €150 pay a flat €3 customs duty per kind of product, and since 1 November 2026, a €2 Union handling fee per kind of product is due as well on online purchases, whatever the value. More in [parcels held at customs](guide:customs).
 
 ## Austrian Post parcel late, lost or damaged
 
@@ -77,22 +77,21 @@ The sender is Austrian Post's customer, so the sender is your first contact for 
 
 ## Austrian Post customer service number and contact
 
-As listed on Austrian Post's pages on 11 October 2026:
+As listed on Austrian Post's pages:
 
 - **Hotline for private customers:** +43 800 010 100, Monday to Friday 7:00 to 19:00, Saturday 8:00 to 13:00.
 - **Contact form:** on [post.at's contact page](https://www.post.at/kontaktformular), round the clock.
-- **Chat:** about a parcel's status, on the tracking page.
 - **Email:** none for recipients.
 
 > Austrian Post warns of fake SMS about missed deliveries asking you to confirm details through a link, and of fake yellow notices with a QR code. Its real emails end in @post.at, and it never asks for your IBAN to deliver a regular parcel.
 
 ## Tracking Austrian Post parcels with Peek
 
-[Peek](/) recognises an international number ending in AT with a valid check digit as Austrian Post at once. For 22 digits, shared with other carriers, Peek asks Austrian Post and [USPS](carrier:usps) at once and names Austrian Post when only it knows the number; if several or none do, pick with "Change". A post.at link works only with an AT number inside.
+[Peek](/) recognises an international number ending in AT with a valid check digit as Austrian Post at once. For 22 digits, Peek asks Austrian Post first and names it when it knows the number; otherwise it checks tracking services, then [USPS](carrier:usps). When the number also has TIPSA's or CTT Express's shape, Peek asks them at the same time. For 24 digits, it asks Austrian Post, InPost and Ciblex, and names Austrian Post when only it knows the number. If Peek names no carrier, pick with "Change". A post.at link is read only with an international postal number inside (two letters, nine digits, two letters); for 22 or 24 digits, paste the number alone.
 
 Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. Times show in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
-While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers; otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After `Übergabe an Zustellpartner` on a 22-digit number, Peek does not follow the partner. Another post's postal number passes to Austrian Post once Austrian Post shows a scan at least as recent as the origin's newest, when the origin gives Austria as the destination or, with none, while you follow it from Austria; an AT postal number you follow from another country passes the same way to that country's post (DHL from Germany, La Poste from France). Peek then follows the delivering carrier's pace.
 
 ## Questions about Austrian Post tracking
 
@@ -106,7 +105,7 @@ The parcel may only be announced: until the sender hands it over, there's little
 
 ### Does Austrian Post have a customer service email?
 
-Not for recipients. Use the contact form, the chat on the tracking page or the hotline.
+Not for recipients. Use the contact form or the hotline.
 
 ### What does Zollanmeldungshindernis mean?
 

@@ -14,8 +14,8 @@ Die Post nennt auf ihren Hilfeseiten zwei Formen (Ziffern hier erfunden):
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `1012345678901234567890` | Die eigene Nummer der Post: 22 Ziffern, beginnt mit 10. |
-| `RR000000005AT` | Eine internationale Postnummer: zwei Buchstaben, neun Ziffern, zwei Buchstaben. Endet sie auf AT, ist es eine Nummer der Österreichischen Post. |
+| `1048291736548291736482` | Die eigene Nummer der Post: 22 Ziffern, beginnt mit 10. |
+| `RR482917367AT` | Eine internationale Postnummer: zwei Buchstaben, neun Ziffern, zwei Buchstaben. Endet sie auf AT, ist es eine Nummer der Österreichischen Post. |
 
 Als Beispiel nennt die Post auch eine internationale Nummer aus Deutschland, mit DE am Ende: Ein Paket aus dem Ausland suchst du auf post.at auch mit seiner internationalen Nummer.
 
@@ -23,7 +23,7 @@ Als Beispiel nennt die Post auch eine internationale Nummer aus Deutschland, mit
 
 Der sechsstellige CRN-Code auf dem Zollaufkleber von Paketen aus Nicht-EU-Ländern ist keine Sendungsnummer: Mit ihm lädst du die Zollanmeldung herunter.
 
-**Verwechslungsgefahr.** 22 Ziffern verwenden viele Paketdienste. `0123450123451234567890` hat die Form von TIPSA aus Spanien, `0012340012345678901234` gehört zu CTT Express, und `RR000000005DE` ist eine Postnummer aus einem anderen Land. Kennt post.at deine Nummer nicht, schau nach, welchen Paketdienst der Shop genannt hat.
+**Verwechslungsgefahr.** 22 Ziffern verwenden viele Paketdienste. `0123450123451234567890` hat die Form von TIPSA aus Spanien, `0012340012345678901234` gehört zu CTT Express, und `RR482917367DE` ist eine Postnummer aus einem anderen Land. Kennt post.at deine Nummer nicht, schau nach, welchen Paketdienst der Shop genannt hat.
 
 ## Österreichische Post Sendungsverfolgung: die Status erklärt
 
@@ -67,7 +67,7 @@ Die Hilfeseiten der Post verwenden Kurzformen wie `Sendung in Verteilung` oder `
 
 **Post Empfangsbox.** Der Zusteller legt das Paket in die Box an deinem Haus und lässt einen Zettel mit Barcode da. Der Barcode öffnet die Box nur einmal, nimm das Paket also gleich heraus.
 
-**Zoll.** Pakete aus Nicht-EU-Ländern verzollt die Post. Einfuhrumsatzsteuer, Zoll und die Importgebühr der Post zahlst du bei der Zustellung oder in der Filiale. Seit 1. Juli 2026 fallen bei Paketen bis 150 € pauschal 3 € Zoll je Warenart an, und seit 1. November 2026 kommt unabhängig vom Wert eine EU-Bearbeitungsgebühr von 2 € je Warenart hinzu. Mehr dazu in [Paket beim Zoll](guide:customs).
+**Zoll.** Pakete aus Nicht-EU-Ländern verzollt die Post. Einfuhrumsatzsteuer, Zoll und die Importgebühr der Post zahlst du bei der Zustellung oder in der Filiale. Seit 1. Juli 2026 fallen bei Paketen bis 150 € pauschal 3 € Zoll je Warenart an, und seit 1. November 2026 kommt bei Online-Bestellungen unabhängig vom Wert eine EU-Bearbeitungsgebühr von 2 € je Warenart hinzu. Mehr dazu in [Paket beim Zoll](guide:customs).
 
 ## Post Paket nicht angekommen: was tun?
 
@@ -81,24 +81,23 @@ Der Versender ist Kunde der Post, darum ist er bei Problemen dein erster Ansprec
 
 **Beschädigt.** Melde den Schaden sofort, spätestens 7 Tage nach der Zustellung (Sonn- und Feiertage zählen nicht), online im Post Konto oder in einer Filiale, mit Fotos von Ware und Verpackung. Heb alles auf, bis die Post antwortet, und sag auch dem Versender Bescheid: Eine Entschädigung geht meist an ihn.
 
-## Österreichische Post Kontakt: Telefon, Formular, Chat
+## Österreichische Post Kontakt: Telefon und Formular
 
-So nennt die Post ihre Kanäle für Privatkunden (gelesen am 11. Oktober 2026):
+So nennt die Post ihre Kanäle für Privatkunden:
 
 - **Hotline:** +43 800 010 100, Montag bis Freitag 7 bis 19 Uhr, Samstag 8 bis 13 Uhr.
 - **Kontaktformular:** auf [post.at/kontaktformular](https://www.post.at/kontaktformular), rund um die Uhr.
-- **Chat:** zum Status deiner Sendung, auf der Seite der Sendungssuche.
 - **E-Mail:** Eine Adresse für Empfänger nennt die Post nicht.
 
 > Die Post warnt vor SMS über angebliche Zustellversuche, die dich über einen Link Daten bestätigen lassen, und vor gefälschten gelben Zetteln mit QR-Code. Echte E-Mails enden auf @post.at, und für ein normales Paket fragt die Post nie nach IBAN oder BIC.
 
 ## Österreichische Post mit Peek verfolgen
 
-[Peek](/) erkennt eine internationale Nummer auf AT mit gültiger Prüfziffer sofort als Austrian Post. 22 Ziffern teilen sich mehrere Paketdienste, darunter USPS und Estafeta: Peek fragt bei Austrian Post nach und meldet „Austrian Post hat dieses Paket.“, wenn die Post die Nummer kennt. Sonst wählst du den Paketdienst mit „Ändern“. Ein Link von post.at funktioniert nur, wenn eine AT-Nummer darin steht.
+[Peek](/) erkennt eine internationale Nummer auf AT mit gültiger Prüfziffer sofort als Austrian Post. Bei 22 Ziffern fragt Peek zuerst bei Austrian Post nach und meldet „Austrian Post hat dieses Paket.“, wenn die Post die Nummer kennt; sonst prüft Peek Tracking-Dienste und dann USPS. Hat die Nummer auch die Form von TIPSA oder CTT Express, fragt Peek diese gleichzeitig. Bei 24 Ziffern fragt Peek Austrian Post, InPost und Ciblex und nennt Austrian Post, wenn nur die Post die Nummer kennt. Nennt Peek keinen Paketdienst, wählst du ihn mit „Ändern“. Ein Link von post.at wird nur mit einer internationalen Postnummer darin erkannt (zwei Buchstaben, neun Ziffern, zwei Buchstaben); bei 22 oder 24 Ziffern füge die Nummer allein ein.
 
 Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen oder in Verteilung ist; sobald es in Zustellung ist, nur noch ein Zeitfenster für diesen Tag. Die Uhrzeiten siehst du in der Zeitzone deines Geräts; auf peektracker.com und in den Apps für iPhone und Android nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`. Die Zollscans der Post, etwa `Lagereingang - Zollanmeldungshindernis`, zeigt Peek als „Beim Zoll“.
 
-Solange du das Paket geöffnet hast oder am Zustelltag Mitteilungen eingeschaltet sind, prüft Peek das Paket bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet; über Tracking-Dienste alle 15 Minuten). Sonst schaut Peek stündlich nach, ebenso, wenn zwei Tage lang nichts Neues kommt (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden). Mitteilungen kann Peek dir bei jedem Scan schicken, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
+Solange du das Paket geöffnet hast oder am Zustelltag Mitteilungen eingeschaltet sind, prüft Peek das Paket bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet). Sonst schaut Peek stündlich nach, ebenso, wenn zwei Tage lang nichts Neues kommt (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden). Mitteilungen kann Peek dir bei jedem Scan schicken, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek bei einer 22-stelligen Nummer dem Partner nicht. Die Postnummer einer anderen Post geht an Austrian Post über, sobald Austrian Post einen Scan zeigt, der mindestens so neu ist wie der neueste der Absenderpost, wenn diese Österreich als Ziel nennt oder, ohne Ziel, solange du die Sendung aus Österreich verfolgst; eine AT-Postnummer, die du aus einem anderen Land verfolgst, geht ebenso an die Post dieses Landes über (DHL aus Deutschland, La Poste aus Frankreich). Peek folgt dann dem Takt des zustellenden Paketdienstes.
 
 ## Fragen zur Sendungsverfolgung der Post
 
@@ -123,17 +122,17 @@ Ja, mit deinem gelben Zettel. Oder du leitest ihm die e-Benachrichtigung weiter.
 Der Zollanmeldung deines Pakets steht etwas im Weg. Die Post lagert das Paket mit `Lagereingang - Zollanmeldungshindernis`, und in ihrer Sendungsverfolgung wirst du um die fehlenden Unterlagen gebeten. Hast du geantwortet, steht dort `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, und das Paket bleibt beim Zoll, bis es verzollt ist.
 
 :::sources
-- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Bedeutung der Status, Benachrichtigung, Abholfrist, Abholung mit und ohne Zettel, Poststation in der Filiale, e-Benachrichtigung und Versanddaten, Schaden, Nachforschung (gelesen am 17. November 2026)
-- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Aufgabebeleg, Laufzeiten, 14 Tage in Filiale, Poststation und Empfangsbox, Wunsch-Poststation, CRN-Code, Zoll (gelesen am 17. November 2026)
+- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Bedeutung der Status, Benachrichtigung, Abholfrist, Abholung mit und ohne Zettel, Poststation in der Filiale, e-Benachrichtigung und Versanddaten, Schaden, Nachforschung
+- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Aufgabebeleg, Laufzeiten, 14 Tage in Filiale, Poststation und Empfangsbox, Wunsch-Poststation, CRN-Code, Zoll
 - [Österreichische Post: Sendungssuche](https://www.post.at/s/sendungssuche) – Sendungsverfolgung ohne Konto, Post Konto, Umschalter EN, Statustexte
 - [Österreichische Post: Kontaktieren Sie uns telefonisch](https://www.post.at/k/c/hotline) – Hotline, Zeiten, Statusliste, Nummernformen
 - [Österreichische Post: Kontaktmöglichkeiten](https://www.post.at/k/c/kontakt) – Kontaktformular rund um die Uhr
-- [Österreichische Post: Zentrale Fragen zur Nachforschung](https://www.post.at/p/a/nachforschung) – wer sucht, Fristen, Schritte für Empfänger, derzeit kostenlos, Einschätzung durch den Kundenservice (gelesen am 17. November 2026)
+- [Österreichische Post: Zentrale Fragen zur Nachforschung](https://www.post.at/p/a/nachforschung) – wer sucht, Fristen, Schritte für Empfänger, derzeit kostenlos, Einschätzung durch den Kundenservice
 - [Österreichische Post: Schadensmeldung](https://www.post.at/p/a/schadensmeldung) – 7 Tage, Ablauf
 - [Österreichische Post: Poststation](https://www.post.at/p/c/abholstation) – Standorte, rund um die Uhr, Umleitung
 - [Österreichische Post: Wunsch-Poststation oder Wunsch-Postfiliale](https://www.post.at/g/c/paket-services-wunsch-poststation-postfiliale) – über 1.500 Poststationen
 - [Österreichische Post: Gelber Zettel von der Post](https://www.post.at/p/blog-gelber-zettel) – gelber Zettel, e-Benachrichtigung, Abholung ohne Zettel
-- [Österreichische Post: Pakete empfangen, wo Sie wollen](https://www.post.at/p/a/paketumleitung) – Umleitung, kostenlos, 3 Werktage, einzelne Pakete unter „Meine Sendungen“, E-Mail nach der Zustellung (gelesen am 17. November 2026)
+- [Österreichische Post: Pakete empfangen, wo Sie wollen](https://www.post.at/p/a/paketumleitung) – Umleitung, kostenlos, 3 Werktage, einzelne Pakete unter „Meine Sendungen“, E-Mail nach der Zustellung
 - [Österreichische Post: Postempfangsbox](https://www.post.at/p/c/empfangsbox) – Empfangsbox
 - [Österreichische Post: Gefahren im Internet](https://www.post.at/i/c/gefahren-im-internet) – gefälschte SMS und Zettel
 - [Österreichische Post: Jahresfinanzbericht 2023](https://assets.post.at/-/media/Dokumente/De/Investor-Relations/Geschaefts--und-Nachhaltigkeitsberichte/Jahresfinanzbericht-Oesterreichische-Post-AG-2023.pdf) – Firmenname, Sitz

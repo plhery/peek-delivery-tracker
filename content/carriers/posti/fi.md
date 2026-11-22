@@ -14,10 +14,10 @@ Posti puhuu lähetystunnuksesta, ja huijausviesteistä varoittaessaan myös seur
 
 | Tunnus (keksitty) | Mikä se on |
 | --- | --- |
-| `JJFI12345678901234567` | Postin paketti: `JJFI` ja 17 numeroa, yhteensä 21 merkkiä. |
-| `RR000000005FI` | Suomesta lähtenyt postilähetys kansainvälisessä muodossa: kaksi kirjainta, yhdeksän numeroa ja `FI`. |
-| `RR000000005CN` | Ulkomailta tuleva lähetys säilyttää lähtömaan tunnuksen. Tämä päättyy kirjaimiin `CN`, eli lähetys on jätetty China Postin kuljetettavaksi. |
-| `00064000000000000002` | 20-numeroinen SSCC-viivakoodi. `64` kolmen ensimmäisen numeron jälkeen viittaa Suomeen. |
+| `JJFI63482917465283914` | Postin paketti: `JJFI` ja 17 numeroa, yhteensä 21 merkkiä. |
+| `RR482917367FI` | Suomesta lähtenyt postilähetys kansainvälisessä muodossa: kaksi kirjainta, yhdeksän numeroa ja `FI`. |
+| `RR482917367CN` | Ulkomailta tuleva lähetys säilyttää lähtömaan tunnuksen. Tämä päättyy kirjaimiin `CN`, eli lähetys on jätetty China Postin kuljetettavaksi. |
+| `00064382917465283912` | 20-numeroinen SSCC-viivakoodi. `64` kolmen ensimmäisen numeron jälkeen viittaa Suomeen. |
 
 Poista tunnuksesta välilyönnit ja hae yksi tunnus kerrallaan.
 
@@ -82,7 +82,7 @@ Tarkka viimeinen noutopäivä on saapumisilmoituksessa.
 
 ## Postin asiakaspalvelu
 
-Postin sivuilla 22.10.2026:
+Postin sivuilla:
 
 - **Puhelin:** 0100 5577. Puhelu maksaa matkapuhelin- tai paikallisverkkomaksun, myös jonotuksen ajalta. Aukioloajat ovat Postin asiakaspalvelusivulla.
 - **Chat:** OmaPosti-sovelluksessa.
@@ -92,9 +92,9 @@ Postin sivuilla 22.10.2026:
 
 [Peek](/) tunnistaa `JJFI`-tunnuksen Postin tunnukseksi heti. Postin linkki, jossa on `/seuranta/`, `/tracking/` tai `/uppfoljning/` (myös esimerkiksi `/en/tracking/`) ja tunnus, ohjaa Postille minkä tahansa tunnuksen. Postinumeroa ei tarvita.
 
-`FI`-loppuisesta postitunnuksesta Peek kysyy ensin Postilta (ja Chronopostilta) ja nimeää Postin, kun Posti tuntee tunnuksen. Jos Posti ei vielä tunne sitä, näet tekstin "Not found at … yet. Peek will keep checking after you add it." Peek-tilille lisätyn paketin Peek tarkistaa ensimmäiset 6 tuntia tunnin välein ja sen jälkeen yhä harvemmin. Ilman tiliä tarkistukset loppuvat 6 tunnin kuluttua, ellet ota käyttöön ilmoitusta "Notify me when it’s found": silloin Peek tarkistaa paketin kerran päivässä, kunnes lisäyksestä on kulunut 30 päivää. Jos tarkistusnumero ei täsmää, Peek ei kysy Postilta: valitse Posti painikkeella "Change". SSCC-koodista Peek kysyy Postilta ja muilta yhtiöiltä, joiden muotoon koodi sopii; jos useampi niistä tuntee sen, valitse itse. Ulkomaisen tunnuksen saat Postille "Change"-painikkeella tai posti.fi:n seurantalinkillä, ja osan kansainvälisistä paketeista Peek seuraa itse Postille asti.
+`FI`-loppuisesta postitunnuksesta Peek kysyy ensin Postilta (ja Chronopostilta) ja nimeää Postin, kun Posti tuntee tunnuksen. Jos Posti ei vielä tunne sitä, näet tekstin "Not found at … yet. Peek will keep checking after you add it." Peek-tilille lisätyn paketin Peek tarkistaa ensimmäiset 6 tuntia tunnin välein ja sen jälkeen yhä harvemmin. Ilman tiliä tarkistukset loppuvat 6 tunnin kuluttua, ellet ota käyttöön ilmoitusta "Notify me when it’s found": silloin Peek tarkistaa paketin kerran päivässä, kunnes lisäyksestä on kulunut 30 päivää. Jos tarkistusnumero ei täsmää, Peek ei kysy Postilta: valitse Posti painikkeella "Change". SSCC-koodista Peek kysyy Postilta ja muilta yhtiöiltä, joiden muotoon koodi sopii. Ulkomaisen tunnuksen saat Postille "Change"-painikkeella tai posti.fi:n seurantalinkillä, ja osan kansainvälisistä paketeista Peek seuraa itse Postille asti.
 
-Peek lukee Postin seurannan englanniksi, joten tapahtumat näkyvät englanninkielisinä riveinä, kuten `Item is ready for a pick up` (paketti odottaa noutoa) tai `Item accepted from transport` (paketti on yhä matkalla, sanamuodosta huolimatta). Jos Posti selittää tapahtumaa, selitys on rivin perässä. Peek näyttää myös skannausten paikkakunnat kartalla, painon, mitat sekä noutopisteen nimen ja osoitteen. Ulkomaisten skannausten paikkamerkintä ULKOMAILLA jää pois. Peek tarkistaa paketin jopa 10 minuutin välein, jakelussa olevan jopa 2 minuutin välein (jakelupäivänä Suomen aikaa kello 6 alkaen ja vain silloin, kun tieto tulee Postin omasta seurannasta; seurantapalvelujen kautta 15 minuutin välein), ja voi ilmoittaa muutoksista. Jos uutta tietoa ei tule kahteen päivään (tai 12 tuntiin, kun paketti on vasta rekisteröity tai kuljetusyhtiön vastaanottama), Peek tarkistaa sen enää kerran tunnissa. Noutokoodi ja osoitteesi jäävät pois, eikä Peek näytä arvioitua toimitusaikaa tai lähettäjää. Usean paketin yhteistä tunnusta se ei seuraa, ja vanhat lähetykset näkyvät löytymättöminä.
+Peek lukee Postin seurannan englanniksi, joten tapahtumat näkyvät englanninkielisinä riveinä, kuten `Item is ready for a pick up` (paketti odottaa noutoa) tai `Item accepted from transport` (paketti on yhä matkalla, sanamuodosta huolimatta). Jos Posti selittää tapahtumaa, selitys on rivin perässä. Peek näyttää myös skannausten paikkakunnat kartalla, painon, mitat sekä noutopisteen nimen ja osoitteen. Ulkomaisten skannausten paikkamerkintä ULKOMAILLA jää pois. Kun paketti on auki näytölläsi, tai jakelupäivänä, jos ilmoitukset ovat päällä, Peek tarkistaa paketin jopa 10 minuutin välein, jakelussa olevan jopa 2 minuutin välein (jakelupäivänä Suomen aikaa kello 6 alkaen ja vain silloin, kun tieto tulee Postin omasta seurannasta), muuten kerran tunnissa. Peek voi myös ilmoittaa muutoksista. Jos uutta tietoa ei tule kahteen päivään (tai 12 tuntiin, kun paketti on vasta rekisteröity tai kuljetusyhtiön vastaanottama), Peek tarkistaa sen enää kerran tunnissa. Noutokoodi ja osoitteesi jäävät pois, eikä Peek näytä arvioitua toimitusaikaa tai lähettäjää. Usean paketin yhteistä tunnusta se ei seuraa, ja vanhat lähetykset näkyvät löytymättöminä.
 
 ## Kysymyksiä Postin seurannasta
 

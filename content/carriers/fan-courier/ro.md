@@ -14,9 +14,9 @@ AWB-ul este numărul documentului de transport, cel după care urmărești colet
 
 | Număr (inventat) | Ce este |
 | --- | --- |
-| `7000000000000` | AWB FAN Courier: 13 cifre, fără litere. |
-| `1ABC000000001` | AWB [Sameday](carrier:sameday): începe cu `1`, urmat de litere și cifre. Nu e de la FAN. |
-| `RR000000005RO` | Trimitere Poșta Română: două litere, nouă cifre și `RO`. Nu e de la FAN. |
+| `7000481927364` | AWB FAN Courier: 13 cifre, fără litere. |
+| `1ABC482917365` | AWB [Sameday](carrier:sameday): începe cu `1`, urmat de litere și cifre. Nu e de la FAN. |
+| `RR482917367RO` | Trimitere Poșta Română: două litere, nouă cifre și `RO`. Nu e de la FAN. |
 
 De unde iei AWB-ul și unde mai vezi coletul:
 
@@ -83,13 +83,13 @@ Pe site-ul FAN, la 23 octombrie 2026:
 - **ȘteFAN**, asistentul virtual de pe fancourier.ro, disponibil oricând.
 - **Curierul**, doar în ziua livrării, cu numărul din aplicație sau din linkul din SMS.
 
-> FAN avertizează că a crescut numărul tentativelor de fraudă care îi folosesc numele. Nu deschide linkuri care îți cer datele bancare.
+> FAN avertizează că a crescut numărul tentativelor de fraudă care îi folosesc numele. Nu deschide linkuri false care îți cer datele bancare.
 
 ## Urmărirea coletelor FAN Courier cu Peek
 
-[Peek](/) întreabă direct FAN Courier despre un număr de 13 cifre care începe cu `2`, `3`, `4`, `5` sau `7`, împreună cu Delhivery, ale cărui numere pot arăta la fel, și cu [Econt](carrier:econt), dacă regiunea telefonului sau conexiunea ta e din Bulgaria. Dacă doar FAN îl are, vezi „FAN Courier has this parcel.”; dacă îl are și alt curier, alegi tu. Un AWB de altă formă nu e recunoscut: lipește-l oricum (Peek urmărește peste 4.500 de curieri), apasă „Change” și alege „FAN Courier”. Poți lipi și adresa paginii de tracking a FAN, în română (`/awb-tracking/`) sau în engleză (`/en/awb-track/`), cu `tracking=` sau `awb=` urmat de AWB, ori cu un AWB de 13 cifre după `/awb-tracking/`: Peek o trimite direct la FAN Courier.
+[Peek](/) întreabă direct FAN Courier despre un număr de 13 cifre care începe cu `2`, `3`, `4`, `5` sau `7`, și iMile pentru unul care începe cu `3`. Dacă regiunea telefonului sau conexiunea ta e din Bulgaria, întreabă și [Econt](carrier:econt), iar dacă e din India, Delhivery, pentru numerele pe care le ia regula Delhivery. Dacă doar FAN îl are, vezi „FAN Courier has this parcel.”; dacă îl are și alt curier, alegi tu. Un AWB de altă formă nu e recunoscut: lipește-l oricum (Peek urmărește peste 4.500 de curieri), apasă „Change” și alege „FAN Courier”. Poți lipi și adresa paginii de tracking a FAN, în română (`/awb-tracking/`) sau în engleză (`/en/awb-track/`), cu `tracking=` sau `awb=` urmat de AWB, ori cu un AWB de 13 cifre după `/awb-tracking/`: Peek o trimite direct la FAN Courier.
 
-Peek citește trackingul FAN în engleză, așa că vezi formulările englezești ale FAN, de exemplu `Shipment sorted` sau `Recipient notified` (adică `Avizat`); `Shipment picked up` apare ca „Shipment collected”. Pagina FAN arată doar statusul și cele patru etape, pe când Peek arată fiecare scanare, cu localitatea și ora. FAN nu indică fusul orar al scanărilor, așa că Peek le citește orele ca ora României și ți le arată în fusul orar al dispozitivului; pe peektracker.com și în aplicațiile pentru iPhone și Android, istoricul se încheie cu un rând în engleză care îl numește („Times are in your time zone: …”). Peek verifică coletul cel mult o dată la 10 minute, cel mult o dată la 2 minute cât e în livrare (doar în ziua aceea, de la ora 6:00, ora României, și cât timp răspunde trackingul FAN însuși; prin servicii de urmărire, la fiecare 15 minute), și te poate anunța când se schimbă statusul. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră.
+Peek citește trackingul FAN în engleză, așa că vezi formulările englezești ale FAN, de exemplu `Shipment sorted` sau `Recipient notified` (adică `Avizat`); `Shipment picked up` apare ca „Shipment collected”. Pagina FAN arată doar statusul și cele patru etape, pe când Peek arată fiecare scanare, cu localitatea și ora. FAN nu indică fusul orar al scanărilor, așa că Peek le citește orele după localitatea indicată (ora României pentru o localitate din România) și ți le arată în fusul orar al dispozitivului; pe peektracker.com și în aplicațiile pentru iPhone și Android, istoricul se încheie cu un rând în engleză care îl numește („Times are in your time zone: …”). Cât ai coletul deschis sau, în ziua livrării, cu notificările pornite, Peek îl verifică cel mult o dată la 10 minute, cel mult o dată la 2 minute cât e în livrare (doar în ziua aceea, de la ora 6:00, ora României, și cât timp răspunde trackingul FAN însuși); altfel, o dată pe oră. Te poate anunța când se schimbă statusul. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră.
 
 Peek nu arată o zi estimată de livrare și nici numele FANbox-ului, și lasă deoparte numele destinatarului, conținutul, greutatea și plata. Returul și redirecționarea merg cu alt AWB, pe care Peek nu-l urmează singur: AWB-ul inițial nu apare niciodată ca returnat. Ca să urmărești coletul mai departe, adaugă în Peek și AWB-ul nou („Număr AWB return” sau „Număr AWB redirecționare” pe pagina FAN). Peek nu poate contacta FAN sau magazinul în locul tău.
 

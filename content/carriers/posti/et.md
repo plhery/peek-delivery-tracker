@@ -14,10 +14,10 @@ SmartPosti nimetab jälgimisnumbrit pakikoodiks, kuid koodi kuju oma lehtedel ei
 
 | Kood (välja mõeldud) | Mis see on |
 | --- | --- |
-| `JJFI00000000000000000` | Posti kood: `JJFI` ja 17 numbrit, kokku 21 märki. |
-| `00064000000000000002` | 20-kohaline SSCC-kood, mis algab `00`-ga ja mille neljas ja viies number on `64`. |
-| `RR000000005FI` | Kaks tähte, üheksa numbrit ja `FI`: Soome Posti kood rahvusvahelises postivormingus. |
-| `RR000000005CN` | Välismaalt tuleval pakil võib olla saatjariigi posti number. `CN` lõpus tähendab, et pakk postitati Hiinas. |
+| `JJFI63482917465283914` | Posti kood: `JJFI` ja 17 numbrit, kokku 21 märki. |
+| `00064382917465283912` | 20-kohaline SSCC-kood, mis algab `00`-ga ja mille neljas ja viies number on `64`. |
+| `RR482917367FI` | Kaks tähte, üheksa numbrit ja `FI`: Soome Posti kood rahvusvahelises postivormingus. |
+| `RR482917367CN` | Välismaalt tuleval pakil võib olla saatjariigi posti number. `CN` lõpus tähendab, et pakk postitati Hiinas. |
 
 Kui sinu pakikood on muu kujuga, kleebi see ikkagi: Peek jälgib üle 4500 vedaja ja Posti saad valida ise (vt allpool).
 
@@ -65,7 +65,7 @@ Peekis on sammud Posti ingliskeelses sõnastuses (vt allpool).
 
 SmartPosti Eesti lehed ei kirjelda, kuidas SmartPosti tollivormistust korraldab. Maksu- ja Tolliameti (MTA) järgi tuleb kõik väljastpoolt ELi saabuvad pakid deklareerida. Seda saad teha, kui posti- või kullerettevõte on saatnud sulle teate, et pakk vajab deklareerimist. Vaja on teatel olevat jälgimisnumbrit ja MRN-numbrit (kui see puudub, küsi teate saatjalt) ning kauba väärtust tõendavat dokumenti, näiteks arvet. Deklaratsiooni esitad ise e-MTAs või lased selle teha posti- või kullerettevõttel või tolliagentuuril, kellele tasud enne paki kättesaamist teenustasu ja maksud. Tollikontroll võib MTA sõnul võtta mõnest päevast paari kuuni.
 
-**Maksud.** Kuni 150-eurone tellitud saadetis maksustatakse käibemaksuga (üldjuhul 24%) ja alates 1. juulist 2026 ka 3-eurose tollimaksuga iga kaubaartikli kohta. Sama kaubakoodiga kaubad võivad olla üks kaubaartikkel. Alates 1. novembrist 2026 võetakse iga kaubaartikli kohta ka 2-eurost käitlustasu, olenemata saadetise väärtusest. Eraisikult eraisikule saadetud kingitus on maksuvaba kuni 45 euroni ning sellele ei rakendu 3-eurone tollimaks ega käitlustasu.
+**Maksud.** Kuni 150-eurone tellitud saadetis maksustatakse käibemaksuga (üldjuhul 24%) ja alates 1. juulist 2026 ka 3-eurose tollimaksuga iga kaubaartikli kohta. Sama kaubakoodiga kaubad võivad olla üks kaubaartikkel. Alates 1. novembrist 2026 võetakse internetiostude puhul iga kaubaartikli kohta ka 2-eurost käitlustasu, olenemata saadetise väärtusest. Eraisikult eraisikule saadetud kingitus on maksuvaba kuni 45 euroni ning sellele ei rakendu 3-eurone tollimaks ega käitlustasu.
 
 **IOSS.** Kui tellisid IOSS-erikorraga liitunud e-poest, deklareerib paki üldjuhul müüja või tema esindaja, näiteks posti- või kullerettevõte. Alates 1. juulist 2026 ei saa eraisik IOSS-saadetist ise deklareerida.
 
@@ -87,7 +87,7 @@ SmartPosti ei saada linke tollivormistus- ega käitlemistasu maksmiseks ja MTA e
 
 ## SmartPosti klienditeenindus
 
-Nii olid SmartPosti klienditeeninduse kontaktid smartposti.ee lehel 26. oktoobril 2026:
+SmartPosti klienditeeninduse kontaktid smartposti.ee lehel:
 
 - **Telefon:** +372 60 11 000 (kohaliku kõne paketipõhine minutihind, ka ootejärjekorras)
 - **E-post:** klienditeenindus@smartposti.com
@@ -101,13 +101,13 @@ Nii olid SmartPosti klienditeeninduse kontaktid smartposti.ee lehel 26. oktoobri
 
 [Peek](/) tunneb `JJFI`-koodi kohe ära kui Posti koodi. Toimivad ka SmartPosti jälgimislingid: smartposti.ee `/saadetise-jalgimine/` või `/en/tracking/` ja kood ning smartposti.ee `/receiving/parcel-tracking` ja itella.ee `/private-customer/track-shipment` lingid, milles on `trackingCode=`. Siis küsib Peek koodi Postilt, olgu see mis kujul tahes. Venekeelse jälgimislehe linki Peek ei loe: kleebi sealt ainult kood. Sihtnumbrit pole vaja.
 
-`FI`-lõpulise postikoodi puhul küsib Peek Postilt ja [Chronopostilt](carrier:chronopost), ülaltoodud kujuga SSCC-koodi puhul Postilt ning ka Matkahuoltolt, Swiss Post Cargolt, PostNordilt ja NZ Postilt. Kui Posti tunneb koodi, näed teksti „Posti has this parcel.“ Kui mitu vedajat tunneb sama koodi, vali ise. Kui veel keegi ei tunne, näed teksti „Not found at … yet. Peek will keep checking after you add it.“ ja Peek otsib lisatud pakki edasi. Peeki kontole lisatud pakki kontrollitakse esimesed 6 tundi kord tunnis, seejärel järjest harvemini; ilma kontota lõpeb kontrollimine 6 tunni pärast, kui sa just ei lülita sisse valikut „Notify me when it’s found“: siis kontrollitakse pakki kord päevas, kuni lisamisest on möödas 30 päeva.
+`FI`-lõpulise postikoodi puhul küsib Peek Postilt ja [Chronopostilt](carrier:chronopost), ülaltoodud kujuga SSCC-koodi puhul Postilt ning ka Matkahuoltolt, Swiss Post Cargolt, PostNordilt ja NZ Postilt. Kui Posti tunneb koodi, näed teksti „Posti has this parcel.“ Kui veel keegi ei tunne, näed teksti „Not found at … yet. Peek will keep checking after you add it.“ ja Peek otsib lisatud pakki edasi. Peeki kontole lisatud pakki kontrollitakse esimesed 6 tundi kord tunnis, seejärel järjest harvemini; ilma kontota lõpeb kontrollimine 6 tunni pärast, kui sa just ei lülita sisse valikut „Notify me when it’s found“: siis kontrollitakse pakki kord päevas, kuni lisamisest on möödas 30 päeva.
 
 Välismaa postinumbriga pakki jälgib Peek saatjariigi posti juures ja Eestis võib seda edasi otsida Omnivast, SmartPostist mitte. Kui tead, et Eestis toob paki SmartPosti, või kui SmartPosti kood on muu kujuga, vajuta „Change“ (lisatud pakil „Change carrier“) ja vali Posti või kleebi SmartPosti jälgimislink. Otsingusse võid kirjutada ka „SmartPosti“: Posti juures on siis kirjas „Also called SmartPosti“.
 
 Peek näitab pakki ainult siis, kui Posti vastuses on üks pakk täpselt sama koodiga, mille sisestasid, nii et mitme paki ühist koodi Peek ei jälgi. SmartPosti Eesti koodide puhul pole see ette kindel: kui Peek pakki ei leia, jälgi seda smartposti.ee lehel.
 
-Peek loeb Posti andmeid inglise keeles, nii et sammud on ingliskeelsed, näiteks `Item is ready for a pick up` (pakk ootab väljavõtmist) või `Item accepted from transport` (pakk on sõnastusest hoolimata endiselt teel). Peek näitab ka sammude asukohti kaardil, paki kaalu ja mõõte ning pakiautomaati või pakipunkti, kus pakk ootab. Uksekoodi, sinu aadressi, eeldatavat tarneaega ega saatjat Peek ei näita, nii et kapi avamiseks on sul vaja SmartPosti SMSi. Peek kontrollib pakki kuni iga 10 minuti järel (kui pakk on kulleriga teel, kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Posti enda jälgimine vastab; jälgimisteenuste kaudu iga 15 minuti järel) ning võib muutustest teada anda. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Vana pakk võib jääda leidmata. Peek ei saa sinu eest SmartPosti ega e-poega ühendust võtta.
+Peek loeb Posti andmeid inglise keeles, nii et sammud on ingliskeelsed, näiteks `Item is ready for a pick up` (pakk ootab väljavõtmist) või `Item accepted from transport` (pakk on sõnastusest hoolimata endiselt teel). Peek näitab ka sammude asukohti kaardil, paki kaalu ja mõõte ning pakiautomaati või pakipunkti, kus pakk ootab. Uksekoodi, sinu aadressi, eeldatavat tarneaega ega saatjat Peek ei näita, nii et kapi avamiseks on sul vaja SmartPosti SMSi. Kui pakk on sul ekraanil lahti või on tarnepäev ja teavitused on sees, kontrollib Peek pakki kuni iga 10 minuti järel (kui pakk on kulleriga teel, kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Posti enda jälgimine vastab), muidu kord tunnis. Peek võib ka muutustest teada anda. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Vana pakk võib jääda leidmata. Peek ei saa sinu eest SmartPosti ega e-poega ühendust võtta.
 
 ## Küsimused SmartPosti paki jälgimise kohta
 

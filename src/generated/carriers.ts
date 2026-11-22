@@ -4464,6 +4464,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "tracciamento-heppner",
+      "title": "Tracciamento Heppner: numero, CAP e fasce di consegna",
+      "name": "Heppner",
+      "color": "#005baa"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-tracciamento",
@@ -5450,6 +5458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "seguimiento-heppner",
+      "title": "Seguimiento Heppner: número, código postal y entregas",
+      "name": "Heppner",
+      "color": "#005baa"
+    },
+    {
       "id": "geodis",
       "catalog": "geodis",
       "slug": "geodis-seguimiento",
@@ -6434,6 +6450,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Posti: código JJFI, estados, cacifos e contactos",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "rastreio-heppner",
+      "title": "Rastreio Heppner: número, código postal e entregas",
+      "name": "Heppner",
+      "color": "#005baa"
     },
     {
       "id": "geodis",
@@ -7446,6 +7470,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "sledzenie-heppner",
+      "title": "Śledzenie Heppner: numer, kod pocztowy i terminy dostawy",
+      "name": "Heppner",
+      "color": "#005baa"
     },
     {
       "id": "geodis",

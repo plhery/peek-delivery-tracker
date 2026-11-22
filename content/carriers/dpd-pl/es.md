@@ -46,9 +46,9 @@ Ojo con el término inglés *collected*: en `Parcel collected by pickup point` s
 
 **Avisos y cambios.** En Polonia la entrega habitual es al siguiente día laborable (garantizada en 3 días laborables en servicio nacional; los sábados solo si el remitente contrató el suplemento *Sobota*). Con DPD Predict recibes la franja por correo o SMS, y el día de reparto puedes ver al mensajero en el mapa y su teléfono en DPD Mobile. Una vez recogido el envío, DPD Mobile o [Moja Paczka](https://mojapaczka.dpd.com.pl/login) (con número de paquete y PIN) permiten aplazar la entrega hasta 3 días laborables, cambiar dirección, elegir vecino o lugar seguro, desviar a un punto DPD Pickup o rechazarlo. Los envíos de ciertos remitentes (como Temu, AliExpress y Shein) solo admiten desvío a un punto DPD Pickup dentro de la ruta del repartidor.
 
-**Puntos y taquillas DPD Pickup.** DPD suma más de 35.000 puntos y taquillas en Polonia (incluidas más de 12.500 estaciones automáticas y comercios como Żabka, Lidl o Auchan). El paquete aguarda **2 días laborables completos**, sin opción de prórroga antes de devolverse. Para abrir una taquilla basta con DPD Mobile o teclear en el panel el código de recogida recibido por correo (otra persona puede usarlo si no hay que firmar documentos). Si el punto elegido está lleno (`Not delivered to pickup point - overloaded`), DPD lo desvía a uno cercano activo y te avisa. Los envíos *Allegro Delivery* solo se ven en las herramientas de Allegro, no en DPD Mobile. Más detalles en [entrega fallida](guide:missed-delivery).
+**Puntos y taquillas DPD Pickup.** DPD suma más de 35.000 puntos y taquillas en Polonia (incluidas más de 12.500 estaciones automáticas y comercios como Żabka, Lidl o Auchan). El paquete aguarda **2 días laborables completos**, sin opción de prórroga antes de devolverse. Para abrir una taquilla basta con DPD Mobile o teclear en el panel el código de recogida recibido por correo (otra persona puede usarlo si no hay que firmar documentos). Si el punto elegido está lleno (`Not delivered to pickup point - overloaded`), DPD lo desvía a uno cercano activo y te avisa. Más detalles en [entrega fallida](guide:missed-delivery).
 
-**Paquetes desde Polonia hacia España.** Tras `Sent outside Poland`, la entrega en España pasa al socio del grupo Geopost —[SEUR](carrier:seur)— con el mismo código de 14 cifras. Entre Polonia y **España peninsular y Baleares** no se pagan aranceles aduaneros gracias a la unión aduanera de la UE; ten en cuenta que Canarias queda fuera del ámbito del IVA comunitario (aplica IGIC) y Ceuta y Melilla están fuera tanto del territorio aduanero como del área de IVA de la UE. Consulta [paquetes retenidos en aduanas](guide:customs) si tu envío cruza esas fronteras fiscales.
+**Paquetes desde Polonia hacia España.** Tras `Sent outside Poland`, entrega la red DPD del país de destino, y el seguimiento de DPD Polonia sigue mostrando sus escaneos hasta la entrega. Entre Polonia y **España peninsular y Baleares** no se pagan aranceles aduaneros gracias a la unión aduanera de la UE; ten en cuenta que Canarias queda fuera del ámbito del IVA comunitario (aplica IGIC) y Ceuta y Melilla están fuera tanto del territorio aduanero como del área de IVA de la UE. Consulta [paquetes retenidos en aduanas](guide:customs) si tu envío cruza esas fronteras fiscales.
 
 ## Paquete de DPD Polonia retrasado, perdido o dañado
 
@@ -65,13 +65,13 @@ DPD resuelve en un máximo de **30 días naturales** desde que la reclamación e
 - **Soporte técnico de taquillas DPD Pickup**: `+48 22 571 52 52`, de lunes a viernes de 8:00 a 20:00 y sábados de 8:00 a 14:00.
 - **Correo y chat**: las páginas de contacto de DPD Polonia no publican correo de atención ni chat en vivo.
 
-> DPD Polonia alerta sobre SMS y correos falsos que piden recargos por exceso de peso o error en la dirección: DPD nunca envía enlaces de pago por SMS ni por correo electrónico. Si hiciste clic, cambia tus contraseñas, avisa a tu banco e informa al Contact Center.
+> DPD Polonia alerta sobre SMS y correos falsos que piden recargos por exceso de peso o error en la dirección: DPD Polonia nunca envía enlaces para pagar recargos por SMS ni por correo electrónico. Si hiciste clic, cambia tus contraseñas, avisa a tu banco e informa al Contact Center.
 
 ## Seguir un paquete de DPD Polonia con Peek
 
 [Peek](/) identifica al instante como DPD Poland cualquier código de 13 dígitos y una letra (`4829105736491A`). Con 14 dígitos empezados por `13` (`13482910573649`), comprueba los transportistas compatibles priorizando a DPD Poland y muestra «DPD Poland tiene este paquete.» cuando su sistema reconoce el envío; en otros códigos de 14 cifras puedes elegir DPD Poland pulsando «Cambiar» o «Cambiar transportista». También admite enlaces de `tracktrace.dpd.com.pl` o `tt.dpd.com.pl` (`p1=`) y de `dpd.com/pl` (`parcelNumber=`), pero rechaza los códigos de envío de 9 cifras («no emite números como este»).
 
-Peek lee la página inglesa de DPD Polonia y muestra el estado, el historial y la hora de entrega. Las filas con código de delegación o punto Pickup polaco se leen en hora de Varsovia (`Europe/Warsaw`) y se convierten a tu zona («Horas en tu zona horaria: {{zone}}.»); las filas sin código polaco (como el alta inicial o escaneos en otro país) conservan su hora local sin zona asumida. El buscador no informa ciudad del escaneo, fecha prevista, remitente ni peso, y Peek descarta el nombre del destinatario, la dirección del punto y el número de bultos. Peek no continúa el seguimiento automáticamente tras `Sent outside Poland` ni guarda el nuevo número generado en `Parcel return`.
+Peek lee la página inglesa de DPD Polonia y muestra el estado, el historial y la hora de entrega. Todas las filas, también el alta inicial y los escaneos en otro país, se leen en hora de Varsovia (`Europe/Warsaw`) y se convierten a tu zona («Horas en tu zona horaria: {{zone}}.»). El buscador no informa ciudad del escaneo, fecha prevista, remitente ni peso, y Peek descarta el nombre del destinatario, la dirección del punto y el número de bultos. Tras `Sent outside Poland`, Peek sigue leyendo el seguimiento de DPD Polonia, que muestra los escaneos de la red DPD del país de destino hasta la entrega, sin consultar el rastreo de esa filial; no guarda el nuevo número generado en `Parcel return`.
 
 Mientras mantienes el paquete abierto en pantalla, o el día de reparto con notificaciones activas, Peek consulta el seguimiento directo hasta cada 10 minutos, y hasta cada 2 minutos cuando pasa a «En reparto» (ese día desde las 6:00 hora local mientras responda directamente el portal de DPD Polonia); el resto del tiempo, y tras dos días sin novedades (12 horas en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Mediante servicios de seguimiento comprueba hasta cada 15 minutos ese día en «En reparto» bajo las mismas condiciones, y si no cada hora, o cada 3 horas tras un día sin cambios. Puedes activar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
@@ -91,7 +91,7 @@ No: tanto `tracktrace.dpd.com.pl` como Peek solo piden el código de 14 caracter
 
 ### ¿Cómo sigo mi pedido cuando aparece `Sent outside Poland`?
 
-Introduce el mismo número de 14 cifras en el transportista de Geopost del país de destino —por ejemplo, en [SEUR](carrier:seur) si viaja a España.
+No hace falta hacer nada: Peek sigue leyendo el seguimiento de DPD Polonia, que muestra los escaneos de la red DPD del país de destino hasta la entrega. Peek no consulta el rastreo de la filial de DPD de ese país.
 
 :::sources
 - [DPD Polska: FAQ (polaco)](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – códigos de 14 caracteres, entrega en 1–3 días laborables, cambios y custodia de 2 días laborables
@@ -101,7 +101,7 @@ Introduce el mismo número de 14 cifras en el transportista de Geopost del país
 - [DPD Polska: Moja Paczka](https://mojapaczka.dpd.com.pl/login) – gestión de la entrega con código de paquete y PIN
 - [DPD Polska: Receive your parcel](https://www.dpd.com/pl/en/receive-your-parcel/) – avisos por correo y SMS con DPD Predict
 - [DPD Polska: DPD Pickup](https://www.dpd.com/pl/pl/dpd-pickup/) – más de 35.000 puntos y taquillas (Żabka, Lidl, Auchan)
-- [DPD Polska: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – código de recogida en teclado y nota sobre Allegro Delivery
+- [DPD Polska: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – código de recogida en teclado
 - [DPD Polska: Submit a claim](https://www.dpd.com/pl/en/moje-dpd/submit-a-claim-at-dpd/) – pérdida tras 30 días y resolución en 30 días
 - [DPD Polska: Elektroniczny protokół szkody](https://protokol.dpd.com.pl/) – parte de daños en línea
 - [DPD Polska: Fałszywe SMS-y i e-maile](https://www.dpd.com/pl/pl/o-dpd/falszywe-maile/) – advertencia frente a enlaces de pago falsos

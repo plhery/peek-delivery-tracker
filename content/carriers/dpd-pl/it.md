@@ -18,7 +18,7 @@ DPD Polonia usa codici collo di 14 caratteri: 13 cifre seguite da una lettera pe
 | `13482910573649` | 14 cifre che iniziano con `13`: numero di pacco numerico di DPD Polonia. |
 | `482910573` | Codice di spedizione a 9 caratteri (*kod nadania*) usato dal mittente agli armadietti: non è un codice tracciabile in Peek. |
 
-Quattordici cifre sono usate anche da [BRT](carrier:brt) (partner Geopost in Italia), [DPD Switzerland](carrier:dpd-ch), [DPD Germany](carrier:dpd-de), [DPD UK](carrier:dpd-uk), [Chronopost](carrier:chronopost) o [SEUR](carrier:seur): controlla quale corriere indica il venditore. Se il sito risponde `There is no trace for this parcel`, il numero è errato o non ancora acquisito: DPD consiglia di riprovare la mattina successiva alla spedizione.
+Quattordici cifre sono usate anche da [BRT](carrier:brt), [DPD Switzerland](carrier:dpd-ch), [DPD Germany](carrier:dpd-de), [DPD UK](carrier:dpd-uk), [Chronopost](carrier:chronopost) o [SEUR](carrier:seur): controlla quale corriere indica il venditore. Se il sito risponde `There is no trace for this parcel`, il numero è errato o non ancora acquisito: DPD consiglia di riprovare la mattina successiva alla spedizione.
 
 ## Stati DPD Polonia in inglese: cosa significano
 
@@ -46,9 +46,9 @@ Attenzione al verbo inglese *collected*: in `Parcel collected by pickup point` v
 
 **Avvisi e modifiche.** In Polonia la consegna avviene di norma il giorno lavorativo successivo (garantita entro 3 giorni lavorativi sul territorio nazionale; il sabato solo con opzione *Sobota*). Con DPD Predict ricevi la fascia oraria via e-mail o SMS e il giorno della consegna vedi il corriere sulla mappa e il suo telefono in DPD Mobile. Dopo la presa in carico, su DPD Mobile o [Moja Paczka](https://mojapaczka.dpd.com.pl/login) (con numero pacco e PIN) puoi spostare la consegna fino a 3 giorni lavorativi, cambiare indirizzo, indicare un vicino o un luogo sicuro, deviare su un punto DPD Pickup o rifiutare il collo. I pacchi di alcuni mittenti (tra cui Temu, AliExpress e Shein) possono essere deviati solo verso un punto DPD Pickup lungo il giro dell'autista.
 
-**Punti e locker DPD Pickup.** La rete in Polonia supera i 35.000 punti e armadietti (oltre 12.500 locker automatici e catene come Żabka, Lidl e Auchan). La giacenza dura **2 giorni lavorativi interi** senza possibilità di proroga prima del reso. Al locker ritiri tramite DPD Mobile o digitando sulla tastiera il codice ricevuto via e-mail (cedibile a un delegato se non occorre firmare documenti). Se il punto scelto è pieno (`Not delivered to pickup point - overloaded`), DPD indirizza il pacco a un punto attivo vicino avvisandoti. Le spedizioni *Allegro Delivery* compaiono solo negli strumenti di Allegro, non in DPD Mobile. Approfondisci in [consegna mancata](guide:missed-delivery).
+**Punti e locker DPD Pickup.** La rete in Polonia supera i 35.000 punti e armadietti (oltre 12.500 locker automatici e catene come Żabka, Lidl e Auchan). La giacenza dura **2 giorni lavorativi interi** senza possibilità di proroga prima del reso. Al locker ritiri tramite DPD Mobile o digitando sulla tastiera il codice ricevuto via e-mail (cedibile a un delegato se non occorre firmare documenti). Se il punto scelto è pieno (`Not delivered to pickup point - overloaded`), DPD indirizza il pacco a un punto attivo vicino avvisandoti. Approfondisci in [consegna mancata](guide:missed-delivery).
 
-**Pacchi dalla Polonia verso Italia e Svizzera.** Dopo `Sent outside Poland`, il trasporto prosegue con il partner Geopost del Paese d'arrivo — in Italia [BRT](carrier:brt), in Svizzera [DPD Switzerland](carrier:dpd-ch) — con lo stesso codice di 14 cifre. Tra Polonia e Italia non ci sono dazi doganali grazie all'unione doganale UE (restano fuori Livigno per dogana e IVA, e Campione d'Italia e le acque italiane del Lago di Lugano per l'IVA UE). Verso la **Svizzera**, fuori dall'UE, l'UDSC (BAZG) applica l'IVA all'importazione dell'8,1 % (2,6 % ridotta per libri o alimentari), ma non riscuote tributi inferiori a 5 CHF; vedi [pacco fermo in dogana](guide:customs).
+**Pacchi dalla Polonia verso Italia e Svizzera.** Dopo `Sent outside Poland`, consegna la rete DPD del Paese d'arrivo, e il tracking di DPD Polonia continua a mostrarne le scansioni fino alla consegna. Tra Polonia e Italia non ci sono dazi doganali grazie all'unione doganale UE (restano fuori Livigno per dogana e IVA, e Campione d'Italia e le acque italiane del Lago di Lugano per l'IVA UE). Verso la **Svizzera**, fuori dall'UE, l'UDSC (BAZG) applica l'IVA all'importazione dell'8,1 % (2,6 % ridotta per libri o alimentari), ma non riscuote tributi fino a 5 CHF; vedi [pacco fermo in dogana](guide:customs).
 
 ## Pacco DPD Polonia in ritardo, smarrito o danneggiato
 
@@ -65,13 +65,13 @@ DPD risponde entro **30 giorni di calendario** dal reclamo completo. Per i servi
 - **Assistenza tecnica locker DPD Pickup**: `+48 22 571 52 52`, dal lunedì al venerdì 8:00–20:00 e il sabato 8:00–14:00.
 - **E-mail e chat**: sulle pagine di contatto di DPD Polonia non sono presenti indirizzi e-mail clienti né chat.
 
-> DPD Polonia mette in guardia da SMS ed e-mail truffa che chiedono supplementi per sovrappeso o indirizzo errato: DPD non invia mai link di pagamento via SMS o e-mail. Se hai cliccato, cambia subito le password, avvisa la banca e contatta il Contact Center.
+> DPD Polonia mette in guardia da SMS ed e-mail truffa che chiedono supplementi per sovrappeso o indirizzo errato: DPD Polonia non invia mai link per pagare supplementi via SMS o e-mail. Se hai cliccato, cambia subito le password, avvisa la banca e contatta il Contact Center.
 
 ## Seguire un pacco DPD Polonia con Peek
 
 [Peek](/) riconosce subito come DPD Poland un codice di 13 cifre e una lettera (`4829105736491A`). Per 14 cifre che iniziano con `13` (`13482910573649`), interroga i corrieri compatibili partendo da DPD Poland e mostra «DPD Poland ha questo pacco.» appena il portale conferma il numero; per altri codici a 14 cifre puoi scegliere DPD Poland con «Cambia» o «Cambia corriere». Funzionano anche i link `tracktrace.dpd.com.pl` o `tt.dpd.com.pl` (`p1=`) e `dpd.com/pl` (`parcelNumber=`), mentre i codici d'invio a 9 cifre vengono rifiutati («non emette numeri come questo»).
 
-Peek legge il tracking inglese di DPD Polonia e mostra stato, cronologia e ora di consegna. Le righe accompagnate da un codice di filiale o punto Pickup polacco sono lette sul fuso di Varsavia (`Europe/Warsaw`) e convertite nel tuo («Orari nel tuo fuso orario: {{zone}}.»); le righe prive di codice polacco (come la registrazione iniziale o le scansioni all'estero) mantengono l'ora locale indicata. Il portale non fornisce città della scansione, data stimata, mittente né peso, e Peek scarta nome del destinatario, indirizzo del punto e numero di colli. Peek non prosegue il tracking in automatico dopo `Sent outside Poland` e non acquisisce il nuovo numero generato con `Parcel return`.
+Peek legge il tracking inglese di DPD Polonia e mostra stato, cronologia e ora di consegna. Tutte le righe, anche la registrazione iniziale e le scansioni all'estero, sono lette sul fuso di Varsavia (`Europe/Warsaw`) e convertite nel tuo («Orari nel tuo fuso orario: {{zone}}.»). Il portale non fornisce città della scansione, data stimata, mittente né peso, e Peek scarta nome del destinatario, indirizzo del punto e numero di colli. Dopo `Sent outside Poland`, Peek continua a leggere il tracking di DPD Polonia, che mostra le scansioni della rete DPD del Paese d'arrivo fino alla consegna, senza interrogare il tracking di quella società; non acquisisce il nuovo numero generato con `Parcel return`.
 
 Mentre tieni il pacco aperto sullo schermo, o nel giorno di consegna con notifiche attive, Peek controlla il tracking diretto fino a ogni 10 minuti, e fino a ogni 2 minuti quando entra «In consegna» (quel giorno dalle 6:00 ora locale finché risponde direttamente il portale DPD Polonia); negli altri momenti, e dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Tramite i servizi di tracciamento controlla fino a ogni 15 minuti in quel giorno «In consegna» alle stesse condizioni, altrimenti ogni ora, o ogni 3 ore dopo un giorno senza aggiornamenti. Puoi scegliere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
@@ -91,7 +91,7 @@ No: su `tracktrace.dpd.com.pl` e su Peek basta il codice a 14 caratteri. Il PIN 
 
 ### Come seguo una spedizione dalla Polonia in Italia dopo `Sent outside Poland`?
 
-Inserisci lo stesso numero di 14 cifre sul corriere del gruppo Geopost nel Paese di arrivo — per l'Italia [BRT](carrier:brt), per la Svizzera [DPD Switzerland](carrier:dpd-ch).
+Non serve altro: Peek continua a leggere il tracking di DPD Polonia, che mostra le scansioni della rete DPD del Paese d'arrivo fino alla consegna. Peek non interroga il tracking della società DPD di quel Paese.
 
 :::sources
 - [DPD Polska: FAQ (polacco)](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – codici di 14 caratteri, tempi di 1–3 giorni lavorativi, modifiche e sosta di 2 giorni lavorativi
@@ -101,7 +101,7 @@ Inserisci lo stesso numero di 14 cifre sul corriere del gruppo Geopost nel Paese
 - [DPD Polska: Moja Paczka](https://mojapaczka.dpd.com.pl/login) – gestione consegna con numero collo e PIN
 - [DPD Polska: Receive your parcel](https://www.dpd.com/pl/en/receive-your-parcel/) – avvisi via e-mail e SMS con DPD Predict
 - [DPD Polska: DPD Pickup](https://www.dpd.com/pl/pl/dpd-pickup/) – oltre 35.000 punti e locker (Żabka, Lidl, Auchan)
-- [DPD Polska: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – codice di ritiro su tastierino e nota Allegro Delivery
+- [DPD Polska: DPD Pickup parcel lockers](https://www.dpd.com/pl/en/dpd-polska-parcel-lockers/) – codice di ritiro su tastierino
 - [DPD Polska: Submit a claim](https://www.dpd.com/pl/en/moje-dpd/submit-a-claim-at-dpd/) – smarrimento dopo 30 giorni e decisione entro 30 giorni
 - [DPD Polska: Elektroniczny protokół szkody](https://protokol.dpd.com.pl/) – verbale di danno online
 - [DPD Polska: Fałszywe SMS-y i e-maile](https://www.dpd.com/pl/pl/o-dpd/falszywe-maile/) – avviso contro SMS ed e-mail fraudolenti

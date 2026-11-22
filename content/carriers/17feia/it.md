@@ -10,7 +10,7 @@ updated: 2026-11-21
 
 ## Codice di tracking 17FEIA: com'è fatto
 
-Peek riconosce i codici 17FEIA dalla struttura `FEI`, due lettere, dieci cifre e `YQ`: 17 caratteri in tutto. Le due lettere dopo `FEI` indicano la sede 17FEIA, come `SZ` per Shenzhen o `SH` per Shanghai. Tutti gli esempi sono inventati:
+Peek riconosce i codici 17FEIA dalla struttura `FEI`, due lettere, dieci cifre e `YQ`: 17 caratteri in tutto. Per le partenze da Shenzhen, le due lettere dopo `FEI` sono `SZ`. Tutti gli esempi sono inventati:
 
 | Codice (inventato) | Cos'è |
 | --- | --- |
@@ -72,7 +72,7 @@ Dopo lo sdoganamento all'importazione, 17FEIA affida il pacco a un corriere che 
 
 **Fermo su `The order has information pending customer confirmation.`** Se hai usato uno spedizioniere, controlla l'account o i messaggi lì. Altrimenti chiedi al venditore.
 
-**Silenzio dopo il volo.** Dopo `Flight has departed.`, possono passare giorni senza aggiornamenti. Dopo quattro giorni senza una nuova riga, Peek lo segnala («Nessun aggiornamento da quattro giorni»). Vedi [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Silenzio dopo il volo.** Dopo `Flight has departed.`, possono passare giorni senza aggiornamenti. Dopo quattro giorni senza una nuova riga, Peek lo segnala con il giorno di quella riga («Nessun aggiornamento da …»). Vedi [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Consegnato, ma non è arrivato nulla.** Controlla attorno a casa e chiedi ai vicini, poi al corriere finale e al venditore. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ Il sito web di 17FEIA ha risposto a Peek con un controllo antibot, quindi questa
 
 Per qualsiasi altro codice, come quello del corriere finale, incollalo lo stesso: Peek traccia oltre 4.500 corrieri. Quando il formato corrisponde a più corrieri senza certezza, Peek mostra «Verifica dei servizi di tracciamento…» mentre interroga le sue fonti; se non corrisponde ad alcuno, lo cerca appena lo aggiungi. Per impostare tu il corriere, tocca «Cambia» e cerca `17FEIA`, `Feia` o `一起飞`, oppure usa «Cambia corriere» su un pacco già salvato. Peek interroga 17FEIA solo per codici composti da `FEI`, due lettere, dieci cifre e due lettere: per un altro formato segnala che 17FEIA «non emette numeri come questo».
 
-Peek mostra lo stato, fino alle 100 righe più recenti nell'inglese di 17FEIA con il luogo se indicato, e il Paese di destinazione. Legge i passaggi di magazzino sull'ora di Pechino e le scansioni inoltrate con un Paese a fuso unico (o uno Stato USA a fuso unico) sull'ora locale del luogo, convertendoli nel fuso del tuo dispositivo; le righe senza luogo o fuso determinato (voli, dogana o un deposito senza Paese) mantengono l'ora scritta da 17FEIA. Peek omette la barra di avanzamento, l'origine, i CAP e il peso. 17FEIA non fornisce data prevista di consegna, nome del servizio, dati di mittente o destinatario né prova di consegna.
+Peek mostra lo stato, le righe nell'inglese di 17FEIA con il luogo se indicato, e il Paese di destinazione. Legge i passaggi di magazzino sull'ora di Pechino e le scansioni inoltrate con un Paese a fuso unico (o uno Stato USA a fuso unico) sull'ora locale del luogo, convertendoli nel fuso del tuo dispositivo. Le righe di volo e di dogana non indicano un luogo: Peek usa l'ora delle righe vicine, quella di Pechino finché una riga non segnala l'arrivo del volo, poi quella del corriere che consegna se 17FEIA ne inoltra le scansioni, altrimenti quella del tuo Paese. Questi orari possono essere sfasati di qualche ora. Peek omette la barra di avanzamento, l'origine, i CAP e il peso. 17FEIA non fornisce data prevista di consegna, nome del servizio, dati di mittente o destinatario né prova di consegna.
 
 Quando 17FEIA indica DPD Germany, DHL o FedEx con un codice del formato di quel corriere, la scheda del pacco lo mostra (ad esempio «Consegna con DPD Germany») e riporta quel numero sotto quello di 17FEIA. Finché quel corriere ha solo l'annuncio senza una scansione propria, la scheda indica «Annunciato a …, non ancora ricevuto». Appena quel corriere registra una scansione almeno recente quanto l'ultima di 17FEIA, Peek segue il pacco lì mantenendo la cronologia di 17FEIA. Se il portale di 17FEIA non è raggiungibile, Peek interroga i servizi di tracciamento e mostra la loro cronologia nelle loro parole.
 
@@ -113,7 +113,7 @@ La riga completa è `Arrived at delivery hub，Awaiting carrie scan.`: lo sdogan
 Il corriere a cui 17FEIA lo affida dopo lo sdoganamento all'importazione. Il record di 17FEIA può indicarne nome e codice: se si tratta di DPD Germany, DHL in Germania o FedEx, la scheda Peek lo mostra. Altrimenti chiedi al venditore.
 
 :::sources
-- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nomi, formato `FEI…YQ` e sedi (`SZ`/`SH`), portale e link `orderNumber=`, etichette cinesi, testi inglesi e fasi (incluse ispezione doganale, `国内退回`, cambio fase di `清关行提货到仓` dopo `清关完成` e righe inoltrate DHL/UPS/deposito UK), barra di avanzamento, gestione fusi orari, partner (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`), destinazioni e ultime 100 scansioni
+- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nomi, formato `FEI…YQ` e partenze da Shenzhen (`SZ`), portale e link `orderNumber=`, etichette cinesi, testi inglesi e fasi (incluse ispezione doganale, `国内退回`, cambio fase di `清关行提货到仓` dopo `清关完成` e righe inoltrate DHL/UPS/deposito UK), barra di avanzamento, gestione fusi orari, partner (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`) e destinazioni
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – altri formati terminanti in `YQ` (`HuaHan Logistics`), servizi di tracciamento di riserva e passaggio al corriere locale
 - [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio doganale temporaneo di 3 € per articolo fino a 150 € dal 1° luglio 2026, tariffa di gestione dell'Unione di 2 € dal 1° novembre 2026
 - [Commissione europea: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tariffa di 2 € per articolo qualunque sia il valore, definizione di articolo

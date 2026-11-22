@@ -10,7 +10,7 @@ updated: 2026-11-21
 
 ## Numer śledzenia 17FEIA: jak wygląda
 
-Peek rozpoznaje numery 17FEIA jako `FEI`, dwie litery, dziesięć cyfr i `YQ`: razem 17 znaków. Dwie litery po `FEI` oznaczają oddział 17FEIA, np. `SZ` dla Shenzhen lub `SH` dla Szanghaju. Wszystkie przykłady poniżej są zmyślone:
+Peek rozpoznaje numery 17FEIA jako `FEI`, dwie litery, dziesięć cyfr i `YQ`: razem 17 znaków. Przy nadaniach z Shenzhen dwie litery po `FEI` to `SZ`. Wszystkie przykłady poniżej są zmyślone:
 
 | Numer (zmyślony) | Co to jest |
 | --- | --- |
@@ -72,7 +72,7 @@ Po odprawie przywozowej 17FEIA przekazuje paczkę przewoźnikowi, który dostarc
 
 **Stoi na `The order has information pending customer confirmation.`** Jeśli korzystałeś z agenta wysyłkowego, sprawdź tam konto lub wiadomości. W przeciwnym razie zapytaj sprzedawcę.
 
-**Cisza po wylocie.** Po wpisie `Flight has departed.` przez kilka dni może nie być nic nowego. Po czterech dniach bez nowego wpisu Peek oznacza przesyłkę („Brak aktualizacji od czterech dni”). Zobacz [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating) i [śledzenie przesyłek z Chin](guide:tracking-from-china).
+**Cisza po wylocie.** Po wpisie `Flight has departed.` przez kilka dni może nie być nic nowego. Po czterech dniach bez nowego wpisu Peek oznacza przesyłkę, podając dzień tego wpisu („Brak aktualizacji od …”). Zobacz [dlaczego śledzenie nie aktualizuje się](guide:tracking-not-updating) i [śledzenie przesyłek z Chin](guide:tracking-from-china).
 
 **Dostarczona, ale nic nie przyszło.** Sprawdź wokół domu i zapytaj sąsiadów, potem przewoźnika doręczającego i sprzedawcę. Zobacz [dostarczona, ale nieotrzymana](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ Strona 17FEIA odpowiedziała Peek kontrolą przeciw botom, więc nie ma tu numer
 
 Każdy inny numer, np. przewoźnika doręczającego, wklej tak samo: Peek śledzi ponad 4500 przewoźników. Gdy kształt pasuje do kilku firm bez pewności, Peek wyświetla „Sprawdzanie usług śledzenia…” podczas zapytań; gdy nie pasuje do żadnej, sprawdza go po dodaniu. Aby wybrać przewoźnika ręcznie, stuknij „Zmień” i wpisz `17FEIA`, `Feia` lub `一起飞`, albo użyj opcji „Zmień przewoźnika” na już dodanej przesyłce. Peek pyta 17FEIA tylko o numery złożone z `FEI`, dwóch liter, dziesięciu cyfr i dwóch liter: dla innego formatu komunikat podaje, że 17FEIA „nie wydaje takich numerów”.
 
-Peek pokazuje status, do 100 najnowszych wpisów w angielskim brzmieniu 17FEIA wraz z miejscem (gdy jest podane) oraz kraj docelowy. Etapy magazynowe odczytuje w czasie pekińskim, a przekazane skany z krajów jednostrefowych (lub jednostrefowych stanów USA) w ich czasie lokalnym i przelicza na strefę twojego urządzenia; wiersze bez miejsca lub określonej strefy (loty, cło lub magazyn bez podanego kraju) zachowują godzinę podaną przez 17FEIA. Peek pomija pasek postępu, kraj nadania, kody pocztowe i wagę. 17FEIA nie podaje przewidywanej daty doręczenia, nazwy usługi, danych nadawcy lub odbiorcy ani potwierdzenia odbioru.
+Peek pokazuje status, wpisy w angielskim brzmieniu 17FEIA wraz z miejscem (gdy jest podane) oraz kraj docelowy. Etapy magazynowe odczytuje w czasie pekińskim, a przekazane skany z krajów jednostrefowych (lub jednostrefowych stanów USA) w ich czasie lokalnym i przelicza na strefę twojego urządzenia. Wpisy o lotach i odprawie celnej nie podają miejsca: Peek przyjmuje dla nich zegar sąsiednich wpisów, czas pekiński do wpisu o przylocie, a potem czas przewoźnika doręczającego, jeśli 17FEIA przekazuje jego skany, a w przeciwnym razie czas twojego kraju. Te godziny mogą odbiegać o kilka godzin. Peek pomija pasek postępu, kraj nadania, kody pocztowe i wagę. 17FEIA nie podaje przewidywanej daty doręczenia, nazwy usługi, danych nadawcy lub odbiorcy ani potwierdzenia odbioru.
 
 Gdy 17FEIA wskazuje DPD Germany, DHL lub FedEx z numerem pasującym do formatu tego przewoźnika, karta przesyłki to pokazuje (np. „Doręcza: DPD Germany”) i wyświetla ten numer po numerze 17FEIA. Dopóki ten przewoźnik ma tylko zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Gdy tylko pojawi się jego skan co najmniej tak świeży jak ostatni w 17FEIA, Peek śledzi paczkę tam, zachowując historię z 17FEIA. Jeśli śledzenie 17FEIA nie odpowiada, Peek pyta usługi śledzenia i pokazuje ich historię w ich brzmieniu.
 
@@ -113,7 +113,7 @@ Pełny wpis brzmi `Arrived at delivery hub，Awaiting carrie scan.`: odprawa cel
 Przewoźnik, któremu 17FEIA przekazuje przesyłkę po odprawie przywozowej. Rekord 17FEIA może podać jego nazwę i numer: jeśli jest to DPD Germany, DHL w Niemczech lub FedEx, pokazuje to karta w Peek. W innym wypadku zapytaj sprzedawcę.
 
 :::sources
-- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nazwy, format `FEI…YQ` i oddziały (`SZ`/`SH`), strona śledzenia i link `orderNumber=`, chińskie etykiety, angielskie opisy i etapy (w tym kontrola celna, `国内退回`, zmiana etapu `清关行提货到仓` po `清关完成` oraz przekazane wpisy DHL/UPS/magazynu w Wielkiej Brytanii), pasek postępu, zasady stref czasowych, partnerzy (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`), kierunki i 100 najnowszych skanów
+- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nazwy, format `FEI…YQ` i nadania z Shenzhen (`SZ`), strona śledzenia i link `orderNumber=`, chińskie etykiety, angielskie opisy i etapy (w tym kontrola celna, `国内退回`, zmiana etapu `清关行提货到仓` po `清关完成` oraz przekazane wpisy DHL/UPS/magazynu w Wielkiej Brytanii), pasek postępu, zasady stref czasowych, partnerzy (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`) i kierunki
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – inne formaty zakończone na `YQ` (`HuaHan Logistics`), zapasowe usługi śledzenia i przejęcie przez przewoźnika lokalnego
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tymczasowe cło 3 € za pozycję do 150 € od 1 lipca 2026 r., unijna opłata manipulacyjna 2 € od 1 listopada 2026 r.
 - [Komisja Europejska: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata 2 € za pozycję niezależnie od wartości, definicja pozycji

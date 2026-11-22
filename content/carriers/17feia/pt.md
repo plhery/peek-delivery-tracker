@@ -10,7 +10,7 @@ A 17FEIA (一起飞, também Shanghai Hongshan International Logistics, 上海�
 
 ## Número de seguimento 17FEIA: como é
 
-O Peek reconhece os números da 17FEIA como `FEI`, duas letras, dez algarismos e `YQ`: 17 carateres no total. As duas letras depois de `FEI` indicam a delegação da 17FEIA, como `SZ` para Shenzhen ou `SH` para Xangai. Todos os exemplos são inventados:
+O Peek reconhece os números da 17FEIA como `FEI`, duas letras, dez algarismos e `YQ`: 17 carateres no total. Nas saídas de Shenzhen, as duas letras depois de `FEI` são `SZ`. Todos os exemplos são inventados:
 
 | Número (inventado) | O que é |
 | --- | --- |
@@ -72,7 +72,7 @@ A 17FEIA trabalha para quem contratou o envio: o vendedor ou o transitário que 
 
 **Parada em `The order has information pending customer confirmation.`** Se usaste um transitário, verifica a tua conta ou mensagens lá. Caso contrário, pergunta ao vendedor.
 
-**Sem novidades depois do voo.** Após `Flight has departed.`, podem passar dias sem nova linha. Ao fim de quatro dias sem atualização, o Peek assinala-o («Sem atualizações há quatro dias»). Vê [porque o seguimento não atualiza](guide:tracking-not-updating) e [seguir uma encomenda da China](guide:tracking-from-china).
+**Sem novidades depois do voo.** Após `Flight has departed.`, podem passar dias sem nova linha. Ao fim de quatro dias sem nova linha, o Peek assinala-o com o dia dessa linha («Sem atualizações desde …»). Vê [porque o seguimento não atualiza](guide:tracking-not-updating) e [seguir uma encomenda da China](guide:tracking-from-china).
 
 **Entregue, mas nada chegou.** Verifica à volta de casa e pergunta aos vizinhos, depois à transportadora final e ao vendedor. Vê [entregue mas não recebida](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ O [Peek](/) identifica logo a 17FEIA a partir de um número `FEI…YQ` («Transp
 
 Para qualquer outro número, como o da transportadora final, cola-o na mesma: o Peek segue mais de 4500 transportadoras. Quando a forma encaixa em várias transportadoras sem certeza, o Peek mostra «A verificar serviços de seguimento…» enquanto consulta; se não encaixa em nenhuma, pesquisa assim que a adicionares. Para escolheres a transportadora, toca em «Alterar» e procura `17FEIA`, `Feia` ou `一起飞`, ou usa «Alterar transportadora» numa encomenda já adicionada. O Peek só pergunta à 17FEIA por números compostos por `FEI`, duas letras, dez algarismos e duas letras: para outro formato indica que a 17FEIA «não emite números como este».
 
-O Peek mostra o estado, até às 100 linhas mais recentes no inglês da 17FEIA com o local quando indicado, e o país de destino. Lê os passos de armazém na hora de Pequim e os registos retransmitidos de um país com fuso único (ou estado dos EUA com fuso único) na hora local, convertidos para o fuso do teu dispositivo; as linhas sem local ou sem fuso determinado (voos, alfândega ou um depósito sem país) mantêm a hora tal como a 17FEIA a escreve. O Peek omite a barra de progresso, a origem, os códigos postais e o peso. A 17FEIA não fornece data prevista de entrega, nome de serviço, dados de remetente ou destinatário nem comprovativo de entrega.
+O Peek mostra o estado, as linhas no inglês da 17FEIA com o local quando indicado, e o país de destino. Lê os passos de armazém na hora de Pequim e os registos retransmitidos de um país com fuso único (ou estado dos EUA com fuso único) na hora local, convertidos para o fuso do teu dispositivo. As linhas de voo e de alfândega não indicam local: o Peek aplica-lhes a hora das linhas vizinhas, a de Pequim até uma linha indicar a chegada do voo e depois a da transportadora que entrega, se a 17FEIA retransmitir os registos dela, ou senão a do teu país. Essas horas podem ter umas horas de diferença. O Peek omite a barra de progresso, a origem, os códigos postais e o peso. A 17FEIA não fornece data prevista de entrega, nome de serviço, dados de remetente ou destinatário nem comprovativo de entrega.
 
 Quando a 17FEIA indica DPD Germany, DHL ou FedEx com um número da forma dessa transportadora, o cartão da encomenda mostra-o (por exemplo, «Entrega: DPD Germany») e coloca esse número abaixo do da 17FEIA. Enquanto essa transportadora tiver apenas o anúncio sem registo próprio, o cartão indica «Anunciada a …, ainda não recebida». Assim que mostrar um registo pelo menos tão recente como o último da 17FEIA, o Peek passa a segui-la lá e mantém o histórico da 17FEIA. Quando o rastreio da 17FEIA está inacessível, o Peek consulta serviços de seguimento e mostra o histórico deles nas palavras deles.
 
@@ -113,7 +113,7 @@ A linha completa é `Arrived at delivery hub，Awaiting carrie scan.`: o desalfa
 A transportadora à qual a 17FEIA entrega o envio após o desalfandegamento de importação. O registo da 17FEIA pode indicar o nome e o número dela: quando é a DPD Germany, a DHL na Alemanha ou a FedEx, o cartão do Peek mostra-o. Caso contrário, pergunta ao vendedor.
 
 :::sources
-- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nomes, formato `FEI…YQ` e delegações (`SZ`/`SH`), rastreio e ligação `orderNumber=`, etiquetas chinesas, textos ingleses e etapas (incluindo inspeção aduaneira, `国内退回`, mudança de etapa de `清关行提货到仓` após `清关完成` e linhas retransmitidas DHL/UPS/depósito Reino Unido), barra de progresso, gestão de fusos horários, parceiros (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`), destinos e 100 registos mais recentes
+- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – nomes, formato `FEI…YQ` e saídas de Shenzhen (`SZ`), rastreio e ligação `orderNumber=`, etiquetas chinesas, textos ingleses e etapas (incluindo inspeção aduaneira, `国内退回`, mudança de etapa de `清关行提货到仓` após `清关完成` e linhas retransmitidas DHL/UPS/depósito Reino Unido), barra de progresso, gestão de fusos horários, parceiros (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`) e destinos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – outros formatos acabados em `YQ` (`HuaHan Logistics`), serviços de seguimento de recurso e passagem para a transportadora local
 - [Comissão Europeia: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – direito aduaneiro temporário de 3 € por adição até 150 € desde 1 de julho de 2026, taxa de tratamento da União de 2 € desde 1 de novembro de 2026
 - [Comissão Europeia: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa de 2 € por adição seja qual for o valor, definição de adição

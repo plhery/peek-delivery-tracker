@@ -10,7 +10,7 @@ updated: 2026-11-21
 
 ## Numéro de suivi 17FEIA : à quoi il ressemble
 
-Peek identifie les numéros 17FEIA par le format `FEI`, deux lettres, dix chiffres et `YQ`, soit 17 caractères au total. Les deux lettres après `FEI` désignent l'agence 17FEIA, par exemple `SZ` pour Shenzhen ou `SH` pour Shanghai. Exemples inventés :
+Peek identifie les numéros 17FEIA par le format `FEI`, deux lettres, dix chiffres et `YQ`, soit 17 caractères au total. Pour les départs de Shenzhen, les deux lettres après `FEI` sont `SZ`. Exemples inventés :
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
@@ -44,13 +44,13 @@ Le dossier 17FEIA associe à la plupart des lignes un libellé court en chinois 
 | `Customs inspection in Progress, Release Pending.` (`海关查验，暂未放行`) | Après l'arrivée au port de dédouanement, la douane inspecte l'envoi et ne l'a pas encore libéré. | « À la douane » |
 | `Customs Clearance Completed.` (`清关完成`) | La douane d'importation a libéré le colis. | « En transit » |
 | `Arrived at delivery hub，Awaiting carrie scan.` (`已交仓，等待上网`) | Remis au dépôt du transporteur qui livre. Le premier scan de ce transporteur suit. (« carrie » est l'orthographe du suivi.) | « En transit » |
-| `包裹已做国内退回处理` (`国内退回`) | Retour intérieur en Chine : après confirmation à l'entrepôt, le colis repart vers l'expéditeur au lieu de quitter le pays. | « Retourné à l'expéditeur » |
+| `包裹已做国内退回处理` (`国内退回`) | Retour intérieur en Chine : après confirmation à l'entrepôt, le colis repart vers l'expéditeur au lieu de quitter le pays. | « Retourné à l’expéditeur » |
 
 **Deux lignes qui ne font pas avancer le statut.** `Estimated departure date:` suivi d'une date (`预计起飞日期`) est une prévision écrite avant le vol, pas un scan : Peek l'écarte. `Flight delayed.` (`航班延误`) signale un vol retardé : Peek conserve l'étape de la ligne précédente.
 
 **La barre de progression.** La page de suivi de 17FEIA affiche aussi une barre allant de `仓库收货` (réception en entrepôt) à `成功签收` (signé à la livraison) en passant par `飞机起飞` (décollage) et `飞机落地` (atterrissage). Peek ne reprend pas cette barre, mais classe une ligne libellée `成功签收` en « Livré ».
 
-**Les lignes du transporteur final.** Après la remise, le suivi de 17FEIA peut relayer les scans du transporteur final sous le libellé `运输途中` (en transit), dans ses propres mots et avec son lieu : par exemple les scans de DHL (`The international shipment has been processed in the export parcel center`), d'UPS aux États-Unis (`Arrived at Facility`, `Departed from Facility`, `On the Way, Delivery will be delayed by one business day.`) ou d'un partenaire au Royaume-Uni (`Shipment received in depot`). Peek les interprète selon leur libellé : une réception reste « En transit », tandis qu'une mise en livraison ou une livraison font avancer le statut.
+**Les lignes du transporteur final.** Après la remise, le suivi de 17FEIA peut relayer les scans du transporteur final sous le libellé `运输途中` (en transit), dans ses propres mots et avec son lieu : par exemple les scans de DHL (`The international shipment has been processed in the export parcel center`), d'UPS aux États-Unis (`Arrived at Facility`, `Departed from Facility`, `On the Way, Delivery will be delayed by one business day.`) ou d'un partenaire au Royaume-Uni (`Shipment received in depot`). Peek les interprète selon leur texte : une réception reste « En transit », tandis qu'une mise en livraison ou une livraison font avancer le statut.
 
 **Pourquoi les horaires semblent dans le désordre.** Les étapes en entrepôt en Chine (y compris un retour intérieur) suivent l'heure de Pékin (UTC+8). Les scans relayés du transporteur local utilisent l'heure locale de leur lieu quand celui-ci définit un fuseau unique. Les lignes de vol et de douane n'indiquent pas de lieu et le fuseau affiché par 17FEIA ne correspond pas toujours à celui de l'étape : fie-toi à l'ordre des lignes.
 
@@ -72,7 +72,7 @@ Après le dédouanement à l'importation, 17FEIA confie le colis à un transport
 
 **Bloqué sur `The order has information pending customer confirmation.`** Si tu es passé par un agent d'expédition, vérifie ton compte ou tes messages chez lui. Sinon, contacte le vendeur.
 
-**Aucune nouvelle après le vol.** Après `Flight has departed.`, plusieurs jours peuvent passer sans nouvelle ligne. Après quatre jours sans mise à jour, Peek le signale (« Aucune mise à jour depuis quatre jours »). Voir [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
+**Aucune nouvelle après le vol.** Après `Flight has departed.`, plusieurs jours peuvent passer sans nouvelle ligne. Après quatre jours sans nouvelle ligne, Peek le signale avec le jour de cette ligne (« Aucune mise à jour depuis … »). Voir [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
 
 **Affiché comme livré, mais rien reçu.** Vérifie autour de chez toi et auprès des voisins, puis contacte le transporteur final et le vendeur. Voir [colis livré mais non reçu](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ Le site web de 17FEIA ayant répondu à Peek par un contrôle anti-robot, cette 
 
 Pour tout autre numéro, par exemple celui du transporteur final, colle-le tout de même : Peek suit plus de 4 500 transporteurs. Lorsque le format correspond à plusieurs transporteurs sans certitude, Peek affiche « Vérification des services de suivi… » le temps d'interroger ses sources ; s'il ne correspond à aucun format, Peek le recherche une fois ajouté. Pour choisir le transporteur toi-même, appuie sur « Changer » et recherche `17FEIA`, `Feia` ou `一起飞`, ou utilise « Changer de transporteur » sur un colis déjà ajouté. Peek n'interroge 17FEIA que pour les numéros composés de `FEI`, deux lettres, dix chiffres et deux lettres : pour un autre format, la ligne indique que 17FEIA « n’émet pas de numéros comme celui-ci ».
 
-Peek affiche le statut, jusqu'aux 100 lignes les plus récentes dans l'anglais de 17FEIA avec le lieu quand il est fourni, ainsi que le pays de destination. Il lit les étapes d'entrepôt sur l'heure de Pékin et les scans relayés ayant un pays à fuseau unique (ou un État américain à fuseau unique) sur leur heure locale, puis les convertit dans le fuseau de ton appareil ; les lignes sans lieu ou sans fuseau déterminé (vols, douane ou dépôt sans pays) conservent l'heure telle que 17FEIA l'écrit. Peek n'affiche pas la barre de progression, l'origine, les codes postaux ni le poids. 17FEIA ne fournit ni date de livraison prévue, ni nom de service, ni coordonnées de l'expéditeur ou du destinataire, ni preuve de livraison.
+Peek affiche le statut, les lignes dans l'anglais de 17FEIA avec le lieu quand il est fourni, ainsi que le pays de destination. Il lit les étapes d'entrepôt sur l'heure de Pékin et les scans relayés ayant un pays à fuseau unique (ou un État américain à fuseau unique) sur leur heure locale, puis les convertit dans le fuseau de ton appareil. Les lignes de vol et de douane n'indiquent pas de lieu : Peek leur applique l'heure des lignes voisines, celle de Pékin jusqu'à ce qu'une ligne annonce l'arrivée du vol, puis celle du transporteur final si 17FEIA relaie ses scans, sinon celle de ton pays. Ces heures peuvent être décalées de quelques heures. Peek n'affiche pas la barre de progression, l'origine, les codes postaux ni le poids. 17FEIA ne fournit ni date de livraison prévue, ni nom de service, ni coordonnées de l'expéditeur ou du destinataire, ni preuve de livraison.
 
 Lorsque 17FEIA indique DPD Germany, DHL ou FedEx avec un numéro correspondant au format de ce transporteur, la fiche du colis l'affiche (par exemple « Livraison par DPD Germany ») et inscrit ce numéro après celui de 17FEIA. Tant que ce transporteur n'a reçu que l'annonce du colis sans scan propre, la fiche indique « Annoncé à …, pas encore reçu ». Dès que ce transporteur enregistre un scan au moins aussi récent que le dernier de 17FEIA, Peek bascule le suivi chez lui tout en conservant l'historique 17FEIA. Si le suivi de 17FEIA est injoignable, Peek interroge des services de suivi et affiche leur historique dans leurs termes.
 
@@ -113,7 +113,7 @@ La ligne complète est `Arrived at delivery hub，Awaiting carrie scan.` : le d�
 Le transporteur auquel 17FEIA remet le colis après le dédouanement à l'importation. Le dossier 17FEIA peut indiquer son nom et son numéro : lorsqu'il s'agit de DPD Germany, de DHL en Allemagne ou de FedEx, la fiche Peek l'affiche. Sinon, demande au vendeur.
 
 :::sources
-- [Universal Parcel Scraper : 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – noms, format `FEI…YQ` et agences (`SZ`/`SH`), suivi et lien `orderNumber=`, libellés chinois, textes anglais et étapes (y compris l'inspection douanière, `国内退回`, le changement d'étape de `清关行提货到仓` après `清关完成` et les lignes relayées DHL/UPS/dépôt UK), barre de progression, fuseaux horaires, partenaires (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`), destinations et 100 derniers scans
+- [Universal Parcel Scraper : 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – noms, format `FEI…YQ` et départs de Shenzhen (`SZ`), suivi et lien `orderNumber=`, libellés chinois, textes anglais et étapes (y compris l'inspection douanière, `国内退回`, le changement d'étape de `清关行提货到仓` après `清关完成` et les lignes relayées DHL/UPS/dépôt UK), barre de progression, fuseaux horaires, partenaires (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`) et destinations
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formats concurrents `YQ` (`HuaHan Logistics`), services de suivi de secours et bascule vers le transporteur final
 - [Commission européenne : EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droit de douane temporaire de 3 € par article jusqu'à 150 € depuis le 1er juillet 2026, redevance de traitement de l'Union de 2 € depuis le 1er novembre 2026
 - [Commission européenne : Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – redevance de 2 € par article quelle que soit la valeur, définition d'un article

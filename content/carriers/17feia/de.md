@@ -10,7 +10,7 @@ updated: 2026-11-21
 
 ## 17FEIA-Sendungsnummer: So sieht sie aus
 
-Peek erkennt 17FEIA-Nummern am Aufbau `FEI`, zwei Buchstaben, zehn Ziffern und `YQ`, insgesamt 17 Zeichen. Die zwei Buchstaben nach `FEI` kennzeichnen die Niederlassung von 17FEIA, etwa `SZ` für Shenzhen oder `SH` für Shanghai. Alle Beispiele sind erfunden:
+Peek erkennt 17FEIA-Nummern am Aufbau `FEI`, zwei Buchstaben, zehn Ziffern und `YQ`, insgesamt 17 Zeichen. Bei Abgängen aus Shenzhen lauten die zwei Buchstaben nach `FEI` `SZ`. Alle Beispiele sind erfunden:
 
 | Nummer (erfunden) | Was es ist |
 | --- | --- |
@@ -72,7 +72,7 @@ Nach dem Einfuhrzoll übergibt 17FEIA das Paket an einen Paketdienst, der es zu 
 
 **Steht auf `The order has information pending customer confirmation.`** Wenn du einen Weiterleitungsdienst genutzt hast, prüfe dort dein Konto oder deine Nachrichten. Sonst melde dich beim Verkäufer.
 
-**Still nach dem Abflug.** Nach `Flight has departed.` kann tagelang nichts Neues erscheinen. Nach vier Tagen ohne neuen Eintrag warnt Peek („Seit vier Tagen keine Aktualisierung“). Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
+**Still nach dem Abflug.** Nach `Flight has departed.` kann tagelang nichts Neues erscheinen. Nach vier Tagen ohne neuen Eintrag warnt Peek mit dem Tag dieses Eintrags („Keine Aktualisierung seit …“). Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
 
 **Zugestellt, aber nichts angekommen.** Schau rund ums Haus und frage Nachbarn, danach den ausliefernden Paketdienst und den Verkäufer. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -88,7 +88,7 @@ Die Website von 17FEIA antwortete Peek mit einer Bot-Prüfung, sodass diese Seit
 
 Jede andere Nummer, etwa die des lokalen Zustellers, kannst du ebenso einfügen: Peek verfolgt über 4500 Paketdienste. Passt das Format zu mehreren Diensten ohne Eindeutigkeit, zeigt Peek „Tracking-Dienste werden geprüft…“, während es nachfragt; passt es zu keinem, prüft Peek die Nummer nach dem Hinzufügen. Um den Dienst selbst zu wählen, tippe auf „Ändern“ und suche nach `17FEIA`, `Feia` oder `一起飞`, oder nutze „Paketdienst ändern“ bei einem bereits hinzugefügten Paket. Peek fragt 17FEIA nur nach Nummern aus `FEI`, zwei Buchstaben, zehn Ziffern und zwei Buchstaben: Bei jedem anderen Format meldet die Zeile, 17FEIA „vergibt keine Nummern wie diese“.
 
-Peek zeigt den Status, bis zu 100 der neuesten Zeilen im Englisch von 17FEIA samt Ort (wo angegeben) und das Zielland. Lagerschritte liest es nach Pekinger Zeit und weitergeleitete Scans aus Ländern mit einer Zeitzone (oder einzelnen US-Bundesstaaten mit einer Zeitzone) nach deren Ortszeit, umgerechnet in die Zeitzone deines Geräts; Einträge ohne Ort oder eindeutige Zeitzone (Flüge, Zoll oder ein Depot ohne Land) bleiben als unveränderte Ortszeit stehen. Fortschrittsbalken, Herkunft, Postleitzahlen und Gewicht lässt Peek weg. 17FEIA liefert weder Liefertermin noch Servicenamen, Absender- oder Empfängerdaten oder Zustellnachweis.
+Peek zeigt den Status, die Zeilen im Englisch von 17FEIA samt Ort (wo angegeben) und das Zielland. Lagerschritte liest es nach Pekinger Zeit und weitergeleitete Scans aus Ländern mit einer Zeitzone (oder einzelnen US-Bundesstaaten mit einer Zeitzone) nach deren Ortszeit, umgerechnet in die Zeitzone deines Geräts. Flug- und Zollzeilen nennen keinen Ort: Peek liest sie auf der Uhr der Zeilen daneben, nach Pekinger Zeit, bis eine Zeile die Ankunft des Flugs meldet, danach nach der Uhr des ausliefernden Paketdienstes, wenn 17FEIA dessen Scans weitergibt, sonst nach der deines Landes. Diese Zeiten können ein paar Stunden abweichen. Fortschrittsbalken, Herkunft, Postleitzahlen und Gewicht lässt Peek weg. 17FEIA liefert weder Liefertermin noch Servicenamen, Absender- oder Empfängerdaten oder Zustellnachweis.
 
 Nennt 17FEIA DPD Germany, DHL oder FedEx mit einer Nummer im Format dieses Paketdienstes, zeigt die Paketkarte das an (etwa „Zustellung durch DPD Germany“) und führt diese Nummer hinter der von 17FEIA auf. Solange dieser Paketdienst nur die Ankündigung ohne eigenen Scan hat, steht dort „Bei … angekündigt, noch nicht eingetroffen“. Sobald er einen Scan zeigt, der mindestens so aktuell ist wie der letzte von 17FEIA, verfolgt Peek das Paket dort weiter und behält den 17FEIA-Verlauf. Ist der 17FEIA-Tracker nicht erreichbar, fragt Peek stattdessen Tracking-Dienste ab und zeigt deren Verlauf in deren Worten.
 
@@ -113,7 +113,7 @@ Die volle Zeile lautet `Arrived at delivery hub，Awaiting carrie scan.`: Der Ei
 Der Paketdienst, an den 17FEIA das Paket nach dem Einfuhrzoll übergibt. Der Datensatz von 17FEIA kann Namen und Nummer nennen: Bei DPD Germany, DHL in Deutschland oder FedEx zeigt Peek das auf der Paketkarte an. Andernfalls frage den Verkäufer.
 
 :::sources
-- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – Namen, `FEI…YQ`-Format und Niederlassungen (`SZ`/`SH`), Tracker und `orderNumber=`-Link, chinesische Etiketten, englische Texte und Stufen (samt Zollprüfung, `国内退回`, Stufenwechsel von `清关行提货到仓` nach `清关完成` sowie weitergeleiteten DHL-/UPS-/UK-Depot-Zeilen), Fortschrittsbalken, Zeitzonenlogik, Partner (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`), Zielländer und 100 neueste Scans
+- [Universal Parcel Scraper: 17FEIA](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/17feia) – Namen, `FEI…YQ`-Format und Abgänge aus Shenzhen (`SZ`), Tracker und `orderNumber=`-Link, chinesische Etiketten, englische Texte und Stufen (samt Zollprüfung, `国内退回`, Stufenwechsel von `清关行提货到仓` nach `清关完成` sowie weitergeleiteten DHL-/UPS-/UK-Depot-Zeilen), Fortschrittsbalken, Zeitzonenlogik, Partner (`DPD-DE`, `DE-DHL`, `FEDEX-GROUND`) und Zielländer
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – andere `YQ`-Formate (`HuaHan Logistics`), Tracking-Dienste als Rückfall und Übergabe an den Zusteller
 - [Europäische Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – vorübergehender Zoll von 3 € pro Artikel bis 150 € seit 1. Juli 2026, EU-Bearbeitungsgebühr von 2 € seit 1. November 2026
 - [Europäische Kommission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € Bearbeitungsgebühr pro Artikel unabhängig vom Wert, Begriff des Artikels

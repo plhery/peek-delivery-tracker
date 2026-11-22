@@ -3076,6 +3076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "mainfreight-sendungsverfolgung",
+      "title": "Mainfreight Sendungsverfolgung: Nummern und Status",
+      "name": "Mainfreight",
+      "color": "#005eb8"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "17feia-sendungsverfolgung",
@@ -4246,6 +4254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "suivi-mainfreight",
+      "title": "Suivi Mainfreight\u00a0: numéros de fret et statuts",
+      "name": "Mainfreight",
+      "color": "#005eb8"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "suivi-17feia",
@@ -5352,6 +5368,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "tracciamento-mainfreight",
+      "title": "Tracciamento Mainfreight: codici merce e stati",
+      "name": "Mainfreight",
+      "color": "#005eb8"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "tracking-17feia",
@@ -6442,6 +6466,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62019"
     },
     {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "seguimiento-mainfreight",
+      "title": "Seguimiento Mainfreight: números de carga y estados",
+      "name": "Mainfreight",
+      "color": "#005eb8"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "seguimiento-17feia",
@@ -7490,6 +7522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento J&T Express China: números JT, estados e ajuda",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "rastreio-mainfreight",
+      "title": "Rastreio Mainfreight: números de carga e estados",
+      "name": "Mainfreight",
+      "color": "#005eb8"
     },
     {
       "id": "17feia",
@@ -8614,6 +8654,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express China: numery JT, statusy i kontakt",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "sledzenie-mainfreight",
+      "title": "Śledzenie Mainfreight: numery listów i statusy",
+      "name": "Mainfreight",
+      "color": "#005eb8"
     },
     {
       "id": "17feia",

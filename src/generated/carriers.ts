@@ -2668,6 +2668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#143167"
     },
     {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "dpd-portugal-sendungsverfolgung",
+      "title": "DPD Portugal Sendungsverfolgung: Status, Pickup & Kontakt",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-sendungsverfolgung",
@@ -3750,6 +3758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#143167"
     },
     {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "dpd-portugal-suivi",
+      "title": "Suivi DPD Portugal\u00a0: statuts, points Pickup et contact",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-suivi-colis",
@@ -4752,6 +4768,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#143167"
     },
     {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "tracciamento-dpd-portugal",
+      "title": "Tracciamento DPD Portugal: stati, punti Pickup e contatti",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
+    },
+    {
       "id": "tnt-it",
       "catalog": "tnt-it",
       "slug": "tnt-italy-tracking",
@@ -5744,6 +5768,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento DHLink: número de DHgate, estados y reparto",
       "name": "DHLink",
       "color": "#143167"
+    },
+    {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "seguimiento-dpd-portugal",
+      "title": "Seguimiento DPD Portugal: estados, puntos Pickup y contacto",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
     },
     {
       "id": "tnt",
@@ -7782,6 +7814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DHLink: numer z DHgate, statusy i doręczenie",
       "name": "DHLink",
       "color": "#143167"
+    },
+    {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "sledzenie-dpd-portugal",
+      "title": "Śledzenie DPD Portugal: statusy, punkty Pickup i kontakt",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
     },
     {
       "id": "tnt",

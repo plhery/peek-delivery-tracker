@@ -142,7 +142,7 @@
   { "id": "imile", "catalog": "imile", "name": "iMile", "languages": ["en", "es", "it", "de", "fr", "pt", "pl"] },
   { "id": "postnl", "catalog": "spring-gds", "name": "PostNL", "languages": ["en", "nl", "it", "pl", "es", "fr", "de", "pt"] },
   { "id": "dhlink", "catalog": "dhlink", "name": "DHLink", "languages": ["en", "fr", "pt", "de", "es", "it", "pl"] },
-  { "id": "dpd-pt", "catalog": "dpd-pt", "name": "DPD Portugal", "languages": ["en", "pt"] },
+  { "id": "dpd-pt", "catalog": "dpd-pt", "name": "DPD Portugal", "languages": ["en", "pt", "fr", "de", "es", "it", "pl"] },
   { "id": "tnt-it", "catalog": "tnt-it", "name": "TNT Italy", "languages": ["en", "it"] },
   { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es", "pl", "it"] },
   { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },

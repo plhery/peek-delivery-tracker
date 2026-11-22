@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-Ekart (znany także jako *eKart Logistics* oraz *Ekart Express*), prowadzony w Indiach od 2009 roku przez spółkę *Instakart Services Private Limited* z siedzibą w Bengaluru (stan Karnataka), to jeden z największych indyjskich przewoźników obsługujących handel internetowy. Odbiera zamówienia od sprzedawców, przesyła je przez sieć sortowni i doręcza w ponad 15 000 kodów PIN w Indiach. Wklej identyfikator śledzenia z wiadomości ze sklepu w polu powyżej albo wpisz go na [stronie Track Order w serwisie ekartlogistics.in](https://www.ekartlogistics.in/track-order).
+Ekart (znany także jako *eKart Logistics* oraz *Ekart Express*), według strony *About Us* działający od 2009 roku, prowadzony przez spółkę *Instakart Services Private Limited* z siedzibą w Bengaluru (stan Karnataka), to jeden z największych indyjskich przewoźników obsługujących handel internetowy. Odbiera zamówienia od sprzedawców, przesyła je przez sieć sortowni i doręcza w ponad 15 000 kodów PIN w Indiach. Wklej identyfikator śledzenia z wiadomości ze sklepu w polu powyżej albo wpisz go na [stronie Track Order w serwisie ekartlogistics.in](https://www.ekartlogistics.in/track-order).
 
 ## Identyfikator śledzenia Ekart: jak wygląda
 
@@ -50,15 +50,15 @@ Wyszukiwarka Ekart podaje przy każdym skanie datę, godzinę i miasto — czase
 
 ## Jak Ekart doręcza w Indiach
 
-Ekart działa wyłącznie na terenie Indii, a Peek nie przekazuje paczek Ekart żadnemu innemu przewoźnikowi. Na stronie `ekartlogistics.in` sekcja B2C Express deklaruje zasięg ponad 15 000 kodów PIN w doręczeniach (FAQ wymienia 5 000 kodów PIN przy odbiorach i 15 000 przy doręczeniach, a podstrona *About Us* — 14 000 kodów PIN, ponad 80 sortowni i 3 500 oddziałów ostatniej mili), oferując doręczenia tego samego lub następnego dnia na krótkich dystansach oraz w 48–96 godzin na dłuższych trasach zależnie od kodu PIN.
+Kod Peek zna Ekart tylko w Indiach, a Peek nie przekazuje paczek Ekart żadnemu innemu przewoźnikowi. Na stronie `ekartlogistics.in` sekcja B2C Express deklaruje zasięg ponad 15 000 kodów PIN w doręczeniach (FAQ wymienia 5 000 kodów PIN przy odbiorach i 15 000 przy doręczeniach, a podstrona *About Us* — 14 000 kodów PIN, ponad 80 sortowni i 3 500 oddziałów ostatniej mili), oferując doręczenia tego samego lub następnego dnia na krótkich dystansach oraz w 48–96 godzin na dłuższych trasach zależnie od kodu PIN.
 
-Według oficjalnego FAQ Ekart wykonuje **pięć prób** w pierwszej mili (odbiór od sprzedawcy) oraz **trzy próby doręczenia** w ostatniej mili do odbiorcy, a termin dostawy można przełożyć na prośbę klienta, dopóki przesyłka nie została oznaczona jako `RTO` ([nieudane doręczenie](guide:missed-delivery)).
+Według oficjalnego FAQ Ekart wykonuje **pięć ponownych prób** (*reattempts*) w pierwszej mili (odbiór od sprzedawcy) oraz **trzy ponowne próby doręczenia** w ostatniej mili do odbiorcy, a termin dostawy można przełożyć na prośbę klienta, dopóki przesyłka nie została oznaczona jako `RTO` ([nieudane doręczenie](guide:missed-delivery)).
 
 ## Śledzenie Ekart stoi w miejscu, ma status RTO lub brak paczki
 
 **Zatrzymana na `Shipment Created`, `Pickup Requested` lub `NotPickedEvent`.** Sprzedawca nie przekazał jeszcze paczki (albo podjęcie się nie udało); `PickupCancel` oznacza anulowanie odbioru. Zapytaj sklep, kiedy zamówienie wyjdzie.
 
-**Brak nowego skanu przez kilka dni.** Gdy zarejestrowana, przyjęta lub jadąca paczka nie ma nowego skanu przez cztery dni, Peek wyświetla „Brak aktualizacji od czterech dni”. Skontaktuj się ze sklepem ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating)).
+**Brak nowego skanu przez kilka dni.** Gdy zarejestrowana, przyjęta lub jadąca paczka nie ma nowego skanu przez cztery dni, Peek wyświetla „Brak aktualizacji od …” z dniem tego ostatniego skanu. Skontaktuj się ze sklepem ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating)).
 
 **Nieudana próba lub RTO.** Po `undelivered_attempted`, `undelivered_unattempted` lub `Unsuccessful` sprawdź datę po `Rescheduled to:` i potwierdź w sklepie adres oraz numer telefonu. Przy `ShipmentRtoConfirmed` lub `Marked RTO: ORDER_REJECT` przesyłka wraca do nadawcy — poproś sklep o zwrot pieniędzy lub ponowną wysyłkę ([zwrot do nadawcy](guide:returned-to-sender)).
 
@@ -66,7 +66,7 @@ Według oficjalnego FAQ Ekart wykonuje **pięć prób** w pierwszej mili (odbió
 
 ## Obsługa klienta i kontakt z Ekart
 
-W sekcji FAQ na `ekartlogistics.in` Ekart kieruje sprzedawców do zgłaszania spraw przez panel nadawcy (odpowiedź w ciągu 24 godzin), a w zakładce *Corporate Information* podaje adres siedziby *Instakart Services Private Limited* w Bengaluru (`Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru KA 560103`), nie publikując infolinii ani adresu e-mail dla odbiorców paczek. W sprawie zamówienia, ponownej wysyłki lub zwrotu środków skontaktuj się ze sklepem albo platformą zakupową.
+W sekcji FAQ na `ekartlogistics.in` Ekart kieruje sprzedawców do zgłaszania spraw przez panel nadawcy (odpowiedź w ciągu 24 godzin), a w zakładce *Corporate Information* podaje adres *Instakart Services Private Limited* w Bengaluru (`Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru KA 560103`), nie publikując infolinii ani adresu e-mail dla odbiorców paczek. W sprawie zamówienia, ponownej wysyłki lub zwrotu środków skontaktuj się ze sklepem albo platformą zakupową.
 
 **Uwaga na fałszywe SMS-y.** Oficjalne domeny Ekart to `www.ekartlogistics.in` (`ekartlogistics.in`) oraz `ekartlogistics.com`. Zanim opłacisz cokolwiek z linku w wiadomości, przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
@@ -74,9 +74,9 @@ W sekcji FAQ na `ekartlogistics.in` Ekart kieruje sprzedawców do zgłaszania sp
 
 Wklej identyfikator w [Peek](/): przy jednej z 17 powyższych grup liter z `C`, `P` lub `R` i dziesięcioma cyframi Peek od razu wskazuje Ekart („Wykryty przewoźnik”). Przy innych literach na początku (`ABCP4829105736`) Peek pokazuje „Sprawdzanie usług śledzenia…” i odpytuje wyszukiwarkę Ekart: gdy znajdzie skan, wyświetli „Ekart ma tę przesyłkę.” (gdy skanu jeszcze nie ma, stuknij „Zmień” i wybierz Ekart pod „Pasują do numeru”). Link z `ekartlogistics.com` zawierający `shipmenttrack/` również od razu przypisuje Ekart; natomiast link z `shiprocket.co` jest śledzony w Shiprocket. Ręczny wybór Ekart dla ciągu innego niż cztery litery i dziesięć cyfr pokaże, że przewoźnik „nie wydaje takich numerów”.
 
-Przypisana do Ekart przesyłka przed pierwszym skanem pokazuje „Oczekiwanie na przewoźnika Ekart” (a bez przewoźnika — „Brak historii śledzenia”). Peek pobiera dane z wyszukiwarki Ekart bez konta i telefonu: każdy wiersz z kodem i miastem, dokładną godziną przeliczoną na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”) bez powtórzeń oraz przewidywaną datę doręczenia, dopóki paczka zmierza do Ciebie (znika po doręczeniu, anulowaniu lub RTO).
+Przypisana do Ekart przesyłka przed pierwszym skanem pokazuje „Oczekiwanie na przewoźnika Ekart” (a bez przewoźnika — „Brak historii śledzenia”). Dwa dni po tym, jak Ekart po raz pierwszy odpowie, że nie zna numeru, Peek poprosi Cię o jego sprawdzenie, wybór innego przewoźnika lub usunięcie przesyłki. Peek pobiera dane z wyszukiwarki Ekart bez konta i telefonu: każdy wiersz z kodem i miastem, dokładną godziną przeliczoną na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”) bez powtórzeń oraz przewidywaną datę doręczenia, dopóki paczka zmierza do Ciebie (znika po doręczeniu, anulowaniu lub RTO).
 
-Gdy odpowiada wyszukiwarka Ekart, Peek sprawdza status nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz co 2 minuty od 6:00 (czasu indyjskiego) w dniu skanu `Out For Delivery` (przez serwisy śledzenia do co 15 minut w tym dniu przy otwartej karcie lub włączonych powiadomieniach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z Ekart ani ze sklepem.
+Gdy odpowiada wyszukiwarka Ekart, przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut oraz nawet co 2 minuty od 6:00 (czasu indyjskiego) w dniu skanu `Out For Delivery` (przez serwisy śledzenia do co 15 minut w tym dniu przy otwartej karcie lub włączonych powiadomieniach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę. Powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Ekart ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie Ekart
 
@@ -98,12 +98,12 @@ Paczka została zeskanowana w oddziale doręczeniowym (*Delivery Hub*): w drodze
 
 ### Ile prób doręczenia podejmuje Ekart?
 
-Oficjalne FAQ Ekart podaje trzy próby doręczenia do odbiorcy w ostatniej mili (oraz pięć prób odbioru od sprzedawcy). W sprawach zamówienia kontaktuj się najpierw ze sklepem.
+Oficjalne FAQ Ekart podaje trzy ponowne próby doręczenia (*reattempts*) do odbiorcy w ostatniej mili (oraz pięć ponownych prób odbioru od sprzedawcy). W sprawach zamówienia kontaktuj się najpierw ze sklepem.
 
 :::sources
 - [Ekart Logistics: Strona główna](https://www.ekartlogistics.in/) – indyjski operator logistyczny e-commerce i zasięg ponad 15 000 kodów PIN
 - [Ekart Logistics: Track Order](https://www.ekartlogistics.in/track-order) – śledzenie przesyłek e-commerce oraz osobny link B2B/LR
-- [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – trzy próby doręczenia, pięć prób odbioru, zmiana terminu przed RTO, 5 000 / 15 000 kodów PIN i zgłoszenia dla sprzedawców
+- [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – trzy ponowne próby doręczenia, pięć ponownych prób odbioru, zmiana terminu przed RTO, 5 000 / 15 000 kodów PIN i zgłoszenia dla sprzedawców
 - [Ekart Logistics: About Us](https://www.ekartlogistics.in/about-us) – działalność od 2009 r., 3 500 oddziałów doręczeniowych, ponad 80 sortowni i 14 000 kodów PIN
 - [Ekart Logistics: B2C Express](https://www.ekartlogistics.in/b2c-express) – doręczenia tego samego / następnego dnia oraz w 48–96 godzin w Indiach
 - [Ekart Logistics: Corporate Information](https://www.ekartlogistics.in/corporate-info) – Instakart Services Private Limited z siedzibą w Bengaluru

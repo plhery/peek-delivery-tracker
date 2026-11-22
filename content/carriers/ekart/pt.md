@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-A Ekart (também conhecida como *eKart Logistics* e *Ekart Express*), operada na Índia pela *Instakart Services Private Limited* desde 2009 com sede em Bengaluru (Karnataka), é uma das maiores transportadoras indianas de comércio eletrónico. Recolhe encomendas online junto do vendedor, encaminha-as pelos seus centros de triagem e entrega em mais de 15 000 códigos PIN na Índia. Cola o ID de seguimento enviado pela loja na caixa acima ou introdu-lo na [página Track Order de ekartlogistics.in](https://www.ekartlogistics.in/track-order).
+A Ekart (também conhecida como *eKart Logistics* e *Ekart Express*), lançada em 2009 segundo a página *About Us* e operada pela *Instakart Services Private Limited*, com sede em Bengaluru (Karnataka), é uma das maiores transportadoras indianas de comércio eletrónico. Recolhe encomendas online junto do vendedor, encaminha-as pelos seus centros de triagem e entrega em mais de 15 000 códigos PIN na Índia. Cola o ID de seguimento enviado pela loja na caixa acima ou introdu-lo na [página Track Order de ekartlogistics.in](https://www.ekartlogistics.in/track-order).
 
 ## ID de seguimento da Ekart: como é
 
@@ -50,15 +50,15 @@ O localizador da Ekart apresenta cada leitura com data, hora e cidade — umas v
 
 ## Como a Ekart entrega na Índia
 
-A Ekart opera apenas na Índia e o Peek não transfere encomendas da Ekart para nenhuma outra transportadora. Em `ekartlogistics.in`, a página B2C Express indica cobertura em mais de 15 000 códigos PIN de entrega (as FAQ referem 5 000 códigos PIN de recolha e 15 000 de entrega, enquanto *About Us* menciona 14 000 códigos PIN, mais de 80 centros de triagem e 3 500 centros de última milha), com opções no próprio dia ou no dia seguinte a curta distância e em 48 a 96 horas a distâncias maiores consoante o código PIN.
+O código do Peek só conhece a Ekart na Índia e o Peek não transfere encomendas da Ekart para nenhuma outra transportadora. Em `ekartlogistics.in`, a página B2C Express indica cobertura em mais de 15 000 códigos PIN de entrega (as FAQ referem 5 000 códigos PIN de recolha e 15 000 de entrega, enquanto *About Us* menciona 14 000 códigos PIN, mais de 80 centros de triagem e 3 500 centros de última milha), com opções no próprio dia ou no dia seguinte a curta distância e em 48 a 96 horas a distâncias maiores consoante o código PIN.
 
-Segundo as FAQ oficiais da Ekart, são feitas **cinco tentativas** na primeira milha (recolha no vendedor) e **três tentativas** na última milha (entrega ao destinatário), podendo a entrega ser reagendada a pedido do cliente desde que a remessa ainda não esteja marcada como `RTO` ([falha na entrega](guide:missed-delivery)).
+Segundo as FAQ oficiais da Ekart, são feitas **cinco novas tentativas** (*reattempts*) na primeira milha (recolha no vendedor) e **três novas tentativas** na última milha (entrega ao destinatário), podendo a entrega ser reagendada a pedido do cliente desde que a remessa ainda não esteja marcada como `RTO` ([falha na entrega](guide:missed-delivery)).
 
 ## Seguimento Ekart parado, em RTO ou não entregue
 
 **Parada em `Shipment Created`, `Pickup Requested` ou `NotPickedEvent`.** O vendedor ainda não entregou o pacote à Ekart (ou a recolha falhou); `PickupCancel` indica cancelamento da recolha. Pergunta à loja quando será expedida.
 
-**Vários dias sem nova leitura.** Quando uma encomenda registada, aceite ou em trânsito passa quatro dias sem nova leitura, o Peek assinala «Sem atualizações há quatro dias». Fala com a loja ([porque é que o seguimento não atualiza](guide:tracking-not-updating)).
+**Vários dias sem nova leitura.** Quando uma encomenda registada, aceite ou em trânsito passa quatro dias sem nova leitura, o Peek assinala «Sem atualizações desde …» com o dia dessa última leitura. Fala com a loja ([porque é que o seguimento não atualiza](guide:tracking-not-updating)).
 
 **Tentativa falhada ou RTO.** Após `undelivered_attempted`, `undelivered_unattempted` ou `Unsuccessful`, verifica a data após `Rescheduled to:` e confirma a morada e o telefone com a loja. Se surgir `ShipmentRtoConfirmed` ou `Marked RTO: ORDER_REJECT`, o pacote regressa ao vendedor: pede reembolso ou novo envio ([devolvida ao remetente](guide:returned-to-sender)).
 
@@ -66,7 +66,7 @@ Segundo as FAQ oficiais da Ekart, são feitas **cinco tentativas** na primeira m
 
 ## Apoio ao cliente e contactos da Ekart
 
-Nas FAQ de `ekartlogistics.in`, a Ekart instrui os vendedores a abrir um pedido no portal de expedidores (resposta em 24 horas) e em *Corporate Information* indica a sede da *Instakart Services Private Limited* em Bengaluru (`Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru KA 560103`), sem divulgar telefone nem e-mail de apoio para destinatários. Para questões, reenvio ou reembolso da tua compra, dirige-te primeiro à loja ou marketplace onde compraste.
+Nas FAQ de `ekartlogistics.in`, a Ekart instrui os vendedores a abrir um pedido no portal de expedidores (resposta em 24 horas) e em *Corporate Information* indica a morada da *Instakart Services Private Limited* em Bengaluru (`Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru KA 560103`), sem divulgar telefone nem e-mail de apoio para destinatários. Para questões, reenvio ou reembolso da tua compra, dirige-te primeiro à loja ou marketplace onde compraste.
 
 **Cuidado com SMS falsos.** Os domínios oficiais da Ekart são `www.ekartlogistics.in` (`ekartlogistics.in`) e `ekartlogistics.com`. Antes de pagares qualquer valor pedido por mensagem, lê [mensagens falsas de entregas](guide:delivery-scam-texts).
 
@@ -74,9 +74,9 @@ Nas FAQ de `ekartlogistics.in`, a Ekart instrui os vendedores a abrir um pedido 
 
 Cola o ID no [Peek](/): com um dos 17 prefixos acima seguido de `C`, `P` ou `R` e dez algarismos, o Peek atribui logo a Ekart («Transportadora detetada»). Com outras letras à frente (`ABCP4829105736`), mostra «A verificar serviços de seguimento…» e pergunta ao localizador da Ekart: mal exista uma leitura, diz «Ekart tem esta encomenda.» (se ainda não houver, toca em «Alterar» e escolhe a Ekart em «Corresponde a este número»). Uma ligação de `ekartlogistics.com` com `shipmenttrack/` também a regista na Ekart; já uma ligação de `shiprocket.co` é seguida na Shiprocket. Escolher a Ekart manualmente para algo diferente de quatro letras e dez algarismos indica que «não emite números como este».
 
-Registada na Ekart, uma encomenda sem leituras mostra «À espera de Ekart» (ou «Ainda sem histórico de seguimento» sem transportadora). O Peek lê diretamente o localizador da Ekart sem conta nem telefone: cada linha com códigos e cidade, hora exata convertida para o fuso do teu dispositivo («Horas no teu fuso horário: …») sem repetições e data prevista de entrega enquanto a encomenda segue para ti (ocultada após entrega, cancelamento ou RTO).
+Registada na Ekart, uma encomenda sem leituras mostra «À espera de Ekart» (ou «Ainda sem histórico de seguimento» sem transportadora). Dois dias depois de a Ekart responder pela primeira vez que não conhece o número, o Peek pede-te que o verifiques, escolhas outra transportadora ou elimines a encomenda. O Peek lê diretamente o localizador da Ekart sem conta nem telefone: cada linha com códigos e cidade, hora exata convertida para o fuso do teu dispositivo («Horas no teu fuso horário: …») sem repetições e data prevista de entrega enquanto a encomenda segue para ti (ocultada após entrega, cancelamento ou RTO).
 
-Enquanto o localizador da Ekart responder, o Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas, e até a cada 2 minutos a partir das 6:00 (hora da Índia) no dia em que a Ekart regista `Out For Delivery` (via serviços de seguimento, até a cada 15 minutos nesse dia com a encomenda aberta ou alertas ativos); nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem novidades, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a Ekart nem a loja por ti.
+Enquanto o localizador da Ekart responder, com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6:00 (hora da Índia) no dia em que a Ekart regista `Out For Delivery` (via serviços de seguimento, até a cada 15 minutos nesse dia com a encomenda aberta ou alertas ativos); nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem novidades, de hora a hora. Alertas: «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Ekart nem a loja por ti.
 
 ## Perguntas frequentes sobre o seguimento da Ekart
 
@@ -98,12 +98,12 @@ A encomenda deu entrada num centro de distribuição (*Delivery Hub*): à ida, o
 
 ### Quantas tentativas de entrega faz a Ekart?
 
-As FAQ oficiais da Ekart indicam três tentativas na última milha ao destinatário (e cinco tentativas na recolha ao vendedor). Sobre a tua encomenda, fala primeiro com a loja.
+As FAQ oficiais da Ekart indicam três novas tentativas (*reattempts*) na última milha ao destinatário (e cinco na recolha ao vendedor). Sobre a tua encomenda, fala primeiro com a loja.
 
 :::sources
 - [Ekart Logistics: Página inicial](https://www.ekartlogistics.in/) – transportadora e-commerce na Índia e mais de 15 000 códigos PIN cobertos
 - [Ekart Logistics: Track Order](https://www.ekartlogistics.in/track-order) – seguimento de encomendas e-commerce e ligação separada B2B/LR
-- [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – três tentativas de entrega, cinco de recolha, reagendamento antes de RTO, 5 000 / 15 000 códigos PIN e suporte por ticket para vendedores
+- [Ekart Logistics: FAQ](https://www.ekartlogistics.in/faq) – três novas tentativas de entrega, cinco de recolha, reagendamento antes de RTO, 5 000 / 15 000 códigos PIN e suporte por ticket para vendedores
 - [Ekart Logistics: About Us](https://www.ekartlogistics.in/about-us) – início em 2009, 3 500 centros de distribuição, mais de 80 centros de triagem e 14 000 códigos PIN
 - [Ekart Logistics: B2C Express](https://www.ekartlogistics.in/b2c-express) – entregas no próprio dia / dia seguinte e em 48–96 horas na Índia
 - [Ekart Logistics: Corporate Information](https://www.ekartlogistics.in/corporate-info) – Instakart Services Private Limited e sede em Bengaluru

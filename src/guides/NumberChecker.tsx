@@ -35,6 +35,14 @@ let reader: Promise<Reader> | null = null;
 const loadReader = () => (reader ??= import('./numberReading'));
 
 /**
+ * An El Corte Inglés order number: 13 digits starting 259 or 269, as its customers quote them
+ * (https://www.ocu.org/reclamar/lista-reclamaciones-publicas/mucho-retraso-en-entrega/3e6c4a88d9208bdbc4). Readers of its
+ * guide type them in, and no carrier tracks one, so the checker hands one on without its carrier: asking it first would
+ * cost a lookup for nothing.
+ */
+const ORDER_NUMBER = /(?<![0-9])2[56]9[0-9]{10}(?![0-9])/;
+
+/**
  * A field in a guide that names the carrier of a number as it is typed, from its shape alone, as the landing
  * reads it. Tracking it hands it to the landing the way a carrier's page does: never through an address, and
  * with the carrier the guide names, if any, as the hint that the landing asks first.
@@ -65,7 +73,7 @@ export function NumberChecker({ locale, words, carrier }: { locale: Locale; word
       document.getElementById('number-checker')?.focus();
       return;
     }
-    writeCarrierHandoff(text, Date.now(), { carrier });
+    writeCarrierHandoff(text, Date.now(), { carrier: ORDER_NUMBER.test(text) ? undefined : carrier });
     window.location.assign(landing);
   }
 

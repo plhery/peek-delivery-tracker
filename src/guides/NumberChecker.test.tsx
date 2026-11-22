@@ -158,6 +158,18 @@ describe('the number checker in a guide', () => {
     await user.type(screen.getByRole('textbox', { name: es['guides.checker.label'] }), '1234567890123{Enter}');
     expect(assign).toHaveBeenCalledExactlyOnceWith('/es');
     expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '1234567890123', carrier: 'celeritas' });
+    // An El Corte Inglés order number goes on alone: no carrier tracks it.
+    const field = screen.getByRole('textbox', { name: es['guides.checker.label'] });
+    for (const order of ['2690000000001', 'Pedido nº 2590000000001']) {
+      await user.clear(field);
+      await user.type(field, `${order}{Enter}`);
+      expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toEqual(expect.objectContaining({ text: order }));
+      expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).not.toHaveProperty('carrier');
+    }
+    // A longer number that starts the same way is no order number.
+    await user.clear(field);
+    await user.type(field, '26900000000012{Enter}');
+    expect(JSON.parse(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)!)).toMatchObject({ text: '26900000000012', carrier: 'celeritas' });
   });
 
   it('leaves the Enter that picks an input method’s candidate to the input method', async () => {

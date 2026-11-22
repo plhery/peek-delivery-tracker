@@ -58,7 +58,7 @@ Kann FAN nicht zustellen, benachrichtigt es dich laut AGB und lagert das Paket 5
 
 **Collect Point** (PayPoint-Colet-Expres-Läden): nur vorausbezahlte Pakete bis 10 kg. Bring Ausweis und den 5-stelligen Code aus SMS oder E-Mail mit; der Shop lagert es 7 Kalendertage.
 
-**Zahlung beim Kurier.** Kartenzahlung geht nur, wenn der Shop sie freigegeben hat. Öffnen vor dem Bezahlen ist nur möglich, wenn der Absender „Check on Delivery“ gebucht hat.
+**Zahlung beim Kurier.** Den Nachnahmebetrag kannst du nur per Karte zahlen, wenn der Shop das freigegeben hat. Öffnen vor dem Bezahlen ist nur möglich, wenn der Absender „Check on Delivery“ gebucht hat.
 
 ## FAN-Courier-Paket verspätet, verloren oder beschädigt
 
@@ -72,20 +72,20 @@ FAN nennt keine feste Tageszahl, ab der du eingreifen solltest. Sofern kein ande
 
 Die auf der Website von FAN Courier genannten Kanäle:
 
-- **Telefon:** 021.9336 (+40 21 9336 aus dem Ausland, normaler Tarif), 0723 55 22 33 oder 0742 55 22 33 aus Vodafone und Orange, oder \*9336. Montag bis Freitag, 9:00 bis 17:00 Uhr.
+- **Telefon:** 021.9336 (+40 21 9336 aus dem Ausland, normaler Tarif), 0723 55 22 33 oder 0742 55 22 33 aus Vodafone und Orange, oder \*9336. Montag bis Freitag, 9:00 bis 17:00 Uhr rumänischer Zeit.
 - **E-Mail:** customer@fancourier.ro; FANbox-Probleme fanbox@fancourier.ro; Collect Point collectpoint@fancourier.ro; Auslandssendungen international@fancourier.ro.
 - **ȘteFAN:** der Chat-Assistent auf fancourier.ro, rund um die Uhr erreichbar.
 - **Der Kurier:** nur am Liefertag über die App oder den SMS-Link.
 
-> FAN warnt vor vermehrten Betrugsversuchen in seinem Namen. Öffne keine Links, die nach deinen Bankdaten fragen.
+> FAN warnt vor vermehrten Betrugsversuchen in seinem Namen. Öffne keine falschen Links, die nach deinen Bankdaten fragen.
 
 ## FAN-Courier-Pakete mit Peek verfolgen
 
-[Peek](/) fragt FAN Courier bei jeder 13-stelligen Nummer mit Anfangsziffer `2`, `3`, `4`, `5` oder `7` ab – bei Nummern mit `7000` mit Vorrang für FAN Courier – zusammen mit weiteren Paketdiensten derselben Länge wie [Delhivery](carrier:delhivery) und Econt. Kennt nur FAN die Sendung, erscheint „FAN Courier hat dieses Paket.“; kennen sie mehrere, wählst du aus. Eine AWB anderer Form wird nicht automatisch erkannt: Füg sie trotzdem ein (Peek verfolgt über 4500 Paketdienste), tipp auf „Ändern“ und wähle „FAN Courier“. Ein Tracking-Link von FAN auf Rumänisch (`/awb-tracking/`) oder Englisch (`/en/awb-track/`) mit `tracking=` oder `awb=` oder mit einer 13-stelligen AWB nach `/awb-tracking/` geht direkt an FAN Courier.
+[Peek](/) fragt FAN Courier bei jeder 13-stelligen Nummer mit Anfangsziffer `2`, `3`, `4`, `5` oder `7` ab. Steht die Region deines Telefons oder deine Verbindung in Deutschland, Österreich, der Schweiz oder Rumänien, fragt Peek nur FAN Courier (bei Nummern mit `3` auch iMile); in Bulgarien zusätzlich Econt, und zwar zuerst, außer bei Nummern mit `7000`. Kennt nur FAN die Sendung, erscheint „FAN Courier hat dieses Paket.“; kennen sie mehrere, wählst du aus. Eine AWB anderer Form wird nicht automatisch erkannt: Füg sie trotzdem ein (Peek verfolgt über 4500 Paketdienste), tipp auf „Ändern“ und wähle „FAN Courier“. Ein Tracking-Link von FAN auf Rumänisch (`/awb-tracking/`) oder Englisch (`/en/awb-track/`) mit `tracking=` oder `awb=` oder mit einer 13-stelligen AWB nach `/awb-tracking/` geht direkt an FAN Courier.
 
-Peek zeigt jeden Scan von FAN samt Ort und Uhrzeit. Da FAN keine Zeitzone angibt, wertet Peek die Zeiten als rumänische Zeit und rechnet sie in die Zeitzone deines Geräts um; auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen. Die Scans behalten FANs englische Texte, außer `Shipment picked up`, das als „Sendung übernommen“ erscheint. In der Sendung führt „Hol dir Hilfe bei FAN Courier“ zur Kontaktseite von FAN.
+Peek zeigt jeden Scan von FAN samt Ort und Uhrzeit. Da FAN keine Zeitzone angibt, wertet Peek die Zeiten in der Zeit des genannten Orts (rumänische Zeit für einen Ort in Rumänien) und rechnet sie in die Zeitzone deines Geräts um; auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen. Die Scans behalten FANs englische Texte, außer `Shipment picked up` und `Delivered`, die als „Sendung übernommen“ und „Zugestellt“ erscheinen. Steht die Sendung still, führt „Hol dir Hilfe bei FAN Courier“ im Hinweis der Sendung zur Kontaktseite von FAN.
 
-Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag, an dem FAN das Paket in Zustellung scannt, ab 6:00 Uhr rumänischer Zeit alle 2 Minuten, solange FANs eigener Tracker antwortet (über Tracking-Dienste alle 15 Minuten). Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen.
+Solange du das Paket auf dem Bildschirm geöffnet hast – oder am Liefertag mit aktiven Mitteilungen –, prüft Peek bis zu alle 10 Minuten, und am Tag, an dem FAN das Paket in Zustellung scannt, ab 6:00 Uhr rumänischer Zeit alle 2 Minuten, solange FANs eigener Tracker antwortet. Sonst sowie nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Benachrichtigungen kannst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen.
 
 Peek zeigt weder ein erwartetes Lieferdatum noch den Namen der FANbox und lässt Empfängername, Inhalt, Gewicht und Zahlungsdaten weg. Eine Rücksendung reist unter eigener AWB, daher erscheint die ursprüngliche Sendung nie als zurückgesendet.
 

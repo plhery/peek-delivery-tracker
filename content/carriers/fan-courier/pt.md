@@ -58,7 +58,7 @@ Se a FAN não conseguir entregar, as condições gerais indicam que te avisa e g
 
 **Collect Point** (lojas PayPoint Colet Expres): apenas encomendas pré-pagas até 10 kg. Leva documento de identificação e o código de 5 caracteres do SMS ou email; a loja guarda-a 7 dias seguidos.
 
-**Pagar ao estafeta.** Só aceita cartão se a loja o permitir. Não podes abrir a encomenda antes de pagar, salvo se o remetente contratou «Check on Delivery».
+**Pagar ao estafeta.** O valor à cobrança só se paga com cartão se a loja o permitir. Não podes abrir a encomenda antes de pagar, salvo se o remetente contratou «Check on Delivery».
 
 ## Encomenda FAN Courier atrasada, perdida ou danificada
 
@@ -72,20 +72,20 @@ A FAN não indica ao fim de quantos dias reclamar. Salvo outro prazo acordado, a
 
 Canais indicados no site da FAN Courier:
 
-- **Telefone:** 021.9336 (+40 21 9336 do estrangeiro, tarifa normal), 0723 55 22 33 ou 0742 55 22 33 a partir da Vodafone e Orange, ou \*9336. De segunda a sexta, das 9h00 às 17h00.
+- **Telefone:** 021.9336 (+40 21 9336 do estrangeiro, tarifa normal), 0723 55 22 33 ou 0742 55 22 33 a partir da Vodafone e Orange, ou \*9336. De segunda a sexta, das 9h00 às 17h00, hora da Roménia.
 - **Email:** customer@fancourier.ro; problemas FANbox fanbox@fancourier.ro; Collect Point collectpoint@fancourier.ro; encomendas internacionais international@fancourier.ro.
 - **ȘteFAN:** o assistente de chat em fancourier.ro, disponível a qualquer hora.
 - **O estafeta:** apenas no dia da entrega, através da app ou do link SMS.
 
-> A FAN avisa que aumentaram as tentativas de fraude em seu nome. Não abras links que peçam os teus dados bancários.
+> A FAN avisa que aumentaram as tentativas de fraude em seu nome. Não abras links falsos que peçam os teus dados bancários.
 
 ## Seguir encomendas FAN Courier com o Peek
 
-O [Peek](/) pergunta à FAN Courier por qualquer número de 13 algarismos começado por `2`, `3`, `4`, `5` ou `7` — dando prioridade à FAN Courier nos números começados por `7000` — juntamente com outras transportadoras com o mesmo comprimento, incluindo [Delhivery](carrier:delhivery) e Econt. Se só a FAN o conhecer, vês «FAN Courier tem esta encomenda.»; se outra também o conhecer, escolhes. Um AWB com outro formato não é reconhecido automaticamente: cola-o na mesma (o Peek segue mais de 4500 transportadoras), carrega em «Alterar» e escolhe «FAN Courier». Um link da página de rastreio romena (`/awb-tracking/`) ou inglesa (`/en/awb-track/`) com `tracking=` ou `awb=`, ou com um AWB de 13 algarismos após `/awb-tracking/`, vai direto para a FAN Courier.
+O [Peek](/) pergunta à FAN Courier por qualquer número de 13 algarismos começado por `2`, `3`, `4`, `5` ou `7`. Se a região do teu telemóvel ou a tua ligação for de Portugal ou da Roménia, só pergunta à FAN Courier (e à iMile se começar por `3`); na Bulgária pergunta também à Econt, primeiro, exceto se o número começar por `7000`. Se só a FAN o conhecer, vês «FAN Courier tem esta encomenda.»; se outra também o conhecer, escolhes. Um AWB com outro formato não é reconhecido automaticamente: cola-o na mesma (o Peek segue mais de 4500 transportadoras), carrega em «Alterar» e escolhe «FAN Courier». Um link da página de rastreio romena (`/awb-tracking/`) ou inglesa (`/en/awb-track/`) com `tracking=` ou `awb=`, ou com um AWB de 13 algarismos após `/awb-tracking/`, vai direto para a FAN Courier.
 
-O Peek mostra cada registo da FAN com localidade e hora. Como as horas da FAN não trazem fuso horário, o Peek lê-as na hora romena e apresenta-as no fuso do teu dispositivo; em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» e o respetivo nome. Os registos mantêm o inglês da FAN, exceto `Shipment picked up`, mostrado como «Encomenda recolhida». No ecrã da encomenda, «Pede ajuda a FAN Courier» abre a página de contactos da FAN.
+O Peek mostra cada registo da FAN com localidade e hora. Como as horas da FAN não trazem fuso horário, o Peek lê-as na hora do local indicado (hora romena para uma localidade da Roménia) e apresenta-as no fuso do teu dispositivo; em peektracker.com e nas apps para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» e o respetivo nome. Os registos mantêm o inglês da FAN, exceto `Shipment picked up` e `Delivered`, mostrados como «Encomenda recolhida» e «Entregue». Se a encomenda ficar parada, a nota do seu ecrã propõe «Pede ajuda a FAN Courier», que abre a página de contactos da FAN.
 
-Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h00 hora romena no dia em que a FAN regista a encomenda em distribuição enquanto o rastreio da FAN responder (a cada 15 minutos através de serviços de seguimento). Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
+Enquanto mantiveres a encomenda aberta no ecrã, ou no dia da entrega com as notificações ligadas, o Peek verifica até a cada 10 minutos, ou a cada 2 minutos a partir das 6h00 hora romena no dia em que a FAN regista a encomenda em distribuição enquanto o rastreio da FAN responder. Fora desses casos, e após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 Não mostra dia previsto de entrega nem o nome do FANbox, e deixa de fora nome do destinatário, conteúdo, peso e dados de pagamento. Como uma devolução segue sob AWB próprio, o envio original nunca aparece como devolvido.
 

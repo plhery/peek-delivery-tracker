@@ -58,7 +58,7 @@ Si FAN no puede entregar, sus condiciones generales establecen que te avisa y gu
 
 **Collect Point** (tiendas PayPoint Colet Expres): solo envíos prepagados hasta 10 kg. Lleva documento de identidad y el código de 5 caracteres del SMS o correo; el comercio lo guarda 7 días naturales.
 
-**Pago al mensajero.** Solo admite tarjeta si la tienda lo permite. No puedes abrir el paquete antes de pagar salvo que el remitente contratase «Check on Delivery».
+**Pago al mensajero.** El importe contra reembolso solo se paga con tarjeta si la tienda lo permite. No puedes abrir el paquete antes de pagar salvo que el remitente contratase «Check on Delivery».
 
 ## Paquete FAN Courier retrasado, perdido o dañado
 
@@ -72,20 +72,20 @@ FAN no fija un plazo concreto a partir del cual preocuparse. Salvo acuerdo disti
 
 Canales publicados en la web de FAN Courier:
 
-- **Teléfono:** 021.9336 (+40 21 9336 desde el extranjero, tarifa normal), 0723 55 22 33 o 0742 55 22 33 desde Vodafone y Orange, o \*9336. De lunes a viernes, de 9:00 a 17:00.
+- **Teléfono:** 021.9336 (+40 21 9336 desde el extranjero, tarifa normal), 0723 55 22 33 o 0742 55 22 33 desde Vodafone y Orange, o \*9336. De lunes a viernes, de 9:00 a 17:00, hora de Rumanía.
 - **Correo electrónico:** customer@fancourier.ro; incidencias FANbox fanbox@fancourier.ro; Collect Point collectpoint@fancourier.ro; envíos internacionales international@fancourier.ro.
 - **ȘteFAN:** el asistente de chat en fancourier.ro, disponible a cualquier hora.
 - **El repartidor:** solo el día de entrega, mediante la app o el enlace del SMS.
 
-> FAN advierte de que han aumentado los intentos de fraude usando su nombre. No abras enlaces que pidan tus datos bancarios.
+> FAN advierte de que han aumentado los intentos de fraude usando su nombre. No abras enlaces falsos que pidan tus datos bancarios.
 
 ## Seguir paquetes de FAN Courier con Peek
 
-[Peek](/) consulta a FAN Courier para cualquier número de 13 dígitos que empiece por `2`, `3`, `4`, `5` o `7` — priorizando FAN Courier cuando empieza por `7000` — junto con otros transportistas con el mismo largo, como [Delhivery](carrier:delhivery) y Econt. Si solo FAN lo conoce, verás «FAN Courier tiene este paquete.»; si lo reconoce otro también, eliges. Un AWB de otra forma no se detecta solo: pégalo igualmente (Peek sigue más de 4500 transportistas), pulsa «Cambiar» y elige «FAN Courier». Un enlace de la página de seguimiento en rumano (`/awb-tracking/`) o inglés (`/en/awb-track/`) con `tracking=` o `awb=`, o con un AWB de 13 dígitos tras `/awb-tracking/`, va directo a FAN Courier.
+[Peek](/) consulta a FAN Courier para cualquier número de 13 dígitos que empiece por `2`, `3`, `4`, `5` o `7`. Si la región de tu teléfono o tu conexión está en España o Rumanía, solo consulta a FAN Courier (y a iMile si empieza por `3`); en Bulgaria consulta también a Econt, primero salvo si el número empieza por `7000`. Si solo FAN lo conoce, verás «FAN Courier tiene este paquete.»; si lo reconoce otro también, eliges. Un AWB de otra forma no se detecta solo: pégalo igualmente (Peek sigue más de 4500 transportistas), pulsa «Cambiar» y elige «FAN Courier». Un enlace de la página de seguimiento en rumano (`/awb-tracking/`) o inglés (`/en/awb-track/`) con `tracking=` o `awb=`, o con un AWB de 13 dígitos tras `/awb-tracking/`, va directo a FAN Courier.
 
-Peek muestra cada escaneo de FAN con localidad y hora. Como los horarios de FAN carecen de zona horaria, Peek los interpreta en hora rumana y los muestra en la de tu dispositivo; en peektracker.com y en las apps de iPhone y Android, el historial acaba con «Horas en tu zona horaria:» y su nombre. Los escaneos mantienen el inglés de FAN, salvo `Shipment picked up`, que se muestra como «Envío admitido». En la ficha del envío, «Pide ayuda a FAN Courier» abre la página de contacto de FAN.
+Peek muestra cada escaneo de FAN con localidad y hora. Como los horarios de FAN carecen de zona horaria, Peek los interpreta en la hora del lugar indicado (hora rumana para una localidad de Rumanía) y los muestra en la de tu dispositivo; en peektracker.com y en las apps de iPhone y Android, el historial acaba con «Horas en tu zona horaria:» y su nombre. Los escaneos mantienen el inglés de FAN, salvo `Shipment picked up` y `Delivered`, que se muestran como «Envío admitido» y «Entregado». Si el envío se queda parado, la nota de su ficha ofrece «Pide ayuda a FAN Courier», que abre la página de contacto de FAN.
 
-Mientras tienes el paquete abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos, o cada 2 minutos desde las 6:00 hora rumana el día en que FAN lo escanea en reparto mientras responda el rastreador de FAN (y cada 15 minutos a través de servicios de seguimiento). Fuera de esos casos, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Puedes configurar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
+Mientras tienes el paquete abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos, o cada 2 minutos desde las 6:00 hora rumana el día en que FAN lo escanea en reparto mientras responda el rastreador de FAN. Fuera de esos casos, y tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Puedes configurar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
 No muestra fecha estimada de entrega ni el nombre del FANbox, y omite nombre del destinatario, contenido, peso y datos de pago. Como las devoluciones viajan con un AWB distinto, el envío original nunca figura como devuelto.
 

@@ -58,7 +58,7 @@ Si FAN ne peut pas livrer, ses conditions générales prévoient qu'elle t'avise
 
 **Collect Point** (commerces PayPoint Colet Expres) : colis prépayés uniquement, jusqu'à 10 kg. Apporte une pièce d'identité et le code à 5 caractères du SMS ou de l'e-mail ; le magasin le garde 7 jours calendaires.
 
-**Paiement au livreur.** La carte n'est acceptée que si le magasin l'autorise. Impossible d'ouvrir le colis avant de payer, sauf si l'expéditeur a souscrit « Check on Delivery ».
+**Paiement au livreur.** Le contre-remboursement ne se paie par carte que si le magasin l'autorise. Impossible d'ouvrir le colis avant de payer, sauf si l'expéditeur a souscrit « Check on Delivery ».
 
 ## Colis FAN Courier en retard, perdu ou abîmé
 
@@ -72,20 +72,20 @@ FAN n'indique pas au bout de combien de jours s'inquiéter. Sauf autre date conv
 
 Canaux publiés sur le site de FAN Courier :
 
-- **Téléphone :** 021.9336 (+40 21 9336 depuis l'étranger, numéro à tarif normal), 0723 55 22 33 ou 0742 55 22 33 depuis Vodafone et Orange, ou \*9336. Du lundi au vendredi, de 9 h à 17 h.
+- **Téléphone :** 021.9336 (+40 21 9336 depuis l'étranger, numéro à tarif normal), 0723 55 22 33 ou 0742 55 22 33 depuis Vodafone et Orange, ou \*9336. Du lundi au vendredi, de 9 h à 17 h, heure roumaine.
 - **E-mail :** customer@fancourier.ro ; problèmes FANbox fanbox@fancourier.ro ; Collect Point collectpoint@fancourier.ro ; colis vers ou depuis l'étranger international@fancourier.ro.
 - **ȘteFAN :** l'assistant de chat sur fancourier.ro, joignable à toute heure.
 - **Le livreur :** le jour de la livraison uniquement, via l'application ou le lien SMS.
 
-> FAN avertit que les tentatives de fraude utilisant son nom ont augmenté. N'ouvre pas de liens te demandant tes coordonnées bancaires.
+> FAN avertit que les tentatives de fraude utilisant son nom ont augmenté. N'ouvre pas de faux liens te demandant tes coordonnées bancaires.
 
 ## Suivre un colis FAN Courier avec Peek
 
-[Peek](/) interroge FAN Courier pour tout numéro à 13 chiffres commençant par `2`, `3`, `4`, `5` ou `7` — en mettant FAN Courier en priorité pour les numéros commençant par `7000` — aux côtés d'autres transporteurs partageant cette longueur, dont [Delhivery](carrier:delhivery) et Econt. Si seule FAN connaît le colis, tu vois « FAN Courier a ce colis. » ; si un autre transporteur le connaît aussi, tu choisis. Un AWB d'une autre forme n'est pas détecté automatiquement : colle-le quand même (Peek suit plus de 4 500 transporteurs), puis appuie sur « Changer » et choisis « FAN Courier ». Un lien de suivi roumain (`/awb-tracking/`) ou anglais (`/en/awb-track/`) avec `tracking=` ou `awb=`, ou suivi d'un AWB à 13 chiffres après `/awb-tracking/`, va directement à FAN Courier.
+[Peek](/) interroge FAN Courier pour tout numéro à 13 chiffres commençant par `2`, `3`, `4`, `5` ou `7`. Si la région de ton téléphone ou ta connexion est en France ou en Roumanie, il n'interroge que FAN Courier (et iMile pour un numéro commençant par `3`) ; en Bulgarie, il interroge aussi Econt, en premier sauf pour un numéro commençant par `7000`. Si seule FAN connaît le colis, tu vois « FAN Courier a ce colis. » ; si un autre transporteur le connaît aussi, tu choisis. Un AWB d'une autre forme n'est pas détecté automatiquement : colle-le quand même (Peek suit plus de 4 500 transporteurs), puis appuie sur « Changer » et choisis « FAN Courier ». Un lien de suivi roumain (`/awb-tracking/`) ou anglais (`/en/awb-track/`) avec `tracking=` ou `awb=`, ou suivi d'un AWB à 13 chiffres après `/awb-tracking/`, va directement à FAN Courier.
 
-Peek affiche chaque scan de FAN avec sa ville et son heure. Les horaires de FAN ne comportant pas de fuseau, Peek les lit à l'heure roumaine et les affiche dans le fuseau de ton appareil ; sur peektracker.com et dans les applis iPhone et Android, l'historique se termine par « Heures dans ton fuseau horaire : » suivi de son nom. Les scans gardent le libellé anglais de FAN, sauf `Shipment picked up`, affiché comme « Colis pris en charge ». Sur la fiche du colis, « Demande de l’aide à FAN Courier » renvoie vers la page de contact de FAN.
+Peek affiche chaque scan de FAN avec sa ville et son heure. Les horaires de FAN ne comportant pas de fuseau, Peek les lit à l'heure du lieu indiqué (l'heure roumaine pour une ville de Roumanie) et les affiche dans le fuseau de ton appareil ; sur peektracker.com et dans les applis iPhone et Android, l'historique se termine par « Heures dans ton fuseau horaire : » suivi de son nom. Les scans gardent le libellé anglais de FAN, sauf `Shipment picked up` et `Delivered`, affichés comme « Colis pris en charge » et « Livré ». Si le colis ne bouge plus, la note de sa fiche propose « Demande de l’aide à FAN Courier », qui renvoie vers la page de contact de FAN.
 
-Tant que tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h heure roumaine le jour où FAN scanne le colis en livraison tant que le suivi de FAN répond (et toutes les 15 minutes via des services de suivi). Autrement, et après deux jours sans nouvelle (12 heures tant que le colis affiche encore « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Tu peux activer les notifications sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Tant que tu gardes le colis ouvert à l'écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h heure roumaine le jour où FAN scanne le colis en livraison tant que le suivi de FAN répond. Autrement, et après deux jours sans nouvelle (12 heures tant que le colis affiche encore « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures. Tu peux activer les notifications sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 Peek n'affiche ni jour de livraison prévu ni nom du FANbox, et laisse de côté le nom du destinataire, le contenu, le poids et les informations de paiement. Un retour voyageant sous son propre AWB, l'envoi initial n'apparaît jamais comme retourné.
 

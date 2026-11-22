@@ -372,8 +372,9 @@ class PassNotesTest {
     }
 
     @Test
-    fun aCarrierWritingItsTimelineAheadAddsNoLineToThePass() {
-        // The history's line says the rest are predictions; the pass, moving, says the same with or without them.
+    fun aCarrierWritingItsTimelineAheadAddsOnlyTheSellerLineForADeliveryToThePass() {
+        // The history's line says the rest are predictions; the pass, moving, says the same with or without them,
+        // until the steps written ahead hold a delivery: then it adds the one line telling the reader to ask the seller.
         val lamp = DemoCards.parcel("Moon lamp").copy(carrier = CarrierId.Gzyl)
         fun words(): List<String> =
             compose.onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsProperties.Text), useUnmergedTree = true).fetchSemanticsNodes().flatMap(::texts)
@@ -385,10 +386,15 @@ class PassNotesTest {
         compose.waitForIdle()
         assertEquals(plain, words())
 
-        val written = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z")
-        passParcel = lamp.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(written))
+        val sorted = PlannedTrackingEvent(description = "Sorted", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T07:00:00Z")
+        passParcel = lamp.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(sorted))
         compose.waitForIdle()
         assertEquals(plain, words())
+
+        val delivered = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z")
+        passParcel = lamp.copy(writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = listOf(sorted, delivered))
+        compose.waitForIdle()
+        assertEquals(plain + "GZYL’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller.", words())
         assertFalse(textExists("predictions"))
     }
 

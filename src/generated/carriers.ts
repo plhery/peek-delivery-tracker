@@ -2316,6 +2316,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d57"
     },
     {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "cacesa-sendungsverfolgung",
+      "title": "CACESA Sendungsverfolgung: Zoll, Status und Zustellung",
+      "name": "CACESA",
+      "color": "#C9032D"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "sunyou-sendungsverfolgung",
@@ -3236,6 +3244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Allegro One\u00a0: One Box, One Punkt et One Kurier",
       "name": "Allegro One",
       "color": "#006d57"
+    },
+    {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "suivi-cacesa",
+      "title": "Suivi CACESA\u00a0: douane, statuts et transporteur final",
+      "name": "CACESA",
+      "color": "#C9032D"
     },
     {
       "id": "sunyou",
@@ -4182,6 +4198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Allegro One: One Box, One Punkt e One Kurier",
       "name": "Allegro One",
       "color": "#006d57"
+    },
+    {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "tracciamento-cacesa",
+      "title": "Tracciamento CACESA: dogana, stati e chi consegna",
+      "name": "CACESA",
+      "color": "#C9032D"
     },
     {
       "id": "sunyou",
@@ -6830,6 +6854,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Allegro One śledzenie przesyłki: One Box, Punkt i Kurier",
       "name": "Allegro One",
       "color": "#006d57"
+    },
+    {
+      "id": "cacesa",
+      "catalog": "cacesa",
+      "slug": "sledzenie-cacesa",
+      "title": "Śledzenie CACESA: cło, statusy i kto doręcza paczkę",
+      "name": "CACESA",
+      "color": "#C9032D"
     },
     {
       "id": "sunyou",

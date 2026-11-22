@@ -56,7 +56,7 @@
   { "id": "landmark-global", "catalog": "landmark-global", "name": "Landmark Global", "languages": ["en", "de", "fr", "es", "pt", "it", "pl"] },
   { "id": "dhl-ecommerce", "catalog": "dhl-ecommerce", "name": "DHL eCommerce", "languages": ["en", "de"] },
   { "id": "allegro-one", "catalog": "allegro-one", "name": "Allegro One", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
-  { "id": "cacesa", "catalog": "cacesa", "name": "CACESA", "languages": ["en", "es", "pt"] },
+  { "id": "cacesa", "catalog": "cacesa", "name": "CACESA", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "sunyou", "catalog": "sunyou", "name": "SunYou", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "amazon-shipping", "catalog": "amazon-shipping", "name": "Amazon Shipping", "languages": ["en", "de", "fr", "it", "es", "pl", "pt"] },
   { "id": "postnord", "catalog": "postnord", "name": "PostNord", "languages": ["en", "da", "sv", "nb", "fi"] },

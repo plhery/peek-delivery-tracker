@@ -89683,6 +89683,12 @@
     ]
   },
   {
+    "input": "CRT330596304272",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "CS004311555CZ",
     "carrier": "intl-post",
     "confidence": "high",
@@ -106158,6 +106164,14 @@
     ]
   },
   {
+    "input": "P-0044-2639",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dtdc"
+    ]
+  },
+  {
     "input": "P/11309/LPOZ/2026",
     "carrier": "no-limit",
     "confidence": "high",
@@ -112327,6 +112341,28 @@
     ],
     "asked": [
       "chronopost"
+    ]
+  },
+  {
+    "input": "S-199806-2617",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
+    "input": "S-80215-2616",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {

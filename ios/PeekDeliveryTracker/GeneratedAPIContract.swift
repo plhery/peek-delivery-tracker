@@ -2077,6 +2077,8 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let fsqh = CarrierID(rawValue: "fsqh")
     static let ledaExpress = CarrierID(rawValue: "leda-express")
     static let qlgj = CarrierID(rawValue: "qlgj")
+    static let coretrails = CarrierID(rawValue: "coretrails")
+    static let warp = CarrierID(rawValue: "warp")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -4102,6 +4104,8 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .fsqh,
         .ledaExpress,
         .qlgj,
+        .coretrails,
+        .warp,
     ]
 
     init(from decoder: Decoder) throws {

@@ -19547,7 +19547,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "xde-logistics"
     },
-    "trackingUrlTemplate": "https://www.xde.com.ph/?tn={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -19570,8 +19569,7 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://www.xde.com.ph/"
+    "detectionRules": []
   },
   "yalidine": {
     "displayName": "Yalidine",
@@ -44170,7 +44168,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.cmtexpress.com.cn/track.aspx",
+    "trackingSearchUrl": "https://tms.cmtexpress.com.cn/en/trackIndex.htm",
     "trackingUrlTemplate": "https://tms.cmtexpress.com.cn/en/trackIndex.htm?documentCode={trackingNumber}"
   },
   "kuayuan-express": {
@@ -68107,6 +68105,56 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "coretrails": {
+    "displayName": "Coretrails",
+    "countries": [
+      "US"
+    ],
+    "color": "#100B37",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "coretrails"
+    },
+    "trackingUrlTemplate": "https://www.coretrails.com/home/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.coretrails.com",
+          "coretrails.com"
+        ],
+        "path": "^/home/(CRT\\d+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.coretrails.com/",
+    "helpUrl": "https://www.coretrails.com/contact-us"
+  },
+  "warp": {
+    "displayName": "WARP",
+    "countries": [
+      "US"
+    ],
+    "color": "#4ADE80",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "warp"
+    },
+    "trackingUrlTemplate": "https://tracking.wearewarp.com/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.wearewarp.com"
+        ],
+        "path": "^/([SP]-?\\d{3,9}-?\\d{4})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.wearewarp.com/"
   }
 } as const;
 
@@ -70185,7 +70233,9 @@ export const CARRIER_IDS = [
   "wanjia-logistics",
   "fsqh",
   "leda-express",
-  "qlgj"
+  "qlgj",
+  "coretrails",
+  "warp"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -8444,7 +8444,9 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "speedy",
-      "recognitionRank": 280
+      "recognitionRank": 280,
+      "browserRecognitionRank": 280,
+      "browserRecognitionPattern": "^63\\d{9}$"
     },
     "linkRules": [
       {
@@ -10450,7 +10452,9 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "AAA Cooper",
     "aliases": [
       "AAA Cooper Transportation",
-      "ACT"
+      "ACT",
+      "DHE Transportation",
+      "Midwest Motor Express"
     ],
     "countries": [
       "US"
@@ -67596,6 +67600,60 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://swiss-universal-express.ch/tracking/?lang=en"
+  },
+  "konga-kxpress": {
+    "displayName": "Konga Logistics",
+    "aliases": [
+      "KXpress",
+      "KXpress Logistics"
+    ],
+    "countries": [
+      "NG"
+    ],
+    "color": "#ed017f",
+    "selectable": true,
+    "timezone": "Africa/Lagos",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "konga-kxpress"
+    },
+    "trackingUrlTemplate": "https://logistics.konga.com/track?order_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "logistics.konga.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "order_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://logistics.konga.com/"
+  },
+  "woori-taekbae": {
+    "displayName": "Woori Taekbae",
+    "aliases": [
+      "우리택배",
+      "우리택배 주식회사",
+      "호남택배",
+      "호남로지스",
+      "Honam Logis",
+      "Woori"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#013974",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "woori-taekbae"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -69652,7 +69710,9 @@ export const CARRIER_IDS = [
   "numark-transportation",
   "polar-express",
   "good-express-us",
-  "swiss-universal-express"
+  "swiss-universal-express",
+  "konga-kxpress",
+  "woori-taekbae"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

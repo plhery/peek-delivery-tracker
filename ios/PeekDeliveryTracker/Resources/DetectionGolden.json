@@ -52153,6 +52153,35 @@
     ]
   },
   {
+    "input": "5009576202",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
     "input": "501-46-75268-1",
     "carrier": "unknown",
     "confidence": "low",
@@ -52227,6 +52256,35 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "5012202753",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
     ]
   },
   {
@@ -52327,6 +52385,93 @@
     ]
   },
   {
+    "input": "5020389636",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "5023253955",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "5024202293",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
     "input": "50250073144",
     "carrier": "unknown",
     "confidence": "low",
@@ -52356,6 +52501,35 @@
     "confidence": "high",
     "candidates": [
       "estafeta"
+    ]
+  },
+  {
+    "input": "5026148326",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
     ]
   },
   {
@@ -92675,6 +92849,17 @@
     ],
     "asked": [
       "colis-prive"
+    ]
+  },
+  {
+    "input": "F568440379001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste"
+    ],
+    "asked": [
+      "la-poste"
     ]
   },
   {

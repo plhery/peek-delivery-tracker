@@ -15,7 +15,7 @@ Eine Sendungsnummer von DHL eCommerce UK besteht aus 14 Ziffern. Die meisten Num
 | Nummer (erfunden) | Bedeutung |
 | --- | --- |
 | `60124829173648` | Eine britische Sendungsnummer: 14 Ziffern, hier beginnend mit `6012`. |
-| `4829173` | Die 7-stellige Nummer auf einer Benachrichtigungskarte für das Feld „Card number“. |
+| `4829173` | Die Nummer auf einer Benachrichtigungskarte für das Feld „Card number“. |
 | `948291736` | Die 9-stellige Nummer einer Retoure. |
 
 Der Tracker nimmt auch eine Kundenreferenz entgegen. Eine Kartennummer oder Referenz findet das Paket jedoch nur zusammen mit der Lieferpostleitzahl.
@@ -43,7 +43,7 @@ Der Tracker ist auf Englisch und zeigt die neueste Meldung oben an. Diese Meldun
 | `Collected` | Du hast das Paket selbst abgeholt. |
 | `We're sorry but your shipment was refused on delivery. Please contact your sender for further information` | Annahme verweigert; die Überschrift meldet anschließend die Rücksendung an den Absender. |
 
-Zwei Meldungen sorgen oft für Verwirrung. `Collected` allein bedeutet, dass du das Paket abgeholt hast, während `Your shipment has been collected` am Anfang bedeutet, dass DHL es beim Absender abgeholt hat. Und `Your shipment is at the delivery depot` kann nach einer Zustellung oder Verweigerung erneut auftauchen, wenn das Paket zurück ins Depot kommt: entscheidend ist immer die neueste Zeile.
+Zwei Meldungen können verwirren. `Collected` allein bedeutet, dass du das Paket abgeholt hast, während `Your shipment has been collected` am Anfang bedeutet, dass DHL es beim Absender abgeholt hat. Und `Your shipment is at the delivery depot` kann nach einer Zustellung oder Verweigerung erneut auftauchen, wenn das Paket zurück ins Depot kommt: entscheidend ist immer die neueste Zeile.
 
 ## Zustellung, ServicePoints und verpasste Lieferungen
 
@@ -73,13 +73,13 @@ Auf der Kontaktseite von DHL eCommerce UK genannte Kontaktwege:
 - **Online:** das Formular „Send us a message“ auf der [Kontaktseite](https://track.dhlecommerce.co.uk/contact-us?nav=1) mit dem Thema „Help with my parcel delivery“. Außerhalb der Geschäftszeiten antwortet der Support am nächsten Werktag.
 - **DHL-Express-Pakete:** wende dich an DHL Express; DHL eCommerce UK kann dabei nicht helfen.
 
-> Laut Citizens Advice ist eine Nachricht, die Geld für die Auslieferung oder Umplanung eines Pakets verlangt, fast immer Betrug. Tippe nicht auf den Link: prüfe die Nummer selbst im DHL-Tracker oder in Peek und leite verdächtige SMS kostenlos an 7726 weiter, wie GOV.UK rät.
+> Laut Citizens Advice ist eine Nachricht, die Geld für die Auslieferung oder Umplanung eines Pakets verlangt, meist Betrug. Tippe nicht auf den Link: prüfe die Nummer selbst im DHL-Tracker oder in Peek und leite verdächtige SMS kostenlos an 7726 weiter, wie GOV.UK rät.
 
 ## Pakete von DHL eCommerce UK mit Peek verfolgen
 
-[Peek](/) erkennt 14-stellige Nummern, doch das Format wird geteilt, daher fragt Peek passende Paketdienste ab. Nummern ab `6012` gehen überall zuerst an DHL eCommerce UK. Nummern beginnend mit 31, 41 oder 55 umfassen ebenfalls DHL eCommerce UK – bei Abfragen aus dem Vereinigten Königreich direkt nach [DPD UK](carrier:dpd-uk), sonst nach den zuerst geprüften 14-stelligen Diensten. Kennt ein anderer Dienst die Nummer ebenfalls, wählst du DHL eCommerce UK über „Ändern“. Links von track.dhlecommerce.co.uk (mit `con=`) oder track.dhlparcel.co.uk (mit `consignmentnumber=`) lassen sich direkt einfügen. Eine 9-stellige Retourennummer mit führender 9 wird verfolgt, sobald du DHL eCommerce UK über „Ändern“ wählst; 7-stellige Kartennummern und Referenzen lassen sich nicht verfolgen, weil sie eine Postleitzahl benötigen.
+[Peek](/) erkennt 14-stellige Nummern, doch das Format wird geteilt, daher fragt Peek passende Paketdienste ab. Nummern ab `6012` gehen überall zuerst an DHL eCommerce UK. Nummern beginnend mit 31, 41 oder 55 fragt Peek bei Abfragen aus dem Vereinigten Königreich ebenfalls bei DHL eCommerce UK an, direkt nach [DPD UK](carrier:dpd-uk); anderswo fragt Peek DHL eCommerce UK dazu nicht: wähle DHL eCommerce UK dann selbst. Kennt ein anderer Dienst die Nummer ebenfalls, wählst du DHL eCommerce UK über „Ändern“. Links von track.dhlecommerce.co.uk (mit `con=`) oder track.dhlparcel.co.uk (mit `consignmentnumber=`) lassen sich direkt einfügen. Eine 9-stellige Retourennummer mit führender 9 wird verfolgt, sobald du DHL eCommerce UK selbst wählst; Kartennummern und Referenzen lassen sich nicht verfolgen, weil sie eine Postleitzahl benötigen.
 
-Peek zeigt Status, Verlauf (neuester Eintrag zuerst) mit DHLs englischen Originalmeldungen, den erwarteten Liefertag (fällt weg nach Zustellung, Rücksendung oder Ablauf) und die Zustellzeit. Uhrzeiten werden in britischer Zeit eingelesen und in deiner Zeitzone angezeigt („Uhrzeiten in deiner Zeitzone:“). Unterschrift und Absenderreferenz werden weggelassen; da DHL keine Orte für Scans angibt, erscheint nichts auf der Karte. Sendungen verschwinden einige Zeit nach der Zustellung aus DHLs Tracking, und Peek folgt dem Paket nicht zu einem anderen Paketdienst.
+Peek zeigt Status, Verlauf (neuester Eintrag zuerst) mit DHLs englischen Originalmeldungen, den erwarteten Liefertag (nur solange das Paket unterwegs und noch nicht in Zustellung ist; nach Ablauf fällt er weg) und die Zustellzeit. Uhrzeiten werden in britischer Zeit eingelesen und in deiner Zeitzone angezeigt („Uhrzeiten in deiner Zeitzone:“). Unterschrift und Absenderreferenz werden weggelassen; da DHL keine Orte für Scans angibt, erscheint nichts auf der Karte. Sendungen verschwinden einige Zeit nach der Zustellung aus DHLs Tracking, und Peek folgt dem Paket nicht zu einem anderen Paketdienst.
 
 Peek fragt DHLs Tracker direkt bis zu alle 10 Minuten ab – oder alle 2 Minuten ab 6:00 Uhr britischer Zeit an dem Tag, an dem DHL das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DHL eCommerce UK nach.“ und bietet „Hol dir Hilfe bei DHL eCommerce UK“.
 
@@ -108,5 +108,5 @@ Vorsicht. Laut Citizens Advice ist eine SMS, die eine Zahlung für die Zustellun
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – Verantwortung des Verkäufers, Nachfrage beim Kurier, 30 Tage, Ablageort, Betrugs-SMS
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – Rechnung des Kuriers, rund 3 Wochen Lagerfrist, Rücksendung
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – Betrugs-SMS an 7726 weiterleiten
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – von Peek ausgelesene Daten: 14-stellige Nummern und Bereiche, 7-stellige Kartennummern, 9-stellige Retouren, Statusmeldungen, neueste zuerst, früher DHL Parcel UK und UK Mail
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – von Peek ausgelesene Daten: 14-stellige Nummern und Bereiche, Kartennummern, 9-stellige Retouren, Statusmeldungen, neueste zuerst, früher DHL Parcel UK und UK Mail
 :::

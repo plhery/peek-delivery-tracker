@@ -15,7 +15,7 @@ Un numéro d'envoi DHL eCommerce UK compte 14 chiffres. La plupart de ceux recon
 | Numéro (inventé) | À quoi il correspond |
 | --- | --- |
 | `60124829173648` | Un numéro d'envoi britannique : 14 chiffres, ici commençant par `6012`. |
-| `4829173` | Le numéro à 7 chiffres sur un avis de passage, à saisir dans le champ « Card number ». |
+| `4829173` | Le numéro d'un avis de passage, à saisir dans le champ « Card number ». |
 | `948291736` | Le numéro à 9 chiffres d'un colis retour. |
 
 Le suivi accepte aussi une référence client. Un numéro d'avis de passage ou une référence ne trouve le colis qu'avec le code postal de livraison.
@@ -24,7 +24,7 @@ Les numéros à 14 chiffres ne sont pas propres à DHL. [DPD UK](carrier:dpd-uk)
 
 ## Les statuts de suivi DHL eCommerce UK expliqués
 
-Le suivi est en anglais et affiche le message le plus récent en haut. Voici les messages reçus par Peek, dans leur ordre habituel :
+Le suivi est en anglais et affiche le message le plus récent en haut. Voici les messages reçus par Peek, à peu près dans l'ordre :
 
 | Libellé DHL eCommerce UK | Ce qu'il signifie pour toi |
 | --- | --- |
@@ -77,9 +77,9 @@ Coordonnées indiquées sur la page de contact de DHL eCommerce UK :
 
 ## Suivre un colis DHL eCommerce UK avec Peek
 
-[Peek](/) reconnaît le format à 14 chiffres, mais comme il est partagé, il interroge plusieurs transporteurs probables. Un numéro commençant par `6012` est demandé en premier à DHL eCommerce UK partout. Les numéros commençant par 31, 41 ou 55 incluent aussi DHL eCommerce UK, interrogé juste après [DPD UK](carrier:dpd-uk) si tu cherches depuis le Royaume-Uni, ou après les premiers transporteurs à 14 chiffres ailleurs. Si un autre réseau connaît aussi le numéro, choisis DHL eCommerce UK avec « Changer ». Un lien de track.dhlecommerce.co.uk (avec `con=`) ou track.dhlparcel.co.uk (avec `consignmentnumber=`) fonctionne également. Un numéro de retour à 9 chiffres commençant par 9 se suit après avoir sélectionné DHL eCommerce UK avec « Changer » ; les numéros d'avis de passage et références client ne sont pas pris en charge, car ils exigent un code postal.
+[Peek](/) reconnaît le format à 14 chiffres, mais comme il est partagé, il interroge plusieurs transporteurs probables. Un numéro commençant par `6012` est demandé en premier à DHL eCommerce UK partout. Les numéros commençant par 31, 41 ou 55 sont aussi demandés à DHL eCommerce UK, juste après [DPD UK](carrier:dpd-uk), si tu cherches depuis le Royaume-Uni ; ailleurs, Peek ne les lui demande pas : choisis toi-même DHL eCommerce UK. Si un autre réseau connaît aussi le numéro, choisis DHL eCommerce UK avec « Changer ». Un lien de track.dhlecommerce.co.uk (avec `con=`) ou track.dhlparcel.co.uk (avec `consignmentnumber=`) fonctionne également. Un numéro de retour à 9 chiffres commençant par 9 se suit une fois que tu as choisi toi-même DHL eCommerce UK ; les numéros d'avis de passage et références client ne sont pas pris en charge, car ils exigent un code postal.
 
-Peek affiche le statut, l'historique du plus récent au plus ancien avec les messages en anglais tels que DHL les publie, le jour de livraison prévu (retiré une fois le colis livré, retourné ou la date passée) et l'heure de livraison. Les horaires sont lus à l'heure britannique et affichés dans ton fuseau horaire (« Heures dans ton fuseau horaire : »). Peek ne récupère ni le signataire ni la référence expéditeur, et DHL n'indiquant pas de lieu pour ses scans, rien n'apparaît sur la carte. Les envois disparaissent du suivi DHL quelque temps après la livraison, et Peek ne suit pas un colis chez un autre transporteur.
+Peek affiche le statut, l'historique du plus récent au plus ancien avec les messages en anglais tels que DHL les publie, le jour de livraison prévu (affiché seulement tant que le colis est en route, avant sa sortie en livraison, et retiré une fois la date passée) et l'heure de livraison. Les horaires sont lus à l'heure britannique et affichés dans ton fuseau horaire (« Heures dans ton fuseau horaire : »). Peek ne récupère ni le signataire ni la référence expéditeur, et DHL n'indiquant pas de lieu pour ses scans, rien n'apparaît sur la carte. Les envois disparaissent du suivi DHL quelque temps après la livraison, et Peek ne suit pas un colis chez un autre transporteur.
 
 Peek interroge directement le suivi DHL jusqu'à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h (heure du Royaume-Uni) le jour où DHL le scanne en livraison, tant que le colis est ouvert dans Peek ou le jour de la livraison avec les notifications activées. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Pour les notifications, choisis « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Après quatre jours sans scan en transit, hors douane ou incident signalé, Peek affiche « Aucune mise à jour depuis… », rappelle qu'« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger DHL eCommerce UK. » et propose « Demande de l’aide à DHL eCommerce UK ».
 
@@ -108,5 +108,5 @@ Prudence. Citizens Advice indique qu'un SMS demandant un paiement pour recevoir 
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – responsabilité du vendeur, relance du transporteur, 30 jours, lieu convenu, SMS frauduleux
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – facture du transporteur, garde d'environ 3 semaines, retour à l'expéditeur
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – transfert des SMS frauduleux au 7726
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – données lues par Peek : 14 chiffres et préfixes, avis de passage à 7 chiffres, retours à 9 chiffres, statuts du plus récent au plus ancien, ex-DHL Parcel UK et UK Mail
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – données lues par Peek : 14 chiffres et préfixes, avis de passage, retours à 9 chiffres, statuts du plus récent au plus ancien, ex-DHL Parcel UK et UK Mail
 :::

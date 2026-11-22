@@ -15,7 +15,7 @@ Numer przesyłki DHL eCommerce UK ma 14 cyfr. Większość zaczyna się od `6012
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
 | `60124829173648` | Brytyjski numer przesyłki: 14 cyfr, tutaj zaczynający się od `6012`. |
-| `4829173` | 7-cyfrowy numer z awiza kierowcy, do pola „Card number”. |
+| `4829173` | Numer z awiza kierowcy, do pola „Card number”. |
 | `948291736` | 9-cyfrowy numer przesyłki zwrotnej. |
 
 Wyszukiwarka przyjmuje też numer referencyjny klienta. Numer z awiza lub referencja znajdą paczkę wyłącznie razem z kodem pocztowym odbiorcy.
@@ -77,9 +77,9 @@ Dane ze strony kontaktowej DHL eCommerce UK:
 
 ## Śledzenie paczek DHL eCommerce UK w Peek
 
-[Peek](/) rozpoznaje format 14 cyfr, ale ponieważ dzieli go wiele sieci, pyta najbardziej prawdopodobnych przewoźników. Numer zaczynający się od `6012` trafia wszędzie najpierw do DHL eCommerce UK. Numery od 31, 41 lub 55 także obejmują DHL eCommerce UK — w Wielkiej Brytanii tuż po [DPD UK](carrier:dpd-uk), a w innych krajach po pierwszych przewoźnikach 14-cyfrowych. Jeśli numer zna też inna sieć, wybierz DHL eCommerce UK przyciskiem „Zmień”. Można też wkleić link z track.dhlecommerce.co.uk (z `con=`) lub track.dhlparcel.co.uk (z `consignmentnumber=`). 9-cyfrowy numer zwrotu zaczynający się od 9 działa po wybraniu DHL eCommerce UK przez „Zmień”; 7-cyfrowe numery z awiz i referencje klienta nie są śledzone, bo wymagają kodu pocztowego.
+[Peek](/) rozpoznaje format 14 cyfr, ale ponieważ dzieli go wiele sieci, pyta najbardziej prawdopodobnych przewoźników. Numer zaczynający się od `6012` trafia wszędzie najpierw do DHL eCommerce UK. O numery od 31, 41 lub 55 Peek pyta też DHL eCommerce UK — w Wielkiej Brytanii tuż po [DPD UK](carrier:dpd-uk); w innych krajach nie pyta o nie DHL eCommerce UK: wybierz go sam. Jeśli numer zna też inna sieć, wybierz DHL eCommerce UK przyciskiem „Zmień”. Można też wkleić link z track.dhlecommerce.co.uk (z `con=`) lub track.dhlparcel.co.uk (z `consignmentnumber=`). 9-cyfrowy numer zwrotu zaczynający się od 9 działa, gdy sam wybierzesz DHL eCommerce UK; numery z awiz i referencje klienta nie są śledzone, bo wymagają kodu pocztowego.
 
-Peek pokazuje status, historię od najnowszego wpisu z angielskimi komunikatami DHL, przewidywany dzień dostawy (usuwany po doręczeniu, zwrocie lub upływie terminu) oraz czas doręczenia. Godziny są odczytywane w czasie brytyjskim i wyświetlane w twojej strefie czasowej („Godziny w twojej strefie czasowej:”). Pomijane są podpis odbiorcy i referencja nadawcy; ponieważ DHL nie podaje miejscowości przy skanach, nic nie trafia na mapę. Po pewnym czasie od doręczenia przesyłki znikają ze strony DHL, a Peek nie przenosi śledzenia do innego przewoźnika.
+Peek pokazuje status, historię od najnowszego wpisu z angielskimi komunikatami DHL, przewidywany dzień dostawy (widoczny tylko, gdy paczka jest w drodze, przed wydaniem do doręczenia, i usuwany po upływie terminu) oraz czas doręczenia. Godziny są odczytywane w czasie brytyjskim i wyświetlane w twojej strefie czasowej („Godziny w twojej strefie czasowej:”). Pomijane są podpis odbiorcy i referencja nadawcy; ponieważ DHL nie podaje miejscowości przy skanach, nic nie trafia na mapę. Po pewnym czasie od doręczenia przesyłki znikają ze strony DHL, a Peek nie przenosi śledzenia do innego przewoźnika.
 
 Peek odpytuje stronę DHL bezpośrednio nawet co 10 minut, a w dniu, gdy DHL zeskanuje paczkę w doręczeniu — co 2 minuty od 6:00 czasu brytyjskiego, gdy paczka jest otwarta w Peek lub w dniu dostawy z włączonymi powiadomieniami. Po dwóch dniach bez zmian (po 12 godzinach, gdy przesyłka ma jeszcze status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę. Dla powiadomień możesz wybrać „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po czterech dniach bez skanu w transporcie, poza odprawą celną i zgłoszonym problemem, Peek wyświetla „Brak aktualizacji od…”, przypomina, że „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika DHL eCommerce UK.” oraz podsuwa link „Poproś przewoźnika DHL eCommerce UK o pomoc”.
 
@@ -108,5 +108,5 @@ Zachowaj ostrożność. Citizens Advice ostrzega, że SMS z prośbą o zapłatę
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – odpowiedzialność sprzedawcy, reklamacja u kuriera, 30 dni, uzgodnione miejsce, fałszywe wiadomości
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – rachunek od kuriera, około 3 tygodnie przechowywania, zwrot do nadawcy
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – przekazywanie podejrzanych SMS-ów na 7726
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dane odczytywane przez Peek: 14 cyfr i prefiksy, 7-cyfrowe awiza, 9-cyfrowe zwroty, komunikaty od najnowszego, dawniej DHL Parcel UK i UK Mail
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dane odczytywane przez Peek: 14 cyfr i prefiksy, awiza, 9-cyfrowe zwroty, komunikaty od najnowszego, dawniej DHL Parcel UK i UK Mail
 :::

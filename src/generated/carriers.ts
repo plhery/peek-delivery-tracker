@@ -3276,6 +3276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005eb8"
     },
     {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "spx-express-singapore-sendungsverfolgung",
+      "title": "SPX Express Singapur Sendungsverfolgung & Shopee-Status",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "17feia-sendungsverfolgung",
@@ -4638,6 +4646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005eb8"
     },
     {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "suivi-spx-express-singapore",
+      "title": "Suivi SPX Express Singapour\u00a0: colis Shopee et statuts",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "suivi-17feia",
@@ -5960,6 +5976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005eb8"
     },
     {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "tracciamento-spx-express-singapore",
+      "title": "Tracciamento SPX Express Singapore: Shopee e stati",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "tracking-17feia",
@@ -7266,6 +7290,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005eb8"
     },
     {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "seguimiento-spx-express-singapore",
+      "title": "Seguimiento SPX Express Singapur: Shopee y estados",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "seguimiento-17feia",
@@ -8538,6 +8570,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Mainfreight: números de carga e estados",
       "name": "Mainfreight",
       "color": "#005eb8"
+    },
+    {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "seguimento-spx-express-singapore",
+      "title": "Seguimento SPX Express Singapura: Shopee e estados",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
     },
     {
       "id": "17feia",
@@ -9878,6 +9918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Mainfreight: numery listów i statusy",
       "name": "Mainfreight",
       "color": "#005eb8"
+    },
+    {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "sledzenie-spx-express-singapore",
+      "title": "Śledzenie SPX Express Singapur: paczki Shopee i statusy",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
     },
     {
       "id": "17feia",

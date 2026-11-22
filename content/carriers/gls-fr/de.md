@@ -14,7 +14,7 @@ Schau zuerst in die Bestell- oder Versandbestätigung des Händlers. Hat der Abs
 
 | Nummer (erfunden) | Was es ist |
 | --- | --- |
-| `00K4829M` | 8 Buchstaben und Ziffern, oft beginnend mit `00`: die Paketnummer. |
+| `00K4829M` | 8 Buchstaben und Ziffern: die Paketnummer. |
 | `48291057362` | 11 Ziffern: die andere Form der Paketnummer. |
 | `004829105730` | 12 Ziffern: die 11-stellige Nummer plus eine auf dem Etikett gedruckte Prüfziffer. |
 | 5 oder 6 Zeichen | Die Referenz auf der Benachrichtigungskarte von GLS. |
@@ -48,7 +48,7 @@ Das Tracking-Portal von GLS France öffnet auf Französisch und bietet im Kopf e
 
 **Zustellzeiten.** GLS France liefert von Montag bis Freitag zwischen 8:00 und 18:00 Uhr ohne Terminvereinbarung. Als Regellaufzeit nennt GLS 24 Stunden für den Großteil Frankreichs, 24 bis 96 Stunden in Nachbarländer und 72 bis 120 Stunden in weiter entfernte Länder.
 
-**Niemand zu Hause.** Der Fahrer versucht das Paket zunächst gegen Unterschrift bei einem Hausmeister oder Nachbarn abzugeben; die Benachrichtigung nennt den Empfänger. Gelingt das nicht, kann es in ein nahegelegenes Relais GLS gehen oder für einen weiteren Versuch zurück ins Depot. Nach zwei erfolglosen Zustellversuchen wartet es im Depot und geht anschließend an den Absender zurück. Die Hilfeseiten von GLS nennen für die Lagerung im Depot teils 5 Arbeitstage und teils bis zu 10 Tage – hole das Paket daher rasch ab oder frage bei GLS nach.
+**Niemand zu Hause.** Der Fahrer versucht das Paket zunächst gegen Unterschrift bei einem Hausmeister oder Nachbarn abzugeben; die Benachrichtigung nennt den Empfänger. Gelingt das nicht, kann es in ein nahegelegenes Relais GLS gehen oder für einen weiteren Versuch zurück ins Depot. Nach zwei erfolglosen Zustellversuchen wartet es im Depot und geht anschließend an den Absender zurück. Die Hilfeseiten von GLS nennen für die Lagerung im Depot teils 5 Arbeitstage und teils bis zu 10 Arbeitstage – hole das Paket daher rasch ab oder frage bei GLS nach.
 
 **Zustellung ändern.** Gib die Referenz der Benachrichtigung im GLS-Tracking ein, um ein neues Datum oder eine andere Adresse zu wählen, einen sicheren Ablageort zu erlauben oder die Abholung im Depot zu wählen. Mit dem FlexDeliveryService bieten die GLS-E-Mails zusätzlich ein Relais GLS an, und über einen Link am Liefertag lässt sich die Auswahl ändern (Änderungen können bis zu 24 Stunden dauern). Welche Optionen bereitstehen, hängt davon ab, was der Absender gebucht hat.
 
@@ -76,7 +76,7 @@ Auf den offiziellen Seiten von GLS France sind folgende Kontaktwege angegeben:
 
 ## Ein Paket von GLS France mit Peek verfolgen
 
-Füge die Paketnummer in [Peek](/) ein: Peek verfolgt mehr als 4500 Paketdienste. Weil sowohl 8-stellige Codes (einschließlich solcher mit `00` am Anfang) als auch 11- und 12-stellige Nummern zu mehreren Paketdiensten passen, prüft Peek beim Hinzufügen die infrage kommenden Dienste („Tracking-Dienste werden geprüft…“) und fragt GLS France bei passenden Codes zuerst. Kennt GLS France die Nummer, erscheint „GLS France hat dieses Paket.“ Eine Postleitzahl ist für GLS France nicht nötig (anders als bei GLS Germany oder GLS Schweiz). Links von moncolis.gls-france.com, gls-france.com sowie gls-group-Seiten mit `/FR/` funktionieren ebenfalls; die Referenz von der Benachrichtigungskarte funktioniert nicht.
+Füge die Paketnummer in [Peek](/) ein: Peek verfolgt mehr als 4500 Paketdienste. Weil sowohl 8-stellige Codes (einschließlich solcher mit `00` am Anfang) als auch 11- und 12-stellige Nummern zu mehreren Paketdiensten passen, prüft Peek beim Hinzufügen die infrage kommenden Dienste („Tracking-Dienste werden geprüft…“) und fragt GLS France bei Codes mit `00` am Anfang immer zuerst, bei den anderen Formen zuerst, wenn du in Frankreich bist. Kennt GLS France die Nummer, erscheint „GLS France hat dieses Paket.“ Eine Postleitzahl ist für GLS France nicht nötig (anders als bei GLS Germany oder GLS Schweiz). Links von moncolis.gls-france.com, gls-france.com sowie gls-group-Seiten mit `/FR/` funktionieren ebenfalls; die Referenz von der Benachrichtigungskarte funktioniert nicht.
 
 Peek zeigt den Status, den Verlauf, den voraussichtlichen Liefertag (bis das Paket in Zustellung ist, in einem Abholpunkt wartet oder ein Problem auftritt), den Namen des Absenders, die Zustellzeit sowie – solange das Paket wartet – Namen und Adresse von Relais GLS, Schließfach oder Depot. Da GLS seine Standorte nur mit Kürzeln wie `FR0012` statt Ortsnamen angibt, erscheint nichts auf der Karte. Weil GLS France nur Statuscodes übermittelt, stammen die Schritttexte von Peek selbst. Kontaktdaten und Zustellanweisungen werden nicht übernommen, und ein Gewicht gibt es nicht.
 

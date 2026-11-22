@@ -14,7 +14,7 @@ Sprawdź najpierw potwierdzenie zakupu wysłane przez sprzedawcę. Jeśli nadawc
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `00K4829M` | 8 liter i cyfr, często zaczynających się od `00`: numer paczki. |
+| `00K4829M` | 8 liter i cyfr: numer paczki. |
 | `48291057362` | 11 cyfr: druga postać numeru paczki. |
 | `004829105730` | 12 cyfr: 11-cyfrowy numer z cyfrą kontrolną drukowaną na etykietach. |
 | 5 lub 6 znaków | Numer referencyjny z awiza GLS. |
@@ -48,7 +48,7 @@ Strona śledzenia GLS France otwiera się po francusku, z przełącznikiem EN w 
 
 **Kiedy doręcza.** Od poniedziałku do piątku w godzinach 8:00–18:00, bez umawiania godziny. GLS podaje 24 godziny dla większości Francji, 24–96 godzin do krajów sąsiednich oraz 72–120 godzin dla dalszych kierunków.
 
-**Nikogo nie było w domu.** Kurier próbuje najpierw przekazać paczkę za podpisem dozorcy lub sąsiadowi — awizo wskazuje, kto ją ma. W przeciwnym razie może trafić do pobliskiego punktu Relais GLS albo wrócić do oddziału przed kolejną próbą. Po dwóch nieudanych próbach czeka w oddziale, a potem wraca do nadawcy. Strony pomocy GLS podają raz 5 dni roboczych, a w innym miejscu do 10 dni, więc odbierz ją szybko lub zapytaj GLS.
+**Nikogo nie było w domu.** Kurier próbuje najpierw przekazać paczkę za podpisem dozorcy lub sąsiadowi — awizo wskazuje, kto ją ma. W przeciwnym razie może trafić do pobliskiego punktu Relais GLS albo wrócić do oddziału przed kolejną próbą. Po dwóch nieudanych próbach czeka w oddziale, a potem wraca do nadawcy. Strony pomocy GLS podają raz 5 dni roboczych, a w innym miejscu do 10 dni roboczych, więc odbierz ją szybko lub zapytaj GLS.
 
 **Zmiana doręczenia.** Wpisz numer z awiza w śledzeniu GLS, aby wybrać inny dzień lub adres, zezwolić na bezpieczne pozostawienie albo odbiór w oddziale. Przy usłudze FlexDeliveryService e-maile od GLS proponują również Relais GLS, a link wysłany w dniu doręczenia pozwala zmienić wybór (wprowadzenie zmiany może potrwać do 24 godzin). Dostępne opcje zależą od usługi wykupionej przez nadawcę.
 
@@ -76,7 +76,7 @@ Oficjalne strony GLS France podają następujące kanały kontaktu:
 
 ## Śledzenie przesyłki GLS France w Peek
 
-Wklej numer do [Peek](/): Peek śledzi ponad 4500 przewoźników. Ponieważ zarówno 8-znakowe kody (w tym zaczynające się od `00`), jak i 11- oraz 12-cyfrowe numery pasują do wielu przewoźników, podczas dodawania Peek sprawdza pasujących przewoźników („Sprawdzanie usług śledzenia…”), pytając najpierw GLS France. Gdy GLS France zna przesyłkę, zobaczysz „GLS France ma tę przesyłkę.”. GLS France nie wymaga kodu pocztowego (w przeciwieństwie do GLS Germany czy GLS Switzerland). Działają też linki z moncolis.gls-france.com, gls-france.com oraz stron gls-group zawierających `/FR/`; numer z awiza nie działa.
+Wklej numer do [Peek](/): Peek śledzi ponad 4500 przewoźników. Ponieważ zarówno 8-znakowe kody (w tym zaczynające się od `00`), jak i 11- oraz 12-cyfrowe numery pasują do wielu przewoźników, podczas dodawania Peek sprawdza pasujących przewoźników („Sprawdzanie usług śledzenia…”), pytając najpierw GLS France o kody zaczynające się od `00`, a jeśli jesteś we Francji, także o pozostałe formaty. Gdy GLS France zna przesyłkę, zobaczysz „GLS France ma tę przesyłkę.”. GLS France nie wymaga kodu pocztowego (w przeciwieństwie do GLS Germany czy GLS Switzerland). Działają też linki z moncolis.gls-france.com, gls-france.com oraz stron gls-group zawierających `/FR/`; numer z awiza nie działa.
 
 Peek pokazuje status, historię, przewidywany dzień doręczenia (do momentu wyjścia do doręczenia, oczekiwania w punkcie odbioru lub wystąpienia problemu), nazwę nadawcy, godzinę doręczenia oraz — gdy paczka czeka — nazwę i adres punktu Relais GLS, automatu albo oddziału. Skany GLS zawierają kody obiektów takie jak `FR0012` zamiast miast, więc na mapie nic się nie wyświetla. Ponieważ GLS France wysyła wyłącznie kody statusów, opisy kroków pochodzą z samego Peek. Twoje dane kontaktowe i instrukcje doręczenia są pomijane, a waga nie jest podawana.
 

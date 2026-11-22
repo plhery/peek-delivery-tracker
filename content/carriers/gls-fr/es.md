@@ -14,7 +14,7 @@ Mira primero en el correo de confirmación de compra enviado por el vendedor. Si
 
 | Número (inventado) | Qué es |
 | --- | --- |
-| `00K4829M` | 8 letras y cifras, a menudo empezando por `00`: el número de paquete. |
+| `00K4829M` | 8 letras y cifras: el número de paquete. |
 | `48291057362` | 11 cifras: la otra forma del número de paquete. |
 | `004829105730` | 12 cifras: el número de 11 cifras más un dígito de control impreso en las etiquetas. |
 | 5 o 6 caracteres | La referencia del aviso de paso de GLS. |
@@ -25,7 +25,7 @@ Los códigos de 8 caracteres también encajan con [GLS Germany](carrier:gls-de) 
 
 ## Qué significan los estados de seguimiento de GLS France
 
-La web de seguimiento de GLS France se abre en francés y tiene un selector EN en la cabecera. Estos son sus titulares en inglés, aproximadamente en el orden habitual:
+La web de seguimiento de GLS France se abre en francés y tiene un selector EN en la cabecera. Estos son sus titulares en inglés, aproximadamente en el orden en que los ve un paquete:
 
 | GLS indica | Qué significa para ti |
 | --- | --- |
@@ -76,7 +76,7 @@ En las páginas oficiales de GLS France figuran estos canales:
 
 ## Seguir un paquete de GLS France con Peek
 
-Pega el número en [Peek](/): Peek sigue más de 4500 transportistas. Tanto los códigos de 8 caracteres (incluidos los que empiezan por `00`) como los de 11 y 12 cifras encajan con varios transportistas, así que Peek consulta los candidatos («Comprobando servicios de seguimiento…»), preguntando primero a GLS France. Si GLS France conoce el paquete, verás «GLS France tiene este paquete.». Para GLS France no hace falta código postal (a diferencia de GLS Germany o GLS Switzerland). También funcionan los enlaces de moncolis.gls-france.com, gls-france.com y las páginas de gls-group con `/FR/`; la referencia del aviso de paso no sirve.
+Pega el número en [Peek](/): Peek sigue más de 4500 transportistas. Tanto los códigos de 8 caracteres (incluidos los que empiezan por `00`) como los de 11 y 12 cifras encajan con varios transportistas, así que Peek consulta los candidatos («Comprobando servicios de seguimiento…»), preguntando primero a GLS France por los códigos que empiezan por `00` y, si estás en Francia, también por las demás formas. Si GLS France conoce el paquete, verás «GLS France tiene este paquete.». Para GLS France no hace falta código postal (a diferencia de GLS Germany o GLS Switzerland). También funcionan los enlaces de moncolis.gls-france.com, gls-france.com y las páginas de gls-group con `/FR/`; la referencia del aviso de paso no sirve.
 
 Peek muestra el estado, el historial, el día de entrega previsto (hasta que sale a reparto, llega a un punto de recogida o surge una incidencia), el nombre del remitente, la hora de entrega y, mientras espera, el nombre y la dirección del Relais GLS, la taquilla o la delegación. Los escaneos de GLS solo traen códigos internos como `FR0012` y no ciudades, así que no aparece nada en el mapa. Como GLS France solo envía códigos de estado, los textos de cada paso son los propios de Peek. Tus datos de contacto y las instrucciones de entrega se descartan, y no hay peso.
 

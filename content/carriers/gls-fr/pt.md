@@ -14,7 +14,7 @@ Procura primeiro no e-mail de confirmação de compra do vendedor. Se o remetent
 
 | Número (inventado) | O que é |
 | --- | --- |
-| `00K4829M` | 8 letras e algarismos, muitas vezes a começar por `00`: o número da encomenda. |
+| `00K4829M` | 8 letras e algarismos: o número da encomenda. |
 | `48291057362` | 11 algarismos: a outra forma do número da encomenda. |
 | `004829105730` | 12 algarismos: o número de 11 algarismos seguido de um dígito de controlo impresso nas etiquetas. |
 | 5 ou 6 caracteres | A referência no aviso de passagem da GLS. |
@@ -48,7 +48,7 @@ O site de seguimento da GLS France abre em francês e tem um botão EN no cabeç
 
 **Quando entrega.** De segunda a sexta-feira, das 8:00 às 18:00, sem marcação. A GLS indica 24 horas para a maior parte de França, 24 a 96 horas para países vizinhos e 72 a 120 horas para destinos mais distantes.
 
-**Ninguém em casa.** O estafeta tenta primeiro entregar mediante assinatura a um porteiro ou vizinho; o aviso diz quem a tem. Se não for possível, pode ir para um Relais GLS próximo ou voltar ao depósito para nova tentativa. Após duas tentativas falhadas fica no depósito e depois regressa ao remetente. As páginas de ajuda da GLS mencionam 5 dias úteis num local e até 10 dias noutro, por isso levanta-a depressa ou pergunta à GLS.
+**Ninguém em casa.** O estafeta tenta primeiro entregar mediante assinatura a um porteiro ou vizinho; o aviso diz quem a tem. Se não for possível, pode ir para um Relais GLS próximo ou voltar ao depósito para nova tentativa. Após duas tentativas falhadas fica no depósito e depois regressa ao remetente. As páginas de ajuda da GLS mencionam 5 dias úteis num local e até 10 dias úteis noutro, por isso levanta-a depressa ou pergunta à GLS.
 
 **Alterar a entrega.** Introduz a referência do aviso no seguimento da GLS para escolher nova data ou morada, autorizar um local seguro ou levantar no depósito. Com o FlexDeliveryService, os e-mails da GLS oferecem também um Relais GLS, e uma ligação enviada no dia da entrega permite alterar a escolha (pode demorar até 24 horas). As opções disponíveis dependem do que o remetente contratou.
 
@@ -76,7 +76,7 @@ As páginas oficiais da GLS France indicam estes contactos:
 
 ## Seguir uma encomenda GLS France com o Peek
 
-Cola o número no [Peek](/): o Peek segue mais de 4500 transportadoras. Como tanto os códigos de 8 caracteres (incluindo os começados por `00`) como os de 11 e 12 algarismos encaixam em várias transportadoras, o Peek pergunta às prováveis ao adicionar («A verificar serviços de seguimento…»), consultando primeiro a GLS France. Quando a GLS France reconhece o número, vês «GLS France tem esta encomenda.». Para a GLS France não é preciso código postal (ao contrário da GLS Germany ou da GLS Switzerland). Também funcionam ligações de moncolis.gls-france.com, gls-france.com e páginas gls-group com `/FR/`; a referência do aviso de passagem não funciona.
+Cola o número no [Peek](/): o Peek segue mais de 4500 transportadoras. Como tanto os códigos de 8 caracteres (incluindo os começados por `00`) como os de 11 e 12 algarismos encaixam em várias transportadoras, o Peek pergunta às prováveis ao adicionar («A verificar serviços de seguimento…»), consultando primeiro a GLS France para os códigos começados por `00` e, se estiveres em França, também para os outros formatos. Quando a GLS France reconhece o número, vês «GLS France tem esta encomenda.». Para a GLS France não é preciso código postal (ao contrário da GLS Germany ou da GLS Switzerland). Também funcionam ligações de moncolis.gls-france.com, gls-france.com e páginas gls-group com `/FR/`; a referência do aviso de passagem não funciona.
 
 O Peek mostra o estado, o histórico, o dia de entrega previsto (até sair para distribuição, ficar num ponto de levantamento ou surgir um problema), o nome do remetente, a hora da entrega e, enquanto espera, o nome e a morada do Relais GLS, cacifo ou depósito. Os registos da GLS trazem códigos de instalações como `FR0012` em vez de cidades, pelo que nada aparece no mapa. Como a GLS France só envia códigos de estado, os textos dos passos são os do próprio Peek. Os teus contactos e instruções de entrega são descartados e não existe peso.
 

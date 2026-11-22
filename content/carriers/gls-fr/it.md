@@ -14,7 +14,7 @@ Controlla prima l'e-mail di conferma d'acquisto del venditore. Se il mittente ha
 
 | Codice (inventato) | Che cos'è |
 | --- | --- |
-| `00K4829M` | 8 lettere e cifre, spesso inizianti per `00`: il numero del pacco. |
+| `00K4829M` | 8 lettere e cifre: il numero del pacco. |
 | `48291057362` | 11 cifre: l'altro formato del numero del pacco. |
 | `004829105730` | 12 cifre: il numero da 11 cifre più una cifra di controllo stampata sulle etichette. |
 | 5 o 6 caratteri | Il riferimento sull'avviso di passaggio di GLS. |
@@ -25,7 +25,7 @@ I codici di 8 caratteri corrispondono anche a [GLS Germany](carrier:gls-de) e [G
 
 ## Cosa significano gli stati di tracciamento di GLS France
 
-Il sito di tracciamento di GLS France si apre in francese e offre il selettore EN in alto. Ecco le intestazioni in inglese, nell'ordine in cui compaiono di solito:
+Il sito di tracciamento di GLS France si apre in francese e offre il selettore EN in alto. Ecco le intestazioni in inglese, nell'ordine in cui un pacco le incontra:
 
 | GLS indica | Cosa significa per te |
 | --- | --- |
@@ -48,7 +48,7 @@ Il sito di tracciamento di GLS France si apre in francese e offre il selettore E
 
 **Quando consegna.** Dal lunedì al venerdì, dalle 8:00 alle 18:00, senza appuntamento. GLS indica 24 ore per la maggior parte della Francia, da 24 a 96 ore verso i paesi confinanti e da 72 a 120 ore verso destinazioni più lontane.
 
-**Nessuno in casa.** Il corriere prova prima a consegnarlo dietro firma a un portiere o a un vicino; l'avviso indica chi lo custodisce. In alternativa può portarlo a un Relais GLS vicino o riportarlo al deposito per un altro tentativo. Dopo due tentativi falliti rimane in deposito e poi torna al mittente. Le pagine di aiuto di GLS indicano in un punto 5 giorni lavorativi e altrove fino a 10 giorni: ritiralo presto o contatta GLS.
+**Nessuno in casa.** Il corriere prova prima a consegnarlo dietro firma a un portiere o a un vicino; l'avviso indica chi lo custodisce. In alternativa può portarlo a un Relais GLS vicino o riportarlo al deposito per un altro tentativo. Dopo due tentativi falliti rimane in deposito e poi torna al mittente. Le pagine di aiuto di GLS indicano in un punto 5 giorni lavorativi e altrove fino a 10 giorni lavorativi: ritiralo presto o contatta GLS.
 
 **Modificare la consegna.** Inserisci il riferimento dell'avviso nel tracciamento di GLS per scegliere un'altra data o un altro indirizzo, autorizzare un luogo sicuro o ritirare il pacco al deposito. Con FlexDeliveryService, le e-mail di GLS offrono anche un Relais GLS, e un link inviato il giorno della consegna consente di cambiare scelta (fino a 24 ore per l'applicazione). Le opzioni dipendono da ciò che ha prenotato il mittente.
 
@@ -76,7 +76,7 @@ Sulle pagine ufficiali di GLS France risultano questi contatti:
 
 ## Tracciare un pacco GLS France con Peek
 
-Incolla il numero in [Peek](/): Peek segue oltre 4.500 corrieri. Poiché sia i codici a 8 caratteri (compresi quelli che iniziano per `00`) sia quelli da 11 e 12 cifre combaciano con più corrieri, quando aggiungi il codice Peek interroga i corrieri probabili («Verifica dei servizi di tracciamento…»), chiedendo per primo a GLS France. Se GLS France riconosce il pacco, vedi «GLS France ha questo pacco.». Per GLS France non serve alcun CAP (a differenza di GLS Germany o GLS Svizzera). Funzionano anche i link di moncolis.gls-france.com, gls-france.com e delle pagine gls-group con `/FR/`; il riferimento dell'avviso di passaggio non funziona.
+Incolla il numero in [Peek](/): Peek segue oltre 4.500 corrieri. Poiché sia i codici a 8 caratteri (compresi quelli che iniziano per `00`) sia quelli da 11 e 12 cifre combaciano con più corrieri, quando aggiungi il codice Peek interroga i corrieri probabili («Verifica dei servizi di tracciamento…»), chiedendo per primo a GLS France per i codici che iniziano per `00` e, se sei in Francia, anche per gli altri formati. Se GLS France riconosce il pacco, vedi «GLS France ha questo pacco.». Per GLS France non serve alcun CAP (a differenza di GLS Germany o GLS Svizzera). Funzionano anche i link di moncolis.gls-france.com, gls-france.com e delle pagine gls-group con `/FR/`; il riferimento dell'avviso di passaggio non funziona.
 
 Peek mostra lo stato, la cronologia, il giorno di consegna previsto (finché il pacco non è in consegna, in attesa in un punto di ritiro o bloccato da un problema), il nome del mittente, l'orario di consegna e, durante la giacenza, il nome e l'indirizzo del Relais GLS, dell'armadietto o del deposito. Le scansioni di GLS riportano codici sede come `FR0012` e non città, quindi sulla mappa non compare nulla. Poiché GLS France invia solo codici di stato, i testi dei passaggi sono quelli di Peek. I tuoi recapiti e le istruzioni di consegna vengono scartati e non c'è il peso.
 

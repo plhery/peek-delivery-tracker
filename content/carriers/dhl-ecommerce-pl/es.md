@@ -47,7 +47,7 @@ Si un paquete fue retirado, eliminado o se dio por perdido, ya no hay entrega qu
 
 ## Puntos DHL POP, taquillas DHL BOX y cambios de entrega
 
-**Puntos y taquillas.** DHL cuenta con 24.000 puntos en Polonia para enviar y recoger paquetes: puntos DHL POP y taquillas automáticas DHL BOX 24/7, de las cuales 9.000 son taquillas. Los puntos POP están en gasolineras, comercios y quioscos, incluidos establecimientos Żabka, ABC y Lewiatan. Desde mayo de 2026 las tiendas también pueden enviar a puntos y taquillas los sábados sin coste adicional.
+**Puntos y taquillas.** DHL cuenta con 24.000 puntos en Polonia para enviar y recoger paquetes: puntos DHL POP y taquillas automáticas DHL BOX 24/7, de las cuales 9.000 son taquillas. Los puntos POP están en gasolineras, comercios y quioscos, incluidos establecimientos Żabka, ABC y Lewiatan. DHL también entrega en puntos y taquillas los sábados, con su servicio estándar y sin coste adicional.
 
 **Cambiar la entrega.** DHL indica que los destinatarios pueden cambiar la fecha o dirección de entrega por sí mismos, gratis y sin contactar con el remitente. En Mój DHL, las opciones del paquete permiten redirigirlo a un punto, cambiar la dirección, rechazarlo, llamar o localizar al repartidor y recuperar el PIN del paquete. El menú principal incluye además «Redirect parcel».
 
@@ -99,7 +99,8 @@ No aquí. Allegro sigue los paquetes de Allegro Delivery por su cuenta, así que
 
 :::sources
 - [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – página y app de seguimiento, número de albarán de 11 dígitos para paquetes nacionales, menú (contacto, reclamación, redirección, devolución), opciones del paquete (redirigir a punto, cambiar dirección, rechazar, repartidor, PIN), varios números a la vez
-- [DHL24: portal de DHL eCommerce Poland](https://dhl24.com.pl/) – avisos por correo y SMS, cambios gratuitos de fecha o dirección, 24.000 puntos y taquillas, 9.000 DHL BOX, entregas los sábados, tipos de puntos POP, devoluciones en Mój DHL
+- [DHL24: portal de DHL eCommerce Poland](https://dhl24.com.pl/) – avisos por correo y SMS, cambios gratuitos de fecha o dirección, 24.000 puntos y taquillas, tipos de puntos POP, devoluciones en Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9.000 taquillas DHL BOX 24/7 entre los puntos DHL POP, entregas en puntos y taquillas los sábados con el servicio estándar, sin coste adicional
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formulario de reclamación, número de etiqueta u orden de transporte
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – puntos DHL POP en Żabka, ABC y Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilidad del vendedor hasta la entrega, 30 días, plazo adicional, reembolso

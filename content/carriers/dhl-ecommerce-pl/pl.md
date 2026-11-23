@@ -14,8 +14,8 @@ DHL nazywa go numerem listu przewozowego. Przy przesyłkach krajowych ma 11 cyfr
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `99999999984` | 11 cyfr zakończonych cyfrą kontrolną: numer listu przewozowego. |
-| `30000000008` | Też numer listu przewozowego. Numery nie zaczynają się zawsze tą samą cyfrą: zdarzają się 1, 2 i 3. |
+| `14829173640` | 11 cyfr zakończonych cyfrą kontrolną: numer listu przewozowego. |
+| `34829173642` | Też numer listu przewozowego. Numery nie zaczynają się zawsze tą samą cyfrą: zdarzają się 1, 2 i 3. |
 
 Numer znajdziesz w e-mailu ze sklepu o wysyłce. Mój DHL śledzi kilka paczek naraz, a w menu ma też „Zwróć paczkę”: sklep może pozwolić klientom na zwroty w aplikacji.
 
@@ -47,7 +47,7 @@ Przy paczce wycofanej, zutylizowanej albo zaginionej nie ma już na co czekać: 
 
 ## Punkty DHL POP, automaty DHL BOX i zmiana doręczenia
 
-**Punkty i automaty.** DHL ma w Polsce 24 000 miejsc nadania i odbioru paczek: punkty DHL POP i automaty paczkowe DHL BOX 24/7. Samych automatów było w maju 2026 r. 9000. Punkty DHL POP działają m.in. na stacjach benzynowych, w sklepach i salonach prasowych, np. w Żabce, ABC i Lewiatanie. Od maja 2026 r. sklep może też zamówić doręczenie do punktów i automatów w soboty, bez dopłaty.
+**Punkty i automaty.** DHL ma w Polsce 24 000 miejsc nadania i odbioru paczek: punkty DHL POP i automaty paczkowe DHL BOX 24/7, w tym 9000 automatów. Punkty DHL POP działają m.in. na stacjach benzynowych, w sklepach i salonach prasowych, np. w Żabce, ABC i Lewiatanie. Do punktów i automatów DHL doręcza też w soboty, w standardowej usłudze i bez dopłat.
 
 **Zmiana doręczenia.** DHL podaje, że odbiorca może sam zmienić datę lub adres doręczenia, bezpłatnie i bez kontaktu z nadawcą. W Mój DHL przy paczce znajdziesz m.in. przekierowanie do punktu, zmianę adresu dostawy, rezygnację z przesyłki, telefon do kuriera i jego lokalizację oraz odzyskanie PIN-u. W głównym menu jest też „Przekieruj paczkę”.
 
@@ -71,7 +71,11 @@ Przy paczce wycofanej, zutylizowanej albo zaginionej nie ma już na co czekać: 
 
 Przy 11 cyfrach [Peek](/) pyta przewoźników, do których numer może należeć: GLS France, GLS Germany, GLS Switzerland, PostLogistics Poczty Szwajcarskiej i DHL eCommerce Poland, a w Polsce najpierw DHL eCommerce Poland, potem GLS Poland zamiast PostLogistics. Gdy numer zna tylko DHL, zobaczysz „DHL eCommerce Poland ma tę przesyłkę.”. Jeśli zna go też któraś sieć GLS albo PostLogistics, wybierz DHL eCommerce Poland przyciskiem „Zmień”; po takim wyborze zadziałają też inne numery z 11 do 34 liter i cyfr. Numery Allegro Delivery z `AD` są odrzucane, bo śledzi je Allegro, a numery `JJD` trafiają do DHL z Niemiec (`JJD000090` z 14–16 cyframi do DHL eCommerce Netherlands), chyba że wybierzesz DHL eCommerce Poland. Działają linki z mojdhl.pl (`paczki=`) i sprawdz.dhl.com.pl (`sn=`); link z dhl.com z `tracking-id=` zostanie odczytany jako DHL z Niemiec, więc wtedy wpisz sam numer.
 
-Peek odczytuje bieżący status z Mój DHL po polsku albo po angielsku, jak opisano wyżej, a historię skanów ze strony sprawdz.dhl.com.pl po angielsku, niezależnie od tego, w jakim języku korzystasz z Peek. Każdy skan ma angielskie zdanie DHL (np. `The shipment is in transit to the delivery depot.`), miejsce podane przez DHL i tamtejszą godzinę. Gdy historii nie uda się odczytać, zobaczysz tylko bieżący status (np. po angielsku `Parcel has been delivered` albo `The parcel has returned to Sender`) z datą z chwili, gdy został odczytany; tylko doręczenie i zwrot mają wtedy godzinę od DHL. W obu przypadkach Peek pokazuje też przewidywany dzień dostawy (z przedziałem godzin, jeśli DHL go podaje), nadawcę (zwykle sklep) i godzinę doręczenia. Numeru obejmującego kilka paczek nie da się tak śledzić. Peek sprawdza DHL najwyżej raz na godzinę, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu czeka 2 godziny; ręczne odświeżenie czeka tyle samo. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
+Peek odczytuje bieżący status z Mój DHL po polsku albo po angielsku, jak opisano wyżej, a historię skanów ze strony sprawdz.dhl.com.pl po angielsku, niezależnie od tego, w jakim języku korzystasz z Peek. Każdy skan ma angielskie zdanie DHL (np. `The shipment is in transit to the delivery depot.`), miejsce podane przez DHL i tamtejszą godzinę. Gdy historii nie uda się odczytać, zobaczysz tylko bieżący status (np. po angielsku `Parcel has been delivered` albo `The parcel has returned to Sender`) z datą z chwili, gdy został odczytany; tylko doręczenie i zwrot mają wtedy godzinę od DHL. W obu przypadkach Peek pokazuje też przewidywany dzień dostawy (z przedziałem godzin, jeśli DHL go podaje), nadawcę (zwykle sklep) i godzinę doręczenia. Numeru obejmującego kilka paczek nie da się tak śledzić. Peek sprawdza DHL najwyżej raz na godzinę, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu czeka 2 godziny; ręczne odświeżenie czeka tyle samo. Po siedmiu dniach bez nowych wpisów w statusie „Zarejestrowana” sprawdza co 6 godzin.
+
+Gdy najnowszy skan ma cztery dni, a paczka wciąż ma status „Zarejestrowana”, „Przyjęta przez przewoźnika” albo „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie paczki pojawia się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika DHL eCommerce Poland.” z linkiem „Poproś przewoźnika DHL eCommerce Poland o pomoc” do strony DHL o śledzeniu przesyłek. Po trzech tygodniach bez nowego skanu komunikat brzmi: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika DHL eCommerce Poland.”
+
+Powiadomienia mogą dotyczyć opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Pytania o śledzenie przesyłki DHL
 
@@ -93,7 +97,8 @@ Paczki Allegro Delivery śledzi samo Allegro, więc Peek nie przyjmuje ich numer
 
 :::sources
 - [DHL eCommerce Polska: Mój DHL, śledzenie](https://mojdhl.pl/tracking) – strona i aplikacja śledzenia, 11-cyfrowy numer listu przewozowego przesyłki krajowej, menu (kontakt, reklamacja, przekierowanie, zwrot), opcje przy paczce (punkt, adres, rezygnacja, kurier, PIN), kilka numerów naraz
-- [DHL24: portal DHL eCommerce Polska](https://dhl24.com.pl/) – e-maile i SMS-y, bezpłatna zmiana daty lub adresu, 24 000 punktów i automatów, 9000 DHL BOX, soboty, rodzaje punktów DHL POP, zwroty w Mój DHL
+- [DHL24: portal DHL eCommerce Polska](https://dhl24.com.pl/) – e-maile i SMS-y, bezpłatna zmiana daty lub adresu, 24 000 punktów i automatów, rodzaje punktów DHL POP, zwroty w Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9000 automatów DHL BOX 24/7 wśród punktów DHL POP, doręczenia do punktów i automatów w soboty w standardowej usłudze, bez dopłat
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formularz reklamacji, numer etykiety lub zlecenia
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – punkty DHL POP w Żabce, ABC i Lewiatanie, DHL BOX 24/7
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – odpowiedzialność sprzedawcy za uszkodzenia, 30 dni, dodatkowy termin, rozwiązanie umowy

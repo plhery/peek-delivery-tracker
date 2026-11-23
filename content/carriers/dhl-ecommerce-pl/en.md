@@ -14,8 +14,8 @@ DHL calls it the waybill number (numer listu przewozowego). For domestic parcels
 
 | Number (invented) | What it is |
 | --- | --- |
-| `99999999984` | 11 digits ending in the check digit: a waybill number. |
-| `30000000008` | Also a waybill number. They don't all start with the same digit: 1, 2 and 3 all occur. |
+| `14829173640` | 11 digits ending in the check digit: a waybill number. |
+| `34829173642` | Also a waybill number. They don't all start with the same digit: 1, 2 and 3 all occur. |
 
 Look for it in the shop's shipping email. Mój DHL can follow several parcels at once, and its menu also has "Return your parcel": shops can let customers send returns through the app.
 
@@ -47,7 +47,7 @@ A withdrawn, disposed of or lost parcel leaves nothing to wait for: Peek flags i
 
 ## DHL POP points, DHL BOX lockers and changing delivery
 
-**Points and lockers.** DHL counts 24,000 places in Poland to send and collect parcels: DHL POP points and DHL BOX 24/7 parcel lockers, 9,000 of them lockers as of May 2026. POP points sit in petrol stations, shops and newsagents, Żabka, ABC and Lewiatan stores among them. Since May 2026, shops can also have parcels delivered to points and lockers on Saturdays, at no extra charge.
+**Points and lockers.** DHL counts 24,000 places in Poland to send and collect parcels: DHL POP points and DHL BOX 24/7 parcel lockers, 9,000 of them lockers. POP points sit in petrol stations, shops and newsagents, Żabka, ABC and Lewiatan stores among them. DHL also delivers to points and lockers on Saturdays, in its standard service at no extra charge.
 
 **Changing delivery.** DHL says recipients can change the delivery date or address themselves, free and without contacting the sender. In Mój DHL, a parcel's options include redirecting it to a point, changing the delivery address, declining the parcel, calling or locating the courier, and recovering the parcel's PIN. The main menu also has "Redirect parcel".
 
@@ -71,7 +71,11 @@ A withdrawn, disposed of or lost parcel leaves nothing to wait for: Peek flags i
 
 For 11 digits, [Peek](/) asks the likely carriers at once (GLS France, GLS Germany, GLS Switzerland, Swiss Post's PostLogistics and DHL eCommerce Poland; for readers in Poland, DHL first, then GLS Poland in place of PostLogistics) and shows "DHL eCommerce Poland has this parcel." when only DHL knows the number. If a GLS network knows it too, pick DHL eCommerce Poland with "Change"; picked this way, other numbers of 11 to 34 letters and digits work too. Allegro Delivery `AD` numbers are refused, as Allegro tracks them, and `JJD` plates go to DHL Germany (`JJD000090` with 14 to 16 more digits to DHL eCommerce Netherlands) unless you pick DHL eCommerce Poland. Links from mojdhl.pl (`paczki=`) and sprawdz.dhl.com.pl (`sn=`) work; a dhl.com link with `tracking-id=` is read as DHL Germany, so type the number instead.
 
-Peek reads the current status from Mój DHL in Polish or English, as above, and the scan history from sprawdz.dhl.com.pl in English, whatever language you use Peek in. Each scan comes with DHL's English wording (`The shipment is in transit to the delivery depot.`, for example), the place DHL gives and the local time there. When the history can't be read, Peek shows only the current status (`Parcel has been delivered` in English, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. Either way it adds the expected delivery day (with DHL's planned hours when it gives them), the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. It can notify you of every scan, important steps or delivery day only.
+Peek reads the current status from Mój DHL in Polish or English, as above, and the scan history from sprawdz.dhl.com.pl in English, whatever language you use Peek in. Each scan comes with DHL's English wording (`The shipment is in transit to the delivery depot.`, for example), the place DHL gives and the local time there. When the history can't be read, Peek shows only the current status (`Parcel has been delivered` in English, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. Either way it adds the expected delivery day (with DHL's planned hours when it gives them), the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. After seven days without news at "Label created", it checks every 6 hours.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DHL eCommerce Poland.", with a "Get help from DHL eCommerce Poland" link to DHL's page for tracking questions. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DHL eCommerce Poland."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about DHL parcel tracking in Poland
 
@@ -93,7 +97,8 @@ Not here. Allegro tracks Allegro Delivery parcels itself, so Peek doesn't take t
 
 :::sources
 - [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – tracking page and app, 11-digit waybill number for domestic parcels, menu (contact, complaint, redirect, return), a parcel's options (redirect to a point, change address, decline, courier, PIN), several numbers at once
-- [DHL24: DHL eCommerce Poland's portal](https://dhl24.com.pl/) – email and text notices, free changes of date or address, 24,000 points and lockers, 9,000 DHL BOX, Saturday deliveries, POP point types, returns in Mój DHL
+- [DHL24: DHL eCommerce Poland's portal](https://dhl24.com.pl/) – email and text notices, free changes of date or address, 24,000 points and lockers, POP point types, returns in Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9,000 DHL BOX 24/7 lockers among the DHL POP points, Saturday deliveries to points and lockers in the standard service at no extra charge
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – complaint form, label or order number
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – DHL POP points in Żabka, ABC and Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – trader responsible for damage until delivery, 30 days, extra deadline, refund

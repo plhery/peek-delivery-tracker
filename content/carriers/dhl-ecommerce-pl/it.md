@@ -47,7 +47,7 @@ Un pacco ritirato dal mittente, smaltito o smarrito non è più in attesa di con
 
 ## Punti DHL POP, locker DHL BOX e modifica della consegna
 
-**Punti e locker.** DHL conta 24.000 punti in Polonia per spedire e ritirare pacchi: punti DHL POP e locker automatici DHL BOX 24/7, di cui 9.000 sono armadietti automatici. I punti POP si trovano in stazioni di servizio, negozi ed edicole, tra cui punti vendita Żabka, ABC e Lewiatan. Da maggio 2026 i negozi possono inoltre far consegnare a punti e locker anche il sabato, senza costi aggiuntivi.
+**Punti e locker.** DHL conta 24.000 punti in Polonia per spedire e ritirare pacchi: punti DHL POP e locker automatici DHL BOX 24/7, di cui 9.000 sono armadietti automatici. I punti POP si trovano in stazioni di servizio, negozi ed edicole, tra cui punti vendita Żabka, ABC e Lewiatan. DHL consegna a punti e locker anche il sabato, nel servizio standard e senza costi aggiuntivi.
 
 **Modificare la consegna.** DHL dichiara che i destinatari possono modificare data o indirizzo autonomamente, gratis e senza contattare il mittente. In Mój DHL le opzioni del pacco includono il reindirizzamento a un punto di ritiro, il cambio indirizzo, il rifiuto del pacco, la chiamata o localizzazione del corriere e il recupero del PIN del pacco. Il menu principale contiene anche «Redirect parcel».
 
@@ -99,7 +99,8 @@ Qui no. Allegro traccia autonomamente i pacchi Allegro Delivery, quindi Peek non
 
 :::sources
 - [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – pagina e app di tracciamento, numero lettera di vettura a 11 cifre per pacchi nazionali, menu (contatti, reclamo, reindirizzamento, reso), opzioni pacco (reindirizza a punto, cambia indirizzo, rifiuta, corriere, PIN), più numeri insieme
-- [DHL24: portale DHL eCommerce Poland](https://dhl24.com.pl/) – avvisi e-mail e SMS, modifiche gratuite di data o indirizzo, 24.000 punti e locker, 9.000 DHL BOX, consegne il sabato, tipologie punti POP, resi in Mój DHL
+- [DHL24: portale DHL eCommerce Poland](https://dhl24.com.pl/) – avvisi e-mail e SMS, modifiche gratuite di data o indirizzo, 24.000 punti e locker, tipologie punti POP, resi in Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9.000 locker DHL BOX 24/7 tra i punti DHL POP, consegne a punti e locker il sabato nel servizio standard, senza costi aggiuntivi
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – modulo reclami, numero etichetta o ordine di trasporto
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – punti DHL POP presso Żabka, ABC e Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilità del venditore fino alla consegna, 30 giorni, termine extra, rimborso

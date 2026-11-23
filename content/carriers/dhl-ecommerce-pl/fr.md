@@ -47,7 +47,7 @@ Pour un colis retiré par l’expéditeur, détruit ou perdu, il n’y a plus ri
 
 ## Points DHL POP, consignes DHL BOX et modification de livraison
 
-**Points relais et consignes.** DHL recense 24 000 lieux en Pologne pour déposer et retirer des colis : des points DHL POP et des consignes automatiques DHL BOX 24/7, dont 9 000 consignes automatiques. Les points POP se trouvent dans des stations-service, commerces et kiosques, notamment dans les magasins Żabka, ABC et Lewiatan. Depuis mai 2026, les boutiques peuvent également faire livrer en point relais et en consigne le samedi, sans frais supplémentaires.
+**Points relais et consignes.** DHL recense 24 000 lieux en Pologne pour déposer et retirer des colis : des points DHL POP et des consignes automatiques DHL BOX 24/7, dont 9 000 consignes automatiques. Les points POP se trouvent dans des stations-service, commerces et kiosques, notamment dans les magasins Żabka, ABC et Lewiatan. DHL livre aussi en point relais et en consigne le samedi, dans son service standard et sans frais supplémentaires.
 
 **Modifier la livraison.** DHL indique que les destinataires peuvent modifier eux-mêmes la date ou l’adresse de livraison, gratuitement et sans passer par l’expéditeur. Dans Mój DHL, les options d’un colis permettent de le rediriger vers un point relais, de changer l’adresse de livraison, de refuser le colis, d’appeler ou de localiser le livreur et de récupérer le code PIN du colis. Le menu principal comporte aussi « Redirect parcel ».
 
@@ -99,7 +99,8 @@ Non, pas ici. Allegro assure lui-même le suivi des colis Allegro Delivery ; Pee
 
 :::sources
 - [DHL eCommerce Poland : Mój DHL tracking](https://mojdhl.pl/tracking) – page et application de suivi, numéro de bordereau à 11 chiffres pour les colis nationaux, menu (contact, réclamation, redirection, retour), options d’un colis (redirection vers un point, changement d’adresse, refus, livreur, PIN), plusieurs numéros à la fois
-- [DHL24 : portail DHL eCommerce Poland](https://dhl24.com.pl/) – alertes par e-mail et SMS, modifications gratuites de date ou d’adresse, 24 000 points et consignes, 9 000 DHL BOX, livraisons le samedi, types de points POP, retours dans Mój DHL
+- [DHL24 : portail DHL eCommerce Poland](https://dhl24.com.pl/) – alertes par e-mail et SMS, modifications gratuites de date ou d’adresse, 24 000 points et consignes, types de points POP, retours dans Mój DHL
+- [DHL : DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9 000 consignes DHL BOX 24/7 parmi les points DHL POP, livraisons en point relais et en consigne le samedi dans le service standard, sans frais supplémentaires
 - [DHL24 : Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formulaire de réclamation, numéro d’étiquette ou d’ordre de transport
 - [DHL24 : Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – points DHL POP chez Żabka, ABC et Lewiatan, DHL BOX 24/7
 - [Your Europe : Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilité du vendeur jusqu’à la livraison, 30 jours, délai supplémentaire, remboursement

@@ -47,7 +47,7 @@ Numa encomenda retirada, eliminada ou dada como perdida já não há entrega a a
 
 ## Pontos DHL POP, cacifos DHL BOX e alteração de entrega
 
-**Pontos e cacifos.** A DHL conta 24 000 locais na Polónia para enviar e levantar encomendas: pontos DHL POP e cacifos automáticos DHL BOX 24/7, dos quais 9 000 são cacifos. Os pontos POP situam-se em postos de combustível, lojas e quiosques, incluindo estabelecimentos Żabka, ABC e Lewiatan. Desde maio de 2026 as lojas podem também optar por entregas ao sábado em pontos e cacifos sem custo adicional.
+**Pontos e cacifos.** A DHL conta 24 000 locais na Polónia para enviar e levantar encomendas: pontos DHL POP e cacifos automáticos DHL BOX 24/7, dos quais 9 000 são cacifos. Os pontos POP situam-se em postos de combustível, lojas e quiosques, incluindo estabelecimentos Żabka, ABC e Lewiatan. A DHL também entrega em pontos e cacifos ao sábado, no serviço normal e sem custo adicional.
 
 **Alterar a entrega.** A DHL refere que os destinatários podem alterar a data ou a morada de entrega por si próprios, gratuitamente e sem contactar o remetente. No Mój DHL, as opções da encomenda incluem redirecionar para um ponto, alterar a morada, recusar a encomenda, ligar ou localizar o estafeta e recuperar o PIN da encomenda. O menu principal inclui também «Redirect parcel».
 
@@ -99,7 +99,8 @@ Aqui não. A Allegro acompanha as encomendas Allegro Delivery diretamente, pelo 
 
 :::sources
 - [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – página e app de seguimento, número de guia de 11 dígitos para encomendas nacionais, menu (contacto, reclamação, redirecionar, devolver), opções da encomenda (redirecionar para ponto, alterar morada, recusar, estafeta, PIN), vários números em simultâneo
-- [DHL24: portal da DHL eCommerce Poland](https://dhl24.com.pl/) – avisos por e-mail e SMS, alterações gratuitas de data ou morada, 24 000 pontos e cacifos, 9 000 DHL BOX, entregas ao sábado, tipos de pontos POP, devoluções no Mój DHL
+- [DHL24: portal da DHL eCommerce Poland](https://dhl24.com.pl/) – avisos por e-mail e SMS, alterações gratuitas de data ou morada, 24 000 pontos e cacifos, tipos de pontos POP, devoluções no Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9 000 cacifos DHL BOX 24/7 entre os pontos DHL POP, entregas em pontos e cacifos ao sábado no serviço normal, sem custo adicional
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formulário de reclamação, número da etiqueta ou ordem de transporte
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – pontos DHL POP em Żabka, ABC e Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – responsabilidade do vendedor até à entrega, 30 dias, prazo adicional, reembolso

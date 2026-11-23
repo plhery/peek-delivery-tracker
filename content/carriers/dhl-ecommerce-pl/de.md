@@ -47,7 +47,7 @@ Bei zurückgezogenen, entsorgten oder verlorenen Paketen gibt es nichts mehr abz
 
 ## DHL POP-Punkte, DHL BOX-Automaten und Lieferänderung
 
-**Abholstellen und Automaten.** DHL zählt in Polen 24.000 Orte zum Aufgeben und Abholen von Paketen: DHL POP-Punkte und rund um die Uhr zugängliche DHL BOX-24/7-Paketautomaten, davon 9.000 Paketautomaten. POP-Punkte befinden sich in Tankstellen, Geschäften und Kiosken, darunter Żabka-, ABC- und Lewiatan-Filialen. Seit Mai 2026 können Shops Pakete zudem ohne Aufpreis samstags an Abholpunkte und Automaten liefern lassen.
+**Abholstellen und Automaten.** DHL zählt in Polen 24.000 Orte zum Aufgeben und Abholen von Paketen: DHL POP-Punkte und rund um die Uhr zugängliche DHL BOX-24/7-Paketautomaten, davon 9.000 Paketautomaten. POP-Punkte befinden sich in Tankstellen, Geschäften und Kiosken, darunter Żabka-, ABC- und Lewiatan-Filialen. An Abholpunkte und Automaten stellt DHL im Standardservice auch samstags zu, ohne Aufpreis.
 
 **Lieferung ändern.** Laut DHL können Empfänger Lieferdatum oder Adresse selbst kostenlos und ohne Kontakt zum Absender ändern. In Mój DHL umfassen die Paketoptionen das Umleiten an einen Abholpunkt, Ändern der Lieferadresse, Ablehnen des Pakets, Anrufen oder Orten des Kuriers sowie das erneute Abrufen der Paket-PIN. Im Hauptmenü gibt es außerdem „Redirect parcel“.
 
@@ -99,7 +99,8 @@ Hier nicht. Allegro verfolgt Allegro-Delivery-Pakete selbst, daher nimmt Peek de
 
 :::sources
 - [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – Trackingseite und App, 11-stellige Frachtbriefnummer für Inlandspakete, Menü (Kontakt, Reklamation, Umleitung, Retoure), Paketoptionen (an Punkt umleiten, Adresse ändern, ablehnen, Kurier, PIN), mehrere Nummern gleichzeitig
-- [DHL24: Portal von DHL eCommerce Poland](https://dhl24.com.pl/) – E-Mail- und SMS-Benachrichtigungen, kostenlose Änderungen von Datum oder Adresse, 24.000 Punkte und Automaten, 9.000 DHL BOX, Samstagszustellung, POP-Punkt-Typen, Retouren in Mój DHL
+- [DHL24: Portal von DHL eCommerce Poland](https://dhl24.com.pl/) – E-Mail- und SMS-Benachrichtigungen, kostenlose Änderungen von Datum oder Adresse, 24.000 Punkte und Automaten, POP-Punkt-Typen, Retouren in Mój DHL
+- [DHL: DHL eCommerce ma już 9 tys. automatów DHL BOX 24/7](https://www.dhl.com/pl-pl/home/prasa/prasa-archiwum/2026/dhl-ecommerce-ma-juz-9-tys-automatow-dhl-box-24-7-paczka-coraz-czesciej-czeka-po-drodze.html) – 9.000 DHL BOX-24/7-Automaten unter den DHL POP-Punkten, Samstagszustellung an Abholpunkte und Automaten im Standardservice ohne Aufpreis
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – Reklamationsformular, Etiketten- oder Transportauftragsnummer
 - [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – DHL POP-Punkte bei Żabka, ABC und Lewiatan, DHL BOX 24/7
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – Händlerhaftung bis zur Übergabe, 30 Tage, Nachfrist, Erstattung

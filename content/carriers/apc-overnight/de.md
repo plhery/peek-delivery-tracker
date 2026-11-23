@@ -48,7 +48,7 @@ APC Choice ist nur auf Englisch verfügbar. Dort siehst du eine Übersicht zur S
 
 ## Lieferzeiten, verpasste Zustellungen und Depotabholung bei APC
 
-Laut APC treffen die meisten Sendungen innerhalb Großbritanniens am nächsten Werktag nach Versand ein, abhängig vom Ort. Der Absender wählt den Tarif: nächster Werktag bis 10:30 Uhr, bis 12:00 Uhr (britische Zeit) oder regulär am nächsten Werktag; Samstagszustellung ist in vielen Regionen möglich, wenn der Absender sie bucht. Hat der Shop deine Kontaktdaten an APC übermittelt, erhältst du das 2-Stunden-Zeitfenster meist per E-Mail oder SMS, sobald die Tour geplant ist, und APC Choice zeigt, wie nah der Fahrer ist.
+Laut APC treffen die meisten Sendungen innerhalb Großbritanniens am nächsten Werktag nach Versand ein, abhängig vom Ort. Der Absender wählt den Tarif: nächster Werktag bis 10:30 Uhr, bis 12:00 Uhr (britische Zeit) oder regulär am nächsten Werktag; Samstagszustellung ist in vielen Regionen möglich, wenn der Absender sie bucht. Hat der Shop deine Kontaktdaten an APC übermittelt, kann dir APC das 2-Stunden-Zeitfenster per E-Mail oder SMS schicken, sobald die Tour geplant ist, und APC Choice zeigt, wie nah der Fahrer ist.
 
 Über APC Choice kannst du die Zustellung bis zur Auslieferung anpassen, auch noch nach einer Benachrichtigungskarte. Je nach Tarif und Freigabe des Absenders kannst du:
 
@@ -61,7 +61,7 @@ Laut APC treffen die meisten Sendungen innerhalb Großbritanniens am nächsten W
 
 **Nach einer Karte:** Fahrer kommen am selben Tag kein zweites Mal vorbei, und auch die Abholung im Depot ist am selben Tag nicht möglich. Nach dem ersten Versuch kannst du noch ein weiteres Mal umbuchen. Eine neu gebuchte Zustellung erfolgt im selben Tarif; ein festes Zeitfenster oder Samstagszustellung muss der Absender beauftragen.
 
-**Depotabholung:** Buche die Abholung vor 19:00 Uhr (britische Zeit) für den nächsten Tag und bringe einen Lichtbildausweis sowie einen Adressnachweis mit. Prüfe vorher die Öffnungszeiten des Depots.
+**Depotabholung:** Buche die Abholung vor 19:00 Uhr (britische Zeit) für den nächsten Tag und bringe einen Identitätsnachweis sowie einen Adressnachweis mit. Prüfe vorher die Öffnungszeiten des Depots.
 
 **Drei Werktage:** Meldet sich innerhalb von drei Werktagen nach einer verpassten Zustellung niemand bei APC, kann das Paket an den Absender zurückgehen.
 
@@ -84,7 +84,7 @@ APC bietet für Empfänger keine landesweite Hotline, keinen Chat und keine allg
 
 Füge die 22-stellige Nummer oder einen `apcchoice.apc-overnight.com`-Link mit `id=` in [Peek](/) ein – eine Postleitzahl ist nicht nötig. Weil mehrere Paketdienste dieses Format nutzen, fragt Peek gleichzeitig bei APC Overnight und der Österreichischen Post nach und zeigt „APC Overnight hat dieses Paket.“, sobald APC die Sendung kennt. Eine 22-stellige Nummer ohne gültiges Datum wird APC gar nicht erst angeboten und stammt nicht von APC: Prüfe sie beim Shop. Die 7-stellige Sendungsnummer allein lässt sich hier nicht verfolgen, und Links zu `apc.co.uk` werden nicht ausgewertet.
 
-Zeitangaben von APC enthalten keine Zeitzone: Peek liest sie in britischer Zeit und übernimmt den Verlauf von APC. Auch das Gewicht kann angezeigt werden. `Delivered` und `Out for delivery` übersetzt Peek in „Zugestellt“ und „In Zustellung“; andere Meldungen bleiben im Wortlaut von APC. Ein voraussichtlicher Liefertag, das 2-Stunden-Zeitfenster, ein Abholpunkt, ein Zustellnachweis oder der Empfängername werden nicht angezeigt, und Umleitungen bleiben in APC Choice.
+Zeitangaben von APC enthalten keine Zeitzone: Peek liest sie in britischer Zeit und übernimmt den Verlauf von APC. Auch das Gewicht kann angezeigt werden. `Delivered` und `Out for delivery` übersetzt Peek in „Zugestellt“ und „In Zustellung“; andere Meldungen bleiben im Wortlaut von APC. Ein voraussichtlicher Liefertag, das 2-Stunden-Zeitfenster, ein Abholpunkt, ein Zustellnachweis oder der Empfängername werden nicht angezeigt, und Änderungen an der Zustellung bleiben in APC Choice.
 
 Solange du das Paket in Peek geöffnet hast oder am Zustelltag Benachrichtigungen aktiviert sind, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr britischer Zeit am Tag, an dem das Paket in Zustellung geht, bis zu alle 2 Minuten bei direkter Antwort von APC Choice oder alle 5 Minuten nach einer Browser-Prüfung. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange der Status bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich; bleibt der Status sieben Tage lang bei „Etikett erstellt“, alle 6 Stunden.
 

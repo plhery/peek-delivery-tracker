@@ -12,10 +12,10 @@ APC Overnight, występująca obecnie jako The APC, to największa niezależna si
 
 APC posługuje się jednym numerem: „consignment number” to 7-cyfrowy numer referencyjny przypisany do paczki. Formularz śledzenia wymaga podania tego numeru razem z kodem pocztowym doręczenia.
 
-Sklepy często przesyłają zamiast tego dłuższy kod: 22-cyfrowy numer w linku APC Choice (`apcchoice.apc-overnight.com/track-parcel?id=…`). Zaczyna się od daty nadania i kończy tym samym 7-cyfrowym numerem przesyłki.
+Sklepy często przesyłają zamiast tego dłuższy kod: 22-cyfrowy numer w linku APC Choice (`apcchoice.apc-overnight.com/track-parcel?id=…`). Zaczyna się od daty zlecenia przesyłki i kończy tym samym 7-cyfrowym numerem przesyłki.
 
 :::anatomy 20260715 4829173 7364058
-- 20260715 | Data nadania w formacie 20RRMMDD: tutaj 15 lipca 2026
+- 20260715 | Data zlecenia przesyłki w formacie 20RRMMDD: tutaj 15 lipca 2026
 - 4829173 | Siedem kolejnych cyfr
 - 7364058 | 7-cyfrowy numer przesyłki, o który pytają strony APC
 :::

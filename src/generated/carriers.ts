@@ -3660,6 +3660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "samus-sendungsverfolgung",
+      "title": "SAMUS Sendungsverfolgung: Nummern, Status & Abholung",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
       "id": "siuntos-autobusais",
       "catalog": "siuntos-autobusais",
       "slug": "siuntos-autobusais-sendungsverfolgung",
@@ -5374,6 +5382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "suivi-samus",
+      "title": "Suivi SAMUS\u00a0: numéros, statuts et retrait à Vilnius",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
       "id": "siuntos-autobusais",
       "catalog": "siuntos-autobusais",
       "slug": "suivi-siuntos-autobusais",
@@ -7048,6 +7064,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "tracciamento-samus",
+      "title": "Tracciamento SAMUS: numeri, stati e ritiro a Vilnius",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
       "id": "siuntos-autobusais",
       "catalog": "siuntos-autobusais",
       "slug": "tracciamento-siuntos-autobusais",
@@ -8706,6 +8730,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "seguimiento-samus",
+      "title": "Seguimiento SAMUS: números, estados y recogida en Vilna",
+      "name": "SAMUS",
+      "color": "#e50079"
+    },
+    {
       "id": "siuntos-autobusais",
       "catalog": "siuntos-autobusais",
       "slug": "seguimiento-siuntos-autobusais",
@@ -10346,6 +10378,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SXW Express: números SXW, estados e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "seguimento-samus",
+      "title": "Seguimento SAMUS: números, estados e recolha em Vilnius",
+      "name": "SAMUS",
+      "color": "#e50079"
     },
     {
       "id": "siuntos-autobusais",
@@ -12046,6 +12086,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SXW Express: numery SXW, statusy i dostawa",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "samus",
+      "catalog": "samus",
+      "slug": "sledzenie-samus",
+      "title": "Śledzenie SAMUS: numery, statusy i odbiór w Wilnie",
+      "name": "SAMUS",
+      "color": "#e50079"
     },
     {
       "id": "siuntos-autobusais",

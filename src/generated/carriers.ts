@@ -3284,6 +3284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "metropolitan-warehouse-sendungsverfolgung",
+      "title": "Metropolitan Warehouse (MWD) Sendungsverfolgung",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",
@@ -5244,6 +5252,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi GOFO Canada\u00a0: numéros GFCA, statuts et retards",
       "name": "GOFO Canada",
       "color": "#fc4c02"
+    },
+    {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "suivi-metropolitan-warehouse",
+      "title": "Suivi Metropolitan Warehouse (MWD)\u00a0: meubles et aide",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
     },
     {
       "id": "topyou",
@@ -7216,6 +7232,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "tracciamento-metropolitan-warehouse",
+      "title": "Tracciamento Metropolitan Warehouse (MWD): mobili",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-tracking",
@@ -9186,6 +9210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "seguimiento-metropolitan-warehouse",
+      "title": "Seguimiento Metropolitan Warehouse (MWD): muebles y ayuda",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-seguimiento",
@@ -11146,6 +11178,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento GOFO Canada: números GFCA, estados e atrasos",
       "name": "GOFO Canada",
       "color": "#fc4c02"
+    },
+    {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "seguimento-metropolitan-warehouse",
+      "title": "Seguimento Metropolitan Warehouse (MWD): móveis",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
     },
     {
       "id": "topyou",
@@ -13134,6 +13174,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GOFO Canada: numery GFCA, statusy i opóźnienia",
       "name": "GOFO Canada",
       "color": "#fc4c02"
+    },
+    {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "sledzenie-metropolitan-warehouse",
+      "title": "Śledzenie Metropolitan Warehouse (MWD): dostawy mebli",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
     },
     {
       "id": "topyou",

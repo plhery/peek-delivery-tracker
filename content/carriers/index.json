@@ -161,7 +161,7 @@
   { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] },
+  { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de", "fr", "it", "ru", "es", "sv", "pt", "pl"] },
   { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

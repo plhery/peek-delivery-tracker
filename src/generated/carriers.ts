@@ -2988,6 +2988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "couriersplease-sendungsverfolgung",
+      "title": "CouriersPlease Sendungsverfolgung: Nummern & Hilfe",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
+    },
+    {
       "id": "nz-post",
       "catalog": "nz-post",
       "slug": "nz-post-sendungsverfolgung",
@@ -4940,6 +4948,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Aramex Australie\u00a0: numéros, statuts et contacts",
       "name": "Aramex Australia",
       "color": "#dc291e"
+    },
+    {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "suivi-couriersplease",
+      "title": "Suivi CouriersPlease\u00a0: numéros, statuts et aide",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
     },
     {
       "id": "nz-post",
@@ -6904,6 +6920,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "tracciamento-couriersplease",
+      "title": "Tracciamento CouriersPlease: numeri, stati e aiuto",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
+    },
+    {
       "id": "nz-post",
       "catalog": "nz-post",
       "slug": "tracciamento-nz-post",
@@ -8866,6 +8890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "seguimiento-couriersplease",
+      "title": "Seguimiento CouriersPlease: números, estados y ayuda",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
+    },
+    {
       "id": "nz-post",
       "catalog": "nz-post",
       "slug": "seguimiento-nz-post",
@@ -10818,6 +10850,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Aramex Austrália: números, estados e contactos",
       "name": "Aramex Australia",
       "color": "#dc291e"
+    },
+    {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "seguimento-couriersplease",
+      "title": "Seguimento CouriersPlease: números, estados e ajuda",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
     },
     {
       "id": "nz-post",
@@ -12790,6 +12830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Aramex Australia: numery, statusy i kontakt",
       "name": "Aramex Australia",
       "color": "#dc291e"
+    },
+    {
+      "id": "couriersplease",
+      "catalog": "couriersplease",
+      "slug": "sledzenie-couriersplease",
+      "title": "Śledzenie CouriersPlease: numery, statusy i pomoc",
+      "name": "CouriersPlease",
+      "color": "#c21e36"
     },
     {
       "id": "nz-post",

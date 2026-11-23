@@ -2284,6 +2284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "an-post-sendungsverfolgung",
+      "title": "An Post Sendungsverfolgung: Status, Zoll und Kontakt",
+      "name": "An Post",
+      "color": "#00a76a"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-sendungsverfolgung",
@@ -4204,6 +4212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Yanwen suivi\u00a0: numéros, statuts et qui contacter",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "suivi-an-post",
+      "title": "Suivi An Post\u00a0: statuts, douane et contact en Irlande",
+      "name": "An Post",
+      "color": "#00a76a"
     },
     {
       "id": "vinted-go",
@@ -6136,6 +6152,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "tracciamento-an-post",
+      "title": "Tracciamento An Post: stati, dogana e contatti Irlanda",
+      "name": "An Post",
+      "color": "#00a76a"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-tracking",
@@ -8058,6 +8082,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "seguimiento-an-post",
+      "title": "Seguimiento An Post: estados, aduanas y contacto",
+      "name": "An Post",
+      "color": "#00a76a"
+    },
+    {
       "id": "vinted-go",
       "catalog": "vinted-go",
       "slug": "vinted-go-seguimiento",
@@ -9970,6 +10002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Yanwen tracking: rastrear encomenda, estados e contactos",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "seguimento-an-post",
+      "title": "Seguimento An Post: estados, alfândega e contactos",
+      "name": "An Post",
+      "color": "#00a76a"
     },
     {
       "id": "vinted-go",
@@ -11894,6 +11934,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Yanwen śledzenie przesyłki: statusy, kurier, kontakt",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "an-post",
+      "catalog": "an-post",
+      "slug": "sledzenie-an-post",
+      "title": "Śledzenie An Post: statusy, cło i kontakt w Irlandii",
+      "name": "An Post",
+      "color": "#00a76a"
     },
     {
       "id": "vinted-go",

@@ -16,7 +16,7 @@ O código de rastreio (ou número da remessa) aparece no e-mail de envio da loja
 | --- | --- |
 | `48291736405821` | Código de 14 dígitos da Jadlog. Compartilha o mesmo formato de 14 dígitos com outras marcas europeias do grupo Geopost/DPD (como DPD, Chronopost, SEUR e BRT). |
 
-No site oficial da Jadlog também é possível consultar pelo CPF ou CNPJ do destinatário, mas o Peek rastreia apenas pelo código de 14 dígitos e nunca pede seu CPF. Se o seu código tiver 15 dígitos iniciados por `8880`, ele pertence à [J&T Express Brazil](carrier:j-and-t-br); códigos de 13 caracteres iniciados por `BR` são da [SPX Express Brazil](carrier:spx-br); códigos de 17 caracteres começando com `AJ` são da [Anjun Logistics](carrier:anjun); e códigos de 13 caracteres terminados em `BR` são dos Correios. Confira outros formatos em [formatos de código de rastreio](guide:tracking-number-formats) (em português de Portugal).
+O Peek rastreia apenas pelo código de 14 dígitos e nunca pede seu CPF. Se o seu código tiver 15 dígitos iniciados por `8880`, ele pertence à [J&T Express Brazil](carrier:j-and-t-br); códigos de 15 caracteres iniciados por `BR` são da [SPX Express Brazil](carrier:spx-br); códigos de 17 caracteres começando com `AJ` são da [Anjun Logistics](carrier:anjun); e códigos de 13 caracteres terminados em `BR` são dos Correios. Confira outros formatos em [formatos de código de rastreio](guide:tracking-number-formats) (em português de Portugal).
 
 ## O que significam os status de rastreio da Jadlog
 
@@ -37,12 +37,12 @@ Quando o lojista gera etiquetas em lote antes da coleta do motorista, `Order cre
 Na página de [produtos e serviços](https://www.jadlog.com.br/jadlog/servicos) e em [Quem Somos](https://www.jadlog.com.br/jadlog/quemsomos), a Jadlog detalha suas principais modalidades:
 
 - **Jadlog.com e Jadlog Package:** entregas de e-commerce (Jadlog.com atende encomendas de até 30 kg; Jadlog Package cobre operações rodoviárias B2C e B2B).
-- **Jadlog Rodo, RodoEconômico, Cargo e DOC:** transporte rodoviário até 50 kg (Rodo), modalidade econômica, carga aérea urgente B2B e documentos.
+- **Jadlog Rodo, RodoEconômico, Cargo e DOC:** transporte rodoviário até 50 kg (Rodo), modalidade econômica, carga aérea B2B e documentos.
 - **[Jadlog Predict](https://www.jadlog.com.br/jadlog/jadlogPredict):** disponível em regiões metropolitanas e áreas de alto volume, enviando aviso automático por SMS com uma janela estimada de 1 hora para a entrega.
-- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup):** mais de 4.000 estabelecimentos comerciais parceiros (cobrindo mais de 90% da população brasileira) para retirada, postagem e logística reversa (*Reversa*), com notificações por SMS e e-mail quando o pacote está disponível.
+- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup):** mais de 4.000 estabelecimentos comerciais parceiros (cobrindo mais de 90% da população brasileira) para retirada, postagem e logística reversa (*Reversa*), com avisos por SMS e e-mail para acompanhar o pacote.
 - **[Jadlog Internacional](https://www.jadlog.com.br/jadlog/internacional):** exportação a partir do Brasil para 154 países (300 destinos) pela rede Geopost.
 
-**O que a Jadlog não fixa publicamente.** O site da Jadlog não publica um único número padrão de tentativas de entrega, um prazo garantido único ou uma quantidade fixa de dias de guarda nos pontos Pickup para todas as lojas, porque essas condições variam conforme o contrato do remetente. Verifique o aviso por SMS ou e-mail do ponto Pickup — e a página do pedido na loja — para conferir o prazo de retirada e as regras de nova tentativa.
+**O que a Jadlog não fixa publicamente.** O site da Jadlog não publica um único número padrão de tentativas de entrega, um prazo garantido único ou uma quantidade fixa de dias de guarda nos pontos Pickup para todas as lojas. Verifique o aviso por SMS ou e-mail do ponto Pickup — e a página do pedido na loja — para conferir o prazo de retirada e as regras de nova tentativa.
 
 ## Encomenda Jadlog parada, atrasada ou não recebida
 
@@ -73,7 +73,9 @@ Como códigos de 14 dígitos são usados por várias empresas do grupo Geopost/D
 
 O Peek consulta a API pública do grupo Geopost para a Jadlog sem exigir CEP nem CPF. Mostra a etapa atual ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Entregue"), o histórico resumido de eventos (em inglês pela API da Geopost ou em português quando repassado do rastreio local) e o horário de entrega. Previsão de entrega, peso, endereço do ponto Pickup e nome ou assinatura de quem recebeu não ficam disponíveis no Peek.
 
-O Peek consulta até a cada 10 minutos com o pacote aberto ou no dia da entrega com alertas ativados, e até a cada 2 minutos a partir das 6h no horário local no dia em que o pacote sai para entrega. Fora desses momentos, verifica de hora em hora, mantém consultas de hora em hora com a tela aberta após 12 horas em "Etiqueta criada" ou "Recebida pela transportadora" ou 2 dias sem novidade, e passa a cada 6 horas depois de 7 dias ainda em "Etiqueta criada". Quando serviços auxiliares de rastreamento entram como alternativa, consultam de hora em hora, a cada 3 horas após 1 dia sem mudança e até a cada 15 minutos no dia da entrega. Após 4 dias em trânsito sem atualização, o Peek destaca o silêncio (por exemplo, "Sem atualizações desde seg., 12 out.") e mostra "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Jadlog." Depois de mais de três semanas sem novidades, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Jadlog."
+Com o pacote aberto na tela, ou no dia da entrega com as notificações ativadas, o Peek consulta até a cada 10 minutos; no dia em que o pacote sai para entrega, até a cada 2 minutos a partir das 6h no horário local, enquanto o rastreio da própria Jadlog responder. Fora disso, de hora em hora. Depois de 12 horas só com "Etiqueta criada" ou "Recebida pela transportadora", ou de dois dias sem novidade, consulta de hora em hora em qualquer caso, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando o rastreio da Jadlog não responde e o Peek acompanha o pacote só por serviços de rastreamento, consulta de hora em hora, a cada 3 horas depois de um dia sem novidade e até a cada 15 minutos no dia em que o pacote sai para entrega.
+
+Quando o registro mais recente tem quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com o dia desse registro, por exemplo "Sem atualizações desde seg 12 out". A página da encomenda mostra então "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Jadlog." Depois de três semanas sem registro novo, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Jadlog."
 
 Você escolhe os alertas em "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha o rastreamento e não agenda nova entrega nem entra em contato com franquias da Jadlog por você.
 
@@ -89,7 +91,7 @@ O [Jadlog Predict](https://www.jadlog.com.br/jadlog/jadlogPredict) é um aviso a
 
 ### Como funciona o Jadlog Pickup?
 
-O [Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup) reúne mais de 4.000 comércios parceiros no Brasil para retirada de compras online e postagem de devoluções (*Reversa*). Quando o pacote chega ao ponto escolhido, a Jadlog avisa por SMS e e-mail.
+O [Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup) reúne mais de 4.000 comércios parceiros no Brasil para retirada de compras online e postagem de devoluções (*Reversa*). A Jadlog envia avisos por SMS e e-mail para você acompanhar o pacote.
 
 ### Por que a Jadlog aparece ligada à DPD e à Geopost?
 

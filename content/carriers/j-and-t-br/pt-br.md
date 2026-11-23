@@ -6,21 +6,21 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-A J&T Express Brasil é a operação brasileira da J&T Express, rede global de entregas expressas fundada em 2015 e presente em 13 países. No Brasil, a transportadora atende todos os 5.571 municípios com mais de 50 centros de transferência, mais de 1.600 rotas regionais e mais de 6.000 Pontos J&T (pontos parceiros de postagem e retirada). Você pode acompanhar sua encomenda na [página de rastreio da J&T Express Brasil](https://www.jtexpress.com.br/trajectoryQuery) ou colar o código no campo acima.
+A J&T Express Brasil é a operação brasileira da J&T Express, rede de entregas expressas fundada em 2015 e presente em diversos países, 13 deles citados na sua página de história. No Brasil, a transportadora atende todos os 5.571 municípios com mais de 50 centros de transferência, mais de 1.600 rotas regionais e mais de 6.000 Pontos J&T, lojas parceiras onde o remetente posta o pacote. Você pode acompanhar sua encomenda na [página de rastreio da J&T Express Brasil](https://www.jtexpress.com.br/trajectoryQuery) ou colar o código no campo acima.
 
 ## Código de rastreio J&T Express Brasil: formato e onde achar
 
-O código de rastreio (chamado de *número de pedido* no site da J&T) aparece no e-mail de envio da loja, nos detalhes do pedido no marketplace ou no comprovante de postagem de um Ponto J&T. O padrão da J&T Express Brasil tem 15 dígitos começando por `8880`.
+O código de rastreio aparece no e-mail de envio da loja ou nos detalhes do pedido no marketplace. O rastreador da J&T o chama de carta de porte. O padrão da J&T Express Brasil tem 15 dígitos começando por `8880`.
 
 | Formato (inventado) | O que é |
 | --- | --- |
 | `888048291736405` | Código da J&T Express Brasil: `8880` seguido de 11 dígitos. |
 
-O rastreador oficial da J&T aceita até 30 códigos por consulta, separados por vírgula ou quebra de linha. Se o código da sua compra começar por `BR` com 13 caracteres, ele pertence à [SPX Express Brazil](carrier:spx-br); códigos de 13 caracteres com duas letras, nove dígitos e final `BR` são dos Correios; códigos de 17 caracteres iniciados por `AJ` são da [Anjun Logistics](carrier:anjun); e sequências de 14 dígitos sem `8880` costumam ser da [Jadlog](carrier:jadlog). Veja mais no guia de [formatos de código de rastreio](guide:tracking-number-formats) (em português de Portugal).
+Se o código da sua compra começar por `BR` e tiver 15 caracteres (`BR`, 12 dígitos e um dígito ou letra final), ele pertence à [SPX Express Brazil](carrier:spx-br); códigos de 13 caracteres com duas letras, nove dígitos e final `BR` são dos Correios; códigos de 17 caracteres iniciados por `AJ` são da [Anjun Logistics](carrier:anjun); e sequências de 14 dígitos sem `8880` costumam ser da [Jadlog](carrier:jadlog). Veja mais no guia de [formatos de código de rastreio](guide:tracking-number-formats) (em português de Portugal).
 
 ## O que significam os status da J&T Express Brasil
 
-As atualizações da J&T Express Brasil aparecem em português. Vale prestar atenção na descrição detalhada, porque o título `Em transferencia` aparece tanto antes da coleta quanto durante o transporte entre hubs.
+As atualizações da J&T Express Brasil aparecem em português. `Em transferencia` aparece em duas etapas: antes da coleta pela J&T, quando o remetente só registrou o pacote, e depois, no transporte entre centros. O Peek distingue as duas pelo código de status da J&T.
 
 | Status da J&T Express Brasil | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -38,9 +38,9 @@ A J&T Express Brasil atende [operações de e-commerce B2C](https://www.jtexpres
 
 **Peso e dimensões.** Na calculadora de frete da [página inicial da J&T](https://www.jtexpress.com.br/), o limite para encomendas é de até 30 kg, com no máximo 120 cm em qualquer lado e soma total das dimensões (altura + largura + comprimento) de até 240 cm.
 
-**Pontos J&T.** A rede conta com mais de 6.000 estabelecimentos parceiros ([Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)) integrados à logística nacional para postagem e retirada de pacotes.
+**Pontos J&T.** A rede conta com mais de 6.000 estabelecimentos parceiros ([Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)) onde o remetente posta pacotes para a J&T coletar. As páginas da J&T não os apresentam como pontos de retirada para o destinatário.
 
-**Tentativas e prazo de entrega.** As páginas públicas da J&T Express Brasil não fixam um único número de tentativas de entrega, um prazo padrão garantido ou um prazo único de guarda em ponto de retirada, pois essas regras variam conforme o contrato da loja ou do marketplace. Consulte sempre a data prevista e as orientações de entrega dentro do pedido na loja onde você comprou.
+**Tentativas e prazo de entrega.** As páginas públicas da J&T Express Brasil não fixam um único número de tentativas de entrega, um prazo padrão garantido ou um prazo único de guarda em ponto de retirada. Consulte sempre a data prevista e as orientações de entrega dentro do pedido na loja onde você comprou.
 
 ## Compras internacionais e Programa Remessa Conforme
 
@@ -78,9 +78,11 @@ Para reembolso ou alteração de pedido, fale primeiro com o vendedor. Para trat
 
 O [Peek](/) reconhece automaticamente códigos de 15 dígitos iniciados por `8880` como J&T Express Brasil, além de links colados de `jtexpress.com.br/trajectoryQuery` ou `/mobile/expressTracking` com o parâmetro `waybillNo=`. Se precisar escolher a transportadora manualmente para outro formato, toque em "Trocar" ao adicionar ou em "Trocar transportadora" na tela da encomenda e selecione J&T Express Brazil (pesquisar "J&T Express Brasil" ou "J&T Brazil" também encontra).
 
-O Peek consulta o rastreio público da J&T Express Brasil e mostra a etapa atual ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Entregue"), o histórico de mensagens em português e os horários lidos no fuso de Brasília (`America/Sao_Paulo`, exibidos no fuso do seu aparelho). Como o rastreio público da J&T não expõe previsão de entrega, endereço de ponto de retirada, nome do entregador ou recebedor nem foto de comprovante, esses dados não aparecem no Peek.
+O Peek consulta o rastreio público da J&T Express Brasil e mostra a etapa atual ("Etiqueta criada", "Recebida pela transportadora", "Em trânsito", "Saiu para entrega", "Entregue"), o histórico de mensagens em português e os horários lidos no fuso de Brasília (`America/Sao_Paulo`, exibidos no fuso do seu aparelho). O Peek não mostra previsão de entrega, ponto de retirada nem foto de comprovante. Quando a mensagem da J&T cita o entregador, o nome aparece mascarado, como a J&T o escreve.
 
-O Peek consulta a J&T Express Brasil no máximo a cada 30 minutos, inclusive com a encomenda aberta e no dia da entrega — atualizar manualmente não força uma consulta antes desse intervalo — e aguarda 60 minutos após uma consulta com falha. Fora desses momentos, verifica de hora em hora, mantém consultas de hora em hora com a tela aberta após 12 horas em "Etiqueta criada" ou "Recebida pela transportadora" ou 2 dias sem novidade, e passa a cada 6 horas depois de 7 dias ainda em "Etiqueta criada". Quando serviços auxiliares de rastreamento atuam como alternativa, consultam de hora em hora, a cada 3 horas após 1 dia sem mudança e até a cada 15 minutos no dia da entrega. Se passarem 4 dias em trânsito sem atualização, o Peek destaca o atraso (por exemplo, "Sem atualizações desde seg., 12 out."), exibe "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando J&T Express Brazil." e mostra o link "Pedir ajuda a J&T Express Brazil", que leva ao formulário oficial de feedback da J&T. Depois de mais de três semanas sem novidades, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando J&T Express Brazil."
+O Peek consulta a J&T Express Brasil no máximo a cada 30 minutos, também com a encomenda aberta na tela ou no dia da entrega com as notificações ativadas, e atualizar manualmente não consulta antes disso; depois de uma consulta com falha, espera uma hora. Fora disso, de hora em hora. Depois de 12 horas só com "Etiqueta criada" ou "Recebida pela transportadora", ou de dois dias sem novidade, consulta de hora em hora em qualquer caso, e a cada 6 horas depois de sete dias em "Etiqueta criada". O Peek não consulta serviços de rastreamento para a J&T Express Brazil: todas as atualizações vêm do rastreio da própria J&T.
+
+Quando o registro mais recente tem quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com o dia desse registro, por exemplo "Sem atualizações desde seg 12 out". A página da encomenda mostra então "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando J&T Express Brazil.", com o link "Pedir ajuda a J&T Express Brazil" para o formulário de feedback da J&T. Depois de três semanas sem registro novo, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando J&T Express Brazil."
 
 Você pode configurar os avisos do Peek em "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha o rastreamento e não altera endereços nem fala com a J&T Express Brasil por você.
 
@@ -88,7 +90,7 @@ Você pode configurar os avisos do Peek em "Cada movimentação", "Etapas import
 
 ### Qual é o formato do código de rastreio da J&T Express Brasil?
 
-O código da J&T Express Brasil tem 15 dígitos e começa com `8880` (por exemplo `888048291736405`, dígitos inventados). Você pode consultar até 30 códigos de uma vez no site da J&T ou colar o número no Peek.
+O código da J&T Express Brasil tem 15 dígitos e começa com `8880` (por exemplo `888048291736405`, dígitos inventados). Cole o código no Peek ou na página de rastreio da J&T.
 
 ### Por que minha encomenda J&T fica parada em `Em transferencia`?
 
@@ -104,12 +106,12 @@ Ligue para `0800-055-0050`, escreva para `meajuda@jtexpress.com.br` (ou `escalat
 
 :::sources
 - [J&T Express Brasil: Página inicial](https://www.jtexpress.com.br/) – cobertura de 5.571 municípios, +6.000 Pontos J&T, +1.600 rotas, +50 centros de transferência, limites de 30 kg / 120 cm / 240 cm, SAC 0800 e e-mail
-- [J&T Express Brasil: Rastreio](https://www.jtexpress.com.br/trajectoryQuery) – consulta de até 30 pedidos e alerta oficial contra cobranças de taxas por WhatsApp/SMS/links de terceiros
-- [J&T Express Brasil: História](https://www.jtexpress.com.br/aboutus/history) – fundação em 2015 e presença em 13 países
+- [J&T Express Brasil: Rastreio](https://www.jtexpress.com.br/trajectoryQuery) – consulta da carta de porte e alerta oficial contra cobranças de taxas por WhatsApp/SMS/links de terceiros
+- [J&T Express Brasil: História](https://www.jtexpress.com.br/aboutus/history) – fundação em 2015 e 13 dos países onde atua
 - [J&T Express Brasil: Serviços B2C](https://www.jtexpress.com.br/service/b2c) – operação de entregas para e-commerce
 - [J&T Express Brasil: Envios C2C](https://www.jtexpress.com.br/clients/c2c) – serviço de envios pessoais
 - [J&T Express Brasil: Logística Internacional (CBT)](https://www.jtexpress.com.br/service/cbt) – envios transfronteiriços e Programa Remessa Conforme
-- [J&T Express Brasil: Pontos J&T (PUDO)](https://www.jtexpress.com.br/joinUs/pudo) – rede parceira de postagem e retirada
+- [J&T Express Brasil: Pontos J&T (PUDO)](https://www.jtexpress.com.br/joinUs/pudo) – lojas parceiras onde o remetente posta o pacote
 - [J&T Express Brasil: Atendimento de pedido](https://www.jtexpress.com.br/contactus/orderFeedback) – formulário de feedback de pedidos e canais de suporte
 - [J&T Express Brasil: Ouvidoria](https://www.jtexpress.com.br/contactus/supervise) – escopo da ouvidoria e direcionamento de pedidos ao SAC
 - [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – regras de Imposto de Importação e ICMS em sites certificados e não certificados

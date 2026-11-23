@@ -6,21 +6,21 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-J&T Express Brazil is the Brazilian operation of J&T Express, an express logistics network founded in 2015 that operates across 13 countries. In Brazil it delivers e-commerce orders, personal parcels and cross-border shipments across all 5,571 municipalities through more than 50 transfer centres, over 1,600 regional routes and more than 6,000 partner drop-off and collection points (Pontos J&T). You can check a parcel on [J&T Express Brazil's tracking page](https://www.jtexpress.com.br/trajectoryQuery), or paste the waybill number into the box above.
+J&T Express Brazil is the Brazilian operation of J&T Express, an express logistics network founded in 2015 that works in many countries, 13 of them named on its history page. In Brazil it delivers e-commerce orders, personal parcels and cross-border shipments to all 5,571 municipalities through more than 50 transfer centres, over 1,600 regional routes and more than 6,000 Pontos J&T, partner shops where senders drop off parcels. You can check a parcel on [J&T Express Brazil's tracking page](https://www.jtexpress.com.br/trajectoryQuery), or paste the waybill number into the box above.
 
 ## J&T Express Brazil tracking number: format and where to find it
 
-Look for the waybill number (*código de rastreio* or *número de pedido*) in the online store's dispatch email, inside your marketplace order page or on the receipt issued at a Ponto J&T. J&T Express Brazil uses a 15-digit waybill number beginning with `8880`.
+Look for the tracking code (*código de rastreio*) in the online store's dispatch email or on your marketplace order page. J&T's tracker calls it the waybill (*carta de porte*). J&T Express Brazil uses a 15-digit waybill number beginning with `8880`.
 
 | Format (invented) | What it is |
 | --- | --- |
 | `888048291736405` | J&T Express Brazil waybill: `8880` followed by 11 digits. |
 
-J&T's tracking page accepts up to 30 numbers at once, separated by commas or line breaks. If your dispatch message carries a `BR` code with 13 characters, that belongs to [SPX Express Brazil](carrier:spx-br) rather than J&T; a 13-character code ending in `BR` with two leading letters and nine digits belongs to [Correios](carrier:correios-br); a 17-character code starting with `AJ` belongs to [Anjun Logistics](carrier:anjun); and a 14-digit number without the `8880` prefix often belongs to [Jadlog](carrier:jadlog). See [tracking number formats](guide:tracking-number-formats) if you are unsure which carrier issued your code.
+If your dispatch message carries a 15-character `BR` code (`BR`, 12 digits and a final digit or letter), that belongs to [SPX Express Brazil](carrier:spx-br) rather than J&T; a 13-character code ending in `BR` with two leading letters and nine digits belongs to [Correios](carrier:correios-br); a 17-character code starting with `AJ` belongs to [Anjun Logistics](carrier:anjun); and a 14-digit number without the `8880` prefix often belongs to [Jadlog](carrier:jadlog). See [tracking number formats](guide:tracking-number-formats) if you are unsure which carrier issued your code.
 
 ## What J&T Express Brazil tracking statuses mean
 
-J&T Express Brazil publishes its scan descriptions in Portuguese. Some stages share the same headline (`Em transferencia`) while the detailed line explains whether the parcel is still waiting to be picked up or moving between hubs.
+J&T Express Brazil publishes its scan descriptions in Portuguese. `Em transferencia` stands for two stages: before J&T's collection scan, the sender has only registered the parcel; after it, the parcel is moving between centres. Peek tells them apart by J&T's status code.
 
 | J&T Express Brazil says | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -38,9 +38,9 @@ J&T Express Brazil handles [B2C e-commerce logistics](https://www.jtexpress.com.
 
 **Weight and size limits.** On its [homepage](https://www.jtexpress.com.br/) freight calculator, J&T states that a parcel can weigh up to 30 kg, with no single side longer than 120 cm and the sum of length, width and height no greater than 240 cm.
 
-**Pontos J&T.** J&T operates more than 6,000 partner shops across Brazil ([Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)), which act as drop-off and collection points integrated into the national network.
+**Pontos J&T.** J&T counts more than 6,000 partner shops across Brazil ([Pontos J&T](https://www.jtexpress.com.br/joinUs/pudo)) where senders drop off parcels for J&T to collect. J&T's pages don't present them as pickup points for recipients.
 
-**Delivery attempts and scheduling.** J&T Express Brazil's public pages do not publish a single fixed delivery-attempt count, guaranteed transit window or pickup-point holding period for all retail contracts, because marketplace and store agreements set those terms. Check the estimated date and any delivery instructions inside the store or marketplace app where you bought the item.
+**Delivery attempts and scheduling.** J&T Express Brazil's public pages give no number of delivery attempts, guaranteed transit time or holding period. Check the estimated date and any delivery instructions inside the store or marketplace app where you bought the item.
 
 ## Cross-border parcels and Remessa Conforme customs
 
@@ -78,9 +78,11 @@ Contact the seller first for order refunds or address changes. To reach J&T Expr
 
 [Peek](/) recognises a 15-digit `8880` waybill number as J&T Express Brazil automatically, with high confidence, and also recognises pasted `jtexpress.com.br/trajectoryQuery` or `/mobile/expressTracking` links containing `waybillNo=`. If Peek ever guesses a different carrier for another code, tap "Change" while adding or "Change carrier" on the parcel screen and choose J&T Express Brazil (searching for "J&T Express Brasil" or "J&T Brazil" finds it too).
 
-Peek queries J&T Express Brazil's guest tracking directly and displays the current stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), J&T's Portuguese scan descriptions and timestamps read in Brazilian local time (`America/Sao_Paulo`, displayed in your device's time zone). J&T's public tracker does not expose an estimated delivery date, pickup point details, recipient or courier names, or proof-of-delivery photos, so those do not appear in Peek.
+Peek queries J&T Express Brazil's guest tracking directly and displays the current stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), J&T's Portuguese scan descriptions and timestamps read in Brazilian local time (`America/Sao_Paulo`, displayed in your device's time zone). Peek shows no expected date, pickup point or delivery photo. When J&T's line names the courier, the name shows masked, as J&T writes it.
 
-Peek checks J&T Express Brazil at most every 30 minutes, including while you have the parcel open and on delivery day — refreshing by hand will not check sooner — and waits 60 minutes after a failed check. Between active bursts it checks hourly, stays hourly while open once a parcel has sat 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they run hourly, slow to every 3 hours after a day with no change, and step up to every 15 minutes on delivery day. If tracking goes quiet for 4 days in transit, Peek flags it (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking J&T Express Brazil." and offers "Get help from J&T Express Brazil", which opens J&T's order feedback form. After more than three weeks without a new scan, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking J&T Express Brazil."
+Peek checks J&T Express Brazil at most every 30 minutes, also while you have the parcel open in Peek or on its delivery day with notifications on, and refreshing by hand doesn't check sooner; after a failed check it waits an hour. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". Peek asks no tracking services for J&T Express Brazil: every update comes from J&T's own tracker.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking J&T Express Brazil.", with a "Get help from J&T Express Brazil" link to J&T's order feedback form. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking J&T Express Brazil."
 
 You can choose notification alerts for "Every scan", "Important steps" or "Delivery only". Peek only monitors tracking updates and cannot redirect a parcel or contact J&T Express Brazil on your behalf.
 
@@ -88,7 +90,7 @@ You can choose notification alerts for "Every scan", "Important steps" or "Deliv
 
 ### What does a J&T Express Brazil tracking number look like?
 
-A J&T Express Brazil waybill is 15 digits starting with `8880` (for example `888048291736405`, digits invented). You can track up to 30 numbers at once on J&T's site or paste one into Peek.
+A J&T Express Brazil waybill is 15 digits starting with `8880` (for example `888048291736405`, digits invented). Paste it into Peek or into J&T's tracking page.
 
 ### Why does my J&T Express parcel say `Em transferencia` for days?
 
@@ -104,12 +106,12 @@ Call `0800-055-0050`, email `meajuda@jtexpress.com.br` (or `escalations@jtexpres
 
 :::sources
 - [J&T Express Brazil: Home](https://www.jtexpress.com.br/) – national coverage (5,571 municipalities), 6,000+ Pontos J&T, 1,600+ routes, 50+ transfer centres, 30 kg / 120 cm / 240 cm limits, SAC phone and email
-- [J&T Express Brazil: Tracking](https://www.jtexpress.com.br/trajectoryQuery) – waybill lookup (up to 30 numbers), official security warning against WhatsApp/SMS/third-party customs payment links
-- [J&T Express Brazil: History](https://www.jtexpress.com.br/aboutus/history) – global network founded in 2015 across 13 countries
+- [J&T Express Brazil: Tracking](https://www.jtexpress.com.br/trajectoryQuery) – waybill lookup and the official security warning against WhatsApp/SMS/third-party customs payment links
+- [J&T Express Brazil: History](https://www.jtexpress.com.br/aboutus/history) – founded in 2015; 13 of its countries named
 - [J&T Express Brazil: B2C Services](https://www.jtexpress.com.br/service/b2c) – e-commerce logistics in Brazil
 - [J&T Express Brazil: C2C Personal Shipping](https://www.jtexpress.com.br/clients/c2c) – personal parcel service
 - [J&T Express Brazil: Cross-Border (CBT)](https://www.jtexpress.com.br/service/cbt) – international shipping and Programa Remessa Conforme clearance
-- [J&T Express Brazil: Pontos J&T (PUDO)](https://www.jtexpress.com.br/joinUs/pudo) – partner drop-off and collection network
+- [J&T Express Brazil: Pontos J&T (PUDO)](https://www.jtexpress.com.br/joinUs/pudo) – partner shops where senders drop off parcels
 - [J&T Express Brazil: Order Feedback](https://www.jtexpress.com.br/contactus/orderFeedback) – recipient feedback form and contact details
 - [J&T Express Brazil: Ouvidoria](https://www.jtexpress.com.br/contactus/supervise) – ethics channel scope versus customer service
 - [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – certified vs non-certified import duty and ICMS rules

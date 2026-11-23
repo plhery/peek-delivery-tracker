@@ -14,9 +14,9 @@ Look for your shipment code (*código de rastreio* or *remessa*) in the online s
 
 | Format (invented) | What it is |
 | --- | --- |
-| `48291736405821` | Jadlog 14-digit parcel number. Shares the 14-digit shape with Geopost/DPD carriers in Europe such as [DPD Germany](carrier:dpd-de), [DPD France](carrier:dpd-fr), [Chronopost](carrier:chronopost), [SEUR](carrier:seur) and [BRT](carrier:brt). |
+| `48291736405821` | Jadlog 14-digit parcel number. Shares the 14-digit shape with Geopost/DPD carriers in Europe such as [DPD Germany](carrier:dpd-de), [Chronopost](carrier:chronopost), [SEUR](carrier:seur) and [BRT](carrier:brt). |
 
-On Jadlog's own website you can also look up a shipment by Brazilian taxpayer ID (CPF or CNPJ), though Peek tracks by the 14-digit parcel number alone and never asks for your CPF. If your code has 15 digits starting with `8880`, it belongs to [J&T Express Brazil](carrier:j-and-t-br); a 13-character `BR` code belongs to [SPX Express Brazil](carrier:spx-br); a 17-character `AJ` code belongs to [Anjun Logistics](carrier:anjun); and a 13-character code ending in `BR` belongs to [Correios](carrier:correios-br). See [tracking number formats](guide:tracking-number-formats) for other shapes.
+Peek tracks by the 14-digit parcel number alone and never asks for your CPF. If your code has 15 digits starting with `8880`, it belongs to [J&T Express Brazil](carrier:j-and-t-br); a 15-character `BR` code belongs to [SPX Express Brazil](carrier:spx-br); a 17-character `AJ` code belongs to [Anjun Logistics](carrier:anjun); and a 13-character code ending in `BR` belongs to [Correios](carrier:correios-br). See [tracking number formats](guide:tracking-number-formats) for other shapes.
 
 ## What Jadlog tracking statuses mean
 
@@ -36,13 +36,13 @@ When a store prints shipping labels in batches before Jadlog's van picks them up
 
 Jadlog lists its core services on [jadlog.com.br/jadlog/servicos](https://www.jadlog.com.br/jadlog/servicos), [Quem Somos](https://www.jadlog.com.br/jadlog/quemsomos) and dedicated product pages:
 
-- **Jadlog.com and Jadlog Package:** e-commerce road and air-road delivery (Jadlog.com handles parcels up to 30 kg; Jadlog Package covers B2C and B2B road shipments).
-- **Jadlog Rodo, RodoEconômico, Cargo and DOC:** heavier road freight up to 50 kg (Rodo), economy road service, urgent B2B air cargo and document transport.
+- **Jadlog.com and Jadlog Package:** e-commerce delivery (Jadlog.com handles parcels up to 30 kg; Jadlog Package covers B2C and B2B road shipments).
+- **Jadlog Rodo, RodoEconômico, Cargo and DOC:** heavier road freight up to 50 kg (Rodo), economy road service, B2B air cargo and document transport.
 - **[Jadlog Predict](https://www.jadlog.com.br/jadlog/jadlogPredict):** available in metropolitan and high-volume areas, sending an automatic SMS alert with a 1-hour delivery window so you know when to expect the driver.
-- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup):** more than 4,000 partner shops across Brazil (reaching over 90% of the population) for parcel collection, drop-off and e-commerce reverse returns (*Reversa*), with SMS and email notifications when a parcel is ready.
+- **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup):** more than 4,000 partner shops across Brazil (reaching over 90% of the population) for parcel collection, drop-off and e-commerce reverse returns (*Reversa*), with SMS and email notices to follow the parcel.
 - **[Jadlog Internacional](https://www.jadlog.com.br/jadlog/internacional):** export shipping from Brazil to 154 countries (300 destinations) using Geopost's international network.
 
-**What Jadlog does not publish publicly.** Jadlog's website does not state a single universal delivery-attempt limit, guaranteed delivery SLA or fixed Pickup-point holding duration for all online shops, as those rules depend on the contract between the store and Jadlog. Check the SMS or email notice sent for your Pickup parcel — or your online store's order screen — for exact collection deadlines and redelivery rules.
+**What Jadlog does not publish publicly.** Jadlog's website does not state a single universal delivery-attempt limit, guaranteed delivery SLA or fixed Pickup-point holding duration for all online shops. Check the SMS or email notice sent for your Pickup parcel — or your online store's order screen — for exact collection deadlines and redelivery rules.
 
 ## Jadlog parcel stuck, delayed or not received
 
@@ -73,7 +73,9 @@ Because 14-digit numbers are shared across Geopost/DPD carriers worldwide, [Peek
 
 Peek queries Geopost's guest tracking API directly for Jadlog without needing your postcode or CPF. It shows the current stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), summary scan history (in English from Geopost's API or Portuguese when relayed from Jadlog's local tracker) and the delivery timestamp. Estimated delivery dates, parcel weight, Jadlog Pickup shop addresses and recipient names or signatures are not exposed in Peek.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts turned on, and up to every 2 minutes from 6:00 a.m. local time on the day the parcel goes out for delivery. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, slow to every 3 hours after a day without change, and step up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the silence (for example "No tracking update since Mon, Oct 12") and displays "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jadlog." After more than three weeks with nothing new, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jadlog."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day the parcel goes out for delivery, every 2 minutes from 6 a.m. local time, while Jadlog's tracking answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Jadlog's tracking doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jadlog." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jadlog."
 
 You can choose alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking only and cannot book a redelivery or contact a Jadlog franchise for you.
 
@@ -89,7 +91,7 @@ A Jadlog parcel number is 14 digits long (for example `48291736405821`, digits i
 
 ### How does Jadlog Pickup work?
 
-[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup) uses over 4,000 partner commercial shops across Brazil where recipients can collect parcels or drop off reverse returns. Jadlog sends an SMS and email notice once a parcel arrives at the chosen shop.
+[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup) uses over 4,000 partner commercial shops across Brazil where recipients can collect parcels or drop off reverse returns. Jadlog sends SMS and email notices so you can follow the parcel.
 
 ### Why is Jadlog connected to DPD and Geopost?
 

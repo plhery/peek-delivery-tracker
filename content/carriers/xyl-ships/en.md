@@ -26,7 +26,7 @@ XYL-Ships publishes its tracking milestones in English, following a parcel from 
 
 | XYL-Ships says | What it means for you | Peek shows |
 | --- | --- | --- |
-| `Shipment inbound in sorting center` | XYL-Ships received and scanned the parcel at its origin sorting centre. | "Received by carrier" |
+| `Shipment inbound in sorting center` | XYL-Ships received and scanned the parcel at its origin sorting centre. | "In transit" |
 | `Departed from sorting center`, `Arrived at sorting warehouse`, `Leaving warehouse` | Moving through origin sorting warehouses before linehaul handover. | "In transit" |
 | `Hand over to transportation company`, `Departed from origin transportation center`, `Arrived at destination transportation center` | Handed to the international linehaul carrier, departed China and reached the destination country's intake centre. | "In transit" |
 | `Released and the package is being transferred`, `Package is being transferred locally` | Cleared into the destination country and moving into local domestic transfer. | "In transit" |
@@ -42,7 +42,7 @@ Notice two easy-to-misread lines near the end of the journey. `Arriving at the d
 
 On [xylships.com](https://xylships.com/), XYL-Ships presents commercial air freight (including domestic 6-hour and 12-hour premium air freight and FBA door-to-door consolidation), ocean container consolidation, rail and road haulage, plus cross-border single-item e-commerce parcel handling — citing a single-item small-parcel customer case with 99% completion within 20 days.
 
-**Local final-mile delivery.** XYL-Ships does not run its own retail delivery vans outside China. As its own tracking lines show, once a parcel reaches the destination country it is transferred to a local transportation partner or post office for final delivery.
+**Local final-mile delivery.** As XYL-Ships' own tracking lines show, once a parcel reaches the destination country it is transferred to a local transportation partner or post office for final delivery.
 
 **Delivery rules and missing details.** `xylships.com` does not publish recipient delivery-attempt counts, parcel-locker rules, holding deadlines, transit guarantees or claims windows. Once the parcel enters your country, actual doorstep procedures (leaving with a neighbour, safe-place drop-off or pickup-card holding days) depend on whichever local postal or courier partner completes delivery.
 
@@ -54,9 +54,9 @@ When you bought an item from an online store shipped via XYL-Ships, the seller i
 
 **Long silence during transit.** Multi-day gaps are common between `Departed from origin transportation center` and `Arrived at destination transportation center` while parcels wait for flights, customs clearance and destination intake scans. See [why tracking stops updating](guide:tracking-not-updating).
 
-**No local tracking number shown.** XYL-Ships' tracker follows the parcel through the local partner under your original `NUDE` or `XLWL` number, without exposing a separate local courier reference. If you need the local partner's name or barcode because a delivery failed, ask the seller to check with their shipping agent.
+**No local tracking number in Peek.** Peek follows the parcel through the local partner under your `NUDE` or `XLWL` number and shows no separate local reference. If a delivery fails and you need the local partner's name or number, ask the seller.
 
-**Marked `Delivered` but nowhere to be found.** Check your letterbox, porch, building reception and neighbours first — local last-mile partners sometimes leave small parcels in mailboxes or safe places without leaving a separate card. If it still does not turn up, report it to the seller immediately and ask for proof of delivery. See [delivered but not received](guide:delivered-not-received).
+**Marked `Delivered` but nowhere to be found.** Check your letterbox, porch, building reception and neighbours first. If it still does not turn up, report it to the seller immediately and ask for proof of delivery. See [delivered but not received](guide:delivered-not-received).
 
 **Damaged, lost or returned.** Keep photos of damaged packaging and contact the store straight away, or open a payment/marketplace buyer-protection dispute before your order window closes. See [damaged parcel](guide:damaged-parcel) and [lost parcel](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
@@ -75,11 +75,13 @@ Because XYL-Ships works with business shippers rather than individual retail rec
 
 [Peek](/) recognises `NUDE` (`NUDE` + 10 digits + `EX`) and `XLWL` (`XLWL` + 10 digits + `EX` or `EXP`) tracking numbers as XYL-Ships automatically, with high confidence. Because XYL-Ships does not use carrier-specific tracking URLs in Peek, paste the tracking number itself rather than a link; if you ever need to pick the carrier manually, tap "Change" while adding or "Change carrier" on the parcel screen and choose XYL-Ships (searching "FXYL" finds it too).
 
-Peek reads XYL-Ships' JSON tracking feed directly and shows the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), XYL-Ships' English scan descriptions, the scan location when the feed includes one, and timestamps carrying explicit time-zone offsets (displayed in your device's time zone). Peek drops sender and recipient address fields and internal customer references; XYL-Ships' tracker does not provide an estimated delivery date, parcel weight, local handoff carrier tracking number or proof-of-delivery photo.
+Peek reads XYL-Ships' JSON tracking feed directly and shows the stage ("In transit", "Out for delivery" or "Delivered"), XYL-Ships' English scan descriptions, the scan location when the feed includes one, and timestamps carrying explicit time-zone offsets (displayed in your device's time zone). Peek drops sender and recipient address fields and internal customer references. It shows no expected date, weight, local carrier's number or delivery photo.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts enabled, and up to every 2 minutes from 6:00 a.m. on the newest scan's clock (or China time) on the day `Parcel currently being delivered` appears. Otherwise it checks hourly, stays hourly while open once a parcel has sat 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, slow to every 3 hours after a day without change, and step up to every 15 minutes on delivery day. If a parcel goes 4 days in transit with no new scan, Peek flags it (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking XYL-Ships." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking XYL-Ships."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day XYL-Ships shows `Parcel currently being delivered`, every 2 minutes from 6 a.m. on the clock of XYL-Ships' newest scan, while XYL-Ships' own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When XYL-Ships' tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
 
-You can choose alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking only and cannot identify the undisclosed local driver or contact XYL-Ships on your behalf.
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking XYL-Ships." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking XYL-Ships."
+
+You can choose alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking only and can't name the local carrier or contact XYL-Ships for you.
 
 ## Questions about XYL-Ships tracking
 
@@ -97,7 +99,7 @@ It means the parcel has arrived in your destination city and is being handed ove
 
 ### Who delivers XYL-Ships parcels in my country?
 
-XYL-Ships transfers parcels to a local transportation partner or postal service after destination intake, and its tracking feed does not name that local carrier or publish a second tracking number. If delivery fails, ask the seller for the local carrier's details.
+XYL-Ships transfers parcels to a local transportation partner or postal service after destination intake, and its tracking lines don't name that local carrier; Peek shows no second tracking number. If delivery fails, ask the seller for the local carrier's details.
 
 :::sources
 - [XYL-Ships International Logistics](https://xylships.com/) – CAAC and IATA air transport sales agency qualifications, air/sea/rail/road and cross-border single-item small-parcel services, Track Order entry and contact email `fzxyl9527@163.com`

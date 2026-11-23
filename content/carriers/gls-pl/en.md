@@ -10,7 +10,7 @@ GLS Poland (*General Logistics Systems Poland Sp. z o.o.*, headquartered in Głu
 
 ## GLS Poland tracking number and Track-ID: formats
 
-Find your parcel number in the online shop's shipping email, GLS's email/SMS alert or on a missed-delivery card (*awizo*), which also carries a shorter Track-ID that works in GLS's search box.
+Find your parcel number in the online shop's shipping email, GLS's email/SMS alert or on a missed-delivery card (*awizo*). GLS's search box also takes the Track-ID from GLS's notices.
 
 | Format (invented) | What it is |
 | --- | --- |
@@ -29,21 +29,22 @@ GLS Poland displays Polish scan descriptions on its Polish website and English g
 | `Paczka została przekazana GLS` | GLS collected or accepted the parcel into its network. | "Received by carrier" |
 | `In transit`, `Final parcel center`, `Paczka zarejestrowana w filii GLS`, `Paczka wyjechała z filii GLS` | Moving through GLS sorting hubs and local Polish branches toward the delivering depot. | "In transit" |
 | `In delivery`, `Paczka w doręczeniu` | The courier loaded your parcel for delivery today. | "Out for delivery" |
-| `Handing over the parcel to the recipient at the GLS ParcelShop.` (and GLS Point / locker arrival scans) | Waiting for collection at a GLS Point or 24/7 parcel locker. | "Ready for pickup" |
-| `The parcel has been delivered.`, `Paczka została doręczona` | Delivered to you, an authorised person or a neighbour. | "Delivered" |
-| `Paczka niedoreczona - odmowa przyjecia przez Odbiorce`, `Paczka pozostawiona w filii doreczajacej - Odbiorca odmowil przyjecia` | Delivery was refused by the recipient and the parcel returned to the local branch. | "Delivery attempted" / "Returned to sender" |
+| A GLS Point or parcel locker arrival, which GLS marks as delivered | Waiting for you at a GLS Point or 24/7 parcel locker. | "Ready for pickup" |
+| `The parcel has been delivered.`, `Paczka została doręczona`, `Handing over the parcel to the recipient at the GLS ParcelShop.` | Delivered to you, an authorised person or a neighbour, or collected at a GLS Point. | "Delivered" |
+| `Paczka niedoreczona - odmowa przyjecia przez Odbiorce` | The recipient refused the parcel. | "Delivery attempted" |
+| `Paczka pozostawiona w filii doreczajacej - Odbiorca odmowil przyjecia` | Refused, and held at the delivering branch. | "Needs attention" |
 
-GLS Poland's [Live Tracking](https://gls-group.com/PL/en/live-tracking/) also lets recipients follow a parcel on a map with updates every 15 minutes once it is out for delivery. Note that GLS sometimes marks a GLS Point handover as delivered even while the parcel is waiting for you to pick it up — Peek displays that step as "Ready for pickup".
+On the delivery day, GLS Poland's [Live Tracking](https://gls-group.com/PL/en/live-tracking/) emails a link with the expected delivery time, kept to within 15 minutes, and shows the courier on a map once 20 stops or fewer remain. GLS's progress bar marks a parcel left at a GLS Point or locker as delivered while it waits for you; Peek shows that step as "Ready for pickup", and "Delivered" once you've collected it.
 
 ## GLS Poland delivery times, GLS Points, ORLEN lockers and FlexDeliveryService
 
-**Delivery days and speed.** GLS Poland delivers Monday to Friday (Saturday delivery only if specifically ordered by the sender). Domestic standard parcels usually arrive the next working day (not guaranteed; senders can pay for Express 10:00 or 12:00). Cross-border EU parcels typically take 48 to 96 hours (2 to 7 working days depending on the country listed on [GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/)).
+**Delivery days and speed.** GLS Poland delivers Monday to Friday (Saturday delivery only if specifically ordered by the sender). Domestic standard parcels usually arrive the next working day (not guaranteed; senders can pay for Express 10:00 or 12:00). From Poland, GLS gives 2 to 7 working days to other EU countries, depending on the country ([GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/)).
 
-**Weight, size and CashService (COD).** Domestic address parcels can weigh up to 31.5 kg (40 kg for international address parcels; 20 kg for parcel lockers, myGLS and selected points), within 200 × 80 × 60 cm and length plus girth up to 300 cm. Cash-on-delivery (`CashService`, up to 6,000 PLN per day) can be paid to the courier by cash, card or BLIK.
+**Weight, size and CashService (COD).** Domestic address parcels can weigh up to 31.5 kg (40 kg for international address parcels; 31.5 kg through selected GLS Points; 20 kg through other GLS Points, parcel lockers and myGLS), within 200 × 80 × 60 cm and length plus girth up to 300 cm. Cash-on-delivery (`CashService`, up to 6,000 PLN per day) can be paid to the courier by cash, card or BLIK.
 
 **Missed delivery and second attempt.** On [GLS Poland's receiving page](https://gls-group.com/PL/en/receiving/), if you are not home, the courier may leave the parcel with a neighbour (with your consent) or redirect an eligible non-COD parcel to a nearby GLS Point. Otherwise the parcel returns to the branch for a second delivery attempt on the next working day; if still undelivered, it stays at the depot before going back to the sender (5 working days for FlexDeliveryService depot pickup, or returned after 6 working days under the receiving guide).
 
-**GLS Points holding time.** Under GLS Poland's current [Terms of Service](https://gls-group.com/PL/pl/regulamin/) (effective 9 November 2026) and [FAQ](https://gls-group.com/PL/en/faq/), parcels wait at a GLS Point for **7 calendar days** before returning to the sender (note that GLS's older [receiving page](https://gls-group.com/PL/en/receiving/) still says "7 working days"). Collect using the PIN sent by SMS/email or an ID.
+**GLS Points holding time.** Under GLS Poland's [terms](https://gls-group.com/PL/pl/regulamin/) for GLS Points and parcel lockers (in force from 9 November 2026) and its [FAQ](https://gls-group.com/PL/en/faq/), parcels wait at a GLS Point for **7 calendar days** before returning to the sender (the [receiving](https://gls-group.com/PL/en/receiving/) and GLS Points pages still say seven working days). Collect it with the PIN sent by text or email; GLS may check your ID.
 
 **24/7 ORLEN Paczka parcel lockers.** Parcels routed to [shared ORLEN Paczka lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) are held for **72 hours** and return automatically to the sender afterwards. Open the locker with your SMS/email PIN, QR code or remote unlock in the myGLS app — no ID is required, so anyone holding the code can collect. For 24/7 locker technical help, call `801 167 536` or `502 167 536`.
 
@@ -73,11 +74,15 @@ Contact the online shop first for order refunds. To reach GLS Poland directly (d
 
 ## Track a GLS Poland parcel with Peek
 
-Because 11- and 12-digit numbers are shared across several European carriers, [Peek](/) uses your region to decide who to ask first. In Poland, Peek queries GLS Poland first (ahead of [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) and [PPL](carrier:ppl) for 11-digit codes, and [BRT](carrier:brt) and [Colis Privé](carrier:colis-prive) for 12-digit codes) and shows "GLS Poland has this parcel." when GLS confirms it. Outside Poland, Peek treats GLS Poland as a last resort — paste a `gls-group.com/PL/` or `gls-group.eu/PL/` link (`match=`, `parcelNumber=` or `matchParcelNumber=`) to pick GLS Poland straight away, or tap "Change" while adding / "Change carrier" on the parcel screen.
+Paste the number in [Peek](/). 11- and 12-digit numbers are shared by several carriers, so Peek asks the likely ones and goes by your country (your phone's region, or on the web where you connect from). In Poland it asks GLS Poland first, before [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) and others such as [PPL](carrier:ppl) for 11 digits or [BRT](carrier:brt) and [Colis Privé](carrier:colis-prive) for 12, and you'll usually see "GLS Poland has this parcel." Elsewhere GLS Poland is asked only once the other likely carriers have missed the number. A pasted `gls-group.com` or `gls-group.eu` link with `/PL/` in its path and the number in `match=`, `parcelNumber=` or `matchParcelNumber=` is tracked as GLS Poland. Otherwise press "Change" as you add the parcel, or "Change carrier" on one already added, and pick GLS Poland.
 
-Peek shows an optional "Delivery postcode" field for GLS Poland. Although optional, GLS only returns full scan details when you provide the delivery postcode (any country's 3-to-12-character format with a digit works, and it is never exposed on shared links). Without a postcode, Peek falls back to tracking services and slows to daily checks after a day with no answers; adding or editing the postcode triggers an immediate check. Once GLS answers, Peek displays the current stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Ready for pickup", "Delivered", "Delivery attempted", "Returned to sender"), town and country on a map, expected delivery day, weight, delivery time, GLS Point name and address, and Polish local timestamps (`Europe/Warsaw`, shown in your device's time zone). Recipient name, street address, contact details, signature and sender reference are dropped.
+The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it, as the line under the field says: "GLS Poland shows its scans only with the delivery postcode." Without it, Peek gets GLS's status but no scans: it asks other tracking services for them meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries once the postcode you last gave a GLS Poland parcel, or failing that the one on your latest parcel. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". While GLS waits for the postcode, or doesn't find the parcel with yours, and nothing has answered for a day, Peek checks once a day; adding or changing the postcode checks the parcel at once. The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
 
-Peek checks GLS Poland about once an hour, delivery day included — manual refresh does not check sooner — and waits 4 hours after a failed check. After 7 days still at "Label created", checks drop to every 6 hours. When tracking services run alone (without a postcode), they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GLS Poland." and displays "Get help from GLS Poland", which opens GLS Poland's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking GLS Poland."
+With the postcode, you see the status, each scan's place on a map, the expected day, the weight, the delivery time and, at a GLS Point, its name and address. Your name, address, contact details, the signature and the sender's reference are dropped. Peek reads GLS's English service rather than the Polish page: there, `W doręczeniu` reads `In delivery` and `Paczka została doręczona` reads `The parcel has been delivered.` A GLS Point or locker arrival shows as "Ready for pickup". Times are read as Polish time.
+
+Peek checks GLS about once an hour, delivery day included, and refreshing by hand doesn't check sooner (4 hours after a failed check); every 6 hours after seven days without news at "Label created". Through tracking services alone, it checks hourly, and every 3 hours after a quiet day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GLS Poland.", with a "Get help from GLS Poland" link to GLS Poland's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking GLS Poland."
 
 You can pick notification presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot redirect parcels or file complaints with GLS Poland on your behalf.
 
@@ -85,7 +90,7 @@ You can pick notification presets for "Every scan", "Important steps" or "Delive
 
 ### How long does GLS Poland hold a parcel at a GLS Point or ORLEN locker?
 
-Under GLS Poland's current [Terms of Service](https://gls-group.com/PL/pl/regulamin/) and [FAQ](https://gls-group.com/PL/en/faq/), GLS Points hold parcels for 7 calendar days (an older page still mentions 7 working days), while 24/7 ORLEN Paczka parcel lockers hold parcels for 72 hours before automatic return to the sender.
+Under GLS Poland's current [Terms of Service](https://gls-group.com/PL/pl/regulamin/) and [FAQ](https://gls-group.com/PL/en/faq/), GLS Points hold parcels for 7 calendar days (the receiving and GLS Points pages still say seven working days), while 24/7 ORLEN Paczka parcel lockers hold parcels for 72 hours before automatic return to the sender.
 
 ### Why does GLS Poland ask for my postcode to show full tracking?
 
@@ -107,9 +112,9 @@ Open the FlexDeliveryService link in GLS's email notification (no account needed
 - [GLS Poland: Parcel Redirection](https://gls-group.com/PL/en/parcel-redirection/) – FlexDeliveryService options without an account
 - [GLS Poland: GLS Points](https://gls-group.com/PL/en/shipping-receiving-points/gls-points/) – 18,000+ GLS Points (including 11,000 Żabka stores), 26,000+ OOH points, weight/size limits and EU transit times
 - [GLS Poland: Parcel Lockers](https://gls-group.com/PL/en/shipping-receiving-points/parcel-lockers/) – ~8,000 shared ORLEN Paczka 24/7 lockers, 72-hour pickup window, PIN/QR/myGLS app, 20 kg limit and locker hotline
-- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – map view with 15-minute updates
+- [GLS Poland: Live Tracking](https://gls-group.com/PL/en/live-tracking/) – map view and an expected time to within 15 minutes
 - [GLS Poland: FAQ](https://gls-group.com/PL/en/faq/) – 7-calendar-day GLS Point hold, CashService cash/card/BLIK, missed delivery answers
-- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – terms effective 9 November 2026: 7-calendar-day pickup window, 7-day hidden-damage notice, 30/45-day complaint windows and 30-day resolution
+- [GLS Poland: Terms of Service (Regulamin)](https://gls-group.com/PL/pl/regulamin/) – terms, those for GLS Points and lockers in force from 9 November 2026: 7-calendar-day pickup window, 7-day hidden-damage notice, 30/45-day complaint windows and 30-day resolution
 - [GLS Poland: Contact](https://gls-group.com/PL/en/gls-contact/) – hotline `+48 46 814 82 20` (Mon–Fri 07:00–19:00, Sat 07:00–15:00), `gls@gls-poland.com` and contact form
 - [GLS Poland: Consumer Complaints](https://gls-group.com/PL/pl/reklamacje-konsumenckie/) – online consumer claim submission
 - [GLS Poland: Security Advices](https://gls-group.com/PL/en/security-advices/) – phishing warnings, `security@gls-poland.com` and CERT NASK reporting

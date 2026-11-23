@@ -16,7 +16,7 @@ Your tracking number appears in the marketplace or online store's dispatch notif
 | --- | --- |
 | `AJ261015482917364` | Anjun Logistics / Anjun Express code: `AJ` + 6-digit date + 9 digits. |
 
-Anjun runs two tracking portals: [anjuntrack.com](https://anjuntrack.com/trajectory) covers China-to-Brazil cross-border consignments, while [anjunexpress.com](https://anjunexpress.com/trackPackage) focuses on Brazilian last-mile and domestic parcels. If your order instead has a 13-character `BR` code, check [SPX Express Brazil](carrier:spx-br); a 15-digit `8880` code belongs to [J&T Express Brazil](carrier:j-and-t-br); and a 13-character postal code ending in `BR` belongs to [Correios](carrier:correios-br). See [tracking number formats](guide:tracking-number-formats) to identify other prefixes.
+Anjun runs two tracking portals: [anjuntrack.com](https://anjuntrack.com/trajectory) covers China-to-Brazil cross-border consignments, while [anjunexpress.com](https://anjunexpress.com/trackPackage) focuses on Brazilian last-mile and domestic parcels. If your order instead has a 15-character `BR` code, check [SPX Express Brazil](carrier:spx-br); a 15-digit `8880` code belongs to [J&T Express Brazil](carrier:j-and-t-br); and a 13-character postal code ending in `BR` belongs to [Correios](carrier:correios-br). See [tracking number formats](guide:tracking-number-formats) to identify other prefixes.
 
 ## What Anjun Logistics tracking statuses mean
 
@@ -25,24 +25,25 @@ Cross-border Anjun parcels usually switch from English scan lines in China and H
 | Anjun says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Objeto postado` | Electronic pre-advice or posting recorded before warehouse intake. | "Label created" |
-| `The goods have arrived at Anjun`, `Objeto coletado` | Anjun received the parcel at its origin warehouse or collected it in Brazil. | "Received by carrier" |
+| `The goods have arrived at Anjun`; `Objeto coletado` as the first scan of a parcel sent within Brazil | Anjun's warehouse in China has the parcel, or Anjun collected it from a sender in Brazil. | "Received by carrier" |
 | `The goods have been issued`, `Departed Facility in SHENZHEN`, `Arrived at Sort Facility HONG KONG INTERNATIONAL AIRPORT`, `Departed Facility in HONG KONG INTERNATIONAL AIRPORT`, `Arrived at Sort Facility Destination Airport` | Export processing, flight departure from Shenzhen or Hong Kong and arrival at the Brazilian destination airport. | "In transit" |
-| `Recebimento de cargas no armazém courier`, `Entrada no armazém alfândegado de TFK`, `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes`, `Análise concluída - importação autorizada` | Customs bonded warehouse intake, customs declaration submission and import clearance in Brazil. | "At customs" |
-| `Pacote Liberado Aguadando a Coleta de Last Mile`, `Saída do Centro Internacional`, `Coletado por Last Mile`, `Objeto recebido pelos Correios do Brasil` | Released from customs and handed to Anjun's last-mile network or to Correios for domestic delivery. | "In transit" |
+| `Recebimento de cargas no armazém courier` | Received at the courier terminal in Brazil, before customs. | "In transit" |
+| `Entrada no armazém alfândegado de TFK`, `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes`, `Análise concluída - importação autorizada` | Bonded warehouse intake, the declaration sent to customs and the end of its review. | "At customs" |
+| `Pacote Liberado Aguadando a Coleta de Last Mile`, `Saída do Centro Internacional`, `Coletado por Last Mile`, `Objeto coletado`, `Objeto recebido pelos Correios do Brasil` | Released from customs and handed to Anjun's last-mile network or to Correios for domestic delivery. | "In transit" |
 | `O pacote chegou ao centro de trânsito`, `O pacote saiu do centro de trânsito`, `Objeto chegou ao ponto de entrega` | Moving through Brazilian transit hubs and reaching the local delivery station (not out for delivery yet). | "In transit" |
 | `Objeto saiu para entrega ao destinatário` | A local courier is out delivering your parcel today. | "Out for delivery" |
 | `A entrega falhou` (for example `Cliente ausente` or `Endereço fora da rota`) | Delivery could not be completed (recipient absent or address off route). | "Delivery attempted" |
 | `A entrega falhou: Pacote não pertence à Base` | The parcel reached the wrong local base and is being rerouted rather than attempted at your door. | "In transit" |
-| `O pacote está a caminho do centro de trânsito para devolução.` | The parcel is moving back to a transit centre to be returned. | "Needs attention" |
+| `O pacote está a caminho do centro de trânsito para devolução.` | Back to a transit centre after failed deliveries. It can still go out for delivery again. | "Needs attention" |
 | `O pacote foi assinado`, `Objeto entregue ao destinatário` | Anjun recorded the parcel as signed for and delivered. | "Delivered" |
 
 Note that `Objeto chegou ao ponto de entrega` means the parcel reached Anjun's local delivery depot — not a customer pickup counter — so wait for `Objeto saiu para entrega ao destinatário` before expecting the driver.
 
 ## Anjun Express Brazil network and delivery
 
-On [Anjun Express's Brazilian website](https://anjunexpress.com/home), the company describes its services across first-mile collection, international customs clearance, [last-mile delivery](https://anjunexpress.com/lastMile), B2B logistics, warehousing and Super Express. Its homepage cites more than 1,000 collection points, over 350 vehicles and over 2,000 staff (its [collection-point partner page](https://anjunexpress.com/collectionPoint) cites more than 500 points).
+On [Anjun Express's Brazilian website](https://anjunexpress.com/home), the company lists first-mile collection, [last-mile delivery](https://anjunexpress.com/lastMile), B2B logistics, warehousing, direct shipping and Super Express; its last-mile page adds a 25,000 m² bonded warehouse at São Paulo's GRU Airport. Its homepage cites more than 1,000 collection points, over 350 vehicles and over 2,000 staff (its [collection-point partner page](https://anjunexpress.com/collectionPoint) cites more than 500 points).
 
-Anjun Express does not publish a fixed number of delivery attempts, guaranteed delivery timeframe or parcel-holding period on its public pages, because those conditions vary by marketplace contract. For exact deadlines or delivery-attempt rules on an online purchase, check the order page in the store or marketplace where you bought the item.
+Anjun Express does not publish a fixed number of delivery attempts, guaranteed delivery timeframe or parcel-holding period on its public pages. For exact deadlines or delivery-attempt rules on an online purchase, check the order page in the store or marketplace where you bought the item.
 
 ## Customs clearance and Remessa Conforme in Brazil
 
@@ -84,7 +85,9 @@ On [anjunexpress.com/home](https://anjunexpress.com/home), Anjun Express announc
 
 Peek checks `anjuntrack.com` first for cross-border history and, if that portal has no scans yet, automatically checks `anjunexpress.com` as well so domestic Brazilian parcels appear without extra steps. Peek displays the stage ("Label created", "Received by carrier", "In transit", "At customs", "Out for delivery", "Delivery attempted", "Needs attention", "Delivered"), English and Portuguese scan lines, any failed-delivery reason (such as `Cliente ausente`), the town and state in Brazil (street addresses are stripped), the destination country and local wall-clock times (China time in China, Brazil time in Brazil, shown in your device's time zone). Peek drops the site's progress bar, recipient street address, GPS coordinates, driver name, support phone/email text inside scan notes, signatures and photos; estimated delivery dates, parcel weights and any downstream local handoff number are not provided by Anjun's tracker.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day when alerts are on, and up to every 2 minutes from 6:00 a.m. local time on the day `Objeto saiu para entrega ao destinatário` appears. Otherwise it checks hourly, stays hourly while open once a parcel has spent 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day quiet, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the delay (for example "No tracking update since Mon, Oct 12") and displays "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Anjun Logistics." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Anjun Logistics."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Anjun shows `Objeto saiu para entrega ao destinatário`, every 2 minutes from 6 a.m. local time, while Anjun's own tracking answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Anjun's tracking doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Anjun Logistics." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Anjun Logistics."
 
 You can pick notification presets for "Every scan", "Important steps" or "Delivery only". Peek tracks updates only and cannot clear customs or contact Anjun Express for you.
 

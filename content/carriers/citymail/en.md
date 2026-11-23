@@ -14,9 +14,9 @@ CityMail's tracking page asks for the tracking number (spårningsnummer), and it
 
 | Number (invented) | What it is |
 | --- | --- |
-| `BCMAA00000000` | `BCM`, two letters and eight digits: a CityMail parcel reference. |
-| `BCMA0000000`, `BCMAAA000000000` | The same with one to three letters and seven to nine digits. |
-| `BCMAA0000000000000CN` | `BCM`, two letters, 13 digits and `CN`: a longer CityMail reference. |
+| `BCMKP48291037` | `BCM`, two letters and eight digits: a CityMail parcel reference. |
+| `BCMK4829103`, `BCMKPR482910375` | The same with one to three letters and seven to nine digits. |
+| `BCMKP4829103756182CN` | `BCM`, two letters, 13 digits and `CN`: a longer CityMail reference. |
 | Another reference | Peek's code also takes a sender's own reference for CityMail: 8 to 35 letters and digits (see below). |
 
 No number? Ask the shop or company that sent the item. If its email names [PostNord](carrier:postnord) or [Bring](carrier:bring), the number is theirs, not CityMail's. More in [how to find your tracking number](guide:find-tracking-number).
@@ -43,7 +43,7 @@ The first three mean the parcel hasn't reached CityMail yet. If a delivery faile
 
 ## CityMail delivery in Sweden
 
-**When.** CityMail's help pages say it delivers parcels on weekdays that aren't public holidays, between 08.00 and 17.00. Its list of services for shops also has an evening delivery to the door (Hemleverans kväll). The expected day is in the tracking link in CityMail's SMS or email. If the day changes, CityMail tells you the same way. How fast it comes depends on what the web shop chose: home delivery in 1–2 days or 1–4 days. Deliveries to a parcel locker or service point come the day after CityMail gets the parcel from the shop.
+**When.** CityMail's help pages say it delivers parcels on weekdays that aren't public holidays, between 08.00 and 17.00, Swedish time. Its list of services for shops also has an evening delivery to the door (Hemleverans kväll). The expected day is in the tracking link in CityMail's SMS or email. If the day changes, CityMail tells you the same way. How fast it comes depends on what the web shop chose: home delivery in 1–2 days or 1–4 days. Deliveries to a parcel locker or service point come the day after CityMail gets the parcel from the shop.
 
 **Where.** CityMail's own couriers leave the parcel in your letterbox or PO box, by your front door, or in a bag on your letterbox. You don't need to be home. You don't sign or show ID.
 
@@ -66,9 +66,9 @@ The first three mean the parcel hasn't reached CityMail yet. If a delivery faile
 
 ## CityMail contact and customer service
 
-Peek can't contact CityMail or the shop for you. As read on 1 November 2026:
+Peek can't contact CityMail or the shop for you. On citymail.se:
 
-- **Mottagarservice (help for people who receive post and parcels):** phone 0771-40 60 40, email mottagarservice@citymail.se. CityMail's help page shows whether it's open right now. On Sunday 1 November it said it was closed and would open the next morning at 08:30.
+- **Mottagarservice (help for people who receive post and parcels):** phone 0771-40 60 40, email mottagarservice@citymail.se. Open Monday to Friday, 08.30–17.00 Swedish time.
 - **Business questions:** switchboard 08-709 43 00.
 - **Online:** CityMail's [help pages](https://www.citymail.se/hjalp/) and [questions and answers](https://www.citymail.se/hjalp/fragor-och-svar/), in Swedish. CityMail also has a web app where you can follow a delivery, redirect it, book a return and get updates.
 
@@ -77,13 +77,13 @@ Peek can't contact CityMail or the shop for you. As read on 1 November 2026:
 - **A `BCM` number.** Paste it in [Peek](/): Peek names CityMail straight away, with "Detected carrier". Spaces, dashes and lower case are fine.
 - **A link to CityMail's tracker.** A tracking.citymail.se link with `?search=` and your reference also names CityMail at once, whatever the reference.
 - **Another reference.** Peek can't tell a CityMail parcel by this shape and doesn't ask CityMail about it on its own. Paste it all the same: Peek follows more than 4,500 carriers. Then press "Change" and pick CityMail, even if Peek is showing "Checking tracking services…" for other carriers or has named another one. On a parcel you've already added, use "Change carrier". For CityMail, Peek takes 8 to 35 letters and digits, with at least one digit. For anything else, it says CityMail "doesn’t issue numbers like this one".
-- **Not listed yet.** Until CityMail lists the number, the parcel shows "Waiting for CityMail", and Peek keeps asking CityMail.
+- **Not listed yet.** Until CityMail lists the number, the parcel shows "Waiting for CityMail", and Peek keeps asking CityMail. After two days, Peek asks you to check the number, choose another carrier or delete the parcel.
 
 **What Peek shows.** CityMail's status and each scan with its time and place, in CityMail's Swedish words. CityMail's tracker gives no time zone, so Peek reads its times as Swedish time. The booking and the announced parcel show as "Label created". The terminal and the way to the service point show as "In transit": no CityMail wording in Peek's code means "Out for delivery". `Paketet har levererats till ombud` shows as "Ready for pickup", with the service point's name. The delivered wordings show as "Delivered". The failed delivery shows as "Delivery attempted", with CityMail's words under "What CityMail says". The return shows as "Returned to sender".
 
 Peek also shows the sender's name and, while the parcel is on its way, CityMail's estimated delivery day. It leaves out your postcode and CityMail's proof of delivery: for those, use "Open the CityMail website", which opens your number on CityMail's tracker.
 
-Peek checks up to every 10 minutes, and it can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from CityMail" link. Notifications can follow "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about CityMail tracking
 
@@ -93,7 +93,7 @@ Check that you copied the whole reference from CityMail's SMS or email. When Cit
 
 ### What time does CityMail deliver?
 
-Parcels come on weekdays that aren't public holidays, between 08.00 and 17.00, though CityMail also offers shops an evening delivery to the door. The expected day is in the tracking link in CityMail's SMS or email. Letters come during the day, and not to every postcode every day.
+Parcels come on weekdays that aren't public holidays, between 08.00 and 17.00 Swedish time, though CityMail also offers shops an evening delivery to the door. The expected day is in the tracking link in CityMail's SMS or email. Letters come during the day, and not to every postcode every day.
 
 ### Do I need to be home for a CityMail delivery?
 
@@ -111,7 +111,7 @@ Yes. CityMail has delivered post in Sweden since 1991 and has a licence from Pos
 - [CityMail: Spåra paket](https://www.citymail.se/spara-paket/) – tracking page, tracking number field and its BCM example
 - [CityMail: Var är mitt paket?](https://www.citymail.se/hjalp/var-ar-mitt-paket/) – SMS with a tracking link, latest event, number in the SMS or email
 - [CityMail: När kommer mitt paket?](https://www.citymail.se/hjalp/nar-kommer-mitt-paket/) – delivery days and hours, 1–2 or 1–4 days
-- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – delivery places, no signature, lockers and service points, ID, damage, delays, letters' rolling schedule, licence
+- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – delivery places, no signature, lockers and service points, ID, damage, delays, letters' rolling schedule, licence, Mottagarservice hours
 - [CityMail: Hjälp & kontakt](https://www.citymail.se/hjalp/) – Mottagarservice phone, email and opening, switchboard
 - [CityMail: Ombud](https://www.citymail.se/paket/ombud/) – DHL's service points, the SMS with a BankID link, ID at pickup, evening delivery
 - [CityMail: Var är mitt brev?](https://www.citymail.se/hjalp/var-ar-mitt-brev/) – a missing letter: ask the sender first

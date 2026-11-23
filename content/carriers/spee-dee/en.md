@@ -6,13 +6,13 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Spee-Dee Delivery (*Spee-Dee Delivery Service, Inc.*) is a family-owned US Midwest regional parcel and LTL freight carrier founded in 1978 by Don Weeres in St. Cloud, Minnesota. Built around economical next-day ground delivery across the Upper Midwest, Spee-Dee serves B2B distributors, auto-parts and industrial suppliers, pharmacies, and regional e-commerce retailers, alongside walk-in shipping locations and EZR Returns ([speedeedelivery.com](https://speedeedelivery.com/)).
+Spee-Dee Delivery (*Spee-Dee Delivery Service, Inc.*) is a second-generation family-owned delivery company that Don Weeres founded in 1978 as an on-call delivery service. It calls itself the undisputed leader in final mile delivery across the Midwest, with a next-day network, and also offers LTL freight, warehousing, walk-in shipping locations and EZR Returns ([speedeedelivery.com](https://speedeedelivery.com/)).
 
 You can track a shipment on [Spee-Dee's Track a Shipment page](https://speedeedelivery.com/track-a-shipment/) or paste your `SP` barcode into the box above.
 
 ## Spee-Dee tracking number formats
 
-Spee-Dee barcodes always begin with `SP` followed by either 16 or 18 digits:
+Peek knows Spee-Dee's barcodes as `SP` followed by 16 or 18 digits:
 
 | Format (invented) | What it is |
 | --- | --- |
@@ -28,7 +28,7 @@ According to [Spee-Dee's Service Area Maps](https://speedeedelivery.com/services
 - **Full-state coverage:** Illinois, Iowa, Minnesota, North Dakota, South Dakota, and Wisconsin.
 - **Select cities and ZIP Codes:** Kansas (including expanded ZIPs `660` and `666`), Michigan, Missouri (including expanded ZIPs `634–635`, `644–646`, and `650–653`), and Nebraska.
 
-Transit times across most of the core network are overnight (next business day) to two business days depending on origin and destination ZIP Codes.
+For transit times, the Service Area Maps page shows a Days in Transit map for each shipping ZIP Code, and its Zip Transit File gives the transit times for every ZIP Code Spee-Dee serves.
 
 ## What Spee-Dee tracking statuses mean
 
@@ -47,21 +47,23 @@ Spee-Dee reuses older 16-digit `SP` barcodes on new shipments. On Spee-Dee's raw
 
 ## Delays, missing scans, and claims
 
-Because Spee-Dee operates regional overnight linehaul trucks rather than multi-week long-haul freight, most shipments post an `ARRIVAL SCAN` the evening after pickup and go `OUT FOR DELIVERY` the next business morning.
+A few points help when the tracking looks wrong:
 
-- **No scans yet:** If your tracking page returns `No packages were found matching the barcode supplied.`, the shipper may have printed the label before Spee-Dee's evening pickup scan. Wait until the next business morning before checking with the seller, or see [when tracking stops updating](guide:tracking-not-updating).
+- **No scans yet:** if Spee-Dee's page returns `No packages were found matching the barcode supplied.`, Spee-Dee hasn't scanned the parcel yet or the barcode has a typo. Check the barcode, then ask the seller whether the parcel has been handed to Spee-Dee, or see [when tracking stops updating](guide:tracking-not-updating).
 - **Rate limits on frequent refreshes:** Spee-Dee's tracking host limits searches per minute and returns HTTP 503 temporarily if queried repeatedly in quick succession. Waiting a minute or letting Peek check automatically avoids hitting that limit.
 - **Non-delivery or damage claims:** Spee-Dee's [Customer Service form](https://speedeedelivery.com/customer-service/) includes dedicated **Claims – Non-Delivery** and **Claims – Damage** request types, and asks you to include the **full delivery address** when submitting a tracking inquiry. See the [delivered not received guide](guide:delivered-not-received) if a package shows delivered without arriving.
 
 ## Tracking Spee-Dee with Peek
 
-Paste any 18-character (`SP` + 16 digits) or 20-character (`SP` + 18 digits) Spee-Dee barcode — or a `speedeedelivery.com` link — into Peek, and Peek recognizes Spee-Dee automatically with high confidence. If you ever need to adjust the carrier manually, use **Change** while adding the parcel or **Change carrier** on the tracking screen.
+Paste any 18-character (`SP` + 16 digits) or 20-character (`SP` + 18 digits) Spee-Dee barcode, or a `speedeedelivery.com` link, into Peek, and Peek recognizes Spee-Dee at once. If you ever need to change the carrier, use **Change** while adding the parcel or **Change carrier** on the tracking screen.
 
-Peek reads Spee-Dee's package progress page directly through the open-source [universal-parcel-scraper Spee-Dee adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), with automatic remote fallback if Spee-Dee's host filters a direct connection. Peek automatically strips earlier history from **reused barcodes** (stopping at any prior completed delivery older than a day), drops internal HTML debug comments and parenthetical route numbers from `OUT FOR DELIVERY`, and records each scan's city/terminal location and local wall-clock timestamp (`MM/DD/YYYY hh:mm am/pm`, without guessing a time zone offset). Spee-Dee's tracker does not provide an estimated delivery date or parcel weight.
+Peek reads Spee-Dee's package progress page directly through the open-source [universal-parcel-scraper Spee-Dee adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), and through a remote network when Spee-Dee's host refuses a direct connection. For a **reused barcode**, it keeps only the rows since the previous delivery a day or more before. It drops the page's HTML debug comments and the route number after `OUT FOR DELIVERY`, and records each scan's city or terminal and time. Spee-Dee gives local times without an offset: Peek dates each on its place's zone (Chicago time for St. Cloud, Fargo, Milwaukee or Sioux Falls, Detroit time for Detroit), a scan without a place on its neighbour's, else on New York time, and shows every scan on your device's clock. Spee-Dee's tracker does not provide an estimated delivery date or parcel weight.
 
-Because Spee-Dee's progress table starts once the parcel reaches a sorting terminal rather than listing separate **Label created** or **Received by carrier** rows, Peek maps `ARRIVAL SCAN` to **In transit**, `OUT FOR DELIVERY` to **Out for delivery**, and `Delivered` to **Delivered** (while checking any other activity text through Peek's shared status rules).
+Peek maps `ARRIVAL SCAN` to **In transit**, `OUT FOR DELIVERY` to **Out for delivery** and `Delivered` to **Delivered**, and reads any other activity through its shared status rules.
 
-If no new scan arrives overnight or over a weekend, Peek displays: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Spee-Dee." After more than three weeks without a new scan, Peek shows: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Spee-Dee." To reach Spee-Dee's support team straight from the parcel view, tap **Get help from Spee-Dee**.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Spee-Dee shows `OUT FOR DELIVERY`, every 2 minutes from 6 a.m. on the newest scan's clock, or every 5 minutes when the last check had to open a browser, while Spee-Dee's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Spee-Dee doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Spee-Dee.", with a "Get help from Spee-Dee" link to Spee-Dee's Customer Service page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Spee-Dee."
 
 In Peek's notification preferences, pick **Every scan**, **Important steps**, or **Delivery only** to control your alerts.
 
@@ -73,7 +75,7 @@ Spee-Dee notes on its [Customer Service page](https://speedeedelivery.com/custom
 - **Local phone:** `320-251-6697`
 - **Fax:** `320-251-1846` (LTL fax: `320-240-7995`)
 - **Online contact & claims form:** [Spee-Dee Customer Service](https://speedeedelivery.com/customer-service/) (include your `SP` barcode and full delivery address for tracking questions)
-- **Headquarters (physical address):** Spee-Dee Delivery Service Inc., 4101 Clearwater Road, St. Cloud, MN 56301
+- **Physical address:** Spee-Dee Delivery Service Inc., 4101 Clearwater Road, St. Cloud, MN 56301
 - **Mailing address:** P.O. Box 1417, St. Cloud, MN 56302
 - **Company overview & tracking:** [About Spee-Dee](https://speedeedelivery.com/about-us/) and [Track a Shipment](https://speedeedelivery.com/track-a-shipment/)
 

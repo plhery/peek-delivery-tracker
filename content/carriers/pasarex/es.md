@@ -6,24 +6,23 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-PasarEX (marca comercial de *PASAR EXPRESS SAS*, empresa colombiana fundada en 1993) es un operador de mensajería expresa internacional, carga aérea y última milla para comercio electrónico con presencia en **Colombia**, **Chile**, **Panamá** y **Barbados**, respaldado por un centro logístico en Miami y rutas multimodales desde China. Los compradores suelen encontrar a PasarEX en pedidos internacionales de Amazon y compras transfronterizas que ingresan por Bogotá, Santiago, Ciudad de Panamá o Bridgetown.
+PasarEX (marca comercial de *PASAR EXPRESS SAS*, empresa colombiana fundada en 1993) ofrece transporte expreso, carga aérea y última milla para plataformas de comercio electrónico. Sus sitios cubren **Colombia**, **Chile**, **Panamá** y **Barbados**, y sus servicios incluyen un centro logístico en Miami y rutas multimodales desde China.
 
-Como PasarEX actúa a la vez como agente aduanero de importación y distribuidor local en muchas rutas, el seguimiento acompaña el paquete desde el manifiesto electrónico hasta la llegada de la carga consolidada, el despacho aduanero, la bodega y el reparto final.
+PasarEX despacha los paquetes en aduana como agente, así que su seguimiento va del manifiesto a la llegada de la carga consolidada, la aduana, las bodegas y el reparto local.
 
 ## Formatos de guía y códigos de seguimiento de PasarEX
 
-El rastreador de PasarEX (`tracking.pasarex.com`) admite guías alfanuméricas de 6 a 30 caracteres que incluyan al menos un dígito:
+Peek admite números de PasarEX de 6 a 30 letras y dígitos con al menos un dígito. Una forma es solo de PasarEX:
 
 | Formato (inventado) | Qué es |
 | --- | --- |
-| `AMZPSR482917360` | `AMZPSR` + 9 dígitos (15 caracteres) — código de importación internacional de Amazon gestionado por PasarEX; reconocido como candidato exclusivo de PasarEX. |
-| `PSR482917360` | Guía aérea propia de PasarEX — selecciona PasarEX manualmente o pega tu enlace de seguimiento. |
+| `AMZPSR482917360` | `AMZPSR` + 9 dígitos (15 caracteres) — número de Amazon que el rastreador de PasarEX consulta; ningún otro transportista en Peek tiene esta forma. |
 
 Si tu correo incluye un enlace directo `tracking.pasarex.com/?awb=...`, al pegarlo en Peek la guía se extrae y se asigna a PasarEX de inmediato. Para consultar otros códigos de compras online, revisa la [guía de formatos de números de seguimiento](guide:tracking-number-formats) y la [guía de pedidos de Amazon](guide:amazon-orders).
 
 ## Qué significan los estados de PasarEX
 
-En su portal, PasarEX agrupa los registros bajo encabezados amplios (`COMMENTS`, `IN CUSTOMS PROCESS`, `RECEIVED FOR DELIVERY`, `IN TRANSIT`, `IN WAREHOUSE`, `OUT FOR DISTRIBUTION`, `DELIVERED`), mientras cada fila detalla la descripción en español o inglés junto con la ciudad y la fecha y hora.
+En su portal, PasarEX agrupa los registros bajo encabezados amplios (`COMMENTS`, `IN CUSTOMS PROCESS`, `RECEIVED FOR DELIVERY`, `IN TRANSIT`, `IN WAREHOUSE`, `OUT FOR DISTRIBUTION`, `DELIVERED`, `SHIPPING WITH DELIVERY ISSUE`), mientras cada fila detalla la descripción en español o inglés junto con la ciudad y la fecha y hora.
 
 | Texto en PasarEX | Qué significa |
 | --- | --- |
@@ -41,24 +40,26 @@ En su portal, PasarEX agrupa los registros bajo encabezados amplios (`COMMENTS`,
 
 Como PasarEX gestiona la nacionalización y luego la última milla, conviene tener presentes dos puntos clave:
 
-- **Espera antes del arribo consolidado:** Mientras el seguimiento solo indique `Orden de pedido recibida - paquete no arribado` o `Information (Manifest) of the shipment received.`, la mercancía aún viaja desde el origen (habitualmente Miami o China) hacia el país de destino. Las novedades se reanudan cuando se registra `Carga consolidada para importación recibida`. Consulta la [guía de aduanas](guide:customs) y [cuando el seguimiento deja de actualizarse](guide:tracking-not-updating).
+- **Antes de que llegue el paquete:** mientras el seguimiento solo indique `Orden de pedido recibida - paquete no arribado` o `Information (Manifest) of the shipment received.`, el pedido está registrado pero el paquete aún no ha llegado a PasarEX. Las novedades se reanudan cuando se registra `Carga consolidada para importación recibida` o `Reception of consolidated cargo in import.`. Consulta la [guía de aduanas](guide:customs) y [cuando el seguimiento deja de actualizarse](guide:tracking-not-updating).
 - **Derechos de PQR e indemnización en Colombia (Resolución CRC 5050 de 2016):** En [Soporte PasarEX Colombia](https://pasarex.com/co/soporte/), Pasar Express SAS detalla los plazos legales bajo la Ley 1369 de 2009 y la Resolución 5050 de 2016. El destinatario cuenta con **5 días hábiles** desde la entrega para reclamar por expoliación o avería, y el remitente dispone de **10 días calendario** en envíos nacionales y **6 meses** en servicios internacionales por pérdida, expoliación o avería (salvo términos pactados en cuentas corporativas). La solicitud debe adjuntar copia de la Guía Aérea, factura comercial, factura de Pasar Express SAS, lista de artículos reclamados, descripción del embalaje y registro fotográfico. PasarEX responde normalmente las PQR en **15 días hábiles** (ampliable si requiere investigación adicional), y el usuario tiene **10 días hábiles** tras la notificación para presentar recurso de reposición y en subsidio de apelación.
 
 ## Seguir envíos de PasarEX con Peek
 
-Pega tu código `AMZPSR...` o un enlace de `tracking.pasarex.com/?awb=...` en Peek. Para guías sin prefijo `AMZPSR`, elige PasarEX mediante **Cambiar** al añadir el paquete o **Cambiar transportista** en la pantalla del envío.
+Pega tu número o un enlace de `tracking.pasarex.com/?awb=...` en Peek, que sigue a más de 4.500 transportistas. Un enlace va a PasarEX directamente. Por un número suelto, Peek nunca pregunta a PasarEX: puede preguntar a otros transportistas con la misma forma, luego consulta servicios de seguimiento («Comprobando servicios de seguimiento…») y archiva el paquete con PasarEX solo si un servicio de seguimiento lo atribuye a PasarEX, y a ningún otro transportista, con pasos fechados. Así que pulsa «Cambiar» y elige PasarEX (en «Encaja con este número» para un número `AMZPSR`), o usa «Cambiar transportista» en un paquete ya añadido.
 
-Como el portal de PasarEX exige superar una casilla reCAPTCHA en cada consulta, Peek lee los movimientos mediante el [adaptador de PasarEX en universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pasarex) con un asistente de navegador y una cadencia mínima de actualización de 60 minutos. Extrae cada descripción, ciudad y hora local (`dd/MM/yyyy HH:mm:ss`, sin inventar huso horario) y ordena todo el historial del más reciente al más antiguo en lugar de mantenerlo separado por pestañas. El portal de PasarEX no muestra fecha estimada de entrega, peso ni comprobante firmado.
+El rastreador de PasarEX pide marcar una casilla reCAPTCHA en cada consulta, así que Peek lo lee mediante el [adaptador de PasarEX en universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pasarex) con un asistente de navegador. Lee la descripción, la ciudad y la hora de cada movimiento y ordena el historial del más reciente al más antiguo en lugar de por los encabezados de PasarEX. PasarEX da horas locales sin desfase: Peek fecha cada una en la zona de su ciudad (hora de Nueva York para Miami, de Bogotá para Bogotá, Medellín y Cali, y la de Santiago, Panamá o Barbados para esos lugares), un movimiento sin ciudad en la de su vecino, y si no en hora de Bogotá, y muestra cada movimiento en el reloj de tu dispositivo. El portal de PasarEX no muestra fecha estimada de entrega, peso ni comprobante firmado.
 
 Peek clasifica cada movimiento en etapas claras: **Etiqueta creada** al recibir el manifiesto electrónico, **En tránsito** desde la recepción de la carga consolidada hasta la liberación aduanera, el ingreso a bodega y el tránsito terrestre (PasarEX pasa directo del manifiesto al arribo de carga consolidada sin publicar un escaneo separado de **Admitido por el transportista**), **En aduanas** durante el trámite aduanero, **En reparto** cuando sale a ruta local y **Entregado** al confirmarse la entrega.
 
-Durante vuelos consolidados, trámites de aduana o fines de semana, Peek recuerda: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a PasarEX.» Si pasan más de tres semanas sin novedades, aparece: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a PasarEX.»
+Peek consulta el rastreador de PasarEX como mucho cada hora, el mínimo que PasarEX permite entre dos consultas, también tras una consulta fallida, tengas o no el paquete abierto; el día del reparto no hace consultas cada 2 minutos. Tras siete días en «Etiqueta creada», revisa cada 6 horas. Cuando el rastreador de PasarEX no responde y Peek sigue el paquete solo a través de servicios de seguimiento, revisa cada hora, y cada 3 horas tras un día sin novedades.
+
+Cuando el escaneo más reciente tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de ese escaneo, como «Sin novedades desde el lun 12 oct». La página del paquete dice entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a PasarEX.» Tras tres semanas sin un escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a PasarEX.»
 
 En los ajustes de notificaciones de Peek puedes elegir **Cada escaneo**, **Pasos importantes** o **Solo la entrega**.
 
 ## Cómo contactar con PasarEX
 
-PasarEX dispone de líneas telefónicas, atención bilingüe y correos específicos en cada país donde opera:
+PasarEX publica teléfonos y correos para cada país:
 
 - **Colombia ([pasarex.com/co/soporte](https://pasarex.com/co/soporte/)):** `+57 601 384 7000`, `+57 601 390 6000` (también línea de PQR en Bogotá), `+57 601 291 6500`, `+57 300 919 7521`, `+57 300 919 7532`; correos `sac@pasar.net` y `pqr@pasar.net`
 - **Chile ([pasarex.com/cl](https://pasarex.com/cl/)):** `+56 2 2571 7500`; correo `clgestionpe@pasar.net`
@@ -66,21 +67,19 @@ PasarEX dispone de líneas telefónicas, atención bilingüe y correos específi
 - **Barbados:** `+1 246 4370277` y `+1 305 7042435`
 - **Información institucional:** [PasarEX Colombia](https://pasarex.com/co/) y [Nosotros](https://pasarex.com/co/nosotros/)
 
-Si tu compra vino de Amazon con código `AMZPSR...`, también puedes verificar el estado del pedido o solicitar reembolso o reemplazo directamente desde el soporte de Amazon.
-
 ## Preguntas frecuentes
 
 ### ¿Qué es un código que empieza por `AMZPSR`?
 
-`AMZPSR` seguido de 9 dígitos (15 caracteres en total, como `AMZPSR482917360`) es un número de envío internacional de Amazon gestionado por PasarEX para el despacho aduanero y la entrega local en Colombia, Chile, Panamá o Barbados.
+`AMZPSR` seguido de 9 dígitos (15 caracteres en total, como `AMZPSR482917360`) es un número de Amazon que el rastreador de PasarEX consulta. Ningún otro transportista en Peek tiene esta forma, pero Peek no pregunta a PasarEX por sí solo: elígelo en «Encaja con este número».
 
-### ¿Qué significa «Orden de pedido recibida - paquete no arribado»?
+### ¿Qué significa `Orden de pedido recibida - paquete no arribado`?
 
 Indica que PasarEX ya recibió el manifiesto electrónico del envío, pero el paquete físico todavía no ha arribado a la estación de importación en destino. El historial vuelve a moverse cuando aterriza la carga consolidada.
 
 ### ¿Por qué Peek actualiza PasarEX cada hora y no cada pocos minutos?
 
-Porque el rastreador web de PasarEX exige completar una verificación reCAPTCHA en cada consulta; Peek espacia las comprobaciones al menos 60 minutos para mantener el seguimiento estable.
+PasarEX permite consultar su rastreador como mucho una vez por hora, también tras una consulta fallida, así que Peek lo revisa cada hora. Además, su rastreador pide marcar una casilla reCAPTCHA en cada consulta.
 
 ### ¿Cuál es el plazo para reclamar por avería o daño en PasarEX Colombia?
 

@@ -58,7 +58,7 @@ Il sito di SXW Express dichiara consegne porta a porta `DDU/DDP` e recapito loca
 
 **Solo `Parcel Data Received` o `The electronic cargo information has been received`.** Il venditore ha creato l'ordine, ma il pacco non è ancora stato scansionato. Se dopo qualche giorno non cambia nulla, chiedi al negozio se lo ha effettivamente spedito.
 
-**«In attesa di SXW Express».** Finché SXW elenca la spedizione senza scansioni reali (o solo con tappe scritte in anticipo) e i servizi di tracciamento non hanno dati, Peek mantiene «In attesa di SXW Express»: nell'app iPhone o Android o con un account, Peek interroga SXW ogni 6 ore dopo le prime ore; senza account, nelle prime 6 ore, poi quando apri il link (al massimo ogni 6 ore, e una volta al giorno dopo due giorni) e ogni giorno fino a 30 giorni con le notifiche attive. Se invece la pagina SXW risponde di non conoscere affatto quel numero e nessun servizio lo trova, dopo due giorni Peek mostra: «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.»
+**«In attesa di SXW Express».** Finché SXW elenca la spedizione senza scansioni reali (o solo con tappe scritte in anticipo) e i servizi di tracciamento non hanno dati, Peek mantiene «In attesa di SXW Express». Se invece la pagina SXW risponde di non conoscere affatto quel numero e nessun servizio lo trova, dopo due giorni Peek mostra: «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.»
 
 **`Customs declaration completed`.** È la dichiarazione di esportazione in Cina prima del volo («In transito»), non un fermo nella dogana del tuo Paese.
 

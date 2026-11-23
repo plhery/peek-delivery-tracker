@@ -45,7 +45,7 @@ Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Engl
 | `<User not at home>` | Ein Zustellversuch ist gescheitert, gemeldet vom Paketdienst vor Ort. |
 | `Delivered.` | Zugestellt, ebenfalls in den Worten eines Paketdiensts vor Ort. |
 
-`Order Submited.` (so geschrieben), `Waybill Generated` und `Shipping Order Created.` heißen dasselbe wie die erste Zeile: Es gibt nur das Etikett, das Paket ist vielleicht noch beim Händler. `Pick up by local carrier at destination port` heißt dasselbe wie `Batch delivery to carrier`. Danach stammen die Zeilen vom Paketdienst vor Ort, manchmal mit einem Länderkürzel davor oder einem Depotnamen in Klammern. Ein Paketdienst schreibt in Großbuchstaben und ohne seinen Namen: `ARRIVE TRANSITHUB` (sein Umschlagzentrum), `TASK ASSIGNED` (sein Zustellauftrag) und `ORDER SORTED` (seine Sortierung), bei Peek alle „Unterwegs“. In Italien ist `First parcel scan along Poste Italiane’s logistic network` der erste Scan von Poste Italiane nach der Übergabe durch Yanwen, keine neue Abholung („Unterwegs“). `<wrong address>` ist ebenfalls ein gescheiterter Zustellversuch, diesmal wegen der Adresse. DHLs Zeile `The recipient has selected a Packstation as the new delivery address.` kann schon kommen, solange das Paket noch in China ist: DHL hält damit nur fest, dass du eine Packstation als neue Lieferadresse gewählt hast. Peek behält deshalb den bisherigen Status bei und zeigt keinen Ort an.
+`Order Submited.` (so geschrieben) und `Waybill Generated` heißen dasselbe wie die erste Zeile: Es gibt nur das Etikett, das Paket ist vielleicht noch beim Händler. `Shipping Order Created.` ist der Auftragshinweis eines Partners: Peek behält den bisherigen Status bei. `Pick up by local carrier at destination port` heißt dasselbe wie `Batch delivery to carrier`. Danach stammen die Zeilen vom Paketdienst vor Ort, manchmal mit einem Länderkürzel davor oder einem Depotnamen in Klammern. Ein Paketdienst schreibt in Großbuchstaben und ohne seinen Namen: `ARRIVE TRANSITHUB` (sein Umschlagzentrum), `TASK ASSIGNED` (sein Zustellauftrag) und `ORDER SORTED` (seine Sortierung), bei Peek alle „Unterwegs“. In Italien ist `First parcel scan along Poste Italiane’s logistic network` der erste Scan von Poste Italiane nach der Übergabe durch Yanwen, keine neue Abholung („Unterwegs“). `<wrong address>` ist ebenfalls ein gescheiterter Zustellversuch, diesmal wegen der Adresse. DHLs Zeile `The recipient has selected a Packstation as the new delivery address.` kann schon kommen, solange das Paket noch in China ist: DHL hält damit nur fest, dass du eine Packstation als neue Lieferadresse gewählt hast. Peek behält deshalb den bisherigen Status bei und zeigt keinen Ort an.
 
 Manche Pakete übergibt Yanwen nach `Yanwen facility - Outbound` an China Post. Dann zeigt Yanwen die Scans von China Post auf Chinesisch, erklärt auf der Seite zu [China Post](carrier:china-post); `中国邮政已收取邮件` ist diese Übergabe. `【…】退回，备注:安检退回` heißt, dass ein Sortierzentrum das Paket bei seiner Sicherheitskontrolle zurückgeschickt hat und sich darum kümmert, bevor es weitergeht: Es geht nicht an den Händler zurück. Peek zeigt dafür „Problem gemeldet“.
 
@@ -59,7 +59,7 @@ Welcher Paketdienst bei dir klingelt, hängt vom Land und von der Versandart des
 
 Zustellversuche, Benachrichtigungskarten, neue Termine, Paketshops und wie lange ein Paket wartet, regelt der Paketdienst vor Ort: Yanwen veröffentlicht dazu nichts. `Available_For_Pick_Up` heißt, dass das Paket an einer Abholstelle auf dich wartet; `Undelivered` heißt, dass die Zustellung gescheitert ist. Mit der „Last Mile Tracking“-Nummer und dem Kontakt im Hinweiskasten fragst du den Paketdienst nach einer neuen Zustellung.
 
-Die Ergebnisseite hat außerdem ein Fenster „Proof of Delivery Images“, das nach der Postleitzahl des Empfängers fragt. Jeder Scan zeigt seine GMT-Abweichung, und ein Schalter stellt die Zeitzone um.
+Auf der Ergebnisseite zeigt jeder Scan seine GMT-Abweichung.
 
 ## Yanwen Paket nicht angekommen: was du tun kannst
 
@@ -77,7 +77,7 @@ Die Ergebnisseite hat außerdem ein Fenster „Proof of Delivery Images“, das 
 
 ## Yanwen Kontakt: Hotline und E-Mail
 
-Stand 11. Oktober 2026 nennt Yanwen diese Wege:
+Yanwen nennt diese Wege:
 
 - **Hotline:** 400-108-5656, laut chinesischer Kontaktseite Montag bis Samstag von 9 bis 18 Uhr. Eine 400er-Nummer ist eine chinesische Servicenummer; ob sie aus dem Ausland erreichbar ist und welche Sprachen gesprochen werden, sagt Yanwen nicht.
 - **E-Mail:** marketing@yw56.com.cn, die einzige Adresse auf der englischen Seite. Als Support-Adresse bezeichnet Yanwen sie nicht.
@@ -89,9 +89,9 @@ Einen Kontakt für Deutschland, Österreich oder die Schweiz veröffentlicht Yan
 
 [Peek](/) erkennt BYS-Nummern, YP-Nummern und die US-Nummern mit YW sofort. Eine YP-Nummer mit falscher Prüfziffer erkennt es nicht als Yanwen: Wähl Yanwen dann mit „Ändern“. Ein Link von track.yw56.com.cn mit `nums=` geht immer an Yanwen, egal welche Nummer drinsteht, also auch mit der Nummer des Paketdiensts vor Ort.
 
-Peek zeigt den Status, den Verlauf mit Ort oder Region jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer („Zustellung durch“ und sein Name, oder „Bei … angekündigt, noch nicht eingetroffen“, solange Peek das Paket dort nur angekündigt findet, noch ohne eigenen Scan). Nennt Yanwen einen Paketdienst, den Peek kennt, und passt die Nummer zu ihm, fragt Peek dort nach und wechselt, sobald dieser neuere Schritte zeigt. Einen voraussichtlichen Liefertermin oder eine Abholstelle zeigt Peek nicht; Bestellnummern, Kontakte, Postleitzahlen, Zustell-PINs und Türnummern lässt es weg.
+Peek zeigt den Status, den Verlauf mit Ort oder Region jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer („Zustellung durch“ und sein Name, oder „Bei … angekündigt, noch nicht eingetroffen“, solange Peek das Paket dort nur angekündigt findet, noch ohne eigenen Scan). Nennt Yanwen einen Paketdienst, den Peek kennt, und passt die Nummer zu ihm, fragt Peek dort nach und wechselt, sobald dieser neuere Schritte zeigt. Einen voraussichtlichen Liefertermin oder eine Abholstelle zeigt Peek nicht; Bestellnummern, Kontakte und Postleitzahlen lässt es weg.
 
-Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzone deines Geräts, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Es schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist: an diesem Tag ab 6 Uhr Ortszeit und solange Yanwens eigenes Tracking antwortet (über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL und USPS, auch wenn das Paket in Zustellung ist. Mitteilungen kann es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag schicken. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Yanwen oder den Shop kontaktieren kann es nicht für dich.
+Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzone deines Geräts, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Solange du das Paket geöffnet hast oder am Zustelltag Mitteilungen aktiv sind, schaut es bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist: an diesem Tag ab 6 Uhr Ortszeit und solange Yanwens eigenes Tracking antwortet; sonst stündlich. Über Tracking-Dienste allein schaut es stündlich nach, alle 3 Stunden nach einem ruhigen Tag und am Zustelltag unter denselben Bedingungen bis zu alle 15 Minuten. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dessen eigenem Takt. Mitteilungen kann es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag schicken. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Yanwen oder den Shop kontaktieren kann es nicht für dich.
 
 ## Fragen zur Yanwen Sendungsverfolgung
 
@@ -112,7 +112,7 @@ Yanwen nennt Empfängern keine Lieferzeiten, also halte dich an die Schätzung, 
 Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwens eigene Scans sind immer englisch; die Tabelle oben übersetzt die häufigsten.
 
 :::sources
-- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – Tracking-Seite, Sprachen, Spalten, Kategorien, Hinweiskasten, Zustellnachweis, Zeitzonen, Hotline
+- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – Tracking-Seite, Sprachen, Spalten, Kategorien, Hinweiskasten, Hotline
 - [Yanwen: 燕文追踪 (Tracking, Chinesisch)](https://track.yw56.com.cn/) – Scans auf Englisch, Hinweis zu China Post
 - [Yanwen: YANWEN EXPRESS, englische Startseite](https://www.yw56.com.cn/en/) – Unternehmen, 1998 Peking, Zustellung durch Paketdienste vor Ort, Hotline, E-Mail
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – Unternehmensgeschichte

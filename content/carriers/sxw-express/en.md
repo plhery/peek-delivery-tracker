@@ -62,7 +62,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **Only `Parcel Data Received` or `货物电子信息已经收到`.** The seller has created the shipment, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for SXW Express".** Peek has no step for your number yet: SXW's tracker doesn't know it, has no steps for it or holds only steps written ahead, and the tracking services Peek asks have nothing either. Peek keeps checking, asking SXW's tracker every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. When SXW lists the shipment without a scan yet, or holds only steps written ahead, Peek keeps showing "Waiting for SXW Express". When neither SXW's tracker nor the tracking services know the number, Peek shows "Waiting for SXW Express" first and, after two days, "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Compare the number with the seller's message: SXW and twelve digits.
+**"Waiting for SXW Express".** Peek has no step for your number yet: SXW's tracker doesn't know it, has no steps for it or holds only steps written ahead, and the tracking services Peek asks have nothing either. Peek keeps checking. When SXW lists the shipment without a scan yet, or holds only steps written ahead, Peek keeps showing "Waiting for SXW Express". When neither SXW's tracker nor the tracking services know the number, Peek shows "Waiting for SXW Express" first and, after two days, "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Compare the number with the seller's message: SXW and twelve digits.
 
 **`Customs declaration completed`.** That's the export declaration in China, before the flight, not customs in your country. The parcel isn't held, so Peek shows "In transit". If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
 
@@ -74,7 +74,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 ## SXW Express contact number and customer service
 
-As read on 14 November 2026, SXW's website, sxwexpress.cn, lists no phone number, email or street address. Its "Contact US" page has a title and nothing else, and its "Online Support" panel is empty. The site's member sign-in is for accounts with SXW: you don't need one to track a parcel.
+SXW's website, sxwexpress.cn, lists no phone number, email or street address. Its "Contact US" page has a title and nothing else, and its "Online Support" panel is empty. The site's member sign-in is for accounts with SXW: you don't need one to track a parcel.
 
 SXW's customer is the seller, so ask the seller about your order first, and the marketplace if the seller doesn't answer. For a parcel GOFO Express delivers in the US, ask GOFO about the delivery itself.
 

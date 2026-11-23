@@ -58,7 +58,7 @@ Laut eigener Website bietet SXW Express `DDU/DDP door-to-door delivery` und `loc
 
 **Nur `Parcel Data Received` oder `The electronic cargo information has been received`.** Der Verkäufer hat den Auftrag angelegt, aber noch wurde kein Paket gescannt. Tut sich nach einigen Tagen nichts, frag beim Shop nach, ob die Ware wirklich übergeben wurde.
 
-**„Warten auf SXW Express“.** Führt SXW den Auftrag noch ohne echte Scans (oder nur mit vorab eingetragenen Schritten) und liefern auch Tracking-Dienste nichts, bleibt Peek bei „Warten auf SXW Express“: In der iPhone- oder Android-App sowie im Konto fragt Peek nach den ersten Stunden alle 6 Stunden bei SXW nach; ohne Konto in den ersten 6 Stunden, danach beim Öffnen des Links (höchstens alle 6 Stunden, nach zwei Tagen höchstens täglich) und bei aktiven Mitteilungen täglich bis 30 Tage nach der Abfrage. Meldet die SXW-Seite hingegen, dass die Nummer dort gar nicht existiert, und findet auch kein Tracking-Dienst etwas, zeigt Peek nach zwei Tagen: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
+**„Warten auf SXW Express“.** Führt SXW den Auftrag noch ohne echte Scans (oder nur mit vorab eingetragenen Schritten) und liefern auch Tracking-Dienste nichts, bleibt Peek bei „Warten auf SXW Express“. Meldet die SXW-Seite hingegen, dass die Nummer dort gar nicht existiert, und findet auch kein Tracking-Dienst etwas, zeigt Peek nach zwei Tagen: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
 
 **`Customs declaration completed`.** Das ist die Ausfuhranmeldung in China vor dem Flug („Unterwegs“), keine Zollkontrolle im Empfängerland.
 

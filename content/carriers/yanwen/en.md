@@ -44,7 +44,7 @@ Yanwen's tracking site comes in English and Chinese only, and Yanwen's own scan 
 | `<User not at home>` | A delivery attempt failed, as relayed from the local carrier. |
 | `Delivered.` | Delivered, in the words of one local carrier. |
 
-`Order Submited.`, `Waybill Generated` and `Shipping Order Created.` mean the same as the first row: only the label exists, and the parcel may not have left the seller. `Pick up by local carrier at destination port` means the same as `Batch delivery to carrier`. After that, the lines are the local carrier's own, sometimes with a country prefix or a depot name in brackets: USPS's `Out for Delivery` or `Delivered, In/At Mailbox`, for example. One local carrier's come in capitals, without its name: `ARRIVE TRANSITHUB` (its transit hub), `TASK ASSIGNED` (its delivery task) and `ORDER SORTED` (its sorting), all "In transit" in Peek. In Italy, `First parcel scan along Poste Italiane’s logistic network` is Poste Italiane's first scan after Yanwen's hand-over, not a new pickup ("In transit"). USPS's `Shipping Label Created, USPS Awaiting Item` can turn up while the parcel is still in China: it is only USPS's record of the label, so Peek keeps the stage the parcel already had and shows no place for it. DHL's `The recipient has selected a Packstation as the new delivery address.` can also come while the parcel is still in China: it only records that you chose a DHL Packstation for delivery, and Peek treats it the same way.
+`Order Submited.` and `Waybill Generated` mean the same as the first row: only the label exists, and the parcel may not have left the seller. `Shipping Order Created.` is a partner's order notice: Peek keeps the stage the parcel already had. `Pick up by local carrier at destination port` means the same as `Batch delivery to carrier`. After that, the lines are the local carrier's own, sometimes with a country prefix or a depot name in brackets: USPS's `Out for Delivery` or `Delivered, In/At Mailbox`, for example. One local carrier's come in capitals, without its name: `ARRIVE TRANSITHUB` (its transit hub), `TASK ASSIGNED` (its delivery task) and `ORDER SORTED` (its sorting), all "In transit" in Peek. In Italy, `First parcel scan along Poste Italiane’s logistic network` is Poste Italiane's first scan after Yanwen's hand-over, not a new pickup ("In transit"). USPS's `Shipping Label Created, USPS Awaiting Item` can turn up while the parcel is still in China: it is only USPS's record of the label, so Peek keeps the stage the parcel already had and shows no place for it. DHL's `The recipient has selected a Packstation as the new delivery address.` can also come while the parcel is still in China: it only records that you chose a DHL Packstation for delivery, and Peek treats it the same way.
 
 Some parcels are handed to China Post after `Yanwen facility - Outbound`. Yanwen then relays China Post's scans in Chinese, explained on the [China Post](carrier:china-post) page; `中国邮政已收取邮件` is that hand-over. `【…】退回，备注:安检退回` means a sorting centre sent the parcel back at its security check and deals with it before sending it on: it isn't a return to the seller. Peek shows it as "Needs attention".
 
@@ -54,11 +54,11 @@ Above the scans, Yanwen files each parcel under a category. `Info_Received` is t
 
 Yanwen doesn't deliver in Europe itself: it says it works "with local carriers to fulfill the last mile package delivery". When it names that carrier, the result page shows a notes box with "Distributor", "Distributor Website" and "Contact Number". For some parcels the box is empty.
 
-Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, a US last-mile company whose site doesn't say whether it is linked to Yanwen (see [YWE](carrier:ywe)), and in Canada by Emile or UniUni. In Australia, Yanwen hands its parcels in batches to [J&T Express Australia](carrier:j-and-t-au) at the port of arrival; J&T's scans then show in Yanwen's history, some with J&T's customer service number, which Peek leaves out, and Peek shows J&T's pickup as "In transit".
+Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, a US last-mile company whose site doesn't say whether it is linked to Yanwen (see [YWE](carrier:ywe)), and in Canada by Emile or UniUni. In Australia, Yanwen hands its parcels in batches to [J&T Express Australia](carrier:j-and-t-au) at the port of arrival; J&T's scans then show in Yanwen's history, and Peek shows J&T's pickup as "In transit".
 
 Attempts, notice cards, rescheduling and how long a parcel waits are the local carrier's rules: Yanwen publishes none. `Available_For_Pick_Up` means the parcel is waiting at a pickup point; `Undelivered` means delivery failed. Use the "Last Mile Tracking" number and the contact in the notes box to ask that carrier about a new delivery.
 
-The result page also has a "Proof of Delivery Images" window, unlocked with the recipient's ZIP code. Each scan shows its GMT offset, and a switch changes the time zone.
+On the result page, each scan shows its GMT offset.
 
 ## Yanwen package not updating, lost or returned
 
@@ -74,12 +74,12 @@ The result page also has a "Proof of Delivery Images" window, unlocked with the 
 
 ## Yanwen contact number and customer service
 
-As read on 11 October 2026, Yanwen lists these channels:
+Yanwen lists these channels:
 
 - **Hotline**: 400-108-5656, Monday to Saturday, 9:00 to 18:00, according to its Chinese contact page. A 400 number is a Chinese service number; Yanwen doesn't say whether it works from abroad or which languages are spoken.
 - **Email**: marketing@yw56.com.cn, the only address on its English site. Yanwen doesn't call it a support address.
 - **Other channels**: an online chat at the bottom right of yw56.com.cn, a customer portal and a WeChat account, all in Chinese and aimed at sellers.
-- **US last mile**: YanwenExpress gives service@yanwenexpress.com on its site; its customer support page shows no phone number.
+- **US last mile**: YanwenExpress's customer support page shows no phone number or email address.
 
 Yanwen publishes no contact for any European country. For the order, the shop or marketplace is quicker; for the delivery itself, use the carrier and number in the notes box.
 
@@ -87,9 +87,9 @@ Yanwen publishes no contact for any European country. For the order, the shop or
 
 [Peek](/) recognises BYS numbers, YP numbers and US YW numbers straight away. A YP number with a wrong check digit isn't recognised as Yanwen's: pick Yanwen with "Change". A link from track.yw56.com.cn with `nums=` is read as Yanwen whatever number it holds, so it works for the local number too.
 
-It shows the status, the history with the town or region of each scan on a map, the delivery time, the destination country and the local carrier with its number ("Delivery with" that carrier, or "Announced to …, not received yet" while that carrier has only the announcement of the parcel, with no scan of its own). When Yanwen names a local carrier in Peek's list and the number fits it, Peek asks that carrier and switches to it once it shows newer progress. Yanwen gives no expected delivery date; Peek shows no pickup point and drops order references, contacts, postcodes, delivery PINs and door numbers.
+It shows the status, the history with the town or region of each scan on a map, the delivery time, the destination country and the local carrier with its number ("Delivery with" that carrier, or "Announced to …, not received yet" while that carrier has only the announcement of the parcel, with no scan of its own). When Yanwen names a local carrier in Peek's list and the number fits it, Peek asks that carrier and switches to it once it shows newer progress. Yanwen gives no expected delivery date; Peek shows no pickup point and drops order references, contacts and postcodes.
 
-Scan times are read with Yanwen's GMT offsets and shown in your device's time zone, and repeated scans are removed. A relayed USPS `In Transit to Next Facility` step dated midnight shows only its day, since USPS dates those steps by day alone. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Yanwen's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Yanwen or the shop for you.
+Scan times are read with Yanwen's GMT offsets and shown in your device's time zone, and repeated scans are removed. A relayed USPS `In Transit to Next Facility` step dated midnight shows only its day, since USPS dates those steps by day alone. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Yanwen's own tracker answers; otherwise hourly. Through tracking services, it's hourly, every 3 hours after a quiet day and up to every 15 minutes on the delivery day under the same condition. When another carrier takes over the delivery, Peek follows that carrier's own pace. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Yanwen or the shop for you.
 
 ## Questions about Yanwen tracking
 
@@ -110,7 +110,7 @@ Yes. Yanwen is a logistics company founded in Beijing in 1998 that runs its own 
 Yanwen publishes no delivery times for recipients, so go by the estimate the shop or marketplace shows for your order. For parcels from China in general, see [tracking a parcel from China](guide:tracking-from-china).
 
 :::sources
-- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – tracking site, languages, result columns, categories, notes box, proof of delivery, time zones, hotline
+- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – tracking site, languages, result columns, categories, notes box, hotline
 - [Yanwen: 燕文追踪 (tracking, Chinese)](https://track.yw56.com.cn/) – scans in English, China Post notice
 - [Yanwen: YANWEN EXPRESS home page](https://www.yw56.com.cn/en/) – company, 1998 Beijing, last mile by local carriers, hotline, email
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress and eBay
@@ -118,6 +118,6 @@ Yanwen publishes no delivery times for recipients, so go by the estimate the sho
 - [Yanwen: 联系我们 (contact us)](https://www.yw56.com.cn/webfile/联系我们/) – hotline hours, product lines via Royal Mail, Yodel, Hermes, Evri
 - [Yanwen: 关于官方快件查询入口及服务的通告 (official tracking channels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numbers, one-year limit, phone lookup, chat, portal, WeChat
 - [YanwenExpress: home page](https://www.yanwenexpress.com/) – last-mile delivery in the US
-- [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – email, no phone
+- [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – no phone number or email address
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, J&T Express Australia's scans after the batch hand-over, DHL's Packstation notice, a local carrier's scans in capitals, Poste Italiane's first scan
 :::

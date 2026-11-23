@@ -21,7 +21,7 @@ O Peek reconhece as cartas de porte da HuaHan com o formato `HHW`, duas letras, 
 
 Muitos transitários chineses terminam os seus números em `YQ`, cada qual com as suas letras iniciais: `HHW` identifica exclusivamente a HuaHan e mais nenhuma transportadora do catálogo do Peek utiliza esse prefixo. Espaços, traços e letras minúsculas não afetam a pesquisa ao colar o código no Peek.
 
-**Onde encontrá-lo.** A loja envia o número no e-mail de confirmação de expedição ou mostra-o na página da encomenda. Se não o encontrar, consulte [como encontrar o número de seguimento](guide:find-tracking-number). Na página pública de consulta da HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), com o título `运单追踪`), o formulário está em chinês e aceita até 20 códigos separados por vírgulas (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`) após resolver, se pedida, uma soma simples; já o endereço principal [hh-exp.cn](https://www.hh-exp.cn/) abre o portal de início de sessão para expedidores (`华翰物流订单管理系统`), com ligação para a consulta pública.
+**Onde encontrá-lo.** A loja envia o número no e-mail de confirmação de expedição ou mostra-o na página da encomenda. Se não o encontrar, consulte [como encontrar o número de seguimento](guide:find-tracking-number). Na página pública de consulta da HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), com o título `运单追踪`), o formulário está em chinês e aceita até 20 códigos separados por vírgulas (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`) após passar primeiro uma verificação: clicar pela ordem indicada ou resolver uma soma simples; já o endereço principal [hh-exp.cn](https://www.hh-exp.cn/) abre o portal de início de sessão para expedidores (`华翰物流订单管理系统`), com ligação para a consulta pública.
 
 **Um segundo código.** O registo da HuaHan pode apresentar o número atribuído pela transportadora local. Por vezes, a HuaHan acrescenta depois de um traço inferior um sufixo interno que não faz parte do código dessa transportadora: retire o `_` e tudo o que vier a seguir ao pesquisar diretamente no site do operador local.
 
@@ -82,7 +82,7 @@ A HuaHan regista a distribuição, o ponto de recolha e a entrega com códigos p
 | Linha da Landmark Global | O que significa para si | Estado no Peek |
 | --- | --- | --- |
 | `Shipment Data Uploaded` | Dados do remetente carregados na Landmark Global. | «Etiqueta criada» |
-| `Processed` | Processamento no mesmo minuto, lido pelo Peek como trânsito. | «Em trânsito» |
+| `Processed` | Processamento no mesmo minuto: apenas um aviso, e o Peek mantém a etapa anterior. | A etapa anterior |
 | `Incoming scan at facility` | Entrada num centro logístico após entrega à rede da bpost. | «Em trânsito» |
 | `Outgoing scan at facility` | Saída desse centro (arquivada sob o código de distribuição pela HuaHan, mas exibida como «Em trânsito» pelo Peek porque a entrega pode ocorrer dias depois). | «Em trânsito» |
 | `Out for delivery (On the way)` | Em giro de entrega. | «Em distribuição» |
@@ -105,7 +105,7 @@ A HuaHan presta serviços aos vendedores online e as suas páginas não indicam 
 
 ## Encomenda HuaHan atrasada, parada ou não encontrada
 
-**Número não encontrado (`没有找到记录`).** Enquanto a HuaHan não tiver registo do código, o seu rastreador responde `没有找到记录` («nenhum registo encontrado»); o Peek mostra «À espera de HuaHan Logistics» e continua a verificar. Se ao fim de dois dias nem a HuaHan nem outra fonte reconhecerem o número, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e as consultas passam a diárias e, após uma semana, semanais. Confirme cada carácter (`HHW`, duas letras, dez algarismos, `YQ`) na mensagem do vendedor.
+**Número não encontrado (`没有找到记录`).** Enquanto a HuaHan não tiver registo do código, o seu rastreador responde `没有找到记录` («nenhum registo encontrado»); o Peek mostra «À espera de HuaHan Logistics» e continua a verificar. Se ao fim de dois dias nem a HuaHan nem outra fonte reconhecerem o número, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» Confirme cada carácter (`HHW`, duas letras, dez algarismos, `YQ`) na mensagem do vendedor.
 
 **Parada em `Shipment information received`.** A loja registou o envio, mas a HuaHan ainda não leu fisicamente a encomenda no armazém. Pergunte ao vendedor quando entregou o pacote.
 
@@ -146,7 +146,7 @@ Enquanto mantiver a encomenda aberta, ou no dia da entrega com as notificações
 
 ### Onde posso seguir uma encomenda da HuaHan?
 
-Na caixa de pesquisa no topo desta página ou no localizador público da HuaHan em `hh-exp.cn/WebTrack/CargoTrack.html` (até 20 números separados por vírgulas, após uma eventual validação por soma). Utilize sempre o número `HHW…YQ` completo de 17 caracteres.
+Na caixa de pesquisa no topo desta página ou no localizador público da HuaHan em `hh-exp.cn/WebTrack/CargoTrack.html` (até 20 números separados por vírgulas, após passar primeiro uma verificação: clicar pela ordem indicada ou resolver uma soma simples). Utilize sempre o número `HHW…YQ` completo de 17 caracteres.
 
 ### O que significa «Has been given to local carrier» na HuaHan?
 

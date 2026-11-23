@@ -84,7 +84,7 @@ HuaHan files the local carrier's out-for-delivery, pickup-point and delivery sca
 | HuaHan relays | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Shipment Data Uploaded` | Landmark Global's record of the sender's data. Not a movement. | "Label created" |
-| `Processed` | Landmark Global's processing, in the same minute as that record. Not a receipt of the parcel: Peek reads it as transit. | "In transit" |
+| `Processed` | Landmark Global's processing, in the same minute as that record. Not a receipt of the parcel: a notice, and Peek keeps the stage before it. | The stage before it |
 | `Incoming scan at facility` | A depot has the parcel, after the hand-off to bpost's network. | "In transit" |
 | `Outgoing scan at facility` | It has left that depot. The delivery round can still be days away. | "In transit" |
 | `Out for delivery (On the way)` | On the delivery round. | "Out for delivery" |
@@ -96,7 +96,7 @@ HuaHan files `Outgoing scan at facility` under its out-for-delivery code, but th
 
 After `Has been given to local carrier`, a carrier in the destination country delivers the parcel, and HuaHan's tracker can name it and give its number.
 
-**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. DPD delivers some: its depot scans, such as `In Transit, Scanned By DPD At parcel delivery centre.`, are in the table above. [CTT Express](carrier:ctt-express) is announced for the last leg of others: HuaHan's tracker passes on its notice `Pendiente de recepción en CTT Express` ("awaiting receipt at CTT Express") hours before HuaHan has the parcel in China, and Peek shows "Label created". Others go through [Landmark Global](carrier:landmark-global): HuaHan's tracker relays its lines from its record of the sender's data to the delivery round, and after Landmark Global's hand-off, bpost's network delivers (see "Through Landmark Global" above). Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
+**What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. DPD delivers some: its depot scans, such as `In Transit, Scanned By DPD At parcel delivery centre.`, are in the table above. [CTT Express](carrier:ctt-express) is announced for the last leg of others: HuaHan's tracker passes on its notice `Pendiente de recepción en CTT Express` ("awaiting receipt at CTT Express") minutes after HuaHan's arrival scan in China, on Madrid's clock, and Peek shows "Label created". Others go through [Landmark Global](carrier:landmark-global): HuaHan's tracker relays its lines from its record of the sender's data to the delivery round, and after Landmark Global's hand-off, bpost's network delivers (see "Through Landmark Global" above). Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
 
 **Delivery attempts and pickup.** Attempts, notice cards and where a missed parcel waits, and for how long, follow the local carrier's rules: ask that carrier, with its number, to rearrange a delivery. See [missed delivery](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
@@ -104,7 +104,7 @@ After `Has been given to local carrier`, a carrier in the destination country de
 
 ## HuaHan parcel not arriving or tracking stuck
 
-**Number not found.** When HuaHan has no record of the number, its tracker answers 没有找到记录 ("no record found"), and Peek shows "Waiting for HuaHan Logistics" and keeps checking. If HuaHan still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the seller's message, character by character: HHW, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Number not found.** When HuaHan has no record of the number, its tracker answers 没有找到记录 ("no record found"), and Peek shows "Waiting for HuaHan Logistics" and keeps checking. If HuaHan still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check the number against the seller's message, character by character: HHW, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Shipment information received`.** The shop has booked the shipment, but HuaHan hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 
@@ -132,7 +132,7 @@ When HuaHan names a local carrier Peek knows, with a number of that carrier's sh
 
 When HuaHan's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words.
 
-While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: at most hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (every 5 when the check opens a browser), while HuaHan's own tracker answers; otherwise hourly. Through tracking services, it's hourly, every 3 hours after a quiet day and up to every 15 minutes on the delivery day under the same condition. When another carrier takes over the delivery, Peek follows that carrier's own pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
 
 ## Questions about HuaHan tracking
 
@@ -142,7 +142,7 @@ A Chinese carrier, also called HuaHan Express or 华翰速递, that ships parcel
 
 ### Where can I track a HuaHan parcel?
 
-In the box above, or on HuaHan's own tracker on hh-exp.cn. That tracker can ask you a simple sum before it shows a parcel. Use the whole HHW…YQ number.
+In the box above, or on HuaHan's own tracker on hh-exp.cn. That tracker asks you to pass a check first: clicking in order, or a simple sum. Use the whole HHW…YQ number.
 
 ### What does "Has been given to local carrier" mean on HuaHan tracking?
 

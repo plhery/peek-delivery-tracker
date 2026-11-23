@@ -21,7 +21,7 @@ Peek reconnaît les lettres de transport HuaHan sous la forme `HHW`, deux lettre
 
 De nombreux transitaires chinois terminent leurs numéros par `YQ`, chacun avec son propre préfixe : c’est `HHW` qui distingue HuaHan, et aucun autre transporteur du catalogue de Peek n’utilise ce préfixe. Les espaces, les tirets et les minuscules n’ont aucune importance lorsque vous collez le numéro dans Peek.
 
-**Où le trouver.** Le vendeur l’indique dans l’e-mail d’expédition ou sur la page de votre commande. Si vous ne le trouvez pas, consultez [comment trouver votre numéro de suivi](guide:find-tracking-number). Sur le site public de HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), intitulé `运单追踪`), l’interface est en chinois et accepte jusqu’à 20 numéros séparés par une virgule (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`), après une éventuelle vérification par addition simple ; la racine [hh-exp.cn](https://www.hh-exp.cn/) renvoie au portail de connexion réservé aux expéditeurs (`华翰物流订单管理系统`), avec un lien vers la page publique de suivi.
+**Où le trouver.** Le vendeur l’indique dans l’e-mail d’expédition ou sur la page de votre commande. Si vous ne le trouvez pas, consultez [comment trouver votre numéro de suivi](guide:find-tracking-number). Sur le site public de HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), intitulé `运单追踪`), l’interface est en chinois et accepte jusqu’à 20 numéros séparés par une virgule (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`), après une vérification préalable (des clics dans l’ordre demandé, ou une addition simple) ; la racine [hh-exp.cn](https://www.hh-exp.cn/) renvoie au portail de connexion réservé aux expéditeurs (`华翰物流订单管理系统`), avec un lien vers la page publique de suivi.
 
 **Un second numéro.** Le suivi de HuaHan peut afficher le numéro attribué au colis par le transporteur local. HuaHan y ajoute parfois un suffixe après un tiret bas (`_`) qui ne fait pas partie du numéro du transporteur final : retirez le `_` et ce qui suit si vous cherchez le colis directement sur le site de ce transporteur.
 
@@ -60,7 +60,7 @@ HuaHan range les scans de mise en tournée, de point relais et de livraison sous
 
 **Deux lignes trompeuses.** `We will pick up your parcel from the sender soon.` apparaît parfois tout au début, avant même que HuaHan ait reçu le colis en Chine : c’est l’annonce enregistrée chez le transporteur final, pas un passage chez vous. Peek affiche « Étiquette créée ». De même, `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` note une consigne de redirection demandée alors que le colis est encore en Chine : cet enregistrement ne fait pas avancer le colis et Peek ne lui attribue aucun statut.
 
-**Données électroniques, pas mouvements.** `The instruction data for this shipment have been provided by the sender to DHL electronically.` (avec ou sans point final) est l’enregistrement informatique de [DHL](carrier:dhl) pour le dernier kilomètre ; `Pre-Shipment Info Sent to USPS` est l’annonce électronique d’USPS ; `Pendiente de recepción en CTT Express` est l’avis d’attente de [CTT Express](carrier:ctt-express), transmis avant même que HuaHan ait le colis en Chine ; `货物电子信息已经收到` signale la réception des données de la commande en chinois. Aucun de ces messages n’est un scan physique : Peek affiche « Étiquette créée » ou conserve le statut déjà atteint.
+**Données électroniques, pas mouvements.** `The instruction data for this shipment have been provided by the sender to DHL electronically.` (avec ou sans point final) est l’enregistrement informatique de [DHL](carrier:dhl) pour le dernier kilomètre ; `Pre-Shipment Info Sent to USPS` est l’annonce électronique d’USPS ; `Pendiente de recepción en CTT Express` est l’avis d’attente de [CTT Express](carrier:ctt-express), transmis quelques minutes après le scan d’arrivée de HuaHan en Chine, à l’heure de Madrid ; `货物电子信息已经收到` signale la réception des données de la commande en chinois. Aucun de ces messages n’est un scan physique : Peek affiche « Étiquette créée » ou conserve le statut déjà atteint.
 
 **Un même scan en double.** Le suivi de HuaHan affiche parfois deux lignes à la même minute pour un événement du transporteur final : l’une avec le lieu et les mots du transporteur, l’autre sans lieu avec une formule générique de HuaHan telle que `Delivered, Parcel was delivered successfully`. Peek ne garde que la ligne comportant le lieu.
 
@@ -82,7 +82,7 @@ HuaHan range les scans de mise en tournée, de point relais et de livraison sous
 | Scan Landmark Global relayé | Ce que cela signifie pour vous | Statut dans Peek |
 | --- | --- | --- |
 | `Shipment Data Uploaded` | Données de l’expéditeur enregistrées par Landmark Global. | « Étiquette créée » |
-| `Processed` | Traitement informatique dans la même minute, lu comme transit par Peek. | « En transit » |
+| `Processed` | Traitement informatique dans la même minute : un simple avis, et Peek garde l’étape précédente. | L’étape précédente |
 | `Incoming scan at facility` | Arrivée dans un dépôt après remise au réseau de bpost. | « En transit » |
 | `Outgoing scan at facility` | Départ de ce dépôt (classé sous le code de tournée par HuaHan, mais affiché « En transit » par Peek car la tournée peut avoir lieu plusieurs jours plus tard). | « En transit » |
 | `Out for delivery (On the way)` | En tournée de livraison. | « En livraison » |
@@ -106,7 +106,7 @@ HuaHan s’adresse aux vendeurs e-commerce et ses pages publiques ne précisent 
 
 ## Colis HuaHan en retard, bloqué ou introuvable
 
-**Numéro introuvable (`没有找到记录`).** Tant que HuaHan ne connaît pas le numéro, son suivi répond `没有找到记录` (« aucun enregistrement trouvé ») ; Peek affiche « En attente de HuaHan Logistics » et continue de vérifier. Si HuaHan ne reconnaît toujours pas le numéro après deux jours et qu’aucune autre source n’a répondu, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et espace ensuite les vérifications à une fois par jour, puis une fois par semaine après sept jours. Vérifiez chaque caractère (`HHW`, deux lettres, dix chiffres, `YQ`) auprès du vendeur.
+**Numéro introuvable (`没有找到记录`).** Tant que HuaHan ne connaît pas le numéro, son suivi répond `没有找到记录` (« aucun enregistrement trouvé ») ; Peek affiche « En attente de HuaHan Logistics » et continue de vérifier. Si HuaHan ne reconnaît toujours pas le numéro après deux jours et qu’aucune autre source n’a répondu, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » Vérifiez chaque caractère (`HHW`, deux lettres, dix chiffres, `YQ`) auprès du vendeur.
 
 **Bloqué sur `Shipment information received`.** Le vendeur a créé l’expédition, mais HuaHan n’a pas encore scanné le colis en entrepôt. Demandez au vendeur quand il a remis la marchandise.
 
@@ -147,7 +147,7 @@ C’est un logisticien chinois du e-commerce transfrontalier (`深圳市华翰�
 
 ### Où suivre un colis HuaHan ?
 
-Dans le champ en haut de cette page, ou sur le suivi public de HuaHan à l’adresse `hh-exp.cn/WebTrack/CargoTrack.html` (jusqu’à 20 numéros séparés par des virgules, après une éventuelle vérification par addition simple). Utilisez toujours le numéro `HHW…YQ` complet à 17 caractères.
+Dans le champ en haut de cette page, ou sur le suivi public de HuaHan à l’adresse `hh-exp.cn/WebTrack/CargoTrack.html` (jusqu’à 20 numéros séparés par des virgules, après une vérification préalable : des clics dans l’ordre demandé, ou une addition simple). Utilisez toujours le numéro `HHW…YQ` complet à 17 caractères.
 
 ### Que signifie « Has been given to local carrier » sur un suivi HuaHan ?
 

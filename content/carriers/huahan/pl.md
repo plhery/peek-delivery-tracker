@@ -21,7 +21,7 @@ Peek rozpoznaje listy przewozowe HuaHan po układzie złożonym z liter `HHW`, d
 
 Wielu chińskich spedytorów kończy swoje numery literami `YQ`, różniąc się prefiksem na początku: `HHW` wyróżnia wyłącznie HuaHan i żaden inny przewoźnik w katalogu Peek nie korzysta z tego oznaczenia. Spacje, myślniki oraz małe i wielkie litery nie mają znaczenia przy wklejaniu numeru w Peek.
 
-**Gdzie znaleźć numer.** Sprzedawca podaje go w wiadomości e-mail z potwierdzeniem wysyłki albo w szczegółach zamówienia na koncie w sklepie. Jeśli nie możesz go odszukać, zajrzyj do poradnika [jak znaleźć numer śledzenia przesyłki](guide:find-tracking-number). Publiczna strona śledzenia HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), zatytułowana `运单追踪`) jest prowadzona po chińsku i przyjmuje jednocześnie do 20 numerów rozdzielonych przecinkami (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`) po ewentualnym rozwiązaniu prostego działania matematycznego; z kolei strona główna [hh-exp.cn](https://www.hh-exp.cn/) to panel logowania dla nadawców (`华翰物流订单管理系统`), zawierający odnośnik do publicznego śledzenia.
+**Gdzie znaleźć numer.** Sprzedawca podaje go w wiadomości e-mail z potwierdzeniem wysyłki albo w szczegółach zamówienia na koncie w sklepie. Jeśli nie możesz go odszukać, zajrzyj do poradnika [jak znaleźć numer śledzenia przesyłki](guide:find-tracking-number). Publiczna strona śledzenia HuaHan ([hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html), zatytułowana `运单追踪`) jest prowadzona po chińsku i przyjmuje jednocześnie do 20 numerów rozdzielonych przecinkami (`多个单号请用英文逗号隔开（最多支持 20 个单号同时查询）`) po wcześniejszej weryfikacji: kliknięciu we wskazanej kolejności albo rozwiązaniu prostego działania matematycznego; z kolei strona główna [hh-exp.cn](https://www.hh-exp.cn/) to panel logowania dla nadawców (`华翰物流订单管理系统`), zawierający odnośnik do publicznego śledzenia.
 
 **Drugi numer śledzenia.** W karcie przesyłki HuaHan może pojawić się także własny numer lokalnego przewoźnika doręczającego. Zdarza się, że HuaHan dopisuje po znaku podkreślenia wewnętrzny przyrostek, który nie należy do właściwego numeru kuriera docelowego: pomiń znak `_` i wszystko po nim, gdy wpisujesz kod bezpośrednio na stronie lokalnego przewoźnika.
 
@@ -82,7 +82,7 @@ HuaHan zapisuje wydanie kurierowi, złożenie w punkcie odbioru oraz doręczenie
 | Wpis Landmark Global w HuaHan | Co oznacza dla twojej przesyłki | Status w Peek |
 | --- | --- | --- |
 | `Shipment Data Uploaded` | Dane nadawcy przesłane do Landmark Global. | „Zarejestrowana” |
-| `Processed` | Przetworzenie w tej samej minucie, odczytywane przez Peek jako tranzyt. | „W transporcie” |
+| `Processed` | Przetworzenie w tej samej minucie: tylko komunikat, a Peek zachowuje poprzedni etap. | Poprzedni etap |
 | `Incoming scan at facility` | Przyjęcie w magazynie po przekazaniu do sieci bpost. | „W transporcie” |
 | `Outgoing scan at facility` | Wyjazd z tego magazynu (zapisywany przez HuaHan pod kodem wydania do doręczenia, ale pokazywany w Peek jako „W transporcie”, gdyż właściwe doręczenie może nastąpić kilka dni później). | „W transporcie” |
 | `Out for delivery (On the way)` | W trasie doręczeniowej do odbiorcy. | „W doręczeniu” |
@@ -105,7 +105,7 @@ HuaHan świadczy usługi dla sprzedawców internetowych, a jego strony nie rozst
 
 ## Paczka HuaHan nie dociera albo śledzenie utknęło
 
-**Nie znaleziono numeru (`没有找到记录`).** Gdy HuaHan nie ma jeszcze numeru w bazie, jego strona zwraca komunikat `没有找到记录` („nie znaleziono wpisu”); Peek wyświetla „Oczekiwanie na przewoźnika HuaHan Logistics” i ponawia zapytania. Jeśli po dwóch dniach ani HuaHan, ani inne źródło nadal nie rozpoznaje numeru, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a kolejne sprawdzenia odbywają się raz dziennie i – po upływie tygodnia – raz w tygodniu. Porównaj dokładnie każdy znak (`HHW`, dwie litery, dziesięć cyfr, `YQ`) z wiadomością od sprzedawcy.
+**Nie znaleziono numeru (`没有找到记录`).** Gdy HuaHan nie ma jeszcze numeru w bazie, jego strona zwraca komunikat `没有找到记录` („nie znaleziono wpisu”); Peek wyświetla „Oczekiwanie na przewoźnika HuaHan Logistics” i ponawia zapytania. Jeśli po dwóch dniach ani HuaHan, ani inne źródło nadal nie rozpoznaje numeru, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Porównaj dokładnie każdy znak (`HHW`, dwie litery, dziesięć cyfr, `YQ`) z wiadomością od sprzedawcy.
 
 **Zatrzymana na `Shipment information received`.** Sklep utworzył zlecenie wysyłki, lecz HuaHan nie zeskanował jeszcze paczki w swoim magazynie. Zapytaj sprzedawcę, kiedy fizycznie przekazał przesyłkę.
 
@@ -146,7 +146,7 @@ To chińska firma logistyczna specjalizująca się w transgranicznym e-commerce 
 
 ### Gdzie mogę śledzić paczkę HuaHan?
 
-W polu wyszukiwania na górze tej strony albo w publicznej wyszukiwarce HuaHan pod adresem `hh-exp.cn/WebTrack/CargoTrack.html` (do 20 numerów oddzielonych przecinkami po ewentualnej weryfikacji rachunkowej). Zawsze wpisuj pełny 17-znakowy numer `HHW…YQ`.
+W polu wyszukiwania na górze tej strony albo w publicznej wyszukiwarce HuaHan pod adresem `hh-exp.cn/WebTrack/CargoTrack.html` (do 20 numerów oddzielonych przecinkami po wcześniejszej weryfikacji: kliknięciu we wskazanej kolejności albo rozwiązaniu prostego działania). Zawsze wpisuj pełny 17-znakowy numer `HHW…YQ`.
 
 ### Co oznacza status „Has been given to local carrier” w HuaHan?
 

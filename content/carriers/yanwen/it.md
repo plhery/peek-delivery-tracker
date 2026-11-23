@@ -45,7 +45,7 @@ Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe
 | `<User not at home>` | Un tentativo di consegna non è riuscito: non eri in casa. |
 | `Delivered.` | Consegnato, nelle parole del corriere italiano. |
 
-`Order Submited.` (scritto così, con l'errore), `Waybill Generated` e `Shipping Order Created.` valgono come la prima riga: esiste solo l'etichetta, e il pacco può essere ancora dal venditore. `Pick up by local carrier at destination port` vuol dire lo stesso di `Batch delivery to carrier`. Poi arrivano le righe del corriere locale. Uno scrive in maiuscolo, senza il suo nome: `ARRIVE TRANSITHUB` (il suo centro di transito), `TASK ASSIGNED` (l'incarico di consegna) e `ORDER SORTED` (lo smistamento), tutte «In transito» su Peek. In Italia, `First parcel scan along Poste Italiane’s logistic network` è la prima scansione di Poste Italiane dopo il passaggio da Yanwen, non un nuovo ritiro («In transito»). La riga di DHL `The recipient has selected a Packstation as the new delivery address.` può comparire quando il pacco è ancora in Cina: registra solo che hai scelto una Packstation DHL come nuovo indirizzo di consegna, quindi Peek lascia lo stato che il pacco aveva già e non le associa nessun luogo.
+`Order Submited.` (scritto così, con l'errore) e `Waybill Generated` valgono come la prima riga: esiste solo l'etichetta, e il pacco può essere ancora dal venditore. `Shipping Order Created.` è l'avviso d'ordine di un partner: Peek lascia lo stato che il pacco aveva già. `Pick up by local carrier at destination port` vuol dire lo stesso di `Batch delivery to carrier`. Poi arrivano le righe del corriere locale. Uno scrive in maiuscolo, senza il suo nome: `ARRIVE TRANSITHUB` (il suo centro di transito), `TASK ASSIGNED` (l'incarico di consegna) e `ORDER SORTED` (lo smistamento), tutte «In transito» su Peek. In Italia, `First parcel scan along Poste Italiane’s logistic network` è la prima scansione di Poste Italiane dopo il passaggio da Yanwen, non un nuovo ritiro («In transito»). La riga di DHL `The recipient has selected a Packstation as the new delivery address.` può comparire quando il pacco è ancora in Cina: registra solo che hai scelto una Packstation DHL come nuovo indirizzo di consegna, quindi Peek lascia lo stato che il pacco aveva già e non le associa nessun luogo.
 
 Dopo il passaggio, le righe sono quelle del corriere locale. Nei pacchi arrivati in Italia erano in inglese, con davanti il deposito tra parentesi quadre larghe, per esempio «【Milan center】Received.» o «【dalla sede operativa di TORINO (TO)】Delivered.». Oltre a quelle della tabella si vedono `Arrived.`, `Shipment dispatched.`, `<wrong address>` (l'indirizzo non va bene) e `Back To DS.`, cioè il pacco è tornato al deposito di consegna dopo un tentativo fallito.
 
@@ -59,7 +59,7 @@ Yanwen non consegna da sé in Europa: dice di lavorare «with local carriers», 
 
 Tentativi, avvisi, giacenza e nuova consegna seguono le regole del corriere locale: Yanwen non ne pubblica nessuna. In un pacco consegnato in Italia si sono visti due `<User not at home>`, un `<wrong address>` e un `Back To DS.` prima della consegna, quindi il corriere riprova. La categoria `Available_For_Pick_Up` vuol dire che il pacco ti aspetta in un punto di ritiro; `Undelivered` che la consegna non è riuscita.
 
-La pagina dei risultati ha anche una finestra «Proof of Delivery Images», che chiede il CAP del destinatario. Ogni scansione mostra il suo fuso orario GMT, e un selettore cambia il fuso. Per il Ticino Yanwen non indica quale corriere consegni.
+Nella pagina dei risultati, ogni scansione mostra il suo fuso orario GMT. Per il Ticino Yanwen non indica quale corriere consegni.
 
 ## Pacco Yanwen fermo, perso o tornato indietro
 
@@ -77,7 +77,7 @@ La pagina dei risultati ha anche una finestra «Proof of Delivery Images», che 
 
 ## Yanwen contatti: telefono ed e-mail
 
-All'11 ottobre 2026 Yanwen indica questi canali:
+Yanwen indica questi canali:
 
 - **Telefono**: 400-108-5656, dal lunedì al sabato, dalle 9:00 alle 18:00, secondo la pagina contatti in cinese. È un numero di servizio cinese: Yanwen non dice se si può chiamare dall'estero né in che lingue risponde.
 - **E-mail**: marketing@yw56.com.cn, l'unico indirizzo sul sito in inglese. Yanwen non lo presenta come indirizzo di assistenza.
@@ -89,9 +89,9 @@ Yanwen non pubblica nessun contatto per l'Italia o la Svizzera. Per l'ordine è 
 
 [Peek](/) riconosce subito i numeri BYS, quelli che finiscono con YP e i numeri YW degli Stati Uniti. Un numero YP con la cifra di controllo sbagliata non viene riconosciuto come Yanwen: scegli Yanwen con «Cambia». Un link di track.yw56.com.cn con `nums=` viene letto come Yanwen qualunque numero contenga, anche il numero di 13 cifre del corriere italiano, che digitato da solo Peek non collega a nessun corriere italiano.
 
-Mostra lo stato, la cronologia con la città o la regione di ogni scansione su una mappa, l'ora della consegna, il Paese di destinazione e il corriere locale con il suo numero («Consegna con» quel corriere, oppure «Annunciato a …, non ancora ricevuto» finché Peek trova il pacco solo annunciato a lui, senza una sua scansione). Quando Yanwen nomina un corriere locale che Peek conosce e il numero gli corrisponde, Peek chiede a quel corriere e passa a lui quando mostra novità più recenti. Yanwen non dà una data di consegna prevista; Peek non mostra punti di ritiro e scarta riferimenti d'ordine, contatti, CAP, PIN di consegna e numeri di porta.
+Mostra lo stato, la cronologia con la città o la regione di ogni scansione su una mappa, l'ora della consegna, il Paese di destinazione e il corriere locale con il suo numero («Consegna con» quel corriere, oppure «Annunciato a …, non ancora ricevuto» finché Peek trova il pacco solo annunciato a lui, senza una sua scansione). Quando Yanwen nomina un corriere locale che Peek conosce e il numero gli corrisponde, Peek chiede a quel corriere e passa a lui quando mostra novità più recenti. Yanwen non dà una data di consegna prevista; Peek non mostra punti di ritiro e scarta riferimenti d'ordine, contatti e CAP.
 
-Gli orari sono letti nel fuso GMT di Yanwen e mostrati nel fuso orario del tuo dispositivo, e le scansioni ripetute vengono tolte. `Delivered` e `Out for delivery` compaiono con parole italiane; le altre righe restano come sono scritte, compreso `Delivered.` del corriere italiano. Il tracking viene controllato fino a ogni 10 minuti e fino a ogni 2 quando il pacco è in consegna, ma solo in quel giorno, dalle 6 del mattino, ora locale, e finché risponde il tracking di Yanwen; quando rispondono i servizi di tracciamento, ogni 15 minuti. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL e USPS, anche in consegna. Puoi ricevere notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Peek non può contattare Yanwen o il negozio al posto tuo.
+Gli orari sono letti nel fuso GMT di Yanwen e mostrati nel fuso orario del tuo dispositivo, e le scansioni ripetute vengono tolte. `Delivered` e `Out for delivery` compaiono con parole italiane; le altre righe restano come sono scritte, compreso `Delivered.` del corriere italiano. Finché tieni aperto il pacco, o nel giorno di consegna con le notifiche attive, il tracking viene controllato fino a ogni 10 minuti e fino a ogni 2 quando il pacco è in consegna, ma solo in quel giorno, dalle 6 del mattino, ora locale, e finché risponde il tracking di Yanwen; altrimenti ogni ora. Tramite i soli servizi di tracciamento, ogni ora, ogni 3 ore dopo un giorno fermo e fino a ogni 15 minuti il giorno di consegna alle stesse condizioni. Se la consegna passa a un altro corriere, Peek segue il ritmo proprio di quel corriere. Puoi ricevere notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Peek non può contattare Yanwen o il negozio al posto tuo.
 
 ## Domande sul tracking Yanwen
 
@@ -116,7 +116,7 @@ No. L'unico telefono che Yanwen pubblica è il 400-108-5656, un numero di serviz
 Yanwen non pubblica tempi di consegna per chi riceve: vale la stima che il negozio o il marketplace mostra per il tuo ordine. Quando il pacco è consegnato, la riga del tracking indica i giorni impiegati.
 
 :::sources
-- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – sito di tracciamento, lingue, numeri, categorie, riquadro del corriere, scansioni in Italia, prova di consegna, fusi orari, telefono
+- [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – sito di tracciamento, lingue, numeri, categorie, riquadro del corriere, scansioni in Italia, telefono
 - [Yanwen: 燕文追踪 (tracking, in cinese)](https://track.yw56.com.cn/) – scansioni in inglese, prodotti China Post non tracciati
 - [Yanwen: YANWEN EXPRESS, home page](https://www.yw56.com.cn/en/) – azienda, Pechino 1998, ultimo miglio con corrieri locali, telefono, e-mail
 - [Yanwen: Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress ed eBay

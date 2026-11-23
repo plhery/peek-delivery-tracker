@@ -91,15 +91,15 @@ La [página Contact us de Early Bird](https://earlybird.se/en/contact-us) no pub
 
 **Qué muestra Peek.** Cada paso con el texto en inglés de Early Bird (los antiguos siguen en sueco), su hora, el lugar de cada terminal y la hora de entrega. La reserva aparece como «Etiqueta creada», la recepción como «Admitido por el transportista», terminales y trayecto a taquilla como «En tránsito», intentos fallidos como «Intento de entrega», la taquilla como «Listo para recoger» y entrega o recogida como «Entregado». Un nuevo intento mantiene el paso anterior. Peek no muestra el día previsto ni el nombre de la taquilla: ambos figuran en el enlace del SMS/correo y en la app iBoxen.
 
-**Cuando toma el relevo otro transportista.** El seguimiento de Early Bird enlaza entonces con el suyo. Peek reconoce tres: PostNord, DSV y DB Schenker (clasificado bajo DSV). La ficha indica «Entrega con PostNord» o «Entrega con DSV» y Peek lo sigue con el mismo número en cuanto publique nuevos escaneos. Mientras solo tenga el aviso previo sin escaneo propio, muestra «Anunciado a PostNord, aún no recibido» o «Anunciado a DSV, aún no recibido».
+**Cuando toma el relevo otro transportista.** El seguimiento de Early Bird enlaza entonces con el suyo. Peek reconoce tres: PostNord, DSV y DB Schenker (clasificado bajo [DSV](carrier:dsv)). La ficha indica «Entrega con PostNord» o «Entrega con DSV» y Peek lo sigue con el mismo número en cuanto publique nuevos escaneos. Mientras solo tenga el aviso previo sin escaneo propio, muestra «Anunciado a PostNord, aún no recibido» o «Anunciado a DSV, aún no recibido».
 
-Peek comprueba hasta cada 10 minutos y puede notificarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora.
+Mientras el paquete está abierto en Peek, Peek lo comprueba hasta cada 10 minutos y puede notificarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora, y cada 6 horas tras siete días sin novedades en «Etiqueta creada». Si el paquete pasa cuatro días sin una línea nueva en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra «Sin novedades desde el …» con el día de esa línea y un enlace «Pide ayuda a Early Bird».
 
 ## Preguntas sobre el seguimiento de Early Bird
 
 ### ¿A qué hora reparte Early Bird?
 
-Normalmente entre las 01:00 y las 07:00, hasta seis días a la semana según la zona. No necesitas estar en casa ni despierto.
+Normalmente entre las 01:00 y las 07:00 (hora sueca), hasta seis días a la semana según la zona. No necesitas estar en casa ni despierto.
 
 ### ¿Por qué mi seguimiento de Early Bird solo dice que la entrega está reservada?
 

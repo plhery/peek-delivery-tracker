@@ -91,15 +91,15 @@ Auf der [Kontaktseite von Early Bird](https://earlybird.se/en/contact-us) stehen
 
 **Was Peek zeigt.** Jeden Schritt im englischen Wortlaut von Early Bird (ältere Zeilen bleiben Schwedisch) mit Uhrzeit, dem Terminal-Ort und der Zustellzeit. Die Buchung erscheint als „Etikett erstellt“, die Übernahme als „Beim Paketdienst eingegangen“, Terminals und Weg zum Locker als „Unterwegs“, fehlgeschlagene Versuche als „Zustellversuch“, der Locker als „Abholbereit“ und Zustellung oder Abholung als „Zugestellt“. Ein neu geplanter Versuch behält die vorherige Stufe. Peek zeigt weder geplanten Liefertag noch den Locker-Namen: Der Liefertag steht im Link der SMS/E-Mail, der Locker in Nachricht und iBoxen-App.
 
-**Wenn ein anderer Paketdienst übernimmt.** Early Birds Tracking verlinkt dann auf diesen Dienst. Peek erkennt drei davon: PostNord, DSV und DB Schenker (unter DSV geführt). Die Karte zeigt „Zustellung durch PostNord“ oder „Zustellung durch DSV“, und Peek folgt diesem Dienst unter derselben Nummer, sobald neue Scans erscheinen. Solange jener Dienst nur die Vorankündigung ohne eigenen Scan hat, steht dort „Bei PostNord angekündigt, noch nicht eingetroffen“ bzw. „Bei DSV angekündigt, noch nicht eingetroffen“.
+**Wenn ein anderer Paketdienst übernimmt.** Early Birds Tracking verlinkt dann auf diesen Dienst. Peek erkennt drei davon: PostNord, DSV und DB Schenker (unter [DSV](carrier:dsv) geführt). Die Karte zeigt „Zustellung durch PostNord“ oder „Zustellung durch DSV“, und Peek folgt diesem Dienst unter derselben Nummer, sobald neue Scans erscheinen. Solange jener Dienst nur die Vorankündigung ohne eigenen Scan hat, steht dort „Bei PostNord angekündigt, noch nicht eingetroffen“ bzw. „Bei DSV angekündigt, noch nicht eingetroffen“.
 
-Peek prüft bis zu alle 10 Minuten und benachrichtigt dich nach Wahl bei „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich.
+Solange das Paket in Peek geöffnet ist, prüft Peek es bis zu alle 10 Minuten und benachrichtigt dich nach Wahl bei „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich, und nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Bleibt das Paket vier Tage ohne neuen Eintrag bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“ mit dem Tag dieses Eintrags und einen Link „Hol dir Hilfe bei Early Bird“.
 
 ## Fragen zur Early-Bird-Sendungsverfolgung
 
 ### Zu welcher Uhrzeit liefert Early Bird?
 
-Meist zwischen 01:00 und 07:00 Uhr, je nach Region bis zu sechs Tage pro Woche. Du musst weder zu Hause noch wach sein.
+Meist zwischen 01:00 und 07:00 Uhr (schwedische Zeit), je nach Region bis zu sechs Tage pro Woche. Du musst weder zu Hause noch wach sein.
 
 ### Warum zeigt mein Early-Bird-Tracking nur „booked“?
 

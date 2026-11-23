@@ -91,15 +91,15 @@ Na [stronie Contact us Early Bird](https://earlybird.se/en/contact-us) nie podan
 
 **Co pokazuje Peek.** Każdy etap w angielskim brzmieniu Early Bird (starsze wpisy zostają po szwedzku) wraz z godziną, miejscem skanu terminalowego i godziną doręczenia. Rezerwacja widnieje jako „Zarejestrowana”, przyjęcie jako „Przyjęta przez przewoźnika”, terminale i droga do automatu jako „W transporcie”, nieudane próby jako „Próba doręczenia”, automat jako „Do odbioru”, a doręczenie lub odbiór jako „Dostarczona”. Nowa próba zachowuje poprzedni etap. Peek nie pokazuje planowanego dnia doręczenia ani nazwy automatu – znajdziesz je w linku z SMS-a/e-maila i w aplikacji iBoxen.
 
-**Gdy paczkę przejmuje inny przewoźnik.** Śledzenie Early Bird odsyła wtedy do tamtej firmy. Peek rozpoznaje trzy: PostNord, DSV oraz DB Schenker (zapisywany pod DSV). Karta wyświetla „Doręcza: PostNord” lub „Doręcza: DSV”, a Peek przełącza się na tego przewoźnika pod tym samym numerem, gdy pojawią się świeże skany. Dopóki ma on tylko zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi PostNord, jeszcze nieprzyjęta” lub „Zgłoszona przewoźnikowi DSV, jeszcze nieprzyjęta”.
+**Gdy paczkę przejmuje inny przewoźnik.** Śledzenie Early Bird odsyła wtedy do tamtej firmy. Peek rozpoznaje trzy: PostNord, DSV oraz DB Schenker (zapisywany pod [DSV](carrier:dsv)). Karta wyświetla „Doręcza: PostNord” lub „Doręcza: DSV”, a Peek przełącza się na tego przewoźnika pod tym samym numerem, gdy pojawią się świeże skany. Dopóki ma on tylko zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi PostNord, jeszcze nieprzyjęta” lub „Zgłoszona przewoźnikowi DSV, jeszcze nieprzyjęta”.
 
-Peek sprawdza co 10 minut i może wysyłać powiadomienia dla „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po dwóch dniach bez zmian (po 12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę.
+Gdy paczka jest otwarta w Peek, Peek sprawdza ją nawet co 10 minut i może wysyłać powiadomienia dla „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po dwóch dniach bez zmian (po 12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez nowości przy „Zarejestrowana” co 6 godzin. Jeśli paczka przez cztery dni nie ma nowego wpisu przy „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek pokazuje „Brak aktualizacji od …” z dniem tego wpisu i link „Poproś przewoźnika Early Bird o pomoc”.
 
 ## Pytania o śledzenie Early Bird
 
 ### O której godzinie doręcza Early Bird?
 
-Zwykle między 01:00 a 07:00, do sześciu dni w tygodniu w zależności od rejonu. Nie musisz być w domu ani obudzony.
+Zwykle między 01:00 a 07:00 (czasu szwedzkiego), do sześciu dni w tygodniu w zależności od rejonu. Nie musisz być w domu ani obudzony.
 
 ### Dlaczego moje śledzenie Early Bird pokazuje tylko rezerwację dostawy?
 

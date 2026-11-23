@@ -91,15 +91,15 @@ La [pagina Contact us di Early Bird](https://earlybird.se/en/contact-us) non ele
 
 **Cosa mostra Peek.** Ogni tappa nella dicitura inglese di Early Bird (le vecchie restano in svedese), con orario, nome del terminal e ora di consegna. La prenotazione appare come «Etichetta creata», la ricezione come «Preso in carico», terminal e trasferimento al locker come «In transito», tentativi falliti come «Tentativo di consegna», locker come «Pronto per il ritiro» e consegna o ritiro come «Consegnato». Un nuovo tentativo mantiene lo stato precedente. Peek non mostra il giorno previsto né il nome del locker: il giorno è nel link di SMS/e-mail, il locker nel messaggio e nell'app iBoxen.
 
-**Quando subentra un altro corriere.** Il tracciamento Early Bird rimanda a quel corriere. Peek ne riconosce tre: PostNord, DSV e DB Schenker (registrato sotto DSV). La scheda mostra «Consegna con PostNord» o «Consegna con DSV» e Peek segue quel corriere con lo stesso numero appena registra scansioni nuove. Finché quel corriere ha solo l'annuncio senza scansioni proprie, appare «Annunciato a PostNord, non ancora ricevuto» o «Annunciato a DSV, non ancora ricevuto».
+**Quando subentra un altro corriere.** Il tracciamento Early Bird rimanda a quel corriere. Peek ne riconosce tre: PostNord, DSV e DB Schenker (registrato sotto [DSV](carrier:dsv)). La scheda mostra «Consegna con PostNord» o «Consegna con DSV» e Peek segue quel corriere con lo stesso numero appena registra scansioni nuove. Finché quel corriere ha solo l'annuncio senza scansioni proprie, appare «Annunciato a PostNord, non ancora ricevuto» o «Annunciato a DSV, non ancora ricevuto».
 
-Peek controlla fino a ogni 10 minuti e può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora.
+Finché il pacco è aperto in Peek, Peek lo controlla fino a ogni 10 minuti e può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Se il pacco resta quattro giorni senza una nuova riga su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …» con il giorno di quella riga e un link «Chiedi aiuto a Early Bird».
 
 ## Domande sul tracking Early Bird
 
 ### A che ora consegna Early Bird?
 
-Di solito tra le 01:00 e le 07:00, fino a sei giorni a settimana secondo la zona. Non serve essere in casa né svegli.
+Di solito tra le 01:00 e le 07:00 (ora svedese), fino a sei giorni a settimana secondo la zona. Non serve essere in casa né svegli.
 
 ### Perché il mio tracking Early Bird dice solo che la consegna è prenotata?
 

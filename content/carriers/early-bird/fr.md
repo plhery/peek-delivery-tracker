@@ -91,15 +91,15 @@ La [page Contact us d'Early Bird](https://earlybird.se/en/contact-us) ne mention
 
 **Ce que Peek affiche.** Chaque étape dans le libellé anglais d'Early Bird (les anciennes lignes restent en suédois), avec son heure, le lieu indiqué par chaque scan de terminal et l'heure de livraison. La réservation apparaît comme « Étiquette créée », la réception comme « Pris en charge », les terminaux et l'acheminement vers un casier comme « En transit », les échecs de livraison comme « Tentative de livraison », la mise en casier comme « Prêt à être retiré » et la livraison ou le retrait comme « Livré ». Une nouvelle tentative conserve l'étape précédente. Peek n'affiche ni le jour prévu ni le nom du casier : le jour prévu figure dans le lien du SMS ou de l'e-mail d'Early Bird, et le casier dans son message et l'application iBoxen.
 
-**Quand un autre transporteur prend le relais.** Le suivi d'Early Bird renvoie alors vers celui-ci. Le code de Peek en reconnaît trois : PostNord, DSV et DB Schenker (classé sous DSV). La fiche indique « Livraison par PostNord » ou « Livraison par DSV », et Peek suit ce transporteur sous le même numéro dès qu'il publie de nouveaux scans. Tant que ce transporteur n'a reçu que l'annonce sans scan propre, la fiche indique « Annoncé à PostNord, pas encore reçu » ou « Annoncé à DSV, pas encore reçu ».
+**Quand un autre transporteur prend le relais.** Le suivi d'Early Bird renvoie alors vers celui-ci. Le code de Peek en reconnaît trois : PostNord, DSV et DB Schenker (classé sous [DSV](carrier:dsv)). La fiche indique « Livraison par PostNord » ou « Livraison par DSV », et Peek suit ce transporteur sous le même numéro dès qu'il publie de nouveaux scans. Tant que ce transporteur n'a reçu que l'annonce sans scan propre, la fiche indique « Annoncé à PostNord, pas encore reçu » ou « Annoncé à DSV, pas encore reçu ».
 
-Peek vérifie jusqu'à toutes les 10 minutes et peut te notifier pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures.
+Tant que le colis est ouvert dans Peek, Peek le vérifie jusqu'à toutes les 10 minutes, et peut te notifier pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures, et toutes les 6 heures après sept jours sans nouvelles à « Étiquette créée ». Si le colis reste quatre jours sans nouvelle ligne à « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis … » avec le jour de cette ligne et un lien « Demande de l’aide à Early Bird ».
 
 ## Questions sur le suivi Early Bird
 
 ### À quelle heure Early Bird livre-t-il ?
 
-Généralement entre 01:00 et 07:00, jusqu'à six jours par semaine selon le secteur. Tu n'as pas besoin d'être chez toi ni réveillé.
+Généralement entre 01:00 et 07:00 (heure de Suède), jusqu'à six jours par semaine selon le secteur. Tu n'as pas besoin d'être chez toi ni réveillé.
 
 ### Pourquoi mon suivi Early Bird indique-t-il seulement que la livraison est réservée ?
 

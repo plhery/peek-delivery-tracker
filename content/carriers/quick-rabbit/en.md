@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-17
 ---
 
-Quick Rabbit is a Spanish delivery company for online shops and retailers, based in San Fernando de Henares near Madrid. It delivers across Spain to your door, to pick-up points and to Citibox lockers. Track a parcel with its `PKG` code on [Quick Rabbit's tracking page](https://web.quickrabbit.es/es/tracking) or paste it in the box above. Quick Rabbit says you'll find the code in your confirmation email or shipping receipt.
+Quick Rabbit is a Spanish delivery company for online shops and retailers, based in Madrid. It delivers across Spain to your door, to pick-up points and to Citibox lockers. Track a parcel with its `PKG` code on [Quick Rabbit's tracking page](https://web.quickrabbit.es/es/tracking) or paste it in the box above. Quick Rabbit says you'll find the code in your confirmation email or shipping receipt.
 
 ## Quick Rabbit tracking number: the PKG code
 
@@ -14,9 +14,9 @@ Quick Rabbit calls it the tracking code (`código de seguimiento`). It comes in 
 
 | Number | What it is |
 | --- | --- |
-| `PKG00020260101123456789` | `PKG`, three digits, an eight-digit date (year, month, day) and nine more digits: the usual Quick Rabbit code. |
-| `PKG000260101ES1234567890123A` | `PKG`, nine digits, `ES`, 13 digits and a letter: a longer layout. |
-| `WT0000000000000000` | `WT` and 16 digits: a shipper's reference, shown as `Referencia` on Quick Rabbit's page. |
+| `PKG48220260715482917365` | `PKG`, three digits, an eight-digit date (year, month, day) and nine more digits: the usual Quick Rabbit code. |
+| `PKG482260715ES4829173640582K` | `PKG`, nine digits, `ES`, 13 digits and a letter: a longer layout. |
+| `WT4829173640582917` | `WT` and 16 digits: a shipper's reference, shown as `Referencia` on Quick Rabbit's page. |
 
 A code the tracker doesn't know gets `Paquete no encontrado` ("Package not found"): check it against the shop's email. No code at all? Ask the shop, or see [how to find a tracking number](guide:find-tracking-number).
 
@@ -69,12 +69,9 @@ For any problem with a parcel, Quick Rabbit's contact page sends you to the clai
 
 ## Quick Rabbit contact
 
-As read on 28 October 2026:
-
-- **Email:** customer@quickrabbit.es; the contact page promises an answer within 2 hours in business hours.
-- **WhatsApp:** +34 628 437 468, on the English contact page.
-- **Hours:** Monday to Friday 8:00 to 20:00, Saturday 9:00 to 14:00, closed on Sunday (its FAQ gives these as the sales team's hours), with incident support around the clock.
-- **Address:** Av. del Sistema Solar, 27, Nave 3, 28830 San Fernando de Henares, Madrid.
+- **Email:** customer@quickrabbit.es, its main channel. For an urgent incident, put "URGENT" in the subject.
+- **Hours:** Monday to Friday 8:00 to 20:00, Saturday 9:00 to 14:00, closed on Sunday, Madrid time (its FAQ gives these as the sales team's hours).
+- **Address:** Avenida de Aragón, 404, 28022 Madrid.
 
 The contact page's form is for businesses asking for a quote.
 
@@ -84,7 +81,11 @@ The contact page's form is for businesses asking for a quote.
 
 Peek reads Quick Rabbit's own tracker: the status, the history in the English lines above and the delivery time, read on Madrid time and shown in your device's time zone. Quick Rabbit names no places, so there's no map. Peek leaves out the estimated delivery date, the destination city, the shipper's reference and the courier's coordinates, which can be your door. There's no proof of delivery and no locker code, and Peek doesn't hand the parcel on to Citibox: the locker steps are Quick Rabbit's own lines.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Quick Rabbit scans the parcel out for delivery, while Quick Rabbit's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't change the delivery, open a claim, or contact Quick Rabbit or the shop for you.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Madrid time on the day Quick Rabbit scans the parcel out for delivery, while Quick Rabbit's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has spent seven days at "Label created" with no news.
+
+If a parcel at "Label created", "Received by carrier" or "In transit" has no new scan for four days, Peek flags it with the latest scan's day ("No tracking update since …") and adds "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Quick Rabbit." with a "Get help from Quick Rabbit" link. After three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Quick Rabbit."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't change the delivery, open a claim, or contact Quick Rabbit or the shop for you.
 
 ## Questions about Quick Rabbit tracking
 
@@ -102,13 +103,13 @@ Press `Actualizar datos de entrega` on the tracking page and enter your email. T
 
 ### How do I contact Quick Rabbit?
 
-Email customer@quickrabbit.es or WhatsApp +34 628 437 468. For a problem with a parcel, use the claim on the tracking page, as the contact page asks.
+Email customer@quickrabbit.es, with "URGENT" in the subject for an urgent incident. For a problem with a parcel, use the claim on the tracking page, as the contact page asks.
 
 :::sources
 - [Quick Rabbit: Seguimiento de Paquetes](https://web.quickrabbit.es/es/tracking) – tracking code and where to find it, not-found message, reference, statuses, updating a delivery, claims, urgent support
 - [Quick Rabbit: Package Tracking](https://web.quickrabbit.es/en/tracking) – the tracker in English
-- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – claims through tracking, email, answer time, hours (the sales team's, per its FAQ), address
-- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – WhatsApp
+- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – claims through tracking, email, urgent incidents, hours (the sales team's, per its FAQ), address
+- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – the same page in English
 - [Quick Rabbit: E-commerce & retail logistics in Spain](https://web.quickrabbit.es/en) – 50 provinces, claims from the tracking page
 - [Quick Rabbit: About Us](https://web.quickrabbit.es/en/about) – more than 5 years, partners
 - [Quick Rabbit: Our Services](https://web.quickrabbit.es/en/services) – SMS and email notifications, retry service

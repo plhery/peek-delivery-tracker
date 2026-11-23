@@ -6,7 +6,7 @@ published: 2026-11-01
 updated: 2026-11-17
 ---
 
-Quick Rabbit es una empresa española de reparto para tiendas online y comercios, con sede en San Fernando de Henares, junto a Madrid. Reparte por toda España a domicilio, en puntos de recogida y en casilleros Citibox. Para seguir tu paquete, escribe su código `PKG` en el [seguimiento de Quick Rabbit](https://web.quickrabbit.es/es/tracking) o pégalo en la casilla de arriba. Según Quick Rabbit, el código está «en tu email de confirmación o recibo de envío».
+Quick Rabbit es una empresa española de reparto para tiendas online y comercios, con sede en Madrid. Reparte por toda España a domicilio, en puntos de recogida y en casilleros Citibox. Para seguir tu paquete, escribe su código `PKG` en el [seguimiento de Quick Rabbit](https://web.quickrabbit.es/es/tracking) o pégalo en la casilla de arriba. Según Quick Rabbit, el código está «en tu email de confirmación o recibo de envío».
 
 ## Número de seguimiento de Quick Rabbit: el código PKG
 
@@ -14,9 +14,9 @@ Quick Rabbit lo llama «código de seguimiento». Tiene dos formas, y su buscado
 
 | Número | Qué es |
 | --- | --- |
-| `PKG00020260101123456789` | `PKG`, tres cifras, una fecha de ocho cifras (año, mes y día) y nueve cifras más: el código habitual de Quick Rabbit. |
-| `PKG000260101ES1234567890123A` | `PKG`, nueve cifras, `ES`, 13 cifras y una letra: una forma más larga. |
-| `WT0000000000000000` | `WT` y 16 cifras: una referencia del remitente. La página de Quick Rabbit la muestra como `Referencia`. |
+| `PKG48220260715482917365` | `PKG`, tres cifras, una fecha de ocho cifras (año, mes y día) y nueve cifras más: el código habitual de Quick Rabbit. |
+| `PKG482260715ES4829173640582K` | `PKG`, nueve cifras, `ES`, 13 cifras y una letra: una forma más larga. |
+| `WT4829173640582917` | `WT` y 16 cifras: una referencia del remitente. La página de Quick Rabbit la muestra como `Referencia`. |
 
 Si el buscador responde `Paquete no encontrado`, compara el código con el email de la tienda. ¿No tienes ningún código? Pídeselo a la tienda o mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
@@ -69,12 +69,9 @@ Para cualquier incidencia con un paquete, la página de contacto de Quick Rabbit
 
 ## Quick Rabbit: contacto y atención al cliente
 
-Así lo indicaba la web de Quick Rabbit el 28 de octubre de 2026:
-
-- **Email:** customer@quickrabbit.es. La página de contacto promete respuesta en menos de 2 horas en horario laboral.
-- **WhatsApp:** +34 628 437 468, en la página de contacto en inglés.
-- **Horario:** de lunes a viernes de 8:00 a 20:00 y sábados de 9:00 a 14:00; domingos, cerrado. Según sus preguntas frecuentes, es el horario del equipo comercial; para incidencias hay soporte 24/7.
-- **Dirección:** Av. del Sistema Solar, 27, Nave 3, 28830 San Fernando de Henares, Madrid.
+- **Email:** customer@quickrabbit.es, su canal principal. Para una incidencia urgente, pon «URGENTE» en el asunto.
+- **Horario:** de lunes a viernes de 8:00 a 20:00 y sábados de 9:00 a 14:00; domingos, cerrado. Según sus preguntas frecuentes, es el horario del equipo comercial.
+- **Dirección:** Avenida de Aragón, 404, 28022 Madrid.
 
 El formulario de la página de contacto es para empresas que piden presupuesto.
 
@@ -84,7 +81,11 @@ El formulario de la página de contacto es para empresas que piden presupuesto.
 
 Peek lee el propio seguimiento de Quick Rabbit: el estado, el historial con las líneas en inglés de la tabla y la hora de entrega. Lee las horas con el reloj de Madrid y te las muestra en la zona horaria de tu dispositivo. Quick Rabbit no indica lugares, así que no hay mapa. Peek deja fuera la fecha prevista de entrega, la ciudad de destino, la referencia del remitente y las coordenadas del repartidor, que pueden ser las de tu puerta. No hay prueba de entrega ni código del casillero, y Peek no consulta a Citibox: los pasos del casillero son líneas del propio Quick Rabbit.
 
-Peek consulta el seguimiento hasta una vez cada 10 minutos y hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Quick Rabbit; a través de servicios de seguimiento, cada 15 minutos). Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
+Mientras tengas el paquete abierto en Peek, o el día de la entrega con las notificaciones activadas, Peek consulta el seguimiento hasta una vez cada 10 minutos y hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora de Madrid, y mientras responda el propio seguimiento de Quick Rabbit); si no, una vez por hora. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora, y cada 6 horas si lleva siete días sin novedades en «Etiqueta creada».
+
+Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin un nuevo escaneo, Peek lo marca con el día del último («Sin novedades desde el …»), añade la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Quick Rabbit.» y el enlace «Pide ayuda a Quick Rabbit». A las tres semanas, la nota pasa a ser «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Quick Rabbit.»
+
+Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Quick Rabbit
 
@@ -102,13 +103,13 @@ Que Quick Rabbit está investigando dónde está el paquete; según su página, 
 
 ### ¿Cómo contactar con Quick Rabbit?
 
-Escribe a customer@quickrabbit.es o escríbele por WhatsApp al +34 628 437 468. Para un problema con un paquete, usa la reclamación de la página de seguimiento, como pide su página de contacto.
+Escribe a customer@quickrabbit.es, con «URGENTE» en el asunto si es una incidencia urgente. Para un problema con un paquete, usa la reclamación de la página de seguimiento, como pide su página de contacto.
 
 :::sources
 - [Quick Rabbit: Seguimiento de Paquetes](https://web.quickrabbit.es/es/tracking) – código de seguimiento y dónde encontrarlo, paquete no encontrado, referencia, estados y sus descripciones, actualizar datos de entrega, reclamaciones, soporte urgente
 - [Quick Rabbit: Package Tracking (en inglés)](https://web.quickrabbit.es/en/tracking) – el seguimiento en inglés
-- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – reclamaciones desde el seguimiento, email, tiempo de respuesta, horario (el del equipo comercial, según sus preguntas frecuentes), dirección
-- [Quick Rabbit: Contact (en inglés)](https://web.quickrabbit.es/en/contact) – WhatsApp
+- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – reclamaciones desde el seguimiento, email, incidencias urgentes, horario (el del equipo comercial, según sus preguntas frecuentes), dirección
+- [Quick Rabbit: Contact (en inglés)](https://web.quickrabbit.es/en/contact) – la misma página en inglés
 - [Quick Rabbit: E-commerce & retail logistics in Spain (en inglés)](https://web.quickrabbit.es/en) – 50 provincias, reclamaciones desde la página de seguimiento
 - [Quick Rabbit: About Us (en inglés)](https://web.quickrabbit.es/en/about) – más de 5 años, socios
 - [Quick Rabbit: Our Services (en inglés)](https://web.quickrabbit.es/en/services) – avisos por SMS y email, nuevo intento tras una entrega fallida

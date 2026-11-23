@@ -16,9 +16,9 @@ The shapes Peek's catalog knows (examples invented):
 
 | Shape | Example | Whose it can be |
 | --- | --- | --- |
-| 10 digits | `1234567890` | DHL eCommerce Iberia, but also [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis and GLS Spain |
-| Two letters, 7 digits, then `0` | `AB12345670` | DHL eCommerce Iberia |
-| `JJD000061`, `JJD000268`, `JJD000269` or `JJD000368`, then 14 digits | `JJD00006112345678901234` | DHL eCommerce Iberia |
+| 10 digits | `4829173649` | DHL eCommerce Iberia, but also [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis and GLS Spain |
+| Two letters, 7 digits, then `0` | `KL48291730` | DHL eCommerce Iberia |
+| `JJD000061`, `JJD000268`, `JJD000269` or `JJD000368`, then 14 digits | `JJD00006148291736482917` | DHL eCommerce Iberia |
 
 If the shop's email names [Mondial Relay](carrier:mondial-relay) or [GLS Spain](carrier:gls-es) for a 10-digit number, track it there. Two letters, nine digits and `ES` is a [Correos](carrier:correos-spain) number.
 
@@ -69,11 +69,11 @@ Look for DHL eCommerce's contact details on DHL's website for the country the pa
 
 ## Tracking DHL eCommerce Iberia parcels with Peek
 
-[Peek](/) asks DHL eCommerce Iberia and [TNT Italy](carrier:tnt-it), whose waybills have the same shape, about two letters, 7 digits and `0`. For 10 digits it asks DHL eCommerce Iberia, Packeta and BOX NOW, and DHL Express first when its check digit passes (then also ACS Courier and Geniki Taxydromiki, whose numbers pass the same check); if DHL Express knows the number too, it wins. If carriers of different brands know it, or none does, you pick with "Change carrier". A `JJD` plate of the shape in the table above is named DHL eCommerce Iberia at once. DHL's other numbers (12 or 22 digits, other `JJD` plates, postal numbers) work only after picking "DHL eCommerce Iberia" there. No postcode is needed.
+[Peek](/) asks DHL eCommerce Iberia and [TNT Italy](carrier:tnt-it), whose waybills have the same shape, about two letters, 7 digits and `0`. For 10 digits it asks DHL eCommerce Iberia, Packeta and BOX NOW, with DHL Freight (from Portugal or with no country known, only once the others have missed the number), and DHL Express first when its check digit passes (then also ACS Courier and Geniki Taxydromiki, whose numbers pass the same check); if DHL Express knows the number too, it wins. If carriers of different brands know it, or none does, you pick with "Change carrier". A `JJD` plate of the shape in the table above is named DHL eCommerce Iberia at once. DHL's other numbers (12 or 22 digits, other `JJD` plates, postal numbers) work only after picking "DHL eCommerce Iberia" there. No postcode is needed.
 
 Shipment links from DHL eCommerce Iberia's tracking page can be pasted too, in Spanish, Portuguese or English (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` or `ModifyMyShipment`). They name DHL eCommerce Iberia straight away, whatever the number's shape. A postcode at the end of the link is left out, as none is needed.
 
-DHL's scans carry no time zone: Peek reads them on the clock of the scan's place and lists DHL's own history. Statuses keep DHL's English wording, except `Delivered` and `Out for delivery`, which show as Peek's own. Peek can notify you when the status changes. It shows no expected delivery date or delivery time for DHL eCommerce Iberia.
+DHL's scans carry no time zone: Peek reads them on the clock of the scan's place and lists DHL's own history. When DHL's answer carries a CTT Express number, Peek also asks [CTT Express](carrier:ctt-express) and follows the parcel there once CTT Express shows a scan no older than DHL's newest. Statuses keep DHL's English wording, except `Delivered` and `Out for delivery`, which show as Peek's own. Peek can notify you when the status changes. It shows no expected delivery date or delivery time for DHL eCommerce Iberia.
 
 ## Questions about DHL eCommerce tracking
 

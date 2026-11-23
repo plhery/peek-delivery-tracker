@@ -16,9 +16,9 @@ Estas son las formas que conoce el catálogo de Peek (ejemplos inventados):
 
 | Forma | Ejemplo | De quién puede ser |
 | --- | --- | --- |
-| 10 cifras | `1234567890` | DHL eCommerce Iberia, pero también Mondial Relay, Relais Colis, GLS Spain o, si cuadra su dígito de control, [DHL Express](carrier:dhl-express) |
-| Dos letras, 7 cifras y un `0` | `AB12345670` | DHL eCommerce Iberia |
-| `JJD000061`, `JJD000268`, `JJD000269` o `JJD000368` y 14 cifras | `JJD00006112345678901234` | DHL eCommerce Iberia |
+| 10 cifras | `4829173649` | DHL eCommerce Iberia, pero también Mondial Relay, Relais Colis, GLS Spain o, si cuadra su dígito de control, [DHL Express](carrier:dhl-express) |
+| Dos letras, 7 cifras y un `0` | `KL48291730` | DHL eCommerce Iberia |
+| `JJD000061`, `JJD000268`, `JJD000269` o `JJD000368` y 14 cifras | `JJD00006148291736482917` | DHL eCommerce Iberia |
 
 Si el correo de la tienda nombra a [Mondial Relay](carrier:mondial-relay) o [GLS Spain](carrier:gls-es) para un número de 10 cifras, el paquete es suyo, no de DHL. Dos letras, nueve cifras y `ES` es un número de [Correos](carrier:correos-spain), no de DHL.
 
@@ -70,11 +70,11 @@ Busca los datos de contacto de DHL eCommerce en la web de DHL del país donde se
 
 ## Seguir un paquete DHL eCommerce Iberia con Peek
 
-Por los números de dos letras, 7 cifras y `0`, [Peek](/) pregunta a DHL eCommerce Iberia y también a TNT Italia, cuyas cartas de porte tienen la misma forma. Con 10 cifras pregunta a la vez a DHL eCommerce Iberia, Packeta y BOX NOW, y antes a DHL Express si cuadra su dígito de control (y entonces también a ACS Courier y Geniki Taxydromiki, cuyos números pasan el mismo control); si DHL Express también conoce el número, gana DHL Express. Si lo conocen transportistas de marcas distintas, o ninguno, eliges tú con «Cambiar transportista». Una matrícula `JJD` con la forma de la tabla de arriba la reconoce al momento como DHL eCommerce Iberia. Otros números (12 o 22 cifras, las demás matrículas `JJD`, códigos `JVGL` o `3S`, números postales) solo funcionan después de elegir ahí «DHL eCommerce Iberia». No hace falta código postal.
+Por los números de dos letras, 7 cifras y `0`, [Peek](/) pregunta a DHL eCommerce Iberia y también a TNT Italia, cuyas cartas de porte tienen la misma forma. Con 10 cifras pregunta a la vez a DHL eCommerce Iberia, Packeta y BOX NOW, también a DHL Freight (desde Portugal o sin país conocido, solo cuando los demás no conocen el número), y antes a DHL Express si cuadra su dígito de control (y entonces también a ACS Courier y Geniki Taxydromiki, cuyos números pasan el mismo control); si DHL Express también conoce el número, gana DHL Express. Si lo conocen transportistas de marcas distintas, o ninguno, eliges tú con «Cambiar transportista». Una matrícula `JJD` con la forma de la tabla de arriba la reconoce al momento como DHL eCommerce Iberia. Otros números (12 o 22 cifras, las demás matrículas `JJD`, códigos `JVGL` o `3S`, números postales) solo funcionan después de elegir ahí «DHL eCommerce Iberia». No hace falta código postal.
 
 También puedes pegar enlaces de envíos de la página de seguimiento de DHL eCommerce Iberia, en español, portugués o inglés (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` o `ModifyMyShipment`). Indican DHL eCommerce Iberia directamente, sea cual sea el formato del número. Si el enlace lleva un código postal al final, Peek no lo usa, porque no le hace falta.
 
-Los escaneos de DHL no llevan zona horaria: Peek los lee en la hora del lugar de cada escaneo y muestra el historial de la propia DHL. La consulta a DHL se hace en inglés, así que los estados salen con el texto inglés de DHL, salvo `Delivered` y `Out for delivery`, que aparecen con las palabras de Peek («Entregado» y «En reparto»). Si CTT Express hace la entrega, sigue el paquete en [CTT Express](carrier:ctt-express) con su número. También puede enviarte notificaciones cuando cambia el estado, pero no muestra fecha prevista ni hora de entrega para DHL eCommerce Iberia.
+Los escaneos de DHL no llevan zona horaria: Peek los lee en la hora del lugar de cada escaneo y muestra el historial de la propia DHL. La consulta a DHL se hace en inglés, así que los estados salen con el texto inglés de DHL, salvo `Delivered` y `Out for delivery`, que aparecen con las palabras de Peek («Entregado» y «En reparto»). Si la respuesta de DHL trae un número de CTT Express, Peek pregunta también a [CTT Express](carrier:ctt-express) y sigue el paquete allí en cuanto CTT Express muestra un escaneo no más antiguo que el último de DHL. También puede enviarte notificaciones cuando cambia el estado, pero no muestra fecha prevista ni hora de entrega para DHL eCommerce Iberia.
 
 ## Preguntas sobre el seguimiento de DHL eCommerce
 

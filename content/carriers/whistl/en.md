@@ -20,10 +20,10 @@ A reference can have another carrier's shape, such as the delivering carrier's o
 
 | Number shape (invented) | Whose it looks like |
 | --- | --- |
-| `RR000000005GB` | Royal Mail (two letters, nine digits, `GB`) |
-| `H00ABC0000000000` | Evri's 16-character barcode, see [Evri tracking](carrier:evri) |
-| `00000000000000` | 14 digits: DPD UK among several others, see [DPD UK](carrier:dpd-uk) |
-| `ZDBABC123456` | XDP, see [XDP tracking](carrier:xdp) |
+| `RR482917367GB` | Royal Mail (two letters, nine digits, `GB`) |
+| `H00KLM0048291708` | Evri's 16-character barcode, see [Evri tracking](carrier:evri) |
+| `48291736482917` | 14 digits: DPD UK among several others, see [DPD UK](carrier:dpd-uk) |
+| `ZDBKLM482917` | XDP, see [XDP tracking](carrier:xdp) |
 
 More on reading a number in [which carrier a tracking number belongs to](guide:tracking-number-formats).
 
@@ -87,23 +87,23 @@ When tracking stalls, start with [why tracking stops updating](guide:tracking-no
 
 ## Whistl contact number and customer service
 
-Whistl's contact page, read on 13 October 2026:
+Whistl's contact page gives:
 
 - **About your parcel:** the shop you bought from.
 - **Tracking:** the "Whistl Tracking Portal" button on the contact page.
-- **General enquiries:** 01628 702 965, between 8.30am and 5.30pm. This line serves Whistl's business customers.
+- **General enquiries:** 01628 702 965, between 8.30am and 5.30pm UK time.
 - **Customer Services email:** packagescustomerservices@whistl.co.uk, which "cannot assist the public with item-related tracking queries".
 - **Head office:** Network House, Third Avenue, Marlow, Buckinghamshire, SL7 1EY.
 
-In Greece, Cyprus, Luxembourg and Malta, Whistl has no office or phone line. Ask the shop, and once the parcel is handed over, the carrier or local post named on the tracker.
+Ask the shop, and once the parcel is handed over, the carrier or local post named on the tracker.
 
 ## Tracking Whistl parcels with Peek
 
-Whistl's references have no shape, so a typed number never names Whistl. Paste a Whistl link instead (web.parcelhub.net or despatch.whistl.co.uk `/Tracking/reference/…`, or trackmyitem.whistl.co.uk `/tracking/…`), or add the reference and pick "Whistl" with "Change". No postcode is needed. A reference shaped like another carrier's number, such as the delivering carrier's own (a Royal Mail `…GB` number, say), tracks that carrier, not Whistl.
+For a reference made of `L` and 17 digits, such as `L48291736482917364`, Peek asks Whistl directly and shows "Whistl has this parcel." once Whistl knows it. Other Whistl references have no shape of their own, so paste a Whistl link instead (web.parcelhub.net or despatch.whistl.co.uk `/Tracking/reference/…`, or trackmyitem.whistl.co.uk `/tracking/…`), or add the reference and pick "Whistl" with "Change". No postcode is needed. A reference shaped like another carrier's number, such as the delivering carrier's own (a Royal Mail `…GB` number, say), tracks that carrier, not Whistl.
 
-[Peek](/) reads Whistl's Parcelhub tracker. Its times carry no time zone: Peek reads them on the clock of the scan's place, UK time for scans in the UK, and lists Whistl's own history. Peek can show the carrier that delivers the parcel with that carrier's number, and can notify you when the status changes. There's no expected delivery day, weight or pickup point. Statuses keep Whistl's English wording, except plain `Delivered`, `In transit` and `Returned to sender`, shown in Peek's words.
+[Peek](/) reads Whistl's Parcelhub tracker. Its times carry no time zone: Peek reads them on the clock of the scan's place when Whistl names one, otherwise on UK time, and lists Whistl's own history. Peek can show the carrier that delivers the parcel with that carrier's number, and can notify you when the status changes. There's no expected delivery day, weight or pickup point. Statuses keep Whistl's English wording, except plain `Delivered`, `In transit` and `Returned to sender`, shown in Peek's words.
 
-When Whistl names Royal Mail, Parcelforce Worldwide, DPD UK, DHL Parcel UK, Amazon Shipping, [InPost](carrier:inpost), [UPS](carrier:ups) or [FedEx](carrier:fedex), Peek can follow the parcel there. A parcel named only as Evri, DPD or Yodel isn't followed: add the carrier's own number, or use Yodel's site, as Peek can't track Yodel. A reference covering several parcels isn't tracked: add each parcel number.
+When Whistl names Royal Mail, Parcelforce Worldwide, DPD UK, DHL Parcel UK, Amazon Shipping, [InPost](carrier:inpost) (Yodel included, which Peek tracks as InPost), [UPS](carrier:ups), [FedEx](carrier:fedex) or Evri, Peek can follow the parcel there. A parcel named only as DPD isn't followed: add the carrier's own number. A reference covering several parcels isn't tracked: add each parcel number.
 
 ## Questions about Whistl tracking
 

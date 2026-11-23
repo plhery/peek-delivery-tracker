@@ -16,10 +16,10 @@ The numbers Peek links to Helthjem look like this (digits invented), next to Bri
 
 | Number | Whose it is |
 | --- | --- |
-| `370724760000000000` | Helthjem: 18 digits starting `37072476`. |
-| `00370724760000000000` | The same with `00` in front, as under a barcode: 20 digits. |
-| `370111111111111116` | [Bring](carrier:bring): its own 18-digit numbers also start `370` or `373`. |
-| `RR000000005NO` | Bring: postal numbers ending `NO`. |
+| `370724764829173648` | Helthjem: 18 digits starting `37072476`. |
+| `00370724764829173648` | The same with `00` in front, as under a barcode: 20 digits. |
+| `370748291736482919` | [Bring](carrier:bring): its own 18-digit numbers also start `370` or `373`. |
+| `RR482917367NO` | Bring: postal numbers ending `NO`. |
 
 The last digit of such a number is a check digit. Helthjem's search also takes its 17-digit shipment number, with or without `401` in front.
 
@@ -79,11 +79,11 @@ Helthjem's own site, helthjem.no, has a help and contact page. When four days pa
 
 ## Tracking a Helthjem parcel with Peek
 
-[Peek](/) names Helthjem at once from 18 digits starting `37072476`, or the same with `00` in front, when the check digit fits. Other numbers starting `370` or `373` can be Bring's: Peek asks Bring and any other carrier the shape fits. Helthjem's 17-digit shipment numbers and its other 20-digit barcodes need "Change", or a link to the parcel on Helthjem's tracking page.
+[Peek](/) names Helthjem at once from 18 digits starting `37072476`, or the same with `00` in front, when the check digit fits. Other 18-digit numbers starting `370` or `373` can be Bring's: when their GS1 check digit is valid, Peek asks Bring, with Matkahuolto for `373`; if several carriers know the parcel, you choose. Helthjem's 17-digit shipment numbers and its other 20-digit barcodes need "Change", or a link to the parcel on Helthjem's tracking page.
 
 Peek shows the status, each scan's place (including sorter scans Helthjem's page hides), the time it was delivered, the shop that sent it and the pickup point's name while it waits or once collected. When Helthjem relabels a parcel for a pickup point, Peek also shows the new label's number. Statuses stay in Helthjem's Norwegian, and scan times match Helthjem's. When Helthjem books the night round, Peek shows the date in `Planlagt levering natt til …` as the expected day. It leaves out the expected day Helthjem's page shows, the point's address, the photo and postcodes.
 
-When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. While PostNord has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" instead. Peek checks up to every 10 minutes, or every 2 on delivery day (from 6 a.m. local time, once Helthjem scans the parcel out for delivery, while Helthjem's or PostNord's own tracker answers; through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Helthjem for you.
+When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. While PostNord has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" instead. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. Oslo time on the day Helthjem (or PostNord after the hand-over) scans the parcel out for delivery, while that carrier's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days at "Label created" with nothing new. Peek can notify you when the status changes. It can't contact Helthjem for you.
 
 ## Questions about Helthjem tracking
 

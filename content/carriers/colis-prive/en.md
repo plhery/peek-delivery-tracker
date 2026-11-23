@@ -16,9 +16,9 @@ The number is 12 letters and digits:
 
 | Shape | Invented example |
 | --- | --- |
-| Two letters, ten digits | `AB1234567890` |
-| One letter, eleven digits | `A12345678901` |
-| Twelve digits | `987654321098` |
+| Two letters, ten digits | `KL4829173648` |
+| One letter, eleven digits | `K48291736482` |
+| Twelve digits | `847291736482` |
 
 The tracking also asks for the delivery postcode; a number it doesn't recognise sends you back to the empty form. Twelve digits alone also fit [FedEx](carrier:fedex), Mondial Relay, [BRT](carrier:brt) and others, `CC` plus ten digits points to Relais Colis and `FR` plus ten digits to Amazon Logistics. Check which carrier your email names, or see [tracking number formats](guide:tracking-number-formats). Colis Privé Store orders have an order number (the order reference) that usually starts with HS or 2R, and they're tracked only on colisprive-store.com with that reference.
 
@@ -62,18 +62,18 @@ Nothing moving for days? See [why tracking stops updating](guide:tracking-not-up
 
 ## Colis Privé customer service number and contact
 
-As listed on 9 October 2026:
+As listed on Colis Privé's pages:
 
-- **France:** 0 806 000 250 (free service plus the price of a call), Monday to Friday 9am to 7pm and Saturday 9am to 1pm, per the French page. There's no email address; claims go through the tracking page.
+- **France:** 0 806 000 250 (free service plus the price of a call), Monday to Friday 9am to 7pm and Saturday 9am to 1pm French time, per the French page. There's no email address; claims go through the tracking page.
 - **Belgium and Luxembourg:** no incoming phone line. colisprive.be gives two email addresses: suividecolis@colisprive.com on its English contact page, opvolgenvanpakketten@colisprive.com on its Dutch pages. Send your name, postcode and parcel number; email claims can take 4 to 7 days.
 
 > Colis Privé says it never asks you to pay to track a parcel, to give bank details by email or text or to call a premium-rate number. In France, you can forward a suspicious text to 33700.
 
 ## Tracking a Colis Privé parcel with Peek
 
-[Peek](/) needs the 12-character number and the delivery postcode. Type the number and choose Colis Privé as the carrier: a field appears for the postcode, five digits in France, four in Belgium, or L and four digits in Luxembourg. Or type the number followed by its postcode: `AB1234567890 75001` (France), `AB1234567890 B1000` (Belgium) or `AB1234567890 L1234` (Luxembourg), all invented. Keep the B or L, and Peek finds Colis Privé by itself. Links from colisprive.com or colisprive.fr can be pasted too.
+[Peek](/) needs the 12-character number and the delivery postcode. Type the number and choose Colis Privé as the carrier: a field appears for the postcode, five digits in France, four in Belgium, or L and four digits in Luxembourg. Or type the number followed by its postcode: `KL4829173648 75001` (France), `KL4829173648 B1000` (Belgium) or `KL4829173648 L1234` (Luxembourg), all invented. Keep the B or L, and Peek finds Colis Privé by itself. Links from colisprive.com or colisprive.fr can be pasted too.
 
-It checks up to every 10 minutes. Colis Privé's scans carry a date but no time, so the faster checks of a parcel out for delivery, up to every 2 minutes, run only on the day of the round, from 6 a.m. French time, while Colis Privé's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery, and leaves out the recipient's name and address. Peek can't file a claim or contact Colis Privé for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes. Colis Privé's scans carry a date but no time, so the faster checks of a parcel out for delivery, up to every 2 minutes, run only on the day of the round, from 6 a.m. French time, while Colis Privé's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days at "Label created" with nothing new. Peek can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery and, only to you, the recipient's name (under "Recipient"). Peek can't file a claim or contact Colis Privé for you.
 
 ## Questions about Colis Privé tracking
 

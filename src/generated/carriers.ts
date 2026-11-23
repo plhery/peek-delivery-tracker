@@ -3020,6 +3020,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e73547"
     },
     {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "z-leading-sendungsverfolgung",
+      "title": "Z-Leading (Zhongling) Tracking: Nummern, Lieferung, Hilfe",
+      "name": "Z-Leading",
+      "color": "#005ab0"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-sendungsverfolgung",
@@ -4862,6 +4870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e73547"
     },
     {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "suivi-z-leading",
+      "title": "Suivi Z-Leading (Zhongling)\u00a0: numéros, livraison et aide",
+      "name": "Z-Leading",
+      "color": "#005ab0"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-suivi",
@@ -6688,6 +6704,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e73547"
     },
     {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "tracciamento-z-leading",
+      "title": "Tracciamento Z-Leading (Zhongling): numeri, consegna, aiuto",
+      "name": "Z-Leading",
+      "color": "#005ab0"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-tracking",
@@ -8498,6 +8522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e73547"
     },
     {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "seguimiento-z-leading",
+      "title": "Seguimiento Z-Leading (Zhongling): números, entrega y ayuda",
+      "name": "Z-Leading",
+      "color": "#005ab0"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-seguimiento",
@@ -10298,6 +10330,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Techlink: números ZHPHD…ML, estados e entrega",
       "name": "Techlink",
       "color": "#e73547"
+    },
+    {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "seguimento-z-leading",
+      "title": "Seguimento Z-Leading (Zhongling): números, entrega, ajuda",
+      "name": "Z-Leading",
+      "color": "#005ab0"
     },
     {
       "id": "imile",
@@ -12142,6 +12182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Techlink: numery ZHPHD…ML, statusy i dostawa",
       "name": "Techlink",
       "color": "#e73547"
+    },
+    {
+      "id": "z-leading",
+      "catalog": "z-leading",
+      "slug": "sledzenie-z-leading",
+      "title": "Śledzenie Z-Leading (Zhongling): numery, dostawa i pomoc",
+      "name": "Z-Leading",
+      "color": "#005ab0"
     },
     {
       "id": "imile",

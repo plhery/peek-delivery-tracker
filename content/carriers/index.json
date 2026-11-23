@@ -138,7 +138,7 @@
   { "id": "china-post", "catalog": "china-post", "name": "China Post", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "ru"] },
   { "id": "fedex-pl", "catalog": "fedex-pl", "name": "FedEx Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
   { "id": "techlink", "catalog": "techlink", "name": "Techlink", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
-  { "id": "z-leading", "catalog": "z-leading", "name": "Z-Leading", "languages": ["en"] },
+  { "id": "z-leading", "catalog": "z-leading", "name": "Z-Leading", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "imile", "catalog": "imile", "name": "iMile", "languages": ["en", "es", "it", "de", "fr", "pt", "pl"] },
   { "id": "postnl", "catalog": "spring-gds", "name": "PostNL", "languages": ["en", "nl", "it", "pl", "es", "fr", "de", "pt"] },
   { "id": "dhlink", "catalog": "dhlink", "name": "DHLink", "languages": ["en", "fr", "pt", "de", "es", "it", "pl"] },

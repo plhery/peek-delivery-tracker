@@ -14618,6 +14618,30 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1928dc"
     },
     {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "cdek-otslezhivanie",
+      "title": "Отслеживание СДЭК (CDEK): номер заказа, статусы и ПВЗ",
+      "name": "CDEK",
+      "color": "#00b33c"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "ozon-otslezhivanie",
+      "title": "Отслеживание Ozon: трек-номер заказа и статусы доставки",
+      "name": "Ozon",
+      "color": "#005bff"
+    },
+    {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "dobropost-otslezhivanie",
+      "title": "Отслеживание DobroPost: трек DBRPST, статусы и ПВЗ",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "otslezhivanie-5post",
@@ -14952,6 +14976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "spara-paket-citymail",
+      "title": "Spåra paket med CityMail: BCM-nummer, statusar och ombud",
+      "name": "CityMail",
+      "color": "#fc4c02"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "early-bird-sparning",
@@ -15222,6 +15254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "urmarire-colet-dpd-romania",
+      "title": "Urmărire colet DPD România: AWB, statusuri și Smart Control",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "posta-romana",
       "catalog": "posta-romana",
       "slug": "urmarire-colet-posta-romana",
@@ -15270,6 +15310,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка Еконт — номера, офиси и Еконтомат",
       "name": "Econt",
       "color": "#234182"
+    },
+    {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "prosledyavane-eushipments",
+      "title": "Проследяване на euShipments: статуси, куриери и контакт",
+      "name": "euShipments",
+      "color": "#0a8fcf"
     },
     {
       "id": "gzyl",

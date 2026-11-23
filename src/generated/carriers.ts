@@ -3084,6 +3084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec0307"
     },
     {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "quick-rabbit-sendungsverfolgung",
+      "title": "Quick Rabbit Sendungsverfolgung: PKG-Code, Status, Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "huaya-express-sendungsverfolgung",
@@ -4766,6 +4774,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec0307"
     },
     {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "suivi-quick-rabbit",
+      "title": "Suivi Quick Rabbit\u00a0: codes PKG, statuts et Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "suivi-huaya-express",
@@ -6414,6 +6430,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Yilong Logistics: codici YIL…WL e stati",
       "name": "Yilong Logistics",
       "color": "#ec0307"
+    },
+    {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "tracciamento-quick-rabbit",
+      "title": "Tracciamento Quick Rabbit: codici PKG, stati e Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
     },
     {
       "id": "huaya-express",
@@ -9684,6 +9708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec0307"
     },
     {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "seguimento-quick-rabbit",
+      "title": "Seguimento Quick Rabbit: códigos PKG, estados e Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
       "id": "huaya-express",
       "catalog": "huaya-express",
       "slug": "seguimento-huaya-express",
@@ -11358,6 +11390,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Yilong Logistics: numery YIL…WL i statusy",
       "name": "Yilong Logistics",
       "color": "#ec0307"
+    },
+    {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "sledzenie-quick-rabbit",
+      "title": "Śledzenie Quick Rabbit: kody PKG, statusy i Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
     },
     {
       "id": "huaya-express",

@@ -2332,6 +2332,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "dhl-ecommerce-polen-sendungsverfolgung",
+      "title": "DHL eCommerce Polen Sendungsverfolgung: Status & Abholung",
+      "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-uk",
       "catalog": "dhl-ecommerce-uk",
       "slug": "dhl-ecommerce-uk-sendungsverfolgung",
@@ -4027,6 +4035,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "suivi-dhl-ecommerce-iberia",
       "title": "Suivi DHL eCommerce Iberia\u00a0: statuts et ServicePoints",
       "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
+    },
+    {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "suivi-dhl-ecommerce-pologne",
+      "title": "Suivi DHL eCommerce Pologne\u00a0: statuts, retrait et aide",
+      "name": "DHL eCommerce Poland",
       "color": "#ffcc00"
     },
     {
@@ -5744,6 +5760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "tracciamento-dhl-ecommerce-polonia",
+      "title": "Tracciamento DHL eCommerce Polonia: stati, ritiro e aiuto",
+      "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-uk",
       "catalog": "dhl-ecommerce-uk",
       "slug": "tracciamento-dhl-ecommerce-uk",
@@ -7410,6 +7434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "seguimiento-dhl-ecommerce-polonia",
+      "title": "Seguimiento DHL eCommerce Polonia: estados y recogida",
+      "name": "DHL eCommerce Poland",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl-ecommerce-uk",
       "catalog": "dhl-ecommerce-uk",
       "slug": "seguimiento-dhl-ecommerce-uk",
@@ -9073,6 +9105,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "dhl-ecommerce-iberia-rastreio",
       "title": "DHL eCommerce Iberia rastreio: estados e ServicePoints",
       "name": "DHL eCommerce Iberia",
+      "color": "#ffcc00"
+    },
+    {
+      "id": "dhl-ecommerce-pl",
+      "catalog": "dhl-ecommerce-pl",
+      "slug": "seguimento-dhl-ecommerce-polonia",
+      "title": "Seguimento DHL eCommerce Polónia: estados e recolha",
+      "name": "DHL eCommerce Poland",
       "color": "#ffcc00"
     },
     {

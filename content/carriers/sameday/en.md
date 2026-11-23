@@ -6,18 +6,18 @@ published: 2026-10-13
 updated: 2026-11-17
 ---
 
-Sameday is a Romanian courier, also in Bulgaria, with its own easybox parcel lockers. Track a parcel with its AWB, the number in Sameday's SMS, email and SAMEDAY App, under "Check AWB" on sameday.ro or sameday.bg, or by pasting it in the box above.
+Sameday is a Romanian courier, also in Bulgaria, with its own easybox parcel lockers. Track a parcel with its AWB, the number in Sameday's SMS, email and SAMEDAY App, on sameday.ro's tracking page or under "Check AWB" on sameday.bg, or by pasting it in the box above.
 
 ## Sameday AWB: your tracking number
 
 Sameday calls the tracking number the AWB: 5 to 50 letters and digits, in the SAMEDAY App, Sameday's email or SMS, and usually the shop's shipping email. These examples are invented:
 
-| Shape (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `1ABC123456789` | An AWB: `1`, three to five letters and 9 to 12 digits. |
-| `1ABC123456789001` | A parcel number: the AWB plus 3 digits. Track the AWB without them. |
+| `1AWB482917364` | An AWB: `1`, three to five letters and 9 to 12 digits. |
+| `1AWB482917364001` | A parcel number: the AWB plus 3 digits. Track the AWB without them. |
 
-The SAMEDAY App lists every AWB linked to the phone number you registered with; orders placed with another number don't appear. Some 17-character AWBs look like [Colis Privé](carrier:colis-prive) numbers, and some 16-character ones like [Royal Mail](carrier:royal-mail)'s, so check which carrier the shop's email names.
+The SAMEDAY App lists every AWB linked to the phone number you registered with; orders placed with another number don't appear. Some 17-character AWBs, such as `1ABCD482917364058`, look like [Colis Privé](carrier:colis-prive) numbers, and some 16-character ones like [Royal Mail](carrier:royal-mail)'s, so check which carrier the shop's email names.
 
 ## What Sameday's tracking statuses mean
 
@@ -32,12 +32,10 @@ Sameday's trackers open in Romanian, Hungarian or Bulgarian, with a switch to En
 | `The parcel has arrived at the local agency and will be prepared for delivery.` | At the depot that delivers your area. |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY App, email or SMS.` | Out for delivery, to your door or to an easybox. |
 | `The parcel has arrived at the delivery point. Pickup details are available in the SAMEDAY App, email or SMS.` | Ready for pickup in an easybox or SAMEDAY point. |
-| `We could not deliver the parcel. We will be back with details or another attempt.` | A missed delivery. |
 | `The parcel was redirected. As soon as it is in the courier's possession, it will be processed as requested.` | Someone asked to send it to a pickup point instead. |
 | `The parcel has been successfully delivered.` | Delivered, including when you took it out of an easybox. |
-| `The parcel will be returned as requested. For more details, please contact the sender.` | It's going back to the sender. |
 
-"The courier will deliver the parcel soon" also appears when the courier is heading to an easybox, not your door. The pickup PIN or QR code is never on the tracking page, only in the app, email or SMS. A redirection line can appear before Sameday has the parcel. And after a return line, "successfully delivered" means the parcel reached the sender.
+"The courier will deliver the parcel soon" also appears when the courier is heading to an easybox, not your door. The pickup PIN or QR code is never on the tracking page, only in the app, email or SMS. A missed delivery and a return to the sender have lines of their own, which Peek files under "Delivery attempted" and "Returned to sender". A redirection line can appear before Sameday has the parcel. And after a return line, "successfully delivered" means the parcel reached the sender.
 
 ## Easybox, SAMEDAY points and missed deliveries
 
@@ -67,13 +65,19 @@ Sameday's channels:
 - **Bulgaria:** 0700 16 226, Monday to Friday, 9:00 to 17:00, charged at your plan's rate for 0700 numbers, plus a contact form.
 - **Hungary**, where Sameday no longer operates: a contact form only. Sameday's banner sends eMAG customers to eMAG.
 
-> Sameday says it never asks for payment by SMS or on social media. You pay only the shop in advance, in the SAMEDAY App, or the courier or easybox on delivery, and only messages from sameday.ro or sdy.ro are its own.
+> Sameday says it never asks for payment by SMS or on social media. You pay only the shop in advance, in the SAMEDAY App, or the courier or easybox on delivery.
 
 ## Tracking a Sameday parcel with Peek
 
-[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian network, then its Bulgarian one, whether they know it: you'll see "Sameday has this parcel." or "Not found at Sameday yet". Some 17-character AWBs are also asked of Colis Privé; some 16-character ones are tried at Royal Mail only if Sameday doesn't confirm them. A parcel number is offered to Sameday when its AWB has 9 digits; otherwise pick "Sameday" with "Change". Either way Sameday answers with its AWB, shown as "Sameday tracks this as". A sameday.ro or sameday.bg tracking link with the AWB in it works too.
+[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian network, then its Bulgarian one, whether they know it: you'll see "Sameday has this parcel." or "not found yet · Peek keeps checking". Some 17-character AWBs are also asked of Colis Privé; some 16-character ones are tried at Royal Mail only if Sameday doesn't confirm them. A parcel number is offered to Sameday when its AWB has 9 digits; otherwise pick "Sameday" with "Change". Either way Sameday answers with its AWB, shown as "Sameday tracks this as". A sameday.ro or sameday.bg tracking link with the AWB in it works too.
 
-Peek shows the status, the history with each scan's county and country on a map, and the delivery time, in Sameday's English wordings. There's no expected delivery day and no easybox or point name. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Sameday scans the parcel out for delivery, while Sameday's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend easybox storage or send you a PIN.
+Peek shows the status, the history with each scan's county and country on a map, and the delivery time, in Sameday's English wordings. There's no expected delivery day and no easybox or point name.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Sameday scans it out for delivery, from 6 a.m. Romanian and Bulgarian time, every 2 minutes while Sameday's own tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". If Sameday's tracker doesn't answer and Peek has to go through tracking services, it checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Sameday.", with a "Get help from Sameday" link to sameday.ro's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Sameday."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't extend easybox storage or send you a PIN.
 
 ## Questions about Sameday tracking
 
@@ -94,8 +98,9 @@ Yes, if the order used your phone number: the SAMEDAY App lists its AWBs. Otherw
 In Bulgaria, written claims go to claims@sameday.bg. In Romania, Sameday uses the contact form on sameday.ro and SAMY instead.
 
 :::sources
-- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – phone, hours, SAMY, form, AWB 5–50 characters, official domains
-- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – Check AWB, app AWBs, cancelling, Temu and Shein
+- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – phone, hours, SAMY, form, AWB 5–50 characters
+- [Sameday: SAMY](https://sameday.ro/samy/?lang=en) – virtual assistant, around the clock
+- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – app AWBs, cancelling, Temu and Shein
 - [Sameday: Livrare în easybox](https://sameday.ro/intrebari-frecvente/livrare-in-easybox/) – easybox storage, extension, 12-hour link, PIN problems
 - [Sameday: FAQ Sameday App](https://sameday.ro/intrebari-frecvente/sameday-app/) – delivery options, postponing, live courier, 4,700 easyboxes
 - [Sameday: SAMEDAY point](https://sameday.ro/intrebari-frecvente/sameday-point/) – 36 working hours, card only, pickups
@@ -113,6 +118,5 @@ In Bulgaria, written claims go to claims@sameday.bg. In Romania, Sameday uses th
 - [Sameday: Sameday App (Bulgaria)](https://sameday.bg/sameday-app/) – 800 easyboxes
 - [Sameday: Home (Hungary)](https://sameday.hu/) – closure from 23 July 2026
 - [Sameday: Contact (Hungary)](https://sameday.hu/contact/?lang=en) – form only
-- [Sameday: Tracker script](https://sameday.hu/app/themes/samedaytwo/public/js/modules/awb/tracker.js) – status titles and sentences
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Sameday's status sentences, what Peek reads
 :::

@@ -70,7 +70,7 @@ Os termos da DAI Post acrescentam que, se não estiveres presente, a encomenda p
 
 ## Seguimento DAI Post parado, encomenda perdida ou devolvida
 
-**Sem novidades há dias.** A DAI Post regista encomendas apenas em pontos-chave e lembra que continuam em movimento entre eles. Em envios interestaduais ou regionais pode parecer parada vários dias. Após quatro dias sem novidades, o Peek assinala-a («Sem atualizações há quatro dias»). Vê [porque o seguimento para de atualizar](guide:tracking-not-updating).
+**Sem novidades há dias.** A DAI Post regista encomendas apenas em pontos-chave e lembra que continuam em movimento entre eles. Em envios interestaduais ou regionais pode parecer parada vários dias. Se a encomenda ficar quatro dias sem uma linha nova em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde …» com o dia dessa linha e uma ligação «Pede ajuda a DAI Post». Vê [porque o seguimento para de atualizar](guide:tracking-not-updating).
 
 **Ainda «Etiqueta criada».** A DAI Post ainda não recebeu a encomenda. Se permanecer assim durante dias, pergunta à loja se já a enviou.
 
@@ -90,14 +90,14 @@ Canais de contacto da DAI Post:
 
 O [Peek](/) segue uma encomenda DAI Post apenas com o número: sem conta nem código postal.
 
-- **Um número `NZC`.** O Peek identifica logo a DAI Post («Transportadora detetada»).
+- **Um número `NZC`.** O Peek identifica logo a DAI Post («Transportadora detetada»). Se, dois dias depois da primeira resposta, a DAI Post continuar sem conhecer o número, o Peek pede-te que o verifiques, escolhas outra transportadora ou apagues a encomenda.
 - **Um número de 20 dígitos começado por `0039358094`.** Cola-o na mesma: o Peek acompanha mais de 4 500 transportadoras. Enquanto verifica vês «A verificar serviços de seguimento…», e a DAI Post está entre as primeiras consultadas. Se a DAI Post a tiver, o Peek mostra-a. Se ainda não, a encomenda indica «À espera do primeiro registo de DAI Post» e o cartão diz «Provavelmente DAI Post»; após uma semana, o Peek sugere confirmar o número com o remetente. Para escolher DAI Post manualmente, toca em «Alterar»: surge em «Corresponde a este número».
 - **Qualquer outro número.** Cola-o na mesma, toca em «Alterar» e escolhe DAI Post (pesquisa DAI Post ou Parcel Right). Numa encomenda já adicionada, usa «Alterar transportadora».
 - **Uma ligação.** Cola uma ligação de seguimento de daipost.com, parcelright.com.au ou parcelrig.ht: o Peek extrai o número e identifica logo a DAI Post.
 
 O Peek mostra o estado, cada linha nas palavras da DAI Post, a cidade e país de cada registo, a data prevista de entrega quando a DAI Post a fornece e a hora da entrega. Não mostra ponto de recolha, nome de serviço, peso nem prova de entrega. «Abrir o site de DAI Post» abre o número no seguimento oficial. No código do Peek, algumas encomendas da [Asendia](carrier:asendia), e algumas da [ePost Global](carrier:epost-global) para a Nova Zelândia, chegam à DAI Post: o seu seguimento inclui os registos dela.
 
-O Peek verifica até de 10 em 10 minutos, ou de 2 em 2 a partir das 6h locais no dia em que a DAI Post regista a encomenda em distribuição. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Alertas: «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». O Peek não pode contactar a DAI Post nem a loja por ti.
+Enquanto a encomenda está aberta no Peek, ou no dia da entrega com as notificações ativas, o Peek verifica-a até de 10 em 10 minutos, e de 2 em 2 a partir das 6h locais no dia em que a DAI Post regista a encomenda em distribuição. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e de 6 em 6 horas após sete dias sem novidades em «Etiqueta criada». As notificações podem seguir «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a DAI Post nem a loja por ti.
 
 ## Perguntas sobre o seguimento DAI Post
 

@@ -70,7 +70,7 @@ Warunki DAI Post dodają, że w razie nieobecności paczka może zostać zostawi
 
 ## Śledzenie DAI Post stoi, paczka zaginiona lub zwrócona
 
-**Brak nowego wpisu od kilku dni.** DAI Post skanuje paczki tylko w kluczowych punktach i zaznacza, że pomiędzy skanami przesyłka nadal się przemieszcza. W transporcie międzystanowym lub regionalnym może wyglądać na nieruchomą przez kilka dni. Po czterech dniach bez nowości Peek ją oznacza („Brak aktualizacji od czterech dni”). Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+**Brak nowego wpisu od kilku dni.** DAI Post skanuje paczki tylko w kluczowych punktach i zaznacza, że pomiędzy skanami przesyłka nadal się przemieszcza. W transporcie międzystanowym lub regionalnym może wyglądać na nieruchomą przez kilka dni. Gdy paczka przez cztery dni nie ma nowej linii przy „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek pokazuje „Brak aktualizacji od …” z dniem tej linii i link „Poproś przewoźnika DAI Post o pomoc”. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 **Wciąż „Zarejestrowana”.** DAI Post jeszcze nie ma paczki. Jeśli trwa to kilka dni, zapytaj sklep, czy faktycznie ją wysłał.
 
@@ -90,14 +90,14 @@ Kanały kontaktu DAI Post:
 
 [Peek](/) śledzi paczkę DAI Post po samym numerze: bez konta i bez kodu pocztowego.
 
-- **Numer `NZC`.** Peek natychmiast rozpoznaje DAI Post („Wykryty przewoźnik”).
+- **Numer `NZC`.** Peek natychmiast rozpoznaje DAI Post („Wykryty przewoźnik”). Jeśli dwa dni po pierwszej odpowiedzi DAI Post nadal nie zna numeru, Peek poprosi cię o jego sprawdzenie, wybór innego przewoźnika albo usunięcie paczki.
 - **20-cyfrowy numer zaczynający się od `0039358094`.** Wklej go mimo to: Peek obsługuje ponad 4 500 przewoźników. Podczas sprawdzania zobaczysz „Sprawdzanie usług śledzenia…”, a DAI Post należy do pierwszych pytanych. Jeśli ma paczkę, Peek ją wskaże; jeśli jeszcze nie, paczka pokaże „Oczekiwanie na pierwszy skan przewoźnika DAI Post”, a karta „Prawdopodobnie DAI Post”; po tygodniu Peek zasugeruje sprawdzenie numeru u nadawcy. Aby wybrać DAI Post ręcznie, kliknij „Zmień”: widnieje w „Pasują do numeru”.
 - **Każdy inny numer.** Wklej go mimo to, kliknij „Zmień” i wybierz DAI Post (wyszukaj DAI Post lub Parcel Right). Na już dodanej paczce użyj „Zmień przewoźnika”.
 - **Link.** Wklej link śledzenia z daipost.com, parcelright.com.au albo parcelrig.ht: Peek wyodrębni numer i od razu wskaże DAI Post.
 
 Peek wyświetla status, każdy wpis w brzmieniu DAI Post, miejscowość i kraj każdego skanu, przewidywaną datę dostawy (gdy DAI Post ją podaje) oraz godzinę doręczenia. Nie pokazuje punktu odbioru, nazwy usługi, wagi ani potwierdzenia doręczenia. „Otwórz stronę przewoźnika DAI Post” otwiera numer w oficjalnym śledzeniu. W kodzie Peek część paczek [Asendia](carrier:asendia) oraz część paczek [ePost Global](carrier:epost-global) do Nowej Zelandii trafia do DAI Post, więc ich śledzenie zawiera jego skany.
 
-Peek sprawdza paczkę nawet co 10 minut, a co 2 minuty od 6:00 czasu lokalnego w dniu, gdy DAI Post zeskanuje ją w doręczeniu. Po dwóch dniach bez zmian (12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Powiadomienia: „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Peek nie może skontaktować się za ciebie z DAI Post ani ze sklepem.
+Gdy paczka jest otwarta w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a co 2 minuty od 6:00 czasu lokalnego w dniu, gdy DAI Post zeskanuje ją w doręczeniu. Po dwóch dniach bez zmian (12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez zmian przy „Zarejestrowana” co 6 godzin. Powiadomienia mogą obejmować „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z DAI Post ani ze sklepem.
 
 ## Pytania o śledzenie DAI Post
 

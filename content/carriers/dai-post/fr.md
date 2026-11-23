@@ -70,7 +70,7 @@ Les conditions de DAI Post précisent qu’en ton absence le colis peut être la
 
 ## Suivi DAI Post bloqué, colis perdu ou retourné
 
-**Aucune nouvelle ligne depuis des jours.** DAI Post ne scanne les colis qu’aux étapes clés et précise que le colis continue d’avancer entre deux scans. Sur les trajets entre États ou vers les régions, il peut sembler immobile plusieurs jours. Après quatre jours sans nouvelle, Peek le signale (« Aucune mise à jour depuis quatre jours »). Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
+**Aucune nouvelle ligne depuis des jours.** DAI Post ne scanne les colis qu’aux étapes clés et précise que le colis continue d’avancer entre deux scans. Sur les trajets entre États ou vers les régions, il peut sembler immobile plusieurs jours. Si le colis reste quatre jours sans nouvelle ligne sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis … » avec le jour de cette ligne et un lien « Demande de l’aide à DAI Post ». Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
 
 **Toujours sur « Étiquette créée ».** DAI Post n’a pas encore le colis. Si cela dure plusieurs jours, demande à la boutique s’il a bien été expédié.
 
@@ -90,14 +90,14 @@ Canaux de contact de DAI Post :
 
 [Peek](/) suit un colis DAI Post avec le numéro seul, sans compte ni code postal.
 
-- **Un numéro `NZC`.** Peek nomme DAI Post aussitôt (« Transporteur détecté »).
+- **Un numéro `NZC`.** Peek nomme DAI Post aussitôt (« Transporteur détecté »). Si DAI Post ne connaît toujours pas le numéro deux jours après sa première réponse, Peek te demande de le vérifier, de choisir un autre transporteur ou de supprimer le colis.
 - **Un numéro à 20 chiffres commençant par `0039358094`.** Colle-le tout de même : Peek suit plus de 4 500 transporteurs. Pendant la vérification, il affiche « Vérification des services de suivi… », et DAI Post figure parmi les premiers interrogés. Si DAI Post a le colis, Peek le nomme. Sinon, la carte affiche « Probablement DAI Post » et « En attente du premier scan de DAI Post » ; après une semaine, Peek suggère de vérifier le numéro auprès de l’expéditeur. Pour choisir DAI Post manuellement, appuie sur « Changer » : il figure sous « Correspond à ce numéro ».
 - **Tout autre numéro.** Colle-le quand même, puis appuie sur « Changer » et choisis DAI Post (cherche DAI Post ou Parcel Right). Sur un colis déjà ajouté, utilise « Changer de transporteur ».
 - **Un lien.** Colle un lien de suivi de daipost.com, parcelright.com.au ou parcelrig.ht : Peek extrait le numéro et nomme DAI Post immédiatement.
 
 Peek affiche le statut, chaque ligne dans les mots de DAI Post, la ville et le pays de chaque scan, la date de livraison prévue lorsque DAI Post en fournit une, ainsi que l’heure de livraison. Il n’affiche pas de point de retrait, de nom de service, de poids ni de preuve de livraison. « Ouvrir le site DAI Post » ouvre ton numéro sur le suivi officiel. Dans le code de Peek, certains colis [Asendia](carrier:asendia), ainsi que certains colis [ePost Global](carrier:epost-global) vers la Nouvelle-Zélande, passent par DAI Post : leur suivi affiche ses scans.
 
-Peek vérifie le colis jusqu’à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h heure locale le jour où DAI Post le scanne en livraison. Après deux jours sans nouvelle (12 heures tant qu’il reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie chaque heure. Alertes disponibles : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Peek ne peut contacter ni DAI Post ni la boutique à ta place.
+Tant que le colis est ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek le vérifie jusqu’à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h heure locale le jour où DAI Post le scanne en livraison. Après deux jours sans nouvelle (12 heures tant qu’il reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie chaque heure, puis toutes les 6 heures après sept jours sans nouvelle sur « Étiquette créée ». Les notifications peuvent suivre « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni DAI Post ni la boutique à ta place.
 
 ## Questions sur le suivi DAI Post
 

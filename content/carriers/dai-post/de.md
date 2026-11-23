@@ -70,7 +70,7 @@ In den Bedingungen von DAI Post steht zudem, dass das Paket bei Abwesenheit an e
 
 ## DAI Post Tracking aktualisiert nicht, verloren oder zurückgesandt
 
-**Tagelang keine neue Zeile.** DAI Post scannt Pakete nur an Schlüsselpunkten und betont, dass Sendungen dazwischen weiterlaufen. Bei Sendungen zwischen Bundesstaaten oder in Regionen kann das Tracking tagelang stehen. Nach vier Tagen ohne Neuigkeiten markiert Peek es („Seit vier Tagen keine Aktualisierung“). Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+**Tagelang keine neue Zeile.** DAI Post scannt Pakete nur an Schlüsselpunkten und betont, dass Sendungen dazwischen weiterlaufen. Bei Sendungen zwischen Bundesstaaten oder in Regionen kann das Tracking tagelang stehen. Bleibt das Paket vier Tage ohne neue Zeile bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“ mit dem Tag dieser Zeile und einen Link „Hol dir Hilfe bei DAI Post“. Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 **Weiterhin „Etikett erstellt“.** DAI Post hat das Paket noch nicht. Bleibt das tagelang so, frag beim Shop nach, ob wirklich verschickt wurde.
 
@@ -90,14 +90,14 @@ Die Kontaktkanäle von DAI Post:
 
 [Peek](/) verfolgt ein DAI-Post-Paket allein mit der Nummer – ohne Konto und ohne Postleitzahl.
 
-- **Eine `NZC`-Nummer.** Peek erkennt DAI Post sofort („Erkannter Paketdienst“).
+- **Eine `NZC`-Nummer.** Peek erkennt DAI Post sofort („Erkannter Paketdienst“). Kennt DAI Post die Nummer zwei Tage nach seiner ersten Antwort noch nicht, bittet Peek dich, sie zu prüfen, einen anderen Paketdienst zu wählen oder das Paket zu löschen.
 - **Eine 20-stellige Nummer ab `0039358094`.** Füge sie trotzdem ein: Peek unterstützt mehr als 4.500 Paketdienste. Während der Prüfung steht dort „Tracking-Dienste werden geprüft…“, und DAI Post gehört zu den ersten angefragten Diensten. Hat DAI Post das Paket, nennt Peek ihn. Falls noch nicht, zeigt das Paket „Warten auf den ersten Scan von DAI Post“ und die Karte „Wahrscheinlich DAI Post“; nach einer Woche schlägt Peek vor, die Nummer beim Absender zu prüfen. Zum manuellen Auswählen tippe auf „Ändern“: DAI Post steht unter „Passt zu dieser Nummer“.
 - **Jede andere Nummer.** Füge sie ein, tippe auf „Ändern“ und wähle DAI Post (suche nach DAI Post oder Parcel Right). Bei einem bereits gespeicherten Paket nutze „Paketdienst ändern“.
 - **Ein Link.** Füge einen Tracking-Link von daipost.com, parcelright.com.au oder parcelrig.ht ein: Peek übernimmt die Nummer und wählt sofort DAI Post.
 
 Peek zeigt Status, jede Zeile im Wortlaut von DAI Post, Ort und Land jedes Scans, das voraussichtliche Lieferdatum (falls DAI Post eines nennt) und die Zustellzeit. Es zeigt keinen Abholpunkt, keinen Servicenamen, kein Gewicht und keinen Zustellnachweis. „Website von DAI Post öffnen“ öffnet die Nummer direkt im DAI-Post-Tracking. In Peeks Code laufen manche [Asendia](carrier:asendia)-Pakete und manche [ePost Global](carrier:epost-global)-Pakete nach Neuseeland über DAI Post: deren Tracking zeigt dann die DAI-Post-Scans.
 
-Peek prüft bis zu alle 10 Minuten, oder alle 2 Minuten ab 6 Uhr Ortszeit an dem Tag, an dem DAI Post das Paket in Zustellung scannt. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Benachrichtigungen: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Peek kann weder DAI Post noch den Shop für dich kontaktieren.
+Solange das Paket in Peek geöffnet ist, oder an seinem Zustelltag mit aktivierten Benachrichtigungen, prüft Peek es bis zu alle 10 Minuten, und alle 2 Minuten ab 6 Uhr Ortszeit an dem Tag, an dem DAI Post das Paket in Zustellung scannt. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen können „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ folgen. Peek kann weder DAI Post noch den Shop für dich kontaktieren.
 
 ## Fragen zur DAI Post Sendungsverfolgung
 

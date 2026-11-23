@@ -70,7 +70,7 @@ Le condizioni di DAI Post aggiungono che, se sei assente, il pacco può essere l
 
 ## Tracciamento DAI Post fermo, pacco smarrito o restituito
 
-**Nessuna nuova riga da giorni.** DAI Post scansiona solo nei punti chiave e ricorda che il pacco continua a spostarsi tra una scansione e l’altra. Su tratte interstatali o regionali può sembrare fermo per giorni. Dopo quattro giorni senza novità, Peek lo segnala («Nessun aggiornamento da quattro giorni»). Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
+**Nessuna nuova riga da giorni.** DAI Post scansiona solo nei punti chiave e ricorda che il pacco continua a spostarsi tra una scansione e l’altra. Su tratte interstatali o regionali può sembrare fermo per giorni. Se il pacco resta quattro giorni senza una nuova riga su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …» con il giorno di quella riga e un link «Chiedi aiuto a DAI Post». Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 **Ancora «Etichetta creata».** DAI Post non ha ancora ricevuto il pacco. Se resta così per giorni, chiedi al negozio se l’ha effettivamente spedito.
 
@@ -90,14 +90,14 @@ Canali di contatto di DAI Post:
 
 [Peek](/) segue un pacco DAI Post con il solo numero: senza account né CAP.
 
-- **Un numero `NZC`.** Peek indica subito DAI Post («Corriere rilevato»).
+- **Un numero `NZC`.** Peek indica subito DAI Post («Corriere rilevato»). Se due giorni dopo la sua prima risposta DAI Post non conosce ancora il numero, Peek ti chiede di controllarlo, scegliere un altro corriere o eliminare il pacco.
 - **Un numero di 20 cifre che inizia con `0039358094`.** Incollalo comunque: Peek segue oltre 4.500 corrieri. Mentre verifica vedi «Verifica dei servizi di tracciamento…», e DAI Post è tra i primi interrogati. Se DAI Post ce l’ha, Peek lo indica; se non ancora, il pacco mostra «In attesa della prima scansione di DAI Post» e la scheda dice «Probabilmente DAI Post», e dopo una settimana Peek suggerisce di verificare il numero con il mittente. Per selezionare DAI Post manualmente tocca «Cambia»: lo trovi in «Compatibili con questo numero».
 - **Qualsiasi altro numero.** Incollalo comunque, tocca «Cambia» e scegli DAI Post (cerca DAI Post o Parcel Right). Su un pacco già aggiunto usa «Cambia corriere».
 - **Un link.** Incolla un link di tracciamento da daipost.com, parcelright.com.au o parcelrig.ht: Peek estrae il numero e imposta subito DAI Post.
 
 Peek mostra stato, ogni riga nelle parole di DAI Post, città e Paese di ciascuna scansione, data di consegna prevista quando DAI Post la indica e orario di consegna. Non mostra punto di ritiro, nome servizio, peso né prova di consegna. «Apri il sito DAI Post» apre il numero sul tracciamento ufficiale. Nel codice di Peek, alcuni pacchi [Asendia](carrier:asendia), e alcuni pacchi [ePost Global](carrier:epost-global) diretti in Nuova Zelanda, arrivano a DAI Post: il loro tracciamento include le sue scansioni.
 
-Peek controlla fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 ora locale nel giorno in cui DAI Post registra il pacco in consegna. Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Notifiche: «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Peek non può contattare DAI Post né il negozio per te.
+Finché il pacco è aperto in Peek, o nel giorno della consegna con le notifiche attive, Peek lo controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 ora locale nel giorno in cui DAI Post registra il pacco in consegna. Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Le notifiche possono seguire «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare DAI Post né il negozio per te.
 
 ## Domande sul tracciamento DAI Post
 

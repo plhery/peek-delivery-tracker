@@ -34068,6 +34068,27 @@
     ]
   },
   {
+    "input": "2387595308",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "2389015477",
     "carrier": "unknown",
     "confidence": "low",
@@ -42851,7 +42872,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -43224,7 +43246,8 @@
       "dhl-ecommerce-es",
       "dhl-freight",
       "dpd-ie",
-      "geniki-taxydromiki"
+      "geniki-taxydromiki",
+      "gls-hu"
     ],
     "preferred": [
       "dhl-express"
@@ -43258,7 +43281,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -43357,7 +43381,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -43441,7 +43466,8 @@
       "dhl-ecommerce-es",
       "dhl-freight",
       "dpd-ie",
-      "geniki-taxydromiki"
+      "geniki-taxydromiki",
+      "gls-hu"
     ],
     "preferred": [
       "dhl-express"
@@ -43467,7 +43493,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -43491,7 +43518,8 @@
       "dhl-ecommerce-es",
       "dhl-freight",
       "dpd-ie",
-      "geniki-taxydromiki"
+      "geniki-taxydromiki",
+      "gls-hu"
     ],
     "preferred": [
       "dhl-express"
@@ -43536,7 +43564,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -43557,7 +43586,8 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
-      "dpd-ie"
+      "dpd-ie",
+      "gls-hu"
     ],
     "asked": [
       "packeta",
@@ -72595,6 +72625,14 @@
     ]
   },
   {
+    "input": "814449681",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "81459151",
     "carrier": "unknown",
     "confidence": "low",
@@ -87536,6 +87574,21 @@
     ]
   },
   {
+    "input": "CDM132108761",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt-au"
+    ],
+    "asked": [
+      "colis-prive",
+      "tnt-au",
+      "purolator"
+    ]
+  },
+  {
     "input": "CE00047947",
     "carrier": "unknown",
     "confidence": "low",
@@ -92388,6 +92441,18 @@
     ]
   },
   {
+    "input": "ED100265337PA",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "correos-panama",
+      "chronopost"
+    ]
+  },
+  {
     "input": "ED307210090IN",
     "carrier": "india-post",
     "confidence": "high",
@@ -92982,6 +93047,7 @@
       "intl-post"
     ],
     "asked": [
+      "correos-panama",
       "chronopost"
     ]
   },
@@ -104379,6 +104445,17 @@
     ]
   },
   {
+    "input": "MGRAE8000000046YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "meest"
+    ],
+    "asked": [
+      "meest"
+    ]
+  },
+  {
     "input": "MGT00125027683",
     "carrier": "unknown",
     "confidence": "none",
@@ -108749,13 +108826,10 @@
   },
   {
     "input": "PNA5937988669",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "postnet-za",
+    "confidence": "high",
     "candidates": [
-      "magyar-posta"
-    ],
-    "preferred": [
-      "magyar-posta"
+      "postnet-za"
     ]
   },
   {
@@ -108870,9 +108944,19 @@
   },
   {
     "input": "PPA78181363215",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "postnet-za",
+    "confidence": "high",
+    "candidates": [
+      "postnet-za"
+    ]
+  },
+  {
+    "input": "PPA81910065407",
+    "carrier": "postnet-za",
+    "confidence": "high",
+    "candidates": [
+      "postnet-za"
+    ]
   },
   {
     "input": "PQ0DK20000034530151002K",
@@ -110728,6 +110812,18 @@
     ]
   },
   {
+    "input": "RE4F7P1H-362320-99847414",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "RE4H7Z2K-314050-74642170",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "RE924000013UY",
     "carrier": "intl-post",
     "confidence": "high",
@@ -111554,6 +111650,14 @@
     ]
   },
   {
+    "input": "RN219954910MY",
+    "carrier": "pos-malaysia",
+    "confidence": "high",
+    "candidates": [
+      "pos-malaysia"
+    ]
+  },
+  {
     "input": "RN700062106IT",
     "carrier": "poste-italiane",
     "confidence": "high",
@@ -112012,6 +112116,17 @@
   },
   {
     "input": "RR010457475AZ",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RR014310824JM",
     "carrier": "intl-post",
     "confidence": "high",
     "candidates": [
@@ -119670,6 +119785,17 @@
     ],
     "asked": [
       "la-poste"
+    ]
+  },
+  {
+    "input": "WR01-5028292620001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive"
+    ],
+    "asked": [
+      "colis-prive"
     ]
   },
   {

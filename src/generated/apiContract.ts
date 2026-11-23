@@ -8000,6 +8000,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^ANS\\d{13}UA$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^MGR[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://t.meest-group.com/n/"
@@ -16228,7 +16232,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "courier-it"
     },
     "trackingUrlTemplate": "https://intellitrack.courierit.co.za/?SearchString={trackingNumber}",
     "linkRules": [
@@ -21966,7 +21970,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Jamaica",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jamaica-post"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -23077,9 +23081,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "gel-express"
     },
-    "trackingUrlTemplate": "https://www.gel-express.de/sendungsverfolgung/?snr={trackingNumber}",
+    "trackingUrlTemplate": "https://www.gel-express.de/de/sendungsverfolgung/?snr={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -38683,7 +38687,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Asuncion",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "correo-paraguayo"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -59295,7 +59299,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Panama",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "correos-panama",
+      "recognitionRank": 641
     },
     "trackingUrlTemplate": "https://operaciones.correospanama.gob.pa/IPSWebTracking/IPSWeb_item_events.aspx?itemid={trackingNumber}",
     "linkRules": [
@@ -59309,7 +59314,14 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{2}\\d{9}PA$",
+        "confidence": "low",
+        "checksum": "s10",
+        "preferred": true
+      }
+    ],
     "trackingSearchUrl": "https://operaciones.correospanama.gob.pa/IPSWebTracking/",
     "helpUrl": "https://www.correospanama.gob.pa/preguntas-frecuentes/"
   },
@@ -59705,9 +59717,19 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Caracas",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "liberty-express"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "iqpack.libertyexpress.com"
+        ],
+        "pathPattern": "^/Tracking$",
+        "params": [
+          "nGuia"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://iqpack.libertyexpress.com/SearchGuide",
     "helpUrl": "https://libertyexpress.com/es-us/contacto/"
@@ -60658,7 +60680,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "postnet-za",
+      "recognitionRank": 642
     },
     "trackingUrlTemplate": "https://www.postnet.co.za/tracker?pnpp={trackingNumber}",
     "linkRules": [
@@ -60673,7 +60696,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^(?:PNA\\d{10}|PPA\\d{11})$",
+        "confidence": "high"
+      }
+    ],
     "trackingSearchUrl": "https://www.postnet.co.za/tracker",
     "helpUrl": "https://www.postnet.co.za/contact-postnet"
   },
@@ -64112,7 +64140,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Budapest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "gls-hu"
+      "adapter": "gls-hu",
+      "recognitionRank": 607
     },
     "trackingUrlTemplate": "https://gls-group.com/HU/hu/csomagkovetes/?match={trackingNumber}",
     "linkRules": [
@@ -64129,7 +64158,13 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^3[34]\\d{8}$",
+        "confidence": "low",
+        "lastResort": true
+      }
+    ],
     "trackingSearchUrl": "https://gls-group.com/HU/hu/csomagkovetes/",
     "helpUrl": "https://gls-group.com/HU/hu/kapcsolat/"
   },

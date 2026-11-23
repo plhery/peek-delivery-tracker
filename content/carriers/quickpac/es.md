@@ -54,7 +54,7 @@ Quickpac solo reparte en Suiza, en áreas postales seleccionadas. La rapidez dep
 
 **Ausencia.** Existen dos juegos de reglas publicados y ninguna página aclara cuál rige en cada envío, así que sigue la tarjeta o mensaje que recibas:
 
-- **Tarjeta «Abholinformationen» de Quickpac:** indica un punto de recogida cercano disponible desde el siguiente día laborable. Quickpac indica una custodia de 14 días antes de devolver el envío al remitente, mostrando el código de recogida de la tarjeta o del seguimiento. Algunos paquetes van a Coop Pick-up, que avisa por SMS o correo y devuelve los pedidos tras 7 días.
+- **Tarjeta «Abholinformationen» de Quickpac:** indica un punto de recogida cercano disponible desde el siguiente día laborable. Según Quickpac, el paquete espera allí 14 días y después vuelve al remitente. Para recogerlo, muestra el código de recogida de la tarjeta o del seguimiento. Algunos paquetes van a Coop Pick-up, que avisa por SMS o correo y devuelve los pedidos tras 7 días.
 - **Tarjeta de entrega de Planzer Paket:** trae un código para su portal de destinatarios donde puedes fijar otro día, indicar un lugar seguro o ver en qué Planzer Parcel shop está el paquete. El punto suele guardarlo 7 días: lleva el código de recogida y tu documento de identidad. Algunos son taquillas abiertas 24 horas. El remitente puede restringir estas opciones.
 
 Los paquetes transferidos a Swiss Post tienen otro intento de entrega y después esperan en la oficina postal.
@@ -89,13 +89,13 @@ No se puede llamar directamente al repartidor, y ninguna página confirma si el 
 
 [Peek](/) reconoce al instante un código de 18 dígitos que empieza por `44` como Quickpac y lo consulta en el portal de Planzer; también funciona un enlace de quickpac.ch o tracking.app.planzer.ch. Muestra el estado, el historial, la entrega estimada, el peso, las dimensiones, la hora de entrega y el país de destino, y omite la dirección del destinatario. `Shipped` se traduce correctamente como entregado.
 
-Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos — y cada 2 minutos a partir de las 6:00 (hora suiza) el día en que sale a reparto, mientras responda el seguimiento de Planzer. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora, y cada 6 horas tras siete días en «Etiqueta creada». Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha), «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Quickpac.» y el enlace «Pide ayuda a Quickpac». Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con Quickpac por ti.
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos — y cada 2 minutos a partir de las 6:00 (hora suiza) el día en que sale a reparto, mientras responda el seguimiento de Planzer. Si no, consulta cada hora. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora aunque lo tengas abierto, y cada 6 horas tras siete días en «Etiqueta creada». Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha), «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Quickpac.» y el enlace «Pide ayuda a Quickpac». Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con Quickpac por ti.
 
 ## Preguntas sobre el seguimiento de Quickpac
 
 ### ¿Es lo mismo el ID de seguimiento Quickpac que el número de paquete?
 
-Sí. Rastras un envío Quickpac con su número de paquete de 18 dígitos, que Quickpac llama también número de envío y el portal de Planzer «Shipment Number».
+Sí. Rastreas un envío Quickpac con su número de paquete de 18 dígitos, que Quickpac llama también número de envío y el portal de Planzer «Shipment Number».
 
 ### ¿Tiene Quickpac seguimiento en vivo?
 

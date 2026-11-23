@@ -14732,6 +14732,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL track & trace: pakket volgen met een YL…YQ-nummer",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "dpd-belgie-volgen",
+      "title": "DPD België volgen — pakketnummer, Pickup en bezorging",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     }
   ],
   "sv": [
@@ -14774,6 +14782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra paket med TopYou: TYZR-nummer, statusar och leverans",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "early-bird-sparning",
+      "title": "Early Bird spårning — nattleverans, paketskåp och hjälp",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     }
   ],
   "da": [
@@ -14826,6 +14842,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Posten- og Bring-sporing: nummer, status og hentefrister",
       "name": "Bring",
       "color": "#56b529"
+    },
+    {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "helthjem-sporing",
+      "title": "Helthjem sporing — sporingsnummer, statuser og hentested",
+      "name": "Helthjem",
+      "color": "#ffb202"
     }
   ],
   "fi": [
@@ -14988,6 +15012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet Packeta: numărul Z, statusuri și Z-BOX",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "urmarire-colet-sameday",
+      "title": "Urmărire colet Sameday — AWB, easybox, statusuri și contact",
+      "name": "Sameday",
+      "color": "#e92427"
     },
     {
       "id": "cargus",
@@ -15316,6 +15348,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Нова пошта відстеження: номер ЕН, статуси, зберігання",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "vidstezhennya-ukrposhta",
+      "title": "Відстеження Укрпошта — трек-номери, статуси та митниця",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
     },
     {
       "id": "nova-global",

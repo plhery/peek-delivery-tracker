@@ -24,7 +24,7 @@ El correo de Foxpost dirigido a ti y al remitente termina con el ID del paquete.
 
 ## Qué significan los estados de seguimiento de Foxpost
 
-El rastreador de Foxpost muestra cada etapa con un título breve, fecha, hora y una frase. La web está en húngaro; si cambias a inglés en el menú verás los mismos pasos en inglés, por ejemplo `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. Las frases húngaras en orden habitual:
+El rastreador de Foxpost muestra cada etapa con un título breve, fecha, hora y una frase. La web está en húngaro, y su menú ofrece también inglés. Las frases húngaras en orden habitual:
 
 | Estado de Foxpost | Qué significa para ti |
 | --- | --- |
@@ -46,7 +46,7 @@ Lee la frase, no solo el título: «Automatában» (en taquilla) cubre tanto el 
 
 **Plazo de custodia.** Foxpost guarda el paquete en taquilla 5 días naturales, incluidos fines de semana y festivos; la fecha límite exacta al minuto figura en el mensaje y no se puede prorrogar. Si la taquilla falla, se amplía automáticamente. En un Z-Pont las condiciones fijan 7 días, o 5 del 1 de octubre al 20 de enero (la página de recogida indica 7 todo el año, así que guíate por la fecha del mensaje), y atención al cliente puede ampliarlo por teléfono. Pasado el plazo vuelve al remitente; si lo compraste en tienda, contacta con ella.
 
-**Contra reembolso.** En A-BOX solo se paga con tarjeta en el terminal. En Z-BOX solo mediante el enlace de los correos de Foxpost, y el código de apertura llega después de pagar. En Z-Pont se admite efectivo o tarjeta.
+**Contra reembolso.** En A-BOX solo se paga con tarjeta en el terminal. En Z-BOX, mediante el enlace de los correos de Foxpost o en la app de Foxpost, y el código de apertura llega después de pagar. En Z-Pont se admite efectivo o tarjeta.
 
 **Taquilla llena o averiada.** Foxpost puede mover el paquete a otra taquilla cercana o a un Z-Pont; puedes aceptar o rechazar en el aviso. Si el código no abre la puerta, empieza de nuevo y luego llama a atención al cliente.
 
@@ -74,9 +74,9 @@ En las páginas de contacto de Foxpost:
 
 ## Seguir paquetes de Foxpost con Peek
 
-[Peek](/) identifica Foxpost al instante con un número `CLFOX`. Con un número de entrega a domicilio empezado por `66639` (de 10 a 20 dígitos), Peek pregunta primero a Foxpost junto a otros transportistas de igual longitud y asigna Foxpost en cuanto lo reconoce; si aún no figura, puedes elegir Foxpost con «Cambiar» o pegar un enlace de foxpost.hu con `code=` (de /csomagkovetes/ o /en/parcel-tracking), que identifica Foxpost sea cual sea el número. Un número `Z` pasa a Packeta.
+[Peek](/) identifica Foxpost al instante con un número `CLFOX`. Con un número de entrega a domicilio empezado por `66639` (de 10 a 20 dígitos), Peek pregunta primero a Foxpost junto a otros transportistas de igual longitud y asigna Foxpost en cuanto lo reconoce. Mientras Foxpost aún no lo conozca, Peek muestra «Probablemente Foxpost» y sigue comprobando. También puedes elegir Foxpost con «Cambiar» o pegar un enlace de foxpost.hu con `code=` (de /csomagkovetes/ o /en/parcel-tracking), que identifica Foxpost sea cual sea el número. Un número `Z` pasa a Packeta.
 
-Peek muestra el historial de Foxpost leyendo sus horarios en hora de Budapest. Los estados permanecen en el húngaro de Foxpost independientemente del idioma en que uses Peek. Puede mostrar el remitente (normalmente la tienda) y la taquilla de destino o espera, y avisarte cuando cambia el estado. No incluye fecha prevista ni peso, y omite el número de pedido y los datos de pago.
+Peek muestra el historial de Foxpost leyendo sus horarios en hora de Budapest. Las líneas del historial permanecen en el húngaro de Foxpost independientemente del idioma en que uses Peek; el estado del paquete aparece en tu idioma, por ejemplo «Listo para recoger». Puede mostrar el remitente (normalmente la tienda) y la taquilla de destino o espera, y avisarte cuando cambia el estado. No incluye fecha prevista ni peso, y omite el número de pedido y los datos de pago.
 
 ## Preguntas sobre el seguimiento de Foxpost
 
@@ -98,7 +98,7 @@ Foxpost indica que de taquilla a taquilla puede tardar tan solo un día laborabl
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formatos, números Z enviados a Packeta, estados, campos del rastreador
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – cambio a inglés, textos ingleses
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – el rastreador en inglés, desde el menú
 - [Foxpost: Home](https://foxpost.hu/) – taquillas y entrega a domicilio, formatos, Packeta Group
 - [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – dónde está el número, app, fusión, sin envíos al extranjero, tiempos, reembolso, taquillas llenas, paquetes DPD
 - [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – códigos, 5 días de custodia, Z-Pont, reembolso, intentos a domicilio

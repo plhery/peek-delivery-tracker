@@ -24,7 +24,7 @@ Non trovi nulla? Chiedi al negozio e leggi [dove trovare il numero di tracking](
 
 ## Significato degli stati di tracking Foxpost
 
-Il tracking Foxpost mostra ogni tappa con un titolo breve, data, ora e una frase. Il sito è in ungherese; passando all'inglese dal menu compaiono gli stessi passaggi in inglese, come `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. Le frasi ungheresi nell'ordine abituale:
+Il tracking Foxpost mostra ogni tappa con un titolo breve, data, ora e una frase. Il sito è in ungherese, e il suo menu offre anche l'inglese. Le frasi ungheresi nell'ordine abituale:
 
 | Stato Foxpost | Cosa vuol dire per te |
 | --- | --- |
@@ -46,7 +46,7 @@ Leggi la frase, non solo il titolo: «Automatában» (nel locker) copre sia il d
 
 **Tempi di giacenza.** In un locker il pacco resta 5 giorni di calendario, inclusi fine settimana e festivi; la scadenza esatta al minuto è nel messaggio e non è prorogabile. In caso di guasto del locker si proroga in automatico. Presso uno Z-Pont le condizioni prevedono 7 giorni, o 5 dal 1° ottobre al 20 gennaio (la pagina ritiro indica 7 tutto l'anno, quindi segui la data nel messaggio), e l'assistenza può prorogare al telefono. Scaduto il termine torna al mittente; per acquisti in negozio contatta il venditore.
 
-**Contrassegno.** Gli A-BOX accettano solo carta al terminale. Gli Z-BOX si pagano solo tramite il link nelle e-mail Foxpost e il codice di apertura arriva dopo il pagamento. Uno Z-Pont accetta contanti o carta.
+**Contrassegno.** Gli A-BOX accettano solo carta al terminale. Gli Z-BOX si pagano tramite il link nelle e-mail Foxpost o nell'app Foxpost, e il codice di apertura arriva dopo il pagamento. Uno Z-Pont accetta contanti o carta.
 
 **Locker pieno o guasto.** Foxpost può spostare il pacco in un locker vicino o uno Z-Pont; puoi accettare o rifiutare nell'avviso. Se il codice non apre lo sportello, ripeti l'operazione e poi chiama l'assistenza.
 
@@ -74,9 +74,9 @@ Sulle pagine contatti di Foxpost:
 
 ## Tracciare pacchi Foxpost con Peek
 
-[Peek](/) identifica subito Foxpost per un numero `CLFOX`. Per un numero di consegna a domicilio che inizia con `66639` (10–20 cifre), Peek interroga prima Foxpost insieme ad altri corrieri di pari lunghezza e mostra Foxpost appena lo riconosce; se non è ancora elencato, scegli Foxpost con «Cambia» oppure incolla un link foxpost.hu con `code=` (da /csomagkovetes/ o /en/parcel-tracking), che individua Foxpost qualunque sia il codice. Un numero `Z` passa a Packeta.
+[Peek](/) identifica subito Foxpost per un numero `CLFOX`. Per un numero di consegna a domicilio che inizia con `66639` (10–20 cifre), Peek interroga prima Foxpost insieme ad altri corrieri di pari lunghezza e mostra Foxpost appena lo riconosce. Finché Foxpost non lo conosce, Peek mostra «Probabilmente Foxpost» e continua a controllare. Puoi anche scegliere Foxpost con «Cambia» oppure incollare un link foxpost.hu con `code=` (da /csomagkovetes/ o /en/parcel-tracking), che individua Foxpost qualunque sia il codice. Un numero `Z` passa a Packeta.
 
-Peek riporta la cronologia di Foxpost leggendo gli orari in ora di Budapest. Gli stati restano nell'ungherese di Foxpost in qualunque lingua usi Peek. Può mostrare il mittente (di solito il negozio) e il locker verso cui il pacco è diretto o in cui attende, e avvisarti a ogni cambio di stato. Mancano data prevista e peso, e restano esclusi numero d'ordine e dettagli di pagamento.
+Peek riporta la cronologia di Foxpost leggendo gli orari in ora di Budapest. Le righe della cronologia restano nell'ungherese di Foxpost in qualunque lingua usi Peek; lo stato del pacco appare nella tua lingua, per esempio «Pronto per il ritiro». Può mostrare il mittente (di solito il negozio) e il locker verso cui il pacco è diretto o in cui attende, e avvisarti a ogni cambio di stato. Mancano data prevista e peso, e restano esclusi numero d'ordine e dettagli di pagamento.
 
 ## Domande sul tracking Foxpost
 
@@ -98,7 +98,7 @@ Foxpost indica che da locker a locker può bastare un giorno lavorativo dal riti
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formati, numeri Z inviati a Packeta, stati, campi del portale
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – cambio in inglese, testi inglesi
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – il tracking in inglese, dal menu
 - [Foxpost: Home](https://foxpost.hu/) – locker e domicilio, formati, Packeta Group
 - [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – dov'è il numero, app, fusione, nessun invio estero, tempi, contrassegno, locker pieni, pacchi DPD
 - [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – codici, giacenza 5 giorni, Z-Pont, contrassegno, tentativi a domicilio

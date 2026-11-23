@@ -24,7 +24,7 @@ Tu ne trouves rien ? Demande au magasin et consulte [où trouver ton numéro de 
 
 ## Signification des statuts de suivi Foxpost
 
-Le suivi de Foxpost affiche chaque étape sous forme d'un court titre, d'une date et heure et d'une phrase. Le site est en hongrois ; en basculant en anglais dans le menu, les mêmes étapes s'affichent en anglais, par exemple `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. Voici les phrases hongroises dans l'ordre habituel :
+Le suivi de Foxpost affiche chaque étape sous forme d'un court titre, d'une date et heure et d'une phrase. Le site est en hongrois, et son menu propose aussi l'anglais. Voici les phrases hongroises dans l'ordre habituel :
 
 | Statut Foxpost | Ce que ça veut dire pour toi |
 | --- | --- |
@@ -46,7 +46,7 @@ Lis la phrase, pas seulement le titre : « Automatában » (dans le casier) couv
 
 **Délai de garde.** Foxpost conserve un colis en casier pendant 5 jours calendaires, week-ends et jours fériés inclus ; l'échéance exacte à la minute près figure dans le message et ne peut pas être prolongée. En cas de panne du casier, elle est prolongée automatiquement. En point Z-Pont, les conditions de Foxpost prévoient 7 jours, ou 5 jours du 1er octobre au 20 janvier (la page retrait indique 7 jours toute l'année : fie-toi donc à la date du message), et le service client peut prolonger par téléphone. Passé le délai, le colis repart chez l'expéditeur : si tu l'as commandé en boutique, contacte le magasin.
 
-**Paiement à la livraison.** Un A-BOX n'accepte que la carte bancaire sur son terminal. Un Z-BOX ne s'acquitte que via le lien dans les e-mails de Foxpost, et le code d'ouverture arrive après paiement. Un Z-Pont accepte espèces ou carte.
+**Paiement à la livraison.** Un A-BOX n'accepte que la carte bancaire sur son terminal. Un Z-BOX se règle via le lien des e-mails de Foxpost ou dans l'app Foxpost, et le code d'ouverture arrive après paiement. Un Z-Pont accepte espèces ou carte.
 
 **Casier plein ou en panne.** Foxpost peut transférer le colis dans un casier voisin ou un Z-Pont ; tu peux accepter ou refuser dans son avis. Si le code n'ouvre pas la porte, recommence puis appelle le service client.
 
@@ -74,9 +74,9 @@ Sur les pages de contact de Foxpost :
 
 ## Suivre un colis Foxpost avec Peek
 
-[Peek](/) identifie Foxpost immédiatement pour un numéro `CLFOX`. Pour un numéro de livraison à domicile commençant par `66639` (10 à 20 chiffres), Peek interroge Foxpost en premier, aux côtés d'autres transporteurs partageant cette longueur, et affiche Foxpost dès qu'il le connaît ; s'il n'est pas encore listé, tu peux choisir Foxpost via « Changer » ou coller un lien foxpost.hu contenant `code=` (depuis /csomagkovetes/ ou /en/parcel-tracking), qui identifie Foxpost quel que soit le numéro. Un numéro commençant par `Z` passe chez Packeta.
+[Peek](/) identifie Foxpost immédiatement pour un numéro `CLFOX`. Pour un numéro de livraison à domicile commençant par `66639` (10 à 20 chiffres), Peek interroge Foxpost en premier, aux côtés d'autres transporteurs partageant cette longueur, et affiche Foxpost dès qu'il le connaît. Tant que Foxpost ne le connaît pas encore, Peek affiche « Probablement Foxpost » et continue de vérifier. Tu peux aussi choisir Foxpost via « Changer » ou coller un lien foxpost.hu contenant `code=` (depuis /csomagkovetes/ ou /en/parcel-tracking), qui identifie Foxpost quel que soit le numéro. Un numéro commençant par `Z` passe chez Packeta.
 
-Peek affiche l'historique propre à Foxpost en lisant ses heures à l'heure de Budapest. Les statuts restent dans le hongrois de Foxpost quelle que soit ta langue dans Peek. Peek peut afficher l'expéditeur (en général le magasin) et le casier vers lequel se dirige ou où attend le colis, et te notifier à chaque changement de statut. Il n'y a ni date prévue ni poids, et le numéro de commande ainsi que les données de paiement sont omis.
+Peek affiche l'historique propre à Foxpost en lisant ses heures à l'heure de Budapest. Les lignes de l'historique restent dans le hongrois de Foxpost quelle que soit ta langue dans Peek ; le statut du colis s'affiche dans ta langue, par exemple « Prêt à être retiré ». Peek peut afficher l'expéditeur (en général le magasin) et le casier vers lequel se dirige ou où attend le colis, et te notifier à chaque changement de statut. Il n'y a ni date prévue ni poids, et le numéro de commande ainsi que les données de paiement sont omis.
 
 ## Questions sur le suivi Foxpost
 
@@ -98,7 +98,7 @@ Foxpost indique que de casier à casier cela peut prendre un seul jour ouvré ap
 
 :::sources
 - [Foxpost : Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formats de numéro, renvoi des numéros Z vers Packeta, statuts, champs du suivi
-- [Foxpost : Track your parcel](https://foxpost.hu/en/parcel-tracking) – bascule en anglais, libellés anglais
+- [Foxpost : Track your parcel](https://foxpost.hu/en/parcel-tracking) – le suivi en anglais, via le menu
 - [Foxpost : Home](https://foxpost.hu/) – casiers et livraison à domicile, formats de numéro, Packeta Group
 - [Foxpost : Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – où trouver le numéro, application, fusion, pas d'envoi à l'étranger, délais, contre-remboursement, casiers pleins, colis DPD
 - [Foxpost : Csomagátvétel](https://foxpost.hu/csomagatvetel) – codes, garde 5 jours, Z-Pont, paiement à la livraison, tentatives à domicile

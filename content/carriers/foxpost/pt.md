@@ -24,7 +24,7 @@ Não encontras nada? Pergunta à loja e vê [como encontrar o teu número de seg
 
 ## O que significam os estados de seguimento da Foxpost
 
-O seguimento da Foxpost apresenta cada etapa com um título curto, data, hora e uma frase. O site está em húngaro; mudando para inglês no menu aparecem as mesmas etapas em inglês, como `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. As frases húngaras por ordem habitual:
+O seguimento da Foxpost apresenta cada etapa com um título curto, data, hora e uma frase. O site está em húngaro, e o menu oferece também inglês. As frases húngaras por ordem habitual:
 
 | Estado Foxpost | O que significa para ti |
 | --- | --- |
@@ -46,7 +46,7 @@ Lê a frase e não só o título: «Automatában» (no cacifo) aplica-se tanto a
 
 **Tempo de guarda.** A Foxpost guarda a encomenda no cacifo durante 5 dias de calendário, incluindo fins de semana e feriados; o prazo exato ao minuto vem na mensagem e não pode ser prolongado. Um cacifo avariado prolonga o prazo automaticamente. Num Z-Pont os termos indicam 7 dias, ou 5 dias de 1 de outubro a 20 de janeiro (a página de levantamento refere 7 dias todo o ano, pelo que deves seguir a data da mensagem), e o apoio ao cliente pode prolongar por telefone. Findo o prazo volta ao remetente; numa compra em loja contacta a loja.
 
-**Pagamento contra entrega.** Um A-BOX aceita apenas cartão no terminal. Um Z-BOX paga-se só pela ligação nos e-mails da Foxpost, chegando o código de abertura após o pagamento. Um Z-Pont aceita dinheiro ou cartão.
+**Pagamento contra entrega.** Um A-BOX aceita apenas cartão no terminal. Um Z-BOX paga-se pela ligação nos e-mails da Foxpost ou na app da Foxpost, chegando o código de abertura após o pagamento. Um Z-Pont aceita dinheiro ou cartão.
 
 **Cacifo cheio ou avariado.** A Foxpost pode colocar a encomenda noutro cacifo próximo ou num Z-Pont; podes aceitar ou recusar no aviso. Se o código não abrir a porta, recomeça e depois liga ao apoio ao cliente.
 
@@ -74,9 +74,9 @@ Nas páginas de contacto da Foxpost:
 
 ## Seguir encomendas da Foxpost com o Peek
 
-O [Peek](/) identifica logo a Foxpost para números `CLFOX`. Para um número de entrega ao domicílio começado por `66639` (10 a 20 dígitos), o Peek consulta primeiro a Foxpost junto de outras transportadoras do mesmo comprimento e seleciona Foxpost assim que a reconhecer; se ainda não constar, escolhe Foxpost com «Alterar» ou cola uma ligação de foxpost.hu com `code=` (de /csomagkovetes/ ou /en/parcel-tracking), que identifica a Foxpost qualquer que seja o número. Números `Z` seguem para a Packeta.
+O [Peek](/) identifica logo a Foxpost para números `CLFOX`. Para um número de entrega ao domicílio começado por `66639` (10 a 20 dígitos), o Peek consulta primeiro a Foxpost junto de outras transportadoras do mesmo comprimento e seleciona Foxpost assim que a reconhecer. Enquanto a Foxpost ainda não o conhecer, o Peek mostra «Provavelmente Foxpost» e continua a verificar. Também podes escolher Foxpost com «Alterar» ou colar uma ligação de foxpost.hu com `code=` (de /csomagkovetes/ ou /en/parcel-tracking), que identifica a Foxpost qualquer que seja o número. Números `Z` seguem para a Packeta.
 
-O Peek mostra o histórico próprio da Foxpost lendo as horas na hora de Budapeste. Os estados ficam no húngaro da Foxpost seja qual for a língua em que usas o Peek. Mostra o remetente (em geral a loja) e o cacifo de destino ou espera, e pode notificar-te quando o estado muda. Não há data prevista nem peso, e número de pedido e dados de pagamento ficam de fora.
+O Peek mostra o histórico próprio da Foxpost lendo as horas na hora de Budapeste. As linhas do histórico ficam no húngaro da Foxpost seja qual for a língua em que usas o Peek; o estado da encomenda aparece na tua língua, por exemplo «Pronta para levantamento». Mostra o remetente (em geral a loja) e o cacifo de destino ou espera, e pode notificar-te quando o estado muda. Não há data prevista nem peso, e número de pedido e dados de pagamento ficam de fora.
 
 ## Perguntas sobre o seguimento da Foxpost
 
@@ -98,7 +98,7 @@ A Foxpost indica que de cacifo para cacifo pode demorar apenas um dia útil apó
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formatos, números Z encaminhados para a Packeta, estados, campos
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – opção em inglês, textos ingleses
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – o seguimento em inglês, pelo menu
 - [Foxpost: Home](https://foxpost.hu/) – cacifos e domicílio, formatos, Packeta Group
 - [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – onde está o número, app, fusão, sem envio internacional, prazos, contra entrega, cacifos cheios, encomendas DPD
 - [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – códigos, guarda de 5 dias, Z-Pont, contra entrega, tentativas ao domicílio

@@ -24,7 +24,7 @@ Nic nie znajdujesz? Zapytaj sklep i zobacz [jak znaleźć numer śledzenia](guid
 
 ## Znaczenie statusów śledzenia Foxpost
 
-Śledzenie Foxpost wyświetla każdy etap jako krótki tytuł, datę z godziną oraz zdanie. Strona jest po węgiersku; przełączenie języka w menu na angielski pokazuje te same etapy po angielsku, np. `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. Węgierskie zdania w typowej kolejności:
+Śledzenie Foxpost wyświetla każdy etap jako krótki tytuł, datę z godziną oraz zdanie. Strona jest po węgiersku, a jej menu oferuje też angielski. Węgierskie zdania w typowej kolejności:
 
 | Status Foxpost | Co to oznacza dla ciebie |
 | --- | --- |
@@ -46,7 +46,7 @@ Czytaj zdanie, a nie sam tytuł: „Automatában” (w automacie) obejmuje zaró
 
 **Czas przechowywania.** W automacie paczka czeka 5 dni kalendarzowych z weekendami i świętami włącznie; dokładny termin co do minuty widnieje w powiadomieniu i nie da się go przedłużyć. Awaria automatu przedłuża go automatycznie. W Z-Pont regulamin daje 7 dni, a od 1 października do 20 stycznia 5 dni (strona odbioru podaje 7 dni cały rok, więc kieruj się datą z wiadomości), z możliwością telefonicznego przedłużenia przez obsługę. Po terminie paczka wraca do nadawcy; przy zakupie w sklepie skontaktuj się ze sklepem.
 
-**Pobranie.** Automat A-BOX przyjmuje wyłącznie kartę w terminalu. W Z-BOX zapłacisz wyłącznie przez link w e-mailach od Foxpost, a kod otwarcia przychodzi po opłaceniu. W Z-Pont zapłacisz gotówką lub kartą.
+**Pobranie.** Automat A-BOX przyjmuje wyłącznie kartę w terminalu. W Z-BOX zapłacisz przez link w e-mailach od Foxpost lub w aplikacji Foxpost, a kod otwarcia przychodzi po opłaceniu. W Z-Pont zapłacisz gotówką lub kartą.
 
 **Pełny lub zepsuty automat.** Foxpost może przenieść przesyłkę do pobliskiego automatu lub Z-Pont; w powiadomieniu możesz zaakceptować lub odmówić. Jeśli kod nie otwiera skrytki, zacznij od nowa, a potem zadzwoń na infolinię.
 
@@ -74,9 +74,9 @@ Na stronach kontaktowych Foxpost:
 
 ## Śledzenie paczek Foxpost w Peek
 
-[Peek](/) od razu rozpoznaje Foxpost po numerze `CLFOX`. Dla numeru doręczenia pod drzwi zaczynającego się od `66639` (10–20 cyfr) Peek pyta najpierw Foxpost obok innych przewoźników tej długości i wybiera Foxpost, gdy ten zna przesyłkę; jeśli jeszcze jej nie widać, wybierz Foxpost przez „Zmień” albo wklej link z foxpost.hu z parametrem `code=` (z /csomagkovetes/ lub /en/parcel-tracking), który od razu wskazuje Foxpost. Numer `Z` trafia do Packeta.
+[Peek](/) od razu rozpoznaje Foxpost po numerze `CLFOX`. Dla numeru doręczenia pod drzwi zaczynającego się od `66639` (10–20 cyfr) Peek pyta najpierw Foxpost obok innych przewoźników tej długości i wybiera Foxpost, gdy ten zna przesyłkę. Dopóki Foxpost jej jeszcze nie zna, Peek pokazuje „Prawdopodobnie Foxpost” i sprawdza dalej. Możesz też wybrać Foxpost przez „Zmień” albo wkleić link z foxpost.hu z parametrem `code=` (z /csomagkovetes/ lub /en/parcel-tracking), który od razu wskazuje Foxpost. Numer `Z` trafia do Packeta.
 
-Peek wyświetla własną historię Foxpost, odczytując godziny w czasie budapeszteńskim. Statusy pozostają w węgierskim brzmieniu Foxpost niezależnie od języka w Peek. Pokazuje nadawcę (zwykle sklep) i automat, do którego zmierza lub w którym czeka paczka, oraz wysyła powiadomienia o zmianach statusu. Brak przewidywanej daty doręczenia i wagi, a numer zamówienia i dane płatności są pomijane.
+Peek wyświetla własną historię Foxpost, odczytując godziny w czasie budapeszteńskim. Wpisy w historii pozostają w węgierskim brzmieniu Foxpost niezależnie od języka w Peek; status paczki Peek pokazuje w twoim języku, np. „Do odbioru”. Pokazuje nadawcę (zwykle sklep) i automat, do którego zmierza lub w którym czeka paczka, oraz wysyła powiadomienia o zmianach statusu. Brak przewidywanej daty doręczenia i wagi, a numer zamówienia i dane płatności są pomijane.
 
 ## Pytania o śledzenie Foxpost
 
@@ -98,7 +98,7 @@ Foxpost podaje, że z automatu do automatu może to być nawet jeden dzień robo
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – formaty numerów, przekierowanie numerów Z do Packeta, statusy, pola systemu
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – przełącznik na angielski, angielskie komunikaty
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – śledzenie po angielsku, przez menu
 - [Foxpost: Home](https://foxpost.hu/) – automaty i doręczenie pod drzwi, formaty, Packeta Group
 - [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – gdzie znaleźć numer, aplikacja, fuzja, brak wysyłki za granicę, czasy, pobranie, pełne automaty, paczki DPD
 - [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – kody, 5 dni przechowywania, Z-Pont, pobranie, próby pod drzwi

@@ -14,8 +14,8 @@ GLS's Austrian tracking takes parcel numbers and Track IDs, several at once if y
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000000` | 11 digits. Also fits [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Poland, PostLogistics and others. |
-| `000000000009` | 12 digits, the last a check digit. Also fits GLS Germany, GLS Switzerland, GLS France, GLS Poland, BRT and others. |
+| `48291736504` | 11 digits. Also fits [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Poland, PostLogistics and others. |
+| `482917365042` | 12 digits, the last a check digit. Also fits GLS Germany, GLS Switzerland, GLS France, GLS Poland, BRT and others. |
 | Track ID | On GLS's notification card. GLS's tracking page takes it; in Peek, use the parcel number. |
 
 If the shop's email names [Austrian Post](carrier:austrian-post) or another carrier, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
@@ -71,9 +71,9 @@ For a refund or a new parcel, the shop is your contact.
 
 ## GLS Austria contact and customer service
 
-Peek can't contact GLS or the shop for you. As read on 31 October 2026:
+Peek can't contact GLS or the shop for you. On GLS Austria's pages:
 
-- **Recipient form:** [GLS Austria's form for recipients](https://gls-group.com/AT/en/contact-form/recipient-request/), customer service Monday to Friday, 8 am to 6 pm. It needs the parcel number or Track ID, your postcode, phone and email.
+- **Recipient form:** [GLS Austria's form for recipients](https://gls-group.com/AT/en/contact-form/recipient-request/), customer service Monday to Friday, 8 am to 6 pm Austrian time. It needs the parcel number or Track ID, your postcode, phone and email.
 - **Phone:** +43 5 9876 3000, in GLS Austria's company details. +43 059876 1000 is the call centre for GLS-ONE, GLS's service for senders. GLS lists no phone line for recipients.
 - **Post:** General Logistics Systems Austria GmbH, Traunuferstraße 105a, 4052 Ansfelden.
 
@@ -83,9 +83,9 @@ Peek can't contact GLS or the shop for you. As read on 31 October 2026:
 
 Paste the number in [Peek](/). Several GLS companies use these shapes, so Peek asks the likely ones and goes by your country (your phone's region, or on the web where you connect from). In Austria you'll usually see "GLS Austria has this parcel." Elsewhere it usually names another GLS company, such as GLS Germany, which asks the same GLS service but needs the postcode: keep it and give the postcode, or press "Change" and pick GLS Austria. If no GLS company knows the number yet, add it anyway or pick GLS Austria from the carrier list: Peek follows more than 4,500 carriers. A pasted gls-group.com link with /AT/ in its path is tracked as GLS Austria.
 
-The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it, as the line under the field says: "GLS Austria shows its scans only with the delivery postcode." Without it, Peek only learns whether GLS knows the number: it asks other tracking services meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries once the postcode you last gave a GLS Austria parcel, or failing that the one on your latest parcel. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". While GLS waits for the postcode, or doesn't find the parcel with yours, and nothing has answered for a day, Peek checks once a day; adding or changing the postcode checks the parcel at once. The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
+The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it, as the line under the field says: "GLS Austria shows its scans only with the delivery postcode." Without it, Peek gets GLS's status but no scans: it asks other tracking services for them meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries once the postcode you last gave a GLS Austria parcel, or failing that the one on your latest parcel. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". While GLS waits for the postcode, or doesn't find the parcel with yours, and nothing has answered for a day, Peek checks once a day; adding or changing the postcode checks the parcel at once. The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
 
-With the postcode, you see the status, each scan's place on a map, the expected day, the weight, the delivery time and, at a Parcel Shop, its name and address. Your name, address, contact details, the signature and the sender's reference are dropped. Peek reads GLS's English service rather than the German page: there, `In Zustellung` reads `In delivery` and `Das Paket wurde erfolgreich zugestellt.` reads `The parcel has been delivered.` A Parcel Shop arrival shows as "Ready for pickup". Times are read as Austrian time. Peek checks GLS about once an hour, delivery day included (4 hours after a failed check), and can notify you of changes.
+With the postcode, you see the status, each scan's place on a map, the expected day, the weight, the delivery time and, at a Parcel Shop, its name and address. Your name, address, contact details, the signature and the sender's reference are dropped. Peek reads GLS's English service rather than the German page: there, `In Zustellung` reads `In delivery` and `Das Paket wurde erfolgreich zugestellt.` reads `The parcel has been delivered.` A Parcel Shop arrival shows as "Ready for pickup". Times are read as Austrian time. Peek checks GLS about once an hour, delivery day included (4 hours after a failed check), and every 6 hours after seven days without news at "Label created". It can notify you of changes. If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from GLS Austria" link.
 
 ## Questions about GLS tracking in Austria
 
@@ -95,7 +95,7 @@ Usually 24 hours within Austria, Monday to Friday, without a guarantee. GLS Aust
 
 ### Does GLS deliver on Saturdays in Austria?
 
-No: Monday to Friday only.
+Not as standard: GLS delivers Monday to Friday. Its terms let a sender book Saturday delivery of an express consignment for a surcharge.
 
 ### How long does GLS keep my parcel?
 
@@ -121,7 +121,7 @@ Not an exact time. You can move delivery to another day, in the same time window
 - [GLS Austria: Recipient request](https://gls-group.com/AT/en/contact-form/recipient-request/) – hours, fields, delivered not received
 - [GLS Austria: Corporate information](https://gls-group.com/AT/en/corporate-information/) – company, address, phone
 - [GLS Austria: Customer information](https://gls-group.com/AT/en/customer-information/) – GLS-ONE call centre
-- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – no Saturdays, no guarantee, two attempts
+- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – working days except Saturdays, no guarantee, two attempts, Saturday for express consignments at a surcharge
 - [GLS Austria: Standard delivery times](https://gls-group.com/AT/en/standard-delivery-time/) – 24 hours, times only from Austria
 - [GLS Austria: Security advice](https://gls-group.com/AT/en/press/gls-informs/security-advice/) – scams, reporting
 - [GLS Austria: Home](https://gls-group.com/AT/de/home/) – 11 depots, Ansfelden

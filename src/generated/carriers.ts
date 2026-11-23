@@ -2436,6 +2436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-sendungsverfolgung",
+      "title": "BOX NOW Sendungsverfolgung: Paketstationen, PIN & Status",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "dhl-ecommerce-netherlands-sendungsverfolgung",
@@ -3884,6 +3892,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Posti\u00a0: code JJFI, statuts, consignes et contact",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "suivi-box-now",
+      "title": "Suivi BOX NOW\u00a0: casiers, codes PIN et statuts",
+      "name": "BOX NOW",
+      "color": "#44d62c"
     },
     {
       "id": "dhl-ecommerce-nl",
@@ -5360,6 +5376,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "tracciamento-box-now",
+      "title": "Tracciamento BOX NOW: locker, codici PIN e stati",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "tracciamento-dhl-ecommerce-netherlands",
@@ -6786,6 +6810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "seguimiento-box-now",
+      "title": "Seguimiento BOX NOW: taquillas, códigos PIN y estados",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
+    {
       "id": "dhl-ecommerce-nl",
       "catalog": "dhl-ecommerce-nl",
       "slug": "seguimiento-dhl-ecommerce-netherlands",
@@ -8202,6 +8234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Posti: código JJFI, estados, cacifos e contactos",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "seguimento-box-now",
+      "title": "Seguimento BOX NOW: cacifos, códigos PIN e estados",
+      "name": "BOX NOW",
+      "color": "#44d62c"
     },
     {
       "id": "dhl-ecommerce-nl",
@@ -9654,6 +9694,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "sledzenie-box-now",
+      "title": "Śledzenie BOX NOW: automaty, kody PIN i statusy",
+      "name": "BOX NOW",
+      "color": "#44d62c"
     },
     {
       "id": "dhl-ecommerce-nl",

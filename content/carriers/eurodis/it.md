@@ -10,7 +10,7 @@ EURODIS è una rete europea per spedizioni combinate di pacchi e pallet (*combi-
 
 ## Numero di tracciamento EURODIS
 
-La pagina Track & Trace di EURODIS offre quattro modalità di ricerca: codice a barre *collo* a 24 caratteri, numero di spedizione EURODIS a 13 cifre, riferimento del mittente (con paese e CAP di destinazione) oppure numero del partner di spedizione (con paese di partenza). Le due forme riconosciute dal codice di Peek (con cifre inventate):
+La pagina Track & Trace di EURODIS offre quattro modalità di ricerca: codice a barre *collo* a 24 caratteri, numero di spedizione EURODIS a 13 cifre, riferimento del mittente (con paese e CAP di destinazione) oppure numero del partner di spedizione (con paese di partenza). Le due forme note al codice di Peek (con cifre inventate):
 
 | Numero (inventato) | Che cos’è |
 | --- | --- |
@@ -63,7 +63,7 @@ In Austria il membro EURODIS è Österreichische Post. Avvisi, punti di ritiro e
 
 La [pagina Track & Trace di EURODIS](https://eurodis.com/track-trace/) mostra i passaggi di pacchi e pallet nella rete e, quando disponibile, il codice del partner locale. In Germania trans-o-flex mette a disposizione anche *trans-o-flex insight*; per l’Austria vedi la nostra pagina [Austrian Post](carrier:austrian-post).
 
-Poiché EURODIS non pubblica un elenco ufficiale di tutte le diciture esatte, consulta la guida [cosa significano gli stati di tracciamento](guide:tracking-statuses) per i passaggi tipici.
+Consulta la guida [cosa significano gli stati di tracciamento](guide:tracking-statuses) per i passaggi tipici.
 
 ## Spedizione EURODIS in ritardo, danneggiata o non consegnata
 
@@ -79,20 +79,20 @@ Poiché EURODIS non pubblica un elenco ufficiale di tutte le diciture esatte, co
 
 ## Contatti e assistenza clienti EURODIS
 
-- **EURODIS.** La [pagina contatti EURODIS](https://eurodis.com/contact/) offre un selettore («Shipment request») per ruolo (mittente o destinatario), paese di partenza e paese di consegna per trovare il recapito del partner locale. Per richieste generali o commerciali scrivi a contact@eurodis.com.
+- **EURODIS.** La [pagina contatti EURODIS](https://eurodis.com/contact/) offre un selettore («Shipment request») per paese di partenza e paese di consegna per trovare il recapito dedicato alla tua spedizione. Per richieste generali o commerciali scrivi a contact@eurodis.com.
 - **Germania: trans-o-flex.** Assistenza destinatari al +49 6201 988 222, dal lunedì al venerdì 7:00–17:00 (ora tedesca), oppure tramite il modulo «[Are you awaiting a consignment?](https://www.trans-o-flex.com/en/contact-persons/are-you-awaiting-a-consignment/)» indicando il numero di spedizione.
 - **Austria: Österreichische Post.** Numero e moduli si trovano sulla nostra pagina [Austrian Post](carrier:austrian-post).
 - **Il mittente.** Con trans-o-flex solo il mittente può cambiare indirizzo, richiedere un secondo tentativo o aprire reclami per danni o perdita.
 
 ## Tracciare una spedizione EURODIS con Peek
 
-**Codice EURODIS.** [Peek](/) non riconosce un numero EURODIS dalla sola forma perché nessun formato è esclusivo. Per 13 o 24 cifre interroga altri corrieri compatibili («Verifica dei servizi di tracciamento…»), ma non EURODIS; se nessuno lo conosce compare «Nessuna cronologia di tracciamento per ora». Per archiviarlo sotto EURODIS premi «Cambia», cerca EURODIS e selezionalo (oppure «Cambia corriere» su un pacco già aggiunto). Un link `eurodis.com/track-trace` con `trackCollo-input-of=` seleziona subito EURODIS come «Corriere rilevato». Peek accetta 13 cifre o 24 lettere e cifre con almeno una cifra; altrimenti segnala che EURODIS «non emette numeri come questo».
+**Codice EURODIS.** [Peek](/) non riconosce un numero EURODIS dalla sola forma perché nessun formato è esclusivo. Per 13 cifre interroga prima FAN Courier, poi servizi di tracciamento («Verifica dei servizi di tracciamento…») e Delhivery, Econt, Ozon e Paquetexpress solo se nessuno conosce il numero; per 24 cifre Austrian Post, InPost e Ciblex, poi servizi di tracciamento ed Express One solo se nessuno lo conosce; mai EURODIS. Se nessuno lo conosce compare «Nessuna cronologia di tracciamento per ora». Per archiviarlo sotto EURODIS premi «Cambia», cerca EURODIS e selezionalo (oppure «Cambia corriere» su un pacco già aggiunto). Un link `eurodis.com/track-trace` con `trackCollo-input-of=` seleziona subito EURODIS come «Corriere rilevato». Peek accetta 13 cifre o 24 lettere e cifre con almeno una cifra; altrimenti segnala che EURODIS «non emette numeri come questo».
 
-**Cosa legge Peek.** Peek legge direttamente la pagina di tracciamento EURODIS e mostra stato, cronologia, località, ora di consegna, paese di destinazione, partner di consegna e relativo codice quando presenti. Scarta numero colli, riferimenti cliente, recapiti, nomi di mittente e destinatario, indirizzo e firmatario; EURODIS non fornisce peso, data prevista né nome del servizio. Gli orari senza fuso orario sono letti sull’ora locale (ora tedesca in Germania) e convertiti nel tuo fuso orario («Orari nel tuo fuso orario:»). Se la pagina EURODIS non risponde temporaneamente, Peek interroga servizi di tracciamento, mostra «In attesa di EURODIS» e dal secondo controllo «Non è ancora stato possibile raggiungere EURODIS. Peek continua a provare.»
+**Cosa legge Peek.** Peek legge direttamente la pagina di tracciamento EURODIS e mostra stato, cronologia, località, ora di consegna e paese di destinazione quando presenti; se EURODIS indica Express One o Austrian Post per la consegna, Peek mostra anche quel membro e il suo numero, passa al suo tracciamento appena mostra una scansione non più vecchia dell’ultima di EURODIS e ne segue il ritmo. Peek non segue gli altri membri. Scarta numero colli, riferimenti cliente, recapiti, nomi di mittente e destinatario, indirizzo e firmatario; EURODIS non fornisce peso, data prevista né nome del servizio. Gli orari senza fuso orario sono letti sull’ora del paese indicato dalla scansione (ora tedesca per la Germania), quelli di una scansione senza luogo sull’ora del paese di destinazione una volta arrivato il pacco, altrimenti su quella di una scansione vicina, e convertiti nel tuo fuso orario («Orari nel tuo fuso orario:»). Se la pagina EURODIS non risponde temporaneamente, Peek interroga servizi di tracciamento; se nessuno ha il numero, mostra «In attesa di EURODIS» e dal secondo controllo «Non è ancora stato possibile raggiungere EURODIS. Peek continua a provare.»
 
 **Codice del partner.** Se il partner locale ti ha dato il proprio codice, aggiungilo direttamente su Peek, che segue oltre 4.500 corrieri tra cui Austrian Post ed Express One. Un link trans-o-flex (`trans-o-flex.com/sendungsverfolgung/tracking` con `ref=`) archivia la spedizione sotto trans-o-flex e interroga servizi di tracciamento.
 
-**Frequenza e notifiche.** Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 secondo l’orologio dell’ultima scansione il giorno in cui entra «In consegna» finché tieni aperto il pacco in Peek o hai le notifiche attive, quando il tracciamento EURODIS risponde. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Per le notifiche puoi scegliere «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Dopo quattro giorni senza scansioni in transito, fuori dalla dogana o da un problema segnalato, Peek mostra «Nessun aggiornamento da …», la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a EURODIS.» e «Chiedi aiuto a EURODIS». Peek non può contattare EURODIS, i suoi partner né il mittente per te.
+**Frequenza e notifiche.** Mentre il pacco è aperto in Peek, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 secondo l’orologio dell’ultima scansione il giorno in cui entra «In consegna», quando il tracciamento EURODIS risponde. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e dopo sette giorni senza novità su «Etichetta creata», ogni 6 ore. Per le notifiche puoi scegliere «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni su un invio in «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …», la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a EURODIS.» e «Chiedi aiuto a EURODIS». Peek non può contattare EURODIS, i suoi partner né il mittente per te.
 
 ## Domande sul tracciamento EURODIS
 
@@ -110,7 +110,7 @@ trans-o-flex, azienda di trasporto espresso e logistica con sede a Weinheim. L�
 
 ### Come contatto EURODIS?
 
-Usa prima il selettore per paese sulla [pagina contatti EURODIS](https://eurodis.com/contact/) per trovare il partner locale. Per richieste generali scrivi a contact@eurodis.com.
+Usa prima il selettore per paese sulla [pagina contatti EURODIS](https://eurodis.com/contact/) per trovare il recapito dedicato alla tua spedizione. Per richieste generali scrivi a contact@eurodis.com.
 
 :::sources
 - [EURODIS: home page](https://eurodis.com/) – rete europea combi-freight in 38 paesi, tracciamento tramite codice a barre da 24 caratteri

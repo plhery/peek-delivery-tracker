@@ -12,11 +12,11 @@ CouriersPlease is an Australian parcel delivery company, part of FMH Group, that
 
 CouriersPlease calls it the consignment number, also known as the tracking number. Its Help Centre says it is usually up to 15 characters, letters and/or numbers, and generally starts with `CP`. The redelivery page allows up to 20 characters. Not every CouriersPlease number starts with `CP`.
 
-| Number (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `CPABC1234123456` | A typical CouriersPlease consignment number: CP, letters, then digits. |
-| `CPA12345000000` | Also a CouriersPlease shape, a shorter one. |
-| `CP000000005AU` | Not CouriersPlease: two letters, nine digits and AU is a postal item number, the kind [Australia Post](carrier:australia-post) uses. |
+| `CPABC4829173640` | A typical CouriersPlease consignment number: CP, letters, then digits. |
+| `CPA48291736405` | Also a CouriersPlease shape, a shorter one. |
+| `CP482917367AU` | Not CouriersPlease: two letters, nine digits and AU is a postal item number, the kind [Australia Post](carrier:australia-post) uses. |
 
 **Where to find it.** Look in the shop's order confirmation email or app. CouriersPlease's own emails always contain it, but are sent only if the sender shared your email address. They come from noreply@couriersplease.com.au, and its texts from the sender name `Courierspls`. A missed-delivery card has a redelivery card number, which the redelivery page also accepts. CouriersPlease can't look a parcel up by name or address. [How to find your tracking number](guide:find-tracking-number) lists more places to look.
 
@@ -44,15 +44,17 @@ These are the Help Centre's wordings, in the order a parcel usually meets them:
 
 `In transit to regional delivery centre` doesn't necessarily mean the parcel has stopped moving, CouriersPlease says. Its tracking page also shows a Delivery ETA with a badge: `On track`, or `Overdue` once that date has passed without delivery.
 
+`Parcel requires further processing` isn't in the Help Centre's list. It can appear days after the parcel arrived at a facility, and Peek shows it as still in transit.
+
 ## Delivery, collection points and redelivery
 
 **Delivery days and times.** CouriersPlease's guide gives 1 to 3 business days from metro to metro, a few extra days across the country, longer for regional or remote areas, and an extra week at peak times like Christmas. All are estimates. You can't pick a delivery time: it depends on the Franchise Partner's route that day.
 
 **When you're not home.** The driver looks for a safe place. If there isn't one, or a signature is needed, the parcel goes to a nearby collection point. Parcels over 10 kg or 100 cm don't go to a collection point: you're asked to arrange a redelivery instead. In regional areas, CouriersPlease says parcels are always left in a safe place.
 
-**Collection points.** CouriersPlease works with HUBBED, which has more than 3,000 collection points across Australia. Find one with the [collection point locator](https://www.couriersplease.com.au/resources/find-a-collection-point). The transfer can take up to 24 hours to confirm, so wait for `Ready for collection`. You need a collection PIN, current photo ID and proof of address. Parcels are generally held for 7 days, then may go back to the sender. If no PIN arrived, request it from [HUBBED](https://hubbed.com/getpin/).
+**Collection points.** CouriersPlease works with HUBBED, which has more than 3,000 collection points across Australia. Find one with the [collection point locator](https://www.couriersplease.com.au/resources/find-a-collection-point). The transfer can take up to 24 hours to confirm, so wait for `Ready for collection`. You need a collection PIN, current photo ID and proof of address. Parcels are generally held for 7 days. The terms of carriage count them from the PIN, then allow 5 more days at the nearest depot before the parcel goes back to the sender. If no PIN arrived, request it from [HUBBED](https://hubbed.com/getpin/).
 
-**Redelivery.** Book it on the [redelivery page](https://www.couriersplease.com.au/book/redelivery) with the consignment or redelivery card number. The link is valid for 6 business days from the attempt, and redelivery usually follows within 1 to 2 business days. You get one redelivery; if that fails, the depot generally holds the parcel up to 6 business days before it may go back. A parcel already sent to a collection point can't be redelivered to your address.
+**Redelivery.** Book it on the [redelivery page](https://www.couriersplease.com.au/book/redelivery) with the consignment or redelivery card number. The link is valid for 6 business days from the attempt, and redelivery usually follows within 1 to 2 business days. You get one redelivery; if that fails, the depot generally holds the parcel up to 6 business days before it may go back. The Help Centre says a parcel already sent to a collection point can't be redelivered to your address and must be collected there, though CouriersPlease's receiving guide still offers a redelivery within 6 days; ask Support before you book one.
 
 **Delivery Choices.** If the sender gave your email and mobile, CouriersPlease's notification has a link to ask for a signature, collect nearby, leave it with a neighbour, change the address or choose another day a few days later. Outside that link, only the sender can redirect a parcel to a new address.
 
@@ -66,7 +68,7 @@ These are the Help Centre's wordings, in the order a parcel usually meets them:
 
 ## Couriers Please contact number
 
-As listed on CouriersPlease's Help Centre on 15 October 2026:
+CouriersPlease's channels:
 
 - **Phone:** 1300 36 1000, for questions the Help Centre doesn't answer. Have the consignment number ready. No opening hours are published.
 - **Help Centre:** [support.couriersplease.com.au](https://support.couriersplease.com.au/hc/en-au), and a Virtual Assistant chat on couriersplease.com.au.
@@ -76,11 +78,15 @@ As listed on CouriersPlease's Help Centre on 15 October 2026:
 
 ## Tracking CouriersPlease parcels with Peek
 
-[Peek](/) names CouriersPlease straight away for a number of the `CP` shape above. A link from couriersplease.com.au/tools-track (with `no=` or `trackingCode=`) works too. No account, postcode or phone number needed. A CouriersPlease number that doesn't start with `CP` isn't recognised as CouriersPlease: paste the tracking link, or pick CouriersPlease with "Change carrier".
+[Peek](/) names CouriersPlease straight away for a number of the `CP` shape above. A link from couriersplease.com.au/tools-track (with `no=` or `trackingCode=`) works too. No account, postcode or phone number needed. A CouriersPlease number that doesn't start with `CP` isn't recognised as CouriersPlease: paste the tracking link, or pick CouriersPlease with "Change" as you add it, or "Change carrier" on a parcel already added. Peek then takes any 8 to 30 letters and digits with at least one digit, which covers item labels, prepaid coupons and the SSCCs some senders print.
 
-Peek reads CouriersPlease's own tracking and shows its scans in CouriersPlease's wording, each with its state, and the Delivery ETA once CouriersPlease has scanned the parcel. It shows no collection point or proof of delivery for CouriersPlease.
+Peek reads CouriersPlease's own tracking and shows its scans in CouriersPlease's wording, each with the time CouriersPlease gives (Sydney time, even outside New South Wales) and its state, and the Delivery ETA once CouriersPlease has scanned the parcel, until it's delivered or returned. It shows no collection point, proof of delivery, recipient's name or driver's name for CouriersPlease.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day CouriersPlease scans the parcel out for delivery, while CouriersPlease's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you when the status changes. For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day CouriersPlease scans the parcel `Onboard for delivery`, every 2 minutes from 6 a.m. Sydney time while CouriersPlease's own tracker answers. Peek counts that day on Sydney's clock, as CouriersPlease times its scans, so in Perth the 2-minute checks start at 3 or 4 a.m. and stop at 9 or 10 p.m. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When CouriersPlease's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking CouriersPlease.", with a "Get help from CouriersPlease" link to CouriersPlease's Help Centre. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking CouriersPlease."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
 
 ## Questions about Couriers Please tracking
 
@@ -105,7 +111,7 @@ Usually, from the depot serving your address, once Support has arranged it. Brin
 - [CouriersPlease Help Centre: What is a consignment number and where can I find it?](https://support.couriersplease.com.au/hc/en-au/articles/31617306631705-What-is-a-consignment-number-and-where-can-I-find-it) – number format, where to find it, no tracking by name
 - [CouriersPlease: Track A Parcel Delivery](https://www.couriersplease.com.au/tools-track) – tracking page, up to 10 numbers, Delivery ETA, On track and Overdue
 - [CouriersPlease: Book A Parcel Redelivery](https://www.couriersplease.com.au/book/redelivery) – up to 20 characters, redelivery card number
-- [CouriersPlease: Guide to receiving](https://www.couriersplease.com.au/faqs) – transit times, not-home rules, 10 kg and 100 cm, delays, Virtual Assistant
+- [CouriersPlease: Guide to receiving](https://www.couriersplease.com.au/faqs) – transit times, not-home rules, 10 kg and 100 cm, redelivery within 6 days from a collection point, delays, Virtual Assistant
 - [CouriersPlease Help Centre: Why is there no tracking information for my parcel?](https://support.couriersplease.com.au/hc/en-au/articles/31318572493849-Why-is-there-no-tracking-information-for-my-parcel) – try again after 1 business day
 - [CouriersPlease Help Centre: Why does my parcel have no recent updates?](https://support.couriersplease.com.au/hc/en-au/articles/31318338371609-Why-does-my-parcel-have-no-recent-updates) – gaps between scans, Manifested, partner handover
 - [CouriersPlease Help Centre: Why is my delivery delayed?](https://support.couriersplease.com.au/hc/en-au/articles/61272436045849-Why-is-my-delivery-delayed) – Manifested, delivery partners
@@ -117,6 +123,7 @@ Usually, from the depot serving your address, once Support has arranged it. Brin
 - [CouriersPlease Help Centre: Can I collect my parcel from my local depot?](https://support.couriersplease.com.au/hc/en-au/articles/31313853154201-Can-I-collect-my-parcel-from-my-local-depot) – depot pickup rules
 - [CouriersPlease Help Centre: Can I change my delivery address?](https://support.couriersplease.com.au/hc/en-au/articles/31942733256729-Can-I-change-my-delivery-address) – only the sender redirects
 - [CouriersPlease Help Centre: Can I receive my parcel on a specific date or time?](https://support.couriersplease.com.au/hc/en-au/articles/31307335257369-Can-I-receive-my-parcel-on-a-specific-date-or-time) – no time slots, Franchise Partner routes
+- [CouriersPlease: Terms and Conditions of Carriage](https://www.couriersplease.com.au/media/Terms_and_Conditions_of_Carriage_12_October_2023_ed4c2f9d36.pdf) – collection point hold: 7 days from the PIN, then 5 at the nearest depot
 - [CouriersPlease: Delivery Choices](https://www.couriersplease.com.au/delivery-choices) – delivery options, regional Authority to Leave
 - [CouriersPlease Help Centre: What should I do if my parcel shows as delivered but I haven't received it?](https://support.couriersplease.com.au/hc/en-au/articles/31908806814617-What-should-I-do-if-my-parcel-shows-as-delivered-but-I-haven-t-received-it) – checks, 14 business days
 - [CouriersPlease Help Centre: How do I get proof of delivery for my parcel?](https://support.couriersplease.com.au/hc/en-au/articles/31356692166169-How-do-I-get-proof-of-delivery-for-my-parcel) – photo or signature, up to 1 hour

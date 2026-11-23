@@ -18,12 +18,12 @@ Planzer publishes no number format. Peek knows these shapes (digits invented):
 
 | Number | Whose it is |
 | --- | --- |
-| `9134 6097 0000 0000 0000` | Planzer: 20 digits starting 91346097. |
-| `999.90.98765432` | A Planzer shared shipment: 13 digits starting 99990. |
-| `441234567890123456` | [Quickpac](carrier:quickpac), part of Planzer Paket: 18 digits starting 44. |
-| `99.60.987654.98765432` | Swiss Post: 18 digits, longer than Planzer's dotted shape. |
+| `9134 6097 4829 1736 4058` | Planzer: 20 digits starting 91346097. |
+| `999.90.48291736` | A Planzer shared shipment: 13 digits starting 99990. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), part of Planzer Paket: 18 digits starting 44. |
+| `99.60.482917.36405829` | [Swiss Post](carrier:swiss-post): 18 digits, longer than Planzer's dotted shape. |
 
-Copy the number rather than typing it: one digit too many and a Planzer number reads as [Australia Post](carrier:australia-post)'s ([lengths overlap between carriers](guide:tracking-number-formats)).
+Copy the number rather than typing it: one digit too many and a Planzer number reads as [SEUR](carrier:seur)'s ([lengths overlap between carriers](guide:tracking-number-formats)).
 
 ## Planzer track and trace statuses explained
 
@@ -69,9 +69,9 @@ The sender holds the contract with Planzer Paket, so loss, damage and returns go
 
 ## Planzer customer service and contact number
 
-As listed on Planzer Paket's and Quickpac's pages on 9 October 2026:
+As listed on Planzer Paket's and Quickpac's pages:
 
-- **Customer Service Centre:** 0848 00 19 36, Monday to Friday 8 am to 6 pm, CHF 0.08 per minute from Swiss landlines. Have your tracking number ready.
+- **Customer Service Centre:** 0848 00 19 36, Monday to Friday 8 am to 6 pm Swiss time, CHF 0.08 per minute from Swiss landlines. Have your tracking number ready.
 - **Contact form:** on [Planzer Paket's contact page](https://www.planzer-paket.ch/en/contact/), for a missing parcel, redelivery, a new date, an address change, damage or complaints, with a call-back option.
 - **Other lines:** Quickpac's homepage gives 044 438 50 40, 021 821 02 02 and 091 611 54 84 for Planzer Paket's customer service, one per language, and the tracking box on planzer-paket.ch gives +41 44 438 50 40 in its error message. No page explains how these relate to 0848.
 - **From abroad:** no page says whether 0848 works outside Switzerland or gives a +41 form of it, so use the contact form.
@@ -82,11 +82,15 @@ As listed on Planzer Paket's and Quickpac's pages on 9 October 2026:
 
 ## Tracking a Planzer parcel with Peek
 
-[Peek](/) recognises a 20-digit number starting 91346097, or a tracking.app.planzer.ch link with `deliveryNumber=`, and shows the status, history, expected delivery, delivery time and destination country, the total weight when every parcel states one and the dimensions for a single parcel, but not the recipient address. `Shipped` appears as delivered.
+[Peek](/) recognises a 20-digit number starting 91346097, or a tracking.app.planzer.ch link with `deliveryNumber=`, and shows the status, history, expected delivery, delivery time and destination country, the total weight when every parcel states one and the dimensions for a single parcel. When Planzer names the recipient, you also see that name under "Recipient" and, while the parcel is on its way, the destination town on the map; someone you share the parcel with sees neither, and the name of whoever signed stays private: no app shows it. `Shipped` appears as delivered.
 
 For a 13-digit number starting 99990, it asks for the complete shared link (trackandtrace.planzergroup.com/shared/…, including its accessKey), then reads the steps reached so far with their times and an expected date.
 
-It checks up to every 10 minutes, and up to every 2 minutes on the day Planzer scans the parcel out for delivery, from 6 am Swiss time, while Planzer's own tracking answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Planzer's tracking gives no scan places, so there's little to pin on the map. Peek can't contact Planzer for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Planzer scans it out for delivery, from 6 a.m. Swiss time, every 2 minutes while Planzer's own tracking answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When only tracking services answer, Peek checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Planzer.", with a "Get help from Planzer" link to Planzer Paket's contact page (in German). After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Planzer."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". Planzer's tracking gives no scan places, so no scan lands on the map. Peek can't contact Planzer for you.
 
 ## Questions about Planzer tracking
 
@@ -96,7 +100,7 @@ It's the parcel branch of Planzer Transport AG in Dietikon, part of the Swiss Pl
 
 ### What time does Planzer deliver?
 
-Planzer publishes no delivery hours. It tells senders that parcels without a booked time arrive by the evening of the next working day at the latest, but its terms give no guarantee. Senders can pay for delivery by 8 am, 10 am or noon where the postcode allows.
+Planzer publishes no delivery hours. It tells senders that parcels without a booked time arrive by the evening of the next working day at the latest, but its terms give no guarantee. Senders can pay for delivery by 8 am, 10 am or noon Swiss time where the postcode allows.
 
 ### Does Planzer deliver on Saturday?
 

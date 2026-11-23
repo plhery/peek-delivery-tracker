@@ -18,12 +18,12 @@ Planzer non pubblica il formato dei suoi numeri. Queste sono le forme che conosc
 
 | Numero | Di chi è |
 | --- | --- |
-| `9134 6097 0000 0000 0000` | Planzer: 20 cifre che iniziano con 91346097. |
-| `999.90.98765432` | Spedizione condivisa Planzer: 13 cifre che iniziano con 99990. |
-| `441234567890123456` | [Quickpac](carrier:quickpac), parte di Planzer Pacchi: 18 cifre che iniziano con 44. |
-| `99.60.987654.98765432` | Posta Svizzera: 18 cifre, più lungo della forma di Planzer con i punti. |
+| `9134 6097 4829 1736 4058` | Planzer: 20 cifre che iniziano con 91346097. |
+| `999.90.48291736` | Spedizione condivisa Planzer: 13 cifre che iniziano con 99990. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), parte di Planzer Pacchi: 18 cifre che iniziano con 44. |
+| `99.60.482917.36405829` | [Posta Svizzera](carrier:swiss-post): 18 cifre, più lungo della forma di Planzer con i punti. |
 
-Copia il numero invece di riscriverlo: con una cifra in più, un numero Planzer viene preso per uno di Australia Post. Per un numero di altra forma, [la guida ai formati dei codici](guide:tracking-number-formats) aiuta a capire il corriere.
+Copia il numero invece di riscriverlo: con una cifra in più, un numero Planzer viene preso per uno di [SEUR](carrier:seur). Per un numero di altra forma, [la guida ai formati dei codici](guide:tracking-number-formats) aiuta a capire il corriere.
 
 ## Planzer tracciamento pacchi: cosa vogliono dire gli stati
 
@@ -69,26 +69,30 @@ Il contratto con Planzer Pacchi ce l'ha il mittente, quindi danni, smarrimenti e
 
 ## Planzer contatti: telefono e modulo
 
-Come risultavano sulle pagine di Planzer il 9 ottobre 2026:
+Come risultano sulle pagine di Planzer:
 
-- **Centrale dedicata alla clientela:** 0848 00 19 36, da lunedì a venerdì dalle 08.00 alle 18.00, CHF 0.08 al minuto da rete fissa svizzera. «Parliamo la Sua lingua», scrive la pagina italiana. Tieni pronto il numero di spedizione.
+- **Centrale dedicata alla clientela:** 0848 00 19 36, da lunedì a venerdì dalle 08.00 alle 18.00, ora svizzera, CHF 0.08 al minuto da rete fissa svizzera. «Parliamo la Sua lingua», scrive la pagina italiana. Tieni pronto il numero di spedizione.
 - **Modulo di contatto:** sulla [pagina contatti di Planzer Pacchi](https://www.planzer-paket.ch/it/contatti/), per un pacco che non trovi, una nuova consegna o data, il permesso di deposito, la prova di consegna, un cambio d'indirizzo, danni o reclami. Puoi chiedere di essere richiamato.
 - **Altri numeri:** la homepage di Quickpac elenca per il servizio clienti di Planzer Paket una linea per lingua, tra cui lo 091 611 54 84, con prefisso ticinese. Le pagine contatti di Planzer Pacchi indicano solo lo 0848.
 - **Dall'estero:** nessuna pagina dice se lo 0848 funziona fuori dalla Svizzera, né ne dà una versione con +41: usa il modulo.
 - **E-mail:** nessuna per chi riceve. L'impressum cita info@planzer-paket.ch.
 - **Indirizzo:** Planzer Paket, Lerzenstrasse 14, 8953 Dietikon.
 - **Centrale del gruppo:** il +41 (0)44 744 64 64 è la sede di Dietikon, non una linea per i pacchi: per un pacco quella pagina rimanda al modulo.
-- **Oggetti ingombranti (Planzer Homeservice):** servizio a parte, prenotabile solo con un acquisto in un negozio cliente di Planzer. Da lunedì a venerdì dalle 08.00 alle 17.00, tra l'altro al +41 91 611 58 71, o a service@planzer-homeservice.ch, con i dati dell'ordine.
+- **Oggetti ingombranti (Planzer Homeservice):** servizio a parte, prenotabile solo con un acquisto in un negozio cliente di Planzer. Da lunedì a venerdì dalle 08.00 alle 17.00, ora svizzera, tra l'altro al +41 91 611 58 71, o a service@planzer-homeservice.ch, con i dati dell'ordine.
 
 > Planzer mette in guardia da e-mail e SMS falsi che chiedono di confermare un pacco cliccando su un link. Inoltra quello sospetto come allegato a security@planzer.ch: Planzer ti dice se è autentico. Puoi segnalarlo anche all'UFCS e, se sei stato truffato, sporgere denuncia alla polizia cantonale.
 
 ## Tracciare un pacco Planzer con Peek
 
-[Peek](/) riconosce un numero di 20 cifre che inizia con 91346097, o un link di tracking.app.planzer.ch con `deliveryNumber=`, e mostra stato, cronologia, consegna prevista, peso totale (se ogni pacco ne indica uno), dimensioni (se la spedizione è di un solo pacco), ora di consegna e paese di destinazione, non l'indirizzo del destinatario. `Shipped` compare come consegnato.
+[Peek](/) riconosce un numero di 20 cifre che inizia con 91346097, o un link di tracking.app.planzer.ch con `deliveryNumber=`, e mostra stato, cronologia, consegna prevista, peso totale (se ogni pacco ne indica uno), dimensioni (se la spedizione è di un solo pacco), ora di consegna e paese di destinazione. Quando Planzer indica il destinatario, Peek ti mostra anche il suo nome, sotto «Destinatario», e, finché il pacco è in viaggio, la città di destinazione sulla mappa; chi riceve da te il pacco condiviso non vede né l’uno né l’altra, e il nome di chi ha firmato resta privato: nessuna app lo mostra. `Shipped` compare come consegnato.
 
 Per un numero di 13 cifre che inizia con 99990 ti chiede il link di tracciamento condiviso completo (trackandtrace.planzergroup.com/shared/…, con il suo accessKey), poi legge i passaggi raggiunti finora, con i loro orari, e una data prevista.
 
-Controlla il pacco fino a ogni 10 minuti, fino a ogni 2 minuti dalle 06.00 (ora svizzera) quando è in consegna (solo il giorno stesso e finché risponde il tracking di Planzer; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Il tracking di Planzer non dice dove avvengono le scansioni, quindi non ci sono luoghi da mostrarti. Peek non può contattare Planzer al posto tuo.
+Finché il pacco è aperto in Peek, o nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6.00, ora svizzera, nel giorno in cui Planzer lo scansiona in consegna, finché risponde il tracking di Planzer. Altrimenti controlla ogni ora. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico») controlla ogni ora anche se lo tieni aperto, e dopo sette giorni su «Etichetta creata» ogni 6 ore. Quando rispondono solo i servizi di tracciamento, Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e, nel giorno della consegna, fino a ogni 15 minuti mentre lo tieni aperto o con le notifiche attive.
+
+Quando l'ultima scansione ha quattro giorni e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con il giorno di quella scansione, per esempio «Nessun aggiornamento da lun 12 ott». La pagina del pacco dice allora «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Planzer.», con il link «Chiedi aiuto a Planzer» alla pagina di contatto di Planzer Pacchi (in tedesco). Dopo tre settimane senza nuove scansioni dice «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a Planzer.»
+
+Può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Il tracking di Planzer non dice dove avvengono le scansioni, quindi nessuna finisce sulla mappa. Peek non può contattare Planzer al posto tuo.
 
 ## Domande sul tracking Planzer
 
@@ -98,7 +102,7 @@ Controlla il pacco fino a ogni 10 minuti, fino a ogni 2 minuti dalle 06.00 (ora 
 
 ### Quali sono gli orari di consegna di Planzer?
 
-Senza un orario prenotato, Planzer dice ai mittenti che il pacco arriva al più tardi la sera del giorno lavorativo successivo, ma le sue condizioni non lo garantiscono. Dove l'NPA lo permette, il mittente può pagare la consegna entro le 08.00, le 10.00 o le 12.00; altri orari, Planzer non ne pubblica.
+Senza un orario prenotato, Planzer dice ai mittenti che il pacco arriva al più tardi la sera del giorno lavorativo successivo, ma le sue condizioni non lo garantiscono. Dove l'NPA lo permette, il mittente può pagare la consegna entro le 08.00, le 10.00 o le 12.00, ora svizzera; altri orari, Planzer non ne pubblica.
 
 ### Planzer consegna il sabato?
 

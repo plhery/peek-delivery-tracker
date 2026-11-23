@@ -18,12 +18,12 @@ Planzer veröffentlicht kein Nummernformat. Peek erkennt Planzer an den ersten z
 
 | Nummer | Wem sie gehört |
 | --- | --- |
-| `9134 6097 0000 0000 0000` | Planzer: 20 Ziffern, beginnt mit 91346097. |
-| `999.90.98765432` | Eine geteilte Planzer-Sendung: 13 Ziffern, beginnt mit 99990, mit oder ohne Punkte. |
-| `441234567890123456` | [Quickpac](carrier:quickpac), seit 2024 Teil von Planzer Paket: 18 Ziffern, beginnt mit 44. |
-| `99.60.987654.98765432` | Die Post: 18 Ziffern, also länger als Planzers Form mit Punkten. |
+| `9134 6097 4829 1736 4058` | Planzer: 20 Ziffern, beginnt mit 91346097. |
+| `999.90.48291736` | Eine geteilte Planzer-Sendung: 13 Ziffern, beginnt mit 99990, mit oder ohne Punkte. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), seit 2024 Teil von Planzer Paket: 18 Ziffern, beginnt mit 44. |
+| `99.60.482917.36405829` | [Die Post](carrier:swiss-post): 18 Ziffern, also länger als Planzers Form mit Punkten. |
 
-Kopier die Nummer lieber, statt sie abzutippen: Mit einer Ziffer zu viel sieht eine Planzer-Nummer aus wie eine Australia-Post-Nummer. Woran du andere Paketdienste an ihrer Nummer erkennst, erklärt [Sendungsnummern erkennen](guide:tracking-number-formats).
+Kopier die Nummer lieber, statt sie abzutippen: Mit einer Ziffer zu viel sieht eine Planzer-Nummer aus wie eine von [SEUR](carrier:seur). Woran du andere Paketdienste an ihrer Nummer erkennst, erklärt [Sendungsnummern erkennen](guide:tracking-number-formats).
 
 ## Planzer Sendungsverfolgung: was die Status bedeuten
 
@@ -72,24 +72,28 @@ Den Vertrag mit Planzer Paket hat der Absender. Schaden, Verlust und Rücksendun
 
 ## Planzer Kontakt: Telefon, Formular und E-Mail
 
-So stand es am 9. Oktober 2026 auf Planzers Seiten:
+So steht es auf Planzers Seiten:
 
-- **Zentrale für Kundenanliegen:** 0848 00 19 36, Montag bis Freitag 8 bis 18 Uhr, CHF 0.08 pro Minute vom Schweizer Festnetz. Halte deine Sendungsnummer bereit. Ob die Nummer aus dem Ausland funktioniert, steht nirgends.
+- **Zentrale für Kundenanliegen:** 0848 00 19 36, Montag bis Freitag 8 bis 18 Uhr Schweizer Zeit, CHF 0.08 pro Minute vom Schweizer Festnetz. Halte deine Sendungsnummer bereit. Ob die Nummer aus dem Ausland funktioniert, steht nirgends.
 - **Kontaktformular:** auf [Planzer Pakets Kontaktseite](https://www.planzer-paket.ch/de/kontakt/) unter „Ich empfange ein Paket“, etwa für „Sendung erneut zustellen“, „Neuer Liefertermin“, „Adressänderung“ oder „Schaden-/Verlustmeldung“, auf Wunsch mit Rückruf.
 - **E-Mail:** Für Empfänger gibt es keine Adresse, nur das Formular. Im Impressum steht info@planzer-paket.ch.
 - **Adresse:** Planzer Paket, Lerzenstrasse 14, 8953 Dietikon.
-- **Andere Nummern:** Quickpacs Website listet für den „Planzer Paket Kundendienst“ drei Nummern nach Sprache: 044 438 50 40, 021 821 02 02 und 091 611 54 84. Die Fehlermeldung im Tracking-Feld auf planzer-paket.ch nennt +41 44 438 50 40. Planzer Pakets Kontaktseiten drucken nur die 0848er-Nummer, und keine Seite erklärt, wie diese Nummern zusammenhängen. Die Planzer Zentrale in Dietikon (+41 44 744 64 64, Montag bis Freitag 7 bis 18 Uhr) ist die Nummer der Gruppe und verweist für Paketanliegen aufs Formular.
-- **Großgeräte (Planzer Homeservice):** Montag bis Freitag 8 bis 17 Uhr, Deutschschweiz +41 44 744 68 56, oder service@planzer-homeservice.ch.
+- **Andere Nummern:** Quickpacs Website listet für den „Planzer Paket Kundendienst“ drei Nummern nach Sprache: 044 438 50 40, 021 821 02 02 und 091 611 54 84. Die Fehlermeldung im Tracking-Feld auf planzer-paket.ch nennt +41 44 438 50 40. Planzer Pakets Kontaktseiten drucken nur die 0848er-Nummer, und keine Seite erklärt, wie diese Nummern zusammenhängen. Die Planzer Zentrale in Dietikon (+41 44 744 64 64, Montag bis Freitag 7 bis 18 Uhr Schweizer Zeit) ist die Nummer der Gruppe und verweist für Paketanliegen aufs Formular.
+- **Großgeräte (Planzer Homeservice):** Montag bis Freitag 8 bis 17 Uhr Schweizer Zeit, Deutschschweiz +41 44 744 68 56, oder service@planzer-homeservice.ch.
 
 > Planzer warnt vor gefälschten E-Mails und SMS, in denen du ein Paket per Link bestätigen sollst, und hat keine 0900er-Hotline. Leite eine verdächtige Nachricht als Anhang an security@planzer.ch weiter, Planzer klärt ab, ob sie echt ist. Nach einem Betrug rät Planzer zur Anzeige bei der Kantonspolizei.
 
 ## Planzer Paket mit Peek verfolgen
 
-[Peek](/) erkennt eine 20-stellige Nummer, die mit 91346097 beginnt, und einen Link von tracking.app.planzer.ch mit `deliveryNumber=`. Dann zeigt es Status, Sendungsverlauf, voraussichtliche Zustellung, Zeitpunkt der Zustellung und Zielland, dazu das Gesamtgewicht, wenn Planzer für jedes Paket der Sendung eines nennt, und die Abmessungen, wenn es um ein einzelnes Paket geht. Die Empfängeradresse zeigt es nicht. `Shipped` erscheint als zugestellt.
+[Peek](/) erkennt eine 20-stellige Nummer, die mit 91346097 beginnt, und einen Link von tracking.app.planzer.ch mit `deliveryNumber=`. Dann zeigt es Status, Sendungsverlauf, voraussichtliche Zustellung, Zeitpunkt der Zustellung und Zielland, dazu das Gesamtgewicht, wenn Planzer für jedes Paket der Sendung eines nennt, und die Abmessungen, wenn es um ein einzelnes Paket geht. Nennt Planzer den Empfänger, zeigt Peek dir auch dessen Namen unter „Empfänger“ und, solange das Paket unterwegs ist, den Zielort auf der Karte; wer das Paket über deinen geteilten Link ansieht, sieht beides nicht, und der Name der Person, die unterschrieben hat, bleibt privat: Keine App zeigt ihn. `Shipped` erscheint als zugestellt.
 
 Bei einer 13-stelligen Nummer mit 99990 am Anfang fragt es nach dem vollständigen Sendungslink (trackandtrace.planzergroup.com/shared/…, mit accessKey) und liest dann die erreichten Schritte mit ihren Zeiten und ein erwartetes Datum.
 
-Es schaut bis zu alle 10 Minuten nach, ab 6 Uhr Schweizer Zeit bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour und solange Planzer selbst antwortet; über Tracking-Dienste alle 15 Minuten), und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Planzer für dich kontaktieren kann es nicht. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie auch im Sendungsverlauf.
+Solange du das Paket in Peek geöffnet hast, oder am Liefertag mit eingeschalteten Mitteilungen, prüft Peek bis zu alle 10 Minuten; an dem Tag, an dem Planzer das Paket in Zustellung scannt, ab 6 Uhr Schweizer Zeit alle 2 Minuten, solange Planzers eigenes Tracking antwortet. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, auch wenn du es geöffnet hast, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Antworten nur Tracking-Dienste, prüft Peek stündlich, alle 3 Stunden, sobald ein Tag ohne neuen Scan vergeht, und am Tag der Zustellung bis zu alle 15 Minuten, solange du das Paket geöffnet hast oder Mitteilungen aktiviert sind.
+
+Ist der neueste Scan vier Tage alt und steht das Paket noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Die Paketseite sagt dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Planzer nach.“, mit dem Link „Hol dir Hilfe bei Planzer“ zur Kontaktseite von Planzer Paket. Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Planzer nach.“
+
+Mitteilungen bekommst du für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie im Sendungsverlauf und auf der Karte. Planzer für dich kontaktieren kann Peek nicht.
 
 ## Fragen zur Planzer Sendungsverfolgung
 
@@ -99,7 +103,7 @@ Meist einen Werktag. Ohne gebuchte Zeit verspricht Planzer Versendern die Zustel
 
 ### Zu welcher Uhrzeit stellt Planzer zu?
 
-Feste Zustellzeiten veröffentlicht Planzer nicht, ohne Zeitangabe kann das Paket bis zum Abend kommen. Gegen Aufpreis bucht der Absender eine Zustellung bis 8, 10 oder 12 Uhr, je nach Postleitzahl. Für Pakete, die ohne Unterschrift deponiert werden, gelten solche Zeitfenster nicht.
+Feste Zustellzeiten veröffentlicht Planzer nicht, ohne Zeitangabe kann das Paket bis zum Abend kommen. Gegen Aufpreis bucht der Absender eine Zustellung bis 8, 10 oder 12 Uhr Schweizer Zeit, je nach Postleitzahl. Für Pakete, die ohne Unterschrift deponiert werden, gelten solche Zeitfenster nicht.
 
 ### Stellt Planzer am Samstag zu?
 

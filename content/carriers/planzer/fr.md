@@ -18,12 +18,12 @@ Planzer ne publie aucun format de numéro. Voici les formes que Peek connaît, a
 
 | Numéro | À qui il appartient |
 | --- | --- |
-| `9134 6097 0000 0000 0000` | Planzer : 20 chiffres commençant par 91346097. |
-| `999.90.98765432` | Un envoi partagé Planzer : 13 chiffres commençant par 99990, avec ou sans points. |
-| `441234567890123456` | [Quickpac](carrier:quickpac), qui fait partie de Planzer Paket depuis 2024 : 18 chiffres commençant par 44. |
-| `99.60.987654.98765432` | La Poste suisse : 18 chiffres, plus long que la forme à points de Planzer. |
+| `9134 6097 4829 1736 4058` | Planzer : 20 chiffres commençant par 91346097. |
+| `999.90.48291736` | Un envoi partagé Planzer : 13 chiffres commençant par 99990, avec ou sans points. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), qui fait partie de Planzer Paket depuis 2024 : 18 chiffres commençant par 44. |
+| `99.60.482917.36405829` | [La Poste suisse](carrier:swiss-post) : 18 chiffres, plus long que la forme à points de Planzer. |
 
-Copie-colle le numéro plutôt que de le taper : avec un chiffre de trop, un numéro Planzer passe pour un numéro d'Australia Post. Pour reconnaître d'autres numéros, lis [à quel transporteur appartient un numéro de suivi](guide:tracking-number-formats).
+Copie-colle le numéro plutôt que de le taper : avec un chiffre de trop, un numéro Planzer passe pour un numéro de [SEUR](carrier:seur). Pour reconnaître d'autres numéros, lis [à quel transporteur appartient un numéro de suivi](guide:tracking-number-formats).
 
 ## Suivi Planzer : ce que veulent dire les statuts
 
@@ -71,15 +71,15 @@ L'expéditeur a le contrat avec Planzer Colis : dommage, perte ou retour passent
 
 ## Planzer contact : téléphone, formulaire et e-mail
 
-Relevé sur les pages de Planzer le 9 octobre 2026 :
+D'après les pages de Planzer :
 
-- **Centrale des demandes clients :** 0848 00 19 36, du lundi au vendredi de 8 h à 18 h, CHF 0.08 la minute depuis un poste fixe. Garde ton numéro d'envoi sous la main.
+- **Centrale des demandes clients :** 0848 00 19 36, du lundi au vendredi de 8 h à 18 h, heure suisse, CHF 0.08 la minute depuis un poste fixe. Garde ton numéro d'envoi sous la main.
 - **Formulaire :** sur [la page Aide et contact de Planzer Colis](https://www.planzer-paket.ch/fr/aide-et-contact/), pour un colis introuvable, une nouvelle date, un changement d'adresse, une preuve de livraison ou une réclamation, avec option de rappel.
 - **Genève, Vaud et le reste de la Romandie :** pas de ligne régionale sur les pages de contact de Planzer Colis, qui ne donnent que le 0848. La page d'accueil de Quickpac cite bien un 021 821 02 02 pour le service client de Planzer Paket en français, mais aucune page de Planzer Colis ne confirme ce numéro : appelle d'abord le 0848.
 - **Depuis l'étranger :** aucune page ne dit si le 0848 y fonctionne ; passe par le formulaire.
 - **E-mail :** aucune adresse pour les destinataires. Les mentions légales indiquent info@planzer-paket.ch.
 - **Adresse :** Planzer Paket, Lerzenstrasse 14, 8953 Dietikon.
-- **Gros articles (Planzer Homeservice) :** du lundi au vendredi de 8 h à 17 h, +41 22 308 98 99 pour la Suisse romande, service@planzer-homeservice.ch.
+- **Gros articles (Planzer Homeservice) :** du lundi au vendredi de 8 h à 17 h, heure suisse, +41 22 308 98 99 pour la Suisse romande, service@planzer-homeservice.ch.
 
 Le +41 44 744 64 64 est la centrale du groupe à Dietikon, pas une ligne colis : sa page renvoie vers le formulaire.
 
@@ -87,17 +87,21 @@ Le +41 44 744 64 64 est la centrale du groupe à Dietikon, pas une ligne colis :
 
 ## Suivre un colis Planzer avec Peek
 
-[Peek](/) reconnaît un numéro de 20 chiffres commençant par 91346097, ou un lien de tracking.app.planzer.ch contenant `deliveryNumber=`. Il affiche le statut, l'historique, la livraison prévue, le poids total (si chaque colis en indique un), les dimensions (si l'envoi ne compte qu'un seul colis), l'heure de livraison et le pays de destination, mais pas l'adresse du destinataire. `Shipped` y apparaît comme livré.
+[Peek](/) reconnaît un numéro de 20 chiffres commençant par 91346097, ou un lien de tracking.app.planzer.ch contenant `deliveryNumber=`. Il affiche le statut, l'historique, la livraison prévue, le poids total (si chaque colis en indique un), les dimensions (si l'envoi ne compte qu'un seul colis), l'heure de livraison et le pays de destination. Lorsque Planzer nomme le destinataire, Peek te montre aussi son nom, sous « Destinataire », et, tant que le colis est en route, la ville de destination sur la carte ; une personne avec qui tu partages le colis ne voit ni l’un ni l’autre, et le nom de la personne qui a signé reste privé : aucune app ne l’affiche. `Shipped` y apparaît comme livré.
 
 Pour un numéro de 13 chiffres commençant par 99990, il te demande le lien partagé complet (trackandtrace.planzergroup.com/shared/…, avec son accessKey), puis n'en lit que les étapes franchies, avec leur heure, et une date de livraison prévue : ni poids, ni dimensions, ni pays.
 
-Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et tant que c'est le suivi de Planzer qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Planzer ne donne pas le lieu de ses scans : la carte n'en montre donc pas. Peek ne peut pas contacter Planzer à ta place.
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h, heure suisse, le jour où Planzer scanne le colis en livraison, tant que le suivi de Planzer répond. Sinon, il vérifie toutes les heures. Après deux jours sans nouvelles (12 heures tant que le colis en est à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures même si tu le gardes ouvert, puis toutes les 6 heures une fois le colis à « Étiquette créée » depuis sept jours. Quand seuls des services de suivi répondent, Peek vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan et, le jour où le colis est en livraison, jusqu'à toutes les 15 minutes tant que tu le gardes ouvert ou que les notifications sont activées.
+
+Quand le dernier scan date de quatre jours et que le colis en est encore à « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis dit alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Planzer. », avec un lien « Demande de l’aide à Planzer » vers la page de contact de Planzer Colis (en allemand). Après trois semaines sans nouveau scan, elle dit « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Planzer. »
+
+Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Planzer ne donne pas le lieu de ses scans : aucun n'apparaît donc sur la carte. Peek ne peut pas contacter Planzer à ta place.
 
 ## Questions sur le suivi de colis Planzer
 
 ### Jusqu'à quelle heure Planzer livre-t-il ?
 
-Sans heure convenue, au plus tard le soir du jour ouvré suivant, annonce Planzer aux expéditeurs ; ses conditions n'en donnent toutefois aucune garantie. L'expéditeur peut payer une livraison jusqu'à 8 h, 10 h ou 12 h, selon ton code postal. Ces créneaux ne valent pas pour un colis déposé sans confirmation de réception, la livraison standard de Planzer Colis.
+Sans heure convenue, au plus tard le soir du jour ouvré suivant, annonce Planzer aux expéditeurs ; ses conditions n'en donnent toutefois aucune garantie. L'expéditeur peut payer une livraison jusqu'à 8 h, 10 h ou 12 h, heure suisse, selon ton code postal. Ces créneaux ne valent pas pour un colis déposé sans confirmation de réception, la livraison standard de Planzer Colis.
 
 ### Planzer livre-t-il le samedi ?
 

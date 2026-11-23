@@ -3850,6 +3850,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DK Logistics Sendungsverfolgung: Frachtbrief & Kontakt",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "jet-express-sendungsverfolgung",
+      "title": "Jet Express Tracking: Auftragsnummer, Lieferung, Kontakt",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "fr": [
@@ -5732,6 +5740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi DK Logistics\u00a0: bordereau, livraison et contact",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "suivi-jet-express",
+      "title": "Suivi Jet Express\u00a0: numéro de commande, livraison, contact",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "it": [
@@ -7590,6 +7606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento DK Logistics: lettera di vettura e contatti",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "tracciamento-jet-express",
+      "title": "Tracciamento Jet Express: numero d’ordine, consegna, aiuto",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "es": [
@@ -9424,6 +9448,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento DK Logistics: guía, entregas y contacto",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "seguimiento-jet-express",
+      "title": "Seguimiento Jet Express: número de pedido, entrega, contacto",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "pt": [
@@ -11250,6 +11282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento DK Logistics: guia, entregas e contacto",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "seguimento-jet-express",
+      "title": "Seguimento Jet Express: número de pedido, entrega, ajuda",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "pt-br": [
@@ -13126,6 +13166,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DK Logistics: list przewozowy, dostawa i kontakt",
       "name": "DK Logistics",
       "color": "#f58428"
+    },
+    {
+      "id": "jet-express-ee",
+      "catalog": "jet-express-ee",
+      "slug": "sledzenie-jet-express",
+      "title": "Śledzenie Jet Express: numer zamówienia, dostawa, kontakt",
+      "name": "Jet Express",
+      "color": "#d61b22"
     }
   ],
   "ru": [

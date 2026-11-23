@@ -14,11 +14,11 @@ Peek knows three shapes for Pitney Bowes, each 14 to 20 characters long. With in
 
 | Number (invented) | What it is |
 | --- | --- |
-| `UPAAA000000000000000` | UPAA, one letter and 15 digits: in Peek's code, an eBay parcel from the US or the UK. |
-| `UPBE0000000000000000` | UPBE and 16 characters, digits or the letters A to F: an eBay parcel from the UK. |
-| `PBXAA000000000` | PBX, two letters and 9 digits: another Pitney Bowes parcel going abroad. |
-| `PBXAA000000000000000` | PBX, two letters and 15 characters, digits or the letters A to F: the same, in its longer form. |
-| `UPAA000000000000000` | UPAA without its letter: not Pitney Bowes's shape, and Peek recognises no carrier. If you choose Pitney Bowes for it, Peek says it "doesn’t issue numbers like this one". Check for a missing character. |
+| `UPAAK482917364058291` | UPAA, one letter and 15 digits: in Peek's code, an eBay parcel from the US or the UK. |
+| `UPBE48291736A4F02819` | UPBE and 16 characters, digits or the letters A to F: an eBay parcel from the UK. |
+| `PBXHK482917365` | PBX, two letters and 9 digits: another Pitney Bowes parcel going abroad. |
+| `PBXHK48291736A4F0281` | PBX, two letters and 15 characters, digits or the letters A to F: the same, in its longer form. |
+| `UPAA482917364058291` | UPAA without its letter: not Pitney Bowes's shape, and Peek recognises no carrier. If you choose Pitney Bowes for it, Peek says it "doesn’t issue numbers like this one". Check for a missing character. |
 
 Spaces, dashes and lower case don't matter in Peek. Its catalog also knows Pitney Bowes as Pitney Bowes Global Ecommerce, Pitney Bowes Expedited Parcel Service, eBay Global Shipping Program and PBI.
 
@@ -86,7 +86,7 @@ Peek couldn't read Pitney Bowes's website, so this page has no list of its partn
 
 **Nothing new once the post has it.** After the post's first lines, its own tracking may be ahead of what Pitney Bowes passes on, and Peek doesn't switch to it by itself. Open the post's page from the line on Pitney Bowes's tracker, or add the post's number to Peek as a parcel of its own.
 
-**No update for days.** After four days without a new line, a parcel showing "Label created" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct"), and Peek notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating).
+**No update for days.** After four days without a new line, a parcel showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct") and the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Pitney Bowes." After three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Pitney Bowes." See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** Check where it was left and ask neighbours, then the delivering post and the seller. See [delivered but not received](guide:delivered-not-received).
 
@@ -94,7 +94,7 @@ Peek couldn't read Pitney Bowes's website, so this page has no list of its partn
 
 ## Pitney Bowes customer service and contact
 
-As of 1 November 2026, Peek couldn't read Pitney Bowes's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
+Peek couldn't read Pitney Bowes's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
 
 Pitney Bowes ships the parcel for the seller or the marketplace, so ask them first: for an eBay order, through eBay. Once the post has the parcel, ask the post about the delivery itself.
 
@@ -108,7 +108,7 @@ Peek doesn't hand the parcel over to the post: the post's scans reach you throug
 
 The tracker prints each time on the clock of whoever scanned the parcel, with no time zone. Peek reads each line on the clock of its place, or of the leg the parcel was on. Without a place, `In Transit` and `Item processed at Interpost` are on UTC, `Interpost handed item over to postal company` on UTC+2, and `Customs Clearance` on the clock of the country it names. Every time is shown in your device's time zone.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Pitney Bowes's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks Pitney Bowes's tracker up to every 10 minutes, and up to every 2 minutes from 6 a.m. on the latest scan's clock on the day the parcel goes out for delivery, while the tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
 
 ## Questions about Pitney Bowes tracking
 

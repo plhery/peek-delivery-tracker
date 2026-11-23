@@ -3364,6 +3364,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "dpd-austria-sendungsverfolgung",
+      "title": "DPD Austria Sendungsverfolgung: Status, Pickup & Kontakt",
+      "name": "DPD Austria",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "ozon-sendungsverfolgung",
@@ -4910,6 +4918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "suivi-dpd-austria",
+      "title": "Suivi DPD Austria\u00a0: statuts, points Pickup et contact",
+      "name": "DPD Austria",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "suivi-ozon",
@@ -6432,6 +6448,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "tracking-dpd-austria",
+      "title": "Tracking DPD Austria: stati, punti Pickup e contatti",
+      "name": "DPD Austria",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "tracking-ozon",
@@ -7930,6 +7954,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "seguimiento-dpd-austria",
+      "title": "Seguimiento DPD Austria: estados, Pickup y contacto",
+      "name": "DPD Austria",
+      "color": "#dc0032"
+    },
+    {
       "id": "ozon-logistics",
       "catalog": "ozon-logistics",
       "slug": "seguimiento-ozon",
@@ -9401,6 +9433,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "seguimento-dpd-paises-baixos",
       "title": "Seguimento DPD Países Baixos: estados, entrega e contacto",
       "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "seguimento-dpd-austria",
+      "title": "Seguimento DPD Austria: estados, Pickup e contacto",
+      "name": "DPD Austria",
       "color": "#dc0032"
     },
     {
@@ -10941,6 +10981,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "sledzenie-dpd-holandia",
       "title": "Śledzenie DPD Holandia: statusy, doręczenie i kontakt",
       "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "sledzenie-dpd-austria",
+      "title": "Śledzenie DPD Austria: statusy, punkty Pickup i kontakt",
+      "name": "DPD Austria",
       "color": "#dc0032"
     },
     {

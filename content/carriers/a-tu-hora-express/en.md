@@ -22,7 +22,7 @@ Look for your service or tracking number in the retailer's dispatch email or ord
 
 ## What A Tu Hora Express tracking statuses mean
 
-A Tu Hora Express returns scan descriptions in Spanish alongside numeric status codes (`cod`) and local Spain wall-clock times (`Europe/Madrid`):
+A Tu Hora Express gives each scan in Spanish, with a status code (`cod`) and a time on Madrid's clock:
 
 | A Tu Hora Express says (code) | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -40,14 +40,14 @@ A Tu Hora Express returns scan descriptions in Spanish alongside numeric status 
 
 On [atuhoraexpress.com/home/](https://atuhoraexpress.com/home/) and [atuhoraexpress.com](https://atuhoraexpress.com/), A Tu Hora Express lists five core services — *Express 24h*, *Economy 48h*, *Masivo 72h*, *Reverse Logistics* and *B2B Premium* — across its Spanish branch network, with tracking hosted via [atuhoraexpress.com/tracking/](https://atuhoraexpress.com/tracking/) and [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli).
 
-A Tu Hora Express's public website does not publish fixed retail rules on the number of doorstep delivery attempts, parcel weight/dimension caps or depot storage limits, as those terms are agreed under each online store's commercial contract. If your order arrived from outside the European Union and passed through customs before Spanish last-mile handover, remember that EU-bound low-value imports carry the €3 customs duty on consignments up to €150 and the €2 EU handling fee per item unless settled at checkout; see [parcels held at customs](guide:customs).
+A Tu Hora Express's website publishes no number of delivery attempts, weight or size limits or storage period. If your order came from outside the European Union, it pays €3 customs duty per item when it is worth €150 or less, and the €2 Union handling fee per item, unless the shop charged them at checkout; see [parcels held at customs](guide:customs).
 
 ## A Tu Hora Express parcel delayed, stuck or missing
 
 Because online stores hold the transport contract with A Tu Hora Express, contact the retailer first if a parcel is repeatedly stuck in `Incidencia`, shows an address problem (`Dirección incorrecta o incompleta`) or misses its expected delivery day.
 
 - **Repeated incidents or `Pendiente nuevo reparto`:** confirm your street address, floor/door details and contact phone number with the retailer and email `info@atuhoraexpress.com` with your 16- or 24-digit code and delivery postcode.
-- **Marked `Realizado con éxito` but not received:** check with household members, neighbours and your building concierge (*portería*) first, then contact the retailer and A Tu Hora Express right away so the depot can inspect the delivery proof.
+- **Marked `Realizado con éxito` but not received:** check with household members, neighbours and your building concierge (*portería*) first, then contact the retailer and A Tu Hora Express right away.
 - For step-by-step next actions, see [why tracking stops updating](guide:tracking-not-updating), [delivered but not received](guide:delivered-not-received), [damaged parcel](guide:damaged-parcel), [lost parcel](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## A Tu Hora Express customer service and contacts
@@ -64,13 +64,15 @@ Official contact details published on [atuhoraexpress.com/home/](https://atuhora
 
 ## Track an A Tu Hora Express parcel with Peek
 
-[Peek](/) recognises any 16-digit code starting with six zeros (`0000004829173640`, digits invented) as A Tu Hora Express automatically with high confidence. For a 24-digit barcode (`000000482917364000128013`), Peek checks A Tu Hora Express automatically alongside [Ciblex](carrier:ciblex), [InPost](carrier:inpost), [bpost](carrier:bpost), [Austrian Post](carrier:austrian-post) and [Express One](carrier:express-one) using the embedded 5-digit postcode and shows "A Tu Hora Express has this parcel." when it answers. For a 10-digit code (`4829173640`), tap "Change" while adding or "Change carrier" on the parcel screen and select A Tu Hora Express (searching "A Tu Hora" finds it too).
+[Peek](/) recognises any 16-digit code starting with six zeros (`0000004829173640`, digits invented) as A Tu Hora Express automatically with high confidence. A 24-digit barcode (`000000482917364000128013`) fits several carriers: Peek asks A Tu Hora Express, with the postcode the barcode carries, [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) and [Ciblex](carrier:ciblex) whether they know it, and [Express One](carrier:express-one) only if none does, and says "A Tu Hora Express has this parcel." when A Tu Hora Express answers. For a 10-digit code (`4829173640`), tap "Change" while adding or "Change carrier" on the parcel screen and select A Tu Hora Express (searching "A Tu Hora" finds it too).
 
-For 10- and 16-digit codes, Peek offers an optional "Delivery postcode" field (`5 digits`). Although optional so you can save the parcel right away, A Tu Hora Express's direct tracker only answers those shorter codes when the 5-digit Spanish delivery postcode is supplied — without it, Peek asks other tracking services instead and slows to daily checks after a day with no answers. Entering or updating the postcode triggers an immediate direct lookup. On 24-digit codes, Peek reads the postcode from the final five digits automatically.
+For 10- and 16-digit codes, Peek offers an optional "Delivery postcode" field with the line "A Tu Hora Express shows the parcel only with the delivery postcode." Until you add it, the parcel screen offers "Add postcode", and Peek follows the parcel through tracking services, checking once a day after a day with no answer. Entering the postcode makes Peek check right away. A 24-digit barcode carries its postcode in its last five digits, so it needs none.
 
-When A Tu Hora Express answers, Peek shows the mapped stage ("Label created", "In transit", "Out for delivery", "Delivery attempted", "Needs attention", "Returned to sender", "Delivered"), Spanish scan descriptions, status codes, town name where provided, expected delivery date when A Tu Hora Express exposes it on an open parcel, parcel weight when present and local Madrid wall-clock timestamps. Peek discards GPS coordinates beside scans, the progress rail, departure date, customer reference, sender and recipient names, destination address, parcel count, volume, remarks, proof-of-delivery records and delivery options; A Tu Hora Express's portal does not publish pickup-point locations or service names.
+When A Tu Hora Express answers, Peek shows the stage ("Label created", "In transit", "Out for delivery", "Delivery attempted", "Needs attention", "Returned to sender", "Delivered"), the Spanish scan wording with its town, the expected delivery day while A Tu Hora Express shows one on an open shipment, and the weight. The status codes set the stage; Peek doesn't show them. Scans are dated on Madrid time and shown on your device's clock. Peek leaves out the GPS coordinates beside scans, the progress rail, departure date, customer reference, sender and recipient names, destination address, parcel count, volume, remarks, proof of delivery and delivery options; A Tu Hora Express's tracker shows no pickup point or service name.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. Madrid time on the day an out-for-delivery scan (`En reparto` / `En realización`) arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback (including when no postcode is provided for a 10- or 16-digit code), they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking A Tu Hora Express." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking A Tu Hora Express."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day A Tu Hora Express shows `En reparto` or `En realización`, every 2 minutes from 6 a.m. Madrid time, while A Tu Hora Express's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When A Tu Hora Express's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking A Tu Hora Express." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking A Tu Hora Express."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot reschedule deliveries, change your address or contact A Tu Hora Express on your behalf.
 
@@ -78,7 +80,7 @@ You can pick alert presets for "Every scan", "Important steps" or "Delivery only
 
 ### Why does A Tu Hora Express ask for my delivery postcode?
 
-A Tu Hora Express protects 10- and 16-digit tracking codes by requiring the 5-digit Spanish delivery postcode on [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) and in Peek. If your store gave you a 24-digit code, the last five digits already contain the postcode.
+A Tu Hora Express shows a 10- or 16-digit code only with its 5-digit Spanish delivery postcode, on [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) as in Peek, where the field is optional but A Tu Hora Express doesn't answer without it. If your store gave you a 24-digit code, the last five digits already contain the postcode.
 
 ### What does `Realizado con éxito` mean on A Tu Hora Express tracking?
 

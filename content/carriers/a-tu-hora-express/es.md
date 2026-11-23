@@ -22,32 +22,32 @@ Busca tu número de servicio o expedición en el correo de envío de la tienda o
 
 ## Qué significan los estados de A Tu Hora Express
 
-El rastreador de A Tu Hora Express muestra estados en español acompañados de códigos numéricos (`cod`) y horas locales de España (`Europe/Madrid`):
+El rastreador de A Tu Hora Express da cada escaneo en español, con un código de estado (`cod`) y la hora de Madrid:
 
 | A Tu Hora Express indica (código) | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
-| `Documentado` (`0`) | El remitente dio de alta el envío electrónicamente antes de la entrada en agencia. | "Etiqueta creada" |
-| `En tránsito` (`1`) | El paquete viaja por la red de A Tu Hora Express entre delegaciones. | "En tránsito" |
-| `En agencia distribución` (`11`) | Ha llegado a la delegación local encargada de repartir en tu código postal. | "En tránsito" |
-| `En reparto` (`2`) / `En realización` | El repartidor lo lleva en ruta para intentar la entrega hoy. | "En reparto" |
-| `Incidencia - Pendiente nuevo reparto` (`3`), `Ausente`, `Dirección incorrecta o incompleta`, `Rechazado` | No se pudo completar la entrega (ausencia, error en la dirección, rechazo o envío pendiente de nuevo intento). | "Intento de entrega" |
-| `Incidencia - Falta parcial` (`3`), `Incidencia - No cumplimiento agencia` / `Incumplimiento de la agencia` | Incidencia operativa, como bulto faltante en una expedición o falta de entrega por parte de la agencia. | "Incidencia" |
+| `Documentado` (`0`) | El remitente dio de alta el envío electrónicamente antes de la entrada en agencia. | «Etiqueta creada» |
+| `En tránsito` (`1`) | El paquete viaja por la red de A Tu Hora Express entre delegaciones. | «En tránsito» |
+| `En agencia distribución` (`11`) | Ha llegado a la delegación local encargada de repartir en tu código postal. | «En tránsito» |
+| `En reparto` (`2`) / `En realización` | El repartidor lo lleva en ruta para intentar la entrega hoy. | «En reparto» |
+| `Incidencia - Pendiente nuevo reparto` (`3`), `Ausente`, `Dirección incorrecta o incompleta`, `Rechazado` | No se pudo completar la entrega (ausencia, error en la dirección, rechazo o envío pendiente de nuevo intento). | «Intento de entrega» |
+| `Incidencia - Falta parcial` (`3`), `Incidencia - No cumplimiento agencia` / `Incumplimiento de la agencia` | Incidencia operativa, como bulto faltante en una expedición o falta de entrega por parte de la agencia. | «Incidencia» |
 | `Pendiente de realizar` (`5`) | Aparece junto a una incidencia a la misma hora indicando que queda pendiente un nuevo reparto; la incidencia marca la etapa. | *(mantiene la etapa de la incidencia)* |
-| `Realizado con éxito` (`4`) / `Entregado con éxito` | Paquete entregado por A Tu Hora Express. | "Entregado" |
-| `Devuelto` | Envío devuelto hacia el remitente. | "Devuelto al remitente" |
+| `Realizado con éxito` (`4`) / `Entregado con éxito` | Paquete entregado por A Tu Hora Express. | «Entregado» |
+| `Devuelto` | Envío devuelto hacia el remitente. | «Devuelto al remitente» |
 
 ## Servicios de entrega y condiciones públicas
 
 En [atuhoraexpress.com](https://atuhoraexpress.com/) y [atuhoraexpress.com/home/](https://atuhoraexpress.com/home/), A Tu Hora Express detalla cinco servicios principales —*Express 24h*, *Economy 48h*, *Masivo 72h*, *Logística Inversa* y *B2B Premium*— a través de su red de delegaciones, con acceso al seguimiento desde [atuhoraexpress.com/tracking/](https://atuhoraexpress.com/tracking/) y [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli).
 
-La web pública de A Tu Hora Express no publica un número fijo de intentos de entrega, límites de peso y medidas ni días de custodia en delegación, ya que esas condiciones dependen del contrato de cada tienda online. Si compraste fuera de la Unión Europea y el envío pasó por aduanas antes de pasar a reparto nacional, recuerda que los pedidos de fuera de la UE están sujetos al derecho de aduana de 3 € en envíos de hasta 150 € y a la tasa de tramitación de la UE de 2 € por artículo salvo que se abonen en la tienda; consulta [paquetes retenidos en aduanas](guide:customs).
+La web de A Tu Hora Express no publica un número de intentos de entrega, límites de peso o medidas ni días de custodia. Si el pedido llegó de fuera de la Unión Europea, paga 3 € de derecho de aduana por artículo si vale 150 € o menos, y la tasa de tramitación de la UE de 2 € por artículo, salvo que la tienda los cobrara al comprar; consulta [paquetes retenidos en aduanas](guide:customs).
 
 ## Paquete de A Tu Hora Express retrasado, con incidencia o no recibido
 
 En compras por internet, el contrato de transporte corresponde a la tienda, que debe gestionar cambios de dirección, reenvíos o reembolsos si el paquete encadena incidencias o supera la fecha prevista.
 
 - **Incidencias repetidas o `Pendiente nuevo reparto`:** comprueba con la tienda que tu dirección, piso/puerta y teléfono sean correctos y escribe a `info@atuhoraexpress.com` indicando tu código de 16 o 24 dígitos y el código postal de entrega.
-- **Aparece `Realizado con éxito` pero no lo tienes:** pregunta primero a familiares, vecinos y en la portería o conserjería, y avisa cuanto antes tanto a la tienda como a A Tu Hora Express para que la delegación revise el justificante de entrega.
+- **Aparece `Realizado con éxito` pero no lo tienes:** pregunta primero a familiares, vecinos y en la portería o conserjería, y avisa cuanto antes tanto a la tienda como a A Tu Hora Express.
 - Para más pasos, consulta [por qué no se actualiza el seguimiento](guide:tracking-not-updating), [entregado pero no recibido](guide:delivered-not-received), [paquete dañado](guide:damaged-parcel), [paquete perdido](guide:lost-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
 ## Atención al cliente y contacto de A Tu Hora Express
@@ -64,21 +64,23 @@ Datos oficiales publicados en [atuhoraexpress.com](https://atuhoraexpress.com/),
 
 ## Seguir un paquete de A Tu Hora Express en Peek
 
-[Peek](/) reconoce automáticamente cualquier código de 16 dígitos que empieza por seis ceros (`0000004829173640`, dígitos inventados) como A Tu Hora Express con alta confianza. En los códigos de 24 dígitos (`000000482917364000128013`), Peek consulta automáticamente a A Tu Hora Express junto con [Ciblex](carrier:ciblex), [InPost](carrier:inpost), [bpost](carrier:bpost), [Austrian Post](carrier:austrian-post) y [Express One](carrier:express-one) usando el código postal de 5 dígitos incrustado al final, y muestra "A Tu Hora Express tiene este paquete." cuando responde. Si tienes un código corto de 10 dígitos (`4829173640`), pulsa "Cambiar" al añadir o "Cambiar transportista" en la pantalla del paquete y elige A Tu Hora Express (buscar "A Tu Hora" también lo encuentra).
+[Peek](/) reconoce automáticamente cualquier código de 16 dígitos que empieza por seis ceros (`0000004829173640`, dígitos inventados) como A Tu Hora Express con alta confianza. Un código de 24 dígitos (`000000482917364000128013`) encaja con varios transportistas: Peek pregunta a A Tu Hora Express, con el código postal que lleva el código, a [Austrian Post](carrier:austrian-post), [InPost](carrier:inpost) y [Ciblex](carrier:ciblex) si lo conocen, y a [Express One](carrier:express-one) solo si ninguno lo conoce, y muestra «A Tu Hora Express tiene este paquete.» cuando A Tu Hora Express responde. Si tienes un código corto de 10 dígitos (`4829173640`), pulsa «Cambiar» al añadir o «Cambiar transportista» en la pantalla del paquete y elige A Tu Hora Express (buscar «A Tu Hora» también lo encuentra).
 
-Para códigos de 10 y 16 dígitos, Peek ofrece el campo opcional "Código postal de entrega" (`5 dígitos`). Aunque es opcional para guardar el paquete al momento, el rastreador directo de A Tu Hora Express solo responde a esos códigos cortos cuando indicas el código postal español de 5 dígitos; sin él, Peek pregunta a otros servicios de seguimiento y pasa a revisar una vez al día tras un día sin respuestas. Al introducir o actualizar el código postal, Peek lanza la consulta directa al instante. En códigos de 24 dígitos lee el código postal automáticamente de las cinco últimas cifras.
+Para códigos de 10 y 16 dígitos, Peek ofrece el campo opcional «Código postal de entrega», con la línea «A Tu Hora Express solo muestra el paquete con el código postal de entrega.» Hasta que lo añades, la pantalla del paquete ofrece «Añadir código postal», y Peek sigue el paquete a través de servicios de seguimiento, una vez al día tras un día sin respuesta. Al introducir el código postal, Peek lo revisa al momento. El código de 24 dígitos lleva el código postal en sus cinco últimas cifras, así que no lo necesita.
 
-Cuando A Tu Hora Express responde, Peek muestra la etapa ("Etiqueta creada", "En tránsito", "En reparto", "Intento de entrega", "Incidencia", "Devuelto al remitente", "Entregado"), las descripciones en español, los códigos de estado, la población cuando consta, la fecha prevista de entrega cuando A Tu Hora Express la facilita en un envío abierto, el peso cuando aparece y las horas locales de Madrid. Peek omite las coordenadas GPS junto a los escaneos, la barra de progreso, la fecha de salida, la referencia de cliente, nombres de remitente y destinatario, dirección de destino, número de bultos, volumen, observaciones, justificante de entrega y opciones de entrega; el portal tampoco publica puntos de recogida ni nombre del servicio.
+Cuando A Tu Hora Express responde, Peek muestra la etapa («Etiqueta creada», «En tránsito», «En reparto», «Intento de entrega», «Incidencia», «Devuelto al remitente», «Entregado»), el texto en español de cada escaneo con su población, la fecha prevista de entrega mientras A Tu Hora Express la muestra en un envío abierto, y el peso. Los códigos de estado fijan la etapa; Peek no los muestra. Los escaneos van fechados con la hora de Madrid y Peek los muestra con la hora de tu dispositivo. Peek omite las coordenadas GPS junto a los escaneos, la barra de progreso, la fecha de salida, la referencia de cliente, los nombres de remitente y destinatario, la dirección de destino, el número de bultos, el volumen, las observaciones, el justificante de entrega y las opciones de entrega; el rastreador no muestra punto de recogida ni nombre del servicio.
 
-Peek consulta hasta cada 10 minutos mientras tienes el paquete abierto o el día de entrega con avisos activos, y hasta cada 2 minutos desde las 6:00 hora de Madrid el día en que llega un escaneo en reparto (`En reparto` / `En realización`). El resto del tiempo revisa cada hora, se mantiene cada hora con la pantalla abierta tras 12 horas en "Etiqueta creada" o "Admitido por el transportista" o 2 días sin novedad, y baja a cada 6 horas tras 7 días aún en "Etiqueta creada". Cuando los servicios alternativos de seguimiento cubren la consulta (incluido sin código postal en códigos de 10 o 16 dígitos), revisan cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de entrega. Tras 4 días en tránsito sin novedades, Peek avisa (por ejemplo "Sin novedades desde el lun, 12 oct") y muestra "Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a A Tu Hora Express." Después de más de tres semanas sin novedades aparece "Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a A Tu Hora Express."
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek revisa hasta cada 10 minutos, y el día en que A Tu Hora Express muestra `En reparto` o `En realización`, cada 2 minutos desde las 6:00, hora de Madrid, mientras el rastreador de A Tu Hora Express responda. Si no, revisa cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o dos días sin novedades, revisa cada hora sigas como sigas el paquete, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el rastreador de A Tu Hora Express no responde y Peek sigue el paquete solo a través de servicios de seguimiento, revisa cada hora, cada 3 horas tras un día sin novedades y hasta cada 15 minutos el día en que el paquete sale a reparto.
 
-Puedes elegir avisos para "Cada escaneo", "Pasos importantes" o "Solo la entrega". Peek solo sigue las actualizaciones y no puede reprogramar entregas, cambiar tu dirección ni contactar con A Tu Hora Express por ti.
+Cuando el escaneo más reciente tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de ese escaneo, como «Sin novedades desde el lun 12 oct». La página del paquete dice entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a A Tu Hora Express.» Tras tres semanas sin un escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a A Tu Hora Express.»
+
+Puedes elegir avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo sigue las actualizaciones y no puede reprogramar entregas, cambiar tu dirección ni contactar con A Tu Hora Express por ti.
 
 ## Preguntas frecuentes sobre A Tu Hora Express
 
 ### ¿Por qué A Tu Hora Express me pide el código postal?
 
-Para consultar códigos de 10 o 16 dígitos, [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) y Peek necesitan además el código postal español de entrega de 5 dígitos. Si tu código tiene 24 dígitos, los últimos cinco ya son el código postal.
+A Tu Hora Express solo muestra un código de 10 o 16 dígitos con su código postal español de entrega de 5 dígitos, en [mydelivery.atuhoraexpress.com](https://mydelivery.atuhoraexpress.com/#/login-form-cli) como en Peek, donde el campo es opcional, pero A Tu Hora Express no responde sin él. Si tu código tiene 24 dígitos, los últimos cinco ya son el código postal.
 
 ### ¿Qué significa `Realizado con éxito` en A Tu Hora Express?
 

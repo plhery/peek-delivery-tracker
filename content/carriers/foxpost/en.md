@@ -14,9 +14,9 @@ Foxpost's tracking box asks for one of three kinds of ID:
 
 | Number | Whose it is |
 | --- | --- |
-| `CLFOX123456789012345` | `CLFOX` and digits: a parcel going to a Foxpost locker or pickup point. Foxpost also calls it the parcel's barcode. |
-| `Z1234567890` | `Z` and digits: a Packeta parcel. Foxpost's tracker sends a Z number it doesn't know on to Packeta's tracking. |
-| `6663900000` | Digits starting `66639`: a parcel you chose to have delivered to your door. |
+| `CLFOX482917365048291` | `CLFOX` and digits: a parcel going to a Foxpost locker or pickup point. Foxpost also calls it the parcel's barcode. |
+| `Z4829173650` | `Z` and digits: a Packeta parcel. Foxpost's tracker sends a Z number it doesn't know on to Packeta's tracking. |
+| `6663948271` | Digits starting `66639`: a parcel you chose to have delivered to your door. |
 
 Foxpost's email to you and the sender ends with the parcel ID. With a Foxpost account, it also appears under "Bejövő csomagjaim" (incoming parcels). When the parcel reaches the locker, the opening code comes by Viber (else SMS) and email.
 
@@ -24,7 +24,7 @@ Can't find any of it? Ask the shop, and see [how to find your tracking number](g
 
 ## What Foxpost tracking statuses mean
 
-Foxpost's tracker shows each step as a short title, a date and time, and a sentence. The site is Hungarian; switch it to English in the menu and the same steps appear in English, such as `Your package has arrived at the (return) parcel locker you selected and is now ready for pickup!`. The Hungarian sentences, in the order a parcel meets them:
+Foxpost's tracker shows each step as a short title, a date and time, and a sentence. The site is Hungarian, and its menu also offers English. The Hungarian sentences, in the order a parcel meets them:
 
 | Foxpost's status | What it means for you |
 | --- | --- |
@@ -46,7 +46,7 @@ Read the sentence, not the title: "Automatában" (in parcel locker) covers both 
 
 **How long it waits.** Foxpost keeps a parcel in a locker for 5 calendar days, weekends and public holidays included; the exact deadline, to the minute, is in the message. It can't extend that. A broken locker extends it automatically. At a Z-Pont, Foxpost's terms give 7 days, 5 days from 1 October to 20 January (its pickup page says 7 days all year, so go by the date in the message), and customer service can extend it by phone. After the deadline the parcel goes back to the sender; if you bought it from a shop, contact the shop.
 
-**Cash on delivery.** An A-BOX takes card only, at its terminal. A Z-BOX takes payment only through the link in Foxpost's emails, and the opening code comes after you pay. A Z-Pont takes cash or card.
+**Cash on delivery.** An A-BOX takes card only, at its terminal. A Z-BOX takes payment through the link in Foxpost's emails or in the Foxpost app, and the opening code comes after you pay. A Z-Pont takes cash or card.
 
 **Full or broken locker.** Foxpost may send the parcel to another locker nearby or a Z-Pont; you can accept or refuse that in its notice. If the code doesn't open the door, start again, then call customer service.
 
@@ -65,19 +65,19 @@ Read the sentence, not the title: "Automatában" (in parcel locker) covers both 
 
 ## Foxpost customer service and contact
 
-As listed on Foxpost's contact pages on 12 October 2026:
+On Foxpost's contact pages:
 
-- **Phone:** 06-1-999-0-369, Monday, Tuesday, Wednesday and Friday 8:00 to 18:00, Thursday 8:00 to 20:00, at the standard national rate.
-- **In person:** 1097 Budapest, Könyves Kálmán krt. 12-14, green staircase, 2nd floor, Thursdays only, 8:00 to 20:00.
+- **Phone:** 06-1-999-0-369, Monday, Tuesday, Wednesday and Friday 8:00 to 18:00, Thursday 8:00 to 20:00 Hungarian time, at the standard national rate.
+- **In person:** 1097 Budapest, Könyves Kálmán krt. 12-14, green staircase, 2nd floor, Thursdays only, 8:00 to 20:00 Hungarian time.
 - **Written:** the [contact forms](https://foxpost.hu/kapcsolatfelveteli-urlapok?pageType=c2c), including an enquiry about a parcel ("Csomag utáni érdeklődés"), and the [claim form](https://foxpost.hu/reklamacio?pageType=c2c). Foxpost publishes no customer email address. For a Packeta parcel, use Packeta's help instead.
 
 > Foxpost writes only from foxpost.hu addresses. A link that doesn't end in foxpost.hu is a scam, Foxpost never asks for bank login details, and it doesn't phone to ask you to "confirm delivery": hang up.
 
 ## Tracking Foxpost parcels with Peek
 
-[Peek](/) names Foxpost straight away for a `CLFOX` number. A 10-digit home-delivery number is offered to other carriers, never Foxpost: pick "Foxpost" with "Change", or paste a foxpost.hu tracking link with `code=` (from /csomagkovetes/ or /en/parcel-tracking), which names Foxpost whatever the number. A `Z` number goes to Packeta.
+[Peek](/) names Foxpost straight away for a `CLFOX` number. For a home-delivery number starting `66639` (10 to 20 digits), Peek asks Foxpost first, alongside other carriers whose numbers have the same length, and names Foxpost as soon as it knows the number. While Foxpost doesn't know it yet, Peek shows "Probably Foxpost" and keeps checking. You can also pick "Foxpost" with "Change", or paste a foxpost.hu tracking link with `code=` (from /csomagkovetes/ or /en/parcel-tracking), which names Foxpost whatever the number. A `Z` number goes to Packeta.
 
-Peek lists Foxpost's own history, reading its times as Budapest time. Statuses stay in Foxpost's Hungarian, whatever language you read Peek in. Peek can show the sender (usually the shop) and the locker the parcel is heading to or waits at, and can notify you when the status changes. There's no expected delivery date or weight, and the order number and payment details are left out.
+Peek lists Foxpost's own history, reading its times as Budapest time. The history's lines stay in Foxpost's Hungarian, whatever language you read Peek in; the parcel's status shows in yours, such as "Ready for pickup". Peek can show the sender (usually the shop) and the locker the parcel is heading to or waits at, and can notify you when the status changes. There's no expected delivery date or weight, and the order number and payment details are left out.
 
 ## Questions about Foxpost tracking
 
@@ -99,7 +99,7 @@ Foxpost says locker to locker can take as little as one working day after collec
 
 :::sources
 - [Foxpost: Csomagkövetés](https://foxpost.hu/csomagkovetes/) – number shapes, Z numbers sent to Packeta, statuses, tracker fields
-- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – English switch, English wordings
+- [Foxpost: Track your parcel](https://foxpost.hu/en/parcel-tracking) – the tracker in English, through the menu
 - [Foxpost: Home](https://foxpost.hu/) – lockers and home delivery, number shapes, Packeta Group
 - [Foxpost: Gyakran ismételt kérdések](https://foxpost.hu/ugyfelszolgalat) – where the number is, app, merger, no sending abroad, delivery times, cash on delivery, full lockers, DPD parcels
 - [Foxpost: Csomagátvétel](https://foxpost.hu/csomagatvetel) – codes, 5-day hold, Z-Pont, cash on delivery, home delivery attempts

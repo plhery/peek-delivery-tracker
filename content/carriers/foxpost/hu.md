@@ -14,9 +14,9 @@ A Csomagkövetés háromféle számot fogad el:
 
 | Szám (kitalált példa) | Mit jelent |
 | --- | --- |
-| `CLFOX000000000000000` | `CLFOX` és 15 számjegy: automatába vagy átvevőhelyre kért csomag. |
-| `Z0000000000` | `Z` és 10 számjegy: Packeta-csomagszám. Ha a Foxpost nem ismeri, a Csomagkövetés átirányít a Packeta nyomkövetési oldalára. |
-| `6663900000` | 10 számjegy, `66639`-cel kezdődik: házhoz szállított csomag. |
+| `CLFOX482917365048291` | `CLFOX` és 15 számjegy: automatába vagy átvevőhelyre kért csomag. |
+| `Z4829173650` | `Z` és 10 számjegy: Packeta-csomagszám. Ha a Foxpost nem ismeri, a Csomagkövetés átirányít a Packeta nyomkövetési oldalára. |
+| `6663948271` | `66639`-cel kezdődő számsor: házhoz szállított csomag. |
 
 A számot a Foxpost e-mailjének végén találod: ezt akkor küldik, amikor a csomag létrejön a rendszerükben, regisztráció nélkül is, ha ismerik az e-mail-címedet. Regisztrált felhasználóként a fiókod „Bejövő csomagjaim” menüjében is látod, a FOXPOST appban pedig akkor, ha ugyanazzal az e-mail-címmel rendeltél. Ne keverd össze a többi kóddal: a 9 jegyű feladási kód a feladóé, a nyitókód pedig csak az átvételre jó.
 
@@ -52,7 +52,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 **A-BOX.** Az automata kijelzőjén add meg az üzenetben kapott kódot. Az utánvétet itt csak bankkártyával fizetheted, az automata termináljánál.
 
-**Z-BOX.** A kezelőpanelen add meg a 6 számjegyű nyitókódot. Az utánvétet csak online, a fizetési linken rendezheted: megtalálod a „Csomagod már raktárunkban van” és a „Csomagod megérkezett” tárgyú e-mailben. A linken meg kell adnod a csomagazonosítót és az értesítőben kapott 6 jegyű hitelesítő kódot. A nyitókódot csak sikeres fizetés után küldik el.
+**Z-BOX.** A kezelőpanelen add meg a 6 számjegyű nyitókódot. Az utánvétet online rendezheted, a fizetési linken vagy az új FOXPOST appban. A linket megtalálod a „Csomagod már raktárunkban van” és a „Csomagod megérkezett” tárgyú e-mailben. A linken meg kell adnod a csomagazonosítót és az értesítőben kapott 6 jegyű hitelesítő kódot. A nyitókódot csak sikeres fizetés után küldik el.
 
 **Tárolási idő.** Az automatában 5 naptári napig vár a csomag, a hétvégét és a munkaszüneti napokat is beleszámítva. A pontos határidőt óra-perc pontossággal az érkezésről szóló SMS vagy Viber-üzenet és az e-mail tartalmazza. Hosszabbítást nem kérhetsz; ha viszont az automata elromlik, a Foxpost magától meghosszabbítja a tárolási időt, és SMS-ben értesít. A határidő után a csomag automatikusan visszamegy a feladóhoz, újbóli kiszállítás nincs: webshopos rendelésnél a webshoppal kell felvenned a kapcsolatot.
 
@@ -82,7 +82,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 ## Foxpost ügyfélszolgálat
 
-Így szerepeltek az elérhetőségek a foxpost.hu oldalon 2026. október 25-én:
+Az elérhetőségek a foxpost.hu oldalon:
 
 - **Telefon:** 06-1-999-0-369, hétfőn, kedden, szerdán és pénteken 8 és 18 óra között, csütörtökön 8 és 20 óra között, belföldi normál díjjal. A packeta.hu ugyanezt a számot adja meg.
 - **Személyesen:** 1097 Budapest, Könyves Kálmán krt. 12-14., zöld lépcsőház, 2. emelet, kizárólag csütörtökön 8 és 20 óra között.
@@ -92,7 +92,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 ## Foxpost-csomag követése a Peekkel
 
-A [Peek](/) a `CLFOX` kezdetű számról rögtön tudja, hogy Foxpost-csomag. A 10 jegyű, `66639` kezdetű házhoz szállítási számot viszont más szállítóknak ajánlja fel, a Foxpostnak nem. Ezt is nyugodtan illeszd be: a Peek több mint 4500 szállítót követ. A Foxpostot a „Change” gombbal választhatod ki. Beillesztheted a foxpost.hu Csomagkövetés linkjét is a `code=` résszel: ebből a Peek a számtól függetlenül tudja, hogy Foxpostról van szó. A `Z` kezdetű számot a Peek a [Packetánál](carrier:packeta) követi.
+A [Peek](/) a `CLFOX` kezdetű számról rögtön tudja, hogy Foxpost-csomag. A `66639` kezdetű házhoz szállítási számnál (10–20 számjegy) először a Foxpostot kérdezi meg, az azonos hosszúságú számokat használó más szállítókkal együtt, és amint a Foxpost ismeri a számot, Foxpost-csomagként követi. Amíg a Foxpost nem ismeri, a Peek „Probably Foxpost” felirattal mutatja, és tovább figyeli. A Foxpostot a „Change” gombbal is kiválaszthatod. Beillesztheted a foxpost.hu Csomagkövetés linkjét is a `code=` résszel: ebből a Peek a számtól függetlenül tudja, hogy Foxpostról van szó. A `Z` kezdetű számot a Peek a [Packetánál](carrier:packeta) követi.
 
 A Peek a Foxpost teljes előzményét mutatja, a lépéseket pedig magyarul, ahogy a Foxpost írja őket, akármilyen nyelven használod a Peeket. Az időpontokat budapesti idő szerint értelmezi, és az eszközöd időzónájában jeleníti meg. Látod a feladót (többnyire a webshopot) és azt az automatát vagy átvevőhelyet, ahová a csomag tart, vagy ahol vár. Várható kézbesítési napot és súlyt a Foxpost nem ad, a rendelésszámot és a fizetési adatokat pedig a Peek nem veszi át. Ha változik a státusz, a Peek értesítést küldhet. A Foxposttal vagy a webshoppal helyetted nem tud kapcsolatba lépni.
 

@@ -14,8 +14,8 @@ Kun Express publishes no number format, but the numbers seen on its tracking are
 
 | Number | What it is |
 | --- | --- |
-| `KUN1234567890` | KUN and 10 digits: Kun Express. |
-| `9400123456789012345674` | 22 digits starting with 94: a USPS number. |
+| `KUN4829173650` | KUN and 10 digits: Kun Express. |
+| `9400148291736504829172` | 22 digits starting with 94: a USPS number. |
 
 **Where to find it.** Kun Express works for sellers: web shops, dropshippers and sellers on TikTok, Temu and Amazon. The seller books the parcel and gives the number in the shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number). Kun Express's tracking page also finds a parcel by the seller's own reference, and then shows its KUN number.
 
@@ -61,9 +61,9 @@ Kun Express publishes no rules for recipients on delivery attempts, notice cards
 
 **How long it takes.** Kun Express gives no delivery time for its USPS line. It tells sellers that over 98% of parcels on its Canada line arrive within 12 calendar days, and that on its "DHL/UPS US virtual warehouse" service 70% arrive within 7 calendar days and over 98% within 10. These are sales figures, not a date for your order.
 
-**Nothing found.** Peek takes the answer Kun Express's tracker gives for a number it doesn't know as Kun Express listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Kun Express", with no request to check the number. So compare the number with the seller's message yourself: KUN and 10 digits.
+**Nothing found.** Kun Express's tracker says when it doesn't know a number. Peek then shows "Waiting for Kun Express" and keeps asking: a new label can take a while to show up. If Kun Express still doesn't know the number two days later, with nothing else answering for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it. Compare the number with the seller's message: KUN and 10 digits.
 
-**No update.** Kun Express's record shows USPS's scans only once it has copied them, so the latest USPS step can be missing. If the shop gave you a USPS number, check USPS's tracking too. More in [why tracking stops updating](guide:tracking-not-updating).
+**No update.** Kun Express's record shows USPS's scans only once it has copied them, so the latest USPS step can be missing. After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", and the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Kun Express."; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Kun Express." If the shop gave you a USPS number, check USPS's tracking too. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered but not there.** If the record ends in a USPS delivered line, read [delivered but not received](guide:delivered-not-received) and tell the seller.
 
@@ -71,7 +71,7 @@ Kun Express publishes no rules for recipients on delivery attempts, notice cards
 
 ## Kun Express contact number and email
 
-As read on 21 October 2026, kun-express.com lists one set of channels, written for sellers:
+kun-express.com lists one set of channels, written for sellers:
 
 - **Phone**: +86 19106772411, a Chinese mobile number, Monday to Sunday from 09:00 to 18:00. The site gives no time zone.
 - **Email**: kunexpress2022@gmail.com.
@@ -82,15 +82,15 @@ Kun Express publishes no help for recipients and no warning about fake delivery 
 
 ## Track Kun Express parcels with Peek
 
-[Peek](/) names Kun Express at once from a KUN number with 10 digits, which no other carrier in its catalog shares. Type or paste the number itself: Peek takes no Kun Express tracking links.
+[Peek](/) names Kun Express at once from a KUN number with 10 digits, which no other carrier in its catalog shares. Type or paste the number, or the address of the tracking page kun-express.com's search box opens: Peek reads the KUN number from it.
 
-Peek reads Kun Express's own tracking up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Kun Express's tracking answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's place where Kun Express gives one, and the destination country. Each scan is read on the clock Kun Express gives it and shown in your device's time zone; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Kun Express's record can also carry its `KUN Warehouse` departure again, weeks after USPS delivered the parcel: Peek leaves out a `KUN Warehouse` line dated a day or more after a delivery. A line Kun Express's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, is held back as a forecast, not a scan. Until the parcel is delivered or returned, Peek opens its tracking history with "Other sites may show more steps, but they’re only predictions." and lists the lines written ahead under "Show them", greyed, each with "Predicted for" and its day. Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. local time on the day it goes out for delivery, while Kun Express's own tracking answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". It shows the status, the history with each scan's place where Kun Express gives one, and the destination country. Each scan is read on the clock Kun Express gives it and shown in your device's time zone; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Kun Express's record can also carry its `KUN Warehouse` departure again, weeks after USPS delivered the parcel: Peek leaves out a `KUN Warehouse` line dated a day or more after a delivery. A line Kun Express's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, is held back as written in advance: it is no scan and sets no status. Until the parcel is delivered or returned, Peek opens its tracking history with "Kun Express’s site lists the whole route in advance, delivery included. Those steps aren’t real scans." and lists those lines under "Show them", greyed: "Predicted for" and its day while that day is ahead, "Written in advance for" once it has passed. If one of them is a delivery whose time has come and no scan says the parcel was delivered or returned, Peek adds under the status: "Kun Express’s site shows a delivery it wrote in advance, not a real scan. If nothing came, ask the seller." Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
 
 `Shipment information received` appears in Peek's own words. The other lines, USPS's included, show as written, except exact matches such as `Delivered`.
 
 Peek can't hand the parcel over to USPS: Kun Express's record names neither the delivery carrier nor the USPS number, so the parcel page doesn't say "Delivery with USPS", and the history goes only as far as Kun Express has copied it. If the seller gave you the USPS number too, add it as its own parcel and Peek follows it with USPS.
 
-Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Kun Express or the seller for you.
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Kun Express or the seller for you.
 
 ## Questions about Kun Express tracking
 

@@ -28,9 +28,9 @@ The shapes Peek knows (digits invented):
 
 | Number (invented) | What it is |
 | --- | --- |
-| `0100000000000000` | 16 digits starting `0100`: a PIN parcel number, as Peek's code reads it. 16 digits also fit [DHL eCommerce](carrier:dhl-ecommerce) and [TNT](carrier:tnt). |
-| `0000000000000` | 13 digits: a registered letter or a formal delivery. Many other carriers use 13 digits too. |
-| `000000000000(0)` | The same 13 digits as a label can print them, with the last digit in brackets. Peek reads them as `0000000000000`. |
+| `0100482917364058` | 16 digits starting `0100`: a PIN parcel number, as Peek's code reads it. 16 digits also fit [DHL eCommerce](carrier:dhl-ecommerce) and [TNT](carrier:tnt). |
+| `4829173640582` | 13 digits: a registered letter or a formal delivery. Many other carriers use 13 digits too. |
+| `482917364058(2)` | The same 13 digits as a label can print them, with the last digit in brackets. Peek reads them as `4829173640582`. |
 
 If the shop's email names [DHL](carrier:dhl) or another carrier, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
@@ -74,9 +74,9 @@ For a replacement or a refund, the sender is your contact, and PIN says that's t
 
 ## PIN AG contact and customer service
 
-Peek can't contact PIN AG or the sender for you. As read on 1 November 2026:
+Peek can't contact PIN AG or the sender for you. PIN AG lists:
 
-- **ServiceCenter:** 030 577978-800, Monday to Friday, 8 am to 6 pm.
+- **ServiceCenter:** 030 577978-800, Monday to Friday, 8 am to 6 pm German time.
 - **Online forms:** the trace request (Nachforschungsauftrag) and the delivery report (Hinweis zur Briefzustellung), both linked from PIN's help pages, and the contact forms its tracking page links to.
 - **Head office:** PIN AG, Alt-Moabit 91, 10559 Berlin. Phone 030 577978-0, email info@pin-ag.de.
 
@@ -84,14 +84,18 @@ Peek can't contact PIN AG or the sender for you. As read on 1 November 2026:
 
 Paste the number in [Peek](/), with or without brackets: Peek joins a bracketed last digit to the others.
 
-- **16 digits starting with 0100.** Other carriers use 16 digits too, so Peek asks the likely ones whether they have it, by your country (your phone's region, or on the web where you connect from). In Germany it asks PIN AG first. While it asks, you see "Checking tracking services…". If PIN has the item, you see "PIN AG has this parcel." and Peek files it there. Outside Germany, Peek doesn't ask PIN AG: press "Change" and pick PIN AG.
+- **16 digits starting with 0100.** Other carriers use 16 digits too, so Peek asks the likely ones whether they have it, by your country (your phone's region, or on the web your browser's time zone). In Germany it asks PIN AG first. While it asks, you see "Checking tracking services…". If PIN has the item, you see "PIN AG has this parcel." and Peek files it there. Outside Germany, Peek asks PIN AG only once the other carriers have missed the number.
 - **Not listed yet.** Add it anyway. In Germany, once Peek has asked PIN and PIN doesn't list the number yet, the parcel shows "Waiting for PIN AG’s first scan" and "Probably PIN AG", and Peek keeps asking PIN. After a week, Peek asks you to check the number with the sender or choose another carrier.
 - **13 digits.** Peek can't tell a PIN number by this shape alone. Paste it all the same: Peek follows more than 4,500 carriers. Press "Change" and pick PIN AG (type PIN). On a parcel you've already added, use "Change carrier".
 - **A link to PIN's tracking page** with your number names PIN AG at once ("Detected carrier").
 
-**What Peek shows.** PIN's status and each step with its time, in PIN's German words, on German time. `Sortierzentrum`, `Zustelldepot` and the status with no further updates show as "In transit", `In Zustellung` as "Out for delivery", `Zugestellt` as "Delivered" and `Unzustellbar` as "Needs attention". An item waiting at the depot for you (PIN's tracking page then shows the depot's address and opening hours) shows as "Ready for pickup", whatever step PIN files it under. PIN gives no scan places, delivery estimate or weight. Peek leaves out your address and the depot's address: to see the depot, use "Open the PIN AG website", which opens your number on PIN's tracking page. A standard letter has no tracking at PIN, so Peek can't follow it either.
+**What Peek shows.** PIN's status and each step with its time, in PIN's German words, on German time. `Sortierzentrum`, `Zustelldepot` and the status with no further updates show as "In transit", `In Zustellung` as "Out for delivery", `Zugestellt` as "Delivered" and `Unzustellbar` as "Needs attention". An item waiting at the depot for you (PIN's tracking page then shows the depot's address and opening hours) shows as "Ready for pickup", whatever step PIN files it under. PIN gives no scan places, delivery estimate, weight or signer. Peek leaves out your address and the depot's address: to see the depot, use "Open the PIN AG website", which opens your number on PIN's tracking page. A standard letter has no tracking at PIN, so Peek can't follow it either.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day PIN scans the item out for delivery, while PIN's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only".
+While you have the item open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. German time on the day PIN scans the item out for delivery, while PIN's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the item has shown "Label created" for seven days.
+
+When the newest scan is four days old and the item is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The item's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PIN AG.", with a "Get help from PIN AG" link to PIN's ServiceCenter. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PIN AG."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about PIN AG tracking
 

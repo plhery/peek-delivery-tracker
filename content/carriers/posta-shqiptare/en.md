@@ -14,9 +14,9 @@ Posta Shqiptare tracks items by a 13-character barcode: two letters for the type
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RR000000005AL` | Starts with C, E, L or R and ends in `AL`: an item posted in Albania. |
-| `UA000000005AL` | Other first letters, still ending in `AL`: also numbered in Albania. |
-| `RR000000005CN` | Ends in other letters, here `CN` for China: another country's post numbered it. A parcel coming to Albania usually has such a number, and Posta Shqiptare's tracker follows it too. |
+| `RR482917367AL` | Starts with C, E, L or R and ends in `AL`: an item posted in Albania. |
+| `UA619402838AL` | Other first letters, still ending in `AL`: also numbered in Albania. |
+| `RR739402812CN` | Ends in other letters, here `CN` for China: another country's post numbered it. A parcel coming to Albania usually has such a number, and Posta Shqiptare's tracker follows it too. |
 
 The box on Posta Shqiptare's website takes only this shape; anything else gets `Kodi eshte i gabuar!` (the code is wrong). No number? Posta Shqiptare says to ask at the counter of the post office that hands out your mail, with your name and surname. See [how to find a tracking number](guide:find-tracking-number).
 
@@ -78,9 +78,9 @@ Peek files these lines under its own stages: "Received by carrier", "In transit"
 
 ## Posta Shqiptare contact number and customer service
 
-Posta Shqiptare's channels, as read on 1 November 2026:
+Posta Shqiptare's published channels:
 
-- **Phone:** +355 682044727 or +355 682044707.
+- **Phone:** +355 682044727.
 - **Email:** asistence@postashqiptare.al
 - **Head office:** Drejtoria e përgjithshme Posta Shqiptare, Rruga "Reshit Çollaku" nr. 4, Tirana. Hours listed under it on the contact page: Monday to Thursday 08:00 to 16:30, Friday 08:00 to 14:00 (Albanian time).
 - **Complaints about mail abroad:** on the form at the post office where the item was posted.
@@ -97,9 +97,9 @@ A parcel coming to Albania under another post's number is filed under that post,
 
 Peek shows each line in Posta Shqiptare's wording, and a scan abroad with the country's name in English. It drops an office name that holds a postcode, and anything after a delivery's wording that could name who took the item. It shows no expected delivery date, as Posta Shqiptare gives none. Peek reads Posta Shqiptare's own lines on Albanian time, and works out the clock of the lines from abroad from the place they name or the scans around them.
 
-When you track from another country, Peek also asks your country's post with the same `AL` number: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) in Germany, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) in Greece and others. It switches to that post once it has fresh scans, and keeps Posta Shqiptare's history. From Kosovo, Montenegro or Turkey, it asks no other post.
+When you track from another country, Peek also asks your country's post with the same `AL` number: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) in Germany, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) in Greece and others. It switches to that post once it shows a scan no older than Posta Shqiptare's newest, and keeps Posta Shqiptare's history. From Kosovo, Montenegro or Turkey, it asks no other post.
 
-Peek checks up to every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Posta Shqiptare, your post or the shop for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks Posta Shqiptare directly up to every 10 minutes while its tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Posta Shqiptare." and a "Get help from Posta Shqiptare" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Posta Shqiptare." Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Posta Shqiptare, your post or the shop for you.
 
 ## Questions about Posta Shqiptare tracking
 
@@ -117,7 +117,7 @@ By its own standards, in Albania, the next day between cities and up to 3 workin
 
 ### What is the Posta Shqiptare phone number?
 
-+355 682044727 or +355 682044707, or email asistence@postashqiptare.al. Its contact page lists 08:00 to 16:30 Monday to Thursday and 08:00 to 14:00 on Friday under the head office's address.
++355 682044727, or email asistence@postashqiptare.al. Its contact page lists 08:00 to 16:30 Monday to Thursday and 08:00 to 14:00 on Friday under the head office's address.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – tracking box, number shape, post offices

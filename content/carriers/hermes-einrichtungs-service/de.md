@@ -12,16 +12,17 @@ Der Hermes Einrichtungs-Service (HES) ist die Firma der Otto Group, die Möbel, 
 
 Bei vielen Versendern kündigt HES die Lieferung selbst per E-Mail oder SMS an und schreibt die Sendungsverfolgungsnummer hinein. Die spätere Terminankündigung enthält außerdem einen Link direkt zu deiner Sendungsverfolgung. Oft nennt dir auch der Shop in seiner Versandankündigung eine Sendungsverfolgungsnummer oder eine Kollinummer. Noch nichts bekommen? Frag den Shop, und schau in [Sendungsnummer finden](guide:find-tracking-number).
 
-Laut HES besteht die Sendungsverfolgungsnummer aus 16 bis 25 Ziffern. Die Kollinummer vergibt der Auftraggeber selbst, deshalb schwanken Aufbau und Länge. Bekannt sind diese Formen (Ziffern erfunden):
+Laut HES besteht die Sendungsverfolgungsnummer aus 16 bis 25 Ziffern. Die Kollinummer vergibt der Auftraggeber selbst, deshalb schwanken Aufbau und Länge. Üblich sind diese Formen:
 
-| Nummer | Was sie ist |
+| Beispiel (erfunden) | Was sie ist |
 | --- | --- |
-| `12345678901234567` | 17 oder 19 Ziffern: die Lieferscheinnummer deines Auftrags. |
-| `00000000000000000000` | 20 Ziffern, beginnt mit `00`: die Nummer eines einzelnen Packstücks. |
+| `41854829170000364` | 17 Ziffern mit `0000` an den Stellen 11 bis 14: die Lieferscheinnummer deines Auftrags. |
+| `4185482917000036482` | 19 Ziffern nach demselben Muster (auch 21 kommen vor): ebenfalls eine Lieferscheinnummer. |
+| `00482917364058291736` | 20 Ziffern, beginnt mit `00`: die Nummer eines einzelnen Packstücks (Kollinummer). |
 
 Gib die Nummer vollständig ein. Den Sendungsverlauf zeigt myhes.de mit der Nummer allein. Für mehr Details und das Live-Tracking am Zustelltag fragt die Seite zusätzlich nach der Postleitzahl des Empfängers.
 
-Reine Ziffernfolgen dieser Längen nutzen auch viele andere Paketdienste, eine Nummer allein verrät HES also nicht ([warum sich Nummern ähneln](guide:tracking-number-formats)). Und HES ist nicht [Hermes](carrier:hermes-de), der Paketdienst: Es ist ein eigenständiges Schwesterunternehmen der Hermes Germany, die Pakete bis 31,5 kg zustellt.
+Reine Ziffernfolgen dieser Längen nutzen auch andere Paketdienste ([warum sich Nummern ähneln](guide:tracking-number-formats)). Und HES ist nicht [Hermes](carrier:hermes-de), der Paketdienst: Es ist ein eigenständiges Schwesterunternehmen der Hermes Germany, die Pakete bis 31,5 kg zustellt.
 
 ## Status in der Hermes Einrichtungs-Service Sendungsverfolgung
 
@@ -68,24 +69,26 @@ Auftraggeber von HES sind nur Unternehmen. Für Reklamationen ist deshalb der Sh
 
 ## Hermes Einrichtungs-Service Kontakt und Telefonnummer
 
-So nennen es die Seiten von HES am 12. Oktober 2026:
-
 - **Dein Auslieferdepot:** Eine zentrale Hotline für Empfänger gibt es nicht. Telefon, E-Mail und Servicezeiten deines Depots stehen auf myhes.de in den Auftragsdetails unter „Dein HES Kundenservice“. Ruf dafür deine Sendung mit der Nummer auf und nenn sie, wenn du dich meldest.
 - **Chatbot:** Hermine beantwortet Fragen, zusammen mit dem Kundenservice im Depot.
 - **Der Shop:** Bei Fragen zur Sendung schickt dich die Kontaktseite von HES zu deinem Shop oder zur Sendungsverfolgung auf myhes.de.
 - **Zentrale in Löhne:** +49 5732 103-0 gibt laut Impressum keine Sendungsauskünfte.
 
-In Österreich liefert HES mit dem Partner Gebrüder Weiss, in der Schweiz mit der Sieber Transport AG. Einen eigenen Kanal für Empfänger dort nennt HES nicht, frag also den Shop.
+In den Niederlanden liefert HES mit dem Partner TSN Groen, in Österreich mit Gebrüder Weiss, in der Schweiz mit der Sieber Transport AG. Einen eigenen Kanal für Empfänger dort nennt HES nicht, frag also den Shop.
 
 Hermes Germany verschickt nach eigener Angabe keine SMS, ausgenommen der Hermes Einrichtungsservice. Eine SMS von HES kann also echt sein.
 
 ## Hermes Einrichtungs-Service mit Peek verfolgen
 
-Lieferscheinnummern von HES haben Längen, die auch andere Paketdienste nutzen. Deshalb fragt [Peek](/) bei ihnen neben anderen Diensten auch HES und verfolgt das Paket dort, wenn HES die Nummer kennt; nach der Nummer eines Packstücks fragt Peek HES nicht. Zeigt Peek einen anderen Dienst an, etwa DHL eCommerce, Colis Privé, Poczta Polska, [Swiss Post Cargo](carrier:swiss-post-cargo) oder USPS, oder keinen, tipp auf „Ändern“ und wähle Hermes Einrichtungs-Service, nicht Hermes Germany: Dort wird eine HES-Nummer nicht gefunden, und umgekehrt. Mit HES wird die Nummer auf myhes.de nachgeschlagen, eine Postleitzahl ist nicht nötig. Füg die Nummer ein, nicht einen Link von myhes.de, denn Links werden nicht ausgelesen.
+Bei einer 19-stelligen Lieferscheinnummer mit `0000` an den Stellen 11 bis 14 fragt [Peek](/) nur HES. Eine 17-stellige nach diesem Muster kann auch von DHL eCommerce stammen, eine 21-stellige auch von SEUR, deshalb fragt Peek dann beide. Nach der 20-stelligen Kollinummer eines Packstücks fragt Peek HES nicht. Zeigt Peek einen anderen Dienst an oder keinen, tipp auf „Ändern“ (bei einer schon hinzugefügten Sendung „Paketdienst ändern“) und wähle Hermes Einrichtungs-Service, nicht Hermes Germany: Dort wird eine HES-Nummer nicht gefunden, und umgekehrt. Mit HES wird die Nummer auf myhes.de nachgeschlagen, eine Postleitzahl ist nicht nötig. Füg die Nummer ein, nicht einen Link von myhes.de, denn Links werden nicht ausgelesen.
 
 Peek zeigt Status und Sendungsverlauf mit den deutschen Sätzen von HES, den geplanten Liefertag mit Zeitfenster, wenn myhes.de eines nennt, den Händler oder Shop, der die Ware verkauft hat, und den Zeitpunkt der Zustellung. Orte gibt HES nicht heraus, deshalb erscheint auf der Karte nichts, und das Live-Tracking des Lieferwagens ist nicht zu sehen. Ein storniertes oder zurückgehendes Paket erscheint als Problem. Dein Name, deine Adresse und Lieferhinweise wie eine Abstellgenehmigung fehlen, alle Zeiten gelten als deutsche Zeit.
 
-Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald die Ware auf Tour ist (am Tag der Tour ab 6:00 Uhr Ortszeit oder, wenn HES ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange HES selbst antwortet; über Tracking-Dienste alle 15 Minuten), und du bekommst auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
+Solange du die Sendung in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten – und am Tag der Tour alle 2 Minuten, solange das Tracking von HES antwortet: ab 6 Uhr (deutsche Zeit) oder, wenn HES ein Zeitfenster nennt, das nach 6:30 Uhr beginnt, ab einer halben Stunde vor dessen Beginn. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, auch wenn du die Sendung geöffnet hast, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden.
+
+Bleibt eine Sendung in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit dem Tag des letzten Scans), den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Hermes Einrichtungs-Service nach.“ und den Link „Hol dir Hilfe bei Hermes Einrichtungs-Service“ zu den FAQ auf myhes.de. Nach über drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Hermes Einrichtungs-Service nach.“
+
+Peek benachrichtigt dich mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Fragen zur Hermes Einrichtungs-Service Sendungsverfolgung
 
@@ -111,7 +114,7 @@ Es startet erst, wenn die Liefertour begonnen hat, und myhes.de verlangt dafür 
 - [HES: Sendungsverfolgung](https://myhes.de/de/sendungsverfolgung) – Postleitzahl, Statustexte, Feld mit dem Liefertermin, Lieferhinweise
 - [HES: Kontakt](https://www.hes.de/de/kontakt/) – Fragen zur Sendung, Schwesterunternehmen der Hermes Germany
 - [HES: Impressum](https://www.hes.de/de/impressum/) – Zentrale ohne Sendungsauskunft, Depotkontakt in der Sendungsauskunft
-- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – Partner in Österreich und der Schweiz
+- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – Partner in den Niederlanden, Österreich und der Schweiz
 - [Hermes Germany: Sicherheit](https://www.myhermes.de/sicherheit/) – SMS vom Hermes Einrichtungsservice
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek bei HES liest
 :::

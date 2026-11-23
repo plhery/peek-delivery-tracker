@@ -12,16 +12,17 @@ Hermes Einrichtungs-Service (HES) is the Otto Group company that delivers furnit
 
 For many shops, HES announces the delivery by email or SMS with your tracking number (Sendungsverfolgungsnummer), and its appointment message links straight to your tracking. The shop's shipping email may give it too, or a Kollinummer (piece number). Nothing yet? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number).
 
-HES says its tracking number is 16 to 25 digits. A Kollinummer is set by the shop, so its shape and length vary. Peek's records hold these (digits invented):
+HES says its tracking number is 16 to 25 digits. A Kollinummer is set by the shop, so its shape and length vary. The usual shapes:
 
-| Number | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `12345678901234567` | 17 or 19 digits: a delivery-note (Lieferschein) number. |
-| `00000000000000000000` | 20 digits starting `00`: the number of one piece of the order. |
+| `41854829170000364` | 17 digits with `0000` in places 11 to 14: a delivery-note (Lieferschein) number. |
+| `4185482917000036482` | 19 digits on the same pattern (21 occur too): another HES delivery-note number. |
+| `00482917364058291736` | 20 digits starting `00`: the number of one piece of the order (Kollinummer). |
 
 Enter the number in full. myhes.de shows the history with the number alone; it asks for your postcode for more details and, on the day, the live tracking.
 
-Many carriers use the same lengths, so a number alone never says it's HES ([why lengths overlap](guide:tracking-number-formats)). HES is also not [Hermes](carrier:hermes-de), the parcel company: it's an independent sister company of Hermes Germany, which handles parcels up to 31.5 kg. Entered here as a Hermes Germany parcel, a HES number isn't found, and the reverse.
+Other carriers use the same lengths ([why lengths overlap](guide:tracking-number-formats)). HES is also not [Hermes](carrier:hermes-de), the parcel company: it's an independent sister company of Hermes Germany, which handles parcels up to 31.5 kg. Entered here as a Hermes Germany parcel, a HES number isn't found, and the reverse.
 
 ## Hermes Einrichtungs-Service statuses in English
 
@@ -68,24 +69,26 @@ HES works only for businesses, so the shop that sold you the goods is your conta
 
 ## Hermes Einrichtungs-Service contact and phone number
 
-As listed on HES's pages on 12 October 2026:
-
 - **Your delivery depot:** HES has no central hotline for recipients. The depot's phone, email and hours are in the order details on myhes.de, under "Dein HES Kundenservice". Give your tracking number when you contact it.
 - **Chatbot:** Hermine answers questions alongside the depot's customer service.
 - **The shop:** HES's contact page sends questions about a shipment to your shop or to the tracking on myhes.de.
 - **Head office:** +49 5732 103-0 in Löhne gives no shipment information.
 
-In Austria and Switzerland HES delivers through partners (Gebrüder Weiss, Sieber Transport AG) and publishes no recipient channel there, so ask the shop.
+In the Netherlands, Austria and Switzerland HES delivers through partners (TSN Groen, Gebrüder Weiss, Sieber Transport AG) and publishes no recipient channel there, so ask the shop.
 
 Hermes Germany sends no SMS, but HES does, so a text from HES can be genuine.
 
 ## Tracking Hermes Einrichtungs-Service with Peek
 
-HES's delivery-note numbers have lengths other carriers use too, so [Peek](/) asks HES, among others, whether it knows one, and follows the parcel on HES when it does; it doesn't ask HES about a piece number. If Peek shows another carrier (DHL eCommerce, Colis Privé, Poczta Polska, [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps)…) or none, tap "Change" and choose Hermes Einrichtungs-Service, and the number is looked up on myhes.de, with no postcode needed. Paste the number, not a myhes.de link.
+For a 19-digit delivery-note number with `0000` in places 11 to 14, [Peek](/) asks HES alone. A 17-digit number on that pattern can be DHL eCommerce's too, and a 21-digit one SEUR's, so Peek asks both. It doesn't ask HES about a 20-digit piece number (Kollinummer). If Peek shows another carrier or none, tap "Change" ("Change carrier" on a parcel already added) and choose Hermes Einrichtungs-Service, and the number is looked up on myhes.de, with no postcode needed. Paste the number, not a myhes.de link.
 
 Peek shows the status and history in HES's German wording, the planned delivery day with its time window when myhes.de gives one, the shop or dealer that sold the goods and the time of delivery. HES gives no places, so nothing appears on the map, and the van's live tracking isn't shown. A cancelled or returned order shows as a problem. Your name, address and delivery instructions are left out, and times are read as German time.
 
-It checks up to every 10 minutes, or every 2 on the day the van goes out, from 6 a.m. local time or, when HES gives a time window, from half an hour before it opens, while HES's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day of the round, every 2 minutes while HES's own tracking answers, from 6 a.m. German time or, when HES gives a time window starting after 6:30, from half an hour before it opens. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created".
+
+When the newest scan is four days old and the order is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Hermes Einrichtungs-Service.", with a "Get help from Hermes Einrichtungs-Service" link to HES's FAQ on myhes.de. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Hermes Einrichtungs-Service."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Hermes Einrichtungs-Service tracking
 
@@ -112,7 +115,7 @@ Only if the shop's contract with HES includes it: Saturday and evening delivery,
 - [HES: FAQ](https://myhes.de/de/faq) – where the number is, changing the day, drop-off, attempts, damage, returns, depot contact
 - [HES: Kontakt](https://www.hes.de/de/kontakt/) – shipment questions, sister company of Hermes Germany
 - [HES: Impressum](https://www.hes.de/de/impressum/) – head office, depot contact in tracking
-- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partners in Austria and Switzerland
+- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partners in the Netherlands, Austria and Switzerland
 - [Hermes Germany: Sicherheit](https://www.myhermes.de/sicherheit/) – SMS from HES
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

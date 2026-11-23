@@ -14692,6 +14692,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee7532"
     },
     {
+      "id": "sunyou",
+      "catalog": "sunyou",
+      "slug": "shunyou-wuliu-sunyou-chaxun",
+      "title": "顺友物流（SunYou / SYPost）查询：SY单号、状态与派送",
+      "name": "SunYou",
+      "color": "#02a232"
+    },
+    {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-wuliu-chaxun",
@@ -14706,6 +14714,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "澳洲邮政（Australia Post）物流查询：单号、状态与快递柜",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "yihao-zhuanxian-first-line-chaxun",
+      "title": "壹号专线（FIRST LINE）物流查询：1ST单号、状态与美国派送",
+      "name": "FIRST LINE",
+      "color": "#55207a"
     },
     {
       "id": "juxi-express",
@@ -14794,6 +14810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "美特顺物流（Meiteshun）查询：AMTS单号与预设轨迹",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "chengtai-tongyun-cttyex-chaxun",
+      "title": "诚泰通运（CTTYEX）查询：CTTY单号、英文轨迹与北京时间",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     },
     {
       "id": "huaya-express",
@@ -14900,6 +14924,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "jifan-guoji-wuliu-chaxun",
+      "title": "吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间",
+      "name": "Jifan",
+      "color": "#c81011"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "yiqifei-17feia-wuliu-chaxun",
@@ -14930,6 +14962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "安骏物流（Anjun Logistics）查询：中巴专线与巴西清关",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "xyl-ships-fxyl-wuliu-chaxun",
+      "title": "XYL-Ships（FXYL）物流查询：NUDE与XLWL单号及状态",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
     }
   ],
   "nl": [

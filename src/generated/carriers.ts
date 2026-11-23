@@ -2572,6 +2572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec6500"
     },
     {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "foxpost-sendungsverfolgung",
+      "title": "Foxpost Sendungsverfolgung: Status, Locker & Kontakt",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-sendungsverfolgung",
@@ -4124,6 +4132,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Express One\u00a0: statuts, points relais et contacts",
       "name": "Express One",
       "color": "#ec6500"
+    },
+    {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "suivi-foxpost",
+      "title": "Suivi Foxpost\u00a0: statuts, casiers et contacts",
+      "name": "Foxpost",
+      "color": "#b70100"
     },
     {
       "id": "slovenska-posta",
@@ -5712,6 +5728,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec6500"
     },
     {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "tracking-foxpost",
+      "title": "Tracking Foxpost: stati, locker e contatti",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "tracciamento-slovenska-posta",
@@ -7250,6 +7274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ec6500"
     },
     {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "seguimiento-foxpost",
+      "title": "Seguimiento Foxpost: estados, taquillas y contacto",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "seguimiento-slovenska-posta",
@@ -8778,6 +8810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Express One: estados, pontos e contactos",
       "name": "Express One",
       "color": "#ec6500"
+    },
+    {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "seguimento-foxpost",
+      "title": "Seguimento Foxpost: estados, cacifos e contactos",
+      "name": "Foxpost",
+      "color": "#b70100"
     },
     {
       "id": "slovenska-posta",
@@ -10350,6 +10390,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Express One: statusy, punkty i kontakt",
       "name": "Express One",
       "color": "#ec6500"
+    },
+    {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "sledzenie-foxpost",
+      "title": "Śledzenie Foxpost: statusy, automaty i kontakt",
+      "name": "Foxpost",
+      "color": "#b70100"
     },
     {
       "id": "slovenska-posta",

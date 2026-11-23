@@ -2852,6 +2852,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "canpar-sendungsverfolgung",
+      "title": "Canpar Sendungsverfolgung: Nummern, Status und SMARTSpot",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "uniuni-tracking",
@@ -6496,6 +6504,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "tracciamento-canpar",
+      "title": "Tracciamento Canpar: numeri, stati e mancate consegne",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "uniuni-tracking",
@@ -8290,6 +8306,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "seguimiento-canpar",
+      "title": "Seguimiento Canpar: números, estados y entregas fallidas",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
       "id": "uniuni",
       "catalog": "uniuni",
       "slug": "uniuni-tracking",
@@ -10074,6 +10098,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Canada Post: códigos, estados e alfândega",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "seguimento-canpar",
+      "title": "Seguimento Canpar: números, estados e entregas falhadas",
+      "name": "Canpar",
+      "color": "#003b70"
     },
     {
       "id": "uniuni",
@@ -11894,6 +11926,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Canada Post: numery, statusy, awizo i cło",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "sledzenie-canpar",
+      "title": "Śledzenie Canpar: numery, statusy i odbiór SMARTSpot",
+      "name": "Canpar",
+      "color": "#003b70"
     },
     {
       "id": "uniuni",

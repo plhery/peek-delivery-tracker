@@ -83351,9 +83351,19 @@
   },
   {
     "input": "AECA00000001313353",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "aliexpress",
+    "confidence": "high",
+    "candidates": [
+      "aliexpress"
+    ]
+  },
+  {
+    "input": "AECA00009999999990",
+    "carrier": "aliexpress",
+    "confidence": "high",
+    "candidates": [
+      "aliexpress"
+    ]
   },
   {
     "input": "AF037866-6",
@@ -87515,6 +87525,14 @@
     "confidence": "high",
     "candidates": [
       "swiss-post"
+    ]
+  },
+  {
+    "input": "CFJY999999980CN",
+    "carrier": "tsjy",
+    "confidence": "high",
+    "candidates": [
+      "tsjy"
     ]
   },
   {
@@ -120119,6 +120137,12 @@
     "asked": [
       "australia-post"
     ]
+  },
+  {
+    "input": "YJIDB1836638923YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "YL7389999980YQ",

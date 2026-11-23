@@ -255,6 +255,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
+        "pattern": "^AECA\\d{14}$",
+        "confidence": "high"
+      },
+      {
         "pattern": "^CNBR\\d{11}$",
         "confidence": "low"
       },
@@ -16009,6 +16013,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^TSJY\\d{9}CN$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^CFJY\\d{9}CN$",
         "confidence": "high"
       }
     ],
@@ -68438,6 +68446,25 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "yji": {
+    "displayName": "YJI",
+    "aliases": [
+      "延锦国际",
+      "延锦国际物流货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ef5c00",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "yji"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -70529,7 +70556,8 @@ export const CARRIER_IDS = [
   "marfret",
   "skyquick",
   "ts-lines",
-  "gti"
+  "gti",
+  "yji"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

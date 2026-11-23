@@ -14,13 +14,13 @@ Z-Leading nie publikuje formatu numeru, a żadna publiczna strona nie pokazuje p
 
 Katalog Peek wiąże z Z-Leading jeden kształt, pochodzący z przesyłki przypisanej przez usługi śledzenia do Zhongling: `ZL`, dwie kolejne litery i dziewięć cyfr, jak zmyślony przykład `ZLGK482917364`. To tylko słabe dopasowanie: sam kształt nie przesądza, że numer należy do Z-Leading.
 
-Z-Leading deklaruje, że jest bezpośrednim agentem DHL, UPS i FedEx i sam drukuje ich listy przewozowe, dlatego przesyłka ekspresowa może nosić jeden z ich numerów. Ich wzory (cyfry zmyślone):
+Z-Leading deklaruje, że jest agentem pierwszej klasy DHL, UPS i FedEx i sam drukuje ich listy przewozowe, dlatego przesyłka ekspresowa może nosić jeden z ich numerów. Ich wzory (cyfry zmyślone):
 
 | Numer (zmyślony) | Co to jest |
 | --- | --- |
 | `1Z4829A73640582913` | `1Z` i 16 liter lub cyfr: [UPS](carrier:ups). |
 | `4829173646` | Dziesięć cyfr: może to być m.in. [DHL Express](carrier:dhl-express). |
-| `482917364058` | Dwanaście cyfr: może to być m.in. [FedEx](carrier:fedex). |
+| `482917364055` | Dwanaście cyfr: może to być m.in. [FedEx](carrier:fedex). |
 
 Przy frachcie lotniczym lub morskim numer należy do linii lotniczej albo żeglugowej i śledzi się go na jej stronie. Jeśli twój numer nie pasuje do żadnego z powyższych, zajrzyj do [formaty numerów śledzenia](guide:tracking-number-formats).
 
@@ -65,7 +65,7 @@ Dla innych numerów Peek pyta usługi śledzenia podczas dodawania („Sprawdzan
 
 Z-Leading nie ma własnego śledzenia, które Peek mógłby czytać bezpośrednio. Dla paczki przypisanej do Z-Leading Peek pyta kolejno ParcelsApp, Ship24 i 17TRACK i zostaje przy pierwszym, który ma przesyłkę, pokazując status i historię z tej usługi w jej brzmieniu. Historia ta może mieć opóźnienie względem przewoźnika końcowego albo pozostać pusta. Link śledzenia otwiera stronę danej usługi. Gdy usługa wskaże przewoźnika odczytywanego bezpośrednio przez Peek, Peek pyta go o ten sam numer i przełącza się na niego, gdy pokaże skan co najmniej tak świeży jak najnowszy w historii. Peek nie przekazuje tym usługom twojego adresu IP ani kraju.
 
-Peek sprawdza co godzinę, co 3 godziny po dniu bez nowego skanu, do co 15 minut w dniu doręczenia oraz co 6 godzin po siedmiu dniach na etapie „Zarejestrowana”; usługa, która nie znała numeru, jest pytana ponownie następnego dnia. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Z-Leading.” oraz link „Poproś przewoźnika Z-Leading o pomoc”. Może powiadamiać w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może kontaktować się z Z-Leading ani ze sklepem w twoim imieniu.
+Peek sprawdza co godzinę, co 3 godziny po dniu bez nowego skanu oraz co 6 godzin po siedmiu dniach na etapie „Zarejestrowana”. W dniu, w którym paczka jest w doręczeniu, sprawdza nawet co 15 minut, dopóki masz ją otwartą w Peek lub masz włączone powiadomienia. Usługa, która nie znała numeru, jest pytana ponownie następnego dnia. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą) oraz komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Z-Leading.” Z-Leading nie ma w Peek strony pomocy, więc link do pomocy pojawia się dopiero, gdy Peek śledzi firmę doręczającą, i tylko jeśli ona ją ma. Może powiadamiać w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może kontaktować się z Z-Leading ani ze sklepem w twoim imieniu.
 
 ## Pytania o śledzenie Z-Leading
 

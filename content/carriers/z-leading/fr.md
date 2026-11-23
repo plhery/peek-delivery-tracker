@@ -14,13 +14,13 @@ Z-Leading ne publie aucun format de numéro, et aucune page publique ne montre u
 
 Le catalogue de Peek associe une forme à Z-Leading, relevée sur un colis classé sous Zhongling par des services de suivi : `ZL`, deux autres lettres et neuf chiffres, comme le numéro fictif `ZLGK482917364`. Il ne s’agit que d’une correspondance faible : la forme seule ne prouve pas que le numéro appartient à Z-Leading.
 
-Z-Leading se présente comme agent direct de DHL, UPS et FedEx et imprime lui-même leurs lettres de transport ; un envoi express peut donc porter l’un de leurs numéros. Leurs formats (chiffres fictifs) :
+Z-Leading se présente comme agent de premier rang de DHL, UPS et FedEx et imprime lui-même leurs lettres de transport ; un envoi express peut donc porter l’un de leurs numéros. Leurs formats (chiffres fictifs) :
 
 | Numéro (fictif) | À quoi il correspond |
 | --- | --- |
 | `1Z4829A73640582913` | `1Z` suivi de 16 lettres ou chiffres : [UPS](carrier:ups). |
 | `4829173646` | Dix chiffres : peut être [DHL Express](carrier:dhl-express), entre autres. |
-| `482917364058` | Douze chiffres : peut être [FedEx](carrier:fedex), entre autres. |
+| `482917364055` | Douze chiffres : peut être [FedEx](carrier:fedex), entre autres. |
 
 Pour le fret aérien ou maritime, le numéro appartient à la compagnie aérienne ou maritime, et se suit sur son site. Si ton numéro ne correspond à aucun de ces cas, consulte [formats des numéros de suivi](guide:tracking-number-formats).
 
@@ -65,7 +65,7 @@ Pour tout autre numéro, Peek interroge les services de suivi pendant l’ajout 
 
 Z-Leading n’a pas de suivi que Peek puisse lire directement. Pour un colis classé sous Z-Leading, Peek interroge tour à tour ParcelsApp, Ship24 et 17TRACK et conserve le premier qui connaît le colis. Il affiche le statut et l’historique de ce service, dans ses propres mots. Cet historique peut avoir du retard sur celui du transporteur final, et rester vide pour certains envois. Le lien de suivi ouvre la page de ce service pour ce numéro. Lorsque le service nomme un transporteur que Peek lit directement, Peek interroge ce transporteur avec le même numéro et bascule dessus dès que celui-ci affiche un scan au moins aussi récent que le dernier connu. Peek ne transmet ni ton adresse IP ni ton pays à ces services.
 
-Peek vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, jusqu’à toutes les 15 minutes le jour où le colis est en livraison, et toutes les 6 heures après sept jours au statut « Étiquette créée » ; un service qui ne connaissait pas le numéro est réinterrogé le lendemain. Si un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Z-Leading. » et le lien « Demande de l’aide à Z-Leading ». Il peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Z-Leading ni la boutique à ta place.
+Peek vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan et toutes les 6 heures après sept jours au statut « Étiquette créée ». Le jour où le colis est en livraison, il vérifie jusqu’à toutes les 15 minutes tant que tu le gardes ouvert dans Peek ou que les notifications sont activées. Un service qui ne connaissait pas le numéro est réinterrogé le lendemain. Si un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date) et « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Z-Leading. » Z-Leading n’a pas de page d’aide dans Peek : un lien « Demande de l’aide à … » n’apparaît qu’une fois que Peek suit le transporteur qui livre, et seulement si celui-ci en a une. Il peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Z-Leading ni la boutique à ta place.
 
 ## Questions sur le suivi Z-Leading
 

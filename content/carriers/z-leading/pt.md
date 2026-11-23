@@ -20,7 +20,7 @@ A Z-Leading apresenta-se como agente de primeira linha da DHL, UPS e FedEx e imp
 | --- | --- |
 | `1Z4829A73640582913` | `1Z` e 16 letras ou dígitos: [UPS](carrier:ups). |
 | `4829173646` | Dez dígitos: pode ser [DHL Express](carrier:dhl-express), entre outras. |
-| `482917364058` | Doze dígitos: pode ser [FedEx](carrier:fedex), entre outras. |
+| `482917364055` | Doze dígitos: pode ser [FedEx](carrier:fedex), entre outras. |
 
 Em frete aéreo ou marítimo, o número pertence à companhia aérea ou marítima e segue-se no respetivo site. Se o teu número não encaixar em nenhum destes, vê [formatos de números de seguimento](guide:tracking-number-formats).
 
@@ -65,7 +65,7 @@ Para qualquer outro número, o Peek consulta serviços de seguimento ao adiciona
 
 A Z-Leading não tem seguimento que o Peek possa ler diretamente. Para uma encomenda registada na Z-Leading, o Peek consulta por ordem ParcelsApp, Ship24 e 17TRACK e mantém o primeiro que a conhecer, mostrando o estado e histórico desse serviço nas suas palavras. Esse histórico pode atrasar-se face à transportadora final ou estar vazio. A ligação de seguimento abre a página desse serviço. Quando o serviço indica uma transportadora que o Peek lê diretamente, o Peek consulta-a com o mesmo número e muda para ela assim que mostrar um registo pelo menos tão recente quanto o mais recente do histórico. O Peek não partilha o teu endereço IP nem o teu país com esses serviços.
 
-O Peek verifica de hora a hora, a cada 3 horas após um dia sem novos registos, até de 15 em 15 minutos no dia em que está em distribuição e a cada 6 horas após sete dias em «Etiqueta criada»; um serviço que não conhecia o número é consultado novamente no dia seguinte. Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data), «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Z-Leading.» e a ligação «Pede ajuda a Z-Leading». Pode avisar-te com «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a Z-Leading nem a loja por ti.
+O Peek verifica de hora a hora, a cada 3 horas após um dia sem novos registos e a cada 6 horas após sete dias em «Etiqueta criada». No dia em que está em distribuição, verifica até de 15 em 15 minutos enquanto a tiveres aberta no Peek ou com as notificações ativadas. Um serviço que não conhecia o número é consultado novamente no dia seguinte. Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data) e «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Z-Leading.» A Z-Leading não tem página de ajuda no Peek: uma ligação «Pede ajuda a …» só aparece quando o Peek segue a transportadora que entrega, e só se esta tiver uma. Pode avisar-te com «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a Z-Leading nem a loja por ti.
 
 ## Perguntas sobre o seguimento Z-Leading
 

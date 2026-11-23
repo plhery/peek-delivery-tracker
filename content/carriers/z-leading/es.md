@@ -14,13 +14,13 @@ Z-Leading no publica ningún formato de número, y ninguna página pública mues
 
 El catálogo de Peek vincula un formato a Z-Leading, tomado de un paquete que los servicios de seguimiento clasificaron bajo Zhongling: `ZL`, dos letras más y nueve cifras, como el ejemplo inventado `ZLGK482917364`. Es solo una coincidencia débil: la forma por sí sola no demuestra que pertenezca a Z-Leading.
 
-Z-Leading afirma ser agente directo de DHL, UPS y FedEx e imprimir sus albaranes él mismo, por lo que un envío exprés puede llevar uno de sus números. Sus formatos (cifras inventadas):
+Z-Leading afirma ser agente de primer nivel de DHL, UPS y FedEx e imprimir sus albaranes él mismo, por lo que un envío exprés puede llevar uno de sus números. Sus formatos (cifras inventadas):
 
 | Número (inventado) | Qué es |
 | --- | --- |
 | `1Z4829A73640582913` | `1Z` y 16 letras o cifras: [UPS](carrier:ups). |
 | `4829173646` | Diez cifras: puede ser [DHL Express](carrier:dhl-express), entre otros. |
-| `482917364058` | Doce cifras: puede ser [FedEx](carrier:fedex), entre otros. |
+| `482917364055` | Doce cifras: puede ser [FedEx](carrier:fedex), entre otros. |
 
 En carga aérea o marítima, el número pertenece a la aerolínea o naviera y se consulta en su web. Si tu número no coincide con ninguno de estos, consulta [formatos de números de seguimiento](guide:tracking-number-formats).
 
@@ -65,7 +65,7 @@ Para cualquier otro número, Peek consulta servicios de seguimiento al añadirlo
 
 Z-Leading no tiene seguimiento propio que Peek pueda leer. Para un paquete asignado a Z-Leading, Peek consulta por turno a ParcelsApp, Ship24 y 17TRACK y se queda con el primero que lo tenga. Muestra el estado y el historial de ese servicio, con sus textos. Puede llevar retraso respecto al transportista final o no tener nada aún. El enlace de seguimiento abre la página de ese servicio para el número. Cuando el servicio nombra un transportista que Peek lee directamente, Peek pregunta a ese transportista por el mismo número y cambia a él en cuanto muestra un escaneo al menos tan reciente como el último del historial. Peek no envía tu IP ni tu país a esos servicios.
 
-Peek comprueba cada hora, cada 3 horas cuando pasa un día sin nuevos escaneos, hasta cada 15 minutos el día en que sale a reparto y cada 6 horas tras siete días en «Etiqueta creada»; un servicio que no conocía el número vuelve a consultarse un día después. Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha), «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Z-Leading.» y el enlace «Pide ayuda a Z-Leading». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con Z-Leading ni con la tienda por ti.
+Peek comprueba cada hora, cada 3 horas cuando pasa un día sin nuevos escaneos y cada 6 horas tras siete días en «Etiqueta creada». El día en que sale a reparto, comprueba hasta cada 15 minutos mientras lo tengas abierto en Peek o con las notificaciones activadas. Un servicio que no conocía el número vuelve a consultarse un día después. Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha) y «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Z-Leading.» Z-Leading no tiene página de ayuda en Peek: un enlace «Pide ayuda a …» solo aparece cuando Peek sigue a la empresa que entrega, y solo si esta tiene una. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con Z-Leading ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Z-Leading
 

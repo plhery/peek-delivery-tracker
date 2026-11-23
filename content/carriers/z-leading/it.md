@@ -14,13 +14,13 @@ Z-Leading non pubblica alcun formato di numero e nessuna pagina pubblica mostra 
 
 Il catalogo di Peek collega a Z-Leading un solo formato, ricavato da un pacco classificato come Zhongling dai servizi di tracciamento: `ZL`, altre due lettere e nove cifre, come l’esempio inventato `ZLGK482917364`. È solo una corrispondenza debole: la forma da sola non dimostra che il codice appartenga a Z-Leading.
 
-Z-Leading si dichiara agente diretto di DHL, UPS e FedEx e stampa direttamente le loro lettere di vettura, per cui una spedizione espressa può avere uno dei loro codici. I formati (cifre inventate):
+Z-Leading si dichiara agente di primo livello di DHL, UPS e FedEx e stampa direttamente le loro lettere di vettura, per cui una spedizione espressa può avere uno dei loro codici. I formati (cifre inventate):
 
 | Numero (inventato) | Che cos’è |
 | --- | --- |
 | `1Z4829A73640582913` | `1Z` e 16 lettere o cifre: [UPS](carrier:ups). |
 | `4829173646` | Dieci cifre: può essere [DHL Express](carrier:dhl-express), fra gli altri. |
-| `482917364058` | Dodici cifre: può essere [FedEx](carrier:fedex), fra gli altri. |
+| `482917364055` | Dodici cifre: può essere [FedEx](carrier:fedex), fra gli altri. |
 
 Per il trasporto aereo o marittimo, il codice appartiene alla compagnia aerea o navale e si traccia sul loro sito. Se il tuo codice non rientra in questi casi, consulta [formati dei numeri di tracciamento](guide:tracking-number-formats).
 
@@ -65,7 +65,7 @@ Per qualsiasi altro codice, Peek interroga i servizi di tracciamento mentre lo a
 
 Z-Leading non ha un tracker che Peek possa leggere direttamente. Per un pacco registrato sotto Z-Leading, Peek interroga a turno ParcelsApp, Ship24 e 17TRACK e mantiene il primo che ha il pacco, mostrando stato e cronologia di quel servizio nelle sue parole. Tale cronologia può restare indietro rispetto al corriere effettivo o risultare vuota. Il link di tracciamento apre la pagina di quel servizio. Quando il servizio nomina un corriere che Peek legge direttamente, Peek lo interroga con lo stesso numero e passa a lui appena mostra una scansione almeno altrettanto recente quanto l’ultima in cronologia. Peek non comunica il tuo indirizzo IP né il tuo paese ai servizi.
 
-Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni, fino a ogni 15 minuti nel giorno in cui è in consegna e ogni 6 ore dopo sette giorni su «Etichetta creata»; un servizio che non conosceva il codice viene interrogato di nuovo il giorno seguente. Se un pacco fermo su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza nuove scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da…» con la data), «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Z-Leading.» e il link «Chiedi aiuto a Z-Leading». Può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Z-Leading né il negozio al posto tuo.
+Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e ogni 6 ore dopo sette giorni su «Etichetta creata». Nel giorno in cui è in consegna, controlla fino a ogni 15 minuti finché lo tieni aperto in Peek o hai le notifiche attive. Un servizio che non conosceva il codice viene interrogato di nuovo il giorno seguente. Se un pacco fermo su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza nuove scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da…» con la data) e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Z-Leading.» Z-Leading non ha una pagina di aiuto in Peek: un link «Chiedi aiuto a …» compare solo quando Peek segue il corriere che consegna, e solo se ne ha una. Può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Z-Leading né il negozio al posto tuo.
 
 ## Domande sul tracciamento Z-Leading
 

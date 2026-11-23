@@ -16,7 +16,7 @@ Die Hilfeseiten von PPL verlangen die 11-stellige Sendungsnummer (*11-digit ship
 | --- | --- |
 | `24829173640` | Eine PPL Sendungsnummer: 11 Ziffern (Beginn mit `2` bis `9`). |
 
-PPL schickt dir eine E-Mail, sobald das Paket zur Beförderung übernommen wurde, sowie eine SMS und E-Mail, wenn es abholbereit ist. Die Übernahme-E-Mail enthält zudem die PIN zum Ändern der Zustellung. Gar keine Nachricht erhalten? Frag den Shop oder schau unter [Sendungsnummer finden](guide:find-tracking-number).
+PPL schickt dir eine E-Mail, sobald das Paket zur Beförderung übernommen wurde, sowie eine SMS und E-Mail, wenn es abholbereit ist. Gar keine Nachricht erhalten? Frag den Shop oder schau unter [Sendungsnummer finden](guide:find-tracking-number).
 
 Elf Ziffern sind eine gängige Länge: Auch GLS (in Deutschland, der Schweiz, Frankreich, Österreich und Polen), PostLogistics der Schweizerischen Post, Coordinadora, Mainfreight und Paquetexpress nutzen sie. Elf Ziffern allein beweisen also nicht, dass PPL zustellt – prüfe, welchen Paketdienst der Shop nennt. Zehn oder zwölf Ziffern deuten auf einen Tippfehler oder einen anderen Dienstleister hin.
 
@@ -40,13 +40,13 @@ PPL zeigt Sendungsstatus nur auf Tschechisch oder Englisch an. Auf Englisch ersc
 | `The shipment has not been collected by the recipient and will be returned to the sender` | Nicht rechtzeitig abgeholt; geht zurück an den Absender. |
 | `The shipment has been handed over to a foreign partner for delivery` | Zur Zustellung an einen Partner im Ausland übergeben. |
 
-`Delivered to the pick-up point` heißt nicht, dass du das Paket erhalten hast: Es wartet am Abholpunkt und die Lagerfrist läuft bereits. `Will be delivered today` ist der Beladescan. `Not delivered due to lack of time` (oder Fahrzeugpanne, verspätete Ankunft im Depot oder Routenproblem) bedeutet, dass kein Zustellversuch stattfand. Über abgeschlossenen Verläufen zeigt PPL zusätzlich die Zusammenfassung `The shipment has been delivered to the recipient.` Die Übernahme-E-Mail kann beim Depotwechsel erneut eintreffen.
+`Delivered to the pick-up point` heißt nicht, dass du das Paket erhalten hast: Es wartet am Abholpunkt und die Lagerfrist läuft bereits. `Will be delivered today` ist der Beladescan. `Not delivered due to lack of time` (oder Fahrzeugpanne, verspätete Ankunft im Depot oder Routenproblem) bedeutet, dass kein Zustellversuch stattfand. Über abgeschlossenen Verläufen zeigt PPL zusätzlich die Zusammenfassung `The shipment has been delivered to the recipient.`
 
 ## PPL Zustellung, PPL Shops und PPL Boxen
 
 Beim Einkauf wählst du eine Lieferadresse oder einen Abholpunkt: PPL Shop, PPL Box oder eine Partnerbox wie AlzaBox. Innerhalb Tschechiens liefert PPL in der Regel am nächsten Werktag; Sendungen aus dem Ausland erreichen Tschechien laut PPL in 2 bis 5 Werktagen nach der Abholung im Ausland.
 
-**Zustellung ändern.** Sobald das Paket unterwegs oder in Tschechien ist, kannst du es in der mojePPL-App oder auf der [Seite zur Zustelländerung](https://www.ppl.cz/en/change-of-delivery) mit Sendungsnummer und PIN an einen Abholpunkt umleiten oder Tag bzw. Adresse ändern.
+**Zustellung ändern.** In der mojePPL-App oder auf der [Seite zur Zustelländerung](https://www.ppl.cz/en/change-of-delivery) mit Sendungsnummer und PIN kannst du das Paket an einen PPL-Abholpunkt umleiten.
 
 **Nicht zu Hause.** Trifft der Fahrer beim ersten Versuch niemanden an, kann das Paket automatisch im nächsten Abholpunkt (oder in deinem in mojePPL hinterlegten Lieblingspunkt) hinterlegt werden.
 
@@ -76,11 +76,11 @@ Eine Empfänger-Hotline veröffentlicht PPL nicht. Als allgemeine Firmenadresse 
 
 ## PPL Pakete mit Peek verfolgen
 
-[Peek](/) kann ein PPL-Paket nicht allein an elf Ziffern erkennen: Es fragt die Paketdienste mit demselben Format ab – darunter PPL, GLS, PostLogistics, Coordinadora, Mainfreight und Paquetexpress – und zeigt denjenigen an, der die Sendung kennt. Du kannst PPL auch direkt über „Paketdienst ändern“ wählen oder einen ppl.cz-Link mit `shipmentId=` einfügen, den Peek sofort als PPL erkennt. Ein dhl.com-Link mit PPL-Nummer funktioniert nicht.
+[Peek](/) kann ein PPL-Paket nicht allein an elf Ziffern erkennen: Es fragt die Paketdienste mit demselben Format ab – darunter PPL, GLS, PostLogistics, Coordinadora, Mainfreight und Paquetexpress – und zeigt denjenigen an, der die Sendung kennt. Du kannst PPL auch direkt über „Ändern“ (bei einer schon hinzugefügten Sendung „Paketdienst ändern“) wählen oder einen ppl.cz-Link mit `shipmentId=` einfügen, den Peek sofort als PPL erkennt. Ein dhl.com-Link mit PPL-Nummer funktioniert nicht.
 
 Peek übernimmt die englischen Statusmeldungen von PPL, liest Zeitstempel in Prager Zeit und zeigt sie in deiner Gerätezeitzone an. Angezeigt werden der voraussichtliche Liefertag (falls PPL ihn nennt), Gewicht, Zustellzeit sowie der Name des PPL Shops oder der PPL Box während der Lagerung. Ortsnamen liefert PPL für Scans nicht. Lieferzeitfenster, Absender, Kundenreferenz, Adresse des Abholpunkts, Nachnahmedaten und Zustellnachweis lässt Peek weg. Verlinkt PPL einen Auslandspartner samt dessen Nummer, zeigt Peek diesen als ausliefernden Partner an. SmartPIN-Codes werden nicht akzeptiert.
 
-Solange du das Paket in Peek geöffnet hältst oder am Liefertag bei aktiven Benachrichtigungen prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr tschechischer Zeit an dem Tag, an dem PPL das Paket in Zustellung scannt, alle 2 Minuten, solange PPLs eigenes Tracking antwortet. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange das Paket auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich, und nach sieben Tagen auf „Etikett erstellt“ alle 6 Stunden. Bleibt eine Sendung in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei PPL nach.“ und den Link „Hol dir Hilfe bei PPL“. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Solange du das Paket in Peek geöffnet hältst oder am Liefertag bei aktiven Benachrichtigungen prüft Peek bis zu alle 10 Minuten – und ab 6:00 Uhr tschechischer Zeit an dem Tag, an dem PPL das Paket in Zustellung scannt, alle 2 Minuten, solange PPLs eigenes Tracking antwortet. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange das Paket auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich, auch wenn du das Paket geöffnet hast, und nach sieben Tagen auf „Etikett erstellt“ alle 6 Stunden. Bleibt eine Sendung in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei PPL nach.“ und den Link „Hol dir Hilfe bei PPL“. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Häufige Fragen zur PPL Sendungsverfolgung
 

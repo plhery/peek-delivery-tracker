@@ -16,7 +16,7 @@ Les pages d’aide de PPL demandent le numéro d’expédition à 11 chiffres (*
 | --- | --- |
 | `24829173640` | Un numéro d’expédition PPL : 11 chiffres (commençant entre `2` et `9`). |
 
-PPL envoie un e-mail dès la prise en charge du colis pour le transport, puis un SMS et un e-mail lorsque le colis est prêt à être retiré. L’e-mail de prise en charge contient aussi le code PIN nécessaire pour modifier la livraison. Si tu n’as reçu aucun message, demande le numéro à la boutique ; voir aussi [comment trouver ton numéro de suivi](guide:find-tracking-number).
+PPL envoie un e-mail dès la prise en charge du colis pour le transport, puis un SMS et un e-mail lorsque le colis est prêt à être retiré. Si tu n’as reçu aucun message, demande le numéro à la boutique ; voir aussi [comment trouver ton numéro de suivi](guide:find-tracking-number).
 
 Onze chiffres est une longueur très répandue : GLS (en France, Allemagne, Suisse, Autriche et Pologne), PostLogistics (La Poste suisse), Coordinadora, Mainfreight et Paquetexpress l’utilisent aussi. Un numéro à 11 chiffres seul ne prouve donc pas qu’il s’agit de PPL : vérifie le transporteur nommé par le vendeur. Dix ou douze chiffres signalent une faute de frappe ou un autre transporteur.
 
@@ -40,13 +40,13 @@ Le suivi de PPL n’affiche ses statuts qu’en tchèque ou en anglais ; voici l
 | `The shipment has not been collected by the recipient and will be returned to the sender` | Non retiré à temps ; renvoyé à l’expéditeur. |
 | `The shipment has been handed over to a foreign partner for delivery` | Remis à un partenaire étranger pour la livraison. |
 
-`Delivered to the pick-up point` ne signifie pas que le colis t’a été remis : il attend en point relais et le délai de garde a commencé. `Will be delivered today` correspond au scan de chargement. `Not delivered due to lack of time` (ou une panne, une arrivée tardive au dépôt ou un incident de tournée) signifie qu’aucun livreur n’est passé. Au-dessus d’un historique terminé, PPL affiche aussi la ligne de synthèse `The shipment has been delivered to the recipient.` L’e-mail de prise en charge peut arriver une seconde fois lors d’un changement de dépôt.
+`Delivered to the pick-up point` ne signifie pas que le colis t’a été remis : il attend en point relais et le délai de garde a commencé. `Will be delivered today` correspond au scan de chargement. `Not delivered due to lack of time` (ou une panne, une arrivée tardive au dépôt ou un incident de tournée) signifie qu’aucun livreur n’est passé. Au-dessus d’un historique terminé, PPL affiche aussi la ligne de synthèse `The shipment has been delivered to the recipient.`
 
 ## Livraison PPL, PPL shops et consignes PPL box
 
 Lors de la commande, tu choisis la livraison à une adresse ou en point de retrait : PPL shop, PPL box ou consigne partenaire comme AlzaBox. PPL indique généralement une livraison le jour ouvré suivant en Tchéquie, et 2 à 5 jours ouvrés pour atteindre la Tchéquie après la collecte à l’étranger.
 
-**Modifier la livraison.** Une fois le colis en transport ou arrivé en Tchéquie, tu peux rediriger la livraison vers un point de retrait ou modifier la date ou l’adresse dans mojePPL ou sur la [page de modification PPL](https://www.ppl.cz/en/change-of-delivery) avec le numéro d’expédition et le code PIN.
+**Modifier la livraison.** Dans mojePPL, ou sur la [page de modification PPL](https://www.ppl.cz/en/change-of-delivery) avec le numéro d’expédition et le code PIN, tu peux faire livrer le colis dans un point de retrait PPL.
 
 **En cas d’absence.** Si le livreur ne te trouve pas lors de la première tentative, le colis peut être déposé automatiquement au point de retrait le plus proche (ou dans ton point favori défini dans mojePPL).
 
@@ -76,11 +76,11 @@ PPL ne publie aucune ligne téléphonique dédiée aux destinataires. Sa page [A
 
 ## Suivre un colis PPL avec Peek
 
-[Peek](/) ne peut pas identifier un colis PPL à partir de 11 chiffres seuls : il interroge les transporteurs partageant ce format — dont PPL, GLS, PostLogistics, Coordinadora, Mainfreight et Paquetexpress — et affiche celui qui connaît l’envoi. Tu peux aussi choisir PPL via « Changer de transporteur », ou coller un lien ppl.cz contenant `shipmentId=`, reconnu directement comme PPL. Un lien dhl.com avec un numéro PPL ne fonctionne pas.
+[Peek](/) ne peut pas identifier un colis PPL à partir de 11 chiffres seuls : il interroge les transporteurs partageant ce format — dont PPL, GLS, PostLogistics, Coordinadora, Mainfreight et Paquetexpress — et affiche celui qui connaît l’envoi. Tu peux aussi choisir PPL via « Changer » (ou « Changer de transporteur » sur un colis déjà ajouté), ou coller un lien ppl.cz contenant `shipmentId=`, reconnu directement comme PPL. Un lien dhl.com avec un numéro PPL ne fonctionne pas.
 
 Peek conserve les statuts anglais de PPL, lit les horaires à l’heure de Prague et les affiche dans le fuseau horaire de ton appareil. Il indique la date de livraison prévue lorsqu’elle est publiée, le poids, l’heure de livraison et le nom du PPL shop ou de la PPL box où attend le colis. PPL ne fournit aucun lieu pour ses scans. Peek écarte le créneau horaire, l’expéditeur, la référence client, l’adresse du point relais, les détails de contre-remboursement et la preuve de livraison. Lorsque la réponse de PPL renvoie vers le suivi d’un partenaire étranger avec son numéro, Peek affiche ce partenaire comme livreur final. Les codes SmartPIN ne sont pas acceptés.
 
-Tant que tu gardes le colis ouvert dans Peek, ou le jour de la livraison si tes notifications sont activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes à partir de 6 h (heure tchèque) le jour où PPL scanne le colis en livraison, tant que le suivi de PPL répond. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures, et toutes les 6 heures après sept jours sur « Étiquette créée ». Si un colis en « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger PPL. » ainsi que le lien « Demande de l’aide à PPL ». Tu peux recevoir les alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de la livraison si tes notifications sont activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes à partir de 6 h (heure tchèque) le jour où PPL scanne le colis en livraison, tant que le suivi de PPL répond. Sinon, il vérifie toutes les heures. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures même si tu l’as ouvert, et toutes les 6 heures après sept jours sur « Étiquette créée ». Si un colis en « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger PPL. » ainsi que le lien « Demande de l’aide à PPL ». Tu peux recevoir les alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi PPL
 

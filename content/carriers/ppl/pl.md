@@ -16,7 +16,7 @@ Strony pomocy PPL proszą o 11-cyfrowy numer przesyłki (*11-digit shipment numb
 | --- | --- |
 | `24829173640` | Numer przesyłki PPL: 11 cyfr (zaczynających się od `2`–`9`). |
 
-PPL wysyła e-mail po przyjęciu przesyłki do transportu oraz SMS i e-mail, gdy paczka czeka na odbiór. E-mail o przyjęciu zawiera także kod PIN potrzebny do zmiany doręczenia. Nie masz żadnej wiadomości? Zapytaj sklep lub sprawdź [jak znaleźć numer śledzenia](guide:find-tracking-number).
+PPL wysyła e-mail po przyjęciu przesyłki do transportu oraz SMS i e-mail, gdy paczka czeka na odbiór. Nie masz żadnej wiadomości? Zapytaj sklep lub sprawdź [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
 Jedenaście cyfr to popularna długość: korzystają z niej także GLS (w Niemczech, Szwajcarii, Francji, Austrii i Polsce), szwajcarski PostLogistics, Coordinadora, Mainfreight i Paquetexpress, więc same 11 cyfr nie przesądza, że paczkę wiezie PPL. Sprawdź przewoźnika w e-mailu sklepu; dziesięć albo dwanaście cyfr oznacza literówkę lub innego przewoźnika.
 
@@ -40,13 +40,13 @@ Aplikacja mojePPL pokazuje paczkę automatycznie tylko wtedy, gdy adres e-mail p
 | `The shipment has not been collected by the recipient and will be returned to the sender` | Nieodebrana w terminie; wraca do nadawcy. |
 | `The shipment has been handed over to a foreign partner for delivery` | Przekazana partnerowi zagranicznemu do doręczenia. |
 
-`Delivered to the pick-up point` nie oznacza doręczenia do rąk własnych: paczka czeka w punkcie i biegnie czas na odbiór. `Will be delivered today` to skan załadunku. `Not delivered due to lack of time` (lub awaria auta, późny przyjazd do magazynu czy problem z trasą) znaczy, że nikt nie podjechał. Nad zakończoną historią PPL wyświetla dodatkowo wiersz podsumowania `The shipment has been delivered to the recipient.` E-mail o przyjęciu może przyjść ponownie przy zmianie magazynu.
+`Delivered to the pick-up point` nie oznacza doręczenia do rąk własnych: paczka czeka w punkcie i biegnie czas na odbiór. `Will be delivered today` to skan załadunku. `Not delivered due to lack of time` (lub awaria auta, późny przyjazd do magazynu czy problem z trasą) znaczy, że nikt nie podjechał. Nad zakończoną historią PPL wyświetla dodatkowo wiersz podsumowania `The shipment has been delivered to the recipient.`
 
 ## Doręczenie PPL, PPL shopy i automaty PPL box
 
 Przy zakupie wybierasz adres albo punkt odbioru: PPL shop, PPL box lub automat partnerski, np. AlzaBox. W Czechach paczki docierają zazwyczaj następnego dnia roboczego, a przesyłki z zagranicy docierają do Czech w 2–5 dni roboczych od odbioru za granicą.
 
-**Zmiana doręczenia.** Gdy przesyłka jest w transporcie lub w Czechach, możesz przekierować ją do punktu odbioru albo zmienić dzień lub adres w mojePPL lub na [stronie zmiany doręczenia](https://www.ppl.cz/en/change-of-delivery) za pomocą numeru przesyłki i kodu PIN.
+**Zmiana doręczenia.** W mojePPL albo na [stronie zmiany doręczenia](https://www.ppl.cz/en/change-of-delivery), podając numer przesyłki i kod PIN, możesz przekierować paczkę do punktu odbioru PPL.
 
 **Nieobecność.** Jeśli kurier nie zastanie cię przy pierwszej próbie, paczka może automatycznie trafić do najbliższego punktu odbioru (lub ulubionego punktu ustawionego w mojePPL).
 
@@ -76,11 +76,11 @@ PPL nie publikuje infolinii telefonicznej dla odbiorców. Na stronie [About us](
 
 ## Śledzenie paczek PPL w Peek
 
-[Peek](/) nie rozpoznaje PPL po samych 11 cyfrach, dlatego pyta przewoźników korzystających z tego formatu — w tym PPL, GLS, PostLogistics, Coordinadora, Mainfreight i Paquetexpress — i wskazuje tego, który zna przesyłkę. Możesz też wybrać PPL przez „Zmień przewoźnika” albo wkleić link z ppl.cz zawierający `shipmentId=`, który Peek rozpoznaje od razu jako PPL. Link z dhl.com z numerem PPL nie zadziała.
+[Peek](/) nie rozpoznaje PPL po samych 11 cyfrach, dlatego pyta przewoźników korzystających z tego formatu — w tym PPL, GLS, PostLogistics, Coordinadora, Mainfreight i Paquetexpress — i wskazuje tego, który zna przesyłkę. Możesz też wybrać PPL przez „Zmień” (albo „Zmień przewoźnika” przy już dodanej przesyłce) albo wkleić link z ppl.cz zawierający `shipmentId=`, który Peek rozpoznaje od razu jako PPL. Link z dhl.com z numerem PPL nie zadziała.
 
 Peek czyta angielskie statusy PPL bez zmian, przelicza godziny z czasu praskiego na strefę czasową twojego urządzenia i pokazuje przewidywany dzień doręczenia (gdy PPL go podaje), wagę, godzinę doręczenia oraz nazwę PPL shopu lub PPL boxa, w którym paczka czeka. PPL nie podaje lokalizacji dla skanów. Peek pomija przedział godzinowy, nadawcę, referencję klienta, adres punktu odbioru, dane pobrania i potwierdzenie doręczenia. Gdy PPL podaje link do śledzenia zagranicznego partnera wraz z jego numerem, Peek wskazuje tego partnera jako doręczającego. Kodów SmartPIN Peek nie obsługuje.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu czeskiego) w dniu, gdy PPL zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada śledzenie PPL. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika PPL.” oraz link „Poproś przewoźnika PPL o pomoc”. Możesz ustawić powiadomienia dla „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Dopóki masz paczkę otwartą w Peek albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu czeskiego) w dniu, gdy PPL zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada śledzenie PPL. W innych przypadkach Peek sprawdza co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, nawet gdy masz ją otwartą, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika PPL.” oraz link „Poproś przewoźnika PPL o pomoc”. Możesz ustawić powiadomienia dla „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Pytania o śledzenie PPL
 

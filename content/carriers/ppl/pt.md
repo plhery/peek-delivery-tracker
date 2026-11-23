@@ -16,7 +16,7 @@ As páginas de ajuda da PPL pedem o número de envio de 11 dígitos (*11-digit s
 | --- | --- |
 | `24829173640` | Um número de envio PPL: 11 dígitos (a começar entre `2` e `9`). |
 
-A PPL envia um e-mail assim que aceita a encomenda para transporte, e depois um SMS e um e-mail quando fica pronta para levantamento. O e-mail de aceitação inclui também o PIN necessário para alterar a entrega. Sem qualquer mensagem? Pergunta à loja ou vê [como encontrar um número de seguimento](guide:find-tracking-number).
+A PPL envia um e-mail assim que aceita a encomenda para transporte, e depois um SMS e um e-mail quando fica pronta para levantamento. Sem qualquer mensagem? Pergunta à loja ou vê [como encontrar um número de seguimento](guide:find-tracking-number).
 
 Onze dígitos é um comprimento muito comum: GLS (na Alemanha, Suíça, França, Áustria e Polónia), PostLogistics (Correios suíços), Coordinadora, Mainfreight e Paquetexpress também o usam, pelo que 11 dígitos por si só não provam que o envio seja da PPL. Confirma a transportadora indicada pela loja; dez ou doze dígitos apontam para gralha ou outra transportadora.
 
@@ -40,13 +40,13 @@ O seguimento da PPL apresenta os textos apenas em checo ou inglês; estes são o
 | `The shipment has not been collected by the recipient and will be returned to the sender` | Não levantada a tempo; volta ao remetente. |
 | `The shipment has been handed over to a foreign partner for delivery` | Entregue a um parceiro no estrangeiro para distribuição. |
 
-`Delivered to the pick-up point` não significa entrega em mão: a encomenda aguarda no ponto e o prazo de guarda já está a contar. `Will be delivered today` corresponde ao registo de carga. `Not delivered due to lack of time` (ou avaria, chegada tardia ao depósito ou problema de rota) indica que ninguém passou. Acima de um histórico concluído, a PPL imprime também a linha resumo `The shipment has been delivered to the recipient.` O e-mail de aceitação pode voltar a chegar quando o envio muda de depósito.
+`Delivered to the pick-up point` não significa entrega em mão: a encomenda aguarda no ponto e o prazo de guarda já está a contar. `Will be delivered today` corresponde ao registo de carga. `Not delivered due to lack of time` (ou avaria, chegada tardia ao depósito ou problema de rota) indica que ninguém passou. Acima de um histórico concluído, a PPL imprime também a linha resumo `The shipment has been delivered to the recipient.`
 
 ## Entregas PPL, PPL shops e cacifos PPL box
 
 Na loja escolhes entrega ao domicílio ou ponto de recolha: PPL shop, PPL box ou cacifo parceiro como AlzaBox. Dentro da Chéquia a entrega ocorre habitualmente no dia útil seguinte; encomendas do estrangeiro demoram em média 2 a 5 dias úteis a chegar à Chéquia após recolha na origem.
 
-**Alterar a entrega.** Quando a encomenda está em trânsito ou já na Chéquia, podes reencaminhá-la para um ponto de levantamento ou mudar data ou morada na mojePPL ou na [página de alteração de entrega](https://www.ppl.cz/en/change-of-delivery) com o número de envio e o PIN.
+**Alterar a entrega.** Na mojePPL, ou na [página de alteração de entrega](https://www.ppl.cz/en/change-of-delivery) com o número de envio e o PIN, podes reencaminhar a encomenda para um ponto de levantamento PPL.
 
 **Ausência.** Se o motorista não te encontrar na primeira tentativa, a encomenda pode ser depositada automaticamente no ponto de levantamento mais próximo (ou no ponto favorito definido na mojePPL).
 
@@ -76,11 +76,11 @@ A PPL não publica linha telefónica para destinatários. A página [About us](h
 
 ## Seguir uma encomenda PPL com o Peek
 
-O [Peek](/) não consegue identificar a PPL apenas por 11 dígitos, pelo que pergunta às transportadoras com o mesmo formato — entre elas PPL, GLS, PostLogistics, Coordinadora, Mainfreight e Paquetexpress — e mostra a que reconhece o envio. Podes também escolher PPL em «Alterar transportadora» ou colar uma ligação ppl.cz com `shipmentId=`, reconhecida de imediato como PPL. Uma ligação dhl.com com número PPL não funciona.
+O [Peek](/) não consegue identificar a PPL apenas por 11 dígitos, pelo que pergunta às transportadoras com o mesmo formato — entre elas PPL, GLS, PostLogistics, Coordinadora, Mainfreight e Paquetexpress — e mostra a que reconhece o envio. Podes também escolher PPL em «Alterar» (ou «Alterar transportadora» numa encomenda já adicionada) ou colar uma ligação ppl.cz com `shipmentId=`, reconhecida de imediato como PPL. Uma ligação dhl.com com número PPL não funciona.
 
 O Peek lê os estados em inglês da PPL tal como escritos, interpreta as horas pela hora de Praga e mostra-as no fuso horário do teu dispositivo. Mostra o dia previsto de entrega quando a PPL o indica, peso, hora de entrega e o nome do PPL shop ou PPL box onde aguarda. A PPL não publica localidades nos registos. O Peek omite a faixa horária, remetente, referência do cliente, morada do ponto de recolha, detalhes de cobrança e comprovativo de entrega. Quando a PPL associa o seguimento de um parceiro estrangeiro com o respetivo número, o Peek indica esse parceiro como responsável pela entrega. Não aceita códigos SmartPIN.
 
-Enquanto mantiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek verifica até de 10 em 10 minutos — e a cada 2 minutos a partir das 6h00 (hora checa) no dia em que a PPL regista a encomenda em distribuição, enquanto o seguimento da PPL responder. Após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e a cada 6 horas após sete dias em «Etiqueta criada». Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data), «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a PPL.» e a ligação «Pede ajuda a PPL». Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
+Enquanto mantiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek verifica até de 10 em 10 minutos — e a cada 2 minutos a partir das 6h00 (hora checa) no dia em que a PPL regista a encomenda em distribuição, enquanto o seguimento da PPL responder. Caso contrário, verifica de hora a hora. Após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora mesmo que a tenhas aberta, e a cada 6 horas após sete dias em «Etiqueta criada». Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data), «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a PPL.» e a ligação «Pede ajuda a PPL». Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas sobre o seguimento PPL
 

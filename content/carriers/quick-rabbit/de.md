@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Quick Rabbit ist ein spanischer Lieferdienst für Online-Shops und Einzelhändler mit Sitz in San Fernando de Henares bei Madrid. Er liefert in ganz Spanien an deine Haustür, an Abholstellen und in Citibox-Paketkästen. Verfolge ein Paket mit seinem `PKG`-Code auf der [Trackingseite von Quick Rabbit](https://web.quickrabbit.es/es/tracking) oder füge ihn oben in das Feld ein. Laut Quick Rabbit steht der Code in deiner Bestätigungs-E-Mail oder auf dem Versandbeleg.
+Quick Rabbit ist ein spanischer Lieferdienst für Online-Shops und Einzelhändler mit Sitz in Madrid. Er liefert in ganz Spanien an deine Haustür, an Abholstellen und in Citibox-Paketkästen. Verfolge ein Paket mit seinem `PKG`-Code auf der [Trackingseite von Quick Rabbit](https://web.quickrabbit.es/es/tracking) oder füge ihn oben in das Feld ein. Laut Quick Rabbit steht der Code in deiner Bestätigungs-E-Mail oder auf dem Versandbeleg.
 
 ## Quick-Rabbit-Sendungsnummer: der PKG-Code
 
@@ -69,10 +69,9 @@ Bei jedem Problem mit einem Paket verweist die Kontaktseite von Quick Rabbit auf
 
 ## Kontakt zu Quick Rabbit
 
-- **E-Mail:** customer@quickrabbit.es; die Kontaktseite verspricht eine Antwort innerhalb von 2 Stunden während der Geschäftszeiten.
-- **WhatsApp:** +34 628 437 468, angegeben auf der englischen Kontaktseite.
-- **Zeiten:** Montag bis Freitag 8:00 bis 20:00 Uhr, Samstag 9:00 bis 14:00 Uhr, sonntags geschlossen (Madrider Zeit; laut FAQ gelten diese Zeiten für das Vertriebsteam), mit Vorfall-Support rund um die Uhr.
-- **Adresse:** Av. del Sistema Solar, 27, Nave 3, 28830 San Fernando de Henares, Madrid.
+- **E-Mail:** customer@quickrabbit.es, der Hauptkanal. Bei einem dringenden Vorfall schreib „URGENT“ in den Betreff.
+- **Zeiten:** Montag bis Freitag 8:00 bis 20:00 Uhr, Samstag 9:00 bis 14:00 Uhr, sonntags geschlossen (Madrider Zeit; laut FAQ gelten diese Zeiten für das Vertriebsteam).
+- **Adresse:** Avenida de Aragón, 404, 28022 Madrid.
 
 Das Formular auf der Kontaktseite richtet sich an Geschäftskunden, die ein Angebot anfordern.
 
@@ -82,9 +81,9 @@ Das Formular auf der Kontaktseite richtet sich an Geschäftskunden, die ein Ange
 
 Peek liest direkt den Tracker von Quick Rabbit aus: Status, Verlauf in den oben gezeigten englischen Zeilen und Zustellzeit, ausgewertet in Madrider Zeit und angezeigt in der Zeitzone deines Geräts. Da Quick Rabbit keine Ortsnamen angibt, gibt es keine Karte. Peek lässt das voraussichtliche Lieferdatum, die Zielstadt, die Absenderreferenz und die Koordinaten des Kuriers weg, die direkt vor deiner Tür liegen können. Es gibt keinen Zustellnachweis, keinen Namen des Empfängers und keinen Fachcode, und Peek gibt das Paket nicht an Citibox weiter: Die Paketkasten-Schritte stammen direkt aus Quick Rabbits eigenen Zeilen.
 
-Solange du das Paket in Peek geöffnet hast oder am Zustelltag Benachrichtigungen aktiviert sind, prüft Peek den Status bis zu alle 10 Minuten und ab 6 Uhr morgens Madrider Zeit bis zu alle 2 Minuten an dem Tag, an dem Quick Rabbit das Paket als in Zustellung scannt. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich, und nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden.
+Solange du das Paket in Peek geöffnet hast oder am Zustelltag Benachrichtigungen aktiviert sind, prüft Peek den Status bis zu alle 10 Minuten und ab 6 Uhr morgens Madrider Zeit bis zu alle 2 Minuten an dem Tag, an dem Quick Rabbit das Paket als in Zustellung scannt, solange das Tracking von Quick Rabbit antwortet, sonst stündlich. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich, und nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden.
 
-Bleibt ein Paket vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit {{date}}“) an, samt dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Quick Rabbit nach.“ und dem Link „Hol dir Hilfe bei Quick Rabbit“.
+Bleibt ein Paket vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“) an, samt dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Quick Rabbit nach.“ und dem Link „Hol dir Hilfe bei Quick Rabbit“.
 
 Peek kann dich über „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ benachrichtigen. Es kann keine Lieferung ändern, keine Reklamation einreichen und weder Quick Rabbit noch den Shop für dich kontaktieren.
 
@@ -104,13 +103,13 @@ Klicke auf der Trackingseite auf `Actualizar datos de entrega` und gib deine E-M
 
 ### Wie erreiche ich Quick Rabbit?
 
-Per E-Mail an customer@quickrabbit.es oder per WhatsApp unter +34 628 437 468. Bei einem Problem mit einem Paket nutze die Reklamation auf der Trackingseite, wie es die Kontaktseite vorgibt.
+Per E-Mail an customer@quickrabbit.es, bei einem dringenden Vorfall mit „URGENT“ im Betreff. Bei einem Problem mit einem Paket nutze die Reklamation auf der Trackingseite, wie es die Kontaktseite vorgibt.
 
 :::sources
 - [Quick Rabbit: Seguimiento de Paquetes](https://web.quickrabbit.es/es/tracking) – Trackingcode und Fundort, Nicht-gefunden-Meldung, Referenz, Status, Lieferänderung, Reklamationen, dringender Support
 - [Quick Rabbit: Package Tracking](https://web.quickrabbit.es/en/tracking) – Tracking auf Englisch
-- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – Reklamationen über das Tracking, E-Mail, Antwortzeit, Öffnungszeiten (laut FAQ die des Vertriebsteams), Adresse
-- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – WhatsApp
+- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – Reklamationen über das Tracking, E-Mail, dringende Vorfälle, Öffnungszeiten (laut FAQ die des Vertriebsteams), Adresse
+- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – dieselbe Seite auf Englisch
 - [Quick Rabbit: E-commerce & retail logistics in Spain](https://web.quickrabbit.es/en) – 50 Provinzen, Reklamationen über die Trackingseite
 - [Quick Rabbit: About Us](https://web.quickrabbit.es/en/about) – mehr als 5 Jahre, Partner
 - [Quick Rabbit: Our Services](https://web.quickrabbit.es/en/services) – SMS- und E-Mail-Benachrichtigungen, weiterer Zustellversuch

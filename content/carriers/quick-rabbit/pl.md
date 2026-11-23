@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Quick Rabbit to hiszpańska firma kurierska obsługująca sklepy internetowe i sprzedawców detalicznych, z siedzibą w San Fernando de Henares pod Madrytem. Dostarcza przesyłki w całej Hiszpanii pod drzwi, do punktów odbioru i do skrytek Citibox. Paczkę sprawdzisz za pomocą kodu `PKG` na [stronie śledzenia Quick Rabbit](https://web.quickrabbit.es/es/tracking) albo wklejając go w pole powyżej. Quick Rabbit podaje, że kod znajdziesz w mailu potwierdzającym lub na potwierdzeniu nadania.
+Quick Rabbit to hiszpańska firma kurierska obsługująca sklepy internetowe i sprzedawców detalicznych, z siedzibą w Madrycie. Dostarcza przesyłki w całej Hiszpanii pod drzwi, do punktów odbioru i do skrytek Citibox. Paczkę sprawdzisz za pomocą kodu `PKG` na [stronie śledzenia Quick Rabbit](https://web.quickrabbit.es/es/tracking) albo wklejając go w pole powyżej. Quick Rabbit podaje, że kod znajdziesz w mailu potwierdzającym lub na potwierdzeniu nadania.
 
 ## Numer śledzenia Quick Rabbit: kod PKG
 
@@ -69,10 +69,9 @@ W przypadku dowolnego problemu z przesyłką strona kontaktowa Quick Rabbit kier
 
 ## Kontakt z Quick Rabbit
 
-- **E-mail:** customer@quickrabbit.es; strona kontaktowa obiecuje odpowiedź w ciągu 2 godzin w godzinach pracy.
-- **WhatsApp:** +34 628 437 468, podany na angielskiej stronie kontaktowej.
-- **Godziny:** poniedziałek–piątek 8:00–20:00, sobota 9:00–14:00, niedziela nieczynne (czasu madryckiego; w FAQ wskazano te godziny jako godziny zespołu sprzedaży), przy całodobowym wsparciu w sprawach incydentów.
-- **Adres:** Av. del Sistema Solar, 27, Nave 3, 28830 San Fernando de Henares, Madryt.
+- **E-mail:** customer@quickrabbit.es, główny kanał kontaktu. W pilnej sprawie wpisz „URGENT” w temacie.
+- **Godziny:** poniedziałek–piątek 8:00–20:00, sobota 9:00–14:00, niedziela nieczynne (czasu madryckiego; w FAQ wskazano te godziny jako godziny zespołu sprzedaży).
+- **Adres:** Avenida de Aragón, 404, 28022 Madryt.
 
 Formularz na stronie kontaktowej służy firmom pytającym o wycenę.
 
@@ -82,9 +81,9 @@ Formularz na stronie kontaktowej służy firmom pytającym o wycenę.
 
 Peek odczytuje bezpośrednio system śledzenia Quick Rabbit: status, historię w powyższych angielskich wpisach i godzinę doręczenia, liczone według czasu madryckiego i wyświetlane w strefie czasowej Twojego urządzenia. Quick Rabbit nie podaje nazw miejscowości, więc nie ma mapy. Peek pomija szacowaną datę dostawy, miasto docelowe, numer referencyjny nadawcy i współrzędne kuriera, które mogą wskazywać Twój adres. Nie ma dowodu doręczenia, danych osoby podpisującej ani kodu skrytki, a Peek nie przekazuje przesyłki do Citibox: etapy skrytkowe pochodzą z własnych wpisów Quick Rabbit.
 
-Gdy masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a od 6:00 czasu madryckiego nawet co 2 minuty w dniu, w którym Quick Rabbit zeskanuje paczkę jako w doręczeniu. Po dwóch dniach bez nowych danych (po 12 godzinach, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach bez nowości przy statusie „Zarejestrowana” — co 6 godzin.
+Gdy masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a od 6:00 czasu madryckiego nawet co 2 minuty w dniu, w którym Quick Rabbit zeskanuje paczkę jako w doręczeniu, dopóki działa śledzenie Quick Rabbit, a poza tym co godzinę. Po dwóch dniach bez nowych danych (po 12 godzinach, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach bez nowości przy statusie „Zarejestrowana” — co 6 godzin.
 
-Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od {{date}}”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Quick Rabbit.” oraz link „Poproś przewoźnika Quick Rabbit o pomoc”.
+Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Quick Rabbit.” oraz link „Poproś przewoźnika Quick Rabbit o pomoc”.
 
 Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może zmienić doręczenia, zgłosić reklamacji ani skontaktować się w Twoim imieniu z Quick Rabbit czy sklepem.
 
@@ -104,13 +103,13 @@ Kliknij `Actualizar datos de entrega` na stronie śledzenia i wpisz swój e-mail
 
 ### Jak skontaktować się z Quick Rabbit?
 
-Napisz na customer@quickrabbit.es lub na WhatsApp pod numer +34 628 437 468. W razie problemu z przesyłką skorzystaj z reklamacji na stronie śledzenia, zgodnie z zaleceniem strony kontaktowej.
+Napisz na customer@quickrabbit.es, w pilnej sprawie z „URGENT” w temacie. W razie problemu z przesyłką skorzystaj z reklamacji na stronie śledzenia, zgodnie z zaleceniem strony kontaktowej.
 
 :::sources
 - [Quick Rabbit: Seguimiento de Paquetes](https://web.quickrabbit.es/es/tracking) – kod śledzenia i gdzie go znaleźć, komunikat nie znaleziono, numer referencyjny, statusy, aktualizacja dostawy, reklamacje, pilne wsparcie
 - [Quick Rabbit: Package Tracking](https://web.quickrabbit.es/en/tracking) – śledzenie po angielsku
-- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – reklamacje przez śledzenie, e-mail, czas odpowiedzi, godziny (zespołu sprzedaży według FAQ), adres
-- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – WhatsApp
+- [Quick Rabbit: Contacto](https://web.quickrabbit.es/es/contact) – reklamacje przez śledzenie, e-mail, pilne sprawy, godziny (zespołu sprzedaży według FAQ), adres
+- [Quick Rabbit: Contact](https://web.quickrabbit.es/en/contact) – ta sama strona po angielsku
 - [Quick Rabbit: E-commerce & retail logistics in Spain](https://web.quickrabbit.es/en) – 50 prowincji, reklamacje ze strony śledzenia
 - [Quick Rabbit: About Us](https://web.quickrabbit.es/en/about) – ponad 5 lat, partnerzy
 - [Quick Rabbit: Our Services](https://web.quickrabbit.es/en/services) – powiadomienia SMS i e-mail, ponowna próba

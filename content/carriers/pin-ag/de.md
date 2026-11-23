@@ -76,7 +76,7 @@ Für Ersatz oder Erstattung ist der Absender dein Ansprechpartner – laut PIN d
 
 Peek kann weder PIN AG noch den Absender für dich kontaktieren. Kontaktdaten von PIN AG:
 
-- **ServiceCenter:** 030 577978-800, Montag bis Freitag von 8:00 bis 18:00 Uhr (deutscher Zeit).
+- **ServiceCenter:** 030 577978-800, Montag bis Freitag von 8:00 bis 18:00 Uhr (deutsche Zeit).
 - **Online-Formulare:** Nachforschungsauftrag und Hinweis zur Briefzustellung über die PIN-Hilfeseiten sowie die Kontaktformulare auf der Sendungsverfolgungsseite.
 - **Zentrale:** PIN AG, Alt-Moabit 91, 10559 Berlin. Telefon 030 577978-0, E-Mail info@pin-ag.de.
 
@@ -84,7 +84,7 @@ Peek kann weder PIN AG noch den Absender für dich kontaktieren. Kontaktdaten vo
 
 Füge die Nummer in [Peek](/) ein – mit oder ohne Klammern: Peek hängt eine eingeklammerte letzte Ziffer direkt an die übrigen an.
 
-- **16 Ziffern ab 0100.** Da auch andere Dienste 16 Ziffern verwenden, fragt Peek je nach Land (Region deines Telefons oder im Web dein Standort) die wahrscheinlichsten ab. In Deutschland fragt es zuerst bei PIN AG nach. Währenddessen erscheint „Tracking-Dienste werden geprüft…“. Hat PIN die Sendung, zeigt Peek „PIN AG hat dieses Paket.“ und ordnet sie dort ein. Außerhalb Deutschlands fragt Peek nicht bei PIN AG an: Tippe auf „Ändern“ und wähle PIN AG.
+- **16 Ziffern ab 0100.** Da auch andere Dienste 16 Ziffern verwenden, fragt Peek je nach Land (Region deines Telefons oder im Web die Zeitzone deines Browsers) die wahrscheinlichsten ab. In Deutschland fragt es zuerst bei PIN AG nach. Währenddessen erscheint „Tracking-Dienste werden geprüft…“. Hat PIN die Sendung, zeigt Peek „PIN AG hat dieses Paket.“ und ordnet sie dort ein. Außerhalb Deutschlands fragt Peek erst bei PIN AG an, wenn die anderen Dienste die Nummer nicht kennen.
 - **Noch nicht gelistet.** Füge die Sendung trotzdem hinzu. Hat Peek in Deutschland bei PIN angefragt und die Nummer ist noch nicht bekannt, zeigt das Paket „Warten auf den ersten Scan von PIN AG“ und „Wahrscheinlich PIN AG“, und Peek fragt weiter nach. Nach einer Woche bittet Peek dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
 - **13 Ziffern.** Allein an dieser Form erkennt Peek PIN nicht. Füge die Nummer dennoch ein: Peek unterstützt über 4.500 Paketdienste. Tippe auf „Ändern“ und wähle PIN AG (einfach PIN eingeben). Bei einem bereits hinzugefügten Paket nutze „Paketdienst ändern“.
 - **Ein Link zur PIN-Sendungsverfolgung** mit deiner Nummer ordnet die Sendung sofort PIN AG zu („Erkannter Paketdienst“).

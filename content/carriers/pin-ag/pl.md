@@ -84,7 +84,7 @@ Peek nie może skontaktować się w twoim imieniu z PIN AG ani z nadawcą. Dane 
 
 Wklej numer do [Peek](/), z nawiasami lub bez: Peek automatycznie łączy ostatnią cyfrę w nawiasie z resztą numeru.
 
-- **16 cyfr zaczynających się od 0100.** Ponieważ inni przewoźnicy też używają 16 cyfr, Peek odpytuje najbardziej prawdopodobnych według twojego kraju (regionu telefonu albo lokalizacji w przeglądarce). W Niemczech pyta najpierw PIN AG. W trakcie sprawdzania widać „Sprawdzanie usług śledzenia…”. Gdy PIN zna przesyłkę, pojawia się „PIN AG ma tę przesyłkę.” i Peek zapisuje ją pod PIN AG. Poza Niemcami Peek nie pyta PIN AG: kliknij „Zmień” i wybierz PIN AG.
+- **16 cyfr zaczynających się od 0100.** Ponieważ inni przewoźnicy też używają 16 cyfr, Peek odpytuje najbardziej prawdopodobnych według twojego kraju (regionu telefonu albo strefy czasowej przeglądarki). W Niemczech pyta najpierw PIN AG. W trakcie sprawdzania widać „Sprawdzanie usług śledzenia…”. Gdy PIN zna przesyłkę, pojawia się „PIN AG ma tę przesyłkę.” i Peek zapisuje ją pod PIN AG. Poza Niemcami Peek pyta PIN AG dopiero wtedy, gdy pozostali przewoźnicy nie znają numeru.
 - **Jeszcze niewidoczna.** Dodaj ją mimo to. W Niemczech, gdy Peek zapytał PIN, a numeru jeszcze nie ma, widać „Oczekiwanie na pierwszy skan przewoźnika PIN AG” i „Prawdopodobnie PIN AG”, a Peek dalej pyta PIN. Po tygodniu Peek poprosi o sprawdzenie numeru u nadawcy lub wybór innego przewoźnika.
 - **13 cyfr.** Po samej długości Peek nie rozpozna PIN. Wklej numer mimo wszystko: Peek obsługuje ponad 4500 przewoźników. Kliknij „Zmień” i wybierz PIN AG (wpisz PIN). W już dodanej paczce użyj „Zmień przewoźnika”.
 - **Link do strony śledzenia PIN** z twoim numerem od razu wskazuje PIN AG („Wykryty przewoźnik”).

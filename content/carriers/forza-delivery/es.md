@@ -14,10 +14,10 @@ Forza llama guía (número de guía) al número de rastreo. Viene en la etiqueta
 
 | Guía | Qué es |
 | --- | --- |
-| `FD0000000` | FD y siete dígitos: en el catálogo de Peek, una forma que solo usa Forza. |
-| `FD000000` | FD y seis dígitos. Los números de GLS Switzerland, GLS France, GLS Germany y Loggi pueden verse igual. |
-| `FD00000000` | FD y ocho dígitos. Los de TNT Italy pueden verse igual, y los de DHL eCommerce Iberia cuando el último dígito es 0. |
-| `FD000000000` | FD y nueve dígitos. El rastreo de Forza la acepta, pero Peek propone GLS Italy para esta forma: elige tú a Forza (más abajo te explicamos cómo). |
+| `FD4829173` | FD y siete dígitos. Los números de R+L Carriers pueden verse igual: Peek pregunta a Forza y a R+L Carriers a la vez. |
+| `FD482917` | FD y seis dígitos. Los números de GLS Switzerland, GLS France, GLS Germany, GLS Netherlands y Loggi pueden verse igual. |
+| `FD48291736` | FD y ocho dígitos. Los de TNT Italy pueden verse igual, y los de DHL eCommerce Iberia cuando el último dígito es 0. |
+| `FD482917364` | FD y nueve dígitos. El rastreo de Forza la acepta, pero Peek propone GLS Italy para esta forma: elige tú a Forza (más abajo te explicamos cómo). |
 
 A Peek no le importan las minúsculas, los espacios ni los guiones. El rastreo de Forza también acepta una referencia en lugar de la guía (su campo dice `Número de guía o referencia`), pero Peek necesita la guía FD. ¿No tienes ningún número? Mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
@@ -62,7 +62,7 @@ Para un reembolso o un nuevo envío, habla primero con la tienda: ella eligió a
 
 **Se queda en `Generado` o `Solicitado`.** La tienda hizo la guía, pero Forza todavía no tiene el paquete. Pregúntale a la tienda cuándo se lo va a entregar a Forza.
 
-**Varios días sin movimiento.** Si un paquete en camino lleva cuatro días sin un escaneo nuevo, Peek lo marca con el día del último escaneo («Sin novedades desde el lun 12 oct»). Llama a Forza con tu guía a mano. Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Varios días sin movimiento.** Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» lleva cuatro días sin un escaneo nuevo, Peek lo marca con el día del último escaneo, como «Sin novedades desde el lun 12 oct», y la página del paquete dice «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Forza Delivery Express.» Forza no tiene página de ayuda en Peek, así que no aparece ningún enlace «Pide ayuda a …»: llama a Forza con tu guía a mano. Tras tres semanas sin un escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Forza Delivery Express.» Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 **Dañado o perdido.** Actúa de inmediato. Los términos de Forza le dan al remitente 48 horas desde que Forza aceptó el envío para reclamar por escrito, con un solo reclamo por envío. Sin seguro, Forza paga como máximo Q800 o su equivalente en moneda local (US$100 en los términos de El Salvador). El remitente es la tienda: avísale el mismo día. Mira [paquete dañado](guide:damaged-parcel) y [paquete perdido](guide:lost-parcel).
 
@@ -72,13 +72,13 @@ Para un reembolso o un nuevo envío, habla primero con la tienda: ella eligió a
 
 ## Forza Delivery: teléfono y atención al cliente
 
-Estas son las líneas de Atención al cliente que publicaba el sitio web de Forza el 1 de noviembre de 2026:
+Estas son las líneas de Atención al cliente que publica el sitio web de Forza:
 
 - **Guatemala:** 1753.
 - **El Salvador:** +503 2535-1818.
 - **Honduras:** +504 2276-1818.
 
-En el encabezado de varias de sus páginas aparece «Lunes a sábado de 7:00 a 19:00 horas». Cada agencia Express Center tiene su propio horario, que aparece en las páginas de agencias. Para programar una entrega, usa el botón Programar Entrega de la [página de Guatemala](https://www.forzadelivery.com/gt/); la [de El Salvador](https://www.forzadelivery.com/sv/) tiene el mismo botón, con el mismo enlace. En la página de Honduras ese botón no tiene enlace: mejor llama. Ten a mano tu guía.
+En el encabezado de varias de sus páginas aparece «Lunes a sábado de 7:00 a 19:00 horas», en hora de Centroamérica (UTC−6). Cada agencia Express Center tiene su propio horario, que aparece en las páginas de agencias. Para programar una entrega, usa el botón Programar Entrega de la [página de Guatemala](https://www.forzadelivery.com/gt/); la [de El Salvador](https://www.forzadelivery.com/sv/) tiene el mismo botón, con el mismo enlace. En la página de Honduras ese botón no tiene enlace: mejor llama. Ten a mano tu guía.
 
 ## Rastrear un paquete de Forza Delivery con Peek
 
@@ -86,13 +86,11 @@ En el encabezado de varias de sus páginas aparece «Lunes a sábado de 7:00 a 1
 
 Si Peek no encuentra el paquete, toca «Cambiar» y elige Forza Delivery Express en «Encaja con este número», o en «Todos los transportistas» si tu guía tiene nueve dígitos (escribe Forza en el buscador para encontrarlo). En un paquete que ya agregaste, usa «Cambiar transportista». Si eliges Forza para un número que no es FD con seis a nueve dígitos, Peek te dice que Forza «no emite números como este»: revisa el número.
 
-Una guía FD con siete dígitos apunta a Forza. Si agregas una y Forza todavía no la tiene registrada, Peek muestra «Probablemente Forza Delivery Express» y «Esperando el primer escaneo de Forza Delivery Express», y sigue preguntando. Después de una semana, te pide que verifiques el número con el remitente o que elijas otro transportista.
-
 Peek consulta el rastreo de Forza solo con la guía: sin número de teléfono ni código postal. Muestra el estado y cada línea con las palabras de Forza en español y su hora. Las líneas de Forza no indican ningún lugar. Su rastreo puede mostrar más, como una fecha estimada, el destino, puntos en un mapa, nombres, quién firmó y datos del pago. Peek los deja fuera, así que no muestra fecha estimada de entrega ni mapa.
 
 Las horas de Forza no indican zona horaria: Peek las toma como hora de Guatemala y te las muestra en la zona horaria de tu dispositivo. Guatemala, El Salvador y Honduras tienen la misma hora (UTC−6, sin horario de verano), así que un escaneo en cualquiera de los tres países aparece con la hora correcta.
 
-Peek consulta a Forza hasta una vez cada 10 minutos, o hasta una vez cada 2 minutos (cada 5 si tiene que abrir el seguimiento de Forza en un navegador) desde las 6:00, hora local, el día en que aparece el estado `En ruta`, mientras responda el propio seguimiento de Forza; a través de servicios de seguimiento, cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega»: «Solo la entrega» cubre `En ruta` y `Entregado`. Peek no puede contactar a Forza ni a la tienda por ti, y tampoco puede pagar un monto contra entrega.
+Mientras tengas el paquete abierto en Peek, o el día de la entrega con las notificaciones activadas, Peek consulta a Forza hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos (cada 5 si tiene que abrir el seguimiento de Forza en un navegador) desde las 6:00, hora local (UTC−6), el día en que aparece el estado `En ruta`, mientras responda el propio seguimiento de Forza. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora, y cada 6 horas tras siete días en «Etiqueta creada». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega»: «Solo la entrega» cubre `En ruta` y `Entregado`. Peek no puede contactar a Forza ni a la tienda por ti, y tampoco puede pagar un monto contra entrega.
 
 ## Preguntas sobre el rastreo de Forza Delivery
 

@@ -14,10 +14,10 @@ Forza calls the tracking number a guía (número de guía). It is on the parcel'
 
 | Guía | What it is |
 | --- | --- |
-| `FD0000000` | FD and seven digits: a shape only Forza uses in Peek's catalog. |
-| `FD000000` | FD and six digits. GLS Switzerland, GLS France, GLS Germany and Loggi numbers can look the same. |
-| `FD00000000` | FD and eight digits. TNT Italy numbers can look the same, and DHL eCommerce Iberia's when the last digit is 0. |
-| `FD000000000` | FD and nine digits. Forza's tracker takes it, but Peek offers GLS Italy for this shape: choose Forza yourself (see below). |
+| `FD4829173` | FD and seven digits. R+L Carriers numbers can look the same: Peek asks Forza and R+L Carriers at once. |
+| `FD482917` | FD and six digits. GLS Switzerland, GLS France, GLS Germany, GLS Netherlands and Loggi numbers can look the same. |
+| `FD48291736` | FD and eight digits. TNT Italy numbers can look the same, and DHL eCommerce Iberia's when the last digit is 0. |
+| `FD482917364` | FD and nine digits. Forza's tracker takes it, but Peek offers GLS Italy for this shape: choose Forza yourself (see below). |
 
 Lower case, spaces and dashes don't matter in Peek. Forza's tracker also takes a reference instead of the guía (its field says `Número de guía o referencia`), but Peek needs the FD guía. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
@@ -62,7 +62,7 @@ For a refund or a new parcel, talk to the shop first: it chose Forza, not you.
 
 **Stuck at `Generado` or `Solicitado`.** The shop has made the guía, but Forza doesn't have the parcel yet. Ask the shop when it will hand it over.
 
-**No new line for days.** When a parcel on its way has had no new scan for four days, Peek flags it with the day of the latest scan ("No tracking update since Mon 12 Oct"). Call Forza with your guía. See [why tracking stops updating](guide:tracking-not-updating).
+**No new line for days.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new scan for four days, Peek flags it with the newest scan's day, such as "No tracking update since Mon 12 Oct", and the parcel's page says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Forza Delivery Express." Forza has no help page in Peek, so there is no "Get help from …" link: call Forza with your guía. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Forza Delivery Express." See [why tracking stops updating](guide:tracking-not-updating).
 
 **Damaged or lost.** Act at once. Forza's terms give the sender 48 hours from when Forza accepted the parcel to claim in writing, one claim per parcel. Without insurance, they cap what Forza pays at Q800 or the same in local money (US$100 in El Salvador's terms). The sender is the shop: tell it the same day. See [damaged parcels](guide:damaged-parcel) and [lost parcels](guide:lost-parcel).
 
@@ -72,13 +72,13 @@ For a refund or a new parcel, talk to the shop first: it chose Forza, not you.
 
 ## Forza Delivery customer service and contact
 
-As read on 1 November 2026, Forza lists these customer service lines (Atención al cliente):
+Forza lists these customer service lines (Atención al cliente):
 
 - **Guatemala**: 1753.
 - **El Salvador**: +503 2535-1818.
 - **Honduras**: +504 2276-1818.
 
-Forza's site header shows Monday to Saturday, 7:00 to 19:00. Each Express Center has its own hours, on the agencies pages. To plan a delivery, use the Programar Entrega (schedule a delivery) button on [Forza's Guatemala page](https://www.forzadelivery.com/gt/); the [El Salvador page](https://www.forzadelivery.com/sv/) has the same button, with the same link. The Honduras page's button has no link: call instead. Have your guía ready.
+Forza's site header shows Monday to Saturday, 7:00 to 19:00, Central America time (UTC−6). Each Express Center has its own hours, on the agencies pages. To plan a delivery, use the Programar Entrega (schedule a delivery) button on [Forza's Guatemala page](https://www.forzadelivery.com/gt/); the [El Salvador page](https://www.forzadelivery.com/sv/) has the same button, with the same link. The Honduras page's button has no link: call instead. Have your guía ready.
 
 ## Track a Forza Delivery parcel with Peek
 
@@ -86,13 +86,11 @@ Forza's site header shows Monday to Saturday, 7:00 to 19:00. Each Express Center
 
 If Peek doesn't find it, press "Change" and pick Forza Delivery Express under "Fits this number", or under "All carriers" for a guía with nine digits (typing "Forza" finds it). On a parcel you've already added, use "Change carrier". If you pick Forza for a number that isn't FD and six to nine digits, Peek says Forza "doesn’t issue numbers like this one": check the number.
 
-A guía of FD and seven digits points to Forza. If you add one and Forza doesn't list it yet, Peek shows "Probably Forza Delivery Express" and "Waiting for Forza Delivery Express’s first scan", and keeps asking. After a week, it asks you to check the number with the sender or choose another carrier.
-
 Peek asks Forza's tracker with the guía alone: no phone number or postcode. It shows the status and each line with Forza's Spanish words and time. Forza's lines name no place. Its tracker can show more, such as an expected date, the destination, map points, names, who signed and payment details. Peek leaves these out, so it shows no expected delivery date and no map.
 
 Forza's times name no time zone: Peek reads them on Guatemala's clock and shows them in your device's. Guatemala, El Salvador and Honduras share that clock (UTC−6, with no summer time), so a scan in any of the three shows at the right time.
 
-Peek asks Forza up to every 10 minutes, or every 2 minutes (every 5 when it has to open Forza's tracker in a browser) from 6 a.m. local time on the day of an `En ruta` scan, while Forza's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks Forza up to every 10 minutes, and every 2 minutes (every 5 when it has to open Forza's tracker in a browser) from 6 a.m. local time (UTC−6) on the day of an `En ruta` scan, while Forza's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days at "Label created". It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
 
 ## Questions about Forza Delivery tracking
 

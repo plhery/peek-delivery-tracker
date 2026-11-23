@@ -14,11 +14,11 @@ A posta.hu nyomkövetője ezeket az azonosítókat ismeri (a példaszámok kital
 
 | Azonosító | Mi ez? |
 | --- | --- |
-| `PB00000000000` | Belföldi MPL csomag, például MPL Üzleti csomag: `P`, egy betű és még 11 karakter, összesen 13. Ha a vonalkód hosszabb, csak az első 13 karaktert írja be. |
-| `CP000000005HU` | Európa+ csomag: két betű, 9 számjegy és `HU`. |
-| `EA000000005HU` | Nemzetközi EMS gyorsposta, ugyanebben a formában. |
-| `RR000000005HU` | Nemzetközi ajánlott levél. |
-| `JJH30AAAAAPL00000000` | MPL Europe Standard csomag: 20 karakter, `JJH`-val kezdődik. A posta.hu „(DHL)” jelöléssel sorolja fel. |
+| `PB48271936404` | Belföldi MPL csomag, például MPL Üzleti csomag: `P`, egy betű és még 11 karakter, összesen 13. Ha a vonalkód hosszabb, csak az első 13 karaktert írja be. |
+| `CP482917367HU` | Európa+ csomag: két betű, 9 számjegy és `HU`. |
+| `EA736482153HU` | Nemzetközi EMS gyorsposta, ugyanebben a formában. |
+| `RR619402838HU` | Nemzetközi ajánlott levél. |
+| `JJH30KLMNPQ748291635` | MPL Europe Standard csomag: 20 karakter, `JJH`-val kezdődik. A posta.hu „(DHL)” jelöléssel sorolja fel. |
 
 A belföldi ajánlott és tértivevényes levél, valamint a hivatalos irat azonosítója `RL`-lel kezdődik; mind a 16 karakterét be kell írni. Egyszerre legfeljebb 10 azonosítót kereshet.
 
@@ -75,7 +75,7 @@ A többi `A küldemény nem kézbesíthető (…)` státusz zárójelben adja me
 
 ## A Magyar Posta elérhetőségei
 
-A posta.hu-n 2026. október 25-én:
+A posta.hu szerint:
 
 - **Telefon:** 06-1-767-8282, hétfőtől szerdáig és pénteken 8–17, csütörtökön 8–20 óra között.
 - **E-mail:** ugyfelszolgalat@posta.hu.
@@ -86,8 +86,8 @@ A posta.hu-n 2026. október 25-én:
 
 ## Magyar Posta-küldemények követése Peekkel
 
-[Peek](/) felülete angol nyelvű. A `P`-vel kezdődő belföldi, a `HU`-ra végződő, az `RL`-lel kezdődő ajánlott és a `JJH`-val kezdődő MPL Europe Standard azonosítóból Peek nem tudja biztosan, hogy a csomag a Magyar Postáé (a `P`, egy betű és 11 számjegy a francia [La Poste](carrier:la-poste) számaira is illik), ezért megkérdezi a Magyar Postát. Ehhez böngészőben nyitja meg a posta.hu-t, ami akár 20 másodpercig is eltarthat. Ha a Magyar Posta ismeri a számot, ezt látja: „Magyar Posta has this parcel.” Ha nem, a „Change” gombbal választhatja ki.
-Peek mutatja az eseményeket a helyükkel és az átvételi helyet (posta, PostaPont vagy automata), de várható kézbesítési napot és átvételi határidőt nem. Külföldről érkező küldeményt Peek a feladó ország postájának azonosítójával követ. Ha az szerint a csomag Magyarországra tart, Peek ugyanazzal a számmal a Magyar Postát is megkérdezi, és amint ott friss esemény van, onnan követi tovább. Peek akár 10 percenként, kiszállítás közben akár 2–5 percenként ellenőriz (5 percenként, ha böngészőben kell megnyitnia a posta.hu-t), és változáskor értesítést küldhet. A sűrűbb ellenőrzés csak a kiszállítás napján, reggel 6-tól magyar idő szerint érvényes, és csak addig, amíg a Magyar Posta saját nyomkövetése válaszol; nyomkövető szolgáltatásokon keresztül 15 percenként ellenőriz. Ha két napig nincs újdonság (vagy 12 óráig, amíg a küldeményt még csak regisztrálták, illetve épp csak átvette a posta), Peek már csak óránként ellenőrzi. A Magyar Postával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+[Peek](/) felülete angol nyelvű. A `P`-vel kezdődő belföldi, a `HU`-ra végződő, az `RL`-lel kezdődő ajánlott és a `JJH`-val kezdődő MPL Europe Standard azonosítóból Peek nem tudja biztosan, hogy a csomag a Magyar Postáé (a `P`, egy betű és 11 számjegy a francia [La Poste](carrier:la-poste) számaira is illik), ezért megkérdezi a Magyar Postát, a `HU`-ra végződő postai számnál a Chronopostot is. Ehhez böngészőben nyitja meg a posta.hu-t, ami akár 20 másodpercig is eltarthat. Ha a Magyar Posta ismeri a számot, ezt látja: „Magyar Posta has this parcel.” Ha nem, a „Change” gombbal választhatja ki.
+Peek mutatja az eseményeket a helyükkel és az átvételi helyet (posta, PostaPont vagy automata), de várható kézbesítési napot, átvételi határidőt és az átvevő nevét nem. Külföldről érkező küldeményt Peek a feladó ország postájának azonosítójával követ. Ha az szerint a csomag Magyarországra tart, vagy nem nevez meg célországot, és Ön Magyarországról követi, Peek ugyanazzal a számmal a Magyar Postát is megkérdezi, és amint ott a külföldi posta legutóbbi eseményénél nem régebbi esemény jelenik meg, onnan követi tovább. Amíg a küldemény meg van nyitva a Peekben, vagy a kézbesítés napján, ha be vannak kapcsolva az értesítések, Peek akár 10 percenként ellenőriz; azon a napon, amikor a Magyar Posta kiszállításra veszi, reggel 6-tól magyar idő szerint akár 2 percenként (5 percenként, ha böngészőben kell megnyitnia a posta.hu-t), amíg a Magyar Posta saját nyomkövetése válaszol; egyébként óránként. Ha két napig nincs újdonság (vagy 12 óráig, amíg a küldeményt még csak regisztrálták, illetve épp csak átvette a posta), Peek óránként ellenőriz, ha pedig hét napja nincs újdonság, és a küldemény még „Label created” állapotú, 6 óránként. Ha egy „Label created”, „Received by carrier” vagy „In transit” állapotú küldeménynél négy napja nincs új esemény, Peek a legutóbbi esemény napjával jelzi: „No tracking update since …”, alatta: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Magyar Posta.”, és egy „Get help from Magyar Posta” hivatkozást is mutat; három hét után a megjegyzés így szól: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Magyar Posta.” Értesítést minden eseményről („Every scan”), a fontos lépésekről („Important steps”) vagy csak a kézbesítésről („Delivery only”) kérhet. A Magyar Postával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések a Magyar Posta nyomkövetéséről
 

@@ -14,10 +14,10 @@ The shapes posta.hu's tracker lists (digits invented):
 
 | Number | What it is |
 | --- | --- |
-| `PB00012345670` | A domestic MPL parcel: `P`, a letter and 11 more characters, 13 in all. On a longer barcode, enter the first 13 characters. |
-| `CP000000005HU` | An international parcel (Europe+ or EMS): two letters, 9 digits, `HU`. |
-| `RR000000005HU` | An international registered letter. Domestic registered letters start `RL` and need 16 characters. |
-| `JJH30AAAAAPL00000000` | MPL Europe Standard: 20 characters starting `JJH`, a DHL-style ID. |
+| `PB48271936404` | A domestic MPL parcel: `P`, a letter and 11 more characters, 13 in all. On a longer barcode, enter the first 13 characters. |
+| `CP482917367HU` | An international parcel (Europe+ or EMS): two letters, 9 digits, `HU`. |
+| `RR619402838HU` | An international registered letter. Domestic registered letters start `RL` and need 16 characters. |
+| `JJH30KLMNPQ748291635` | MPL Europe Standard: 20 characters starting `JJH`, a DHL-style ID. |
 
 Magyar Posta's email shows the identifier; tapping it opens tracking in the app.
 
@@ -74,7 +74,7 @@ Other `A küldemény nem kézbesíthető (…)` endings give the reason, such as
 
 ## Magyar Posta contact number and customer service
 
-As listed on posta.hu on 15 October 2026:
+posta.hu lists:
 
 - **Phone:** 06-1-767-8282; from abroad +36 1 767 8282. Monday to Wednesday and Friday 8:00 to 17:00, Thursday 8:00 to 20:00, Hungarian time. No separate English line is listed.
 - **Email:** ugyfelszolgalat@posta.hu.
@@ -85,8 +85,8 @@ As listed on posta.hu on 15 October 2026:
 
 ## Tracking Magyar Posta parcels with Peek
 
-[Peek](/) asks Magyar Posta whether it knows a domestic `P…` number, a postal `…HU` one, a registered letter's `RL…` or an MPL Europe Standard `JJH…`, in a browser on Peek's server, so the answer can take up to about 20 seconds; for 11 digits after `P` and a letter, La Poste is asked too. You can also pick Magyar Posta with "Change", or paste a posta.hu tracking link with `searchvalue=`, which names it straight away.
-The first lookup opens posta.hu in a browser on Peek's server to pass its captcha, so it isn't instant; later checks read the number from Magyar Posta's app list. If the captcha is refused, Peek waits 10 minutes and tracking services fill in, though their history can lag. Peek shows the status, the history with each place, and the pickup point (post office, PostaPont or locker), in Magyar Posta's Hungarian. It shows no expected delivery or pickup deadline. It checks up to every 10 minutes, or every 2 to 5 minutes (5 when it has to open posta.hu in a browser) from 6 a.m. local time on the day Magyar Posta scans the parcel out for delivery, while Magyar Posta's own tracker answers (through tracking services, every 15 minutes), and can notify you on changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. An item posted abroad keeps its foreign post's number. When the foreign post says it's coming to Hungary, or names no destination and you track it from Hungary, Peek asks Magyar Posta too and follows the parcel there once Magyar Posta shows fresh progress.
+[Peek](/) asks Magyar Posta whether it knows a domestic `P…` number, a postal `…HU` one, a registered letter's `RL…` or an MPL Europe Standard `JJH…`, in a browser on Peek's server, so the answer can take up to about 20 seconds; for 11 digits after `P` and a letter, La Poste is asked too, and for a postal `…HU` number, Chronopost. You can also pick Magyar Posta with "Change", or paste a posta.hu tracking link with `searchvalue=`, which names it straight away.
+The first lookup opens posta.hu in a browser on Peek's server to pass its captcha, so it isn't instant; later checks read the number from Magyar Posta's app list. If the captcha is refused, Peek asks again after 15 minutes, then at an interval that doubles while it's refused, up to 6 hours; tracking services fill in meanwhile, though their history can lag. Peek shows the status, the history with each place, and the pickup point (post office, PostaPont or locker), in Magyar Posta's Hungarian. It shows no expected delivery, pickup deadline or signer. While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and from 6 a.m. Hungarian time on the day Magyar Posta scans it out for delivery, every 2 minutes (5 when a check opens posta.hu in a browser), while Magyar Posta's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Magyar Posta." and a "Get help from Magyar Posta" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Magyar Posta." Peek can notify you of "Every scan", "Important steps" or "Delivery only". An item posted abroad keeps its foreign post's number. When the foreign post says it's coming to Hungary, or names no destination and you track it from Hungary, Peek asks Magyar Posta too and follows the parcel there once Magyar Posta shows a scan no older than the foreign post's newest.
 
 ## Questions about Magyar Posta tracking
 

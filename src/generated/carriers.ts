@@ -2556,6 +2556,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "meest-sendungsverfolgung",
+      "title": "Meest Sendungsverfolgung: Nummern, Status und Kontakt",
+      "name": "Meest",
+      "color": "#0061af"
+    },
+    {
       "id": "nova-poshta",
       "catalog": "nova-poshta",
       "slug": "nova-poshta-sendungsverfolgung",
@@ -4428,6 +4436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Dachser en Espagne et au Portugal\u00a0: lien et statuts",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "suivi-meest",
+      "title": "Suivi Meest\u00a0: numéros, statuts et contacts",
+      "name": "Meest",
+      "color": "#0061af"
     },
     {
       "id": "nova-poshta",
@@ -6320,6 +6336,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "tracciamento-meest",
+      "title": "Tracciamento Meest: numeri, stati e contatti",
+      "name": "Meest",
+      "color": "#0061af"
+    },
+    {
       "id": "nova-poshta",
       "catalog": "nova-poshta",
       "slug": "tracciamento-nova-poshta",
@@ -8178,6 +8202,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005ca9"
     },
     {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "seguimiento-meest",
+      "title": "Seguimiento Meest: números, estados y contacto",
+      "name": "Meest",
+      "color": "#0061af"
+    },
+    {
       "id": "nova-poshta",
       "catalog": "nova-poshta",
       "slug": "seguimiento-nova-poshta",
@@ -10018,6 +10050,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Dachser tracking: rastrear encomenda, estados e contactos",
       "name": "Dachser",
       "color": "#005ca9"
+    },
+    {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "seguimento-meest",
+      "title": "Seguimento Meest: números, estados e contactos",
+      "name": "Meest",
+      "color": "#0061af"
     },
     {
       "id": "nova-poshta",

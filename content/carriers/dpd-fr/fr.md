@@ -14,14 +14,14 @@ Selon DPD France, le numéro de colis commence par 250, 1 ou 0 et compte 12 à 1
 
 | Numéro (inventé) | Ce qu'il faut savoir |
 | --- | --- |
-| `250000000000000` | 15 chiffres commençant par 250 : un numéro de colis DPD France. |
-| `2500000000000009` | 16 chiffres : le même numéro suivi d'un chiffre de contrôle, tel qu'il est imprimé sur l'étiquette. |
-| `10000000000000` | 14 chiffres commençant par 1 : une autre forme de numéro DPD France. |
-| `012345678901` | 12 chiffres commençant par 0 : une forme plus courte. |
+| `250482917364058` | 15 chiffres commençant par 250 : un numéro de colis DPD France. |
+| `2504829173640586` | 16 chiffres : le même numéro suivi d'un chiffre de contrôle, tel qu'il est imprimé sur l'étiquette. |
+| `10482917364058` | 14 chiffres commençant par 1 : une autre forme de numéro DPD France. |
+| `048291736405` | 12 chiffres commençant par 0 : une forme plus courte. |
 
 Le suivi de DPD accepte aussi le numéro d'un avis de passage ou le code reçu par SMS Predict. Tu peux y saisir jusqu'à 25 numéros, un par ligne, sans code postal. Un vrai SMS de DPD France arrive sous le nom d'expéditeur « DPD France ».
 
-**Attention aux numéros qui se ressemblent.** 14 chiffres suivis d'une lettre (`00000000000000U`) appartiennent à d'autres réseaux DPD ou à [Chronopost](carrier:chronopost), pas à DPD France. Certains colis expédiés de l'étranger par une filiale DPD (DPD UK, DPD Allemagne…) sont confiés à Chronopost à leur arrivée en France : DPD France affiche alors `Numéro de colis inconnu` et renvoie vers le suivi de Chronopost. Si ton colis est livré par DPD en Suisse, regarde plutôt la page [DPD Suisse](carrier:dpd-ch).
+**Attention aux numéros qui se ressemblent.** 14 chiffres suivis d'une lettre (`48291736405826B`) appartiennent à d'autres réseaux DPD ou à [Chronopost](carrier:chronopost), pas à DPD France. Certains colis expédiés de l'étranger par une filiale DPD (DPD UK, DPD Allemagne…) sont confiés à Chronopost à leur arrivée en France : DPD France affiche alors `Numéro de colis inconnu` et renvoie vers le suivi de Chronopost. Si ton colis est livré par DPD en Suisse, regarde plutôt la page [DPD Suisse](carrier:dpd-ch).
 
 ## Suivi colis DPD : ce que veulent dire les statuts
 
@@ -46,9 +46,9 @@ Tant que la ligne `Colis en préparation chez l'expéditeur` reste la dernière,
 
 ## Livraison DPD, point relais Pickup et absence
 
-**Jours et heures.** DPD France livre du lundi au vendredi entre 8 h et 18 h, et le samedi entre 8 h et 15 h pour certains codes postaux. Il annonce 24 à 48 heures de délai à partir de l'envoi par la boutique.
+**Jours et heures.** DPD France livre du lundi au vendredi entre 8 h et 18 h, heure française, et le samedi entre 8 h et 15 h pour certains codes postaux. Il annonce 24 à 48 heures de délai à partir de l'envoi par la boutique.
 
-**Predict.** Si la boutique a choisi ce service, tu reçois un SMS et un e-mail avec le jour prévu dès la prise en charge, puis, le jour J, un créneau de 3 heures. Inutile de répondre au SMS. Par son lien ou dans l'app myDPD, tu peux choisir une autre date, une autre adresse, un relais Pickup, l'agence DPD, un voisin ou un lieu sûr, selon les options retenues par la boutique, jusqu'à 23 h le jour du message. Après 23 h, ou une fois un choix fait, plus de changement possible.
+**Predict.** Si la boutique a choisi ce service, tu reçois un SMS et un e-mail avec le jour prévu dès la prise en charge, puis, le jour J, un créneau de 3 heures. Inutile de répondre au SMS. Par son lien ou dans l'app myDPD, tu peux choisir une autre date, une autre adresse, un relais Pickup, l'agence DPD, un voisin ou un lieu sûr, selon les options retenues par la boutique, jusqu'à 23 h, heure française, le jour du message. Après 23 h, ou une fois un choix fait, plus de changement possible.
 
 **Tu étais absent.** Le livreur dépose un avis de passage dans ta boîte aux lettres ; replanifie la livraison en ligne. Avec Predict, il peut aussi laisser le colis dans un relais Pickup proche si sa taille et ton adresse le permettent. DPD France ne donne pas de nombre de tentatives : ses conditions générales disent que le colis est représenté le lendemain ou à une date indiquée par l'expéditeur ou par toi.
 
@@ -70,9 +70,9 @@ C'est la boutique qui a le contrat avec DPD France, et DPD ne garantit pas ses d
 
 ## DPD contact : téléphone et service client
 
-Relevé le 11 octobre 2026 sur la [page Service Clients de DPD France](https://www.dpd.com/fr/fr/contact/service-clients/) :
+Sur la [page Service Clients de DPD France](https://www.dpd.com/fr/fr/contact/service-clients/) :
 
-- **Téléphone :** 09 70 80 85 66 (+33 9 70 80 85 66 depuis l'étranger), service gratuit et non surtaxé, au prix d'un appel. Du lundi au vendredi de 8 h à 20 h et le samedi de 10 h à 18 h, hors jours fériés. DPD le présente comme le seul numéro officiel de son service client.
+- **Téléphone :** 09 70 80 85 66 (+33 9 70 80 85 66 depuis l'étranger), service gratuit et non surtaxé, au prix d'un appel. Du lundi au vendredi de 8 h à 20 h et le samedi de 10 h à 18 h, heure française, hors jours fériés. DPD le présente comme le seul numéro officiel de son service client.
 - **Formulaire de contact** sur la même page, avec ton nom, ton e-mail, le numéro de colis ou d'avis de passage et le code postal de livraison. Il n'y a pas d'adresse e-mail publique.
 - **Messages privés** par WhatsApp, Messenger ou X, depuis les liens de cette page.
 
@@ -82,11 +82,15 @@ Ces canaux couvrent les colis du réseau DPD France ; DPD France ne donne pas de
 
 ## Suivre un colis DPD France avec Peek
 
-[Peek](/) reconnaît tout de suite le numéro à 15 chiffres qui commence par 250. Les autres formes existent aussi chez d'autres transporteurs. Pour les 14 chiffres commençant par 10 et la forme à 16 chiffres de l'étiquette, Peek interroge d'abord les transporteurs qu'il peut consulter rapidement et qui utilisent aussi cette forme (Ciblex, SEUR et BRT pour 14 chiffres), puis des services de suivi ; si aucun ne trouve le numéro, il ouvre le suivi de DPD France dans un navigateur pour le lui demander, ce qui peut prendre jusqu'à 20 secondes de plus, et choisit DPD France si DPD affiche des scans datés et récents. Pour les autres formes, Peek ne peut pas demander à DPD France s'il connaît le numéro : le plus souvent, tu appuies sur « Changer de transporteur » et tu choisis DPD France. Un lien trace.dpd.fr marche aussi (`/fr/trace/` ou `/trace-particuliers/`). Les autres liens, comme `/en/trace/` ou ceux de www.dpd.fr, ne marchent que s'ils contiennent le numéro à 15 chiffres en 250, et un lien dpd.com ou dpdgroup.com avec `parcelNumber=` est lu comme DPD France si son chemin commence par `/fr/`, comme DPD Suisse s'il commence par `/ch/`. Aucun code postal n'est demandé.
+[Peek](/) reconnaît tout de suite le numéro à 15 chiffres qui commence par 250. Les autres formes existent aussi chez d'autres transporteurs. Pour 14 chiffres commençant par 0 ou par 11 à 19, comme `14829173640582`, Peek demande à DPD France s'il connaît le numéro ; depuis le champ de cette page, il le lui demande en premier. Pour les 14 chiffres commençant par 10 et la forme à 16 chiffres de l'étiquette, Peek interroge d'abord les transporteurs qu'il peut consulter rapidement et qui utilisent aussi cette forme (SEUR, BRT et Ciblex pour 14 chiffres), puis des services de suivi ; si aucun ne trouve le numéro, il ouvre le suivi de DPD France dans un navigateur pour le lui demander, ce qui peut prendre jusqu'à 20 secondes de plus, et choisit DPD France si DPD affiche des scans datés et récents. Hors du Brésil, Jadlog, qui y utilise la forme à 14 chiffres, ne vient qu'en dernier, si DPD France ne connaît pas non plus le numéro. Pour les 12 chiffres commençant par 0, Peek ne peut pas demander à DPD France s'il connaît le numéro : appuie sur « Changer » et choisis DPD France, ou sur « Changer de transporteur » pour un colis déjà ajouté. Un lien trace.dpd.fr marche aussi (`/fr/trace/` ou `/trace-particuliers/`). Les autres liens, comme `/en/trace/` ou ceux de www.dpd.fr, ne marchent que s'ils contiennent le numéro à 15 chiffres en 250, et un lien dpd.com ou dpdgroup.com avec `parcelNumber=` est lu comme DPD France si son chemin commence par `/fr/`, comme [DPD Suisse](carrier:dpd-ch) s'il commence par `/ch/`. Aucun code postal n'est demandé.
 
 Peek affiche le statut, l'historique avec l'agence de chaque scan, le jour de livraison prévu, le poids et l'heure de livraison, et place l'agence qui livre sur la carte. Les statuts restent en français, tels que DPD les écrit, et les heures sont lues à l'heure de Paris. Peek ne garde ni ton nom ni ton adresse, ni la signature ni la référence client, et n'affiche pas le relais : seulement « Prêt à être retiré ». Si DPD montre un aller et un retour, Peek garde le trajet de ton numéro. Il ne suit pas le colis chez un autre transporteur.
 
-Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (toutes les 5 quand il doit ouvrir le suivi de DPD dans un navigateur), et peut t'envoyer des notifications quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Ces vérifications rapprochées ne valent que le jour où DPD met le colis en livraison, dès 6 h, heure locale, et tant que c'est le suivi de DPD qui répond ; quand ce sont des services de suivi qui répondent, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h, heure française, le jour où DPD France scanne le colis en livraison, tant que le suivi de DPD répond (toutes les 5 minutes quand Peek doit l'ouvrir dans un navigateur). Sinon, il vérifie toutes les heures. Après deux jours sans nouvelles (12 heures tant que le colis en est à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures même si tu le gardes ouvert, puis toutes les 6 heures une fois le colis à « Étiquette créée » depuis sept jours. Quand seuls des services de suivi répondent, Peek vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan et, le jour où le colis est en livraison, jusqu'à toutes les 15 minutes tant que tu le gardes ouvert ou que les notifications sont activées.
+
+Quand le dernier scan date de quatre jours et que le colis en est encore à « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis dit alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger DPD France. », avec un lien « Demande de l’aide à DPD France » vers la page Service Clients de DPD France. Après trois semaines sans nouveau scan, elle dit « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger DPD France. »
+
+Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi DPD
 
@@ -96,7 +100,7 @@ Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une 
 
 ### DPD livre-t-il le samedi ?
 
-Oui, pour certains codes postaux, entre 8 h et 15 h. En semaine, DPD France livre entre 8 h et 18 h.
+Oui, pour certains codes postaux, entre 8 h et 15 h, heure française. En semaine, DPD France livre entre 8 h et 18 h.
 
 ### Combien de temps prend une livraison DPD ?
 

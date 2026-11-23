@@ -12,16 +12,16 @@ DPD France, called Exapaq until 2015, is the French parcel network of Geopost, p
 
 DPD France says its parcel numbers start with 250, 1 or 0 and have 12 to 15 digits. No number at all? DPD says only the sender has it, so ask the shop, or see [where else to find a tracking number](guide:find-tracking-number).
 
-| Shape (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `250000000000000` | 15 digits starting 250: the usual DPD France parcel number. |
-| `2500000000000009` | 16 digits: the same number plus a check digit, as printed on the label. |
-| `10000000000000` | 14 digits starting 1: another DPD France parcel number shape. |
-| `012345678901` | 12 digits starting 0: a shorter DPD France shape. |
+| `250482917364058` | 15 digits starting 250: the usual DPD France parcel number. |
+| `2504829173640586` | 16 digits: the same number plus a check digit, as printed on the label. |
+| `10482917364058` | 14 digits starting 1: another DPD France parcel number shape. |
+| `048291736405` | 12 digits starting 0: a shorter DPD France shape. |
 
 DPD's tracking also takes the number on a delivery notice (avis de passage) or a Predict SMS code, and asks for no postcode. A genuine DPD France SMS comes from the sender name "DPD France".
 
-Fourteen digits followed by a letter (`00000000000000U`) belongs to other DPD networks or [Chronopost](carrier:chronopost), not DPD France. Parcels from [DPD UK](carrier:dpd-uk), DPD Germany and other DPD subsidiaries are sometimes handed to Chronopost on arrival in France: DPD France then shows `Numéro de colis inconnu` (parcel number unknown) and points you to Chronopost's tracking.
+Fourteen digits followed by a letter (`48291736405826B`) belongs to other DPD networks or [Chronopost](carrier:chronopost), not DPD France. Parcels from [DPD UK](carrier:dpd-uk), [DPD Germany](carrier:dpd-de) and other DPD subsidiaries are sometimes handed to Chronopost on arrival in France: DPD France then shows `Numéro de colis inconnu` (parcel number unknown) and points you to Chronopost's tracking.
 
 ## What DPD France's tracking statuses mean
 
@@ -45,9 +45,9 @@ Until the parcel is handed over, DPD says only the sender can answer questions. 
 
 ## DPD parcel not delivered: Predict, Pickup relays and lockers
 
-DPD France delivers Monday to Friday, 8am to 6pm, and on Saturday, 8am to 3pm, for some postcodes.
+DPD France delivers Monday to Friday, 8am to 6pm French time, and on Saturday, 8am to 3pm, for some postcodes.
 
-**Predict.** If the sender chose it, you get an SMS and email with the planned day, then a 3-hour slot on the day. Through the link or the myDPD app you can pick another day or address, a Pickup relay, the depot, a neighbour or a safe place, as the sender allows, until 11pm on the day of the message.
+**Predict.** If the sender chose it, you get an SMS and email with the planned day, then a 3-hour slot on the day. Through the link or the myDPD app you can pick another day or address, a Pickup relay, the depot, a neighbour or a safe place, as the sender allows, until 11pm French time on the day of the message.
 
 **Missed delivery.** The driver leaves a notice in your letterbox; reschedule online. With Predict, the parcel may go to a nearby Pickup relay instead. DPD France states no number of attempts: its terms say the parcel comes again the next day or on a date you or the sender give.
 
@@ -67,9 +67,9 @@ Damaged or incomplete: refuse it, giving the reason (it goes back to the sender)
 
 ## DPD France contact number and customer service
 
-DPD France's channels, as read on 11 October 2026 on its [customer service page](https://www.dpd.com/fr/fr/contact/service-clients/):
+DPD France's channels, on its [customer service page](https://www.dpd.com/fr/fr/contact/service-clients/):
 
-- **Phone** 09 70 80 85 66 (+33 9 70 80 85 66 from abroad), charged as a normal call, Monday to Friday 8am to 8pm and Saturday 10am to 6pm, except public holidays. DPD calls it its only official customer service number.
+- **Phone** 09 70 80 85 66 (+33 9 70 80 85 66 from abroad), charged as a normal call, Monday to Friday 8am to 8pm and Saturday 10am to 6pm, French time, except public holidays. DPD calls it its only official customer service number.
 - **Contact form** on the same page, with the parcel or notice number and delivery postcode. There's no public email address.
 - **Private messages** via WhatsApp, Messenger or X, linked from that page.
 
@@ -79,11 +79,15 @@ These cover parcels in DPD France's network; DPD France gives no separate number
 
 ## Tracking DPD France parcels with Peek
 
-[Peek](/) recognises the 15-digit number starting 250 at once. Other shapes are shared with other carriers. For the 14-digit number starting 10 and the 16-digit label form, Peek first asks the carriers it can check quickly that use the shape (Ciblex, SEUR and BRT for 14 digits), then tracking services; if none of them finds the number, it opens DPD France's tracker in a browser to ask, which can take up to 20 seconds more, and picks DPD France when DPD shows recent dated scans. Peek can't ask DPD France about the other shapes, so for those you'll usually press "Change" and pick DPD France. trace.dpd.fr links work (`/fr/trace/` and `/trace-particuliers/`). Other links, such as `/en/trace/` or www.dpd.fr ones, work only when they hold the 15-digit `250` number, and dpd.com or dpdgroup.com links with `parcelNumber=` are read as DPD France when their path starts with `/fr/`, as DPD Switzerland when it starts with `/ch/`.
+[Peek](/) recognises the 15-digit number starting 250 at once. Other shapes are shared with other carriers. For 14 digits starting 0 or 11 to 19, such as `14829173640582`, Peek asks DPD France whether it knows the number; from the box on this page, it asks DPD France first. For the 14-digit number starting 10 and the 16-digit label form, Peek first asks the carriers it can check quickly that use the shape (SEUR, BRT and Ciblex for 14 digits), then tracking services; if none of them finds the number, it opens DPD France's tracker in a browser to ask, which can take up to 20 seconds more, and picks DPD France when DPD shows recent dated scans. Outside Brazil, Jadlog, which uses the 14-digit shape there, comes last, only if DPD France doesn't know the number either. Peek can't ask DPD France about the 12-digit shape, so press "Change" and pick DPD France, or "Change carrier" on a parcel you've already added. trace.dpd.fr links work (`/fr/trace/` and `/trace-particuliers/`). Other links, such as `/en/trace/` or www.dpd.fr ones, work only when they hold the 15-digit `250` number, and dpd.com or dpdgroup.com links with `parcelNumber=` are read as DPD France when their path starts with `/fr/`, as [DPD Switzerland](carrier:dpd-ch) when it starts with `/ch/`.
 
 Peek shows the status, the history with each scan's depot, the expected day, the weight and the delivery time, and maps the delivering depot. Statuses stay in French; times are read on Paris time and shown in your device's time zone. It drops your name and address, the signature and the customer reference, and shows no relay's name or address, only "Ready for pickup". If DPD shows an outbound and a return trip, Peek keeps the one for your number. It follows no other carrier.
 
-Peek checks up to every 10 minutes, or every 2 (every 5 when it has to open DPD's tracker in a browser) from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day DPD France scans it out for delivery, from 6 a.m. French time, every 2 minutes while DPD's own tracker answers, or every 5 when Peek has to open that tracker in a browser. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When only tracking services answer, Peek checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DPD France.", with a "Get help from DPD France" link to DPD France's customer service page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DPD France."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about DPD France tracking
 

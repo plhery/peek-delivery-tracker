@@ -63,7 +63,7 @@
   { "id": "bring", "catalog": "bring-posten", "name": "Bring", "languages": ["en", "nb", "sv", "da", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posti", "catalog": "posti", "name": "Posti", "languages": ["en", "fi", "et", "sv", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "omniva", "catalog": "omniva", "name": "Omniva", "languages": ["en", "lt", "et", "lv", "pl", "fr", "de", "es", "it", "pt"] },
-  { "id": "ppl", "catalog": "ppl", "name": "PPL", "languages": ["en", "cs"] },
+  { "id": "ppl", "catalog": "ppl", "name": "PPL", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "box-now", "catalog": "box-now", "name": "BOX NOW", "languages": ["en", "el", "bg", "hr", "sl", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dhl-ecommerce-nl", "catalog": "dhl-ecommerce-nl", "name": "DHL eCommerce Netherlands", "languages": ["en", "fr", "nl", "de", "es", "it", "pt", "pl"] },
   { "id": "heppner", "catalog": "heppner", "name": "Heppner", "languages": ["en", "fr", "de", "nl", "es", "it", "pt", "pl"] },

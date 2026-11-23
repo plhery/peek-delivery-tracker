@@ -2508,6 +2508,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f86300"
     },
     {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "ppl-sendungsverfolgung",
+      "title": "PPL Sendungsverfolgung: 11-stellige Nummer und Boxen",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "box-now-sendungsverfolgung",
@@ -4436,6 +4444,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Omniva\u00a0: codes, statuts et consignes baltes",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "suivi-ppl",
+      "title": "Suivi PPL\u00a0: numéro à 11 chiffres, statuts et Parcelbox",
+      "name": "PPL",
+      "color": "#004b93"
     },
     {
       "id": "box-now",
@@ -6384,6 +6400,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f86300"
     },
     {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "tracciamento-ppl",
+      "title": "Tracciamento PPL: codice a 11 cifre, stati e PPL box",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "tracciamento-box-now",
@@ -8322,6 +8346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f86300"
     },
     {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "seguimiento-ppl",
+      "title": "Seguimiento PPL: número de 11 dígitos, estados y boxes",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "seguimiento-box-now",
@@ -10250,6 +10282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Omniva: códigos, estados e cacifos bálticos",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "seguimento-ppl",
+      "title": "Seguimento PPL: código de 11 dígitos, estados e boxes",
+      "name": "PPL",
+      "color": "#004b93"
     },
     {
       "id": "box-now",
@@ -12198,6 +12238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "sledzenie-ppl",
+      "title": "Śledzenie PPL: 11-cyfrowy numer, statusy i PPL boxy",
+      "name": "PPL",
+      "color": "#004b93"
     },
     {
       "id": "box-now",

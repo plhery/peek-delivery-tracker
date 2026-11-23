@@ -5367,7 +5367,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-17</lastmod>
+<lastmod>2026-11-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/carriers</loc>
@@ -28067,6 +28067,68 @@
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/fan-courier-international-urmarire-awb" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/fan-courier-international-tracking" />
 <lastmod>2026-11-20</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/jt-express-brazil-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/anjun-logistics-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/anjun-logistics-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-anjun-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/anjun-logistics-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt-br/carriers/rastreio-anjun-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/anjun-logistics-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-anjun-express" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/anjun-logistics-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/xyl-ships-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/xyl-ships-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/xyl-ships-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/jadlog-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jadlog-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jadlog" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jadlog-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt-br/carriers/rastreio-jadlog</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jadlog-tracking" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jadlog" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jadlog-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/gls-poland-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-poland-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-gls-polska" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-poland-tracking" />
+<lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/sledzenie-gls-polska</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gls-poland-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-gls-polska" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gls-poland-tracking" />
+<lastmod>2026-11-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/assistants</loc>

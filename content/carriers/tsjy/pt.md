@@ -15,6 +15,7 @@ O site da TSJY não descreve os seus números, mas seguem um formato fixo. TSJY 
 | Número | O que é |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, nove dígitos e CN: número de pedido TSJY. |
+| `CFJY482917365CN` | CFJY, nove dígitos e CN: também um número de encomenda TSJY, de uma segunda série. |
 | `TSJY48291736CN` | Apenas oito dígitos: não é o formato TSJY e o Peek não identifica a TSJY. Verifica se falta um dígito. |
 | `FEIKM4829173650YQ` | FEI, duas letras, dez dígitos e YQ: número da [17FEIA](carrier:17feia), linha que transporta alguns envios TSJY para o estrangeiro. |
 
@@ -89,7 +90,7 @@ Com a TSJY és normalmente tu o cliente, pois reservaste o envio. Assim, em caso
 
 **Parada no armazém.** Se os passos internos da TSJY pararem durante vários dias, pergunta ao apoio ao cliente.
 
-**Sem novidades após o voo.** Depois de `Flight has departed.`, pode não surgir nada novo até à aterragem ou alfândega. Se uma encomenda ainda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem nova linha, o Peek assinala-a com «Sem atualizações há quatro dias» (ou «Sem atualizações desde …»), explica: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a TSJY.» e mostra «Pede ajuda a TSJY». Vê [porque o seguimento deixa de atualizar](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
+**Sem novidades após o voo.** Depois de `Flight has departed.`, pode não surgir nada novo até à aterragem ou alfândega. Se uma encomenda ainda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem nova linha, o Peek assinala-a com «Sem atualizações há quatro dias» (ou «Sem atualizações desde …»), explica: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a TSJY.» Como a TSJY não tem página de ajuda no Peek, só aparece um link de ajuda quando o Peek segue a empresa que entrega, se esta tiver uma. Vê [porque o seguimento deixa de atualizar](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
 
 **Perdida ou danificada.** O site da TSJY promete indemnização integral por perda ou dano (丢破必赔), mas as páginas públicas não dão regras nem prazos: contacta logo o apoio ao cliente e guarda a caixa e os artigos. Vê [encomendas perdidas](guide:lost-parcel) e [encomendas danificadas](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ O site está apenas em chinês e não menciona atendimento em inglês.
 
 ## Seguir uma encomenda TSJY com o Peek
 
-O [Peek](/) identifica logo a TSJY a partir de um número `TSJY…CN` («Transportadora detetada»): nenhuma outra transportadora seguida pelo Peek usa este formato. Uma ligação para os resultados da TSJY com um número TSJY após `nos=` também funciona; havendo vários, o Peek usa o primeiro. Uma ligação da TSJY com o número da linha ou qualquer número fora do formato TSJY não fica sob a TSJY: o Peek lê esse número por si só, como se o tivesses colado.
+O [Peek](/) identifica logo a TSJY a partir de um número `TSJY…CN` ou `CFJY…CN` («Transportadora detetada»): nenhuma outra transportadora seguida pelo Peek usa este formato. Uma ligação para os resultados da TSJY com um número TSJY após `nos=` também funciona; havendo vários, o Peek usa o primeiro. Uma ligação da TSJY com o número da linha ou qualquer número fora do formato TSJY não fica sob a TSJY: o Peek lê esse número por si só, como se o tivesses colado.
 
 Para qualquer outro número, cola-o na mesma: o Peek acompanha mais de 4500 transportadoras. Quando o formato corresponde a várias, o Peek mostra «A verificar serviços de seguimento…» enquanto consulta; não correspondendo a nenhuma, pesquisa-o depois de adicionares. Se o Peek não indicar a transportadora, toca em «Alterar» e escolhe-a em «Todas as transportadoras», ou usa «Alterar transportadora» mais tarde. Se escolheres TSJY para outro número, o Peek diz que a TSJY «não emite números como este».
 

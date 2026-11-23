@@ -15,6 +15,7 @@ TSJYs Website beschreibt das Nummernformat nicht, doch es folgt einem festen Mus
 | Nummer | Was sie ist |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, neun Ziffern und CN: eine TSJY-Auftragsnummer. |
+| `CFJY482917365CN` | CFJY, neun Ziffern und CN: ebenfalls eine TSJY-Auftragsnummer, aus einer zweiten Serie. |
 | `TSJY48291736CN` | Nur acht Ziffern: kein TSJY-Format, und Peek erkennt TSJY nicht. Prüfe, ob eine Ziffer fehlt. |
 | `FEIKM4829173650YQ` | FEI, zwei Buchstaben, zehn Ziffern und YQ: eine [17FEIA](carrier:17feia)-Nummer der Versandlinie, die manche TSJY-Sendungen ins Ausland bringt. |
 
@@ -89,7 +90,7 @@ Bei TSJY bist normalerweise du selbst der Auftraggeber, denn du hast den Versand
 
 **Im Lager stecken geblieben.** Stehen TSJYs eigene Schritte mehrere Tage still, frag den Kundenservice.
 
-**Still nach dem Abflug.** Nach `Flight has departed.` gibt es oft bis zur Landung oder Verzollung keine neue Zeile. Bleibt ein Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, meldet Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“), erklärt: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei TSJY nach.“ und bietet „Hol dir Hilfe bei TSJY“ an. Siehe [warum die Sendungsverfolgung stehen bleibt](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
+**Still nach dem Abflug.** Nach `Flight has departed.` gibt es oft bis zur Landung oder Verzollung keine neue Zeile. Bleibt ein Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, meldet Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“), erklärt: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei TSJY nach.“ Für TSJY hat Peek keine Hilfeseite: Ein Hilfe-Link erscheint erst, wenn Peek dem zustellenden Unternehmen folgt, und nur, wenn es eine hat. Siehe [warum die Sendungsverfolgung stehen bleibt](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
 
 **Verloren oder beschädigt.** TSJYs Website verspricht volle Erstattung bei Verlust oder Beschädigung (丢破必赔), nennt öffentlich aber keine Regeln oder Fristen: Kontaktiere den Kundenservice sofort und bewahre Karton samt Inhalt auf. Siehe [verlorene Pakete](guide:lost-parcel) und [beschädigte Pakete](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ Die Website ist nur auf Chinesisch und erwähnt keinen Support auf Englisch.
 
 ## Ein TSJY-Paket mit Peek verfolgen
 
-[Peek](/) erkennt TSJY sofort an einer `TSJY…CN`-Nummer („Erkannter Paketdienst“): Kein anderer von Peek unterstützter Dienst nutzt diese Form. Auch ein Link zur TSJY-Ergebnisseite mit einer TSJY-Nummer nach `nos=` funktioniert; enthält er mehrere Nummern, nimmt Peek die erste. Ein TSJY-Link mit der Nummer der Versandlinie oder einer Nummer ohne TSJY-Format wird nicht unter TSJY gespeichert: Peek liest jene Nummer eigenständig, so als hättest du sie direkt eingefügt.
+[Peek](/) erkennt TSJY sofort an einer `TSJY…CN`- oder `CFJY…CN`-Nummer („Erkannter Paketdienst“): Kein anderer von Peek unterstützter Dienst nutzt diese Form. Auch ein Link zur TSJY-Ergebnisseite mit einer TSJY-Nummer nach `nos=` funktioniert; enthält er mehrere Nummern, nimmt Peek die erste. Ein TSJY-Link mit der Nummer der Versandlinie oder einer Nummer ohne TSJY-Format wird nicht unter TSJY gespeichert: Peek liest jene Nummer eigenständig, so als hättest du sie direkt eingefügt.
 
 Jede andere Nummer fügst du trotzdem einfach ein: Peek verfolgt mehr als 4.500 Paketdienste. Passt das Format zu mehreren Diensten, zeigt Peek beim Prüfen „Tracking-Dienste werden geprüft…“; passt es zu keinem, schlägt Peek die Nummer nach dem Hinzufügen nach. Nennt Peek keinen Paketdienst, tippe auf „Ändern“ und wähle ihn unter „Alle Paketdienste“, oder nutze später „Paketdienst ändern“. Wählst du TSJY für eine andere Nummer, meldet Peek, dass TSJY „vergibt keine Nummern wie diese“.
 

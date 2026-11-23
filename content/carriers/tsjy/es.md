@@ -15,6 +15,7 @@ La web de TSJY no describe sus números, pero siguen un formato fijo. TSJY son l
 | Número | Qué es |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, nueve dígitos y CN: un número de pedido de TSJY. |
+| `CFJY482917365CN` | CFJY, nueve dígitos y CN: también un número de pedido de TSJY, de una segunda serie. |
 | `TSJY48291736CN` | Solo ocho dígitos: no es el formato de TSJY y Peek no identifica TSJY. Comprueba si falta un dígito. |
 | `FEIKM4829173650YQ` | FEI, dos letras, diez dígitos y YQ: un número de [17FEIA](carrier:17feia), la línea que transporta algunos envíos de TSJY al extranjero. |
 
@@ -89,7 +90,7 @@ Con TSJY normalmente el cliente eres tú porque contrataste el envío. Así que 
 
 **Parado en el almacén.** Si los pasos propios de TSJY no avanzan durante varios días, pregunta a su atención al cliente.
 
-**Sin novedades tras el vuelo.** Después de `Flight has departed.`, puede no haber noticias hasta el aterrizaje o la aduana. Si un paquete todavía en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin una nueva línea, Peek lo marca con «Sin novedades desde hace cuatro días» (o «Sin novedades desde el …»), explica «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a TSJY.» y ofrece «Pide ayuda a TSJY». Consulta [por qué el seguimiento deja de actualizarse](guide:tracking-not-updating) y [seguir paquetes desde China](guide:tracking-from-china).
+**Sin novedades tras el vuelo.** Después de `Flight has departed.`, puede no haber noticias hasta el aterrizaje o la aduana. Si un paquete todavía en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin una nueva línea, Peek lo marca con «Sin novedades desde hace cuatro días» (o «Sin novedades desde el …»), explica «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a TSJY.» Como TSJY no tiene página de ayuda en Peek, solo aparece un enlace de ayuda cuando Peek sigue a la empresa que entrega, si esta tiene una. Consulta [por qué el seguimiento deja de actualizarse](guide:tracking-not-updating) y [seguir paquetes desde China](guide:tracking-from-china).
 
 **Perdido o dañado.** La web de TSJY promete compensar íntegramente por pérdida o daño (丢破必赔), pero sus páginas públicas no dan reglas ni plazos de reclamación: escribe enseguida a su atención al cliente y conserva la caja y la mercancía. Consulta [paquetes perdidos](guide:lost-parcel) y [paquetes dañados](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ El sitio está solo en chino y no menciona atención en inglés.
 
 ## Seguir un paquete de TSJY con Peek
 
-[Peek](/) identifica TSJY al instante por un número `TSJY…CN` («Transportista detectado»): ningún otro transportista que sigue Peek usa este formato. También funciona un enlace a los resultados de TSJY con un número TSJY tras `nos=`; si incluye varios, Peek toma el primero. Un enlace de TSJY con el número de la línea, o con cualquier número que no cumpla la forma de TSJY, no se guarda en TSJY: Peek lee ese código por sí solo, como si lo hubieras pegado directamente.
+[Peek](/) identifica TSJY al instante por un número `TSJY…CN` o `CFJY…CN` («Transportista detectado»): ningún otro transportista que sigue Peek usa este formato. También funciona un enlace a los resultados de TSJY con un número TSJY tras `nos=`; si incluye varios, Peek toma el primero. Un enlace de TSJY con el número de la línea, o con cualquier número que no cumpla la forma de TSJY, no se guarda en TSJY: Peek lee ese código por sí solo, como si lo hubieras pegado directamente.
 
 Para cualquier otro número, pégalo igualmente: Peek sigue a más de 4.500 transportistas. Cuando el formato encaja con varios, Peek muestra «Comprobando servicios de seguimiento…» mientras pregunta; si no encaja con ninguno, lo busca en cuanto lo añades. Si Peek no identifica al transportista, pulsa «Cambiar» y elígelo en «Todos los transportistas», o usa «Cambiar transportista» más adelante. Si eliges TSJY para otro número, Peek avisa de que TSJY «no emite números como este».
 

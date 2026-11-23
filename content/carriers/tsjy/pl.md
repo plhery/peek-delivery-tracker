@@ -15,6 +15,7 @@ Strona TSJY nie opisuje formatu swoich numerów, ale mają one jeden stały wzó
 | Numer | Co to jest |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, dziewięć cyfr i CN: numer zamówienia TSJY. |
+| `CFJY482917365CN` | CFJY, dziewięć cyfr i CN: także numer zamówienia TSJY, z drugiej serii. |
 | `TSJY48291736CN` | Tylko osiem cyfr: to nie format TSJY i Peek nie rozpoznaje TSJY. Sprawdź, czy nie brakuje cyfry. |
 | `FEIKM4829173650YQ` | FEI, dwie litery, dziesięć cyfr i YQ: numer [17FEIA](carrier:17feia), linii przewożącej część przesyłek TSJY za granicę. |
 
@@ -89,7 +90,7 @@ W TSJY to zazwyczaj ty jesteś klientem, bo zleciłeś wysyłkę. Przy opóźnie
 
 **Utknęła w magazynie.** Jeśli własne kroki TSJY zatrzymają się na kilka dni, zapytaj obsługę klienta.
 
-**Cisza po wylocie.** Po `Flight has departed.` może nie być nic nowego aż do lądowania lub odprawy celnej. Gdy przesyłka nadal na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego wpisu od czterech dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), wyjaśnia: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika TSJY.” i wyświetla „Poproś przewoźnika TSJY o pomoc”. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
+**Cisza po wylocie.** Po `Flight has departed.` może nie być nic nowego aż do lądowania lub odprawy celnej. Gdy przesyłka nadal na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego wpisu od czterech dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), wyjaśnia: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika TSJY.” TSJY nie ma w Peek strony pomocy, więc link do pomocy pojawia się dopiero, gdy Peek śledzi firmę doręczającą, i tylko jeśli ona ją ma. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
 
 **Zaginiona lub uszkodzona.** Strona TSJY obiecuje pełną rekompensatę za zaginięcie lub uszkodzenie (丢破必赔), ale publiczne strony nie podają zasad ani terminów: skontaktuj się od razu z obsługą klienta i zachowaj pudełko oraz zawartość. Zobacz [zagubione paczki](guide:lost-parcel) i [uszkodzone paczki](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ Strona jest wyłącznie po chińsku i nie wspomina o obsłudze po angielsku.
 
 ## Śledzenie paczki TSJY w Peek
 
-[Peek](/) od razu rozpoznaje TSJY po numerze `TSJY…CN` („Wykryty przewoźnik”): żaden inny przewoźnik obsługiwany przez Peek nie ma tego formatu. Działa też link do wyników TSJY z numerem TSJY po `nos=`; przy kilku numerach Peek bierze pierwszy. Link TSJY zawierający numer linii albo numer spoza formatu TSJY nie trafia pod TSJY: Peek odczytuje ten kod osobno, jak po wklejeniu samego numeru.
+[Peek](/) od razu rozpoznaje TSJY po numerze `TSJY…CN` lub `CFJY…CN` („Wykryty przewoźnik”): żaden inny przewoźnik obsługiwany przez Peek nie ma tego formatu. Działa też link do wyników TSJY z numerem TSJY po `nos=`; przy kilku numerach Peek bierze pierwszy. Link TSJY zawierający numer linii albo numer spoza formatu TSJY nie trafia pod TSJY: Peek odczytuje ten kod osobno, jak po wklejeniu samego numeru.
 
 Każdy inny numer również wklej śmiało: Peek obsługuje ponad 4500 przewoźników. Gdy kształt pasuje do kilku firm, podczas sprawdzania widać „Sprawdzanie usług śledzenia…”; gdy nie pasuje do żadnej, Peek sprawdza numer po dodaniu. Jeśli Peek nie wskaże przewoźnika, kliknij „Zmień” i wybierz go w sekcji „Wszyscy przewoźnicy”, albo użyj później „Zmień przewoźnika”. Gdy wybierzesz TSJY dla innego numeru, Peek informuje, że TSJY „nie wydaje takich numerów”.
 

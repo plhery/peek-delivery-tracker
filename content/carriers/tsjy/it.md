@@ -15,6 +15,7 @@ Il sito TSJY non descrive i propri numeri, ma hanno un formato fisso. TSJY sono 
 | Numero | Cos’è |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, nove cifre e CN: un numero d’ordine TSJY. |
+| `CFJY482917365CN` | CFJY, nove cifre e CN: anche questo un codice d’ordine TSJY, di una seconda serie. |
 | `TSJY48291736CN` | Solo otto cifre: non è il formato TSJY e Peek non riconosce TSJY. Controlla se manca una cifra. |
 | `FEIKM4829173650YQ` | FEI, due lettere, dieci cifre e YQ: un numero [17FEIA](carrier:17feia), della linea che trasporta alcuni invii TSJY all’estero. |
 
@@ -89,7 +90,7 @@ Con TSJY in genere il cliente sei tu perché hai prenotato la spedizione. Per un
 
 **Fermo in magazzino.** Se i passaggi interni di TSJY restano fermi per diversi giorni, chiedi alla sua assistenza clienti.
 
-**Silenzio dopo il volo.** Dopo `Flight has departed.` può non comparire nulla finché non atterra o arriva in dogana. Se un pacco ancora su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza una nuova riga, Peek lo segnala con «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da …»), spiega: «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a TSJY.» e propone «Chiedi aiuto a TSJY». Vedi [perché il tracciamento si ferma](guide:tracking-not-updating) e [tracciare pacchi dalla Cina](guide:tracking-from-china).
+**Silenzio dopo il volo.** Dopo `Flight has departed.` può non comparire nulla finché non atterra o arriva in dogana. Se un pacco ancora su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza una nuova riga, Peek lo segnala con «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da …»), spiega: «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a TSJY.» Poiché TSJY non ha una pagina di assistenza in Peek, un link di aiuto compare solo quando Peek segue l’azienda che consegna, se ne ha una. Vedi [perché il tracciamento si ferma](guide:tracking-not-updating) e [tracciare pacchi dalla Cina](guide:tracking-from-china).
 
 **Smarrito o danneggiato.** Il sito TSJY promette il rimborso integrale in caso di smarrimento o danneggiamento (丢破必赔), ma le pagine pubbliche non indicano regole né termini: contatta subito l’assistenza clienti e conserva scatola e merce. Vedi [pacchi smarriti](guide:lost-parcel) e [pacchi danneggiati](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ Il sito è solo in cinese e non menziona assistenza in inglese.
 
 ## Tracciare un pacco TSJY con Peek
 
-[Peek](/) identifica subito TSJY da un codice `TSJY…CN` («Corriere rilevato»): nessun altro corriere seguito da Peek usa questo formato. Funziona anche un link alla pagina risultati TSJY con un codice TSJY dopo `nos=`; se ce ne sono più d’uno, Peek prende il primo. Un link TSJY che contiene il codice della linea o un numero fuori formato non viene registrato sotto TSJY: Peek lo legge da solo, come se lo avessi incollato.
+[Peek](/) identifica subito TSJY da un codice `TSJY…CN` o `CFJY…CN` («Corriere rilevato»): nessun altro corriere seguito da Peek usa questo formato. Funziona anche un link alla pagina risultati TSJY con un codice TSJY dopo `nos=`; se ce ne sono più d’uno, Peek prende il primo. Un link TSJY che contiene il codice della linea o un numero fuori formato non viene registrato sotto TSJY: Peek lo legge da solo, come se lo avessi incollato.
 
 Per qualunque altro numero, incollalo comunque: Peek segue oltre 4.500 corrieri. Se il formato corrisponde a più corrieri, Peek mostra «Verifica dei servizi di tracciamento…» durante la ricerca; se non corrisponde a nessuno, lo cerca dopo l’aggiunta. Se Peek non nomina il corriere, tocca «Cambia» e sceglilo sotto «Tutti i corrieri», oppure usa «Cambia corriere» in seguito. Se scegli TSJY per un altro codice, Peek indica che TSJY «non emette numeri come questo».
 

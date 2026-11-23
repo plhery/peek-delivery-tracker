@@ -15,6 +15,7 @@ Le site de TSJY ne décrit pas le format de ses numéros, mais ils suivent une s
 | Numéro | Ce que c’est |
 | --- | --- |
 | `TSJY482917365CN` | TSJY, neuf chiffres et CN : un numéro de commande TSJY. |
+| `CFJY482917365CN` | CFJY, neuf chiffres et CN : aussi un numéro de commande TSJY, d’une seconde série. |
 | `TSJY48291736CN` | Seulement huit chiffres : ce n’est pas le format TSJY, et Peek ne reconnaît pas TSJY. Vérifie s’il manque un chiffre. |
 | `FEIKM4829173650YQ` | FEI, deux lettres, dix chiffres et YQ : un numéro [17FEIA](carrier:17feia), de la ligne qui transporte certains envois TSJY à l’étranger. |
 
@@ -89,7 +90,7 @@ Avec TSJY, tu es généralement le client : c’est toi qui as réservé l’env
 
 **Bloqué à l’entrepôt.** Si les étapes propres de TSJY n’avancent plus pendant plusieurs jours, demande à son service client.
 
-**Silencieux après le vol.** Après `Flight has departed.`, il peut n’y avoir aucune nouvelle avant l’atterrissage ou la douane. Si un colis encore à « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouvelle ligne, Peek le signale par « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis … »), explique qu’« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger TSJY. » et propose « Demande de l’aide à TSJY ». Voir [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis venant de Chine](guide:tracking-from-china).
+**Silencieux après le vol.** Après `Flight has departed.`, il peut n’y avoir aucune nouvelle avant l’atterrissage ou la douane. Si un colis encore à « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouvelle ligne, Peek le signale par « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis … »), explique qu’« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger TSJY. » TSJY n’ayant pas de page d’aide dans Peek, un lien d’aide n’apparaît qu’une fois que Peek suit la société qui livre, si elle en a une. Voir [pourquoi le suivi ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis venant de Chine](guide:tracking-from-china).
 
 **Perdu ou endommagé.** Le site de TSJY promet une indemnisation intégrale en cas de perte ou de dommage (丢破必赔), mais ses pages publiques ne donnent ni règles ni délais de réclamation : contacte aussitôt son service client et conserve le carton et le contenu. Voir [colis perdus](guide:lost-parcel) et [colis endommagés](guide:damaged-parcel).
 
@@ -107,7 +108,7 @@ Le site est uniquement en chinois et n’indique pas de service en anglais.
 
 ## Suivre un colis TSJY avec Peek
 
-[Peek](/) identifie immédiatement TSJY pour un numéro `TSJY…CN` (« Transporteur détecté ») : aucun autre transporteur suivi par Peek n’utilise ce format. Un lien vers la page de résultats de TSJY avec un numéro TSJY après `nos=` fonctionne aussi ; s’il contient plusieurs numéros, Peek prend le premier. Un lien TSJY portant le numéro de la ligne, ou tout numéro ne suivant pas le format TSJY, n’est pas classé sous TSJY : Peek lit ce numéro seul, comme si tu l’avais collé.
+[Peek](/) identifie immédiatement TSJY pour un numéro `TSJY…CN` ou `CFJY…CN` (« Transporteur détecté ») : aucun autre transporteur suivi par Peek n’utilise ce format. Un lien vers la page de résultats de TSJY avec un numéro TSJY après `nos=` fonctionne aussi ; s’il contient plusieurs numéros, Peek prend le premier. Un lien TSJY portant le numéro de la ligne, ou tout numéro ne suivant pas le format TSJY, n’est pas classé sous TSJY : Peek lit ce numéro seul, comme si tu l’avais collé.
 
 Pour tout autre numéro, colle-le quand même : Peek suit plus de 4 500 transporteurs. Quand le format correspond à plusieurs transporteurs, Peek affiche « Vérification des services de suivi… » pendant la recherche ; quand il ne correspond à aucun, Peek le recherche une fois ajouté. Si Peek ne nomme pas le transporteur, appuie sur « Changer » et choisis-le sous « Tous les transporteurs », ou utilise « Changer de transporteur » plus tard. Si tu choisis TSJY pour un autre numéro, Peek indique que TSJY « n’émet pas de numéros comme celui-ci ».
 

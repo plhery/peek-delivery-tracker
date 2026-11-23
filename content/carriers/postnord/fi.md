@@ -14,10 +14,10 @@ PostNordin seuranta puhuu lähetystunnuksesta. Siinä on 8–35 merkkiä, ja se 
 
 | Tunnus (keksitty) | Mikä se on |
 | --- | --- |
-| `00064000000000000002` | 20 numeroa, alussa `00`: paketin SSCC-viivakoodi. `64` kolmen ensimmäisen numeron jälkeen viittaa Suomeen. Samanmuotoisia koodeja käyttävät muutkin, myös Posti. |
-| `12345678901SE` | 11 numeroa ja `SE`: PostNordin paketti Ruotsista. |
-| `RR000000005SE` | Kaksi kirjainta, yhdeksän numeroa ja `SE`: Ruotsissa jätetty seurattava postilähetys. |
-| `RR000000005DK` | Sama muoto, lopussa `DK`: lähetys on jätetty Tanskassa. |
+| `00064482917364058290` | 20 numeroa, alussa `00`: paketin SSCC-viivakoodi. `64` kolmen ensimmäisen numeron jälkeen viittaa Suomeen. Samanmuotoisia koodeja käyttävät muutkin, myös Posti. |
+| `48291736405SE` | 11 numeroa ja `SE`: PostNordin paketti Ruotsista. |
+| `RR482917367SE` | Kaksi kirjainta, yhdeksän numeroa ja `SE`: Ruotsissa jätetty seurattava postilähetys. |
+| `RR482917367DK` | Sama muoto, lopussa `DK`: lähetys on jätetty Tanskassa. |
 
 **Ei tuloksia?** Jos seuranta näyttää `Toimituksia ei löytynyt`, lähetys ei PostNordin mukaan ole seurattavissa tai tunnus on väärä. Tarkista tunnus verkkokaupasta.
 
@@ -90,7 +90,7 @@ Huomaa, että suomalainenkin verkkokauppa voi toimittaa tavaran EU:n ulkopuolise
 
 ## PostNordin asiakaspalvelu
 
-PostNordin sivuilla 23.10.2026:
+PostNordin sivuilla:
 
 - **Asiakaspalvelu Suomessa:** postnord.fi tai PostNord-sovellus. Seurantasivulta pääset sinne linkistä `Ota yhteyttä`.
 - **PostNord Oy:** Osumakuja 1–3, 01530 Vantaa.
@@ -103,7 +103,13 @@ PostNordin sivuilla 23.10.2026:
 
 Jos tunnuksessa on muuten 10–20 numeroa, liitä se silti: Peek seuraa yli 4 500 kuljetusyhtiötä. Valitse PostNord painikkeella "Change", jolla vaihdat myös väärin valitun yhtiön. Linkki tracking.postnord.com- tai postnord.fi-sivulta vie tunnuksen suoraan PostNordille.
 
-Peek lukee PostNordin seurannan englanniksi, joten näet PostNordin englanninkieliset tekstit. `The shipment item has been delivered to a service point.` tarkoittaa, että paketti odottaa sinua palvelupisteessä, ei sitä, että olisit saanut sen, ja `The shipment item is being customs cleared by us.` sitä, että paketti on tullauksessa. Peek näyttää jokaisen skannauksen paikan, lähettäjän, painon, mitat ja kohdemaan sekä noutoa odottavan paketin palvelupisteen nimen ja osoitteen. Tekstiviesti- ja sähköposti-ilmoitukset jäävät pois, ja `The shipment item has been stored.` merkitään ongelmaksi. Nimeäsi Peek ei tallenna, eikä se näytä arvioitua toimitusaikaa, vaikka PostNordin seuranta näyttäisi. Peek tarkistaa paketin jopa 10 minuutin välein ja jakelussa olevan jopa 2 minuutin välein (jakelupäivänä paikallista aikaa kello 6 alkaen ja vain silloin, kun tieto tulee PostNordin omasta seurannasta; seurantapalvelujen kautta 15 minuutin välein). Jos uutta tietoa ei tule kahteen päivään (tai 12 tuntiin, kun paketti on vasta rekisteröity tai kuljetusyhtiön vastaanottama), Peek tarkistaa sen enää kerran tunnissa. Skannaukset näkyvät kartalla, ja Peek voi ilmoittaa muutoksista. PostNordiin tai verkkokauppaan Peek ei voi ottaa yhteyttä puolestasi.
+Peek lukee PostNordin seurannan englanniksi, joten näet PostNordin englanninkieliset tekstit. `The shipment item has been delivered to a service point.` tarkoittaa, että paketti odottaa sinua palvelupisteessä, ei sitä, että olisit saanut sen, ja `The shipment item is being customs cleared by us.` sitä, että paketti on tullauksessa. Peek näyttää jokaisen skannauksen paikan, lähettäjän, painon, mitat ja kohdemaan sekä noutoa odottavan paketin palvelupisteen nimen ja osoitteen. Tekstiviesti- ja sähköposti-ilmoitukset jäävät pois, ja `The shipment item has been stored.` merkitään ongelmaksi. Nimeäsi Peek ei tallenna, eikä se näytä arvioitua toimitusaikaa, vaikka PostNordin seuranta näyttäisi. Skannaukset näkyvät kartalla.
+
+Kun paketti on auki Peekissä tai on sen jakelupäivä ja ilmoitukset ovat päällä, Peek tarkistaa sen jopa 10 minuutin välein. Kun PostNord on skannannut paketin jakeluun, Peek tarkistaa sen jakelupäivänä paikallista aikaa kello 6 alkaen jopa 2 minuutin välein, kun PostNordin oma seuranta vastaa (seurantapalvelujen kautta 15 minuutin välein). Jos uutta tietoa ei tule kahteen päivään (tai 12 tuntiin, kun paketin tila on yhä "Label created" tai "Received by carrier"), Peek tarkistaa sen kerran tunnissa, ja kuuden tunnin välein, kun tila on ollut "Label created" seitsemän päivää.
+
+Kun uusin skannaus on neljä päivää vanha ja paketin tila on yhä "Label created", "Received by carrier" tai "In transit", Peek merkitsee sen skannauksen päivällä, esimerkiksi "No tracking update since Mon 12 Oct". Paketin sivulla lukee silloin "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PostNord.", ja linkki "Get help from PostNord" vie PostNordin asiakaspalvelun usein kysyttyihin kysymyksiin postnord.se-sivulla. Kun uutta skannausta ei ole tullut kolmeen viikkoon, siinä lukee "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PostNord."
+
+Ilmoituksiksi voit valita "Every scan", "Important steps" tai "Delivery only". PostNordiin tai verkkokauppaan Peek ei voi ottaa yhteyttä puolestasi.
 
 ## Kysymyksiä PostNordin seurannasta
 

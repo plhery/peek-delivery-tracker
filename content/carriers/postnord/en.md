@@ -14,11 +14,11 @@ PostNord Denmark says a shipment number is usually 13 to 20 characters long: typ
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00073000000000000004` | 20 digits starting `00`: a parcel barcode, as on PostNord Home or Service Point parcels. |
-| `RR000000005SE` | Two letters, nine digits, `SE`: a registered letter or small parcel posted in Sweden. |
-| `RR000000005DK` | The same ending `DK`: a tracked item from Denmark. |
-| `12345678901SE` | 11 digits and `SE`: a Swedish Service Point parcel. |
-| `19999999999980` | 14 digits: some PostNord Home parcels. Other carriers use this length too. |
+| `00073482917364058292` | 20 digits starting `00`: a parcel barcode, as on PostNord Home or Service Point parcels. |
+| `RR482917367SE` | Two letters, nine digits, `SE`: a registered letter or small parcel posted in Sweden. |
+| `RR482917367DK` | The same ending `DK`: a tracked item from Denmark. |
+| `48291736405SE` | 11 digits and `SE`: a Swedish Service Point parcel. |
+| `19482917364058` | 14 digits: some PostNord Home parcels. Other carriers use this length too. |
 
 No number? Ask the shop that sent the parcel for it. When a parcel waits for you, the pickup-code link in PostNord's SMS or email also shows the shipment number.
 
@@ -48,7 +48,7 @@ The confusing one is `The shipment item has been delivered to a service point.`:
 
 These rules are PostNord Denmark's. In Sweden, Norway and Finland, check postnord.se, postnord.no, postnord.fi or the app.
 
-**Delivery times.** Weekdays between 07:00 and 21:00, with no more precise time. Parcels for a Pakkeshop (service point) or parcel box arrive Monday to Saturday.
+**Delivery times.** Weekdays between 07:00 and 21:00 Danish time, with no more precise time. Parcels for a Pakkeshop (service point) or parcel box arrive Monday to Saturday.
 
 **Not home.** A parcel that doesn't fit your letterbox goes to a Pakkeshop. With the FlexChange link in PostNord's SMS or email, or under "Opdatér levering" in the app, you can let the driver leave it at your address at your own risk, or pick another Pakkeshop. You can't choose the delivery day.
 
@@ -68,13 +68,13 @@ PostNord can't correct a wrong name or address: an undeliverable parcel goes bac
 
 **Marked delivered, not received.** In Denmark, contact PostNord by chat in the app or with its contact form. See [delivered but not received](guide:delivered-not-received).
 
-**Customs in Denmark.** Goods from outside the EU carry 25% VAT and PostNord's import fee of DKK 225. Since 1 July 2026 duty applies at any value: €3 per item line under €150. Pay within 10 days in the app, or by SMS or letter, or the parcel goes back; it's delivered within five working days of payment. Charged again after paying VAT at checkout? The shop didn't pass on the VAT details: pay and ask the shop for a refund, or refuse the parcel. More in [parcels held at customs](guide:customs).
+**Customs in Denmark.** Goods from outside the EU carry 25% VAT and PostNord's import fee of DKK 225. Since 1 July 2026 duty applies at any value: €3 per item line (goods with the same commodity code) under €150, and duty on the value above. An EU handling fee of €2 per item line comes on top for orders from outside the EU: if the sender hasn't paid it, you pay it with PostNord's import charge. Pay within 10 days in the app, or by SMS or letter, or the parcel goes back; it's delivered within five working days of payment. Charged again after paying VAT at checkout? The shop didn't pass on the VAT details: pay and ask the shop for a refund, or refuse the parcel. More in [parcels held at customs](guide:customs).
 
 ## PostNord customer service: chat, form and app
 
-As listed on PostNord's pages on 12 October 2026:
+From PostNord's pages:
 
-- **Denmark:** chat Monday to Friday, 9:00 to 16:00, in the PostNord app under "support" or in Tracking under the parcel; customs questions on chat Monday to Friday, 10:00 to 14:00. A chatbot answers around the clock, and there's a contact form. PostNord Denmark has no phone line.
+- **Denmark:** chat Monday to Friday, 9:00 to 16:00 Danish time, in the PostNord app under "support" or in Tracking under the parcel; customs questions on chat Monday to Friday, 10:00 to 14:00 Danish time. A chatbot answers around the clock, and there's a contact form. PostNord Denmark no longer has a phone line.
 - **Sweden:** customer service on postnord.se or in the PostNord app.
 - **Norway and Finland:** customer service on postnord.no or postnord.fi, or in the app.
 
@@ -82,9 +82,15 @@ As listed on PostNord's pages on 12 October 2026:
 
 ## PostNord parcel tracking with Peek
 
-[Peek](/) names a postal number ending `SE` or `DK`, or 11 digits plus `SE`, as PostNord's straight away. For a 20-digit number starting `00` with Sweden's or Denmark's prefix, Peek asks PostNord first, together with [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) and [NZ Post](carrier:nz-post), and for Sweden's prefix [Matkahuolto](carrier:matkahuolto) too, and says "PostNord has this parcel." when only PostNord knows it. With `73402216` after the first three digits, the number is from [Early Bird](carrier:early-bird), a Swedish carrier that hands some parcels to PostNord: Peek then asks Early Bird first, and PostNord with the others. Other 10- to 20-digit numbers, such as a DPD number PostNord delivers, work after "Change". Links from tracking.postnord.com work with any number.
+[Peek](/) names a postal number ending `SE` or `DK`, or 11 digits plus `SE`, as PostNord's straight away. For a 20-digit number starting `00` with Sweden's or Denmark's prefix, Peek asks PostNord first, together with [Swiss Post Cargo](carrier:swiss-post-cargo) and [NZ Post](carrier:nz-post), and for Sweden's prefix [Matkahuolto](carrier:matkahuolto) too, and says "PostNord has this parcel." when only PostNord knows it. With `73402216` after the first three digits, the number is from [Early Bird](carrier:early-bird), a Swedish carrier that hands some parcels to PostNord: Peek then asks Early Bird first, and PostNord with the others. Other 10- to 20-digit numbers, such as a DPD number PostNord delivers, work after "Change". Links from tracking.postnord.com work with any number.
 
-Peek shows PostNord's English statuses as written, with each scan's place, the sender, weight, dimensions, destination country and, while the parcel waits, the service point's address. It leaves out SMS and email notices and flags `The shipment item has been stored.` as a problem. It checks up to every 10 minutes (every 2 from 6 a.m. local time on the day PostNord scans the parcel out for delivery, while PostNord's own tracker answers; through tracking services, every 15 minutes), draws each scan on a map and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops your name and shows no expected delivery, even when PostNord's own tracking gives one.
+Peek shows PostNord's English statuses as written, with each scan's place, the sender, weight, dimensions, destination country and, while the parcel waits, the service point's address. It leaves out SMS and email notices, flags `The shipment item has been stored.` as a problem and draws each scan on a map. It drops your name and shows no expected delivery, even when PostNord's own tracking gives one.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day PostNord scans the parcel out for delivery, while PostNord's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PostNord.", with a "Get help from PostNord" link to PostNord Sweden's customer service FAQ. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PostNord."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about PostNord tracking
 
@@ -98,7 +104,7 @@ In Denmark, 7 days at a Pakkeshop and 3 days in a parcel box, extendable to 7 in
 
 ### What time does PostNord deliver?
 
-PostNord Denmark delivers parcels on weekdays between 07:00 and 21:00, without a more precise time.
+PostNord Denmark delivers parcels on weekdays between 07:00 and 21:00 Danish time, without a more precise time.
 
 ### Is PostNord legit?
 

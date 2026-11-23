@@ -14,10 +14,10 @@ På sporingssiden heter feltet «Sendingsnummer». PostNord kaller det også for
 
 | Nummer (oppdiktet) | Hva det er |
 | --- | --- |
-| `00070000000000000003` | 20 siffer som begynner på `00`: strekkoden på en pakke. Også andre transportører bruker nummer på 20 siffer. |
-| `12345678901SE` | 11 siffer og `SE`: en PostNord-pakke fra Sverige. |
-| `RR000000005SE` | To bokstaver, ni siffer og `SE`: en sporbar postsending levert inn i Sverige. |
-| `RR000000005DK` | Samme form med `DK`: levert inn i Danmark. |
+| `00070482917364058291` | 20 siffer som begynner på `00`: strekkoden på en pakke. Også andre transportører bruker nummer på 20 siffer. |
+| `48291736405SE` | 11 siffer og `SE`: en PostNord-pakke fra Sverige. |
+| `RR482917367SE` | To bokstaver, ni siffer og `SE`: en sporbar postsending levert inn i Sverige. |
+| `RR482917367DK` | Samme form med `DK`: levert inn i Danmark. |
 
 **Ikke PostNords nummer?** Slutter nummeret på `NO`, er det en sending fra Norge som du sporer hos Posten og Bring. Også Bring bruker strekkoder på 20 siffer som begynner på `00370` eller `00373`. Et nummer på 18 siffer som begynner på `37072476`, er fra [Helthjem](carrier:helthjem). Slutter det på `FI`, er det levert inn i Finland, der [Posti](carrier:posti) leverer.
 
@@ -86,7 +86,7 @@ Norge er ikke med i EU og har egne regler for toll og merverdiavgift. Det du bet
 
 ## Kundeservice hos PostNord
 
-Slik står det på PostNords sider 23. oktober 2026:
+Fra PostNords sider:
 
 - **Kundeservice i Norge:** via postnord.no. På sporingssiden kommer du dit med lenken «Ta kontakt».
 - **PostNord AS:** Alfaset 3. Industrivei 25, 0668 Oslo, telefon 09300.
@@ -99,7 +99,13 @@ Slik står det på PostNords sider 23. oktober 2026:
 
 Andre nummer på 10 til 20 siffer: lim dem inn likevel, Peek følger mer enn 4 500 transportører. Trykk på "Change" og velg PostNord. En lenke fra tracking.postnord.com eller postnord.no peker ut PostNord uansett nummer.
 
-Peek leser PostNords sporing på engelsk, så du ser PostNords engelske tekster. `The shipment item has been delivered to a service point.` betyr at pakken venter på deg på hentestedet, ikke at du har fått den, og `The shipment item is being customs cleared by us.` at den blir fortollet. Peek viser stedet for hver skanning, avsenderen, vekt, mål og mottakerlandet, og mens pakken venter, hentestedets navn og adresse. SMS- og e-postvarsler tar Peek ikke med, og `The shipment item has been stored.` markerer Peek som et problem. Navnet ditt lagrer Peek ikke, og Peek viser ingen forventet leveringsdag, heller ikke når PostNord har en. Peek sjekker pakken opptil hvert 10. minutt og opptil hvert 2. når den er ute for levering (bare samme dag, fra kl. 6 lokal tid og så lenge PostNords egen sporing svarer; via sporingstjenester hvert 15. minutt). Skanningene vises på et kart, og Peek kan varsle deg når noe skjer. Peek kan ikke kontakte PostNord eller nettbutikken for deg.
+Peek leser PostNords sporing på engelsk, så du ser PostNords engelske tekster. `The shipment item has been delivered to a service point.` betyr at pakken venter på deg på hentestedet, ikke at du har fått den, og `The shipment item is being customs cleared by us.` at den blir fortollet. Peek viser stedet for hver skanning, avsenderen, vekt, mål og mottakerlandet, og mens pakken venter, hentestedets navn og adresse. SMS- og e-postvarsler tar Peek ikke med, og `The shipment item has been stored.` markerer Peek som et problem. Navnet ditt lagrer Peek ikke, og Peek viser ingen forventet leveringsdag, heller ikke når PostNord har en. Skanningene vises på et kart.
+
+Mens du har pakken åpen i Peek, eller på leveringsdagen med varsler slått på, sjekker Peek den opptil hvert 10. minutt, og opptil hvert 2. minutt fra kl. 6 lokal tid den dagen PostNord skanner den ut for levering, så lenge PostNords egen sporing svarer (via sporingstjenester hvert 15. minutt). Etter to dager uten nytt (12 timer mens pakken fortsatt står som "Label created" eller "Received by carrier") sjekker Peek hver time, og hver 6. time når pakken har stått som "Label created" i sju dager.
+
+Er den nyeste skanningen fire dager gammel og pakken fortsatt står som "Label created", "Received by carrier" eller "In transit", merker Peek den med skanningens dag, for eksempel "No tracking update since Mon 12 Oct". Pakkens side sier da "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PostNord." med lenken "Get help from PostNord" til PostNords kundeservice-FAQ på postnord.se. Etter tre uker uten ny skanning står det "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PostNord."
+
+Peek kan varsle deg ved "Every scan", "Important steps" eller "Delivery only". Peek kan ikke kontakte PostNord eller nettbutikken for deg.
 
 ## Spørsmål om PostNord-sporing
 

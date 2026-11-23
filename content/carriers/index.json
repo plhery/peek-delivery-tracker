@@ -198,7 +198,7 @@
   { "id": "blue-dart", "catalog": "blue-dart", "name": "Blue Dart", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ekart", "catalog": "ekart", "name": "Ekart", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "j-and-t-middle-east", "catalog": "j-and-t-middle-east", "name": "J&T Express Middle East", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en"] },
+  { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "globalpost", "catalog": "globalpost", "name": "GlobalPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es"] },

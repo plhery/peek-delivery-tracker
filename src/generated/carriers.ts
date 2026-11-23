@@ -3300,6 +3300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "dpd-romania-sendungsverfolgung",
+      "title": "DPD Romania Sendungsverfolgung: Status & Smart Control",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "globalpost-sendungsverfolgung",
@@ -4862,6 +4870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "suivi-dpd-romania",
+      "title": "Suivi DPD Romania\u00a0: statuts, Smart Control et contact",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "suivi-globalpost",
@@ -6400,6 +6416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "tracking-dpd-romania",
+      "title": "Tracking DPD Romania: stati, Smart Control e contatti",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "tracciamento-globalpost",
@@ -7906,6 +7930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "seguimiento-dpd-romania",
+      "title": "Seguimiento DPD Romania: estados, Smart Control y contacto",
+      "name": "DPD Romania",
+      "color": "#dc0032"
+    },
+    {
       "id": "globalpost",
       "catalog": "globalpost",
       "slug": "seguimiento-globalpost",
@@ -9402,6 +9434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento J&T Express Middle East: códigos JTE e estados",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "seguimento-dpd-romania",
+      "title": "Seguimento DPD Romania: estados, Smart Control e contacto",
+      "name": "DPD Romania",
+      "color": "#dc0032"
     },
     {
       "id": "globalpost",
@@ -10958,6 +10998,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express Middle East: numery JTE i statusy",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "sledzenie-dpd-romania",
+      "title": "Śledzenie DPD Romania: statusy, Smart Control i kontakt",
+      "name": "DPD Romania",
+      "color": "#dc0032"
     },
     {
       "id": "globalpost",

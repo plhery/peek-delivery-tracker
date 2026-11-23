@@ -16,9 +16,9 @@ DAO says its parcel numbers have 9, 13 or 20 digits (digits below invented):
 
 | Number | What it is |
 | --- | --- |
-| `00057126960000000008` | The 20-digit parcel number, starting `00057`. It's the barcode on the label, and the one DAO's customer service asks for. |
-| `7000000000000` | A 13-digit number starting with `7`. |
-| `000000000` | A 9-digit e-label code: a sender who buys shipping from DAO writes it on the parcel instead of printing a label. |
+| `00057126964829173646` | The 20-digit parcel number, starting `00057`. It's the barcode on the label, and the one DAO's customer service asks for. |
+| `7482917364058` | A 13-digit number starting with `7`. |
+| `482917364` | A 9-digit e-label code: a sender who buys shipping from DAO writes it on the parcel instead of printing a label. |
 
 Spaces don't matter. Danish parcels from other carriers [look different](guide:tracking-number-formats): [PostNord's](carrier:postnord) postal numbers end in `DK` and its 20-digit numbers start with other prefixes, GLS numbers have 11 or 12 digits and DPD's have 14. If DAO's page can't find it, check the digits, then ask the shop. See [how to find your tracking number](guide:find-tracking-number) if nothing arrived.
 
@@ -71,9 +71,9 @@ The shop holds the contract with DAO, but DAO's contact page also tells recipien
 
 ## DAO customer service and contact number
 
-As listed on DAO's contact page on 13 October 2026:
+As listed on DAO's contact page:
 
-- **Phone:** +45 72 33 08 50, Monday to Friday 8 am to 7 pm, Saturday and Sunday 8 am to 4 pm.
+- **Phone:** +45 72 33 08 50, Monday to Friday 8 am to 7 pm, Saturday and Sunday 8 am to 4 pm, Danish time.
 - **Email:** kundeservice@dao.as, with your 20-digit parcel number.
 - **Forms:** "Need help?" and feedback forms, linked from [DAO's Help and contact page](https://dao.as/en/contact-dao/); the damage form it links to is gone.
 - **Courier complaints:** kvalitetabo@dao.as or 44 51 75 70.
@@ -84,9 +84,11 @@ As listed on DAO's contact page on 13 October 2026:
 
 [Peek](/) asks about a 20-digit number starting `0005712696` or `0005715127` at DAO and the other likely carriers, PostNord among them, at once. When only DAO knows it, you see "DAO has this parcel."; when PostNord knows it too, Peek says how many carriers know the number and you choose yours. A 13-digit or 9-digit number needs "Change" and DAO, or a dao.as tracking link, which works with any number. DAO then answers with the 20-digit number, which is tracked from then on.
 
-DAO's scans carry no time zone: Peek reads them on the clock of the scan's place, Danish time in Denmark, and lists DAO's own history. It can show the daoSHOP the parcel goes to or waits at. Statuses keep DAO's English wording. You can be notified when the status changes. While you have it open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day it shows `To be delivered today`, while DAO's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier").
+DAO's scans carry no time zone: Peek reads them on the clock of the scan's place, Danish time in Denmark, and lists DAO's own history. It can show the daoSHOP the parcel goes to or waits at. Statuses keep DAO's English wording. While you have it open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. Danish time on the day it shows `To be delivered today`, while DAO's own tracker answers (every 5 minutes when it needs a browser; through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), and every 6 hours after seven days without news at "Label created".
 
-For a parcel sent abroad, the partner's tracking number shows, and when DAO's link names a carrier in Peek's list, the parcel can be followed there. DAO gives no expected arrival day and no weight. The masked names, your address and postcode, and the shop's address, hours and map position are left out. Peek can't contact DAO for you.
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DAO.", with a "Get help from DAO" link to DAO's help centre. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DAO."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". For a parcel sent abroad, the partner's tracking number shows, and when DAO's link names a carrier in Peek's list, the parcel can be followed there. DAO gives no expected arrival day and no weight. The masked names, your address and postcode, and the shop's address, hours and map position are left out. Peek can't contact DAO for you.
 
 ## Questions about DAO tracking
 

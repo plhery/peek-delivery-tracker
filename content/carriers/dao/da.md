@@ -14,9 +14,9 @@ Ifølge Find din pakke har DAO's pakkenumre 9, 13 eller 20 cifre:
 
 | Nummer (opdigtet) | Hvad det er |
 | --- | --- |
-| `00057126960000000008` | 20 cifre, der starter med `00057`: stregkoden på pakkens label. Det er det nummer, kundeservice beder om. |
-| `7000000000000` | 13 cifre, der starter med `7`. |
-| `000000000` | 9 cifre: koden fra en e-label. Køber afsenderen fragten hos DAO, får den en 9-cifret kode, som skrives på pakken i stedet for en printet label. |
+| `00057126964829173646` | 20 cifre, der starter med `00057`: stregkoden på pakkens label. Det er det nummer, kundeservice beder om. |
+| `7482917364058` | 13 cifre, der starter med `7`. |
+| `482917364` | 9 cifre: koden fra en e-label. Køber afsenderen fragten hos DAO, får den en 9-cifret kode, som skrives på pakken i stedet for en printet label. |
 
 **Hvor står nummeret?** I dao-appen, som selv tilføjer de pakker, der er på vej til dig, så snart forsendelsen er oprettet. Når pakken venter i en daoSHOP, får du pakkenummeret og udleveringskoden på sms eller mail. Har du hverken appen eller en besked, så spørg afsenderen.
 
@@ -75,7 +75,7 @@ Find din pakke viser status, historik, afsender og modtager, og skal pakken til 
 
 ## DAO's kundeservice
 
-Sådan stod det på DAO's sider 26. oktober 2026:
+Sådan står det på DAO's sider:
 
 - **Telefon:** 72 33 08 50, mandag til fredag kl. 8–19, lørdag og søndag kl. 8–16.
 - **Mail:** kundeservice@dao.as. Skriv pakkens 20-cifrede nummer i mailen.
@@ -89,7 +89,11 @@ Sådan stod det på DAO's sider 26. oktober 2026:
 
 Sætter du et 20-cifret nummer ind, der starter med `0005712696` eller `0005715127`, spørger [Peek](/) på én gang DAO, [PostNord](carrier:postnord) og et par andre transportører, hvis numre kan se sådan ud. Kender kun DAO pakken, står der "DAO has this parcel." i Peek. Kender PostNord den også, kan Peek bede dig vælge. Ved andre 20-cifrede numre, 13-cifrede numre og e-labelkoder kan Peek ikke se på nummeret, at det er DAO's. Sæt det ind alligevel, for Peek følger over 4.500 transportører, og tryk på "Change" og vælg DAO. Et link fra Find din pakke på dao.as virker med alle tre slags numre.
 
-Peek henter DAO's sporing på engelsk, så du ser de engelske statustekster fra tabellen ovenfor. Peek viser hver scanning med tid og sted og navnet på den daoSHOP, pakken skal til eller venter i. Afsender- og modtagernavnene, som DAO viser maskeret, din adresse og dit postnummer samt butikkens adresse, åbningstider og placering på kortet tager Peek ikke med. DAO oplyser hverken forventet leveringsdag eller vægt. Får du beskeder om pakken, tjekker Peek den op til hvert 10. minut, også om natten, når DAO kører ud, og op til hvert 2. minut fra kl. 6 lokal tid den dag, den står som `To be delivered today`, så længe DAO's egen sporing svarer (via sporingstjenester hvert 15. minut). Peek kan give dig besked, når der sker noget, men kan ikke kontakte DAO eller webshoppen for dig.
+Peek henter DAO's sporing på engelsk, så du ser de engelske statustekster fra tabellen ovenfor. Peek viser hver scanning med tid og sted og navnet på den daoSHOP, pakken skal til eller venter i. Afsender- og modtagernavnene, som DAO viser maskeret, din adresse og dit postnummer samt butikkens adresse, åbningstider og placering på kortet tager Peek ikke med. DAO oplyser hverken forventet leveringsdag eller vægt. Har du pakken åben i Peek, eller er det dens leveringsdag, og du har slået beskeder til, tjekker Peek den op til hvert 10. minut, også om natten, når DAO kører ud, og op til hvert 2. minut fra kl. 6 dansk tid den dag, den står som `To be delivered today`, så længe DAO's egen sporing svarer (hvert 5. minut, når den kræver en browser; via sporingstjenester hvert 15. minut); ellers hver time. Efter to dage uden nyt (12 timer, mens pakken stadig står som "Label created" eller "Received by carrier") tjekker Peek hver time, og efter syv dage uden nyt på "Label created" hver 6. time.
+
+Er den nyeste scanning fire dage gammel, og står pakken stadig som "Label created", "Received by carrier" eller "In transit", markerer Peek den med scanningens dag, fx "No tracking update since Mon 12 Oct". Pakkens side skriver så "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DAO." med linket "Get help from DAO" til DAO's hjælpecenter. Efter tre uger uden ny scanning står der "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DAO."
+
+Peek kan give dig besked om "Every scan", "Important steps" eller "Delivery only", men kan ikke kontakte DAO eller webshoppen for dig.
 
 ## Spørgsmål om DAO-pakker
 

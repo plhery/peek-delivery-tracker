@@ -124,7 +124,7 @@
   { "id": "australia-post", "catalog": "australia-post", "name": "Australia Post", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aramex-au", "catalog": "aramex-au", "name": "Aramex Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "couriersplease", "catalog": "couriersplease", "name": "CouriersPlease", "languages": ["en"] },
-  { "id": "nz-post", "catalog": "nz-post", "name": "NZ Post", "languages": ["en"] },
+  { "id": "nz-post", "catalog": "nz-post", "name": "NZ Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "aramex-nz", "catalog": "aramex-nz", "name": "Aramex New Zealand", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "magyar-posta", "catalog": "magyar-posta", "name": "Magyar Posta", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

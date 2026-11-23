@@ -2916,6 +2916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "nz-post-sendungsverfolgung",
+      "title": "NZ Post Sendungsverfolgung: Nummern, Status und Abholung",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "aramex-neuseeland-sendungsverfolgung",
@@ -4750,6 +4758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "suivi-nz-post",
+      "title": "Suivi NZ Post\u00a0: numéros, statuts et colis manqués",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "suivi-aramex-nouvelle-zelande",
@@ -6568,6 +6584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "tracciamento-nz-post",
+      "title": "Tracciamento NZ Post: numeri, stati e mancate consegne",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "tracciamento-aramex-nuova-zelanda",
@@ -8370,6 +8394,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "seguimiento-nz-post",
+      "title": "Seguimiento NZ Post: números, estados y entrega fallida",
+      "name": "NZ Post",
+      "color": "#d8291c"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "seguimiento-aramex-nueva-zelanda",
@@ -10162,6 +10194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Aramex Austrália: números, estados e contactos",
       "name": "Aramex Australia",
       "color": "#dc291e"
+    },
+    {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "seguimento-nz-post",
+      "title": "Seguimento NZ Post: números, estados e entregas falhadas",
+      "name": "NZ Post",
+      "color": "#d8291c"
     },
     {
       "id": "aramex-nz",
@@ -11990,6 +12030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Aramex Australia: numery, statusy i kontakt",
       "name": "Aramex Australia",
       "color": "#dc291e"
+    },
+    {
+      "id": "nz-post",
+      "catalog": "nz-post",
+      "slug": "sledzenie-nz-post",
+      "title": "Śledzenie NZ Post: numery, statusy i odbiór paczek",
+      "name": "NZ Post",
+      "color": "#d8291c"
     },
     {
       "id": "aramex-nz",

@@ -16,9 +16,9 @@ Look for your international waybill number in the retailer's dispatch email, you
 | --- | --- |
 | `NP482917364058NPG` | Standard Nova Global waybill: 2 letters (such as `NP`, `WB`, `OG` or `YW`) + 9 to 16 digits + `NPG`. |
 | `ABCDF4829173640NPG` | Merchant-order waybill: 5 letters + 10 digits + `NPG`. |
-| `TE4829173640582917NGUS` | Cross-border e-commerce waybill bound for the US: `TE` + 16 digits + `NGUS`. |
+| `TE4829173640582917NGUS` | Nova Global waybill for a parcel from China: `TE` + 16 digits + `NGUS`. |
 
-Once your shipment arrives in the destination country, Nova Global often pairs the `NPG` or `NGUS` waybill with a domestic delivery partner's tracking number (for example Nova Poshta in Ukraine, or a local postal/courier partner in the US, Canada or Europe). For other cross-border barcode shapes, see [tracking number formats](guide:tracking-number-formats).
+In the destination country, Nova Global may hand the parcel to a local carrier, such as Nova Poshta in Ukraine, and list that carrier's own number beside the `NPG` or `NGUS` waybill. For other cross-border barcode shapes, see [tracking number formats](guide:tracking-number-formats).
 
 ## What Nova Global tracking statuses and codes mean
 
@@ -38,11 +38,11 @@ Nova Global's tracker uses consistent numeric status codes alongside English or 
 
 ## Cross-border delivery, forwarding and customs
 
-On [nova.global](https://nova.global/) and its [Public Contract / Privacy Policy page](https://nova.global/public-contract/), Nova Global outlines four international divisions: *Global E-Commerce* (cross-border retail deliveries across NALA, EMEA and APAC), *Global Forwarding* (virtual shopping addresses in 16 countries forwarding parcels to your doorstep), *Global Sellers* (marketplace and social-commerce exports via Etsy, Amazon, eBay, Vinted, StockX, Depop and TikTok Shop to 160+ countries) and *Global Freight* (air, road and ocean cargo).
+On [nova.global](https://nova.global/), Nova Global outlines four divisions: *Global E-Commerce* (cross-border retail deliveries across NALA, EMEA and APAC), *Global Forwarding* (virtual shopping addresses in 16 countries forwarding parcels to your doorstep), *Global Sellers* (marketplace and social-commerce exports via Etsy, Amazon, eBay, Vinted, StockX, Depop and TikTok Shop to 160+ countries) and *Global Freight* (air, road and ocean cargo).
 
-**Customs clearance and documents.** International shipments entering Ukraine, the European Union, the United States or Canada pass through customs (`20`, `400`, `402`). If tracking shows missing or mismatched documents (*Нестача / невідповідність супровідних документів*) or `402` (`Parcel require customs clearance`), check your email, SMS or Nova Post app promptly for a broker request to upload your invoice or passport/tax ID so clearance (`401`) can proceed. For general customs rules (including EU import VAT, the €3 customs duty up to €150 and the €2 EU handling fee on non-EU orders), see [parcels held at customs](guide:customs).
+**Customs clearance and documents.** International shipments entering Ukraine, the European Union, the United States or Canada pass through customs (`20`, `400`, `402`). Nova Global's [privacy policy](https://nova.global/public-contract/) says it may ask you for scanned documents about the shipment, such as those confirming its value, and other documents the customs of the sender's or recipient's country require. For general customs rules (including EU import VAT, the €3 customs duty up to €150 and the €2 EU handling fee on non-EU orders), see [parcels held at customs](guide:customs).
 
-**Local delivery rules.** Because Nova Global hands parcels off to Nova Poshta branches/lockers in Ukraine or partner couriers in the US, Canada and Europe, exact delivery-attempt limits, locker storage days and branch hours follow the destination partner's local rules.
+**Local delivery rules.** Where Nova Global hands the parcel to Nova Poshta or another local carrier, that carrier's rules set the delivery attempts, storage days and branch hours.
 
 ## Nova Global parcel stuck at customs, quiet or missing
 
@@ -56,7 +56,7 @@ Official details published on [nova.global/contact/](https://www.nova.global/con
 
 - **Email:** `info@nova.global`.
 - **Support options on tracking page:** *Call us*, *Send e-mail* and *Chat with us* widgets on [nova.global/track/](https://nova.global/track/), plus parcel tracking and support inside the **Nova Post** mobile app.
-- **Headquarters:** LLC "Nova Poshta Global" (*LLC NP GLOBAL*, Identification Code `38130410` / TIN `381304126502`), 103 Stolychne Hwy, Kyiv, 03026, Ukraine (with regional US head office in New Jersey).
+- **Company:** LLC "Nova Poshta Global" (*LLC NP GLOBAL*, identification code `38130410`, TIN `381304126502`), 103 Stolychne Hwy, Kyiv, 03026, Ukraine. Nova Global also has an office in New Jersey.
 
 > Ignore unsolicited SMS or messaging links asking for an urgent card payment to "clear" a Nova Global parcel. Confirm any legitimate customs duty notice inside the official Nova Post app or via [nova.global/track/](https://nova.global/track/) and `info@nova.global`. See [delivery scam texts](guide:delivery-scam-texts).
 
@@ -64,9 +64,11 @@ Official details published on [nova.global/contact/](https://www.nova.global/con
 
 [Peek](/) automatically recognises `NPG` waybills (`NP482917364058NPG` or `ABCDF4829173640NPG`, digits invented) and `NGUS` waybills (`TE4829173640582917NGUS`) as Nova Global with high confidence, and also recognises pasted `nova.global/track/?Tracking_ID=` or `novaposhtaglobal.ua/track/?Tracking_ID=` links. If you ever need to choose Nova Global manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "Nova Poshta Global", "NP Global" or "Нова Пошта Глобал" finds it too).
 
-Peek queries Nova Global's tracking feed directly and shows the mapped stage ("Label created", "Received by carrier", "In transit", "At customs", "Out for delivery", "Ready for pickup", "Needs attention", "Delivered"), English scan wording, scan codes (`1-0`, `14`, `20`, `303`, `37`, `38`, `3-1`, `400`–`410`, `553`, etc.), country location, destination country, delivery timestamp when available, plus the handed-off local delivery partner and its local tracking number when Nova Global exposes a unique match. For scans inside Ukraine, Peek converts Kyiv timestamps to your device's time zone; for scans abroad, Peek preserves the local wall-clock time reported by the scanning site. Peek drops the origin country label and extra tracking aliases; Nova Global's tracker does not supply an estimated delivery date, weight, service name, pickup-point street address or proof-of-delivery photo.
+Peek reads Nova Global's tracker directly, in English, and shows the stage ("Label created", "Received by carrier", "In transit", "At customs", "Out for delivery", "Ready for pickup", "Needs attention", "Delivered"), each scan's wording with its country, the destination country and the delivery time when Nova Global gives one. Nova Global's codes, such as `402` or `553`, set the stage; Peek doesn't show them. Nova Global dates scans in Ukraine on Kyiv time and scans abroad on their place's time zone; Peek shows them on your device's clock. When Nova Global names the local carrier with its number and Peek recognises that carrier, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. Peek leaves out the origin country and the parcel's other numbers. Nova Global's tracker gives no estimated delivery date, weight, service name, pickup-point address or proof-of-delivery photo.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. Kyiv time on the day an `On courier delivery` (`37`) scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Nova Global." and displays "Get help from Nova Global", which opens Nova Global's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Nova Global."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Nova Global shows `37` (`On courier delivery`), every 2 minutes from 6 a.m. on the clock of the newest scan's place, while Nova Global's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Nova Global's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Nova Global.", with a "Get help from Nova Global" link to Nova Global's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Nova Global."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot submit customs documents or contact Nova Global on your behalf.
 
@@ -74,15 +76,15 @@ You can pick alert presets for "Every scan", "Important steps" or "Delivery only
 
 ### What do `NPG` and `NGUS` mean at the end of a tracking number?
 
-`NPG` marks a Nova Global (*Nova Poshta Global*) international waybill (such as `NP482917364058NPG` or `ABCDF4829173640NPG`, digits invented), while `TE...NGUS` (`TE4829173640582917NGUS`) marks a Nova Global cross-border parcel routed to the United States.
+`NPG` marks a Nova Global (*Nova Poshta Global*) international waybill (such as `NP482917364058NPG` or `ABCDF4829173640NPG`, digits invented), while `TE...NGUS` (`TE4829173640582917NGUS`) marks a Nova Global waybill for a parcel from China.
 
 ### What does `Parcel require customs clearance` (`402`) mean?
 
-Code `402` means customs requires declaration details, an invoice or recipient ID documents before releasing the shipment. Watch your email, SMS or Nova Post app for customs broker instructions so the parcel can move to `401` (`Customs declaration finished`).
+Code `402` means the parcel needs customs clearance. Nova Global may ask you for scanned documents about the shipment, such as those confirming its value, when customs require them; once it is cleared, the parcel shows `401` (`Customs declaration finished`).
 
 ### Where do I pick up a Nova Global parcel in Ukraine?
 
-When tracking shows `303` (`Delivered to the locker`) or `38` (`At the post office`), your parcel is ready for collection at your selected Nova Poshta parcel locker (*поштомат*) or branch using the Nova Post app or SMS/Viber pickup notice.
+When tracking shows `303` (`Delivered to the locker`) or `38` (`At the post office`), your parcel is ready for collection at your selected Nova Poshta parcel locker (*поштомат*) or branch.
 
 ### How do I contact Nova Global customer care?
 
@@ -93,5 +95,5 @@ Email `info@nova.global`, visit [nova.global/contact/](https://www.nova.global/c
 - [Nova Global: Parcel Tracking](https://nova.global/track/) – public tracking portal, 506,690 pickup points and customer care channels
 - [Nova Global: Contacts](https://www.nova.global/contact/) – `info@nova.global`, LLC NP GLOBAL (TIN `381304126502`, 103 Stolychne Hwy, Kyiv) (help URL linked by Peek)
 - [Nova Global: Public Contract & Privacy Policy](https://nova.global/public-contract/) – *LLC "Nova Poshta Global"* (ID `38130410`), Kyiv postal address and customs/data notices
-- [Universal Parcel Scraper: nova-global](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/nova-global) – `NPG`/`NGUS` detection, `nova.global`/`novaposhtaglobal.ua` link rules, status codes (`1-0` to `553`), Kyiv vs local wall clocks, local partner handoff extraction and help URL
+- [Universal Parcel Scraper: nova-global](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/nova-global) – `NPG`/`NGUS` detection, `nova.global`/`novaposhtaglobal.ua` link rules, status codes (`1-0` to `553`), Kyiv time for scans in Ukraine and each place's zone abroad, local partner handoff extraction and help URL
 :::

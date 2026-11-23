@@ -14,7 +14,7 @@ Every Estafeta shipment carries both a short 10-digit **tracking code** (*códig
 
 | Format (invented) | What it is |
 | --- | --- |
-| `482917364058E704829173` | 22-character full *guía* with a service letter in the 13th position (for example `E`, `A` or `C`). |
+| `482917364058E704829173` | 22-character full *guía* with a letter in the 13th place (for example `E`, `A` or `C`). |
 | `4829173640580D48291736` | 22-character two-day full *guía* with a service letter (such as `D`) in the 14th position. |
 | `4829173640582917364058` | 22-digit all-numeric full *guía*. Shares this 22-digit length with [Austrian Post](carrier:austrian-post) and [USPS](carrier:usps). |
 | `4829173640` | 10-digit short *código de rastreo*. Shares 10-digit numeric length with [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), [Packeta](carrier:packeta) and others. |
@@ -23,7 +23,7 @@ If your Mexican delivery carries a `JMX` waybill or a branch-coded *guía* (such
 
 ## What Estafeta tracking statuses mean
 
-Estafeta displays Spanish status descriptions paired with the scanning city or hub and local wall-clock time:
+Estafeta's tracker shows Spanish status descriptions with the scanning city or hub and the local time of the scan:
 
 | Estafeta says | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -44,7 +44,7 @@ According to Estafeta's [FAQ](https://www.estafeta.com/preguntas-frecuentes) and
 
 ## Delayed, damaged or missing Estafeta parcels
 
-For online store purchases, contact the seller first because they hold the contract with Estafeta and authorise address updates, reshipments or refunds.
+For an online purchase, the store booked the shipment. Estafeta's [terms](https://www.estafeta.com/terminos-y-condiciones) let the sender or the recipient, under conditions, change the address within the same city, switch to an Estafeta branch, change the delivery date or ask for extended hours (18:00 to 22:00), and let the sender stop the parcel, for deliveries in Mexico City and its metropolitan area, Guadalajara and Monterrey; ask while tracking the parcel on Estafeta's channels. For a new shipment or a refund, contact the store.
 
 - **Strict 24-working-hour claims window (Clause 10):** under Estafeta's [Service Contract](https://www.estafeta.com/contrato-de-servicios), written claims for damage, partial loss or confirmed total loss must be submitted within **24 working hours** (*24 horas hábiles*) after receipt or confirmation of loss, addressed to Estafeta's Customer Care department in Mexico City.
 - **Liability cap (Clause 6):** without Declared Value insurance, Estafeta's maximum carrier liability is **30 UMA** (upon presenting proof of commercial value or repair cost).
@@ -54,7 +54,7 @@ For online store purchases, contact the seller first because they hold the contr
 
 Official channels published on [Estafeta Contact](https://www.estafeta.com/contacto), [Estafeta FAQ](https://www.estafeta.com/preguntas-frecuentes), [About Estafeta](https://www.estafeta.com/acerca-de-estafeta) and [Terms & Conditions](https://www.estafeta.com/terminos-y-condiciones):
 
-- **Customer service phone (Mexico):** `800 3782338` (`800 ESTAFETA`).
+- **Customer service phone (Mexico):** `800 3782338`.
 - **Virtual assistant (24/7/365):** **Beatriz** (*Bety*) on [estafeta.com](https://www.estafeta.com/) for pickup scheduling and tracking help.
 - **Online contact form:** [estafeta.com/contacto](https://www.estafeta.com/contacto) and the **Estafeta** mobile app (iOS / Android).
 - **Consumer disputes in Mexico:** if a dispute with an online retailer or courier remains unresolved, consumers may contact Mexico's Federal Consumer Protection Agency ([PROFECO](https://www.gob.mx/profeco)).
@@ -63,11 +63,13 @@ Official channels published on [Estafeta Contact](https://www.estafeta.com/conta
 
 ## Track an Estafeta parcel with Peek
 
-[Peek](/) automatically recognises 22-character lettered Estafeta guides (`482917364058E704829173` and `4829173640580D48291736`, invented) with high confidence, and also recognises pasted `cs.estafeta.com` links carrying `wayBill=`. For 10-digit tracking codes (`4829173640`) or 22-digit all-numeric guides (`4829173640582917364058`), Peek checks Estafeta alongside other matching carriers and shows "Estafeta has this parcel." when Estafeta confirms it; you can also tap "Change" while adding or "Change carrier" on the parcel screen to pick Estafeta manually.
+[Peek](/) automatically recognises 22-character lettered Estafeta guides (`482917364058E704829173` and `4829173640580D48291736`, invented) with high confidence, and also recognises pasted `cs.estafeta.com` links carrying `wayBill=`. For a 10-digit tracking code (`4829173640`) or a 22-digit all-numeric guide (`4829173640582917364058`), Peek asks Estafeta first when you track from Mexico, and elsewhere only once the other likely carriers don't know the number; it shows "Estafeta has this parcel." when Estafeta confirms it. You can also tap "Change" while adding or "Change carrier" on the parcel screen to pick Estafeta yourself.
 
-Peek queries Estafeta's tracker directly and shows the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Needs attention", "Delivered"), Spanish scan descriptions, city or hub locations, service name (such as `Terrestre`), local wall-clock scan times and the canonical 22-character guide number when you entered a 10-digit short code (label-only guides display Estafeta's registration notice until the first physical scan arrives). Peek discards recipient names, postcodes, signatures, proof-of-delivery images, downloadable shipment reports and scheduled delivery dates.
+Peek reads Estafeta's tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Needs attention", "Delivered") and the Spanish scan descriptions with their city or hub. Estafeta gives each scan's time without a zone: Peek dates it on its city's time zone and shows it on your device's clock. The service name stays out of every Peek app. When you entered a 10-digit code, Peek shows the full 22-character guide under "Estafeta tracks this as"; a guide with only its label shows Estafeta's registration notice until the first scan. Peek leaves out recipient names, postcodes, signatures, proof-of-delivery images, downloadable shipment reports and scheduled delivery dates.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an `En proceso de entrega a domicilio` scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Estafeta." and displays "Get help from Estafeta", which opens Estafeta's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Estafeta."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Estafeta shows `En proceso de entrega a domicilio`, every 2 minutes from 6 a.m. on the clock of the newest scan's city, while Estafeta's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Estafeta's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Estafeta.", with a "Get help from Estafeta" link to Estafeta's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Estafeta."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot reschedule an Estafeta delivery or file a 24-hour claim on your behalf.
 
@@ -99,5 +101,5 @@ Call `800 3782338`, use the form on [estafeta.com/contacto](https://www.estafeta
 - [Estafeta: Terms & Conditions](https://www.estafeta.com/terminos-y-condiciones) – general website and service terms
 - [Estafeta: Contact](https://www.estafeta.com/contacto) – official customer care contact form (help URL linked by Peek)
 - [PROFECO](https://www.gob.mx/profeco) – Mexico's Federal Consumer Protection Agency
-- [Universal Parcel Scraper: estafeta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/estafeta) – 10-digit / 22-character guide detection, `cs.estafeta.com?wayBill=` link rule, Spanish status wording, local clocks, stripped fields and help URL
+- [Universal Parcel Scraper: estafeta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/estafeta) – 10-digit / 22-character guide detection, `cs.estafeta.com?wayBill=` link rule, Spanish status wording, each city's clock, stripped fields and help URL
 :::

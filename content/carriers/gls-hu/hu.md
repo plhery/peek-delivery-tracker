@@ -18,7 +18,7 @@ A csomagszámot a webáruház feladási értesítőjében, a FlexDeliveryService
 | `03482917364` | 11 jegyű belföldi GLS Hungary csomagszám kezdő nullával. |
 | `94829173640` | 11 jegyű nemzetközi GLS csomagszám Magyarországra vagy külföldre. |
 
-Mivel a 10–11 jegyű tiszta számkódokat más európai GLS leányvállalatok (például [GLS Austria](carrier:gls-at), [GLS Germany](carrier:gls-de), [GLS Poland](carrier:gls-pl) vagy [GLS Italy](carrier:gls-it)) és egyéb futárszolgálatok is használják, érdemes kézzel a GLS Hungary-t kiválasztani vagy a `gls-group.com/HU/...` linket beilleszteni. További formátumok: [csomagszám-formátumok](guide:tracking-number-formats).
+A 10 és 11 jegyű számokat más GLS-vállalatok (például [GLS Austria](carrier:gls-at), [GLS Germany](carrier:gls-de), [GLS Poland](carrier:gls-pl) vagy [GLS Italy](carrier:gls-it)) és más futárszolgálatok is használják, ezért a GLS Hungary-t magadnak kell kiválasztanod, vagy illeszd be a `gls-group.com/HU/...` linket. További formátumok: [csomagszám-formátumok](guide:tracking-number-formats).
 
 ## Mit jelentenek a GLS Hungary csomagkövetési státuszok
 
@@ -26,11 +26,11 @@ A [gls-group.com/HU/hu/csomagkovetes/](https://gls-group.com/HU/hu/csomagkovetes
 
 | GLS Hungary állapotkód | Mit jelent számodra | Mit mutat a Peek |
 | --- | --- | --- |
-| `PREADVICE` | A feladó elektronikusan rögzítette a csomagadatokat, a GLS még nem vette át a csomagot. | "Label created" |
-| `INPICKUP` | A GLS átvette a csomagot a feladótól vagy a CsomagPonton. | "Received by carrier" |
-| `INTRANSIT` | A csomag úton van a GLS Hungary depói és elosztóközpontjai között (vagy nemzetközi tranzitban). | "In transit" |
-| `DELIVERED` | A csomagot kézbesítették a címzettnek, szomszédnak, CsomagPontra vagy Csomagautomatába. | "Delivered" |
-| `CANCELED` | A csomagfelvételt törölték vagy a küldeményt kézbesítés nélkül visszairányították. | "Returned to sender" / "Needs attention" |
+| `PREADVICE` | A feladó elektronikusan rögzítette a csomagadatokat, a GLS még nem vette át a csomagot. | „Label created” |
+| `INPICKUP` | A GLS átvette a csomagot a feladótól vagy a CsomagPonton. | „Received by carrier” |
+| `INTRANSIT` | A csomag úton van a GLS Hungary depói és elosztóközpontjai között (vagy nemzetközi tranzitban). | „In transit” |
+| `DELIVERED` | A csomagot kézbesítették a címzettnek, szomszédnak, CsomagPontra vagy Csomagautomatába. | „Delivered” |
+| `CANCELED` | A csomagfelvételt törölték. | „Returned to sender” |
 
 ## Szállítási idők, súlyhatárok, GLS CsomagPontok és automaták
 
@@ -47,30 +47,32 @@ A [GLS Hungary főoldal](https://gls-group.com/HU/hu/home/), a [GYIK](https://gl
 
 A [GLS Hungary GYIK](https://gls-group.com/HU/hu/gyik/) alapján átvételkor érdemes ellenőrizni a csomagolást:
 
-- **Külső sérülés átvételkor:** ha a doboz láthatóan sérült (például kiszakadt vagy benyomódott), **megtagadhatod az átvételt**, így a GLS jegyzőkönyvezi a sérülést. Téves termék vagy belső hiba esetén a webáruházzal vedd fel a kapcsolatot (online vásárlásnál 14 napos elállási jog illet meg).
+- **Külső sérülés átvételkor:** ha a doboz láthatóan sérült (például kiszakadt), **megtagadhatod az átvételt**, és a GLS visszaküldi a csomagot a feladónak. Sérült csomagolásnál átvételkor a tartalmat is ellenőrizheted; a futár kárjegyzőkönyvet vesz fel. Ha a csomag kívülről ép volt, és csak kibontás után veszed észre a sérülést, a feladóhoz fordulj.
 - **Elmaradt vagy hiányzó csomag:** ellenőrizd a futár értesítőjét (hátha szomszéd vette át) és a FlexDeliveryService e-mailt vagy Viber-üzenetet, majd hívd a címzetti ügyfélszolgálatot (`+36 29 886-700`) a csomagszámmal, és értesítsd a feladót. Lásd még: [miért nem frissül a követés](guide:tracking-not-updating), [kézbesített, de nem érkezett meg](guide:delivered-not-received), [sérült csomag](guide:damaged-parcel), [elveszett csomag](guide:lost-parcel) és [visszaküldve a feladónak](guide:returned-to-sender).
 
 ## GLS Hungary ügyfélszolgálat és elérhetőségek
 
 Hivatalos adatok a [Kapcsolat](https://gls-group.com/HU/hu/kapcsolat/), a [Cégadatok](https://gls-group.com/HU/hu/cegadatok/), az [Általános Üzleti Feltételek](https://gls-group.com/HU/hu/altalanos-uzleti-feltetelek/) és a [GYIK](https://gls-group.com/HU/hu/gyik/) oldalairól:
 
-- **Címzetti ügyfélszolgálat:** `+36 29 886-700` (vezetékes tarifával hívható; szezonálisan a GLS Automata technikai támogatása is ezen érhető el).
+- **Címzetti ügyfélszolgálat:** `+36 29 886-700` (vezetékes tarifával hívható).
 - **Feladói ügyfélszolgálat:** `+36 29 88 66 70`.
 - **E-mail:** `info@gls-hungary.com`.
 - **Online kapcsolatfelvételi űrlap:** [gls-group.com/HU/hu/kapcsolat/](https://gls-group.com/HU/hu/kapcsolat/).
-- **Székhely:** GLS General Logistics Systems Hungary Csomag-Logisztikai Kft., 2351 Alsónémedi, GLS Európa u. 2.
+- **Cégadatok:** GLS General Logistics Systems Hungary Csomag-Logisztikai Kft., 2351 Alsónémedi, GLS Európa u. 2.
 
-> **Hivatalos csalási figyelmeztetés:** a [gls-group.com/HU/hu/home/](https://gls-group.com/HU/hu/home/) főoldalon a GLS Hungary figyelmeztet a nevükkel visszaélő adathalász üzenetekre és a `.pdf.img` kiterjesztésű hamis «elektronikus számla» mellékletekre. Soha ne nyiss meg gyanús csatolmányt, és ne fizess ismeretlen linken keresztül — a csomagot közvetlenül a [gls-group.com/HU/hu/csomagkovetes/](https://gls-group.com/HU/hu/csomagkovetes/) oldalon ellenőrizd. Lásd [csaló kézbesítési SMS-ek](guide:delivery-scam-texts).
+> **Hivatalos csalási figyelmeztetés:** a [gls-group.com/HU/hu/home/](https://gls-group.com/HU/hu/home/) főoldalon a GLS Hungary figyelmeztet a nevükkel visszaélő adathalász üzenetekre és a `.pdf.img` kiterjesztésű hamis „elektronikus számla” mellékletekre. Soha ne nyiss meg gyanús csatolmányt, és ne fizess ismeretlen linken keresztül — a csomagot közvetlenül a [gls-group.com/HU/hu/csomagkovetes/](https://gls-group.com/HU/hu/csomagkovetes/) oldalon ellenőrizd. Lásd [csaló kézbesítési SMS-ek](guide:delivery-scam-texts).
 
 ## GLS Hungary csomag követése a Peek alkalmazásban
 
-A [Peek](/) automatikusan felismeri a beillesztett `gls-group.com/HU/...` és `gls-group.eu/HU/...` linkeket (`match=`, `parcelNumber=` vagy `matchParcelNumber=` paraméterrel) GLS Hungary-ként. Mivel a 10 és 11 jegyű GLS Hungary csomagszámok (`3482917364`, `03482917364` vagy `94829173640`, kitalált számok) átfednek más európai GLS hálózatokkal és futárszolgálatokkal, kézi hozzáadáskor koppints a "Change" gombra (vagy a csomag képernyőjén a "Change carrier" opcióra), és válaszd a GLS Hungary-t (a "GLS Magyarország" keresésre is megjelenik).
+A [Peek](/) a beillesztett `gls-group.com/HU/...` és `gls-group.eu/HU/...` linkekből (`match=`, `parcelNumber=` vagy `matchParcelNumber=` paraméterrel) felismeri, hogy GLS Hungary-csomagról van szó. A puszta számot (például `3482917364`, `03482917364` vagy `94829173640`, kitalált számok) a Peek sosem rendeli a GLS Hungary-hez: hozzáadáskor koppints a „Change” gombra, vagy a csomag képernyőjén a „Change carrier” lehetőségre, és válaszd a GLS Hungary-t (a „GLS Magyarország” keresésre is megjelenik).
 
-A Peek közvetlenül lekérdezi a GLS Hungary nyilvános áttekintő felületét (irányítószám nélkül), és magyarországi időzónában (`Europe/Budapest`) mutatja a fő állapotot ("Label created", "Received by carrier", "In transit", "Returned to sender", "Needs attention", "Delivered"). Mivel a GLS Hungary weboldala a részletes szkennelési előzményeket, depóhelyszíneket, várható kézbesítési napot és CsomagPont/Automata adatokat csak a kézbesítési irányítószám megadása után jeleníti meg, a Peek itt az összefoglaló státuszt mutatja; részletes előzményhez vagy FlexDeliveryService átirányításhoz nyisd meg a [gls-group.com/HU/hu/csomagkovetes/](https://gls-group.com/HU/hu/csomagkovetes/) oldalt az irányítószámmal.
+A Peek a GLS Hungary áttekintő adatait kéri le, ugyanazt, amit a csomagkövető oldal irányítószám nélkül mutat, és ennek állapotát jeleníti meg („Label created”, „Received by carrier”, „In transit”, „Returned to sender”, „Delivered”) a GLS szövegével. Az áttekintésben nincsenek szkennelések, helyszínek, várható kézbesítési nap, sem CsomagPont- vagy Automata-adatok: ezeket a GLS csak a kézbesítési irányítószámmal mutatja, ezért a részletekhez vagy a FlexDeliveryService átirányításhoz nyisd meg a [gls-group.com/HU/hu/csomagkovetes/](https://gls-group.com/HU/hu/csomagkovetes/) oldalt az irányítószámmal.
 
-A GLS Hungary lekérdezési korlátai miatt a Peek **legfeljebb 60 percenként egyszer** ellenőrzi a GLS Hungary állapotát (akkor is, ha nyitva tartod a csomagot vagy kézbesítési napon), sikertelen lekérdezés után pedig **4 órát (240 percet)** vár a következő próbálkozásig; 7 nap után "Label created" állapotban 6 óránként ellenőriz. Amikor tartalék követési szolgáltatások válaszolnak, óránként, egy nap változatlanság után 3 óránként, kézbesítési napon pedig legfeljebb 15 percenként ellenőriznek. Ha 4 napig nincs új frissítés szállítás közben, a Peek jelzi a szünetet (például "No tracking update since Mon, Oct 12"), kiírja: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GLS Hungary." és megjeleníti a "Get help from GLS Hungary" gombot, amely a GLS Hungary kapcsolati oldalát nyitja meg. Három hétnél hosszabb csend után megjelenik: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking GLS Hungary."
+A Peek egy GLS Hungary-csomagot legfeljebb óránként egyszer ellenőriz, a kézi frissítést is beleértve, sikertelen ellenőrzés után pedig 4 órát vár. Hét nap „Label created” állapot után 6 óránként ellenőriz.
 
-Választhatsz értesítési beállítást: "Every scan", "Important steps" vagy "Delivery only". A Peek csak követi a csomag állapotát, és nem tudja átirányítani a küldeményt vagy felvenni a kapcsolatot a GLS Hungary-val helyetted.
+Ha a GLS Hungary állapota négy napja nem változott, és a csomag még „Label created”, „Received by carrier” vagy „In transit” állapotban van, a Peek azzal a nappal jelzi, amikor utoljára változást látott, például: „No tracking update since Mon 12 Oct”. A csomag oldalán ekkor ez áll: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GLS Hungary.”, és egy „Get help from GLS Hungary” hivatkozás a GLS Hungary kapcsolati oldalára visz. Három hét új hír nélkül: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking GLS Hungary.”
+
+Választhatsz értesítési beállítást: „Every scan”, „Important steps” vagy „Delivery only”. A Peek csak követi a csomag állapotát, és nem tudja átirányítani a küldeményt vagy felvenni a kapcsolatot a GLS Hungary-val helyetted.
 
 ## Gyakori kérdések a GLS Hungary csomagkövetésről
 

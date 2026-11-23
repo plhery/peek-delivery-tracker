@@ -14,7 +14,7 @@ Cada envío de Estafeta cuenta con un **código de rastreo** corto de 10 dígito
 
 | Formato (inventado) | Qué es |
 | --- | --- |
-| `482917364058E704829173` | Guía completa de 22 caracteres con letra de servicio en la posición 13 (por ejemplo `E`, `A` o `C`). |
+| `482917364058E704829173` | Guía completa de 22 caracteres con una letra en la posición 13 (por ejemplo `E`, `A` o `C`). |
 | `4829173640580D48291736` | Guía completa de 22 caracteres (dos días) con letra de servicio (como `D`) en la posición 14. |
 | `4829173640582917364058` | Guía completa puramente numérica de 22 dígitos. Comparte longitud con [Austrian Post](carrier:austrian-post) y [USPS](carrier:usps). |
 | `4829173640` | Código de rastreo corto de 10 dígitos. Comparte longitud con [DHL](carrier:dhl), [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), [Packeta](carrier:packeta) y otros. |
@@ -27,12 +27,12 @@ Estafeta muestra descripciones en español junto con la plaza o centro operativo
 
 | Estafeta muestra | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
-| `La guía ha sido generada sin embargo el envío aún no es depositado en Estafeta` | El remitente generó la guía electrónicamente, pero aún no entrega el paquete a Estafeta. | "Etiqueta creada" |
-| `Recibido por estafeta` | Estafeta recibió físicamente el paquete en sucursal o recolección. | "Admitido por el transportista" |
-| `En tránsito`, `[Ciudad] Llegada a centro Operativo plaza Destino`, `Pendiente programacion para salida a ruta` | En traslado por la red nacional, recibido en el centro operativo de tu plaza o programado para salir a ruta. | "En tránsito" |
-| `En proceso de entrega a domicilio` | El paquete ya va a bordo de la unidad local para entregarse hoy. | "En reparto" |
-| `CARGA DEMORADA POR BLOQUEO O ACCIDENTE EXTERNO EN VIA FEDERAL` | Retraso por bloqueo o accidente externo en carretera federal. | "Incidencia" |
-| `Entregado` | Entregado en domicilio o recogido en sucursal. | "Entregado" |
+| `La guía ha sido generada sin embargo el envío aún no es depositado en Estafeta` | El remitente generó la guía electrónicamente, pero aún no entrega el paquete a Estafeta. | «Etiqueta creada» |
+| `Recibido por estafeta` | Estafeta recibió físicamente el paquete en sucursal o recolección. | «Admitido por el transportista» |
+| `En tránsito`, `[Ciudad] Llegada a centro Operativo plaza Destino`, `Pendiente programacion para salida a ruta` | En traslado por la red nacional, recibido en el centro operativo de tu plaza o programado para salir a ruta. | «En tránsito» |
+| `En proceso de entrega a domicilio` | El paquete ya va a bordo de la unidad local para entregarse hoy. | «En reparto» |
+| `CARGA DEMORADA POR BLOQUEO O ACCIDENTE EXTERNO EN VIA FEDERAL` | Retraso por bloqueo o accidente externo en carretera federal. | «Incidencia» |
+| `Entregado` | Entregado en domicilio o recogido en sucursal. | «Entregado» |
 
 ## Horarios de entrega, 2 intentos y 10 días en sucursal
 
@@ -44,7 +44,7 @@ Conforme a las [Preguntas frecuentes](https://www.estafeta.com/preguntas-frecuen
 
 ## Paquete de Estafeta retrasado, dañado o extraviado
 
-En compras por internet, contacta primero a la tienda o vendedor: al ser el titular de la guía, gestiona cambios de domicilio, reenvíos o devoluciones.
+En una compra por internet, el envío lo contrató la tienda. Los [términos](https://www.estafeta.com/terminos-y-condiciones) de Estafeta permiten al remitente o al destinatario, con condiciones, cambiar el domicilio dentro de la misma ciudad, pasar el envío a una sucursal Estafeta, cambiar la fecha de entrega o pedir horario extendido (18:00 a 22:00 hrs), y al remitente detener el envío, en Ciudad de México y Área Metropolitana, Guadalajara y Monterrey; se pide al rastrearlo en los canales de Estafeta. Para un reenvío o un reembolso, contacta a la tienda.
 
 - **Plazo estricto de 24 horas hábiles para reclamar (cláusula 10):** según el [Contrato de servicios](https://www.estafeta.com/contrato-de-servicios), las reclamaciones por daño, pérdida parcial o extravío deben presentarse **por escrito dentro de las 24 horas hábiles** posteriores a la recepción o confirmación del extravío, dirigidas a Atención a Clientes en la Ciudad de México.
 - **Tope de responsabilidad (cláusula 6):** sin seguro de valor declarado, la responsabilidad máxima de Estafeta es de **30 UMA** acreditando el valor comercial o reparación.
@@ -54,7 +54,7 @@ En compras por internet, contacta primero a la tienda o vendedor: al ser el titu
 
 Canales oficiales publicados en [Contacto Estafeta](https://www.estafeta.com/contacto), [Preguntas frecuentes](https://www.estafeta.com/preguntas-frecuentes), [Acerca de Estafeta](https://www.estafeta.com/acerca-de-estafeta) y [Términos y condiciones](https://www.estafeta.com/terminos-y-condiciones):
 
-- **Teléfono de atención (México):** `800 3782338` (`800 ESTAFETA`).
+- **Teléfono de atención (México):** `800 3782338`.
 - **Asistente virtual 24/7/365:** **Beatriz** (*Bety*) en [estafeta.com](https://www.estafeta.com/) para recolecciones y dudas de rastreo.
 - **Formulario web y app:** [estafeta.com/contacto](https://www.estafeta.com/contacto) y la app móvil **Estafeta** (iOS y Android).
 - **Defensa del consumidor:** ante conflictos no resueltos en México, puedes acudir a la [PROFECO](https://www.gob.mx/profeco).
@@ -63,13 +63,15 @@ Canales oficiales publicados en [Contacto Estafeta](https://www.estafeta.com/con
 
 ## Rastrear un envío de Estafeta en Peek
 
-[Peek](/) reconoce automáticamente las guías de 22 caracteres con letra (`482917364058E704829173` y `4829173640580D48291736`, inventadas) como Estafeta con alta confianza, además de enlaces pegados de `cs.estafeta.com` con el parámetro `wayBill=`. Para códigos cortos de 10 dígitos (`4829173640`) o guías numéricas de 22 dígitos (`4829173640582917364058`), Peek consulta a Estafeta junto con otros transportistas compatibles y muestra "Estafeta tiene este paquete." cuando Estafeta lo confirma; también puedes pulsar "Cambiar" al añadir o "Cambiar transportista" en la pantalla del paquete.
+[Peek](/) reconoce automáticamente las guías de 22 caracteres con letra (`482917364058E704829173` y `4829173640580D48291736`, inventadas) como Estafeta con alta confianza, además de enlaces pegados de `cs.estafeta.com` con el parámetro `wayBill=`. Con un código corto de 10 dígitos (`4829173640`) o una guía numérica de 22 dígitos (`4829173640582917364058`), Peek pregunta primero a Estafeta si rastreas desde México, y en otros países solo cuando los demás transportistas posibles no conocen el número; muestra «Estafeta tiene este paquete.» cuando Estafeta lo confirma. También puedes pulsar «Cambiar» al añadir o «Cambiar transportista» en la pantalla del paquete.
 
-Peek consulta el rastreador de Estafeta directamente y muestra la etapa ("Etiqueta creada", "Admitido por el transportista", "En tránsito", "En reparto", "Incidencia", "Entregado"), los escaneos en español, la ciudad o centro operativo, el servicio contratado (como `Terrestre`), la hora local del escaneo y la guía completa de 22 caracteres cuando buscaste con el código corto de 10 dígitos (si solo se generó la guía, muestra el aviso de registro hasta el primer escaneo físico). Peek omite nombres de destinatarios, códigos postales, firmas, fotos de entrega, reportes descargables y fechas programadas de entrega.
+Peek consulta el rastreador de Estafeta directamente y muestra la etapa («Etiqueta creada», «Admitido por el transportista», «En tránsito», «En reparto», «Incidencia», «Entregado») y los escaneos en español con su ciudad o centro operativo. Estafeta da la hora de cada escaneo sin zona: Peek la fecha en la zona horaria de su ciudad y la muestra en la hora de tu dispositivo. El nombre del servicio no aparece en ninguna app de Peek. Si buscaste con el código de 10 dígitos, Peek muestra la guía completa bajo «Estafeta lo sigue con el número»; si solo se generó la guía, muestra el aviso de registro de Estafeta hasta el primer escaneo. Peek omite nombres de destinatarios, códigos postales, firmas, fotos de entrega, reportes descargables y fechas programadas de entrega.
 
-Peek consulta hasta cada 10 minutos mientras tienes el paquete abierto o el día de entrega con avisos activos, y hasta cada 2 minutos desde las 6:00 hora local el día en que llega un escaneo `En proceso de entrega a domicilio`. El resto del tiempo revisa cada hora, se mantiene cada hora con la pantalla abierta tras 12 horas en "Etiqueta creada" o "Admitido por el transportista" o 2 días sin novedad, y baja a cada 6 horas tras 7 días aún en "Etiqueta creada". Cuando los servicios alternativos de seguimiento cubren la consulta, revisan cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de entrega. Tras 4 días en tránsito sin novedades, Peek avisa (por ejemplo "Sin novedades desde el lun, 12 oct"), muestra "Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Estafeta." y enseña "Pide ayuda a Estafeta", que abre la página de contacto de Estafeta. Después de más de tres semanas sin novedades aparece "Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Estafeta."
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek revisa hasta cada 10 minutos, y cada 2 minutos desde las 6:00, hora de la ciudad del escaneo más reciente, el día en que Estafeta muestra `En proceso de entrega a domicilio`, mientras el rastreador de Estafeta responda. Si no, revisa cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o dos días sin novedades, revisa cada hora sigas como sigas el paquete, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el rastreador de Estafeta no responde y Peek sigue el paquete solo a través de servicios de seguimiento, revisa cada hora, cada 3 horas tras un día sin novedades y hasta cada 15 minutos el día en que el paquete sale a reparto.
 
-Puedes elegir avisos para "Cada escaneo", "Pasos importantes" o "Solo la entrega". Peek únicamente sigue las actualizaciones y no reprograma entregas ni presenta reclamaciones de 24 horas ante Estafeta por ti.
+Cuando el escaneo más reciente tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de ese escaneo, como «Sin novedades desde el lun 12 oct». La página del paquete dice entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Estafeta.», con el enlace «Pide ayuda a Estafeta» a la página de contacto de Estafeta. Tras tres semanas sin un escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Estafeta.»
+
+Puedes elegir avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek únicamente sigue las actualizaciones y no reprograma entregas ni presenta reclamaciones de 24 horas ante Estafeta por ti.
 
 ## Preguntas frecuentes sobre el rastreo Estafeta
 
@@ -99,5 +101,5 @@ Llama al `800 3782338`, llena el formulario en [estafeta.com/contacto](https://w
 - [Estafeta: Términos y condiciones](https://www.estafeta.com/terminos-y-condiciones) – condiciones generales del sitio y servicio
 - [Estafeta: Contacto](https://www.estafeta.com/contacto) – formulario oficial de atención al cliente (enlace de ayuda usado por Peek)
 - [PROFECO](https://www.gob.mx/profeco) – Procuraduría Federal del Consumidor
-- [Universal Parcel Scraper: estafeta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/estafeta) – detección de códigos de 10 dígitos y guías de 22 caracteres, regla de enlace `cs.estafeta.com?wayBill=`, estados en español, hora local, campos omitidos y URL de ayuda
+- [Universal Parcel Scraper: estafeta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/estafeta) – detección de códigos de 10 dígitos y guías de 22 caracteres, regla de enlace `cs.estafeta.com?wayBill=`, estados en español, la hora de cada ciudad, campos omitidos y URL de ayuda
 :::

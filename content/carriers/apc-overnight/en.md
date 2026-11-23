@@ -14,17 +14,17 @@ APC talks about one number: "A consignment number is the 7–digit tracking refe
 
 Shops often send a longer one instead: a 22-digit number inside an APC Choice link (apcchoice.apc-overnight.com/track-parcel?id=…). It starts with the booking date and ends with the same 7-digit consignment number.
 
-:::anatomy 20261231 0000000 1234567
-- 20261231 | The booking date, 20YYMMDD: here 31 December 2026
-- 0000000 | Seven more digits
-- 1234567 | The 7-digit consignment number APC's pages ask for
+:::anatomy 20260715 4829173 7364058
+- 20260715 | The booking date, 20YYMMDD: here 15 July 2026
+- 4829173 | Seven more digits
+- 7364058 | The 7-digit consignment number APC's pages ask for
 :::
 
 With the long number in the link, APC Choice opens the parcel's history without a postcode. The postcode is needed only to see the proof of delivery or to change the delivery.
 
 Two things to watch:
 
-- A 22-digit number that doesn't start with a real date (`1234567890123456789012`, for example) isn't APC's. Numbers of that length can belong to [USPS](carrier:usps), [Austrian Post](carrier:austrian-post) or Estafeta.
+- A 22-digit number that doesn't start with a real date (`4829173640582917364058`, for example) isn't APC's. Numbers of that length can belong to [USPS](carrier:usps), [Austrian Post](carrier:austrian-post) or Estafeta.
 - APC's numbers don't look like [Royal Mail's](carrier:royal-mail) (ending in `GB`), [Parcelforce's](carrier:parcelforce), [Evri's](carrier:evri) or [DPD UK's](carrier:dpd-uk).
 
 If nothing comes up, APC's FAQ lists the usual reasons: the sender hasn't dispatched the parcel yet, it hasn't been scanned into the network, or the number was mistyped. Try later or check the number with the sender. No number at all? See [how to find a tracking number](guide:find-tracking-number).
@@ -48,7 +48,7 @@ APC Choice is in English only. It shows a consignment summary (dispatch date, we
 
 ## APC delivery times, missed deliveries and depot collection
 
-APC says most UK deliveries arrive on the next working day after dispatch, depending on location. The sender picks the service: next day by 10:30am, by 12 noon or standard next working day; Saturday delivery is available in many areas if the sender arranges it. If the shop gave APC your contact details, you may get the 2-hour window by email or text once the parcel is scheduled, and APC Choice shows how close the driver is.
+APC says most UK deliveries arrive on the next working day after dispatch, depending on location. The sender picks the service: next day by 10:30am, by 12 noon (UK time) or standard next working day; Saturday delivery is available in many areas if the sender arranges it. If the shop gave APC your contact details, you may get the 2-hour window by email or text once the parcel is scheduled, and APC Choice shows how close the driver is.
 
 APC Choice lets you change things until the parcel is delivered, even after a card. Depending on the service and what the sender allows, you can:
 
@@ -57,11 +57,11 @@ APC Choice lets you change things until the parcel is delivered, even after a ca
 - choose a safe place or a neighbour;
 - have it sent to a Parcelly store (over 2,500 across the UK).
 
-**Safe place:** APC may leave a parcel without a signature only with the sender's permission, or yours through APC Choice where allowed. Business addresses get no safe place or neighbour option, and attempts there start from 8am.
+**Safe place:** APC may leave a parcel without a signature only with the sender's permission, or yours through APC Choice where allowed. Business addresses get no safe place or neighbour option, and attempts there start from 8am UK time.
 
 **After a card:** drivers can't try again the same day, and you can't collect from the depot that day either. You can reschedule once more after the first attempt. A rebooked delivery uses the same service; a timed or Saturday upgrade must come from the sender.
 
-**Depot collection:** ask before 7pm for next-day collection, and bring proof of identity and proof of address. Check the depot's opening times first.
+**Depot collection:** ask before 7pm UK time for next-day collection, and bring proof of identity and proof of address. Check the depot's opening times first.
 
 **Three working days:** if APC hears nothing within three working days of a missed delivery, the parcel may go back to the sender.
 
@@ -73,7 +73,7 @@ If tracking says delivered and you have nothing, the proof of delivery (photo, G
 
 ## Contacting APC
 
-APC has no national phone line, chat or general email for recipients; its own pages list these channels (read on 13 October 2026):
+APC has no national phone line, chat or general email for recipients; its own pages list these channels:
 
 - **Your local depot:** the [Depot Finder](https://apc.co.uk/depot-finder/) shows its contact details and opening hours from your postcode. APC Choice also names the delivering depot and its email under "APC Pinpoint".
 - **Customer Service Enquiry form** on [apc.co.uk/contact-us](https://apc.co.uk/contact-us/): give the consignment number and the delivery postcode; APC forwards it to your local depot, which replies by phone or email.
@@ -84,7 +84,13 @@ APC has no national phone line, chat or general email for recipients; its own pa
 
 Paste the 22-digit number or an apcchoice.apc-overnight.com link with `id=` into [Peek](/); no postcode needed. Since the number's shape is shared, Peek asks APC Overnight and Austrian Post at once and shows "APC Overnight has this parcel." when APC knows it. A 22-digit number without a real date isn't offered to APC and isn't APC's: check it with the shop. The 7-digit consignment number on its own can't be tracked here, and apc.co.uk links aren't read.
 
-APC's times carry no time zone: Peek reads them on UK time and lists APC's own history. It can also show the weight and notify you when the status changes. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot and no pickup point, and rearranging a delivery stays in APC Choice.
+APC's times carry no time zone: Peek reads them on UK time and lists APC's own history. It can also show the weight. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot, no pickup point and no proof of delivery, and rearranging a delivery stays in APC Choice.
+
+While you have it open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. UK time on the day it shows `Out for delivery`, while APC Choice answers (every 5 minutes when it needs a browser; through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), and every 6 hours after seven days without news at "Label created".
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking APC Overnight.", with a "Get help from APC Overnight" link to APC's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking APC Overnight."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact APC or the shop for you.
 
 ## Questions about APC tracking
 
@@ -98,7 +104,7 @@ APC may return a parcel to the sender if you don't respond within three working 
 
 ### What time does APC deliver?
 
-It depends on the service the sender paid for: by 10:30am, by 12 noon or any time on the next working day. When the parcel is out for delivery, APC Choice and APC's email or text give a 2-hour window.
+It depends on the service the sender paid for: by 10:30am, by 12 noon (UK time) or any time on the next working day. When the parcel is out for delivery, APC Choice and APC's email or text give a 2-hour window.
 
 ### Is APC Parcelforce?
 

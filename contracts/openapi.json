@@ -71118,8 +71118,8 @@
       ],
       "post": {
         "operationId": "addPublicParcelPostcode",
-        "summary": "Add the delivery postcode another carrier holding a lookup's parcel asks for",
-        "description": "The carrier is asked first. A postcode it accepts files the lookup under it and queues its check at once; one it refuses shows nothing and counts against the link, five a day.",
+        "summary": "Add the delivery postcode a carrier asks for a lookup's parcel, or may have it with",
+        "description": "For the carrier the link names in inputNeeded or inputSuggested. The carrier is asked first. A postcode it accepts files the lookup under it and queues its check at once; one it refuses shows nothing and counts against the link, five a day.",
         "security": [],
         "parameters": [
           {
@@ -76941,6 +76941,26 @@
             "type": "object",
             "additionalProperties": false,
             "description": "Another carrier holds the parcel and asks for its delivery postcode, or the parcel's own carrier needs one the lookup lacks. The owner adds it with addPublicParcelPostcode. Sent to the owner of a lookup only.",
+            "required": [
+              "carrier",
+              "field"
+            ],
+            "properties": {
+              "carrier": {
+                "$ref": "#/components/schemas/CarrierId"
+              },
+              "field": {
+                "type": "string",
+                "enum": [
+                  "dpdPostcode"
+                ]
+              }
+            }
+          },
+          "inputSuggested": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "For a lookup filed under no carrier that no carrier or provider has answered for yet, the carrier its number points to from the lookup's country that can't be asked about it without the delivery postcode. Nothing says that carrier has the parcel. The owner adds the postcode with addPublicParcelPostcode. Sent to the owner of a lookup only, never with inputNeeded.",
             "required": [
               "carrier",
               "field"

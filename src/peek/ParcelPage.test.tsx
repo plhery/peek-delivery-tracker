@@ -1001,6 +1001,31 @@ describe('ParcelPage actions', () => {
     await waitFor(() => expect(mocks.addPostcode).toHaveBeenCalledWith(LINK_ID, OWNER_KEY, 'spring-gds', '1000', 'BE'));
   });
 
+  it('offers the postcode a carrier the number points to may have the parcel with, without saying it has it', async () => {
+    // Synthetic: eight digits, as Mondial Relay's shipment numbers, that it tracks only with the delivery postcode.
+    const suggested = testView({ parcel: { carrier: 'unknown', trackingNumber: '99999990' } });
+    suggested.link = { ...suggested.link, inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } };
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: suggested });
+    mocks.read.mockResolvedValue(suggested);
+    mocks.addPostcode.mockRejectedValueOnce(new ParcelLinkError('refused')).mockResolvedValueOnce(view(journey));
+    const user = userEvent.setup();
+    open();
+    const words = 'Mondial Relay may have this parcel. Add the delivery postcode to track it.';
+    const prompt = await screen.findByText(words);
+    await user.click(within(prompt.parentElement!).getByRole('button', { name: 'Add postcode' }));
+    const sheet = screen.getByRole('dialog', { name: 'Add postcode' });
+    expect(sheet).toHaveTextContent(words);
+    expect(screen.queryByText('Mondial Relay has this parcel. Add the delivery postcode to track it.')).toBeNull();
+    await user.type(within(sheet).getByRole('textbox'), '75001');
+    await user.click(within(sheet).getByRole('button', { name: 'Add postcode' }));
+    expect(await within(sheet).findByRole('alert'))
+      .toHaveTextContent('Mondial Relay doesn’t have this parcel for that postcode. Check it and try again.');
+    expect(mocks.addPostcode.mock.lastCall?.slice(0, 4)).toEqual([LINK_ID, OWNER_KEY, 'mondial-relay', '75001']);
+    await user.click(within(sheet).getByRole('button', { name: 'Add postcode' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(screen.queryByText(words)).toBeNull();
+  });
+
   it('asks nobody but the holder of the owner key for a postcode', async () => {
     const asked = testView();
     asked.link = { ...asked.link, inputNeeded: { carrier: 'dhl', field: 'dpdPostcode' } };
@@ -1009,6 +1034,13 @@ describe('ParcelPage actions', () => {
     expect(await screen.findByRole('heading', { level: 1 })).toBeVisible();
     expect(screen.queryByText('DHL has this parcel. Add the delivery postcode to track it.')).toBeNull();
     expect(screen.queryByRole('button', { name: 'Add postcode' })).toBeNull();
+    const suggested = testView({ parcel: { carrier: 'unknown', trackingNumber: '99999990' } });
+    suggested.link = { ...suggested.link, inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } };
+    mocks.read.mockResolvedValue(suggested);
+    cleanup();
+    open();
+    expect(await screen.findByRole('heading', { level: 1 })).toBeVisible();
+    expect(screen.queryByText('Mondial Relay may have this parcel. Add the delivery postcode to track it.')).toBeNull();
   });
 });
 

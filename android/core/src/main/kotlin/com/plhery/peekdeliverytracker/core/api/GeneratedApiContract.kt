@@ -4854,6 +4854,7 @@ data class ParcelLink(
     val alerts: ParcelAlerts? = null,
     val giftWords: GiftWords? = null,
     val inputNeeded: ParcelLinkInputNeeded? = null,
+    val inputSuggested: ParcelLinkInputSuggested? = null,
 )
 
 @Serializable
@@ -5479,6 +5480,12 @@ data class ParcelLinkInputNeeded(
 )
 
 @Serializable
+data class ParcelLinkInputSuggested(
+    val carrier: CarrierId,
+    val field: ParcelLinkInputSuggestedField,
+)
+
+@Serializable
 data class PublicPackageCarrierData(
     @SerialName("active_tracking_carrier") val activeTrackingCarrier: CarrierId? = null,
     @SerialName("active_tracking_number") val activeTrackingNumber: String? = null,
@@ -5595,6 +5602,16 @@ enum class ParcelLinkInputNeededField(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): ParcelLinkInputNeededField? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class ParcelLinkInputSuggestedField(val rawValue: String) {
+    @SerialName("dpdPostcode") DpdPostcode("dpdPostcode"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): ParcelLinkInputSuggestedField? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

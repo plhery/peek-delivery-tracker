@@ -142,6 +142,38 @@ begin
   if public.claim_parcel_link_postcode(first#>>'{link,id}', key_a, 'dhl', 5) <> '{"asked": false}' then
     raise exception 'A delivered lookup took a try';
   end if;
+
+  -- A carrier the number of a lookup filed under no carrier points to, which needs the postcode, may be given it.
+  first := public.create_one_off_parcel('99999990', 'unknown', null, null, key_a);
+  update public.packages
+  set carrier_data = '{"routing":{"input_suggested":{"carrier":"mondial-relay","field":"dpdPostcode"}}}'
+  where id = (first#>>'{package,id}')::uuid;
+  if public.claim_parcel_link_postcode(first#>>'{link,id}', key_a, 'gls-de', 5) <> '{"asked": false}' then
+    raise exception 'A try was taken for a carrier nothing suggested';
+  end if;
+  claim := public.claim_parcel_link_postcode(first#>>'{link,id}', key_a, 'mondial-relay', 5);
+  if claim->>'attempt' is null or claim->>'tracking_number' <> '99999990' then
+    raise exception 'The suggested carrier took no try: %', claim;
+  end if;
+  filed := public.file_parcel_link_postcode(first#>>'{link,id}', key_a, 'mondial-relay', '75001', 'FR');
+  if filed->'created' <> 'true' or filed#>>'{package,carrier}' <> 'mondial-relay' or filed#>>'{package,dpd_postcode}' <> '75001' then
+    raise exception 'A lookup was not filed under the suggested carrier: %', filed;
+  end if;
+  -- Only while the lookup is filed under no carrier, and never past a carrier that asks.
+  second := public.create_one_off_parcel('99999991', 'colisweb', null, null, key_a);
+  update public.packages
+  set carrier_data = '{"routing":{"input_suggested":{"carrier":"mondial-relay","field":"dpdPostcode"}}}'
+  where id = (second#>>'{package,id}')::uuid;
+  if public.claim_parcel_link_postcode(second#>>'{link,id}', key_a, 'mondial-relay', 5) <> '{"asked": false}' then
+    raise exception 'A lookup filed under a carrier took a try for a suggested one';
+  end if;
+  second := public.create_one_off_parcel('99999992', 'unknown', null, null, key_a);
+  update public.packages
+  set carrier_data = '{"routing":{"input_needed":{"carrier":"dhl","field":"dpdPostcode"},"input_suggested":{"carrier":"mondial-relay","field":"dpdPostcode"}}}'
+  where id = (second#>>'{package,id}')::uuid;
+  if public.claim_parcel_link_postcode(second#>>'{link,id}', key_a, 'mondial-relay', 5) <> '{"asked": false}' then
+    raise exception 'A suggested carrier took a try while another asks';
+  end if;
 end;
 $$;
 rollback;

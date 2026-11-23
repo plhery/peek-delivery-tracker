@@ -844,8 +844,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   forgets the previous parcel once no link points to it. One it refuses, or finds no parcel
   with, shows nothing of the parcel and counts against the link: five a day, in `parcel_link_postcode_attempts`.
   A check that could not ask the carrier is not counted, and a carrier that blocks after
-  wrong postcodes answers with its wait. The Android app asks for it on the parcel's page and sends it from its
-  carrier editor; the iPhone app does not show the request yet.
+  wrong postcodes answers with its wait. The Android and iPhone apps ask for it on the parcel's page and send it from
+  their carrier editor.
   The owner of a lookup changes its carrier, or the inputs that carrier takes, on the same link
   ([`carrier/route.ts`](../app/api/public/parcels/[linkId]/carrier/route.ts)): the link keeps its
   sharing, gift, alerts and shown number and moves to the one-off parcel of its number with those
@@ -860,7 +860,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   cannot ask without it (Mondial Relay's 8-digit shipments, and Paack's SHEIN numbers, whose
   postcode is optional because other sources are asked without it): `routing.input_suggested`, set
   at each check. The prompt says the carrier may have the parcel; the owner adding the postcode
-  files it there. The front door offers the same carrier when detection names it
+  files it there. A lookup without an account shows it to the owner as `inputSuggested`, while
+  no carrier asks for an input, and its postcode goes to the link as a requested one does: the
+  carrier is asked first and a refusal counts against the link. The front door offers the same carrier when detection names it
   (`inputSuggested`, for an unknown answer without tracking history): the postcode field is
   optional, a paste stops once to show it, and the lookup names that carrier only with the
   postcode, sent in the request body like any other. The add sheets on the website and in the

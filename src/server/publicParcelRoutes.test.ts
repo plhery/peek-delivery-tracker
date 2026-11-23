@@ -875,6 +875,25 @@ describe('the postcode another carrier asks for', () => {
     }
   });
 
+  it('tells the owner of a lookup filed under no carrier, and no one else, which carrier its number may be with', async () => {
+    const suggesting = { carrier_data: { routing: { input_suggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } } } };
+    find({ owner: true }, suggesting);
+    const link = (await (await open(linkId, ownerKey)).json()).link;
+    expect(link.inputSuggested).toEqual({ carrier: 'mondial-relay', field: 'dpdPostcode' });
+    expect(link).not.toHaveProperty('inputNeeded');
+    find({}, suggesting);
+    const viewer = await (await open()).text();
+    expect(viewer).not.toContain('inputSuggested');
+    expect(viewer).not.toContain('mondial-relay');
+    // Not once the lookup is filed under a carrier, nor once it is over, nor past a carrier that asks, nor for another input.
+    for (const parcel of [{ ...suggesting, carrier: 'colisweb' }, { ...suggesting, current_stage: 'delivered' },
+      { carrier_data: { routing: { ...asking, ...suggesting.carrier_data.routing } } },
+      { carrier_data: { routing: { input_suggested: { carrier: 'mondial-relay', field: 'trackingUrl' } } } }]) {
+      find({ owner: true }, parcel);
+      expect((await (await open(linkId, ownerKey)).json()).link).not.toHaveProperty('inputSuggested');
+    }
+  });
+
   it('asks the carrier first, then files the lookup under it and checks it at once', async () => {
     const claimed = claim();
     const checked = check({ outcome: 'accepted' });

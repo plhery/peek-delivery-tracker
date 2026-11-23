@@ -293,6 +293,9 @@ describe('the API backend', () => {
     expect(parcelLinkView(asked).link.inputNeeded).toEqual({ carrier: 'dhl', field: 'dpdPostcode' });
     // Only the owner is asked.
     expect(parcelLinkView({ ...asked, link: { ...asked.link, role: 'viewer' } }).link.inputNeeded).toBeUndefined();
+    const suggested = { ...owner, link: { ...owner.link, inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } } } as ApiPublicParcelResponse;
+    expect(parcelLinkView(suggested).link.inputSuggested).toEqual({ carrier: 'mondial-relay', field: 'dpdPostcode' });
+    expect(parcelLinkView({ ...suggested, link: { ...suggested.link, role: 'viewer' } }).link.inputSuggested).toBeUndefined();
     const { links, request } = api(
       json(owner),
       json({ error: 'The carrier does not have the parcel for this postcode' }, 422),

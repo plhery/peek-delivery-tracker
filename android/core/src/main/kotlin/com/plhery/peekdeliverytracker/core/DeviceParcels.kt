@@ -261,11 +261,12 @@ class DeviceParcelClient(
      */
     val check: (suspend (linkId: String, key: String) -> PublicParcelResponse?)? = null,
     /**
-     * Gives the delivery postcode the owner's link asks for (`link.inputNeeded`), which the service tries with that
-     * carrier before it keeps anything: the link as it then stands, its parcel filed under the carrier, or as it stands
-     * already when nothing is asked any more; null when the service has no such link for the key (its 404). A postcode
-     * the carrier refuses, too many tried or a carrier that can't be asked throw [DevicePostcodeRefusal]. None for a
-     * client that can't, which moves the link to the carrier instead.
+     * Gives the delivery postcode the owner's link asks for (`link.inputNeeded`), or its suggested carrier may have the
+     * parcel with (`link.inputSuggested`), which the service tries with that carrier before it keeps anything: the link
+     * as it then stands, its parcel filed under the carrier, or as it stands already when nothing is asked any more;
+     * null when the service has no such link for the key (its 404). A postcode the carrier refuses, too many tried or a
+     * carrier that can't be asked throw [DevicePostcodeRefusal]. None for a client that can't, which moves the link to
+     * the carrier instead.
      */
     val addPostcode: (suspend (linkId: String, key: String, ParcelLinkPostcodeRequest) -> PublicParcelResponse?)? = null,
 ) {
@@ -1055,7 +1056,7 @@ class DeviceParcels(
         val move = client?.changeCarrier
         val postcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty
         val give = client?.addPostcode?.takeIf {
-            postcode != null && entry.parcel.inputNeeded?.carrier == carrier &&
+            postcode != null && (entry.parcel.inputNeeded?.carrier == carrier || entry.parcel.inputSuggestedPrompt?.carrier == carrier) &&
                 trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty == null && phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty == null
         }
         if (key != null && (move != null || give != null)) {

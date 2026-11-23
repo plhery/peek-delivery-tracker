@@ -114,8 +114,9 @@ export interface ParcelLinksClient {
   /** Changes what the link shows, with its owner key. Answers the parcel as the owner now sees it. */
   updateParcelLink(id: string, key: string, changes: ParcelLinkChanges, signal?: AbortSignal): Promise<ParcelLinkView>;
   /**
-   * Adds the delivery postcode the link's `inputNeeded` asks for, with its owner key. Answers the parcel filed under
-   * that carrier, or as it now stands when nothing is asked any more; fails as `refused` when the carrier refuses it.
+   * Adds the delivery postcode the link's `inputNeeded` asks for, or its `inputSuggested` carrier may have the parcel
+   * with, with its owner key. Answers the parcel filed under that carrier, or as it now stands when nothing is asked any
+   * more; fails as `refused` when the carrier refuses it.
    */
   addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, country?: string, signal?: AbortSignal): Promise<ParcelLinkView>;
   /**
@@ -240,9 +241,12 @@ export function parcelLinkView(response: ApiPublicParcelResponse): ParcelLinkVie
       canKeep: link.canKeep === true,
       gift: link.gift === true,
       ...(link.giftWords ? { giftWords: link.giftWords } : {}),
-      // The postcode another carrier asks for, which only the owner can add.
+      // The postcode another carrier asks for, or the one a carrier the number points to may have the parcel with,
+      // which only the owner can add.
       ...(link.role === 'owner' && link.inputNeeded?.field === 'dpdPostcode' && typeof link.inputNeeded.carrier === 'string'
-        ? { inputNeeded: { carrier: link.inputNeeded.carrier, field: 'dpdPostcode' as const } } : {}),
+        ? { inputNeeded: { carrier: link.inputNeeded.carrier, field: 'dpdPostcode' as const } }
+        : link.role === 'owner' && link.inputSuggested?.field === 'dpdPostcode' && typeof link.inputSuggested.carrier === 'string'
+          ? { inputSuggested: { carrier: link.inputSuggested.carrier, field: 'dpdPostcode' as const } } : {}),
       // Only a link that says it was stopped is: an answer from before sharing could be stopped is a shared one.
       shared: link.shared !== false,
       // A browser can only subscribe with the server's key. Whether the server emails accounts is said only when it does.

@@ -502,16 +502,23 @@ function isoTime(value: unknown): string | null {
 /**
  * The delivery postcode another carrier holding a lookup's parcel asks for, or
  * its own carrier when the lookup has none, which its owner may add
- * (`routing.input_needed`). The carrier's name and the input it needs, nothing
- * it told about the parcel.
+ * (`routing.input_needed`). Otherwise, for a lookup filed under no carrier, the
+ * carrier its number points to that can't be asked without the postcode
+ * (`routing.input_suggested`, trackingRouting.ts's suggestedInput), which may
+ * have the parcel. The carrier's name and the input, nothing it told about the parcel.
  */
-function postcodeAsked(row: JsonObject): Pick<ApiParcelLink, 'inputNeeded'> {
+function postcodeAsked(row: JsonObject): Pick<ApiParcelLink, 'inputNeeded' | 'inputSuggested'> {
   const routing = isRecord(row.carrier_data) && isRecord(row.carrier_data.routing) ? row.carrier_data.routing : {};
+  if (row.one_off !== true || row.current_stage === 'delivered' || row.current_stage === 'returned') return {};
   const needed = routing.input_needed;
-  return row.one_off === true && isRecord(needed) && needed.field === 'dpdPostcode' && typeof needed.carrier === 'string'
-    && (needed.carrier !== row.carrier || !String(row.dpd_postcode ?? '').trim())
-    && row.current_stage !== 'delivered' && row.current_stage !== 'returned'
-    ? { inputNeeded: { carrier: needed.carrier as ApiCarrierId, field: 'dpdPostcode' } } : {};
+  if (isRecord(needed) && needed.field === 'dpdPostcode' && typeof needed.carrier === 'string'
+    && (needed.carrier !== row.carrier || !String(row.dpd_postcode ?? '').trim())) {
+    return { inputNeeded: { carrier: needed.carrier as ApiCarrierId, field: 'dpdPostcode' } };
+  }
+  const suggested = routing.input_suggested;
+  return row.carrier === 'unknown' && !isRecord(needed) && isRecord(suggested) && suggested.field === 'dpdPostcode'
+    && typeof suggested.carrier === 'string'
+    ? { inputSuggested: { carrier: suggested.carrier as ApiCarrierId, field: 'dpdPostcode' } } : {};
 }
 
 /** Whether the link is a gift still on its way for this caller: everyone but the owner, until the parcel is delivered. */

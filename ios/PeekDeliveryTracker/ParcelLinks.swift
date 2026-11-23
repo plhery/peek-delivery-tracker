@@ -55,6 +55,27 @@ extension Parcel {
             newsAt: package.newsAt
         )
     }
+
+    /// The parcel behind a link this iPhone follows, with the delivery postcode the link asks its owner for
+    /// (`link.inputNeeded`, never a viewer's): another carrier holds the parcel, or its own can't find it without one.
+    /// Otherwise with the carrier its number points to that may have it and can't be asked without the postcode
+    /// (`link.inputSuggested`, the owner's too). The parcel's page asks for it as an account's does, and
+    /// `DeviceParcels.changeCarrier` gives it.
+    init(shared package: PublicPackage, link: ParcelLink) {
+        self.init(shared: package)
+        guard link.role == .owner else { return }
+        var routing = carrierData?.routing ?? CarrierDataRouting()
+        if let asked = link.inputNeeded {
+            let field: CarrierInputNeededField = switch asked.field { case .dpdPostcode: .dpdPostcode }
+            routing.inputNeeded = CarrierInputNeeded(carrier: asked.carrier, field: field)
+        } else if let suggested = link.inputSuggested {
+            let field: CarrierInputSuggestedField = switch suggested.field { case .dpdPostcode: .dpdPostcode }
+            routing.inputSuggested = CarrierInputSuggested(carrier: suggested.carrier, field: field)
+        } else {
+            return
+        }
+        carrierData?.routing = routing
+    }
 }
 
 extension ParcelNumberHint {

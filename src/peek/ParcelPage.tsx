@@ -45,7 +45,7 @@ import { MaintenanceStrip, maintenanceText } from '../components/MaintenanceStri
 import { useNow, useOffline, useWideLayout } from './parcel/hooks';
 import { AccountRow, AddToDeliveries, AlreadyFollowed, KeepSheet, PassportTeaser, SharedWithYou } from './parcel/Keep';
 import { OtherParcels } from './parcel/OtherParcels';
-import { PostcodeAsked, PostcodeSheet } from './parcel/Postcode';
+import { PostcodeAsked, PostcodeSheet, type PostcodeAsk } from './parcel/Postcode';
 import { RouteMap } from './parcel/RouteMap';
 import { SampleInvitation, SampleNote } from './parcel/Sample';
 import { copyText, shareParcelLink } from './parcel/share';
@@ -455,9 +455,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     announceNotice('app.restoredAnnouncement', { name: shownName() });
   }
 
-  // The postcode another carrier holding the parcel asks for, or its own: the owner's to add, with the key.
-  const asked = key ? link.inputNeeded ?? null : null;
-  const ownAsks = asked?.carrier === parcel.carrier;
+  // The postcode another carrier holding the parcel asks for, or its own, or the one a carrier the number points to may
+  // have it with: the owner's to add, with the key.
+  const asked = key ? link.inputNeeded ?? link.inputSuggested ?? null : null;
+  const ask: PostcodeAsk = !link.inputNeeded ? 'suggested' : asked?.carrier === parcel.carrier ? 'own' : 'other';
   const [addingPostcode, setAddingPostcode] = useState(false);
 
   const final = !!stage && isFinal(stage);
@@ -578,7 +579,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         <p className="sr-only" role="status">{checked}</p>
         {wrapped && <GiftSurprise />}
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}
-        {asked && <PostcodeAsked carrier={asked.carrier} own={ownAsks} onAdd={() => setAddingPostcode(true)} />}
+        {asked && <PostcodeAsked carrier={asked.carrier} ask={ask} onAdd={() => setAddingPostcode(true)} />}
         {owner && link.shared === false && <p className="peekp-shared"><Glyph name="info" />{t('share.stopped.owner')}</p>}
         {/* The likely carrier's words say Peek keeps asking it already; no carrier will answer for an order number. */}
         {!carrierKnown && !placeholder && !likely && !shape && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
@@ -641,7 +642,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       onSignIn={session.account === 'visitor' && !sample ? signInFor : undefined} everyParcel={session.account === 'visitor' && !sample}
       onClose={() => setAlerting(false)} />}
     {addingPostcode && asked && key && <PostcodeSheet linkId={linkId} ownerKey={key} carrier={asked.carrier}
-      trackingNumber={parcel.trackingNumber} destination={parcel.destinationCountry} own={ownAsks} onAdded={adopt}
+      trackingNumber={parcel.trackingNumber} destination={parcel.destinationCountry} ask={ask} onAdded={adopt}
       onClose={() => setAddingPostcode(false)} />}
     {forgetting && <ForgetDialog arrived={forgetting === 'arrived' ? { forgetLine } : undefined} onForget={forget} onCancel={() => setForgetting(false)} />}
     {mapOpen && route && <ParcelMapSheet route={route} stage={stage ?? undefined} brand={brand} onClose={() => setMapOpen(false)} />}

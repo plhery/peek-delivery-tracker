@@ -5,6 +5,8 @@ import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.ChangePackageCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResult
@@ -24,6 +26,8 @@ import com.plhery.peekdeliverytracker.core.api.ParcelLink
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputNeeded
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputNeededField
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputSuggested
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkPostcodeRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
@@ -603,6 +607,44 @@ class DeviceParcelTests {
         assertNull(parcel.inputNeededPrompt)
         assertEquals(true, storage.parcels.single().postcodeGiven)
         assertEquals(listOf(GivenPostcode(CarrierId.Dpd, "75002", "FR")), postcodes.entries)
+    }
+
+    /**
+     * The carrier a lookup's number points to that can't be asked without the postcode shows on the parcel, as an
+     * account's suggestion does; its postcode goes to the link (`POST …/postcode`), so the carrier is asked before
+     * anything moves. Another carrier moves the link as before, and a viewer is offered nothing.
+     */
+    @Test
+    fun theCarrierALinkSuggestsShowsOnTheParcelAndItsPostcodeGoesToTheLink() = runTest {
+        val id = UUID.randomUUID()
+        val filedId = UUID.randomUUID()
+        val storage = Memory()
+        val calls = Calls()
+        // Synthetic: eight digits, as Mondial Relay's shipment numbers, which it tracks only with the delivery postcode.
+        val number = "99999990"
+        val suggesting = { linkId: String ->
+            link(linkId).copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.MondialRelay, ParcelLinkInputSuggestedField.DpdPostcode))
+        }
+        val device = device(
+            client(
+                calls,
+                lookup = PublicLookupResponse(link = suggesting("22222222222A"), key = key, parcel = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null)),
+                postcode = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(filedId, number = number, carrier = CarrierId.MondialRelay)) },
+                move = { linkId, change -> PublicParcelResponse(link = suggesting(linkId), parcel = pkg(id, number = number, carrier = change.carrier)) },
+            ),
+            storage, this,
+        )
+        device.add(CreatePackageRequest(trackingNumber = number, label = ""))
+        assertEquals(CarrierInputSuggested(CarrierId.MondialRelay, CarrierInputSuggestedField.DpdPostcode), device.list().single().inputSuggestedPrompt)
+        assertNull(device.list().single().inputNeededPrompt)
+
+        val parcel = device.changeCarrier(id = id, carrier = CarrierId.MondialRelay, trackingUrl = null, dpdPostcode = "75001")
+
+        assertEquals(listOf("lookup $number -", "postcode 22222222222A k mondial-relay 75001 -"), calls.all)
+        assertEquals(CarrierId.MondialRelay, parcel.carrier)
+        assertNull(parcel.inputSuggestedPrompt)
+        val viewer = reader("22222222222B").copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.MondialRelay, ParcelLinkInputSuggestedField.DpdPostcode))
+        assertNull(Parcel(shared = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null), link = viewer).inputSuggestedPrompt)
     }
 
     /** Another carrier than the one that asks, or no postcode, moves the link as before; a viewer's link asks nothing. */

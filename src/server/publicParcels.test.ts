@@ -277,9 +277,9 @@ describe('what a link shows', () => {
       package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'unknown', sync_status: 'ok',
         created_at: '2026-10-02T08:00:00Z', carrier_data: {}, tracking_events: [] },
     }, alerts).link;
-    // A gift's words and the postcode another carrier asks for come only when there are some.
+    // A gift's words and the postcode a carrier asks for, or may have the parcel with, come only when there are some.
     expect(Object.keys(shown({ owner: true })).sort())
-      .toEqual(Object.keys(link.properties).filter((key) => !['giftWords', 'inputNeeded'].includes(key)).sort());
+      .toEqual(Object.keys(link.properties).filter((key) => !['giftWords', 'inputNeeded', 'inputSuggested'].includes(key)).sort());
     // Only the owner, who always reads the number, is told what viewers are shown.
     expect(shown({ owner: true, show_number: true })).toMatchObject({ showNumber: true, numberShown: true });
     expect(shown({ owner: true })).toMatchObject({ showNumber: false, numberShown: true });

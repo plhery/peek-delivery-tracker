@@ -71282,6 +71282,10 @@ export interface ApiParcelLink {
   "carrier": ApiCarrierId;
   "field": "dpdPostcode";
 };
+  "inputSuggested"?: {
+  "carrier": ApiCarrierId;
+  "field": "dpdPostcode";
+};
 }
 
 export interface ApiParcelNumberHint {

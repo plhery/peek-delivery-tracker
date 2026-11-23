@@ -524,6 +524,14 @@ final class Localizer: ObservableObject {
             }
         }
         if error is DeviceLookupsSpent { return text("peek.dailyLimit") }
+        if let refusal = error as? DevicePostcodeRefusal {
+            let carrier = ["carrier": CarrierCatalog.shared.info(for: refusal.carrier, language: language).displayName]
+            switch refusal {
+            case .refused: return text("link.postcode.refused", carrier)
+            case .tries(_, let until): return text("link.postcode.tries", ["time": clockTime(until)])
+            case .unreachable: return text("link.postcode.unreachable", carrier)
+            }
+        }
         if let down = error as? ServerDown { return maintenanceText(down.notice ?? .unannounced, readAt: nil) }
         if let error = error as? AuthenticationError {
             switch error {

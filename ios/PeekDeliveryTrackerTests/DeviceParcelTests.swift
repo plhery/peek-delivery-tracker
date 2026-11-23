@@ -85,8 +85,9 @@ final class DeviceParcelTests: XCTestCase {
                         alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on },
                         unalert: @escaping @Sendable (String) throws -> Void = { _ in },
                         forget: @escaping @Sendable (String) throws -> Void = { _ in },
-                        move: @escaping @Sendable (String) throws -> PublicPackage? = { _ in nil }) -> DeviceParcelClient {
-        DeviceParcelClient(
+                        move: @escaping @Sendable (String) throws -> PublicPackage? = { _ in nil },
+                        postcode: (@Sendable (String, ParcelLinkPostcodeRequest) throws -> PublicParcelResponse?)? = nil) -> DeviceParcelClient {
+        var client = DeviceParcelClient(
             lookup: { request in
                 calls.add("lookup \(request.trackingNumber) \(request.carrier?.rawValue ?? "-")")
                 calls.lookupCountry(request.lookupCountryHint)
@@ -136,6 +137,13 @@ final class DeviceParcelTests: XCTestCase {
             },
             removeAlert: { linkID, request in calls.add("unalert \(linkID) \(request.token)"); try unalert(linkID) }
         )
+        if let postcode {
+            client.addPostcode = { linkID, key, request in
+                calls.add("postcode \(linkID) \(key.prefix(1)) \(request.carrier.rawValue) \(request.postcode) \(request.postcodeCountry ?? "-")")
+                return try postcode(linkID, request)
+            }
+        }
+        return client
     }
 
     private func reader(_ id: String, canKeep: Bool = true) -> ParcelLink {
@@ -327,6 +335,87 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [true])
         XCTAssertEqual(storage.keys, ["22222222222A": key])
         XCTAssertEqual(memory.entries, [given(.dpd, "75002")])
+    }
+
+    /// The carrier a lookup's number points to that can't be asked without the postcode shows on the parcel, as an
+    /// account's suggestion does; its postcode goes to the link (`POST …/postcode`), so the carrier is asked before
+    /// anything moves. A viewer is offered nothing.
+    func testTheCarrierALinkSuggestsShowsOnTheParcelAndItsPostcodeGoesToTheLink() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let id = UUID(), filedID = UUID()
+        let calls = Calls()
+        // Synthetic: eight digits, as Mondial Relay's shipment numbers, which it tracks only with the delivery postcode.
+        let number = "99999990"
+        let suggested = ParcelLinkInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
+        var suggesting = link("22222222222A")
+        suggesting.inputSuggested = suggested
+        let memory = PostcodeMemory(defaults: defaults)
+        let filed = PublicParcelResponse(link: link("22222222222A"), package: package(filedID, number: number, carrier: .mondialRelay))
+        let device = DeviceParcels(client: client(
+            calls, lookup: PublicLookupResponse(link: suggesting, key: key, package: package(id, number: number, carrier: .unknown, stage: nil)),
+            postcode: { _, _ in filed }
+        ), storage: Memory(), postcodes: memory)
+        _ = try await device.add(CreatePackageRequest(trackingNumber: number, label: ""))
+        XCTAssertEqual(device.list().first?.inputSuggestedPrompt, CarrierInputSuggested(carrier: .mondialRelay, field: .dpdPostcode))
+        XCTAssertNil(device.list().first?.inputNeededPrompt)
+
+        let parcel = try await device.changeCarrier(id: id, carrier: .mondialRelay, trackingURL: nil, dpdPostcode: " 75001 ",
+                                                    dpdPostcodeCountry: "FR")
+
+        XCTAssertEqual(calls.all, ["lookup \(number) -", "postcode 22222222222A k mondial-relay 75001 FR"])
+        XCTAssertEqual(parcel.carrier, .mondialRelay)
+        XCTAssertNil(parcel.inputSuggestedPrompt)
+        XCTAssertEqual(device.postcodeGiven(id: filedID), true)
+        XCTAssertEqual(memory.entries, [given(.mondialRelay, "75001", "FR")])
+        var viewer = reader("22222222222B")
+        viewer.inputSuggested = suggested
+        XCTAssertNil(Parcel(shared: package(id, number: number, carrier: .unknown, stage: nil), link: viewer).inputSuggestedPrompt)
+    }
+
+    /// The postcode a carrier asks the owner's link for goes to the link; one the carrier refuses changes nothing and
+    /// says so. Another carrier, or that carrier with a link, moves the link as before.
+    func testThePostcodeALinkAsksForGoesToTheLinkAndARefusedOneChangesNothing() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let id = UUID()
+        let calls = Calls()
+        var asking = link("22222222222A")
+        asking.inputNeeded = ParcelLinkInputNeeded(carrier: .dhl, field: .dpdPostcode)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Moon lamp", archivedAt: nil,
+                                        parcel: Parcel(shared: package(id, carrier: .unknown, stage: nil), link: asking), checkedAt: Date())]
+        let moved = package(id, carrier: .ups)
+        let device = DeviceParcels(client: client(
+            calls, move: { _ in moved },
+            postcode: { _, request in throw DevicePostcodeRefusal.refused(request.carrier) }
+        ), storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+        XCTAssertEqual(device.list().first?.inputNeededPrompt, CarrierInputNeeded(carrier: .dhl, field: .dpdPostcode))
+
+        do {
+            _ = try await device.changeCarrier(id: id, carrier: .dhl, trackingURL: nil, dpdPostcode: "99999")
+            XCTFail("A refused postcode filed the parcel")
+        } catch {
+            XCTAssertEqual(error as? DevicePostcodeRefusal, .refused(.dhl))
+            XCTAssertEqual(Localizer().errorMessage(error),
+                           Localizer().text("link.postcode.refused", ["carrier": CarrierCatalog.shared.info(for: .dhl, language: Localizer().language).displayName]))
+        }
+        XCTAssertEqual(device.list().map(\.carrier), [.unknown])
+        XCTAssertEqual(storage.parcels.map(\.label), ["Moon lamp"])
+
+        _ = try await device.changeCarrier(id: id, carrier: .ups, trackingURL: nil, dpdPostcode: "99999")
+        XCTAssertEqual(calls.all, ["postcode 22222222222A k dhl 99999 -", "carrier 22222222222A k ups"])
+        XCTAssertEqual(device.list().map(\.carrier), [.ups])
+    }
+
+    func testAPostcodeRefusalSaysWhenToTryAgainOrThatTheCarrierCouldNotBeAsked() {
+        let localizer = Localizer()
+        let until = Date(timeIntervalSince1970: 1_800_000_000)
+        XCTAssertEqual(localizer.errorMessage(DevicePostcodeRefusal.tries(.mondialRelay, until: until)),
+                       localizer.text("link.postcode.tries", ["time": localizer.clockTime(until)]))
+        XCTAssertEqual(localizer.errorMessage(DevicePostcodeRefusal.unreachable(.mondialRelay)),
+                       localizer.text("link.postcode.unreachable", ["carrier": "Mondial Relay"]))
     }
 
     func testTheSameDetailsGivenAgainKeepWhatTheDeviceKnowsOfTheParcel() async throws {

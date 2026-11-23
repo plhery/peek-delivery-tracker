@@ -95,7 +95,7 @@
   { "id": "helthjem", "catalog": "helthjem", "name": "Helthjem", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "matkahuolto", "catalog": "matkahuolto", "name": "Matkahuolto", "languages": ["en", "fi", "sv", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ukrposhta", "catalog": "ukrposhta", "name": "Ukrposhta", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "acs-courier", "catalog": "acs-courier", "name": "ACS Courier", "languages": ["en", "el"] },
+  { "id": "acs-courier", "catalog": "acs-courier", "name": "ACS Courier", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "elta", "catalog": "elta", "name": "ELTA Hellenic Post", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "geniki-taxydromiki", "catalog": "geniki-taxydromiki", "name": "Geniki Taxydromiki", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cyprus-post", "catalog": "cyprus-post", "name": "Cyprus Post", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },

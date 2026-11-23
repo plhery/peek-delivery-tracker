@@ -2708,6 +2708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "acs-courier-sendungsverfolgung",
+      "title": "ACS Courier Sendungsverfolgung: Nummern, Status, Kontakt",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "elta-hellenic-post-sendungsverfolgung",
@@ -4508,6 +4516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Ukrposhta\u00a0: numéros, statuts et retrait en bureau",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "suivi-acs-courier",
+      "title": "Suivi ACS Courier\u00a0: numéros, statuts et contacts",
+      "name": "ACS Courier",
+      "color": "#e42229"
     },
     {
       "id": "elta",
@@ -6336,6 +6352,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "tracciamento-acs-courier",
+      "title": "Tracciamento ACS Courier: numeri, stati e contatti",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "tracciamento-elta-hellenic-post",
@@ -8114,6 +8138,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe0c"
     },
     {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "seguimiento-acs-courier",
+      "title": "Seguimiento ACS Courier: números, estados y contacto",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
+    {
       "id": "elta",
       "catalog": "elta",
       "slug": "seguimiento-elta-hellenic-post",
@@ -9882,6 +9914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Ukrposhta: números, estados e levantamento",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "seguimento-acs-courier",
+      "title": "Seguimento ACS Courier: números, estados e contactos",
+      "name": "ACS Courier",
+      "color": "#e42229"
     },
     {
       "id": "elta",
@@ -11686,6 +11726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Ukrposhta: numery, statusy i odbiór w placówce",
       "name": "Ukrposhta",
       "color": "#ffbe0c"
+    },
+    {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "sledzenie-acs-courier",
+      "title": "Śledzenie ACS Courier: numery, statusy i kontakt",
+      "name": "ACS Courier",
+      "color": "#e42229"
     },
     {
       "id": "elta",

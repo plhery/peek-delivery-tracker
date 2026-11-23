@@ -2844,6 +2844,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "lso-sendungsverfolgung",
+      "title": "LSO Sendungsverfolgung: Nummern, Status und Lieferung",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-sendungsverfolgung",
@@ -4590,6 +4598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "suivi-lso",
+      "title": "Suivi LSO\u00a0: numéros d’envoi, statuts et livraisons",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-suivi",
@@ -6304,6 +6320,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "tracciamento-lso",
+      "title": "Tracciamento LSO: numeri airbill, stati e consegne",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-tracciamento",
@@ -8002,6 +8026,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cc2027"
     },
     {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "seguimiento-lso",
+      "title": "Seguimiento LSO: números de envío, estados y ayuda",
+      "name": "LSO",
+      "color": "#0047ba"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-rastreo",
@@ -9690,6 +9722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento OnTrac: números, estados e entregas falhadas",
       "name": "OnTrac",
       "color": "#cc2027"
+    },
+    {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "seguimento-lso",
+      "title": "Seguimento LSO: números airbill, estados e entregas",
+      "name": "LSO",
+      "color": "#0047ba"
     },
     {
       "id": "gofo",
@@ -11414,6 +11454,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek OnTrac: numery, statusy i doręczenia",
       "name": "OnTrac",
       "color": "#cc2027"
+    },
+    {
+      "id": "lso",
+      "catalog": "lso",
+      "slug": "sledzenie-lso",
+      "title": "Śledzenie LSO: numery airbill, statusy i doręczenia",
+      "name": "LSO",
+      "color": "#0047ba"
     },
     {
       "id": "gofo",

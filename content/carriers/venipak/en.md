@@ -69,7 +69,7 @@ The shop holds the contract with Venipak, so a lost, damaged or wrong item goes 
 
 ## Venipak customer service and contact number
 
-Each country has its own customer service.
+Each country has its own customer service, with hours on local Baltic time:
 
 - **Lithuania:** +370 700 55221 (charged at your plan's rates), Monday to Friday 8 am to 6 pm; helpdesk.lt@venipak.com; chat and a "Send a message" form on [Venipak Lithuania's contacts page](https://venipak.com/lt/en/contacts/).
 - **Latvia:** +371 6601 6601, Monday to Friday 8 am to 5 pm; helpdesk.lv@venipak.com; form on [Venipak Latvia's contacts page](https://venipak.com/lv/en/contacts/).

@@ -7754,6 +7754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "es": [
     {
+      "id": "quickpac",
+      "catalog": "quickpac",
+      "slug": "seguimiento-quickpac",
+      "title": "Seguimiento Quickpac: número de 18 dígitos y contacto",
+      "name": "Quickpac",
+      "color": "#ed1c24"
+    },
+    {
       "id": "colis-prive",
       "catalog": "colis-prive",
       "slug": "seguimiento-colis-prive",
@@ -9643,6 +9651,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "pt": [
+    {
+      "id": "quickpac",
+      "catalog": "quickpac",
+      "slug": "seguimento-quickpac",
+      "title": "Seguimento Quickpac: número de 18 dígitos e contacto",
+      "name": "Quickpac",
+      "color": "#ed1c24"
+    },
     {
       "id": "colis-prive",
       "catalog": "colis-prive",
@@ -11543,6 +11559,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "pl": [
+    {
+      "id": "quickpac",
+      "catalog": "quickpac",
+      "slug": "sledzenie-quickpac",
+      "title": "Śledzenie Quickpac: 18-cyfrowy numer, statusy i kontakt",
+      "name": "Quickpac",
+      "color": "#ed1c24"
+    },
     {
       "id": "colis-prive",
       "catalog": "colis-prive",

@@ -12,19 +12,19 @@ Cyprus Post (Κυπριακά Ταχυδρομεία), the Department of Postal 
 
 Cyprus Post's tracker takes the 13-character numbers of the Universal Postal Union's S10 standard, which posts give to registered items, EMS items, parcels and tracked letters: [two letters, nine digits and two letters](guide:tracking-number-formats).
 
-:::anatomy RR 000000005 CY
+:::anatomy RR 482917367 CY
 - RR | Service indicator: the first letter says what kind of item it is
-- 000000005 | Eight-digit serial number, then a check digit
+- 482917367 | Eight-digit serial number, then a check digit
 - CY | Country code: CY for a number issued under Cyprus's authority
 :::
 
 | First letter (invented examples) | What it is |
 | --- | --- |
-| `RR000000005CY` | R: registered item |
-| `CP000000005CY` | C: parcel |
-| `EE000000005CY` | E: EMS item |
-| `LA000000005CY` | L: tracked letter |
-| `UA000000005CY` | U: letter-post item with goods, not tracked for the customer |
+| `RR482917367CY` | R: registered item |
+| `CP482917367CY` | C: parcel |
+| `EE482917367CY` | E: EMS item |
+| `LA482917367CY` | L: tracked letter |
+| `UA482917367CY` | U: letter-post item with goods, not tracked for the customer |
 
 An item posted abroad keeps the number its own post gave it, ending in that country's code (`…GB`, `…FR`, `…GR`), and Cyprus Post's tracker takes it too, with the foreign post's scans. `There is no information for this item` means the tracker doesn't have the number: check it with the sender.
 
@@ -63,7 +63,7 @@ For a postal number ending `CY` with a valid check digit, [Peek](/) asks Cyprus 
 
 For an item posted abroad, Peek first asks the post that issued the number where it can, such as [ELTA](carrier:elta) for `…GR`, or tracking services. Cyprus Post's tracker takes such numbers too: pick "Cyprus Post" with "Change". Peek tries Cyprus Post by itself when the post abroad says the item is going to Cyprus or, if it names no destination, when you add it from Cyprus, and switches once Cyprus Post has scans as recent as the post abroad's. Peek asks Cyprus Post only about 13-character numbers. Not sure of the carrier? Paste the number anyway: Peek follows more than 4,500 carriers.
 
-Peek shows Cyprus Post's statuses as written, the office or facility and country of each scan on a map, the delivery time and the post office where an item waits or was collected. Cypriot scans keep their exact time, and a foreign post's are read on its country's clock; where a country has several time zones, Peek works the zone out from the place named, which can put the hour off. Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day the item goes out with the postman, while Cyprus Post's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows no expected delivery or weight, and drops the Extra Information, next office, postcodes and who signed: for why an item wasn't delivered, see the tracker on cypruspost.post.
+Peek shows Cyprus Post's statuses as written, the office or facility and country of each scan on a map, the delivery time and the post office where an item waits or was collected. Cypriot scans keep their exact time, and a foreign post's are read on its country's clock; where a country has several time zones, Peek works the zone out from the place named, which can put the hour off. When you have the item open in Peek, or on its delivery day with notifications on, Peek asks Cyprus Post directly up to every 10 minutes, or every 2 from 6 a.m. Cyprus time on the day the item goes out with the postman, while Cyprus Post's own tracker answers, and can notify you when the status changes. After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. After four days without a scan on an item at "Label created", "Received by carrier" or "In transit", Peek shows the last scan's date ("No tracking update since …") with the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Cyprus Post." and a "Get help from Cyprus Post" link. It shows no expected delivery or weight, and drops the Extra Information, next office, postcodes and who signed: for why an item wasn't delivered, see the tracker on cypruspost.post.
 
 ## Questions about Cyprus Post tracking
 

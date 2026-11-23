@@ -14,10 +14,10 @@ Peek knows two shapes for SPX Express Singapore. With invented digits:
 
 | Number (invented) | What it is |
 | --- | --- |
-| `SPXSG000000000000` | SPXSG, 11 digits and one more digit or letter (17 characters): SPX's own number for the parcel. Peek names SPX Express Singapore at once. |
-| `SG0000000000000` | SG, 12 digits and a final digit or letter (15 characters): the Shopee number that SPX's tracker pairs with the parcel. Peek can't name SPX from this shape alone (see below). |
-| `SPXSG0000000000` | SPXSG and only 10 digits: Peek doesn't recognise it. Check for a missing digit. |
-| `RA000000005SG` | Two letters, nine digits and SG at the end: a [Singapore Post](carrier:singapore-post) number, not SPX's. |
+| `SPXSG48291736482K` | SPXSG, 11 digits and one more digit or letter (17 characters): SPX's own number for the parcel. Peek names SPX Express Singapore at once. |
+| `SG482917364829K` | SG, 12 digits and a final digit or letter (15 characters): the Shopee number that SPX's tracker pairs with the parcel. Peek can't name SPX from this shape alone (see below). |
+| `SPXSG4829173648` | SPXSG and only 10 digits: Peek doesn't recognise it. Check for a missing digit. |
+| `RA482917367SG` | Two letters, nine digits and SG at the end: a [Singapore Post](carrier:singapore-post) number, not SPX's. |
 
 Spaces and lower case don't matter when you paste a number into Peek.
 
@@ -58,7 +58,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 - **GST at import.** If the seller is not GST-registered and the shipment's total CIF value (cost, insurance and freight) is over S$400, GST is collected when the goods enter Singapore. At S$400 or less, no GST is charged at import, unless the goods are liquor or tobacco.
 - **Charged twice?** If you paid GST at checkout and are asked again at import, pay the import GST to get your goods. Then ask the seller for a refund, with proof that you paid GST.
 
-**Held at customs.** The Immigration & Checkpoints Authority (ICA) can hold a courier parcel with dutiable, controlled or prohibited goods, or one worth over S$400 (total CIF value) with no invoice when it arrived. ICA then gives the courier a warehouse deposit receipt, and the courier should tell you what to do next.
+**Held at customs.** The Immigration & Checkpoints Authority (ICA) can hold a courier parcel with dutiable, controlled or prohibited goods, or one worth over S$400 (total CIF value) with no invoice when it arrived. ICA then gives the courier a warehouse deposit receipt: to ask about the parcel, get the shipment details and that receipt from the courier and share them with the authority the receipt names.
 
 **Scams.** Singapore Customs says it doesn't ask for GST payments or personal details by SMS, email or messaging apps. See [delivery scam texts](guide:delivery-scam-texts) and [parcels held at customs](guide:customs).
 
@@ -68,7 +68,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 
 **Stuck on `[China]Sender is preparing to ship your parcel`.** The seller hasn't shipped it yet. Ask the seller when it will.
 
-**No update for days.** Parcels often go quiet on long flights, at customs or over a weekend. When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and keeps asking SPX. After three weeks with nothing new, it suggests asking the seller. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** Parcels often go quiet on long flights, at customs or over a weekend. When a parcel at "Label created", "Received by carrier" or "In transit" has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct") and a "Get help from SPX Express Singapore" link, and keeps asking SPX. After three weeks with nothing new, it suggests asking the seller. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Delivered, but nothing came.** Look around your door and ask your household and neighbours. Then contact the seller, or Shopee. See [delivered but not received](guide:delivered-not-received).
 
@@ -76,7 +76,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 
 ## SPX Express Singapore customer service and contact
 
-As of 1 November 2026, Peek couldn't read SPX Express Singapore's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
+Peek couldn't read SPX Express Singapore's website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
 
 For a Shopee order, ask through Shopee. For an order from another shop, ask that shop first: it booked the delivery. Singapore Customs can't help: it has no access to courier tracking, and says to ask the courier.
 
@@ -96,7 +96,7 @@ Added without a carrier, a parcel shows "No tracking history yet" while Peek ask
 
 If SPX's tracker can't be reached, Peek shows what tracking services report instead, in their words.
 
-**Checks and alerts.** Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day SPX scans the parcel out for delivery, while SPX's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact SPX, Shopee or the seller for you.
+**Checks and alerts.** While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks SPX directly up to every 10 minutes, and up to every 2 minutes from 6 a.m. Singapore time on the day SPX scans the parcel out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created", every 6 hours. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact SPX, Shopee or the seller for you.
 
 ## Questions about SPX Express Singapore tracking
 
@@ -114,11 +114,11 @@ Your parcel from abroad is in Singapore, and it has been handed to the local del
 
 ### Why is my SPX tracking not updating?
 
-If the last line is `[China]Sender is preparing to ship your parcel`, the seller hasn't shipped it yet. Later on, parcels often go quiet on flights, at customs or over a weekend. After four days without news, Peek flags the parcel. If it stays quiet, ask the seller, or Shopee.
+If the last line is `[China]Sender is preparing to ship your parcel`, the seller hasn't shipped it yet. Later on, parcels often go quiet on flights, at customs or over a weekend. After four days without news at "Label created", "Received by carrier" or "In transit", Peek flags the parcel. If it stays quiet, ask the seller, or Shopee.
 
 :::sources
 - [Singapore Customs: GST on Low-Value Goods](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/gst-on-low-value-goods/) – the S$400 rule, GST at checkout or at import, GST charged twice, scams
 - [Singapore Customs: Courier / Postal Procedures](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/courier-postal-procedures/) – parcels held by ICA, asking the courier about tracking
 - [Universal Parcel Scraper: SPX Express Singapore](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spx-sg) – names, number shapes, tracker links, wordings and their stages
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SPX's shared codes, hidden steps kept, Singapore Post's shape, Janio's hand-over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – how each scan is filed under a stage, tracking services
 :::

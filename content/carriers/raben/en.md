@@ -14,9 +14,9 @@ Raben gives each shipment its own number. The business that booked the transport
 
 | Number (invented) | What it is |
 | --- | --- |
-| `270000000000000` | 27 and 13 more digits: the shape of a Raben shipment number in Peek's catalog. |
-| `27 0000 0000 0000 0` | The same with spaces. Spaces and dashes don't matter in Peek. |
-| `oftc.myraben.com/link/ShipmentInformation?ShipmentNumber=270000000000000` | A link to one shipment on Raben's tracker, as raben-group.com's tracking box opens it. Paste the whole link into Peek. |
+| `274829173648291` | 27 and 13 more digits: the shape of a Raben shipment number in Peek's catalog. |
+| `27 4829 1736 4829 1` | The same with spaces. Spaces and dashes don't matter in Peek. |
+| `oftc.myraben.com/link/ShipmentInformation?ShipmentNumber=274829173648291` | A link to one shipment on Raben's tracker, as raben-group.com's tracking box opens it. Paste the whole link into Peek. |
 
 [BRT](carrier:brt) in Italy and Yunda in China use 15-digit numbers too, so a number like this isn't always Raben's. Raben's search also finds a shipment by a reference or a package label, but Peek only follows the shipment number itself.
 
@@ -74,21 +74,21 @@ Raben Poland's pallet FAQ explains how a delivery works there. Extras are booked
 
 ## Raben contact and customer service
 
-As read on Raben's sites on 30 October 2026:
+As listed on Raben's sites:
 
 - **Your shipment's contact.** Raben asks you to contact the dedicated person shown on the shipment's status page, which Peek doesn't show.
-- **Hours.** Raben Poland's customer service works Monday to Friday, 8:00 to 16:00, aims to answer within 3 hours and serves customers in Polish as standard.
+- **Hours.** Raben Poland's customer service works Monday to Friday, 8:00 to 16:00 Polish time, aims to answer within 3 hours and serves customers in Polish as standard.
 - **Branches.** Raben's [contact page](https://www.raben-group.com/contact) finds a depot by postcode and lists branches by country; each country's site, such as polska.raben-group.com, has its own contacts.
 
 ## Track a Raben shipment with Peek
 
-Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 4,500 carriers. While you add it, Peek asks the carriers that use the shape ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for Raben" once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
+Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 4,500 carriers. While you add it, Peek asks Raben and BRT, then Ozon as a last resort if neither knows the number ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for Raben" once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
 
-A link from myraben.com or oftc.myraben.com files the parcel under Raben straight away. If your Raben number has another shape, pick Raben by hand: Peek asks Raben's tracker for any 4 to 40 letters and digits, with at least one digit.
+A tracking link from myraben.com or oftc.myraben.com (…/link/ShipmentInformation?ShipmentNumber=…) files the parcel under Raben straight away. If your Raben number has another shape, pick Raben by hand: Peek asks Raben's tracker for any 4 to 40 letters and digits, with at least one digit.
 
 Peek reads Raben's tracker in English: the status, each step in Raben's wording with its town and country, the planned delivery day (a date, without a time) or, once the driver's place on the round sets one, the delivery slot with its times, the weight and the delivery time. Times show in your device's time zone. Steps that only change a date or data leave the status as it was. Peek leaves out the item count, volume, progress bar, remarks and the office's contact. The public tracker gives no sender or recipient name, address, pickup point, service or proof of delivery.
 
-Peek checks up to every 10 minutes, and up to every 2 on the day Raben scans the shipment out for delivery, from 6 a.m. local time or, once Raben gives a delivery slot, from half an hour before it opens, while Raben's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
+When you have the shipment open in Peek, or on its delivery day with notifications on, Peek asks Raben directly up to every 10 minutes, and up to every 2 on the day Raben scans it out for delivery, from 6 a.m. on the clock of the country of its latest scan or, once Raben gives a delivery slot, from half an hour before it opens, while Raben's own tracker answers. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created", every 6 hours. After four days without a scan on a shipment at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" and "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Raben." It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
 
 ## Questions about Raben tracking
 

@@ -14,9 +14,9 @@ TForce's tracking page looks freight up by PRO number, or by bill of lading (BOL
 
 | Number (invented) | What it is |
 | --- | --- |
-| `000000000` | The PRO: nine digits. The last is a check digit, what's left when the first eight are divided by 7, so it's always 0 to 6. |
-| `00000000` | A PRO without its leading 0. TForce's tracker adds the 0, and so does Peek once you pick TForce Freight. |
-| `2205000000000` | A PARS number, used by customs brokers for freight into Canada: 2205, then the PRO. Paste it whole: Peek asks TForce by the PRO in it. |
+| `482917363` | The PRO: nine digits. The last is a check digit, what's left when the first eight are divided by 7, so it's always 0 to 6. |
+| `48291736` | A PRO without its leading 0. TForce's tracker adds the 0, and so does Peek once you pick TForce Freight. |
+| `2205482917363` | A PARS number, used by customs brokers for freight into Canada: 2205, then the PRO. Paste it whole: Peek asks TForce by the PRO in it. |
 
 A nine-digit PRO ending in 7, 8 or 9 has a typo. Peek's catalog also knows TForce Freight as UPS Freight and TForce.
 
@@ -44,7 +44,7 @@ A `Delivered` status beside the PRO always shows as "Delivered"; otherwise the n
 
 ## How TForce Freight delivers
 
-TForce carries the freight to the service center that serves you, then delivers it by truck. Its tracker gives an estimated delivery day, which Peek shows until the freight is out for delivery or an attempt fails. Peek's code hands the shipment over to no other carrier.
+TForce carries the freight to the service center that serves you, then delivers it by truck. Its tracker gives an estimated delivery day, which Peek keeps until the freight is delivered or the day has passed. Peek's code hands the shipment over to no other carrier.
 
 TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) sets out how delivery works:
 
@@ -61,7 +61,7 @@ TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) se
 
 **A digit is wrong.** A PRO whose last digit fails the check isn't TForce's, and Peek never asks TForce about it. If you pick TForce Freight anyway, Peek says it "doesn’t issue numbers like this one", and the shipment shows "Check the tracking number".
 
-**Not updating.** After four days without a new line, a shipment showing "Received by carrier" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct"). Ask the shop or the shipper. See [tracking that isn't updating](guide:tracking-not-updating).
+**Not updating.** After four days without a new line, a shipment showing "Received by carrier" or "In transit" gets a flag with the day of its latest line ("No tracking update since Mon 12 Oct"), with the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking TForce Freight." and a "Get help from TForce Freight" link. Ask the shop or the shipper. See [tracking that isn't updating](guide:tracking-not-updating).
 
 **Missed delivery.** After a `Shipment not delivered.` line, Peek flags the shipment ("Check the carrier’s next steps"). Call TForce or ask whoever booked the freight to set a new delivery. More in [missed deliveries](guide:missed-delivery).
 
@@ -84,7 +84,7 @@ If tracking says delivered and nothing came, see [delivered but not received](gu
 
 ## TForce Freight customer service and contact
 
-As read on 1 November 2026:
+As listed on TForce's pages:
 
 - **Customer Service:** (800) 333-7400, toll-free from the US, Canada, Guam, Puerto Rico and the U.S. Virgin Islands, for tracking, proof of delivery and problems. From elsewhere: (804) 231-8555.
 - **Email:** the Email TForce Freight Customer Support form, linked from TForce's Contact Us page; it has a field for the PRO.
@@ -93,17 +93,17 @@ As read on 1 November 2026:
 
 The shop or the sending business is often quicker: they hold the booking with TForce.
 
-TForce's pages quoted here, all on www.tforcefreight.com and read on 1 November 2026: Tracking; Fact Sheet; Rules Tariffs, with the LTL Rules Tariff UPGF 102-T; Canada; Cargo Claims Information; Contact Us, with Email TForce Freight Customer Support; Service Information.
+TForce's pages quoted here, all on www.tforcefreight.com: Tracking; Fact Sheet; Rules Tariffs, with the LTL Rules Tariff UPGF 102-T; Canada; Cargo Claims Information; Contact Us, with Email TForce Freight Customer Support; Service Information.
 
 ## Track a TForce Freight shipment with Peek
 
-A PRO's shape doesn't tell Peek it's TForce's: nine digits fit TNT and XPO too. Paste it all the same: Peek follows more than 4,500 carriers. While "Checking tracking services…" shows, Peek asks all three, and tracking services if none knows it; if TForce alone has the freight, its name shows with "has this parcel". For a PARS number, TForce comes first among the carriers Peek asks; for an eight-digit PRO, Peek asks only tracking services. Or press "Change" and pick TForce Freight under "Fits this number", or use "Change carrier" later. A link to TForce's tracker (`proNumbers=`) or the UPS Freight tracker (`TrackProNumber=`) names TForce at once ("Detected carrier").
+A PRO's shape doesn't tell Peek it's TForce's: nine digits fit TNT and XPO too. Paste it all the same: Peek follows more than 4,500 carriers. While "Checking tracking services…" shows, Peek asks all three at once, then DPD Ireland and tracking services if none knows it; if TForce alone has the freight, its name shows with "has this parcel", and if several know it, you choose. For a PARS number, Peek asks TForce together with FAN Courier; for an eight-digit PRO, Peek asks only tracking services. Or press "Change" and pick TForce Freight under "Fits this number", or use "Change carrier" later. A link to TForce's tracker (`proNumbers=`) or the UPS Freight tracker (`TrackProNumber=`) names TForce at once ("Detected carrier").
 
-Peek asks TForce's tracker by the PRO alone. It shows the status, each line with its town and state, the estimated delivery day, the destination country on the shipment's map and the weight in your own units; it leaves out names, the appointment, BOL and PO numbers and the piece count, and gets no proof of delivery. "Open the TForce Freight website" opens your number on TForce's tracker, or for a PARS number the PRO in it. If that tracker can't be reached or asks for a CAPTCHA, Peek asks [tracking services](guide:universal-tracker).
+Peek asks TForce's tracker by the PRO alone. It shows the status, each line with its town and state, the estimated delivery day, the destination country on the shipment's map, the weight in your own units and, only to you, the recipient's town on the map and name under "Recipient"; it leaves out the shipper, the appointment, BOL and PO numbers and the piece count, and gets no proof of delivery. "Open the TForce Freight website" opens your number on TForce's tracker, or for a PARS number the PRO in it. If that tracker can't be reached or asks for a CAPTCHA, Peek asks [tracking services](guide:universal-tracker).
 
 TForce gives each line its service center's local time, with no time zone. Peek reads it on the clock of the line's town, else of its state or province when Peek can tell which one it is (the main clock where there are several), else of a line next to it or of where the freight is going, else on Eastern time, and shows it in your device's time zone.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day TForce scans the freight out for delivery, while TForce's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
+While you have the shipment open in Peek, or on its delivery day with notifications on, Peek asks TForce directly up to every 10 minutes, and up to every 2 minutes from 6 a.m. on the latest scan's clock (Eastern time by default) on the day TForce scans the freight out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
 
 ## Questions about TForce Freight tracking
 

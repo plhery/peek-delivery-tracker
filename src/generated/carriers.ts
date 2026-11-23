@@ -2456,6 +2456,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "One by Allegro CZ (WE|DO) tracking — numbers & delivery",
       "name": "One by Allegro CZ",
       "color": "#006d57"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "5post-tracking",
+      "title": "5Post tracking — numbers, Pyaterochka pickup & statuses",
+      "name": "5Post",
+      "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "shipter-tracking",
+      "title": "Shipter tracking — H3 Korean export numbers & statuses",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "de": [
@@ -12446,6 +12462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "rastreamento-correios-brasil",
+      "title": "Rastreamento Correios — códigos BR e Minhas Importações",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "rastreio-yto-express",
@@ -14592,6 +14616,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание посылок Почты России: трек-номер и статусы",
       "name": "Russian Post",
       "color": "#1928dc"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "otslezhivanie-5post",
+      "title": "Отслеживание 5Post — статусы, постаматы и контакты",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "zh": [
@@ -14768,6 +14800,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DAO Track & Trace: find din pakke, daoSHOP og natlevering",
       "name": "DAO",
       "color": "#e30613"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "dsv-sporing",
+      "title": "DSV sporing — forsendelsesnumre, DB Schenker og status",
+      "name": "DSV",
+      "color": "#002664"
     }
   ],
   "nb": [
@@ -15200,6 +15240,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Venipak sūtījumu izsekošana: statusi, pakomāti un kurjers",
       "name": "Venipak",
       "color": "#9339f2"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "latvijas-pasts-sutijumu-izsekosana",
+      "title": "Latvijas Pasts sūtījumu izsekošana — numuri, pakomāti",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     }
   ],
   "et": [

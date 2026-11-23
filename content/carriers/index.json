@@ -90,7 +90,7 @@
   { "id": "posta-srbije", "catalog": "posta-srbije", "name": "Pošta Srbije", "languages": ["en", "sr", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "venipak", "catalog": "venipak", "name": "Venipak", "languages": ["en", "lt", "lv", "et", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "lietuvos-pastas", "catalog": "lietuvos-pastas", "name": "Lietuvos paštas", "languages": ["en", "lt", "fr", "ru", "de", "es", "it", "pt", "pl"] },
-  { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en", "lv", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dao", "catalog": "dao", "name": "DAO", "languages": ["en", "da", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "helthjem", "catalog": "helthjem", "name": "Helthjem", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "matkahuolto", "catalog": "matkahuolto", "name": "Matkahuolto", "languages": ["en", "fi", "sv", "fr", "de", "es", "it", "pt", "pl"] },
@@ -147,7 +147,7 @@
   { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es", "pl", "it"] },
   { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "straightship", "catalog": "straightship", "name": "Straightship", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
+  { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "pt-br", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en", "ru", "zh", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "spx-br", "catalog": "spx-br", "name": "SPX Express Brazil", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
@@ -205,7 +205,7 @@
   { "id": "quantium-solutions", "catalog": "quantium-solutions", "name": "Quantium Solutions", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posta-shqiptare", "catalog": "posta-shqiptare", "name": "Posta Shqiptare", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "dsv", "catalog": "dsv", "name": "DSV", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "dsv", "catalog": "dsv", "name": "DSV", "languages": ["en", "da", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "pin-ag", "catalog": "pin-ag", "name": "PIN AG", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "pitney-bowes", "catalog": "pitney-bowes", "name": "Pitney Bowes", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "rl-carriers", "catalog": "rl-carriers", "name": "R+L Carriers", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
@@ -304,5 +304,7 @@
   { "id": "pasarex", "catalog": "pasarex", "name": "PasarEX", "languages": ["en", "es"] },
   { "id": "spee-dee", "catalog": "spee-dee", "name": "Spee-Dee", "languages": ["en"] },
   { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en"] },
-  { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs"] }
+  { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs"] },
+  { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru"] },
+  { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en"] }
 ]

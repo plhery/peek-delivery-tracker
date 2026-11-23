@@ -12,10 +12,10 @@ ORLEN Paczka, dawniej Paczka w RUCHu, to polska sieć, która dowozi paczki do a
 
 Numer paczki ma 13 cyfr: zaczyna się od 210 i kończy cyfrą kontrolną. Wpisuj go bez spacji. Pole śledzenia na orlenpaczka.pl przyjmuje numer paczki albo kod nadania.
 
-| Kształt (wymyślony) | Co to jest |
+| Przykład (wymyślony) | Co to jest |
 | --- | --- |
-| `2109876543210` | 13 cyfr od 210: numer paczki. |
-| `1234567890` | Kod nadania z 10 cyfr: nadawca używa go przy nadaniu paczki. |
+| `2104829173643` | 13 cyfr od 210: numer paczki. |
+| `4829173640` | Kod nadania z 10 cyfr: nadawca używa go przy nadaniu paczki. |
 
 Gdzie go szukać:
 
@@ -24,7 +24,7 @@ Gdzie go szukać:
 
 Kod odbioru nie służy do śledzenia, podobnie jak numer telefonu. Nie masz żadnej wiadomości? Zajrzyj do poradnika [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-Paczki z Allegro Delivery mają numer zaczynający się od `AD`: śledzisz je w Allegro, w aplikacji albo na allegro.pl. Numer międzynarodowy zakończony na PL, na przykład `RR000000005PL`, należy do [Poczty Polskiej](carrier:poczta-polska).
+Paczki z Allegro Delivery mają numer zaczynający się od `AD`: śledzisz je w Allegro, w aplikacji albo na allegro.pl. Numer międzynarodowy zakończony na PL, na przykład `RR482917367PL`, należy do [Poczty Polskiej](carrier:poczta-polska).
 
 ## Statusy ORLEN Paczka: co znaczą
 
@@ -69,7 +69,7 @@ Według ORLEN Paczki paczka ze sklepu internetowego dociera do punktu w 1 dzień
 
 ## ORLEN Paczka kontakt
 
-Przy paczce z Allegro Delivery kontaktuj się z Allegro, które odpowiada za obsługę klienta tych przesyłek. Przy zamówieniu ze sklepu zacznij od sklepu. Kanały kontaktu ORLEN Paczki (stan na 6 listopada 2026 r.):
+Przy paczce z Allegro Delivery kontaktuj się z Allegro, które odpowiada za obsługę klienta tych przesyłek. Przy zamówieniu ze sklepu zacznij od sklepu. Kanały kontaktu ORLEN Paczki:
 
 - **Infolinia:** 22 33 33 999, koszt połączenia według stawki operatora. Czynna od poniedziałku do piątku w godzinach 7:00–22:00, w sobotę 9:00–19:00 (w częstych pytaniach: do 16:00) i w niedzielę 10:00–16:00.
 - **[Formularz kontaktowy](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, na przykład gdy nie masz kodu odbioru albo paczka zaginęła.
@@ -79,11 +79,15 @@ ORLEN Paczka nie wysyła linków w SMS-ach i nie prosi o dopłatę do paczki prz
 
 ## Śledzenie paczki ORLEN Paczka w Peek
 
-[Peek](/) rozpoznaje numery z 13 cyfr zaczynające się od 210 z poprawną cyfrą kontrolną. Taki sam kształt mają numery innych przewoźników, więc Peek pyta naraz ORLEN Paczkę i kilku z nich, na przykład Delhivery i FAN Courier, i pisze „ORLEN Paczka ma tę przesyłkę.”, gdy zna ją tylko ORLEN Paczka. Przy innych numerach z 13 cyfr od 2 albo 3 wybierz ORLEN Paczkę przez „Zmień przewoźnika” albo wklej link śledzenia z orlenpaczka.pl z 13-cyfrowym numerem. Kodów nadania z 7 i 10 cyfr Peek nie śledzi, a numery `AD` nie należą do ORLEN Paczki.
+[Peek](/) rozpoznaje numery z 13 cyfr zaczynające się od 210 z poprawną cyfrą kontrolną. Taki sam kształt mają numery innych przewoźników, więc Peek pyta naraz ORLEN Paczkę, Ukrposhtę i FAN Courier, a Delhivery, Econt, Ozon Logistics i Paquetexpress poza ich własnymi krajami dopiero wtedy, gdy żaden z tych trzech nie zna numeru. Pisze „ORLEN Paczka ma tę przesyłkę.”, gdy zna ją tylko ORLEN Paczka. Przy innych numerach z 13 cyfr od 2 albo 3 wybierz ORLEN Paczkę przez „Zmień” (przy dodanej już paczce przez „Zmień przewoźnika”) albo wklej link śledzenia z orlenpaczka.pl z 13-cyfrowym numerem. Kodów nadania z 7 i 10 cyfr Peek nie śledzi, a numery `AD` nie należą do ORLEN Paczki.
 
-Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
+Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
 
-Peek sprawdza śledzenie nawet co 10 minut i może cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
+Gdy masz paczkę otwartą w Peek, Peek sprawdza ją nawet co 10 minut. ORLEN Paczka nie podaje dnia dostawy i nie skanuje paczek jako wydanych do doręczenia, więc Peek nigdy nie przechodzi na tempo dnia dostawy ani na sprawdzanie co 2 minuty. Poza tym sprawdza co godzinę. Po 12 godzinach na etapie „Zarejestrowana” albo „Przyjęta przez przewoźnika” albo po dwóch dniach bez nowości sprawdza co godzinę bez względu na to, jak ją śledzisz, a po siedmiu dniach na etapie „Zarejestrowana” co 6 godzin.
+
+Gdy najnowszy skan ma cztery dni, a paczka jest wciąż na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” albo „W transporcie”, Peek oznacza ją dniem tego skanu, na przykład „Brak aktualizacji od pon 12 paź”. Strona paczki pisze wtedy: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika ORLEN Paczka.”, z linkiem „Poproś przewoźnika ORLEN Paczka o pomoc” do strony kontaktowej ORLEN Paczki. Po trzech tygodniach bez nowego skanu: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika ORLEN Paczka.”
+
+W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”.
 
 ## Pytania o śledzenie ORLEN Paczka
 

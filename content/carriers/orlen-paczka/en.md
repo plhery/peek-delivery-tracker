@@ -12,10 +12,10 @@ ORLEN Paczka is a Polish parcel network, formerly Paczka w RUCHu, that delivers 
 
 The parcel number has 13 digits: it starts 210 and ends in a check digit. Type it without spaces.
 
-| Shape (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `2109876543210` | 13 digits starting 210: the parcel number. |
-| `1234567890` | A 10-digit sending code the sender uses at drop-off, not the parcel number. |
+| `2104829173643` | 13 digits starting 210: the parcel number. |
+| `4829173640` | A 10-digit sending code the sender uses at drop-off, not the parcel number. |
 
 Where it turns up:
 
@@ -24,7 +24,7 @@ Where it turns up:
 
 A pickup code isn't a tracking number, and neither is your phone number. No message at all? See [how to find your tracking number](guide:find-tracking-number).
 
-Allegro Delivery parcels carry a number starting `AD`: track those in the Allegro app or on allegro.pl. An international number ending in PL, such as `RR000000005PL`, belongs to [Poczta Polska](carrier:poczta-polska).
+Allegro Delivery parcels carry a number starting `AD`: track those in the Allegro app or on allegro.pl. An international number ending in PL, such as `RR482917367PL`, belongs to [Poczta Polska](carrier:poczta-polska).
 
 ## What ORLEN Paczka's statuses mean
 
@@ -67,9 +67,9 @@ ORLEN names next-day delivery among the service's strengths, and ORLEN Paczka's 
 
 ## ORLEN Paczka customer service and contact
 
-For an Allegro Delivery parcel, contact Allegro, which handles customer service for those parcels. For a shop order, start with the shop. ORLEN Paczka's own contact page is on its Polish site, orlenpaczka.pl, under "Kontakt". Its channels as of 6 November 2026, all in Polish:
+For an Allegro Delivery parcel, contact Allegro, which handles customer service for those parcels. For a shop order, start with the shop. ORLEN Paczka's own contact page is on its Polish site, orlenpaczka.pl, under "Kontakt". Its channels, all in Polish:
 
-- **Helpline:** 22 33 33 999, charged at your operator's rate. Monday to Friday 7:00–22:00, Saturday 9:00–19:00 (its FAQ says until 16:00) and Sunday 10:00–16:00.
+- **Helpline:** 22 33 33 999, charged at your operator's rate. Monday to Friday 7:00–22:00, Saturday 9:00–19:00 (its FAQ says until 16:00) and Sunday 10:00–16:00, Polish time.
 - **[Contact form](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, for example when you have no pickup code or the parcel is lost.
 - **[Complaint form](https://www.orlenpaczka.pl/reklamacje/)** for loss, damage or delay, open to senders, recipients and payers.
 
@@ -77,11 +77,15 @@ ORLEN Paczka doesn't send links by SMS and doesn't ask for extra payment for a p
 
 ## Tracking ORLEN Paczka parcels with Peek
 
-[Peek](/) recognises 13-digit numbers starting 210 with a valid check digit. Other carriers share that shape, so it asks ORLEN Paczka and several of them, such as Delhivery and [FAN Courier](carrier:fan-courier), at once and says "ORLEN Paczka has this parcel." when only ORLEN Paczka knows it. For other 13-digit numbers starting 2 or 3, pick ORLEN Paczka with "Change" or paste the orlenpaczka.pl tracking link that carries the 13-digit number. The 7- and 10-digit sending codes can't be tracked in Peek, and `AD` numbers aren't ORLEN Paczka's.
+[Peek](/) recognises 13-digit numbers starting 210 with a valid check digit. Other carriers share that shape, so it asks ORLEN Paczka, Ukrposhta and [FAN Courier](carrier:fan-courier) at once, and Delhivery, Econt, Ozon Logistics and Paquetexpress, outside their own countries, only if none of those three knows the number. It says "ORLEN Paczka has this parcel." when only ORLEN Paczka knows it. For other 13-digit numbers starting 2 or 3, pick ORLEN Paczka with "Change" ("Change carrier" on a parcel you've already added) or paste the orlenpaczka.pl tracking link that carries the 13-digit number. The 7- and 10-digit sending codes can't be tracked in Peek, and `AD` numbers aren't ORLEN Paczka's.
 
 It shows the Polish wordings as written, the sorting-centre town on a map where named, and the delivery time, with times read on Warsaw time and shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. There is no pickup point, expected delivery, weight or sender, and the return parcel's number is dropped. A Vinted parcel handed to another country's carrier isn't followed and stays in transit. Parcels already picked up drop out of ORLEN Paczka's tracking after some months.
 
-It checks up to every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open in Peek, Peek checks up to every 10 minutes. ORLEN Paczka gives no delivery day and doesn't scan parcels out for delivery, so Peek never switches to its delivery-day pace or its 2-minute checks. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created".
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ORLEN Paczka.", with a "Get help from ORLEN Paczka" link to ORLEN Paczka's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ORLEN Paczka."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about ORLEN Paczka tracking
 

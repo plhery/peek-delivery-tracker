@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-菜鸟（Cainiao）是阿里巴巴集团旗下的物流公司，成立于 2013 年、总部位于浙江杭州，为速卖通（AliExpress）等跨境平台卖家承运发往海外的包裹。菜鸟国际官方查件网站 [global.cainiao.com](https://global.cainiao.com/) 专门支持菜鸟及速卖通包裹查询；你可以直接在那里查询，或把快递单号粘贴到上方查询框里。在速卖通下单的买家，进入「My Orders（我的订单）」找到对应订单并点击「Tracking（查看物流）」即可看到单号。
+菜鸟（Cainiao）是阿里巴巴集团旗下的物流公司，成立于 2013 年、总部位于浙江杭州，为速卖通（AliExpress）等跨境平台卖家承运发往海外的包裹。菜鸟国际官方查件网站 [global.cainiao.com](https://global.cainiao.com/) 专门支持菜鸟及速卖通包裹查询；你可以直接在那里查询，或把快递单号粘贴到上方查询框里。
 
 ## 菜鸟（Cainiao）单号格式：怎么看、在哪里找
 
@@ -44,13 +44,13 @@ updated: 2026-11-23
 
 ## 菜鸟派送失败、自提点与快递柜规则
 
-菜鸟官网介绍其在 9 个国家和地区建有本地自营派送网络，并在海外本地化页面点名了西班牙、法国和波兰（设有菜鸟自营快递柜）。针对英国、爱尔兰和美国，菜鸟公开页面未写明固定合作尾程快递或派送次数规则。移交尾程后，如果菜鸟掌握当地快递联系信息，查件页上的「View Contact Information」按钮会显示该尾程快递的联系方式。
+菜鸟官网介绍其在 9 个国家和地区提供本地包裹派送服务，并在海外本地化页面点名了西班牙、法国和波兰（设有菜鸟自营快递柜）。针对英国、爱尔兰和美国，菜鸟公开页面未写明固定合作尾程快递或派送次数规则。移交尾程后，如果菜鸟掌握当地快递联系信息，查件页上的「View Contact Information」按钮会显示该尾程快递的联系方式。
 
 菜鸟的经济类物流提示说明，经济小包在移交给目的国承运商后不再提供后续全程轨迹。如需确认当地派送商，可询问卖家或参考 [中国直邮包裹跟踪指南](guide:tracking-from-china)。
 
 看到 `Undelivered` 时，通常意味着派送时无人签收、司机找不到地址，或者按你的要求改期了派送；菜鸟建议尽快联系承运商预约重派或自行领取。看到 `Awaiting Collection` 或 `First Notification to recipient` 同样表示包裹正在等你自提，菜鸟提醒应尽快领取，否则可能被退回寄件人。
 
-在西班牙，菜鸟拥有自营本地网络并将 Ecoscooting 列为客服联系方：Ecoscooting 帮助说明指出派送失败后会在 3 个工作日内再次尝试派送，存放在自提点或快递柜的包裹保留 14 天，取件 PIN 码会通过邮件或短信发送。
+在西班牙，菜鸟拥有自营本地网络；当地派送公司 Ecoscooting 的帮助说明指出派送失败后会在 3 个工作日内再次尝试派送，存放在自提点或快递柜的包裹保留 14 天，取件 PIN 码会通过邮件或短信发送。
 
 ## 菜鸟物流不更新、延误或丢件怎么办
 
@@ -65,19 +65,19 @@ updated: 2026-11-23
 菜鸟英文联系页（`cainiao.com`）未公布收件人客服电话，仅列出：
 
 - **客服邮箱**：`cainiaoglobalcs@service.cainiao.com`（标注为 Customer Service，未写明受理范围）。
-- **速卖通订单**：引导至速卖通帮助中心，提供 24/7 在线客服（Online Service）。
+- **速卖通订单**：引导至速卖通帮助中心，提供在线客服（Online Service）。
 
-菜鸟中文官网的联系电话面向中国国内和商家客户。个人买家遇到订单问题优先找卖家或速卖通客服，涉及最后派送和自提再联系轨迹中显示的当地快递商。在西班牙，Ecoscooting 与菜鸟西班牙商家页列出客服电话 `+34 912 15 93 69`（西班牙免费专线 `+34 800 00 03 69`）及邮箱 `customersupport@ecoscooting.com`（工作日 09:00–18:00、周末 09:00–13:00）；葡萄牙地区 Ecoscooting 电话为 `+351 300 609 006`。
+菜鸟中文官网的联系电话面向中国国内和商家客户。个人买家遇到订单问题优先找卖家或速卖通客服，涉及最后派送和自提再联系轨迹中显示的当地快递商。在西班牙，Ecoscooting 列出客服电话 `+34 912 15 93 69`（西班牙免费专线 `+34 800 00 03 69`）及邮箱 `customersupport@ecoscooting.com`（工作日 09:00–18:00、周末 09:00–13:00）；葡萄牙地区 Ecoscooting 电话为 `+351 300 609 006`。
 
 ## 用 Peek 跟踪菜鸟（Cainiao）包裹
 
-在 [Peek](/) 中，这类包裹统一显示为「AliExpress / Cainiao」。粘贴 `DOFR`、`CNFR`、`CNG` 或 `AP` 单号（例如虚构单号 `CNG48291736051428`）时，Peek 会直接自动识别，查到记录后提示「AliExpress / Cainiao 有这个包裹的记录。」；遇到 `LP` 单号或 `CNUSUP`、`CNBR`、`CNMEX` 等菜鸟参考号时，Peek 会在候选承运商中一并询问菜鸟。纯国际邮政单号默认交给国家邮政处理，但以 `TY`、`MI`、`XX` 或 `GO` 结尾的也会同步询问菜鸟；其他邮政单号只要直接粘贴带 `mailNoList=` 参数的 `global.cainiao.com` 链接，就能直接走菜鸟查询（注意 `track.cainiao.com` 和速卖通订单链接无法直接识别）。如需手动调整，点击添加页的「更换」或详情页的「更换快递公司」，详情页亦附有「向 AliExpress / Cainiao 寻求帮助」链接直达官方联系页。
+在 [Peek](/) 中，这类包裹统一显示为「AliExpress / Cainiao」。粘贴 `DOFR`、`CNFR`、`CNG` 或 `AP` 单号（例如虚构单号 `CNG48291736051428`）时，Peek 会直接自动识别，查询框里会显示 AliExpress / Cainiao 和「识别出的快递公司」；遇到 `LP` 单号或 `CNUSUP`、`CNBR`、`CNMEX` 等菜鸟参考号时，Peek 会在候选承运商中一并询问菜鸟。纯国际邮政单号默认交给国家邮政处理，但以 `TY`、`MI`、`XX` 或 `GO` 结尾的也会同步询问菜鸟；其他邮政单号只要直接粘贴带 `mailNoList=` 参数的 `global.cainiao.com` 链接，就能直接走菜鸟查询（注意 `track.cainiao.com` 和速卖通订单链接无法直接识别）。如需手动调整，点击添加页的「更换」或详情页的「更换快递公司」，详情页亦附有「向 AliExpress / Cainiao 寻求帮助」链接直达官方联系页。
 
-有时速卖通在包裹还在菜鸟手中时，就已经把尾程快递单号（例如意大利 SDA 单号）发给了买家。对部分这类号段，Peek 会同时查询菜鸟和当地尾程快递；如果两边都查到了，包裹会保留在 AliExpress / Cainiao 下，等当地尾程快递出现扫描后自动把尾程轨迹合并进来。
+有时速卖通在包裹还在菜鸟手中时，就已经把尾程快递单号（例如意大利 SDA 单号）发给了买家。
 
 Peek 会展示标准阶段（「已生成面单」「已揽收」「运输中」「清关中」「派送中」「派送未成功」「待取件」「已签收」「需要留意」等）、完整轨迹、菜鸟提供的扫描地点（标在地图上）、预计送达日期区间、签收时间以及菜鸟公布的当地尾程快递单号。
 
-Peek 针对菜鸟最快每 30 分钟查询一次（包括派送当天；查询失败后间隔一小时）。当尾程快递正式接手后，Peek 遵循接手快递商的刷新频率（例如 Royal Mail 与 Poste Italiane 每小时一次，PostNL、USPS 和美国 GOFO 每 30 分钟一次）。连续两天无新扫描（或处于「已生成面单」「已揽收」满 12 小时）改为每小时检查一次。连续四天无新动态时，Peek 会提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 AliExpress / Cainiao 查询。」，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 AliExpress / Cainiao 查询。」。
+Peek 针对菜鸟最快每 30 分钟查询一次（包括派送当天；查询失败后间隔一小时）。当尾程快递正式接手后，Peek 遵循实际派送快递商自己的频率。连续两天无新扫描（或处于「已生成面单」「已揽收」满 12 小时）改为每小时检查一次。最新扫描仍是「已生成面单」「已揽收」或「运输中」且连续四天无新动态时，Peek 会提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 AliExpress / Cainiao 查询。」，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 AliExpress / Cainiao 查询。」。
 
 通知偏好支持「每次扫描」「重要环节」和「仅派送当天」。Peek 无法替你联系菜鸟、速卖通或提交理赔。
 
@@ -101,5 +101,13 @@ Peek 针对菜鸟最快每 30 分钟查询一次（包括派送当天；查询�
 
 :::sources
 - [Cainiao：全球快递追踪平台（Global Express Tracking）](https://global.cainiao.com/) – 菜鸟与速卖通专属追踪入口与单号格式说明
+- [Cainiao：Logistics Status Explanation（英文）](https://global.cainiao.com/helpDoc.htm?slug=phdx0i) – Undelivered、Awaiting Collection、Unclaimed 等状态说明与领取提醒
+- [Cainiao：FAQ（英文）](https://global.cainiao.com/helpDoc.htm?slug=bp5fbp) – 11 天与 12 天、目的国停滞、海关、延误与争议
+- [Cainiao：查件页语言文件](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – 经济类提示、View Contact Information、Did you receive it?
+- [Cainiao：About Cainiao（英文）](https://www.cainiao.com/en/about-us-brief-introduction.html) – 2013 年成立、阿里巴巴、9 个国家和地区的本地派送
+- [Cainiao：Overseas Local（英文）](https://www.cainiao.com/en/global-local-capabilities.html) – 西班牙、法国、波兰与自营快递柜
+- [Cainiao：Cross-border Express Delivery（英文）](https://www.cainiao.com/en/global-express.html) – 各类服务的参考时效
+- [Cainiao：Contact Cainiao（英文）](https://www.cainiao.com/en/about-us-contact-us.html) – 客服邮箱、杭州地址、速卖通订单入口
+- [Ecoscooting](https://ecoscooting.com/) – 西班牙与葡萄牙客服电话和时间、3 个工作日内再派、自提点保留 14 天
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 菜鸟号段规则（LP/CNG/DOFR/CNFR/AP/CNUSUP/CNBR/CNMEX）、中英文状态与 `Shipment cancelled` 映射、`global.cainiao.com` 链接解析及与尾程快递合并跟踪机制
 :::

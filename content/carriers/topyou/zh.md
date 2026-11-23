@@ -16,7 +16,7 @@ updated: 2026-11-23
 | --- | --- |
 | `TYZRK4829173605YQ` | `TYZR` + 1 位字母 + 10 位数字 + `YQ`：标准通邮运单号。 |
 | `TYZRK482917360YQ` | 中间只有 9 位数字：不符合通邮格式，请检查是否漏输了一位数字。 |
-| `JXCKP4829173605YQ` | 同样以 `YQ` 结尾，但开头是 `JXC`：这是聚溪国际（Juxi Express）的单号，不是通邮。 |
+| `JXCKP4829173605YQ` | 同样以 `YQ` 结尾，但开头是 `JXC`：这是驹隙物流（Juxi Express）的单号，不是通邮。 |
 
 在 Peek 中粘贴单号无需在意空格和大小写；但注意通邮自己的查件页 `track.szty56.com` 区分大小写，在官网查询时请全部输入大写字母。如果找不到单号，请参阅 [如何找到你的快递单号](guide:find-tracking-number) 和 [快递单号格式指南](guide:tracking-number-formats)。
 
@@ -66,7 +66,7 @@ updated: 2026-11-23
 **同步显示的尾程快递轨迹。** 移交尾程后，通邮后台常常直接续播当地快递的扫描：
 
 - **美国（USPS）与法意（GOFO）：** 发往美国会同步 USPS 扫描；法国和意大利常见 GOFO 的 `Arrived at sorting center`、`The package left sorting center`、`Package departed from sorting center`、`Arrived at GOFO Regional Destination Facility`（「运输中」）以及司机真正出门派送的 `The driver is out for delivery`（「派送中」）。
-- **德国（iMile）：** 格式为「阶段名 + 逗号 + 完整英文句」：`In Transit, Your order has been shipped from 【iMile Köln DC Center】.`、`Delivery, Your order has arrived at 【Dortmund01】` 和 `Delivery, Your order has assigned delivery drvier.`（仅分配司机尚未出发，`drvier` 为 iMile 原拼写）全都是「运输中」——所以看到 `Delivery,` 开头并不等于已经出门派送；真正的派送中是 `Delivery, Our delivery associate is out for delivery.`（「派送中」）。盘点类无移动记录不会改变阶段。出现 `Arrived, The parcel has been delivered to 【】. Please collect your parcel promptly at 【】 using your pickup code.` 表示已到达自提点，请凭取件码领取（「待取件」）。
+- **德国（iMile）：** 格式为「阶段名 + 逗号 + 完整英文句」：`In Transit, Your order has been shipped from 【iMile Köln DC Center】.`、`Delivery, Your order has arrived at 【Dortmund01】` 和 `Delivery, Your order has assigned delivery drvier.`（仅分配司机尚未出发，`drvier` 为 iMile 原拼写）全都是「运输中」——所以看到 `Delivery,` 开头并不等于已经出门派送；真正的派送中是 `Delivery, Our delivery associate is out for delivery.`（「派送中」）。盘点类无移动记录不会改变阶段。以 `Arrived, The parcel has been delivered to 【】. Please collect your parcel promptly at 【】 using your pickup code.` 开头的记录表示已到达自提点，请凭取件码领取（「待取件」）。
 - **奥地利（DPD）与西班牙：** 奥地利 DPD 轨迹包括 `In parcel delivery center`（「运输中」）、`In delivery`（「派送中」）、`Unfortunately, consignee not present. Notification was left.`（「派送未成功」）、`Parcel was handed over to Pickup parcel shop` / `Takeover by Pickup parcel shop`（「待取件」）以及超期未取退件的 `Parcel was not picked up`（「需要留意」）。西班牙清关后常见 `Parcel in transit`（「运输中」）。
 
 ## 通邮（TopYou）包裹在各国由谁派送
@@ -93,13 +93,13 @@ updated: 2026-11-23
 
 ## 用 Peek 跟踪通邮（TopYou）包裹
 
-[Peek](/) 会通过 `TYZR` + 1 位字母 + 10 位数字 + `YQ` 的唯一规则立即自动识别通邮（如虚构单号 `TYZRK4829173605YQ`），确认记录后显示「TopYou 有这个包裹的记录。」；第四位为其他字母时属于弱匹配，Peek 会实时询问通邮后台确认。Peek 仅对这两类格式向通邮查询；如果手里只有当地尾程快递单号，请直接粘贴尾程单号（Peek 支持超过 3,500 家快递），也可点击「更换」或「更换快递公司」手动调整。
+[Peek](/) 会通过 `TYZR` + 1 位字母 + 10 位数字 + `YQ` 的唯一规则立即自动识别通邮（如虚构单号 `TYZRK4829173605YQ`），查询框里会显示 TopYou 和「识别出的快递公司」；第四位为其他字母时属于弱匹配，Peek 会实时询问通邮后台确认。Peek 仅对这两类格式向通邮查询；如果手里只有当地尾程快递单号，请直接粘贴尾程单号（Peek 支持 4,500 多家快递），也可点击「更换」或「更换快递公司」手动调整。
 
 Peek 直接读取通邮官方后台，展示规范化阶段（「已生成面单」「已揽收」「运输中」「清关中」「派送中」「派送未成功」「待取件」「已签收」「已退回寄件人」「需要留意」等）、通邮或转发的尾程轨迹原文、目的国及包裹重量。为了避免中国机场扫描误标成目的国，Peek 会过滤通邮自有节点上只写了国家名的地点；如果通邮整体状态已标记妥投或退件，即便最后一条文字未写明，Peek 也会准确标出「已签收」或「已退回寄件人」。通邮自有扫描按北京时间读取，转发的各国尾程扫描则由 Peek 修正时区后统一换算为你设备的本地时间。通邮不提供预计送达日期。
 
 当通邮记录里带有尾程转单号时，如果它是校验位正确的国际邮政 S10 单号，Peek 会同步向收件国国家邮政查询；如果能唯一匹配某家 Peek 支持直连的当地快递，Peek 也会同步查询，待当地快递出现最新扫描后无缝接力切换并保留通邮历史和两个单号。但对于 20 位纯数字等无法唯一确定归属的号码，Peek 会继续在通邮后台同步尾程扫描。
 
-在通邮官方后台正常响应时，Peek 最快每 10 分钟查询一次；连续两天无新扫描（或前段处于「已生成面单」「已揽收」满 12 小时）改为每小时查询一次；包裹进入派送当天从当地时间早上 6 点起最快每 2 分钟查询一次（第三方查询服务每小时一次、派送当天每 15 分钟一次；若已切换给尾程快递，则按该快递频率如 Royal Mail/Poste Italiane 每小时、PostNL/USPS 每 30 分钟）。连续四天无新扫描时 Peek 会提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 TopYou 查询。」，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 TopYou 查询。」。
+你打开着这个包裹，或在派送当天开着通知时，Peek 最快每 10 分钟查询一次，包裹派送中时最快每 2 分钟一次（需要打开浏览器查询时为 5 分钟；只在派送当天当地时间早上 6 点以后，且结果来自通邮官方后台时）；其他时候每小时一次。连续两天无新扫描（或前段处于「已生成面单」「已揽收」满 12 小时）改为每小时查询一次。只有第三方查询服务有结果时，Peek 每小时查询一次，静默满一天后每 3 小时一次，派送当天你打开着包裹或开着通知时最快每 15 分钟一次；切换给尾程快递后，按实际派送快递自己的频率查询。最新扫描仍是「已生成面单」「已揽收」或「运输中」且连续四天无新扫描时，Peek 会提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 TopYou 查询。」，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 TopYou 查询。」。
 
 通知偏好可选「每次扫描」「重要环节」（进口清关、GOFO 与 iMile 真正外出派送、待取件、派送未成功、签收与退件，不含中国出口报关、航班、放行和误导性的 `Shipment is out for delivery`）或「仅派送当天」。Peek 无法替你联系通邮或卖家。
 
@@ -123,6 +123,7 @@ Peek 直接读取通邮官方后台，展示规范化阶段（「已生成面单
 
 :::sources
 - [通邮集团：官网首页](https://www.szty56.com/) – 深圳联系电话（0755-81819898）与工作日服务时间、企业简介
+- [通邮集团：关于我们](https://www.szty56.com/view?path=about/about) – 2016 年成立、深圳总部、各地分子公司及操作处理中心、日处理订单量超 80 万件
 - [European Commission：欧盟海关改革（英文）](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 11 月 1 日起每类商品 2 欧元欧盟统一处理费
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TYZR 单号规则、多版本英文状态与邮政/GOFO/iMile/DPD 尾程节点映射、地点过滤、时区修正、Lastmile Number 提取及自动接力切换尾程机制
 :::

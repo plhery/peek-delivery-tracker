@@ -18,10 +18,10 @@ Quelques [numéros suisses](guide:tracking-number-formats) se ressemblent. Avec 
 
 | Numéro | À qui il appartient |
 | --- | --- |
-| `441234567890123456` | Quickpac : 18 chiffres commençant par 44. |
-| `44.12.345678.90123456` | Le même, avec les points qu'ajoute le cadre de suivi de Quickpac. |
-| `990000000000000000` | La Poste suisse : 18 chiffres commençant par 99 ou 98. |
-| `91346097000000000000` | Planzer : 20 chiffres commençant par 91346097. |
+| `448291736405829173` | Quickpac : 18 chiffres commençant par 44. |
+| `44.82.917364.05829173` | Le même, avec les points qu'ajoute le cadre de suivi de Quickpac. |
+| `994829173640582917` | [La Poste suisse](carrier:swiss-post) : 18 chiffres commençant par 99 ou 98. |
+| `91346097482917364058` | Planzer : 20 chiffres commençant par 91346097. |
 
 Si l'expéditeur l'a prévu, Quickpac confie à La Poste les colis qu'il ne peut pas livrer, et son cadre de suivi affiche un lien « Post Tracking ». Un numéro en 44 de 17 ou 19 chiffres a en général perdu ou gagné un chiffre. Pas de numéro du tout ? Demande-le à l'expéditeur, ou lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -55,7 +55,7 @@ Quickpac ne livre qu'en Suisse, dans des zones de codes postaux dont il ne publi
 
 **Passage manqué.** Deux jeux de règles sont publiés, et aucune page ne dit lequel vaut pour ton colis : suis la carte ou le message reçu.
 
-- **La carte « Information de retrait » de Quickpac** indique un point de retrait proche, où le colis t'attend dès le jour ouvrable suivant, pendant 14 jours, avant de repartir chez l'expéditeur. La FAQ de Quickpac cite les points PickMup de Migros, mais le site de PickMup ne répondait pas le 9 octobre 2026 : fie-toi à la carte. Présente le code de retrait de la carte ou du suivi, et ne le confie qu'à qui va chercher le colis pour toi. Certains colis vont chez Coop Pick-up, qui te prévient par SMS ou e-mail quand ils sont prêts. Son site renvoie ses commandes à la boutique après 7 jours, et aucune page ne dit si ce délai ou celui de 14 jours vaut pour un colis Quickpac : va le chercher sans attendre, et pose tes questions à l'expéditeur ou à Coop Pick-up.
+- **La carte « Information de retrait » de Quickpac** indique un point de retrait proche, où le colis t'attend dès le jour ouvrable suivant, pendant 14 jours, avant de repartir chez l'expéditeur. La FAQ de Quickpac cite les points PickMup de Migros, mais fie-toi à la carte. Présente le code de retrait de la carte ou du suivi, et ne le confie qu'à qui va chercher le colis pour toi. Certains colis vont chez Coop Pick-up, qui te prévient par SMS ou e-mail quand ils sont prêts. Son site renvoie ses commandes à la boutique après 7 jours, et aucune page ne dit si ce délai ou celui de 14 jours vaut pour un colis Quickpac : va le chercher sans attendre, et pose tes questions à l'expéditeur ou à Coop Pick-up.
 - **L'avis de passage de Planzer Colis** porte une clé de livraison pour son portail destinataire : choisis un nouveau « Jour de livraison », indique un « Lieu de dépôt » ou vois quel point colis Planzer garde ton colis. Un colis ni remis ni déposé y part tout seul et y reste en règle générale 7 jours ; apporte le code de retrait et une pièce d'identité. Les points colis sont des magasins ou des boîtes de retrait, parfois ouverts jour et nuit. L'expéditeur peut désactiver ces options. Le numéro seul ne montre que le statut : pour modifier, passe par la clé ou le lien de l'e-mail ou du SMS.
 
 Un colis confié à La Poste a droit à une nouvelle tentative et, si elle échoue, t'attend à l'office de poste.
@@ -70,7 +70,7 @@ C'est la boutique qui a le contrat avec Quickpac : c'est elle qui agit.
 
 **Indiqué livré, mais introuvable.** Quickpac te demande de vérifier que personne ne l'a pris pour toi, puis de regarder dans le compartiment à colis, la cage d'escalier et l'entrée. Planzer Colis demande que le statut indique `Colis livré`, puis de voir la « Confirmation de livraison » dans son portail (parfois une photo), avant d'écrire via son formulaire. Voir [colis livré mais non reçu](guide:delivered-not-received).
 
-**Abîmé ou perdu.** « Pour signaler un dommage ou une perte, veuillez vous adresser directement à votre expéditeur », écrit Planzer Colis. Pour un dommage, l'expéditeur veut des photos de la marchandise, du colis et de l'étiquette. La FAQ anglaise de Quickpac renvoie à un formulaire dont le lien menait à une erreur le 9 octobre 2026.
+**Abîmé ou perdu.** « Pour signaler un dommage ou une perte, veuillez vous adresser directement à votre expéditeur », écrit Planzer Colis. Pour un dommage, l'expéditeur veut des photos de la marchandise, du colis et de l'étiquette.
 
 **Le délai de l'expéditeur.** Les conditions de Quickpac limitent sa responsabilité à CHF 500.– par colis, sauf accord écrit, et l'expéditeur doit déclarer le cas par écrit dans les 30 jours après avoir remis le colis. Un colis déposé à la demande de l'expéditeur ou du destinataire n'est pas couvert. Préviens vite la boutique.
 
@@ -78,9 +78,9 @@ C'est la boutique qui a le contrat avec Quickpac : c'est elle qui agit.
 
 ## Quickpac contact : téléphone, formulaire et e-mail
 
-Quickpac renvoie toutes les questions sur un colis à Planzer Paket, Planzer Colis en français. Ses propres pages n'existent qu'en allemand et en anglais : quickpac.ch/fr mène à une erreur. Relevé le 9 octobre 2026 :
+Quickpac renvoie toutes les questions sur un colis à Planzer Paket, Planzer Colis en français. Ses propres pages n'existent qu'en allemand et en anglais. Les canaux :
 
-- **Service client de Planzer Colis :** 0848 00 19 36, du lundi au vendredi de 8 h à 18 h, CHF 0.08 la minute depuis un poste fixe. Garde ton numéro d'envoi sous la main.
+- **Service client de Planzer Colis :** 0848 00 19 36, du lundi au vendredi de 8 h à 18 h (heure suisse), CHF 0.08 la minute depuis un poste fixe. Garde ton numéro d'envoi sous la main.
 - **Formulaire :** sur [la page Aide et contact de Planzer Colis](https://www.planzer-paket.ch/fr/aide-et-contact/), pour un colis introuvable, une nouvelle livraison, un changement d'adresse ou une réclamation.
 - **Ligne en français de la page d'accueil de Quickpac :** 021 821 02 02, celle du service client de Planzer Paket, sans horaires indiqués.
 - **Ligne gratuite de Quickpac :** 0800 363 363, toujours sur ses pages, avec des horaires contradictoires.
@@ -90,15 +90,21 @@ Impossible d'appeler le livreur directement. Aucune page ne dit si le 0848 fonct
 
 ## Suivre un colis Quickpac avec Peek
 
-[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi. Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et tant que c'est le site de suivi de Planzer qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi.
 
-Il affiche le statut, l'historique, la livraison prévue, le poids, les dimensions, l'heure de livraison et le pays de destination, mais pas l'adresse du destinataire. `Shipped` y apparaît comme livré. Peek ne peut ni contacter Quickpac à ta place, ni accélérer le colis.
+Il affiche le statut, l'historique, la livraison prévue, le poids, les dimensions, l'heure de livraison et le pays de destination, mais pas l'adresse du destinataire. `Shipped` y apparaît comme livré.
+
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h, heure suisse, le jour où le colis est en livraison (`In delivery`), tant que le site de suivi de Planzer répond. Sinon, il vérifie toutes les heures. Après deux jours sans nouvelles (12 heures tant que le colis en est à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures même si tu le gardes ouvert, puis toutes les 6 heures une fois le colis à « Étiquette créée » depuis sept jours.
+
+Quand le dernier scan date de quatre jours et que le colis en est encore à « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis dit alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Quickpac. », avec un lien « Demande de l’aide à Quickpac » vers la page de contact de Planzer Colis (en allemand). Après trois semaines sans nouveau scan, elle dit « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Quickpac. »
+
+Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut ni contacter Quickpac à ta place, ni accélérer le colis.
 
 ## Questions sur le suivi Quickpac
 
 ### Quel est le numéro de téléphone de Quickpac ?
 
-Pour ton colis, appelle le service client de Planzer Colis au 0848 00 19 36, du lundi au vendredi de 8 h à 18 h. La page d'accueil de Quickpac donne aussi le 021 821 02 02 pour le français.
+Pour ton colis, appelle le service client de Planzer Colis au 0848 00 19 36, du lundi au vendredi de 8 h à 18 h, heure suisse. La page d'accueil de Quickpac donne aussi le 021 821 02 02 pour le français.
 
 ### Le Quickpac tracking ID, c'est le numéro du colis ?
 

@@ -18,10 +18,10 @@ The examples below use made-up digits; the last two are [other carriers' numbers
 
 | Number | Whose it is |
 | --- | --- |
-| `441234567890123456` | Quickpac: 18 digits starting 44. |
-| `44.12.345678.90123456` | The same, dotted as Quickpac's tracking box writes it. |
-| `990000000000000000` | Swiss Post: 18 digits starting 99 or 98. |
-| `91346097000000000000` | [Planzer](carrier:planzer): 20 digits starting 91346097. |
+| `448291736405829173` | Quickpac: 18 digits starting 44. |
+| `44.82.917364.05829173` | The same, dotted as Quickpac's tracking box writes it. |
+| `994829173640582917` | [Swiss Post](carrier:swiss-post): 18 digits starting 99 or 98. |
+| `91346097482917364058` | [Planzer](carrier:planzer): 20 digits starting 91346097. |
 
 If the sender agreed, Quickpac hands undeliverable parcels to Swiss Post, and its tracking can show a "Post tracking" link. A 44 number with 17 or 19 digits has usually lost or gained one. No number? Ask the sender, or see [how to find your tracking number](guide:find-tracking-number).
 
@@ -54,7 +54,7 @@ Quickpac delivers only in Switzerland, in selected postcode areas. Speed is the 
 
 **Missed delivery.** Two sets of rules are published, and no page says which applies to your parcel, so follow the card or message you get:
 
-- **Quickpac's "Abholinformationen" card** names a nearby pickup point, ready from the next working day. Quickpac says the parcel waits there 14 days, then goes back to the sender. Its FAQ names Migros' PickMup points, but PickMup's site didn't load on 9 October 2026 to confirm it still runs: go by the card. Show the pickup code from the card or tracking. Some parcels go to Coop Pick-up, which tells you by SMS or email. Coop Pick-up's own rule is to send orders back after 7 days.
+- **Quickpac's "Abholinformationen" card** names a nearby pickup point, ready from the next working day. Quickpac says the parcel waits there 14 days, then goes back to the sender. Its FAQ names Migros' PickMup points; go by the card. Show the pickup code from the card or tracking. Some parcels go to Coop Pick-up, which tells you by SMS or email. Coop Pick-up's own rule is to send orders back after 7 days.
 - **Planzer Paket's delivery card** has a code for its recipient portal: pick a new day, name a safe place or see which Planzer Parcel shop holds the parcel. A shop usually keeps it 7 days: bring the pickup code and your identity card. Some shops are pickup boxes, some open around the clock. The sender can switch options off.
 
 Parcels handed to Swiss Post get another attempt, then wait at the post office.
@@ -67,7 +67,7 @@ Parcels handed to Swiss Post get another attempt, then wait at the post office.
 
 **Delivered, but not there.** Quickpac asks you to check that nobody took it in, and to look in the parcel compartment, staircase and entrance. Planzer Paket asks you to check that the status says `Parcel delivered`, see "Delivery confirmation" in its portal (sometimes a photo), then use its form. See [delivered but not received](guide:delivered-not-received).
 
-**Damaged or lost.** Planzer Paket sends you to the sender, who wants photos of the goods, parcel and label. Quickpac's English FAQ points to a contact form whose link returned an error on 9 October 2026.
+**Damaged or lost.** Planzer Paket sends you to the sender, who wants photos of the goods, parcel and label.
 
 **The sender's deadline.** Quickpac's contract is with the sender. Its terms cap its liability at CHF 500 per parcel unless agreed otherwise, and the sender must claim in writing within 30 days of handing the parcel over. Parcels deposited on request aren't covered. Tell the shop quickly.
 
@@ -75,9 +75,9 @@ Parcels handed to Swiss Post get another attempt, then wait at the post office.
 
 ## Quickpac customer service and contact
 
-Quickpac sends every parcel question to Planzer Paket. As listed on 9 October 2026:
+Quickpac sends every parcel question to Planzer Paket:
 
-- **Planzer Paket customer service:** 0848 00 19 36, Monday to Friday 8 am to 6 pm, CHF 0.08 per minute from Swiss landlines. Have your tracking number ready.
+- **Planzer Paket customer service:** 0848 00 19 36, Monday to Friday 8 am to 6 pm Swiss time, CHF 0.08 per minute from Swiss landlines. Have your tracking number ready.
 - **Contact form:** on [Planzer Paket's contact page](https://www.planzer-paket.ch/en/contact/), for a missing parcel, redelivery, a new date, an address change or complaints. For damage or loss, contact the sender first.
 - **Lines on Quickpac's German homepage:** Planzer Paket's customer service lines, by language: 044 438 50 40 (German and English), 021 821 02 02 (French), 091 611 54 84 (Italian), no hours given.
 - **Quickpac's free line:** 0800 363 363, still on its pages, with conflicting hours.
@@ -87,9 +87,15 @@ Drivers can't be called directly. No page says whether 0848 works from abroad.
 
 ## Tracking a Quickpac parcel with Peek
 
-[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too. It checks up to every 10 minutes (every 2 minutes on the day the parcel is out for delivery, from 6 am Swiss time, while Planzer's tracking site answers; through tracking services, every 15 minutes) and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too.
 
-It shows the status, history, expected delivery, weight, dimensions, delivery time and destination country. It leaves out the recipient address. `Shipped` appears as delivered. Peek can't contact Quickpac for you.
+It shows the status, history, expected delivery, weight, dimensions, delivery time and destination country. It leaves out the recipient address. `Shipped` appears as delivered.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day the parcel is out for delivery (`In delivery`), from 6 a.m. Swiss time, every 2 minutes while Planzer's tracking site answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created".
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Quickpac.", with a "Get help from Quickpac" link to Planzer Paket's contact page (in German). After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Quickpac."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Quickpac for you.
 
 ## Questions about Quickpac tracking
 

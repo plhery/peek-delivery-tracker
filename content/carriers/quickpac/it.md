@@ -18,10 +18,10 @@ Alcuni numeri svizzeri si somigliano. Con cifre inventate:
 
 | Numero | Di chi è |
 | --- | --- |
-| `441234567890123456` | Quickpac: 18 cifre che iniziano con 44. |
-| `44.12.345678.90123456` | Lo stesso, con i punti che aggiunge il riquadro di Quickpac. |
-| `990000000000000000` | Non è Quickpac: Peek lo attribuisce alla Posta Svizzera (18 cifre che iniziano con 99 o 98). |
-| `91346097000000000000` | Planzer: 20 cifre che iniziano con 91346097. |
+| `448291736405829173` | Quickpac: 18 cifre che iniziano con 44. |
+| `44.82.917364.05829173` | Lo stesso, con i punti che aggiunge il riquadro di Quickpac. |
+| `994829173640582917` | Non è Quickpac: Peek lo attribuisce alla [Posta Svizzera](carrier:swiss-post) (18 cifre che iniziano con 99 o 98). |
+| `91346097482917364058` | Planzer: 20 cifre che iniziano con 91346097. |
 
 Se il mittente l'ha concordato, Quickpac passa alla Posta i pacchi che non riesce a consegnare, e il riquadro può mostrare un link «Post tracking». Un numero che inizia con 44 ma ha 17 o 19 cifre di solito ha perso o guadagnato una cifra; per un numero di forma diversa, leggi [come capire il corriere dal numero](guide:tracking-number-formats). Nessun numero? Chiedilo al mittente o leggi [dove si trova il codice tracking](guide:find-tracking-number).
 
@@ -54,7 +54,7 @@ Quickpac consegna solo in Svizzera, in zone di NPA selezionate che non elenca. N
 
 **Consegna mancata.** Sono pubblicate due serie di regole e nessuna pagina dice quale vale per il tuo pacco, quindi segui l'avviso o il messaggio che ricevi:
 
-- **La scheda di Quickpac con le informazioni per il ritiro** indica un punto di ritiro vicino: il pacco è lì dal giorno lavorativo successivo, resta in giacenza 14 giorni e poi torna al mittente. Le FAQ citano i punti PickMup della Migros, ma il 9 ottobre 2026 il sito di PickMup non si è aperto per confermare che il servizio c'è ancora: fa fede la scheda. Mostra il codice di ritiro, dalla scheda o dal tracking sul telefono, e dallo solo a chi ritira per te. Alcuni pacchi vanno a un punto Coop Pick-up, che ti manda un SMS o un'e-mail quando sono pronti. Il sito di Coop Pick-up rimanda i suoi ordini al negozio dopo 7 giorni, ma nessuna pagina dice se vale questo termine o quello di 14 giorni per un pacco Quickpac: ritiralo presto e per le domande rivolgiti al mittente o a Coop Pick-up.
+- **La scheda di Quickpac con le informazioni per il ritiro** indica un punto di ritiro vicino: il pacco è lì dal giorno lavorativo successivo, resta in giacenza 14 giorni e poi torna al mittente. Le FAQ citano i punti PickMup della Migros, ma fa fede la scheda. Mostra il codice di ritiro, dalla scheda o dal tracking sul telefono, e dallo solo a chi ritira per te. Alcuni pacchi vanno a un punto Coop Pick-up, che ti manda un SMS o un'e-mail quando sono pronti. Il sito di Coop Pick-up rimanda i suoi ordini al negozio dopo 7 giorni, ma nessuna pagina dice se vale questo termine o quello di 14 giorni per un pacco Quickpac: ritiralo presto e per le domande rivolgiti al mittente o a Coop Pick-up.
 - **L'avviso di consegna di Planzer Pacchi** ha un codice di consegna per il portale destinatari: lì scegli un altro «Giorno di consegna», indichi un «Luogo di deposito» o vedi quale punto Planzer Pacchi ha il pacco. Di norma ci resta 7 giorni: porta il codice di ritiro e un documento d'identità. Alcuni punti sono box di ritiro, alcuni aperti 24 ore su 24. Il mittente può disattivare queste opzioni.
 
 I pacchi passati alla Posta hanno un altro tentativo di consegna, poi aspettano all'ufficio postale.
@@ -67,7 +67,7 @@ I pacchi passati alla Posta hanno un altro tentativo di consegna, poi aspettano 
 
 **Risulta consegnato, ma non c'è.** Quickpac ti chiede di verificare che nessuno l'abbia preso per te e di guardare nello scomparto pacchi, sulle scale e nell'ingresso. Planzer Pacchi ti chiede di controllare che lo stato sia `Spedizione recapitata`, di aprire la «Conferma di consegna» nel portale (a volte con una foto, se il mittente lo prevede), poi di usare il suo modulo. Leggi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-**Danneggiato o perso.** Planzer Pacchi scrive: «Per notificare un sinistro o uno smarrimento, La preghiamo di rivolgersi direttamente al Suo mittente.» Per un danno il mittente vuole foto della merce, del pacco e dell'etichetta. Le FAQ inglesi di Quickpac rimandano a un modulo di contatto il cui link, il 9 ottobre 2026, dava errore.
+**Danneggiato o perso.** Planzer Pacchi scrive: «Per notificare un sinistro o uno smarrimento, La preghiamo di rivolgersi direttamente al Suo mittente.» Per un danno il mittente vuole foto della merce, del pacco e dell'etichetta.
 
 **La scadenza del mittente.** Le condizioni di Quickpac limitano la sua responsabilità a CHF 500 per pacco, salvo accordi scritti diversi, e il mittente deve segnalare il caso per iscritto entro 30 giorni da quando gli ha affidato il pacco. I pacchi depositati su richiesta non sono coperti. Avvisa il negozio presto.
 
@@ -75,10 +75,10 @@ I pacchi passati alla Posta hanno un altro tentativo di consegna, poi aspettano 
 
 ## Contattare Quickpac: telefono in italiano, modulo ed e-mail
 
-Quickpac manda tutte le domande sui pacchi a Planzer Pacchi. I canali, come risultavano il 9 ottobre 2026:
+Quickpac manda tutte le domande sui pacchi a Planzer Pacchi. I canali:
 
 - **Linea in italiano:** 091 611 54 84, sulla homepage tedesca di Quickpac per il servizio clienti di Planzer Pacchi, senza orari. Tieni pronto il numero di spedizione.
-- **Centrale dedicata alla clientela di Planzer Pacchi:** 0848 00 19 36, da lunedì a venerdì dalle 8.00 alle 18.00, CHF 0.08 al minuto da rete fissa svizzera.
+- **Centrale dedicata alla clientela di Planzer Pacchi:** 0848 00 19 36, da lunedì a venerdì dalle 8.00 alle 18.00, ora svizzera, CHF 0.08 al minuto da rete fissa svizzera.
 - **Modulo di contatto:** sulla [pagina contatti di Planzer Pacchi](https://www.planzer-paket.ch/it/contatti/), per un pacco che non trovi, una nuova consegna o data, un cambio d'indirizzo, danni, smarrimenti o reclami.
 - **Linea gratuita di Quickpac:** 0800 363 363, ancora sulle sue pagine, con orari diversi da una pagina all'altra.
 - **E-mail:** info@quickpac.ch, per i reclami sulla consegna.
@@ -87,9 +87,15 @@ I fattorini non si possono chiamare direttamente. Il sito di Quickpac esiste sol
 
 ## Seguire un pacco Quickpac con Peek
 
-[Peek](/) riconosce un numero di 18 cifre che inizia con 44 come Quickpac e lo legge dal sito di tracking di Planzer; puoi incollare anche un link di tracking di quickpac.ch o di tracking.app.planzer.ch. Controlla il pacco fino a ogni 10 minuti (fino a ogni 2 minuti dalle 6.00, ora svizzera, quando è in consegna, solo il giorno stesso e finché risponde il sito di tracking di Planzer; quando rispondono i servizi di tracciamento, ogni 15 minuti), mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora.
+[Peek](/) riconosce un numero di 18 cifre che inizia con 44 come Quickpac e lo legge dal sito di tracking di Planzer; puoi incollare anche un link di tracking di quickpac.ch o di tracking.app.planzer.ch.
 
-Mostra stato, cronologia, consegna prevista, peso, dimensioni, ora di consegna e paese di destinazione, e lascia fuori l'indirizzo del destinatario che il sito di Planzer mostra. `Shipped` compare come consegnato. Non può contattare Quickpac al posto tuo né far arrivare prima il pacco.
+Mostra stato, cronologia, consegna prevista, peso, dimensioni, ora di consegna e paese di destinazione, e lascia fuori l'indirizzo del destinatario che il sito di Planzer mostra. `Shipped` compare come consegnato.
+
+Finché il pacco è aperto in Peek, o nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6.00, ora svizzera, nel giorno in cui il pacco è in consegna (`In delivery`), finché risponde il sito di tracking di Planzer. Altrimenti controlla ogni ora. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico») controlla ogni ora anche se lo tieni aperto, e dopo sette giorni su «Etichetta creata» ogni 6 ore.
+
+Quando l'ultima scansione ha quattro giorni e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con il giorno di quella scansione, per esempio «Nessun aggiornamento da lun 12 ott». La pagina del pacco dice allora «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Quickpac.», con il link «Chiedi aiuto a Quickpac» alla pagina di contatto di Planzer Pacchi (in tedesco). Dopo tre settimane senza nuove scansioni dice «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a Quickpac.»
+
+Può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Quickpac al posto tuo né far arrivare prima il pacco.
 
 ## Domande sul tracking Quickpac
 

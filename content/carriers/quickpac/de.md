@@ -18,10 +18,10 @@ Wie Quickpac-Nummern beginnen, steht auf keiner Seite von Quickpac oder Planzer.
 
 | Nummer | Wem Peek sie zuordnet |
 | --- | --- |
-| `441234567890123456` | Quickpac: 18 Ziffern, beginnt mit 44. |
-| `44.12.345678.90123456` | Dieselbe Nummer, mit Punkten gegliedert, wie die Tracking-Box auf quickpac.ch sie zeigen kann. |
-| `990000000000000000` | Die Post: 18 Ziffern, beginnt mit 99 oder 98. |
-| `91346097000000000000` | [Planzer](carrier:planzer): 20 Ziffern, beginnt mit 91346097. |
+| `448291736405829173` | Quickpac: 18 Ziffern, beginnt mit 44. |
+| `44.82.917364.05829173` | Dieselbe Nummer, mit Punkten gegliedert, wie die Tracking-Box auf quickpac.ch sie zeigen kann. |
+| `994829173640582917` | [Die Post](carrier:swiss-post): 18 Ziffern, beginnt mit 99 oder 98. |
+| `91346097482917364058` | [Planzer](carrier:planzer): 20 Ziffern, beginnt mit 91346097. |
 
 Ist es mit dem Absender so vereinbart, gibt Quickpac unzustellbare Pakete an die Post weiter. Im Tracking kann dann ein Link „Post Tracking“ erscheinen. Laut Quickpac hat jedes Paket eine 18-stellige Nummer: Zählst du mehr oder weniger Ziffern, prüf die Nummer nochmals oder schau, [zu welchem Paketdienst sie passt](guide:tracking-number-formats). Gar keine Nummer? Ohne sie lässt sich ein Quickpac-Paket nicht verfolgen: Frag den Absender oder lies, wie du [deine Sendungsnummer findest](guide:find-tracking-number).
 
@@ -63,7 +63,7 @@ Ohne Internet nimmt die Gratisnummer 0800 363 363 den Deponierungsauftrag entgeg
 
 **Verpasste Zustellung.** Veröffentlicht sind zwei Regelwerke, und keine Seite sagt, welches für dein Paket gilt. Richte dich nach der Karte oder Nachricht, die du bekommst:
 
-- **Quickpacs Karte „Abholinformation“** nennt eine Abholstelle in deiner Nähe, wo das Paket ab dem nächsten Werktag liegt. Laut Quickpac wartet es dort 14 Tage und geht danach an den Absender zurück. Abholen kannst du es mit dem Abholcode von der Karte oder aus dem Tracking. Gib ihn nur Leuten, die es für dich holen. Als Abholstellen nennt Quickpacs FAQ PickMup der Migros, doch PickMups Seite ließ sich am 9. Oktober 2026 nicht laden: Maßgebend ist die Karte. Manche Pakete gehen an Coop Pick-up. Dann meldet sich Coop Pick-up per SMS oder E-Mail und schickt Bestellungen laut eigener Seite nach 7 Tagen an den Shop zurück.
+- **Quickpacs Karte „Abholinformation“** nennt eine Abholstelle in deiner Nähe, wo das Paket ab dem nächsten Werktag liegt. Laut Quickpac wartet es dort 14 Tage und geht danach an den Absender zurück. Abholen kannst du es mit dem Abholcode von der Karte oder aus dem Tracking. Gib ihn nur Leuten, die es für dich holen. Als Abholstellen nennt Quickpacs FAQ PickMup der Migros, maßgebend ist aber die Karte. Manche Pakete gehen an Coop Pick-up. Dann meldet sich Coop Pick-up per SMS oder E-Mail und schickt Bestellungen laut eigener Seite nach 7 Tagen an den Shop zurück.
 - **Planzer Pakets Zustellkarte** trägt einen Zustellschlüssel für das Empfängerportal. Dort wählst du unter „Zustelltag“ ein neues Datum, gibst unter „Deponierort“ einen Ablageort an oder siehst, in welchem Planzer Paket Shop das Paket liegt. Kann Planzer Paket ein Paket weder übergeben noch deponieren, leitet es dieses automatisch in einen nahen Shop um. Dort bleibt es in der Regel 7 Tage. Bring den Abholcode (digital oder ausgedruckt) und einen Ausweis mit. Manche Shops sind Abholboxen, einige rund um die Uhr offen. Ist eine Option gelb oder grau hinterlegt, hat der Absender sie gesperrt.
 
 Mit der Sendungsnummer allein siehst du bei Planzer Paket nur den Status. Ändern geht über den Zustellschlüssel, den Link aus der E-Mail oder SMS oder nach einer Registrierung mit der E-Mail-Adresse, die der Absender von dir hat. Geht ein Paket an die Post, versucht sie es nochmals und legt es sonst in der Postfiliale bereit.
@@ -78,7 +78,7 @@ Den Vertrag mit Quickpac hat der Absender, nicht du. Bei Verspätung, Schaden od
 
 **Zugestellt, aber nicht da.** Quickpac bittet dich zu prüfen, ob jemand das Paket für dich angenommen hat, und im Ablagefach des Briefkastens, im Treppenhaus und im Eingangsbereich nachzusehen. Planzer Paket verlangt, dass der Status `Sendung zugestellt` lautet, und zeigt im Portal unter „Lieferbestätigung“ den Nachweis, je nach Absender mit Foto. Hilft das nicht, meldest du es über das Formular der Zentrale für Kundenanliegen. Schritt für Schritt: [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Beschädigt oder verloren.** Planzer Paket schickt dich dafür direkt zum Absender. Für eine Schadenmeldung will dieser ein Foto der Ware, des Pakets und der Sendungsetikette. Der Link zum Kontaktformular in Quickpacs englischer FAQ führte am 9. Oktober 2026 auf eine Fehlerseite (404).
+**Beschädigt oder verloren.** Planzer Paket schickt dich dafür direkt zum Absender. Für eine Schadenmeldung will dieser ein Foto der Ware, des Pakets und der Sendungsetikette.
 
 **Die Frist des Absenders.** Laut Quickpacs AGB haftet Quickpac mit höchstens CHF 500 pro Paket, wenn schriftlich nichts anderes vereinbart ist. Der Absender muss Schaden oder Verlust innert 30 Tagen nach der Einlieferung schriftlich an info@quickpac.ch melden, sonst verfällt der Anspruch. Pakete, die auf Wunsch deponiert wurden, sind ausgeschlossen. Melde dich also rasch beim Shop.
 
@@ -88,10 +88,10 @@ Den Vertrag mit Quickpac hat der Absender, nicht du. Bei Verspätung, Schaden od
 
 ## Quickpac Kontakt in der Schweiz: Kundendienst und Telefon
 
-Quickpacs Kontaktseite schickt dich mit allen Fragen zu deinem Paket an Planzer Paket. Stand 9. Oktober 2026:
+Quickpacs Kontaktseite schickt dich mit allen Fragen zu deinem Paket an Planzer Paket:
 
 - **Planzer Paket Kundendienst auf Deutsch:** 044 438 50 40, so auf Quickpacs Startseite, ohne Zeiten. Halte die Sendungsnummer bereit.
-- **Zentrale für Kundenanliegen:** 0848 00 19 36, Montag bis Freitag 8 bis 18 Uhr, CHF 0.08 pro Minute vom Schweizer Festnetz.
+- **Zentrale für Kundenanliegen:** 0848 00 19 36, Montag bis Freitag 8 bis 18 Uhr Schweizer Zeit, CHF 0.08 pro Minute vom Schweizer Festnetz.
 - **Kontaktformular:** auf [Planzer Pakets Kontaktseite](https://www.planzer-paket.ch/de/kontakt/) unter „Ich empfange ein Paket“, etwa für „Sendung erneut zustellen“, „Neuer Liefertermin“, „Zustellung stoppen“, „Adressänderung“, „Schaden-/Verlustmeldung“ und „Beanstandungen“.
 - **Quickpacs Gratisnummer:** 0800 363 363 steht noch auf Quickpacs Seiten, mit widersprüchlichen Zeiten.
 - **E-Mail:** info@quickpac.ch, für Beschwerden zur Zustellung.
@@ -100,9 +100,15 @@ Zusteller kannst du nicht direkt anrufen.
 
 ## Quickpac-Sendung mit Peek verfolgen
 
-[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch. Es schaut bis zu alle 10 Minuten nach, ab 6 Uhr Schweizer Zeit bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour und solange Planzers Tracking-Seite antwortet; über Tracking-Dienste alle 15 Minuten), zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
+[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch.
 
-Du siehst Status, Verlauf, voraussichtliche Zustellung, Gewicht, Abmessungen, Zustellzeit und Zielland. Die Empfängeradresse, die Planzers Seite zeigt, lässt Peek weg, und `Shipped` erscheint als zugestellt. Deponierungsauftrag, neuen Zustelltag oder Reklamation erledigst du weiter bei Quickpac, Planzer Paket oder dem Shop: Peek kann sie nicht für dich kontaktieren.
+Du siehst Status, Verlauf, voraussichtliche Zustellung, Gewicht, Abmessungen, Zustellzeit und Zielland. Die Empfängeradresse, die Planzers Seite zeigt, lässt Peek weg, und `Shipped` erscheint als zugestellt.
+
+Solange du das Paket in Peek geöffnet hast, oder am Liefertag mit eingeschalteten Mitteilungen, prüft Peek bis zu alle 10 Minuten; an dem Tag, an dem das Paket in Zustellung ist (`In delivery`), ab 6 Uhr Schweizer Zeit alle 2 Minuten, solange Planzers Tracking-Seite antwortet. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, auch wenn du es geöffnet hast, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden.
+
+Ist der neueste Scan vier Tage alt und steht das Paket noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Die Paketseite sagt dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Quickpac nach.“, mit dem Link „Hol dir Hilfe bei Quickpac“ zur Kontaktseite von Planzer Paket. Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Quickpac nach.“
+
+Mitteilungen bekommst du für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Deponierungsauftrag, neuen Zustelltag oder Reklamation erledigst du weiter bei Quickpac, Planzer Paket oder dem Shop: Peek kann sie nicht für dich kontaktieren.
 
 ## Fragen zum Quickpac Tracking
 

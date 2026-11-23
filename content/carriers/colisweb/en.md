@@ -16,8 +16,8 @@ The number is digits only, at least 8 of them. Colisweb's tracking box also acce
 
 | Shape | Invented example |
 | --- | --- |
-| 8 digits | `12345678` |
-| Longer, up to 32 digits | `1234567890` |
+| 8 digits | `48291736` |
+| Longer, up to 32 digits | `4829173654` |
 
 Eight digits also fit a [Mondial Relay](carrier:mondial-relay) shipment number and a [Heppner](carrier:heppner) number, both of which ask for a postcode. Longer numbers fit many carriers. Check which company your SMS or email names: furniture and large appliances also travel with [C Chez Vous](carrier:c-chez-vous), which tracks by order number. And Colisweb is not [Colis Privé](carrier:colis-prive): a different company with a similar name.
 
@@ -71,9 +71,9 @@ If the tracking still shows `Votre commande est confirmée.`, check the delivery
 
 ## How to contact Colisweb
 
-As listed on 12 October 2026, Colisweb gives recipients no phone number and no email address. Its tracking page's FAQ gives this route:
+Colisweb gives recipients no phone number and no email address. Its tracking page's FAQ gives this route:
 
-- **Chat:** enter your delivery postcode on [colisweb.com/suivi-livraison](https://www.colisweb.com/suivi-livraison). The follow-up page has a chat, open Monday to Saturday, 8am to 8pm.
+- **Chat:** enter your delivery postcode on [colisweb.com/suivi-livraison](https://www.colisweb.com/suivi-livraison). The follow-up page has a chat, open Monday to Saturday, 8am to 8pm Paris time.
 - **Contact form:** the FAQ also points to the form at colisweb.com/contact, but it's built for businesses (it asks for a professional email), so use the chat first.
 - **The shop:** for cancellations, returns, damage or a refund, contact the retailer you bought from.
 
@@ -81,11 +81,11 @@ Its privacy page lists an email for personal data requests only.
 
 ## Tracking a Colisweb delivery with Peek
 
-An 8-digit number fits Colisweb, Mondial Relay and Heppner, and none of them can be asked whether it knows the number, so [Peek](/) doesn't name a carrier on its own: press "Change" and pick Colisweb. Do the same with a longer number. Or paste a tracking link from colisweb.com that carries the number: Peek reads it as Colisweb whatever the length. Peek asks no postcode for Colisweb. Picked Mondial Relay by mistake? Its postcode field is the sign.
+An 8-digit number fits Colisweb, Mondial Relay and Heppner, some also TForce Freight in North America, and none of them can be asked whether it knows the number, so [Peek](/) doesn't name a carrier on its own: press "Change" and pick Colisweb. Do the same with a longer number. Or paste a tracking link from colisweb.com that carries the number: Peek reads it as Colisweb whatever the length. Peek asks no postcode for Colisweb. In France, as in the other countries Mondial Relay serves, Peek may show "Mondial Relay may have this parcel. Add the delivery postcode to track it." for an 8-digit number nobody answers for: if your SMS or email comes from Colisweb, don't add a postcode, pick Colisweb.
 
 Colisweb sends only step codes, so Peek shows every step in its own words in your language. It shows the status, three milestones (delivery confirmed, collected by the crew, delivered) with their times but without places, the retailer's name and the delivery time. While the delivery is booked, collected or out for delivery and not being rescheduled, it shows your slot: a day and hours, in Paris time. A cancelled delivery shows as returned to the sender. It leaves out your name and address.
 
-Peek checks up to every 10 minutes, or every 2 on the day it goes out for delivery, from 6 a.m. local time or, when Peek shows your slot, from half an hour before it opens, while Colisweb's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
+While the delivery is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes. Once Peek shows it "Out for delivery" that day, it checks every 2 minutes, from 6 a.m. Paris time or from half an hour before your slot opens, whichever is later. Notifications can follow "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created", except on your slot's day. If the delivery goes four days without a new line at "Label created" or "In transit", Peek shows "No tracking update since …" with that line's day, even when your slot is still ahead: a delivery booked for a later day can stay at "Label created" until the crew collects it. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
 
 ## Questions about Colisweb tracking
 

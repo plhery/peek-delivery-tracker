@@ -16,8 +16,8 @@ Le numéro ne contient que des chiffres, au moins 8. La case de suivi accepte au
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `12345678` | 8 chiffres, la forme la plus courte. Même longueur chez Mondial Relay et Heppner. |
-| `1234567890` | Un numéro plus long, jusqu'à 32 chiffres. Beaucoup d'autres transporteurs ont ces longueurs. |
+| `48291736` | 8 chiffres, la forme la plus courte. Même longueur chez Mondial Relay et Heppner. |
+| `4829173654` | Un numéro plus long, jusqu'à 32 chiffres. Beaucoup d'autres transporteurs ont ces longueurs. |
 
 Un numéro à 8 chiffres peut donc aussi être un numéro d'expédition [Mondial Relay](carrier:mondial-relay) ou un numéro [Heppner](carrier:heppner), deux suivis qui demandent un code postal. Regarde quelle entreprise signe ton SMS ou ton e-mail : les meubles et le gros électroménager voyagent aussi avec [C Chez Vous](carrier:c-chez-vous), qui se suit par numéro de commande. Et Colisweb n'est pas [Colis Privé](carrier:colis-prive) : les noms se ressemblent, mais ce sont deux sociétés différentes.
 
@@ -71,9 +71,9 @@ Le suivi reste sur `Votre commande est confirmée.` ? Regarde le jour de livrais
 
 ## Colisweb service client : chat, contact et téléphone
 
-Relevé le 12 octobre 2026, Colisweb ne donne aux destinataires ni numéro de téléphone ni adresse e-mail. La FAQ de sa page de suivi indique ce chemin :
+Colisweb ne donne aux destinataires ni numéro de téléphone ni adresse e-mail. La FAQ de sa page de suivi indique ce chemin :
 
-- **Chat :** saisis ton code postal de livraison sur [colisweb.com/suivi-livraison](https://www.colisweb.com/suivi-livraison). La page de suivi détaillée propose un chat, ouvert du lundi au samedi, de 8 h à 20 h.
+- **Chat :** saisis ton code postal de livraison sur [colisweb.com/suivi-livraison](https://www.colisweb.com/suivi-livraison). La page de suivi détaillée propose un chat, ouvert du lundi au samedi, de 8 h à 20 h, heure de Paris.
 - **Formulaire de contact :** la FAQ renvoie aussi au formulaire de colisweb.com/contact, mais il est fait pour les entreprises (il demande un e-mail professionnel). Passe d'abord par le chat.
 - **Le magasin :** pour une annulation, un retour, un dommage ou un remboursement, contacte l'enseigne qui t'a vendu l'article.
 
@@ -81,11 +81,11 @@ Sa politique de confidentialité donne une adresse e-mail, réservée aux demand
 
 ## Suivre une livraison Colisweb avec Peek
 
-Un numéro à 8 chiffres correspond à Colisweb, Mondial Relay et Heppner, et Peek ne peut demander à aucun d'eux s'il le connaît : [Peek](/) ne nomme donc pas le transporteur tout seul. Appuie sur « Changer » et choisis Colisweb. Avec un numéro plus long, Peek ne propose pas Colisweb et peut nommer un autre transporteur : passe aussi par « Changer ». Tu peux aussi coller un lien de suivi de colisweb.com qui contient le numéro : il est lu comme Colisweb, quelle que soit sa longueur. Aucun code postal n'est demandé pour Colisweb ; si un champ code postal apparaît, c'est que tu as choisi Mondial Relay ou Heppner par erreur.
+Un numéro à 8 chiffres correspond à Colisweb, Mondial Relay et Heppner, parfois aussi à TForce Freight en Amérique du Nord, et Peek ne peut demander à aucun d'eux s'il le connaît : [Peek](/) ne nomme donc pas le transporteur tout seul. Appuie sur « Changer » et choisis Colisweb. Avec un numéro plus long, Peek ne propose pas Colisweb et peut nommer un autre transporteur : passe aussi par « Changer ». Tu peux aussi coller un lien de suivi de colisweb.com qui contient le numéro : il est lu comme Colisweb, quelle que soit sa longueur. Aucun code postal n'est demandé pour Colisweb. En France, comme dans les autres pays que dessert Mondial Relay, Peek peut afficher « Mondial Relay a peut-être ce colis. Ajoute le code postal de livraison pour le suivre. » pour un numéro à 8 chiffres pour lequel personne ne répond : si ton SMS ou ton e-mail vient de Colisweb, n'ajoute pas de code postal et choisis Colisweb.
 
 Colisweb n'envoie que des codes d'étape : Peek affiche donc chaque étape avec ses propres mots, en français. Il montre le statut, trois étapes (livraison confirmée, commande récupérée par l'équipe, livrée) avec leur heure mais sans lieu, le nom de l'enseigne et l'heure de livraison. Tant que la livraison est programmée, récupérée ou en cours et qu'elle n'est pas en train d'être reprogrammée, il affiche ton créneau : un jour et des heures, à l'heure de Paris. Une livraison annulée apparaît comme retournée à l'expéditeur. Ton nom et ton adresse ne sont pas repris.
 
-Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois la livraison en cours (le jour même, dès 6 h, heure locale, et à partir d'une demi-heure avant le début de ton créneau, tant que c'est le suivi de Colisweb qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : chaque scan, les étapes importantes ou le jour de livraison uniquement. Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
+Tant que la livraison est ouverte dans Peek, ou le jour de la livraison avec les notifications activées, Peek la vérifie jusqu'à toutes les 10 minutes. Quand Peek l'affiche « En livraison » ce jour-là, il la vérifie toutes les 2 minutes, dès 6 h, heure de Paris, ou dès une demi-heure avant le début de ton créneau si c'est plus tard. Les notifications peuvent suivre « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek vérifie toutes les heures, et toutes les 6 heures après sept jours sans nouvelles à « Étiquette créée », sauf le jour de ton créneau. Si la livraison reste quatre jours sans nouvelle ligne à « Étiquette créée » ou « En transit », Peek affiche « Aucune mise à jour depuis … » avec le jour de cette ligne, même si ton créneau est encore à venir : une livraison réservée pour un autre jour peut rester à « Étiquette créée » jusqu'à ce que l'équipe la récupère. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
 
 ## Questions sur le suivi Colisweb
 

@@ -2140,6 +2140,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "relais-colis-sendungsverfolgung",
+      "title": "Relais Colis Sendungsverfolgung: Status, Abholung & Kontakt",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-sendungsverfolgung",
@@ -5024,6 +5032,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "tracciamento-relais-colis",
+      "title": "Tracciamento Relais Colis: stati, ritiro e contatti",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-tracking",
@@ -6434,6 +6450,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "seguimiento-relais-colis",
+      "title": "Seguimiento Relais Colis: estados, recogida y contacto",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "seguimiento-poste-italiane",
@@ -7836,6 +7860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "seguimento-relais-colis",
+      "title": "Seguimento Relais Colis: estados, recolha e contacto",
+      "name": "Relais Colis",
+      "color": "#7bb928"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-rastreio",
@@ -9230,6 +9262,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Chronopost śledzenie paczki: z Francji do Polski i statusy",
       "name": "Chronopost",
       "color": "#0056a7"
+    },
+    {
+      "id": "relais-colis",
+      "catalog": "relais-colis",
+      "slug": "sledzenie-relais-colis",
+      "title": "Śledzenie Relais Colis: statusy, odbiór i kontakt",
+      "name": "Relais Colis",
+      "color": "#7bb928"
     },
     {
       "id": "poste-italiane",

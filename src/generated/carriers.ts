@@ -1992,6 +1992,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FAN Courier International tracking: AWB and statuses",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "jt-express-brazil-tracking",
+      "title": "J&T Express Brazil tracking: status, pickup and contact",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "anjun-logistics-tracking",
+      "title": "Anjun Logistics tracking: China-to-Brazil statuses and SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
+    },
+    {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "xyl-ships-tracking",
+      "title": "XYL-Ships tracking: NUDE and XLWL numbers and statuses",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
+    },
+    {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "jadlog-tracking",
+      "title": "Jadlog tracking: 14-digit codes, Pickup, Predict and status",
+      "name": "Jadlog",
+      "color": "#dc0032"
+    },
+    {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "gls-poland-tracking",
+      "title": "GLS Poland tracking: statuses, GLS Points, lockers and help",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
     }
   ],
   "de": [
@@ -11876,6 +11916,30 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio SPX Express: pedidos da Shopee, status e prazos",
       "name": "SPX Express Brazil",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "rastreio-jt-express-brasil",
+      "title": "Rastreio J&T Express Brasil: status, entrega e contato",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "rastreio-anjun-express",
+      "title": "Rastreio Anjun Express: encomendas da China, status e SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
+    },
+    {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "rastreio-jadlog",
+      "title": "Rastreio Jadlog: código de 14 dígitos, Pickup e status",
+      "name": "Jadlog",
+      "color": "#dc0032"
     }
   ],
   "pl": [
@@ -13854,6 +13918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie FAN Courier International: AWB i statusy",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "sledzenie-gls-polska",
+      "title": "Śledzenie GLS Polska: statusy, punkty GLS, automaty i pomoc",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
     }
   ],
   "ru": [

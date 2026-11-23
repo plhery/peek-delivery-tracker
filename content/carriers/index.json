@@ -246,5 +246,10 @@
   { "id": "zipasgo", "catalog": "zipasgo", "name": "ZipasGo", "languages": ["en", "lt", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dk-logistics-ee", "catalog": "dk-logistics-ee", "name": "DK Logistics", "languages": ["en", "et", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jet-express-ee", "catalog": "jet-express-ee", "name": "Jet Express", "languages": ["en", "et", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "fan-courier-international", "catalog": "fan-courier-international", "name": "FAN Courier International", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] }
+  { "id": "fan-courier-international", "catalog": "fan-courier-international", "name": "FAN Courier International", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] },
+  { "id": "j-and-t-br", "catalog": "j-and-t-br", "name": "J&T Express Brazil", "languages": ["en", "pt-br"] },
+  { "id": "anjun", "catalog": "anjun", "name": "Anjun Logistics", "languages": ["en", "pt-br"] },
+  { "id": "xyl-ships", "catalog": "xyl-ships", "name": "XYL-Ships", "languages": ["en"] },
+  { "id": "jadlog", "catalog": "jadlog", "name": "Jadlog", "languages": ["en", "pt-br"] },
+  { "id": "gls-pl", "catalog": "gls-pl", "name": "GLS Poland", "languages": ["en", "pl"] }
 ]

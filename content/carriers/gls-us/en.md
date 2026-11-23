@@ -47,7 +47,7 @@ If nothing follows `LABEL CREATED` for a day or more, Peek says "The sender hasn
 
 **Address.** GLS doesn't deliver to P.O. boxes, and it sorts parcels by ZIP code, so a wrong one can delay a parcel. It reroutes a parcel only with the sender's authorization: ask the shop. See [changing a delivery address](guide:change-delivery-address).
 
-**Days.** Monday to Friday; Saturday only in some areas, when the sender asks for it; never Sunday. GLS is closed on six holidays; the next are Thanksgiving (November 26), Christmas Day and New Year's Day. A parcel due on a holiday comes the next business day.
+**Days.** Monday to Friday; Saturday only in some areas, when the sender asks for it; never Sunday. GLS is closed on six US holidays: New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and Christmas Day. A parcel due on a holiday comes the next business day.
 
 **Times.** These depend on the sender's service. Priority comes by 10:30 a.m. the next business day in most areas, Ground by 5 p.m. (6 p.m. in rural areas). On longer trips, Priority comes by 10:30 a.m. on the scheduled day and Ground by the end of it. Saturday deliveries come by 10:30 a.m. in most areas.
 
@@ -59,7 +59,7 @@ If nothing follows `LABEL CREATED` for a day or more, Peek says "The sender hasn
 
 **Not found.** GLS US's tracker says when it doesn't know a number. Peek then shows "Waiting for GLS US’s first scan" for an SH number you left to it, or "Waiting for GLS US" when you picked GLS US yourself, and keeps asking. A new label often takes a while to show up. If there's still nothing two days after you added an SH number you left to Peek, Peek flags it: "Still waiting for the carrier’s first update". If you picked GLS US and it still doesn't know the number two days later, with nothing else answering for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shop's email, then ask the shop whether the parcel has really been sent.
 
-**No news for days.** After four days without a new scan, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of that scan: "No tracking update since Mon 12 Oct". Peek adds that parcels often go quiet over a weekend, and keeps asking GLS US. After three weeks with no new scan, it says instead "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating).
+**No news for days.** After four days without a new scan, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of that scan: "No tracking update since …". Peek adds that parcels often go quiet over a weekend, keeps asking GLS US and offers a "Get help from GLS US" link. After three weeks with no new scan, it says instead "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating).
 
 **Delivered, but nothing came.** `SHIPMENT DELIVERED` with no parcel at your door? Look on GLS's tracker for who signed, if anyone did. Check around the door, the mailroom, the leasing office and with neighbors, then call GLS's recipient line and tell the shop. See [delivered but not received](guide:delivered-not-received).
 
@@ -69,7 +69,7 @@ If nothing follows `LABEL CREATED` for a day or more, Peek says "The sender hasn
 
 ## GLS US customer service and contact
 
-As listed on GLS US's [customer support page](https://gls-group.com/US/en/support/customer-support/) on November 13, 2026:
+On GLS US's [customer support page](https://gls-group.com/US/en/support/customer-support/):
 
 - **Phone:** 1-800-322-5555, option 2 (recipient support: tracking, delivery problems, delivery help).
 - **Hours:** Monday to Friday, 7 a.m. to 7 p.m., and Saturday, 7 a.m. to 4 p.m., Pacific time.
@@ -88,13 +88,13 @@ As listed on GLS US's [customer support page](https://gls-group.com/US/en/suppor
 
 On a parcel you've already added, use "Change carrier". Peek asks GLS US only about numbers of 5 to 20 letters and digits.
 
-**What you see.** Peek asks GLS US's tracker by the number alone: no account and no ZIP code. It shows the status, each scan with its town and state on a map, and, when GLS US's tracker gives one, the expected delivery day until the parcel is delivered or returned. It leaves out the recipient's name and address, who signed, the signature and proof of delivery, and the shipper's reference. Peek's code hands GLS US parcels over to no other carrier. If GLS US files several shipments under one number, Peek follows the one with the newest scan. "Open the GLS US website", on the parcel's page, opens the number on GLS's US tracker.
+**What you see.** Peek asks GLS US's tracker by the number alone: no account and no ZIP code. It shows the status, each scan with its town and state on a map, and, when GLS US's tracker gives one, the expected delivery day until the parcel is delivered or returned. On your own parcel page it shows the recipient's name GLS US gives (under "Recipient") and ends your map's route at the delivery town; shared links show neither. It doesn't show who signed, the signature, the proof of delivery or the shipper's reference. Peek's code hands GLS US parcels over to no other carrier. If GLS US files several shipments under one number, Peek follows the one with the newest scan. "Open the GLS US website", on the parcel's page, opens the number on GLS's US tracker.
 
 **Times.** GLS US gives each scan's time without a time zone. Peek reads it on the clock of the scan's town or, when it doesn't know the town, on that of the scan's state (the main one where a state has more than one). For a scan that names no town or state, it uses the clock of the closest earlier scan it can place, else of the closest later one; failing both, Pacific time. Peek shows every time in your device's time zone.
 
 **When GLS US doesn't answer.** If GLS US's tracker can't be reached, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
-**How often.** While you have the parcel open, or on its delivery day with notifications on, and GLS US's tracker answers, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GLS US puts the parcel on a delivery route; otherwise hourly. Through tracking services, hourly, and up to every 15 minutes on that day while you have it open or notifications are on. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. local time on the day GLS US puts it on a delivery route; otherwise hourly. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly, and every 6 hours after seven days without news at "Label created". Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact GLS US or the shop for you, change the delivery or file a claim.
 

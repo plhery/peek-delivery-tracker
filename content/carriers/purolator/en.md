@@ -12,10 +12,10 @@ Purolator is a Canadian courier for parcels and freight, majority owned by Canad
 
 Purolator calls its tracking number the PIN, short for Package Identification Number. Each shipment gets one, and Purolator calls it your reference for every contact with Purolator about that shipment. So a PIN and a tracking number are the same thing.
 
-| Shape (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `123456789015` | 12 digits. Peek reads the last one as a check digit. |
-| `ABC123456789` | 3 letters and 9 digits. Purolator's tracker labels this a PIN too. |
+| `482917364051` | 12 digits. Peek reads the last one as a check digit. |
+| `BKM482917364` | 3 letters and 9 digits. Purolator's tracker labels this a PIN too. |
 
 Purolator's tracker also takes a tracking reference of up to 15 characters, if the sender set one: an order number, a code, even a sentence. It works like a PIN.
 
@@ -71,17 +71,23 @@ Goods sent by courier from the United States or Mexico may qualify for relief fr
 
 ## Purolator customer service phone number
 
-Purolator's number in Canada, from its Service Guide in force from 30 June 2026 (read on 14 October 2026), is **1 888 SHIP-123 (1 888 744-7123)**. Have your PIN ready: Purolator asks for it in every contact about a shipment.
+Purolator's number in Canada, from its Service Guide in force from 30 June 2026, is **1 888 SHIP-123 (1 888 744-7123)**. Have your PIN ready: Purolator asks for it in every contact about a shipment.
 
 Got a text about a delivery attempt with a link? Don't tap it: type the PIN into Purolator's tracker yourself. The Government of Canada asks you to forward spam texts to 7726 (SPAM).
 
 ## Tracking Purolator parcels with Peek
 
-[Peek](/) asks Purolator about 3 letters and 9 digits, except a few letter prefixes that belong to other carriers, but doesn't name it from that shape alone: TNT Australia's domestic consignments look the same, so Peek asks TNT Australia too, and follows those as TNT Australia when it knows the number. When Purolator knows the number, Peek says "Purolator has this parcel." A 12-digit number is shared too, so if its check digit passes, Peek asks five carriers at once, Purolator among them (first for readers in Canada, the US and the UK), and names the one that knows it. If carriers of different brands know it, or none does, pick Purolator with "Change". Links from purolator.com with `pin=`, `pins=` or `searchValue=` work too.
+[Peek](/) asks Purolator about 3 letters and 9 digits, except a few letter prefixes that belong to other carriers, but doesn't name it from that shape alone: TNT Australia's domestic consignments and some Colis Privé numbers look the same, so Peek asks TNT Australia and Colis Privé too, and follows the parcel under the one that knows the number. When Purolator knows the number, Peek says "Purolator has this parcel." A 12-digit number is shared too: if it starts with 0 to 6 and its check digit passes, Peek asks Purolator, BRT, Colis Privé, Sending, Paquetexpress and Metropolitan Warehouse, five at once and the sixth if none of the five knows it, with Purolator first for readers in Canada, and names the one that knows it. If carriers of different brands know it, or none does, pick Purolator with "Change", or with "Change carrier" on a parcel you've already added. Links from purolator.com with `pin=`, `pins=` or `searchValue=` work too.
 
 Peek shows the status, each scan with its town, province and country on a map, the expected delivery day, the destination country and, for single-parcel shipments, the weight. Statuses stay in Purolator's English, exactly as written. The recipient's name is dropped, and Peek doesn't show which counter holds a parcel (only the `Available for pickup…` wording) or let you change a delivery.
 
-Scan times show in your device's time zone. On cross-border shipments, Purolator sends them without a time zone: Peek then reads them on the clock of the scan's town and still lists Purolator's own history. Purolator's website also sometimes answers Peek with a check instead of data; then tracking services fill in. You can be notified at every scan, at important steps or on delivery day only.
+Scan times show in your device's time zone. On cross-border shipments, Purolator sends them without a time zone: Peek then reads them on the clock of the scan's town and still lists Purolator's own history. Purolator's website also sometimes answers Peek with a check instead of data; then tracking services fill in.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Purolator scans it out for delivery, from 6 a.m. local time at the newest scan's place, every 2 minutes while Purolator's own tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Purolator's website answers with a check and only tracking services answer, Peek checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Purolator.", with a "Get help from Purolator" link to Purolator's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Purolator."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Purolator tracking
 

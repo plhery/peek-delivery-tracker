@@ -16,13 +16,13 @@ Aramex doesn't publish a format. The labels seen in its tracking are 12 characte
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `AB1234567890` | Two letters, then 10 digits. |
-| `2X1234567890` | A digit, a letter, then 10 digits. |
-| `A91234567890` | A letter, a digit, then 10 digits. |
+| `KP4829103756` | Two letters, then 10 digits. |
+| `2X4829103756` | A digit, a letter, then 10 digits. |
+| `A94829103756` | A letter, a digit, then 10 digits. |
 
 Aramex never reuses a number.
 
-Lookalikes: [Aramex New Zealand](carrier:aramex-nz) uses exactly the same shape but is a separate network, and Colis Privé in France has 12-character numbers too. A number like `RR000000005AU` (two letters, nine digits, AU) is a postal item, not an Aramex label: track it with [Australia Post](carrier:australia-post). Aramex's international service on aramex.com uses 11-digit waybills and is a different tracker.
+Lookalikes: [Aramex New Zealand](carrier:aramex-nz) uses exactly the same shape but is a separate network, and Colis Privé in France has 12-character numbers too. A number like `RR482910372AU` (two letters, nine digits, AU) is a postal item, not an Aramex label: track it with [Australia Post](carrier:australia-post). Aramex's international service on aramex.com uses 11-digit waybills and is a different tracker.
 
 ## What Aramex tracking statuses mean
 
@@ -71,32 +71,32 @@ The shop picks the delivery service: Authority to Leave (safe place), Signature,
 
 **Damaged.** Tell the shop as soon as possible and lodge an enquiry with Aramex within 24 hours.
 
-The shop holds the invoices a claim needs, so in practice the shop claims. Aramex's terms set the deadlines: damage photos within 24 hours of delivery and a written claim within 7 business days; loss claims within 30 business days of pickup. Cover is up to $1,500 per consignment, and with Authority to Leave a photo and GPS proof of delivery waives a loss claim. These limits don't reduce your rights under the Australian Consumer Law.
+The shop holds the invoices a claim needs, so in practice the shop claims. Aramex's terms set the deadlines: damage photos within 24 hours of delivery and a written claim within 7 business days; loss claims within 30 business days of Aramex picking it up. Cover is up to $1,500 per consignment, and with Authority to Leave a photo and GPS proof of delivery waives a loss claim. These limits don't reduce your rights under the Australian Consumer Law.
 
 **Returned.** A wrong address, failed attempts or a requested return can send it back. Ask the shop.
 
 ## Aramex Australia contact number and enquiries
 
-As read on 15 October 2026, Aramex's Contact page lists no national phone line or email for recipients, and no 24-hour line. It points to:
+Aramex's Contact page lists no national phone line or email for recipients, and no 24-hour line. It points to:
 
 - **Online enquiry form**, also reached through Submit online enquiry on a tracking result.
-- **Your local depot**, Monday to Friday except public holidays: Sydney, Melbourne, Brisbane and Hobart 1300 327 892; Perth (08) 9356 5309; Adelaide (08) 8345 2300; Canberra (02) 6260 1718. Most open 8am to 5pm; Canberra closes at 4pm and Hobart opens at 9am.
+- **Your local depot**, Monday to Friday except public holidays, in each depot's local time: Sydney, Melbourne, Brisbane and Hobart 1300 327 892; Perth (08) 9356 5309; Adelaide (08) 8345 2300; Canberra (02) 6260 1718. Most open 8am to 5pm; Canberra closes at 4pm and Hobart opens at 9am.
 
 > Aramex warns of fake SMS saying a parcel couldn't be delivered without a signature. Its own links only begin with https://aramex.com.au or https://aramex.co.nz, it never asks for payment to collect a parcel, and you can report scams to scams@aramex.com.au.
 
 ## Tracking Aramex Australia parcels with Peek
 
-[Peek](/) reads Aramex Australia's own tracking. The 12-character shape is shared with Aramex New Zealand and Colis Privé, so it asks them at once, Aramex Australia first for a reader in Australia, and names the one that has the parcel; if both Aramex networks know it, you choose with "Change". A label starting with a letter then a digit isn't offered as Aramex: paste its aramex.com.au tracking link or pick Aramex with "Change". Old fastway.com.au links work too. Peek doesn't offer Aramex for the sender's long SSCC barcode number.
+[Peek](/) reads Aramex Australia's own tracking. The 12-character shape is shared with Aramex New Zealand and Colis Privé, so it asks them at once, Aramex Australia first for a reader in Australia, and names the one that has the parcel; if both Aramex networks know it, you choose with "Change". A label starting with a letter then a digit isn't offered as Aramex: paste its aramex.com.au tracking link or pick "Aramex Australia" with "Change". Old fastway.com.au links work too. Peek doesn't offer Aramex for the sender's long SSCC barcode number. If it has 20 digits starting with `00`, you can pick "Aramex Australia" with "Change": Peek then follows the parcel and shows "Aramex Australia tracks this as" with Aramex's own label.
 
 It can show the status and the expected day. `Delivered` and `In transit` appear in Peek's own words; the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
 
-Aramex's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Aramex's own history, shown on a map. It can notify you when the status changes.
+Aramex's scan times carry no time zone: Peek reads each on the clock of the scan's place (a scan with no place takes a neighbouring scan's clock, or Sydney time) and lists Aramex's own history, shown on a map. It can notify you when the status changes.
 
 ## Questions about Aramex tracking in Australia
 
 ### What do Aramex tracking numbers start with?
 
-Two letters, a digit and a letter, or a letter and a digit, followed by 10 digits, such as the invented `AB1234567890`.
+Two letters, a digit and a letter, or a letter and a digit, followed by 10 digits, such as the invented `KP4829103756`.
 
 ### Does Aramex deliver on weekends in Australia?
 

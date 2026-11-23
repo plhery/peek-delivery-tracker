@@ -14,10 +14,10 @@ Bring says an item or parcel number generally has 13 characters (two letters, ni
 
 | Number (invented) | What it is |
 | --- | --- |
-| `RR000000005NO` | Two letters, nine digits, `NO`: an item number. |
-| `370001111000000006` | 18 digits starting with `3`. |
-| `00370000000000000004` | `00` and an 18-digit number starting `370`: 20 digits in all. |
-| `70000000000000003` | 17 digits starting with `7`. |
+| `RR482917367NO` | Two letters, nine digits, `NO`: an item number. |
+| `370748291736482919` | 18 digits starting with `3`. |
+| `00370748291736482919` | `00` and an 18-digit number starting `370`: 20 digits in all. |
+| `70482917364829174` | 17 digits starting with `7`. |
 
 **Where to find it.** In the shop's shipping email, in an SMS or email from Bring or Posten, or as a barcode on Posten's mailbox notice. Bring's own tracking also accepts the sender's reference or your mobile number.
 
@@ -79,7 +79,7 @@ Some senders allow no extension, and the tracking page shows each parcel's own d
 
 ## Bring customer service phone number
 
-As listed on Bring's and Posten's pages on 27 October 2026:
+As listed on Bring's and Posten's pages (local time in Norway, Sweden and Denmark):
 
 - **Posten, Norway:** 22 03 00 00, weekdays 08:00 to 17:00; chat around the clock.
 - **Bring, Norway:** 04045, or +47 22030045 from abroad, weekdays 08:00 to 17:00; chat around the clock.
@@ -91,9 +91,9 @@ As listed on Bring's and Posten's pages on 27 October 2026:
 
 ## Tracking Bring parcels with Peek
 
-[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so Peek asks Bring first, together with the other carriers the number fits ([Matkahuolto](carrier:matkahuolto) too for `373`), and names Bring whenever Bring knows the parcel. Peek doesn't ask Bring about barcodes starting `00373402216`, though: those are the numbers of [Early Bird](carrier:early-bird), a Swedish carrier. If Bring doesn't come up, tap "Change" and pick Bring under "Fits this number". The exception is an 18-digit number starting `370` or `373` whose 6th to 9th digits are zeros: Peek files it under [Ecoscooting](carrier:ecoscooting) without asking Bring, so tap "Change" and search for Bring. Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track 17- or 18-digit numbers, 20-digit ones starting `00`, and postal numbers (two letters, nine digits, two letters) with a valid check digit, from any country. A sendingsnummer for several parcels isn't tracked; use each kollinummer.
+[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so when their GS1 check digit is valid, Peek asks Bring first, together with [Matkahuolto](carrier:matkahuolto) for `373`, Swiss Post Cargo, PostNord and NZ Post for `00370` and `00373`, and Colis Privé and DHL eCommerce for `70`. If only Bring knows the parcel, Peek files it under Bring; if several do, you choose. Peek doesn't ask Bring about barcodes starting `00373402216`, though: those are the numbers of [Early Bird](carrier:early-bird), a Swedish carrier. If Bring doesn't come up, tap "Change" and pick Bring under "Fits this number". The exception is an 18-digit number starting `370` or `373` whose 6th to 9th digits are zeros: Peek files it under [Ecoscooting](carrier:ecoscooting) without asking Bring, so tap "Change" and search for Bring. Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track 17- or 18-digit numbers, 20-digit ones starting `00`, and postal numbers (two letters, nine digits, two letters) with a valid check digit, from any country. A sendingsnummer for several parcels isn't tracked; use each kollinummer.
 
-Peek shows the status, each scan's town on a map, the sender, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day Bring scans the parcel out for delivery, while Bring's own tracker answers; through tracking services, every 15 minutes) and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows the status, each scan's town on a map, the sender, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, and can notify you of changes. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. on the clock of the latest scan (Norwegian time in Norway) on the day Bring scans the parcel out for delivery, while Bring's own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days at "Label created" with nothing new.
 
 ## Questions about Bring tracking
 

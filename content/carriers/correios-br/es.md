@@ -14,11 +14,11 @@ Según Correios, un código de seguimiento tiene 13 caracteres: dos letras que i
 
 | Código | Qué es |
 | --- | --- |
-| `EA000000005BR` | E: EMS, el servicio urgente. |
-| `CA000000005BR` | C: paquete postal. |
-| `LA000000005BR` | L: carta o pequeño paquete con seguimiento. |
-| `RA000000005BR` | R: certificado. |
-| `CA000000005ES` | De [Correos](carrier:correos-spain): un paquete que sale de España. Correios lo entrega en Brasil con este código. |
+| `EA482917367BR` | E: EMS, el servicio urgente. |
+| `CA482917367BR` | C: paquete postal. |
+| `LA482917367BR` | L: carta o pequeño paquete con seguimiento. |
+| `RA482917367BR` | R: certificado. |
+| `CA482917367ES` | De [Correos](carrier:correos-spain): un paquete que sale de España. Correios lo entrega en Brasil con este código. |
 
 La novena cifra sirve para comprobar las ocho anteriores: si copias mal una, lo normal es que el código deje de ser válido. ¿No tienes el código? Pídeselo a quien te lo manda; en una compra, Correios remite a la tienda. El historial se puede consultar en internet durante 180 días.
 
@@ -68,7 +68,7 @@ Si envías con Correos, Correios lo entrega en Brasil con el mismo código, y la
 
 **CPF y Minhas Importações.** Para Correios, todo paquete del extranjero es una importación y necesita un CPF (el número fiscal brasileño) en regla, con el nombre del destinatario tal como lo tiene Receita Federal. El destinatario lo gestiona en [Minhas Importações](https://portalimportador.correios.com.br) o en la app de Correios, tras darse de alta en Meu Correios: vincula los paquetes a su CPF, manda los documentos que pida la aduana y paga.
 
-**Impuestos**, según Receita Federal (página actualizada el 12 de junio de 2026):
+**Impuestos**, según Receita Federal:
 
 - **Impuesto de importación: 60 %** del valor en aduana (mercancía, envío y seguro). Es la regla general, la de un regalo que mandas tú: cuenta el valor que declaras, si cuadra con el precio de algo igual o parecido. Solo las compras de un particular en webs [certificadas en Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/empresas-certificadas-no-programa-remessa-conforme-prc) (PRC) tienen otro tipo, que se paga al comprar: 0 % hasta 50 dólares y, por encima, 60 % con 30 dólares de descuento en el impuesto.
 - **ICMS**, el impuesto de cada estado: del 17 % al 20 %.
@@ -97,10 +97,10 @@ Por encima de 3000 dólares, o si la aduana no libera el paquete por otro motivo
 
 ## Teléfono de Correios y atención al cliente
 
-Canales que daban Correios y Correos el 24 de octubre de 2026:
+Canales de Correios y Correos:
 
 - **Correios:** WhatsApp +55 11 4003-8210, que también da el seguimiento; el chat Carol, en correios.com.br, y para reclamaciones, el portal [Fale Conosco](https://faleconosco.correios.com.br/inicio), con una cuenta de Meu Correios.
-- **Correios, teléfono (SAC) en Brasil:** 4003 8210 desde las capitales y sus áreas metropolitanas o desde un móvil; 0800 881 8210 desde un fijo en el resto. De lunes a viernes de 8 a 20 h y los sábados de 8 a 14 h, salvo festivos.
+- **Correios, teléfono (SAC) en Brasil:** 4003 8210 desde las capitales y sus áreas metropolitanas o desde un móvil; 0800 881 8210 desde un fijo en el resto. De lunes a viernes de 8 a 20 h y los sábados de 8 a 14 h (hora de Brasilia), salvo festivos.
 - **Correos, en España:** 915 197 197 o 900 400 004, de lunes a viernes no festivos de 8 a 20 h y los sábados de 9 a 13 h.
 
 Los centros de clasificación y de reparto de Correios no atienden por teléfono.
@@ -109,11 +109,11 @@ Los centros de clasificación y de reparto de Correios no atienden por teléfono
 
 [Peek](/) reconoce al momento como Correios un código de dos letras, nueve cifras y `BR` cuando la cifra de control cuadra. Si no cuadra, Peek no propone ningún transportista y, si eliges Correios Brazil con «Cambiar», te avisa de que «no emite números como este»: revisa el código. También sirven los enlaces del rastreador de Correios con `objetos=`.
 
-Peek trae el historial de Correios y muestra el estado, cada lectura con su ciudad y su estado brasileño y, mientras el paquete va de camino sin retraso, la fecha prevista de Correios. Las horas de las lecturas se leen en la hora local y se muestran en la zona horaria de tu dispositivo. Los estados salen en portugués.
+Peek trae el historial de Correios y muestra el estado, cada lectura con su ciudad y su estado brasileño y, mientras el paquete va de camino sin retraso, la fecha prevista de Correios. Las horas se leen en la zona que Correios da a cada lectura en Brasil, y en la hora del país que emitió el código para las lecturas del correo de origen, y se muestran en la zona horaria de tu dispositivo. Los estados salen en portugués.
 
-Correios no le dice a Peek adónde va el paquete. Si lo añades desde España (por la región de tu móvil o, en la web, por el país de tu conexión), Peek pregunta también a Correos con el mismo código y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de Correios; la tarjeta dice entonces «Entrega con Correos». Un paquete que mandas tú con un código acabado en `ES` se sigue en Correos, que tampoco indica el destino, así que Peek solo pregunta a Correios si quien lo sigue está en Brasil.
+Correios no le dice a Peek adónde va el paquete. Si lo añades desde España (por la región de tu móvil o, en la web, por el país de tu conexión), Peek pregunta también a Correos con el mismo código y pasa a seguirlo allí en cuanto Correos muestra una lectura no más antigua que la última de Correios, sin perder el historial de Correios; la tarjeta dice entonces «Entrega con Correos». Un paquete que mandas tú con un código acabado en `ES` se sigue en Correos, que tampoco indica el destino, así que Peek solo pregunta a Correios si quien lo sigue está en Brasil.
 
-Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (cada 5 si tiene que abrir el rastreador de Correios en un navegador), y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Estas consultas más seguidas solo se hacen el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de Correios o de Correos; a través de servicios de seguimiento, Peek consulta cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
+Mientras tienes el paquete abierto en Peek, o el día de la entrega con las notificaciones activadas, Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 cuando el paquete está en reparto (cada 5 si tiene que abrir el rastreador de Correios en un navegador), ese día desde las 6:00 en la hora de la última lectura y mientras responda el propio seguimiento de Correios o de Correos. En otro caso, y tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek consulta una vez por hora, y cada 6 horas tras siete días sin novedades en «Etiqueta creada». Puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
 
 ## Preguntas sobre el seguimiento de Correios Brasil
 
@@ -160,5 +160,5 @@ Depende del servicio y del código postal (CEP), y el seguimiento de Correios mu
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – Aduana, 3 €, 2 €
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – fechas de 3 € y 2 €
 - [Comisión Europea: Guidance on the €3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – ventas a distancia, 2 €
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados (inspección de la aduana de exportación, 9 de noviembre de 2026; espera para recogerlo en la dirección indicada, 14 de noviembre de 2026; pago pendiente en la aduana, 15 de noviembre de 2026), lo que muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados (inspección de la aduana de exportación, espera para recogerlo en la dirección indicada, pago pendiente en la aduana), lo que muestra Peek
 :::

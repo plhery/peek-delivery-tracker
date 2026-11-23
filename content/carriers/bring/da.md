@@ -14,9 +14,9 @@ En Bring-pakke har flere numre: forsendelsesnummer, kollinummer, pakkenummer og 
 
 | Nummer (opdigtet) | Hvad det er |
 | --- | --- |
-| `00370000000000000004` | 20 cifre, der starter med `00370` eller `00373`. Andre transportører bruger også numre af den længde. |
-| `70000000000000003` | 17 cifre, der starter med `70`. |
-| `RR000000005NO` | To bogstaver, ni cifre og `NO`: en sporbar postforsendelse, der er indleveret i Norge. |
+| `00370748291736482919` | 20 cifre, der starter med `00370` eller `00373`. Andre transportører bruger også numre af den længde. |
+| `70482917364829174` | 17 cifre, der starter med `70`. |
+| `RR482917367NO` | To bogstaver, ni cifre og `NO`: en sporbar postforsendelse, der er indleveret i Norge. |
 
 Et Bring-nummer kan også have 18 cifre og starte med `370` eller `373`: det er den 20-cifrede udgave uden de to nuller foran.
 
@@ -75,7 +75,7 @@ Bring har omkring 1.100 pakkeshops i Danmark og et hurtigt voksende net af pakke
 
 ## Brings kundeservice
 
-Sådan stod det på Brings sider 26. oktober 2026:
+Sådan står det på Brings sider (dansk tid):
 
 - **Chat:** Brings digitale medarbejder svarer på bring.dk døgnet rundt.
 - **Telefon:** 70 28 60 70 (+45 fra udlandet), hverdage kl. 8–17. Først svarer en AI-assistent, som stiller dig videre til en medarbejder i åbningstiden, hvis du har brug for det.
@@ -85,9 +85,9 @@ Sådan stod det på Brings sider 26. oktober 2026:
 
 ## Spor Bring-pakker med Peek
 
-[Peek](/) kan med det samme se, at et nummer på to bogstaver, ni cifre og `NO` er Brings, når kontrolcifferet stemmer. Talnumrene deler Bring med andre transportører. Sæt nummeret ind alligevel: Peek følger over 4.500 transportører og spørger Bring først, ved 20 cifre sammen med [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) og [NZ Post](carrier:nz-post), ved `373` også [Matkahuolto](carrier:matkahuolto), og ved 17 cifre sammen med [DHL eCommerce](carrier:dhl-ecommerce). Stregkoder, der starter med `00373402216`, hører dog til svenske [Early Bird](carrier:early-bird), så dem spørger Peek ikke Bring om. Kender kun Bring pakken, står der "Bring has this parcel." Kommer Bring ikke frem, så tryk på "Change" og vælg Bring under "Fits this number", eller søg Bring frem, hvis Peek har valgt en anden transportør. Et link fra tracking.bring.dk fortæller Peek, at det er Bring, uanset nummer. Hos Bring følger Peek numre på 17 eller 18 cifre (20 med `00` foran) og numre på to bogstaver, ni cifre og to bogstaver med gyldigt kontrolciffer, men ikke et forsendelsesnummer med flere pakker: brug kollinummeret.
+[Peek](/) kan med det samme se, at et nummer på to bogstaver, ni cifre og `NO` er Brings, når kontrolcifferet stemmer. Talnumrene deler Bring med andre transportører. Sæt nummeret ind alligevel: Peek følger over 4.500 transportører og spørger Bring først, når GS1-kontrolcifferet stemmer: ved 20 cifre sammen med [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) og [NZ Post](carrier:nz-post), ved `373` også [Matkahuolto](carrier:matkahuolto), og ved 17 cifre sammen med Colis Privé og [DHL eCommerce](carrier:dhl-ecommerce). Stregkoder, der starter med `00373402216`, hører dog til svenske [Early Bird](carrier:early-bird), så dem spørger Peek ikke Bring om. Kender kun Bring pakken, står der "Bring has this parcel."; kender flere den, vælger du. Kommer Bring ikke frem, så tryk på "Change" og vælg Bring under "Fits this number", eller søg Bring frem, hvis Peek har valgt en anden transportør. Et link fra tracking.bring.dk fortæller Peek, at det er Bring, uanset nummer. Hos Bring følger Peek numre på 17 eller 18 cifre (20 med `00` foran) og numre på to bogstaver, ni cifre og to bogstaver med gyldigt kontrolciffer, men ikke et forsendelsesnummer med flere pakker: brug kollinummeret.
 
-Peek viser hvert trin med en kort engelsk betegnelse som "Handed in", "At terminal", "Out for delivery" og "Ready for pickup". Du ser status, byen for hver scanning på et kort, afsender, vægt, mål, forventet leveringsdag, når Bring oplyser den, og navnet på pakkeshoppen eller pakkeboksen, mens pakken venter. Adresser, billeder og hentekoden tager Peek ikke med. Følger du pakken, tjekker Peek den op til hvert 10. minut og op til hvert 2. minut, når den er ude til levering (kun samme dag, fra kl. 6 lokal tid og så længe Brings egen sporing svarer; via sporingstjenester hvert 15. minut). Peek kan give dig besked, når der sker noget, men kan ikke kontakte Bring eller webshoppen for dig.
+Peek viser hvert trin med en kort engelsk betegnelse som "Handed in", "At terminal", "Out for delivery" og "Ready for pickup". Du ser status, byen for hver scanning på et kort, afsender, vægt, mål, forventet leveringsdag, når Bring oplyser den, og navnet på pakkeshoppen eller pakkeboksen, mens pakken venter. Adresser, billeder og hentekoden tager Peek ikke med. Mens du har pakken åben i Peek, eller på leveringsdagen med notifikationer slået til, tjekker Peek den op til hvert 10. minut og op til hvert 2. minut, når den er ude til levering (kun samme dag, fra kl. 6 efter klokken for den seneste scanning, dansk tid i Danmark, og så længe Brings egen sporing svarer). Ellers, og efter to dage uden nyt (12 timer, mens pakken stadig står som "Label created" eller "Received by carrier"), tjekker Peek en gang i timen og hver 6. time efter syv dage uden nyt på "Label created". Peek kan give dig besked, når der sker noget, men kan ikke kontakte Bring eller webshoppen for dig.
 
 ## Spørgsmål om Bring-sporing
 

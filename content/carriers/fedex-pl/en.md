@@ -15,7 +15,7 @@ The number is in the shop's shipping email or on your order page. A FedEx Poland
 | Shape (invented) | What it is |
 | --- | --- |
 | `6123456789016` | 13 digits starting with 6: a FedEx Poland domestic parcel. |
-| `123456789012` | 12 digits: a number for FedEx's worldwide tracking page, not FedEx Poland. See the [FedEx](carrier:fedex) page. |
+| `784291736480` | 12 digits: a number for FedEx's worldwide tracking page, not FedEx Poland. See the [FedEx](carrier:fedex) page. |
 
 No number? Ask the shop. More in [where to find a tracking number](guide:find-tracking-number).
 
@@ -56,11 +56,11 @@ On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `
 
 ## Track a FedEx Poland parcel with Peek
 
-[Peek](/) can't tell a FedEx Poland number by its shape: 13 digits starting with 6 also fit Correos Chile, Delhivery, Yunda and Korea Post. Paste it all the same: Peek follows more than 4,500 carriers. When you add it, Peek asks the carriers whose numbers look like this, FedEx Poland among them, and shows "FedEx Poland has this parcel." when only FedEx Poland knows it. If none knows it yet or several do, pick FedEx Poland with "Change"; typing "Opek" or "FedEx Polska" in the search finds it too. Peek suggests FedEx Poland only when the last digit passes the number's check, but you can pick it by hand.
+[Peek](/) can't tell a FedEx Poland number by its shape: 13 digits starting with 6 also fit Correos Chile, Delhivery, Yunda and Korea Post. Paste it all the same: Peek follows more than 4,500 carriers. When you add it and the last digit passes the number's check, Peek asks FedEx Poland first and shows "FedEx Poland has this parcel." once it knows the number. If none knows it yet or several do, pick FedEx Poland with "Change"; typing "Opek" or "FedEx Polska" in the search finds it too. Peek suggests FedEx Poland only when the last digit passes the number's check, but you can pick it by hand.
 
 A link from FedEx's domestic tracking page, on fds2tracking.emea.fedex.com or fedex.com, or a poland.fedex.com link with `packageId=`, opens as FedEx Poland straight away.
 
-Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Polish time on the day FedEx scans the parcel out for delivery, while FedEx's own tracking answers; when FedEx gives a slot, from half an hour before it opens. Through tracking services, it checks hourly, and up to every 15 minutes on delivery day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
+Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Polish time on the day FedEx scans the parcel out for delivery, while FedEx's own tracking answers; when FedEx gives a slot, from half an hour before it opens. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
 
 ## Questions about FedEx Poland tracking
 
@@ -74,7 +74,7 @@ The page reports a number it doesn't know as not recognised, so check the 13 dig
 
 ### Is a text asking me to pay for a FedEx delivery real?
 
-It may be a scam. CERT Polska (CSIRT NASK) warns of texts that pose as courier companies: they claim a delivery problem and link to a fake site that asks for an extra payment for redelivery, to steal card details. Don't use the link: type the number into the box above yourself and, if in doubt, contact FedEx through a phone number or email address from its official website, not from the text. Forward the whole text to 8080, free of charge. If your card details are already on a fake site, contact your bank at once. See [delivery scam texts](guide:delivery-scam-texts).
+It may be a scam. CERT Polska (CSIRT NASK) warns of texts that pose as courier companies: they claim a delivery problem and link to a fake site that asks for an extra payment for redelivery, to steal card details. Don't use the link: type the number into the box above yourself and, if in doubt, contact FedEx through a phone number or email address from its official website, not from the text. Forward the whole text to 8080 (free from Poland; from abroad, at your operator's rate). If your card details are already on a fake site, contact your bank at once. See [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-digit numbers and check digit, the domestic tracker and its answers, statuses, proof of delivery, what Peek shows

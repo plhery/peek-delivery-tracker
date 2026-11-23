@@ -14,10 +14,10 @@ I Brings spårning heter paketets nummer kollinummer. En sändning med flera pak
 
 | Nummer (påhittat) | Vad det är |
 | --- | --- |
-| `00370000000000000004` | 20 siffror som börjar med `00370`. Utan de två första nollorna är det ett kollinummer på 18 siffror, som börjar med `370` eller `373`. |
-| `00373000000000000005` | Samma form med `373`. |
-| `70000000000000003` | 17 siffror som börjar med `70`. |
-| `RR000000005NO` | Två bokstäver, nio siffror och `NO`: en postförsändelse inlämnad i Norge. |
+| `00370748291736482919` | 20 siffror som börjar med `00370`. Utan de två första nollorna är det ett kollinummer på 18 siffror, som börjar med `370` eller `373`. |
+| `00373748291736482910` | Samma form med `373`. |
+| `70482917364829174` | 17 siffror som börjar med `70`. |
+| `RR482917367NO` | Två bokstäver, nio siffror och `NO`: en postförsändelse inlämnad i Norge. |
 
 **Var står numret?** I orderbekräftelsen eller i mejlet eller sms:et från butiken. I Bring-appen dyker paket som är registrerade på ditt telefonnummer upp automatiskt, och andra lägger du till med numret. Består sändningen av flera paket har varje paket sitt eget kollinummer.
 
@@ -85,7 +85,7 @@ Handlar du på nätet från ett land utanför EU räknas det som privatimport. D
 
 ## Brings kundservice
 
-Saknar du ett paket kontaktar du först butiken. Så når du Brings kundservice, enligt Brings sida den 26 oktober 2026:
+Saknar du ett paket kontaktar du först butiken. Så når du Brings kundservice, enligt Brings sida (svensk tid):
 
 - **Telefon:** 0770-11 33 00, vardagar 08.00–17.00. Först svarar en AI-assistent, som under öppettiderna kan koppla dig till en medarbetare.
 - **Chatt:** Brings digitala medarbetare svarar dygnet runt.
@@ -94,9 +94,9 @@ Saknar du ett paket kontaktar du först butiken. Så når du Brings kundservice,
 
 ## Spåra Bring-paket med Peek
 
-[Peek](/) ser direkt att ett nummer med två bokstäver, nio siffror och `NO` är Brings, om kontrollsiffran stämmer. Sifferformerna delar Bring med andra transportörer. Då frågar Peek Bring först, tillsammans med de andra som numret passar: [Matkahuolto](carrier:matkahuolto) vid `373`, [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) och [NZ Post](carrier:nz-post) vid 20 siffror, och [DHL eCommerce](carrier:dhl-ecommerce) vid 17 siffror. Streckkoder som börjar med `00373402216` hör däremot till [Early Bird](carrier:early-bird), och om dem frågar Peek inte Bring. Kommer Bring inte upp trycker du på "Change" och väljer Bring under "Fits this number". Har Peek valt en annan transportör söker du fram Bring där. Klistrar du in en länk från tracking.bring.se, tracking.bring.com, tracking.bring.dk, sporing.bring.no eller sporing.posten.no vet Peek att det är Bring, oavsett nummer. Hos Bring följer Peek nummer på 17 eller 18 siffror, 20 siffror som börjar med `00` och nummer med två bokstäver, nio siffror och två bokstäver med rätt kontrollsiffra, men inte ett sändningsnummer för flera paket: använd kollinumret.
+[Peek](/) ser direkt att ett nummer med två bokstäver, nio siffror och `NO` är Brings, om kontrollsiffran stämmer. Sifferformerna delar Bring med andra transportörer. Då frågar Peek, när GS1-kontrollsiffran stämmer, Bring först, tillsammans med de andra som numret passar: [Matkahuolto](carrier:matkahuolto) vid `373`, [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) och [NZ Post](carrier:nz-post) vid 20 siffror, och Colis Privé och [DHL eCommerce](carrier:dhl-ecommerce) vid 17 siffror. Känner bara Bring paketet lägger Peek det under Bring; känner flera det väljer du. Streckkoder som börjar med `00373402216` hör däremot till [Early Bird](carrier:early-bird), och om dem frågar Peek inte Bring. Kommer Bring inte upp trycker du på "Change" och väljer Bring under "Fits this number". Har Peek valt en annan transportör söker du fram Bring där. Klistrar du in en länk från tracking.bring.se, tracking.bring.com, tracking.bring.dk, sporing.bring.no eller sporing.posten.no vet Peek att det är Bring, oavsett nummer. Hos Bring följer Peek nummer på 17 eller 18 siffror, 20 siffror som börjar med `00` och nummer med två bokstäver, nio siffror och två bokstäver med rätt kontrollsiffra, men inte ett sändningsnummer för flera paket: använd kollinumret.
 
-Peek visar status, platsen för varje skanning på en karta, avsändaren, vikt, mått, förväntad dag när Bring anger en och, medan paketet väntar, namnet på ombudet eller paketboxen. I stället för Brings meningar får varje steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, foton och hämtkoden tar Peek inte med. Peek kollar paketet upp till var tionde minut och upp till varannan minut när det är ute för leverans (bara samma dag, från klockan 6 lokal tid och så länge Brings egen spårning svarar; via spårningstjänster var femtonde minut), och Peek kan meddela dig när något händer. Peek kan inte kontakta Bring eller butiken åt dig.
+Peek visar status, platsen för varje skanning på en karta, avsändaren, vikt, mått, förväntad dag när Bring anger en och, medan paketet väntar, namnet på ombudet eller paketboxen. I stället för Brings meningar får varje steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, foton och hämtkoden tar Peek inte med. Medan du har paketet öppet i Peek, eller på leveransdagen med aviseringar på, kollar Peek det upp till var tionde minut och upp till varannan minut när det är ute för leverans (bara samma dag, från klockan 6 enligt klockan för den senaste skanningen, svensk tid i Sverige, och så länge Brings egen spårning svarar). Annars, och efter två dagar utan nyheter (12 timmar medan paketet fortfarande står som "Label created" eller "Received by carrier"), kollar Peek en gång i timmen, och var sjätte timme efter sju dagar utan nyheter på "Label created". Peek kan meddela dig när något händer. Peek kan inte kontakta Bring eller butiken åt dig.
 
 ## Frågor om att spåra paket med Bring
 

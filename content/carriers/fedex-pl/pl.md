@@ -15,7 +15,7 @@ Numer znajdziesz w e-mailu ze sklepu o wysyłce albo na stronie zamówienia. Num
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
 | `6123456789016` | 13 cyfr, na początku 6: krajowa przesyłka FedEx Polska. |
-| `123456789012` | 12 cyfr: numer do światowego śledzenia FedEx, nie FedEx Polska. Więcej na stronie o [FedEx](carrier:fedex). |
+| `784291736480` | 12 cyfr: numer do światowego śledzenia FedEx, nie FedEx Polska. Więcej na stronie o [FedEx](carrier:fedex). |
 
 Nie masz numeru? Zapytaj sklep. Zobacz też, [gdzie szukać numeru przesyłki](guide:find-tracking-number).
 
@@ -56,11 +56,11 @@ W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Plan
 
 ## Śledzenie przesyłki FedEx Polska w Peek
 
-[Peek](/) nie rozpozna FedEx Polska po samym numerze: 13 cyfr zaczynających się od 6 mają też Correos Chile, Delhivery, Yunda i Korea Post. I tak wklej numer: Peek śledzi ponad 4500 przewoźników. Po dodaniu pyta przewoźników z takimi numerami, w tym FedEx Poland, i pokazuje „FedEx Poland ma tę przesyłkę.”, gdy numer zna tylko FedEx. Jeśli nie zna go nikt albo zna kilku, wybierz FedEx Poland przyciskiem „Zmień”; znajdziesz go też, wpisując „Opek” albo „FedEx Polska”. Peek proponuje FedEx Poland tylko wtedy, gdy zgadza się cyfra kontrolna numeru, ale ręcznie możesz go wybrać zawsze.
+[Peek](/) nie rozpozna FedEx Polska po samym numerze: 13 cyfr zaczynających się od 6 mają też Correos Chile, Delhivery, Yunda i Korea Post. I tak wklej numer: Peek śledzi ponad 4500 przewoźników. Po dodaniu, gdy zgadza się cyfra kontrolna, pyta najpierw FedEx Poland i pokazuje „FedEx Poland ma tę przesyłkę.”, gdy FedEx zna numer. Jeśli nie zna go nikt albo zna kilku, wybierz FedEx Poland przyciskiem „Zmień”; znajdziesz go też, wpisując „Opek” albo „FedEx Polska”. Peek proponuje FedEx Poland tylko wtedy, gdy zgadza się cyfra kontrolna numeru, ale ręcznie możesz go wybrać zawsze.
 
 Link ze strony śledzenia krajowego, z fds2tracking.emea.fedex.com lub fedex.com, albo link z poland.fedex.com z `packageId=` od razu otwiera się jako FedEx Poland.
 
-Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Peek sprawdza przesyłkę nawet co 10 minut, a gdy jest wydana do doręczenia, nawet co 2 minuty, w dniu wydania od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie FedEx; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. Przez serwisy śledzenia przesyłek sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
+Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Gdy masz przesyłkę otwartą w Peek albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza ją nawet co 10 minut, a gdy jest wydana do doręczenia, nawet co 2 minuty, w dniu wydania od 6:00 czasu polskiego i dopóki odpowiada własne śledzenie FedEx; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. W pozostałych przypadkach, a także gdy przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją co godzinę, a po siedmiu dniach bez wiadomości przy statusie „Zarejestrowana” co 6 godzin. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
 
 ## Pytania o śledzenie przesyłek FedEx Polska
 
@@ -74,7 +74,7 @@ Numer, którego nie zna, strona zgłasza jako nierozpoznany, więc sprawdź 13 c
 
 ### Czy SMS o dopłacie do przesyłki FedEx jest prawdziwy?
 
-Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzega przed SMS-ami, w których przestępcy podszywają się pod firmy kurierskie: piszą o problemie z doręczeniem, a link prowadzi do fałszywej strony, gdzie pod pretekstem dopłaty za ponowną dostawę wyłudzają dane karty. Nie klikaj linku: numer wpisz sam w pole powyżej, a w razie wątpliwości skontaktuj się z FedEx przez numer telefonu lub adres e-mail z jego oficjalnej strony, nie z SMS-a. Podejrzany SMS przekaż w całości na bezpłatny numer 8080. Jeśli dane karty trafiły już na fałszywą stronę, od razu skontaktuj się z bankiem. Więcej w poradniku o [fałszywych SMS-ach o paczkach](guide:delivery-scam-texts).
+Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzega przed SMS-ami, w których przestępcy podszywają się pod firmy kurierskie: piszą o problemie z doręczeniem, a link prowadzi do fałszywej strony, gdzie pod pretekstem dopłaty za ponowną dostawę wyłudzają dane karty. Nie klikaj linku: numer wpisz sam w pole powyżej, a w razie wątpliwości skontaktuj się z FedEx przez numer telefonu lub adres e-mail z jego oficjalnej strony, nie z SMS-a. Podejrzany SMS przekaż w całości na numer 8080 (bezpłatnie w Polsce; z zagranicy według taryfy operatora). Jeśli dane karty trafiły już na fałszywą stronę, od razu skontaktuj się z bankiem. Więcej w poradniku o [fałszywych SMS-ach o paczkach](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13 cyfr i cyfra kontrolna, krajowe śledzenie i jego odpowiedzi, statusy, potwierdzenie doręczenia, co pokazuje Peek

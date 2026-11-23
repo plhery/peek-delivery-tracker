@@ -14,10 +14,10 @@ Posten kaller det sporingsnummer, som er en fellesbetegnelse på sendingsnummer 
 
 | Nummer (oppdiktet) | Hva det er |
 | --- | --- |
-| `RR000000005NO` | To bokstaver, ni tall og `NO`: en postsending fra Norge. |
-| `370001111000000006` | 18 siffer som begynner på `3`. |
-| `70000000000000003` | 17 siffer som begynner på `7`. |
-| `RR000000005CN` | En pakke fra utlandet beholder nummeret fra avsenderlandet, her Kina. Posten sporer også slike pakker. |
+| `RR482917367NO` | To bokstaver, ni tall og `NO`: en postsending fra Norge. |
+| `370748291736482919` | 18 siffer som begynner på `3`. |
+| `70482917364829174` | 17 siffer som begynner på `7`. |
+| `RR482917367CN` | En pakke fra utlandet beholder nummeret fra avsenderlandet, her Kina. Posten sporer også slike pakker. |
 
 **Hvor finner du nummeret?** I e-posten eller SMS-en fra nettbutikken, eller i varselet fra Posten. Bring-sporingen godtar også avsenders referanse eller mobilnummeret ditt. Er en sending på flere kolli, har hvert kolli sitt eget kollinummer.
 
@@ -70,7 +70,7 @@ Noen avsendere tillater ikke at fristen forlenges. Pakker som ikke blir hentet, 
 
 ## Kundeservice hos Posten og Bring
 
-Slik står det på Postens og Brings sider 22. oktober 2026:
+Slik står det på Postens og Brings sider (norsk tid):
 
 - **Posten:** chat med en digital medarbeider hele døgnet; telefon 22 03 00 00, hverdager 08.00–17.00. Du møter først en AI-assistent.
 - **Bring:** 04045, eller +47 22030045 fra utlandet, hverdager 08.00–17.00; utenom åpningstiden svarer en AI-assistent.
@@ -80,9 +80,9 @@ Slik står det på Postens og Brings sider 22. oktober 2026:
 
 ## Spor Bring-pakker med Peek
 
-[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Peek spør derfor Bring først, sammen med de andre transportørene nummeret kan høre til (for `373`-numre også [Matkahuolto](carrier:matkahuolto)), og velger Bring når Bring kjenner pakken. Strekkoder som begynner på `00373402216`, hører derimot til svenske [Early Bird](carrier:early-bird), og dem spør ikke Peek Bring om. Kommer ikke Bring opp, trykker du på "Change" og velger Bring, som står først under "Fits this number". Unntaket er 18-sifrede numre som begynner på `370` eller `373` og har nuller som 6. til 9. siffer: dem tolker Peek som numre fra [Ecoscooting](carrier:ecoscooting), uten å spørre Bring. Da trykker du på "Change" og søker opp Bring. En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore numre på 17 eller 18 siffer, numre på 20 siffer som begynner på `00`, og sporingsnumre på 13 tegn (to bokstaver, ni siffer, to bokstaver) med riktig kontrollsiffer, fra alle land. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
+[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Når GS1-kontrollsifferet stemmer, spør Peek derfor Bring først, sammen med [Matkahuolto](carrier:matkahuolto) for `373`, Swiss Post Cargo, [PostNord](carrier:postnord) og NZ Post for `00370` og `00373`, og Colis Privé og DHL eCommerce for `70`. Kjenner bare Bring pakken, legger Peek den under Bring; kjenner flere den, velger du. Strekkoder som begynner på `00373402216`, hører derimot til svenske [Early Bird](carrier:early-bird), og dem spør ikke Peek Bring om. Kommer ikke Bring opp, trykker du på "Change" og velger Bring, som står først under "Fits this number". Unntaket er 18-sifrede numre som begynner på `370` eller `373` og har nuller som 6. til 9. siffer: dem tolker Peek som numre fra [Ecoscooting](carrier:ecoscooting), uten å spørre Bring. Da trykker du på "Change" og søker opp Bring. En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore numre på 17 eller 18 siffer, numre på 20 siffer som begynner på `00`, og sporingsnumre på 13 tegn (to bokstaver, ni siffer, to bokstaver) med riktig kontrollsiffer, fra alle land. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
 
-Peek viser status, stedet for hver skanning, avsender, vekt, mål, forventet dag når Bring oppgir den, og navnet på hentestedet mens pakken venter. I stedet for Brings setninger får hvert steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, bilder og hentekoden tar Peek ikke med. Peek sjekker pakken opptil hvert 10. minutt, opptil hvert 2. når den er ute til levering (bare samme dag, fra kl. 6 lokal tid og så lenge Brings egen sporing svarer; via sporingstjenester hvert 15. minutt), og kan varsle deg når noe skjer.
+Peek viser status, stedet for hver skanning, avsender, vekt, mål, forventet dag når Bring oppgir den, og navnet på hentestedet mens pakken venter. I stedet for Brings setninger får hvert steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, bilder og hentekoden tar Peek ikke med. Peek kan varsle deg når noe skjer. Mens du har pakken åpen i Peek, eller på leveringsdagen med varsler på, sjekker Peek den opptil hvert 10. minutt, og opptil hvert 2. når den er ute til levering (bare samme dag, fra kl. 6 etter klokken til siste skanning, norsk tid i Norge, og så lenge Brings egen sporing svarer). Ellers, og etter to dager uten nytt (12 timer mens pakken fortsatt står som "Label created" eller "Received by carrier"), sjekker Peek én gang i timen, og hver 6. time etter sju dager uten nytt på "Label created".
 
 ## Spørsmål om sporing hos Posten og Bring
 

@@ -14,12 +14,12 @@ Correios describes tracking codes as 13 characters: two letters for the type of 
 
 | Code | What it is |
 | --- | --- |
-| `EA000000005BR` | E: EMS, the express service. |
-| `CA000000005BR` | C: parcel post. |
-| `LA000000005BR` | L: tracked letter post. |
-| `RA000000005BR` | R: registered letter post. |
-| `NN000000005BR` | N, B, D, P or Z (and AV to AZ, GA, GD): letters the UPU keeps for domestic or bilateral services. |
-| `RA000000005CN` | [China Post](carrier:china-post)'s, not Correios'. Coming into Brazil, Correios delivers it under this code. |
+| `EA482917367BR` | E: EMS, the express service. |
+| `CA482917367BR` | C: parcel post. |
+| `LA482917367BR` | L: tracked letter post. |
+| `RA482917367BR` | R: registered letter post. |
+| `NN482917367BR` | N, B, D, P or Z (and AV to AZ, GA, GD): letters the UPU keeps for domestic or bilateral services. |
+| `RA482917367CN` | [China Post](carrier:china-post)'s, not Correios'. Coming into Brazil, Correios delivers it under this code. |
 
 The ninth digit checks the other eight, so one wrong digit usually makes the code invalid. Correios notes that some parcels from abroad also carry a code ending `BR`, from a specific Correios service. No code? Correios says to ask the shop. Its tracker keeps a parcel's history online for 180 days.
 
@@ -60,7 +60,7 @@ If your customs holds the parcel, Correios says you deal with it directly: neith
 
 **Minhas Importações.** Correios handles customs online in [Minhas Importações](https://portalimportador.correios.com.br) and the Correios app, after a one-time sign-up to Meu Correios. There you link parcels to your CPF, send documents customs asks for, and pay.
 
-**Taxes**, as Receita Federal lists them (page updated 12 June 2026):
+**Taxes**, as Receita Federal lists them:
 
 - **Import duty**: 60% of the customs value (goods, freight and insurance). This general rule covers any parcel the next rule doesn't: one from a shop outside Remessa Conforme, or one for a company.
 - **Bought on a site [certified in Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/empresas-certificadas-no-programa-remessa-conforme-prc) (PRC) and sent to a private person**: 0% up to US$50; above that, 60% with US$30 off the duty. This applies to declarations registered since 12 May 2026; before, it was 20% and US$20 off.
@@ -89,7 +89,7 @@ Over US$3,000, or if customs won't release a parcel for another reason, Correios
 
 ## Correios contact number and customer service
 
-As read on 23 October 2026, Correios lists, in Portuguese:
+Correios lists, in Portuguese (hours in Brasília time):
 
 - **Phone (SAC)**: 4003 8210 in state capitals and metro areas, and from mobiles elsewhere; 0800 881 8210 from landlines elsewhere. Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00, except public holidays.
 - **WhatsApp**: (11) 4003-8210, which also handles tracking.
@@ -102,11 +102,11 @@ Sorting and delivery units take no calls.
 
 [Peek](/) names Correios at once for two letters, nine digits and `BR` when the check digit is right. With a wrong one, Peek names no carrier, and if you pick Correios with "Change" it says Correios "doesn’t issue numbers like this one": check the code. Correios tracking links with `objetos=` work too.
 
-Peek fetches Correios' history and shows the status, each scan with its town and state, and Correios' expected delivery date while the parcel is in transit and not late. Scan times are read on the local clock and shown in your device's time zone. Statuses stay in Portuguese.
+Peek fetches Correios' history and shows the status, each scan with its town and state, and Correios' expected delivery date while the parcel is in transit and not late. Scan times are read on the zone Correios gives each scan in Brazil, and on the clock of the country that issued the code for the sending post's scans, and shown in your device's time zone. Statuses stay in Portuguese.
 
-Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows newer scans, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
+Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows a scan no older than Correios' newest, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
 
-Peek checks up to every 10 minutes, or every 2 (every 5 when it has to open Correios' tracker in a browser) from 6 a.m. local time on the day Correios scans the parcel out for delivery, while Correios' own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks Correios up to every 10 minutes, or every 2 (every 5 when it has to open Correios' tracker in a browser) from 6 a.m. on the clock of the latest scan on the day Correios scans the parcel out for delivery, while Correios' own tracker answers. Otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days at "Label created" with nothing new. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
 
 ## Questions about Correios Brazil tracking
 
@@ -143,5 +143,5 @@ Yes, with the same code: on Correios' tracker, then on your own post's tracker o
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – service letters, check digit
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
 - [European Commission: Guidance on the €3 customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – item, distance sales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings (export customs inspection, 9 November 2026; waiting for collection at the address given, 14 November 2026; payment due at customs, 15 November 2026), what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings (export customs inspection, waiting for collection at the address given, payment due at customs), what Peek shows
 :::

@@ -68,7 +68,7 @@ Os três primeiros significam que a encomenda ainda não chegou à CityMail. Se 
 
 O Peek não pode contactar a CityMail nem a loja por ti. Em citymail.se:
 
-- **Mottagarservice (apoio a destinatários de correio e encomendas):** telefone 0771-40 60 40, e-mail mottagarservice@citymail.se. A página de ajuda indica em tempo real se o atendimento está aberto.
+- **Mottagarservice (apoio a destinatários de correio e encomendas):** telefone 0771-40 60 40, e-mail mottagarservice@citymail.se. Horário: de segunda a sexta, das 08:30 às 17:00 (hora da Suécia).
 - **Assuntos empresariais:** central 08-709 43 00.
 - **Online:** as [páginas de ajuda](https://www.citymail.se/hjalp/) e [perguntas e respostas](https://www.citymail.se/hjalp/fragor-och-svar/) da CityMail, em sueco. A CityMail disponibiliza também uma app web para seguir entregas, redirecionar, marcar devoluções e receber atualizações.
 
@@ -77,13 +77,13 @@ O Peek não pode contactar a CityMail nem a loja por ti. Em citymail.se:
 - **Um número `BCM`.** Cola-o no [Peek](/): o Peek identifica logo a CityMail em «Transportadora detetada». Espaços, hífenes e minúsculas funcionam normalmente.
 - **Uma ligação para o seguimento da CityMail.** Uma ligação `tracking.citymail.se` com `?search=` e a referência também identifica logo a CityMail, seja qual for a referência.
 - **Outra referência.** O Peek não reconhece a CityMail por este formato nem a consulta automaticamente. Cola-a na mesma: o Peek acompanha mais de 4 500 transportadoras. Depois toca em «Alterar» e escolhe CityMail, mesmo que o Peek mostre «A verificar serviços de seguimento…» ou tenha sugerido outra transportadora. Numa encomenda já adicionada, usa «Alterar transportadora». Para a CityMail, o Peek aceita de 8 a 35 letras e dígitos com pelo menos um dígito; fora disso, indica que a CityMail «não emite números como este».
-- **Ainda sem registo.** Enquanto a CityMail não conhecer a referência, a encomenda mostra «À espera de CityMail» e o Peek continua a perguntar.
+- **Ainda sem registo.** Enquanto a CityMail não conhecer a referência, a encomenda mostra «À espera de CityMail» e o Peek continua a perguntar. Após dois dias, o Peek pede-te que verifiques o número, escolhas outra transportadora ou apagues a encomenda.
 
 **O que o Peek mostra.** O estado e cada registo com hora e local, nas palavras suecas da CityMail. Como a CityMail não inclui fuso horário, o Peek lê as horas na hora da Suécia. A reserva e o aviso aparecem como «Etiqueta criada». O terminal e o caminho para o ponto surgem como «Em trânsito»: nenhuma mensagem da CityMail no Peek corresponde a «Em distribuição». `Paketet har levererats till ombud` surge como «Pronta para levantamento» com o nome do ponto, as entregas como «Entregue», a entrega falhada como «Tentativa de entrega» com o texto em «O que diz CityMail», e o regresso como «Devolvida ao remetente».
 
-O Peek mostra também o nome do remetente, o código de produto do serviço (`Produktkod`), a hora da entrega e, durante o trajeto, o dia estimado de entrega da CityMail. Deixa de fora o código postal e a prova de entrega: para os veres, usa «Abrir o site de CityMail», que abre o teu número no seguimento oficial.
+O Peek mostra também o nome do remetente e, durante o trajeto, o dia estimado de entrega da CityMail. Deixa de fora o código postal e a prova de entrega: para os veres, usa «Abrir o site de CityMail», que abre o teu número no seguimento oficial.
 
-O Peek verifica até de 10 em 10 minutos e pode notificar-te em «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora.
+Enquanto a encomenda está aberta no Peek, ou no dia da entrega com as notificações ativas, o Peek verifica-a até de 10 em 10 minutos. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e de 6 em 6 horas após sete dias sem novidades em «Etiqueta criada». Se a encomenda ficar quatro dias sem uma linha nova em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde …» com o dia dessa linha e uma ligação «Pede ajuda a CityMail». As notificações podem seguir «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas sobre o seguimento CityMail
 
@@ -111,7 +111,7 @@ Sim. A CityMail distribui correio na Suécia desde 1991 e tem licença da *Post-
 - [CityMail: Spåra paket](https://www.citymail.se/spara-paket/) – página de seguimento, campo do número e exemplo BCM
 - [CityMail: Var är mitt paket?](https://www.citymail.se/hjalp/var-ar-mitt-paket/) – SMS com ligação de seguimento, último evento, número no SMS ou e-mail
 - [CityMail: När kommer mitt paket?](https://www.citymail.se/hjalp/nar-kommer-mitt-paket/) – dias e horários de entrega, 1–2 ou 1–4 dias
-- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – locais de entrega, sem assinatura, cacifos e pontos, documento, danos, atrasos, ciclo das cartas, licença
+- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – locais de entrega, sem assinatura, cacifos e pontos, documento, danos, atrasos, ciclo das cartas, licença, horário do Mottagarservice
 - [CityMail: Hjälp & kontakt](https://www.citymail.se/hjalp/) – telefone, e-mail e estado de abertura do Mottagarservice, central
 - [CityMail: Ombud](https://www.citymail.se/paket/ombud/) – pontos DHL, SMS com ligação BankID, documento no levantamento, entrega noturna
 - [CityMail: Var är mitt brev?](https://www.citymail.se/hjalp/var-ar-mitt-brev/) – carta perdida: perguntar primeiro ao remetente

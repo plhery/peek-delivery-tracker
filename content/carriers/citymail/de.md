@@ -68,7 +68,7 @@ Die ersten drei bedeuten, dass CityMail das Paket noch nicht erhalten hat. Schei
 
 Peek kann weder CityMail noch den Shop für dich kontaktieren. Laut citymail.se:
 
-- **Mottagarservice (Hilfe für Empfänger von Briefen und Paketen):** Telefon 0771-40 60 40, E-Mail mottagarservice@citymail.se. Auf der Hilfeseite zeigt CityMail laufend an, ob der Service gerade geöffnet ist.
+- **Mottagarservice (Hilfe für Empfänger von Briefen und Paketen):** Telefon 0771-40 60 40, E-Mail mottagarservice@citymail.se. Erreichbar montags bis freitags von 08:30 bis 17:00 Uhr (schwedische Zeit).
 - **Geschäftliche Anfragen:** Zentrale 08-709 43 00.
 - **Online:** die [Hilfeseiten](https://www.citymail.se/hjalp/) und [Fragen und Antworten](https://www.citymail.se/hjalp/fragor-och-svar/) auf Schwedisch. CityMail bietet außerdem eine Web-App zum Verfolgen, Umleiten, Retourenbuchen und für Updates.
 
@@ -76,14 +76,14 @@ Peek kann weder CityMail noch den Shop für dich kontaktieren. Laut citymail.se:
 
 - **Eine `BCM`-Nummer.** Füge sie in [Peek](/) ein: Peek nennt CityMail sofort unter „Erkannter Paketdienst“. Leerzeichen, Bindestriche und Kleinschreibung stören nicht.
 - **Ein Link zum CityMail-Tracking.** Ein Link auf `tracking.citymail.se` mit `?search=` und deiner Referenz erkennt CityMail ebenfalls sofort, unabhängig von der Referenz.
-- **Eine andere Referenz.** An diesem Muster erkennt Peek CityMail nicht und fragt CityMail nicht von selbst. Füge sie trotzdem ein: Peek folgt mehr als 4.500 Paketdiensten. Tippe dann auf „Ändern“ und wähle CityMail – auch wenn Peek gerade „Tracking-Dienste werden geprüft…“ anzeigt oder einen anderen Dienst genannt hat. Bei einem bereits hinzugefügten Paket nutze „Paketdienst ändern“. Für CityMail nimmt Peek 8 bis 35 Buchstaben und Ziffern mit mindestens einer Ziffer an; bei allem anderen meldet es, dass CityMail „vergibt keine Nummern wie diese“.
-- **Noch nicht gelistet.** Bis CityMail die Referenz kennt, zeigt das Paket „Warten auf CityMail“, und Peek fragt weiter nach.
+- **Eine andere Referenz.** An diesem Muster erkennt Peek CityMail nicht und fragt CityMail nicht von selbst. Füge sie trotzdem ein: Peek folgt mehr als 4.500 Paketdiensten. Tippe dann auf „Ändern“ und wähle CityMail – auch wenn Peek gerade „Tracking-Dienste werden geprüft…“ anzeigt oder einen anderen Dienst genannt hat. Bei einem bereits hinzugefügten Paket nutze „Paketdienst ändern“. Für CityMail nimmt Peek 8 bis 35 Buchstaben und Ziffern mit mindestens einer Ziffer an; bei allem anderen zeigt es: CityMail „vergibt keine Nummern wie diese“.
+- **Noch nicht gelistet.** Bis CityMail die Referenz kennt, zeigt das Paket „Warten auf CityMail“, und Peek fragt weiter nach. Nach zwei Tagen bittet Peek dich, die Nummer zu prüfen, einen anderen Paketdienst zu wählen oder das Paket zu löschen.
 
 **Was Peek zeigt.** Den Status und jeden Scan mit Zeit und Ort im schwedischen Wortlaut von CityMail. Da CityMail keine Zeitzone nennt, liest Peek die Zeiten als schwedische Zeit. Buchung und Ankündigung erscheinen als „Etikett erstellt“. Terminal und Weg zum Paketshop erscheinen als „Unterwegs“: kein CityMail-Text in Peek bedeutet „In Zustellung“. `Paketet har levererats till ombud` erscheint als „Abholbereit“ mit dem Namen des Paketshops, Zustellungen als „Zugestellt“, die gescheiterte Zustellung als „Zustellversuch“ mit dem CityMail-Text unter „Das sagt CityMail“, und die Rücksendung als „Zurück an Absender“.
 
-Peek zeigt außerdem den Namen des Absenders, den Produktcode (`Produktkod`), die Zustellzeit und – solange das Paket unterwegs ist – den geschätzten Liefertag von CityMail. Deine Postleitzahl und den Zustellnachweis lässt Peek weg: dafür nutze „Website von CityMail öffnen“, womit deine Nummer direkt im CityMail-Tracking aufgeht.
+Peek zeigt außerdem den Namen des Absenders und – solange das Paket unterwegs ist – den geschätzten Liefertag von CityMail. Deine Postleitzahl und den Zustellnachweis lässt Peek weg: dafür nutze „Website von CityMail öffnen“, womit deine Nummer direkt im CityMail-Tracking aufgeht.
 
-Peek prüft bis zu alle 10 Minuten und kann dich bei „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“ benachrichtigen. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich.
+Solange das Paket in Peek geöffnet ist, oder an seinem Zustelltag mit aktivierten Benachrichtigungen, prüft Peek es bis zu alle 10 Minuten. Nach zwei Tagen ohne Neuigkeiten (oder 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Bleibt das Paket vier Tage ohne neue Zeile bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“ mit dem Tag dieser Zeile und einen Link „Hol dir Hilfe bei CityMail“. Benachrichtigungen können „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ folgen.
 
 ## Fragen zur CityMail Sendungsverfolgung
 
@@ -111,7 +111,7 @@ Ja. CityMail liefert seit 1991 Post in Schweden aus und besitzt eine Lizenz von 
 - [CityMail: Spåra paket](https://www.citymail.se/spara-paket/) – Tracking-Seite, Nummernfeld und BCM-Beispiel
 - [CityMail: Var är mitt paket?](https://www.citymail.se/hjalp/var-ar-mitt-paket/) – SMS mit Tracking-Link, letztes Ereignis, Nummer in SMS oder E-Mail
 - [CityMail: När kommer mitt paket?](https://www.citymail.se/hjalp/nar-kommer-mitt-paket/) – Liefertage und -zeiten, 1–2 oder 1–4 Tage
-- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – Ablageorte, ohne Unterschrift, Paketstationen und Paketshops, Ausweis, Schäden, Verspätungen, Brief-Rhythmus, Lizenz
+- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – Ablageorte, ohne Unterschrift, Paketstationen und Paketshops, Ausweis, Schäden, Verspätungen, Brief-Rhythmus, Lizenz, Zeiten von Mottagarservice
 - [CityMail: Hjälp & kontakt](https://www.citymail.se/hjalp/) – Telefon, E-Mail und Öffnungsstatus von Mottagarservice, Zentrale
 - [CityMail: Ombud](https://www.citymail.se/paket/ombud/) – DHL-Paketshops, SMS mit BankID-Link, Ausweis bei Abholung, Abendzustellung
 - [CityMail: Var är mitt brev?](https://www.citymail.se/hjalp/var-ar-mitt-brev/) – fehlender Brief: zuerst beim Absender nachfragen

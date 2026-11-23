@@ -68,7 +68,7 @@ Les trois premiers statuts signifient que le colis n’est pas encore entre les 
 
 Peek ne peut contacter ni CityMail ni la boutique à ta place. Sur citymail.se :
 
-- **Mottagarservice (aide aux destinataires de courrier et colis) :** téléphone 0771-40 60 40, e-mail mottagarservice@citymail.se. La page d’aide de CityMail indique en temps réel si le service est ouvert.
+- **Mottagarservice (aide aux destinataires de courrier et colis) :** téléphone 0771-40 60 40, e-mail mottagarservice@citymail.se. Horaires : du lundi au vendredi, de 08 h 30 à 17 h 00 (heure de Suède).
 - **Questions professionnelles :** standard 08-709 43 00.
 - **En ligne :** les [pages d’aide](https://www.citymail.se/hjalp/) et la [foire aux questions](https://www.citymail.se/hjalp/fragor-och-svar/) de CityMail, en suédois. CityMail propose aussi une application web pour suivre une livraison, la rediriger, réserver un retour et recevoir des mises à jour.
 
@@ -77,13 +77,13 @@ Peek ne peut contacter ni CityMail ni la boutique à ta place. Sur citymail.se :
 - **Un numéro `BCM`.** Colle-le dans [Peek](/) : Peek nomme aussitôt CityMail avec « Transporteur détecté ». Espaces, tirets et minuscules ne posent aucun problème.
 - **Un lien vers le suivi CityMail.** Un lien `tracking.citymail.se` contenant `?search=` et ta référence identifie aussi CityMail immédiatement, quelle que soit la référence.
 - **Une autre référence.** Peek ne reconnaît pas CityMail à ce format et ne l’interroge pas automatiquement. Colle-la tout de même : Peek suit plus de 4 500 transporteurs. Appuie ensuite sur « Changer » et choisis CityMail, même si Peek affiche « Vérification des services de suivi… » pour d’autres transporteurs ou en a nommé un autre. Sur un colis déjà ajouté, utilise « Changer de transporteur ». Pour CityMail, Peek accepte de 8 à 35 lettres et chiffres comportant au moins un chiffre ; sinon, il indique que CityMail « n’émet pas de numéros comme celui-ci ».
-- **Pas encore listé.** Tant que CityMail ne connaît pas la référence, le colis affiche « En attente de CityMail » et Peek continue de vérifier.
+- **Pas encore listé.** Tant que CityMail ne connaît pas la référence, le colis affiche « En attente de CityMail » et Peek continue de vérifier. Après deux jours, Peek te demande de vérifier le numéro, de choisir un autre transporteur ou de supprimer le colis.
 
 **Ce que montre Peek.** Le statut et chaque scan avec son heure et son lieu, dans les mots suédois de CityMail. Comme CityMail n’indique pas de fuseau horaire, Peek lit ses heures en heure de Suède. La réservation et l’annonce s’affichent en « Étiquette créée ». L’arrivée au terminal et le trajet vers le point relais apparaissent en « En transit » : aucun libellé CityMail dans Peek ne correspond à « En livraison ». `Paketet har levererats till ombud` s’affiche en « Prêt à être retiré » avec le nom du point relais. Les libellés de remise montrent « Livré ». L’échec de livraison montre « Tentative de livraison », avec les mots de CityMail sous « Ce que dit CityMail ». Le retour affiche « Retourné à l’expéditeur ».
 
-Peek affiche également le nom de l’expéditeur, le code produit du service (`Produktkod`), l’heure de livraison ainsi que, pendant le trajet, le jour de livraison estimé par CityMail. Il laisse de côté ton code postal et la preuve de livraison : pour les voir, utilise « Ouvrir le site CityMail », qui ouvre ton numéro sur le suivi officiel.
+Peek affiche également le nom de l’expéditeur et, pendant le trajet, le jour de livraison estimé par CityMail. Il laisse de côté ton code postal et la preuve de livraison : pour les voir, utilise « Ouvrir le site CityMail », qui ouvre ton numéro sur le suivi officiel.
 
-Peek vérifie le colis jusqu’à toutes les 10 minutes et peut t’avertir pour « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification horaire.
+Tant que le colis est ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek le vérifie jusqu’à toutes les 10 minutes. Après deux jours sans nouvelle (ou 12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure, puis toutes les 6 heures après sept jours sans nouvelle sur « Étiquette créée ». Si le colis reste quatre jours sans nouvelle ligne sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis … » avec le jour de cette ligne et un lien « Demande de l’aide à CityMail ». Les notifications peuvent suivre « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi CityMail
 
@@ -111,7 +111,7 @@ Oui. CityMail distribue du courrier en Suède depuis 1991 et dispose d’une lic
 - [CityMail : Spåra paket](https://www.citymail.se/spara-paket/) – page de suivi, champ numéro de suivi et exemple BCM
 - [CityMail : Var är mitt paket?](https://www.citymail.se/hjalp/var-ar-mitt-paket/) – SMS avec lien de suivi, dernier événement, numéro dans le SMS ou l’e-mail
 - [CityMail : När kommer mitt paket?](https://www.citymail.se/hjalp/nar-kommer-mitt-paket/) – jours et heures de livraison, 1–2 ou 1–4 jours
-- [CityMail : Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – lieux de dépôt, sans signature, casiers et points relais, pièce d’identité, dommages, retards, roulement des lettres, licence
+- [CityMail : Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – lieux de dépôt, sans signature, casiers et points relais, pièce d’identité, dommages, retards, roulement des lettres, licence, horaires du Mottagarservice
 - [CityMail : Hjälp & kontakt](https://www.citymail.se/hjalp/) – téléphone, e-mail et ouverture du Mottagarservice, standard
 - [CityMail : Ombud](https://www.citymail.se/paket/ombud/) – points relais DHL, SMS avec lien BankID, pièce d’identité au retrait, livraison en soirée
 - [CityMail : Var är mitt brev?](https://www.citymail.se/hjalp/var-ar-mitt-brev/) – lettre manquante : demander d’abord à l’expéditeur

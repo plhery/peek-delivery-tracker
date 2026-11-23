@@ -19,7 +19,7 @@ Morning Global 官网未公开单号格式文档，Peek 承运商库收录的典
 
 在 Peek 中输入单号时，小写字母、空格和连字符均不影响识别。Morning Global 官网查询页支持单次最多输入 20 个单号，以英文逗号分隔。
 
-**在哪里找到单号。** 可在店铺发货邮件或订单详情页中查看。若找不到，可参阅[如何查找快递单号](guide:find-tracking-number)和[中国跨境包裹追踪指南](guide:tracking-from-china)。
+**在哪里找到单号。** 可在店铺发货邮件或订单详情页中查看。若找不到，可参阅[如何查找快递单号](guide:find-tracking-number)（英文）和[中国跨境包裹追踪指南](guide:tracking-from-china)（英文）。
 
 **其他格式的单号。** 如果你手动选定了 Morning Global，Peek 会对任何 8 至 40 位的字母数字组合向其追踪接口发起查询。
 
@@ -45,21 +45,21 @@ Morning Global 追踪页面在 `Shipment Journey` 下方按条列出物流记录
 | `Out for Delivery` | 当地派送员正在派送途中。 | “派送中” |
 | `Delivered` | 已妥投签收。 | “已签收” |
 
-当一条记录的补充说明比状态标题包含更多信息时，Peek 会以“状态：说明”的格式呈现，同时自动隐去签收人姓名和电话号码。未列入上表的其他措辞会按 Peek 通用规则解读，或原样保留不改变阶段。
+当一条记录的补充说明比状态标题包含更多信息时，Peek 会以“状态：说明”的格式呈现，并去掉其中的电话号码。未列入上表的其他措辞会按 Peek 通用规则解读，或原样保留不改变阶段。
 
 **查无此单。** 若后台查不到该单号，Morning Global 官网会提示 `No shipment record was found for this tracking number.`。
 
 ## 谁负责派送 Morning Global 包裹
 
-出现 `Handed Over for Delivery` 后，Morning Global 会把包裹转交给目的国当地派送合作伙伴。其官网并未公开各国具体合作伙伴名单，查询接口也不会向 Peek 返回合作商名称或对方独立单号；如需改约投递时间，请联系卖家或 Morning Global 客服获取末端转单号。
+出现 `Handed Over for Delivery` 后，Morning Global 会把包裹转交给目的国当地派送合作伙伴。其官网并未公开各国具体合作伙伴名单，查询结果也不向 Peek 标明合作商名称，也没有显示合作商自有单号的栏目；如需改约投递时间，请联系卖家或 Morning Global 客服获取末端转单号。
 
 **自营网点与合作网络。** Morning Global 将英国与美国列为自营地区，并在伦敦与洛杉矶设有区域总部；加拿大与美国同属其重点布局市场，澳大利亚则依托当地合作伙伴网络派送。
 
-**派送尝试与自提规则。** Morning Global 不面向收件人公布派送次数、未投递通知单或自提点保管期限，这些均按当地派送商规则执行。详见[错过派送怎么办](guide:missed-delivery)和[未领取的包裹怎么处理](guide:uncollected-parcel)。
+**派送尝试与自提规则。** Morning Global 不面向收件人公布派送次数、未投递通知单或自提点保管期限，这些均按当地派送商规则执行。详见[错过派送怎么办](guide:missed-delivery)（英文）和[未领取的包裹怎么处理](guide:uncollected-parcel)（英文）。
 
-**欧盟进口关税与 2 欧元处理费。** 自 2026 年 7 月 1 日起，从欧盟境外网购且货值不超过 150 欧元的包裹每类货品须缴纳 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值高低，每类货品另须缴纳 2 欧元欧盟处理费。2026 年 10 月 22 日，Morning Global 向发件商家发布公告称，自 11 月 1 日起按每条报关品目收取 2 欧元清关处理费（视目的国规定另计增值税），但公告未说明商家是否将该费用转嫁给消费者。英国、美国、加拿大和澳大利亚则遵循各自海关规定，详见[包裹被海关扣留怎么办](guide:customs)。
+**欧盟进口关税与 2 欧元处理费。** 自 2026 年 7 月 1 日起，从欧盟境外网购且货值不超过 150 欧元的包裹每类货品须缴纳 3 欧元欧盟关税；自 2026 年 11 月 1 日起，无论货值高低，每类货品另须缴纳 2 欧元欧盟处理费。2026 年 10 月 22 日，Morning Global 向发件商家发布公告称，自 11 月 1 日起按每条报关品目收取 2 欧元清关处理费（视目的国规定另计增值税），但公告未说明商家是否将该费用转嫁给消费者。英国、美国、加拿大和澳大利亚则遵循各自海关规定，详见[包裹被海关扣留怎么办](guide:customs)（英文）。
 
-**清关资料上传。** 若海关要求收件人补充身份证件复印件、发票或其他文件，Morning Global 官网设有专门的 [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) 表单（需填写运单号）。切记只在 `morninglobal.com` 官方域名下提交资料，切勿轻信陌生短信里的付费或身份上传链接，详见[防范快递诈骗短信](guide:delivery-scam-texts)。
+**清关资料上传。** 若海关要求收件人补充身份证件复印件、发票或其他文件，Morning Global 官网设有专门的 [Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) 表单（需填写运单号）。切记只在 `morninglobal.com` 官方域名下提交资料，切勿轻信陌生短信里的付费或身份上传链接，详见[防范快递诈骗短信](guide:delivery-scam-texts)（英文）。
 
 **延误公告。** Morning Global 会在官网[新闻公告页](https://www.morninglobal.com/news/)发布异常提醒，例如 2026 年 10 月 30 日曾公告澳大利亚劳资纠纷可能导致 MGIP 渠道延误约 2 至 3 个工作日。
 
@@ -71,19 +71,19 @@ Morning Global 的签约方是委托发货的商家。遇到包裹延误、丢�
 
 **停在 `Order Created`。** 表示商家仅完成了线上下单，尚未把实物交给 Morning Global，请向商家询问实际交货日期。
 
-**停在清关阶段。** `Customs Clearance Begins` 说明包裹正在目的国海关审查。如收到缴税通知可参阅[包裹被海关扣留怎么办](guide:customs)；若滞留时间过长，请通知卖家。
+**停在清关阶段。** `Customs Clearance Begins` 说明包裹正在目的国海关审查。如收到缴税通知可参阅[包裹被海关扣留怎么办](guide:customs)（英文）；若滞留时间过长，请通知卖家。
 
-**多日无新扫描。** 运输途中连续四天无新动态时，Peek 会提醒包裹静默，并提示长途航班、清关或周末常见停顿。若已显示 `Handed Over for Delivery`，建议索要本地派送商单号跟进，详见[为什么快递物流停止更新](guide:tracking-not-updating)。
+**多日无新扫描。** 包裹处于「已生成面单」「已揽收」或「运输中」且 4 天没有新扫描时，Peek 会显示「自10月12日周一起没有物流更新」这样的提醒（日期为最后一条扫描的日期），并说明包裹在长途航班上、在海关或遇到周末时常常暂时没有动静。若已显示 `Handed Over for Delivery`，建议索要本地派送商单号跟进，详见[为什么快递物流停止更新](guide:tracking-not-updating)（英文）。
 
-**丢件或破损。** 务必要尽早处理。Morning Global 服务条款规定，发货商家须自公司揽收之日起 **30 天内** 提出索赔报备，并在 **90 天内** 补齐佐证材料；因 Morning Global 责任导致的赔付上限为申报价值且每票最高不超过 50 美元。作为买家，请直接找商家要求退款或补发，详见[包裹丢失](guide:lost-parcel)和[包裹破损](guide:damaged-parcel)。
+**丢件或破损。** 务必要尽早处理。Morning Global 服务条款规定，发货商家须自公司揽收之日起 **30 天内** 提出索赔报备，并在 **90 天内** 补齐佐证材料；因 Morning Global 责任导致的赔付上限为申报价值且每票最高不超过 50 美元。作为买家，请直接找商家要求退款或补发，详见[包裹丢失](guide:lost-parcel)（英文）和[包裹破损](guide:damaged-parcel)（英文）。
 
-**地址错误或拒收。** Morning Global 条款明确写明，因地址错误/不全、无人应门或收件人拒收导致的派送失败，对商家仍按已完成订单结算。请及时向卖家核对收货地址；若包裹被退回，参阅[包裹退回寄件人](guide:returned-to-sender)。
+**地址错误或拒收。** Morning Global 条款明确写明，因地址错误/不全、无人应门或收件人拒收导致的派送失败，对商家仍按已完成订单结算。请及时向卖家核对收货地址；若包裹被退回，参阅[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
-**显示已签收但没拿到。** 请先检查门口、信箱并询问邻居。Morning Global 官网在 `Signed By` 栏可能会显示签收人信息（Peek 会出于隐私隐藏该项），核查后尽快联系商家，详见[显示已签收但未收到包裹](guide:delivered-not-received)。
+**显示已签收但没拿到。** 请先检查门口、信箱并询问邻居。Morning Global 官网在 `Signed By` 栏可能会显示签收人信息（Peek 不显示该栏），核查后尽快联系商家，详见[显示已签收但未收到包裹](guide:delivered-not-received)（英文）。
 
 ## Morning Global 客服与联系方式
 
-截至 2026 年 11 月 17 日查阅的 [Morning Global 联系我们页面](https://www.morninglobal.com/contact/)（货运查询通道）：
+[Morning Global 联系我们页面](https://www.morninglobal.com/contact/)（货运查询通道）：
 
 - **美国团队**：cs.mgus@morninglobal.com，电话 `+1 888 981 8688`。
 - **英国团队**：cs.mgeu@morninglobal.com，电话 `+44 20 7019 9035`。
@@ -96,13 +96,13 @@ Morning Global 的签约方是委托发货的商家。遇到包裹延误、丢�
 
 ## 使用 Peek 追踪 Morning Global 包裹
 
-单凭 `BR…MG` 格式，[Peek](/) 不会直接武断判定为 Morning Global，而是直接粘贴即可：Peek 支持 3,500 多家承运商，会先联网核实，一旦 Morning Global 后台认领该包裹，便会显示“Morning Global 有这个包裹的记录。”；如果你粘贴的是带有 `tracking_number=` 参数的 morninglobal.com 追踪链接，则会直接自动归类为 Morning Global。如未自动识别，可在添加包裹时点击“更换”手动选中 Morning Global，或在包裹详情页点击“更换快递公司”。
+单凭 `BR…MG` 格式，[Peek](/) 不会直接武断判定为 Morning Global，而是直接粘贴即可：Peek 跟踪 4,500 多家快递公司，会先联网核实，一旦 Morning Global 后台认领该包裹，便会显示“Morning Global 有这个包裹的记录。”；如果你粘贴的是带有 `tracking_number=` 参数的 morninglobal.com 追踪链接，则会直接自动归类为 Morning Global。如未自动识别，可在添加包裹时点击“更换”手动选中 Morning Global，或在包裹详情页点击“更换快递公司”。
 
-Peek 仅凭单号即可直接读取 Morning Global 官网追踪（无需邮编），展示当前阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“已签收”）、每条轨迹及其地点、目的地国家以及签收时间。对于标注了 UTC 偏移量的行，Peek 会严格按该偏移量解析；未附偏移量的行则依次按扫描地点时钟、相邻行时钟、目的国时钟或香港时间解析，最后全部换算为你的设备本地时区并在历史底部注明。Peek 会略去始发地、`Estimated Delivery`（预计送达）、重量、件数、`Reference` 与签收人信息，因此不展示预计送达日期。
+Peek 仅凭单号即可直接读取 Morning Global 官网追踪（无需邮编），展示当前阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“已签收”）、每条轨迹及其地点、目的地国家以及签收时间。对于标注了 UTC 偏移量的行，Peek 会严格按该偏移量解析；未附偏移量的行则依次按扫描地点时钟、相邻行时钟或香港时间解析，再换算为你所在的时区显示，物流记录下方注明「时间按你所在的时区显示：…」。Peek 会略去始发地、`Estimated Delivery`（预计送达）、重量、件数、`Reference` 与签收人信息，因此不展示预计送达日期。
 
-由于 Morning Global 不返回当地派送伙伴名称或转单号，即便单号恰好符合邮政校验码，Peek 也不会转交本国邮政，而是持续通过 Morning Global 官网跟进至签收。
+由于 Morning Global 不标明当地派送伙伴，即便单号恰好符合邮政校验码，Peek 也不会转交本国邮政，而是持续通过 Morning Global 官网跟进至签收。
 
-Peek 对 Morning Global 最高每小时检查一次（包括派送当天），若单次请求失败则会等待 2 小时后再重试，手动刷新同样受此冷却限制。若包裹长时间无新动态，Peek 会提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Morning Global 查询。”；超过三周无更新时，则提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Morning Global 查询。”
+Peek 对 Morning Global 最高每小时检查一次（包括派送当天），若单次请求失败则会等待 2 小时后再重试，手动刷新同样受此冷却限制。包裹处于「已生成面单」「已揽收」或「运输中」且 4 天没有新扫描时，Peek 会显示「自10月12日周一起没有物流更新」这样的提醒（日期为最后一条扫描的日期），并附上说明「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 Morning Global 查询。」；超过三周后，说明改为「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 Morning Global 查询。」。
 
 你可以按需选择“每次扫描”、“重要环节”（覆盖 `Customs Clearance Begins`、`Out for Delivery` 与 `Delivered`）或“仅派送当天”三种通知预设，也可以通过详情页的“向 Morning Global 寻求帮助”链接直接访问官网联系页面。Peek 无法代你联系 Morning Global 或卖家。
 

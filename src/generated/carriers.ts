@@ -2336,6 +2336,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "A. Duie Pyle tracking: PRO numbers, LTL statuses & support",
       "name": "A. Duie Pyle",
       "color": "#f27629"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "buffalo-ex-tracking",
+      "title": "BUFFALO tracking: BUFZA codes, South Africa customs & help",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "chit-chats-tracking",
+      "title": "Chit Chats tracking: 10-char IDs, USPS/Canada Post handoff",
+      "name": "Chit Chats",
+      "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "dpd-hu-tracking",
+      "title": "DPD Hungary tracking: 14-digit codes, FOXPOST & support",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "e24metro-ca-tracking",
+      "title": "E24 (Metro Supply Chain) tracking: Canada last-mile & help",
+      "name": "E24",
+      "color": "#545859"
+    },
+    {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "go-express-tracking",
+      "title": "GO! Express tracking: 12-digit waybills, statuses & help",
+      "name": "GO! Express",
+      "color": "#b9242b"
     }
   ],
   "de": [
@@ -4314,6 +4354,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Freight Sendungsverfolgung: ActiveTracing & Hilfe",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "go-express-sendungsverfolgung",
+      "title": "GO! Express Sendungsverfolgung: Frachtbrief, Status & Hilfe",
+      "name": "GO! Express",
+      "color": "#b9242b"
     }
   ],
   "fr": [
@@ -14754,6 +14802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS Hungary csomagkövetés: számok, automaták, segítség",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "dpd-hu-csomagkovetes",
+      "title": "DPD Hungary csomagkövetés: 14 jegyű kódok, FOXPOST és súgó",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     }
   ],
   "ro": [

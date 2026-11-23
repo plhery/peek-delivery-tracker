@@ -3,7 +3,7 @@ title: Vinted Go suivi : statuts, consigne, point relais et contact
 description: Suivre un colis Vinted Go : où trouver le numéro, ce que veut dire chaque statut, combien de temps le colis t'attend en consigne et qui contacter en cas de souci.
 slug: vinted-go-suivi
 published: 2026-10-11
-updated: 2026-11-22
+updated: 2026-11-23
 ---
 
 Vinted Go est le service de livraison de Vinted : il achemine les colis vendus sur Vinted d'une consigne ou d'un point relais vers une autre consigne, un point relais ou un voisin relais, et en France parfois jusqu'à ta porte. Pour suivre ton colis, ouvre la conversation de la commande sur Vinted et clique sur « Suivre le colis », ou saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking).
@@ -96,7 +96,7 @@ Vinted prévient que l'hameçonnage passe aussi par SMS. Transfère les e-mails 
 
 [Peek](/) lit directement le suivi de Vinted Go, sans compte ni code postal. Il affiche chaque scan avec son heure et la ville de chaque centre de tri, sous un titre à lui (« Prêt à être retiré », « Livré »). Vinted Go est interrogé en anglais : l'historique garde donc ses libellés anglais, comme `Ready to collect at the locker`, et pas ceux de la page française. Tant que le colis t'attend, Peek nomme la consigne ou le point relais ; une fois le colis retiré, il indique où et à quelle heure. Les voisins relais ne sont pas nommés, et l'adresse du point, ses horaires et la date limite de retrait restent sur la page de Vinted Go. Pas de date de livraison prévue non plus. Dès que le colis repart vers le vendeur, le titre passe à « Retourné à l’expéditeur ».
 
-Un numéro qui commence par `VGS`, Peek le reconnaît tout de suite comme Vinted Go. Si tu saisis seulement le numéro à 16 chiffres, Peek demande à Vinted Go et à DHL eCommerce (pour certains numéros, à d'autres transporteurs aussi) s'ils le connaissent, et retient Vinted Go si c'est lui qui le connaît ; pour un code `UW`, il interroge Vinted Go. Sinon, appuie sur « Changer » et choisis « Vinted Go », ou colle le lien de suivi vintedgo.com, avec ou sans la langue dedans : Vinted Go est reconnu tout de suite.
+Un numéro qui commence par `VGS`, Peek le reconnaît tout de suite comme Vinted Go. Si tu saisis seulement le numéro à 16 chiffres, Peek demande à Vinted Go et à DHL eCommerce (pour certains numéros, à d'autres transporteurs aussi) s'ils le connaissent, et retient Vinted Go si c'est lui qui le connaît ; si aucun ne le connaît, il demande en dernier à TNT. Pour un code `UW`, il interroge Vinted Go. Sinon, appuie sur « Changer » et choisis « Vinted Go », ou colle le lien de suivi vintedgo.com, avec ou sans la langue dedans : Vinted Go est reconnu tout de suite.
 
 Le suivi est vérifié jusqu'à toutes les 10 minutes, toutes les heures dès que 48 heures passent sans nouveau scan (ou 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge »), et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Si Vinted Go confie le colis à un autre réseau avec un nouveau numéro de suivi, Peek peut le suivre chez ce transporteur, s'il le lit directement. Quand les 13 derniers caractères d'un code de 16 caractères avec `UW` sont un code de colis de Poste Italiane, Peek interroge le suivi de Poste Italiane sur ces 13 caractères et y suit le colis dès que Poste Italiane a le scan le plus récent. Peek ne peut pas contacter Vinted ou Vinted Go, ni signaler un problème à ta place.
 

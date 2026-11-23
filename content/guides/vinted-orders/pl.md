@@ -4,7 +4,7 @@ description: Jak śledzić paczkę z Vinted jako kupujący lub sprzedający: kto
 slug: sledzenie-paczki-vinted
 picture: Dwa telefony, sprzedającego i kupującego, a między nimi paczka jadąca furgonetką, i wesoły Pip.
 published: 2026-10-16
-updated: 2026-11-22
+updated: 2026-11-23
 ---
 
 Na Vinted to kupujący wybiera przewoźnika i płaci za etykietę, a sprzedający dostaje ją do wydruku albo jako kod i ma 5 dni roboczych na nadanie paczki. Obie strony śledzą przesyłkę w oknie rozmowy, pod „Śledź przesyłkę”, gdzie można też skopiować numer przewoźnika. Pierwsze informacje mogą się tam pojawić do 48 godzin po nadaniu, a sprzedający dostaje pieniądze dopiero, gdy kupujący potwierdzi, że wszystko jest OK, albo 2 dni po dostawie.
@@ -149,7 +149,7 @@ Polityka zwrotów Vinted obejmuje zakupy przez „Kup teraz”: zamówienie niew
 
 ## Jak śledzić paczkę z Vinted poza aplikacją?
 
-Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numer Vinted Go zaczynający się od `VGS` i link do śledzenia z vintedgo.com Peek rozpoznaje od razu; przy numerze 16-cyfrowym pyta Vinted Go i DHL eCommerce, która z tych firm go zna. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za ciebie nie zgłosi: to zostaje w oknie rozmowy.
+Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numer Vinted Go zaczynający się od `VGS` i link do śledzenia z vintedgo.com Peek rozpoznaje od razu; przy numerze 16-cyfrowym pyta Vinted Go i DHL eCommerce, która z tych firm go zna, a TNT dopiero wtedy, gdy żadna z nich go nie zna. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za ciebie nie zgłosi: to zostaje w oknie rozmowy.
 
 :::sources
 - [Vinted: Wysyłka na Vinted](https://www.vinted.pl/help/234) – przewoźnicy, 12 krajów, etykieta albo kod, anulowanie, przewoźnicy domyślni, duże paczki i odległe adresy

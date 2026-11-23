@@ -737,7 +737,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
 - **Last resorts.** A carrier whose numbers are runs other carriers print abroad (Coordinadora's
   eleven digits are GLS's) comes last for a lookup from outside its countries, or from no known
   country, and so does one that only a rule too weak to ask it beside the others offers the
-  number: the scraper flags it `lastResort` (and the first `outsideCountry`, which a release
+  number (TNT France's sixteen digits from 17 or 18 sit among Vinted Go's): the scraper flags it
+  `lastResort` (and the first `outsideCountry`, which a release
   without `lastResort` sets alone). It is asked only once every other candidate has missed the
   number, never beside them, five at most, over HTTP and then in a browser. The Add sheet asks them after the first ten, FedEx, the providers and
   the browser confirmations, when no other candidate was left out of those ten and while the

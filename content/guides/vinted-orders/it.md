@@ -4,7 +4,7 @@ description: Tracciare un pacco Vinted, da chi compra o da chi vende: chi lo con
 slug: tracciamento-pacco-vinted
 picture: Due smartphone, quello di una venditrice e quello di un acquirente, tra cui un pacco viaggia su un furgone, e un Pip allegro.
 published: 2026-10-16
-updated: 2026-11-22
+updated: 2026-11-23
 ---
 
 Su Vinted è chi compra a scegliere il corriere al momento del pagamento e a pagare l'etichetta; chi vende la riceve come etichetta prepagata o come codice QR e ha 5 giorni lavorativi per consegnare il pacco. Tutti e due lo seguono nella conversazione dell'ordine, con «Traccia il pacco», dove puoi anche copiare il codice di tracciamento del corriere. Il tracciamento può comparire fino a 48 ore dopo la consegna al punto, e chi vende viene pagato solo quando chi compra conferma che è «Tutto a posto», o 2 giorni dopo la consegna.
@@ -128,7 +128,7 @@ La politica di rimborso di Vinted copre gli acquisti fatti con «Acquista» da u
 
 ## Si può tracciare un pacco Vinted fuori dall'app?
 
-Sì: copia il codice da «Traccia il pacco» e incollalo in [Peek](/). Un codice Vinted Go che inizia con `VGS` e un link di tracciamento vintedgo.com vengono riconosciuti subito; per un codice di 16 cifre, Peek chiede a Vinted Go e DHL eCommerce chi lo conosce. Peek riconosce dal codice anche Poste Italiane, InPost, BRT, GLS e DHL Express; per una forma condivisa, come 12 o 14 cifre, premi «Cambia» e scegli il corriere indicato da Vinted. Segnalare un problema non lo può fare per te: quello resta nella conversazione.
+Sì: copia il codice da «Traccia il pacco» e incollalo in [Peek](/). Un codice Vinted Go che inizia con `VGS` e un link di tracciamento vintedgo.com vengono riconosciuti subito; per un codice di 16 cifre, Peek chiede a Vinted Go e DHL eCommerce chi lo conosce, e a TNT se nessuno dei due lo conosce. Peek riconosce dal codice anche Poste Italiane, InPost, BRT, GLS e DHL Express; per una forma condivisa, come 12 o 14 cifre, premi «Cambia» e scegli il corriere indicato da Vinted. Segnalare un problema non lo può fare per te: quello resta nella conversazione.
 
 :::sources
 - [Vinted: Spedizione su Vinted](https://www.vinted.it/help/234) – corrieri in Italia, paesi collegati, etichetta o codice, annullamento, impostazioni di spedizione, pacchi voluminosi e CAP remoti

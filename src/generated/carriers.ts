@@ -6384,6 +6384,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4a50e"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "tracciamento-post-luxembourg",
+      "title": "Tracciamento POST Luxembourg: numeri, stati e contatti",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "tracciamento-maltapost",
@@ -8170,6 +8178,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4a50e"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "seguimiento-post-luxembourg",
+      "title": "Seguimiento POST Luxembourg: números, estados y contacto",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "maltapost",
       "catalog": "maltapost",
       "slug": "seguimiento-maltapost",
@@ -9946,6 +9962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Cyprus Post: números, estados e alfândega",
       "name": "Cyprus Post",
       "color": "#e4a50e"
+    },
+    {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "seguimento-post-luxembourg",
+      "title": "Seguimento POST Luxembourg: números, estados e contacto",
+      "name": "POST Luxembourg",
+      "color": "#008736"
     },
     {
       "id": "maltapost",
@@ -11758,6 +11782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Cyprus Post: numery, statusy i cło",
       "name": "Cyprus Post",
       "color": "#e4a50e"
+    },
+    {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "sledzenie-post-luxembourg",
+      "title": "Śledzenie POST Luxembourg: numery, statusy i kontakt",
+      "name": "POST Luxembourg",
+      "color": "#008736"
     },
     {
       "id": "maltapost",

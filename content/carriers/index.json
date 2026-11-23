@@ -99,7 +99,7 @@
   { "id": "elta", "catalog": "elta", "name": "ELTA Hellenic Post", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "geniki-taxydromiki", "catalog": "geniki-taxydromiki", "name": "Geniki Taxydromiki", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cyprus-post", "catalog": "cyprus-post", "name": "Cyprus Post", "languages": ["en", "el", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "post-luxembourg", "catalog": "post-luxembourg", "name": "POST Luxembourg", "languages": ["en", "fr", "de"] },
+  { "id": "post-luxembourg", "catalog": "post-luxembourg", "name": "POST Luxembourg", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "maltapost", "catalog": "maltapost", "name": "MaltaPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "whistl", "catalog": "whistl", "name": "Whistl", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xdp", "catalog": "xdp", "name": "XDP", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

@@ -77,7 +77,7 @@
   { "id": "nova-poshta", "catalog": "nova-poshta", "name": "Nova Poshta", "languages": ["en", "pl", "uk", "fr", "de", "es", "it", "pt"] },
   { "id": "sameday", "catalog": "sameday", "name": "Sameday", "languages": ["en", "bg"] },
   { "id": "speedy", "catalog": "speedy", "name": "Speedy", "languages": ["en"] },
-  { "id": "cargus", "catalog": "cargus", "name": "Cargus", "languages": ["en", "ro"] },
+  { "id": "cargus", "catalog": "cargus", "name": "Cargus", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "fan-courier", "catalog": "fan-courier", "name": "FAN Courier", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "econt", "catalog": "econt", "name": "Econt", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ceska-posta", "catalog": "ceska-posta", "name": "Česká pošta", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },

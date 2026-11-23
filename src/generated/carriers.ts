@@ -2516,6 +2516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "cargus-sendungsverfolgung",
+      "title": "Cargus Sendungsverfolgung: AWB-Nummer, Status & SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "fan-courier-sendungsverfolgung",
@@ -3980,6 +3988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Nova Poshta\u00a0: numéros, statuts et agences",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "suivi-cargus",
+      "title": "Suivi Cargus\u00a0: numéro AWB, statuts et SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
     },
     {
       "id": "fan-courier",
@@ -5472,6 +5488,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "tracciamento-cargus",
+      "title": "Tracciamento Cargus: numero AWB, stati e SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "tracciamento-fan-courier",
@@ -6914,6 +6938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "seguimiento-cargus",
+      "title": "Seguimiento Cargus: número AWB, estados y SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
+    },
+    {
       "id": "fan-courier",
       "catalog": "fan-courier",
       "slug": "seguimiento-fan-courier",
@@ -8346,6 +8378,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Nova Poshta: números, estados e balcões",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "seguimento-cargus",
+      "title": "Seguimento Cargus: número AWB, estados e SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
     },
     {
       "id": "fan-courier",
@@ -9822,6 +9862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "sledzenie-cargus",
+      "title": "Śledzenie Cargus: numer AWB, statusy i SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
     },
     {
       "id": "fan-courier",

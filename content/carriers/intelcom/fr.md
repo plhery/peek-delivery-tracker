@@ -12,14 +12,14 @@ Intelcom est un livreur montréalais du dernier kilomètre : il apporte chez toi
 
 Le numéro vient du marchand, pas d'Intelcom. Dragonfly indique qu'il se trouve « sur le site du commerçant » où tu as acheté, ainsi que dans le courriel qui confirme l'envoi de ta commande. La page de suivi l'appelle « Numéro de suivi », parfois « numéro de repérage ».
 
-La règle du transporteur est simple : des lettres d'abord, des chiffres ensuite. Les lettres changent selon le marchand ; voici des formes relevées sur des colis, avec des chiffres inventés :
+La règle du transporteur est simple : des lettres d'abord, des chiffres ensuite. Les lettres changent selon le marchand ; voici des exemples inventés des formes courantes :
 
-| Forme (inventée) | Ce que c'est |
+| Exemple (inventé) | Ce que c'est |
 | --- | --- |
-| `INTLCM1234567890` | `INTLCM` suivi de chiffres : le préfixe propre à Intelcom. |
-| `INTLCMA123456789` | `INTLCM`, une lettre, puis 9 chiffres. |
-| `CRIN12345678901234` | `CRIN` suivi de 14 chiffres, vu sur certains colis. |
-| `ABCD00000000123456789` | Lettres puis chiffres : une référence du marchand, acceptée elle aussi. |
+| `INTLCM4829173640` | `INTLCM` suivi de chiffres : le préfixe propre à Intelcom. |
+| `INTLCMA482917364` | `INTLCM`, une lettre, puis 9 chiffres. |
+| `CRIN48291736405829` | `CRIN` suivi de 14 chiffres, vu sur certains colis. |
+| `BKMZ482917364058` | Lettres puis chiffres : une référence du marchand, acceptée elle aussi. |
 
 Attention au `CRIN` suivi de 13 chiffres au lieu de 14 : Peek le cherche chez [Colis Privé](carrier:colis-prive), un livreur français, et jamais chez Intelcom. Compte bien les chiffres.
 
@@ -70,7 +70,7 @@ Article endommagé ou manquant, colis déclaré perdu : c'est au marchand qu'il 
 
 ## Intelcom : numéro de téléphone et service à la clientèle
 
-Voici les canaux listés sur les sites d'Intelcom et de Dragonfly, lus le 14 octobre 2026 :
+Voici les canaux listés sur les sites d'Intelcom et de Dragonfly :
 
 - **Intelcom (Québec)** : 1 514 807-6086, ou sans frais 1 833 640-2301.
 - **Dragonfly (autres provinces)** : sans frais 1 833 622-1570.
@@ -83,11 +83,15 @@ Les agents ont accès aux mêmes informations que toi : garde ton numéro de sui
 
 ## Suivre un colis Intelcom avec Peek
 
-[Peek](/) reconnaît Intelcom tout de suite pour un numéro `INTLCM` comme ceux du tableau, et pour tout lien intelcom.ca ou dragonflyshipping.ca qui contient `tracking-id=`, quel que soit le numéro dedans. Un numéro `CRIN` n'est rattaché à Intelcom que si un service de suivi le nomme ; sinon, choisis Intelcom avec « Changer de transporteur ». Une référence de marchand n'est pas reconnue à partir du numéro, mais une fois Intelcom choisi, Peek l'envoie telle quelle.
+[Peek](/) reconnaît Intelcom tout de suite pour un numéro `INTLCM` comme ceux du tableau, et pour tout lien intelcom.ca ou dragonflyshipping.ca qui contient `tracking-id=`, quel que soit le numéro dedans. Un numéro `CRIN` n'est rattaché à Intelcom que si un service de suivi le nomme ; sinon, choisis « Intelcom / Dragonfly » avec « Changer » en l'ajoutant, ou « Changer de transporteur » sur un colis déjà ajouté. Une référence de marchand n'est pas reconnue à partir du numéro, mais une fois Intelcom choisi, Peek l'envoie telle quelle.
 
-Peek lit directement le suivi de Dragonfly et affiche les statuts dans leur version anglaise, tels qu'écrits, même pour un colis du Québec : `Nous approchons!` y devient `On our way to you!`, et `Hourra! Votre colis a été livré!` devient `Hooray! Your package is here`. Chaque étape a son heure exacte, mais Dragonfly ne donne pas de lieu. Peek montre la livraison prévue (une plage horaire une fois le colis chez le livreur, un jour avant cela) et, pour les gros marchands comme Amazon, Walmart ou Canadian Tire, le nom de l'expéditeur. Il laisse de côté le nom du livreur, tes coordonnées et la preuve de livraison, et n'affiche ni point de retrait ni poids. Il ne peut pas modifier la livraison ni montrer la photo.
+Peek lit directement le suivi de Dragonfly et affiche les statuts dans leur version anglaise, tels qu'écrits, même pour un colis du Québec : `Nous approchons!` y devient `On our way to you!`, et `Hourra! Votre colis a été livré!` devient `Hooray! Your package is here`. Chaque étape a son heure exacte, mais Dragonfly ne donne pas de lieu. Peek montre la livraison prévue (une plage horaire une fois le colis chez le livreur, un jour avant cela) et, pour les gros marchands comme Amazon, Walmart ou Canadian Tire, le nom de l'expéditeur. Quand Dragonfly donne le nom du destinataire, Peek te le montre, sous « Destinataire » ; une personne avec qui tu partages le colis ne le voit pas. Peek laisse de côté le nom du livreur, ton adresse, ton numéro de téléphone et la preuve de livraison, et n'affiche ni point de retrait ni poids. Il ne peut pas modifier la livraison ni montrer la photo.
 
-Peek vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison, livraisons du soir comprises (le jour même, dès 6 h, heure locale, et à partir d'une demi-heure avant le début de la plage horaire quand Dragonfly en donne une, tant que c'est le suivi de Dragonfly qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer une notification quand le statut change. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de la livraison si tes notifications sont activées, Peek vérifie le suivi jusqu'à toutes les 10 minutes ; le jour où Dragonfly scanne le colis en livraison, toutes les 2 minutes (à partir d'une demi-heure avant le début de la plage horaire quand Dragonfly en donne une), tant que le suivi de Dragonfly répond. Peek compte cette journée en temps universel (UTC), comme Dragonfly date ses scans : elle se termine à 19 h, heure de l'Est (16 h, heure du Pacifique), une heure plus tard l'été. Une livraison en soirée après cette heure n'a donc plus les vérifications aux 2 minutes, même si Dragonfly livre jusqu'à 22 h. Sinon, Peek vérifie toutes les heures. Après 12 heures à « Étiquette créée » ou « Pris en charge », ou deux jours sans nouvelles, il vérifie toutes les heures même si tu as ouvert le colis, et toutes les 6 heures après sept jours à « Étiquette créée ». Quand le suivi de Dragonfly ne répond pas et que Peek suit le colis par des services de suivi seulement, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour de la livraison.
+
+Si un colis à « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek le signale avec le jour de ce dernier scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis affiche alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Intelcom / Dragonfly. », avec le lien « Demande de l’aide à Intelcom / Dragonfly » vers la page de soutien de Dragonfly. Après plus de trois semaines sans nouveau scan, elle affiche « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Intelcom / Dragonfly. »
+
+Tu peux recevoir les alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Intelcom
 
@@ -116,7 +120,7 @@ Oui. Intelcom ne demande jamais de paiement pour livrer, et ses vrais textos vie
 - [Dragonfly : Livraison Pratico-Comptoir](https://dragonflyshipping.ca/fr/livraison-pratico-comptoir/) – code-barres, 5 jours
 - [Dragonfly : Support](https://dragonflyshipping.ca/en/support/) – preuve de livraison, retards sur le réseau, messagerie
 - [Dragonfly : International expansion](https://dragonflyshipping.ca/en/press/news/dragonfly-international-expansion/) – noms Intelcom et Dragonfly depuis mai 2024, siège à Montréal
-- [Dragonfly : script de la page de suivi](https://dragonflyshipping.ca/assets/js/itc.min.2.40.0.492.js) – libellés des statuts et langue affichée
+- [Dragonfly : script de la page de suivi](https://dragonflyshipping.ca/assets/js/itc.min.2.41.0.493.js) – libellé des statuts selon la langue de la page
 - [Intelcom : Consignee email notifications](https://developers.intelcomexpress.com/docs/consignee-email-notifications) – courriels en français et en anglais
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit
 :::

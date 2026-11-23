@@ -12,14 +12,14 @@ Intelcom is a Montreal last-mile courier that delivers online orders across Cana
 
 You get the number from the shop, not from Intelcom: Dragonfly says it's on the merchant's website where you ordered and in the email confirming your order has shipped. Intelcom's text messages come only from the short code 87225.
 
-Dragonfly's own rule is simple: a number starts with letters and ends with digits. The letters vary by shop, so these shapes (invented here) are only the common ones:
+Dragonfly's own rule is simple: a number starts with letters and ends with digits. The letters vary by shop, so these examples (invented here) show only the common shapes:
 
-| Shape (invented) | What it is |
+| Example (invented) | What it is |
 | --- | --- |
-| `INTLCM1234567890` | `INTLCM` and 10 digits, Intelcom's own prefix. |
-| `INTLCMA123456789` | `INTLCM`, a letter and 9 digits. |
-| `CRIN12345678901234` | `CRIN` and 14 digits, seen on some parcels. |
-| `ABCD00000000123456789` | Letters then digits: a shop's own reference, also accepted. |
+| `INTLCM4829173640` | `INTLCM` and 10 digits, Intelcom's own prefix. |
+| `INTLCMA482917364` | `INTLCM`, a letter and 9 digits. |
+| `CRIN48291736405829` | `CRIN` and 14 digits, seen on some parcels. |
+| `BKMZ482917364058` | Letters then digits: a shop's own reference, also accepted. |
 
 Number not working on the tracking page? Dragonfly gives three reasons: the shop hasn't told it about the parcel yet, the number isn't letters followed by digits, or it's more than three months old. If it still fails, ask the shop. Peek takes a `CRIN` number with 13 digits instead of 14 for Colis Privé, not Intelcom. For other formats, see [which carrier a number belongs to](guide:tracking-number-formats).
 
@@ -68,7 +68,7 @@ Damaged or missing items, and parcels shown as lost, go to the shop: Dragonfly d
 
 ## Intelcom contact number and customer service
 
-Intelcom's channels, as listed on its sites on 14 October 2026:
+The channels on Intelcom's and Dragonfly's sites:
 
 - **Dragonfly (outside Quebec):** toll free 1-833-622-1570.
 - **Intelcom (Quebec):** (514) 807-6086, toll free 1-833-640-2301.
@@ -81,11 +81,15 @@ Agents see the same tracking information you do, so have the number ready and ex
 
 ## Tracking Intelcom parcels with Peek
 
-[Peek](/) names Intelcom at once for `INTLCM` numbers like those above, and for any intelcom.ca or dragonflyshipping.ca link with `tracking-id=` in it, whatever the number inside. A `CRIN` number is named only if a tracking service names Intelcom; otherwise pick Intelcom with "Change". Shop references aren't recognised from the number, but once you pick Intelcom with "Change" Peek sends them as they are.
+[Peek](/) names Intelcom at once for `INTLCM` numbers like those above, and for any intelcom.ca or dragonflyshipping.ca link with `tracking-id=` in it, whatever the number inside. A `CRIN` number is named only if a tracking service names Intelcom; otherwise pick "Intelcom / Dragonfly" with "Change" as you add it, or "Change carrier" on a parcel already added. Shop references aren't recognised from the number, but once you pick Intelcom / Dragonfly, Peek sends them as they are.
 
-Peek reads Dragonfly's tracking directly and shows the status in its English words, as written, even for Quebec parcels. Each step has its exact time; Dragonfly gives no place for it. Peek shows the expected delivery, a time window once the parcel is with the driver and a day before that, and for big shops such as Amazon, Walmart or Canadian Tire the sender's name. It drops the driver's name, your details and the proof of delivery, and shows no pickup point or weight. It can't change the delivery or show the photo.
+Peek reads Dragonfly's tracking directly and shows the status in its English words, as written, even for Quebec parcels. Each step has its exact time; Dragonfly gives no place for it. Peek shows the expected delivery, a time window once the parcel is with the driver and a day before that, and for big shops such as Amazon, Walmart or Canadian Tire the sender's name. When Dragonfly gives the recipient's name, Peek shows it only to you, under "Recipient"; someone you share the parcel with doesn't see it. Peek drops the driver's name, your address and phone number and the proof of delivery, and shows no pickup point or weight. It can't change the delivery or show the photo.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Dragonfly scans the parcel out for delivery, evening deliveries included (when Dragonfly gives a time window, from half an hour before it opens), while Dragonfly's own tracker answers; through tracking services, every 15 minutes. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Dragonfly scans the parcel out for delivery, every 2 minutes (from half an hour before the time window, when Dragonfly gives one) while Dragonfly's own tracker answers. Peek counts that day in UTC, as Dragonfly dates its scans, so it ends at 7 p.m. Eastern time (4 p.m. Pacific), an hour later in summer: an evening delivery after that gets no 2-minute checks, though Dragonfly delivers until 10 p.m. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Dragonfly's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Intelcom / Dragonfly.", with a "Get help from Intelcom / Dragonfly" link to Dragonfly's support page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Intelcom / Dragonfly."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Intelcom tracking
 
@@ -114,7 +118,7 @@ Yes, one company. Since May 2024 Intelcom has traded as Dragonfly outside Quebec
 - [Dragonfly: International expansion](https://dragonflyshipping.ca/en/press/news/dragonfly-international-expansion/) – Intelcom and Dragonfly names, founded 1986
 - [Intelcom: FAQ](https://intelcom.ca/en/faq/) – Intelcom's numbers and text messages
 - [Intelcom: Support](https://intelcom.ca/en/support/) – Quebec phone numbers, hours
-- [Dragonfly: Tracking page script](https://dragonflyshipping.ca/assets/js/itc.min.2.40.0.492.js) – status labels and their language
+- [Dragonfly: Tracking page script](https://dragonflyshipping.ca/assets/js/itc.min.2.41.0.493.js) – status wording by page language
 - [Intelcom: Consignee email notifications](https://developers.intelcomexpress.com/docs/consignee-email-notifications) – notification types
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

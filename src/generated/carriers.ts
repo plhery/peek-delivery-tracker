@@ -14644,6 +14644,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "yanwen",
+      "catalog": "yanwen",
+      "slug": "yanwen-wuliu-chaxun",
+      "title": "燕文物流（Yanwen）单号查询：UL…YP格式、状态与尾程",
+      "name": "Yanwen",
+      "color": "#8cbe1e"
+    },
+    {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-wuliu-chaxun",
@@ -14692,6 +14700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "pengyou-wuliu-chaxun",
+      "title": "捧友供应链（Pengyou）查询：PY单号与预设轨迹说明",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-wuliu-chaxun",
@@ -14724,6 +14740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fe9b00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "wanbang-suda-wanbexpress-wuliu-chaxun",
+      "title": "万邦速达（WanbExpress）查询：WNB…YQ单号与状态",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "guangzhou-yunlian-gzyl-wuliu-chaxun",
@@ -14740,12 +14764,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#be2c33"
     },
     {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-wuliu-chaxun",
+      "title": "华翰物流（HuaHan）单号查询：HHW…YQ状态与尾程",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-huoyun-wuliu-chaxun",
       "title": "星和货运（Xinghe Freight）物流查询：GZXH单号与状态",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "shengxingwang-sxw-express-wuliu-chaxun",
+      "title": "胜兴旺（SXW Express）物流查询：SXW单号与状态",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "nl": [

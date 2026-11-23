@@ -14,8 +14,8 @@ The shapes Peek knows, with made-up digits:
 
 | Number | What it is |
 | --- | --- |
-| `CHPU0000000000000000000` | `CHPU` and 19 digits: a Chronodiali number. Peek recognises it at once. |
-| `CD0000000000` | `CD` and 10 digits. Peek can track it with Chronodiali too, but the same shape fits [Colis Privé](carrier:colis-prive), [Aramex Australia](carrier:aramex-au) and [Aramex New Zealand](carrier:aramex-nz) numbers, so Peek asks all four which one has it (see below). |
+| `CHPU4829103756182947305` | `CHPU` and 19 digits: a Chronodiali number. Peek recognises it at once. |
+| `CD4829103756` | `CD` and 10 digits. Peek can track it with Chronodiali too, but the same shape fits [Colis Privé](carrier:colis-prive), [Aramex Australia](carrier:aramex-au) and [Aramex New Zealand](carrier:aramex-nz) numbers, so Peek asks all four which one has it (see below). |
 | `chronodiali.ma/suivi_colis.html?id=…` | A link to Chronodiali's tracking page. Peek reads it as Chronodiali, whatever number it holds. |
 
 Chronodiali isn't [Chronopost](carrier:chronopost), the French express carrier: their numbers and trackers are different. No number at all? Ask the shop, or see [where to find a tracking number](guide:find-tracking-number).
@@ -61,7 +61,7 @@ Chronodiali says it delivers all over Morocco, to more than 300 destinations, at
 - **Three attempts:** Chronodiali lists "3 Tentatives de livraison" (three delivery attempts) among its services. In Peek, each failed attempt shows a line starting `La livraison a échoué`, with or without a reason.
 - **Keep your phone on:** one reason for a failed delivery is that you didn't answer or couldn't be reached.
 - **Notifications:** its services page lists SMS and email notifications, and a customer notification at each step of the journey.
-- **Agencies:** Agadir, Casablanca, Fès, Marrakech, Rabat and Tangier, open Monday to Friday 9:00 to 18:00 and Saturday 9:00 to 13:00. The addresses are on its "Points de livraison" page.
+- **Agencies:** Agadir, Casablanca, Fès, Marrakech, Rabat and Tangier, open Monday to Friday 9:00 to 18:00 and Saturday 9:00 to 13:00, Moroccan time. The addresses are on its "Points de livraison" page.
 
 Chronodiali's site doesn't say how long an agency keeps a parcel, or what happens after the third failed attempt. Ask Chronodiali or the shop. Missed the courier? See [missed deliveries](guide:missed-delivery).
 
@@ -70,7 +70,7 @@ Chronodiali's site doesn't say how long an agency keeps a parcel, or what happen
 For a refund or a new parcel, ask the shop. The shop is Chronodiali's customer: it books the pickups through the platform it gets with its contract.
 
 - **No movement after `Les données du colis ont été intégrées dans nos systèmes.`:** the shop has created the shipment, but Chronodiali hasn't collected the parcel yet. Ask the shop when it will hand it over. If chronodiali.ma shows `En cours de traitement.` (being processed), Chronodiali knows the number but has no scan yet.
-- **Late:** Chronodiali publishes no delivery times. Its terms say they are given with the order and can vary with the destination. See [tracking that isn't updating](guide:tracking-not-updating).
+- **Late:** Chronodiali publishes no delivery times. Its terms say they are given with the order and can vary with the destination. When the newest line is four days old or more and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day ("No tracking update since …") and adds a "Get help from Chronodiali" link. See [tracking that isn't updating](guide:tracking-not-updating).
 - **Refused or not paid:** if you refuse the parcel or can't pay, the courier records a failed delivery. The parcel can then go back to the shop: `Le colis va être renvoyé à l'expéditeur.`, then `Le colis a été retourné à l'adresse de l'expéditeur.` See [returned to sender](guide:returned-to-sender).
 - **Delivered but not received:** Chronodiali gives shops a digital proof of delivery in their client space. Ask the shop to check it. More in [delivered but not received](guide:delivered-not-received).
 - **Damaged or lost:** tell the shop first. You can also tick "Réclamation ?" on Chronodiali's contact form, or call or email it with your number. See [damaged parcels](guide:damaged-parcel) and [lost parcels](guide:lost-parcel).
@@ -78,7 +78,7 @@ For a refund or a new parcel, ask the shop. The shop is Chronodiali's customer: 
 
 ## Chronodiali contact number and customer service
 
-As read on 1 November 2026 on chronodiali.ma:
+On chronodiali.ma:
 
 - **Phone:** +212 5 20 61 62 63 (05 20 61 62 63 from Morocco).
 - **Email:** service-client@chronodiali.ma.
@@ -93,9 +93,9 @@ Paste a `CHPU` number and [Peek](/) names Chronodiali at once, under "Detected c
 
 A `CD` number of 10 digits doesn't tell Peek the carrier. Paste it all the same: Peek follows more than 4,500 carriers. Peek shows "Checking tracking services…" while it asks Chronodiali and the carriers whose numbers share the shape; if Chronodiali alone has the parcel, its name shows with "has this parcel". Or tap "Change" and pick "Chronodiali" under "Fits this number". If you pick Chronodiali for a number of another shape, Peek says it "doesn’t issue numbers like this one", and the parcel shows "Check the tracking number".
 
-Peek reads Chronodiali's own tracking: the status, each line as Chronodiali writes it (in French, sometimes in English, as the two lines above), the hub's name as the place where there is one, the destination country and the delivery time. Peek shows the times in your device's time zone. It leaves out the sender's name and yours, the towns, the amount to pay, the proof of delivery and the courier's calls. Chronodiali's tracking gives no expected delivery date and no weight. The lines about a partner company don't name the partner, and Peek doesn't follow the partner's own tracking.
+Peek reads Chronodiali's own tracking: the status, each line as Chronodiali writes it (in French, sometimes in English, as the two lines above), the hub's name as the place where there is one, the destination country and the delivery time. Peek shows the times in your device's time zone. It leaves out the sender's name and town, the amount to pay, the proof of delivery and the courier's calls. When Chronodiali sends them, you also see the recipient's name under "Recipient" and, while the parcel is on its way, the destination town on the map when Peek places it in Morocco; someone you share the parcel with sees neither, and the name of whoever signed stays private: no app shows it. Chronodiali's tracking gives no expected delivery date and no weight. The lines about a partner company don't name the partner, and Peek doesn't follow the partner's own tracking.
 
-If Chronodiali doesn't know the number yet, Peek shows "Waiting for Chronodiali" and keeps checking. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Chronodiali scans the parcel out for delivery, while Chronodiali's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't pay, rebook a delivery or contact Chronodiali or the shop for you.
+If Chronodiali doesn't know the number yet, Peek shows "Waiting for Chronodiali" and keeps checking; if Chronodiali still doesn't know it after two days, Peek asks you to check it, choose another carrier or delete the parcel. While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Moroccan time on the day Chronodiali scans the parcel out for delivery, while Chronodiali's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't pay, rebook a delivery or contact Chronodiali or the shop for you.
 
 ## Questions about Chronodiali tracking
 

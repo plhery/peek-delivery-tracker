@@ -5,7 +5,7 @@ import type { ApiCarrierDetectionResponse, ApiCarrierId } from '../generated/api
 import { isAmazonTrackingNumber } from '../lib/amazon';
 import { detectCarrierMatch, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { createAdapterRegistry } from './adapterRegistry';
-import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
+import { BROWSER_RECOGNITION_BUDGET_MS, browserRecognitionSlotToSpare, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
 import { checkAmazonShipping } from './amazonShippingEligibility';
 import { HttpError } from './api';
 import { isPhoneNumber, isPlaceholderNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition, type RecognitionCandidate } from 'universal-parcel-scraper';
@@ -29,10 +29,10 @@ const ANSWER_TTL_MS = 10 * 60_000;
 const MAX_ANSWERS = 500;
 
 /**
- * Whether FedEx is asked right after the first batch of carriers misses a number that passes FedEx's check (the
- * scraper ranks FedEx first for it), rather than after the second batch and the providers: on unless
- * `FEDEX_EARLY_RECOGNITION` is `off`, `false`, `no` or `0`. FedEx answers only in a browser, which turns some lookups
- * away with a bot check.
+ * Whether FedEx is asked about a number that passes FedEx's check (the scraper ranks FedEx first for it) with the
+ * first batch of carriers, or right after that batch misses it, rather than after the second batch and the providers:
+ * on unless `FEDEX_EARLY_RECOGNITION` is `off`, `false`, `no` or `0`. FedEx answers only in a browser, which turns
+ * some lookups away with a bot check.
  */
 export function fedexEarlyRecognition(env: Record<string, string | undefined> = process.env): boolean {
   return !['off', 'false', 'no', '0'].includes(env.FEDEX_EARLY_RECOGNITION?.trim().toLowerCase() ?? '');
@@ -88,13 +88,26 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   };
   const askBrowser = (carrier: string, context: TrackingContext) => recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier));
   const browserBudget = () => Math.max(1, Math.min(BROWSER_RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())));
-  const outcomes = await recognizeAll(candidates.slice(0, MAX_RECOGNITIONS), ask, RECOGNITION_BUDGET_MS, signal);
+  // A number that passes FedEx's check goes to FedEx, which answers only in a browser, as soon as the first five miss
+  // it, before the next five and the providers. When FedEx also ranks above every carrier asked over HTTP (none of them
+  // backed by number evidence or the page the number was typed on), its read starts with the first five instead, as
+  // long as a browser is left for other checks. Their answer still comes first: one that settles the number stops it.
+  const fedex = fedexEarlyRecognition()
+    ? browserCandidates.filter(({ carrier, preferred }) => carrier === 'fedex' && preferred) : [];
+  const stopFedex = new AbortController();
+  const headStart = fedex.length && browserCandidates[0]?.carrier === 'fedex'
+    && !candidates.some(({ carrier, preferred }) => preferred || carrier === hint)
+    && browserRecognitionSlotToSpare('fedex', trackingNumber)
+    ? recognizeAll(fedex, askBrowser, browserBudget(), signal ? AbortSignal.any([signal, stopFedex.signal]) : stopFedex.signal)
+    : undefined;
+  // A stopped read rejects with nobody waiting for it.
+  headStart?.catch(() => undefined);
+  const outcomes = await recognizeAll(candidates.slice(0, MAX_RECOGNITIONS), ask, RECOGNITION_BUDGET_MS, signal)
+    .catch((error: unknown) => { stopFedex.abort(); throw error; });
   const missed = () => { const settled = settleRecognition(outcomes); return !settled.carrier && !settled.choices.length; };
-  // A number that passes FedEx's check goes to FedEx as soon as the first five miss it, before the next five and the
-  // providers.
-  const early = missed() && fedexEarlyRecognition() && detectCarrierMatch(typed).preferred.includes('fedex')
-    ? browserCandidates.filter(({ carrier }) => carrier === 'fedex') : [];
-  if (early.length) outcomes.push(...await recognizeAll(early, askBrowser, browserBudget(), signal));
+  const early = missed() ? fedex : [];
+  if (early.length) outcomes.push(...await (headStart ?? recognizeAll(early, askBrowser, browserBudget(), signal)));
+  else stopFedex.abort();
   // The next five are asked only when none of the first knows the number, for another three
   // seconds at most: past the deadline they go unanswered.
   const next = missed() ? candidates.slice(MAX_RECOGNITIONS) : undefined;
@@ -141,6 +154,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
       asked: asked.length,
       asked_carriers: asked.join(','),
       second_batch: Boolean(next?.length),
+      ...(headStart ? { fedex_head_start: true } : {}),
       ...(early.length ? { fedex_early: true } : {}),
       ...(retried ? { fedex_retried: true } : {}),
       ...(outsideDue.length ? { last_resort: true } : {}),

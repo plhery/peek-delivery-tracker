@@ -16,7 +16,7 @@ vi.mock('./adapterRegistry', () => ({ createAdapterRegistry: () => ({ for: (carr
   recognize: (number: string, context: unknown) => mocks.http(carrier, number, context),
 }) }) }));
 vi.mock('./browserRecognition', () => ({ BROWSER_RECOGNITION_BUDGET_MS: 20_000, MAX_BROWSER_RECOGNITIONS: 2,
-  recognizeBrowser: (...args: unknown[]) => mocks.browser(...args) }));
+  browserRecognitionSlotToSpare: () => true, recognizeBrowser: (...args: unknown[]) => mocks.browser(...args) }));
 beforeEach(() => {
   vi.unstubAllEnvs();
   mocks.candidates = undefined;

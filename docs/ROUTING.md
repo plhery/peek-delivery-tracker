@@ -759,10 +759,13 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   focus, which includes opening the carrier picker, a paste, a shared number), within
   three seconds for the first five HTTP candidates and, when none of them knows the number,
   three more for the next five, then up to twenty seconds for browser confirmation. A number that
-  passes FedEx's check goes to FedEx, which confirms only in a browser, as soon as the first five miss
-  it, before the next five (`FEDEX_EARLY_RECOGNITION=off` asks it after them again). When that read
-  does not answer, as when both browsers are busy, FedEx is asked again with the browser confirmations
-  unless the detection's 25 seconds are over. At most two
+  passes FedEx's check goes to FedEx, which confirms only in a browser, before the next five. When the
+  scraper ranks FedEx above every HTTP candidate too (none backed by number evidence or the carrier
+  whose page the number was typed on), FedEx's read starts with the first five, if a browser is left
+  free for other checks; otherwise once they miss. Their answer still wins, as when FedEx was asked
+  after them, and stops FedEx's read (`FEDEX_EARLY_RECOGNITION=off` asks FedEx after the next five).
+  When that read does not answer, as when both browsers are busy, FedEx is asked again with the browser
+  confirmations unless the detection's 25 seconds are over. At most two
   browser recognitions run per process, and identical requests share work. Complete answers
   are cached per number and country hint for ten minutes; browser answers and their history for five minutes,
   failures for thirty seconds. Changing the number or leaving the form cancels its request;

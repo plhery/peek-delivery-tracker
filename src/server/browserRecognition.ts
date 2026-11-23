@@ -36,6 +36,14 @@ const shared: BrowserRecognitionState = processScope[stateKey] ??= { cache: new 
 const { cache, pending } = shared;
 let registry: ReturnType<typeof createAdapterRegistry> | undefined;
 
+/**
+ * Whether a read started ahead of need can take a browser without leaving the process none: it joins the same read
+ * under way, or leaves a slot free for every other check.
+ */
+export function browserRecognitionSlotToSpare(carrier: string, number: string): boolean {
+  return pending.has(`${carrier}:${number}`) || pending.size < MAX_BROWSER_RECOGNITIONS - 1;
+}
+
 function remember(key: string, answer?: BrowserRecognition) {
   cache.delete(key);
   cache.set(key, { at: Date.now(), answer });

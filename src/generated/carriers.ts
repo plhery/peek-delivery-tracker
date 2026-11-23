@@ -14726,8 +14726,8 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     {
       "id": "juxi-express",
       "catalog": "juxi-express",
-      "slug": "juxi-guoji-juxi-express-wuliu-chaxun",
-      "title": "聚溪国际（Juxi Express）查询：JXC单号、尾程与售后",
+      "slug": "juxi-wuliu-juxi-express-chaxun",
+      "title": "驹隙物流（Juxi Express）查询：JXC单号、尾程与售后",
       "name": "Juxi Express",
       "color": "#e2393c"
     },

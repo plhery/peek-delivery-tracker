@@ -1,7 +1,7 @@
 ---
 title: 驹隙物流（Juxi Express）查询：JXC单号、尾程与售后
 description: 查询上海驹隙物流（Juxi Express/SHJX）跨境包裹：JXC…YQ单号格式、无官网查件说明、英德加美尾程派送、关税与理赔联系。
-slug: juxi-guoji-juxi-express-wuliu-chaxun
+slug: juxi-wuliu-juxi-express-chaxun
 published: 2026-11-23
 updated: 2026-11-23
 ---

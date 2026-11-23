@@ -116437,6 +116437,17 @@
     "candidates": []
   },
   {
+    "input": "TGE9999999999999SH",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "suhu"
+    ],
+    "asked": [
+      "suhu"
+    ]
+  },
+  {
     "input": "TGFL003384",
     "carrier": "unknown",
     "confidence": "none",

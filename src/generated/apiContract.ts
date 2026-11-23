@@ -51421,7 +51421,12 @@ export const CARRIER_CAPABILITIES = {
     },
     "trackingUrlTemplate": "https://www.suhusupplychain.com/",
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^TGE\\d{13}SH$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.suhusupplychain.com/"
   },
   "allied-express": {

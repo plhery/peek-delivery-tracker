@@ -4350,6 +4350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0160ab"
     },
     {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "suivi-hermes-einrichtungs-service",
+      "title": "Suivi Hermes Einrichtungs-Service\u00a0: meubles et RDV",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-suivi",
@@ -6288,6 +6296,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0160ab"
     },
     {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "tracciamento-hermes-einrichtungs-service",
+      "title": "Tracciamento Hermes Einrichtungs-Service: mobili e cita",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-tracking",
@@ -8218,6 +8234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0160ab"
     },
     {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "seguimiento-hermes-einrichtungs-service",
+      "title": "Seguimiento Hermes Einrichtungs-Service: muebles y cita",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
+    },
+    {
       "id": "landmark-global",
       "catalog": "landmark-global",
       "slug": "landmark-global-seguimiento",
@@ -10138,6 +10162,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Ciblex: números, estados em francês e contactos",
       "name": "Ciblex",
       "color": "#0160ab"
+    },
+    {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "seguimento-hermes-einrichtungs-service",
+      "title": "Seguimento Hermes Einrichtungs-Service: móveis e marcação",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
     },
     {
       "id": "landmark-global",
@@ -12078,6 +12110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Ciblex: numery, francuskie statusy i kontakt",
       "name": "Ciblex",
       "color": "#0160ab"
+    },
+    {
+      "id": "hermes-einrichtungs-service",
+      "catalog": "hermes",
+      "slug": "sledzenie-hermes-einrichtungs-service",
+      "title": "Śledzenie Hermes Einrichtungs-Service: meble i termin",
+      "name": "Hermes Einrichtungs-Service",
+      "color": "#0091cd"
     },
     {
       "id": "landmark-global",

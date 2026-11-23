@@ -3508,6 +3508,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "early-bird-sendungsverfolgung",
+      "title": "Early Bird Sendungsverfolgung: Status, Nacht & Locker",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -5086,6 +5094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "suivi-early-bird",
+      "title": "Suivi Early Bird\u00a0: statuts, livraison matinale et casiers",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -6640,6 +6656,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "tracking-early-bird",
+      "title": "Tracking Early Bird: stati, consegna mattutina e locker",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-tracking",
@@ -8170,6 +8194,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "seguimiento-early-bird",
+      "title": "Seguimiento Early Bird: estados, entregas y taquillas",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -9674,6 +9706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio J&T Express UK: números JTUK e estados",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "seguimento-early-bird",
+      "title": "Seguimento Early Bird: estados, entregas e cacifos",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     },
     {
       "id": "xinghe-freight",
@@ -11246,6 +11286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express UK: numery JTUK i statusy",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "sledzenie-early-bird",
+      "title": "Śledzenie Early Bird: statusy, poranne dostawy i automaty",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     },
     {
       "id": "xinghe-freight",

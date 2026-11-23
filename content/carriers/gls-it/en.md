@@ -16,10 +16,10 @@ GLS's form takes these codes:
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `AB123456789` | National shipment number: two letters and up to 9 digits. |
-| `A1 123456789` | National shipment number with a letter and a digit, like GLS's own example. |
-| `12345678901` | International shipment number: 11 digits, one per parcel. |
-| `12345678` | Parcel ID (ID Collo): the digits under the ID Collo barcode, without the leading zeros and the final "GLS". |
+| `MI482917365` | National shipment number: two letters and up to 9 digits. |
+| `M4 482917365` | National shipment number with a letter and a digit, like GLS's own example. |
+| `48291736504` | International shipment number: 11 digits, one per parcel. |
+| `48291736` | Parcel ID (ID Collo): the digits under the ID Collo barcode, without the leading zeros and the final "GLS". |
 
 A national shipment of several parcels needs only one number.
 
@@ -46,7 +46,7 @@ GLS's FAQ lists more labels. `AWAITING SENDER’S INSTRUCTIONS – SHIPMENT IN S
 
 ## GLS delivery in Italy: missed parcels, GLS Points and giacenza
 
-GLS delivers Monday to Friday, public holidays excluded, during the day (roughly 8.30 to 18.30). A set time or a Saturday only happens if the sender paid for it.
+GLS delivers Monday to Friday, public holidays excluded, during the day (roughly 8.30 to 18.30 Italian time). A set time or a Saturday only happens if the sender paid for it.
 
 **Missed delivery.** The driver leaves a notice, and a second attempt follows the next working day. If the sender booked GLS's Flex Delivery, a link by email or SMS lets you pick a new date or a pickup point (a Sede or GLS Shop). If the sender's contract allows it, you can also choose a new address, a safe place or a neighbour. To change the address otherwise, ask the sender.
 
@@ -54,7 +54,7 @@ GLS delivers Monday to Friday, public holidays excluded, during the day (roughly
 
 **GLS Points and lockers.** You pick a GLS Shop when you order online and get an SMS or email when it arrives. GLS counts over 10,000 shops in Italy. You have 10 working days to pick up, with a reminder after 5; after that it goes back to the Sede. Lockers and Points are on GLS's [Trova Sede e GLS Point](https://gls-group.com/IT/it/trova-sede-parcelshop/) locator.
 
-**Fermo Deposito.** If the sender booked depot pickup, pick it up at the Sede by the 3rd working day with ID and the shipment number. Hours: Monday to Friday 8.30 to 13.00 and 14.30 to 18.30, Saturday 8.30 to 12.00.
+**Fermo Deposito.** If the sender booked depot pickup, pick it up at the Sede by the 3rd working day with ID and the shipment number. Hours: Monday to Friday 8.30 to 13.00 and 14.30 to 18.30, Saturday 8.30 to 12.00, Italian time.
 
 ## GLS parcel late, lost or damaged
 
@@ -68,22 +68,22 @@ You can also complain yourself with the form attached to GLS's service charter, 
 
 ## GLS Italy contact number and customer service
 
-GLS Italy's channels, as read on 11 October 2026:
+GLS Italy's channels:
 
 - **Freephone** 800 184726, GLS's central customer care.
 - **Automated tracking line** 02 98 03 55 56, 24 hours; from abroad +39 02 98 03 55 56.
-- **Email** customerservice@gls-italy.com, or the form behind "Continue and contact Customer Service" on GLS's [Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) page. The charter gives Monday to Friday, 9.00 to 13.00 and 14.30 to 17.30, holidays excluded.
+- **Email** customerservice@gls-italy.com, or the form behind "Continue and contact Customer Service" on GLS's [Customer Service updates](https://gls-group.com/IT/en/online-services/contacts/) page. The charter gives Monday to Friday, 9.00 to 13.00 and 14.30 to 17.30 Italian time, holidays excluded.
 - **Your local Sede**: phone and email on the Trova Sede locator.
 
 > GLS Italy warns that it never asks for card payment by SMS or email. Don't click or pay; report fake messages to cybersec@gls-italy.com. Parcels from outside the EU can bring a genuine request for duties and taxes.
 
 ## Tracking GLS Italy parcels with Peek
 
-[Peek](/) asks GLS Italy about two letters and nine digits and says "GLS Italy has this parcel." when GLS knows it. For GLS's letter-and-digit form, pick GLS Italy with "Change". A gls-group.com or gls-group.eu tracking link with /IT/ in its path works too; gls-italy.com links don't. Peek asks GLS France, Germany and Switzerland about 11-digit international numbers, never GLS Italy; if GLS Germany knows yours, Peek asks for the delivery postcode.
+[Peek](/) asks GLS Italy about two letters and nine digits, or a letter, a digit and nine digits, and says "GLS Italy has this parcel." when GLS knows it. For a national number with fewer than nine digits, pick GLS Italy with "Change"; Peek can't track an ID Collo, so give the shipment number. A gls-group.com or gls-group.eu tracking link with /IT/ in its path works too; gls-italy.com links don't. Peek asks GLS France, Germany and Switzerland about 11-digit international numbers, never GLS Italy; if GLS Germany knows yours, Peek asks for the delivery postcode.
 
-GLS Italy's scan times carry no time zone: Peek reads them on Italian time and lists GLS Italy's own history. When the newest scan has a day but no time, Peek dates the history from universal tracking services that know the parcel. Statuses keep GLS's English wording, and the weight shows.
+GLS Italy's scan times carry no time zone: Peek reads them on Italian time and lists GLS Italy's own history. When the newest scan has a day but no time, Peek dates the history from universal tracking services that know the parcel. History lines keep GLS's English wording; the parcel's status shows in your language, such as "Delivered". The weight shows too.
 
-The only expected delivery day it shows is the one you book a redelivery for after a missed delivery: GLS writes it as `Consegna prenotata il` and the date, in Italian even among its English statuses. It shows no pickup point or sender, and drops your name, address and signature. A parcel forwarded or returned under a new number isn't followed, and old shipments come back as not found.
+The only expected delivery day it shows is the one you book a redelivery for after a missed delivery: GLS writes it as `Consegna prenotata il` and the date, in Italian even among its English statuses. It shows no pickup point or sender and drops your name; your town, which GLS gives with the delivery address, places the end of the route on your own map, and shared links never show it. A parcel forwarded or returned under a new number isn't followed, and old shipments come back as not found.
 
 ## Questions about GLS tracking in Italy
 

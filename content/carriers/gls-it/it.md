@@ -16,10 +16,10 @@ Il modulo di ricerca di GLS accetta questi codici (cifre inventate):
 
 | Forma | Che cos'è |
 | --- | --- |
-| `AB123456789` | Numero di spedizione nazionale: due lettere e fino a 9 cifre. |
-| `A1 123456789` | Numero nazionale con una lettera e una cifra all'inizio, come nell'esempio di GLS. |
-| `12345678901` | Numero di spedizione internazionale: 11 cifre, uno per collo. |
-| `12345678` | ID Collo: le cifre sotto il codice a barre ID Collo, senza gli zeri iniziali e senza «GLS» finale. |
+| `MI482917365` | Numero di spedizione nazionale: due lettere e fino a 9 cifre. |
+| `M4 482917365` | Numero nazionale con una lettera e una cifra all'inizio, come nell'esempio di GLS. |
+| `48291736504` | Numero di spedizione internazionale: 11 cifre, uno per collo. |
+| `48291736` | ID Collo: le cifre sotto il codice a barre ID Collo, senza gli zeri iniziali e senza «GLS» finale. |
 
 Il modulo prende anche il numero del DDT (codice Sede, numero di contratto di 4 cifre e numero DdT). Per una spedizione nazionale di più colli basta un solo numero; per l'estero serve il numero di ogni collo.
 
@@ -45,7 +45,7 @@ Le FAQ di GLS spiegano altre etichette. `IN ATTESA DI ISTRUZIONI DAL MITTENTE �
 
 ## Pacco GLS non consegnato: giacenza, GLS Point e fermo deposito
 
-GLS consegna dal lunedì al venerdì, festivi esclusi, durante il giorno (indicativamente dalle 8.30 alle 18.30). La consegna a un orario preciso o di sabato c'è solo se il mittente ha aggiunto quel servizio.
+GLS consegna dal lunedì al venerdì, festivi esclusi, durante il giorno (indicativamente dalle 8.30 alle 18.30, ora italiana). La consegna a un orario preciso o di sabato c'è solo se il mittente ha aggiunto quel servizio.
 
 **Se non ci sei.** Il corriere lascia un avviso di passaggio e riprova il giorno lavorativo successivo. Se il mittente ha attivato FlexDeliveryService, un link via e-mail o SMS ti fa scegliere una nuova data o un punto di ritiro (Sede o GLS Shop); se il contratto del mittente lo prevede, anche un nuovo indirizzo nella zona della stessa Sede, un luogo sicuro o un vicino. Per cambiare indirizzo in altri casi, chiedi al mittente.
 
@@ -53,7 +53,7 @@ GLS consegna dal lunedì al venerdì, festivi esclusi, durante il giorno (indica
 
 **GLS Point e locker.** Il GLS Shop lo scegli quando ordini e ricevi un SMS o un'e-mail quando il pacco arriva. GLS conta oltre 10.000 Shop in Italia. Hai 10 giorni lavorativi per ritirarlo, con un promemoria dopo 5; poi torna in Sede. Punti e locker sono nella ricerca [Trova Sede e GLS Point](https://gls-group.com/IT/it/trova-sede-parcelshop/).
 
-**Fermo deposito.** Se il mittente ha scelto il ritiro in Sede, hai tempo fino al terzo giorno lavorativo dall'arrivo, con un documento e il numero di spedizione. Un delegato porta il numero, la copia del tuo documento, una delega firmata e il proprio documento. Orari: dal lunedì al venerdì 8.30–13.00 e 14.30–18.30, il sabato 8.30–12.00.
+**Fermo deposito.** Se il mittente ha scelto il ritiro in Sede, hai tempo fino al terzo giorno lavorativo dall'arrivo, con un documento e il numero di spedizione. Un delegato porta il numero, la copia del tuo documento, una delega firmata e il proprio documento. Orari: dal lunedì al venerdì 8.30–13.00 e 14.30–18.30, il sabato 8.30–12.00, ora italiana.
 
 ## Pacco GLS in ritardo, perso o rotto: cosa fare
 
@@ -67,11 +67,11 @@ Risulta consegnato ma non l'hai ricevuto? Avvisa subito il mittente: solo chi ha
 
 ## GLS contatti: numero verde, e-mail e Sede
 
-I canali di GLS Italy, come risultavano l'11 ottobre 2026:
+I canali di GLS Italy:
 
 - **Numero verde** 800 184726, il customer care centralizzato.
 - **Linea automatica** 02 98 03 55 56, attiva 24 ore su 24, per lo stato della spedizione.
-- **E-mail** customerservice@gls-italy.com, oppure il modulo che si apre da «Prosegui e contatta il Customer Service» nella pagina [Aggiornamenti Assistenza Clienti](https://gls-group.com/IT/it/servizi-online/contatti/). Per il servizio clienti la Carta dei Servizi indica dal lunedì al venerdì, 9.00–13.00 e 14.30–17.30, festivi e prefestivi esclusi.
+- **E-mail** customerservice@gls-italy.com, oppure il modulo che si apre da «Prosegui e contatta il Customer Service» nella pagina [Aggiornamenti Assistenza Clienti](https://gls-group.com/IT/it/servizi-online/contatti/). Per il servizio clienti la Carta dei Servizi indica dal lunedì al venerdì, 9.00–13.00 e 14.30–17.30 (ora italiana), festivi e prefestivi esclusi.
 - **La tua Sede**: telefono ed e-mail nella ricerca Trova Sede.
 
 Chat o WhatsApp: GLS Italy non ne indica.
@@ -80,11 +80,11 @@ Chat o WhatsApp: GLS Italy non ne indica.
 
 ## Seguire un pacco GLS Italy con Peek
 
-[Peek](/) chiede a GLS Italy i numeri di due lettere e nove cifre e scrive «GLS Italy ha questo pacco.» quando GLS lo conosce. Per la forma con una lettera e una cifra, scegli GLS Italy con «Cambia». Funzionano anche i link di tracciamento di gls-group.com o gls-group.eu con /IT/ nel percorso, non quelli di gls-italy.com. I numeri internazionali di 11 cifre Peek li chiede a GLS Francia, Germania e Svizzera, mai a GLS Italy; se li conosce GLS Germania e non GLS Francia, ti chiede il codice postale di consegna.
+[Peek](/) chiede a GLS Italy i numeri di due lettere e nove cifre, o di una lettera, una cifra e nove cifre, e scrive «GLS Italy ha questo pacco.» quando GLS lo conosce. Per un numero nazionale con meno di nove cifre, scegli GLS Italy con «Cambia»; Peek non segue l'ID Collo, quindi indica il numero di spedizione. Funzionano anche i link di tracciamento di gls-group.com o gls-group.eu con /IT/ nel percorso, non quelli di gls-italy.com. I numeri internazionali di 11 cifre Peek li chiede a GLS Francia, Germania e Svizzera, mai a GLS Italy; se li conosce GLS Germania e non GLS Francia, ti chiede il codice postale di consegna.
 
-Gli orari di GLS Italy non hanno fuso orario: Peek li legge nell'ora italiana e mostra la cronologia di GLS Italy. Quando l'ultima scansione ha la data ma non l'ora, Peek prende le date dai servizi di tracciamento universali che conoscono il pacco. Gli stati di GLS Italy compaiono nella dicitura inglese, così come sono scritti: `Delivered.`, con il punto, non diventa il «Consegnato» di Peek. Si vedono anche la città di ogni scansione e il peso, e puoi ricevere notifiche quando lo stato cambia.
+Gli orari di GLS Italy non hanno fuso orario: Peek li legge nell'ora italiana e mostra la cronologia di GLS Italy. Quando l'ultima scansione ha la data ma non l'ora, Peek prende le date dai servizi di tracciamento universali che conoscono il pacco. Le righe della cronologia restano nella dicitura inglese di GLS Italy, così come sono scritte; lo stato del pacco appare nella tua lingua, per esempio «Consegnato». Si vedono anche la città di ogni scansione e il peso, e puoi ricevere notifiche quando lo stato cambia.
 
-L'unico giorno di consegna previsto che mostra è quello per cui prenoti la riconsegna dopo un tentativo non riuscito: GLS lo scrive `Consegna prenotata il` con la data, in italiano anche tra gli stati in inglese. Non mostra il punto di ritiro né il mittente, e lascia fuori nome, indirizzo e firma. Non segue una spedizione inoltrata o resa con un nuovo numero, e le spedizioni vecchie risultano non trovate.
+L'unico giorno di consegna previsto che mostra è quello per cui prenoti la riconsegna dopo un tentativo non riuscito: GLS lo scrive `Consegna prenotata il` con la data, in italiano anche tra gli stati in inglese. Non mostra il punto di ritiro né il mittente, e lascia fuori il tuo nome; la tua città, che GLS indica con l'indirizzo di consegna, segna la fine del percorso sulla tua mappa, e i link condivisi non la mostrano mai. Non segue una spedizione inoltrata o resa con un nuovo numero, e le spedizioni vecchie risultano non trovate.
 
 ## Domande sul tracking GLS
 

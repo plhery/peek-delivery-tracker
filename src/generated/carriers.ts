@@ -3340,6 +3340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "dsv-sendungsverfolgung",
+      "title": "DSV Sendungsverfolgung: Nummern, Status & DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -4910,6 +4918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "suivi-dsv",
+      "title": "Suivi DSV\u00a0: numéros, statuts et DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -6456,6 +6472,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "tracking-dsv",
+      "title": "Tracking DSV: numeri di spedizione, stati e DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "tracciamento-rl-carriers",
@@ -7978,6 +8002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "seguimiento-dsv",
+      "title": "Seguimiento DSV: números, estados y DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "seguimiento-rl-carriers",
@@ -9474,6 +9506,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Correos de Chile: números e estados",
       "name": "Correos de Chile",
       "color": "#d9232d"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "seguimento-dsv",
+      "title": "Seguimento DSV: números, estados e DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
     },
     {
       "id": "rl-carriers",
@@ -11038,6 +11078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Correos de Chile: numery i statusy",
       "name": "Correos de Chile",
       "color": "#d9232d"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "sledzenie-dsv",
+      "title": "Śledzenie DSV: numery przesyłek, statusy i DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
     },
     {
       "id": "rl-carriers",

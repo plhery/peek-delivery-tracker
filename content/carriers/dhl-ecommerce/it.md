@@ -22,7 +22,7 @@ I codici DHL eCommerce hanno almeno dieci caratteri e di solito iniziano con `GM
 
 La riga «Delivery by» su Webtrack indica il vettore dell’ultimo miglio, il cui codice può comparire in seguito.
 
-Codici simili: 16 cifre possono appartenere anche a TNT, Evri, Canada Post o Correos Express, e un `9261` o `9361` a USPS. Un codice di 14 cifre è di [DHL eCommerce UK](carrier:dhl-ecommerce-uk), rete separata con tracciamento proprio; un codice `JVGL` di [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl); [DHL Express](carrier:dhl-express) e [DHL Paket](carrier:dhl) usano formati diversi. Altro in [formati dei numeri di tracciamento](guide:tracking-number-formats).
+Codici simili: 16 cifre possono appartenere anche a TNT, Evri, Canada Post o Correos Express, e un `9261` o `9361` a USPS. Un codice di 14 cifre può essere di [DHL eCommerce UK](carrier:dhl-ecommerce-uk), rete separata con tracciamento proprio; un codice `JVGL` di [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl); [DHL Express](carrier:dhl-express) e [DHL Paket](carrier:dhl) usano formati diversi. Altro in [formati dei numeri di tracciamento](guide:tracking-number-formats).
 
 ## Stati di tracciamento DHL eCommerce spiegati
 
@@ -40,12 +40,12 @@ Webtrack mostra uno stato sintetico (`En Route`, `Delivered`, `Exception`…) so
 | `TENDERED TO DELIVERY SERVICE PROVIDER, ALLOW 1-3 DAYS FOR UPDATES FOR PACKAGES WITHIN THE US` | Consegnato al corriere finale. Per pacchi negli USA gli aggiornamenti possono fermarsi fino a 3 giorni. |
 | `OUT FOR DELIVERY` | Oggi con l’autista o il portalettere. |
 | `DELIVERY ATTEMPT FAILED` | Nessuno ha potuto ritirarlo. Cerca un avviso del corriere locale. |
-| `DELIVERED` | Consegnato. `[IN/AT MAILBOX]` indica il deposito nella cassetta postale. |
+| `DELIVERED` | Consegnato. |
 | `RETURNED TO SENDER` | Sta tornando al negozio. |
 
-L’impostazione inglese britannico di Webtrack usa qualche dicitura diversa, come `PROCESSED THROUGH SORT FACILITY`. I pacchi USA mostrano anche le scansioni USPS dopo il passaggio, come `ARRIVAL AT POST OFFICE`.
+I pacchi USA mostrano anche le scansioni USPS dopo il passaggio, come `ARRIVAL AT POST OFFICE`.
 
-Due stati creano spesso equivoci: `DELIVERED TO RETURNS AGENT OR COLLEGE/UNIVERSITY FOR FINAL DELIVERY` significa che il pacco è stato consegnato a un intermediario (come un ufficio postale universitario) che te lo inoltrerà; `Picked up at parcelshop` indica che il mittente lo ha consegnato in un punto di raccolta, non che sia pronto al ritiro per te.
+Uno stato crea spesso equivoci: `Picked up at parcelshop` indica che il mittente lo ha consegnato in un punto di raccolta, non che sia pronto al ritiro per te.
 
 ## Come consegna DHL eCommerce: USPS, poste locali e assenze
 
@@ -74,7 +74,7 @@ Rivolgiti prima al negozio, come indicato nelle FAQ Webtrack. La pagina «Contac
 - **Stati Uniti e Canada** (spedizioni dagli USA): +1 317-554-5191, lun–ven 8:00–20:00 EST (la scheda Canada indica 8:00–21:00 ET).
 - **Germania:** rimanda al [servizio clienti DHL Germania](https://www.dhl.de/de/privatkunden/hilfe-kundenservice.html), lun–dom 7:00–20:00 (ora tedesca).
 - **Irlanda:** 818 370050 (dall’Irlanda), lun–ven 8:00–18:00 (ora irlandese).
-- **Australia:** +61 37 0356818, lun–ven 8:00–18:00 (ora locale).
+- **Australia:** +61 37 0356818, lun–ven 8:00–18:00.
 - **Austria e Svizzera:** +49 228 92 95 95 95, lun–ven 9:00–18:00 (dalle 8:00 in Austria, ora dell’Europa centrale).
 - **Regno Unito:** indica la linea DHL eCommerce UK, 024 7693 7770. Vedi la pagina [DHL eCommerce UK](carrier:dhl-ecommerce-uk).
 
@@ -82,13 +82,13 @@ Il modulo «Contact Support» di Webtrack prevede una risposta entro 24–72 ore
 
 ## Tracciare un pacco DHL eCommerce con Peek
 
-[Peek](/) riconosce subito DHL eCommerce («Corriere rilevato») per `GM` e da 16 a 18 cifre. Per un codice `GM` più breve (8–15 cifre) interroga DHL eCommerce e gli altri corrieri compatibili. Sui formati condivisi (16 o 17 cifre, `9261`/`9361`) interroga insieme i corrieri probabili (es. TNT per 16 cifre, Austrian Post e poi USPS per `9261`/`9361`). Se solo DHL eCommerce lo conosce, Peek lo segnala; se lo riconoscono più marchi, li elenca con «Ha questo pacco» così puoi scegliere. Con «Cambia» (o «Cambia corriere») accetta da 5 a 40 lettere e cifre per DHL eCommerce. Funzionano anche link `webtrack.dhlglobalmail.com`, `ecommerceportal.dhl.com` e `dhl.com` quando il codice corrisponde a DHL eCommerce.
+[Peek](/) riconosce subito DHL eCommerce («Corriere rilevato») per `GM` e da 16 a 18 cifre. Per un codice `GM` più breve (8–15 cifre) interroga insieme DHL eCommerce, Colis Privé e Aramex, e assegna il pacco a DHL eCommerce se lo conosce. Sui formati condivisi (16 o 17 cifre, `9261`/`9361`) interroga insieme i corrieri probabili (es. TNT per 16 cifre; per `9261`/`9361`, Austrian Post insieme a DHL eCommerce e, solo se nessuno dei due lo conosce, servizi di tracciamento, la pagina di USPS e la pagina globale DHL). Se solo DHL eCommerce lo conosce, Peek lo segnala; se lo riconoscono più marchi, li elenca con «Ha questo pacco» così puoi scegliere. Con «Cambia» (o «Cambia corriere») accetta per DHL eCommerce qualsiasi codice di almeno 10 lettere e cifre. Funzionano anche link `webtrack.dhlglobalmail.com`, `ecommerceportal.dhl.com` e `dhl.com` quando il codice corrisponde a DHL eCommerce, tranne un codice `GM` breve.
 
 Webtrack viene interrogato per primo. Se non elenca il pacco, Peek apre la pagina globale su `dhl.com` tramite browser, più lenta e soggetta a blocchi automatici.
 
-Peek mostra stato, ogni scansione con città e paese sulla mappa, giorno previsto quando DHL lo fornisce, mittente, nome del servizio e orario di consegna; da Webtrack anche peso e corriere finale. Esclude indirizzo del destinatario e riferimento cliente. Le diciture mantengono l’inglese americano di DHL e ogni consegna appare come «Consegnato». Gli orari sono letti sull’orologio locale di ciascuna scansione e convertiti nel tuo fuso orario («Orari nel tuo fuso orario:»).
+Peek mostra stato, ogni scansione con città e paese sulla mappa, giorno previsto quando DHL lo fornisce, mittente e orario di consegna; da Webtrack anche peso e corriere finale. Esclude indirizzo del destinatario e riferimento cliente. Le diciture mantengono l’inglese americano di DHL e ogni consegna appare come «Consegnato». Gli orari sono letti sull’orologio locale di ciascuna scansione (una riga senza luogo prende quello di una riga vicina) e convertiti nel tuo fuso orario («Orari nel tuo fuso orario:»).
 
-Quando Webtrack indica USPS, il pacco può proseguire su USPS con il suo numero mostrando «Consegna con USPS» (oppure «Annunciato a USPS, non ancora ricevuto» finché USPS non registra scansioni). I pacchi letti dalla pagina globale DHL (Europa, Asia) non passano a una posta locale. Peek controlla fino a ogni 10 minuti, e fino a ogni 5 minuti dalle 6:00 secondo l’orologio dell’ultima scansione il giorno in cui entra «In consegna» finché tieni aperto il pacco in Peek o hai le notifiche attive (il possibile ricorso al browser limita la frequenza). Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Per le notifiche puoi scegliere «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Dopo quattro giorni senza scansioni in transito, fuori dalla dogana o da un problema segnalato, Peek mostra «Nessun aggiornamento da …», la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DHL eCommerce.» e «Chiedi aiuto a DHL eCommerce». Peek segue oltre 4.500 corrieri, ma non può contattare DHL eCommerce né il negozio per te.
+Quando Webtrack indica USPS, il pacco passa su USPS con il suo numero appena USPS mostra una scansione recente almeno quanto l’ultima di DHL eCommerce, mostrando «Consegna con USPS» (oppure «Annunciato a USPS, non ancora ricevuto» finché USPS non registra scansioni). Peek fa lo stesso con gli altri corrieri finali indicati da Webtrack, come La Poste, Austrian Post, Poczta Polska, Correos o Poste Italiane. I pacchi letti dalla pagina globale DHL non passano a una posta locale. Finché il pacco è aperto in Peek, o nel giorno di consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti e, il giorno in cui entra «In consegna», dalle 6:00 secondo l’orologio dell’ultima scansione, ogni 2 minuti finché Webtrack risponde (ogni 5 minuti quando l’ultimo controllo ha aperto la pagina di `dhl.com` in un browser). Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e dopo sette giorni senza novità su «Etichetta creata», ogni 6 ore. Per le notifiche puoi scegliere «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni su un pacco in «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …», la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DHL eCommerce.» e «Chiedi aiuto a DHL eCommerce». Peek segue oltre 4.500 corrieri, ma non può contattare DHL eCommerce né il negozio per te.
 
 ## Domande sul tracciamento DHL eCommerce
 

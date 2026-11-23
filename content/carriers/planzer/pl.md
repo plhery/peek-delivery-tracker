@@ -20,10 +20,10 @@ Planzer nie publikuje oficjalnego schematu numeracji. Peek rozpoznaje takie wzor
 | --- | --- |
 | `9134 6097 4829 1736 4058` | Planzer: 20 cyfr zaczynających się od `91346097`. |
 | `999.90.48291736` | Współdzielona przesyłka Planzer: 13 cyfr zaczynających się od `99990`. |
-| `448291736405829173` | Quickpac, część Planzer Paket: 18 cyfr zaczynających się od `44`. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), część Planzer Paket: 18 cyfr zaczynających się od `44`. |
 | `99.60.482917.36405829` | [Swiss Post](carrier:swiss-post): 18 cyfr, dłuższy niż kropkowany zapis Planzer. |
 
-Skopiuj numer zamiast wpisywać go ręcznie: jedna cyfra za dużo sprawia, że Peek pyta innego przewoźnika, np. SEUR, zamiast Planzer ([dlaczego długości się nakładają](guide:tracking-number-formats)).
+Skopiuj numer zamiast wpisywać go ręcznie: jedna cyfra za dużo sprawia, że Peek pyta innego przewoźnika, np. [SEUR](carrier:seur), zamiast Planzer ([dlaczego długości się nakładają](guide:tracking-number-formats)).
 
 ## Statusy śledzenia Planzer wyjaśnione
 
@@ -82,11 +82,11 @@ Kanały publikowane na stronach Planzer Paket i Quickpac:
 
 ## Śledzenie paczki Planzer w Peek
 
-[Peek](/) od razu rozpoznaje 20-cyfrowy numer zaczynający się od `91346097` lub link tracking.app.planzer.ch z parametrem `deliveryNumber=`, wyświetlając status, historię, przewidywany termin, godzinę doręczenia, kraj docelowy, łączną wagę (gdy wszystkie paczki ją podają) oraz wymiary pojedynczej paczki, bez adresu odbiorcy. `Shipped` wyświetla się poprawnie jako dostarczona.
+[Peek](/) od razu rozpoznaje 20-cyfrowy numer zaczynający się od `91346097` lub link tracking.app.planzer.ch z parametrem `deliveryNumber=`, wyświetlając status, historię, przewidywany termin, godzinę doręczenia, kraj docelowy, łączną wagę (gdy wszystkie paczki ją podają) oraz wymiary pojedynczej paczki. Jeśli Planzer podaje odbiorcę, Peek pokazuje ci też jego imię i nazwisko pod „Odbiorca” oraz, dopóki paczka jest w drodze, miejscowość docelową na mapie; osoba, której udostępnisz paczkę, nie widzi ani jednego, ani drugiego, a nazwisko osoby, która podpisała odbiór, pozostaje prywatne: żadna aplikacja go nie pokazuje. `Shipped` wyświetla się poprawnie jako dostarczona.
 
 Dla 13-cyfrowego numeru na `99990` Peek prosi o pełny współdzielony link z trackandtrace.planzergroup.com (wraz z `accessKey`) i odczytuje dotychczasowe etapy z godzinami oraz przewidywaną datą.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu szwajcarskiego) w dniu, gdy Planzer zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie Planzer (przez usługi śledzenia w tych samych warunkach do co 15 minut). Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Planzer.” oraz link „Poproś przewoźnika Planzer o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Ponieważ Planzer nie podaje miejscowości przy skanach, na mapie niewiele się pojawia, a Peek nie skontaktuje się z Planzer za ciebie.
+Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu szwajcarskiego) w dniu, gdy Planzer zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie Planzer (przez usługi śledzenia tego dnia do co 15 minut, gdy masz ją otwartą lub włączone powiadomienia). W pozostałych przypadkach sprawdza co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, nawet gdy masz ją otwartą, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Planzer.” oraz link „Poproś przewoźnika Planzer o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Ponieważ Planzer nie podaje miejscowości przy skanach, na mapie niewiele się pojawia, a Peek nie skontaktuje się z Planzer za ciebie.
 
 ## Pytania o śledzenie Planzer
 

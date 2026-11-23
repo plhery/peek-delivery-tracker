@@ -20,10 +20,10 @@ Planzer no publica un formato oficial. Peek reconoce estas formas (dígitos inve
 | --- | --- |
 | `9134 6097 4829 1736 4058` | Planzer: 20 dígitos empezando por `91346097`. |
 | `999.90.48291736` | Envío compartido de Planzer: 13 dígitos empezando por `99990`. |
-| `448291736405829173` | Quickpac, parte de Planzer Paket: 18 dígitos empezando por `44`. |
+| `448291736405829173` | [Quickpac](carrier:quickpac), parte de Planzer Paket: 18 dígitos empezando por `44`. |
 | `99.60.482917.36405829` | [Swiss Post](carrier:swiss-post): 18 dígitos, más largo que la forma con puntos de Planzer. |
 
-Copia el número en lugar de teclearlo: con un dígito de más, Peek pregunta a otro transportista como SEUR en lugar de Planzer ([por qué se solapan las longitudes](guide:tracking-number-formats)).
+Copia el número en lugar de teclearlo: con un dígito de más, Peek pregunta a otro transportista como [SEUR](carrier:seur) en lugar de Planzer ([por qué se solapan las longitudes](guide:tracking-number-formats)).
 
 ## Estados de seguimiento de Planzer explicados
 
@@ -82,11 +82,11 @@ Canales publicados en las páginas de Planzer Paket y Quickpac:
 
 ## Seguir un paquete Planzer con Peek
 
-[Peek](/) reconoce al instante un código de 20 dígitos que empiece por `91346097` o un enlace de tracking.app.planzer.ch con `deliveryNumber=`, mostrando estado, historial, entrega prevista, hora de entrega, país de destino, peso total (cuando consta en todos los bultos) y dimensiones en envíos de un solo bulto, omitiendo la dirección del destinatario. `Shipped` aparece correctamente como entregado.
+[Peek](/) reconoce al instante un código de 20 dígitos que empiece por `91346097` o un enlace de tracking.app.planzer.ch con `deliveryNumber=`, mostrando estado, historial, entrega prevista, hora de entrega, país de destino, peso total (cuando consta en todos los bultos) y dimensiones en envíos de un solo bulto. Cuando Planzer indica el destinatario, Peek te muestra también su nombre, en «Destinatario», y, mientras el paquete está en camino, la localidad de destino en el mapa; alguien con quien compartes el paquete no ve ninguno de los dos, y el nombre de quien firmó queda privado: ninguna app lo muestra. `Shipped` aparece correctamente como entregado.
 
 Para un código de 13 dígitos que empiece por `99990`, Peek pide el enlace compartido completo de trackandtrace.planzergroup.com (incluido su parámetro `accessKey`) y lee los pasos registrados con sus horas y la fecha prevista.
 
-Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos — y cada 2 minutos a partir de las 6:00 (hora suiza) el día en que Planzer lo escanea en reparto, mientras responda el seguimiento propio de Planzer (hasta cada 15 minutos mediante servicios de seguimiento en las mismas condiciones). Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora, y cada 6 horas tras siete días en «Etiqueta creada». Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha), «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Planzer.» y el enlace «Pide ayuda a Planzer». Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Como Planzer no incluye localidades en los escaneos, apenas hay puntos que fijar en el mapa, y Peek no puede contactar con Planzer por ti.
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos — y cada 2 minutos a partir de las 6:00 (hora suiza) el día en que Planzer lo escanea en reparto, mientras responda el seguimiento propio de Planzer (mediante servicios de seguimiento, ese día hasta cada 15 minutos mientras lo tengas abierto o con las notificaciones activadas). Si no, consulta cada hora. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora aunque lo tengas abierto, y cada 6 horas tras siete días en «Etiqueta creada». Si un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin nuevos escaneos, Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el…» con la fecha), «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Planzer.» y el enlace «Pide ayuda a Planzer». Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Como Planzer no incluye localidades en los escaneos, apenas hay puntos que fijar en el mapa, y Peek no puede contactar con Planzer por ti.
 
 ## Preguntas sobre el seguimiento de Planzer
 

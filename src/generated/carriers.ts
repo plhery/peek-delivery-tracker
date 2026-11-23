@@ -3412,6 +3412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "dai-post-sendungsverfolgung",
+      "title": "DAI Post Sendungsverfolgung: Nummern, Status & Hilfe",
+      "name": "DAI Post",
+      "color": "#008faf"
+    },
+    {
       "id": "eurodis",
       "catalog": "eurodis",
       "slug": "eurodis-sendungsverfolgung",
@@ -4934,6 +4942,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "suivi-dai-post",
+      "title": "Suivi DAI Post\u00a0: numéros, statuts et aide à la livraison",
+      "name": "DAI Post",
+      "color": "#008faf"
+    },
+    {
       "id": "eurodis",
       "catalog": "eurodis",
       "slug": "suivi-eurodis",
@@ -6424,6 +6440,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "tracciamento-dai-post",
+      "title": "Tracciamento DAI Post: numeri, stati e aiuto consegna",
+      "name": "DAI Post",
+      "color": "#008faf"
+    },
+    {
       "id": "eurodis",
       "catalog": "eurodis",
       "slug": "tracciamento-eurodis",
@@ -7890,6 +7914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "seguimiento-dai-post",
+      "title": "Seguimiento DAI Post: números, estados y ayuda de entrega",
+      "name": "DAI Post",
+      "color": "#008faf"
+    },
+    {
       "id": "eurodis",
       "catalog": "eurodis",
       "slug": "seguimiento-eurodis",
@@ -9330,6 +9362,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SPX Express Singapura: Shopee e estados",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "seguimento-dai-post",
+      "title": "Seguimento DAI Post: números, estados e ajuda de entrega",
+      "name": "DAI Post",
+      "color": "#008faf"
     },
     {
       "id": "eurodis",
@@ -10838,6 +10878,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SPX Express Singapur: paczki Shopee i statusy",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "sledzenie-dai-post",
+      "title": "Śledzenie DAI Post: numery, statusy i pomoc w dostawie",
+      "name": "DAI Post",
+      "color": "#008faf"
     },
     {
       "id": "eurodis",

@@ -31,7 +31,7 @@ As read on dkl.ee, DKL offers:
 - **Special cargo**: dangerous goods (the site lists the codes DGR, ADR, HUM and AVI), and frozen and chilled goods.
 - **Other services**: guarded escort within Estonia, gifts and flowers, warehousing and customs warehousing.
 
-It also lists a free courier call, insurance if the customer asks for it, pickup anywhere in the world with the customer's account number, and payment by the recipient if asked for in advance. Senders book a pickup with the courier order form on dkl.ee. Orders are taken on weekdays until 16:00; orders placed later go out on the next working day.
+It also lists a free courier call, insurance if the customer asks for it, pickup anywhere in the world with the customer's account number, and payment by the recipient if asked for in advance. Senders book a pickup with the courier order form on dkl.ee. Orders are taken on weekdays until 16:00 Estonian time; orders placed later go out on the next working day.
 
 After delivery, DKL emails the sender a proof of delivery (POD) with the recipient's surname and the date and time of delivery.
 
@@ -55,12 +55,12 @@ DKL says it has no fixed price list for import deliveries, and it doesn't say ho
 
 ## DK Logistics contact and customer service
 
-As read on 14 November 2026, dkl.ee lists:
+dkl.ee lists:
 
 - **Customer service phone**: +372 640 4014.
 - **Email**: info@dkl.ee.
 - **Fax**: +372 640 4011.
-- **Hours**: Monday to Friday, 09:00–17:00; orders until 16:00. Closed at weekends and on Estonian public holidays.
+- **Hours**: Monday to Friday, 09:00–17:00 Estonian time; orders until 16:00. Closed at weekends and on Estonian public holidays.
 - **Address**: DK Logistics OÜ, Kesk-Sõjamäe 2, 11415 Tallinn, Estonia.
 
 Have the waybill number ready when you call or write.
@@ -71,9 +71,9 @@ Have the waybill number ready when you call or write.
 
 If you leave the carrier open, Peek looks for it through tracking services. When the number looks like other carriers' numbers, Peek asks the services while you add it ("Checking tracking services…"), and if none knows it yet, the carrier list says "Not found by tracking services yet. Peek will keep checking after you add it." A number that looks like no other carrier's isn't checked while you add it: the carrier list says "Peek will look it up after you add it." When the services name DK Logistics or DKL as the carrier and show the parcel moving, Peek files it under DK Logistics.
 
-DK Logistics has no tracker for Peek to read. So for a parcel filed under DK Logistics, Peek asks ParcelsApp, Ship24 and 17TRACK in turn (Ship24 first for a ten-digit number) and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind DKL's own, and for some shipments there's nothing at all. Once a service has the parcel, its tracking link opens that service's page for the number; until then, the parcel has no tracking link. Peek doesn't pass your IP address or country on to the services.
+DK Logistics has no tracker for Peek to read. So for a parcel filed under DK Logistics, Peek asks ParcelsApp, Ship24 and 17TRACK in turn, in an order that depends on the number (Ship24 first for a ten-digit number) and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind DKL's own, and for some shipments there's nothing at all. Once a service has the parcel, its tracking link opens that service's page for the number; until then, the parcel has no tracking link. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact DK Logistics or the sender for you.
+Peek checks hourly, and every 3 hours once a day passes without a new scan. On the day the parcel is out for delivery, while it's open in Peek or with notifications on, Peek checks it up to every 15 minutes. After seven days without news at "Label created", it checks every 6 hours. A service that didn't know the number is asked again a day later. If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DK Logistics" link. Notifications can follow "Every scan", "Important steps" or "Delivery only". It can't contact DK Logistics or the sender for you.
 
 ## Questions about DK Logistics tracking
 
@@ -91,11 +91,11 @@ The waybill number (HAWB) of the shipment, or its reference. DKL doesn't publish
 
 ### Does DK Logistics deliver on Saturdays?
 
-DKL's office is open Monday to Friday, 09:00–17:00, and closed at weekends and on public holidays. It doesn't publish weekend delivery.
+DKL's office is open Monday to Friday, 09:00–17:00 Estonian time, and closed at weekends and on public holidays. It doesn't publish weekend delivery.
 
 ### How do I contact DK Logistics?
 
-Call customer service on +372 640 4014 or write to info@dkl.ee, Monday to Friday, 09:00–17:00. The office is at Kesk-Sõjamäe 2 in Tallinn.
+Call customer service on +372 640 4014 or write to info@dkl.ee, Monday to Friday, 09:00–17:00 Estonian time. The office is at Kesk-Sõjamäe 2 in Tallinn.
 
 :::sources
 - [DK Logistics: Track&Trace](https://www.dkl.ee/en/menu/4-TRACK_TRACE.html) – HAWB search by waybill number or reference, no number format

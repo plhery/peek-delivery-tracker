@@ -55,7 +55,7 @@ DKL-i sõnul pole tal impordiveo jaoks kindlat hinnakirja ning tema lehel pole k
 
 ## DK Logisticsi klienditeenindus
 
-Nii olid DK Logisticsi kontaktid dkl.ee lehel kirjas 14. novembril 2026:
+DK Logisticsi kontaktid dkl.ee lehel:
 
 - **Klienditeenindus**: +372 640 4014.
 - **E-post**: info@dkl.ee.
@@ -71,9 +71,9 @@ Kui helistate või kirjutate, hoidke saatelehe number käepärast.
 
 Kui jätate vedaja valimata, otsib Peek seda jälgimisteenuste kaudu. Kui number sarnaneb mõne teise vedaja numbriga, küsib Peek teenustelt juba lisamise ajal („Checking tracking services…“) ja kui ükski neist numbrit veel ei tea, on vedajate loendis kirjas „Not found by tracking services yet. Peek will keep checking after you add it.“ Numbrit, mis ei sarnane ühegi teise vedaja omaga, lisamise ajal ei kontrollita: vedajate loendis on siis kirjas „Peek will look it up after you add it.“ Kui teenused nimetavad vedajaks DK Logisticsi või DKL-i ja näitavad paki liikumist, seob Peek paki DK Logisticsiga.
 
-DK Logisticsil pole jälgimisliidest, mida Peek saaks lugeda. Seepärast küsib Peek DK Logisticsi paki kohta järjest teenustelt ParcelsApp, Ship24 ja 17TRACK (kümnekohalise numbri puhul Ship24-lt esimesena) ning jääb esimese juurde, millel pakk olemas on. Peek näitab selle teenuse olekuid ja ajalugu teenuse enda sõnastuses. See ajalugu võib DKL-i omast maha jääda ja mõne saadetise kohta pole seal midagi. Kui mõni teenus pakki teab, avab paki jälgimislink selle teenuse lehe sama numbriga; seni pole pakil jälgimislinki. Teie IP-aadressi ega riiki Peek teenustele ei edasta.
+DK Logisticsil pole jälgimisliidest, mida Peek saaks lugeda. Seepärast küsib Peek DK Logisticsi paki kohta järjest teenustelt ParcelsApp, Ship24 ja 17TRACK, numbrist sõltuvas järjekorras (kümnekohalise numbri puhul Ship24-lt esimesena) ning jääb esimese juurde, millel pakk olemas on. Peek näitab selle teenuse olekuid ja ajalugu teenuse enda sõnastuses. See ajalugu võib DKL-i omast maha jääda ja mõne saadetise kohta pole seal midagi. Kui mõni teenus pakki teab, avab paki jälgimislink selle teenuse lehe sama numbriga; seni pole pakil jälgimislinki. Teie IP-aadressi ega riiki Peek teenustele ei edasta.
 
-Peek kontrollib pakki kord tunnis, pärast päeva ilma uue sammuta iga 3 tunni järel ja päeval, mil pakk on kulleriga teel, kuni iga 15 minuti järel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest DK Logisticsi ega saatjaga ühendust võtta.
+Peek kontrollib pakki kord tunnis ja pärast päeva ilma uue sammuta iga 3 tunni järel. Päeval, mil pakk on kulleriga teel, kontrollib Peek seda kuni iga 15 minuti järel, kui pakk on Peekis avatud või teavitused on sisse lülitatud. Kui pakk on seitse päeva ilma uudisteta olekus „Label created“, kontrollib Peek seda iga 6 tunni järel. Teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Kui pakil pole neli päeva uut rida olekus „Label created“, „Received by carrier“ või „In transit“, näitab Peek teadet „No tracking update since …“ selle rea päevaga ja linki „Get help from DK Logistics“. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest DK Logisticsi ega saatjaga ühendust võtta.
 
 ## Küsimused DK Logisticsi saadetise jälgimise kohta
 

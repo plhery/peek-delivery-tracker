@@ -2748,6 +2748,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#53b6ed"
     },
     {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "apc-overnight-sendungsverfolgung",
+      "title": "APC Overnight Sendungsverfolgung: Nummern und Status",
+      "name": "APC Overnight",
+      "color": "#243269"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-sendungsverfolgung",
@@ -4460,6 +4468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi XDP\u00a0: numéros d’envoi, statuts et livraison",
       "name": "XDP",
       "color": "#53b6ed"
+    },
+    {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "suivi-apc-overnight",
+      "title": "Suivi APC Overnight\u00a0: numéros, statuts et livraisons",
+      "name": "APC Overnight",
+      "color": "#243269"
     },
     {
       "id": "ups",
@@ -6192,6 +6208,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#53b6ed"
     },
     {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "tracciamento-apc-overnight",
+      "title": "Tracciamento APC Overnight: numeri, stati e consegne",
+      "name": "APC Overnight",
+      "color": "#243269"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
@@ -7882,6 +7906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#53b6ed"
     },
     {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "seguimiento-apc-overnight",
+      "title": "Seguimiento APC Overnight: números, estados y entregas",
+      "name": "APC Overnight",
+      "color": "#243269"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-seguimiento",
@@ -9562,6 +9594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento XDP: números de expedição, estados e entrega",
       "name": "XDP",
       "color": "#53b6ed"
+    },
+    {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "seguimento-apc-overnight",
+      "title": "Seguimento APC Overnight: números, estados e entregas",
+      "name": "APC Overnight",
+      "color": "#243269"
     },
     {
       "id": "ups",
@@ -11278,6 +11318,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie XDP: numery przesyłek, statusy i doręczenie",
       "name": "XDP",
       "color": "#53b6ed"
+    },
+    {
+      "id": "apc-overnight",
+      "catalog": "apc-overnight",
+      "slug": "sledzenie-apc-overnight",
+      "title": "Śledzenie APC Overnight: numery, statusy i doręczenia",
+      "name": "APC Overnight",
+      "color": "#243269"
     },
     {
       "id": "ups",

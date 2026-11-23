@@ -103,7 +103,7 @@
   { "id": "maltapost", "catalog": "maltapost", "name": "MaltaPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "whistl", "catalog": "whistl", "name": "Whistl", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xdp", "catalog": "xdp", "name": "XDP", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "apc-overnight", "catalog": "apc-overnight", "name": "APC Overnight", "languages": ["en"] },
+  { "id": "apc-overnight", "catalog": "apc-overnight", "name": "APC Overnight", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ups", "catalog": "ups", "name": "UPS", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "fedex", "catalog": "fedex", "name": "FedEx", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "zh"] },
   { "id": "dhl-express", "catalog": "dhl-express", "name": "DHL Express", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },

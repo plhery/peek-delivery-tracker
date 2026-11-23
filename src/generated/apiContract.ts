@@ -45981,7 +45981,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Mexico_City",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tiui"
     },
     "trackingUrlTemplate": "https://tiuiamigo.tiui.mx/rastreo/{trackingNumber}",
     "linkRules": [

@@ -58,7 +58,7 @@ Regeln von Singapore Customs für Auslandskäufe per Luftfracht oder Post:
 - **GST bei der Einfuhr.** Ist der Verkäufer nicht GST-registriert und übersteigt der gesamte CIF-Wert der Sendung (Warenwert, Versicherung und Fracht) 400 S$, wird die GST bei der Einfuhr erhoben. Bis 400 S$ fällt keine Einfuhr-GST an, außer bei Alkohol und Tabak.
 - **Doppelt berechnet?** Hast du GST bereits beim Checkout bezahlt und wirst bei der Einfuhr erneut zur Zahlung aufgefordert, zahle zunächst die Einfuhr-GST, um die Ware zu erhalten, und verlange dann mit Zahlungsnachweis eine Erstattung vom Verkäufer.
 
-**Beim Zoll festgehalten.** Die Immigration & Checkpoints Authority (ICA) kann Kurierpakete mit zollpflichtigen, kontrollierten oder verbotenen Waren sowie Sendungen über 400 S$ CIF ohne beigefügte Rechnung einbehalten. Die ICA stellt dem Kurier dann eine Einlagerungsquittung aus, und der Kurier sollte dir das weitere Vorgehen mitteilen.
+**Beim Zoll festgehalten.** Die Immigration & Checkpoints Authority (ICA) kann Kurierpakete mit zollpflichtigen, kontrollierten oder verbotenen Waren sowie Sendungen über 400 S$ CIF ohne beigefügte Rechnung einbehalten. Die ICA stellt dem Kurier dann eine Einlagerungsquittung aus; für Rückfragen lässt du dir vom Kurier die Sendungsdaten und diese Quittung geben und reichst sie bei der auf der Quittung genannten Behörde ein.
 
 **Betrug.** Singapore Customs weist darauf hin, dass keine GST-Zahlungen oder persönlichen Daten per SMS, E-Mail oder Messenger angefordert werden. Siehe [Betrugs-SMS](guide:delivery-scam-texts) und [Paket beim Zoll](guide:customs).
 
@@ -68,7 +68,7 @@ Regeln von Singapore Customs für Auslandskäufe per Luftfracht oder Post:
 
 **Steht bei `[China]Sender is preparing to ship your parcel`.** Der Verkäufer hat es noch nicht versendet. Frage dort nach, wann es rausgeht.
 
-**Tagelang keine Aktualisierung.** Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Nach vier Tagen ohne neuen Scan unterwegs (außerhalb von Zoll oder gemeldetem Problem) markiert Peek das Paket mit „Keine Aktualisierung seit …“ und fragt weiter bei SPX nach. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
+**Tagelang keine Aktualisierung.** Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Nach vier Tagen ohne neuen Scan bei einem Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ markiert Peek das Paket mit „Keine Aktualisierung seit …“ und fragt weiter bei SPX nach. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
 
 **Als zugestellt markiert, aber nichts angekommen.** Schau rund um die Haustür, frage Mitbewohner und Nachbarn und wende dich dann an den Verkäufer oder Shopee. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -94,7 +94,7 @@ Ohne festgelegten Dienst zeigt ein Paket „Noch kein Sendungsverlauf“, währe
 
 **Von Janio zu SPX.** Nennt ein Janio-Paket in seinem Tracking SPX mit einer SPX-Singapur-Nummer, zeigt die Paketkarte „Zustellung durch SPX Express Singapore“ und Peek fragt auch SPX ab. Hat SPX bisher nur die Ankündigung ohne eigenen Scan, steht stattdessen „Bei SPX Express Singapore angekündigt, noch nicht eingetroffen“. Sobald SPX einen mindestens ebenso aktuellen Scan meldet wie Janio, folgt Peek dem Paket dort weiter und behält den Janio-Verlauf.
 
-**Prüfungen und Mitteilungen.** Peek fragt SPX direkt bis zu alle 10 Minuten ab – und ab 6:00 Uhr Singapur-Zeit alle 2 Minuten an dem Tag, an dem SPX das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich. Für Mitteilungen wählst du „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei SPX Express Singapore nach.“ und bietet „Hol dir Hilfe bei SPX Express Singapore“. Peek kann weder SPX noch Shopee oder den Verkäufer für dich kontaktieren.
+**Prüfungen und Mitteilungen.** Peek fragt SPX direkt bis zu alle 10 Minuten ab – und ab 6:00 Uhr Singapur-Zeit alle 2 Minuten an dem Tag, an dem SPX das Paket in Zustellung scannt, solange das Paket in Peek geöffnet ist oder am Liefertag mit aktiven Mitteilungen. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Für Mitteilungen wählst du „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Nach vier Tagen ohne Scan bei einem Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek „Keine Aktualisierung seit …“, erklärt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei SPX Express Singapore nach.“ und bietet „Hol dir Hilfe bei SPX Express Singapore“. Peek kann weder SPX noch Shopee oder den Verkäufer für dich kontaktieren.
 
 ## Häufige Fragen zu SPX Express Singapur
 
@@ -112,11 +112,11 @@ Dein Paket aus dem Ausland ist in Singapur angekommen und zur weiteren Sortierun
 
 ### Warum aktualisiert sich mein SPX-Tracking nicht?
 
-Lautet die letzte Zeile `[China]Sender is preparing to ship your parcel`, hat der Verkäufer noch nicht versendet. Später pausieren Updates oft bei Flügen, beim Zoll oder am Wochenende. Nach vier Tagen ohne Neuigkeiten unterwegs markiert Peek die Sendung; bleibt sie still, frage Verkäufer oder Shopee.
+Lautet die letzte Zeile `[China]Sender is preparing to ship your parcel`, hat der Verkäufer noch nicht versendet. Später pausieren Updates oft bei Flügen, beim Zoll oder am Wochenende. Nach vier Tagen ohne Neuigkeiten auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ markiert Peek die Sendung; bleibt sie still, frage Verkäufer oder Shopee.
 
 :::sources
 - [Singapore Customs: GST on Low-Value Goods](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/gst-on-low-value-goods/) – 400-S$-Regel, GST beim Checkout oder bei Einfuhr, doppelte Berechnung, Betrug
 - [Singapore Customs: Courier / Postal Procedures](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/courier-postal-procedures/) – von ICA einbehaltene Pakete, Verweis an den Kurier
 - [Universal Parcel Scraper: SPX Express Singapore](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spx-sg) – Namen, Nummernformate, Tracker-Links, Wortlaute und Statusstufen
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – gemeinsame Codes von SPX, beibehaltene verborgene Schritte, Format von Singapore Post, Übergabe von Janio
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Einordnung jedes Scans in eine Statusstufe, Tracking-Dienste
 :::

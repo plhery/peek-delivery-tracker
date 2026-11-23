@@ -58,7 +58,7 @@ Regras da Singapore Customs para compras no estrangeiro vindas por via aérea ou
 - **GST na importação.** Se o vendedor não estiver registado na GST e o valor CIF total do envio (bens, seguro e frete) ultrapassar 400 S$, a GST é cobrada à entrada em Singapura. Até 400 S$ não há GST na importação, exceto álcool e tabaco.
 - **Cobrado duas vezes?** Se pagaste GST no checkout e te voltarem a cobrar na importação, paga a GST de importação para receber os artigos e pede depois reembolso ao vendedor com comprovativo.
 
-**Retida na alfândega.** A Immigration & Checkpoints Authority (ICA) pode reter encomendas com artigos sujeitos a impostos, controlados ou proibidos, ou com valor CIF total acima de 400 S$ sem fatura à chegada. A ICA entrega então um recibo de depósito à transportadora, que deve informar-te sobre o passo seguinte.
+**Retida na alfândega.** A Immigration & Checkpoints Authority (ICA) pode reter encomendas com artigos sujeitos a impostos, controlados ou proibidos, ou com valor CIF total acima de 400 S$ sem fatura à chegada. A ICA entrega então um recibo de depósito à transportadora; para te informares, pede à transportadora os dados do envio e esse recibo e apresenta-os à autoridade indicada no recibo.
 
 **Burlas.** A Singapore Customs afirma que não pede pagamentos de GST nem dados pessoais por SMS, e-mail ou apps de mensagens. Vê [SMS falsos de entrega](guide:delivery-scam-texts) e [encomendas retidas na alfândega](guide:customs).
 
@@ -68,7 +68,7 @@ Regras da Singapore Customs para compras no estrangeiro vindas por via aérea ou
 
 **Parada em `[China]Sender is preparing to ship your parcel`.** O vendedor ainda não enviou a encomenda: pergunta-lhe quando vai expedir.
 
-**Sem atualizações há dias.** É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. Após quatro dias sem registos em trânsito (fora de alfândega ou problema assinalado), o Peek assinala-a com «Sem atualizações desde…» e continua a perguntar à SPX. Vê [seguimento que não atualiza](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
+**Sem atualizações há dias.** É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. Após quatro dias sem registos numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-a com «Sem atualizações desde…» e continua a perguntar à SPX. Vê [seguimento que não atualiza](guide:tracking-not-updating) e [seguir encomendas da China](guide:tracking-from-china).
 
 **Entregue mas não chegou.** Procura junto à porta e pergunta em casa e aos vizinhos; depois contacta o vendedor ou a Shopee. Vê [entregue mas não recebida](guide:delivered-not-received).
 
@@ -94,7 +94,7 @@ Adicionada sem transportadora, a encomenda mostra «Ainda sem histórico de segu
 
 **De Janio para SPX.** Quando o seguimento de uma encomenda Janio indica a SPX com um número SPX Singapore, o cartão mostra «Entrega: SPX Express Singapore» e o Peek também pergunta à SPX. Enquanto a SPX tiver apenas o anúncio sem registo próprio, surge «Anunciada a SPX Express Singapore, ainda não recebida». Assim que a SPX apresenta um registo tão recente quanto o último da Janio, o Peek passa a segui-la lá mantendo o histórico da Janio.
 
-**Verificações e notificações.** O Peek consulta diretamente a SPX até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora de Singapura) no dia em que a SPX regista a encomenda em distribuição, enquanto estiver aberta no Peek ou no dia da entrega com as notificações ligadas. Após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora a hora. Para as notificações, podes escolher «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Após quatro dias sem registos em trânsito, fora de alfândega ou problema assinalado, o Peek mostra «Sem atualizações desde…», explica que «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a SPX Express Singapore.» e disponibiliza «Pede ajuda a SPX Express Singapore». O Peek não pode contactar a SPX, a Shopee ou o vendedor por ti.
+**Verificações e notificações.** O Peek consulta diretamente a SPX até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 (hora de Singapura) no dia em que a SPX regista a encomenda em distribuição, enquanto estiver aberta no Peek ou no dia da entrega com as notificações ligadas. Após dois dias sem novidades (12 horas enquanto ainda mostrar «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora a hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Para as notificações, podes escolher «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Após quatro dias sem registos numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde…», explica que «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a SPX Express Singapore.» e disponibiliza «Pede ajuda a SPX Express Singapore». O Peek não pode contactar a SPX, a Shopee ou o vendedor por ti.
 
 ## Perguntas frequentes sobre SPX Express Singapura
 
@@ -112,11 +112,11 @@ A tua encomenda vinda do estrangeiro chegou a Singapura e foi entregue à rede l
 
 ### Porque não atualiza o meu seguimento SPX?
 
-Se a última linha for `[China]Sender is preparing to ship your parcel`, o vendedor ainda não a enviou. Mais tarde, as encomendas ficam frequentemente sem novidades em voos, na alfândega ou ao fim de semana. Após quatro dias sem novidades em trânsito o Peek assinala-a; se continuar parada, pergunta ao vendedor ou à Shopee.
+Se a última linha for `[China]Sender is preparing to ship your parcel`, o vendedor ainda não a enviou. Mais tarde, as encomendas ficam frequentemente sem novidades em voos, na alfândega ou ao fim de semana. Após quatro dias sem novidades em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-a; se continuar parada, pergunta ao vendedor ou à Shopee.
 
 :::sources
 - [Singapore Customs: GST on Low-Value Goods](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/gst-on-low-value-goods/) – regra dos 400 S$, GST no checkout ou importação, cobrança dupla, burlas
 - [Singapore Customs: Courier / Postal Procedures](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/courier-postal-procedures/) – encomendas retidas pela ICA, perguntar à transportadora pelo seguimento
 - [Universal Parcel Scraper: SPX Express Singapore](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spx-sg) – nomes, formatos de número, links do seguimento, textos e etapas
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – códigos partilhados da SPX, passos ocultos mantidos, formato Singapore Post, passagem da Janio
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cada registo classificado numa etapa, serviços de seguimento
 :::

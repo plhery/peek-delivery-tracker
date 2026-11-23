@@ -58,7 +58,7 @@ Règles de Singapore Customs pour les achats à l'étranger arrivant par avion o
 - **GST à l'importation.** Si le vendeur n'est pas enregistré à la GST et que la valeur CIF totale de l'envoi (marchandises, assurance et fret) dépasse 400 S$, la GST est perçue à l'entrée à Singapour. À 400 S$ ou moins, aucune GST n'est perçue à l'importation, sauf pour l'alcool et le tabac.
 - **Facturé deux fois ?** Si tu as payé la GST à la commande et qu'on te la réclame de nouveau à l'importation, paie la GST d'importation pour recevoir ton colis, puis demande le remboursement au vendeur avec la preuve de paiement.
 
-**Retenu en douane.** L'Immigration & Checkpoints Authority (ICA) peut retenir un colis contenant des articles soumis à droits, réglementés ou interdits, ou d'une valeur CIF totale supérieure à 400 S$ arrivé sans facture. L'ICA remet alors un reçu de dépôt en entrepôt au transporteur, qui doit t'indiquer la marche à suivre.
+**Retenu en douane.** L'Immigration & Checkpoints Authority (ICA) peut retenir un colis contenant des articles soumis à droits, réglementés ou interdits, ou d'une valeur CIF totale supérieure à 400 S$ arrivé sans facture. L'ICA remet alors un reçu de dépôt en entrepôt au transporteur : pour te renseigner, demande-lui les détails de l'envoi et ce reçu, puis transmets-les à l'autorité indiquée sur le reçu.
 
 **Arnaques.** Singapore Customs précise qu'elle ne demande jamais de paiement de GST ni de données personnelles par SMS, e-mail ou messagerie. Voir [les faux SMS de livraison](guide:delivery-scam-texts) et [les colis retenus en douane](guide:customs).
 
@@ -68,7 +68,7 @@ Règles de Singapore Customs pour les achats à l'étranger arrivant par avion o
 
 **Bloqué sur `[China]Sender is preparing to ship your parcel`.** Le vendeur n'a pas encore expédié le colis : demande-lui quand il partira.
 
-**Aucune mise à jour depuis des jours.** Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Après quatre jours sans nouveau scan en transit (hors douane ou incident signalé), Peek affiche « Aucune mise à jour depuis… » et continue d'interroger SPX. Voir [le suivi qui ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
+**Aucune mise à jour depuis des jours.** Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Après quatre jours sans nouveau scan sur un colis en « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis… » et continue d'interroger SPX. Voir [le suivi qui ne se met plus à jour](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
 
 **Indiqué livré mais introuvable.** Vérifie autour de ta porte et demande à ton foyer et tes voisins, puis contacte le vendeur ou Shopee. Voir [colis indiqué livré mais non reçu](guide:delivered-not-received).
 
@@ -94,7 +94,7 @@ Ajouté sans transporteur, un colis affiche « Aucun historique de suivi pour le
 
 **De Janio à SPX.** Lorsque le suivi d'un colis Janio désigne SPX avec un numéro SPX Singapore, la carte affiche « Livraison par SPX Express Singapore » et Peek interroge aussi SPX. Tant que SPX n'a reçu que l'annonce sans scan propre, la carte indique « Annoncé à SPX Express Singapore, pas encore reçu ». Dès que SPX publie un scan au moins aussi récent que le dernier de Janio, Peek suit le colis chez SPX tout en gardant l'historique Janio.
 
-**Vérifications et notifications.** Peek interroge directement SPX jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h (heure de Singapour) le jour où SPX scanne le colis en livraison, tant que le colis est ouvert dans Peek ou le jour de la livraison avec les notifications activées. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Pour les notifications, choisis « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Après quatre jours sans scan en transit, hors douane ou incident signalé, Peek affiche « Aucune mise à jour depuis… », rappelle qu'« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger SPX Express Singapore. » et propose « Demande de l’aide à SPX Express Singapore ». Peek ne peut pas contacter SPX, Shopee ou le vendeur à ta place.
+**Vérifications et notifications.** Peek interroge directement SPX jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h (heure de Singapour) le jour où SPX scanne le colis en livraison, tant que le colis est ouvert dans Peek ou le jour de la livraison avec les notifications activées. Après deux jours sans nouvelle (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure ; après sept jours sans nouvelle sur « Étiquette créée », toutes les 6 heures. Pour les notifications, choisis « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Après quatre jours sans scan sur un colis en « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis… », rappelle qu'« Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger SPX Express Singapore. » et propose « Demande de l’aide à SPX Express Singapore ». Peek ne peut pas contacter SPX, Shopee ou le vendeur à ta place.
 
 ## Questions fréquentes sur SPX Express Singapour
 
@@ -112,11 +112,11 @@ Ton colis venu de l'étranger est arrivé à Singapour et a été remis au rése
 
 ### Pourquoi mon suivi SPX ne se met-il plus à jour ?
 
-Si la dernière ligne est `[China]Sender is preparing to ship your parcel`, le vendeur n'a pas encore expédié le colis. Par la suite, les colis restent souvent silencieux pendant les vols, en douane ou le week-end. Après quatre jours sans nouvelle en transit, Peek signale le colis. S'il reste bloqué, contacte le vendeur ou Shopee.
+Si la dernière ligne est `[China]Sender is preparing to ship your parcel`, le vendeur n'a pas encore expédié le colis. Par la suite, les colis restent souvent silencieux pendant les vols, en douane ou le week-end. Après quatre jours sans nouvelle sur « Étiquette créée », « Pris en charge » ou « En transit », Peek signale le colis. S'il reste bloqué, contacte le vendeur ou Shopee.
 
 :::sources
 - [Singapore Customs: GST on Low-Value Goods](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/gst-on-low-value-goods/) – règle des 400 S$, GST au paiement ou à l'importation, double facturation, arnaques
 - [Singapore Customs: Courier / Postal Procedures](https://www.customs.gov.sg/personal-shipment/buying-from-overseas/courier-postal-procedures/) – colis retenus par l'ICA, demander au transporteur pour le suivi
 - [Universal Parcel Scraper: SPX Express Singapore](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spx-sg) – noms, formats de numéros, liens de suivi, libellés et étapes
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – codes partagés de SPX, étapes masquées conservées, format Singapore Post, relais depuis Janio
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – classement de chaque scan sous une étape, services de suivi
 :::

@@ -2300,6 +2300,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "dpd-ireland-sendungsverfolgung",
+      "title": "DPD Ireland Sendungsverfolgung: Status, Pickup & Kontakt",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-es",
       "catalog": "gls-es",
       "slug": "gls-spanien-sendungsverfolgung",
@@ -3804,6 +3812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "bpost suivi\u00a0: code-barres, statuts et point relais",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "suivi-dpd-ireland",
+      "title": "Suivi DPD Ireland\u00a0: statuts, points Pickup et contact",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
     },
     {
       "id": "gls-es",
@@ -5344,6 +5360,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "tracking-dpd-ireland",
+      "title": "Tracking DPD Ireland: stati, punti Pickup e contatti",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-es",
       "catalog": "gls-es",
       "slug": "tracciamento-gls-spagna",
@@ -6824,6 +6848,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento bpost: código de barras, estados y recogida",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "seguimiento-dpd-ireland",
+      "title": "Seguimiento DPD Ireland: estados, puntos Pickup y contacto",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
     },
     {
       "id": "gls-es",
@@ -8308,6 +8340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "seguimento-dpd-ireland",
+      "title": "Seguimento DPD Ireland: estados, pontos Pickup e contacto",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-es",
       "catalog": "gls-es",
       "slug": "seguimento-gls-espanha",
@@ -9790,6 +9830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie bpost: kod kreskowy, statusy i punkty odbioru",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "dpd-ie",
+      "catalog": "dpd-ie",
+      "slug": "sledzenie-dpd-ireland",
+      "title": "Śledzenie DPD Ireland: statusy, punkty Pickup i kontakt",
+      "name": "DPD Ireland",
+      "color": "#dc0032"
     },
     {
       "id": "gls-es",

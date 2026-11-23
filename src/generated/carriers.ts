@@ -2296,6 +2296,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Serpost tracking: Peru S10 codes, customs statuses & help",
       "name": "Serpost",
       "color": "#00308a"
+    },
+    {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "skypostal-tracking",
+      "title": "SkyPostal tracking: SKAMZUS & SP codes, statuses & support",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "thailand-post-tracking",
+      "title": "Thailand Post tracking: TH S10 codes, EMS statuses & help",
+      "name": "Thailand Post",
+      "color": "#ef172f"
+    },
+    {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "yunda-tracking",
+      "title": "Yunda Express tracking: waybill codes, statuses & 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
+    },
+    {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "onlog-express-tracking",
+      "title": "Onlog Express tracking: AA codes, Brazil statuses & help",
+      "name": "Onlog Express",
+      "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "a-duie-pyle-tracking",
+      "title": "A. Duie Pyle tracking: PRO numbers, LTL statuses & support",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     }
   ],
   "de": [
@@ -12284,6 +12324,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Jadlog: código de 14 dígitos, Pickup e status",
       "name": "Jadlog",
       "color": "#dc0032"
+    },
+    {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "rastreamento-onlog-express",
+      "title": "Rastreamento Onlog Express: códigos AA, status e contato",
+      "name": "Onlog Express",
+      "color": "#1a345d"
     }
   ],
   "pl": [

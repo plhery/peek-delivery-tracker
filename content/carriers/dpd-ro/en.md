@@ -14,8 +14,8 @@ DPD calls it the waybill number, or AWB. DPD's pages give no length rule; the wa
 
 | Number (invented) | What it is |
 | --- | --- |
-| `80000000000` | 11 digits starting with 8: a DPD Romania waybill. The shape also fits [GLS Germany](carrier:gls-de), [GLS France](carrier:gls-fr), [GLS Switzerland](carrier:gls-ch), [GLS Austria](carrier:gls-at), [PPL](carrier:ppl) and others. |
-| `01200000000000` | 14 digits: the shape of parcel numbers from other DPD companies, such as [DPD Germany](carrier:dpd-de), [DPD UK](carrier:dpd-uk), [DPD France](carrier:dpd-fr) or [DPD Portugal](carrier:dpd-pt). Peek tracks DPD Romania by its 11-digit waybill only. |
+| `84927163504` | 11 digits starting with 8: a DPD Romania waybill. The shape also fits [GLS Germany](carrier:gls-de), [GLS France](carrier:gls-fr), [GLS Switzerland](carrier:gls-ch), [GLS Austria](carrier:gls-at), [PPL](carrier:ppl) and others. |
+| `01204819273645` | 14 digits: the shape of parcel numbers from other DPD companies, such as [DPD Germany](carrier:dpd-de), [DPD UK](carrier:dpd-uk), [DPD France](carrier:dpd-fr) or [DPD Portugal](carrier:dpd-pt). Peek tracks DPD Romania by its 11-digit waybill only. |
 
 Look in the shop's shipping email or on your order page. DPD's mobile app has a recipient dashboard; you sign in with a code sent by SMS or email. If the shop names [Cargus](carrier:cargus), [FAN Courier](carrier:fan-courier) or [Sameday](carrier:sameday) instead, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
@@ -75,9 +75,9 @@ For a refund or a new parcel, ask the shop: it holds the contract with DPD.
 
 ## DPD Romania contact and customer service
 
-Peek can't contact DPD or the shop for you. As read on 1 November 2026, on DPD Romania's English contact page:
+Peek can't contact DPD or the shop for you. DPD Romania's English contact page lists:
 
-- **Parcels within Romania:** 031 824 90 90, Monday to Friday, 8:30 am to 4:30 pm. Requests to client@dpd.ro.
+- **Parcels within Romania:** 031 824 90 90, Monday to Friday, 8:30 am to 4:30 pm Romanian time. Requests to client@dpd.ro.
 - **International parcels:** 031 824 90 32 or international@dpd.ro, same hours.
 - **Complaints:** reclamatii@dpd.ro or the complaint form.
 - **Post:** Dynamic Parcel Distribution S.A., Str. Buiacului nr. 2, LogIQ Logistic Park, Corp A (A1-A2), 077135 Mogoșoaia, Ilfov.
@@ -88,13 +88,13 @@ DPD doesn't say whether its staff speak English.
 
 ## Tracking a DPD Romania parcel with Peek
 
-Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks other carriers: if you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 4,500 carriers. A tracking.dpd.ro link with `shipmentNumber=` works too.
+Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks the other carriers and tracking services first, then DPD Romania, and names it when DPD knows the number. If you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 4,500 carriers. Links from tracking.dpd.ro or services.dpd.ro/tracking with `shipmentNumber=`, and from dpd.com/ro/ or dpdgroup.com/ro/ with `parcelNumber=`, work too.
 
-Peek asks DPD for its English tracking and shows the status, the history in DPD's words with each scan's town (and country), the expected delivery date while the parcel is on its way, and the delivery time. It leaves out who received it, the signature and the return waybill; DPD gives no weight or sender.
+Peek asks DPD for its English tracking and shows the status, the history in DPD's words with each scan's town (and country), the expected delivery date while the parcel is on its way, with the time window when DPD's Predict message gives one, and the delivery time. It leaves out who received it, the signature and the return waybill; DPD gives no weight or sender.
 
 When DPD hands a parcel to [ACS Courier](carrier:acs-courier) for the last leg, to Cyprus for example, it names ACS and the ACS number. If that number has ten digits, as ACS's vouchers do, Peek asks ACS with it and follows ACS once it has a scan as recent as DPD's latest. Until then, or for a number of another shape, Peek follows DPD, and the parcel's card already names ACS and shows its number.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes). It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use Smart Control.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes on the day DPD scans it out for delivery: from 6 a.m. Romanian time or, when DPD's Predict message gives a window, from half an hour before it opens, whichever is later. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DPD Romania" link. To change the delivery, use Smart Control.
 
 ## Questions about DPD tracking in Romania
 
@@ -112,7 +112,7 @@ Yes. DPD's tracker has an English version, and Peek shows DPD's English wordings
 
 ### What is the DPD Romania phone number?
 
-031 824 90 90 for parcels within Romania and 031 824 90 32 for international ones, Monday to Friday, 8:30 am to 4:30 pm.
+031 824 90 90 for parcels within Romania and 031 824 90 32 for international ones, Monday to Friday, 8:30 am to 4:30 pm Romanian time.
 
 :::sources
 - [DPD Romania: Where is my parcel?](https://www.dpd.com/ro/en/faq/unde-este-coletul-meu/) – waybill number, tracker

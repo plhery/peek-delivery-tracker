@@ -3482,6 +3482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SXW Express Sendungsverfolgung: SXW-Nummer und Status",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "dk-logistics-sendungsverfolgung",
+      "title": "DK Logistics Sendungsverfolgung: Frachtbrief & Kontakt",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "fr": [
@@ -5012,6 +5020,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi SXW Express\u00a0: numéros SXW, statuts et livraison",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "suivi-dk-logistics",
+      "title": "Suivi DK Logistics\u00a0: bordereau, livraison et contact",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "it": [
@@ -6510,6 +6526,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento SXW Express: numeri SXW, stati e dogana",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "tracciamento-dk-logistics",
+      "title": "Tracciamento DK Logistics: lettera di vettura e contatti",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "es": [
@@ -7984,6 +8008,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de SXW Express: números SXW y estados",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "seguimiento-dk-logistics",
+      "title": "Seguimiento DK Logistics: guía, entregas y contacto",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "pt": [
@@ -9434,6 +9466,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SXW Express: números SXW, estados e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "seguimento-dk-logistics",
+      "title": "Seguimento DK Logistics: guia, entregas e contacto",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "pt-br": [
@@ -10950,6 +10990,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SXW Express: numery SXW, statusy i dostawa",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "dk-logistics-ee",
+      "catalog": "dk-logistics-ee",
+      "slug": "sledzenie-dk-logistics",
+      "title": "Śledzenie DK Logistics: list przewozowy, dostawa i kontakt",
+      "name": "DK Logistics",
+      "color": "#f58428"
     }
   ],
   "ru": [

@@ -79,11 +79,11 @@ Kanały GLS Italy:
 
 ## Śledzenie paczek GLS Italy w Peek
 
-[Peek](/) pyta GLS Italy zarówno o krajowe numery dwuliterowe z dziewięcioma cyframi, jak i o format z jedną literą, cyfrą i dziewięcioma cyframi, pokazując „GLS Italy ma tę przesyłkę.”, gdy GLS ją rozpozna. Dla innego formatu, jak ID Collo, wybierz GLS Italy przez „Zmień”. Działa także link śledzenia gls-group.com lub gls-group.eu z `/IT/` w ścieżce; linki gls-italy.com nie. O 11-cyfrowe numery międzynarodowe Peek pyta GLS Francja, Niemcy i Szwajcaria, nigdy GLS Italy; jeśli zna go GLS Germany, Peek poprosi o kod pocztowy odbiorcy.
+[Peek](/) pyta GLS Italy zarówno o krajowe numery dwuliterowe z dziewięcioma cyframi, jak i o format z jedną literą, cyfrą i dziewięcioma cyframi, pokazując „GLS Italy ma tę przesyłkę.”, gdy GLS ją rozpozna. Dla numeru krajowego z mniej niż dziewięcioma cyframi wybierz GLS Italy przez „Zmień”; Peek nie śledzi ID Collo, więc podaj numer przesyłki. Działa także link śledzenia gls-group.com lub gls-group.eu z `/IT/` w ścieżce; linki gls-italy.com nie. O 11-cyfrowe numery międzynarodowe Peek pyta GLS Francja, Niemcy i Szwajcaria, nigdy GLS Italy; jeśli zna go GLS Germany, Peek poprosi o kod pocztowy odbiorcy.
 
-Godziny skanów GLS Italy nie zawierają strefy czasowej: Peek odczytuje je w czasie włoskim i pokazuje historię GLS Italy. Gdy najnowszy skan ma datę bez godziny, Peek uzupełnia godziny z uniwersalnych usług śledzenia znających paczkę. Statusy zachowują angielskie brzmienie GLS, a ponadto wyświetlana jest waga.
+Godziny skanów GLS Italy nie zawierają strefy czasowej: Peek odczytuje je w czasie włoskim i pokazuje historię GLS Italy. Gdy najnowszy skan ma datę bez godziny, Peek uzupełnia godziny z uniwersalnych usług śledzenia znających paczkę. Wpisy w historii zachowują angielskie brzmienie GLS; status paczki Peek pokazuje w twoim języku, np. „Dostarczona”. Wyświetlana jest też waga.
 
-Jedynym pokazywanym przewidywanym dniem doręczenia jest termin zarezerwowany przez ciebie po nieudanej próbie: GLS zapisuje go jako `Consegna prenotata il` z datą, po włosku nawet wśród angielskich statusów. Peek nie wyświetla punktu odbioru ani nadawcy oraz pomija twoje imię, adres i podpis. Przesyłka przekierowana lub zwrócona pod nowym numerem nie jest dalej śledzona, a stare przesyłki widnieją jako nieznalezione.
+Jedynym pokazywanym przewidywanym dniem doręczenia jest termin zarezerwowany przez ciebie po nieudanej próbie: GLS zapisuje go jako `Consegna prenotata il` z datą, po włosku nawet wśród angielskich statusów. Peek nie wyświetla punktu odbioru ani nadawcy oraz pomija twoje imię; twoje miasto, które GLS podaje z adresem doręczenia, wyznacza koniec trasy na twojej własnej mapie, a udostępnione linki nigdy go nie pokazują. Przesyłka przekierowana lub zwrócona pod nowym numerem nie jest dalej śledzona, a stare przesyłki widnieją jako nieznalezione.
 
 ## Pytania o śledzenie GLS we Włoszech
 

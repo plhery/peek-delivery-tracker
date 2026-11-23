@@ -79,11 +79,11 @@ Canales de GLS Italy:
 
 ## Seguir paquetes de GLS Italy con Peek
 
-[Peek](/) pregunta a GLS Italy tanto por los números nacionales de dos letras y nueve dígitos como por el formato de una letra, un dígito y nueve dígitos, y muestra «GLS Italy tiene este paquete.» cuando GLS lo conoce. Para otro formato como el ID Collo, elige GLS Italy con «Cambiar». Un enlace de gls-group.com o gls-group.eu con /IT/ en la ruta también funciona; los enlaces de gls-italy.com no. Con números internacionales de 11 dígitos, Peek consulta a GLS Francia, Alemania y Suiza, nunca a GLS Italy; si GLS Germany lo reconoce, Peek pide el código postal de entrega.
+[Peek](/) pregunta a GLS Italy tanto por los números nacionales de dos letras y nueve dígitos como por el formato de una letra, un dígito y nueve dígitos, y muestra «GLS Italy tiene este paquete.» cuando GLS lo conoce. Para un número nacional de menos de nueve dígitos, elige GLS Italy con «Cambiar»; Peek no sigue el ID Collo, así que usa el número de envío. Un enlace de gls-group.com o gls-group.eu con /IT/ en la ruta también funciona; los enlaces de gls-italy.com no. Con números internacionales de 11 dígitos, Peek consulta a GLS Francia, Alemania y Suiza, nunca a GLS Italy; si GLS Germany lo reconoce, Peek pide el código postal de entrega.
 
-Los horarios de GLS Italy llegan sin zona horaria: Peek los lee en hora italiana y muestra el historial de GLS Italy. Cuando el último escaneo tiene fecha pero no hora, Peek toma los horarios de los servicios de seguimiento universales que conozcan el envío. Los estados mantienen el texto en inglés de GLS y se muestra el peso.
+Los horarios de GLS Italy llegan sin zona horaria: Peek los lee en hora italiana y muestra el historial de GLS Italy. Cuando el último escaneo tiene fecha pero no hora, Peek toma los horarios de los servicios de seguimiento universales que conozcan el envío. Las líneas del historial mantienen el texto en inglés de GLS; el estado del paquete aparece en tu idioma, por ejemplo «Entregado». También se muestra el peso.
 
-El único día previsto que muestra es el que reservas tras una entrega fallida: GLS lo escribe `Consegna prenotata il` y la fecha, en italiano incluso entre estados ingleses. No muestra punto de recogida ni remitente, y descarta tu nombre, dirección y firma. No sigue paquetes reenviados o devueltos con otro número, y los envíos antiguos aparecen como no encontrados.
+El único día previsto que muestra es el que reservas tras una entrega fallida: GLS lo escribe `Consegna prenotata il` y la fecha, en italiano incluso entre estados ingleses. No muestra punto de recogida ni remitente, y descarta tu nombre; tu ciudad, que GLS da con la dirección de entrega, marca el final de la ruta en tu propio mapa, y los enlaces compartidos nunca la muestran. No sigue paquetes reenviados o devueltos con otro número, y los envíos antiguos aparecen como no encontrados.
 
 ## Preguntas sobre el seguimiento de GLS en Italia
 

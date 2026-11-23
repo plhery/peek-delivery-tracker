@@ -2220,6 +2220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "dpd-fr-sendungsverfolgung",
+      "title": "DPD France Sendungsverfolgung: Nummern und Status",
+      "name": "DPD France",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-fr",
       "catalog": "gls-fr",
       "slug": "gls-france-sendungsverfolgung",
@@ -6064,6 +6072,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "tracciamento-dpd-fr",
+      "title": "Tracciamento DPD France: codici, stati e punti Pickup",
+      "name": "DPD France",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-fr",
       "catalog": "gls-fr",
       "slug": "tracciamento-gls-france",
@@ -7978,6 +7994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "seguimiento-dpd-fr",
+      "title": "Seguimiento DPD France: números, estados y Pickup",
+      "name": "DPD France",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-fr",
       "catalog": "gls-fr",
       "slug": "seguimiento-gls-france",
@@ -9882,6 +9906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTT Express (Expresso) rastreio: estados e contactos",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "seguimento-dpd-fr",
+      "title": "Seguimento DPD France: números, estados e pontos Pickup",
+      "name": "DPD France",
+      "color": "#dc0032"
     },
     {
       "id": "gls-fr",
@@ -11798,6 +11830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CTT Express: statusy po polsku, punkty i kontakt",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "sledzenie-dpd-fr",
+      "title": "Śledzenie DPD France: numery, statusy i punkty Pickup",
+      "name": "DPD France",
+      "color": "#dc0032"
     },
     {
       "id": "gls-fr",

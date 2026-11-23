@@ -80,7 +80,7 @@ Peek przypisuje te wpisy do własnych etapów: „Przyjęta przez przewoźnika�
 
 Kanały kontaktu Posta Shqiptare:
 
-- **Telefon:** +355 682044727 lub +355 682044707.
+- **Telefon:** +355 682044727.
 - **E-mail:** asistence@postashqiptare.al.
 - **Siedziba główna:** Drejtoria e përgjithshme Posta Shqiptare, Rruga „Reshit Çollaku” nr. 4, Tirana. Godziny podane pod nią na stronie kontaktowej: od poniedziałku do czwartku 08:00–16:30, w piątek 08:00–14:00 (czasu albańskiego).
 - **Reklamacje przesyłek zagranicznych:** na formularzu w placówce pocztowej, gdzie nadano przesyłkę.
@@ -99,7 +99,7 @@ Peek pokazuje każdy wiersz w brzmieniu Posta Shqiptare, a skany zagraniczne z n
 
 Gdy śledzisz z innego kraju, Peek pyta pod tym samym numerem `AL` także pocztę twojego kraju: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) dla numerów na E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) w Niemczech, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) w Grecji i inne. Przełącza się na tę pocztę, gdy pokaże skan co najmniej tak świeży jak najnowszy w Posta Shqiptare, zachowując historię Posta Shqiptare. Z Kosowa, Czarnogóry czy Turcji nie pyta żadnej innej poczty.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek odpytuje Posta Shqiptare bezpośrednio nawet co 10 minut, dopóki odpowiada jej wyszukiwarka. Po dwóch dniach bez nowych wpisów (po 12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę; po siedmiu dniach bez nowych wpisów w statusie „Zarejestrowana” — co 6 godzin. Po czterech dniach bez skanu dla paczki w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek wyświetla „Brak aktualizacji od …”, informację „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Posta Shqiptare.” oraz link „Poproś przewoźnika Posta Shqiptare o pomoc”. Powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z Posta Shqiptare, twoją pocztą ani ze sklepem.
+Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek odpytuje Posta Shqiptare bezpośrednio nawet co 10 minut, dopóki odpowiada jej wyszukiwarka, a poza tym co godzinę. Po dwóch dniach bez nowych wpisów (po 12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę; po siedmiu dniach bez nowych wpisów w statusie „Zarejestrowana” — co 6 godzin. Po czterech dniach bez skanu dla paczki w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek wyświetla „Brak aktualizacji od …”, informację „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Posta Shqiptare.” oraz link „Poproś przewoźnika Posta Shqiptare o pomoc”. Powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z Posta Shqiptare, twoją pocztą ani ze sklepem.
 
 ## Pytania o śledzenie Posta Shqiptare
 
@@ -117,7 +117,7 @@ Według jej standardów w Albanii następnego dnia między miastami i średnio d
 
 ### Jaki jest numer telefonu Posta Shqiptare?
 
-+355 682044727 lub +355 682044707 albo e-mail asistence@postashqiptare.al. Jej strona kontaktowa podaje pod adresem siedziby głównej godziny 08:00–16:30 od poniedziałku do czwartku i 08:00–14:00 w piątek czasu albańskiego.
++355 682044727 albo e-mail asistence@postashqiptare.al. Jej strona kontaktowa podaje pod adresem siedziby głównej godziny 08:00–16:30 od poniedziałku do czwartku i 08:00–14:00 w piątek czasu albańskiego.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – pole śledzenia, format numeru, placówki pocztowe

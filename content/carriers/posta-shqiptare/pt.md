@@ -80,7 +80,7 @@ O Peek classifica estas linhas nas suas próprias etapas: «Aceite pela transpor
 
 Canais de contacto da Posta Shqiptare:
 
-- **Telefone:** +355 682044727 ou +355 682044707.
+- **Telefone:** +355 682044727.
 - **E-mail:** asistence@postashqiptare.al.
 - **Sede:** Drejtoria e përgjithshme Posta Shqiptare, Rruga «Reshit Çollaku» nr. 4, Tirana. Horários indicados abaixo na página de contacto: segunda a quinta das 08:00 às 16:30, sexta das 08:00 às 14:00 (hora da Albânia).
 - **Reclamações sobre correio internacional:** no formulário da estação de correios onde o envio foi depositado.
@@ -99,7 +99,7 @@ O Peek mostra cada linha com o texto da Posta Shqiptare e cada registo no estran
 
 Quando segues a partir de outro país, o Peek pergunta também aos correios do teu país com o mesmo código `AL`: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) para um código começado por E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) na Alemanha, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) na Grécia e outros. Muda para esses correios assim que mostrarem um registo pelo menos tão recente como o mais recente da Posta Shqiptare, mantendo o histórico da Posta Shqiptare. A partir do Kosovo, Montenegro ou Turquia não pergunta a outros correios.
 
-Enquanto tiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta diretamente a Posta Shqiptare até de 10 em 10 minutos enquanto o seu rastreador responder. Após dois dias sem novidades (12 horas enquanto ainda mostra «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Ao fim de quatro dias sem registo numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde …», a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Posta Shqiptare.» e a ligação «Pede ajuda a Posta Shqiptare». Alertas: «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Posta Shqiptare, os teus correios nem a loja por ti.
+Enquanto tiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta diretamente a Posta Shqiptare até de 10 em 10 minutos enquanto o seu rastreador responder; caso contrário, de hora a hora. Após dois dias sem novidades (12 horas enquanto ainda mostra «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Ao fim de quatro dias sem registo numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde …», a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Posta Shqiptare.» e a ligação «Pede ajuda a Posta Shqiptare». Alertas: «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Posta Shqiptare, os teus correios nem a loja por ti.
 
 ## Perguntas sobre o seguimento Posta Shqiptare
 
@@ -117,7 +117,7 @@ Segundo os seus padrões, na Albânia no dia seguinte entre cidades e até 3 dia
 
 ### Qual é o telefone da Posta Shqiptare?
 
-+355 682044727 ou +355 682044707, ou e-mail para asistence@postashqiptare.al. A página de contacto indica das 08:00 às 16:30 de segunda a quinta e das 08:00 às 14:00 à sexta (hora da Albânia) sob a morada da sede.
++355 682044727, ou e-mail para asistence@postashqiptare.al. A página de contacto indica das 08:00 às 16:30 de segunda a quinta e das 08:00 às 14:00 à sexta (hora da Albânia) sob a morada da sede.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – caixa de seguimento, formato do código, estações de correios

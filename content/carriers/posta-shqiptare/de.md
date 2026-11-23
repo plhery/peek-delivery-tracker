@@ -80,7 +80,7 @@ Peek ordnet diese Zeilen eigenen Stufen zu: „Beim Paketdienst eingegangen“, 
 
 Kontaktwege von Posta Shqiptare:
 
-- **Telefon:** +355 682044727 oder +355 682044707.
+- **Telefon:** +355 682044727.
 - **E-Mail:** asistence@postashqiptare.al.
 - **Zentrale:** Drejtoria e përgjithshme Posta Shqiptare, Rruga „Reshit Çollaku“ nr. 4, Tirana. Darunter angegebene Zeiten auf der Kontaktseite: Montag bis Donnerstag 08:00 bis 16:30 Uhr, Freitag 08:00 bis 14:00 Uhr (albanische Zeit).
 - **Reklamationen zu Auslandspost:** per Formular in der Einlieferungsfiliale.
@@ -99,7 +99,7 @@ Peek zeigt jede Zeile im Wortlaut von Posta Shqiptare und Scans im Ausland mit d
 
 Verfolgst du aus einem anderen Land, fragt Peek mit derselben `AL`-Nummer auch die Post deines Landes: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) bei Anfangsbuchstabe E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) in Deutschland, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) in Griechenland und weitere. Es wechselt zu dieser Post, sobald sie einen Scan mindestens so aktuell wie den neuesten von Posta Shqiptare zeigt, und behält den Verlauf von Posta Shqiptare bei. Aus dem Kosovo, Montenegro oder der Türkei fragt es keine andere Post.
 
-Solange du das Paket in Peek geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, fragt Peek Posta Shqiptare direkt bis zu alle 10 Minuten ab, solange ihr Tracker antwortet. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Nach vier Tagen ohne Scan bei einem Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek „Keine Aktualisierung seit …“, den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Posta Shqiptare nach.“ und den Link „Hol dir Hilfe bei Posta Shqiptare“. Benachrichtigungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann weder Posta Shqiptare noch deine Post oder den Shop für dich kontaktieren.
+Solange du das Paket in Peek geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, fragt Peek Posta Shqiptare direkt bis zu alle 10 Minuten ab, solange ihr Tracker antwortet, sonst stündlich. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Nach vier Tagen ohne Scan bei einem Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek „Keine Aktualisierung seit …“, den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Posta Shqiptare nach.“ und den Link „Hol dir Hilfe bei Posta Shqiptare“. Benachrichtigungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann weder Posta Shqiptare noch deine Post oder den Shop für dich kontaktieren.
 
 ## Fragen zur Posta Shqiptare Sendungsverfolgung
 
@@ -117,7 +117,7 @@ Nach eigenen Standards innerhalb Albaniens am nächsten Tag zwischen Städten un
 
 ### Wie lautet die Telefonnummer von Posta Shqiptare?
 
-+355 682044727 oder +355 682044707, oder per E-Mail an asistence@postashqiptare.al. Auf der Kontaktseite stehen unter der Adresse der Zentrale Montag bis Donnerstag 08:00 bis 16:30 Uhr und Freitag 08:00 bis 14:00 Uhr albanischer Zeit.
++355 682044727 oder per E-Mail an asistence@postashqiptare.al. Auf der Kontaktseite stehen unter der Adresse der Zentrale Montag bis Donnerstag 08:00 bis 16:30 Uhr und Freitag 08:00 bis 14:00 Uhr albanischer Zeit.
 
 :::sources
 - [Posta Shqiptare: Home](https://www.postashqiptare.al/) – Trackingfeld, Nummernformat, Postfilialen

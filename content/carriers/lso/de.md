@@ -58,7 +58,7 @@ Die Freitext-Statuszeile kann mehr Details enthalten als die fünf Schritte. LSO
 
 **Verspätet oder verloren.** Ansprüche wegen verlorener oder verspäteter Pakete müssen innerhalb von 30 Tagen eingereicht werden.
 
-**Wer aktiv wird.** Nur Inhaber eines LSO-Geschäftskontos können eine Reklamation einreichen. Wenn du ein Paket erwartest, verweist LSO an den Verkäufer – wende dich bei einer Onlinebestellung also an den Shop. Zeigt das Tracking „Delivered“ an, aber es ist nichts angekommen, lies [Paket als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received).
+**Wer aktiv wird.** Nur Inhaber eines LSO-Kontos können eine Reklamation einreichen. Wenn du ein Paket erwartest, verweist LSO an den Verkäufer – wende dich bei einer Onlinebestellung also an den Shop. Zeigt das Tracking „Delivered“ an, aber es ist nichts angekommen, lies [Paket als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received).
 
 ## LSO-Kundenservice: Telefonnummer und Kontakt
 
@@ -75,9 +75,9 @@ Halte die Airbill-Nummer bereit. Auf der Feiertagsseite nennt LSO noch die Numme
 
 [Peek](/) erkennt LSO bei einer Nummer im `ZY0`-Format sofort. Auch ein Tracking-Link von `lso.com/tracking` (mit `airbillnos=`) oder `app.lso.com/tracking` (mit `barcodes=`) funktioniert. Konto, Postleitzahl oder Telefonnummer sind nicht nötig.
 
-Peek kann die eigene LSO-Seite nicht direkt auslesen. Stattdessen verfolgt es LSO-Pakete über Tracking-Dienste und zeigt Status und Verlauf dieser Dienste in deren Wortlaut an. Dieser Verlauf liegt oft mehrere Stunden hinter der LSO-Seite zurück, und bei manchen Paketen gibt es noch keinen Eintrag. Peek zeigt für LSO keinen Zustellnachweis, keinen Namen des Unterzeichners und keinen Abholpunkt an, und ein voraussichtliches Lieferdatum nur dann, wenn 17TRACK – einer dieser Dienste – die Schätzung von LSO weitergibt.
+Peek kann die eigene LSO-Seite nicht direkt auslesen. Stattdessen verfolgt es LSO-Pakete über Tracking-Dienste und zeigt Status und Verlauf dieser Dienste in deren Wortlaut an. Dieser Verlauf liegt oft mehrere Stunden hinter der LSO-Seite zurück, und bei manchen Paketen gibt es noch keinen Eintrag. Peek zeigt für LSO keinen Zustellnachweis und keinen Abholpunkt an, und ein voraussichtliches Lieferdatum nur dann, wenn 17TRACK – einer dieser Dienste – die Schätzung von LSO weitergibt.
 
-Peek prüft stündlich, alle 3 Stunden, sobald ein Tag ohne neuen Scan vergangen ist, alle 6 Stunden, wenn das Paket sieben Tage lang im Status „Etikett erstellt“ bleibt, und am Zustelltag bis zu alle 15 Minuten, solange du das Paket in Peek geöffnet hast oder Benachrichtigungen aktiviert sind.
+Peek prüft stündlich, alle 3 Stunden, sobald ein Tag ohne neuen Scan vergangen ist, alle 6 Stunden, wenn das Paket sieben Tage lang im Status „Etikett erstellt“ bleibt, und an dem Tag, an dem das Paket in Zustellung geht, bis zu alle 15 Minuten, solange du das Paket in Peek geöffnet hast oder Benachrichtigungen aktiviert sind.
 
 Bleibt ein Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, meldet Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“), erklärt: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei LSO nach.“ und bietet „Hol dir Hilfe bei LSO“ an. Du kannst Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ aktivieren. Für die Unterschrift, eine Reklamation oder ein Lieferproblem wende dich an LSO oder den Shop.
 

@@ -68,7 +68,7 @@ Tras la aduana de importación, 17FEIA entrega el paquete a un transportista que
 
 17FEIA trabaja para quien contrató el envío: el vendedor o el agente de envíos que utilizaste. Si el paquete se retrasa, se pierde, llega dañado o se devuelve, habla primero con ellos.
 
-**Número no encontrado.** Si no conoce el número, el rastreador de 17FEIA no muestra avances. Peek muestra «Esperando a 17FEIA» y sigue consultando. Si tras dos días 17FEIA sigue sin reconocer el número y ninguna otra fuente ha respondido, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y pasa a comprobarlo una vez al día, y una vez a la semana pasada una semana desde que lo añadiste. Revisa el código frente al mensaje de envío: `FEI`, dos letras, diez cifras, `YQ`.
+**Número no encontrado.** Si no conoce el número, el rastreador de 17FEIA no muestra avances. Peek muestra «Esperando a 17FEIA» y sigue consultando. Si tras dos días 17FEIA sigue sin reconocer el número y ninguna otra fuente ha respondido, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» Revisa el código frente al mensaje de envío: `FEI`, dos letras, diez cifras, `YQ`.
 
 **Parado en `The order has information pending customer confirmation.`** Si usaste un agente de envíos, revisa tu cuenta o tus mensajes allí. En caso contrario, pregunta al vendedor.
 

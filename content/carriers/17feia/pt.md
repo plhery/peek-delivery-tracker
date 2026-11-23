@@ -68,7 +68,7 @@ Após o desalfandegamento de importação, a 17FEIA entrega a encomenda a uma tr
 
 A 17FEIA trabalha para quem contratou o envio: o vendedor ou o transitário que usaste. Em caso de atraso, perda, danos ou devolução, fala primeiro com eles.
 
-**Número não encontrado.** Se não conhece o número, o rastreio da 17FEIA não mostra progresso. O Peek mostra «À espera de 17FEIA» e continua a verificar. Se dois dias depois a 17FEIA continuar sem reconhecer o número e nenhuma outra fonte tiver respondido, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e verifica depois uma vez por dia, e uma vez por semana passada uma semana desde que a adicionaste. Confere o número com a mensagem de envio: `FEI`, duas letras, dez algarismos, `YQ`.
+**Número não encontrado.** Se não conhece o número, o rastreio da 17FEIA não mostra progresso. O Peek mostra «À espera de 17FEIA» e continua a verificar. Se dois dias depois a 17FEIA continuar sem reconhecer o número e nenhuma outra fonte tiver respondido, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» Confere o número com a mensagem de envio: `FEI`, duas letras, dez algarismos, `YQ`.
 
 **Parada em `The order has information pending customer confirmation.`** Se usaste um transitário, verifica a tua conta ou mensagens lá. Caso contrário, pergunta ao vendedor.
 

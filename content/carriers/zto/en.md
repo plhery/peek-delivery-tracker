@@ -70,7 +70,7 @@ From ZTO's FAQ:
 
 ## ZTO Express contact number and customer service
 
-As read on 31 October 2026, ZTO lists:
+ZTO lists:
 
 - **95311**: its national customer service hotline in mainland China (`全国统一客服热线`), 08:30 to 17:30, its FAQ says. ZTO's English site calls it the "Customer Service Hotline".
 - **95720**: the number ZTO's couriers call you from (`中通业务员专属外呼号码`).
@@ -80,7 +80,7 @@ For ZTO International's lines, see its page. For the order itself, ask the selle
 
 ## Track a ZTO Express parcel with Peek
 
-Paste the number in [Peek](/): it follows more than 4,500 carriers. A ZTO number pasted alone isn't enough for Peek to ask ZTO Express. It asks some of the other carriers that use the shape (DHL, BRT and FedEx for 12 digits; DPD, SEUR and BRT for 14 digits; ZTO International first for a 771 number), then tracking services, and shows "Checking tracking services…" meanwhile. If they have the parcel and name ZTO Express, Peek files it there and asks ZTO at its next check. If nothing turns up, the line under the number says "not found yet · Peek keeps checking". To have Peek read ZTO's own tracker from the start, tap "Change" and pick ZTO Express under "Fits this number", or search for ZTO or 中通快递 (中通 alone also brings up ZTO International). On a parcel you've already added, use "Change carrier". Peek's ZTO lookup takes only the two shapes above: for any other, it notes that ZTO Express "doesn’t issue numbers like this one".
+Paste the number in [Peek](/): it follows more than 4,500 carriers. A ZTO number pasted alone isn't enough for Peek to ask ZTO Express first. It asks some of the other carriers that use the shape (FedEx, DHL, BRT and Colis Privé for 12 digits, never ZTO; DPD, SEUR and BRT for 14 digits; ZTO International first for a 771 number), then tracking services, and shows "Checking tracking services…" meanwhile. If they have the parcel and name ZTO Express, Peek files it there and asks ZTO at its next check. After the tracking services, for 14 digits starting 73 or 79, Peek checks ZTO's own tracker in a browser and files the parcel under ZTO Express if ZTO has it. If nothing turns up, the line under the number says "not found yet · Peek keeps checking". To have Peek read ZTO's own tracker from the start, tap "Change" and pick ZTO Express under "Fits this number", or search for ZTO or 中通快递 (中通 alone also brings up ZTO International). On a parcel you've already added, use "Change carrier". Peek's ZTO lookup takes only the two shapes above: for any other, it notes that ZTO Express "doesn’t issue numbers like this one".
 
 Peek reads ZTO's own tracker, and opens a browser when ZTO asks for a check. For each scan it shows the step (table above), the town of the ZTO site that made it (the site's Chinese name where Peek can't place it) and the exact time, in your device's time zone (on peektracker.com and in the iPhone and Android apps, a line under the history names that zone). It leaves out ZTO's full line of each scan and, with it, couriers' contacts, phone numbers and the recipient's name and address, and shows no expected delivery date. ZTO's public tracker can leave out a parcel's earliest scans, and so can Peek. Peek follows the ZTO number only: a forwarder's number is another parcel to add.
 
@@ -121,5 +121,5 @@ Signed for: Peek shows it as "Signed for", Delivered. You, someone for you or a 
 - [ZTO Express: 中通国际 (ZTO International)](https://www.zto.com/introduce/service/international) – the group's international window since 2014
 - [ZTO Express: 中通集运 (consolidation)](https://www.zto.com/introduce/service/concentrated) – international consolidation and its contacts
 - [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – checking on delivery, consent for lockers and stations, appeals
-- [Universal Parcel Scraper: ZTO Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/zto) – number shapes, step names, what Peek shows and leaves out, ZTO's verification puzzle and browser lookups, no recognition
+- [Universal Parcel Scraper: ZTO Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/zto) – number shapes, step names, what Peek shows and leaves out, ZTO's verification puzzle and browser lookups, browser recognition of 14-digit numbers starting 73 or 79
 :::

@@ -68,7 +68,7 @@ Nach dem Einfuhrzoll übergibt 17FEIA das Paket an einen Paketdienst, der es zu 
 
 17FEIA arbeitet im Auftrag dessen, der den Versand gebucht hat: des Verkäufers oder deines Weiterleitungsdienstes. Bei Verspätung, Verlust, Schaden oder Rücksendung wende dich zuerst an ihn.
 
-**Nummer nicht gefunden.** Bei einer unbekannten Nummer zeigt der Tracker von 17FEIA keinen Fortschritt. Peek zeigt „Warten auf 17FEIA“ und fragt weiter nach. Kennt 17FEIA die Nummer zwei Tage später noch immer nicht und hat auch keine andere Quelle geantwortet, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und prüft danach täglich, nach einer Woche wöchentlich. Vergleiche die Nummer mit der Versandnachricht: `FEI`, zwei Buchstaben, zehn Ziffern, `YQ`.
+**Nummer nicht gefunden.** Bei einer unbekannten Nummer zeigt der Tracker von 17FEIA keinen Fortschritt. Peek zeigt „Warten auf 17FEIA“ und fragt weiter nach. Kennt 17FEIA die Nummer zwei Tage später noch immer nicht und hat auch keine andere Quelle geantwortet, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ Vergleiche die Nummer mit der Versandnachricht: `FEI`, zwei Buchstaben, zehn Ziffern, `YQ`.
 
 **Steht auf `The order has information pending customer confirmation.`** Wenn du einen Weiterleitungsdienst genutzt hast, prüfe dort dein Konto oder deine Nachrichten. Sonst melde dich beim Verkäufer.
 

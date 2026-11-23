@@ -68,7 +68,7 @@ Dopo lo sdoganamento all'importazione, 17FEIA affida il pacco a un corriere che 
 
 17FEIA lavora per chi ha prenotato la spedizione: il venditore o lo spedizioniere che hai usato. In caso di ritardo, smarrimento, danneggiamento o reso, contatta prima loro.
 
-**Codice non trovato.** Per un numero sconosciuto, il portale di 17FEIA non mostra avanzamenti. Peek indica «In attesa di 17FEIA» e continua a controllare. Se dopo due giorni 17FEIA non riconosce ancora il numero e nessun'altra fonte ha risposto, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e controlla poi una volta al giorno, e una volta alla settimana trascorsa una settimana dall'aggiunta. Confronta il codice con il messaggio di spedizione: `FEI`, due lettere, dieci cifre, `YQ`.
+**Codice non trovato.** Per un numero sconosciuto, il portale di 17FEIA non mostra avanzamenti. Peek indica «In attesa di 17FEIA» e continua a controllare. Se dopo due giorni 17FEIA non riconosce ancora il numero e nessun'altra fonte ha risposto, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» Confronta il codice con il messaggio di spedizione: `FEI`, due lettere, dieci cifre, `YQ`.
 
 **Fermo su `The order has information pending customer confirmation.`** Se hai usato uno spedizioniere, controlla l'account o i messaggi lì. Altrimenti chiedi al venditore.
 

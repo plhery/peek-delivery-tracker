@@ -67,7 +67,7 @@ After import customs, 17FEIA hands the parcel to a carrier that takes it on to y
 
 17FEIA works for whoever booked the shipment: the seller, or the forwarder you used. For a late, lost, damaged or returned parcel, contact them first.
 
-**Number not found.** For a number it doesn't know, 17FEIA's tracker shows no progress. The parcel shows "Waiting for 17FEIA" and Peek keeps checking. If 17FEIA still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shipping message: FEI, two letters, ten digits, YQ.
+**Number not found.** For a number it doesn't know, 17FEIA's tracker shows no progress. The parcel shows "Waiting for 17FEIA" and Peek keeps checking. If 17FEIA still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check the number against the shipping message: FEI, two letters, ten digits, YQ.
 
 **Stuck on `The order has information pending customer confirmation.`** If you used a forwarder, check your account or messages there. Otherwise, ask the seller.
 

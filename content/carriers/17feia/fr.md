@@ -68,7 +68,7 @@ Après le dédouanement à l'importation, 17FEIA confie le colis à un transport
 
 17FEIA travaille pour le donneur d'ordre qui a réservé l'expédition : le vendeur ou le commissionnaire auquel tu as fait appel. Pour un colis en retard, perdu, endommagé ou retourné, contacte-le en premier.
 
-**Numéro introuvable.** Pour un numéro inconnu, le suivi de 17FEIA n'affiche aucun avancement. Peek indique « En attente de 17FEIA » et continue de vérifier. Si 17FEIA ne connaît toujours pas le numéro deux jours plus tard et qu'aucune autre source n'a répondu, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. », puis vérifie une fois par jour, et une fois par semaine une fois sept jours passés depuis l'ajout. Vérifie le numéro par rapport au message d'expédition : `FEI`, deux lettres, dix chiffres, `YQ`.
+**Numéro introuvable.** Pour un numéro inconnu, le suivi de 17FEIA n'affiche aucun avancement. Peek indique « En attente de 17FEIA » et continue de vérifier. Si 17FEIA ne connaît toujours pas le numéro deux jours plus tard et qu'aucune autre source n'a répondu, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » Vérifie le numéro par rapport au message d'expédition : `FEI`, deux lettres, dix chiffres, `YQ`.
 
 **Bloqué sur `The order has information pending customer confirmation.`** Si tu es passé par un agent d'expédition, vérifie ton compte ou tes messages chez lui. Sinon, contacte le vendeur.
 

@@ -68,7 +68,7 @@ Po odprawie przywozowej 17FEIA przekazuje paczkę przewoźnikowi, który dostarc
 
 17FEIA realizuje zlecenie dla podmiotu, który wykupił wysyłkę: sprzedawcy albo agenta wysyłkowego. W razie opóźnienia, zaginięcia, uszkodzenia lub zwrotu skontaktuj się najpierw z nimi.
 
-**Nie znaleziono numeru.** Dla nieznanego numeru strona 17FEIA nie pokazuje postępu. Peek wyświetla „Oczekiwanie na przewoźnika 17FEIA” i nadal sprawdza. Jeśli dwa dni później 17FEIA wciąż nie zna numeru, a żadne inne źródło nie odpowiedziało, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i sprawdza ją raz dziennie, a po tygodniu od dodania raz w tygodniu. Porównaj numer z wiadomością o wysyłce: `FEI`, dwie litery, dziesięć cyfr, `YQ`.
+**Nie znaleziono numeru.** Dla nieznanego numeru strona 17FEIA nie pokazuje postępu. Peek wyświetla „Oczekiwanie na przewoźnika 17FEIA” i nadal sprawdza. Jeśli dwa dni później 17FEIA wciąż nie zna numeru, a żadne inne źródło nie odpowiedziało, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Porównaj numer z wiadomością o wysyłce: `FEI`, dwie litery, dziesięć cyfr, `YQ`.
 
 **Stoi na `The order has information pending customer confirmation.`** Jeśli korzystałeś z agenta wysyłkowego, sprawdź tam konto lub wiadomości. W przeciwnym razie zapytaj sprzedawcę.
 

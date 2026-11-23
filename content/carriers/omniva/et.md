@@ -14,10 +14,10 @@ Omniva nimetab seda saadetise koodiks või jälgimisnumbriks. Kood on kuni 21 m�
 
 | Kood (välja mõeldud) | Mis see on |
 | --- | --- |
-| `JJEE00000000000000000` | Omniva pakk: `JJEE` ja 17 numbrit, kokku 21 märki. |
-| `JJEEAAA00000000000` | Omniva paki teine kuju: `JJEE`, kolm tähte ja 11 numbrit. |
-| `CE000000005EE` | Kaks tähte, üheksa numbrit ja `EE`: Omniva kood rahvusvahelises postivormingus. |
-| `RR000000005CN` | Välismaalt tuleval pakil on saatjariigi posti number. See lõpeb tähtedega `CN`, seega postitati pakk Hiinas. |
+| `JJEE48291736405829173` | Omniva pakk: `JJEE` ja 17 numbrit, kokku 21 märki. |
+| `JJEEMKP48291736405` | Omniva paki teine kuju: `JJEE`, kolm tähte ja 11 numbrit. |
+| `CE482917367EE` | Kaks tähte, üheksa numbrit ja `EE`: Omniva kood rahvusvahelises postivormingus. |
+| `RR739402812CN` | Välismaalt tuleval pakil on saatjariigi posti number. See lõpeb tähtedega `CN`, seega postitati pakk Hiinas. |
 
 Kuuekohaline uksekood SMSis või e-kirjas avab pakiautomaadi kapi, aga jälgimisnumber see ei ole. Sama kehtib kuuekohalise tagastuskoodi kohta.
 
@@ -90,7 +90,7 @@ Kõik väljastpoolt ELi saabuvad pakid tuleb deklareerida olenemata väärtusest
 
 ## Omniva klienditugi
 
-Nii olid Omniva eraklienditoe kontaktid omniva.ee lehel 25. oktoobril 2026:
+Omniva eraklienditoe kontaktid omniva.ee lehel:
 
 - **Telefon:** +372 661 6616
 - **E-post:** info@omniva.ee
@@ -101,11 +101,11 @@ Nii olid Omniva eraklienditoe kontaktid omniva.ee lehel 25. oktoobril 2026:
 
 ## Omniva paki jälgimine Peekis
 
-[Peek](/) tunneb Omniva paki kohe ära `JJEE`-koodi järgi (mõlemat kuju) ning `EE`-lõpulise postikoodi järgi, mis algab tähega C, E, L või R (v.a `CR`, `CV` ja `RO`) ja mille kontrollnumber klapib, näiteks `CE000000005EE`. Toimivad ka minu.omniva.ee, mana.omniva.lv ja mano.omniva.lt jälgimislingid (`/track/` ja kood) ning omniva.ee ja omniva.lt jälgimislingid, milles on `barcode=`. Sihtnumbrit pole vaja.
+[Peek](/) tunneb Omniva paki kohe ära `JJEE`-koodi järgi (mõlemat kuju) ning `EE`-lõpulise postikoodi järgi, mis algab tähega C, E, L või R (v.a `CR`, `CV` ja `RO`) ja mille kontrollnumber klapib, näiteks `CE482917367EE`. Toimivad ka minu.omniva.ee, mana.omniva.lv ja mano.omniva.lt jälgimislingid (`/track/` ja kood) ning omniva.ee ja omniva.lt jälgimislingid, milles on `barcode=`. Sihtnumbrit pole vaja.
 
-Muu `EE`-lõpulise koodi puhul küsib Peek Omnivalt ja [Chronopostilt](carrier:chronopost), kas nad koodi tunnevad. Kui Omniva tunneb, näed teksti „Omniva has this parcel.“ Kui veel mitte, otsib Peek lisatud pakki edasi, aja jooksul harvemini, kuni kuu aega. Vale kontrollnumbriga koodi ei seo Peek ühegi vedajaga ja ka siis, kui valid Omniva käsitsi, märgib Peek, et Omniva sellist numbrit ei väljasta: kontrolli, kas number on õigesti kirjas. Teise riigi postinumbriga pakk jääb Peekis saatjariigi posti juurde. Omniva kaudu jälgib Peek seda siis, kui vajutad „Change“ (lisatud pakil „Change carrier“) ja valid Omniva või kleebid Omniva jälgimislingi: ise Peek pakki Omnivale üle ei anna.
+Muu `EE`-lõpulise koodi puhul küsib Peek Omnivalt ja [Chronopostilt](carrier:chronopost), kas nad koodi tunnevad. Kui Omniva tunneb, näed teksti „Omniva has this parcel.“ Kui veel mitte, otsib Peek lisatud pakki edasi, aja jooksul harvemini, kuni kuu aega. Vale kontrollnumbriga koodi ei seo Peek ühegi vedajaga ja ka siis, kui valid Omniva käsitsi, märgib Peek, et Omniva sellist numbrit ei väljasta: kontrolli, kas number on õigesti kirjas. Teise riigi postinumbriga pakk jääb Peekis saatjariigi posti juurde. Kui saatjariigi post märgib sihtriigiks Eesti või ei nimeta sihtriiki ja sa oled Eestis, küsib Peek sama numbriga ka Omnivalt ja jätkab jälgimist Omniva kaudu, kui Omnivas on samm, mis pole vanem saatjariigi posti viimasest sammust. Kohe saad Omniva valida, kui vajutad „Change“ (lisatud pakil „Change carrier“) või kleebid Omniva jälgimislingi.
 
-Peek näitab Omniva olekuid inglise keeles, sammude asukohti Omniva võrgus, sihtriiki, millal pakk kätte toimetati, ning pakiautomaati või postkontorit, kus pakk ootab. Aadresse, sihtnumbreid, ebaõnnestunud katse põhjust, eeldatavat tarneaega ega kaalu Peek ei näita. Peek kontrollib pakki kuni iga 10 minuti järel (kui pakk on kulleriga teel, kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Omniva enda jälgimine vastab; jälgimisteenuste kaudu iga 15 minuti järel). Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Sammud on kaardil ja muutustest võib Peek sulle teada anda. Vanal pakil võib alles olla ainult kättetoimetamise samm. Peek ei saa sinu eest Omniva ega e-poega ühendust võtta.
+Peek näitab Omniva olekuid inglise keeles, sammude asukohti Omniva võrgus, sihtriiki, millal pakk kätte toimetati, ning pakiautomaati või postkontorit, kus pakk ootab. Aadresse, sihtnumbreid, ebaõnnestunud katse põhjust, eeldatavat tarneaega ega kaalu Peek ei näita. Kui pakk on Peekis avatud või on selle kättetoimetamise päev ja teavitused on sees, kontrollib Peek pakki kuni iga 10 minuti järel; päeval, mil Omniva annab paki kullerile, alates kella 6-st Eesti aja järgi kuni iga 2 minuti järel, seni kuni Omniva enda jälgimine vastab; muidu kord tunnis. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis ning kui pakk on seitse päeva ilma uudisteta olekus „Label created“, iga 6 tunni järel. Kui olekus „Label created“, „Received by carrier“ või „In transit“ olevale pakile pole neli päeva uut sammu tulnud, märgib Peek selle viimase sammu päevaga: „No tracking update since …“, lisab märkuse „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva.“ ja lingi „Get help from Omniva“; kolme nädala pärast on märkus „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva.“ Sammud on kaardil ja teavitusi saad valida: „Every scan“, „Important steps“ või „Delivery only“. Vanal pakil võib alles olla ainult kättetoimetamise samm. Peek ei saa sinu eest Omniva ega e-poega ühendust võtta.
 
 ## Küsimused Omniva paki jälgimise kohta
 

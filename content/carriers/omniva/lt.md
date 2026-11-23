@@ -14,10 +14,10 @@ Omniva jį vadina siuntos kodu arba sekimo numeriu. Dažniausiai pasitaiko tokie
 
 | Numeris (išgalvotas) | Kas tai |
 | --- | --- |
-| `JJEE00000000000000000` | Omniva siunta: `JJEE` ir 17 skaitmenų, iš viso 21 ženklas. |
-| `JJEEAAA00000000000` | Kita Omniva numerio forma: `JJEE`, trys raidės ir 11 skaitmenų. |
-| `CE000000005EE` | Dvi raidės, devyni skaitmenys ir `EE`: Omniva numeris tarptautiniu pašto formatu. |
-| `RR000000005CN` | Siunta iš užsienio keliauja su siuntėjo šalies pašto numeriu. Šis baigiasi `CN`: siunta išsiųsta Kinijoje. |
+| `JJEE48291736405829173` | Omniva siunta: `JJEE` ir 17 skaitmenų, iš viso 21 ženklas. |
+| `JJEEMKP48291736405` | Kita Omniva numerio forma: `JJEE`, trys raidės ir 11 skaitmenų. |
+| `CE482917367EE` | Dvi raidės, devyni skaitmenys ir `EE`: Omniva numeris tarptautiniu pašto formatu. |
+| `RR739402812CN` | Siunta iš užsienio keliauja su siuntėjo šalies pašto numeriu. Šis baigiasi `CN`: siunta išsiųsta Kinijoje. |
 
 Šešiaženklis durelių kodas iš SMS žinutės ar el. laiško atidaro paštomato skyrelį, bet tai ne sekimo numeris: Omniva pati primena jų nepainioti.
 
@@ -81,7 +81,7 @@ Atkreipkite dėmesį: `Shipment delivered` po `Shipment is being returned to the
 
 ## Omniva kontaktai
 
-Taip kontaktus omniva.lt nurodė 2026 m. spalio 23 d.:
+Kontaktai, kaip juos nurodo omniva.lt:
 
 - **Privačių klientų aptarnavimo centras:** +370 700 55077. Skambučio ir sujungimo kaina priklauso nuo „Telia“ taikomo tarifo.
 - **Darbo laikas:** pirmadieniais–penktadieniais 8.00–18.00, šeštadieniais 9.00–15.00, sekmadieniais nedirba.
@@ -98,9 +98,9 @@ Numerį, kuris prasideda `JJEE` (bet kurios iš dviejų formų), [Peek](/) iška
 
 Numerį, kuris baigiasi `EE`, prasideda raide C, R, E ar L (bet ne CR, CV ar RO) ir turi teisingą kontrolinį skaitmenį, Peek pagal formą iškart priskiria Omniva. Jei raidės kitos, Peek iškart klausia Omniva ir [Chronopost](carrier:chronopost), ar jie šią siuntą žino. Jei Omniva siuntą žino, matysite „Omniva has this parcel.“, o jei dar ne – kad siunta dar nerasta: pridėtos siuntos Peek ieškos toliau, vis rečiau, iki mėnesio. Jei kontrolinis skaitmuo neteisingas, Peek tokio numerio Omniva neklausia: patikrinkite, ar gerai jį nusirašėte.
 
-Siuntą su kitos šalies pašto numeriu Peek seks per Omniva, jei pasirinksite Omniva per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuosite Omniva sekimo nuorodą. Pats Peek tokios siuntos Omniva neperduoda.
+Siuntą su kitos šalies pašto numeriu Peek seks per Omniva, jei pasirinksite Omniva per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuosite Omniva sekimo nuorodą. Jei siuntėjo šalies paštas nurodo, kad siunta keliauja į Lietuvą, arba šalies nenurodo ir jūs esate Lietuvoje, Peek tuo pačiu numeriu klausia Lietuvos pašto, ne Omniva, ir seka siuntą ten, kai Lietuvos pašte atsiranda žingsnis, ne senesnis už naujausią siuntėjo pašto žingsnį.
 
-Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Peek tikrina ne dažniau kaip kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – ne dažniau kaip kas 2 minutes, kol atsako pati Omniva (per sekimo paslaugas – kas 15 minučių); žingsnius rodo žemėlapyje ir pasikeitus būsenai gali jums pranešti. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą. Peek negali už jus susisiekti su Omniva ar parduotuve.
+Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Kol siunta atidaryta Peek arba pristatymo dieną, jei pranešimai įjungti, Peek tikrina ne dažniau kaip kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – ne dažniau kaip kas 2 minutes, kol atsako pati Omniva; kitu atveju kartą per valandą. Žingsnius Peek rodo žemėlapyje. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą, o jei siunta septynias dienas be naujienų lieka būsenos „Label created“, kas 6 valandas. Jei siuntai, kurios būsena „Label created“, „Received by carrier“ ar „In transit“, keturias dienas nėra naujo žingsnio, Peek ją pažymi paskutinio žingsnio diena: „No tracking update since …“, prideda pastabą „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva.“ ir nuorodą „Get help from Omniva“; po trijų savaičių pastaba būna „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva.“ Pranešimams galite pasirinkti „Every scan“, „Important steps“ arba „Delivery only“. Peek negali už jus susisiekti su Omniva ar parduotuve.
 
 ## Dažni klausimai apie Omniva siuntų sekimą
 

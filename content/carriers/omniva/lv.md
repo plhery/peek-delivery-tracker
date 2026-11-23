@@ -14,10 +14,10 @@ Omniva to sauc par sūtījuma kodu vai izsekošanas numuru. Pēc Omniva noteikum
 
 | Numurs (izdomāts) | Kas tas ir |
 | --- | --- |
-| `JJEE00000000000000000` | Omniva sūtījums: `JJEE` un 17 cipari, kopā 21 zīme. |
-| `JJEEAAA00000000000` | Cita Omniva numura forma: `JJEE`, trīs burti un 11 cipari. |
-| `CE000000005EE` | Divi burti, deviņi cipari un `EE`: Omniva numurs starptautiskajā pasta formātā. |
-| `RR000000005CN` | Sūtījums no ārzemēm ceļo ar sūtītāja valsts pasta numuru. Šis beidzas ar `CN`: sūtījums nosūtīts no Ķīnas. |
+| `JJEE48291736405829173` | Omniva sūtījums: `JJEE` un 17 cipari, kopā 21 zīme. |
+| `JJEEMKP48291736405` | Cita Omniva numura forma: `JJEE`, trīs burti un 11 cipari. |
+| `CE482917367EE` | Divi burti, deviņi cipari un `EE`: Omniva numurs starptautiskajā pasta formātā. |
+| `RR739402812CN` | Sūtījums no ārzemēm ceļo ar sūtītāja valsts pasta numuru. Šis beidzas ar `CN`: sūtījums nosūtīts no Ķīnas. |
 
 Sešciparu durvju kods no īsziņas vai e-pasta atver pakomāta skapīti, bet tas nav izsekošanas numurs. Numurs, kas beidzas ar `LV`, pieder [Latvijas Pastam](carrier:latvijas-pasts), nevis Omniva.
 
@@ -85,7 +85,7 @@ Ievēro: `Shipment delivered` pēc `Shipment is being returned to the sender` no
 
 ## Omniva kontakti
 
-Kā omniva.lv norādīts 2026. gada 26. oktobrī:
+Kā norādīts omniva.lv:
 
 - **Privāto klientu atbalsta centrs:** +371 27042424.
 - **Darba laiks:** pirmdien–piektdien 8.00–18.00, sestdien 9.00–15.00, svētdien slēgts.
@@ -104,7 +104,7 @@ Arī numuru, kas beidzas ar `EE`, sākas ar C, R, E vai L (bet ne CR, CV vai RO)
 
 Sūtījumu ar citas valsts pasta numuru Peek izsekos pie Omniva, ja izvēlēsies Omniva ar „Change“ (jau pievienotam sūtījumam – ar „Change carrier“) vai ielīmēsi Omniva izsekošanas saiti. Ja šāds sūtījums ceļo uz Latviju, piegādes posmu Peek pats meklē tikai pie Latvijas Pasta, ne pie Omniva.
 
-Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamērķa valsti, izsniegšanas laiku un pakomātu, kurā sūtījums gaida vai no kura tas izņemts. Pasta indeksus un neizdevušās piegādes iemeslus tas nerāda, paredzamo piegādes dienu un svaru arī ne. Peek pārbauda sūtījumu ne biežāk kā reizi 10 minūtēs, bet tajā dienā, kad tas nodots kurjeram, ne biežāk kā reizi 2 minūtēs (no plkst. 6.00 pēc vietējā laika un tikai tik ilgi, kamēr atbild pašas Omniva izsekošana; ja dati nāk no izsekošanas pakalpojumiem, ik pēc 15 minūtēm); soļus tas rāda kartē un, mainoties statusam, var tev paziņot. Ja divas dienas nav jaunumu (vai 12 stundas, kamēr sūtījums ir tikai reģistrēts vai pārvadātāja pieņemts), Peek to pārbauda reizi stundā. Peek nevar tavā vietā sazināties ar Omniva vai veikalu.
+Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamērķa valsti, izsniegšanas laiku un pakomātu, kurā sūtījums gaida vai no kura tas izņemts. Pasta indeksus un neizdevušās piegādes iemeslus tas nerāda, paredzamo piegādes dienu un svaru arī ne. Kamēr sūtījums ir atvērts Peek vai piegādes dienā, ja paziņojumi ir ieslēgti, Peek to pārbauda ne biežāk kā reizi 10 minūtēs, bet tajā dienā, kad Omniva to nodod kurjeram, no plkst. 6.00 pēc vietējā laika ne biežāk kā reizi 2 minūtēs, kamēr atbild pašas Omniva izsekošana; citādi reizi stundā. Soļus Peek rāda kartē. Ja divas dienas nav jaunumu (vai 12 stundas, kamēr sūtījums ir tikai reģistrēts vai pārvadātāja pieņemts), Peek to pārbauda reizi stundā, bet ja sūtījums septiņas dienas bez jaunumiem ir statusā „Label created“, reizi 6 stundās. Ja sūtījumam statusā „Label created“, „Received by carrier“ vai „In transit“ četras dienas nav jauna soļa, Peek to atzīmē ar pēdējā soļa dienu: „No tracking update since …“, pievieno piezīmi „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva.“ un saiti „Get help from Omniva“; pēc trim nedēļām piezīme ir „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva.“ Paziņojumiem var izvēlēties „Every scan“, „Important steps“ vai „Delivery only“. Peek nevar tavā vietā sazināties ar Omniva vai veikalu.
 
 ## Biežāk uzdotie jautājumi par Omniva sūtījumu izsekošanu
 

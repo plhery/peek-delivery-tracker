@@ -14,10 +14,10 @@ Omniva calls it the "shipment tracking code" or "shipment code (tracking number)
 
 | Code | What it is |
 | --- | --- |
-| `JJEE12345678901234567` | An Omniva parcel: `JJEE` and 17 digits, 21 characters in all. |
-| `JJEEABC12345678901` | Another Omniva parcel code: `JJEE`, three letters, 11 digits. |
-| `CE000000005EE` | Two letters, nine digits, `EE`: an item handed to Omniva, in the international postal format. Parcels delivered to parcel machines in Latvia and Lithuania carry codes ending `EE` too. |
-| `RR000000005CN` | A parcel from abroad keeps the sender's number; this one ends `CN`, posted in China. |
+| `JJEE48291736405829173` | An Omniva parcel: `JJEE` and 17 digits, 21 characters in all. |
+| `JJEEMKP48291736405` | Another Omniva parcel code: `JJEE`, three letters, 11 digits. |
+| `CE482917367EE` | Two letters, nine digits, `EE`: an item handed to Omniva, in the international postal format. Parcels delivered to parcel machines in Latvia and Lithuania carry codes ending `EE` too. |
+| `RR739402812CN` | A parcel from abroad keeps the sender's number; this one ends `CN`, posted in China. |
 
 The six-digit door code in the delivery SMS opens the parcel machine and is not a tracking number; neither is the six-digit return code.
 
@@ -72,7 +72,7 @@ Two catch people out: `Delivery attempt made` means the attempt failed, and `Shi
 
 ## Omniva customer service and contact number
 
-As listed on Omniva's private customer contact pages on 12 October 2026:
+Omniva's private customer contact pages list these, in each country's local time:
 
 | Country | Phone | Email | Hours |
 | --- | --- | --- | --- |
@@ -86,9 +86,9 @@ Each site also has forms for a delivery status request, a damaged or lost parcel
 
 [Peek](/) names a `JJEE` code of either shape above as Omniva's straight away. Links from minu.omniva.ee, mana.omniva.lv and mano.omniva.lt (`/track/` and the code), and omniva.ee or omniva.lt tracking links with `barcode=`, work for any code. No postcode needed.
 
-A postal-format number ending `EE` that starts with C, R, E or L (but not CR, CV or RO) and has a valid check digit is Omniva's by its shape, so Peek names Omniva straight away. For one with other letters, Peek asks Omniva and Chronopost together and files the parcel under the one that knows the code. If neither knows it yet, you see "Not found at … yet. Peek will keep checking after you add it.", and Peek keeps asking, less often as the days pass. A code Peek names as Omniva's that Omniva doesn't list yet shows "Waiting for Omniva"; if Omniva still doesn't know it two days later and nothing else has answered for it, Peek asks you to check the number, choose another carrier or delete the parcel, and Peek then checks it daily, and weekly once a week has passed since you added it. A number with a wrong check digit names no carrier, and Omniva refuses it even when picked by hand: check it for a typo. A foreign postal number tracks at Omniva after "Change" or from an Omniva link. When the sending post says it is going to Estonia, or names no country and you're in Estonia, Peek also asks Omniva and, once Omniva shows new steps, follows the parcel there; for Latvia or Lithuania it asks Latvijas Pasts or Lietuvos paštas instead. An `EE` postal number Omniva sends abroad can be followed to the destination's post the same way.
+A postal-format number ending `EE` that starts with C, R, E or L (but not CR, CV or RO) and has a valid check digit is Omniva's by its shape, so Peek names Omniva straight away. For one with other letters, Peek asks Omniva and Chronopost together and files the parcel under the one that knows the code. If neither knows it yet, you see "Not found at … yet. Peek will keep checking after you add it.", and Peek keeps asking, less often as the days pass. A code Peek names as Omniva's that Omniva doesn't list yet shows "Waiting for Omniva"; if Omniva still doesn't know it two days later and nothing else has answered for it, Peek asks you to check the number, choose another carrier or delete the parcel, and Peek then checks it daily, and weekly once a week has passed since you added it. A number with a wrong check digit names no carrier, and Omniva refuses it even when picked by hand: check it for a typo. A foreign postal number tracks at Omniva after "Change" or from an Omniva link. When the sending post says it is going to Estonia, or names no country and you're in Estonia, Peek also asks Omniva and follows the parcel there once Omniva shows a scan no older than the sending post's newest; for Latvia or Lithuania it asks Latvijas Pasts or Lietuvos paštas instead. An `EE` postal number Omniva sends abroad can be followed to the destination's post the same way.
 
-It shows Omniva's English statuses, the Omniva site of each scan, the destination country, the delivery time and the parcel machine or post office it waits at. It drops addresses, postcodes and failure reasons, and shows no expected delivery or weight. Peek checks up to every 10 minutes (every 2 from 6 a.m. local time on the day Omniva scans the parcel out for delivery, while Omniva's own tracker answers; through tracking services, every 15 minutes), puts each scan on a map and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Old parcels may keep only the delivery.
+It shows Omniva's English statuses, the Omniva site of each scan on a map, the destination country, the delivery time and the parcel machine or post office it waits at. It drops addresses, postcodes and failure reasons, and shows no expected delivery or weight. While the parcel is open in Peek, or on its delivery day with notifications on, Peek asks Omniva up to every 10 minutes, and every 2 minutes from 6 a.m. Estonian time on the day Omniva scans the parcel out for delivery, while Omniva's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Omniva." and a "Get help from Omniva" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Omniva." Peek can notify you of "Every scan", "Important steps" or "Delivery only". Old parcels may keep only the delivery.
 
 ## Questions about Omniva tracking
 

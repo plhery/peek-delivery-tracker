@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Sameday ist ein rumänischer Paketdienst, der auch in Bulgarien tätig ist und ein eigenes Netz aus easybox-Paketstationen betreibt. Verfolge deine Sendung mit der AWB-Nummer aus der SAMEDAY App oder den SMS und E-Mails von Sameday unter „Check AWB“ auf sameday.ro oder sameday.bg – oder direkt im Suchfeld oben.
+Sameday ist ein rumänischer Paketdienst, der auch in Bulgarien tätig ist und ein eigenes Netz aus easybox-Paketstationen betreibt. Verfolge deine Sendung mit der AWB-Nummer aus der SAMEDAY App oder den SMS und E-Mails von Sameday auf der Trackingseite von sameday.ro oder unter „Check AWB“ auf sameday.bg – oder direkt im Suchfeld oben.
 
 ## Sameday AWB: deine Sendungsnummer
 
@@ -32,12 +32,10 @@ Die Trackingseiten von Sameday öffnen auf Rumänisch, Ungarisch oder Bulgarisch
 | `The parcel has arrived at the local agency and will be prepared for delivery.` | Im zuständigen Auslieferungsdepot angekommen. |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY App, email or SMS.` | In Zustellung – an deine Adresse oder an eine easybox. |
 | `The parcel has arrived at the delivery point. Pickup details are available in the SAMEDAY App, email or SMS.` | Abholbereit in einer easybox oder einem SAMEDAY point. |
-| `We could not deliver the parcel. We will be back with details or another attempt.` | Zustellversuch fehlgeschlagen. |
 | `The parcel was redirected. As soon as it is in the courier's possession, it will be processed as requested.` | Umleitung an eine Abholstelle beauftragt. |
 | `The parcel has been successfully delivered.` | Zugestellt – auch nach Entnahme aus einer easybox. |
-| `The parcel will be returned as requested. For more details, please contact the sender.` | Auf dem Rückweg zum Absender. |
 
-`The courier will deliver the parcel soon` erscheint auch dann, wenn der Fahrer eine easybox anfährt, nicht nur bei Haustürzustellung. PIN oder QR-Code stehen nie auf der Trackingseite, sondern nur in der App, E-Mail oder SMS. Eine Umleitungszeile kann schon auftauchen, bevor Sameday das Paket übernommen hat. Und nach einer Rücksendezeile bedeutet `successfully delivered`, dass das Paket wieder beim Absender angekommen ist.
+`The courier will deliver the parcel soon` erscheint auch dann, wenn der Fahrer eine easybox anfährt, nicht nur bei Haustürzustellung. PIN oder QR-Code stehen nie auf der Trackingseite, sondern nur in der App, E-Mail oder SMS. Eine Umleitungszeile kann schon auftauchen, bevor Sameday das Paket übernommen hat. Und nach einer Rücksendezeile bedeutet `successfully delivered`, dass das Paket wieder beim Absender angekommen ist. Auch ein gescheiterter Zustellversuch und eine Rücksendung haben eigene Zeilen; Peek ordnet sie als „Zustellversuch“ und „Zurück an Absender“ ein.
 
 ## Easybox, SAMEDAY points und verpasste Zustellungen
 
@@ -67,13 +65,13 @@ Kontakte von Sameday:
 - **Bulgarien:** 0700 16 226, Montag bis Freitag 9:00–17:00 Uhr (bulgarische Zeit) zum Tarif deines Anbieters für 0700-Nummern, plus Kontaktformular.
 - **Ungarn** (Betrieb eingestellt): nur Kontaktformular; das Banner verweist eMAG-Kunden an eMAG.
 
-> Sameday betont, niemals Zahlungen per SMS oder über soziale Netzwerke anzufordern. Du zahlst nur vorab im Shop, in der SAMEDAY App oder bei Zustellung beim Fahrer bzw. an der easybox; echte Nachrichten stammen nur von sameday.ro oder sdy.ro.
+> Sameday betont, niemals Zahlungen per SMS oder über soziale Netzwerke anzufordern. Du zahlst nur vorab im Shop, in der SAMEDAY App oder bei Zustellung beim Fahrer bzw. an der easybox.
 
 ## Sameday-Pakete mit Peek verfolgen
 
 [Peek](/) erkennt das AWB-Muster und fragt erst das rumänische, dann das bulgarische Sameday-Netz ab: Du siehst „Sameday hat dieses Paket.“ oder „noch nicht gefunden“. Einige 17-stellige AWBs werden zusätzlich bei Colis Privé geprüft; manche 16-stellige erst bei Royal Mail, falls Sameday sie nicht bestätigt. Eine Paketnummer wird Sameday angeboten, wenn ihre AWB 9 Ziffern umfasst; sonst wähle über „Ändern“ Sameday aus. In beiden Fällen antwortet Sameday mit seiner AWB, angezeigt unter „Sameday führt die Sendung unter“. Tracking-Links von sameday.ro oder sameday.bg mit der AWB funktionieren ebenfalls.
 
-Peek zeigt Status, Verlauf mit Kreis/Bezirk und Land jedes Scans auf einer Karte sowie die Zustellzeit in Samedays englischem Wortlaut. Voraussichtlicher Liefertag sowie Name von easybox oder SAMEDAY point werden nicht angezeigt. Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten – und ab 6 Uhr (rumänische/bulgarische Zeit) an dem Tag, an dem Sameday die Sendung als in Zustellung scannt, alle 2 Minuten, solange Samedays eigenes Tracking antwortet. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Sameday nach.“ sowie „Hol dir Hilfe bei Sameday“. Peek benachrichtigt dich mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Die easybox-Lagerzeit verlängern oder dir eine PIN schicken kann Peek nicht.
+Peek zeigt Status, Verlauf mit Kreis/Bezirk und Land jedes Scans auf einer Karte sowie die Zustellzeit in Samedays englischem Wortlaut. Voraussichtlicher Liefertag sowie Name von easybox oder SAMEDAY point werden nicht angezeigt. Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten – und ab 6 Uhr (rumänische/bulgarische Zeit) an dem Tag, an dem Sameday die Sendung als in Zustellung scannt, alle 2 Minuten, solange Samedays eigenes Tracking antwortet. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, auch wenn du es geöffnet hast, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Sameday nach.“ sowie „Hol dir Hilfe bei Sameday“. Peek benachrichtigt dich mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Die easybox-Lagerzeit verlängern oder dir eine PIN schicken kann Peek nicht.
 
 ## Fragen zur Sameday Sendungsverfolgung
 
@@ -94,8 +92,9 @@ Ja, sofern bei der Bestellung deine Telefonnummer verwendet wurde: Die SAMEDAY A
 In Bulgarien gehen schriftliche Reklamationen an claims@sameday.bg. In Rumänien nutzt Sameday stattdessen das Kontaktformular auf sameday.ro und SAMY.
 
 :::sources
-- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – Telefon, Zeiten, SAMY, Formular, AWB 5–50 Zeichen, offizielle Domains
-- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – Check AWB, App-AWBs, Stornierung, Temu und Shein
+- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – Telefon, Zeiten, SAMY, Formular, AWB 5–50 Zeichen
+- [Sameday: SAMY](https://sameday.ro/samy/?lang=en) – virtueller Assistent, rund um die Uhr
+- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – App-AWBs, Stornierung, Temu und Shein
 - [Sameday: Livrare în easybox](https://sameday.ro/intrebari-frecvente/livrare-in-easybox/) – easybox-Fristen, Verlängerung, 12-Stunden-Link, PIN-Probleme
 - [Sameday: FAQ Sameday App](https://sameday.ro/intrebari-frecvente/sameday-app/) – Zustelloptionen, Verschieben, 4.700 easybox-Stationen
 - [Sameday: SAMEDAY point](https://sameday.ro/intrebari-frecvente/sameday-point/) – 36 Arbeitsstunden, Abholung

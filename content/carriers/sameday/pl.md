@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Sameday to rumuńska firma kurierska działająca również w Bułgarii, z własną siecią automatów paczkowych easybox. Paczkę sprawdzisz po numerze AWB z SMS-a, e-maila lub aplikacji SAMEDAY App w sekcji „Check AWB” na sameday.ro albo sameday.bg, a także wklejając go w pole powyżej.
+Sameday to rumuńska firma kurierska działająca również w Bułgarii, z własną siecią automatów paczkowych easybox. Paczkę sprawdzisz po numerze AWB z SMS-a, e-maila lub aplikacji SAMEDAY App na stronie śledzenia sameday.ro albo w sekcji „Check AWB” na sameday.bg, a także wklejając go w pole powyżej.
 
 ## Numer AWB Sameday: jak wygląda
 
@@ -32,12 +32,10 @@ Strony śledzenia Sameday otwierają się po rumuńsku, węgiersku lub bułgarsk
 | `The parcel has arrived at the local agency and will be prepared for delivery.` | W lokalnym oddziale obsługującym twój rejon. |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY App, email or SMS.` | W doręczeniu — pod adres lub do automatu easybox. |
 | `The parcel has arrived at the delivery point. Pickup details are available in the SAMEDAY App, email or SMS.` | Czeka na odbiór w easybox lub SAMEDAY point. |
-| `We could not deliver the parcel. We will be back with details or another attempt.` | Nieudana próba doręczenia. |
 | `The parcel was redirected. As soon as it is in the courier's possession, it will be processed as requested.` | Zlecono przekierowanie do punktu odbioru. |
 | `The parcel has been successfully delivered.` | Doręczona, także po wyjęciu z easybox. |
-| `The parcel will be returned as requested. For more details, please contact the sender.` | Wraca do nadawcy. |
 
-`The courier will deliver the parcel soon` pojawia się również wtedy, gdy kurier wiezie paczkę do automatu easybox, a nie pod drzwi. PIN ani kod QR nigdy nie widnieją na stronie śledzenia — przychodzą tylko w aplikacji, e-mailu lub SMS-ie. Wpis o przekierowaniu może pojawić się, zanim Sameday fizycznie odbierze paczkę, a po wpisie o zwrocie `successfully delivered` oznacza doręczenie z powrotem do nadawcy.
+`The courier will deliver the parcel soon` pojawia się również wtedy, gdy kurier wiezie paczkę do automatu easybox, a nie pod drzwi. PIN ani kod QR nigdy nie widnieją na stronie śledzenia — przychodzą tylko w aplikacji, e-mailu lub SMS-ie. Wpis o przekierowaniu może pojawić się, zanim Sameday fizycznie odbierze paczkę, a po wpisie o zwrocie `successfully delivered` oznacza doręczenie z powrotem do nadawcy. Nieudane doręczenie i zwrot do nadawcy też mają własne wpisy, które Peek oznacza jako „Próba doręczenia” i „Zwrócona nadawcy”.
 
 ## Easybox, SAMEDAY point i nieudane doręczenia
 
@@ -67,13 +65,13 @@ Kanały kontaktu Sameday:
 - **Bułgaria:** 0700 16 226, poniedziałek–piątek 9:00–17:00 (czas bułgarski), opłata według taryfy operatora dla numerów 0700, plus formularz kontaktowy.
 - **Węgry** (działalność zakończona): tylko formularz kontaktowy; baner odsyła klientów eMAG do eMAG.
 
-> Sameday podkreśla, że nigdy nie żąda płatności SMS-em ani w mediach społecznościowych. Płacisz wyłącznie z góry w sklepie, w aplikacji SAMEDAY App albo kurierowi / w easybox przy odbiorze, a autentyczne są tylko wiadomości z domen sameday.ro lub sdy.ro.
+> Sameday podkreśla, że nigdy nie żąda płatności SMS-em ani w mediach społecznościowych. Płacisz wyłącznie z góry w sklepie, w aplikacji SAMEDAY App albo kurierowi / w easybox przy odbiorze.
 
 ## Śledzenie paczki Sameday w Peek
 
 [Peek](/) rozpoznaje format AWB Sameday i sprawdza najpierw sieć rumuńską, potem bułgarską: zobaczysz „Sameday ma tę przesyłkę.” albo „jeszcze nie znaleziono”. Część 17-znakowych AWB sprawdzana jest równolegle w Colis Privé, a część 16-znakowych trafia do Royal Mail tylko wtedy, gdy Sameday ich nie potwierdzi. Numer paczki jest sprawdzany w Sameday, gdy jego AWB ma 9 cyfr; w przeciwnym razie kliknij „Zmień” i wybierz Sameday. W obu przypadkach Sameday zwraca AWB, widoczny jako „Sameday śledzi przesyłkę pod numerem”. Działają też linki z sameday.ro i sameday.bg zawierające AWB.
 
-Peek pokazuje status, historię z okręgiem i krajem każdego skanu na mapie oraz godzinę doręczenia w angielskich opisach Sameday. Brak przewidywanej daty doręczenia oraz nazwy automatu easybox lub punktu odbioru. Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu rumuńskiego/bułgarskiego) w dniu, gdy Sameday zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie Sameday. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Sameday.” oraz link „Poproś przewoźnika Sameday o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może przedłużyć przechowywania w easybox ani wysłać PIN-u.
+Peek pokazuje status, historię z okręgiem i krajem każdego skanu na mapie oraz godzinę doręczenia w angielskich opisach Sameday. Brak przewidywanej daty doręczenia oraz nazwy automatu easybox lub punktu odbioru. Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 (czasu rumuńskiego/bułgarskiego) w dniu, gdy Sameday zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie Sameday. W pozostałych przypadkach sprawdza co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, nawet gdy masz ją otwartą, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Sameday.” oraz link „Poproś przewoźnika Sameday o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może przedłużyć przechowywania w easybox ani wysłać PIN-u.
 
 ## Pytania o śledzenie Sameday
 
@@ -94,8 +92,9 @@ Tak, jeśli zamówienie używało twojego numeru telefonu: SAMEDAY App wyświetl
 W Bułgarii pisemne reklamacje przyjmuje claims@sameday.bg. W Rumunii Sameday korzysta z formularza na sameday.ro i asystenta SAMY.
 
 :::sources
-- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – telefon, godziny, SAMY, formularz, AWB 5–50 znaków, oficjalne domeny
-- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – Check AWB, AWB w aplikacji, anulowanie, Temu i Shein
+- [Sameday: Contact](https://sameday.ro/contact/?lang=en) – telefon, godziny, SAMY, formularz, AWB 5–50 znaków
+- [Sameday: SAMY](https://sameday.ro/samy/?lang=en) – wirtualny asystent, całą dobę
+- [Sameday: Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – AWB w aplikacji, anulowanie, Temu i Shein
 - [Sameday: Livrare în easybox](https://sameday.ro/intrebari-frecvente/livrare-in-easybox/) – czas w easybox, przedłużenie, link 12 godzin, problemy z PIN
 - [Sameday: FAQ Sameday App](https://sameday.ro/intrebari-frecvente/sameday-app/) – opcje doręczenia, przełożenie, 4700 easybox
 - [Sameday: SAMEDAY point](https://sameday.ro/intrebari-frecvente/sameday-point/) – 36 godzin roboczych, odbiór

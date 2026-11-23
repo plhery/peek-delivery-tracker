@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Sameday est un transporteur roumain, également présent en Bulgarie, qui exploite son propre réseau de consignes automatiques easybox. Suis ton colis avec son numéro AWB — indiqué dans le SMS, l’e-mail et l’application SAMEDAY App — via « Check AWB » sur sameday.ro ou sameday.bg, ou en le collant dans le champ ci-dessus.
+Sameday est un transporteur roumain, également présent en Bulgarie, qui exploite son propre réseau de consignes automatiques easybox. Suis ton colis avec son numéro AWB — indiqué dans le SMS, l’e-mail et l’application SAMEDAY App — sur la page de suivi de sameday.ro ou via « Check AWB » sur sameday.bg, ou en le collant dans le champ ci-dessus.
 
 ## Numéro AWB Sameday : à quoi il ressemble
 
@@ -32,12 +32,10 @@ Les suivis Sameday s’ouvrent en roumain, hongrois ou bulgare avec un sélecteu
 | `The parcel has arrived at the local agency and will be prepared for delivery.` | Arrivé à l’agence locale qui couvre ton secteur. |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY App, email or SMS.` | En livraison, vers ton domicile ou vers une consigne easybox. |
 | `The parcel has arrived at the delivery point. Pickup details are available in the SAMEDAY App, email or SMS.` | Prêt à être retiré en easybox ou en SAMEDAY point. |
-| `We could not deliver the parcel. We will be back with details or another attempt.` | Tentative de livraison manquée. |
 | `The parcel was redirected. As soon as it is in the courier's possession, it will be processed as requested.` | Une redirection vers un point de retrait a été demandée. |
 | `The parcel has been successfully delivered.` | Livré, y compris après retrait en easybox. |
-| `The parcel will be returned as requested. For more details, please contact the sender.` | En retour vers l’expéditeur. |
 
-`The courier will deliver the parcel soon` apparaît aussi lorsque le livreur se rend à une consigne easybox, pas uniquement pour une livraison à domicile. Le code PIN ou QR de retrait n’est jamais affiché sur la page de suivi : il arrive uniquement dans l’application, par e-mail ou par SMS. Une ligne de redirection peut apparaître avant que Sameday n’ait le colis. Enfin, après une ligne de retour, `successfully delivered` signifie que le colis est revenu chez l’expéditeur.
+`The courier will deliver the parcel soon` apparaît aussi lorsque le livreur se rend à une consigne easybox, pas uniquement pour une livraison à domicile. Le code PIN ou QR de retrait n’est jamais affiché sur la page de suivi : il arrive uniquement dans l’application, par e-mail ou par SMS. Une ligne de redirection peut apparaître avant que Sameday n’ait le colis. Enfin, après une ligne de retour, `successfully delivered` signifie que le colis est revenu chez l’expéditeur. Un échec de livraison et un retour à l’expéditeur ont aussi leurs propres lignes, que Peek range sous « Tentative de livraison » et « Retourné à l’expéditeur ».
 
 ## Consignes easybox, SAMEDAY points et livraisons manquées
 
@@ -67,13 +65,13 @@ Canaux de Sameday :
 - **Bulgarie :** 0700 16 226, du lundi au vendredi de 9 h à 17 h (heure bulgare), au tarif de ton forfait pour les numéros 0700, ainsi qu’un formulaire de contact.
 - **Hongrie** (activité arrêtée) : formulaire de contact uniquement ; la bannière renvoie les clients eMAG vers eMAG.
 
-> Sameday indique qu’il ne demande jamais de paiement par SMS ni sur les réseaux sociaux. Tu paies uniquement à la boutique à l’avance, dans la SAMEDAY App, ou au livreur / à la consigne easybox à la livraison, et seuls les messages issus de sameday.ro ou sdy.ro sont authentiques.
+> Sameday indique qu’il ne demande jamais de paiement par SMS ni sur les réseaux sociaux. Tu paies uniquement à la boutique à l’avance, dans la SAMEDAY App, ou au livreur / à la consigne easybox à la livraison.
 
 ## Suivre un colis Sameday avec Peek
 
 [Peek](/) reconnaît la forme des AWB Sameday et interroge d’abord le réseau roumain puis le réseau bulgare : il affiche « Sameday a ce colis. » ou « pas encore trouvé ». Certains AWB à 17 caractères sont également demandés à Colis Privé ; certains AWB à 16 caractères ne sont essayés chez Royal Mail que si Sameday ne les confirme pas. Un numéro de colis est proposé à Sameday lorsque son AWB comporte 9 chiffres ; sinon appuie sur « Changer » et choisis Sameday. Dans les deux cas, Sameday renvoie son numéro AWB, affiché sous « Sameday le suit sous le numéro ». Un lien de suivi sameday.ro ou sameday.bg contenant l’AWB fonctionne aussi.
 
-Peek affiche le statut, l’historique avec le comté et le pays de chaque scan sur une carte et l’heure de livraison, dans les libellés anglais de Sameday. Il n’affiche ni date de livraison estimée ni nom de consigne easybox ou de point relais. Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes à partir de 6 h (heure roumaine/bulgare) le jour où Sameday scanne le colis en livraison, tant que le suivi propre de Sameday répond. Après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures après sept jours au statut « Étiquette créée ». Si un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Sameday. » et le lien « Demande de l’aide à Sameday ». Peek peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni prolonger la garde en easybox ni te renvoyer de code PIN.
+Peek affiche le statut, l’historique avec le comté et le pays de chaque scan sur une carte et l’heure de livraison, dans les libellés anglais de Sameday. Il n’affiche ni date de livraison estimée ni nom de consigne easybox ou de point relais. Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes à partir de 6 h (heure roumaine/bulgare) le jour où Sameday scanne le colis en livraison, tant que le suivi propre de Sameday répond. Sinon, il vérifie toutes les heures. Après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures même si tu le gardes ouvert, puis toutes les 6 heures après sept jours au statut « Étiquette créée ». Si un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Sameday. » et le lien « Demande de l’aide à Sameday ». Peek peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni prolonger la garde en easybox ni te renvoyer de code PIN.
 
 ## Questions sur le suivi Sameday
 
@@ -94,8 +92,9 @@ Oui si la commande utilise ton numéro de téléphone : la SAMEDAY App liste les
 En Bulgarie, les réclamations écrites s’envoient à claims@sameday.bg. En Roumanie, Sameday utilise le formulaire sur sameday.ro et son assistant SAMY.
 
 :::sources
-- [Sameday : Contact](https://sameday.ro/contact/?lang=en) – téléphone, horaires, SAMY, formulaire, AWB de 5 à 50 caractères, domaines officiels
-- [Sameday : Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – Check AWB, AWB dans l’app, annulation, Temu et Shein
+- [Sameday : Contact](https://sameday.ro/contact/?lang=en) – téléphone, horaires, SAMY, formulaire, AWB de 5 à 50 caractères
+- [Sameday : SAMY](https://sameday.ro/samy/?lang=en) – assistant virtuel, 24 h/24
+- [Sameday : Intrebari Frecvente](https://sameday.ro/intrebari-frecvente/) – AWB dans l’app, annulation, Temu et Shein
 - [Sameday : Livrare în easybox](https://sameday.ro/intrebari-frecvente/livrare-in-easybox/) – délais easybox, prolongation, lien 12 heures, problèmes de PIN
 - [Sameday : FAQ Sameday App](https://sameday.ro/intrebari-frecvente/sameday-app/) – options de livraison, report, 4 700 easybox
 - [Sameday : SAMEDAY point](https://sameday.ro/intrebari-frecvente/sameday-point/) – 36 heures ouvrées, retrait

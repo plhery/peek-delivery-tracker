@@ -67,7 +67,7 @@ Für Economy-Sendungen sowie Luft- und Seepakete bis 4,5 kg gilt laut Jifan ein 
 
 Jifans Vertragspartner sind die versendenden Unternehmen in Festlandchina, nicht die Empfänger: Wende dich bei Verspätung, Verlust, Beschädigung oder Rücksendung zuerst an den Verkäufer oder Marktplatz.
 
-**`查询不到` (nicht auffindbar).** Prüfe die Nummer auf Tippfehler, gib sie in Großbuchstaben ein und frag beim Händler nach, falls sie unbekannt bleibt. Peek zeigt „Warten auf Jifan“ und fragt weiter ab. Kennt Jifan die Nummer auch nach zwei Tagen noch nicht und hat kein anderer Dienst geantwortet, meldet Peek: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ Danach prüft Peek täglich und eine Woche nach dem Hinzufügen wöchentlich.
+**`查询不到` (nicht auffindbar).** Prüfe die Nummer auf Tippfehler, gib sie in Großbuchstaben ein und frag beim Händler nach, falls sie unbekannt bleibt. Peek zeigt „Warten auf Jifan“ und fragt weiter ab. Kennt Jifan die Nummer auch nach zwei Tagen noch nicht und hat kein anderer Dienst geantwortet, meldet Peek: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
 
 **Nur `Order information received`.** Jifan hat erst die elektronischen Daten, noch nicht das Paket. Tut sich mehrere Tage nichts, frag den Verkäufer, ob die Ware übergeben wurde.
 
@@ -97,7 +97,7 @@ Peek liest Status, alle englischen Verlaufszeilen und das Zielland direkt aus Ji
 
 Peeks Status richtet sich nach dem neuesten zugeordneten Scan und greift nur dann auf den Zusammenfassungsstatus (`运输途中`) zurück, wenn keine Zeile eine Stufe ergibt. Da Jifans Tracker weder Lieferdatum noch Gewicht, Tarifnamen, Zustellpartner oder Zweitnummer liefert, begleitet Peek die `JFGJ…CN`-Nummer bis zum Schluss direkt bei Jifan.
 
-Solange Jifans Tracker antwortet, prüft Peek bis zu alle 10 Minuten, wenn das Paket geöffnet ist oder am erwarteten Liefertag Mitteilungen aktiv sind. Ab 6 Uhr auf der Uhr des Paketdienstes (Pekinger Zeit) an dem Tag, an dem Jifan die Zustelltour meldet, sind bei geöffnetem Paket oder aktiven Mitteilungen Prüfungen bis zu alle 2 Minuten möglich. Geschlossen und ohne Mitteilungen sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich; antwortet nur ein Tracking-Dienst, prüft Peek stündlich, alle 3 Stunden sobald der letzte Scan einen Tag alt ist und bis zu alle 15 Minuten am Zustelltag, aber nur bei geöffnetem Paket oder aktiven Mitteilungen. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Jifan oder den Händler kontaktieren kann Peek nicht.
+Solange Jifans Tracker antwortet, prüft Peek bis zu alle 10 Minuten, wenn das Paket geöffnet ist oder am erwarteten Liefertag Mitteilungen aktiv sind. Geschlossen und ohne Mitteilungen sowie nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich; antwortet nur ein Tracking-Dienst, prüft Peek stündlich, alle 3 Stunden sobald der letzte Scan einen Tag alt ist und bis zu alle 15 Minuten am Zustelltag, aber nur bei geöffnetem Paket oder aktiven Mitteilungen. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Jifan oder den Händler kontaktieren kann Peek nicht.
 
 ## Häufige Fragen zur Jifan-Sendungsverfolgung
 

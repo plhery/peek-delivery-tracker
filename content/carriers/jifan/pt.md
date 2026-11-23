@@ -67,7 +67,7 @@ Nas encomendas económicas e nos volumes pequenos até 4,5 kg por ar ou mar, a J
 
 Os clientes da Jifan são as empresas expedidoras na China continental, não os destinatários: em caso de atraso, extravio, dano ou devolução, fala primeiro com o vendedor ou plataforma de compra.
 
-**`查询不到` (não encontrado).** Confirma se há algum erro de escrita, digita o número em maiúsculas sem espaços e pergunta ao vendedor se continuar sem aparecer. O Peek mostra «À espera de Jifan» e continua a verificar. Se dois dias depois a Jifan ainda não conhecer o número e nenhum outro serviço tiver respondido, o Peek apresenta: «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» A partir daí o Peek verifica diariamente e, passada uma semana desde que a adicionaste, semanalmente.
+**`查询不到` (não encontrado).** Confirma se há algum erro de escrita, digita o número em maiúsculas sem espaços e pergunta ao vendedor se continuar sem aparecer. O Peek mostra «À espera de Jifan» e continua a verificar. Se dois dias depois a Jifan ainda não conhecer o número e nenhum outro serviço tiver respondido, o Peek apresenta: «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.»
 
 **Apenas `Order information received`.** A Jifan recebeu os dados eletrónicos, ainda não o pacote físico. Se nada mudar durante vários dias, pergunta ao vendedor se entregou a encomenda.
 
@@ -97,7 +97,7 @@ O Peek lê no localizador da Jifan o estado, todas as linhas no inglês original
 
 O estado do Peek segue a leitura mais recente que compreende e só recorre ao estado de resumo (`运输途中`) quando nenhuma linha define etapa. Como o localizador da Jifan não mostra data prevista de entrega, peso, nome do serviço, empresa final nem segundo código, o Peek continua a acompanhar o número `JFGJ…CN` na Jifan até ao fim.
 
-Enquanto o localizador da Jifan responder, o Peek verifica novidades até a cada 10 minutos com a encomenda aberta ou com alertas ativos se a entrega for esperada hoje. A partir das 6:00 no relógio da transportadora (hora de Pequim) no dia em que a Jifan indica a saída para distribuição, as verificações podem passar a cada 2 minutos com a encomenda no ecrã ou alertas ativos. Fora do ecrã e sem alertas, bem como após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; quando apenas um serviço de seguimento responde, verifica de hora a hora, a cada 3 horas quando a última leitura tem um dia e até a cada 15 minutos no dia da distribuição, só com a encomenda aberta ou alertas ativos. Podes receber alertas de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Jifan nem o vendedor por ti.
+Enquanto o localizador da Jifan responder, o Peek verifica novidades até a cada 10 minutos com a encomenda aberta ou com alertas ativos se a entrega for esperada hoje. Fora do ecrã e sem alertas, bem como após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; quando apenas um serviço de seguimento responde, verifica de hora a hora, a cada 3 horas quando a última leitura tem um dia e até a cada 15 minutos no dia da distribuição, só com a encomenda aberta ou alertas ativos. Podes receber alertas de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Jifan nem o vendedor por ti.
 
 ## Perguntas frequentes sobre o seguimento da Jifan
 

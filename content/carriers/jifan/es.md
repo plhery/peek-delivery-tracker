@@ -67,7 +67,7 @@ En su línea económica y en los paquetes pequeños de hasta 4,5 kg por aire o m
 
 Los clientes de Jifan son las empresas remitentes en China continental, no quien compra: ante retrasos, pérdidas, daños o devoluciones, acude primero al vendedor o a la plataforma donde hiciste el pedido.
 
-**`查询不到` (no se encuentra).** Comprueba que no haya erratas, escríbelo en mayúsculas y pregunta al vendedor si sigue fallando. Peek muestra «Esperando a Jifan» y continúa consultando. Si pasados dos días Jifan sigue sin reconocerlo y ningún otro servicio ha respondido, Peek avisa: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» A partir de ahí Peek lo comprueba a diario, y una vez por semana cuando se cumple una semana desde que lo añadiste.
+**`查询不到` (no se encuentra).** Comprueba que no haya erratas, escríbelo en mayúsculas y pregunta al vendedor si sigue fallando. Peek muestra «Esperando a Jifan» y continúa consultando. Si pasados dos días Jifan sigue sin reconocerlo y ningún otro servicio ha respondido, Peek avisa: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
 
 **Solo `Order information received`.** Jifan recibió los datos del envío, todavía no el paquete físico. Si pasan varios días sin novedades, consulta al vendedor si llegó a entregarlo.
 
@@ -97,7 +97,7 @@ Peek lee directamente del rastreador de Jifan el estado, cada línea en el ingl�
 
 El estado de Peek sigue el escaneo más reciente que reconoce y solo recurre al resumen (`运输途中`) si ninguna línea fija etapa. Como el rastreador de Jifan no facilita fecha prevista, peso, nombre de tarifa, empresa de reparto ni segundo número, Peek mantiene el seguimiento del código `JFGJ…CN` en Jifan hasta la entrega.
 
-Mientras responda el rastreador de Jifan, Peek comprueba cambios hasta cada 10 minutos con el paquete en pantalla o con alertas activas si la entrega se espera hoy. Desde las 6:00 del reloj del transportista (hora de Pekín) el día en que Jifan anuncia el reparto, las comprobaciones pueden bajar a cada 2 minutos con el paquete abierto o alertas activas. Fuera de pantalla y sin alertas, así como tras dos días sin novedades (12 horas en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora; cuando solo responde un servicio de seguimiento, revisa cada hora, cada 3 horas si el último escaneo tiene más de un día y hasta cada 15 minutos el día de reparto, solo con el paquete abierto o con alertas activas. Avisos configurables: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con Jifan ni con el vendedor por ti.
+Mientras responda el rastreador de Jifan, Peek comprueba cambios hasta cada 10 minutos con el paquete en pantalla o con alertas activas si la entrega se espera hoy. Fuera de pantalla y sin alertas, así como tras dos días sin novedades (12 horas en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora; cuando solo responde un servicio de seguimiento, revisa cada hora, cada 3 horas si el último escaneo tiene más de un día y hasta cada 15 minutos el día de reparto, solo con el paquete abierto o con alertas activas. Avisos configurables: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con Jifan ni con el vendedor por ti.
 
 ## Preguntas frecuentes sobre el seguimiento de Jifan
 

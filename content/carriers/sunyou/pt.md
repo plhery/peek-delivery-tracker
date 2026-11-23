@@ -14,10 +14,10 @@ A SunYou não publica nenhum formato de número, mas os que aparecem no seguimen
 
 | Número | De quem é |
 | --- | --- |
-| `SY99999999980` | SY e 11 algarismos: SunYou. |
-| `SYPT000000000` | SY, duas letras e 9 algarismos: também SunYou. |
-| `LP00000000000000` | LP e 14 algarismos: uma referência logística do AliExpress e da Cainiao. |
-| `RR000000005CN` | Duas letras, 9 algarismos e CN: um número dos [Correios da China](carrier:china-post). |
+| `SY73918462519` | SY e 11 algarismos: SunYou. |
+| `SYPT482910637` | SY, duas letras e 9 algarismos: também SunYou. |
+| `LP61840295738142` | LP e 14 algarismos: uma referência logística do AliExpress e da Cainiao. |
+| `RR482910576CN` | Duas letras, 9 algarismos e CN: um número dos [Correios da China](carrier:china-post). |
 
 As duas letras a seguir a SY nem sempre são o país de destino. No seguimento da SunYou, um número `SYRM` foi para o Japão e outro para a Bulgária, e um número `SYAE` foi para a Grécia. Quem procura «sunyou post rm tracking» tem um número destes: o RM não indica o país de destino.
 
@@ -29,7 +29,7 @@ As duas letras a seguir a SY nem sempre são o país de destino. No seguimento d
 
 ## Estados SunYou: o que quer dizer cada um
 
-O sypost.net mostra as leituras na língua que escolheres lá, entre 13, com o português. Esse português é o da própria SunYou e soa a brasileiro («retirada», «seu pacote»). Em inglês, pela ordem em que a encomenda costuma encontrá-las:
+O sypost.net mostra as leituras na língua que escolheres lá, entre 15, com o português. Esse português é o da própria SunYou e soa a brasileiro («retirada», «seu pacote»). Em inglês, pela ordem em que a encomenda costuma encontrá-las:
 
 | A SunYou escreve | O que quer dizer para ti |
 | --- | --- |
@@ -62,8 +62,6 @@ A SunYou não publica regras para tentativas de entrega, avisos, pontos de levan
 
 Algumas encomendas SunYou viajam como correio normal, que, diz a SunYou, só se segue até o correio do país de destino a receber. Nessas, o histórico pode parar quando esse correio fica com a encomenda.
 
-O seguimento da SunYou tem ainda uma ligação «Proof of Delivery», que pede o número de telemóvel de quem recebe.
-
 ## SunYou não entrega: encomenda parada ou perdida
 
 **Quem trata.** O cliente da SunYou é o vendedor: é ele que abre conta, regista a encomenda e tem o contrato. As páginas da SunYou não dão a quem recebe nenhuma forma de reclamar, por isso, com uma encomenda atrasada, perdida, danificada ou devolvida, fala com o vendedor ou com o marketplace onde compraste. As indemnizações da SunYou são para vendedores.
@@ -76,7 +74,7 @@ O seguimento da SunYou tem ainda uma ligação «Proof of Delivery», que pede o
 
 ## SunYou contacto: telefone e e-mail
 
-A 12 de outubro de 2026, a SunYou indicava os mesmos canais para todos os países, sem escritório para quem recebe em Portugal:
+A SunYou indica os mesmos canais para todos os países, sem escritório para quem recebe em Portugal:
 
 - **Linha de apoio:** +86 4006075388, um número chinês. Não publica horário nem custo da chamada.
 - **E-mail:** mto@sypost.com, a caixa de correio de seguimento.
@@ -92,7 +90,7 @@ O Peek pergunta à SunYou em inglês, por isso as linhas aparecem em inglês, sa
 
 Quando a SunYou dá o número da transportadora local e o Peek segue essa transportadora no país de destino, pergunta-lhe e passa para ela assim que mostra novidades mais recentes. A encomenda fica com o número SunYou, e a página dela mostra a transportadora que entrega e o número dela com uma ligação. Isto não acontece com todas as encomendas: a Meest, na Grécia, por exemplo, não é seguida.
 
-Verifica até de 10 em 10 minutos, até de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da SunYou a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda: de hora a hora na Royal Mail e na Poste Italiane, de 30 em 30 minutos na PostNL, na USPS e na GOFO nos Estados Unidos, também quando a encomenda sai para entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a SunYou nem o vendedor por ti.
+Verifica até de 10 em 10 minutos, até de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da SunYou a responder; através de serviços de seguimento apenas: de hora a hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia da entrega enquanto a encomenda estiver aberta ou com notificações ativas), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a SunYou nem o vendedor por ti.
 
 ## Perguntas sobre o rastreamento SunYou
 
@@ -113,7 +111,7 @@ Sim: escolhe Português no sypost.net e as leituras aparecem traduzidas pela Sun
 A SunYou fala aos vendedores de 4 a 5 dias para alguns destinos principais na linha geral e de 20 a 30 dias de calendário na linha para os Estados Unidos. Não é uma promessa para a tua encomenda: guia-te pela estimativa da loja ou do marketplace.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – site de seguimento, línguas, regras do número, linha de apoio, e-mail de seguimento, etiquetas dos estados, prova de entrega, número da transportadora, leituras e transportadoras locais
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – site de seguimento, línguas, regras do número, linha de apoio, e-mail de seguimento, etiquetas dos estados, número da transportadora, leituras e transportadoras locais
 - [SunYou: 联系我们 (contactos)](https://www.sypost.com/views/contact.html) – linha de apoio, e-mail, contacto para reclamações
 - [SunYou: 顺邮宝专线 (linha geral)](https://www.sypost.com/views/services-1.html) – limites do seguimento do correio normal, prazos, indemnização a vendedores
 - [SunYou: 顺速宝专线 (linha comercial)](https://www.sypost.com/views/services-2.html) – transportadoras locais no último troço, lista de países, prazos

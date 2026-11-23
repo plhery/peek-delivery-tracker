@@ -67,7 +67,7 @@ Jifan publishes no rules for recipients on delivery attempts, notice cards or pi
 
 Jifan's customers are the businesses that send parcels with it, not you. For a late, lost, damaged or returned parcel, contact the seller or marketplace first.
 
-**`查询不到` (can't be found).** Check the number for a typo, type it in capitals, and ask the seller if it still fails. The parcel shows "Waiting for Jifan" and Peek keeps checking. If Jifan still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
+**`查询不到` (can't be found).** Check the number for a typo, type it in capitals, and ask the seller if it still fails. The parcel shows "Waiting for Jifan" and Peek keeps checking. If Jifan still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel."
 
 **Only `Order information received`.** Jifan has the order's data, not the parcel. If nothing new comes for several days, ask the seller whether the parcel was handed over.
 
@@ -101,7 +101,7 @@ Peek's status follows the newest line it understands, and the summary status (`�
 
 Jifan's tracker shows no delivery date, weight, service name, delivering company or second number, so Peek has none either. It keeps following the JFGJ number on Jifan's tracker to the end.
 
-While Jifan's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, on the day Jifan reports the delivery round, using Beijing time, checks can run every 2 minutes with the parcel on screen or alerts on. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, and up to every 15 minutes on the day it goes out for delivery, only while you have it open or notifications are on. For checks with the carrier itself, after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
+While Jifan's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, and up to every 15 minutes on the day it goes out for delivery, only while you have it open or notifications are on. For checks with the carrier itself, after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
 
 ## Questions about Jifan tracking
 

@@ -67,7 +67,7 @@ Dla paczek ekonomicznych oraz małych paczek do 4,5 kg drogą lotniczą lub mors
 
 Klientami Jifan są firmy nadające towar w Chinach kontynentalnych, a nie kupujący — w sprawie opóźnienia, zaginięcia, uszkodzenia lub zwrotu skontaktuj się najpierw ze sprzedawcą lub platformą zakupową.
 
-**`查询不到` (nie znaleziono).** Sprawdź numer pod kątem literówki, wpisz go wielkimi literami bez spacji i zapytaj sprzedawcę, jeśli nadal nie działa. Peek pokazuje „Oczekiwanie na przewoźnika Jifan” i sprawdza dalej. Jeżeli po dwóch dniach Jifan wciąż nie zna numeru i żaden inny serwis nie odpowiedział, Peek wyświetla: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Od tej pory Peek odpytuje raz dziennie, a po tygodniu od dodania — raz w tygodniu.
+**`查询不到` (nie znaleziono).** Sprawdź numer pod kątem literówki, wpisz go wielkimi literami bez spacji i zapytaj sprzedawcę, jeśli nadal nie działa. Peek pokazuje „Oczekiwanie na przewoźnika Jifan” i sprawdza dalej. Jeżeli po dwóch dniach Jifan wciąż nie zna numeru i żaden inny serwis nie odpowiedział, Peek wyświetla: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
 
 **Tylko `Order information received`.** Jifan ma dane zamówienia, lecz jeszcze nie fizyczną paczkę. Gdy przez kilka dni nic się nie zmienia, zapytaj sprzedawcę, czy przekazał przesyłkę.
 
@@ -97,7 +97,7 @@ Peek pobiera z wyszukiwarki Jifan status, wszystkie wiersze po angielsku oraz kr
 
 Status w Peek wynika z najnowszego rozpoznanego skanu, a ze statusu podsumowania (`运输途中`) korzysta tylko wtedy, gdy żaden wiersz nie określa etapu. Ponieważ tracker Jifan nie podaje przewidywanej daty doręczenia, wagi, nazwy usługi, firmy doręczającej ani drugiego numeru, Peek śledzi numer `JFGJ…CN` bezpośrednio w Jifan aż do doręczenia.
 
-Dopóki odpowiada wyszukiwarka Jifan, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub z włączonymi powiadomieniami, jeśli dostawa jest spodziewana dzisiaj. Od 6:00 według zegara przewoźnika (czasu pekińskiego) w dniu, w którym Jifan zgłasza wydanie do doręczenia, przy otwartej paczce lub włączonych alertach sprawdzanie może przyspieszyć do co 2 minut. Poza ekranem i bez alertów oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę; gdy odpowiada tylko serwis śledzenia, sprawdza co godzinę, co 3 godziny gdy ostatni skan ma ponad dobę i do co 15 minut w dniu doręczenia, ale tylko przy otwartej paczce lub włączonych alertach. Dostępne powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Jifan ani ze sprzedawcą.
+Dopóki odpowiada wyszukiwarka Jifan, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub z włączonymi powiadomieniami, jeśli dostawa jest spodziewana dzisiaj. Poza ekranem i bez alertów oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę; gdy odpowiada tylko serwis śledzenia, sprawdza co godzinę, co 3 godziny gdy ostatni skan ma ponad dobę i do co 15 minut w dniu doręczenia, ale tylko przy otwartej paczce lub włączonych alertach. Dostępne powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Jifan ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie Jifan
 

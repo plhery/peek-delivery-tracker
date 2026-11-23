@@ -14,10 +14,10 @@ SunYou no publica ningún formato de número, pero los que aparecen en su seguim
 
 | Número | De quién es |
 | --- | --- |
-| `SY99999999980` | SY y 11 cifras: SunYou. |
-| `SYGB000000000` | SY, dos letras y 9 cifras: también SunYou. |
-| `LP00000000000000` | LP y 14 cifras: referencia logística de AliExpress y Cainiao. |
-| `RR000000005CN` | Dos letras, 9 cifras y CN: un número de [China Post](carrier:china-post). |
+| `SY73918462519` | SY y 11 cifras: SunYou. |
+| `SYGB482910637` | SY, dos letras y 9 cifras: también SunYou. |
+| `LP61840295738142` | LP y 14 cifras: referencia logística de AliExpress y Cainiao. |
+| `RR482910576CN` | Dos letras, 9 cifras y CN: un número de [China Post](carrier:china-post). |
 
 Las dos letras que siguen a SY no siempre indican el destino. En el seguimiento de SunYou, un número `SYRM` fue a Japón y otro a Bulgaria, y uno `SYAE` acabó en Grecia.
 
@@ -59,8 +59,6 @@ SunYou no publica normas sobre intentos de entrega, avisos, puntos de recogida n
 
 Algunos paquetes de SunYou viajan como correo ordinario, que según SunYou solo se puede seguir hasta que lo recibe el correo del país de destino. En esos casos, el historial puede pararse en cuanto el paquete llega a ese correo.
 
-El seguimiento de SunYou tiene también un enlace «Proof of Delivery» (prueba de entrega), que pide el teléfono del destinatario.
-
 ## Paquete de SunYou que no llega o seguimiento parado
 
 **Quién actúa.** El cliente de SunYou es el vendedor: abre una cuenta, registra el envío y tiene el contrato. Las páginas de SunYou no ofrecen ninguna vía de reclamación al destinatario, así que, si el paquete se retrasa, se pierde, llega dañado o vuelve, escribe a la tienda o al marketplace donde compraste. Las indemnizaciones de SunYou son para vendedores.
@@ -73,7 +71,7 @@ El seguimiento de SunYou tiene también un enlace «Proof of Delivery» (prueba 
 
 ## SunYou teléfono y contacto en España
 
-SunYou no tiene teléfono, correo ni oficina en España. Estos son los canales que publica, iguales para todos los países, leídos el 12 de octubre de 2026:
+SunYou no tiene teléfono, correo ni oficina en España. Estos son los canales que publica, iguales para todos los países:
 
 - **Teléfono:** +86 4006075388, un número chino. No publica horario ni coste de la llamada.
 - **Correo:** mto@sypost.com, su buzón de seguimiento.
@@ -89,7 +87,7 @@ Las líneas de SunYou aparecen en inglés, sea cual sea tu idioma, salvo coincid
 
 Cuando SunYou da el número del transportista local, Peek puede preguntar a esa empresa y cambiar a sus datos cuando muestran un avance más reciente. Con un número postal que va a España, esa empresa es Correos. El paquete conserva su número de SunYou; su página dice «Entrega con» esa empresa y muestra su número con un enlace a su seguimiento. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, la página dice en su lugar «Anunciado a …, aún no recibido». No pasa con todos los paquetes.
 
-Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 minutos cuando el paquete va en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de SunYou; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete: cada hora con Royal Mail y Poste Italiane, cada 30 minutos con PostNL, USPS y GOFO en Estados Unidos, también con el paquete en reparto. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con SunYou ni con la tienda por ti.
+Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 minutos cuando el paquete va en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de SunYou; solo a través de servicios de seguimiento: cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de entrega con el paquete abierto o notificaciones activas), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con SunYou ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de SunYou
 
@@ -110,7 +108,7 @@ Un transportista local, que el historial de tu paquete suele nombrar junto a su 
 No. Sus teléfonos son chinos, como el +86 4006075388 de su web de seguimiento, y para un pedido conviene escribir antes a la tienda.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – web de seguimiento, idiomas, número, teléfono, correo, estados, prueba de entrega, número del transportista, escaneos y transportistas locales
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – web de seguimiento, idiomas, número, teléfono, correo, estados, número del transportista, escaneos y transportistas locales
 - [SunYou: 联系我们 (contacto, en chino)](https://www.sypost.com/views/contact.html) – teléfono, correo, quejas
 - [SunYou: 顺邮宝专线 (línea general, en chino)](https://www.sypost.com/views/services-1.html) – seguimiento del correo ordinario, plazos, indemnización a vendedores
 - [SunYou: 顺速宝专线 (línea comercial, en chino)](https://www.sypost.com/views/services-2.html) – transportistas locales, plazos

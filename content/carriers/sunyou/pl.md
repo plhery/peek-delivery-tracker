@@ -14,10 +14,10 @@ SunYou nie publikuje formatu numeru, ale numery widoczne w jego śledzeniu mają
 
 | Numer | Czyj to numer |
 | --- | --- |
-| `SY99999999980` | SY i 11 cyfr: SunYou. |
-| `SYPL123456789` | SY, dwie litery i 9 cyfr: też SunYou. |
-| `LP00000000000000` | LP i 14 cyfr: numer logistyczny AliExpress i Cainiao. |
-| `RR000000005CN` | Dwie litery, 9 cyfr i CN: numer [China Post](carrier:china-post). |
+| `SY73918462519` | SY i 11 cyfr: SunYou. |
+| `SYPL482910637` | SY, dwie litery i 9 cyfr: też SunYou. |
+| `LP61840295738142` | LP i 14 cyfr: numer logistyczny AliExpress i Cainiao. |
+| `RR482910576CN` | Dwie litery, 9 cyfr i CN: numer [China Post](carrier:china-post). |
 
 Dwie litery po SY nie zawsze oznaczają kraj docelowy. W śledzeniu SunYou numer `SYRM` trafił do Japonii, inny do Bułgarii, a numer `SYAE` do Grecji. Nie wnioskuj więc z nich, dokąd jedzie paczka.
 
@@ -29,7 +29,7 @@ Dwie litery po SY nie zawsze oznaczają kraj docelowy. W śledzeniu SunYou numer
 
 ## SunYou śledzenie: co znaczą statusy
 
-Strona sypost.net ma 13 wersji językowych, ale polskiej wśród nich nie ma: przy polskim zapytaniu odpowiada po angielsku. Najczęstsze linie, w kolejności, w jakiej spotyka je paczka:
+Strona sypost.net ma 15 wersji językowych, ale polskiej wśród nich nie ma: przy polskim zapytaniu odpowiada po angielsku. Najczęstsze linie, w kolejności, w jakiej spotyka je paczka:
 
 | SunYou pisze | Co to znaczy dla ciebie |
 | --- | --- |
@@ -62,8 +62,6 @@ Liczby prób doręczenia, awizo, punktów odbioru ani czasu przechowania SunYou 
 
 Część paczek SunYou jedzie jako zwykła przesyłka pocztowa. Według SunYou da się ją śledzić tylko do momentu, gdy przejmie ją poczta kraju docelowego, więc historia może się wtedy urwać.
 
-Śledzenie SunYou ma też link „Proof of Delivery”, który prosi o numer telefonu odbiorcy.
-
 ## Paczka SunYou nie dochodzi albo stoi
 
 **Kto działa.** Klientem SunYou jest sprzedawca: zakłada konto, nadaje paczkę i ma umowę. Strony SunYou nie dają odbiorcom żadnej drogi reklamacji, a zasady odszkodowań SunYou dotyczą sprzedawców. Przy spóźnionej, zgubionej, uszkodzonej albo zwróconej paczce pisz więc do sklepu lub platformy, na której kupowałeś, na przykład AliExpress, Temu albo Allegro.
@@ -76,7 +74,7 @@ Część paczek SunYou jedzie jako zwykła przesyłka pocztowa. Według SunYou d
 
 ## SunYou kontakt: telefon i e-mail
 
-Stan na 12 października 2026 SunYou podaje te same kanały dla wszystkich krajów, bez biura ani numeru dla Polski:
+SunYou podaje te same kanały dla wszystkich krajów, bez biura ani numeru dla Polski:
 
 - **Infolinia:** +86 4006075388, chiński numer. SunYou nie podaje godzin ani kosztu połączenia.
 - **E-mail:** mto@sypost.com, skrzynka do spraw śledzenia.
@@ -92,7 +90,7 @@ Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takim
 
 Gdy SunYou podaje numer lokalnego przewoźnika, aplikacja może zapytać tego przewoźnika i przełączyć się na niego, gdy pokaże nowsze postępy. Gdy tym numerem jest numer pocztowy (dwie litery, 9 cyfr, dwie litery) paczki do Polski, pyta [Pocztę Polską](carrier:poczta-polska). Paczka zachowuje numer SunYou, a jej strona pokazuje „Doręcza:” z nazwą przewoźnika oraz jego numer z linkiem. Dopóki Peek widzi paczkę u tego przewoźnika tylko jako zgłoszoną, bez jego własnego skanu, strona pokazuje zamiast tego „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Nie dzieje się tak przy każdej paczce.
 
-Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za ciebie z SunYou ani ze sklepem.
+Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez same serwisy śledzenia przesyłek: co godzinę, co 3 godziny po dniu bez zmian i nawet co 15 minut w dniu doręczenia przy otwartej paczce lub włączonych powiadomieniach). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za ciebie z SunYou ani ze sklepem.
 
 ## Pytania o SunYou tracking
 
@@ -113,7 +111,7 @@ SunYou tego nie wyjaśnia. Numer `SYRM` to zwykły kształt SunYou, a litery nie
 Nie, SunYou podaje tylko chińską infolinię +86 4006075388 i e-mail mto@sypost.com. W sprawie zamówienia szybciej pomoże sklep.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – strona śledzenia, języki, przyjmowane numery, infolinia, e-mail, etykiety statusów, Proof of Delivery, numer przewoźnika, linie skanów i lokalni przewoźnicy
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – strona śledzenia, języki, przyjmowane numery, infolinia, e-mail, etykiety statusów, numer przewoźnika, linie skanów i lokalni przewoźnicy
 - [SunYou: 联系我们 (kontakt, po chińsku)](https://www.sypost.com/views/contact.html) – infolinia, e-mail, kontakt w sprawie skarg
 - [SunYou: 顺邮宝专线 (linia ogólna, po chińsku)](https://www.sypost.com/views/services-1.html) – śledzenie zwykłych przesyłek, czasy, odszkodowania dla sprzedawców
 - [SunYou: 顺速宝专线 (linia komercyjna, po chińsku)](https://www.sypost.com/views/services-2.html) – lokalni przewoźnicy, lista krajów, czasy

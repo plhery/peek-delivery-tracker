@@ -67,7 +67,7 @@ Per i pacchi economici e i piccoli colli fino a 4,5 kg via aerea o via mare, Jif
 
 I clienti di Jifan sono le aziende mittenti nella Cina continentale, non i destinatari: per ritardi, smarrimenti, danni o resi contatta per primo il venditore o il marketplace.
 
-**`查询不到` (impossibile trovare).** Controlla eventuali errori di battitura, inserisci il numero in maiuscolo senza spazi e chiedi al venditore se continua a non comparire. Peek mostra «In attesa di Jifan» e prosegue le verifiche. Se dopo due giorni Jifan non riconosce ancora il numero e nessun altro servizio ha risposto, Peek avvisa: «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» Da quel momento Peek controlla una volta al giorno e, trascorsa una settimana dall'aggiunta, una volta a settimana.
+**`查询不到` (impossibile trovare).** Controlla eventuali errori di battitura, inserisci il numero in maiuscolo senza spazi e chiedi al venditore se continua a non comparire. Peek mostra «In attesa di Jifan» e prosegue le verifiche. Se dopo due giorni Jifan non riconosce ancora il numero e nessun altro servizio ha risposto, Peek avvisa: «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.»
 
 **Solo `Order information received`.** Jifan ha ricevuto i dati dell'ordine ma non ancora il pacco fisico. Se non cambia nulla per diversi giorni, chiedi al venditore se ha consegnato la merce al corriere.
 
@@ -97,7 +97,7 @@ Peek legge dal tracker di Jifan lo stato, ogni riga nell'inglese originale e il 
 
 Lo stato di Peek segue la scansione più recente riconosciuta e usa lo stato di riepilogo (`运输途中`) solo quando nessuna riga assegna una fase. Poiché il tracker di Jifan non fornisce data di consegna prevista, peso, nome del servizio, corriere finale né secondo codice, Peek continua a seguire il numero `JFGJ…CN` su Jifan fino alla consegna.
 
-Finché il tracker di Jifan risponde, Peek controlla fino a ogni 10 minuti con il pacco aperto o con le notifiche attive se la consegna è prevista in giornata. Dalle 6:00 sull'orologio del corriere (ora di Pechino) nel giorno in cui Jifan segnala l'uscita in consegna, i controlli possono scendere fino a ogni 2 minuti a pacco aperto o con avvisi attivi. A schermo chiuso e senza avvisi, così come dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora; quando risponde solo un servizio di tracciamento, controlla ogni ora, ogni 3 ore quando l'ultima scansione ha più di un giorno e fino a ogni 15 minuti il giorno della consegna, solo a pacco aperto o con avvisi attivi. Puoi attivare avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Jifan né il venditore per te.
+Finché il tracker di Jifan risponde, Peek controlla fino a ogni 10 minuti con il pacco aperto o con le notifiche attive se la consegna è prevista in giornata. A schermo chiuso e senza avvisi, così come dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora; quando risponde solo un servizio di tracciamento, controlla ogni ora, ogni 3 ore quando l'ultima scansione ha più di un giorno e fino a ogni 15 minuti il giorno della consegna, solo a pacco aperto o con avvisi attivi. Puoi attivare avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Jifan né il venditore per te.
 
 ## Domande frequenti sul tracciamento Jifan
 

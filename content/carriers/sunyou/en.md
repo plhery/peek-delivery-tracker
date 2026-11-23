@@ -14,10 +14,10 @@ SunYou publishes no number format, but the numbers seen on its tracking take two
 
 | Number | What it is |
 | --- | --- |
-| `SY99999999980` | SY and 11 digits: SunYou. |
-| `SYGB000000000` | SY, two letters and 9 digits: SunYou too. |
-| `LP00000000000000` | LP and 14 digits: an AliExpress and Cainiao logistics number. |
-| `RR000000005CN` | Two letters, nine digits, CN: a [China Post](carrier:china-post) number. |
+| `SY73918462519` | SY and 11 digits: SunYou. |
+| `SYGB482910637` | SY, two letters and 9 digits: SunYou too. |
+| `LP61840295738142` | LP and 14 digits: an AliExpress and Cainiao logistics number. |
+| `RR482910576CN` | Two letters, nine digits, CN: a [China Post](carrier:china-post) number. |
 
 The two letters after SY don't always match the destination. On SunYou's tracking, an `SYRM` number went to Japan and another to Bulgaria, and an `SYAE` number went to Greece.
 
@@ -29,7 +29,7 @@ The two letters after SY don't always match the destination. On SunYou's trackin
 
 ## SunYou tracking statuses: what they mean
 
-sypost.net shows the scans in the language you pick there (13 languages, including English, Spanish, French, German and Portuguese). In English, in the order a parcel usually meets them:
+sypost.net shows the scans in the language you pick there (15 languages, including English, Spanish, French, German and Portuguese). In English, in the order a parcel usually meets them:
 
 | SunYou says | What it means for you |
 | --- | --- |
@@ -60,8 +60,6 @@ SunYou publishes no rules for delivery attempts, cards, pickup points or how lon
 
 Some SunYou parcels go as ordinary mail, which SunYou says can be tracked only until the destination's post receives them. On those, the history may stop once that post has the parcel.
 
-SunYou's tracking also has a "Proof of Delivery" link, which asks for the recipient's phone number.
-
 ## SunYou parcel not arriving or tracking stuck
 
 **Who acts.** The seller is SunYou's customer: they open an account, book the parcel and hold the contract. SunYou's pages give recipients no claim route, so for a late, lost, damaged or returned parcel, contact the seller or the marketplace you ordered from. SunYou's compensation rules are for sellers.
@@ -74,7 +72,7 @@ SunYou's tracking also has a "Proof of Delivery" link, which asks for the recipi
 
 ## SunYou contact number and customer service
 
-As read on 12 October 2026, SunYou lists the same channels for every country, with no local office for recipients:
+SunYou lists the same channels for every country, with no local office for recipients:
 
 - **Hotline**: +86 4006075388, a Chinese number. No hours or call costs are published.
 - **Email**: mto@sypost.com, its track-and-trace mailbox.
@@ -90,7 +88,7 @@ SunYou's lines show in English whatever your language, except exact matches such
 
 When SunYou gives the local carrier's number, Peek can ask that carrier (Royal Mail, DHL in Germany, Canada Post, USPS or the national post, for example) and switch to it once it shows newer progress. The parcel keeps its SunYou number, its page says "Delivery with" that carrier and lists the carrier's own number with a link. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This doesn't happen for every parcel: [Meest](carrier:meest) in Greece, for one, isn't followed.
 
-It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SunYou's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL, USPS and GOFO in the US, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SunYou or the seller for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SunYou's own tracker answers (through tracking services alone: hourly, every 3 hours after a quiet day, and up to every 15 minutes on the delivery day while the parcel is open or notifications are on). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SunYou or the seller for you.
 
 ## Questions about SunYou tracking
 
@@ -115,7 +113,7 @@ SunYou tells sellers 4 to 5 days to some main destinations on its general line a
 In the UK histories read on SunYou's tracking, Royal Mail delivered. Your parcel's own history names the carrier after `Departed Sunyou Facility`, with that carrier's number.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – tracking site, languages, number input, hotline, track-and-trace email, status labels, Proof of Delivery, carrier number lines, scan wordings and local carriers
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – tracking site, languages, number input, hotline, track-and-trace email, status labels, carrier number lines, scan wordings and local carriers
 - [SunYou: 联系我们 (Contact)](https://www.sypost.com/views/contact.html) – hotline, email, complaints contact
 - [SunYou: 顺邮宝专线 (general line)](https://www.sypost.com/views/services-1.html) – ordinary mail tracking limits, delivery times, seller compensation
 - [SunYou: 顺速宝专线 (commercial line)](https://www.sypost.com/views/services-2.html) – local last-mile carriers, delivery times

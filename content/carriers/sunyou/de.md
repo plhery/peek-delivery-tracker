@@ -14,10 +14,10 @@ Ein Nummernformat veröffentlicht SunYou nicht. Die Tracking-Seite nimmt 5 bis 5
 
 | Nummer | Wem sie gehört |
 | --- | --- |
-| `SY99999999980` | SY und 11 Ziffern: SunYou. |
-| `SYDE123456789` | SY, zwei Buchstaben und 9 Ziffern: ebenfalls SunYou. |
-| `LP00000000000000` | LP und 14 Ziffern: eine Logistiknummer von AliExpress und Cainiao. |
-| `RR000000005CN` | Zwei Buchstaben, neun Ziffern, CN: eine Nummer von [China Post](carrier:china-post). |
+| `SY73918462519` | SY und 11 Ziffern: SunYou. |
+| `SYDE482910637` | SY, zwei Buchstaben und 9 Ziffern: ebenfalls SunYou. |
+| `LP61840295738142` | LP und 14 Ziffern: eine Logistiknummer von AliExpress und Cainiao. |
+| `RR482910576CN` | Zwei Buchstaben, neun Ziffern, CN: eine Nummer von [China Post](carrier:china-post). |
 
 Die zwei Buchstaben nach SY verraten nicht sicher das Zielland. Auf SunYous Tracking ging eine `SYRM`-Nummer nach Japan, eine andere nach Bulgarien, und eine `SYAE`-Nummer nach Griechenland. Ein DE in der Nummer heißt also nicht unbedingt Deutschland.
 
@@ -29,7 +29,7 @@ Die zwei Buchstaben nach SY verraten nicht sicher das Zielland. Auf SunYous Trac
 
 ## SunYou Sendungsverfolgung: was die Status bedeuten
 
-sypost.net gibt es in 13 Sprachen, darunter Deutsch, und die Scans erscheinen in der Sprache, die du dort wählst. Auf Deutsch, in der Reihenfolge, in der ein Paket sie meist erreicht, mit der englischen Fassung daneben:
+sypost.net gibt es in 15 Sprachen, darunter Deutsch, und die Scans erscheinen in der Sprache, die du dort wählst. Auf Deutsch, in der Reihenfolge, in der ein Paket sie meist erreicht, mit der englischen Fassung daneben:
 
 | SunYou schreibt | Auf Englisch | Was es für dich heißt |
 | --- | --- | --- |
@@ -58,8 +58,6 @@ Regeln für Zustellversuche, Benachrichtigungskarten, Abholstellen oder Lagerfri
 
 Manche SunYou-Pakete reisen als einfache Briefpost. Die lässt sich laut SunYou nur verfolgen, bis die Post im Zielland sie übernimmt; danach kann der Verlauf stehen bleiben, obwohl das Paket weiterreist.
 
-Für den Zustellnachweis hat das Tracking einen Link „Proof of Delivery“, der nach der Telefonnummer des Empfängers fragt.
-
 ## SunYou Paket nicht angekommen: was du tun kannst
 
 **Wer zuständig ist.** Der Händler ist SunYous Kunde: Er eröffnet das Konto, bucht das Paket und hat den Vertrag. Für Empfänger nennen SunYous Seiten keinen Weg für Reklamationen, und SunYous Entschädigungsregeln gelten für Händler. Bei einem verspäteten, verlorenen, beschädigten oder zurückgeschickten Paket wendest du dich also an den Shop oder den Marktplatz, bei dem du bestellt hast.
@@ -74,7 +72,7 @@ Für den Zustellnachweis hat das Tracking einen Link „Proof of Delivery“, de
 
 ## SunYou Kontakt: Hotline und E-Mail
 
-Stand 12. Oktober 2026 nennt SunYou für alle Länder dieselben Kanäle, ohne Ansprechpartner in Deutschland, Österreich oder der Schweiz und ohne Kontaktseite auf Deutsch:
+SunYou nennt für alle Länder dieselben Kanäle, ohne Ansprechpartner in Deutschland, Österreich oder der Schweiz und ohne Kontaktseite auf Deutsch:
 
 - **Hotline:** +86 4006075388, eine chinesische Nummer. Erreichbarkeit und Kosten nennt SunYou nicht.
 - **E-Mail:** mto@sypost.com, das Postfach für Sendungsverfolgung.
@@ -90,7 +88,7 @@ Peek liest SunYous Tracking auf Englisch, darum stehen die Zeilen dort englisch,
 
 Nennt SunYou die Nummer des Paketdiensts vor Ort, kann Peek diesen Dienst abfragen, etwa DHL in Deutschland oder bei einer Postnummer die Post des Ziellands, und wechselt zu ihm, sobald er neuere Schritte zeigt. Das Paket behält seine SunYou-Nummer, seine Seite zeigt „Zustellung durch“ und den Dienst, mit dessen eigener Nummer und einem Link. Solange Peek das Paket bei diesem Dienst nur angekündigt findet, noch ohne eigenen Scan, zeigt die Seite stattdessen „Bei … angekündigt, noch nicht eingetroffen“. Das klappt nicht bei jedem Paket.
 
-Es schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SunYou selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL, USPS und GOFO in den USA, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. SunYou oder den Händler kontaktieren kann es nicht für dich.
+Es schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SunYou selbst antwortet; über Tracking-Dienste allein: stündlich, alle 3 Stunden nach einem ruhigen Tag und bis zu alle 15 Minuten am Liefertag bei geöffnetem Paket oder aktiven Mitteilungen), und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. SunYou oder den Händler kontaktieren kann es nicht für dich.
 
 ## Fragen zur SunYou Sendungsverfolgung
 
@@ -111,7 +109,7 @@ SunYou sitzt in Shenzhen, China, mit Niederlassungen in Guangzhou, Dongguan, Yiw
 Nein: SunYou nennt nur die chinesische Hotline +86 4006075388 und die E-Mail-Adresse mto@sypost.com. Schneller hilft meist der Händler oder der Paketdienst vor Ort.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – Tracking-Seite, Sprachen, Nummerneingabe, Hotline, E-Mail, Status, Zustellnachweis, Nummer des Paketdiensts vor Ort, Scans und Zusteller
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – Tracking-Seite, Sprachen, Nummerneingabe, Hotline, E-Mail, Status, Nummer des Paketdiensts vor Ort, Scans und Zusteller
 - [SunYou: Sprachdatei der Tracking-Seite](https://www.sypost.net/language) – deutsche und englische Status und Scans
 - [SunYou: 联系我们 (Kontakt)](https://www.sypost.com/views/contact.html) – Hotline, E-Mail, Beschwerden
 - [SunYou: 顺邮宝专线 (allgemeine Linie)](https://www.sypost.com/views/services-1.html) – Briefpost nur bis zur Post im Zielland verfolgbar, Laufzeiten, Entschädigung für Händler

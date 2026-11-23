@@ -14,10 +14,10 @@ SunYou ne publie aucun format de numéro, mais ceux qu'on voit sur son suivi ont
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `SY99999999980` | SY et 11 chiffres : SunYou. |
-| `SYFR000000000` | SY, deux lettres et 9 chiffres : SunYou aussi. |
-| `LP00000000000000` | LP et 14 chiffres : une référence logistique d'AliExpress et Cainiao. |
-| `RR000000005CN` | Deux lettres, neuf chiffres, CN : un numéro de [China Post](carrier:china-post). |
+| `SY73918462519` | SY et 11 chiffres : SunYou. |
+| `SYFR482910637` | SY, deux lettres et 9 chiffres : SunYou aussi. |
+| `LP61840295738142` | LP et 14 chiffres : une référence logistique d'AliExpress et Cainiao. |
+| `RR482910576CN` | Deux lettres, neuf chiffres, CN : un numéro de [China Post](carrier:china-post). |
 
 Les deux lettres après SY ne donnent pas toujours le pays de destination. Sur le suivi de SunYou, un numéro `SYRM` est allé au Japon, un autre en Bulgarie, et un numéro `SYAE` en Grèce.
 
@@ -58,8 +58,6 @@ SunYou ne publie aucune règle sur les tentatives de livraison, les avis de pass
 
 Certains colis SunYou voyagent en courrier ordinaire, que SunYou dit suivre seulement jusqu'à la prise en charge par la poste du pays de destination. Pour ceux-là, l'historique peut s'arrêter une fois le colis chez cette poste.
 
-Le suivi de SunYou propose aussi un lien de preuve de livraison (« Proof of Delivery »), qui demande le numéro de téléphone du destinataire.
-
 ## Colis SunYou non reçu ou bloqué : que faire
 
 **Qui agit.** Le vendeur est le client de SunYou : il ouvre un compte, enregistre le colis et a le contrat. Les pages de SunYou n'offrent aucune voie de réclamation aux destinataires, et ses indemnisations sont réservées aux vendeurs. Pour un colis en retard, perdu, abîmé ou renvoyé, contacte donc le vendeur ou la plateforme où tu as commandé.
@@ -72,7 +70,7 @@ Le suivi de SunYou propose aussi un lien de preuve de livraison (« Proof of Del
 
 ## SunYou contact : téléphone et e-mail
 
-Relevé le 12 octobre 2026, SunYou donne les mêmes canaux pour tous les pays, sans bureau pour les destinataires en France, en Belgique ou en Suisse, et sans page de contact en français :
+SunYou donne les mêmes canaux pour tous les pays, sans bureau pour les destinataires en France, en Belgique ou en Suisse, et sans page de contact en français :
 
 - **Téléphone :** +86 4006075388, un numéro chinois. Ni horaires ni coût d'appel publiés.
 - **E-mail :** mto@sypost.com, sa boîte de suivi des colis.
@@ -88,7 +86,7 @@ Peek interroge SunYou en anglais : les lignes restent en anglais, sauf les libel
 
 Quand SunYou donne le numéro du transporteur local, Peek peut l'interroger, par exemple La Poste pour un numéro postal à destination de la France, et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde son numéro SunYou, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Tant que Peek ne trouve chez ce transporteur que l'annonce du colis, sans scan de sa part, la page indique à la place « Annoncé à …, pas encore reçu ». Pas pour chaque colis : Meest en Grèce, par exemple, n'est pas suivi.
 
-Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SunYou qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL, USPS et GOFO aux États-Unis, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni SunYou ni le vendeur à ta place.
+Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SunYou qui répond ; via des services de suivi seuls : toutes les heures, toutes les 3 heures après un jour calme et jusqu'à toutes les 15 minutes le jour de la livraison si le colis est ouvert ou que les notifications sont actives), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni SunYou ni le vendeur à ta place.
 
 ## Questions sur le suivi SunYou
 
@@ -109,7 +107,7 @@ En Chine : SunYou a son siège à Shenzhen et des agences à Guangzhou, Dongguan
 C'est possible : SunYou affiche le logo d'Amazon parmi ses plateformes partenaires, avec ceux d'AliExpress, Temu, eBay, Joom ou Wish. C'est le vendeur qui choisit SunYou ; pour un problème, passe par ta commande sur la plateforme.
 
 :::sources
-- [SunYou : Sunyou Package Tracking](https://www.sypost.net/) – site de suivi, langues, saisie du numéro, téléphone, e-mail, preuve de livraison
+- [SunYou : Sunyou Package Tracking](https://www.sypost.net/) – site de suivi, langues, saisie du numéro, téléphone, e-mail
 - [SunYou : fichier de langue du suivi](https://www.sypost.net/language) – statuts et étapes en français et en anglais
 - [SunYou : Search.js du suivi](https://www.sypost.net/track/Scripts/Search.js) – statuts du résumé, numéro du transporteur, Copy Link
 - [SunYou : 联系我们 (contact)](https://www.sypost.com/views/contact.html) – téléphone, e-mail, réclamations

@@ -14,10 +14,10 @@ SunYou non pubblica un formato. Il suo sito accetta da 5 a 50 lettere, cifre e t
 
 | Numero | Di chi è |
 | --- | --- |
-| `SY99999999980` | SY e 11 cifre: SunYou. |
-| `SYGB000000000` | SY, due lettere e 9 cifre: anche questo SunYou. |
-| `LP00000000000000` | LP e 14 cifre: un numero logistico di AliExpress e Cainiao. |
-| `RR000000005CN` | Due lettere, nove cifre e CN: un numero di [China Post](carrier:china-post). |
+| `SY73918462519` | SY e 11 cifre: SunYou. |
+| `SYGB482910637` | SY, due lettere e 9 cifre: anche questo SunYou. |
+| `LP61840295738142` | LP e 14 cifre: un numero logistico di AliExpress e Cainiao. |
+| `RR482910576CN` | Due lettere, nove cifre e CN: un numero di [China Post](carrier:china-post). |
 
 Le due lettere dopo SY non indicano per forza il Paese di arrivo. Sul tracking di SunYou un numero `SYRM` è andato in Giappone, un altro in Bulgaria, e un numero `SYAE` in Grecia. Chi cerca «sunyou post rm tracking» ha quasi sempre un numero che comincia con SYRM: è un normale numero SunYou.
 
@@ -29,7 +29,7 @@ Le due lettere dopo SY non indicano per forza il Paese di arrivo. Sul tracking d
 
 ## Stati del tracking SunYou: cosa significano
 
-sypost.net esiste in 13 lingue, italiano compreso, e mostra le scansioni nella lingua che scegli lì. In italiano le prime due righe dicono «Ricevuta informazione di preavviso» (il venditore ha registrato il pacco, ma SunYou non ce l'ha ancora) e «Spedizione ricevuta» (SunYou l'ha preso in Cina), seguite dal Paese di arrivo, che resta in inglese. Poi, nell'ordine in cui un pacco le incontra di solito, con la versione inglese accanto:
+sypost.net esiste in 15 lingue, italiano compreso, e mostra le scansioni nella lingua che scegli lì. In italiano le prime due righe dicono «Ricevuta informazione di preavviso» (il venditore ha registrato il pacco, ma SunYou non ce l'ha ancora) e «Spedizione ricevuta» (SunYou l'ha preso in Cina), seguite dal Paese di arrivo, che resta in inglese. Poi, nell'ordine in cui un pacco le incontra di solito, con la versione inglese accanto:
 
 | SunYou scrive | In inglese | Cosa vuol dire per te |
 | --- | --- | --- |
@@ -56,8 +56,6 @@ Regole su tentativi di consegna, avvisi, punti di ritiro o giorni di giacenza, S
 
 Alcuni pacchi SunYou viaggiano come posta ordinaria, che secondo SunYou si traccia solo finché la posta del Paese di arrivo non la riceve. Su quei pacchi la cronologia può fermarsi lì, anche se il pacco continua il viaggio.
 
-Il tracking ha anche un link «Proof of Delivery», la prova di consegna, che chiede il numero di telefono del destinatario.
-
 ## Pacco SunYou fermo o in ritardo: cosa fare
 
 **Chi se ne occupa.** Il cliente di SunYou è il venditore: apre l'account, prenota la spedizione e ha il contratto. Le pagine di SunYou non danno ai destinatari una strada per i reclami, e i rimborsi previsti da SunYou sono per i venditori. Per un pacco in ritardo, perso, danneggiato o rispedito indietro, quindi, scrivi al negozio o al marketplace dove hai ordinato.
@@ -72,7 +70,7 @@ Il tracking ha anche un link «Proof of Delivery», la prova di consegna, che ch
 
 ## SunYou Italia contatti: telefono ed email
 
-Al 12 ottobre 2026 SunYou indica gli stessi canali per tutti i Paesi, senza un ufficio per i destinatari in Italia o in Svizzera e senza una pagina di contatti in italiano:
+SunYou indica gli stessi canali per tutti i Paesi, senza un ufficio per i destinatari in Italia o in Svizzera e senza una pagina di contatti in italiano:
 
 - **Telefono**: +86 4006075388, un numero cinese. Orari e costi della chiamata non sono indicati.
 - **Email**: mto@sypost.com, la casella per il tracciamento.
@@ -88,7 +86,7 @@ Peek legge il tracking di SunYou in inglese, quindi su Peek le righe compaiono i
 
 Quando SunYou dà il numero del corriere locale, Peek può chiedere a quel corriere, per esempio Royal Mail o DHL in Germania, e passare a lui appena mostra passaggi più recenti. Il pacco tiene il numero SunYou e la sua pagina dice «Consegna con» seguito dal corriere, con il suo numero e un link. Finché Peek trova il pacco solo annunciato a quel corriere, senza una sua scansione, la pagina dice invece «Annunciato a …, non ancora ricevuto». Non succede per ogni pacco: un numero postale diretto in Svizzera può passare alla Posta Svizzera, ma per l'Italia Peek non ha una regola che lo passi a Poste Italiane: lo segue semmai sulla posta che ha emesso il numero, se la traccia.
 
-Controlla fino a ogni 10 minuti, fino a ogni 2 quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SunYou; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL, USPS e GOFO negli Stati Uniti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SunYou o il venditore al posto tuo.
+Controlla fino a ogni 10 minuti, fino a ogni 2 quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SunYou; tramite i soli servizi di tracciamento: ogni ora, ogni 3 ore dopo una giornata senza novità e fino a ogni 15 minuti il giorno della consegna a pacco aperto o con notifiche attive), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SunYou o il venditore al posto tuo.
 
 ## Domande sul tracking SunYou
 
@@ -109,7 +107,7 @@ SunYou ha sede a Shenzhen, in Cina, con filiali a Guangzhou, Dongguan, Yiwu, Kun
 No: SunYou indica solo il numero cinese +86 4006075388 e l'email mto@sypost.com. Di solito ti aiutano prima il venditore o il corriere locale.
 
 :::sources
-- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – sito di tracciamento, lingue, numeri accettati, telefono, email, stati, prova di consegna, numero del corriere locale, scansioni e corrieri
+- [SunYou: Sunyou Package Tracking](https://www.sypost.net/) – sito di tracciamento, lingue, numeri accettati, telefono, email, stati, numero del corriere locale, scansioni e corrieri
 - [SunYou: file delle lingue del tracking](https://www.sypost.net/language) – stati e scansioni in italiano e in inglese
 - [SunYou: 联系我们 (contatti)](https://www.sypost.com/views/contact.html) – telefono, email, reclami
 - [SunYou: 顺邮宝专线 (linea generale)](https://www.sypost.com/views/services-1.html) – posta ordinaria tracciata fino alla posta di arrivo, tempi, rimborsi ai venditori

@@ -181,7 +181,7 @@
   { "id": "chunghwa-post", "catalog": "chunghwa-post", "name": "Chunghwa Post", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
   { "id": "raben", "catalog": "raben", "name": "Raben", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jd-logistics", "catalog": "jd-logistics", "name": "JD Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "singapore-post", "catalog": "singapore-post", "name": "Singapore Post", "languages": ["en"] },
+  { "id": "singapore-post", "catalog": "singapore-post", "name": "Singapore Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "zto", "catalog": "zto", "name": "ZTO Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "japan-post", "catalog": "japan-post", "name": "Japan Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

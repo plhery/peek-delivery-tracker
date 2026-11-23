@@ -3292,6 +3292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "singapore-post-sendungsverfolgung",
+      "title": "Singapore Post (SingPost) Sendungsverfolgung & Status",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
+    },
+    {
       "id": "zto",
       "catalog": "zto",
       "slug": "zto-express-sendungsverfolgung",
@@ -5062,6 +5070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "suivi-singapore-post",
+      "title": "Suivi Singapore Post (SingPost)\u00a0: numéros et statuts",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
+    },
+    {
       "id": "zto",
       "catalog": "zto",
       "slug": "suivi-zto-express",
@@ -6792,6 +6808,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "tracciamento-singapore-post",
+      "title": "Tracciamento Singapore Post (SingPost): numeri e stati",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
+    },
+    {
       "id": "zto",
       "catalog": "zto",
       "slug": "tracciamento-zto-express",
@@ -8498,6 +8522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "seguimiento-singapore-post",
+      "title": "Seguimiento Singapore Post (SingPost): números y estados",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
+    },
+    {
       "id": "zto",
       "catalog": "zto",
       "slug": "seguimiento-zto-express",
@@ -10202,6 +10234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento JD Logistics: códigos JD, estados e contactos",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "seguimento-singapore-post",
+      "title": "Seguimento Singapore Post (SingPost): números e estados",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
     },
     {
       "id": "zto",
@@ -11950,6 +11990,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek JD Logistics: numery, statusy i kontakt",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "sledzenie-singapore-post",
+      "title": "Śledzenie Singapore Post (SingPost): numery i statusy",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
     },
     {
       "id": "zto",

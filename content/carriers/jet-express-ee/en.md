@@ -114,8 +114,8 @@ Jet Express gives 1 working day to the big cities, 1 to 2 working days to rural 
 Call +372 646 3222 on weekdays, 8:00–18:00 Estonian time, or write to info@kuller.ee. For a late, lost or damaged shipment, use the "A case with a shipment" form within 7 days.
 
 :::sources
-- [Jet Express: Express Courier and International Transport](https://kuller.ee/en/) – Tracking and customer environment links to portal.kuller.ee, FAQ on the order number, phone hours, latest pickup, labels and pallets, changing an order, IATA agent
-- [Jet Express: Kuller, transport ja logistika üle maailma](https://kuller.ee/) – "Jälgi saadetist" and "Iseteenindus" links to portal.kuller.ee, the FAQ in Estonian, the email notice
+- [Jet Express: Express Courier and International Transport](https://kuller.ee/en/) – Tracking and customer environment links to portal.kuller.ee, FAQ on the order number, phone hours, latest pickup, labels and pallets, changing an order, IATA agent, the phishing warning
+- [Jet Express: Kuller, transport ja logistika üle maailma](https://kuller.ee/) – "Jälgi saadetist" and "Iseteenindus" links to portal.kuller.ee, the FAQ in Estonian, the phishing warning
 - [Jet Express: Track & Trace](https://portal.kuller.ee/opter/TT) – the tracking page, "Package number", its sections
 - [Jet Express: Track Your Shipments in Real Time Online](https://kuller.ee/en/nuud-on-meie-klientidel-voimalus-jalgida-saadetisi-ka-reaalajas/) – order number from self-service or customer service
 - [Jet Express: About Us](https://kuller.ee/en/about-us/) – history, Jetpak representative, 24-hour ordering, express courier cities, delivery times abroad
@@ -125,7 +125,7 @@ Call +372 646 3222 on weekdays, 8:00–18:00 Estonian time, or write to info@kul
 - [Jet Express: Tolliteenused](https://kuller.ee/teenused/lisateenused/tolliteenused/) – import, export and transit clearance
 - [Jet Express: Tellimistingimused ja transpordireeglid](https://kuller.ee/tellimistingimused/) – failed delivery, refusal, signature, subcontractors, lost after 30 working days, claims in 7 days, duties paid by the customer
 - [Jet Express: Damaged or Lost Shipment – Filing a Claim](https://kuller.ee/en/a-case-with-a-shipment/) – claims within 7 days, form fields, liability insurance, CMR and the Law of Obligations Act
-- [Jet Express: Contact](https://kuller.ee/en/contact/) – phone, email, address
+- [Jet Express: Contact](https://kuller.ee/en/contact/) – phone, email, address, the phishing warning
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 from 1 July 2026, €2 handling fee from 1 November 2026
 - [Maksu- ja Tolliamet: Saadetise maksustamine](https://www.emta.ee/eraklient/saadetised-reisimine-elama-asumine/saadetised/saadetise-maksustamine) – the same rules in Estonia, whatever the value, no handling fee on gifts between private persons
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – no Jet Express number shape or tracker, portal.kuller.ee links read by their keyword, Jet Express OÜ as a name, the Track & Trace link, how Peek follows Jet Express parcels through tracking services

@@ -114,7 +114,7 @@ Suurlinnadesse 1 tööpäevaga, maapiirkondadesse 1–2 ja saartele 1–3 tööp
 Helistage tööpäeviti 8.00–18.00 numbril +372 646 3222 või kirjutage aadressil info@kuller.ee. Hilinenud, kadunud või kahjustatud saadetise kohta täitke 7 päeva jooksul vorm „Juhtum saadetisega“.
 
 :::sources
-- [Jet Express: Kuller, transport ja logistika üle maailma](https://kuller.ee/) – „Jälgi saadetist“ ja „Iseteenindus“ viivad portal.kuller.ee-sse, KKK tellimuse numbri, telefoni aja, pealekorje, pakisildi ja tellimuse muutmise kohta, IATA kaubaagent, teade e-kirjade hilinemisest
+- [Jet Express: Kuller, transport ja logistika üle maailma](https://kuller.ee/) – „Jälgi saadetist“ ja „Iseteenindus“ viivad portal.kuller.ee-sse, KKK tellimuse numbri, telefoni aja, pealekorje, pakisildi ja tellimuse muutmise kohta, IATA kaubaagent, hoiatus petukirjade eest
 - [Jet Express: Track & Trace](https://portal.kuller.ee/opter/TT) – jälgimisleht, „Package number“, lehe jaotised
 - [Jet Express: Track Your Shipments in Real Time Online](https://kuller.ee/en/nuud-on-meie-klientidel-voimalus-jalgida-saadetisi-ka-reaalajas/) – tellimuse number iseteenindusest või klienditeenindusest
 - [Jet Express: Meist – Eesti transpordi- ja logistikafirma](https://kuller.ee/meist/) – ajalugu, Jetpaki esindaja, kulleri tellimine ööpäev läbi, kiirkulleri linnad, tarneajad välismaale

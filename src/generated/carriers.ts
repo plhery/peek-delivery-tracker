@@ -2292,6 +2292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "gls-spanien-sendungsverfolgung",
+      "title": "GLS Spanien Sendungsverfolgung: Status, Shops & Kontakt",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dhl-ecommerce-es",
       "catalog": "dhl-ecommerce-es",
       "slug": "dhl-ecommerce-iberia-sendungsverfolgung",
@@ -3716,6 +3724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "bpost suivi\u00a0: code-barres, statuts et point relais",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "suivi-gls-espagne",
+      "title": "Suivi GLS Espagne\u00a0: statuts, Parcel Shops et contact",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
     },
     {
       "id": "dhl-ecommerce-es",
@@ -5166,6 +5182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento bpost: codice a barre, stati e punti di ritiro",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "tracciamento-gls-spagna",
+      "title": "Tracciamento GLS Spagna: stati, Parcel Shop e contatti",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
     },
     {
       "id": "dhl-ecommerce-es",
@@ -7964,6 +7988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "seguimento-gls-espanha",
+      "title": "Seguimento GLS Espanha: estados, Parcel Shops e contacto",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dhl-ecommerce-es",
       "catalog": "dhl-ecommerce-es",
       "slug": "dhl-ecommerce-iberia-rastreio",
@@ -9358,6 +9390,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie bpost: kod kreskowy, statusy i punkty odbioru",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "sledzenie-gls-hiszpania",
+      "title": "Śledzenie GLS Hiszpania: statusy, punkty i kontakt",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
     },
     {
       "id": "dhl-ecommerce-es",

@@ -3404,6 +3404,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "pitney-bowes-sendungsverfolgung",
+      "title": "Pitney Bowes Sendungsverfolgung: UPAA, UPBE und PBX",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -5070,6 +5078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "suivi-pitney-bowes",
+      "title": "Suivi Pitney Bowes\u00a0: numéros UPAA, UPBE et PBX expliqués",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -6704,6 +6720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "tracking-pitney-bowes",
+      "title": "Tracking Pitney Bowes: codici UPAA, UPBE e PBX spiegati",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "tracciamento-rl-carriers",
@@ -8322,6 +8346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "seguimiento-pitney-bowes",
+      "title": "Seguimiento Pitney Bowes: números UPAA, UPBE y PBX",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "seguimiento-rl-carriers",
@@ -9914,6 +9946,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento DSV: números, estados e DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "seguimento-pitney-bowes",
+      "title": "Seguimento Pitney Bowes: códigos UPAA, UPBE e PBX",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
     },
     {
       "id": "rl-carriers",
@@ -11566,6 +11606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DSV: numery przesyłek, statusy i DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "sledzenie-pitney-bowes",
+      "title": "Śledzenie Pitney Bowes: numery UPAA, UPBE i PBX",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
     },
     {
       "id": "rl-carriers",

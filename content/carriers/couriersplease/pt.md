@@ -10,7 +10,7 @@ A CouriersPlease (Couriers Please Pty Limited, parte do FMH Group) é uma transp
 
 ## Número de seguimento CouriersPlease: como é
 
-A CouriersPlease chama-lhe *consignment number* (número de envio ou de seguimento). A página de nova entrega indica que pode começar por `CP` e ter até 20 caracteres. O sistema oficial aceita entre 8 e 30 letras e dígitos (com pelo menos um dígito), abrangendo envios, etiquetas de volumes, cupões pré-pagos e códigos SSCC emitidos por alguns remetentes. Nem todos os números da CouriersPlease começam por `CP`.
+A CouriersPlease chama-lhe *consignment number* (número de envio ou de seguimento). A página de nova entrega indica que pode começar por `CP` e ter até 20 caracteres. Para a CouriersPlease, o Peek aceita entre 8 e 30 letras e dígitos (com pelo menos um dígito), abrangendo envios, etiquetas de volumes, cupões pré-pagos e códigos SSCC emitidos por alguns remetentes. Nem todos os números da CouriersPlease começam por `CP`.
 
 | Número (inventado) | O que é |
 | --- | --- |
@@ -34,7 +34,7 @@ No [guia de receção](https://www.couriersplease.com.au/faqs), a CouriersPlease
 | `Arrived at facility for processing` | Chegou a um centro de processamento da CouriersPlease. |
 | `Parcel requires further processing` | A encomenda precisa de processamento adicional no centro; continua normalmente na rede. |
 | `Processed at delivery centre` | Processada no centro de distribuição. |
-| `In transit to delivery centre` | Em trânsito para um centro de distribuição (muitas vezes com as duas cidades entre parênteses retos). |
+| `In transit to delivery centre` | Em trânsito para um centro de distribuição (muitas vezes com as duas cidades entre parênteses). |
 | `Arrived at delivery centre` | Chegou ao centro de distribuição; não precisa de fazer nada. |
 | `In transit to regional delivery centre` | Entregue a um parceiro regional ou em trânsito para um centro regional. |
 | `Onboard for delivery` | A bordo da viatura do motorista ou do Franchise Partner para entrega. |
@@ -61,7 +61,7 @@ Avisos como `Delivery rescheduled` ou as entradas `Delivery instructions –` (n
 
 **Pontos de recolha HUBBED.** Em parceria com a HUBBED, a CouriersPlease disponibiliza mais de 3.000 pontos de recolha na Austrália com horários alargados. Encontre o mais próximo por subúrbio ou código postal no [localizador de pontos de recolha](https://www.couriersplease.com.au/resources/find-a-collection-point), com filtros para *Drop Off*, *Redirections* e *Failed deliveries*. Se o remetente tiver dado o seu e-mail, a CouriersPlease envia aviso em 24 horas; caso contrário, deixa um talão em papel. Segundo a cláusula 5.4 dos Termos de Transporte, a entrega considera-se concluída quando a CouriersPlease envia o código PIN: dispõe de **7 dias** após esse aviso para levantar a encomenda, findos os quais permanece no depósito mais próximo durante mais **5 dias** antes de ser devolvida a expensas do cliente. Se não recebeu o PIN, peça-o na [página Get PIN da HUBBED](https://hubbed.com/getpin/) (para si, para a sua empresa ou para outra pessoa).
 
-**Nova entrega.** Agende-a na [página de nova entrega](https://www.couriersplease.com.au/book/redelivery) com o número de envio ou do cartão de aviso. O guia de receção refere ainda que, se a encomenda tiver sido levada para um ponto de recolha, pode pedir nova entrega no prazo de 6 dias.
+**Nova entrega.** Agende-a na [página de nova entrega](https://www.couriersplease.com.au/book/redelivery) com o número de envio ou do cartão de aviso. O guia de receção refere ainda que, se a encomenda tiver sido levada para um ponto de recolha, pode pedir nova entrega no prazo de 6 dias. O centro de ajuda da CouriersPlease diz, pelo contrário, que uma encomenda já desviada para um ponto de recolha não pode ser entregue de novo na sua morada e tem de ser levantada lá; em caso de dúvida, pergunte ao apoio antes de a agendar.
 
 **Delivery Choices.** Quando o remetente fornece o seu e-mail e telemóvel na reserva, recebe uma ligação segura com cinco opções em [Delivery Choices](https://www.couriersplease.com.au/delivery-choices):
 
@@ -89,13 +89,13 @@ Avisos como `Delivery rescheduled` ou as entradas `Delivery instructions –` (n
 
 ## Acompanhar encomendas CouriersPlease com o Peek
 
-O [Peek](/) reconhece imediatamente a CouriersPlease nos números com o padrão `CP` (como `CPABC4829173640` ou `CPA48291736405`) e nas ligações de couriersplease.com.au/tools-track com `no=` ou `trackingCode=`. Não exige conta, código postal nem telefone. Se o número não começar por `CP`, cole a ligação de seguimento ou selecione CouriersPlease através de «Alterar» ou «Alterar transportadora».
+O [Peek](/) reconhece imediatamente a CouriersPlease nos números com o padrão `CP` (como `CPABC4829173640` ou `CPA48291736405`) e nas ligações de couriersplease.com.au/tools-track com `no=` ou `trackingCode=`. Não exige conta, código postal nem telefone. Se o número não começar por `CP`, cole a ligação de seguimento ou selecione CouriersPlease com «Alterar» ao adicionar ou «Alterar transportadora» numa encomenda já guardada.
 
-O Peek lê diretamente o sistema oficial da CouriersPlease e apresenta cada registo no texto inglês da transportadora, com a hora local da leitura (Australia/Sydney), o estado australiano quando indicado e a data prevista de entrega (*Delivery ETA*) assim que a encomenda ultrapassa o registo inicial (até à entrega ou devolução). Remove código HTML e ligações de suporte inseridas nos textos e não mostra morada do ponto de recolha, PIN HUBBED nem fotografia de entrega.
+O Peek lê diretamente o sistema oficial da CouriersPlease e apresenta cada registo no texto inglês da transportadora, com a hora que a CouriersPlease indica (hora de Sydney, mesmo fora da Nova Gales do Sul), o estado australiano quando indicado e a data prevista de entrega (*Delivery ETA*) assim que a encomenda ultrapassa o registo inicial (até à entrega ou devolução). Remove código HTML e ligações de suporte inseridas nos textos e não mostra morada do ponto de recolha, PIN HUBBED nem fotografia de entrega.
 
-O Peek consulta diretamente a CouriersPlease até de 10 em 10 minutos enquanto tem a encomenda aberta ou no dia da entrega com alertas ativos, e de 2 em 2 minutos a partir das 6h00 hora local no dia em que a CouriersPlease regista a saída para entrega (`Onboard for delivery`); caso contrário, de hora a hora. Após 12 horas em «Etiqueta criada» ou «Aceite pela transportadora», ou após dois dias sem novos registos, passa a verificar de hora a hora mesmo com o ecrã aberto, e de 6 em 6 horas após sete dias ainda em «Etiqueta criada». Quando recorre a serviços de seguimento, consulta de hora a hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia da entrega.
+O Peek consulta diretamente a CouriersPlease até de 10 em 10 minutos enquanto tem a encomenda aberta ou no dia da entrega com alertas ativos, e de 2 em 2 minutos a partir das 6h00 hora de Sydney no dia em que a CouriersPlease regista a saída para entrega (`Onboard for delivery`), enquanto o seu sistema responde; caso contrário, de hora a hora. O Peek conta esse dia na hora de Sydney, a dos registos da CouriersPlease: em Perth, essas consultas começam às 3h ou 4h e terminam às 21h ou 22h. Após 12 horas em «Etiqueta criada» ou «Aceite pela transportadora», ou após dois dias sem novos registos, passa a verificar de hora a hora mesmo com o ecrã aberto, e de 6 em 6 horas após sete dias ainda em «Etiqueta criada». Quando recorre a serviços de seguimento, consulta de hora a hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia da entrega.
 
-Passados quatro dias sem um novo registo em «Em trânsito», o Peek assinala o abrandamento (por exemplo, «Sem atualizações desde seg., 12 out.»), apresenta «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a CouriersPlease.» e mostra o botão «Pede ajuda a CouriersPlease». Após mais de três semanas sem novidades, passa para: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a CouriersPlease.»
+Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem um novo registo, o Peek assinala-a com o dia desse último registo (por exemplo, «Sem atualizações desde seg 12 out»), apresenta «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a CouriersPlease.» e mostra a ligação «Pede ajuda a CouriersPlease» para o centro de ajuda da CouriersPlease. Após mais de três semanas sem novidades, passa para: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a CouriersPlease.»
 
 Pode escolher notificações para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não agenda novas entregas, não pede códigos PIN HUBBED nem submete reclamações Parcel Protect — para isso, contacte a CouriersPlease ou a loja.
 
@@ -121,6 +121,7 @@ Avise de imediato a loja remetente. As reclamações escritas ao abrigo do Parce
 - [CouriersPlease: Track A Parcel Delivery](https://www.couriersplease.com.au/tools-track) – seguimento até 10 números separados por vírgulas
 - [CouriersPlease: Guide to receiving](https://www.couriersplease.com.au/faqs) – cinco etapas de seguimento, prazos estimados, limites 10 kg / 100 cm, 6 dias para nova entrega, 24–48 horas úteis em atrasos, Virtual Assistant
 - [CouriersPlease: Book A Parcel Redelivery](https://www.couriersplease.com.au/book/redelivery) – número de envio ou cartão de aviso, prefixo CP, até 20 caracteres
+- [CouriersPlease: How do I arrange a redelivery?](https://support.couriersplease.com.au/hc/en-au/articles/31312747333785-How-do-I-arrange-a-redelivery) – sem nova entrega para uma encomenda já desviada para um ponto de recolha
 - [CouriersPlease: Find a Collection Point](https://www.couriersplease.com.au/resources/find-a-collection-point) – pesquisa por subúrbio ou código postal e filtros de pontos
 - [CouriersPlease: Delivery Choices](https://www.couriersplease.com.au/delivery-choices) – ATL por defeito, cinco opções de entrega, regra regional ATL
 - [CouriersPlease: Parcel Protect Domestic Cover](https://www.couriersplease.com.au/parcel-protect-domestic-cover) – limite de 1.000 AUD, exclusão dos primeiros 100 AUD e de ATL, prazo de 14 dias úteis, reclamações via intermediários

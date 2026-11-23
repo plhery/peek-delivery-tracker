@@ -10,7 +10,7 @@ Speedy is a Bulgarian courier, Speedy AD of Sofia, with offices, Speedy Lockers 
 
 ## Speedy tracking number: where to find it
 
-Speedy calls it "the waybill number (tracking number)". The numbers in Speedy's own examples and on its tracker are 11 digits, like `61234567890` (invented), though Speedy publishes no length rule.
+Speedy calls it "the waybill number (tracking number)". The numbers in Speedy's own examples and on its tracker are 11 digits, like `63482917364` (invented), though Speedy publishes no length rule.
 
 You'll find it:
 
@@ -76,7 +76,7 @@ Both sender and recipient can claim, within 6 months of the day Speedy accepted 
 
 ## Speedy contact number and customer service
 
-Speedy's channels, as its English [Contact us](https://www.speedy.bg/en/contact-us) page listed them on 12 October 2026:
+Speedy's channels, as its English [Contact us](https://www.speedy.bg/en/contact-us) page lists them:
 
 - **Phone** 0 7001 7001 from fixed lines (a local call), 1 7001 7001 from mobiles (per your plan), or the short number \*7001 from a mobile.
 - **International parcels** 0 7001 8001 (fixed lines) or international@speedy.bg.
@@ -92,7 +92,11 @@ Speedy publishes no opening hours and no chat. These are Bulgarian numbers; Spee
 
 Peek then shows the status, the history with the town (and country) of each scan on a map, the expected delivery day while the parcel is on its way, and the delivery time. When the parcel waits at an office or locker, you see its name, not its address. When [ACS Courier](carrier:acs-courier) delivers the leg in Greece or Cyprus, Speedy names ACS and its number, and Peek can follow the parcel there. It leaves out the recipient, proof of delivery and return number.
 
-Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Speedy scans the parcel out for delivery, while Speedy's own tracker answers (through tracking services, every 15 minutes). Its notifications cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend a pickup period or resend your PIN.
+Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes. On the day Speedy scans it out for delivery, Peek checks every 2 minutes from 6 a.m. Bulgarian time while Speedy's own tracker answers, or every 5 minutes while that tracker needs a browser; when only tracking services answer, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created".
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Speedy.", with a "Get help from Speedy" link to Speedy's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Speedy."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't extend a pickup period or resend your PIN.
 
 ## Questions about Speedy tracking
 

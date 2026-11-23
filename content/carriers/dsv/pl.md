@@ -18,7 +18,7 @@ W trakcie łączenia systemów DSV utrzymuje oba narzędzia: przesyłka zlecona 
 | --- | --- |
 | `DEKLM482917365` | 14 znaków: europejski kod kraju jak DE, SE, DK czy PL, trzy litery i dziewięć cyfr. Dawny numer drogowy DB Schenker i format przypisany DSV w katalogu Peek. |
 | `KLM4829173` | Trzy litery i siedem lub osiem cyfr: inny dawny numer drogowy DB Schenker. Peek nie rozpoznaje DSV po tym formacie. |
-| `094827361549283710` | 18 cyfr (20 z `00` z przodu): kod kreskowy pojedynczej paczki z dawnej przesyłki drogowej DB Schenker. |
+| `094827361549283711` | 18 cyfr (20 z `00` z przodu): kod kreskowy pojedynczej paczki z dawnej przesyłki drogowej DB Schenker. |
 | Litery i cyfry | Numer przesyłki, rezerwacji lub *house bill* w myDSV. Peek pyta myDSV dla dowolnego ciągu 5–40 liter i cyfr zawierającego co najmniej jedną cyfrę. |
 | `mydsv.com/track-shipment?query=DEKLM482917365` | Link do śledzenia myDSV, otwierany przez „Track DSV shipment” na dsv.com. |
 
@@ -39,7 +39,7 @@ myDSV rejestruje każdy skan od rezerwacji po potwierdzenie doręczenia. Widok p
 | `Handover responsibilty of cargo`, `Handover of Cargo` | DSV przekazało ładunek na końcu swojej usługi, co kończy przesyłkę (pierwsza pisownia pochodzi z DSV). | „Dostarczona” |
 | `Actual delivery` | Doręczono. | „Dostarczona” |
 
-`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` i `Requested delivery` to plany, nie skany: Peek pomija je w historii, a `Estimated delivery` pokazuje jako przewidywany dzień (lub zakres dni) doręczenia do chwili wydania do dostawy.
+`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` i `Requested delivery` to plany, nie skany: Peek pomija je w historii, a `Estimated delivery` pokazuje jako przewidywany dzień (lub zakres dni) doręczenia, dopóki przesyłka nie zostanie doręczona.
 
 Dawny system DB Schenker obsługuje przesyłki drogowe własnymi komunikatami:
 
@@ -69,7 +69,7 @@ Po drodze pojawiają się też `Linehaul departed`, `Linehaul arrived`, `Termina
 
 **Powiadomienia i potwierdzenie doręczenia.** W myDSV użytkownicy mogą włączyć powiadomienia (np. odbiór czy odprawa celna), sprawdzić przewidywany czas przybycia ładunków drogowych i pobrać potwierdzenie doręczenia po zakończeniu. Jeśli nie ty zlecałeś DSV, zapytaj nadawcę. Strony DSV nie podają liczby prób doręczenia ani czasu składowania na terminalu – zapytaj obsługujący oddział DSV.
 
-**Cło.** W większości krajów z własnymi biurami DSV działa jako licencjonowana agencja celna, a gdzie indziej współpracuje z agentami. W sprawach odprawy DSV zaleca kontakt z DSV w danym kraju. W Irlandii i pozostałych krajach UE zakupy online spoza UE podlegają od 1 lipca 2026 r. cłu 3 € za rodzaj produktu w zamówieniach do 150 €, a od 1 listopada 2026 r. unijnej opłacie manipulacyjnej 2 € za rodzaj produktu niezależnie od wartości. Poza UE obowiązują lokalne przepisy: zobacz [paczki zatrzymane na cle](guide:customs).
+**Cło.** W większości krajów z własnymi biurami DSV działa jako licencjonowana agencja celna, a gdzie indziej współpracuje z agentami. W sprawach odprawy DSV zaleca kontakt z DSV w danym kraju. W UE zakupy online spoza UE podlegają od 1 lipca 2026 r. cłu 3 € za rodzaj produktu w zamówieniach do 150 €, a od 1 listopada 2026 r. unijnej opłacie manipulacyjnej 2 € za rodzaj produktu niezależnie od wartości. Poza UE obowiązują lokalne przepisy: zobacz [paczki zatrzymane na cle](guide:customs).
 
 ## Przesyłka DSV opóźniona, zatrzymana lub uszkodzona
 
@@ -102,7 +102,7 @@ Peek pokazuje status, każdy etap w brzmieniu DSV z miastem i krajem oraz przewi
 
 Jeśli szwedzka firma Early Bird przekaże twoją paczkę do DSV lub DB Schenker, Peek wskaże DSV jako doręczyciela i zacznie je śledzić, gdy pojawią się nowsze skany.
 
-Peek sprawdza co 10 minut, a w dniu skanu wydania do doręczenia co 2 minuty od 6:00 czasu lokalnego, dopóki odpowiada system DSV (przez usługi śledzenia co godzinę, a w dniu doręczenia do co 15 minut przy otwartej paczce lub włączonych alertach), i powiadamia o „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po dwóch dniach bez zmian (po 12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Nie może skontaktować się z DSV ani nadawcą, zarezerwować dostawy ani złożyć reklamacji.
+Gdy przesyłka jest otwarta w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a co 2 minuty od 6:00 czasu lokalnego w dniu, w którym DSV zeskanuje ją do doręczenia, i powiadamia o „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po dwóch dniach bez zmian (po 12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez nowości przy „Zarejestrowana” co 6 godzin. Jeśli przesyłka przez cztery dni nie ma nowego wpisu przy „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek pokazuje „Brak aktualizacji od …” z dniem tego wpisu i link „Poproś przewoźnika DSV o pomoc”. Nie może skontaktować się z DSV ani nadawcą, zarezerwować dostawy ani złożyć reklamacji.
 
 ## Pytania o śledzenie DSV
 

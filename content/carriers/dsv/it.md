@@ -18,7 +18,7 @@ Finché DSV integra Schenker nei propri sistemi mantiene due portali: una spediz
 | --- | --- |
 | `DEKLM482917365` | 14 caratteri: un codice Paese europeo come DE, SE, DK o PL, tre lettere e nove cifre. Ex numero stradale DB Schenker e il formato che il catalogo di Peek assegna a DSV. |
 | `KLM4829173` | Tre lettere e sette o otto cifre: altro ex numero stradale DB Schenker. Peek non seleziona DSV da questo formato. |
-| `094827361549283710` | 18 cifre (20 con `00` davanti): codice a barre di un collo di una ex spedizione stradale DB Schenker. |
+| `094827361549283711` | 18 cifre (20 con `00` davanti): codice a barre di un collo di una ex spedizione stradale DB Schenker. |
 | Lettere e cifre | Numero di spedizione, prenotazione o *house bill* myDSV. Peek interroga myDSV con qualunque codice di 5–40 lettere e cifre che includa almeno una cifra. |
 | `mydsv.com/track-shipment?query=DEKLM482917365` | Link al tracciamento myDSV, come aperto da «Track DSV shipment» su dsv.com. |
 
@@ -39,7 +39,7 @@ myDSV registra ogni scansione, dalla prenotazione alla prova di consegna. La vis
 | `Handover responsibilty of cargo`, `Handover of Cargo` | DSV ha ceduto la merce al termine del proprio servizio, concludendo la spedizione (la prima conserva la grafia di DSV). | «Consegnato» |
 | `Actual delivery` | Consegnata. | «Consegnato» |
 
-`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` e `Requested delivery` sono stime, non scansioni: Peek le esclude dalla cronologia e mostra `Estimated delivery` come giorno previsto di consegna (o intervallo) finché il pacco non esce in consegna.
+`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` e `Requested delivery` sono stime, non scansioni: Peek le esclude dalla cronologia e mostra `Estimated delivery` come giorno previsto di consegna (o intervallo) finché la spedizione non è consegnata.
 
 L'ex portale DB Schenker copre le spedizioni su strada con proprie diciture:
 
@@ -69,7 +69,7 @@ Lungo il percorso compaiono anche `Linehaul departed`, `Linehaul arrived`, `Term
 
 **Notifiche e prova di consegna.** Su myDSV gli utenti possono attivare avvisi (es. ritiro o sdoganamento), vedere gli orari stimati di arrivo per il trasporto su strada e scaricare la prova di consegna al termine. Se non hai prenotato tu DSV, chiedi al mittente. Le pagine DSV non indicano quanti tentativi effettua né per quanto un terminal custodisce la merce: chiedi alla filiale DSV incaricata.
 
-**Dogana.** Nella maggior parte dei Paesi in cui è presente, DSV è doganalista autorizzato; altrove collabora con agenti. Per assistenza allo sdoganamento DSV invita a contattare DSV nel Paese interessato. In Irlanda e nel resto dell'UE gli acquisti online da fuori UE prevedono dal 1° luglio 2026 un dazio di 3 € per tipo di prodotto sugli ordini fino a 150 € e dal 1° novembre 2026 una tariffa di gestione dell'Unione di 2 € per tipo di prodotto di qualunque valore. Altrove valgono le regole del tuo Paese: vedi [pacchi fermi in dogana](guide:customs).
+**Dogana.** Nella maggior parte dei Paesi in cui è presente, DSV è doganalista autorizzato; altrove collabora con agenti. Per assistenza allo sdoganamento DSV invita a contattare DSV nel Paese interessato. Nell'UE gli acquisti online da fuori UE prevedono dal 1° luglio 2026 un dazio di 3 € per tipo di prodotto sugli ordini fino a 150 € e dal 1° novembre 2026 una tariffa di gestione dell'Unione di 2 € per tipo di prodotto di qualunque valore. Altrove valgono le regole del tuo Paese: vedi [pacchi fermi in dogana](guide:customs).
 
 ## Spedizione DSV in ritardo, ferma o danneggiata
 
@@ -102,7 +102,7 @@ Peek mostra lo stato, ogni tappa nella dicitura DSV con città e Paese e il gior
 
 Se il corriere svedese Early Bird affida il pacco a DSV o DB Schenker, Peek indica DSV come corriere incaricato e lo segue appena DSV pubblica scansioni più recenti.
 
-Peek controlla fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 ora locale il giorno in cui DSV registra la spedizione in consegna, finché risponde il portale DSV (tramite servizi di tracciamento, ogni ora, e fino a ogni 15 minuti il giorno di consegna con pagina aperta o notifiche attive), con notifiche su «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Non può contattare DSV o il mittente, prenotare consegne né aprire reclami.
+Finché la spedizione è aperta in Peek, o nel giorno della consegna con le notifiche attive, Peek la controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00, ora locale, il giorno in cui DSV la registra in consegna, con notifiche su «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Se la spedizione resta quattro giorni senza una nuova riga su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …» con il giorno di quella riga e un link «Chiedi aiuto a DSV». Non può contattare DSV o il mittente, prenotare consegne né aprire reclami.
 
 ## Domande sul tracking DSV
 

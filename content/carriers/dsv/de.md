@@ -18,7 +18,7 @@ Während DSV Schenker in seine Systeme integriert, bleiben beide Tracker paralle
 | --- | --- |
 | `DEKLM482917365` | 14 Zeichen: europäischer Ländercode wie DE, SE, DK oder PL, drei Buchstaben und neun Ziffern. Frühere DB-Schenker-Landverkehrsnummer und das Format im Peek-Katalog für DSV. |
 | `KLM4829173` | Drei Buchstaben und sieben oder acht Ziffern: weiteres früheres DB-Schenker-Landverkehrsformat. Peek erkennt DSV hieran nicht automatisch. |
-| `094827361549283710` | 18 Ziffern (20 mit `00` davor): Packstück-Barcode einer früheren DB-Schenker-Landverkehrssendung. |
+| `094827361549283711` | 18 Ziffern (20 mit `00` davor): Packstück-Barcode einer früheren DB-Schenker-Landverkehrssendung. |
 | Buchstaben und Ziffern | Eine myDSV-Sendungs-, Buchungs- oder House-Bill-Nummer. Peek fragt myDSV mit beliebigen 5 bis 40 Zeichen aus Buchstaben und Ziffern (mindestens eine Ziffer) ab. |
 | `mydsv.com/track-shipment?query=DEKLM482917365` | Link zum myDSV-Tracker, wie ihn „Track DSV shipment“ auf dsv.com öffnet. |
 
@@ -69,7 +69,7 @@ Unterwegs erscheinen außerdem `Linehaul departed`, `Linehaul arrived`, `Termina
 
 **Updates und Abliefernachweis.** In myDSV lassen sich Benachrichtigungen (z. B. Abholung oder Verzollung) einrichten, geschätzte Ankunftszeiten für Straßenfracht abrufen und nach Abschluss der Abliefernachweis herunterladen. Hast du DSV nicht selbst gebucht, frag den Absender. Wie viele Zustellversuche DSV macht oder wie lange ein Terminal Ware lagert, steht auf den Seiten nicht: Wende dich an die zuständige DSV-Niederlassung.
 
-**Zoll.** In den meisten Ländern mit eigenen Standorten ist DSV zugelassener Zollagent, anderswo arbeitet es mit Partnern. Bei Fragen zur Verzollung verweist DSV an DSV im jeweiligen Land. In Irland und der übrigen EU gelten für Online-Käufe aus Drittländern seit dem 1. Juli 2026 ein EU-Zoll von 3 € je Produktart bis 150 € und seit dem 1. November 2026 eine Unions-Bearbeitungsgebühr von 2 € je Produktart unabhängig vom Wert. Anderswo gelten nationale Regeln: siehe [Paket beim Zoll](guide:customs).
+**Zoll.** In den meisten Ländern mit eigenen Standorten ist DSV zugelassener Zollagent, anderswo arbeitet es mit Partnern. Bei Fragen zur Verzollung verweist DSV an DSV im jeweiligen Land. In der EU gelten für Online-Käufe aus Drittländern seit dem 1. Juli 2026 ein EU-Zoll von 3 € je Produktart bis 150 € und seit dem 1. November 2026 eine Unions-Bearbeitungsgebühr von 2 € je Produktart unabhängig vom Wert. Anderswo gelten nationale Regeln: siehe [Paket beim Zoll](guide:customs).
 
 ## DSV-Sendung verspätet, hängen geblieben oder beschädigt
 
@@ -102,7 +102,7 @@ Peek zeigt Status, jeden Schritt im DSV-Wortlaut samt Ort und Land sowie den erw
 
 Übergibt das schwedische Unternehmen Early Bird dein Paket an DSV oder DB Schenker, nennt Peek DSV als zustellenden Paketdienst und folgt DSV, sobald neuere Scans vorliegen.
 
-Peek prüft bis zu alle 10 Minuten, am Tag der Zustellung ab 6:00 Uhr Ortszeit alle 2 Minuten, solange DSVs Tracker antwortet (über Tracking-Dienste stündlich, am Zustelltag bis zu alle 15 Minuten bei geöffneter Ansicht oder aktiven Benachrichtigungen), und benachrichtigt dich nach Wahl bei „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Es kann weder DSV oder den Absender kontaktieren noch Lieferungen buchen oder Schäden melden.
+Solange die Sendung in Peek geöffnet ist, oder an ihrem Zustelltag mit aktiven Benachrichtigungen, prüft Peek sie bis zu alle 10 Minuten, und alle 2 Minuten ab 6:00 Uhr Ortszeit an dem Tag, an dem DSV sie in die Zustellung scannt. Es benachrichtigt dich nach Wahl bei „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach zwei Tagen ohne Neuigkeiten (12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich, und nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Bleibt die Sendung vier Tage ohne neuen Eintrag bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“ mit dem Tag dieses Eintrags und einen Link „Hol dir Hilfe bei DSV“. Es kann weder DSV oder den Absender kontaktieren noch Lieferungen buchen oder Schäden melden.
 
 ## Fragen zur DSV-Sendungsverfolgung
 

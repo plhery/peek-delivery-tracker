@@ -18,7 +18,7 @@ Enquanto a DSV integra a Schenker nos seus sistemas, mantém dois rastreadores: 
 | --- | --- |
 | `DEKLM482917365` | 14 carateres: código de país europeu como DE, SE, DK ou PL, três letras e nove dígitos. Antigo número rodoviário da DB Schenker e o formato que o catálogo do Peek atribui à DSV. |
 | `KLM4829173` | Três letras e sete ou oito dígitos: outro antigo número rodoviário da DB Schenker. O Peek não identifica a DSV por esta forma. |
-| `094827361549283710` | 18 dígitos (20 com `00` à frente): o código de barras de um volume de um antigo envio rodoviário DB Schenker. |
+| `094827361549283711` | 18 dígitos (20 com `00` à frente): o código de barras de um volume de um antigo envio rodoviário DB Schenker. |
 | Letras e dígitos | Número de envio, reserva ou *house bill* do myDSV. O Peek consulta o myDSV com quaisquer 5 a 40 letras e dígitos que incluam pelo menos um dígito. |
 | `mydsv.com/track-shipment?query=DEKLM482917365` | Ligação para o seguimento myDSV, tal como abre «Track DSV shipment» em dsv.com. |
 
@@ -39,7 +39,7 @@ O myDSV regista cada leitura desde a reserva até à prova de entrega. A vista p
 | `Handover responsibilty of cargo`, `Handover of Cargo` | A DSV entregou a carga no fim do seu serviço, concluindo o envio (o primeiro mantém a grafia da DSV). | «Entregue» |
 | `Actual delivery` | Entregue. | «Entregue» |
 
-`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` e `Requested delivery` são previsões, não registos: o Peek omite-os do histórico e mostra `Estimated delivery` como dia previsto (ou intervalo de dias) até sair para entrega.
+`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` e `Requested delivery` são previsões, não registos: o Peek omite-os do histórico e mostra `Estimated delivery` como dia previsto (ou intervalo de dias) até à entrega.
 
 O antigo seguimento da DB Schenker cobre envios rodoviários com expressões próprias:
 
@@ -69,7 +69,7 @@ Pelo caminho surgem ainda `Linehaul departed`, `Linehaul arrived`, `Terminal inv
 
 **Atualizações e prova de entrega.** No myDSV os utilizadores podem configurar notificações (como recolha ou desalfandegamento), ver horas previstas de chegada para carga rodoviária e descarregar a prova de entrega no final. Se não reservaste tu a DSV, pergunta ao remetente. As páginas da DSV não indicam quantas tentativas faz nem quanto tempo um terminal guarda a carga: confirma junto do escritório DSV responsável.
 
-**Alfândega.** Na maioria dos países onde tem escritórios, a DSV é despachante aduaneiro licenciado; nos restantes trabalha com agentes. Para apoio num desalfandegamento, a DSV pede contacto com a DSV nesse país. Na Irlanda e no resto da UE, compras online fora da UE pagam 3 € de direitos por tipo de produto em encomendas até 150 € desde 1 de julho de 2026 e 2 € de taxa de tratamento da União por tipo de produto, qualquer que seja o valor, desde 1 de novembro de 2026. Fora da UE aplicam-se as regras do teu país: vê [encomendas retidas na alfândega](guide:customs).
+**Alfândega.** Na maioria dos países onde tem escritórios, a DSV é despachante aduaneiro licenciado; nos restantes trabalha com agentes. Para apoio num desalfandegamento, a DSV pede contacto com a DSV nesse país. Na UE, compras online fora da UE pagam 3 € de direitos por tipo de produto em encomendas até 150 € desde 1 de julho de 2026 e 2 € de taxa de tratamento da União por tipo de produto, qualquer que seja o valor, desde 1 de novembro de 2026. Fora da UE aplicam-se as regras do teu país: vê [encomendas retidas na alfândega](guide:customs).
 
 ## Envio DSV atrasado, parado ou danificado
 
@@ -102,7 +102,7 @@ O Peek mostra o estado, cada etapa nas palavras da DSV com cidade e país, e o d
 
 Se a transportadora sueca Early Bird entregar a tua encomenda à DSV ou DB Schenker, o Peek indica a DSV como transportadora entregadora e passa a segui-la assim que apresentar registos mais recentes.
 
-O Peek verifica até de 10 em 10 minutos, ou de 2 em 2 a partir das 6:00 hora local no dia em que a DSV regista o envio em distribuição, enquanto o seguimento próprio responder (via serviços de seguimento, de hora a hora, e até de 15 em 15 minutos no dia da entrega com a página aberta ou alertas ativos), podendo notificar-te para «Todos os registos», «Passos importantes» ou «Só a entrega». Após dois dias sem novidades (12 horas enquanto mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Não pode contactar a DSV nem o remetente, agendar entregas nem abrir reclamações.
+Enquanto o envio estiver aberto no Peek, ou no dia da entrega com as notificações ativas, o Peek verifica-o até de 10 em 10 minutos, e de 2 em 2 minutos a partir das 6:00, hora local, no dia em que a DSV o regista em distribuição, podendo notificar-te para «Todos os registos», «Passos importantes» ou «Só a entrega». Após dois dias sem novidades (12 horas enquanto mostrar «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e de 6 em 6 horas após sete dias sem novidades em «Etiqueta criada». Se o envio ficar quatro dias sem uma linha nova em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações desde …» com o dia dessa linha e uma ligação «Pede ajuda a DSV». Não pode contactar a DSV nem o remetente, agendar entregas nem abrir reclamações.
 
 ## Perguntas sobre o seguimento da DSV
 

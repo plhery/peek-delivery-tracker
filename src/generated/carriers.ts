@@ -3508,6 +3508,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "nox-sendungsverfolgung",
+      "title": "nox NachtExpress Sendungsverfolgung: Status & Abstellplatz",
+      "name": "nox",
+      "color": "#fadb00"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "far-international-sendungsverfolgung",
@@ -5294,6 +5302,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "suivi-nox",
+      "title": "Suivi nox NachtExpress\u00a0: statuts, dépôt et contact",
+      "name": "nox",
+      "color": "#fadb00"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "suivi-far-international",
@@ -7040,6 +7056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "tracciamento-nox",
+      "title": "Tracciamento nox NachtExpress: stati, deposito e contatti",
+      "name": "nox",
+      "color": "#fadb00"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "tracciamento-far-international",
@@ -8770,6 +8794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006647"
     },
     {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "seguimiento-nox",
+      "title": "Seguimiento nox NachtExpress: estados, depósito y contacto",
+      "name": "nox",
+      "color": "#fadb00"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "seguimiento-far-international",
@@ -10482,6 +10514,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento R+L Carriers: número PRO, estados e reclamações",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "seguimento-nox",
+      "title": "Seguimento nox NachtExpress: estados, depósito e contacto",
+      "name": "nox",
+      "color": "#fadb00"
     },
     {
       "id": "far-international",
@@ -12246,6 +12286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie R+L Carriers: numer PRO, statusy i reklamacje",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "sledzenie-nox",
+      "title": "Śledzenie nox NachtExpress: statusy, miejsce dostawy",
+      "name": "nox",
+      "color": "#fadb00"
     },
     {
       "id": "far-international",

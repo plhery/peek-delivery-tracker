@@ -209,7 +209,7 @@
   { "id": "pin-ag", "catalog": "pin-ag", "name": "PIN AG", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "pitney-bowes", "catalog": "pitney-bowes", "name": "Pitney Bowes", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "rl-carriers", "catalog": "rl-carriers", "name": "R+L Carriers", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "nox", "catalog": "nox", "name": "nox", "languages": ["en"] },
+  { "id": "nox", "catalog": "nox", "name": "nox", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "far-international", "catalog": "far-international", "name": "FAR International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

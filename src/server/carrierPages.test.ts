@@ -198,6 +198,7 @@ describe('what a carrier’s page tells a search engine', () => {
 
   it('sets a French page’s words as French is set, its code aside', async () => {
     // Each file read once, as in production: rendering every page re-reads them otherwise, too slowly for a busy runner.
+    // Every French carrier page is rendered, so the time grows with their number: under coverage on CI it passes ten seconds.
     vi.stubEnv('NODE_ENV', 'production');
     const pages = [
       renderToStaticMarkup(await CarrierIndexRoute({ locale: 'fr' })),
@@ -208,7 +209,7 @@ describe('what a carrier’s page tells a search engine', () => {
       expect(words).not.toMatch(/ [?!;:»]|« /);
     }
     expect(pages[0]).toContain(frenchSpacing(fr['carriers.lead']));
-  });
+  }, 60_000);
 });
 
 describe('a site that serves no carriers\' pages', () => {

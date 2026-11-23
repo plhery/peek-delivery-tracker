@@ -3388,6 +3388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "posta-shqiptare-sendungsverfolgung",
+      "title": "Posta Shqiptare Sendungsverfolgung: AL-Nummern und Zoll",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "dsv-sendungsverfolgung",
@@ -5038,6 +5046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "suivi-posta-shqiptare",
+      "title": "Suivi Posta Shqiptare\u00a0: numéros AL, statuts et douane",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "suivi-dsv",
@@ -6656,6 +6672,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "tracking-posta-shqiptare",
+      "title": "Tracking Posta Shqiptare: codici AL, stati e dogana",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "tracking-dsv",
@@ -8258,6 +8282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#d9232d"
     },
     {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "seguimiento-posta-shqiptare",
+      "title": "Seguimiento Posta Shqiptare: números AL y aduanas",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
+    },
+    {
       "id": "dsv",
       "catalog": "dsv",
       "slug": "seguimiento-dsv",
@@ -9834,6 +9866,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Correos de Chile: números e estados",
       "name": "Correos de Chile",
       "color": "#d9232d"
+    },
+    {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "seguimento-posta-shqiptare",
+      "title": "Seguimento Posta Shqiptare: códigos AL, estados e alfândega",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
     },
     {
       "id": "dsv",
@@ -11470,6 +11510,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Correos de Chile: numery i statusy",
       "name": "Correos de Chile",
       "color": "#d9232d"
+    },
+    {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "sledzenie-posta-shqiptare",
+      "title": "Śledzenie Posta Shqiptare: numery AL, statusy i cło",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
     },
     {
       "id": "dsv",

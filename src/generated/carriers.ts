@@ -2628,6 +2628,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-sendungsverfolgung",
+      "title": "Venipak Sendungsverfolgung: Status, Automaten und Kontakt",
+      "name": "Venipak",
+      "color": "#9339f2"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "lietuvos-pastas-sendungsverfolgung",
@@ -4276,6 +4284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Pošta Srbije\u00a0: poste serbe, statuts et contacts",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "suivi-venipak",
+      "title": "Suivi Venipak\u00a0: statuts, consignes et livraisons manquées",
+      "name": "Venipak",
+      "color": "#9339f2"
     },
     {
       "id": "lietuvos-pastas",
@@ -5952,6 +5968,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "tracciamento-venipak",
+      "title": "Tracciamento Venipak: stati, locker e consegne mancate",
+      "name": "Venipak",
+      "color": "#9339f2"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "tracciamento-lietuvos-pastas",
@@ -7578,6 +7602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fbba00"
     },
     {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "seguimiento-venipak",
+      "title": "Seguimiento Venipak: estados, taquillas y contacto",
+      "name": "Venipak",
+      "color": "#9339f2"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "seguimiento-lietuvos-pastas",
@@ -9202,6 +9234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Pošta Srbije: correios da Sérvia, estados e ajuda",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "seguimento-venipak",
+      "title": "Seguimento Venipak: estados, cacifos e entregas falhadas",
+      "name": "Venipak",
+      "color": "#9339f2"
     },
     {
       "id": "lietuvos-pastas",
@@ -10862,6 +10902,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Pošta Srbije: Poczta Serbska, statusy i kontakt",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "sledzenie-venipak",
+      "title": "Śledzenie Venipak: statusy, automaty paczkowe i kontakt",
+      "name": "Venipak",
+      "color": "#9339f2"
     },
     {
       "id": "lietuvos-pastas",

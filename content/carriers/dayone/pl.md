@@ -18,7 +18,7 @@ DayOne nie publikuje oficjalnego formatu. Taki kształt Peek rozpoznaje jako Day
 | `DOT1482917364058291` | DOT1 i 15 kolejnych cyfr: również DayOne. Serwis DayOne sprawdza je w innym systemie. |
 | `DOT048291736405829` | Tylko 15 cyfr: nie pasuje do DayOne i Peek nie wskazuje DayOne. Sprawdź, czy nie brakuje cyfry. |
 
-W Peek wielkość liter nie ma znaczenia. Zapisuj DOT łącznie z cyframi: spacja albo myślnik zaraz po DOT może sprawić, że Peek odczyta same cyfry i wskaże innego przewoźnika.
+W Peek wielkość liter, spacje i myślniki nie mają znaczenia, gdy wklejasz sam numer. W całej wiadomości zapisuj DOT łącznie z cyframi: spacja zaraz po DOT może sprawić, że Peek odczyta same cyfry i wskaże innego przewoźnika.
 
 **Gdzie go znaleźć.** W e-mailu o wysyłce ze sklepu lub na stronie zamówienia. Jeśli nie możesz go znaleźć, zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
@@ -104,7 +104,7 @@ Gdy DayOne podaje strefę czasową skanu, Peek ją wykorzystuje. Dla skanu bez s
 
 Strona DayOne nie wyświetla numeru doręczającego przewoźnika, ale odpowiedź techniczna czasem go zawiera. Peek odpytuje wtedy także tę firmę: pocztę w twoim kraju dla numeru pocztowego (dwie litery, dziewięć cyfr, dwie litery) jak Royal Mail, USPS, Canada Post, An Post czy Australia Post, albo jednego przewoźnika wynikającego z formatu, np. YunExpress dla numeru `YT`. Gdy ten przewoźnik pokaże skan co najmniej tak świeży jak najnowszy w DayOne, Peek przełącza śledzenie na niego, wyświetla jego numer obok DOT i zachowuje historię DayOne.
 
-Dla numeru `DOT0`, dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a od 6:00 czasu lokalnego w dniu zeskanowania jej przez DayOne do doręczenia nawet co 2 minuty, dopóki własny system DayOne odpowiada; po dwóch dniach bez wieści (po 12 godzinach przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Dla numeru `DOT1` (przez usługi śledzenia) Peek sprawdza co godzinę, co 3 godziny po dniu bez nowego skanu, co 6 godzin po siedmiu dniach na etapie „Zarejestrowana” oraz nawet co 15 minut w dniu doręczenia, dopóki masz paczkę otwartą w Peek lub włączone powiadomienia. Może wysyłać powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z DayOne ani ze sklepem.
+Dla numeru `DOT0`, dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a od 6:00 czasu lokalnego w dniu zeskanowania jej przez DayOne do doręczenia nawet co 2 minuty, dopóki własny system DayOne odpowiada; po dwóch dniach bez wieści (po 12 godzinach przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Dla numeru `DOT1` (przez usługi śledzenia) Peek sprawdza co godzinę, co 3 godziny po dniu bez nowego skanu, co 6 godzin po siedmiu dniach na etapie „Zarejestrowana” oraz nawet co 15 minut w dniu, w którym paczka jest w doręczeniu, dopóki masz paczkę otwartą w Peek lub włączone powiadomienia. Może wysyłać powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z DayOne ani ze sklepem.
 
 ## Pytania o śledzenie DayOne
 

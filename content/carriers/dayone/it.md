@@ -18,7 +18,7 @@ DayOne non pubblica un formato ufficiale. Ecco la forma che Peek riconosce come 
 | `DOT1482917364058291` | DOT1 e altre 15 cifre: anch’esso di DayOne. Il tracker DayOne cerca questi numeri in un altro sistema. |
 | `DOT048291736405829` | Solo 15 cifre: non è il formato DayOne e Peek non nomina DayOne. Controlla se manca una cifra. |
 
-In Peek le minuscole non contano. Tieni DOT unito alle cifre: con uno spazio o un trattino subito dopo DOT, Peek può leggere solo le cifre e proporre un altro corriere.
+In Peek minuscole, spazi e trattini non contano se incolli il codice da solo. In un messaggio intero, tieni DOT unito alle cifre: con uno spazio subito dopo DOT, Peek può leggere solo le cifre e proporre un altro corriere.
 
 **Dove trovarlo.** Nell’e-mail di spedizione del negozio o nella pagina dell’ordine. Se non lo trovi, vedi [come trovare il numero di tracciamento](guide:find-tracking-number).
 
@@ -104,7 +104,7 @@ Quando DayOne indica il fuso orario di una scansione, Peek lo usa. Se manca, ric
 
 Il tracker di DayOne non mostra il codice del corriere finale, ma la sua risposta a volte lo contiene. In tal caso Peek interroga anche quell’azienda: la posta del tuo paese per un codice postale (due lettere, nove cifre, due lettere) come Royal Mail, USPS, Canada Post, An Post o Australia Post, oppure l’unico corriere legato al formato, come YunExpress per un codice `YT`. Appena quel corriere registra una scansione almeno recente quanto l’ultima di DayOne, Peek passa a seguirlo lì, mostra quel codice accanto al DOT e conserva la cronologia di DayOne.
 
-Per un codice `DOT0`, mentre tieni il pacco aperto in Peek o il giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e dalle 6:00 (ora locale) del giorno in cui DayOne scansiona il pacco in consegna fino a ogni 2 minuti finché il tracker proprio di DayOne risponde; dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora, e se resta su «Etichetta creata» per sette giorni, ogni 6 ore. Per un codice `DOT1` (tramite servizi di tracciamento), Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni, ogni 6 ore dopo sette giorni su «Etichetta creata», e fino a ogni 15 minuti il giorno della consegna mentre il pacco è aperto in Peek o le notifiche sono attive. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare DayOne né il negozio al posto tuo.
+Per un codice `DOT0`, mentre tieni il pacco aperto in Peek o il giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti, e dalle 6:00 (ora locale) del giorno in cui DayOne scansiona il pacco in consegna fino a ogni 2 minuti finché il tracker proprio di DayOne risponde; dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), Peek controlla ogni ora, e se resta su «Etichetta creata» per sette giorni, ogni 6 ore. Per un codice `DOT1` (tramite servizi di tracciamento), Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni, ogni 6 ore dopo sette giorni su «Etichetta creata», e fino a ogni 15 minuti il giorno in cui il pacco è in consegna, mentre il pacco è aperto in Peek o le notifiche sono attive. Può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare DayOne né il negozio al posto tuo.
 
 ## Domande sul tracciamento DayOne
 

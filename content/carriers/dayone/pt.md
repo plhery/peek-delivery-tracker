@@ -18,7 +18,7 @@ A DayOne não publica um formato oficial. Este é o formato que o Peek reconhece
 | `DOT1482917364058291` | DOT1 e mais 15 dígitos: também da DayOne. O site da DayOne consulta estes números noutro sistema. |
 | `DOT048291736405829` | Apenas 15 dígitos: não é formato DayOne e o Peek não identifica a DayOne. Verifica se falta um dígito. |
 
-No Peek, minúsculas não importam. Mantém DOT colado aos dígitos: com um espaço ou hífen logo após DOT, o Peek pode ler só os dígitos e indicar outra transportadora.
+No Peek, minúsculas, espaços e hífenes não importam quando colas o número sozinho. Numa mensagem inteira, mantém DOT colado aos dígitos: com um espaço logo após DOT, o Peek pode ler só os dígitos e indicar outra transportadora.
 
 **Onde encontrar.** No e-mail de envio da loja ou na página da encomenda. Se não encontrares, vê [como encontrar o teu número de seguimento](guide:find-tracking-number).
 
@@ -104,7 +104,7 @@ Quando a DayOne fornece o fuso horário de um registo, o Peek utiliza-o. Sem fus
 
 O site da DayOne não mostra o número da empresa que entrega, mas a resposta técnica inclui-o por vezes. O Peek consulta então também essa empresa: o correio do teu país para um número postal (duas letras, nove dígitos, duas letras) como Royal Mail, USPS, Canada Post, An Post ou Australia Post, ou a única transportadora indicada pelo formato, como a YunExpress para números `YT`. Assim que essa transportadora mostrar um registo pelo menos tão recente como o último da DayOne, o Peek acompanha a encomenda lá, mostra esse número junto ao DOT e preserva o histórico da DayOne.
 
-Para um número `DOT0`, enquanto manténs a encomenda aberta no Peek ou no dia da entrega com as notificações ativadas, o Peek verifica até de 10 em 10 minutos, e a partir das 6:00 (hora local) do dia em que a DayOne regista a encomenda em distribuição até de 2 em 2 minutos enquanto o site próprio da DayOne responder; após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora, e se ficar sete dias em «Etiqueta criada», de 6 em 6 horas. Para um número `DOT1` (via serviços de seguimento), o Peek verifica de hora em hora, de 3 em 3 horas após um dia sem novos registos, de 6 em 6 horas após sete dias em «Etiqueta criada», e até de 15 em 15 minutos no dia da entrega enquanto manténs a encomenda aberta no Peek ou as notificações ativadas. Pode avisar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a DayOne nem a loja por ti.
+Para um número `DOT0`, enquanto manténs a encomenda aberta no Peek ou no dia da entrega com as notificações ativadas, o Peek verifica até de 10 em 10 minutos, e a partir das 6:00 (hora local) do dia em que a DayOne regista a encomenda em distribuição até de 2 em 2 minutos enquanto o site próprio da DayOne responder; após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora em hora, e se ficar sete dias em «Etiqueta criada», de 6 em 6 horas. Para um número `DOT1` (via serviços de seguimento), o Peek verifica de hora em hora, de 3 em 3 horas após um dia sem novos registos, de 6 em 6 horas após sete dias em «Etiqueta criada», e até de 15 em 15 minutos no dia em que a encomenda está em distribuição, enquanto manténs a encomenda aberta no Peek ou as notificações ativadas. Pode avisar-te de «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a DayOne nem a loja por ti.
 
 ## Perguntas sobre o seguimento DayOne
 

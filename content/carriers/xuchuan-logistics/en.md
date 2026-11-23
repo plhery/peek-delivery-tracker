@@ -10,13 +10,13 @@ Xuchuan International Logistics (旭川国际物流) is a freight forwarder in X
 
 ## Xuchuan tracking number: what it looks like
 
-Xuchuan publishes no number format. Peek's catalog links one shape to Xuchuan: XC, ten digits and CN, 14 characters in all, like the invented `XC0000000000CN`. It's only a weak match: the shape alone doesn't prove the number is Xuchuan's. No other carrier in Peek's list uses it.
+Xuchuan publishes no number format. Peek's catalog links one shape to Xuchuan: XC, ten digits and CN, 14 characters in all, like `XC4829173640CN`. It's only a weak match: the shape alone doesn't prove the number is Xuchuan's. No other carrier in Peek's list uses it.
 
 | Number | What it is |
 | --- | --- |
-| `XC0000000000CN` | XC, ten digits, CN: the shape Peek links to Xuchuan. |
-| `XC000000005CN` | Two letters, nine digits, CN: the shape of a [postal number](guide:tracking-number-formats) from China. Peek reads it as [China Post](carrier:china-post) if its check digit is right. Count the digits again. |
-| `XC00000000000CN` | Eleven digits: no shape Peek knows. Check for an extra digit. |
+| `XC4829173640CN` | XC, ten digits, CN: the shape Peek links to Xuchuan. |
+| `XC482917367CN` | Two letters, nine digits, CN: the shape of a [postal number](guide:tracking-number-formats) from China. Peek reads it as [China Post](carrier:china-post) if its check digit is right. Count the digits again. |
+| `XC48291736405CN` | Eleven digits: no shape Peek knows. Check for an extra digit. |
 
 Spaces, dashes and lower case don't matter when you paste the number into Peek.
 
@@ -53,7 +53,7 @@ It says it handles the last mile for online sellers, but not who does it in your
 
 ## Xuchuan contact and customer service
 
-As read on 14 November 2026, xcwl.ltd, in Chinese only, lists:
+xcwl.ltd, in Chinese only, lists:
 
 - **Phone**: one Chinese mobile number, given as the customer service hotline. One part of the page says it answers 24/7; the footer says Monday to Friday, 9:00 to 18:00. No time zone is given.
 - **Chat**: a WeChat ID and a QQ number for customer service. The boxes that say to scan a QR code show only an icon, no code. QQ is online from 9:00 to 21:00.
@@ -72,7 +72,11 @@ Xuchuan has no tracker for Peek to read. So Peek asks ParcelsApp, Ship24 and 17T
 
 Until a service knows the number, the parcel shows "No tracking history yet", or "Waiting for Xuchuan International Logistics" once you've picked Xuchuan. Once the parcel is filed under Xuchuan, a service may name the carrier that took it over, with that carrier's own number. If Peek can read that carrier's own tracking, it asks there too. Once that carrier has a scan at least as new as the newest in the history, Peek follows the parcel there and keeps the earlier scans. The parcel shows "Delivery with" and that carrier's name; while that carrier has only been told the parcel is coming, it shows "Announced to …, not received yet".
 
-While a service has the parcel, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Xuchuan or the shop for you.
+While a service has the parcel, Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours after seven days without news at "Label created". On the day it's out for delivery, Peek checks up to every 15 minutes while you have it open in Peek or with notifications on. A service that didn't know the number is asked again a day later.
+
+When a parcel at "Label created", "Received by carrier" or "In transit" has had no new scan for four days, Peek flags it with the newest scan's day, such as "No tracking update since Mon 12 Oct", and the parcel's page says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Xuchuan International Logistics." Xuchuan has no help page in Peek, so a "Get help from …" link appears only once Peek follows the delivering company, and only if that company has one. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Xuchuan International Logistics."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Xuchuan or the shop for you.
 
 ## Questions about Xuchuan tracking
 
@@ -86,7 +90,7 @@ Not one of its own. The tracking box on xcwl.ltd runs 17TRACK's tracking widget 
 
 ### What does a Xuchuan tracking number look like?
 
-The shape Peek links to Xuchuan is XC, ten digits and CN, like the invented `XC0000000000CN`. Xuchuan publishes no format itself, so the shape is only a weak match, not proof. With nine digits, it's the shape of a China Post number instead.
+The shape Peek links to Xuchuan is XC, ten digits and CN, like `XC4829173640CN`. Xuchuan publishes no format itself, so the shape is only a weak match, not proof. With nine digits, it's the shape of a China Post number instead.
 
 ### Who delivers Xuchuan parcels?
 

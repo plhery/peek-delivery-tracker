@@ -14,8 +14,8 @@ Poșta Română's tracking code has 13 characters: two letters, nine digits and 
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `CP000000005RO` | An item Poșta Română numbered, within Romania or going abroad. The two letters in front vary with the service; `RO` at the end is what counts. |
-| `RR000000005CN` | Ends in other letters, here `CN`: another country's post numbered it, here [China Post](carrier:china-post). A parcel coming to Romania from abroad usually has such a number. |
+| `CP482917367RO` | An item Poșta Română numbered, within Romania or going abroad. The two letters in front vary with the service; `RO` at the end is what counts. |
+| `RR739402812CN` | Ends in other letters, here `CN`: another country's post numbered it, here [China Post](carrier:china-post). A parcel coming to Romania from abroad usually has such a number. |
 
 Poșta Română tracks registered and insured items, parcels, cash-on-delivery parcels, EMS and registered printed papers. A standard letter can't be tracked.
 
@@ -30,6 +30,7 @@ Peek reads each step in Romanian, usually without accents, with the office or hu
 | `In transport` | It has left the place named and is on its way. |
 | `Sosit in Romania` | It has arrived in Romania from abroad, at the international exchange office. |
 | `Expediat din Romania` | It has been sent abroad. Poșta Română's tracking ends here. |
+| `Predat la factor` | Handed to the postman for the round: out for delivery. |
 | `Programat pentru predare incepand cu aceasta data` | It's ready to be handed over from this date at the post office named. Collect it there. |
 | `Predat la destinatar` | Handed to the recipient: delivered. |
 | `Returnat catre expeditor` | It's going back to the sender. |
@@ -44,7 +45,7 @@ Peek files these under its own stages, such as "In transit" or "Ready for pickup
 
 **Customs on parcels from outside the EU.** Romania is in the EU, so a parcel from China, the UK or the US goes through customs, and every such parcel with goods needs an electronic customs declaration, gifts included. Poșta Română declares your online orders of up to €150 for you, as your representative, and collects VAT at the standard 21% on them, unless the seller collected it through IOSS and the data sent ahead with the parcel shows it. Since 1 July 2026, goods bought online from outside the EU in orders up to €150 carry a €3 EU customs duty per item, as Poșta Română's own customs page says too. Since 1 November 2026, a €2 Union handling fee per item applies as well, whatever the value. An item is the goods in a parcel that share a tariff classification, description and, where required, origin.
 
-Poșta Română charges a customs presentation fee of 18.00 lei for these low-value parcels, gifts and IOSS parcels included. If customs selects the parcel for a risk check, you get a notice asking for documents, and the customs brokerage fee is 35.00 lei per parcel instead. You need an EORI number for customs formalities, even as a private person receiving a gift that needs them. You pay import taxes in cash, or by card at post offices with customs assistance that have a card terminal. More in [parcels held at customs](guide:customs).
+Poșta Română charges a customs presentation fee for these low-value parcels, gifts and IOSS parcels included. If customs selects the parcel for a risk check, you get a notice asking for documents, and a higher customs brokerage fee per parcel applies instead. You need an EORI number for customs formalities, even as a private person receiving a gift that needs them. You pay import taxes in cash, or by card at post offices with customs assistance that have a card terminal. More in [parcels held at customs](guide:customs).
 
 **Delays and returns at customs.** Poșta Română processes these parcels in Bucharest, using electronic data the sending post sends ahead. Missing or incomplete data delays a parcel; without it or proper CN22/CN23 customs forms, the parcel goes back to the sender. Ordered on [AliExpress](guide:aliexpress-orders), [Temu](guide:temu-orders) or [Shein](guide:shein-orders)? See [tracking from China](guide:tracking-from-china).
 
@@ -64,9 +65,9 @@ Poșta Română's tracker follows an item until it leaves Romania, and shows not
 
 ## Poșta Română customer service and contact
 
-Poșta Română's channels, as read on 1 November 2026:
+Poșta Română's channels:
 
-- **Phone:** 021 9393, Monday to Friday, 8am to 8pm. Calls are charged at the normal rate.
+- **Phone:** 021 9393, Monday to Friday, 8am to 8pm Romanian time. Calls are charged at the normal rate.
 - **Email:** suportclienti@ro.post.
 - **Complaints:** online with the internal or [international complaint form](https://www.posta-romana.ro/en/reclamatii-externe.html), at a post office counter, or by post with confirmation of receipt. Poșta Română doesn't take complaints by phone or through its Customer Support form.
 
@@ -78,9 +79,9 @@ Every post uses the same 13-character shape, so [Peek](/) doesn't name Poșta Ro
 
 Peek reads Poșta Română's own tracking. It shows each step in Poșta Română's Romanian wording with the place it names, and the post office where your parcel waits as the "Pickup point", or as "Picked up at" once you've collected it. Peek reads every scan on Romanian time, as the tracker shows only scans in Romania. It leaves out the origin, the departure date and the office's opening hours. A `Programat pentru predare incepand cu aceasta data` line dated ahead, such as the next day, shows in Peek once that time comes. The tracker gives no expected delivery date, weight or names, so Peek shows none. "Open the Poșta Română website" on the parcel's page opens the number on Poșta Română's tracker. Pick Poșta Română for a number it can't look up, and Peek shows "doesn’t issue numbers like this one".
 
-When you track an `RO` number from outside Romania, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post from Ireland, Canada Post, Australia Post, [NZ Post](carrier:nz-post), [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, Israel Post from Israel, and a carrier in every other EU country, Switzerland and Norway. It switches to that post once it shows fresh scans, and keeps Poșta Română's history. From Romania, Peek asks no other post, as Poșta Română's tracking doesn't name the destination, so follow the destination post yourself; from Moldova, Turkey or the UAE, it knows none to ask. The other way round, when another post's tracking names Romania as the destination, or names none and you track from Romania, Peek asks Poșta Română with that post's number.
+When you track an `RO` number from outside Romania, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post from Ireland, Canada Post, Australia Post, [NZ Post](carrier:nz-post), [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, Israel Post from Israel, the post of every other EU country (Spring GDS from the Netherlands), Switzerland, Norway and Moldova, and more, from Japan to Brazil. It switches to that post once it shows a scan no older than Poșta Română's newest, and keeps Poșta Română's history. From Romania, Peek asks no other post, as Poșta Română's tracking doesn't name the destination, so follow the destination post yourself; from a country whose post Peek doesn't know, such as Turkey or the UAE, it asks none. The other way round, when another post's tracking names Romania as the destination, or names none and you track from Romania, Peek asks Poșta Română with that post's number.
 
-Peek checks up to every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Poșta Română, your post or the shop for you.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek asks Poșta Română up to every 10 minutes, and every 2 minutes from 6 a.m. Romanian time on the day Poșta Română hands the parcel to the postman (`Predat la factor`), while its tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Poșta Română." and a "Get help from Poșta Română" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Poșta Română." Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Poșta Română, your post or the shop for you.
 
 ## Questions about Poșta Română tracking
 
@@ -98,20 +99,20 @@ At least 5 calendar days from the day it notifies you. Collect it at the office 
 
 ### Do I pay customs on a parcel from outside the EU?
 
-For online orders, yes. Orders up to €150 carry a €3 customs duty per item, and every online order the €2 Union handling fee per item, whatever its value. Poșta Română also collects 21% VAT unless the seller collected it through IOSS, and charges a customs presentation fee of 18.00 lei.
+For online orders, yes. Orders up to €150 carry a €3 customs duty per item, and every online order the €2 Union handling fee per item, whatever its value. Poșta Română also collects 21% VAT unless the seller collected it through IOSS, and charges a customs presentation fee.
 
 ### What is the Poșta Română customer service number?
 
-021 9393, Monday to Friday, 8am to 8pm, or email suportclienti@ro.post. Poșta Română doesn't take complaints by phone.
+021 9393, Monday to Friday, 8am to 8pm Romanian time, or email suportclienti@ro.post. Poșta Română doesn't take complaints by phone.
 
 :::sources
 - [Poșta Română: Track & Trace](https://www.posta-romana.ro/en/track-trace.html) – 13-character code, tracking in Romania only, destination post's tracker, complaint forms, contact, scam warning
-- [Poșta Română: Help](https://www.posta-romana.ro/en/help.html) – code format, trackable services, standard letters, compensation at any post office, unregistered mail, posts covering their own part
-- [Poșta Română: Ajutor](https://www.posta-romana.ro/ajutor.html) – customs declarations, €3 duty, 21% VAT, 18.00 and 35.00 lei fees, EORI, exchange office, returns without data, payment, declaring yourself
+- [Poșta Română](https://www.posta-romana.ro/) – scam warning
+- [Poșta Română: Ajutor (archived copy)](https://web.archive.org/web/20260713182410/https://www.posta-romana.ro/ajutor.html) – trackable services, posts covering their own part, compensation at any post office, customs declarations, 21% VAT, presentation and brokerage fees, exchange office, returns without data, payment, declaring yourself
 - [Poșta Română: Modificări vamale începând cu 01.07.2026](https://www.posta-romana.ro/a2050/servicii-destinatari/informatii-utile/intrebari-frecvente/modificari-vamale-incepand-cu-01072026.html) – €3 duty per item from 1 July 2026, EORI for gifts
 - [Poșta Română: Termeni și condiții](https://www.posta-romana.ro/a119/termeni-de-utilizare/termeni-si-conditii.html) – universal service, delivery everywhere in Romania, Z+5, 5-day hold, liability, complaint rules
 - [Poșta Română: International complaint](https://www.posta-romana.ro/en/reclamatii-externe.html) – who can complain, complaint reasons
-- [Poșta Română: Contact info](https://www.posta-romana.ro/en/a847/about-us/contact-info.html) – phone, email, hours
+- [Poșta Română: Contact](https://www.posta-romana.ro/contact.html) – phone, email, hours, no complaints by phone or through the support form
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty, €2 handling fee
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – per item, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – scan wordings, what Peek reads, which post it asks next

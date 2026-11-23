@@ -272,5 +272,11 @@
   { "id": "chukou1", "catalog": "chukou1", "name": "Chukou1", "languages": ["en"] },
   { "id": "cj-packet", "catalog": "cj-packet", "name": "CJ Packet", "languages": ["en"] },
   { "id": "cmt-express", "catalog": "cmt-express", "name": "CMT Express", "languages": ["en"] },
-  { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es"] }
+  { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es"] },
+  { "id": "dobropost", "catalog": "dobropost", "name": "DobroPost", "languages": ["en"] },
+  { "id": "ems", "catalog": "ems", "name": "EMS", "languages": ["en"] },
+  { "id": "jiayang", "catalog": "jiayang", "name": "Jiayang International", "languages": ["en"] },
+  { "id": "jumppoint-international", "catalog": "jumppoint-international", "name": "Jumppoint International Express", "languages": ["en"] },
+  { "id": "kuayuan-express", "catalog": "kuayuan-express", "name": "Kuayuan Express", "languages": ["en"] },
+  { "id": "liccardi", "catalog": "liccardi", "name": "Liccardi Express Courier", "languages": ["en", "it"] }
 ]

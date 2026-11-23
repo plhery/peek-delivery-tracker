@@ -2200,6 +2200,54 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Correos de México tracking: S10 MX codes, claims & help",
       "name": "Correos de México",
       "color": "#ed007d"
+    },
+    {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "dobropost-tracking",
+      "title": "DobroPost tracking: DBRPST codes, statuses & China hubs",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "ems-tracking",
+      "title": "EMS tracking: S10 item numbers, statuses & postal help",
+      "name": "EMS",
+      "color": "#003b7a"
+    },
+    {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "jiayang-tracking",
+      "title": "Jiayang International tracking: JYGJ codes, statuses & help",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "jumppoint-international-tracking",
+      "title": "Jumppoint International tracking: JP codes, statuses & help",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
+      "id": "kuayuan-express",
+      "catalog": "kuayuan-express",
+      "slug": "kuayuan-express-tracking",
+      "title": "Kuayuan Express tracking: waybill codes, handoffs & help",
+      "name": "Kuayuan Express",
+      "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "liccardi-tracking",
+      "title": "Liccardi Express Courier tracking: LDV codes & support",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     }
   ],
   "de": [
@@ -8134,6 +8182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento FAN Courier International: AWB e stati",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "tracciamento-liccardi",
+      "title": "Tracciamento Liccardi Express Courier: LDV, stati e aiuto",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     }
   ],
   "es": [

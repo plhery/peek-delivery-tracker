@@ -14,7 +14,7 @@ The number shape Peek's code knows for Early Bird (digits invented):
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00373402216000000004` | 20 digits: `00`, any digit, `73402216`, then nine digits. The last one is a check digit. A parcel barcode number. |
+| `00373402216482917364` | 20 digits: `00`, any digit, `73402216`, then nine digits. The last one is a check digit. A parcel barcode number. |
 | Another reference | 8 to 30 letters and digits. Peek can track it at Early Bird, but can't tell Early Bird from its shape. |
 
 [PostNord](carrier:postnord) and [Bring](carrier:bring) also use 20-digit numbers starting `00`, so the shape alone doesn't prove the parcel is with Early Bird. Gave the wrong mobile number? You can still track with the parcel number from the shop's order confirmation. More in [how to find your tracking number](guide:find-tracking-number).
@@ -53,7 +53,7 @@ A dash: Peek's code has no Swedish wording for that step. On Early Bird's own pa
 
 **Who brings it.** Newspaper carriers, on their rounds. Early Bird is owned by Sweden's leading media companies and reaches almost all of Sweden, towns and countryside. Your options depend on where you live and what the shop chose.
 
-**When.** At night or early in the morning. Early Bird says deliveries usually happen between 01:00 and 07:00, and your parcel is there by 07:00. You don't need to be home or awake. It delivers up to six days a week, weekends included, depending on the area.
+**When.** At night or early in the morning. Early Bird says deliveries usually happen between 01:00 and 07:00 Swedish time, and your parcel is there by 07:00. You don't need to be home or awake. It delivers up to six days a week, weekends included, depending on the area.
 
 **How long.** Home Delivery takes 1 to 3 days from when Early Bird receives the parcel, not from the day you ordered. Early Bird Express, where the shop offers it, comes the same night: by 07:00 the morning after you order. The planned delivery day is in the link in Early Bird's SMS or email.
 
@@ -78,7 +78,7 @@ A dash: Peek's code has no Swedish wording for that step. On Early Bird's own pa
 
 ## Early Bird customer service and contact
 
-As read on 2 November 2026, Early Bird's [Contact us page](https://earlybird.se/en/contact-us) lists no phone number or email address. You pick a subject, such as "Damaged package", "Incorrect delivery" or "Received someone else's package", and fill in its form with your tracking number and a short description. For a refund or a return, contact the shop. Peek can't contact Early Bird or the shop for you.
+Early Bird's [Contact us page](https://earlybird.se/en/contact-us) lists no phone number or email address. You pick a subject, such as "Damaged package", "Incorrect delivery" or "Received someone else's package", and fill in its form with your tracking number and a short description. For a refund or a return, contact the shop. Peek can't contact Early Bird or the shop for you.
 
 > Early Bird doesn't ask for an extra fee to release a parcel: delivery is normally paid when you buy. Don't pay or click links in an unexpected message; check the parcel on Early Bird's own tracking page. More in [delivery scam texts](guide:delivery-scam-texts).
 
@@ -93,13 +93,13 @@ As read on 2 November 2026, Early Bird's [Contact us page](https://earlybird.se/
 
 **When another carrier takes over.** Early Bird's tracking then links to that carrier's. Peek's code knows three: PostNord, DSV and DB Schenker, which Peek files under [DSV](carrier:dsv). The card says "Delivery with PostNord" or "Delivery with DSV", and Peek follows that carrier under the same number once it shows fresh scans. While that carrier has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" or "Announced to DSV, not received yet" instead.
 
-Peek checks up to every 10 minutes and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+While the parcel is open in Peek, Peek checks it up to every 10 minutes, and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from Early Bird" link.
 
 ## Questions about Early Bird tracking
 
 ### What time does Early Bird deliver?
 
-Usually between 01:00 and 07:00, up to six days a week depending on the area. You don't need to be home or awake.
+Usually between 01:00 and 07:00 Swedish time, up to six days a week depending on the area. You don't need to be home or awake.
 
 ### Why does my Early Bird tracking only say the delivery is booked?
 

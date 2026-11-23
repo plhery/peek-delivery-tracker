@@ -86,7 +86,7 @@ O Peek não conseguiu ler o site da Pitney Bowes, pelo que esta página não lis
 
 **Nada de novo depois de chegar aos correios.** Após as primeiras linhas dos correios, o seguimento próprio destes pode ir à frente do que a Pitney Bowes transmite, e o Peek não muda sozinho para lá. Abre a página dos correios a partir da linha no rastreador da Pitney Bowes ou adiciona o código postal ao Peek como encomenda separada.
 
-**Vários dias sem atualizações.** Ao fim de quatro dias sem registo numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra um aviso («Sem atualizações há quatro dias» ou «Sem atualizações desde …») com a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Pitney Bowes.» e a ligação «Pede ajuda a Pitney Bowes». Vê [porque é que o seguimento deixa de atualizar](guide:tracking-not-updating).
+**Vários dias sem atualizações.** Ao fim de quatro dias sem registo numa encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra um aviso («Sem atualizações há quatro dias» ou «Sem atualizações desde …») com a nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Pitney Bowes.» Vê [porque é que o seguimento deixa de atualizar](guide:tracking-not-updating).
 
 **Entregue mas não chegou.** Verifica onde poderá ter sido deixada e pergunta aos vizinhos, depois aos correios que entregaram e ao vendedor. Vê [entregue mas não recebida](guide:delivered-not-received).
 
@@ -108,7 +108,7 @@ O Peek não transfere a encomenda para os correios: os registos postais chegam a
 
 O rastreador apresenta cada hora no relógio de quem registou a encomenda, sem fuso horário. O Peek lê cada linha no relógio do seu local ou do troço respetivo. Sem local indicado, `In Transit` e `Item processed at Interpost` ficam em UTC, `Interpost handed item over to postal company` em UTC+2 e `Customs Clearance` na hora do país mencionado. Cada hora é apresentada no fuso horário do teu dispositivo.
 
-Enquanto tiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta diretamente a Pitney Bowes até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 no relógio do último registo no dia em que sai para distribuição, enquanto o rastreador da Pitney Bowes responder. Após dois dias sem novidades (12 horas enquanto ainda mostra «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Pode notificar-te em «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Pitney Bowes, o vendedor nem os correios por ti.
+Enquanto tiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta diretamente a Pitney Bowes até de 10 em 10 minutos, e até de 2 em 2 minutos a partir das 6:00 no relógio do último registo no dia em que sai para distribuição, enquanto o rastreador da Pitney Bowes responder; caso contrário, de hora a hora. Após dois dias sem novidades (12 horas enquanto ainda mostra «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora; após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas. Pode notificar-te em «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Pitney Bowes, o vendedor nem os correios por ti.
 
 ## Perguntas sobre o seguimento Pitney Bowes
 

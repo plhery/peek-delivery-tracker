@@ -86,7 +86,7 @@ Peek non ha potuto leggere il sito di Pitney Bowes, quindi questa pagina non ele
 
 **Nessuna novità una volta affidato alle poste.** Dopo le prime righe delle poste, il loro sito può essere più aggiornato di quanto riporta Pitney Bowes e Peek non passa automaticamente alle poste. Apri la pagina delle poste dalla riga sul tracker Pitney Bowes oppure aggiungi il codice postale in Peek come pacco separato.
 
-**Nessun aggiornamento da giorni.** Dopo quattro giorni senza scansioni su un pacco in «Etichetta creata», «Preso in carico» o «In transito», Peek mostra un avviso («Nessun aggiornamento da quattro giorni» o «Nessun aggiornamento da …») con la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Pitney Bowes.» e il link «Chiedi aiuto a Pitney Bowes». Vedi [perché il tracking smette di aggiornarsi](guide:tracking-not-updating).
+**Nessun aggiornamento da giorni.** Dopo quattro giorni senza scansioni su un pacco in «Etichetta creata», «Preso in carico» o «In transito», Peek mostra un avviso («Nessun aggiornamento da quattro giorni» o «Nessun aggiornamento da …») con la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Pitney Bowes.» Vedi [perché il tracking smette di aggiornarsi](guide:tracking-not-updating).
 
 **Consegnato ma non ricevuto.** Controlla dove può essere stato lasciato e chiedi ai vicini, poi alle poste che hanno consegnato e al venditore. Vedi [consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -108,7 +108,7 @@ Peek non passa il pacco alle poste: le scansioni postali arrivano tramite il tra
 
 Il tracker stampa ogni orario sull'orologio di chi ha scansionato il pacco, senza fuso orario. Peek legge ciascuna riga sull'orologio del suo luogo o della tratta in corso. Senza località, `In Transit` e `Item processed at Interpost` usano UTC, `Interpost handed item over to postal company` UTC+2 e `Customs Clearance` l'ora del paese citato. Ogni orario appare nel fuso orario del tuo dispositivo.
 
-Finché hai il pacco aperto in Peek, o il giorno della consegna con le notifiche attive, Peek interroga direttamente Pitney Bowes fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 sull'orologio dell'ultima scansione nel giorno in cui il pacco va in consegna, finché il tracker di Pitney Bowes risponde. Dopo due giorni senza novità (12 ore mentre il pacco mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora; dopo sette giorni senza novità in «Etichetta creata», ogni 6 ore. Può avvisarti su «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Pitney Bowes, il venditore né le poste al posto tuo.
+Finché hai il pacco aperto in Peek, o il giorno della consegna con le notifiche attive, Peek interroga direttamente Pitney Bowes fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 sull'orologio dell'ultima scansione nel giorno in cui il pacco va in consegna, finché il tracker di Pitney Bowes risponde; altrimenti ogni ora. Dopo due giorni senza novità (12 ore mentre il pacco mostra ancora «Etichetta creata» o «Preso in carico»), controlla ogni ora; dopo sette giorni senza novità in «Etichetta creata», ogni 6 ore. Può avvisarti su «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare Pitney Bowes, il venditore né le poste al posto tuo.
 
 ## Domande sul tracking Pitney Bowes
 

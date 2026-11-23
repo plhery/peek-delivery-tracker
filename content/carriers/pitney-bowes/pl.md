@@ -86,7 +86,7 @@ Peek nie zdołał odczytać strony internetowej Pitney Bowes, więc ta strona ni
 
 **Brak nowości po przejęciu przez pocztę.** Po pierwszych wierszach poczty jej własne śledzenie może wyprzedzać to, co przekazuje Pitney Bowes, a Peek sam się na nią nie przełącza. Otwórz stronę poczty z wiersza w wyszukiwarce Pitney Bowes albo dodaj numer pocztowy w Peek jako osobną przesyłkę.
 
-**Brak aktualizacji od dni.** Po czterech dniach bez skanu dla paczki w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek pokazuje flagę („Brak aktualizacji od czterech dni” lub „Brak aktualizacji od …”), informację „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Pitney Bowes.” oraz link „Poproś przewoźnika Pitney Bowes o pomoc”. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
+**Brak aktualizacji od dni.** Po czterech dniach bez skanu dla paczki w statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek pokazuje flagę („Brak aktualizacji od czterech dni” lub „Brak aktualizacji od …”) i informację „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Pitney Bowes.” Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 
 **Doręczona, ale nic nie przyszło.** Sprawdź miejsce zostawienia i zapytaj sąsiadów, potem doręczającą pocztę i sprzedawcę. Zobacz [doręczona, ale nie otrzymana](guide:delivered-not-received).
 
@@ -108,7 +108,7 @@ Peek nie przekazuje paczki do poczty: skany pocztowe docierają przez wyszukiwar
 
 Wyszukiwarka drukuje każdą godzinę według zegara podmiotu, który zeskanował paczkę, bez strefy czasowej. Peek odczytuje każdy wiersz według zegara jego miejsca lub etapu podróży. Bez miejsca `In Transit` i `Item processed at Interpost` idą w UTC, `Interpost handed item over to postal company` w UTC+2, a `Customs Clearance` w czasie wskazanego kraju. Każda godzina wyświetla się w strefie czasowej twojego urządzenia.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek odpytuje bezpośrednio Pitney Bowes nawet co 10 minut, a w dniu wydania do doręczenia od 6:00 według zegara najnowszego skanu nawet co 2 minuty, dopóki odpowiada jej wyszukiwarka. Po dwóch dniach bez nowych wpisów (po 12 godzinach, gdy paczka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę; po siedmiu dniach bez nowych wpisów w statusie „Zarejestrowana” — co 6 godzin. Może powiadamiać o opcjach „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z Pitney Bowes, ze sprzedawcą ani z pocztą.
+Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek odpytuje bezpośrednio Pitney Bowes nawet co 10 minut, a w dniu wydania do doręczenia od 6:00 według zegara najnowszego skanu nawet co 2 minuty, dopóki odpowiada jej wyszukiwarka, a poza tym co godzinę. Po dwóch dniach bez nowych wpisów (po 12 godzinach, gdy paczka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę; po siedmiu dniach bez nowych wpisów w statusie „Zarejestrowana” — co 6 godzin. Może powiadamiać o opcjach „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z Pitney Bowes, ze sprzedawcą ani z pocztą.
 
 ## Pytania o śledzenie Pitney Bowes
 

@@ -86,7 +86,7 @@ Peek konnte die Website von Pitney Bowes nicht auslesen, daher nennt diese Seite
 
 **Nichts Neues, sobald die Post es hat.** Nach den ersten Zeilen der Post ist deren eigenes Tracking oft weiter als das von Pitney Bowes, und Peek wechselt nicht selbst dorthin. Öffne die Seite der Post über die Zeile im Pitney-Bowes-Tracker oder lege die Nummer der Post als eigenes Paket in Peek an.
 
-**Tagelang kein Update.** Nach vier Tagen ohne Scan bei einem Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek einen Hinweis („Seit vier Tagen keine Aktualisierung“ bzw. „Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Pitney Bowes nach.“ und „Hol dir Hilfe bei Pitney Bowes“. Siehe [Warum sich die Sendungsverfolgung nicht mehr aktualisiert](guide:tracking-not-updating).
+**Tagelang kein Update.** Nach vier Tagen ohne Scan bei einem Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek einen Hinweis („Seit vier Tagen keine Aktualisierung“ bzw. „Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Pitney Bowes nach.“ Siehe [Warum sich die Sendungsverfolgung nicht mehr aktualisiert](guide:tracking-not-updating).
 
 **Zugestellt, aber nicht da.** Prüfe den Ablageort und frag Nachbarn, danach die zustellende Post und den Verkäufer. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -108,7 +108,7 @@ Peek übergibt das Paket nicht an die Post: Deren Scans kommen über den Tracker
 
 Der Tracker gibt jede Uhrzeit auf der Uhr des jeweiligen Scanners ohne Zeitzone aus. Peek liest jede Zeile auf der Uhr ihres Orts oder Abschnitts. Ohne Ortsangabe stehen `In Transit` und `Item processed at Interpost` auf UTC, `Interpost handed item over to postal company` auf UTC+2 und `Customs Clearance` auf der Uhr des genannten Landes. Alle Zeiten erscheinen in der Zeitzone deines Geräts.
 
-Solange du das Paket in Peek geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, fragt Peek Pitney Bowes direkt bis zu alle 10 Minuten ab, und ab 6:00 Uhr auf der Uhr des letzten Scans am Tag der Zustellung bis zu alle 2 Minuten, solange der Tracker von Pitney Bowes antwortet. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann weder Pitney Bowes noch den Verkäufer oder die Post für dich kontaktieren.
+Solange du das Paket in Peek geöffnet hast, oder am Zustelltag mit aktivierten Benachrichtigungen, fragt Peek Pitney Bowes direkt bis zu alle 10 Minuten ab, und ab 6:00 Uhr auf der Uhr des letzten Scans am Tag der Zustellung bis zu alle 2 Minuten, solange der Tracker von Pitney Bowes antwortet, sonst stündlich. Nach zwei Tagen ohne Neuigkeiten (nach 12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann weder Pitney Bowes noch den Verkäufer oder die Post für dich kontaktieren.
 
 ## Fragen zur Pitney Bowes Sendungsverfolgung
 

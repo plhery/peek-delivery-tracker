@@ -10,13 +10,14 @@ TSJY (通世集运) is a consolidation service in China, run by 苏州通世供�
 
 ## TSJY tracking number: what it looks like
 
-TSJY's site doesn't describe its numbers, but they have one fixed shape. TSJY is the initials of 通世集运, Tongshi Jiyun. Every example below is made up:
+TSJY's site doesn't describe its numbers, but they have a fixed shape. TSJY is the initials of 通世集运, Tongshi Jiyun. Every example below is made up:
 
 | Number | What it is |
 | --- | --- |
-| `TSJY000000000CN` | TSJY, nine digits and CN: a TSJY order number. |
-| `TSJY00000000CN` | Only eight digits: not TSJY's shape, and Peek doesn't name TSJY. Check for a missing digit. |
-| `FEIAA0000000000YQ` | FEI, two letters, ten digits and YQ: a [17FEIA](carrier:17feia) number, from the line that carries some TSJY orders abroad. |
+| `TSJY482917365CN` | TSJY, nine digits and CN: a TSJY order number. |
+| `CFJY482917365CN` | CFJY, nine digits and CN: also a TSJY order number, from a second series. |
+| `TSJY48291736CN` | Only eight digits: not TSJY's shape, and Peek doesn't name TSJY. Check for a missing digit. |
+| `FEIKM4829173650YQ` | FEI, two letters, ten digits and YQ: a [17FEIA](carrier:17feia) number, from the line that carries some TSJY orders abroad. |
 
 In Peek, small letters, spaces and dashes don't matter.
 
@@ -89,7 +90,7 @@ With TSJY you are usually the customer: you booked the shipment. So for a late, 
 
 **Stuck in the warehouse.** If TSJY's own steps stop for several days, ask its customer service.
 
-**Quiet after the flight.** After `Flight has departed.`, there may be nothing new until the landing or customs. When a parcel on its way has had no new line for four days, Peek flags it with the day of its latest line ("No tracking update since Mon 12 Oct"). See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**Quiet after the flight.** After `Flight has departed.`, there may be nothing new until the landing or customs. When the newest line is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking TSJY." TSJY and 17FEIA have no help page in Peek, so a "Get help from …" link appears only once Peek follows the delivering company, and only if that company has one. After three weeks with no new line, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking TSJY." See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **Lost or damaged.** TSJY's site promises to pay in full for lost or damaged parcels (丢破必赔), but its public pages give no claim rules or deadlines: ask its customer service at once, and keep the box and the goods. See [lost parcels](guide:lost-parcel) and [damaged parcels](guide:damaged-parcel).
 
@@ -97,7 +98,7 @@ With TSJY you are usually the customer: you booked the shipment. So for a late, 
 
 ## TSJY customer service and contact
 
-As read on 1 November 2026 on [TSJY's home page](https://www.tsjy56.com/), in its 客服中心 (customer service centre) section:
+On [TSJY's home page](https://www.tsjy56.com/), in its 客服中心 (customer service centre) section:
 
 - **Phone and email**: a customer service phone number (客户服务电话) and email address (客服邮箱). No opening hours are given.
 - **WeChat**: a QR code to add TSJY's customer service (添加微信客服), plus its WeChat service account and mini program.
@@ -107,7 +108,7 @@ The site is in Chinese only and says nothing about service in English.
 
 ## Track a TSJY parcel with Peek
 
-[Peek](/) names TSJY at once from a TSJY…CN number ("Detected carrier"): no other carrier Peek follows uses this shape. A link to TSJY's result page with a TSJY number after `nos=` works too; with several numbers in it, Peek takes the first. A TSJY link holding the line's number, or any number not of TSJY's shape, isn't filed under TSJY: Peek reads that number on its own, as if you'd pasted it.
+[Peek](/) names TSJY at once from a TSJY…CN or CFJY…CN number ("Detected carrier"): no other carrier Peek follows uses these shapes. A link to TSJY's result page with a TSJY number after `nos=` works too; with several numbers in it, Peek takes the first. A TSJY link holding the line's number, or any number not of TSJY's shape, isn't filed under TSJY: Peek reads that number on its own, as if you'd pasted it.
 
 For any other number, paste it all the same: Peek follows more than 4,500 carriers. When the shape fits several carriers, Peek shows "Checking tracking services…" while it asks around; when it fits none, Peek looks the number up once you add it. If Peek doesn't name the carrier, tap "Change" and pick it under "All carriers", or use "Change carrier" later. If you pick TSJY for another number, Peek says TSJY "doesn’t issue numbers like this one".
 
@@ -115,7 +116,9 @@ Peek reads TSJY's tracker: every line with its place and time. It leaves out the
 
 When TSJY gives a 17FEIA number, or a line's number whose shape points to one carrier Peek knows, Peek asks that carrier. Until that carrier shows a scan at least as recent as TSJY's newest, Peek stays on TSJY's tracking, and the parcel already shows who delivers it ("Delivery with 17FEIA", or "Announced to 17FEIA, not received yet" while 17FEIA has only the announcement of the parcel, with no scan of its own) and that number. Then Peek follows the parcel there and keeps TSJY's history.
 
-Peek checks up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TSJY, 17FEIA or the shops for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes while TSJY's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days. Once Peek follows 17FEIA or the delivering company, it checks at that carrier's pace, up to every 2 minutes from 6 a.m. local time on the day it scans the parcel out for delivery when Peek reads that carrier's own tracker.
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TSJY, 17FEIA or the shops for you.
 
 ## Questions about TSJY tracking
 

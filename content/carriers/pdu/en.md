@@ -6,18 +6,18 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**PDU** (*Parcel Delivery Union*, operated by *Shanghai Youdilian Technology Co., Ltd.*, Chinese *友递联科技*) is a Shanghai-headquartered cross-border smart-logistics provider founded in 2022 ([pduni.com](https://www.pduni.com/)). Operating self-run branches and local operations hubs in more than 10 countries across North America, Europe, Africa and Asia (as well as dedicated Latin America last-mile links), PDU provides e-commerce merchants and manufacturers with end-to-end customs clearance, pickup, overseas last-mile delivery and cash-on-delivery (COD) collection. You can check a shipment on PDU's English waybill portal at [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) or paste your tracking number into the box above.
+**PDU** (*Parcel Delivery Union*, operated by *Shanghai Youdilian Technology Co., Ltd.*, Chinese *友递联科技*) is a Shanghai-headquartered cross-border smart-logistics provider founded in 2022 ([pduni.com](https://www.pduni.com/)). Operating self-run branches and local operations hubs in more than 10 countries across North America, Europe, Africa and Asia, PDU provides e-commerce merchants and manufacturers with end-to-end customs clearance, pickup, overseas last-mile delivery and cash-on-delivery (COD) collection. You can check a shipment on PDU's English waybill portal at [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) or paste your tracking number into the box above.
 
 ## PDU tracking numbers (`PD` suffix and custom waybills)
 
-Many PDU cross-border parcels carry a 12-character code made of two destination or channel letters, 8 digits and the suffix `PD`:
+Many PDU cross-border parcels carry a 12-character code made of two letters, 8 digits and `PD`:
 
 | Format (invented) | What it is |
 | --- | --- |
 | `MX48291736PD` | 12-character PDU cross-border waybill (`MX` + 8 digits + `PD`). |
 | `CO73918462PD` | Alternative 12-character `..PD` waybill format used on international routes. |
 
-PDU's public inquiry page also accepts other alphanumeric service waybills of 6 to 40 characters when you select PDU manually. Note that 12-character `..PD` codes share a similar length pattern with some European carriers, so Peek checks PDU directly against its live tracker before confirming ownership. See [tracking number formats](guide:tracking-number-formats).
+PDU's public inquiry page also accepts other alphanumeric service waybills of 6 to 40 characters when you select PDU manually. The same shape fits [Colis Privé](carrier:colis-prive)'s numbers: Peek asks Colis Privé first and then PDU, or PDU first in China. See [tracking number formats](guide:tracking-number-formats).
 
 ## What PDU tracking statuses mean
 
@@ -66,11 +66,13 @@ Official contact details published on [PDU Waybill Inquiry](https://www.pduni.co
 
 ## Track a PDU parcel with Peek
 
-When you enter a 12-character `..PD` code (`MX48291736PD` or `CO73918462PD`, invented), [Peek](/) checks PDU automatically alongside other matching 12-character carriers and shows `"PDU has this parcel."` once PDU's waybill service confirms it. If your PDU tracking number uses a different 6- to 40-character format, tap "Change" while adding or "Change carrier" on the parcel screen and select **PDU** (searching "Parcel Delivery Union" or "友递联" finds it too).
+When you enter a 12-character `..PD` code (`MX48291736PD` or `CO73918462PD`, invented), [Peek](/) asks Colis Privé and PDU in turn (PDU first in China) and shows "PDU has this parcel." once PDU's tracker knows it. If your PDU tracking number uses a different 6- to 40-character format, tap "Change" while adding or "Change carrier" on the parcel screen and select **PDU** (searching "Parcel Delivery Union" or "友递联" finds it too).
 
-Peek queries PDU's tracking API directly and displays the mapped stage ("Label created", "In transit", "Out for delivery", "Needs attention", "Returned to sender", "Delivered"), cleaned scan descriptions (stripping raw leading carrier code prefixes such as `ENT,`), scan locations, delivery timestamp on delivery and exact timestamped instants built from each scan's stated UTC offset (falling back to PDU's Beijing `UTC+8` clock when no local offset is given). PDU's public tracker does not return an estimated delivery date, weight, signatory name or separate last-mile tracking code.
+Peek reads PDU's tracker and shows the stage ("Label created", "In transit", "Out for delivery", "Needs attention", "Returned to sender", "Delivered"), the scan wording without the last-mile carrier's code in front (`Entregado`, not `ENT,Entregado`), the place and the delivery time. PDU's state codes set the stage and stay out of every Peek app. PDU gives each scan's time with its UTC offset, or else on Beijing time, and Peek shows them on your device's clock. PDU's tracker gives no estimated delivery date.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PDU." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PDU."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day PDU shows `Salida a Ruta`, every 2 minutes from 6 a.m. on the newest scan's clock, while PDU's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When PDU's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PDU." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PDU."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, edit your delivery address or contact PDU for you.
 

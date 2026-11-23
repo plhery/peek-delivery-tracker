@@ -32,7 +32,7 @@ Serpost publishes Spanish milestone descriptions naming the specific Peruvian po
 | `ENVÍO SALIÓ DE PERÚ`, `ENVÍO RUMBO AL PAÍS DE DESTINO` | Outbound international item departed Peru toward the destination country's postal operator. | "In transit" |
 | `ENVÍO LLEGÓ A LA ADMINISTRACIÓN POSTAL ...` | Arrived at the local Peruvian delivery post office preparing your route. | "In transit" |
 | `ENVÍO EN PROCESO DE DISTRIBUCIÓN`, `SALIÓ A DISTRIBUCIÓN` | Out with a Serpost postal carrier for doorstep delivery. | "Out for delivery" |
-| `ENVÍO DISPONIBLE PARA ENTREGA O RECOJO` | Ready for collection at the assigned Serpost office (bring your ID / DNI). | "Ready for pickup" |
+| `ENVÍO DISPONIBLE PARA ENTREGA O RECOJO` | Ready for collection at the assigned Serpost office. | "Ready for pickup" |
 | `INTENTO FALLIDO DE ENTREGA`, `SE INTENTÓ ENTREGAR PERO FUE IMPOSIBLE` | Delivery could not be completed (recipient absent or access issue); check for a branch pickup notice. | "Delivery attempted" |
 | `ENTREGADO`, `ENVÍO ENTREGADO`, `FUE ENTREGADO` | Delivered to the recipient or collected at the post office. | "Delivered" |
 
@@ -40,8 +40,8 @@ Serpost publishes Spanish milestone descriptions naming the specific Peruvian po
 
 According to [Serpost Shipping Services](https://www.gob.pe/institucion/serpost/pages/20800-enviar-cartas-dentro-y-fuera-del-pais-con-serpost) and [Serpost Claims & Inquiries](https://www.gob.pe/institucion/serpost/pages/33693-reclamos-y-consultas-servicios-postales-del-peru):
 
-- **Published transit estimates:** domestic **Expreso** **48–72 hours max**; domestic **Estándar** **5–7 business days**; domestic **Económico** **7–10 business days**; international **Expreso (EMS)** **7–10 business days**; international **Económico** **10–30 business days**.
-- **Peruvian customs (`ENVÍO SUJETO A TRÁMITE ANTE ADUANA`):** inbound items above Peru's duty-free threshold or containing restricted goods require SUNAT customs clearance and an *Aviso de Llegada* (arrival notice) before release or pickup. See [parcels held at customs](guide:customs).
+- **Published times for letters:** domestic **Expreso** **48–72 hours max**; domestic **Estándar** **5–7 business days**; domestic **Económico** **7–10 business days**; international **Expreso** **7–10 business days**; international **Económico** **10–30 business days**. Only Expreso and Estándar letters can be followed online.
+- **Peruvian customs (`ENVÍO SUJETO A TRÁMITE ANTE ADUANA`):** the item is held for customs formalities and is not available for delivery until customs lets it through (`ENVÍO SIN OBSERVACIÓN POR LA ADUANA`). Serpost's tracker can show an arrival notice (*Aviso de llegada*). See [parcels held at customs](guide:customs).
 - **Official claim windows & timelines:** claims for **EMS** items can be filed from the day after the delivery deadline up to **4 months** from posting (response within **30 calendar days**); international certified mail claims are accepted after **20 calendar days** and international parcels after **30 calendar days**; domestic claims receive a response within **16 business days** (domestic indemnity equals **3× postage paid**; international indemnity follows UPU rules).
 
 ## Serpost parcel delayed, in customs or missing
@@ -63,11 +63,13 @@ Official channels published on [Serpost Contacto (gob.pe)](https://www.gob.pe/in
 
 ## Track a Serpost parcel with Peek
 
-When you enter a 13-character Peruvian S10 code (`RR482917367PE` or `EE739184627PE`, invented) into [Peek](/), Peek validates the S10 check digit and can check Serpost directly — and if you are tracking an inbound foreign S10 code arriving in Peru or need to switch to Serpost manually, tap "Change" while adding or "Change carrier" on the parcel screen and select **Serpost** (searching "SERPOST", "Peru Post" or "Servicios Postales del Perú" finds it too); Peek confirms `"Serpost has this parcel."` once Serpost returns scans.
+When you enter a 13-character Peruvian S10 code (`RR482917367PE` or `EE739184627PE`, invented) into [Peek](/), Peek checks the S10 check digit and asks Serpost first, then Chronopost. For a foreign S10 code arriving in Peru, or to switch to Serpost yourself, tap "Change" while adding or "Change carrier" on the parcel screen and select **Serpost** (searching "SERPOST", "Peru Post" or "Servicios Postales del Perú" finds it too). Peek shows "Serpost has this parcel." once Serpost returns scans.
 
-Peek opens a session on `serpost.com.pe/Cliente/SegumientoLinea` and displays the mapped stage ("Received by carrier", "In transit", "At customs", "Out for delivery", "Ready for pickup", "Delivery attempted", "Delivered"), Spanish event descriptions (scrubbing office WhatsApp prompts), Peruvian postal-office names, verified Peruvian office map coordinates when Serpost attaches a branch map, delivery timestamp on delivery, destination country (`PE`) for domestic/inbound deliveries, and timestamps on Peru time (`America/Lima`). Serpost's online tracker does not return an estimated delivery date, weight or signatory name.
+Peek reads Serpost's tracker and shows the stage ("Received by carrier", "In transit", "At customs", "Out for delivery", "Ready for pickup", "Delivery attempted", "Delivered"), Serpost's Spanish wording without the office's WhatsApp invitation, the office's name and the delivery time. When Serpost links an office's map inside Peru, Peek places the scan there on the parcel's map; once the item is out for delivery, ready for pickup or delivered, Peek shows Peru as the destination. Serpost gives scan times on Lima's clock: Peek dates them on Lima time and shows them on your device's clock. Serpost's tracker gives no estimated delivery date, weight or signer's name.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Serpost." and displays "Get help from Serpost", which opens Serpost's official contact page on `gob.pe`. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Serpost."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Serpost shows `ENVÍO EN PROCESO DE DISTRIBUCIÓN`, every 2 minutes from 6 a.m. Lima time, while Serpost's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Serpost's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Serpost.", with a "Get help from Serpost" link to Serpost's contact page on gob.pe. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Serpost."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear SUNAT customs, file claims or contact Serpost for you.
 
@@ -83,7 +85,7 @@ It means Peruvian customs (SUNAT) selected the international parcel for customs 
 
 ### How long does Serpost take to deliver?
 
-Published estimates on [gob.pe](https://www.gob.pe/institucion/serpost/pages/20800-enviar-cartas-dentro-y-fuera-del-pais-con-serpost) are **48–72 hours** for domestic Expreso, **5–7 business days** domestic Estándar, **7–10 business days** domestic Económico or international EMS, and **10–30 business days** for international Económico.
+Serpost publishes times for letters on [gob.pe](https://www.gob.pe/institucion/serpost/pages/20800-enviar-cartas-dentro-y-fuera-del-pais-con-serpost): **48–72 hours** for domestic Expreso, **5–7 business days** for domestic Estándar, **7–10 business days** for domestic Económico or international Expreso, and **10–30 business days** for international Económico.
 
 ### How do I contact Serpost customer service or file a claim?
 
@@ -94,6 +96,6 @@ Call Serpost's Call Center at `(01) 511-5110`, email `servicioalcliente@serpost.
 - [Serpost: Portal Institucional (gob.pe)](https://www.gob.pe/serpost) – *Servicios Postales del Perú S.A.* (MTC) official government hub
 - [Serpost: Contacto y Números de Atención](https://www.gob.pe/institucion/serpost/contacto-y-numeros-de-emergencias) – Call Center `511-5110`, switchboard `511-5000`, `servicioalcliente@serpost.com.pe` and Los Olivos HQ (help URL linked by Peek)
 - [Serpost: Reclamos y Consultas](https://www.gob.pe/institucion/serpost/pages/33693-reclamos-y-consultas-servicios-postales-del-peru) – claim windows (20d certified, 30d parcels, 4m EMS), response times (16d domestic / 30d EMS) and indemnity rules
-- [Serpost: Envíos Nacionales e Internacionales](https://www.gob.pe/institucion/serpost/pages/20800-enviar-cartas-dentro-y-fuera-del-pais-con-serpost) – published delivery time ranges for Expreso, Estándar, Económico and international services
+- [Serpost: Envíos Nacionales e Internacionales](https://www.gob.pe/institucion/serpost/pages/20800-enviar-cartas-dentro-y-fuera-del-pais-con-serpost) – published delivery times for letters, by service
 - [Universal Parcel Scraper: serpost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/serpost) – UPU S10 check-digit validation, `SegumientoLinea` lookup, Spanish status rules, office name & Peru map-coordinate parsing and `America/Lima` timestamps
 :::

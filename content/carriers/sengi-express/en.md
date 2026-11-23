@@ -17,7 +17,7 @@ Sengi Express frequently issues a 13-character **Poste Italiane / SDA** waybill 
 | `482C73918462F` | 13-character SDA / Poste Italiane waybill (`3 digits` + `C` + `8 digits` + `F`) tracked by Sengi Express before Poste Italiane scans it in Italy. |
 | `SENGI482917360MT` | 16-character cross-border Sengi code (`5 letters` + `9 digits` + `MT`). |
 
-Because Sengi prints the Italian `...C...F` barcode at origin in China, Poste Italiane's own website often shows nothing until the parcel clears European customs and enters Italy; tracking with Sengi Express reveals the entire China-to-Europe first leg in the meantime. When selected manually, Sengi's tracker also accepts other 8- to 40-character alphanumeric partner waybills. See [tracking number formats](guide:tracking-number-formats).
+Sengi gives a parcel for Italy its SDA waybill before SDA knows it, so Poste Italiane's tracker may not find the number at first; Sengi's tracker follows the parcel from its Chinese warehouse to the recipient in Italy. When selected manually, Sengi's tracker also accepts other 8- to 40-character alphanumeric partner waybills. See [tracking number formats](guide:tracking-number-formats).
 
 ## What Sengi Express tracking statuses mean
 
@@ -31,14 +31,14 @@ Sengi Express publishes English (and Chinese) cross-border scan descriptions alo
 | `Customs clearance inspection, Reason: supposed as undervaluation, waiting for customs check(VM)` | Selected by European customs authorities for valuation or content verification (`VM`). | "At customs" |
 | `Ready for transit to last mile operator` | Cleared customs and queued for handover to [Poste Italiane](carrier:poste-italiane) or the destination courier. | "In transit" |
 
-Other scans — including origin acceptance, out-for-delivery, delivery attempts and final delivery — are classified from Sengi's English scan wording. Once injected into Italy, recipients can also check the parcel directly on [Poste Italiane](carrier:poste-italiane) using the same `...C...F` barcode (or any relabelled tracking number Sengi attaches).
+A scan with another wording takes its stage from that wording. Sengi says recipients can also follow the parcel on [Poste Italiane](carrier:poste-italiane)'s website, under the same `...C...F` waybill or the new number when Sengi relabels the parcel.
 
 ## Direct injection, European customs gateways and Poste Italiane delivery
 
 According to [Sengi Express About](https://portal.sengiexpress.com/about/) and [Sengi Express Products](https://portal.sengiexpress.com/product/):
 
 - **European air gateways:** Sengi runs direct B2C and B2B customs clearance at Milan Malpensa (`MXP`), Amsterdam (`AMS`), Liège (`LGG`) and Paris Charles de Gaulle (`CDG`).
-- **Poste Italiane last-mile services:** in Italy, Sengi injects parcels into Poste Italiane's **Crono** standard parcel service, **Crono Express**, **Extralarge** (oversized / FBA final mile), **Crono ADP** (pickup points and lockers) and **Crono Reverse** (returns).
+- **Poste Italiane last-mile services:** in Italy, Sengi injects parcels into Poste Italiane's **Crono** standard parcel service, **Crono Express**, **Extralarge** (oversized / FBA final mile), **Crono ADP** (pickup lockers) and **Crono Reverse** (returns).
 - **Customs valuation checks (`VM`) & EU fees:** shipments from China into the EU must comply with EU customs rules, import VAT (IOSS or paid on delivery) and EU customs/handling charges on non-EU orders. If tracking shows `supposed as undervaluation, waiting for customs check(VM)`, customs is verifying the declared value with the importer/broker — wait for clearance or alert your online seller. See [parcels held at customs](guide:customs).
 
 ## Sengi Express parcel stuck, quiet or missing
@@ -61,11 +61,13 @@ Official contacts published on [Sengi Express About](https://portal.sengiexpress
 
 ## Track a Sengi Express parcel with Peek
 
-When you enter a 13-character `...C...F` code (`482C73918462F`, invented), [Peek](/) checks Sengi Express automatically alongside [Poste Italiane](carrier:poste-italiane) and AliExpress — catching early China-to-Europe scans before Poste Italiane activates the barcode — and shows `"Sengi Express has this parcel."` when Sengi holds it. For `...MT` codes (`SENGI482917360MT`, invented) or other partner waybills, tap "Change" while adding or "Change carrier" on the parcel screen and select **Sengi Express** (searching "Sengi" finds it too).
+When you enter a 13-character `...C...F` code (`482C73918462F`, invented), [Peek](/) asks [Poste Italiane](carrier:poste-italiane) first, then AliExpress and Sengi Express (Sengi before AliExpress in Italy; in China AliExpress first, then Sengi), and shows "Sengi Express has this parcel." when Sengi holds it. For an `...MT` code (`SENGI482917360MT`, invented), Peek asks [MaltaPost](carrier:maltapost), whose numbers end in `MT` too: for that code or another partner waybill, tap "Change" while adding or "Change carrier" on the parcel screen and select **Sengi Express** (searching "Sengi" finds it too).
 
-Peek queries Sengi Express's tracking API directly and displays the mapped stage ("Label created", "In transit", "At customs", plus "Received by carrier", "Out for delivery", "Ready for pickup", "Delivery attempted", "Needs attention", "Returned to sender" and "Delivered" when scan wording matches), English scan descriptions and event codes, locations, automatic handoff to [Poste Italiane](carrier:poste-italiane) on `PI` channel parcels plus any relabelled tracking number when Sengi changes the barcode, and exact timestamps built from Sengi's stated UTC offset (keeping local wall-clock time if no offset is supplied). Sengi's API does not return an estimated delivery date, weight, signatory name or separate delivery timestamp.
+Peek reads Sengi's tracker and shows the stage ("Label created", "In transit", "At customs", or another stage when a scan's wording says so), Sengi's English wording (its Chinese wording when there is no English) and the place. The event codes set the stage and stay out of every Peek app. Sengi states an offset for its scan times; a scan without one is dated on its place's time zone (Italy's for `MXP`, Beijing's for Guangzhou), or else on the zone of the scan beside it, and Peek shows them all on your device's clock. On Sengi's Poste Italiane line, Peek checks that Poste Italiane has the parcel: the parcel then shows "Delivery with" and Poste Italiane's name, and lists the new number when Sengi relabels the parcel.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Sengi Express." and displays "Get help from Sengi Express", which opens Sengi Express's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Sengi Express."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Sengi shows an out-for-delivery scan, which it hasn't so far, every 2 minutes from 6 a.m. on the newest scan's clock, while Sengi's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Sengi's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Sengi Express.", with a "Get help from Sengi Express" link to Sengi's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Sengi Express."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, edit delivery addresses or contact Sengi Express or Poste Italiane for you.
 
@@ -77,11 +79,11 @@ Sengi Express (*Guangzhou Sengi Logistics Co., Ltd.*) is a China-to-Italy and Ch
 
 ### Why does my Poste Italiane `...C...F` code show up on Sengi Express first?
 
-Sengi prints the Italian SDA / [Poste Italiane](carrier:poste-italiane) barcode (`482C73918462F`, invented) at its warehouse in China. Until the parcel clears European customs and is inducted in Italy, only Sengi Express shows the first-leg flight and customs checkpoints.
+Sengi gives a parcel for Italy its SDA / [Poste Italiane](carrier:poste-italiane) waybill (`482C73918462F`, invented) before SDA knows it. Sengi's tracker shows the flight and customs scans, while Poste Italiane's may not find the number at first.
 
 ### What does `supposed as undervaluation, waiting for customs check(VM)` mean?
 
-European customs flagged the parcel for a declared-value inspection (`VM`). The customs broker or seller handles the clearance paperwork; contact your seller if the inspection lasts more than a week.
+European customs flagged the parcel for a declared-value inspection (`VM`). The customs broker or seller handles the clearance paperwork; contact your seller if it stays there.
 
 ### How do I contact Sengi Express customer service?
 

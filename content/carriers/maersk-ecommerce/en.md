@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Maersk eCommerce** (*Maersk Logistics & Services USA Inc.*, incorporating the former *B2C Europe* and *InterPost* parcel platforms) is A.P. Moller–Maersk's domestic and cross-border B2C parcel delivery network ([maersk.com/supply-chain-logistics/e-commerce-logistics](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics)). Moving over 80 million parcels a year across more than 75 integrated last-mile partners in North America and Europe, Maersk eCommerce consolidates online-retailer parcels through its own sortation hubs, handles B2C customs clearance on international lanes and hands off final doorstep delivery to regional couriers such as [Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac), [USPS](carrier:usps), [DHL](carrier:dhl) and [DPD Austria](carrier:dpd-at). You can paste your 19-character `1M` parcel number into the box above to track both Maersk's facility scans and the relayed local carrier milestones.
+**Maersk eCommerce** (*Maersk Logistics & Services USA Inc.*, incorporating the former *B2C Europe* and *InterPost* parcel platforms) is A.P. Moller–Maersk's domestic and cross-border B2C parcel delivery network ([maersk.com/supply-chain-logistics/e-commerce-logistics](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics)). Moving more than 80 million parcels a year with more than 75 carriers integrated in North America and Europe, Maersk eCommerce sorts online sellers' parcels in its own facilities, clears B2C parcels through customs on international routes and hands final delivery to local carriers and postal providers, such as [Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac) and [DPD Austria](carrier:dpd-at). You can paste your 19-character `1M` parcel number into the box above to track both Maersk's facility scans and the relayed local carrier milestones.
 
 ## Maersk eCommerce tracking numbers (`1M` format)
 
@@ -17,42 +17,42 @@ Maersk eCommerce issues 19-character alphanumeric parcel numbers beginning with 
 | `1MAB4829C7360514928` | 19-character Maersk eCommerce parcel code (`1M` + 7-char client code + 10 digits). |
 | `1MKX7391E4829173605` | Alternative 19-character `1M` parcel number used on North American or European routes. |
 
-Check your retailer's dispatch email or order-tracking link (`maersk.com/tracking/parcel/...`) for the `1M` number. Once Maersk injects the parcel into a local last-mile carrier, it also attaches that partner's domestic tracking code alongside the original `1M` reference. See [tracking number formats](guide:tracking-number-formats).
+Check your retailer's dispatch email or order-tracking link (`maersk.com/tracking/parcel/...`) for the `1M` number. Maersk's tracker can name the last-mile carrier and the number that carrier gave the parcel. See [tracking number formats](guide:tracking-number-formats).
 
 ## What Maersk eCommerce tracking statuses mean
 
-Maersk eCommerce numbers its own hub events in the `70000`–`72999` range and relayed last-mile carrier scans from `77000` upwards:
+Maersk's own scans carry codes from `70000` to `72004`, the last-mile carrier's from `77100`:
 
 | Maersk code & wording | What it means for you | Peek shows |
 | --- | --- | --- |
-| `70000` `Shipment Manifest Received`, `70001` `Maersk Shipping Label Created` | Retailer transmitted shipment data or Maersk generated its internal parcel label before or at network intake. | "Label created" |
+| `70000` `Shipment Manifest Received`, `70001` `Maersk Shipping Label Created` | `70000`: the seller's manifest lists the parcel before Maersk has it. `70001`: Maersk's own label, made once the parcel reaches its network, often minutes before `70002`. | "Label created" |
 | `70002` `Parcel Received by Maersk` | Physical parcel received and scanned into a Maersk eCommerce induction facility. | "Received by carrier" |
 | `72001` `Arrived at Maersk Facility`, `72002` `Processing at Maersk Facility`, `72004` `Departed from Maersk Facility` | Sorted at a Maersk consolidation hub and dispatched toward the destination region or gateway. | "In transit" |
 | `77100` `In-Transit Scan`, `77101` `Enroute to Facility`, `77102` `Arrival at Facility`, `77103` `Processing at Facility`, `77105` `Departed from Facility`, `77106` `Parcel In-transit` | Relayed domestic transit events from the local last-mile carrier (such as OnTrac, Amazon Logistics or DPD). | "In transit" |
 | `77203` `Out for Delivery` | Loaded onto the local last-mile driver's vehicle for delivery today. | "Out for delivery" |
 | `77200` `Parcel Successfully Delivered` | Delivered to the recipient's address by the last-mile partner. | "Delivered" |
 
-Exception-flagged events from Maersk or a partner courier are marked as `"Needs attention"`. Because Maersk frequently relays partner scans without repeating hub details, watching for the linked local-carrier tracking number gives you access to doorstep delivery photos or redelivery controls directly with that courier.
+A scan without one of these codes shows "Needs attention" when Maersk flags it as an exception, and otherwise takes its stage from the step it falls under on Maersk's tracker.
 
 ## Coverage, returns and cross-border customs
 
-On [Maersk E-Commerce](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics), Maersk serves merchants across 22 major North American and European markets — including the United States, Canada, the UK, Germany, France, Spain, Italy, the Netherlands, Belgium, Austria, Switzerland, Poland, Portugal, Sweden, Denmark, Norway, Finland, Ireland, Czechia, Slovakia, Hungary and Luxembourg:
+Maersk E-Commerce gives full delivery coverage in 32 countries across North America and Europe, with origin injection points in China and Southeast Asia ([Maersk E-Commerce](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics)):
 
-- **Multi-partner induction:** Maersk picks up consolidated merchant volumes, sorts them at regional facilities and injects parcels into local delivery networks rather than running branded consumer vans everywhere.
-- **International customs clearance:** cross-border shipments into the EU, UK, Canada or US pass through B2C customs clearance; duties and import VAT (including EU non-EU import charges) depend on whether the merchant shipped DDP (delivered duty paid) or DDU. See [parcels held at customs](guide:customs).
-- **E-commerce returns:** Maersk also runs domestic and international drop-off returns networks for participating online brands, using separate return labels supplied by the retailer.
+- **Facilities and partners:** in Europe, 8 sorting and cross-docking facilities, injection hubs in London, Taulov and Amsterdam, and more than 40 last-mile partners and postal providers, with home delivery and pick-up points. In North America, sorting facilities and gateways at JFK, LAX and ORD; Standard delivery takes 2–7 days in the US and 1–10 days in Canada, Expedited 2–5 and 1–5.
+- **International customs clearance:** Maersk clears B2C parcels through customs for shipping into the UK, the EU and the US. Whether you pay duties and import VAT on arrival depends on whether the seller charged them at checkout. See [parcels held at customs](guide:customs).
+- **E-commerce returns:** domestic and international returns by drop-off or home collection for the sellers that offer them, paperless and duty-exempt on some routes.
 
 ## Maersk eCommerce parcel delayed, quiet or missing
 
 Because Maersk eCommerce is a B2B parcel consolidator contracted by e-commerce brands, **always contact the online store first** for address changes, missing items, replacements or refunds.
 
 - **Quiet gap during linehaul or partner handoff:** tracking commonly pauses for a few days between `72004` (`Departed from Maersk Facility`) and the first `77100+` last-mile carrier scan while linehaul trucks or flights transfer parcels to the local courier. See [why tracking stops updating](guide:tracking-not-updating).
-- **Use the handed-off carrier code:** once Peek or Maersk links the local delivery carrier's tracking number (for example an [OnTrac](carrier:ontrac), [Amazon Logistics](carrier:amazon-logistics) or [DPD Austria](carrier:dpd-at) code), checking that partner directly often shows delivery photos, locker codes or redelivery scheduling.
+- **Use the last-mile carrier's number:** once Maersk names the carrier and its number, that carrier's own tracker and help take over. Peek shows "Delivery with" for [Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac) and [DPD Austria](carrier:dpd-at).
 - **Marked delivered or damaged:** inspect around entrances, parcel rooms and neighbours, check the local partner's tracking record, and notify the merchant promptly. See [delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel), [damaged parcel](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## Maersk eCommerce support and official portals
 
-Maersk eCommerce does not operate a public consumer call centre for individual B2C parcel edits; retailers manage bookings via MyParcel and Maersk's regional teams.
+Maersk's support page offers a live chat and case management, mostly for its business customers; sellers book through Maersk's MyParcel login for business.
 
 - **Maersk E-Commerce overview & business enquiries:** [maersk.com/supply-chain-logistics/e-commerce-logistics](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics).
 - **Maersk general support & FAQs:** [maersk.com/support](https://www.maersk.com/support) and [maersk.com](https://www.maersk.com/).
@@ -62,11 +62,13 @@ Maersk eCommerce does not operate a public consumer call centre for individual B
 
 ## Track a Maersk eCommerce parcel with Peek
 
-[Peek](/) checks Maersk eCommerce automatically as the sole candidate when you enter a 19-character `1M` parcel number (`1MAB4829C7360514928` or `1MKX7391E4829173605`, invented) and shows `"Maersk eCommerce has this parcel."` once Maersk's parcel API confirms it; Peek also recognises pasted `maersk.com/tracking/parcel/` links directly. If you ever need to select it manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "B2C Europe", "InterPost", "Maersk Parcel" or "Maersk E-Delivery" finds it too).
+[Peek](/) checks Maersk eCommerce automatically as the sole candidate when you enter a 19-character `1M` parcel number (`1MAB4829C7360514928` or `1MKX7391E4829173605`, invented) and shows "Maersk eCommerce has this parcel." once Maersk's parcel API confirms it; Peek also recognises pasted `maersk.com/tracking/parcel/` links directly. If you ever need to select it manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "B2C Europe", "InterPost", "Maersk Parcel" or "Maersk E-Delivery" finds it too).
 
-Peek queries Maersk's public e-commerce parcel API directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Needs attention", "Delivered"), Maersk and relayed last-mile scan descriptions and 5-digit status codes, city/region locations, estimated delivery date when Maersk publishes one, service name, destination country, delivery timestamp when delivered, automatic handoff to supported local carriers ([Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac) and [DPD Austria](carrier:dpd-at)) when Maersk names them, and exact timestamped instants where an offset is reported (falling back to local wall-clock time when a partner omits its offset). Peek deduplicates identical partner scans reported twice and omits client order numbers, recipient street/postcode and raw partner links.
+Peek reads Maersk's parcel tracker and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Needs attention", "Delivered"), the wording of Maersk's and the last-mile carrier's scans, the town and region, the estimated delivery day when Maersk gives one, the destination country and the delivery time. The status codes and the service name stay out of every Peek app. Maersk states an offset for its own scans and most partners'; a partner scan without one, such as DPD's, is dated on its place's time zone (Vienna's for a scan in Graz), or else on the zone of the scan beside it, and Peek shows them all on your device's clock. Peek keeps one copy of a partner scan the tracker lists twice. When Maersk names [Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac) or [DPD Austria](carrier:dpd-at) with a number that fits that carrier's own format, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. Peek never reads the client's order number, the destination town and postcode or the partner's link.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Maersk eCommerce." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Maersk eCommerce."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Maersk shows `77203` (`Out for Delivery`), every 2 minutes from 6 a.m. on the newest scan's clock, while Maersk's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Maersk's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Maersk eCommerce." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Maersk eCommerce."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, reroute parcels or contact Maersk eCommerce or its last-mile partners for you.
 
@@ -84,13 +86,13 @@ Maersk eCommerce parcel numbers are 19 characters long: `1M`, followed by a 7-ch
 
 Maersk consolidates and transports the parcel between hubs and then hands final delivery to a regional last-mile partner in your country, such as [Amazon Logistics](carrier:amazon-logistics), [OnTrac](carrier:ontrac), [DPD Austria](carrier:dpd-at) or local postal couriers.
 
-### Why does my Maersk eCommerce parcel say `70001 Maersk Shipping Label Created` for days?
+### Why does my Maersk eCommerce parcel stay at `70000 Shipment Manifest Received` for days?
 
-`70000` and `70001` mean the merchant created the shipment electronically before or right around handover; transit scans begin once Maersk scans `70002` (`Parcel Received by Maersk`) at its induction hub.
+`70000` means the seller's manifest lists the parcel before Maersk has it, so nothing moves until the seller hands it over: ask the seller if it stays there. Maersk adds `70001`, its own label, once the parcel reaches its network, often minutes before `70002` (`Parcel Received by Maersk`).
 
 :::sources
 - [Maersk: E-Commerce Parcel Delivery Services](https://www.maersk.com/supply-chain-logistics/e-commerce-logistics) – 80M+ annual parcels, 75+ integrated carriers, North America & Europe domestic/international/returns networks
 - [Maersk: Official Website](https://www.maersk.com/) – global logistics portal and parcel tracking entry
 - [Maersk: Support & FAQs](https://www.maersk.com/support) – official Maersk support portal
-- [Universal Parcel Scraper: maersk-ecommerce](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/maersk-ecommerce) – 19-char `1M` format, `maersk.com/tracking/parcel/` link rule, 70000–77200 status codes, ETA/service/country extraction and Amazon/OnTrac/DPD-AT handoff rules
+- [Universal Parcel Scraper: maersk-ecommerce](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/maersk-ecommerce) – 19-char `1M` format, `maersk.com/tracking/parcel/` link rule, 70000–77200 status codes, ETA and country, and the Amazon/OnTrac/DPD-AT hand-over rules
 :::

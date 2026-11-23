@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Post Haste** (*Post Haste Couriers*) is one of New Zealand's longest-running nationwide express courier networks, operating in partnership with Castle Parcels as part of the **Freightways Group** since 1977 ([posthaste.co.nz](https://posthaste.co.nz/)). Serving business and residential deliveries across both the North and South Islands through more than 20 regional branches and Delivery Link Partners, Post Haste handles local, regional overnight, inter-island overnight and two-day economy parcels alongside rural delivery zones. You can check a parcel on [posthaste.co.nz/tools/track/](https://posthaste.co.nz/tools/track/) or paste your Post Haste tracking link or consignment code into the box above.
+**Post Haste** (*Post Haste Couriers*) is a New Zealand courier network that joined the **Freightways Group** in 1977 and works in partnership with Castle Parcels ([posthaste.co.nz](https://posthaste.co.nz/)). Serving business and residential deliveries across both the North and South Islands through more than 20 regional branches and Delivery Link Partners, Post Haste handles local, regional overnight, inter-island overnight and two-day economy parcels alongside rural delivery zones. You can check a parcel on [posthaste.co.nz/tools/track/](https://posthaste.co.nz/tools/track/) or paste your Post Haste tracking link or consignment code into the box above.
 
 ## Post Haste tracking numbers (tickets, labels & email links)
 
@@ -30,12 +30,12 @@ Post Haste runs on the shared Freightways tracking backend (used across Post Has
 | `P` (`Picked Up`) | Collected from the sender by a Post Haste courier. | "Received by carrier" |
 | `STAT/RZDEL` | Rural or non-urban delivery zone notice; rural partner handover typically adds 2–3 business days. | "In transit" |
 | `STAT/REDEL` | Rescheduled and sent back out following an earlier missed delivery. | "In transit" |
-| `D` (`Handed over` / `Delivered by courier or branch` to rural partner) | Handed off to a rural delivery contractor; still on its way to your property rather than at your door yet. | "In transit" |
+| `D` (`Delivery Handed Over` / `Delivered by courier or branch` to rural partner) | Handed off to a rural delivery contractor; still on its way to your property rather than at your door yet. | "In transit" |
 | `ONBD` | On board the local courier van for delivery today. | "Out for delivery" |
 | `NOND` / `NOND/*` | Non-delivery event (such as no one home and card left, closed premises or access issue). | "Delivery attempted" |
 | `D`, `3P/D` | Delivered to the recipient's address (including `3P/D` completed by a rural delivery partner). | "Delivered" |
 
-Note that `STAT/HLDFR8` means the parcel is held at the branch freight office after an unsuccessful delivery; arrange redelivery or branch collection promptly so it is not returned.
+`STAT/HLDFR8` means the parcel is held at the branch's freight office after a delivery that didn't happen. It doesn't say whether the parcel waits for collection or another delivery: arrange redelivery or ask the branch.
 
 ## Delivery times, rural zones and redelivery in New Zealand
 
@@ -43,11 +43,11 @@ According to [Post Haste Sending & Receiving](https://posthaste.co.nz/services/s
 
 - **Published transit speeds:** **Local** across-town business-to-business delivery; **Regional** overnight (usually by lunchtime next business day); **Nationwide overnight** within and between North and South Islands (usually by midday next working day for business addresses, end of day for residential); **Two-day inter-island economy**; plus **Saturday delivery** in major metropolitan areas.
 - **Non-urban & rural addresses:** Post Haste covers most rural New Zealand addresses through rural delivery partners (`STAT/RZDEL`), which adds two to three working days beyond metro targets.
-- **Unattended premises & redelivery:** Post Haste's standard policy is **not** to leave parcels at an unattended address unless authority to leave has been arranged. If a delivery is missed, arrange redelivery online at [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) using the card-to-call reference, or contact your local branch (bring photo ID if collecting from a depot).
+- **Unattended premises & redelivery:** Post Haste's standard policy is **not** to leave parcels at an unattended address unless authority to leave has been arranged. If a delivery is missed, arrange redelivery online at [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) with the 16-digit delivery reference, or contact your local branch if you don't have one. Bring a form of ID to collect from a branch.
 
 ## Post Haste parcel delayed, held or missing
 
-- **Rural handover looks "delivered" on some trackers:** if a scan says `Delivered by courier or branch` or `Handed over`, the parcel has usually been transferred to a rural contractor (`3P`) rather than dropped at your gate — allow 2–3 working days for the rural run (`3P/D`). Peek keeps rural handovers in `"In transit"` rather than marking them delivered early.
+- **Rural handover looks "delivered" on some trackers:** if a scan says `Delivered by courier or branch` or `Delivery Handed Over`, the parcel has usually been transferred to a rural contractor (`3P`) rather than dropped at your gate — allow 2–3 working days for the rural run (`3P/D`). Peek keeps rural handovers at "In transit" rather than marking them delivered early.
 - **No scans after label creation or stuck at depot:** if a customer-printed consignment won't show up from the number alone, paste the full `receiver.posthaste.co.nz` link from your dispatch email so Peek can pass the sender's account code. For parcels stalled at a branch, contact your local Post Haste depot or the sender.
 - **Loss or damage claims:** see Post Haste's loss and damage guidelines at [help.posthaste.co.nz/category/receiving-parcels/](https://help.posthaste.co.nz/category/receiving-parcels/) and contact the retailer who booked the courier first. See [delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel), [damaged parcel](guide:damaged-parcel), [returned to sender](guide:returned-to-sender) and [why tracking stops updating](guide:tracking-not-updating).
 
@@ -63,11 +63,13 @@ Official support and branch directories published on [posthaste.co.nz/about-us/c
 
 ## Track a Post Haste parcel with Peek
 
-The easiest way to add a Post Haste shipment in [Peek](/) is to paste the full tracking link from your dispatch email (`receiver.posthaste.co.nz/?consignmentid=CU..…` or `posthaste.co.nz/track?query=`), which Peek recognises automatically as Post Haste and uses to extract the sender's account when required. If you enter a bare ticket, charge label or consignment number (`PH48291736`, `73918462` or `KLM4829173`, invented), Post Haste has no standalone auto-detection pattern, so tap "Change" while adding or "Change carrier" on the parcel screen and select **Post Haste** (searching "Post Haste Couriers" or "Posthaste" finds it too); if your label requires a sender account, Peek also lets you attach the optional Post Haste tracking link on the parcel screen.
+The easiest way to add a Post Haste shipment in [Peek](/) is to paste the full tracking link from your dispatch email (`receiver.posthaste.co.nz/?consignmentid=CU..…` or `posthaste.co.nz/track?query=`), which Peek recognises automatically as Post Haste and uses to extract the sender's account when required. If you enter a bare ticket, charge label or consignment number (`PH48291736`, `73918462` or `KLM4829173`, invented), Peek doesn't recognise Post Haste from the number alone (it asks TNT Italy about a ticket such as `PH48291736` and Australia Post about a consignment such as `KLM4829173`), so tap "Change" while adding or "Change carrier" on the parcel screen and select **Post Haste** (searching "Post Haste Couriers" or "Posthaste" finds it too). Peek then offers an optional "Complete tracking link" field for the link in your shipping email, which names the sender's account some parcels need.
 
-Peek queries Freightways' Post Haste tracking API directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivery attempted", "Delivered"), Freightways event codes and descriptions, suburb and region locations, estimated delivery date when Post Haste publishes an `ETA`, delivery timestamp on delivery, partner Freightways network handoffs when another catalog network scans the parcel, and exact timestamped UTC instants. Peek discards signature/delivery photo attachments, authority-to-leave flags, postcodes and driver names.
+Peek reads the Freightways lookup under Post Haste's name and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivery attempted", "Delivered"), the scan wording, the suburb and region, the estimated delivery day when Post Haste gives one, and the delivery time. The scan types and subtypes set the stage and stay out of every Peek app. Scan times come as UTC instants, shown on your device's clock. When another Freightways network, such as Castle Parcels, makes the newest scan, the parcel shows "Delivery with" and that network's name. Peek doesn't keep the signature and signer's name, delivery photos, the authority-to-leave tag, postcodes or the driver.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Post Haste." and displays "Get help from Post Haste", which opens Post Haste's receiving-parcels help centre. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Post Haste."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Post Haste shows `ONBD`, every 2 minutes from 6 a.m. New Zealand time, while Post Haste's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Post Haste's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Post Haste.", with a "Get help from Post Haste" link to Post Haste's receiving-parcels help. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Post Haste."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot book redelivery, grant authority to leave or contact your local Post Haste branch for you.
 
@@ -83,9 +85,9 @@ Some customer-printed labels (such as Despatch IT consignments) are tied to the 
 
 ### What if I missed my Post Haste delivery?
 
-Post Haste normally requires someone present unless authority to leave was given. Use the online form at [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) with your card-to-call reference or call your local branch listed at [posthaste.co.nz/about-us/contact/](https://posthaste.co.nz/about-us/contact/).
+Post Haste normally requires someone present unless authority to leave was given. Use the online form at [posthaste.co.nz/tools/redelivery/](https://posthaste.co.nz/tools/redelivery/) with your 16-digit delivery reference, or call your local branch listed at [posthaste.co.nz/about-us/contact/](https://posthaste.co.nz/about-us/contact/).
 
-### Why does Post Haste tracking say "Handed over" or `STAT/RZDEL`?
+### Why does Post Haste tracking say `Delivery Handed Over` or `STAT/RZDEL`?
 
 `STAT/RZDEL` indicates a rural or non-urban delivery address, and a handover scan means the parcel has been passed to a rural delivery contractor — typically adding 2–3 business days before final doorstep delivery (`3P/D`).
 

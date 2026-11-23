@@ -17,7 +17,7 @@ Redur tracking numbers (*N° Tracking*) are 14 digits long with no letters or sp
 | `58492716380419` | Standard 14-digit Redur parcel tracking number (*NTRACKING*). |
 | `61738492051628` | Alternative 14-digit Redur shipment tracking code for Spain, Portugal or Eurodis routes. |
 
-On [redur.es/track-trace/](https://redur.es/track-trace/), the form also lets account users search by expedition number or customer reference, while automated tracking in Peek uses the 14-digit tracking number (`NTRACKING`) or a direct `redur.es/track-trace/?...&valor=` link. Because bare 14-digit numbers overlap with several other European couriers (such as [SEUR](carrier:seur) and DPD), pasting the Redur link or selecting Redur manually ensures Peek checks Redur immediately. See [tracking number formats](guide:tracking-number-formats).
+On [redur.es/track-trace/](https://redur.es/track-trace/), the form also searches by expedition number and by the sender's or a partner's references, while automated tracking in Peek uses the 14-digit tracking number (`NTRACKING`) or a direct `redur.es/track-trace/?...&valor=` link. Peek doesn't recognise Redur from the number alone: a bare 14-digit number goes to DPD, [SEUR](carrier:seur) and other carriers (SEUR first in Spain), so paste Redur's link or choose Redur. See [tracking number formats](guide:tracking-number-formats).
 
 ## What Redur tracking statuses mean
 
@@ -28,7 +28,7 @@ Redur's tracking page shows a 7-step progress bar together with depot-level scan
 | `DOCUMENTACION` / `DATA ENTERING` | Electronic shipping documentation transmitted by the sender before physical depot intake (dated to the day only). | "Label created" |
 | `ENTRADA PLAZA ORIGEN` / `INBOUND ORIGIN DEPOT` | First physical intake scan at Redur's origin depot. | "Received by carrier" |
 | `SALIDA PLAZA ORIGEN` (`OUTBOUND ORIGIN DEPOT`), `ENTRADA/SALIDA PLAZA TRANSITO` (`INBOUND/OUTBOUND TRANSIT DEPOT`), `ENTRADA PLAZA DESTINO` (`INBOUND FINAL DEPOT`) | Moving between origin, transit and destination depots across Spain or Portugal. | "In transit" |
-| `CARGA CAMION T. INTERNACIONAL` / `TRUCK LOAD INTERNATIONAL TRAFFIC` | Loaded onto an international Eurodis road trunk toward another European country. | "In transit" |
+| `CARGA CAMION T. INTERNACIONAL` / `TRUCK LOAD INTERNATIONAL TRAFFIC` | Loaded on a truck for another country, where a partner delivers. | "In transit" |
 | `PENDIENTE DE FECHA CONCERTADA`, `FECHA DE ENTREGA CONCERTADA` / `BOOKING AGREED DATE` | Waiting to agree a delivery date with the recipient, or delivery appointment date confirmed. | "In transit" |
 | `SALIDA A REPARTO` / `OUT FOR DELIVERY` | Out on the local Redur delivery vehicle today. | "Out for delivery" |
 | `RECOGERÁN EN AGENCIA` | Held at the destination Redur depot for recipient collection. | "Ready for pickup" |
@@ -40,14 +40,14 @@ Redur's tracking page shows a 7-step progress bar together with depot-level scan
 
 According to [Redur](https://redur.es/) and [Redur Services](https://redur.es/servicios/):
 
-- **Domestic Iberia (*Servicio Doméstico*):** urgent parcel, pallet and combi-freight distribution across mainland Spain, the Balearic and Canary Islands and Portugal via Redur's 61+ own depots, backed by *Redur Connected* email and SMS delivery notifications and the *Maia* shipment management tool.
+- **Domestic Iberia (*Servicio Doméstico*):** urgent parcel, pallet and combi-freight distribution across mainland Spain, the islands and Portugal via Redur's 61+ own depots, backed by *Redur Connected* email and SMS delivery notifications and the *Maia* shipment management tool.
 - **International Europe (*Servicio Internacional*):** daily departures across Europe for B2B and B2C shipments through the **Eurodis** partner network. Once `CARGA CAMION T. INTERNACIONAL` appears, a local Eurodis partner courier in the destination country completes final delivery.
 - **Temperature-controlled pharma (*Farma 15-25*):** GDP-compliant 15–25 °C distribution for healthcare and pharmaceutical shipments.
 
 ## Missed delivery, appointment holds and missing parcels
 
-- **`PENDIENTE DE FECHA CONCERTADA` (awaiting agreed date):** common on bulky, palletized or business deliveries where Redur contacts the recipient to book a delivery slot before dispatching the van. Check your phone and email for a *Redur Connected* notice, or call Redur with your 14-digit number.
-- **`DESTINATARIO AUSENTE`, `INCORRECT ADDRESS` or `RECOGERÁN EN AGENCIA`:** contact your seller or Redur's customer service promptly with your 14-digit tracking code to confirm your address, schedule a fresh delivery attempt or check opening hours for depot collection (bring photo ID).
+- **`PENDIENTE DE FECHA CONCERTADA` (awaiting agreed date):** Redur is waiting to agree a delivery day with you before the parcel goes out; `FECHA DE ENTREGA CONCERTADA` or `BOOKING AGREED DATE` means a day was agreed. Check your phone and email, or call Redur with your 14-digit number.
+- **`DESTINATARIO AUSENTE`, `INCORRECT ADDRESS` or `RECOGERÁN EN AGENCIA`:** contact your seller or Redur's customer service promptly with your 14-digit tracking code to confirm your address, schedule a fresh delivery attempt or check opening hours for depot collection.
 - **Delayed, damaged or missing shipments:** notify the online retailer or shipper first (they hold the contract with Redur and can file a formal claim) and confirm the parcel's depot location with Redur. See [delivered but not received](guide:delivered-not-received), [damaged parcel](guide:damaged-parcel), [lost parcel](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [why tracking stops updating](guide:tracking-not-updating).
 
 ## Redur customer service and Madrid headquarters
@@ -63,11 +63,13 @@ Official contact details published on [Redur Contacto](https://redur.es/contacto
 
 ## Track a Redur parcel with Peek
 
-Paste a direct `redur.es/track-trace/?...&valor=` tracking link into [Peek](/) and Peek recognises Redur automatically. Because bare 14-digit numbers (`58492716380419` or `61738492051628`, invented) are shared by many European carriers and Redur has no exclusive number prefix, enter your 14-digit number and tap "Change" while adding or "Change carrier" on the parcel screen to select **Redur** (searching "Redur Spain", "Redur Portugal" or "Redur S.A." finds it too); Peek then verifies it directly against Redur's tracker and shows `"Redur has this parcel."` once confirmed.
+Paste a direct `redur.es/track-trace/?...&valor=` tracking link into [Peek](/) and Peek recognises Redur automatically. Because bare 14-digit numbers (`58492716380419` or `61738492051628`, invented) are shared by many European carriers and Redur has no exclusive number prefix, enter your 14-digit number and tap "Change" while adding or "Change carrier" on the parcel screen to select **Redur** (searching "Redur Spain", "Redur Portugal" or "Redur S.A." finds it too); Peek then verifies it directly against Redur's tracker and shows "Redur has this parcel." once confirmed.
 
-Peek queries `redur.es/track-trace/` directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Ready for pickup", "Delivery attempted", "Returned to sender", "Delivered"), Spanish scan descriptions, depot locations, the final delivery status from Redur's progress rail when active, and local wall-clock timestamps as printed by Redur (date-only for midnight `DOCUMENTACION` rows, without a time-zone offset). Peek discards the package-count column; Redur's public tracker does not publish an estimated delivery date, weight, service name, separate delivery timestamp or onward Eurodis partner tracking number.
+Peek reads Redur's tracker and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Ready for pickup", "Delivery attempted", "Returned to sender", "Delivered"), Redur's wording and the depot. When the last step of Redur's progress bar is lit, Peek shows the parcel as delivered. Redur gives scan times without a zone: Peek dates each scan on its depot's time zone (Madrid's for `ALGETE`, Lisbon's for `LISBOA`, the Canaries' for `LAS PALMAS`) and a scan from a depot it can't place on the zone of the scan beside it, then shows them on your device's clock; `DOCUMENTACION` keeps its day alone. Peek doesn't keep the package count. Redur's tracker gives no estimated delivery date, weight, service name, delivery time of its own or partner number.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Redur." and displays "Get help from Redur", which opens Redur's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Redur."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Redur shows `SALIDA A REPARTO` or `OUT FOR DELIVERY`, every 2 minutes from 6 a.m. on the clock of the newest scan's depot, while Redur's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Redur's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Redur.", with a "Get help from Redur" link to Redur's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Redur."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot book a delivery appointment, edit an address or contact Redur for you.
 
@@ -79,11 +81,11 @@ Redur tracking numbers are 14 numeric digits with no letters or spaces (for exam
 
 ### What does `PENDIENTE DE FECHA CONCERTADA` mean on Redur?
 
-It means the shipment is at a Redur depot waiting to arrange a mutually agreed delivery date with the recipient — common for large parcels, pallets or commercial deliveries.
+It means Redur is waiting to agree a delivery day with you before the parcel goes out.
 
 ### What does `RECOGERÁN EN AGENCIA` mean?
 
-It means your parcel is being held at the local Redur branch (*delegación*) ready for you to collect in person with valid ID.
+It means your parcel is being held at the local Redur branch (*delegación*) ready for you to collect.
 
 ### How do I contact Redur customer service?
 
@@ -94,5 +96,5 @@ Call Redur's central switchboard in Spain on `(+34) 916 20 46 10`, email `info@r
 - [Redur: Track & Trace](https://redur.es/track-trace/) – public shipment tracker
 - [Redur: Servicios](https://redur.es/servicios/) – *Servicio Doméstico*, *Servicio Internacional*, *Farma 15-25* (GDP) and *Logística integral*
 - [Redur: Contacto](https://redur.es/contacto/) – `(+34) 916 20 46 10`, `info@redur.es` and Algete (Madrid) headquarters (help URL linked by Peek)
-- [Universal Parcel Scraper: redur](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/redur) – 14-digit format, `redur.es/track-trace/` link rule, Spanish/English scan wording map, delivered progress-rail handling and local wall clocks
+- [Universal Parcel Scraper: redur](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/redur) – 14-digit format, `redur.es/track-trace/` link rule, Spanish/English scan wording map, delivered progress-rail handling and scan times dated on each depot's time zone
 :::

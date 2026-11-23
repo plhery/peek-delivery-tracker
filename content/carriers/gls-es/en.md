@@ -12,7 +12,7 @@ GLS Spain is the Spanish arm of the GLS Group, the parcel network that took over
 
 The shop gives you the number: look in its shipping email or order page, then in GLS's emails, SMS, WhatsApp messages and the My GLS app. If the courier missed you, the paper note left at your door, the "nota de paso", carries it too. Still nothing? Ask the shop, as GLS suggests, or see [how to find a tracking number](guide:find-tracking-number).
 
-GLS publishes no length or format for its Spanish numbers. The Spanish form calls the field "N° de envio / Albarán". Shipment numbers have nine or ten digits; those seen by Peek carried 10 starting with 1, like the invented `1234567890`. GLS's tracking also finds a parcel by the longer barcode on its label or by the shop's reference.
+GLS publishes no length or format for its Spanish numbers. The Spanish form calls the field "N° de envio / Albarán". Shipment numbers have nine or ten digits; those seen by Peek carried 10 starting with 1, like `1482910375`. GLS's tracking also finds a parcel by the longer barcode on its label or by the shop's reference.
 
 GLS's tracking page first asks whether the shipment is national or international; either way, without the destination postcode it shows nothing.
 
@@ -64,10 +64,10 @@ For a parcel from outside the EU, GLS Spain or an authorised agent will probably
 
 ## GLS Spain customer service and contact number
 
-GLS Spain's channels for recipients, as read on 11 October 2026 (its [English contact page](https://gls-group.com/ES/en/contact/) lists the same ones as the Spanish):
+GLS Spain's channels for recipients (its [English contact page](https://gls-group.com/ES/en/contact/) lists the same ones as the Spanish):
 
-- **Phone** +34 91 080 62 29, Monday to Friday, 9:00 to 14:00 and 16:00 to 19:00. GLS doesn't state what the call costs.
-- **Private message** on Facebook (@GLSSpain), Instagram (@gls_spain) or X (@GLS_clientes), Monday to Friday, 09:00 to 18:00.
+- **Phone** +34 91 080 62 29, Monday to Friday, 9:00 to 14:00 and 16:00 to 19:00 Madrid time. GLS doesn't state what the call costs.
+- **Private message** on Facebook (@GLSSpain), Instagram (@gls_spain) or X (@GLS_clientes), Monday to Friday, 09:00 to 18:00 Madrid time.
 - **Gisela**, GLS's [virtual assistant](https://gls-group.com/ES/es/asistente-virtual/), a web chat that GLS's FAQ links as "Consulta" and that also opens from "Make a claim".
 
 GLS says 911 118 768 is a genuine number it uses only for quality calls.
@@ -76,9 +76,9 @@ GLS says 911 118 768 is a genuine number it uses only for quality calls.
 
 [Peek](/) reads GLS Spain's own tracking, without an account. Like GLS, it needs the delivery postcode: once GLS Spain is the carrier, a "Delivery postcode" field appears, filled in if you gave one before. It goes to GLS and, when needed, to tracking services. A wrong postcode looks like an unknown number.
 
-You then see each scan's time and GLS's English wording, such as `At delivery agency`, under a headline in Peek's words ("In transit", or "Ready for pickup" once GLS says `Received in` a Parcel Shop or locker), with the expected delivery day, the weight and the Parcel Shop or locker where the parcel waits. GLS gives no scan places, and the pickup code stays on its page. Peek's link to GLS opens its form without the number. Checks run up to every 10 minutes, or every 2 from 6 a.m. local time on the day GLS scans the parcel out for delivery, while GLS's own tracker answers (through tracking services, every 15 minutes), and you can be notified of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+You then see each scan's time and GLS's English wording, such as `At delivery agency`, under a headline in Peek's words ("In transit", or "Ready for pickup" once GLS says `Received in` a Parcel Shop or locker), with the expected delivery day, the weight and the Parcel Shop or locker where the parcel waits. GLS gives no scan places, and the pickup code stays on its page. Peek's link to GLS opens its form without the number. While the parcel is open in Peek, or on its delivery day with notifications on, checks run up to every 10 minutes, or every 2 from 6 a.m. Madrid time on the day GLS scans the parcel out for delivery, while GLS's own tracker answers, and notifications can follow "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GLS Spain." and a "Get help from GLS Spain" link.
 
-The number alone doesn't name GLS Spain, and GLS answers nothing without the postcode, so for a 10-digit number Peek asks DHL eCommerce Iberia, Packeta and BOX NOW, and, when DHL Express's check digit fits, [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki. Press "Change", pick "GLS Spain" and add the postcode. A mygls.gls-spain.es link, or a gls-group.com or gls-group.eu link with `/ES/`, names GLS Spain at once, though the postcode is still asked. A parcel another carrier hands to GLS Spain isn't followed there automatically.
+The number alone doesn't name GLS Spain, and GLS answers nothing without the postcode, so for a 10-digit number Peek first asks DHL eCommerce Iberia, Packeta and BOX NOW, with DHL Freight in Spain and some other countries (not Portugal or Andorra), and, when DHL Express's check digit fits, [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki. If none knows the number, it tries tracking services, then DPD Ireland, Cargus and Estafeta, and DHL Freight if it hasn't asked it yet. If nobody answers and your country is Spain, Portugal or Andorra, Peek shows "GLS Spain may have this parcel. Add the delivery postcode to track it." Otherwise press "Change", pick "GLS Spain" and add the postcode. A mygls.gls-spain.es or mygls.gls-portugal.pt link with the number, or a gls-group.com or gls-group.eu link with `/ES/` or `/PT/` and the number in `match`, `parcelNumber` or `matchParcelNumber`, names GLS Spain at once, though the postcode is still asked. A parcel another carrier hands to GLS Spain isn't followed there automatically.
 
 ## Questions about GLS tracking in Spain
 
@@ -103,7 +103,7 @@ GLS bought ASM: in April 2016 it announced the purchase of ASM Transporte Urgent
 - [GLS Spain: Frequently asked questions - Receiving parcels](https://gls-group.com/ES/en/faq/receiving-parcels/) – attempts, On delivery
 - [GLS Spain: Guide to understanding your parcel status step by step](https://gls-group.com/ES/en/blog/guide-to-understanding-your-parcel-status-step-by-step/) – status meanings, 7 days
 - [GLS Spain: Contact](https://gls-group.com/ES/en/contact/) – phone and hours in English
-- [GLS Spain: Preguntas frecuentes - Recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – number from the shop, statuses, attempts, ID, damage, virtual assistant ("Consulta", read 7 November 2026), delivery times
+- [GLS Spain: Preguntas frecuentes - Recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – number from the shop, statuses, attempts, ID, damage, virtual assistant ("Consulta"), delivery times
 - [GLS Spain: Asistente virtual GLS](https://gls-group.com/ES/es/asistente-virtual/) – Gisela, web chat
 - [GLS Spain: Recibir paquetes](https://gls-group.com/ES/es/recibir-paquetes/) – nota de paso, 9 days, authorisation, Gisela
 - [GLS Spain: Seguimiento de envío](https://gls-group.com/ES/es/recibir-paquetes/seguimiento-envio/) – number and postcode, national or international, 10,500 points

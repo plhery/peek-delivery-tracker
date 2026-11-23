@@ -6,26 +6,26 @@ published: 2026-10-11
 updated: 2026-11-17
 ---
 
-Relais Colis is a French network delivering parcels to local shops that act as pickup points, now part of [GLS France](carrier:gls-fr). Track a parcel on [Relais Colis's tracking page](https://relaiscolis.com/colis/suivre) with its parcel number, or paste the number in the box above. The number comes from the shop that sent it, or from Relais Colis's confirmation email for a parcel sent between people.
+Relais Colis is a French network delivering parcels to local shops that act as pickup points, now part of [GLS France](carrier:gls-fr). Track a parcel on [Relais Colis's tracking page](https://relaiscolis.com/colis/suivre) with its parcel number, or paste the number in the box above. The number comes from whoever sent the parcel.
 
 ## Relais Colis tracking number (numéro de colis)
 
-Relais Colis's tracking form asks for a "numéro de colis" of 12 to 16 characters; its example starts with `CC`. Relais Colis doesn't explain what the letters or digits mean.
+Relais Colis's tracking form asks for a "numéro de colis" of 12 to 16 characters. Relais Colis doesn't explain what the letters or digits mean.
 
 | Shape (invented) | What to know |
 | --- | --- |
-| `CC1234567890` to `CC12345678901234` | `CC` and 10 to 14 digits: the form Relais Colis's own example takes. |
-| `1234567890` | 10 digits. Also fits DHL, [Mondial Relay](carrier:mondial-relay) and others. |
-| `19999999999980` | 14 digits. Fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others; Peek doesn't ask Relais Colis about it. |
-| `VD1234567890` | `VD` and 10 digits. Also fits [Colis Privé](carrier:colis-prive). |
+| `CC4829103756` to `CC48291037561829` | `CC` and 10 to 14 digits: Peek files it under Relais Colis at once. |
+| `7482910375` | 10 digits. Also fits DHL, [Mondial Relay](carrier:mondial-relay) and others. |
+| `18492037164829` | 14 digits. Fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others; Peek doesn't ask Relais Colis about it. |
+| `VD4829103756` | `VD` and 10 digits. Also fits [Colis Privé](carrier:colis-prive). |
 
-Between people, Relais Colis emails the recipient a confirmation to follow the parcel; for a shop order, look in the shop's shipping email or order page. No number? Relais Colis's "Je n'ai pas mon numéro de colis" search uses the recipient's email or phone and the shop's name; see also [how to find a tracking number](guide:find-tracking-number).
+For a shop order, look in the shop's shipping email or order page. No number? Relais Colis's "Je n'ai pas mon numéro de colis" search uses the recipient's email or phone and the shop's name; see also [how to find a tracking number](guide:find-tracking-number).
 
 If the shop names another carrier, the number is probably theirs: see [tracking number formats](guide:tracking-number-formats).
 
 ## Relais Colis suivi: what the statuses mean in English
 
-Relais Colis's site and tracking are in French only, and it publishes no list of statuses. Each tracking line is a French sentence; look for these words, roughly in the order a parcel meets them:
+Relais Colis's site and tracking are in French only. Each tracking line is a French sentence; look for these words, roughly in the order a parcel meets them:
 
 | Relais Colis says | What it means for you |
 | --- | --- |
@@ -46,7 +46,7 @@ Relais Colis's site and tracking are in French only, and it publishes no list of
 
 **The notice.** When the parcel reaches the relay you chose, Relais Colis sends you an email or SMS.
 
-**How long it waits.** 7 working days, which is about 9 calendar days, up to 11 around public holidays (Relais Colis doesn't count Mondays, Sundays, public holidays or the Tuesday after one). After that, a shop order goes back to the shop, and a parcel sent through relaiscolis.com goes back to the relay it was sent from.
+**How long it waits.** 7 working days, which is about 9 calendar days, up to 11 around public holidays. After that, a shop order goes back to the shop, and a parcel sent through relaiscolis.com goes back to the relay it was sent from.
 
 **Collecting it.** Show your QR code, or ID (identity card, passport or driving licence) if you didn't get one.
 
@@ -68,19 +68,19 @@ For a shop order, the shop holds the contract with Relais Colis, so delays, loss
 
 ## Relais Colis customer service and contact
 
-As listed on relaiscolis.com on 11 October 2026; everything is in French.
+As listed on relaiscolis.com; everything is in French.
 
 - **Phone:** 09 70 25 22 31, at the price of a local call. No hours are given.
-- **Claim form:** the FAQ's "Pour une réclamation" link leads to Relais Colis's help centre, which didn't open on 11 October 2026.
+- **Claim form:** the FAQ's "Pour une réclamation" link leads to Relais Colis's help centre.
 - **Email:** contactctoc@relaiscolis.com, for lost parcels sent through relaiscolis.com.
 
 > Relais Colis warns of fake emails and calls in its name. Its addresses all end in @relaiscolis.com, it never asks for personal data by phone or email, and you shouldn't call back a premium-rate number.
 
 ## Tracking Relais Colis parcels with Peek
 
-[Peek](/) recognises `CC` numbers as Relais Colis's at once. Other shapes are shared, so Peek asks the likely carriers and shows "asking…" first: for 10 digits it asks [DHL eCommerce Spain](carrier:dhl-ecommerce-es), Packeta and BOX NOW, not Relais Colis (and [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki first when the number passes DHL Express's check digit), and for `VD` numbers Colis Privé and Relais Colis. With 14 digits, it asks Chronopost, DPD and others, not Relais Colis, even for readers in France. If several carriers know the number, or none does, press "Change" and pick Relais Colis. A relaiscolis.com tracking link works too. No postcode is needed.
+[Peek](/) recognises `CC` numbers as Relais Colis's at once. Other shapes are shared, so Peek asks the likely carriers and shows "asking…" first: for 10 digits it asks [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), Packeta, BOX NOW and others, not Relais Colis (and [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki first when the number passes DHL Express's check digit), and for `VD` numbers Colis Privé, Relais Colis and others. With 14 digits, it asks Chronopost, DPD and others, not Relais Colis, even for readers in France. If several carriers know the number, or none does, press "Change" and pick Relais Colis. A relaiscolis.com tracking link works too. No postcode is needed.
 
-Peek shows the status and history only: no place on the map, no expected delivery and no details of the relay holding the parcel; it drops those and your name and address. Wordings stay in French as Relais Colis writes them; only a few exact ones, such as `Livraison effectuée`, are replaced by Peek's own label ("Delivered"). Times are read as Paris time. When Relais Colis's latest status has no exact time, Peek takes the dated history from other tracking services and asks Relais Colis again every 6 hours. Otherwise it checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Relais Colis scans the parcel out for delivery, while Relais Colis's own tracker answers (through tracking services, every 15 minutes), and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows the status and history only: no place on the map, no expected delivery and no details of the relay holding the parcel; it drops those and your name and address. Wordings stay in French as Relais Colis writes them; only a few exact ones, such as `Livraison effectuée`, are replaced by Peek's own label ("Delivered"). Times are read as Paris time. When a Relais Colis scan has a day but no time, Peek looks for a dated history from tracking services. While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. Paris time on the day Relais Colis scans the parcel out for delivery, while its own tracker answers, and notifications can follow "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Relais Colis." and a "Get help from Relais Colis" link.
 
 ## Questions about Relais Colis tracking
 
@@ -91,10 +91,6 @@ A French network delivering parcels to nearly 7,000 partner shops, says GLS, whi
 ### Why is my Relais Colis tracking not moving?
 
 Relais Colis says it handles routing incidents within 15 days. For a shop order, ask the shop, which deals with Relais Colis.
-
-### Does Relais Colis deliver on Saturdays?
-
-Yes: for parcels sent through relaiscolis.com, its terms say Relais Colis delivers from Tuesday to Saturday.
 
 ### Does Relais Colis deliver outside France?
 
@@ -111,7 +107,6 @@ No. Relais Colis says it doesn't deliver to the French overseas territories or a
 - [Relais Colis: Acheminement bloqué](https://relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 days
 - [Relais Colis: Colis perdu](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – lost parcels, email
 - [Relais Colis: Colis abîmé](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refusal, 3 and 5 days
-- [Relais Colis: Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – working days, delivery days, QR code, compensation, mediator
 - [Relais Colis: Besoin d'aide FAQ](https://relaiscolis.com/faq) – phone, claim link
 - [Relais Colis: Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – fraud warning
 - [Relais Colis: Trouver un Relais](https://relaiscolis.com/relais/trouver) – relay finder

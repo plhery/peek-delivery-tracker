@@ -6,20 +6,20 @@ published: 2026-10-11
 updated: 2026-11-17
 ---
 
-Relais Colis livre des colis dans des commerces de proximité qui servent de points relais, partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, saisis son numéro sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre), ou colle-le dans le champ ci-dessus. Ce numéro vient de la boutique qui t'a envoyé le colis, ou de l'e-mail de confirmation de Relais Colis pour un colis envoyé entre particuliers.
+Relais Colis livre des colis dans des commerces de proximité qui servent de points relais, partout en France ; le réseau appartient désormais à [GLS France](carrier:gls-fr). Pour suivre ton colis, saisis son numéro sur [la page « Suivre mon colis » de Relais Colis](https://relaiscolis.com/colis/suivre), ou colle-le dans le champ ci-dessus. Ce numéro vient de la personne ou de la boutique qui t'a envoyé le colis.
 
 ## Numéro de suivi Relais Colis : où le trouver
 
-Le formulaire de suivi demande un « numéro de colis » de 12 à 16 caractères, et son exemple commence par `CC`. Relais Colis n'explique pas ce que veulent dire les lettres ou les chiffres. Les formes possibles, avec des chiffres inventés :
+Le formulaire de suivi demande un « numéro de colis » de 12 à 16 caractères. Relais Colis n'explique pas ce que veulent dire les lettres ou les chiffres. Les formes possibles, avec des chiffres inventés :
 
 | Numéro (inventé) | Ce qu'il faut savoir |
 | --- | --- |
-| `CC1234567890` à `CC12345678901234` | `CC` puis 10 à 14 chiffres : la forme de l'exemple de Relais Colis. |
-| `1234567890` | 10 chiffres. Correspond aussi à DHL, [Mondial Relay](carrier:mondial-relay) et d'autres. |
-| `19999999999980` | 14 chiffres. Correspond à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres ; Peek n'interroge pas Relais Colis pour un tel numéro. |
-| `VD1234567890` | `VD` puis 10 chiffres. Correspond aussi à [Colis Privé](carrier:colis-prive). |
+| `CC4829103756` à `CC48291037561829` | `CC` puis 10 à 14 chiffres : Peek le classe tout de suite chez Relais Colis. |
+| `7482910375` | 10 chiffres. Correspond aussi à DHL, [Mondial Relay](carrier:mondial-relay) et d'autres. |
+| `18492037164829` | 14 chiffres. Correspond à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres ; Peek n'interroge pas Relais Colis pour un tel numéro. |
+| `VD4829103756` | `VD` puis 10 chiffres. Correspond aussi à [Colis Privé](carrier:colis-prive). |
 
-**Où le chercher.** Pour un colis entre particuliers, Relais Colis envoie au destinataire un e-mail de confirmation qui permet de suivre le colis ; l'expéditeur, lui, retrouve le numéro dans son compte, rubrique « Mes Commandes ». Pour une commande en ligne, regarde l'e-mail d'expédition de la boutique ou la page de ta commande.
+**Où le chercher.** Pour une commande en ligne, regarde l'e-mail d'expédition de la boutique ou la page de ta commande.
 
 **Pas de numéro ?** La recherche « Je n'ai pas mon numéro de colis » de Relais Colis retrouve le colis avec l'e-mail ou le téléphone du destinataire et le nom de la boutique (« Enseigne magasin »). Voir aussi [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -27,7 +27,7 @@ Si la boutique cite un autre transporteur, le numéro est sans doute le sien : [
 
 ## Suivi Relais Colis : ce que veulent dire les statuts
 
-Relais Colis ne publie pas la liste de ses statuts. Chaque ligne du suivi est une phrase en français ; repère ces mots, à peu près dans l'ordre où ton colis les rencontre :
+Chaque ligne du suivi est une phrase en français ; repère ces mots, à peu près dans l'ordre où ton colis les rencontre :
 
 | Relais Colis écrit | Ce que ça veut dire pour toi |
 | --- | --- |
@@ -48,7 +48,7 @@ Relais Colis ne publie pas la liste de ses statuts. Chaque ligne du suivi est un
 
 **Le message.** Quand le colis arrive dans le Relais Colis choisi, tu reçois un e-mail ou un SMS.
 
-**Combien de temps il reste.** 7 jours ouvrés, soit environ 9 jours calendaires, jusqu'à 11 avec les jours fériés : Relais Colis ne compte ni le lundi, ni le dimanche, ni les jours fériés, ni le mardi qui suit un jour férié. Passé ce délai, un colis commandé dans une boutique en ligne repart chez la boutique, et un colis envoyé via relaiscolis.com retourne au Relais Colis d'où il est parti.
+**Combien de temps il reste.** 7 jours ouvrés, soit environ 9 jours calendaires, jusqu'à 11 avec les jours fériés. Passé ce délai, un colis commandé dans une boutique en ligne repart chez la boutique, et un colis envoyé via relaiscolis.com retourne au Relais Colis d'où il est parti.
 
 **Pour le retirer.** Présente ton QR code au commerçant, ou ta pièce d'identité (carte d'identité, passeport ou permis de conduire) si tu ne l'as pas reçu. Le QR code est personnel : ne le transmets à personne.
 
@@ -60,7 +60,7 @@ Relais Colis ne publie pas la liste de ses statuts. Chaque ligne du suivi est un
 
 **Livraison à domicile.** Selon la FAQ de Relais Colis, son équipe te contacte par e-mail ou par téléphone pour fixer un rendez-vous, et te recontacte si tu étais absent. Si personne ne t'a appelé, fais une réclamation auprès de la boutique.
 
-**Délai et jours de livraison.** Pour un colis envoyé via relaiscolis.com, il faut en moyenne 3 à 6 jours ouvrés jusqu'au relais, et Relais Colis livre du mardi au samedi, selon ses conditions de vente.
+**Délai.** Pour un colis envoyé via relaiscolis.com, il faut en moyenne 3 à 6 jours ouvrés jusqu'au relais.
 
 ## Suivi Relais Colis bloqué : colis en retard, perdu ou abîmé
 
@@ -70,14 +70,12 @@ Pour une commande en ligne, c'est la boutique qui a le contrat avec Relais Colis
 - **Colis perdu :** commande en ligne, réclamation auprès de la boutique. Pour un colis envoyé via relaiscolis.com, écris au Service Client de Relais Colis.
 - **Colis abîmé :** si l'emballage est abîmé, dis au commerçant que tu refuses le colis. Si tu l'acceptes, tu as 3 jours pour contacter Relais Colis par e-mail et 5 jours pour envoyer des photos de l'extérieur, de l'intérieur et du produit abîmé. Pour une commande en ligne, réclamation auprès de la boutique.
 
-Pour les envois via relaiscolis.com, les conditions de vente plafonnent l'indemnisation sans option ZEN à 25 € par colis en avoir ou 20 € par chèque. Après une réclamation écrite restée sans solution, tu peux saisir le médiateur de la FEVAD (mediateurfevad.fr).
-
 ## Relais Colis contact : téléphone, réclamation et e-mail
 
-Relevé sur relaiscolis.com le 11 octobre 2026 :
+Relevé sur relaiscolis.com :
 
 - **Téléphone :** 09 70 25 22 31, prix d'un appel local. Aucun horaire n'est indiqué.
-- **Réclamation :** le lien « Pour une réclamation » de la FAQ mène au centre d'aide de Relais Colis, qui ne s'ouvrait pas le 11 octobre 2026.
+- **Réclamation :** le lien « Pour une réclamation » de la FAQ mène au centre d'aide de Relais Colis.
 - **E-mail :** contactctoc@relaiscolis.com, pour un colis perdu envoyé via relaiscolis.com.
 - **Commande en ligne :** la boutique, qui traite avec Relais Colis.
 
@@ -85,19 +83,15 @@ Relevé sur relaiscolis.com le 11 octobre 2026 :
 
 ## Suivre un colis Relais Colis avec Peek
 
-[Peek](/) reconnaît tout de suite un numéro `CC` comme un numéro Relais Colis. Les autres formes sont partagées : il interroge les transporteurs les plus probables et affiche « Peek demande à … » pendant ce temps. Pour 10 chiffres, il demande à DHL eCommerce Spain, Packeta et BOX NOW, pas à Relais Colis (et d'abord à [DHL Express](carrier:dhl-express), ACS Courier et Geniki Taxydromiki si le numéro passe la clé de contrôle de DHL Express) ; pour un numéro `VD`, à Colis Privé et Relais Colis. Avec 14 chiffres, il demande à Chronopost, à DPD et à d'autres, mais pas à Relais Colis, même si tu es en France. Si plusieurs transporteurs connaissent le numéro, ou aucun, appuie sur « Changer » et choisis Relais Colis. Un lien de suivi relaiscolis.com marche aussi. Aucun code postal n'est demandé.
+[Peek](/) reconnaît tout de suite un numéro `CC` comme un numéro Relais Colis. Les autres formes sont partagées : il interroge les transporteurs les plus probables et affiche « Peek demande à … » pendant ce temps. Pour 10 chiffres, il demande entre autres à DHL eCommerce Iberia, Packeta et BOX NOW, pas à Relais Colis (et d'abord à [DHL Express](carrier:dhl-express), ACS Courier et Geniki Taxydromiki si le numéro passe la clé de contrôle de DHL Express) ; pour un numéro `VD`, à Colis Privé, Relais Colis et d'autres. Avec 14 chiffres, il demande à Chronopost, à DPD et à d'autres, mais pas à Relais Colis, même si tu es en France. Si plusieurs transporteurs connaissent le numéro, ou aucun, appuie sur « Changer » et choisis Relais Colis. Un lien de suivi relaiscolis.com marche aussi. Aucun code postal n'est demandé.
 
-Peek affiche uniquement le statut et l'historique : pas de lieu sur la carte, pas de date de livraison prévue, ni le nom ou l'adresse du relais qui garde ton colis. Il ne garde pas non plus ton nom ni ton adresse. Les statuts restent en français, tels que Relais Colis les écrit ; seuls quelques libellés exacts, comme `Livraison effectuée`, prennent le libellé de Peek (« Livré »). Les heures sont lues à l'heure de Paris. Quand le dernier statut de Relais Colis n'a pas d'heure exacte, Peek prend l'historique daté chez d'autres services de suivi et redemande à Relais Colis toutes les 6 heures. Sinon, il vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Relais Colis qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Peek affiche uniquement le statut et l'historique : pas de lieu sur la carte, pas de date de livraison prévue, ni le nom ou l'adresse du relais qui garde ton colis. Il ne garde pas non plus ton nom ni ton adresse. Les statuts restent en français, tels que Relais Colis les écrit ; seuls quelques libellés exacts, comme `Livraison effectuée`, prennent le libellé de Peek (« Livré »). Les heures sont lues à l'heure de Paris. Quand un scan de Relais Colis a un jour mais pas d'heure, Peek cherche un historique daté chez des services de suivi. Tant que le colis est ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et toutes les 2 minutes dès 6 h, heure de Paris, le jour où Relais Colis passe le colis en livraison, tant que le suivi de Relais Colis répond, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures, et toutes les 6 heures après sept jours sans nouvelles à « Étiquette créée ». Si un colis reste quatre jours sans scan à « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis … », la note « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Relais Colis. » et un lien « Demande de l’aide à Relais Colis ».
 
 ## Questions sur le suivi Relais Colis
 
 ### Combien de temps un colis reste-t-il en Relais Colis ?
 
 7 jours ouvrés, soit environ 9 jours calendaires et jusqu'à 11 avec les jours fériés. Ensuite, il repart chez la boutique ou au relais d'expédition.
-
-### Relais Colis livre-t-il le samedi ?
-
-Oui : pour les colis envoyés via relaiscolis.com, ses conditions de vente disent que Relais Colis livre du mardi au samedi.
 
 ### Qu'est-ce que Relais Colis ?
 
@@ -128,7 +122,6 @@ Non. Relais Colis dit ne pas livrer pour le moment dans les DOM-TOM ni à l'étr
 - [Relais Colis : Mon colis est perdu, que faire ?](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – colis perdu, Service Client
 - [Relais Colis : Mon colis est abîmé, que faire ?](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refus, 3 et 5 jours
 - [Relais Colis : Livraisons dans les DOM-TOM ou à l'étranger](https://relaiscolis.com/faq/question/faites-vous-des-livraisons-dans-les-dom-tom-ou-a-letranger) – France uniquement
-- [Relais Colis : Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – jours ouvrés, jours de livraison, QR code, indemnisation, médiateur
 - [Relais Colis : Besoin d'aide FAQ](https://relaiscolis.com/faq) – téléphone, lien de réclamation
 - [Relais Colis : Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – faux e-mails et appels
 - [Relais Colis : Trouver un Relais](https://relaiscolis.com/relais/trouver) – recherche de relais

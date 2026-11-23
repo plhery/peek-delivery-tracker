@@ -17,7 +17,7 @@ The Andreani numbers Peek knows have 15 digits and start with 36000, 31000 or 30
 | `360000000000000` | 36000 and 10 more digits: Andreani's range, but only a weak match. [BRT](carrier:brt) and Yunda also use 15 digits, so Peek asks both Andreani and BRT. |
 | `310000000000000` | 31000 and 10 more digits: Andreani's range too. |
 | `300000000000000` | 30000 and 10 more digits: Andreani's range too. |
-| `000000000000000` | 15 digits with another start. Peek doesn't link it to Andreani. [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), [Hermes](carrier:hermes-de), BRT and Yunda use 15 digits too. |
+| `007394028156348` | 15 digits with another start. Peek doesn't link it to Andreani. [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), [Hermes](carrier:hermes-de), BRT and Yunda use 15 digits too. |
 
 Spaces don't matter when you paste a number into Peek.
 
@@ -29,7 +29,7 @@ Can't find your number? See [how to find a tracking number](guide:find-tracking-
 
 ## Andreani tracking statuses explained
 
-Andreani's tracker groups its lines under headings, in Spanish. The four Peek knows are `Pendiente de ingreso` (waiting to be received), `Ingresado` (received), `En camino` (on its way) and `Entregado` (delivered). Each line is a short sentence written to you, with the branch (`sucursal`) and town where there is one. The lines Peek knows, in the order a parcel gets them:
+Andreani's tracker groups its lines under headings, in Spanish. The four Peek knows are `Pendiente de ingreso` (waiting to be received), `Ingresado` (received), `En camino` (on its way) and `Entregado` (delivered). Each line is a short sentence written to you, with the branch (`sucursal`) and town where there is one. The lines of a usual journey that Peek knows, in the order a parcel gets them:
 
 | Andreani says | What it means for you | Peek's status |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ Peek couldn't read Andreani's website, so this page gives no delivery times, no 
 
 **Only `Pendiente de ingreso`.** The sender has created the shipment but hasn't handed the parcel to Andreani yet. Peek shows "Label created". Ask the shop if it has sent your order.
 
-**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for Andreani", and Peek keeps asking. If nothing comes after a few days, check the number with the shop. See [why tracking stops updating](guide:tracking-not-updating).
+**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for Andreani", and Peek keeps asking. If Andreani still doesn't know the number after two days, Peek asks you to check it, choose another carrier or delete the parcel: check it with the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Quiet for days.** When the newest line is four days old or more and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day: "No tracking update since Mon 12 Oct". Parcels often go quiet over a weekend. If nothing changes, ask the shop. After three weeks with no new line, Peek says so too: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
+**Quiet for days.** When the newest line is four days old or more and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day: "No tracking update since Mon 12 Oct", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Andreani." and a "Get help from Andreani" link. If nothing changes, ask the shop. After three weeks with no new line, Peek says so too: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
 
 **Delivered, but nothing came.** The last line is `Ya entregamos tu envío. ¡Esperamos volver a verte pronto!`, but you have no parcel. Ask the people at the address, your neighbours and your building's staff, then the shop. See [delivered but not received](guide:delivered-not-received).
 
@@ -75,7 +75,7 @@ Peek couldn't read Andreani's website, so this page gives no delivery times, no 
 
 ## Andreani customer service and contact
 
-As of 1 November 2026, Peek couldn't read Andreani's website, so this page lists no phone number, email or opening hours: Peek gives only contacts read on official pages. Andreani's website is andreani.com.
+Peek couldn't read Andreani's website, so this page lists no phone number, email or opening hours: Peek gives only contacts read on official pages. Andreani's website is andreani.com.
 
 For an online order, ask the shop first: it booked the delivery and has the shipment's details.
 
@@ -83,7 +83,7 @@ For an online order, ask the shop first: it booked the delivery and has the ship
 
 A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's. Paste it all the same: Peek follows more than 4,500 carriers.
 
-**A number starting with 36000, 31000 or 30000.** Peek asks Andreani and BRT at once, and shows "Checking tracking services…" meanwhile. If Andreani has the parcel, the line under the number names Andreani and says "has this parcel", and Peek files the parcel there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably Andreani" and "Waiting for Andreani’s first scan", and Peek keeps asking Andreani, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
+**A number starting with 36000, 31000 or 30000.** Peek asks Andreani and BRT at once (tracking services and Ozon only if neither knows the number), and shows "Checking tracking services…" meanwhile. If Andreani has the parcel, the line under the number names Andreani and says "has this parcel", and Peek files the parcel there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably Andreani" and "Waiting for Andreani’s first scan", and Peek keeps asking Andreani, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
 
 **An andreani.com link.** Paste the tracking link with `/envio/` in it. Peek names Andreani at once ("Detected carrier") and tracks the number from the link, a reference with letters too.
 
@@ -91,9 +91,9 @@ A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's
 
 **What Peek shows.** Peek reads Andreani's own tracker, the same lookup Andreani's tracking page makes. For each line it shows Andreani's Spanish words, its stage (table above), the branch, and the time. Andreani's times are on Argentina's clock, which has one time zone and no daylight saving time. Peek shows them in your device's time zone. Andreani's tracker also shows the sender's name, the driver's name, remarks, a map position, a progress bar and a delivery estimate. Peek leaves all of these out, so it shows no expected delivery date.
 
-**When Andreani doesn't answer.** Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows their copy in their own words. Peek knows no hand-over from Andreani to another carrier, so it follows the parcel with Andreani to the end.
+**When Andreani doesn't answer.** Peek asks tracking services instead and shows their copy in their own words. Peek knows no hand-over from Andreani to another carrier, so it follows the parcel with Andreani to the end.
 
-**Checks and alerts.** Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Andreani scans the parcel out for delivery, while Andreani's own tracker answers (through tracking services, every 15 minutes). A parcel with no news for two days, or for 12 hours at "Label created" or "Received by carrier", is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Andreani or the shop for you.
+**Checks and alerts.** While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and every 2 minutes from 6 a.m. Argentine time on the day Andreani scans the parcel out for delivery, while Andreani's own tracker answers. A parcel with no news for two days, or for 12 hours at "Label created" or "Received by carrier", is checked hourly, and after seven days without news at "Label created", every 6 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Andreani or the shop for you.
 
 ## Questions about Andreani tracking
 
@@ -107,7 +107,7 @@ Waiting to be received: the sender has announced the parcel, but Andreani doesn'
 
 ### What does "Hoy te visitaremos para entregarte tu envío." mean?
 
-Andreani will come today to deliver your parcel. Peek shows "Out for delivery" and checks more often until the delivery line comes.
+Andreani will come today to deliver your parcel. Peek shows "Out for delivery" and, while the parcel is open in Peek or notifications are on, checks more often until the delivery line comes.
 
 ### Why is my Andreani tracking not updating?
 

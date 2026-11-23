@@ -14,15 +14,15 @@ Nummern von DHL eCommerce haben mindestens zehn Zeichen und beginnen meist mit G
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `GM0000000000000000` | GM und 16 bis 18 Ziffern: die GM-Nummer, die übliche Form bei DHL eCommerce. |
-| `GM0000000000` | GM und 8 bis 15 Ziffern: eine kürzere GM-Nummer. |
-| `0000000000000000` | 16 oder 17 Ziffern: eine weitere Form von DHL eCommerce. |
+| `GM4829103756182947` | GM und 16 bis 18 Ziffern: die GM-Nummer, die übliche Form bei DHL eCommerce. |
+| `GM4829103756` | GM und 8 bis 15 Ziffern: eine kürzere GM-Nummer. |
+| `7394028156342819` | 16 oder 17 Ziffern: eine weitere Form von DHL eCommerce. |
 | `0031000000000000000000000000000` | 0031 und 27 Ziffern: ebenfalls DHL eCommerce. |
 | `9261000000000000000000` | 22 Ziffern mit 9261 oder 9361 vorne: die USPS-Nummer, die ein Paket in den USA nach der Übergabe an USPS trägt. |
 
 In Webtracks Detailbox steht unter „Delivery by“, welcher Paketdienst zustellt. Auf Webtrack kannst du bis zu 10 Nummern auf einmal eingeben, getrennt durch Kommas.
 
-Verwechslungsgefahr: 16 Ziffern können auch zu TNT, Evri, Canada Post oder Correos Express gehören, eine 9261- oder 9361-Nummer auch zu USPS. 14 Ziffern sind DHL eCommerce UK, ein eigenes Netz mit eigenem Tracking. [DHL Paket](carrier:dhl) und [DHL Express](carrier:dhl-express) nutzen wieder andere Formen, etwa `JJD…` bei DHL Paket. Mehr in [Sendungsnummer: welcher Paketdienst steckt dahinter](guide:tracking-number-formats).
+Verwechslungsgefahr: 16 Ziffern können auch zu TNT, Evri, Canada Post oder Correos Express gehören, eine 9261- oder 9361-Nummer auch zu USPS. 14 Ziffern können auch zu DHL eCommerce UK gehören, einem eigenen Netz mit eigenem Tracking. [DHL Paket](carrier:dhl) und [DHL Express](carrier:dhl-express) nutzen wieder andere Formen, etwa `JJD…` bei DHL Paket. Mehr in [Sendungsnummer: welcher Paketdienst steckt dahinter](guide:tracking-number-formats).
 
 ## DHL eCommerce Tracking: was die Status bedeuten
 
@@ -40,7 +40,7 @@ Webtrack zeigt oben einen kurzen Gesamtstatus (`En Route`, `Delivered`, `Excepti
 | `TENDERED TO DELIVERY SERVICE PROVIDER, ALLOW 1-3 DAYS FOR UPDATES FOR PACKAGES WITHIN THE US` | Es wurde dem Zusteller übergeben. Bei Paketen in den USA können die Updates bis zu 3 Tage ruhen. |
 | `OUT FOR DELIVERY` | Es ist heute beim Zusteller. |
 | `DELIVERY ATTEMPT FAILED` | Die Zustellung hat nicht geklappt. Schau im Briefkasten nach einer Benachrichtigung des Zustellers. |
-| `DELIVERED` | Zugestellt. `[IN/AT MAILBOX]` dahinter heißt: im Briefkasten. |
+| `DELIVERED` | Zugestellt. |
 | `RETURNED TO SENDER` | Es geht zurück an den Shop. |
 
 Stellst du Webtrack auf „Deutsch“ um, sind die meisten Scans übersetzt, einige bleiben englisch (`LABEL CREATED`, `OUT FOR DELIVERY`). So heißen die häufigsten Scans auf Deutsch, wie sie bei Paketen in die USA erscheinen:
@@ -55,7 +55,7 @@ Stellst du Webtrack auf „Deutsch“ um, sind die meisten Scans übersetzt, ein
 | `DELIVERY SERVICE PROVIDER ÜBERGEBEN` | Dem Zusteller übergeben, halb englisch, wie DHL es schreibt. |
 | `ZUGESTELLT` | Zugestellt. |
 
-Zwei Scans verwirren oft. `DELIVERED TO RETURNS AGENT OR COLLEGE/UNIVERSITY FOR FINAL DELIVERY` heißt: an eine Zwischenstelle geliefert, etwa einen Retourendienstleister oder die Poststelle einer Hochschule, die es weitergibt. `Picked up at parcelshop` heißt, dass der Absender das Paket in einem Shop abgegeben hat. Dort wartet nichts auf dich.
+Ein Scan verwirrt oft. `Picked up at parcelshop` heißt, dass der Absender das Paket in einem Shop abgegeben hat. Dort wartet nichts auf dich.
 
 ## Wer stellt DHL eCommerce in Deutschland, Österreich und der Schweiz zu?
 
@@ -81,7 +81,7 @@ Adresse ändern: Webtracks deutsche FAQ sagt, das gehe nur, wenn beide Adressen 
 
 ## DHL eCommerce Kontakt und Telefonnummer
 
-Frag zuerst den Shop, so rät es auch Webtracks FAQ. Webtracks Seite „Contact Customer Service“ zeigt, Stand 12. Oktober 2026, eine Karte pro Land:
+Frag zuerst den Shop, so rät es auch Webtracks FAQ. Webtracks Seite „Contact Customer Service“ zeigt eine Karte pro Land:
 
 - **Deutschland:** Die Karte verweist auf den [Kundenservice von DHL](https://www.dhl.de/de/privatkunden/hilfe-kundenservice.html) auf dhl.de, Montag bis Sonntag 7 bis 20 Uhr.
 - **Österreich:** +49 228 92 95 95 95, Montag bis Freitag 8 bis 18 Uhr, Samstag und Sonntag geschlossen.
@@ -94,13 +94,13 @@ Verdächtige Nachricht? Gefälschte SMS erkennst du laut dhl.de oft an einem gek
 
 ## DHL eCommerce mit Peek verfolgen
 
-[Peek](/) erkennt GM mit 16 bis 18 Ziffern sofort als DHL eCommerce. Eine kürzere GM-Nummer mit 8 bis 15 Ziffern prüft Peek bei DHL eCommerce und den anderen Paketdiensten mit dieser Form. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, bei passender Prüfziffer auch Evri UK, Canada Post und Correos Express; Colis Privé bei 17; die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer, und kennen beide sie nicht, öffnet Peek zuletzt die Seite von USPS. Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, listet Peek jede mit „Kennt diese Nummer“ auf, und du wählst deine; „Ändern“ nimmt für DHL eCommerce jede Folge aus 5 bis 40 Buchstaben und Ziffern an. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat.
+[Peek](/) erkennt GM mit 16 bis 18 Ziffern sofort als DHL eCommerce. Eine kürzere GM-Nummer mit 8 bis 15 Ziffern prüft Peek gleichzeitig bei DHL eCommerce, Colis Privé und Aramex und ordnet sie DHL eCommerce zu, wenn DHL eCommerce sie kennt. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, bei passender Prüfziffer auch Evri UK, Canada Post und Correos Express; Colis Privé bei 17; die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer, und erst wenn beide sie nicht kennen, fragt Peek Tracking-Dienste und öffnet die Seite von USPS und DHLs globale Seite. Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, listet Peek jede mit „Kennt diese Nummer“ auf, und du wählst deine; „Ändern“ nimmt für DHL eCommerce jede Folge aus mindestens 10 Buchstaben und Ziffern an. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat, außer bei einer kurzen GM-Nummer.
 
 Gefragt wird zuerst Webtrack. Kennt Webtrack das Paket nicht, wird DHLs globale Tracking-Seite auf dhl.com geöffnet. Das dauert länger und kann scheitern, wenn DHL automatische Besuche blockiert.
 
 Du siehst den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Liefertag, wenn DHL einen nennt, den Absender und den Zustellzeitpunkt; von Webtrack auch Gewicht und Zusteller. Deine Adresse, die Referenz des Shops und der Name der Person, die unterschrieben hat, fallen weg. Die Scans bleiben in DHLs US-Englisch, jede Zustellung erscheint als „Zugestellt“. Ein Scan, der sich zeitlich nicht einordnen lässt, erscheint nicht.
 
-Nennt Webtrack USPS, kann das Paket bei USPS weiterverfolgt werden, und seine Seite zeigt „Zustellung durch USPS“. Solange Peek das Paket bei USPS nur angekündigt findet, noch ohne eigenen Scan, zeigt sie stattdessen „Bei USPS angekündigt, noch nicht eingetroffen“. Pakete, die DHLs globale Seite beantwortet (Europa, Asien), verfolgt Peek nicht bis zur Post vor Ort. Mitteilungen kannst du für jeden Scan, nur für wichtige Schritte oder „Nur die Zustellung“ einstellen.
+Nennt Webtrack USPS, wechselt das Paket zu USPS, sobald USPS einen Scan zeigt, der nicht älter ist als der neueste von DHL eCommerce, und seine Seite zeigt „Zustellung durch USPS“. Solange Peek das Paket bei USPS nur angekündigt findet, noch ohne eigenen Scan, zeigt sie stattdessen „Bei USPS angekündigt, noch nicht eingetroffen“. Ebenso folgt Peek den anderen Zustellern, die Webtrack nennt, etwa La Poste, der Österreichischen Post, Poczta Polska, Correos oder Poste Italiane. Pakete, die DHLs globale Seite beantwortet, verfolgt Peek nicht bis zur Post vor Ort. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Solange das Paket in Peek geöffnet ist, oder an seinem Zustelltag mit eingeschalteten Mitteilungen, prüft Peek bis zu alle 10 Minuten und an dem Tag, an dem es „In Zustellung“ ist, ab 6 Uhr nach der Uhr des neuesten Scans alle 2 Minuten, solange Webtrack antwortet, oder alle 5 Minuten, wenn die letzte Abfrage dhl.com in einem Browser geöffnet hat. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) prüft Peek stündlich, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Steht ein Paket vier Tage ohne Scan bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“, den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei DHL eCommerce nach.“ und einen Link „Hol dir Hilfe bei DHL eCommerce“.
 
 ## Fragen zur DHL eCommerce Sendungsverfolgung
 

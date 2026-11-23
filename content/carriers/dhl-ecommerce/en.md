@@ -14,15 +14,15 @@ DHL eCommerce numbers have at least ten characters and typically start with GM. 
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `GM0000000000000000` | GM and 16 to 18 digits: the GM number, DHL eCommerce's usual shape. |
-| `GM0000000000` | GM and 8 to 15 digits: a shorter GM number. |
+| `GM4829103756182947` | GM and 16 to 18 digits: the GM number, DHL eCommerce's usual shape. |
+| `GM4829103756` | GM and 8 to 15 digits: a shorter GM number. |
 | `9261234567890123456789` | 22 digits starting 9261 or 9361: the USPS number a US parcel carries once it's handed to USPS. |
-| `0000000000000000` | 16 or 17 digits: another DHL eCommerce shape. |
+| `7394028156342819` | 16 or 17 digits: another DHL eCommerce shape. |
 | `0031000000000000000000000000000` | 0031 and 27 digits: another DHL eCommerce shape. |
 
 Webtrack's "Delivery by" line names the last-mile carrier, whose own number may appear later.
 
-Lookalikes: 16 digits can also be TNT's, Evri's, Canada Post's or Correos Express's, and a 9261 or 9361 number USPS's. A 14-digit number belongs to [DHL eCommerce UK](carrier:dhl-ecommerce-uk), a separate network with its own tracking, a `JVGL` number to [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl), and [DHL Express](carrier:dhl-express) and [DHL Paket](carrier:dhl) use other shapes again. More in [tracking number formats](guide:tracking-number-formats).
+Lookalikes: 16 digits can also be TNT's, Evri's, Canada Post's or Correos Express's, and a 9261 or 9361 number USPS's. A 14-digit number can belong to [DHL eCommerce UK](carrier:dhl-ecommerce-uk), a separate network with its own tracking, a `JVGL` number to [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl), and [DHL Express](carrier:dhl-express) and [DHL Paket](carrier:dhl) use other shapes again. More in [tracking number formats](guide:tracking-number-formats).
 
 ## DHL eCommerce tracking statuses explained
 
@@ -40,12 +40,12 @@ Webtrack shows a one-line status (`En Route`, `Delivered`, `Exception`…) above
 | `TENDERED TO DELIVERY SERVICE PROVIDER, ALLOW 1-3 DAYS FOR UPDATES FOR PACKAGES WITHIN THE US` | It has been handed to the carrier that delivers it. For US parcels, updates can pause for up to 3 days. |
 | `OUT FOR DELIVERY` | It's with the driver or mail carrier today. |
 | `DELIVERY ATTEMPT FAILED` | Nobody could take it. Look for a notice from the delivering carrier. |
-| `DELIVERED` | Delivered. `[IN/AT MAILBOX]` after it means it went in your mailbox. |
+| `DELIVERED` | Delivered. |
 | `RETURNED TO SENDER` | It's going back to the shop. |
 
-Webtrack's English (UK) setting words a few scans differently, such as `PROCESSED THROUGH SORT FACILITY`. US parcels also show USPS's scans after the handover, such as `ARRIVAL AT POST OFFICE`.
+US parcels also show USPS's scans after the handover, such as `ARRIVAL AT POST OFFICE`.
 
-Two scans confuse people. `DELIVERED TO RETURNS AGENT OR COLLEGE/UNIVERSITY FOR FINAL DELIVERY` means it went to a go-between, such as a campus mailroom, which passes it on to you. `Picked up at parcelshop` means the sender dropped it off at a shop. Nothing is waiting there for you.
+One scan confuses people. `Picked up at parcelshop` means the sender dropped it off at a shop. Nothing is waiting there for you.
 
 ## How DHL eCommerce delivers: USPS, local posts and missed parcels
 
@@ -69,7 +69,7 @@ Changing the address: Webtrack's FAQ says that once a parcel leaves the shop, DH
 
 ## DHL eCommerce customer service and contact number
 
-Ask the shop first, as Webtrack's FAQ advises. Webtrack's "Contact Customer Service" page, read on 12 October 2026, lists a card per country:
+Ask the shop first, as Webtrack's FAQ advises. Webtrack's "Contact Customer Service" page lists a card per country:
 
 - **United States and Canada** (parcels sent from the US): +1 317-554-5191, Monday to Friday 8 AM to 8 PM EST (Canada's card says 8 AM to 9 PM ET).
 - **Germany:** the card sends you to [DHL's German customer service](https://www.dhl.de/de/privatkunden/hilfe-kundenservice.html), Monday to Sunday 7 AM to 8 PM.
@@ -82,13 +82,13 @@ Webtrack's "Contact Support" form says someone should be in touch "within 24-72 
 
 ## Tracking a DHL eCommerce parcel with Peek
 
-[Peek](/) names DHL eCommerce at once for GM and 16 to 18 digits. It checks a shorter GM number, with 8 to 15 digits, with DHL eCommerce and the other carriers that use that shape. For shared shapes, it asks the likely carriers at the same time (TNT for 16 digits, plus Evri UK, Canada Post and Correos Express when the last digit checks out; Colis Privé for 17 digits; Austrian Post for a 9261 or 9361 number, then USPS's page last if neither knows it). If only DHL eCommerce knows it, you're told. If several brands do, Peek lists each of them, marked "Knows this number", and you pick yours; "Change" accepts any 5 to 40 letters and digits for DHL eCommerce. Links from webtrack.dhlglobalmail.com, ecommerceportal.dhl.com work too, and dhl.com tracking links when the number has a DHL eCommerce shape.
+[Peek](/) names DHL eCommerce at once for GM and 16 to 18 digits. It checks a shorter GM number, with 8 to 15 digits, with DHL eCommerce, Colis Privé and Aramex at the same time, and files it with DHL eCommerce if DHL eCommerce knows it. For shared shapes, it asks the likely carriers at the same time (TNT for 16 digits, plus Evri UK, Canada Post and Correos Express when the last digit checks out; Colis Privé for 17 digits; Austrian Post for a 9261 or 9361 number, then, only if neither knows it, tracking services, USPS's page and DHL's global page). If only DHL eCommerce knows it, you're told. If several brands do, Peek lists each of them, marked "Knows this number", and you pick yours; "Change" accepts any code of at least 10 letters and digits for DHL eCommerce. Links from webtrack.dhlglobalmail.com, ecommerceportal.dhl.com work too, and dhl.com tracking links when the number has a DHL eCommerce shape other than a short GM number.
 
 Webtrack is asked first. When it doesn't list the parcel, Peek opens DHL's global tracking page on dhl.com, which takes longer and can fail when DHL blocks automated visits.
 
 You see the status, each scan with its town and country on a map, the expected delivery day when DHL gives one, the sender and the delivery time; from Webtrack, also the weight and the delivering carrier. Peek leaves out your address, the shop's reference and the name of whoever signed. Scans keep DHL's US English wording, and every delivered scan shows as "Delivered".
 
-When Webtrack names USPS, the parcel can be followed on USPS with its number, and its page says "Delivery with USPS". While USPS has only the announcement of the parcel, with no scan of its own, it says "Announced to USPS, not received yet" instead. Parcels answered by DHL's global page (Europe, Asia) aren't followed to a local post. You can be notified of every scan, important steps or "Delivery only".
+When Webtrack names USPS, the parcel moves to USPS with its number once USPS shows a scan no older than DHL eCommerce's newest, and its page says "Delivery with USPS". While USPS has only the announcement of the parcel, with no scan of its own, it says "Announced to USPS, not received yet" instead. Peek does the same with the other final carriers Webtrack names, such as La Poste, Austrian Post, Poczta Polska, Correos or Poste Italiane. Parcels answered by DHL's global page aren't followed to a local post. Notifications can follow "Every scan", "Important steps" or "Delivery only". While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and on the day it goes "Out for delivery", from 6 a.m. on the latest scan's clock, every 2 minutes while Webtrack answers, or every 5 minutes when the last check opened dhl.com in a browser. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DHL eCommerce." and a "Get help from DHL eCommerce" link.
 
 ## Questions about DHL eCommerce tracking
 

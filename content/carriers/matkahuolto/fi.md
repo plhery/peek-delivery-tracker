@@ -16,11 +16,11 @@ Matkahuolto ei kerro sivuillaan tunnustensa muotoja. Peek tuntee nämä muodot:
 
 | Tunnus (keksitty) | Mikä se on |
 | --- | --- |
-| `MH000000005FI` | Matkahuollon oma tunnus: `MH`, yhdeksän numeroa ja `FI`. |
-| `MA0000000000000000000` | Matkahuollon oma tunnus: `MA` ja 19 numeroa. |
+| `MH482910372FI` | Matkahuollon oma tunnus: `MH`, yhdeksän numeroa ja `FI`. |
+| `MA7394028156342019482` | Matkahuollon oma tunnus: `MA` ja 19 numeroa. |
 | `00373000000000000005` | Paketin 20-numeroinen SSCC-viivakoodi. Matkahuollon seuranta löytää sen myös ilman alun nollia, 18 numerona. |
 
-`JJFI`-alkuinen tunnus kuuluu [Postille](carrier:posti), samoin `FI`-loppuinen postitunnus, jonka alussa on muut kirjaimet kuin `MH` (`RR000000005FI`). Jos Matkahuollon seuranta ei löydä pakettia, katso lähettäjän viestistä, mikä yhtiö sen kuljettaa.
+`JJFI`-alkuinen tunnus kuuluu [Postille](carrier:posti), samoin `FI`-loppuinen postitunnus, jonka alussa on muut kirjaimet kuin `MH` (`RR482910372FI`). Jos Matkahuollon seuranta ei löydä pakettia, katso lähettäjän viestistä, mikä yhtiö sen kuljettaa.
 
 ## Mitä Matkahuollon seurannan tilat tarkoittavat
 
@@ -79,7 +79,7 @@ Pakettipisteinä toimivat Matkahuollon omat pisteet sekä muun muassa monet K-ka
 
 ## Matkahuollon asiakaspalvelu
 
-Matkahuollon sivuilla 26.10.2026:
+Matkahuollon sivuilla:
 
 - **Pakettipalveluiden neuvonta:** 0600 11300, ma–pe 8–18, 2,49 €/min/vastattu puhelu + pvm. Jonotuksesta veloitetaan pvm/mpm.
 - **Pakettipalveluiden tuki:** 020 33 6161, ma–pe 8–10 ja 14–16, pvm/mpm. Apua automaatteihin ja kotiinkuljetuksiin.

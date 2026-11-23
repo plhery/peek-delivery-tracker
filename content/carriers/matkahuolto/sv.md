@@ -16,11 +16,11 @@ Matkahuolto berättar inte hur koderna ser ut. Peek känner till de här formern
 
 | Kod (påhittad) | Vad det är |
 | --- | --- |
-| `MH000000005FI` | Matkahuoltos egen kod: `MH`, nio siffror och `FI`. |
-| `MA0000000000000000000` | Matkahuoltos egen kod: `MA` och 19 siffror. |
+| `MH482910372FI` | Matkahuoltos egen kod: `MH`, nio siffror och `FI`. |
+| `MA7394028156342019482` | Matkahuoltos egen kod: `MA` och 19 siffror. |
 | `00373000000000000005` | En SSCC-streckkod på 20 siffror. Uppföljningen hittar den också utan de två första nollorna. |
 
-En kod som börjar på `JJFI` hör till [Posti](carrier:posti), liksom en kod med två bokstäver, nio siffror och `FI` som inte börjar på `MH`, till exempel `RR000000005FI`. Hittar Matkahuolto inte paketet, kolla i avsändarens meddelande vem som levererar det.
+En kod som börjar på `JJFI` hör till [Posti](carrier:posti), liksom en kod med två bokstäver, nio siffror och `FI` som inte börjar på `MH`, till exempel `RR482910372FI`. Hittar Matkahuolto inte paketet, kolla i avsändarens meddelande vem som levererar det.
 
 ## Statusar i Matkahuoltos uppföljning
 
@@ -92,7 +92,7 @@ Allt du köper från länder utanför EU måste förtullas, och du kan behöva b
 
 ## Matkahuoltos kundtjänst
 
-Enligt Matkahuoltos svenska sidor den 26 oktober 2026:
+Enligt Matkahuoltos svenska sidor:
 
 - **Rådgivning för pakettjänster:** 0600 11300, må–fr kl. 8–18, 2,49 €/min per besvarat samtal plus lokalnätsavgift. Kötiden kostar lokalnäts- eller mobilsamtalsavgift.
 - **Telefonstöd för pakettjänster:** 020 33 6161, må–fr kl. 8–10 och 14–16, lokalnäts- eller mobilsamtalsavgift. För frågor om automater och hemleverans.
@@ -106,7 +106,7 @@ Enligt Matkahuoltos svenska sidor den 26 oktober 2026:
 
 För en SSCC-kod på 18 eller 20 siffror med Finlands `64` eller Sveriges `73` efter den första siffran (efter `00` och en siffra i den långa formen) frågar Peek Matkahuolto och andra transportörer som koden passar. Känner också [Posti](carrier:posti) (`64`) eller [Bring](carrier:bring) (`73`) till koden väljer Peek den, och känner till exempel [PostNord](carrier:postnord) också till den väljer du själv. Om andra koder frågar Peek inte Matkahuolto. Klistra in koden ändå: Peek följer fler än 4 500 transportörer, och du byter till Matkahuolto med "Change". En länk från Matkahuoltos uppföljning med `parcelNumber=` lägger Peek hos Matkahuolto.
 
-Peek visar Matkahuoltos engelska händelser med ort och tid samt, när paketet väntar på dig, ställets namn och gatuadress. Peek läser tiderna som finsk tid och visar dem i din enhets tidszon. Beräknad leveranstid, vikt och avsändare får Peek inte, och sista hämtningsdagen läser Peek inte ut separat: den står i statusraden och i avin. Har du aviseringar på, eller har du tittat på paketet den senaste timmen, kollar Peek det upp till var tionde minut och upp till varannan minut den dag det körs ut till ditt serviceställe, från klockan 6 finsk tid och så länge Matkahuoltos egen uppföljning svarar (via spårningstjänster var femtonde minut). Aviseringarna ställer du in på "Every scan", "Important steps" eller "Delivery only". Peek följer inte ett paket vidare från FedEx eller andra till Matkahuolto och kan inte kontakta Matkahuolto eller webbutiken åt dig.
+Peek visar Matkahuoltos engelska händelser med ort och tid samt, när paketet väntar på dig, ställets namn och gatuadress. Peek läser varje tid på klockan för händelsens ort (finsk tid i Finland; en rad utan ort på en närliggande rads klocka, annars finsk tid) och visar dem i din enhets tidszon. Beräknad leveranstid, vikt och avsändare får Peek inte, och sista hämtningsdagen läser Peek inte ut separat: den står i statusraden och i avin. Medan paketet är öppet i Peek, eller på leveransdagen med aviseringar på, kollar Peek det upp till var tionde minut och upp till varannan minut den dag det körs ut till ditt serviceställe, från klockan 6 finsk tid och så länge Matkahuoltos egen uppföljning svarar. Efter två dagar utan nyheter (12 timmar medan paketet står på "Label created" eller "Received by carrier") kollar Peek varje timme, och efter sju dagar utan nyheter vid "Label created" var sjätte timme. Aviseringarna ställer du in på "Every scan", "Important steps" eller "Delivery only". Peek följer inte ett paket vidare från FedEx eller andra till Matkahuolto och kan inte kontakta Matkahuolto eller webbutiken åt dig.
 
 ## Frågor om att spåra Matkahuolto-paket
 

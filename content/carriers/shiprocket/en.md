@@ -14,10 +14,10 @@ Shiprocket calls the tracking number the AWB (air waybill number). Within India,
 
 | Number (invented) | What it is |
 | --- | --- |
-| `8321234567890` | 832 and 10 more digits: a ShiprocketX AWB. |
-| `1234567890123` | 13 or 14 digits: a domestic courier's AWB, such as Delhivery's or Xpressbees'. |
-| `12345678903` | 11 digits: the shape of a Blue Dart AWB. |
-| `FMPC1234567890` | Three letters, C, P or R, then 10 digits: an Ekart AWB. |
+| `8324829103756` | 832 and 10 more digits: a ShiprocketX AWB. |
+| `7394028156342` | 13 or 14 digits: a domestic courier's AWB, such as Delhivery's or Xpressbees'. |
+| `74829103753` | 11 digits: the shape of a Blue Dart AWB. |
+| `FMPC4829103756` | Three letters, C, P or R, then 10 digits: an Ekart AWB. |
 
 **Where to find it.** Look in the email and SMS sent when your order was confirmed. Shiprocket's tracker also takes the order ID or your mobile number, checks a one-time code (OTP) and opens myShiprocket, its site where buyers follow their orders. More places to look: [how to find your tracking number](guide:find-tracking-number).
 
@@ -69,9 +69,7 @@ Once it is on its way back, ask the seller for a new shipment or a refund. See [
 
 ## Shiprocket customer care number and contact
 
-As read on 21 October 2026:
-
-- **Phone:** 9643887070, 9711451060 and 8510042020 (Indian numbers, +91 from abroad). Shiprocket's tracking site lists them for tracking issues, with live chat, and calls its support 24/7; its contact page gives the same numbers from 9 am to 9 pm.
+- **Phone:** 9643887070, 9711451060 and 8510042020 (Indian numbers, +91 from abroad). Shiprocket's tracking site lists them for tracking issues, with live chat, and calls its support 24/7; its contact page gives the same numbers from 9 am to 9 pm Indian time.
 - **Email:** support@shiprocket.in.
 - **Escalation:** support answers within 5 business days. If not, write to escalation@shiprocket.com, then to grievance@shiprocket.com; each replies within 3 business days.
 
@@ -79,11 +77,11 @@ Most of this help is written for sellers. Shiprocket's tracking site also warns:
 
 ## Tracking Shiprocket parcels with Peek
 
-For a 13-digit number starting 832, [Peek](/) asks Shiprocket: the Add sheet shows "Checking tracking services…", then "Shiprocket has this parcel." As Delhivery's waybills share that length, Peek doesn't name Shiprocket from the number alone; if no answer comes, pick Shiprocket with "Change". A shiprocket.co/tracking/ link names Shiprocket whatever the number.
+For a 13-digit number starting 832, [Peek](/) asks Shiprocket from the start (with Delhivery if your country is India), and tracking services and other carriers only if Shiprocket doesn't know the number: the Add sheet shows "Checking tracking services…", then "Shiprocket has this parcel." As Delhivery's waybills share that length, Peek doesn't file the parcel under Shiprocket from the number alone; if no answer comes, it shows "Waiting for Shiprocket’s first scan" and keeps asking, and you can pick Shiprocket with "Change". A shiprocket.co/tracking/ link names Shiprocket whatever the number.
 
-Peek reads Shiprocket's tracking page up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Shiprocket's own page answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with its place where the page gives one, Shiprocket's delivery estimate while the parcel is on its way, and the delivery time of a parcel delivered in India. Scans abroad carry no time zone: Peek reads each on the clock of its place and shows it in your device's time zone, and a ShiprocketX delivery abroad gives no delivery time. Lines show as the page writes them, except exact matches such as `Delivered`, which appear in Peek's own words. Peek leaves out the seller, the order's contents, your name and address, and shows no proof of delivery; it doesn't switch to the carrier abroad.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek reads Shiprocket's tracking page up to every 10 minutes, or every 2 minutes from 6 a.m. on the latest scan's clock (Indian time in India) on the day the parcel goes out for delivery, while Shiprocket's own page answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. It shows the status, each scan with its place where the page gives one, Shiprocket's delivery estimate while the parcel is on its way, and the delivery time of a parcel delivered in India. Scans abroad carry no time zone: Peek reads each on the clock of its place (a line without a place on a neighbouring line's, sometimes Indian time) and shows it in your device's time zone. Lines show as the page writes them, except exact matches such as `Delivered`, which appear in Peek's own words. Peek leaves out the seller, the order's contents, your name and address, and shows no proof of delivery; it doesn't switch to the carrier abroad.
 
-For an older parcel, Peek shows the archived view's last status and its day, and looks for a fuller history in tracking services. It can't verify you as the buyer, ask for a reattempt or contact Shiprocket or the seller for you. It can notify you of every scan, important steps only or "Delivery only". Peek also follows [Delhivery](carrier:delhivery), [Blue Dart](carrier:blue-dart), Xpressbees, [Ekart](carrier:ekart), DTDC, Shadowfax and [India Post](carrier:india-post) by their own numbers.
+For an older parcel, Peek shows the archived view's last status and its day, and looks for a fuller history in tracking services. It can't verify you as the buyer, ask for a reattempt or contact Shiprocket or the seller for you. It can notify you of "Every scan", "Important steps" or "Delivery only". After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" and the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Shiprocket." Peek also follows [Delhivery](carrier:delhivery), [Blue Dart](carrier:blue-dart), Xpressbees, [Ekart](carrier:ekart), DTDC, Shadowfax and [India Post](carrier:india-post) by their own numbers.
 
 ## Questions about Shiprocket tracking
 
@@ -97,7 +95,7 @@ RTO means return to origin: the parcel couldn't be delivered and is going back t
 
 ### What is the Shiprocket customer care number?
 
-Shiprocket's tracking site lists 9643887070, 9711451060 and 8510042020 for tracking issues, as read on 21 October 2026. For a problem with your order, Shiprocket tells buyers to contact the seller.
+Shiprocket's tracking site lists 9643887070, 9711451060 and 8510042020 for tracking issues. For a problem with your order, Shiprocket tells buyers to contact the seller.
 
 ### Why does Shiprocket tracking say AWB Not Found?
 

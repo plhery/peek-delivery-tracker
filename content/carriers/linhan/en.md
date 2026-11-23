@@ -14,8 +14,8 @@ LinHan publishes no number format. Its waybills are LHGJ, eight digits and CD. W
 
 | Number | What it is |
 | --- | --- |
-| `LHGJ12345678CD` | LHGJ, eight digits and CD: a LinHan International waybill. |
-| `LHGJ1234567CD` | Only seven digits: not a LinHan shape. Check for a missing digit. |
+| `LHGJ48291037CD` | LHGJ, eight digits and CD: a LinHan International waybill. |
+| `LHGJ4829103CD` | Only seven digits: not a LinHan shape. Check for a missing digit. |
 
 Lower case and spaces don't matter when you paste the number into Peek.
 
@@ -81,7 +81,7 @@ LinHan publishes no delivery times and no rules for delivery attempts, pickup po
 
 **`查询不到`.** The tracker doesn't know the number: check it with the seller. It only shows parcels from the last two months, so it won't find an older one either.
 
-**Delivered but not there.** If the last line is `Delivered`, read [delivered but not received](guide:delivered-not-received) and tell the seller. LinHan's tracker shows no signature or photo.
+**Delivered but not there.** If the last line is `Delivered`, read [delivered but not received](guide:delivered-not-received) and tell the seller. LinHan's tracker shows no photo; at most, its delivery line names who signed.
 
 **Lost, damaged or returned.** LinHan publishes no claims process, compensation or returns policy. The seller booked the parcel with LinHan, so ask the seller or the marketplace for a refund or a new parcel. See [lost parcels](guide:lost-parcel).
 
@@ -93,13 +93,13 @@ LinHan's home page, in Chinese only, ends with a 联系我们 (Contact us) block
 
 [Peek](/) recognises a LinHan number by its shape: LHGJ, eight digits and CD, which no other carrier in its catalog uses. A link to LinHan's tracker with `nos=` and the number in it can be pasted too.
 
-Peek reads LinHan's own tracker and shows the status, each scan with its town where LinHan gives one, and the destination country. It moves the town out of the wording into the scan's place and leaves out the postcode, so a delivery reads `Delivered` at its town. A row LinHan lists twice shows once, and the scans keep LinHan's English, `Internationaliy` included. Peek reads every time on Beijing time, as the tracker writes it, and shows it in your device's time zone.
+Peek reads LinHan's own tracker and shows the status, each scan with its town where LinHan gives one, and the destination country. It moves the town out of the wording into the scan's place and leaves out the postcode, so a delivery reads `Delivered` at its town. A row LinHan lists twice shows once, and the scans keep LinHan's English, `Internationaliy` included. If LinHan's delivery line names who signed (`Delivered, signed by …`), the name stays in that line and shows nowhere else; a shared link shows the line without it. Peek reads every time on Beijing time, as the tracker writes it, and shows it in your device's time zone.
 
 Some lines count differently from how they sound. `Order information received` is "Label created". `Internationaliy Package received at processing center` and `Accepted at logistics carrier Regional Destination Facility` are "In transit", not a new acceptance. The two customs lines are "At customs". `package is on the way` stays "In transit", as it doesn't say the parcel is out for delivery.
 
 LinHan gives no expected delivery date, weight, service name, delivering company or second number, so Peek shows none of these, and it follows the LHGJ number to the end rather than handing the parcel over to another carrier.
 
-Peek checks up to every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact LinHan or the seller for you.
+Peek checks up to every 10 minutes while the parcel is open in Peek, or on its delivery day with notifications on, while LinHan's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" and the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking LinHan International." Notifications can follow "Every scan", "Important steps" or "Delivery only". It can't contact LinHan or the seller for you.
 
 ## Questions about LinHan tracking
 

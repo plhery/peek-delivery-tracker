@@ -123,7 +123,6 @@ Non. Le login du portail clients de Planzer sert aux entreprises ; comme destina
 - [Planzer : Contact](https://www.planzer.ch/fr/contact/) – centrale de Dietikon
 - [Planzer : Conseils de sécurité](https://www.planzer.ch/fr/phishing-fr/) – faux messages, OFCS
 - [Planzer : Tracking](https://tracking.app.planzer.ch/) – langues, numéros, libellés
-- [Planzer : Suivi de l'envoi](https://trackandtrace.planzergroup.com/shared/sendungen/) – page partagée en allemand
 - [Planzer Paket : Kontakt](https://www.planzer-paket.ch/de/kontakt/) – formulaire, risque du dépôt, samedi
 - [Planzer Paket : Impressum](https://www.planzer-paket.ch/de/impressum/) – adresse, e-mail
 - [Planzer : Informationsfluss](https://www.planzer.ch/de/informationsfluss/) – portail clients des entreprises

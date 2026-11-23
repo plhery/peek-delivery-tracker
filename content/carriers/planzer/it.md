@@ -122,7 +122,6 @@ In un punto Planzer Pacchi: il tracking lo indica dopo «Ritiro a», e il codice
 - [Planzer: Contatti](https://www.planzer.ch/it/contatti/) – centrale di Dietikon
 - [Planzer Homeservice: FAQ e area assistenza](https://planzer-homeservice.ch/it/contatti/faq-e-area-assistenza/) – oggetti ingombranti
 - [Planzer: Tracking](https://tracking.app.planzer.ch/) – lingue, numeri, etichette
-- [Planzer: Tracciamento della consegna](https://trackandtrace.planzergroup.com/shared/sendungen/) – pagina condivisa
 - [Planzer Paket: Kontakt](https://www.planzer-paket.ch/de/kontakt/) – temi del modulo, sabato, NPA, rischio del deposito
 - [Planzer: Informationsfluss](https://www.planzer.ch/de/informationsfluss/) – portale clienti per le aziende
 - [Planzer Paket: Impressum](https://www.planzer-paket.ch/de/impressum/) – succursale, indirizzo, e-mail

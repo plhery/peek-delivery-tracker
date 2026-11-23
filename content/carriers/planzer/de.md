@@ -126,7 +126,6 @@ Einen Live-Link beschreibt Planzer nur beim Homeservice für große Ware: Er kom
 - [Planzer: Kontakt](https://www.planzer.ch/de/kontakt/) – Zentrale Dietikon
 - [Planzer: Phishing erkennen](https://www.planzer.ch/de/phishing/) – gefälschte Nachrichten
 - [Planzer: Tracking](https://tracking.app.planzer.ch/) – Sprachen, Beschriftungen
-- [Planzer: T&T Sendungsverfolgung](https://trackandtrace.planzergroup.com/shared/sendungen/) – geteilte Seite
 - [Planzer Paket: Impressum](https://www.planzer-paket.ch/de/impressum/) – Adresse, E-Mail
 - [Planzer: Homeservice](https://www.planzer.ch/de/transport/homeservice/) – Termine, Live-Link
 - [Planzer Homeservice: FAQ](https://planzer-homeservice.ch/de/kontakt/faq/) – Kontakt

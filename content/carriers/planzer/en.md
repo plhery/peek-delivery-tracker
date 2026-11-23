@@ -114,7 +114,6 @@ Not as a rule: Planzer's terms describe delivery Monday to Friday. Saturday deli
 - [Planzer: Security tips](https://www.planzer.ch/en/phishing-2/) – fake messages
 - [Planzer Paket: Receiving](https://www.planzer-paket.ch/en/receiving/) – tracking box, +41 44 438 50 40
 - [Planzer: Tracking](https://tracking.app.planzer.ch/) – languages, numbers, labels
-- [Planzer: Shipment tracking](https://trackandtrace.planzergroup.com/shared/sendungen/) – shared page
 - [Planzer Paket: Kontakt](https://www.planzer-paket.ch/de/kontakt/) – form topics, drop-off risk, Saturday
 - [Planzer Paket: Impressum](https://www.planzer-paket.ch/de/impressum/) – operator, address, email
 - [Quickpac: Home](https://quickpac.ch/de) – part of Planzer Paket since 2024, phone lines

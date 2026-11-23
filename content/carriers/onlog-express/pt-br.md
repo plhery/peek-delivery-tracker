@@ -52,7 +52,7 @@ Canais oficiais publicados em [onlogexpress.com.br](https://onlogexpress.com.br/
 - **Telefones (São Paulo):** `(11) 5662-8108` e `(11) 5663-3829`.
 - **E-mail:** `atendimento@onlogexpress.com.br`.
 - **Horário de atendimento:** segunda a sexta-feira, das `8h` às `18h` (fechado aos sábados e domingos).
-- **Matriz São Paulo:** Rua Estados Unidos, 2031, Jardim América, São Paulo – SP, CEP `01427-002`.
+- **Matriz São Paulo:** Rua Estados Unidos, 2031, Jardim América, São Paulo – SP.
 - **Rastreador oficial:** [conecta.log.br/rastreio.php](https://conecta.log.br/rastreio.php).
 
 > Reforçando o aviso oficial da Onlog: a transportadora nunca cobra taxas de liberação por e-mail, WhatsApp ou telefone. Ignore e denuncie qualquer mensagem desse tipo. Veja [golpes por SMS de entrega](guide:delivery-scam-texts).

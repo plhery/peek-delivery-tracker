@@ -52,7 +52,7 @@ Official contact channels published on [onlogexpress.com.br](https://onlogexpres
 - **Telephone (São Paulo):** `(11) 5662-8108` and `(11) 5663-3829`.
 - **Email:** `atendimento@onlogexpress.com.br`.
 - **Support hours:** Monday to Friday, `08:00` to `18:00` BRT (closed Saturdays and Sundays).
-- **Headquarters (*Matriz São Paulo*):** Rua Estados Unidos, 2031, Jardim América, São Paulo – SP, CEP `01427-002`, Brazil.
+- **Headquarters (*Matriz São Paulo*):** Rua Estados Unidos, 2031, Jardim América, São Paulo – SP, Brazil.
 - **Online tracker:** [conecta.log.br/rastreio.php](https://conecta.log.br/rastreio.php).
 
 > Remember Onlog's official warning: Onlog never charges release fees by email, WhatsApp or telephone. Ignore and report any message demanding a PIX or card payment to unlock a parcel. See [delivery scam texts](guide:delivery-scam-texts).

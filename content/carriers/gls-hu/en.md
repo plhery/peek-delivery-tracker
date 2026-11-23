@@ -64,7 +64,7 @@ Official contacts published on [GLS Hungary Contact](https://gls-group.com/HU/hu
 
 ## Track a GLS Hungary parcel with Peek
 
-[Peek](/) recognises a pasted `gls-group.com/HU/...` or `gls-group.eu/HU/...` tracking link (with `match=`, `parcelNumber=` or `matchParcelNumber=`) as GLS Hungary. A number alone, such as `3482917364`, `03482917364` or `94829173640` (invented), is never matched to GLS Hungary: tap "Change" while adding or "Change carrier" on the parcel screen and choose GLS Hungary (searching "GLS Magyarország" finds it too).
+[Peek](/) recognises a pasted `gls-group.com/HU/...` or `gls-group.eu/HU/...` tracking link (with `match=`, `parcelNumber=` or `matchParcelNumber=`) as GLS Hungary. A 10-digit number starting with 33 or 34, such as `3482917364` (invented), fits other carriers too, so Peek asks them first and GLS Hungary only once none of them knows it; it then shows "GLS Hungary has this parcel." unless the parcel is more than two months old. Other numbers, such as `03482917364` or `94829173640` (invented), are never matched to GLS Hungary. If Peek doesn't name GLS Hungary, tap "Change" while adding or "Change carrier" on the parcel screen and choose GLS Hungary (searching "GLS Magyarország" finds it too).
 
 Peek asks GLS Hungary for the overview its tracking page shows without the postcode, and shows its stage ("Label created", "Received by carrier", "In transit", "Returned to sender", "Delivered") with GLS's wording. The overview holds no scans, places, expected day or Parcel Shop and Locker details: GLS shows those only with the delivery postcode, so open [gls-group.com/HU/en/parcel-tracking/](https://gls-group.com/HU/en/parcel-tracking/) with it for the scans, pickup addresses or a FlexDeliveryService redirection.
 

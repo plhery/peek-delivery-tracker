@@ -2452,6 +2452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "postnord-sendungsverfolgung",
+      "title": "PostNord Sendungsverfolgung: Nummern, Status und Abholung",
+      "name": "PostNord",
+      "color": "#00a0d6"
+    },
+    {
       "id": "bring",
       "catalog": "bring-posten",
       "slug": "bring-sendungsverfolgung",
@@ -4236,6 +4244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping suivi\u00a0: numéro de suivi et colis non reçu",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "suivi-postnord",
+      "title": "Suivi PostNord\u00a0: numéros, statuts et retrait",
+      "name": "PostNord",
+      "color": "#00a0d6"
     },
     {
       "id": "bring",
@@ -6048,6 +6064,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "tracciamento-postnord",
+      "title": "Tracciamento PostNord: numeri, stati e ritiro",
+      "name": "PostNord",
+      "color": "#00a0d6"
+    },
+    {
       "id": "bring",
       "catalog": "bring-posten",
       "slug": "tracciamento-bring",
@@ -7810,6 +7834,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "seguimiento-postnord",
+      "title": "Seguimiento PostNord: números, estados y recogida",
+      "name": "PostNord",
+      "color": "#00a0d6"
+    },
+    {
       "id": "bring",
       "catalog": "bring-posten",
       "slug": "seguimiento-bring",
@@ -9562,6 +9594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping seguimento: número PT ou ES e o que fazer",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "seguimento-postnord",
+      "title": "Seguimento PostNord: números, estados e levantamento",
+      "name": "PostNord",
+      "color": "#00a0d6"
     },
     {
       "id": "bring",
@@ -11342,6 +11382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping śledzenie: numer przesyłki, statusy i pomoc",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "postnord",
+      "catalog": "postnord",
+      "slug": "sledzenie-postnord",
+      "title": "Śledzenie PostNord: numery, statusy i odbiór",
+      "name": "PostNord",
+      "color": "#00a0d6"
     },
     {
       "id": "bring",

@@ -5018,6 +5018,26 @@
     ]
   },
   {
+    "input": "00L5JLD3",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-fr",
+      "gls-ch",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "preferred": [
+      "gls-fr"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "00L9VSLL",
     "carrier": "unknown",
     "confidence": "low",
@@ -14831,6 +14851,38 @@
     ]
   },
   {
+    "input": "10241520611771",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "dpd",
+      "mondial-relay",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-fr"
+    ],
+    "asked": [
+      "seur",
+      "brt",
+      "ciblex"
+    ]
+  },
+  {
     "input": "1025737677",
     "carrier": "unknown",
     "confidence": "low",
@@ -15168,6 +15220,38 @@
       "japan-post",
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "10376530014751",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "dpd",
+      "mondial-relay",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-fr"
+    ],
+    "asked": [
+      "seur",
+      "brt",
+      "ciblex"
     ]
   },
   {

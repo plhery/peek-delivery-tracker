@@ -68602,6 +68602,38 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://srilankancargo.ibsplc.aero/icargoneoportal/app/main/#/app/tracking/awb",
     "helpUrl": "https://www.srilankancargo.com/"
+  },
+  "callcourier": {
+    "displayName": "CallCourier",
+    "aliases": [
+      "Call Courier",
+      "CallCourier Pakistan"
+    ],
+    "countries": [
+      "PK"
+    ],
+    "color": "#00b14c",
+    "selectable": true,
+    "timezone": "Asia/Karachi",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://callcourier.com.pk/tracking/?tc={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "callcourier.com.pk",
+          "www.callcourier.com.pk"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "tc"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://callcourier.com.pk/tracking/"
   }
 } as const;
 
@@ -70700,7 +70732,8 @@ export const CARRIER_IDS = [
   "seaboard-marine",
   "air-arabia-cargo",
   "gold-star-line",
-  "srilankan-cargo"
+  "srilankan-cargo",
+  "callcourier"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -34476,7 +34476,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://fastbox.co.kr/en/",
+    "trackingSearchUrl": "https://fastbox.co.kr/DHUB/tracking.php",
     "helpUrl": "https://fastbox.co.kr/en/introduction/contact.php"
   },
   "cheetah-delivery": {
@@ -36855,7 +36855,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.centurion.net.au/TrackAndTrace/"
+    "trackingSearchUrl": "https://centurion.net.au/tracking/"
   },
   "cope-sensitive-freight": {
     "displayName": "COPE Sensitive Freight",
@@ -43992,7 +43992,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.jetft.com/tracking.html",
+    "trackingSearchUrl": "https://www.jetft.com/order.html",
     "helpUrl": "https://www.jetft.com/contact.html"
   },
   "jikuaida": {
@@ -57613,7 +57613,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://portal.travelexpress.com.cy/system/",
     "helpUrl": "https://www.travelexpresscourier.com/support.html"
   },
   "trobud": {

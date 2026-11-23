@@ -34475,7 +34475,7 @@
           "confidence": "high"
         }
       ],
-      "trackingSearchUrl": "https://fastbox.co.kr/en/",
+      "trackingSearchUrl": "https://fastbox.co.kr/DHUB/tracking.php",
       "helpUrl": "https://fastbox.co.kr/en/introduction/contact.php"
     },
     "cheetah-delivery": {
@@ -36854,7 +36854,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.centurion.net.au/TrackAndTrace/"
+      "trackingSearchUrl": "https://centurion.net.au/tracking/"
     },
     "cope-sensitive-freight": {
       "displayName": "COPE Sensitive Freight",
@@ -43991,7 +43991,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.jetft.com/tracking.html",
+      "trackingSearchUrl": "https://www.jetft.com/order.html",
       "helpUrl": "https://www.jetft.com/contact.html"
     },
     "jikuaida": {
@@ -57612,7 +57612,6 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://portal.travelexpress.com.cy/system/",
       "helpUrl": "https://www.travelexpresscourier.com/support.html"
     },
     "trobud": {

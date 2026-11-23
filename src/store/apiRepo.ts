@@ -1,4 +1,4 @@
-import { detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
+import { carrierTrackingNumber, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 import { timeZoneRegion } from '../lib/postcodeExample';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
@@ -445,10 +445,10 @@ export function createApiRepo(
     },
 
     async add(input: NewParcelInput): Promise<ParcelWithEvents> {
-      const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
-      const carrier = input.carrier ?? detectCarrier(trackingNumber);
+      const carrier = input.carrier ?? detectCarrier(normalizeTrackingNumber(input.trackingNumber));
       const body: ApiCreatePackageRequest = {
-        trackingNumber,
+        // A Tiui folio keeps its hyphens, which Tiui's tracker needs.
+        trackingNumber: carrierTrackingNumber(input.trackingNumber, carrier),
         label: input.label,
         carrier,
         trackingUrl: input.trackingUrl?.trim() || undefined,

@@ -68,6 +68,14 @@ describe('going on', () => {
     expect(job).toEqual({ type: 'lookup', carrier: 'swiss-post', input: { trackingNumber: '993412345678901234', carrier: 'swiss-post' } });
   });
 
+  it('sends a Tiui folio with its hyphens, which Tiui needs, and the same shape under another carrier without them', () => {
+    const typing = run([typed('24-61-7035')]);
+    expect(run([{ type: 'choose', carrier: 'tiui' }, track], [], typing).job)
+      .toEqual({ type: 'lookup', carrier: 'tiui', input: { trackingNumber: '24-61-7035', carrier: 'tiui' } });
+    expect(run([{ type: 'choose', carrier: 'seino' }, track], [], typing).job)
+      .toMatchObject({ input: { trackingNumber: '24617035', carrier: 'seino' } });
+  });
+
   it('does nothing while a lookup is on its way', () => {
     const opening = run([pasted(UPS)]);
     expect(run([track, typed('other'), pasted('1ZDEMO202600000002'), { type: 'choose', carrier: 'dhl' }], [], opening)).toBe(opening);

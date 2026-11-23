@@ -238,7 +238,8 @@ and in `android/core/src/main/kotlin/com/plhery/peekdeliverytracker/core/Carrier
 The iPhone and Android apps keep a rule whose checksum they do not know only as a low-confidence
 candidate that is never preferred, so their replay of the scraper's detection answers fails after
 the adoption. Add the checksum to both before the release that names it. The Swift file also
-holds the iPhone's copy of how a number is normalized, of the shape a number may have, of the
+holds the iPhone's copy of how a number is normalized, of the numbers a carrier keeps as typed (a Tiui
+folio's hyphens, `carrierTrackingNumber`, also in Android's `CarrierCatalog.kt`), of the shape a number may have, of the
 order recognition asks carriers in and of the labels that introduce one in a message; change them
 with the scraper's. Both apps' tests also replay the scraper's checksum vectors, so a Swift or
 Kotlin checksum that answers differently from the scraper's fails.

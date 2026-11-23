@@ -335,6 +335,11 @@ describe('createApiRepo', () => {
       }),
     }));
 
+    await createApiRepo().add({ trackingNumber: '24-61-7035', label: '', carrier: 'tiui' });
+    expect(fetch).toHaveBeenLastCalledWith('/api/packages', expect.objectContaining({
+      body: JSON.stringify({ trackingNumber: '24-61-7035', label: '', carrier: 'tiui' }),
+    }));
+
     await createApiRepo().add({
       trackingNumber: 'ambiguous-123',
       label: '',

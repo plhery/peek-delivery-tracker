@@ -7,7 +7,7 @@ import {
   type ApiParcelFeedbackPageSaid,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
-import { carrierInfo, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
+import { carrierInfo, carrierTrackingNumber, KEPT_NUMBER_SHAPE, normalizeTrackingNumber, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { readsPostcodeCountry, sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { amazonAccountMessage } from './amazonGuide';
@@ -128,7 +128,8 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
     });
   }
   return {
-    trackingNumber,
+    // As the carrier knows it: a Tiui folio keeps its hyphens, which Tiui's tracker needs, and every other number is the one checked above.
+    trackingNumber: carrierTrackingNumber(rawTracking, carrier),
     label: rawLabel.trim(),
     carrier,
     ...extras,

@@ -1203,8 +1203,9 @@ class CarrierCatalog private constructor(
 
         /** JavaScript's `\s`, which the shared engine strips. ICU's `\s` misses U+FEFF, which copied text can
          * carry, and adds U+0085. */
-        private const val separatorPattern =
-            "[\\t\\n\\x{0B}\\f\\r\\x{20}\\x{A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}.-]"
+        private const val whitespace =
+            "\\t\\n\\x{0B}\\f\\r\\x{20}\\x{A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}"
+        private const val separatorPattern = "[$whitespace.-]"
 
         /** Capitals without separators. A label prints its SSCC behind the bracketed GS1 identifier,
          * "(00) 3 7012345 678901234 7", which carriers track as the twenty digits without brackets; other
@@ -1216,6 +1217,15 @@ class CarrierCatalog private constructor(
             if (matches(compact, "^\\(00\\)[0-9]{18}$")) return "00" + compact.substring(4)
             if ('/' in compact) noLimitShipmentNumber(compact)?.let { return it }
             return compact
+        }
+
+        /** The number a parcel is saved and looked up under for its carrier: [normalize], except that a Tiui
+         * folio, three groups of digits joined by hyphens, keeps its hyphens without its spaces, since Tiui's tracker
+         * needs them. Mirrors `carrierTrackingNumber` in the shared engine. */
+        fun carrierTrackingNumber(raw: String, carrier: CarrierId): String {
+            if (carrier.rawValue != "tiui" || raw.length > 64) return normalize(raw)
+            val folio = CatalogExpressions.replacing("[$whitespace]", raw, "") ?: return normalize(raw)
+            return if (matches(folio, "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$")) folio else normalize(raw)
         }
 
         /** A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial, L and the

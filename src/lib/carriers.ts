@@ -146,6 +146,7 @@ export type {
   TrackingInputMatch,
 } from 'universal-parcel-scraper';
 export {
+  carrierTrackingNumber,
   detectCarrier,
   detectCarrierMatch,
   formatTrackingNumber,

@@ -1518,8 +1518,9 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     /// JavaScript's `\s`, which the shared engine strips. ICU's `\s` misses U+FEFF, which copied
     /// text can carry, and adds U+0085.
-    private static let separatorPattern =
-        "[\\t\\n\\x{0B}\\f\\r\\x{20}\\x{A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}.-]"
+    private static let whitespace =
+        "\\t\\n\\x{0B}\\f\\r\\x{20}\\x{A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}"
+    private static let separatorPattern = "[\(whitespace).-]"
 
     /// Capitals without separators. A label prints its SSCC behind the bracketed GS1 identifier,
     /// "(00) 3 7012345 678901234 7", which carriers track as the twenty digits without brackets;
@@ -1536,6 +1537,15 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         if matches(compact, pattern: "^\\(00\\)[0-9]{18}$") { return "00" + compact.dropFirst(4) }
         if compact.contains("/"), let shipment = noLimitShipmentNumber(compact) { return shipment }
         return compact
+    }
+
+    /// The number a parcel is saved and looked up under for its carrier: `normalize`, except that a Tiui folio,
+    /// three groups of digits joined by hyphens, keeps its hyphens without its spaces, since Tiui's tracker needs
+    /// them. Mirrors `carrierTrackingNumber` in the shared engine.
+    static func carrierTrackingNumber(_ raw: String, carrier: CarrierID) -> String {
+        guard carrier.rawValue == "tiui", raw.utf16.count <= 64, let spaces = expression("[\(whitespace)]") else { return normalize(raw) }
+        let folio = spaces.stringByReplacingMatches(in: raw, range: NSRange(raw.startIndex..., in: raw), withTemplate: "")
+        return matches(folio, pattern: "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$") ? folio : normalize(raw)
     }
 
     /// A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial,

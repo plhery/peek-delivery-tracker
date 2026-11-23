@@ -2831,6 +2831,15 @@ extension CarrierCatalogTests {
         XCTAssertEqual(CarrierCatalog.normalize("AB/12"), "AB/12")
     }
 
+    /// A Tiui folio keeps its hyphens under Tiui alone; the same shape under another carrier normalizes.
+    func testATiuiFolioKeepsItsHyphensUnderTiuiAlone() {
+        let tiui = CarrierID(rawValue: "tiui")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber(" 99 - 99-9999 ", carrier: tiui), "99-99-9999")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99999999", carrier: tiui), "99999999")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99-99-99999-9", carrier: tiui), "9999999999")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99-99-9999", carrier: CarrierID(rawValue: "seino")), "99999999")
+    }
+
     /// A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits.
     func testAnSSCCTypedWithItsBracketedIdentifierReadsAsItsDigits() {
         let sscc = "00370123456789012347"

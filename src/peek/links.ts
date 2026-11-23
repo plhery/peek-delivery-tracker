@@ -20,7 +20,7 @@ import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import { isDemoBuild } from '../lib/buildMode';
 import { announcedMaintenance, deviceOnline, serverDown, unanswered, type MaintenanceNotice } from '../lib/maintenance';
 import { typedNumber } from '../lib/carrierDetection';
-import { CARRIERS, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
+import { CARRIERS, carrierTrackingNumber, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { pageLocale } from '../lib/locale';
 import { timeZoneRegion } from '../lib/postcodeExample';
 import { userErrorKey } from '../lib/userMessages';
@@ -205,7 +205,9 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     },
 
     async lookupParcel(input, signal) {
-      const body: ApiPublicLookupRequest = { trackingNumber: normalizeTrackingNumber(input.trackingNumber), ...lookupDetails(input) };
+      const details = lookupDetails(input);
+      // A Tiui folio keeps its hyphens, which Tiui's tracker needs.
+      const body: ApiPublicLookupRequest = { trackingNumber: carrierTrackingNumber(input.trackingNumber, details.carrier), ...details };
       const response = await protectedPost('/api/public/parcels', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiPublicLookupResponse>(response);

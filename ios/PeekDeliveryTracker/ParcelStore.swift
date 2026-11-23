@@ -686,7 +686,7 @@ final class ParcelStore: ObservableObject {
     ) async throws -> Parcel {
         let generation = session.generation
         let request = CreatePackageRequest(
-            trackingNumber: CarrierCatalog.normalize(trackingNumber),
+            trackingNumber: CarrierCatalog.carrierTrackingNumber(trackingNumber, carrier: carrier),
             label: label.trimmingCharacters(in: .whitespacesAndNewlines),
             carrier: carrier,
             trackingURL: trackingURL?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,

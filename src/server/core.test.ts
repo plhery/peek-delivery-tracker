@@ -631,6 +631,11 @@ describe('input validation', () => {
       trackingUrl: '',
       dpdPostcode: '',
     })).toThrow('letters and numbers');
+    // A Tiui folio keeps its hyphens, which Tiui's tracker needs; the same shape under another carrier does not.
+    expect(newPackageValues({ trackingNumber: ' 24 - 61-7035 ', label: '', carrier: 'tiui', trackingUrl: '', dpdPostcode: '' })
+      .trackingNumber).toBe('24-61-7035');
+    expect(newPackageValues({ trackingNumber: '24-61-7035', label: '', carrier: 'seino', trackingUrl: '', dpdPostcode: '' })
+      .trackingNumber).toBe('24617035');
     // The add reads a number as detection does: a label's bracketed SSCC is the twenty digits behind the brackets.
     expect(newPackageValues({ trackingNumber: '(00) 3 4043438 1234567890', label: '', carrier: 'unknown', trackingUrl: '', dpdPostcode: '' })
       .trackingNumber).toBe('00340434381234567890');

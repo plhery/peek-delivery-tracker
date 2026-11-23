@@ -719,7 +719,8 @@ undated defaults and old reused numbers cannot identify a carrier. Candidate sel
 comes from the scraper's catalog, and the Add sheets show the possible candidates.
 The sheets send the number as typed (`typedNumber`) beside the normalized one: a rule's
 `rawPattern` reads its dashes and spaces (an R+L PRO number's dash), while the carriers,
-the parcel and the answer keep the normalized number. While checking, they show a general progress indicator; only the server's answer names
+the parcel and the answer keep the normalized number, except a Tiui folio saved under Tiui, which keeps the hyphens
+Tiui's tracker needs (`carrierTrackingNumber`). While checking, they show a general progress indicator; only the server's answer names
 the carriers checked. A failed request does not manufacture a queried-carrier list.
 
 - **Which and in what order.** Matching low-confidence rules that qualify, including

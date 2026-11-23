@@ -871,7 +871,7 @@ class ParcelStore(
     ): Parcel {
         val generation = session.generation
         val request = CreatePackageRequest(
-            trackingNumber = CarrierCatalog.normalize(trackingNumber),
+            trackingNumber = CarrierCatalog.carrierTrackingNumber(trackingNumber, carrier),
             label = label.trimmingWhitespacesAndNewlines(),
             carrier = carrier,
             trackingUrl = trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty,

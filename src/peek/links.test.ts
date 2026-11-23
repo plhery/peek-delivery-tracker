@@ -189,6 +189,12 @@ describe('the API backend', () => {
     expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '993411111122222222', carrier: 'swiss-post' });
   });
 
+  it('sends a Tiui folio with its hyphens, which Tiui needs', async () => {
+    const { links, request } = api(json(owner, 201));
+    await links.lookupParcel({ trackingNumber: ' 24-61-7035 ', carrier: 'tiui' });
+    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '24-61-7035', carrier: 'tiui' });
+  });
+
   it('sends the language the page is written in, so a carrier that words its scans in several answers in it', async () => {
     const { links, request } = api(json(owner, 201), json(owner, 201), json(owner, 201));
     try {

@@ -2645,6 +2645,16 @@ class CarrierCatalogTests {
         assertEquals("AB/12", CarrierCatalog.normalize("AB/12"))
     }
 
+    /** A Tiui folio keeps its hyphens under Tiui alone; the same shape under another carrier normalizes. */
+    @Test
+    fun aTiuiFolioKeepsItsHyphensUnderTiuiAlone() {
+        val tiui = CarrierId("tiui")
+        assertEquals("99-99-9999", CarrierCatalog.carrierTrackingNumber(" 99 - 99-9999 ", tiui))
+        assertEquals("99999999", CarrierCatalog.carrierTrackingNumber("99999999", tiui))
+        assertEquals("9999999999", CarrierCatalog.carrierTrackingNumber("99-99-99999-9", tiui))
+        assertEquals("99999999", CarrierCatalog.carrierTrackingNumber("99-99-9999", CarrierId("seino")))
+    }
+
     /** A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits. */
     @Test
     fun anSSCCTypedWithItsBracketedIdentifierReadsAsItsDigits() {

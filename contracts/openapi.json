@@ -75634,7 +75634,7 @@
         "properties": {
           "trackingNumber": {
             "type": "string",
-            "description": "Normalizes to an uppercase alphanumeric tracking number between 4 and 40 characters and containing at least one digit.",
+            "description": "Normalizes to an uppercase alphanumeric tracking number between 4 and 40 characters and containing at least one digit. A Tiui folio sent with the carrier tiui, three groups of digits joined by hyphens, keeps its hyphens: Tiui's tracker needs them.",
             "pattern": "^(?=.*[0-9])[A-Za-z0-9 .-]+$"
           },
           "label": {
@@ -77317,7 +77317,7 @@
         "properties": {
           "trackingNumber": {
             "type": "string",
-            "description": "Normalizes to an uppercase alphanumeric tracking number between 4 and 40 characters and containing at least one digit.",
+            "description": "Normalizes to an uppercase alphanumeric tracking number between 4 and 40 characters and containing at least one digit. A Tiui folio sent with the carrier tiui, three groups of digits joined by hyphens, keeps its hyphens: Tiui's tracker needs them.",
             "pattern": "^(?=.*[0-9])[A-Za-z0-9 .-]+$"
           },
           "carrier": {

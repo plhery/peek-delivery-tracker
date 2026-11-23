@@ -5,6 +5,7 @@ import { isDemoBuild } from '../../lib/buildMode';
 import { canAskCarrier, carrierCheck, type CarrierCheck } from '../../lib/carrierPicker';
 import {
   carrierRequirements,
+  carrierTrackingNumber,
   isPickupCode,
   normalizeTrackingNumber,
   notTrackingNumber,
@@ -305,7 +306,8 @@ function lookupInput(found: Survey): ParcelLookupInput {
   const dpdPostcodeCountry = dpdPostcode ? sentPostcodeCountry(carrier, found.postcodeCountry) : undefined;
   const phoneDigits = wanted('phoneDigits') ? found.input('phoneDigits').trim() : undefined;
   return {
-    trackingNumber: found.normalized,
+    // As the carrier knows it: a Tiui folio keeps its hyphens.
+    trackingNumber: found.match ? carrierTrackingNumber(found.match.trackingNumber, carrier) : found.normalized,
     ...(carrier !== 'unknown' ? { carrier } : {}),
     ...(trackingUrl ? { trackingUrl } : {}),
     ...(dpdPostcode ? { dpdPostcode } : {}),

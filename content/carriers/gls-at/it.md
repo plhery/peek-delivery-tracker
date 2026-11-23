@@ -42,7 +42,7 @@ Se l'e-mail del negozio cita [Austrian Post](carrier:austrian-post) o un altro c
 
 ## Consegna GLS in Austria: vicini, Parcel Shop e locker
 
-**Quando.** Dal lunedì al venerdì in orario lavorativo. Le condizioni GLS contano i giorni lavorativi escluso il sabato, non garantiscono le 24 ore e non consentono di scegliere un'ora esatta. Se il mittente usa FlexDeliveryService, GLS invia via e-mail un link di tracking che mostra il giorno previsto alla presa in carico e, il giorno stesso, quante fermate mancano.
+**Quando.** Dal lunedì al venerdì in orario lavorativo. Le condizioni GLS contano i giorni lavorativi escluso il sabato, non garantiscono le 24 ore, e non puoi scegliere un'ora esatta. Se il mittente usa FlexDeliveryService, GLS invia via e-mail un link di tracking che mostra il giorno previsto alla presa in carico e, il giorno stesso, quante fermate mancano.
 
 **Nessuno in casa.** L'autista tenta prima presso un vicino (che firma) oppure in un Parcel Shop o Parcel Locker vicino, e GLS lascia un avviso o invia un'e-mail con il luogo. I pacchi non deviabili (aziendali o espressi) vengono riprovati il giorno lavorativo successivo e, in caso di ulteriore esito negativo, rientrano in deposito. GLS fa al massimo due tentativi. Alcuni pacchi, come quelli con obbligo di documento d'identità con foto, vengono consegnati solo di persona.
 
@@ -83,9 +83,9 @@ Peek non può contattare GLS o il negozio per te:
 
 Incolla il numero in [Peek](/). Diverse società GLS usano questi formati, quindi Peek interroga le più probabili in base al tuo Paese (regione del telefono o Paese di connessione sul web). In Austria vedrai di solito «GLS Austria ha questo pacco.». Altrove nomina spesso un'altra filiale come GLS Germany, che interroga lo stesso servizio GLS ma chiede il codice postale: tienila e inserisci il codice postale, oppure premi «Cambia» e seleziona GLS Austria. Se nessuna società GLS conosce ancora il codice, aggiungilo comunque o scegli GLS Austria dall'elenco: Peek traccia oltre 4.500 corrieri. Un link incollato da gls-group.com o gls-group.eu con /AT/ nel percorso viene tracciato come GLS Austria.
 
-Il campo «Codice postale di consegna» è segnato «Facoltativo», ma GLS mostra le scansioni solo con esso, come indica la riga sotto il campo: «GLS Austria mostra le scansioni solo con il codice postale di consegna.» Senza codice postale Peek verifica solo se GLS conosce il numero, interroga intanto altri servizi di tracciamento e propone sulla scheda «Aggiungi codice postale». Con un account Peek prova una volta l'ultimo codice postale fornito per un pacco GLS Austria o altrimenti quello del pacco più recente. Se GLS non trova il pacco con quel codice, Peek lo segnala e offre «Modifica codice postale». Finché GLS attende il codice postale o non trova il pacco con il tuo, e nessun'altra fonte risponde per un giorno, Peek controlla una volta al giorno; l'aggiunta o la modifica avviano subito un controllo. Il codice postale viene inviato a GLS e, se necessario, ai servizi di tracciamento, e non appare mai nei link condivisi.
+Il campo «Codice postale di consegna» è segnato «Facoltativo», ma GLS mostra le scansioni solo con esso, come indica la riga sotto il campo: «GLS Austria mostra le scansioni solo con il codice postale di consegna.» Senza codice postale Peek riceve da GLS solo lo stato, senza scansioni: le chiede intanto ad altri servizi di tracciamento e propone sulla scheda «Aggiungi codice postale». Con un account Peek prova una volta l'ultimo codice postale fornito per un pacco GLS Austria o altrimenti quello del pacco più recente. Se GLS non trova il pacco con quel codice, Peek lo segnala e offre «Modifica codice postale». Finché GLS attende il codice postale o non trova il pacco con il tuo, e nessun'altra fonte risponde per un giorno, Peek controlla una volta al giorno; l'aggiunta o la modifica avviano subito un controllo. Il codice postale viene inviato a GLS e, se necessario, ai servizi di tracciamento, e non appare mai nei link condivisi.
 
-Con il codice postale vedi stato, luogo di ogni scansione su mappa, giorno previsto, peso, ora di consegna e, per un Parcel Shop, nome e indirizzo. Nome, indirizzo, contatti, firma e riferimento del mittente sono esclusi. Peek legge il servizio inglese di GLS anziché la pagina tedesca: `In Zustellung` compare come `In delivery` e `Das Paket wurde erfolgreich zugestellt.` come `The parcel has been delivered.`. L'arrivo al Parcel Shop appare come «Pronto per il ritiro». Gli orari sono letti in ora austriaca. Peek controlla GLS circa ogni ora, giorno di consegna compreso (4 ore dopo un tentativo fallito), e può avvisarti dei cambiamenti.
+Con il codice postale vedi stato, luogo di ogni scansione su mappa, giorno previsto, peso, ora di consegna e, per un Parcel Shop, nome e indirizzo. Nome, indirizzo, contatti, firma e riferimento del mittente sono esclusi. Peek legge il servizio inglese di GLS anziché la pagina tedesca: `In Zustellung` compare come `In delivery` e `Das Paket wurde erfolgreich zugestellt.` come `The parcel has been delivered.`. L'arrivo al Parcel Shop appare come «Pronto per il ritiro». Gli orari sono letti in ora austriaca. Peek controlla GLS circa ogni ora, giorno di consegna compreso (4 ore dopo un tentativo fallito), e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Può avvisarti dei cambiamenti. Se il pacco resta quattro giorni senza una nuova riga su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da …» con il giorno di quella riga e un link «Chiedi aiuto a GLS Austria».
 
 ## Domande sul tracking GLS in Austria
 
@@ -95,7 +95,7 @@ Di norma 24 ore in Austria, dal lunedì al venerdì, senza garanzia. GLS Austria
 
 ### GLS consegna il sabato in Austria?
 
-No: solo dal lunedì al venerdì.
+Non di norma: GLS consegna dal lunedì al venerdì. Le sue condizioni consentono al mittente di prenotare, con un supplemento, la consegna di sabato di una spedizione espressa.
 
 ### Per quanto tempo GLS tiene il mio pacco?
 
@@ -121,7 +121,7 @@ Non un orario preciso. Puoi spostare la consegna a un altro giorno nella stessa 
 - [GLS Austria: Recipient request](https://gls-group.com/AT/en/contact-form/recipient-request/) – orari, campi, consegnato non ricevuto
 - [GLS Austria: Corporate information](https://gls-group.com/AT/en/corporate-information/) – azienda, indirizzo, telefono
 - [GLS Austria: Customer information](https://gls-group.com/AT/en/customer-information/) – call center GLS-ONE
-- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – niente sabato, nessuna garanzia, due tentativi
+- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – giorni lavorativi escluso il sabato, nessuna garanzia, due tentativi, sabato per le spedizioni espresse con supplemento
 - [GLS Austria: Standard delivery times](https://gls-group.com/AT/en/standard-delivery-time/) – 24 ore, tempi solo dall'Austria
 - [GLS Austria: Security advice](https://gls-group.com/AT/en/press/gls-informs/security-advice/) – truffe, segnalazioni
 - [GLS Austria: Home](https://gls-group.com/AT/de/home/) – 11 depositi, Ansfelden

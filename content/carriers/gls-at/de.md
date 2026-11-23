@@ -42,7 +42,7 @@ Nennt die Versandmail [Österreichische Post](carrier:austrian-post) oder einen 
 
 ## GLS-Zustellung in Österreich: Nachbarn, PaketShops und Locker
 
-**Wann.** Montag bis Freitag zu Geschäftszeiten. Die Bedingungen von GLS zählen Werktage ohne Samstage, garantieren die 24 Stunden nicht und lassen keine exakte Uhrzeit zu. Nutzt der Absender den GLS FlexDeliveryService, mailt dir GLS einen Link, der ab Übernahme den erwarteten Tag und am Zustelltag die verbleibenden Stopps zeigt.
+**Wann.** Montag bis Freitag zu Geschäftszeiten. Die Bedingungen von GLS zählen Werktage ohne Samstage, garantieren die 24 Stunden nicht, und eine genaue Uhrzeit kannst du nicht wählen. Nutzt der Absender den GLS FlexDeliveryService, mailt dir GLS einen Link, der ab Übernahme den erwarteten Tag und am Zustelltag die verbleibenden Stopps zeigt.
 
 **Niemand zu Hause.** Der Fahrer probiert zuerst einen Nachbarn (gegen Unterschrift) oder sonst einen nahen PaketShop bzw. Parcel Locker, und GLS informiert per Karte oder E-Mail über den Ort. Pakete, die nicht umgeleitet werden dürfen (z. B. Geschäfts- oder Expresssendungen), werden am nächsten Werktag erneut zugestellt und landen bei erneutem Fehlschlag im Depot. GLS unternimmt höchstens zwei Versuche. Manche Sendungen (z. B. mit Lichtbildausweis-Pflicht) werden nur persönlich übergeben.
 
@@ -83,9 +83,9 @@ Peek kann GLS oder den Shop nicht für dich kontaktieren:
 
 Füge die Nummer in [Peek](/) ein. Mehrere GLS-Gesellschaften nutzen diese Formate, daher fragt Peek nach deinem Land (Geräteregion oder Verbindungsland im Web) die passenden ab. In Österreich erscheint meist „GLS Austria hat dieses Paket.“. Anderswo nennt es oft eine andere Gesellschaft wie GLS Germany, die denselben GLS-Dienst nutzt, aber die Postleitzahl verlangt: Behalte sie bei und gib die Postleitzahl ein, oder tippe auf „Ändern“ und wähle GLS Austria. Kennt noch keine GLS-Gesellschaft die Nummer, füge sie trotzdem hinzu oder wähle GLS Austria aus der Liste: Peek verfolgt über 4500 Paketdienste. Ein eingefügter gls-group.com- oder gls-group.eu-Link mit /AT/ im Pfad wird als GLS Austria geführt.
 
-Das Feld „Postleitzahl der Lieferadresse“ trägt den Vermerk „Optional“, doch GLS zeigt seine Scans nur damit, wie der Hinweis darunter sagt: „GLS Austria zeigt die Scans nur mit der Postleitzahl der Lieferadresse an.“ Ohne sie erfährt Peek nur, ob GLS die Nummer kennt, fragt derweil andere Tracking-Dienste und bietet auf der Paketseite „Postleitzahl eingeben“ an. Mit Konto probiert Peek einmal die zuletzt für ein GLS-Austria-Paket genannte Postleitzahl oder sonst die deines letzten Pakets. Findet GLS das Paket mit dieser Postleitzahl nicht, meldet Peek es und bietet „Postleitzahl ändern“. Solange GLS auf die Postleitzahl wartet oder das Paket damit nicht findet und einen Tag lang nichts anderes antwortet, prüft Peek einmal täglich; das Hinzufügen oder Ändern prüft sofort. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste und erscheint nie auf geteilten Links.
+Das Feld „Postleitzahl der Lieferadresse“ trägt den Vermerk „Optional“, doch GLS zeigt seine Scans nur damit, wie der Hinweis darunter sagt: „GLS Austria zeigt die Scans nur mit der Postleitzahl der Lieferadresse an.“ Ohne sie erhält Peek von GLS nur den Status, keine Scans: Es fragt derweil andere Tracking-Dienste danach und bietet auf der Paketseite „Postleitzahl eingeben“ an. Mit Konto probiert Peek einmal die zuletzt für ein GLS-Austria-Paket genannte Postleitzahl oder sonst die deines letzten Pakets. Findet GLS das Paket mit dieser Postleitzahl nicht, meldet Peek es und bietet „Postleitzahl ändern“. Solange GLS auf die Postleitzahl wartet oder das Paket damit nicht findet und einen Tag lang nichts anderes antwortet, prüft Peek einmal täglich; das Hinzufügen oder Ändern prüft sofort. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste und erscheint nie auf geteilten Links.
 
-Mit Postleitzahl siehst du Status, jeden Scan-Ort auf einer Karte, voraussichtlichen Liefertag, Gewicht, Zustellzeit sowie bei einem PaketShop dessen Name und Adresse. Name, Adresse, Kontaktdaten, Unterschrift und Absenderreferenz fallen weg. Peek liest den englischen GLS-Dienst statt der deutschen Seite: `In Zustellung` heißt dort `In delivery`, `Das Paket wurde erfolgreich zugestellt.` heißt `The parcel has been delivered.`. Eine Ankunft im PaketShop erscheint als „Abholbereit“. Uhrzeiten werden als österreichische Zeit gelesen. Peek prüft GLS etwa stündlich, auch am Zustelltag (4 Stunden nach einer fehlgeschlagenen Prüfung), und kann dich bei Änderungen benachrichtigen.
+Mit Postleitzahl siehst du Status, jeden Scan-Ort auf einer Karte, voraussichtlichen Liefertag, Gewicht, Zustellzeit sowie bei einem PaketShop dessen Name und Adresse. Name, Adresse, Kontaktdaten, Unterschrift und Absenderreferenz fallen weg. Peek liest den englischen GLS-Dienst statt der deutschen Seite: `In Zustellung` heißt dort `In delivery`, `Das Paket wurde erfolgreich zugestellt.` heißt `The parcel has been delivered.`. Eine Ankunft im PaketShop erscheint als „Abholbereit“. Uhrzeiten werden als österreichische Zeit gelesen. Peek prüft GLS etwa stündlich, auch am Zustelltag (4 Stunden nach einer fehlgeschlagenen Prüfung), und nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Es kann dich bei Änderungen benachrichtigen. Bleibt das Paket vier Tage ohne neuen Eintrag bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Keine Aktualisierung seit …“ mit dem Tag dieses Eintrags und einen Link „Hol dir Hilfe bei GLS Austria“.
 
 ## Fragen zur GLS-Sendungsverfolgung in Österreich
 
@@ -95,7 +95,7 @@ Meist 24 Stunden innerhalb Österreichs, Montag bis Freitag, ohne Garantie. GLS 
 
 ### Liefert GLS in Österreich am Samstag?
 
-Nein, nur Montag bis Freitag.
+Nicht im Standard: GLS stellt Montag bis Freitag zu. Laut seinen Bedingungen kann ein Absender die Samstagszustellung einer Expresssendung gegen Aufpreis buchen.
 
 ### Wie lange lagert GLS mein Paket?
 
@@ -121,7 +121,7 @@ Keine exakte Uhrzeit. Du kannst die Zustellung im selben Zeitfenster auf einen a
 - [GLS Austria: Recipient request](https://gls-group.com/AT/en/contact-form/recipient-request/) – Zeiten, Felder, zugestellt aber nicht erhalten
 - [GLS Austria: Corporate information](https://gls-group.com/AT/en/corporate-information/) – Gesellschaft, Adresse, Telefon
 - [GLS Austria: Customer information](https://gls-group.com/AT/en/customer-information/) – GLS-ONE-Callcenter
-- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – keine Samstage, keine Garantie, zwei Versuche
+- [GLS Austria: Special terms and conditions](https://gls-group.com/AT/en/terms-and-conditions/) – Werktage ohne Samstage, keine Garantie, zwei Versuche, Samstag für Expresssendungen gegen Aufpreis
 - [GLS Austria: Standard delivery times](https://gls-group.com/AT/en/standard-delivery-time/) – 24 Stunden, Laufzeiten nur ab Österreich
 - [GLS Austria: Security advice](https://gls-group.com/AT/en/press/gls-informs/security-advice/) – Betrug, Meldung
 - [GLS Austria: Home](https://gls-group.com/AT/de/home/) – 11 Depots, Ansfelden

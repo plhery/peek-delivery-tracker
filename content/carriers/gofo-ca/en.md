@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-17
 ---
 
-GOFO Canada is the Canadian network of GOFO, a parcel carrier with networks in several countries, and it runs the same tracking system as GOFO in the United States. GOFO says its Canadian network is live in Toronto, with Vancouver and more coverage on the way. Its numbers begin with `GFCA`: track one on GOFO's Canadian tracking page, on gofo.com, or paste it in the box above. No number yet? See [how to find a tracking number](guide:find-tracking-number).
+GOFO Canada is the Canadian network of GOFO, a parcel carrier with networks in several countries, and it runs the same tracking system as GOFO in the United States. GOFO says its Canadian network is live in Toronto and Vancouver, with more coverage on the way. Its numbers begin with `GFCA`: track one on GOFO's Canadian tracking page, on gofo.com, or paste it in the box above. No number yet? See [how to find a tracking number](guide:find-tracking-number).
 
 ## GOFO Canada tracking number: what it looks like
 
@@ -14,7 +14,7 @@ Peek files a number under GOFO Canada when it has this shape, in capitals or not
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `GFCA00000000000000` | GFCA followed by 14 digits, the GOFO Canada waybill number. Peek reads a letter O typed right after GFCA as a zero |
+| `GFCA48291736405829` | GFCA followed by 14 digits, the GOFO Canada waybill number. Peek reads a letter O typed right after GFCA as a zero |
 
 GOFO also gives each parcel a tracking number, which either repeats the `GFCA` waybill or is the shop's own reference. Peek follows the `GFCA` waybill only, so that's the number to paste.
 
@@ -51,9 +51,9 @@ Ordered from Temu or Shein? See [Temu orders](guide:temu-orders) and [Shein orde
 
 ## GOFO Canada customer service
 
-Peek has no help link for GOFO Canada. For a late, missing or damaged order, start with the shop that sent it, and keep your `GFCA` number and your order number at hand. GOFO's own Canadian pages are on gofo.com.
+For a late, missing or damaged order, start with the shop that sent it, and keep your `GFCA` number and your order number at hand. GOFO's own Canadian pages are on gofo.com.
 
-For a delivery issue or a tracking question, GOFO lists these channels on its [Canadian customer service page](https://www.gofo.com/ca/customer-service), as read on 8 November 2026:
+For a delivery issue or a tracking question, GOFO lists these channels on its [Canadian customer service page](https://www.gofo.com/ca/customer-service):
 
 - **Email:** cs@mail.gofo.com
 - **Phone (hotline for recipients):** +1 (949) 688-6032, Monday to Friday 9 a.m. to 9 p.m., Saturday and Sunday 11 a.m. to 7 p.m., Eastern time.
@@ -66,7 +66,11 @@ For a delivery issue or a tracking question, GOFO lists these channels on its [C
 
 Peek reads GOFO Canada's own tracking: the status, each scan with its time and the town and province GOFO gives for it, those places on a map, the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows GOFO's expected delivery date until the parcel is out for delivery, delivered, returned or at a pickup point, and leaves out the delivery photos, coordinates and weight.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GOFO scans the parcel out for delivery, while GOFO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't book a redelivery or contact GOFO or the shop for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day GOFO scans it out for delivery, from 6 a.m. local time at the newest scan's place, every 2 minutes while GOFO's own tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created".
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking GOFO Canada.", with a "Get help from GOFO Canada" link to GOFO's Canadian customer service page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking GOFO Canada."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't book a redelivery or contact GOFO or the shop for you.
 
 ## Questions about GOFO Canada tracking
 
@@ -83,8 +87,8 @@ GOFO has loaded the parcel for the trip between two of its facilities, before it
 Check its shape first: a GOFO Canada number is `GFCA` and 14 digits. A `GFUS`, `GFFR` or `GFIT` number belongs to GOFO's US, French or Italian network, which Peek tracks under its own name. If a `GFCA` number still finds nothing, check it against the shop's shipping email, then ask the shop.
 
 :::sources
-- [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – active federal corporation 1807362-7, continued from Ontario under the CBCA on 2026-07-08, registered office in Mississauga (checked 8 November 2026)
-- [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – number shape, links, scan wordings and stages shared with GOFO US, the support line, what Peek keeps and leaves out, GOFO US's MGP numbers (read 8 November 2026)
-- [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – email, recipients' hotline and hours, WhatsApp, inquiry form and chat; proof of delivery, where to look, new attempt within 24 hours, 1–2 days from a delivery station, delays and losses through the sender, returns can't be intercepted (read 8 November 2026)
-- [GOFO Canada](https://www.gofo.com/ca) – live in Toronto, Vancouver and more coverage on the way (read 8 November 2026)
+- [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – active federal corporation 1807362-7, continued from Ontario under the CBCA on 2026-07-08, registered office in Mississauga
+- [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – number shape, links, scan wordings and stages shared with GOFO US, the support line, what Peek keeps and leaves out, GOFO US's MGP numbers, GOFO Canada's help link
+- [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – email, recipients' hotline and hours, WhatsApp, inquiry form and chat; proof of delivery, where to look, new attempt within 24 hours, 1–2 days from a delivery station, delays and losses through the sender, returns can't be intercepted
+- [GOFO Canada](https://www.gofo.com/ca) – live in Toronto and Vancouver, more coverage on the way
 :::

@@ -76,7 +76,7 @@ Otras terminaciones de `A küldemény nem kézbesíthető (…)` detallan el mot
 
 Canales publicados en posta.hu:
 
-- **Teléfono:** 06-1-767-8282; desde el extranjero +36 1 767 8282. De lunes a miércoles y viernes de 8:00 a 17:00, jueves de 8:00 a 20:00, hora de Hungría. No figura ninguna línea independiente en inglés.
+- **Teléfono:** 06-1-767-8282; desde el extranjero +36 1 767 8282. De lunes a miércoles y viernes de 8:30 a 16:30, jueves de 8:00 a 20:00, hora de Hungría. No figura ninguna línea independiente en inglés.
 - **Correo electrónico:** ugyfelszolgalat@posta.hu.
 - **Presencial:** 1062 Budapest, Teréz körút 51-53; lunes de 7:00 a 19:00, de martes a viernes de 8:00 a 16:00, hora de Hungría.
 - **Dudas de aduanas:** los formularios de contacto en posta.hu/vam.

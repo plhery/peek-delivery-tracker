@@ -76,7 +76,7 @@ Other `A küldemény nem kézbesíthető (…)` endings give the reason, such as
 
 posta.hu lists:
 
-- **Phone:** 06-1-767-8282; from abroad +36 1 767 8282. Monday to Wednesday and Friday 8:00 to 17:00, Thursday 8:00 to 20:00, Hungarian time. No separate English line is listed.
+- **Phone:** 06-1-767-8282; from abroad +36 1 767 8282. Monday to Wednesday and Friday 8:30 to 16:30, Thursday 8:00 to 20:00, Hungarian time. No separate English line is listed.
 - **Email:** ugyfelszolgalat@posta.hu.
 - **In person:** 1062 Budapest, Teréz körút 51-53; Monday 7:00 to 19:00, Tuesday to Friday 8:00 to 16:00.
 - **Customs questions:** the contact forms on posta.hu/vam.

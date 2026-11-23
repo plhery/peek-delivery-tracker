@@ -71,13 +71,13 @@ A többi `A küldemény nem kézbesíthető (…)` státusz zárójelben adja me
 
 **Elveszett csomag.** Kártérítést főszabály szerint a feladó, többnyire a webáruház kérhet. Ön akkor, ha a feladó írásban Önre engedményezte ezt a jogot, vagy ha belföldi webáruházi rendelésnél bemutatja a teljes vételárat tartalmazó visszaigazolást (például a számla másolatát), és a kézbesítéskor már nem kellett volna fizetnie. A belföldi könyvelt küldemény elveszettnek számít, ha a feladástól számított 15 napon belül nem kézbesítették, és meg sem kísérelték. A kárigényt a feladást követő 15. naptól 6 hónapon belül, írásban jelentheti be; a posta 30 napon belül válaszol.
 
-**Panasz és NMHH.** Belföldi küldeményről személyesen, telefonon vagy írásban tehet panaszt, a feladástól számított 6 hónapon belül. A posta 30 napon belül válaszol (ezt egyszer 30 nappal meghosszabbíthatja). Ha a válasszal nem ért egyet, vagy nem kap választ, a válasz kézhezvételétől, illetve a határidő lejártától számított 30 napon belül a Nemzeti Média- és Hírközlési Hatósághoz (NMHH) fordulhat; az eljárás díja 6 000 forint.
+**Panasz és NMHH.** Belföldi küldeményről személyesen, telefonon vagy írásban tehet panaszt, a feladástól számított 6 hónapon belül. A posta 30 napon belül válaszol (ezt egyszer 30 nappal meghosszabbíthatja). Ha a válasszal nem ért egyet, vagy nem kap választ, a válasz kézhezvételétől, illetve a határidő lejártától számított 30 napon belül a Nemzeti Média- és Hírközlési Hatósághoz (NMHH) fordulhat.
 
 ## A Magyar Posta elérhetőségei
 
 A posta.hu szerint:
 
-- **Telefon:** 06-1-767-8282, hétfőtől szerdáig és pénteken 8–17, csütörtökön 8–20 óra között.
+- **Telefon:** 06-1-767-8282, hétfőtől szerdáig és pénteken 8:30–16:30, csütörtökön 8–20 óra között.
 - **E-mail:** ugyfelszolgalat@posta.hu.
 - **Személyesen:** 1062 Budapest, Teréz körút 51–53., hétfőn 7–19, keddtől péntekig 8–16 óra között.
 - **Vámügyek:** a posta.hu/vam oldal kapcsolatfelvételi űrlapjai.

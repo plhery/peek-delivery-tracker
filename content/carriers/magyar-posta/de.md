@@ -76,7 +76,7 @@ Weitere Zusätze bei `A küldemény nem kézbesíthető (…)` nennen den Grund,
 
 Auf posta.hu genannte Kontaktwege:
 
-- **Telefon:** 06-1-767-8282; aus dem Ausland +36 1 767 8282. Montag bis Mittwoch und Freitag 8:00 bis 17:00 Uhr, Donnerstag 8:00 bis 20:00 Uhr ungarische Zeit. Eine eigene englische Hotline wird nicht genannt.
+- **Telefon:** 06-1-767-8282; aus dem Ausland +36 1 767 8282. Montag bis Mittwoch und Freitag 8:30 bis 16:30 Uhr, Donnerstag 8:00 bis 20:00 Uhr ungarische Zeit. Eine eigene englische Hotline wird nicht genannt.
 - **E-Mail:** ugyfelszolgalat@posta.hu.
 - **Vor Ort:** 1062 Budapest, Teréz körút 51-53; Montag 7:00 bis 19:00 Uhr, Dienstag bis Freitag 8:00 bis 16:00 Uhr ungarische Zeit.
 - **Zollfragen:** die Kontaktformulare unter posta.hu/vam.

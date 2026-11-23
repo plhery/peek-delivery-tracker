@@ -95923,6 +95923,17 @@
     "candidates": []
   },
   {
+    "input": "GC999999998FR",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "GCMURL1854800",
     "carrier": "unknown",
     "confidence": "none",
@@ -107261,6 +107272,14 @@
     ],
     "asked": [
       "flash-express-ph"
+    ]
+  },
+  {
+    "input": "P325590",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "flecha-amarilla"
     ]
   },
   {

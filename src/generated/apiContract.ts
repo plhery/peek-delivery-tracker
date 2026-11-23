@@ -1515,6 +1515,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^XR\\d{13}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^GC\\d{9}FR$",
+        "confidence": "low"
       }
     ],
     "aliases": [
@@ -46329,7 +46333,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Mexico_City",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "odm-express"
     },
     "trackingUrlTemplate": "https://odmexpress.com.mx/rastreo-2/?rastreo_fall={trackingNumber}",
     "linkRules": [

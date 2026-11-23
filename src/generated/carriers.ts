@@ -2460,6 +2460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-sendungsverfolgung",
+      "title": "Omniva Sendungsverfolgung: Codes, Status und Paketautomaten",
+      "name": "Omniva",
+      "color": "#f86300"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "box-now-sendungsverfolgung",
@@ -4060,6 +4068,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Posti\u00a0: code JJFI, statuts, consignes et contact",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "suivi-omniva",
+      "title": "Suivi Omniva\u00a0: codes, statuts et consignes baltes",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "box-now",
@@ -5688,6 +5704,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "tracking-omniva",
+      "title": "Tracking Omniva: codici, stati e armadietti automatici",
+      "name": "Omniva",
+      "color": "#f86300"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "tracciamento-box-now",
@@ -7274,6 +7298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8000"
     },
     {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "seguimiento-omniva",
+      "title": "Seguimiento Omniva: códigos, estados y taquillas",
+      "name": "Omniva",
+      "color": "#f86300"
+    },
+    {
       "id": "box-now",
       "catalog": "box-now",
       "slug": "seguimiento-box-now",
@@ -8850,6 +8882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Posti: código JJFI, estados, cacifos e contactos",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "seguimento-omniva",
+      "title": "Seguimento Omniva: códigos, estados e cacifos bálticos",
+      "name": "Omniva",
+      "color": "#f86300"
     },
     {
       "id": "box-now",

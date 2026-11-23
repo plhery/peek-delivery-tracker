@@ -14,8 +14,8 @@ FAN Courier International este serviciul FAN Courier pentru livrări transfronta
 
 | Număr (inventat) | Ce este |
 | --- | --- |
-| `1234567890123456F0001` | AWB FAN Courier International: 16 cifre, `F`, 4 cifre. Îl urmărești pe fancourier.eu. |
-| `7000000000000` | AWB [FAN Courier](carrier:fan-courier): 13 cifre, fără litere. Îl urmărești pe fancourier.ro. |
+| `4829173640582917F4829` | AWB FAN Courier International: 16 cifre, `F`, 4 cifre. Îl urmărești pe fancourier.eu. |
+| `4829173640582` | AWB [FAN Courier](carrier:fan-courier): 13 cifre, fără litere. Îl urmărești pe fancourier.ro. |
 
 AWB-ul îl găsești în emailul de expediere al magazinului sau pe pagina comenzii. FAN Courier International lucrează doar cu firme, pe bază de contract, așa că magazinul comandă transportul și tot el are AWB-ul. Dacă nu ți l-a trimis, cere-l de la el.
 
@@ -74,11 +74,11 @@ FAN Courier International garantează livrarea în cel mult 12 zile lucrătoare 
 
 ## Contact FAN Courier International
 
-Pe fancourier.eu, la 14 noiembrie 2026:
+Pe fancourier.eu:
 
 - **Email:** customer@fancourier.eu, pentru informații despre o expediție și pentru reclamații.
 - **Formular de contact** pe [fancourier.eu/ro/contact](https://fancourier.eu/ro/contact), unde trebuie să treci numărul AWB.
-- **Program:** luni–vineri, 9:00–18:00.
+- **Program:** luni–vineri, 9:00–18:00, ora României.
 
 Pe fancourier.eu nu apare un număr de telefon. Pentru un AWB de 13 cifre, folosește canalele [FAN Courier](carrier:fan-courier) din țară.
 
@@ -88,7 +88,11 @@ Lipește AWB-ul în căsuța de mai sus. Un număr de 16 cifre, `F` și 4 cifre 
 
 Un AWB de 13 cifre e de la FAN Courier: Peek întreabă [FAN Courier](carrier:fan-courier), împreună cu alți curieri ale căror numere pot arăta la fel, niciodată FAN Courier International. Dacă alegi totuși FAN Courier International pentru un astfel de număr, rândul curierului îți spune că „doesn’t issue numbers like this one”, iar Peek nu-l întreabă deloc. Din adresa unei pagini de pe fancourier.eu Peek nu poate citi niciun număr, așa că lipește direct AWB-ul.
 
-Peek îți arată fiecare pas cu formularea englezească a FAN, hubul și ora, în fusul orar al dispozitivului tău; pe peektracker.com și în aplicațiile pentru iPhone și Android, istoricul se încheie cu un rând care îl numește („Times are in your time zone: …”). Verifică coletul cel mult o dată la 10 minute cât timp răspunde trackingul FAN (dacă trebuie să treacă prin servicii de urmărire, o dată pe oră, iar în ziua în care coletul e în livrare, cel mult o dată la 15 minute) și te poate anunța când se schimbă statusul. După 12 ore în care coletul e doar „Label created” sau „Received by carrier”, ori după două zile fără noutăți, Peek îl verifică o dată pe oră.
+Peek îți arată fiecare pas cu formularea englezească a FAN, hubul și ora, în fusul orar al dispozitivului tău; pe peektracker.com și în aplicațiile pentru iPhone și Android, istoricul se încheie cu un rând care îl numește („Times are in your time zone: …”). Cât timp ai coletul deschis în Peek, sau în ziua livrării cu notificările pornite, Peek îl verifică cel mult o dată la 10 minute; în ziua în care coletul e în livrare, de la 6:00 ora României, o dată la 2 minute, cât timp răspunde trackingul FAN. Altfel îl verifică o dată pe oră. După 12 ore în care coletul e doar „Label created” sau „Received by carrier”, ori după două zile fără noutăți, Peek îl verifică o dată pe oră oricum l-ai urmări, iar după șapte zile în „Label created”, o dată la 6 ore. Dacă trackingul FAN nu răspunde și Peek trebuie să treacă prin servicii de urmărire, verifică o dată pe oră, o dată la 3 ore după o zi fără scanare nouă și, în ziua în care coletul e în livrare, cel mult o dată la 15 minute, cât timp e deschis în Peek sau are notificările pornite.
+
+Dacă cea mai nouă scanare are patru zile și coletul e încă în „Label created”, „Received by carrier” sau „In transit”, Peek îl marchează cu ziua acelei scanări, de exemplu „No tracking update since Mon 12 Oct”. Pagina coletului spune atunci „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking FAN Courier International.”, cu linkul „Get help from FAN Courier International” spre pagina de contact a FAN. După trei săptămâni fără scanare nouă, apare „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking FAN Courier International.”
+
+Peek te poate anunța la fiecare scanare („Every scan”), doar la pașii importanți („Important steps”) sau doar la livrare („Delivery only”).
 
 Peek nu arată o zi estimată de livrare și nici numele lockerului, și lasă deoparte numele expeditorului și al destinatarului și greutatea coletului. Nu preia singur un AWB de retur din trackingul FAN: dacă coletul se întoarce cu un număr nou, adaugă-l în Peek ca să-l urmărești. Peek nu poate contacta FAN sau magazinul în locul tău.
 

@@ -14,8 +14,8 @@ Like FAN Courier at home, FAN Courier International calls its tracking number th
 
 | Number (made up) | What it is |
 | --- | --- |
-| `1234567890123456F0001` | FAN Courier International AWB: 16 digits, `F`, 4 digits. Track it on fancourier.eu. |
-| `7000000000000` | FAN Courier AWB: 13 digits, no letter. This is a [FAN Courier](carrier:fan-courier) parcel, tracked on fancourier.ro. |
+| `4829173640582917F4829` | FAN Courier International AWB: 16 digits, `F`, 4 digits. Track it on fancourier.eu. |
+| `4829173640582` | FAN Courier AWB: 13 digits, no letter. This is a [FAN Courier](carrier:fan-courier) parcel, tracked on fancourier.ro. |
 
 Look for it in the shop's shipping email or on your order page. FAN Courier International works only with businesses under contract, so the shop books the delivery and gets the AWB, and only the shop can give it to you. No number at all? See [how to find a tracking number](guide:find-tracking-number). For other shapes, see [tracking number formats](guide:tracking-number-formats).
 
@@ -72,11 +72,11 @@ FAN Courier International promises delivery within 12 working days in the EU and
 
 ## FAN Courier International contact
 
-FAN Courier International's channels, as listed on fancourier.eu on 14 November 2026:
+FAN Courier International's channels, as listed on fancourier.eu:
 
 - **Email** customer@fancourier.eu, for questions about a shipment and for complaints.
 - **Contact form** on [fancourier.eu/contact](https://fancourier.eu/contact). It asks for the AWB number.
-- **Hours** Monday to Friday, 9:00 to 18:00.
+- **Hours** Monday to Friday, 9:00 to 18:00 Romanian time.
 
 fancourier.eu gives an email address and a form, not a phone number. For a parcel sent with a 13-digit FAN Courier AWB, use [FAN Courier's](carrier:fan-courier) own channels instead.
 
@@ -86,7 +86,11 @@ Paste the AWB in the box above. A number of 16 digits, `F` and 4 digits fits onl
 
 A 13-digit AWB is a FAN Courier number: Peek asks [FAN Courier](carrier:fan-courier) about it, along with other carriers whose numbers can look the same, never FAN Courier International. If you choose FAN Courier International for one anyway, the carrier line says it "doesn’t issue numbers like this one", and Peek doesn't ask it. A link copied from fancourier.eu holds no number Peek can read, so paste the AWB itself.
 
-Peek shows each step with FAN's English wording, the hub it names and its time, in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It checks up to every 10 minutes while FAN's tracker answers (hourly if it has to go through tracking services, and up to every 15 minutes on delivery day), and can notify you when the status changes. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly.
+Peek shows each step with FAN's English wording, the hub it names and its time, in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day it is out for delivery, from 6:00 Romanian time, every 2 minutes while FAN's tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". If FAN's tracker doesn't answer and Peek has to go through tracking services, it checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking FAN Courier International.", with a "Get help from FAN Courier International" link to FAN's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking FAN Courier International."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 Peek shows no expected delivery day and no locker name, and leaves out the sender's and recipient's names and the parcel's weight. It doesn't pick up a return number from FAN's tracker: if the parcel goes back under a new number, add that number to follow it. Peek can't contact FAN or the shop for you.
 

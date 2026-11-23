@@ -3836,6 +3836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00843d"
     },
     {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "zipasgo-sendungsverfolgung",
+      "title": "ZipasGo Tracking: Parcel Stars, Partnerdienste und Hilfe",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "dk-logistics-sendungsverfolgung",
@@ -5710,6 +5718,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00843d"
     },
     {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "suivi-zipasgo",
+      "title": "Suivi ZipasGo\u00a0: Parcel Stars, partenaires et aide",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "suivi-dk-logistics",
@@ -7560,6 +7576,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00843d"
     },
     {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "tracciamento-zipasgo",
+      "title": "Tracciamento ZipasGo: Parcel Stars, partner e aiuto",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "tracciamento-dk-logistics",
@@ -9386,6 +9410,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00843d"
     },
     {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "seguimiento-zipasgo",
+      "title": "Seguimiento ZipasGo: Parcel Stars, socios y ayuda",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "seguimiento-dk-logistics",
@@ -11202,6 +11234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Siuntos autobusais: encomendas em autocarro",
       "name": "Siuntos autobusais",
       "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "seguimento-zipasgo",
+      "title": "Seguimento ZipasGo: Parcel Stars, parceiros e ajuda",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
     },
     {
       "id": "dk-logistics-ee",
@@ -13070,6 +13110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Siuntos autobusais: paczki autobusowe na Litwie",
       "name": "Siuntos autobusais",
       "color": "#00843d"
+    },
+    {
+      "id": "zipasgo",
+      "catalog": "zipasgo",
+      "slug": "sledzenie-zipasgo",
+      "title": "Śledzenie ZipasGo: Parcel Stars, partnerzy i pomoc",
+      "name": "ZipasGo",
+      "color": "#ffdb1c"
     },
     {
       "id": "dk-logistics-ee",

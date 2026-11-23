@@ -2556,6 +2556,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "speedy-sendungsverfolgung",
+      "title": "Speedy Sendungsverfolgung: Nummer, Status & Automaten",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "cargus",
       "catalog": "cargus",
       "slug": "cargus-sendungsverfolgung",
@@ -4252,6 +4260,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Nova Poshta\u00a0: numéros, statuts et agences",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "suivi-speedy",
+      "title": "Suivi Speedy\u00a0: numéro de bordereau, statuts et consignes",
+      "name": "Speedy",
+      "color": "#dc0032"
     },
     {
       "id": "cargus",
@@ -5976,6 +5992,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "tracciamento-speedy",
+      "title": "Tracciamento Speedy: codice, stati, uffici e locker",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "cargus",
       "catalog": "cargus",
       "slug": "tracciamento-cargus",
@@ -7650,6 +7674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "seguimiento-speedy",
+      "title": "Seguimiento Speedy: albarán, estados, oficinas y taquillas",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "cargus",
       "catalog": "cargus",
       "slug": "seguimiento-cargus",
@@ -9314,6 +9346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Nova Poshta: números, estados e balcões",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "seguimento-speedy",
+      "title": "Seguimento Speedy: guia de transporte, estados e cacifos",
+      "name": "Speedy",
+      "color": "#dc0032"
     },
     {
       "id": "cargus",
@@ -11014,6 +11054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "sledzenie-speedy",
+      "title": "Śledzenie Speedy: numer listu, statusy i automaty paczkowe",
+      "name": "Speedy",
+      "color": "#dc0032"
     },
     {
       "id": "cargus",

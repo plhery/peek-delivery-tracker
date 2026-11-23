@@ -12,15 +12,15 @@ Z-Leading (Shenzhen Z-leading International Logistics, which the tracking servic
 
 Z-Leading publishes no number format, and no public page shows a whole Z-Leading number. Its FAQ says that once a shipment is dispatched, it gives the customer a tracking number and the official website of the carrier: an express company, an airline or a shipping line.
 
-Peek's catalog links one shape to Z-Leading, taken from a parcel that tracking services filed under Zhongling: `ZL`, two more letters and nine digits, like the invented `ZLAB000000000`. It's only a weak match: the shape alone doesn't prove the number is Z-Leading's.
+Peek's catalog links one shape to Z-Leading, taken from a parcel that tracking services filed under Zhongling: `ZL`, two more letters and nine digits, like `ZLGK482917364`. It's only a weak match: the shape alone doesn't prove the number is Z-Leading's.
 
 Z-Leading says it is a first-class agent of DHL, UPS and FedEx and prints their waybills itself, so an express shipment can carry one of their numbers. Their shapes, with invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `1Z0000000000000000` | 1Z and 16 letters or digits: [UPS](carrier:ups). |
-| `0000000000` | Ten digits: can be [DHL Express](carrier:dhl-express), among others. |
-| `000000000000` | Twelve digits: can be [FedEx](carrier:fedex), among others. |
+| `1Z4829A73640582913` | 1Z and 16 letters or digits: [UPS](carrier:ups). |
+| `4829173646` | Ten digits: can be [DHL Express](carrier:dhl-express), among others. |
+| `482917364055` | Twelve digits: can be [FedEx](carrier:fedex), among others. |
 
 For air or sea freight, the number belongs to the airline or shipping line, and their website tracks it. If the number you have fits none of these, see [tracking number formats](guide:tracking-number-formats).
 
@@ -48,9 +48,9 @@ On its DDP lines by air, sea, rail or road, Z-Leading says it handles everything
 
 ## Z-Leading contact and customer service
 
-As read on 22 October 2026, z-leading.com lists, in English:
+z-leading.com lists, in English:
 
-- **After-sales**: support@forestshipping.com, the address its contact page gives for after-sales service. It's on the site of Forest Shipping, another Shenzhen forwarder.
+- **After-sales**: the email address its contact page gives for after-sales service, on a domain other than z-leading.com.
 - **Form**: the contact page's form, which is for business inquiries and freight quotes only.
 - **Phone and WhatsApp**: one Chinese mobile number, shown on the contact page with an email address. No hours are given.
 - **Address**: First Floor, Building B2, Fumin Industrial Zone, Tangwei Community, Fuhai Street, Bao'an District, Shenzhen.
@@ -65,7 +65,11 @@ For any other number, Peek asks tracking services while you add it ("Checking tr
 
 Z-Leading has no tracker for Peek to read. So for a parcel filed under Z-Leading, Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind the carrier's own, and for some shipments there's nothing at all. The parcel's tracking link opens that service's page for the number. When the service names a carrier Peek reads directly, Peek asks that carrier for the same number and switches to it once it shows progress as recent. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact Z-Leading or the shop for you.
+Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours after seven days without news at "Label created". On the day the parcel is out for delivery, it checks up to every 15 minutes while you have it open in Peek or with notifications on. A service that didn't know the number is asked again a day later.
+
+When a parcel at "Label created", "Received by carrier" or "In transit" has had no new scan for four days, Peek flags it with the newest scan's day, such as "No tracking update since Mon 12 Oct", and the parcel's page says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Z-Leading." Z-Leading has no help page in Peek, so a "Get help from …" link appears only once Peek follows the delivering company, and only if that company has one. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Z-Leading."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Z-Leading or the shop for you.
 
 ## Questions about Z-Leading tracking
 
@@ -83,7 +87,7 @@ Z-Leading doesn't say for each service. A shipment with a DHL, UPS or FedEx numb
 
 ### How do I contact Z-Leading?
 
-Its contact page gives support@forestshipping.com for after-sales service, a Chinese mobile number on phone and WhatsApp, and a form for business inquiries. If a shop sent your parcel, ask the shop.
+Its contact page gives an email address for after-sales service, a Chinese mobile number on phone and WhatsApp, and a form for business inquiries. If a shop sent your parcel, ask the shop.
 
 :::sources
 - [Z-Leading: Professional Logistic Solutions Provider (home)](https://www.z-leading.com/) – founded 2013, Shenzhen, DHL, UPS and FedEx agent with self-print waybills, warehouses in China, the US and Europe, transport routes
@@ -97,6 +101,5 @@ Its contact page gives support@forestshipping.com for after-sales service, a Chi
 - [Z-Leading: Contact Us](https://www.z-leading.com/contact-us/) – after-sales address, form, phone and WhatsApp, office address
 - [Z-Leading: Why Global Businesses Choose Z-Leading for International Logistics](https://www.z-leading.com/why-global-businesses-choose-z-leading-for-international-logistics/) – blog for Amazon, eBay and DTC brands, DHL, UPS and FedEx agent
 - [17TRACK: ZHONGLING Tracking](https://www.17track.net/en/carriers/zhongling) – how 17TRACK names Z-Leading, with links to z-leading.com
-- [Forest Shipping: Freight Forwarder, FBA, Air & Sea Freight](https://www.forestshipping.com/) – forestshipping.com is Forest Shipping's site, a Shenzhen forwarder
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the ZL number shape (a weak match, from a parcel filed under Zhongling), no Z-Leading tracker, Zhongling and 中领国际 as names for Z-Leading, how Peek follows Z-Leading parcels through tracking services, UPS, DHL Express and FedEx shapes
 :::

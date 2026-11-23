@@ -1,6 +1,6 @@
 [
   { "id": "quickpac", "catalog": "quickpac", "name": "Quickpac", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
-  { "id": "planzer", "catalog": "planzer", "name": "Planzer", "languages": ["en", "de", "fr", "it"] },
+  { "id": "planzer", "catalog": "planzer", "name": "Planzer", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "colis-prive", "catalog": "colis-prive", "name": "Colis Privé", "languages": ["en", "fr", "nl", "de", "es", "it", "pt", "pl"] },
   { "id": "brt", "catalog": "brt", "name": "BRT", "languages": ["en", "it", "de", "fr", "es", "pl", "pt"] },
   { "id": "correos-express", "catalog": "correos-express", "name": "Correos Express", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },

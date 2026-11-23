@@ -7762,6 +7762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed1c24"
     },
     {
+      "id": "planzer",
+      "catalog": "planzer",
+      "slug": "seguimiento-planzer",
+      "title": "Seguimiento Planzer: qué significa cada estado y contacto",
+      "name": "Planzer",
+      "color": "#e30613"
+    },
+    {
       "id": "colis-prive",
       "catalog": "colis-prive",
       "slug": "seguimiento-colis-prive",
@@ -9658,6 +9666,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Quickpac: número de 18 dígitos e contacto",
       "name": "Quickpac",
       "color": "#ed1c24"
+    },
+    {
+      "id": "planzer",
+      "catalog": "planzer",
+      "slug": "seguimento-planzer",
+      "title": "Seguimento Planzer: significado dos estados e contacto",
+      "name": "Planzer",
+      "color": "#e30613"
     },
     {
       "id": "colis-prive",
@@ -11566,6 +11582,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Quickpac: 18-cyfrowy numer, statusy i kontakt",
       "name": "Quickpac",
       "color": "#ed1c24"
+    },
+    {
+      "id": "planzer",
+      "catalog": "planzer",
+      "slug": "sledzenie-planzer",
+      "title": "Śledzenie Planzer: znaczenie statusów i kontakt",
+      "name": "Planzer",
+      "color": "#e30613"
     },
     {
       "id": "colis-prive",

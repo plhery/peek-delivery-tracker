@@ -14,10 +14,10 @@ Packlink gives each shipment a reference of its own: two letters for the market,
 
 | Number (invented) | What it is |
 | --- | --- |
-| `ES2026COM0000000000` | ES, the year, COM and 10 digits: a Packlink reference. |
-| `ES2026PRO0000000000` | The same with PRO: also a Packlink reference. |
-| `00000000000000` | 14 digits: one of SEUR's number shapes, which DPD and other carriers share. |
-| `1Z0000000000000000` | 1Z, then 16 letters or digits: a UPS number. |
+| `ES2026COM4829173650` | ES, the year, COM and 10 digits: a Packlink reference. |
+| `ES2026PRO6194028375` | The same with PRO: also a Packlink reference. |
+| `48291736405829` | 14 digits: one of SEUR's number shapes, which DPD and other carriers share. |
+| `1Z9X482W0348291737` | 1Z, then 16 letters or digits: a UPS number. |
 
 **Where to find it.** Packlink sends the reference in the confirmation email when the shipment is booked. If someone sold you something and sent it through Packlink, they have that email: ask them for the reference or the carrier's number. More places to look: [how to find your tracking number](guide:find-tracking-number) and [second-hand orders](guide:second-hand-orders).
 
@@ -74,7 +74,7 @@ See also [missed deliveries](guide:missed-delivery) and [uncollected parcels](gu
 
 ## Packlink phone number and contact
 
-As read on 1 November 2026:
+Packlink's published channels:
 
 - **Phone:** none. Packlink says it works online only and has no phone support. It warns that phone numbers for Packlink on other websites are not true or verified by Packlink: don't use them.
 - **Contact form:** on Packlink's help centre, linked from its phone page. Choose the right category, and for a shipment already made, have the reference from the confirmation email ready. Packlink also offers live chat with its customer service.
@@ -84,11 +84,11 @@ As read on 1 November 2026:
 
 Paste the Packlink reference into [Peek](/). Its shape belongs to Packlink alone, so the Add sheet shows Packlink as "Detected carrier" straight away. You can paste the carrier's own number instead: Peek follows more than 4,500 carriers. If that number's shape fits several carriers, as SEUR's 14 digits do, Peek shows "Checking tracking services…" while it asks them; press "Change" to pick the carrier yourself.
 
-Peek reads Packlink's tracking up to every 10 minutes, and up to every 2 minutes from 6 a.m. Madrid time on the day the parcel goes out for delivery, while Packlink's own tracking answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows each scan in the carrier's words where Packlink gives them, else in Packlink's English line, with the time read on Madrid time and shown in your device's time zone. At a pickup-point line, Peek's status reads "Ready for pickup"; at `RECIBIDO EN ORIGEN`, "Received by carrier". Packlink's expected delivery day shows while the parcel is on its way, and a shipment of several parcels shows as one history. Peek leaves out the places, so there's no map, and the parcel count. Packlink's tracking gives no weight, sender or recipient.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek reads Packlink's tracking up to every 10 minutes, and up to every 2 minutes from 6 a.m. Madrid time on the day the parcel goes out for delivery, while Packlink's own tracking answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new line on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Packlink." and a "Get help from Packlink" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Packlink." It shows each scan in the carrier's words where Packlink gives them, else in Packlink's English line, with the time read on Madrid time and shown in your device's time zone. At a pickup-point line, Peek's status reads "Ready for pickup"; at `RECIBIDO EN ORIGEN`, "Received by carrier". Packlink's expected delivery day shows while the parcel is on its way, and a shipment of several parcels shows as one history. Peek leaves out the places, so there's no map, and the parcel count. Packlink's tracking gives no weight, sender or recipient.
 
-Packlink's tracking also holds the carrier's own number. When that number's shape names one carrier with certainty, as a UPS number starting 1Z does, Peek asks that carrier too. Once the carrier shows a scan as recent as Packlink's newest, Peek follows the parcel there and keeps Packlink's history: the parcel then reads "Delivery with UPS", and its details list both numbers. No SEUR or Correos Express number shape is that certain, so their parcels stay on Packlink's tracking.
+Packlink's tracking also holds the carrier's own number. When that number's shape names one carrier with certainty, as a UPS number starting 1Z does, Peek asks that carrier too. Once the carrier shows a scan no older than Packlink's newest, Peek follows the parcel there and keeps Packlink's history: the parcel then reads "Delivery with UPS", and its details list both numbers. No SEUR or Correos Express number shape is that certain, so their parcels stay on Packlink's tracking.
 
-Peek can notify you when the parcel moves, but it can't make a claim, change the delivery or contact anyone for you.
+Peek can notify you of "Every scan", "Important steps" or "Delivery only", but it can't make a claim, change the delivery or contact anyone for you.
 
 ## Questions about Packlink tracking
 
@@ -98,7 +98,7 @@ No. Packlink is a platform where people and shops compare and book carriers. The
 
 ### What is the Packlink phone number?
 
-None: Packlink works online only and warns that numbers on other websites aren't verified by it. Use the contact form on its help centre or its live chat (as read on 1 November 2026).
+None: Packlink works online only and warns that numbers on other websites aren't verified by it. Use the contact form on its help centre or its live chat.
 
 ### Where is my Packlink tracking number?
 

@@ -3204,6 +3204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60013"
     },
     {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "gofo-ca-sendungsverfolgung",
+      "title": "GOFO Canada Sendungsverfolgung: GFCA-Nummern und Status",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",
@@ -5102,6 +5110,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60013"
     },
     {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "suivi-gofo-ca",
+      "title": "Suivi GOFO Canada\u00a0: numéros GFCA, statuts et retards",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-suivi-colis",
@@ -6984,6 +7000,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60013"
     },
     {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "tracciamento-gofo-ca",
+      "title": "Tracciamento GOFO Canada: codici GFCA, stati e ritardi",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-tracking",
@@ -8850,6 +8874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60013"
     },
     {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "seguimiento-gofo-ca",
+      "title": "Seguimiento GOFO Canada: números GFCA, estados y retrasos",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-seguimiento",
@@ -10698,6 +10730,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Huaya Express: números HYYT…GZ e estados",
       "name": "Huaya Express",
       "color": "#e60013"
+    },
+    {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "seguimento-gofo-ca",
+      "title": "Seguimento GOFO Canada: números GFCA, estados e atrasos",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
     },
     {
       "id": "topyou",
@@ -12590,6 +12630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Huaya Express: numery HYYT…GZ, statusy i dostawa",
       "name": "Huaya Express",
       "color": "#e60013"
+    },
+    {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "sledzenie-gofo-ca",
+      "title": "Śledzenie GOFO Canada: numery GFCA, statusy i opóźnienia",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
     },
     {
       "id": "topyou",

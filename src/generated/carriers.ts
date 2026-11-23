@@ -2228,6 +2228,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "gls-italy-sendungsverfolgung",
+      "title": "GLS Italy Sendungsverfolgung: Nummern, Status & Kontakt",
+      "name": "GLS Italy",
+      "color": "#ffdd00"
+    },
+    {
       "id": "poczta-polska",
       "catalog": "poczta-polska",
       "slug": "poczta-polska-sendungsverfolgung",
@@ -3803,6 +3811,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "gls-france-suivi-colis",
       "title": "GLS France suivi colis\u00a0: statuts, relais et contact",
       "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "suivi-gls-italy",
+      "title": "Suivi GLS Italy\u00a0: numéros, statuts et livraisons manquées",
+      "name": "GLS Italy",
       "color": "#ffdd00"
     },
     {
@@ -6962,6 +6978,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "seguimiento-gls-italy",
+      "title": "Seguimiento GLS Italy: números, estados y entregas",
+      "name": "GLS Italy",
+      "color": "#ffdd00"
+    },
+    {
       "id": "poczta-polska",
       "catalog": "poczta-polska",
       "slug": "seguimiento-poczta-polska",
@@ -8516,6 +8540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "seguimento-gls-italy",
+      "title": "Seguimento GLS Italy: números, estados e entregas",
+      "name": "GLS Italy",
+      "color": "#ffdd00"
+    },
+    {
       "id": "poczta-polska",
       "catalog": "poczta-polska",
       "slug": "seguimento-poczta-polska",
@@ -10061,6 +10093,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "sledzenie-gls-france",
       "title": "GLS France śledzenie: statusy, Relais GLS i kontakt",
       "name": "GLS France",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "sledzenie-gls-italy",
+      "title": "Śledzenie GLS Italy: numery, statusy i nieudane dostawy",
+      "name": "GLS Italy",
       "color": "#ffdd00"
     },
     {

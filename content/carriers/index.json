@@ -29,7 +29,7 @@
   { "id": "ctt-express", "catalog": "ctt-express", "name": "CTT Express", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
   { "id": "dpd-fr", "catalog": "dpd-fr", "name": "DPD France", "languages": ["en", "fr"] },
   { "id": "gls-fr", "catalog": "gls-fr", "name": "GLS France", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "gls-it", "catalog": "gls-it", "name": "GLS Italy", "languages": ["en", "it"] },
+  { "id": "gls-it", "catalog": "gls-it", "name": "GLS Italy", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
   { "id": "poczta-polska", "catalog": "poczta-polska", "name": "Poczta Polska", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
   { "id": "orlen-paczka", "catalog": "orlen-paczka", "name": "ORLEN Paczka", "languages": ["en", "pl"] },
   { "id": "austrian-post", "catalog": "austrian-post", "name": "Austrian Post", "languages": ["en", "de", "fr", "es", "it", "pt", "pl"] },

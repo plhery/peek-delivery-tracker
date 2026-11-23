@@ -24535,7 +24535,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -24550,7 +24551,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "asked": [
       "dhl-ecommerce"
@@ -25008,7 +25010,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "asked": [
       "dhl-ecommerce"
@@ -25038,7 +25041,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -25054,7 +25058,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -25070,7 +25075,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -25139,7 +25145,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -25155,7 +25162,8 @@
     "confidence": "low",
     "candidates": [
       "vinted-go",
-      "dhl-ecommerce"
+      "dhl-ecommerce",
+      "tnt"
     ],
     "preferred": [
       "vinted-go"
@@ -26036,6 +26044,7 @@
       "dhl-ecommerce",
       "correos-express",
       "canada-post",
+      "tnt",
       "evri-uk"
     ],
     "asked": [
@@ -38973,6 +38982,31 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "297-72328572",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "dhl-ecommerce-pl",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "dhl-ecommerce-pl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics"
     ]
   },
   {

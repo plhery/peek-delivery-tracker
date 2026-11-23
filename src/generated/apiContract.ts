@@ -5252,6 +5252,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^(?!1[78])\\d{16}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^1[78]\\d{14}$",
+        "confidence": "low",
+        "lastResort": true
       }
     ],
     "trackingUrlTemplate": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons={trackingNumber}",
@@ -66676,7 +66681,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Ocean Network Express",
     "aliases": [
       "ONE",
-      "ONE Line"
+      "ONE Line",
+      "ONE Ocean Network Express"
     ],
     "color": "#e5007e",
     "selectable": true,
@@ -68272,6 +68278,28 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://szprd.rtb56.com/track_query.aspx"
+  },
+  "china-airlines-cargo": {
+    "displayName": "China Airlines Cargo",
+    "aliases": [
+      "China Airlines",
+      "華航貨運"
+    ],
+    "countries": [
+      "TW"
+    ],
+    "color": "#B51124",
+    "selectable": true,
+    "timezone": "Asia/Taipei",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "china-airlines-cargo"
+    },
+    "trackingUrlTemplate": "https://icargowebportal.china-airlines.com/icargoneoportal/app/main/#/app/tracking/awb",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://icargowebportal.china-airlines.com/icargoneoportal/app/main/#/app/tracking/awb",
+    "helpUrl": "https://cargo.china-airlines.com/CCNetv2/content/home/index.aspx"
   }
 } as const;
 
@@ -70356,7 +70384,8 @@ export const CARRIER_IDS = [
   "atc-logistical",
   "correos-guatemala",
   "just-ship-sg",
-  "prd"
+  "prd",
+  "china-airlines-cargo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -17,7 +17,7 @@ Kuayuan Express cross-border parcel codes are 14 characters long, starting with 
 | `3KAA6101548291` | 14-character Kuayuan Express waybill (`3` + 3 letters + `YMMDD` date digits + 5-digit serial). |
 | `3KBC6102873914` | Alternative 14-character Kuayuan Express cross-border parcel code. |
 
-Once a parcel clears import customs in Europe or the United States, Kuayuan assigns or links a destination partner's last-mile tracking code (`server_hawbcode`, for example a [DPD Germany](carrier:dpd-de), [USPS](carrier:usps), [Royal Mail](carrier:royal-mail) or [DHL](carrier:dhl) barcode) alongside the original 14-character Kuayuan number. See [tracking number formats](guide:tracking-number-formats).
+Kuayuan can also give the number of the line it hands the parcel to (`server_hawbcode`), such as a [DPD Germany](carrier:dpd-de) barcode, beside its own 14-character number. See [tracking number formats](guide:tracking-number-formats).
 
 ## What Kuayuan Express tracking statuses mean
 
@@ -35,7 +35,7 @@ Kuayuan's tracking system pairs short uppercase scan codes with English descript
 | `UE` | Parcel returned to sender after failed delivery or refusal. | "Returned to sender" |
 | `CC` | Successfully delivered and signed for at the destination. | "Delivered" |
 
-When Kuayuan returns a scan without one of the nine codes above (such as `Order information received`, `Customs clearance in progress` or `Out for delivery` relayed from a partner courier), Peek classifies it from its English wording.
+The `ND` scans are the line's own, in its own words: English for DPD Germany, Chinese for China Post (`中国邮政已收取邮件`). A scan with another code, or none, takes its stage from its wording.
 
 ## Delivery times, customs and local partner handoffs
 
@@ -44,7 +44,7 @@ According to [kuayuanexpress.com.cn](https://www.kuayuanexpress.com.cn/):
 - **Published transit times:** Kuayuan advertises **7–10 days** door-to-door on its US air-line general cargo route and **7–10 days** to major European countries via fixed flight schedules and local operations.
 - **Special-cargo channels:** in addition to general merchandise, Kuayuan carries battery-equipped electronics, cosmetics/liquids and health supplements using dedicated compliant channels.
 - **Customs clearance & DDP:** Kuayuan promotes double-clearance tax-included (DDP) channels for Europe and the United States using automated HS-code matching. For shipments not booked DDP, destination import VAT and customs duties (including EU charges on non-EU orders) may still apply. See [parcels held at customs](guide:customs).
-- **Local last-mile delivery:** after import clearance, local couriers — such as [DPD Germany](carrier:dpd-de) in Europe or domestic postal/courier partners in the US and UK — handle doorstep attempts, pickup shops and redelivery rules.
+- **Local delivery:** after import clearance, Kuayuan's overseas team hands the parcel to a local partner, such as [DPD Germany](carrier:dpd-de), or delivers it with its own vehicles. The local carrier sets doorstep attempts, pickup shops and redelivery.
 
 ## Kuayuan Express parcel stuck, quiet or missing
 
@@ -67,11 +67,13 @@ Official contact details published on [kuayuanexpress.com.cn](https://www.kuayua
 
 ## Track a Kuayuan Express parcel with Peek
 
-[Peek](/) checks Kuayuan Express automatically as the sole candidate when you enter a 14-character `3`-prefixed Kuayuan waybill (`3KAA6101548291` or `3KBC6102873914`, invented) and shows `"Kuayuan Express has this parcel."` once Kuayuan confirms it. If your Kuayuan code starts with another digit or you need to select it manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "跨源速递" or "Kuayuan" finds it too).
+[Peek](/) checks Kuayuan Express automatically as the sole candidate when you enter a 14-character `3`-prefixed Kuayuan waybill (`3KAA6101548291` or `3KBC6102873914`, invented) and shows "Kuayuan Express has this parcel." once Kuayuan confirms it. If your Kuayuan code starts with another digit or you need to select it manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "跨源速递" or "Kuayuan" finds it too).
 
-Peek queries Kuayuan's tracking API directly in English and displays the mapped stage ("In transit", "Delivery attempted", "Returned to sender", "Delivered", plus "Label created", "Received by carrier", "At customs", "Out for delivery", "Ready for pickup" or "Needs attention" when scan wording matches), English scan descriptions and scan codes, facility locations, destination country, recipient name and destination town when returned, handed-off local delivery carrier and tracking number when Kuayuan links a recognized partner waybill, and local wall-clock timestamps as reported by each scan (without a time-zone offset). Kuayuan's API does not return an estimated delivery date, weight or separate delivery timestamp.
+Peek reads Kuayuan's tracker in English and shows the stage ("In transit", "Delivery attempted", "Returned to sender", "Delivered", or another stage when a scan without one of the nine codes says so), the scan wording, the place and the destination country. The scan codes stay out of every Peek app, and the recipient's name and town stay private. Kuayuan gives scan times without a zone: Peek dates each scan on its place's time zone (Los Angeles's for a scan in Los Angeles, Beijing's for one in Shenzhen), a scan whose place it doesn't know on the zone of the scan beside it, and a parcel with no place at all on Beijing time, and shows them on your device's clock. When Kuayuan gives the line's number and Peek recognises that carrier, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. Kuayuan's tracker gives no estimated delivery date, weight or delivery time of its own.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Kuayuan Express." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Kuayuan Express."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Kuayuan shows an out-for-delivery scan, every 2 minutes from 6 a.m. on the clock of the newest scan's place, while Kuayuan's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Kuayuan's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Kuayuan Express." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Kuayuan Express."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, modify delivery addresses or contact Kuayuan Express or your local carrier for you.
 
@@ -95,5 +97,5 @@ Contact your online seller or marketplace first for order issues. Kuayuan Expres
 
 :::sources
 - [Kuayuan Express: Official Website & Tracker](https://www.kuayuanexpress.com.cn/) – *Shenzhen Kuayuan Express Supply Chain Co., Ltd.*, 20-number tracker, US/Europe 7–10 day routes, DDP customs, phone `+86 15013702902` and email `fanjinyun@kuayuanexpress.com`
-- [Universal Parcel Scraper: kuayuan-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuayuan-express) – 14-character waybill format, `getTrackInfoOutside` API, 9 scan codes (`AF`–`UE`), partner `server_hawbcode` handoff detection and local wall-clock handling
+- [Universal Parcel Scraper: kuayuan-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuayuan-express) – 14-character waybill format, `getTrackInfoOutside` API, 9 scan codes (`AF`–`UE`), partner `server_hawbcode` hand-over and each scan dated on its place's time zone
 :::

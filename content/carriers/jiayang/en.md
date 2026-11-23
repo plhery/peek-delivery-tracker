@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Jiayang International (*Dongguan Jiayang International Logistics Co., Ltd.*, Chinese *东莞市嘉扬国际物流有限公司* / *东莞嘉扬国际*) is a Chinese cross-border freight forwarder and e-commerce parcel carrier operating out of Shenzhen and Dongguan with domestic consolidation warehouses in Guangzhou, Shenzhen, Zhongshan, Foshan and Yiwu and overseas warehouses and offices in Dubai, Oman and Kuwait. On [jygjgyl.com](https://www.jygjgyl.com/), Jiayang specializes in door-to-door tax-included (DDP) and DDU air, sea and small-parcel dedicated lines from China to Middle Eastern destinations (UAE/Dubai, Saudi Arabia, Oman, Qatar, Bahrain, Kuwait), the United States and South Africa. You can check a shipment on [jygjgyl.com](https://www.jygjgyl.com/) or paste your `JYGJ` tracking number into the box above.
+Jiayang International (*Dongguan Jiayang International Logistics Co., Ltd.*, Chinese *东莞市嘉扬国际物流有限公司* / *东莞嘉扬国际*) is a Chinese cross-border freight forwarder and e-commerce parcel carrier headquartered in Shenzhen, with offices in Guangzhou, Shenzhen, Dubai, Oman and Kuwait, warehouses in Guangzhou, Shenzhen, Zhongshan, Foshan and Yiwu, and overseas warehouses in Dubai and Oman. On [jygjgyl.com](https://www.jygjgyl.com/), Jiayang specializes in door-to-door tax-included (DDP) and DDU air, sea and small-parcel dedicated lines from China to Middle Eastern destinations (UAE/Dubai, Saudi Arabia, Oman, Qatar, Bahrain, Kuwait), the United States and South Africa. You can check a shipment on [jygjgyl.com](https://www.jygjgyl.com/) or paste your `JYGJ` tracking number into the box above.
 
 ## Jiayang International tracking numbers (`JYGJ` format)
 
@@ -17,7 +17,7 @@ Cross-border small parcels booked through Jiayang typically carry a 16-character
 | `JYGJ4829173605YQ` | Standard 16-character Jiayang International parcel number (`JYGJ` + 10 digits + `YQ`). |
 | `JYGJ7391846208YQ` | Alternative 16-character `JYGJ...YQ` cross-border waybill example. |
 
-When you choose Jiayang International manually, its tracker also accepts other alphanumeric waybill references of 8 to 40 characters containing at least one digit. Jiayang handles the China export leg, international air or sea linehaul and customs clearance before transferring the parcel to a local courier in the destination country. See [tracking number formats](guide:tracking-number-formats).
+When you choose Jiayang International manually, its tracker also accepts other alphanumeric waybill references of 8 to 40 characters containing at least one digit. Jiayang's services run from export in China and the international air or sea leg to customs clearance and local delivery (当地派送) in the destination country. See [tracking number formats](guide:tracking-number-formats).
 
 ## What Jiayang International tracking statuses mean
 
@@ -31,17 +31,16 @@ Jiayang's tracking portal runs on the same English-and-Chinese cross-border trac
 | `Arrive at the destination international airport` | Landed at the international gateway airport in the destination country. | "In transit" |
 | `Import customs clearance` (with port or city name) | Submitted to destination import customs for clearance and inspection. | "At customs" |
 | `Leave the ... processing center`, `Arrived at logistics carrier facility in transit to next facility`, `Accepted at logistics carrier regional destination facility`, `Arrive at the last mile sorting and distribution center`, `Leaving the sorting center` | Handed over to the destination last-mile carrier (often anonymized as "logistics carrier") and moving through local hubs. | "In transit" |
-| `Out for delivery` | Out with the local delivery courier for final drop-off. | "Out for delivery" |
 | `Delivered` | Delivered to the recipient's address by the destination partner. | "Delivered" |
 
-Note that Jiayang's tracker prints **every timestamp on Beijing time (`UTC+8`)**, including events that take place in the United States, the Middle East or Europe, so a local morning delivery abroad may display an evening Beijing clock in raw carrier feeds.
+Note that Jiayang's tracker prints **every timestamp on Beijing time (`UTC+8`)**, including events that take place in the United States, the Middle East or Europe, so a local morning delivery abroad may display an evening Beijing clock in raw carrier feeds. Jiayang's tracker has shown no out-for-delivery scan so far: a parcel goes from the last-mile sorting centre to `Delivered`.
 
 ## Cross-border dedicated lines, local delivery and customs
 
 According to [Jiayang Company Profile](https://www.jygjgyl.com/assets/12779/index.html), [E-Commerce Small Parcels](https://www.jygjgyl.com/assets/12777/index.html) and [US Dedicated Line](https://www.jygjgyl.com/assets/12783/index.html):
 
 - **Regional hubs:** Jiayang consolidates parcels at warehouses in Guangzhou, Shenzhen, Zhongshan, Foshan and Yiwu and operates overseas consolidation warehouses in Dubai and Oman for Gulf shipments alongside US air/sea DDP and FBA channels.
-- **Last-mile partner handoff:** Jiayang does not run a consumer doorstep delivery network outside its regional partners; once destination clearance finishes, a local postal or parcel courier (such as [USPS](carrier:usps) or regional Gulf couriers) completes final delivery, often appearing in Jiayang's feed simply as "logistics carrier".
+- **Local delivery:** Jiayang lists local delivery (当地派送) among its services. Its tracker calls the last-mile network only "logistics carrier" and gives no local tracking number.
 - **Customs clearance:** many merchant bookings use double-clearance tax-included (DDP) channels, while DDU shipments require the recipient to settle import VAT or duties with local customs or the local delivery carrier. See [parcels held at customs](guide:customs).
 
 ## Jiayang parcel stuck, quiet or missing
@@ -63,11 +62,13 @@ Official company details published on [jygjgyl.com](https://www.jygjgyl.com/) an
 
 ## Track a Jiayang International parcel with Peek
 
-[Peek](/) checks Jiayang International automatically as the sole candidate when you enter a `JYGJ` number (`JYGJ4829173605YQ` or `JYGJ7391846208YQ`, invented) and shows `"Jiayang International has this parcel."` once Jiayang's tracker confirms it; Peek also recognises pasted `www.jygjgyl.com/index/tracknumber/track?nos=` links. If you ever need to choose Jiayang International manually (for example with a non-`JYGJ` reference), tap "Change" while adding or "Change carrier" on the parcel screen (searching "嘉扬国际", "JYGJ" or "Dongguan Jiayang" finds it too).
+[Peek](/) checks Jiayang International automatically as the sole candidate when you enter a `JYGJ` number (`JYGJ4829173605YQ` or `JYGJ7391846208YQ`, invented) and shows "Jiayang International has this parcel." once Jiayang's tracker confirms it; Peek also recognises pasted `www.jygjgyl.com/index/tracknumber/track?nos=` links. If you ever need to choose Jiayang International manually (for example with a non-`JYGJ` reference), tap "Change" while adding or "Change carrier" on the parcel screen (searching "嘉扬国际", "JYGJ" or "Dongguan Jiayang" finds it too).
 
-Peek queries Jiayang's tracking API directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "At customs", "Out for delivery", "Delivered", plus exception or return stages when scan wording matches), English scan descriptions, destination country, parsed abroad city/state/ZIP locations when included in the scan text, and full timestamps converted from Jiayang's Beijing (`Asia/Shanghai`) clock. Jiayang's tracker does not supply an estimated delivery date, weight, signatory name, service name or separate local-carrier tracking number.
+Peek reads Jiayang's tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "At customs", "Delivered", or another stage when a scan's wording says so), the English scan wording, the place without its postcode, and the destination country. Jiayang gives each scan with Beijing's UTC offset, overseas scans included, and Peek shows them on your device's clock. Jiayang's tracker gives no estimated delivery date, weight, signer's name, service name or local carrier's tracking number.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jiayang International." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jiayang International."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Jiayang shows an out-for-delivery scan (none so far), every 2 minutes from 6 a.m. Beijing time, while Jiayang's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Jiayang's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jiayang International." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jiayang International."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, look up unlinked local carrier numbers or contact Jiayang International for you.
 
@@ -91,7 +92,7 @@ Contact the online retailer or marketplace where you placed your order first, as
 
 :::sources
 - [Jiayang International: Official Website](https://www.jygjgyl.com/) – cargo tracking, Middle East/US/South Africa special lines, Dongguan address and hotline `186 8244 9187`
-- [Jiayang International: Company Profile](https://www.jygjgyl.com/assets/12779/index.html) – Shenzhen HQ, Guangzhou/Shenzhen/Zhongshan/Foshan/Yiwu domestic warehouses and Dubai/Oman/Kuwait overseas hubs
+- [Jiayang International: Company Profile](https://www.jygjgyl.com/assets/12779/index.html) – Shenzhen headquarters, offices in Guangzhou, Shenzhen, Dubai, Oman and Kuwait, warehouses in Guangzhou/Shenzhen/Zhongshan/Foshan/Yiwu and overseas warehouses in Dubai and Oman
 - [Jiayang International: E-Commerce Small Parcels](https://www.jygjgyl.com/assets/12777/index.html) – cross-border small-parcel consolidation and tracking
 - [Jiayang International: US Dedicated Line](https://www.jygjgyl.com/assets/12783/index.html) – US DDP/DDU air, sea and FBA delivery channels
 - [Universal Parcel Scraper: jiayang](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/jiayang) – `JYGJ...YQ` format, `jygjgyl.com` link rule, CTTYEX/LinHan status mapping, Beijing-time conversion and destination country parsing

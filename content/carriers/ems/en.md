@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**EMS** (*Express Mail Service*) is the international postal express network established by the **Universal Postal Union (UPU)** and coordinated by the **EMS Cooperative** ([ems.post](https://www.ems.post/en)). Rather than operating its own aircraft or vans, EMS connects designated national postal operators worldwide — such as [Japan Post](carrier:japan-post), [China Post](carrier:china-post), [Korea Post](carrier:korea-post), [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [La Poste](carrier:la-poste), [Poste Italiane](carrier:poste-italiane) and [Australia Post](carrier:australia-post) — so express documents and merchandise move under one standardized 13-character identifier. You can look up an item on the global EMS tracker at [items.ems.post](https://items.ems.post/) or paste your EMS item number into the box above.
+**EMS** (*Express Mail Service*) is the international postal express service for documents and merchandise. The **Universal Postal Union (UPU)** created the **EMS Cooperative** ([ems.post](https://www.ems.post/en)) to develop it; the Cooperative counted 179 members in June 2026. Rather than operating its own aircraft or vans, EMS connects designated national postal operators worldwide — such as [Japan Post](carrier:japan-post), [China Post](carrier:china-post), [Korea Post](carrier:korea-post), [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [La Poste](carrier:la-poste), [Poste Italiane](carrier:poste-italiane) and [Australia Post](carrier:australia-post) — so express documents and merchandise move under one standardized 13-character identifier. You can look up an item on the global EMS tracker at [items.ems.post](https://items.ems.post/) or paste your EMS item number into the box above.
 
 ## EMS tracking numbers (13-character UPU S10 format)
 
@@ -43,14 +43,14 @@ The EMS Cooperative public tracking table at [items.ems.post](https://items.ems.
 
 Because EMS is a cooperative network of national posts listed in the [EMS Operators directory](https://www.ems.post/en/global-network/ems-operators), two different postal organizations handle every cross-border item:
 
-- **Origin post vs. destination post:** the origin postal operator handles collection, export clearance and international dispatch; once `Arrived at destination import office` appears, your own national postal operator (or its designated express subsidiary, such as Chronopost in France or Parcelforce in the UK) controls import clearance, delivery attempts, redelivery and post-office collection holding periods.
+- **Origin post vs. destination post:** the origin postal operator handles collection, export clearance and international dispatch; once `Arrived at destination import office` appears, your own national postal operator (or its express arm, such as Parcelforce in the UK) controls import clearance, delivery attempts, redelivery and post-office collection holding periods.
 - **Check both EMS and your local post:** the global EMS feed relays standardized EDI milestones, while your destination post's own tracking page often adds richer domestic details such as customs payment links, pickup-office addresses, delivery windows or redelivery scheduling.
 - **Customs duties and import VAT:** cross-border EMS parcels are subject to destination customs rules, import VAT, postal clearance fees and customs duties (including EU non-EU import charges). If tracking pauses on `Presented to import customs` or `Held at destination import office`, watch for an official letter, email or portal notice from your local post. See [parcels held at customs](guide:customs).
 
 ## EMS parcel delayed, stuck or missing
 
 - **Silent gap between export and import:** international airmail dispatches often go several days without a scan between `Departed from export office` and `Arrived at destination import office`, especially during peak seasons or when waiting for customs intake. See [why tracking stops updating](guide:tracking-not-updating).
-- **Only the origin or destination post can investigate:** as stated on [EMS Tracking](https://www.ems.post/en/global-network/tracking), the EMS Unit and the UPU do not provide tracking by phone and do not intervene in service disputes between postal operators and customers. For lost or damaged EMS items, the **sender** normally files an official inquiry or indemnity claim with the origin postal operator, while the recipient can contact the destination EMS operator for local delivery or customs queries. See [lost parcel](guide:lost-parcel), [damaged parcel](guide:damaged-parcel), [delivered but not received](guide:delivered-not-received) and [returned to sender](guide:returned-to-sender).
+- **Your local post helps, not the UPU:** as stated on [EMS Tracking](https://www.ems.post/en/global-network/tracking), the EMS Unit and the UPU do not provide tracking by phone and do not intervene in service disputes between postal operators and customers. For a missing EMS item, EMS's [contacts page](https://www.ems.post/en/about-us/contacts-0) sends you to your local EMS customer service or call centre, which can answer general EMS queries, find your tracking number and help locate the item. See [lost parcel](guide:lost-parcel), [damaged parcel](guide:damaged-parcel), [delivered but not received](guide:delivered-not-received) and [returned to sender](guide:returned-to-sender).
 
 ## EMS customer service and official operator directory
 
@@ -66,9 +66,11 @@ Because each country's EMS service is operated by its local designated post, [EM
 
 When you enter a 13-character `E`-prefixed S10 code (`EA482917367JP` or `EE739184627CN`, invented) into [Peek](/), Peek normally routes it first to the origin postal operator identified by the final two letters (such as [Japan Post](carrier:japan-post) or [China Post](carrier:china-post)), because EMS itself has no standalone auto-detection rule. To query the global **EMS** Cooperative tracker instead, tap "Change" while adding or "Change carrier" on the parcel screen and select **EMS** (searching "Express Mail Service" or "EMS Post" finds it too). Peek also recognises pasted `items.ems.post/api/publicTracking/track?itemId=` tracking links directly as EMS.
 
-Peek queries `items.ems.post` directly (verifying that the code is a valid `E`-prefixed S10 number with a valid check digit) and displays the mapped stage ("Received by carrier", "In transit", "At customs", "Out for delivery", "Delivery attempted", "Needs attention", "Returned to sender", "Delivered"), English EMS event wording, facility location and local wall-clock timestamps as reported by each postal exchange (preserving the cross-border scan order without inventing a time-zone offset). The EMS public table does not supply an estimated delivery date, weight, signatory name or separate delivery timestamp.
+Peek reads `items.ems.post` directly, once it has checked that the code is an `E` S10 number with a valid check digit, and shows the stage ("Received by carrier", "In transit", "At customs", "Out for delivery", "Delivery attempted", "Needs attention", "Returned to sender", "Delivered"), the English EMS wording and the office. EMS gives scan times without a zone: Peek dates each scan on its office's time zone (Tokyo's for `TOKYO INTERNATIONAL`, Paris's for `ROISSY CDG`), and a scan without a place on the zone of the scan beside it, and shows them on your device's clock. The EMS table gives no estimated delivery date, weight, signer's name or separate delivery time.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking EMS." and displays "Get help from EMS", which opens the EMS Cooperative customer-support directory. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking EMS."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day EMS shows `Out for delivery`, every 2 minutes from 6 a.m. on the clock of the newest scan's place, while the EMS tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When the EMS tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking EMS.", with a "Get help from EMS" link to EMS's contact directory. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking EMS."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs, pay import charges or contact your local postal operator for you.
 
@@ -80,7 +82,7 @@ An EMS tracking number is a 13-character UPU S10 code starting with `E`, a secon
 
 ### Who delivers my EMS parcel in my country?
 
-EMS parcels are delivered by your country's designated national postal operator (or its express arm), such as [USPS](carrier:usps) in the United States, [Royal Mail](carrier:royal-mail) / Parcelforce in the UK, [La Poste](carrier:la-poste) / Chronopost in France, [Poste Italiane](carrier:poste-italiane) in Italy or [Australia Post](carrier:australia-post) in Australia.
+EMS parcels are delivered by your country's designated national postal operator (or its express arm), such as [USPS](carrier:usps) in the United States, [Royal Mail](carrier:royal-mail) / Parcelforce in the UK, [La Poste](carrier:la-poste) in France, [Poste Italiane](carrier:poste-italiane) in Italy or [Australia Post](carrier:australia-post) in Australia.
 
 ### Why did my EMS parcel stop updating after `Departed from export office`?
 
@@ -88,7 +90,7 @@ After `Departed from export office`, the parcel is in international air transit 
 
 ### Who do I contact if an EMS parcel is stuck or lost?
 
-Do not call the UPU or EMS Unit — they do not handle individual parcel support. Use [ems.post/en/about-us/contacts-0](https://www.ems.post/en/about-us/contacts-0) to find your local EMS operator's helpline for delivery or customs questions, and ask the sender to open an official investigation with the origin postal operator if the parcel is missing.
+The UPU and the EMS Unit give no tracking by phone and do not step into disputes between posts and their customers. Use [ems.post/en/about-us/contacts-0](https://www.ems.post/en/about-us/contacts-0) to find your local EMS customer service or call centre, which can help locate your item.
 
 :::sources
 - [EMS Cooperative: Official Website](https://www.ems.post/en) – UPU Express Mail Service Cooperative overview and global postal network
@@ -96,5 +98,5 @@ Do not call the UPU or EMS Unit — they do not handle individual parcel support
 - [EMS Cooperative: Global Operator Contacts](https://www.ems.post/en/about-us/contacts-0) – A–Z national EMS customer service directory by region (help URL linked by Peek)
 - [EMS Cooperative: Operators A–Z](https://www.ems.post/en/global-network/ems-operators) – designated national postal operator network
 - [EMS Public Tracking Portal](https://items.ems.post/) – global EMS public tracking lookup
-- [Universal Parcel Scraper: ems](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ems) – S10 `E`-prefix check-digit validation, `items.ems.post` link rule, 18-status EMS Cooperative mapping and local wall-clock ordering
+- [Universal Parcel Scraper: ems](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ems) – S10 `E`-prefix check-digit validation, `items.ems.post` link rule, 18-status EMS Cooperative mapping and each scan dated on its office's time zone
 :::

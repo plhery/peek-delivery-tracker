@@ -26,7 +26,7 @@ O seguimento da SingPost lista primeiro o registo mais recente, com data, hora e
 | A SingPost indica | O que significa para ti |
 | --- | --- |
 | `SingPost has received your order information, but not your item yet` | O remetente registou o envio. A SingPost ainda não tem a encomenda. |
-| `Accepted at Drop-Off Point` | O remetente entregou o envio num ponto de recolha. |
+| `Accepted at Drop-Off Point` | O remetente deixou o envio num ponto de depósito. |
 | `Item received by SingPost` | A SingPost recebeu o envio. |
 | `Item Received at Sorting Facility`, `Item is with SingPost (Singapore) for processing.` | Em triagem em Singapura. |
 | `Further processing in progress` | Continua em tratamento. |
@@ -72,7 +72,7 @@ Fora da UE aplicam-se as regras do teu país. Mais detalhes em [encomendas retid
 
 **Perdida ou danificada.** Reclama pelo formulário online da SingPost até 30 dias após a data de envio, com número de seguimento, dados de remetente e destinatário, descrição e valor do conteúdo. A SingPost indemniza até ao valor declarado, com limite de 150 S$ em Speedpost International e 68 S$ em Speedpost Saver International. Numa compra online avisa também a loja: vê [encomendas perdidas](guide:lost-parcel).
 
-**Entregue mas não chegou.** Em Singapura, verifica a caixa de correio e a calha exterior do apartamento, pergunta em casa e contacta a SingPost, que pode enviar prova de entrega para serviços com assinatura. Na Europa entregou o teu correio: começa pelo seguimento dele e vê [entregue mas não recebida](guide:delivered-not-received).
+**Entregue mas não chegou.** Em Singapura, verifica a caixa de correio e o armário técnico (riser) à porta do apartamento, pergunta em casa e contacta a SingPost, que pode enviar prova de entrega para serviços com assinatura. Na Europa entregou o teu correio: começa pelo seguimento dele e vê [entregue mas não recebida](guide:delivered-not-received).
 
 **Devolvida.** Uma encomenda regressa após 3 tentativas falhadas, 10 dias úteis sem levantamento ou 14 dias sem pagamento de GST ou direitos. Vê [devolvida ao remetente](guide:returned-to-sender).
 
@@ -95,7 +95,7 @@ O Peek apresenta cada registo no texto inglês da SingPost com o local e enquadr
 
 Quando a SingPost indica o país de destino — ou não indica nenhum e acompanhas a encomenda fora de Singapura —, o Peek consulta também o correio desse país com o mesmo número `SG`: [DHL](carrier:dhl) na Alemanha, [La Poste](carrier:la-poste) em França, [Poste Italiane](carrier:poste-italiane) em Itália, [Correos](carrier:correos-spain) em Espanha, [PostNL](carrier:postnl), [bpost](carrier:bpost), [Correios da Áustria](carrier:austrian-post), [Swiss Post](carrier:swiss-post), [Poczta Polska](carrier:poczta-polska), [CTT](carrier:ctt) em Portugal, PostNord na Suécia e Dinamarca, [Royal Mail](carrier:royal-mail), An Post, [USPS](carrier:usps), [Canada Post](carrier:canada-post) e [Australia Post](carrier:australia-post). Muda para esse correio mal ele mostre registos mais recentes e conserva o histórico da SingPost. No sentido inverso, Singapura como destino não basta para o Peek consultar a Singapore Post: só o faz quando a transportadora inicial nomeia a SingPost como entregadora, como pode acontecer com a Janio.
 
-Enquanto manténs a encomenda aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek verifica até de 10 em 10 minutos, e a partir das 6:00 (hora local) do dia em que sai para distribuição até de 2 em 2 minutos enquanto o site próprio da SingPost ou do teu correio responder (Royal Mail e Poste Italiane são verificados de hora em hora, PostNL e USPS até de 30 em 30 minutos; através de serviços de seguimento, até de 15 em 15 minutos). Após dois dias sem novidades (12 horas enquanto a encomenda continuar em «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora em hora; e se ficar em «Etiqueta criada» durante sete dias, de 6 em 6 horas.
+Enquanto manténs a encomenda aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek verifica até de 10 em 10 minutos, e a partir das 6:00 (hora local) do dia em que sai para distribuição até de 2 em 2 minutos enquanto o site próprio da SingPost ou do teu correio responder (Royal Mail é verificada de hora em hora; Poste Italiane, PostNL e USPS até de 30 em 30 minutos; através de serviços de seguimento, até de 15 em 15 minutos). Após dois dias sem novidades (12 horas enquanto a encomenda continuar em «Etiqueta criada» ou «Aceite pela transportadora»), o Peek verifica de hora em hora; e se ficar em «Etiqueta criada» durante sete dias, de 6 em 6 horas.
 
 Se uma encomenda ainda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novo registo, o Peek assinala-a com «Sem atualizações há quatro dias» (ou «Sem atualizações desde …»), explica: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Singapore Post.» e mostra «Pede ajuda a Singapore Post». Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a SingPost, o teu correio nem a loja por ti.
 

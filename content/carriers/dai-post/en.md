@@ -14,9 +14,9 @@ DAI Post tracks the numbers shops print on their parcels, so they come in severa
 
 | Number (invented) | What it is |
 | --- | --- |
-| `NZC000000000` | NZC and nine digits: in Peek's code, DAI Post's number for parcels to New Zealand. Peek names DAI Post at once. |
-| `00393580940000000003` | 20 digits starting `0039358094`, the last a check digit: an SSCC, a label's barcode number, which the label may print as `(00) 3 9358094 000000000 3`. Other carriers use 20 digits too, so Peek can't be sure from the shape. |
-| `ABC00000000000` | A shop's own reference, letters then digits. Peek doesn't recognise it by its shape. |
+| `NZC482910375` | NZC and nine digits: in Peek's code, DAI Post's number for parcels to New Zealand. Peek names DAI Post at once. |
+| `00393580944829103754` | 20 digits starting `0039358094`, the last a check digit: an SSCC, a label's barcode number, which the label may print as `(00) 3 9358094 482910375 4`. Other carriers use 20 digits too, so Peek can't be sure from the shape. |
+| `KPR48291037561` | A shop's own reference, letters then digits. Peek doesn't recognise it by its shape. |
 
 Spaces, brackets and lower case don't matter. If one digit of a 20-digit number is wrong, its check digit fails and Peek won't link it to DAI Post: check the number. More in [how to find a tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
@@ -70,7 +70,7 @@ DAI Post's terms add that if you're not there, the parcel may be left in a secur
 
 ## DAI Post tracking not updating, lost or returned
 
-**No new line for days.** DAI Post scans parcels at key points only, and says a parcel still moves between them. On interstate or regional deliveries, it can seem to stand still for days. After four days without news, Peek flags it with the day of the last line ("No tracking update since Mon 12 Oct"). See [why tracking stops updating](guide:tracking-not-updating).
+**No new line for days.** DAI Post scans parcels at key points only, and says a parcel still moves between them. On interstate or regional deliveries, it can seem to stand still for days. If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DAI Post" link. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Still "Label created".** DAI Post doesn't have the parcel yet. If it stays like this for days, ask the shop whether it really sent it.
 
@@ -80,7 +80,7 @@ DAI Post's terms add that if you're not there, the parcel may be left in a secur
 
 ## DAI Post customer service and contact
 
-DAI Post's channels, as read on 1 November 2026:
+DAI Post's channels:
 
 - **Phone:** Australia +61 3 8586 1200, New Zealand +64 800 451 718, Singapore +65 800 321 1587. No opening hours are given.
 - **Email:** consumercare@daipost.com.
@@ -90,14 +90,14 @@ DAI Post's channels, as read on 1 November 2026:
 
 [Peek](/) follows a DAI Post parcel with the number alone: no account or postcode.
 
-- **An NZC number.** Peek names DAI Post at once ("Detected carrier").
+- **An NZC number.** Peek names DAI Post at once ("Detected carrier"). If DAI Post still doesn't know the number two days after its first answer, Peek asks you to check it, choose another carrier or delete the parcel.
 - **A 20-digit number starting 0039358094.** Paste it all the same: Peek follows more than 4,500 carriers. While it checks, you see "Checking tracking services…", and DAI Post is among the first asked. If DAI Post has it, Peek names it. If not yet, the parcel shows "Waiting for DAI Post’s first scan" and the card says "Probably DAI Post"; after a week, Peek suggests checking the number with the sender. To choose DAI Post yourself, tap "Change": it's under "Fits this number".
 - **Any other number.** Paste it all the same, then tap "Change" and pick DAI Post (search DAI Post or Parcel Right). On a parcel already added, use "Change carrier".
 - **A link.** Paste a tracking link from daipost.com, parcelright.com.au or parcelrig.ht: Peek takes the number and names DAI Post straight away.
 
 Peek shows the status, each line in DAI Post's words, the town and country of each scan, the expected delivery date when DAI Post gives one, and the delivery time. It shows no pick up point, service name, weight or proof of delivery. "Open the DAI Post website" opens the number on DAI Post's tracker. In Peek's code, some [Asendia](carrier:asendia) parcels, and some [ePost Global](carrier:epost-global) parcels to New Zealand, reach DAI Post: their tracking shows its scans.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DAI Post scans the parcel out for delivery, while DAI Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. local time on the day DAI Post scans it out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". Notifications can follow "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
 
 ## Questions about DAI Post tracking
 

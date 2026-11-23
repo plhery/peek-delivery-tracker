@@ -98,7 +98,7 @@ Innych formatów Peek nie rozpoznaje automatycznie jako DSV. Wklej je mimo to: P
 
 Peek pyta najpierw myDSV. Jeśli myDSV nie zna dawnego numeru drogowego lub kodu paczki DB Schenker, Peek sprawdza system Schenker – wyłącznie dla przesyłek drogowych; dla lotniczych i morskich widocznych tylko tam użyj „Track Schenker shipment” na dsv.com.
 
-Peek pokazuje status, każdy etap w brzmieniu DSV z miastem i krajem oraz przewidywany dzień doręczenia. DSV podaje lokalny czas skanu bez strefy czasowej: Peek ustala strefę po miejscu (mieście, porcie, kodzie lotniska) lub sąsiednich skanach, a w ostateczności przyjmuje czas kopenhaski, więc sporadycznie godzina może być nieścisła. Peek pomija nazwę usługi, miasto nadawcy, twój adres, kody pocztowe i pasek postępu DSV, a z systemu Schenker strony, referencje, towary i nazwisko podpisującego.
+Peek pokazuje status, każdy etap w brzmieniu DSV z miastem i krajem oraz przewidywany dzień doręczenia. DSV podaje lokalny czas skanu bez strefy czasowej: Peek ustala strefę po miejscu (mieście, porcie, kodzie lotniska) lub sąsiednich skanach, a w ostateczności przyjmuje czas kopenhaski, więc sporadycznie godzina może być nieścisła. Imię i nazwisko odbiorcy, gdy DSV je podaje, widzisz tylko ty, pod „Odbiorca”, a miasto z adresu doręczenia może kończyć trasę na twojej mapie, dopóki przesyłka jest w drodze; udostępnione linki nie pokazują ani jednego, ani drugiego. Peek pomija nazwę usługi, miasto nadawcy, ulicę, kody pocztowe i pasek postępu DSV, a z systemu Schenker nadawcę, referencje, towary i nazwisko podpisującego.
 
 Jeśli szwedzka firma Early Bird przekaże twoją paczkę do DSV lub DB Schenker, Peek wskaże DSV jako doręczyciela i zacznie je śledzić, gdy pojawią się nowsze skany.
 

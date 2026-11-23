@@ -98,7 +98,7 @@ Andere Nummernformate erkennt Peek nicht automatisch als DSV. Füge sie trotzdem
 
 Peek fragt zuerst myDSV ab. Kennt myDSV eine frühere DB-Schenker-Landverkehrsnummer oder einen Packstück-Barcode nicht, wechselt Peek zum Schenker-Tracker – dort aber nur für Straßenfracht. Luft- oder Seefracht, die nur dort steht, prüfst du direkt unter „Track Schenker shipment“ auf dsv.com.
 
-Peek zeigt Status, jeden Schritt im DSV-Wortlaut samt Ort und Land sowie den erwarteten Liefertag. DSV liefert Ortszeiten ohne Zeitzone: Peek leitet die Zone aus Ort, Hafen oder Flughafencode oder benachbarten Scans ab, sonst gilt Kopenhagener Zeit, was vereinzelt abweichen kann. Peek lässt Servicename, Absenderort, deine Adresse, Postleitzahlen, DSVs Fortschrittsbalken sowie beim Schenker-Tracker Beteiligte, Referenzen, Güter und den Namen des Unterzeichners weg.
+Peek zeigt Status, jeden Schritt im DSV-Wortlaut samt Ort und Land sowie den erwarteten Liefertag. DSV liefert Ortszeiten ohne Zeitzone: Peek leitet die Zone aus Ort, Hafen oder Flughafencode oder benachbarten Scans ab, sonst gilt Kopenhagener Zeit, was vereinzelt abweichen kann. Den Namen des Empfängers, wenn DSV ihn nennt, zeigt Peek nur dir unter „Empfänger“, und den Ort der Lieferadresse kann deine eigene Karte als Ziel der Route zeigen, solange die Sendung unterwegs ist; geteilte Links zeigen beides nicht. Peek lässt Servicename, Absenderort, Straße, Postleitzahlen, DSVs Fortschrittsbalken sowie beim Schenker-Tracker Absender, Referenzen, Güter und den Namen des Unterzeichners weg.
 
 Übergibt das schwedische Unternehmen Early Bird dein Paket an DSV oder DB Schenker, nennt Peek DSV als zustellenden Paketdienst und folgt DSV, sobald neuere Scans vorliegen.
 

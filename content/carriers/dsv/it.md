@@ -98,7 +98,7 @@ Peek non individua DSV da altri formati. Incollali comunque: Peek traccia oltre 
 
 Peek interroga prima myDSV. Un ex codice stradale o barcode DB Schenker ignoto a myDSV passa al portale Schenker, che Peek legge solo per spedizioni su strada: per spedizioni aeree o marittime presenti solo lì usa «Track Schenker shipment» su dsv.com.
 
-Peek mostra lo stato, ogni tappa nella dicitura DSV con città e Paese e il giorno di consegna previsto. DSV riporta l'ora locale senza fuso orario: Peek ricava il fuso dal luogo (città, porto o codice aeroporto) o dalle scansioni vicine, altrimenti usa l'ora di Copenaghen, quindi talvolta può essere impreciso. Peek omette nome del servizio, città del mittente, tuo indirizzo, codici postali e barra di avanzamento DSV, e dal portale Schenker parti coinvolte, riferimenti, merci e firmatario.
+Peek mostra lo stato, ogni tappa nella dicitura DSV con città e Paese e il giorno di consegna previsto. DSV riporta l'ora locale senza fuso orario: Peek ricava il fuso dal luogo (città, porto o codice aeroporto) o dalle scansioni vicine, altrimenti usa l'ora di Copenaghen, quindi talvolta può essere impreciso. Il nome del destinatario, quando DSV lo indica, lo vedi solo tu, sotto «Destinatario», e la città dell'indirizzo di consegna può chiudere il percorso della tua mappa mentre la spedizione è in viaggio; i link condivisi non mostrano né l'uno né l'altra. Peek omette nome del servizio, città del mittente, via, codici postali e barra di avanzamento DSV, e dal portale Schenker mittente, riferimenti, merci e firmatario.
 
 Se il corriere svedese Early Bird affida il pacco a DSV o DB Schenker, Peek indica DSV come corriere incaricato e lo segue appena DSV pubblica scansioni più recenti.
 

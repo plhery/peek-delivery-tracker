@@ -98,7 +98,7 @@ Peek can't tell DSV by any other number's shape. Paste it all the same: Peek fol
 
 Peek asks myDSV first. A former DB Schenker road number or package barcode that myDSV doesn't know goes to the Schenker tracker, which Peek reads for road shipments only: for an air or sea shipment found only there, use "Track Schenker shipment" on dsv.com.
 
-Peek shows the status, each step in DSV's wording with its town and country, and the expected delivery day. DSV gives each scan's local time without a time zone; Peek works out the zone from the scan's place (a town, a port, an airport code) or the scans around it, else Copenhagen time, so now and then it can be wrong. Peek leaves out the service name, the sender's town, your address, postcodes and DSV's progress bar, and from the Schenker tracker the parties, references, goods and the name of whoever signed.
+Peek shows the status, each step in DSV's wording with its town and country, and the expected delivery day. DSV gives each scan's local time without a time zone; Peek works out the zone from the scan's place (a town, a port, an airport code) or the scans around it, else Copenhagen time, so now and then it can be wrong. The recipient's name, when DSV gives it, shows under "Recipient" on your own parcel page, and the delivery address's town can end your own map's route while the shipment is on its way; shared links show neither. Peek leaves out the service name, the sender's town, the street address, postcodes and DSV's progress bar, and from the Schenker tracker the sender, references, goods and the name of whoever signed.
 
 If Early Bird, a Swedish delivery company, hands your parcel over to DSV or DB Schenker, Peek names DSV as the carrier delivering it and follows DSV once DSV shows fresh scans.
 

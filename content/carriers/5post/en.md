@@ -16,10 +16,10 @@ You can check a parcel on [fivepost.ru](https://fivepost.ru/) (under *Где м�
 
 | Format (invented) | What it is |
 | --- | --- |
-| `P48291736051` | `P` + 11 digits (12 characters total) — Avito Delivery / 5Post format (shares length with [Colis Privé](carrier:colis-prive), so Peek confirms it against 5Post). |
-| `99994829173605` | 14-digit online-store order code (starts with `9999` on many partner stores; shares 14-digit length with European parcel networks, so pick 5Post manually or paste the link). |
+| `P48291736051` | `P` + 11 digits (12 characters), the shape of Avito Delivery numbers. Peek asks [Colis Privé](carrier:colis-prive) and 5Post, 5Post first in Russia. |
+| `99994829173605` | 14 digits, an online shop's order number. Peek never names 5Post for it and asks DPD's companies, Chronopost, SEUR, BRT and others: choose 5Post yourself or paste the 5Post link. |
 
-Because shops choose their own order numbers, two unrelated stores can occasionally share a short numeric code. Pasting a direct `fivepost.ru/tracking?id=...` link routes your parcel straight to 5Post immediately. For broader comparisons across Russian and international formats, see the [tracking number formats guide](guide:tracking-number-formats).
+Shops choose their own order numbers, so two orders can share one. 5Post's website then asks for digits of the recipient's phone number, and Peek can't tell the orders apart. A `fivepost.ru/tracking?id=...` link files the parcel under 5Post straight away. For other shapes, see the [tracking number formats guide](guide:tracking-number-formats).
 
 ## What 5Post tracking statuses mean
 
@@ -35,7 +35,7 @@ Because shops choose their own order numbers, two unrelated stores can occasiona
 | `DONE` — `Получен` | Collected by the recipient (delivered). |
 | `RECEIVED_BY_COURIER` — `Передан курьеру` | Out for doorstep delivery on courier-delivered orders. |
 | `RETURNING_BY_COURIER` — `Неуспешная попытка вручения` | A courier delivery attempt failed. |
-| `CUSTOMS_CLEARANCE_STARTED` / `CUSTOMS_DATA_REQUIRED` / `CUSTOMS_AWAITING_PAYMENT` | Cross-border orders (such as AliExpress) undergoing customs clearance, requesting recipient passport/tax data for the customs broker, or awaiting duty payment. |
+| `CUSTOMS_CLEARANCE_STARTED` / `CUSTOMS_DATA_REQUIRED` / `CUSTOMS_AWAITING_PAYMENT` | An order from abroad (such as AliExpress) in customs clearance, waiting for your data for the customs representative, or waiting for the duties to be paid. |
 | `CUSTOMS_CLEARANCE_COMPLETED` — `Таможенное оформление завершено` | Customs released the parcel to continue to 5Post. |
 | `UNCLAIMED_...` / `RETURNED_TO_PARTNER` / `RETURNED_TO_CLIENT` | Uncollected past the storage deadline or cancelled after handover, heading back to the store or sender (`UNCLAIMED_READY_FOR_REPICKUP` means prepared for re-delivery to a pickup point). |
 | `INCEPTION_PROBLEM` / `LOST` / `CANCELLED` / `REGISTRATION_ERROR_...` | Order problem, cancellation, loss, or missing phone number / delivery date / address needing correction. |
@@ -44,32 +44,32 @@ Notice one important quirk in 5Post's codes: `DELIVERED` (`Доставлен в
 
 ## Picking up from Pyaterochka, Perekrestok, and lockers
 
-Most 5Post recipients collect orders either from a self-service 5Post locker (*постамат*) or directly at the supermarket checkout desk (*касса*) inside Pyaterochka or Perekrestok stores during store opening hours:
+An order for pickup waits in a 5Post parcel locker (*постамат*) or at the checkout (*касса*) of the Pyaterochka or Perekrestok store chosen with the order; 5Post's FAQ gives the opening hours of lockers and pickup points:
 
-- **Pickup code:** Once `Доставлен в пункт выдачи` posts, 5Post sends your pickup code via SMS, email, or the 5Post account/app. Enter that code at the locker screen or give it to the store cashier.
+- **Pickup code:** When the order reaches the point (`Доставлен в пункт выдачи`), 5Post sends the pickup code by SMS. Enter it on the locker's screen or give it at the checkout. 5Post's FAQ says where to find the code and what to do if the staff can't find your order.
 - **Storage extensions & phone edits:** As listed on [5Post FAQ](https://fivepost.ru/faq/), recipients can check storage periods, extend storage, pay online via the website or mobile app, or find steps for changing a phone number, opening a stuck locker door, or reporting an empty or wrong compartment.
-- **Cross-border orders (AliExpress):** International orders routed via 5Post include air linehaul (`DEPARTED_BY_AIR`, `DELIVERED_BY_AIR`) and Russian customs clearance; if tracking shows `Требуется предоставить данные таможенному представителю` (`CUSTOMS_DATA_REQUIRED`) or `Требуется оплата таможенных платежей` (`CUSTOMS_AWAITING_PAYMENT`), submit the requested customs details promptly to avoid return. See the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating).
+- **Cross-border orders (AliExpress):** International orders routed via 5Post include air linehaul (`DEPARTED_BY_AIR`, `DELIVERED_BY_AIR`) and Russian customs clearance; if tracking shows `Требуется предоставить данные таможенному представителю` (`CUSTOMS_DATA_REQUIRED`) or `Требуется оплата таможенных платежей` (`CUSTOMS_AWAITING_PAYMENT`), the customs representative needs your data or the duties are unpaid; 5Post's FAQ says which orders go through customs, why the data is needed, how to contact the customs representative and when to pay. See the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating).
 
 For parcels carried inside Russia by the national post or another courier, compare with [Russian Post](carrier:russian-post) and [CDEK](carrier:cdek).
 
 ## Tracking 5Post with Peek
 
-Paste your `P` + 11 digits Avito code, shop order number, or `fivepost.ru/tracking?id=...` link into Peek. Because short numeric shop codes overlap with other carriers worldwide, pick **5Post** manually via **Change** when adding the parcel or **Change carrier** on the parcel screen whenever Peek does not select it automatically.
+Paste your `P` number, shop order number or `fivepost.ru/tracking?id=...` link into Peek. For a `P` number Peek asks Colis Privé and 5Post, 5Post first in Russia, and says "5Post has this parcel." once 5Post answers. For a 14-digit order number it never names 5Post: tap "Change" while adding the parcel, or "Change carrier" on its page, and pick 5Post. A 5Post link files the parcel under 5Post straight away.
 
-Peek queries 5Post's guest mobile tracking API directly through the open-source [universal-parcel-scraper 5Post adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/5post), with automatic retry on network timeouts. It records every scan code, Russian description, regional sorting-centre location (`РЦ ...`), pickup point details, exact timezone-offset timestamps, and the collection timestamp (`delivered_at`). Account-specific fields such as payment breakdown, storage deadline, store opening hours, and sender name stay on 5Post's own app and site.
+Peek reads 5Post's guest tracking through the open-source [universal-parcel-scraper 5Post adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/5post), and tries again after a network error. It shows each scan's Russian wording, the sorting centre or hub a warehouse scan names (`РЦ ...`, `ХАБ ...`), the pickup point's name and address once the order waits at a pickup point or locker, and the time you collected it. 5Post dates every scan with its UTC offset, and Peek shows it on your device's clock. The storage deadline, payment details, the point's opening hours, the sender's name and the number of parcels stay on 5Post's site and app.
 
-Peek maps 5Post's codes accurately so `DELIVERED` never triggers a false doorstep-delivered notice: **Label created** (`INFORMATION_RECEIVED`), **Received by carrier** (`PROCESS_WITHDRAWN`), **In transit** (warehouse processing, departure, air legs, and post-customs transfer), **At customs** (broker data requests, clearance, and duty payment), **Out for delivery** (`RECEIVED_BY_COURIER`), **Delivery attempted** (`RETURNING_BY_COURIER`), **Ready for pickup** (`DELIVERED` — `Доставлен в пункт выдачи`), **Delivered** (`DONE` — `Получен`), **Returned to sender** (`UNCLAIMED_...` / `RETURNED_TO_...`), and **Needs attention** (`LOST`, `CANCELLED`, `CUSTOMS_CLEARANCE_REJECTED`, and registration errors).
+Peek maps 5Post's codes accurately so `DELIVERED` never triggers a false doorstep-delivered notice: **Label created** (`INFORMATION_RECEIVED`), **Received by carrier** (`PROCESS_WITHDRAWN`), **In transit** (warehouse processing, departure, air legs, and post-customs transfer), **At customs** (broker data requests, clearance, and duty payment), **Out for delivery** (`RECEIVED_BY_COURIER`), **Delivery attempted** (`RETURNING_BY_COURIER`), **Ready for pickup** (`DELIVERED` — `Доставлен в пункт выдачи`), **Delivered** (`DONE` — `Получен`), **Returned to sender** (`RETURNED_TO_...` and the `UNCLAIMED_...` codes, except `UNCLAIMED_READY_FOR_REPICKUP`, which stays In transit), and **Needs attention** (`LOST`, `CANCELLED`, `CUSTOMS_CLEARANCE_REJECTED`, and registration errors).
 
-When an order pauses during long-distance transit or customs clearance, Peek shows: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking 5Post." After more than three weeks without a new scan, Peek displays: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking 5Post." Tap **Get help from 5Post** on the tracking screen to jump straight to 5Post's official FAQ and support form.
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking 5Post.", with a "Get help from 5Post" link to 5Post's FAQ. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking 5Post."
 
-In Peek's notification preferences, choose **Every scan**, **Important steps**, or **Delivery only** to control your alerts.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day 5Post shows `Передан курьеру`, every 2 minutes from 6 a.m. on the newest scan's clock, while 5Post's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When 5Post's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day. It can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Contacting 5Post
 
 5Post lists official phone lines and guest/account feedback forms on [fivepost.ru/contacts](https://fivepost.ru/contacts/) and [fivepost.ru/faq](https://fivepost.ru/faq/):
 
 - **Moscow and Moscow Region phone:** `8-495-935-88-00` (charged at your carrier's rate)
-- **Russian regions (toll-free):** `8-800-100-05-05`
+- **Russian regions:** `8-800-100-05-05`
 - **Online FAQ & support ticket form:** [5Post FAQ](https://fivepost.ru/faq/) and [5Post Contacts](https://fivepost.ru/contacts/) (supports recipient inquiries with or without login and file attachments up to 40 MB)
 - **Legal address:** 109029, Moscow, ul. Srednyaya Kalitnikovskaya, 28 bldg. 4 (INN `7722461620`, OGRN `1187746567568`)
 
@@ -81,11 +81,11 @@ In 5Post's tracking system, `DELIVERED` (`Доставлен в пункт вы�
 
 ### Where do I pick up a 5Post order?
 
-You collect it at the 5Post parcel locker (*постамат*) or supermarket checkout counter inside the Pyaterochka («Пятёрочка») or Perekrestok («Перекрёсток») store you selected at checkout, using the pickup code sent when the parcel arrives.
+You collect it at the 5Post parcel locker (*постамат*) or supermarket checkout counter inside the Pyaterochka («Пятёрочка») or Perekrestok («Перекрёсток») store you selected at checkout, using the code from 5Post's SMS.
 
 ### Why did 5Post ask for customs data on my AliExpress order?
 
-Cross-border shipments arriving in Russia require customs clearance through a customs broker (`CUSTOMS_DATA_REQUIRED`). Submit your details through the link provided by the store or customs broker so clearance (`CUSTOMS_CLEARANCE_COMPLETED`) can finish.
+An order from abroad is cleared through customs by a customs representative, who may need your data (`CUSTOMS_DATA_REQUIRED`). 5Post's FAQ says which orders go through customs clearance, why the data is needed and how to contact the customs representative. Once customs has released the order, 5Post shows `Таможенное оформление завершено` (`CUSTOMS_CLEARANCE_COMPLETED`).
 
 ### How do I contact 5Post if a locker door does not open or the parcel is missing?
 

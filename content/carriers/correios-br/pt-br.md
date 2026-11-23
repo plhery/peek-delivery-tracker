@@ -16,12 +16,12 @@ Os códigos dos Correios seguem o padrão S10 da União Postal Universal (UPU), 
 | --- | --- |
 | `EA482917367BR` | `E`: EMS, serviço expresso internacional. |
 | `CA482917367BR` | `C`: encomenda postal internacional. |
-| `LA482917367BR` | `L`: remessa registrada/rastreável de pequeno porte (como Correios Packet / Prime). |
+| `LA482917367BR` | `L`: remessa rastreável de pequeno porte. |
 | `RA482917367BR` | `R`: correspondência ou pequeno pacote registrado. |
-| `NN482917367BR` | `N`, `B`, `D`, `P` ou `Z` (além de `AV`–`AZ`, `GA`, `GD`): faixas reservadas a serviços nacionais (como PAC e SEDEX) ou bilaterais. |
+| `NN482917367BR` | `N`, `B`, `D`, `P` ou `Z` (além de `AV`–`AZ`, `GA`, `GD`): letras que a UPU reserva a serviços nacionais ou bilaterais. |
 | `RA482917367CN` | Código emitido pelo correio da China (China Post), mas entregue no Brasil pelos Correios sob o mesmo código. |
 
-Como o nono dígito valida os oito anteriores, um único número trocado torna o código inválido. Os Correios informam que alguns serviços de importação contratados no exterior também usam códigos terminados em `BR`. Sem código? Peça diretamente à loja ou ao remetente. O rastreador oficial mantém o histórico online por **180 dias** ([Perguntas frequentes dos Correios](https://www.correios.com.br/acesso-a-informacao/perguntas-frequentes)). Veja também o guia de [formatos de código de rastreio](guide:tracking-number-formats).
+O nono dígito confere os oito anteriores, por isso um único número trocado geralmente torna o código inválido. Os Correios informam que algumas encomendas vindas do exterior também têm código terminado em `BR`, de um serviço específico dos Correios. Sem código? Peça diretamente à loja ou ao remetente. O rastreador oficial mantém o histórico online por **180 dias** ([Perguntas frequentes dos Correios](https://www.correios.com.br/acesso-a-informacao/perguntas-frequentes)). Veja também o guia de [formatos de código de rastreio](guide:tracking-number-formats).
 
 ## O que significam os status dos Correios
 
@@ -34,7 +34,7 @@ Os Correios exibem cada movimentação em português, acompanhada da cidade e da
 | `Objeto encaminhado para fiscalização aduaneira de exportação` | Encomenda enviada ao exterior em conferência na alfândega brasileira antes do embarque; enquanto estiver ali, não fica sob guarda dos Correios. |
 | `Objeto em transferência - por favor aguarde` | Em deslocamento entre unidades operacionais ou centros de tratamento dos Correios. |
 | `Objeto recebido pelos Correios do Brasil` | Encomenda vinda do exterior chegou à unidade internacional dos Correios no Brasil. |
-| `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes` | Dados eletrônicos enviados à Receita Federal e a eventuais órgãos anuentes (como ANVISA ou Anatel). |
+| `Informações enviadas para análise da autoridade aduaneira/órgãos anuentes` | Dados eletrônicos enviados à Receita Federal e a eventuais órgãos anuentes (como ANVISA, ANEEL, MAPA, Exército ou Polícia Federal). |
 | `Aguardando pagamento` | Há tributos ou despacho postal pendentes em Minhas Importações antes da liberação. |
 | `Análise concluída - importação autorizada` | Fiscalização encerrada e entrada no país autorizada. |
 | `Saída do Centro Internacional` | A encomenda saiu do centro internacional rumo à distribuição doméstica no Brasil. |
@@ -51,7 +51,7 @@ Algumas mensagens exigem atenção imediata: `Importação não autorizada` indi
 Os detalhes oficiais constam em [Recebimento de Encomendas Internacionais](https://www.correios.com.br/receber/encomenda/internacional) e nos manuais da Receita Federal ([Tributação](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/topicos/tributacao)):
 
 - **CPF obrigatório:** Toda encomenda vinda do exterior é uma importação e exige CPF regular do destinatário, com nome idêntico ao cadastro da Receita Federal.
-- **Minhas Importações:** Todo o acompanhamento aduaneiro, envio de documentos e pagamento ocorre pelo portal `portalimportador.correios.com.br` ou pelo aplicativo Correios, mediante cadastro gratuito no Meu Correios.
+- **Minhas Importações:** Todo o acompanhamento aduaneiro, envio de documentos e pagamento ocorre pelo portal `portalimportador.correios.com.br` ou pelo aplicativo Correios, depois de um cadastro único no Meu Correios.
 - **Imposto de Importação (regra geral):** **60%** sobre o valor aduaneiro (mercadoria + frete + seguro) para compras em lojas fora do Programa Remessa Conforme ou importações destinadas a pessoa jurídica.
 - **Sites certificados no [Programa Remessa Conforme (PRC)](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/empresas-certificadas-no-programa-remessa-conforme-prc) (pessoa física):** **0%** até US$ 50; acima de US$ 50, **60%** com desconto de US$ 30 no imposto (regra válida para declarações registradas a partir de 12 de maio de 2026; anteriormente era 20% até US$ 50 e desconto de US$ 20 acima).
 - **ICMS e Despacho Postal:** Incide ICMS estadual (17% a 20%, conforme o estado), dentro ou fora do PRC, podendo somar-se a tarifa de **Despacho Postal** cobrada pelos Correios pelos serviços de suporte aduaneiro (que não é imposto). Acima de US$ 3.000 ou em retenções especiais, é preciso contratar despachante aduaneiro.
@@ -59,7 +59,7 @@ Os detalhes oficiais constam em [Recebimento de Encomendas Internacionais](https
 - **Retirada na agência e prazos de guarda:** Segundo a página de [Prazo de Guarda de Objetos Internacionais](https://www.correios.com.br/receber/prazo-de-guarda-objetos-internacionais), encomendas internacionais aguardam retirada por **20 dias corridos** após as tentativas de entrega (**7 dias** para EMS e Correios Packet). Terceiros podem retirar levando autorização assinada, documento original próprio e documento (ou cópia) do destinatário.
 - **Cuidado com golpes:** Conforme o alerta de [Segurança dos Correios](https://www.correios.com.br/falecomoscorreios/seguranca/seguranca), os Correios nunca enviam links de pagamento nem pedem dados bancários por e-mail, SMS ou WhatsApp, e a Receita Federal não envia boletos nem liga cobrando taxas. Acesse `correios.com.br` digitando o endereço diretamente — veja também o guia de [SMS falsos de entrega](guide:delivery-scam-texts).
 
-Se sua compra no Brasil vier por transportadora privada em vez dos Correios, confira também [Jadlog](carrier:jadlog), [Anjun Express](carrier:anjun), [J&T Express Brazil](carrier:j-and-t-br) e [Memphis Courier](carrier:memphis-courier).
+Se sua compra no Brasil vier por transportadora privada em vez dos Correios, confira também [Jadlog](carrier:jadlog), [Anjun Logistics](carrier:anjun), [J&T Express Brazil](carrier:j-and-t-br) e [Memphis Courier](carrier:memphis-courier).
 
 ## Encomendas do Brasil para o exterior, atrasos e reclamações
 
@@ -71,15 +71,17 @@ Encomendas enviadas do Brasil para fora passam pela alfândega brasileira de exp
 
 ## Como acompanhar Correios Brazil no Peek
 
-Cole qualquer código de 13 caracteres terminado em `BR` com dígito verificador válido no Peek e ele identifica **Correios Brazil** imediatamente (links dos Correios com `objetos=` também são reconhecidos). Se o dígito verificador estiver incorreto, o Peek avisa para conferir o código. Para ajustar a transportadora manualmente — por exemplo, ao acompanhar um código estrangeiro já no Brasil — use **Trocar** ao adicionar a encomenda ou **Trocar transportadora** na tela de detalhes.
+O Peek identifica **Correios Brazil** na hora para duas letras, nove dígitos e `BR` quando o dígito verificador está certo. Com um dígito errado, o Peek não indica transportadora nenhuma e, se você escolher Correios Brazil com "Trocar", avisa que Correios Brazil "não emite códigos como este": confira o código. Links de rastreamento dos Correios com `objetos=` também funcionam.
 
-O Peek consulta diretamente o histórico dos Correios pelo [adaptador Correios Brazil no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/correios-br), exibindo o status, cada movimentação com cidade e UF e a data prevista de entrega enquanto o objeto estiver em trânsito e dentro do prazo, preservando os textos em português. Em remessas que saem do Brasil ou chegam com código de outro correio nacional, o Peek também consulta o correio parceiro com o mesmo número e alterna automaticamente quando surgem movimentações mais recentes, mantendo todo o histórico anterior.
+O Peek busca o histórico dos Correios pelo [adaptador Correios Brazil no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/correios-br) e mostra o status, cada movimentação com cidade e UF e a data prevista de entrega enquanto o objeto está em trânsito e dentro do prazo. Os horários são lidos no fuso que os Correios dão a cada movimentação no Brasil, e no relógio do país que emitiu o código para as movimentações do correio de origem, e aparecem no fuso do seu aparelho. Os status ficam em português.
+
+Os Correios não informam ao Peek o destino da encomenda; por isso, fora do Brasil, o Peek também consulta o correio do seu país (USPS, Royal Mail, Canada Post, An Post ou Australia Post, por exemplo) com o mesmo código e passa para ele quando este mostra uma movimentação não mais antiga que a mais recente dos Correios, mantendo o histórico dos Correios. Uma encomenda que chega ao Brasil com código de outro correio é acompanhada nesse correio; o Peek também consulta os Correios quando esse correio indica o Brasil como destino (ou, se não indicar nenhum, quando você está no Brasil).
 
 O Peek traduz os eventos para etapas claras: **Etiqueta criada** (`Etiqueta emitida`), **Recebida pela transportadora** (`Objeto postado`), **Em trânsito** (transferências e saída do centro internacional), **Na alfândega** (fiscalização aduaneira e `Aguardando pagamento`), **Saiu para entrega**, **Tentativa de entrega**, **Pronta para retirada** (`Objeto aguardando retirada no endereço indicado`), **Entregue** e **Devolvida ao remetente**.
 
-Se o pacote ficar dias sem novidades em voos internacionais ou na Receita Federal, o Peek exibe: „É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Correios Brazil.“ Passadas mais de três semanas sem movimento, aparece: „Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Correios Brazil.“ Para abrir o atendimento oficial direto do pacote, toque em **Pedir ajuda a Correios Brazil**.
+Quando o registro mais recente tem quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com o dia desse registro, por exemplo "Sem atualizações desde seg 12 out". A página da encomenda mostra então "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Correios Brazil.", com o link "Pedir ajuda a Correios Brazil" para a Central de Atendimento dos Correios. Depois de três semanas sem registro novo, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Correios Brazil."
 
-Nos alertas do Peek, escolha entre **Cada movimentação**, **Etapas importantes** ou **Só a entrega**.
+Com a encomenda aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek consulta os Correios até a cada 10 minutos; no dia em que os Correios registram `Objeto saiu para entrega ao destinatário`, a cada 2 minutos (a cada 5 quando precisa abrir o rastreador dos Correios num navegador) a partir das 6h no relógio da movimentação mais recente, enquanto o rastreio dos próprios Correios responder. Fora disso, de hora em hora. Depois de 12 horas só com "Etiqueta criada" ou "Recebida pela transportadora", ou de dois dias sem novidade, consulta de hora em hora em qualquer caso, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando o rastreio dos Correios não responde e o Peek acompanha a encomenda só por serviços de rastreamento, consulta de hora em hora, a cada 3 horas depois de um dia sem novidade e até a cada 15 minutos no dia em que a encomenda sai para entrega. Nos alertas, escolha entre "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
 ## Telefones e atendimento oficial dos Correios
 
@@ -92,11 +94,11 @@ Canais publicados na [Central de Atendimento dos Correios](https://www.correios.
 
 ## Perguntas frequentes
 
-### O que significa „Objeto em transferência - por favor aguarde“?
+### O que significa "Objeto em transferência - por favor aguarde"?
 
 Significa que a encomenda está viajando entre duas unidades operacionais dos Correios no Brasil e não exige nenhuma ação sua no momento.
 
-### Por que meu rastreamento mostra „Aguardando pagamento“?
+### Por que meu rastreamento mostra "Aguardando pagamento"?
 
 Há tributos aduaneiros ou tarifa de Despacho Postal em aberto. Acesse Minhas Importações (`portalimportador.correios.com.br`) ou o app Correios para pagar por boleto ou Pix em até **20 dias corridos**, evitando a devolução ao exterior.
 

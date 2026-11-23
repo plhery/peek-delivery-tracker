@@ -21,7 +21,7 @@ If your order ships into Brazil or Mexico under another carrier's barcode — su
 
 ## What 360Lion tracking statuses mean
 
-360Lion groups shipments under high-level states (`Processing`, `Pre-alert`, `In transit.`, `Returned`, `Delivered`) and attaches scan codes (`WSO*` at origin in China, `WSD*` at destination). Once the parcel hands off to the destination country's last-mile carrier, the tracker frequently keeps that local carrier's own wording (often in Spanish or Portuguese).
+360Lion groups shipments under high-level states (`Processing`, `Pre-alert`, `In transit.`, `Returned`, `Delivered`) and attaches scan codes (`WSO*` at origin in China, `WSD*` at destination). Once the parcel reaches the destination country's last-mile carrier, the tracker can carry that carrier's own wording.
 
 | 360Lion says (code / group) | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -39,17 +39,17 @@ Note that 360Lion's `Pre-alert` (`WARNING` / *预警*) state can mean either an 
 
 On [360lion.com/en/](https://www.360lion.com/en/) and [360lion.com](https://www.360lion.com/), 360Lion describes itself as a cross-border linehaul carrier and airline General Sales and Service Agent (GSSA) running regular charter flights from China into Latin America, backed by overseas warehouses in Mexico, Chile, Brazil, Colombia and the US.
 
-**Last-mile delivery.** 360Lion does not operate consumer delivery vans at your doorstep in Latin America or the US. After destination airport arrival (`WSD00`) and import customs clearance, it hands each parcel over (`WSD02`) to a local postal or express partner in your country, which handles final doorstep attempts, pickup points or returns.
+**Last-mile delivery.** After the destination airport (`WSD00`) and import customs, 360Lion hands the parcel over (`WSD02`) to a last-mile carrier in your country, which delivers it.
 
-**Recipient rules and customs.** Because 360Lion serves business shippers rather than retail consumers, its website does not publish recipient delivery-attempt limits, pickup-point holding periods or transit guarantees for small parcels (its [Terms & FAQ page](https://www.360lion.com/?m=home&c=Lists&a=index&tid=82) covers commercial seller rules such as SEND air freight, prohibited goods and 30-day seller claim windows). Import VAT, duties and customs IDs (such as CPF in Brazil, CURP/RFC in Mexico or CUIL/CUIT in Argentina) follow your destination country's customs laws and the marketplace checkout terms. See [parcels held at customs](guide:customs).
+**Recipient rules and customs.** Because 360Lion serves business shippers rather than retail consumers, its website does not publish recipient delivery-attempt limits, pickup-point holding periods or transit guarantees for small parcels (its [Terms & FAQ page](https://www.360lion.com/?m=home&c=Lists&a=index&tid=82) covers commercial seller rules such as SEND air freight, prohibited goods and 30-day seller claim windows). Import VAT and duties follow your destination country's customs rules. See [parcels held at customs](guide:customs).
 
 ## 360Lion parcel stuck, quiet or not delivered
 
 Because 360Lion contracts with the online store or marketplace rather than the buyer, always contact the seller or platform first for late orders, address errors or refunds.
 
-**No updates between China and destination.** Long-haul flights from China to Latin America and destination customs queues regularly create gaps of several days to over a week between `departed from airport` (`WSO04`) and `arrived at airport` (`WSD00`). See [why tracking stops updating](guide:tracking-not-updating).
+**No updates between China and destination.** Long-haul flights from China to Latin America and destination customs queues can leave gaps of several days between `departed from airport` (`WSO04`) and `arrived at airport` (`WSD00`). See [why tracking stops updating](guide:tracking-not-updating).
 
-**Local handoff without a second number.** 360Lion's public tracker relays last-mile wording under your original `WSH` or `AR` number without exposing a separate local tracking code. If delivery fails and you need the local partner's contact or reference, ask the seller or email 360Lion's parcel-inquiry desk.
+**Local handoff without a second number.** Peek follows the last-mile carrier's lines through 360Lion's tracker under your `WSH` or `AR` number and shows no separate local tracking number. If delivery fails and you need the local partner's contact or reference, ask the seller or email 360Lion's parcel-inquiry desk.
 
 **Delivered, damaged or lost.** Check with household members, neighbours and building reception first if a parcel shows `Delivered`; if it is missing or damaged, document everything and open a dispute with the seller or marketplace before buyer protection expires. See [delivered but not received](guide:delivered-not-received), [damaged parcel](guide:damaged-parcel), [lost parcel](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
@@ -59,7 +59,7 @@ Contacts published on [360Lion's Contact Us page](https://www.360lion.com/?m=hom
 
 - **Parcel inquiry email (*查件业务*):** `customerservice@360lion.com`.
 - **General / business email:** `info@360lion.com`.
-- **Shenzhen headquarters phone:** `+86 0755-2360-1325` (Shanghai `+86 021-6142-1360`, Guangzhou `+86 020-8653-4133`).
+- **Shenzhen headquarters phone:** `+86 755 2360 1325` (Shanghai `+86 21 6142 1360`, Guangzhou `+86 20 8653 4133`).
 - **Headquarters address:** 7/F, Block A, Star River World, No. 1 Yabao Road, Bantian Street, Longgang District, Shenzhen, Guangdong, China.
 
 > Watch out for fake SMS or WhatsApp messages demanding an urgent payment link to "release" a cross-border parcel at customs. Verify any genuine duty request through your marketplace order page or your country's official postal/customs portal first. See [delivery scam texts](guide:delivery-scam-texts).
@@ -68,9 +68,11 @@ Contacts published on [360Lion's Contact Us page](https://www.360lion.com/?m=hom
 
 [Peek](/) checks 360Lion automatically when you enter a `WSH...YQ` code (such as `WSHMX4829173640YQ`, digits invented) — where 360Lion is the sole candidate — or an `AR` + 10-digit code (such as `AR4829173640`), where Peek checks 360Lion alongside [Colis Privé](carrier:colis-prive), [Aramex Australia](carrier:aramex-au) and [Aramex New Zealand](carrier:aramex-nz) and shows "360Lion has this parcel." when 360Lion answers. Pasting a `toms.360lion.com/track?trackNumber=` link selects 360Lion directly; otherwise tap "Change" while adding or "Change carrier" on the parcel screen and select 360Lion (searching "360Lion Express", "WSH" or "纬狮物流" finds it too).
 
-Peek queries 360Lion's tracking API directly and displays the stage ("Label created", "Received by carrier", "In transit", "At customs", "Returned to sender", "Delivered"), scan wording (keeping the local last-mile wording where present, otherwise 360Lion's English), 360Lion scan codes (`WSO04`, `WSD00`, `WSD02`, etc.), location as country name or 3-letter airport code, destination country, delivery time and timestamps carrying explicit time-zone offsets (for example `+08:00` in China and `-03:00` in Argentina, displayed in your device's time zone). Peek drops the site's progress rail, origin country label, transit-day counter and proof-of-delivery attachment; 360Lion's tracker does not supply an estimated delivery date, service name or parcel weight.
+Peek reads 360Lion's tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "At customs", "Returned to sender" or "Delivered"), each scan's wording (the last-mile carrier's own where 360Lion relays it, otherwise 360Lion's English), the place as a country name or a three-letter airport code, the destination country and the delivery time. Each scan comes with its place's offset, such as `+8` in China and `-3` in Argentina, and shows on your device's clock. Peek leaves out the site's progress rail, the origin country, the transit-day counter and the proof of delivery; 360Lion's tracker gives no expected delivery date, service name or weight.
 
-Because 360Lion's tracker does not publish an out-for-delivery stage or an estimated delivery date, Peek checks up to every 10 minutes while you have the parcel open, and hourly otherwise — staying hourly even while open once a parcel has sat 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and dropping to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly and every 3 hours after a day without change (up to every 15 minutes on delivery day if tracking services supply an out-for-delivery scan or expected day). After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking 360Lion." and displays "Get help from 360Lion", which opens 360Lion's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking 360Lion."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, while 360Lion's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When 360Lion's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking 360Lion.", with a "Get help from 360Lion" link to 360Lion's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking 360Lion."
 
 You can choose notification presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs or contact 360Lion or your local delivery partner for you.
 
@@ -90,11 +92,11 @@ You can choose notification presets for "Every scan", "Important steps" or "Deli
 
 ### How can I contact 360Lion about a missing parcel?
 
-Ask the seller or marketplace first for buyer protection and refunds. You can also email 360Lion's parcel inquiry desk at `customerservice@360lion.com` or call its Shenzhen office at `+86 0755-2360-1325`.
+Ask the seller or marketplace first for buyer protection and refunds. You can also email 360Lion's parcel inquiry desk at `customerservice@360lion.com` or call its Shenzhen office at `+86 755 2360 1325`.
 
 :::sources
 - [360Lion Express: English Home](https://www.360lion.com/en/) – founded 2015, Shenzhen/Shanghai/Guangzhou/Yiwu/Dongguan/Hong Kong branches, 50-number tracker, marketplace partners and headquarters address
-- [360Lion: Chinese Home](https://www.360lion.com/) – dedicated small-parcel routes across 16 Latin American countries and the US, charter air capacity and overseas warehouses
+- [360Lion: Chinese Home](https://www.360lion.com/) – dedicated small-parcel routes across 15 Latin American countries and the US, charter air capacity and overseas warehouses
 - [360Lion: Contact Us](https://www.360lion.com/?m=home&c=Lists&a=index&tid=79) – `customerservice@360lion.com`, `info@360lion.com`, Shenzhen/Guangzhou/Shanghai phones and office addresses (help URL linked by Peek)
 - [360Lion: About Us](https://www.360lion.com/?m=home&c=Lists&a=index&tid=78) – company overview
 - [360Lion: Dedicated Small Parcels](https://www.360lion.com/?m=home&c=Lists&a=index&tid=90) – cross-border B2C parcel service

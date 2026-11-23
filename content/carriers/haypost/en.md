@@ -46,13 +46,13 @@ Across its network of approximately 777 post offices ([About HayPost](https://ww
 - **International postal services ([haypost.am/en/postal-services/international-delivery](https://www.haypost.am/en/postal-services/international-delivery)):** international letters, small packets up to 2 kg (length + width + thickness ≤ 0.9 m, longest side ≤ 0.6 m), parcels up to 20 kg (any side ≤ 1.05 m), M-bags up to 30 kg and EMS accelerated mail.
 - **HayPost Express to the United States ([haypost.am/en/postal-services/Haypost-Express](https://www.haypost.am/en/postal-services/Haypost-Express)):** air parcel delivery from any Armenian post office to Los Angeles (pick-up offices in Glendale, Van Nuys and Sylmar), up to 30 kg, with an average transit time of 7 to 10 working days.
 
-**Details not published in English on HayPost's public FAQ.** While HayPost lists FAQ topics on [haypost.am/en/faq](https://www.haypost.am/en/faq) covering holding times, delivery control terms, customs fees and compensation, the public page does not expand those figures without interactive portal lookup, so confirm exact branch holding periods, domestic control times and customs thresholds directly with your local post office or HayPost support before posting or waiting on a parcel.
+**HayPost's FAQ.** [HayPost's FAQ](https://www.haypost.am/en/faq) has questions on the control terms for domestic delivery, customs fees, compensation and how long EMS items are kept; for the figures that apply to your item, ask your post office or HayPost.
 
 ## Delayed, customs-held or missing HayPost parcels
 
-For online purchases shipped to or from Armenia through postal channels, contact the seller first regarding refunds or reshipments — under UPU postal rules, formal inquiries and compensation claims are normally initiated by the sender with the posting receipt.
+For online purchases shipped to or from Armenia through postal channels, contact the seller first regarding refunds or reshipments.
 
-**Quiet gaps between countries.** After `Send item abroad (EDI-received)`, international mail waits for air transport, arrival sorting and import customs at the destination country's office of exchange, which commonly leaves gaps of a week or more. See [why tracking stops updating](guide:tracking-not-updating).
+**Quiet gaps between countries.** After `Send item abroad (EDI-received)`, international mail waits for air transport, arrival sorting and import customs at the destination country's office of exchange, which can leave gaps of several days. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Customs clearance.** Inbound parcels to Armenia and outbound `AM` parcels entering destinations such as the EU or US pass through destination import customs (`Send item to customs (Inb)`). Keep your purchase invoice and tracking number ready if customs requests valuation proof. See [parcels held at customs](guide:customs).
 
@@ -67,7 +67,7 @@ Contacts published on [haypost.am/en/contact-us](https://www.haypost.am/en/conta
 - **YES Yerevan Express order line:** `+374 10 514 513`.
 - **Email:** `info@haypost.am`.
 - **Headquarters:** 65/5 Arshakunyats Ave., Yerevan 0061, Republic of Armenia.
-- **Online contact form and live chat:** available on [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us).
+- **Online contact form:** on [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us), with a live chat on [haypost.am](https://www.haypost.am/en).
 
 > Be cautious of SMS, WhatsApp or email messages claiming you must click a third-party link and enter bank card details to pay a small "redelivery" or "address-confirmation" fee for a HayPost parcel. Verify your S10 code directly on [haypost.am/en/track-trace](https://www.haypost.am/en/track-trace) or call `+374 10 514-514`. See [delivery scam texts](guide:delivery-scam-texts).
 
@@ -75,9 +75,11 @@ Contacts published on [haypost.am/en/contact-us](https://www.haypost.am/en/conta
 
 For UPU S10 codes ending in `AM` (such as `RR482917367AM` or `CP482917367AM`, digits invented), [Peek](/) follows HayPost automatically as the preferred origin post, and can also track inbound S10 codes sent to Armenia once you pick HayPost. Because HayPost does not have dedicated tracking URL rules in Peek, paste the 13-character S10 number itself; if you need to select HayPost manually, tap "Change" while adding or "Change carrier" on the parcel view and choose HayPost (searching "Armenia Post" or "Հայփոստ" finds it too).
 
-Peek reads HayPost's public JSON tracking API directly in English and shows the mapped stage ("Label created", "Received by carrier", "In transit", "At customs", "Out for delivery", "Delivery attempted", "Ready for pickup", "Delivered"), IPS scan wording (including failure reasons and next-step notes such as `Addressee not available`), office/country location (dropping numeric postcodes), destination country and delivery time. Armenian scans and `Send item abroad (EDI-received)` rows are read on Yerevan time (`Asia/Yerevan`, displayed in your device's time zone), while foreign post scans keep their local wall clock. When HayPost pre-publishes a future-dated `Send item abroad (EDI-received)` plan (often scheduled hours ahead), Peek omits that planned row until its actual time arrives. HayPost's API does not return an estimated delivery date, weight, service name, sender/recipient details or proof-of-delivery photo.
+Peek reads HayPost's public JSON tracking API directly in English and shows the mapped stage ("Received by carrier", "In transit", "At customs", "Out for delivery", "Delivery attempted", "Ready for pickup", "Delivered"), IPS scan wording (including failure reasons and next-step notes such as `Addressee not available`), office/country location (dropping numeric postcodes), destination country and delivery time. Armenian scans and `Send item abroad (EDI-received)` rows are dated on Yerevan time, and a foreign post's scans on their place's time zone (France's for Paris, for example); Peek shows them on your device's clock. When HayPost pre-publishes a future-dated `Send item abroad (EDI-received)` plan (often scheduled hours ahead), Peek omits that planned row until its actual time arrives. HayPost's API does not return an estimated delivery date, weight, service name, sender/recipient details or proof-of-delivery photo.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day `Send item out for physical delivery` appears. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day quiet, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the silence (for example "No tracking update since Mon, Oct 12"), displays "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking HayPost." and shows "Get help from HayPost", which opens HayPost's contact page. After more than three weeks without a new scan, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking HayPost."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day HayPost shows `Send item out for physical delivery (Inb)`, every 2 minutes from 6 a.m. on the clock of HayPost's newest scan, while HayPost's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When HayPost's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking HayPost.", with a "Get help from HayPost" link to HayPost's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking HayPost."
 
 You can choose alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs or file an inquiry with HayPost on your behalf.
 
@@ -97,7 +99,7 @@ Yes. Any tracked international UPU S10 code destined for Armenia can be checked 
 
 ### How do I contact HayPost customer support?
 
-Call `+374 10 514-514` (or `+374 10 544-444` for corporate services), email `info@haypost.am` or use the contact form and live chat on [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us).
+Call `+374 10 514-514` (or `+374 10 544-444` for corporate services), email `info@haypost.am` or use the contact form on [haypost.am/en/contact-us](https://www.haypost.am/en/contact-us) or the live chat on HayPost's site.
 
 :::sources
 - [HayPost: Home](https://www.haypost.am/en) – national postal operator portal

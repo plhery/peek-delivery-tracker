@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-J&T Express Mexico (operated legally by *Conejo Corriendo, S. de R.L. de C.V.* in Mexico City) is the Mexican arm of the global J&T Express parcel network founded in 2015. Across Mexico it handles e-commerce and occasional domestic shipments up to 30 kg, running hubs and sorting centres 365 days a year alongside more than 150 sales points (*Puntos de Venta*) for drop-off and *Ocurre* branch pickup. You can check a shipment on [J&T Express Mexico's tracking page](https://www.jtexpress.mx/trajectoryQuery), or paste the waybill number into the box above.
+J&T Express Mexico (operated legally by *Conejo Corriendo, S. de R.L. de C.V.* in Mexico City) is the Mexican arm of the global J&T Express parcel network founded in 2015. Across Mexico it handles e-commerce and occasional domestic shipments up to 30 kg, running hubs and sorting centres 365 days a year alongside more than 150 sales points (*Puntos de Venta*), with home delivery or *Ocurre* branch pickup where covered. You can check a shipment on [J&T Express Mexico's tracking page](https://www.jtexpress.mx/trajectoryQuery), or paste the waybill number into the box above.
 
 ## J&T Express Mexico tracking number: JMX format and phone verification
 
@@ -22,23 +22,16 @@ Look for your waybill number (*número de guía*) in the online store's dispatch
 
 J&T Express Mexico's tracker returns scan rows in Spanish, English or Chinese depending on the language requested, pairing each short status label with a sentence prefixed by the branch or hub name (in brackets) and a timestamp on Mexico City time (`UTC-6`).
 
-- **Before pickup ("Label created"):** the store created the `JMX` waybill electronically, or the parcel is queued for collection.
-- **Collection ("Received by carrier"):** a J&T driver picked the parcel up from the seller or scanned it in at a sales point.
-- **Sorting and transfers ("In transit"):** the parcel moves through J&T Express Mexico's hubs and regional distribution centres (which operate 365 days a year).
-- **Local delivery ("Out for delivery"):** the courier loaded the parcel for delivery to your address.
-- **Delivery exceptions or pickup ("Delivery attempted" / "Ready for pickup"):** if a doorstep visit cannot be completed or you chose *Ocurre* service at a branch.
-- **Completed ("Delivered"):** J&T recorded proof of delivery at the address or branch.
-
-Because road legs between Mexican hubs can span several states, tracking often pauses between regional sorting scans until the destination hub unloads the trailer.
+Peek has no list of J&T Express Mexico's status labels yet, so it gives each scan a stage from the label's wording.
 
 ## J&T Express Mexico delivery, size limits and Ocurre pickup
 
 According to [J&T Express Mexico's Services](https://www.jtexpress.mx/service), [Products & Services](https://www.jtexpress.mx/productService) and [Domestic Terms & Conditions](https://www.jtexpress.mx/information/termsAndAgreement):
 
-- **Coverage, transit times and delivery options:** nationwide Mexican coverage with more than 150 sales points (*Puntos de Venta*), supporting both doorstep delivery (*Entrega a domicilio*) and branch pickup (*Ocurre*) where covered. J&T's [FAQ](https://www.jtexpress.mx/informationNew) states a standard delivery window of **3 to 7 working days**, and door-to-door delivery in selected areas runs Monday to Friday from 06:00 to 20:30.
+- **Coverage, transit times and delivery options:** nationwide Mexican coverage with more than 150 sales points (*Puntos de Venta*), supporting both doorstep delivery (*Entrega a domicilio*) and branch pickup (*Ocurre*) where covered. J&T's [FAQ](https://www.jtexpress.mx/informationNew) gives a standard delivery time of **3 to 7 working days**, and [Products & Services](https://www.jtexpress.mx/productService) gives home delivery in selected areas Monday to Friday, 06:00 to 20:30.
 - **Weight, size and value caps:** parcels up to **30 kg**, with no single side longer than **1.0 m (100 cm)** and the sum of the three sides no more than **1.6 m (160 cm)**. Billing uses the greater of actual or volumetric weight (`length × width × height in cm ÷ 5000`). Maximum accepted shipment value is **MXN $30,000**.
 - **Delivery rules and non-guaranteed schedules:** under Clause 5.1, J&T delivers to the specified address (not necessarily personally to the named individual). Clause 8.1 notes that regular delivery schedules are estimates, not binding guarantees.
-- **Undeliverable parcels:** under Clause 5.5, J&T Express Mexico may destroy shipments that remain undelivered 30 calendar days after being declared *"no entregable"* (undeliverable). J&T's public terms do not specify a single fixed number of doorstep delivery attempts across all retail contracts, so check your marketplace order page for contract-specific redelivery rules.
+- **Undeliverable parcels:** under Clause 5.5, J&T Express Mexico may destroy shipments that remain undelivered 30 calendar days after being declared *"no entregable"* (undeliverable). The terms give no number of delivery attempts.
 
 ## Delayed, damaged or missing J&T Express Mexico parcels
 
@@ -56,7 +49,7 @@ For online purchases, the seller holds the transport contract with J&T Express M
 
 Contacts published in J&T Express Mexico's [Terms & Conditions](https://www.jtexpress.mx/information/termsAndAgreement), [Products & Services](https://www.jtexpress.mx/productService) and [Privacy Notice](https://www.jtexpress.mx/information/avisodeprivacidad):
 
-- **Customer service phone:** `55 7100 1047` (phone support hours listed on [Products & Services](https://www.jtexpress.mx/productService): Monday to Friday 09:00–20:00, Saturday 09:00–14:00).
+- **Customer service phone:** `55 7100 1047`.
 - **Messaging chat number:** `55 2948 4706` (listed on [Information & FAQ](https://www.jtexpress.mx/informationNew)) alongside the *J&T chat* widget on [jtexpress.mx](https://www.jtexpress.mx/).
 - **Customer service and claims email:** `serviciocliente@jtexpress.mx`.
 - **Privacy / data-protection email:** `protecciondedatos@jtexpress.mx`.
@@ -69,11 +62,13 @@ Contacts published in J&T Express Mexico's [Terms & Conditions](https://www.jtex
 
 [Peek](/) recognises any `JMX` + 12-digit waybill (`JMX482917364058`, digits invented) as J&T Express Mexico automatically with high confidence, and also recognises pasted `jtexpress.mx/trajectoryQuery?waybillNo=` links. If you ever need to choose J&T Express Mexico manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "J&T Express México" or "JT Express Mexico" finds it too).
 
-Peek includes an optional "Last 4 digits of the phone number" field for J&T Express Mexico. Although marked optional so you can still add the parcel without it, J&T Express Mexico's direct tracker only answers when you supply the last 4 digits of the recipient's or sender's phone number (if the digits do not match the waybill, J&T refuses the lookup and Peek asks you to check the digits). Without those 4 digits, Peek queries other tracking services instead and slows to daily checks after a day with no answers; entering or updating the 4 digits triggers an immediate check.
+Peek shows an optional "Last 4 digits of the phone number" field for J&T Express Mexico, with the line "J&T Express Mexico shows its scans only with the last 4 digits of the recipient’s or sender’s phone. They’re kept with this parcel and sent only to J&T Express Mexico." J&T refuses digits that aren't the parcel's. Without them, Peek follows the parcel through tracking services, and once it has checked, the parcel's page says "J&T Express Mexico shows its scans with the last 4 digits of the recipient’s or sender’s phone." with "Add the digits".
 
-When J&T Express Mexico answers, Peek requests scans in your language (English, Spanish or Chinese) and shows the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivery attempted", "Ready for pickup", "Delivered"), J&T's status label, the bracketed hub/city place at the start of the scan note, the delivery timestamp and timestamps with Mexico City's fixed `-06:00` offset (displayed in your device's time zone). Peek drops the rest of J&T's scan sentence (which can include the courier's name), origin/destination labels and extra event details; J&T's tracker does not provide an estimated delivery date or parcel weight.
+When J&T Express Mexico answers, Peek asks for its scans in English or Chinese when that is your app's language, and in Spanish otherwise. It shows the stage it reads from J&T's label, the label itself, the bracketed hub or city at the start of the scan note, the delivery time and each scan's time with Mexico City's fixed `-06:00` offset, on your device's clock. Peek leaves out the rest of J&T's scan sentence (which can include the courier's name), the origin and destination labels and other event details; J&T's tracker gives no expected delivery date or weight.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. Mexico City time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback (including when no phone digits are entered), they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and displays "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking J&T Express Mexico." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking J&T Express Mexico."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day J&T Express Mexico shows the parcel out for delivery, every 2 minutes from 6 a.m. Mexico City time, while J&T Express Mexico's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When J&T Express Mexico's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking J&T Express Mexico." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking J&T Express Mexico."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking only and cannot update your delivery address or file a claim with J&T Express Mexico on your behalf.
 
@@ -93,13 +88,13 @@ Under its [Domestic Terms & Conditions](https://www.jtexpress.mx/information/ter
 
 ### How do I file a claim or contact J&T Express Mexico?
 
-Call `55 7100 1047` (Mon–Fri 09:00–20:00, Sat 09:00–14:00) or email `serviciocliente@jtexpress.mx`. Written claims for loss, damage or delay must be submitted within 30 calendar days after proof of delivery with supporting receipts or invoices.
+Call `55 7100 1047` or email `serviciocliente@jtexpress.mx`. Written claims for loss, damage or delay must be submitted within 30 calendar days after proof of delivery with supporting receipts or invoices.
 
 :::sources
 - [J&T Express Mexico: Home](https://www.jtexpress.mx/) – 365-day hub operation, Mexico City headquarters
 - [J&T Express Mexico: Tracking](https://www.jtexpress.mx/trajectoryQuery) – real-time waybill tracking
 - [J&T Express Mexico: Services](https://www.jtexpress.mx/service) – up to 30 kg, nationwide coverage, 150+ Puntos de Venta, home delivery and Ocurre
-- [J&T Express Mexico: Products & Services](https://www.jtexpress.mx/productService) – Mon–Fri 06:00–20:30 delivery in selected areas, phone support hours (Mon–Fri 09:00–20:00, Sat 09:00–14:00)
+- [J&T Express Mexico: Products & Services](https://www.jtexpress.mx/productService) – Mon–Fri 06:00–20:30 delivery in selected areas
 - [J&T Express Mexico: Information & FAQ](https://www.jtexpress.mx/informationNew) – general shipping and tracking FAQ
 - [J&T Express Mexico: About Us](https://www.jtexpress.mx/aboutNew) – global J&T network founded 2015 (`1519.HK`)
 - [J&T Express Mexico: Domestic Terms & Conditions](https://www.jtexpress.mx/information/termsAndAgreement) – Conejo Corriendo S. de R.L. de C.V., 30 kg / 1.0 m / 1.6 m / MXN $30,000 limits, 30-day undeliverable rule, 15 UMA liability, 30-day written claims, `55 7100 1047` and `serviciocliente@jtexpress.mx`

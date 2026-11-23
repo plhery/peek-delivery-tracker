@@ -16,8 +16,8 @@ SAMUS's documentation for business clients shows the number and the barcode on t
 
 | Number (made up) | What it is |
 | --- | --- |
-| `RD000000005LT` | Two letters, nine digits, LT: the form in SAMUS's documentation. Peek treats the ninth digit as a check digit, as on postal numbers. |
-| `RD000000000LT` | The same shape with a wrong check digit: Peek names no carrier. Check the number, or pick SAMUS yourself (see below). |
+| `RD482917367LT` | Two letters, nine digits, LT: the form in SAMUS's documentation. Peek treats the ninth digit as a check digit, as on postal numbers. |
+| `RD482917360LT` | The same shape with a wrong check digit: Peek names no carrier. Check the number, or pick SAMUS yourself (see below). |
 
 Spaces, dashes and lower case don't matter when you paste the number into Peek. On samus.lt, the result shows a "Parcel number" and a "Parcel code". If the site says `Your letter with number "…" is not found`, check the number with the sender.
 
@@ -81,13 +81,13 @@ Peek can't read SAMUS's tracker, so it doesn't show these lines: see "Track a SA
 
 ## SAMUS contact and customer service
 
-As read on 14 November 2026, samus.lt lists:
+From samus.lt:
 
 - **Main number**: +370 602 33354.
 - **Email**: info@samus.lt for general questions; paieska@samus.lt for parcels.
 - **Vilnius office and pickup point**: Žalgirio g. 92, LT-09303 Vilnius.
 - **Other offices**: Partizanų g. 19 in Kaunas, Minijos g. 49-10 in Klaipėda (klaipeda@samus.lt) and Trakų g. 20 in Šiauliai.
-- **Hours**: the rules give Monday to Friday, 8:00 to 17:00. The contact page gives no opening hours.
+- **Hours**: the rules give Monday to Friday, 8:00 to 17:00 Lithuanian time. The contact page gives no opening hours.
 
 Give the parcel number when you write. For the order itself, a return or a refund, ask the company that sent the item.
 
@@ -101,7 +101,11 @@ You can also paste a link from SAMUS's Lithuanian tracker, which ends in `/siunt
 
 For an item filed under SAMUS, Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first that has it; for a number with a correct check digit, it asks the Universal Postal Union's tracking (UPU) last. While the item is on its way, in its first 30 days in Peek, Peek asks Lietuvos paštas and Chronopost first; if one shows real progress, Peek moves the item there ("Swapped automatically from SAMUS"). Peek shows the status and history the service holds, in its wording. It can lag behind SAMUS's own, and for some items there's nothing at all. If you left the carrier to Peek and the services name SAMUS, with scans that show the item moving, Peek names SAMUS for you. Until a service has the item, Peek's link opens SAMUS's tracker with your number; after that, the service's page. Peek doesn't pass your IP address or country on to the services.
 
-Until a service knows the number, an item filed under SAMUS shows "Waiting for SAMUS". While a service has the item, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SAMUS or the sender for you.
+Until a service knows the number, an item filed under SAMUS shows "Waiting for SAMUS". A service that didn't know the number is asked again a day later. While a service has the item, Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours once the item has spent seven days at "Label created". On the day it's out for delivery, Peek checks up to every 15 minutes while you have the item open or notifications on.
+
+When the newest line is four days old and the item is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, such as "No tracking update since Mon 12 Oct". The item's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking SAMUS.", with a "Get help from SAMUS" link to SAMUS's contact page. After three weeks with no new line, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking SAMUS."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SAMUS or the sender for you.
 
 ## Questions about SAMUS tracking
 
@@ -123,7 +127,7 @@ No. Only the sender, or someone it authorises, can claim, within 6 months of sen
 
 ### How do I contact SAMUS?
 
-Call +370 602 33354 or email info@samus.lt (paieska@samus.lt for parcels), Monday to Friday, 8:00 to 17:00.
+Call +370 602 33354 or email info@samus.lt (paieska@samus.lt for parcels), Monday to Friday, 8:00 to 17:00 Lithuanian time.
 
 :::sources
 - [SAMUS: Laiškai ir siuntos](https://www.samus.lt/) – letters and parcels, self-service

@@ -16,8 +16,8 @@ updated: 2026-11-17
 
 | Numeris (išgalvotas) | Kas tai |
 | --- | --- |
-| `RD000000005LT` | Dvi raidės, devyni skaitmenys ir LT – tokia forma nurodyta „SAMUS“ dokumentacijoje. Devintąjį skaitmenį Peek laiko kontroliniu, kaip pašto numeriuose. |
-| `RD000000000LT` | Ta pati forma, bet kontrolinis skaitmuo netinka: Peek vežėjo nenurodo. Patikrinkite numerį arba „SAMUS“ pasirinkite patys (žr. žemiau). |
+| `RD482917367LT` | Dvi raidės, devyni skaitmenys ir LT – tokia forma nurodyta „SAMUS“ dokumentacijoje. Devintąjį skaitmenį Peek laiko kontroliniu, kaip pašto numeriuose. |
+| `RD482917360LT` | Ta pati forma, bet kontrolinis skaitmuo netinka: Peek vežėjo nenurodo. Patikrinkite numerį arba „SAMUS“ pasirinkite patys (žr. žemiau). |
 
 Tarpai, brūkšneliai ar mažosios raidės įklijuojant numerį į Peek netrukdo. Sekimo rezultate samus.lt rodo du laukus: „Siuntos nr.“ ir „Siuntos kodas“. Jei svetainė rašo `Jūsų laiškas su "…" numeriu nerastas`, pasitikslinkite numerį pas siuntėją.
 
@@ -81,7 +81,7 @@ Peek „SAMUS“ sekimo nuskaityti negali, todėl šių būsenų nerodo. Daugiau
 
 ## „SAMUS“ kontaktai
 
-Taip kontaktus samus.lt nurodė 2026 m. lapkričio 14 d.:
+Kontaktai, kuriuos nurodo samus.lt:
 
 - **Bendras numeris:** +370 602 33354.
 - **El. paštas:** bendri klausimai – info@samus.lt, siuntos – paieska@samus.lt.
@@ -101,7 +101,11 @@ Galite įklijuoti ir „SAMUS“ lietuviško sekimo puslapio nuorodą, kuri baig
 
 Kai siunta priskirta „SAMUS“, Peek paeiliui klausia „ParcelsApp“, „Ship24“ ir „17TRACK“ ir pasilieka pirmąją paslaugą, kuri siuntą turi; numerio su tinkamu kontroliniu skaitmeniu galiausiai klausiama ir Pasaulinės pašto sąjungos (UPU) sekimo. Kol siunta keliauja, pirmąsias 30 dienų Peek pirmiausia klausia Lietuvos pašto ir „Chronopost“; jei kuris nors jų rodo tikrą siuntos judėjimą, Peek siuntą perkelia ten („Swapped automatically from SAMUS“). Peek rodo paslaugos turimą būseną ir istoriją, jos žodžiais. Ji gali atsilikti nuo „SAMUS“ sekimo, o kai kurių siuntų joje nėra visai. Jei vežėjo nepasirinkote, o paslaugos nurodo „SAMUS“ ir rodo siuntos judėjimą, Peek „SAMUS“ priskiria pats. Kol nė viena paslauga siuntos neturi, Peek nuoroda atidaro „SAMUS“ sekimo puslapį su jūsų numeriu, o vėliau – tos paslaugos puslapį. Jūsų IP adreso ar šalies Peek paslaugoms neperduoda.
 
-Kol nė viena paslauga numerio nežino, „SAMUS“ priskirta siunta svetainėje peektracker.com rodo „Waiting for SAMUS“. Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, o tą dieną, kai siunta išvežta pristatyti, – net kas 15 minučių. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei parą naujų įrašų nėra, Peek tikrina kas 3 valandas. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „SAMUS“ ar siuntėju už jus Peek negali.
+Kol nė viena paslauga numerio nežino, „SAMUS“ priskirta siunta svetainėje peektracker.com rodo „Waiting for SAMUS“. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, parą nesant naujų įrašų – kas 3 valandas, o siuntai septynias dienas išbuvus „Label created“ – kas 6 valandas. Tą dieną, kai siunta išvežta pristatyti, Peek ją tikrina net kas 15 minučių, kol siuntą turite atsivertę arba esate įjungę pranešimus.
+
+Jei keturias dienas naujo įrašo nėra, o siunta vis dar „Label created“, „Received by carrier“ arba „In transit“, Peek ją pažymi paskutinio įrašo diena, pvz., „No tracking update since Mon 12 Oct“. Siuntos puslapyje tada rašoma „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking SAMUS.“ ir yra nuoroda „Get help from SAMUS“ į „SAMUS“ kontaktų puslapį. Po trijų savaičių be naujų įrašų rašoma „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking SAMUS.“
+
+Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „SAMUS“ ar siuntėju už jus Peek negali.
 
 ## Dažni klausimai apie „SAMUS“ siuntų sekimą
 

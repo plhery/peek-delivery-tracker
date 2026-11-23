@@ -17,7 +17,7 @@ Die Andreani-Nummern, die Peek kennt, haben 15 Ziffern und beginnen mit `36000`,
 | `360004829103756` | `36000` und 10 weitere Ziffern: Bereich von Andreani, aber nur ein schwacher Treffer. [BRT](carrier:brt) und Yunda nutzen ebenfalls 15 Ziffern, daher fragt Peek sowohl Andreani als auch BRT. |
 | `310004829103756` | `31000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
 | `300004829103756` | `30000` und 10 weitere Ziffern: ebenfalls der Bereich von Andreani. |
-| `739402815634281` | 15 Ziffern mit anderem Anfang. Peek ordnet sie nicht Andreani zu: [FedEx](carrier:fedex), DPD Frankreich, [Hermes](carrier:hermes-de), BRT und Yunda verwenden ebenfalls 15 Ziffern. |
+| `007394028156348` | 15 Ziffern mit anderem Anfang. Peek ordnet sie nicht Andreani zu: [FedEx](carrier:fedex), DPD Frankreich, [Hermes](carrier:hermes-de), BRT und Yunda verwenden ebenfalls 15 Ziffern. |
 
 Leerzeichen spielen beim Einfügen in Peek keine Rolle.
 
@@ -29,7 +29,7 @@ Nummer nicht gefunden? Siehe [wie du eine Sendungsnummer findest](guide:find-tra
 
 ## Andreani Tracking-Status erklärt
 
-Das Tracking von Andreani gruppiert seine Zeilen unter spanischen Überschriften. Die vier, die Peek kennt, sind `Pendiente de ingreso` (wartet auf Einlieferung), `Ingresado` (eingegangen), `En camino` (unterwegs) und `Entregado` (zugestellt). Jede Zeile ist ein kurzer Satz an dich, mit Filiale (`sucursal`) und Ort, wenn vorhanden. Die Zeilen, die Peek kennt, in der üblichen Reihenfolge:
+Das Tracking von Andreani gruppiert seine Zeilen unter spanischen Überschriften. Die vier, die Peek kennt, sind `Pendiente de ingreso` (wartet auf Einlieferung), `Ingresado` (eingegangen), `En camino` (unterwegs) und `Entregado` (zugestellt). Jede Zeile ist ein kurzer Satz an dich, mit Filiale (`sucursal`) und Ort, wenn vorhanden. Die Zeilen eines üblichen Wegs, die Peek kennt, in ihrer Reihenfolge:
 
 | Andreani meldet | Was das für dich bedeutet | Status in Peek |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ Peek konnte die Website von Andreani nicht auslesen; deshalb nennt diese Seite k
 
 **Nur `Pendiente de ingreso`.** Der Absender hat die Sendung angelegt, das Paket aber noch nicht an Andreani übergeben. Peek zeigt „Etikett erstellt“. Frag beim Shop, ob deine Bestellung schon verschickt wurde.
 
-**Gar kein Ergebnis.** Vielleicht kennt Andreanis Tracking die Nummer noch nicht. Unter Andreani abgelegt, zeigt das Paket „Warten auf Andreani“, und Peek fragt weiter nach. Kommt nach einigen Tagen nichts, prüfe die Nummer beim Shop. Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+**Gar kein Ergebnis.** Vielleicht kennt Andreanis Tracking die Nummer noch nicht. Unter Andreani abgelegt, zeigt das Paket „Warten auf Andreani“, und Peek fragt weiter nach. Kennt Andreani die Nummer nach zwei Tagen noch immer nicht, bittet Peek dich, sie zu prüfen, einen anderen Paketdienst zu wählen oder das Paket zu löschen: Prüfe sie beim Shop. Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
-**Tagelang still.** Ist die neueste Zeile vier Tage oder älter und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit „Seit vier Tagen keine Aktualisierung“. Über ein Wochenende bleiben Pakete oft still. Ändert sich nichts, frag beim Shop nach.
+**Tagelang still.** Ist die neueste Zeile vier Tage oder älter und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieser Zeile: „Keine Aktualisierung seit …“. Über ein Wochenende bleiben Pakete oft still. Ändert sich nichts, frag beim Shop nach.
 
 **Zugestellt, aber nichts angekommen.** Die letzte Zeile lautet `Ya entregamos tu envío. ¡Esperamos volver a verte pronto!`, doch du hast kein Paket. Frag Personen an der Adresse, Nachbarn und Hauspersonal, danach den Shop. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -83,7 +83,7 @@ Bei einer Online-Bestellung wende dich zuerst an den Shop: Er hat die Lieferung 
 
 An einer 15-stelligen Nummer allein erkennt [Peek](/) Andreani nicht. Füge sie trotzdem ein: Peek unterstützt mehr als 4.500 Paketdienste.
 
-**Eine Nummer beginnend mit `36000`, `31000` oder `30000`.** Peek fragt gleichzeitig bei Andreani und BRT nach und zeigt dabei „Tracking-Dienste werden geprüft…“. Hat Andreani das Paket, nennt die Zeile unter der Nummer Andreani mit „hat dieses Paket“, und Peek ordnet es dort ein. Falls noch nicht, steht dort „noch nicht gefunden · Peek prüft weiter“. Füge das Paket trotzdem hinzu: Es zeigt „Wahrscheinlich Andreani“ und „Warten auf den ersten Scan von Andreani“, und Peek fragt nach den ersten Stunden alle 6 Stunden weiter bei Andreani nach, wenn das Paket in der iPhone- oder Android-App oder in deinem Konto liegt. Bei einer Abfrage ohne Konto prüft Peek während der ersten 6 Stunden, danach beim Öffnen des Links (höchstens alle 6 Stunden, nach den ersten zwei Tagen höchstens täglich) und bei aktivierten Benachrichtigungen täglich bis 30 Tage nach der Abfrage. Nach einer Woche ohne Ergebnis bittet es dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
+**Eine Nummer beginnend mit `36000`, `31000` oder `30000`.** Peek fragt gleichzeitig bei Andreani und BRT nach (Tracking-Dienste und Ozon nur, wenn keiner der beiden die Nummer kennt) und zeigt dabei „Tracking-Dienste werden geprüft…“. Hat Andreani das Paket, nennt die Zeile unter der Nummer Andreani mit „hat dieses Paket“, und Peek ordnet es dort ein. Falls noch nicht, steht dort „noch nicht gefunden · Peek prüft weiter“. Füge das Paket trotzdem hinzu: Es zeigt „Wahrscheinlich Andreani“ und „Warten auf den ersten Scan von Andreani“, und Peek fragt nach den ersten Stunden alle 6 Stunden weiter bei Andreani nach, wenn das Paket in der iPhone- oder Android-App oder in deinem Konto liegt. Bei einer Abfrage ohne Konto prüft Peek während der ersten 6 Stunden, danach beim Öffnen des Links (höchstens alle 6 Stunden, nach den ersten zwei Tagen höchstens täglich) und bei aktivierten Benachrichtigungen täglich bis 30 Tage nach der Abfrage. Nach einer Woche ohne Ergebnis bittet es dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
 
 **Ein andreani.com-Link.** Füge den Tracking-Link mit `/envio/` ein. Peek nennt Andreani sofort („Erkannter Paketdienst“) und verfolgt die Nummer aus dem Link – auch Referenzen mit Buchstaben.
 
@@ -91,9 +91,9 @@ An einer 15-stelligen Nummer allein erkennt [Peek](/) Andreani nicht. Füge sie 
 
 **Was Peek zeigt.** Peek fragt direkt Andreanis eigenes Tracking ab, denselben Abruf wie die Tracking-Seite von Andreani. Für jede Zeile siehst du den spanischen Text, die Stufe (Tabelle oben), die Filiale und die Uhrzeit. Andreanis Zeiten laufen auf argentinischer Zeit, die eine einzige Zeitzone ohne Sommerzeit hat; Peek rechnet sie in deine Geräte-Zeitzone um. Andreanis Tracking zeigt zudem Absendername, Fahrername, Hinweise, Kartenposition, Fortschrittsbalken und eine Lieferprognose – all das lässt Peek weg und zeigt daher kein voraussichtliches Lieferdatum.
 
-**Wenn Andreani nicht antwortet.** Dann fragt Peek nacheinander Tracking-Dienste an – ParcelsApp, Ship24 und 17TRACK – und zeigt deren Meldungen in ihrem eigenen Wortlaut. Eine Übergabe von Andreani an einen anderen Paketdienst kennt Peek nicht und verfolgt das Paket bis zum Schluss bei Andreani.
+**Wenn Andreani nicht antwortet.** Dann fragt Peek Tracking-Dienste an und zeigt deren Meldungen in ihrem eigenen Wortlaut. Eine Übergabe von Andreani an einen anderen Paketdienst kennt Peek nicht und verfolgt das Paket bis zum Schluss bei Andreani.
 
-**Prüfungen und Benachrichtigungen.** Peek prüft bis zu alle 10 Minuten, und alle 2 Minuten ab 6 Uhr Ortszeit an dem Tag, an dem Andreani das Paket in Zustellung scannt. Ohne Neuigkeiten seit zwei Tagen – oder nach 12 Stunden auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ – prüft Peek stündlich. Benachrichtigungen gibt es für „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Peek kann weder Andreani noch den Shop für dich kontaktieren.
+**Prüfungen und Benachrichtigungen.** Solange das Paket in Peek geöffnet ist, oder an seinem Zustelltag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten, und alle 2 Minuten ab 6 Uhr argentinischer Zeit an dem Tag, an dem Andreani das Paket in Zustellung scannt, solange Andreanis Tracking antwortet. Ohne Neuigkeiten seit zwei Tagen – oder nach 12 Stunden auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ – prüft Peek stündlich, und nach sieben Tagen ohne Neuigkeiten auf „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen gibt es mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek kann weder Andreani noch den Shop für dich kontaktieren.
 
 ## Fragen zur Andreani Sendungsverfolgung
 
@@ -107,7 +107,7 @@ Wartet auf Einlieferung: Der Absender hat das Paket angekündigt, aber Andreani 
 
 ### Was bedeutet „Hoy te visitaremos para entregarte tu envío.“?
 
-Andreani kommt heute, um dein Paket zuzustellen. Peek zeigt „In Zustellung“ und prüft häufiger, bis die Zustellzeile erscheint.
+Andreani kommt heute, um dein Paket zuzustellen. Peek zeigt „In Zustellung“ und prüft, solange das Paket in Peek geöffnet ist oder Benachrichtigungen aktiv sind, häufiger, bis die Zustellzeile erscheint.
 
 ### Warum aktualisiert sich mein Andreani-Tracking nicht?
 

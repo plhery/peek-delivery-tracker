@@ -17,7 +17,7 @@ Les numéros Andreani que Peek connaît comptent 15 chiffres et commencent par `
 | `360004829103756` | `36000` suivi de 10 chiffres : la plage Andreani, mais une correspondance faible. [BRT](carrier:brt) et Yunda utilisent aussi 15 chiffres, donc Peek interroge à la fois Andreani et BRT. |
 | `310004829103756` | `31000` suivi de 10 chiffres : également dans la plage Andreani. |
 | `300004829103756` | `30000` suivi de 10 chiffres : également dans la plage Andreani. |
-| `739402815634281` | 15 chiffres commençant autrement. Peek ne le relie pas à Andreani : [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), [Hermes](carrier:hermes-de), BRT et Yunda utilisent aussi 15 chiffres. |
+| `007394028156348` | 15 chiffres commençant autrement. Peek ne le relie pas à Andreani : [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), [Hermes](carrier:hermes-de), BRT et Yunda utilisent aussi 15 chiffres. |
 
 Les espaces ne posent aucun problème lorsque tu colles un numéro dans Peek.
 
@@ -29,7 +29,7 @@ Tu ne trouves pas ton numéro ? Consulte [comment trouver un numéro de suivi](g
 
 ## Statuts de suivi Andreani expliqués
 
-Le suivi d’Andreani regroupe ses lignes sous des en-têtes en espagnol. Les quatre que Peek connaît sont `Pendiente de ingreso` (en attente de réception), `Ingresado` (reçu), `En camino` (en route) et `Entregado` (livré). Chaque ligne est une courte phrase adressée au destinataire, mentionnant l’agence (`sucursal`) et la ville lorsqu’il y en a une. Voici les lignes reconnues par Peek, dans l’ordre habituel :
+Le suivi d’Andreani regroupe ses lignes sous des en-têtes en espagnol. Les quatre que Peek connaît sont `Pendiente de ingreso` (en attente de réception), `Ingresado` (reçu), `En camino` (en route) et `Entregado` (livré). Chaque ligne est une courte phrase adressée au destinataire, mentionnant l’agence (`sucursal`) et la ville lorsqu’il y en a une. Voici les lignes d’un trajet habituel reconnues par Peek, dans l’ordre :
 
 | Ce que dit Andreani | Ce que cela signifie pour toi | Statut Peek |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ Peek n’a pas pu lire le site web d’Andreani : cette page ne donne donc ni d�
 
 **Seulement `Pendiente de ingreso`.** L’expéditeur a créé l’envoi mais n’a pas encore remis le colis à Andreani. Peek affiche « Étiquette créée ». Demande à la boutique si la commande a bien été expédiée.
 
-**Aucun résultat.** Il se peut que le suivi d’Andreani ne connaisse pas encore le numéro. Classé sous Andreani, le colis affiche « En attente de Andreani » et Peek continue d’interroger le transporteur. Si rien n’apparaît après quelques jours, vérifie le numéro auprès de la boutique. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
+**Aucun résultat.** Il se peut que le suivi d’Andreani ne connaisse pas encore le numéro. Classé sous Andreani, le colis affiche « En attente de Andreani » et Peek continue d’interroger le transporteur. Si Andreani ne connaît toujours pas le numéro après deux jours, Peek te demande de le vérifier, de choisir un autre transporteur ou de supprimer le colis : vérifie-le auprès de la boutique. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
 
-**Silencieux depuis plusieurs jours.** Quand la ligne la plus récente a quatre jours ou plus et que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale : « Aucune mise à jour depuis quatre jours ». Les colis restent souvent sans nouvelle le week-end. Si rien ne change, contacte la boutique.
+**Silencieux depuis plusieurs jours.** Quand la ligne la plus récente a quatre jours ou plus et que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de cette ligne : « Aucune mise à jour depuis … ». Les colis restent souvent sans nouvelle le week-end. Si rien ne change, contacte la boutique.
 
 **Livré, mais rien reçu.** La dernière ligne affiche `Ya entregamos tu envío. ¡Esperamos volver a verte pronto!`, mais tu n’as pas le colis. Renseigne-toi auprès des personnes présentes à l’adresse, des voisins et du gardien de l’immeuble, puis contacte la boutique. Voir [colis indiqué livré mais non reçu](guide:delivered-not-received).
 
@@ -83,7 +83,7 @@ Pour une commande en ligne, contacte d’abord la boutique : c’est elle qui a 
 
 Un numéro à 15 chiffres ne suffit pas à [Peek](/) pour savoir qu’il appartient à Andreani. Colle-le tout de même : Peek suit plus de 4 500 transporteurs.
 
-**Un numéro commençant par `36000`, `31000` ou `30000`.** Peek interroge à la fois Andreani et BRT et affiche « Vérification des services de suivi… » pendant la recherche. Si Andreani connaît le colis, la ligne sous le numéro nomme Andreani et affiche « a ce colis », puis Peek le classe chez Andreani. Sinon, elle indique « pas encore trouvé · Peek continue de vérifier ». Ajoute-le quand même : la carte affiche « Probablement Andreani » et « En attente du premier scan de Andreani », et Peek continue d’interroger Andreani toutes les 6 heures après les premières heures si le colis est dans l’app iPhone ou Android, ou dans ton compte. Pour une recherche sans compte, Peek vérifie durant les 6 premières heures, puis lorsque tu ouvres le lien (au plus toutes les 6 heures, puis au plus une fois par jour après deux jours) et, si les notifications sont activées, une fois par jour jusqu’à 30 jours après la recherche. Après une semaine sans résultat, il propose de vérifier le numéro auprès de l’expéditeur ou de choisir un autre transporteur.
+**Un numéro commençant par `36000`, `31000` ou `30000`.** Peek interroge à la fois Andreani et BRT (des services de suivi et Ozon seulement si aucun des deux ne connaît le numéro) et affiche « Vérification des services de suivi… » pendant la recherche. Si Andreani connaît le colis, la ligne sous le numéro nomme Andreani et affiche « a ce colis », puis Peek le classe chez Andreani. Sinon, elle indique « pas encore trouvé · Peek continue de vérifier ». Ajoute-le quand même : la carte affiche « Probablement Andreani » et « En attente du premier scan de Andreani », et Peek continue d’interroger Andreani toutes les 6 heures après les premières heures si le colis est dans l’app iPhone ou Android, ou dans ton compte. Pour une recherche sans compte, Peek vérifie durant les 6 premières heures, puis lorsque tu ouvres le lien (au plus toutes les 6 heures, puis au plus une fois par jour après deux jours) et, si les notifications sont activées, une fois par jour jusqu’à 30 jours après la recherche. Après une semaine sans résultat, il propose de vérifier le numéro auprès de l’expéditeur ou de choisir un autre transporteur.
 
 **Un lien andreani.com.** Colle le lien de suivi contenant `/envio/`. Peek affiche aussitôt Andreani (« Transporteur détecté ») et suit le numéro extrait du lien, y compris une référence avec des lettres.
 
@@ -91,9 +91,9 @@ Un numéro à 15 chiffres ne suffit pas à [Peek](/) pour savoir qu’il apparti
 
 **Ce que montre Peek.** Peek lit directement le suivi d’Andreani, la même requête que la page officielle. Pour chaque étape, il affiche le texte espagnol d’Andreani, son étape (tableau ci-dessus), l’agence et l’heure. Les horaires d’Andreani suivent l’heure d’Argentine, qui n’a qu’un fuseau horaire et aucun changement d’heure, et Peek les convertit dans ton fuseau horaire. Le site d’Andreani affiche aussi le nom de l’expéditeur, le nom du chauffeur, des remarques, une position sur carte, une barre de progression et une estimation de livraison : Peek laisse tout cela de côté et n’affiche donc pas de date de livraison estimée.
 
-**Quand Andreani ne répond pas.** Peek interroge alors les services de suivi — ParcelsApp, Ship24 et 17TRACK tour à tour — et affiche leurs lignes dans leurs propres mots. Peek ne connaît aucun relais d’Andreani vers un autre transporteur et suit donc le colis chez Andreani jusqu’au bout.
+**Quand Andreani ne répond pas.** Peek interroge alors des services de suivi et affiche leurs lignes dans leurs propres mots. Peek ne connaît aucun relais d’Andreani vers un autre transporteur et suit donc le colis chez Andreani jusqu’au bout.
 
-**Vérifications et alertes.** Peek vérifie le colis jusqu’à toutes les 10 minutes, ou toutes les 2 minutes à partir de 6 h heure locale le jour où Andreani le scanne en livraison. Un colis sans nouvelle depuis deux jours, ou depuis 12 heures en « Étiquette créée » ou « Pris en charge », est vérifié chaque heure. Tu peux activer les alertes sur « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Peek ne peut contacter ni Andreani ni la boutique à ta place.
+**Vérifications et alertes.** Tant que le colis est ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek le vérifie jusqu’à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h, heure d’Argentine, le jour où Andreani le scanne en livraison, tant que le suivi d’Andreani répond. Un colis sans nouvelle depuis deux jours, ou depuis 12 heures en « Étiquette créée » ou « Pris en charge », est vérifié chaque heure, et après sept jours sans nouvelle en « Étiquette créée », toutes les 6 heures. Tu peux recevoir des alertes avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni Andreani ni la boutique à ta place.
 
 ## Questions sur le suivi Andreani
 
@@ -107,7 +107,7 @@ En attente de prise en charge : l’expéditeur a annoncé le colis, mais Andrea
 
 ### Que signifie « Hoy te visitaremos para entregarte tu envío. » ?
 
-Andreani passe livrer ton colis aujourd’hui. Peek affiche « En livraison » et vérifie plus fréquemment jusqu’à la confirmation de livraison.
+Andreani passe livrer ton colis aujourd’hui. Peek affiche « En livraison » et, tant que le colis est ouvert dans Peek ou que les notifications sont activées, vérifie plus fréquemment jusqu’à la confirmation de livraison.
 
 ### Pourquoi mon suivi Andreani ne se met-il plus à jour ?
 

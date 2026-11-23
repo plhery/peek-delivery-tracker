@@ -17,7 +17,7 @@ Los números de Andreani que Peek conoce tienen 15 dígitos y empiezan por `3600
 | `360004829103756` | `36000` y 10 dígitos más: rango de Andreani, aunque con coincidencia débil. [BRT](carrier:brt) y Yunda también usan 15 dígitos, así que Peek pregunta a Andreani y a BRT. |
 | `310004829103756` | `31000` y 10 dígitos más: también del rango de Andreani. |
 | `300004829103756` | `30000` y 10 dígitos más: también del rango de Andreani. |
-| `739402815634281` | 15 dígitos con otro inicio. Peek no lo asocia a Andreani: [FedEx](carrier:fedex), DPD Francia, [Hermes](carrier:hermes-de), BRT y Yunda también usan 15 dígitos. |
+| `007394028156348` | 15 dígitos con otro inicio. Peek no lo asocia a Andreani: [FedEx](carrier:fedex), DPD Francia, [Hermes](carrier:hermes-de), BRT y Yunda también usan 15 dígitos. |
 
 Los espacios no importan al pegar un número en Peek.
 
@@ -29,7 +29,7 @@ Los espacios no importan al pegar un número en Peek.
 
 ## Estados del seguimiento de Andreani explicados
 
-El seguimiento de Andreani agrupa sus avisos bajo encabezados en español. Los cuatro que Peek conoce son `Pendiente de ingreso`, `Ingresado`, `En camino` y `Entregado`. Cada línea es una frase breve dirigida a ti, con la sucursal y la localidad cuando corresponde. Las líneas que Peek reconoce, en el orden habitual:
+El seguimiento de Andreani agrupa sus avisos bajo encabezados en español. Los cuatro que Peek conoce son `Pendiente de ingreso`, `Ingresado`, `En camino` y `Entregado`. Cada línea es una frase breve dirigida a ti, con la sucursal y la localidad cuando corresponde. Las líneas de un trayecto habitual que Peek reconoce, en orden:
 
 | Andreani dice | Qué significa para ti | Estado en Peek |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ Peek no pudo leer el sitio web de Andreani, por lo que esta página no incluye p
 
 **Solo `Pendiente de ingreso`.** El remitente creó el envío, pero aún no entregó el paquete a Andreani. Peek muestra «Etiqueta creada». Pregunta a la tienda si ya despachó tu compra.
 
-**Sin ningún resultado.** Puede que el rastreador de Andreani aún no registre el número. Guardado en Andreani, el envío muestra «Esperando a Andreani» y Peek sigue preguntando. Si pasan varios días sin nada, confirma el número con la tienda. Ver [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
+**Sin ningún resultado.** Puede que el rastreador de Andreani aún no registre el número. Guardado en Andreani, el envío muestra «Esperando a Andreani» y Peek sigue preguntando. Si tras dos días Andreani sigue sin conocer el número, Peek te pide que lo revises, elijas otro transportista o elimines el paquete: confírmalo con la tienda. Ver [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
-**Sin novedades durante días.** Cuando la línea más reciente tiene cuatro días o más y el envío sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca como «Sin novedades desde hace cuatro días». Es habitual que no haya movimientos el fin de semana. Si sigue igual, consulta a la tienda.
+**Sin novedades durante días.** Cuando la línea más reciente tiene cuatro días o más y el envío sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de esa línea: «Sin novedades desde el …». Es habitual que no haya movimientos el fin de semana. Si sigue igual, consulta a la tienda.
 
 **Entregado, pero no llegó nada.** La última línea dice `Ya entregamos tu envío. ¡Esperamos volver a verte pronto!`, pero no tienes el paquete. Pregunta a quienes viven en el domicilio, a vecinos o al personal del edificio, y luego a la tienda. Ver [entregado pero no recibido](guide:delivered-not-received).
 
@@ -83,7 +83,7 @@ Para una compra online, contacta primero a la tienda: contrató el envío y tien
 
 Un número de 15 dígitos no basta para que [Peek](/) sepa solo por su forma que es de Andreani. Pégalo igualmente: Peek sigue a más de 4.500 transportistas.
 
-**Un número que empieza por `36000`, `31000` o `30000`.** Peek pregunta a Andreani y a BRT al mismo tiempo y muestra «Comprobando servicios de seguimiento…» mientras tanto. Si Andreani tiene el paquete, la línea bajo el número nombra a Andreani y dice «tiene este paquete», y Peek lo guarda allí. Si no, dice «aún no encontrado · Peek seguirá comprobando». Añádelo igual: el envío mostrará «Probablemente Andreani» y «Esperando el primer escaneo de Andreani», y Peek seguirá preguntando a Andreani cada 6 horas tras las primeras horas en la app de iPhone o Android o en tu cuenta. Para una consulta sin cuenta, Peek pregunta durante las primeras 6 horas, luego cuando abres el enlace (como máximo cada 6 horas, y como máximo una vez al día pasados dos días) y, si tienes alertas activas, una vez al día hasta 30 días después de la consulta. Tras una semana sin novedades, te sugiere verificar el número con el remitente o elegir otro transportista.
+**Un número que empieza por `36000`, `31000` o `30000`.** Peek pregunta a Andreani y a BRT al mismo tiempo (a servicios de seguimiento y a Ozon solo si ninguno de los dos conoce el número) y muestra «Comprobando servicios de seguimiento…» mientras tanto. Si Andreani tiene el paquete, la línea bajo el número nombra a Andreani y dice «tiene este paquete», y Peek lo guarda allí. Si no, dice «aún no encontrado · Peek seguirá comprobando». Añádelo igual: el envío mostrará «Probablemente Andreani» y «Esperando el primer escaneo de Andreani», y Peek seguirá preguntando a Andreani cada 6 horas tras las primeras horas en la app de iPhone o Android o en tu cuenta. Para una consulta sin cuenta, Peek pregunta durante las primeras 6 horas, luego cuando abres el enlace (como máximo cada 6 horas, y como máximo una vez al día pasados dos días) y, si tienes alertas activas, una vez al día hasta 30 días después de la consulta. Tras una semana sin novedades, te sugiere verificar el número con el remitente o elegir otro transportista.
 
 **Un enlace de andreani.com.** Pega el enlace de seguimiento con `/envio/`. Peek nombra a Andreani al instante («Transportista detectado») y sigue el número del enlace, incluidas referencias con letras.
 
@@ -91,9 +91,9 @@ Un número de 15 dígitos no basta para que [Peek](/) sepa solo por su forma que
 
 **Qué muestra Peek.** Peek consulta directamente el rastreador de Andreani, la misma consulta que hace su página web. Para cada movimiento muestra la frase de Andreani, su etapa (tabla de arriba), la sucursal y la hora. Las horas de Andreani usan el horario de Argentina, que tiene una sola zona horaria y sin cambio de hora; Peek las convierte a la zona horaria de tu dispositivo. El rastreador de Andreani también muestra el nombre del remitente, el nombre del conductor, observaciones, ubicación en mapa, barra de progreso y una estimación de entrega; Peek omite todo eso, por lo que no muestra fecha estimada de entrega.
 
-**Cuando Andreani no responde.** Peek consulta en su lugar servicios de seguimiento —ParcelsApp, Ship24 y 17TRACK por orden— y muestra sus avisos con sus propias palabras. Peek no conoce traspasos de Andreani a otro transportista, así que sigue el envío con Andreani hasta el final.
+**Cuando Andreani no responde.** Peek consulta en su lugar servicios de seguimiento y muestra sus avisos con sus propias palabras. Peek no conoce traspasos de Andreani a otro transportista, así que sigue el envío con Andreani hasta el final.
 
-**Comprobaciones y alertas.** Peek revisa hasta cada 10 minutos, o cada 2 minutos desde las 6:00 hora local el día en que Andreani marca el paquete en reparto. Un envío sin novedades durante dos días, o durante 12 horas en «Etiqueta creada» o «Admitido por el transportista», se comprueba cada hora. Puede avisarte en «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Peek no puede contactar a Andreani ni a la tienda por ti.
+**Comprobaciones y alertas.** Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek revisa hasta cada 10 minutos, y cada 2 minutos desde las 6:00, hora de Argentina, el día en que Andreani marca el paquete en reparto, mientras el rastreador de Andreani responda. Un envío sin novedades durante dos días, o durante 12 horas en «Etiqueta creada» o «Admitido por el transportista», se comprueba cada hora, y tras siete días sin novedades en «Etiqueta creada», cada 6 horas. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar a Andreani ni a la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Andreani
 
@@ -107,7 +107,7 @@ Que el remitente anunció el envío, pero Andreani todavía no tiene el paquete.
 
 ### ¿Qué significa «Hoy te visitaremos para entregarte tu envío.»?
 
-Que Andreani pasará hoy a entregar tu paquete. Peek muestra «En reparto» y comprueba con más frecuencia hasta que aparezca la entrega.
+Que Andreani pasará hoy a entregar tu paquete. Peek muestra «En reparto» y, mientras tengas el paquete abierto en Peek o las notificaciones activadas, comprueba con más frecuencia hasta que aparezca la entrega.
 
 ### ¿Por qué no se actualiza mi seguimiento de Andreani?
 

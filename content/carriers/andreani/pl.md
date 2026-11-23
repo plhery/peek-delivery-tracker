@@ -17,7 +17,7 @@ Numery Andreani, które rozpoznaje Peek, mają 15 cyfr i zaczynają się od `360
 | `360004829103756` | `36000` i 10 kolejnych cyfr: zakres Andreani, ale tylko słabe dopasowanie. [BRT](carrier:brt) i Yunda również używają 15 cyfr, więc Peek pyta zarówno Andreani, jak i BRT. |
 | `310004829103756` | `31000` i 10 kolejnych cyfr: również zakres Andreani. |
 | `300004829103756` | `30000` i 10 kolejnych cyfr: również zakres Andreani. |
-| `739402815634281` | 15 cyfr z innym początkiem. Peek nie wiąże go z Andreani: [FedEx](carrier:fedex), DPD Francja, [Hermes](carrier:hermes-de), BRT i Yunda też stosują 15 cyfr. |
+| `007394028156348` | 15 cyfr z innym początkiem. Peek nie wiąże go z Andreani: [FedEx](carrier:fedex), DPD Francja, [Hermes](carrier:hermes-de), BRT i Yunda też stosują 15 cyfr. |
 
 Spacje nie przeszkadzają przy wklejaniu numeru do Peek.
 
@@ -29,7 +29,7 @@ Nie możesz znaleźć numeru? Zobacz [jak znaleźć numer śledzenia](guide:find
 
 ## Wyjaśnienie statusów śledzenia Andreani
 
-Śledzenie Andreani grupuje wpisy pod nagłówkami po hiszpańsku. Cztery nagłówki znane Peek to `Pendiente de ingreso` (oczekuje na przyjęcie), `Ingresado` (przyjęta), `En camino` (w drodze) i `Entregado` (doręczona). Każdy wpis to krótkie zdanie skierowane do odbiorcy, z nazwą oddziału (`sucursal`) i miejscowością, jeśli zostały podane. Wpisy znane Peek, w typowej kolejności:
+Śledzenie Andreani grupuje wpisy pod nagłówkami po hiszpańsku. Cztery nagłówki znane Peek to `Pendiente de ingreso` (oczekuje na przyjęcie), `Ingresado` (przyjęta), `En camino` (w drodze) i `Entregado` (doręczona). Każdy wpis to krótkie zdanie skierowane do odbiorcy, z nazwą oddziału (`sucursal`) i miejscowością, jeśli zostały podane. Wpisy typowej trasy znane Peek, w kolejności:
 
 | Andreani podaje | Co to oznacza dla ciebie | Status w Peek |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ Peek nie mógł odczytać strony internetowej Andreani, więc ta strona nie poda
 
 **Tylko `Pendiente de ingreso`.** Nadawca utworzył przesyłkę, lecz nie przekazał jeszcze paczki do Andreani. Peek pokazuje „Zarejestrowana”. Zapytaj sklep, czy zamówienie zostało już wysłane.
 
-**Brak wyników.** Wyszukiwarka Andreani może jeszcze nie znać numeru. Zapisana pod Andreani paczka pokazuje „Oczekiwanie na przewoźnika Andreani”, a Peek pyta dalej. Jeśli po kilku dniach nadal nic nie ma, potwierdź numer w sklepie. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+**Brak wyników.** Wyszukiwarka Andreani może jeszcze nie znać numeru. Zapisana pod Andreani paczka pokazuje „Oczekiwanie na przewoźnika Andreani”, a Peek pyta dalej. Jeśli po dwóch dniach Andreani nadal nie zna numeru, Peek prosi o sprawdzenie go, wybór innego przewoźnika albo usunięcie przesyłki: potwierdź numer w sklepie. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
-**Cisza od kilku dni.** Gdy najnowszy wpis ma co najmniej cztery dni, a paczka nadal ma status „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją: „Brak aktualizacji od czterech dni”. Przez weekend często nie ma nowych skanów. Jeśli nic się nie zmienia, zapytaj sklep.
+**Cisza od kilku dni.** Gdy najnowszy wpis ma co najmniej cztery dni, a paczka nadal ma status „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego wpisu: „Brak aktualizacji od …”. Przez weekend często nie ma nowych skanów. Jeśli nic się nie zmienia, zapytaj sklep.
 
 **Doręczona, ale nic nie dotarło.** Ostatni wpis to `Ya entregamos tu envío. ¡Esperamos volver a verte pronto!`, lecz nie masz paczki. Zapytaj domowników, sąsiadów i obsługę budynku, a potem sklep. Zobacz [doręczona, ale nieotrzymana](guide:delivered-not-received).
 
@@ -83,7 +83,7 @@ Przy zakupach online zapytaj najpierw sklep: to on zamówił dostawę i ma szcze
 
 Po samych 15 cyfrach [Peek](/) nie rozpoznaje jednoznacznie Andreani. Wklej numer mimo to: Peek obsługuje ponad 4 500 przewoźników.
 
-**Numer zaczynający się od `36000`, `31000` lub `30000`.** Peek pyta równocześnie Andreani i BRT, wyświetlając „Sprawdzanie usług śledzenia…”. Jeśli Andreani ma paczkę, wiersz pod numerem wskazuje Andreani z dopiskiem „ma tę przesyłkę” i Peek przypisuje ją do Andreani. Jeśli nie, pojawia się „jeszcze nie znaleziono · Peek sprawdza dalej”. Dodaj przesyłkę mimo to: wyświetli „Prawdopodobnie Andreani” i „Oczekiwanie na pierwszy skan przewoźnika Andreani”, a Peek pyta Andreani co 6 godzin po pierwszych kilku godzinach w aplikacji na iPhone’a lub Androida albo na koncie. Przy wyszukiwaniu bez konta Peek sprawdza przez pierwsze 6 godzin, potem przy otwarciu linku (najwyżej co 6 godzin, a po dwóch dniach najwyżej raz dziennie) oraz przy włączonych powiadomieniach raz dziennie do 30 dni od wyszukiwania. Po tygodniu bez wyniku sugeruje sprawdzenie numeru u nadawcy lub wybór innego przewoźnika.
+**Numer zaczynający się od `36000`, `31000` lub `30000`.** Peek pyta równocześnie Andreani i BRT (usługi śledzenia i Ozon dopiero wtedy, gdy żaden z nich nie zna numeru), wyświetlając „Sprawdzanie usług śledzenia…”. Jeśli Andreani ma paczkę, wiersz pod numerem wskazuje Andreani z dopiskiem „ma tę przesyłkę” i Peek przypisuje ją do Andreani. Jeśli nie, pojawia się „jeszcze nie znaleziono · Peek sprawdza dalej”. Dodaj przesyłkę mimo to: wyświetli „Prawdopodobnie Andreani” i „Oczekiwanie na pierwszy skan przewoźnika Andreani”, a Peek pyta Andreani co 6 godzin po pierwszych kilku godzinach w aplikacji na iPhone’a lub Androida albo na koncie. Przy wyszukiwaniu bez konta Peek sprawdza przez pierwsze 6 godzin, potem przy otwarciu linku (najwyżej co 6 godzin, a po dwóch dniach najwyżej raz dziennie) oraz przy włączonych powiadomieniach raz dziennie do 30 dni od wyszukiwania. Po tygodniu bez wyniku sugeruje sprawdzenie numeru u nadawcy lub wybór innego przewoźnika.
 
 **Link andreani.com.** Wklej link śledzenia zawierający `/envio/`. Peek od razu wskazuje Andreani („Wykryty przewoźnik”) i śledzi numer z linku, także referencje z literami.
 
@@ -91,9 +91,9 @@ Po samych 15 cyfrach [Peek](/) nie rozpoznaje jednoznacznie Andreani. Wklej nume
 
 **Co pokazuje Peek.** Peek odczytuje bezpośrednio śledzenie Andreani — to samo zapytanie co strona Andreani. Dla każdego zdarzenia pokazuje hiszpański opis Andreani, etap (tabela wyżej), oddział i godzinę. Czasy Andreani podawane są w czasie Argentyny, który ma jedną strefę czasową bez czasu letniego; Peek przelicza je na strefę twojego urządzenia. Strona Andreani pokazuje też nazwę nadawcy, imię kierowcy, uwagi, pozycję na mapie, pasek postępu i szacowany termin doręczenia: Peek pomija te pola i dlatego nie wyświetla przewidywanej daty dostawy.
 
-**Gdy Andreani nie odpowiada.** Peek pyta wtedy po kolei usługi śledzenia — ParcelsApp, Ship24 i 17TRACK — i pokazuje ich wpisy w ich własnym brzmieniu. Peek nie zna przekazań z Andreani do innego przewoźnika, więc śledzi paczkę w Andreani do końca.
+**Gdy Andreani nie odpowiada.** Peek pyta wtedy usługi śledzenia i pokazuje ich wpisy w ich własnym brzmieniu. Peek nie zna przekazań z Andreani do innego przewoźnika, więc śledzi paczkę w Andreani do końca.
 
-**Sprawdzanie i powiadomienia.** Peek sprawdza paczkę nawet co 10 minut, a co 2 minuty od 6:00 czasu lokalnego w dniu, gdy Andreani zeskanuje ją w doręczeniu. Przesyłka bez nowych zdarzeń przez dwa dni, albo przez 12 godzin ze statusem „Zarejestrowana” lub „Przyjęta przez przewoźnika”, sprawdzana jest co godzinę. Możesz ustawić powiadomienia: „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Peek nie może skontaktować się za ciebie z Andreani ani ze sklepem.
+**Sprawdzanie i powiadomienia.** Gdy paczka jest otwarta w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a co 2 minuty od 6:00 czasu argentyńskiego w dniu, gdy Andreani zeskanuje ją w doręczeniu, dopóki wyszukiwarka Andreani odpowiada. Przesyłka bez nowych zdarzeń przez dwa dni, albo przez 12 godzin ze statusem „Zarejestrowana” lub „Przyjęta przez przewoźnika”, sprawdzana jest co godzinę, a po siedmiu dniach bez zmian ze statusem „Zarejestrowana” co 6 godzin. Możesz ustawić powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się za ciebie z Andreani ani ze sklepem.
 
 ## Pytania o śledzenie Andreani
 
@@ -107,7 +107,7 @@ Oczekuje na przyjęcie: nadawca zgłosił przesyłkę, ale Andreani jeszcze jej 
 
 ### Co oznacza „Hoy te visitaremos para entregarte tu envío.”?
 
-Andreani przyjedzie dziś doręczyć twoją przesyłkę. Peek pokazuje „W doręczeniu” i sprawdza częściej, aż pojawi się wpis o doręczeniu.
+Andreani przyjedzie dziś doręczyć twoją przesyłkę. Peek pokazuje „W doręczeniu” i, gdy paczka jest otwarta w Peek albo powiadomienia są włączone, sprawdza częściej, aż pojawi się wpis o doręczeniu.
 
 ### Dlaczego moje śledzenie Andreani się nie aktualizuje?
 

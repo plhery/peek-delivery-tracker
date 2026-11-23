@@ -14,10 +14,10 @@ An item posted with Latvijas Pasts has a 13-character [international postal numb
 
 | First letters (invented examples) | What it is |
 | --- | --- |
-| `RR000000005LV` | Registered item: you sign when you receive it. |
-| `LA000000005LV` | Traceable item: tracked at each stage, put in your mailbox without a signature. |
-| `CA000000005LV` | Parcel: you get an invitation to collect it at the post office. |
-| `EE000000005LV` | Express Mail Service (EMS). |
+| `RR482917367LV` | Registered item: you sign when you receive it. |
+| `LA482917367LV` | Traceable item: tracked at each stage, put in your mailbox without a signature. |
+| `CA482917367LV` | Parcel: you get an invitation to collect it at the post office. |
+| `EE482917367LV` | Express Mail Service (EMS). |
 
 Simple or Economy items are not registered at any stage, so they can't be tracked, and no compensation is paid if they're damaged. If you have no number, the item may have been sent this way; see [how to find a tracking number](guide:find-tracking-number).
 
@@ -52,17 +52,17 @@ The tracker shows each step with its date, time and the Latvian post office. Abo
 | `Item address re-labelled` | Relabelled for its new address, where it now goes. |
 | `Item handed over for delivery` | Out for delivery. |
 | `Unsuccessful delivery attempt` | Delivery failed: see missed deliveries below. At the same second as `Item address re-labelled`, though, it records a redirection: the item goes on, for example to another pickup point, and Peek shows "In transit", not "Delivery attempted". |
-| `Notification - pick-up invitation printed` | Ready for pickup: the post office has printed an invitation for you to collect it there. |
+| `Notification - pick-up invitation printed`, `Electronic notification (SMS) - pick-up invitation sent to recipient` | Ready for pickup: the post office has printed an invitation for you to collect it there, or sent it to you by SMS. |
 | `Item arrived at pick-up point` | A foreign post's scan: the item waits at a pickup point abroad. It names the country, not the point. |
 | `Item delivered` | Delivered, also when the destination country's post delivers an item sent abroad. |
 
-`Item returned from Customs` is the one that worries people: it means the item is back from the customs check and moving again, not that it's going back. `Item awaiting next planned cycle` means it's waiting for the next dispatch at the exchange office. For duties and EU fees on parcels from outside the EU, see [parcels held at customs](guide:customs).
+`Item returned from Customs` is the one that worries people: it means the item is back from the customs check and moving again, not that it's going back. `Item awaiting next planned cycle` means it's waiting for the next dispatch at the exchange office. A shop's parcel routed through a transit location has its own wordings: `Parcel notify received` and `Parcel data received` (its data only; it isn't handed over yet), `Parcel has arrived at transit location` (its first scan), `Parcel collected at transit location`, `Parcel sent to destination country`, `Parcel has arrived in last mile` (it has reached the destination country's network) and `Parcel has gone thought last mile customs` (the tracker's spelling: it has cleared customs there). For duties and EU fees on parcels from outside the EU, see [parcels held at customs](guide:customs).
 
 If the tracker says `No information received on the tracking of the postal item. Please, try again!`, check the number, or wait: the item may not be scanned yet, and an item from abroad shows up once the post abroad has sent its data. `Postal item number entered incorrectly. Please check it and enter it again.` means the number is mistyped. If a correct number stays unknown for several days, ask the sender whether the item was sent with tracking: Simple and Economy items never show up.
 
 ## Latvijas Pasts parcel lockers, couriers and missed deliveries
 
-**Parcel lockers.** When your item reaches a locker you get an SMS with the address, the deadline and a six-digit code (and an e-mail, if the sender gave your address). It waits up to seven days; if it's still there on the third day the code is sent again, and you get a reminder before the time runs out. After that the courier takes it to the sorting centre and a paper invitation comes to your address asking you to arrange redelivery; it's kept for up to 30 days, then goes back to the sender. If the code never came, ask the sender to contact Latvijas Pasts: it corrects the phone number only at the sender's request. Lockers take parcels up to 30 kg and 38 × 38 × 58 cm.
+**Parcel lockers.** When your item reaches a locker you get an SMS with the address, the deadline and a six-digit code (and an e-mail, if the sender gave your address). It waits up to seven days; if it's still there on the third day the code is sent again, and you get a reminder before the time runs out. If it isn't collected within seven days, it counts as undelivered and goes back to the sender; an item with a longer storage period goes to the nearest Customer Service Location instead, which keeps it for 30 days. If the code never came, ask the sender to contact Latvijas Pasts: it corrects the phone number only at the sender's request. Lockers take parcels up to 30 kg and 38 × 38 × 58 cm.
 
 **Unisend lockers.** A parcel sent from Latvia to a Unisend locker in Lithuania or Estonia also waits seven days, with the code sent by SMS and e-mail (to a Latvian, Lithuanian or Estonian number) and again after 48 hours. If nobody collects it, it goes straight back to the sender.
 
@@ -78,15 +78,15 @@ A claim for a lost or damaged locker parcel must come from the sender, so if you
 
 When a courier brings a registered or insured item, check the contents in front of the courier so a report can be signed. If you open it alone and find damage, take photos and contact the sender for a replacement or refund; Latvijas Pasts says compensation then isn't its responsibility.
 
-For an item sent abroad that hasn't arrived, the sender can ask for an international search: it's free once 30 days have passed since posting.
+For an item sent abroad that hasn't arrived, the sender can ask for an international search: it's charged within a month of posting, and free once 30 days have passed.
 
 Tracking stuck, or held at customs on the way in? See [tracking that isn't updating](guide:tracking-not-updating) and [parcels held at customs](guide:customs).
 
 ## Latvijas Pasts contact and customer service
 
-The channels as pasts.lv listed them on 9 November 2026:
+The channels on pasts.lv:
 
-- **Helpline:** +371 27008001.
+- **Helpline:** +371 27008001 (the parcel locker terms also give +371 67008001).
 - **Email:** info@pasts.lv.
 - **Hours:** Monday to Friday 8:00 to 19:00, Saturday 9:00 to 17:00, closed Sunday.
 - **Report a problem:** the form at [mans.pasts.lv/complaint](https://mans.pasts.lv/complaint), handled during customer support hours.
@@ -95,11 +95,15 @@ The channels as pasts.lv listed them on 9 November 2026:
 
 ## Tracking Latvijas Pasts with Peek
 
-[Peek](/) names a postal number starting C, E, L or R and ending `LV` as Latvijas Pasts's straight away when its check digit is valid. For other valid numbers ending `LV`, such as `VV…LV`, it asks Latvijas Pasts and [Chronopost](carrier:chronopost) at once and shows "Latvijas Pasts has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Latvijas Pasts isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A mans.pasts.lv/track link with the number in it always names Latvijas Pasts. Searching the picker for "Latvian Post" finds it too. If Latvijas Pasts doesn't know the number yet, a parcel filed under it shows "Waiting for Latvijas Pasts" and Peek keeps checking. If Latvijas Pasts still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it.
+[Peek](/) names a postal number starting C, E, L or R and ending `LV` as Latvijas Pasts's straight away when its check digit is valid. For other valid numbers ending `LV`, such as `VV482917367LV`, it asks Latvijas Pasts and [Chronopost](carrier:chronopost) at once and shows "Latvijas Pasts has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Latvijas Pasts isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A mans.pasts.lv/track link with the number in it always names Latvijas Pasts. Searching the picker for "Latvian Post" finds it too. If Latvijas Pasts doesn't know the number yet, a parcel filed under it shows "Waiting for Latvijas Pasts" and Peek keeps checking. If Latvijas Pasts still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it.
 
-An item from abroad is followed at its foreign post first. When that post says the item is going to Latvia (or names no destination and you're in Latvia), Peek also asks Latvijas Pasts with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Latvijas Pasts straight away, pick "Latvijas Pasts" with "Change".
+An item from abroad is followed at its foreign post first. When that post says the item is going to Latvia (or names no destination and you're in Latvia), Peek also asks Latvijas Pasts with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Latvijas Pasts straight away, pick "Latvijas Pasts" with "Change" as you add it, or "Change carrier" on a parcel already added.
 
-Latvijas Pasts's times carry no time zone: Peek reads them on the clock of the scan's place, Latvian time for Latvian post offices, and lists Latvijas Pasts's own history. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight. Peek checks up to every 10 minutes, and up to every 2 minutes on the day Latvijas Pasts hands the parcel over for delivery, from 6 a.m. Latvian time, while Latvijas Pasts's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+Latvijas Pasts's times carry no time zone: Peek reads them on the clock of the scan's place, Latvian time for Latvian post offices, and lists Latvijas Pasts's own history. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Latvijas Pasts hands the parcel over for delivery, every 2 minutes from 6 a.m. on the clock of that scan's place (Latvian time in Latvia) while Latvijas Pasts's own tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Latvijas Pasts's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Latvijas Pasts.", with a "Get help from Latvijas Pasts" link to Latvijas Pasts's customer support page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Latvijas Pasts."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Latvian Post tracking
 
@@ -120,7 +124,7 @@ Yes, if it was sent with tracking. mans.pasts.lv/track also shows the scans it g
 Not always. Simple and Economy items aren't registered, so they can't be tracked; registered, traceable, parcel and EMS items can.
 
 :::sources
-- [Latvijas Pasts: Customer support](https://pasts.lv/en/client-support) – number letters by service, no compensation for Simple items, tracking FAQ, international search, hours, helpline, Report a problem
+- [Latvijas Pasts: Customer support](https://pasts.lv/en/client-support) – number letters by service, no compensation for Simple items, tracking FAQ, international search charged within a month and free after 30 days, hours, helpline, Report a problem
 - [Latvijas Pasts: Contacts](https://pasts.lv/en/about-us/contacts) – helpline, email, hours
 - [Latvijas Pasts: Receive a parcel](https://pasts.lv/en/private-person/receive-parcel) – ways to receive, authorisation
 - [Latvijas Pasts: Receive by courier](https://pasts.lv/en/private-person/receive-parcel/receive-by-courier) – courier SMS, three attempts, storage, Main Post Office, Postman at home
@@ -130,10 +134,10 @@ Not always. Simple and Economy items aren't registered, so they can't be tracked
 - [Latvijas Pasts: Shipment redirection](https://pasts.lv/en/services/private-person/receiving/redirection-of-shipments) – redirect link, options, prices, exclusions
 - [Latvijas Pasts: Lost or damaged parcel locker shipments](https://pasts.lv/en/services/private-person/shipment-management/lost-or-damaged-parcel-locker-shipments) – sender claims, contents, value and proof, one-month review
 - [Latvijas Pasts: Damaged shipment](https://pasts.lv/en/useful/faulty-shipment) – checking contents with the courier, claims to the sender
-- [Latvijas Pasts: Pakomātu pakalpojumu noteikumi](https://pasts.lv/media/789/download/Pakomatu_noteikumi.pdf) – six-digit code, e-mail, code sent again on the third day, 30-day storage after a missed locker, phone number corrections, Unisend lockers in Lithuania and Estonia
-- [Latvijas Pasts: Pasargā sevi no krāpniekiem](https://www.pasts.lv/pasarga-sevi-no-krapniekiem) – fake SMS and email warning
+- [Latvijas Pasts: Pakomātu pakalpojumu noteikumi](https://pasts.lv/media/789/download/Pakomatu_noteikumi.pdf) – six-digit code, e-mail, code sent again on the third day, seven days in the locker, then back to the sender or 30 days at a Customer Service Location, +371 67008001, phone number corrections, Unisend lockers in Lithuania and Estonia
+- [Latvijas Pasts: Pasargā sevi no krāpniekiem](https://pasts.lv/pasarga-sevi-no-krapniekiem) – fake SMS and email warning
 - [Latvijas Pasts: Mans pasts, track shipment](https://mans.pasts.lv/track?locale=en-GB) – English tracker, progress bar, status wordings, not-found reply, International Tracking button
-- [Latvijas Pasts: About us](https://pasts.lv/en/about-us) – state-owned national post, services
+- [Latvijas Pasts: About us](https://pasts.lv/en/about-us/par-pastu) – state-owned national post, services
 - [Latvijas Pasts: Latvijas Pasts and UNISEND launch their joint parcel locker network](https://pasts.lv/en/news/latvijas-pasts-and-unisend-launch-their-joint-parcel-locker-network) – Unisend is Lietuvos paštas's brand, joint lockers
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, status wordings and what they mean, the tracker's wrong-number reply, numbers named straight away, refused numbers, moving to Latvijas Pasts from the post abroad
 :::

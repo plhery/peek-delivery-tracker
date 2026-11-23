@@ -68521,6 +68521,31 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.seaboardmarine.com/tracking-results/"
+  },
+  "air-arabia-cargo": {
+    "displayName": "Air Arabia Cargo",
+    "aliases": [
+      "Air Arabia",
+      "العربية للطيران"
+    ],
+    "countries": [
+      "AE",
+      "MA",
+      "EG",
+      "PK"
+    ],
+    "color": "#C20041",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "air-arabia-cargo"
+    },
+    "trackingUrlTemplate": "https://cargo.airarabia.com/cargo-tracking/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargo.airarabia.com/cargo-tracking/",
+    "helpUrl": "https://cargo.airarabia.com/"
   }
 } as const;
 
@@ -70616,7 +70641,8 @@ export const CARRIER_IDS = [
   "yji",
   "arkas",
   "pasha-hawaii",
-  "seaboard-marine"
+  "seaboard-marine",
+  "air-arabia-cargo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

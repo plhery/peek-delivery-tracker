@@ -14684,6 +14684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "speedpak",
+      "catalog": "speedpak",
+      "slug": "ebay-speedpak-wuliu-chaxun",
+      "title": "eBay SpeedPAK 物流查询：28位单号、状态与尾程",
+      "name": "SpeedPAK",
+      "color": "#ee7532"
+    },
+    {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-wuliu-chaxun",
@@ -14714,6 +14722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JCEX（佳成国际）物流查询：JCZ 单号、状态与派送",
       "name": "JCEX",
       "color": "#0080cc"
+    },
+    {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "lingdong-guoji-wuliu-chaxun",
+      "title": "领东国际（Lingdong）物流查询：SZLD单号与状态",
+      "name": "Lingdong International",
+      "color": "#0171bb"
     },
     {
       "id": "china-post",
@@ -14860,12 +14876,36 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e1251b"
     },
     {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "zhongtong-kuaidi-zto-wuliu-chaxun",
+      "title": "中通快递（ZTO Express）单号查询：状态、驿站与客服",
+      "name": "ZTO Express",
+      "color": "#0279ff"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "diyi-wuliu-cne-express-chaxun",
+      "title": "递一物流（CNE Express）查询：3A5V单号与尾程",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-wuliu-chaxun",
       "title": "华翰物流（HuaHan）单号查询：HHW…YQ状态与尾程",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "yiqifei-17feia-wuliu-chaxun",
+      "title": "一起飞（17FEIA）国际物流查询：FEI…YQ单号与状态",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     },
     {
       "id": "xinghe-freight",

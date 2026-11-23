@@ -16,7 +16,7 @@ Wyszukiwarka CVC prosi o numer listu przewozowego (*товарителница* 
 
 | Co wklejasz | Co robi Peek |
 | --- | --- |
-| Sam numer CVC | Nie wskazuje CVC. Może pokazać innych przewoźników pasujących do długości numeru albo żadnego. Wybierz CVC ręcznie zgodnie z sekcją „Śledzenie paczki CVC w Peek” niżej. |
+| Sam numer CVC | Nie wskazuje CVC. Może pokazać innych przewoźników pasujących do formatu numeru albo żadnego. Wybierz CVC ręcznie zgodnie z sekcją „Śledzenie paczki CVC w Peek” niżej. |
 | Link do śledzenia CVC: `my.e-cvc.bg/track?wb=` i numer | Peek wyciąga numer z adresu i natychmiast rozpoznaje CVC („Wykryty przewoźnik”). |
 | Numer przypisany przez sklep innemu przewoźnikowi | Śledź go u tego przewoźnika: e-mail ze sklepu to najlepsza wskazówka, kto doręcza. |
 
@@ -31,7 +31,7 @@ Peek odczytuje bezpośrednio stronę śledzenia CVC pod adresem my.e-cvc.bg/trac
 | `Приета за събиране` | Zarejestrowana | Przesyłka została zgłoszona do odbioru; CVC jeszcze jej nie odebrało. |
 | `Отложено събиране за …` | Zarejestrowana | Odbiór przesyłki został przełożony na podany termin. |
 | `Взета от куриер …` | Przyjęta przez przewoźnika | Kurier CVC odebrał paczkę. |
-| `Приета в хъб …`, `Транспорт към хъб …` | W transporcie | Dotarła do hubu CVC lub jedzie w kierunku hubu. |
+| `Приета в Хъб …`, `Транспорт към Хъб …` | W transporcie | Dotarła do hubu CVC lub jedzie w kierunku hubu. |
 | `Приета за разнос` | W doręczeniu | Paczka wyjechała dziś na trasę doręczeń. |
 | `Доставена`, `Доставена на …` | Dostarczona | Paczka została doręczona. |
 
@@ -45,9 +45,9 @@ Strony CVC nie podają czasów dostaw, liczby prób doręczenia, adresów oddzia
 
 ## Paczka CVC bez aktualizacji, zaginiona lub zwrócona
 
-**Na razie nic.** Możliwe, że CVC jeszcze nie zarejestrowało numeru. Peek pokazuje wtedy „Oczekiwanie na przewoźnika CVC” i sprawdza dalej. Jeśli dwa dni po dodaniu paczki nadal nie ma żadnego wpisu, Peek ostrzega: „Oczekiwanie na pierwszą aktualizację od przewoźnika”. Porównaj numer z e-mailem ze sklepu. Gdy po kilku dniach wciąż nic nie przychodzi, otwórz śledzenie CVC przyciskiem „Otwórz stronę przewoźnika CVC” na stronie paczki i zapytaj sklep, czy paczka faktycznie została wysłana.
+**Na razie nic.** Możliwe, że CVC jeszcze nie zarejestrowało numeru. Peek pokazuje wtedy „Oczekiwanie na przewoźnika CVC” i sprawdza dalej. Jeśli dwa dni po pierwszej takiej odpowiedzi CVC nadal nie zna numeru, Peek prosi o sprawdzenie numeru, wybór innego przewoźnika lub usunięcie paczki. Porównaj numer z e-mailem ze sklepu. Gdy po kilku dniach wciąż nic nie przychodzi, otwórz śledzenie CVC przyciskiem „Otwórz stronę przewoźnika CVC” na stronie paczki i zapytaj sklep, czy paczka faktycznie została wysłana.
 
-**Brak wiadomości od kilku dni.** Po czterech dniach bez nowego wpisu przesyłka będąca wciąż na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” dostaje oznaczenie „Brak aktualizacji od czterech dni”. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+**Brak wiadomości od kilku dni.** Po czterech dniach bez nowego wpisu przesyłka będąca wciąż na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” dostaje oznaczenie „Brak aktualizacji od …” z dniem tej linii. Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 **Doręczona, ale nic nie dotarło.** Sprawdź okolice drzwi i zapytaj sąsiadów, a potem sklep. Zobacz [doręczona, ale nieotrzymana](guide:delivered-not-received).
 
@@ -67,15 +67,15 @@ Strony CVC nie podają telefonu, adresu e-mail ani biura: my.e-cvc.bg wyświetla
 2. Kliknij „Zmień” przy linii przewoźnika i wyszukaj CVC. Działają też hasła „e-CVC” i „Си Ви Си” (z podpisem „Znany też jako e-CVC” lub „Znany też jako Си Ви Си”) oraz „Bulgaria”.
 3. Wybierz CVC: pojawi się podpis „Wybrano ręcznie”. Uruchom śledzenie.
 
-Na już dodanej paczce użyj „Zmień przewoźnika”. Dla CVC Peek akceptuje wyłącznie od 1 do 20 cyfr; dla innego ciągu zgłasza, że CVC „nie wydaje takich numerów”. Jeśli Peek wymienia inne firmy w „Pasują do numeru”, pasują one tylko do długości numeru. Przed wyborem może pojawić się „jeszcze nie znaleziono · Peek sprawdza dalej”, co jest normalne dla nowego numeru.
+Na już dodanej paczce użyj „Zmień przewoźnika”. Dla CVC Peek akceptuje wyłącznie od 1 do 20 cyfr; dla innego ciągu zgłasza, że CVC „nie wydaje takich numerów”. Jeśli Peek wymienia inne firmy w „Pasują do numeru”, pasują one tylko do formatu numeru. Przed wyborem może pojawić się „jeszcze nie znaleziono · Peek sprawdza dalej”, co jest normalne dla nowego numeru.
 
 Jeśli zostawisz wybór Peek, zapyta on usługi śledzenia: gdy pokażą paczkę w ruchu i wskażą CVC jako przewoźnika, Peek sam przypisze ją do CVC.
 
 **Co widzisz.** Status oraz każdy wpis z historii wraz z datą i godziną według czasu lokalnego Bułgarii. CVC nie zwraca miejscowości skanu, przewidywanej daty dostawy, punktu odbioru ani wagi. „Otwórz stronę przewoźnika CVC” otwiera numer bezpośrednio na bułgarskiej stronie śledzenia CVC.
 
-**Inny przewoźnik.** W ciągu pierwszych 30 dni Peek sprawdza również przewoźników, których format pasuje do numeru. Jeśli któryś z nich wykaże paczkę w drodze pod tym numerem, Peek przenosi ją tam z adnotacją „Automatycznie zmieniono przewoźnika (wcześniej: CVC)”.
+**Inny przewoźnik.** Jeśli śledzenie CVC nie zna numeru, w ciągu pierwszych 30 dni Peek sprawdza również przewoźników, których format pasuje do numeru. Jeśli któryś z nich wykaże paczkę w drodze pod tym numerem, Peek przenosi ją tam z adnotacją „Automatycznie zmieniono przewoźnika (wcześniej: CVC)”.
 
-**Jak często.** Dopóki odpowiada śledzenie CVC, Peek sprawdza paczkę nawet co 10 minut, a co 2 minuty od 6:00 czasu lokalnego w dniu skanu w doręczeniu (`Приета за разнос`). Po dwóch dniach bez zmian (12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Powiadomienia obejmują „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”.
+**Jak często.** Gdy paczka jest otwarta w Peek albo, przy włączonych powiadomieniach, w dniu, w którym CVC zeskanuje ją jako `Приета за разнос`, Peek sprawdza ją nawet co 10 minut, a tego dnia od 6:00 czasu bułgarskiego co 2 minuty. Po dwóch dniach bez nowości (12 godzinach przy „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez nowości przy „Zarejestrowana” co 6 godzin. Powiadomienia mogą obejmować „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 Peek nie może skontaktować się za ciebie z CVC, sklepem ani nadawcą, zmienić dostawy ani złożyć reklamacji.
 

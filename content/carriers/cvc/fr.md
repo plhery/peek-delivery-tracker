@@ -31,7 +31,7 @@ Peek lit directement la page de suivi de CVC sur my.e-cvc.bg/track et affiche ch
 | `Приета за събиране` | Étiquette créée | L’envoi est enregistré pour la collecte ; CVC n’a pas encore pris le colis en main. |
 | `Отложено събиране за …` | Étiquette créée | La collecte du colis a été reportée à la date indiquée. |
 | `Взета от куриер …` | Pris en charge | Un coursier CVC a récupéré le colis. |
-| `Приета в хъб …`, `Транспорт към хъб …` | En transit | Le colis est arrivé dans un hub CVC ou est en route vers un hub. |
+| `Приета в Хъб …`, `Транспорт към Хъб …` | En transit | Le colis est arrivé dans un hub CVC ou est en route vers un hub. |
 | `Приета за разнос` | En livraison | Le colis est pris en charge pour la tournée de livraison du jour. |
 | `Доставена`, `Доставена на …` | Livré | Le colis a été livré. |
 
@@ -45,9 +45,9 @@ Les sites de CVC ne publient ni délais de livraison, ni nombre de tentatives, n
 
 ## Colis CVC bloqué, perdu ou renvoyé
 
-**Rien pour l’instant.** Il est possible que CVC n’ait pas encore enregistré le numéro. Peek affiche alors « En attente de CVC » et continue de vérifier. S’il n’y a toujours aucune ligne deux jours après l’ajout, Peek le signale : « En attente de la première mise à jour du transporteur ». Vérifie le numéro dans l’e-mail de la boutique. Si rien n’apparaît après quelques jours, ouvre directement le suivi CVC via « Ouvrir le site CVC » sur la page du colis et demande à la boutique si le colis a bien été expédié.
+**Rien pour l’instant.** Il est possible que CVC n’ait pas encore enregistré le numéro. Peek affiche alors « En attente de CVC » et continue de vérifier. Si CVC ne connaît toujours pas le numéro deux jours après l’avoir signalé, Peek te demande de le vérifier, de choisir un autre transporteur ou de supprimer le colis. Vérifie le numéro dans l’e-mail de la boutique. Si rien n’apparaît après quelques jours, ouvre directement le suivi CVC via « Ouvrir le site CVC » sur la page du colis et demande à la boutique si le colis a bien été expédié.
 
-**Aucune nouvelle depuis plusieurs jours.** Après quatre jours sans nouvelle étape, un colis resté sur « Étiquette créée », « Pris en charge » ou « En transit » affiche : « Aucune mise à jour depuis quatre jours ». Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
+**Aucune nouvelle depuis plusieurs jours.** Après quatre jours sans nouvelle étape, un colis resté sur « Étiquette créée », « Pris en charge » ou « En transit » affiche « Aucune mise à jour depuis … » avec le jour de cette ligne. Voir [pourquoi un suivi ne se met plus à jour](guide:tracking-not-updating).
 
 **Livré, mais rien reçu.** Vérifie autour de la porte et auprès des voisins, puis contacte la boutique. Voir [livré mais non reçu](guide:delivered-not-received).
 
@@ -67,15 +67,15 @@ Les sites de CVC n’affichent aucun numéro de téléphone, aucune adresse e-ma
 2. Appuie sur « Changer » à côté du transporteur et recherche CVC. « e-CVC » ou « Си Ви Си » fonctionnent aussi (avec « Aussi appelé e-CVC » ou « Aussi appelé Си Ви Си » sous le nom), tout comme « Bulgaria ».
 3. Sélectionne CVC : la ligne indique alors « Choisi par toi ». Lance le suivi.
 
-Sur un colis déjà ajouté, utilise « Changer de transporteur ». Pour CVC, Peek n’accepte qu’un numéro composé de 1 à 20 chiffres ; pour tout autre format, il indique que CVC « n’émet pas de numéros comme celui-ci ». Si Peek propose d’autres transporteurs sous « Correspond à ce numéro », ils ne font que partager la longueur du numéro. Avant ton choix, la ligne peut afficher « pas encore trouvé · Peek continue de vérifier », ce qui est normal pour un numéro récent.
+Sur un colis déjà ajouté, utilise « Changer de transporteur ». Pour CVC, Peek n’accepte qu’un numéro composé de 1 à 20 chiffres ; pour tout autre format, il indique que CVC « n’émet pas de numéros comme celui-ci ». Si Peek propose d’autres transporteurs sous « Correspond à ce numéro », ils correspondent seulement à la forme du numéro. Avant ton choix, la ligne peut afficher « pas encore trouvé · Peek continue de vérifier », ce qui est normal pour un numéro récent.
 
 Si tu laisses Peek détecter le transporteur, il consulte les services de suivi : si l’un d’eux montre le colis en mouvement et nomme CVC comme transporteur, Peek le classe automatiquement sous CVC.
 
 **Ce que tu vois.** Le statut et chaque ligne de l’historique avec sa date et son heure, lues sur l’heure de Bulgarie. CVC ne fournit ni lieu de scan, ni date de livraison prévue, ni point relais, ni poids. Le bouton « Ouvrir le site CVC » ouvre directement ton numéro sur le suivi bulgare de CVC.
 
-**Autre transporteur.** Durant les 30 premiers jours du colis, Peek interroge aussi les transporteurs dont le format correspond à ton numéro. Si l’un d’eux montre le colis en acheminement sous ce numéro, Peek le bascule chez lui avec la mention « Transporteur remplacé automatiquement (ancien : CVC) ».
+**Autre transporteur.** Si le suivi de CVC ne connaît pas le numéro, Peek interroge aussi, durant les 30 premiers jours du colis, les transporteurs dont le format correspond à ton numéro. Si l’un d’eux montre le colis en acheminement sous ce numéro, Peek le bascule chez lui avec la mention « Transporteur remplacé automatiquement (ancien : CVC) ».
 
-**Fréquence.** Tant que le suivi de CVC répond, Peek vérifie le colis jusqu’à toutes les 10 minutes, et toutes les 2 minutes à partir de 6 h heure locale le jour où CVC le scanne en livraison (`Приета за разнос`). Après deux jours sans nouvelle (ou 12 heures en « Étiquette créée » ou « Pris en charge »), Peek vérifie chaque heure. Les notifications couvrent « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+**Fréquence.** Tant que le colis est ouvert dans Peek, ou le jour où CVC le scanne `Приета за разнос` avec les notifications activées, Peek le vérifie jusqu’à toutes les 10 minutes, et ce jour-là toutes les 2 minutes à partir de 6 h, heure de Bulgarie. Après deux jours sans nouvelle (ou 12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure, puis toutes les 6 heures après sept jours sans nouvelle sur « Étiquette créée ». Les notifications peuvent suivre « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 Peek ne peut contacter ni CVC, ni la boutique, ni l’expéditeur à ta place, ni modifier la livraison ou déposer une réclamation.
 

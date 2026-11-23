@@ -31,7 +31,7 @@ Peek liest das Tracking von CVC auf my.e-cvc.bg/track direkt aus und zeigt jede 
 | `Приета за събиране` | Etikett erstellt | Die Sendung ist zur Abholung angemeldet; CVC hat das Paket noch nicht übernommen. |
 | `Отложено събиране за …` | Etikett erstellt | Die Abholung wurde auf das genannte Datum verschoben. |
 | `Взета от куриер …` | Beim Paketdienst eingegangen | Ein CVC-Kurier hat das Paket abgeholt. |
-| `Приета в хъб …`, `Транспорт към хъб …` | Unterwegs | Im CVC-Hub eingetroffen oder auf dem Weg zu einem Hub. |
+| `Приета в Хъб …`, `Транспорт към Хъб …` | Unterwegs | Im CVC-Hub eingetroffen oder auf dem Weg zu einem Hub. |
 | `Приета за разнос` | In Zustellung | Das Paket ist heute auf der Auslieferungstour. |
 | `Доставена`, `Доставена на …` | Zugestellt | Das Paket wurde zugestellt. |
 
@@ -45,9 +45,9 @@ Auf den Seiten von CVC stehen keine Lieferzeiten, Zustellversuche, Filialen, Nac
 
 ## CVC-Paket aktualisiert nicht, verloren oder zurückgesandt
 
-**Noch nichts zu sehen.** Möglicherweise kennt CVC die Nummer noch nicht. Peek zeigt dann „Warten auf CVC“ und fragt weiter nach. Gibt es zwei Tage nach dem Hinzufügen noch immer keine Zeile, meldet Peek „Warten auf das erste Update des Paketdienstes“. Vergleiche die Nummer mit der E-Mail des Shops. Kommt nach einigen Tagen nichts, öffne das CVC-Tracking über „Website von CVC öffnen“ auf der Paketseite und frage beim Shop nach, ob wirklich verschickt wurde.
+**Noch nichts zu sehen.** Möglicherweise kennt CVC die Nummer noch nicht. Peek zeigt dann „Warten auf CVC“ und fragt weiter nach. Kennt CVC die Nummer zwei Tage nach seiner ersten solchen Antwort noch immer nicht, bittet Peek dich, sie zu prüfen, einen anderen Paketdienst zu wählen oder das Paket zu löschen. Vergleiche die Nummer mit der E-Mail des Shops. Kommt nach einigen Tagen nichts, öffne das CVC-Tracking über „Website von CVC öffnen“ auf der Paketseite und frage beim Shop nach, ob wirklich verschickt wurde.
 
-**Tagelang keine Neuigkeiten.** Nach vier Tagen ohne neuen Eintrag erhält ein Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ den Hinweis „Seit vier Tagen keine Aktualisierung“. Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+**Tagelang keine Neuigkeiten.** Nach vier Tagen ohne neuen Eintrag erhält ein Paket im Status „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ den Hinweis „Keine Aktualisierung seit …“ mit dem Tag dieser Zeile. Siehe [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 **Zugestellt, aber nicht angekommen.** Schau rund um die Tür und frag Nachbarn, danach den Shop. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -67,15 +67,15 @@ Die Seiten von CVC nennen weder Telefonnummer noch E-Mail oder Filiale: my.e-cvc
 2. Tippe auf „Ändern“ neben der Paketdienst-Zeile und suche nach CVC. Auch „e-CVC“ oder „Си Ви Си“ findet es (mit „Auch e-CVC“ oder „Auch Си Ви Си“ unter dem Namen), ebenso „Bulgaria“.
 3. Wähle CVC: die Zeile zeigt dann „Von dir gewählt“. Starte das Tracking.
 
-Bei einem bereits gespeicherten Paket nutze „Paketdienst ändern“. Für CVC akzeptiert Peek nur 1 bis 20 Ziffern; bei allem anderen meldet Peek, dass CVC „vergibt keine Nummern wie diese“. Listet Peek andere Dienste unter „Passt zu dieser Nummer“, passen diese nur zur Ziffernlänge. Vor deiner Auswahl kann „noch nicht gefunden · Peek prüft weiter“ stehen – normal bei neuen Nummern.
+Bei einem bereits gespeicherten Paket nutze „Paketdienst ändern“. Für CVC akzeptiert Peek nur 1 bis 20 Ziffern; bei allem anderen zeigt Peek: CVC „vergibt keine Nummern wie diese“. Listet Peek andere Dienste unter „Passt zu dieser Nummer“, passen diese nur zur Form der Nummer. Vor deiner Auswahl kann „noch nicht gefunden · Peek prüft weiter“ stehen – normal bei neuen Nummern.
 
 Überlässt du Peek die Wahl, fragt es Tracking-Dienste ab: Zeigen sie das Paket unterwegs und nennen CVC als Zusteller, ordnet Peek es automatisch CVC zu.
 
 **Was du siehst.** Den Status und jede Zeile aus dem Verlauf mit Datum und Uhrzeit in bulgarischer Ortszeit. CVC liefert keinen Scan-Ort, kein voraussichtliches Lieferdatum, keinen Abholpunkt und kein Gewicht. „Website von CVC öffnen“ öffnet deine Nummer direkt auf dem bulgarischen CVC-Tracking.
 
-**Anderer Paketdienst.** In den ersten 30 Tagen fragt Peek auch die Dienste an, deren Nummernformat zu deiner Nummer passt. Zeigt einer von ihnen das Paket unterwegs, wechselt Peek dorthin und vermerkt „Automatisch von CVC gewechselt“.
+**Anderer Paketdienst.** Kennt CVCs Tracking die Nummer nicht, fragt Peek in den ersten 30 Tagen auch die Dienste an, deren Nummernformat zu deiner Nummer passt. Zeigt einer von ihnen das Paket unterwegs, wechselt Peek dorthin und vermerkt „Automatisch von CVC gewechselt“.
 
-**Wie oft.** Solange CVCs Tracking antwortet, prüft Peek bis zu alle 10 Minuten, und alle 2 Minuten ab 6 Uhr Ortszeit an dem Tag, an dem CVC das Paket in Zustellung scannt (`Приета за разнос`). Nach zwei Tagen ohne Neuigkeiten (oder 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich. Benachrichtigungen gibt es für „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“.
+**Wie oft.** Solange das Paket in Peek geöffnet ist, oder mit aktivierten Benachrichtigungen an dem Tag, an dem CVC es mit `Приета за разнос` scannt, prüft Peek es bis zu alle 10 Minuten, an diesem Tag ab 6 Uhr bulgarischer Zeit alle 2 Minuten. Nach zwei Tagen ohne Neuigkeiten (oder 12 Stunden bei „Etikett erstellt“ oder „Beim Paketdienst eingegangen“) prüft Peek stündlich, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen können „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ folgen.
 
 Peek kann weder CVC noch den Shop oder Absender für dich kontaktieren, keine Zustellung ändern und keine Reklamation einreichen.
 

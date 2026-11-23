@@ -31,7 +31,7 @@ O Peek lê diretamente a página de seguimento da CVC em my.e-cvc.bg/track e apr
 | `Приета за събиране` | Etiqueta criada | O envio foi registado para recolha; a CVC ainda não recolheu a encomenda. |
 | `Отложено събиране за …` | Etiqueta criada | A recolha foi adiada para a data indicada. |
 | `Взета от куриер …` | Aceite pela transportadora | Um estafeta da CVC já recolheu a encomenda. |
-| `Приета в хъб …`, `Транспорт към хъб …` | Em trânsito | Chegou a um hub da CVC ou segue a caminho de um hub. |
+| `Приета в Хъб …`, `Транспорт към Хъб …` | Em trânsito | Chegou a um hub da CVC ou segue a caminho de um hub. |
 | `Приета за разнос` | Em distribuição | A encomenda saiu hoje para entrega. |
 | `Доставена`, `Доставена на …` | Entregue | A encomenda foi entregue. |
 
@@ -45,9 +45,9 @@ Os sites da CVC não publicam prazos de entrega, tentativas, agências, regras d
 
 ## Encomenda CVC sem atualizações, perdida ou devolvida
 
-**Ainda nada.** A CVC pode ainda não conhecer o número. O Peek mostra então «À espera de CVC» e continua a verificar. Se continuarem sem existir registos dois dias após adicionares a encomenda, o Peek assinala: «À espera da primeira atualização da transportadora». Confirma o número no e-mail da loja. Se nada aparecer após alguns dias, abre o seguimento da CVC com «Abrir o site de CVC» na página da encomenda e pergunta à loja se foi realmente enviada.
+**Ainda nada.** A CVC pode ainda não conhecer o número. O Peek mostra então «À espera de CVC» e continua a verificar. Se, dois dias depois da primeira resposta, a CVC continuar sem conhecer o número, o Peek pede-te que o verifiques, escolhas outra transportadora ou apagues a encomenda. Confirma o número no e-mail da loja. Se nada aparecer após alguns dias, abre o seguimento da CVC com «Abrir o site de CVC» na página da encomenda e pergunta à loja se foi realmente enviada.
 
-**Sem novidades há dias.** Após quatro dias sem novo registo, uma encomenda ainda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» mostra «Sem atualizações há quatro dias». Vê [porque o seguimento para de atualizar](guide:tracking-not-updating).
+**Sem novidades há dias.** Após quatro dias sem novo registo, uma encomenda ainda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» mostra «Sem atualizações desde …» com o dia dessa linha. Vê [porque o seguimento para de atualizar](guide:tracking-not-updating).
 
 **Entregue, mas não chegou nada.** Verifica junto à porta e com os vizinhos e depois fala com a loja. Vê [entregue mas não recebida](guide:delivered-not-received).
 
@@ -73,9 +73,9 @@ Se deixares a escolha ao Peek, ele consulta serviços de seguimento: se mostrare
 
 **O que vês.** O estado e cada linha do histórico com data e hora lidas na hora local da Bulgária. A CVC não indica localidade do registo, dia previsto de entrega, ponto de recolha nem peso. «Abrir o site de CVC» abre o número diretamente no seguimento búlgaro da CVC.
 
-**Outra transportadora.** Nos primeiros 30 dias da encomenda, o Peek pergunta também às transportadoras cujo formato coincida com o número. Se uma delas mostrar a encomenda em curso, o Peek transfere-a e mostra «Alterado automaticamente de CVC».
+**Outra transportadora.** Se o seguimento da CVC não conhecer o número, nos primeiros 30 dias da encomenda o Peek pergunta também às transportadoras cujo formato coincida com o número. Se uma delas mostrar a encomenda em curso, o Peek transfere-a e mostra «Alterado automaticamente de CVC».
 
-**Frequência.** Enquanto o seguimento da CVC responder, o Peek verifica até de 10 em 10 minutos, e de 2 em 2 a partir das 6h locais no dia em que a CVC regista a encomenda em distribuição (`Приета за разнос`). Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. As notificações abrangem «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+**Frequência.** Enquanto a encomenda está aberta no Peek, ou com as notificações ativas no dia em que a CVC a regista `Приета за разнос`, o Peek verifica-a até de 10 em 10 minutos, e nesse dia de 2 em 2 minutos a partir das 6h, hora da Bulgária. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e de 6 em 6 horas após sete dias sem novidades em «Etiqueta criada». As notificações podem seguir «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 O Peek não pode contactar a CVC, a loja ou o remetente por ti, nem alterar a entrega ou abrir reclamação.
 

@@ -31,7 +31,7 @@ Peek legge direttamente la pagina di tracciamento di CVC su my.e-cvc.bg/track e 
 | `Приета за събиране` | Etichetta creata | La spedizione è registrata per il ritiro; CVC non ha ancora ritirato il pacco. |
 | `Отложено събиране за …` | Etichetta creata | Il ritiro è stato rinviato alla data indicata. |
 | `Взета от куриер …` | Preso in carico | Un corriere CVC ha ritirato il pacco. |
-| `Приета в хъб …`, `Транспорт към хъб …` | In transito | Arrivato in un hub CVC o in viaggio verso un hub. |
+| `Приета в Хъб …`, `Транспорт към Хъб …` | In transito | Arrivato in un hub CVC o in viaggio verso un hub. |
 | `Приета за разнос` | In consegna | Il pacco è sul giro di consegna di oggi. |
 | `Доставена`, `Доставена на …` | Consegnato | Il pacco è stato consegnato. |
 
@@ -45,9 +45,9 @@ I siti di CVC non pubblicano tempi di consegna, tentativi di recapito, sedi, reg
 
 ## Pacco CVC che non si aggiorna, smarrito o restituito
 
-**Ancora nulla.** È possibile che CVC non conosca ancora il numero. Peek mostra allora «In attesa di CVC» e continua a controllare. Se dopo due giorni dall’aggiunta non compare alcuna riga, Peek avvisa: «Ancora in attesa del primo aggiornamento del corriere». Confronta il numero con l’e-mail del negozio. Se dopo qualche giorno non arriva nulla, apri il tracciamento CVC con «Apri il sito CVC» sulla pagina del pacco e chiedi al negozio se è stato davvero spedito.
+**Ancora nulla.** È possibile che CVC non conosca ancora il numero. Peek mostra allora «In attesa di CVC» e continua a controllare. Se due giorni dopo la sua prima risposta CVC non conosce ancora il numero, Peek ti chiede di controllarlo, scegliere un altro corriere o eliminare il pacco. Confronta il numero con l’e-mail del negozio. Se dopo qualche giorno non arriva nulla, apri il tracciamento CVC con «Apri il sito CVC» sulla pagina del pacco e chiedi al negozio se è stato davvero spedito.
 
-**Nessuna novità da giorni.** Dopo quattro giorni senza una nuova riga, un pacco ancora su «Etichetta creata», «Preso in carico» o «In transito» riceve l’avviso «Nessun aggiornamento da quattro giorni». Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
+**Nessuna novità da giorni.** Dopo quattro giorni senza una nuova riga, un pacco ancora su «Etichetta creata», «Preso in carico» o «In transito» riceve l’avviso «Nessun aggiornamento da …» con il giorno di quella riga. Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 **Consegnato, ma non hai ricevuto nulla.** Controlla attorno alla porta e chiedi ai vicini, poi al negozio. Vedi [consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -67,15 +67,15 @@ I siti di CVC non indicano numeri di telefono, e-mail né uffici: my.e-cvc.bg mo
 2. Tocca «Cambia» accanto alla riga del corriere e cerca CVC. Anche «e-CVC» o «Си Ви Си» lo trovano (con «Noto anche come e-CVC» o «Noto anche come Си Ви Си» sotto il nome), così come «Bulgaria».
 3. Scegli CVC: la riga mostra allora «Scelto da te». Avvia il tracciamento.
 
-Su un pacco già aggiunto usa «Cambia corriere». Per CVC Peek accetta solo da 1 a 20 cifre; per qualsiasi altro valore indica che CVC «non emette numeri come questo». Se Peek elenca altri corrieri in «Compatibili con questo numero», è solo per la lunghezza del numero. Prima della scelta la riga può mostrare «non ancora trovato · Peek continua a controllare»: è normale per un numero nuovo.
+Su un pacco già aggiunto usa «Cambia corriere». Per CVC Peek accetta solo da 1 a 20 cifre; per qualsiasi altro valore indica che CVC «non emette numeri come questo». Se Peek elenca altri corrieri in «Compatibili con questo numero», corrispondono solo alla forma del numero. Prima della scelta la riga può mostrare «non ancora trovato · Peek continua a controllare»: è normale per un numero nuovo.
 
 Se lasci scegliere a Peek, interroga i servizi di tracciamento: se mostrano il pacco in viaggio indicando CVC come corriere, Peek lo assegna automaticamente a CVC.
 
 **Cosa vedi.** Lo stato e ogni riga della cronologia con data e ora lette sull’ora bulgara. CVC non indica la località delle scansioni, la data di consegna prevista, il punto di ritiro né il peso. «Apri il sito CVC» apre direttamente il numero sul tracciamento bulgaro di CVC.
 
-**Altro corriere.** Nei primi 30 giorni del pacco Peek interroga anche i corrieri il cui formato corrisponde al numero. Se uno di essi mostra il pacco in transito, Peek lo sposta lì e mostra «Cambio automatico da CVC».
+**Altro corriere.** Se il tracciamento di CVC non conosce il numero, nei primi 30 giorni del pacco Peek interroga anche i corrieri il cui formato corrisponde al numero. Se uno di essi mostra il pacco in transito, Peek lo sposta lì e mostra «Cambio automatico da CVC».
 
-**Frequenza.** Finché risponde il tracciamento di CVC, Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 ora locale nel giorno in cui CVC lo registra in consegna (`Приета за разнос`). Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Le notifiche coprono «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna».
+**Frequenza.** Finché il pacco è aperto in Peek, o con le notifiche attive nel giorno in cui CVC lo scansiona `Приета за разнос`, Peek lo controlla fino a ogni 10 minuti, e quel giorno ogni 2 minuti dalle 6:00, ora bulgara. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Le notifiche possono seguire «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
 Peek non può contattare CVC, il negozio o il mittente al posto tuo, né modificare la consegna o aprire un reclamo.
 

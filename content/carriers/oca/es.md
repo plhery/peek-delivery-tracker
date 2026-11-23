@@ -6,19 +6,19 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-OCA (Organización Coordinadora Argentina) es uno de los principales operadores privados de paquetería, correo y logística de comercio electrónico en Argentina, con cobertura nacional para tiendas online, Mercado Envíos y retiros en Puntos OCA y SmartLockers. Los destinatarios pueden consultar sus envíos en el [buscador de envíos de OCA](https://www.oca.com.ar/Busquedas/Envios) o ubicar su punto más cercano en el [Buscador de Puntos OCA](https://www.oca.com.ar/Busquedas/Sucursales).
+OCA es un operador argentino de paquetería y correo. Su plataforma ePak sirve a ecommerce, grandes empresas y pymes que envían a todo el país, y trabaja con Mercado Envíos; también entrega en Puntos OCA y SmartLockers. Los destinatarios pueden consultar sus envíos en el [buscador de envíos de OCA](https://www.oca.com.ar/Busquedas/Envios) o ubicar su punto más cercano en el [Buscador de Puntos OCA](https://www.oca.com.ar/Busquedas/Sucursales).
 
-La mayoría de los paquetes de comercio electrónico viajan por la plataforma e-Pak de OCA, que registra cada ingreso en planta, viaje entre sucursales, visita a domicilio y plazo de retiro.
+El seguimiento de OCA registra cada ingreso en planta, viaje entre sucursales, visita a domicilio y plazo de retiro.
 
 ## Formatos de número de seguimiento de OCA
 
 Los paquetes estándar de OCA e-Pak utilizan un número de guía u orden de admisión de 19 dígitos:
 
-- **19 dígitos con `0000` en las posiciones 6 a 9** (por ejemplo, `3654800004829173605`) — el formato habitual de encomiendas e-Pak y compras enviadas por Mercado Envíos.
-- **Sufijo de bulto `-1` (o `-2`, etc.)** — muchas etiquetas impresas muestran un guion y el número de pieza al final, como `3654800004829173605-1`. Como indica el [Centro de Ayuda de OCA](https://www.oca.com.ar/CentroDeAyuda), no debes escribir el `-1` apartado; Peek quita ese sufijo automáticamente y consulta los 19 dígitos del envío.
+- **19 dígitos con `0000` en las posiciones 6 a 9** (por ejemplo, `3654800004829173605`) — el número de guía u orden de admisión con el que el Centro de Ayuda de OCA indica hacer el seguimiento.
+- **Un `-1` apartado** — algunas etiquetas imprimen un `-1` tras el número, como `3654800004829173605-1`. El [Centro de Ayuda de OCA](https://www.oca.com.ar/CentroDeAyuda) indica no escribirlo. En Peek tampoco: Peek solo quita el guion, y `...-1` se convierte en un número de 20 dígitos que OCA no conoce.
 - **Envíos con estampilla y postales** — para encomiendas con estampilla OCA usa 3 letras mayúsculas (`YAE`, `YAA`, `MDA`, `PAA`) y 8 números sin espacios ni paréntesis; los sobres con estampilla llevan 2 letras y 8 números. Las postales simples sin estampilla no tienen seguimiento y se entregan en el buzón o por debajo de la puerta.
 
-En la web de OCA puedes abreviar los ceros centrales con `//`, mientras que en Peek conviene pegar los 19 dígitos completos o un enlace directo de `oca.com.ar/Seguimiento/Paquetes/...` (incluidos enlaces heredados de e-Pak, que Peek reconoce al instante). Como algunos números de 19 dígitos coinciden en longitud con transportistas de otros países, Peek consulta el servicio de OCA para confirmar que el envío existe. Puedes comparar otros formatos en la [guía de formatos de números de seguimiento](guide:tracking-number-formats).
+En la web de OCA puedes sustituir los ceros centrales por `//`; Peek necesita los 19 dígitos completos o un enlace directo de `oca.com.ar/Seguimiento/Paquetes/...` o heredado de e-Pak, que Peek reconoce al instante. En Argentina, Peek consulta a OCA por un número de 19 dígitos con esta forma; fuera de Argentina solo lo consulta como último recurso. Puedes comparar otros formatos en la [guía de formatos de números de seguimiento](guide:tracking-number-formats).
 
 ## Qué significan los estados de OCA
 
@@ -45,7 +45,7 @@ El servicio de seguimiento e-Pak de OCA informa cada movimiento en español y su
 El [Centro de Ayuda de OCA](https://www.oca.com.ar/CentroDeAyuda) detalla las condiciones vigentes para entregas en Argentina:
 
 - **Dos visitas a domicilio:** OCA realiza dos visitas sin coordinación previa, de lunes a sábados de 9 a 18 h. Puede recibir cualquier persona mayor de 18 años presentando su DNI. En días de lluvia el servicio funciona de forma limitada.
-- **Retiro en sucursal (5 días hábiles):** Si no encuentran a nadie tras las visitas — o si elegiste retiro en sucursal — el paquete queda disponible durante **5 días hábiles** en el Punto OCA asignado. Retira el titular con DNI y número de envío (excluyente), o una persona autorizada mayor de 18 años con fotocopia del DNI del titular, nota manuscrita y número de envío. Vencido el plazo, se devuelve al remitente.
+- **Retiro en sucursal (5 días hábiles):** Si no encuentran a nadie tras las visitas, el paquete queda disponible durante **5 días hábiles** en el Punto OCA asignado. Retira el titular con DNI y número de envío (excluyente), o una persona autorizada mayor de 18 años con fotocopia del DNI del titular, nota manuscrita y número de envío. Vencido el plazo, se devuelve al remitente.
 - **SmartLockers (48 horas + extensión opcional):** Cuando OCA deposita tu paquete en un locker, recibes un correo y/o SMS con código QR y clave alfanumérica. Tienes **48 horas corridas** para retirarlo; si se acerca el vencimiento llegan avisos y un botón de pago para sumar hasta **3 días adicionales** abonando con tarjeta antes de la devolución al remitente.
 - **Dirección incorrecta o envío devuelto:** OCA no permite interrumpir el envío ni modificar la dirección una vez despachado. Debes aguardar el circuito de visitas para retirarlo personalmente en sucursal o esperar que vuelva al remitente para coordinar un reenvío. Consulta también la [guía de entregas fallidas](guide:missed-delivery).
 - **Trámites especiales (DNI, pasaportes, Tarjeta OCA Geo y sobres):** El DNI se entrega solo en domicilio presentando el talón de RENAPER (sin retiro en sucursal); el pasaporte pasa a sucursal tras dos visitas al domicilio. La Tarjeta OCA Geo solo se entrega o retira por el titular. Los sobres con estampilla tienen dos visitas y, si no se entregan, regresan al remitente sin pasar a sucursal.
@@ -55,13 +55,15 @@ Si también recibes paquetes con otro correo privado argentino, puedes ver nuest
 
 ## Seguir envíos de OCA con Peek
 
-Pega tu número de 19 dígitos (con o sin `-1`) o un enlace de `oca.com.ar/Seguimiento/Paquetes/...` en Peek. Si necesitas seleccionar o corregir el transportista manualmente, toca **Cambiar** al añadir el paquete o **Cambiar transportista** desde la ficha del envío.
+Pega tu número de 19 dígitos sin el `-1`, o un enlace de `oca.com.ar/Seguimiento/Paquetes/...`, en Peek. Si necesitas seleccionar o corregir el transportista manualmente, toca **Cambiar** al añadir el paquete o **Cambiar transportista** desde la ficha del envío.
 
 Peek consulta directamente el servicio web e-Pak `Tracking_Pieza` de OCA mediante el [adaptador de OCA en universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/oca). Convierte cada fecha al huso oficial de Argentina (`America/Argentina/Buenos_Aires`, `-03:00`), extrae el nombre de la sucursal en el campo de ubicación y evita que un registro posterior de `Acuse digitalizado` altere una entrega ya completada. El servicio e-Pak de OCA no devuelve fecha estimada de entrega ni peso.
 
 Peek traduce los estados de OCA a etapas claras: **Etiqueta creada** (`En proceso de Retiro`), **Admitido por el transportista** (`Retirado`), **En tránsito** (procesos en planta y traslados entre sucursales), **En reparto** (`Programado para visita a domicilio` y `Visita a Domicilio en Curso`), **Intento de entrega** (`No entregado` y `Reprogramado para nueva visita`), **Listo para recoger** (`En Espera de Retiro por Sucursal`), **Entregado** (`Entregado`) y **Devuelto al remitente** (`Devolución en Proceso` / `Devuelto al Remitente`).
 
-Cuando un envío cruza provincias o pasa el fin de semana en planta, Peek te recuerda: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a OCA.» Si pasan más de tres semanas sin movimientos, verás: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a OCA.» También puedes abrir el soporte oficial desde **Pide ayuda a OCA** en la pantalla del envío.
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek revisa hasta cada 10 minutos, y cada 2 minutos desde las 6:00, hora de Argentina, el día en que OCA muestra `Programado para visita a domicilio` o `Visita a Domicilio en Curso`, mientras el rastreador de OCA responda. Si no, revisa cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o dos días sin novedades, revisa cada hora sigas como sigas el paquete, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el rastreador de OCA no responde y Peek sigue el paquete solo a través de servicios de seguimiento, revisa cada hora, cada 3 horas tras un día sin novedades y hasta cada 15 minutos el día en que el paquete sale a reparto.
+
+Cuando el escaneo más reciente tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de ese escaneo, como «Sin novedades desde el lun 12 oct». La página del paquete dice entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a OCA.», con el enlace «Pide ayuda a OCA» a el Centro de Ayuda de OCA. Tras tres semanas sin un escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a OCA.»
 
 En las notificaciones de Peek puedes elegir entre **Cada escaneo**, **Pasos importantes** o **Solo la entrega**.
 
@@ -77,7 +79,7 @@ En las notificaciones de Peek puedes elegir entre **Cada escaneo**, **Pasos impo
 
 ### ¿Por qué mi número de OCA termina en `-1`?
 
-El `-1` indica el número de bulto en la etiqueta impresa. Para rastrear el envío en OCA hay que omitir ese sufijo y escribir solo los 19 dígitos; si lo pegas completo en Peek, el `-1` se recorta automáticamente.
+El Centro de Ayuda de OCA indica no escribir el `-1` apartado y hacer el seguimiento con los 19 dígitos de la guía u orden de admisión. Haz lo mismo en Peek: no quita el `-1`, y con él el número no es uno que OCA conozca.
 
 ### ¿Cuántos días guarda OCA un paquete en sucursal o en un SmartLocker?
 

@@ -6,17 +6,17 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Kuehne+Nagel is a global freight forwarder headquartered in Switzerland, operating road, air, sea, and contract logistics networks across Europe, the Americas, Asia-Pacific, Africa, and the Middle East. Most recipients see Kuehne+Nagel on B2B pallet deliveries, bulky home-delivery orders moved through road freight terminals, and international air or ocean consignments tracked through the [myKN public tracker](https://mykn.kuehne-nagel.com/public-tracking/).
+Kuehne+Nagel is one of the world's leading logistics providers, with close to 92,000 employees at almost 1,300 sites in close to 100 countries. It moves sea, air and road freight, and its [myKN public tracker](https://mykn.kuehne-nagel.com/public-tracking/) looks up shipments of every mode.
 
 Public tracking on myKN covers shipments started within the last 90 days. Because Kuehne+Nagel moves freight across road stations, airports, container freight stations, rail ramps, and seaports, a single shipment can display both physical route milestones and separate booking, customs, or document notices.
 
 ## Kuehne+Nagel tracking number formats
 
-Kuehne+Nagel accepts shipment references of 6 to 35 letters and digits on its public search, ignoring case, spaces, and dashes. The tracker searches by exact whole reference across Kuehne+Nagel tracking numbers as well as customer or freight references. Three formats appear regularly on Kuehne+Nagel parcels and road consignments:
+Peek takes Kuehne+Nagel references of 6 to 35 letters and digits, with at least one digit, and removes spaces and dashes. myKN looks up Kuehne+Nagel's own tracking numbers, waybills and bookings in the same search as customer references. Peek recognises three shapes:
 
-- **`RWM` followed by 9 digits** (12 characters total, such as `RWM482917360`) — a Kuehne+Nagel road-logistics shipment number that identifies Kuehne+Nagel unambiguously.
-- **`RAPI` followed by 8 digits** (12 characters total, such as `RAPI48291736`) — another Kuehne+Nagel road reference unique to the carrier.
-- **2 digits, `A`, and 9 digits** (12 characters total, such as `26A482917360`) — a shorter reference shape that overlaps with [Australia Post](carrier:australia-post) and [Colis Privé](carrier:colis-prive), so Peek checks which carrier holds the shipment before locking onto one.
+- **`RWM` followed by 9 digits** (12 characters total, such as `RWM482917360`) — a Kuehne+Nagel road shipment's tracking number, which Peek recognises as Kuehne+Nagel's alone.
+- **`RAPI` followed by 8 digits** (12 characters total, such as `RAPI48291736`) — a Kuehne+Nagel tracking number, which Peek also recognises as Kuehne+Nagel's alone.
+- **2 digits, `A`, and 9 digits** (12 characters total, such as `26A482917360`) — a road shipment's tracking number. The shape fits [Australia Post](carrier:australia-post) and [Colis Privé](carrier:colis-prive) too, so Peek asks Australia Post, Colis Privé and Kuehne+Nagel in turn (Kuehne+Nagel second in Switzerland and Germany).
 
 For air and sea freight, shippers may also send a Kuehne+Nagel waybill, house bill of lading, or customer reference that falls outside those three patterns. If you paste a tracking link from `mykn.kuehne-nagel.com/public-tracking/shipments?query=...`, Peek extracts the reference and routes it directly to Kuehne+Nagel. For a broader look at how carrier numbers compare across freight and parcel networks, see the [tracking number formats guide](guide:tracking-number-formats).
 
@@ -34,7 +34,7 @@ Kuehne+Nagel's public tracker separates a shipment into two feeds: physical stop
 | Customs entry release / Export customs entry release / Import customs entry release | Customs or the relevant border agency has cleared the cargo to continue moving. |
 | In delivery | The road vehicle is out on the final delivery leg, or has arrived at the delivery site. |
 | Delivery / Freight collection / Proof of delivery available | Cargo has been delivered to the consignee or collected from the terminal; `Delivery with discrepancies` still marks delivery while noting a shortage or damage. |
-| Delivery attempt failed / Delivery not possible | A delivery visit did not succeed, for example if the consignee refused the freight or redirected it. |
+| Delivery attempt failed / Delivery not possible | A delivery visit did not succeed, for example when the consignee refused it. |
 | Shipment on hold / Delivery instructions pending / Missing/incomplete document | The consignment is paused at a station or customs point until missing paperwork, payment, or delivery instructions are supplied. |
 
 A few milestone labels deserve a closer look:
@@ -46,38 +46,40 @@ A few milestone labels deserve a closer look:
 
 ## Delivery, customs, and delays
 
-Kuehne+Nagel moves palletised road freight, air cargo, and ocean containers rather than standard letterbox parcels. On European road deliveries, the local depot often books a delivery appointment with the recipient or receiving bay before sending the truck out; `Delivery appointment submission` records that an appointment date was entered, though the shipment only switches to out for delivery when `In delivery` posts.
+`Delivery appointment submission` records a delivery date agreed for later. It isn't a scan: the shipment only switches to out for delivery when `In delivery` posts, or the truck's `Arrival` at the delivery address.
 
-International air and ocean shipments pass through export and import customs brokers. If tracking shows `Awaiting consignee's feedback`, `Awaiting consignee's payment`, `Entry documents required`, or `Unable to file customs entry - missing details or documentation`, the customs broker needs commercial invoices, EORI or tax details, or duty settlement before the shipment can leave the port or airport. See the [customs guide](guide:customs) for how import clearance and charges work.
+If tracking shows `Awaiting consignee's feedback`, `Awaiting consignee's payment` or `Entry documents required`, customs is waiting for the consignee's answer, payment or papers. `Unable to file customs entry - missing details or documentation` means the customs entry can't be filed until they arrive. See the [customs guide](guide:customs) for how import clearance and charges work.
 
-Gaps of several days between scans are common during ocean sailings, multi-leg air consolidations, weekend depot closures, and terminal staging. Planned milestone dates shown on myKN are forecasts rather than achieved scans. For general advice on stalled freight and parcel tracking, read [when tracking stops updating](guide:tracking-not-updating).
+Planned milestone dates shown on myKN are forecasts rather than achieved scans. For general advice on stalled freight and parcel tracking, read [when tracking stops updating](guide:tracking-not-updating).
 
 ## Tracking Kuehne+Nagel with Peek
 
-When you paste a `RWM` or `RAPI` reference or a `mykn.kuehne-nagel.com` link into Peek, Peek recognizes Kuehne+Nagel immediately. For a 12-character `26A...` number shared with [Australia Post](carrier:australia-post) and [Colis Privé](carrier:colis-prive), or a custom freight reference without a dedicated prefix, pick Kuehne+Nagel using **Change** while adding the parcel or **Change carrier** on the tracking screen.
+When you paste a `RWM` or `RAPI` number or a `mykn.kuehne-nagel.com/public-tracking/shipments?query=...` link into Peek, Peek recognizes Kuehne+Nagel at once. For a `26A...` number, Peek asks the carriers above in turn and shows "Kuehne+Nagel has this parcel." once Kuehne+Nagel answers. For a waybill or customer reference without these shapes, pick Kuehne+Nagel using **Change** while adding the parcel or **Change carrier** on the tracking screen.
 
-Peek reads Kuehne+Nagel's public shipment search, route milestones, and transport notices directly through the open-source [universal-parcel-scraper Kuehne+Nagel adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuehne-nagel). It records achieved milestones only (ignoring planned forecast dates), reads total weight in kilograms and destination country when returned, and replaces a secondary customer reference with Kuehne+Nagel's canonical tracking number when the search resolves to one shipment. Where Kuehne+Nagel supplies a UTC offset on a timestamp, Peek stores an exact instant; otherwise it displays the local clock reported by the tracker without guessing a zone.
+Peek reads Kuehne+Nagel's public shipment search, route milestones and transport notices directly through the open-source [universal-parcel-scraper Kuehne+Nagel adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuehne-nagel). It records achieved milestones only (ignoring planned forecast dates) and reads the total weight in kilograms and the destination country when returned. When the search finds the shipment under a customer reference, Peek lists Kuehne+Nagel's own tracking number beside yours, under "Kuehne+Nagel tracks this as"; when a reference matches several shipments, Peek can't tell which one is yours. A scan's time comes with its offset when the scanning system knows it, and Peek keeps that instant. Otherwise Peek dates the scan on its place's zone (Berlin time for Hamburg, Zurich time for Basel), a scan without a place on its neighbour's, else on Zurich time, and shows every scan on your device's clock.
 
 Peek maps Kuehne+Nagel milestones into clear stages: **Label created** for bookings and ready-for-pickup notices, **Received by carrier** for pickup, **In transit** for hub, port, rail, and handover movements, **At customs** for export/import clearance and agency holds, **Out for delivery** for `In delivery` and truck arrival at destination, **Delivery attempted** for failed delivery attempts, **Needs attention** for holds, failed pickups, cancellations, and missing documents, and **Delivered** for delivery, freight collection, or proof-of-delivery completion. Bookkeeping notices stay in the timeline without moving the current stage backwards, and a post-delivery customs filing will not revert a delivered shipment.
 
-If scans pause mid-journey, Peek reminds you that "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Kuehne+Nagel." After more than three weeks without a new milestone, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Kuehne+Nagel."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day Kuehne+Nagel shows `In delivery` or the truck's `Arrival` at the delivery address, every 2 minutes from 6 a.m. on the newest scan's clock, while Kuehne+Nagel's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Kuehne+Nagel doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Kuehne+Nagel." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Kuehne+Nagel."
 
 You can choose notification alerts for **Every scan**, **Important steps**, or **Delivery only** from the parcel settings.
 
 ## Contacting Kuehne+Nagel
 
-Kuehne+Nagel handles shipment inquiries through its local country offices and the shipper's account team rather than a single global consumer helpline.
+Kuehne+Nagel's site offers a location finder and a contact form:
 
 - **Global website and tracking portal:** [kuehne-nagel.com](https://www.kuehne-nagel.com/) and [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/)
 - **Local office directory:** [Kuehne+Nagel locations worldwide](https://www.kuehne-nagel.com/company/locations) to locate the nearest country or branch desk
-- **Online inquiry form:** [Talk to an expert](https://www.kuehne-nagel.com/contact/talk-to-an-expert) for general shipment and service inquiries
-- **Shipper or supplier first:** For commercial freight and bulky e-commerce orders, the party that booked the transport with Kuehne+Nagel (usually the seller or supplier) holds the account needed to amend delivery appointments, supply missing customs paperwork, or open a claim. Compare with other European freight networks such as [DHL Freight](carrier:dhl-freight) and [DSV](carrier:dsv) if your order was split across carriers.
+- **Online inquiry form:** [Talk to an expert](https://www.kuehne-nagel.com/contact/talk-to-an-expert) to get a tailored solution by email
+- **Other freight networks:** if your order was split across carriers, compare [DHL Freight](carrier:dhl-freight) and [DSV](carrier:dsv).
 
 ## Frequently asked questions
 
 ### Why does my Kuehne+Nagel tracking number say no results found?
 
-Kuehne+Nagel's public tracker only returns shipments that started within the last 90 days and matches whole references only. Check that no digits are missing, and if the booking was just created, wait for the first achieved milestone; if a reference matches several shipments at once, ask the shipper for Kuehne+Nagel's own `RWM`, `RAPI`, or house tracking number.
+Kuehne+Nagel's public tracker only covers shipments that started in the last 90 days. Check that no characters are missing, and if the booking was just created, wait for the first achieved milestone. If a reference matches several shipments at once, ask the shipper for Kuehne+Nagel's own `RWM`, `RAPI` or other tracking number.
 
 ### What does "Service complete" or "Freight handover" mean on Kuehne+Nagel tracking?
 
@@ -89,7 +91,7 @@ Kuehne+Nagel's public route view displays planned forecast dates alongside achie
 
 ### How long does Kuehne+Nagel public tracking stay available?
 
-Public tracking on `mykn.kuehne-nagel.com` covers shipments initiated within the past 90 days. Older freight records require a registered myKN business account or confirmation from the shipper.
+Public tracking on `mykn.kuehne-nagel.com` covers shipments that started in the last 90 days. To see more, myKN offers a free sign-up.
 
 :::sources
 - [Kuehne+Nagel global site](https://www.kuehne-nagel.com/)

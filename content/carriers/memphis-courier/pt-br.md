@@ -6,21 +6,21 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-A Memphis Courier é uma empresa 100% brasileira com mais de 25 anos de atuação em logística internacional de remessas expressas (courier) e importação formal entre o exterior — especialmente os Estados Unidos — e o Brasil. Operando com terminal courier no Aeroporto Internacional de Guarulhos (GRU) e escritório em São Paulo, a empresa realiza o transporte aéreo, o desembaraço aduaneiro junto à Receita Federal e a órgãos reguladores como a ANVISA (incluindo importações de cannabis medicinal pela RDC 660 e RDC 327) e a entrega em todo o Brasil.
+A Memphis Courier é uma empresa 100% brasileira com mais de 25 anos de história, que oferece soluções logísticas para encomendas expressas e formais, tanto para exportação como para importação. Com terminal courier no Aeroporto Internacional de Guarulhos (GRU) e escritório em São Paulo, faz o transporte aéreo, o desembaraço junto à Receita Federal e à ANVISA (incluindo importações de cannabis medicinal pela RDC 660 e RDC 327, de medicamentos produzidos nos Estados Unidos, Europa, Colômbia e Uruguai) e a entrega em todo o Brasil.
 
-Como boa parte das remessas embarca em Miami rumo a Guarulhos antes de passar pela alfândega e pela fiscalização sanitária, o rastreamento acompanha de perto a chegada no aeroporto, o desembaraço na Receita Federal e a liberação da ANVISA.
+O rastreamento acompanha a encomenda até o aeroporto de Guarulhos, o desembaraço na Receita Federal, a inspeção da ANVISA e a entrega.
 
 ## Formato do código de rastreamento da Memphis Courier
 
 O código usado pela Memphis Courier segue um padrão próprio de 11 caracteres alfanuméricos:
 
-- **`M` + 7 dígitos + `MIA`** (11 caracteres no total, como `M4829173MIA`) — código de remessa courier emitido para encomendas expedidas via hub de Miami com destino ao Brasil.
+- **`M` + 7 dígitos + `MIA`** (11 caracteres no total, como `M4829173MIA`) — o formato que o Peek reconhece como da Memphis Courier.
 
-Espaços e letras minúsculas são normalizados automaticamente na consulta. O portal de rastreamento (`clients.memphiscourier.com.br`) consulta esse código diretamente, sem exigir login de conta corporativa. Pelo formato `M` + 7 dígitos + `MIA`, o Peek reconhece a Memphis Courier como candidata automaticamente e confirma assim que o serviço da transportadora retorna os dados da remessa. Para conferir padrões usados por outras transportadoras em compras internacionais, veja o [guia de formatos de código de rastreamento](guide:tracking-number-formats).
+O Peek aceita códigos da Memphis Courier de 6 a 30 letras e dígitos; tira os espaços e passa as letras para maiúsculas. O portal de rastreamento (`clients.memphiscourier.com.br`) consulta o código sem login de conta. Pelo formato `M` + 7 dígitos + `MIA`, o Peek consulta só a Memphis Courier e mostra "Memphis Courier está com esta encomenda." quando ela responde. Para conferir padrões usados por outras transportadoras em compras internacionais, veja o [guia de formatos de código de rastreamento](guide:tracking-number-formats).
 
 ## Significado dos códigos e status da Memphis Courier
 
-O sistema da Memphis Courier publica códigos de três letras acompanhados de descrições em português e da indicação de localidade (país ou estado). A barra de etapas do site destaca quatro marcos — Criado (`FLT`), desembaraço (`BRP`), Liberado (`CLA`) e Entregue (`DLV`) — enquanto o histórico detalha cada movimentação entre origem, aeroporto e inspeção.
+O sistema da Memphis Courier publica códigos de três letras com descrições em português e a localidade (país ou estado). A barra de etapas do site mostra Criado (`FLT`), desembaraço (`BRP`), Liberado e Entregue; dos registros que levam às duas últimas (`CLA` e `DLV`), só se conhece o rótulo da etapa.
 
 | Código | Texto na Memphis Courier | O que significa |
 | --- | --- | --- |
@@ -33,15 +33,15 @@ O sistema da Memphis Courier publica códigos de três letras acompanhados de de
 | `AAZ` | Pedido recebido pela GRU Airport | A encomenda foi recepcionada no terminal de cargas do aeroporto de Guarulhos antes do início do desembaraço. |
 | `BRP` | Processo de desembaraço iniciado | O processo de desembaraço aduaneiro no Brasil foi aberto. |
 | `HOC` | Encomenda sendo inspecionada pela Alfândega | A remessa está em conferência pela Receita Federal. |
-| `ANV` | Em inspeção pela ANVISA | A encomenda passa por inspeção da ANVISA, etapa habitual em medicamentos e produtos de cannabis medicinal importados. |
-| `CLA` | Liberado | A alfândega e os órgãos anuentes liberaram a encomenda para seguir para a entrega nacional. |
-| `DLV` | Entregue | A remessa foi entregue ao destinatário no Brasil. |
+| `ANV` | Em inspeção pela ANVISA | A encomenda passa por inspeção da ANVISA durante o desembaraço. |
+| `CLA` | Liberado (barra de etapas) | A alfândega e os órgãos anuentes liberaram a encomenda para seguir para a entrega nacional. |
+| `DLV` | Entregue (barra de etapas) | A remessa foi entregue ao destinatário no Brasil. |
 
 ## Alfândega, validação de CPF e inspeção da ANVISA
 
 A Receita Federal exige o CPF do importador pessoa física para liberar qualquer remessa expressa internacional no Brasil. Conforme explicado na página de [Serviços Adicionais](https://memphiscourier.com.br/servicos-adicionais/), muitos sites estrangeiros não têm campo para CPF no fechamento da compra; nesses casos, a equipe de Customer Services da Memphis Courier entra em contato com o destinatário para validar o CPF e evitar travas no desembaraço.
 
-Em remessas de medicamentos e CBD medicinal procedentes dos Estados Unidos, Europa, Colômbia ou Uruguai, o pacote passa tanto pela Receita Federal (`HOC`) quanto pela ANVISA (`ANV`) em Guarulhos antes de mudar para `CLA` (Liberado). O prazo nessa fase varia conforme a fila dos órgãos reguladores e a conferência de receitas, autorizações de importação e dados cadastrais. Se o rastreamento permanecer em `BRP`, `HOC` ou `ANV` por vários dias úteis, verifique seu e-mail e mensagens de WhatsApp da Memphis Courier para checar se há alguma pendência de CPF ou documento. Saiba mais no [guia de alfândega](guide:customs) e em [quando o rastreamento para de atualizar](guide:tracking-not-updating).
+Em remessas de cannabis medicinal e outros medicamentos que a Memphis Courier traz dos Estados Unidos, Europa, Colômbia ou Uruguai, o pacote pode passar tanto pela Receita Federal (`HOC`) quanto pela ANVISA (`ANV`) em Guarulhos antes de mudar para `CLA` (Liberado). Se o rastreamento permanecer em `BRP`, `HOC` ou `ANV` por vários dias úteis, verifique seu e-mail e o WhatsApp: a Memphis Courier informa os clientes por e-mail, WhatsApp, chat ou telefone e pode ter pedido a confirmação do CPF ou um documento. Saiba mais no [guia de alfândega](guide:customs) e em [quando o rastreamento para de atualizar](guide:tracking-not-updating).
 
 Após a liberação (`CLA`), a distribuição cobre todo o território brasileiro. Se você também acompanha entregas de outros operadores no Brasil, consulte as páginas de [Anjun Express](carrier:anjun), [Jadlog](carrier:jadlog) e [J&T Express Brazil](carrier:j-and-t-br).
 
@@ -49,11 +49,13 @@ Após a liberação (`CLA`), a distribuição cobre todo o território brasileir
 
 Cole o código `M...MIA` no Peek para identificar a Memphis Courier automaticamente assim que o sistema confirmar a remessa. Caso precise escolher ou alterar a transportadora manualmente, use **Trocar** ao adicionar a encomenda ou **Trocar transportadora** na tela de detalhes.
 
-O Peek consulta o serviço público de rastreamento da Memphis Courier diretamente por meio do [adaptador Memphis Courier no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier). Ele lê todos os códigos de evento, as descrições em português, a localidade informada e o peso total em quilogramas quando disponível, preservando o horário local exato retornado pela transportadora (ou o fuso explícito quando presente). Campos adicionais do portal, como observações internas, contagem de volumes, CEPs e documentos aduaneiros anexados, permanecem disponíveis apenas no portal da Memphis Courier.
+O Peek consulta o serviço público de rastreamento da Memphis Courier diretamente por meio do [adaptador Memphis Courier no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier). Ele lê o código, a descrição em português e a localidade de cada registro, e o peso total em quilogramas quando disponível. A Memphis Courier informa o horário de cada registro como hora local e só indica o fuso quando o horário termina com ele. O Peek mantém esse fuso; sem ele, data o registro pelo fuso do local (horário de Nova York para `Estados Unidos`, de São Paulo para `SP` ou `Brasil`), um registro sem local pelo fuso do registro vizinho, senão pelo de São Paulo, e mostra todos no relógio do seu aparelho. Campos adicionais do portal, como observações internas, contagem de volumes, CEPs, destino e documentos aduaneiros anexados, ficam só no portal da Memphis Courier.
 
 O Peek organiza os 12 códigos da Memphis Courier em etapas claras: **Etiqueta criada** para `FLT`, **Em trânsito** de `CHK` até `AAZ` e novamente após a liberação em `CLA` (os códigos da Memphis Courier passam direto da criação do pedido para o trânsito no centro de distribuição, sem um código separado de **Recebida pela transportadora**), **Na alfândega** para `BRP`, `HOC` e `ANV`, e **Entregue** quando `DLV` é registrado.
 
-Em voos longos ou durante a espera na alfândega e na ANVISA, o Peek informa: „É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Memphis Courier.“ Se passarem mais de três semanas sem novidades, o aviso muda para: „Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Memphis Courier.“ Sempre que precisar falar diretamente com a transportadora, toque em **Pedir ajuda a Memphis Courier** na tela do pacote.
+Com a encomenda aberta no Peek, ou no dia da entrega com as notificações ativadas, o Peek consulta até a cada 10 minutos, enquanto o rastreio da Memphis Courier responder. Fora disso, de hora em hora. O rastreio da Memphis Courier não tem etapa de saída para entrega, então o Peek nunca passa às consultas a cada 2 minutos do dia da entrega. Depois de 12 horas só com "Etiqueta criada" ou "Recebida pela transportadora", ou de dois dias sem novidade, consulta de hora em hora em qualquer caso, e a cada 6 horas depois de sete dias em "Etiqueta criada". Quando o rastreio da Memphis Courier não responde e o Peek acompanha a encomenda só por serviços de rastreamento, consulta de hora em hora, a cada 3 horas depois de um dia sem novidade e até a cada 15 minutos no dia em que a encomenda sai para entrega.
+
+Quando o registro mais recente tem quatro dias e a encomenda continua em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek sinaliza com o dia desse registro, por exemplo "Sem atualizações desde seg 12 out". A página da encomenda mostra então "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando Memphis Courier.", com o link "Pedir ajuda a Memphis Courier" para a página Fale Conosco da Memphis Courier. Depois de três semanas sem registro novo, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando Memphis Courier."
 
 Nas configurações de alerta do Peek, escolha entre **Cada movimentação**, **Etapas importantes** ou **Só a entrega**.
 
@@ -71,9 +73,9 @@ Tenha em mãos o código `M...MIA` e o CPF do destinatário ao acionar o atendim
 
 ## Perguntas frequentes
 
-### O que significa `ANV` („Em inspeção pela ANVISA“) no rastreamento?
+### O que significa `ANV` ("Em inspeção pela ANVISA") no rastreamento?
 
-O código `ANV` indica que a Agência Nacional de Vigilância Sanitária (ANVISA) está analisando a remessa no Aeroporto de Guarulhos durante o desembaraço. É um passo padrão em importações de medicamentos e cannabis medicinal (RDC 660 / RDC 327) antes da liberação (`CLA`).
+O código `ANV` indica que a Agência Nacional de Vigilância Sanitária (ANVISA) está inspecionando a remessa durante o desembaraço. A Memphis Courier faz o desembaraço de cannabis medicinal (RDC 660 / RDC 327) junto à ANVISA; a remessa fica na alfândega até a liberação (`CLA`).
 
 ### Por que a Memphis Courier pediu para validar meu CPF?
 
@@ -81,7 +83,7 @@ A Receita Federal exige o CPF do destinatário pessoa física para liberar remes
 
 ### Por que o rastreamento fica sem atualizações entre `DEP` e `ARR`?
 
-`DEP` marca a saída da origem rumo a Guarulhos e `ARR` registra o pouso em São Paulo. Enquanto a carga está no voo ou aguardando conferência no terminal de cargas (`AAZ`), não há novos eventos intermediários.
+`DEP` marca a saída da origem rumo a Guarulhos e `ARR` a chegada ao aeroporto. A lista de códigos da Memphis Courier não tem registro para o voo, então o próximo é `ARR` ou o `AAZ` do terminal de cargas.
 
 ### A Memphis Courier atende solicitações feitas pelo Reclame Aqui?
 

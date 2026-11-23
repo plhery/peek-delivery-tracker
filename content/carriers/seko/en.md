@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-SEKO Logistics is a global freight forwarder, e-commerce logistics provider, and white-glove home-delivery network founded in Chicago in 1976, operating more than 150 offices across over 60 countries with major hubs serving the United States, the United Kingdom, Australia, and New Zealand. Shoppers and businesses encounter SEKO in two common ways: heavy or white-glove home deliveries and freight shipments tracked on [sekologistics.com/en/track](https://www.sekologistics.com/en/track/), and cross-border e-commerce parcels routed through SEKO's [OmniParcel tracker](https://track.omniparcel.com/).
+SEKO Logistics began in 1976 with a single office in Chicago and now has more than 150 offices in over 60 countries and 15 primary hubs. Its services include air, ocean and ground freight, e-commerce, White Glove & Specialty Delivery, and Home Delivery & Last Mile. Shipments are tracked on [sekologistics.com/en/track](https://www.sekologistics.com/en/track/), and cross-border e-commerce parcels on SEKO's [OmniParcel tracker](https://track.omniparcel.com/).
 
 Because SEKO's standard tracking portal and OmniParcel operate as two separate systems with different tracking number formats and scan styles, knowing which format you have helps you read the timeline accurately.
 
@@ -14,7 +14,7 @@ Because SEKO's standard tracking portal and OmniParcel operate as two separate s
 
 SEKO Logistics shipments do not follow one exclusive prefix; instead, they fall into two families handled by different portals:
 
-- **SEKO Logistics shipment numbers (8 to 20 letters and digits, with at least 7 consecutive digits):** Common shapes include 3 shipper letters followed by 7 digits (such as `WFY4829173`), 5 letters followed by 7 digits, or 9 digits alone (such as `482917360`). Because 3 letters + 7 digits overlaps with [Australia Post](carrier:australia-post) and 9 digits overlaps with [DPD Ireland](carrier:dpd-ie) (and 12-character codes can overlap with [Colis Privé](carrier:colis-prive)), SEKO has no automatic prefix-only detection — select SEKO Logistics manually or paste your tracking link.
+- **SEKO Logistics shipment numbers:** Peek takes 8 to 20 letters and digits with a run of at least 7 digits. Shapes seen include 3 letters followed by 7 digits (such as `WFY4829173`), 5 letters followed by 7 digits, or 9 digits alone (such as `482917360`). Peek never recognises SEKO from a bare number: for 3 letters + 7 digits it asks [Australia Post](carrier:australia-post), for 5 letters + 7 digits [Colis Privé](carrier:colis-prive), and for 9 digits [DPD Ireland](carrier:dpd-ie), outside Ireland only as a last resort. Select SEKO Logistics manually or paste your tracking link.
 - **SEKO OmniParcel numbers (`GX` + 17 or 18 digits):** Cross-border e-commerce consignments on `track.omniparcel.com` use `GX` followed by 17 or 18 digits (such as `GX482917360514829173`). SEKO's main tracking page does not recognize `GX` numbers; only OmniParcel's tracker answers them.
 
 If you paste a link from `sekologistics.com/en/track/?trackingNumbers=...` or `track.omniparcel.com/...`, Peek extracts the number and routes it straight to SEKO Logistics automatically. For more on how logistics and parcel codes differ, see the [tracking number formats guide](guide:tracking-number-formats).
@@ -46,11 +46,11 @@ Two phrases on SEKO's main portal are worth noting:
 
 ## White-glove home delivery, cross-border customs, and delays
 
-SEKO handles both bulky home deliveries (furniture, appliances, fitness equipment, and high-value electronics with appointment-based white-glove service) and cross-border OmniParcel orders.
+SEKO's site lists White Glove & Specialty Delivery and Home Delivery & Last Mile among its services, and secure logistics for electronics and hardware, beside cross-border OmniParcel orders.
 
-- **Home delivery appointments:** On bulky US and UK deliveries, once tracking reaches `At Delivery Terminal` or `On Hand Destination Station`, SEKO or its local delivery partner typically contacts you to schedule a delivery window (`At Delivery Terminal Delivery Appt Set`). SEKO's page often posts either an `Expected Arrival` date or an `Estimated delivery between` date range while the shipment is in transit.
-- **Cross-border OmniParcel handoffs:** On international e-commerce orders (`GX...`), SEKO consolidates freight at an origin warehouse, clears destination customs, and hands off to a local last-mile carrier (`Received by Last Mile Provider`). Expect multi-day quiet stretches during flights and customs inspection; see the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating) if updates pause.
-- **Repeated timestamps:** SEKO's main tracker sometimes lists the same status change twice in different capitalization within the same minute, and reports local wall-clock times without a time zone. On OmniParcel, the public webpage defaults to UTC+10:00 unless you switch the time-zone dropdown; Peek queries OmniParcel explicitly in UTC so every timestamp converts cleanly to your local clock.
+- **Home delivery appointments:** `At Delivery Terminal Delivery Appt Set` and `On Hand DEST Delv Appt Set` mean a delivery appointment is set while the shipment waits at the delivering terminal. SEKO's page often posts either an `Expected Arrival` date or an `Estimated delivery between` date range while the shipment is in transit.
+- **Cross-border OmniParcel handoffs:** On international e-commerce orders (`GX...`), OmniParcel's scans run from the origin warehouse through export, the flight and destination customs to a local last-mile carrier (`Received by Last Mile Provider`). Scans can pause during flights and customs; see the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating) if updates pause.
+- **Times and repeats:** SEKO's tracking page gives times to the minute without a zone and sometimes lists the same status twice within a minute in different capitals; Peek keeps one and dates SEKO's milestones, which name no place, on Chicago time. OmniParcel's page shows times in UTC+10:00 unless you switch its time-zone dropdown; Peek asks OmniParcel in UTC, so each scan keeps its exact instant. Peek shows every scan on your device's clock.
 
 If your cross-border order uses a separate major courier for another part of the trip, compare tracking with [DHL Express](carrier:dhl-express) or [FedEx](carrier:fedex).
 
@@ -62,7 +62,9 @@ Peek queries both portals directly through the open-source [universal-parcel-scr
 
 Peek maps SEKO and OmniParcel milestones into standard stages: **Label created** for data received, created, and driver-at-pickup notices, **Received by carrier** for pickup and origin warehouse intake, **In transit** for hub, flight, transfer, delivery-terminal, warehouse-arrival, customs-cleared, and last-mile handover scans, **At customs** for destination customs inspection, **Out for delivery** for out-for-delivery and driver-on-site scans, **Ready for pickup** for collection-point or locker holds, **Delivery attempted** for failed attempts, **Needs attention** for origin or destination holds, **Delivered** for delivery and safe-drop scans, and **Returned to sender** for returns.
 
-When a shipment sits between hubs or in customs over a weekend, Peek displays: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking SEKO Logistics." After more than three weeks without a new scan, Peek shows: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking SEKO Logistics."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day SEKO's page shows `Shipment is Out for Delivery`, `Out for Delivery` or `Driver on site Delivery Location`, or OmniParcel shows `Out for delivery` or `The order is on the way to the recipient.`, every 2 minutes from 6 a.m. on the newest scan's clock, while SEKO's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When SEKO doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking SEKO Logistics." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking SEKO Logistics."
 
 In Peek's alert settings, choose **Every scan**, **Important steps**, or **Delivery only** to tailor your notifications.
 
@@ -76,7 +78,7 @@ SEKO publishes regional customer service hotlines directly on its [tracking page
 - **Online shipment inquiry:** [Contact SEKO Logistics](https://www.sekologistics.com/en/contact-us/) (select the "Track My Shipment" form)
 - **Company overview:** [About SEKO Logistics](https://www.sekologistics.com/en/about/) and [sekologistics.com](https://www.sekologistics.com/en/)
 
-For e-commerce purchases shipped via OmniParcel or scheduled home delivery, keep your SEKO tracking number and seller order number handy — the merchant can also coordinate address updates, missed appointments, or claims with SEKO directly.
+Keep your SEKO tracking number at hand when you call or fill in the Track My Shipment form.
 
 ## Frequently asked questions
 
@@ -90,11 +92,11 @@ No. On SEKO Logistics tracking, `Delivered To Warehouse` means the shipment arri
 
 ### Why did Peek ask me to pick a carrier for my SEKO tracking number?
 
-SEKO's tracking formats (such as 3 letters + 7 digits or 9 digits) overlap with other carriers, and OmniParcel's `GX` codes are not uniquely prefixed across all global carriers. Selecting SEKO Logistics via **Change** or pasting the official SEKO or OmniParcel tracking link tells Peek exactly where to look.
+SEKO's numbers (such as 3 letters + 7 digits or 9 digits) fit other carriers too, and Peek never recognises SEKO from a bare number, `GX` numbers included. Selecting SEKO Logistics via **Change** or pasting the official SEKO or OmniParcel tracking link tells Peek exactly where to look.
 
 ### How do I schedule a SEKO Logistics home delivery appointment?
 
-Once your shipment reaches `At Delivery Terminal` or `On Hand Destination Station`, SEKO's local station typically reaches out to arrange a delivery window. If you have not been contacted, call the US Home Delivery Hotline at `(866) 268-5263`, UK Customer Service at `+44 1784 417120`, or submit the Track My Shipment form on [sekologistics.com/en/contact-us](https://www.sekologistics.com/en/contact-us/).
+Call the US Home Delivery Hotline at `(866) 268-5263` or UK Customer Service at `+44 1784 417120`, or use the Track My Shipment form on [sekologistics.com/en/contact-us](https://www.sekologistics.com/en/contact-us/).
 
 :::sources
 - [SEKO Logistics](https://www.sekologistics.com/en/)

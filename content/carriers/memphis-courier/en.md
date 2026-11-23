@@ -6,21 +6,21 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Memphis Courier is a Brazilian international logistics and express-import carrier with more than 25 years of experience moving courier and formal shipments between the United States and Brazil. Operating from its courier terminal at Guarulhos International Airport (GRU) and its São Paulo office, Memphis Courier handles end-to-end air transport, Receita Federal customs clearance, regulatory clearance with agencies such as ANVISA (including medical cannabis imports under RDC 660 and RDC 327), and nationwide last-mile delivery across Brazil.
+Memphis Courier is a 100% Brazilian logistics company with more than 25 years of history, handling express and formal shipments for export and import. From its courier terminal at Guarulhos International Airport (GRU) and its São Paulo office, it offers air transport, Receita Federal customs clearance, regulatory clearance with ANVISA (including medical cannabis imports under RDC 660 and RDC 327, for medicines made in the United States, Europe, Colombia and Uruguay) and delivery across Brazil.
 
-Because most Memphis Courier shipments fly out of Miami into Guarulhos before entering Brazilian customs and health-agency review, tracking updates are tightly tied to airport arrival, Receita Federal inspection, and ANVISA approval.
+Its tracking follows the parcel to Guarulhos airport, through Receita Federal inspection and ANVISA review, and on to delivery.
 
 ## Memphis Courier tracking number format
 
 Memphis Courier tracking numbers follow a distinctive 11-character alphanumeric pattern:
 
-- **`M` + 7 digits + `MIA`** (11 characters total, such as `M4829173MIA`) — the house courier code issued for shipments departing through Memphis Courier's Miami gateway to Brazil.
+- **`M` + 7 digits + `MIA`** (11 characters total, such as `M4829173MIA`) — the shape Peek recognises as Memphis Courier's.
 
-Spaces and lowercase letters are stripped when the number is looked up. Memphis Courier's tracking portal (`clients.memphiscourier.com.br`) accepts this code directly without requiring a customer account login. Because the `M` + 7 digits + `MIA` shape is specific to Memphis Courier, Peek identifies it as a Memphis Courier candidate automatically, though it keeps detection at low confidence until Memphis Courier's service confirms the shipment exists. For other parcel formats commonly seen on Brazil imports, see the [tracking number formats guide](guide:tracking-number-formats).
+Peek takes Memphis Courier codes of 6 to 30 letters and digits; it removes spaces and capitalises letters. Memphis Courier's tracking portal (`clients.memphiscourier.com.br`) looks a code up without a customer account login. From the `M` + 7 digits + `MIA` shape, Peek asks Memphis Courier alone and shows "Memphis Courier has this parcel." once it answers. For other parcel formats commonly seen on Brazil imports, see the [tracking number formats guide](guide:tracking-number-formats).
 
 ## Memphis Courier tracking statuses
 
-Memphis Courier's tracking service returns short 3-letter scan codes paired with Portuguese descriptions and a location column (usually a state or country). Its own step bar progresses through four headline milestones — created (`FLT`), customs (`BRP`), released (`CLA`), and delivered (`DLV`) — with detailed transit and inspection scans in between.
+Memphis Courier's tracking service returns 3-letter scan codes with Portuguese descriptions and a location column (a state or country). Its tracking page's step bar runs Criado (`FLT`), customs (`BRP`), Liberado and Entregue; the scans that reach the last two (`CLA` and `DLV`) are known only by those step labels.
 
 | Code | Memphis Courier wording | What it means |
 | --- | --- | --- |
@@ -33,15 +33,15 @@ Memphis Courier's tracking service returns short 3-letter scan codes paired with
 | `AAZ` | Pedido recebido pela GRU Airport | Received by the GRU Airport cargo terminal ahead of formal customs entry. |
 | `BRP` | Processo de desembaraço iniciado | Brazilian customs clearance has started. |
 | `HOC` | Encomenda sendo inspecionada pela Alfândega | Under inspection by Receita Federal (Brazilian customs). |
-| `ANV` | Em inspeção pela ANVISA | Under regulatory inspection by ANVISA, Brazil's health agency — common on medical CBD and pharmaceutical imports. |
-| `CLA` | Liberado | Customs and any required regulatory agencies have released the shipment for domestic delivery. |
-| `DLV` | Entregue | Delivered to the recipient's address in Brazil. |
+| `ANV` | Em inspeção pela ANVISA | Under regulatory inspection by ANVISA, Brazil's health agency, during clearance. |
+| `CLA` | Liberado (step bar) | Customs and any required regulatory agencies have released the shipment for domestic delivery. |
+| `DLV` | Entregue (step bar) | Delivered to the recipient's address in Brazil. |
 
 ## Customs, CPF validation, and ANVISA clearance
 
 Every personal express import into Brazil requires the recipient's CPF (Cadastro de Pessoas Físicas) for Receita Federal clearance. As Memphis Courier notes on its [additional services page](https://memphiscourier.com.br/servicos-adicionais/), many foreign online stores do not include a CPF field at checkout; when that happens, Memphis Courier's customer service team reaches out to validate the recipient's CPF so clearance is not blocked.
 
-For regulated healthcare and medical cannabis imports from the US, Europe, Colombia, or Uruguay, parcels go through both Receita Federal (`HOC`) and ANVISA (`ANV`) checks at Guarulhos before `CLA` (released) appears. Inspection times depend on agency queues and whether all prescriptions, import authorizations, and recipient details match. If your shipment stays on `BRP`, `HOC`, or `ANV` for several business days without a change, check your email and WhatsApp messages from Memphis Courier in case they requested a CPF confirmation or supporting document. For more on how international import clearance works, see the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating).
+For medical cannabis and other medicines Memphis Courier brings in from the US, Europe, Colombia or Uruguay, the parcel can go through both Receita Federal (`HOC`) and ANVISA (`ANV`) checks at Guarulhos before `CLA` (released) appears. If your shipment stays on `BRP`, `HOC`, or `ANV` for several business days without a change, check your email and WhatsApp: Memphis Courier keeps customers informed by email, WhatsApp, chat or phone, and may have asked for a CPF confirmation or a document. For more on how international import clearance works, see the [customs guide](guide:customs) and [when tracking stops updating](guide:tracking-not-updating).
 
 Once customs releases the parcel (`CLA`), domestic distribution covers all Brazilian states. If another carrier delivers a separate order to Brazil, compare tracking behaviour on [Anjun Express](carrier:anjun), [Jadlog](carrier:jadlog), or [J&T Express Brazil](carrier:j-and-t-br).
 
@@ -49,11 +49,13 @@ Once customs releases the parcel (`CLA`), domestic distribution covers all Brazi
 
 Paste an `M...MIA` code into Peek and Peek matches it to Memphis Courier automatically once the carrier responds. If you need to pick or switch the carrier manually, choose **Change** when adding the parcel or **Change carrier** from the tracking view.
 
-Peek queries Memphis Courier's public tracking service directly through the open-source [universal-parcel-scraper Memphis Courier adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier). It pulls every scan code, Portuguese wording, location label, and total shipment weight in kilograms when present, keeping each scan's local wall-clock timestamp (or explicit offset when the service provides one) rather than inventing a time zone. Fields shown on the client portal such as internal remarks, parcel count, postcodes, and attached customs documents stay on Memphis Courier's own site.
+Peek queries Memphis Courier's public tracking service directly through the open-source [universal-parcel-scraper Memphis Courier adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/memphis-courier). It reads each scan's code, Portuguese wording and location label, and the total weight in kilograms when present. Memphis Courier gives each scan's time as a wall clock and states an offset only where the time ends with one. Peek keeps that offset; otherwise it dates the scan on its place's zone (New York time for `Estados Unidos`, São Paulo time for `SP` or `Brasil`), a scan without a place on its neighbour's, else on São Paulo time, and shows every scan on your device's clock. Fields shown on the client portal such as internal remarks, parcel count, postcodes, destination and attached customs documents stay on Memphis Courier's own site.
 
 Peek groups Memphis Courier's 12 scan codes into clear progress stages: **Label created** for `FLT`, **In transit** from `CHK` through `AAZ` and again after customs release at `CLA` (Memphis Courier's code set moves directly from order creation into distribution-centre transit rather than using a separate **Received by carrier** code), **At customs** for `BRP`, `HOC`, and `ANV`, and **Delivered** once `DLV` posts.
 
-During flights from Miami or while waiting in Receita Federal and ANVISA queues, Peek displays: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Memphis Courier." If no new scan arrives for more than three weeks, Peek shows: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Memphis Courier." You can jump straight to official support at any time through **Get help from Memphis Courier** on the tracking screen.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes while Memphis Courier's tracker answers. Otherwise Peek checks hourly. Memphis Courier's tracker shows no out-for-delivery step, so Peek never switches to its 2-minute delivery-day checks. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Memphis Courier's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Memphis Courier.", with a "Get help from Memphis Courier" link to Memphis Courier's Fale Conosco page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Memphis Courier."
 
 Choose **Every scan**, **Important steps**, or **Delivery only** in Peek's alert preferences to decide how often you want notifications.
 
@@ -73,7 +75,7 @@ Have your `M...MIA` tracking number and recipient CPF ready when contacting supp
 
 ### What does `ANV` ("Em inspeção pela ANVISA") mean on Memphis Courier tracking?
 
-`ANV` means Brazil's health regulatory agency (ANVISA) is reviewing the shipment at Guarulhos Airport as part of import clearance. It is standard for medical cannabis (RDC 660 / RDC 327) and health-related imports and remains active until ANVISA and customs release the parcel (`CLA`).
+`ANV` means Brazil's health regulatory agency (ANVISA) is inspecting the shipment as part of import clearance. Memphis Courier clears medical cannabis imports (RDC 660 / RDC 327) with ANVISA; the parcel stays at customs until `CLA` (released).
 
 ### Why did Memphis Courier contact me for my CPF?
 
@@ -81,7 +83,7 @@ Receita Federal requires the recipient's CPF on every personal express import in
 
 ### Why are there no scans between `DEP` and `ARR`?
 
-`DEP` records departure from the origin hub toward Guarulhos International Airport and `ARR` records landing in São Paulo. No intermediate scan posts while the shipment is airborne or awaiting airport cargo intake (`AAZ`).
+`DEP` records departure from the origin toward Guarulhos airport and `ARR` the arrival there. Memphis Courier's code list has no scan for the flight itself, so the next one is `ARR` or the cargo terminal's `AAZ`.
 
 ### Does Memphis Courier answer support requests posted on Reclame Aqui?
 

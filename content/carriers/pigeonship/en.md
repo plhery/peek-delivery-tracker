@@ -8,23 +8,23 @@ updated: 2026-11-23
 
 PigeonShip is a final-mile delivery carrier operating across the United States and Canada, with offices in Provo, Utah, and Oakville, Ontario. Retailers, e-commerce shippers, and local businesses use PigeonShip for same-day, next-day, and regional e-commerce deliveries through services including **Pigeon Flex** (2–5 day nationwide delivery), **Pigeon Express** (2-day nationwide delivery), **Pigeon Connect** (on-demand same-day delivery), and **Pigeon Flash** (scheduled same-day delivery).
 
-Unlike national postal operators that record a long chain of depot scans, PigeonShip runs crowdsourced and dedicated final-mile routes and gives recipients a single live tracking link on `admin.pigeonship.com` showing the order's current status, due time, and post-delivery confirmation.
+PigeonShip recruits independent drivers and runs dedicated delivery programs for businesses. Recipients get a tracking link on `admin.pigeonship.com` that shows the order's status and due time, then a completion page once it is delivered.
 
 ## PigeonShip tracking number format
 
-PigeonShip package tracking numbers are alphanumeric strings of 8 to 30 characters. Live final-mile orders commonly use a structured 18-character format alternating digits and uppercase letters:
+Peek takes PigeonShip numbers of 8 to 30 letters and digits; it removes spaces and capitalises letters. Peek recognises one 18-character shape that alternates digits and capital letters:
 
 - **18 alphanumeric characters** matching `digit-letter-digit-letter-3 digits-letter-3 digits-letter-2 digits-letter-digit-2 letters` (for example, `7P4K829H631N58R2TM`).
 
-PigeonShip sends recipients a direct tracking link formatted as `admin.pigeonship.com/shipping/tracking/package/<trackingNumber>/`. When you paste that link into Peek, Peek extracts the package code and routes it straight to PigeonShip. When you paste a bare 18-character code in this pattern, Peek recognizes PigeonShip as the candidate carrier and confirms the shipment against PigeonShip's live page. Spaces and lowercase letters are stripped automatically. For comparisons with other US and Canadian courier formats, see the [tracking number formats guide](guide:tracking-number-formats).
+PigeonShip's tracking links have the form `admin.pigeonship.com/shipping/tracking/package/<trackingNumber>/`. When you paste that link into Peek, Peek extracts the package code and routes it straight to PigeonShip. From a bare 18-character code in this shape, Peek asks PigeonShip alone and shows "PigeonShip has this parcel." once it answers. For comparisons with other US and Canadian courier formats, see the [tracking number formats guide](guide:tracking-number-formats).
 
 ## How PigeonShip live tracking works
 
-PigeonShip's recipient tracking page is a summary view rather than a traditional multi-scan history table. While the order is active, the page shows the current order status code, a short status label, and an expected deliver-by timestamp (`dueDate`) when scheduled. Once the driver completes the drop-off, PigeonShip replaces the live map screen at that same URL with a completion page reading `Your delivery has been completed successfully.` along with a link to delivery confirmation photos.
+PigeonShip's recipient tracking page is a summary view rather than a scan history. While the order is active, it shows "In transit" and the driver on a map, with a deliver-by time (`dueDate`) when one is set; behind the page, the order carries a status code and label, such as `16` and `Assigned`. The page shows "Delivered" for code `64` alone. Once the delivery is complete, PigeonShip replaces the page at that same URL with a completion page reading `Your delivery has been completed successfully.` and a link to the delivery's pictures.
 
 | PigeonShip status / page | What it means |
 | --- | --- |
-| Status `16` — `Assigned` | The package has been assigned to a PigeonShip driver or route and is moving toward delivery. |
+| Status `16` — `Assigned` | The order is on a driver's route; the page shows "In transit". |
 | Due date / deliver-by time | The target completion timestamp shown on active orders before drop-off. |
 | Status `64` / `Delivered` or `Your delivery has been completed successfully.` | The driver completed the delivery; opening PigeonShip's own link lets you view the delivery confirmation picture. |
 | `Page not found` (404) | The tracking number is not active in PigeonShip's live tracking system, or contains a typo. |
@@ -33,23 +33,25 @@ Because PigeonShip does not publish a timestamped scan log on its recipient page
 
 ## Same-day delivery expectations and what to check if delayed
 
-Because PigeonShip focuses on local same-day, next-day, and short-window e-commerce routes across North America, most orders move from driver assignment to doorstep drop-off within hours rather than days. On active orders, PigeonShip's tracking link also provides advance arrival alerts and a proof-of-delivery photo once the driver leaves the parcel at your door.
+PigeonShip offers same-day and next-day delivery anywhere in the US and Canada. Reviews on its site mention a text before the driver arrives and a photo after the drop-off.
 
 If your order still shows `Assigned` past its expected delivery time, or if the tracking link shows `Page not found`:
 
-- **Check for typos or an unshipped order:** Confirm the full code or full `admin.pigeonship.com` link from the retailer's email or SMS. A newly printed order may not open a live route until PigeonShip creates the package page.
-- **Check the retailer's order page:** On e-commerce orders, the merchant is PigeonShip's direct account holder and can verify whether the parcel has been handed off to the local driver or needs re-dispatch.
-- **Check delivery instructions and safe drop locations:** PigeonShip drivers follow label notes and typically photograph the porch or front-door drop-off, so open the original tracking link on `admin.pigeonship.com` if you need to see the delivery photo after completion. For more troubleshooting steps, read [when tracking stops updating](guide:tracking-not-updating) and the [missed delivery guide](guide:missed-delivery).
+- **Check for typos:** Confirm the full code or full `admin.pigeonship.com` link from the retailer's email or SMS; PigeonShip's site answers `Page not found` for a number it has no page for.
+- **Contact PigeonShip:** use its [contact form](https://www.pigeonship.com/contact-us) if the order stays on "In transit" past its due time.
+- **Check delivery instructions:** reviews on PigeonShip's site mention drivers following the label's directions and a photo of the drop-off; open the original tracking link on `admin.pigeonship.com` to see the pictures after completion. For more troubleshooting steps, read [when tracking stops updating](guide:tracking-not-updating) and the [missed delivery guide](guide:missed-delivery).
 
 ## Tracking PigeonShip with Peek
 
 Paste either your PigeonShip tracking number or the full `admin.pigeonship.com/shipping/tracking/package/...` link into Peek. If Peek does not pre-select PigeonShip for an unconventional code format, choose **Change** while adding the parcel or **Change carrier** on the parcel screen.
 
-Peek fetches PigeonShip's server-rendered tracking page directly through the open-source [universal-parcel-scraper PigeonShip adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pigeonship). It reads the live status code, status label, completion state, and explicit deliver-by timestamp (`dueDate`) when present. To protect privacy and avoid noisy map data, Peek intentionally discards the recipient's name, live GPS coordinates, visual progress rail, and delivery photos — open PigeonShip's own link if you want to inspect the drop-off photo.
+Peek fetches PigeonShip's server-rendered tracking page directly through the open-source [universal-parcel-scraper PigeonShip adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pigeonship). It reads the order's status code and label, whether it is delivered, and the deliver-by time (`dueDate`) when present, which Peek shows as the expected delivery. Peek leaves out the recipient's name, the driver's map coordinates, the progress rail and the delivery photos — open PigeonShip's own link to see the drop-off photo.
 
-Because PigeonShip exposes only a current summary rather than a list of historical scans, Peek tracks it as a summary-only parcel rather than showing earlier **Label created** or **Received by carrier** scan rows: an active `Assigned` order displays as **In transit** with its expected delivery time, and a completed delivery displays as **Delivered**.
+Because PigeonShip shows only the current state, Peek adds a row dated when it saw each change of stage: an active `Assigned` order shows as **In transit** with its expected delivery time, and a completed delivery as **Delivered**.
 
-If an order goes quiet while waiting for a driver or route update, Peek notes: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PigeonShip." If nothing changes for over three weeks, Peek displays: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PigeonShip." Whenever you need direct assistance, select **Get help from PigeonShip** on the tracking screen to go straight to PigeonShip's contact page.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes while PigeonShip's tracking page answers. Otherwise Peek checks hourly. PigeonShip's tracking page shows no out-for-delivery step, so Peek never switches to its 2-minute delivery-day checks. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When PigeonShip's tracking page doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking PigeonShip.", with a "Get help from PigeonShip" link to PigeonShip's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking PigeonShip."
 
 In Peek's notification settings, pick **Every scan**, **Important steps**, or **Delivery only** to choose which updates alert you.
 
@@ -59,13 +61,12 @@ In Peek's notification settings, pick **Every scan**, **Important steps**, or **
 - **Official website:** [pigeonship.com](https://www.pigeonship.com/)
 - **US office:** PigeonShip USA, 1675 N Freedom Blvd Ste 9B, Provo, Utah 84604-6929
 - **Canada office:** PigeonShip Canada, 405 Dundas St W, Oakville, ON L6M 5P9
-- **Retailer support:** Because PigeonShip delivers on behalf of merchants, contacting the store that shipped your order is often the fastest way to request a redelivery, address correction, or missing-package replacement.
 
 ## Frequently asked questions
 
 ### Why does PigeonShip tracking not show a list of past scans?
 
-PigeonShip's live recipient page is summary-only: it shows the order's current status (such as `Assigned` or delivered) and deliver-by time rather than a multi-stop warehouse scan history.
+PigeonShip's live recipient page is summary-only: it shows the order's current status ("In transit" or "Delivered") and deliver-by time rather than a multi-stop warehouse scan history.
 
 ### Where can I see the PigeonShip delivery photo?
 
@@ -73,7 +74,7 @@ Peek does not store or display delivery photos from PigeonShip. Once your parcel
 
 ### What does status `Assigned` mean on PigeonShip?
 
-`Assigned` (status code `16`) means PigeonShip has assigned your package to a driver or delivery route and it is underway toward your address.
+`Assigned` (status code `16`) is the order's status behind PigeonShip's page while it is on a driver's route; the page itself shows "In transit". Peek shows it as **In transit**.
 
 ### Does PigeonShip deliver in both the US and Canada?
 

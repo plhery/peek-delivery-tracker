@@ -6,17 +6,17 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Kühne+Nagel ist ein weltweit tätiges Speditions- und Logistikunternehmen mit Sitz in der Schweiz und Standorten in Deutschland, Österreich, der Schweiz und über 100 weiteren Ländern. Privat- und Geschäftskunden begegnen Kühne+Nagel vor allem bei Paletten- und Stückgutsendungen im Landverkehr, bei sperrigen Onlinebestellungen sowie bei internationaler Luft- und Seefracht über die öffentliche Sendungsverfolgung von [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/).
+Kühne+Nagel ist einer der weltweit führenden Logistikdienstleister, mit fast 92.000 Mitarbeitern an fast 1.300 Standorten in fast 100 Ländern. Das Unternehmen befördert See-, Luft- und Landverkehrsfracht; die öffentliche Sendungsverfolgung [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/) sucht Sendungen jeder Verkehrsart.
 
 Die öffentliche myKN-Abfrage deckt Sendungen ab, die in den letzten 90 Tagen gestartet wurden. Da Kühne+Nagel Fracht über Umschlaglager, Flughäfen, Containerterminals und Häfen bewegt, zeigt eine Sendung sowohl physische Strecken-Meilensteine als auch gesonderte Buchungs-, Zoll- und Dokumentenmeldungen.
 
 ## Sendungsnummern bei Kühne+Nagel
 
-Die öffentliche Suche von Kühne+Nagel akzeptiert Referenzen mit 6 bis 35 Buchstaben und Ziffern und ignoriert Groß- und Kleinschreibung, Leerzeichen sowie Bindestriche. Gesucht wird immer nach vollständigen Referenzen — sowohl nach eigenen Kühne+Nagel-Tracking-IDs als auch nach Kunden- oder Auftragsreferenzen. Drei Nummernformate tauchen bei Stückgut- und Straßensendungen besonders häufig auf:
+Peek nimmt Kühne+Nagel-Referenzen mit 6 bis 35 Buchstaben und Ziffern an, darunter mindestens eine Ziffer, und entfernt Leerzeichen und Bindestriche. myKN sucht die eigenen Sendungsnummern, Frachtbriefe und Buchungen von Kühne+Nagel in derselben Suche wie Kundenreferenzen. Drei Formen erkennt Peek:
 
-- **`RWM` gefolgt von 9 Ziffern** (12 Zeichen, z. B. `RWM482917360`) — eine eindeutige Referenz aus dem Kühne+Nagel-Landverkehr.
-- **`RAPI` gefolgt von 8 Ziffern** (12 Zeichen, z. B. `RAPI48291736`) — eine weitere eindeutige Kühne+Nagel-Sendungsnummer.
-- **2 Ziffern, `A` und 9 Ziffern** (12 Zeichen, z. B. `26A482917360`) — ein 12-stelliges Format, das sich mit [Australia Post](carrier:australia-post) und [Colis Privé](carrier:colis-prive) überschneidet; Peek prüft daher, welcher Dienstleister die Sendung tatsächlich führt.
+- **`RWM` gefolgt von 9 Ziffern** (12 Zeichen, z. B. `RWM482917360`) — die Sendungsnummer einer Kühne+Nagel-Straßensendung; Peek ordnet sie allein Kühne+Nagel zu.
+- **`RAPI` gefolgt von 8 Ziffern** (12 Zeichen, z. B. `RAPI48291736`) — eine Kühne+Nagel-Sendungsnummer, die Peek ebenfalls allein Kühne+Nagel zuordnet.
+- **2 Ziffern, `A` und 9 Ziffern** (12 Zeichen, z. B. `26A482917360`) — die Sendungsnummer einer Straßensendung. Die Form passt auch zu [Australia Post](carrier:australia-post) und [Colis Privé](carrier:colis-prive); Peek fragt daher nacheinander Australia Post, Colis Privé und Kühne+Nagel (in der Schweiz und in Deutschland Kühne+Nagel an zweiter Stelle).
 
 Bei Luft- und Seefracht geben Absender häufig zusätzlich Luftfrachtbrief-Nummern (AWB), Konnossementsnummern oder eigene Bestellreferenzen an. Fügst du einen Tracking-Link von `mykn.kuehne-nagel.com/public-tracking/shipments?query=...` ein, liest Peek die Nummer direkt aus und ordnet sie Kühne+Nagel zu. Einen allgemeinen Überblick über Aufbau und Präfixe anderer Anbieter findest du im [Ratgeber zu Sendungsnummern](guide:tracking-number-formats).
 
@@ -34,7 +34,7 @@ Das öffentliche myKN-Portal trennt den Verlauf in Strecken-Meilensteine an den 
 | Customs entry release / Import customs entry release | Der Zoll oder die zuständige Behörde hat die Ware für den Weitertransport freigegeben. |
 | In delivery | Die Sendung befindet sich auf dem Zustellfahrzeug oder der Lkw ist am Zielort eingetroffen. |
 | Delivery / Freight collection / Proof of delivery available | Die Fracht wurde zugestellt oder am Terminal abgeholt; `Delivery with discrepancies` markiert eine erfolgte Zustellung mit vermerkter Abweichung oder Beschädigung. |
-| Delivery attempt failed / Delivery not possible | Ein Zustellversuch war nicht erfolgreich, etwa wegen Annahmeverweigerung oder Umleitung. |
+| Delivery attempt failed / Delivery not possible | Ein Zustellversuch war nicht erfolgreich, etwa wegen Annahmeverweigerung. |
 | Shipment on hold / Delivery instructions pending / Missing/incomplete document | Die Sendung steht an einer Station oder beim Zoll still, bis fehlende Papiere, Zahlungen oder Weisungen vorliegen. |
 
 Einige Hinweise werden leicht missverstanden:
@@ -46,39 +46,41 @@ Einige Hinweise werden leicht missverstanden:
 
 ## Zustellung, Zoll und längere Scanpausen
 
-Kühne+Nagel befördert vor allem Stückgut, Paletten sowie Luft- und Seefracht statt klassischer Briefkastenpakete. Im europäischen Landverkehr vereinbart das zuständige Empfangsdepot bei Privat- oder Firmenadressen häufig vorab einen Zustelltermin (Avisierung). Die Meldung `Delivery appointment submission` hält diese Terminabsprache fest; erst `In delivery` zeigt an, dass die Ware tatsächlich auf dem Zustellfahrzeug rollt.
+`Delivery appointment submission` hält einen für später vereinbarten Zustelltermin fest und ist kein Scan: Erst `In delivery` oder die Ankunft (`Arrival`) des Lkw an der Lieferadresse setzt die Sendung auf „In Zustellung“.
 
-Bei Sendungen aus Nicht-EU-Ländern übernimmt ein Zollagent die Einfuhranmeldung. Meldungen wie `Awaiting consignee's feedback`, `Awaiting consignee's payment`, `Entry documents required` oder `Unable to file customs entry - missing details or documentation` bedeuten, dass noch Handelsrechnungen, EORI- oder Steuerdaten oder Einfuhrabgaben fehlen. Wie Verzollung und Gebühren ablaufen, erklärt der [Zoll-Ratgeber](guide:customs).
+Meldungen wie `Awaiting consignee's feedback`, `Awaiting consignee's payment` oder `Entry documents required` bedeuten, dass der Zoll auf eine Antwort, eine Zahlung oder Unterlagen des Empfängers wartet; bei `Unable to file customs entry - missing details or documentation` kann die Zollanmeldung erst danach eingereicht werden. Wie Verzollung und Gebühren ablaufen, erklärt der [Zoll-Ratgeber](guide:customs).
 
-Mehrere Tage ohne neuen Scan sind auf Seereisen, bei mehrstufigen Luftfracht-Konsolidierungen oder über Wochenenden üblich. Auf myKN gezeigte geplante Termine sind Prognosen und noch keine tatsächlichen Scans. Weitere Tipps zu ruhigen Sendungsverläufen stehen im Ratgeber [wenn sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+Auf myKN gezeigte geplante Termine sind Prognosen und noch keine tatsächlichen Scans. Weitere Tipps zu ruhigen Sendungsverläufen stehen im Ratgeber [wenn sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 ## Kühne+Nagel mit Peek verfolgen
 
-Fügst du eine `RWM`- oder `RAPI`-Nummer oder einen `mykn.kuehne-nagel.com`-Link ein, erkennt Peek Kühne+Nagel sofort. Bei einer 12-stelligen `26A...`-Nummer (die auch [Australia Post](carrier:australia-post) und [Colis Privé](carrier:colis-prive) nutzen) oder einer freien Kundenreferenz wählst du Kühne+Nagel beim Hinzufügen über **Ändern** oder später über **Paketdienst ändern** gezielt aus.
+Fügst du eine `RWM`- oder `RAPI`-Nummer oder einen `mykn.kuehne-nagel.com/public-tracking/shipments?query=...`-Link ein, erkennt Peek Kühne+Nagel sofort. Bei einer `26A...`-Nummer fragt Peek die oben genannten Paketdienste nacheinander und zeigt „Kuehne+Nagel hat dieses Paket.“, sobald Kühne+Nagel antwortet. Bei einem Frachtbrief oder einer Kundenreferenz ohne diese Formen wählst du Kühne+Nagel beim Hinzufügen über **Ändern** oder später über **Paketdienst ändern** aus.
 
-Peek ruft die öffentliche myKN-Suche, die Strecken-Meilensteine und die Informationsmeldungen direkt über den quelloffenen [universal-parcel-scraper Kühne+Nagel-Adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuehne-nagel) ab. Dabei übernimmt Peek ausschließlich tatsächlich erreichte Meilensteine (keine bloßen Plantermine), liest bei Verfügbarkeit das Gewicht in Kilogramm und das Zielland aus und ersetzt eine sekundäre Kundenreferenz durch die kanonische Kühne+Nagel-Trackingnummer, sobald genau eine Sendung gefunden wird. Enthält ein Zeitstempel eine Zeitzonenangabe, speichert Peek den genauen Zeitpunkt; andernfalls zeigt Peek die gemeldete Ortszeit ohne geratene Zeitzone an.
+Peek ruft die öffentliche myKN-Suche, die Strecken-Meilensteine und die Informationsmeldungen direkt über den quelloffenen [universal-parcel-scraper Kühne+Nagel-Adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/kuehne-nagel) ab. Dabei übernimmt Peek ausschließlich tatsächlich erreichte Meilensteine (keine bloßen Plantermine) und liest bei Verfügbarkeit das Gewicht in Kilogramm und das Zielland aus. Findet die Suche die Sendung unter einer Kundenreferenz, zeigt Peek die eigene Kühne+Nagel-Sendungsnummer neben deiner unter „Kuehne+Nagel führt die Sendung unter“; passt eine Referenz zu mehreren Sendungen, kann Peek deine nicht bestimmen. Kennt das scannende System die Zeitzone, kommt die Uhrzeit mit ihrem Versatz, und Peek übernimmt den genauen Zeitpunkt. Sonst datiert Peek den Scan nach der Zeitzone seines Orts (Berliner Zeit für Hamburg, Zürcher Zeit für Basel), einen Scan ohne Ort nach der Zeitzone des Nachbarscans, sonst nach Zürcher Zeit, und zeigt alle auf der Uhr deines Geräts.
 
 Peek ordnet die Kühne+Nagel-Meilensteine übersichtlich zu: **Etikett erstellt** für Buchungen und Abholbereitschaft, **Beim Paketdienst eingegangen** nach der Abholung, **Unterwegs** für Terminal-, Hafen-, Bahn- und Übergabescans, **Beim Zoll** für Export-/Importabfertigung und Behördenprüfungen, **In Zustellung** ab `In delivery`, **Zustellversuch** bei gescheiterter Auslieferung, **Problem gemeldet** bei Sperren, fehlenden Dokumenten oder Stornierungen sowie **Zugestellt** nach Zustellung, Selbstabholung oder Vorliegen des Abliefernachweises. Nachträgliche Dokumenten- oder Zollmeldungen setzen eine zugestellte Sendung nicht mehr zurück.
 
-Bleibt es unterwegs länger still, zeigt Peek den Hinweis: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Kuehne+Nagel nach.“ Nach mehr als drei Wochen ohne Bewegung erscheint: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Kuehne+Nagel nach.“
+Solange du die Sendung in Peek geöffnet hast, oder an ihrem Zustelltag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten; an dem Tag, an dem Kühne+Nagel `In delivery` oder die Ankunft (`Arrival`) des Lkw an der Lieferadresse zeigt, alle 2 Minuten ab 6 Uhr nach der Uhr des neuesten Scans, solange die Kühne+Nagel-Sendungsverfolgung antwortet; sonst stündlich. Nach 12 Stunden im Status „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ oder nach zwei Tagen ohne Neuigkeiten prüft Peek stündlich, egal wie du die Sendung verfolgst, und nach sieben Tagen weiterhin bei „Etikett erstellt“ alle 6 Stunden. Antwortet die Kühne+Nagel-Sendungsverfolgung nicht und verfolgt Peek die Sendung nur über Tracking-Dienste, prüft Peek stündlich, nach einem Tag ohne Neuigkeiten alle 3 Stunden und am Tag der Zustellung bis zu alle 15 Minuten.
+
+Bleibt eine Sendung bei „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, markiert Peek sie mit dem Tag dieses letzten Scans (zum Beispiel „Keine Aktualisierung seit Mo 12. Okt“) und zeigt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Kuehne+Nagel nach.“ Nach mehr als drei Wochen ohne neuen Scan erscheint: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Kuehne+Nagel nach.“
 
 In den Benachrichtigungseinstellungen kannst du zwischen **Jeden Scan**, **Wichtige Schritte** und **Nur die Zustellung** wählen.
 
 ## Kontakt zu Kühne+Nagel
 
-Anfragen zu laufenden Sendungen bearbeitet Kühne+Nagel über die jeweiligen Landesgesellschaften und das betreuende Depot statt über eine zentrale Endkunden-Hotline.
+Auf seiner Website bietet Kühne+Nagel eine Standortsuche und ein Kontaktformular:
 
 - **Offizielle Websites:** [Kühne+Nagel Deutschland](https://www.kuehne-nagel.com/de), [Kühne+Nagel Schweiz](https://www.kuehne-nagel.com/ch) und [myKN Public Tracking](https://mykn.kuehne-nagel.com/public-tracking/)
-- **Standortsuche:** [Kühne+Nagel-Standorte weltweit](https://www.kuehne-nagel.com/de/unternehmen/standorte) für das zuständige Büro oder Empfangsdepot
+- **Standortsuche:** [Kühne+Nagel-Standorte weltweit](https://www.kuehne-nagel.com/de/unternehmen/standorte) für das nächste Büro
 - **Kontaktformular:** [Sprechen Sie mit unseren Experten](https://www.kuehne-nagel.com/de/kontakt/experten-kontaktieren)
 - **Zentrale Deutschland (Impressum):** Kühne + Nagel (AG & Co.) KG, Wilhelm-Kaisen-Brücke 1, 28195 Bremen, Tel. +49 (0)421 3605-0, E-Mail `info.bremen@kuehne-nagel.com` ([Impressum](https://www.kuehne-nagel.com/de/unternehmen/impressum))
-- **Zuerst den Absender ansprechen:** Bei Stückgut- und Onlinebestellungen ist der Auftraggeber (Verkäufer oder Lieferant) Vertragspartner von Kühne+Nagel und kann Zustelltermine, fehlende Zollunterlagen oder Reklamationen am schnellsten klären. Falls ein Teil deiner Lieferung über eine andere Spedition läuft, sieh dir auch [DHL Freight](carrier:dhl-freight) oder [DSV](carrier:dsv) an.
+- **Andere Speditionen:** Falls ein Teil deiner Lieferung über eine andere Spedition läuft, sieh dir auch [DHL Freight](carrier:dhl-freight) oder [DSV](carrier:dsv) an.
 
 ## Häufige Fragen
 
 ### Warum findet myKN meine Kühne+Nagel-Sendungsnummer nicht?
 
-Die öffentliche Suche deckt nur Sendungen ab, die innerhalb der letzten 90 Tage gestartet wurden, und sucht ausschließlich nach vollständigen Referenzen. Prüfe die Nummer auf Tippfehler und warte bei ganz frischen Buchungen auf den ersten erreichten Meilenstein. Trifft eine allgemeine Referenz auf mehrere Sendungen gleichzeitig zu, bitte den Absender um die eindeutige `RWM`- oder `RAPI`-Tracking-ID.
+Die öffentliche Suche deckt nur Sendungen ab, die in den letzten 90 Tagen gestartet wurden. Prüfe die Nummer auf Tippfehler und warte bei ganz frischen Buchungen auf den ersten erreichten Meilenstein. Trifft eine Referenz auf mehrere Sendungen gleichzeitig zu, bitte den Absender um die `RWM`-, `RAPI`- oder eine andere Kühne+Nagel-Sendungsnummer.
 
 ### Was bedeutet „Freight handover“ oder „Service complete“?
 
@@ -90,7 +92,7 @@ Auf der öffentlichen myKN-Seite stehen geplante Prognosedaten neben bereits err
 
 ### Wie lange bleiben Sendungen im öffentlichen Kühne+Nagel-Tracking sichtbar?
 
-Das öffentliche Tracking auf `mykn.kuehne-nagel.com` umfasst Sendungen der letzten 90 Tage. Ältere Frachtdaten lassen sich nur über ein registriertes myKN-Geschäftskonto oder über den Absender abrufen.
+Das öffentliche Tracking auf `mykn.kuehne-nagel.com` umfasst Sendungen, die in den letzten 90 Tagen gestartet wurden. Wer mehr sehen will, kann sich bei myKN kostenlos registrieren.
 
 :::sources
 - [Kühne+Nagel Deutschland](https://www.kuehne-nagel.com/de)

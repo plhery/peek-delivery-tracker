@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Helthjem** (*Helthjem Netthandel AS*, registrert i Oslo — [Brønnøysundregistrene](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010)) er en norsk pakketjeneste for nettbutikker som leverer pakker direkte på dørmatten eller i postkassen — ofte på nattrunder sammen med avisbudene — eller til et lokalt hentested. Lim inn sporingsnummeret i feltet øverst for å følge pakken din, eller søk direkte på `helthjem.no`.
+**Helthjem** (*Helthjem Netthandel AS*, registrert i Oslo — [Brønnøysundregistrene](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010)) er en norsk pakketjeneste for nettbutikker som legger pakker på dørmatten eller i postkassen, også på nattrunder, eller sender dem til et hentested. Lim inn sporingsnummeret i feltet øverst for å følge pakken din, eller søk direkte på `helthjem.no`.
 
 ## Slik finner du sporingsnummeret fra Helthjem
 
@@ -21,7 +21,7 @@ Her er formatene Peek kobler til Helthjem (med oppdiktede sifre), sammenlignet m
 | `370482917360514822` | [Bring](carrier:bring): egne 18-sifrede numre starter også på `370` eller `373`. |
 | `RR482917367NO` | Bring: postnumre som slutter på `NO`. |
 
-Siste siffer i disse 18- og 20-sifrede kodene er et kontrollsiffer. Helthjems eget søk på `helthjem.no` tar også 17-sifrede sendingsnumre (med eller uten `401` foran). Fordi Helthjems nummerserie ligner sterkt på Brings `370`-numre, skiller Peek dem ved starten `37072476` og kontrollsifferet. Hvis Helthjem ikke kjenner et nummer eller har slettet gammel historikk, finner søket ingenting — dobbeltsjekk sifrene, prøv Bring, eller hør med nettbutikken. Se også [tracking number formats](guide:tracking-number-formats).
+Siste siffer i disse 18- og 20-sifrede kodene er et kontrollsiffer. Helthjems eget søk på `helthjem.no` tar også 17-sifrede sendingsnumre (med eller uten `401` foran). Fordi Helthjems nummerserie ligner sterkt på Brings `370`-numre, skiller Peek dem ved starten `37072476` og kontrollsifferet. Hvis Helthjem ikke kjenner et nummer, eller ikke lenger har det, finner søket ingenting: dobbeltsjekk sifrene, prøv Bring, eller spør nettbutikken hvilken transportør den booket. Se også [tracking number formats](guide:tracking-number-formats).
 
 ## Hva sporingsstatusene hos Helthjem betyr
 
@@ -43,15 +43,15 @@ Helthjems sporingsside viser pakkens status, skanninger med sted, beregnet lever
 | `Returneres` | På vei tilbake til avsender, eller allerede returnert. |
 | `Pakken er kansellert` | Sendingen er kansellert. |
 
-**Hvorfor står det et annet sted enn adressen din?** I meldinger som `Vi har mottatt pakken din...` og `Pakken er under transport.` viser stedsnavnet terminalen eller sorteringsanlegget som behandlet pakken — for eksempel Helthjems avdeling på Vestby utenfor Oslo — ikke hvor pakken skal leveres.
+**Hvorfor står det et annet sted enn adressen din?** I `Vi har mottatt pakken din…` og `Pakken er under transport.` er stedet Helthjem-terminalen eller sorteringsanlegget som behandlet pakken, ikke adressen din. I 2023 drev Helthjem sin egen pakketerminal på Vestby utenfor Oslo, og Enhetsregisteret oppfører fortsatt en Helthjem-avdeling der, så en skanning på Vestby sier hvor pakken ble sortert, ikke hvor den skal.
 
 ## Levering med Helthjem: nattrunder, dørmatte og hentested
 
-- **Avisbud og seksdagers levering:** Helthjem samarbeider med avisdistribusjonsnettverket i Norge (seks leveringsdager i uken) og overlater større pakker som ikke kan legges ved døren til [PostNord](carrier:postnord).
+- **Hvem som leverer:** I 2023 solgte Helthjem pakkelevering til nettbutikker og ga pakkene til avisdistributørene i Helthjem-nettverket, som alle leverte seks dager i uken. Større pakker som ikke kunne settes ved døren, gikk med [PostNord](carrier:postnord).
 - **Nattrunder:** Dagen før hjemmelevering melder Helthjem gjerne `Planlagt levering natt til ...` — det betyr at pakken er booket på runden natt til den angitte datoen, ikke at budet allerede står utenfor.
-- **Levering på dørmatte eller i postkasse:** Den siste meldingen angir om pakken er lagt på dørmatten eller i postkassen. På Helthjems egen sporingsside kan du ofte se et leveringsbilde fra budet (Peek viser ikke bildet).
-- **Hentested:** Store pakker, adresser uten nattdistribusjon eller sendinger der du valgte hentested får meldingen `På vei til hentested`. Helthjem setter da en ny etikett med nytt nummer på pakken, men det opprinnelige nummeret ditt finner den fortsatt. Når statusen endres til `Klar til henting`, viser `helthjem.no` navnet og adressen på hentestedet. Hentes ikke pakken i tide, følger `Pakke ikke hentet` og retur til butikken.
-- **Overlevering til PostNord og pakker fra Kina via 4PX:** Når Helthjem markerer en pakke som et PostNord-produkt, viser sporingen videre til [PostNord](carrier:postnord) med sendingsnummeret. Ved 4PX-sendinger fra Kina betyr en engelsk `Parcel arrival notified`-linje at Helthjem har fått forhåndsmeldingen fra nettbutikken.
+- **Levering på dørmatte eller i postkasse:** Den siste meldingen angir om pakken er lagt på dørmatten eller i postkassen. Helthjems sporingsside kan vise et bilde av leveringen; Peek viser det ikke, så se der.
+- **Hentested:** I 2023 delte Helthjem ut pakker i butikker: for store pakker, for dem som heller ville hente selv, og der distributørene ikke leverte. En pakke som sendes dit i stedet for hjem til deg, får `På vei til hentested`, og Helthjem setter en ny etikett med nytt nummer på den; nummeret ditt finner den fortsatt. Når den er klar, endres statusen til `Klar til henting`, og Helthjems side viser hentestedet og adressen. Hentes ikke pakken i tide, følger `Pakke ikke hentet`, og den går tilbake til butikken.
+- **PostNord-pakker og pakker fra Kina via 4PX:** Når Helthjem markerer en pakke som et PostNord-produkt, sender Helthjems sporingsside deg videre til sporingen hos [PostNord](carrier:postnord) med sendingsnummeret. En `Parcel arrival notified`-linje i historikken hos 4PX er Helthjems melding om at butikken har meldt pakken, videreformidlet på engelsk når 4PX overleverer den.
 
 ## Forsinket, savnet eller skadet Helthjem-pakke
 
@@ -64,33 +64,35 @@ Helthjems sporingsside viser pakkens status, skanninger med sted, beregnet lever
 
 ## Spor Helthjem med Peek
 
-Lim inn et 18-sifret nummer som starter med `37072476` (eller 20 sifre med `00` foran) med gyldig kontrollsiffer i Peek, så gjenkjennes **Helthjem** umiddelbart. Andre numre som starter på `370` eller `373` kan tilhøre [Bring](carrier:bring), så Peek sjekker relevante transportører. For Helthjems 17-sifrede sendingsnumre eller andre 20-sifrede strekkoder velger du Helthjem manuelt via **Change** ved tilføyelse eller **Change carrier** på pakkesiden — eller limer inn sporinglenken fra `helthjem.no` (Peek-grensesnittet er på engelsk).
+[Peek](/) kjenner igjen Helthjem med en gang fra 18 sifre som starter med `37072476`, eller de samme med `00` foran, når kontrollsifferet stemmer. Andre 18-sifrede numre som starter med `370` eller `373`, kan være Brings: når GS1-kontrollsifferet er gyldig, spør Peek [Bring](carrier:bring), sammen med Matkahuolto for `373`; kjenner flere transportører pakken, velger du. Helthjems 17-sifrede sendingsnumre og andre 20-sifrede strekkoder krever "Change" (eller "Change carrier" på pakkesiden), eller en lenke til pakken på Helthjems sporingsside. Peeks grensesnitt er på engelsk.
 
-Peek leser sporingen direkte via den åpne [universal-parcel-scraper Helthjem-adapteren](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/helthjem). Den viser status, alle skannesteder (også sorteringsskanninger som Helthjems egen side skjuler), leveringstidspunkt, nettbutikkens navn, hentestedets navn samt eventuelt nytt etikettnummer ved omadressering til hentested, og bruker datoen i `Planlagt levering natt til ...` som forventet leveringsdag. Leveringsbilde, gateadresse og postnummer utelates av personvernhensyn. Når Helthjem overfører pakken til [PostNord](carrier:postnord), følger Peek sendingen videre hos PostNord så snart PostNord registrerer nye skanninger.
+Peek leser Helthjems sporing gjennom den åpne [universal-parcel-scraper Helthjem-adapteren](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/helthjem). Peek viser status, stedet for hver skanning (også sorteringsskanninger som Helthjems side skjuler), tidspunktet pakken ble levert, butikken som sendte den, og hentestedets navn mens pakken venter der eller når den er hentet. Når Helthjem setter ny etikett på pakken for et hentested, viser Peek også nummeret på den nye etiketten. Statusene beholder Helthjems norske ordlyd, og tidene stemmer med Helthjems. Når Helthjem booker nattrunden, viser Peek datoen i `Planlagt levering natt til …` som forventet dag. Peek utelater den forventede dagen Helthjems side viser, hentestedets adresse, bildet og postnumre.
 
-Peek oversetter Helthjems statuser til tydelige trinn: **Label created** (forhåndsmeldt av nettbutikken), **Received by carrier** (mottatt ved Helthjem-terminal), **In transit** (under transport, planlagt nattrunde og på vei til hentested), **Delivery attempted** (`Budet fikk ikke med seg pakken din ut i natt.`), **Ready for pickup** (`Klar til henting`), **Delivered** (levert på dørmatte, i postkasse eller hentet), **Returned to sender** (`Pakke ikke hentet` / `Returneres`) og **Needs attention** (`Pakken er kansellert`).
+Når Helthjem markerer en pakke som PostNord leverer, står det "Delivery with PostNord" på kortet, og Peek kan følge den hos [PostNord](carrier:postnord) under sendingsnummeret. Så lenge PostNord bare har forhåndsmeldingen, uten egen skanning, står det "Announced to PostNord, not received yet" i stedet.
 
-Hvis det er stille mellom skanninger eller i helgen, viser Peek: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Helthjem.“ Etter mer enn tre uker uten nytt skann vises: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Helthjem.“ Du kan åpne Helthjems kundeservice direkte fra pakkekortet med **Get help from Helthjem**.
+Peek plasserer Helthjems statuser i sine trinn: **Label created** (forhåndsmeldt av nettbutikken), **In transit** (mottatt ved terminalen, under transport, booket på nattrunden, ikke tatt med av nattbudet og på vei til hentested), **Out for delivery** (på runden), **Ready for pickup** (`Klar til henting`), **Delivered** (levert på dørmatten, i postkassen eller hentet), **Needs attention** (`Pakke ikke hentet`, `Pakken er kansellert` og `Returneres` mens pakken er på vei tilbake) og **Returned to sender** (når Helthjem melder pakken som returnert).
 
-I Peeks varslingsinnstillinger velger du mellom **Every scan**, **Important steps** eller **Delivery only**.
+Er den nyeste skanningen fire dager gammel og pakken fortsatt står som "Label created", "Received by carrier" eller "In transit", merker Peek den med skanningens dag, for eksempel "No tracking update since Mon 12 Oct". Pakkens side sier da "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Helthjem." med lenken "Get help from Helthjem" til Helthjems hjelpe- og kontaktside. Etter tre uker uten ny skanning står det "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Helthjem."
+
+Mens du har pakken åpen i Peek, eller på leveringsdagen med varsler slått på, sjekker Peek den opptil hvert 10. minutt, og opptil hvert 2. minutt fra kl. 6 norsk tid den dagen Helthjem (eller PostNord etter overleveringen) melder pakken ute til levering, så lenge den transportørens egen sporing svarer. Ellers, og etter to dager uten nytt (12 timer mens pakken fortsatt står som "Label created" eller "Received by carrier"), sjekker Peek hver time, og hver 6. time etter sju dager uten nytt på "Label created". Varslene kan følge "Every scan", "Important steps" eller "Delivery only". Peek kan ikke kontakte Helthjem for deg.
 
 ## Kontakt Helthjem kundeservice
 
-Helthjem tilbyr hjelpesenter og kontaktskjema på `helthjem.no` (`helthjem.no/kontakt-oss`). Gjelder henvendelsen selve bestillingen, refusjon, erstatning eller ny utsending, skal du alltid kontakte nettbutikken som sendte pakken, ettersom nettbutikken er Helthjems avtalepart.
+Helthjems eget nettsted, helthjem.no, har en hjelpe- og kontaktside (`helthjem.no/kontakt-oss`). Gjelder henvendelsen selve bestillingen, refusjon, erstatning eller ny utsending, kontakter du nettbutikken som sendte pakken: det er den som booket Helthjem.
 
 ## Ofte stilte spørsmål
 
 ### Når på døgnet leverer Helthjem?
 
-Hjemmeleveringer går ofte på nattrunder med avisbudene. Når Helthjem legger pakken på en nattrunde, vises `Planlagt levering natt til ...` dagen før med datoen leveringen gjelder.
+Hjemmeleveringer kan komme på en nattrunde. Når Helthjem booker en, viser sporingen `Planlagt levering natt til …` dagen før, med datoen natten leder inn i. Peek viser den datoen som forventet dag.
 
-### Hva betyr „Budet fikk ikke med seg pakken din ut i natt.“?
+### Hva betyr "Budet fikk ikke med seg pakken din ut i natt"?
 
 Det betyr at nattbudet ikke fikk tatt med pakken på den planlagte runden. Pakken ligger fortsatt hos Helthjem og settes opp på en ny nattrunde.
 
 ### Hvorfor finner ikke Helthjem sporingsnummeret mitt?
 
-Enten har ikke Helthjem mottatt pakken ennå, gammel historikk er utløpt, eller nummeret tilhører en annen transportør som [Bring](carrier:bring) (som også starter på `370` eller `373`). Kontroller sifrene eller spør nettbutikken.
+Enten har ikke Helthjem mottatt pakken ennå, Helthjem har ikke lenger nummeret, eller nummeret tilhører en annen transportør som [Bring](carrier:bring) (som også starter på `370` eller `373`). Kontroller sifrene eller spør nettbutikken.
 
 ### Hvordan kontakter jeg Helthjem ved manglende eller skadet pakke?
 
@@ -98,6 +100,8 @@ Bruk kontaktsiden på `helthjem.no` for leveringsspørsmål, og kontakt alltid n
 
 :::sources
 - [Brønnøysundregistrene — Helthjem Netthandel AS](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010)
+- [Brønnøysundregistrene — Helthjem Netthandel AS avd Vestby](https://virksomhet.brreg.no/nb/oppslag/underenheter/925669946)
+- [Konkurransetilsynet — Schibsted Delivery AS / Amedia Distribusjon AS (23. oktober 2023)](https://konkurransetilsynet.no/wp-content/uploads/2023/10/2023_0474-1-OFF-Schibsted-Delivery-AS-Amedia-Distribusjon-AS-1.pdf)
 - [Forbrukerrådet — Misfornøyd med netthandel](https://www.forbrukerradet.no/forside/okonomi-og-betaling/netthandel-misfornoyd/)
 - [Nkom — Slik kan du avsløre SMS-svindel](https://nkom.no/aktuelt/slik-kan-du-avslore-sms-svindel)
 - [Politiet — Beskytt deg mot svindel og ID-tyveri](https://www.politiet.no/rad/beskytt-deg-mot-svindel-og-id-tyveri)

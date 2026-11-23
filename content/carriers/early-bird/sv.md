@@ -17,7 +17,7 @@ Kollinumret hittar du i sms/mejl från Early Bird eller i e-handlarens orderbekr
 | `00373402216482917364` | 20 siffror: `00`, valfri siffra, `73402216` och nio siffror där den sista är en kontrollsiffra (streckkodsnummer). |
 | Annan referens | 8 till 30 bokstäver och siffror — kan spåras hos Early Bird i Peek om du väljer Early Bird manuellt. |
 
-Eftersom både [PostNord](carrier:postnord) och [Bring](carrier:bring) också använder 20-siffriga koder som börjar med `00` bekräftar Peek vilken transportör som har paketet. Saknar du nummer? Se [how to find a tracking number](guide:find-tracking-number) (på engelsk).
+Eftersom både [PostNord](carrier:postnord) och [Bring](carrier:bring) också använder 20-siffriga koder som börjar med `00` bekräftar Peek vilken transportör som har paketet. Saknar du nummer? Se [how to find a tracking number](guide:find-tracking-number) (på engelska).
 
 ## Vad Early Birds spårningsstatusar betyder
 
@@ -31,12 +31,12 @@ Early Birds spårning visar varje steg på svenska på den svenska sidan och på
 | `Vi misslyckades med att leverera ditt paket som planerat. Vi meddelar dig snarast med information om hur vi gör för att ditt paket ska komma fram.` | `We failed to deliver your package as planned. We will notify you as soon as possible...` | Leveransförsöket misslyckades; Early Bird meddelar nästa steg (nytt försök eller ombokning). |
 | `Vi kunde inte komma in i porten och misslyckades därför med att leverera ditt paket. Vi kommer göra ett nytt försök så snart som möjligt.` | `We were unable to access the entrance and therefore failed to deliver your package...` | Budet kom inte in genom porten; Early Bird gör ett nytt försök. |
 | `Vi har bokat in ett nytt försök att leverera ditt paket.` | `We have scheduled a new attempt to deliver your package.` | Ett nytt utkörningsförsök är inbokat. |
-| `Eftersom vi inte kunde leverera paketet hem till dig så kommer vi boka om det till ett paketskåp. Vi meddelar dig snarast så snart vi vet vilket skåp det blir.` | `Since we were unable to deliver the parcel to your home, we will reroute it to a parcel locker...` | Paketet styrs om till ett paketskåp i närheten. |
+| `Eftersom vi inte kunde leverera paketet hem till dig så kommer vi boka om det till ett paketskåp. Vi meddelar dig så snart vi vet vilket skåp det blir.` | `Since we were unable to deliver the parcel to your home, we will reroute it to a parcel locker...` | Paketet styrs om till ett paketskåp i närheten. |
 | `Paketet är på väg. Du får ett meddelande när det är redo att hämtas ur paketskåpet.` | `Your package is on its way. You will receive a notification when it is ready to be collected from the parcel locker.` | På väg ut till valt paketskåp. |
 | `Ditt paket finns nu redo att hämtas från paketskåpet. Du behöver iBoxens app för att öppna luckan.` | `Your package is now ready for collection from the parcel locker. The iBoxen app is required to open the box.` | Klart att hämta i iBoxen-skåpet. |
 | `Paketet har hämtats ur paketskåpet.` | `The package has been collected from the parcel locker.` | Uthämtat ur paketskåpet. |
 | `Paketet är levererat till din dörr.` | `The package has been delivered to your door.` | Lämnat utanför din ytterdörr. |
-| `Paketet är levererat till din postlåda.` | `The package has been delivered to your postlåda / mailbox.` | Lagt i din postlåda. |
+| `Paketet är levererat till din postlåda.` | `The package has been delivered to your mailbox.` | Lagt i din postlåda. |
 | `Paketet är levererat i en påse på din postlåda.` | `The package has been delivered in a bag on your mailbox.` | Hängt i en påse på din postlåda (eller dörr). |
 
 Äldre försändelser i Early Birds tidigare system visas alltid på svenska med texter som `Leveransen till dig är bokad av e-handlaren.`, `Paketet har ankommit till sorteringsterminal Göteborg` och `Ditt paket har nu levererats av Early Bird. Om paketet inte fick plats i postlådan så har det hängts i en påse på din postlåda alternativt dörr`.
@@ -54,23 +54,30 @@ Enligt [Early Birds vanliga frågor](https://earlybird.se/vanliga-fragor):
 
 ## Försenat, saknat eller skadat paket
 
-- **Står bara som „bokad“:** Early Bird har inte fått paketet från e-handlaren ännu; kontakta butiken ([tracking that isn't updating](guide:tracking-not-updating)).
-- **Markerat som levererat men borta:** Kontrollera adressen i orderbekräftelsen, titta i och bredvid postlådan samt utanför dörren, fråga hushållet och grannar, och skicka sedan formuläret *Saknat paket trots leveransbekräftelse* på [Kontakta oss](https://earlybird.se/kontakta-oss) ([delivered not received](guide:delivered-not-received)).
+- **Står bara som "bokad":** Early Bird har inte fått paketet från e-handlaren ännu; kontakta butiken ([tracking that isn't updating](guide:tracking-not-updating)).
+- **Markerat som levererat men borta:** Kontrollera adressen i orderbekräftelsen, titta i och bredvid postlådan samt utanför dörren, fråga hushållet och grannar, och skicka sedan formuläret *Saknar paket trots bekräftelse* på [Kontakta oss](https://earlybird.se/kontakta-oss) ([delivered not received](guide:delivered-not-received)).
 - **Skadat paket:** Fyll i formuläret för skadat paket med tydligt foto och kontakta även e-handlaren, som ansvarar för varan och eventuell ersättning ([damaged parcel](guide:damaged-parcel)).
 
 > Early Bird tar aldrig ut någon extra avgift via sms för att släppa ett paket — frakten betalas normalt i kassan. Klicka inte på oväntade betallänkar; kolla alltid statusen direkt på [earlybird.se/spara-och-hjalp](https://earlybird.se/spara-och-hjalp) ([delivery scam texts](guide:delivery-scam-texts)).
 
 ## Spåra Early Bird med Peek
 
-Klistra in ditt 20-siffriga kollinummer (`00...73402216...` med giltig kontrollsiffra) eller en spårningslänk från `earlybird.se` (`spara-och-hjalp`, `en/track-and-help`, `tracking?id=...`) eller `track.earlybird.se` (`a=...`) i Peek. Eftersom [PostNord](carrier:postnord) använder liknande 20-siffriga koder kontrollerar Peek Early Bird först tillsammans med övriga matchande transportörer. För andra referenser (8–30 tecken) eller om du vill välja manuellt, tryck **Change** när du lägger till paketet eller **Change carrier** på paketsidan (Peeks gränssnitt är på engelsk).
+- **Ett 20-siffrigt Early Bird-nummer.** Klistra in det i [Peek](/). Eftersom PostNords nummer ser likadana ut visar Peek "Checking tracking services…" och frågar Early Bird först, tillsammans med PostNord och andra transportörer som numret passar. När Early Bird känner till det säger Peek "Early Bird has this parcel." Om ingen transportör känner till det ännu utser Peek Early Bird som trolig transportör: paketet visar "Probably Early Bird" och "Waiting for Early Bird’s first scan", och Peek fortsätter fråga. För att lägga det under Early Bird trycker du på "Change" innan du spårar och väljer Early Bird under "Fits this number", eller använder "Change carrier" senare.
+- **En länk till Early Birds spårning.** En earlybird.se-länk till `spara-och-hjalp`, `en/track-and-help` eller `tracking` med `id=`, eller en track.earlybird.se-länk med `a=`, utser Early Bird direkt, vilket nummer det än gäller.
+- **En annan referens.** Klistra in den ändå: Peek följer över 4 500 transportörer. För att spåra den hos Early Bird trycker du på "Change" och söker efter Early Bird, eller använder "Change carrier" senare. För Early Bird tar Peek 8 till 30 bokstäver och siffror, och ett 20-siffrigt nummer som börjar med `00` behöver en giltig kontrollsiffra. Annars säger Peek att Early Bird "doesn’t issue numbers like this one".
+- **Inte listat ännu.** Ett paket under Early Bird visar "Waiting for Early Bird" tills Early Bird listar det, och Peek fortsätter fråga. Om Early Bird säger att numret är fel visar Peek "Check the tracking number".
 
-Peek läser Early Birds spårning direkt genom den öppna [universal-parcel-scraper Early Bird-adaptern](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/early-bird) och visar varje skanning (engelska texter, eller svenska för äldre system), klockslag, terminalort och leveranstidpunkt. Planerad leveransdag och specifikt iBoxen-skåp visas inte i Peek utan i Early Birds sms/mejl och iBoxens app. Lämnar Early Bird över paketet till [PostNord](carrier:postnord) eller [DSV](carrier:dsv) (inklusive DB Schenker), visar Peek den mottagande transportören och följer automatiskt vidare där så fort nya skanningar kommer in.
+Peeks gränssnitt är på engelska.
 
-Peek samlar stegen i tydliga faser: **Label created** (bokad leverans), **Received by carrier** (mottaget av Early Bird), **In transit** (terminaler och transport till paketskåp), **Delivery attempted** (misslyckat leveransförsök), **Ready for pickup** (klart i iBoxen-skåpet) och **Delivered** (levererat till dörr/postlåda eller uthämtat ur skåp).
+Peek läser Early Birds spårning genom den öppna [universal-parcel-scraper Early Bird-adaptern](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/early-bird). Peek visar varje steg i Early Birds engelska formulering (äldre rader står kvar på svenska), med klockslag, platsen som varje terminalskanning anger och leveranstidpunkten. Peek visar ingen planerad leveransdag och namnger inte skåpet: den planerade dagen finns i länken i Early Birds sms eller mejl, skåpet i meddelandet och i iBoxens app.
 
-Blir det tyst över natten eller under en helg visar Peek: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Early Bird.“ Efter mer än tre veckor utan uppdatering visas: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Early Bird.“ Du når Early Birds officiella hjälpsida direkt via **Get help from Early Bird**.
+När en annan transportör tar över länkar Early Birds spårning till den transportörens. Peeks kod känner till tre: [PostNord](carrier:postnord), DSV och DB Schenker, som Peek lägger under [DSV](carrier:dsv). Kortet säger då "Delivery with PostNord" eller "Delivery with DSV", och Peek följer den transportören under samma nummer när den visar nya skanningar. Så länge den transportören bara har aviseringen av paketet, utan egen skanning, säger kortet i stället "Announced to PostNord, not received yet" eller "Announced to DSV, not received yet".
 
-I Peeks aviseringsinställningar väljer du **Every scan**, **Important steps** eller **Delivery only**.
+Peek visar bokningen som "Label created", mottagandet som "Received by carrier", terminaler och vägen till ett skåp som "In transit", misslyckade leveranser som "Delivery attempted", skåpet som "Ready for pickup" och leverans eller uthämtning som "Delivered". Ett nytt inbokat försök behåller steget före det.
+
+När den senaste skanningen är fyra dagar gammal och paketet fortfarande står som "Label created", "Received by carrier" eller "In transit", flaggar Peek det med skanningens dag, till exempel "No tracking update since Mon 12 Oct". Paketets sida säger då "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Early Bird." med länken "Get help from Early Bird" till Early Birds kontaktsida. Efter tre veckor utan ny skanning står det "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Early Bird."
+
+Medan du har paketet öppet i Peek kollar Peek det upp till var tionde minut. Efter två dagar utan nyheter (12 timmar medan paketet fortfarande står som "Label created" eller "Received by carrier") kollar Peek varje timme, och var sjätte timme efter sju dagar utan nyheter på "Label created". Peek kan meddela dig om "Every scan", "Important steps" eller "Delivery only". Peek kan inte kontakta Early Bird eller butiken åt dig.
 
 ## Kontakta Early Bird kundservice
 
@@ -107,5 +114,10 @@ Nej — Early Bird hanterar kundärenden via kontaktformulären på [earlybird.s
 - [Early Bird — Kontakta oss](https://earlybird.se/kontakta-oss)
 - [Early Bird — Track & help (EN)](https://earlybird.se/en/track-and-help)
 - [Early Bird — Contact us (EN)](https://earlybird.se/en/contact-us)
+- [Early Bird — Frequently asked questions (EN)](https://earlybird.se/en/frequently-asked-questions)
+- [Early Bird — About Early Bird (EN)](https://earlybird.se/en/about-us)
+- [Early Bird — Home Delivery (EN)](https://earlybird.se/en/home-delivery)
+- [Early Bird — Parcel locker delivery (EN)](https://earlybird.se/en/parcel-locker-delivery)
+- [Early Bird — Early Bird Express (EN)](https://earlybird.se/en/express-delivery)
 - [universal-parcel-scraper Early Bird-adapter](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/early-bird)
 :::

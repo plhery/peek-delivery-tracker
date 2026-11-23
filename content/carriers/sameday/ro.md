@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Sameday** este una dintre principalele companii de curierat din România (activă și în Bulgaria), cu propria rețea de peste 4.700 de lockere **easybox** în România și puncte partenere **SAMEDAY point** ([sameday.ro](https://sameday.ro/)). Poți urmări un colet folosind numărul **AWB** din SMS, e-mail sau aplicația SAMEDAY App — pe `sameday.ro` la *Verificare AWB*, pe `sameday.bg` sau lipind codul direct în câmpul de mai sus.
+**Sameday** este o companie de curierat din România, activă și în Bulgaria, cu propria rețea de peste 4.700 de lockere **easybox** în România și puncte partenere **SAMEDAY point** ([sameday.ro](https://sameday.ro/)). Poți urmări un colet folosind numărul **AWB** din SMS, e-mail sau aplicația SAMEDAY App — pe pagina de urmărire de pe `sameday.ro`, la „Check AWB” pe `sameday.bg` sau lipind codul direct în câmpul de mai sus.
 
 ## Formatul numărului AWB Sameday
 
@@ -32,12 +32,10 @@ Portalul Sameday afișează un titlu scurt (de exemplu `The parcel is in transit
 | `The parcel has arrived at the local agency and will be prepared for delivery.` | A ajuns în agenția locală care va face livrarea. |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY App, email or SMS.` | Coletul este la curier, în curs de livrare la adresă sau spre încărcare în easybox. |
 | `The parcel has arrived at the delivery point. Pickup details are available in the SAMEDAY App, email or SMS.` | Gata de ridicare din easybox sau SAMEDAY point — verifică aplicația, e-mailul sau SMS-ul pentru codul PIN/QR. |
-| `We could not deliver the parcel. We will be back with details or another attempt.` | Încercare de livrare nereușită. |
 | `The parcel was redirected. As soon as it is in the courier's possession, it will be processed as requested.` | S-a solicitat redirecționarea coletului către un punct de ridicare sau altă opțiune. |
 | `The parcel has been successfully delivered.` | Livrat la adresă sau ridicat din easybox (după o linie de retur, indică predarea înapoi la expeditor). |
-| `The parcel will be returned as requested. For more details, please contact the sender.` | Coletul se întoarce la expeditor. |
 
-Reține două detalii utile: „The courier will deliver the parcel soon“ apare și atunci când curierul duce coletul spre un locker easybox, iar codul PIN sau QR de ridicare nu apare niciodată pe pagina publică de urmărire, ci doar în aplicație, e-mail sau SMS.
+Reține: „The courier will deliver the parcel soon” apare și atunci când curierul duce coletul spre un easybox, nu la ușa ta, iar codul PIN sau QR de ridicare nu apare niciodată pe pagina de urmărire, ci doar în aplicație, e-mail sau SMS. O livrare ratată și o returnare la expeditor au rânduri proprii, pe care Peek le pune la „Delivery attempted” și „Returned to sender”. Un rând de redirecționare poate apărea înainte ca Sameday să aibă coletul.
 
 ## Livrare la adresă, easybox și SAMEDAY point
 
@@ -56,19 +54,21 @@ Termenii Sameday România prevăd livrarea internă în maximum **5 zile lucrăt
 
 Pentru anulare sau retur, ia legătura direct cu magazinul. Pentru întârziere, deteriorare sau colet pierdut, expeditorul sau destinatarul poate depune o reclamație scrisă în termen de **6 luni calendaristice** de la depunerea coletului (prin formularul de pe `sameday.ro/contact`, poștă recomandată sau la sediu). Sameday are termen de **3 luni** pentru soluționare, iar despăgubirea revine expeditorului, cu excepția cazului în care acesta cedează dreptul destinatarului. Dacă răspunsul nu te mulțumește sau lipsește după 3 luni, te poți adresa **ANCOM** în termen de un an de la depunere. În Bulgaria, reclamațiile se trimit în 6 luni la `claims@sameday.bg` (răspuns în 1 lună intern / 3 luni internațional, cu recurs la CRC).
 
-> **Atenție la mesajele false:** Sameday precizează că nu solicită niciodată plăți prin SMS sau pe rețele sociale. Plata se face doar la magazin, în SAMEDAY App sau la curier/easybox la livrare, iar mesajele autentice vin exclusiv de pe domeniile `sameday.ro` sau `sdy.ro` ([delivery scam texts](guide:delivery-scam-texts)).
+> **Atenție la mesajele false:** Sameday precizează că nu solicită niciodată plăți prin SMS sau pe rețele sociale. Plătești doar magazinului în avans, în SAMEDAY App, sau curierului ori la easybox la livrare ([delivery scam texts](guide:delivery-scam-texts)).
 
 ## Urmărirea coletelor Sameday în Peek
 
-Lipește AWB-ul Sameday sau un link de pe `sameday.ro` ori `sameday.bg` în Peek: aplicația recunoaște formatul și întreabă mai întâi rețeaua Sameday din România și apoi pe cea din Bulgaria. Dacă introduci un număr complet de colet (AWB + 3 cifre) sau un format care se suprapune cu [Colis Privé](carrier:colis-prive) ori [Royal Mail](carrier:royal-mail), poți selecta Sameday manual cu **Change** la adăugare sau **Change carrier** din pagina coletului (interfața aplicației Peek este în engleză).
+[Peek](/) recunoaște forma AWB-ului Sameday și întreabă rețeaua Sameday din România, apoi pe cea din Bulgaria, dacă îl cunosc: vei vedea „Sameday has this parcel.” sau „not found yet · Peek keeps checking”. Unele AWB-uri de 17 caractere sunt întrebate și la [Colis Privé](carrier:colis-prive); unele de 16 caractere sunt încercate la [Royal Mail](carrier:royal-mail) doar dacă Sameday nu le confirmă. Un număr de colet e propus pentru Sameday când AWB-ul lui are 9 cifre; altfel alege „Sameday” cu „Change” (sau „Change carrier” din pagina coletului). Oricum, Sameday răspunde cu AWB-ul, afișat ca „Sameday tracks this as”. Merge și un link de urmărire de pe sameday.ro sau sameday.bg cu AWB-ul în el. Interfața Peek este în engleză.
 
-Peek preia datele direct prin [adaptorul Sameday din universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sameday) și afișează statusul, istoricul cu județul și țara pe hartă și ora livrării (fără data estimată sau numele exact al lockerului easybox). Peek verifică actualizările până la o dată la 10 minute — și până la o dată la 2 minute în ziua în care coletul iese la livrare (începând cu ora 6:00 ora locală), reducând frecvența la o oră după două zile fără noutăți.
+Peek citește Sameday prin [adaptorul Sameday din universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sameday) și arată statusul, istoricul cu județul și țara fiecărei scanări pe hartă și ora livrării, în formulările în engleză ale Sameday. Nu arată o zi estimată de livrare și nici numele easybox-ului sau al punctului.
+
+Cât timp coletul e deschis în Peek, sau în ziua livrării cu notificările pornite, Peek îl verifică cel mult o dată la 10 minute, iar în ziua în care Sameday îl scanează `The courier will deliver the parcel soon…`, de la ora 6:00, ora României sau a Bulgariei, cel mult o dată la 2 minute, cât timp răspunde urmărirea Sameday. Altfel îl verifică o dată pe oră. După 12 ore doar la „Label created” sau „Received by carrier”, ori după două zile fără noutăți, îl verifică o dată pe oră oricum l-ai urmări, iar după șapte zile la „Label created”, o dată la 6 ore. Dacă urmărirea Sameday nu răspunde și Peek trece prin servicii de urmărire, verifică o dată pe oră, o dată la 3 ore după o zi fără scanare nouă și, în ziua în care coletul iese la livrare, cel mult o dată la 15 minute cât timp coletul e deschis în Peek sau are notificările pornite.
 
 Peek grupează statusurile Sameday în etape clare: **Label created** (AWB creat, așteaptă preluarea), **Received by carrier** (predat către Sameday), **In transit** (depozit central, tranzit și agenție locală), **Out for delivery** (în curs de livrare), **Delivery attempted** (încercare nereușită), **Ready for pickup** (ajuns în easybox / SAMEDAY point), **Delivered** (livrat / ridicat) și **Returned to sender** (retur către expeditor).
 
-Dacă nu apar scanări noi câteva zile sau în weekend, Peek afișează: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Sameday.“ După mai mult de trei săptămâni fără noutăți, vei vedea: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Sameday.“ Pentru asistență oficială direct din pagina coletului, apasă **Get help from Sameday**.
+Când cea mai nouă scanare are patru zile și coletul e încă la „Label created”, „Received by carrier” sau „In transit”, Peek îl marchează cu ziua acelei scanări, de exemplu „No tracking update since Mon 12 Oct”. Pagina coletului spune atunci „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Sameday.”, cu un link „Get help from Sameday” către pagina de contact de pe sameday.ro. După trei săptămâni fără scanare nouă, spune „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Sameday.”
 
-Din setările de notificări ale Peek poți alege **Every scan**, **Important steps** sau **Delivery only**.
+Peek te poate anunța la „Every scan”, „Important steps” sau „Delivery only”. Nu poate prelungi păstrarea în easybox și nu-ți poate trimite un PIN.
 
 ## Contact Sameday România și relații clienți
 
@@ -100,5 +100,18 @@ Da, dacă ai comandat folosind numărul tău de telefon: instalează și deschid
 - [Sameday — Întrebări frecvente](https://sameday.ro/intrebari-frecvente/)
 - [Sameday — SAMEDAY point](https://sameday.ro/intrebari-frecvente/sameday-point/)
 - [Sameday — Termeni și condiții](https://sameday.ro/termeni-si-conditii/)
+- [Sameday — Contact](https://sameday.ro/contact/?lang=en)
+- [Sameday — SAMY](https://sameday.ro/samy/?lang=en)
+- [Sameday — Livrare în easybox](https://sameday.ro/intrebari-frecvente/livrare-in-easybox/)
+- [Sameday — FAQ Sameday App](https://sameday.ro/intrebari-frecvente/sameday-app/)
+- [Sameday — Când un mesaj pare fraudulos](https://sameday.ro/cand-un-mesaj-pare-fraudulos-cel-mai-probabil-asa-este/)
+- [Sameday — Ofertă comercială 2025](https://sameday.ro/app/uploads/2025/01/SAMEDAY_Oferta-Comerciala_2025.pdf)
+- [Sameday — Contacts (Bulgaria)](https://sameday.bg/contacts-sameday/?lang=en)
+- [Sameday — FAQ delivery to address (Bulgaria)](https://sameday.bg/frequent-questions/delivery-to-address/?lang=en)
+- [Sameday — SAMEDAY point (Bulgaria)](https://sameday.bg/sameday-point/?lang=en)
+- [Sameday — Общи условия](https://sameday.bg/terms-and-conditions-delivery-courier-services-bg/)
+- [Sameday — Home (Bulgaria)](https://sameday.bg/)
+- [Sameday — Sameday App (Bulgaria)](https://sameday.bg/sameday-app/)
+- [Sameday — Home (Hungary)](https://sameday.hu/)
 - [Adaptorul Sameday în universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sameday)
 :::

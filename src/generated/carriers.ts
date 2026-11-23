@@ -14628,6 +14628,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "zh": [
     {
+      "id": "yunexpress",
+      "catalog": "yunexpress",
+      "slug": "yuntu-yunexpress-wuliu-chaxun",
+      "title": "云途物流（YunExpress）查询：YT单号、状态与尾程",
+      "name": "YunExpress",
+      "color": "#008284"
+    },
+    {
+      "id": "cainiao",
+      "catalog": "aliexpress",
+      "slug": "cainiao-wuliu-chaxun",
+      "title": "菜鸟（Cainiao）国际物流查询：单号、状态与客服",
+      "name": "Cainiao",
+      "color": "#e62e04"
+    },
+    {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-wuliu-chaxun",
@@ -14650,6 +14666,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JCEX（佳成国际）物流查询：JCZ 单号、状态与派送",
       "name": "JCEX",
       "color": "#0080cc"
+    },
+    {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "zhongguo-youzheng-wuliu-chaxun",
+      "title": "中国邮政（China Post）国际物流查询：单号、状态与尾程",
+      "name": "China Post",
+      "color": "#006d46"
     },
     {
       "id": "straightship",
@@ -14676,6 +14700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "tongyou-topyou-wuliu-chaxun",
+      "title": "通邮（TopYou）国际物流查询：TYZR单号、状态与尾程",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jinritong-jrt-wuliu-chaxun",
@@ -14698,6 +14730,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "广州云链（GZYL）物流查询：YL…YQ单号与预设轨迹说明",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-guoji-wuliu-chaxun",
+      "title": "守务国际（Shouwu）物流查询：SWECN单号、状态与尾程",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "xinghe-freight",

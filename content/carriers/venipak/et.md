@@ -14,7 +14,7 @@ Venipaki jälgimisvormil sisestatakse kood lahtrisse „Saadetise/paki kood“. 
 
 | Kood (välja mõeldud) | Mis see on |
 | --- | --- |
-| `V00000E0000000` | Venipaki paki number: `V`, viis numbrit, `E` ja seitse numbrit, kokku 14 märki. Igal pakil on oma number (triipkood). |
+| `V48291E7364058` | Venipaki paki number: `V`, viis numbrit, `E` ja seitse numbrit, kokku 14 märki. Igal pakil on oma number (triipkood). |
 | 7–10 numbrit | Saadetise number. Ühes saadetises võib olla mitu pakki. |
 
 Koodi asemel saab vormil täita ka lahtrid „Kliendi ID“ ja „Dokumendi number“, kuid need on saatja andmed: Venipaki eeskirjas on klient see, kes saadetise vedamiseks üle annab. Kui Venipaki lehele ilmub teade „Shipment … not found“, kontrollige, kas kood on õigesti kirjas.
@@ -81,7 +81,7 @@ Kui jälgimine näitab, et pakk on terminalis, palub Venipak oodata SMS-i, mis t
 
 ## Venipaki klienditeenindus
 
-Nii olid Venipak Eesti kontaktid venipak.com/ee lehel kirjas 26. oktoobril 2026:
+Venipak Eesti kontaktid venipak.com/ee lehel:
 
 - **Telefon:** +372 641 4481
 - **Tööaeg:** E–R 8.00–17.00, L–P suletud
@@ -94,11 +94,11 @@ Tellimuse, tagastuse või raha kohta küsige e-poelt.
 
 ## Venipaki paki jälgimine Peekis
 
-Numbri, mis näeb välja nagu `V00000E0000000`, seob [Peek](/) kuju järgi kohe Venipakiga. Sobivad ka väiketähed või tühik enne tähte `E` ning venipak.com-i jälgimislingid (`/tracking/track/` ja number).
+Numbri, mis näeb välja nagu `V48291E7364058`, seob [Peek](/) kuju järgi kohe Venipakiga. Sobivad ka väiketähed või tühik enne tähte `E` ning venipak.com-i jälgimislingid (`/tracking/track/` ja number).
 
 7–10-kohalist saadetise numbrit Peek kuju järgi Venipakiga ei seo ega küsi selle kohta Venipakilt. Kleepige see siiski – Peek jälgib enam kui 4500 vedaja pakke – ja valige Venipak nupuga „Change“ (juba lisatud pakil „Change carrier“) või kleepige Venipaki jälgimislink selle numbriga. Kui saadetises on mitu pakki, palub Peek lisada pakid eraldi, igaüks oma numbriga.
 
-Peek küsib otse Venipakilt ja näitab Venipaki samme kuupäeva ja kellaajaga: olekuid inglise keeles nagu ülal tabelis, terminali ning pakiautomaati või pick-up punkti (koos linnaga), kus pakk ootab või kust see välja võeti. Eeldatavat tarnepäeva ega kaalu Venipak ei anna; kaardi koordinaate, pakkide arvu ega saaja kontrolli Peek ei näita. Peek kontrollib pakki kuni iga 10 minuti järel ja kulleriga teel olevat pakki (`Out for delivery`) kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Venipaki enda jälgimine vastab. Jälgimisteenuste kaudu kontrollib Peek pakki kord tunnis ja päeval, mil pakk on kulleriga teel, kuni iga 15 minuti järel. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Oleku muutumisel võib Peek teile teada anda. Peek ei saa teie eest Venipaki ega e-poega ühendust võtta.
+Peek küsib otse Venipakilt ja näitab Venipaki samme kuupäeva ja kellaajaga: olekuid inglise keeles nagu ülal tabelis, terminali ning pakiautomaati või pick-up punkti (koos linnaga), kus pakk ootab või kust see välja võeti. Eeldatavat tarnepäeva ega kaalu Venipak ei anna; kaardi koordinaate, pakkide arvu ega saaja kontrolli Peek ei näita. Kui pakk on Peekis avatud või on selle kättetoimetamise päev ja teavitused on sees, kontrollib Peek pakki kuni iga 10 minuti järel ja kulleriga teel olevat pakki (`Out for delivery`) kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Venipaki enda jälgimine vastab; muidu kord tunnis. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis ning kui pakk on seitse päeva ilma uudisteta olekus „Label created“, iga 6 tunni järel. Kui olekus „Label created“, „Received by carrier“ või „In transit“ olevale pakile pole neli päeva uut sammu tulnud, märgib Peek selle viimase sammu päevaga: „No tracking update since …“, lisab märkuse „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Venipak.“ ja lingi „Get help from Venipak“; kolme nädala pärast on märkus „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Venipak.“ Oleku muutumisel võib Peek teile teada anda: valida saab „Every scan“, „Important steps“ või „Delivery only“. Peek ei saa teie eest Venipaki ega e-poega ühendust võtta.
 
 ## Küsimused Venipaki paki jälgimise kohta
 

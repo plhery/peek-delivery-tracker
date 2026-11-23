@@ -18,8 +18,8 @@ Venipak's help pages give no format, but its labels follow one shape (digits inv
 
 | Number | What it is |
 | --- | --- |
-| `V12345E1234567` | A Venipak parcel number: `V`, 5 digits, `E`, 7 digits. The 5 digits identify the sender's account, the last 7 the parcel. |
-| `1234567` | A shipment number of 7 to 10 digits, which can cover several parcels. |
+| `V48291E7364058` | A Venipak parcel number: `V`, 5 digits, `E`, 7 digits. The 5 digits identify the sender's account, the last 7 the parcel. |
+| `48291736` | A shipment number of 7 to 10 digits, which can cover several parcels. |
 
 Venipak's form takes a "Shipment/parcel code", or a "Customer ID" with a "Document number", which only the sender has. [Baltic numbers of another shape](guide:tracking-number-formats) belong to someone else: `JJEE` codes and postal numbers ending `EE` are [Omniva's](carrier:omniva), postal numbers ending `LT` are [Lietuvos paštas's](carrier:lietuvos-pastas), and 14 digits are usually DPD's.
 
@@ -69,7 +69,7 @@ The shop holds the contract with Venipak, so a lost, damaged or wrong item goes 
 
 ## Venipak customer service and contact number
 
-As listed on Venipak's contact pages on 13 October 2026, each country has its own customer service.
+Each country has its own customer service.
 
 - **Lithuania:** +370 700 55221 (charged at your plan's rates), Monday to Friday 8 am to 6 pm; helpdesk.lt@venipak.com; chat and a "Send a message" form on [Venipak Lithuania's contacts page](https://venipak.com/lt/en/contacts/).
 - **Latvia:** +371 6601 6601, Monday to Friday 8 am to 5 pm; helpdesk.lv@venipak.com; form on [Venipak Latvia's contacts page](https://venipak.com/lv/en/contacts/).
@@ -79,11 +79,13 @@ As listed on Venipak's contact pages on 13 October 2026, each country has its ow
 
 ## Tracking a Venipak parcel with Peek
 
-[Peek](/) names a number like `V12345E1234567` as Venipak's straight away; no other carrier shares the shape, and lowercase or a space before the `E` is fine. Tracking links on venipak.com or venipak.lt with the number in them work too; from a venipak.lv link Peek reads only a `V…E…` parcel number.
+[Peek](/) names a number like `V48291E7364058` as Venipak's straight away; no other carrier shares the shape, and lowercase or a space before the `E` is fine. Tracking links on venipak.com or venipak.lt with the number in them work too; from a venipak.lv link Peek reads only a `V…E…` parcel number.
 
 A 7 to 10-digit shipment number is never named Venipak: pick Venipak with "Change", or paste a venipak.com or venipak.lt link. A one-parcel shipment is then followed by its parcel number; for several parcels, add each parcel number.
 
-Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. It checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Venipak scans the parcel out for delivery, while Venipak's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
+Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. While the parcel is open in Peek, or on its delivery day with notifications on, it checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Venipak scans the parcel out for delivery, while Venipak's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has spent seven days at "Label created" with no news. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes: choose "Every scan", "Important steps" or "Delivery only".
+
+If a parcel at "Label created", "Received by carrier" or "In transit" has no new scan for four days, Peek flags it with the latest scan's day ("No tracking update since …") and adds "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Venipak." with a "Get help from Venipak" link. After three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Venipak."
 
 Venipak gives no expected arrival day and no weight. Peek leaves out map coordinates, the parcel count and the recipient check, and can't contact Venipak for you.
 
@@ -91,11 +93,11 @@ Venipak gives no expected arrival day and no weight. Peek leaves out map coordin
 
 ### Can I track a Venipak parcel without the tracking number?
 
-Yes, in Venipak's new app: according to its Estonian news of 22 October 2026, the app works across the Baltics and shows every Venipak parcel linked to your account through your email or phone number. On the website, Venipak's form takes a customer ID with a document number instead, but only the sender has those: ask the shop, or, in Lithuania, wait for Venipak's SMS the evening before.
+Yes, in Venipak's new app: according to its Estonian news, the app works across the Baltics and shows every Venipak parcel linked to your account through your email or phone number. On the website, Venipak's form takes a customer ID with a document number instead, but only the sender has those: ask the shop, or, in Lithuania, wait for Venipak's SMS the evening before.
 
 ### Can I change the address for a Venipak parcel?
 
-Yes, from the business day after the driver collected it, or even on the delivery day according to Venipak's Lithuanian FAQ. Email the new address to customer service or call, and it arrives one business day later. To send it to a locker instead, Venipak's new app can redirect it, its Estonian news of 22 October 2026 says.
+Yes, from the business day after the driver collected it, or even on the delivery day according to Venipak's Lithuanian FAQ. Email the new address to customer service or call, and it arrives one business day later. To send it to a locker instead, Venipak's new app can redirect it, its Estonian news says.
 
 ### Does Venipak deliver the next day?
 

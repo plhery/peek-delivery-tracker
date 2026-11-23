@@ -14,7 +14,7 @@ Venipak izsekošanas formā numuru ievada laukā „Sūtījuma / pakas kods“. 
 
 | Numurs (izdomāts) | Kas tas ir |
 | --- | --- |
-| `V00000E0000000` | Venipak pakas numurs: `V`, pieci cipari, `E` un septiņi cipari, kopā 14 zīmes. Katrai pakai ir savs numurs (svītrkods). |
+| `V48291E7364058` | Venipak pakas numurs: `V`, pieci cipari, `E` un septiņi cipari, kopā 14 zīmes. Katrai pakai ir savs numurs (svītrkods). |
 | 7–10 cipari | Sūtījuma numurs. Vienā sūtījumā var būt vairākas pakas. |
 
 Koda vietā formā var aizpildīt arī laukus „Klienta ID“ un „Dokumenta numurs“, taču tie ir sūtītāja dati: Venipak noteikumos par klientu sauc to, kas sūtījumu nodod pārvadāšanai. Ja Venipak lapā parādās „Shipment … not found“, pārbaudiet, vai numuru ievadījāt pareizi.
@@ -73,7 +73,7 @@ Ja redzat, ka sūtījums ir terminālī, Venipak lūdz pagaidīt, līdz saņemsi
 
 ## Venipak kontakti
 
-Kā venipak.com/lv norādīts 2026. gada 26. oktobrī:
+Kontakti, ko Venipak norāda venipak.com/lv:
 
 - **Klientu apkalpošanas nodaļa:** +371 6601 6601.
 - **Darba laiks:** pirmdien–piektdien 8.00–17.00, sestdien un svētdien slēgts.
@@ -86,11 +86,11 @@ Par pašu pasūtījumu, atgriešanu vai naudu jautājiet veikalam.
 
 ## Venipak sūtījuma izsekošana ar Peek
 
-Numuru, kas izskatās kā `V00000E0000000`, [Peek](/) pēc formas uzreiz piesaista Venipak. Der arī mazie burti vai atstarpe pirms `E`, kā arī venipak.com izsekošanas saites (`/tracking/track/` un numurs).
+Numuru, kas izskatās kā `V48291E7364058`, [Peek](/) pēc formas uzreiz piesaista Venipak. Der arī mazie burti vai atstarpe pirms `E`, kā arī venipak.com izsekošanas saites (`/tracking/track/` un numurs).
 
 7–10 ciparu sūtījuma numuru Peek pēc formas Venipak nepiesaista un Venipak par to nejautā. Tomēr ielīmējiet to – Peek izseko vairāk nekā 4500 pārvadātāju sūtījumus – un izvēlieties Venipak ar „Change“ (jau pievienotam sūtījumam – ar „Change carrier“) vai ielīmējiet Venipak izsekošanas saiti ar šo numuru. Ja sūtījumā ir vairākas pakas, Peek lūgs katru pievienot ar tās pakas numuru.
 
-Peek jautā pašai Venipak un rāda tās soļus ar datumu un laiku: statusus angliski, kā tabulā augstāk, termināli, kā arī pakomātu vai pick-up punktu (ar pilsētu), kurā sūtījums gaida vai no kura tas izņemts. Paredzamo piegādes dienu un svaru Venipak nenorāda, savukārt kartes koordinātas, paku skaitu un saņēmēja pārbaudi Peek nerāda. Peek pārbauda sūtījumu ne biežāk kā reizi 10 minūtēs, bet tajā dienā, kad tas izvests piegādei, ne biežāk kā reizi 2 minūtēs (no plkst. 6.00 pēc vietējā laika un tikai tik ilgi, kamēr atbild pašas Venipak izsekošana; ja dati nāk no izsekošanas pakalpojumiem, ik pēc 15 minūtēm). Ja divas dienas nav jaunumu (vai 12 stundas, kamēr sūtījums ir tikai reģistrēts vai pārvadātāja pieņemts), Peek to pārbauda reizi stundā. Mainoties statusam, Peek var jums paziņot. Peek nevar jūsu vietā sazināties ar Venipak vai veikalu.
+Peek jautā pašai Venipak un rāda tās soļus ar datumu un laiku: statusus angliski, kā tabulā augstāk, termināli, kā arī pakomātu vai pick-up punktu (ar pilsētu), kurā sūtījums gaida vai no kura tas izņemts. Paredzamo piegādes dienu un svaru Venipak nenorāda, savukārt kartes koordinātas, paku skaitu un saņēmēja pārbaudi Peek nerāda. Kamēr sūtījums ir atvērts Peek vai piegādes dienā, ja paziņojumi ir ieslēgti, Peek to pārbauda ne biežāk kā reizi 10 minūtēs, bet tajā dienā, kad tas izvests piegādei, ne biežāk kā reizi 2 minūtēs (no plkst. 6.00 pēc vietējā laika un tikai tik ilgi, kamēr atbild pašas Venipak izsekošana); citādi reizi stundā. Ja divas dienas nav jaunumu (vai 12 stundas, kamēr sūtījums ir tikai reģistrēts vai pārvadātāja pieņemts), Peek to pārbauda reizi stundā, bet ja sūtījums septiņas dienas bez jaunumiem ir statusā „Label created“, reizi 6 stundās. Ja sūtījumam statusā „Label created“, „Received by carrier“ vai „In transit“ četras dienas nav jauna soļa, Peek to atzīmē ar pēdējā soļa dienu: „No tracking update since …“, pievieno piezīmi „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Venipak.“ un saiti „Get help from Venipak“; pēc trim nedēļām piezīme ir „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Venipak.“ Mainoties statusam, Peek var jums paziņot: var izvēlēties „Every scan“, „Important steps“ vai „Delivery only“. Peek nevar jūsu vietā sazināties ar Venipak vai veikalu.
 
 ## Biežāk uzdotie jautājumi par Venipak sūtījumu izsekošanu
 

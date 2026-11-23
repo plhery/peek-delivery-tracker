@@ -16,7 +16,7 @@ updated: 2026-11-17
 
 | Numeris (išgalvotas) | Kas tai |
 | --- | --- |
-| `V00000E0000000` | „Venipak“ pakuotės numeris: `V`, 5 skaitmenys, `E` ir 7 skaitmenys, iš viso 14 ženklų. Kiekviena pakuotė turi savo brūkšninį kodą. |
+| `V48291E7364058` | „Venipak“ pakuotės numeris: `V`, 5 skaitmenys, `E` ir 7 skaitmenys, iš viso 14 ženklų. Kiekviena pakuotė turi savo brūkšninį kodą. |
 | 7–10 skaitmenų | Siuntos numeris. Viena siunta gali apimti kelias pakuotes. |
 
 Sekimo formoje vietoj siuntos kodo galima įvesti „Kliento ID“ ir „Dokumento numerį“, bet tai siuntėjo duomenys: „Venipak“ klientu vadina tą, kas siuntą išsiunčia. Jei svetainė rašo „Siunta numeriu … nebuvo rasta“, patikrinkite, ar gerai nusirašėte numerį.
@@ -75,7 +75,7 @@ Jei sekimas rodo, kad siunta terminale, „Venipak“ pataria palaukti SMS žinu
 
 ## „Venipak“ kontaktai
 
-Taip kontaktus venipak.com/lt nurodė 2026 m. spalio 26 d.:
+Kontaktai, kuriuos „Venipak“ nurodo venipak.com/lt:
 
 - **Klientų aptarnavimo skyrius:** +370 700 55221. Skambučio kaina pagal jūsų mokėjimo plano tarifus.
 - **Darbo laikas:** pirmadieniais–penktadieniais 8–18 val. Puslapyje apie paštomatų prieinamumą nurodomas ir šeštadienis, 8–16 val.
@@ -88,11 +88,11 @@ Dėl paties užsakymo, grąžinimo ar pinigų klauskite parduotuvės.
 
 ## „Venipak“ siuntos sekimas su Peek
 
-Numerį, kuris atrodo kaip `V00000E0000000`, [Peek](/) pagal formą iškart priskiria „Venipak“. Tinka ir mažosios raidės ar tarpas prieš `E`, taip pat „Venipak“ sekimo nuorodos (`/tracking/track/` ir numeris) bei venipak.lt nuorodos (`/siuntos-kelias/track/` ir numeris).
+Numerį, kuris atrodo kaip `V48291E7364058`, [Peek](/) pagal formą iškart priskiria „Venipak“. Tinka ir mažosios raidės ar tarpas prieš `E`, taip pat „Venipak“ sekimo nuorodos (`/tracking/track/` ir numeris) bei venipak.lt nuorodos (`/siuntos-kelias/track/` ir numeris).
 
 Siuntos numerio iš 7–10 skaitmenų Peek pagal formą „Venipak“ nepriskiria ir „Venipak“ apie jį neklausia. Vis tiek jį įklijuokite – Peek seka daugiau nei 4 500 vežėjų – ir pasirinkite „Venipak“ per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuokite „Venipak“ sekimo nuorodą su šiuo numeriu. Jei siuntoje kelios pakuotės, Peek paprašys kiekvieną pridėti su jos pakuotės numeriu.
 
-Peek klausia pačios „Venipak“ ir rodo jos žingsnius su data ir laiku: būsenas angliškai, kaip lentelėje aukščiau, terminalą, taip pat paštomatą ar atsiėmimo punktą (su miestu), kuriame siunta laukia ar iš kurio buvo atsiimta. Numatomos pristatymo dienos ir svorio „Venipak“ nepateikia, o žemėlapio koordinačių, pakuočių skaičiaus ir gavėjo patikrinimo Peek nerodo. Peek tikrina ne dažniau kaip kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – ne dažniau kaip kas 2 minutes, kol atsako pati „Venipak“; per sekimo paslaugas – kas 15 minučių. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą. Pasikeitus būsenai Peek gali jums pranešti. Peek negali už jus susisiekti su „Venipak“ ar parduotuve.
+Peek klausia pačios „Venipak“ ir rodo jos žingsnius su data ir laiku: būsenas angliškai, kaip lentelėje aukščiau, terminalą, taip pat paštomatą ar atsiėmimo punktą (su miestu), kuriame siunta laukia ar iš kurio buvo atsiimta. Numatomos pristatymo dienos ir svorio „Venipak“ nepateikia, o žemėlapio koordinačių, pakuočių skaičiaus ir gavėjo patikrinimo Peek nerodo. Kol siunta atidaryta Peek arba pristatymo dieną, jei pranešimai įjungti, Peek tikrina ne dažniau kaip kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – ne dažniau kaip kas 2 minutes, kol atsako pati „Venipak“; kitu atveju kartą per valandą. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą, o jei siunta septynias dienas be naujienų lieka būsenos „Label created“, kas 6 valandas. Jei siuntai, kurios būsena „Label created“, „Received by carrier“ ar „In transit“, keturias dienas nėra naujo žingsnio, Peek ją pažymi paskutinio žingsnio diena: „No tracking update since …“, prideda pastabą „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Venipak.“ ir nuorodą „Get help from Venipak“; po trijų savaičių pastaba būna „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Venipak.“ Pasikeitus būsenai Peek gali jums pranešti: galite pasirinkti „Every scan“, „Important steps“ arba „Delivery only“. Peek negali už jus susisiekti su „Venipak“ ar parduotuve.
 
 ## Dažni klausimai apie „Venipak“ siuntų sekimą
 

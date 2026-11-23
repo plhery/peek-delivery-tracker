@@ -20,7 +20,7 @@ updated: 2026-11-23
 | `ESLAX48291057364`、`APLAX48291057364`、`AXLAX48291057364` | 相同结构但以 `ES`、`AP` 或 `AX` 开头。 |
 | `ECLAX4829105736` | 只有 15 位字符：不符合易客满 16 位规则，请检查是否漏掉了一位数字。 |
 
-Peek 目录中没有其他承运商使用这些 16 位规则；粘贴时无需在意空格和字母大小写。单号印在包裹面单上，也会出现在商家的发货邮件或订单详情页中；找不到请参阅 [如何找到你的快递单号](guide:find-tracking-number) 和 [快递单号格式指南](guide:tracking-number-formats)。
+Peek 目录中没有其他承运商使用这些 16 位规则；粘贴时无需在意空格和字母大小写。单号印在包裹面单上，也会出现在商家的发货邮件或订单详情页中；找不到请参阅 [如何找到你的快递单号](guide:find-tracking-number)（英文） 和 [快递单号格式指南](guide:tracking-number-formats)（英文）。
 
 **直达查件链接。** 如果商家发来带 `?number=`、`orderNumber=` 或 `trackingno=` 参数的 `ecmsglobal.com` 链接，直接粘贴整条链接到 Peek 即可自动提取易客满单号。
 
@@ -51,21 +51,21 @@ Peek 目录中没有其他承运商使用这些 16 位规则；粘贴时无需�
 
 **中文轨迹对应。** 部分运单以中文显示节点，Peek 同样准确归类：`发货预报已收到，正在等待货物到达我们的始发站仓库`（「已生成面单」）、`干线航班起飞` / `干线航班已到达`（「运输中」）、`货物已进入清关流程`（「清关中」）、`货物已清关放行` / `货物已到达目的站仓库` / `货物出库前往配送中心安排最终派送`（「运输中」）。
 
-**时区说明。** 易客满自有节点均携带操作站当地时钟和 UTC 偏移；转发的尾程节点偏移常标为 0，Peek 会自动判断其属于 UTC 还是扫描地当地时间，而标注午夜零点的航班节点（`Flight departure` / `Flight arrival`）只展示日期。详见 [中国直邮包裹跟踪指南](guide:tracking-from-china)。
+**时区说明。** 易客满自有节点均携带操作站当地时钟和 UTC 偏移；转发的尾程节点偏移常标为 0，Peek 会自动判断其属于 UTC 还是扫描地当地时间，而标注午夜零点的航班节点（`Flight departure` / `Flight arrival`）只展示日期。详见 [中国直邮包裹跟踪指南](guide:tracking-from-china)（英文）。
 
 ## 易客满包裹在各国由谁派送与参考时效
 
 最后一公里由易客满合作的当地尾程快递商派送。易客满追踪页的「Last Mile Delivery」信息框通常会写明「LM Provider」（尾程快递商）、「LM Tracking No.」（尾程单号）和直达链接。在美国线路的常见历史记录中，尾程常由 SpeedX 派送，易客满将其扫描转发为 `Parcel in transit during last mile delivery`。
 
-**参考时效：** 易客满美国发往海外的公开参考时效为：英国 3–6 个工作日、加拿大 3–11 个工作日、澳大利亚 3–8 个工作日、欧盟 4–8 个工作日（具体取决于起运地、目的地及渠道）。派送次数、通知卡与自提保管规则均执行当地尾程快递规定，参见 [错过派送怎么办](guide:missed-delivery)。
+**参考时效：** 易客满美国发往海外的公开参考时效为：英国 3–6 个工作日、加拿大 3–11 个工作日、澳大利亚 3–8 个工作日、欧盟 4–8 个工作日（具体取决于起运地、目的地及渠道）。派送次数、通知卡与自提保管规则均执行当地尾程快递规定，参见 [错过派送怎么办](guide:missed-delivery)（英文）。
 
 ## 易客满包裹查不到、卡关或丢失怎么办
 
 - **提示「We could not find a shipment for this tracking number.」。** 可能是单号抄错或商家尚未向易客满传单。若满两天易客满与第三方服务均查无记录，Peek 会提示核对 16 位单号。
 - **停在 `Virtual Manifest has been received`。** 易客满只收到电子预报还没拿到包裹，请问商家何时交付。
-- **停在海关清关（`Shipment started customs clearance process.`）。** 易客满常见问题说明：DDU/DAP 渠道可能需要收件人在派送前缴纳税费，DDP 渠道则通常由寄件人预付；收到缴税通知请参阅 [包裹海关扣留与清关指南](guide:customs)。
-- **停在 `Shipment is tendering to third party carrier for final delivery.` 后没更新。** 请在易客满追踪页的「Last Mile Delivery」框查找尾程单号直接查询当地快递。另见 [物流为什么停止更新](guide:tracking-not-updating)。
-- **显示已签收但没收到、丢件、破损、错发或退件。** 易客满 FAQ 明确要求买家找零售商或卖家办理补发或退款，且仅寄件人可在易客满收件后 30 天内书面提出理赔；同时易客满无法替买家取消订单或修改内容。退件原因常见违禁品、地址不全、清关受阻、未缴税费或收件人未配合清关（注意单条 `Return to origin` 未必真退件，观察几天是否有尾程扫描跟进，无进展再找卖家）。参见 [显示已签收但未收到](guide:delivered-not-received)、[包裹丢失怎么办](guide:lost-parcel) 和 [包裹退回寄件人](guide:returned-to-sender)。
+- **停在海关清关（`Shipment started customs clearance process.`）。** 易客满常见问题说明：DDU/DAP 渠道可能需要收件人在派送前缴纳税费，DDP 渠道则通常由寄件人预付；收到缴税通知请参阅 [包裹海关扣留与清关指南](guide:customs)（英文）。
+- **停在 `Shipment is tendering to third party carrier for final delivery.` 后没更新。** 请在易客满追踪页的「Last Mile Delivery」框查找尾程单号直接查询当地快递。另见 [物流为什么停止更新](guide:tracking-not-updating)（英文）。
+- **显示已签收但没收到、丢件、破损、错发或退件。** 易客满 FAQ 明确要求买家找零售商或卖家办理补发或退款，且仅寄件人可在易客满收件后 30 天内书面提出理赔；同时易客满无法替买家取消订单或修改内容。退件原因常见违禁品、地址不全、清关受阻、未缴税费或收件人未配合清关（注意单条 `Return to origin` 未必真退件，观察几天是否有尾程扫描跟进，无进展再找卖家）。参见 [显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹丢失怎么办](guide:lost-parcel)（英文） 和 [包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## 易客满客服电话与联系方式
 
@@ -78,13 +78,13 @@ Peek 目录中没有其他承运商使用这些 16 位规则；粘贴时无需�
 
 ## 用 Peek 跟踪易客满（ECMS Express）包裹
 
-[Peek](/) 会根据 16 位 `EC`/`ES`/`AP`/`AX` 专属格式自动识别易客满（如虚构单号 `ECLAX48291057364`）并确认「ECMS Express 有这个包裹的记录。」；如需手动调整可点「更换」或「更换快递公司」，详情页亦附有「向 ECMS Express 寻求帮助」链接直达易客满联系页面。查询无需注册账号、邮编或手机号。
+[Peek](/) 会根据 16 位 `EC`/`ES`/`AP`/`AX` 专属格式立即认出易客满（如虚构单号 `ECLAX48291057364`），无需先向易客满确认；如需手动调整可点「更换」或「更换快递公司」。包裹被标记为没有物流更新时，包裹页的说明附有「向 ECMS Express 寻求帮助」链接，打开易客满的「Contact Us」联系页面。查询无需注册账号、邮编或手机号。
 
 易客满查件页带有简单算术图片验证码，Peek 会自动识别解析（失败时重试一次新图片）；若官网仍无响应，Peek 会临时通过第三方查询服务获取记录。Peek 展示规范化阶段（「已生成面单」「已揽收」「运输中」「清关中」「派送中」「待取件」「已签收」「需要留意」等）、每条扫描的城镇/省州/国家、目的国以及换算为你设备本地时区的时间，同时隐藏商家参考号和付款链接，不显示重量或预计送达日期。
 
 只要易客满记录里指明 Peek 认识的当地尾程快递并给出尾程单号，Peek 就会同步展示尾程单号并同时查询该尾程商；一旦尾程商出现不早于易客满最新记录的扫描，Peek 即自动接力切换并完整保留易客满前期历史（其他未自动接力的尾程单号可手动作为独立包裹添加到 Peek）。
 
-页面打开或派送当天开启通知时，Peek 最快每 10 分钟检查一次，进入派送当天从当地时间早上 6 点起最快每 2 分钟检查一次（第三方服务每 15 分钟一次；切至当地尾程快递后遵循该快递频率）；平时及两天无新动态（或前段 12 小时无变化）降为每小时一次。静默满四天时 Peek 会提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 ECMS Express 查询。」，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 ECMS Express 查询。」。
+只要你打开着这个包裹，或在派送当天开启了通知，Peek 最快每 10 分钟检查一次；同样条件下，包裹派送当天从当地时间早上 6 点起最快每 2 分钟一次（仅在易客满官方查询正常响应时）；其他时候每小时一次。易客满官方查询无响应、只有第三方查询服务有结果时，Peek 每小时检查一次，最新扫描超过一天后每 3 小时一次，派送当天在你打开包裹或开启通知时最快每 15 分钟一次。转到当地尾程快递跟踪后，Peek 按该快递的频率检查。连续两天无新扫描（或前段处于「已生成面单」「已揽收」满 12 小时）也降为每小时一次。最新扫描已满四天、包裹仍处于「已生成面单」「已揽收」或「运输中」时，Peek 会用这条扫描的日期标出包裹，如「自10月12日周一起没有物流更新」，包裹页随后提示「包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 ECMS Express 查询。」并附「向 ECMS Express 寻求帮助」链接，超过三周无动静则提示「已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 ECMS Express 查询。」。
 
 通知偏好可选「每次扫描」「重要环节」（清关、`Return to origin`、派送中、待取件及签收，不含普通航班与仓库扫描）或「仅派送当天」。Peek 无法替你联系易客满或卖家。
 
@@ -111,5 +111,13 @@ Peek 目录中没有其他承运商使用这些 16 位规则；粘贴时无需�
 应优先联系发货的网店或卖家——易客满明确规定仅寄件人可在收件后 30 天内提交索赔。涉及末端派送可联系当地快递，或致电易客满美、英、澳客服热线。
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 易客满公司主体（天津易客满国际物流有限公司、2013 年创立及各地区客服电话）、16 位 EC/ES/AP/AX 单号规则、算术验证码识别与链接参数、中英文状态与清关/尾程映射、时区修正及自动接力尾程快递机制
+- [ECMS Express：首页（英文）](https://www.ecmsglobal.com/en-us/home.html) – 为网店承运的国际快递
+- [ECMS Express：About ECMS（英文）](https://www.ecmsglobal.com/en-us/about.html) – 2013 年创立
+- [易客满：关于我们](https://www.ecmsglobal.com/zh-cn/about.html) – 2013 年成立、各地自有分支机构、天津易客满国际物流有限公司
+- [ECMS Express：Parcel Delivery Service（英文）](https://www.ecmsglobal.com/en-us/express.html) – 当地尾程合作快递、自美国发出的参考时效
+- [ECMS Express：Track Your Shipment（英文）](https://www.ecmsglobal.com/en-us/tracking.html) – 安全验证、汇总状态、「Last Mile Delivery」信息框、查无记录提示
+- [ECMS Express：FAQ（英文）](https://www.ecmsglobal.com/en-us/faq.html) – 税费（DDU/DAP、DDP）、退件原因、取消订单、仅寄件人 30 天内索赔
+- [ECMS Express：Contact Us（英文）](https://www.ecmsglobal.com/en-us/contact-us.html) – 美、英、澳电话与工作时间、留言表单
+- [ECMS Express：Support (UK)（英文）](https://www.ecmsglobal.com/en-uk/support.html) – 英国本地格式电话
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 16 位 EC/ES/AP/AX 单号规则、算术验证码识别与链接参数、中英文状态与清关/尾程映射、时区修正及自动接力尾程快递机制
 :::

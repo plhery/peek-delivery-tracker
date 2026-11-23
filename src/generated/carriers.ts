@@ -3388,6 +3388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b418b"
     },
     {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "chronodiali-sendungsverfolgung",
+      "title": "Chronodiali Sendungsverfolgung: CHPU-Nummern & Kontakt",
+      "name": "Chronodiali",
+      "color": "#009adf"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "17feia-sendungsverfolgung",
@@ -4862,6 +4870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b418b"
     },
     {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "suivi-chronodiali",
+      "title": "Suivi Chronodiali\u00a0: numéros CHPU, statuts et contact",
+      "name": "Chronodiali",
+      "color": "#009adf"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "suivi-17feia",
@@ -6304,6 +6320,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b418b"
     },
     {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "tracciamento-chronodiali",
+      "title": "Tracciamento Chronodiali: numeri CHPU, stati e contatti",
+      "name": "Chronodiali",
+      "color": "#009adf"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "tracking-17feia",
@@ -7722,6 +7746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b418b"
     },
     {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "seguimiento-chronodiali",
+      "title": "Seguimiento Chronodiali: números CHPU, estados y contacto",
+      "name": "Chronodiali",
+      "color": "#009adf"
+    },
+    {
       "id": "17feia",
       "catalog": "17feia",
       "slug": "seguimiento-17feia",
@@ -9114,6 +9146,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento EURODIS: números de envio e parceiros locais",
       "name": "EURODIS",
       "color": "#0b418b"
+    },
+    {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "seguimento-chronodiali",
+      "title": "Seguimento Chronodiali: números CHPU, estados e contacto",
+      "name": "Chronodiali",
+      "color": "#009adf"
     },
     {
       "id": "17feia",
@@ -10574,6 +10614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie EURODIS: numery przesyłek i lokalni partnerzy",
       "name": "EURODIS",
       "color": "#0b418b"
+    },
+    {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "sledzenie-chronodiali",
+      "title": "Śledzenie Chronodiali: numery CHPU, statusy i kontakt",
+      "name": "Chronodiali",
+      "color": "#009adf"
     },
     {
       "id": "17feia",

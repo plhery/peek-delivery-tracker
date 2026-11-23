@@ -228,7 +228,7 @@
   { "id": "spx-sg", "catalog": "spx-sg", "name": "SPX Express Singapore", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dai-post", "catalog": "dai-post", "name": "DAI Post", "languages": ["en"] },
   { "id": "eurodis", "catalog": "eurodis", "name": "EURODIS", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "chronodiali", "catalog": "chronodiali", "name": "Chronodiali", "languages": ["en"] },
+  { "id": "chronodiali", "catalog": "chronodiali", "name": "Chronodiali", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "17feia", "catalog": "17feia", "name": "17FEIA", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "tsjy", "catalog": "tsjy", "name": "TSJY", "languages": ["en"] },
   { "id": "stone3pl", "catalog": "stone3pl", "name": "Stone3PL", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

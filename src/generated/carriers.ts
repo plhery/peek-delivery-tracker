@@ -2376,6 +2376,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GO! Express tracking: 12-digit waybills, statuses & help",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "kuehne-nagel-tracking",
+      "title": "Kuehne+Nagel tracking — numbers, statuses, and delivery",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "memphis-courier-tracking",
+      "title": "Memphis Courier tracking — numbers, statuses, and customs",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "oca-tracking",
+      "title": "OCA tracking — numbers, statuses, branches, and delivery",
+      "name": "OCA",
+      "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "pigeonship-tracking",
+      "title": "PigeonShip tracking — numbers, statuses, and delivery",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "seko-logistics-tracking",
+      "title": "SEKO Logistics tracking — numbers, OmniParcel, and delivery",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     }
   ],
   "de": [
@@ -4362,6 +4402,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GO! Express Sendungsverfolgung: Frachtbrief, Status & Hilfe",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "kuehne-nagel-sendungsverfolgung",
+      "title": "Kühne+Nagel Sendungsverfolgung — Nummern und Status",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     }
   ],
   "fr": [
@@ -10360,6 +10408,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de Serpost: códigos S10, aduanas y contacto",
       "name": "Serpost",
       "color": "#00308a"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "seguimiento-oca",
+      "title": "Seguimiento OCA — números, estados, sucursales y entregas",
+      "name": "OCA",
+      "color": "#592c82"
     }
   ],
   "pt": [
@@ -12380,6 +12436,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Onlog Express: códigos AA, status e contato",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "rastreio-memphis-courier",
+      "title": "Rastreamento Memphis Courier — códigos, alfândega e ANVISA",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
     }
   ],
   "pl": [

@@ -14,11 +14,12 @@ Every SpeedPAK number read on Orange Connex's tracking was 28 letters and digits
 
 | Number | What it is |
 | --- | --- |
-| `ES0000000000000000000000000N` | ES and 26 letters and digits: SpeedPAK. |
-| `EE1234567890123456789012345X` | EE and 26 letters and digits: SpeedPAK too. |
-| `EE123456789CN` | Two letters, nine digits, two letters: an international postal number, not SpeedPAK. |
+| `ES4829173640582917364058290N` | ES and 26 letters and digits: SpeedPAK. |
+| `EE4829173640582917364058295X` | EE and 26 letters and digits: SpeedPAK too. |
+| `EX4829173640582917364058291A` | EX and 26 letters and digits: SpeedPAK. On those read so far, [DHL Express](carrier:dhl-express) carried the parcel all the way. |
+| `EE482917367CN` | Two letters, nine digits, two letters: an international postal number, not SpeedPAK. |
 
-eBay's pages for sellers also speak of SpeedPAK numbers starting with EX or EM. Peek tracks an EX number of 28 characters as SpeedPAK: on those read so far, [DHL Express](carrier:dhl-express) carried the parcel all the way. EM numbers it doesn't track as SpeedPAK.
+eBay's pages for sellers also speak of SpeedPAK numbers starting with EM, which Peek doesn't track as SpeedPAK.
 
 **Where to find it.** In eBay's Purchase history, the number appears as a link beside the item. If you bought as a guest, open the email whose subject starts "Order Confirmed", then View order details and Show delivery details. If no number shows, eBay says to contact the seller and ask them to upload it. More in [how to find your tracking number](guide:find-tracking-number).
 
@@ -71,15 +72,15 @@ Orange Connex's claims page is for sellers, not recipients: claims and refunds g
 
 ## SpeedPAK customer service and contact number
 
-As read on 12 October 2026, neither eBay nor Orange Connex lists a SpeedPAK contact for recipients in the UK or Ireland. Orange Connex itself asks buyers to contact their seller, through eBay or the platform where they ordered.
+Neither eBay nor Orange Connex lists a SpeedPAK contact for recipients in the UK or Ireland. Orange Connex itself asks buyers to contact their seller, through eBay or the platform where they ordered.
 
 Orange Connex's own customer service, as its site lists it:
 
-- **Phone**: 400 126 0008 or 86 21 60662670 (mainland China), 852 30183458 (Hong Kong).
-- **Hours**: Monday to Saturday, 9:00 to 18:00; closed on Sundays and national holidays.
+- **Phone**: 400 126 0008 (mainland China), 852 30183458 (Hong Kong).
+- **Hours**: Monday to Saturday, 9:00 to 18:00 China Standard Time; closed on Sundays and national holidays.
 - **Email**: CS@orangeconnex.com.
 
-eBay prints the same email with the hours in China Standard Time, on a page for sellers. Once the delivering carrier is named, its own customer service is the one that can act on a missed delivery.
+eBay prints the same email and hours, in China Standard Time, on a page for sellers. Once the delivering carrier is named, its own customer service is the one that can act on a missed delivery.
 
 ## Track a SpeedPAK parcel with Peek
 
@@ -87,7 +88,11 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
-Peek checks up to every 10 minutes (every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SpeedPAK's own tracker answers; through tracking services, up to every 15 minutes while you have the parcel open or notifications are on), puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SpeedPAK or the seller, or open a claim for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day the parcel goes out for delivery, from 6 a.m. local time, every 2 minutes while SpeedPAK's own tracker answers. Otherwise it checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When only tracking services answer, Peek checks hourly, every 3 hours once a day passes without a new scan, and, on the out-for-delivery day, up to every 15 minutes while the parcel is open in Peek or has notifications on. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail, up to every 30 minutes for Poste Italiane, PostNL and USPS, out for delivery too.
+
+**No new scan for days.** When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking SpeedPAK.", with a "Get help from SpeedPAK" link to eBay's help page for an item that hasn't arrived. Once Peek follows the delivering carrier, the link goes to that carrier's help page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking SpeedPAK."
+
+Peek puts each scan on a map. For notifications, choose "Every scan", "Important steps" or "Delivery only". It can't contact SpeedPAK or the seller, or open a claim for you.
 
 ## Questions about SpeedPAK tracking
 
@@ -108,7 +113,8 @@ No official page says which carrier delivers SpeedPAK parcels in the UK. The `LM
 Orange Connex's page shows English or Chinese, and opens in Chinese unless you chose English there before or your browser's language is set to plain "en" (a British or American English setting doesn't count). Switch the language on the page; a few lines stay in Chinese even then.
 
 :::sources
-- [Orange Connex: Tracking For SpeedPAK](https://www.orangeconnex.com/tracking) – FAQ, service levels, Economy tracking, languages, contact lines and hours, status wordings, last-mile carriers
+- [Orange Connex: Tracking For SpeedPAK](https://www.orangeconnex.com/tracking) – languages, contact lines and hours, status wordings, last-mile carriers
+- [Orange Connex: FAQ](https://www.orangeconnex.com/helpFAQ) – service levels, 8 to 12 business days for Standard, half-way tracking for Economy
 - [Orange Connex Logistics DE: Tracking](https://globalshipping.orangeconnex.de/tracking) – contact the seller, five days without movement, local transfer delays
 - [Orange Connex Logistics DE: Help centre](https://globalshipping.orangeconnex.de/helpPage) – buyers ask their seller
 - [Orange Connex: Claims](https://help.orangeconnex.com/helpCentre/claims.html) – claims are for sellers

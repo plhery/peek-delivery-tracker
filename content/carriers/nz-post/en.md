@@ -23,11 +23,11 @@ Type it without spaces or brackets. Invented examples of the shapes:
 
 | Shape (example) | What it is |
 | --- | --- |
-| `RR000000005NZ` | Postal number: 2 letters, 9 digits, `NZ` (13 characters). |
-| `12345678901234567890` | Courier parcel number, 20 digits. |
-| `1234567890123456ABC123NZ` | Courier label: 16 digits, 3 letters, 3 digits, 2 letters (24 characters). |
+| `RR482917367NZ` | Postal number: 2 letters, 9 digits, `NZ` (13 characters). |
+| `48291736405829173640` | Courier parcel number, 20 digits. |
+| `4829173640582917AKL001NZ` | Courier label: 16 digits, 3 letters, 3 digits, 2 letters (24 characters). |
 
-Lookalikes: the "Missed my parcel" card carries a card number of `CTC` and 9 digits. It isn't the tracking number, so don't track with it. Two letters and 10 digits (`AB1234567890`) belong to [Aramex New Zealand](carrier:aramex-nz), not NZ Post.
+Lookalikes: the "Missed my parcel" card carries a card number of `CTC` and 9 digits. It isn't the tracking number, so don't track with it. Two letters and 10 digits (`AB4829173640`) belong to [Aramex New Zealand](carrier:aramex-nz), not NZ Post.
 
 ## What NZ Post tracking statuses mean
 
@@ -80,7 +80,7 @@ If a parcel from abroad shows nothing in NZ Post's tracking yet, check the sende
 
 ## NZ Post tracking contact number
 
-As listed on nzpost.co.nz on 15 October 2026, Monday to Friday, 8am to 5.30pm, except public holidays:
+From nzpost.co.nz, Monday to Friday, 8am to 5.30pm New Zealand time, except public holidays:
 
 - Auckland 09 977 0102, Waikato 07 960 0468, Palmerston North 06 952 8600, Wellington 04 897 5675, South Island 03 983 1425.
 - From anywhere: +64 9 977 0102.
@@ -95,7 +95,13 @@ As listed on nzpost.co.nz on 15 October 2026, Monday to Friday, 8am to 5.30pm, e
 
 Peek reads NZ Post's own tracking and shows the status, each scan with its depot on a map and the time of delivery. `Delivered` appears in Peek's own words; the rest as NZ Post writes them. It drops the recipient, signatures and the delivery photo, shows no expected delivery date or collection location, and can't redirect a parcel or set Leave my parcel.
 
-It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out with the courier, while NZ Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad with a postal number (two letters, nine digits, two letters) can be switched over too: when the sending post's tracking names New Zealand as the destination, or names no country and you track from New Zealand, Peek also asks NZ Post with the same number. Once NZ Post has a scan at least as recent as the sending post's newest, Peek follows the parcel there and keeps the sending post's history.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. New Zealand time on the day NZ Post shows `With courier for delivery`, while NZ Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking NZ Post.", with a "Get help from NZ Post" link to NZ Post's contact and support page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking NZ Post."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
+
+When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad with a postal number (two letters, nine digits, two letters) can be switched over too: when the sending post's tracking names New Zealand as the destination, or names no country and you track from New Zealand, Peek also asks NZ Post with the same number. Once NZ Post has a scan at least as recent as the sending post's newest, Peek follows the parcel there and keeps the sending post's history.
 
 ## Questions about NZ Post tracking
 
@@ -105,7 +111,7 @@ The sender has made a label and given your parcel its number, but NZ Post hasn't
 
 ### How long is an NZ Post tracking number?
 
-13 characters for a postal number (`RR000000005NZ`) and 20 digits for most courier parcels. Some courier labels carry 24 characters ending in `NZ`.
+13 characters for a postal number (`RR482917367NZ`) and 20 digits for most courier parcels. Some courier labels carry 24 characters ending in `NZ`.
 
 ### Does NZ Post deliver on Saturdays?
 

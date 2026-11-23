@@ -63,7 +63,7 @@ If a delivery fails or the parcel waits for you, see [missed delivery](guide:mis
 
 **Nothing yet.** A tracking service may not know the number yet, or may not follow Transpress's parcels at all. Peek keeps asking, each service again at most a day after it last had nothing. If there's still no line two days after you added the parcel, Peek flags it: "Still waiting for the carrier’s first update". Check the number against the shop's email. If nothing comes after a few days, open Transpress's own tracker with "Open the Transpress website" and ask the shop whether the parcel was really sent.
 
-**No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of its latest line: "No tracking update since Mon 12 Oct". See [why tracking stops updating](guide:tracking-not-updating).
+**No news for days.** After four days without a new line, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag with the day of its latest line, such as "No tracking update since Mon 12 Oct". Its page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Transpress.", with a "Get help from Transpress" link to Transpress's Contacts page. After three weeks with no new line, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Transpress." See [why tracking stops updating](guide:tracking-not-updating).
 
 **Sent back.** When Transpress can't deliver (you refused it, you're away for long or unknown at the address, or the address is wrong or incomplete), it tells the sender and returns the parcel within 14 days of that notice, the sender paying both ways. If the sender gives no instructions within 3 working days, or can't be reached, the parcel counts as unclaimed: Transpress keeps it 14 more days, then it becomes Transpress's property, which it may sell or destroy. See [returned to sender](guide:returned-to-sender).
 
@@ -77,12 +77,12 @@ For an online order, tell the shop first: it booked the delivery and can take it
 
 ## Transpress contact and customer service
 
-As transpress.bg's Contacts page listed them on 13 November 2026:
+From transpress.bg's Contacts page:
 
-- **Phone:** \*5015, 0700 150 50 or 02 948 07 00. Office hours Monday to Friday, 09:00 to 18:00.
+- **Phone:** \*5015, 0700 150 50 or 02 948 07 00. Office hours Monday to Friday, 09:00 to 18:00 Bulgarian time.
 - **Tracking questions** (parcels up to 2,500 kg): aftersales@transpress.bg for parcels within Bulgaria, international@transpress.bg for international ones.
 - **General email:** transpress@transpress.bg.
-- **Chat:** on transpress.bg, every day from 7:00 to 23:00, or send your question through the chat's form.
+- **Chat:** on transpress.bg, every day from 7:00 to 23:00 Bulgarian time, or send your question through the chat's form.
 - **Claims:** the form under "Complaints" ("Рекламации" on the Bulgarian site).
 
 ## Track a Transpress parcel with Peek
@@ -101,7 +101,7 @@ If you leave the carrier to Peek, it asks tracking services, and files the parce
 
 **Another carrier.** In the parcel's first 30 days, Peek also asks the carriers whose number shapes fit yours. If one of them shows the parcel moving under that number, Peek moves the parcel there and says "Swapped automatically from Transpress".
 
-**How often.** Peek checks the parcel hourly, and every 3 hours once a day passes without news. On the day it's out for delivery, Peek checks up to every 15 minutes while you have it open or notifications are on. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** Peek checks the parcel hourly, every 3 hours once a day passes without news, and every 6 hours once it has spent seven days at "Label created". On the day it's out for delivery, Peek checks up to every 15 minutes while you have it open or notifications are on. Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact Transpress, the shop or the sender for you, change the delivery or file a claim.
 
@@ -121,7 +121,7 @@ In writing, within 6 months of the day Transpress accepted the parcel, with the 
 
 ### What is Transpress's phone number?
 
-\*5015, 0700 150 50 or 02 948 07 00. Its offices work Monday to Friday, 09:00 to 18:00. For tracking questions, Transpress gives aftersales@transpress.bg (within Bulgaria) and international@transpress.bg.
+\*5015, 0700 150 50 or 02 948 07 00. Its offices work Monday to Friday, 09:00 to 18:00 Bulgarian time. For tracking questions, Transpress gives aftersales@transpress.bg (within Bulgaria) and international@transpress.bg.
 
 :::sources
 - [Transpress: Shipment tracking](https://transpress.bg/en/for-clien/shipment-tracking) – English tracker, "Shipment number", "Complaints" form

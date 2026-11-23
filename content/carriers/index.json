@@ -126,7 +126,7 @@
   { "id": "couriersplease", "catalog": "couriersplease", "name": "CouriersPlease", "languages": ["en"] },
   { "id": "nz-post", "catalog": "nz-post", "name": "NZ Post", "languages": ["en"] },
   { "id": "aramex-nz", "catalog": "aramex-nz", "name": "Aramex New Zealand", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "magyar-posta", "catalog": "magyar-posta", "name": "Magyar Posta", "languages": ["en", "hu"] },
+  { "id": "magyar-posta", "catalog": "magyar-posta", "name": "Magyar Posta", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "j-and-t-de", "catalog": "j-and-t-de", "name": "J&T Express Germany", "languages": ["en", "de", "ru", "ro", "hr", "it", "pl", "fr", "es", "pt"] },

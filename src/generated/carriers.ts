@@ -2836,6 +2836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "magyar-posta-sendungsverfolgung",
+      "title": "Magyar Posta Sendungsverfolgung: Status, PostaPont und Zoll",
+      "name": "Magyar Posta",
+      "color": "#346631"
+    },
+    {
       "id": "shiprocket",
       "catalog": "shiprocket",
       "slug": "shiprocket-sendungsverfolgung",
@@ -4454,6 +4462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "suivi-magyar-posta",
+      "title": "Suivi Magyar Posta\u00a0: statuts hongrois, PostaPont et douane",
+      "name": "Magyar Posta",
+      "color": "#346631"
+    },
+    {
       "id": "shiprocket",
       "catalog": "shiprocket",
       "slug": "suivi-shiprocket",
@@ -6040,6 +6056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "tracking-magyar-posta",
+      "title": "Tracking Magyar Posta: stati ungheresi, PostaPont e dogana",
+      "name": "Magyar Posta",
+      "color": "#346631"
+    },
+    {
       "id": "shiprocket",
       "catalog": "shiprocket",
       "slug": "tracciamento-shiprocket",
@@ -7618,6 +7642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc291e"
     },
     {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "seguimiento-magyar-posta",
+      "title": "Seguimiento Magyar Posta: estados húngaros y PostaPont",
+      "name": "Magyar Posta",
+      "color": "#346631"
+    },
+    {
       "id": "shiprocket",
       "catalog": "shiprocket",
       "slug": "seguimiento-shiprocket",
@@ -9186,6 +9218,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Aramex Nova Zelândia: números, estados, contactos",
       "name": "Aramex New Zealand",
       "color": "#dc291e"
+    },
+    {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "seguimento-magyar-posta",
+      "title": "Seguimento Magyar Posta: estados húngaros e PostaPont",
+      "name": "Magyar Posta",
+      "color": "#346631"
     },
     {
       "id": "shiprocket",
@@ -10798,6 +10838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Aramex Nowa Zelandia: numery, statusy i kontakt",
       "name": "Aramex New Zealand",
       "color": "#dc291e"
+    },
+    {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "sledzenie-magyar-posta",
+      "title": "Śledzenie Magyar Posta: statusy węgierskie i PostaPont",
+      "name": "Magyar Posta",
+      "color": "#346631"
     },
     {
       "id": "shiprocket",

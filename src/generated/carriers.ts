@@ -3388,6 +3388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "dpd-belgium-sendungsverfolgung",
+      "title": "DPD Belgium Sendungsverfolgung: Status, Pickup & Kontakt",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "sto-express-sendungsverfolgung",
@@ -4942,6 +4950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "suivi-dpd-belgium",
+      "title": "Suivi DPD Belgium\u00a0: statuts, livraison et contact",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "suivi-sto-express",
@@ -6472,6 +6488,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "tracking-dpd-belgium",
+      "title": "Tracking DPD Belgium: stati, consegna e contatti",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "tracciamento-sto-express",
@@ -7978,6 +8002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "seguimiento-dpd-belgium",
+      "title": "Seguimiento DPD Belgium: estados, entrega y contacto",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "seguimiento-sto-express",
@@ -9458,6 +9490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CityMail: números, estados e entrega Suécia",
       "name": "CityMail",
       "color": "#fc4c02"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "seguimento-dpd-belgium",
+      "title": "Seguimento DPD Belgium: estados, entrega e contacto",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     },
     {
       "id": "sto",
@@ -11006,6 +11046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CityMail: numery, statusy i dostawa w Szwecji",
       "name": "CityMail",
       "color": "#fc4c02"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "sledzenie-dpd-belgium",
+      "title": "Śledzenie DPD Belgium: statusy, doręczenie i kontakt",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     },
     {
       "id": "sto",

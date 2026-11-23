@@ -14,8 +14,8 @@ ACS calls it the shipping number; shops often say voucher.
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `0000000000` | An ACS shipping number: 10 digits, no letters, the last a check digit. |
-| `RR000000005GR` | Not ACS: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
+| `4829173646` | An ACS shipping number: 10 digits, no letters, the last a check digit. |
+| `RR482917367GR` | Not ACS: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
 
 It's in ACS's SMS, Viber or email, in the locker message and often in the shop's shipping email. The number on the "Absent" note left after a missed delivery works in ACS's tracker too, and a return gets its own new number.
 
@@ -68,12 +68,12 @@ ACS's Smartpoint Lockers come with or without a screen, and the two open differe
 
 ## ACS Courier contact number and customer service
 
-As listed on ACS's sites on 13 October 2026:
+From ACS's sites:
 
-- **Greece:** 210 8190000 or 211 5005000 (+30 from abroad), Monday to Friday 08:00 to 20:00, Saturday 08:00 to 15:00; press 1 for English. Have the number ready.
+- **Greece:** 210 8190000 or 211 5005000 (+30 from abroad), Monday to Friday 08:00 to 20:00, Saturday 08:00 to 15:00, Greek time; press 1 for English. Have the number ready.
 - **Greece online:** the "File a Claim" form and requests 24/7 via acscourier.gr; email info@acscourier.gr for complaints; a 24/7 digital assistant in Greek and English.
-- **Greek lockers that won't open:** 211 500 5264, Monday to Friday 09:00 to 19:00.
-- **Cyprus:** 77777373, or +357 22273000 from abroad; Monday to Friday 07:45 to 19:00, Saturday 09:00 to 13:00. ACS Cyprus asks you to use its website's contact form when lines are busy; complaints go to helpdesk@acscyprus.com or its "File a Claim" form.
+- **Greek lockers that won't open:** 211 500 5264, Monday to Friday 09:00 to 19:00, Greek time.
+- **Cyprus:** 77777373, or +357 22273000 from abroad; Monday to Friday 07:45 to 19:00, Saturday 09:00 to 13:00, Cyprus time. ACS Cyprus asks you to use its website's contact form when lines are busy; complaints go to helpdesk@acscyprus.com or its "File a Claim" form.
 
 There's no separate line for the UK or elsewhere: use these numbers.
 
@@ -81,11 +81,15 @@ There's no separate line for the UK or elsewhere: use these numbers.
 
 ## Tracking ACS Courier parcels with Peek
 
-[Peek](/) can't tell an ACS number from its 10 digits alone, so it asks the carriers it fits whether they know it: ACS (when the last digit passes ACS's check and the digits are typed without spaces or dashes), DHL Express, Geniki Taxydromiki (on the same terms), [BOX NOW](carrier:box-now), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), naming ACS when ACS alone knows it; if another carrier knows it too, even DHL Express, you choose. If ACS isn't asked, or Peek names another carrier, pick "ACS Courier" with "Change", or paste an ACS Track and Trace link with `trackingNumber=` from either site, which names ACS at once (myACS links aren't read).
+[Peek](/) can't tell an ACS number from its 10 digits alone, so it asks the carriers it fits whether they know it: ACS (when the last digit passes ACS's check and the digits are typed without spaces or dashes), DHL Express, Geniki Taxydromiki (on the same terms), [BOX NOW](carrier:box-now), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), DHL Freight, [DPD Ireland](carrier:dpd-ie), Estafeta and, if the first digit isn't 0, [Packeta](carrier:packeta), naming ACS when ACS alone knows it; if another carrier knows it too, even DHL Express, you choose. If ACS isn't asked, or Peek names another carrier, pick "ACS Courier" with "Change", or paste an ACS Track and Trace link with `trackingNumber=` from either site, which names ACS at once (myACS links aren't read).
 
-Peek reads ACS's tracker through its Cypriot English site: each scan in ACS's English words, with the branch or hub and its time. While the parcel moves it can show ACS's expected delivery day, and it names the SmartPoint where the parcel waits. A `Not delivered` scan shows ACS's reason in brackets, unless it holds a name, phone number or address. No weight; the recipient, signatory, sender, other comments and branch contacts are dropped. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day ACS scans the parcel out for delivery, while ACS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek reads ACS's tracker through its Cypriot English site: each scan in ACS's English words, with the branch or hub and its time. While the parcel moves it can show ACS's expected delivery day, and it names the SmartPoint where the parcel waits. A `Not delivered` scan shows ACS's reason in brackets, unless it holds a name, phone number or address. No weight; the recipient, signatory, sender, other comments and branch contacts are dropped. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Greek time on the day ACS scans the parcel out for delivery, while ACS's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
 
-When Speedy or DPD Romania names ACS as the carrier delivering in Greece or Cyprus, the parcel can be followed to ACS. Notifications come for every scan, important steps only, or on delivery day only.
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ACS Courier.", with a "Get help from ACS Courier" link to ACS's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ACS Courier."
+
+When Speedy or DPD Romania names ACS as the carrier delivering in Greece or Cyprus, the parcel can be followed to ACS.
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about ACS Courier tracking
 
@@ -128,6 +132,5 @@ For complaints in Greece, info@acscourier.gr; in Cyprus, helpdesk@acscyprus.com.
 - [ACS Courier: Διαχείριση Παραπόνων (Cyprus)](https://cyp.acscourier.net/exypiretisi/kentro-pliroforisis/diaxeirisi-paraponwn/) – helpdesk email
 - [ACS Courier: Frauds using the ACS brand](https://www.acscourier.net/en/important-updates/frauds-using-the-acs-brand-1622026/) – fake messages, official senders
 - [ACS Courier: Frauds using the ACS brand (Cyprus)](https://cyp.acscourier.net/en/useful-info/useful-information/acs-news/frauds-using-the-acs-brand/) – Cypriot sender and email domain
-- [ACS Courier: Tracking service](https://api.acscourier.net/api/parcels/shipment-statuses) – summary statuses and their meanings
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ACS's summary statuses and what Peek reads
 :::

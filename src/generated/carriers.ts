@@ -3236,6 +3236,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#27967a"
     },
     {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "gls-austria-sendungsverfolgung",
+      "title": "GLS Austria Sendungsverfolgung: Status, Shops & Kontakt",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "india-post-sendungsverfolgung",
@@ -4830,6 +4838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#27967a"
     },
     {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "suivi-gls-austria",
+      "title": "Suivi GLS Austria\u00a0: statuts, Parcel Shops et contact",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "suivi-india-post",
@@ -6400,6 +6416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#27967a"
     },
     {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "tracking-gls-austria",
+      "title": "Tracking GLS Austria: stati, Parcel Shop e contatti",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "tracciamento-india-post",
@@ -7938,6 +7962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#27967a"
     },
     {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "seguimiento-gls-austria",
+      "title": "Seguimiento GLS Austria: estados, Parcel Shops y contacto",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "seguimiento-india-post",
@@ -9466,6 +9498,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento ePost Global: números EPG, estados e entrega",
       "name": "ePost Global",
       "color": "#27967a"
+    },
+    {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "seguimento-gls-austria",
+      "title": "Seguimento GLS Austria: estados, Parcel Shops e contacto",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
     },
     {
       "id": "india-post",
@@ -11054,6 +11094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie ePost Global: numery EPG, statusy i doręczenie",
       "name": "ePost Global",
       "color": "#27967a"
+    },
+    {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "sledzenie-gls-austria",
+      "title": "Śledzenie GLS Austria: statusy, Parcel Shopy i kontakt",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
     },
     {
       "id": "india-post",

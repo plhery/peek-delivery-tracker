@@ -188,7 +188,7 @@
   { "id": "russian-post", "catalog": "russian-post", "name": "Russian Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "huahan", "catalog": "huahan", "name": "HuaHan Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "epost-global", "catalog": "epost-global", "name": "ePost Global", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en"] },
+  { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "india-post", "catalog": "india-post", "name": "India Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

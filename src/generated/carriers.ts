@@ -14700,6 +14700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "juxi-guoji-juxi-express-wuliu-chaxun",
+      "title": "聚溪国际（Juxi Express）查询：JXC单号、尾程与售后",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "jcex",
       "catalog": "jcex",
       "slug": "jcex-wuliu-chaxun",
@@ -14714,6 +14722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "中国邮政（China Post）国际物流查询：单号、状态与尾程",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "zhihe-techlink-wuliu-chaxun",
+      "title": "智禾国际（Techlink）物流查询：ZHPHD单号与状态",
+      "name": "Techlink",
+      "color": "#e73547"
     },
     {
       "id": "dhlink",
@@ -14828,6 +14844,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b8f91"
     },
     {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "yikeman-ecms-express-wuliu-chaxun",
+      "title": "易客满（ECMS Express）物流查询：16位单号与状态",
+      "name": "ECMS Express",
+      "color": "#12823d"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "jingdong-wuliu-jd-logistics-chaxun",
+      "title": "京东物流（JD Logistics）国际查询：单号、状态与客服",
+      "name": "JD Logistics",
+      "color": "#e1251b"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-wuliu-chaxun",
@@ -14850,6 +14882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "胜兴旺（SXW Express）物流查询：SXW单号与状态",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "anjun-wuliu-chaxun",
+      "title": "安骏物流（Anjun Logistics）查询：中巴专线与巴西清关",
+      "name": "Anjun Logistics",
+      "color": "#009944"
     }
   ],
   "nl": [

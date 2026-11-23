@@ -2072,6 +2072,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Paquetexpress tracking: guías, statuses, Ocurre and claims",
       "name": "Paquetexpress",
       "color": "#002a52"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "ydh-tracking",
+      "title": "YDH tracking: YDH...YQ and AZ codes, handoffs and contacts",
+      "name": "YDH",
+      "color": "#015db9"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "a-tu-hora-express-tracking",
+      "title": "A Tu Hora Express tracking: codes, postcode & help",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "dtdc-tracking",
+      "title": "DTDC tracking: AWB formats, RTO statuses, delivery and help",
+      "name": "DTDC",
+      "color": "#0d237d"
+    },
+    {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "gofo-spain-tracking",
+      "title": "GOFO Spain tracking: GFES and CIES codes, 3 attempts, help",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "korea-post-tracking",
+      "title": "Korea Post tracking: EMS KR codes, 13-digit parcels & help",
+      "name": "Korea Post",
+      "color": "#da291c"
     }
   ],
   "de": [
@@ -9984,6 +10024,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Paquetexpress: guías, estados, Ocurre y contacto",
       "name": "Paquetexpress",
       "color": "#002a52"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "seguimiento-a-tu-hora-express",
+      "title": "Seguimiento A Tu Hora Express: códigos y código postal",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
+    },
+    {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "seguimiento-gofo-espana",
+      "title": "Seguimiento GOFO España: códigos GFES/CIES y ayuda",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
     }
   ],
   "pt": [

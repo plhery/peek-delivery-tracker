@@ -256,5 +256,10 @@
   { "id": "bulgarian-posts", "catalog": "bulgarian-posts", "name": "Bulgarian Posts", "languages": ["en", "bg"] },
   { "id": "haypost", "catalog": "haypost", "name": "HayPost", "languages": ["en"] },
   { "id": "360lion", "catalog": "360lion", "name": "360Lion", "languages": ["en"] },
-  { "id": "paquetexpress", "catalog": "paquetexpress", "name": "Paquetexpress", "languages": ["en", "es"] }
+  { "id": "paquetexpress", "catalog": "paquetexpress", "name": "Paquetexpress", "languages": ["en", "es"] },
+  { "id": "ydh", "catalog": "ydh", "name": "YDH", "languages": ["en"] },
+  { "id": "a-tu-hora-express", "catalog": "a-tu-hora-express", "name": "A Tu Hora Express", "languages": ["en", "es"] },
+  { "id": "dtdc", "catalog": "dtdc", "name": "DTDC", "languages": ["en"] },
+  { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },
+  { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] }
 ]

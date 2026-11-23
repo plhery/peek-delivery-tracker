@@ -63,19 +63,19 @@ De tre första statusarna visar att paketet ännu inte har kommit in i CityMails
 
 Peek kan inte kontakta CityMail eller nätbutiken åt dig. Enligt [CityMails hjälp- och kontaktsida](https://www.citymail.se/hjalp/):
 
-- **Mottagarservice (för privatpersoner som tar emot post och paket):** telefon `0771-40 60 40`, e-post `mottagarservice@citymail.se`. Hjälpsidan visar i realtid om telefonlinjen är öppen och när den öppnar nästa vardag (normalt kl. 08:30).
+- **Mottagarservice (för privatpersoner som tar emot post och paket):** telefon `0771-40 60 40`, e-post `mottagarservice@citymail.se`. Öppet måndag–fredag kl. 08.30–17.00 enligt CityMails Frågor och svar.
 - **Företagsfrågor och växel:** telefon `08-709 43 00`.
 - **Online:** [CityMails hjälpsidor](https://www.citymail.se/hjalp/) och [Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) på svenska. CityMail har även en webbapp där mottagare kan följa leveransen, styra om den, boka retur och få aviseringar.
 
 ## Spåra ett CityMail-paket med Peek
 
-- **Ett `BCM`-nummer:** Klistra in numret i [Peek](/) (till exempel `BCMKP48291736`, påhittat) så känner Peek igen CityMail direkt. Mellanslag, bindestreck och gemener spelar ingen roll. När CityMail känner igen paketet visar Peek `"CityMail has this parcel."`.
+- **Ett `BCM`-nummer:** Klistra in numret i [Peek](/) (till exempel `BCMKP48291736`, påhittat) så känner Peek igen CityMail direkt och visar "Detected carrier". Mellanslag, bindestreck och gemener spelar ingen roll.
 - **En spårningslänk från CityMail:** En länk till `tracking.citymail.se` med `?search=` och din referens kopplas automatiskt till CityMail oavsett referensformat.
-- **Annan avsändarreferens:** Peek kan inte avgöra utifrån ett godtyckligt format att det är CityMail. Klistra ändå in numret (Peek följer över 3 500 transportörer), tryck sedan på "Change" vid tillägg eller "Change carrier" på ett redan tillagt paket och välj CityMail. För CityMail godtar Peek 8 till 35 bokstäver och siffror med minst en siffra.
+- **Annan avsändarreferens:** Peek kan inte avgöra utifrån ett godtyckligt format att det är CityMail och frågar inte CityMail om det på egen hand. Klistra ändå in numret (Peek följer över 4 500 transportörer), tryck sedan på "Change" vid tillägg eller "Change carrier" på ett redan tillagt paket och välj CityMail. För CityMail godtar Peek 8 till 35 bokstäver och siffror med minst en siffra.
 
-Peek hämtar status och varje skanning direkt från CityMails spårning med tidpunkt (tolkad i svensk tid) och plats, på CityMails svenska formuleringar, tillsammans med avsändarens namn och beräknad leveransdag medan paketet är på väg. Beställning och föranmälan visas som "Label created", mottagna paket som "Received by carrier", terminal och transport till ombud som "In transit", levererat till ombud som "Ready for pickup" (med ombudets namn), utdelat som "Delivered", misslyckad leverans som "Delivery attempted" och retur som "Returned to sender". Postnummer och leveransbevis visas inte i Peek — använd i stället länken till CityMails egen spårning eller "Get help from CityMail".
+Peek hämtar status och varje skanning direkt från CityMails spårning med tidpunkt (tolkad i svensk tid) och plats, på CityMails svenska formuleringar, tillsammans med avsändarens namn och beräknad leveransdag medan paketet är på väg. Beställning och föranmälan visas som "Label created", terminal och transport till ombud som "In transit" (ingen av CityMails formuleringar betyder "Out for delivery"), levererat till ombud som "Ready for pickup" (med ombudets namn), utdelat som "Delivered", misslyckad leverans som "Delivery attempted" och retur som "Returned to sender". Postnummer och leveransbevis visas inte i Peek — använd i stället "Open the CityMail website", som öppnar ditt nummer i CityMails spårning.
 
-Peek kontrollerar nya händelser upp till var 10:e minut, och glesar ut till varje timme efter två dagar utan nya skanningar (eller efter 12 timmar när status fortfarande är "Label created" eller "Received by carrier"). Efter fyra dagar utan uppdatering visas "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking CityMail." och efter mer än tre veckor utan nya uppgifter visas "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking CityMail.".
+Medan paketet är öppet i Peek, eller på leveransdagen med aviseringar på, kontrollerar Peek det upp till var 10:e minut. Efter två dagar utan nyheter (12 timmar medan paketet fortfarande visar "Label created" eller "Received by carrier") kontrollerar Peek varje timme, och var 6:e timme efter sju dagar utan nyheter på "Label created". Går paketet fyra dagar utan ny rad på "Label created", "Received by carrier" eller "In transit" markerar Peek det med den radens dag, till exempel "No tracking update since Mon 12 Oct", och visar "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking CityMail." med länken "Get help from CityMail" till [CityMails hjälpsidor](https://www.citymail.se/hjalp/). Efter mer än tre veckor utan nya uppgifter visas "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking CityMail."
 
 Du kan välja aviseringar för "Every scan", "Important steps" eller "Delivery only". Peek bevakar endast spårningsstatus och kan inte kontakta CityMail eller ändra leveransplats åt dig.
 
@@ -95,7 +95,7 @@ Nej. CityMail lämnar paketet i brevlådan eller postfacket, vid din dörr eller
 
 ### Kan man spåra ett vanligt CityMail-brev?
 
-CityMails spårningssida heter Spåra paket och är avsedd för spårbara paket. För vanliga brev finns ingen spårning — om ett brev saknas rekommenderar CityMail att du först kontrollerar med avsändaren och därefter kontaktar Mottagarservice.
+CityMails spårningssida heter Spåra paket och är avsedd för spårbara paket. CityMails hjälp för ett saknat brev nämner ingen spårning: fråga först avsändaren och kontakta sedan Mottagarservice.
 
 ### Är CityMail ett seriöst företag?
 
@@ -105,10 +105,11 @@ Ja. CityMail har delat ut post i Sverige sedan 1991 och har tillstånd från Pos
 - [CityMail: Spåra paket](https://www.citymail.se/spara-paket/) – spårningssida, fält för spårningsnummer och BCM-exempel
 - [CityMail: Var är mitt paket?](https://www.citymail.se/hjalp/var-ar-mitt-paket/) – SMS med spårningslänk, senaste händelse och var spårningsnumret finns
 - [CityMail: När kommer mitt paket?](https://www.citymail.se/hjalp/nar-kommer-mitt-paket/) – utdelningsdagar, tider (08.00–17.00) och leveranstid 1–2 eller 1–4 dagar
-- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – utdelningsplatser utan signatur, ombud och paketboxar, legitimation, skador, förseningar, brevens rullande schema och PTS-tillstånd
+- [CityMail: Frågor och svar](https://www.citymail.se/hjalp/fragor-och-svar/) – utdelningsplatser utan signatur, ombud och paketboxar, legitimation, skador, förseningar, brevens rullande schema, PTS-tillstånd och Mottagarservice öppettider
 - [CityMail: Hjälp & kontakt](https://www.citymail.se/hjalp/) – Mottagarservice (telefon, e-post, öppettider) och företagsväxel
 - [CityMail: Ombud](https://www.citymail.se/paket/ombud/) – DHL-ombud, SMS med BankID-länk, legitimation vid uthämtning och kvällsleverans
 - [CityMail: Var är mitt brev?](https://www.citymail.se/hjalp/var-ar-mitt-brev/) – hantering av saknade brev
 - [CityMail: Om CityMail](https://www.citymail.se/om-citymail/) – grundat 1991, medarbetare, kontor, terminaler, egna bud och webbapp
+- [CityMail: Integritetspolicy](https://www.citymail.se/integritetspolicy/) – DHL-ombud, iBoxen-paketboxar och att paket inte eftersänds
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – vad Peek läser från CityMail, svenska statusformuleringar och nummerformat
 :::

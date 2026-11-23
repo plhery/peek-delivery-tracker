@@ -64,7 +64,7 @@ DobroPost's site has a "Напишите в поддержку" (write to suppor
 
 ## Track a DobroPost parcel with Peek
 
-[Peek](/) detects DobroPost automatically as the sole candidate when you enter a `DBRPST` number (`DBRPST6482917304` or `DBRPST73918462051`, invented) and shows "DobroPost has this parcel." once DobroPost's tracker recognises it; Peek also recognises pasted `tracking.dobropost.com/?trackNumber=` links. If you ever need to choose DobroPost manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "ДоброПост" or "Dobropost" finds it too).
+[Peek](/) detects DobroPost automatically as the sole candidate when you enter a `DBRPST` number (`DBRPST6482917304` or `DBRPST73918462051`, invented) and names it at once, with "Detected carrier"; Peek also recognises pasted `tracking.dobropost.com/?trackNumber=` links. If you ever need to choose DobroPost manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "ДоброПост" or "Dobropost" finds it too).
 
 Peek reads DobroPost's tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "At customs", "Ready for pickup", "Needs attention", "Returned to sender", "Delivered"), the Russian wording of DobroPost and of the partners it relays (CDEK, Boxberry and Russian Post) with phone numbers removed, and the delivery time once delivered. The town CDEK names in brackets at the end of a scan is that scan's place. The status codes stay out of every Peek app. DobroPost gives every scan with Moscow's UTC offset, China warehouse scans included, and Peek shows them on your device's clock. DobroPost's tracker gives no estimated delivery date, weight, signer's name or last-mile tracking number.
 

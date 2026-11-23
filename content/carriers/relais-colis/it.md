@@ -6,26 +6,26 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-Relais Colis è una rete francese che consegna pacchi presso negozi locali usati come punti di ritiro e oggi fa parte di [GLS France](carrier:gls-fr). Puoi seguire un pacco con il suo numero sulla [pagina di tracciamento di Relais Colis](https://relaiscolis.com/colis/suivre) o incollandolo nella casella qui sopra. Il numero arriva dal negozio che ha spedito l’ordine oppure dall’e-mail di conferma di Relais Colis per le spedizioni tra privati.
+Relais Colis è una rete francese che consegna pacchi presso negozi locali usati come punti di ritiro e oggi fa parte di [GLS France](carrier:gls-fr). Puoi seguire un pacco con il suo numero sulla [pagina di tracciamento di Relais Colis](https://relaiscolis.com/colis/suivre) o incollandolo nella casella qui sopra. Il numero te lo dà chi spedisce il pacco.
 
 ## Numero di tracciamento Relais Colis («numéro de colis»)
 
-Il modulo di Relais Colis chiede un «numéro de colis» di 12–16 caratteri; l’esempio del sito inizia con `CC`. Relais Colis non spiega il significato di lettere o cifre.
+Il modulo di Relais Colis chiede un «numéro de colis» di 12–16 caratteri. Relais Colis non spiega il significato di lettere o cifre.
 
 | Formato (inventato) | Cosa sapere |
 | --- | --- |
-| `CC4829103756` a `CC48291037561829` | `CC` seguito da 10 a 14 cifre: il formato mostrato come esempio da Relais Colis. |
+| `CC4829103756` a `CC48291037561829` | `CC` seguito da 10 a 14 cifre: Peek li assegna subito a Relais Colis. |
 | `7482910375` | 10 cifre. Corrisponde anche a DHL, [Mondial Relay](carrier:mondial-relay) e altri. |
 | `18492037164829` | 14 cifre. Corrisponde a DPD, SEUR, BRT, [Ciblex](carrier:ciblex) e altri; Peek non interroga Relais Colis per questa lunghezza. |
 | `VD4829103756` | `VD` e 10 cifre. Corrisponde anche a Colis Privé. |
 
-Tra privati, Relais Colis manda al destinatario un’e-mail di conferma per seguire il pacco; per un acquisto online, cercalo nell’e-mail di spedizione o nella pagina dell’ordine. Non hai il numero? La ricerca «Je n’ai pas mon numéro de colis» usa l’e-mail o il telefono del destinatario e il nome del negozio; vedi anche [come trovare un numero di tracciamento](guide:find-tracking-number).
+Per un acquisto online, cercalo nell’e-mail di spedizione o nella pagina dell’ordine. Non hai il numero? La ricerca «Je n’ai pas mon numéro de colis» usa l’e-mail o il telefono del destinatario e il nome del negozio; vedi anche [come trovare un numero di tracciamento](guide:find-tracking-number).
 
 Se il negozio nomina un altro corriere, il numero appartiene probabilmente a quello: guarda [formati dei numeri di tracciamento](guide:tracking-number-formats).
 
 ## Relais Colis suivi: cosa significano gli stati in francese
 
-Il sito e il tracciamento di Relais Colis sono solo in francese e non esiste un elenco ufficiale degli stati. Ogni riga è una frase in francese; cerca queste parole, all’incirca nell’ordine di viaggio:
+Il sito e il tracciamento di Relais Colis sono solo in francese. Ogni riga è una frase in francese; cerca queste parole, all’incirca nell’ordine di viaggio:
 
 | Relais Colis dice | Cosa significa per te |
 | --- | --- |
@@ -46,7 +46,7 @@ Il sito e il tracciamento di Relais Colis sono solo in francese e non esiste un 
 
 **Avviso.** Quando il pacco arriva al punto scelto, Relais Colis invia un’e-mail o un SMS.
 
-**Tempo di giacenza.** 7 giorni lavorativi, cioè circa 9 giorni di calendario e fino a 11 attorno ai festivi (Relais Colis non conta lunedì, domeniche, giorni festivi né il martedì successivo a un festivo). Scaduto il termine, un ordine di negozio torna al negozio, mentre un pacco spedito da relaiscolis.com torna al punto di partenza.
+**Tempo di giacenza.** 7 giorni lavorativi, cioè circa 9 giorni di calendario e fino a 11 attorno ai festivi. Scaduto il termine, un ordine di negozio torna al negozio, mentre un pacco spedito da relaiscolis.com torna al punto di partenza.
 
 **Ritiro.** Mostra il codice QR oppure un documento d’identità (carta d’identità, passaporto o patente) se non hai ricevuto il QR.
 
@@ -78,9 +78,9 @@ Tutta l’assistenza su relaiscolis.com è solo in francese:
 
 ## Tracciare un pacco Relais Colis con Peek
 
-[Peek](/) riconosce subito i numeri che iniziano per `CC` come Relais Colis. Gli altri formati sono condivisi con altri corrieri, quindi Peek interroga prima i candidati compatibili: con 10 cifre chiede a DHL eCommerce Spagna, Packeta e BOX NOW, non a Relais Colis (e prima a [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki se torna la cifra di controllo di DHL Express); con i numeri `VD` chiede a Colis Privé, Relais Colis e altri corrieri compatibili. Con 14 cifre interroga Chronopost, DPD e altri, non Relais Colis, anche dalla Francia. Se più corrieri conoscono il numero, o nessuno, tocca «Cambia» e scegli «Relais Colis». Funziona anche un link di tracciamento di relaiscolis.com; non serve il codice postale.
+[Peek](/) riconosce subito i numeri che iniziano per `CC` come Relais Colis. Gli altri formati sono condivisi con altri corrieri, quindi Peek interroga prima i candidati compatibili: con 10 cifre chiede, tra gli altri, a DHL eCommerce Iberia, Packeta e BOX NOW, non a Relais Colis (e prima a [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki se torna la cifra di controllo di DHL Express); con i numeri `VD` chiede a Colis Privé, Relais Colis e altri corrieri compatibili. Con 14 cifre interroga Chronopost, DPD e altri, non Relais Colis, anche dalla Francia. Se più corrieri conoscono il numero, o nessuno, tocca «Cambia» e scegli «Relais Colis». Funziona anche un link di tracciamento di relaiscolis.com; non serve il codice postale.
 
-Peek mostra solo stato e cronologia: niente luogo sulla mappa, nessuna data stimata e nessun dettaglio del punto ritiro; elimina quei campi insieme a nome e indirizzo. I testi restano in francese così come scritti da Relais Colis; solo poche frasi esatte come `Livraison effectuée` vengono sostituite dall’etichetta di Peek («Consegnato»). Gli orari sono letti sull’ora di Parigi. Se l’ultimo stato di Relais Colis non ha un orario esatto, Peek prende la cronologia datata dai servizi di tracciamento e richiama Relais Colis ogni 6 ore. Altrimenti controlla fino a ogni 10 minuti, o ogni 2 minuti dalle 6:00 ora locale nel giorno in cui Relais Colis registra il pacco in consegna, e può inviarti notifiche. Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora.
+Peek mostra solo stato e cronologia: niente luogo sulla mappa, nessuna data stimata e nessun dettaglio del punto ritiro; elimina quei campi insieme a nome e indirizzo. I testi restano in francese così come scritti da Relais Colis; solo poche frasi esatte come `Livraison effectuée` vengono sostituite dall’etichetta di Peek («Consegnato»). Gli orari sono letti sull’ora di Parigi. Se una scansione di Relais Colis non ha l’orario, Peek cerca una cronologia datata presso i servizi di tracciamento. Peek controlla fino a ogni 10 minuti, e ogni 2 minuti dalle 6:00 ora di Parigi nel giorno in cui Relais Colis registra il pacco in consegna, mentre il pacco è aperto in Peek o nel giorno di consegna con le notifiche attive, quando la pagina di Relais Colis risponde, e può inviarti notifiche. Dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e dopo sette giorni senza novità su «Etichetta creata», ogni 6 ore.
 
 ## Domande sul tracciamento Relais Colis
 
@@ -91,10 +91,6 @@ Una rete francese che consegna pacchi in quasi 7.000 negozi partner secondo GLS,
 ### Perché il tracciamento Relais Colis non si muove?
 
 Relais Colis indica che gestisce gli incidenti di instradamento entro 15 giorni. Per un acquisto online, rivolgiti al negozio, che si interfaccia con Relais Colis.
-
-### Relais Colis consegna il sabato?
-
-Sì: per i pacchi spediti su relaiscolis.com, le condizioni indicano consegne dal martedì al sabato.
 
 ### Relais Colis consegna fuori dalla Francia?
 
@@ -111,7 +107,6 @@ No. Relais Colis precisa che al momento non consegna nei territori francesi d’
 - [Relais Colis: Acheminement bloqué](https://relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 giorni
 - [Relais Colis: Colis perdu](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – pacchi smarriti, e-mail
 - [Relais Colis: Colis abîmé](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – rifiuto, 3 e 5 giorni
-- [Relais Colis: Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – giorni lavorativi, giorni di consegna, QR, rimborso, mediatore
 - [Relais Colis: Besoin d'aide FAQ](https://relaiscolis.com/faq) – telefono, link reclami
 - [Relais Colis: Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – avviso frodi
 - [Relais Colis: Trouver un Relais](https://relaiscolis.com/relais/trouver) – ricerca punti ritiro

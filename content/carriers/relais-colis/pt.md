@@ -6,26 +6,26 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-A Relais Colis é uma rede francesa que entrega encomendas em lojas locais usadas como pontos de recolha e faz agora parte da [GLS France](carrier:gls-fr). Segue uma encomenda com o respetivo número na [página de seguimento da Relais Colis](https://relaiscolis.com/colis/suivre) ou colando-o na caixa acima. O número vem da loja que enviou o pedido ou do e-mail de confirmação da Relais Colis em envios entre particulares.
+A Relais Colis é uma rede francesa que entrega encomendas em lojas locais usadas como pontos de recolha e faz agora parte da [GLS France](carrier:gls-fr). Segue uma encomenda com o respetivo número na [página de seguimento da Relais Colis](https://relaiscolis.com/colis/suivre) ou colando-o na caixa acima. O número é dado por quem envia a encomenda.
 
 ## Número de seguimento Relais Colis («numéro de colis»)
 
-O formulário da Relais Colis pede um «numéro de colis» de 12 a 16 caracteres; o exemplo apresentado começa por `CC`. A Relais Colis não explica o significado das letras nem dos dígitos.
+O formulário da Relais Colis pede um «numéro de colis» de 12 a 16 caracteres. A Relais Colis não explica o significado das letras nem dos dígitos.
 
 | Formato (inventado) | O que deves saber |
 | --- | --- |
-| `CC4829103756` a `CC48291037561829` | `CC` e 10 a 14 dígitos: o formato usado no exemplo da própria Relais Colis. |
+| `CC4829103756` a `CC48291037561829` | `CC` e 10 a 14 dígitos: o Peek atribui-os de imediato à Relais Colis. |
 | `7482910375` | 10 dígitos. Também corresponde à DHL, [Mondial Relay](carrier:mondial-relay) e outras. |
 | `18492037164829` | 14 dígitos. Corresponde a DPD, SEUR, BRT, [Ciblex](carrier:ciblex) e outras; o Peek não pergunta à Relais Colis por este formato. |
 | `VD4829103756` | `VD` e 10 dígitos. Também coincide com a Colis Privé. |
 
-Entre particulares, a Relais Colis envia ao destinatário um e-mail de confirmação para acompanhar a encomenda; numa compra online, procura no e-mail de envio ou na página do pedido. Não tens número? A pesquisa «Je n’ai pas mon numéro de colis» usa o e-mail ou telefone do destinatário e o nome da loja; consulta também [como encontrar um número de seguimento](guide:find-tracking-number).
+Numa compra online, procura no e-mail de envio ou na página do pedido. Não tens número? A pesquisa «Je n’ai pas mon numéro de colis» usa o e-mail ou telefone do destinatário e o nome da loja; consulta também [como encontrar um número de seguimento](guide:find-tracking-number).
 
 Se a loja mencionar outra transportadora, o número deverá ser dela: vê [formatos de números de seguimento](guide:tracking-number-formats).
 
 ## Relais Colis suivi: o que significam os estados em francês
 
-O site e o seguimento da Relais Colis existem apenas em francês e não publicam uma tabela oficial de estados. Cada linha é uma frase em francês; procura estas expressões, mais ou menos por ordem:
+O site e o seguimento da Relais Colis existem apenas em francês. Cada linha é uma frase em francês; procura estas expressões, mais ou menos por ordem:
 
 | A Relais Colis indica | O que significa para ti |
 | --- | --- |
@@ -46,7 +46,7 @@ O site e o seguimento da Relais Colis existem apenas em francês e não publicam
 
 **Aviso.** Quando a encomenda chega ao ponto escolhido, a Relais Colis envia um e-mail ou SMS.
 
-**Prazo de guarda.** 7 dias úteis, cerca de 9 dias de calendário e até 11 junto a feriados (a Relais Colis não conta segundas-feiras, domingos, feriados nem a terça-feira seguinte a um feriado). Depois desse prazo, um pedido de loja regressa à loja e uma encomenda enviada por relaiscolis.com regressa ao ponto de origem.
+**Prazo de guarda.** 7 dias úteis, cerca de 9 dias de calendário e até 11 junto a feriados. Depois desse prazo, um pedido de loja regressa à loja e uma encomenda enviada por relaiscolis.com regressa ao ponto de origem.
 
 **Levantamento.** Mostra o código QR, ou um documento de identificação (cartão de cidadão, passaporte ou carta de condução) caso não tenhas recebido QR.
 
@@ -78,9 +78,9 @@ Todos os canais em relaiscolis.com funcionam apenas em francês:
 
 ## Seguir encomendas Relais Colis com o Peek
 
-O [Peek](/) reconhece imediatamente números `CC` como sendo da Relais Colis. Outros formatos são partilhados, pelo que o Peek consulta primeiro as transportadoras prováveis: em 10 dígitos pergunta à [DHL eCommerce Espanha](carrier:dhl-ecommerce-es), Packeta e BOX NOW, não à Relais Colis (e primeiro à [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki se o dígito de controlo da DHL Express bater certo); em números `VD`, consulta a Colis Privé, a Relais Colis e outras transportadoras compatíveis. Com 14 dígitos pergunta à Chronopost, DPD e outras, não à Relais Colis, mesmo em França. Se várias transportadoras reconhecerem o número, ou nenhuma, toca em «Alterar» e escolhe «Relais Colis». Uma ligação de seguimento de relaiscolis.com também funciona, sem código postal.
+O [Peek](/) reconhece imediatamente números `CC` como sendo da Relais Colis. Outros formatos são partilhados, pelo que o Peek consulta primeiro as transportadoras prováveis: em 10 dígitos pergunta, entre outras, à [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), Packeta e BOX NOW, não à Relais Colis (e primeiro à [DHL Express](carrier:dhl-express), ACS Courier e Geniki Taxydromiki se o dígito de controlo da DHL Express bater certo); em números `VD`, consulta a Colis Privé, a Relais Colis e outras transportadoras compatíveis. Com 14 dígitos pergunta à Chronopost, DPD e outras, não à Relais Colis, mesmo em França. Se várias transportadoras reconhecerem o número, ou nenhuma, toca em «Alterar» e escolhe «Relais Colis». Uma ligação de seguimento de relaiscolis.com também funciona, sem código postal.
 
-O Peek mostra apenas o estado e o histórico: sem localização no mapa, sem data prevista e sem detalhes do ponto de recolha, omitindo também nome e morada. Os textos mantêm-se em francês tal como escritos pela Relais Colis; apenas poucas frases exatas, como `Livraison effectuée`, são substituídas pela etiqueta do Peek («Entregue»). As horas são lidas na hora de Paris. Quando o último estado da Relais Colis não traz hora exata, o Peek usa o histórico datado de serviços de seguimento e volta a consultar a Relais Colis de 6 em 6 horas. Nos restantes casos verifica até de 10 em 10 minutos, ou de 2 em 2 a partir das 6h locais no dia em que a Relais Colis regista a encomenda em distribuição, e pode enviar notificações. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), passa a verificar de hora a hora.
+O Peek mostra apenas o estado e o histórico: sem localização no mapa, sem data prevista e sem detalhes do ponto de recolha, omitindo também nome e morada. Os textos mantêm-se em francês tal como escritos pela Relais Colis; apenas poucas frases exatas, como `Livraison effectuée`, são substituídas pela etiqueta do Peek («Entregue»). As horas são lidas na hora de Paris. Quando um registo da Relais Colis não traz hora, o Peek procura um histórico datado em serviços de seguimento. O Peek verifica até de 10 em 10 minutos, e de 2 em 2 minutos a partir das 6h, hora de Paris, no dia em que a Relais Colis regista a encomenda em distribuição, enquanto a encomenda estiver aberta no Peek ou no dia da entrega com as notificações ligadas, quando a página da Relais Colis responde, e pode enviar notificações. Após dois dias sem novidades (12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), passa a verificar de hora a hora, e após sete dias sem novidades em «Etiqueta criada», de 6 em 6 horas.
 
 ## Perguntas sobre o seguimento Relais Colis
 
@@ -91,10 +91,6 @@ Uma rede francesa que entrega encomendas em quase 7 000 lojas parceiras, segundo
 ### Porque não avança o meu seguimento Relais Colis?
 
 A Relais Colis diz tratar incidentes de encaminhamento no prazo de 15 dias. Numa compra online, pergunta à loja, que trata diretamente com a Relais Colis.
-
-### A Relais Colis entrega aos sábados?
-
-Sim: para encomendas enviadas através de relaiscolis.com, as condições indicam entregas de terça-feira a sábado.
 
 ### A Relais Colis entrega fora de França?
 
@@ -111,7 +107,6 @@ Não. A Relais Colis refere que, por agora, não entrega nos territórios france
 - [Relais Colis: Acheminement bloqué](https://relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 dias
 - [Relais Colis: Colis perdu](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – encomendas perdidas, e-mail
 - [Relais Colis: Colis abîmé](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – recusa, 3 e 5 dias
-- [Relais Colis: Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – dias úteis, dias de entrega, QR, compensação, mediador
 - [Relais Colis: Besoin d'aide FAQ](https://relaiscolis.com/faq) – telefone, ligação de reclamação
 - [Relais Colis: Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – alerta de fraude
 - [Relais Colis: Trouver un Relais](https://relaiscolis.com/relais/trouver) – pesquisa de pontos

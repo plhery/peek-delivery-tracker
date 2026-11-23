@@ -2152,6 +2152,54 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Freight tracking: ActiveTracing IDs, statuses & help",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "anserx-tracking",
+      "title": "AnserX tracking: BTYCN...YQ codes, handoffs & contacts",
+      "name": "AnserX",
+      "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "bjs-home-delivery-tracking",
+      "title": "BJS Home Delivery tracking: B-codes, 3-hour slots & help",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
+    },
+    {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "chukou1-tracking",
+      "title": "Chukou1 tracking: EC-FirstClass codes, handoffs & help",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "cj-packet-tracking",
+      "title": "CJ Packet tracking: CJP...YQ codes, handoffs & contacts",
+      "name": "CJ Packet",
+      "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "cmt-express-tracking",
+      "title": "CMT Express tracking: CMT codes, Shenzhen hub & contacts",
+      "name": "CMT Express",
+      "color": "#ed010b"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "correos-de-mexico-tracking",
+      "title": "Correos de México tracking: S10 MX codes, claims & help",
+      "name": "Correos de México",
+      "color": "#ed007d"
     }
   ],
   "de": [
@@ -10096,6 +10144,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Estafeta: guías, 2 intentos, reclamos y ayuda",
       "name": "Estafeta",
       "color": "#e30613"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "rastreo-correos-de-mexico",
+      "title": "Rastreo Correos de México: guías MX, ventanilla y reclamos",
+      "name": "Correos de México",
+      "color": "#ed007d"
     }
   ],
   "pt": [

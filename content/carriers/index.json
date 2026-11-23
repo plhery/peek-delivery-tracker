@@ -266,5 +266,11 @@
   { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en"] },
   { "id": "estafeta", "catalog": "estafeta", "name": "Estafeta", "languages": ["en", "es"] },
   { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu"] },
-  { "id": "dhl-freight", "catalog": "dhl-freight", "name": "DHL Freight", "languages": ["en", "de"] }
+  { "id": "dhl-freight", "catalog": "dhl-freight", "name": "DHL Freight", "languages": ["en", "de"] },
+  { "id": "anserx", "catalog": "anserx", "name": "AnserX", "languages": ["en"] },
+  { "id": "bjs-home-delivery", "catalog": "bjs-home-delivery", "name": "BJS Home Delivery", "languages": ["en"] },
+  { "id": "chukou1", "catalog": "chukou1", "name": "Chukou1", "languages": ["en"] },
+  { "id": "cj-packet", "catalog": "cj-packet", "name": "CJ Packet", "languages": ["en"] },
+  { "id": "cmt-express", "catalog": "cmt-express", "name": "CMT Express", "languages": ["en"] },
+  { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es"] }
 ]

@@ -261,5 +261,10 @@
   { "id": "a-tu-hora-express", "catalog": "a-tu-hora-express", "name": "A Tu Hora Express", "languages": ["en", "es"] },
   { "id": "dtdc", "catalog": "dtdc", "name": "DTDC", "languages": ["en"] },
   { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },
-  { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] }
+  { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] },
+  { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk"] },
+  { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en"] },
+  { "id": "estafeta", "catalog": "estafeta", "name": "Estafeta", "languages": ["en", "es"] },
+  { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu"] },
+  { "id": "dhl-freight", "catalog": "dhl-freight", "name": "DHL Freight", "languages": ["en", "de"] }
 ]

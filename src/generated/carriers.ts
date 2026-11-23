@@ -2112,6 +2112,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Korea Post tracking: EMS KR codes, 13-digit parcels & help",
       "name": "Korea Post",
       "color": "#da291c"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "nova-global-tracking",
+      "title": "Nova Global tracking: NPG & NGUS codes, customs and help",
+      "name": "Nova Global",
+      "color": "#da291c"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "xlcourier-tracking",
+      "title": "XLCourier tracking: XLC codes, heavy UK parcels and help",
+      "name": "XLCourier",
+      "color": "#044ad6"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "estafeta-tracking",
+      "title": "Estafeta tracking: 10- & 22-char codes, 2 attempts & help",
+      "name": "Estafeta",
+      "color": "#e30613"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "gls-hungary-tracking",
+      "title": "GLS Hungary tracking: parcel numbers, lockers and contacts",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "dhl-freight-tracking",
+      "title": "DHL Freight tracking: ActiveTracing IDs, statuses & help",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     }
   ],
   "de": [
@@ -4082,6 +4122,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FAN Courier International Tracking: AWB und Status",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "dhl-freight-sendungsverfolgung",
+      "title": "DHL Freight Sendungsverfolgung: ActiveTracing & Hilfe",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     }
   ],
   "fr": [
@@ -10040,6 +10088,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GOFO España: códigos GFES/CIES y ayuda",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "rastreo-estafeta",
+      "title": "Rastreo Estafeta: guías, 2 intentos, reclamos y ayuda",
+      "name": "Estafeta",
+      "color": "#e30613"
     }
   ],
   "pt": [
@@ -14466,6 +14522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL csomagkövetés Kínából: YL…YQ szám, státuszok",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "gls-magyarorszag-csomagkovetes",
+      "title": "GLS Hungary csomagkövetés: számok, automaták, segítség",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     }
   ],
   "ro": [
@@ -14796,6 +14860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Нова пошта відстеження: номер ЕН, статуси, зберігання",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "vidstezhennia-nova-global",
+      "title": "Відстеження Nova Global: коди NPG і NGUS, митниця, контакти",
+      "name": "Nova Global",
+      "color": "#da291c"
     }
   ],
   "sr": [

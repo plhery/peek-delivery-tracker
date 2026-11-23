@@ -14,8 +14,8 @@ M-ONE calls it the barcode number. Its tracker's box says "Order number": enter 
 
 | Number | What it is |
 | --- | --- |
-| `AA000000005RS` | Two letters, nine digits and `RS`, the [international postal format](guide:tracking-number-formats) with Serbia's code. The last digit is a check digit. |
-| `RS000000000000` | `RS` and 12 digits, another shape M-ONE's own tracker shows. |
+| `AA482917367RS` | Two letters, nine digits and `RS`, the [international postal format](guide:tracking-number-formats) with Serbia's code. The last digit is a check digit. |
+| `RS482917364058` | `RS` and 12 digits, another shape M-ONE's own tracker shows. |
 
 Pošta Srbije uses the same postal format, so a number ending in `RS` is not always M-ONE's: check the name in your shipping message. No number at all? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -44,7 +44,7 @@ M-ONE's tracker answers in Serbian, even on its English site. Peek keeps M-ONE's
 
 ## M-ONE delivery in Serbia
 
-M-ONE's current express service is "Today for Tomorrow": delivery by 7 PM on the next working day, to any address in Serbia. A sender's contract can set another time, up to 3 working days. In Belgrade, there's also a same-day service for parcels up to 30 kg. M-ONE works Monday to Friday. Saturdays, Sundays and public holidays are non-working days and don't count in delivery times.
+M-ONE's current express service is "Today for Tomorrow": delivery by 7 PM Serbian time on the next working day, to any address in Serbia. A sender's contract can set another time, up to 3 working days. In Belgrade, there's also a same-day service for parcels up to 30 kg. M-ONE works Monday to Friday. Saturdays, Sundays and public holidays are non-working days and don't count in delivery times.
 
 **Who can take the parcel.** You, someone you authorise, or an adult in your household, someone employed in your household, or a colleague at your workplace. You can also name a safe place in writing, by email, SMS or Viber. The parcel is then left there, at your risk.
 
@@ -70,9 +70,9 @@ M-ONE's current express service is "Today for Tomorrow": delivery by 7 PM on the
 
 ## M-ONE contact and customer service
 
-As read on m-one.rs on 2 November 2026:
+From m-one.rs:
 
-- **Phone:** 011 222 8 222 (+381 11 222 8 222 from abroad). The call centre answers on working days, 08:00 to 16:00. Have the parcel number ready.
+- **Phone:** 011 222 8 222 (+381 11 222 8 222 from abroad). The call centre answers on working days, 08:00 to 16:00 Serbian time. Have the parcel number ready.
 - **Complaints:** reklamacije@m-one.rs. For damage, M-ONE's FAQ says to call 011 222 8 222; its other terms of use (July 2024) give 011/2203547 for its complaints service.
 - **Customer service:** podrskaMone@milsped.com.
 - **General:** office@m-one.rs and info@m-one.rs.
@@ -86,9 +86,13 @@ The documents at the foot of m-one.rs include M-ONE's general terms and a compen
 
 A number starting with `C`, `E`, `L` or `R`, ending in `RS` and with a valid check digit is named [Pošta Srbije](carrier:posta-srbije) from its shape. If yours came from M-ONE, pick "M-ONE" with "Change". Peek names no carrier from `RS` and 12 digits, so pick "M-ONE" with "Change" there too. A link to M-ONE's tracker with a number of either shape after `?` (m-one.rs/en?…) can be pasted as well, and names M-ONE.
 
-Peek reads M-ONE's own tracker. You get the status and the history in M-ONE's Serbian words, the depot that handled each step and the parcel's weight. M-ONE gives its times without a time zone. Peek reads them on Serbian time and shows them in your device's time zone. M-ONE's tracker gives no expected delivery day and no pickup point, so Peek shows neither. The sender's and recipient's names are left out. A parcel filed under M-ONE shows "Waiting for M-ONE" until M-ONE knows the number, and Peek keeps checking.
+Peek reads M-ONE's own tracker. You get the status and the history in M-ONE's Serbian words, the depot where a scan names one, and the parcel's weight. M-ONE gives its times without a time zone. Peek reads them on Serbian time and shows them in your device's time zone. M-ONE's tracker gives no expected delivery day and no pickup point, so Peek shows neither. The sender's and recipient's names are left out. A parcel filed under M-ONE shows "Waiting for M-ONE" until M-ONE knows the number, and Peek keeps checking.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while M-ONE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't redirect a parcel, open a claim, or contact M-ONE or the shop for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Serbian time on the day the parcel goes out for delivery, while M-ONE's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking M-ONE.", with a "Get help from M-ONE" link to M-ONE's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking M-ONE."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't redirect a parcel, open a claim, or contact M-ONE or the shop for you.
 
 ## Questions about M-ONE tracking
 
@@ -98,7 +102,7 @@ Not quite: M-ONE, founded in 2020, is a subsidiary of Milšped Group. Its terms 
 
 ### How long does M-ONE take to deliver?
 
-With "Today for Tomorrow", M-ONE delivers by 7 PM on the next working day anywhere in Serbia. A sender's contract can allow up to 3 working days. Weekends and public holidays don't count.
+With "Today for Tomorrow", M-ONE delivers by 7 PM Serbian time on the next working day anywhere in Serbia. A sender's contract can allow up to 3 working days. Weekends and public holidays don't count.
 
 ### How long does M-ONE keep a parcel after a missed delivery?
 
@@ -110,7 +114,7 @@ In Serbian, it says the recipient will come for the parcel. The parcel waits at 
 
 ### What is M-ONE's phone number?
 
-011 222 8 222, or +381 11 222 8 222 from abroad, on working days from 08:00 to 16:00. For damage, call by the end of the next working day after delivery.
+011 222 8 222, or +381 11 222 8 222 from abroad, on working days from 08:00 to 16:00 Serbian time. For damage, call by the end of the next working day after delivery.
 
 :::sources
 - [M-ONE: Home](https://m-one.rs/en) – founded 2020, Milšped Group, network across Serbia, TRACK section and its messages, barcode number, "Today for Tomorrow", same-day service in Belgrade, returns, parcel lockers and parcel shops, business hours, info@ and customer service emails, documents

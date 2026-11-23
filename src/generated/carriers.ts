@@ -3356,6 +3356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0053a1"
     },
     {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "andreani-sendungsverfolgung",
+      "title": "Andreani Sendungsverfolgung: Nummern & Status Argentinien",
+      "name": "Andreani",
+      "color": "#d71920"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "mainfreight-sendungsverfolgung",
@@ -4822,6 +4830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0053a1"
     },
     {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "suivi-andreani",
+      "title": "Suivi Andreani\u00a0: numéros de colis et statuts en Argentine",
+      "name": "Andreani",
+      "color": "#d71920"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "suivi-mainfreight",
@@ -6256,6 +6272,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0053a1"
     },
     {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "tracciamento-andreani",
+      "title": "Tracciamento Andreani: numeri e stati in Argentina",
+      "name": "Andreani",
+      "color": "#d71920"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "tracciamento-mainfreight",
@@ -7666,6 +7690,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0053a1"
     },
     {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "seguimiento-andreani",
+      "title": "Seguimiento Andreani: números y estados en Argentina",
+      "name": "Andreani",
+      "color": "#d71920"
+    },
+    {
       "id": "mainfreight",
       "catalog": "mainfreight",
       "slug": "seguimiento-mainfreight",
@@ -9050,6 +9082,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento TForce Freight: números PRO e reclamações",
       "name": "TForce Freight",
       "color": "#0053a1"
+    },
+    {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "seguimento-andreani",
+      "title": "Seguimento Andreani: números e estados na Argentina",
+      "name": "Andreani",
+      "color": "#d71920"
     },
     {
       "id": "mainfreight",
@@ -10502,6 +10542,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie TForce Freight: numery PRO, statusy i szkody",
       "name": "TForce Freight",
       "color": "#0053a1"
+    },
+    {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "sledzenie-andreani",
+      "title": "Śledzenie Andreani: numery i statusy w Argentynie",
+      "name": "Andreani",
+      "color": "#d71920"
     },
     {
       "id": "mainfreight",

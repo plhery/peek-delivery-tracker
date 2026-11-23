@@ -2248,6 +2248,54 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Liccardi Express Courier tracking: LDV codes & support",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "maersk-ecommerce-tracking",
+      "title": "Maersk eCommerce tracking: 1M parcel codes & scan status",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "pdu-tracking",
+      "title": "PDU tracking: Parcel Delivery Union codes, statuses & help",
+      "name": "PDU",
+      "color": "#005cfe"
+    },
+    {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "post-haste-tracking",
+      "title": "Post Haste tracking: NZ tickets, consignment codes & help",
+      "name": "Post Haste",
+      "color": "#24b2d8"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "redur-tracking",
+      "title": "Redur tracking: 14-digit codes, Spain & Portugal statuses",
+      "name": "Redur",
+      "color": "#0c4c49"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "sengi-express-tracking",
+      "title": "Sengi Express tracking: China–Italy codes & Poste handoff",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "serpost-tracking",
+      "title": "Serpost tracking: Peru S10 codes, customs statuses & help",
+      "name": "Serpost",
+      "color": "#00308a"
     }
   ],
   "de": [
@@ -10208,6 +10256,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Correos de México: guías MX, ventanilla y reclamos",
       "name": "Correos de México",
       "color": "#ed007d"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "seguimiento-redur",
+      "title": "Seguimiento Redur: códigos de 14 dígitos, estados y ayuda",
+      "name": "Redur",
+      "color": "#0c4c49"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "seguimiento-serpost",
+      "title": "Seguimiento de Serpost: códigos S10, aduanas y contacto",
+      "name": "Serpost",
+      "color": "#00308a"
     }
   ],
   "pt": [

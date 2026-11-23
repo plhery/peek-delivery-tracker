@@ -242,7 +242,7 @@
   { "id": "sxw-express", "catalog": "sxw-express", "name": "SXW Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xuchuan-logistics", "catalog": "xuchuan-logistics", "name": "Xuchuan International Logistics", "languages": ["en"] },
   { "id": "samus", "catalog": "samus", "name": "SAMUS", "languages": ["en", "lt"] },
-  { "id": "siuntos-autobusais", "catalog": "siuntos-autobusais", "name": "Siuntos autobusais", "languages": ["en", "lt"] },
+  { "id": "siuntos-autobusais", "catalog": "siuntos-autobusais", "name": "Siuntos autobusais", "languages": ["en", "lt", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "zipasgo", "catalog": "zipasgo", "name": "ZipasGo", "languages": ["en", "lt"] },
   { "id": "dk-logistics-ee", "catalog": "dk-logistics-ee", "name": "DK Logistics", "languages": ["en", "et", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jet-express-ee", "catalog": "jet-express-ee", "name": "Jet Express", "languages": ["en", "et"] },

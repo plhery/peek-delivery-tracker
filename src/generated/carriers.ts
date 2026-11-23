@@ -3660,6 +3660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "siuntos-autobusais-sendungsverfolgung",
+      "title": "Siuntos autobusais Sendungsverfolgung: Buspakete in Litauen",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "dk-logistics-sendungsverfolgung",
@@ -5366,6 +5374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "suivi-siuntos-autobusais",
+      "title": "Suivi Siuntos autobusais\u00a0: colis par bus en Lituanie",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "suivi-dk-logistics",
@@ -7032,6 +7048,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "tracciamento-siuntos-autobusais",
+      "title": "Tracciamento Siuntos autobusais: pacchi in bus in Lituania",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "tracciamento-dk-logistics",
@@ -8682,6 +8706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "seguimiento-siuntos-autobusais",
+      "title": "Seguimiento Siuntos autobusais: paquetes en bus en Lituania",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
+    },
+    {
       "id": "dk-logistics-ee",
       "catalog": "dk-logistics-ee",
       "slug": "seguimiento-dk-logistics",
@@ -10314,6 +10346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SXW Express: números SXW, estados e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "seguimento-siuntos-autobusais",
+      "title": "Seguimento Siuntos autobusais: encomendas em autocarro",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
     },
     {
       "id": "dk-logistics-ee",
@@ -12006,6 +12046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SXW Express: numery SXW, statusy i dostawa",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "siuntos-autobusais",
+      "catalog": "siuntos-autobusais",
+      "slug": "sledzenie-siuntos-autobusais",
+      "title": "Śledzenie Siuntos autobusais: paczki autobusowe na Litwie",
+      "name": "Siuntos autobusais",
+      "color": "#00843d"
     },
     {
       "id": "dk-logistics-ee",

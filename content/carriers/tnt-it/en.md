@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-17
 ---
 
-TNT Italy is the TNT brand of FedEx Express Italy S.r.l., the single company TNT's and FedEx's Italian businesses became on 1 December 2022. A parcel sent within Italy travels on a waybill (*lettera di vettura*) of two letters and eight digits, such as `NA00000000`. Track it on [tnt.it's tracking page](https://www.tnt.it/tracking/Tracking.do), which carries FedEx's name. The waybill is in the sender's shipping confirmation, and on the "Lasciato avviso" card the courier leaves when you're out.
+TNT Italy is the TNT brand of FedEx Express Italy S.r.l., the single company TNT's and FedEx's Italian businesses became on 1 December 2022. A parcel sent within Italy travels on a waybill (*lettera di vettura*) of two letters and eight digits, such as `NA48291736`. Track it on [tnt.it's tracking page](https://www.tnt.it/tracking/Tracking.do), which carries FedEx's name. The waybill is in the sender's shipping confirmation, and on the "Lasciato avviso" card the courier leaves when you're out.
 
 ## TNT Italy waybill: what it looks like and where to find it
 
@@ -14,8 +14,8 @@ tnt.it wants the waybill with its two identifying letters in front. If one more 
 
 | What you have | What to type | Invented example |
 | --- | --- | --- |
-| Waybill: two letters and 8 digits | As it is | `NA00000000` |
-| Waybill with a dash and one more digit | The two letters and 8 digits only | `NA00000000-0` becomes `NA00000000` |
+| Waybill: two letters and 8 digits | As it is | `NA48291736` |
+| Waybill with a dash and one more digit | The two letters and 8 digits only | `NA48291736-3` becomes `NA48291736` |
 | International consignment (*Connote*): 9 digits | The 9 digits: tnt.it tracks it, but it's a [TNT](carrier:tnt) international shipment | None: TNT reuses these numbers |
 
 If you sent the parcel, tnt.it says the waybill is in your shipment confirmation email, in the notes you were sent or in the manifest. If you're receiving it, ask the sender, or look at the "Lasciato avviso" card: TNT prints the waybill on it. tnt.it takes several numbers at once, separated by commas. See also [how to find a tracking number](guide:find-tracking-number).
@@ -66,9 +66,9 @@ TNT Italy's Express service delivers the next working day in most Italian munici
 
 ## TNT Italy customer service number and complaints
 
-As read on TNT Italy's contact pages on 23 October 2026:
+TNT Italy's published channels:
 
-- **+39 02 3601 7467**: for any request, from Italy or abroad, at your phone operator's normal rates. Monday to Friday, 8:30 to 18:30, with operators in Italy.
+- **+39 02 3601 7467**: for any request, from Italy or abroad, at your phone operator's normal rates. Monday to Friday, 8:30 to 18:30 Italian time, with operators in Italy.
 - **800 123 868**: free from Italy, for formal complaints, quotes and delivery times.
 - **[Contattaci online](https://www.tnt.it/CustomerOnline/)**, a form open 24 hours a day: ask where a shipment is, request proof of delivery, open a complaint or rearrange a missed delivery.
 - **Web chat** on tnt.it, for tracking problems that need an operator.
@@ -77,9 +77,9 @@ As read on TNT Italy's contact pages on 23 October 2026:
 
 ## Tracking a TNT Italy parcel with Peek
 
-Paste the waybill as two letters and eight digits, without the dash and the digit after it. [Peek](/) asks TNT Italy about that shape, and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) too when it ends in 0, then shows "TNT Italy has this parcel." when TNT Italy knows the number. If TNT Italy doesn't come up, pick it with "Change", or "Change carrier" on the parcel. A tnt.it tracking link with `consigNos=` names TNT Italy straight away.
+Paste the waybill as two letters and eight digits (`NA48291736`), or with its dash and the digit after it (`NA48291736-3`). [Peek](/) asks TNT Italy about either shape, and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) too when the eight digits end in 0, or [GLS Italy](carrier:gls-it) for the dashed one, then shows "TNT Italy has this parcel." when TNT Italy knows the number. If TNT Italy doesn't come up, pick it with "Change", or "Change carrier" on the parcel. A tnt.it tracking link with `consigNos=` names TNT Italy straight away.
 
-Peek reads tnt.it's tracking, so scans stay in TNT's Italian words. It shows the status, the history with the depot tnt.it names for a scan, and the delivery time. It checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day TNT scans the parcel out for delivery, while TNT's own tracker answers (through tracking services, every 15 minutes), and can notify you with "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. The expected delivery date, origin and destination, number of parcels, the sender's reference and who signed stay on tnt.it. Peek can't follow a shipment tnt.it hands over to FedEx's site, and it doesn't switch to a replacement waybill: add the new one. It can't contact TNT or the sender for you.
+Peek reads tnt.it's tracking, so scans stay in TNT's Italian words. It shows the status, the history with the depot tnt.it names for a scan, and the delivery time. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks TNT Italy up to every 10 minutes, and up to every 2 minutes from 6 a.m. Italian time on the day TNT scans the parcel out for delivery, while TNT's own tracker answers; otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". After four days without a new scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking TNT Italy." and a "Get help from TNT Italy" link; after three weeks the note reads "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking TNT Italy." It can notify you of "Every scan", "Important steps" or "Delivery only". The expected delivery date, origin and destination, number of parcels, the sender's reference and who signed stay on tnt.it. Peek can't follow a shipment tnt.it hands over to FedEx's site, and it doesn't switch to a replacement waybill: add the new one. It can't contact TNT or the sender for you.
 
 ## Questions about TNT Italy tracking
 

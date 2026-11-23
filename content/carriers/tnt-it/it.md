@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-11-17
 ---
 
-In Italia TNT è oggi un marchio di FedEx Express Italy S.r.l., la società unica in cui TNT Italia e FedEx Italia si sono fuse il 1° dicembre 2022. Le spedizioni nazionali viaggiano con una lettera di vettura di due lettere e otto cifre, come `NA00000000`. Il pacco lo segui sulla [pagina di tracking di tnt.it](https://www.tnt.it/tracking/Tracking.do), che porta il nome FedEx. La lettera di vettura la trovi nella conferma di spedizione del mittente e sulla cartolina «Lasciato avviso», se il corriere passa e non ti trova.
+In Italia TNT è oggi un marchio di FedEx Express Italy S.r.l., la società unica in cui TNT Italia e FedEx Italia si sono fuse il 1° dicembre 2022. Le spedizioni nazionali viaggiano con una lettera di vettura di due lettere e otto cifre, come `NA48291736`. Il pacco lo segui sulla [pagina di tracking di tnt.it](https://www.tnt.it/tracking/Tracking.do), che porta il nome FedEx. La lettera di vettura la trovi nella conferma di spedizione del mittente e sulla cartolina «Lasciato avviso», se il corriere passa e non ti trova.
 
 ## Lettera di vettura TNT: com'è fatta e dove si trova
 
@@ -14,8 +14,8 @@ tnt.it vuole la lettera di vettura con le due lettere identificative davanti. Se
 
 | Cosa hai | Cosa inserire | Esempio inventato |
 | --- | --- | --- |
-| Lettera di vettura: due lettere e 8 cifre | Così com'è | `NA00000000` |
-| Lettera di vettura con trattino e una cifra in più | Solo le due lettere e le 8 cifre | `NA00000000-0` diventa `NA00000000` |
+| Lettera di vettura: due lettere e 8 cifre | Così com'è | `NA48291736` |
+| Lettera di vettura con trattino e una cifra in più | Solo le due lettere e le 8 cifre | `NA48291736-3` diventa `NA48291736` |
 | Spedizione internazionale (Connote): 9 cifre | Le 9 cifre: tnt.it la traccia, ma è della rete internazionale di TNT | Nessuno: TNT riutilizza questi numeri |
 
 Se hai spedito tu, tnt.it dice che la lettera di vettura è nella mail di conferma della spedizione, nelle note che ti sono arrivate o nel manifest. Se il pacco lo ricevi, chiedila al mittente o guarda la cartolina «Lasciato avviso»: TNT ci stampa sopra il numero. Su tnt.it puoi cercare più numeri insieme, separandoli con una virgola. Altri posti dove cercarla: [dove si trova il codice tracking](guide:find-tracking-number).
@@ -68,7 +68,7 @@ Il servizio Express di TNT consegna il giorno lavorativo dopo il ritiro nella ma
 
 ## TNT contatti: numero di telefono, modulo online e reclami
 
-Secondo le pagine di contatto di TNT Italia, al 23 ottobre 2026:
+I canali pubblicati da TNT Italia:
 
 - **02 36017467** (+39 02 36017467 dall'estero): per qualsiasi richiesta, dall'Italia o dall'estero, alla tariffa del tuo operatore. Dal lunedì al venerdì, 8:30–18:30, con operatori che rispondono dall'Italia.
 - **800 123 868**: gratuito dall'Italia, per reclami formali, preventivi e tempi di consegna.
@@ -79,9 +79,9 @@ Secondo le pagine di contatto di TNT Italia, al 23 ottobre 2026:
 
 ## Seguire un pacco TNT con Peek
 
-Incolla la lettera di vettura come due lettere e otto cifre, senza trattino né ultima cifra. Con questa forma [Peek](/) interroga TNT Italy, e anche DHL eCommerce Iberia se il numero finisce per 0, e scrive «TNT Italy ha questo pacco.» quando TNT lo conosce. Se TNT Italy non compare, sceglilo con «Cambia», o con «Cambia corriere» sul pacco. Se incolli un link di tracking di tnt.it con `consigNos=`, Peek riconosce subito TNT Italy.
+Incolla la lettera di vettura come due lettere e otto cifre (`NA48291736`), o con il trattino e la cifra che lo segue (`NA48291736-3`). [Peek](/) interroga TNT Italy, e anche [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) se le otto cifre finiscono per 0, o [GLS Italy](carrier:gls-it) nella forma con il trattino, e scrive «TNT Italy ha questo pacco.» quando TNT lo conosce. Se TNT Italy non compare, sceglilo con «Cambia», o con «Cambia corriere» sul pacco. Se incolli un link di tracking di tnt.it con `consigNos=`, Peek riconosce subito TNT Italy.
 
-Peek legge il tracking di tnt.it, quindi le scansioni restano nelle parole di TNT. Mostra lo stato, la cronologia con la filiale che tnt.it indica per una scansione e l'ora di consegna. Controlla fino a ogni 10 minuti, fino a ogni 2 quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di tnt.it; quando rispondono i servizi di tracciamento, ogni 15 minuti), e ti avvisa con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Data prevista di consegna, origine e destinazione, numero di colli, riferimento del mittente e firma restano su tnt.it. Peek non segue una spedizione che tnt.it rimanda al sito FedEx, e non passa da solo a una nuova lettera di vettura: aggiungila tu. Non può contattare TNT o il mittente al posto tuo.
+Peek legge il tracking di tnt.it, quindi le scansioni restano nelle parole di TNT. Mostra lo stato, la cronologia con la filiale che tnt.it indica per una scansione e l'ora di consegna. Finché hai il pacco aperto in Peek, o il giorno della consegna con le notifiche attive, Peek interroga TNT Italy fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6.00 ora italiana nel giorno in cui TNT scansiona il pacco in consegna, finché risponde il tracking di tnt.it; altrimenti ogni ora. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla una volta all'ora, e ogni 6 ore dopo sette giorni senza novità su «Etichetta creata». Dopo quattro giorni senza scansioni su un pacco in «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con il giorno dell'ultima scansione, «Nessun aggiornamento da …», la nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a TNT Italy.» e il link «Chiedi aiuto a TNT Italy»; dopo tre settimane la nota diventa «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a TNT Italy.» Ti avvisa con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Data prevista di consegna, origine e destinazione, numero di colli, riferimento del mittente e firma restano su tnt.it. Peek non segue una spedizione che tnt.it rimanda al sito FedEx, e non passa da solo a una nuova lettera di vettura: aggiungila tu. Non può contattare TNT o il mittente al posto tuo.
 
 ## Domande sul tracking TNT
 

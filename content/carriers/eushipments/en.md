@@ -14,7 +14,7 @@ euShipments publishes no number format. It says that once the order is processed
 
 | Number | What it is |
 | --- | --- |
-| `12345678` | Eight digits: the only shape Peek has seen on euShipments' tracker, for an order delivered in Bulgaria. The courier there delivered it under the same number. |
+| `74829103` | Eight digits: the only shape Peek has seen on euShipments' tracker, for an order delivered in Bulgaria. The courier there delivered it under the same number. |
 | The number after "Tracking Number:" | The local courier's own number, shown on euShipments' result once the courier has the parcel. The courier's own tracker takes it. |
 
 Eight digits also fit [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) and [Heppner](carrier:heppner), so the number alone doesn't say euShipments: check which company the shop's email names. A link to euShipments' tracking page won't open your order: the page takes the number only through its form. No number at all? See [how to find a tracking number](guide:find-tracking-number).
@@ -68,7 +68,7 @@ Its home page shows couriers' logos among its "Key eCommerce partnerships", incl
 
 ## euShipments contact number and customer service
 
-As read on 28 October 2026, euShipments lists:
+euShipments lists:
 
 - **Phone**: +359 700 70 755, a Bulgarian number, on its contact, FAQ and tracking pages. euShipments gives no hours.
 - **Email**: office@eushipments.com.
@@ -82,7 +82,7 @@ Its FAQ, written for shops, says it offers their customers phone, email and live
 
 Peek reads euShipments' tracker. It shows the status, the history, and for warehouse and hub lines the place, with the country for hubs. It keeps euShipments' English status and leaves out the courier's wording from "Tracking Information". When the "Tracking Link:" goes to the tracker of a courier Peek can follow, such as [Econt](carrier:econt), Sameday, FAN Courier, [Packeta](carrier:packeta), Slovenská pošta or Geniki Taxydromiki, with the courier's number in the link, Peek shows "Delivery with" that courier, and the courier's number when it differs from yours. While that courier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. It asks the courier, and follows the parcel there once the courier's tracker shows dated progress at least as recent as euShipments' latest line, keeping euShipments' lines. Otherwise it stays on euShipments' history.
 
-euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while euShipments' own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact euShipments, the shop or the courier for you.
+euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks euShipments directly up to every 10 minutes, or every 2 minutes from 6 a.m. on the latest scan's clock on the day the parcel goes out for delivery, while euShipments' own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking euShipments." and a "Get help from euShipments" link. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact euShipments, the shop or the courier for you.
 
 ## Questions about euShipments tracking
 

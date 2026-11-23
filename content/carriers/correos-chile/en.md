@@ -14,9 +14,9 @@ Peek knows two shapes for Correos de Chile. With invented digits:
 
 | Number (invented) | What it is |
 | --- | --- |
-| `RR000000005CL` | Two letters, nine digits and `CL`, the code for Chile: an item Correos de Chile numbered, in the [international postal format](guide:tracking-number-formats). The two letters in front vary. The last of the nine digits is a check digit. |
-| `0000000000000` | 13 digits: Peek's other shape for Correos de Chile, but only a weak match. DPD France, Yunda and other carriers use 13 digits too. |
-| `RR000000005CN` | Ends in other letters, here `CN`: another country's post numbered it, here [China Post](carrier:china-post). Peek follows it with that post. |
+| `RR482910372CL` | Two letters, nine digits and `CL`, the code for Chile: an item Correos de Chile numbered, in the [international postal format](guide:tracking-number-formats). The two letters in front vary. The last of the nine digits is a check digit. |
+| `7394028156342` | 13 digits: Peek's other shape for Correos de Chile, but only a weak match. DPD France, Yunda and other carriers use 13 digits too. |
+| `RR482910372CN` | Ends in other letters, here `CN`: another country's post numbered it, here [China Post](carrier:china-post). Peek follows it with that post. |
 
 Spaces and lower case don't matter when you paste a number into Peek. Can't find yours? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -55,7 +55,7 @@ Was your parcel sent from Chile with a `CL` number? Once it has left Chile, chec
 
 **Stuck at customs.** The last line is `ENVÍO EN PROCESO DE INTERNACIÓN AL PAÍS`, and Peek flags the parcel as "Customs clearance". Customs may be checking the parcel, or waiting for a document or a payment: Correos de Chile tells you when something is needed.
 
-**Quiet for days.** When a parcel at "Received by carrier" or "In transit" has had no new step for four days, Peek flags it with the day of that step ("No tracking update since Mon 12 Oct"). Parcels often go quiet on long flights or over a weekend. After three weeks with no new step, Peek says instead "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
+**Quiet for days.** When a parcel at "Label created", "Received by carrier" or "In transit" has had no new step for four days, Peek flags it with the day of that step ("No tracking update since Mon 12 Oct") and a "Get help from Correos de Chile" link. Parcels often go quiet on long flights or over a weekend. After three weeks with no new step, Peek says instead "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller."
 
 **Delivered, but nothing came.** Ask your neighbours and the delivery office, then the sender. See [delivered but not received](guide:delivered-not-received).
 
@@ -63,7 +63,7 @@ Was your parcel sent from Chile with a `CL` number? Once it has left Chile, chec
 
 ## Correos de Chile customer service and contact
 
-As of 1 November 2026, Peek couldn't read Correos de Chile's website, so this page lists no phone number or office hours: Peek gives only contacts read on official pages. For a parcel going through customs by post, Chile's customs service tells you to check where it stands on www.correos.cl or to write to sac@correos.cl.
+Peek couldn't read Correos de Chile's website, so this page lists no phone number or office hours: Peek gives only contacts read on official pages. For a parcel going through customs by post, Chile's customs service tells you to check where it stands on www.correos.cl or to write to sac@correos.cl.
 
 For an online order, ask the shop first: it booked the delivery.
 
@@ -71,13 +71,13 @@ For an online order, ask the shop first: it booked the delivery.
 
 [Peek](/) recognises two letters, nine digits and `CL` as Correos de Chile when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check your shipping email, or choose "Track it as typed".
 
-A 13-digit number isn't Correos de Chile's by shape alone. Paste it all the same: Peek follows more than 4,500 carriers. If you add it without a carrier, Peek asks other carriers that use 13 digits, such as Delhivery or Ukrposhta, and tracking services ("Checking tracking services…"), but not Correos de Chile. It files the parcel under Correos de Chile only if a tracking service names it, and no other carrier, with dated steps. So if the shop says Correos de Chile, press "Change" and pick it under "Fits this number", or use "Change carrier" on a parcel you've already added. A number another post issued, such as one ending in `CN`, isn't Correos de Chile's: if you pick Correos de Chile for it, Peek says it "doesn’t issue numbers like this one".
+A 13-digit number isn't Correos de Chile's by shape alone. Paste it all the same: Peek follows more than 4,500 carriers. If you add it without a carrier, Peek asks FAN Courier first (with Paquetexpress from Mexico), then tracking services ("Checking tracking services…") and, only if none knows the number, other carriers that use 13 digits, such as Delhivery, Econt or Ozon, but never Correos de Chile. It files the parcel under Correos de Chile only if a tracking service names it, and no other carrier, with dated steps. So if the shop says Correos de Chile, press "Change" and pick it under "Fits this number", or use "Change carrier" on a parcel you've already added. A number another post issued, such as one ending in `CN`, isn't Correos de Chile's: if you pick Correos de Chile for it, Peek says it "doesn’t issue numbers like this one".
 
 Filed under Correos de Chile, a parcel shows "Waiting for Correos de Chile" until its first step. Peek then reads Correos de Chile's own tracker and shows the lines it knows in their Spanish wording, with the office, under its own stages, such as "Received by carrier" or "At customs". It leaves out the recipient's name, and shows no expected delivery date. Correos de Chile's times carry no time zone: Peek reads each one on the local clock of the office it names, or of the steps around it. When Correos de Chile's tracker doesn't answer, Peek asks tracking services instead, 17TRACK first, and shows their copy in their own words.
 
-When you track a `CL` number from outside Chile, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK (Parcelforce for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, [Correos](carrier:correos-spain) from Spain, [Correios](carrier:correios-br) from Brazil, and the posts of every other EU country, Argentina and Peru, among others. It switches to that post once it has a step at least as recent as Correos de Chile's newest, and keeps Correos de Chile's history. From Mexico or China it asks no other post. The other way round, Peek can't look up a parcel sent to Chile under another post's number on Correos de Chile's tracker: it follows it under the post that numbered it.
+When you track a `CL` number from outside Chile, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK (Parcelforce for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, [Correos](carrier:correos-spain) from Spain, [Correios](carrier:correios-br) from Brazil, and the posts of the other EU countries except the Netherlands, Argentina and Peru, among others. It switches to that post once it has a step at least as recent as Correos de Chile's newest, and keeps Correos de Chile's history. From Mexico or China it asks no other post. The other way round, Peek can't look up a parcel sent to Chile under another post's number on Correos de Chile's tracker: it follows it under the post that numbered it.
 
-Peek checks up to every 10 minutes, more often once the parcel is out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Correos de Chile, your post or the shop for you.
+When you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks Correos de Chile up to every 10 minutes, and on the day it is out for delivery, from 6 a.m. on the clock of its latest scan (Chile time in Chile), up to every 2 minutes, or every 5 when the lookup opens a browser, while Correos de Chile's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created" or with no step at all, every 6 hours. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Correos de Chile, your post or the shop for you.
 
 ## Questions about Correos de Chile tracking
 
@@ -99,7 +99,7 @@ The parcel may be at customs, on a flight, or not handed over yet. Sent abroad? 
 
 ### What does a Correos de Chile tracking number look like?
 
-Two letters, nine digits and `CL`, such as `RR000000005CL`, or 13 digits. Peek recognises the first by its shape; for the second, pick Correos de Chile with "Change".
+Two letters, nine digits and `CL`, such as `RR482910372CL`, or 13 digits. Peek recognises the first by its shape; for the second, pick Correos de Chile with "Change".
 
 :::sources
 - [Servicio Nacional de Aduanas: Compras online](https://www.aduana.cl/aduana/site/edic/base/port/comercio_electronico.html) – postal orders through Correos de Chile, couriers for others

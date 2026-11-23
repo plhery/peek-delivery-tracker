@@ -14,10 +14,10 @@ Pošta Slovenije calls it the acceptance number (*sprejemna številka*). It has 
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `CA000000005SI` | A parcel: parcels start with `CA` to `CZ`. |
-| `RR000000005SI` | A registered letter: `RA` to `RZ`. |
-| `EE000000005SI` | Express mail: `EA` to `EZ`. |
-| `RR000000005CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
+| `CA482910372SI` | A parcel: parcels start with `CA` to `CZ`. |
+| `RR482910372SI` | A registered letter: `RA` to `RZ`. |
+| `EE482910372SI` | Express mail: `EA` to `EZ`. |
+| `RR482910372CN` | An item from abroad keeps the foreign post's number, ending in the country it came from. |
 
 You'll usually find it in the sender's message. Pošta Slovenije's own SMS (sender "Paketomat" or "POSTA") and @posta.si emails carry it too. Parcels addressed with your phone number also appear in MojaPošta's "Moji paketi" (My Parcels) list. Lost it? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -37,12 +37,11 @@ The tracker shows each step in Slovenian, or in English with its language switch
 | `Unsuccessful delivery attempt` | It could not be delivered, or was not collected. Read the next step below it. |
 | `The item is ready for pickup at the post office` | It waits at the post office the step names. |
 | `Unsuccessful delivery` | Nobody collected it from the parcel locker in time: it moves to a post office. |
-| `The item was delivered to the mailbox / P.O. box` | Delivered. |
+| `The item was delivered to the mailbox / P.O. box` | Delivered; after a return, delivered to the sender. |
 | `The item has been picked up` | Delivered: handed over at the address or to the recipient. |
 | `Unsuccessful delivery attempt. Item is being returned to the sender` | Not collected: it is going back to the sender. |
-| `The item has been delivered to the sender` | Returned: the sender has it back. |
 
-`Unsuccessful delivery attempt` means either nobody was in (next step: `The item will be redirected to the post office`) or nobody picked it up; the line below tells you which. `The item was delivered to the mailbox / P.O. box` also appears for a parcel handed over in person, with `The item was delivered to the doorstep` below. And `The item has been picked up`, like the summary label `Picked up`, means the parcel reached its recipient, not that a courier collected it.
+`Unsuccessful delivery attempt` means either nobody was in (next step: `The item will be redirected to the post office`) or nobody picked it up; the line below tells you which. `The item was delivered to the mailbox / P.O. box` also appears for a parcel handed over in person, with `The item was delivered to the doorstep` below. And `The item has been picked up` means the parcel reached its recipient, not that a courier collected it.
 
 ## Delivery, PS Paketomat and post office pickup
 
@@ -50,7 +49,7 @@ If nobody is home, the postman leaves a notice saying where the item waits and u
 
 - **MojPaket parcels** (sent under a contract with Pošta Slovenije): 8 days at the post office, counted from the day after the notice.
 - **Universal postal items**: 15 days, unless a sender abroad set a shorter period.
-- **PS Paketomat lockers** (more than 300, open around the clock, code by SMS): 60 hours, then 5 days at a post office.
+- **PS Paketomat lockers** (more than 450, open around the clock, code by SMS): 60 hours, then 5 days at a post office.
 
 After that, the parcel goes back to the sender.
 
@@ -68,9 +67,9 @@ Pošta Slovenije delivers most domestic items the day after posting (D+1), at th
 
 ## Pošta Slovenije contact and customer service
 
-Pošta Slovenije's channels, as posta.si listed them in October 2026:
+Pošta Slovenije's channels, as posta.si lists them:
 
-- **Contact centre:** 080 14 00, free from Slovenia, Monday to Friday 7.00 to 17.00.
+- **Contact centre:** 080 14 00, free from Slovenia, Monday to Friday 7.00 to 17.00 Slovenian time.
 - **Phone:** +386 2 449 20 00 (on the English contact page).
 - **Email:** info@posta.si; sledenje.posiljk@posta.si for tracking; PomocMojaPosta@posta.si for the app and tracker.
 - **Pio**, Pošta Slovenije's virtual assistant, and the "Have a question?" form on en.posta.si.
@@ -81,9 +80,9 @@ Pošta Slovenije's channels, as posta.si listed them in October 2026:
 
 A postal number ending `SI` that starts with C, E, L or R and has a valid check digit is Pošta Slovenije's by its shape, so [Peek](/) names Pošta Slovenije straight away. For one with other letters, Peek asks Pošta Slovenije (and [Chronopost](carrier:chronopost)) at once and shows "Pošta Slovenije has this parcel." when it knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Pošta Slovenije isn't asked, and its lookup refuses the number even when picked by hand: check it for a typo. A moja.posta.si tracking link can be pasted too, and always names Pošta Slovenije.
 
-An item from abroad keeps its foreign post's number. When the foreign post says it's coming to Slovenia, or names no destination and you track it from Slovenia, Peek asks Pošta Slovenije too and follows the parcel there once Pošta Slovenije shows fresh progress; the foreign post's steps stay. Pošta Slovenije's lookup takes any postal number, so you can also pick "Pošta Slovenije" with "Change", or paste a moja.posta.si tracking link for it.
+An item from abroad keeps its foreign post's number. When the foreign post says it's coming to Slovenia, or names no destination and you track it from Slovenia, Peek asks Pošta Slovenije too and follows the parcel there once Pošta Slovenije shows a scan no older than the foreign post's newest; the foreign post's steps stay. Pošta Slovenije's lookup takes any postal number, so you can also pick "Pošta Slovenije" with "Change", or paste a moja.posta.si tracking link for it.
 
-Peek reads the service behind the MojaPošta app, checks up to every 10 minutes (every 2 from 6 a.m. local time on the day Pošta Slovenije scans the parcel out for delivery, while Pošta Slovenije's own tracker answers; through tracking services, every 15 minutes) and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock. Statuses keep Pošta Slovenije's English wording, detail line included.
+Peek reads the service behind the MojaPošta app. While you have the parcel open in Peek, or on its delivery day with notifications on, Peek asks Pošta Slovenije directly up to every 10 minutes, or every 2 minutes from 6 a.m. Slovenian time on the day Pošta Slovenije scans the parcel out for delivery, while its tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly; after seven days without news at "Label created", every 6 hours. After four days without a scan on a parcel at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …", the note "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Pošta Slovenije." and a "Get help from Pošta Slovenije" link. It can notify you of "Every scan", "Important steps" or "Delivery only". Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock, or on Slovenian time in a country with several time zones such as the US, which can put it hours off. Statuses keep Pošta Slovenije's English wording, detail line included.
 
 ## Questions about Pošta Slovenije tracking
 
@@ -106,7 +105,7 @@ Yes, with its postal number: the tracker shows items from abroad once they reach
 :::sources
 - [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – English tracker, number shape, two-month window, statuses, help contact
 - [Post of Slovenia: PS Paketomat](https://en.posta.si/home/postal-services-/receiving-mail/ps-paketomat) – locker code by SMS, 60 hours, 5 days at a post office, return
-- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 hours a day, more than 300 lockers, cash on delivery
+- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 hours a day, more than 450 lockers, cash on delivery
 - [Pošta Slovenije: Splošni pogoji PS Paketomat](https://www.posta.si/zasebno-site/Documents/Splosni%20pogoji%20PS%20Paketomat.pdf) – in force since 1 April 2026: 60 hours for every item in a locker
 - [Post of Slovenia: My Delivery – My Choice](https://en.posta.si/home/postal-services-/receiving-mail/my-delivery-my-choice) – changing the delivery point
 - [Pošta Slovenije: Moja dostava, moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – link through the MojaPošta app, Viber or SMS, mobile number condition

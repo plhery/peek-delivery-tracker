@@ -14,10 +14,10 @@ Pošta Slovenije številki za sledenje pravi sprejemna številka, v pomoči za M
 
 | Številka (izmišljena) | Kaj je |
 | --- | --- |
-| `CA000000005SI` | Paket: paketi imajo oznake od `CA` do `CZ`. |
-| `RR000000005SI` | Priporočeno pismo: od `RA` do `RZ`. Vrednostna pisma imajo oznake od `VA` do `VZ`. |
-| `EE000000005SI` | Hitra pošta: od `EA` do `EZ`. |
-| `RR000000005CN` | Pošiljka iz tujine: ohrani številko tuje pošte z oznako države, iz katere prihaja (tu `CN`, Kitajska). |
+| `CA482910372SI` | Paket: paketi imajo oznake od `CA` do `CZ`. |
+| `RR482910372SI` | Priporočeno pismo: od `RA` do `RZ`. Vrednostna pisma imajo oznake od `VA` do `VZ`. |
+| `EE482910372SI` | Hitra pošta: od `EA` do `EZ`. |
+| `RR482910372CN` | Pošiljka iz tujine: ohrani številko tuje pošte z oznako države, iz katere prihaja (tu `CN`, Kitajska). |
 
 Druga oznaka države pomeni drugo pošto: `…HR` je [hrvaška](carrier:hrvatska-posta), `…AT` [avstrijska](carrier:austrian-post), `…CN` [kitajska pošta](carrier:china-post). Ko tako pošiljko prevzame Pošta Slovenije, v Sledenju pošiljk pod isto številko vidite tudi korake v Sloveniji.
 
@@ -42,7 +42,7 @@ Sledenje pošiljk korake privzeto izpiše v slovenščini, s preklopom na EN pa 
 | `Unsuccessful delivery attempt` | Dostava ni uspela ali pošiljke niste prevzeli. Nadaljevanje pove, kaj sledi, na primer `The item will be redirected to the post office`. |
 | `The item is ready for pickup at the post office` | Pošiljka vas čaka na pošti, ki jo navaja korak. |
 | `Unsuccessful delivery` | Paketa niste pravočasno prevzeli iz PS Paketomata, zato gre na pošto. |
-| `The item was delivered to the mailbox / P.O. box` | Dostavljeno v hišni predalčnik ali poštni predal. Če sledi `The item was delivered to the doorstep`, je bil paket izročen na vašem naslovu. |
+| `The item was delivered to the mailbox / P.O. box` | Dostavljeno v hišni predalčnik ali poštni predal, po vračilu pa pošiljatelju. Če sledi `The item was delivered to the doorstep`, je bil paket izročen na vašem naslovu. |
 | `The item has been picked up` | Pošiljka je bila prevzeta (podrobnost: `The item was picked up at the post office`), torej je dostavljena. Ne pomeni, da jo je prevzel kurir. |
 | `Unsuccessful delivery attempt. Item is being returned to the sender` | Pošiljke niste prevzeli v roku, zato se vrača pošiljatelju. |
 
@@ -60,7 +60,7 @@ Korak o dostavi po vračilu pomeni, da je paket spet pri pošiljatelju. Če se s
 
 Roki se štejejo v koledarskih dneh od dneva po obvestilu. Ko rok poteče, se pošiljka vrne pošiljatelju.
 
-**PS Paketomat.** V Sloveniji je več kot 300 PS Paketomatov, ki delujejo 24 ur na dan. Predal odprete s QR-kodo ali PIN-kodo iz obvestila, ki ga dobite po SMS-u, e-pošti ali v aplikaciji MojaPošta. V paketomatu lahko prevzamete tudi pošiljko z odkupnino ali označeno vrednostjo do 500 EUR: odkupnino plačate prek povezave PayByLink v obvestilu, s kartico, Flikom ali Valu-jem, nato dobite kodo za prevzem.
+**PS Paketomat.** V Sloveniji je več kot 450 PS Paketomatov, ki delujejo 24 ur na dan. Predal odprete s QR-kodo ali PIN-kodo iz obvestila, ki ga dobite po SMS-u, e-pošti ali v aplikaciji MojaPošta. V paketomatu lahko prevzamete tudi pošiljko z odkupnino ali označeno vrednostjo do 500 EUR: odkupnino plačate prek povezave PayByLink v obvestilu, s kartico, Flikom ali Valu-jem, nato dobite kodo za prevzem.
 
 **Moja dostava – moja izbira.** Paket lahko preusmerite tudi, ko je že na poti: v PS Paketomat, na pošto, na bencinski servis Petrol (z doplačilom po Petrolovem ceniku), v paketnik Direct4.me, na drug naslov v Sloveniji ali na dogovorjeno mesto (terasa, balkon, garaža, lopa, pred vhodom), lahko pa izberete enega od treh ponujenih datumov dostave. Povezavo dobite prek aplikacije MojaPošta, Vibra ali SMS-a, zato ob spletnem nakupu navedite svojo mobilno številko. V MojiPošti v razdelku Moji paketi izberite paket in nato Preusmeri paket. Preusmeritev ni mogoča, ko je paket že v končni fazi dostave, pri dodatnih storitvah ali posebnih zahtevah pošiljatelja, pri preveliki teži ali merah in pri odkupnini nad 500 EUR.
 
@@ -76,7 +76,7 @@ Večina pošiljk je po Sloveniji dostavljena naslednji dan po oddaji (D+1), najk
 
 ## Kontakt in pomoč Pošte Slovenije
 
-Kot je posta.si navajala 25. oktobra 2026:
+Kot navaja posta.si:
 
 - **Kontaktni center:** 080 14 00 (brezplačna številka) ali +386 2 449 20 00, od ponedeljka do petka od 7.00 do 17.00; ob sobotah, nedeljah in praznikih je zaprt.
 - **E-pošta:** info@posta.si; za sledenje sledenje.posiljk@posta.si; za MojoPošto PomocMojaPosta@posta.si; za uvoz info.carinska@posta.si.
@@ -91,7 +91,7 @@ Kot je posta.si navajala 25. oktobra 2026:
 
 Pošiljko iz tujine Peek najprej spremlja pri tuji pošti. Če ta kot namembno državo navede Slovenijo ali je sploh ne navede, vi pa pošiljko dodate iz Slovenije, Peek isto številko preveri še pri Pošti Slovenije. Ko ta pokaže korak, ki ni starejši od zadnjega koraka tuje pošte, Peek pošiljko naprej spremlja pri njej, zgodovina tuje pošte pa ostane. Pošto Slovenije lahko pod »Change« izberete tudi sami, saj njeno iskanje sprejme vsako poštno številko te oblike.
 
-Peek bere storitev, na kateri deluje aplikacija MojaPošta. Pošiljko preveri največ enkrat na 10 minut, ko je v dostavi največ enkrat na 2 minuti (le na dan dostave, od 6. ure zjutraj po slovenskem času in dokler odgovarja sama Pošta Slovenije; prek storitev za sledenje vsakih 15 minut), in vas lahko obvesti, ko se status spremeni. Če dva dni ni novic (ali 12 ur, dokler je pošiljka šele prijavljena ali oddana prevozniku), jo Peek preverja le še enkrat na uro. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času in jih prikaže v časovnem pasu vaše naprave.
+Peek bere storitev, na kateri deluje aplikacija MojaPošta. Dokler imate pošiljko odprto v Peeku ali na dan dostave z vklopljenimi obvestili, jo Peek pri Pošti Slovenije preveri največ enkrat na 10 minut, ko je v dostavi pa največ enkrat na 2 minuti (le na dan dostave, od 6. ure zjutraj po slovenskem času in dokler odgovarja sama Pošta Slovenije), in vas lahko obvesti, ko se status spremeni. Če dva dni ni novic (ali 12 ur, dokler je pošiljka šele prijavljena ali oddana prevozniku), jo Peek preverja le še enkrat na uro, po sedmih dneh brez novic pri »Label created« pa vsakih 6 ur. Če pošiljka pri »Label created«, »Received by carrier« ali »In transit« štiri dni nima novega koraka, Peek pokaže »No tracking update since …«, opombo »Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Pošta Slovenije.« in povezavo »Get help from Pošta Slovenije«. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času (v državi z več časovnimi pasovi, kot so ZDA, po slovenskem, kar je lahko več ur narobe) in jih prikaže v časovnem pasu vaše naprave.
 
 ## Vprašanja o sledenju pošiljk Pošte Slovenije
 
@@ -119,7 +119,7 @@ Sledenje pošiljk številke ne pozna. Preverite, ali ste jo vpisali pravilno, in
 - [Pošta Slovenije: Sledenje pošiljk (MojaPošta)](https://moja.posta.si/tracking) – 13-mestna sprejemna številka, dva meseca, preklop SI/EN, sporočila o napaki in nepopolnih podatkih, doplačilo za Petrol
 - [Pošta Slovenije: MojaPošta – Center za pomoč](https://www.posta.si/zasebno/mojaposta/center-za-pomoc) – sledilna številka, Moji paketi za 60 dni, obvestilo s QR-kodo in PIN-om, Preusmeri paket in omejitve, Pio, PomocMojaPosta@posta.si
 - [Pošta Slovenije: Priročnik za pravilno opremo paketov](https://www.posta.si/poslovno-site/Documents/Prirocnik-za-pravilno-opremo-malih-poslovnih-paketov-poslovnih-paketov-PPIN-PPVD-palet-in-tovora.pdf) – sestava sprejemne številke, oznake za pakete, hitro pošto, priporočena in vrednostna pisma
-- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – več kot 300, 24 ur na dan, koda v SMS-u, 60 ur, 5 dni na izročilni pošti, 500 EUR, PayByLink
+- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – več kot 450, 24 ur na dan, koda v SMS-u, 60 ur, 5 dni na izročilni pošti, 500 EUR, PayByLink
 - [Pošta Slovenije: Moja dostava – moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – možnosti preusmeritve, povezava v MojiPošti, Vibru ali SMS-u, mobilna številka
 - [Pošta Slovenije: Pooblastilo za prevzem pošiljk](https://www.posta.si/zasebno/postne-storitve/prejemanje/pooblastilo-za-prevzem-posiljk) – overjeno in neoverjeno pooblastilo, hrbtna stran obvestila o prispeli pošiljki
 - [Pošta Slovenije: Splošni pogoji izvajanja univerzalne poštne storitve](https://www.posta.si/Documents/Zakoni%20in%20splo%c5%a1ni%20pogoji/Splo%c5%a1ni%20pogoji%20izvajanja%20univerzalne%20po%c5%a1tne%20storitve.pdf) – izvajalec univerzalne storitve, istovetnost, vročitev, obvestilo, P-71, 15 dni, reklamacija, odgovor, AKOS, naslovnikova odškodnina

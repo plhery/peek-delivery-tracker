@@ -91,9 +91,9 @@ Siuntos autobusais non ha un tracker leggibile direttamente da Peek. Peek interr
 
 Finché nessun servizio conosce il numero, un pacco assegnato a Siuntos autobusais mostra «In attesa di Siuntos autobusais». Quando un servizio ha il pacco, Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuovi aggiornamenti, dopo sette giorni senza novità su «Etichetta creata» ogni 6 ore, e fino a ogni 15 minuti il giorno in cui è in consegna mentre lo tieni aperto o hai le notifiche attive. Un servizio che non conosceva il numero viene ricontrollato un giorno dopo.
 
-Se passano quattro giorni senza nuovi aggiornamenti mentre il pacco resta su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da {{date}}»), insieme alla nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Siuntos autobusais.» e al link «Chiedi aiuto a Siuntos autobusais».
+Se passano quattro giorni senza nuovi aggiornamenti mentre il pacco resta su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da …»), insieme alla nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Siuntos autobusais.» e al link «Chiedi aiuto a Siuntos autobusais».
 
-Peek può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non mostra codici di ritiro né chi ha firmato e non può contattare Siuntos autobusais o il mittente al posto tuo.
+Peek può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Siuntos autobusais o il mittente al posto tuo.
 
 ## Domande sul tracciamento Siuntos autobusais
 

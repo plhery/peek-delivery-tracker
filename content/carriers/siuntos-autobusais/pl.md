@@ -91,9 +91,9 @@ Siuntos autobusais nie udostępnia systemu śledzenia, który Peek może odczyta
 
 Dopóki żadna usługa nie zna numeru, przesyłka przypisana do Siuntos autobusais wyświetla „Oczekiwanie na przewoźnika Siuntos autobusais”. Gdy usługa śledzi przesyłkę, Peek sprawdza co godzinę, co 3 godziny po upływie doby bez nowego skanu, po siedmiu dniach bez nowości przy statusie „Zarejestrowana” co 6 godzin, a w dniu doręczenia do co 15 minut, gdy masz przesyłkę otwartą lub włączone powiadomienia. Usługa, która nie znała numeru, jest odpytywana ponownie następnego dnia.
 
-Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od {{date}}”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Siuntos autobusais.” oraz link „Poproś przewoźnika Siuntos autobusais o pomoc”.
+Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Siuntos autobusais.” oraz link „Poproś przewoźnika Siuntos autobusais o pomoc”.
 
-Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie pokazuje kodu odbioru ani osoby podpisującej i nie może skontaktować się w Twoim imieniu z Siuntos autobusais ani nadawcą.
+Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może skontaktować się w Twoim imieniu z Siuntos autobusais ani nadawcą.
 
 ## Pytania o śledzenie Siuntos autobusais
 

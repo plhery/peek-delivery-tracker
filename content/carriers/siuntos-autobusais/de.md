@@ -91,9 +91,9 @@ Siuntos autobusais bietet keinen Tracker, den Peek direkt auslesen kann. Deshalb
 
 Bis ein Dienst die Nummer kennt, zeigt ein unter Siuntos autobusais gespeichertes Paket „Warten auf Siuntos autobusais“. Sobald ein Dienst die Sendung führt, prüft Peek stündlich, alle 3 Stunden sobald ein Tag ohne neuen Scan vergeht, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden, und bis zu alle 15 Minuten am Tag der Zustellung, solange du es geöffnet hast oder Benachrichtigungen aktiviert sind. Ein Dienst ohne Treffer wird einen Tag später erneut gefragt.
 
-Bleibt ein Paket vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit {{date}}“) an, zusammen mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Siuntos autobusais nach.“ und dem Link „Hol dir Hilfe bei Siuntos autobusais“.
+Bleibt ein Paket vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“) an, zusammen mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Siuntos autobusais nach.“ und dem Link „Hol dir Hilfe bei Siuntos autobusais“.
 
-Peek kann dich über „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ benachrichtigen. Es zeigt keinen Abholcode und keinen Unterzeichner an und kann weder Siuntos autobusais noch den Absender für dich kontaktieren.
+Peek kann dich über „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ benachrichtigen. Es kann weder Siuntos autobusais noch den Absender für dich kontaktieren.
 
 ## Fragen zur Sendungsverfolgung von Siuntos autobusais
 

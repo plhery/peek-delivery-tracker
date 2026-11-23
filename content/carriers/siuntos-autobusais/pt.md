@@ -91,9 +91,9 @@ A Siuntos autobusais não tem um sistema de seguimento que o Peek possa ler dire
 
 Enquanto nenhum serviço conhecer o número, uma encomenda em Siuntos autobusais mostra «À espera de Siuntos autobusais». Quando um serviço tem a encomenda, o Peek verifica de hora a hora, de 3 em 3 horas assim que passe um dia sem novos registos, após sete dias sem novidades em «Etiqueta criada» de 6 em 6 horas, e até de 15 em 15 minutos no dia em que sai para distribuição enquanto a mantiver aberta ou tiver notificações ligadas. Um serviço que não conhecia o número volta a ser consultado um dia depois.
 
-Se passarem quatro dias sem novas atualizações enquanto a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde {{date}}»), acompanhado pela nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Siuntos autobusais.» e pela ligação «Pede ajuda a Siuntos autobusais».
+Se passarem quatro dias sem novas atualizações enquanto a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde …»), acompanhado pela nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Siuntos autobusais.» e pela ligação «Pede ajuda a Siuntos autobusais».
 
-O Peek pode notificá-lo para «Todos os registos», «Passos importantes» ou «Só a entrega». Não mostra códigos de levantamento nem quem assinou e não pode contactar a Siuntos autobusais nem o remetente por si.
+O Peek pode notificá-lo para «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a Siuntos autobusais nem o remetente por si.
 
 ## Perguntas sobre o seguimento Siuntos autobusais
 

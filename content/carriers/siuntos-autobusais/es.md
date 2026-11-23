@@ -91,9 +91,9 @@ Siuntos autobusais no tiene un rastreador que Peek pueda consultar directamente.
 
 Hasta que un servicio conozca el número, un paquete asignado a Siuntos autobusais muestra «Esperando a Siuntos autobusais». Cuando un servicio tiene el paquete, Peek comprueba cada hora, cada 3 horas una vez pasado un día sin escaneos nuevos, tras siete días sin novedades en «Etiqueta creada» cada 6 horas, y hasta cada 15 minutos el día de reparto mientras lo tengas abierto o las notificaciones estén activadas. Un servicio que no conocía el número vuelve a consultarse un día después.
 
-Si pasan cuatro días sin actualizaciones mientras el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el {{date}}»), acompañado de la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Siuntos autobusais.» y el enlace «Pide ayuda a Siuntos autobusais».
+Si pasan cuatro días sin actualizaciones mientras el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra «Sin novedades desde hace cuatro días» (o «Sin novedades desde el …»), acompañado de la nota «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Siuntos autobusais.» y el enlace «Pide ayuda a Siuntos autobusais».
 
-Peek puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No muestra códigos de recogida ni el nombre de quien firmó y no puede contactar con Siuntos autobusais ni con el remitente por ti.
+Peek puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con Siuntos autobusais ni con el remitente por ti.
 
 ## Preguntas sobre el seguimiento de Siuntos autobusais
 

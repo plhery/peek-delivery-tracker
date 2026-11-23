@@ -91,9 +91,9 @@ Siuntos autobusais ne dispose pas d’un suivi que Peek puisse lire directement.
 
 Tant qu’aucun service ne connaît le numéro, un colis classé sous Siuntos autobusais affiche « En attente de Siuntos autobusais ». Lorsqu’un service suit le colis, Peek vérifie toutes les heures, toutes les 3 heures dès qu’une journée passe sans nouveau scan, après sept jours sans nouvelles à l’étape « Étiquette créée » toutes les 6 heures, et jusqu’à toutes les 15 minutes le jour où il est en livraison tant que vous l’avez ouvert ou que les notifications sont activées. Un service qui ne connaissait pas le numéro est réinterrogé le lendemain.
 
-Si quatre jours passent sans nouvelle mise à jour alors que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis {{date}} »), accompagné du message « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Siuntos autobusais. » et du lien « Demande de l’aide à Siuntos autobusais ».
+Si quatre jours passent sans nouvelle mise à jour alors que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis … »), accompagné du message « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Siuntos autobusais. » et du lien « Demande de l’aide à Siuntos autobusais ».
 
-Peek peut vous envoyer des notifications pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il n’affiche ni code de retrait ni nom du signataire et ne peut pas contacter Siuntos autobusais ou l’expéditeur à votre place.
+Peek peut vous envoyer des notifications pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut pas contacter Siuntos autobusais ou l’expéditeur à votre place.
 
 ## Questions sur le suivi Siuntos autobusais
 

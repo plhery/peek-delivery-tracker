@@ -14734,6 +14734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "dpd-nederland-volgen",
+      "title": "DPD Nederland volgen — pakketnummer, tijdvak en contact",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "dpd-belgie-volgen",
@@ -15022,6 +15030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e92427"
     },
     {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "urmarire-colet-speedy",
+      "title": "Urmărire colet Speedy — AWB 11 cifre, statusuri și contact",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
       "id": "cargus",
       "catalog": "cargus",
       "slug": "cargus-urmarire-colet",
@@ -15044,6 +15060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet J&T Germania: numărul JTDE și statusurile",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "urmarire-colet-posta-romana",
+      "title": "Urmărire colet Poșta Română — coduri RO, vamă și contact",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     },
     {
       "id": "fan-courier-international",
@@ -15070,6 +15094,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка Sameday: AWB, easybox и статуси",
       "name": "Sameday",
       "color": "#e92427"
+    },
+    {
+      "id": "speedy",
+      "catalog": "speedy",
+      "slug": "prosledyavane-spidi",
+      "title": "Проследяване на пратка Спиди — товарителница и автомати",
+      "name": "Speedy",
+      "color": "#dc0032"
+    },
+    {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "prosledyavane-ekont",
+      "title": "Проследяване на пратка Еконт — номера, офиси и Еконтомат",
+      "name": "Econt",
+      "color": "#234182"
     },
     {
       "id": "gzyl",
@@ -15374,6 +15414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje pošiljke Pošte Srbije: statusi, rokovi i kontakt",
       "name": "Pošta Srbije",
       "color": "#fbba00"
+    },
+    {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "pracenje-posiljki-m-one",
+      "title": "Praćenje pošiljki M-ONE (Milšped ONE) — statusi i kontakt",
+      "name": "M-ONE",
+      "color": "#024da0"
     }
   ]
 };

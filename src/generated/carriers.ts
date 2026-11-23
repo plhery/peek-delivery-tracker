@@ -2780,6 +2780,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "aramex-australien-sendungsverfolgung",
+      "title": "Aramex Australien Tracking: Nummern, Status & Kontakt",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "aramex-neuseeland-sendungsverfolgung",
@@ -4262,6 +4270,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "suivi-aramex-australie",
+      "title": "Suivi Aramex Australie\u00a0: numéros, statuts et contacts",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "suivi-aramex-nouvelle-zelande",
@@ -5712,6 +5728,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "tracciamento-aramex-australia",
+      "title": "Tracciamento Aramex Australia: numeri, stati e contatti",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "tracciamento-aramex-nuova-zelanda",
@@ -7146,6 +7170,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1928"
     },
     {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "seguimiento-aramex-australia",
+      "title": "Seguimiento Aramex Australia: números, estados y contacto",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
+    },
+    {
       "id": "aramex-nz",
       "catalog": "aramex-nz",
       "slug": "seguimiento-aramex-nueva-zelanda",
@@ -8570,6 +8602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Australia Post: códigos, estados e cacifos",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "seguimento-aramex-australia",
+      "title": "Seguimento Aramex Austrália: números, estados e contactos",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
     },
     {
       "id": "aramex-nz",
@@ -10038,6 +10078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Australia Post: numery, statusy i automaty",
       "name": "Australia Post",
       "color": "#dc1928"
+    },
+    {
+      "id": "aramex-au",
+      "catalog": "aramex-au",
+      "slug": "sledzenie-aramex-australia",
+      "title": "Śledzenie Aramex Australia: numery, statusy i kontakt",
+      "name": "Aramex Australia",
+      "color": "#dc291e"
     },
     {
       "id": "aramex-nz",

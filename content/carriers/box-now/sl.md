@@ -14,8 +14,8 @@ BOX NOW pakete iz spletnih trgovin dostavlja v svoje paketomate, ki so dostopni 
 
 | Številka (izmišljena) | Kaj je |
 | --- | --- |
-| `0000000000` | Številka za sledenje BOX NOW: 10 števk. |
-| `000000` | Ni številka za sledenje, ampak 6-mestna PIN-koda, s katero odprete omarico v paketomatu. |
+| `7482910375` | Številka za sledenje BOX NOW: 10 števk. |
+| `482910` | Ni številka za sledenje, ampak 6-mestna PIN-koda, s katero odprete omarico v paketomatu. |
 
 PIN-koda pride šele, ko je paket v paketomatu. Deset števk imajo tudi številke drugih prevoznikov, na primer [DHL Expressa](carrier:dhl-express) ali [Packete](carrier:packeta). Če e-pošta trgovine navaja drugega prevoznika, pošiljki sledite pri njem.
 

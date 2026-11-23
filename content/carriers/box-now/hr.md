@@ -14,8 +14,8 @@ Broj za praćenje ima 10 znamenki, bez slova. Stranica za praćenje traži samo 
 
 | Broj (izmišljen) | Što je to |
 | --- | --- |
-| `0000000000` | BOX NOW broj za praćenje: 10 znamenki. |
-| `000000` | Nije broj za praćenje, nego 6-znamenkasti PIN kojim otvarate pretinac u paketomatu. |
+| `7482910375` | BOX NOW broj za praćenje: 10 znamenki. |
+| `482910` | Nije broj za praćenje, nego 6-znamenkasti PIN kojim otvarate pretinac u paketomatu. |
 
 PIN stiže tek kad je paket u paketomatu. Deset znamenki imaju i brojevi drugih prijevoznika, primjerice [DHL Expressa](carrier:dhl-express) ili [Packete](carrier:packeta). Ako e-mail trgovine navodi drugog prijevoznika, pošiljku pratite kod njega.
 

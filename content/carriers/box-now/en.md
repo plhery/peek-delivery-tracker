@@ -14,8 +14,8 @@ BOX NOW's help pages in all five countries point to the email and the SMS or Vib
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `0000000000` | A BOX NOW parcel ID: 10 digits. |
-| `000000` | Not a tracking number: the 6-digit PIN that opens the locker. |
+| `7482910375` | A BOX NOW parcel ID: 10 digits. |
+| `482910` | Not a tracking number: the 6-digit PIN that opens the locker. |
 
 BOX NOW publishes no meaning for the digits. The PIN arrives only once the parcel is in your locker. Other carriers use 10 digits too: if the shop's email names another carrier, track it there. No message at all? The shop has the number: see [how to find your tracking number](guide:find-tracking-number).
 
@@ -76,23 +76,23 @@ Trust the "Last pick up time" on the tracking page. A parcel not picked up goes 
 
 ## BOX NOW contact number and customer service
 
-As listed on BOX NOW's English sites on 12 October 2026:
+As listed on BOX NOW's own sites (Eastern European time in Greece, Cyprus and Bulgaria; Central European time in Croatia and Slovenia):
 
 - **Greece:** +30 211 1005 333, Monday to Friday 08:00 to 20:00 and Saturday 10:00 to 18:00, from BOX NOW's consumer charter (its contact page lists no number). Parcel problems: dema@boxnow.gr (name, phone number, voucher ID); general questions: care@boxnow.gr; or the contact form.
 - **Cyprus:** Call Center +357 240 42000, Monday to Friday 8:00 to 20:00, Saturday 10:00 to 18:00. Parcel problems: dema@boxnow.cy, or the contact form.
 - **Bulgaria:** Call Center 0700 70 774 (+359 700 70 774), Monday to Friday 08:00 to 21:00, Saturday 09:00 to 20:00, Sunday 09:00 to 17:00. Email support@boxnow.bg, or the contact form's "Problem with parcel delivery".
 - **Croatia:** Call Center +385 1 7000 900, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00. Email podrska@boxnow.hr, or the contact form.
-- **Slovenia** (boxnow.si, 27 October 2026): Call Center +386 1 330 6111, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00. Email podpora@boxnow.si, or the contact form.
+- **Slovenia:** Call Center +386 1 330 6111, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00. Email podpora@boxnow.si, or the contact form.
 
 None of the sites says what a call costs.
 
 ## Tracking a BOX NOW parcel with Peek
 
-[Peek](/) can't tell a BOX NOW parcel from its 10 digits alone, so it asks the carriers the number fits whether they know it: BOX NOW and DHL eCommerce Iberia, and, depending on the digits and how they're typed, [DHL Express](carrier:dhl-express), [ACS Courier](carrier:acs-courier), Geniki Taxydromiki or Packeta. If BOX NOW alone knows it, Peek names BOX NOW; if others know it too, you choose, except that DHL Express wins when it knows the number and neither ACS nor Geniki Taxydromiki does. Otherwise pick "BOX NOW" with "Change". A BOX NOW tracking link with `?track=` isn't read: paste the number itself.
+[Peek](/) can't tell a BOX NOW parcel from its 10 digits alone, so it asks the carriers the number fits whether they know it: BOX NOW and DHL eCommerce Iberia, and, depending on the digits and how they're typed, [DHL Express](carrier:dhl-express), [ACS Courier](carrier:acs-courier), Geniki Taxydromiki or Packeta, and, from some countries, DHL Freight. If none of them knows it, Peek then asks tracking services, then DPD Ireland, Estafeta and DHL Freight if it hasn't asked it yet. If BOX NOW alone knows it, Peek names BOX NOW; if others know it too, you choose, except that DHL Express wins when it knows the number and neither ACS nor Geniki Taxydromiki does. Otherwise pick "BOX NOW" with "Change". A link to BOX NOW's tracking page (`/track?track=…`, with or without a language in the path, such as `/en/track`) on boxnow.gr, boxnow.cy, boxnow.bg, boxnow.hr or boxnow.si names BOX NOW at once.
 
 Peek then shows the status, the history with the place each scan names, the expected delivery day while the parcel is on its way, the destination country, the delivery time, and the locker's name once the parcel waits there or was collected. It leaves out the locker's address and position, the pickup deadline, the compartment size, payment, the sender and postcodes, so check the "Last pick up time" on BOX NOW's own page.
 
-Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". Peek checks up to every 10 minutes while you follow the parcel, and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend the pickup time or resend your PIN.
+Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from BOX NOW" link. Notifications can follow "Every scan", "Important steps" or "Delivery only". It can't extend the pickup time or resend your PIN.
 
 ## Questions about BOX NOW tracking
 

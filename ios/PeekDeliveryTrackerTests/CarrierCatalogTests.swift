@@ -638,6 +638,15 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertNil(asked("DE"))
     }
 
+    /// The menu of countries stays as it is while the Add sheet redraws for the same country, as when the carriers'
+    /// answer comes in: built again, an open menu would scroll back to its top under the reader's finger.
+    func testTheCountryMenuIsTheSameWhileItsCountryIs() {
+        let menu = LookupCountryMenu(country: "CH", home: "CH", choose: { _ in })
+        XCTAssertEqual(menu, LookupCountryMenu(country: "CH", home: "CH", choose: { _ in }), "Whatever its action")
+        XCTAssertNotEqual(menu, LookupCountryMenu(country: "FR", home: "CH", choose: { _ in }))
+        XCTAssertNotEqual(menu, LookupCountryMenu(country: "CH", home: nil, choose: { _ in }))
+    }
+
     func testRecognitionReportsOnlyTheCarriersInTheServerAnswer() {
         let number = "12345678901"
         let serverAsked: [CarrierID] = [.glsDe, .postlogistics]

@@ -673,6 +673,8 @@ struct AddParcelView: View {
         ].compactMap { $0 })
         .accessibilityIdentifier("addParcel.carrier")
         .disabled(amazonNumber)
+        // VoiceOver reads the line, then the menu of the country it names.
+        .accessibilitySortPriority(1)
         // The menu is drawn over the button, at the place kept for it beside the words, rather than inside its label:
         // a tap on it opens the menu, and anywhere else on the line the picker.
         .overlayPreferenceValue(LookupCountryPlace.self) { place in
@@ -680,10 +682,12 @@ struct AddParcelView: View {
                 GeometryReader { geometry in
                     let frame = geometry[place]
                     LookupCountryMenu(country: country, home: ParcelLookupCountry.hint(), choose: pickCountry)
+                        .equatable()
                         .position(x: frame.midX, y: frame.midY)
                 }
             }
         }
+        .accessibilityElement(children: .contain)
     }
 
     /// Says that the line opens the picker. An Amazon number keeps its carrier.
@@ -1634,7 +1638,7 @@ struct PostcodeCountryMenu: View {
 
 /// The country the carriers are asked for, beside the words of the Add sheet's carrier line that name it: its flag,
 /// opening on the device's country, then every other by name. Picking one asks again, for this number only.
-struct LookupCountryMenu: View {
+struct LookupCountryMenu: View, Equatable {
     let country: String
     /// The device's country, first in the list.
     let home: String?
@@ -1642,13 +1646,23 @@ struct LookupCountryMenu: View {
 
     @EnvironmentObject private var localizer: Localizer
 
+    /// The same country and home make the same menu, whatever `choose`. Used with `.equatable()`, the menu is left as it
+    /// is when the sheet redraws, as when the carriers' answer comes in: built again, an open menu would scroll back to
+    /// its top under the reader's finger.
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.country == rhs.country && lhs.home == rhs.home
+    }
+
     var body: some View {
+        let label = localizer.text("add.lookupCountry")
+        let selection = Binding(get: { country }, set: choose)
         Menu {
-            Picker(localizer.text("add.lookupCountry"), selection: Binding(get: { country }, set: choose)) {
-                if let home { Section { option(home) } }
-                Section {
-                    ForEach(CarrierCatalog.countriesByName(in: localizer.language).filter { $0 != home }, id: \.self) { option($0) }
-                }
+            // Two lists, so that a line sets the device's country apart from the others.
+            if let home {
+                Picker(label, selection: selection) { option(home) }
+            }
+            Picker(label, selection: selection) {
+                ForEach(CarrierCatalog.countriesByName(in: localizer.language).filter { $0 != home }, id: \.self) { option($0) }
             }
         } label: {
             // A larger target than the flag, centred on the place kept for it.

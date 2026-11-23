@@ -34907,7 +34907,6 @@
           "confidence": "low"
         }
       ],
-      "trackingSearchUrl": "https://postone.eu/en/products/view/track",
       "helpUrl": "https://postone.eu/en/contact-us"
     },
     "tas-courier": {
@@ -37420,7 +37419,7 @@
           "confidence": "low"
         }
       ],
-      "trackingSearchUrl": "https://shipwizmo.com/",
+      "trackingSearchUrl": "https://shipwizmo.com/tracking",
       "helpUrl": "https://shipwizmo.com/contact"
     },
     "alljoy": {
@@ -39649,7 +39648,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.yamatohk.com.hk/",
+      "trackingSearchUrl": "https://app01.yamatohk.com.hk/spds-track-and-trace/TrackAndTrace",
       "helpUrl": "https://www.yamatohk.com.hk/contact-us/enquiry/"
     },
     "tawssil": {
@@ -40604,7 +40603,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://superb-express.com/site/searchview"
+      "trackingSearchUrl": "https://superb-express.com/"
     },
     "tapuz-delivery": {
       "displayName": "Tapuz Delivery",
@@ -45032,7 +45031,6 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://redbox.mv/tracking",
       "helpUrl": "https://redbox.mv/contact"
     },
     "royale-international": {
@@ -45258,7 +45256,7 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://www.wepost.com.my/tracking",
+      "trackingSearchUrl": "https://www.wepost.com.my/",
       "helpUrl": "https://www.wepost.com.my/contact"
     },
     "xpressen": {
@@ -45289,7 +45287,6 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://track.xpressen.dk/Tracking",
       "helpUrl": "https://www.xpressen.dk/kontakt/"
     },
     "66post": {
@@ -52112,7 +52109,6 @@
         }
       ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill",
       "helpUrl": "https://trumpcardinc.com/contact-us/"
     },
     "blitznow": {
@@ -58822,7 +58818,7 @@
       },
       "linkRules": [],
       "detectionRules": [],
-      "trackingSearchUrl": "https://tnt.partsexpress.nl/",
+      "trackingSearchUrl": "https://partsexpress.eu/",
       "helpUrl": "https://partsexpress.eu/contact/"
     },
     "scan-global-logistics": {

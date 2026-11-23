@@ -34902,7 +34902,6 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://postone.eu/en/products/view/track",
     "helpUrl": "https://postone.eu/en/contact-us"
   },
   "tas-courier": {
@@ -37415,7 +37414,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://shipwizmo.com/",
+    "trackingSearchUrl": "https://shipwizmo.com/tracking",
     "helpUrl": "https://shipwizmo.com/contact"
   },
   "alljoy": {
@@ -39644,7 +39643,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.yamatohk.com.hk/",
+    "trackingSearchUrl": "https://app01.yamatohk.com.hk/spds-track-and-trace/TrackAndTrace",
     "helpUrl": "https://www.yamatohk.com.hk/contact-us/enquiry/"
   },
   "tawssil": {
@@ -40599,7 +40598,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://superb-express.com/site/searchview"
+    "trackingSearchUrl": "https://superb-express.com/"
   },
   "tapuz-delivery": {
     "displayName": "Tapuz Delivery",
@@ -45027,7 +45026,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://redbox.mv/tracking",
     "helpUrl": "https://redbox.mv/contact"
   },
   "royale-international": {
@@ -45253,7 +45251,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.wepost.com.my/tracking",
+    "trackingSearchUrl": "https://www.wepost.com.my/",
     "helpUrl": "https://www.wepost.com.my/contact"
   },
   "xpressen": {
@@ -45284,7 +45282,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://track.xpressen.dk/Tracking",
     "helpUrl": "https://www.xpressen.dk/kontakt/"
   },
   "66post": {
@@ -52107,7 +52104,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://ace2.trumpcardinc.com/searchairbill",
     "helpUrl": "https://trumpcardinc.com/contact-us/"
   },
   "blitznow": {
@@ -58817,7 +58813,7 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://tnt.partsexpress.nl/",
+    "trackingSearchUrl": "https://partsexpress.eu/",
     "helpUrl": "https://partsexpress.eu/contact/"
   },
   "scan-global-logistics": {

@@ -31,7 +31,7 @@ La web de JS Express muestra cada escaneo con fecha y hora, un lugar entre 【co
 | JS Express escribe | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
 | `Electronic notification of order creation received.` | La tienda ha enviado los datos del pedido a JS Express, que todavía no tiene el paquete. | «Etiqueta creada» |
-| `PRE-ADVICE` | Un socio logístico ha recibido los datos electrónicos antes de que el paquete entre en el almacén de JS Express. | «Etiqueta creada» |
+| `PRE-ADVICE` | Un socio logístico ha recibido los datos electrónicos antes de que el paquete entre en el almacén de JS Express. | La fase que ya tenía |
 | `Item has been collected` | El almacén de JS Express en China ya tiene el paquete: es el primer escaneo real. | «Admitido por el transportista» |
 | `Item inbound in sorting center.`, `Item outbound in sorting center.` | Clasificado en el centro de JS Express en China. | «En tránsito» |
 | `Domestic allocation has begun`, `Under domestic allocation` | Sigue en el almacén de JS Express en China, tras la clasificación y antes de salir. | «En tránsito» |
@@ -57,9 +57,9 @@ La web de JS Express muestra cada escaneo con fecha y hora, un lugar entre 【co
 | `Delivery to local courier`, `Last Mile Delivery` | Entregado a la empresa que reparte en España, antes de su primer escaneo propio. Aún no te lo han entregado. | «En tránsito» |
 | `Delivery in progress` | En algunas rutas: el transportista local tiene el paquete en su delegación antes de sacarlo a reparto. Pese al texto, todavía no va en la furgoneta. | «En tránsito» |
 | `到达待取` | Estado propio de JS Express en chino: ha llegado y espera recogida. Como lugar solo aparece el país. | «Listo para recoger» |
-| `The delivery address is incorrect. Please ask the recipient to contact their local area?` | Aviso de JS Express tras un intento fallido por dirección incompleta o errónea; pide contactar con la oficina local (Peek quita los números de teléfono). | «Intento de entrega» |
+| `The delivery address is incorrect. Please ask the recipient to contact their local area?` | Aviso de JS Express tras un intento fallido por dirección incompleta o errónea; pide contactar con la oficina local (Peek quita los números de teléfono). | «Incidencia» |
 
-Ese mismo aviso de dirección aparece también en chino (`收件人地址不详或有误，派送失败，逾期退回或销毁的具体费用以账单为准，麻烦让收件人联系下当地`), con un teléfono al final: Peek lo traduce al inglés y muestra «Intento de entrega».
+Ese mismo aviso de dirección aparece también en chino (`收件人地址不详或有误，派送失败，逾期退回或销毁的具体费用以账单为准，麻烦让收件人联系下当地`), con un teléfono al final: Peek lo traduce al inglés y muestra «Incidencia».
 
 **El escaneo de CTT Express en España.** Cuando reparte [CTT Express](carrier:ctt-express) en España, el historial de JS Express recoge en español su estado `Enviado`: significa que CTT Express ya ha admitido el paquete y lo ha puesto en camino entre sus centros antes del reparto («En tránsito»).
 
@@ -81,7 +81,7 @@ Los intentos de entrega, avisos y puntos de recogida siguen las normas del trans
 
 ## Paquete de JS Express parado, en aduanas o que no llega
 
-**`未获取到任何数据,请提供有效单号!`** La página inglesa de JS Express responde esta frase en chino cuando no reconoce el código («no se han obtenido datos, facilite un número válido»). `No track data for now!` indica que aún no hay escaneos. En ambos casos, Peek muestra «Esperando a JS Express» y sigue comprobando. Si pasados dos días JS Express sigue sin conocer el número y ningún otro servicio responde por él, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.», y desde entonces Peek comprueba una vez al día y, pasada una semana desde que lo añadiste, una vez por semana. Revisa el código carácter por carácter con el de la tienda; si en unos días no cambia nada, pregunta al vendedor si llegó a entregarlo.
+**`未获取到任何数据,请提供有效单号!`** La página inglesa de JS Express responde esta frase en chino cuando no reconoce el código («no se han obtenido datos, facilite un número válido»). `No track data for now!` indica que aún no hay escaneos. En ambos casos, Peek muestra «Esperando a JS Express» y sigue comprobando. Si pasados dos días JS Express sigue sin conocer el número y ningún otro servicio responde por él, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» Revisa el código carácter por carácter con el de la tienda; si en unos días no cambia nada, pregunta al vendedor si llegó a entregarlo.
 
 **Parado en `Electronic notification of order creation received.`** JS Express aún no ha recogido el paquete en su almacén. Pregunta a la tienda cuándo lo entregó.
 
@@ -108,13 +108,13 @@ Como las reclamaciones ante JS Express las tramita el vendedor que contrató el 
 
 [Peek](/) reconoce un número de JS Express por su forma (JSE, dos letras, diez cifras y YQ), que no usa ningún otro transportista de su catálogo, y consulta directamente el buscador de JS Express. Si solo tienes el código del repartidor local, pega ese: Peek sigue más de 4500 transportistas y, si no reconoce la empresa por el formato, puedes elegirla con «Cambiar».
 
-Peek lee la página en inglés de JS Express y muestra el historial completo, el lugar de cada escaneo y el país de destino, que esa web omite. `到达待取` se muestra en inglés como `Arrived, awaiting collection`, igual que el aviso chino por dirección incorrecta. Peek elimina los nombres de quien recoge el paquete y los números de teléfono, y deja fuera las fotos de entrega y la referencia interna de la tienda. Como entrega prevista enseña el día estimado por JS Express y lo quita en cuanto el paquete pasa a «En reparto», puesto que el reparto corresponde a ese día. Las filas informativas no cambian el estado.
+Peek lee la página en inglés de JS Express y muestra el historial completo, el lugar de cada escaneo y el país de destino, que esa web omite. `到达待取` se muestra en inglés como `Arrived, awaiting collection`, igual que el aviso chino por dirección incorrecta. Peek elimina los números de teléfono, pero conserva el nombre de quien firma, y deja fuera las fotos de entrega y la referencia interna de la tienda. Como entrega prevista enseña el día estimado por JS Express y lo quita en cuanto el paquete pasa a «En reparto», puesto que el reparto corresponde a ese día. Las filas informativas no cambian el estado.
 
 Los escaneos en China se leen en hora de Pekín y los europeos según la zona horaria deducida del lugar o del país de destino, mostrándose todos en el huso horario de tu dispositivo, del más reciente al más antiguo.
 
 Cuando el número local encaja con seguridad en una empresa que trabaja en España (como CTT Express), Peek muestra «Entrega con …» junto con su código y la consulta también; si es un número postal internacional válido, consulta a Correos. Mientras ese transportista solo tenga el preaviso electrónico sin escaneo físico, verás «Anunciado a …, aún no recibido». En cuanto publique un escaneo igual de reciente o posterior al último de JS Express, Peek sigue el envío allí mostrando ambos números y conservando el historial de JS Express.
 
-Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos (cada 5 cuando tiene que abrir la web de JS Express en un navegador) desde las 6:00, hora local, el día en que el paquete sale «En reparto», mientras responda el propio seguimiento de JS Express (a través de servicios de seguimiento, cada 15 minutos). Si otra empresa asume la entrega, Peek sigue el ritmo de quien reparte el paquete: como mucho una vez por hora con Royal Mail y Poste Italiane, y como mucho cada 30 minutos con PostNL y USPS, también en reparto. Tras dos días sin novedades (o 12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), pasa a comprobar cada hora. Puedes elegir avisos para «Cada escaneo», «Pasos importantes» (aduana, incidencias, intentos, «Listo para recoger», reparto, entrega y devolución) o «Solo la entrega». Peek no puede contactar con JS Express ni con la tienda por ti.
+Mientras tengas el paquete abierto en Peek, o el día de su entrega con las notificaciones activadas, Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos (cada 5 cuando tiene que abrir la web de JS Express en un navegador) desde las 6:00, hora local, el día en que el paquete sale «En reparto», mientras responda el propio seguimiento de JS Express; si no, cada hora. A través de servicios de seguimiento, consulta cada hora, cada 3 horas tras un día sin novedades y hasta cada 15 minutos el día del reparto, con la misma condición. Si otra empresa asume la entrega, Peek sigue el ritmo de quien reparte el paquete. Tras dos días sin novedades (o 12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), pasa a comprobar cada hora. Puedes elegir avisos para «Cada escaneo», «Pasos importantes» (aduana, incidencias, intentos, «Listo para recoger», reparto, entrega y devolución) o «Solo la entrega». Peek no puede contactar con JS Express ni con la tienda por ti.
 
 ## Preguntas frecuentes sobre el seguimiento de JS Express
 

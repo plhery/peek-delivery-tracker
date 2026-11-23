@@ -3636,6 +3636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "transpress-sendungsverfolgung",
+      "title": "Transpress (Транспрес) Sendungsverfolgung in Bulgarien",
+      "name": "Transpress",
+      "color": "#1e6ee2"
+    },
+    {
       "id": "gls-us",
       "catalog": "gls-us",
       "slug": "gls-us-sendungsverfolgung",
@@ -5334,6 +5342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "suivi-transpress",
+      "title": "Suivi Transpress (Транспрес)\u00a0: suivre un colis en Bulgarie",
+      "name": "Transpress",
+      "color": "#1e6ee2"
+    },
+    {
       "id": "gls-us",
       "catalog": "gls-us",
       "slug": "suivi-gls-us",
@@ -6992,6 +7008,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "tracciamento-transpress",
+      "title": "Tracciamento Transpress (Транспрес): pacchi in Bulgaria",
+      "name": "Transpress",
+      "color": "#1e6ee2"
+    },
+    {
       "id": "gls-us",
       "catalog": "gls-us",
       "slug": "tracking-gls-us",
@@ -8634,6 +8658,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "seguimiento-transpress",
+      "title": "Seguimiento Transpress (Транспрес): paquetes en Bulgaria",
+      "name": "Transpress",
+      "color": "#1e6ee2"
+    },
+    {
       "id": "gls-us",
       "catalog": "gls-us",
       "slug": "seguimiento-gls-us",
@@ -10258,6 +10290,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CVC (Си Ви Си): seguir encomenda na Bulgária",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "seguimento-transpress",
+      "title": "Seguimento Transpress (Транспрес): encomendas na Bulgária",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     },
     {
       "id": "gls-us",
@@ -11942,6 +11982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CVC (Си Ви Си): paczka w Bułgarii",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "transpress",
+      "catalog": "transpress",
+      "slug": "sledzenie-transpress",
+      "title": "Śledzenie Transpress (Транспрес): paczki w Bułgarii",
+      "name": "Transpress",
+      "color": "#1e6ee2"
     },
     {
       "id": "gls-us",

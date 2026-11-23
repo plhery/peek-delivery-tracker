@@ -1698,6 +1698,7 @@ struct ChangeCarrierView: View {
                     PostcodeCountryMenu(carrier: selectedCarrier, requirement: carrierRequirement, country: country) {
                         postcodes.choose($0, for: selectedCarrier)
                     }
+                    .equatable()
                 }
                 TextField(
                     placeholder: localizer.text("add.requirement.dpdPostcode"),

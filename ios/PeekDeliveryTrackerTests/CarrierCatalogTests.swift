@@ -647,6 +647,18 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertNotEqual(menu, LookupCountryMenu(country: "CH", home: nil, choose: { _ in }))
     }
 
+    /// The postcode's menu of countries stays as it is while its screen redraws for the same field and country.
+    func testThePostcodeCountryMenuIsTheSameWhileItsCountryIs() throws {
+        func requirement(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
+            try XCTUnwrap(catalog.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })
+        }
+        let postNL = try requirement(.springGDS, "3SABCD1234567")
+        let menu = PostcodeCountryMenu(carrier: .springGDS, requirement: postNL, country: "NL", choose: { _ in })
+        XCTAssertEqual(menu, PostcodeCountryMenu(carrier: .springGDS, requirement: postNL, country: "NL", choose: { _ in }), "Whatever its action")
+        XCTAssertNotEqual(menu, PostcodeCountryMenu(carrier: .springGDS, requirement: postNL, country: "BE", choose: { _ in }))
+        XCTAssertNotEqual(menu, PostcodeCountryMenu(carrier: .heppner, requirement: try requirement(.heppner, "99999980"), country: "NL", choose: { _ in }))
+    }
+
     func testRecognitionReportsOnlyTheCarriersInTheServerAnswer() {
         let number = "12345678901"
         let serverAsked: [CarrierID] = [.glsDe, .postlogistics]

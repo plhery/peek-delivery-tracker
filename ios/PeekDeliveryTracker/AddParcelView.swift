@@ -771,6 +771,7 @@ struct AddParcelView: View {
                                                     inset: EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 10)) {
                                     postcodes.choose($0, for: inputCarrier)
                                 }
+                                .equatable()
                                 Divider().padding(.vertical, 12)
                             }
                             TextField(placeholder: example ?? "", text: Binding(get: { deliveryPostcode }, set: { deliveryPostcode = $0 }))
@@ -1590,7 +1591,7 @@ struct SuggestedPostcodeCarrier: Equatable {
 
 /// The country a delivery postcode is from, beside its field: its flag and code, opening on the countries the
 /// field takes, the carrier's own first.
-struct PostcodeCountryMenu: View {
+struct PostcodeCountryMenu: View, Equatable {
     let carrier: CarrierID
     let requirement: CarrierRequirement
     let country: String
@@ -1600,12 +1601,24 @@ struct PostcodeCountryMenu: View {
 
     @EnvironmentObject private var localizer: Localizer
 
+    /// The same carrier, field and country make the same menu, whatever `choose`. Used with `.equatable()`, the menu is
+    /// left as it is when its screen redraws, as when a check of the parcel comes back: built again, an open menu would
+    /// scroll back to its top under the reader's finger.
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.carrier == rhs.carrier && lhs.requirement == rhs.requirement && lhs.country == rhs.country && lhs.inset == rhs.inset
+    }
+
     var body: some View {
         let choices = CarrierCatalog.shared.postcodeCountryChoices(for: carrier, requirement: requirement, language: localizer.language)
+        let label = localizer.text("add.requirement.postcodeCountry")
+        let selection = Binding(get: { country }, set: choose)
         Menu {
-            Picker(localizer.text("add.requirement.postcodeCountry"), selection: Binding(get: { country }, set: choose)) {
-                Section { options(choices.own) }
-                Section { options(choices.others) }
+            // Two lists, so that a line sets the carrier's own countries apart from the others.
+            if !choices.own.isEmpty {
+                Picker(label, selection: selection) { options(choices.own) }
+            }
+            if !choices.others.isEmpty {
+                Picker(label, selection: selection) { options(choices.others) }
             }
         } label: {
             HStack(spacing: 4) {

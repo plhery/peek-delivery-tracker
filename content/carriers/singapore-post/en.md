@@ -14,8 +14,8 @@ A SingPost number has 13 characters in the [international postal format](guide:t
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `RA000000005SG` | Two letters, nine digits and `SG`: an item SingPost numbered. SingPost's own examples start with RA or SM; `SG` at the end is what counts. |
-| `CNSGS0000000000` | `CNSGS` and ten digits: a shape Peek links to Singapore Post, though not by its shape alone (more below). |
+| `RA482917367SG` | Two letters, nine digits and `SG`: an item SingPost numbered. SingPost's own examples start with RA or SM; `SG` at the end is what counts. |
+| `CNSGS4829173640` | `CNSGS` and ten digits: a shape Peek links to Singapore Post, though not by its shape alone (more below). |
 
 A number ending in other letters, such as `DE`, comes from another country's post. Ordinary mail has no number. Can't find yours? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -78,7 +78,7 @@ Outside the EU, your own country's rules apply. More in [parcels held at customs
 
 ## Singapore Post customer service and contact number
 
-SingPost's channels, as read on 31 October 2026:
+SingPost's channels:
 
 - **Hotline in Singapore:** 1605.
 - **From abroad:** +65 6845 4545 (not toll-free).
@@ -91,11 +91,15 @@ SingPost's channels, as read on 31 October 2026:
 
 A `CNSGS` number isn't Singapore Post's by its shape alone, so Peek asks first: "Checking tracking services…", then "Singapore Post has this parcel." when SingPost knows it. If not yet, Peek keeps checking after you add it and shows "Waiting for Singapore Post’s first scan".
 
-Peek shows each scan in SingPost's English wording, with its place, and files the wordings in the table above under its own stages, such as "In transit" or "At customs". It leaves out the reason SingPost can add under a scan, and there's no expected delivery date or weight. Speedpost scans come without a time zone, so Peek reads each on the clock of the place it names, or of the scans around it (the destination's once a scan says the item has arrived), else on Singapore time.
+Peek shows each scan in SingPost's English wording, with its place, and files the wordings in the table above under its own stages, such as "In transit" or "At customs". It leaves out the reason SingPost can add under a scan, and there's no expected delivery date, weight, POPStation collection code or signer's name. Speedpost scans come without a time zone, so Peek reads each on the clock of the place it names, or of the scans around it (the destination's once a scan says the item has arrived), else on Singapore time.
 
 When SingPost names the destination country, or names none and you track from outside Singapore, Peek also asks that country's post with the same `SG` number: [DHL](carrier:dhl) in Germany, [La Poste](carrier:la-poste) in France, [Poste Italiane](carrier:poste-italiane) in Italy, [Correos](carrier:correos-spain) in Spain, [PostNL](carrier:postnl), [bpost](carrier:bpost), [Austrian Post](carrier:austrian-post), [Swiss Post](carrier:swiss-post), [Poczta Polska](carrier:poczta-polska), [CTT](carrier:ctt) in Portugal, [PostNord](carrier:postnord) in Sweden and Denmark, [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [USPS](carrier:usps), [Canada Post](carrier:canada-post) and [Australia Post](carrier:australia-post). It switches to that post once it shows fresh scans, and keeps SingPost's history. The other way round, Singapore as a parcel's destination isn't enough for Peek to ask Singapore Post: it does when the carrier bringing the parcel names SingPost as the one delivering it, as Janio can.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SingPost's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes; through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SingPost, your post or the shop for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SingPost's or your post's own tracker answers (Royal Mail is checked hourly, Poste Italiane, PostNL and USPS up to every 30 minutes; through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Singapore Post.", with a "Get help from Singapore Post" link to SingPost's support page; once Peek has switched to your post, the link names that post. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Singapore Post."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SingPost, your post or the shop for you.
 
 ## Questions about Singapore Post tracking
 

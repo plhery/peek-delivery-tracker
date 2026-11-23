@@ -3076,6 +3076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0a8fcf"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "mhi-sendungsverfolgung",
+      "title": "MHI Sendungsverfolgung: Trackmail-Status und Zusteller",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-sendungsverfolgung",
@@ -4830,6 +4838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0a8fcf"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "suivi-mhi",
+      "title": "Suivi MHI\u00a0: statuts Trackmail et transporteur final",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "suivi-pengyou",
@@ -6552,6 +6568,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0a8fcf"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "tracciamento-mhi",
+      "title": "Tracciamento MHI: stati Trackmail e chi consegna",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "tracciamento-pengyou",
@@ -8258,6 +8282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0a8fcf"
     },
     {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "seguimiento-mhi",
+      "title": "Seguimiento MHI: estados de Trackmail y quién entrega",
+      "name": "MHI",
+      "color": "#00075c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-seguimiento",
@@ -9954,6 +9986,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento euShipments: estados e estafeta local",
       "name": "euShipments",
       "color": "#0a8fcf"
+    },
+    {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "seguimento-mhi",
+      "title": "Seguimento MHI: estados Trackmail e quem entrega",
+      "name": "MHI",
+      "color": "#00075c"
     },
     {
       "id": "pengyou",
@@ -11694,6 +11734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie euShipments: statusy i lokalny kurier",
       "name": "euShipments",
       "color": "#0a8fcf"
+    },
+    {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "sledzenie-mhi",
+      "title": "Śledzenie MHI: statusy Trackmail i kto doręcza",
+      "name": "MHI",
+      "color": "#00075c"
     },
     {
       "id": "pengyou",

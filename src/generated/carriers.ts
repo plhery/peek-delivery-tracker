@@ -2244,6 +2244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-sendungsverfolgung",
+      "title": "ORLEN Paczka Sendungsverfolgung: Nummern und Status",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "austrian-post-sendungsverfolgung",
@@ -4156,6 +4164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Poczta Polska\u00a0: numéros, statuts et points relais",
       "name": "Poczta Polska",
       "color": "#c43c2b"
+    },
+    {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "suivi-orlen-paczka",
+      "title": "Suivi ORLEN Paczka\u00a0: numéros, statuts et retraits",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
     },
     {
       "id": "austrian-post",
@@ -6072,6 +6088,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "tracciamento-orlen-paczka",
+      "title": "Tracciamento ORLEN Paczka: numeri, stati e ritiri",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "tracciamento-austrian-post",
@@ -7962,6 +7986,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "seguimiento-orlen-paczka",
+      "title": "Seguimiento ORLEN Paczka: números, estados y recogidas",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "austrian-post",
       "catalog": "austrian-post",
       "slug": "seguimiento-austrian-post",
@@ -9842,6 +9874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Poczta Polska: números, estados e levantamentos",
       "name": "Poczta Polska",
       "color": "#c43c2b"
+    },
+    {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "seguimento-orlen-paczka",
+      "title": "Seguimento ORLEN Paczka: números, estados e recolhas",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
     },
     {
       "id": "austrian-post",

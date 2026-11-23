@@ -2860,6 +2860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "kun-express-sendungsverfolgung",
+      "title": "Kun Express Sendungsverfolgung: KUN-Nummern und USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "juxi-express-sendungsverfolgung",
@@ -4470,6 +4478,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "suivi-kun-express",
+      "title": "Suivi Kun Express\u00a0: numéros KUN, statuts et USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "juxi-express-suivi",
@@ -6048,6 +6064,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "tracking-kun-express",
+      "title": "Tracking Kun Express: codici KUN, stati e USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "tracciamento-juxi-express",
@@ -7618,6 +7642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "seguimiento-kun-express",
+      "title": "Seguimiento Kun Express: números KUN, estados y USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "seguimiento-juxi-express",
@@ -9178,6 +9210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express Alemanha rastreio: código JTDE e estados",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "seguimento-kun-express",
+      "title": "Seguimento Kun Express: códigos KUN, estados e USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
     },
     {
       "id": "juxi-express",
@@ -10782,6 +10822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express Germany śledzenie: numer JTDE i statusy",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "kun-express",
+      "catalog": "kun-express",
+      "slug": "sledzenie-kun-express",
+      "title": "Śledzenie Kun Express: numery KUN, statusy i USPS",
+      "name": "Kun Express",
+      "color": "#0761ff"
     },
     {
       "id": "juxi-express",

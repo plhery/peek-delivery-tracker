@@ -130,7 +130,7 @@
   { "id": "shiprocket", "catalog": "shiprocket", "name": "Shiprocket", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "j-and-t-de", "catalog": "j-and-t-de", "name": "J&T Express Germany", "languages": ["en", "de", "ru", "ro", "hr", "it", "pl", "fr", "es", "pt"] },
-  { "id": "kun-express", "catalog": "kun-express", "name": "Kun Express", "languages": ["en"] },
+  { "id": "kun-express", "catalog": "kun-express", "name": "Kun Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "juxi-express", "catalog": "juxi-express", "name": "Juxi Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jcex", "catalog": "jcex", "name": "JCEX", "languages": ["en", "pl", "zh"] },
   { "id": "lingdong", "catalog": "lingdong", "name": "Lingdong International", "languages": ["en", "es", "de", "fr", "it", "pt", "pl"] },

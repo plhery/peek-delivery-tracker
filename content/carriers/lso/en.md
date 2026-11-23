@@ -16,9 +16,9 @@ LSO publishes no format. The LSO airbill numbers seen so far are 8 characters: `
 
 | Number (invented) | What it is |
 | --- | --- |
-| `ZY012345` | An LSO airbill number: ZY, the digit zero, then five characters. |
-| `ZY0ABCDE` | Also LSO: the last five can be letters. |
-| `ZYO12345` | A typo: the letter O instead of the digit zero. This is no longer an LSO shape. |
+| `ZY048291` | An LSO airbill number: ZY, the digit zero, then five characters. |
+| `ZY0K7M4P` | Also LSO: the last five can be letters. |
+| `ZYO48291` | A typo: the letter O instead of the digit zero. This is no longer an LSO shape. |
 
 The third character is the digit zero. Typed as the letter O, the number looks like nothing LSO uses, and Peek may suggest GLS instead. Spaces, hyphens and lower case don't matter when you paste it into Peek. LSO's own tracker takes up to 10 numbers at once, one per line.
 
@@ -62,7 +62,7 @@ The free-text status line can say more than the five steps. LSO publishes no lis
 
 ## LSO customer service number and contact
 
-As listed on lso.com on 15 October 2026:
+As listed on lso.com:
 
 - **Phone:** (888) 688-6909, in the footer of every page. LSO publishes no opening hours.
 - **Email:** customerservice@lso.com.
@@ -77,7 +77,11 @@ Have the airbill number ready. LSO's holidays page gives another number, 866.215
 
 Peek can't read LSO's own tracking. It follows LSO parcels through tracking services instead and shows the status and history those services hold, in their wording. That history is often hours behind LSO's page, and for some parcels there's nothing yet. Peek shows no proof of delivery or pickup point for LSO, and an expected delivery only when 17TRACK, one of those services, passes on LSO's own estimate.
 
-Peek checks hourly (every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery) and can notify you when the status changes. For the signature, a claim or a delivery problem, go to LSO or the shop.
+Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours after seven days without news at "Label created". On the day the parcel is out for delivery, it checks up to every 15 minutes while you have it open or with notifications on.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking LSO.", with a "Get help from LSO" link to LSO's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking LSO."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". For the signature, a claim or a delivery problem, go to LSO or the shop.
 
 ## Questions about LSO tracking
 

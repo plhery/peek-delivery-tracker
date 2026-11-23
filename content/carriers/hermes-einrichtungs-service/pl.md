@@ -76,17 +76,17 @@ Zgodnie z oficjalnymi stronami HES:
 - **Sklep:** strona kontaktowa HES kieruje pytania o przesyłki do sklepu albo do śledzenia na myhes.de.
 - **Centrala:** numer +49 5732 103-0 w Löhne nie udziela informacji o dostawach.
 
-W Austrii i Szwajcarii HES dostarcza przez partnerów (Gebrüder Weiss, Sieber Transport AG) i nie podaje tam kontaktu dla odbiorców — pytaj w sklepie.
+W Holandii, Austrii i Szwajcarii HES dostarcza przez partnerów (TSN Groen, Gebrüder Weiss, Sieber Transport AG) i nie podaje tam kontaktu dla odbiorców — pytaj w sklepie.
 
 Hermes Germany nie wysyła SMS-ów, ale HES tak, więc wiadomość SMS od HES może być prawdziwa.
 
 ## Śledzenie Hermes Einrichtungs-Service w Peek
 
-[Peek](/) rozpoznaje od razu 19- lub 21-cyfrowy numer listu przewozowego HES zgodny ze wzorem (`0000` na pozycjach 11–14) i sprawdza HES (obok DHL eCommerce) również dla pasującego numeru 17-cyfrowego; nie odpytuje natomiast HES o 20-cyfrowy *Kollinummer*. Jeśli Peek wskaże innego przewoźnika albo żadnego, użyj „Zmień przewoźnika” i wybierz Hermes Einrichtungs-Service, a sprawdzi numer na myhes.de bez kodu pocztowego. Wklej sam numer, nie link myhes.de.
+[Peek](/) rozpoznaje od razu 19-cyfrowy numer listu przewozowego HES zgodny ze wzorem (`0000` na pozycjach 11–14) i sprawdza HES również dla pasującego numeru 21-cyfrowego (obok SEUR) lub 17-cyfrowego (obok DHL eCommerce); nie odpytuje natomiast HES o 20-cyfrowy *Kollinummer*. Jeśli Peek wskaże innego przewoźnika albo żadnego, użyj „Zmień” (albo „Zmień przewoźnika” przy już dodanej przesyłce) i wybierz Hermes Einrichtungs-Service, a sprawdzi numer na myhes.de bez kodu pocztowego. Wklej sam numer, nie link myhes.de.
 
 Peek pokazuje status i historię w niemieckim brzmieniu z myhes.de, planowany dzień dostawy z przedziałem godzinowym (gdy strona go podaje), nazwę sklepu oraz godzinę dostawy. HES nie przekazuje lokalizacji, więc na mapie nic się nie wyświetla i nie widać pozycji auta na żywo. Anulowane lub zwrócone zamówienie widnieje jako problem. Imię, nazwisko, adres i wskazówki dostawy są pomijane, a godziny odczytywane w czasie niemieckim.
 
-Dopóki masz zamówienie otwarte w Peek albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a co 2 minuty w dniu wyjazdu samochodu w trasę, od 6:00 (czasu niemieckiego) albo na pół godziny przed początkiem okna czasowego podanego przez HES, dopóki odpowiada śledzenie HES. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli przesyłka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Hermes Einrichtungs-Service.” oraz link „Poproś przewoźnika Hermes Einrichtungs-Service o pomoc”. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Dopóki masz zamówienie otwarte w Peek albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a co 2 minuty w dniu wyjazdu samochodu w trasę, od 6:00 (czasu niemieckiego), a jeśli okno czasowe podane przez HES zaczyna się po 6:30 — od pół godziny przed jego początkiem, dopóki odpowiada śledzenie HES. W innych przypadkach Peek sprawdza co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, nawet gdy masz ją otwartą, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli przesyłka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Hermes Einrichtungs-Service.” oraz link „Poproś przewoźnika Hermes Einrichtungs-Service o pomoc”. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Pytania o Hermes Einrichtungs-Service
 
@@ -113,7 +113,7 @@ Tylko jeśli obejmuje to umowa sklepu z HES: dostawa sobotnia, wieczorna oraz us
 - [HES: FAQ](https://myhes.de/de/faq) – gdzie szukać numeru, zmiana dnia, pozostawienie, próby, szkody, zwroty, kontakt do magazynu
 - [HES: Kontakt](https://www.hes.de/de/kontakt/) – pytania o przesyłki, spółka siostrzana Hermes Germany
 - [HES: Impressum](https://www.hes.de/de/impressum/) – centrala, kontakt magazynu w śledzeniu
-- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partnerzy w Austrii i Szwajcarii
+- [HES: Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partnerzy w Holandii, Austrii i Szwajcarii
 - [Hermes Germany: Sicherheit](https://www.myhermes.de/sicherheit/) – SMS-y od HES
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wykrywanie numerów i dane czytane przez Peek
 :::

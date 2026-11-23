@@ -76,17 +76,17 @@ Voici les canaux indiqués sur les pages officielles de HES :
 - **La boutique :** la page de contact de HES renvoie toute question sur une commande vers la boutique ou le suivi sur myhes.de.
 - **Siège social :** le +49 5732 103-0 à Löhne ne fournit aucune information sur les livraisons.
 
-En Autriche et en Suisse, HES livre par l’intermédiaire de partenaires (Gebrüder Weiss, Sieber Transport AG) et ne publie aucun contact destinataire : adresse-toi à la boutique.
+Aux Pays-Bas, en Autriche et en Suisse, HES livre par l’intermédiaire de partenaires (TSN Groen, Gebrüder Weiss, Sieber Transport AG) et ne publie aucun contact destinataire : adresse-toi à la boutique.
 
 Contrairement à Hermes Germany qui n’envoie pas de SMS, HES en envoie bien : un SMS provenant de HES peut donc être authentique.
 
 ## Suivre une livraison Hermes Einrichtungs-Service avec Peek
 
-[Peek](/) reconnaît directement un numéro de bon de livraison HES de 19 ou 21 chiffres au bon schéma (`0000` en positions 11–14) et teste aussi HES (avec DHL eCommerce) sur un numéro de 17 chiffres correspondant ; en revanche, il n’interroge pas HES sur un *Kollinummer* de 20 chiffres. Si Peek affiche un autre transporteur ou aucun, utilise « Changer de transporteur » et choisis Hermes Einrichtungs-Service pour interroger myhes.de sans code postal. Colle le numéro, pas un lien myhes.de.
+[Peek](/) reconnaît directement un numéro de bon de livraison HES de 19 chiffres au bon schéma (`0000` en positions 11–14) et teste aussi HES sur un numéro correspondant de 21 chiffres (avec SEUR) ou de 17 chiffres (avec DHL eCommerce) ; en revanche, il n’interroge pas HES sur un *Kollinummer* de 20 chiffres. Si Peek affiche un autre transporteur ou aucun, utilise « Changer » (ou « Changer de transporteur » sur un colis déjà ajouté) et choisis Hermes Einrichtungs-Service pour interroger myhes.de sans code postal. Colle le numéro, pas un lien myhes.de.
 
 Peek affiche le statut et l’historique en allemand tels que myhes.de les publie, le jour de livraison prévu avec son créneau horaire lorsqu’il est indiqué, la boutique ou le vendeur et l’heure de livraison. HES ne communiquant aucun lieu, rien n’apparaît sur la carte et le suivi GPS du camion n’est pas repris. Une commande annulée ou retournée s’affiche comme problème. Ton nom, ton adresse et tes consignes de livraison sont écartés, et les horaires sont lus à l’heure allemande.
 
-Tant que tu gardes l’envoi ouvert dans Peek, ou le jour de la livraison si tes notifications sont activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes le jour où le camion part en tournée, dès 6 h (heure allemande) ou une demi-heure avant l’ouverture du créneau annoncé par HES, tant que le suivi de HES répond. Après deux jours sans nouvelle (12 heures tant que l’envoi reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures, et toutes les 6 heures après sept jours sur « Étiquette créée ». Si un envoi en « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Hermes Einrichtungs-Service. » et le lien « Demande de l’aide à Hermes Einrichtungs-Service ». Tu peux recevoir des alertes pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Tant que tu gardes l’envoi ouvert dans Peek, ou le jour de la livraison si tes notifications sont activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes le jour où le camion part en tournée, dès 6 h (heure allemande), ou dès une demi-heure avant le créneau annoncé par HES s’il commence après 6 h 30, tant que le suivi de HES répond. Sinon, il vérifie toutes les heures. Après deux jours sans nouvelle (12 heures tant que l’envoi reste sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures même si tu l’as ouvert, et toutes les 6 heures après sept jours sur « Étiquette créée ». Si un envoi en « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Hermes Einrichtungs-Service. » et le lien « Demande de l’aide à Hermes Einrichtungs-Service ». Tu peux recevoir des alertes pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur Hermes Einrichtungs-Service
 
@@ -113,7 +113,7 @@ Uniquement si le contrat entre la boutique et HES le prévoit : la livraison le 
 - [HES : FAQ](https://myhes.de/de/faq) – emplacement du numéro, report de date, dépôt, tentatives, dégâts, retours, contact dépôt
 - [HES : Kontakt](https://www.hes.de/de/kontakt/) – questions sur les envois, société sœur de Hermes Germany
 - [HES : Impressum](https://www.hes.de/de/impressum/) – siège social, contact dépôt dans le suivi
-- [HES : Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partenaires en Autriche et en Suisse
+- [HES : Versand ins Ausland](https://www.hes.de/de/versenden/versand-ins-ausland/) – partenaires aux Pays-Bas, en Autriche et en Suisse
 - [Hermes Germany : Sicherheit](https://www.myhermes.de/sicherheit/) – SMS envoyés par HES
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – détection et données lues par Peek
 :::

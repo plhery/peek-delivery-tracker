@@ -14666,6 +14666,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "圆通速递（YTO）物流查询：YT 单号、物流记录与客服电话",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-wuliu-chaxun",
+      "title": "美特顺物流（Meiteshun）查询：AMTS单号与预设轨迹",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jinritong-jrt-wuliu-chaxun",
+      "title": "今日通（JRT）物流查询：JRT…MM单号、航班轨迹与尾程",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "jisu-guoji-js-express-wuliu-chaxun",
+      "title": "急速国际（JS Express）物流查询：JSE单号、状态与尾程",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "guangzhou-yunlian-gzyl-wuliu-chaxun",
+      "title": "广州云链（GZYL）物流查询：YL…YQ单号与预设轨迹说明",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-huoyun-wuliu-chaxun",
+      "title": "星和货运（Xinghe Freight）物流查询：GZXH单号与状态",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "nl": [

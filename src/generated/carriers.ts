@@ -3812,6 +3812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "xuchuan-logistics-sendungsverfolgung",
+      "title": "Xuchuan Logistics Tracking: XC-Nummern, Lieferung, Hilfe",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
+    },
+    {
       "id": "samus",
       "catalog": "samus",
       "slug": "samus-sendungsverfolgung",
@@ -5678,6 +5686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "suivi-xuchuan-logistics",
+      "title": "Suivi Xuchuan Logistics\u00a0: numéros XC, livraison et aide",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
+    },
+    {
       "id": "samus",
       "catalog": "samus",
       "slug": "suivi-samus",
@@ -7520,6 +7536,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "tracciamento-xuchuan-logistics",
+      "title": "Tracciamento Xuchuan Logistics: numeri XC, consegna, aiuto",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
+    },
+    {
       "id": "samus",
       "catalog": "samus",
       "slug": "tracciamento-samus",
@@ -9338,6 +9362,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003876"
     },
     {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "seguimiento-xuchuan-logistics",
+      "title": "Seguimiento Xuchuan Logistics: números XC, entrega y ayuda",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
+    },
+    {
       "id": "samus",
       "catalog": "samus",
       "slug": "seguimiento-samus",
@@ -11146,6 +11178,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SXW Express: números SXW, estados e entrega",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "seguimento-xuchuan-logistics",
+      "title": "Seguimento Xuchuan Logistics: números XC, entrega e ajuda",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
     },
     {
       "id": "samus",
@@ -13006,6 +13046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SXW Express: numery SXW, statusy i dostawa",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "xuchuan-logistics",
+      "catalog": "xuchuan-logistics",
+      "slug": "sledzenie-xuchuan-logistics",
+      "title": "Śledzenie Xuchuan Logistics: numery XC, dostawa i pomoc",
+      "name": "Xuchuan International Logistics",
+      "color": "#0a2463"
     },
     {
       "id": "samus",

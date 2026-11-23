@@ -240,7 +240,7 @@
   { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gls-us", "catalog": "gls-us", "name": "GLS US", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "sxw-express", "catalog": "sxw-express", "name": "SXW Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "xuchuan-logistics", "catalog": "xuchuan-logistics", "name": "Xuchuan International Logistics", "languages": ["en"] },
+  { "id": "xuchuan-logistics", "catalog": "xuchuan-logistics", "name": "Xuchuan International Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "samus", "catalog": "samus", "name": "SAMUS", "languages": ["en", "lt", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "siuntos-autobusais", "catalog": "siuntos-autobusais", "name": "Siuntos autobusais", "languages": ["en", "lt", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "zipasgo", "catalog": "zipasgo", "name": "ZipasGo", "languages": ["en", "lt"] },

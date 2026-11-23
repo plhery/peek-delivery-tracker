@@ -345,6 +345,24 @@ begin
 end;
 $$;
 
+-- A Tiui folio keeps its hyphens, which its tracker needs; the same shape under
+-- another carrier is stored in capitals without them.
+do $$
+declare
+  folio public.packages;
+  other public.packages;
+begin
+  folio := test_support.add_parcel('99 - 99-9999', '', 'tiui', null, null);
+  other := test_support.add_parcel('99-99-9998', '', 'seino', null, null);
+  if folio.tracking_number <> '99-99-9999' or other.tracking_number <> '99999998' then
+    raise exception 'a Tiui folio lost its hyphens, or another carrier''s number kept them';
+  end if;
+  if not public.delete_owned_package(folio.id) or not public.delete_owned_package(other.id) then
+    raise exception 'the folio checks'' parcels were not deleted';
+  end if;
+end;
+$$;
+
 do $$
 declare
   visible integer;

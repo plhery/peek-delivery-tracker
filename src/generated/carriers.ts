@@ -3356,6 +3356,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "citymail-sendungsverfolgung",
+      "title": "CityMail Sendungsverfolgung: Nummern & Status Schweden",
+      "name": "CityMail",
+      "color": "#fc4c02"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "sto-express-sendungsverfolgung",
@@ -4862,6 +4870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "suivi-citymail",
+      "title": "Suivi CityMail\u00a0: numéros, statuts et livraison en Suède",
+      "name": "CityMail",
+      "color": "#fc4c02"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "suivi-sto-express",
@@ -6336,6 +6352,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "tracciamento-citymail",
+      "title": "Tracciamento CityMail: numeri, stati e consegne Svezia",
+      "name": "CityMail",
+      "color": "#fc4c02"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "tracciamento-sto-express",
@@ -7786,6 +7810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005bff"
     },
     {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "seguimiento-citymail",
+      "title": "Seguimiento CityMail: números, estados y entrega Suecia",
+      "name": "CityMail",
+      "color": "#fc4c02"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "seguimiento-sto-express",
@@ -9210,6 +9242,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Ozon: números de encomenda e estados em português",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "seguimento-citymail",
+      "title": "Seguimento CityMail: números, estados e entrega Suécia",
+      "name": "CityMail",
+      "color": "#fc4c02"
     },
     {
       "id": "sto",
@@ -10702,6 +10742,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Ozon: numery zamówień i statusy po polsku",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "sledzenie-citymail",
+      "title": "Śledzenie CityMail: numery, statusy i dostawa w Szwecji",
+      "name": "CityMail",
+      "color": "#fc4c02"
     },
     {
       "id": "sto",

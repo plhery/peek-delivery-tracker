@@ -2572,6 +2572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "sameday-sendungsverfolgung",
+      "title": "Sameday Sendungsverfolgung: AWB, easybox und Status",
+      "name": "Sameday",
+      "color": "#e92427"
+    },
+    {
       "id": "speedy",
       "catalog": "speedy",
       "slug": "speedy-sendungsverfolgung",
@@ -4460,6 +4468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Nova Poshta\u00a0: numéros, statuts et agences",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "suivi-sameday",
+      "title": "Suivi Sameday\u00a0: AWB, easybox et statuts expliqués",
+      "name": "Sameday",
+      "color": "#e92427"
     },
     {
       "id": "speedy",
@@ -6368,6 +6384,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "tracciamento-sameday",
+      "title": "Tracciamento Sameday: AWB, easybox e stati spiegati",
+      "name": "Sameday",
+      "color": "#e92427"
+    },
+    {
       "id": "speedy",
       "catalog": "speedy",
       "slug": "tracciamento-speedy",
@@ -8242,6 +8266,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "seguimiento-sameday",
+      "title": "Seguimiento Sameday: AWB, easybox y estados",
+      "name": "Sameday",
+      "color": "#e92427"
+    },
+    {
       "id": "speedy",
       "catalog": "speedy",
       "slug": "seguimiento-speedy",
@@ -10098,6 +10130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Nova Poshta: números, estados e balcões",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "seguimento-sameday",
+      "title": "Seguimento Sameday: AWB, easybox e estados explicados",
+      "name": "Sameday",
+      "color": "#e92427"
     },
     {
       "id": "speedy",
@@ -11990,6 +12030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór",
       "name": "Nova Poshta",
       "color": "#e30613"
+    },
+    {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "sledzenie-sameday",
+      "title": "Śledzenie Sameday: numer AWB, easybox i statusy",
+      "name": "Sameday",
+      "color": "#e92427"
     },
     {
       "id": "speedy",

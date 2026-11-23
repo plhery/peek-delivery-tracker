@@ -2364,6 +2364,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "colisweb-sendungsverfolgung",
+      "title": "Colisweb Sendungsverfolgung: Status, Zeitfenster & Kontakt",
+      "name": "Colisweb",
+      "color": "#15cbe3"
+    },
+    {
       "id": "ciblex",
       "catalog": "ciblex",
       "slug": "ciblex-sendungsverfolgung",
@@ -5424,6 +5432,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "tracking-colisweb",
+      "title": "Tracking Colisweb: messaggi in francese e fasce orarie",
+      "name": "Colisweb",
+      "color": "#15cbe3"
+    },
+    {
       "id": "ciblex",
       "catalog": "ciblex",
       "slug": "tracciamento-ciblex",
@@ -6914,6 +6930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "seguimiento-colisweb",
+      "title": "Seguimiento Colisweb: mensajes en francés y franjas",
+      "name": "Colisweb",
+      "color": "#15cbe3"
+    },
+    {
       "id": "ciblex",
       "catalog": "ciblex",
       "slug": "seguimiento-ciblex",
@@ -8394,6 +8418,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Asendia: estados, entrega em Portugal e alfândega",
       "name": "Asendia",
       "color": "#005d69"
+    },
+    {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "seguimento-colisweb",
+      "title": "Seguimento Colisweb: mensagens em francês e janelas",
+      "name": "Colisweb",
+      "color": "#15cbe3"
     },
     {
       "id": "ciblex",
@@ -9902,6 +9934,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Asendia śledzenie przesyłek: statusy, doręczenie i cło",
       "name": "Asendia",
       "color": "#005d69"
+    },
+    {
+      "id": "colisweb",
+      "catalog": "colisweb",
+      "slug": "sledzenie-colisweb",
+      "title": "Śledzenie Colisweb: komunikaty po francusku i okna dostaw",
+      "name": "Colisweb",
+      "color": "#15cbe3"
     },
     {
       "id": "ciblex",

@@ -50,7 +50,7 @@
   { "id": "gofo-it", "catalog": "gofo-it", "name": "GOFO Italy", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
   { "id": "speedpak", "catalog": "speedpak", "name": "SpeedPAK", "languages": ["en", "de", "fr", "it", "es", "pl"] },
   { "id": "asendia", "catalog": "asendia", "name": "Asendia", "languages": ["en", "fr", "de", "it", "pt", "es", "pl"] },
-  { "id": "colisweb", "catalog": "colisweb", "name": "Colisweb", "languages": ["en", "fr"] },
+  { "id": "colisweb", "catalog": "colisweb", "name": "Colisweb", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ciblex", "catalog": "ciblex", "name": "Ciblex", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "hermes-einrichtungs-service", "catalog": "hermes", "name": "Hermes Einrichtungs-Service", "languages": ["en", "de"] },
   { "id": "landmark-global", "catalog": "landmark-global", "name": "Landmark Global", "languages": ["en", "de", "fr", "es", "pt", "it", "pl"] },

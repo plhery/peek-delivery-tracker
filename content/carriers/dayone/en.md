@@ -14,11 +14,11 @@ DayOne publishes no number format. The shape Peek knows as DayOne's, with made-u
 
 | Number | What it is |
 | --- | --- |
-| `DOT0000000000000000` | DOT and 16 digits: a DayOne number. |
-| `DOT1000000000000000` | DOT1 and 15 more digits: also DayOne's. DayOne's tracker looks these up in another system. |
-| `DOT000000000000000` | Only 15 digits: not DayOne's shape, and Peek doesn't name DayOne. Check for a missing digit. |
+| `DOT0482917364058291` | DOT and 16 digits: a DayOne number. |
+| `DOT1482917364058291` | DOT1 and 15 more digits: also DayOne's. DayOne's tracker looks these up in another system. |
+| `DOT048291736405829` | Only 15 digits: not DayOne's shape, and Peek doesn't name DayOne. Check for a missing digit. |
 
-In Peek, lower case doesn't matter. Keep DOT joined to the digits: with a space or a dash right after DOT, Peek can read the digits alone and name another carrier.
+In Peek, lower case, spaces and dashes don't matter when you paste the number alone. In a whole message, keep DOT joined to the digits: with a space right after DOT, Peek can read the digits alone and name another carrier.
 
 **Where to find it.** In the shop's shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
@@ -77,7 +77,7 @@ DayOne sends you to the shop. Its tracker says: "For all package logistics, lost
 
 **Only `Info received` or `Order processed by shipper`.** Nobody has scanned the parcel yet. If it stays like that for several days, ask the shop when it was sent.
 
-**No new scan for days.** Parcels often go quiet on long flights and at customs. When a parcel on its way has had no new scan for four days, Peek flags it with the day of that scan ("No tracking update since Mon 12 Oct"). After three weeks with no new scan, Peek says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller." See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No new scan for days.** When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DayOne.", with a "Get help from DayOne" link to DayOne's contact page. Once Peek follows the delivering post, the link names that post, if Peek has a help page for it. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DayOne." See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **`Alert` or `Expired`.** Read the newest scans, then ask the shop for help, with your DOT number.
 
@@ -87,7 +87,7 @@ DayOne sends you to the shop. Its tracker says: "For all package logistics, lost
 
 ## DayOne contact
 
-As read on 1 November 2026 on [DayOne's tracker](https://www.dayonetrack.com/):
+From [DayOne's tracker](https://www.dayonetrack.com/):
 
 - **About your parcel**: the shop you ordered from, as DayOne asks.
 - **Business email**: info@dayone-shipping.com, which DayOne gives for cooperation and business enquiries other than parcel questions.
@@ -104,7 +104,9 @@ When DayOne gives a scan the time offset of its place, Peek uses it. For a scan 
 
 DayOne's tracker doesn't show the delivering company's number, but its lookup sometimes has it. Peek then asks that company too: your country's post for a postal number (two letters, nine digits, two letters), such as Royal Mail, USPS, Canada Post, An Post or Australia Post, or the one carrier the number's shape points to, such as YunExpress for a YT number. Once that carrier shows a scan at least as recent as DayOne's newest, Peek follows the parcel there, shows its number next to the DOT number and keeps DayOne's history.
 
-For a DOT0 number, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DayOne scans the parcel out for delivery, while DayOne's own tracker answers; when tracking services answer, as for a DOT1 number, hourly, and up to every 15 minutes on the delivery day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
+For a DOT0 number, while you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DayOne scans the parcel out for delivery, while DayOne's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days. When tracking services answer, as for a DOT1 number, Peek checks hourly, every 3 hours once the newest scan is a day old, and every 6 hours after seven days at "Label created"; on the day the parcel is out for delivery, up to every 15 minutes while you have it open in Peek or notifications on.
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
 
 ## Questions about DayOne tracking
 

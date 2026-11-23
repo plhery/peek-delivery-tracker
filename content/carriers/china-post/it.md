@@ -77,7 +77,7 @@ China Post porta il pacco in aereo. In Italia lo prende Poste Italiane, dalla do
 
 ## Tracking China Post fermo, pacco perso o rispedito
 
-**Ancora nessuna scansione.** China Post non mostra niente finché non ha scansionato il pacco: prima, il negozio ha solo creato un'etichetta. Chiedi al negozio quando l'ha consegnato. Nel frattempo Peek mostra «In attesa di China Post». Se dopo due giorni China Post non mostra ancora niente e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento lo controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
+**Ancora nessuna scansione.** China Post non mostra niente finché non ha scansionato il pacco: prima, il negozio ha solo creato un'etichetta. Chiedi al negozio quando l'ha consegnato. Nel frattempo Peek mostra «In attesa di China Post». Se dopo due giorni China Post non mostra ancora niente e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.»
 
 **Silenzio dopo la partenza dalla Cina.** Tra il volo e la prima scansione di Poste possono passare giorni senza notizie. Controlla lo stesso codice su poste.it, ricordando che un pacco compare solo dalla presa in carico in Italia. Un codice che inizia con U potrebbe non avere mai scansioni in Italia. Approfondisci in [tracking che non si aggiorna](guide:tracking-not-updating) e [tracking di un pacco dalla Cina](guide:tracking-from-china).
 

@@ -57,7 +57,7 @@ Escluse le scansioni [DHL](carrier:dhl) copiate sulla direttrice tedesca, la rig
 
 **In attesa dopo lo svincolo doganale.** La dogana d'importazione ha terminato i controlli e il collo attende il ritiro del corriere locale. Se passano diversi giorni senza la presa in carico, avvisa il venditore ([perché il tracciamento non si aggiorna](guide:tracking-not-updating)).
 
-**Nessun risultato.** Poiché per un codice sconosciuto Huaya restituisce una riga vuota con il riferimento ripetuto, Peek la interpreta come spedizione registrata senza ancora scansioni e mostra «In attesa di Huaya Express» senza segnalare errori di formato (per una ricerca senza account continua a controllare nelle prime 6 ore, poi quando apri il link e, fino a 30 giorni dalla ricerca, finché le notifiche restano attive). Ricontrolla tu stesso i caratteri rispetto al messaggio del negozio (`HYYT`, dodici cifre, `GZ`) e chiedi conferma al venditore.
+**Nessun risultato.** Poiché per un codice sconosciuto Huaya restituisce una riga vuota con il riferimento ripetuto, Peek la interpreta come spedizione registrata senza ancora scansioni e mostra «In attesa di Huaya Express» senza segnalare errori di formato. Ricontrolla tu stesso i caratteri rispetto al messaggio del negozio (`HYYT`, dodici cifre, `GZ`) e chiedi conferma al venditore.
 
 **In ritardo, smarrito o restituito.** Le condizioni di rimborso sul sito di Huaya sono scritte per i negozi mittenti, non per chi riceve. Chiedi al venditore una nuova spedizione o un rimborso e, se non risponde, apri una contestazione sul marketplace ([pacco smarrito](guide:lost-parcel), [restituito al mittente](guide:returned-to-sender), [consegnato ma non ricevuto](guide:delivered-not-received)).
 

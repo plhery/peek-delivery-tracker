@@ -57,7 +57,7 @@ Poza kopiowanymi skanami [DHL](carrier:dhl) na trasie do Niemiec, wzmianką o Ea
 
 **Cisza po odprawie importowej.** Odprawa celna jest zakończona, a paczka czeka na odbiór przez lokalnego przewoźnika. Jeśli przez kilka dni nie pojawia się przekazanie, powiadom sprzedawcę ([dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating)).
 
-**Brak wyników.** Ponieważ dla nieznanego numeru Huaya zwraca pusty wiersz z powtórzoną referencją, Peek traktuje to jako zgłoszoną przesyłkę przed pierwszym skanem i wyświetla „Oczekiwanie na przewoźnika Huaya Express” bez prośby o sprawdzenie numeru (przy wyszukaniu bez konta sprawdza przez pierwsze 6 godzin, potem po otwarciu linku oraz do 30 dni przy włączonych powiadomieniach). Sam porównaj wpisany kod z wiadomością ze sklepu (`HYYT`, dwanaście cyfr, `GZ`) i upewnij się u sprzedawcy, że nadał paczkę przez Huaya.
+**Brak wyników.** Ponieważ dla nieznanego numeru Huaya zwraca pusty wiersz z powtórzoną referencją, Peek traktuje to jako zgłoszoną przesyłkę przed pierwszym skanem i wyświetla „Oczekiwanie na przewoźnika Huaya Express” bez prośby o sprawdzenie numeru. Sam porównaj wpisany kod z wiadomością ze sklepu (`HYYT`, dwanaście cyfr, `GZ`) i upewnij się u sprzedawcy, że nadał paczkę przez Huaya.
 
 **Opóźniona, zagubiona lub zwrócona.** Warunki reklamacyjne Huaya są pisane dla sklepów nadających, a nie dla odbiorców. Poproś sprzedawcę o ponowną wysyłkę lub zwrot pieniędzy, a gdy przestanie odpowiadać, otwórz spór na platformie zakupowej ([zagubiona paczka](guide:lost-parcel), [zwrot do nadawcy](guide:returned-to-sender), [dostarczona, ale nieotrzymana](guide:delivered-not-received)).
 

@@ -71,7 +71,7 @@ Zustellversuche und Benachrichtigungskarten folgen den Regeln deiner Post, siehe
 
 ## China Post Sendungsverfolgung ohne Update, Paket verloren oder zurück
 
-**Noch keine Scans.** China Post zeigt nichts, bis sie das Paket gescannt hat. Vorher hat der Shop nur ein Etikett erstellt. Frag den Shop, wann er das Paket übergeben hat. Peek zeigt so lange „Warten auf China Post“. Zeigt China Post auch zwei Tage später nichts zu der Nummer und antwortet sonst niemand für sie, zeigt Peek stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich.
+**Noch keine Scans.** China Post zeigt nichts, bis sie das Paket gescannt hat. Vorher hat der Shop nur ein Etikett erstellt. Frag den Shop, wann er das Paket übergeben hat. Peek zeigt so lange „Warten auf China Post“. Zeigt China Post auch zwei Tage später nichts zu der Nummer und antwortet sonst niemand für sie, zeigt Peek stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
 
 **Funkstille nach dem Abflug.** Zwischen Flug und erstem Scan deiner Post können Tage ohne Neuigkeit vergehen. Schau mit derselben Nummer bei deiner Post nach. Bei der Deutschen Post sind nicht alle Schritte sichtbar, und die Österreichische Post zeigt das Paket erst, wenn ein Logistikzentrum es erfasst hat. Eine Nummer mit U bekommt in deinem Land vielleicht nie Scans. Mehr in [Sendungsverfolgung aktualisiert nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 

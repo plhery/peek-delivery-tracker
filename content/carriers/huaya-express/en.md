@@ -55,7 +55,7 @@ Huaya's tracking record names no delivering company and no second number, apart 
 
 **Waiting after the import customs line.** Customs are done and the parcel is waiting for the local carrier to collect it. If several days pass without the hand-over line, tell the seller. See [why tracking stops updating](guide:tracking-not-updating).
 
-**No result.** Peek takes Huaya's answer for a number it doesn't know (above) as Huaya listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Huaya Express", with no request to check the number. So check what you typed against the seller's message yourself: HYYT, twelve digits, GZ. If it's right and Huaya still has nothing, ask the seller to confirm it booked the parcel with Huaya.
+**No result.** Peek takes Huaya's answer for a number it doesn't know (above) as Huaya listing the shipment without a scan yet: it keeps checking and shows "Waiting for Huaya Express", with no request to check the number. So check what you typed against the seller's message yourself: HYYT, twelve digits, GZ. If it's right and Huaya still has nothing, ask the seller to confirm it booked the parcel with Huaya.
 
 **Late, lost or returned.** Huaya's claim terms are written for the shops that book with it, not for you. Ask the seller for a new parcel or a refund, and if the seller stops answering, open a dispute on the marketplace you bought from. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 

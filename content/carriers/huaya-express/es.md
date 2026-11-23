@@ -57,7 +57,7 @@ Fuera de los escaneos copiados de [DHL](carrier:dhl) en Alemania, de Early Bird 
 
 **Sin cambios tras completarse la aduana de importación.** La aduana ya terminó y el paquete espera a que el operador local lo retire. Si pasan varios días sin traspaso al operador, avisa al vendedor ([por qué no se actualiza el seguimiento](guide:tracking-not-updating)).
 
-**Sin resultados.** Como Huaya devuelve una fila vacía con la referencia cuando no reconoce un código, Peek lo interpreta como envío registrado aún sin primer escaneo y muestra «Esperando a Huaya Express» sin pedirte revisar el número (en consultas sin cuenta sigue comprobando las primeras 6 horas, luego cuando abras su enlace y, hasta 30 días después, mientras tengas activadas las notificaciones). Comprueba tú mismo el código frente al mensaje de la tienda (`HYYT`, doce cifras, `GZ`) y confirma con el vendedor que realmente envió con Huaya.
+**Sin resultados.** Como Huaya devuelve una fila vacía con la referencia cuando no reconoce un código, Peek lo interpreta como envío registrado aún sin primer escaneo y muestra «Esperando a Huaya Express» sin pedirte revisar el número. Comprueba tú mismo el código frente al mensaje de la tienda (`HYYT`, doce cifras, `GZ`) y confirma con el vendedor que realmente envió con Huaya.
 
 **Retrasado, perdido o devuelto.** Las condiciones de reclamación de Huaya están redactadas para las tiendas remitentes, no para compradores. Pide al vendedor un reenvío o reembolso y, si deja de responder, abre una disputa en la plataforma donde compraste ([paquete perdido](guide:lost-parcel), [devuelto al remitente](guide:returned-to-sender), [entregado pero no recibido](guide:delivered-not-received)).
 

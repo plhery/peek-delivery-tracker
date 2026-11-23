@@ -118,7 +118,7 @@ Shouwus Sendungsverfolgung nennt weder Namen noch Nummer des Paketdiensts, auße
 
 ## Shouwu Paket kommt nicht an oder Tracking hängt
 
-**`Not Found`.** Shouwu nennt vier Gründe: Es hat das Paket noch nicht angenommen oder noch nicht gescannt, die Nummer ist falsch, oder das Paket wurde vor so langer Zeit verschickt, dass seine Daten weg sind. Die Bearbeitung dauere meist ein paar Tage. Peek zeigt „Warten auf Shouwu International“ und fragt weiter nach. Kennt Shouwu die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Prüf die Nummer Zeichen für Zeichen; tut sich nach ein paar Tagen nichts, frag den Shop.
+**`Not Found`.** Shouwu nennt vier Gründe: Es hat das Paket noch nicht angenommen oder noch nicht gescannt, die Nummer ist falsch, oder das Paket wurde vor so langer Zeit verschickt, dass seine Daten weg sind. Die Bearbeitung dauere meist ein paar Tage. Peek zeigt „Warten auf Shouwu International“ und fragt weiter nach. Kennt Shouwu die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ Prüf die Nummer Zeichen für Zeichen; tut sich nach ein paar Tagen nichts, frag den Shop.
 
 **Hängt bei `Preparing`, `Shipment information received` oder `Carrier received the shipment`.** Shouwu hat das Paket noch nicht oder hat es noch nicht aus seinem Lager losgeschickt. Frag den Shop, wann er es übergeben hat.
 

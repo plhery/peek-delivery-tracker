@@ -70,7 +70,7 @@ Pour un passage manqué, lis aussi [colis non livré, avis de passage](guide:mis
 
 ## Suivi China Post qui ne bouge plus, colis perdu ou renvoyé
 
-**Pas encore de scan.** China Post n'affiche rien tant qu'elle n'a pas scanné le colis ; avant, la boutique a seulement créé l'étiquette. Demande-lui quand elle l'a remis. En attendant, Peek affiche « En attente de China Post ». Si deux jours plus tard China Post n'affiche toujours rien pour ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
+**Pas encore de scan.** China Post n'affiche rien tant qu'elle n'a pas scanné le colis ; avant, la boutique a seulement créé l'étiquette. Demande-lui quand elle l'a remis. En attendant, Peek affiche « En attente de China Post ». Si deux jours plus tard China Post n'affiche toujours rien pour ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. »
 
 **Plus rien depuis le départ de Chine.** Entre l'avion et le premier scan de ta poste, plusieurs jours peuvent passer sans nouvelles. Cherche le même numéro sur le site de ta poste. Un numéro qui commence par U peut n'avoir aucun scan chez toi. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis venu de Chine](guide:tracking-from-china).
 

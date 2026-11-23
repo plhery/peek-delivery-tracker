@@ -80,7 +80,7 @@ updated: 2026-11-23
 
 - **停在进口清关（`Shipment started the customs clearance process at destination`）。** 包裹正在目的国海关清关。根据 [欧盟委员会海关改革说明](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en)，自 2026 年 11 月 1 日起，从欧盟境外网购的包裹无论价值多少，均须按每类商品缴纳 2 欧元欧盟统一处理费。收到缴税通知请见 [包裹海关扣留与清关指南](guide:customs)；滞留多日请联系卖家，并参考 [物流为什么停止更新](guide:tracking-not-updating)。
 - **清关放行后毫无更新。** 出现 `Departed from customs`、`Shipment completed the customs clearance process at destination`、`Customs Clearance Completed Successfully` 或 `Import clearance success` 后，包裹应已移交当地尾程快递。请在通邮查件页查找转单号，或问卖家要尾程快递商与单号。见 [中国直邮包裹跟踪指南](guide:tracking-from-china)。
-- **提示「查询不到」或「暂无轨迹信息」。** 通邮查件页对未知单号返回「查询不到」，对已建单未实扫的包裹返回「暂无轨迹信息」。若超过两天通邮仍查不到该单号且第三方查询服务也无记录，Peek 会提示核对单号并转为每天检查一次（满一周后每周检查一次）；若系统确认已建单但超过一天仍停留在 `Parcel Data Received`，说明卖家尚未交货给通邮，请问卖家何时发出。
+- **提示「查询不到」或「暂无轨迹信息」。** 通邮查件页对未知单号返回「查询不到」，对已建单未实扫的包裹返回「暂无轨迹信息」。若超过两天通邮仍查不到该单号且第三方查询服务也无记录，Peek 会提示核对单号；若系统确认已建单但超过一天仍停留在 `Parcel Data Received`，说明卖家尚未交货给通邮，请问卖家何时发出。
 - **显示已签收却没收到，或丢失/退件。** 美国包裹先联系当地 USPS 邮局，再联系卖家。由于是卖家与通邮签约，所有丢件退款或补发申请必须找卖家或购物平台提出。参见 [显示已签收但未收到](guide:delivered-not-received)、[包裹丢失怎么办](guide:lost-parcel) 和 [包裹退回寄件人](guide:returned-to-sender)。
 
 ## 通邮（TopYou）客服电话与联系方式

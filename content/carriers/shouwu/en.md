@@ -104,7 +104,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 ## Shouwu parcel not arriving or tracking stuck
 
-**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for Shouwu International" and keeps checking. If Shouwu still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number character by character; if nothing comes after a few days, ask the seller.
+**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for Shouwu International" and keeps checking. If Shouwu still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Check the number character by character; if nothing comes after a few days, ask the seller.
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 

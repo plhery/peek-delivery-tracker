@@ -57,7 +57,7 @@ Abgesehen von den kopierten [DHL](carrier:dhl)-Scans auf einer Route nach Deutsc
 
 **Pause nach der Einfuhrverzollung.** Der Zoll ist abgeschlossen und das Paket wartet auf die Abholung durch den Zusteller vor Ort. Tut sich mehrere Tage lang nichts, informiere den Verkäufer ([Warum sich das Tracking nicht aktualisiert](guide:tracking-not-updating)).
 
-**Kein Ergebnis.** Da Huaya bei unbekannten Nummern eine leere Zeile mit der Referenz zurückgibt, wertet Peek dies als angekündigte Sendung ohne ersten Scan und zeigt „Warten auf Huaya Express“ ohne Fehlermeldung zum Nummernformat (bei einer Suche ohne Konto prüft Peek in den ersten 6 Stunden weiter, danach beim Öffnen des Links und bis zu 30 Tage lang bei eingeschalteten Mitteilungen). Vergleiche die Schreibweise daher selbst mit der Nachricht des Händlers (`HYYT`, zwölf Ziffern, `GZ`) und frag beim Shop nach, ob er wirklich mit Huaya verschickt hat.
+**Kein Ergebnis.** Da Huaya bei unbekannten Nummern eine leere Zeile mit der Referenz zurückgibt, wertet Peek dies als angekündigte Sendung ohne ersten Scan und zeigt „Warten auf Huaya Express“ ohne Fehlermeldung zum Nummernformat. Vergleiche die Schreibweise daher selbst mit der Nachricht des Händlers (`HYYT`, zwölf Ziffern, `GZ`) und frag beim Shop nach, ob er wirklich mit Huaya verschickt hat.
 
 **Verspätet, verloren oder zurückgeschickt.** Huayas Haftungsregeln auf den Linien-Seiten richten sich an einliefernde Shops, nicht an Empfänger. Bitte den Händler um Ersatz oder Erstattung und eröffne bei Funkstille einen Käuferschutzfall auf dem Marktplatz ([Paket verloren](guide:lost-parcel), [Zurück an den Absender](guide:returned-to-sender), [Zugestellt, aber nicht erhalten](guide:delivered-not-received)).
 

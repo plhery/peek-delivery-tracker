@@ -57,7 +57,7 @@ Tirando as leituras copiadas da [DHL](carrier:dhl) numa rota para a Alemanha, a 
 
 **Sem avanços após o desalfandegamento de importação.** A alfândega já libertou o pacote, que aguarda recolha pela transportadora local. Se passarem vários dias sem entrega ao operador, avisa o vendedor ([porque é que o seguimento não atualiza](guide:tracking-not-updating)).
 
-**Sem resultados.** Como a Huaya devolve uma linha em branco com a referência repetida para números desconhecidos, o Peek trata essa resposta como remessa registada ainda sem primeira leitura e mostra «À espera de Huaya Express» sem pedir que verifiques o número (numa consulta sem conta continua a verificar nas primeiras 6 horas, depois quando abres a ligação e, até 30 dias após a consulta, enquanto as notificações estiverem ativas). Confere tu mesmo os caracteres com a mensagem da loja (`HYYT`, doze algarismos, `GZ`) e confirma com o vendedor se expediu pela Huaya.
+**Sem resultados.** Como a Huaya devolve uma linha em branco com a referência repetida para números desconhecidos, o Peek trata essa resposta como remessa registada ainda sem primeira leitura e mostra «À espera de Huaya Express» sem pedir que verifiques o número. Confere tu mesmo os caracteres com a mensagem da loja (`HYYT`, doze algarismos, `GZ`) e confirma com o vendedor se expediu pela Huaya.
 
 **Atrasada, perdida ou devolvida.** Os termos de indemnização da Huaya destinam-se às lojas remetentes, não ao destinatário. Pede ao vendedor novo envio ou reembolso e, se deixar de responder, abre disputa na plataforma onde compraste ([encomenda perdida](guide:lost-parcel), [devolvida ao remetente](guide:returned-to-sender), [entregue mas não recebido](guide:delivered-not-received)).
 

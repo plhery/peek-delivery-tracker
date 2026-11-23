@@ -70,7 +70,7 @@ Correos. China Post lleva el paquete hasta España y, desde ahí, Correos se enc
 
 ## Seguimiento de China Post parado, perdido o devuelto
 
-**Todavía sin lecturas.** China Post no muestra nada hasta que lee el paquete; antes, la tienda solo ha creado la etiqueta. Pregúntale cuándo lo entregó. Mientras tanto, Peek muestra «Esperando a China Post». Si dos días después China Post sigue sin mostrar nada para el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste.
+**Todavía sin lecturas.** China Post no muestra nada hasta que lee el paquete; antes, la tienda solo ha creado la etiqueta. Pregúntale cuándo lo entregó. Mientras tanto, Peek muestra «Esperando a China Post». Si dos días después China Post sigue sin mostrar nada para el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
 
 **Parado desde que salió de China.** Entre el vuelo y la primera lectura de Correos pueden pasar días sin novedades. Busca el mismo número en el localizador de Correos. Un número que empieza por U puede no tener nunca lecturas en España. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguir un paquete de China](guide:tracking-from-china).
 

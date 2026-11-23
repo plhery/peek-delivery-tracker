@@ -64,7 +64,7 @@ Once you know the carrier and its number, its own tracking has the local detail,
 
 ## DHLink parcel not updating, lost or delivered but missing
 
-**Not found.** Check the number on your DHgate order, and try the tracking number rather than the DHLink number. A last-mile number finds nothing on DHLink's page: check it with that carrier. If you've picked DHLink with "Change" for a number DHLink doesn't know, Peek shows "Waiting for DHLink" and keeps checking. If DHLink still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
+**Not found.** Check the number on your DHgate order, and try the tracking number rather than the DHLink number. A last-mile number finds nothing on DHLink's page: check it with that carrier. If you've picked DHLink with "Change" for a number DHLink doesn't know, Peek shows "Waiting for DHLink" and keeps checking. If DHLink still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel."
 
 **Stuck after the flight or customs.** Look for a "Last Leg No." and check it with that carrier, whose scans may be newer than DHLink's. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 

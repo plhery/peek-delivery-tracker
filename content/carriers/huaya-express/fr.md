@@ -57,7 +57,7 @@ En dehors des scans [DHL](carrier:dhl) recopiés sur une ligne vers l'Allemagne,
 
 **En attente après le dédouanement import.** La douane a libéré l'envoi et le colis attend sa prise en charge par le transporteur local. Si plusieurs jours s'écoulent sans remise au prestataire, préviens le vendeur ([pourquoi le suivi ne bouge plus](guide:tracking-not-updating)).
 
-**Aucun résultat.** Face à la ligne vide que renvoie Huaya lorsqu'il ne connaît pas encore un numéro, Peek considère que l'envoi attend son premier scan et affiche « En attente de Huaya Express » sans message d'erreur sur le format (pour une recherche sans compte, Peek revérifie pendant les 6 premières heures, puis quand tu rouvres son lien et, jusqu'à 30 jours après la recherche, tant que les notifications sont activées). Vérifie donc toi-même la saisie par rapport au message du marchand (`HYYT`, douze chiffres, `GZ`), puis demande au vendeur s'il a bien expédié avec Huaya.
+**Aucun résultat.** Face à la ligne vide que renvoie Huaya lorsqu'il ne connaît pas encore un numéro, Peek considère que l'envoi attend son premier scan et affiche « En attente de Huaya Express » sans message d'erreur sur le format. Vérifie donc toi-même la saisie par rapport au message du marchand (`HYYT`, douze chiffres, `GZ`), puis demande au vendeur s'il a bien expédié avec Huaya.
 
 **En retard, perdu ou retourné.** Les conditions d'indemnisation publiées par Huaya s'adressent aux marchands expéditeurs, pas aux destinataires. Demande un renvoi ou un remboursement au vendeur et, s'il ne répond plus, ouvre un litige sur la plateforme d'achat ([colis perdu](guide:lost-parcel), [retourné à l'expéditeur](guide:returned-to-sender), [indiqué livré mais non reçu](guide:delivered-not-received)).
 

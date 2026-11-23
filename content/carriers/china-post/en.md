@@ -100,7 +100,7 @@ It shows the status, the history with the office of each scan (an office written
 
 For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history. If China Post names no country, Peek goes by yours: in the iPhone and Android apps, the region set on your phone; on peektracker.com, the country you added the parcel from.
 
-Peek checks China Post hourly, out for delivery too. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and every 30 minutes for USPS, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
+Peek checks China Post hourly, out for delivery too. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
 
 ## Questions about China Post tracking
 

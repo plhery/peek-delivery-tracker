@@ -130,7 +130,7 @@ Peek takes the parcel's stage from Shouwu's status, as in the tables above, and 
 
 With no courier named, Peek shows no "Delivery with" line and doesn't hand the parcel over to the courier, even when the history relays iMile's lines. If you have the courier's number, add it to Peek as a parcel of its own.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Shouwu's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact Shouwu or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Shouwu's own tracker answers; otherwise hourly. Through tracking services, it's hourly, every 3 hours after a quiet day and up to every 15 minutes on the delivery day under the same condition. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact Shouwu or the seller for you.
 
 ## Questions about Shouwu tracking
 

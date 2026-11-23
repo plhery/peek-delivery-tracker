@@ -2032,6 +2032,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS Poland tracking: statuses, GLS Points, lockers and help",
       "name": "GLS Poland",
       "color": "#ffdd00"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "jt-express-mexico-tracking",
+      "title": "J&T Express Mexico tracking: JMX codes, phone digits, help",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "bulgarian-posts-tracking",
+      "title": "Bulgarian Posts tracking: PS and BG codes, customs, claims",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "haypost-tracking",
+      "title": "HayPost tracking: AM postal codes, statuses and contacts",
+      "name": "HayPost",
+      "color": "#fa4616"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "360lion-tracking",
+      "title": "360Lion tracking: WSH and AR codes, statuses and contacts",
+      "name": "360Lion",
+      "color": "#cf5d15"
+    },
+    {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "paquetexpress-tracking",
+      "title": "Paquetexpress tracking: guías, statuses, Ocurre and claims",
+      "name": "Paquetexpress",
+      "color": "#002a52"
     }
   ],
   "de": [
@@ -9928,6 +9968,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento FAN Courier International: AWB y estados",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "rastreo-jt-express-mexico",
+      "title": "Rastreo J&T Express México: guías JMX, teléfono y contacto",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
+    },
+    {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "rastreo-paquetexpress",
+      "title": "Rastreo Paquetexpress: guías, estados, Ocurre y contacto",
+      "name": "Paquetexpress",
+      "color": "#002a52"
     }
   ],
   "pt": [
@@ -14438,6 +14494,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Транспрес (Transpress): проследяване на пратка и статуси",
       "name": "Transpress",
       "color": "#1e6ee2"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "prosledyavane-balgarski-poshti",
+      "title": "Проследяване Български пощи: кодове, статуси, митница",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     }
   ],
   "el": [

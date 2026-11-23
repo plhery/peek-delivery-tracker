@@ -14,9 +14,9 @@ Eine Nummer von POST hat 13 Zeichen: zwei Buchstaben, neun Ziffern und `LU`. Gib
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `RR000000005LU` | Einschreiben |
-| `CP000000005LU` | Paket |
-| `LX000000005LU` | FollowMe-Etikett: verfolgbar, aber ohne Unterschrift und ohne rechtsgültigen Aufgabebeleg, für Sendungen bis 2 kg |
+| `RR482917367LU` | Einschreiben |
+| `CP482917367LU` | Paket |
+| `LX482917367LU` | FollowMe-Etikett: verfolgbar, aber ohne Unterschrift und ohne rechtsgültigen Aufgabebeleg, für Sendungen bis 2 kg |
 
 Die letzte der neun Ziffern ist eine Prüfziffer, ein Tippfehler macht die Nummer also meist ungültig.
 
@@ -83,22 +83,23 @@ Pakete mit Waren aus einem Land außerhalb der EU durchlaufen die Zollformalitä
 
 - die luxemburgische Mehrwertsteuer (17 %);
 - seit dem 1. Juli 2026 eine Zollabgabe von 3 € pro Artikeltyp im Paket, für online gekaufte Waren bis 150 € Gesamtwert, auch wenn die Mehrwertsteuer schon beim Kauf bezahlt wurde;
+- seit dem 1. November 2026 europäische Bearbeitungsgebühren von 2 € pro Artikeltyp für online gekaufte Waren von außerhalb der EU, unabhängig vom Wert, auch wenn die Mehrwertsteuer schon beim Kauf bezahlt wurde;
 - die Bearbeitungsgebühr von POST, wenn POST die Zollformalitäten erledigt: 6 € für ein Paket im Wert bis 22 €, 18 € über 22 € bis 150 €;
 - Verbrauchsteuern auf bestimmte Waren.
 
-Beispiel von POST aus der Zeit vor dem 1. November 2026: Für ein Paket im Wert von 20 € samt Versand, mit drei Artikeltypen (etwa T-Shirt, Jeans und Schuhe) und ohne vorab bezahlte Mehrwertsteuer waren bei der Zustellung 18,40 € fällig: 3,40 € Mehrwertsteuer, 6 € Bearbeitungsgebühr und 9 € Zollabgabe.
+Beispiel von POST: Ein T-Shirt, eine Jeans und ein Paar Schuhe sind drei Artikeltypen, also 9 € Zollabgabe und 6 € europäische Bearbeitungsgebühren, dazu die Mehrwertsteuer und gegebenenfalls die Bearbeitungsgebühr von POST.
 
-Bezahlt wird bei der Zustellung oder bei der Abholung in einer POST-Verkaufsstelle. Hat ein beim Import-One-Stop-Shop (IOSS) registrierter Händler die Mehrwertsteuer schon beim Kauf kassiert, fällt sie bei der Einfuhr nicht noch einmal an. Ein Geschenk von privat an privat ohne kommerziellen Charakter bis 45 € ist laut luxemburgischer Zoll- und Verbrauchsteuerverwaltung abgabenfrei, darüber fällt die Mehrwertsteuer auf den ganzen Wert an. Mit der Bearbeitungsgebühr hat der Zoll nichts zu tun: Die Post erhebt sie auf eigene Rechnung, sagt die Zollverwaltung. Dein Paket liegt immer bei der Post, nie beim Zoll.
+Bezahlt wird bei der Zustellung oder bei der Abholung in einer POST-Verkaufsstelle. Hat ein beim Import-One-Stop-Shop (IOSS) registrierter Händler die Mehrwertsteuer schon beim Kauf kassiert, fällt sie bei der Einfuhr nicht noch einmal an. Ein Geschenk von privat an privat ohne kommerziellen Charakter bis 45 € ist laut luxemburgischer Zoll- und Verbrauchsteuerverwaltung abgabenfrei, darüber fällt die Mehrwertsteuer auf den ganzen Wert an. Mit der Bearbeitungsgebühr von POST hat der Zoll nichts zu tun: Die Post erhebt sie auf eigene Rechnung, sagt die Zollverwaltung. Dein Paket liegt immer bei der Post, nie beim Zoll.
 
-Seit dem 1. November 2026 erhebt die EU zusätzlich eine Bearbeitungsgebühr von 2 € pro Artikeltyp, laut Europäischer Kommission und POST. Mehr in [Paket beim Zoll](guide:customs).
+Mehr in [Paket beim Zoll](guide:customs).
 
 > Andere Wege zu zahlen als bei der Zustellung oder der Abholung nennt POST nicht. Eine SMS oder E-Mail, die dich per Link bezahlen lässt, damit dein Paket weiterkommt, passt nicht dazu. Das Europäische Verbraucherzentrum Luxemburg warnt vor solchen Nachrichten im Namen bekannter Unternehmen: Klick nie auf einen verdächtigen Link und prüf die Sendung selbst bei POST. Mehr unter [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## POST Luxembourg Kontakt: Telefon, Formular, Beschwerde
 
-So nennen die deutschen Seiten von POST ihre Kanäle (gelesen am 26. Oktober 2026):
+So nennen die deutschen Seiten von POST ihre Kanäle:
 
-- **Telefon für Briefe und Pakete:** 8002 8004, aus Luxemburg kostenlos, oder +352 2424 8004 aus dem Ausland. Laut der Seite „Kontaktieren Sie uns“ montags bis freitags 8 bis 17 Uhr, laut einigen Hilfeseiten „rund um die Uhr“ (mehr unten bei den Fragen).
+- **Telefon für Briefe und Pakete:** 8002 8004, aus Luxemburg kostenlos, oder +352 2424 8004 aus dem Ausland. Laut der Seite „Kontaktieren Sie uns“ montags bis freitags 8 bis 17 Uhr Luxemburger Zeit, laut einigen Hilfeseiten „rund um die Uhr“ (mehr unten bei den Fragen).
 - **Kontaktformular:** auf der Seite [Kontaktieren Sie uns](https://www.post.lu/de/particuliers/infos-aide/contactez-nous), mit deiner Sendungsnummer.
 - **Vor Ort:** in einer Postfiliale, zu finden mit „Eine Verkaufsstelle finden“.
 
@@ -110,7 +111,13 @@ Bei einer Nummer auf `LU` mit gültiger Prüfziffer fragt [Peek](/) gleichzeitig
 
 Ein Paket aus dem Ausland verfolgt Peek zuerst bei der Post des Absenderlands. Mit „Ändern“ wählst du POST Luxembourg, oder du fügst einen Link von post.lu ein. Von selbst fragt Peek bei POST nach, wenn die ausländische Postnummer eine gültige Prüfziffer hat und die Post im Ausland POST nennt oder Luxemburg als Ziel meldet. Meldet sie kein Ziel oder antwortet sie nicht, fragt Peek POST, wenn es dich in Luxemburg verortet. Zeigt POST einen datierten Schritt, der mindestens so neu ist wie der letzte aus dem Ausland, wechselt Peek zu POST. Der Verlauf aus dem Ausland bleibt erhalten.
 
-Peek zeigt die Schritte von POST jeweils unter ihrem Tag, in der Reihenfolge von POST. `Item out for delivery` setzt das Paket auf „In Zustellung“, `Final delivery` auf „Zugestellt“. Ein voraussichtliches Lieferdatum, das Gewicht oder die Abholstelle zeigt Peek nicht. Es prüft bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange POST selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. POST für dich kontaktieren kann Peek nicht.
+Peek zeigt die Schritte von POST jeweils unter ihrem Tag, in der Reihenfolge von POST. `Item out for delivery` setzt das Paket auf „In Zustellung“, `Final delivery` auf „Zugestellt“. Ein voraussichtliches Lieferdatum, das Gewicht oder die Abholstelle zeigt Peek nicht.
+
+Solange du das Paket in Peek geöffnet hast, oder am Liefertag mit aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten, und ab 6 Uhr Luxemburger Zeit an dem Tag, an dem POST `Item out for delivery` zeigt, bis zu alle 2 Minuten, solange POST selbst antwortet. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), prüft Peek stündlich, und alle 6 Stunden, wenn das Paket seit sieben Tagen „Etikett erstellt“ zeigt.
+
+Ist der neueste Scan vier Tage alt und steht das Paket noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, kennzeichnet Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Die Seite des Pakets sagt dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei POST Luxembourg nach.“, mit dem Link „Hol dir Hilfe bei POST Luxembourg“ zur Hilfe von POST für Postdienste (auf Englisch). Nach drei Wochen ohne neuen Scan sagt sie „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei POST Luxembourg nach.“
+
+Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. POST für dich kontaktieren kann Peek nicht.
 
 ## Fragen zur Sendungsverfolgung von POST Luxembourg
 
@@ -120,7 +127,7 @@ Innerhalb Luxemburgs in der Regel zwei bis drei Tage. Für internationale Sendun
 
 ### Ist die Hotline von POST Luxembourg rund um die Uhr erreichbar?
 
-Die Seiten von POST widersprechen sich. Die Kontaktseite nennt für Briefe und Pakete montags bis freitags 8 bis 17 Uhr, rund um die Uhr nur für Telekom. Einige Hilfeseiten zu Paketen nennen für 8002 8004 dagegen „rund um die Uhr“.
+Die Seiten von POST widersprechen sich. Die Kontaktseite nennt für Briefe und Pakete montags bis freitags 8 bis 17 Uhr Luxemburger Zeit, rund um die Uhr nur für Telekom. Einige Hilfeseiten zu Paketen nennen für 8002 8004 dagegen „rund um die Uhr“.
 
 ### Kann ich einen normalen Brief mit POST Luxembourg verfolgen?
 
@@ -150,8 +157,7 @@ Nach einer Benachrichtigungskarte 15 Tage in der Verkaufsstelle. Mit PackUp 7 Ta
 - [POST Luxembourg: Welche Lieferzeiten haben Pakete?](https://www.post.lu/de/particuliers/support/colis/colis/livraison/delais-de-livraison-pour-les-colis) – zwei bis drei Tage, DHL
 - [POST Luxembourg: Ist mein Paket versichert?](https://www.post.lu/de/particuliers/support/colis/colis/securiser-et-suivre/mon-colis-est-il-assure) – 50 bis 530 €, SecurPack, „rund um die Uhr“, kostenlose Nummer im Inland
 - [POST Luxembourg: Wie kann ich herausfinden, wo sich mein Paket befindet?](https://www.post.lu/de/particuliers/support/colis/colis/securiser-et-suivre/comment-savoir-ou-se-trouve-mon-colis) – „rund um die Uhr“
-- [POST Luxembourg: Zollformalitäten und Zollgebühren](https://www.post.lu/de/particuliers/colis-courrier/formalites-douanieres) – fällige Beträge, 3 € pro Artikeltyp, Bearbeitungsgebühren, Zahlung
-- [POST Luxembourg: Broschüre Zollformalitäten (PDF)](https://www.post.lu/documents/20125/468363/Flyer_POST_FraisDouanes_DE.pdf/563351bc-384f-42b3-3e83-b6df2d008499) – Rechenbeispiel, T-Shirt, Jeans und Schuhe
+- [POST Luxembourg: Zollformalitäten und Zollgebühren](https://www.post.lu/de/particuliers/colis-courrier/formalites-douanieres) – fällige Beträge, 3 € und 2 € pro Artikeltyp, Beispiel, Bearbeitungsgebühren, Zahlung
 - [POST Luxembourg: Kontaktieren Sie uns](https://www.post.lu/de/particuliers/infos-aide/contactez-nous) – Zeiten, Telekom, Formular
 - [Zoll- und Verbrauchsteuerverwaltung: Colis/Envois (Französisch)](https://douanes.public.lu/fr/commerce-international/colis-envois/Colis_Envois.html) – IOSS, Geschenke bis 45 €, Gebühren der Post, Paket bei der Post
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026

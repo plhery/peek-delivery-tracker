@@ -14,9 +14,9 @@ Un numéro POST compte 13 caractères : deux lettres, neuf chiffres et `LU`. Sai
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `RR000000005LU` | Envoi recommandé |
-| `CP000000005LU` | Colis |
-| `LX000000005LU` | Étiquette FollowMe : un suivi sans signature et sans valeur juridique |
+| `RR482917367LU` | Envoi recommandé |
+| `CP482917367LU` | Colis |
+| `LX482917367LU` | Étiquette FollowMe : un suivi sans signature et sans valeur juridique |
 
 Seuls ces envois se suivent : une lettre simple n'a pas de numéro. Le neuvième chiffre est une clé de contrôle, qu'une faute de frappe rend en général fausse. Un envoi venu de l'étranger garde le numéro de la poste d'origine (`…CN`, `…FR`…), que le Track and Trace de POST accepte aussi. Pas de numéro ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -76,22 +76,23 @@ Tout colis de marchandises venant d'un pays hors UE fait l'objet de formalités 
 
 - la TVA luxembourgeoise (17 %) ;
 - un droit de douane : depuis le 1er juillet 2026, 3 € par type d'article pour un achat en ligne de 150 € au plus, même si la TVA a été payée à la commande ;
+- des frais européens de traitement : depuis le 1er novembre 2026, 2 € par type d'article pour un achat en ligne hors UE, quelle que soit sa valeur, même si la TVA a été payée à la commande ;
 - les frais de traitement POST, quand POST effectue les formalités : 6 € pour un colis de 22 € au plus, 18 € au-delà et jusqu'à 150 € ;
 - des accises sur certains produits.
 
-Exemple de POST, avant le 1er novembre 2026 : colis de 20 €, port compris, trois types d'articles, TVA non payée à la commande : 3,40 € de TVA, 6 € de frais et 9 € de droits, soit 18,40 €.
+Exemple de POST : un t-shirt, un jean et une paire de chaussures font trois types d'articles, soit 9 € de droit de douane et 6 € de frais européens de traitement, plus la TVA et, s'il y a lieu, les frais de traitement POST.
 
 Tu paies à la livraison ou au retrait en point de vente POST, sauf la TVA déjà encaissée à la commande par un vendeur inscrit au guichet unique IOSS. Un cadeau d'un particulier, sans caractère commercial et de 45 € au plus, est en franchise, selon l'Administration des douanes et accises ; au-delà, la TVA porte sur toute la valeur.
 
-Depuis le 1er novembre 2026, l'UE applique en plus des frais de traitement de l'Union de 2 € par type d'article, selon la Commission européenne et la page de POST. Plus de détails dans [colis bloqué en douane](guide:customs).
+Plus de détails dans [colis bloqué en douane](guide:customs).
 
 > POST encaisse ce qui reste dû à la livraison ou au retrait : un SMS ou un e-mail qui demande de payer par un lien pour débloquer un colis ne correspond pas à ce que décrit POST. Le CEC Luxembourg met en garde contre ces faux messages au nom d'entreprises connues : ne clique pas, vérifie le numéro toi-même sur le Track and Trace. Voir [les SMS de livraison frauduleux](guide:delivery-scam-texts).
 
 ## Contact POST Luxembourg : téléphone et réclamation
 
-Relevé sur les pages françaises de POST le 26 octobre 2026 :
+Les canaux de POST pour le courrier et les colis, selon ses pages françaises :
 
-- **Téléphone (courrier et colis) :** 8002 8004, gratuit depuis le Luxembourg, ou +352 2424 8004 depuis l'étranger, du lundi au vendredi de 8 h à 17 h selon la page Nous contacter. Certaines pages d'aide affichent « 24h/24 et 7j/7 » pour ces numéros, horaires que la page Nous contacter réserve au service Telecom.
+- **Téléphone (courrier et colis) :** 8002 8004, gratuit depuis le Luxembourg, ou +352 2424 8004 depuis l'étranger, du lundi au vendredi de 8 h à 17 h (heure du Luxembourg) selon la page Nous contacter. Certaines pages d'aide affichent « 24h/24 et 7j/7 » pour ces numéros, horaires que la page Nous contacter réserve au service Telecom.
 - **Formulaire :** sur la page [Nous contacter](https://www.post.lu/fr/particuliers/infos-aide/contactez-nous), avec ton numéro d'envoi.
 - **Sur place :** dans un bureau de poste (outil « Trouver un point de vente »).
 
@@ -103,7 +104,13 @@ Pour un numéro en `LU` dont la clé de contrôle est valide, [Peek](/) demande 
 
 Un envoi venu de l'étranger est d'abord suivi chez la poste d'origine. Peek interroge POST quand celle-ci indique le Luxembourg comme destination, ou n'en indique aucune (voire ne répond pas) et que Peek te situe au Luxembourg, puis passe à POST dès que POST montre une étape au moins aussi récente. Tu peux aussi choisir « POST Luxembourg » avec « Changer ».
 
-Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de POST qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait.
+
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h, heure du Luxembourg, le jour où POST affiche `Item out for delivery`, tant que le suivi de POST répond. Après deux jours sans nouvelles (12 heures tant que le colis en est à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures une fois le colis à « Étiquette créée » depuis sept jours.
+
+Quand le dernier scan date de quatre jours et que le colis en est encore à « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis dit alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger POST Luxembourg. », avec un lien « Demande de l’aide à POST Luxembourg » vers l'aide de POST sur les services postaux (en anglais). Après trois semaines sans nouveau scan, elle dit « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger POST Luxembourg. »
+
+Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi des colis POST Luxembourg
 
@@ -113,7 +120,7 @@ Après un avis de passage, 15 jours en point de vente. Avec PackUp, 7 jours en s
 
 ### Le service client de POST Luxembourg répond-il 24 h/24 ?
 
-Pour le courrier et les colis, la page Nous contacter donne le 8002 8004 du lundi au vendredi, de 8 h à 17 h, et réserve le 24 h/24 au service Telecom, même si certaines pages d'aide l'affichent pour ce numéro.
+Pour le courrier et les colis, la page Nous contacter donne le 8002 8004 du lundi au vendredi, de 8 h à 17 h (heure du Luxembourg), et réserve le 24 h/24 au service Telecom, même si certaines pages d'aide l'affichent pour ce numéro.
 
 ### Peut-on suivre une lettre simple avec POST Luxembourg ?
 
@@ -141,12 +148,11 @@ En général 2 à 3 jours au Luxembourg. À l'international, POST ne garantit au
 - [POST Luxembourg : Retours de colis](https://www.post.lu/fr/particuliers/colis-courrier/retours-de-colis) – étiquette, dépôt, stations
 - [POST Luxembourg : Délais de livraison pour les colis](https://www.post.lu/fr/particuliers/support/colis/colis/livraison/delais-de-livraison-pour-les-colis) – 2 à 3 jours
 - [POST Luxembourg : Mon colis est-il assuré ?](https://www.post.lu/fr/particuliers/support/colis/colis/securiser-et-suivre/mon-colis-est-il-assure) – 50 à 530 €, SecurPack
-- [POST Luxembourg : Formalités et frais de douane](https://www.post.lu/fr/particuliers/colis-courrier/formalites-douanieres) – TVA, 3 €, frais de traitement, paiement
-- [POST Luxembourg : Formalités & frais de douane (PDF)](https://www.post.lu/documents/20125/468363/Flyer_POST_FraisDouanes_FR.pdf/88735966-a741-14ad-8720-6affe6bbe840) – exemple de calcul
+- [POST Luxembourg : Formalités et frais de douane](https://www.post.lu/fr/particuliers/colis-courrier/formalites-douanieres) – TVA, 3 € et 2 € par type d'article, exemple, frais de traitement POST, paiement
 - [POST Luxembourg : Nous contacter](https://www.post.lu/fr/particuliers/infos-aide/contactez-nous) – horaires, Telecom, formulaire
 - [Douanes et accises : E-commerce, nouvelles règles](https://douanes.public.lu/fr/actualites/2026/nouvelles-regles-ecommerce.html) – 3 € par type d'article
 - [Douanes et accises : Colis et envois](https://douanes.public.lu/fr/commerce-international/colis-envois/Colis_Envois.html) – IOSS, cadeaux de 45 €
-- [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € au 1er novembre 2026
+- [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € depuis le 1er novembre 2026
 - [Guichet.lu : Médiation de l'ILR](https://guichet.public.lu/fr/citoyens/justice/voies-recours-reglement-litiges/resolution-litige-amiable/mediation-ilr.html) – conditions, gratuité, 90 jours
 - [CEC Luxembourg : Achat en ligne](https://www.cecluxembourg.lu/themes/achats/achat-en-ligne/) – 30 jours, mise en demeure
 - [CEC Luxembourg : Arnaques](https://www.cecluxembourg.lu/themes/arnaques-et-contrefacons/arnaques/) – faux SMS

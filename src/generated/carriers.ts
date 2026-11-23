@@ -3556,6 +3556,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "gls-us-sendungsverfolgung",
+      "title": "GLS US Sendungsverfolgung (GSO): Nummern, Status & Kontakt",
+      "name": "GLS US",
+      "color": "#ffdd00"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "sxw-express-sendungsverfolgung",
@@ -5166,6 +5174,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "suivi-gls-us",
+      "title": "Suivi GLS US (GSO)\u00a0: numéros, statuts et livraison",
+      "name": "GLS US",
+      "color": "#ffdd00"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "suivi-sxw-express",
@@ -6744,6 +6760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "tracking-gls-us",
+      "title": "Tracking GLS US (GSO): numeri, stati e consegne",
+      "name": "GLS US",
+      "color": "#ffdd00"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "tracciamento-sxw-express",
@@ -8306,6 +8330,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#652b9e"
     },
     {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "seguimiento-gls-us",
+      "title": "Seguimiento GLS US (GSO): números, estados y entregas",
+      "name": "GLS US",
+      "color": "#ffdd00"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "seguimiento-sxw-express",
@@ -9842,6 +9874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CVC (Си Ви Си): seguir encomenda na Bulgária",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "seguimento-gls-us",
+      "title": "Seguimento GLS US (GSO): números, estados e entregas",
+      "name": "GLS US",
+      "color": "#ffdd00"
     },
     {
       "id": "sxw-express",
@@ -11446,6 +11486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CVC (Си Ви Си): paczka w Bułgarii",
       "name": "CVC",
       "color": "#652b9e"
+    },
+    {
+      "id": "gls-us",
+      "catalog": "gls-us",
+      "slug": "sledzenie-gls-us",
+      "title": "Śledzenie GLS US (GSO): numery, statusy i doręczenia",
+      "name": "GLS US",
+      "color": "#ffdd00"
     },
     {
       "id": "sxw-express",

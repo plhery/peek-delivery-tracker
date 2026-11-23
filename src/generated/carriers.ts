@@ -3420,6 +3420,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "posta-romana-sendungsverfolgung",
+      "title": "Poșta Română Sendungsverfolgung: RO-Nummern und Zoll",
+      "name": "Poșta Română",
+      "color": "#ea0029"
+    },
+    {
       "id": "dpd-nl",
       "catalog": "dpd-nl",
       "slug": "dpd-niederlande-sendungsverfolgung",
@@ -5062,6 +5070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "suivi-posta-romana",
+      "title": "Suivi Poșta Română\u00a0: numéros RO, statuts et douane",
+      "name": "Poșta Română",
+      "color": "#ea0029"
+    },
+    {
       "id": "dpd-nl",
       "catalog": "dpd-nl",
       "slug": "suivi-dpd-pays-bas",
@@ -6672,6 +6688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "tracking-posta-romana",
+      "title": "Tracking Poșta Română: codici RO, stati e dogana",
+      "name": "Poșta Română",
+      "color": "#ea0029"
+    },
+    {
       "id": "dpd-nl",
       "catalog": "dpd-nl",
       "slug": "tracciamento-dpd-paesi-bassi",
@@ -8266,6 +8290,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c81011"
     },
     {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "seguimiento-posta-romana",
+      "title": "Seguimiento Poșta Română: números RO, estados y aduanas",
+      "name": "Poșta Română",
+      "color": "#ea0029"
+    },
+    {
       "id": "dpd-nl",
       "catalog": "dpd-nl",
       "slug": "seguimiento-dpd-paises-bajos",
@@ -9834,6 +9866,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Jifan: números JFGJ, estados e hora de Pequim",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "seguimento-posta-romana",
+      "title": "Seguimento Poșta Română: códigos RO, estados e alfândega",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     },
     {
       "id": "dpd-nl",
@@ -11462,6 +11502,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jifan: numery JFGJ, statusy i czas pekiński",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "sledzenie-posta-romana",
+      "title": "Śledzenie Poșta Română: numery RO, statusy i cło",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     },
     {
       "id": "dpd-nl",

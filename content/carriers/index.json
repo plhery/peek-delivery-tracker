@@ -212,7 +212,7 @@
   { "id": "nox", "catalog": "nox", "name": "nox", "languages": ["en"] },
   { "id": "far-international", "catalog": "far-international", "name": "FAR International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en"] },
+  { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-nl", "catalog": "dpd-nl", "name": "DPD Netherlands", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

@@ -3484,6 +3484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "pin-ag-sendungsverfolgung",
+      "title": "PIN AG Sendungsverfolgung: Einschreiben, Pakete & Abholung",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "pitney-bowes",
       "catalog": "pitney-bowes",
       "slug": "pitney-bowes-sendungsverfolgung",
@@ -5262,6 +5270,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "suivi-pin-ag",
+      "title": "Suivi PIN AG\u00a0: recommandés, colis et retrait en dépôt",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "pitney-bowes",
       "catalog": "pitney-bowes",
       "slug": "suivi-pitney-bowes",
@@ -7000,6 +7016,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "tracciamento-pin-ag",
+      "title": "Tracciamento PIN AG: raccomandate, pacchi e ritiro",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "pitney-bowes",
       "catalog": "pitney-bowes",
       "slug": "tracking-pitney-bowes",
@@ -8722,6 +8746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#002664"
     },
     {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "seguimiento-pin-ag",
+      "title": "Seguimiento PIN AG: cartas certificadas, paquetes y retiro",
+      "name": "PIN AG",
+      "color": "#003366"
+    },
+    {
       "id": "pitney-bowes",
       "catalog": "pitney-bowes",
       "slug": "seguimiento-pitney-bowes",
@@ -10426,6 +10458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento DSV: números, estados e DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "seguimento-pin-ag",
+      "title": "Seguimento PIN AG: correio registado, encomendas e depósito",
+      "name": "PIN AG",
+      "color": "#003366"
     },
     {
       "id": "pitney-bowes",
@@ -12182,6 +12222,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DSV: numery przesyłek, statusy i DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "sledzenie-pin-ag",
+      "title": "Śledzenie PIN AG: listy polecone, paczki i odbiór w bazie",
+      "name": "PIN AG",
+      "color": "#003366"
     },
     {
       "id": "pitney-bowes",

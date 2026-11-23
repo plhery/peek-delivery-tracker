@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-GOFO Canada to kanadyjska sieć kurierska GOFO, firmy działającej w kilku krajach i korzystającej z tego samego systemu śledzenia co GOFO w Stanach Zjednoczonych. GOFO informuje, że jej kanadyjska sieć działa w Toronto, a Vancouver i kolejne obszary są w przygotowaniu. Numery zaczynają się od `GFCA`: sprawdź przesyłkę na kanadyjskiej stronie śledzenia gofo.com albo wklej numer w pole powyżej. Nie masz jeszcze numeru? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number).
+GOFO Canada to kanadyjska sieć kurierska GOFO, firmy działającej w kilku krajach i korzystającej z tego samego systemu śledzenia co GOFO w Stanach Zjednoczonych. GOFO informuje, że jej kanadyjska sieć działa w Toronto i Vancouver, a kolejne obszary są w przygotowaniu. Numery zaczynają się od `GFCA`: sprawdź przesyłkę na kanadyjskiej stronie śledzenia gofo.com albo wklej numer w pole powyżej. Nie masz jeszcze numeru? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
 ## Numer śledzenia GOFO Canada: jak wygląda
 
@@ -45,7 +45,7 @@ GOFO dodaje do części skanów telefon i e-mail działu wsparcia; Peek usuwa t�
 
 **Doręczona, ale jej nie ma.** Peek pokazuje godzinę skanu doręczenia, lecz nie zdjęcie ani dopiski GOFO po przecinku. Oficjalna strona gofo.com/ca/track udostępnia dowód doręczenia — najczęściej zdjęcie miejsca pozostawienia paczki — po podaniu nazwiska odbiorcy z zamówienia. Sprawdź najpierw okolicę wejścia, skrzynkę pocztową lub wspólny punkt skrzynek, zapytaj sąsiadów, domowników, portiera lub ochronę budynku. Jeśli paczki nadal nie ma, zgłoś to GOFO (kontakty niżej), najlepiej ze zdjęciem budynku z zewnątrz, oraz napisz do sklepu z numerem zamówienia i kodem `GFCA`. Zobacz [doręczona, ale nie otrzymana](guide:delivered-not-received).
 
-**Opóźniona lub zagubiona.** Napisz do sklepu, który ją wysłał: dysponuje danymi zamówienia i wysyłki, a GOFO podaje, że nadawca może złożyć reklamację i zapytanie w twoim imieniu. Zobacz [zaginiona paczka](guide:lost-parcel). Jeśli przesyłka wraca do nadawcy, sprawdź [zwrot do nadawcy](guide:returned-to-sender): GOFO informuje, że paczki w zwrocie nie da się przechwycić, więc poproś sklep o ponowną wysyłkę lub zwrot pieniędzy.
+**Opóźniona lub zagubiona.** Napisz do sklepu, który ją wysłał: dysponuje danymi zamówienia i wysyłki, a GOFO podaje, że nadawca może złożyć reklamację i zapytanie w twoim imieniu. Zobacz [zaginiona paczka](guide:lost-parcel). Jeśli przesyłka wraca do nadawcy, sprawdź [zwrot do nadawcy](guide:returned-to-sender): GOFO informuje, że paczki w zwrocie nie da się przechwycić, więc poproś sklep o wymianę lub ponowną wysyłkę.
 
 Zamówienie z Temu lub Shein? Zobacz [zamówienia Temu](guide:temu-orders) i [zamówienia Shein](guide:shein-orders). Informacje o opłatach celnych znajdziesz w poradniku [cło](guide:customs).
 
@@ -64,7 +64,7 @@ W sprawie opóźnionego, brakującego lub uszkodzonego zamówienia zacznij od sk
 
 Peek odczytuje własne śledzenie GOFO Canada: status, każdy skan z godziną oraz miastem i prowincją podanymi przez GOFO, te miejsca na mapie, godzinę doręczenia oraz kraj docelowy. Opisy zachowują angielskie brzmienie GOFO bez dopisku z kontaktem. Peek pokazuje przewidywaną datę doręczenia GOFO, dopóki paczka nie jest w doręczeniu, doręczona, zwrócona ani w punkcie odbioru, i pomija zdjęcia z doręczenia, współrzędne oraz wagę.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 czasu lokalnego w dniu, gdy GOFO zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie GOFO Canada. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GOFO Canada.” oraz link „Poproś przewoźnika GOFO Canada o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może zamówić ponownego doręczenia ani skontaktować się z GOFO lub sklepem w twoim imieniu.
+Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut — a od 6:00 czasu lokalnego w dniu, gdy GOFO zeskanuje paczkę w doręczeniu, co 2 minuty, dopóki odpowiada własne śledzenie GOFO Canada. W pozostałych przypadkach sprawdza co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, nawet gdy masz ją otwartą, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GOFO Canada.” oraz link „Poproś przewoźnika GOFO Canada o pomoc”. Peek wysyła powiadomienia w trybie „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może zamówić ponownego doręczenia ani skontaktować się z GOFO lub sklepem w twoim imieniu.
 
 ## Pytania o śledzenie GOFO Canada
 
@@ -84,5 +84,5 @@ Sprawdź najpierw prefiks: numer GOFO Canada to `GFCA` i 14 cyfr. Kody `GFUS`, `
 - [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – aktywna spółka federalna 1807362-7, przeniesiona z Ontario 8 lipca 2026, siedziba w Mississauga
 - [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – kształt numeru, linki, opisy i etapy wspólne z GOFO US, linia kontaktu, dane pokazywane i pomijane, link pomocy GOFO Canada
 - [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – e-mail, infolinia odbiorców i godziny, WhatsApp, formularz i czat; dowód doręczenia, gdzie szukać, ponowna próba w 24 godziny, 1–2 dni ze stacji, reklamacje przez nadawcę, brak możliwości przechwycenia zwrotu
-- [GOFO Canada](https://www.gofo.com/ca) – sieć aktywna w Toronto, Vancouver i dalsza rozbudowa w toku
+- [GOFO Canada](https://www.gofo.com/ca) – sieć aktywna w Toronto i Vancouver, dalsza rozbudowa w toku
 :::

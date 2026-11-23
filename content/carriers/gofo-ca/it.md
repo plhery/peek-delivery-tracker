@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-GOFO Canada è la rete canadese di GOFO, un corriere presente in diversi paesi che usa lo stesso sistema di tracciamento di GOFO negli Stati Uniti. GOFO indica che la rete canadese è attiva a Toronto, con Vancouver e altre aree in arrivo. I codici iniziano con `GFCA`: inserisci il tuo sulla pagina canadese di tracciamento su gofo.com oppure incollalo qui sopra. Non hai ancora il codice? Leggi [come trovare il numero di tracciamento](guide:find-tracking-number).
+GOFO Canada è la rete canadese di GOFO, un corriere presente in diversi paesi che usa lo stesso sistema di tracciamento di GOFO negli Stati Uniti. GOFO indica che la rete canadese è attiva a Toronto e Vancouver, con altre aree in arrivo. I codici iniziano con `GFCA`: inserisci il tuo sulla pagina canadese di tracciamento su gofo.com oppure incollalo qui sopra. Non hai ancora il codice? Leggi [come trovare il numero di tracciamento](guide:find-tracking-number).
 
 ## Numero di tracciamento GOFO Canada: com’è fatto
 
@@ -64,7 +64,7 @@ Per un ordine in ritardo, mancante o danneggiato, parti dal negozio tenendo a po
 
 Peek legge il tracciamento diretto di GOFO Canada: stato, ogni scansione con orario, città e provincia indicati da GOFO, quei luoghi su una mappa, orario di consegna e paese di destinazione. Le scansioni restano nel testo inglese di GOFO senza la riga di supporto. Peek mostra la data prevista di consegna di GOFO finché il pacco non è in consegna, consegnato, restituito o pronto per il ritiro, e omette foto di consegna, coordinate e peso.
 
-Mentre tieni il pacco aperto in Peek, oppure nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti — e ogni 2 minuti dalle 6:00 (ora locale) nel giorno in cui GOFO lo scansiona in consegna, finché il tracciamento diretto di GOFO Canada risponde. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora, e ogni 6 ore dopo sette giorni su «Etichetta creata». Se un pacco fermo su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza nuove scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da…» con la data), «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Canada.» e il link «Chiedi aiuto a GOFO Canada». Peek può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può fissare una riconsegna né contattare GOFO o il negozio per te.
+Mentre tieni il pacco aperto in Peek, oppure nel giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti — e ogni 2 minuti dalle 6:00 (ora locale) nel giorno in cui GOFO lo scansiona in consegna, finché il tracciamento diretto di GOFO Canada risponde. Altrimenti controlla ogni ora. Dopo due giorni senza novità (12 ore finché resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora anche se lo tieni aperto, e ogni 6 ore dopo sette giorni su «Etichetta creata». Se un pacco fermo su «Etichetta creata», «Preso in carico» o «In transito» resta quattro giorni senza nuove scansioni, Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da…» con la data), «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a GOFO Canada.» e il link «Chiedi aiuto a GOFO Canada». Peek può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può fissare una riconsegna né contattare GOFO o il negozio per te.
 
 ## Domande sul tracciamento GOFO Canada
 
@@ -84,5 +84,5 @@ Controlla prima il prefisso: un codice GOFO Canada inizia con `GFCA` seguito da 
 - [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – società federale attiva 1807362-7, continuata dall’Ontario l’8 luglio 2026, sede a Mississauga
 - [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – formato codice, link, testi e stati condivisi con GOFO US, riga assistenza, dati mostrati ed esclusi, link di aiuto GOFO Canada
 - [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – e-mail, linea destinatari e orari, WhatsApp, modulo e chat; prova di consegna, dove controllare, nuovo tentativo entro 24 ore, 1–2 giorni dalla stazione, reclami tramite mittente, resi non intercettabili
-- [GOFO Canada](https://www.gofo.com/ca) – attivo a Toronto, Vancouver e ulteriore copertura in preparazione
+- [GOFO Canada](https://www.gofo.com/ca) – attivo a Toronto e Vancouver, ulteriore copertura in preparazione
 :::

@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-GOFO Canada ist das kanadische Netzwerk von GOFO, einem Paketdienst mit eigenen Netzen in mehreren Ländern, und nutzt dasselbe Trackingsystem wie GOFO in den USA. Laut GOFO ist das kanadische Netz in Toronto aktiv, während Vancouver und weitere Gebiete im Aufbau sind. Die Nummern beginnen mit `GFCA`: Prüfe deine Sendung auf der kanadischen Trackingseite von gofo.com oder füge die Nummer oben ein. Noch keine Nummer? Sieh dir [Sendungsnummer finden](guide:find-tracking-number) an.
+GOFO Canada ist das kanadische Netzwerk von GOFO, einem Paketdienst mit eigenen Netzen in mehreren Ländern, und nutzt dasselbe Trackingsystem wie GOFO in den USA. Laut GOFO ist das kanadische Netz in Toronto und Vancouver aktiv, weitere Gebiete sind im Aufbau. Die Nummern beginnen mit `GFCA`: Prüfe deine Sendung auf der kanadischen Trackingseite von gofo.com oder füge die Nummer oben ein. Noch keine Nummer? Sieh dir [Sendungsnummer finden](guide:find-tracking-number) an.
 
 ## GOFO Canada Sendungsnummer: Format und Aufbau
 
@@ -64,7 +64,7 @@ Bei verspäteten, fehlenden oder beschädigten Bestellungen ist immer zuerst der
 
 Peek liest GOFO Canadas eigenes Tracking: Status, jeden Scan mit Uhrzeit sowie Stadt und Provinz, diese Orte auf einer Karte, die Zustellzeit und das Zielland. Scans bleiben in GOFOs englischem Wortlaut ohne Support-Zusatz. Peek zeigt GOFOs voraussichtliches Lieferdatum an, bis das Paket in Zustellung, zugestellt, zurückgesendet oder abholbereit ist, und lässt Zustellfotos, Koordinaten und Gewicht weg.
 
-Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten – und ab 6 Uhr Ortszeit an dem Tag, an dem GOFO die Sendung als in Zustellung scannt, alle 2 Minuten, solange das eigene Tracking von GOFO Canada antwortet. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GOFO Canada nach.“ sowie „Hol dir Hilfe bei GOFO Canada“. Peek benachrichtigt dich mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Eine erneute Zustellung buchen oder GOFO bzw. den Shop kontaktieren kann Peek nicht.
+Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, prüft Peek bis zu alle 10 Minuten – und ab 6 Uhr Ortszeit an dem Tag, an dem GOFO die Sendung als in Zustellung scannt, alle 2 Minuten, solange das eigene Tracking von GOFO Canada antwortet. Sonst prüft Peek stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ angezeigt wird) fragt Peek stündlich nach, auch wenn du es geöffnet hast, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage lang ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), den Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GOFO Canada nach.“ sowie „Hol dir Hilfe bei GOFO Canada“. Peek benachrichtigt dich mit „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Eine erneute Zustellung buchen oder GOFO bzw. den Shop kontaktieren kann Peek nicht.
 
 ## Fragen zur GOFO Canada Sendungsverfolgung
 
@@ -84,5 +84,5 @@ Prüfe zuerst das Präfix: GOFO Canada nutzt `GFCA` plus 14 Ziffern. `GFUS`, `GF
 - [Corporations Canada: GOFO EXPRESS CANADA INC.](https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=18073627) – aktive Bundesgesellschaft 1807362-7, fortgeführt am 8. Juli 2026 aus Ontario, Sitz in Mississauga
 - [Universal Parcel Scraper: GOFO Canada](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/gofo-ca) – Nummernformat, Links, Scan-Wortlaute und Stufen gemeinsam mit GOFO US, Support-Zeile, von Peek gezeigte und weggelassene Felder, Hilfelink GOFO Canada
 - [GOFO Canada: Customer Service](https://www.gofo.com/ca/customer-service) – E-Mail, Empfänger-Hotline und Zeiten, WhatsApp, Anfrageformular und Chat; Zustellnachweis, Suchorte, neuer Versuch binnen 24 Stunden, 1–2 Tage ab Zustellstation, Nachforschung über Absender, Rücksendungen nicht abfangbar
-- [GOFO Canada](https://www.gofo.com/ca) – aktiv in Toronto, Vancouver und weiterer Ausbau angekündigt
+- [GOFO Canada](https://www.gofo.com/ca) – aktiv in Toronto und Vancouver, weiterer Ausbau angekündigt
 :::

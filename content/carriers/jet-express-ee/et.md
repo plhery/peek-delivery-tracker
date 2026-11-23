@@ -48,7 +48,7 @@ Pakiautomaate ega pakipunkte Jet Expressi lehel ei mainita.
 
 Jet Express veab nii eksport- kui ka importkaupa üle maailma ning aitab tolliteenusega impordi-, ekspordi- ja transiitvormistusel nii Eestis kui ka rahvusvaheliselt. Tellimistingimuste järgi kannab kõik tollimaksud, maksud, lõivud ja trahvid tellija, kui ei ole kokku lepitud teisiti, ning tolliga seotud viivituste eest Jet Express ei vastuta.
 
-Alates 1. juulist 2026 maksustatakse kuni 150-eurone väljastpoolt ELi tulev saadetis 3-eurose tollimaksuga iga kaubaartikli kohta. Alates 1. novembrist 2026 lisandub 2-eurone käitlustasu iga kaubaartikli kohta, olenemata saadetise väärtusest. Maksu- ja Tolliameti (MTA) sõnul eraisikult eraisikule saadetud kingituselt käitlustasu ei võeta. Kui te ise vedu ei tellinud, küsige saatjalt, kes maksab. Lähemalt räägib [tolli juhend](guide:customs) (inglise keeles).
+Alates 1. juulist 2026 maksustatakse väljaspool ELi asuvatest e-poodidest ja müügiplatvormidelt tellitud kuni 150-eurone saadetis 3-eurose tollimaksuga iga kaubaartikli kohta. Alates 1. novembrist 2026 lisandub 2-eurone käitlustasu iga kaubaartikli kohta, olenemata saadetise väärtusest. Maksu- ja Tolliameti (MTA) sõnul eraisikult eraisikule saadetud kingituselt ei võeta 3-eurost tollimaksu ega käitlustasu. Kui te ise vedu ei tellinud, küsige saatjalt, kes maksab. Lähemalt räägib [tolli juhend](guide:customs) (inglise keeles).
 
 ## Saadetis hilineb, on kadunud või kahjustatud
 
@@ -64,14 +64,16 @@ Alates 1. juulist 2026 maksustatakse kuni 150-eurone väljastpoolt ELi tulev saa
 
 ## Jet Expressi klienditeenindus
 
-Nii olid Jet Expressi kontaktid kuller.ee lehel kirjas 14. novembril 2026:
+Jet Expressi kontaktid kuller.ee lehel:
 
 - **Telefon**: +372 646 3222, tööpäeviti 8.00–18.00.
-- **E-post**: info@kuller.ee. Lehel oleva teate järgi võivad e-kirjad Microsofti ja Outlooki probleemi tõttu hilineda, seepärast palutakse helistada.
+- **E-post**: info@kuller.ee.
 - **Kahjunõue**: vorm „Juhtum saadetisega“.
 - **Aadress**: Jet Express OÜ, Liivalao 14, 11216 Tallinn.
 
 Kui helistate või kirjutate, hoidke tellimuse number käepärast.
+
+Jet Express hoiatab petukirjade eest: ta ei küsi kunagi e-kirja ega SMS-i teel makseid, paroole ega kaardiandmeid. Kahtlase kirja korral ärge avage linke ja kirjutage aadressil info@kuller.ee.
 
 ## Jet Expressi saadetise jälgimine Peekis
 
@@ -83,7 +85,11 @@ Kui jätate vedaja valimata, otsib Peek seda jälgimisteenuste kaudu. Kui number
 
 Peek ei loe Jet Expressi jälgimislehte ise. Jet Expressi paki kohta küsib Peek järjest teenustelt ParcelsApp, Ship24 ja 17TRACK (kümnekohalise numbri puhul Ship24-lt esimesena) ning jääb esimese juurde, millel pakk olemas on. Peek näitab selle teenuse olekuid ja ajalugu teenuse enda sõnastuses. See ajalugu võib Jet Expressi omast maha jääda ja mõne saadetise kohta pole seal midagi. Kuni ükski teenus pakki ei tea, avab paki jälgimislink Jet Expressi Track & Trace'i lehe sama numbriga, hiljem aga teenuse lehe. Teie IP-aadressi ega riiki Peek teenustele ei edasta.
 
-Peek kontrollib pakki kord tunnis, pärast päeva ilma uue sammuta iga 3 tunni järel ja päeval, mil pakk on kulleriga teel, kuni iga 15 minuti järel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest Jet Expressi ega saatjaga ühendust võtta.
+Peek kontrollib pakki kord tunnis ja pärast päeva ilma uue sammuta iga 3 tunni järel. Kui pakk on seitse päeva ilma uudisteta olekus „Label created“, kontrollib Peek seda iga 6 tunni järel. Päeval, mil pakk on kulleriga teel, kontrollib Peek seda kuni iga 15 minuti järel, kui pakk on Peekis avatud või teavitused on sisse lülitatud. Teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast.
+
+Kui olekus „Label created“, „Received by carrier“ või „In transit“ olevale pakile pole neli päeva uut sammu tulnud, märgib Peek selle viimase sammu päevaga, näiteks „No tracking update since Mon 12 Oct“. Paki lehel on siis märkus „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jet Express.“ ja link „Get help from Jet Express“ Jet Expressi kontaktilehele. Kolme nädala pärast on märkus „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jet Express.“
+
+Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest Jet Expressi ega saatjaga ühendust võtta.
 
 ## Küsimused Jet Expressi saadetise jälgimise kohta
 

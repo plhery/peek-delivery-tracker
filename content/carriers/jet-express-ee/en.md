@@ -33,7 +33,7 @@ As read on kuller.ee:
 - **Express courier** in Tallinn, Tartu, Narva, Pärnu, Viljandi and Kuressaare.
 - **Abroad**: Jet Express quotes 3 to 5 hours to Finland, 4 to 24 hours to Scandinavia and the rest of Europe, and 48 hours worldwide. Its global courier service covers countries inside and outside the EU, and it is an IATA-accredited cargo agent.
 
-A courier can be ordered 24 hours a day, public holidays included. In Tallinn and Tartu, the latest pickup is at 16:00. Each parcel gets a Jet Express label, even when a shipment has several parcels, and a shipment over 35 kg must be on a pallet.
+A courier can be ordered 24 hours a day, public holidays included. In Tallinn and Tartu, the latest pickup is at 16:00 Estonian time. Each parcel gets a Jet Express label, even when a shipment has several parcels, and a shipment over 35 kg must be on a pallet.
 
 Jet Express's terms say that:
 
@@ -48,7 +48,7 @@ Its site mentions no parcel lockers or pickup points.
 
 Jet Express carries imports and exports worldwide, and its customs service helps with import, export and transit clearance in Estonia and abroad. Its terms say that the customer who ordered the transport pays all customs duties, taxes and fees unless agreed otherwise, and that Jet Express isn't liable for delays at customs.
 
-Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU customs duty of €3 per kind of product. Since 1 November 2026, a Union handling fee of €2 per kind of product comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another doesn't pay the handling fee. If you didn't order the transport yourself, ask the sender who pays. More in [parcels held at customs](guide:customs).
+Since 1 July 2026, online orders from outside the EU worth up to €150 pay an EU customs duty of €3 per kind of product. Since 1 November 2026, a Union handling fee of €2 per kind of product comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another pays neither the €3 duty nor the handling fee. If you didn't order the transport yourself, ask the sender who pays. More in [parcels held at customs](guide:customs).
 
 ## Jet Express shipment late, stuck or lost
 
@@ -64,14 +64,16 @@ Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU custom
 
 ## Jet Express contact and customer service
 
-As read on 14 November 2026, kuller.ee lists, in Estonian and English:
+kuller.ee lists, in Estonian and English:
 
-- **Phone**: +372 646 3222, weekdays 8:00–18:00.
-- **Email**: info@kuller.ee. A notice on the site says emails to Jet Express may arrive late because of a Microsoft and Outlook problem, and asks customers to call instead.
+- **Phone**: +372 646 3222, weekdays 8:00–18:00 Estonian time.
+- **Email**: info@kuller.ee.
 - **Claims**: the form "A case with a shipment" ("Juhtum saadetisega" in Estonian).
 - **Address**: Jet Express OÜ, Liivalao 14, 11216 Tallinn.
 
 Have your order number ready when you call or write.
+
+Jet Express warns that it never asks for payments, passwords or card details by email or SMS. If in doubt, don't click links: write to info@kuller.ee.
 
 ## Track a Jet Express shipment with Peek
 
@@ -83,7 +85,11 @@ If you leave the carrier open, Peek looks for it through tracking services. When
 
 Peek doesn't read Jet Express's tracking page itself. For a parcel filed under Jet Express, it asks ParcelsApp, Ship24 and 17TRACK in turn (Ship24 first for a ten-digit number) and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind Jet Express's own, and for some shipments there's nothing at all. Until a service has the parcel, its tracking link opens Jet Express's Track & Trace page for the number; after that, it opens the service's page. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the shipment is out for delivery; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact Jet Express or the sender for you.
+Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours after seven days without news at "Label created". On the day the shipment is out for delivery, it checks up to every 15 minutes while you have it open in Peek or with notifications on. A service that didn't know the number is asked again a day later.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Jet Express.", with a "Get help from Jet Express" link to Jet Express's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Jet Express."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jet Express or the sender for you.
 
 ## Questions about Jet Express tracking
 
@@ -105,7 +111,7 @@ Jet Express gives 1 working day to the big cities, 1 to 2 working days to rural 
 
 ### How do I contact Jet Express?
 
-Call +372 646 3222 on weekdays, 8:00–18:00, or write to info@kuller.ee. For a late, lost or damaged shipment, use the "A case with a shipment" form within 7 days.
+Call +372 646 3222 on weekdays, 8:00–18:00 Estonian time, or write to info@kuller.ee. For a late, lost or damaged shipment, use the "A case with a shipment" form within 7 days.
 
 :::sources
 - [Jet Express: Express Courier and International Transport](https://kuller.ee/en/) – Tracking and customer environment links to portal.kuller.ee, FAQ on the order number, phone hours, latest pickup, labels and pallets, changing an order, IATA agent

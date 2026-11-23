@@ -3891,6 +3891,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^MGP\\d{13}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^FC\\d{13}$",
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "trackingUrlTemplate": "https://www.gofo.com/us/track?searchID={trackingNumber}",

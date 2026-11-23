@@ -14,8 +14,8 @@ Forza appelle le numéro de suivi une *guía* (*número de guía*). Il figure su
 
 | Guía (fictive) | Ce que c’est |
 | --- | --- |
-| `FD4829173` | `FD` et sept chiffres : Peek interroge Forza Delivery Express en premier, avec R+L Carriers. |
-| `FD482917` | `FD` et six chiffres : des numéros GLS France, GLS Allemagne et GLS Suisse peuvent avoir la même forme. |
+| `FD4829173` | `FD` et sept chiffres : Peek interroge Forza Delivery Express et R+L Carriers en même temps. |
+| `FD482917` | `FD` et six chiffres : des numéros GLS France, GLS Allemagne, GLS Suisse, GLS Pays-Bas et Loggi peuvent avoir la même forme. |
 | `FD48291736` | `FD` et huit chiffres : des numéros TNT Italie peuvent ressembler, ainsi que DHL eCommerce Iberia lorsque le dernier chiffre est 0. |
 | `FD482917364` | `FD` et neuf chiffres : le suivi de Forza l’accepte, mais Peek propose GLS Italie pour ce format — choisis Forza manuellement (voir ci-dessous). |
 
@@ -62,7 +62,7 @@ Pour un remboursement ou un nouvel envoi, adresse-toi d’abord à la boutique :
 
 **Bloqué sur `Generado` ou `Solicitado`.** La boutique a créé la guía mais Forza n’a pas encore le colis. Demande à la boutique quand elle le remettra.
 
-**Aucune nouvelle ligne depuis des jours.** Lorsqu’un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), suivi de « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Forza Delivery Express. » et du lien « Demande de l’aide à Forza Delivery Express ». Appelle Forza avec ta guía. Voir [pourquoi un suivi cesse de se mettre à jour](guide:tracking-not-updating).
+**Aucune nouvelle ligne depuis des jours.** Lorsqu’un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date), suivi de « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Forza Delivery Express. » Forza n’a pas de page d’aide dans Peek, donc aucun lien « Demande de l’aide à … ». Appelle Forza avec ta guía. Voir [pourquoi un suivi cesse de se mettre à jour](guide:tracking-not-updating).
 
 **Endommagé ou perdu.** Agis aussitôt. Les conditions de Forza laissent 48 heures à l’expéditeur à compter de la prise en charge pour réclamer par écrit, à raison d’une réclamation par colis. Sans assurance, l’indemnisation est plafonnée à 800 Q ou l’équivalent en monnaie locale (100 $ US dans les conditions du Salvador). L’expéditeur est la boutique : préviens-la le jour même. Voir [colis endommagé](guide:damaged-parcel) et [colis perdu](guide:lost-parcel).
 
@@ -82,7 +82,7 @@ L’en-tête du site Forza affiche du lundi au samedi, de 7 h à 19 h (heure d�
 
 ## Suivre un colis Forza Delivery avec Peek
 
-[Peek](/) ne peut pas identifier Forza sur la seule base de la guía en `FD`. Colle-la tout de même : Peek suit plus de 4 500 transporteurs. Pour `FD` suivi de six à huit chiffres, Peek interroge les transporteurs compatibles, dont Forza (en premier pour sept chiffres), et affiche « Forza Delivery Express a ce colis. » lorsque le suivi Forza connaît la guía. Un lien rastreo.forzadelivery.com contenant la guía est classé aussitôt sous Forza (« Transporteur détecté »).
+[Peek](/) ne peut pas identifier Forza sur la seule base de la guía en `FD`. Colle-la tout de même : Peek suit plus de 4 500 transporteurs. Pour `FD` suivi de six à huit chiffres, Peek interroge les transporteurs compatibles, dont Forza, et affiche « Forza Delivery Express a ce colis. » lorsque le suivi Forza connaît la guía. Un lien rastreo.forzadelivery.com contenant la guía est classé aussitôt sous Forza (« Transporteur détecté »).
 
 Si Peek ne le trouve pas encore, appuie sur « Changer » et choisis Forza Delivery Express sous « Correspond à ce numéro », ou sous « Tous les transporteurs » pour une guía à neuf chiffres (taper « Forza » le trouve). Sur un colis déjà ajouté, utilise « Changer de transporteur ». Si tu choisis Forza pour un numéro qui n’est pas `FD` suivi de six à neuf chiffres, Peek indique que Forza « n’émet pas de numéros comme celui-ci » : vérifie le numéro.
 
@@ -90,7 +90,7 @@ Peek interroge le suivi Forza avec la seule guía : ni numéro de téléphone ni
 
 Les heures de Forza ne portent pas de fuseau horaire : Peek les lit sur l’heure du Guatemala et les convertit dans le fuseau de ton appareil. Le Guatemala, le Salvador et le Honduras partagent le même fuseau (UTC−6, sans heure d’été), donc tout scan dans l’un des trois pays s’affiche à la bonne heure.
 
-Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek interroge Forza jusqu’à toutes les 10 minutes — et toutes les 2 minutes (toutes les 5 minutes lorsqu’il doit ouvrir le suivi Forza dans un navigateur) à partir de 6 h heure locale (UTC−6) le jour d’un scan `En ruta`, tant que le suivi propre de Forza répond; sinon toutes les heures. Après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures après sept jours au statut « Étiquette créée ». Il peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement » : « Livraison seulement » couvre `En ruta` et `Entregado`. Peek ne peut contacter ni Forza ni la boutique à ta place, ni régler un montant COD.
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek interroge Forza jusqu’à toutes les 10 minutes — et toutes les 2 minutes (toutes les 5 minutes lorsqu’il doit ouvrir le suivi Forza dans un navigateur) à partir de 6 h heure locale (UTC−6) le jour d’un scan `En ruta`, tant que le suivi propre de Forza répond. Après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures après sept jours au statut « Étiquette créée ». Il peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement » : « Livraison seulement » couvre `En ruta` et `Entregado`. Peek ne peut contacter ni Forza ni la boutique à ta place, ni régler un montant COD.
 
 ## Questions sur le suivi Forza Delivery
 

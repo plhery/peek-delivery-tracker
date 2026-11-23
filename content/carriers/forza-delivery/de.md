@@ -14,8 +14,8 @@ Forza nennt die Sendungsnummer *guía* (*número de guía*). Sie steht auf dem P
 
 | Guía (erfunden) | Was es ist |
 | --- | --- |
-| `FD4829173` | `FD` und sieben Ziffern: Peek fragt zuerst Forza Delivery Express, zusammen mit R+L Carriers. |
-| `FD482917` | `FD` und sechs Ziffern: Nummern von GLS Frankreich, GLS Deutschland und GLS Schweiz können gleich aussehen. |
+| `FD4829173` | `FD` und sieben Ziffern: Peek fragt Forza Delivery Express und R+L Carriers zugleich. |
+| `FD482917` | `FD` und sechs Ziffern: Nummern von GLS Frankreich, GLS Deutschland, GLS Schweiz, GLS Niederlande und Loggi können gleich aussehen. |
 | `FD48291736` | `FD` und acht Ziffern: Nummern von TNT Italien können gleich aussehen, und DHL eCommerce Iberia bei Endziffer 0. |
 | `FD482917364` | `FD` und neun Ziffern: der Forza-Tracker nimmt sie an, Peek schlägt aber GLS Italien vor – wähle Forza selbst (siehe unten). |
 
@@ -62,7 +62,7 @@ Für eine Erstattung oder Ersatzlieferung sprich zuerst den Shop an: er hat Forz
 
 **Hängt bei `Generado` oder `Solicitado`.** Der Shop hat die Guía angelegt, Forza hat das Paket aber noch nicht. Frag den Shop, wann er es übergibt.
 
-**Tagelang kein neuer Eintrag.** Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum), „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Forza Delivery Express nach.“ und „Hol dir Hilfe bei Forza Delivery Express“. Ruf mit deiner Guía bei Forza an. Siehe [warum das Tracking stehen bleibt](guide:tracking-not-updating).
+**Tagelang kein neuer Eintrag.** Bleibt ein Paket in „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ vier Tage ohne neuen Scan, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit…“ mit Datum) und „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Forza Delivery Express nach.“ Forza hat in Peek keine Hilfeseite, also keinen Link „Hol dir Hilfe bei …“. Ruf mit deiner Guía bei Forza an. Siehe [warum das Tracking stehen bleibt](guide:tracking-not-updating).
 
 **Beschädigt oder verloren.** Handle sofort. Laut Forza-AGB hat der Absender 48 Stunden ab Übernahme durch Forza Zeit für eine schriftliche Reklamation, eine pro Paket. Ohne Versicherung begrenzen die AGB die Haftung auf Q800 bzw. den Gegenwert in Landeswährung (100 US$ in den AGB für El Salvador). Absender ist der Shop: informiere ihn noch am selben Tag. Siehe [beschädigte Pakete](guide:damaged-parcel) und [verlorene Pakete](guide:lost-parcel).
 
@@ -82,7 +82,7 @@ In der Kopfzeile der Website nennt Forza Montag bis Samstag von 7:00 bis 19:00 U
 
 ## Ein Forza Delivery-Paket mit Peek verfolgen
 
-[Peek](/) kann Forza nicht allein an der `FD`-Guía erkennen. Füge sie trotzdem ein: Peek unterstützt über 4.500 Paketdienste. Bei `FD` mit sechs bis acht Ziffern fragt Peek die passenden Paketdienste, darunter Forza (bei sieben Ziffern zuerst), und meldet „Forza Delivery Express hat dieses Paket.“, sobald der Forza-Tracker die Guía kennt. Ein rastreo.forzadelivery.com-Link mit der Guía wird sofort unter Forza eingetragen („Erkannter Paketdienst“).
+[Peek](/) kann Forza nicht allein an der `FD`-Guía erkennen. Füge sie trotzdem ein: Peek unterstützt über 4.500 Paketdienste. Bei `FD` mit sechs bis acht Ziffern fragt Peek die passenden Paketdienste, darunter Forza, und meldet „Forza Delivery Express hat dieses Paket.“, sobald der Forza-Tracker die Guía kennt. Ein rastreo.forzadelivery.com-Link mit der Guía wird sofort unter Forza eingetragen („Erkannter Paketdienst“).
 
 Findet Peek das Paket noch nicht, tippe auf „Ändern“ und wähle Forza Delivery Express unter „Passt zu dieser Nummer“ – oder unter „Alle Paketdienste“ bei einer neunstelligen Guía (die Suche nach „Forza“ findet ihn). Bei einem bereits hinzugefügten Paket nutze „Paketdienst ändern“. Wählst du Forza für eine Nummer, die nicht aus `FD` und sechs bis neun Ziffern besteht, meldet Peek, Forza „vergibt keine Nummern wie diese“: prüfe die Nummer.
 
@@ -90,7 +90,7 @@ Peek fragt den Forza-Tracker allein mit der Guía ab – ohne Telefonnummer oder
 
 Die Zeiten von Forza tragen keine Zeitzone: Peek liest sie nach guatemaltekischer Zeit und zeigt sie in der Zeitzone deines Geräts. Guatemala, El Salvador und Honduras teilen dieselbe Zeit (UTC−6, ohne Sommerzeit), sodass Scans aus allen drei Ländern zur richtigen Uhrzeit erscheinen.
 
-Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, fragt Peek bis zu alle 10 Minuten bei Forza nach – und ab 6 Uhr Ortszeit (UTC−6) am Tag eines `En ruta`-Scans alle 2 Minuten (alle 5 Minuten, wenn der Forza-Tracker im Browser geöffnet werden muss), solange Forzas eigener Tracker antwortet; sonst stündlich. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ – „Nur die Zustellung“ deckt `En ruta` und `Entregado` ab. Peek kann weder Forza noch den Shop für dich kontaktieren und keinen COD-Betrag bezahlen.
+Solange du das Paket in Peek geöffnet hast oder am Liefertag bei aktivierten Mitteilungen, fragt Peek bis zu alle 10 Minuten bei Forza nach – und ab 6 Uhr Ortszeit (UTC−6) am Tag eines `En ruta`-Scans alle 2 Minuten (alle 5 Minuten, wenn der Forza-Tracker im Browser geöffnet werden muss), solange Forzas eigener Tracker antwortet. Nach zwei Tagen ohne Neuigkeiten (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) prüft Peek stündlich, und nach sieben Tagen im Status „Etikett erstellt“ alle 6 Stunden. Benachrichtigungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ – „Nur die Zustellung“ deckt `En ruta` und `Entregado` ab. Peek kann weder Forza noch den Shop für dich kontaktieren und keinen COD-Betrag bezahlen.
 
 ## Fragen zur Forza Delivery Sendungsverfolgung
 

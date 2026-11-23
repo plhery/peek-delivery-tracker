@@ -14,8 +14,8 @@ Forza nazywa numer śledzenia *guía* (*número de guía*). Widnieje na etykieci
 
 | Guía (zmyślona) | Co to jest |
 | --- | --- |
-| `FD4829173` | `FD` i siedem cyfr: Peek pyta najpierw Forza Delivery Express, wraz z R+L Carriers. |
-| `FD482917` | `FD` i sześć cyfr: ten sam wygląd mogą mieć numery GLS Francja, GLS Niemcy i GLS Szwajcaria. |
+| `FD4829173` | `FD` i siedem cyfr: Peek pyta jednocześnie Forza Delivery Express i R+L Carriers. |
+| `FD482917` | `FD` i sześć cyfr: ten sam wygląd mogą mieć numery GLS Francja, GLS Niemcy, GLS Szwajcaria, GLS Holandia i Loggi. |
 | `FD48291736` | `FD` i osiem cyfr: podobnie wyglądają numery TNT Włochy, a przy ostatniej cyfrze 0 także DHL eCommerce Iberia. |
 | `FD482917364` | `FD` i dziewięć cyfr: strona Forza go przyjmuje, lecz Peek proponuje GLS Włochy — wybierz Forza ręcznie (zobacz niżej). |
 
@@ -62,7 +62,7 @@ O zwrot pieniędzy lub ponowną wysyłkę zwróć się najpierw do sklepu — to
 
 **Stoi na `Generado` lub `Solicitado`.** Sklep utworzył guíę, ale Forza nie ma jeszcze paczki. Zapytaj sklep, kiedy ją przekaże.
 
-**Brak nowych wpisów od dni.** Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą), komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Forza Delivery Express.” oraz link „Poproś przewoźnika Forza Delivery Express o pomoc”. Zadzwoń do Forza z numerem guíi. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
+**Brak nowych wpisów od dni.** Jeśli paczka na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu przez cztery dni, Peek pokazuje „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od…” z datą) oraz komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Forza Delivery Express.” Forza nie ma w Peek strony pomocy, więc nie ma linku do pomocy. Zadzwoń do Forza z numerem guíi. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 
 **Uszkodzona lub zaginiona.** Reaguj natychmiast. Regulamin Forza daje nadawcy 48 godzin od przyjęcia paczki na pisemną reklamację (jedną na paczkę). Bez ubezpieczenia odszkodowanie ograniczono do Q800 lub równowartości w lokalnej walucie (100 USD w regulaminie dla Salwadoru). Nadawcą jest sklep — poinformuj go tego samego dnia. Zobacz [uszkodzone paczki](guide:damaged-parcel) i [zaginione paczki](guide:lost-parcel).
 
@@ -82,7 +82,7 @@ Nagłówek strony Forza podaje godziny od poniedziałku do soboty 7:00–19:00 (
 
 ## Śledzenie paczki Forza Delivery w Peek
 
-[Peek](/) nie rozpoznaje Forza po samej guíi `FD`. Wklej ją mimo to: Peek obsługuje ponad 4500 przewoźników. Dla `FD` z sześcioma do ośmiu cyfr Peek pyta pasujących przewoźników, w tym Forza (w pierwszej kolejności przy siedmiu cyfrach), i wyświetla „Forza Delivery Express ma tę przesyłkę.”, gdy tracker Forza zna guíę. Link z rastreo.forzadelivery.com zawierający guíę trafia od razu pod Forza („Wykryty przewoźnik”).
+[Peek](/) nie rozpoznaje Forza po samej guíi `FD`. Wklej ją mimo to: Peek obsługuje ponad 4500 przewoźników. Dla `FD` z sześcioma do ośmiu cyfr Peek pyta pasujących przewoźników, w tym Forza, i wyświetla „Forza Delivery Express ma tę przesyłkę.”, gdy tracker Forza zna guíę. Link z rastreo.forzadelivery.com zawierający guíę trafia od razu pod Forza („Wykryty przewoźnik”).
 
 Jeśli Peek jeszcze jej nie znajdzie, kliknij „Zmień” i wybierz Forza Delivery Express pod „Pasują do numeru” albo pod „Wszyscy przewoźnicy” dla guíi 9-cyfrowej (wyszukanie „Forza” ją znajduje). W już dodanej paczce użyj „Zmień przewoźnika”. Jeśli wybierzesz Forza dla numeru innego niż `FD` i sześć do dziewięciu cyfr, Peek poinformuje, że Forza „nie wydaje takich numerów” — sprawdź numer.
 
@@ -90,7 +90,7 @@ Peek pyta stronę Forza samą guíą — bez telefonu i bez kodu pocztowego. Pok
 
 Godziny Forza nie mają strefy czasowej: Peek czyta je w czasie gwatemalskim i wyświetla w strefie twojego urządzenia. Gwatemala, Salwador i Honduras dzielą ten sam czas (UTC−6, bez zmiany na czas letni), więc skany ze wszystkich trzech krajów mają właściwą godzinę.
 
-Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek pyta Forza do co 10 minut — a od 6:00 czasu lokalnego (UTC−6) w dniu skanu `En ruta` co 2 minuty (co 5 minut, gdy musi otworzyć śledzenie Forza w przeglądarce), dopóki odpowiada własne śledzenie Forza; w pozostałych chwilach co godzinę. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Powiadomienia ustawisz jako „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie” — „Tylko doręczenie” obejmuje `En ruta` i `Entregado`. Peek nie skontaktuje się za ciebie z Forza ani ze sklepem i nie opłaci kwoty COD.
+Dopóki masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek pyta Forza do co 10 minut — a od 6:00 czasu lokalnego (UTC−6) w dniu skanu `En ruta` co 2 minuty (co 5 minut, gdy musi otworzyć śledzenie Forza w przeglądarce), dopóki odpowiada własne śledzenie Forza. Po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Powiadomienia ustawisz jako „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie” — „Tylko doręczenie” obejmuje `En ruta` i `Entregado`. Peek nie skontaktuje się za ciebie z Forza ani ze sklepem i nie opłaci kwoty COD.
 
 ## Pytania o śledzenie Forza Delivery
 

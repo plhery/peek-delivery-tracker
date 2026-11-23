@@ -14,8 +14,8 @@ A Forza chama ao número de seguimento *guía* (*número de guía*). Está na et
 
 | Guía (inventada) | O que é |
 | --- | --- |
-| `FD4829173` | `FD` e sete dígitos: o Peek consulta primeiro a Forza Delivery Express, juntamente com a R+L Carriers. |
-| `FD482917` | `FD` e seis dígitos: números da GLS França, GLS Alemanha e GLS Suíça podem ter a mesma forma. |
+| `FD4829173` | `FD` e sete dígitos: o Peek consulta ao mesmo tempo a Forza Delivery Express e a R+L Carriers. |
+| `FD482917` | `FD` e seis dígitos: números da GLS França, GLS Alemanha, GLS Suíça, GLS Países Baixos e Loggi podem ter a mesma forma. |
 | `FD48291736` | `FD` e oito dígitos: números da TNT Itália podem ser iguais, bem como da DHL eCommerce Iberia quando o último dígito é 0. |
 | `FD482917364` | `FD` e nove dígitos: o seguimento da Forza aceita-o, mas o Peek sugere GLS Itália — escolhe Forza manualmente (ver abaixo). |
 
@@ -62,7 +62,7 @@ Para reembolso ou novo envio fala primeiro com a loja: foi ela quem escolheu a F
 
 **Parada em `Generado` ou `Solicitado`.** A loja criou a guía, mas a Forza ainda não tem a encomenda. Pergunta à loja quando a vai entregar.
 
-**Sem novas linhas durante dias.** Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data), «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Forza Delivery Express.» e a ligação «Pede ajuda a Forza Delivery Express». Liga à Forza com a tua guía. Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating).
+**Sem novas linhas durante dias.** Se uma encomenda em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito» passar quatro dias sem novos registos, o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde…» com a data) e «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a Forza Delivery Express.» A Forza não tem página de ajuda no Peek, por isso não há ligação «Pede ajuda a …». Liga à Forza com a tua guía. Vê [porque é que o seguimento para de atualizar](guide:tracking-not-updating).
 
 **Danificada ou perdida.** Age de imediato. Os termos da Forza dão ao remetente 48 horas desde a aceitação pela Forza para reclamar por escrito, uma reclamação por encomenda. Sem seguro, limitam o pagamento a Q800 ou equivalente local (100 US$ nos termos de El Salvador). O remetente é a loja: avisa-a no próprio dia. Vê [encomendas danificadas](guide:damaged-parcel) e [encomendas perdidas](guide:lost-parcel).
 
@@ -82,7 +82,7 @@ O cabeçalho do site da Forza indica segunda a sábado, das 7h00 às 19h00 (hora
 
 ## Seguir uma encomenda Forza Delivery com o Peek
 
-O [Peek](/) não consegue identificar a Forza apenas pela guía `FD`. Cola-a na mesma: o Peek segue mais de 4.500 transportadoras. Para `FD` com seis a oito dígitos, o Peek consulta as transportadoras compatíveis, incluindo a Forza (primeiro com sete dígitos), e mostra «Forza Delivery Express tem esta encomenda.» assim que o seguimento da Forza conhece a guía. Uma ligação rastreo.forzadelivery.com com a guía é atribuída logo à Forza («Transportadora detetada»).
+O [Peek](/) não consegue identificar a Forza apenas pela guía `FD`. Cola-a na mesma: o Peek segue mais de 4.500 transportadoras. Para `FD` com seis a oito dígitos, o Peek consulta as transportadoras compatíveis, incluindo a Forza, e mostra «Forza Delivery Express tem esta encomenda.» assim que o seguimento da Forza conhece a guía. Uma ligação rastreo.forzadelivery.com com a guía é atribuída logo à Forza («Transportadora detetada»).
 
 Se o Peek ainda não a encontrar, prime «Alterar» e escolhe Forza Delivery Express em «Corresponde a este número», ou em «Todas as transportadoras» para uma guía de nove dígitos (pesquisar «Forza» encontra-a). Numa encomenda já adicionada, usa «Alterar transportadora». Se escolheres Forza para um número que não seja `FD` e seis a nove dígitos, o Peek diz que a Forza «não emite números como este»: confirma o número.
 
@@ -90,7 +90,7 @@ O Peek consulta o seguimento da Forza só com a guía, sem telefone nem código 
 
 As horas da Forza não incluem fuso horário: o Peek lê-as pela hora da Guatemala e apresenta-as no fuso do teu dispositivo. Guatemala, El Salvador e Honduras partilham esse fuso (UTC−6, sem hora de verão), pelo que qualquer registo nos três países aparece à hora certa.
 
-Enquanto mantiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta a Forza até de 10 em 10 minutos — e a cada 2 minutos (a cada 5 minutos quando precisa de abrir o seguimento da Forza num navegador) a partir das 6h00 locais (UTC−6) no dia de um registo `En ruta`, enquanto o seguimento próprio da Forza responder; fora isso, de hora a hora. Após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e a cada 6 horas após sete dias em «Etiqueta criada». Pode avisar-te com «Todos os registos», «Passos importantes» ou «Só a entrega»: «Só a entrega» abrange `En ruta` e `Entregado`. O Peek não pode contactar a Forza nem a loja por ti, nem pagar valores COD.
+Enquanto mantiveres a encomenda aberta no Peek, ou no dia da entrega com as notificações ligadas, o Peek consulta a Forza até de 10 em 10 minutos — e a cada 2 minutos (a cada 5 minutos quando precisa de abrir o seguimento da Forza num navegador) a partir das 6h00 locais (UTC−6) no dia de um registo `En ruta`, enquanto o seguimento próprio da Forza responder. Após dois dias sem novidades (12 horas enquanto continuar em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora, e a cada 6 horas após sete dias em «Etiqueta criada». Pode avisar-te com «Todos os registos», «Passos importantes» ou «Só a entrega»: «Só a entrega» abrange `En ruta` e `Entregado`. O Peek não pode contactar a Forza nem a loja por ti, nem pagar valores COD.
 
 ## Perguntas sobre o seguimento Forza Delivery
 

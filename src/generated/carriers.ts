@@ -3858,6 +3858,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Jet Express Tracking: Auftragsnummer, Lieferung, Kontakt",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "fan-courier-international-sendungsverfolgung",
+      "title": "FAN Courier International Tracking: AWB und Status",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "fr": [
@@ -5748,6 +5756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Jet Express\u00a0: numéro de commande, livraison, contact",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "suivi-fan-courier-international",
+      "title": "Suivi FAN Courier International\u00a0: AWB et statuts",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "it": [
@@ -7614,6 +7630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Jet Express: numero d’ordine, consegna, aiuto",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "tracciamento-fan-courier-international",
+      "title": "Tracciamento FAN Courier International: AWB e stati",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "es": [
@@ -9456,6 +9480,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Jet Express: número de pedido, entrega, contacto",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "seguimiento-fan-courier-international",
+      "title": "Seguimiento FAN Courier International: AWB y estados",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "pt": [
@@ -11290,6 +11322,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Jet Express: número de pedido, entrega, ajuda",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "seguimento-fan-courier-international",
+      "title": "Seguimento FAN Courier International: AWB e estados",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "pt-br": [
@@ -13174,6 +13214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jet Express: numer zamówienia, dostawa, kontakt",
       "name": "Jet Express",
       "color": "#d61b22"
+    },
+    {
+      "id": "fan-courier-international",
+      "catalog": "fan-courier-international",
+      "slug": "sledzenie-fan-courier-international",
+      "title": "Śledzenie FAN Courier International: AWB i statusy",
+      "name": "FAN Courier International",
+      "color": "#2daae1"
     }
   ],
   "ru": [

@@ -32,9 +32,9 @@ Peek can't read the tracker on siuntosautobusais.lt. It shows the history a trac
 
 ## Where to collect a Siuntos autobusais parcel
 
-**At a terminal.** Parcels wait at the parcel terminal in the bus station of the town they were sent to. Check the terminal's hours before you go. UAB „Kautra“ runs these terminals, as read on 14 November 2026:
+**At a terminal.** Parcels wait at the parcel terminal in the bus station of the town they were sent to. Check the terminal's hours before you go. UAB „Kautra“ runs these terminals:
 
-| Town | Address | Hours |
+| Town | Address | Hours (Lithuanian time) |
 | --- | --- | --- |
 | Vilnius | Vilnius bus station, Sodų g. 22 | Mon–Fri 05:25–21:00, Sat–Sun 07:00–19:00 |
 | Kaunas | Kaunas bus station, Vytauto pr. 24 | Mon–Sat 05:45–19:30, Sun 07:15–18:30 |
@@ -71,7 +71,7 @@ In other towns, such as Klaipėda, Panevėžys and Šiauliai, the terminal in th
 
 ## Siuntos autobusais contact
 
-As read on 14 November 2026, siuntosautobusais.lt lists:
+From siuntosautobusais.lt:
 
 - **Email**: info@siuntosautobusais.lt; for Vilnius, vilnius@siuntosautobusais.lt.
 - **Vilnius terminal**: +370 5 233 0983.
@@ -89,7 +89,11 @@ To follow the parcel as a Siuntos autobusais one, press "Change" and type "Siunt
 
 Siuntos autobusais has no tracker Peek can read. So Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind the tracker on siuntosautobusais.lt, and for many parcels there may be nothing at all. If you left the carrier to Peek and the services name Siuntos autobusais or Kautra, with scans that show the parcel moving, Peek names Siuntos autobusais for you. Peek has no link that opens the Siuntos autobusais tracker with your number: type it on siuntosautobusais.lt. Once a service has the parcel, Peek's link opens that service's page. Peek doesn't pass your IP address or country on to the services.
 
-Until a service knows the number, a parcel filed under Siuntos autobusais shows "Waiting for Siuntos autobusais". While a service has the parcel, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Siuntos autobusais or the sender for you.
+Until a service knows the number, a parcel filed under Siuntos autobusais shows "Waiting for Siuntos autobusais". A service that didn't know the number is asked again a day later. While a service has the parcel, Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours once the parcel has spent seven days at "Label created". On the day it's out for delivery, Peek checks up to every 15 minutes while you have the parcel open or notifications on.
+
+When the newest line is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that line's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Siuntos autobusais.", with a "Get help from Siuntos autobusais" link to the terminals page. After three weeks with no new line, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Siuntos autobusais."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Siuntos autobusais or the sender for you.
 
 ## Questions about Siuntos autobusais tracking
 

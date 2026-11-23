@@ -92,7 +92,7 @@ Peek odczytuje status, niemiecką treść każdego skanu wraz z godziną (w czas
 
 W dzień i w nocy, dopóki masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, a od 6:00 czasu niemieckiego w dniu zeskanowania jej przez nox do doręczenia nawet co 2 minuty, dopóki własny system nox odpowiada. Po dwóch dniach bez wieści (po 12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a jeśli przez siedem dni pozostaje na etapie „Zarejestrowana” — co 6 godzin.
 
-Gdy przesyłka nadal na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu od czterech dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), wyjaśnia: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika nox.” i wyświetla „Poproś przewoźnika nox o pomoc”. Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie ustawi miejsca dostawy ani nie złoży reklamacji za ciebie.
+Gdy przesyłka nadal na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” nie ma nowego skanu od czterech dni, Peek oznacza ją komunikatem „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), wyjaśnia: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika nox.” nox nie ma w Peek strony pomocy, więc komunikat nie pokazuje linku do pomocy. Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie ustawi miejsca dostawy ani nie złoży reklamacji za ciebie.
 
 ## Pytania o śledzenie nox
 

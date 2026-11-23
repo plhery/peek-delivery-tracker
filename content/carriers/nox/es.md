@@ -92,7 +92,7 @@ Peek lee el estado, el texto alemán y la hora de cada escaneo (en hora alemana)
 
 Día y noche, mientras tengas el envío abierto en Peek o el día de entrega si las notificaciones están activadas, Peek comprueba hasta cada 10 minutos, y a partir de las 6:00 (hora alemana) del día en que nox escanea el envío en reparto hasta cada 2 minutos mientras el rastreador propio de nox responda. Después de dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), Peek comprueba cada hora; y si permanece siete días en «Etiqueta creada», cada 6 horas.
 
-Si un envío todavía en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin un nuevo escaneo, Peek lo marca con «Sin novedades desde hace cuatro días» (o «Sin novedades desde el …»), explica «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a nox.» y ofrece «Pide ayuda a nox». Puedes recibir avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede configurar tu punto de depósito ni abrir una reclamación por ti.
+Si un envío todavía en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin un nuevo escaneo, Peek lo marca con «Sin novedades desde hace cuatro días» (o «Sin novedades desde el …»), explica «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a nox.» Como nox no tiene página de ayuda en Peek, el aviso no ofrece ningún enlace de ayuda. Puedes recibir avisos de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede configurar tu punto de depósito ni abrir una reclamación por ti.
 
 ## Preguntas sobre el seguimiento de nox
 

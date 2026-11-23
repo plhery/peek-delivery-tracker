@@ -3676,6 +3676,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "tsjy-sendungsverfolgung",
+      "title": "TSJY Sendungsverfolgung (通世集运): Nummern und Status",
+      "name": "TSJY",
+      "color": "#4042e2"
+    },
+    {
       "id": "stone3pl",
       "catalog": "stone3pl",
       "slug": "stone3pl-sendungsverfolgung",
@@ -5478,6 +5486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "suivi-tsjy",
+      "title": "Suivi TSJY (通世集运)\u00a0: numéros de commande et statuts",
+      "name": "TSJY",
+      "color": "#4042e2"
+    },
+    {
       "id": "stone3pl",
       "catalog": "stone3pl",
       "slug": "suivi-stone3pl",
@@ -7240,6 +7256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "tracciamento-tsjy",
+      "title": "Tracciamento TSJY (通世集运): numeri d’ordine e stati",
+      "name": "TSJY",
+      "color": "#4042e2"
+    },
+    {
       "id": "stone3pl",
       "catalog": "stone3pl",
       "slug": "tracciamento-stone3pl",
@@ -8986,6 +9010,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a9e4"
     },
     {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "seguimiento-tsjy",
+      "title": "Seguimiento TSJY (通世集运): números de pedido y estados",
+      "name": "TSJY",
+      "color": "#4042e2"
+    },
+    {
       "id": "stone3pl",
       "catalog": "stone3pl",
       "slug": "seguimiento-stone3pl",
@@ -10714,6 +10746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 17FEIA: números FEI…YQ, estados e entrega",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "seguimento-tsjy",
+      "title": "Seguimento TSJY (通世集运): números de pedido e estados",
+      "name": "TSJY",
+      "color": "#4042e2"
     },
     {
       "id": "stone3pl",
@@ -12494,6 +12534,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 17FEIA: numery FEI…YQ, statusy i doręczenie",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "sledzenie-tsjy",
+      "title": "Śledzenie TSJY (通世集运): numery zamówień i statusy",
+      "name": "TSJY",
+      "color": "#4042e2"
     },
     {
       "id": "stone3pl",

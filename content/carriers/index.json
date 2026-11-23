@@ -91,7 +91,7 @@
   { "id": "venipak", "catalog": "venipak", "name": "Venipak", "languages": ["en", "lt", "lv", "et", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "lietuvos-pastas", "catalog": "lietuvos-pastas", "name": "Lietuvos paštas", "languages": ["en", "lt", "fr", "ru", "de", "es", "it", "pt", "pl"] },
   { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en", "ru"] },
-  { "id": "dao", "catalog": "dao", "name": "DAO", "languages": ["en", "da"] },
+  { "id": "dao", "catalog": "dao", "name": "DAO", "languages": ["en", "da", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "helthjem", "catalog": "helthjem", "name": "Helthjem", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "matkahuolto", "catalog": "matkahuolto", "name": "Matkahuolto", "languages": ["en", "fi", "sv", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ukrposhta", "catalog": "ukrposhta", "name": "Ukrposhta", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },

@@ -2660,6 +2660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-sendungsverfolgung",
+      "title": "DAO Sendungsverfolgung: Status, daoSHOP & Kontakt",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "helthjem",
       "catalog": "helthjem",
       "slug": "helthjem-sendungsverfolgung",
@@ -4364,6 +4372,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis Lietuvos paštas\u00a0: poste lituanienne, LP EXPRESS",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "suivi-dao",
+      "title": "Suivi DAO\u00a0: statuts, daoSHOP et livraisons manquées",
+      "name": "DAO",
+      "color": "#e30613"
     },
     {
       "id": "helthjem",
@@ -6096,6 +6112,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "tracciamento-dao",
+      "title": "Tracciamento DAO: stati, daoSHOP e consegne mancate",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "helthjem",
       "catalog": "helthjem",
       "slug": "tracciamento-helthjem",
@@ -7778,6 +7802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "seguimiento-dao",
+      "title": "Seguimiento DAO: estados, daoSHOP y entregas fallidas",
+      "name": "DAO",
+      "color": "#e30613"
+    },
+    {
       "id": "helthjem",
       "catalog": "helthjem",
       "slug": "seguimiento-helthjem",
@@ -9450,6 +9482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Lietuvos paštas (Correios da Lituânia)",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "seguimento-dao",
+      "title": "Seguimento DAO: estados, daoSHOP e entregas falhadas",
+      "name": "DAO",
+      "color": "#e30613"
     },
     {
       "id": "helthjem",
@@ -11158,6 +11198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Lietuvos paštas (Poczta Litewska) i LP Express",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "sledzenie-dao",
+      "title": "Śledzenie DAO: statusy, daoSHOP i nieudane doręczenia",
+      "name": "DAO",
+      "color": "#e30613"
     },
     {
       "id": "helthjem",

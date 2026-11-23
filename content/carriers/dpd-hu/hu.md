@@ -6,18 +6,18 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-A **DPD Hungary** (*DPD Hungary Kft.*, a Geopost / DPDgroup európai hálózat tagja) Magyarország egyik legnagyobb belföldi és nemzetközi csomagküldő szolgáltatója ([dpd.com/hu/hu/](https://www.dpd.com/hu/hu/)). Belföldi és nemzetközi Classic csomagszállítást kínál 31,5 kg-ig utánvéttel, Pickup csomagpontokkal, a DPD PickApp alkalmazással és **FOXPOST** csomagautomata-együttműködéssel, miközben közvetlenül kapcsolódik az európai DPD-hálózatokhoz (többek között [DPD Germany](carrier:dpd-de), [DPD Austria](carrier:dpd-at), [DPD Poland](carrier:dpd-pl) és [DPD Romania](carrier:dpd-ro)). A csomagodat ellenőrizheted a [dpd.com/hu/hu/](https://www.dpd.com/hu/hu/) oldalon, vagy beillesztheted a 14 számjegyű csomagszámot a fenti mezőbe.
+A **DPD Hungary** (*DPD Hungary Kft.*, a Geopost DPD-hálózatának tagja) Magyarországon kézbesít csomagokat, és külföldre is szállít ([dpd.com/hu/hu/](https://www.dpd.com/hu/hu/)). Belföldi és nemzetközi csomagküldést, utánvétet, Pickup csomagpontokat, csomagfeladáshoz a DPD PickApp alkalmazást, a **FOXPOST**-tal együttműködve pedig FOXPOST csomagautomatába kézbesítést kínál; üzleti űrlapja 31,50 kg-ig sorolja a csomagokat. A csomagodat ellenőrizheted a [dpd.com/hu/hu/](https://www.dpd.com/hu/hu/) oldalon, vagy beillesztheted a 14 számjegyű csomagszámot a fenti mezőbe.
 
 ## DPD Hungary csomagszámok (14 jegyű formátum)
 
-A DPD Hungary csomagszámai **14 számjegyből** állnak; a [dpd.com/hu/hu/](https://www.dpd.com/hu/hu/) tájékoztatója szerint a magyarországi feladású csomagszámok jellemzően **`1638`**-cal vagy **`1640`**-nel kezdődnek:
+A DPD Hungary csomagszámai **14 számjegyből** állnak; a [dpd.com/hu/hu/kapcsolat/](https://www.dpd.com/hu/hu/kapcsolat/) űrlapjai szerint a magyarországi csomagszámok jellemzően **`1638`**-cal vagy **`1640`**-nel kezdődnek:
 
 | Formátum (kitalált) | Mit jelent |
 | --- | --- |
 | `16384829173605` | 14 jegyű, `1638`-cal kezdődő magyar DPD csomagszám. |
 | `16407391846205` | 14 jegyű, `1640`-nel kezdődő magyar DPD csomagszám. |
 
-A más európai DPD-országokból Magyarországra érkező nemzetközi küldemények szintén 14 jegyű csomagszámot kapnak (az indító ország előtagjával), és a határátlépés után változatlan számmal követhetők tovább a DPD Hungary hálózatában. Lásd [csomagszám-formátumok](guide:tracking-number-formats).
+Más DPD-társaságok is 14 jegyű csomagszámot használnak, ezért egy puszta szám bármelyikükhöz tartozhat (lásd lent). Lásd [csomagszám-formátumok](guide:tracking-number-formats).
 
 ## Mit jelentenek a DPD Hungary csomagkövetési állapotai?
 
@@ -25,20 +25,20 @@ A DPD Hungary a myDPD egységes állapotkódjait használja a felvételtől és 
 
 | A myDPD jelzése | Mit jelent számodra | A Peek ezt mutatja |
 | --- | --- | --- |
-| `PARCEL_HANDED` (`Parcel handed to DPD`) | A küldeményt átadták a DPD hálózatának. | "In transit" |
-| `IN_TRANSIT` (`Your parcel is on its way`), `AT_DELIVERY_CENTER` (`At delivery center`) | A csomag szállítás alatt áll a DPD elosztóközpontjai között, vagy megérkezett a helyi kiszállító depóba. | "In transit" |
-| `PARCEL_OUT_FOR_DELIVERY` (`Parcel out for delivery`) | A futár felvette a csomagot a napi kiszállítási körre. | "Out for delivery" |
-| `AVAILABLE_FOR_COLLECTION` (`Ready for collection`) | Átvehető a választott DPD Pickup csomagponton vagy automatában. | "Ready for pickup" |
-| `UNSUCCESSFUL_DELIVERY_ATTEMPT` (`Unsuccessful delivery attempt`) | Sikertelen kézbesítési kísérlet (távollét vagy címprobléma miatt); újabb kísérlet vagy átirányítás következik. | "Delivery attempted" |
-| `DELIVERED` (`Delivered`) | Kézbesítve a címzettnek vagy átvéve a csomagponton/automatában. | "Delivered" |
+| `PARCEL_HANDED` (`Parcel handed to DPD`) | A küldeményt átadták a DPD hálózatának. | „In transit” |
+| `IN_TRANSIT` (`Your parcel is on its way`), `AT_DELIVERY_CENTER` (`At delivery center`) | A csomag szállítás alatt áll a DPD elosztóközpontjai között, vagy megérkezett a helyi kiszállító depóba. | „In transit” |
+| `PARCEL_OUT_FOR_DELIVERY` (`Parcel out for delivery`) | A futár felvette a csomagot a napi kiszállítási körre. | „Out for delivery” |
+| `AVAILABLE_FOR_COLLECTION` (`Ready for collection`) | Átvehető a választott DPD Pickup csomagponton vagy automatában. | „Ready for pickup” |
+| `UNSUCCESSFUL_DELIVERY_ATTEMPT` (`Unsuccessful delivery attempt`) | Sikertelen kézbesítési kísérlet; a futár másnap újra megpróbálja, a második sikertelen kísérlet után pedig a csomag öt munkanapig átvehető az értesítésben megadott depóban. | „Delivery attempted” |
+| `DELIVERED` (`Delivered`) | Kézbesítve a címzettnek vagy átvéve a csomagponton/automatában. | „Delivered” |
 
 ## Átirányítás, FOXPOST automaták és uniós szállítás
 
 A [dpd.com/hu/hu/](https://www.dpd.com/hu/hu/) és a [dpd.com/hu/en/contact/](https://www.dpd.com/hu/en/contact/) hivatalos tájékoztatása alapján:
 
-- **Időpont- és címváltoztatás:** ha nem vagy otthon a futár érkezésekor, a DPD átvételi felületén vagy a DPD PickAppban átütemezheted a kiszállítást, új címet adhatsz meg, vagy Pickup csomagpontra kérheted a csomagot.
+- **Időpont- és címváltoztatás:** egy sikertelen kézbesítés után a futár másnap automatikusan újra megpróbálja. A címet vagy az időpontot az értesítésben kapott linken vagy a myDPD alkalmazásban módosíthatod, és ott átvételi pontot vagy csomagautomatát is választhatsz. Ha a második kísérlet sem sikerül, a csomagot öt munkanapon belül veheted át az értesítésben megadott depóban.
 - **FOXPOST csomagautomata-együttműködés:** a DPD és a **FOXPOST** partnersége révén a DPD-csomagok FOXPOST csomagautomatákba is kérhetők. Az automatába kért küldemények ügyintézését és panaszkezelését a **FOXPOST** végzi a `06-1-999-0-369` telefonszámon (hétfő, kedd, szerda, péntek 8:00–18:00; csütörtök 8:00–20:00).
-- **Nemzetközi EU-küldemények:** az EU-n belüli csomagok vámmentesek; az EU-n kívülről érkező csomagokra magyar áfa és az uniós importterhek vonatkozhatnak. Lásd [vámon álló csomagok](guide:customs).
+- **EU-n kívülről érkező csomagok:** lásd [vámon álló csomagok](guide:customs).
 
 ## Elakadt, sérült vagy elveszett DPD Hungary csomag
 
@@ -57,13 +57,15 @@ A [DPD Hungary Kapcsolat](https://www.dpd.com/hu/hu/kapcsolat/) és a [DPD Hunga
 
 ## DPD Hungary csomag követése a Peek alkalmazásban
 
-Amikor megadsz egy 14 jegyű DPD Hungary csomagszámot (`16384829173605` vagy `16407391846205`, kitalált számok), a [Peek](/) a többi 14 jegyű európai DPD-hálózattal együtt automatikusan ellenőrzi a DPD Hungary rendszerét, és megerősítés után kiírja: `"DPD Hungary has this parcel."` A Peek közvetlenül felismeri a beillesztett `dpdgroup.com/hu/...?parcelNumber=` és `dpd.com/hu/...?parcelNumber=` linkeket is. Ha kézzel szeretnéd kiválasztani a futárszolgálatot, koppints a "Change" gombra hozzáadáskor vagy a "Change carrier" opcióra a csomag képernyőjén.
+Egy 14 jegyű szám (`16384829173605` vagy `16407391846205`, kitalált számok) több DPD-társasághoz és más futárszolgálathoz is illik. Magyarországon a [Peek](/) először a DPD Hungary-t kérdezi meg, máshol előbb más DPD-társaságokat, a Chronopostot, a SEUR-t és a BRT-t. Amint a DPD Hungary megerősíti, a Peek ezt írja ki: „DPD Hungary has this parcel.” A beillesztett `dpdgroup.com/hu/...?parcelNumber=` és `dpd.com/hu/...?parcelNumber=` linkeket a Peek a DPD Hungary-hez rendeli. Ha magad választanád ki a DPD Hungary-t, koppints hozzáadáskor a „Change” gombra, vagy a csomag képernyőjén a „Change carrier” lehetőségre.
 
-A Peek közvetlenül lekérdezi a myDPD Hungary vendég API-t (irányítószám megadása nélkül), és megjeleníti a fő fázist ("In transit", "Out for delivery", "Ready for pickup", "Delivery attempted", "Delivered", illetve "Label created", "Needs attention" vagy "Returned to sender" jelzés esetén), a szkennelési előzményeket és állapotkódokat, a várható kézbesítési napot (ha a myDPD közli), a kézbesítés pontos idejét, a határon átnyúló európai DPD-átadásokat, valamint a magyarországi időzónájú (`Europe/Budapest`) időbélyegeket.
+A Peek a DPD Hungary vendégként elérhető nyomkövetését olvassa, irányítószám nélkül, és megmutatja az állapotot („In transit”, „Out for delivery”, „Ready for pickup”, „Delivery attempted”, „Delivered”, vagy más állapotot, ha a DPD ilyet jelez), a várható kézbesítési napot, ha a DPD megadja, a kézbesítés idejét, és a csomagpont nevét, amíg a csomag ott vár. Irányítószám nélkül a DPD minden lépést csak egyszer ad meg, a legutóbbi dátumával és hely nélkül, így a lépések közötti szkennelések hiányoznak. A DPD időpontjai időeltolódással vagy időzónával érkeznek, ezek hiányában a Peek budapesti idő szerint értelmezi őket, és mindet a készüléked órája szerint mutatja. Amikor a DPD a csomagot olyan ország kézbesítő depójában vagy kiszállításon jelzi, amelynek DPD-társaságát a Peek követi (például a DPD Germany, a DPD Austria, a DPD Poland, Spanyolországban a SEUR, Olaszországban a BRT), a Peek ellenőrzi, hogy az a társaság nyilvántartja-e a csomagot: ekkor a csomagnál a „Delivery with” felirat és a futárszolgálat neve jelenik meg, és mindkét szám látszik. A DPD állapotkódjait a Peek nem mutatja.
 
-A Peek legfeljebb 10 percenként ellenőriz, amíg nyitva van a csomag vagy a kézbesítés napján bekapcsolt értesítésekkel, és legfeljebb 2 percenként helyi idő szerint reggel 6:00-tól azon a napon, amikor kiszállítási szkennelés érkezik. Egyébként óránként kérdez le, nyitott képernyőnél is óránkénti marad 12 óra "Label created" vagy "Received by carrier" állapot vagy 2 nap változatlanság után, és 7 nap "Label created" állapot után 6 óránkéntira lassít. Amikor tartalék követési szolgáltatások válaszolnak, óránként, egy nap változatlanság után 3 óránként, kézbesítési napon pedig legfeljebb 15 percenként ellenőriznek. Ha 4 napig nincs új frissítés szállítás közben, a Peek jelzi a szünetet (például "No tracking update since Mon, Oct 12"), kiírja: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DPD Hungary." és megjeleníti a "Get help from DPD Hungary" gombot, amely a DPD Hungary kapcsolati oldalát nyitja meg. Három hétnél hosszabb csend után megjelenik: "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DPD Hungary."
+Amíg a csomag nyitva van a Peekben, vagy a kézbesítés napján, ha be vannak kapcsolva az értesítések, a Peek akár 10 percenként ellenőriz; azon a napon, amikor a DPD `Parcel out for delivery` állapotot mutat, reggel 6-tól a legutóbbi szkennelés órája szerint akár 2 percenként, amíg a DPD Hungary nyomkövetése válaszol. Egyébként óránként. Ha 12 óráig csak „Label created” vagy „Received by carrier” látszik, vagy két napig nincs újdonság, a Peek óránként ellenőriz, bárhogyan követed a csomagot, hét nap „Label created” után pedig 6 óránként. Ha a DPD Hungary nyomkövetése nem válaszol, és a Peek csak nyomkövető szolgáltatásokon keresztül követi a csomagot, óránként, egy nap csend után 3 óránként, a kiszállítás napján pedig akár 15 percenként ellenőriz.
 
-Választhatsz értesítési beállítást: "Every scan", "Important steps" vagy "Delivery only". A Peek csak követi a csomag állapotát, és nem tudja átirányítani a küldeményt Pickup pontra vagy FOXPOST automatába, illetve nem lép kapcsolatba helyetted a DPD Hungary-val.
+Ha egy „Label created”, „Received by carrier” vagy „In transit” állapotú csomagnál négy napja nincs új szkennelés, a Peek a legutóbbi szkennelés napjával jelzi, például: „No tracking update since Mon 12 Oct”. A csomag oldalán ekkor ez áll: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking DPD Hungary.”, és egy „Get help from DPD Hungary” hivatkozás a DPD Hungary kapcsolati oldalára visz. Három hét új szkennelés nélkül: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking DPD Hungary.”
+
+Választhatsz értesítési beállítást: „Every scan”, „Important steps” vagy „Delivery only”. A Peek csak követi a csomag állapotát, és nem tudja átirányítani a küldeményt Pickup pontra vagy FOXPOST automatába, illetve nem lép kapcsolatba helyetted a DPD Hungary-val.
 
 ## Gyakori kérdések a DPD Hungary csomagkövetésről
 
@@ -81,7 +83,7 @@ A `+36 1 501 6200` telefonszám hétfőn **07:00–19:00**, keddtől péntekig *
 
 ### Kell irányítószám a DPD Hungary csomag követéséhez a Peekben?
 
-Nem — a Peek irányítószám megadása nélkül is lekérdezi a myDPD Hungary vendég követési adatait a 14 jegyű csomagszám alapján.
+Nem — a Peek irányítószám nélkül, a 14 jegyű csomagszám alapján olvassa a DPD Hungary vendégként elérhető nyomkövetését. Irányítószám nélkül a DPD minden lépést egyszer és hely nélkül ad meg.
 
 :::sources
 - [DPD Hungary: Hivatalos weboldal](https://www.dpd.com/hu/hu/) – `1638`/`1640` 14 jegyű csomagszámok, FOXPOST csomagautomata-együttműködés (`06-1-999-0-369`), DPD PickApp és online bejelentő rendszer

@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Chit Chats** (*Chit Chats Express*) is a Canadian e-commerce shipping consolidator founded in 2001 by Derek Nolan, operating 66 drop-off branches and SmartDrop points across Canada and having moved over 50 million parcels for more than 100,000 Canadian online sellers ([chitchats.com](https://chitchats.com/)). Instead of operating its own final-mile doorstep fleet, Chit Chats collects merchant packages across Canada, transports cross-border US orders across the border to induct directly into [USPS](carrier:usps), and hands domestic Canadian and international parcels to partner carriers such as [Canada Post](carrier:canada-post) and [Asendia](carrier:asendia). You can track a shipment on [chitchats.com/tracking](https://chitchats.com/tracking) or paste your 10-character Chit Chats shipment ID into the box above.
+**Chit Chats** (*Chit Chats Express*) is a Canadian e-commerce shipping company founded in 2001 by Derek Nolan. It has 66 locations across Canada, takes parcels by mail-in (SmartDrop) and pickup too, and has shipped over 50 million packages for more than 100,000 shippers ([chitchats.com](https://chitchats.com/)). Partner carriers deliver its parcels: its tracker names the partner and gives the partner's tracking number, such as [USPS](carrier:usps) in the United States or [Canada Post](carrier:canada-post) in Canada. You can track a shipment on [chitchats.com/tracking](https://chitchats.com/tracking) or paste your 10-character Chit Chats shipment ID into the box above.
 
 ## Chit Chats tracking numbers (10-character shipment ID)
 
@@ -21,13 +21,13 @@ Once Chit Chats hands the parcel over to the final-mile partner, the tracking pa
 
 ## What Chit Chats tracking statuses mean
 
-Chit Chats displays its own branch and linehaul milestones first, followed by relayed scan descriptions from the partner carrier ([USPS](carrier:usps), [Canada Post](carrier:canada-post), [Asendia](carrier:asendia), etc.):
+Chit Chats' tracker shows its own scans and then those of the partner carrier ([USPS](carrier:usps), [Canada Post](carrier:canada-post) or another):
 
 | Chit Chats or partner says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Shipment created, Chit Chats awaiting item`, `Label Created`, `Electronic information submitted by shipper` | Merchant bought postage online, but has not dropped the parcel at a Chit Chats branch yet. | "Label created" |
 | `Received by Chit Chats` | Physical parcel scanned in at a Canadian Chit Chats branch or drop spot. | "Received by carrier" |
-| `Arrived at Chit Chats facility`, `Departed from Chit Chats facility`, `In transit` | Sorted at a Chit Chats hub and moving toward the US border or partner handover. | "In transit" |
+| `Arrived at Chit Chats facility`, `Departed from Chit Chats facility`, `In transit` | Sorted at a Chit Chats facility; `In transit` is the hand-over to the partner carrier. | "In transit" |
 | `Received from Chit Chats`, `Accepted at USPS Facility`, `Item accepted at the Post Office`, `Received at sort hub` | Inducted into the partner carrier's sorting network (USPS, Canada Post or international partner). | "In transit" / "Received by carrier" |
 | `Arrived at USPS Facility`, `Departed USPS Facility`, `In Transit to Next Facility`, `Item processed` | Moving through the partner carrier's domestic or international sorting facilities. | "In transit" |
 | `Out for Delivery`, `Item out for delivery` | Out with the local partner carrier for final doorstep delivery today. | "Out for delivery" |
@@ -37,13 +37,13 @@ Chit Chats displays its own branch and linehaul milestones first, followed by re
 
 ## Cross-border US induction, customs and partner handoffs
 
-- **Canada-to-US border crossing:** Chit Chats batches US-bound parcels at its Canadian hubs, clears US customs as consolidated mail/parcels and inducts them directly into [USPS](carrier:usps) on the US side of the border. Watch for current US tariff/customs requirements noted on [chitchats.com](https://chitchats.com/). See [parcels held at customs](guide:customs).
-- **Tracking on the partner carrier:** once Chit Chats posts `In transit` and links a [USPS](carrier:usps), [Canada Post](carrier:canada-post) or [Asendia](carrier:asendia) tracking number, checking that partner directly lets you sign up for local delivery instructions, redelivery or post-office pickup details.
+- **Shipping to the United States:** Chit Chats offers U.S. shipping with customs clearance, delivered duty paid and help with CUSMA paperwork, quotes 2–6 business days, and posts its 2026 U.S. tariff updates on [chitchats.com](https://chitchats.com/). See [parcels held at customs](guide:customs).
+- **Tracking on the partner carrier:** once Chit Chats hands the parcel over, its contact page suggests using the carrier tracking number on the partner carrier's own tracking page.
 
 ## Chit Chats parcel delayed, quiet or missing
 
-- **Contact the online seller first:** on [chitchats.com/contact](https://chitchats.com/contact), Chit Chats explicitly tells recipients that its support team sees the exact same scan data shown on the tracking page and **can only advise the shipper** on account or claim matters. Always contact the seller who shipped your order for refunds, insurance claims or address issues.
-- **Quiet gap during border transfer:** scans often pause for 1–4 business days between `Departed from Chit Chats facility` (`In transit`) and the first [USPS](carrier:usps) acceptance scan while the truck crosses the border and clears US customs. See [why tracking stops updating](guide:tracking-not-updating).
+- **Contact the online seller first:** Chit Chats' [contact page](https://chitchats.com/contact) says its team sees the same tracking information you do and can only advise the shipper, on account-related matters, so recipients should contact the seller.
+- **Late parcel:** once the estimated delivery time has passed, Chit Chats' tracking page suggests contacting the seller. See [why tracking stops updating](guide:tracking-not-updating).
 - **Delivered or missing:** verify whether the parcel is in a mailbox, front porch or local post office (especially if Canada Post left a notice card), then contact the seller promptly. See [delivered but not received](guide:delivered-not-received), [lost parcel](guide:lost-parcel), [damaged parcel](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## Chit Chats customer service and Canadian contacts
@@ -58,11 +58,13 @@ Official support channels published on [Chit Chats Contact Us](https://chitchats
 
 ## Track a Chit Chats parcel with Peek
 
-[Peek](/) checks Chit Chats automatically as the sole candidate when you enter a 10-character Chit Chats shipment ID (`K4N8V3T6R2` or `P7M3X9D5Q8`, invented) and shows `"Chit Chats has this parcel."` once Chit Chats confirms it; Peek also recognises pasted `chitchats.com/tracking/<10-char>` tracking links directly. If you ever need to choose Chit Chats manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "ChitChats" or "Chit Chats Express" finds it too).
+[Peek](/) checks Chit Chats automatically as the sole candidate when you enter a 10-character Chit Chats shipment ID (`K4N8V3T6R2` or `P7M3X9D5Q8`, invented) and shows "Chit Chats has this parcel." once Chit Chats confirms it; Peek also recognises pasted `chitchats.com/tracking/<10-char>` tracking links directly. If you ever need to choose Chit Chats manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "ChitChats" or "Chit Chats Express" finds it too).
 
-Peek queries Chit Chats' JSON tracking endpoint directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Ready for pickup", "Delivery attempted", "Delivered"), Chit Chats and relayed partner scan wording, scan locations (scrubbing street numbers and postcodes), estimated delivery date, weight (converted to kilograms), parcel dimensions, postage service name, destination country, recipient name and destination city/province/postcode, automatic handoff to the partner carrier (`delivery_carrier` and cleaned `delivery_tracking_number`, stripping USPS `420` routing prefixes), and exact timestamped instants for Chit Chats' own scans while keeping local wall clocks for relayed partner scans. Peek omits sender town/name and raw progress rails.
+Peek reads Chit Chats' tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Ready for pickup", "Delivery attempted", "Delivered"), the wording of Chit Chats' and the partner's scans, and each scan's town without its postcode; a place with a street number is left out. It also shows the estimated delivery day, the weight in kilograms and the dimensions. The recipient's name shows under "Recipient" on your own parcel page, and the destination town can end your own map's route while the parcel is on its way; shared links show neither. When Chit Chats names a partner Peek knows, such as USPS or Canada Post, with the partner's tracking number (a USPS number without its ZIP routing prefix), Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. Chit Chats' own scans come with an exact time. A partner's scan comes with a clock that Chit Chats labels as Pacific time but can be hours off it, so Peek dates it on its place's time zone (New York's for `NEW YORK, NY`, Toronto's for `TORONTO, ON`), a scan without a place on the zone of the scan beside it, or else on Vancouver's, and shows them all on your device's clock. Peek leaves out the service name, the status codes and the sender's town.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Chit Chats." and displays "Get help from Chit Chats", which opens Chit Chats' contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Chit Chats."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day the tracker shows `Out for Delivery` or `Item out for delivery`, every 2 minutes from 6 a.m. on the newest scan's clock, while Chit Chats' tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When Chit Chats' tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Chit Chats.", with a "Get help from Chit Chats" link to Chit Chats' contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Chit Chats."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot file claims, edit addresses or contact Chit Chats or its partner carriers for you.
 
@@ -74,15 +76,15 @@ Chit Chats shipment IDs are 10 uppercase letters and digits (for example `K4N8V3
 
 ### Who delivers a Chit Chats parcel to my door?
 
-Chit Chats consolidates and transports the parcel from Canada, then hands final delivery to a partner carrier — typically [USPS](carrier:usps) in the United States, [Canada Post](carrier:canada-post) inside Canada, or [Asendia](carrier:asendia) / postal partners internationally.
+A partner carrier delivers it, such as [USPS](carrier:usps) in the United States or [Canada Post](carrier:canada-post) in Canada. Chit Chats' tracker names the partner and gives its tracking number.
 
 ### Why did my Chit Chats parcel pause after `Departed from Chit Chats facility`?
 
-The parcel is crossing the Canada–US border or transferring to the partner carrier's intake hub. Tracking resumes once USPS, Canada Post or the international partner scans it in.
+Chit Chats' tracker doesn't give a reason. Its `In transit` is the hand-over to the partner carrier, and the partner's scans follow once it has scanned the parcel. If the estimated delivery time has passed, contact the seller.
 
 ### Who should I contact if my Chit Chats parcel is missing?
 
-Contact the online retailer who sent the parcel first — per [chitchats.com/contact](https://chitchats.com/contact), Chit Chats can only open investigations or claims with the shipper (toll-free `1-844-842-8777` for branch/account enquiries).
+Contact the seller who sent the parcel. Per [chitchats.com/contact](https://chitchats.com/contact), Chit Chats' team can only advise the shipper, on account-related matters. Its toll-free line `1-844-842-8777` is for billing, branch inquiries and French support.
 
 :::sources
 - [Chit Chats: Official Website](https://chitchats.com/) – Canadian e-commerce shipping consolidator for US, Canadian and international postage

@@ -71,7 +71,7 @@ Il negozio sceglie il servizio: *Authority to Leave* (luogo sicuro), *Signature*
 
 **Danneggiato.** Avvisa il negozio il prima possibile e apri una segnalazione ad Aramex entro 24 ore.
 
-Poiché è il negozio a possedere le fatture richieste per un reclamo, in pratica il reclamo lo apre il negozio. Le condizioni di Aramex fissano le scadenze: foto del danno entro 24 ore dalla consegna e reclamo scritto entro 7 giorni lavorativi; reclami per smarrimento entro 30 giorni lavorativi dal ritiro. La copertura arriva fino a 1.500 $ per spedizione e, con *Authority to Leave*, la prova fotografica e GPS di consegna esclude un reclamo per smarrimento. Questi limiti non riducono i tuoi diritti ai sensi dell’*Australian Consumer Law*.
+Poiché è il negozio a possedere le fatture richieste per un reclamo, in pratica il reclamo lo apre il negozio. Le condizioni di Aramex fissano le scadenze: foto del danno entro 24 ore dalla consegna e reclamo scritto entro 7 giorni lavorativi; reclami per smarrimento entro 30 giorni lavorativi dal ritiro da parte di Aramex. La copertura arriva fino a 1.500 $ per spedizione e, con *Authority to Leave*, la prova fotografica e GPS di consegna esclude un reclamo per smarrimento. Questi limiti non riducono i tuoi diritti ai sensi dell’*Australian Consumer Law*.
 
 **Restituito.** Un indirizzo errato, tentativi falliti o un reso richiesto possono farlo tornare indietro: rivolgiti al negozio.
 
@@ -80,17 +80,17 @@ Poiché è il negozio a possedere le fatture richieste per un reclamo, in pratic
 La pagina Contact di Aramex non indica alcun numero nazionale né indirizzo e-mail per i destinatari, né una linea attiva 24 ore su 24. Rimanda a:
 
 - **Modulo di richiesta online**, raggiungibile anche da *Submit online enquiry* in un risultato di tracciamento.
-- **Il tuo deposito locale**, dal lunedì al venerdì festivi esclusi (ora locale australiana): Sydney, Melbourne, Brisbane e Hobart `1300 327 892`; Perth `(08) 9356 5309`; Adelaide `(08) 8345 2300`; Canberra `(02) 6260 1718`. Quasi tutti aprono dalle 8 alle 17; Canberra chiude alle 16 e Hobart apre alle 9.
+- **Il tuo deposito locale**, dal lunedì al venerdì festivi esclusi (ora locale di ciascun deposito): Sydney, Melbourne, Brisbane e Hobart `1300 327 892`; Perth `(08) 9356 5309`; Adelaide `(08) 8345 2300`; Canberra `(02) 6260 1718`. Quasi tutti aprono dalle 8 alle 17; Canberra chiude alle 16 e Hobart apre alle 9.
 
 > Aramex mette in guardia da falsi SMS che sostengono che un pacco non sia stato consegnato senza firma. I suoi link autentici iniziano solo con https://aramex.com.au o https://aramex.co.nz, non chiede mai denaro per ritirare un pacco e le truffe si possono segnalare a scams@aramex.com.au.
 
 ## Tracciare un pacco Aramex Australia con Peek
 
-[Peek](/) legge direttamente il tracciamento di Aramex Australia. Poiché la forma di 12 caratteri è condivisa con Aramex Nuova Zelanda e Colis Privé, Peek li interroga insieme — Aramex Australia per primo per chi consulta dall’Australia — e indica quello che ha il pacco; se entrambe le reti Aramex lo conoscono, scegli con «Cambia». Un’etichetta che inizia con una lettera seguita da una cifra (come `A94829103756`) non viene proposta automaticamente come Aramex: incolla il link di tracciamento `aramex.com.au` o scegli «Aramex Australia» con «Cambia». Funzionano anche i vecchi link `fastway.com.au`. Peek non propone Aramex per il lungo codice a barre SSCC del mittente, ma scegliendo Aramex manualmente con quel codice, Peek recupera il numero di etichetta ufficiale di Aramex.
+[Peek](/) legge direttamente il tracciamento di Aramex Australia. Poiché la forma di 12 caratteri è condivisa con Aramex Nuova Zelanda e Colis Privé, Peek li interroga insieme — Aramex Australia per primo per chi consulta dall’Australia — e indica quello che ha il pacco; se entrambe le reti Aramex lo conoscono, scegli con «Cambia». Un’etichetta che inizia con una lettera seguita da una cifra (come `A94829103756`) non viene proposta automaticamente come Aramex: incolla il link di tracciamento `aramex.com.au` o scegli «Aramex Australia» con «Cambia». Funzionano anche i vecchi link `fastway.com.au`. Peek non propone Aramex per il lungo codice SSCC del mittente. Se ha 20 cifre e inizia con `00`, puoi scegliere «Aramex Australia» con «Cambia»: Peek segue allora il pacco e mostra «Aramex Australia lo traccia con il numero» con l’etichetta Aramex.
 
-Peek può mostrare lo stato, l’orario di consegna, il giorno previsto e il servizio (`Priority Delivery` o `Economy Delivery`). `Delivered` e `In transit` compaiono nelle parole di Peek («Consegnato», «In transito»), gli altri nel testo di Aramex. Omette il punto di ritiro e il relativo indirizzo, gli orari di apertura, il codice di ritiro, chi ha firmato, la prova fotografica o di firma, le istruzioni di consegna e i riferimenti.
+Peek può mostrare lo stato e il giorno previsto; il servizio (`Priority Delivery` o `Economy Delivery`) non lo mostra nessuna app. `Delivered` e `In transit` compaiono nelle parole di Peek («Consegnato», «In transito»), gli altri nel testo di Aramex. Omette il punto di ritiro e il relativo indirizzo, gli orari di apertura, il codice di ritiro, chi ha firmato, la prova fotografica o di firma, le istruzioni di consegna e i riferimenti.
 
-Gli orari di scansione di Aramex non includono il fuso orario: Peek legge ciascuno sull’orologio del luogo della scansione ed elenca la cronologia su una mappa. Può anche avvisarti quando lo stato cambia.
+Gli orari di scansione di Aramex non includono il fuso orario: Peek legge ciascuno sull’orologio del luogo della scansione (una scansione senza luogo prende quello di una scansione vicina, o l’ora di Sydney) ed elenca la cronologia su una mappa. Può anche avvisarti quando lo stato cambia.
 
 ## Domande sul tracciamento Aramex in Australia
 

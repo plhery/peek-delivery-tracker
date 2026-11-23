@@ -71,7 +71,7 @@ Der Shop wählt die Zustellart: *Authority to Leave* (sicherer Ort), *Signature*
 
 **Beschädigt.** Informiere den Shop so schnell wie möglich und reiche binnen 24 Stunden eine Anfrage bei Aramex ein.
 
-Der Shop besitzt die für eine Reklamation nötigen Rechnungen, daher reklamiert praktisch der Shop. Die Bedingungen von Aramex nennen diese Fristen: Schadensfotos innerhalb von 24 Stunden nach Zustellung und schriftliche Reklamation innerhalb von 7 Werktagen; Verlustmeldungen binnen 30 Werktagen nach Abholung. Die Haftung reicht bis 1.500 $ je Sendung; bei *Authority to Leave* schließt ein Foto- und GPS-Zustellnachweis eine Verlustforderung aus. Diese Grenzen schränken deine Rechte nach dem *Australian Consumer Law* nicht ein.
+Der Shop besitzt die für eine Reklamation nötigen Rechnungen, daher reklamiert praktisch der Shop. Die Bedingungen von Aramex nennen diese Fristen: Schadensfotos innerhalb von 24 Stunden nach Zustellung und schriftliche Reklamation innerhalb von 7 Werktagen; Verlustmeldungen binnen 30 Werktagen nach der Abholung durch Aramex. Die Haftung reicht bis 1.500 $ je Sendung; bei *Authority to Leave* schließt ein Foto- und GPS-Zustellnachweis eine Verlustforderung aus. Diese Grenzen schränken deine Rechte nach dem *Australian Consumer Law* nicht ein.
 
 **Zurückgeschickt.** Eine falsche Adresse, fehlgeschlagene Versuche oder ein Rückrufwunsch können das Paket zurückgehen lassen – wende dich an den Shop.
 
@@ -80,17 +80,17 @@ Der Shop besitzt die für eine Reklamation nötigen Rechnungen, daher reklamiert
 Die Kontaktseite von Aramex nennt weder eine landesweite Hotline noch eine E-Mail-Adresse für Empfänger und keinen 24-Stunden-Dienst. Sie verweist auf:
 
 - **Online-Anfrageformular**, auch erreichbar über *Submit online enquiry* in einem Tracking-Ergebnis.
-- **Dein örtliches Depot**, Montag bis Freitag außer an Feiertagen (australische Ortszeit): Sydney, Melbourne, Brisbane und Hobart `1300 327 892`; Perth `(08) 9356 5309`; Adelaide `(08) 8345 2300`; Canberra `(02) 6260 1718`. Die meisten sind von 8 bis 17 Uhr erreichbar; Canberra schließt um 16 Uhr und Hobart öffnet um 9 Uhr.
+- **Dein örtliches Depot**, Montag bis Freitag außer an Feiertagen (Ortszeit des jeweiligen Depots): Sydney, Melbourne, Brisbane und Hobart `1300 327 892`; Perth `(08) 9356 5309`; Adelaide `(08) 8345 2300`; Canberra `(02) 6260 1718`. Die meisten sind von 8 bis 17 Uhr erreichbar; Canberra schließt um 16 Uhr und Hobart öffnet um 9 Uhr.
 
 > Aramex warnt vor gefälschten SMS, nach denen ein Paket ohne Unterschrift nicht zugestellt werden konnte. Echte Links beginnen nur mit https://aramex.com.au oder https://aramex.co.nz, Aramex verlangt niemals eine Zahlung zur Abholung und Betrugsversuche lassen sich an scams@aramex.com.au melden.
 
 ## Aramex-Australia-Pakete mit Peek verfolgen
 
-[Peek](/) liest das eigene Tracking von Aramex Australien aus. Da sich Aramex Australien das 12-Zeichen-Muster mit Aramex Neuseeland und Colis Privé teilt, fragt Peek sie gleichzeitig an – für Leser in Australien zuerst Aramex Australien – und zeigt den Dienst an, der das Paket führt; kennen beide Aramex-Netze die Nummer, wählst du mit „Ändern“. Ein Etikett aus Buchstabe, Ziffer und 10 Ziffern (wie `A94829103756`) wird nicht automatisch als Aramex vorgeschlagen: füge den `aramex.com.au`-Tracking-Link ein oder wähle „Aramex Australia“ über „Ändern“. Alte `fastway.com.au`-Links funktionieren ebenfalls. Für die lange SSCC-Barcodenummer des Absenders schlägt Peek Aramex nicht von selbst vor; wählst du Aramex manuell dafür aus, übernimmt Peek jedoch die offizielle Aramex-Etikettennummer.
+[Peek](/) liest das eigene Tracking von Aramex Australien aus. Da sich Aramex Australien das 12-Zeichen-Muster mit Aramex Neuseeland und Colis Privé teilt, fragt Peek sie gleichzeitig an – für Leser in Australien zuerst Aramex Australien – und zeigt den Dienst an, der das Paket führt; kennen beide Aramex-Netze die Nummer, wählst du mit „Ändern“. Ein Etikett aus Buchstabe, Ziffer und 10 Ziffern (wie `A94829103756`) wird nicht automatisch als Aramex vorgeschlagen: füge den `aramex.com.au`-Tracking-Link ein oder wähle „Aramex Australia“ über „Ändern“. Alte `fastway.com.au`-Links funktionieren ebenfalls. Für die lange SSCC-Nummer des Absenders schlägt Peek Aramex nicht vor. Hat sie 20 Ziffern und beginnt mit `00`, kannst du „Aramex Australia“ über „Ändern“ wählen: Peek verfolgt das Paket dann und zeigt „Aramex Australia führt die Sendung unter“ mit der Aramex-Etikettennummer.
 
-Peek zeigt den Status, den Zustellzeitpunkt, den voraussichtlichen Liefertag sowie die Versandart (`Priority Delivery` oder `Economy Delivery`). `Delivered` und `In transit` erscheinen in Peeks eigenen Worten („Zugestellt“, „Unterwegs“), die übrigen wie bei Aramex. Abholstelle samt Adresse, Öffnungszeiten, Abholcode, Empfängerunterschrift, Foto- oder Unterschriftsnachweis, Lieferhinweise und Referenzen blendet Peek aus.
+Peek kann den Status und den voraussichtlichen Liefertag zeigen; die Versandart (`Priority Delivery` oder `Economy Delivery`) zeigt keine App. `Delivered` und `In transit` erscheinen in Peeks eigenen Worten („Zugestellt“, „Unterwegs“), die übrigen wie bei Aramex. Abholstelle samt Adresse, Öffnungszeiten, Abholcode, Empfängerunterschrift, Foto- oder Unterschriftsnachweis, Lieferhinweise und Referenzen blendet Peek aus.
 
-Da Aramex keine Zeitzonen mitliefert, liest Peek jede Scan-Zeit auf der Ortszeit des Scan-Ortes und zeigt den Verlauf auf einer Karte. Bei Statusänderungen kann Peek dich benachrichtigen.
+Da Aramex keine Zeitzonen mitliefert, liest Peek jede Scan-Zeit auf der Ortszeit des Scan-Ortes (ein Scan ohne Ort nimmt die eines benachbarten Scans, sonst Sydney-Zeit) und zeigt den Verlauf auf einer Karte. Bei Statusänderungen kann Peek dich benachrichtigen.
 
 ## Fragen zum Aramex Tracking in Australien
 

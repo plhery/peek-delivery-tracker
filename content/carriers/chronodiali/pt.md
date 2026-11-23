@@ -15,7 +15,7 @@ Os formatos que o Peek conhece, com dígitos inventados:
 | Número | O que é |
 | --- | --- |
 | `CHPU4829103756182947305` | `CHPU` e 19 dígitos: um número Chronodiali. O Peek reconhece-o de imediato. |
-| `CD4829103756` | `CD` e 10 dígitos. O Peek também o acompanha na Chronodiali, mas o mesmo formato cabe na [Colis Privé](carrier:colis-prive), Aramex Austrália e [Aramex Nova Zelândia](carrier:aramex-nz), por isso o Peek consulta as quatro (ver abaixo). |
+| `CD4829103756` | `CD` e 10 dígitos. O Peek também o acompanha na Chronodiali, mas o mesmo formato cabe na [Colis Privé](carrier:colis-prive), [Aramex Austrália](carrier:aramex-au) e [Aramex Nova Zelândia](carrier:aramex-nz), por isso o Peek consulta as quatro (ver abaixo). |
 | `chronodiali.ma/suivi_colis.html?id=…` | Uma ligação para a página de seguimento da Chronodiali. O Peek identifica-a como Chronodiali qualquer que seja o número incluído. |
 
 A Chronodiali não é a [Chronopost](carrier:chronopost), a transportadora expresso francesa: os números e sistemas de seguimento são diferentes. Sem número? Pergunta à loja ou consulta [onde encontrar um número de seguimento](guide:find-tracking-number).

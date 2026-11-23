@@ -21,7 +21,7 @@ La documentazione SAMUS per clienti business mostra numero e codice a barre sull
 
 Spazi, trattini e lettere minuscole non contano quando incolli il numero in Peek. Su samus.lt il risultato mostra «Parcel number» e «Parcel code». Se il sito risponde `Your letter with number "…" is not found`, controlla il numero con il mittente.
 
-Se il tuo codice ha una forma diversa, potrebbe consegnare un’altra azienda, come [Lietuvos paštas](carrier:lietuvos-pastas), Omniva o Venipak. I [formati dei numeri di tracciamento](guide:tracking-number-formats) aiutano a distinguerli.
+Se il tuo codice ha una forma diversa, potrebbe consegnare un’altra azienda, come [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) o [Venipak](carrier:venipak). I [formati dei numeri di tracciamento](guide:tracking-number-formats) aiutano a distinguerli.
 
 ## Stati di tracciamento SAMUS
 
@@ -103,9 +103,9 @@ Per una spedizione registrata sotto SAMUS, Peek interroga nell’ordine ParcelsA
 
 Finché nessun servizio conosce il numero, una spedizione sotto SAMUS mostra «In attesa di SAMUS». Quando un servizio la segue, Peek controlla ogni ora, ogni 3 ore dopo un giorno senza nuovi aggiornamenti, dopo sette giorni senza novità su «Etichetta creata» ogni 6 ore, e fino a ogni 15 minuti il giorno in cui è in consegna mentre la tieni aperta o hai le notifiche attive. Un servizio che non conosceva il numero viene ricontrollato un giorno dopo.
 
-Se passano quattro giorni senza nuovi aggiornamenti mentre la spedizione resta su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da {{date}}»), insieme alla nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a SAMUS.» e al link «Chiedi aiuto a SAMUS».
+Se passano quattro giorni senza nuovi aggiornamenti mentre la spedizione resta su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra «Nessun aggiornamento da quattro giorni» (o «Nessun aggiornamento da …»), insieme alla nota «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a SAMUS.» e al link «Chiedi aiuto a SAMUS».
 
-Peek può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non mostra codici di ritiro né chi ha firmato e non può contattare SAMUS o il mittente al posto tuo.
+Peek può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare SAMUS o il mittente al posto tuo.
 
 ## Domande sul tracciamento SAMUS
 

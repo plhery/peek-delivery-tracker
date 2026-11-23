@@ -21,7 +21,7 @@ La documentation SAMUS destinée aux clients professionnels présente le numéro
 
 Les espaces, tirets et minuscules n’ont pas d’importance lorsque vous collez le numéro dans Peek. Sur samus.lt, le résultat affiche un « Parcel number » et un « Parcel code ». Si le site répond `Your letter with number "…" is not found`, vérifiez le numéro auprès de l’expéditeur.
 
-Si votre numéro a une autre forme, une autre société assure peut-être la livraison, comme [Lietuvos paštas](carrier:lietuvos-pastas), Omniva ou Venipak. Le guide [formats de numéros de suivi](guide:tracking-number-formats) aide à les distinguer.
+Si votre numéro a une autre forme, une autre société assure peut-être la livraison, comme [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) ou [Venipak](carrier:venipak). Le guide [formats de numéros de suivi](guide:tracking-number-formats) aide à les distinguer.
 
 ## Statuts de suivi SAMUS
 
@@ -103,9 +103,9 @@ Pour un envoi classé sous SAMUS, Peek interroge tour à tour ParcelsApp, Ship24
 
 Tant qu’aucun service ne connaît le numéro, un envoi classé sous SAMUS affiche « En attente de SAMUS ». Lorsqu’un service le suit, Peek vérifie toutes les heures, toutes les 3 heures dès qu’une journée passe sans nouveau scan, après sept jours sans nouvelles à l’étape « Étiquette créée » toutes les 6 heures, et jusqu’à toutes les 15 minutes le jour où il est en livraison tant que vous l’avez ouvert ou que les notifications sont activées. Un service qui ne connaissait pas le numéro est réinterrogé le lendemain.
 
-Si quatre jours passent sans nouvelle mise à jour alors que l’envoi reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis {{date}} »), accompagné du message « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger SAMUS. » et du lien « Demande de l’aide à SAMUS ».
+Si quatre jours passent sans nouvelle mise à jour alors que l’envoi reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis … »), accompagné du message « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger SAMUS. » et du lien « Demande de l’aide à SAMUS ».
 
-Peek peut vous envoyer des notifications pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il n’affiche ni code de retrait ni nom du signataire et ne peut pas contacter SAMUS ni l’expéditeur à votre place.
+Peek peut vous envoyer des notifications pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut pas contacter SAMUS ni l’expéditeur à votre place.
 
 ## Questions sur le suivi SAMUS
 

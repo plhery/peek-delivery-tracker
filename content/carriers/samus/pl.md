@@ -21,7 +21,7 @@ Dokumentacja SAMUS dla klientów biznesowych pokazuje numer i kod kreskowy na et
 
 Spacje, myślniki i małe litery nie mają znaczenia po wklejeniu numeru do Peek. Na samus.lt wynik wyświetla „Parcel number” i „Parcel code”. Jeśli strona odpowie `Your letter with number "…" is not found`, zweryfikuj numer u nadawcy.
 
-Jeśli Twój numer ma inny układ, paczkę może dostarczać inna firma, np. [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) lub Venipak. Pomogą w tym [formaty numerów śledzenia](guide:tracking-number-formats).
+Jeśli Twój numer ma inny układ, paczkę może dostarczać inna firma, np. [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) lub [Venipak](carrier:venipak). Pomogą w tym [formaty numerów śledzenia](guide:tracking-number-formats).
 
 ## Statusy śledzenia SAMUS
 
@@ -103,9 +103,9 @@ Dla przesyłki zapisanej pod SAMUS Peek pyta kolejno ParcelsApp, Ship24 i 17TRAC
 
 Dopóki żadna usługa nie zna numeru, przesyłka przypisana do SAMUS pokazuje „Oczekiwanie na przewoźnika SAMUS”. Gdy usługa ją śledzi, Peek sprawdza co godzinę, co 3 godziny po dobie bez nowego skanu, po siedmiu dniach bez nowości przy statusie „Zarejestrowana” co 6 godzin, a w dniu doręczenia do co 15 minut, gdy masz ją otwartą lub włączone powiadomienia. Usługa bez wyniku jest pytana ponownie następnego dnia.
 
-Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od {{date}}”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika SAMUS.” oraz link „Poproś przewoźnika SAMUS o pomoc”.
+Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika SAMUS.” oraz link „Poproś przewoźnika SAMUS o pomoc”.
 
-Peek może powiadamiać o opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie pokazuje kodu odbioru ani osoby podpisującej i nie może skontaktować się w Twoim imieniu z SAMUS ani nadawcą.
+Peek może powiadamiać o opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Nie może skontaktować się w Twoim imieniu z SAMUS ani nadawcą.
 
 ## Pytania o śledzenie SAMUS
 

@@ -21,7 +21,7 @@ Die Dokumentation für Geschäftskunden zeigt Nummer und Strichcode auf dem Etik
 
 Leerzeichen, Bindestriche und Kleinschreibung spielen beim Einfügen in Peek keine Rolle. Auf samus.lt zeigt das Ergebnis eine „Parcel number“ und einen „Parcel code“. Meldet die Seite `Your letter with number "…" is not found`, prüfe die Nummer beim Absender.
 
-Hat deine Nummer eine andere Form, liefert möglicherweise ein anderes Unternehmen, etwa [Lietuvos paštas](carrier:lietuvos-pastas), Omniva oder Venipak. [Sendungsnummern-Formate](guide:tracking-number-formats) helfen bei der Einordnung.
+Hat deine Nummer eine andere Form, liefert möglicherweise ein anderes Unternehmen, etwa [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) oder [Venipak](carrier:venipak). [Sendungsnummern-Formate](guide:tracking-number-formats) helfen bei der Einordnung.
 
 ## SAMUS-Sendungsstatus
 
@@ -103,9 +103,9 @@ Für eine unter SAMUS gespeicherte Sendung fragt Peek nacheinander ParcelsApp, S
 
 Bis ein Dienst die Nummer kennt, zeigt eine unter SAMUS gespeicherte Sendung „Warten auf SAMUS“. Sobald ein Dienst sie führt, prüft Peek stündlich, alle 3 Stunden sobald ein Tag ohne neuen Scan vergeht, nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden, und bis zu alle 15 Minuten am Tag der Zustellung, solange du sie geöffnet hast oder Benachrichtigungen aktiviert sind. Ein Dienst ohne Treffer wird einen Tag später erneut gefragt.
 
-Bleibt eine Sendung vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit {{date}}“) an, zusammen mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei SAMUS nach.“ und dem Link „Hol dir Hilfe bei SAMUS“.
+Bleibt eine Sendung vier Tage lang ohne neues Update auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, zeigt Peek „Seit vier Tagen keine Aktualisierung“ (oder „Keine Aktualisierung seit …“) an, zusammen mit dem Hinweis „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei SAMUS nach.“ und dem Link „Hol dir Hilfe bei SAMUS“.
 
-Peek kann dich über „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ benachrichtigen. Es zeigt keinen Abholcode und keinen Unterzeichner an und kann weder SAMUS noch den Absender für dich kontaktieren.
+Peek kann dich über „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ benachrichtigen. Es kann weder SAMUS noch den Absender für dich kontaktieren.
 
 ## Fragen zur SAMUS-Sendungsverfolgung
 

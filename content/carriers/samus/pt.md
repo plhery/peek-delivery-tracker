@@ -21,7 +21,7 @@ A documentação da SAMUS para clientes empresariais apresenta o número e o có
 
 Espaços, hífenes e minúsculas não interessam ao colar o número no Peek. Em samus.lt, o resultado mostra «Parcel number» e «Parcel code». Se o site responder `Your letter with number "…" is not found`, confirme o número com o remetente.
 
-Se o seu número tiver outro formato, poderá entregar outra empresa, como [Lietuvos paštas](carrier:lietuvos-pastas), Omniva ou Venipak. Os [formatos de números de seguimento](guide:tracking-number-formats) ajudam a identificar qual.
+Se o seu número tiver outro formato, poderá entregar outra empresa, como [Lietuvos paštas](carrier:lietuvos-pastas), [Omniva](carrier:omniva) ou [Venipak](carrier:venipak). Os [formatos de números de seguimento](guide:tracking-number-formats) ajudam a identificar qual.
 
 ## Estados de seguimento SAMUS
 
@@ -103,9 +103,9 @@ Para um envio classificado em SAMUS, o Peek pergunta por ordem a ParcelsApp, Shi
 
 Enquanto nenhum serviço conhecer o número, um envio em SAMUS mostra «À espera de SAMUS». Quando um serviço o segue, o Peek verifica de hora a hora, de 3 em 3 horas assim que passe um dia sem novos registos, após sete dias sem novidades em «Etiqueta criada» de 6 em 6 horas, e até de 15 em 15 minutos no dia em que sai para distribuição enquanto o mantiver aberto ou tiver notificações ligadas. Um serviço que não conhecia o número volta a ser consultado um dia depois.
 
-Se passarem quatro dias sem novas atualizações enquanto o envio continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde {{date}}»), acompanhado pela nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a SAMUS.» e pela ligação «Pede ajuda a SAMUS».
+Se passarem quatro dias sem novas atualizações enquanto o envio continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek mostra «Sem atualizações há quatro dias» (ou «Sem atualizações desde …»), acompanhado pela nota «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a SAMUS.» e pela ligação «Pede ajuda a SAMUS».
 
-O Peek pode notificá-lo para «Todos os registos», «Passos importantes» ou «Só a entrega». Não mostra códigos de levantamento nem quem assinou e não pode contactar a SAMUS nem o remetente por si.
+O Peek pode notificá-lo para «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a SAMUS nem o remetente por si.
 
 ## Perguntas sobre o seguimento SAMUS
 

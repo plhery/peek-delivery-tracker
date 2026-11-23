@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubPeekEnv } from '../test/peekEnv';
+import type { CarrierText } from '../guides/markdown';
 import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
 import { hrefLanguage, isLocale, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
@@ -35,30 +36,40 @@ const translated = carrierLinks('en').map(({ id }) => ({ id, languages: carrierL
 const [, other] = translated.languages.filter(isLocale);
 const missing = written.find((locale) => !translated.languages.includes(locale))!;
 const graph = (html: string) => JSON.parse(/<script type="application\/ld\+json">(.*?)<\/script>/.exec(html)![1])['@graph'];
+/**
+ * Every page as `carrierText` reads it, each file parsed once for the tests that go through them all. There are
+ * hundreds per language, more with each new carrier, and under coverage on CI reading them all twice in one test
+ * passed its ten seconds; so these tests take one language each, and the second reuses what the first read.
+ */
+const texts = new Map<string, CarrierText>();
+const textOf = (locale: Locale, id: string) => {
+  const key = `${id}/${locale}`;
+  if (!texts.has(key)) texts.set(key, carrierText(locale, id));
+  return texts.get(key)!;
+};
 
 describe('the carriers’ pages as the server reads them', () => {
-  it('has each carrier’s page in its languages only, each file under the address and title the app links', () => {
+  it('has each carrier’s page in its languages only, the site’s own first, and each slug in its language alone', () => {
     expect(first).toBeDefined();
     expect(translated).toBeDefined();
-    for (const locale of SUPPORTED_LOCALES) {
-      for (const link of carrierLinks(locale)) {
-        const text = carrierText(locale, link.id);
-        expect({ slug: text.slug, title: text.title }).toEqual({ slug: link.slug, title: link.title });
-        expect(text).not.toHaveProperty('picture');
-        expect(carrierLinkBySlug(locale, link.slug)).toBe(link);
-        expect(carrierLanguages(link.id)).toContain(locale);
-      }
-    }
     expect(carrierLanguages(first.id)[0]).toBe('en');
     expect(carrierLinkBySlug('en', 'no-such-carrier')).toBeUndefined();
     // A slug of one language names nothing in another.
     expect(carrierLinkBySlug(missing, carrierLinks('en')[0].slug)).toBeUndefined();
   });
 
-  it('dates each page, for the sitemap, by its fields alone, as its text does', () => {
-    for (const locale of SUPPORTED_LOCALES) {
-      for (const { id } of carrierLinks(locale)) expect(carrierUpdated(locale, id)).toBe(carrierText(locale, id).updated);
+  it.each(SUPPORTED_LOCALES)('has each %s file under the address and title the app links, in a language the carrier is written in', (locale) => {
+    for (const link of carrierLinks(locale)) {
+      const text = textOf(locale, link.id);
+      expect({ slug: text.slug, title: text.title }).toEqual({ slug: link.slug, title: link.title });
+      expect(text).not.toHaveProperty('picture');
+      expect(carrierLinkBySlug(locale, link.slug)).toBe(link);
+      expect(carrierLanguages(link.id)).toContain(locale);
     }
+  });
+
+  it.each(SUPPORTED_LOCALES)('dates each %s page, for the sitemap, by its fields alone, as its text does', (locale) => {
+    for (const { id } of carrierLinks(locale)) expect(carrierUpdated(locale, id)).toBe(textOf(locale, id).updated);
   });
 
   it('reads a page’s file every time while developing, so an edit shows, and once in production', () => {

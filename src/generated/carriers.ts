@@ -3572,6 +3572,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "dayone-sendungsverfolgung",
+      "title": "DayOne Sendungsverfolgung: DOT-Nummern, Status & Zusteller",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "dpd-belgium-sendungsverfolgung",
@@ -5366,6 +5374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "suivi-dayone",
+      "title": "Suivi DayOne\u00a0: numéros DOT, statuts et livraison",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "suivi-dpd-belgium",
@@ -7120,6 +7136,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "tracciamento-dayone",
+      "title": "Tracciamento DayOne: numeri DOT, stati e chi consegna",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "tracking-dpd-belgium",
@@ -8858,6 +8882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "seguimiento-dayone",
+      "title": "Seguimiento DayOne: números DOT, estados y quién entrega",
+      "name": "DayOne",
+      "color": "#e86d1c"
+    },
+    {
       "id": "dpd-be",
       "catalog": "dpd-be",
       "slug": "seguimiento-dpd-belgium",
@@ -10578,6 +10610,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento CityMail: números, estados e entrega Suécia",
       "name": "CityMail",
       "color": "#fc4c02"
+    },
+    {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "seguimento-dayone",
+      "title": "Seguimento DayOne: números DOT, estados e quem entrega",
+      "name": "DayOne",
+      "color": "#e86d1c"
     },
     {
       "id": "dpd-be",
@@ -12350,6 +12390,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CityMail: numery, statusy i dostawa w Szwecji",
       "name": "CityMail",
       "color": "#fc4c02"
+    },
+    {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "sledzenie-dayone",
+      "title": "Śledzenie DayOne: numery DOT, statusy i kto doręcza",
+      "name": "DayOne",
+      "color": "#e86d1c"
     },
     {
       "id": "dpd-be",

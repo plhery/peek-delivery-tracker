@@ -217,7 +217,7 @@
   { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "citymail", "catalog": "citymail", "name": "CityMail", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "dayone", "catalog": "dayone", "name": "DayOne", "languages": ["en"] },
+  { "id": "dayone", "catalog": "dayone", "name": "DayOne", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-be", "catalog": "dpd-be", "name": "DPD Belgium", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "packlink", "catalog": "packlink", "name": "Packlink", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "sto", "catalog": "sto", "name": "STO Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

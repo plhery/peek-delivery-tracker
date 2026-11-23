@@ -16,11 +16,11 @@ While DSV merges Schenker into its systems, it keeps two trackers: a shipment bo
 
 | Number (invented) | What it is |
 | --- | --- |
-| `DEXXX000000000` | 14 characters: a European country code such as DE, SE, DK or PL, three letters and nine digits. A former DB Schenker road shipment number, and the shape Peek's catalog gives DSV. |
-| `XYZ0000000` | Three letters and seven or eight digits: another former DB Schenker road shipment number. Peek doesn't name DSV from this shape. |
-| `099999999999999980` | 18 digits (20 with `00` in front): the barcode number on a package of a former DB Schenker road shipment. |
+| `DEKLM482917365` | 14 characters: a European country code such as DE, SE, DK or PL, three letters and nine digits. A former DB Schenker road shipment number, and the shape Peek's catalog gives DSV. |
+| `KLM4829173` | Three letters and seven or eight digits: another former DB Schenker road shipment number. Peek doesn't name DSV from this shape. |
+| `094827361549283711` | 18 digits (20 with `00` in front): the barcode number on a package of a former DB Schenker road shipment. |
 | Letters and digits | A myDSV shipment, booking or house bill number. Peek asks myDSV with any 5 to 40 letters and digits that hold at least one digit. |
-| `mydsv.com/track-shipment?query=DEXXX000000000` | A link to myDSV's tracker, as dsv.com's "Track DSV shipment" opens it. |
+| `mydsv.com/track-shipment?query=DEKLM482917365` | A link to myDSV's tracker, as dsv.com's "Track DSV shipment" opens it. |
 
 A customer or order reference, or the airline's master air waybill, can find a shipment in myDSV's search, but Peek doesn't follow those: use DSV's shipment, booking or house bill number. Nor can Peek pick one of several shipments a number matches.
 
@@ -39,7 +39,7 @@ myDSV logs each time a shipment is scanned, from the booking to the proof of del
 | `Handover responsibilty of cargo`, `Handover of Cargo` | DSV handed the cargo over at the end of its service, which completes the shipment (the first keeps DSV's spelling). | "Delivered" |
 | `Actual delivery` | Delivered. | "Delivered" |
 
-`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` and `Requested delivery` are plans, not scans: Peek leaves them out of the history and shows `Estimated delivery` as the expected delivery day, or range of days, until the shipment is out for delivery.
+`Estimated Departure`, `Estimated arrival`, `Estimated pickup`, `Estimated delivery`, `Requested pickup` and `Requested delivery` are plans, not scans: Peek leaves them out of the history and shows `Estimated delivery` as the expected delivery day, or range of days, until the shipment is delivered.
 
 The former DB Schenker tracker covers road shipments with its own wording:
 
@@ -69,7 +69,7 @@ On the way it also shows `Linehaul departed`, `Linehaul arrived`, `Terminal inve
 
 **Updates and proof of delivery.** In myDSV, users can set up notifications, for example for pickup or customs clearance, see estimated arrival times for road cargo and download the proof of delivery once the shipment is complete. If you didn't book DSV, ask the sender. DSV's pages don't say how many delivery attempts it makes or how long a terminal keeps goods: ask the DSV office handling the delivery.
 
-**Customs.** In most countries where it has offices, DSV is a licensed customs broker; elsewhere it works with agents. For help with a clearance, DSV says to contact DSV in that country. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on orders up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere, your country's own rules apply: see [parcels held at customs](guide:customs).
+**Customs.** In most countries where it has offices, DSV is a licensed customs broker; elsewhere it works with agents. For help with a clearance, DSV says to contact DSV in that country. In the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on orders up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere, your country's own rules apply: see [parcels held at customs](guide:customs).
 
 ## DSV shipment late, stuck or damaged
 
@@ -81,7 +81,7 @@ On the way it also shows `Linehaul departed`, `Linehaul arrived`, `Terminal inve
 
 ## DSV contact and customer service
 
-As read on dsv.com on 1 November 2026:
+On dsv.com:
 
 - **Contact form:** on DSV's [help and contact page](https://www.dsv.com/en/support/help-and-contact).
 - **Local offices:** DSV is in more than 90 countries; [find your local DSV office](https://www.dsv.com/en/support/find-dsv) by country.
@@ -92,7 +92,7 @@ DSV's help pages give no phone number for tracking.
 
 ## Track a DSV shipment with Peek
 
-Paste a 14-character number like `DEXXX000000000` and Peek asks DSV while you add it ("Checking tracking services…"), then shows "DSV has this parcel." when DSV knows it. If DSV doesn't list it yet, the parcel reads "Waiting for DSV’s first scan", marked "Probably DSV", while Peek keeps asking; after a week, Peek asks you to check the number or choose another carrier.
+Paste a 14-character number like `DEKLM482917365` and Peek asks DSV while you add it ("Checking tracking services…"), then shows "DSV has this parcel." when DSV knows it. If DSV doesn't list it yet, the parcel reads "Waiting for DSV’s first scan", marked "Probably DSV", while Peek keeps asking; after a week, Peek asks you to check the number or choose another carrier.
 
 Peek can't tell DSV by any other number's shape. Paste it all the same: Peek follows more than 4,500 carriers. To set DSV yourself, press "Change" and search for DSV; "Schenker" finds it too ("Also called DB Schenker"). On a parcel you've already added, use "Change carrier". A mydsv.com tracking link files the parcel under DSV straight away, and so does a link from the Schenker tracker on dsv.com with `refNumber=`.
 
@@ -102,7 +102,7 @@ Peek shows the status, each step in DSV's wording with its town and country, and
 
 If Early Bird, a Swedish delivery company, hands your parcel over to DSV or DB Schenker, Peek names DSV as the carrier delivering it and follows DSV once DSV shows fresh scans.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day DSV scans the shipment out for delivery, while DSV's own tracker answers (through tracking services, every 15 minutes), and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DSV or the sender for you, book a delivery or file a claim.
+While the shipment is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. local time on the day DSV scans it out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the shipment goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DSV" link. It can't contact DSV or the sender for you, book a delivery or file a claim.
 
 ## Questions about DSV tracking
 

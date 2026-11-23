@@ -2724,6 +2724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "latvijas-pasts-sendungsverfolgung",
+      "title": "Latvijas Pasts Sendungsverfolgung: Nummern und Status",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
+    },
+    {
       "id": "dao",
       "catalog": "dao",
       "slug": "dao-sendungsverfolgung",
@@ -4660,6 +4668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis Lietuvos paštas\u00a0: poste lituanienne, LP EXPRESS",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "suivi-latvijas-pasts",
+      "title": "Suivi Latvijas Pasts\u00a0: numéros, statuts et consignes",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     },
     {
       "id": "dao",
@@ -6616,6 +6632,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "tracciamento-latvijas-pasts",
+      "title": "Tracciamento Latvijas Pasts: numeri, stati e locker",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
+    },
+    {
       "id": "dao",
       "catalog": "dao",
       "slug": "tracciamento-dao",
@@ -8562,6 +8586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     },
     {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "seguimiento-latvijas-pasts",
+      "title": "Seguimiento Latvijas Pasts: números, estados y taquillas",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
+    },
+    {
       "id": "dao",
       "catalog": "dao",
       "slug": "seguimiento-dao",
@@ -10498,6 +10530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Lietuvos paštas (Correios da Lituânia)",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "seguimento-latvijas-pasts",
+      "title": "Seguimento Latvijas Pasts: números, estados e cacifos",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     },
     {
       "id": "dao",
@@ -12454,6 +12494,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Lietuvos paštas (Poczta Litewska) i LP Express",
       "name": "Lietuvos paštas",
       "color": "#fedd00"
+    },
+    {
+      "id": "latvijas-pasts",
+      "catalog": "latvijas-pasts",
+      "slug": "sledzenie-latvijas-pasts",
+      "title": "Śledzenie Latvijas Pasts: numery, statusy i automaty",
+      "name": "Latvijas Pasts",
+      "color": "#0c72ba"
     },
     {
       "id": "dao",

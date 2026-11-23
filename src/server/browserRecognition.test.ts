@@ -130,7 +130,7 @@ it.each([
   expect(browser.takeBrowserHistory('sicepat', 'SYNTHETIC0001')).toBeUndefined();
 });
 
-it('gives scheduled Onlog and ZTO recognition 40 seconds while other carriers keep 20', async () => {
+it('gives scheduled Onlog, ZTO and Speedy recognition 40 seconds while other carriers keep 20', async () => {
   vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'performance'] });
   lookup.mockImplementation((_number: string, context: TrackingContext) => new Promise(resolve => {
     expect(context.budgetMs).toBe(40_000);
@@ -141,6 +141,8 @@ it('gives scheduled Onlog and ZTO recognition 40 seconds while other carriers ke
   await expect(result).resolves.toMatchObject({ known: true });
   expect(browser.browserRecognitionWorkBudget('onlog-express')).toBe(40_000);
   expect(browser.browserRecognitionWorkBudget('zto')).toBe(40_000);
+  expect(browser.browserRecognitionWorkBudget('speedy')).toBe(40_000);
+  expect(browser.browserRecognitionWorkBudget('dpd-ro')).toBe(20_000);
   expect(browser.browserRecognitionWorkBudget('zto-international')).toBe(20_000);
   expect(browser.browserRecognitionWorkBudget('constructor')).toBe(20_000);
   expect(browser.browserRecognitionWorkBudget('royal-mail')).toBe(20_000);

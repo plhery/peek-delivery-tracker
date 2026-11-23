@@ -2964,6 +2964,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "tnt-italien-sendungsverfolgung",
+      "title": "TNT Italien Sendungsverfolgung: Frachtbrief und Status",
+      "name": "TNT Italy",
+      "color": "#ff6600"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-sendungsverfolgung",
@@ -4628,6 +4636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi DPD Portugal\u00a0: statuts, points Pickup et contact",
       "name": "DPD Portugal",
       "color": "#dc0032"
+    },
+    {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "suivi-tnt-italie",
+      "title": "Suivi TNT Italie\u00a0: lettre de voiture, statuts et livraison",
+      "name": "TNT Italy",
+      "color": "#ff6600"
     },
     {
       "id": "tnt",
@@ -7890,6 +7906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "seguimiento-tnt-italia",
+      "title": "Seguimiento TNT Italia: albarán, estados y entrega fallida",
+      "name": "TNT Italy",
+      "color": "#ff6600"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-seguimiento",
@@ -9506,6 +9530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Portugal rastreio: estados, pontos Pickup e contactos",
       "name": "DPD Portugal",
       "color": "#dc0032"
+    },
+    {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "seguimento-tnt-italia",
+      "title": "Seguimento TNT Itália: carta de porte, estados e entrega",
+      "name": "TNT Italy",
+      "color": "#ff6600"
     },
     {
       "id": "tnt",
@@ -11166,6 +11198,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DPD Portugal: statusy, punkty Pickup i kontakt",
       "name": "DPD Portugal",
       "color": "#dc0032"
+    },
+    {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "sledzenie-tnt-wlochy",
+      "title": "Śledzenie TNT Włochy: list przewozowy, statusy i odbiór",
+      "name": "TNT Italy",
+      "color": "#ff6600"
     },
     {
       "id": "tnt",

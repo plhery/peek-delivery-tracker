@@ -2868,6 +2868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "purolator",
+      "catalog": "purolator",
+      "slug": "purolator-sendungsverfolgung",
+      "title": "Purolator Sendungsverfolgung: PIN, Status und Abholung",
+      "name": "Purolator",
+      "color": "#da291c"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "canpar-sendungsverfolgung",
@@ -6680,6 +6688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "purolator",
+      "catalog": "purolator",
+      "slug": "tracciamento-purolator",
+      "title": "Tracciamento Purolator: PIN, stati e ritiri",
+      "name": "Purolator",
+      "color": "#da291c"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "tracciamento-canpar",
@@ -8562,6 +8578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "purolator",
+      "catalog": "purolator",
+      "slug": "seguimiento-purolator",
+      "title": "Seguimiento Purolator: PIN, estados y recogidas",
+      "name": "Purolator",
+      "color": "#da291c"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "seguimiento-canpar",
@@ -10426,6 +10450,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Canada Post: códigos, estados e alfândega",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "purolator",
+      "catalog": "purolator",
+      "slug": "seguimento-purolator",
+      "title": "Seguimento Purolator: PIN, estados e levantamentos",
+      "name": "Purolator",
+      "color": "#da291c"
     },
     {
       "id": "canpar",
@@ -12326,6 +12358,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Canada Post: numery, statusy, awizo i cło",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "purolator",
+      "catalog": "purolator",
+      "slug": "sledzenie-purolator",
+      "title": "Śledzenie Purolator: PIN, statusy i odbiór paczek",
+      "name": "Purolator",
+      "color": "#da291c"
     },
     {
       "id": "canpar",

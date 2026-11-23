@@ -6,7 +6,7 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-CMT Express (*Shenzhen Chengmaotong Supply Chain Co., Ltd.*, Chinese *深圳诚贸通供应链有限公司*) is a Shenzhen-based international logistics and supply-chain forwarder handling air, ocean and land freight forwarding, international express, Guangzhou small-parcel lines, customs brokerage and fulfilment to destinations worldwide alongside global partners such as DHL, UPS, FedEx, TNT and USPS. You can look up a shipment on [CMT Express's English tracking portal](https://tms.cmtexpress.com.cn/en/trackIndex.htm) or [cmtexpress.com.cn/en/](https://www.cmtexpress.com.cn/en/), or paste your code into the box above.
+CMT Express (*Shenzhen Chengmaotong Supply Chain Co., Ltd.*, Chinese *深圳诚贸通供应链有限公司*) is a Shenzhen-based international logistics and supply-chain forwarder handling air, ocean and land freight forwarding, international express, Guangzhou small-parcel lines, customs brokerage and fulfilment to destinations worldwide, with express products through DHL, UPS, FedEx, TNT and USPS. You can look up a shipment on [CMT Express's English tracking portal](https://tms.cmtexpress.com.cn/en/trackIndex.htm) or [cmtexpress.com.cn/en/](https://www.cmtexpress.com.cn/en/), or paste your code into the box above.
 
 ## CMT Express tracking numbers: CMT + 12-digit format
 
@@ -32,7 +32,7 @@ CMT Express runs its tracking lookup on a TMS waybill platform showing Chinese a
 
 ## How CMT Express cross-border delivery works
 
-According to [cmtexpress.com.cn](https://www.cmtexpress.com.cn/) and [About CMT Express](https://www.cmtexpress.com.cn/about.html), CMT Express operates out of Shenzhen's international logistics corridor, combining export warehousing, customs declaration brokerage and international linehaul with global express and postal partners across Europe, North America, Asia-Pacific and Latin America.
+According to [cmtexpress.com.cn](https://www.cmtexpress.com.cn/) and [About CMT Express](https://www.cmtexpress.com.cn/about.html), CMT Express is based in Shenzhen and handles sea, air and land forwarding, international express, customs brokerage, warehousing, packaging and distribution.
 
 **Last-mile delivery and customs.** CMT Express acts as the origin forwarder and supply-chain consolidator rather than delivering parcels door-to-door outside China. After export handling and international air/sea transit, a local postal or courier operator in your country handles final doorstep delivery, missed-delivery attempts and pickup-point holding under its own local rules. Because CMT Express serves business shippers rather than retail consumers, its website does not publish consumer transit guarantees or retail delivery-attempt counts. Cross-border orders are subject to destination customs clearance, import VAT and applicable duties unless settled at checkout; see [parcels held at customs](guide:customs).
 
@@ -50,7 +50,7 @@ Official details published on [cmtexpress.com.cn](https://www.cmtexpress.com.cn/
 
 - **Phone (China):** `13927573102`.
 - **Tracking portal:** [tms.cmtexpress.com.cn/en/trackIndex.htm](https://tms.cmtexpress.com.cn/en/trackIndex.htm).
-- **Company:** Shenzhen Chengmaotong Supply Chain Co., Ltd. (*深圳诚贸通供应链有限公司*), Shenzhen, China (additional QQ customer-service channels are listed on the Chinese homepage).
+- **Company:** Shenzhen Chengmaotong Supply Chain Co., Ltd. (*深圳诚贸通供应链有限公司*), Shenzhen, China.
 
 > Watch out for fake SMS or WhatsApp messages asking for an online card fee to "clear customs" or "fix your address" on a parcel from China. Verify any legitimate import charge through your marketplace order page or your local postal operator first. See [delivery scam texts](guide:delivery-scam-texts).
 
@@ -58,9 +58,11 @@ Official details published on [cmtexpress.com.cn](https://www.cmtexpress.com.cn/
 
 [Peek](/) checks CMT Express automatically as the sole candidate when you enter a 15-character `CMT` + 12-digit waybill (`CMT482917364058`, digits invented) and shows "CMT Express has this parcel." when CMT's tracker confirms it; Peek also recognises pasted `tms.cmtexpress.com.cn/en/trackIndex.htm?documentCode=` links. If you ever need to choose CMT Express manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "诚贸通" or "CMT" finds it too).
 
-Peek queries CMT Express's TMS tracker directly and displays the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), English scan wording (translating Chinese platform rows such as `货物电子信息已经收到` into English), scan codes where supplied, locations (omitting internal warehouse shorthand like `SZ.`), service name, destination country, canonical tracking number and the destination partner's delivery tracking number when present, on Beijing time (`Asia/Shanghai`). Peek discards parcel count, weight, customer reference, sender and recipient names, recipient address, postcodes, signatory, signature, proof-of-delivery records and payment details; CMT's tracker does not supply an estimated delivery date, separate delivery timestamp or time-zone offsets.
+Peek reads CMT Express's tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), the platform's own English wording (`The electronic cargo information has been received` for `货物电子信息已经收到`), the place without warehouse shorthand like `SZ.`, and the destination country. When CMT files the parcel under another number than the one you entered, Peek shows it under "CMT Express tracks this as". The scan codes and the service name stay out of every Peek app. CMT gives scan times without a zone: Peek dates them on Beijing time (`Asia/Shanghai`) and shows them on your device's clock. When CMT gives the delivery carrier's number and Peek recognises that carrier, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. Peek leaves out the parcel count, weight, customer reference, sender and recipient names, recipient address, postcodes, signatory, signature, proof-of-delivery records and payment details; CMT's tracker gives no estimated delivery date or delivery time of its own.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. Beijing time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12") and shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking CMT Express." After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking CMT Express."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day CMT Express shows an out-for-delivery scan, every 2 minutes from 6 a.m. Beijing time, while CMT Express's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When CMT Express's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking CMT Express." After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking CMT Express."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs or contact CMT Express or your local carrier on your behalf.
 
@@ -83,10 +85,10 @@ It means CMT Express has physically received and checked your parcel into its Sh
 Contact your online seller or marketplace first for refunds, address fixes or delayed orders. CMT Express lists phone number `13927573102` and its tracker at [tms.cmtexpress.com.cn/en/trackIndex.htm](https://tms.cmtexpress.com.cn/en/trackIndex.htm).
 
 :::sources
-- [CMT Express: Chinese Home](https://www.cmtexpress.com.cn/) – *深圳诚贸通供应链有限公司*, worldwide country coverage, partner carriers (DHL, UPS, FedEx, TNT, USPS), `13927573102`
+- [CMT Express: Chinese Home](https://www.cmtexpress.com.cn/) – *深圳诚贸通供应链有限公司*, worldwide country coverage, products through DHL, UPS, FedEx, TNT and USPS, `13927573102`
 - [CMT Express: English Home](https://www.cmtexpress.com.cn/en/) – English site entry point
 - [CMT Express: About Us](https://www.cmtexpress.com.cn/about.html) – air/ocean/road freight forwarding, international express, customs brokerage and warehousing in Shenzhen
 - [CMT Express: Contact Us](https://www.cmtexpress.com.cn/contact.html) – published phone `13927573102`
 - [CMT Express: TMS Tracking Portal](https://tms.cmtexpress.com.cn/en/trackIndex.htm) – public English waybill lookup
-- [Universal Parcel Scraper: cmt-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cmt-express) – `CMT\d{12}` format, `tms.cmtexpress.com.cn` link rule, Chinese-to-English status mapping, `Asia/Shanghai` timezone and stripped fields
+- [Universal Parcel Scraper: cmt-express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/cmt-express) – `CMT\d{12}` format, `tms.cmtexpress.com.cn` link rule, status mapping in Chinese and English, `Asia/Shanghai` timezone and stripped fields
 :::

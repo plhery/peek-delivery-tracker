@@ -40,7 +40,7 @@ On [anserx.com](https://www.anserx.com/) and [About AnserX](https://www.anserx.c
 
 ## AnserX parcel stuck, quiet or not delivered
 
-Because AnserX contracts with the online store or marketplace rather than the buyer, contact your seller first for late shipments, wrong addresses, refunds or lost-parcel claims.
+AnserX's customers are the sellers who ship with it, so contact your seller first for late shipments, wrong addresses, refunds or lost-parcel claims.
 
 - **Quiet gaps during air linehaul or customs:** tracking often pauses for several days between `BTY_LINE_HANDOVER` (departed origin port), `BTY_LINE_ARRIVED` and `BTY_EXCC_COMPLETED` while flights land and customs processes consolidated batches. See [why tracking stops updating](guide:tracking-not-updating).
 - **Check the local delivery number after handover:** once AnserX links the destination carrier's tracking number, looking that code up directly on your local courier's site often gives fuller delivery-window or pickup details.
@@ -60,9 +60,11 @@ Official contacts published on [AnserX Contact Us](https://www.anserx.com/contac
 
 [Peek](/) automatically recognises `BTYCN` + 10 digits + `YQ` (`BTYCN4829173640YQ`, digits invented) as AnserX with high confidence, and also recognises pasted `oms.anserx.com/tracking?nos=` links. If you ever need to choose AnserX manually, tap "Change" while adding or "Change carrier" on the parcel screen (searching "斑头雁" or "AnserX International Logistics" finds it too).
 
-Peek queries AnserX's OMS tracking service directly and shows the mapped stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), English scan wording (falling back to Chinese when English is absent), `BTY_*` scan codes, city or hub location (stripping embedded postcodes), destination country and the handed-off last-mile carrier's tracking number when AnserX reports it (stripping routing ZIP prefixes on USPS barcodes). For AnserX's own scans, Peek converts Beijing time (`Asia/Shanghai`) to your device's time zone; for relayed local delivery partner scans, Peek preserves that local carrier's wall-clock time as reported. Peek drops raw postcodes, customer account codes and order references; AnserX's tracker does not provide an estimated delivery date, parcel weight, service name, separate delivery timestamp or proof-of-delivery photo.
+Peek reads AnserX's OMS tracker directly and shows the stage ("Label created", "Received by carrier", "In transit", "Out for delivery", "Delivered"), the English scan wording (the Chinese when a scan has none), the city or hub without its postcode, and the destination country. The `BTY_` codes set the stage; no Peek app shows them. AnserX writes its own scans on Beijing time; the local carrier's relayed scans are dated on their place's time zone (Los Angeles's for a scan in Los Angeles, Mexico City's for one in Puebla), and Peek shows them all on your device's clock. When AnserX gives the delivery carrier's number and Peek recognises that carrier, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. A USPS barcode loses its routing ZIP prefix. Peek leaves out the customer account code and order reference; AnserX's tracker gives no estimated delivery date, weight, service name, delivery time of its own or proof-of-delivery photo.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. Beijing time on the day a `BTY_LASTMILE_DELIVERING` ("Out for delivery") scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking AnserX." and displays "Get help from AnserX", which opens AnserX's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking AnserX."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day AnserX shows `BTY_LASTMILE_DELIVERING`, every 2 minutes from 6 a.m. on the clock of the newest scan's place, while AnserX's own tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When AnserX's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking AnserX.", with a "Get help from AnserX" link to AnserX's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking AnserX."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot clear customs or contact AnserX or your local courier for you.
 
@@ -74,7 +76,7 @@ AnserX (*Shenzhen AnserX International Logistics Technology Co., Ltd.*, founded 
 
 ### What does a `BTYCN...YQ` tracking number mean?
 
-`BTYCN` + 10 digits + `YQ` (for example `BTYCN4829173640YQ`, digits invented) is AnserX's 17-character cross-border parcel waybill (`BTY` stands for *Bantouyan* / *斑头雁*).
+`BTYCN` + 10 digits + `YQ` (for example `BTYCN4829173640YQ`, digits invented) is AnserX's 17-character cross-border parcel waybill.
 
 ### Why does AnserX say `Relased from export customs` after arriving in my country?
 
@@ -86,8 +88,8 @@ Ask your online store or marketplace first for order issues and refunds. For car
 
 :::sources
 - [AnserX: Official Website](https://www.anserx.com/) – dedicated small-parcel lines, FBA 0–30 kg / 1.2 m limits, overseas warehouses and Shenzhen headquarters
-- [AnserX: About Us](https://www.anserx.com/about.html) – founded 2018, global routes (US, Europe, Japan, Australia, Southeast Asia, Canada) and smart routing platform
+- [AnserX: About Us](https://www.anserx.com/about.html) – founded 2018, global routes (US, Europe, Japan, Southeast Asia, Russia, Australia) and smart routing platform
 - [AnserX: Contact Us](https://www.anserx.com/contact-us.html) – `bantouyankf@anserx.com`, `0755-2891 8474`, `0755-2868-5256`, online service `09:00–24:00` and Shenzhen address (help URL linked by Peek)
 - [AnserX: OMS Tracking Portal](https://oms.anserx.com/tracking) – public tracking lookup
-- [Universal Parcel Scraper: anserx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/anserx) – `BTYCN...YQ` detection, `oms.anserx.com/tracking?nos=` link rule, `BTY_*` scan codes, Beijing vs relayed local clocks, local `deliveryNo` extraction and help URL
+- [Universal Parcel Scraper: anserx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/anserx) – `BTYCN...YQ` detection, `oms.anserx.com/tracking?nos=` link rule, `BTY_*` scan codes, Beijing time for its own scans and each place's time zone for relayed ones, local `deliveryNo` extraction and help URL
 :::

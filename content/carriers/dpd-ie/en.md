@@ -16,9 +16,9 @@ DPD Ireland doesn't publish the number's format. The ones seen on its tracker ar
 
 | Number (invented) | What it is |
 | --- | --- |
-| `123456789` | The usual DPD Ireland number: 9 digits. |
-| `1234567890` | Now and then 10 digits. |
-| `19999999999980` | 14 digits: a DPD parcel number from [DPD UK](carrier:dpd-uk) or another DPD country, not DPD Ireland. |
+| `482917365` | The usual DPD Ireland number: 9 digits. |
+| `4829173654` | Now and then 10 digits. |
+| `19482736154980` | 14 digits: a DPD parcel number from [DPD UK](carrier:dpd-uk) or another DPD country, not DPD Ireland. |
 
 Numbers this short are shared with other carriers, so the digits alone don't prove who has your parcel. DPD's email and the shop's message do.
 
@@ -68,21 +68,21 @@ If the tracker says `We couldn't locate the consignment number.`, the parcel may
 
 ## DPD Ireland contact number and customer service
 
-As listed on dpd.ie on 11 October 2026:
+dpd.ie lists:
 
-- **Web form:** "Ask Our Team a Question" on the [contact page](https://www.dpd.ie/contact). Customer service hours are Monday to Friday 8am to 6pm and Saturday 8am to 10:30am, excluding public holidays.
+- **Web form:** "Ask Our Team a Question" on the [contact page](https://www.dpd.ie/contact). Customer service hours are Monday to Friday 8am to 6pm and Saturday 8am to 10:30am Irish time, excluding public holidays.
 - **Chatbot:** on dpd.ie, which can connect you to an agent during those hours.
-- **Your depot:** the tracker's Location column names the depot handling your parcel. The [Depot Finder](https://www.dpd.ie/dpd-depot-finder/) lists each depot's phone number, email and hours, mostly Monday to Friday 9:00 to 18:00 and Saturday 9:00 to 10:30.
+- **Your depot:** the tracker's Location column names the depot handling your parcel. The [Depot Finder](https://www.dpd.ie/dpd-depot-finder/) lists each depot's phone number, email and hours, mostly Monday to Friday 9:00 to 18:00 and Saturday 9:00 to 10:30, Irish time.
 
 DPD Ireland's contact pages give no customer-service phone number or email.
 
 ## Tracking DPD Ireland parcels with Peek
 
-[Peek](/) reads DPD Ireland's own tracker, with no account or postcode. It shows each scan in DPD's words with the depot that made it, under a headline in its own words ("Out for delivery", "Delivered"). Once the parcel is on the van, DPD's delivery window becomes the expected delivery and Peek checks up to every 2 minutes instead of every 10: on that day, from half an hour before the window opens but not before 6 a.m. local time, while DPD's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. A delivered parcel shows the time of DPD's delivery scan.
+[Peek](/) reads DPD Ireland's own tracker, with no account or postcode. It shows each scan in DPD's words with the depot that made it, under a headline in its own words ("Out for delivery", "Delivered"). Once the parcel is on the van, DPD's delivery window becomes the expected delivery. While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and that day every 2 minutes from half an hour before the window opens, but not before 6 a.m. Irish time. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DPD Ireland" link. A delivered parcel shows the time of DPD's delivery scan.
 
 Scans from DPD networks abroad have no time zone: Peek reads them on the clock of the scan's place and lists them with the rest of DPD Ireland's history.
 
-Peek doesn't recognise DPD Ireland from the number alone, nor ask it whether it knows a number. Most 9-digit numbers get no carrier; some match TNT's pattern, and TNT is asked first. A 10-digit number is asked of other carriers. Either way, press "Change" and pick "DPD Ireland", or paste a DPD Ireland tracking link with `consignmentNumber=` in it, from www.dpd.ie/tracking/, the track-my-parcel page or tracking.dpd.ie, which names DPD Ireland straight away.
+A 9- or 10-digit number fits DPD Ireland, and other carriers too. From Ireland, Peek asks DPD Ireland first, beside TNT for some 9-digit numbers and a few other carriers for 10 digits, then tracking services; from another country, tracking services first, then DPD Ireland. If DPD Ireland alone knows the number, Peek names it. Otherwise press "Change" and pick "DPD Ireland" under "Fits this number" (searching Interlink Ireland finds it too), or paste a DPD Ireland tracking link with `consignmentNumber=` in it, from www.dpd.ie/tracking/, the track-my-parcel page or tracking.dpd.ie, which names DPD Ireland straight away. Peek doesn't ask DPD Ireland about a 14-digit DPD number.
 
 ## Questions about DPD Ireland tracking
 

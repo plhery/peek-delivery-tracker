@@ -94,7 +94,7 @@ Peek pokazuje następnie status, historię z miastem (i krajem) każdego skanu n
 
 Komunikaty Speedy pojawiają się po angielsku w oryginalnym brzmieniu; `Delivered` wyświetla się w słowach Peek. Gdy masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza do co 10 minut, a od 6:00 czasu bułgarskiego w dniu, w którym Speedy zeskanuje paczkę jako w doręczeniu: do co 2 minut przy bezpośredniej odpowiedzi systemu Speedy, do co 5 minut po sprawdzeniu przez przeglądarkę albo do co 15 minut przez usługi śledzenia. Po dwóch dniach bez nowości (po 12 godzinach przy statusie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę, a po siedmiu dniach bez nowości przy statusie „Zarejestrowana” — co 6 godzin.
 
-Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od {{date}}”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Speedy.” oraz link „Poproś przewoźnika Speedy o pomoc”.
+Gdy przez cztery dni nie pojawi się żaden nowy skan, a przesyłka pozostaje na etapie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek wyświetla komunikat „Brak aktualizacji od czterech dni” (lub „Brak aktualizacji od …”), dopisek „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Speedy.” oraz link „Poproś przewoźnika Speedy o pomoc”.
 
 Powiadomienia obejmują do wyboru „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może przedłużyć czasu odbioru ani ponownie wysłać kodu PIN.
 

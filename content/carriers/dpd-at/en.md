@@ -14,8 +14,8 @@ DPD's parcel number has 14 digits. The shop sends it, or DPD emails it when the 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `06200000000000` | 14 digits starting with 0620 to 0630, 0632 to 0635, 0643 to 0645 or 0649: a parcel number from one of DPD Austria's depots. |
-| `01900000000000` | 14 digits starting with 0101 to 0199: Peek reads it as a [DPD Germany](carrier:dpd-de) number first. DPD Austria may still deliver it (see below). |
+| `06204819273645` | 14 digits starting with 0620 to 0630, 0632 to 0635, 0643 to 0645 or 0649: a parcel number from one of DPD Austria's depots. |
+| `01904819273645` | 14 digits starting with 0101 to 0199: Peek reads it as a [DPD Germany](carrier:dpd-de) number first. DPD Austria may still deliver it (see below). |
 
 If your label shows one more letter or digit after the 14 digits, leave it out. If the shop's email names [Austrian Post](carrier:austrian-post), [GLS Austria](carrier:gls-at) or another carrier, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
@@ -70,9 +70,9 @@ For a refund or a new parcel, ask the shop: it has the contract with DPD.
 
 ## DPD Austria contact and customer service
 
-Peek can't contact DPD or the shop for you. As read on 1 November 2026, on DPD Austria's English pages:
+Peek can't contact DPD or the shop for you. DPD Austria's English pages list:
 
-- **Phone:** 05 03 73 420 (+43 5 03 73 420 from abroad), the service line for private customers, Monday to Friday, 7 am to 6 pm.
+- **Phone:** 05 03 73 420 (+43 5 03 73 420 from abroad), the service line for private customers, Monday to Friday, 7 am to 6 pm Austrian time.
 - **Online:** [DPD Austria's contact form for consignees](https://www.dpd.com/at/en/support/contact-form-consignee/), with the parcel number or PIN, your name and email. DPD asks you to use one channel at a time, as asking in several places slows things down.
 - **Post:** DPD Direct Parcel Distribution Austria GmbH, Arbeitergasse 46, 2333 Leopoldsdorf.
 
@@ -90,7 +90,7 @@ Other 14-digit numbers don't point Peek to DPD Austria: they fit several DPD com
 
 **What you see.** The status, the history in myDPD's words with each depot's town and country, and the delivery time, in Austrian time (a scan in a country on another clock keeps its local time). A parcel at a Pickup point shows as "Ready for pickup". Peek leaves out names, addresses, the time window, the Pickup point, who signed and the delivery options, and shows no expected date; myDPD gives no weight. For the Pickup point, check myDPD or DPD's card; for the code, DPD's email or SMS.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes). It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use myDPD.
+While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. Austrian time on the day DPD scans it out for delivery. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from DPD Austria" link. To change the delivery, use myDPD.
 
 ## Questions about DPD tracking in Austria
 
@@ -112,7 +112,7 @@ The shop has sent DPD the parcel's details, but DPD doesn't have the parcel yet.
 
 ### What is the DPD Austria phone number?
 
-05 03 73 420 for private customers, Monday to Friday, 7 am to 6 pm.
+05 03 73 420 for private customers, Monday to Friday, 7 am to 6 pm Austrian time.
 
 :::sources
 - [DPD Austria: Receiving parcels](https://www.dpd.com/at/en/receiving-parcels/) – Predict, Live-Tracking, changes, deposit okay, lockers

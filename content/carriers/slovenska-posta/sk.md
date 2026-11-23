@@ -22,7 +22,7 @@ Slovenská pošta používa medzinárodný formát poštových čísel s 13 znak
 
 Nie každá zásielka má číslo, ktoré sa dá sledovať. Ak ste ho od odosielateľa nedostali, podľa Slovenskej pošty ju pravdepodobne sledovať nemožno. Ak odosielateľ zadal váš e-mail alebo telefón, zásielka sa vám zobrazí v mobilnej aplikácii, keď overíte, že ste adresát.
 
-Pozor na podobné čísla. Číslo zo 14 číslic, ktoré sa začína na `703`, má tvar čísel [Slovak Parcel Service](carrier:slovak-parcel-service) (stránka v angličtine), nie Slovenskej pošty. Poštové číslo s `CZ` na konci patrí [Českej pošte](carrier:ceska-posta) (v angličtine). A ak vám príde SMS alebo e-mail s „číslom zásielky“ v inom tvare než dve písmená, deväť číslic a kód krajiny, Slovenská pošta to považuje za znak podvodu.
+Pozor na podobné čísla. Číslo zo 14 číslic, ktoré sa začína na `703`, má tvar čísel [Slovak Parcel Service](carrier:slovak-parcel-service), nie Slovenskej pošty. Poštové číslo s `CZ` na konci patrí [Českej pošte](carrier:ceska-posta) (v angličtine). A ak vám príde SMS alebo e-mail s „číslom zásielky“ v inom tvare než dve písmená, deväť číslic a kód krajiny, Slovenská pošta to považuje za znak podvodu.
 
 ## Čo znamenajú stavy zásielky
 

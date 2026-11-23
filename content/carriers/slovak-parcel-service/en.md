@@ -10,14 +10,14 @@ Slovak Parcel Service (SPS) is a Slovak courier, owned by [Austrian Post](carrie
 
 ## Slovak Parcel Service tracking number
 
-SPS's parcel number is 14 digits starting `703`. On the label it's printed in groups with two extra digits, like `703-000-00000000 00` (digits invented). Those 16 digits are the label barcode; the 14-digit parcel number is the same without the last two.
+SPS's parcel number is 14 digits starting `703`. On the label it's printed in groups with two extra digits, like `703-482-91736405 01` (digits invented). Those 16 digits are the label barcode; the 14-digit parcel number is the same without the last two.
 
-| Number | Whose it is |
+| Number (invented) | Whose it is |
 | --- | --- |
-| `70300000000000` | SPS: 14 digits starting 703. |
-| `703-000-00000000 00` | The same parcel as printed on the label, with 2 extra digits. |
-| `00000000000000` | 14 digits not starting 703: DPD, [SEUR](carrier:seur), [BRT](carrier:brt) and others, not SPS. |
-| `RR000000005SK` | A postal number ending SK: [Slovenská pošta](carrier:slovenska-posta), not SPS. |
+| `70348291736405` | SPS: 14 digits starting 703. |
+| `703-482-91736405 01` | The same parcel as printed on the label, with 2 extra digits. |
+| `48291736405829` | 14 digits not starting 703: DPD, [SEUR](carrier:seur), [BRT](carrier:brt) and others, not SPS. |
+| `RR482917367SK` | A postal number ending SK: [Slovenská pošta](carrier:slovenska-posta), not SPS. |
 
 If sps-sro.sk answers "Please check that you entered the shipment number correctly (no spaces)", type it again without spaces or dashes. SPS says the correct format is in your confirmation email or SMS. Its tracking form can also ask for the destination postcode or the customer number to show more detail. No email at all? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number).
 
@@ -71,26 +71,32 @@ From there the site forwards you to mySPS (mysps.sk), which shows a progress bar
 
 ## Slovak Parcel Service contact and customer service
 
-As listed on sps-sro.sk on 12 October 2026:
+From sps-sro.sk:
 
 - **Phone:** your local area code followed by 16877, says SPS; its list of centres gives 02/16877 for Bratislava, Banská Bystrica, Trenčín, Trnava and Žilina, 055/16877 for Košice and 037/16877 for Nitra. From abroad: +421 2 168 77.
-- **Hours:** every working day, 8:00 to 16:30.
+- **Hours:** every working day, 8:00 to 16:30 Slovak time.
 - **mySPS:** SPS recommends mysps.sk for the fastest handling: tracking around the clock and customer-service requests.
 - **Email or chat:** none listed for recipients.
 
-> On 27 May 2026 SPS warned that fake SMS and emails are circulating again. Be careful with links asking for card or personal details, and delete them if you ordered nothing.
+> SPS warns that fake SMS and emails about parcel deliveries are circulating again. Be careful with links asking for card or personal details, and delete them if you ordered nothing.
 
 ## Tracking an SPS parcel with Peek
 
-[Peek](/) knows SPS's shape, 14 digits starting 703, but it's shared with DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) and others. In Slovakia Peek asks SPS first. Elsewhere SPS comes last of the 13 carriers with this shape, so Peek doesn't ask it while you add the number or at the first check; a later check in the parcel's first month can reach it. If another carrier claims it, or none does yet, use "Change" and pick "Slovak Parcel Service" (searching "SPS" finds it). Type the 14 digits: the 16-digit label code doesn't name SPS. An sps-sro.sk tracking link with `shipment_id=` names SPS whatever the number; a mysps.sk link doesn't.
+[Peek](/) knows SPS's shape, 14 digits starting 703, but it's shared with DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) and others. In Slovakia Peek asks SPS first. Elsewhere SPS comes near the end of the carriers with this shape, so Peek doesn't ask it while you add the number or at the first check; a later check in the parcel's first month can reach it. If another carrier claims it, or none does yet, use "Change" and pick "Slovak Parcel Service" (searching "SPS" finds it). Type the 14 digits: the 16-digit label code doesn't name SPS. An sps-sro.sk tracking link with `shipment_id=` names SPS whatever the number; a mysps.sk link doesn't.
 
-SPS's scan times carry no time zone: Peek reads them on Slovak time and lists SPS's own history. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date; a Balíkovo box deposit shows as `Uložený v balíkomate`, with whatever place SPS gives the scan. Peek can notify you when the status changes. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. Slovak time on the day it goes on `Doručovací hárok`, while SPS's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). It can't extend storage or resend your PIN.
+SPS's scan times carry no time zone: Peek reads them on Slovak time and lists SPS's own history. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date; a Balíkovo box deposit shows as `Uložený v balíkomate`, with whatever place SPS gives the scan.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Slovak time on the day the parcel goes on `Doručovací hárok`, while SPS's own tracker answers. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Slovak Parcel Service.", with a "Get help from Slovak Parcel Service" link to SPS's customer service page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Slovak Parcel Service."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't extend storage or resend your PIN.
 
 ## Questions about Slovak Parcel Service tracking
 
 ### What is the Slovak Parcel Service phone number?
 
-Dial your local area code followed by 16877, such as 02/16877 in Bratislava, or +421 2 168 77 from abroad. Lines are open working days from 8:00 to 16:30.
+Dial your local area code followed by 16877, such as 02/16877 in Bratislava, or +421 2 168 77 from abroad. Lines are open working days from 8:00 to 16:30 Slovak time.
 
 ### How long does SPS keep a parcel in a Balíkovo box?
 

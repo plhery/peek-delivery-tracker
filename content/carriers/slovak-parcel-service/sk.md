@@ -10,14 +10,14 @@ Slovak Parcel Service (SPS) je slovenská kuriérska spoločnosť, ktorú od rok
 
 ## Číslo zásielky SPS: ako vyzerá a kde ho nájdete
 
-Číslo zásielky SPS má 14 číslic a začína sa na `703`. Na štítku je vytlačené po skupinách a s dvoma číslicami navyše, napríklad `703-000-00000000 00`. Celé 16-miestne číslo zásielky vyžaduje napríklad generátor príjmových dokladov, na sledovanie stačí prvých 14 číslic.
+Číslo zásielky SPS má 14 číslic a začína sa na `703`. Na štítku je vytlačené po skupinách a s dvoma číslicami navyše, napríklad `703-482-91736405 01`. Celé 16-miestne číslo zásielky vyžaduje napríklad generátor príjmových dokladov, na sledovanie stačí prvých 14 číslic.
 
 | Číslo (vymyslené) | Čo to je |
 | --- | --- |
-| `70300000000000` | Číslo zásielky SPS: 14 číslic, na začiatku 703. |
-| `703-000-00000000 00` | To isté číslo, ako je vytlačené na štítku: po skupinách a s dvoma číslicami navyše. |
-| `00000000000000` | 14 číslic bez 703 na začiatku: taký tvar majú napríklad čísla DPD alebo Hermesu, nie SPS. |
-| `RR000000005SK` | Podacie číslo so `SK` na konci patrí [Slovenskej pošte](carrier:slovenska-posta), nie SPS. |
+| `70348291736405` | Číslo zásielky SPS: 14 číslic, na začiatku 703. |
+| `703-482-91736405 01` | To isté číslo, ako je vytlačené na štítku: po skupinách a s dvoma číslicami navyše. |
+| `48291736405829` | 14 číslic bez 703 na začiatku: taký tvar majú napríklad čísla DPD alebo Hermesu, nie SPS. |
+| `RR482917367SK` | Podacie číslo so `SK` na konci patrí [Slovenskej pošte](carrier:slovenska-posta), nie SPS. |
 
 Ak sps-sro.sk číslo nenájde, napíše „Zásielku sa nám nepodarilo nájsť“. Skontrolujte, či ste ho zadali správne a bez medzier; správny formát je podľa SPS v potvrdzovacom e-maile alebo v SMS. Ak číslo sedí, skúste to o chvíľu znova, údaje sa môžu aktualizovať s oneskorením. E-mail ani SMS s číslom nemáte? Opýtajte sa e-shopu.
 
@@ -97,21 +97,25 @@ Podľa Finančnej správy sa od 1. júla 2026 na zásielky s hodnotou do 150 EUR
 
 ## Kontakt na SPS
 
-Kontakty podľa sps-sro.sk k 26. októbru 2026:
+Kontakty podľa sps-sro.sk:
 
 - **mySPS** na mysps.sk: podľa SPS najrýchlejšia cesta, dostupná nonstop.
 - **Zákaznícka linka** v pracovné dni od 8:00 do 16:30: 02/16877 (strediská Bratislava, Banská Bystrica, Trenčín, Trnava a Žilina), 055/16877 (stredisko Košice, aj Bardejov, Humenné, Michalovce či Trebišov) a 037/16877 (stredisko Nitra, aj Komárno a Levice). V medzinárodnom tvare +421 2 168 77.
 - **E-mail ani chat** pre príjemcov SPS neuvádza.
 
-> SPS 27. mája 2026 upozornila, že sa opäť šíria podvodné SMS a e-maily o doručovaní zásielok. Buďte opatrní najmä vtedy, keď od vás správa cez neznámy odkaz pýta údaje z platobnej karty alebo iné osobné údaje. Ak ste si nič neobjednali, správu ignorujte alebo vymažte.
+> SPS upozorňuje, že sa opäť šíria podvodné SMS a e-maily o doručovaní zásielok. Buďte opatrní najmä vtedy, keď od vás správa cez neznámy odkaz pýta údaje z platobnej karty alebo iné osobné údaje. Ak ste si nič neobjednali, správu ignorujte alebo vymažte.
 
 ## Sledovanie zásielok SPS v Peeku
 
-[Peek](/) pozná tvar čísla SPS, 14 číslic so 703 na začiatku, rovnaký tvar však majú aj čísla DPD, Hermesu a ďalších prepravcov. Vložte ho aj tak: Peek sleduje viac ako 4 500 prepravcov. Ak Peek otvoríte na Slovensku, spýta sa najprv SPS. Keď SPS zásielku pozná, Peek napíše „Slovak Parcel Service has this parcel.“ Mimo Slovenska je SPS v poradí posledná a pri pridaní sa jej Peek nespýta, preto ju tam vyberte sami. To isté urobte, keď zásielku nenájde nikto alebo ju ohlási iný prepravca: kliknite na „Change“ a vyberte „Slovak Parcel Service“ (vo vyhľadávaní stačí napísať SPS). Zadajte 14 číslic: 16-miestny kód zo štítka Peek so SPS nespojí, kým ju nevyberiete ručne. Odkaz na sledovanie zo sps-sro.sk so `shipment_id=` Peek priradí SPS vždy, odkaz z mysps.sk nie.
+[Peek](/) pozná tvar čísla SPS, 14 číslic so 703 na začiatku, rovnaký tvar však majú aj čísla DPD, Hermesu a ďalších prepravcov. Vložte ho aj tak: Peek sleduje viac ako 4 500 prepravcov. Ak Peek otvoríte na Slovensku, spýta sa najprv SPS. Keď SPS zásielku pozná, Peek napíše „Slovak Parcel Service has this parcel.“ Mimo Slovenska je SPS v poradí medzi poslednými a pri pridaní sa jej Peek nespýta, preto ju tam vyberte sami. To isté urobte, keď zásielku nenájde nikto alebo ju ohlási iný prepravca: kliknite na „Change“ a vyberte „Slovak Parcel Service“ (vo vyhľadávaní stačí napísať SPS). Zadajte 14 číslic: 16-miestny kód zo štítka Peek so SPS nespojí, kým ju nevyberiete ručne. Odkaz na sledovanie zo sps-sro.sk so `shipment_id=` Peek priradí SPS vždy, odkaz z mysps.sk nie.
 
 Peek ukáže kroky po slovensky, ako ich píše SPS, pri krokoch stredisko SPS a hmotnosť balíka; `Doručenie` berie ako doručené. Predpokladaný dátum doručenia od SPS nedostáva. Mená, PSČ ani referenčné čísla si zo SPS neukladá.
 
-Peek zásielku kontroluje najviac každých 10 minút a v deň, keď je na doručovacom hárku (`Doručovací hárok`), najviac každé 2 minúty (od 6:00 slovenského času a len kým odpovedá vlastné sledovanie SPS; cez sledovacie služby každých 15 minút). Ak dva dni nepribudne nič nové (alebo 12 hodín, kým je zásielka len zaregistrovaná či prevzatá prepravcom), Peek ju kontroluje už len raz za hodinu. Pri zmene stavu vás môže upozorniť. SPS ani e-shop za vás nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
+Kým máte zásielku otvorenú v Peeku alebo v deň doručenia so zapnutými upozorneniami, Peek ju kontroluje najviac každých 10 minút a v deň, keď je na doručovacom hárku (`Doručovací hárok`), od 6:00 slovenského času najviac každé 2 minúty, kým odpovedá vlastné sledovanie SPS. Ak dva dni nepribudne nič nové (alebo 12 hodín, kým má zásielka stav „Label created“ alebo „Received by carrier“), kontroluje ju raz za hodinu a po siedmich dňoch v stave „Label created“ raz za 6 hodín.
+
+Aplikácia Peek nie je v slovenčine, takže jej texty uvidíte po anglicky. Keď je posledný sken štyri dni starý a zásielka má stále stav „Label created“ (štítok vytvorený), „Received by carrier“ (prevzatá prepravcom) alebo „In transit“ (na ceste), Peek ju označí dňom toho skenu, napríklad „No tracking update since Mon 12 Oct“. Stránka zásielky potom napíše „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Slovak Parcel Service.“ (balíky sa často odmlčia pri dlhom lete, na colnici alebo cez víkend) a ponúkne odkaz „Get help from Slovak Parcel Service“ na stránku zákazníckeho servisu SPS. Po troch týždňoch bez nového skenu napíše „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Slovak Parcel Service.“ (ak balík stále nedošiel, opýtajte sa predajcu).
+
+Upozornenia si vyberiete sami: „Every scan“ (každý sken), „Important steps“ (dôležité kroky) alebo „Delivery only“ (len doručenie). SPS ani e-shop za vás Peek nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
 
 ## Časté otázky o sledovaní zásielok SPS
 

@@ -21,7 +21,7 @@ Pošta Slovenije nazywa go numerem nadania (*sprejemna številka*). Składa się
 
 Zwykle podaje go nadawca. Znajdziesz go też w SMS-ach od Pošta Slovenije (nadawca „Paketomat” lub „POSTA”) i w e-mailach z domeny `@posta.si`. Paczki zaadresowane z twoim numerem telefonu pojawiają się również w MojaPošta na liście „Moji paketi” (Moje paczki). Zgubiłeś numer? Zobacz [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
-Inne litery na końcu wskazują inną pocztę: `…HR` to [Hrvatska pošta](carrier:hrvatska-posta), a `…AT` to [Austrian Post](carrier:austrian-post). Wyszukiwarka obejmuje ostatnie dwa miesiące; starszy lub błędny numer zwraca komunikat „Check tracking number and try again.”
+Inne litery na końcu wskazują inną pocztę: `…HR` to [Hrvatska pošta](carrier:hrvatska-posta), a `…AT` to [Austrian Post](carrier:austrian-post).
 
 ## Co oznaczają statusy Pošta Slovenije
 
@@ -37,12 +37,11 @@ System śledzenia pokazuje etapy po słoweńsku albo po angielsku po przełącze
 | `Unsuccessful delivery attempt` | Doręczenie nie powiodło się albo paczka nie została odebrana. Przeczytaj następny krok poniżej. |
 | `The item is ready for pickup at the post office` | Czeka w placówce pocztowej wskazanej w tym wpisie. |
 | `Unsuccessful delivery` | Nikt nie odebrał paczki z automatu na czas: trafia do placówki pocztowej. |
-| `The item was delivered to the mailbox / P.O. box` | Dostarczona. |
+| `The item was delivered to the mailbox / P.O. box` | Dostarczona; po zwrocie – do nadawcy. |
 | `The item has been picked up` | Dostarczona: wydana pod adresem lub odbiorcy. |
 | `Unsuccessful delivery attempt. Item is being returned to the sender` | Nieodebrana: wraca do nadawcy. |
-| `The item has been delivered to the sender` | Zwrócona: nadawca odebrał ją z powrotem. |
 
-`Unsuccessful delivery attempt` oznacza albo brak odbiorcy (następny krok: `The item will be redirected to the post office`), albo nieodebranie przesyłki; linijka poniżej wyjaśnia przyczynę. `The item was delivered to the mailbox / P.O. box` pojawia się też przy doręczeniu do rąk własnych, z dopiskiem `The item was delivered to the doorstep` poniżej. Z kolei `The item has been picked up` oraz skrót `Picked up` oznaczają przekazanie przesyłki odbiorcy, a nie odbiór paczki przez kuriera od nadawcy.
+`Unsuccessful delivery attempt` oznacza albo brak odbiorcy (następny krok: `The item will be redirected to the post office`), albo nieodebranie przesyłki; linijka poniżej wyjaśnia przyczynę. `The item was delivered to the mailbox / P.O. box` pojawia się też przy doręczeniu do rąk własnych, z dopiskiem `The item was delivered to the doorstep` poniżej. Z kolei `The item has been picked up` oznacza przekazanie przesyłki odbiorcy, a nie odbiór paczki przez kuriera od nadawcy.
 
 ## Doręczenie, PS Paketomat i odbiór na poczcie
 
@@ -50,7 +49,7 @@ Gdy nikogo nie ma w domu, listonosz zostawia awizo z miejscem i terminem odbioru
 
 - **Paczki MojPaket** (nadawane na podstawie umowy z Pošta Slovenije): 8 dni na poczcie, licząc od dnia po awizowaniu.
 - **Przesyłki w ramach usługi powszechnej**: 15 dni, chyba że zagraniczny nadawca wyznaczył krótszy termin.
-- **Automaty PS Paketomat** (ponad 300, czynne całą dobę, kod SMS-em): 60 godzin, a następnie 5 dni w placówce pocztowej.
+- **Automaty PS Paketomat** (ponad 450, czynne całą dobę, kod SMS-em): 60 godzin, a następnie 5 dni w placówce pocztowej.
 
 Po tym czasie paczka wraca do nadawcy.
 
@@ -81,11 +80,11 @@ Kanały kontaktu podawane przez Pošta Slovenije na posta.si:
 
 Numer pocztowy zakończony na `SI`, zaczynający się od C, E, L lub R i z poprawną cyfrą kontrolną, należy do Pošta Slovenije po samym kształcie, więc [Peek](/) od razu pokazuje „Wykryty przewoźnik” dla Pošta Slovenije. Przy innych literach na początku i końcówce `SI` Peek od razu pyta Pošta Slovenije oraz [Chronopost](carrier:chronopost) i wyświetla „Pošta Slovenije ma tę przesyłkę.”, gdy Pošta Slovenije zna numer. W przeciwnym razie zobaczysz „Jeszcze nie znaleziono u: … Peek będzie sprawdzać dalej po dodaniu.” Przy błędnej cyfrze kontrolnej Peek wyświetla „Cyfra kontrolna tego numeru się nie zgadza.”, nie odpytuje Pošta Slovenije, a jej wyszukiwanie odrzuca taki numer nawet po ręcznym wyborze: sprawdź literówki. Możesz też wkleić link śledzenia z `moja.posta.si`, który zawsze wybiera Pošta Slovenije.
 
-Przesyłka z zagranicy zachowuje numer zagranicznej poczty. Gdy ta wskaże Słowenię jako kraj docelowy albo nie poda celu, a śledzisz przesyłkę ze Słowenii, Peek pyta również Pošta Slovenije i przechodzi na nią, gdy pokaże nowszy postęp, zachowując wcześniejszą historię. Wyszukiwanie Pošta Slovenije akceptuje każdy poprawny numer pocztowy S10, więc możesz też wybrać ją przez „Zmień” (lub „Zmień przewoźnika” na dodanej paczce) albo wkleić link `moja.posta.si`.
+Przesyłka z zagranicy zachowuje numer zagranicznej poczty. Gdy ta wskaże Słowenię jako kraj docelowy albo nie poda celu, a śledzisz przesyłkę ze Słowenii, Peek pyta również Pošta Slovenije i przechodzi na nią, gdy pokaże datowany skan nie starszy niż ostatni skan zagranicznej poczty, zachowując wcześniejszą historię. Wyszukiwanie Pošta Slovenije akceptuje każdy poprawny numer pocztowy S10, więc możesz też wybrać ją przez „Zmień” (lub „Zmień przewoźnika” na dodanej paczce) albo wkleić link `moja.posta.si`.
 
-Peek odczytuje usługę stojącą za aplikacją MojaPošta. Nanosi każdy krok na mapę z jego placówką pocztową, zachowuje angielskie opisy Pošta Slovenije wraz z linią szczegółów oraz pokazuje godzinę doręczenia, placówkę pocztową czekającą na odbiór (nigdy automat paczkowy) i imię osoby, która pokwitowała odbiór, jeśli Pošta Slovenije je udostępnia. Pomija kody pocztowe, kod odbioru i adres punktu odbioru; Pošta Slovenije nie podaje przewidywanego dnia doręczenia, wagi, nazwy usługi ani potwierdzenia doręczenia. Skany w Słowenii są czytane według czasu słoweńskiego, a zagraniczne według zegara danego kraju, a potem przeliczane na twoją strefę czasową („Godziny w twojej strefie czasowej:”).
+Peek odczytuje usługę stojącą za aplikacją MojaPošta. Nanosi każdy krok na mapę z jego placówką pocztową, zachowuje angielskie opisy Pošta Slovenije wraz z linią szczegółów oraz pokazuje godzinę doręczenia i placówkę pocztową czekającą na odbiór (nigdy automat paczkowy). Pomija kody pocztowe, kod odbioru i adres punktu odbioru; Pošta Slovenije nie podaje przewidywanego dnia doręczenia, wagi, nazwy usługi ani potwierdzenia doręczenia. Skany w Słowenii są czytane według czasu słoweńskiego, a zagraniczne według zegara danego kraju (w kraju z kilkoma strefami czasowymi, jak USA, według czasu słoweńskiego, z możliwą różnicą kilku godzin), a potem przeliczane na twoją strefę czasową („Godziny w twojej strefie czasowej:”).
 
-Peek sprawdza status do co 10 minut, a w dniu przejścia paczki do etapu „W doręczeniu” co 2 minuty od 6:00 według zegara ostatniego skanu (czasu słoweńskiego w Słowenii), gdy masz paczkę otwartą w Peek lub włączone powiadomienia i strona Pošta Slovenije odpowiada. Po dwóch dniach bez zmian (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. W powiadomieniach możesz wybrać „Wszystkie aktualizacje”, „Tylko ważne” albo „Tylko w dniu dostawy”. Po czterech dniach bez skanu w transporcie, poza odprawą celną i zgłoszonym problemem, Peek pokazuje „Brak aktualizacji od …”, uwagę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Pošta Slovenije.” i opcję „Poproś przewoźnika Pošta Slovenije o pomoc”. Peek śledzi ponad 4500 przewoźników, ale nie skontaktuje się za ciebie z Pošta Slovenije ani z nadawcą.
+Peek sprawdza status do co 10 minut, a w dniu przejścia paczki do etapu „W doręczeniu” co 2 minuty od 6:00 według zegara ostatniego skanu (czasu słoweńskiego w Słowenii), gdy strona Pošta Slovenije odpowiada – o ile paczka jest otwarta w Peek albo w dniu doręczenia przy włączonych powiadomieniach. Po dwóch dniach bez zmian (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez zmian na etapie „Zarejestrowana” co 6 godzin. W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Po czterech dniach bez skanu przy statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek pokazuje „Brak aktualizacji od …”, uwagę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Pošta Slovenije.” i opcję „Poproś przewoźnika Pošta Slovenije o pomoc”. Peek śledzi ponad 4500 przewoźników, ale nie skontaktuje się za ciebie z Pošta Slovenije ani z nadawcą.
 
 ## Pytania o śledzenie Pošta Slovenije
 
@@ -106,9 +105,9 @@ Tak, po jej numerze pocztowym: śledzenie pokazuje przesyłki z zagranicy od chw
 `The item has been picked up` oznacza, że przesyłka została wydana u celu. Jeśli to nie byłeś ty, sprawdź wśród domowników lub osób upoważnionych, a potem zajrzyj do poradnika [dostarczona, ale nieotrzymana](guide:delivered-not-received).
 
 :::sources
-- [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – śledzenie po angielsku, format numeru, okno dwóch miesięcy, statusy, kontakt
+- [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – śledzenie po angielsku, format numeru, statusy, kontakt
 - [Post of Slovenia: PS Paketomat](https://en.posta.si/home/postal-services-/receiving-mail/ps-paketomat) – kod SMS, 60 godzin, 5 dni na poczcie, zwrot
-- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 godziny na dobę, ponad 300 automatów, pobranie
+- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 godziny na dobę, ponad 450 automatów, pobranie
 - [Pošta Slovenije: Splošni pogoji PS Paketomat](https://www.posta.si/zasebno-site/Documents/Splosni%20pogoji%20PS%20Paketomat.pdf) – obowiązuje od 1 kwietnia 2026 r.: 60 godzin w automacie
 - [Post of Slovenia: My Delivery – My Choice](https://en.posta.si/home/postal-services-/receiving-mail/my-delivery-my-choice) – zmiana miejsca doręczenia
 - [Pošta Slovenije: Moja dostava, moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – link przez aplikację MojaPošta, Viber lub SMS, wymóg numeru telefonu

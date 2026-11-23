@@ -21,7 +21,7 @@ Pošta Slovenije lo llama número de admisión (*sprejemna številka*). Tiene 13
 
 Suele aparecer en el mensaje del remitente. También lo incluyen los SMS de Pošta Slovenije (remitente «Paketomat» o «POSTA») y los correos desde `@posta.si`. Los paquetes dirigidos con tu número de teléfono aparecen además en la lista «Moji paketi» (Mis paquetes) de MojaPošta. ¿Lo has perdido? Mira [cómo encontrar un número de seguimiento](guide:find-tracking-number).
 
-Otras letras finales corresponden a otro correo: `…HR` es [Hrvatska pošta](carrier:hrvatska-posta) y `…AT` es [Austrian Post](carrier:austrian-post). El rastreador cubre los dos últimos meses; un número más antiguo o con errata devuelve «Check tracking number and try again.»
+Otras letras finales corresponden a otro correo: `…HR` es [Hrvatska pošta](carrier:hrvatska-posta) y `…AT` es [Austrian Post](carrier:austrian-post).
 
 ## Qué significan los estados de Pošta Slovenije
 
@@ -37,12 +37,11 @@ El rastreador muestra cada paso en esloveno, o en inglés con su selector de idi
 | `Unsuccessful delivery attempt` | No se pudo entregar o no se recogió. Lee el paso siguiente debajo. |
 | `The item is ready for pickup at the post office` | Espera en la oficina de correos indicada en el paso. |
 | `Unsuccessful delivery` | Nadie lo recogió a tiempo de la taquilla: pasa a una oficina de correos. |
-| `The item was delivered to the mailbox / P.O. box` | Entregado. |
+| `The item was delivered to the mailbox / P.O. box` | Entregado; tras una devolución, al remitente. |
 | `The item has been picked up` | Entregado: entregado en la dirección o al destinatario. |
 | `Unsuccessful delivery attempt. Item is being returned to the sender` | No recogido: vuelve al remitente. |
-| `The item has been delivered to the sender` | Devuelto: el remitente ya lo tiene de vuelta. |
 
-`Unsuccessful delivery attempt` significa o bien que no había nadie (paso siguiente: `The item will be redirected to the post office`) o bien que nadie lo recogió; la línea inferior indica cuál. `The item was delivered to the mailbox / P.O. box` también aparece en entregas en mano, con `The item was delivered to the doorstep` debajo. Y `The item has been picked up`, igual que el resumen `Picked up`, significa que el destinatario recibió el paquete, no que un mensajero lo haya recogido al remitente.
+`Unsuccessful delivery attempt` significa o bien que no había nadie (paso siguiente: `The item will be redirected to the post office`) o bien que nadie lo recogió; la línea inferior indica cuál. `The item was delivered to the mailbox / P.O. box` también aparece en entregas en mano, con `The item was delivered to the doorstep` debajo. Y `The item has been picked up` significa que el destinatario recibió el paquete, no que un mensajero lo haya recogido al remitente.
 
 ## Entrega, PS Paketomat y recogida en oficina
 
@@ -50,7 +49,7 @@ Si no hay nadie en casa, el cartero deja un aviso indicando dónde espera el env
 
 - **Paquetes MojPaket** (enviados por contrato con Pošta Slovenije): 8 días en oficina de correos, contados desde el día siguiente al aviso.
 - **Envíos del servicio postal universal**: 15 días, salvo que un remitente extranjero haya fijado un plazo más corto.
-- **Taquillas PS Paketomat** (más de 300, abiertas 24 horas, código por SMS): 60 horas y después 5 días en oficina de correos.
+- **Taquillas PS Paketomat** (más de 450, abiertas 24 horas, código por SMS): 60 horas y después 5 días en oficina de correos.
 
 Pasado ese plazo, el paquete se devuelve al remitente.
 
@@ -81,11 +80,11 @@ Canales de contacto publicados por Pošta Slovenije en posta.si:
 
 Un número postal acabado en `SI` que empieza por C, E, L o R y tiene un dígito de control válido pertenece a Pošta Slovenije por su forma, así que [Peek](/) muestra al instante «Transportista detectado» para Pošta Slovenije. Si empieza por otras letras y acaba en `SI`, Peek pregunta de inmediato a Pošta Slovenije y a [Chronopost](carrier:chronopost), y muestra «Pošta Slovenije tiene este paquete.» en cuanto Pošta Slovenije lo reconoce. Si todavía no aparece, verás «Aún no aparece en … Peek seguirá comprobando cuando lo añadas.» Si el dígito de control falla, Peek avisa «El dígito de control de este número no cuadra.», no consulta a Pošta Slovenije y su búsqueda rechaza el número incluso si lo eliges a mano: revisa si hay una errata. También puedes pegar un enlace de seguimiento de `moja.posta.si`, que siempre selecciona Pošta Slovenije.
 
-Un envío del extranjero mantiene el número de su correo de origen. Cuando ese correo indica destino Eslovenia, o no indica destino y sigues el paquete desde Eslovenia, Peek consulta también a Pošta Slovenije y pasa a seguirlo allí cuando Pošta Slovenije registra novedades más recientes, manteniendo el historial previo. La consulta de Pošta Slovenije acepta cualquier número postal S10 válido, así que también puedes elegirla con «Cambiar» (o «Cambiar transportista» si ya lo añadiste) o pegar un enlace de `moja.posta.si`.
+Un envío del extranjero mantiene el número de su correo de origen. Cuando ese correo indica destino Eslovenia, o no indica destino y sigues el paquete desde Eslovenia, Peek consulta también a Pošta Slovenije y pasa a seguirlo allí cuando Pošta Slovenije registra un escaneo fechado no anterior al último del correo de origen, manteniendo el historial previo. La consulta de Pošta Slovenije acepta cualquier número postal S10 válido, así que también puedes elegirla con «Cambiar» (o «Cambiar transportista» si ya lo añadiste) o pegar un enlace de `moja.posta.si`.
 
-Peek lee el servicio detrás de la app MojaPošta. Sitúa cada paso en el mapa con su oficina de correos, conserva el texto inglés de Pošta Slovenije con su línea de detalle y muestra la hora de entrega, la oficina donde espera el paquete (nunca una taquilla) y el nombre de quien firmó la entrega cuando Pošta Slovenije lo incluye. Omite códigos postales, códigos de recogida y direcciones de puntos de recogida; Pošta Slovenije no facilita fecha estimada de entrega, peso, nombre del servicio ni justificante de entrega. Las horas en Eslovenia se leen en hora de Liubliana y las del extranjero en la hora de su país, convirtiéndolas después a tu zona horaria («Horas en tu zona horaria:»).
+Peek lee el servicio detrás de la app MojaPošta. Sitúa cada paso en el mapa con su oficina de correos, conserva el texto inglés de Pošta Slovenije con su línea de detalle y muestra la hora de entrega y la oficina donde espera el paquete (nunca una taquilla). Omite códigos postales, códigos de recogida y direcciones de puntos de recogida; Pošta Slovenije no facilita fecha estimada de entrega, peso, nombre del servicio ni justificante de entrega. Las horas en Eslovenia se leen en hora de Liubliana y las del extranjero en la hora de su país (en la de Liubliana si el país tiene varios husos horarios, como Estados Unidos, con posibles desfases de horas), convirtiéndolas después a tu zona horaria («Horas en tu zona horaria:»).
 
-Peek consulta hasta cada 10 minutos, y cada 2 minutos desde las 6:00 según el reloj del último escaneo (hora eslovena en Eslovenia) el día en que el paquete pasa a «En reparto» mientras mantienes el envío abierto en Peek o tienes las notificaciones activadas, siempre que responda el seguimiento de Pošta Slovenije. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora. En notificaciones puedes elegir «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Si pasan cuatro días sin escaneo en tránsito, fuera de aduanas o de una incidencia, Peek muestra «Sin novedades desde el …», el aviso «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Pošta Slovenije.» y «Pide ayuda a Pošta Slovenije». Peek sigue a más de 4500 transportistas, pero no puede contactar con Pošta Slovenije ni con el remitente por ti.
+Peek consulta hasta cada 10 minutos, y cada 2 minutos desde las 6:00 según el reloj del último escaneo (hora eslovena en Eslovenia) el día en que el paquete pasa a «En reparto» siempre que responda el seguimiento de Pošta Slovenije, mientras el envío esté abierto en Peek o el día de la entrega con las notificaciones activadas. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora; tras siete días sin novedades en «Etiqueta creada», cada 6 horas. En notificaciones puedes elegir «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si pasan cuatro días sin escaneos en un envío en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra «Sin novedades desde el …», el aviso «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Pošta Slovenije.» y «Pide ayuda a Pošta Slovenije». Peek sigue a más de 4500 transportistas, pero no puede contactar con Pošta Slovenije ni con el remitente por ti.
 
 ## Preguntas sobre el seguimiento de Pošta Slovenije
 
@@ -106,9 +105,9 @@ Sí, con su número postal: el rastreador muestra los envíos del extranjero en 
 `The item has been picked up` significa que se entregó en destino. Si no fuiste tú, pregunta en tu hogar o a personas autorizadas y consulta [entregado pero no recibido](guide:delivered-not-received).
 
 :::sources
-- [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – seguimiento en inglés, formato del número, ventana de dos meses, estados, contacto
+- [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – seguimiento en inglés, formato del número, estados, contacto
 - [Post of Slovenia: PS Paketomat](https://en.posta.si/home/postal-services-/receiving-mail/ps-paketomat) – código por SMS, 60 horas, 5 días en oficina, devolución
-- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 horas al día, más de 300 taquillas, contra reembolso
+- [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 horas al día, más de 450 taquillas, contra reembolso
 - [Pošta Slovenije: Splošni pogoji PS Paketomat](https://www.posta.si/zasebno-site/Documents/Splosni%20pogoji%20PS%20Paketomat.pdf) – vigente desde el 1 de abril de 2026: 60 horas en taquilla
 - [Post of Slovenia: My Delivery – My Choice](https://en.posta.si/home/postal-services-/receiving-mail/my-delivery-my-choice) – cambiar el punto de entrega
 - [Pošta Slovenije: Moja dostava, moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – enlace por app MojaPošta, Viber o SMS, requisito de teléfono móvil

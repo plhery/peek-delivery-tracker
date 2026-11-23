@@ -91,15 +91,15 @@ Strona główna LinHan, wyłącznie po chińsku, kończy się sekcją 联系我�
 
 ## Śledzenie paczki LinHan w Peek
 
-[Peek](/) rozpoznaje numer LinHan po samym kształcie (`LHGJ`, osiem cyfr i `CD`), unikalnym wśród ponad 4500 przewoźników w katalogu, i od razu pokazuje „Wykryty przewoźnik”. Można też wkleić link śledzenia LinHan z parametrem `nos=` i numerem.
+[Peek](/) rozpoznaje numer LinHan po samym kształcie (`LHGJ`, osiem cyfr i `CD`), którego nie używa żaden inny przewoźnik w katalogu, i od razu pokazuje „Wykryty przewoźnik”. Można też wkleić link śledzenia LinHan z parametrem `nos=` i numerem.
 
-Peek odczytuje stronę LinHan i pokazuje status, każdy skan z miastem (gdy podane), kraj docelowy oraz odbiorcę, który pokwitował doręczenie, jeśli linia doręczenia go zawiera. Wydziela miasto z treści opisu jako lokalizację i pomija kody pocztowe, dzięki czemu doręczenie wygląda jako `Delivered` z miastem. Zduplikowane wiersze wyświetlają się raz, a skany zachowują angielską pisownię LinHan, włącznie z `Internationaliy`. Peek czyta każdą godzinę według czasu pekińskiego (UTC+8), tak jak zapisuje ją tracker, i przelicza na twoją strefę czasową („Godziny w twojej strefie czasowej:”).
+Peek odczytuje stronę LinHan i pokazuje status, każdy skan z miastem (gdy podane) oraz kraj docelowy. Wydziela miasto z treści opisu jako lokalizację i pomija kody pocztowe, dzięki czemu wiersz `Delivered` wygląda jako „Dostarczona” z miastem. Zduplikowane wiersze wyświetlają się raz, a pozostałe skany zachowują angielską pisownię LinHan, włącznie z `Internationaliy`. Jeśli wiersz doręczenia LinHan podaje, kto pokwitował (`Delivered, signed by …`), nazwisko zostaje w tym angielskim wierszu i nie pojawia się nigdzie indziej; udostępniony link pokazuje ten wiersz bez niego. Peek czyta każdą godzinę według czasu pekińskiego (UTC+8), tak jak zapisuje ją tracker, i przelicza na twoją strefę czasową („Godziny w twojej strefie czasowej:”).
 
 Część wierszy klasyfikuje się inaczej, niż mogłaby sugerować treść: `Order information received` to „Zarejestrowana”; `Internationaliy Package received at processing center` i `Accepted at logistics carrier Regional Destination Facility` pozostają w „W transporcie”, bez nowego nadania; oba wpisy celne trafiają do „W urzędzie celnym”; `package is on the way` pozostaje w „W transporcie”, bo nie oznacza doręczenia dziś.
 
 LinHan nie podaje przewidywanego dnia doręczenia, wagi, nazwy usługi, lokalnego przewoźnika ani drugiego numeru, więc Peek ich nie wyświetla i śledzi numer `LHGJ` do końca bez przełączania na innego przewoźnika.
 
-Peek sprawdza status do co 10 minut, a w dniu przejścia paczki do etapu „W doręczeniu” co 2 minuty od 6:00 według zegara ostatniego skanu (czasu pekińskiego), gdy masz paczkę otwartą w Peek lub włączone powiadomienia i strona LinHan odpowiada. Po dwóch dniach bez zmian (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. W powiadomieniach możesz wybrać „Wszystkie aktualizacje”, „Tylko ważne” albo „Tylko w dniu dostawy”. Po czterech dniach bez skanu w transporcie, poza odprawą celną i zgłoszonym problemem, Peek pokazuje „Brak aktualizacji od …” i przypomina „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika LinHan International.” Peek nie skontaktuje się za ciebie z LinHan ani ze sprzedawcą.
+Peek sprawdza status do co 10 minut, gdy paczka jest otwarta w Peek albo w dniu dostawy z włączonymi powiadomieniami, o ile strona LinHan odpowiada. Po dwóch dniach bez zmian (po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez zmian przy statusie „Zarejestrowana” co 6 godzin. W powiadomieniach możesz wybrać „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Po czterech dniach bez skanu przy statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek pokazuje „Brak aktualizacji od …” i przypomina „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika LinHan International.” Peek nie skontaktuje się za ciebie z LinHan ani ze sprzedawcą.
 
 ## Pytania o śledzenie LinHan
 
@@ -121,7 +121,7 @@ Ponieważ śledzenie LinHan podaje każdą godzinę w czasie pekińskim (UTC+8),
 
 ### Z kim się skontaktować w sprawie zaginionej paczki LinHan?
 
-Ze sprzedawcą, u którego zamówiłeś — to on opłacił przewóz w LinHan. Strona główna LinHan podaje tylko adres e-mail i adres w Shenzhen, bez obsługi odbiorców.
+Ze sprzedawcą, u którego zamówiłeś — to on zamówił przewóz w LinHan. Strona główna LinHan podaje tylko adres e-mail i adres w Shenzhen, bez obsługi odbiorców.
 
 :::sources
 - [LinHan International: 深圳市林瀚国际物流有限公司 (strona główna)](https://www.linhan56.com/) – nazwa firmy, transgraniczny fracht lotniczy dla nadawców, łańcuch od odbioru po doręczenie za granicą, linki do śledzenia i 17TRACK, sekcja kontaktu

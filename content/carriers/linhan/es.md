@@ -61,7 +61,7 @@ Luego siguen los pasos en tu país, donde toman el relevo el agente de LinHan y 
 
 Muchas filas en tu país empiezan por la ciudad (en EE. UU., ciudad, estado y código ZIP), y la línea de entrega incluye también tu código postal: ciudad, código postal, Delivered. Una misma línea puede aparecer duplicada.
 
-**Horas en hora de Pekín.** El rastreador de LinHan registra cada hora en horario de Pekín (UTC+8), incluso en escaneos hechos en tu país. Como Pekín cambia de día a las 16:00 UTC, un escaneo entre esa hora y tu medianoche lleva la fecha del día siguiente: en España o Alemania desde las 17:00 en invierno y 18:00 en verano; en Nueva York desde las 11:00 en invierno y el mediodía en verano.
+**Horas en hora de Pekín.** El rastreador de LinHan registra cada hora en horario de Pekín (UTC+8), incluso en escaneos hechos en tu país. Como Pekín cambia de día a las 16:00 UTC, un escaneo entre esa hora y tu medianoche lleva la fecha del día siguiente: en la España peninsular o Alemania desde las 17:00 en invierno y 18:00 en verano; en Nueva York desde las 11:00 en invierno y el mediodía en verano.
 
 ## Quién entrega los paquetes de LinHan
 
@@ -91,15 +91,15 @@ La web de LinHan, solo en chino, termina con un bloque 联系我们 (Contacto) q
 
 ## Seguir un paquete de LinHan con Peek
 
-[Peek](/) reconoce un código de LinHan por su forma (`LHGJ`, ocho dígitos y `CD`), exclusiva entre los más de 4500 transportistas de su catálogo, y muestra al instante «Transportista detectado». También puedes pegar un enlace al rastreador de LinHan con `nos=` y el número.
+[Peek](/) reconoce un código de LinHan por su forma (`LHGJ`, ocho dígitos y `CD`), que ningún otro transportista de su catálogo usa, y muestra al instante «Transportista detectado». También puedes pegar un enlace al rastreador de LinHan con `nos=` y el número.
 
-Peek lee el rastreador de LinHan y muestra el estado, cada escaneo con su localidad cuando figura, el país de destino y el firmante si la línea de entrega lo incluye. Separa la ciudad del texto hacia la ubicación y elimina códigos postales, de modo que una entrega se lee `Delivered` en su localidad. Las filas duplicadas aparecen una sola vez y los textos conservan el inglés original de LinHan, incluido `Internationaliy`. Peek interpreta cada hora en horario de Pekín (UTC+8), como la escribe el rastreador, y la muestra en tu zona horaria («Horas en tu zona horaria:»).
+Peek lee el rastreador de LinHan y muestra el estado, cada escaneo con su localidad cuando figura y el país de destino. Separa la ciudad del texto hacia la ubicación y elimina códigos postales, de modo que una línea `Delivered` se lee «Entregado» en su localidad. Las filas duplicadas aparecen una sola vez y los demás textos conservan el inglés original de LinHan, incluido `Internationaliy`. Si la línea de entrega de LinHan nombra a quien firmó (`Delivered, signed by …`), el nombre se queda en esa línea en inglés y no aparece en ningún otro sitio; un enlace compartido muestra la línea sin él. Peek interpreta cada hora en horario de Pekín (UTC+8), como la escribe el rastreador, y la muestra en tu zona horaria («Horas en tu zona horaria:»).
 
 Algunas líneas clasifican distinto de lo que parecen: `Order information received` pasa a «Etiqueta creada»; `Internationaliy Package received at processing center` y `Accepted at logistics carrier Regional Destination Facility` siguen en «En tránsito», no como nueva admisión; las dos líneas aduaneras pasan a «En aduanas»; `package is on the way` sigue en «En tránsito» porque no indica reparto hoy.
 
 LinHan no facilita fecha estimada de entrega, peso, nombre del servicio, empresa final ni segundo código, así que Peek no muestra nada de eso y sigue el número `LHGJ` hasta el final sin cambiar de transportista.
 
-Peek consulta hasta cada 10 minutos, y cada 2 minutos desde las 6:00 según el reloj del último escaneo (hora de Pekín) el día en que el paquete entra «En reparto» mientras lo mantienes abierto en Peek o tienes las notificaciones activadas, siempre que responda el rastreador de LinHan. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora. En notificaciones puedes elegir «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Si pasan cuatro días sin escaneo en tránsito, fuera de aduanas o de una incidencia, Peek muestra «Sin novedades desde el …» y recuerda «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a LinHan International.» Peek no puede contactar con LinHan ni con el vendedor por ti.
+Peek consulta hasta cada 10 minutos mientras el paquete esté abierto en Peek, o el día de entrega con las notificaciones activadas, siempre que responda el rastreador de LinHan. Tras dos días sin novedades (12 horas mientras siga en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora, y tras siete días sin novedades en «Etiqueta creada», cada 6 horas. En notificaciones puedes elegir «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si pasan cuatro días sin escaneo en un envío en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra «Sin novedades desde el …» y recuerda «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a LinHan International.» Peek no puede contactar con LinHan ni con el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de LinHan
 

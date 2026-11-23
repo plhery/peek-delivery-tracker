@@ -48,7 +48,7 @@
   { "id": "dhl-ecommerce-uk", "catalog": "dhl-ecommerce-uk", "name": "DHL eCommerce UK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gofo-fr", "catalog": "gofo-fr", "name": "GOFO France", "languages": ["en", "fr", "es", "de", "it", "pt", "pl"] },
   { "id": "gofo-it", "catalog": "gofo-it", "name": "GOFO Italy", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
-  { "id": "speedpak", "catalog": "speedpak", "name": "SpeedPAK", "languages": ["en", "de", "fr", "it", "es", "pl"] },
+  { "id": "speedpak", "catalog": "speedpak", "name": "SpeedPAK", "languages": ["en", "de", "fr", "it", "es", "pl", "pt"] },
   { "id": "asendia", "catalog": "asendia", "name": "Asendia", "languages": ["en", "fr", "de", "it", "pt", "es", "pl"] },
   { "id": "colisweb", "catalog": "colisweb", "name": "Colisweb", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ciblex", "catalog": "ciblex", "name": "Ciblex", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

@@ -10108,6 +10108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedpak",
+      "catalog": "speedpak",
+      "slug": "seguimento-speedpak",
+      "title": "Seguimento SpeedPAK: encomendas eBay, estados e contacto",
+      "name": "SpeedPAK",
+      "color": "#ee7532"
+    },
+    {
       "id": "asendia",
       "catalog": "asendia",
       "slug": "asendia-rastreio",

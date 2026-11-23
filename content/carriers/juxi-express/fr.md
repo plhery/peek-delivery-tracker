@@ -81,7 +81,7 @@ Si le suivi nomme [bpost](carrier:bpost) ou [La Poste](carrier:la-poste), ou don
 
 ## Juxi Express contact : téléphone et adresse
 
-Relevé le 23 octobre 2026 sur juxiex.com, en chinois uniquement :
+Sur juxiex.com, en chinois uniquement :
 
 - **Téléphone :** 021-60739366, une ligne fixe de Shanghai (+86 21 6073 9366 depuis l'étranger). Aucun horaire publié.
 - **Adresse :** bureau 605, bâtiment B, 1777 Hualong Road, district de Qingpu, Shanghai.
@@ -107,7 +107,7 @@ Un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en 
 
 ### Où suivre un colis Juxi Express ?
 
-Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI, ZO, US ou ZI après JXC : pour ceux-là, Peek interroge d'abord DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
+Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI, ZO, US ou ZI après JXC : pour ceux-là, Peek n'interroge que DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
 
 ### Qui livre les colis Juxi Express en Belgique et en France ?
 
@@ -134,5 +134,5 @@ Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits post
 - [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – TVA dès le premier euro, taux normal de 20 %, IOSS, frais de dossier du transporteur
 - [Douane : IMPORT-EXPORT : quels changements sont à attendre dans les prochaines semaines ?](https://www.douane.gouv.fr/actualites/import-export-quels-changements-sont-attendre-dans-les-prochaines-semaines) – taxe « petits colis » remplacée par le droit forfaitaire de 3 € le 1er juillet 2026
 - [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € par article depuis le 1er novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, SHJX, le nom de Juxi chez 17TRACK, DHLink interrogé en premier pour les numéros JXCYI, JXCZO, JXCUS et JXCZI, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, SHJX, le nom de Juxi chez 17TRACK, seul DHLink interrogé pour les numéros JXCYI, JXCZO, JXCUS et JXCZI, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
 :::

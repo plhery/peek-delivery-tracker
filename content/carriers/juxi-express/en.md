@@ -62,11 +62,11 @@ Juxi also resells DHL, UPS, FedEx and TNT. It publishes no rules for delivery at
 
 **Held parcels.** If Juxi can reach neither the recipient nor the sender by phone, its terms say it posts a notice on its website and may dispose of the parcel when nobody answers within 7 days.
 
-**Customs.** On its DDP lines to the UK and Europe, Juxi collects the VAT from the seller in advance, but where Royal Mail delivers and VAT or duty is still due, the recipient may have to pay it. On the global tracked small packet, only the recipient can pay duty and VAT. On the Canada line, Juxi bills the sender for duty above 20 CAD, and for US parcels it takes a duty deposit from the sender. In the UK, Royal Mail or the courier sends you a bill for anything still due and normally holds the parcel about 3 weeks; unpaid by then, it goes back to the sender. In the EU, where Juxi's German line, most of its train line's destinations and its postal products deliver, online orders from outside the EU pay a temporary €3 customs duty per item type on parcels worth up to €150 (since 1 July 2026) and the EU's €2 handling fee per item type, whatever the value (since 1 November 2026). Juxi doesn't say whether the seller paid them for your order; if not, the post or courier that clears the parcel can ask you for them before delivery. See [parcels held at customs](guide:customs).
+**Customs.** On its DDP lines to the UK and Europe, Juxi collects the VAT from the seller in advance, but where Royal Mail delivers and VAT or duty is still due, the recipient may have to pay it. On the global tracked small packet, only the recipient can pay duty and VAT. On the Canada line, Juxi bills the sender the duty, plus a 10% fee, on parcels declared above 20 CAD, and for US parcels it takes a duty deposit from the sender. In the UK, Royal Mail or the courier sends you a bill for anything still due and normally holds the parcel about 3 weeks; unpaid by then, it goes back to the sender. In the EU, where Juxi's German line, most of its train line's destinations and its postal products deliver, online orders from outside the EU pay a temporary €3 customs duty per item type on parcels worth up to €150 (since 1 July 2026) and the EU's €2 handling fee per item type, whatever the value (since 1 November 2026). Juxi doesn't say whether the seller paid them for your order; if not, the post or courier that clears the parcel can ask you for them before delivery. See [parcels held at customs](guide:customs).
 
 ## Juxi Express contact number and customer service
 
-As read on 21 October 2026, juxiex.com, in Chinese only, lists:
+juxiex.com, in Chinese only, lists:
 
 - **Phone**: 021-60739366, a Shanghai landline (+86 21 6073 9366 from abroad). No hours are published.
 - **Address**: Room 605, Building B, 1777 Hualong Road, Qingpu District, Shanghai. Its about page also lists offices in Guangzhou, Quanzhou and Yiwu, and a second one in Shanghai.
@@ -92,7 +92,7 @@ A Shanghai forwarder, Shanghai Juxi International Freight Forwarding Co., Ltd., 
 
 ### Where can I track a Juxi Express parcel?
 
-In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI, ZO, US or ZI after JXC: it asks DHLink first about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
+In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI, ZO, US or ZI after JXC: it asks only DHLink about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
 
 ### Who delivers Juxi Express parcels?
 
@@ -106,7 +106,7 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [Juxi Express: 上海驹隙国际物流有限公司 (home page)](https://www.juxiex.com/) – company and English name, start in 2016, lines, untracked economy small packet, tracking button with no working link, hotline, address
 - [Juxi Express: 关于我们 (about)](https://www.juxiex.com/about.php) – own lines, express and postal services, UK line (Pudong to Heathrow, 5 to 8 days), Canada line (Vancouver, Toronto), postal delivery by each country's post, pickup and offices, landline
 - [Juxi Express: 托运条款 (consignment terms)](https://www.juxiex.com/server.php) – claims by the shipper within 30 days, held parcels and website notice
-- [Juxi Express: JX英德小包 (small parcel to the UK and Germany)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Germany, up to 5 kg and €22 declared for Germany, UK areas not served, undeliverable parcels, 17TRACK for tracking (read 17 November 2026)
+- [Juxi Express: JX英德小包 (small parcel to the UK and Germany)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Germany, up to 5 kg and €22 declared for Germany, UK areas not served, undeliverable parcels, 17TRACK for tracking
 - [Juxi Express: JX特惠专线 (dedicated line)](https://www.juxiex.com/product_show.php?id=71) – DDP and VAT, Royal Mail last mile, trace and claim windows (30 and 60 days from shipping, investigations up to 30 days), compensation limits
 - [Juxi Express: JX美国经济专线 (US economy line)](https://www.juxiex.com/product_show.php?id=74) – mainland US only, 17TRACK for tracking
 - [Juxi Express: JX加拿大专线-普货 (Canada line)](https://www.juxiex.com/product_show.php?id=76) – 8 to 12 working days, Canada Post, duty above 20 CAD, return fee
@@ -119,5 +119,5 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill from Royal Mail or the courier, parcel held about 3 weeks, then returned
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 customs duty per kind of product up to €150 from 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per kind of product like the €3, at any value, collected by customs from the declarant, which can charge it to the buyer at sale
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, SHJX as 17TRACK lists Juxi, DHLink asked first for JXCYI, JXCZO, JXCUS and JXCZI numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, SHJX as 17TRACK lists Juxi, only DHLink asked for JXCYI, JXCZO, JXCUS and JXCZI numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
 :::

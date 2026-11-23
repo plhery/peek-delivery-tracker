@@ -71,7 +71,7 @@ Mehr in [Paket beim Zoll](guide:customs).
 
 ## Juxi Express Kontakt und Kundenservice
 
-Auf juxiex.com, nur auf Chinesisch, stehen (Stand 3. November 2026):
+Auf juxiex.com, nur auf Chinesisch, stehen:
 
 - **Telefon:** 021-60739366, ein Festnetzanschluss in Shanghai (aus dem Ausland +86 21 6073 9366). Servicezeiten nennt Juxi nicht.
 - **Adresse:** Raum 605, 6. Stock, Gebäude B, Hualong Road 1777, Bezirk Qingpu, Shanghai. Laut seiner Seite 关于我们 (Über uns) hat Juxi außerdem Büros in Guangzhou, Quanzhou und Yiwu und ein zweites in Shanghai.
@@ -97,7 +97,7 @@ Ein Spediteur aus Shanghai, der Pakete von Verkäufern in China ins Ausland brin
 
 ### Wo kann ich ein Juxi-Express-Paket verfolgen?
 
-Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-Nummer erkennt Peek als Juxi-Nummer; nur bei YI, ZO, US oder ZI nach JXC fragt Peek zuerst DHLink, dessen Sendungsverfolgung manche dieser Nummern kennt. Willst du ein solches Paket als Juxi-Paket verfolgen, tipp beim Hinzufügen auf „Ändern“ und wähl Juxi Express. Für seine Kleinpaketlinie nach Großbritannien und Deutschland verweist Juxi auf den Tracking-Dienst 17TRACK, der Juxi unter SHJX führt. Übernimmt DHL oder die Post deines Landes, kannst du das Paket auch dort mit deren Nummer verfolgen.
+Oben im Feld, denn eine eigene Sendungsverfolgung hat Juxi nicht mehr. Eine JXC-Nummer erkennt Peek als Juxi-Nummer; nur bei YI, ZO, US oder ZI nach JXC fragt Peek nur DHLink, dessen Sendungsverfolgung manche dieser Nummern kennt. Willst du ein solches Paket als Juxi-Paket verfolgen, tipp beim Hinzufügen auf „Ändern“ und wähl Juxi Express. Für seine Kleinpaketlinie nach Großbritannien und Deutschland verweist Juxi auf den Tracking-Dienst 17TRACK, der Juxi unter SHJX führt. Übernimmt DHL oder die Post deines Landes, kannst du das Paket auch dort mit deren Nummer verfolgen.
 
 ### Wer stellt Juxi-Express-Pakete in Deutschland, Österreich und der Schweiz zu?
 
@@ -115,7 +115,7 @@ Das hängt von der Linie ab. Auf Juxis DDP-Linien kassiert Juxi die Mehrwertsteu
 - [Juxi Express: 上海驹隙国际物流有限公司 (Startseite)](https://www.juxiex.com/) – Firma und englischer Name, seit 2016, gegründet 2019, nicht verfolgbares China-Post-Kleinpaket, Tracking-Button ohne Funktion, Hotline, Adresse
 - [Juxi Express: 关于我们 (Über uns)](https://www.juxiex.com/about.php) – eigene Linien, Express- und Postdienste, Postsendungen verzollt und zugestellt von der Post des Ziellands, Büros, Festnetznummer
 - [Juxi Express: 托运条款 (Beförderungsbedingungen)](https://www.juxiex.com/server.php) – Versender trägt die Zölle, Ansprüche des Versenders binnen 30 Tagen, liegen gebliebene Pakete und Hinweis auf der Website
-- [Juxi Express: JX英德小包 (Kleinpaket nach Großbritannien und Deutschland)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Deutschland, keine Postfächer, bis 5 kg und Warenwert bis 22 € nach Deutschland, unzustellbare Pakete, Entschädigung, 17TRACK als Tracking-Seite (gelesen am 17. November 2026)
+- [Juxi Express: JX英德小包 (Kleinpaket nach Großbritannien und Deutschland)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Deutschland, keine Postfächer, bis 5 kg und Warenwert bis 22 € nach Deutschland, unzustellbare Pakete, Entschädigung, 17TRACK als Tracking-Seite
 - [Juxi Express: DDP-Linie (Produktseite)](https://www.juxiex.com/product_show.php?id=71) – DDP, Mehrwertsteuer vorab beim Verkäufer, Zoll über 150 €, Etappen, Fristen für Nachforschungen, höchstens 100 Yuan
 - [Juxi Express: 中欧班列专线陆运小包 (Kleinpaket per China-Europa-Zug)](https://www.juxiex.com/product_show.php?id=69) – etwa 18 bis 28 Tage, Ziele mit Deutschland, Österreich und der Schweiz
 - [Juxi Express: JX全球可追踪小包 (weltweit verfolgbares Kleinpaket)](https://www.juxiex.com/product_show.php?id=70) – PostNL, 10 bis 30 Arbeitstage, Zoll und Mehrwertsteuer zahlt der Empfänger, höchstens 1 Yuan
@@ -123,5 +123,5 @@ Das hängt von der Linie ab. Auf Juxis DDP-Linien kassiert Juxi die Mehrwertsteu
 - [Europäische Kommission: EU customs reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenkategorie bis 150 € seit 1. Juli 2026, 2 € Union handling fee seit 1. November 2026
 - [Europäische Kommission: Customs Guidance on EUR 3 customs duty (Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – je Warenkategorie, befristeter Zoll, Bearbeitungsgebühr unabhängig vom Wert
 - [BAZG: Interneteinkauf, Post- und Kuriersendungen: Allgemeine Informationen zur Einfuhr in die Schweiz](https://www.bazg.admin.ch/de/interneteinkauf-postsendungen-informationen-einfuhr) – Zoll und Mehrwertsteuer grundsätzlich fällig, Kosten in der Regel beim Empfänger, beim Transporteur nachfragen
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC-Nummernform, DHLink bei JXCYI-, JXCZO-, JXCUS- und JXCZI-Nummern zuerst gefragt, SHJX und 驹隙 als Namen von Juxi, keine Juxi-Sendungsverfolgung mehr, wie Peek Juxi-Pakete über Tracking-Dienste verfolgt und an den Zusteller übergibt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC-Nummernform, bei JXCYI-, JXCZO-, JXCUS- und JXCZI-Nummern nur DHLink gefragt, SHJX und 驹隙 als Namen von Juxi, keine Juxi-Sendungsverfolgung mehr, wie Peek Juxi-Pakete über Tracking-Dienste verfolgt und an den Zusteller übergibt
 :::

@@ -15,7 +15,7 @@ Die Nummer steht in der Versandmail des Shops oder auf deiner Bestellseite. Eine
 | Format (erfunden) | Was es ist |
 | --- | --- |
 | `6234829173643` | 13 Ziffern beginnend mit `6`: ein polnisches Inlandspaket von FedEx Polen. |
-| `784291736482` | 12 Ziffern: eine Nummer für die weltweite FedEx-Sendungsverfolgung, nicht FedEx Polen. Siehe [FedEx](carrier:fedex). |
+| `784291736480` | 12 Ziffern: eine Nummer für die weltweite FedEx-Sendungsverfolgung, nicht FedEx Polen. Siehe [FedEx](carrier:fedex). |
 
 Keine Nummer? Frag beim Shop nach. Mehr unter [wo du deine Sendungsnummer findest](guide:find-tracking-number).
 
@@ -62,7 +62,7 @@ Ein Link von FedEx’ Inlands-Trackingseite (`fds2tracking.emea.fedex.com` oder 
 
 Peek liest das polnische Inlands-Tracking von FedEx direkt aus. Es zeigt den Status, jeden Scan im polnischen Wortlaut mit Niederlassung und genauer Uhrzeit (umgerechnet in deine Zeitzone, mit „Uhrzeiten in deiner Zeitzone:“ und ihrem Namen), das Zustellzeitfenster am Liefertag, die Zustellzeit und das Gewicht. Weggelassen werden Stückzahl, Abgangs- und Zielniederlassung, Versanddatum, Rücksendenummer und Zustellnachweis; Absender, Namen oder Adressen zeigt FedEx dort ohnehin nicht.
 
-Solange das Paket in Peek geöffnet ist — oder am Liefertag bei aktiven Benachrichtigungen — prüft Peek direkt bei FedEx Polen bis zu alle 10 Minuten, und ab 6:00 Uhr polnischer Zeit am Tag, an dem FedEx „In Zustellung“ meldet (bei genanntem Zeitfenster ab 30 Minuten vor dessen Beginn), bis zu alle 2 Minuten, solange FedEx’ Tracking antwortet; sonst sowie nach zwei ruhigen Tagen (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) stündlich. Für Benachrichtigungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei FedEx Poland nach.“ und dem Link „Hol dir Hilfe bei FedEx Poland“ zum Kundenservice. Peek kann Zustellungen nicht ändern und nicht für dich reklamieren — das läuft über FedEx oder den Absender.
+Solange das Paket in Peek geöffnet ist — oder am Liefertag bei aktiven Benachrichtigungen — prüft Peek direkt bei FedEx Polen bis zu alle 10 Minuten, und ab 6:00 Uhr polnischer Zeit am Tag, an dem FedEx „In Zustellung“ meldet (bei genanntem Zeitfenster ab 30 Minuten vor dessen Beginn), bis zu alle 2 Minuten, solange FedEx’ Tracking antwortet; sonst sowie nach zwei ruhigen Tagen (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Für Benachrichtigungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan bei einem Paket auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei FedEx Poland nach.“ und dem Link „Hol dir Hilfe bei FedEx Poland“ zum Kundenservice. Peek kann Zustellungen nicht ändern und nicht für dich reklamieren — das läuft über FedEx oder den Absender.
 
 ## Häufige Fragen zu FedEx Polen
 
@@ -76,7 +76,7 @@ Die Seite meldet unbekannte Nummern als nicht erkannt — prüfe alle 13 Ziffern
 
 ### Ist eine SMS echt, die eine Zahlung für ein FedEx-Paket verlangt?
 
-Möglicherweise handelt es sich um Betrug. CERT Polska (CSIRT NASK) warnt vor SMS im Namen von Paketdiensten: Sie behaupten ein Zustellproblem und verlinken auf eine gefälschte Seite, die für eine Neuzustellung eine Zuzahlung verlangt, um Kartendaten zu stehlen. Nutze den Link nicht: Gib die Nummer selbst oben ein und kontaktiere FedEx im Zweifel nur über Telefonnummern oder E-Mail-Adressen der offiziellen Website, nicht aus der SMS. Leite die ganze SMS kostenlos an `8080` weiter. Hast du bereits Kartendaten eingegeben, wende dich sofort an deine Bank. Siehe [Betrugs-SMS zu Paketen](guide:delivery-scam-texts).
+Möglicherweise handelt es sich um Betrug. CERT Polska (CSIRT NASK) warnt vor SMS im Namen von Paketdiensten: Sie behaupten ein Zustellproblem und verlinken auf eine gefälschte Seite, die für eine Neuzustellung eine Zuzahlung verlangt, um Kartendaten zu stehlen. Nutze den Link nicht: Gib die Nummer selbst oben ein und kontaktiere FedEx im Zweifel nur über Telefonnummern oder E-Mail-Adressen der offiziellen Website, nicht aus der SMS. Leite die ganze SMS an `8080` weiter (aus Polen kostenlos, aus dem Ausland zum Tarif deines Anbieters). Hast du bereits Kartendaten eingegeben, wende dich sofort an deine Bank. Siehe [Betrugs-SMS zu Paketen](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-stellige Nummern und Prüfziffer, Inlands-Tracker und Antworten, Status, Zustellnachweis, was Peek anzeigt

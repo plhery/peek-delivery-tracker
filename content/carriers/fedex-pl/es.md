@@ -15,7 +15,7 @@ El número aparece en el correo de envío de la tienda o en tu página de pedido
 | Formato (inventado) | Qué es |
 | --- | --- |
 | `6234829173643` | 13 cifras empezando por `6`: un envío nacional de FedEx Polonia. |
-| `784291736482` | 12 cifras: número para el rastreador mundial de FedEx, no de FedEx Polonia. Ver la página de [FedEx](carrier:fedex). |
+| `784291736480` | 12 cifras: número para el rastreador mundial de FedEx, no de FedEx Polonia. Ver la página de [FedEx](carrier:fedex). |
 
 ¿Sin número? Pregunta a la tienda. Más en [dónde encontrar tu número de seguimiento](guide:find-tracking-number).
 
@@ -62,7 +62,7 @@ Un enlace de la página nacional de FedEx (`fds2tracking.emea.fedex.com` o `fede
 
 Peek consulta directamente el servicio nacional de FedEx. Muestra el estado, cada escaneo en polaco con su delegación y hora exacta (convertida a tu zona horaria, con «Horas en tu zona horaria:» seguido de su nombre), la franja horaria del mensajero el día de entrega, la hora de entrega y el peso. Omite el número de bultos, las delegaciones de origen y destino, la fecha de expedición, el número de devolución y el comprobante de entrega; FedEx tampoco muestra ahí remitente, nombre ni dirección.
 
-Mientras tengas el paquete abierto en Peek —o el día de entrega con notificaciones activadas— Peek consulta directamente a FedEx Polonia hasta cada 10 minutos, y hasta cada 2 minutos desde las 6:00 hora de Polonia el día en que FedEx registra «En reparto» (o desde 30 minutos antes de abrirse la franja si FedEx indica una), mientras su rastreador responda; fuera de ese caso y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora. Para notificaciones, elige «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras cuatro días sin escaneos en tránsito, fuera de aduanas o incidencias, Peek muestra la fecha del último escaneo («Sin novedades desde el …») y avisa «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a FedEx Poland.», con el enlace «Pide ayuda a FedEx Poland» a su soporte. Peek no puede cambiar una entrega ni reclamar por ti: eso se gestiona con FedEx o el remitente.
+Mientras tengas el paquete abierto en Peek —o el día de entrega con notificaciones activadas— Peek consulta directamente a FedEx Polonia hasta cada 10 minutos, y hasta cada 2 minutos desde las 6:00 hora de Polonia el día en que FedEx registra «En reparto» (o desde 30 minutos antes de abrirse la franja si FedEx indica una), mientras su rastreador responda; fuera de ese caso y tras dos días sin novedades (12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), comprueba cada hora; tras siete días sin novedades en «Etiqueta creada», cada 6 horas. Para notificaciones, elige «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras cuatro días sin escaneos en un paquete en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek muestra la fecha del último escaneo («Sin novedades desde el …») y avisa «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a FedEx Poland.», con el enlace «Pide ayuda a FedEx Poland» a su soporte. Peek no puede cambiar una entrega ni reclamar por ti: eso se gestiona con FedEx o el remitente.
 
 ## Preguntas frecuentes sobre FedEx Polonia
 
@@ -76,7 +76,7 @@ La página indica como no reconocido cualquier número que desconozca: revisa la
 
 ### ¿Es real un SMS que me pide pagar por una entrega de FedEx?
 
-Puede ser una estafa. CERT Polska (CSIRT NASK) advierte de SMS que suplantan a mensajerías: alegan un problema de entrega y enlazan a una web falsa que pide un pago extra por volver a entregar para robar datos de tarjeta. No uses el enlace: escribe el número arriba tú mismo y, si dudas, contacta con FedEx mediante un teléfono o correo de su web oficial, nunca desde el SMS. Reenvía el SMS completo gratis al `8080`. Si ya introdujiste tu tarjeta en una web falsa, llama de inmediato a tu banco. Ver [estafas por SMS de entregas](guide:delivery-scam-texts).
+Puede ser una estafa. CERT Polska (CSIRT NASK) advierte de SMS que suplantan a mensajerías: alegan un problema de entrega y enlazan a una web falsa que pide un pago extra por volver a entregar para robar datos de tarjeta. No uses el enlace: escribe el número arriba tú mismo y, si dudas, contacta con FedEx mediante un teléfono o correo de su web oficial, nunca desde el SMS. Reenvía el SMS completo al `8080` (gratis desde Polonia; desde el extranjero, según la tarifa de tu operador). Si ya introdujiste tu tarjeta en una web falsa, llama de inmediato a tu banco. Ver [estafas por SMS de entregas](guide:delivery-scam-texts).
 
 :::sources
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – números de 13 cifras y dígito de control, rastreador nacional y respuestas, estados, prueba de entrega, qué muestra Peek

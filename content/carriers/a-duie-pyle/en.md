@@ -30,19 +30,19 @@ A. Duie Pyle's shipment-status history reports concise English terminal and deli
 | `OUT FOR DELIVERY` | Loaded onto the local delivery truck from the destination service center today. | "Out for delivery" |
 | `DELIVERED` | Delivered and signed for at the consignee's address. | "Delivered" |
 
-Note that A. Duie Pyle's history also lists non-movement window rows (`PICKUP WINDOW`, `ETA WINDOW`, `DELIVERY APPOINTMENT WINDOW`) — Peek reads `ETA WINDOW` (or `DELIVERY APPOINTMENT WINDOW`) as your expected delivery estimate rather than cluttering your scan list — and post-delivery billing status `INVOICED` is ignored once delivery is complete.
+Note that A. Duie Pyle's history also lists rows that aren't movements (`PICKUP WINDOW`, `ETA WINDOW`, `DELIVERY APPOINTMENT WINDOW`): Peek leaves them out of the scan list and reads `ETA WINDOW`, else `DELIVERY APPOINTMENT WINDOW`, as your expected delivery. `INVOICED`, the billing after the delivery, moves nothing.
 
 ## Northeast LTL transit times, appointments and interline partners
 
 According to [A. Duie Pyle LTL Solutions](https://aduiepyle.com/solutions/ltl-solutions/) and [aduiepyle.com](https://aduiepyle.com/):
 
-- **Next-day Northeast transit:** A. Duie Pyle measures transit in hours across its 36 Northeast cross-dock terminals, publishing **98.6% next-day delivery** with an average pickup-to-delivery time of **20 hours** on direct Northeast lanes.
-- **Delivery appointments & residential freight:** large palletized or residential LTL deliveries (such as appliances, furniture or equipment) typically require a confirmed `DELIVERY APPOINTMENT WINDOW` with the consignee before the truck goes `OUT FOR DELIVERY`. Ensure the shipper included a reachable daytime phone number.
-- **Interline delivery partners outside the Northeast:** for shipments destined outside Pyle's direct Northeast footprint, A. Duie Pyle hands freight off to regional LTL partners — including Dayton Freight (`DAFG`), Southeastern Freight Lines (`SEFL`) and Oak Harbor (`OAKH`) — and publishes the partner's SCAC code and onward PRO number.
+- **Next-day Northeast transit:** A. Duie Pyle measures transit time by the hour instead of by the day, with **98.6%** of deliveries arriving the next day and an average of **20 hours** from pickup to delivery.
+- **Residential freight and liftgates:** Pyle delivers residential freight, and over 85% of its delivery fleet has a liftgate. Its tracker can list a `DELIVERY APPOINTMENT WINDOW` row with the appointment's window.
+- **Beyond the Northeast:** Pyle ships to the rest of the U.S. and Canada through its partners. When it hands a shipment to Dayton Freight (`DAFG`), Southeastern Freight Lines (`SEFL`) or Oak Harbor Freight Lines (`OAKH`), its tracker names the partner by its SCAC and gives the partner's PRO number.
 
 ## A. Duie Pyle shipment delayed, damaged or missing
 
-- **Freight sitting at the destination terminal:** if tracking shows `ARRIVED AT TERMINAL` at your local service center without going `OUT FOR DELIVERY`, the terminal may be waiting to schedule a delivery appointment or liftgate truck. Call Customer Service on `800-523-5020` with your 8- or 9-digit PRO number to confirm the delivery window. See [why tracking stops updating](guide:tracking-not-updating).
+- **Freight sitting at the destination terminal:** if tracking shows `ARRIVED AT TERMINAL` at your local service center without going `OUT FOR DELIVERY`, call Customer Service on `800-523-5020` with your 8- or 9-digit PRO number to ask when it will be delivered. See [why tracking stops updating](guide:tracking-not-updating).
 - **Freight damage, shortage or claims:** always inspect palletized freight **before** signing the delivery receipt and note any visible wrap tears, crushed cartons or missing pieces directly on the driver's paperwork, then notify the shipper and use A. Duie Pyle's claims portal or customer service desk. See [damaged parcel](guide:damaged-parcel), [lost parcel](guide:lost-parcel), [delivered but not received](guide:delivered-not-received) and [returned to sender](guide:returned-to-sender).
 
 ## A. Duie Pyle customer service and West Chester headquarters
@@ -50,7 +50,7 @@ According to [A. Duie Pyle LTL Solutions](https://aduiepyle.com/solutions/ltl-so
 Official contacts published on [A. Duie Pyle Contact](https://aduiepyle.com/contact/):
 
 - **Customer Service & Corporate toll-free:** `800-523-5020` (local `610-696-5800`; Customer Service fax `610-350-0406`).
-- **Online contact form & 36 service centers directory:** [aduiepyle.com/contact/](https://aduiepyle.com/contact/).
+- **Online contact form and service center list:** [aduiepyle.com/contact/](https://aduiepyle.com/contact/).
 - **Public shipment status tracker:** [aduiepyle.com/resources/shipment-status/](https://aduiepyle.com/resources/shipment-status/).
 - **Corporate headquarters:** *A. Duie Pyle, Inc.*, 650 Westtown Road, P.O. Box 564, West Chester, PA 19381-0564, United States.
 
@@ -58,11 +58,13 @@ Official contacts published on [A. Duie Pyle Contact](https://aduiepyle.com/cont
 
 ## Track an A. Duie Pyle shipment with Peek
 
-Paste an `aduiepyle.com/resources/shipment-status/?tracking=` link into [Peek](/) and Peek recognises A. Duie Pyle automatically. Because bare 8- or 9-digit PRO numbers (`748291736` or `48291736`, invented) overlap with other carriers and A. Duie Pyle has no exclusive prefix, enter your PRO number and tap "Change" while adding or "Change carrier" on the parcel screen to select **A. Duie Pyle** (searching "Pyle" or "A Duie Pyle" finds it too); Peek verifies the PRO directly with A. Duie Pyle and shows `"A. Duie Pyle has this parcel."` once confirmed.
+Paste an `aduiepyle.com/resources/shipment-status/?tracking=` link into [Peek](/) and Peek recognises A. Duie Pyle. Peek never asks A. Duie Pyle from a bare PRO number (`748291736` or `48291736`, invented), as 8 and 9 digits fit other carriers: for 9 digits it asks [TNT](carrier:tnt), [TForce Freight](carrier:tforce-freight) and XPO instead. Enter your PRO number and tap "Change" while adding or "Change carrier" on the parcel screen to pick **A. Duie Pyle** (searching "Pyle" or "A Duie Pyle" finds it too); Peek then checks the PRO with A. Duie Pyle and shows "A. Duie Pyle has this parcel." once confirmed.
 
-Peek queries A. Duie Pyle's shipment-status API directly and displays the mapped stage ("Received by carrier", "In transit", "Out for delivery", "Delivered"), English scan descriptions, city/state terminal locations, estimated delivery date and time window (`ETA WINDOW` or `DELIVERY APPOINTMENT WINDOW`), exact delivery timestamp on delivery, shipment weight converted from pounds to kilograms, consignee name and address, interline partner handoffs (Dayton Freight, Southeastern Freight Lines and Oak Harbor) with the partner's PRO number when assigned, and timezone-validated US state timestamps (keeping local wall-clock time for midnight date-only rows or multi-zone/Canadian locations). Peek omits shipper details, BOL/PO references, piece counts, remarks, signatures and proof-of-delivery documents.
+Peek reads A. Duie Pyle's shipment status and shows the stage ("Received by carrier", "In transit", "Out for delivery", "Delivered"), the English scan wording, the terminal's town and state, the estimated delivery day or window (`ETA WINDOW`, else `DELIVERY APPOINTMENT WINDOW`), the delivery time and the weight, converted from pounds to kilograms. Pyle states an offset with its clocks; Peek keeps it where it is the one the place's state keeps, and otherwise dates the scan on its place's time zone (Toronto's for a scan in Ontario, Mountain time for El Paso in Texas), a scan without a place on the zone of the scan beside it, and shows them all on your device's clock; a row at midnight keeps its day without a time. When Pyle hands the shipment to Dayton Freight, Southeastern Freight Lines or Oak Harbor Freight Lines with that carrier's PRO, Peek checks that it has the parcel: the parcel then shows "Delivery with" and the carrier's name, and lists both numbers. The consignee's name and address stay private, and Peek leaves out the shipper, the bill of lading and purchase order, piece counts, remarks, signatures and proof-of-delivery documents.
 
-Peek checks up to every 10 minutes while you have the parcel open or on delivery day with alerts on, and up to every 2 minutes from 6:00 a.m. local time on the day an out-for-delivery scan arrives. Otherwise it checks hourly, stays hourly while open after 12 hours at "Label created" or "Received by carrier" or 2 days without a new scan, and drops to every 6 hours after 7 days still at "Label created". When tracking services fill in as a fallback, they check hourly, every 3 hours after a day without change, and up to every 15 minutes on delivery day. After 4 days in transit with no new scan, Peek flags the pause (for example "No tracking update since Mon, Oct 12"), shows "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking A. Duie Pyle." and displays "Get help from A. Duie Pyle", which opens A. Duie Pyle's contact page. After more than three weeks without an update, Peek shows "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking A. Duie Pyle."
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes; on the day A. Duie Pyle shows `OUT FOR DELIVERY`, every 2 minutes from 6 a.m. on the newest scan's clock, while A. Duie Pyle's tracker answers. Otherwise Peek checks hourly. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly however you follow it, and every 6 hours after seven days at "Label created". When A. Duie Pyle's tracker doesn't answer and Peek follows the parcel through tracking services alone, it checks hourly, every 3 hours after a quiet day, and up to every 15 minutes on the out-for-delivery day.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking A. Duie Pyle.", with a "Get help from A. Duie Pyle" link to A. Duie Pyle's contact page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking A. Duie Pyle."
 
 You can pick alert presets for "Every scan", "Important steps" or "Delivery only". Peek monitors tracking updates only and cannot schedule freight appointments, request liftgate delivery or contact A. Duie Pyle for you.
 
@@ -78,7 +80,7 @@ A. Duie Pyle PRO numbers are 8 or 9 numeric digits with no letters (for example 
 
 ### Why is my A. Duie Pyle freight waiting at the destination terminal?
 
-Residential or commercial LTL freight often holds at the local service center until a delivery appointment window is scheduled with the consignee. Call `800-523-5020` with your PRO number to confirm your appointment.
+Pyle's tracker doesn't say why freight waits at a terminal. Call `800-523-5020` with your PRO number to ask when it will be delivered.
 
 ### How do I contact A. Duie Pyle customer service?
 

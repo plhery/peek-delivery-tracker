@@ -3700,6 +3700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "m-one-sendungsverfolgung",
+      "title": "M-ONE Sendungsverfolgung (Milšped ONE): Status & Hilfe",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "early-bird-sendungsverfolgung",
@@ -5510,6 +5518,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "suivi-m-one",
+      "title": "Suivi M-ONE (Milšped ONE)\u00a0: statuts, livraison et aide",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "suivi-early-bird",
@@ -7280,6 +7296,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "tracciamento-m-one",
+      "title": "Tracciamento M-ONE (Milšped ONE): stati, consegna e aiuto",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "tracking-early-bird",
@@ -9034,6 +9058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "seguimiento-m-one",
+      "title": "Seguimiento M-ONE (Milšped ONE): estados, entrega y ayuda",
+      "name": "M-ONE",
+      "color": "#024da0"
+    },
+    {
       "id": "early-bird",
       "catalog": "early-bird",
       "slug": "seguimiento-early-bird",
@@ -10770,6 +10802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio J&T Express UK: números JTUK e estados",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "seguimento-m-one",
+      "title": "Seguimento M-ONE (Milšped ONE): estados, entrega e ajuda",
+      "name": "M-ONE",
+      "color": "#024da0"
     },
     {
       "id": "early-bird",
@@ -12558,6 +12598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express UK: numery JTUK i statusy",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "sledzenie-m-one",
+      "title": "Śledzenie M-ONE (Milšped ONE): statusy, dostawa i pomoc",
+      "name": "M-ONE",
+      "color": "#024da0"
     },
     {
       "id": "early-bird",

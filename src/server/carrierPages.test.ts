@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubPeekEnv } from '../test/peekEnv';
 import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
-import { isLocale, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
+import { hrefLanguage, isLocale, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
 
 const request = vi.hoisted(() => ({ host: 'peek.example' }));
 vi.mock('next/headers', () => ({
@@ -174,7 +174,7 @@ describe('what a carrier’s page tells a search engine', () => {
     const others = [...html.matchAll(/class="guide-card carrier-card" href="([^"]+)"/g)].map(([, href]) => href);
     expect(others).toEqual(carrierLinks('en').filter(({ id }) => id !== first.id).map(({ slug }) => `/carriers/${slug}`));
     // Its language links lead to its own page where it is written, to the carriers' own page elsewhere.
-    expect(html).toContain(`href="${carrierAddresses(first.id)[missing]}" hrefLang="${missing}"`);
+    expect(html).toContain(`href="${carrierAddresses(first.id)[missing]}" hrefLang="${hrefLanguage(missing)}"`);
   });
 
   it('starts a carrier’s trail at the landing in the page’s language', async () => {

@@ -61,8 +61,8 @@ In Romania the sender or recipient can claim in writing within 6 calendar months
 
 Sameday's channels:
 
-- **Romania:** 021 637 06 60, Monday to Friday, 09:00 to 13:00 and 13:30 to 17:00. SAMY, the virtual assistant on sameday.ro, answers around the clock, including easybox PIN problems.
-- **Bulgaria:** 0700 16 226, Monday to Friday, 9:00 to 17:00, charged at your plan's rate for 0700 numbers, plus a contact form.
+- **Romania:** 021 637 06 60, Monday to Friday, 09:00 to 13:00 and 13:30 to 17:00 Romanian time. SAMY, the virtual assistant on sameday.ro, answers around the clock, including easybox PIN problems.
+- **Bulgaria:** 0700 16 226, Monday to Friday, 9:00 to 17:00 Bulgarian time, charged at your plan's rate for 0700 numbers, plus a contact form.
 - **Hungary**, where Sameday no longer operates: a contact form only. Sameday's banner sends eMAG customers to eMAG.
 
 > Sameday says it never asks for payment by SMS or on social media. You pay only the shop in advance, in the SAMEDAY App, or the courier or easybox on delivery.

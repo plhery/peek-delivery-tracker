@@ -3170,14 +3170,22 @@ describe('persistent tracking routing', () => {
       expect(next.universal).toHaveBeenCalledOnce();
     });
 
-    it.each(['manual', 'number', 'postcode', 'provider', 'release', 'stage', 'future clock'] as const)('does not reuse after a changed %s', async change => {
+    it('keeps saved fuller history across a scraper release that leaves the preview the same', async () => {
+      const filed = await saved();
+      ((filed.carrier_data as JsonObject).routing as JsonObject).rules = 'older';
+      const next = setup(new Date('2026-09-10T12:15:00Z'));
+      next.direct.mockResolvedValue(preview());
+      expect(await next.router.fetch(filed, true)).toMatchObject({ sourceCarrierId: 'china-post', preserveHistory: true });
+      expect(next.universal).not.toHaveBeenCalled();
+    });
+
+    it.each(['manual', 'number', 'postcode', 'provider', 'stage', 'future clock'] as const)('does not reuse after a changed %s', async change => {
       const filed = await saved();
       const data = filed.carrier_data as JsonObject;
       const routing = data.routing as JsonObject;
       if (change === 'number') filed.tracking_number = 'ZA00000000002';
       if (change === 'postcode') filed.dpd_postcode = '00000';
       if (change === 'provider') data.tracking_provider = '17TRACK';
-      if (change === 'release') routing.rules = 'older';
       if (change === 'stage') filed.current_stage = 'out_for_delivery';
       if (change === 'future clock') (routing.partial_history as JsonObject).checked_at = '2026-09-10T14:00:00Z';
       const next = setup(new Date('2026-09-10T12:15:00Z'));
@@ -3296,12 +3304,20 @@ describe('persistent tracking routing', () => {
       expect(kept).toMatchObject({ sourceCarrierId: 'china-post', preserveHistory: true });
     });
 
-    it.each(['manual', 'carrier news', 'provider', 'release', 'out for delivery', 'future clock'] as const)('asks the providers at once after %s', async change => {
+    it('keeps it across a scraper release that leaves the carrier\'s answer the same', async () => {
+      const filed = await served();
+      ((filed.carrier_data as JsonObject).routing as JsonObject).rules = 'older';
+      const next = setup(new Date('2026-09-10T13:00:00Z'));
+      next.direct.mockResolvedValue(label());
+      expect(await next.router.fetch(filed, true)).toMatchObject({ sourceCarrierId: 'ups', preserveHistory: true });
+      expect(next.universal).not.toHaveBeenCalled();
+    });
+
+    it.each(['manual', 'carrier news', 'provider', 'out for delivery', 'future clock'] as const)('asks the providers at once after %s', async change => {
       const filed = await served();
       const data = filed.carrier_data as JsonObject;
       const routing = data.routing as JsonObject;
       if (change === 'provider') data.tracking_provider = '17TRACK';
-      if (change === 'release') routing.rules = 'older';
       if (change === 'out for delivery') filed.current_stage = 'out_for_delivery';
       if (change === 'future clock') (routing.quiet_history as JsonObject).checked_at = '2026-09-10T14:00:00Z';
       const next = setup(new Date('2026-09-10T13:00:00Z'));

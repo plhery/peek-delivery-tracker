@@ -972,10 +972,11 @@ export class TrackingRouter {
     const partialHistoryKey = (value: RoutedResult): string | undefined => declared === 'china-post'
       && value.sourceCarrierId === declared && !metadata.original_carrier && isPartialAnswer(value.result)
       && hasRoutingProgress(value.result)
-      ? createHash('sha256').update(JSON.stringify([state.rules, declared, number, parcel.tracking_url,
+      ? createHash('sha256').update(JSON.stringify([declared, number, parcel.tracking_url,
         parcel.dpd_postcode, metadata.universal_input, value.result])).digest('base64url') : undefined;
-    // Any filed carrier's whole answer, with the lookup inputs and scraper rules (QUIET_HOLD).
-    const answerKey = (value: RoutedResult): string => createHash('sha256').update(JSON.stringify([state.rules, declared, number,
+    // Any filed carrier's whole answer, with the lookup inputs (QUIET_HOLD). Neither key holds the scraper release, which
+    // comes several times a day: a release that changes the carrier's answer changes the key, and the hold ends.
+    const answerKey = (value: RoutedResult): string => createHash('sha256').update(JSON.stringify([declared, number,
       parcel.tracking_url, parcel.dpd_postcode, metadata.universal_input, value.sourceCarrierId, value.result])).digest('base64url');
     // Carriers asked in this check whose own answer for the number moved but had only
     // local clocks: the answer, the local history it brought, and how to confirm the carrier.
@@ -1680,7 +1681,7 @@ export class TrackingRouter {
     const partial = partialDirect ?? localDirectFallback;
     const held = state.partial_history;
     const historyAge = now().getTime() - millis(held?.checked_at);
-    if (scheduled && !changed && !released && universalNumber === number && partial && held
+    if (scheduled && !changed && universalNumber === number && partial && held
       && held.fingerprint === partialHistoryKey(partial.value) && historyAge >= 0 && historyAge < PARTIAL_HOLD
       && (typeof metadata.tracking_provider !== 'string' || metadata.tracking_provider === held.provider)
       && sources.includes(held.provider as UniversalSource)
@@ -1695,7 +1696,7 @@ export class TrackingRouter {
     const quiet = state.quiet_history;
     const quietAge = now().getTime() - millis(quiet?.checked_at);
     const newest = millis(state.last_event_at);
-    if (scheduled && !changed && !released && universalNumber === number && partial && quiet
+    if (scheduled && !changed && universalNumber === number && partial && quiet
       && quiet.fingerprint === answerKey(partial.value) && quietAge >= 0 && quietAge < QUIET_HOLD
       && newest > 0 && now().getTime() - newest >= QUIET_AFTER && parcel.current_stage !== 'out_for_delivery'
       && (typeof metadata.tracking_provider !== 'string' || metadata.tracking_provider === quiet.provider)

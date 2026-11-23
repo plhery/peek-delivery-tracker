@@ -5969,6 +5969,40 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
 
+  it('keeps asking the earlier carrier while the delivery carrier only tells its scans in the earlier carrier\'s country', async () => {
+    // A destination post tells the origin post's export scans from the posts' data exchange, placed in the origin's country.
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    let now = new Date('2026-01-12T10:30:00Z');
+    const origin: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
+      last_update: '2026-01-11T10:00:00Z', events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };
+    const announced = [{ time: '2026-01-12T10:00:00Z', description: 'Shipment on its way to the carrier', stage: 'in_transit' },
+      { time: '2026-01-12T09:00:00Z', description: 'Shipment information received', stage: 'registered' }];
+    let delivery: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T10:00:00Z', events: announced };
+    const adapter = {
+      fetch: vi.fn(async (carrier: string) => (carrier === 'posti' ? delivery : origin)),
+      fetchUniversal: vi.fn(),
+    };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'relayed-export', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
+    const sync = async (at: string) => {
+      now = new Date(at);
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel);
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+    expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+    expect(parcel.carrier_data).toMatchObject({ active_tracking_carrier: 'posti', handed_over_at: '2026-01-12T10:30:00.000Z' });
+    const scan = (time: string, location: string) => ({ time, description: 'Processed through facility', stage: 'in_transit', location });
+    delivery = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-01-12T16:00:00Z',
+      events: [scan('2026-01-12T16:00:00Z', 'ROISSY CHARLES DE GAULLE, FRANCE'), ...announced] };
+    expect(await sync('2026-01-13T12:30:00Z')).toEqual(['posti', 'la-poste']);
+    expect(await sync('2026-01-13T15:30:00Z')).toEqual(['posti', 'la-poste']);
+    // Its own scan at home ends the follow-up.
+    delivery = { ...delivery, last_update: '2026-01-13T17:00:00Z', events: [scan('2026-01-13T17:00:00Z', 'VANTAA, FINLAND'), ...delivery.events!] };
+    expect(await sync('2026-01-13T18:30:00Z')).toEqual(['posti']);
+  });
+
   describe('while the delivery carrier’s lookup fails', () => {
     const origin0: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
       last_update: '2026-01-11T10:00:00Z', events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };

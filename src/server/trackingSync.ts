@@ -75,7 +75,7 @@ import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, ha
 import { carrierMovedAt, eventStage, keptNotices, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
 import { earlierCarrier } from './relayCopies';
-import { carrierBrand, eventTimestamp, latestResultTime, resultTimezone, statusMapAnswer, SWISS_POST_GLOBAL_STATUSES } from 'universal-parcel-scraper/app';
+import { carrierBrand, eventTimestamp, latestResultTime, resultTimezone, statusMapAnswer, SWISS_POST_GLOBAL_STATUSES, trackingPlace } from 'universal-parcel-scraper/app';
 import { trackingSupportEvidence } from './trackingSupport';
 import { noteTypoCandidate } from './typoCandidate';
 import { confirmationLookup } from './trackingHealth';
@@ -302,26 +302,34 @@ const HELD_BY_PARTNER = new Set(['out_for_delivery', 'failed_attempt', 'ready_fo
 
 /**
  * Whether a delivery carrier's answer still only announces the parcel: no scan past the label dated since the
- * handoff, and nothing it reports only once it holds the parcel, such as a delivery round.
+ * handoff, and nothing it reports only once it holds the parcel, such as a delivery round. A scan it places in a
+ * country the earlier carrier delivers in, and it does not, tells the earlier carrier's step: USPS tells China Post's
+ * export scans in China.
  */
-function announcedOnly(answer: CarrierResult, metadata: JsonObject): boolean {
-  return announcedScans(resultStage(answer), (answer.events ?? []).filter(isRecord), metadata);
+function announcedOnly(answer: CarrierResult, activeCarrier: string, metadata: JsonObject): boolean {
+  return announcedScans(resultStage(answer), (answer.events ?? []).filter(isRecord), activeCarrier, metadata);
 }
 
 /** `announcedOnly` read from the parcel's stage and its stored rows of the delivery carrier, which did not answer. */
 function storedAnnouncedOnly(parcel: JsonObject, activeCarrier: string, metadata: JsonObject): boolean {
   return announcedScans(String(parcel.current_stage ?? 'pending'), storedEventIdentities(parcel)
     .filter((row) => String(row.provider_event_id).startsWith(`${activeCarrier}:`))
-    .map((row) => ({ stage: row.stage, description: row.description, time: row.occurred_at })), metadata);
+    .map((row) => ({ stage: row.stage, description: row.description, location: row.location, time: row.occurred_at })),
+  activeCarrier, metadata);
 }
 
-function announcedScans(stage: string | null | undefined, events: readonly JsonObject[], metadata: JsonObject): boolean {
+function announcedScans(stage: string | null | undefined, events: readonly JsonObject[], activeCarrier: string, metadata: JsonObject): boolean {
   const handedOver = Date.parse(String(metadata.handed_over_at ?? ''));
   // A scan with only its wall clock is past the handoff when it is on every clock: read at UTC+14.
   const at = (event: JsonObject) => event.time != null ? Date.parse(String(event.time))
     : DateTime.fromISO(String(event.local_time ?? ''), { zone: 'UTC+14' }).toMillis();
+  const homes = (carrier: unknown): readonly string[] => CARRIER_DEFINITIONS[String(carrier) as CarrierId]?.countries ?? [];
+  const relayed = (event: JsonObject) => {
+    const country = typeof event.location === 'string' && event.location.trim() ? trackingPlace(event.location).country : null;
+    return country !== null && homes(metadata.original_carrier).includes(country) && !homes(activeCarrier).includes(country);
+  };
   return !HELD_BY_PARTNER.has(stage ?? '') && !events.some((event) => HELD_BY_PARTNER.has(eventStage(event))
-    || (!['pending', 'registered'].includes(eventStage(event)) && at(event) >= handedOver));
+    || (!['pending', 'registered'].includes(eventStage(event)) && at(event) >= handedOver && !relayed(event)));
 }
 
 /** The earlier carrier's follow-up, made while the delivery carrier's lookup failed. */
@@ -3873,7 +3881,7 @@ export class TrackingSyncService {
         throw error;
       }
       const result = normalizeCarrierResult(answer);
-      const afterAnnouncement = followUp === 'announced' && announcedOnly(result, metadata)
+      const afterAnnouncement = followUp === 'announced' && announcedOnly(result, activeCarrier, metadata)
         && await royalBrowserAllowed(carrierId, 'handoff');
       const earlier = afterAnnouncement ? await askEarlier() : await alongsideAnswer;
       return {

@@ -50,7 +50,7 @@ Le module de suivi formule parfois certaines étapes différemment : là où l�
 
 ## Livraison Meest, points de retrait et consignes
 
-**Avec des partenaires locaux.** Pour les achats internationaux acheminés via Meest, la livraison finale dans ton pays est confiée à un partenaire local nommé dans l’historique lorsqu’il prend le relais (comme BOX NOW). Les tentatives de livraison, avis de passage et délais de retrait dépendent alors de ce partenaire.
+**Avec des partenaires locaux.** Selon Meest Canada, un envoi international peut être confié à un partenaire local pour la livraison finale, et le suivi Meest regroupe alors les scans de ce partenaire. L’historique le nomme lorsqu’il prend le relais (comme BOX NOW).
 
 **En Ukraine.** Les pages Meest donnent des durées différentes pour la garde en agence : 3 à 5 jours dans la FAQ de Meest Canada, 5 jours ouvrés gratuits dans les règles de ua.meest.com puis des frais journaliers (les points partenaires limités à 10 kg renvoient le colis à la place). Tu reçois une notification dans l’application Meest Post, ou à défaut un SMS ou message Viber avec le numéro, l’adresse et les horaires de l’agence.
 
@@ -77,7 +77,7 @@ Selon les sites Meest :
 
 [Peek](/) reconnaît la forme du numéro de consolidation (`CV4829173CA64058G`) et du format `ANS…UA` (`ANS4829173640582UA`) et interroge uniquement Meest, qui confirme l’envoi (« Meest a ce colis. »). Pour `IHB` suivi de 10 chiffres, Peek interroge à la fois HR Parcel et Meest puis retient celui qui connaît le numéro. Les numéros postaux (`CV…` compris) et les références d’expéditeur n’atteignent Meest que si tu appuies sur « Changer » pour choisir Meest ou si tu colles un lien Meest. Saisi seul, un numéro postal part vers la poste émettrice, souvent avec [Chronopost](carrier:chronopost) (`CV…PL` vers [Poczta Polska](carrier:poczta-polska), `CV…CA` vers [Postes Canada](carrier:canada-post)), ou vers la poste de destination (Ukrposhta pour l’Ukraine) ; un numéro `CV…US` passe uniquement par Chronopost et les services de suivi. Peek lit les liens de t.meest-group.com, des sites pays meest.com (`parcel_number=`) et de tracking-iframe.meest.com, mais pas le suivi propre de pl.meest.com.
 
-Meest n’indique pas de fuseau horaire sur ses scans : Peek les interprète à l’heure du lieu du scan et affiche l’historique propre de Meest. Peek conserve le statut, le pays de destination et, lorsqu’un partenaire étranger prend le relais, ce transporteur et son numéro : la page du colis affiche par exemple « Livraison par BOX NOW » (ou « Annoncé à BOX NOW, pas encore reçu » tant que ce partenaire n’a pas encore de scan propre), et Peek suit directement ce partenaire dès qu’il le prend en charge. Il n’affiche ni date estimée, ni poids, ni point de retrait (adresse, horaires et date limite de retrait restent à vérifier chez Meest). Un numéro que Meest ne connaît que comme référence partenaire n’est pas suivi, et les anciens historiques disparaissent comme introuvables.
+Meest n’indique pas de fuseau horaire sur ses scans : Peek les interprète à l’heure du lieu du scan et affiche l’historique propre de Meest. Peek conserve le statut, le pays de destination et, lorsqu’un partenaire étranger prend le relais, ce transporteur et son numéro : la page du colis affiche par exemple « Livraison par BOX NOW » (ou « Annoncé à BOX NOW, pas encore reçu » tant que ce partenaire n’a pas encore de scan propre), et Peek suit ensuite ce partenaire directement s’il sait le suivre. Il n’affiche ni date estimée, ni poids, ni point de retrait (adresse, horaires et date limite de retrait restent à vérifier chez Meest). Un numéro que Meest ne connaît que comme référence partenaire n’est pas suivi, et les anciens historiques disparaissent comme introuvables.
 
 Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu’à toutes les 10 minutes — et toutes les 2 minutes à partir de 6 h (heure locale) le jour où Meest le scanne en livraison, tant que le suivi propre de Meest répond. Après deux jours sans nouveauté (12 heures tant que le colis reste sur « Étiquette créée » ou « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures après sept jours au statut « Étiquette créée ». Si un colis aux étapes « Étiquette créée », « Pris en charge » ou « En transit » reste quatre jours sans nouveau scan, Peek affiche « Aucune mise à jour depuis quatre jours » (ou « Aucune mise à jour depuis… » avec la date) et « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Meest. » — Peek ne propose pas de lien d’aide propre à Meest et n’affiche un lien d’aide que lorsqu’il suit un transporteur final qui en possède un. Peek peut t’alerter avec « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut pas contacter Meest ni la boutique à ta place.
 
@@ -89,7 +89,7 @@ Meest est un groupe établi : Meest Post indique que ses origines remontent à 1
 
 ### Quels sont les délais de livraison de Meest Post entre la Pologne et l’Ukraine ?
 
-La FAQ de pl.meest.com indique au moins 4 jours ouvrés de la Pologne vers l’Ukraine et au moins 9 jours ouvrés de l’Ukraine vers la Pologne.
+La FAQ de Meest Post indique au moins 4 jours ouvrés de la Pologne vers l’Ukraine et au moins 9 jours ouvrés de l’Ukraine vers la Pologne.
 
 ### À quoi ressemble un numéro de suivi Meest depuis les États-Unis ?
 
@@ -114,6 +114,6 @@ Meest America précise qu’il commence généralement par un code de lettres su
 - [Meest Post : About us](https://www.meestpost.com/en/about-us) – Meest Polska, Meest Group, fondation en 1989
 - [Meest Post : Reklamacje](https://www.meestpost.com/pl/complaints) – qui peut réclamer, délais de 6 mois et 7 jours
 - [Meest Post : Kontakt](https://www.meestpost.com/pl/contact-us) – téléphone, info@meestpost.com, horaires CET
-- [Meest : FAQ](https://pl.meest.com/faq/) – délais Meest Post Pologne-Ukraine
+- [Meest Post : FAQ](https://www.meestpost.com/pl/faq) – délais Pologne-Ukraine
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formats de numéros (`G`, `ANS…UA`, `IHB`), liens, lecture des heures, transferts partenaires et absence de lien d’aide Meest
 :::

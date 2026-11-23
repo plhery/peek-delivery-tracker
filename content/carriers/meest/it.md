@@ -50,7 +50,7 @@ Il riquadro di ricerca usa a volte parole diverse rispetto a questa tabella: dov
 
 ## Consegna Meest, punti di ritiro e locker
 
-**Consegna tramite partner locali.** Per gli ordini internazionali spediti con Meest, la consegna finale nel tuo paese passa spesso a un partner locale indicato nella cronologia (come BOX NOW). Tentativi di consegna, avvisi e giorni di giacenza seguono le regole di quel partner.
+**Consegna tramite partner locali.** Secondo Meest Canada, una spedizione internazionale può passare a un partner locale per la consegna finale, e il tracciamento Meest riunisce allora le scansioni di quel partner. La cronologia lo indica quando subentra (come BOX NOW).
 
 **In Ucraina.** Le pagine Meest riportano tempi diversi di giacenza in filiale: da 3 a 5 giorni nelle FAQ di Meest Canada, 5 giorni lavorativi gratuiti nelle regole di ua.meest.com seguiti da una tariffa giornaliera (le filiali partner con limite di 10 kg rispediscono invece il pacco al mittente). Ricevi una notifica push nell’app Meest Post oppure un SMS o messaggio Viber con numero della filiale, indirizzo e orari.
 
@@ -89,7 +89,7 @@ Meest è un gruppo attivo da decenni: Meest Post indica radici dal 1989, con sed
 
 ### Quanto impiega Meest Post tra Polonia e Ucraina?
 
-Le FAQ su pl.meest.com indicano almeno 4 giorni lavorativi dalla Polonia all’Ucraina e almeno 9 giorni lavorativi dall’Ucraina alla Polonia.
+Le FAQ di Meest Post indicano almeno 4 giorni lavorativi dalla Polonia all’Ucraina e almeno 9 giorni lavorativi dall’Ucraina alla Polonia.
 
 ### Come è fatto un codice Meest dagli Stati Uniti?
 
@@ -114,6 +114,6 @@ Meest America indica che inizia solitamente con un codice di lettere seguito da 
 - [Meest Post: About us](https://www.meestpost.com/en/about-us) – Meest Polska, Meest Group, 1989
 - [Meest Post: Reklamacje](https://www.meestpost.com/pl/complaints) – chi può reclamare, termini di 6 mesi e 7 giorni
 - [Meest Post: Kontakt](https://www.meestpost.com/pl/contact-us) – telefono, info@meestpost.com, orari CET
-- [Meest: FAQ](https://pl.meest.com/faq/) – tempi di consegna Meest Post
+- [Meest Post: FAQ](https://www.meestpost.com/pl/faq) – tempi tra Polonia e Ucraina
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formati (`G`, `ANS…UA`, `IHB`), link, orari locali, passaggi ai partner e assenza di link di aiuto Meest
 :::

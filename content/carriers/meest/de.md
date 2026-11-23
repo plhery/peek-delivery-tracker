@@ -50,7 +50,7 @@ Die Tracking-Box formuliert manche Schritte etwas anders: Wo eine Ansicht `Shipm
 
 ## Meest Zustellung, Abholstellen und Paketstationen
 
-**Zustellung über lokale Partner.** Bei internationalen Online-Bestellungen über Meest übernimmt ein lokaler Dienst im Zielland die letzte Meile, sobald er im Verlauf genannt wird (etwa BOX NOW). Zustellversuche, Benachrichtigungen und Lagerfristen richten sich dann nach diesem Partner.
+**Zustellung über lokale Partner.** Laut Meest Canada kann eine internationale Sendung für die Zustellung an einen lokalen Partner übergeben werden; das Meest-Tracking führt dann dessen Scans zusammen. Der Verlauf nennt den Partner, sobald er übernimmt (etwa BOX NOW).
 
 **In der Ukraine.** Die Meest-Seiten nennen unterschiedliche Lagerfristen in Filialen: 3 bis 5 Tage in der FAQ von Meest Canada, 5 Werktage kostenlos in den Regeln auf ua.meest.com und danach eine Tagesgebühr (Partnerfilialen mit 10-kg-Limit schicken das Paket stattdessen zurück). Du erhältst eine Push-Meldung in der Meest-Post-App, sonst eine SMS oder Viber-Nachricht mit Filialnummer, Adresse und Öffnungszeiten.
 
@@ -89,7 +89,7 @@ Meest ist eine etablierte Logistikgruppe: Laut Meest Post reichen die Wurzeln bi
 
 ### Wie lange braucht Meest Post zwischen Polen und der Ukraine?
 
-Die FAQ auf pl.meest.com nennt mindestens 4 Werktage von Polen in die Ukraine und mindestens 9 Werktage von der Ukraine nach Polen.
+Die FAQ von Meest Post nennt mindestens 4 Werktage von Polen in die Ukraine und mindestens 9 Werktage von der Ukraine nach Polen.
 
 ### Wie sieht eine Meest Sendungsnummer aus den USA aus?
 
@@ -114,6 +114,6 @@ Laut Meest America beginnt sie meist mit einem Buchstabencode gefolgt von Ziffer
 - [Meest Post: About us](https://www.meestpost.com/en/about-us) – Meest Polska, Meest Group, 1989
 - [Meest Post: Reklamacje](https://www.meestpost.com/pl/complaints) – Anspruchsberechtigte, Fristen von 6 Monaten und 7 Tagen
 - [Meest Post: Kontakt](https://www.meestpost.com/pl/contact-us) – Telefon, info@meestpost.com, CET-Zeiten
-- [Meest: FAQ](https://pl.meest.com/faq/) – Laufzeiten von Meest Post
+- [Meest Post: FAQ](https://www.meestpost.com/pl/faq) – Laufzeiten zwischen Polen und der Ukraine
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernformate (`G`, `ANS…UA`, `IHB`), Links, Uhrzeiten, Partnerübergaben und fehlender Meest-Hilfelink
 :::

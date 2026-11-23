@@ -54,7 +54,7 @@ ZipasGo lists parcel consolidation and returns centres in Vilnius, Kaunas, Riga,
 
 ## ZipasGo contact and customer service
 
-As read on 14 November 2026, zipasgo.com lists:
+zipasgo.com lists:
 
 - **Email**: help@zipasgo.com.
 - **Company**: the service is provided by Zipas, UAB or MB ZipasGo, MB, depending on which one the client uses.
@@ -73,7 +73,11 @@ ZipasGo has no tracker Peek can read. So Peek asks ParcelsApp, Ship24 and 17TRAC
 
 Until a service knows the number, a parcel filed under ZipasGo shows "Waiting for ZipasGo". Once the parcel is filed under ZipasGo, a service may name the carrier that took it over, with that carrier's own number. If Peek can read that carrier's own tracking, it asks there too. Once that carrier has a scan at least as new as the newest in the history, Peek follows the parcel there and keeps the earlier scans. The parcel shows "Delivery with" and that carrier's name; while that carrier has only been told the parcel is coming, it shows "Announced to …, not received yet".
 
-While a service has the parcel, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZipasGo or the seller for you.
+While a service has the parcel, Peek checks hourly, every 3 hours once a day passes without a new scan, and every 6 hours after seven days without news at "Label created". On the day it's out for delivery, Peek checks up to every 15 minutes while you have it open in Peek or with notifications on. A service that didn't know the number is asked again a day later.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ZipasGo.", with a "Get help from ZipasGo" link to ZipasGo's help page. Once Peek follows a delivering company that has a help page of its own, the link goes there instead. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ZipasGo."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZipasGo or the seller for you.
 
 ## Questions about ZipasGo tracking
 

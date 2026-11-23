@@ -54,7 +54,7 @@ Jei sekime nurodytas vienas jų su savo numeriu, siuntą jums pristato ši įmon
 
 ## „ZipasGo“ kontaktai
 
-Taip kontaktus zipasgo.com nurodė 2026 m. lapkričio 14 d.:
+Kontaktai, kuriuos nurodo zipasgo.com:
 
 - **El. paštas:** help@zipasgo.com.
 - **Įmonė:** paslaugas teikia Zipas, UAB arba MB ZipasGo, MB, priklausomai nuo to, kurios įmonės paslaugomis naudojasi klientas.
@@ -73,7 +73,11 @@ Galite įklijuoti ir „ZipasGo“ lietuviško sekimo puslapio nuorodą, kuri ba
 
 Kol nė viena paslauga numerio nežino, „ZipasGo“ priskirta siunta svetainėje peektracker.com rodo „Waiting for ZipasGo“. Kai siunta priskirta „ZipasGo“, paslauga gali nurodyti ją perėmusį vežėją su jo numeriu. Jei Peek gali skaityti to vežėjo sekimą, jis klausia ir jo. Kai to vežėjo naujausias įrašas yra ne senesnis už naujausią istorijoje, Peek toliau seka siuntą ten, išsaugodamas ankstesnius įrašus. Tada siunta rodo „Delivery with“ ir vežėjo pavadinimą, o kol vežėjas tik informuotas, kad siunta atvyks, – „Announced to …, not received yet“.
 
-Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, o tą dieną, kai siunta išvežta pristatyti, – net kas 15 minučių. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei parą naujų įrašų nėra, Peek tikrina kas 3 valandas. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „ZipasGo“ ar pardavėju už jus Peek negali.
+Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, parą nesant naujų įrašų – kas 3 valandas, o siuntai septynias dienas išbuvus „Label created“ – kas 6 valandas. Tą dieną, kai siunta išvežta pristatyti, Peek ją tikrina net kas 15 minučių, kol siuntą turite atsivertę arba esate įjungę pranešimus. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros.
+
+Jei keturias dienas naujo įrašo nėra, o siunta vis dar „Label created“, „Received by carrier“ arba „In transit“, Peek ją pažymi paskutinio įrašo diena, pvz., „No tracking update since Mon 12 Oct“. Siuntos puslapyje tada rašoma „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking ZipasGo.“ ir yra nuoroda „Get help from ZipasGo“ į „ZipasGo“ pagalbos puslapį. Kai Peek seka pristatančią įmonę, turinčią savo pagalbos puslapį, nuoroda veda ten. Po trijų savaičių be naujų įrašų rašoma „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking ZipasGo.“
+
+Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „ZipasGo“ ar pardavėju už jus Peek negali.
 
 ## Dažni klausimai apie „ZipasGo“ siuntų sekimą
 

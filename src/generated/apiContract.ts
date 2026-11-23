@@ -68465,6 +68465,62 @@ export const CARRIER_CAPABILITIES = {
     },
     "linkRules": [],
     "detectionRules": []
+  },
+  "arkas": {
+    "displayName": "Arkas Line",
+    "aliases": [
+      "Arkas",
+      "Arkas Container Transport",
+      "Arkas Konteyner Taşımacılık",
+      "ARKU"
+    ],
+    "color": "#28448F",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "arkas"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://arkasline.com.tr/en/online-tracking/"
+  },
+  "pasha-hawaii": {
+    "displayName": "Pasha Hawaii",
+    "aliases": [
+      "Pasha Hawaii Transport Lines",
+      "PGHU"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#96451d",
+    "selectable": true,
+    "timezone": "Pacific/Honolulu",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pasha-hawaii"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.pashahawaii.com/tracking/container-tracking"
+  },
+  "seaboard-marine": {
+    "displayName": "Seaboard Marine",
+    "aliases": [
+      "Seaboard Marine Ltd.",
+      "SMLU"
+    ],
+    "color": "#153e7e",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "seaboard-marine"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.seaboardmarine.com/tracking-results/"
   }
 } as const;
 
@@ -70557,7 +70613,10 @@ export const CARRIER_IDS = [
   "skyquick",
   "ts-lines",
   "gti",
-  "yji"
+  "yji",
+  "arkas",
+  "pasha-hawaii",
+  "seaboard-marine"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

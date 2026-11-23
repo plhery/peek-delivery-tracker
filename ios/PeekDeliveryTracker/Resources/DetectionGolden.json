@@ -37904,6 +37904,27 @@
     ]
   },
   {
+    "input": "2811120394",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "28120501",
     "carrier": "unknown",
     "confidence": "low",
@@ -45969,6 +45990,27 @@
     "confidence": "high",
     "candidates": [
       "ecoscooting"
+    ]
+  },
+  {
+    "input": "3810910799",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -56781,6 +56823,29 @@
     ]
   },
   {
+    "input": "552811120012",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
+    ]
+  },
+  {
     "input": "55291209-3",
     "carrier": "unknown",
     "confidence": "low",
@@ -57101,6 +57166,33 @@
     ],
     "asked": [
       "brt"
+    ]
+  },
+  {
+    "input": "557811110017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "fedex"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -57548,6 +57640,34 @@
       "tnt",
       "tforce-freight",
       "xpo-ltl"
+    ]
+  },
+  {
+    "input": "573810910196",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "sf-express",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "purolator",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "paquetexpress",
+      "sending"
+    ],
+    "preferred": [
+      "sf-express"
+    ],
+    "asked": [
+      "purolator",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -70025,6 +70145,27 @@
       "poste-italiane",
       "brt",
       "colis-prive"
+    ]
+  },
+  {
+    "input": "7811110178",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "dpd-ie"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -84183,6 +84324,48 @@
     "candidates": []
   },
   {
+    "input": "ARKU2274341",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU2438867",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU5000447",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU5022908",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU8317250",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU8602330",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ARKU8614686",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "AS0000437666",
     "carrier": "unknown",
     "confidence": "low",
@@ -86787,6 +86970,12 @@
   },
   {
     "input": "CAT228172",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "CAXU9389216",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -107659,6 +107848,18 @@
     ]
   },
   {
+    "input": "PGHU4014372",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "PGHU4016122",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "PH00ZZ0000000010100000W",
     "carrier": "correos-spain",
     "confidence": "high",
@@ -113989,6 +114190,54 @@
   },
   {
     "input": "SMLMSEL6D8966500",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU3130772",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU3148560",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU4000330",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU5459160",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU7704689",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU7858200",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU7873014",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "SMLU8522821",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

@@ -68418,6 +68418,26 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.tslines.com/en/tracking?nowmenu=search_by_container_number"
+  },
+  "gti": {
+    "displayName": "GTI",
+    "aliases": [
+      "跨境易通",
+      "深圳市跨境易通供应链管理有限公司",
+      "KJYT"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0093dd",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gti"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -70508,7 +70528,8 @@ export const CARRIER_IDS = [
   "cu-lines",
   "marfret",
   "skyquick",
-  "ts-lines"
+  "ts-lines",
+  "gti"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

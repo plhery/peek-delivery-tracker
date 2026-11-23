@@ -96497,6 +96497,12 @@
     ]
   },
   {
+    "input": "GTI2239196321112",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "GTL7089226121",
     "carrier": "gtl-goto",
     "confidence": "high",

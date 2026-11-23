@@ -14644,6 +14644,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "4px",
+      "catalog": "four-px",
+      "slug": "disifang-4px-wuliu-chaxun",
+      "title": "递四方（4PX）国际物流查询：单号格式、状态与客服",
+      "name": "4PX",
+      "color": "#005add"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "yanwen-wuliu-chaxun",
@@ -14684,6 +14692,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "tuofeixia-dhlink-wuliu-chaxun",
+      "title": "驼飞侠（DHLink）物流查询：敦煌网单号、状态与尾程",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "shunfeng-sf-express-wuliu-chaxun",
+      "title": "顺丰国际（SF Express）物流查询：单号、状态与客服",
+      "name": "SF Express",
+      "color": "#dc1e32"
+    },
+    {
       "id": "straightship",
       "catalog": "straightship",
       "slug": "straightship-wuliu-chaxun",
@@ -14714,6 +14738,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "美特顺物流（Meiteshun）查询：AMTS单号与预设轨迹",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "huaya-yuntong-wuliu-chaxun",
+      "title": "华亚运通（Huaya Express）查询：HYYT单号与状态",
+      "name": "Huaya Express",
+      "color": "#e60013"
     },
     {
       "id": "topyou",
@@ -14762,6 +14794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "守务国际（Shouwu）物流查询：SWECN单号、状态与尾程",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "hywl",
+      "catalog": "hywl",
+      "slug": "huiyi-wuliu-hywl-chaxun",
+      "title": "汇一物流（HYWL）单号查询：TRK单号、中英文状态",
+      "name": "Huiyi Logistics",
+      "color": "#0b8f91"
     },
     {
       "id": "huahan",

@@ -14,11 +14,11 @@ MHI publishes no format for shoppers. The shapes its numbers take, with invented
 
 | Number | What it is |
 | --- | --- |
-| `MHI000W000000000000` | MHI, three digits, then W and 12 digits: MHI. |
-| `MHI000WBB000000000` | MHI, three digits, then WBB and 9 digits: MHI. |
-| `MHI-000-P000000000` | MHI, three digits, then P and 9 digits: MHI. Labels print this one with dashes. |
-| `MHI000000000000000` | MHI, three digits, then 12 more digits: MHI. |
-| `RR000000005US` | Two letters, 9 digits, two letters: a post's number for the same item, which Trackmail shows for some untracked items. |
+| `MHI482W736405829173` | MHI, three digits, then W and 12 digits: MHI. |
+| `MHI482WBB736405829` | MHI, three digits, then WBB and 9 digits: MHI. |
+| `MHI-482-P736405829` | MHI, three digits, then P and 9 digits: MHI. Labels print this one with dashes. |
+| `MHI482736405829173` | MHI, three digits, then 12 more digits: MHI. |
+| `RR482917367US` | Two letters, 9 digits, two letters: a post's number for the same item, which Trackmail shows for some untracked items. |
 | Any other shape | The delivering courier's own number, shown on Trackmail after "Tracking number:" on a tracked item. |
 
 The three digits after MHI stand for the shop's account with MHI. Type a P number on Trackmail with its dashes, as printed: Trackmail finds those only with them. One parcel can end up with two numbers, MHI's and the courier's. More in [tracking number formats](guide:tracking-number-formats).
@@ -74,7 +74,7 @@ Notices, attempts, redelivery and pick-up points follow the delivering courier's
 
 ## MHI contact number and customer service
 
-As read on 28 October 2026, MHI lists:
+MHI lists:
 
 - **Tracking queries:** email tracking@mhi.co, given on its eCommerce delivery page and on the contact page of Nexae (its shipping platform).
 - **Phone:** +44 (0) 117 977 6655, a UK number shown with its Bristol address, 82 Feeder Road, BS2 0TQ. MHI gives no hours and doesn't say it takes parcel queries on it.
@@ -90,7 +90,11 @@ Peek reads Trackmail and shows the status and the history, with each scan's plac
 
 When Trackmail's link points to a courier Peek knows, the parcel's page says "Delivery with" that courier and shows its number. While that courier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. If Peek reads that courier's tracking itself, it asks it with that number and switches to it once it shows newer progress. A courier Peek doesn't know isn't named: use "View carrier tracking" on Trackmail. For an untracked item with a local poster number, Peek may try that number with a national post, usually the one of the country you add the parcel from, and switch the same way. Not with every post, though: an RR… number ending in AU added from Australia isn't passed to Australia Post, so check it on Australia Post's own tracking.
 
-It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while MHI's own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact MHI, the courier or the shop for you.
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Trackmail (or the tracking of the courier that takes over) answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking MHI." MHI has no help page in Peek, so a "Get help from …" link appears only once Peek follows the delivering courier, and only if that courier has one. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking MHI."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact MHI, the courier or the shop for you.
 
 ## Questions about MHI tracking
 

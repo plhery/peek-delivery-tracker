@@ -299,5 +299,10 @@
   { "id": "memphis-courier", "catalog": "memphis-courier", "name": "Memphis Courier", "languages": ["en", "pt-br"] },
   { "id": "oca", "catalog": "oca", "name": "OCA", "languages": ["en", "es"] },
   { "id": "pigeonship", "catalog": "pigeonship", "name": "PigeonShip", "languages": ["en"] },
-  { "id": "seko", "catalog": "seko", "name": "SEKO Logistics", "languages": ["en"] }
+  { "id": "seko", "catalog": "seko", "name": "SEKO Logistics", "languages": ["en"] },
+  { "id": "bfe-express", "catalog": "bfe-express", "name": "BFE Express", "languages": ["en", "es"] },
+  { "id": "pasarex", "catalog": "pasarex", "name": "PasarEX", "languages": ["en", "es"] },
+  { "id": "spee-dee", "catalog": "spee-dee", "name": "Spee-Dee", "languages": ["en"] },
+  { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en"] },
+  { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs"] }
 ]

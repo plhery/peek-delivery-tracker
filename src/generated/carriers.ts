@@ -2416,6 +2416,46 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SEKO Logistics tracking — numbers, OmniParcel, and delivery",
       "name": "SEKO Logistics",
       "color": "#ef3e42"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "bfe-express-tracking",
+      "title": "BFE Express tracking — numbers, statuses, and delivery",
+      "name": "BFE Express",
+      "color": "#122a88"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "pasarex-tracking",
+      "title": "PasarEX tracking — Amazon AMZPSR codes, customs & help",
+      "name": "PasarEX",
+      "color": "#124381"
+    },
+    {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "spee-dee-tracking",
+      "title": "Spee-Dee Delivery tracking — SP numbers, states & help",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
+    },
+    {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "tnt-australia-tracking",
+      "title": "TNT Australia tracking — domestic numbers, statuses & help",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "one-by-allegro-cz-tracking",
+      "title": "One by Allegro CZ (WE|DO) tracking — numbers & delivery",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     }
   ],
   "de": [
@@ -10416,6 +10456,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento OCA — números, estados, sucursales y entregas",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "seguimiento-bfe-express",
+      "title": "Seguimiento BFE Express — códigos CK, WYB, aduana y ayuda",
+      "name": "BFE Express",
+      "color": "#122a88"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "rastreo-pasarex",
+      "title": "Rastreo PasarEX — códigos AMZPSR, aduana, PQR y teléfonos",
+      "name": "PasarEX",
+      "color": "#124381"
     }
   ],
   "pt": [
@@ -14782,6 +14838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Česká pošta sledování zásilek: podací číslo a stavy",
       "name": "Česká pošta",
       "color": "#002776"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "sledovani-zasilky-one-by-allegro-cz",
+      "title": "Sledování zásilky One by Allegro CZ (WE|DO) — stavy a boxy",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     }
   ],
   "sk": [

@@ -25,7 +25,7 @@ A DPD Hungary a myDPD egységes állapotkódjait használja a felvételtől és 
 
 | A myDPD jelzése | Mit jelent számodra | A Peek ezt mutatja |
 | --- | --- | --- |
-| `PARCEL_HANDED` (`Parcel handed to DPD`) | A küldeményt átadták a DPD hálózatának. | „In transit” |
+| `PARCEL_HANDED` (`Parcel handed to DPD`) | A küldeményt átadták a DPD hálózatának. | „Received by carrier” („In transit”, ha a DPD egy későbbi lépés utánra dátumozza) |
 | `IN_TRANSIT` (`Your parcel is on its way`), `AT_DELIVERY_CENTER` (`At delivery center`) | A csomag szállítás alatt áll a DPD elosztóközpontjai között, vagy megérkezett a helyi kiszállító depóba. | „In transit” |
 | `PARCEL_OUT_FOR_DELIVERY` (`Parcel out for delivery`) | A futár felvette a csomagot a napi kiszállítási körre. | „Out for delivery” |
 | `AVAILABLE_FOR_COLLECTION` (`Ready for collection`) | Átvehető a választott DPD Pickup csomagponton vagy automatában. | „Ready for pickup” |

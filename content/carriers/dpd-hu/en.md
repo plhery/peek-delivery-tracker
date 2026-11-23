@@ -25,7 +25,7 @@ DPD Hungary uses the unified myDPD status vocabulary covering handover, depot so
 
 | myDPD code & wording | What it means for you | Peek shows |
 | --- | --- | --- |
-| `PARCEL_HANDED` (`Parcel handed to DPD`) | Physical parcel received from the sender into DPD's network. | "In transit" |
+| `PARCEL_HANDED` (`Parcel handed to DPD`) | Physical parcel received from the sender into DPD's network. | "Received by carrier" ("In transit" when DPD dates it after a later step) |
 | `IN_TRANSIT` (`Your parcel is on its way`), `AT_DELIVERY_CENTER` (`At delivery center`) | Moving between DPD hubs and arrived at your regional Hungarian delivery depot. | "In transit" |
 | `PARCEL_OUT_FOR_DELIVERY` (`Parcel out for delivery`) | Loaded onto the local DPD courier's van for doorstep delivery today. | "Out for delivery" |
 | `AVAILABLE_FOR_COLLECTION` (`Ready for collection`) | Ready to pick up at a DPD Pickup ParcelShop or parcel locker. | "Ready for pickup" |

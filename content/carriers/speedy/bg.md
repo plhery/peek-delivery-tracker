@@ -6,11 +6,11 @@ published: 2026-11-23
 updated: 2026-11-23
 ---
 
-**Спиди** (*Speedy*, „Спиди“ АД, част от групата DPD / Geopost) е една от водещите куриерски компании в България с доставка до адрес, широка мрежа от офиси и автомати **Speedy Locker** ([speedy.bg](https://www.speedy.bg/bg)). Можеш да провериш пратката си чрез полето за проследяване на `speedy.bg`, през линка за **Smart Control** в съобщението от Спиди или като поставиш номера на товарителницата в полето горе.
+**Спиди** (*Speedy*, „Спиди“ АД, част от групата DPD / Geopost) е български куриер от София с офиси, автомати **Speedy Locker** и доставка до адрес ([speedy.bg](https://www.speedy.bg/bg)). Можеш да провериш пратката си чрез полето за проследяване на `speedy.bg`, през линка за **Smart Control** в съобщението от Спиди или като поставиш номера на товарителницата в полето горе.
 
 ## Номер на товарителница на Спиди — къде да го намериш
 
-Спиди използва термина **номер на товарителница** (*waybill number*). Стандартните номера на пратки в примерите и системата на Спиди са **11 цифри**, например `64829173605` (измислен номер). Можеш да го намериш:
+Спиди използва термина **номер на товарителница** (*waybill number*). Номерата в примерите на Спиди и в проследяването му са **11 цифри**, например `64829173605` (измислен номер), макар Спиди да не публикува правило за дължината. Можеш да го намериш:
 
 - в съобщението от Спиди по имейл, SMS или Viber с линк към **Smart Control**, след като пратката бъде обработена;
 - в мобилното приложение **Speedy Mobile**;
@@ -38,7 +38,7 @@ updated: 2026-11-23
 | `Return to Sender` | Връща се към подателя с обратна товарителница. |
 | `Delivered Back to Sender` | Върната обратно при подателя. |
 
-Полезни бележки от [Speedy FAQ](https://www.speedy.bg/en/faq): `Refuse contents check/test` се отнася до опциите „Преглед“ и „Тест“ преди плащане и не променя статуса на движение; `Predict` указва 60-минутния часови прозорец за посещение; `Delivery capacity reached (tour/office)` означава запълнен капацитет на маршрута или офиса; а `Postponed delivery due to inaccurate/incomplete address` показва неточен адрес, който можеш да коригираш в Smart Control.
+Други редове в проследяването на Спиди: `Refuse contents check/test` се отнася до опциите „Преглед“ и „Тест“ преди плащане и не променя статуса на движение; `Predict` указва 60-минутния часови прозорец за посещение; `Delivery capacity reached (tour/office)` означава запълнен капацитет на маршрута или офиса; а `Postponed delivery due to inaccurate/incomplete address` показва неточен адрес, който можеш да коригираш в Smart Control.
 
 ## Smart Control, офиси, автомати и пропусната доставка
 
@@ -58,15 +58,15 @@ updated: 2026-11-23
 
 ## Проследяване на Спиди с Peek
 
-Въведи 11-цифрената товарителница (или линк от `speedy.bg` / `myspeedy.speedy.bg`) в Peek. При номера, започващи с `6`, от България или Румъния Peek проверява **Speedy** на първо място, заедно с [DHL eCommerce Poland](carrier:dhl-ecommerce-pl), [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [Swiss Post](carrier:swiss-post) и [PPL](carrier:ppl). Ако номерът не започва с `6` или няколко куриера го разпознават, избери Speedy ръчно чрез **Change** при добавяне или **Change carrier** на екрана на пратката (интерфейсът на Peek е на английски).
+[Peek](/) не може да познае пратка на Спиди само по 11-те цифри, затова пита вероятните куриери по пет наведнъж, а следващите пет само ако никой от първите не познава номера. Спиди е сред тях само за номера, започващи с `6`. От България или Румъния Peek пита първо Спиди, после [DHL eCommerce Poland](carrier:dhl-ecommerce-pl) само ако номерът минава проверката на контролната му цифра, [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), PostLogistics на [Swiss Post](carrier:swiss-post) и [PPL](carrier:ppl). Другаде Спиди пак е първи за номер, започващ с `63`, но за друг номер, започващ с `6`, е последен, след същите куриери, като тези от твоята държава са първи. Ако няколко куриера познават номера или никой („not found yet · Peek keeps checking“), избери „Speedy“ с „Change“ при добавяне или „Change carrier“ на екрана на пратката (интерфейсът на Peek е на английски). Линк за проследяване от `speedy.bg` или `myspeedy.speedy.bg` с номера в него записва пратката направо към Спиди.
 
-Peek чете проследяването директно през отворения [адаптер Speedy в universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/speedy), показва всяко сканиране с града и държавата на карта, очакваната дата на доставка, часа на получаване и името на офиса или автомата (без адреса, името на получателя и обратния номер). Когато пратка за Гърция или Кипър премине към [ACS Courier](carrier:acs-courier), Peek следи прехвърлянето автоматично.
+Peek чете проследяването директно през отворения [адаптер Speedy в universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/speedy), показва всяко сканиране с града и държавата на карта, очакваната дата на доставка, часа на получаване и името на офиса или автомата (без адреса му; получателя, доказателството за доставка и обратния номер Peek не показва). Когато пратка за Гърция или Кипър премине към [ACS Courier](carrier:acs-courier), Peek следи прехвърлянето автоматично.
 
-Peek превежда стъпките в ясни етапи: **Label created** (`Shipment data received`), **Received by carrier** (`Courier Pick-up` / `Received in Office`), **In transit** (`Departure Scan` / `Arrival Scan`), **Out for delivery** (`Out for Delivery`), **Delivery attempted** (`Unsuccessful Delivery`), **Ready for pickup** (`Prepared for Self-collecting by Consignee`), **Delivered** (`Delivered`) и **Returned to sender** (`Return to Sender` / `Delivered Back to Sender`).
+Peek превежда стъпките в ясни етапи: **Label created** (`Shipment data received`), **Received by carrier** (`Courier Pick-up`), **In transit** (`Received in Office`, `Departure Scan` / `Arrival Scan`), **Out for delivery** (`Out for Delivery`), **Delivery attempted** (`Unsuccessful Delivery`), **Ready for pickup** (`Prepared for Self-collecting by Consignee`), **Delivered** (`Delivered`) и **Returned to sender** (`Return to Sender` / `Delivered Back to Sender`).
 
-При пауза по пътя или през уикенда Peek показва: „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Speedy.“ След повече от три седмици без ново сканиране се появява: „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Speedy.“ За директна връзка с поддръжката натисни **Get help from Speedy**.
+Когато най-новото сканиране е отпреди четири дни, а пратката е още на „Label created“, „Received by carrier“ или „In transit“, Peek я отбелязва с деня на това сканиране, например „No tracking update since Mon 12 Oct“. Тогава страницата на пратката казва „Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Speedy.“, с линк „Get help from Speedy“ към страницата за контакт на Спиди. След три седмици без ново сканиране казва „Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Speedy.“
 
-В настройките за известия на Peek избери **Every scan**, **Important steps** или **Delivery only**.
+Докато пратката е отворена в Peek, или в деня на доставката при включени известия, Peek проверява до всеки 10 минути. В деня, в който Спиди я сканира `Out for Delivery`, Peek проверява на всеки 2 минути от 6 ч. българско време, докато проследяването на Спиди отговаря, или на всеки 5 минути, докато то изисква браузър; когато отговарят само услугите за проследяване, на всеки 15 минути. След два дни без новини (12 часа, докато пратката е още на „Label created“ или „Received by carrier“) Peek проверява на всеки час, а след седем дни без новини на „Label created“ на всеки 6 часа. Известия: „Every scan“, „Important steps“ или „Delivery only“. Peek не може да удължи срока за получаване или да изпрати ПИН кода отново.
 
 ## Контакти и телефони на Спиди
 
@@ -98,10 +98,21 @@ Peek превежда стъпките в ясни етапи: **Label created**
 Официалните SMS съобщения от Спиди идват единствено от номер `170000` (или официалния Viber канал), а имейлите — от `no-reply@speedy.bg`.
 
 :::sources
-- [Спиди България](https://www.speedy.bg/bg)
-- [Спиди — Свържете се с нас](https://www.speedy.bg/bg/contact-us)
-- [Speedy — Contact us (EN)](https://www.speedy.bg/en/contact-us)
-- [Speedy — FAQ (EN)](https://www.speedy.bg/en/faq)
-- [Speedy — Smart Control & Predict](https://www.speedy.bg/en/smart-control)
-- [Адаптер Speedy в universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/speedy)
+- [Спиди: Често задавани въпроси](https://www.speedy.bg/en/faq) – товарителница, Smart Control, Predict, опити за доставка, срокове в офис и автомат, плащане, рекламации
+- [Спиди: Smart Control и Predict](https://www.speedy.bg/en/smart-control) – възможности на Smart Control, SMS и Viber, начини на плащане
+- [Спиди: Speedy Lockers](https://www.speedy.bg/en/automats-information) – ПИН, 3 календарни дни
+- [Спиди: Speedy Mobile](https://www.speedy.bg/en/speedy-mobile) – приложение, онлайн плащане
+- [Speedy: Contact us](https://www.speedy.bg/en/contact-us) – телефони, имейли, дружество
+- [Спиди: Свържете се с нас](https://www.speedy.bg/bg/contact-us) – цена на разговорите
+- [Спиди: Офиси и автомати](https://www.speedy.bg/bg/speedy-offices-automats) – адреси и работно време
+- [Спиди: Начало](https://www.speedy.bg/bg) – поле за проследяване
+- [Спиди: Международни услуги](https://www.speedy.bg/en/international) – Румъния, Гърция, Кипър, услуги на DPD
+- [Спиди: Публично проследяване](https://myspeedy.speedy.bg/pub/tracking/) – формулировки, бележки, езици
+- [Спиди: Web API документация](https://api.speedy.bg/api/docs/) – формулировки на статусите
+- [Спиди: Общи условия куриерски пратки](https://speedy.bg/uploads/media/speedy_files/2025-01-09%20%D0%9E%D0%B1%D1%89%D0%B8%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%9D%D0%9F%D0%A3%20%D0%A1%D0%BF%D0%B8%D0%B4%D0%B8%20%D0%90%D0%94-1738053907.pdf) – едно посещение, протокол при щета, връщане след 7 дни
+- [Спиди: Формуляр за рекламация](https://www.speedy.bg/uploads/media/speedy_files/speedy-claim-form-en-20260929.docx) – кой може да предяви, 6 месеца, срокове за отговор
+- [Спиди: Фишинг кампания чрез SMS](https://www.speedy.bg/bg/post/Phishing-campaign-via-SMS-messages-impersonating-Speedy-20260421) – SMS само от 170000 или Viber
+- [Спиди: Предупреждение за фишинг имейли](https://www.speedy.bg/bg/posts/actual/Warning-about-phishing-emails-using-Speedys-name-20260706) – фалшиви имейли, no-reply@speedy.bg
+- [Transport Intelligence: GeoPost/DPDgroup acquires the majority stake of Speedy AD](https://ti-insight.com/geopost-dpdgroup-acquires-the-majority-stake-of-speedy-ad-in-bulgaria/) – собственост на групата DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – какво чете Peek
 :::

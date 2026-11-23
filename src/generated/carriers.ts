@@ -3500,6 +3500,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "forza-delivery-sendungsverfolgung",
+      "title": "Forza Delivery Tracking: Guía-Nummern, Status und Kontakt",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
+    },
+    {
       "id": "quantium-solutions",
       "catalog": "quantium-solutions",
       "slug": "quantium-solutions-sendungsverfolgung",
@@ -5358,6 +5366,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "suivi-forza-delivery",
+      "title": "Suivi Forza Delivery\u00a0: numéros de guía, statuts, contact",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
+    },
+    {
       "id": "quantium-solutions",
       "catalog": "quantium-solutions",
       "slug": "suivi-quantium-solutions",
@@ -7190,6 +7206,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento CDEK (СДЭК): codici e stati in italiano",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "tracciamento-forza-delivery",
+      "title": "Tracciamento Forza Delivery: guía, stati e contatti",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
     },
     {
       "id": "quantium-solutions",
@@ -10812,6 +10836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00b33c"
     },
     {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "seguimento-forza-delivery",
+      "title": "Seguimento Forza Delivery: números de guía, estados, ajuda",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
+    },
+    {
       "id": "quantium-solutions",
       "catalog": "quantium-solutions",
       "slug": "seguimento-quantium-solutions",
@@ -12662,6 +12694,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CDEK (СДЭК): numery zamówień i statusy",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "sledzenie-forza-delivery",
+      "title": "Śledzenie Forza Delivery: numery guía, statusy i kontakt",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
     },
     {
       "id": "quantium-solutions",

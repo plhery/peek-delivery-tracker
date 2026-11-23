@@ -201,7 +201,7 @@
   { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "globalpost", "catalog": "globalpost", "name": "GlobalPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es"] },
+  { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "quantium-solutions", "catalog": "quantium-solutions", "name": "Quantium Solutions", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posta-shqiptare", "catalog": "posta-shqiptare", "name": "Posta Shqiptare", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

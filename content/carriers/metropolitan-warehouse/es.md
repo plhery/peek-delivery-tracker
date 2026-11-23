@@ -57,7 +57,7 @@ En la web de MWD el centro aparece a veces como `Metro-<Warehouse>-Hub` con el n
 
 Si falta montaje o retirada de embalajes respecto a lo comprado, trátalo con la tienda vendedora.
 
-**Si no estás en casa.** Las páginas públicas de MWD no explican cómo reprogramar una cita fallida, así que avisa antes del día previsto. Sus [condiciones de transporte](https://sso.gomwd.com/Account/TermsandConditions) establecen que, si se rechaza la entrega o resulta imposible completarla, la responsabilidad pasa a ser la de un depositario: tras intentar avisar por teléfono o vía electrónica, pueden cobrarse gastos de almacenaje a partir del siguiente día hábil; si no hay instrucciones en 48 horas se envía un segundo aviso final, y tras 10 días más MWD puede subastar la mercancía. Más ayuda en [entregas fallidas](guide:missed-delivery).
+**Si no estás en casa.** Las páginas públicas de MWD no explican cómo reprogramar una cita fallida, así que avisa antes del día previsto. Sus [condiciones de transporte](https://sso.gomwd.com/Account/TermsandConditions) establecen que, si se rechaza la entrega o no puede completarse por causa del remitente o del destinatario, la responsabilidad pasa a ser la de un depositario: tras intentar avisar por teléfono o vía electrónica, pueden cobrarse gastos de almacenaje a partir del siguiente día hábil; si no hay instrucciones en 48 horas se envía un segundo aviso final, y tras 10 días más MWD puede sacar la mercancía a venta pública. Más ayuda en [entregas fallidas](guide:missed-delivery).
 
 ## Pedido MWD dañado, retrasado o extraviado
 
@@ -79,13 +79,13 @@ El apartado *Info About My Order* está pensado para clientes comerciales (las t
 
 ## Seguir un pedido de MWD con Peek
 
-[Peek](/) no puede identificar MWD solo por el formato, porque doce dígitos coinciden con muchos transportistas ([por qué se solapan los formatos](guide:tracking-number-formats)). Pega el número igualmente: Peek sigue más de 3.500 transportistas. **En Estados Unidos**, consulta a MWD entre los primeros transportistas de 12 dígitos —junto con [BRT](carrier:brt), [Colis Privé](carrier:colis-prive) y [Purolator](carrier:purolator) (si empieza por 0–6 con dígito de control válido)— y muestra «Metropolitan Warehouse & Delivery tiene este paquete.» cuando MWD lo gestiona. **Fuera de Estados Unidos**, Peek trata MWD como último recurso: pregunta antes a los demás transportistas de 12 dígitos y a los servicios de seguimiento, y solo consulta MWD si ninguno lo reconoce. Siempre puedes introducirlo en la página de MWD o elegir Metropolitan Warehouse & Delivery mediante «Cambiar» o «Cambiar transportista» (buscar «MWD» también funciona). Acepta espacios; pega los 12 dígitos directamente, porque Peek no tiene regla para enlaces de MWD.
+[Peek](/) no puede identificar MWD solo por el formato, porque doce dígitos coinciden con muchos transportistas ([por qué se solapan los formatos](guide:tracking-number-formats)). Pega el número igualmente: Peek sigue a más de 4500 transportistas. **En Estados Unidos**, consulta a MWD entre los primeros transportistas de 12 dígitos —junto con [BRT](carrier:brt), [Colis Privé](carrier:colis-prive) y [Purolator](carrier:purolator) (si empieza por 0–6 con dígito de control válido)— y muestra «Metropolitan Warehouse & Delivery tiene este paquete.» cuando MWD lo gestiona. **Fuera de Estados Unidos**, Peek trata MWD como último recurso: pregunta antes a los demás transportistas posibles y solo consulta MWD si ninguno conoce el número. Si lo introduces en el cuadro de esta página, Peek pregunta primero a MWD, estés donde estés. También puedes elegir Metropolitan Warehouse & Delivery con «Cambiar» al añadirlo o «Cambiar transportista» en un paquete ya añadido (buscar «MWD» también funciona). Acepta espacios; pega los 12 dígitos directamente, porque Peek no tiene regla para enlaces de MWD.
 
-Peek lee el rastreador de MWD: estado, historial con el texto inglés de MWD, ciudad y estado de cada evento en el mapa, la hora local tal como la publica MWD (sin zona horaria) y el peso convertido a kilogramos. Deja fuera tu ciudad y código postal de destino, referencias del pedido y del cliente, número PRO de un socio, número de bultos, volumen y la barra de progreso. Tampoco muestra fecha estimada, prueba de entrega ni ubicación en directo del equipo, ni rastrea transportistas asociados.
+Peek lee el rastreador de MWD: estado, historial con el texto inglés de MWD, ciudad y estado de cada evento en el mapa y el peso, en kilos o en libras según tus ajustes. Muestra cada hora en la zona horaria de tu dispositivo y la nombra bajo el historial. Deja fuera tu ciudad y código postal de destino, referencias del pedido y del cliente, número PRO de un socio, número de bultos, volumen y la barra de progreso. Tampoco muestra fecha estimada, prueba de entrega ni ubicación en directo del equipo, ni rastrea transportistas asociados.
 
 Peek consulta directamente a MWD hasta cada 10 minutos mientras mantienes abierto el pedido o el día de reparto con avisos activados, y cada 2 minutos a partir de las 6:00 hora local el día en que aparece `Arrived at Delivery Location`; si no, cada hora. Tras 12 horas en «Etiqueta creada» o «Admitido por el transportista», o tras dos días sin novedades, consulta cada hora incluso con la pantalla abierta, y cada 6 horas tras siete días todavía en «Etiqueta creada». Mediante servicios de seguimiento, revisa cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de entrega.
 
-Después de cuatro días sin un nuevo escaneo en «En tránsito», Peek marca el retraso (por ejemplo, «Sin novedades desde el lun, 12 oct»), muestra «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Metropolitan Warehouse & Delivery.» y ofrece «Pide ayuda a Metropolitan Warehouse & Delivery». Pasadas más de tres semanas sin novedades, muestra: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Metropolitan Warehouse & Delivery.»
+Si un pedido en «Etiqueta creada», «Admitido por el transportista» o «En tránsito» pasa cuatro días sin un nuevo escaneo, Peek lo marca con el día de ese último escaneo (por ejemplo, «Sin novedades desde el lun 12 oct»), muestra «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Metropolitan Warehouse & Delivery.» y ofrece el enlace «Pide ayuda a Metropolitan Warehouse & Delivery» a la página de contacto de MWD. Pasadas más de tres semanas sin novedades, muestra: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Metropolitan Warehouse & Delivery.»
 
 Puedes activar alertas para «Cada escaneo», «Pasos importantes» o «Solo la entrega», que en MWD empieza con `Arrived at Delivery Location`. Peek no puede concertar ni cambiar citas, abrir reclamaciones ni contactar con MWD o la tienda por ti.
 
@@ -93,7 +93,7 @@ Puedes activar alertas para «Cada escaneo», «Pasos importantes» o «Solo la 
 
 ### ¿Qué es Metropolitan Warehouse & Delivery?
 
-Una empresa familiar de transporte de muebles y almacenes 3PL fundada en 1989 en Perth Amboy (Nueva Jersey), con 47 centros en los 48 estados contiguos. La contratan tiendas, marcas de muebles y diseñadores; los particulares no pueden reservarla por su cuenta.
+Una empresa familiar de transporte de muebles y almacenes 3PL fundada en 1989 en Perth Amboy (Nueva Jersey), con 47 centros en los 48 estados contiguos. La contratan tiendas, marcas de muebles y diseñadores; los particulares no la reservan directamente.
 
 ### ¿Qué significa «Delivery Scheduled for WEEK OF»?
 
@@ -112,12 +112,12 @@ Las páginas de MWD explican cómo reservar la franja inicial por autoservicio, 
 Las condiciones de transporte del portal cliente establecen 72 horas desde la entrega para presentar una reclamación escrita por pérdida o daños. Como la tienda es el cliente de MWD, avísala también enseguida.
 
 :::sources
-- [Metropolitan Warehouse & Delivery: Inicio](https://www.gomwd.com/) – desde 1989, red de 47 centros, teléfono de soporte
+- [Metropolitan Warehouse & Delivery: Inicio](https://www.gomwd.com/) – desde 1989, teléfono de soporte
 - [MWD: About Us](https://www.gomwd.com/about-metropolitan) – empresa familiar, sede en Perth Amboy, 48 estados contiguos
 - [MWD: Track a Shipment](https://www.gomwd.com/track-a-shipment) – seguimiento, ventana de cita y prueba de entrega
 - [MWD: Track Your Order](https://main.gomwd.com/client/wixtrackorder) – campo único de 12 dígitos, mensaje de error, reCAPTCHA / captcha de texto
 - [MWD: White Glove Delivery](https://www.gomwd.com/services/white-glove-delivery) – niveles de servicio, reserva autoservicio, recordatorios y seguimiento en vivo
-- [MWD: Services](https://www.gomwd.com/services) – Doorstep Delivery, 5 centros 3PL completos, páginas de seguimiento con marca blanca
+- [MWD: Services](https://www.gomwd.com/services) – Doorstep Delivery, 47 centros y plataformas de cross-docking, 5 centros 3PL completos, páginas de seguimiento con marca blanca
 - [MWD: Contact Us](https://www.gomwd.com/contact-us) – soporte (800) 300-7417 lunes–viernes, comments@gomwd.com, Corporate Office West Sacramento, ruta para clientes
 - [MWD: Terms & Conditions](https://sso.gomwd.com/Account/TermsandConditions) – reclamaciones 72 h (daños) y 30 días (no entrega), límite de 500 USD, almacenaje por entrega fallida
 - [FTC: Business Guide to the Mail, Internet, or Telephone Order Merchandise Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – entrega al transportista, regla de 30 días, consentimiento de retraso y reembolso

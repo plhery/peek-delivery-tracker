@@ -68305,6 +68305,124 @@
       "detectionRules": [],
       "trackingSearchUrl": "https://icargowebportal.china-airlines.com/icargoneoportal/app/main/#/app/tracking/awb",
       "helpUrl": "https://cargo.china-airlines.com/CCNetv2/content/home/index.aspx"
+    },
+    "cargologic": {
+      "displayName": "Cargologic",
+      "aliases": [
+        "Cargologic AG"
+      ],
+      "countries": [
+        "CH"
+      ],
+      "color": "#ca0538",
+      "selectable": true,
+      "timezone": "Europe/Zurich",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "cargologic"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.cargologic.com/en/awb-tracking.html",
+      "helpUrl": "https://www.cargologic.com/en/kontakt.html"
+    },
+    "cu-lines": {
+      "displayName": "CU Lines",
+      "aliases": [
+        "China United Lines",
+        "CULines",
+        "中联航运",
+        "CULU"
+      ],
+      "color": "#006979",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "cu-lines"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.culines.com/en/site/bill",
+      "helpUrl": "https://www.culines.com/en/site/outlets"
+    },
+    "marfret": {
+      "displayName": "Marfret",
+      "aliases": [
+        "Compagnie Maritime Marfret",
+        "Marfret Lines",
+        "MFTU"
+      ],
+      "color": "#ef4239",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "marfret"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.marfret.com/en/container-tracking/"
+    },
+    "skyquick": {
+      "displayName": "SkyQuick International",
+      "aliases": [
+        "SkyQuick",
+        "SkyQuick International Pte Ltd"
+      ],
+      "countries": [
+        "SG"
+      ],
+      "color": "#e4002b",
+      "selectable": true,
+      "timezone": "Asia/Singapore",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "skyquick",
+        "recognitionRank": 689
+      },
+      "trackingUrlTemplate": "https://skyquickinternational.com/tracking.aspx?cn={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "skyquickinternational.com",
+            "www.skyquickinternational.com"
+          ],
+          "pathPattern": "^/tracking\\.aspx$",
+          "params": [
+            "cn"
+          ]
+        },
+        {
+          "domains": [
+            "tracking.frontierforce.com"
+          ],
+          "pathPattern": "^/(?:tracking(?:_search)?\\.aspx|go/plm-tracking(?:_search)?)/?$",
+          "query": "^(?=(?:[^&]*&)*stid=skyquick(?:&|$))(?:[^&]*&)*?cn=([^&]+)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://skyquickinternational.com/",
+      "helpUrl": "https://skyquickinternational.com/index.aspx#contactus"
+    },
+    "ts-lines": {
+      "displayName": "T.S. Lines",
+      "aliases": [
+        "TS Lines",
+        "T.S. Lines Ltd",
+        "TSL",
+        "德翔海運"
+      ],
+      "color": "#009fe8",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "ts-lines"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.tslines.com/en/tracking?nowmenu=search_by_container_number"
     }
   },
   "servers": [
@@ -74185,7 +74303,12 @@
           "correos-guatemala",
           "just-ship-sg",
           "prd",
-          "china-airlines-cargo"
+          "china-airlines-cargo",
+          "cargologic",
+          "cu-lines",
+          "marfret",
+          "skyquick",
+          "ts-lines"
         ]
       },
       "Stage": {

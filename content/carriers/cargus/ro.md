@@ -74,7 +74,7 @@ Dacă trackingul stă pe loc, scrie întâi magazinului: ANCOM, autoritatea care
 
 ## Contact Cargus
 
-Pe cargus.ro, la 25 octombrie 2026:
+Pe cargus.ro (ora României):
 
 - **Telefon:** 021 9330, de luni până vineri, 8:30–12:30 și 13:00–17:00.
 - **Carly**, asistentul virtual de pe cargus.ro, non-stop.
@@ -87,9 +87,9 @@ Pe cargus.ro, la 25 octombrie 2026:
 
 ## Urmărirea coletelor Cargus cu Peek
 
-[Peek](/) nu poate recunoaște un AWB Cargus doar după cifre. Când cauți din România, întreabă și Cargus despre un număr de 10 cifre care începe cu `1` sau de 9 cifre care începe cu `85` sau `86`, alături de alți curieri cu numere de aceeași formă, de exemplu DHL eCommerce Iberia, BOX NOW sau TNT. Dacă doar Cargus îl are, vezi „Cargus has this parcel.”. Dacă îl cauți din altă țară, dacă are altă formă sau dacă îl are și alt curier, apasă „Change” și alege „Cargus”. Sau lipește în Peek adresa paginii de tracking de pe cargus.ro, în română sau în engleză: din link, Peek știe că AWB-ul e de la Cargus.
+[Peek](/) nu poate recunoaște un AWB Cargus doar după cifre. Când cauți din România, întreabă și Cargus despre un număr de 10 cifre care începe cu `1` sau de 9 cifre care începe cu `85` sau `86`, alături de alți curieri cu numere de aceeași formă, de exemplu DHL eCommerce Iberia, BOX NOW sau TNT. Din altă țară, Peek întreabă Cargus abia după ce serviciile de urmărire nu cunosc numărul, împreună cu DPD Ireland și alți curieri încercați la urmă. Dacă doar Cargus îl are, vezi „Cargus has this parcel.”; dacă îl are și alt curier, alegi tu. Dacă are altă formă, apasă „Change” și alege „Cargus”. Sau lipește în Peek adresa paginii de tracking de pe cargus.ro, în română sau în engleză: din link, Peek știe că AWB-ul e de la Cargus.
 
-Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și îți arată fiecare scanare cu data, ora, localitatea și județul. Formulările rămân ale Cargus, mai ales în engleză:
+Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și îți arată fiecare scanare cu data, ora, localitatea și, când are alt nume, județul. Formulările rămân ale Cargus, mai ales în engleză:
 
 | Ce vezi în Peek | Ce înseamnă |
 | --- | --- |
@@ -100,7 +100,7 @@ Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și �
 | `With courier` | E la curier, în livrare. |
 | `Delivered` | Livrat. |
 
-Peek verifică coletul cel mult o dată la 10 minute, cel mult o dată la 2 minute cât e la curier (doar în ziua aceea, de la ora 6:00, ora României, și cât timp răspunde trackingul Cargus însuși; prin servicii de urmărire, la fiecare 15 minute), și te poate anunța când se schimbă statusul. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
+Cât timp coletul e deschis în Peek, sau în ziua livrării cu notificările pornite, Peek îl verifică cel mult o dată la 10 minute, iar cel mult o dată la 2 minute de la ora 6:00, ora României, în ziua în care Cargus îl scanează `With courier`. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e la „Label created” sau „Received by carrier”), Peek îl verifică o dată pe oră, iar după șapte zile fără noutăți la „Label created”, o dată la 6 ore. Dacă trec patru zile fără o linie nouă la „Label created”, „Received by carrier” sau „In transit”, Peek arată „No tracking update since …” cu ziua acelei linii și un link „Get help from Cargus”. Notificările pot urma „Every scan”, „Important steps” sau „Delivery only”. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Cargus
 

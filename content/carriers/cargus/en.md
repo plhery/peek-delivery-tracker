@@ -10,7 +10,7 @@ Cargus is a Romanian courier that has delivered parcels for over 30 years, with 
 
 ## Cargus AWB: the tracking number
 
-AWB stands for Air Way Bill, the name Cargus uses for the number that identifies each shipment. Cargus's own example has 10 digits, `1234567890`, and it warns that the format can vary.
+AWB stands for Air Way Bill, the name Cargus uses for the number that identifies each shipment. Cargus's own example has 10 digits, like the invented `1482910375`, and it warns that the format can vary.
 
 Where to find it:
 
@@ -69,7 +69,7 @@ Cargus gives no advice for tracking that stops moving; for an AWB it can't find,
 
 ## Cargus contact number and customer service
 
-Cargus's channels, as its English contact page listed them on 12 October 2026:
+Cargus's channels, as its English contact page lists them (Romanian time):
 
 - **Phone** 021 9330 (+40 21 9330 from abroad), Monday to Friday, 8:30 to 12:30 and 13:00 to 17:00.
 - **Carly**, the chat assistant on cargus.ro, 24/7.
@@ -80,9 +80,9 @@ Hours may differ on public holidays. Cargus lists no contact for recipients outs
 
 ## Tracking Cargus parcels with Peek
 
-[Peek](/) can't tell a Cargus AWB from its digits alone. When you look a number up from Romania, Peek asks Cargus about 10 digits starting with `1`, or 9 digits starting with `85` or `86`, along with other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), [BOX NOW](carrier:box-now) or [TNT](carrier:tnt). If Cargus alone knows it, you'll see "Cargus has this parcel.". From another country, for another shape, or when another carrier knows it too, pick "Cargus" with "Change". Or paste a cargus.ro tracking link, Romanian or English, which names Cargus whatever the number.
+[Peek](/) can't tell a Cargus AWB from its digits alone. When you look a number up from Romania, Peek asks Cargus about 10 digits starting with `1`, or 9 digits starting with `85` or `86`, along with other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), [BOX NOW](carrier:box-now) or [TNT](carrier:tnt). From another country, Peek asks Cargus only once tracking services don't know the number, along with DPD Ireland and other last resorts. If Cargus alone knows it, you'll see "Cargus has this parcel."; if another carrier knows it too, you choose. For another shape, pick "Cargus" with "Change". Or paste a cargus.ro tracking link, Romanian or English, which names Cargus whatever the number.
 
-Peek reads the service behind the Cargus app, which knows some parcels the website reports as not found, and lists each scan with its date, time, town and county. Cargus's statuses keep its own wording, mostly English with a few in Romanian. Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day the parcel goes out with the courier, while Cargus's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Cargus gives no expected delivery day, so Peek shows none, and it doesn't say which SHIP & GO point or locker holds your parcel: the Cargus notice does.
+Peek reads the service behind the Cargus app, which knows some parcels the website reports as not found, and lists each scan with its date, time, town and, when it has another name, county. Cargus's statuses keep its own wording, mostly English with a few in Romanian. While the parcel is open in Peek, or on its delivery day with notifications on, Peek checks it up to every 10 minutes, and every 2 minutes from 6 a.m. Romanian time on the day Cargus scans it `With courier`. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours after seven days without news at "Label created". If the parcel goes four days without a new line at "Label created", "Received by carrier" or "In transit", Peek shows "No tracking update since …" with that line's day and a "Get help from Cargus" link. Notifications can follow "Every scan", "Important steps" or "Delivery only". Cargus gives no expected delivery day, so Peek shows none, and it doesn't say which SHIP & GO point or locker holds your parcel: the Cargus notice does.
 
 It shows no expected delivery day, pickup point or weight, and leaves out who signed, the delivery PIN, the sender's reference and the parcel count.
 

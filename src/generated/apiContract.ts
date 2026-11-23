@@ -29598,7 +29598,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://post.plus/",
+    "trackingSearchUrl": "https://post.plus/track",
     "helpUrl": "https://post.plus/contact"
   },
   "4sides": {
@@ -42579,8 +42579,7 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^AMZPSR\\d{9}$",
         "confidence": "low"
       }
-    ],
-    "trackingSearchUrl": "https://tracking.pasarex.com/"
+    ]
   },
   "qls-quince": {
     "displayName": "QLS",
@@ -51343,7 +51342,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.ddgyl.vip/"
+    "trackingSearchUrl": "https://www.ddgyl.vip/index/tracknumber/track"
   },
   "zecheng": {
     "displayName": "Zecheng International Logistics",
@@ -58592,7 +58591,6 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://t.bftlogistik.dk/",
     "helpUrl": "https://bftlogistik.dk/kontakt/"
   },
   "bhs-logistics": {

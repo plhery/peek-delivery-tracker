@@ -14844,6 +14844,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "tianhui-hengyuan-thhy-wuliu-chaxun",
+      "title": "天汇恒源（THHY）物流查询：AT…TH单号与轨迹真伪识别",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "jisu-guoji-js-express-wuliu-chaxun",
@@ -14892,6 +14900,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#12823d"
     },
     {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "zhonghua-youzheng-chunghwa-post-chaxun",
+      "title": "中华邮政（Chunghwa Post）物流查询：TW单号、状态与联系",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "jingdong-wuliu-jd-logistics-chaxun",
@@ -14924,12 +14940,36 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "morning-global-mg-wuliu-chaxun",
+      "title": "Morning Global 物流查询：BR…MG单号、状态与客服联系",
+      "name": "Morning Global",
+      "color": "#050059"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "fanyuan-guoji-far-international-chaxun",
+      "title": "泛远国际（FAR International）物流查询：单号、状态与联系",
+      "name": "FAR International",
+      "color": "#003b75"
+    },
+    {
       "id": "jifan",
       "catalog": "jifan",
       "slug": "jifan-guoji-wuliu-chaxun",
       "title": "吉凡国际物流（Jifan）查询：JFGJ单号、状态与北京时间",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "shentong-kuaidi-sto-chaxun",
+      "title": "申通快递（STO Express）查询：单号规则、签收状态与客服",
+      "name": "STO Express",
+      "color": "#ff6700"
     },
     {
       "id": "17feia",

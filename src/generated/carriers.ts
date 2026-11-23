@@ -2916,6 +2916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da291c"
     },
     {
+      "id": "intelcom",
+      "catalog": "intelcom",
+      "slug": "intelcom-dragonfly-sendungsverfolgung",
+      "title": "Intelcom / Dragonfly Sendungsverfolgung: Status & Kontakt",
+      "name": "Intelcom / Dragonfly",
+      "color": "#13a58f"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "canpar-sendungsverfolgung",
@@ -6824,6 +6832,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da291c"
     },
     {
+      "id": "intelcom",
+      "catalog": "intelcom",
+      "slug": "tracciamento-intelcom-dragonfly",
+      "title": "Tracciamento Intelcom / Dragonfly: numeri e contatti",
+      "name": "Intelcom / Dragonfly",
+      "color": "#13a58f"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "tracciamento-canpar",
@@ -8778,6 +8794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da291c"
     },
     {
+      "id": "intelcom",
+      "catalog": "intelcom",
+      "slug": "seguimiento-intelcom-dragonfly",
+      "title": "Seguimiento Intelcom / Dragonfly: números y contacto",
+      "name": "Intelcom / Dragonfly",
+      "color": "#13a58f"
+    },
+    {
       "id": "canpar",
       "catalog": "canpar",
       "slug": "seguimiento-canpar",
@@ -10722,6 +10746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Purolator: PIN, estados e levantamentos",
       "name": "Purolator",
       "color": "#da291c"
+    },
+    {
+      "id": "intelcom",
+      "catalog": "intelcom",
+      "slug": "seguimento-intelcom-dragonfly",
+      "title": "Seguimento Intelcom / Dragonfly: números e contacto",
+      "name": "Intelcom / Dragonfly",
+      "color": "#13a58f"
     },
     {
       "id": "canpar",
@@ -12686,6 +12718,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Purolator: PIN, statusy i odbiór paczek",
       "name": "Purolator",
       "color": "#da291c"
+    },
+    {
+      "id": "intelcom",
+      "catalog": "intelcom",
+      "slug": "sledzenie-intelcom-dragonfly",
+      "title": "Śledzenie Intelcom / Dragonfly: numery, statusy, kontakt",
+      "name": "Intelcom / Dragonfly",
+      "color": "#13a58f"
     },
     {
       "id": "canpar",

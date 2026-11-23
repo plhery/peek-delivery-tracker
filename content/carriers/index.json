@@ -114,7 +114,7 @@
   { "id": "usps", "catalog": "usps", "name": "USPS", "languages": ["en", "es", "de", "fr", "it", "pt", "pl"] },
   { "id": "canada-post", "catalog": "canada-post", "name": "Canada Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "purolator", "catalog": "purolator", "name": "Purolator", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "intelcom", "catalog": "intelcom", "name": "Intelcom / Dragonfly", "languages": ["en", "fr"] },
+  { "id": "intelcom", "catalog": "intelcom", "name": "Intelcom / Dragonfly", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "canpar", "catalog": "canpar", "name": "Canpar", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "uniuni", "catalog": "uniuni", "name": "UniUni", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ontrac", "catalog": "ontrac", "name": "OnTrac", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

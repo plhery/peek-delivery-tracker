@@ -3460,6 +3460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0e3a6b"
     },
     {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "cvc-sendungsverfolgung",
+      "title": "CVC Sendungsverfolgung (Си Ви Си): Paket in Bulgarien",
+      "name": "CVC",
+      "color": "#652b9e"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "sxw-express-sendungsverfolgung",
@@ -4974,6 +4982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0e3a6b"
     },
     {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "suivi-cvc",
+      "title": "Suivi CVC (Си Ви Си)\u00a0: suivre un colis en Bulgarie",
+      "name": "CVC",
+      "color": "#652b9e"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "suivi-sxw-express",
@@ -6456,6 +6472,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0e3a6b"
     },
     {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "tracciamento-cvc",
+      "title": "Tracciamento CVC (Си Ви Си): seguire un pacco in Bulgaria",
+      "name": "CVC",
+      "color": "#652b9e"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "tracciamento-sxw-express",
@@ -7914,6 +7938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0e3a6b"
     },
     {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "seguimiento-cvc",
+      "title": "Seguimiento CVC (Си Ви Си): seguir un paquete en Bulgaria",
+      "name": "CVC",
+      "color": "#652b9e"
+    },
+    {
       "id": "sxw-express",
       "catalog": "sxw-express",
       "slug": "seguimiento-sxw-express",
@@ -9346,6 +9378,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Xinghe Freight: números GZXH, estados e entrega",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "seguimento-cvc",
+      "title": "Seguimento CVC (Си Ви Си): seguir encomenda na Bulgária",
+      "name": "CVC",
+      "color": "#652b9e"
     },
     {
       "id": "sxw-express",
@@ -10846,6 +10886,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Xinghe Freight: numery GZXH, statusy i dostawa",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "cvc",
+      "catalog": "cvc",
+      "slug": "sledzenie-cvc",
+      "title": "Śledzenie CVC (Си Ви Си): paczka w Bułgarii",
+      "name": "CVC",
+      "color": "#652b9e"
     },
     {
       "id": "sxw-express",

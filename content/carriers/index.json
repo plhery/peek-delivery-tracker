@@ -236,7 +236,7 @@
   { "id": "m-one", "catalog": "m-one", "name": "M-ONE", "languages": ["en"] },
   { "id": "early-bird", "catalog": "early-bird", "name": "Early Bird", "languages": ["en"] },
   { "id": "xinghe-freight", "catalog": "xinghe-freight", "name": "Xinghe Freight", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "cvc", "catalog": "cvc", "name": "CVC", "languages": ["en", "bg"] },
+  { "id": "cvc", "catalog": "cvc", "name": "CVC", "languages": ["en", "bg", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "transpress", "catalog": "transpress", "name": "Transpress", "languages": ["en", "bg"] },
   { "id": "gls-us", "catalog": "gls-us", "name": "GLS US", "languages": ["en"] },
   { "id": "sxw-express", "catalog": "sxw-express", "name": "SXW Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

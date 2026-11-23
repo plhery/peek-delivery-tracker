@@ -59565,6 +59565,32 @@
     ]
   },
   {
+    "input": "603-76070212",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "dhl-ecommerce-pl",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl",
+      "speedy"
+    ],
+    "asked": [
+      "dhl-ecommerce-pl",
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics"
+    ]
+  },
+  {
     "input": "6031125571417",
     "carrier": "unknown",
     "confidence": "low",
@@ -96383,6 +96409,24 @@
     "candidates": []
   },
   {
+    "input": "GOSU1029960",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "GOSUPAV6038932",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "GOSUSHH003860672",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "GPEISP0000060731US",
     "carrier": "globalpost",
     "confidence": "high",
@@ -96698,6 +96742,12 @@
       "aramex-au",
       "aramex-nz"
     ]
+  },
+  {
+    "input": "GSLU2051127",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "GSS10009699406448",
@@ -100550,6 +100600,12 @@
     "candidates": [
       "juxi-express"
     ]
+  },
+  {
+    "input": "JXLU6490287",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "JY00CA00A999999980",
@@ -117351,6 +117407,12 @@
     "candidates": [
       "ues-uy"
     ]
+  },
+  {
+    "input": "UETU2904518",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "UF164782444SE",

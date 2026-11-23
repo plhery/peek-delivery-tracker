@@ -68546,6 +68546,62 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://cargo.airarabia.com/cargo-tracking/",
     "helpUrl": "https://cargo.airarabia.com/"
+  },
+  "gold-star-line": {
+    "displayName": "Gold Star Line",
+    "aliases": [
+      "GSL",
+      "Gold Star Line Ltd"
+    ],
+    "color": "#123c60",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gold-star-line"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "www.goldstarline.com",
+          "goldstarline.com"
+        ],
+        "path": "^/tools/track_shipment/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "www.goldstarline.com",
+          "goldstarline.com"
+        ],
+        "pathPattern": "^/CCM\\.aspx$",
+        "params": [
+          "textContainerNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.goldstarline.com/tools/track_shipment"
+  },
+  "srilankan-cargo": {
+    "displayName": "SriLankan Cargo",
+    "aliases": [
+      "SriLankan Airlines"
+    ],
+    "countries": [
+      "LK"
+    ],
+    "color": "#153D8A",
+    "selectable": true,
+    "timezone": "Asia/Colombo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "srilankan-cargo"
+    },
+    "trackingUrlTemplate": "https://srilankancargo.ibsplc.aero/icargoneoportal/app/main/#/app/tracking/awb",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://srilankancargo.ibsplc.aero/icargoneoportal/app/main/#/app/tracking/awb",
+    "helpUrl": "https://www.srilankancargo.com/"
   }
 } as const;
 
@@ -70642,7 +70698,9 @@ export const CARRIER_IDS = [
   "arkas",
   "pasha-hawaii",
   "seaboard-marine",
-  "air-arabia-cargo"
+  "air-arabia-cargo",
+  "gold-star-line",
+  "srilankan-cargo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

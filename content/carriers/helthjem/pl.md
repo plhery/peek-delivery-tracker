@@ -19,7 +19,7 @@ Numery, które Peek przypisuje Helthjem, wyglądają tak (cyfry wymyślone), w p
 | `370724764829173648` | Helthjem: 18 cyfr zaczynających się od `37072476`. |
 | `00370724764829173648` | Ten sam numer z `00` na początku, jak pod kodem kreskowym: 20 cyfr. |
 | `370748291736482919` | Bring: własne 18-cyfrowe numery również zaczynają się od `370` lub `373`. |
-| `RR482917367NO` | Bring: kody pocztowe kończące się na `NO`. |
+| `RR482917367NO` | Bring: pocztowe numery przesyłek kończące się na `NO`. |
 
 Ostatnia cyfra jest cyfrą kontrolną. Wyszukiwarka Helthjem przyjmuje też 17-cyfrowy numer przesyłki, z prefiksem `401` lub bez.
 
@@ -79,13 +79,13 @@ Na stronie `helthjem.no` znajduje się dział pomocy i kontaktu. Gdy przed dorę
 
 ## Śledzenie paczki Helthjem w Peek
 
-[Peek](/) obsługuje ponad 4500 przewoźników i od razu rozpoznaje Helthjem po 18 cyfrach zaczynających się od `37072476` lub tym samym numerze z `00` na początku, gdy zgadza się cyfra kontrolna („Wykryty przewoźnik”). Inne numery od `370` lub `373` mogą należeć do Bring — Peek pyta Bring i pozostałych pasujących przewoźników. 17-cyfrowe numery przesyłek Helthjem i pozostałe 20-cyfrowe kody wymagają przycisku „Zmień” albo linku ze strony `helthjem.no/sporing/`.
+[Peek](/) obsługuje ponad 4500 przewoźników i od razu rozpoznaje Helthjem po 18 cyfrach zaczynających się od `37072476` lub tym samym numerze z `00` na początku, gdy zgadza się cyfra kontrolna („Wykryty przewoźnik”). Inne 18-cyfrowe numery od `370` lub `373` mogą należeć do Bring — gdy zgadza się ich cyfra kontrolna GS1, Peek pyta Bring, a przy `373` także Matkahuolto; jeśli paczkę zna kilku przewoźników, wybór należy do ciebie. 17-cyfrowe numery przesyłek Helthjem i pozostałe 20-cyfrowe kody wymagają przycisku „Zmień” albo linku ze strony `helthjem.no/sporing/`.
 
 Peek pokazuje status, miejsce każdego skanu (w tym skany sortowni ukryte na stronie Helthjem), godzinę doręczenia, sklep nadający oraz nazwę punktu odbioru w trakcie oczekiwania i po odbiorze. Gdy Helthjem nadaje nową etykietę dla punktu odbioru, Peek wyświetla nowy numer pod „Helthjem śledzi przesyłkę pod numerem”. Statusy pozostają w norweskim brzmieniu Helthjem, a godziny przeliczane są na twoją strefę („Godziny w twojej strefie czasowej:” i jej nazwa). Po zaplanowaniu nocnego kursu Peek wyświetla datę z `Planlagt levering natt til …` jako przewidywany dzień. Pomija ogólny dzień przewidywany ze strony Helthjem, adres punktu odbioru, zdjęcie oraz kody pocztowe.
 
 Gdy Helthjem oznacza paczkę jako doręczaną przez PostNord, karta pokazuje „Doręcza: PostNord” i Peek może śledzić ją dalej w PostNord pod numerem przesyłki. Dopóki PostNord ma tylko zgłoszenie bez własnego skanu, wyświetla się „Zgłoszona przewoźnikowi PostNord, jeszcze nieprzyjęta”.
 
-Gdy masz przesyłkę otwartą w Peek — albo w dniu dostawy przy włączonych powiadomieniach — Peek pyta bezpośrednio Helthjem nawet co 10 minut, a w dniu, gdy Helthjem (lub PostNord po przekazaniu) nada status „W doręczeniu”, nawet co 2 minuty od 6:00 czasu w Oslo, dopóki tracker odpowiada; w pozostałym czasie oraz po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Dla powiadomień wybierz „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po czterech dniach bez nowego skanu w drodze, poza odprawą celną i zgłoszonym problemem, Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Helthjem.” z linkiem „Poproś przewoźnika Helthjem o pomoc”. Peek nie może kontaktować się z Helthjem w twoim imieniu.
+Gdy masz przesyłkę otwartą w Peek — albo w dniu dostawy przy włączonych powiadomieniach — Peek pyta bezpośrednio Helthjem nawet co 10 minut, a w dniu, gdy Helthjem (lub PostNord po przekazaniu) nada status „W doręczeniu”, nawet co 2 minuty od 6:00 czasu w Oslo, dopóki tracker odpowiada; w pozostałym czasie oraz po dwóch dniach bez zmian (12 godzinach, gdy przesyłka nadal ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, a po siedmiu dniach bez zmian przy statusie „Zarejestrowana” co 6 godzin. Dla powiadomień wybierz „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Po czterech dniach bez nowego skanu przy statusie „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie” Peek pokazuje datę ostatniego skanu („Brak aktualizacji od …”) i komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Helthjem.” z linkiem „Poproś przewoźnika Helthjem o pomoc”. Peek nie może kontaktować się z Helthjem w twoim imieniu.
 
 ## Pytania o śledzenie Helthjem
 
@@ -95,7 +95,7 @@ Tak. Helthjem Netthandel AS jest zarejestrowana w Oslo jako firma pocztowa i kur
 
 ### O jakiej porze doręcza Helthjem?
 
-Dostawy do domu często odbywają się w ramach nocnych kursów. Gdy Helthjem taki zaplanuje, śledzenie dzień wcześniej wyświetla `Planlagt levering natt til …` z datą kończącą tę noc; Peek pokazuje tę datę jako przewidywany dzień.
+Dostawy do domu mogą odbywać się w ramach nocnych kursów. Gdy Helthjem taki zaplanuje, śledzenie dzień wcześniej wyświetla `Planlagt levering natt til …` z datą kończącą tę noc; Peek pokazuje tę datę jako przewidywany dzień.
 
 ### Co oznacza „Budet fikk ikke med seg pakken din ut i natt”?
 

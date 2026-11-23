@@ -19,7 +19,7 @@ I numeri che Peek collega a Helthjem hanno questa forma (cifre inventate), accan
 | `370724764829173648` | Helthjem: 18 cifre che iniziano con `37072476`. |
 | `00370724764829173648` | Lo stesso con `00` davanti, come sotto un codice a barre: 20 cifre. |
 | `370748291736482919` | Bring: anche i suoi numeri a 18 cifre iniziano con `370` o `373`. |
-| `RR482917367NO` | Bring: codici postali che terminano in `NO`. |
+| `RR482917367NO` | Bring: numeri di spedizione postali che terminano in `NO`. |
 
 L’ultima cifra è una cifra di controllo. La ricerca di Helthjem accetta anche il numero di spedizione a 17 cifre, con o senza `401` davanti.
 
@@ -79,13 +79,13 @@ Il sito `helthjem.no` offre una pagina di aiuto e contatto. Se passano quattro g
 
 ## Tracciare un pacco Helthjem con Peek
 
-[Peek](/) segue oltre 4.500 corrieri e riconosce subito Helthjem da 18 cifre che iniziano con `37072476`, o le stesse precedute da `00`, se la cifra di controllo torna («Corriere rilevato»). Altri numeri con `370` o `373` possono essere di Bring: Peek interroga Bring e gli altri corrieri compatibili. I codici di spedizione Helthjem da 17 cifre e altri codici a barre da 20 cifre richiedono «Cambia» o un link su `helthjem.no/sporing/`.
+[Peek](/) segue oltre 4.500 corrieri e riconosce subito Helthjem da 18 cifre che iniziano con `37072476`, o le stesse precedute da `00`, se la cifra di controllo torna («Corriere rilevato»). Altri numeri da 18 cifre con `370` o `373` possono essere di Bring: se la cifra di controllo GS1 torna, Peek interroga Bring, e per `373` anche Matkahuolto; se più corrieri conoscono il pacco, scegli tu. I codici di spedizione Helthjem da 17 cifre e altri codici a barre da 20 cifre richiedono «Cambia» o un link su `helthjem.no/sporing/`.
 
 Peek mostra stato, luogo di ogni scansione (comprese scansioni di smistamento che la pagina Helthjem nasconde), ora di consegna, negozio mittente e nome del punto di ritiro mentre attende o una volta ritirato. Se Helthjem rietichetta il pacco per un punto di ritiro, Peek mostra anche il nuovo numero sotto «Helthjem lo traccia con il numero». Gli stati restano nel norvegese di Helthjem e gli orari sono convertiti nel tuo fuso («Orari nel tuo fuso orario:» seguito dal nome). Quando Helthjem programma il giro notturno, Peek mostra la data in `Planlagt levering natt til …` come giorno previsto. Omette invece la data generica della pagina Helthjem, l’indirizzo del punto di ritiro, la foto e i codici postali.
 
 Quando Helthjem segnala un pacco affidato a PostNord, la scheda mostra «Consegna con PostNord» e Peek può seguirlo su PostNord col relativo codice. Finché PostNord ha solo l’annuncio senza scansioni proprie, appare «Annunciato a PostNord, non ancora ricevuto».
 
-Mentre hai il pacco aperto in Peek — o il giorno della consegna con le notifiche attive — Peek interroga direttamente Helthjem fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Oslo nel giorno in cui Helthjem (o PostNord dopo il passaggio) segna «In consegna», finché il rispettivo tracker risponde; altrimenti, e dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Per le notifiche scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni in viaggio, fuori da dogana o problemi segnalati, Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Helthjem.», con il link «Chiedi aiuto a Helthjem». Peek non può contattare Helthjem per te.
+Mentre hai il pacco aperto in Peek — o il giorno della consegna con le notifiche attive — Peek interroga direttamente Helthjem fino a ogni 10 minuti, e fino a ogni 2 minuti dalle 6:00 ora di Oslo nel giorno in cui Helthjem (o PostNord dopo il passaggio) segna «In consegna», finché il rispettivo tracker risponde; altrimenti, e dopo due giorni senza novità (12 ore se resta su «Etichetta creata» o «Preso in carico»), controlla ogni ora; dopo sette giorni senza novità su «Etichetta creata», ogni 6 ore. Per le notifiche scegli «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo quattro giorni senza scansioni su «Etichetta creata», «Preso in carico» o «In transito», Peek mostra la data dell’ultima scansione («Nessun aggiornamento da …») e «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a Helthjem.», con il link «Chiedi aiuto a Helthjem». Peek non può contattare Helthjem per te.
 
 ## Domande frequenti su Helthjem
 
@@ -95,7 +95,7 @@ Sì. Helthjem Netthandel AS è registrata a Oslo come azienda postale e corriere
 
 ### A che ora consegna Helthjem?
 
-Le consegne a domicilio avvengono spesso su giro notturno. Quando Helthjem ne prenota uno, il tracciamento mostra il giorno prima `Planlagt levering natt til …` con la data che chiude quella notte; Peek mostra quella data come giorno previsto.
+Le consegne a domicilio possono avvenire su un giro notturno. Quando Helthjem ne prenota uno, il tracciamento mostra il giorno prima `Planlagt levering natt til …` con la data che chiude quella notte; Peek mostra quella data come giorno previsto.
 
 ### Cosa significa «Budet fikk ikke med seg pakken din ut i natt»?
 

@@ -79,13 +79,13 @@ Auf `helthjem.no` gibt es eine Hilfe- und Kontaktseite. Vergehen vor der Auslief
 
 ## Helthjem-Paket mit Peek verfolgen
 
-[Peek](/) verfolgt über 4.500 Paketdienste und erkennt Helthjem sofort bei 18 Ziffern beginnend mit `37072476` oder denselben mit `00` davor, sobald die Prüfziffer stimmt („Erkannter Paketdienst“). Andere Nummern mit `370` oder `373` können zu Bring gehören: Peek fragt Bring und weitere passende Dienste. Für Helthjems 17-stellige Sendungsnummern und andere 20-stellige Barcodes nutze „Ändern“ oder einen Link auf `helthjem.no/sporing/`.
+[Peek](/) verfolgt über 4.500 Paketdienste und erkennt Helthjem sofort bei 18 Ziffern beginnend mit `37072476` oder denselben mit `00` davor, sobald die Prüfziffer stimmt („Erkannter Paketdienst“). Andere 18-stellige Nummern mit `370` oder `373` können zu Bring gehören: Stimmt ihre GS1-Prüfziffer, fragt Peek Bring, bei `373` auch Matkahuolto; kennen mehrere Dienste das Paket, wählst du. Für Helthjems 17-stellige Sendungsnummern und andere 20-stellige Barcodes nutze „Ändern“ oder einen Link auf `helthjem.no/sporing/`.
 
 Peek zeigt den Status, den Ort jedes Scans (einschließlich Sortier-Scans, die Helthjems Seite ausblendet), die Zustellzeit, den Absender-Shop sowie den Namen der Abholstelle während der Lagerung oder nach Abholung. Klebt Helthjem für eine Abholstelle ein neues Etikett auf, zeigt Peek auch die neue Nummer unter „Helthjem führt die Sendung unter“. Die Texte bleiben in Helthjems Norwegisch und die Zeiten erscheinen in deiner Zeitzone („Uhrzeiten in deiner Zeitzone:“ gefolgt von ihrem Namen). Plant Helthjem die Nachttour ein, zeigt Peek das Datum aus `Planlagt levering natt til …` als erwarteten Tag. Weggelassen werden das allgemeine Zieldatum der Helthjem-Seite, die Adresse der Abholstelle, das Foto und Postleitzahlen.
 
 Kennzeichnet Helthjem ein Paket als PostNord-Lieferung, zeigt die Karte „Zustellung durch PostNord“, und Peek kann es bei PostNord unter seiner Sendungsnummer weiterverfolgen. Solange PostNord nur die Ankündigung ohne eigenen Scan hat, steht stattdessen „Bei PostNord angekündigt, noch nicht eingetroffen“.
 
-Solange das Paket in Peek geöffnet ist — oder am Liefertag bei aktiven Benachrichtigungen — fragt Peek direkt bei Helthjem bis zu alle 10 Minuten ab, und ab 6:00 Uhr Osloer Zeit am Tag, an dem Helthjem (oder PostNord nach Übergabe) „In Zustellung“ meldet, bis zu alle 2 Minuten, solange der jeweilige Tracker antwortet; sonst sowie nach zwei ruhigen Tagen (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ gilt) stündlich. Für Benachrichtigungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan unterwegs, außerhalb von Zoll oder gemeldetem Problem, zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Helthjem nach.“ und dem Link „Hol dir Hilfe bei Helthjem“. Peek kann Helthjem nicht für dich kontaktieren.
+Solange das Paket in Peek geöffnet ist — oder am Liefertag bei aktiven Benachrichtigungen — fragt Peek direkt bei Helthjem bis zu alle 10 Minuten ab, und ab 6:00 Uhr Osloer Zeit am Tag, an dem Helthjem (oder PostNord nach Übergabe) „In Zustellung“ meldet, bis zu alle 2 Minuten, solange der jeweilige Tracker antwortet; sonst sowie nach zwei ruhigen Tagen (12 Stunden, solange „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ gilt) stündlich; nach sieben Tagen ohne Neuigkeiten bei „Etikett erstellt“ alle 6 Stunden. Für Benachrichtigungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Nach vier Tagen ohne Scan auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“ zeigt Peek das Datum des letzten Scans („Keine Aktualisierung seit …“) samt „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Helthjem nach.“ und dem Link „Hol dir Hilfe bei Helthjem“. Peek kann Helthjem nicht für dich kontaktieren.
 
 ## Häufige Fragen zu Helthjem
 
@@ -95,7 +95,7 @@ Ja. Die Helthjem Netthandel AS ist in Oslo als Post- und Kurierunternehmen einge
 
 ### Um welche Uhrzeit liefert Helthjem?
 
-Hauszustellungen erfolgen oft auf einer Nachttour. Bucht Helthjem eine ein, zeigt das Tracking am Vortag `Planlagt levering natt til …` mit dem Datum, in das die Nacht mündet; Peek zeigt dieses Datum als erwarteten Tag.
+Hauszustellungen können auf einer Nachttour erfolgen. Bucht Helthjem eine ein, zeigt das Tracking am Vortag `Planlagt levering natt til …` mit dem Datum, in das die Nacht mündet; Peek zeigt dieses Datum als erwarteten Tag.
 
 ### Was bedeutet „Budet fikk ikke med seg pakken din ut i natt“?
 

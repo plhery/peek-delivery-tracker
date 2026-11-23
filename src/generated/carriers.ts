@@ -3476,6 +3476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "packlink-sendungsverfolgung",
+      "title": "Packlink Sendungsverfolgung: Referenz, Status und Kontakt",
+      "name": "Packlink",
+      "color": "#ff4f00"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "sto-express-sendungsverfolgung",
@@ -5134,6 +5142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "suivi-packlink",
+      "title": "Suivi Packlink\u00a0: référence, statuts et qui contacter",
+      "name": "Packlink",
+      "color": "#ff4f00"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "suivi-sto-express",
@@ -6760,6 +6776,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "tracking-packlink",
+      "title": "Tracking Packlink: riferimento, stati e chi contattare",
+      "name": "Packlink",
+      "color": "#ff4f00"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "tracciamento-sto-express",
@@ -8370,6 +8394,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "seguimiento-packlink",
+      "title": "Seguimiento Packlink: referencia, estados y contacto",
+      "name": "Packlink",
+      "color": "#ff4f00"
+    },
+    {
       "id": "sto",
       "catalog": "sto",
       "slug": "seguimiento-sto-express",
@@ -9954,6 +9986,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento DPD Belgium: estados, entrega e contacto",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "seguimento-packlink",
+      "title": "Seguimento Packlink: referência, estados e contactos",
+      "name": "Packlink",
+      "color": "#ff4f00"
     },
     {
       "id": "sto",
@@ -11598,6 +11638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DPD Belgium: statusy, doręczenie i kontakt",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "sledzenie-packlink",
+      "title": "Śledzenie Packlink: numer referencyjny, statusy i kontakt",
+      "name": "Packlink",
+      "color": "#ff4f00"
     },
     {
       "id": "sto",

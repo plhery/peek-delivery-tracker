@@ -2620,6 +2620,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b70100"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "slovak-parcel-service-sendungsverfolgung",
+      "title": "Slovak Parcel Service (SPS) Tracking: Status und Hilfe",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-sendungsverfolgung",
@@ -4412,6 +4420,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Foxpost\u00a0: statuts, casiers et contacts",
       "name": "Foxpost",
       "color": "#b70100"
+    },
+    {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "suivi-slovak-parcel-service",
+      "title": "Suivi Slovak Parcel Service (SPS)\u00a0: statuts et retrait",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
     },
     {
       "id": "slovenska-posta",
@@ -6232,6 +6248,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b70100"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "tracciamento-slovak-parcel-service",
+      "title": "Tracciamento Slovak Parcel Service (SPS): stati e aiuto",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "tracciamento-slovenska-posta",
@@ -8002,6 +8026,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b70100"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "seguimiento-slovak-parcel-service",
+      "title": "Seguimiento Slovak Parcel Service (SPS): estados y ayuda",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "seguimiento-slovenska-posta",
@@ -9762,6 +9794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Foxpost: estados, cacifos e contactos",
       "name": "Foxpost",
       "color": "#b70100"
+    },
+    {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "seguimento-slovak-parcel-service",
+      "title": "Seguimento Slovak Parcel Service (SPS): estados e ajuda",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
     },
     {
       "id": "slovenska-posta",
@@ -11558,6 +11598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Foxpost: statusy, automaty i kontakt",
       "name": "Foxpost",
       "color": "#b70100"
+    },
+    {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "sledzenie-slovak-parcel-service",
+      "title": "Śledzenie Slovak Parcel Service (SPS): statusy i pomoc",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
     },
     {
       "id": "slovenska-posta",

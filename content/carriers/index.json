@@ -83,7 +83,7 @@
   { "id": "ceska-posta", "catalog": "ceska-posta", "name": "Česká pošta", "languages": ["en", "cs", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "express-one", "catalog": "express-one", "name": "Express One", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "foxpost", "catalog": "foxpost", "name": "Foxpost", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "slovak-parcel-service", "catalog": "slovak-parcel-service", "name": "Slovak Parcel Service", "languages": ["en", "sk"] },
+  { "id": "slovak-parcel-service", "catalog": "slovak-parcel-service", "name": "Slovak Parcel Service", "languages": ["en", "sk", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "slovenska-posta", "catalog": "slovenska-posta", "name": "Slovenská pošta", "languages": ["en", "sk", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "posta-slovenije", "catalog": "posta-slovenije", "name": "Pošta Slovenije", "languages": ["en", "sl", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "hrvatska-posta", "catalog": "hrvatska-posta", "name": "Hrvatska pošta", "languages": ["en", "hr", "fr", "de", "es", "it", "pt", "pl"] },

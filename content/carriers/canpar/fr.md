@@ -14,10 +14,10 @@ Canpar donne à chaque colis son propre code à barres. Tu ne le trouves pas ? V
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
-| `D000000000000000000000` | Le code à barres du colis : une lettre (C, D, K, L, S, U, X ou Z) puis 21 chiffres. C'est lui qu'il faut suivre. |
-| `W00000000` | Le numéro de l'avis de livraison laissé par le chauffeur : W et 8 ou 9 chiffres, sous le code à barres en haut de l'avis. |
-| `P000000000` | Une étiquette de ramassage : P et 9 chiffres, quand Canpar vient chercher un colis, un retour par exemple. |
-| `R00000000` | Une étiquette de retour : R et 8 chiffres. |
+| `D482917364058291736405` | Le code à barres du colis : une lettre (C, D, K, L, S, U, X ou Z) puis 21 chiffres. C'est lui qu'il faut suivre. |
+| `W48291736` | Le numéro de l'avis de livraison laissé par le chauffeur : W et 8 ou 9 chiffres, sous le code à barres en haut de l'avis. |
+| `P482917364` | Une étiquette de ramassage : P et 9 chiffres, quand Canpar vient chercher un colis, un retour par exemple. |
+| `R48291736` | Une étiquette de retour : R et 8 chiffres. |
 
 La FAQ de Canpar parle d'une lettre suivie de 8 à 20 chiffres. Repérer un colis accepte ces codes plus courts : s'il ne trouve pas le numéro, il te demande le code postal de destination. Il prend aussi une référence de l'expéditeur avec ce code postal.
 
@@ -83,7 +83,7 @@ Indiqué livré, mais rien chez toi ? Cherche autour de chez toi un endroit abri
 
 ## Joindre Canpar : téléphone et service à la clientèle
 
-Les canaux de Canpar, lus sur sa page Communiquez avec nous le 27 octobre 2026 :
+Les canaux de Canpar, selon sa page Communiquez avec nous :
 
 - **Téléphone** 1 800 387-9335, du lundi au vendredi de 8 h à 20 h HNE ; pour le Québec, de 8 h à 17 h HNE.
 - **Clavardage** par l'icône de chat en bas de l'écran, sur canpar.com, du lundi au vendredi de 10 h à 19 h HNE.
@@ -97,13 +97,19 @@ Garde ton code à barres ou le numéro W de ton avis sous la main.
 
 Peek affiche le statut dans l'anglais de Canpar, chaque scan avec sa ville et sa province sur une carte, ainsi que la date de livraison prévue. Un colis au SMARTSpot apparaît comme « Prêt à être retiré », sans le nom ni l'adresse du comptoir : vois-les sur canpar.com. Peek laisse de côté la preuve de livraison, le destinataire, les adresses et les références. Un colis confié à un livreur partenaire reste « En transit » : Peek ne suit pas ce partenaire. Il ne peut ni réacheminer le colis ni joindre Canpar pour toi.
 
-Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan. Il vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Canpar qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan.
+
+Tant que tu gardes le colis ouvert dans Peek, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes à partir de 6 h, heure locale, le jour où Canpar scanne le colis `Out for Delivery-Almost There!`, tant que le suivi de Canpar répond (via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles (12 heures tant que le colis en est à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures, puis toutes les 6 heures une fois le colis à « Étiquette créée » depuis sept jours.
+
+Quand le dernier scan date de quatre jours et que le colis en est encore à « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis dit alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Canpar. », avec un lien « Demande de l’aide à Canpar » vers sa page de contact (en anglais). Après trois semaines sans nouveau scan, elle dit « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger Canpar. »
+
+Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Canpar
 
 ### Combien de chiffres a un numéro de suivi Canpar ?
 
-Le code à barres complet a une lettre et 21 chiffres, comme l'exemple inventé `D000000000000000000000` ; c'est celui que Peek reconnaît tout seul. La FAQ de Canpar parle aussi de codes plus courts, de 8 à 20 chiffres : Peek les suit si tu choisis Canpar, avec le code postal de destination au besoin.
+Le code à barres complet a une lettre et 21 chiffres, comme l'exemple inventé `D482917364058291736405` ; c'est celui que Peek reconnaît tout seul. La FAQ de Canpar parle aussi de codes plus courts, de 8 à 20 chiffres : Peek les suit si tu choisis Canpar, avec le code postal de destination au besoin.
 
 ### Canpar livre-t-il la fin de semaine ?
 

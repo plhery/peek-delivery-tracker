@@ -16,9 +16,9 @@ Parcels today carry one letter (C, D, K, L, S, U, X or Z) followed by 21 digits,
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `D123456789012345678901` | The parcel's barcode number: the one to track. |
-| `W12345678` | A delivery notice number (W + 8 or 9 digits), printed on the card a driver leaves. |
-| `P123456789` | A Pick Up Tag (P + 9 digits); return tags are R + 8 digits. |
+| `D482917364058291736405` | The parcel's barcode number: the one to track. |
+| `W48291736` | A delivery notice number (W + 8 or 9 digits), printed on the card a driver leaves. |
+| `P482917364` | A Pick Up Tag (P + 9 digits); return tags are R + 8 digits. |
 
 Canpar's own tracking tool also takes these, and a sender's reference with the destination postal code. A barcode can be searched online for about a year; for ones up to three years old, email customerservice@canpar.com.
 
@@ -74,7 +74,7 @@ If tracking says delivered and you have nothing, check the proof of delivery lin
 
 ## Canpar phone number and customer service
 
-Canpar's channels, as listed on its Contact Us page on 15 October 2026:
+Canpar's channels, from its Contact Us page:
 
 - **Phone** 1-800-387-9335, Monday to Friday, 8am to 8pm EST (Quebec: 8am to 5pm EST).
 - **Live chat** from the chat icon at the bottom of canpar.com pages, Monday to Friday, 10am to 7pm EST.
@@ -88,13 +88,19 @@ Have the barcode or W number ready.
 
 It shows Canpar's status in Canpar's English words and the expected delivery day. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
 
-Canpar's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Canpar's own history, shown on a map. Peek can notify you when the status changes.
+Canpar's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Canpar's own history, shown on a map.
+
+While you have the parcel open in Peek, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Canpar scans the parcel `Out for Delivery-Almost There!`, while Canpar's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly, and every 6 hours once the parcel has shown "Label created" for seven days.
+
+When the newest scan is four days old and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it with that scan's day, such as "No tracking update since Mon 12 Oct". The parcel's page then says "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Canpar.", with a "Get help from Canpar" link to Canpar's Contact Us page. After three weeks with no new scan, it says "Nothing new for over three weeks. If it still hasn’t arrived, ask the seller. Peek keeps asking Canpar."
+
+Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Canpar tracking
 
 ### How many digits is a Canpar tracking number?
 
-Current numbers are one letter followed by 21 digits, such as the invented `D123456789012345678901`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code. Peek takes them too: pick Canpar with "Change" and give the postal code if Peek asks for it.
+Current numbers are one letter followed by 21 digits, such as the invented `D482917364058291736405`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code. Peek takes them too: pick Canpar with "Change" and give the postal code if Peek asks for it.
 
 ### Does Canpar deliver on weekends?
 
@@ -125,6 +131,5 @@ It depends on the service and on where the parcel starts and ends. Canpar's Tran
 - [Canpar: Contact Us](https://www.canpar.com/en/contact/contact_us.htm) – phone, hours, chat
 - [Canpar: Privacy Policy](https://www.canpar.com/en/about/privacy.htm) – barcode per parcel, search period
 - [Canpar: Foire aux questions](https://www.canpar.com/fr/support/faqs.htm) – French wording, same rules
-- [Canpar: Tracking service](https://canship.canpar.com/api/CanparAddons/trackByBarcodeV2) – status wordings in English and French
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from Canpar
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – status wordings in English and French, and what Peek reads from Canpar
 :::

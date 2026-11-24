@@ -51,6 +51,8 @@
 .peek-ai-strip__key > span { display: inline-flex; align-items: center; gap: 5px; }
 .peek-ai-strip__scale { display: inline-flex; gap: 2px; }
 .peek-ai-strip__key i { --fill: 0%; display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: color-mix(in srgb, var(--ink) var(--fill), transparent); }
+/* Each swatch edged in a faint ink: the faintest shade alone would barely part from the panel. */
+.peek-ai-strip__scale i { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent); }
 .peek-ai-strip__key i[data-carrier] { box-shadow: inset 0 0 0 1.2px currentColor; }
 /* With more contrast asked for, the shades step further apart and every word takes the ink. */
 @media (prefers-contrast: more) {

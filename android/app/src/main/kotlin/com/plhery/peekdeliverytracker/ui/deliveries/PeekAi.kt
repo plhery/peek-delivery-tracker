@@ -561,8 +561,14 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
         FlowRow(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
                 KeyWords(localizer.text("peekAi.sheet.lessLikely"), soft)
+                // Each swatch edged in a faint ink: the faintest shade alone would barely part from the panel.
                 Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-                    for (level in 1..4) Box(Modifier.size(10.dp).background(stripFill(level), RoundedCornerShape(3.dp)))
+                    for (level in 1..4) {
+                        Box(
+                            Modifier.size(10.dp).background(stripFill(level), RoundedCornerShape(3.dp))
+                                .border(1.dp, ink.copy(alpha = ink.alpha * 0.25f), RoundedCornerShape(3.dp)),
+                        )
+                    }
                 }
                 KeyWords(localizer.text("peekAi.sheet.moreLikely"), soft)
             }

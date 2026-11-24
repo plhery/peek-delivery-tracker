@@ -360,8 +360,11 @@ private struct PeekAiStripView: View {
         HStack(spacing: 5) {
             Text(localizer.text("peekAi.sheet.lessLikely"))
             HStack(spacing: 2) {
+                // Each swatch edged in a faint ink: the faintest shade alone would barely part from the panel.
                 ForEach(1...4, id: \.self) { level in
-                    RoundedRectangle(cornerRadius: 3).fill(fill(level)).frame(width: 10, height: 10)
+                    RoundedRectangle(cornerRadius: 3).fill(fill(level))
+                        .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder(Brand.ink.opacity(0.25), lineWidth: 1))
+                        .frame(width: 10, height: 10)
                 }
             }
             Text(localizer.text("peekAi.sheet.moreLikely"))

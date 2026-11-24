@@ -153,10 +153,15 @@ fun Localizer.peekAiClaim(ai: PeekAi, now: Instant = AppClock.now()): String = w
     PeekAiSays.TodayOrTomorrow -> text("peekAi.claim.todayOrTomorrow")
     PeekAiSays.ThisWeek -> text("peekAi.claim.thisWeek")
     PeekAiSays.ByEndOfNextWeek -> text("peekAi.claim.byEndOfNextWeek")
-    PeekAiSays.Sooner -> when (val day = ai.day) {
-        null -> text("peekAi.claim.sooner")
-        now.atZone(ZoneId.systemDefault()).toLocalDate().plusDays(1).toString() -> text("peekAi.claim.soonerTomorrow")
-        else -> text("peekAi.claim.soonerFrom", mapOf("date" to calendar(day)))
+    PeekAiSays.Sooner -> {
+        val today = now.atZone(ZoneId.systemDefault()).toLocalDate()
+        val day = ai.day
+        when {
+            // A copy kept since its first day has gone by names no day.
+            day == null || day < today.toString() -> text("peekAi.claim.sooner")
+            day == today.plusDays(1).toString() -> text("peekAi.claim.soonerTomorrow")
+            else -> text("peekAi.claim.soonerFrom", mapOf("date" to calendar(day)))
+        }
     }
 }
 

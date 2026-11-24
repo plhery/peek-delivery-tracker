@@ -173,6 +173,8 @@ class PeekAiTests {
         assertEquals("likely by 16:00", english.peekAiClaim(byTime, now))
         assertEquals("maybe sooner, from tomorrow", english.peekAiClaim(sooner, now))
         assertEquals("maybe sooner, from Thu 26 Nov", english.peekAiClaim(sooner.copy(day = "2026-11-26"), now))
+        // Kept past its first day, it names none.
+        assertEquals("maybe sooner", english.peekAiClaim(sooner.copy(day = "2026-11-23"), now))
         assertEquals("likely by the end of next week", english.peekAiClaim(noDate.copy(says = PeekAiSays.ByEndOfNextWeek), now))
     }
 

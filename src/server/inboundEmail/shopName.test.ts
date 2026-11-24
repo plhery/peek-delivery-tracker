@@ -18,6 +18,8 @@ describe('the shop a carrier\'s email names', () => {
     ['Colis de IKEA livré', 'IKEA'],
     ['Paket von ABC STORE ist unterwegs', 'ABC Store'],
     ['Colis de EXAMPLE® SHOP livré', 'Example Shop'],
+    ['Ihre Die schöne Werkstatt Sendung verzögert sich', 'Die schöne Werkstatt'],
+    ['Fwd: Your Haus und Hof Example shipment is on its way', 'Haus und Hof Example'],
   ])('reads "%s"', (subject, shop) => {
     expect(shopNamedIn(subject, subject)).toBe(shop);
   });
@@ -31,6 +33,9 @@ describe('the shop a carrier\'s email names', () => {
     'Ihre Sendung ist unterwegs und Ihr Paket kommt morgen',
     'Zustellung von Montag bis Freitag',
     'Neue Informationen zur Sendung 123.45.12345678',
+    'Ihre neue Sendung ist unterwegs',
+    'Your Example gift shipment is on its way',
+    'Ihre Example ist unterwegs Sendung',
   ])('reads no shop in "%s"', (subject) => {
     expect(shopNamedIn(subject, subject)).toBe('');
   });

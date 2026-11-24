@@ -74,6 +74,16 @@ function nameAtStart(rest: string): string {
   return name.join(' ');
 }
 
+/**
+ * A name the wording holds on both sides ("Ihre X Sendung"): all its words, which start and end with capitalised ones
+ * and may hold small ones between them ("Die schöne Werkstatt"), or nothing.
+ */
+function nameBetween(between: string): string {
+  const words = between.trim().split(/\s+/);
+  if (words.length > MOST_NAME_WORDS || NAME_END.test(between) || !startsName(words[0]!) || !capital(words.at(-1)!)) return '';
+  return words.slice(1).some((word) => AFTER_NAME.has(word.toLowerCase())) ? '' : words.join(' ');
+}
+
 /** Words written in capitals as a name is said: "EXAMPLE SHOP" is "Example Shop", while "IKEA" and "H&M" stay. */
 function saidAloud(name: string): string {
   const letters = name.replace(/[^\p{L}]/gu, '');
@@ -102,8 +112,8 @@ function named(pattern: RegExp, text: string, whole = false): string {
   let tries = 0;
   for (const found of text.matchAll(pattern)) {
     if ((tries += 1) > MOST_TRIES) break;
-    const name = nameAtStart(found[1]!);
-    if (!name || !/\p{L}/u.test(name) || whole && name !== found[1]!.trim().replace(/\s+/g, ' ')) continue;
+    const name = whole ? nameBetween(found[1]!) : nameAtStart(found[1]!);
+    if (!name || !/\p{L}/u.test(name)) continue;
     return tidy(name);
   }
   return '';

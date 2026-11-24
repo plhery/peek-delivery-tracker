@@ -17588,6 +17588,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-meiguo-chaxun",
+      "title": "GOFO Express 美国快递查询：GFUS 单号、签收照片与客服",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
       "id": "australia-post",
       "catalog": "australia-post",
       "slug": "aozhou-youzheng-wuliu-chaxun",
@@ -17602,6 +17610,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "壹号专线（FIRST LINE）物流查询：1ST单号、状态与美国派送",
       "name": "FIRST LINE",
       "color": "#55207a"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-deguo-chaxun",
+      "title": "极兔德国（J&T Express Germany）单号查询、邻居代收与客服",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "juxi-express",
@@ -17690,6 +17706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "圆通速递（YTO）物流查询：YT 单号、物流记录与客服电话",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "spx-express-baxi-chaxun",
+      "title": "巴西 SPX Express（Shopee Xpress）单号查询、状态与关税",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
     },
     {
       "id": "pengyou",

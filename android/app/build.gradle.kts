@@ -102,10 +102,10 @@ android {
         applicationId = "com.plhery.peekdeliverytracker"
         minSdk = 31
         targetSdk = 37
-        versionCode = 20
+        versionCode = 21
         // Android numbers its versions on its own, apart from the iPhone's MARKETING_VERSION; versionCode goes up by one
         // with each build sent to Google Play.
-        versionName = "1.1.26"
+        versionName = "1.1.27"
         // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from), and Firebase's.

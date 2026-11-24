@@ -1,0 +1,6 @@
+Peek AI says when it thinks a parcel will come, if it has a strong hint.
+The map heads for the town a parcel is going to.
+Steps a carrier lists in advance are folded behind one line.
+You can tell Peek “I haven’t received it” and get a next step.
+A J&T China number can be tracked with the last 4 digits of a phone.
+JRS Express and Tiui numbers keep their hyphens.

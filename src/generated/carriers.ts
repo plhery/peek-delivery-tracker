@@ -14974,6 +14974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "rastreamento-uniuni",
+      "title": "Rastreamento UniUni: status, entregas perdidas e contato",
+      "name": "UniUni",
+      "color": "#f68841"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "rastreamento-gofo-express",
@@ -15076,6 +15084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Meiteshun: AMTS, etapas e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "rastreamento-gofo-canada",
+      "title": "Rastreamento GOFO Canada: códigos GFCA, status e atrasos",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
     },
     {
       "id": "topyou",
@@ -18028,6 +18044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "UniUni 快递查询：北美单号格式、物流状态与客服电话",
+      "name": "UniUni",
+      "color": "#f68841"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-meiguo-chaxun",
@@ -18202,6 +18226,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "华亚运通（Huaya Express）查询：HYYT单号与状态",
       "name": "Huaya Express",
       "color": "#e60013"
+    },
+    {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "gofo-ca-tracking",
+      "title": "GOFO Canada 加拿大快递查询：GFCA 单号、状态与延误",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
     },
     {
       "id": "topyou",

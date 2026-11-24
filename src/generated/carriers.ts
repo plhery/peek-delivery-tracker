@@ -4612,6 +4612,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#2478be"
     },
     {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "bjs-home-delivery-sendungsverfolgung",
+      "title": "BJS Home Delivery Sendungsverfolgung: B-Codes & Hilfe",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6782,6 +6790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#2478be"
     },
     {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "suivi-bjs-home-delivery",
+      "title": "Suivi BJS Home Delivery\u00a0: codes B, créneaux 3 h et aide",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -8936,6 +8952,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#2478be"
     },
     {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "tracciamento-bjs-home-delivery",
+      "title": "Tracciamento BJS Home Delivery: codici B, fasce 3 h e aiuto",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11088,6 +11112,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento AnserX: códigos BTYCN...YQ, traspaso y ayuda",
       "name": "AnserX",
       "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "seguimiento-bjs-home-delivery",
+      "title": "Seguimiento BJS Home Delivery: códigos B, franja 3 h y ayuda",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
     },
     {
       "id": "correos-de-mexico",
@@ -13282,6 +13314,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio AnserX: códigos BTYCN...YQ, entrega local e ajuda",
       "name": "AnserX",
       "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "rastreio-bjs-home-delivery",
+      "title": "Rastreio BJS Home Delivery: códigos B, janela 3 h e ajuda",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
     },
     {
       "id": "5post",
@@ -15510,6 +15550,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie AnserX: kody BTYCN...YQ, przekazanie i pomoc",
       "name": "AnserX",
       "color": "#2478be"
+    },
+    {
+      "id": "bjs-home-delivery",
+      "catalog": "bjs-home-delivery",
+      "slug": "sledzenie-bjs-home-delivery",
+      "title": "Śledzenie BJS Home Delivery: kody B, okna 3 h i pomoc",
+      "name": "BJS Home Delivery",
+      "color": "#feba30"
     },
     {
       "id": "5post",

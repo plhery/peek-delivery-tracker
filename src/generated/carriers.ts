@@ -4660,6 +4660,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe2e"
     },
     {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "ems-sendungsverfolgung",
+      "title": "EMS Sendungsverfolgung: S10-Nummern, Status & Hilfe",
+      "name": "EMS",
+      "color": "#003b7a"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6910,6 +6918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe2e"
     },
     {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "suivi-ems",
+      "title": "Suivi EMS\u00a0: numéros S10, statuts et aide postale",
+      "name": "EMS",
+      "color": "#003b7a"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9144,6 +9160,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffbe2e"
     },
     {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "tracciamento-ems",
+      "title": "Tracciamento EMS: codici S10, stati e aiuto postale",
+      "name": "EMS",
+      "color": "#003b7a"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11376,6 +11400,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento DobroPost: códigos DBRPST, estados y hubs",
       "name": "DobroPost",
       "color": "#ffbe2e"
+    },
+    {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "seguimiento-ems",
+      "title": "Seguimiento EMS: códigos S10, estados y ayuda postal",
+      "name": "EMS",
+      "color": "#003b7a"
     },
     {
       "id": "redur",
@@ -13642,6 +13674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio DobroPost: códigos DBRPST, estados e hubs China",
       "name": "DobroPost",
       "color": "#ffbe2e"
+    },
+    {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "rastreio-ems",
+      "title": "Rastreio EMS: códigos S10, estados e apoio postal",
+      "name": "EMS",
+      "color": "#003b7a"
     },
     {
       "id": "buffalo-ex",
@@ -15950,6 +15990,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DobroPost: kody DBRPST, statusy i magazyny",
       "name": "DobroPost",
       "color": "#ffbe2e"
+    },
+    {
+      "id": "ems",
+      "catalog": "ems",
+      "slug": "sledzenie-ems",
+      "title": "Śledzenie EMS: kody S10, statusy i pomoc pocztowa",
+      "name": "EMS",
+      "color": "#003b7a"
     },
     {
       "id": "buffalo-ex",

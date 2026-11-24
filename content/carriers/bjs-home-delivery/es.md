@@ -21,7 +21,7 @@ Si tu entrega voluminosa en el Reino Unido viaja con otra empresa de gran paquet
 
 ## Qué significan los estados de seguimiento de BJS Home Delivery
 
-BJS sigue los pedidos de dos operarios mediante una barra de progreso paso a paso, desde la liberación por parte de la tienda hasta la entrega por la tripulación en días naturales del Reino Unido (`Europe/London`):
+BJS sigue los pedidos de dos operarios mediante una barra de progreso paso a paso, desde la liberación por parte de la tienda hasta la entrega por el equipo en días naturales del Reino Unido (`Europe/London`):
 
 | BJS Home Delivery indica | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
@@ -47,7 +47,7 @@ Según [BJS Home Delivery](https://www.bjshomedelivery.com/en-gb/home-delivery),
 - **Entrega fallida (`Failed`):** el equipo de reservas de BJS se pondrá en contacto contigo para acordar una nueva fecha, o puedes llamar al `01922 645 650` con tu referencia `B...` a mano.
 - **Cancelaciones y extras faltantes:** toda cancelación de pedido debe tramitarse a través de la tienda. Si un extra pagado (como el montaje) no aparece en la hoja de ruta del equipo, consúltalo con la tienda.
 - **Artículos dañados:** revisa el embalaje y el número de bultos al recibirlos y avisa al instante al equipo si ves daños. Si detectas daños después de que se marchen, envía enseguida fotos y la referencia del pedido a tu tienda.
-- **Reclamaciones formales:** escribe a `customerservice@bjshomedelivery.com` o llama al `01922 645 650` indicando nombre, número de pedido, dirección de entrega y detalles — BJS se marca responder **en un plazo de 7 días laborables**.
+- **Reclamaciones formales:** escribe a `customerservice@bjshomedelivery.com` o llama al `01922 645 650` indicando nombre, número de pedido, dirección de entrega y detalles — BJS se propone responder **en un plazo de 7 días laborables**.
 - Consulta también [por qué el seguimiento deja de actualizarse](guide:tracking-not-updating), [entregado pero no recibido](guide:delivered-not-received), [paquete dañado](guide:damaged-parcel), [paquete perdido](guide:lost-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
 ## Atención al cliente y contacto de BJS Home Delivery
@@ -70,7 +70,7 @@ Peek lee directamente el servicio mini-track de BJS. Ofrece un único estado par
 
 Mientras tengas el paquete abierto en Peek, o el día de entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos; el día en que BJS muestra `En Route`, cada 2 minutos desde las 6:00 hora británica, mientras responda el rastreador de BJS. En el resto de casos comprueba cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o tras dos días sin novedades, pasa a comprobar cada hora sea cual sea tu seguimiento, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el rastreador de BJS no responde y Peek sigue el paquete únicamente a través de servicios de seguimiento, comprueba cada hora, cada 3 horas tras un día tranquilo y hasta cada 15 minutos el día de reparto mientras tengas el paquete abierto o las notificaciones activadas.
 
-Cuando el último estado de BJS tiene cuatro días y el pedido sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo señala con el día de ese estado — o el día en que Peek lo vio cambiar si BJS no indica ninguno —, por ejemplo «Sin novedades desde el lun, 12 oct». La página del paquete muestra entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a BJS Home Delivery.», con un enlace «Pide ayuda a BJS Home Delivery» al Centro de ayuda de BJS. Tras tres semanas sin ningún escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a BJS Home Delivery.»
+Cuando el último estado de BJS tiene cuatro días y el pedido sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo señala con el día de ese estado — o el día en que Peek lo vio cambiar si BJS no indica ninguno —, por ejemplo «Sin novedades desde el lun 12 oct». La página del paquete muestra entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a BJS Home Delivery.», con un enlace «Pide ayuda a BJS Home Delivery» al Centro de ayuda de BJS. Tras tres semanas sin ningún escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a BJS Home Delivery.»
 
 Puedes elegir avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo supervisa el estado del envío y no puede reprogramar tu franja de BJS, ver la ubicación GPS en directo de la furgoneta ni contratar extras de montaje en tu nombre.
 

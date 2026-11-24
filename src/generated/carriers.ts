@@ -14774,6 +14774,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "rastreamento-chronopost",
+      "title": "Rastreamento Chronopost: códigos, status e retirada",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "rastreamento-poste-italiane",
@@ -14796,6 +14804,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Yanwen: códigos UL…YP, status e entrega",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "rastreamento-vinted-go",
+      "title": "Rastreamento Vinted Go: status, armários e contato",
+      "name": "Vinted Go",
+      "color": "#004654"
     },
     {
       "id": "gofo-fr",
@@ -17628,6 +17644,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-tracking",
+      "title": "Chronopost 物流查询：单号格式、法语状态与取件点",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-tracking",
@@ -17650,6 +17674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "燕文物流（Yanwen）单号查询：UL…YP格式、状态与尾程",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-tracking",
+      "title": "Vinted Go 物流查询：单号、状态与自提柜取件",
+      "name": "Vinted Go",
+      "color": "#004654"
     },
     {
       "id": "gofo-fr",

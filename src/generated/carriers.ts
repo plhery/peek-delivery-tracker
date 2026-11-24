@@ -4540,6 +4540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0d237d"
     },
     {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "gofo-spain-sendungsverfolgung",
+      "title": "GOFO Spain Sendungsverfolgung: GFES & CIES & Kontakt",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "nova-global-sendungsverfolgung",
@@ -6670,6 +6678,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0d237d"
     },
     {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "suivi-gofo-spain",
+      "title": "Suivi GOFO Spain\u00a0: codes GFES et CIES, 3 tentatives",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "suivi-nova-global",
@@ -8774,6 +8790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento DTDC: formati AWB, stati RTO e assistenza",
       "name": "DTDC",
       "color": "#0d237d"
+    },
+    {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "tracciamento-gofo-spain",
+      "title": "Tracciamento GOFO Spain: codici GFES e CIES e aiuto",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
     },
     {
       "id": "nova-global",
@@ -13044,6 +13068,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0d237d"
     },
     {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "rastreio-gofo-spain",
+      "title": "Rastreio GOFO Spain: códigos GFES e CIES, 3 tentativas",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "rastreio-nova-global",
@@ -15222,6 +15254,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DTDC: formaty AWB, statusy RTO i pomoc",
       "name": "DTDC",
       "color": "#0d237d"
+    },
+    {
+      "id": "gofo-es",
+      "catalog": "gofo-es",
+      "slug": "sledzenie-gofo-spain",
+      "title": "Śledzenie GOFO Spain: kody GFES i CIES, 3 próby",
+      "name": "GOFO Spain",
+      "color": "#fc4c02"
     },
     {
       "id": "nova-global",

@@ -260,7 +260,7 @@
   { "id": "ydh", "catalog": "ydh", "name": "YDH", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "a-tu-hora-express", "catalog": "a-tu-hora-express", "name": "A Tu Hora Express", "languages": ["en", "es"] },
   { "id": "dtdc", "catalog": "dtdc", "name": "DTDC", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },
+  { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] },
   { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

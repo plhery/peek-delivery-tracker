@@ -14806,6 +14806,30 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "rastreamento-gofo-express",
+      "title": "Rastreamento GOFO Express: códigos GFUS, fotos e suporte",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "rastreamento-jt-express-alemanha",
+      "title": "Rastreamento J&T Express Alemanha: códigos JTDE e status",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "rastreamento-jt-express-australia",
+      "title": "Rastreamento J&T Express Austrália: códigos JTAU e status",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "rastreamento-china-post",

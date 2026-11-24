@@ -14950,6 +14950,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1aa3ff"
     },
     {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "rastreamento-australia-post",
+      "title": "Rastreamento Australia Post: códigos, status e lockers",
+      "name": "Australia Post",
+      "color": "#dc1928"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "rastreamento-jt-express-alemanha",
@@ -14988,6 +14996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento SF Express: códigos SF, status e contato",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "rastreamento-straightship",
+      "title": "Rastreamento Straightship: códigos STRTD, status e entrega",
+      "name": "Straightship",
+      "color": "#6aae66"
     },
     {
       "id": "correios-br",
@@ -15044,6 +15060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento JS Express: códigos JSE…YQ, status e entrega",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "rastreamento-wanbexpress",
+      "title": "Rastreamento WanbExpress: códigos WNB…YQ e quem entrega",
+      "name": "WanbExpress",
+      "color": "#da381b"
     },
     {
       "id": "india-post",

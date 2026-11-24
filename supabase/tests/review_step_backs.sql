@@ -53,4 +53,33 @@ from (values ('2025-12-31T10:00:00Z', 'accepted'), ('2025-12-31T11:00:00Z', 'in_
   ('2025-12-31T12:00:00Z', 'delivered'), ('2025-12-31T13:00:00Z', 'returned'),
   ('2025-12-31T14:00:00Z', 'delivered')) as checks (started_at, previous_stage);
 
+-- A scraper release's re-reading. Both parcels stepped back from in transit to accepted at their 11:00 checks, and
+-- both hold a scan with the same wording, which the release before read as in transit by its wording alone; the
+-- release whose first check read it by its map recorded the mapping at 10:30. The first parcel's scan was stored
+-- before then, read as in transit, and now reads accepted: its step is left out. The second's was stored after the
+-- mapping, so it never held the parcel in transit: its step stays listed.
+insert into public.packages (id, user_id, tracking_number, carrier, current_stage)
+values
+  ('59000000-0000-0000-0000-000000000205', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0205', 'cj-packet', 'accepted'),
+  ('69000000-0000-0000-0000-000000000206', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0206', 'cj-packet', 'accepted');
+
+insert into public.tracking_events (package_id, provider_event_id, stage, description, occurred_at, created_at)
+values
+  ('59000000-0000-0000-0000-000000000205', 'cj-packet:review-step-0205', 'accepted', ' Synthetic  Sorting scan ',
+   '2025-12-31T08:00:00Z', '2025-12-31T09:30:00Z'),
+  ('69000000-0000-0000-0000-000000000206', 'cj-packet:review-step-0206', 'accepted', 'Synthetic sorting scan',
+   '2025-12-31T08:00:00Z', '2025-12-31T10:45:00Z');
+
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_stage, outcome, completed_at)
+select package_id::uuid, 'scheduled', 'cj-packet', started_at::timestamptz, previous_stage, 'updated',
+  started_at::timestamptz + interval '1 minute'
+from (values ('2025-12-31T10:00:00Z', 'accepted'), ('2025-12-31T11:00:00Z', 'in_transit'), ('2025-12-31T12:00:00Z', 'accepted'))
+  as checks (started_at, previous_stage)
+cross join (values ('59000000-0000-0000-0000-000000000205'), ('69000000-0000-0000-0000-000000000206')) as parcels (package_id);
+
+insert into public.tracking_status_observations (observation_key, carrier, description_normalized, stage_source, chosen_stage,
+  first_seen, last_seen, resolution, reviewed_at, reviewed_version)
+values (encode(sha256('review-step-backs re-read'), 'hex'), 'cj-packet', 'synthetic sorting scan', 'wording:language',
+  'in_transit', '2025-12-31T09:30:00Z', '2025-12-31T10:00:00Z', 'mapped', '2025-12-31T10:30:00Z', 'universal-parcel-scraper@0.0.0-review');
+
 commit;

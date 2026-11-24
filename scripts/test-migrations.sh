@@ -499,7 +499,8 @@ psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_step_backs.sql"
 step_section=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \
   | awk '/^== Stage step-backs/ { section = 1; next } /^== / { section = 0 } section')
 step_backs=$(awk '/^la-poste\|/' <<< "$step_section" | cut -d '|' -f 1-3,9-10)
-psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000002'"
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000002'" \
+  -c "delete from public.tracking_status_observations where observation_key = encode(sha256('review-step-backs re-read'), 'hex')"
 if [[ "$step_backs" != "la-poste|delivered|in_transit|1|19000000" ]]; then
   echo "stage step-backs: carrier|from|to|parcels|sample = '$step_backs'" >&2
   exit 1
@@ -518,6 +519,13 @@ fi
 # A parcel handed over in place keeps one leg: its step back is listed.
 if ! grep -q '49000000' <<< "$step_section"; then
   echo "stage step-backs miss a parcel handed over in place: '$step_section'" >&2
+  exit 1
+fi
+# A step a scraper release's re-reading of a stored scan explains is left out; one whose scan the mapped release
+# stored is listed.
+re_read=$(awk '/^cj-packet\|/' <<< "$step_section" | cut -d '|' -f 1-3,9-10)
+if [[ "$re_read" != "cj-packet|in_transit|accepted|1|69000000" ]]; then
+  echo "stage step-backs after a scraper release's re-reading: carrier|from|to|parcels|sample = '$re_read'" >&2
   exit 1
 fi
 

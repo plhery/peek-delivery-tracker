@@ -118,7 +118,9 @@ order by a.started_at desc;
 \echo '   over_provider: the parcel''s own carrier answered the check after a universal provider had answered the one'
 \echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin).'
 \echo '   A held return ending is left out: the check before saved the return over the carrier''s summary in transit or at'
-\echo '   customs (return_held), which a delivery round, a problem or a new label ends.'
+\echo '   customs (return_held), which a delivery round, a problem or a new label ends. So is a scraper release''s'
+\echo '   re-reading: a scan stored while the release before read its wording alone as the stage the parcel left (a status'
+\echo '   observation), which the release the step''s check ran on reads by its map as another stage (resolution mapped).'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
 -- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
 -- A linked parcel holds the checks of the parcel merged into it (original_package_id), filed under its
@@ -133,7 +135,7 @@ with legs as (
   where a.started_at >= :since and a.previous_stage is not null and a.outcome <> 'superseded'
 ),
 saved as (
-  select a.id, a.package_id, a.merged_leg, a.started_at, lead(a.started_at) over w as next_at, a.source_carrier,
+  select a.id, a.package_id, a.merged_leg, a.started_at, a.completed_at, lead(a.started_at) over w as next_at, a.source_carrier,
          a.configured_carrier as carrier, a.previous_stage as from_stage,
          coalesce(lead(a.previous_stage) over w, case when not a.merged_leg then a.current_stage end) as to_stage,
          coalesce(lead(a.configured_carrier) over w, a.parcel_carrier) as next_carrier
@@ -182,6 +184,21 @@ left join lateral (
 ) as prior on true
 where not coalesce(back.from_stage = 'returned' and prior.selected_stage = 'returned'
   and prior.reported_stage in ('in_transit', 'customs'), false)
+  -- A scraper release's re-reading: one of the parcel's scans, stored before the running release's map gave its
+  -- wording a stage (the observation's mapping, recorded by the first check on that release that read it), was read by
+  -- its wording alone as the stage the parcel left and now shows another. The mapping came by the time the step's check
+  -- ended, and at most two days before it: a parcel's check after the mapping re-reads its stored scans, and a later
+  -- step back from that stage is the carrier's. The wording is compared as trackingSync.ts stores it (lower case, one
+  -- space); a wording kept as a place template matches no scan, and its step stays listed.
+  and not exists (
+    select from public.tracking_status_observations as o
+    join public.tracking_events as e
+      on e.package_id = back.package_id and split_part(e.provider_event_id, ':', 1) = o.carrier
+      and left(btrim(regexp_replace(lower(e.description), '\s+', ' ', 'g')), 500) = o.description_normalized
+    where o.chosen_stage = back.from_stage and e.stage <> back.from_stage
+      and o.resolution = 'mapped' and o.reviewed_version is not null
+      and e.created_at < o.reviewed_at and o.reviewed_at <= coalesce(back.completed_at, back.next_at, 'infinity')
+      and o.reviewed_at > back.started_at - interval '2 days')
 group by 1, 2, 3, 4, 5, 6
 order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 

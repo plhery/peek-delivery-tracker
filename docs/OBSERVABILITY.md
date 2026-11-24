@@ -548,7 +548,10 @@ from each check's `previous_stage`, a linked parcel's two legs apart; by short i
 whether a hand fix set the stage between the checks: a stage changed outside the API, by a fix script, a migration or the
 stored-scan replay, is kept in `private.hand_stage_changes` with the name a script gives its fix by
 `set local peek.hand_fix = '<name>'`; and whether the parcel's own carrier answered the check that stepped back after a
-universal provider answered the one before it, as the carrier may read the provider's scans in an earlier stage),
+universal provider answered the one before it, as the carrier may read the provider's scans in an earlier stage; a
+step a scraper release's re-reading explains is left out: one of the parcel's scans, stored while the release before
+read its wording alone as the stage the parcel left, which the release the step's check ran on reads by its map
+(the wording's status observation is `mapped` by the time that check ended, at most two days before it)),
 expected days dropped in the window from parcels still on their way (by the day the dropping check's
 `previous_expected_delivery` held, on the parcel's clock as the server read it: the check's `delivery_clock_date`, or
 for a check before it the offset its newest scan states or else the zone its answer declares: passed or still ahead;

@@ -23,7 +23,7 @@ Les préfixes commençant par `7D` + chiffre ou `7X` + chiffre sont exclus de ce
 
 ## Signification des statuts One by Allegro CZ
 
-L’API publique de suivi One by Allegro CZ renvoie des libellés en anglais, chacun accompagné de son horaire et de son décalage UTC. Voici les plus courants :
+L’API publique de suivi One by Allegro CZ renvoie des libellés en anglais, chacun accompagné de son horaire et de son décalage par rapport à UTC. Voici les plus courants :
 
 | Libellé One by Allegro CZ | Ce que cela signifie |
 | --- | --- |
@@ -52,7 +52,7 @@ Si tu manques un délai de retrait ou cherches un colis, consulte les guides sur
 
 Colle ton code One by Allegro CZ de 11 caractères, ou un lien `onedelivery.cz` ou `trace.wedo.cz`, dans Peek : Peek reconnaît aussitôt **One by Allegro CZ**. Si tu dois changer de transporteur, utilise « Changer » lors de l’ajout ou « Changer de transporteur » sur la fiche du colis.
 
-Peek interroge directement le point de suivi public de One by Allegro CZ (`edge.onedelivery.cz`) via l’[adaptateur One by Allegro CZ open source de universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), avec une nouvelle tentative automatique en cas de délai réseau dépassé. Il conserve les horodatages exacts avec décalage horaire ainsi que l’instant de livraison (`delivered_at`), tout en écartant les messages libres qui pourraient exposer des données personnelles. L’API publique n’inclut ni date estimée de livraison, ni ville de dépôt, ni poids du colis.
+Peek interroge directement le point de suivi public de One by Allegro CZ (`edge.onedelivery.cz`) via l’[adaptateur One by Allegro CZ open source de universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), avec une nouvelle tentative automatique en cas de délai réseau dépassé. Il conserve les horodatages exacts avec leur décalage par rapport à UTC ainsi que l’instant de livraison (`delivered_at`), tout en écartant les messages libres qui pourraient exposer des données personnelles. L’API publique n’inclut ni date estimée de livraison, ni ville de dépôt, ni poids du colis.
 
 Peek classe ces libellés en étapes : « Étiquette créée » (`Parcel has been prepared by the sender`), « Pris en charge » (`Parcel has been picked up by the courier`), « En transit » (expédition, centre de tri et agence), « En livraison » (`Parcel has been released for delivery`), « Prêt à être retiré » (`Parcel is awaiting pick-up`) et « Livré » (`Parcel has been delivered`). Il lit aussi les autres libellés Allegro One, comme `Parcel has been returned to the sender`.
 

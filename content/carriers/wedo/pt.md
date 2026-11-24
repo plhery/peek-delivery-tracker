@@ -23,7 +23,7 @@ Os prefixos iniciados por `7D` + dígito ou `7X` + dígito ficam excluídos dest
 
 ## O que significam os estados da One by Allegro CZ
 
-A API pública da One by Allegro CZ devolve textos em inglês com hora e desfasamento UTC. Estes são os mais comuns:
+A API pública da One by Allegro CZ devolve textos em inglês, cada um com a hora e o desfasamento em relação a UTC. Estes são os mais comuns:
 
 | Texto One by Allegro CZ | O que significa |
 | --- | --- |
@@ -42,7 +42,7 @@ Se o rastreio devolver uma mensagem fora do padrão que possa conter dados pesso
 
 A One by Allegro CZ publica prazos claros de levantamento e regras de distribuição em [onedelivery.cz](https://onedelivery.cz/):
 
-- **Cacifos One Box ([onedelivery.cz/one-box](https://onedelivery.cz/one-box)):** acessíveis **24/7** em mais de 5 244 cacifos (One Box, AlzaBox e OX Box). Levanta em **48 horas** após a colocação no cacifo introduzindo o número de telefone do destinatário e o PIN numérico enviado por SMS, email, aplicação One by Allegro ou aplicação Allegro (não é preciso app no ecrã). A cobrança na entrega (*dobírka*) pode ser paga pela ligação na notificação ou no terminal de cartões da One Box.
+- **Cacifos One Box ([onedelivery.cz/one-box](https://onedelivery.cz/one-box)):** acessíveis **24/7** em mais de 5 244 cacifos (One Box, AlzaBox e OX Box). Levanta em **48 horas** após a colocação no cacifo introduzindo o número de telefone do destinatário e o PIN numérico enviado por SMS, email, aplicação One by Allegro ou aplicação Allegro (não é preciso aplicação no ecrã do cacifo). A cobrança na entrega (*dobírka*) pode ser paga pela ligação na notificação ou no terminal de cartões da One Box.
 - **Pontos One Point ([onedelivery.cz/one-point](https://onedelivery.cz/one-point)):** em 1 960 lojas parceiras durante o horário comercial, as encomendas aguardam normalmente **5 dias úteis** (prolongáveis gratuitamente até **3 dias úteis adicionais** através do apoio ao cliente; na época alta antes do Natal o prazo One Point reduz-se de 5 para **3 dias**, mantendo-se One Box nas 48 horas). Os limites máximos One Point são **20 kg**, lado mais comprido **1,2 m** e volume **0,2 m³**. A cobrança na entrega paga-se em numerário ou cartão quando a loja tem terminal.
 - **Entrega ao domicílio One Courier ([onedelivery.cz/one-courier](https://onedelivery.cz/one-courier)):** entrega padrão no **dia útil seguinte (`D+1`)** à recolha, em **dias úteis entre as 08h00 e as 18h00**, até à primeira porta fechada à chave (os estafetas não são obrigados a subir escadas e não há entrega em apartados postais). No dia da entrega recebes aviso por SMS, email ou app. A cobrança na entrega pode ser paga em numerário (valor exato pedido) ou cartão sem taxa extra. Podes mudar a data de entrega ou redirecionar uma encomenda elegível para ponto de recolha na app móvel One by Allegro ou pelo apoio ao cliente; alterações de morada passam pelo apoio ao cliente.
 
@@ -52,7 +52,7 @@ Se perderes um prazo de levantamento ou precisares de localizar uma encomenda, c
 
 Cola o teu código de 11 caracteres One by Allegro CZ, ou uma ligação `onedelivery.cz` ou `trace.wedo.cz`, no Peek e o Peek reconhece logo **One by Allegro CZ**. Se precisares de mudar a transportadora, usa «Alterar» ao adicionar ou «Alterar transportadora» no ecrã de rastreio.
 
-O Peek consulta diretamente o endpoint público da One by Allegro CZ (`edge.onedelivery.cz`) através do [adaptador One by Allegro CZ em código aberto no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), com repetição automática em caso de tempo limite de rede. Regista horários exatos com desfasamento UTC e o instante da entrega (`delivered_at`), descartando mensagens livres que possam expor dados pessoais. A API pública não inclui data estimada de entrega, cidade do depósito nem peso.
+O Peek consulta diretamente o endpoint público da One by Allegro CZ (`edge.onedelivery.cz`) através do [adaptador One by Allegro CZ em código aberto no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), com repetição automática em caso de tempo limite de rede. Regista horários exatos com o desfasamento em relação a UTC e o instante da entrega (`delivered_at`), descartando mensagens livres que possam expor dados pessoais. A API pública não inclui data estimada de entrega, cidade do depósito nem peso.
 
 O Peek traduz estes textos em etapas: «Etiqueta criada» (`Parcel has been prepared by the sender`), «Aceite pela transportadora» (`Parcel has been picked up by the courier`), «Em trânsito» (expedição, centro de triagem e filial), «Em distribuição» (`Parcel has been released for delivery`), «Pronta para levantamento» (`Parcel is awaiting pick-up`) e «Entregue» (`Parcel has been delivered`). Lê também outros textos da Allegro One, como `Parcel has been returned to the sender`.
 

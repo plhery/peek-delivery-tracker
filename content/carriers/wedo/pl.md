@@ -23,7 +23,7 @@ Prefiksy zaczynające się od `7D` + cyfra lub `7X` + cyfra są wyłączone z te
 
 ## Co oznaczają statusy śledzenia One by Allegro CZ
 
-Publiczne API śledzenia One by Allegro CZ zwraca angielskie komunikaty z godziną i przesunięciem UTC. Oto najczęstsze z nich:
+Publiczne API śledzenia One by Allegro CZ zwraca angielskie komunikaty, każdy z godziną i przesunięciem względem UTC. Oto najczęstsze z nich:
 
 | Komunikat One by Allegro CZ | Co oznacza |
 | --- | --- |
@@ -42,8 +42,8 @@ Jeśli tracker zwróci nietypowy komunikat mogący zawierać prywatny tekst doty
 
 One by Allegro CZ publikuje jasne terminy odbioru i zasady doręczeń na [onedelivery.cz](https://onedelivery.cz/):
 
-- **Automaty One Box ([onedelivery.cz/one-box](https://onedelivery.cz/one-box)):** czynne **24/7** w ponad 5244 automatach (One Box, AlzaBox i OX Box). Odbierz w ciągu **48 godzin** od umieszczenia w skrytce, wpisując numer telefonu odbiorcy i kod PIN przysłany SMS-em, e-mailem, w aplikacji One by Allegro lub w aplikacji Allegro (aplikacja nie jest wymagana przy ekranie). Pobranie (*dobírka*) opłacisz przez link z powiadomienia albo kartą w terminalu One Box.
-- **Punkty One Point ([onedelivery.cz/one-point](https://onedelivery.cz/one-point)):** w 1960 sklepach partnerskich w godzinach ich otwarcia paczki czekają standardowo **5 dni roboczych** (można bezpłatnie przedłużyć nawet o **3 dodatkowe dni robocze** przez obsługę klienta; w szczycie przedświątecznym czas przechowywania w One Point skraca się z 5 do **3 dni**, podczas gdy One Box zachowuje 48 godzin). Maksymalne wymiary dla One Point to **20 kg**, najdłuższy bok **1,2 m** i objętość **0,2 m³**. Pobranie opłacisz gotówką lub kartą, jeśli punkt ma terminal.
+- **Automaty One Box ([onedelivery.cz/one-box](https://onedelivery.cz/one-box)):** czynne **24/7** w ponad 5244 automatach (One Box, AlzaBox i OX Box). Odbierz w ciągu **48 godzin** od umieszczenia w skrytce, wpisując numer telefonu odbiorcy i kod PIN przysłany SMS-em, e-mailem, w aplikacji One by Allegro lub w aplikacji Allegro (przy ekranie automatu aplikacja nie jest potrzebna). Pobranie (*dobírka*) opłacisz przez link z powiadomienia albo kartą w terminalu One Box.
+- **Punkty One Point ([onedelivery.cz/one-point](https://onedelivery.cz/one-point)):** w 1960 sklepach partnerskich w godzinach ich otwarcia paczki czekają standardowo **5 dni roboczych** (można bezpłatnie przedłużyć nawet o **3 dodatkowe dni robocze** przez obsługę klienta; w szczycie przedświątecznym czas przechowywania w One Point skraca się z 5 do **3 dni**, podczas gdy One Box zachowuje 48 godzin). Limity dla One Point to **20 kg**, najdłuższy bok **1,2 m** i objętość **0,2 m³**. Pobranie opłacisz gotówką lub kartą, jeśli punkt ma terminal.
 - **Kurier One Courier ([onedelivery.cz/one-courier](https://onedelivery.cz/one-courier)):** standardowe doręczenie w **następny dzień roboczy (`D+1`)** po odbiorze, w **dni robocze między 08:00 a 18:00**, do pierwszych zamykanych drzwi (kurierzy nie mają obowiązku wnoszenia paczek po schodach, a skrytki pocztowe nie są obsługiwane). W dniu doręczenia otrzymasz powiadomienie SMS-em, e-mailem lub w aplikacji. Pobranie zapłacisz gotówką (zalecana odliczona kwota) albo kartą bez dopłat. Termin doręczenia lub przekierowanie kwalifikującej się paczki do punktu odbioru zmienisz w aplikacji One by Allegro albo przez obsługę klienta; zmiana adresu wymaga kontaktu z obsługą.
 
 Jeśli przegapisz termin odbioru lub szukasz paczki, zobacz poradniki o [automatach paczkowych](guide:parcel-lockers), [nieodebranej paczce](guide:uncollected-parcel) oraz [braku aktualizacji śledzenia](guide:tracking-not-updating). Inne czeskie sieci porównasz na stronach [Packeta](carrier:packeta), [PPL](carrier:ppl) i [Česká pošta](carrier:ceska-posta).
@@ -52,7 +52,7 @@ Jeśli przegapisz termin odbioru lub szukasz paczki, zobacz poradniki o [automat
 
 Wklej swój 11-znakowy kod One by Allegro CZ albo link `onedelivery.cz` lub `trace.wedo.cz` w Peek, a Peek rozpozna **One by Allegro CZ** natychmiast. Jeśli trzeba zmienić przewoźnika, użyj „Zmień” podczas dodawania paczki lub „Zmień przewoźnika” na ekranie śledzenia.
 
-Peek odpytuje bezpośrednio publiczny endpoint One by Allegro CZ (`edge.onedelivery.cz`) przez otwarty [adapter One by Allegro CZ w universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), z automatycznym ponowieniem przy przekroczeniu czasu sieci. Zapisuje dokładne znaczniki czasu ze strefą oraz moment doręczenia (`delivered_at`), odrzucając dowolne teksty mogące ujawniać dane osobowe. Publiczne API nie podaje szacowanej daty doręczenia, miasta oddziału ani wagi.
+Peek odpytuje bezpośrednio publiczny endpoint One by Allegro CZ (`edge.onedelivery.cz`) przez otwarty [adapter One by Allegro CZ w universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/wedo), z automatycznym ponowieniem, gdy sieć nie odpowie na czas. Zapisuje dokładne znaczniki czasu z przesunięciem względem UTC oraz moment doręczenia (`delivered_at`), odrzucając dowolne teksty mogące ujawniać dane osobowe. Publiczne API nie podaje szacowanej daty doręczenia, miasta oddziału ani wagi.
 
 Peek przekłada komunikaty na etapy: „Zarejestrowana” (`Parcel has been prepared by the sender`), „Przyjęta przez przewoźnika” (`Parcel has been picked up by the courier`), „W transporcie” (nadanie w drogę, sortownia i oddział), „W doręczeniu” (`Parcel has been released for delivery`), „Do odbioru” (`Parcel is awaiting pick-up`) oraz „Dostarczona” (`Parcel has been delivered`). Odczytuje też inne komunikaty Allegro One, np. `Parcel has been returned to the sender`.
 
@@ -83,7 +83,7 @@ W **One Box** (w tym AlzaBox i OX Box) paczki czekają **48 godzin** od włożen
 
 Tak. Kurierzy One Courier przyjmują gotówkę (zalecana odliczona kwota) lub kartę bez opłat dla odbiorcy; One Box obsługuje płatność kartą przez link w powiadomieniu lub w terminalu automatu; a One Point przyjmuje gotówkę lub kartę, gdy punkt posiada terminal.
 
-### Co zrobić, jeśli zgubiłem kod odbioru One Box lub One Point?
+### Co zrobić, jeśli zgubisz kod odbioru One Box lub One Point?
 
 Kody odbioru przychodzą SMS-em, e-mailem oraz w aplikacjach One by Allegro i Allegro. Jeśli nigdzie nie możesz go znaleźć, napisz do obsługi klienta przez formularz na [onedelivery.cz/kontakt](https://onedelivery.cz/kontakt).
 

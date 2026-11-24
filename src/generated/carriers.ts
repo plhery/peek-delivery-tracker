@@ -14806,6 +14806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "paack",
+      "catalog": "paack",
+      "slug": "rastreamento-paack",
+      "title": "Rastreamento Paack: pedido, código postal e entregas",
+      "name": "Paack",
+      "color": "#5b2dee"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "rastreamento-chronopost",
@@ -15140,6 +15148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Meiteshun: AMTS, etapas e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "rastreamento-speedaf",
+      "title": "Rastreamento Speedaf Express: códigos, status e contatos",
+      "name": "Speedaf",
+      "color": "#ff8300"
     },
     {
       "id": "gofo-ca",
@@ -17948,6 +17964,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "paack",
+      "catalog": "paack",
+      "slug": "paack-tracking",
+      "title": "Paack 快递查询：订单号、邮编与 PaackGo 自提点",
+      "name": "Paack",
+      "color": "#5b2dee"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-tracking",
@@ -18346,6 +18370,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "诚泰通运（CTTYEX）查询：CTTY单号、英文轨迹与北京时间",
       "name": "CTTYEX",
       "color": "#0068AC"
+    },
+    {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "speedaf-tracking",
+      "title": "速达非（Speedaf Express）快递查询：单号、状态与客服",
+      "name": "Speedaf",
+      "color": "#ff8300"
     },
     {
       "id": "huaya-express",

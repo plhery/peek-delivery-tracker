@@ -1689,7 +1689,11 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The parcels on their way, the most pressing first, as the widget picks from them and a Mac's menu bar lists them.
-    var nextDeliveries: [DeliveryWidgetParcel] { Self.nextDeliveries(of: parcels, localizer: localizer) }
+    /// A copy no longer updated is none (`frozenOnTheirWay`).
+    var nextDeliveries: [DeliveryWidgetParcel] {
+        let frozen = frozenOnTheirWay
+        return Self.nextDeliveries(of: parcels.filter { !frozen.contains($0.id) }, localizer: localizer)
+    }
 
     /// `midnights` are those the details are also worded for, as the widgets show them while the app stays closed.
     static func nextDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date(),

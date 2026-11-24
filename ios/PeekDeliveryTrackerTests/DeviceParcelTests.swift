@@ -827,6 +827,34 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(device.viewerLink(id: id), "33333333333A")
     }
 
+    func testTheMacMenuBarLeavesOutAForgottenCopyOnItsWay() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data()) }
+        let frozenID = UUID(), liveID = UUID()
+        let now = Date()
+        let storage = Memory()
+        var copy = ownLookup("22222222222A", frozenID, label: "Trainers", checkedAt: now)
+        copy.frozen = DateParser.isoString(now)
+        copy.alertToken = nil
+        copy.alertPreset = nil
+        storage.keys = ["22222222222B": key]
+        storage.parcels = [copy, ownLookup("22222222222B", liveID, label: "Books", number: "TESTPARCEL999", checkedAt: now)]
+        let device = DeviceParcels(client: client(Calls()), storage: storage)
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
+                                deviceNotifications: quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.showWelcome()
+
+        XCTAssertTrue(store.isGuest)
+        XCTAssertEqual(store.frozenOnTheirWay, [frozenID])
+        // What a Mac's menu bar lists under "On the way", as the list and the widget show it.
+        XCTAssertEqual(store.nextDeliveries.map(\.id), [liveID])
+    }
+
     func testAForgottenCopyNeedsNoKeyOnFileAndOneBesideItOpensNothing() throws {
         var copy = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID())), checkedAt: Date())
         copy.frozen = "2026-11-20T08:00:00Z"

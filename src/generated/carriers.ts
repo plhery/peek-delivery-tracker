@@ -4628,6 +4628,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#bc8c4d"
     },
     {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "chit-chats-sendungsverfolgung",
+      "title": "Chit Chats Sendungsverfolgung: 10-stellige IDs & Übergabe",
+      "name": "Chit Chats",
+      "color": "#db2b35"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6814,6 +6822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#bc8c4d"
     },
     {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "suivi-chit-chats",
+      "title": "Suivi Chit Chats\u00a0: codes 10 car., relais USPS/Postes Canada",
+      "name": "Chit Chats",
+      "color": "#db2b35"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -8990,6 +9006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento BUFFALO: codici BUFZA, dogana Sudafrica e aiuto",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "tracciamento-chit-chats",
+      "title": "Tracciamento Chit Chats: codici 10 car., USPS/Canada Post",
+      "name": "Chit Chats",
+      "color": "#db2b35"
     },
     {
       "id": "5post",
@@ -11178,6 +11202,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#bc8c4d"
     },
     {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "seguimiento-chit-chats",
+      "title": "Seguimiento Chit Chats: códigos de 10 car. y traspaso USPS",
+      "name": "Chit Chats",
+      "color": "#db2b35"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "seguimiento-oca",
@@ -13362,6 +13394,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio BUFFALO: códigos BUFZA, alfândega África do Sul",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "rastreio-chit-chats",
+      "title": "Rastreio Chit Chats: códigos 10 car. e entrega USPS/Canadá",
+      "name": "Chit Chats",
+      "color": "#db2b35"
     },
     {
       "id": "5post",
@@ -15606,6 +15646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie BUFFALO: kody BUFZA, cło w RPA i kontakt",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "chit-chats",
+      "catalog": "chit-chats",
+      "slug": "sledzenie-chit-chats",
+      "title": "Śledzenie Chit Chats: 10-znakowe ID i przekazanie USPS",
+      "name": "Chit Chats",
+      "color": "#db2b35"
     },
     {
       "id": "5post",

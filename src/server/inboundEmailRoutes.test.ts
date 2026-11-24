@@ -310,6 +310,7 @@ function account(options: { known?: string[]; allowance?: number; country?: stri
     // A followed parcel has a name unless a test says otherwise.
     name: vi.spyOn(service, 'nameUnnamedPackage').mockResolvedValue(false),
     announce: vi.spyOn(service, 'parcelsAddedByEmail').mockResolvedValue(0),
+    twin: vi.spyOn(service, 'recordTwinNumbers').mockResolvedValue(true),
   };
 }
 
@@ -481,6 +482,89 @@ describe('an email to a forwarding address', () => {
     await posted(mail('"Example Market" <noreply@example-market.com>', 'Shipped', `The seller shipped your order. Buyer Protection applies. Tracking: ${UPS}`));
     expect(db.create.mock.calls.map(([, number, label]) => [number, label])).toEqual([[UPS, 'Example Market']]);
     expect(auth).not.toHaveBeenCalled();
+  });
+
+  describe('a marketplace\'s email that names its own number and the last mile\'s for one package', () => {
+    const MARKET = 'LP00000000000001';
+    const twins = (number = MARKET) => mail('"Example Market" <noreply@example-market.com>', 'Your package is with its last carrier',
+      `Your package ${DHL} is on its way.\nTrack it: https://global.cainiao.com/detail.htm?mailNoList=${number}`);
+
+    it('adds the marketplace\'s number alone, which follows the whole journey, and keeps the pair for it', async () => {
+      const db = account();
+      await posted(twins());
+      expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([[MARKET, 'Example Market', 'aliexpress']]);
+      expect(db.claim).toHaveBeenCalledOnce();
+      expect(db.twin).toHaveBeenCalledExactlyOnceWith(userId, `new-${MARKET}`, MARKET, DHL);
+      expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Market');
+    });
+
+    it('adds nothing when the account follows either number, keeps the pair for that parcel, and names it', async () => {
+      for (const followed of [DHL, MARKET]) {
+        const db = account({ known: [followed] });
+        db.name.mockResolvedValue(true);
+        await posted(twins());
+        expect(db.create).not.toHaveBeenCalled();
+        expect(db.claim).not.toHaveBeenCalled();
+        expect(db.twin).toHaveBeenCalledExactlyOnceWith(userId, `known-${followed}`, MARKET, DHL);
+        expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${followed}`, 'Example Market');
+        expect(db.record).toHaveBeenCalledWith(userId, 'named', 0, null, 'Example Market');
+        vi.restoreAllMocks();
+      }
+    });
+
+    it('keeps the pair of two parcels the account follows under the numbers, for the marketplace\'s, so they merge', async () => {
+      const db = account({ known: [DHL, MARKET] });
+      await posted(twins());
+      expect(db.twin).toHaveBeenCalledExactlyOnceWith(userId, `known-${MARKET}`, MARKET, DHL);
+      expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Example Market');
+    });
+
+    it('keeps no pair when the marketplace\'s number could not be added, and reads the last mile\'s as any other', async () => {
+      let db = account();
+      db.create.mockRejectedValueOnce(new SupabaseError('full', 400, 'P0001'));
+      await posted(twins());
+      expect(db.create.mock.calls.map(([, number]) => number)).toEqual([MARKET]);
+      expect(db.twin).not.toHaveBeenCalled();
+      expect(db.record).toHaveBeenCalledWith(userId, 'full', 0, null, 'Example Market');
+      vi.restoreAllMocks();
+      // Added meanwhile from elsewhere: which parcel it is can't be told.
+      db = account();
+      db.create.mockRejectedValueOnce(new SupabaseError('exists', 409));
+      await posted(twins());
+      expect(db.create.mock.calls.map(([, number]) => number)).toEqual([MARKET, DHL]);
+      expect(db.twin).not.toHaveBeenCalled();
+    });
+
+    it('pairs nothing in an email that names more numbers, two of the marketplace\'s, or none of them', async () => {
+      let db = account();
+      await posted(mail('"Example Market" <noreply@example-market.com>', 'Your packages are on their way',
+        `Package ${DHL}: https://global.cainiao.com/detail.htm?mailNoList=${MARKET}\nPackage 2: https://global.cainiao.com/detail.htm?mailNoList=LP00000000000002`));
+      expect(db.create.mock.calls.map(([, number]) => number).sort()).toEqual([DHL, MARKET, 'LP00000000000002'].sort());
+      expect(db.twin).not.toHaveBeenCalled();
+      vi.restoreAllMocks();
+      db = account();
+      await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Your parcels ${UPS} and ${DHL} are on their way.`));
+      expect(db.create).toHaveBeenCalledTimes(2);
+      expect(db.twin).not.toHaveBeenCalled();
+    });
+
+    it('keeps the parcel it added when keeping the pair fails, and reports it', async () => {
+      const db = account();
+      db.twin.mockRejectedValue(new SupabaseError('down', 503));
+      const captured = vi.spyOn(monitoring, 'captureOperationalError').mockReturnValue(null);
+      const response = await posted(twins());
+      expect(response.status).toBe(202);
+      expect(db.create).toHaveBeenCalledOnce();
+      expect(captured).toHaveBeenCalledWith(expect.any(SupabaseError), { component: 'packages', operation: 'record_twin_numbers' });
+    });
+
+    it('pairs nothing in a text an assistant sends', async () => {
+      const db = account();
+      const text = `${DHL} https://global.cainiao.com/detail.htm?mailNoList=${MARKET}`;
+      await addParcelsFromText(SupabaseServiceClient.prototype as SupabaseServiceClient, userId, text, '');
+      expect(db.create).toHaveBeenCalledTimes(2);
+      expect(db.twin).not.toHaveBeenCalled();
+    });
   });
 
   it('adds nothing twice, and a number the account follows costs no allowance', async () => {

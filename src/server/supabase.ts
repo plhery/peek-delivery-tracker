@@ -1451,25 +1451,32 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * Which of these numbers an account already follows, by the number each was saved under or the one a merged leg
-   * kept, with the parcel's id.
+   * Which of these numbers an account already follows, with the parcel's id: by the number each was saved under, the
+   * one a merged leg kept, one its carrier names as its next leg's, or an email's twin of its number
+   * (`account_tracking_numbers`).
    */
   async accountTrackingNumbers(userId: string, numbers: string[]): Promise<Map<string, string>> {
     const known = new Map<string, string>();
     if (!numbers.length) return known;
-    const list = quotedList(numbers);
-    const [saved, merged] = await Promise.all([
-      this.request(`/rest/v1/packages?${query({ select: 'id,tracking_number', user_id: `eq.${userId}`, tracking_number: list })}`),
-      this.request(`/rest/v1/packages?${query({
-        select: 'id,tracking_number:carrier_data->>original_tracking_number',
-        user_id: `eq.${userId}`,
-        'carrier_data->>original_tracking_number': list,
-      })}`),
-    ]);
-    for (const row of [...rows(saved), ...rows(merged)]) {
-      if (typeof row.tracking_number === 'string' && typeof row.id === 'string') known.set(row.tracking_number, row.id);
+    const found = await this.request('/rest/v1/rpc/account_tracking_numbers', {
+      method: 'POST',
+      body: { p_user_id: userId, p_numbers: numbers },
+    });
+    for (const row of rows(found)) {
+      if (typeof row.tracking_number === 'string' && typeof row.package_id === 'string') known.set(row.tracking_number, row.package_id);
     }
     return known;
+  }
+
+  /**
+   * Keeps an email's two numbers for one package, the marketplace's logistics number and the last-mile carrier's, for
+   * the account's parcel that holds one of them (`package_twin_numbers`). False when that parcel is gone.
+   */
+  async recordTwinNumbers(userId: string, packageId: string, earlier: string, later: string): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/record_twin_numbers', {
+      method: 'POST',
+      body: { p_user_id: userId, p_package_id: packageId, p_earlier: earlier, p_later: later },
+    }) === true;
   }
 
   /** The account's forwarding address, or null when it has none. */

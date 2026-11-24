@@ -1211,8 +1211,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   match: the later carrier names the earlier leg's number as the item's international
   number; the earlier leg was handed over to it and they share a number it gave the item
   (international or domestic); or the earlier carrier names it as its delivery partner,
-  under one of its numbers. A parcel matching more than one other, or two naming each
-  other, stay apart (`is_later_leg`). The merge follows the check that stores the news,
+  under one of its numbers, or names one of its numbers alone (AliExpress names the last
+  mile's number without its carrier). An email that named both numbers for one package
+  (`package_twin_numbers`, [ARCHITECTURE.md](ARCHITECTURE.md)) confirms it too, unless the
+  earlier carrier names another number for the next leg. A parcel matching more than one
+  other, or two naming each other, stay apart (`is_later_leg`). The merge follows the check that stores the news,
   before that news goes out, and a scan both parcels held keeps the receipts of either
   copy, so it is announced once. The merged parcel keeps both names and histories, and
   the earlier parcel's id still finds it: a change sent under that id applies to the

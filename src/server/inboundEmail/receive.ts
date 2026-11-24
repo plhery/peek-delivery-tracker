@@ -167,7 +167,7 @@ export async function receiveInboundMail(
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   // A seller's notice tells of a parcel the reader sent: still followed, its name says so.
   const name = sentByReader(mail.subject, mail.text) ? await nameSentParcel(service, userId, label) : label;
-  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, { addNew: !delivered, retryEligibility: true });
+  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, { addNew: !delivered, retryEligibility: true, twins: true });
   const named = await nameFollowedParcels(service, userId, additions, name);
   await announce(service, userId, additions);
   const result = mailResult(additions, { named, delivered });

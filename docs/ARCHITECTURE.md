@@ -480,6 +480,15 @@ Key server modules:
     shop the email says it carries for ("Colis de Example Shop", "Paket von Example Shop",
     `inboundEmail/shopName.ts`), without its legal form, or left unnamed: a carrier's
     mailbox name says nothing of the parcel.
+  - An email that names exactly two numbers, a marketplace's own logistics number
+    (AliExpress's) and another carrier's, names one package: the account follows it once.
+    It adds the marketplace's number alone, whose tracker follows the whole journey and
+    names the last mile itself, or nothing when the account follows either number, and
+    keeps the pair for that parcel (`package_twin_numbers`). An email that names either
+    number later then finds that parcel, as it finds one by a number its carrier names as
+    its next leg's (`account_tracking_numbers`), and two parcels the account follows under
+    the pair merge ([ROUTING.md](ROUTING.md)). An email with more numbers, or two of the
+    marketplace's, pairs none, and so does a text an assistant sends.
   - An email to the parcel's sender, as a marketplace or a parcel shop writes to a seller
     ("on its way to the buyer", "thanks for dropping off your parcel"), adds its parcel too.
     Only words that speak to the sender count, in the subject and the first 2,000 characters

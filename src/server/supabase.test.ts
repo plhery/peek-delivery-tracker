@@ -654,6 +654,23 @@ describe('one-off parcels and their links', () => {
     expect(request.mock.calls[3]).toEqual(['/rest/v1/rpc/forget_old_parcel_feedback', { method: 'POST', body: {} }]);
   });
 
+  it('reads the parcels an account follows under some numbers, and keeps an email\'s twin numbers, through functions', async () => {
+    const client = service();
+    const owner = '5b000000-0000-4000-a000-000000000001';
+    const request = vi.spyOn(client, 'request')
+      .mockResolvedValueOnce([{ tracking_number: 'LP00000000000001', package_id: 'parcel-1' }, { tracking_number: null, package_id: 'x' }])
+      .mockResolvedValueOnce(true).mockResolvedValueOnce(false);
+    await expect(client.accountTrackingNumbers(owner, [])).resolves.toEqual(new Map());
+    await expect(client.accountTrackingNumbers(owner, ['LP00000000000001', 'JJD000390000000001']))
+      .resolves.toEqual(new Map([['LP00000000000001', 'parcel-1']]));
+    await expect(client.recordTwinNumbers(owner, 'parcel-1', 'LP00000000000001', 'JJD000390000000001')).resolves.toBe(true);
+    await expect(client.recordTwinNumbers(owner, 'parcel-2', 'LP00000000000001', 'JJD000390000000001')).resolves.toBe(false);
+    expect(request.mock.calls[0]).toEqual(['/rest/v1/rpc/account_tracking_numbers',
+      { method: 'POST', body: { p_user_id: owner, p_numbers: ['LP00000000000001', 'JJD000390000000001'] } }]);
+    expect(request.mock.calls[1]).toEqual(['/rest/v1/rpc/record_twin_numbers',
+      { method: 'POST', body: { p_user_id: owner, p_package_id: 'parcel-1', p_earlier: 'LP00000000000001', p_later: 'JJD000390000000001' } }]);
+  });
+
   it('deletes the review entries of numbers no parcel follows any more through a function', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce({ cases: 2, signals: 1 }).mockResolvedValueOnce(null);

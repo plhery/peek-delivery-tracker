@@ -66,6 +66,40 @@ export function trackingNumbersInText(text: string, carriers: readonly CarrierId
 }
 
 /**
+ * The carriers that are a marketplace's own logistics: an email names their number beside the last-mile carrier's for
+ * one package, and their tracker follows the whole journey and names the next leg itself (AliExpress's, Cainiao's).
+ */
+const MARKETPLACE_LOGISTICS: ReadonlySet<string> = new Set(['aliexpress']);
+
+/** An email's two numbers for one package: the marketplace's logistics number and the last-mile carrier's. */
+export interface TwinNumbers {
+  earlier: NumberInText;
+  later: NumberInText;
+}
+
+/**
+ * The twins among a text's numbers: exactly two numbers, one a marketplace's logistics number and the other a last-mile
+ * carrier's, or none. A text that names more numbers, or two of either kind, may name several packages.
+ */
+export function twinNumbers(numbers: readonly NumberInText[]): TwinNumbers | null {
+  if (numbers.length !== 2) return null;
+  const [first, second] = numbers as [NumberInText, NumberInText];
+  const marketplace = (number: NumberInText) => MARKETPLACE_LOGISTICS.has(number.match.carrier);
+  if (marketplace(first) === marketplace(second)) return null;
+  return marketplace(first) ? { earlier: first, later: second } : { earlier: second, later: first };
+}
+
+/** Keeps a pair for the parcel that follows its package. A failure is reported, and the email's parcels stay. */
+async function keepTwins(service: SupabaseServiceClient, userId: string, packageId: string, { earlier, later }: TwinNumbers): Promise<void> {
+  try {
+    await service.recordTwinNumbers(userId, packageId, earlier.normalized, later.normalized);
+  } catch (error) {
+    if (!(error instanceof SupabaseError)) throw error;
+    captureOperationalError(error, { component: 'packages', operation: 'record_twin_numbers' });
+  }
+}
+
+/**
  * Queues the first check of a parcel just added to an account. A queue that fails marks the parcel, whose next
  * refresh tries again.
  */
@@ -100,6 +134,12 @@ export interface AddingOptions {
   retryEligibility?: boolean;
   /** How far the text is read beyond an email's (trackingNumbersInText). */
   trust?: TextTrust;
+  /**
+   * True for an email, whose two numbers for one package (`twinNumbers`) are followed as one parcel: the account's
+   * under either number, else the marketplace's number alone, added. The pair is kept for that parcel, so either
+   * number finds it later, and two parcels the account follows under them merge (`package_twin_numbers`).
+   */
+  twins?: boolean;
 }
 
 /**
@@ -113,14 +153,19 @@ export async function addNumbersToAccount(
   userId: string,
   numbers: readonly NumberInText[],
   label: string,
-  { addNew = true, retryEligibility = false }: AddingOptions = {},
+  { addNew = true, retryEligibility = false, twins = false }: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
   const known = await service.accountTrackingNumbers(userId, numbers.map(({ normalized }) => normalized));
+  const pair = twins && !numbers.some(({ normalized }) => reviewDemoCarrier(userId, normalized)) ? twinNumbers(numbers) : null;
+  // The parcel that follows the pair's package: the account's under either number, else the one the marketplace's
+  // number adds, tried first.
+  let twin = pair ? known.get(pair.earlier.normalized) ?? known.get(pair.later.normalized) ?? null : null;
   const additions: ParcelAddition[] = [];
   let stopped: ParcelAddition | null = null;
   // Read once, for the first number to add.
   let country: Promise<string | null> | undefined;
-  for (const { normalized, match } of numbers) {
+  for (const number of pair ? [pair.earlier, pair.later] : numbers) {
+    const { normalized, match } = number;
     // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
     const demo = reviewDemoCarrier(userId, normalized);
     // An Amazon-shaped number is Amazon Shipping's when Amazon Shipping's tracker follows it, as the Add sheet's
@@ -129,6 +174,10 @@ export async function addNumbersToAccount(
     const carrier = demo ?? (amazon ? 'amazon-shipping' : match.carrier);
     if (known.has(normalized)) {
       additions.push({ trackingNumber: normalized, carrier, outcome: 'known', packageId: known.get(normalized) ?? null });
+      continue;
+    }
+    if (twin) {
+      additions.push({ trackingNumber: normalized, carrier, outcome: 'known', packageId: twin });
       continue;
     }
     if (!addNew) continue;
@@ -188,6 +237,7 @@ export async function addNumbersToAccount(
       throw error;
     }
     known.set(normalized, packageId);
+    if (number === pair?.earlier) twin = packageId;
     if (demo) {
       additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId: null });
       continue;
@@ -204,6 +254,7 @@ export async function addNumbersToAccount(
     const jobId = await queueFirstCheck(service, userId, packageId);
     additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId });
   }
+  if (pair && twin) await keepTwins(service, userId, twin, pair);
   return additions;
 }
 

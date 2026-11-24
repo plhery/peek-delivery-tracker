@@ -1117,14 +1117,15 @@ describe('the MCP endpoint', () => {
   });
 
   it('keeps a comma or a quote in a tracking number within that number', async () => {
-    const paths: string[] = [];
-    vi.spyOn(service as unknown as { request: (path: string) => Promise<unknown> }, 'request').mockImplementation(async (path: string) => {
-      paths.push(new URL(path, 'https://database.example').searchParams.get('tracking_number') ?? '');
-      return [];
-    });
+    const asked: unknown[] = [];
+    vi.spyOn(service as unknown as { request: (path: string, init?: { body?: unknown }) => Promise<unknown> }, 'request')
+      .mockImplementation(async (path: string, init?: { body?: unknown }) => {
+        if (path === '/rest/v1/rpc/account_tracking_numbers') asked.push(init?.body);
+        return [];
+      });
     const lookup = await call(connect(['parcels:read']), 'get_parcel', { parcel: 'SYNTHETICA","SYNTHETICB' });
     expect(lookup.result).toMatchObject({ isError: true });
-    expect(paths).toContain('in.("SYNTHETICA\\",\\"SYNTHETICB")');
+    expect(asked).toEqual([{ p_user_id: expect.any(String), p_numbers: ['SYNTHETICA","SYNTHETICB'] }]);
   });
 
   it('refuses another site\'s page', async () => {

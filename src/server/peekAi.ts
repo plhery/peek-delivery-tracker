@@ -6,6 +6,7 @@ import { placesForEvents, placeTimeZone, type EventPoint } from 'universal-parce
 import type { ApiPackageRow, ApiPeekAi, ApiPeekAiSays } from '../generated/apiContract';
 import { currentEvent } from '../lib/stages';
 import { toParcel } from '../store/apiRepo';
+import { scanDay } from './eventIdentity';
 import { captureOperationalError } from './observability';
 import {
   ARRIVAL_STAGES, codePoints, deliveryDaysBetween, orderedScans, PHYSICAL_STAGES, predictArrival, scanMilestones, snapshotFeatures,
@@ -158,6 +159,8 @@ export function shortestRange(F: readonly number[], tau: number): { a: number; b
 interface PlacedScan extends AiScan {
   zone: string | null;
   id: string;
+  /** Dated by its day alone: it stands at the start of that day, or just after the scan before it, at no hour it was made. */
+  dayAlone: boolean;
 }
 
 interface Placed {
@@ -211,6 +214,7 @@ function placedScans(row: JsonObject, c: string): Placed {
   // Keyed by everything placing reads: a scan reworded or restaged in place is placed again.
   const key = createHash('sha1').update(JSON.stringify([row.id, c, destination, raw.map((event) => [
     event.id, event.stage, event.occurred_at, event.description, event.location, event.point, event.provider_code, event.provider_event_id,
+    event.time, event.local_time,
   ])])).digest('base64');
   const hit = placedCache.get(key);
   if (hit) {
@@ -225,6 +229,7 @@ function placedScans(row: JsonObject, c: string): Placed {
       id: String(event.id), stage, ts: Date.parse(String(event.occurred_at)) / 1000,
       description: stage === 'delivered' ? null : text(event.description), providerCode: text(event.provider_code),
       source: id.split(':')[0]!.slice(0, 40), country: null, lat: null, lon: null, precision: null, zone: null,
+      dayAlone: scanDay(event) !== null,
     };
   });
   const ordered = orderedScans(scans) as PlacedScan[];
@@ -376,7 +381,8 @@ export function peekAiFor(row: JsonObject, served: JsonObject, now = new Date(),
 function endsAt(ai: PeekAi, local: DateTime): string | null {
   const day = (iso: string | undefined) => iso ? DateTime.fromISO(iso, { zone: local.zone }) : null;
   const [hour, minute] = (ai.time ?? '').split(':').map(Number);
-  const end = ai.says === 'not_today' ? local.startOf('day').plus({ days: 1 })
+  // A call on a missed date says the carrier's date was yesterday: it holds that day only, as `call` makes it.
+  const end = ai.says === 'not_today' || ai.why === 'missed_date' ? local.startOf('day').plus({ days: 1 })
     : ai.says === 'by_time' ? (ai.time ? local.set({ hour, minute, second: 0, millisecond: 0 }) : null)
     : ai.says === 'sooner' ? day(ai.carrier_day)
     : day(ai.day)?.plus({ days: 1 }) ?? null;
@@ -420,7 +426,8 @@ function call(row: JsonObject, c: string, placed: Placed, local: DateTime, blob:
       return { says: 'not_today', why: 'late_out', sure: capped(late.sure), out_since: localIso(out) };
     }
     const rule = blob.byTime[c];
-    if (!rule || newest.stage !== 'out_for_delivery' || namesHour(row.expected_delivery)) return null;
+    // Sent out on a day with no hour, it may have gone out after the carrier's usual hour, and has no time to show.
+    if (!rule || out.dayAlone || newest.stage !== 'out_for_delivery' || namesHour(row.expected_delivery)) return null;
     const [h, m] = rule.by.split(':').map(Number) as [number, number];
     const bound = h + m / 60;
     const left = DateTime.fromSeconds(out.ts, { zone });

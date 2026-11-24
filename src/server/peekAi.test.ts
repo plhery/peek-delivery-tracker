@@ -117,6 +117,16 @@ describe('out for delivery', () => {
     expect(ai(row({}, [ACCEPTED, scan('out_for_delivery', '2026-11-20T14:40:00Z')]), '2026-11-20T14:50:00Z')).toBeNull();
   });
 
+  it('names no hour for a parcel the carrier sent out on a day with no time, which may have left after it', () => {
+    // Stored at the start of its day, or a second after the scan before it that day.
+    const dayOnly = (occurred: string) => scan('out_for_delivery', occurred, { time: '2026-11-20' });
+    expect(ai(row({}, [ACCEPTED, IN_TRANSIT, dayOnly('2026-11-19T23:00:00Z')]), '2026-11-20T09:00:00Z')).toBeNull();
+    const sorted = scan('in_transit', '2026-11-20T05:30:00Z');
+    expect(ai(row({}, [ACCEPTED, sorted, dayOnly('2026-11-20T05:30:01Z')]), '2026-11-20T09:00:00Z')).toBeNull();
+    // Still out late in the evening, it says not today all the same.
+    expect(ai(row({}, [ACCEPTED, IN_TRANSIT, dayOnly('2026-11-19T23:00:00Z')]), '2026-11-20T19:15:00Z')).toMatchObject({ says: 'not_today', why: 'late_out' });
+  });
+
   it('says not today when still out late in the evening', () => {
     expect(ai(out(), '2026-11-20T19:15:00Z')).toEqual({
       says: 'not_today', why: 'late_out', sure: 0.885, out_since: '2026-11-20T08:10:00+01:00', ends_at: '2026-11-21T00:00:00+01:00',
@@ -130,12 +140,12 @@ describe('out for delivery', () => {
 describe("the carrier's day has passed", () => {
   const missed = (fields: JsonObject = {}) => row({ expected_delivery: '2026-11-19', ...fields }, [ACCEPTED, scan('in_transit', '2026-11-20T06:00:00Z')]);
 
-  it('says today or tomorrow when a scan came since, by the next day the carrier delivers on', () => {
+  it('says today or tomorrow when a scan came since, by the next day the carrier delivers on, until that day ends', () => {
     expect(ai(missed(), '2026-11-20T14:30:00Z')).toEqual({
-      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89, ends_at: '2026-11-22T00:00:00+01:00',
+      says: 'today_or_tomorrow', why: 'missed_date', day: '2026-11-21', carrier_day: '2026-11-19', sure: 0.89, ends_at: '2026-11-21T00:00:00+01:00',
     });
     // DPD does not deliver on Saturdays.
-    expect(ai(missed({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23' });
+    expect(ai(missed({ carrier: 'dpd' }), '2026-11-20T14:30:00Z')).toMatchObject({ says: 'by_day', day: '2026-11-23', ends_at: '2026-11-21T00:00:00+01:00' });
   });
 
   it('says nothing without a scan in the day since, or once the day is further back', () => {

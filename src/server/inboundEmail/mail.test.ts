@@ -65,10 +65,14 @@ describe('reading a forwarded shipping email', () => {
     expect(mail.sender).toBe('Example Shop');
   });
 
-  it('labels a message forwarded whole under its own subject with the sender on its opening dated line', async () => {
+  it.each([
+    ['on a 24-hour clock', '01.11.2026 09:15:42'],
+    ['on a 12-hour clock', '11/01/2026 9:15:42 PM'],
+    ['on a 12-hour clock without seconds', '11/01/2026 9:15 a.m.'],
+  ])('labels a message forwarded whole under its own subject with the sender on its opening dated line %s', async (_, stamp) => {
     const mail = await readInboundMail(mime(
       { From: 'Alex Example <alex@example.com>', Subject: 'Alex: Parcel 1234: at the sorting centre' },
-      `01.11.2026 09:15:42 Example Shop <notice@mail.example-shop.com>:\n\n\nYour parcel ${UPS} is at the sorting centre.`,
+      `${stamp} Example Shop <notice@mail.example-shop.com>:\n\n\nYour parcel ${UPS} is at the sorting centre.`,
     ));
     expect(mail.sender).toBe('Example Shop');
     expect(mail.origin).toBe('notice@mail.example-shop.com');

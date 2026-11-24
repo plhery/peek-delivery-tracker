@@ -51,7 +51,7 @@ J&T Express Germany（极兔德国，*J&T Express Germany GmbH*，注册地位�
 在 Peek 观测到的德国实单中，极兔派送员（或德国各地加盟派送合作伙伴）直接送货上门、送交自提点或反馈未妥投原因，未见转交其他德国快递商的情况。
 
 - **派送偏好设置：** 派送通知邮件中带有极兔[派送偏好页面](https://www.jtexpress.de/delivery-preference)链接，核验邮编后可选择本人签收、指定邻居（填姓名与同层/隔壁）、前台代收，或无签收留置在门口、花园、信箱或车库（选择无签收留置时，包裹放置后的遗失风险由收件人承担）。
-- **签收照片政策：** 根据极兔德国 POD 隐私声明，司机在交接或无签收留置时会拍摄包裹及放置局部照片（自动模糊误入画面的人脸），照片常规保留 **6 个月**（如有投诉则保留至结案），并可提供给发件商家处理客诉。
+- **签收照片政策：** 根据极兔德国 POD 隐私声明，司机在交接或无签收留置时会拍摄包裹及放置局部照片（误入画面的人会被自动模糊），照片常规保留 **6 个月**（如有投诉则保留至结案），并可提供给发件商家处理客诉。
 - **拒收或找不到地址：** 拒收后次晨可能再次装车派送；若提示找不到地址，请检查是否漏填楼层、门铃姓名或门牌号并立刻联系商家更正。详见[如何修改收货地址](guide:change-delivery-address)（英文）与[错过派送怎么办](guide:missed-delivery)（英文）。
 - **尝试次数与网点：** 极兔德国官网未公布派送尝试次数、保管天数或固定网点列表，但实单轨迹中存在投递至自提点并邮件通知的节点。
 
@@ -117,4 +117,6 @@ Peek 展示当前阶段、精确到分钟的每条扫描（自动换算为你的
 - [Bundesnetzagentur: 邮政服务商名录](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – *J&T Express Germany GmbH* 自 2026 年 9 月 1 日起登记在册
 - [Bundesnetzagentur: 邮政仲裁常见问题](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – 免费仲裁申请与 Verbraucherservice Post
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – `JTDE` 规则、链接规则、实单英文状态、六类签收方式与隐私过滤
+- [Universal Parcel Scraper: 极兔共用的查询接口](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – 英文轨迹、精确扫描时间、最新 100 条扫描
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 不转交其他快递公司、聚合追踪服务作为后备
 :::

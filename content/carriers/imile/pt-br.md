@@ -58,7 +58,12 @@ A iMile mantém página oficial em português do Brasil ([imile.com/BR-pt](https
 
 Nas [perguntas frequentes brasileiras](https://www.imile.com/BR-pt/CustomerService/FAQ), a iMile só aceita pequenas alterações do endereço de entrega dentro do mesmo CEP registrado no pedido, e a foto da encomenda entregue e a assinatura digital ficam disponíveis para consulta como comprovante. As perguntas frequentes gerais acrescentam que a central de atendimento recebe pedidos de reagendamento. Na página oficial de rastreio há ainda a opção de visualizar o comprovante mediante confirmação do usuário autorizado. Para situações de destinatário ausente, veja [entrega não realizada](guide:missed-delivery).
 
-**Alfândega e Programa Remessa Conforme no Brasil.** Compras internacionais pagam o Imposto de Importação, federal, e o ICMS, estadual. Segundo a [Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona), uma loja certificada no Programa Remessa Conforme cobra os tributos no fechamento da compra e deve mostrá-los antes do pagamento; numa loja fora do programa, eles são cobrados quando a encomenda chega ao Brasil, antes de ser entregue. A iMile não diz como os tributos são pagos nas suas encomendas: a loja sabe se já estavam no preço. Para mais detalhes sobre retenções alfandegárias, consulte [encomendas retidas na alfândega](guide:customs).
+**Alfândega e Programa Remessa Conforme no Brasil.** Compras internacionais pagam o Imposto de Importação, federal, e o ICMS, estadual. Segundo a [Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona):
+
+- **Loja certificada no Programa Remessa Conforme:** os tributos são cobrados no fechamento da compra, e a loja deve mostrá-los antes do pagamento. Até US$ 50, o Imposto de Importação é zero e você paga o ICMS, de 17% a 20% conforme o estado; acima de US$ 50, o Imposto de Importação é de 60%, com desconto de US$ 30 no valor do imposto, mais o ICMS.
+- **Loja fora do programa:** 60% de Imposto de Importação, sem desconto, mesmo até US$ 50, mais 17% a 20% de ICMS, cobrados quando a encomenda chega ao Brasil, antes de ser entregue.
+
+A iMile não diz como os tributos são pagos nas suas encomendas: a loja sabe se já estavam no preço. Para mais detalhes sobre retenções alfandegárias, consulte [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda iMile parada, atrasada ou não recebida
 
@@ -70,7 +75,7 @@ Nas [perguntas frequentes brasileiras](https://www.imile.com/BR-pt/CustomerServi
 
 **Consta como entregue, mas você não recebeu.** Verifique primeiro com moradores, vizinhos ou portaria e procure o comprovante de entrega na página da iMile; depois acione a loja e a iMile. Veja [entregue, mas não recebido](guide:delivered-not-received).
 
-**Extravio, avaria ou devolução.** A iMile não publica um fluxo de indenização direta ao destinatário no Brasil: quem tem o contrato de frete é a loja, que deve providenciar reembolso ou reenvio. Veja [encomenda perdida](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender). Se a loja não resolver o problema e estiver cadastrada no [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1), serviço público e gratuito, você pode registrar uma reclamação ali: a empresa tem até 10 dias para responder.
+**Extravio, avaria ou devolução.** A iMile não publica um fluxo de indenização direta ao destinatário no Brasil: quem tem o contrato de frete é a loja, que deve providenciar reembolso ou reenvio. Veja [encomenda perdida](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender). Se a loja não resolver o problema e estiver cadastrada no [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1), serviço público e gratuito, você pode registrar uma reclamação ali com uma conta gov.br nível prata ou ouro: a empresa tem até 10 dias para responder.
 
 ## Atendimento e contato da iMile no Brasil
 
@@ -123,7 +128,7 @@ As páginas brasileiras da iMile não listam telefone ou e-mail local; o atendim
 - [iMile: Home](https://www.imile.com/en) – fundada em Dubai em 2017, entregas transfronteiriças e PUDOs
 - [iMile: Track Your Shipment](https://www.imile.com/en/track) – página em inglês, resultado vazio e comprovante de entrega
 - [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – reagendamento pela central de atendimento
-- [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – tributos cobrados na compra em lojas certificadas, na chegada ao Brasil nas demais
-- [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – serviço público e gratuito, empresas cadastradas, resposta em até 10 dias
+- [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – em loja certificada, Imposto de Importação zero até US$ 50 e de 60% com desconto de US$ 30 acima, cobrado na compra; nas demais, 60% sem desconto, cobrado na chegada ao Brasil; ICMS de 17% a 20%
+- [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – serviço público e gratuito, conta gov.br prata ou ouro, empresas cadastradas, resposta em até 10 dias
 - [Universal Parcel Scraper: iMile](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/imile) – formatos de código, mapeamento de status, integração com Cainiao, campos exibidos/ocultados e ritmo de atualização
 :::

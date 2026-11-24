@@ -1,10 +1,10 @@
 [
   { "id": "quickpac", "catalog": "quickpac", "name": "Quickpac", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "planzer", "catalog": "planzer", "name": "Planzer", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
-  { "id": "colis-prive", "catalog": "colis-prive", "name": "Colis Privé", "languages": ["en", "fr", "nl", "de", "es", "it", "pt", "pl"] },
+  { "id": "colis-prive", "catalog": "colis-prive", "name": "Colis Privé", "languages": ["en", "fr", "nl", "de", "es", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "brt", "catalog": "brt", "name": "BRT", "languages": ["en", "it", "de", "fr", "es", "pl", "pt", "zh", "pt-br"] },
   { "id": "correos-express", "catalog": "correos-express", "name": "Correos Express", "languages": ["en", "es", "pt", "fr", "de", "it", "pl", "zh", "pt-br"] },
-  { "id": "nacex", "catalog": "nacex", "name": "NACEX", "languages": ["en", "es", "pt", "fr", "de", "it", "pl"] },
+  { "id": "nacex", "catalog": "nacex", "name": "NACEX", "languages": ["en", "es", "pt", "fr", "de", "it", "pl", "zh", "pt-br"] },
   { "id": "yunexpress", "catalog": "yunexpress", "name": "YunExpress", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "zh", "pt-br"] },
   { "id": "cainiao", "catalog": "aliexpress", "name": "Cainiao", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "zh", "pt-br"] },
   { "id": "mondial-relay", "catalog": "mondial-relay", "name": "Mondial Relay", "languages": ["en", "fr", "es", "pt", "nl", "de", "it", "pl", "zh", "pt-br"] },

@@ -14742,6 +14742,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "rastreamento-colis-prive",
+      "title": "Rastreamento Colis Privé: código, CEP e status em francês",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
+    {
       "id": "brt",
       "catalog": "brt",
       "slug": "rastreamento-brt",
@@ -14756,6 +14764,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Correos Express: códigos, status e contato",
       "name": "Correos Express",
       "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "rastreamento-nacex",
+      "title": "Rastreamento NACEX: código com barra, status e contato",
+      "name": "NACEX",
+      "color": "#fe5000"
     },
     {
       "id": "yunexpress",
@@ -18060,6 +18076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "zh": [
     {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "colis-prive-kuaidi-chaxun",
+      "title": "法国 Colis Privé 快递查询：12 位单号、邮编与状态",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
+    {
       "id": "brt",
       "catalog": "brt",
       "slug": "brt-tracking",
@@ -18074,6 +18098,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Correos Express 快递查询：单号、西班牙语状态与客服",
       "name": "Correos Express",
       "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "nacex-kuaidi-chaxun",
+      "title": "NACEX 快递查询：单号格式、西班牙语状态与客服",
+      "name": "NACEX",
+      "color": "#fe5000"
     },
     {
       "id": "yunexpress",

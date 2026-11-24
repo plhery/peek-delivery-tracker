@@ -4748,6 +4748,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "skypostal-sendungsverfolgung",
+      "title": "SkyPostal Sendungsverfolgung: SKAMZUS, SP-Codes & Hilfe",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7156,6 +7164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Serpost\u00a0: codes S10 du Pérou, douane SUNAT et aide",
       "name": "Serpost",
       "color": "#00308a"
+    },
+    {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "suivi-skypostal",
+      "title": "Suivi SkyPostal\u00a0: codes SKAMZUS et SP, statuts et aide",
+      "name": "SkyPostal",
+      "color": "#088aea"
     },
     {
       "id": "onlog-express",
@@ -9568,6 +9584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "tracciamento-skypostal",
+      "title": "Tracciamento SkyPostal: codici SKAMZUS e SP, stati e aiuto",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "tracciamento-onlog-express",
@@ -11970,6 +11994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "seguimiento-skypostal",
+      "title": "Seguimiento SkyPostal: códigos SKAMZUS, SP y soporte",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "seguimiento-onlog-express",
@@ -14370,6 +14402,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Serpost: códigos S10 do Peru, alfândega e apoio",
       "name": "Serpost",
       "color": "#00308a"
+    },
+    {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "rastreio-skypostal",
+      "title": "Rastreio SkyPostal: códigos SKAMZUS, SP e apoio",
+      "name": "SkyPostal",
+      "color": "#088aea"
     },
     {
       "id": "onlog-express",
@@ -16854,6 +16894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Serpost: kody S10 z Peru, cło SUNAT i pomoc",
       "name": "Serpost",
       "color": "#00308a"
+    },
+    {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "sledzenie-skypostal",
+      "title": "Śledzenie SkyPostal: kody SKAMZUS i SP, statusy i pomoc",
+      "name": "SkyPostal",
+      "color": "#088aea"
     },
     {
       "id": "onlog-express",

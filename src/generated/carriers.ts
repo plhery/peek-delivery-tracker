@@ -4716,6 +4716,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "post-haste-sendungsverfolgung",
+      "title": "Post Haste Sendungsverfolgung: NZ-Tickets, Status & Hilfe",
+      "name": "Post Haste",
+      "color": "#24b2d8"
+    },
+    {
       "id": "redur",
       "catalog": "redur",
       "slug": "redur-sendungsverfolgung",
@@ -7100,6 +7108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi PDU\u00a0: codes Parcel Delivery Union, statuts et aide",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "suivi-post-haste",
+      "title": "Suivi Post Haste\u00a0: tickets NZ, codes d’envoi et aide",
+      "name": "Post Haste",
+      "color": "#24b2d8"
     },
     {
       "id": "redur",
@@ -9488,6 +9504,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "tracciamento-post-haste",
+      "title": "Tracciamento Post Haste: ticket NZ, codici e assistenza",
+      "name": "Post Haste",
+      "color": "#24b2d8"
+    },
+    {
       "id": "redur",
       "catalog": "redur",
       "slug": "tracciamento-redur",
@@ -11864,6 +11888,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento PDU: códigos Parcel Delivery Union y ayuda",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "seguimiento-post-haste",
+      "title": "Seguimiento Post Haste: códigos NZ, estados y ayuda",
+      "name": "Post Haste",
+      "color": "#24b2d8"
     },
     {
       "id": "redur",
@@ -14250,6 +14282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio PDU: códigos Parcel Delivery Union e apoio",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "rastreio-post-haste",
+      "title": "Rastreio Post Haste: códigos NZ, estados e apoio",
+      "name": "Post Haste",
+      "color": "#24b2d8"
     },
     {
       "id": "redur",
@@ -16710,6 +16750,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PDU: kody Parcel Delivery Union, statusy i pomoc",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "post-haste",
+      "catalog": "post-haste",
+      "slug": "sledzenie-post-haste",
+      "title": "Śledzenie Post Haste: kody NZ, statusy i pomoc",
+      "name": "Post Haste",
+      "color": "#24b2d8"
     },
     {
       "id": "redur",

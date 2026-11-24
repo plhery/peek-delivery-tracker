@@ -4652,6 +4652,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed007d"
     },
     {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "dobropost-sendungsverfolgung",
+      "title": "DobroPost Sendungsverfolgung: DBRPST-Codes & China-Hubs",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6886,6 +6894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed007d"
     },
     {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "suivi-dobropost",
+      "title": "Suivi DobroPost\u00a0: codes DBRPST, statuts et hubs en Chine",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9104,6 +9120,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed007d"
     },
     {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "tracciamento-dobropost",
+      "title": "Tracciamento DobroPost: codici DBRPST, stati e hub Cina",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11320,6 +11344,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Correos de México: guías MX, ventanilla y reclamos",
       "name": "Correos de México",
       "color": "#ed007d"
+    },
+    {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "seguimiento-dobropost",
+      "title": "Seguimiento DobroPost: códigos DBRPST, estados y hubs",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
     },
     {
       "id": "redur",
@@ -13570,6 +13602,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Correos de México: códigos S10 MX e reclamações",
       "name": "Correos de México",
       "color": "#ed007d"
+    },
+    {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "rastreio-dobropost",
+      "title": "Rastreio DobroPost: códigos DBRPST, estados e hubs China",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
     },
     {
       "id": "buffalo-ex",
@@ -15862,6 +15902,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Correos de México: kody S10 MX i reklamacje",
       "name": "Correos de México",
       "color": "#ed007d"
+    },
+    {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "sledzenie-dobropost",
+      "title": "Śledzenie DobroPost: kody DBRPST, statusy i magazyny",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
     },
     {
       "id": "buffalo-ex",

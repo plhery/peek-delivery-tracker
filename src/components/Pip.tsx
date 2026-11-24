@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { useId, type CSSProperties, type ReactNode } from 'react';
 
 export type PaperPoint = readonly [number, number];
 export interface PaperFlap {
@@ -137,8 +137,14 @@ export function ParcelArt({ className = '', label, ribbon = false }: {
   label?: ReactNode;
   ribbon?: boolean;
 }) {
+  // The sides are shaded across the frame, as the iPhone and Android parcels are: each drawing on a page needs its own ids.
+  const shade = useId();
   return <svg className={`parcel-illustration ${className}`} viewBox="0 0 300 310" fill="none" aria-hidden="true">
-    <ellipse className="parcel-illustration__shadow" cx="150" cy="286" rx="84" ry="10" fill="currentColor" opacity=".08" />
+    <defs>
+      <linearGradient id={`${shade}-left`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#DDBC95" /><stop offset="1" stopColor="#C49A6E" /></linearGradient>
+      <linearGradient id={`${shade}-right`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#BB946A" /><stop offset="1" stopColor="#A77E55" /></linearGradient>
+    </defs>
+    <ellipse className="parcel-illustration__shadow" cx="151" cy="286" rx="90" ry="10" fill="#000" opacity=".08" />
     <g className="parcel-illustration__body">
       <path d={PARCEL.inside} fill="#806345" />
       <ParcelFlap flap={PARCEL.flaps.backLeft} tone="#C4A078" rear hidden />
@@ -159,13 +165,12 @@ export function ParcelArt({ className = '', label, ribbon = false }: {
           <path d="M124 194h29" stroke="#E7E4DC" strokeWidth="4" strokeLinecap="round" />
         </>}
       </g>
-      <path d={PARCEL.left} fill="#C9A47B" />
-      <path d={PARCEL.right} fill="#B78F66" />
+      <path d={PARCEL.left} fill={`url(#${shade}-left)`} />
+      <path d={PARCEL.right} fill={`url(#${shade}-right)`} />
       <path className="parcel-illustration__face-light" d={PARCEL.left} fill="#FFF4D6" />
-      <path d={PARCEL.hairlines} stroke="#987450" strokeOpacity=".25" strokeWidth=".8" />
       <path className="parcel-illustration__edge" d={PARCEL.edges} stroke="#FFF2CF" strokeWidth="1" />
       {label ?? <>
-        <g transform="translate(201 201) rotate(-27)"><path d="M10 22V4m-5 5 5-5 5 5" stroke="#735C43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></g>
+        <g transform="translate(203.2 207) rotate(-27)"><path d="M10 22V4m-5 5 5-5 5 5" stroke="#735C43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></g>
         <g transform="translate(183 234) rotate(-27)">
           <circle r="14" fill="#DECCE2" />
           <circle className="parcel-illustration__seal-light" r="11.5" stroke="#FFF6FF" strokeWidth="1.2" />
@@ -206,13 +211,15 @@ export function ParcelArt({ className = '', label, ribbon = false }: {
 export function SmallPip({ look, blinks = false }: { look?: PaperPoint; blinks?: boolean } = {}) {
   return <svg className={blinks ? 'small-pip parcel-illustration' : 'small-pip'} viewBox="48 88 204 196" fill="none" aria-hidden="true">
     <path d={PARCEL.inside} fill="#806345" />
-    <polygon points={flapPoints(PARCEL.flaps.backRight, false)} fill="#D8B997" />
+    <polygon points={flapPoints(PARCEL.flaps.backRight, false)} fill="#D8B997" stroke="#987450" strokeOpacity=".24" strokeWidth=".7" />
     <path d={PARCEL.left} fill="#C9A47B" />
     <path d={PARCEL.right} fill="#B78F66" />
+    <path d={PARCEL.left} fill="#FFF2CF" fillOpacity=".07" />
     <path d={PARCEL.hairlines} stroke="#987450" strokeOpacity=".25" strokeWidth=".8" />
     <path d={PARCEL.edges} stroke="#FFF2CF" strokeOpacity=".4" strokeWidth="1" />
-    <polygon points={flapPoints(PARCEL.flaps.frontLeft, false)} fill="#DDBD96" />
+    <polygon points={flapPoints(PARCEL.flaps.frontLeft, false)} fill="#DDBD96" stroke="#987450" strokeOpacity=".24" strokeWidth=".7" />
     <PipFace k={1.3} look={look} />
     <path d={PARCEL.tape} fill="#EBDDCA" />
+    <path d={PARCEL.seam} stroke="#AF9474" strokeOpacity=".6" strokeWidth="1" strokeDasharray="3 3" />
   </svg>;
 }

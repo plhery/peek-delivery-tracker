@@ -455,7 +455,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .arrival__parcel { position: absolute; top: 128px; left: 50%; width: 350px; margin-left: -175px; pointer-events: none; transition: transform .85s var(--spring), top .85s var(--spring); z-index: 1; }
 .parcel-illustration { display: block; width: 100%; overflow: visible; }
 .parcel-illustration__body { transform-origin: 150px 210px; animation: parcel-idle 5.4s ease-in-out infinite; }
-.parcel-illustration__shadow { transform-origin: 150px 286px; animation: parcel-shadow 5.4s ease-in-out infinite; }
+.parcel-illustration__shadow { transform-origin: 151px 286px; filter: blur(9px); animation: parcel-shadow 5.4s ease-in-out infinite; }
 /* How far a flap has turned on its hinge, from 0 closed to 1 open: registered as a number, so that it can move. */
 @property --fold { syntax: "<number>"; inherits: false; initial-value: 0; }
 .parcel-illustration__flap { transform-origin: 0 0; transform: scaleY(calc(1 + (var(--fold-scale) - 1) * var(--fold))) skewX(calc(var(--fold-skew) * var(--fold))); transition: --fold .72s var(--spring) .17s, opacity .3s .1s; }

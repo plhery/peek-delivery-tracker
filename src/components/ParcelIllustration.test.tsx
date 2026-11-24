@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { carrierInfo } from '../lib/carriers';
 import { ParcelIllustration } from './Icon';
 
-const arrow = 'g[transform="translate(201 201) rotate(-27)"]';
+const arrow = 'g[transform="translate(203.2 207) rotate(-27)"]';
 const seal = 'g[transform="translate(183 234) rotate(-27)"]';
 
 describe('Pip with its carrier’s label', () => {

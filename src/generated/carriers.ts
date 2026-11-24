@@ -4812,6 +4812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "bfe-express-sendungsverfolgung",
+      "title": "BFE Express Sendungsverfolgung: Nummern, Status & Hilfe",
+      "name": "BFE Express",
+      "color": "#122a88"
+    },
+    {
       "id": "pasarex",
       "catalog": "pasarex",
       "slug": "pasarex-sendungsverfolgung",
@@ -7182,6 +7190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "suivi-bfe-express",
+      "title": "Suivi BFE Express\u00a0: numéros CK et WYB, statuts et aide",
+      "name": "BFE Express",
+      "color": "#122a88"
+    },
+    {
       "id": "pasarex",
       "catalog": "pasarex",
       "slug": "suivi-pasarex",
@@ -9550,6 +9566,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento PigeonShip: numeri, stati e consegna",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "tracciamento-bfe-express",
+      "title": "Tracciamento BFE Express: codici CK e WYB, stati e contatti",
+      "name": "BFE Express",
+      "color": "#122a88"
     },
     {
       "id": "pasarex",
@@ -14292,6 +14316,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "rastreio-bfe-express",
+      "title": "Rastreio BFE Express: códigos CK e WYB, estados e apoio",
+      "name": "BFE Express",
+      "color": "#122a88"
+    },
+    {
       "id": "pasarex",
       "catalog": "pasarex",
       "slug": "rastreio-pasarex",
@@ -16734,6 +16766,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PigeonShip: 18-znakowe kody, statusy i pomoc",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "sledzenie-bfe-express",
+      "title": "Śledzenie BFE Express: numery CK i WYB, statusy i pomoc",
+      "name": "BFE Express",
+      "color": "#122a88"
     },
     {
       "id": "pasarex",

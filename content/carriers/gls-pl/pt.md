@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A GLS Poland (*General Logistics Systems Poland Sp. z o.o.*, com sede em Głuchowo perto de Poznań e centro central de triagem em Stryków perto de Łódź) opera cerca de 50 filiais e mais de 26 000 pontos de levantamento fora de casa na Polónia — incluindo mais de 18 000 GLS Points (entre eles todas as 11 000 lojas de conveniência Żabka) e cerca de 8 000 cacifos partilhados 24/7 [ORLEN Paczka](carrier:orlen-paczka). Acompanha a tua encomenda na [página de rastreio da GLS Poland](https://gls-group.com/PL/en/parcel-tracking/) com o número da encomenda ou Track-ID, ou cola o número na caixa acima.
+A GLS Poland (*General Logistics Systems Poland Sp. z o.o.*, com sede em Głuchowo perto de Poznań e principal centro de triagem em Stryków perto de Łódź) opera cerca de 50 filiais e mais de 26 000 pontos de levantamento fora de casa na Polónia — incluindo mais de 18 000 GLS Points (entre eles todas as 11 000 lojas de conveniência Żabka) e cerca de 8 000 cacifos partilhados 24/7 [ORLEN Paczka](carrier:orlen-paczka). Acompanha a tua encomenda na [página de rastreio da GLS Poland](https://gls-group.com/PL/en/parcel-tracking/) com o número da encomenda ou Track-ID, ou cola o número na caixa acima.
 
 ## Número de rastreio GLS Poland e Track-ID: formatos
 
@@ -82,7 +82,7 @@ Com o código postal vês o estado, o local de cada registo no mapa, o dia previ
 
 O Peek verifica a GLS cerca de uma vez por hora, dia de entrega incluído, e atualizar à mão não verifica mais cedo (4 horas após uma verificação falhada); de 6 em 6 horas após sete dias sem novidades em «Etiqueta criada». Através de serviços de rastreio apenas, verifica de hora em hora e de 3 em 3 horas após um dia sem novidades.
 
-Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg., 12/10». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a GLS Poland.», com a ligação «Pede ajuda a GLS Poland» para a página de contactos da GLS Poland. Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a GLS Poland.»
+Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg 12 out». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a GLS Poland.», com a ligação «Pede ajuda a GLS Poland» para a página de contactos da GLS Poland. Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a GLS Poland.»
 
 Podes escolher os alertas «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek apenas acompanha o rastreio e não pode redirecionar encomendas nem apresentar reclamações junto da GLS Poland em teu nome.
 

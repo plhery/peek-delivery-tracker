@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-GLS Poland (*General Logistics Systems Poland Sp. z o.o.*, con sede en Głuchowo cerca de Poznan y centro de clasificación central en Stryków cerca de Łódź) gestiona unas 50 delegaciones y más de 26.000 puntos de recogida fuera de domicilio en toda Polonia, incluidos más de 18.000 GLS Points (entre ellos las 11.000 tiendas de conveniencia Żabka) y unas 8.000 taquillas compartidas 24/7 de [ORLEN Paczka](carrier:orlen-paczka). Sigue tu envío en la [página de seguimiento de GLS Poland](https://gls-group.com/PL/en/parcel-tracking/) con el número de paquete o Track-ID, o pega el número en el cuadro superior.
+GLS Poland (*General Logistics Systems Poland Sp. z o.o.*, con sede en Głuchowo cerca de Poznań y centro de clasificación central en Stryków cerca de Łódź) gestiona unas 50 delegaciones y más de 26.000 puntos de recogida fuera de domicilio en toda Polonia, incluidos más de 18.000 GLS Points (entre ellos las 11.000 tiendas de conveniencia Żabka) y unas 8.000 taquillas compartidas 24/7 de [ORLEN Paczka](carrier:orlen-paczka). Sigue tu envío en la [página de seguimiento de GLS Poland](https://gls-group.com/PL/en/parcel-tracking/) con el número de paquete o Track-ID, o pega el número en el cuadro superior.
 
 ## Número de seguimiento de GLS Poland y Track-ID: formatos
 
@@ -82,7 +82,7 @@ Con el código postal ves el estado, el lugar de cada escaneo en el mapa, el dí
 
 Peek consulta a GLS aproximadamente una vez por hora, día de reparto incluido, y actualizar a mano no consulta antes (4 horas tras un fallo); cada 6 horas pasados siete días sin novedades en «Etiqueta creada». Mediante servicios de seguimiento únicamente, comprueba cada hora y cada 3 horas tras un día sin cambios.
 
-Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun, 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a GLS Poland.», con un enlace «Pide ayuda a GLS Poland» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a GLS Poland.»
+Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a GLS Poland.», con un enlace «Pide ayuda a GLS Poland» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a GLS Poland.»
 
 Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo supervisa el seguimiento y no puede redirigir paquetes ni presentar reclamaciones ante GLS Poland en tu nombre.
 

@@ -14742,6 +14742,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "rastreamento-brt",
+      "title": "Rastreamento BRT: códigos, status e entregas na Itália",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "rastreamento-yunexpress",
@@ -14828,6 +14836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GOFO France: códigos GFFR, status e ajuda",
       "name": "GOFO France",
       "color": "#fc4c02"
+    },
+    {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "rastreamento-allegro-one",
+      "title": "Rastreamento Allegro One: One Box, One Punkt e Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
     },
     {
       "id": "ecoscooting",
@@ -17660,6 +17676,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "zh": [
     {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-tracking",
+      "title": "BRT 意大利快递查询：单号、状态与未妥投处理",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "yuntu-yunexpress-wuliu-chaxun",
@@ -17754,6 +17778,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "eBay SpeedPAK 物流查询：28位单号、状态与尾程",
       "name": "SpeedPAK",
       "color": "#ee7532"
+    },
+    {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "allegro-one-tracking",
+      "title": "Allegro One 物流查询：One Box 自提柜与状态",
+      "name": "Allegro One",
+      "color": "#006d57"
     },
     {
       "id": "sunyou",

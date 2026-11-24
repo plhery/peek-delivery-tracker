@@ -37,7 +37,7 @@ ecoscooting.com 会根据你的浏览器语言自动以英语、西班牙语或�
 | `Your shipment is out for delivery` | 包裹今天正随派送员外出派送。 |
 | `Your shipment delivery attempt failed [Recipient not at home]` | 派送员上门但无人应答。请查看邮件了解后续安排。 |
 | `Service point closed` | 上门派送失败后，派送员也未能将包裹存入取件点。包裹目前并不在取件点等待领取，Peek 会显示“派送未成功”。 |
-| `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | 已交接给取件点，但尚未完成上架，还不能前往领取。 |
+| `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | 已交给取件点，但还不能领取，也尚未到你手中。 |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | 已可领取。取件 PIN 码会通过邮件或短信发送。 |
 | `Your shipment has been collected by consignee at the parcelshop` | 已在合作包裹点取件。 |
 | `Your shipment has been delivered successfully` | 已签收。 |
@@ -46,23 +46,23 @@ ecoscooting.com 会根据你的浏览器语言自动以英语、西班牙语或�
 
 最容易让人误会的是转交取件点的那一步。它的加粗标题写着 `Delivered to PUDO`（PUDO 指取寄件网点），看起来很像已经送到你手里，但其实并非如此：请务必等到收到包裹点的取件通知后再去取件。
 
-在物流历史上方，ecoscooting.com 还会显示一行总标题。即使包裹已签收，该总标题有时仍停留在 `In transit`，因此请以最新一条扫描记录为准。`Delivery Failure` 出现在 Ecoscooting 标记异常的扫描之后，`Exceeded pickup time` 表示包裹在取件点放置超时，`No trajectory` 则表示尚无任何扫描记录。
+在物流历史上方，ecoscooting.com 还会显示一行总标题。即使包裹已签收，该总标题仍显示 `In transit`，因此请以最新一条扫描记录为准。`Delivery Failure` 出现在 Ecoscooting 标记异常的扫描之后，`Exceeded pickup time` 表示包裹在取件点放置超时，`No trajectory` 则表示尚无任何扫描记录。
 
 ## Ecoscooting 派送、合作包裹点与派送未成功
 
 在西班牙，Ecoscooting 每天派送（包括周六和周日）；在葡萄牙为周一至周六派送。公司无法提供指定时间段派送。
 
-每个包裹享有两次上门派送机会。首次派送未成功后，Ecoscooting 会通过邮件告知原因。若因地址有误，可通过该邮件修改地址，快递员会在 3 个工作日内再次派送；因其他原因未送达同样会在 3 个工作日内重新尝试。两次派送均未成功后，Ecoscooting 会视具体情况决定后续方式并通过邮件通知；在西班牙，若附近有可用网点，通常会将包裹送往附近的取件点。
+每个包裹享有两次上门派送机会。首次派送未成功后，Ecoscooting 会通过邮件告知原因。若因地址有误，可通过该邮件修改地址，快递员会在 3 个工作日内再次派送；因其他原因未送达同样会在 3 个工作日内重新尝试。两次派送均未成功后，Ecoscooting 会视具体情况决定后续方式并通过邮件通知；在西班牙，若附近有可用网点，会将包裹送往附近的取件点。
 
 不在家？你可以授权他人代签。包裹起运时 Ecoscooting 发出的邮件里也附有链接，可将派送方式改为自提点或自提柜。
 
-Ecoscooting 列出了超过 8,000 个取件点以及智能自提柜。包裹送达网点后，你会收到含取件 PIN 码、地址和营业时间的邮件或短信。请在 14 天内取件，否则包裹会退回寄件人，你届时可联系卖家申请退款。Ecoscooting 西班牙语常见问题说明，已经存入取件点的包裹无法再转寄至其他取件点或改为送货上门。
+Ecoscooting 列出了超过 8,000 个取件点以及自提柜。包裹送达网点后，你会收到含取件 PIN 码、地址和营业时间的邮件或短信。请在 14 天内取件，否则包裹会退回寄件人，你届时可联系卖家申请退款。Ecoscooting 西班牙语常见问题说明，已经存入取件点的包裹无法再转寄至其他取件点或改为送货上门。
 
 ## Ecoscooting 包裹未送达、丢失或被盗
 
 Ecoscooting 表示自己只负责本地派送。涉及缺件、错件、退货或退款事宜，请联系你下单的商家或平台。如果物流连续多日未更新，请参阅[物流不更新怎么办](guide:tracking-not-updating)（英文）。当记录出现 `Your shipment has an operational anomaly occurred at the sorting center. Issue is being resolved, updates will follow` 时，Peek 会切换为“需要留意”：这表示 Ecoscooting 正在处理分拣中心的操作异常并会在后续发布更新。
 
-**显示已签收但未收到。** 请找出 Ecoscooting 的送达确认邮件（西班牙语标题为“¡Bien! Hemos entregado tu paquete”并附单号），点击其中的“No recibido”（葡萄牙语为“Não recebido”），或提交官方申诉表单；Ecoscooting 会在 10 个工作日内回复。更多建议见[显示已签收但未收到](guide:delivered-not-received)（英文）。
+**显示已签收但未收到。** 请找出 Ecoscooting 的送达确认邮件（西班牙语标题为“¡Bien! Hemos entregado tu paquete”并附单号），点击其中的“No recibido”（葡萄牙语为“Não recebido”），或提交其申请表单；Ecoscooting 会在 10 个工作日内回复。更多建议见[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
 **丢失或被盗。** 如果物流出现 `Package stolen` 或“Parcel lost”异常，请查找标题为“Aviso importante: Su paquete no puede ser entregado”（葡萄牙语为“Aviso importante: Não foi possível entregar a sua encomenda”）的邮件。如果收到了这封邮件，请将其发给卖家申请退款；如未收到，请联系 Ecoscooting 客服。
 
@@ -115,4 +115,5 @@ Peek 会显示当前状态、带 Ecoscooting 精确时间（不含地点）的�
 - [Ecoscooting: Home Deliveries](https://www.ecoscooting.com/toDoor) – 两次上门尝试、西班牙第三次改投取件点与 24–48 小时说明
 - [Ecoscooting: Network of Pickup Points and Lockers](https://www.ecoscooting.com/pickUpPoint) – 8,000+ 取件点与自提柜网络
 - [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – 公司全称、注册地址、西班牙商事登记、咨询与投诉电话及官方投诉表
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

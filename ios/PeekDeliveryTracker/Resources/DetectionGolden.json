@@ -106964,6 +106964,26 @@
     "candidates": []
   },
   {
+    "input": "NTG999000001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "kuehne-nagel",
+      "colis-prive",
+      "purolator",
+      "tnt-au"
+    ],
+    "preferred": [
+      "kuehne-nagel"
+    ],
+    "asked": [
+      "kuehne-nagel",
+      "colis-prive",
+      "tnt-au",
+      "purolator"
+    ]
+  },
+  {
     "input": "NUDE9999999980EX",
     "carrier": "xyl-ships",
     "confidence": "high",

@@ -7735,6 +7735,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^RAPI\\d{8}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^NTG\\d{9}$",
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://www.kuehne-nagel.com/"

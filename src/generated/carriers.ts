@@ -12462,6 +12462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "rastreamento-imile",
+      "title": "Rastreamento iMile: códigos, status, alfândega e contato",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "correios-br",
       "catalog": "correios-br",
       "slug": "rastreamento-correios-brasil",
@@ -14764,6 +14772,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e73547"
     },
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "imile-guoji-kuaidi-chaxun",
+      "title": "iMile 国际快递查询：单号格式、英文轨迹与客服联系",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "tuofeixia-dhlink-wuliu-chaxun",
@@ -14834,6 +14850,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "通邮（TopYou）国际物流查询：TYZR单号、状态与尾程",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "mayi-yinfu-wuliu-chaxun",
+      "title": "蚂蚁银服（Mayi Yinfu）物流查询：MY单号、航班轨迹与DHL派送",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     },
     {
       "id": "jrt",
@@ -14978,6 +15002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "一起飞（17FEIA）国际物流查询：FEI…YQ单号与状态",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "tongshi-jiyun-tsjy-wuliu-chaxun",
+      "title": "通世集运（TSJY）物流查询：TSJY单号、状态与17FEIA转单",
+      "name": "TSJY",
+      "color": "#4042e2"
     },
     {
       "id": "xinghe-freight",
@@ -15136,6 +15168,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "dsv-sparning",
+      "title": "DSV-spårning: sändningsnummer, status och DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
+    },
+    {
       "id": "citymail",
       "catalog": "citymail",
       "slug": "spara-paket-citymail",
@@ -15213,6 +15253,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "fi": [
+    {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-seuranta",
+      "title": "Vinted Go -paketin seuranta: koodit, automaatit ja apu",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
     {
       "id": "postnord",
       "catalog": "postnord",

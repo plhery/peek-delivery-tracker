@@ -15,7 +15,7 @@ Os códigos do Royal Mail seguem três formatos. Se o seu não estiver nos e-mai
 | Formato (fictício) | O que é |
 | --- | --- |
 | `AB482917367GB` | O código rastreado habitual: 2 letras, 9 dígitos e `GB`. O último dígito é verificador. |
-| `0A4829173605841926KLT` | Uma referência de 21 caracteres de código de barras 2D em etiquetas domésticas. |
+| `0A4829173605841926ABC` | Uma referência de 21 caracteres de código de barras 2D em etiquetas domésticas. |
 | `482917360584CDEF` | Uma referência de 16 caracteres com dígitos e letras de `A` a `F`. |
 
 Códigos parecidos:
@@ -31,7 +31,7 @@ O Royal Mail publica seu rastreamento em inglês. Estas são as mensagens que vo
 | O Royal Mail diz | O que significa para você |
 | --- | --- |
 | `Sender preparing item` | O remetente informou o envio. O Royal Mail ainda não recebeu o pacote. |
-| `We're expecting it` | Anunciado eletronicamente, mas ainda não recebido pelo Royal Mail. |
+| `We're expecting it` | Anunciado, mas ainda não recebido pelo Royal Mail. |
 | `Item Received` | O Royal Mail recebeu o item. A mesma frase reaparece em centros de triagem, hubs e na chegada ao país de destino. |
 | `In transit` | Em deslocamento pela rede postal. |
 | `Item Leaving the UK` | Envio internacional: saiu do Reino Unido. |
@@ -94,7 +94,7 @@ O Peek acessa o site do Royal Mail por meio de um navegador em seu próprio serv
 
 Você vê o status, cada leitura no mapa com o local (códigos postais removidos), a data prevista de entrega (com a janela de horário do Royal Mail quando fornecida), o horário da entrega e o país de destino. Leituras no Reino Unido têm horário exato. Linhas de entrega aparecem como "Entregue", sem o nome de quem assinou, e dados de destinatário, endereço e foto são descartados. Os demais status preservam o texto do Royal Mail. O Peek pode notificar em "Cada movimentação", "Etapas importantes" ou "Só a entrega".
 
-Uma encomenda vinda do exterior com código postal internacional passa a ser acompanhada no Royal Mail assim que ele registra progresso; já um envio EMS, cujo número começa por `E`, é entregue pela Parcelforce, e o Peek o acompanha lá. Um item enviado para o exterior mantém seu número `GB` até a porta: assim que o Royal Mail informa o país de destino, o Peek também consulta os correios desse país em mais de 60 países e migra para ele quando há leituras mais novas. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo dela. Agendamento de nova entrega, indenizações e pagamento de taxas alfandegárias continuam sendo feitos no site do Royal Mail.
+Uma encomenda vinda do exterior com código de rastreamento postal internacional passa a ser acompanhada no Royal Mail assim que ele registra progresso; já um envio EMS, cujo número começa por `E`, é entregue pela Parcelforce, e o Peek o acompanha lá. Um item enviado para o exterior mantém seu número `GB` até a porta: assim que o Royal Mail informa o país de destino, o Peek também consulta os correios desse país em mais de 60 países e migra para ele quando há leituras mais novas. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo dela. Agendamento de nova entrega, indenizações e pagamento de taxas alfandegárias continuam sendo feitos no site do Royal Mail.
 
 ## Perguntas sobre o rastreamento do Royal Mail
 
@@ -124,4 +124,5 @@ Não necessariamente. O remetente pode gerar o código antes de postar o objeto,
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – € 2 por item desde 1º de novembro de 2026, itens idênticos contados como um, mercadorias da Grã-Bretanha incluídas, pago pela loja ou transportadora com possível repasse; na Irlanda cobrado antes da entrega
 - [GOV.UK: Avoid and report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726 e report@phishing.gov.uk
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – dígito verificador, código de país do correio emissor e um número por item
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de código, textos de status e o que o Peek lê do Royal Mail
 :::

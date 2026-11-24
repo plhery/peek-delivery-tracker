@@ -10,12 +10,12 @@ Royal Mail（英国皇家邮政）是英国的国家邮政机构，其官网“T
 
 ## Royal Mail 运单号：格式与查找位置
 
-Royal Mail 运单号常见有三种格式。如果商家的邮件里找不到，请联系商家；更多查找方式见[如何查找运单号](guide:find-tracking-number)（英文）。
+Royal Mail 运单号有三种格式。如果商家的邮件里找不到，请联系商家；更多查找方式见[如何查找运单号](guide:find-tracking-number)（英文）。
 
 | 格式（示例） | 说明 |
 | --- | --- |
 | `AB482917367GB` | 最常见的追踪单号：2 位字母、9 位数字加 `GB`。最后一位数字是校验位。 |
-| `0A4829173605841926KLT` | 来自英国国内面单二维码的 21 位参考号。 |
+| `0A4829173605841926ABC` | 来自英国国内面单二维码的 21 位参考号。 |
 | `482917360584CDEF` | 由数字和字母 `A` 至 `F` 组成的 16 位参考号。 |
 
 容易混淆的单号：
@@ -90,7 +90,7 @@ Citizens Advice 列出的 Royal Mail 联系方式如下：
 
 对于校验位有效的 `AB482917367GB` 格式单号，[Peek](/) 会直接识别为 Royal Mail 并显示“识别出的快递公司”。如果校验位不对，Peek 会提示“这个单号的校验位对不上。”：请对照发货信息核对，或点击“按输入的单号跟踪”再通过“更换”选择 Royal Mail。如果某个字母疑似与数字混淆（例如把 `0` 输成 `O`），Peek 会给出校验正确的建议单号。对于 21 位和 16 位参考号，Peek 会先查询物流查询服务，再查询 Royal Mail 官网，因此可能稍需片刻；如果查无结果，或少数参考号被识别为 [Australia Post](carrier:australia-post)，请点击“更换”手动选择 Royal Mail。带有 `trackNumber=` 的 Royal Mail 查询链接对以上所有单号均可立即识别为 Royal Mail；而 `#/tracking-results/` 链接仅在包含 `GB` 结尾单号时生效。
 
-Peek 会在自有服务器的浏览器中访问 Royal Mail 官网。由于 Royal Mail 经常拒绝自动化访问，无论是平时还是派送当天（即使 Royal Mail 给出了送达时间段），Peek 均大约每小时自动检查一次；手动刷新可以更早触发查询。其他物流查询服务通常只收录少量 Royal Mail 记录，因此状态有时会停留在上一条数小时。
+Peek 会在自有服务器的浏览器中访问 Royal Mail 官网。由于 Royal Mail 经常拒绝自动化访问，无论是平时还是派送当天（即使 Royal Mail 给出了送达时间段），Peek 均大约每小时自动检查一次；手动刷新可以更早触发查询。物流查询服务只收录少量 Royal Mail 记录，因此状态可能会在上一条停留数小时。
 
 页面会显示最新状态、每条扫描及其地点（自动隐去邮编并标在地图上）、预计送达日（如 Royal Mail 提供送达时段也会一并显示）、签收时间及目的国。英国境内扫描均带有精确时间。签收记录统一显示为“已签收”，隐去签收人姓名、收件人、详细地址及照片；其他状态保留 Royal Mail 英文原文。你可以选择按“每次扫描”、“重要环节”或“仅派送当天”接收通知。
 
@@ -124,4 +124,5 @@ Peek 会在自有服务器的浏览器中访问 Royal Mail 官网。由于 Royal
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – 自 2026 年 11 月 1 日起每件 2 欧元（同类商品合算一件）、涵盖大不列颠寄出货物、由商家或派送方缴纳并可转嫁，爱尔兰可在派送前收取
 - [GOV.UK: Avoid and report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726 短信举报与 report@phishing.gov.uk
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – 校验位、发件国邮政代码与每件邮件唯一编号规则
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – 单号格式、状态文案及 Peek 从 Royal Mail 读取的内容
 :::

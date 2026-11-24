@@ -39,7 +39,7 @@ Nas compras online, o vendedor detém o contrato de transporte com a J&T Express
 
 **Danos visíveis e prazo de reclamação de 30 dias.** Segundo a cláusula 9 dos [Termos e condições](https://www.jtexpress.mx/information/termsAndAgreement):
 
-- Inspeciona a encomenda na entrega e anota logo quaisquer danos visíveis; caso contrário, a J&T presume entrega em bom estado (clausula 9.3). Guarda o conteúdo, a caixa original e a embalagem para verificação.
+- Inspeciona a encomenda na entrega e anota logo quaisquer danos visíveis; caso contrário, a J&T presume entrega em bom estado (cláusula 9.3). Guarda o conteúdo, a caixa original e a embalagem para verificação.
 - Apresenta qualquer reclamação por atraso, extravio ou dano **por escrito no prazo de 30 dias de calendário** após a prova de entrega, anexando faturas ou recibos, para `serviciocliente@jtexpress.mx` ou pelo telefone `55 7100 1047`.
 - A responsabilidade padrão nacional está limitada a **15 UMA**, salvo proteção de Valor Declarado contratada pelo remetente (taxa de 5 %, até 30 000 MXN).
 
@@ -68,7 +68,7 @@ Quando a J&T Express Mexico responde, o Peek pede os registos em inglês ou chin
 
 Enquanto manténs a encomenda aberta no Peek, ou no dia de entrega com notificações ativas, o Peek verifica até de 10 em 10 minutos; no dia em que a J&T Express Mexico indica a encomenda em distribuição, de 2 em 2 minutos a partir das 6h na hora da Cidade do México enquanto o rastreio próprio da J&T responder. Nos outros casos verifica de hora a hora. Após 12 horas apenas em «Etiqueta criada» ou «Aceite pela transportadora», ou dois dias sem novidades, verifica de hora a hora independentemente da forma como a segues, e de 6 em 6 horas após sete dias em «Etiqueta criada». Quando o rastreio da J&T Express Mexico não responde e o Peek segue a encomenda apenas por serviços de seguimento, verifica de hora a hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia de distribuição enquanto estiver aberta ou com notificações ativas.
 
-Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia desse registo (por exemplo, «Sem atualizações desde seg., 12 out.»). A página mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a J&T Express Mexico.» Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a J&T Express Mexico.»
+Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia desse registo (por exemplo, «Sem atualizações desde seg 12 out»). A página mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a J&T Express Mexico.» Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a J&T Express Mexico.»
 
 Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek apenas acompanha o seguimento e não pode alterar a morada de entrega nem apresentar reclamações junto da J&T Express Mexico por ti.
 

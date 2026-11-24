@@ -14902,6 +14902,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "rastreamento-orlen-paczka",
+      "title": "Rastreamento ORLEN Paczka: código de 13 dígitos e retirada",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "rastreamento-tipsa",
@@ -14980,6 +14988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento FAN Courier: códigos AWB, status e FANbox",
       "name": "FAN Courier",
       "color": "#0f2345"
+    },
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "rastreamento-posta-slovenije",
+      "title": "Rastreamento Pošta Slovenije: correio da Eslovênia e locker",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
     },
     {
       "id": "lietuvos-pastas",
@@ -18148,6 +18164,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "orlen-paczka",
+      "catalog": "orlen-paczka",
+      "slug": "orlen-paczka-kuaidi-chaxun",
+      "title": "波兰 ORLEN Paczka 快递查询：13 位单号、状态与自提",
+      "name": "ORLEN Paczka",
+      "color": "#db3830"
+    },
+    {
       "id": "tipsa",
       "catalog": "tipsa",
       "slug": "tipsa-kuaidi-chaxun",
@@ -18242,6 +18266,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FAN Courier 快递查询：AWB 运单号、状态与 FANbox 自提柜",
       "name": "FAN Courier",
       "color": "#0f2345"
+    },
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "posta-slovenije-siluowenniya-youzheng-chaxun",
+      "title": "斯洛文尼亚邮政 Pošta Slovenije 查询：单号与自提",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
     },
     {
       "id": "lietuvos-pastas",

@@ -4532,6 +4532,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "a-tu-hora-express-sendungsverfolgung",
+      "title": "A Tu Hora Express Sendungsverfolgung: Codes, PLZ & Hilfe",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
+    },
+    {
       "id": "dtdc",
       "catalog": "dtdc",
       "slug": "dtdc-sendungsverfolgung",
@@ -6678,6 +6686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "suivi-a-tu-hora-express",
+      "title": "Suivi A Tu Hora Express\u00a0: codes, code postal et aide",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
+    },
+    {
       "id": "dtdc",
       "catalog": "dtdc",
       "slug": "suivi-dtdc",
@@ -8806,6 +8822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento YDH: codici YDH...YQ e AZ, passaggi e aiuto",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "tracciamento-a-tu-hora-express",
+      "title": "Tracciamento A Tu Hora Express: codici, CAP e aiuto",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
     },
     {
       "id": "dtdc",
@@ -13116,6 +13140,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "rastreio-a-tu-hora-express",
+      "title": "Rastreio A Tu Hora Express: códigos, código postal e ajuda",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
+    },
+    {
       "id": "dtdc",
       "catalog": "dtdc",
       "slug": "rastreio-dtdc",
@@ -15318,6 +15350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YDH: kody YDH...YQ i AZ, przekazania i pomoc",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "a-tu-hora-express",
+      "catalog": "a-tu-hora-express",
+      "slug": "sledzenie-a-tu-hora-express",
+      "title": "Śledzenie A Tu Hora Express: kody, kod pocztowy i pomoc",
+      "name": "A Tu Hora Express",
+      "color": "#1d2a84"
     },
     {
       "id": "dtdc",

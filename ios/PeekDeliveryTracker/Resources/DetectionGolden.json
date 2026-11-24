@@ -12928,6 +12928,14 @@
     ]
   },
   {
+    "input": "100067364",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "1000814",
     "carrier": "unknown",
     "confidence": "low",
@@ -86299,6 +86307,23 @@
     ]
   },
   {
+    "input": "BCPTEST8",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "BDM000134200008479236",
     "carrier": "cst-italia",
     "confidence": "high",
@@ -88458,6 +88483,14 @@
     "confidence": "high",
     "candidates": [
       "spring-gds"
+    ]
+  },
+  {
+    "input": "CH166241282US",
+    "carrier": "usps",
+    "confidence": "high",
+    "candidates": [
+      "usps"
     ]
   },
   {
@@ -92139,6 +92172,30 @@
   },
   {
     "input": "DR672CV19W93E",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DRNFLY000020465971",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DRNFLY000020665131",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DRNFLY000020896056",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "DRNFLY000023971907",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -112602,6 +112659,17 @@
   },
   {
     "input": "RR010457475AZ",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RR013659216AZ",
     "carrier": "intl-post",
     "confidence": "high",
     "candidates": [

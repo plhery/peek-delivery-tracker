@@ -19899,7 +19899,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Baku",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "azerpost"
     },
     "trackingUrlTemplate": "https://www.azerpost.az/az/xidmetler/gonderislerin-izlenmesi?package_id={trackingNumber}",
     "linkRules": [
@@ -44485,7 +44485,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Guayaquil",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "correos-ecuador"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -69001,6 +69001,72 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://www.planetecourrier.com/fr/suivi-courrier.html",
     "helpUrl": "https://www.planetecourrier.com/fr/nous-joindre.html"
+  },
+  "booths-logistics": {
+    "displayName": "Booth's Logistics",
+    "aliases": [
+      "Booths Logistics",
+      "Booth Logistics",
+      "Booths Transport",
+      "Booth's Transport"
+    ],
+    "countries": [
+      "NZ"
+    ],
+    "color": "#005f9e",
+    "selectable": true,
+    "timezone": "Pacific/Auckland",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "booths-logistics"
+    },
+    "trackingUrlTemplate": "https://www.booths.co.nz/services/tracking/results/?reference={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "booths.co.nz",
+          "www.booths.co.nz"
+        ],
+        "pathPattern": "^/services/tracking/results/?$",
+        "params": [
+          "reference"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.booths.co.nz/services/tracking/",
+    "helpUrl": "https://www.booths.co.nz/our-locations/"
+  },
+  "dragonfly-au": {
+    "displayName": "Dragonfly Australia",
+    "aliases": [
+      "Dragonfly (AU)",
+      "Dragonfly Shipping Australia"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#13a58f",
+    "selectable": true,
+    "timezone": "Australia/Sydney",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dragonfly-au"
+    },
+    "trackingUrlTemplate": "https://dragonflyshipping.com.au/track-your-package/?tracking-id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "dragonflyshipping.com.au"
+        ],
+        "params": [
+          "tracking-id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://dragonflyshipping.com.au/track-your-package/",
+    "helpUrl": "https://dragonflyshipping.com.au/faq/"
   }
 } as const;
 
@@ -71110,7 +71176,9 @@ export const CARRIER_IDS = [
   "cambodia-post",
   "commercive-parcel",
   "mbe-es",
-  "planete-courrier"
+  "planete-courrier",
+  "booths-logistics",
+  "dragonfly-au"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

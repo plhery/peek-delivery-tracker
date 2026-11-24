@@ -2118,6 +2118,8 @@ value class CarrierId(val rawValue: String) {
         val CommerciveParcel = CarrierId("commercive-parcel")
         val MbeEs = CarrierId("mbe-es")
         val PlaneteCourrier = CarrierId("planete-courrier")
+        val BoothsLogistics = CarrierId("booths-logistics")
+        val DragonflyAu = CarrierId("dragonfly-au")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -4174,6 +4176,8 @@ value class CarrierId(val rawValue: String) {
             CommerciveParcel,
             MbeEs,
             PlaneteCourrier,
+            BoothsLogistics,
+            DragonflyAu,
         )
     }
 }

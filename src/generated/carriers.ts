@@ -4556,6 +4556,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#044ad6"
     },
     {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "estafeta-sendungsverfolgung",
+      "title": "Estafeta Sendungsverfolgung: 10 & 22 Zeichen & Hilfe",
+      "name": "Estafeta",
+      "color": "#e30613"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "gls-hungary-sendungsverfolgung",
@@ -6678,6 +6686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#044ad6"
     },
     {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "suivi-estafeta",
+      "title": "Suivi Estafeta\u00a0: codes 10 et 22 car., 2 tentatives, aide",
+      "name": "Estafeta",
+      "color": "#e30613"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "suivi-gls-hungary",
@@ -8774,6 +8790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento XLCourier: codici XLC, pacchi pesanti UK",
       "name": "XLCourier",
       "color": "#044ad6"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "tracciamento-estafeta",
+      "title": "Tracciamento Estafeta: codici 10 e 22 car. e contatti",
+      "name": "Estafeta",
+      "color": "#e30613"
     },
     {
       "id": "gls-hu",
@@ -13036,6 +13060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#044ad6"
     },
     {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "rastreio-estafeta",
+      "title": "Rastreio Estafeta: códigos 10 e 22 car., 2 tentativas",
+      "name": "Estafeta",
+      "color": "#e30613"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "rastreio-gls-hungary",
@@ -15206,6 +15238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie XLCourier: kody XLC, ciężkie paczki w UK",
       "name": "XLCourier",
       "color": "#044ad6"
+    },
+    {
+      "id": "estafeta",
+      "catalog": "estafeta",
+      "slug": "sledzenie-estafeta",
+      "title": "Śledzenie Estafeta: kody 10 i 22 znaki, 2 próby",
+      "name": "Estafeta",
+      "color": "#e30613"
     },
     {
       "id": "gls-hu",

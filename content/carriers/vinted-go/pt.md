@@ -57,7 +57,7 @@ O site escreve `Pronto para coleta`, à brasileira, mas as perguntas frequentes 
 
 **Levantar.** No cacifo, usa o código PIN da notificação para abrir o compartimento certo. Numa loja de encomendas ou num ponto da zona, mostra o teu código de levantamento ou identificação aos funcionários. O horário de cada ponto está no mapa da Vinted Go.
 
-**Quanto tempo espera.** Tens 7 dias consecutivos. A Vinted Go não prolonga o prazo nem trava a encomenda quando já vai de volta. Uma encomenda não levantada volta ao ponto onde o vendedor a deixou; a Vinted cancela então a encomenda e reembolsa-te.
+**Quanto tempo espera.** Tens 7 dias consecutivos. Para uma encomenda num cacifo ou Parcel Centre, os termos da Vinted Go preveem uma Extensão do Prazo de Levantamento paga: nas últimas 24 horas do prazo podes comprar mais 24 horas, mais do que uma vez, quando a Vinted Go a mostrar como disponível. A Vinted Go não trava a encomenda quando já vai de volta. Uma encomenda não levantada volta ao ponto onde o vendedor a deixou; a Vinted cancela então a encomenda e reembolsa-te.
 
 **Quanto demora.** Os termos da Vinted Go apontam para 3 a 6 dias úteis entre a entrega pelo vendedor e a chegada ao ponto.
 
@@ -111,7 +111,7 @@ Para Portugal, a Vinted Go não publica telefone nem e-mail para quem recebe. Aq
 
 :::sources
 - [Vinted Go: Perguntas Frequentes](https://vintedgo.com/pt/faq?country=pt&region=europe) – código de levantamento, 7 dias, outro ponto perto, 25 dias úteis, 2 dias, acompanhamento sem atualizações, mapa
-- [Vinted Go: Termos e condições](https://vintedgo.com/pt/terms-and-conditions?country=pt&region=europe) – empresa, tipos de pontos, 3 a 6 dias úteis, novo aviso, 7 dias consecutivos, danos no cacifo, reclamações pela Vinted
+- [Vinted Go: Termos e condições](https://vintedgo.com/pt/terms-and-conditions?country=pt&region=europe) – empresa, tipos de pontos, 3 a 6 dias úteis, novo aviso, 7 dias consecutivos, extensão paga do prazo, danos no cacifo, reclamações pela Vinted
 - [Vinted Go: Acompanhar encomenda](https://vintedgo.com/pt/tracking?country=pt&region=europe) – formulário, línguas do site, estados, «Tempo de envio»
 - [Vinted: Envio Vinted Go](https://www.vinted.pt/help/1110) – rotas a partir de Portugal, PIN, chat no cacifo das 7h às 22h, 2 dias
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – código na conversa, 48 horas, 25 dias úteis, encomenda perdida, «Tenho um problema»

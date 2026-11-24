@@ -63,7 +63,7 @@ Staat de tracking een paar dagen stil terwijl je pakket onderweg is? Volgens Vin
 
 **Iemand anders laten ophalen.** Vinted en Vinted Go zeggen niet of dat mag. Bij een pakketautomaat gaat het vakje open zodra de afhaalcode is ingevoerd.
 
-**Hoelang het wacht.** 7 kalenderdagen vanaf de aankomst. Verlengen kan niet. De uiterste afhaaldatum staat in je afhaalbericht.
+**Hoelang het wacht.** 7 kalenderdagen vanaf de aankomst. Voor een pakket in een pakketautomaat of Vinted Go-pakketpunt noemen de voorwaarden van Vinted Go een betaalde Ophaalverlenging: in de laatste 24 uur van de ophaaltermijn koop je 24 uur extra, ook meer dan eens, als Vinted Go laat zien dat die beschikbaar is. De uiterste afhaaldatum staat in je afhaalbericht.
 
 **Een ander punt.** Is jouw punt tijdelijk dicht of vol, dan brengt Vinted Go het pakket soms naar een andere locatie in de buurt. Dat kan ook als het pakket niet in de locker past of als het punt sluit. Je hoort waar je het ophaalt zodra het klaarligt.
 
@@ -115,7 +115,7 @@ Peek kijkt hoogstens elke 10 minuten, en elk uur zodra er 48 uur geen nieuwe sca
 
 ### Hoelang blijft een Vinted Go-pakket in de locker liggen?
 
-7 kalenderdagen, in een pakketautomaat, pakketwinkel of buurtpunt, in Nederland en in België. Verlengen kan niet. Daarna gaat het terug naar de verkoper en betaalt Vinted je terug.
+7 kalenderdagen, in een pakketautomaat, pakketwinkel of buurtpunt, in Nederland en in België. In een pakketautomaat of Vinted Go-pakketpunt kun je in de laatste 24 uur betaald 24 uur verlengen, als Vinted Go dat aanbiedt. Daarna gaat het terug naar de verkoper en betaalt Vinted je terug.
 
 ### Hoelang doet Vinted Go over een pakket?
 
@@ -150,7 +150,7 @@ Na verzending kan het tot 48 uur duren voor de tracking verschijnt. Een verkeerd
 - [Vinted België: Hoe je phishingberichten en oplichting kunt voorkomen en rapporteren](https://www.vinted.be/help/628) – @vinted.be
 - [Vinted Go: Veelgestelde vragen (Nederland)](https://vintedgo.com/nl/faq?country=nl&region=europe) – afhaalcode, 7 dagen, ander punt, verzendbevestiging, telefoon
 - [Vinted Go: Veelgestelde vragen (België)](https://vintedgo.com/nl/faq?country=be&region=europe) – telefoon in België
-- [Vinted Go: Algemene voorwaarden van Vinted Go voor Bezorgdiensten](https://vintedgo.com/nl/terms-and-conditions?country=nl&region=europe) – bedrijf, punten, termijnen, schade, klachten
+- [Vinted Go: Algemene voorwaarden van Vinted Go voor Bezorgdiensten](https://vintedgo.com/nl/terms-and-conditions?country=nl&region=europe) – bedrijf, punten, termijnen, betaalde ophaalverlenging, schade, klachten
 - [Vinted Go: Verzenddienst, vertrouwd door miljoenen Vinted-gebruikers](https://vintedgo.com/nl?country=nl&region=europe) – landen, 2022
 - [Vinted Go: Volg je pakket](https://vintedgo.com/nl/tracking?country=nl&region=europe) – trackingpagina, onbekend nummer
 - [Vinted Go: Zoek een punt](https://vintedgo.com/nl/carrier-locations?country=nl&region=europe) – kaart

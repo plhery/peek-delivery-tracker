@@ -58,7 +58,7 @@ Vinted Go's page also holds labels such as `Out for delivery`, `Couldn’t be de
 
 **Picking it up.** At a locker, scan or enter your pick-up code to open the right compartment. At a parcel shop or neighbourhood location, show your pick-up code or ID to the staff. Opening hours are on Vinted Go's map.
 
-**How long it waits.** You have 7 calendar days. Vinted Go can't extend that or stop the parcel once it's heading back. An uncollected parcel returns to the seller's drop-off point; Vinted then cancels the order and refunds you.
+**How long it waits.** You have 7 calendar days. For a parcel in a locker or a parcel centre, Vinted Go's terms add a paid Pickup Extension: in the last 24 hours of the pickup period you can buy 24 more hours, more than once, when Vinted Go shows it's available. Vinted Go can't stop the parcel once it's heading back. An uncollected parcel returns to the seller's drop-off point; Vinted then cancels the order and refunds you.
 
 **Home delivery.** In France, some points offer delivery by an Uber courier at a time you book through a link Vinted sends. Where home delivery exists, Vinted Go's terms allow one attempt with a booked slot and two without.
 
@@ -115,7 +115,7 @@ Tracking can take up to 48 hours to appear after the seller ships, and a mistype
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – pick-up code, 7 days, other point nearby, 25 business days, 2-day report, timeline gaps, locker phone
 - [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – locker phone line for the Netherlands and Belgium
-- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – company, point types, home delivery attempts, 3 to 6 business days, reminder, damage at a locker, claims via Vinted
+- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – company, point types, home delivery attempts, 3 to 6 business days, reminder, paid Pickup Extension, damage at a locker, claims via Vinted
 - [Vinted Go: Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – countries, start in 2022
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – tracking form, site languages, statuses, not-found message
 - [Vinted: Comment suivre un colis ?](https://www.vinted.fr/help/100) – number in the conversation, 48 hours, 25 business days, delivered but not received

@@ -57,7 +57,7 @@ La página de Vinted Go guarda además textos como `En reparto`, `Entrega fallid
 
 **Cómo recogerlo.** En una taquilla, escanea o escribe tu código de recogida para abrir el compartimento. En una tienda de paquetería o una vivienda particular, muestra al personal el código de recogida o un documento de identidad. Los horarios de cada punto están en el mapa de Vinted Go.
 
-**Cuánto tiempo espera.** Tienes 7 días naturales. Vinted Go no puede alargar el plazo ni parar el paquete una vez que vuelve al vendedor. Si no lo recoges, regresa al punto donde lo dejó el vendedor; Vinted cancela entonces el pedido y te devuelve el dinero.
+**Cuánto tiempo espera.** Tienes 7 días naturales. Para un paquete en una taquilla o un centro de paquetería, los términos de Vinted Go prevén una Ampliación del plazo de recogida de pago: en las últimas 24 horas del plazo puedes comprar 24 horas más, incluso varias veces, cuando Vinted Go indique que está disponible. Vinted Go no puede parar el paquete una vez que vuelve al vendedor. Si no lo recoges, regresa al punto donde lo dejó el vendedor; Vinted cancela entonces el pedido y te devuelve el dinero.
 
 **Cuánto tarda.** Las condiciones de Vinted Go apuntan a entre 3 y 6 días laborables desde que el vendedor lo deposita hasta que llega al punto. Los sábados, domingos y festivos no cuentan.
 
@@ -112,7 +112,7 @@ Como mucho 38 × 30 × 18 cm y 15 kg. Vinted distingue tres tamaños de paquete,
 
 :::sources
 - [Vinted Go: Preguntas frecuentes](https://vintedgo.com/es/faq?country=es&region=europe) – código de recogida, 7 días, otro punto cercano, 25 días laborables, 2 días, seguimiento sin actualizar, tipos de punto
-- [Vinted Go: Términos y condiciones](https://vintedgo.com/es/terms-and-conditions?country=es&region=europe) – empresa, 3 a 6 días laborables, nuevo aviso a los 3 días, 7 días naturales, devolución, daños en la taquilla, reclamaciones a través de Vinted, tamaños
+- [Vinted Go: Términos y condiciones](https://vintedgo.com/es/terms-and-conditions?country=es&region=europe) – empresa, 3 a 6 días laborables, nuevo aviso a los 3 días, 7 días naturales, ampliación de pago del plazo de recogida, devolución, daños en la taquilla, reclamaciones a través de Vinted, tamaños
 - [Vinted Go: Seguimiento del paquete](https://vintedgo.com/es/tracking?country=es&region=europe) – formulario, idiomas, estados en español
 - [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – número en la conversación, 48 horas, «Tengo un problema», entregado pero no recibido
 - [Vinted: Envíos con Vinted Go](https://www.vinted.es/help/1110) – rutas desde España, de punto a punto, disponibilidad, tamaños

@@ -58,7 +58,7 @@ La page de suivi prévoit aussi d'autres libellés, comme `En cours de livraison
 
 **Ouvrir la consigne.** Scanne ou saisis ton code de retrait : le bon casier s'ouvre. Code refusé ? Vérifie dans tes e-mails, tes SMS et la commande sur Vinted que tu es à la bonne consigne, avec le bon code. Porte refermée avant d'avoir pris le colis : appelle le support de Vinted Go (numéro derrière le bouton « ? »). En point relais ou chez un voisin relais, présente ton code de retrait ou ta pièce d'identité. Les horaires de chaque point sont sur la carte de Vinted Go.
 
-**Combien de temps il attend.** 7 jours calendaires, en consigne comme en point relais ; le suivi Vinted Go affiche la date limite. Vinted Go ne peut pas prolonger ce délai ni arrêter le colis une fois qu'il repart. Un colis non retiré retourne au point de dépôt du vendeur ; Vinted annule alors la commande et te rembourse.
+**Combien de temps il attend.** 7 jours calendaires, en consigne comme en point relais ; le suivi Vinted Go affiche la date limite. Pour un colis en consigne ou en centre de colis, les conditions de Vinted Go prévoient une Prolongation du délai de retrait payante : pendant les dernières 24 heures du délai, tu peux acheter 24 heures de plus, plusieurs fois si besoin, quand Vinted Go l'indique comme disponible. Vinted Go ne peut pas arrêter le colis une fois qu'il repart. Un colis non retiré retourne au point de dépôt du vendeur ; Vinted annule alors la commande et te rembourse.
 
 **Livraison à domicile.** En France, dans certains relais, un coursier Uber peut livrer le colis chez toi à l'heure convenue, via un lien de réservation que Vinted t'envoie par message. Là où la livraison à domicile existe, les conditions de Vinted Go prévoient une seule tentative avec un créneau réservé, deux sans créneau.
 
@@ -126,7 +126,7 @@ Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et un numéro 
 - [Vinted Go : Foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – code de retrait, code refusé, 7 jours, autre point proche, 25 jours ouvrés, 2 jours pour signaler, suivi sans mise à jour, téléphone de la consigne, dépôt, dimensions, e-mail de dépôt
 - [Vinted Go : Foire aux questions (Belgique)](https://vintedgo.com/fr/faq?country=be&region=europe) – téléphone des consignes en Belgique
 - [Vinted Go : Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – point relais fermé, 7 jours pour retirer
-- [Vinted Go : Conditions générales](https://vintedgo.com/fr/terms-and-conditions?country=fr&region=europe) – société, types de points, rappel après 3 jours, 7 jours calendaires, tentatives à domicile, 3 à 6 jours ouvrés, colis abîmé en consigne, réclamations via Vinted
+- [Vinted Go : Conditions générales](https://vintedgo.com/fr/terms-and-conditions?country=fr&region=europe) – société, types de points, rappel après 3 jours, 7 jours calendaires, prolongation payante du délai de retrait, tentatives à domicile, 3 à 6 jours ouvrés, colis abîmé en consigne, réclamations via Vinted
 - [Vinted Go : Suivre ton colis](https://vintedgo.com/fr/tracking) – formulaire de suivi, langues du site, libellés des statuts, date limite de retrait, colis introuvable
 - [Vinted Go : Service de livraison, approuvé par des millions d'utilisateurs de Vinted](https://vintedgo.com/fr?country=fr&region=europe) – pays desservis, taille du réseau, Routes
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – numéro dans la conversation, 48 h, 25 jours ouvrés, livré mais pas reçu, Bien reçu

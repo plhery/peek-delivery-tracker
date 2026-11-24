@@ -1238,6 +1238,48 @@ describe('native notification boundaries', () => {
     ]);
   });
 
+  it('starts no Live Activity for a scan out for delivery on a round that is over', async () => {
+    const now = Date.parse('2026-11-24T12:00:00Z');
+    const start = (packageId: string, occurredAt: string, eventHasTime = true) => ({
+      device_id: 'device-1',
+      package_id: packageId,
+      event_id: `${packageId}-scan`,
+      event_created_at: '2026-11-24T11:59:00.000Z',
+      push_to_start_token: 'cd'.repeat(32),
+      stage: 'out_for_delivery',
+      occurred_at: occurredAt,
+      event_has_time: eventHasTime,
+    });
+    // A parcel just added whose newest scan went out three days ago, one out this morning, and one dated by its day alone yesterday.
+    const rows = [
+      start('added', '2026-11-21T08:10:00Z'),
+      start('today', '2026-11-24T07:30:00Z'),
+      start('dated', '2026-11-23T00:00:00Z', false),
+    ];
+    const client = {
+      listPendingLiveActivityEvents: vi.fn().mockResolvedValue(rows),
+      recordLiveActivityDeliveries: vi.fn().mockResolvedValue(undefined),
+      updateLiveActivityDevice: vi.fn().mockResolvedValue(undefined),
+    };
+    const native = new NativePushNotificationService(
+      client as never,
+      'TEAM',
+      'KEY',
+      privateKey('prime256v1'),
+      'com.example.delivery',
+      () => now / 1_000,
+    );
+    const live = new DeliveryLiveActivityNotificationService(client as never, native);
+    const send = vi.spyOn(live, 'send').mockResolvedValue(undefined);
+
+    await expect(live.dispatch()).resolves.toMatchObject({ attempted: 2, sent: 2 });
+    expect(send.mock.calls.map(([row, kind]) => [row.package_id, kind])).toEqual([['today', 'start'], ['dated', 'start']]);
+    // Recorded as handled, the old scan is not read again, and blocks no start for a later round.
+    expect(client.recordLiveActivityDeliveries).toHaveBeenCalledWith([
+      expect.objectContaining({ packageId: 'added', deliveryKind: 'update' }),
+    ]);
+  });
+
   it('suppresses only the native alert that a Live Activity successfully replaced', async () => {
     const liveRow = {
       device_id: 'device-1',

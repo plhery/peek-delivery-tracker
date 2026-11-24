@@ -1052,7 +1052,8 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
   notifications and alerts wait for the next dispatch.
 - A Live Activity starts only at `out_for_delivery`, once until a scan in another stage,
   not counting a provider copy the timeline leaves out or a scan in no stage (`pending`).
-  It ends on delivery, failed attempt, problem, pickup, return, archive, sign-out or
+  A scan out for delivery more than a day old (two without a clock), such as the history
+  of a parcel just added, starts none: its round is over. It ends on delivery, failed attempt, problem, pickup, return, archive, sign-out or
   opt-out. At most two run at once. Live Activity pushes go first, so a successful one
   replaces the matching banner; if it fails, the banner is sent.
 - The choice of updates is the account's, for every device it notifies. In Safari on an

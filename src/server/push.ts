@@ -1843,6 +1843,15 @@ export class InboxPushNotificationService extends AppPushNotificationService {
 
 type LiveActivityDeliveryKind = 'start' | 'update' | 'end';
 
+/**
+ * Whether a scan out for delivery is from a round that is over, too old to start a Live Activity: more than a day
+ * old, as for the other notifications (`isOldNews`), or two days for a scan without a clock. The app would end such
+ * an activity as soon as it ran (`isOnDeliveryRound`).
+ */
+export function pastRound(row: JsonObject, now: number): boolean {
+  return Date.parse(stringField(row, 'occurred_at')) < now - (row.event_has_time === false ? 2 : 1) * DAY_MS;
+}
+
 const LIVE_ACTIVITY_PHASES = new Set([
   'out_for_delivery',
   'exception',
@@ -1887,6 +1896,12 @@ export class DeliveryLiveActivityNotificationService {
       }
       const kind = this.deliveryKind(newest);
       if (!kind) continue;
+      // An old scan out for delivery, such as the history of a parcel just added, starts nothing: its round is over.
+      // Recorded as updates, as a start sent would be, the batch leaves the parcel's native alerts as they were.
+      if (kind === 'start' && pastRound(newest, this.apns.now() * 1_000)) {
+        await record(events, 'update');
+        continue;
+      }
       const deviceId = stringField(newest, 'device_id');
       const updateTokenId = stringField(newest, 'update_token_id');
       summary.attempted += 1;

@@ -4668,6 +4668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#db2b35"
     },
     {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "dpd-hu-sendungsverfolgung",
+      "title": "DPD Hungary Sendungsverfolgung: 14-stellige Codes & Hilfe",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6894,6 +6902,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#db2b35"
     },
     {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "suivi-dpd-hu",
+      "title": "Suivi DPD Hungary\u00a0: codes 14 chiffres, FOXPOST et contact",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9112,6 +9128,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#db2b35"
     },
     {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "tracciamento-dpd-hu",
+      "title": "Tracciamento DPD Hungary: codici 14 cifre, FOXPOST e aiuto",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "tracciamento-5post",
@@ -11328,6 +11352,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Chit Chats: códigos de 10 car. y traspaso USPS",
       "name": "Chit Chats",
       "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "seguimiento-dpd-hu",
+      "title": "Seguimiento DPD Hungary: códigos 14 dígitos, FOXPOST y ayuda",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     },
     {
       "id": "oca",
@@ -13554,6 +13586,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Chit Chats: códigos 10 car. e entrega USPS/Canadá",
       "name": "Chit Chats",
       "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "rastreio-dpd-hu",
+      "title": "Rastreio DPD Hungary: códigos 14 dígitos, FOXPOST e apoio",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     },
     {
       "id": "5post",
@@ -15838,6 +15878,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Chit Chats: 10-znakowe ID i przekazanie USPS",
       "name": "Chit Chats",
       "color": "#db2b35"
+    },
+    {
+      "id": "dpd-hu",
+      "catalog": "dpd-hu",
+      "slug": "sledzenie-dpd-hu",
+      "title": "Śledzenie DPD Hungary: kody 14-cyfrowe, FOXPOST i pomoc",
+      "name": "DPD Hungary",
+      "color": "#dc0032"
     },
     {
       "id": "5post",

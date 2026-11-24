@@ -32,6 +32,7 @@ Get it from the [App Store](https://apps.apple.com/app/id6823615370); on a compu
 | Notifications | "Settings" › "Deliveries" › "Notifications", with an account; see [parcel delivery notifications](guide:parcel-notifications) |
 | Add parcels by email | "Settings" › "Deliveries" › "Add parcels by email", marked "Beta", with an account; see [adding parcels by email](guide:add-parcels-by-email) |
 | Dark mode | "Settings" › "Preferences" › "Appearance", then "Dark" |
+| Peek AI | "Settings" › "Preferences" › "Peek AI"; see [Peek AI's delivery estimate](guide:peek-ai) |
 | AI assistants | Not in the app: see [the assistants guide](guide:ai-assistants) |
 
 ## Can I use the Peek app without an account?
@@ -107,7 +108,7 @@ In Peek's Settings window, "General" has "Show in menu bar", which keeps Peek ru
 - [Peek: the share extension](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – Add to Peek and its messages
 - [Peek: adding a parcel](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – the barcode scanner and when it shows
 - [Peek: Siri and Shortcuts](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Next delivery, Add a parcel, their phrases
-- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Appearance, Forget all, the Mac's Settings window
+- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Appearance, Peek AI, Forget all, the Mac's Settings window
 - [Peek: Mac menu bar](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – On the way, its menu, Track with Peek
 - [Peek: Get the app](https://peektracker.com/app) – App Store for iPhone and iPad, code on a computer
 - [Peek: Support](https://peektracker.com/support.html) – Forget all, in the iPhone and Android apps

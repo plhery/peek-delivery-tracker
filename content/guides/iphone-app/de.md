@@ -32,6 +32,7 @@ Du bekommst sie im [App Store](https://apps.apple.com/app/id6823615370); am Comp
 | Mitteilungen | „Einstellungen“ › „Sendungen“ › „Mitteilungen“, mit Konto; siehe [Paketbenachrichtigungen](guide:parcel-notifications) |
 | Pakete per E-Mail hinzufügen | „Einstellungen“ › „Sendungen“ › „Pakete per E-Mail hinzufügen“, mit „Beta“ gekennzeichnet, mit Konto; siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email) |
 | Dunkelmodus | „Einstellungen“ › „Präferenzen“ › „Darstellung“, dann „Dunkel“ |
+| Peek AI | „Einstellungen“ › „Präferenzen“ › „Peek AI“; siehe [die Lieferschätzung von Peek AI](guide:peek-ai) |
 | KI-Assistenten | Nicht in der App: siehe [den Ratgeber zu Assistenten](guide:ai-assistants) |
 
 ## Kann ich die Peek-App ohne Konto nutzen?
@@ -107,7 +108,7 @@ Im Fenster „Einstellungen“ von Peek hat „Allgemein“ den Schalter „In d
 - [Peek: die Teilen-Erweiterung](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – „Zu Peek hinzufügen“ und seine Meldungen
 - [Peek: ein Paket hinzufügen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – der Barcode-Scanner und wann er erscheint
 - [Peek: Siri und Kurzbefehle](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – „Nächste Lieferung“, „Paket hinzufügen“, ihre Sätze
-- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – „Darstellung“, „Alle vergessen“, das Einstellungsfenster des Mac
+- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – „Darstellung“, „Peek AI“, „Alle vergessen“, das Einstellungsfenster des Mac
 - [Peek: Menüleiste des Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – „Unterwegs“, sein Menü, „Mit Peek verfolgen“
 - [Peek: Hol dir die App](https://peektracker.com/app) – App Store für iPhone und iPad, Code am Computer
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – „Alle vergessen“, in den Apps für iPhone und Android

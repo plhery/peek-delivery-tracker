@@ -32,6 +32,7 @@ As «Definições» abrem-se a partir do botão Conta, no canto superior direito
 | Notificações | «Definições» › «Entregas» › «Notificações», com uma conta; vê [as notificações de entrega de encomendas](guide:parcel-notifications) |
 | Adicionar encomendas por e-mail | «Definições» › «Entregas» › «Adicionar encomendas por e-mail», com a etiqueta «Beta», com uma conta; vê [como adicionar encomendas por e-mail](guide:add-parcels-by-email) |
 | Modo escuro | «Definições» › «Preferências» › «Aspeto» e depois «Escuro» |
+| Peek IA | «Definições» › «Preferências» › «Peek IA»; vê [a estimativa do Peek IA](guide:peek-ai) |
 | Assistentes de IA | Não estão na app: vê [o guia dos assistentes](guide:ai-assistants) |
 
 ## Posso usar a app do Peek sem conta?
@@ -107,7 +108,7 @@ Na janela de definições do Peek, «Geral» tem «Mostrar na barra de menus», 
 - [Peek: a extensão de partilha](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – «Adicionar ao Peek» e as mensagens dela
 - [Peek: adicionar uma encomenda](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – o leitor de códigos de barras e quando aparece
 - [Peek: Siri e Atalhos](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Próxima entrega, Adicionar uma encomenda, as frases
-- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Aspeto, Esquecer todas, a janela de definições do Mac
+- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Aspeto, Peek IA, Esquecer todas, a janela de definições do Mac
 - [Peek: barra de menus do Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – A caminho, o menu, Seguir com o Peek
 - [Peek: Obtém a app](https://peektracker.com/app) – App Store para iPhone e iPad, código num computador
 - [Peek: Support (em inglês)](https://peektracker.com/support.html) – Forget all, nas apps para iPhone e Android

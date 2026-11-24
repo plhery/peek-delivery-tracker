@@ -32,6 +32,7 @@ Scaricala dall'[App Store](https://apps.apple.com/app/id6823615370); su un compu
 | Notifiche | «Impostazioni» › «Consegne» › «Notifiche», con un account; vedi [le notifiche di consegna](guide:parcel-notifications) |
 | Aggiungere pacchi via e-mail | «Impostazioni» › «Consegne» › «Aggiungi pacchi via e-mail», con l'etichetta «Beta», con un account; vedi [tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email) |
 | Modalità scura | «Impostazioni» › «Preferenze» › «Aspetto», poi «Scuro» |
+| Peek IA | «Impostazioni» › «Preferenze» › «Peek IA»; vedi [la stima di consegna di Peek IA](guide:peek-ai) |
 | Assistenti IA | Non nell'app: vedi [la guida agli assistenti](guide:ai-assistants) |
 
 ## Posso usare l'app Peek senza un account?
@@ -107,7 +108,7 @@ Nella finestra «Impostazioni» di Peek, «Generali» ha «Mostra nella barra de
 - [Peek: l'estensione di condivisione](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – «Aggiungi a Peek» e i suoi messaggi
 - [Peek: aggiungere un pacco](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – lo scanner di codici a barre e quando compare
 - [Peek: Siri e Comandi Rapidi](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – «Prossima consegna», «Aggiungi un pacco», le loro frasi
-- [Peek: impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – «Aspetto», «Dimentica tutti», la finestra Impostazioni del Mac
+- [Peek: impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – «Aspetto», «Peek IA», «Dimentica tutti», la finestra Impostazioni del Mac
 - [Peek: barra dei menu del Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – «In arrivo», il suo menu, «Traccia con Peek»
 - [Peek: Scarica l'app](https://peektracker.com/app) – App Store per iPhone e iPad, un codice sul computer
 - [Peek: assistenza (in inglese)](https://peektracker.com/support.html) – «Dimentica tutti», nelle app per iPhone e Android

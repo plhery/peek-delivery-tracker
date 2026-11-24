@@ -32,6 +32,7 @@ Descárgala del [App Store](https://apps.apple.com/app/id6823615370); en un orde
 | Notificaciones | «Ajustes» › «Entregas» › «Notificaciones», con una cuenta; mira [las notificaciones de entrega de paquetes](guide:parcel-notifications) |
 | Añadir paquetes por correo | «Ajustes» › «Entregas» › «Añadir paquetes por correo», con la etiqueta «Beta», con una cuenta; mira [cómo añadir paquetes por correo](guide:add-parcels-by-email) |
 | Modo oscuro | «Ajustes» › «Preferencias» › «Apariencia» y luego «Oscuro» |
+| Peek IA | «Ajustes» › «Preferencias» › «Peek IA»; mira [la estimación de Peek IA](guide:peek-ai) |
 | Asistentes de IA | No están en la app: mira [la guía de los asistentes](guide:ai-assistants) |
 
 ## ¿Puedo usar la app de Peek sin cuenta?
@@ -107,7 +108,7 @@ En la ventana de ajustes de Peek, «General» tiene «Mostrar en la barra de men
 - [Peek: la extensión para compartir](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – «Añadir a Peek» y sus mensajes
 - [Peek: añadir un paquete](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – el lector de códigos de barras y cuándo aparece
 - [Peek: Siri y Atajos](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Próxima entrega, Añadir un paquete, sus frases
-- [Peek: Ajustes](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Apariencia, Olvidar todos, la ventana de ajustes del Mac
+- [Peek: Ajustes](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Apariencia, Peek IA, Olvidar todos, la ventana de ajustes del Mac
 - [Peek: barra de menús del Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – En camino, su menú, Seguir con Peek
 - [Peek: Descarga la app](https://peektracker.com/app) – App Store para iPhone y iPad, código en un ordenador
 - [Peek: ayuda (en inglés)](https://peektracker.com/support.html) – Forget all, en las apps de iPhone y Android

@@ -4796,6 +4796,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "pasarex-sendungsverfolgung",
+      "title": "PasarEX Sendungsverfolgung: Amazon-AMZPSR, Zoll & Hilfe",
+      "name": "PasarEX",
+      "color": "#124381"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-sendungsverfolgung",
@@ -7134,6 +7142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "suivi-pasarex",
+      "title": "Suivi PasarEX\u00a0: codes Amazon AMZPSR, douane et aide",
+      "name": "PasarEX",
+      "color": "#124381"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9470,6 +9486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento PigeonShip: numeri, stati e consegna",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "tracciamento-pasarex",
+      "title": "Tracciamento PasarEX: codici Amazon AMZPSR, dogana e aiuto",
+      "name": "PasarEX",
+      "color": "#124381"
     },
     {
       "id": "5post",
@@ -14164,6 +14188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "rastreio-pasarex",
+      "title": "Rastreio PasarEX: códigos Amazon AMZPSR, alfândega e apoio",
+      "name": "PasarEX",
+      "color": "#124381"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "rastreio-5post",
@@ -16574,6 +16606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PigeonShip: 18-znakowe kody, statusy i pomoc",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "pasarex",
+      "catalog": "pasarex",
+      "slug": "sledzenie-pasarex",
+      "title": "Śledzenie PasarEX: kody Amazon AMZPSR, cło i pomoc",
+      "name": "PasarEX",
+      "color": "#124381"
     },
     {
       "id": "5post",

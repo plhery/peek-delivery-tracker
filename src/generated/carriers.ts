@@ -4756,6 +4756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003369"
     },
     {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "memphis-courier-sendungsverfolgung",
+      "title": "Memphis Courier Sendungsverfolgung: M-MIA, Zoll & Hilfe",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "oca-sendungsverfolgung",
@@ -7062,6 +7070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003369"
     },
     {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "suivi-memphis-courier",
+      "title": "Suivi Memphis Courier\u00a0: codes M-MIA, douane ANVISA et aide",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "suivi-oca",
@@ -9366,6 +9382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Kuehne+Nagel: numeri, stati e consegne",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "tracciamento-memphis-courier",
+      "title": "Tracciamento Memphis Courier: codici M-MIA, dogana e aiuto",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
     },
     {
       "id": "oca",
@@ -11682,6 +11706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003369"
     },
     {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "seguimiento-memphis-courier",
+      "title": "Seguimiento Memphis Courier: códigos M-MIA, aduana y ayuda",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "seguimiento-oca",
@@ -13994,6 +14026,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Kuehne+Nagel: números, estados e entregas",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "rastreio-memphis-courier",
+      "title": "Rastreio Memphis Courier: códigos M-MIA, alfândega e apoio",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
     },
     {
       "id": "oca",
@@ -16374,6 +16414,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Kuehne+Nagel: numery, statusy i doręczenia",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "memphis-courier",
+      "catalog": "memphis-courier",
+      "slug": "sledzenie-memphis-courier",
+      "title": "Śledzenie Memphis Courier: kody M-MIA, cło ANVISA i pomoc",
+      "name": "Memphis Courier",
+      "color": "#1f3c5b"
     },
     {
       "id": "oca",

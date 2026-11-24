@@ -34,7 +34,7 @@ Tracker Yunda przypisuje krajowym etapom pięć standardowych chińskich etykiet
 
 ## Doręczenia w Chinach, magazyny konsolidacyjne i zwroty
 
-- **Zakupy z zagranicy przez magazyn w Chinach:** jeśli kupowałeś na Taobao, 1688 lub Pinduoduo przez agenta albo magazyn konsolidacyjny (np. [DobroPost](carrier:dobropost) lub spedytora w Kantonie, Shenzhen, Dongguan albo Yiwu), status `已签收` („Dostarczona”) w Yunda Express oznacza dotarcie paczki do **magazynu konsolidacyjnego w Chinach**, a nie do Twojego kraju. Po przyjęciu spedytor nadaje nowy numer międzynarodowy.
+- **Zakupy z zagranicy przez magazyn w Chinach:** jeśli kupujesz na Taobao, 1688 lub Pinduoduo przez agenta albo magazyn konsolidacyjny (np. [DobroPost](carrier:dobropost) lub spedytora w Kantonie, Shenzhen, Dongguan albo Yiwu), status `已签收` („Dostarczona”) w Yunda Express oznacza dotarcie paczki do **magazynu konsolidacyjnego w Chinach**, a nie do Twojego kraju. Po przyjęciu spedytor nadaje nowy numer międzynarodowy.
 - **Punkty paczkowe (`待取件`):** w Chinach `待取件` oznacza, że przesyłka czeka w punkcie odbioru lub automacie na odebranie przez adresata.
 - **Wykrywanie zwrotów do nadawcy:** surowy tracker Yunda oznacza paczkę zwróconą i pokwitowaną przez nadawcę tą samą etykietą `已签收` co zwykłe doręczenie; Peek sprawdza treść skanu pod kątem wyraźnej informacji o zwrocie lub podpisie nadawcy i ustawia etap „Zwrócona nadawcy”.
 
@@ -59,7 +59,7 @@ Oficjalne dane opublikowane na [Yunda Contact Us](https://www.yundaex.com/cn/abo
 
 Peek nie odpytuje Yunda po samym 13- lub 15-cyfrowym numerze (`3148291736054` albo `437391846205819`, wymyślone): dla 13 cyfr pyta m.in. [iMile](carrier:imile) i [FAN Courier](carrier:fan-courier), a dla 15 cyfr [BRT](carrier:brt). Kliknij „Zmień” podczas dodawania lub „Zmień przewoźnika” na ekranie paczki — Yunda Express figuruje w sekcji „Pasują do numeru” (wyszukanie „Yunda” lub „uda International” również ją znajduje) — albo wklej link `web.yundaex.com/infoInquiry?...&homeWaybill=` w [Peek](/), który od razu rozpoznaje go jako Yunda.
 
-Peek czyta tracker Yunda i pokazuje etap („Przyjęta przez przewoźnika”, „W transporcie”, „W doręczeniu”, „Do odbioru”, „Zwrócona nadawcy”, „Dostarczona”), angielską treść skanu, miasto lub dzielnicę podaną na początku skanu oraz godzinę doręczenia. Yunda podaje czasy według czasu pekińskiego, a Peek wyświetla je na zegarze Twojego urządzenia. Przy zwrocie skany wskazują powrót do nadawcy. Gdy paczka jest w drodze, Twoja własna mapa może kończyć trasę w miejscowości odbiorcy; dokładny adres nie jest pokazywany, a udostępnione linki nie pokazują żadnego z nich. Peek pomija nazwiska i numery telefonów kurierów, adresy punktów odbioru, obrazy podpisów oraz nieopisane wagi. Tracker Yunda nie podaje szacowanego dnia doręczenia.
+Peek czyta tracker Yunda i pokazuje etap („Przyjęta przez przewoźnika”, „W transporcie”, „W doręczeniu”, „Do odbioru”, „Zwrócona nadawcy”, „Dostarczona”), angielską treść skanu, miasto lub dzielnicę podaną na początku skanu oraz godzinę doręczenia. Yunda podaje czasy według czasu pekińskiego, a Peek wyświetla je w czasie Twojego urządzenia. Przy zwrocie skany wskazują powrót do nadawcy. Gdy paczka jest w drodze, Twoja własna mapa może kończyć trasę w miejscowości odbiorcy; dokładny adres nie jest pokazywany, a udostępnione linki nie pokazują żadnego z nich. Peek pomija nazwiska i numery telefonów kurierów, adresy punktów odbioru, obrazy podpisów oraz nieopisane wagi. Tracker Yunda nie podaje szacowanego dnia doręczenia.
 
 Gdy masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy Yunda pokazuje `派送中`, co 2 minuty od godz. 6:00 czasu pekińskiego, dopóki tracker Yunda odpowiada. W pozostałym czasie Peek sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” albo po dwóch dniach bez zmian sprawdza co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na „Zarejestrowana” — co 6 godzin. Gdy tracker Yunda nie odpowiada i Peek śledzi przesyłkę wyłącznie przez usługi śledzące, sprawdza co godzinę, co 3 godziny po spokojnym dniu i nawet co 15 minut w dniu, w którym przesyłka jest w doręczeniu, dopóki masz ją otwartą lub włączone powiadomienia.
 
@@ -79,7 +79,7 @@ Krajowe listy przewozowe Yunda Express mają 13 lub 15 cyfr (np. `3148291736054`
 
 ### Dlaczego moja paczka Yunda ma status „Dostarczona”, skoro mieszkam poza Chinami?
 
-Jeśli zamawiałeś przez chińskiego agenta lub magazyn konsolidacyjny, Yunda Express realizuje wyłącznie krajowy odcinek w Chinach do tego magazynu. Poczekaj, aż spedytor zarejestruje paczkę i przekaże międzynarodowy numer śledzenia.
+Jeśli zamawiasz przez chińskiego agenta lub magazyn konsolidacyjny, Yunda Express realizuje wyłącznie krajowy odcinek w Chinach do tego magazynu. Poczekaj, aż spedytor zarejestruje paczkę i przekaże międzynarodowy numer śledzenia.
 
 ### Jak skontaktować się z obsługą klienta Yunda Express?
 

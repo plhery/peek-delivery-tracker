@@ -491,9 +491,11 @@ Key server modules:
     marketplace's, pairs none, and so does a text an assistant sends. The account's export
     lists the pairs; deleting the parcel deletes its pairs.
   - An email to the parcel's sender, as a marketplace or a parcel shop writes to a seller
-    ("on its way to the buyer", "thanks for dropping off your parcel"), adds its parcel too.
-    Only words that speak to the sender count, in the subject and the first 2,000 characters
-    of the text, never "buyer protection" or a parcel dropped off for the reader
+    ("on its way to the buyer", "thanks for dropping off your parcel"), or as a shop or a
+    carrier writes of a return the reader sends back ("your return has been received"), adds
+    its parcel too. Only words that speak to the sender count, in the subject and the first
+    2,000 characters of the text, never "buyer protection", a parcel dropped off for the
+    reader, a shop's rules for returns or a parcel going back to its sender undelivered
     (`inboundEmail/sentByReader.ts`). The name then starts with "(you sent)" in the language
     the account last used, the usual name after it, 80 characters in all. It is text in the
     name, which every client shows as it is and the owner can change; a shared link shows no

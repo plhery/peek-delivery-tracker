@@ -46,6 +46,45 @@ const SENT: Record<string, [string, string][]> = {
   nl: [['Je pakket is onderweg', 'Je pakket is onderweg naar de koper.']],
 };
 
+// A shop's or a carrier's notice of a return the reader sends back, with made-up shops and numbers.
+const RETURNED: Record<string, [string, string][]> = {
+  en: [
+    ['Return received', 'Hi, we’ve received your return for order 0000. Your refund is on its way.'],
+    ['Your return is on its way', 'Your return parcel has been dropped off at Example Shop. Tracking number 0000000000'],
+    ['Here’s your return label', 'Here’s your return label for order 0000. Print it and drop the parcel off.'],
+    ['Example Shop', 'Thank you for your return. Tracking 0000000000'],
+  ],
+  fr: [
+    ['Retour enregistré', 'Votre retour a bien été enregistré. Numéro de suivi 0000000000'],
+    ['Ton colis retour', 'Ton colis retour est en route vers Example Shop.'],
+    ['Example Shop', 'Nous avons bien reçu votre retour. Le remboursement suit.'],
+  ],
+  de: [
+    ['Retoure angemeldet', 'Deine Retoure ist bei uns eingegangen. Sendungsnummer 0000000000'],
+    ['Deine Rücksendung', 'Wir haben deine Rücksendung erhalten und prüfen sie.'],
+    ['Example Shop', 'Danke für Ihre Rücksendung. Hier ist Ihr Retourenetikett.'],
+  ],
+  es: [
+    ['Devolución registrada', 'Tu devolución ha sido registrada. Número de seguimiento 0000000000'],
+    ['Example Shop', 'Hemos recibido tu devolución.'],
+  ],
+  it: [
+    ['Reso registrato', 'Il tuo reso è stato registrato. Numero di tracciamento 0000000000'],
+    ['Example Shop', 'Abbiamo ricevuto il tuo reso.'],
+  ],
+  pt: [
+    ['Devolução registada', 'A tua devolução foi registada. Número de seguimento 0000000000'],
+    ['Example Shop', 'Recebemos a sua devolução.'],
+  ],
+  pl: [
+    ['Zwrot przyjęty', 'Twój zwrot został zarejestrowany. Numer przesyłki 0000000000'],
+    ['Example Shop', 'Dziękujemy za zwrot. Paczka zwrotna została nadana.'],
+  ],
+  ru: [['Возврат оформлен', 'Ваш возврат оформлен. Трек-номер 0000000000']],
+  zh: [['退货已寄出', '您的退货已寄出，运单号 0000000000']],
+  nl: [['Retour ontvangen', 'We hebben je retourzending in goede orde ontvangen.']],
+};
+
 // A buyer's emails, which speak of the seller, of buyer protection or of a parcel left for them to collect.
 const RECEIVED: [string, string][] = [
   ['Your order has shipped', 'The seller has shipped your order. Sold by Example Shop. Buyer Protection applies.'],
@@ -62,6 +101,27 @@ const RECEIVED: [string, string][] = [
   ['Je pakket is onderweg', 'De verkoper heeft je pakket verzonden. Kopersbescherming.'],
 ];
 
+// A buyer's emails that speak of returns: a shop's rules, a parcel going back to its sender, a refund, feedback.
+const RETURN_RULES: [string, string][] = [
+  ['Your order has shipped', 'Track your order. Free returns. Your order 0000 is on its way.'],
+  ['Dispatched', 'You can return a product within 30 days. Use our online returns centre.'],
+  ['Shipped', 'Not right? Use the enclosed label for your return parcel. Once your return is received, we refund you.'],
+  ['Christmas delivery dates and extended returns', 'Returns on November and December orders run until January.'],
+  ['Your parcel could not be delivered', 'Your parcel is being returned to the sender.'],
+  ['Ta commande est expédiée', 'Vous pouvez demander le retour du produit jusqu’à 30 jours après réception. Droit de retour.'],
+  ['Ton avis compte', 'Merci pour votre retour ! Votre retour a été pris en compte.'],
+  ['Colis en retour', 'Votre colis est en retour vers l’expéditeur.'],
+  ['Versandbestätigung', 'Wenn du etwas zurücksenden möchtest, fordere bitte eine Rücksendung an. Kostenlose Rücksendung.'],
+  ['Zustellung nicht möglich', 'Rücksendung an den Absender eingeleitet.'],
+  ['Pedido enviado', 'Devoluciones gratuitas. Tu envío está en devolución al remitente.'],
+  ['Ordine spedito', 'Reso gratuito entro 30 giorni. Reso al mittente.'],
+  ['Encomenda enviada', 'Devoluções grátis. Devolução ao remetente.'],
+  ['Zwrot pieniędzy', 'Otrzymaliśmy zwrot pieniędzy. Darmowy zwrot. Zwrot do nadawcy.'],
+  ['Заказ отправлен', 'Бесплатный возврат. Мы получили возврат денег. Возврат отправителю.'],
+  ['订单已发货', '7天无理由退货。退货政策。'],
+  ['Je pakket komt eraan', 'Gratis retourneren. Je pakket gaat retour afzender.'],
+];
+
 describe('sentByReader', () => {
   for (const [language, emails] of Object.entries(SENT)) {
     it(`reads a seller's notice in ${language}`, () => {
@@ -69,8 +129,18 @@ describe('sentByReader', () => {
     });
   }
 
+  for (const [language, emails] of Object.entries(RETURNED)) {
+    it(`reads a return the reader sends back in ${language}`, () => {
+      for (const [subject, text] of emails) expect(sentByReader(subject, text), `${subject} / ${text}`).toBe(true);
+    });
+  }
+
   it("leaves a buyer's email alone", () => {
     for (const [subject, text] of RECEIVED) expect(sentByReader(subject, text), `${subject} / ${text}`).toBe(false);
+  });
+
+  it("leaves a buyer's email alone when it speaks of returns", () => {
+    for (const [subject, text] of RETURN_RULES) expect(sentByReader(subject, text), `${subject} / ${text}`).toBe(false);
   });
 
   it('reads the opening only, not the rules in the footer', () => {

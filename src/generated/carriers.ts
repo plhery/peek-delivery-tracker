@@ -17524,6 +17524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0171bb"
     },
     {
+      "id": "j-and-t-au",
+      "catalog": "j-and-t-au",
+      "slug": "jt-express-australia-chaxun",
+      "title": "极兔澳大利亚（J&T Express Australia）单号查询与客服",
+      "name": "J&T Express Australia",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "zhongguo-youzheng-wuliu-chaxun",
@@ -17762,6 +17770,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "申通快递（STO Express）查询：单号规则、签收状态与客服",
       "name": "STO Express",
       "color": "#ff6700"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "jt-express-china-jitu-chaxun",
+      "title": "极兔速递（J&T Express China）单号查询、状态与 956025 客服",
+      "name": "J&T Express China",
+      "color": "#e62019"
+    },
+    {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "spx-express-singapore-chaxun",
+      "title": "新加坡 SPX Express（Shopee Xpress）单号查询与状态说明",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
     },
     {
       "id": "17feia",

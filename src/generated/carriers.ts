@@ -4524,6 +4524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "nova-global-sendungsverfolgung",
+      "title": "Nova Global Sendungsverfolgung: NPG- & NGUS-Codes",
+      "name": "Nova Global",
+      "color": "#da291c"
+    },
+    {
       "id": "xlcourier",
       "catalog": "xlcourier",
       "slug": "xlcourier-sendungsverfolgung",
@@ -6622,6 +6630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "suivi-nova-global",
+      "title": "Suivi Nova Global\u00a0: codes NPG et NGUS, douane et aide",
+      "name": "Nova Global",
+      "color": "#da291c"
+    },
+    {
       "id": "xlcourier",
       "catalog": "xlcourier",
       "slug": "suivi-xlcourier",
@@ -8694,6 +8710,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento YDH: codici YDH...YQ e AZ, passaggi e aiuto",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "tracciamento-nova-global",
+      "title": "Tracciamento Nova Global: codici NPG e NGUS e dogana",
+      "name": "Nova Global",
+      "color": "#da291c"
     },
     {
       "id": "xlcourier",
@@ -10792,6 +10816,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GOFO España: códigos GFES/CIES y ayuda",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "seguimiento-nova-global",
+      "title": "Seguimiento Nova Global: códigos NPG y NGUS y aduanas",
+      "name": "Nova Global",
+      "color": "#da291c"
     },
     {
       "id": "xlcourier",
@@ -12914,6 +12946,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio YDH: códigos YDH...YQ e AZ, entregas e ajuda",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "rastreio-nova-global",
+      "title": "Rastreio Nova Global: códigos NPG e NGUS e alfândega",
+      "name": "Nova Global",
+      "color": "#da291c"
     },
     {
       "id": "xlcourier",
@@ -15062,6 +15102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YDH: kody YDH...YQ i AZ, przekazania i pomoc",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "nova-global",
+      "catalog": "nova-global",
+      "slug": "sledzenie-nova-global",
+      "title": "Śledzenie Nova Global: kody NPG i NGUS, cło i pomoc",
+      "name": "Nova Global",
+      "color": "#da291c"
     },
     {
       "id": "xlcourier",

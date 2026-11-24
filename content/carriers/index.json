@@ -262,7 +262,7 @@
   { "id": "dtdc", "catalog": "dtdc", "name": "DTDC", "languages": ["en"] },
   { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },
   { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] },
-  { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk"] },
+  { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "estafeta", "catalog": "estafeta", "name": "Estafeta", "languages": ["en", "es"] },
   { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },

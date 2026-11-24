@@ -166,7 +166,7 @@ data class DeliveryWidgetList(
         }
 
         fun make(date: Instant, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
-            val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }.map { it.worded(date) }
+            val shown = DeliveryWidgetSelection.listed(snapshot?.parcels.orEmpty(), date)
             return DeliveryWidgetList(date, languageCode, shown, isSample = isSample)
         }
     }

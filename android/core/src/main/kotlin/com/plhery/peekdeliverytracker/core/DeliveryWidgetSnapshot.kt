@@ -27,7 +27,13 @@ data class DeliveryWidgetParcel(
     val trackingNumber: String,
     /** When it is expected or arrived, as the app words it when it publishes; else its status. */
     val detail: String,
+    /** Whether it is out for delivery on a round that has not ended ([isOnDeliveryRound]): the widgets put it first, with the bicycle. */
     val isOutForDelivery: Boolean,
+    /**
+     * When that round ends ([deliveryRoundEnd]): from then on the parcel waits among the others while the app stays
+     * closed. None from an app that didn't publish it.
+     */
+    @Serializable(with = ReferenceDateSerializer::class) val roundEndsAt: Instant? = null,
     /** When a delivered parcel arrived: the widget keeps it for a day after. */
     @Serializable(with = ReferenceDateSerializer::class) val deliveredAt: Instant? = null,
     /** The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone. */
@@ -70,7 +76,9 @@ data class DeliveryWidgetParcel(
     /** The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it. */
     fun worded(at: Instant): DeliveryWidgetParcel {
         // Peek AI's call goes once its day or hour has passed, as it goes from the app's card.
-        val held = if (peekAiUntil?.let { at >= it } == true) copy(peekAi = null) else this
+        val called = if (peekAiUntil?.let { at >= it } == true) copy(peekAi = null) else this
+        // Its round over, it loses the bicycle.
+        val held = if (roundEndsAt?.let { at >= it } == true) called.copy(isOutForDelivery = false) else called
         val wording = later?.lastOrNull { it.midnight() <= at } ?: return held
         return held.copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
     }
@@ -85,9 +93,15 @@ data class DeliveryWidgetWording(
     val nextUp: Boolean? = null,
     val sourceZone: String? = null,
 ) {
+    /**
+     * The moment it holds from in `zone`: a midnight where the app wrote it is that day's midnight in `zone`; another
+     * moment, such as the end of a delivery round, is the same instant everywhere.
+     */
     fun midnight(zone: ZoneId = ZoneId.systemDefault()): Instant {
         val source = sourceZone?.let { runCatching { ZoneId.of(it) }.getOrNull() } ?: return from
-        return from.atZone(source).toLocalDate().atStartOfDay(zone).toInstant()
+        val day = from.atZone(source).toLocalDate()
+        if (day.atStartOfDay(source).toInstant() != from) return from
+        return day.atStartOfDay(zone).toInstant()
     }
 }
 
@@ -136,14 +150,15 @@ object DeliveryWidgetDays {
     }
 
     /**
-     * When the parcels' words change after `now`, Peek AI's calls among them, and the midnight after each of their steps,
-     * from which a step's time names its weekday: a widget is drawn again at each.
+     * When the parcels' words change after `now`, Peek AI's calls among them, the midnight after each of their steps,
+     * from which a step's time names its weekday, and the end of each delivery round: a widget is drawn again at each.
      */
     fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant, zone: ZoneId = ZoneId.systemDefault()): List<Instant> {
         val worded = `in`.flatMap { it.later.orEmpty() }.map { it.midnight(zone) }
         val stepped = `in`.flatMap { it.steps.orEmpty() }.map { midnights(after = it.at, count = 1, zone = zone).first() }
         val called = `in`.mapNotNull { it.peekAiUntil }
-        return (worded + stepped + called).filter { it > after }.toSortedSet().toList()
+        val rounds = `in`.filter { it.isOutForDelivery }.mapNotNull { it.roundEndsAt }
+        return (worded + stepped + called + rounds).filter { it > after }.toSortedSet().toList()
     }
 }
 
@@ -266,6 +281,15 @@ object DeliveryWidgetSelection {
     ): List<DeliveryWidgetParcel> {
         val recent = delivered.filter { isShown(it, now) && it.deliveredAt != null }
         return onTheWay.filter { it.isOutForDelivery } + onTheWay.filter { !it.isOutForDelivery } + recent
+    }
+
+    /**
+     * The parcels the widget shows, in their order, worded for `now`: one whose round has ended since the app published
+     * follows those still out for delivery.
+     */
+    fun listed(parcels: List<DeliveryWidgetParcel>, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
+        val worded = parcels.filter { isShown(it, now) }.map { it.worded(now) }
+        return worded.filter { it.isOutForDelivery } + worded.filter { !it.isOutForDelivery }
     }
 
     /** A delivered parcel leaves the widget a day after it arrived, whenever the app last published it. */

@@ -1044,6 +1044,89 @@ class ParcelLogicTests {
         assertEquals(listOf(first, second, third, nextUp), parcels)
     }
 
+    /** The widgets put a parcel out for delivery first, with the bicycle, only while its round lasts. */
+    @Test
+    fun theWidgetPutsFirstOnlyAParcelWhoseDeliveryRoundLasts() {
+        val localizer = Localizer(AppLanguage.En)
+        val out = outForDeliveryOnAugustFifth()
+        assertTrue(ParcelStore.nextDeliveries(listOf(out), localizer, Instant.parse("2026-08-06T13:59:59Z")).first().isOutForDelivery)
+        assertFalse(ParcelStore.nextDeliveries(listOf(out), localizer, Instant.parse("2026-08-09T09:00:00Z")).first().isOutForDelivery)
+    }
+
+    /**
+     * Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
+     * the widget is drawn again then.
+     */
+    @Test
+    fun theWidgetLetsAParcelWaitAmongTheOthersOnceItsRoundEnds() {
+        val localizer = Localizer(AppLanguage.En)
+        val out = outForDeliveryOnAugustFifth()
+        val ends = Instant.parse("2026-08-06T14:00:00Z")
+        val before = ends.minusSeconds(60)
+        val published = ParcelStore.nextDeliveries(listOf(out), localizer, before).first()
+        assertEquals(ends, published.roundEndsAt)
+        val stillOut = widgetParcel(label = "Still out", outForDelivery = true)
+        val coming = widgetParcel(label = "Coming", outForDelivery = false)
+        val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(published, stillOut, coming), delivered = emptyList(), now = before)
+        assertTrue(ends in DeliveryWidgetDays.changes(parcels, after = before))
+        assertEquals(listOf(published.id, stillOut.id, coming.id), DeliveryWidgetSelection.listed(parcels, before).map { it.id })
+        val listed = DeliveryWidgetSelection.listed(parcels, ends)
+        assertEquals(listOf(stillOut.id, published.id, coming.id), listed.map { it.id })
+        assertEquals(listOf(true, false, false), listed.map { it.isOutForDelivery })
+        // A parcel published after the round ended carries no end.
+        assertNull(ParcelStore.nextDeliveries(listOf(out), localizer, ends).first().roundEndsAt)
+    }
+
+    /**
+     * The round ends at midnight on the carrier's clock, which may fall between two of the phone's: from that moment, not
+     * from the phone's next midnight, the widget takes the parcel out of Next up and Arriving today, as the app does, and
+     * not before it.
+     */
+    @Test
+    fun aParcelWhoseRoundEndedStopsLeadingTheWidgetsCards() {
+        val localizer = Localizer(AppLanguage.En)
+        val zone = ZoneId.systemDefault()
+        val thursday = java.time.LocalDate.of(2026, 11, 12)
+        val morning = thursday.atTime(9, 0).atZone(zone).toInstant()
+        // The carrier's day ends at 18:00 on this phone's clock: its zone is six hours east of the phone's.
+        val ends = thursday.atTime(18, 0).atZone(zone).toInstant()
+        val evening = ends.plusSeconds(30 * 60)
+        val outId = UUID.randomUUID()
+        val laterId = UUID.randomUUID()
+        val out = makeParcel(outId, events = listOf(
+            event(outId, TrackingStage.InTransit, DateParser.isoString(morning.minusSeconds(20 * 3_600))),
+            event(outId, TrackingStage.OutForDelivery, DateParser.isoString(morning.minusSeconds(3_600))),
+        )).copy(expectedDelivery = "2026-11-12", deliveryRoundEndsAt = DateParser.isoString(ends))
+        val coming = makeParcel(laterId, events = listOf(event(laterId, TrackingStage.InTransit, DateParser.isoString(morning.minusSeconds(2 * 3_600)))))
+            .copy(expectedDelivery = "2026-11-14")
+        val parcels = listOf(out, coming)
+
+        // Published in the morning, during the round: the parcel out for delivery is Next up.
+        val published = ParcelStore.widgetDeliveries(parcels, localizer, morning)
+        assertEquals(outId, published.firstOrNull { it.nextUp == true }?.id)
+        assertEquals(laterId, ParcelOrganizer.nextDelivery(parcels, evening)?.id)
+
+        // The widget, the app closed since the morning: still Next up a minute before the round ends.
+        val before = DeliveryWidgetSelection.listed(published, ends.minusSeconds(60))
+        assertEquals(outId, before.firstOrNull { it.nextUp == true }?.id)
+        assertEquals("today", before.firstOrNull { it.id == outId }?.section)
+        // And once it has ended, as the app has it.
+        val listed = DeliveryWidgetSelection.listed(published, evening)
+        assertEquals(laterId, listed.firstOrNull { it.nextUp == true }?.id)
+        assertEquals(laterId, DeliveryWidgetList(evening, "en", listed).cardOrder.firstOrNull()?.id)
+        assertEquals("attention", listed.firstOrNull { it.id == outId }?.section)
+        assertTrue(ends in DeliveryWidgetDays.changes(published, after = morning))
+    }
+
+    /** Sent out late on 5 August UTC, its round ending at midnight on the carrier's clock, ten hours east. */
+    private fun outForDeliveryOnAugustFifth(): Parcel {
+        val id = UUID.randomUUID()
+        return makeParcel(id, events = listOf(
+            event(id, TrackingStage.InTransit, "2026-08-05T08:00:00Z"),
+            event(id, TrackingStage.OutForDelivery, "2026-08-05T21:10:00Z"),
+        )).copy(deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00")
+    }
+
     /** The selection half of ParcelRouteTests.testTheWidgetGalleryShowsTheDemosNextDeliveries; its drawings wait for :app. */
     @Test
     fun theWidgetGalleryShowsTwoOfTheDemosNextDeliveriesInEveryLanguage() {

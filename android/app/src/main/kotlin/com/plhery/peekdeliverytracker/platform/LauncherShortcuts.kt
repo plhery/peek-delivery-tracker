@@ -10,6 +10,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.R
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetSelection
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.WidgetCenter
@@ -69,7 +70,8 @@ object LauncherShortcuts {
      */
     fun update(context: Context, store: DeliveryWidgetSharedStore) = quietly {
         val snapshot = store.snapshot
-        val next = snapshot?.parcels?.firstOrNull { it.deliveredAt == null }
+        // As the widget lists them now: one whose delivery round has ended since the app published follows those still out.
+        val next = snapshot?.parcels?.let { DeliveryWidgetSelection.listed(it) }?.firstOrNull { it.deliveredAt == null }
         val published = ShortcutManagerCompat.getShortcuts(context, ShortcutManagerCompat.FLAG_MATCH_DYNAMIC or ShortcutManagerCompat.FLAG_MATCH_PINNED)
             .firstOrNull { it.id == NEXT_DELIVERY }
         if (next != null) {

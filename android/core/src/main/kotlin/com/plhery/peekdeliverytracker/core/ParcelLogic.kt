@@ -544,6 +544,31 @@ fun Parcel.attention(now: Instant = AppClock.now()): ParcelAttention? {
     return null
 }
 
+/**
+ * When the parcel's delivery round ends: the end of its out-for-delivery scan's day on the carrier's clock, as the server
+ * gives it ([Parcel.deliveryRoundEndsAt]). Without it, the end of that scan's day: a scan dated by its day alone starts
+ * that day at `occurredAt` in the carrier's zone, a timed one is read on the phone's calendar.
+ */
+val Parcel.deliveryRoundEnd: Instant?
+    get() {
+        val event = currentEvent?.takeIf { it.stage == TrackingStage.OutForDelivery } ?: return null
+        deliveryRoundEndsAt?.let(DateParser::date)?.let { return it }
+        val at = DateParser.date(event.occurredAt) ?: return null
+        if (event.day != null) return at.plusSeconds(86_400)
+        val zone = ZoneId.systemDefault()
+        return at.atZone(zone).toLocalDate().plusDays(1).atStartOfDay(zone).toInstant()
+    }
+
+/**
+ * Whether the parcel is out for delivery on a round that has not ended: the widgets put only such a parcel first. One
+ * out for delivery on a day gone by, with no scan since, is not on its way any more.
+ */
+fun Parcel.isOnDeliveryRound(now: Instant = AppClock.now()): Boolean {
+    if (currentStage != TrackingStage.OutForDelivery) return false
+    val ends = deliveryRoundEnd ?: return true
+    return now < ends
+}
+
 /** Whether the map has a place to draw: a generated track's are left out. */
 val Parcel.hasMappedPlace: Boolean get() = GeneratedTrack.without(trackingEvents).any { it.place != null }
 

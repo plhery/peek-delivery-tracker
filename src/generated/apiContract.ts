@@ -8475,6 +8475,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "speedy",
       "recognitionRank": 280,
+      "recognitionPattern": "^63\\d{9}$",
       "browserRecognitionRank": 280,
       "browserRecognitionPattern": "^63\\d{9}$"
     },
@@ -35348,7 +35349,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jerusalem",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "runner-express"
     },
     "trackingUrlTemplate": "https://runnerexpress.co.il/track/?search_query={trackingNumber}",
     "linkRules": [
@@ -35364,7 +35365,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://runnerexpress.co.il/track/",
+    "trackingSearchUrl": "https://runnerexpress.co.il/",
     "helpUrl": "https://runnerexpress.co.il/contact/"
   },
   "rxo": {
@@ -39048,7 +39049,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Melbourne",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "vt-freight-express"
     },
     "trackingUrlTemplate": "https://portal.vtfe.com.au/Track/VTFE/{trackingNumber}",
     "linkRules": [
@@ -39060,7 +39061,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.vtfe.com.au/",
+    "trackingSearchUrl": "https://portal.vtfe.com.au/Track/VTFE",
     "helpUrl": "https://www.vtfe.com.au/contact-us/"
   },
   "airspeed": {
@@ -39537,7 +39538,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Santiago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "paket-cl"
     },
     "trackingUrlTemplate": "https://track.paket.cl/?id={trackingNumber}",
     "linkRules": [
@@ -63028,7 +63029,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "western-post"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -69067,6 +69068,36 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://dragonflyshipping.com.au/track-your-package/",
     "helpUrl": "https://dragonflyshipping.com.au/faq/"
+  },
+  "ctl-group-pl": {
+    "displayName": "CTL Group",
+    "aliases": [
+      "ctlgroup.pl",
+      "CTL Group Centrum Transportowo-Logistyczne"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#FF0000",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ctl-group-pl"
+    },
+    "trackingUrlTemplate": "https://www.ctlgroup.pl/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ctlgroup.pl",
+          "www.ctlgroup.pl"
+        ],
+        "path": "^/tracking/(\\d{6,12})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ctlgroup.pl/tracking",
+    "helpUrl": "https://www.ctlgroup.pl/kontakt"
   }
 } as const;
 
@@ -71178,7 +71209,8 @@ export const CARRIER_IDS = [
   "mbe-es",
   "planete-courrier",
   "booths-logistics",
-  "dragonfly-au"
+  "dragonfly-au",
+  "ctl-group-pl"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

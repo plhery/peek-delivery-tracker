@@ -84309,6 +84309,23 @@
     ]
   },
   {
+    "input": "AMS999999980YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "AMS999999987YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pengyou"
+    ],
+    "asked": [
+      "pengyou"
+    ]
+  },
+  {
     "input": "AMTS000176738FS",
     "carrier": "mtscn",
     "confidence": "high",
@@ -89175,6 +89192,20 @@
     "asked": [
       "cmt-express"
     ]
+  },
+  {
+    "input": "CMV20126303007059175636",
+    "carrier": "commercive-parcel",
+    "confidence": "high",
+    "candidates": [
+      "commercive-parcel"
+    ]
+  },
+  {
+    "input": "CMV20126303007059175637",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "CN 022 808 704 JP",
@@ -96220,34 +96251,26 @@
   },
   {
     "input": "GB5206570633",
-    "carrier": "amazon-logistics",
+    "carrier": "interparcel-uk",
     "confidence": "high",
     "candidates": [
-      "amazon-logistics"
+      "interparcel-uk"
     ]
   },
   {
     "input": "GB6234015339",
-    "carrier": "amazon-logistics",
+    "carrier": "interparcel-uk",
     "confidence": "high",
     "candidates": [
-      "amazon-logistics"
+      "interparcel-uk"
     ]
   },
   {
     "input": "GB9221006391",
-    "carrier": "amazon-logistics",
+    "carrier": "interparcel-uk",
     "confidence": "high",
     "candidates": [
-      "amazon-logistics"
-    ]
-  },
-  {
-    "input": "GB9999999980",
-    "carrier": "amazon-logistics",
-    "confidence": "high",
-    "candidates": [
-      "amazon-logistics"
+      "interparcel-uk"
     ]
   },
   {
@@ -102539,6 +102562,14 @@
     "confidence": "low",
     "candidates": [
       "lex-vn"
+    ]
+  },
+  {
+    "input": "LF065150446SG",
+    "carrier": "singapore-post",
+    "confidence": "high",
+    "candidates": [
+      "singapore-post"
     ]
   },
   {
@@ -113399,6 +113430,14 @@
   },
   {
     "input": "RU658372378NL",
+    "carrier": "spring-gds",
+    "confidence": "high",
+    "candidates": [
+      "spring-gds"
+    ]
+  },
+  {
+    "input": "RU833689939NL",
     "carrier": "spring-gds",
     "confidence": "high",
     "candidates": [

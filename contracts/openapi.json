@@ -897,7 +897,7 @@
       ],
       "detectionRules": [
         {
-          "pattern": "^(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12}|TBAU[0-9]{9}|TBR[0-9]{9})$",
+          "pattern": "^(?:(?:FR|DE|BE|UK|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12}|TBAU[0-9]{9}|TBR[0-9]{9})$",
           "confidence": "high"
         }
       ],
@@ -32893,7 +32893,7 @@
       "timezone": "America/Santo_Domingo",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "inposdom"
       },
       "linkRules": [],
       "detectionRules": [],
@@ -33568,6 +33568,11 @@
         {
           "pattern": "^ZXA\\d{9}PY$",
           "confidence": "high",
+          "checksum": "s10-serial"
+        },
+        {
+          "pattern": "^AMS\\d{9}YQ$",
+          "confidence": "low",
           "checksum": "s10-serial"
         }
       ]
@@ -68801,7 +68806,12 @@
           "path": "^/tracking/(GB\\d{10})(?:/nocache)?/?$"
         }
       ],
-      "detectionRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^GB\\d{10}$",
+          "confidence": "high"
+        }
+      ],
       "trackingSearchUrl": "https://uk.interparcel.com/tracking/"
     },
     "kargolife": {
@@ -68852,6 +68862,81 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.shipagent.in/track"
+    },
+    "cambodia-post": {
+      "displayName": "Cambodia Post",
+      "aliases": [
+        "Cambodia-Post",
+        "ប្រៃសណីយ៍កម្ពុជា"
+      ],
+      "countries": [
+        "KH"
+      ],
+      "color": "#024c3e",
+      "selectable": true,
+      "timezone": "Asia/Phnom_Penh",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "cambodia-post"
+      },
+      "trackingUrlTemplate": "https://www.cambodiapost.com.kh/tracking/search?search={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "cambodiapost.com.kh",
+            "www.cambodiapost.com.kh"
+          ],
+          "path": "^/tracking/search/([A-Za-z]{2}\\d{9}[A-Za-z]{2})/?$"
+        },
+        {
+          "domains": [
+            "cambodiapost.com.kh",
+            "www.cambodiapost.com.kh"
+          ],
+          "pathPattern": "^/tracking/search/?$",
+          "params": [
+            "search"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.cambodiapost.com.kh/tracking/search"
+    },
+    "commercive-parcel": {
+      "displayName": "Commercive Parcel",
+      "countries": [
+        "CN"
+      ],
+      "color": "#2e1065",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "commercive-parcel"
+      },
+      "trackingUrlTemplate": "https://commerciveparcel.com/?numbers={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "commerciveparcel.com",
+            "www.commerciveparcel.com"
+          ],
+          "pathPattern": "^/$",
+          "params": [
+            "numbers",
+            "number",
+            "n"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^CMV\\d{20}$",
+          "confidence": "high",
+          "checksum": "luhn-digits"
+        }
+      ],
+      "trackingSearchUrl": "https://commerciveparcel.com/#track"
     }
   },
   "servers": [
@@ -74753,7 +74838,9 @@
           "interparcel-au",
           "interparcel-uk",
           "kargolife",
-          "shipagent-in"
+          "shipagent-in",
+          "cambodia-post",
+          "commercive-parcel"
         ]
       },
       "Stage": {

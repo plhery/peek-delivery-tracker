@@ -4668,6 +4668,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003b7a"
     },
     {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "jiayang-sendungsverfolgung",
+      "title": "Jiayang International Sendungsverfolgung: JYGJ & Hilfe",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6934,6 +6942,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003b7a"
     },
     {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "suivi-jiayang",
+      "title": "Suivi Jiayang International\u00a0: codes JYGJ, statuts et aide",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9192,6 +9208,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003b7a"
     },
     {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "tracciamento-jiayang",
+      "title": "Tracciamento Jiayang International: codici JYGJ e aiuto",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11448,6 +11472,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento EMS: códigos S10, estados y ayuda postal",
       "name": "EMS",
       "color": "#003b7a"
+    },
+    {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "seguimiento-jiayang",
+      "title": "Seguimiento Jiayang International: códigos JYGJ y ayuda",
+      "name": "Jiayang International",
+      "color": "#105bcc"
     },
     {
       "id": "redur",
@@ -13730,6 +13762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio EMS: códigos S10, estados e apoio postal",
       "name": "EMS",
       "color": "#003b7a"
+    },
+    {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "rastreio-jiayang",
+      "title": "Rastreio Jiayang International: códigos JYGJ e apoio",
+      "name": "Jiayang International",
+      "color": "#105bcc"
     },
     {
       "id": "buffalo-ex",
@@ -16062,6 +16102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie EMS: kody S10, statusy i pomoc pocztowa",
       "name": "EMS",
       "color": "#003b7a"
+    },
+    {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "sledzenie-jiayang",
+      "title": "Śledzenie Jiayang International: kody JYGJ i pomoc",
+      "name": "Jiayang International",
+      "color": "#105bcc"
     },
     {
       "id": "buffalo-ex",

@@ -275,7 +275,7 @@
   { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "dobropost", "catalog": "dobropost", "name": "DobroPost", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "ems", "catalog": "ems", "name": "EMS", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "jiayang", "catalog": "jiayang", "name": "Jiayang International", "languages": ["en"] },
+  { "id": "jiayang", "catalog": "jiayang", "name": "Jiayang International", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jumppoint-international", "catalog": "jumppoint-international", "name": "Jumppoint International Express", "languages": ["en"] },
   { "id": "kuayuan-express", "catalog": "kuayuan-express", "name": "Kuayuan Express", "languages": ["en"] },
   { "id": "liccardi", "catalog": "liccardi", "name": "Liccardi Express Courier", "languages": ["en", "it"] },

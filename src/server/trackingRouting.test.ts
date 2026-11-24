@@ -2697,9 +2697,9 @@ describe('persistent tracking routing', () => {
   });
   it('reports only carrier names the catalog does not know, once per parcel', async () => {
     const { router, universal } = setup();
-    // Sendcloud, Packlink and Wish Post are platforms a shop books carriers through, not carriers.
+    // Sendcloud, Packlink, Wish Post and ShipBob are platforms a shop books carriers through, not carriers.
     const reported = ['La Poste', 'Posti', 'Finland Post', 'UPU', 'Universal Postal Union', 'Chronopost Portugal', 'DHL Express',
-      'Sendcloud', 'Packlink', 'Wish Post', 'Example Parcel Co'];
+      'Sendcloud', 'Packlink', 'Wish Post', 'ShipBob', 'Example Parcel Co'];
     universal.mockResolvedValue({ ...history(), reported_carriers: reported });
     const coverage = () => vi.mocked(monitoring.reportRoutingEvent).mock.calls
       .filter(([code]) => code === 'carrier_coverage_discovered').map(([, context]) => context.provider);

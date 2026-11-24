@@ -14846,6 +14846,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "dhl-express",
+      "catalog": "dhl-express",
+      "slug": "rastreamento-dhl-express",
+      "title": "Rastreamento DHL Express: número de conhecimento e status",
+      "name": "DHL Express",
+      "color": "#ffcc00"
+    },
+    {
       "id": "dhl",
       "catalog": "dhl",
       "slug": "rastreamento-dhl-paket",
@@ -17738,6 +17746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送失败",
       "name": "FedEx",
       "color": "#4d148c"
+    },
+    {
+      "id": "dhl-express",
+      "catalog": "dhl-express",
+      "slug": "dhl-express-tracking",
+      "title": "DHL Express 物流查询：10 位运单号与状态说明",
+      "name": "DHL Express",
+      "color": "#ffcc00"
     },
     {
       "id": "dhl",

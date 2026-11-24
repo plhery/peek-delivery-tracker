@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A J&T Express Germany (*J&T Express Germany GmbH*, sediada em Frankfurt am Main) é a rede alemã do grupo de encomendas J&T Express e realiza entregas em toda a Alemanha. Se uma loja enviou seu pedido pela J&T na Alemanha, o código de rastreamento começa com `JTDE`: cole-o na caixa acima ou consulte diretamente no [rastreador oficial em jtexpress.de](https://www.jtexpress.de/tracking). O número é informado pela loja no e-mail de envio ou na página do seu pedido.
+A J&T Express Germany (*J&T Express Germany GmbH*, sediada em Frankfurt am Main) é a rede alemã do grupo de encomendas J&T Express e realiza entregas na Alemanha. Se uma loja enviou seu pedido pela J&T na Alemanha, o código de rastreamento começa com `JTDE`: cole-o na caixa acima ou consulte diretamente no [rastreador oficial em jtexpress.de](https://www.jtexpress.de/tracking). O número é informado pela loja no e-mail de envio ou na página do seu pedido.
 
 ## Código de rastreamento J&T Express Alemanha: como identificar
 
@@ -99,7 +99,7 @@ Para pedidos feitos em lojas online, comece sempre falando com a loja ou pelo su
 
 O [Peek](/) identifica a J&T Express Germany imediatamente a partir de um código `JTDE` ("Transportadora detectada"), digitado com ou sem espaços e em maiúsculas ou minúsculas, consultando o rastreador oficial apenas pelo código, sem exigir CEP ou conta. Links `www.jtexpress.de/tracking?q=` com o código também funcionam (se trouxerem outro formato, o Peek lê o código como se tivesse sido colado sozinho). Para outros códigos, cole normalmente: o Peek acompanha mais de 4.500 transportadoras. Escolher J&T Express Germany por "Trocar" para outro formato não ajuda, pois o Peek avisa que ela "não emite códigos como este".
 
-O Peek exibe a etapa, cada leitura no seu horário exato convertido para o fuso do seu dispositivo (encerrando o histórico em peektracker.com e nos apps com "Horários no seu fuso horário:" e o nome do fuso) e a hora da entrega. As frases aparecem no inglês da J&T, mantendo até as 100 leituras mais recentes. Como a J&T não informa local, data prevista nem peso, o Peek não exibe mapa. Na página da encomenda, há um atalho para abrir seu código diretamente no site da J&T Express Germany.
+O Peek exibe a etapa, cada leitura no seu momento exato, mostrado no horário do seu aparelho (encerrando o histórico em peektracker.com e nos apps para iPhone e Android com "Horários no seu fuso horário:" e o nome do fuso) e a hora da entrega. As frases aparecem no inglês da J&T, mantendo até as 100 leituras mais recentes. Como a J&T não informa local, data prevista nem peso, o Peek não exibe mapa. Na página da encomenda, há um atalho para abrir seu código diretamente no site da J&T Express Germany.
 
 Enquanto a J&T não registra leituras, o Peek mostra "Aguardando J&T Express Germany" (ou solicita revisão após dois dias sem resposta). Quando o rastreador da J&T fica indisponível ou não conhece o número, o Peek consulta serviços de rastreamento e exibe o histórico deles. Se posteriormente todos responderem sem leituras para um pacote que já tinha histórico, o Peek conserva as leituras encontradas e exibe "A transportadora não tem movimentações novas por enquanto. As que já foram encontradas ficam salvas, e o Peek continua verificando."
 
@@ -141,4 +141,6 @@ Ligue para `+49 6931090650` (segunda a sexta, das `8:00` às `20:00`), use o cha
 - [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – cadastro de prestadores postais: *J&T Express Germany GmbH*
 - [Bundesnetzagentur: FAQ Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – arbitragem postal gratuita, formulário online e Verbraucherservice Post
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – formato `JTDE`, links, frases de status, tipos de entrega e campos filtrados
+- [Universal Parcel Scraper: consulta compartilhada da J&T](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – frases em inglês, horários exatos, as 100 leituras mais recentes
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – sem repasse a outra transportadora, serviços de rastreamento como alternativa
 :::

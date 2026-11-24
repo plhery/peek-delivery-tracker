@@ -4716,6 +4716,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "redur-sendungsverfolgung",
+      "title": "Redur Sendungsverfolgung: 14-stellige Codes & Hilfe",
+      "name": "Redur",
+      "color": "#0c4c49"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7062,6 +7070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "suivi-redur",
+      "title": "Suivi Redur\u00a0: codes à 14 chiffres, statuts Espagne et aide",
+      "name": "Redur",
+      "color": "#0c4c49"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "suivi-onlog-express",
@@ -9406,6 +9422,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento PDU: codici Parcel Delivery Union e aiuto",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "tracciamento-redur",
+      "title": "Tracciamento Redur: codici 14 cifre, Spagna e aiuto",
+      "name": "Redur",
+      "color": "#0c4c49"
     },
     {
       "id": "onlog-express",
@@ -14108,6 +14132,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005cfe"
     },
     {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "rastreio-redur",
+      "title": "Rastreio Redur: códigos de 14 dígitos, Espanha e apoio",
+      "name": "Redur",
+      "color": "#0c4c49"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "rastreio-onlog-express",
@@ -16526,6 +16558,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PDU: kody Parcel Delivery Union, statusy i pomoc",
       "name": "PDU",
       "color": "#005cfe"
+    },
+    {
+      "id": "redur",
+      "catalog": "redur",
+      "slug": "sledzenie-redur",
+      "title": "Śledzenie Redur: 14-cyfrowe kody, Hiszpania i pomoc",
+      "name": "Redur",
+      "color": "#0c4c49"
     },
     {
       "id": "onlog-express",

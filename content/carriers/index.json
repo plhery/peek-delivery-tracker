@@ -282,7 +282,7 @@
   { "id": "maersk-ecommerce", "catalog": "maersk-ecommerce", "name": "Maersk eCommerce", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "pdu", "catalog": "pdu", "name": "PDU", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "post-haste", "catalog": "post-haste", "name": "Post Haste", "languages": ["en"] },
-  { "id": "redur", "catalog": "redur", "name": "Redur", "languages": ["en", "es"] },
+  { "id": "redur", "catalog": "redur", "name": "Redur", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "sengi-express", "catalog": "sengi-express", "name": "Sengi Express", "languages": ["en"] },
   { "id": "serpost", "catalog": "serpost", "name": "Serpost", "languages": ["en", "es"] },
   { "id": "skypostal", "catalog": "skypostal", "name": "SkyPostal", "languages": ["en"] },

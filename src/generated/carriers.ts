@@ -4604,6 +4604,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "anserx-sendungsverfolgung",
+      "title": "AnserX Sendungsverfolgung: BTYCN...YQ-Codes & Kontakt",
+      "name": "AnserX",
+      "color": "#2478be"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6766,6 +6774,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "suivi-anserx",
+      "title": "Suivi AnserX\u00a0: codes BTYCN...YQ, relais locaux et contact",
+      "name": "AnserX",
+      "color": "#2478be"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -8912,6 +8928,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "tracciamento-anserx",
+      "title": "Tracciamento AnserX: codici BTYCN...YQ, consegna e aiuto",
+      "name": "AnserX",
+      "color": "#2478be"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11056,6 +11080,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento DHL Freight: ActiveTracing, estados y ayuda",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "seguimiento-anserx",
+      "title": "Seguimiento AnserX: códigos BTYCN...YQ, traspaso y ayuda",
+      "name": "AnserX",
+      "color": "#2478be"
     },
     {
       "id": "correos-de-mexico",
@@ -13242,6 +13274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio DHL Freight: códigos ActiveTracing e ajuda",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "rastreio-anserx",
+      "title": "Rastreio AnserX: códigos BTYCN...YQ, entrega local e ajuda",
+      "name": "AnserX",
+      "color": "#2478be"
     },
     {
       "id": "5post",
@@ -15462,6 +15502,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DHL Freight: kody ActiveTracing, statusy i pomoc",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "sledzenie-anserx",
+      "title": "Śledzenie AnserX: kody BTYCN...YQ, przekazanie i pomoc",
+      "name": "AnserX",
+      "color": "#2478be"
     },
     {
       "id": "5post",

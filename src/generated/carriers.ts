@@ -14918,6 +14918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d57"
     },
     {
+      "id": "amazon-shipping",
+      "catalog": "amazon-shipping",
+      "slug": "rastreamento-amazon-shipping",
+      "title": "Rastreamento Amazon Shipping: códigos, problemas e ajuda",
+      "name": "Amazon Shipping",
+      "color": "#ff9900"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "rastreamento-ecoscooting",
@@ -15228,6 +15236,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Anjun Express: encomendas da China, status e SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "rastreamento-xyl-ships",
+      "title": "Rastreamento XYL-Ships: códigos NUDE e XLWL e status",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
     },
     {
       "id": "jadlog",
@@ -18058,6 +18074,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "顺友物流（SunYou / SYPost）查询：SY单号、状态与派送",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "amazon-shipping",
+      "catalog": "amazon-shipping",
+      "slug": "amazon-shipping-tracking",
+      "title": "Amazon Shipping 亚马逊物流查询：单号与第三方卖家包裹",
+      "name": "Amazon Shipping",
+      "color": "#ff9900"
     },
     {
       "id": "ecoscooting",

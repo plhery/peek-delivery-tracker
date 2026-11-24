@@ -8,7 +8,8 @@ export const BLOCK_PAUSE_MS = 30 * 60_000;
 export const BEHIND_BLOCK_MS = 24 * 60 * 60_000;
 
 /**
- * Universal providers that answer "no history" for numbers they tracked. One such answer can be
+ * Universal providers that answer a bare "no history" for numbers they tracked (an answer with a reason, or a
+ * "not found", reads what they hold for the number and is no refusal). One such answer can be
  * the provider losing one parcel; two numbers within REFUSAL_WINDOW_MS mean it refuses this server
  * whatever it is asked, as ParcelsApp does for hours to an address it blocks. After a block, one
  * refusal within REFUSAL_WINDOW_MS of the pause ending finds it still in place. The numbers behind a

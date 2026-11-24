@@ -4951,6 +4951,36 @@ describe('a provider refusing numbers it tracked', () => {
     expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
     expect(missed).not.toHaveBeenCalled();
   });
+  it('reads a timeline written ahead, a listed shipment or a "not found" as an answer about the number', async () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const value = setup(time, { refusals: new ProviderRefusals() });
+    const answers = [
+      new NoHistoryError('ParcelsApp', 'ParcelsApp relays only a timeline written ahead', { reason: 'written_ahead' }),
+      new NoHistoryError('ParcelsApp', 'ParcelsApp relays only a timeline written ahead', { reason: 'written_ahead' }),
+      new NoHistoryError('ParcelsApp', 'The carrier lists the shipment without a scan', { reason: 'listed' }),
+      new NotFoundError('ParcelsApp'),
+      new NotFoundError('ParcelsApp'),
+    ];
+    value.universal.mockImplementation(async (source: string) => {
+      if (source === 'ParcelsApp') throw answers.shift()!;
+      return { ...history(), tracking_provider: source };
+    });
+    for (const number of ['TEST1234', 'TEST5678', 'TEST9012', 'TEST3456', 'TEST7890']) await value.router.fetch(tracked(number), false);
+    expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_blocked', expect.anything());
+    expect(parcelsApp(value.health).map(([kind]) => kind)).toEqual(['not_found', 'not_found', 'not_found', 'not_found', 'not_found']);
+  });
+  it('rests the provider for the block’s pause however long the parcel itself waits for it', async () => {
+    const { router, health } = refusing();
+    await router.fetch(tracked('TEST1234'), false);
+    // A parcel that has waited on ParcelsApp eight times in a row waits 6 h for it; the provider rests 30 minutes.
+    const waiting = parcel({ id: 'parcel-TEST5678', tracking_number: 'TEST5678', carrier_data: { routing: state({
+      preferred_provider: 'ParcelsApp', preferred_number: 'TEST5678', last_success_at: '2026-09-10T09:00:00Z',
+      failures: { ParcelsApp: { count: 8, kind: 'rate_limited', retry_at: '2026-09-10T11:00:00Z' } } }) } });
+    const second = await router.fetch(waiting, false);
+    expect(second.result).toMatchObject({ routing: { failures: { ParcelsApp: { kind: 'rate_limited', count: 9, retry_at: '2026-09-10T18:00:00.000Z' } } } });
+    expect(parcelsApp(health)).toEqual([['not_found', 0], ['rate_limited', 1_800_000]]);
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_blocked', expect.objectContaining({ provider: 'ParcelsApp' }));
+  });
   it('counts no answer about a number the provider never tracked', async () => {
     const { router, health } = refusing();
     for (const number of ['TEST1234', 'TEST5678', 'TEST9012']) await router.fetch(parcel({ id: number, tracking_number: number }), false);

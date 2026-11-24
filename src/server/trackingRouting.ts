@@ -2190,9 +2190,11 @@ export class TrackingRouter {
         // The provider this number was tracked through finds no history for it. With another number
         // it tracked soon after, it refuses this server whatever it is asked (providerRefusals.ts):
         // it rests as on a rate limit, and the answer is no lack of history for this parcel. Nor is it
-        // for a number behind that block, which this parcel alone waits out.
+        // for a number behind that block, which this parcel alone waits out. An answer with a reason
+        // (a timeline written ahead, a shipment listed without a scan) or a "not found" is about the
+        // number: it read what it holds for it.
         const refusal = token !== null && !answered && tracked
-          && (caught instanceof NoHistoryError || carrierErrorKind(caught) === 'not_found')
+          && caught instanceof NoHistoryError && !carrierErrorReason(caught)
           ? this.options.refusals?.refused(source, universalNumber, now().getTime()) : undefined;
         if (refusal === 'blocked' || refusal === 'still_blocked') {
           report('provider_blocked', source, 'rate_limited', caught);
@@ -2214,7 +2216,9 @@ export class TrackingRouter {
           report('provider_budget_spent', source, kind);
           recordProviderBudgetSpent(source);
         }
-        retryAfterMs = millis(failure.retry_at) - now().getTime();
+        // The provider rests as long as its own answer (or its block's pause) says, not as long as this parcel waits
+        // for it: a parcel's wait doubles with its own failures, up to 6 h.
+        retryAfterMs = routingFailure(error).retryAfterMs;
         if (kind === 'rate_limited' && recent() && !localDirectFallback && !partialDirect) {
           state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS));
           defer(false);

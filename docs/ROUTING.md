@@ -1373,14 +1373,17 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   allowance to the Adds and refreshes someone does wait for. A lookup the allowance refuses
   goes to the next provider and records no cooldown; with no other answer the parcel is
   checked again once the first of them has a lookup, 15 minutes later at the earliest;
-- cooldowns: 429 → at least 15 min, verification → 1 h, other failures → 1 min to 1 h
-  (exponential);
+- cooldowns: 429 → at least 15 min, or the wait the provider's answer names, verification → 1 h, other failures → 1 min to 1 h
+  (exponential). A parcel's own wait for the provider, which doubles with its failures, sets
+  no cooldown;
 - not-found, `no_history` and a refused number (`invalid_input`) are per-parcel and never
   open a global cooldown, except from a provider refusing this server
   ([providerRefusals.ts](../src/server/providerRefusals.ts)). When the provider a number was
   last answered by finds no history for it, and for another number it answered within
   30 minutes, it is refusing whatever it is asked, as ParcelsApp does for hours to an address
-  it blocks. That second answer counts as a rate limit, not as the parcel's lack of history:
+  it blocks. Only a bare "no history" counts: a "not found", or a no-history answer with a
+  reason (a timeline written ahead, a shipment listed without a scan), reads what the provider
+  holds for that number. That second answer counts as a rate limit, not as the parcel's lack of history:
   the provider rests 30 minutes, and one such answer within 30 minutes of the pause ending
   rests it again. The numbers behind a block count toward no other for a day: one may be a
   number the provider lost, whose own retry would otherwise rest it at the end of every pause.

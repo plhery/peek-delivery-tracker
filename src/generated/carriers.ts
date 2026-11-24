@@ -14798,6 +14798,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "rastreamento-360lion",
+      "title": "Rastreamento 360Lion: códigos WSH e AR, status e contato",
+      "name": "360Lion",
+      "color": "#cf5d15"
+    },
+    {
+      "id": "skypostal",
+      "catalog": "skypostal",
+      "slug": "rastreamento-skypostal",
+      "title": "Rastreamento SkyPostal: códigos SP...BR, status e suporte",
+      "name": "SkyPostal",
+      "color": "#088aea"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "rastreamento-onlog-express",
@@ -17828,6 +17844,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b4da2"
     },
     {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "cj-packet-kuaidi-chaxun",
+      "title": "CJ Packet 快递查询：CJP 单号、汇总状态与客服联系",
+      "name": "CJ Packet",
+      "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "cmt-express-chengmaotong-chaxun",
+      "title": "诚贸通（CMT Express）单号查询：CMT 轨迹、深圳仓与客服",
+      "name": "CMT Express",
+      "color": "#ed010b"
+    },
+    {
       "id": "jiayang",
       "catalog": "jiayang",
       "slug": "jiayang-guoji-chaxun",
@@ -17836,12 +17868,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#105bcc"
     },
     {
+      "id": "kuayuan-express",
+      "catalog": "kuayuan-express",
+      "slug": "kuayuan-express-chaxun",
+      "title": "跨源速递（Kuayuan Express）单号查询：14 位运单与客服",
+      "name": "Kuayuan Express",
+      "color": "#084b86"
+    },
+    {
       "id": "yunda",
       "catalog": "yunda",
       "slug": "yunda-kuaidi-chaxun",
       "title": "韵达快递单号查询：13 与 15 位运单、轨迹状态与 95546 客服",
       "name": "Yunda Express",
       "color": "#ffce00"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "buffalo-ex-nanfei-chaxun",
+      "title": "BUFFALO 国际物流单号查询：BUFZA 轨迹、南非清关与客服",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
     }
   ],
   "nl": [

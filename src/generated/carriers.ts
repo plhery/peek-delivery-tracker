@@ -14894,6 +14894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "rastreamento-fan-courier",
+      "title": "Rastreamento FAN Courier: códigos AWB, status e FANbox",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "rastreamento-ups",
@@ -15084,6 +15092,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento WanbExpress: códigos WNB…YQ e quem entrega",
       "name": "WanbExpress",
       "color": "#da381b"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "rastreamento-ywe",
+      "title": "Rastreamento YWE (YanwenExpress): códigos, status e suporte",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "india-post",
@@ -17916,6 +17932,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3fa7ff"
     },
     {
+      "id": "fan-courier",
+      "catalog": "fan-courier",
+      "slug": "fan-courier-tracking",
+      "title": "FAN Courier 快递查询：AWB 运单号、状态与 FANbox 自提柜",
+      "name": "FAN Courier",
+      "color": "#0f2345"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-guoji-kuaidi-chaxun",
@@ -18218,6 +18242,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "汇一物流（HYWL）单号查询：TRK单号、中英文状态",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "ywe-tracking",
+      "title": "YWE（YanwenExpress）快递查询：单号、状态与美国尾程派送",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "ecms-express",

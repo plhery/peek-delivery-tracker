@@ -14974,6 +14974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedpak",
+      "catalog": "speedpak",
+      "slug": "rastreamento-speedpak",
+      "title": "Rastreamento SpeedPAK (eBay): códigos de 28 caracteres",
+      "name": "SpeedPAK",
+      "color": "#ee7532"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "rastreamento-allegro-one",
@@ -15004,6 +15012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Ecoscooting: status, retirada e contato",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "rastreamento-nova-poshta",
+      "title": "Rastreamento Nova Poshta (Nova Post): códigos EW e agências",
+      "name": "Nova Poshta",
+      "color": "#e30613"
     },
     {
       "id": "fan-courier",
@@ -15364,6 +15380,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "rastreamento-17feia",
+      "title": "Rastreamento 17FEIA (一起飞): códigos FEI…YQ e entrega",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     },
     {
       "id": "j-and-t-br",
@@ -18314,6 +18338,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ecoscooting 物流查询：单号格式、状态与取件点",
       "name": "Ecoscooting",
       "color": "#3fa7ff"
+    },
+    {
+      "id": "nova-poshta",
+      "catalog": "nova-poshta",
+      "slug": "nova-poshta-kuaidi-chaxun",
+      "title": "乌克兰 Nova Poshta（Nova Post）快递查询：EW 单号",
+      "name": "Nova Poshta",
+      "color": "#e30613"
     },
     {
       "id": "fan-courier",

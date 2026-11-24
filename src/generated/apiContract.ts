@@ -1631,11 +1631,13 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^(?!YW[A-Z]{3}\\d{12}$|YWE\\d{14}$|BYT\\d{14}$|(?:GF|CI)[A-Z]{2}\\d{13}$|CNG\\d{14}$|DBRPST\\d{11}$)[A-Z0-9]{12}(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       },
       {
         "pattern": "^[A-Z0-9]{12}$",
-        "confidence": "low"
+        "confidence": "low",
+        "servedCountriesOnly": true
       }
     ],
     "aliases": [
@@ -17153,7 +17155,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^BUFZA(?:\\d{10}|\\dSK\\d{5}BU)YQ$",
+        "pattern": "^BUFZA(?:\\d{10}|\\d[A-Z]{2}\\d{5}[A-Z]{2})YQ$",
         "confidence": "high"
       }
     ],
@@ -20679,9 +20681,10 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "ozon-logistics",
       "recognitionRank": 37,
-      "recognitionPattern": "^(?:\\d{13}|\\d{15})$",
+      "recognitionPattern": "^(?:\\d{8}|\\d{10})0\\d{4}$",
       "recognitionServedCountriesOnly": true,
-      "browserRecognitionRank": 37
+      "browserRecognitionRank": 37,
+      "browserRecognitionPattern": "^(?:\\d{8}|\\d{10})0\\d{4}$"
     },
     "trackingUrlTemplate": "https://tracking.ozon.ru/?track={trackingNumber}",
     "linkRules": [
@@ -40027,11 +40030,12 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Karachi",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "citymail-pk"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://my.citymail.com.pk/track"
+    "trackingSearchUrl": "https://my.citymail.com.pk/track",
+    "trackingUrlTemplate": "https://citymail.com.pk/"
   },
   "consegnia": {
     "displayName": "Consegnia Logistics",
@@ -61037,7 +61041,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuwait",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "kuwait-post"
     },
     "linkRules": [],
     "detectionRules": [],

@@ -4780,6 +4780,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a345d"
     },
     {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "a-duie-pyle-sendungsverfolgung",
+      "title": "A. Duie Pyle Sendungsverfolgung: PRO-Nummern & LTL-Hilfe",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -7228,6 +7236,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Onlog Express\u00a0: codes AA, statuts Brésil et aide",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "suivi-a-duie-pyle",
+      "title": "Suivi A. Duie Pyle\u00a0: numéros PRO, statuts LTL et support",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     },
     {
       "id": "buffalo-ex",
@@ -9680,6 +9696,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a345d"
     },
     {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "tracciamento-a-duie-pyle",
+      "title": "Tracciamento A. Duie Pyle: codici PRO, LTL e supporto",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "tracciamento-buffalo-ex",
@@ -12122,6 +12146,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a345d"
     },
     {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "seguimiento-a-duie-pyle",
+      "title": "Seguimiento A. Duie Pyle: números PRO, LTL y soporte",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "seguimiento-buffalo-ex",
@@ -14562,6 +14594,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Onlog Express: códigos AA, estados e apoio",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "rastreio-a-duie-pyle",
+      "title": "Rastreio A. Duie Pyle: números PRO, LTL e apoio",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     },
     {
       "id": "buffalo-ex",
@@ -17086,6 +17126,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Onlog Express: kody AA, statusy Brazylia i pomoc",
       "name": "Onlog Express",
       "color": "#1a345d"
+    },
+    {
+      "id": "a-duie-pyle",
+      "catalog": "a-duie-pyle",
+      "slug": "sledzenie-a-duie-pyle",
+      "title": "Śledzenie A. Duie Pyle: numery PRO, LTL i pomoc",
+      "name": "A. Duie Pyle",
+      "color": "#f27629"
     },
     {
       "id": "buffalo-ex",

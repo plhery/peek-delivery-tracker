@@ -289,7 +289,7 @@
   { "id": "thailand-post", "catalog": "thailand-post", "name": "Thailand Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "yunda", "catalog": "yunda", "name": "Yunda Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "onlog-express", "catalog": "onlog-express", "name": "Onlog Express", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "a-duie-pyle", "catalog": "a-duie-pyle", "name": "A. Duie Pyle", "languages": ["en"] },
+  { "id": "a-duie-pyle", "catalog": "a-duie-pyle", "name": "A. Duie Pyle", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "buffalo-ex", "catalog": "buffalo-ex", "name": "BUFFALO", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "chit-chats", "catalog": "chit-chats", "name": "Chit Chats", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-hu", "catalog": "dpd-hu", "name": "DPD Hungary", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },

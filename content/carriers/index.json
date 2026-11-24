@@ -290,7 +290,7 @@
   { "id": "yunda", "catalog": "yunda", "name": "Yunda Express", "languages": ["en"] },
   { "id": "onlog-express", "catalog": "onlog-express", "name": "Onlog Express", "languages": ["en", "pt-br"] },
   { "id": "a-duie-pyle", "catalog": "a-duie-pyle", "name": "A. Duie Pyle", "languages": ["en"] },
-  { "id": "buffalo-ex", "catalog": "buffalo-ex", "name": "BUFFALO", "languages": ["en"] },
+  { "id": "buffalo-ex", "catalog": "buffalo-ex", "name": "BUFFALO", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "chit-chats", "catalog": "chit-chats", "name": "Chit Chats", "languages": ["en"] },
   { "id": "dpd-hu", "catalog": "dpd-hu", "name": "DPD Hungary", "languages": ["en", "hu"] },
   { "id": "e24metro-ca", "catalog": "e24metro-ca", "name": "E24", "languages": ["en"] },

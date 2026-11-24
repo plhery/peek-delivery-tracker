@@ -4620,6 +4620,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "buffalo-ex-sendungsverfolgung",
+      "title": "BUFFALO Sendungsverfolgung: BUFZA-Codes, Zoll & Hilfe",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6798,6 +6806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "suivi-buffalo-ex",
+      "title": "Suivi BUFFALO\u00a0: codes BUFZA, douane Afrique du Sud et aide",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -8966,6 +8982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Liccardi Express Courier: LDV, stati e aiuto",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "tracciamento-buffalo-ex",
+      "title": "Tracciamento BUFFALO: codici BUFZA, dogana Sudafrica e aiuto",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
     },
     {
       "id": "5post",
@@ -11146,6 +11170,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "seguimiento-buffalo-ex",
+      "title": "Seguimiento BUFFALO: códigos BUFZA, aduana Sudáfrica y ayuda",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "seguimiento-oca",
@@ -13322,6 +13354,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio BJS Home Delivery: códigos B, janela 3 h e ajuda",
       "name": "BJS Home Delivery",
       "color": "#feba30"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "rastreio-buffalo-ex",
+      "title": "Rastreio BUFFALO: códigos BUFZA, alfândega África do Sul",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
     },
     {
       "id": "5post",
@@ -15558,6 +15598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie BJS Home Delivery: kody B, okna 3 h i pomoc",
       "name": "BJS Home Delivery",
       "color": "#feba30"
+    },
+    {
+      "id": "buffalo-ex",
+      "catalog": "buffalo-ex",
+      "slug": "sledzenie-buffalo-ex",
+      "title": "Śledzenie BUFFALO: kody BUFZA, cło w RPA i kontakt",
+      "name": "BUFFALO",
+      "color": "#bc8c4d"
     },
     {
       "id": "5post",

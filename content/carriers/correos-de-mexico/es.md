@@ -10,7 +10,7 @@ Correos de México (*Servicio Postal Mexicano* / *SEPOMEX*) es el operador posta
 
 ## Números de guía de Correos de México: formato S10
 
-Busca el código en tu recibo de oficina postal, en la guía *Mexpost* o en el correo de envío de la tienda. Correos de México rastrea códigos postales UPU S10 de 13 caracteres — tanto envíos nacidos en México terminados en `MX` como piezas postales extranjeras dirigidas a México (por ejemplo terminadas en `US`, `CN`, `ES` o `JP`):
+Busca el código en tu recibo de oficina postal, en la guía *Mexpost* o en el correo de envío de la tienda. Correos de México rastrea números de envío UPU S10 de 13 caracteres — tanto envíos nacidos en México terminados en `MX` como piezas postales extranjeras dirigidas a México (por ejemplo terminadas en `US`, `CN`, `ES` o `JP`):
 
 | Formato (inventado) | Qué es |
 | --- | --- |
@@ -75,7 +75,7 @@ Puedes elegir avisos para «Cada escaneo», «Pasos importantes» o «Solo la en
 
 ### ¿Qué números de guía funcionan en Correos de México?
 
-Rastrea códigos postales UPU S10 de 13 caracteres: 2 letras + 9 dígitos + 2 letras de país (por ejemplo `RR482917367MX` o `MP482917367MX`, inventados), incluidos envíos S10 del extranjero que entran a México.
+Rastrea números de envío UPU S10 de 13 caracteres: 2 letras + 9 dígitos + 2 letras de país (por ejemplo `RR482917367MX` o `MP482917367MX`, inventados), incluidos envíos S10 del extranjero que entran a México.
 
 ### ¿Qué significa `Puesta en ventanilla`?
 

@@ -488,7 +488,8 @@ Key server modules:
     number later then finds that parcel, as it finds one by a number its carrier names as
     its next leg's (`account_tracking_numbers`), and two parcels the account follows under
     the pair merge ([ROUTING.md](ROUTING.md)). An email with more numbers, or two of the
-    marketplace's, pairs none, and so does a text an assistant sends.
+    marketplace's, pairs none, and so does a text an assistant sends. The account's export
+    lists the pairs; deleting the parcel deletes its pairs.
   - An email to the parcel's sender, as a marketplace or a parcel shop writes to a seller
     ("on its way to the buyer", "thanks for dropping off your parcel"), adds its parcel too.
     Only words that speak to the sender count, in the subject and the first 2,000 characters

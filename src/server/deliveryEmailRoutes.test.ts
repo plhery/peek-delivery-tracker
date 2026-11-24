@@ -481,6 +481,7 @@ describe('the account export', () => {
     const opened = vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue('2026-10-03T21:05:00+00:00');
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
+    vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
     const response = await exportAccount(authenticated('https://delivery.example/api/account/export'), none);
     expect(response.status).toBe(200);
     const exported = await response.json();
@@ -505,6 +506,7 @@ describe('the account export', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
+    vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
     const exported = await (await exportAccount(authenticated('https://delivery.example/api/account/export'), none)).json();
     expect(exported.deliveryEmails).toEqual({ enabled: null, sent: [] });
     expect(exported.account.lastOpenedAt).toBeNull();

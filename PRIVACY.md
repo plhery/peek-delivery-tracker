@@ -48,7 +48,9 @@ using Peek involves.
   recorded. Each email the service reads is kept as it
   came, with your account's id and when it came, for 30 days. It is used to
   learn to read such emails better. An ignored email, one a limit held back
-  and Gmail's forwarding confirmation are not kept.
+  and Gmail's forwarding confirmation are not kept. When an email names one
+  package under two numbers, a marketplace's and the delivering carrier's, both
+  numbers are kept with the parcel that follows it until that parcel is deleted.
 - When you connect an assistant or make a personal token: its name, the site
   or app it answers to, what you allowed it (to see your parcels, to add
   them, to edit or archive them), when you connected it and when it last used Peek, and

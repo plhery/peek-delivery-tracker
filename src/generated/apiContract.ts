@@ -69155,6 +69155,7 @@ export interface ApiAccountExportResponse {
   "deliveryEmails"?: ApiDeliveryEmailsExport;
   "addByEmail"?: ApiAddByEmail | null;
   "assistants"?: Array<ApiAssistantConnection>;
+  "twinNumbers"?: Array<ApiTwinNumbers>;
 }
 
 export interface ApiDeleteAccountRequest {
@@ -71533,6 +71534,13 @@ export interface ApiDeliveryEmailSwitchRequest {
 
 export interface ApiDeliveryEmailSwitchResponse {
   "emailOnDelivery": boolean;
+}
+
+export interface ApiTwinNumbers {
+  "packageId": string;
+  "earlier": string;
+  "later": string;
+  "createdAt": string;
 }
 
 export interface ApiSentDeliveryEmail {

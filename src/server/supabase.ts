@@ -2,7 +2,7 @@ import 'server-only';
 
 import type { ObservedCoverage } from 'universal-parcel-scraper';
 import type { AdapterHold, DpdSession } from 'universal-parcel-scraper/node';
-import type { ApiGiftWords, ApiNativePushTransport } from '../generated/apiContract';
+import type { ApiGiftWords, ApiNativePushTransport, ApiTwinNumbers } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
@@ -1477,6 +1477,15 @@ export class SupabaseServiceClient extends SupabaseClient {
       method: 'POST',
       body: { p_user_id: userId, p_package_id: packageId, p_earlier: earlier, p_later: later },
     }) === true;
+  }
+
+  /** The pairs of numbers the account's emails named for one package, oldest first, as its export shows them. */
+  async twinNumbers(userId: string): Promise<ApiTwinNumbers[]> {
+    const params = query({ select: 'package_id,earlier,later,created_at', user_id: `eq.${userId}`, order: 'created_at.asc,package_id.asc' });
+    return rows(await this.request(`/rest/v1/package_twin_numbers?${params}`)).flatMap((row) =>
+      typeof row.package_id === 'string' && typeof row.earlier === 'string' && typeof row.later === 'string' && typeof row.created_at === 'string'
+        ? [{ packageId: row.package_id, earlier: row.earlier, later: row.later, createdAt: row.created_at }]
+        : []);
   }
 
   /** The account's forwarding address, or null when it has none. */

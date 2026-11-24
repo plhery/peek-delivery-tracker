@@ -72939,6 +72939,13 @@
               "$ref": "#/components/schemas/AssistantConnection"
             },
             "description": "Connected assistants and personal tokens, without their tokens."
+          },
+          "twinNumbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TwinNumbers"
+            },
+            "description": "Pairs of numbers an email named for one package, kept with the account's parcel, oldest first."
           }
         }
       },
@@ -76431,6 +76438,36 @@
         "properties": {
           "emailOnDelivery": {
             "type": "boolean"
+          }
+        }
+      },
+      "TwinNumbers": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "One package an email named under two numbers: a marketplace's logistics number and the last-mile carrier's. Kept until the parcel is deleted.",
+        "required": [
+          "packageId",
+          "earlier",
+          "later",
+          "createdAt"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The account's parcel that follows the package."
+          },
+          "earlier": {
+            "type": "string",
+            "description": "The marketplace's logistics number."
+          },
+          "later": {
+            "type": "string",
+            "description": "The last-mile carrier's number."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },

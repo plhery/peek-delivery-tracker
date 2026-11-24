@@ -52,6 +52,7 @@ data class AccountExportResponse(
     val deliveryEmails: DeliveryEmailsExport? = null,
     val addByEmail: AddByEmail? = null,
     val assistants: List<AssistantConnection>? = null,
+    val twinNumbers: List<TwinNumbers>? = null,
 )
 
 @Serializable
@@ -4535,6 +4536,14 @@ data class DeliveryEmailSwitchRequest(
 @Serializable
 data class DeliveryEmailSwitchResponse(
     val emailOnDelivery: Boolean,
+)
+
+@Serializable
+data class TwinNumbers(
+    val packageId: UUID,
+    val earlier: String,
+    val later: String,
+    val createdAt: String,
 )
 
 @Serializable

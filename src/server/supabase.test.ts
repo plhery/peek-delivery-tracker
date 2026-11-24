@@ -671,6 +671,20 @@ describe('one-off parcels and their links', () => {
       { method: 'POST', body: { p_user_id: owner, p_package_id: 'parcel-1', p_earlier: 'LP00000000000001', p_later: 'JJD000390000000001' } }]);
   });
 
+  it("reads an account's twin numbers for its export, oldest first", async () => {
+    const client = service();
+    const owner = '5b000000-0000-4000-a000-000000000001';
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([
+      { package_id: 'parcel-1', earlier: 'LP00000000000001', later: 'JJD000390000000001', created_at: '2026-11-24T13:10:00+00:00' },
+      { package_id: 'parcel-2', earlier: 'LP00000000000002', later: null, created_at: '2026-11-24T13:11:00+00:00' },
+    ]).mockResolvedValueOnce(null);
+    await expect(client.twinNumbers(owner)).resolves.toEqual([
+      { packageId: 'parcel-1', earlier: 'LP00000000000001', later: 'JJD000390000000001', createdAt: '2026-11-24T13:10:00+00:00' },
+    ]);
+    await expect(client.twinNumbers(owner)).resolves.toEqual([]);
+    expect(request.mock.calls[0]).toEqual([`/rest/v1/package_twin_numbers?select=package_id%2Cearlier%2Clater%2Ccreated_at&user_id=eq.${owner}&order=created_at.asc%2Cpackage_id.asc`]);
+  });
+
   it('deletes the review entries of numbers no parcel follows any more through a function', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce({ cases: 2, signals: 1 }).mockResolvedValueOnce(null);

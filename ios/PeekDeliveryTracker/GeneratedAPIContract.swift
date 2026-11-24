@@ -53,6 +53,7 @@ struct AccountExportResponse: Codable, Equatable, Hashable, Sendable {
     var deliveryEmails: DeliveryEmailsExport? = nil
     var addByEmail: AddByEmail? = nil
     var assistants: [AssistantConnection]? = nil
+    var twinNumbers: [TwinNumbers]? = nil
 }
 
 struct DeleteAccountRequest: Codable, Equatable, Hashable, Sendable {
@@ -4592,6 +4593,20 @@ struct DeliveryEmailSwitchRequest: Codable, Equatable, Hashable, Sendable {
 
 struct DeliveryEmailSwitchResponse: Codable, Equatable, Hashable, Sendable {
     var emailOnDelivery: Bool
+}
+
+struct TwinNumbers: Codable, Equatable, Hashable, Sendable {
+    var packageID: UUID
+    var earlier: String
+    var later: String
+    var createdAt: String
+
+    private enum CodingKeys: String, CodingKey {
+        case packageID = "packageId"
+        case earlier
+        case later
+        case createdAt
+    }
 }
 
 struct SentDeliveryEmail: Codable, Equatable, Hashable, Sendable {

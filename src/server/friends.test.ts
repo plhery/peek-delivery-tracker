@@ -108,6 +108,7 @@ describe('Friends privacy boundary', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
+    vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
     const response = await exportGET(new NextRequest('https://delivery.example/api/account/export', { headers: { Authorization: 'Bearer friends-export-test' } }), { params: Promise.resolve({}) });
     expect(response.status).toBe(200);
     expect(response.headers.get('cache-control')).toBe('no-store');

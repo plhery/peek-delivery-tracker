@@ -35,6 +35,8 @@ export const GET = apiRoute(async (context) => {
     addByEmail: mailbox && (({ token, ...rest }) => ({ address: inboundEmail ? inboxAddress(inboundEmail, token) : token, ...rest }))(mailbox),
     // The assistants connected to the account and its personal tokens; their tokens are kept only as digests.
     assistants,
+    // The two numbers an email named for one package, kept with the parcel that follows it.
+    twinNumbers: await requireService(context).twinNumbers(user.id),
     packages: (await client.listPackages(true)).map(withoutEventSources),
   }, 200, {
     'Content-Disposition': 'attachment; filename="peek-export.json"',

@@ -104,6 +104,7 @@ describe('the account\'s forwarding address', () => {
 
   it('goes into the account export as the address, without the token alone', async () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
+    vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ profile: null, ownCard: null, friends: [] });
@@ -112,6 +113,22 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseUserClient.prototype, 'listDeliveryEmails').mockResolvedValue([]);
     const exported = await (await exportAccount(signedIn('GET'), none)).json();
     expect(exported.addByEmail).toEqual({ address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null, notify: true });
+  });
+
+  it('puts the twin numbers its emails named into the account export, read for this account', async () => {
+    const twins = [{ packageId: '5b000000-0000-4000-a000-000000000002', earlier: 'LP00000000000001', later: 'JJD000390000000001', createdAt: '2026-11-24T13:10:00+00:00' }];
+    vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
+    const read = vi.spyOn(SupabaseServiceClient.prototype, 'twinNumbers').mockResolvedValue(twins);
+    vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
+    vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
+    vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ profile: null, ownCard: null, friends: [] });
+    vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([]);
+    vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue({ enabled_stages: [], email_on_delivery: null } as never);
+    vi.spyOn(SupabaseUserClient.prototype, 'listDeliveryEmails').mockResolvedValue([]);
+    const exported = await (await exportAccount(signedIn('GET'), none)).json();
+    expect(exported.twinNumbers).toEqual(twins);
+    expect(read).toHaveBeenCalledExactlyOnceWith(userId);
+    expect(Object.keys(exported.twinNumbers[0]).sort()).toEqual([...contract.components.schemas.TwinNumbers.required].sort());
   });
 
   it('switches the notification of each parcel an email adds, once the account has an address', async () => {

@@ -14886,6 +14886,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004654"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "rastreamento-dpd-uk",
+      "title": "Rastreamento DPD UK: status, lojas Pickup e contato",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "rastreamento-gofo-franca",
@@ -15172,6 +15180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento YWE (YanwenExpress): códigos, status e suporte",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "rastreamento-japan-post",
+      "title": "Rastreamento Japan Post: códigos EMS e status explicados",
+      "name": "Japan Post",
+      "color": "#cc0000"
     },
     {
       "id": "huahan",
@@ -17996,6 +18012,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004654"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "dpd-uk-tracking",
+      "title": "DPD UK 英国快递查询：14 位单号、状态与自提点",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracking",
@@ -18434,6 +18458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "递一物流（CNE Express）查询：3A5V单号与尾程",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "japan-post-tracking",
+      "title": "日本邮政（Japan Post）快递查询：EMS 单号与状态说明",
+      "name": "Japan Post",
+      "color": "#cc0000"
     },
     {
       "id": "huahan",

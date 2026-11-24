@@ -4788,6 +4788,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#592c82"
     },
     {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "pigeonship-sendungsverfolgung",
+      "title": "PigeonShip Sendungsverfolgung: Nummern, Status & Hilfe",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-sendungsverfolgung",
@@ -7118,6 +7126,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#592c82"
     },
     {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "suivi-pigeonship",
+      "title": "Suivi PigeonShip\u00a0: numéros 18 caractères, statuts et aide",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9446,6 +9462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento OCA: numeri a 19 cifre, stati, filiali e aiuto",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "tracciamento-pigeonship",
+      "title": "Tracciamento PigeonShip: numeri, stati e consegna",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
     },
     {
       "id": "5post",
@@ -11786,6 +11810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#592c82"
     },
     {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "seguimiento-pigeonship",
+      "title": "Seguimiento PigeonShip: códigos, estados y entrega",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
+    },
+    {
       "id": "bfe-express",
       "catalog": "bfe-express",
       "slug": "seguimiento-bfe-express",
@@ -14122,6 +14154,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio OCA: números de 19 dígitos, estados e agências",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "rastreio-pigeonship",
+      "title": "Rastreio PigeonShip: códigos, estados e entrega",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
     },
     {
       "id": "5post",
@@ -16526,6 +16566,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie OCA: 19-cyfrowe numery, statusy, oddziały i pomoc",
       "name": "OCA",
       "color": "#592c82"
+    },
+    {
+      "id": "pigeonship",
+      "catalog": "pigeonship",
+      "slug": "sledzenie-pigeonship",
+      "title": "Śledzenie PigeonShip: 18-znakowe kody, statusy i pomoc",
+      "name": "PigeonShip",
+      "color": "#f2b02c"
     },
     {
       "id": "5post",

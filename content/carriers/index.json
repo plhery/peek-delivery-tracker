@@ -298,7 +298,7 @@
   { "id": "kuehne-nagel", "catalog": "kuehne-nagel", "name": "Kuehne+Nagel", "languages": ["en", "de", "fr", "es", "it", "pt", "pl"] },
   { "id": "memphis-courier", "catalog": "memphis-courier", "name": "Memphis Courier", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "oca", "catalog": "oca", "name": "OCA", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
-  { "id": "pigeonship", "catalog": "pigeonship", "name": "PigeonShip", "languages": ["en"] },
+  { "id": "pigeonship", "catalog": "pigeonship", "name": "PigeonShip", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "seko", "catalog": "seko", "name": "SEKO Logistics", "languages": ["en"] },
   { "id": "bfe-express", "catalog": "bfe-express", "name": "BFE Express", "languages": ["en", "es"] },
   { "id": "pasarex", "catalog": "pasarex", "name": "PasarEX", "languages": ["en", "es"] },

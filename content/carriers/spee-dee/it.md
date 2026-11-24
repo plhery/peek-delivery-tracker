@@ -43,7 +43,7 @@ La tabella di avanzamento di Spee-Dee mostra tre colonne — `Date / Time`, `Loc
 
 ### Codici a barre da 16 cifre riutilizzati
 
-Spee-Dee riutilizza vecchi codici a barre `SP` da 16 cifre per nuove spedizioni. Sulla pagina originale di Spee-Dee possono ancora comparire righe di un pacco consegnato mesi prima sotto le scansioni del tuo pacco attuale. Quando verifichi un codice riutilizzato sul sito Spee-Dee, osserva le date in cima alla tabella e fermati appena incontri un precedente `Delivered` di una vecchia spedizione.
+Spee-Dee riutilizza vecchi codici a barre `SP` da 16 cifre per nuove spedizioni. Sulla pagina originale di Spee-Dee possono ancora comparire righe di un pacco consegnato in precedenza sotto le scansioni del tuo pacco attuale. Quando verifichi un codice riutilizzato sul sito Spee-Dee, osserva le date in cima alla tabella e fermati appena incontri un precedente `Delivered` di una vecchia spedizione.
 
 ## Ritardi, scansioni mancanti e reclami
 
@@ -57,7 +57,7 @@ Alcuni punti aiutano se il tracciamento sembra anomalo:
 
 Incolla un qualsiasi codice a barre Spee-Dee da 18 caratteri (`SP` + 16 cifre) o 20 caratteri (`SP` + 18 cifre), oppure un link `speedeedelivery.com`, in Peek e Peek riconoscerà subito Spee-Dee. Se devi cambiare corriere, usa «Cambia» mentre aggiungi il pacco o «Cambia corriere» nella schermata di tracciamento.
 
-Peek legge la pagina di avanzamento di Spee-Dee tramite l’[adattatore open source Spee-Dee di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), e passa attraverso una rete remota se l’host di Spee-Dee rifiuta la connessione diretta. Per un **codice a barre riutilizzato**, conserva solo le righe successive alla consegna precedente avvenuta almeno un giorno prima. Scarta i commenti HTML di debug e il numero di giro dopo `OUT FOR DELIVERY`, registrando città o terminal e orario di ogni scansione. Spee-Dee fornisce orari locali senza fuso: Peek data ogni scansione sul fuso del luogo (ora di Chicago per St. Cloud, Fargo, Milwaukee o Sioux Falls, ora di Detroit per Detroit), una scansione senza luogo su quello della scansione vicina, altrimenti sull’ora di New York, e mostra tutto sull’orologio del tuo dispositivo. Il tracker Spee-Dee non fornisce data stimata di consegna né peso.
+Peek legge la pagina di avanzamento di Spee-Dee tramite l’[adattatore open source Spee-Dee di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/spee-dee), e passa attraverso una rete remota se l’host di Spee-Dee rifiuta la connessione diretta. Per un **codice a barre riutilizzato**, conserva solo le righe successive alla consegna precedente avvenuta almeno un giorno prima. Scarta i commenti HTML di debug e il numero di giro dopo `OUT FOR DELIVERY`, registrando città o terminal e orario di ogni scansione. Spee-Dee fornisce orari locali senza scarto da UTC: Peek data ogni scansione sul fuso del luogo (ora di Chicago per St. Cloud, Fargo, Milwaukee o Sioux Falls, ora di Detroit per Detroit), una scansione senza luogo su quello della scansione vicina, altrimenti sull’ora di New York, e mostra tutti gli orari con l’ora del tuo dispositivo. Il tracker Spee-Dee non fornisce data stimata di consegna né peso.
 
 Peek mappa `ARRIVAL SCAN` su «In transito», `OUT FOR DELIVERY` su «In consegna» e `Delivered` su «Consegnato», e classifica eventuali altre attività secondo le proprie regole condivise.
 
@@ -91,7 +91,7 @@ Spee-Dee serve l’intero territorio di Illinois, Iowa, Minnesota, Nord Dakota, 
 
 ### Spee-Dee Delivery mostra una data di consegna stimata sul tracker?
 
-No. La pagina di tracciamento Spee-Dee elenca le scansioni di arrivo ai terminal, `OUT FOR DELIVERY` e i dettagli della consegna finale, senza data stimata. Puoi consultare i tempi medi via terra per CAP su [Service Area Maps di Spee-Dee](https://speedeedelivery.com/services/service-area-maps/).
+No. La pagina di tracciamento Spee-Dee elenca le scansioni di arrivo ai terminal, `OUT FOR DELIVERY` e i dettagli della consegna finale, senza data stimata. Puoi consultare i tempi abituali via terra per CAP su [Service Area Maps di Spee-Dee](https://speedeedelivery.com/services/service-area-maps/).
 
 ### Cosa devo includere quando contatto Spee-Dee per un pacco?
 

@@ -75621,6 +75621,44 @@
     ]
   },
   {
+    "input": "881053412",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ]
+  },
+  {
+    "input": "881137924",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ]
+  },
+  {
     "input": "881171022565",
     "carrier": "unknown",
     "confidence": "low",
@@ -81787,6 +81825,25 @@
       "econt",
       "ozon-logistics",
       "paquetexpress"
+    ]
+  },
+  {
+    "input": "992289815",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
     ]
   },
   {
@@ -119964,6 +120021,12 @@
   },
   {
     "input": "WKRW260048622",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "WLDME6071800028",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

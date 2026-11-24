@@ -41173,7 +41173,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "comone-express"
     },
     "trackingUrlTemplate": "https://www.com1logistics.com/tracking.html?trackNo={trackingNumber}",
     "linkRules": [
@@ -44175,7 +44175,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wld-express"
     },
     "linkRules": [],
     "detectionRules": [],

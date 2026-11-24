@@ -3,16 +3,17 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import '../test/parcelCode';
 import { shutOff } from '../test/modalBackground';
-import { LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
+import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
 import { PeekRoot } from './PeekRoot';
 import { forgetAllRecents, recentFor, rememberParcel, RECENTS_STORAGE_KEY } from './recents';
 import { usePeekSession, type PeekSession } from './session';
 
-const mocks = vi.hoisted(() => ({ lookup: vi.fn(), read: vi.fn() }));
+const mocks = vi.hoisted(() => ({ lookup: vi.fn(), read: vi.fn(), forget: vi.fn() }));
 vi.mock('./links', async (original) => ({
   ...await original<typeof import('./links')>(),
   lookupParcel: mocks.lookup,
   readParcelLink: mocks.read,
+  forgetParcelLink: mocks.forget,
 }));
 
 const signIn = vi.fn();
@@ -29,6 +30,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   mocks.lookup.mockResolvedValue({ id: LINK_ID, key: OWNER_KEY, view: pendingView() });
   mocks.read.mockResolvedValue(testView());
+  mocks.forget.mockResolvedValue(undefined);
 });
 afterEach(() => {
   forgetAllRecents();
@@ -63,6 +65,21 @@ describe('PeekRoot', () => {
     expect(within(door).getByLabelText('Tracking number or link')).toHaveValue('');
     expect(door.querySelector(`[data-parcel-link="${LINK_ID}"]`)).toHaveAttribute('href', `/p/${LINK_ID}`);
     expect(screen.getByRole('dialog', { name: 'Parcel details' })).toContainElement(document.querySelector('.peekp-main'));
+  });
+
+  it('lets a lookup take the place of its number’s start, looked up here a minute before', async () => {
+    const start = pendingView(OTHER_LINK_ID);
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: {
+      link: { ...start.link, createdAt: new Date(Date.now() - 60_000).toISOString() },
+      parcel: { ...start.parcel, trackingNumber: '1234567' },
+      numberHint: null,
+    } });
+    render(<PeekRoot session={visitor} />);
+    await track();
+    await waitFor(() => expect(location.pathname).toBe(`/p/${LINK_ID}`));
+    expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY });
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+    expect(mocks.forget).toHaveBeenCalledWith(OTHER_LINK_ID, OWNER_KEY);
   });
 
   it('opens a parcel of the device over the door, and closes it back to the door’s own step in the history', async () => {

@@ -228,6 +228,10 @@ Key server modules:
     copy stays, marked no longer updated, without its key or link notes, and is never read
     again; a new lookup of the same number replaces it. A copy of a link someone shared goes,
     since the 404 doesn't say why it ended.
+  - A lookup whose number starts with the number of one the browser, or the iPhone or Android
+    app, looked up at most 10 minutes earlier replaces that one when it has no scan yet and
+    no name or archive date from the device: it was the number half typed, and its link is
+    deleted on the server as "Forget it now" would.
   - Archiving a parcel is the browser's alone, as in the apps: its page offers Archive among
     its actions once the journey is over, and at its foot before then. The list folds the
     archived parcels at its end, never leads with one and doesn't read them in the

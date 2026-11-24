@@ -7,6 +7,8 @@ import {
   forgetRecent,
   freezeRecent,
   frozenOnTheWay,
+  HALF_TYPED_MS,
+  halfTypedLookups,
   hasUnopenedNews,
   markRecentSeen,
   MAX_RECENTS,
@@ -309,5 +311,39 @@ describe('news since this device last opened a parcel', () => {
     expect(marked()).toBe(false);
     rememberParcel({ id: LINK_ID, view: scanned('2026-11-15T11:00:00Z'), now: NOW + 2 });
     expect(marked()).toBe(true);
+  });
+});
+
+describe('a number half typed', () => {
+  // Looked up here a minute before NOW, with no scan yet.
+  const halfTyped = (number = '1234567', overrides: { stages?: ('pending' | 'in_transit')[]; createdAt?: string } = {}) => {
+    const view = testView({ id: OTHER_LINK_ID, parcel: { trackingNumber: number, syncStatus: 'pending' }, stages: overrides.stages ?? ['pending'] });
+    return { ...view, link: { ...view.link, createdAt: overrides.createdAt ?? new Date(NOW - 60_000).toISOString() } };
+  };
+
+  it('is the start of the number looked up next, minutes later', () => {
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: halfTyped(), now: NOW - 60_000 });
+    expect(halfTypedLookups('1234567899', NOW).map(({ id }) => id)).toEqual([OTHER_LINK_ID]);
+    // Spaces and case are the number's spelling, not another number.
+    expect(halfTypedLookups('12345 67899', NOW).map(({ id }) => id)).toEqual([OTHER_LINK_ID]);
+    // The same number, a number it doesn't start, or one shorter is another lookup.
+    expect(halfTypedLookups('1234567', NOW)).toEqual([]);
+    expect(halfTypedLookups('2234567899', NOW)).toEqual([]);
+    expect(halfTypedLookups('123456', NOW)).toEqual([]);
+  });
+
+  it('stays once it is older, has a scan, is named or archived here, or isn’t this device’s lookup', () => {
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: halfTyped(), now: NOW });
+    expect(halfTypedLookups('1234567899', NOW + HALF_TYPED_MS + 1)).toEqual([]);
+    rememberParcel({ id: OTHER_LINK_ID, view: halfTyped('1234567', { stages: ['pending', 'in_transit'] }), now: NOW });
+    expect(halfTypedLookups('1234567899', NOW)).toEqual([]);
+    rememberParcel({ id: OTHER_LINK_ID, view: halfTyped(), name: 'Shoes', now: NOW });
+    expect(halfTypedLookups('1234567899', NOW)).toEqual([]);
+    rememberParcel({ id: OTHER_LINK_ID, view: halfTyped(), name: null, now: NOW });
+    archiveRecent(OTHER_LINK_ID, true, NOW);
+    expect(halfTypedLookups('1234567899', NOW)).toEqual([]);
+    forgetAllRecents();
+    rememberParcel({ id: OTHER_LINK_ID, view: halfTyped(), now: NOW });
+    expect(halfTypedLookups('1234567899', NOW)).toEqual([]);
   });
 });

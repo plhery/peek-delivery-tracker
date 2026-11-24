@@ -886,6 +886,8 @@ class ParcelStore(
         } else if (isGuest) {
             parcel = device.add(request)
             session.checkGeneration(generation)
+            // The lookups it took the place of, such as the start of its number typed before, leave the list with it.
+            parcels = device.list()
             // Its carrier answers in a moment: ask again soon.
             beginDevicePolling()
             val language = localizer.language

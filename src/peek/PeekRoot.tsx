@@ -3,10 +3,10 @@ import { flushSync } from 'react-dom';
 import { whenIdle } from '../lib/idle';
 import { AlertEveryParcel } from './alertsForAll';
 import { FrontDoor, type TrackedParcel } from './FrontDoor';
-import type { ParcelLinkView } from './links';
+import { forgetParcelLink, type ParcelLinkView } from './links';
 import { parcelCode } from './parcelCode';
 import { NoticeToast } from './parcel/Toast';
-import { rememberParcel } from './recents';
+import { forgetRecent, halfTypedLookups, rememberParcel } from './recents';
 import { openParcelLink, parcelLinkPath, useParcelLinkRoute } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 import { PeekSessionProvider, type PeekSession } from './session';
@@ -64,8 +64,15 @@ export function PeekRoot({ session, serverLinkId = null }: {
   }, []);
 
   const onTracked = useCallback(({ id, key, response }: TrackedParcel) => {
+    // The start of this number, looked up here minutes ago and with no scan yet, was the number half typed: this
+    // lookup takes its place, here and on the service.
+    const halfTyped = halfTypedLookups(response.parcel.trackingNumber).filter((recent) => recent.id !== id);
     // The owner key is given once: it is on the device before anything else happens.
     rememberParcel({ id, key, view: response });
+    for (const recent of halfTyped) {
+      void forgetParcelLink(recent.id, recent.key).catch(() => undefined);
+      forgetRecent(recent.id);
+    }
     reveal(id, response);
   }, [reveal]);
   const onSample = useCallback((sample: ParcelLinkView) => reveal(SAMPLE_LINK_ID, sample), [reveal]);

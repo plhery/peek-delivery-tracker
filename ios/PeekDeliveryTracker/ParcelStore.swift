@@ -701,6 +701,8 @@ final class ParcelStore: ObservableObject {
         } else if isGuest {
             parcel = try await device.add(request)
             try session.checkGeneration(generation)
+            // A lookup can take others' places, such as the start of its number looked up a minute before.
+            parcels = device.list()
             // Its carrier answers in a moment: ask again soon.
             beginDevicePolling()
             let language = localizer.language

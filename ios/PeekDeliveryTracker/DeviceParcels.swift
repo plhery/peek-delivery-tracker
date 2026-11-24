@@ -40,6 +40,9 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// never read again, until it is removed here or a new lookup of its number takes its place. Nil while the service
     /// has it.
     var frozen: String? = nil
+    /// When the service made its link, as the answer that brought the parcel here said. Nil on a parcel kept before
+    /// this was noted.
+    var linkCreatedAt: String? = nil
 
     var isViewer: Bool { viewer == true }
     var isMuted: Bool { muted == true }
@@ -420,6 +423,8 @@ final class DeviceParcels {
     /// time, up to an hour.
     static let alertRetryFirst: TimeInterval = 60
     static let alertRetryLongest: TimeInterval = 60 * 60
+    /// How long after its lookup a number can still be the start of the next one typed.
+    static let halfTypedFor: TimeInterval = 10 * 60
 
     private let client: DeviceParcelClient?
     private let storage: any DeviceParcelStorage
@@ -544,6 +549,7 @@ final class DeviceParcels {
         var entry = DeviceParcel(linkID: response.link.id, label: request.label ?? "", archivedAt: nil,
                                  parcel: Parcel(shared: response.package, link: response.link), checkedAt: now(),
                                  postcodeGiven: request.dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil)
+        entry.linkCreatedAt = response.link.createdAt
         entry.startSeen()
         // A copy no longer updated of the same parcel or number gives way to the new lookup, and leaves it its name.
         let superseded = entries.filter { Self.supersedes(entry.parcel, $0, number: request.trackingNumber) }
@@ -561,6 +567,12 @@ final class DeviceParcels {
                 entry.muted = old.muted
             }
         }
+        // The start of this number, looked up here minutes ago and with no scan yet, was the number half typed: a lookup
+        // from Add takes its place, here and on the service.
+        if id == nil {
+            let number = entry.parcel.trackingNumber.nonEmpty ?? request.trackingNumber
+            while let start = entries.firstIndex(where: { halfTyped($0, of: number) }) { giveWay(at: start, client) }
+        }
         entries.append(entry)
         keys[entry.linkID] = response.key
         save()
@@ -573,7 +585,28 @@ final class DeviceParcels {
     /// iPhone's own is forgotten on the service, and its notifications are turned off.
     private func removeTwin(of parcelID: UUID, besides linkID: String, _ client: DeviceParcelClient) -> DeviceParcel? {
         guard let twin = entries.firstIndex(where: { $0.parcel.id == parcelID && $0.linkID != linkID }) else { return nil }
-        let old = entries.remove(at: twin)
+        return giveWay(at: twin, client)
+    }
+
+    /// Whether `entry` is this iPhone's own lookup of the start of `number`, made here within the last minutes and with
+    /// no scan yet: the number half typed, which the lookup of the whole number takes the place of. An older lookup, one
+    /// with a scan, one named or archived here, a copy no longer updated and someone else's link all stay.
+    private func halfTyped(_ entry: DeviceParcel, of number: String) -> Bool {
+        let typed = CarrierCatalog.normalize(number)
+        let start = CarrierCatalog.normalize(entry.parcel.trackingNumber)
+        guard keys[entry.linkID] != nil, !entry.isViewer, !entry.isFrozen, entry.archivedAt == nil, entry.label.isEmpty,
+              !start.isEmpty, typed.count > start.count, typed.hasPrefix(start),
+              entry.parcel.trackingEvents.allSatisfy({ $0.stage == .pending }),
+              let made = entry.linkCreatedAt.flatMap(DateParser.date) else { return false }
+        let age = now().timeIntervalSince(made)
+        return age >= 0 && age <= Self.halfTypedFor
+    }
+
+    /// Takes an entry out for another to take its place. Its link of this iPhone's own is forgotten on the service, or on
+    /// a later refresh when it can't be told yet, and its notifications are turned off.
+    @discardableResult
+    private func giveWay(at index: Int, _ client: DeviceParcelClient) -> DeviceParcel {
+        let old = entries.remove(at: index)
         let key = keys.removeValue(forKey: old.linkID)
         if let key { forgetting[old.linkID] = key }
         if key != nil || old.alertToken != nil {
@@ -683,6 +716,7 @@ final class DeviceParcels {
                 continue
             }
             var entry = DeviceParcel(linkID: linkID, label: name ?? "", archivedAt: nil, parcel: parcel, checkedAt: now())
+            entry.linkCreatedAt = response.link.createdAt
             entry.startSeen()
             entries.append(entry)
         }
@@ -1017,6 +1051,7 @@ final class DeviceParcels {
         }
         var entry = DeviceParcel(linkID: linkID, label: label ?? "", archivedAt: nil,
                                  parcel: shared, checkedAt: now())
+        entry.linkCreatedAt = response.link.createdAt
         entry.startSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
         if let left = forgotten.first(where: { $0.linkID == linkID }) {
@@ -1040,6 +1075,7 @@ final class DeviceParcels {
         let linkID = response.link.id
         let old = entries[index]
         entries[index].linkID = linkID
+        entries[index].linkCreatedAt = response.link.createdAt
         entries[index].viewer = nil
         entries[index].canKeep = nil
         entries[index].take(Parcel(shared: response.package, link: response.link))

@@ -74,8 +74,8 @@ final class DeviceParcelTests: XCTestCase {
         )
     }
 
-    private func link(_ id: String, shared: Bool = true) -> ParcelLink {
-        ParcelLink(id: id, role: .owner, kind: .lookup, createdAt: "2026-10-01T08:00:00Z", numberShown: true, canKeep: true,
+    private func link(_ id: String, shared: Bool = true, createdAt: String = "2026-10-01T08:00:00Z") -> ParcelLink {
+        ParcelLink(id: id, role: .owner, kind: .lookup, createdAt: createdAt, numberShown: true, canKeep: true,
                    showNumber: false, gift: false, shared: shared)
     }
 
@@ -807,6 +807,112 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(loaded.keys, [:])
         let saved = try JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: JSONEncoder.deliveryTracker.encode([copy]))
         XCTAssertEqual(saved, [copy])
+    }
+
+    /// This iPhone's own lookup of the start of a number, with no scan yet, whose link the service made at `made`.
+    private func halfTyped(_ number: String = "1234567", carrier: CarrierID = .dhl, stage: TrackingStage? = .pending,
+                           made: Date?) -> DeviceParcel {
+        var entry = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil,
+                                 parcel: Parcel(shared: package(UUID(), number: number, carrier: carrier, stage: stage, sync: .pending)),
+                                 checkedAt: made ?? Date(timeIntervalSince1970: 1_800_000_000))
+        entry.linkCreatedAt = made.map { DateParser.isoString($0) }
+        return entry
+    }
+
+    func testALookupTakesThePlaceOfTheStartOfItsNumberLookedUpHereAMinuteBefore() async throws {
+        let start = UUID(), whole = UUID()
+        var now = Date(timeIntervalSince1970: 1_800_000_000)
+        let startKey = String(repeating: "s", count: 43)
+        let first = PublicLookupResponse(link: link("22222222222A", createdAt: DateParser.isoString(now)), key: startKey,
+                                         package: package(start, number: "1234567", stage: .pending, sync: .pending))
+        let second = PublicLookupResponse(link: link("22222222222B", createdAt: DateParser.isoString(now + 60)), key: key,
+                                          package: package(whole, number: "1234567899", stage: .pending, sync: .pending))
+        let storage = Memory()
+        let calls = Calls()
+        var service = client(calls)
+        service.lookup = { request in
+            calls.add("lookup \(request.trackingNumber)")
+            return request.trackingNumber == "1234567" ? first : second
+        }
+        service.forget = { linkID, key in calls.add("forget \(linkID) \(key.prefix(1))") }
+        let device = DeviceParcels(client: service, storage: storage, now: { now })
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data()) }
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        session.showWelcome()
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
+                                deviceNotifications: quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        try await store.add(trackingNumber: "1234567", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+        await device.registerAlerts(token: "token1", locale: .en)
+        XCTAssertEqual(store.parcels.map(\.id), [start])
+
+        // The whole number a minute later: the start leaves the list at once, and the service forgets it with its key.
+        now += 60
+        try await store.add(trackingNumber: "1234567899", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+        XCTAssertEqual(store.parcels.map(\.id), [whole])
+        XCTAssertEqual(device.list().map(\.id), [whole])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222B"])
+        XCTAssertEqual(storage.keys, ["22222222222B": key])
+        for _ in 0..<200 where storage.forgetting != [:] || !calls.all.contains(where: { $0.hasPrefix("forget") }) { await Task.yield() }
+        XCTAssertEqual(Array(calls.all.suffix(3)), ["lookup 1234567899", "unalert 22222222222A token1", "forget 22222222222A s"])
+        XCTAssertEqual(storage.forgetting, [:])
+    }
+
+    /// Whether a lookup of `number` takes `entry`'s place on a device that holds it, with its key unless it is someone
+    /// else's or a copy no longer updated. The service forgets the entry's link exactly when it gives way.
+    private func givesWay(_ entry: DeviceParcel, to number: String, now: Date) async throws -> Bool {
+        let storage = Memory()
+        storage.parcels = [entry]
+        if !entry.isViewer, !entry.isFrozen { storage.keys = [entry.linkID: key] }
+        let calls = Calls()
+        let found = PublicLookupResponse(link: link("22222222222B", createdAt: DateParser.isoString(now)), key: key,
+                                         package: package(UUID(), number: number, stage: .pending, sync: .pending))
+        let device = DeviceParcels(client: client(calls, lookup: found), storage: storage, now: { now })
+        _ = try await device.add(CreatePackageRequest(trackingNumber: number, carrier: .dhl))
+        let gone = !device.list().contains { $0.id == entry.parcel.id }
+        for _ in 0..<200 where gone && !calls.all.contains("forget \(entry.linkID)") { await Task.yield() }
+        XCTAssertEqual(calls.all.contains("forget \(entry.linkID)"), gone)
+        return gone
+    }
+
+    func testOnlyTheStartOfTheNumberLookedUpHereMinutesBeforeWithNoScanYetGivesWay() async throws {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let minuteAgo = now - 60
+        let tenMinutes = try await givesWay(halfTyped(made: now - DeviceParcels.halfTypedFor), to: "1234567899", now: now)
+        XCTAssertTrue(tenMinutes)
+        // Capitals and spaces are the number's spelling, not another number.
+        let spelled = try await givesWay(halfTyped("abc 1234", made: minuteAgo), to: "ABC1234567", now: now)
+        XCTAssertTrue(spelled)
+
+        var named = halfTyped(made: minuteAgo)
+        named.label = "Shoes"
+        var archived = halfTyped(made: minuteAgo)
+        archived.archivedAt = DateParser.isoString(minuteAgo)
+        var frozen = halfTyped(made: minuteAgo)
+        frozen.frozen = DateParser.isoString(minuteAgo)
+        var theirs = halfTyped(made: minuteAgo)
+        theirs.viewer = true
+        let stays: [(String, DeviceParcel, String)] = [
+            ("Older", halfTyped(made: now - DeviceParcels.halfTypedFor - 1), "1234567899"),
+            ("Kept before the time of its link was noted", halfTyped(made: nil), "1234567899"),
+            ("With a scan", halfTyped(stage: .inTransit, made: minuteAgo), "1234567899"),
+            ("Named here", named, "1234567899"),
+            ("Archived here", archived, "1234567899"),
+            ("No longer updated", frozen, "1234567899"),
+            ("Someone else's", theirs, "1234567899"),
+            ("The same number", halfTyped("1234567899", carrier: .ups, made: minuteAgo), "1234567899"),
+            ("Not its start", halfTyped("1234568", made: minuteAgo), "1234567899"),
+            ("Longer", halfTyped("1234567899", made: minuteAgo), "1234567"),
+        ]
+        for (why, entry, number) in stays {
+            let gone = try await givesWay(entry, to: number, now: now)
+            XCTAssertFalse(gone, why)
+        }
     }
 
     /// While the server restarts, its proxy answers "404 page not found" as text: the server failing, and nothing on

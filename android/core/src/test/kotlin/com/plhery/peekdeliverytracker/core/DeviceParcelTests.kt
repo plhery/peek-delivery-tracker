@@ -1342,6 +1342,118 @@ class DeviceParcelTests {
         )
     }
 
+    /** A lookup made here of `number`, `ago` seconds before `now`, with no scan yet unless `stage` is one. */
+    private fun lookedUp(linkId: String, number: String, now: Instant, ago: Long = 60, stage: TrackingStage = TrackingStage.Pending): DeviceParcel {
+        val id = UUID.randomUUID()
+        return parcel(linkId, "", id, at = date(now), pkg = pkg(id, number = number, stage = stage, sync = SyncStatus.Pending))
+            .copy(linkCreatedAt = now.minusSeconds(ago).toString())
+    }
+
+    @Test
+    fun theStartOfTheNumberLookedUpHereMinutesBeforeGivesWayToIt() = runTest {
+        val now = Instant.parse("2026-11-20T10:00:00Z")
+        val fresh = UUID.randomUUID()
+        val storage = Memory()
+        val (startKey, shorterKey) = "a".repeat(43) to "b".repeat(43)
+        storage.keys = mapOf("22222222222A" to startKey, "22222222222B" to shorterKey)
+        storage.parcels = listOf(
+            lookedUp("22222222222A", "1234567", now).copy(alertToken = "token1"),
+            // Ten minutes before, at most.
+            lookedUp("22222222222B", "12345", now, ago = DeviceParcels.halfTypedFor.toLong()),
+        )
+        val calls = Calls()
+        var reachable = false
+        val lookup = PublicLookupResponse(
+            link = link("22222222222Z"), key = key, parcel = pkg(fresh, number = "1234567899", stage = TrackingStage.Pending, sync = SyncStatus.Pending),
+        )
+        val forgets = mutableListOf<Pair<String, String>>()
+        val device = device(
+            client(calls, lookup = lookup).replacing(forget = { linkId, given ->
+                forgets += linkId to given
+                if (!reachable) throw IOException("offline")
+            }),
+            storage, this, now = { now },
+        )
+
+        val added = device.add(CreatePackageRequest(trackingNumber = "1234567899", carrier = CarrierId.Dhl))
+        advanceUntilIdle()
+
+        assertEquals(listOf(fresh), device.list().map { it.id })
+        assertEquals("", added.label)
+        assertEquals(listOf("22222222222Z"), storage.parcels.map { it.linkId })
+        assertEquals(lookup.link.createdAt, storage.parcels.single().linkCreatedAt)
+        assertEquals(mapOf("22222222222Z" to key), storage.keys)
+        assertEquals(listOf("lookup 1234567899 dhl", "unalert 22222222222A token1 ${NativePushTransport.Fcm.rawValue}"), calls.all)
+        // Each link is forgotten with its key, and stays to be forgotten until the service is told.
+        assertEquals(listOf("22222222222A" to startKey, "22222222222B" to shorterKey), forgets)
+        assertEquals(mapOf("22222222222A" to startKey, "22222222222B" to shorterKey), storage.pendingForgets)
+
+        reachable = true
+        device.refresh()
+        assertEquals(listOf("22222222222A" to startKey, "22222222222B" to shorterKey), forgets.drop(2))
+        assertEquals(emptyMap<String, String>(), storage.pendingForgets)
+    }
+
+    @Test
+    fun aStartOfTheNumberStaysWhenOlderScannedNamedArchivedFrozenSomeoneElsesTheSameNumberOrNotItsStart() = runTest {
+        val now = Instant.parse("2026-11-20T10:00:00Z")
+        val fresh = UUID.randomUUID()
+        val storage = Memory()
+        val staying = listOf(
+            lookedUp("22222222222A", "1234567", now, ago = DeviceParcels.halfTypedFor.toLong() + 1),
+            lookedUp("22222222222B", "1234567", now, stage = TrackingStage.InTransit),
+            lookedUp("22222222222C", "1234567", now).copy(label = "Shoes"),
+            lookedUp("22222222222D", "1234567", now).copy(archivedAt = "2026-11-20T09:59:30Z"),
+            lookedUp("22222222222E", "1234567", now).copy(frozen = "2026-11-20T09:59:30Z"),
+            // Someone else's link, read without a key.
+            lookedUp("22222222222F", "1234567", now).copy(viewer = true),
+            // The same number spelled otherwise, a number it doesn't start, and one that starts with it.
+            lookedUp("22222222222G", "12345 67899", now),
+            lookedUp("22222222222H", "2234567", now),
+            lookedUp("22222222222I", "12345678999", now),
+            // Kept before the date of its link was noted.
+            lookedUp("22222222222J", "1234567", now).copy(linkCreatedAt = null),
+        )
+        storage.parcels = staying
+        storage.keys = staying.filter { !it.isViewer }.associate { it.linkId to key }
+        val calls = Calls()
+        val lookup = PublicLookupResponse(
+            link = link("22222222222Z"), key = key, parcel = pkg(fresh, number = "1234567899", stage = TrackingStage.Pending, sync = SyncStatus.Pending),
+        )
+        val device = device(client(calls, lookup = lookup), storage, this, now = { now })
+
+        device.add(CreatePackageRequest(trackingNumber = "1234567899", carrier = CarrierId.Dhl))
+        advanceUntilIdle()
+
+        assertEquals(staying.map { it.parcel.id } + fresh, device.list().map { it.id })
+        assertEquals(listOf("lookup 1234567899 dhl"), calls.all)
+        assertEquals(emptyMap<String, String>(), storage.pendingForgets)
+        assertEquals(staying.filter { !it.isViewer }.map { it.linkId } + "22222222222Z", storage.keys.keys.toList())
+    }
+
+    @Test
+    fun theStartOfTheNumberLeavesTheListAsTheLookupJoinsIt() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val now = Instant.parse("2026-11-20T10:00:00Z")
+        val fresh = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(lookedUp("22222222222A", "1234567", now))
+        val lookup = PublicLookupResponse(
+            link = link("22222222222Z"), key = key, parcel = pkg(fresh, number = "1234567899", stage = TrackingStage.Pending, sync = SyncStatus.Pending),
+        )
+        val device = device(client(Calls(), lookup = lookup), storage, backgroundScope, now = { now })
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.load()
+        assertEquals(storage.parcels.map { it.parcel.id }, store.parcels.map { it.id })
+
+        store.add(trackingNumber = "1234567899", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+        assertEquals(listOf(fresh), store.parcels.map { it.id })
+    }
+
     @Test
     fun aParcelWaitingForItsCarrierIsAskedAboutAtOnce() = runTest {
         val id = UUID.randomUUID()

@@ -98,6 +98,11 @@ data class DeviceParcel(
      * they are turned on again.
      */
     val muted: Boolean? = null,
+    /**
+     * When the service made its link, as the answer that brought the parcel here said. Null on a parcel kept before this
+     * was noted.
+     */
+    val linkCreatedAt: String? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
@@ -762,7 +767,7 @@ class DeviceParcels(
         var entry = DeviceParcel(
             linkId = response.link.id, label = request.label ?: "", archivedAt = null,
             parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
-            postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
+            postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null, linkCreatedAt = response.link.createdAt,
         ).startingSeen()
         // A copy the service forgot of the same parcel or number makes way for the new lookup, as on the website, and
         // leaves it its name.
@@ -773,6 +778,11 @@ class DeviceParcels(
             if (old.parcel.id == replacing) {
                 entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted)
             }
+        }
+        // The start of this number, looked up here minutes before and with no scan yet, was the number half typed: this
+        // lookup takes its place, here and on the service.
+        if (replacing == null) {
+            for (start in halfTyped(response.parcel.trackingNumber?.nonEmpty ?: request.trackingNumber)) giveWay(start, client)
         }
         // A carrier changed by a new lookup keeps the notifications as they were set on the parcel's page, before a
         // round can ask for them.
@@ -1002,7 +1012,7 @@ class DeviceParcels(
             }
             entries = entries + DeviceParcel(
                 linkId = linkId, label = name ?: "", archivedAt = null, parcel = Parcel(shared = response.parcel, link = response.link),
-                checkedAt = now().timeIntervalSinceReferenceDate,
+                checkedAt = now().timeIntervalSinceReferenceDate, linkCreatedAt = response.link.createdAt,
             ).startingSeen()
         }
         return Recovery(recovered, null)
@@ -1252,6 +1262,7 @@ class DeviceParcels(
         var entry = DeviceParcel(
             linkId = linkId, label = label?.nonEmpty ?: superseded.name ?: "", archivedAt = null,
             parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
+            linkCreatedAt = response.link.createdAt,
         ).startingSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
         forgotten.firstOrNull { it.linkId.equalsCanonically(linkId) }?.let { left ->
@@ -1276,6 +1287,7 @@ class DeviceParcels(
         val old = entries[index]
         var owned = old.taking(Parcel(shared = response.parcel, link = response.link)).copy(
             linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
+            linkCreatedAt = response.link.createdAt,
         )
         if (!old.linkId.equalsCanonically(linkId)) {
             // Another link's notifications give way to this one's, asked for on the next round.
@@ -1531,10 +1543,17 @@ class DeviceParcels(
      * its notifications are turned off.
      */
     private fun removeTwin(parcelId: UUID, besides: String?, client: DeviceParcelClient): DeviceParcel? {
-        val twin = entries.indexOfFirst { it.parcel.id == parcelId && (besides == null || !it.linkId.equalsCanonically(besides)) }
-        if (twin < 0) return null
-        val old = entries[twin]
-        entries = entries.filterIndexed { index, _ -> index != twin }
+        val twin = entries.firstOrNull { it.parcel.id == parcelId && (besides == null || !it.linkId.equalsCanonically(besides)) } ?: return null
+        giveWay(twin, client)
+        return twin
+    }
+
+    /**
+     * Takes `old` out for another lookup or link to take its place. Its link of this phone's own is forgotten as one
+     * forgotten here would be, on file until the service has been told, and its notifications are turned off.
+     */
+    private fun giveWay(old: DeviceParcel, client: DeviceParcelClient) {
+        entries = entries.filter { it !== old }
         val key = keys.keyOf(old.linkId)
         keys = keys.setting(old.linkId, null)
         if (key != null) pendingForgets = pendingForgets.setting(old.linkId, key)
@@ -1544,7 +1563,24 @@ class DeviceParcels(
                 if (key != null) forgetIfPending(old.linkId, key, client)
             }
         }
-        return old
+    }
+
+    /**
+     * This phone's own lookups that one of `number` takes the place of: the start of that number, looked up here within
+     * [halfTypedFor] and with no scan yet, which was the number half typed. An older lookup, one with a scan, one named,
+     * archived or no longer updated here, and someone else's link all stay.
+     */
+    private fun halfTyped(number: String): List<DeviceParcel> {
+        val typed = CarrierCatalog.normalize(number)
+        val at = now().timeIntervalSinceReferenceDate
+        return entries.filter { entry ->
+            val start = CarrierCatalog.normalize(entry.parcel.trackingNumber)
+            val made = entry.linkCreatedAt?.let(DateParser::date) ?: return@filter false
+            val age = at - made.timeIntervalSinceReferenceDate
+            keys.keyOf(entry.linkId) != null && !entry.isViewer && !entry.isFrozen && entry.archivedAt == null && entry.label.isEmpty() &&
+                start.isNotEmpty() && typed.characterCount > start.characterCount && typed.hasCanonicalPrefix(start) &&
+                age >= 0 && age <= halfTypedFor && entry.parcel.trackingEvents.all { it.stage == TrackingStage.Pending }
+        }
     }
 
     /** The parcel was opened on this phone (#72): what it tells now is seen, and its dot goes. Nothing leaves the device. */
@@ -1576,6 +1612,9 @@ class DeviceParcels(
 
         /** How long a check said to be on its way is waited for, in seconds, as the website does. */
         const val checkReadFor: Double = 60.0
+
+        /** How long after its lookup a number can still be the start of the next one typed, in seconds, as on the website. */
+        const val halfTypedFor: Double = 10.0 * 60
 
         /** How many parcels one round asks notifications for; the rest wait for the next round, at the list's next refresh. */
         const val alertsPerRound = 25

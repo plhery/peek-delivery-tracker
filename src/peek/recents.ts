@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import { normalizeTrackingNumber } from '../lib/carriers';
 import { currentEvent, isFinal } from '../lib/stages';
 import type { CarrierId, Stage, SyncStatus } from '../types';
 import { forgetAllLinkNotes, forgetLinkNote } from './deviceNotes';
@@ -290,6 +291,26 @@ export function archiveRecent(id: string, archived: boolean, now = Date.now()): 
   // Undefined is left out of what is saved.
   const archivedAt = archived ? new Date(now).toISOString() : undefined;
   write(list.map((recent) => recent.id === id ? { ...recent, archivedAt } : recent));
+}
+
+/** How long after its lookup a number can still be the start of the next one typed. */
+export const HALF_TYPED_MS = 10 * 60_000;
+
+/**
+ * This device's own lookups that one of `number` takes the place of: the start of that number, looked up here within
+ * the last minutes and with no scan yet, which was the number half typed. An older lookup, one with a scan, one named
+ * or archived here, and a link opened from someone else all stay.
+ */
+export function halfTypedLookups(number: string, now = Date.now()): (RecentParcel & { key: string })[] {
+  const typed = normalizeTrackingNumber(number);
+  return load().list.filter((recent): recent is RecentParcel & { key: string } => {
+    const { link, parcel } = recent.snapshot;
+    const start = normalizeTrackingNumber(parcel.trackingNumber);
+    const age = now - Date.parse(link.createdAt);
+    return Boolean(recent.key) && !recent.frozen && !recent.archivedAt && !recent.name && link.kind === 'lookup'
+      && start.length > 0 && typed.length > start.length && typed.startsWith(start)
+      && age >= 0 && age <= HALF_TYPED_MS && parcel.events.every((event) => event.stage === 'pending');
+  });
 }
 
 /** Drops the device's copy, with what it noted about the link. The server's is forgotten with `forgetParcelLink`. */

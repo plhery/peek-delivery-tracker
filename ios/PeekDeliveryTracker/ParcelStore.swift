@@ -1720,6 +1720,8 @@ final class ParcelStore: ObservableObject {
         let calendar = Calendar.current
         var transitions = Set(DeliveryWidgetDays.midnights(after: now))
         for parcel in parcels {
+            // The end of a delivery round, at midnight on the carrier's clock: the list then puts the parcel elsewhere.
+            if parcel.isOnDeliveryRound(now: now), let end = parcel.deliveryRoundEnd, end > now { transitions.insert(end) }
             for value in [parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom].compactMap({ $0 }) {
                 guard let date = DateParser.deliveryDate(value) else { continue }
                 for offset in -1...1 {

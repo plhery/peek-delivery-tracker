@@ -2603,6 +2603,49 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: ends).first).roundEndsAt)
     }
 
+    /// The round ends at midnight on the carrier's clock, which may fall between two of the device's: from that moment,
+    /// not from the device's next midnight, the widget takes the parcel out of Next up and Arriving today, as the app
+    /// does, and not before it.
+    @MainActor
+    func testAParcelWhoseRoundEndedStopsLeadingTheWidgetsCards() throws {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        localizer.language = .en
+        let calendar = Calendar.current
+        let thursday = try XCTUnwrap(DateParser.deliveryDate("2026-11-12"))
+        let morning = try XCTUnwrap(calendar.date(bySettingHour: 9, minute: 0, second: 0, of: thursday))
+        // The carrier's day ends at 18:00 on this device's clock: its zone is six hours east of the device's.
+        let ends = try XCTUnwrap(calendar.date(bySettingHour: 18, minute: 0, second: 0, of: thursday))
+        let evening = ends.addingTimeInterval(30 * 60)
+        let outID = UUID(), laterID = UUID()
+        var out = makeParcel(id: outID, events: [
+            event(outID, .inTransit, DateParser.isoString(morning.addingTimeInterval(-20 * 3_600))),
+            event(outID, .outForDelivery, DateParser.isoString(morning.addingTimeInterval(-3_600))),
+        ])
+        out.expectedDelivery = "2026-11-12"
+        out.deliveryRoundEndsAt = DateParser.isoString(ends)
+        var coming = makeParcel(id: laterID, events: [
+            event(laterID, .inTransit, DateParser.isoString(morning.addingTimeInterval(-2 * 3_600))),
+        ])
+        coming.expectedDelivery = "2026-11-14"
+        let parcels = [out, coming]
+
+        // Published in the morning, during the round: the parcel out for delivery is Next up.
+        let published = ParcelStore.widgetDeliveries(of: parcels, localizer: localizer, now: morning)
+        XCTAssertEqual(published.first { $0.nextUp == true }?.id, outID)
+        XCTAssertEqual(ParcelOrganizer.nextDelivery(from: parcels, now: evening)?.id, laterID)
+
+        // The widget, the app closed since the morning: still Next up a minute before the round ends.
+        let before = DeliveryWidgetSelection.listed(published, now: ends.addingTimeInterval(-60))
+        XCTAssertEqual(before.first { $0.nextUp == true }?.id, outID)
+        XCTAssertEqual(before.first { $0.id == outID }?.section, "today")
+        // And once it has ended, as the app has it.
+        let listed = DeliveryWidgetSelection.listed(published, now: evening)
+        XCTAssertEqual(listed.first { $0.nextUp == true }?.id, laterID)
+        XCTAssertEqual(DeliveryWidgetList.cardOrder(listed).first?.id, laterID)
+        XCTAssertEqual(listed.first { $0.id == outID }?.section, "attention")
+        XCTAssertTrue(DeliveryWidgetDays.changes(in: published, after: morning).contains(ends))
+    }
+
     @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()

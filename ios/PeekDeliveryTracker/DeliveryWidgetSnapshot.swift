@@ -61,10 +61,13 @@ struct DeliveryWidgetWording: Codable, Equatable, Hashable, Sendable {
 
     var sourceZone: String? = nil
 
+    /// The moment it holds from in `zone`: a midnight where the app wrote it is that day's midnight in `zone`; another
+    /// moment, such as the end of a delivery round, is the same instant everywhere.
     func midnight(in zone: TimeZone = .current) -> Date {
         guard let sourceZone, let source = TimeZone(identifier: sourceZone) else { return from }
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = source
+        guard calendar.startOfDay(for: from) == from else { return from }
         let day = calendar.dateComponents([.year, .month, .day], from: from)
         calendar.timeZone = zone
         return calendar.date(from: day) ?? from

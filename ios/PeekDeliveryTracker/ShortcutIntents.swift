@@ -46,9 +46,10 @@ struct NextDeliveryIntent: AppIntent {
 enum NextDeliveryAnswer {
     static func text(snapshot: DeliveryWidgetSnapshot?, copy: ExtensionLocalizer, now: Date = Date()) -> String {
         guard let snapshot else { return copy.text("siri.openPeek") }
-        // The widget also keeps the parcels delivered in the last day, after those on their way.
-        let onTheWay = snapshot.parcels.filter { $0.deliveredAt == nil }
-        guard let next = onTheWay.first?.worded(at: now) else { return copy.text("app.noneOnWay") }
+        // The widget also keeps the parcels delivered in the last day, after those on their way. As it lists them now:
+        // one whose delivery round has ended since the app published follows those still out for delivery.
+        let onTheWay = DeliveryWidgetSelection.listed(snapshot.parcels, now: now).filter { $0.deliveredAt == nil }
+        guard let next = onTheWay.first else { return copy.text("app.noneOnWay") }
         let more = onTheWay.count - 1
         let key: String
         if more == 0 {

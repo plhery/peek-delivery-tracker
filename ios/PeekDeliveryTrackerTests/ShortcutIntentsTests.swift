@@ -36,6 +36,20 @@ final class ShortcutIntentsTests: XCTestCase {
         )
     }
 
+    /// Once a parcel's delivery round has ended, Siri names the parcel the widget now lists first.
+    func testNamesTheWidgetsFirstParcelOnceARoundEnds() {
+        let now = Date()
+        var ended = parcel("Coffee beans", detail: "Out for delivery", outForDelivery: true)
+        ended.roundEndsAt = now.addingTimeInterval(-60)
+        let stillOut = parcel("Lamp", carrier: "UPS", detail: "Out for delivery", outForDelivery: true)
+        let published = snapshot([ended, stillOut])
+        XCTAssertEqual(DeliveryWidgetSelection.listed(published.parcels, now: now).first?.label, "Lamp")
+        XCTAssertEqual(
+            NextDeliveryAnswer.text(snapshot: published, copy: english, now: now),
+            "Your next delivery is “Lamp” with UPS: Out for delivery. 1 more parcel is on the way."
+        )
+    }
+
     func testNamesTheWidgetsFirstParcelAndCountsTheOthers() {
         let first = parcel("Coffee beans", detail: "Out for delivery", outForDelivery: true)
         let later = [parcel("Lamp", carrier: "UPS"), parcel("Book", carrier: "GLS")]

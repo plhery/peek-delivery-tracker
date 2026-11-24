@@ -104,8 +104,8 @@ extension Parcel {
     }
 }
 
-/// The strip in Peek AI's sheet: days with their chance, the carrier's date ringed; or, out for delivery, two hours to
-/// a cell.
+/// The strip in Peek AI's sheet: days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours
+/// to a cell.
 struct PeekAiStrip: Equatable {
     enum Kind { case days, hours }
 
@@ -115,8 +115,10 @@ struct PeekAiStrip: Equatable {
         let over: String
         /// The bold line: the day of the month, or the hour.
         let main: String
-        let likely: Bool
-        let maybe: Bool
+        /// Its chance: the day's, or its two hours' share of the carrier's deliveries.
+        let chance: Double
+        /// How strongly it is shaded, from 0 (no shade) to 4 (the likeliest): `peekAiShades`.
+        var level = 0
         let carrier: Bool
         let past: Bool
         var id: String { key }
@@ -124,6 +126,20 @@ struct PeekAiStrip: Equatable {
 
     let kind: Kind
     let cells: [Cell]
+}
+
+/// Under this chance a cell has no shade: a day or two hours that seldom see a delivery.
+private let peekAiUnshadedBelow = 0.03
+
+/// Each cell's shade, from its chance against the likeliest cell still to come: 4 at 85 % of it or more (the likeliest),
+/// 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in 100. Four steps a reader tells apart at a glance. Hours
+/// gone by are unshaded: the parcel did not come in them.
+func peekAiShades(_ cells: [(chance: Double, past: Bool)]) -> [Int] {
+    let top = max(0, cells.filter { !$0.past }.map(\.chance).max() ?? 0)
+    return cells.map { chance, past in
+        if past || chance < peekAiUnshadedBelow || top <= 0 { return 0 }
+        return chance >= 0.85 * top ? 4 : chance >= 0.55 * top ? 3 : chance >= 0.25 * top ? 2 : 1
+    }
 }
 
 extension Localizer {
@@ -218,7 +234,21 @@ extension Localizer {
             : format.localizedString(from: DateComponents(weekOfMonth: -(days / 7)))
     }
 
-    /// Why Peek AI thinks so, about this parcel: one or two sentences.
+    /// With no carrier date, the last step the parcel took, after the sentence before it.
+    private func peekAiWithLastStep(_ first: String, _ ai: PeekAi, now: Date) -> String {
+        guard let last = ai.last else { return first }
+        let key = switch last.kind {
+        case .depot: "peekAi.last.depot"
+        case .customs: "peekAi.last.customs"
+        case .country: "peekAi.last.country"
+        case .scan: "peekAi.last.scan"
+        }
+        let step = text(key, ["ago": peekAiAgo(last.at, now: now)])
+        // Chinese joins its sentences without a space.
+        return language == .zh ? first + step : "\(first) \(step)"
+    }
+
+    /// Why Peek AI thinks so, about this parcel, in a line under its card: one or two sentences.
     func peekAiWhy(_ ai: PeekAi, carrier: String, now: Date = Date()) -> String {
         switch ai.why {
         case .noOutForDelivery: return text("peekAi.why.noOutForDelivery", ["carrier": carrier])
@@ -226,18 +256,24 @@ extension Localizer {
         case .lateOut: return text("peekAi.why.lateOut", ["carrier": carrier])
         case .missedDate: return text("peekAi.why.missedDate", ["carrier": carrier])
         case .ahead: return text("peekAi.why.ahead", ["carrier": carrier, "date": ai.carrierDay.map(peekAiCalendar) ?? ""])
-        case .noDate:
-            let first = text("peekAi.why.noDate", ["carrier": carrier])
-            guard let last = ai.last else { return first }
-            let key = switch last.kind {
-            case .depot: "peekAi.last.depot"
-            case .customs: "peekAi.last.customs"
-            case .country: "peekAi.last.country"
-            case .scan: "peekAi.last.scan"
-            }
-            let step = text(key, ["ago": peekAiAgo(last.at, now: now)])
-            // Chinese joins its sentences without a space.
-            return language == .zh ? first + step : "\(first) \(step)"
+        case .noDate: return peekAiWithLastStep(text("peekAi.why.noDate", ["carrier": carrier]), ai, now: now)
+        }
+    }
+
+    /// The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's
+    /// word the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went
+    /// out comes after.
+    func peekAiReason(_ ai: PeekAi, carrier: String, now: Date = Date()) -> String {
+        switch ai.why {
+        case .noOutForDelivery: return text("peekAi.reason.noOutForDelivery")
+        case .outForDelivery:
+            return text("peekAi.reason.outForDelivery", [
+                "carrier": carrier, "time": peekAiClock(ai.time ?? ""), "since": peekAiClock(ai.outSince ?? ""),
+            ])
+        case .lateOut: return text("peekAi.reason.lateOut")
+        case .missedDate: return text("peekAi.reason.missedDate")
+        case .ahead: return text("peekAi.reason.ahead")
+        case .noDate: return peekAiWithLastStep(text("peekAi.reason.noDate"), ai, now: now)
         }
     }
 
@@ -248,11 +284,15 @@ extension Localizer {
         return text(ai.says == .notToday ? "peekAi.sure.hour" : "peekAi.sure.parcels", ["n": n])
     }
 
-    /// The strip as VoiceOver reads it: the likely cells still to come, then the carrier's ringed one, "Most likely days:
-    /// Wed 25, Thu 26. DPD’s date: Fri 27", in the language's own list, colon and full stop.
+    /// The strip as VoiceOver reads it, which its shades and ring show: the shaded cells still to come, likeliest first,
+    /// then the carrier's ringed one, "Days, likeliest first: Thu 26, Wed 25, Fri 27. DPD’s date: Fri 27", in the
+    /// language's own list, colon and full stop.
     func peekAiStripSpoken(_ strip: PeekAiStrip, carrier: String) -> String {
         let named = { (cell: PeekAiStrip.Cell) in [cell.over, cell.main].filter { !$0.isEmpty }.joined(separator: " ") }
-        let likely = strip.cells.filter { $0.likely && !$0.past }.map(named)
+        // Cells as likely as each other keep their order in time.
+        let ranked = strip.cells.enumerated().filter { $0.element.level > 0 }
+            .sorted { $0.element.chance != $1.element.chance ? $0.element.chance > $1.element.chance : $0.offset < $1.offset }
+            .map { named($0.element) }
         // Chinese writes full-width marks without spaces, and French a space before its colon.
         let (colon, stop) = switch language {
         case .zh: ("：", "。")
@@ -260,9 +300,9 @@ extension Localizer {
         default: (": ", ". ")
         }
         var parts: [String] = []
-        if !likely.isEmpty {
-            let list = likely.formatted(.list(type: .and, width: .narrow).locale(language.locale))
-            parts.append(text(strip.kind == .hours ? "peekAi.sheet.hours" : "peekAi.sheet.days") + colon + list)
+        if !ranked.isEmpty {
+            let list = ranked.formatted(.list(type: .and, width: .narrow).locale(language.locale))
+            parts.append(text(strip.kind == .hours ? "peekAi.sheet.hoursByChance" : "peekAi.sheet.daysByChance") + colon + list)
         }
         if let ringed = strip.cells.first(where: \.carrier) {
             parts.append(text("peekAi.sheet.carrierDate", ["carrier": carrier]) + colon + named(ringed))
@@ -270,31 +310,38 @@ extension Localizer {
         return parts.joined(separator: stop)
     }
 
-    /// Days with their chance, the carrier's date ringed; or, out for delivery, two hours to a cell, the past ones marked.
+    /// Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell, the past ones
+    /// marked and unshaded.
     func peekAiStrip(_ ai: PeekAi, now: Date = Date()) -> PeekAiStrip? {
+        let shaded = { (cells: [PeekAiStrip.Cell]) in
+            zip(cells, peekAiShades(cells.map { ($0.chance, $0.past) })).map { cell, level in
+                var cell = cell
+                cell.level = level
+                return cell
+            }
+        }
         if let hours = ai.hours, !hours.isEmpty {
             let clock = PeekAi.calendar.dateComponents([.hour, .minute], from: now)
             let hour = Double(clock.hour ?? 0) + Double(clock.minute ?? 0) / 60
             let cells = stride(from: 0, to: hours.count, by: 2).map { index in
                 let pair = hours[index..<min(index + 2, hours.count)]
                 let first = pair[index]
-                let share = pair.reduce(0) { $0 + $1.share }
                 return PeekAiStrip.Cell(
                     key: first.time, over: "", main: deliveryWallClock(Substring(first.time)),
-                    likely: share >= 0.15, maybe: share >= 0.06 && share < 0.15, carrier: false,
+                    chance: pair.reduce(0) { $0 + $1.share }, carrier: false,
                     past: (Double(first.time.prefix(2)) ?? 0) + Double(pair.count) <= hour
                 )
             }
-            return PeekAiStrip(kind: .hours, cells: cells)
+            return PeekAiStrip(kind: .hours, cells: shaded(cells))
         }
         guard let days = ai.days, !days.isEmpty else { return nil }
-        return PeekAiStrip(kind: .days, cells: days.map { entry in
+        return PeekAiStrip(kind: .days, cells: shaded(days.map { entry in
             let date = PeekAi.date(of: entry.day)
             return PeekAiStrip.Cell(
                 key: entry.day, over: date.map(shortWeekday) ?? "",
                 main: date.map { String(PeekAi.calendar.component(.day, from: $0)) } ?? "",
-                likely: entry.p >= 0.25, maybe: entry.p >= 0.08 && entry.p < 0.25, carrier: entry.day == ai.carrierDay, past: false
+                chance: entry.p, carrier: entry.day == ai.carrierDay, past: false
             )
-        })
+        }))
     }
 }

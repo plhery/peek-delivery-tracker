@@ -86,7 +86,7 @@ them in the order written, and Add adds the first unless another is chosen.
 
 Peek AI, the server's `peekAi` on a parcel ([ARCHITECTURE.md](../docs/ARCHITECTURE.md)), is worded
 as the web words it (`PeekAi.swift`): a line on the card, beside the status on Next up, and on the
-parcel's page a short card whose (i) opens the likely days or hours, why, how sure and its switch
+parcel's page a short card whose (i) opens the days or hours shaded by their chance, why, how sure and its switch
 (`PeekAiViews.swift`). It shows only while the parcel is on its way and its call still holds: until
 the moment the server gives (`endsAt`), whatever the device's zone. The sheet closes when it ends.
 One the app cannot read, in a newer server's words, is left out and the parcel kept.

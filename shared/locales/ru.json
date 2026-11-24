@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "{{carrier}}: срок доставки был вчера, но посылка снова в пути.",
   "peekAi.why.ahead": "{{carrier}} указывает {{date}}. Посылка идёт с опережением.",
   "peekAi.why.noDate": "{{carrier}} не указывает дату.",
+  "peekAi.reason.noOutForDelivery": "Посылку ещё не передали курьеру. Большинство посылок, которые отслеживал Peek и которые к этому часу не были у курьера, в тот день не доставили.",
+  "peekAi.reason.outForDelivery": "Большинство посылок {{carrier}}, которые отслеживал Peek, доставили до {{time}} в день передачи курьеру. Эта у курьера с {{since}}.",
+  "peekAi.reason.lateOut": "Уже поздно, а посылка всё ещё у курьера. Большинство посылок, которые отслеживал Peek и которые в это время ещё были у курьера, в тот день не доставили.",
+  "peekAi.reason.missedDate": "У посылки была отметка за последние 24 часа. Большинство посылок, которые отслеживал Peek и которые продолжали двигаться после пропущенного срока, доставили в течение дня-двух.",
+  "peekAi.reason.ahead": "Большинство посылок с похожими отметками, которые отслеживал Peek, доставили раньше даты, названной службой доставки.",
+  "peekAi.reason.noDate": "Peek AI смотрит, сколько шли посылки с похожими отметками, которые отслеживал Peek.",
   "peekAi.last.depot": "Посылка прибыла на склад доставки {{ago}}.",
   "peekAi.last.customs": "Посылка прибыла на таможню {{ago}}.",
   "peekAi.last.country": "Посылка прибыла в страну назначения {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} не называет время",
   "peekAi.carrier.wasDue": "{{carrier}}: срок доставки был вчера",
   "peekAi.sheet.caption": "Чего ожидает Peek AI",
-  "peekAi.sheet.days": "Самые вероятные дни",
-  "peekAi.sheet.hours": "Самое вероятное время",
+  "peekAi.sheet.daysByChance": "Дни, сначала самые вероятные",
+  "peekAi.sheet.hoursByChance": "Время, сначала самое вероятное",
+  "peekAi.sheet.lessLikely": "Менее вероятно",
+  "peekAi.sheet.moreLikely": "Более вероятно",
   "peekAi.sheet.carrierDate": "Дата {{carrier}}",
   "peekAi.sheet.why": "Почему",
   "peekAi.sheet.sure": "Насколько точно",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Для похожих посылок верно в {{n}} случаях из 10.",
   "peekAi.sheet.show": "Показывать Peek AI",
   "peekAi.sheet.showHint": "Только когда у Peek есть веские основания. У большинства посылок такой оценки нет.",
-  "peekAi.sheet.trained": "Peek AI обучен на тысячах посылок, которые отслеживал Peek. Это собственная оценка Peek: {{carrier}} её не обещает."
+  "peekAi.sheet.trained": "Peek AI обучен на посылках, которые отслеживал Peek. Это собственная оценка Peek, а не обещание {{carrier}}."
 }

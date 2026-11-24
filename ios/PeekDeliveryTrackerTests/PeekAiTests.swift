@@ -218,6 +218,26 @@ final class PeekAiTests: XCTestCase {
         XCTAssertEqual(english.peekAiWhy(scanned(hoursAgo: 24 * 20), carrier: "UPS", now: now), "UPS gives no date. Its last scan was 2 weeks ago.")
     }
 
+    /// The sheet says what it goes by: the parcels Peek has followed, the carrier's usual hour before this one's.
+    func testItSaysInItsSheetWhatItGoesBy() {
+        XCTAssertEqual(english.peekAiReason(notToday, carrier: "DPD", now: now),
+                       "It hasn’t gone out for delivery yet. Most parcels Peek has followed that weren’t out by this hour didn’t arrive that day.")
+        XCTAssertEqual(english.peekAiReason(byTime, carrier: "FedEx", now: now),
+                       "Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.")
+        XCTAssertEqual(english.peekAiReason(PeekAi(says: .notToday, why: .lateOut, sure: 0.88), carrier: "DPD", now: now),
+                       "It’s still out for delivery this late. Most parcels Peek has followed that were still out at this hour didn’t arrive that day.")
+        XCTAssertEqual(english.peekAiReason(with(noDate) { $0.why = .missedDate; $0.says = .todayOrTomorrow }, carrier: "DPD", now: now),
+                       "It was scanned in the last 24 hours. Most parcels Peek has followed that kept moving after missing their date arrived within a day or two.")
+        XCTAssertEqual(english.peekAiReason(sooner, carrier: "DPD", now: now),
+                       "Most parcels Peek has followed with scans like this one’s came before the date their carrier gave.")
+        XCTAssertEqual(english.peekAiReason(noDate, carrier: "UPS", now: now),
+                       "Peek AI goes by how long parcels Peek has followed with scans like this one’s took. It reached the delivery depot 2 days ago.")
+        english.language = .zh
+        let reason = english.peekAiReason(noDate, carrier: "UPS", now: now)
+        XCTAssertTrue(reason.hasPrefix(english.text("peekAi.reason.noDate")), reason)
+        XCTAssertFalse(reason.contains("。 "), reason)
+    }
+
     func testItCountsHowOftenItWasRightRoundedDown() {
         XCTAssertEqual(english.peekAiRecord(notToday), "Right 8 times in 10 at this hour.")
         XCTAssertEqual(english.peekAiRecord(noDate), "Right 8 times in 10 on parcels like this one.")
@@ -237,37 +257,49 @@ final class PeekAiTests: XCTestCase {
 
     // MARK: The strip in its sheet
 
-    func testTheStripShowsTheDaysWithTheirChanceTheCarriersDayRinged() throws {
+    /// Each cell is shaded in four steps against the likeliest still to come, none under 3 in 100 or gone by.
+    func testTheStripShadesEachCellInFourStepsAgainstTheLikeliestStillToCome() {
+        XCTAssertEqual(peekAiShades([0.02, 0.06, 0.15, 0.25, 0.36, 0.4].map { ($0, false) }), [0, 1, 2, 3, 4, 4])
+        // The likeliest hours gone by leave the scale to the ones still to come.
+        XCTAssertEqual(peekAiShades([(0.5, true), (0.2, false), (0.1, false)]), [0, 4, 2])
+        XCTAssertEqual(peekAiShades([(0.5, true)]), [0])
+        XCTAssertEqual(peekAiShades([]), [])
+    }
+
+    func testTheStripShowsTheDaysShadedByTheirChanceTheCarriersDayRinged() throws {
         let strip = try XCTUnwrap(english.peekAiStrip(with(noDate) { $0.carrierDay = "2026-11-27" }, now: now))
         XCTAssertEqual(strip.kind, .days)
         XCTAssertEqual(strip.cells.map { "\($0.over) \($0.main)" }, ["Tue 24", "Wed 25", "Thu 26", "Fri 27"])
-        XCTAssertEqual(strip.cells.map { [$0.likely, $0.maybe, $0.carrier] }, [
-            [false, false, false], [true, false, false], [true, false, false], [false, true, true],
-        ])
+        XCTAssertEqual(strip.cells.map(\.level), [1, 3, 4, 2])
+        XCTAssertEqual(strip.cells.map(\.carrier), [false, false, false, true])
     }
 
-    /// VoiceOver reads the strip as one line: the likely days or hours still to come, then the carrier's own.
-    func testTheStripIsSpokenAsTheLikelyCellsStillToComeThenTheCarriers() throws {
+    /// VoiceOver reads the strip as one line, which its shades and ring show: the shaded days or hours still to come,
+    /// likeliest first, then the carrier's own.
+    func testTheStripIsSpokenLikeliestFirstThenTheCarriers() throws {
         let days = try XCTUnwrap(english.peekAiStrip(with(noDate) { $0.carrierDay = "2026-11-27" }, now: now))
-        XCTAssertEqual(english.peekAiStripSpoken(days, carrier: "DPD"), "Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27")
+        XCTAssertEqual(english.peekAiStripSpoken(days, carrier: "DPD"), "Days, likeliest first: Thu 26, Wed 25, Fri 27, Tue 24. DPD’s date: Fri 27")
         let hours = try XCTUnwrap(english.peekAiStrip(byTime, now: now))
-        XCTAssertEqual(english.peekAiStripSpoken(hours, carrier: "FedEx"), "Most likely hours: 14:00")
+        XCTAssertEqual(english.peekAiStripSpoken(hours, carrier: "FedEx"), "Hours, likeliest first: 14:00, 16:00")
 
         english.language = .zh
         let chinese = try XCTUnwrap(english.peekAiStrip(with(noDate) { $0.carrierDay = "2026-11-27" }, now: now))
         let spoken = english.peekAiStripSpoken(chinese, carrier: "DPD")
-        XCTAssertTrue(spoken.hasPrefix(english.text("peekAi.sheet.days") + "："), spoken)
+        XCTAssertTrue(spoken.hasPrefix(english.text("peekAi.sheet.daysByChance") + "："), spoken)
         XCTAssertTrue(spoken.contains("。" + english.text("peekAi.sheet.carrierDate", ["carrier": "DPD"]) + "："), spoken)
         XCTAssertFalse(spoken.contains(": ") || spoken.contains(". "), spoken)
     }
 
-    func testTheStripShowsTheHoursOutForDeliveryTwoToACellThePastOnesFaded() throws {
+    func testTheStripShowsTheHoursOutForDeliveryTwoToACellThePastOnesFadedAndUnshaded() throws {
         let strip = try XCTUnwrap(english.peekAiStrip(byTime, now: now))
         XCTAssertEqual(strip.kind, .hours)
         XCTAssertEqual(strip.cells.map(\.main), ["08:00", "10:00", "12:00", "14:00", "16:00"])
-        XCTAssertEqual(strip.cells.map { [$0.likely, $0.maybe, $0.past] }, [
-            [false, true, true], [true, false, true], [true, false, true], [true, false, false], [false, true, false],
-        ])
+        XCTAssertEqual(strip.cells.map(\.level), [0, 0, 0, 4, 2])
+        XCTAssertEqual(strip.cells.map(\.past), [true, true, true, false, false])
+        // In the morning the midday hours are the likeliest; cells as likely as each other keep their order in time.
+        let morning = try XCTUnwrap(english.peekAiStrip(byTime, now: at(2026, 11, 24, 9, 30)))
+        XCTAssertEqual(morning.cells.map(\.level), [1, 3, 4, 2, 1])
+        XCTAssertEqual(english.peekAiStripSpoken(morning, carrier: "DPD"), "Hours, likeliest first: 12:00, 10:00, 14:00, 08:00, 16:00")
         XCTAssertNil(english.peekAiStrip(notToday, now: now))
     }
 

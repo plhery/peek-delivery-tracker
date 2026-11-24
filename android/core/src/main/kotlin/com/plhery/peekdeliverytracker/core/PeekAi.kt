@@ -210,7 +210,20 @@ private fun Localizer.ago(iso: String, now: Instant): String {
     }
 }
 
-/** Why Peek AI thinks so, about this parcel: one or two sentences. */
+/** With no carrier date, the last step the parcel took, after the sentence before it ([first]). */
+private fun Localizer.withLastStep(first: String, ai: PeekAi, now: Instant): String {
+    val last = ai.last ?: return first
+    val key = when (last.kind) {
+        PeekAiStepKind.Depot -> "peekAi.last.depot"
+        PeekAiStepKind.Customs -> "peekAi.last.customs"
+        PeekAiStepKind.Country -> "peekAi.last.country"
+        PeekAiStepKind.Scan -> "peekAi.last.scan"
+    }
+    val step = text(key, mapOf("ago" to ago(last.at, now)))
+    return if (language == AppLanguage.Zh) "$first$step" else "$first $step"
+}
+
+/** Why Peek AI thinks so, about this parcel, in a line under its card: one or two sentences. */
 fun Localizer.peekAiWhy(ai: PeekAi, carrier: String, now: Instant = AppClock.now()): String {
     val named = mapOf("carrier" to carrier)
     return when (ai.why) {
@@ -219,19 +232,25 @@ fun Localizer.peekAiWhy(ai: PeekAi, carrier: String, now: Instant = AppClock.now
         PeekAiWhy.LateOut -> text("peekAi.why.lateOut", named)
         PeekAiWhy.MissedDate -> text("peekAi.why.missedDate", named)
         PeekAiWhy.Ahead -> text("peekAi.why.ahead", named + ("date" to (ai.carrierDay?.let { calendar(it) } ?: "")))
-        PeekAiWhy.NoDate -> {
-            val first = text("peekAi.why.noDate", named)
-            val last = ai.last ?: return first
-            val key = when (last.kind) {
-                PeekAiStepKind.Depot -> "peekAi.last.depot"
-                PeekAiStepKind.Customs -> "peekAi.last.customs"
-                PeekAiStepKind.Country -> "peekAi.last.country"
-                PeekAiStepKind.Scan -> "peekAi.last.scan"
-            }
-            val step = text(key, mapOf("ago" to ago(last.at, now)))
-            if (language == AppLanguage.Zh) "$first$step" else "$first $step"
-        }
+        PeekAiWhy.NoDate -> withLastStep(text("peekAi.why.noDate", named), ai, now)
     }
+}
+
+/**
+ * The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's word
+ * the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went out comes
+ * after.
+ */
+fun Localizer.peekAiReason(ai: PeekAi, carrier: String, now: Instant = AppClock.now()): String = when (ai.why) {
+    PeekAiWhy.NoOutForDelivery -> text("peekAi.reason.noOutForDelivery")
+    PeekAiWhy.OutForDelivery -> text(
+        "peekAi.reason.outForDelivery",
+        mapOf("carrier" to carrier, "time" to peekAiClock(ai.time ?: ""), "since" to peekAiClock(ai.outSince ?: "")),
+    )
+    PeekAiWhy.LateOut -> text("peekAi.reason.lateOut")
+    PeekAiWhy.MissedDate -> text("peekAi.reason.missedDate")
+    PeekAiWhy.Ahead -> text("peekAi.reason.ahead")
+    PeekAiWhy.NoDate -> withLastStep(text("peekAi.reason.noDate"), ai, now)
 }
 
 /** How often Peek AI was right on parcels like this one: "Right 8 times in 10 at this hour." */
@@ -248,8 +267,10 @@ data class PeekAiCell(
     val over: String,
     /** The bold line: the day of the month, or the hour. */
     val main: String,
-    val likely: Boolean,
-    val maybe: Boolean,
+    /** Its chance: the day's, or its two hours' share of the carrier's deliveries. */
+    val chance: Double,
+    /** How strongly it is shaded, from 0 (no shade) to 4 (the likeliest): [peekAiShades]. */
+    val level: Int,
     val carrier: Boolean,
     val past: Boolean,
 )
@@ -259,24 +280,52 @@ data class PeekAiStrip(val kind: Kind, val cells: List<PeekAiCell>) {
     enum class Kind { Days, Hours }
 }
 
+/** Under this chance a cell has no shade: a day or two hours that seldom see a delivery. */
+private const val UNSHADED_BELOW = 0.03
+
 /**
- * The strip as TalkBack reads it, which its shades and ring show: the likely cells still to come, then the carrier's,
- * "Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27", the cells listed as the language lists units. Empty where it
- * shows neither.
+ * Each cell's shade, from its chance against the likeliest cell still to come (`cells`, each its chance and whether it
+ * has passed): 4 at 85 % of it or more (the likeliest), 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in
+ * 100. Four steps a reader tells apart at a glance. Hours gone by are unshaded: the parcel did not come in them.
+ */
+fun peekAiShades(cells: List<Pair<Double, Boolean>>): List<Int> {
+    val top = cells.filterNot { (_, past) -> past }.maxOfOrNull { (chance, _) -> chance }?.coerceAtLeast(0.0) ?: 0.0
+    return cells.map { (chance, past) ->
+        when {
+            past || chance < UNSHADED_BELOW || top <= 0 -> 0
+            chance >= 0.85 * top -> 4
+            chance >= 0.55 * top -> 3
+            chance >= 0.25 * top -> 2
+            else -> 1
+        }
+    }
+}
+
+/**
+ * The strip as TalkBack reads it, which its shades and ring show: the shaded cells still to come, likeliest first, then
+ * the carrier's, "Days, likeliest first: Thu 26, Wed 25, Fri 27, Tue 24. DPD’s date: Fri 27", the cells listed as the
+ * language lists units. Empty where it shows neither.
  */
 fun Localizer.peekAiStripSpoken(strip: PeekAiStrip, carrier: String): String {
     fun named(cell: PeekAiCell) = listOf(cell.over, cell.main).filter { it.isNotEmpty() }.joinToString(" ")
-    val likely = strip.cells.filter { it.likely && !it.past }.map(::named)
+    // A stable sort: cells as likely as each other keep their order in time.
+    val ranked = strip.cells.filter { it.level > 0 }.sortedByDescending { it.chance }.map(::named)
     val ringed = strip.cells.firstOrNull { it.carrier }
     return listOfNotNull(
-        likely.takeIf { it.isNotEmpty() }?.let {
-            "${text(if (strip.kind == PeekAiStrip.Kind.Hours) "peekAi.sheet.hours" else "peekAi.sheet.days")}: ${Icu.unitLists.join(it, language.locale)}"
+        ranked.takeIf { it.isNotEmpty() }?.let {
+            "${text(if (strip.kind == PeekAiStrip.Kind.Hours) "peekAi.sheet.hoursByChance" else "peekAi.sheet.daysByChance")}: ${Icu.unitLists.join(it, language.locale)}"
         },
         ringed?.let { "${text("peekAi.sheet.carrierDate", mapOf("carrier" to carrier))}: ${named(it)}" },
     ).joinToString(". ")
 }
 
-/** Days with their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
+/** The cells with their shades ([peekAiShades]). */
+private fun List<PeekAiCell>.shaded(): List<PeekAiCell> {
+    val levels = peekAiShades(map { it.chance to it.past })
+    return mapIndexed { index, cell -> cell.copy(level = levels[index]) }
+}
+
+/** Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
 fun Localizer.peekAiStrip(ai: PeekAi, now: Instant = AppClock.now()): PeekAiStrip? {
     val hours = ai.hours.orEmpty()
     if (hours.isNotEmpty()) {
@@ -284,13 +333,12 @@ fun Localizer.peekAiStrip(ai: PeekAi, now: Instant = AppClock.now()): PeekAiStri
         val hour = at.hour + at.minute / 60.0
         val cells = hours.chunked(2).map { pair ->
             val start = pair.first().time.take(2).toIntOrNull() ?: 0
-            val share = pair.sumOf { it.share }
             PeekAiCell(
                 key = pair.first().time, over = "", main = deliveryWallClock(pair.first().time),
-                likely = share >= 0.15, maybe = share >= 0.06 && share < 0.15, carrier = false, past = start + pair.size <= hour,
+                chance = pair.sumOf { it.share }, level = 0, carrier = false, past = start + pair.size <= hour,
             )
         }
-        return PeekAiStrip(PeekAiStrip.Kind.Hours, cells)
+        return PeekAiStrip(PeekAiStrip.Kind.Hours, cells.shaded())
     }
     val days = ai.days.orEmpty().ifEmpty { return null }
     val weekdays = FormatData.language(language).weekdays
@@ -300,8 +348,8 @@ fun Localizer.peekAiStrip(ai: PeekAi, now: Instant = AppClock.now()): PeekAiStri
             val date = dateOf(entry.day) ?: return@mapNotNull null
             PeekAiCell(
                 key = entry.day, over = weekdays[date.dayOfWeek.value % 7].replace(".", ""), main = date.dayOfMonth.toString(),
-                likely = entry.p >= 0.25, maybe = entry.p >= 0.08 && entry.p < 0.25, carrier = entry.day == ai.carrierDay, past = false,
+                chance = entry.p, level = 0, carrier = entry.day == ai.carrierDay, past = false,
             )
-        },
+        }.shaded(),
     )
 }

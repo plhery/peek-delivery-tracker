@@ -6,7 +6,7 @@ import { carrierBrand } from '../lib/carrierBrand';
 import { carrierInfo, displayedCarrierId } from '../lib/carriers';
 import { parcelDeliveryEstimate } from '../lib/parcelStatus';
 import {
-  parcelPeekAi, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiStripSpoken, peekAiWhy, useShowPeekAi,
+  parcelPeekAi, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiReason, peekAiRecord, peekAiStrip, peekAiStripSpoken, peekAiWhy, useShowPeekAi,
   useShowPeekAiChoice,
   type PeekAiWording,
 } from '../lib/peekAi';
@@ -79,22 +79,21 @@ const BULB = 'M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3ZM9.5 20h5';
 const CHART = 'M4 19V5m0 14h16M8 15v-3m4 3V8m4 7v-5';
 const EYE = 'M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12Zm9.5 2.8a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6Z';
 
-/** The days Peek AI expects, the carrier's date ringed; or, out for delivery, the hours. */
+/** The days Peek AI expects, each shaded by its chance, the carrier's date ringed; or, out for delivery, the hours. */
 function PeekAiStrip({ ai, carrier, wording }: { ai: PeekAi; carrier: string; wording: PeekAiWording }) {
   const { t } = wording;
   const strip = peekAiStrip(ai, wording);
   if (!strip) return null;
-  // Its tints and ring say which days are likely and which is the carrier's: a screen reader hears them in words.
+  // Its shades and ring say how likely each day is and which is the carrier's: a screen reader hears them in words.
   return <div className="peek-ai-strip">
     <p className="sr-only">{peekAiStripSpoken(strip, carrier, wording)}</p>
     <div className="peek-ai-strip__cells" aria-hidden="true">
-      {strip.cells.map((cell) => <span key={cell.key} data-likely={cell.likely || undefined} data-maybe={cell.maybe || undefined}
-        data-carrier={cell.carrier || undefined} data-past={cell.past || undefined}>
+      {strip.cells.map((cell) => <span key={cell.key} data-level={cell.level} data-carrier={cell.carrier || undefined} data-past={cell.past || undefined}>
         {cell.over && <span>{cell.over}</span>}<b>{cell.main}</b>
       </span>)}
     </div>
     <div className="peek-ai-strip__key" aria-hidden="true">
-      <span><i data-likely="" />{t(strip.kind === 'hours' ? 'peekAi.sheet.hours' : 'peekAi.sheet.days')}</span>
+      <span>{t('peekAi.sheet.lessLikely')}<span className="peek-ai-strip__scale">{[1, 2, 3, 4].map((level) => <i key={level} data-level={level} />)}</span>{t('peekAi.sheet.moreLikely')}</span>
       {strip.cells.some((cell) => cell.carrier) && <span><i data-carrier="" />{t('peekAi.sheet.carrierDate', { carrier })}</span>}
     </div>
   </div>;
@@ -128,7 +127,7 @@ export function PeekAiSheet({ parcel, ai, auth, onClose }: { parcel: ParcelWithE
     <div className="peeks-switches">
       <div className="peeks-switch peek-ai-fact"><div>
         <span className="peeks-switch__icon">{line(BULB)}</span>
-        <span className="peeks-switch__text"><strong>{t('peekAi.sheet.why')}</strong><small>{peekAiWhy(ai, carrier.name, wording)}</small></span>
+        <span className="peeks-switch__text"><strong>{t('peekAi.sheet.why')}</strong><small>{peekAiReason(ai, carrier.name, wording)}</small></span>
       </div></div>
       <div className="peeks-switch peek-ai-fact"><div>
         <span className="peeks-switch__icon">{line(CHART)}</span>

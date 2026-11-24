@@ -163,21 +163,39 @@ const LAST: Record<NonNullable<PeekAi['last']>['kind'], MessageKey> = {
   depot: 'peekAi.last.depot', customs: 'peekAi.last.customs', country: 'peekAi.last.country', scan: 'peekAi.last.scan',
 };
 
-/** Why Peek AI thinks so, about this parcel: one or two sentences. */
+/** With no carrier date, the last step the parcel took, after the sentence before it. */
+function withLastStep(first: string, ai: PeekAi, { t, languageTag, now = Date.now() }: PeekAiWording): string {
+  if (!ai.last) return first;
+  const step = t(LAST[ai.last.kind], { ago: ago(ai.last.at, languageTag, now) });
+  return new Intl.Locale(languageTag).language === 'zh' ? `${first}${step}` : `${first} ${step}`;
+}
+
+/** Why Peek AI thinks so, about this parcel, in a line under its card: one or two sentences. */
 export function peekAiWhy(ai: PeekAi, carrier: string, wording: PeekAiWording): string {
-  const { t, languageTag, now = Date.now() } = wording;
+  const { t } = wording;
   switch (ai.why) {
     case 'no_out_for_delivery': return t('peekAi.why.noOutForDelivery', { carrier });
     case 'out_for_delivery': return t('peekAi.why.outForDelivery', { carrier, time: clock(ai.out_since ?? '', wording) });
     case 'late_out': return t('peekAi.why.lateOut', { carrier });
     case 'missed_date': return t('peekAi.why.missedDate', { carrier });
     case 'ahead': return t('peekAi.why.ahead', { carrier, date: ai.carrier_day ? calendar(ai.carrier_day, wording) : '' });
-    case 'no_date': {
-      const first = t('peekAi.why.noDate', { carrier });
-      if (!ai.last) return first;
-      const step = t(LAST[ai.last.kind], { ago: ago(ai.last.at, languageTag, now) });
-      return new Intl.Locale(languageTag).language === 'zh' ? `${first}${step}` : `${first} ${step}`;
-    }
+    case 'no_date': return withLastStep(t('peekAi.why.noDate', { carrier }), ai, wording);
+  }
+}
+
+/**
+ * The sheet's Why: what Peek AI goes by, the parcels Peek has followed that were like this one, under the carrier's word
+ * the sheet shows above it. Out for delivery, the carrier's usual hour is the reason; the hour this one went out comes after.
+ */
+export function peekAiReason(ai: PeekAi, carrier: string, wording: PeekAiWording): string {
+  const { t } = wording;
+  switch (ai.why) {
+    case 'no_out_for_delivery': return t('peekAi.reason.noOutForDelivery');
+    case 'out_for_delivery': return t('peekAi.reason.outForDelivery', { carrier, time: clock(ai.time ?? '', wording), since: clock(ai.out_since ?? '', wording) });
+    case 'late_out': return t('peekAi.reason.lateOut');
+    case 'missed_date': return t('peekAi.reason.missedDate');
+    case 'ahead': return t('peekAi.reason.ahead');
+    case 'no_date': return withLastStep(t('peekAi.reason.noDate'), ai, wording);
   }
 }
 
@@ -195,48 +213,71 @@ export interface PeekAiCell {
   over: string;
   /** The bold line: the day of the month, or the hour. */
   main: string;
-  likely: boolean;
-  maybe: boolean;
+  /** Its chance: the day's, or its two hours' share of the carrier's deliveries. */
+  chance: number;
+  /** How strongly it is shaded, from 0 (no shade) to 4 (the likeliest): `peekAiShades`. */
+  level: number;
   carrier: boolean;
   past: boolean;
 }
 
-/** The strip as a screen reader says it: "Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27". */
+/** Under this chance a cell has no shade: a day or two hours that seldom see a delivery. */
+const UNSHADED_BELOW = 0.03;
+
+/**
+ * Each cell's shade, from its chance against the likeliest cell still to come: 4 at 85 % of it or more (the likeliest),
+ * 3 from 55 %, 2 from 25 %, 1 below that, and none under 3 in 100. Four steps a reader tells apart at a glance.
+ * Hours gone by are unshaded: the parcel did not come in them.
+ */
+export function peekAiShades(cells: ReadonlyArray<{ chance: number; past: boolean }>): number[] {
+  const top = Math.max(0, ...cells.filter((cell) => !cell.past).map((cell) => cell.chance));
+  return cells.map(({ chance, past }) => past || chance < UNSHADED_BELOW || top <= 0 ? 0
+    : chance >= 0.85 * top ? 4 : chance >= 0.55 * top ? 3 : chance >= 0.25 * top ? 2 : 1);
+}
+
+/**
+ * The strip as a screen reader says it, which its shades and ring show: the shaded cells still to come, likeliest
+ * first, then the carrier's, "Days, likeliest first: Thu 26, Wed 25, Fri 27. DPD’s date: Fri 27".
+ */
 export function peekAiStripSpoken(strip: { kind: 'days' | 'hours'; cells: PeekAiCell[] }, carrier: string, { t, languageTag }: PeekAiWording): string {
   const named = (cell: PeekAiCell) => [cell.over, cell.main].filter(Boolean).join(' ');
-  const likely = strip.cells.filter((cell) => cell.likely && !cell.past).map(named);
+  // A stable sort: cells as likely as each other keep their order in time.
+  const ranked = strip.cells.filter((cell) => cell.level > 0).sort((a, b) => b.chance - a.chance).map(named);
   const ringed = strip.cells.find((cell) => cell.carrier);
   return [
-    likely.length ? `${t(strip.kind === 'hours' ? 'peekAi.sheet.hours' : 'peekAi.sheet.days')}: ${new Intl.ListFormat(languageTag, { style: 'short', type: 'unit' }).format(likely)}` : '',
+    ranked.length ? `${t(strip.kind === 'hours' ? 'peekAi.sheet.hoursByChance' : 'peekAi.sheet.daysByChance')}: ${new Intl.ListFormat(languageTag, { style: 'short', type: 'unit' }).format(ranked)}` : '',
     ringed ? `${t('peekAi.sheet.carrierDate', { carrier })}: ${named(ringed)}` : '',
   ].filter(Boolean).join('. ');
 }
 
-/** Days with their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
+/** Days shaded by their chance, the carrier's date ringed; or, out for delivery, two hours to a cell. */
 export function peekAiStrip(ai: PeekAi, wording: PeekAiWording): { kind: 'days' | 'hours'; cells: PeekAiCell[] } | null {
   const { languageTag, use24HourTime, now = Date.now() } = wording;
+  const shaded = (cells: Array<Omit<PeekAiCell, 'level'>>) => {
+    const levels = peekAiShades(cells);
+    return cells.map((cell, index) => ({ ...cell, level: levels[index]! }));
+  };
   if (ai.hours?.length) {
     const at = new Date(now);
     const hour = at.getHours() + at.getMinutes() / 60;
-    const cells: PeekAiCell[] = [];
+    const cells: Array<Omit<PeekAiCell, 'level'>> = [];
     for (let index = 0; index < ai.hours.length; index += 2) {
       const pair = ai.hours.slice(index, index + 2);
       const start = Number(pair[0]!.time.slice(0, 2));
-      const share = pair.reduce((sum, entry) => sum + entry.share, 0);
       cells.push({
         key: pair[0]!.time, over: '', main: deliveryWallClock(pair[0]!.time, languageTag, use24HourTime),
-        likely: share >= 0.15, maybe: share >= 0.06 && share < 0.15, carrier: false, past: start + pair.length <= hour,
+        chance: pair.reduce((sum, entry) => sum + entry.share, 0), carrier: false, past: start + pair.length <= hour,
       });
     }
-    return { kind: 'hours', cells };
+    return { kind: 'hours', cells: shaded(cells) };
   }
   if (!ai.days?.length) return null;
   const weekday = new Intl.DateTimeFormat(languageTag, { weekday: 'short' });
   return {
     kind: 'days',
-    cells: ai.days.map(({ day, p }) => ({
+    cells: shaded(ai.days.map(({ day, p }) => ({
       key: day, over: weekday.format(dateOf(day)).replaceAll('.', ''), main: String(dateOf(day).getDate()),
-      likely: p >= 0.25, maybe: p >= 0.08 && p < 0.25, carrier: day === ai.carrier_day, past: false,
-    })),
+      chance: p, carrier: day === ai.carrier_day, past: false,
+    }))),
   };
 }

@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "Przewoźnik {{carrier}} podawał wczorajszą datę, ale przesyłka znów jest w drodze.",
   "peekAi.why.ahead": "Przewoźnik {{carrier}} podaje {{date}}. Przesyłka jest przed czasem.",
   "peekAi.why.noDate": "Przewoźnik {{carrier}} nie podaje daty.",
+  "peekAi.reason.noOutForDelivery": "Przesyłka nie jest jeszcze w doręczeniu. Większość przesyłek śledzonych przez Peek, które o tej porze nie były jeszcze w doręczeniu, nie dotarła tego dnia.",
+  "peekAi.reason.outForDelivery": "Większość przesyłek przewoźnika {{carrier}} śledzonych przez Peek dotarła do {{time}} w dniu wydania do doręczenia. Ta jest w doręczeniu od {{since}}.",
+  "peekAi.reason.lateOut": "Przesyłka wciąż jest w doręczeniu, choć jest już późno. Większość przesyłek śledzonych przez Peek, które o tej porze wciąż były w doręczeniu, nie dotarła tego dnia.",
+  "peekAi.reason.missedDate": "Przesyłka miała aktualizację w ciągu ostatnich 24 godzin. Większość przesyłek śledzonych przez Peek, które po minięciu swojej daty dalej były w drodze, dotarła w ciągu dnia lub dwóch.",
+  "peekAi.reason.ahead": "Większość przesyłek śledzonych przez Peek z podobnymi aktualizacjami dotarła przed datą podaną przez przewoźnika.",
+  "peekAi.reason.noDate": "Peek AI sprawdza, jak długo szły przesyłki śledzone przez Peek z podobnymi aktualizacjami.",
   "peekAi.last.depot": "Dotarła do oddziału doręczającego {{ago}}.",
   "peekAi.last.customs": "Dotarła do urzędu celnego {{ago}}.",
   "peekAi.last.country": "Dotarła do kraju docelowego {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "Przewoźnik {{carrier}} nie podaje godziny",
   "peekAi.carrier.wasDue": "Przewoźnik {{carrier}} podawał wczorajszą datę",
   "peekAi.sheet.caption": "Czego spodziewa się Peek AI",
-  "peekAi.sheet.days": "Najbardziej prawdopodobne dni",
-  "peekAi.sheet.hours": "Najbardziej prawdopodobne godziny",
+  "peekAi.sheet.daysByChance": "Dni od najbardziej prawdopodobnego",
+  "peekAi.sheet.hoursByChance": "Godziny od najbardziej prawdopodobnej",
+  "peekAi.sheet.lessLikely": "Mniej prawdopodobne",
+  "peekAi.sheet.moreLikely": "Bardziej prawdopodobne",
   "peekAi.sheet.carrierDate": "Data przewoźnika {{carrier}}",
   "peekAi.sheet.why": "Dlaczego",
   "peekAi.sheet.sure": "Pewność",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Przy podobnych przesyłkach trafia {{n}} razy na 10.",
   "peekAi.sheet.show": "Pokazuj Peek AI",
   "peekAi.sheet.showHint": "Tylko gdy Peek ma mocną wskazówkę. Większość przesyłek nie pokazuje nic.",
-  "peekAi.sheet.trained": "Peek AI uczy się na tysiącach przesyłek śledzonych przez Peek. To prognoza samego Peeka: przewoźnik {{carrier}} jej nie obiecał."
+  "peekAi.sheet.trained": "Peek AI uczy się na przesyłkach śledzonych przez Peek. To prognoza samego Peeka, a nie obietnica przewoźnika {{carrier}}."
 }

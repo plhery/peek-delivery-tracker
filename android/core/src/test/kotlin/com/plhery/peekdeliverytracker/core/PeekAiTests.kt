@@ -195,6 +195,31 @@ class PeekAiTests {
     }
 
     @Test
+    fun saysInItsSheetWhatItGoesByTheParcelsPeekHasFollowedTheCarriersUsualHourBeforeThisOnes() {
+        assertEquals(
+            "It hasn’t gone out for delivery yet. Most parcels Peek has followed that weren’t out by this hour didn’t arrive that day.",
+            english.peekAiReason(notToday, "DPD", now),
+        )
+        assertEquals(
+            "Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.",
+            english.peekAiReason(byTime, "FedEx", now),
+        )
+        assertEquals(
+            "It’s still out for delivery this late. Most parcels Peek has followed that were still out at this hour didn’t arrive that day.",
+            english.peekAiReason(PeekAi(says = PeekAiSays.NotToday, why = PeekAiWhy.LateOut, sure = 0.88), "DPD", now),
+        )
+        assertEquals(
+            "It was scanned in the last 24 hours. Most parcels Peek has followed that kept moving after missing their date arrived within a day or two.",
+            english.peekAiReason(noDate.copy(why = PeekAiWhy.MissedDate, says = PeekAiSays.TodayOrTomorrow), "DPD", now),
+        )
+        assertEquals("Most parcels Peek has followed with scans like this one’s came before the date their carrier gave.", english.peekAiReason(sooner, "DPD", now))
+        assertEquals(
+            "Peek AI goes by how long parcels Peek has followed with scans like this one’s took. It reached the delivery depot 2 days ago.",
+            english.peekAiReason(noDate, "UPS", now),
+        )
+    }
+
+    @Test
     fun countsHowOftenItWasRightRoundedDown() {
         assertEquals("Right 8 times in 10 at this hour.", english.peekAiRecord(notToday))
         assertEquals("Right 8 times in 10 on parcels like this one.", english.peekAiRecord(noDate))
@@ -209,36 +234,45 @@ class PeekAiTests {
         val why = chinese.peekAiWhy(noDate, "UPS", now)
         assertTrue(why.startsWith(chinese.text("peekAi.why.noDate", mapOf("carrier" to "UPS"))))
         assertFalse(why.contains("。 "))
+        val reason = chinese.peekAiReason(noDate, "UPS", now)
+        assertTrue(reason.startsWith(chinese.text("peekAi.reason.noDate")))
+        assertTrue(reason.length > chinese.text("peekAi.reason.noDate").length)
+        assertFalse(reason.contains("。 "))
     }
 
     @Test
-    fun showsTheDaysWithTheirChanceTheCarriersDayRinged() {
+    fun shadesEachCellInFourStepsAgainstTheLikeliestStillToComeNoneUnder3In100OrGoneBy() {
+        assertEquals(listOf(0, 1, 2, 3, 4, 4), peekAiShades(listOf(0.02, 0.06, 0.15, 0.25, 0.36, 0.4).map { it to false }))
+        // The likeliest hours gone by leave the scale to the ones still to come.
+        assertEquals(listOf(0, 4, 2), peekAiShades(listOf(0.5 to true, 0.2 to false, 0.1 to false)))
+        assertEquals(listOf(0), peekAiShades(listOf(0.5 to true)))
+    }
+
+    @Test
+    fun showsTheDaysShadedByTheirChanceTheCarriersDayRingedAndSaysThemLikeliestFirst() {
         val strip = requireNotNull(english.peekAiStrip(noDate.copy(carrierDay = "2026-11-27"), now))
         assertEquals(PeekAiStrip.Kind.Days, strip.kind)
         assertEquals(listOf("Tue 24", "Wed 25", "Thu 26", "Fri 27"), strip.cells.map { "${it.over} ${it.main}" })
-        assertEquals(
-            listOf(listOf(false, false, false), listOf(true, false, false), listOf(true, false, false), listOf(false, true, true)),
-            strip.cells.map { listOf(it.likely, it.maybe, it.carrier) },
-        )
+        assertEquals(listOf(1 to false, 3 to false, 4 to false, 2 to true), strip.cells.map { it.level to it.carrier })
         // What its shades and ring show, in words.
-        assertEquals("Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27", english.peekAiStripSpoken(strip, "DPD"))
+        assertEquals("Days, likeliest first: Thu 26, Wed 25, Fri 27, Tue 24. DPD’s date: Fri 27", english.peekAiStripSpoken(strip, "DPD"))
         val french = Localizer(AppLanguage.Fr)
         val spoken = french.peekAiStripSpoken(requireNotNull(french.peekAiStrip(noDate.copy(carrierDay = "2026-11-27"), now)), "DPD")
-        assertTrue(spoken, spoken.startsWith("${french.text("peekAi.sheet.days")}: "))
+        assertTrue(spoken, spoken.startsWith("${french.text("peekAi.sheet.daysByChance")}: "))
         assertTrue(spoken, spoken.endsWith(". ${french.text("peekAi.sheet.carrierDate", mapOf("carrier" to "DPD"))}: ven 27"))
     }
 
     @Test
-    fun showsTheHoursOutForDeliveryTwoToACellThePastOnesFaded() {
+    fun showsTheHoursOutForDeliveryTwoToACellThePastOnesFadedAndUnshaded() {
         val strip = requireNotNull(english.peekAiStrip(byTime, now))
         assertEquals(PeekAiStrip.Kind.Hours, strip.kind)
         assertEquals(listOf("08:00", "10:00", "12:00", "14:00", "16:00"), strip.cells.map { it.main })
-        assertEquals(
-            listOf(listOf(false, true, true), listOf(true, false, true), listOf(true, false, true), listOf(true, false, false), listOf(false, true, false)),
-            strip.cells.map { listOf(it.likely, it.maybe, it.past) },
-        )
-        // The likely hours still to come.
-        assertEquals("Most likely hours: 14:00", english.peekAiStripSpoken(strip, "DPD"))
+        assertEquals(listOf(0 to true, 0 to true, 0 to true, 4 to false, 2 to false), strip.cells.map { it.level to it.past })
+        assertEquals("Hours, likeliest first: 14:00, 16:00", english.peekAiStripSpoken(strip, "DPD"))
+        // In the morning the midday hours are the likeliest.
+        val morning = requireNotNull(english.peekAiStrip(byTime, at(24, 9, 30)))
+        assertEquals(listOf(1, 3, 4, 2, 1), morning.cells.map { it.level })
+        assertEquals("Hours, likeliest first: 12:00, 10:00, 14:00, 08:00, 16:00", english.peekAiStripSpoken(morning, "DPD"))
         assertNull(english.peekAiStrip(notToday, now))
     }
 
@@ -247,7 +281,7 @@ class PeekAiTests {
         val twelveHours = Localizer(AppLanguage.En, clockPreference = ClockPreference.TwelveHour)
         val strip = requireNotNull(twelveHours.peekAiStrip(byTime, now))
         assertEquals(listOf("8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"), strip.cells.map { it.main.replace(Regex("\\s"), " ") })
-        assertEquals("Most likely hours: 2:00 PM", twelveHours.peekAiStripSpoken(strip, "DPD").replace(Regex("\\s"), " "))
+        assertEquals("Hours, likeliest first: 2:00 PM, 4:00 PM", twelveHours.peekAiStripSpoken(strip, "DPD").replace(Regex("\\s"), " "))
     }
 
     private fun parcel(stage: TrackingStage, ai: PeekAi?, archivedAt: String? = null, expectedDelivery: String? = null): Parcel {

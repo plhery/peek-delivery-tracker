@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "Das Datum von {{carrier}} war gestern, aber das Paket ist wieder unterwegs.",
   "peekAi.why.ahead": "Laut {{carrier}} kommt das Paket am {{date}}. Es ist früher dran.",
   "peekAi.why.noDate": "{{carrier}} nennt kein Datum.",
+  "peekAi.reason.noOutForDelivery": "Das Paket ist noch nicht in der Zustellung. Die meisten Pakete, die Peek verfolgt hat und die um diese Zeit noch nicht in der Zustellung waren, kamen an dem Tag nicht mehr an.",
+  "peekAi.reason.outForDelivery": "Die meisten Pakete von {{carrier}}, die Peek verfolgt hat, kamen am Tag der Zustellung bis {{time}} an. Dieses ist seit {{since}} in der Zustellung.",
+  "peekAi.reason.lateOut": "Das Paket ist noch so spät in der Zustellung. Die meisten Pakete, die Peek verfolgt hat und die um diese Zeit noch in der Zustellung waren, kamen an dem Tag nicht mehr an.",
+  "peekAi.reason.missedDate": "Das Paket wurde in den letzten 24 Stunden gescannt. Die meisten Pakete, die Peek verfolgt hat und die nach einem verpassten Datum weiter unterwegs waren, kamen innerhalb von ein, zwei Tagen an.",
+  "peekAi.reason.ahead": "Die meisten Pakete mit ähnlichen Scans, die Peek verfolgt hat, kamen vor dem Datum an, das ihr Paketdienst genannt hatte.",
+  "peekAi.reason.noDate": "Peek AI schaut, wie lange Pakete mit ähnlichen Scans gebraucht haben, die Peek verfolgt hat.",
   "peekAi.last.depot": "Das Paket ist {{ago}} im Zustelldepot angekommen.",
   "peekAi.last.customs": "Das Paket ist {{ago}} beim Zoll angekommen.",
   "peekAi.last.country": "Das Paket ist {{ago}} im Zielland angekommen.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} nennt keine Uhrzeit",
   "peekAi.carrier.wasDue": "Datum von {{carrier}}: gestern",
   "peekAi.sheet.caption": "Was Peek AI erwartet",
-  "peekAi.sheet.days": "Wahrscheinlichste Tage",
-  "peekAi.sheet.hours": "Wahrscheinlichste Uhrzeiten",
+  "peekAi.sheet.daysByChance": "Tage, wahrscheinlichste zuerst",
+  "peekAi.sheet.hoursByChance": "Uhrzeiten, wahrscheinlichste zuerst",
+  "peekAi.sheet.lessLikely": "Weniger wahrscheinlich",
+  "peekAi.sheet.moreLikely": "Wahrscheinlicher",
   "peekAi.sheet.carrierDate": "Datum von {{carrier}}",
   "peekAi.sheet.why": "Warum",
   "peekAi.sheet.sure": "Wie sicher",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Bei Paketen wie diesem in {{n}} von 10 Fällen richtig.",
   "peekAi.sheet.show": "Peek AI zeigen",
   "peekAi.sheet.showHint": "Nur wenn Peek einen starken Hinweis hat. Bei den meisten Paketen steht nichts.",
-  "peekAi.sheet.trained": "Peek AI hat aus Tausenden Paketen gelernt, die Peek verfolgt hat. Das ist Peeks eigene Schätzung: {{carrier}} hat sie nicht versprochen."
+  "peekAi.sheet.trained": "Peek AI hat aus den Paketen gelernt, die Peek verfolgt hat. Das ist Peeks eigene Schätzung, kein Versprechen von {{carrier}}."
 }

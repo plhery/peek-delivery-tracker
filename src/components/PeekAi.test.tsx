@@ -101,7 +101,8 @@ describe('Peek AI on the parcel’s page', () => {
     expect(within(sheet).getByText('Today is unlikely')).toBeInTheDocument();
     expect(within(sheet).getByText(`${DPD} says today`)).toBeInTheDocument();
     expect(within(sheet).getByText('Right 8 times in 10 at this hour.')).toBeInTheDocument();
-    expect(sheet).toHaveTextContent(`This is Peek’s own estimate: ${DPD} has not promised it.`);
+    expect(sheet).toHaveTextContent(`This is Peek’s own estimate, not a promise from ${DPD}.`);
+    expect(within(sheet).getByText('It hasn’t gone out for delivery yet. Most parcels Peek has followed that weren’t out by this hour didn’t arrive that day.')).toBeInTheDocument();
 
     const shown = within(sheet).getByRole('switch', { name: 'Show Peek AI' });
     expect(shown).toBeChecked();
@@ -130,7 +131,10 @@ describe('Peek AI on the parcel’s page', () => {
     await user.click(screen.getByRole('button', { name: 'About Peek AI' }));
     const sheet = screen.getByRole('dialog', { name: 'Peek AI' });
     expect(within(sheet).getByText('Likely by Thu 26 Nov')).toBeInTheDocument();
-    expect(within(sheet).getByText('Most likely days')).toBeInTheDocument();
+    // Its key: the four shades between their two ends.
+    expect(sheet.querySelector('.peek-ai-strip__key')).toHaveTextContent(/^Less likelyMore likely/);
+    expect(sheet.querySelectorAll('.peek-ai-strip__scale > i')).toHaveLength(4);
+    expect(within(sheet).getByText(/^Days, likeliest first: /)).toBeInTheDocument();
     expect(within(sheet).getByText('Right 8 times in 10 on parcels like this one.')).toBeInTheDocument();
   });
 });

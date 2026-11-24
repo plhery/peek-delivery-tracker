@@ -209,7 +209,7 @@ struct PeekAiSheet: View {
                 PeekAiStripView(strip: strip, carrier: carrier)
             }
             VStack(spacing: 7) {
-                fact(symbol: "lightbulb", title: localizer.text("peekAi.sheet.why"), text: localizer.peekAiWhy(ai, carrier: carrier, now: now))
+                fact(symbol: "lightbulb", title: localizer.text("peekAi.sheet.why"), text: localizer.peekAiReason(ai, carrier: carrier, now: now))
                 fact(symbol: "chart.bar", title: localizer.text("peekAi.sheet.sure"), text: localizer.peekAiRecord(ai))
                 Toggle(isOn: Binding(get: { store.showPeekAi }, set: { shown in
                     store.setShowPeekAi(shown)
@@ -288,31 +288,51 @@ struct PeekAiSheet: View {
     }
 }
 
-/// The days Peek AI expects, the carrier's date ringed; or, out for delivery, the hours, the past ones faded.
+/// The days Peek AI expects, each shaded by its chance, the carrier's date ringed; or, out for delivery, the hours, the
+/// past ones faded.
 private struct PeekAiStripView: View {
     let strip: PeekAiStrip
     let carrier: String
 
     @EnvironmentObject private var localizer: Localizer
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    /// With more contrast asked for, the shades step further apart and every word takes the ink.
+    private var more: Bool { contrast == .increased }
+
+    /// Each shade's share of the ink, in four steps from 1 to 4 (the likeliest); none at 0.
+    private func fill(_ level: Int) -> Color {
+        let shares = more ? [0, 0.08, 0.15, 0.23, 0.32] : [0, 0.05, 0.11, 0.19, 0.30]
+        return Brand.ink.opacity(shares[min(max(level, 0), shares.count - 1)])
+    }
+
+    /// The quieter words' grey, or the ink with more contrast.
+    private var soft: Color { more ? Brand.ink : Brand.secondaryText }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 4) {
                 ForEach(strip.cells) { cell in
                     VStack(spacing: 1) {
+                        // On the two strongest shades the weekday takes the ink, which the grey would lack contrast
+                        // against; the likeliest is heavier, a mark that needs no colour.
                         if !cell.over.isEmpty {
-                            Text(cell.over).font(.caption2).foregroundStyle(Brand.secondaryText)
+                            Text(cell.over)
+                                .font(.caption2.weight(cell.level == 4 ? .semibold : .regular))
+                                .foregroundStyle(cell.level >= 3 ? Brand.ink : soft)
                         }
-                        Text(cell.main).font(.footnote.weight(.medium)).foregroundStyle(Brand.ink)
+                        Text(cell.main).font(.footnote.weight(cell.level == 4 ? .bold : .medium)).foregroundStyle(Brand.ink)
                     }
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .padding(.top, 5)
                     .padding(.bottom, 6)
                     .frame(maxWidth: .infinity)
-                    .background(Brand.ink.opacity(cell.likely ? 0.13 : cell.maybe ? 0.05 : 0), in: RoundedRectangle(cornerRadius: 9))
+                    .background(fill(cell.level), in: RoundedRectangle(cornerRadius: 9))
                     .overlay {
-                        if cell.carrier { RoundedRectangle(cornerRadius: 9).strokeBorder(Brand.secondaryText, lineWidth: 1.2) }
+                        if cell.carrier {
+                            RoundedRectangle(cornerRadius: 9).strokeBorder(soft, lineWidth: more ? 1.5 : 1.2)
+                        }
                     }
                     .opacity(cell.past ? 0.45 : 1)
                 }
@@ -320,14 +340,14 @@ private struct PeekAiStripView: View {
             // Five hours side by side, "10:00 AM" among them, have no room for larger type: VoiceOver reads them in words.
             .dynamicTypeSize(...DynamicTypeSize.xxLarge)
             .accessibilityHidden(true)
-            HStack(spacing: 12) {
-                key(localizer.text(strip.kind == .hours ? "peekAi.sheet.hours" : "peekAi.sheet.days"), ringed: false)
-                if strip.cells.contains(where: \.carrier) {
-                    key(localizer.text("peekAi.sheet.carrierDate", ["carrier": carrier]), ringed: true)
-                }
+            // The key: the four shades between their two ends, then the carrier's ring. Side by side where they fit.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 14) { scale; ring }
+                VStack(alignment: .leading, spacing: 4) { scale; ring }
             }
             .font(.caption2)
-            .foregroundStyle(Brand.secondaryText)
+            .foregroundStyle(soft)
+            .accessibilityHidden(true)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
@@ -336,13 +356,25 @@ private struct PeekAiStripView: View {
         .accessibilityLabel(localizer.peekAiStripSpoken(strip, carrier: carrier))
     }
 
-    private func key(_ text: String, ringed: Bool) -> some View {
+    private var scale: some View {
         HStack(spacing: 5) {
-            RoundedRectangle(cornerRadius: 3)
-                .fill(ringed ? Color.clear : Brand.secondaryText.opacity(0.3))
-                .overlay { if ringed { RoundedRectangle(cornerRadius: 3).strokeBorder(Brand.secondaryText, lineWidth: 1.2) } }
-                .frame(width: 9, height: 9)
-            Text(text).fixedSize(horizontal: false, vertical: true)
+            Text(localizer.text("peekAi.sheet.lessLikely"))
+            HStack(spacing: 2) {
+                ForEach(1...4, id: \.self) { level in
+                    RoundedRectangle(cornerRadius: 3).fill(fill(level)).frame(width: 10, height: 10)
+                }
+            }
+            Text(localizer.text("peekAi.sheet.moreLikely"))
+        }
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    @ViewBuilder private var ring: some View {
+        if strip.cells.contains(where: \.carrier) {
+            HStack(spacing: 5) {
+                RoundedRectangle(cornerRadius: 3).strokeBorder(soft, lineWidth: 1.2).frame(width: 10, height: 10)
+                Text(localizer.text("peekAi.sheet.carrierDate", ["carrier": carrier])).fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }

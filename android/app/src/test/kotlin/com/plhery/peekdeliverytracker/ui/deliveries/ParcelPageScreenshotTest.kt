@@ -37,7 +37,7 @@ import org.robolectric.annotation.GraphicsMode
  * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark, at an accessibility text
  * size and under Reduce Transparency light and dark, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
  * page beside the list on a tablet on its side, the history beside the pass. Then a guest's page of a parcel Peek forgot, and
- * Peek AI's sheet light and dark, with the hours, and on a tablet. The page dragged down, under its bar, is
+ * Peek AI's sheet light and dark, with the hours light and dark, and on a tablet. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -282,7 +282,10 @@ class ParcelPageScreenshotTest {
         compose.waitForIdle()
     }
 
-    /** Birthday gift's Peek AI sheet: what it expects over the carrier's word, the likely days, why, how sure, the switch. */
+    /**
+     * Birthday gift's Peek AI sheet: what it expects over the carrier's word, the days shaded by their chance with the
+     * likeliest in bold and the scale under them, what it goes by, how sure, the switch.
+     */
     @Test
     fun peekAisSheet() {
         show()
@@ -297,12 +300,19 @@ class ParcelPageScreenshotTest {
         compose.screenshot("page_peek_ai_dark")
     }
 
-    /** Belgian chocolate's, out for delivery: the likely hours. */
+    /** Belgian chocolate's, out for delivery: the hours shaded by their chance, the ones gone faded. */
     @Test
     fun peekAisSheetWithTheHours() {
         show()
         peekAiSheet("Belgian chocolate")
         compose.screenshot("page_peek_ai_hours_light")
+    }
+
+    @Test
+    fun peekAisSheetWithTheHoursInDark() {
+        show(dark = true)
+        peekAiSheet("Belgian chocolate")
+        compose.screenshot("page_peek_ai_hours_dark")
     }
 
     /** On a tablet on its side, the sheet over the list and the page. */

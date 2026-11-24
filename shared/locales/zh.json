@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "{{carrier}} 给出的日期是昨天，但包裹又开始移动了。",
   "peekAi.why.ahead": "{{carrier}} 显示{{date}}送达，包裹进度比这更快。",
   "peekAi.why.noDate": "{{carrier}} 没有给出日期。",
+  "peekAi.reason.noOutForDelivery": "包裹还没开始派送。在 Peek 跟踪过的包裹中，到这个时间还没派送的，大多当天没有送达。",
+  "peekAi.reason.outForDelivery": "在 Peek 跟踪过的 {{carrier}} 包裹中，大多在开始派送当天 {{time}} 前送达。这个包裹 {{since}} 开始派送。",
+  "peekAi.reason.lateOut": "这么晚了，包裹仍在派送中。在 Peek 跟踪过的包裹中，到这个时间仍在派送的，大多当天没有送达。",
+  "peekAi.reason.missedDate": "包裹在过去 24 小时内有更新。在 Peek 跟踪过的包裹中，错过日期后仍在移动的，大多在一两天内送达。",
+  "peekAi.reason.ahead": "在 Peek 跟踪过的包裹中，更新记录与它相似的，大多比快递公司给出的日期更早送达。",
+  "peekAi.reason.noDate": "Peek AI 参考 Peek 跟踪过的、更新记录相似的包裹用了多长时间。",
   "peekAi.last.depot": "{{ago}}到达派送站。",
   "peekAi.last.customs": "{{ago}}到达海关。",
   "peekAi.last.country": "{{ago}}到达目的地国家。",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} 没有给出时间",
   "peekAi.carrier.wasDue": "{{carrier}} 给出的日期是昨天",
   "peekAi.sheet.caption": "Peek AI 的预计",
-  "peekAi.sheet.days": "最可能的日期",
-  "peekAi.sheet.hours": "最可能的时段",
+  "peekAi.sheet.daysByChance": "日期（按可能性从高到低）",
+  "peekAi.sheet.hoursByChance": "时段（按可能性从高到低）",
+  "peekAi.sheet.lessLikely": "可能性较低",
+  "peekAi.sheet.moreLikely": "可能性较高",
   "peekAi.sheet.carrierDate": "{{carrier}} 的日期",
   "peekAi.sheet.why": "原因",
   "peekAi.sheet.sure": "准确度",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "对类似包裹，10 次中有 {{n}} 次准确。",
   "peekAi.sheet.show": "显示 Peek AI",
   "peekAi.sheet.showHint": "只在 Peek 有明确线索时显示。大多数包裹不会显示。",
-  "peekAi.sheet.trained": "Peek AI 基于 Peek 跟踪过的数千个包裹训练而成。这是 Peek 自己的估计：{{carrier}} 并未作出承诺。"
+  "peekAi.sheet.trained": "Peek AI 基于 Peek 跟踪过的包裹训练而成。这是 Peek 自己的估计，不是 {{carrier}} 的承诺。"
 }

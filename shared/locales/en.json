@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "{{carrier}}’s date was yesterday, but it’s on the move again.",
   "peekAi.why.ahead": "{{carrier}} says {{date}}. It’s ahead of that.",
   "peekAi.why.noDate": "{{carrier}} gives no date.",
+  "peekAi.reason.noOutForDelivery": "It hasn’t gone out for delivery yet. Most parcels Peek has followed that weren’t out by this hour didn’t arrive that day.",
+  "peekAi.reason.outForDelivery": "Most {{carrier}} parcels Peek has followed arrived by {{time}} on the day they went out for delivery. This one went out at {{since}}.",
+  "peekAi.reason.lateOut": "It’s still out for delivery this late. Most parcels Peek has followed that were still out at this hour didn’t arrive that day.",
+  "peekAi.reason.missedDate": "It was scanned in the last 24 hours. Most parcels Peek has followed that kept moving after missing their date arrived within a day or two.",
+  "peekAi.reason.ahead": "Most parcels Peek has followed with scans like this one’s came before the date their carrier gave.",
+  "peekAi.reason.noDate": "Peek AI goes by how long parcels Peek has followed with scans like this one’s took.",
   "peekAi.last.depot": "It reached the delivery depot {{ago}}.",
   "peekAi.last.customs": "It reached customs {{ago}}.",
   "peekAi.last.country": "It reached the destination country {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} names no hour",
   "peekAi.carrier.wasDue": "{{carrier}}’s date was yesterday",
   "peekAi.sheet.caption": "What Peek AI expects",
-  "peekAi.sheet.days": "Most likely days",
-  "peekAi.sheet.hours": "Most likely hours",
+  "peekAi.sheet.daysByChance": "Days, likeliest first",
+  "peekAi.sheet.hoursByChance": "Hours, likeliest first",
+  "peekAi.sheet.lessLikely": "Less likely",
+  "peekAi.sheet.moreLikely": "More likely",
   "peekAi.sheet.carrierDate": "{{carrier}}’s date",
   "peekAi.sheet.why": "Why",
   "peekAi.sheet.sure": "How sure",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Right {{n}} times in 10 on parcels like this one.",
   "peekAi.sheet.show": "Show Peek AI",
   "peekAi.sheet.showHint": "Only when Peek has a strong hint. Most parcels show none.",
-  "peekAi.sheet.trained": "Peek AI is trained on the thousands of parcels Peek has followed. This is Peek’s own estimate: {{carrier}} has not promised it."
+  "peekAi.sheet.trained": "Peek AI is trained on the parcels Peek has followed. This is Peek’s own estimate, not a promise from {{carrier}}."
 }

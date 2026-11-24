@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "A data de {{carrier}} era ontem, mas a encomenda voltou a avançar.",
   "peekAi.why.ahead": "{{carrier}} diz {{date}}. A encomenda vai adiantada.",
   "peekAi.why.noDate": "{{carrier}} não indica data.",
+  "peekAi.reason.noOutForDelivery": "A encomenda ainda não saiu para entrega. A maioria das encomendas que o Peek seguiu e que a esta hora ainda não tinham saído não chegou nesse dia.",
+  "peekAi.reason.outForDelivery": "A maioria das encomendas de {{carrier}} que o Peek seguiu chegou até às {{time}} no dia em que saiu para entrega. Esta saiu às {{since}}.",
+  "peekAi.reason.lateOut": "A encomenda ainda está em entrega a esta hora tardia. A maioria das encomendas que o Peek seguiu e que a esta hora ainda estavam em entrega não chegou nesse dia.",
+  "peekAi.reason.missedDate": "A encomenda teve um registo nas últimas 24 horas. A maioria das encomendas que o Peek seguiu e que continuaram a avançar depois de falhar a data chegou num ou dois dias.",
+  "peekAi.reason.ahead": "A maioria das encomendas que o Peek seguiu com registos como os desta chegou antes da data dada pela transportadora.",
+  "peekAi.reason.noDate": "O Peek IA vê quanto tempo demoraram as encomendas que o Peek seguiu com registos como os desta.",
   "peekAi.last.depot": "Chegou ao centro de distribuição {{ago}}.",
   "peekAi.last.customs": "Chegou à alfândega {{ago}}.",
   "peekAi.last.country": "Chegou ao país de destino {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} não indica hora",
   "peekAi.carrier.wasDue": "A data de {{carrier}} era ontem",
   "peekAi.sheet.caption": "O que o Peek IA prevê",
-  "peekAi.sheet.days": "Dias mais prováveis",
-  "peekAi.sheet.hours": "Horas mais prováveis",
+  "peekAi.sheet.daysByChance": "Dias, os mais prováveis primeiro",
+  "peekAi.sheet.hoursByChance": "Horas, as mais prováveis primeiro",
+  "peekAi.sheet.lessLikely": "Menos provável",
+  "peekAi.sheet.moreLikely": "Mais provável",
   "peekAi.sheet.carrierDate": "Data de {{carrier}}",
   "peekAi.sheet.why": "Porquê",
   "peekAi.sheet.sure": "Fiabilidade",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Acerta {{n}} em cada 10 vezes com encomendas como esta.",
   "peekAi.sheet.show": "Mostrar o Peek IA",
   "peekAi.sheet.showHint": "Só quando o Peek tem uma pista forte. A maioria das encomendas não mostra nada.",
-  "peekAi.sheet.trained": "O Peek IA aprendeu com os milhares de encomendas que o Peek seguiu. É uma estimativa do próprio Peek: {{carrier}} não a prometeu."
+  "peekAi.sheet.trained": "O Peek IA aprendeu com as encomendas que o Peek seguiu. É uma estimativa do próprio Peek, não uma promessa de {{carrier}}."
 }

@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "{{carrier}} l’annonçait pour hier, mais le colis avance de nouveau.",
   "peekAi.why.ahead": "{{carrier}} annonce le {{date}}. Le colis est en avance.",
   "peekAi.why.noDate": "{{carrier}} ne donne pas de date.",
+  "peekAi.reason.noOutForDelivery": "Le colis n’est pas encore parti en livraison. La plupart des colis suivis par Peek qui n’étaient pas partis à cette heure-ci ne sont pas arrivés ce jour-là.",
+  "peekAi.reason.outForDelivery": "La plupart des colis {{carrier}} suivis par Peek sont arrivés avant {{time}} le jour de leur départ en livraison. Celui-ci est parti à {{since}}.",
+  "peekAi.reason.lateOut": "Le colis est encore en cours de livraison à cette heure tardive. La plupart des colis suivis par Peek encore en cours de livraison à cette heure-ci ne sont pas arrivés ce jour-là.",
+  "peekAi.reason.missedDate": "Le colis a été scanné dans les dernières 24 heures. La plupart des colis suivis par Peek qui ont continué d’avancer après avoir manqué leur date sont arrivés dans les un ou deux jours.",
+  "peekAi.reason.ahead": "La plupart des colis suivis par Peek avec des scans comme les siens sont arrivés avant la date donnée par leur transporteur.",
+  "peekAi.reason.noDate": "Peek IA se fonde sur le temps qu’ont mis les colis suivis par Peek avec des scans comme les siens.",
   "peekAi.last.depot": "Le colis est arrivé au dépôt de livraison {{ago}}.",
   "peekAi.last.customs": "Le colis est arrivé en douane {{ago}}.",
   "peekAi.last.country": "Le colis est arrivé dans le pays de destination {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} ne donne pas d’heure",
   "peekAi.carrier.wasDue": "{{carrier}} l’annonçait pour hier",
   "peekAi.sheet.caption": "Ce que prévoit Peek IA",
-  "peekAi.sheet.days": "Jours les plus probables",
-  "peekAi.sheet.hours": "Heures les plus probables",
+  "peekAi.sheet.daysByChance": "Jours, les plus probables d’abord",
+  "peekAi.sheet.hoursByChance": "Heures, les plus probables d’abord",
+  "peekAi.sheet.lessLikely": "Moins probable",
+  "peekAi.sheet.moreLikely": "Plus probable",
   "peekAi.sheet.carrierDate": "Date de {{carrier}}",
   "peekAi.sheet.why": "Pourquoi",
   "peekAi.sheet.sure": "Fiabilité",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Voit juste {{n}} fois sur 10 pour les colis comme celui-ci.",
   "peekAi.sheet.show": "Afficher Peek IA",
   "peekAi.sheet.showHint": "Seulement quand Peek a un indice solide. Pour la plupart des colis, rien ne s’affiche.",
-  "peekAi.sheet.trained": "Peek IA a appris des milliers de colis suivis par Peek. C’est une estimation de Peek : {{carrier}} ne l’a pas promise."
+  "peekAi.sheet.trained": "Peek IA a appris des colis suivis par Peek. C’est une estimation de Peek, pas une promesse de {{carrier}}."
 }

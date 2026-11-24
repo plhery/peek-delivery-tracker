@@ -33,16 +33,34 @@
 /* Its sheet. */
 .peek-ai-strip { margin: 12px 0 4px; padding: 12px 14px; border-radius: 16px; background: var(--control); color: var(--ink); }
 .peek-ai-strip__cells { display: grid; grid-auto-columns: 1fr; grid-auto-flow: column; gap: 4px; }
-.peek-ai-strip__cells > span { display: grid; justify-items: center; gap: 1px; padding: 5px 0 6px; border-radius: 9px; color: var(--ink-soft); font-size: 10px; line-height: 1.25; }
+/* Shaded by chance in four steps of the ink, the likeliest strongest and in bold: --fill is each step's share of ink. */
+.peek-ai-strip__cells > span { --fill: 0%; display: grid; justify-items: center; gap: 1px; padding: 5px 0 6px; border-radius: 9px;
+  background: color-mix(in srgb, var(--ink) var(--fill), transparent); color: var(--ink-soft); font-size: 10px; line-height: 1.25; }
 .peek-ai-strip__cells b { color: var(--ink); font-size: 12px; font-weight: 500; }
-.peek-ai-strip__cells > [data-likely] { background: color-mix(in srgb, var(--ink) 13%, transparent); }
-.peek-ai-strip__cells > [data-maybe] { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.peek-ai-strip [data-level="1"] { --fill: 5%; }
+.peek-ai-strip [data-level="2"] { --fill: 11%; }
+.peek-ai-strip [data-level="3"] { --fill: 19%; }
+.peek-ai-strip [data-level="4"] { --fill: 30%; }
+/* On the two strongest shades the weekday takes the ink, which the soft grey would lack contrast against. */
+.peek-ai-strip__cells > [data-level="3"], .peek-ai-strip__cells > [data-level="4"] { color: var(--ink); }
+.peek-ai-strip__cells > [data-level="4"] { font-weight: 600; }
+.peek-ai-strip__cells > [data-level="4"] b { font-weight: 700; }
 .peek-ai-strip__cells > [data-carrier] { box-shadow: inset 0 0 0 1.2px var(--ink-soft); }
 .peek-ai-strip__cells > [data-past] { opacity: .45; }
-.peek-ai-strip__key { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; color: var(--ink-soft); font-size: 10.5px; line-height: 1.4; }
-.peek-ai-strip__key i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 3px; vertical-align: -1px; }
-.peek-ai-strip__key i[data-likely] { background: color-mix(in srgb, currentColor 30%, transparent); }
+.peek-ai-strip__key { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; color: var(--ink-soft); font-size: 10.5px; line-height: 1.4; }
+.peek-ai-strip__key > span { display: inline-flex; align-items: center; gap: 5px; }
+.peek-ai-strip__scale { display: inline-flex; gap: 2px; }
+.peek-ai-strip__key i { --fill: 0%; display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: color-mix(in srgb, var(--ink) var(--fill), transparent); }
 .peek-ai-strip__key i[data-carrier] { box-shadow: inset 0 0 0 1.2px currentColor; }
+/* With more contrast asked for, the shades step further apart and every word takes the ink. */
+@media (prefers-contrast: more) {
+  .peek-ai-strip [data-level="1"] { --fill: 8%; }
+  .peek-ai-strip [data-level="2"] { --fill: 15%; }
+  .peek-ai-strip [data-level="3"] { --fill: 23%; }
+  .peek-ai-strip [data-level="4"] { --fill: 32%; }
+  .peek-ai-strip__cells > span, .peek-ai-strip__key { color: var(--ink); }
+  .peek-ai-strip__cells > [data-carrier] { box-shadow: inset 0 0 0 1.5px var(--ink); }
+}
 .peek-ai-fact > div { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 13px 14px; }
 .peek-ai-sheet__trained { margin: 12px 2px 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; text-align: center; }
 

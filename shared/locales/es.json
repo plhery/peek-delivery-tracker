@@ -1541,6 +1541,12 @@
   "peekAi.why.missedDate": "La fecha de {{carrier}} era ayer, pero vuelve a moverse.",
   "peekAi.why.ahead": "Según {{carrier}}, llega el {{date}}. Va adelantado.",
   "peekAi.why.noDate": "{{carrier}} no da fecha.",
+  "peekAi.reason.noOutForDelivery": "El paquete aún no ha salido a reparto. La mayoría de los paquetes que Peek ha seguido y que a esta hora no habían salido no llegaron ese día.",
+  "peekAi.reason.outForDelivery": "La mayoría de los paquetes de {{carrier}} que Peek ha seguido llegaron antes de las {{time}} el día que salieron a reparto. Este salió a las {{since}}.",
+  "peekAi.reason.lateOut": "El paquete sigue en reparto a estas horas. La mayoría de los paquetes que Peek ha seguido y que a esta hora seguían en reparto no llegaron ese día.",
+  "peekAi.reason.missedDate": "El paquete tuvo una actualización en las últimas 24 horas. La mayoría de los paquetes que Peek ha seguido y que siguieron moviéndose tras pasarse su fecha llegaron en uno o dos días.",
+  "peekAi.reason.ahead": "La mayoría de los paquetes que Peek ha seguido con actualizaciones como las suyas llegaron antes de la fecha que dio su transportista.",
+  "peekAi.reason.noDate": "Peek IA se fija en cuánto tardaron los paquetes que Peek ha seguido con actualizaciones como las suyas.",
   "peekAi.last.depot": "Llegó al centro de reparto {{ago}}.",
   "peekAi.last.customs": "Llegó a la aduana {{ago}}.",
   "peekAi.last.country": "Llegó al país de destino {{ago}}.",
@@ -1551,8 +1557,10 @@
   "peekAi.carrier.noHour": "{{carrier}} no da hora",
   "peekAi.carrier.wasDue": "La fecha de {{carrier}} era ayer",
   "peekAi.sheet.caption": "Lo que espera Peek IA",
-  "peekAi.sheet.days": "Días más probables",
-  "peekAi.sheet.hours": "Horas más probables",
+  "peekAi.sheet.daysByChance": "Días, primero los más probables",
+  "peekAi.sheet.hoursByChance": "Horas, primero las más probables",
+  "peekAi.sheet.lessLikely": "Menos probable",
+  "peekAi.sheet.moreLikely": "Más probable",
   "peekAi.sheet.carrierDate": "Fecha de {{carrier}}",
   "peekAi.sheet.why": "Por qué",
   "peekAi.sheet.sure": "Fiabilidad",
@@ -1560,5 +1568,5 @@
   "peekAi.sure.parcels": "Acierta {{n}} de cada 10 veces con paquetes como este.",
   "peekAi.sheet.show": "Mostrar Peek IA",
   "peekAi.sheet.showHint": "Solo cuando Peek tiene una pista clara. La mayoría de los paquetes no muestran nada.",
-  "peekAi.sheet.trained": "Peek IA ha aprendido de los miles de paquetes que Peek ha seguido. Es una estimación de Peek: {{carrier}} no la ha prometido."
+  "peekAi.sheet.trained": "Peek IA ha aprendido de los paquetes que Peek ha seguido. Es una estimación de Peek, no una promesa de {{carrier}}."
 }

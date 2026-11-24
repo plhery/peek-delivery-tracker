@@ -6,7 +6,8 @@ import type { Locale } from './locale';
 import type { Messages, Translate } from './messages';
 import type { PeekAi } from '../types';
 import {
-  currentPeekAi, peekAiCardWords, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiRecord, peekAiStrip, peekAiStripSpoken, peekAiWhy,
+  currentPeekAi, peekAiCardWords, peekAiCarrierWord, peekAiClaim, peekAiHeading, peekAiReason, peekAiRecord, peekAiShades, peekAiStrip, peekAiStripSpoken,
+  peekAiWhy,
   type PeekAiWording,
 } from './peekAi';
 
@@ -99,6 +100,20 @@ describe('Peek AI’s words', () => {
     expect(peekAiWhy(at(24 * 20), 'UPS', words())).toBe('UPS gives no date. Its last scan was 2 weeks ago.');
   });
 
+  it('says in its sheet what it goes by: the parcels Peek has followed, the carrier’s usual hour before this one’s', () => {
+    expect(peekAiReason(NOT_TODAY, 'DPD', words())).toBe(
+      'It hasn’t gone out for delivery yet. Most parcels Peek has followed that weren’t out by this hour didn’t arrive that day.');
+    expect(peekAiReason(BY_TIME, 'FedEx', words())).toBe(
+      'Most FedEx parcels Peek has followed arrived by 16:00 on the day they went out for delivery. This one went out at 08:12.');
+    expect(peekAiReason({ says: 'not_today', why: 'late_out', sure: 0.88 }, 'DPD', words())).toBe(
+      'It’s still out for delivery this late. Most parcels Peek has followed that were still out at this hour didn’t arrive that day.');
+    expect(peekAiReason({ ...NO_DATE, why: 'missed_date', says: 'today_or_tomorrow' }, 'DPD', words())).toBe(
+      'It was scanned in the last 24 hours. Most parcels Peek has followed that kept moving after missing their date arrived within a day or two.');
+    expect(peekAiReason(SOONER, 'DPD', words())).toBe('Most parcels Peek has followed with scans like this one’s came before the date their carrier gave.');
+    expect(peekAiReason(NO_DATE, 'UPS', words())).toBe(
+      'Peek AI goes by how long parcels Peek has followed with scans like this one’s took. It reached the delivery depot 2 days ago.');
+  });
+
   it('counts how often it was right, rounded down', () => {
     expect(peekAiRecord(NOT_TODAY, words())).toBe('Right 8 times in 10 at this hour.');
     expect(peekAiRecord(NO_DATE, words())).toBe('Right 8 times in 10 on parcels like this one.');
@@ -114,25 +129,33 @@ describe('Peek AI’s words', () => {
 });
 
 describe('the strip in Peek AI’s sheet', () => {
-  it('shows the days with their chance, the carrier’s day ringed', () => {
+  it('shades each cell in four steps against the likeliest still to come, none under 3 in 100 or gone by', () => {
+    const cells = [0.02, 0.06, 0.15, 0.25, 0.36, 0.4].map((chance) => ({ chance, past: false }));
+    expect(peekAiShades(cells)).toEqual([0, 1, 2, 3, 4, 4]);
+    // The likeliest hours gone by leave the scale to the ones still to come.
+    expect(peekAiShades([{ chance: 0.5, past: true }, { chance: 0.2, past: false }, { chance: 0.1, past: false }])).toEqual([0, 4, 2]);
+    expect(peekAiShades([{ chance: 0.5, past: true }])).toEqual([0]);
+  });
+
+  it('shows the days shaded by their chance, the carrier’s day ringed, and says them likeliest first', () => {
     const strip = peekAiStrip({ ...NO_DATE, carrier_day: '2026-11-27' }, words())!;
     expect(strip.kind).toBe('days');
     expect(strip.cells.map(({ over, main }) => `${over} ${main}`)).toEqual(['Tue 24', 'Wed 25', 'Thu 26', 'Fri 27']);
-    expect(strip.cells.map(({ likely, maybe, carrier }) => [likely, maybe, carrier])).toEqual([
-      [false, false, false], [true, false, false], [true, false, false], [false, true, true],
-    ]);
-    // What its tints and ring show, in words.
-    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Most likely days: Wed 25, Thu 26. DPD’s date: Fri 27');
+    expect(strip.cells.map(({ level, carrier }) => [level, carrier])).toEqual([[1, false], [3, false], [4, false], [2, true]]);
+    // What its shades and ring show, in words.
+    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Days, likeliest first: Thu 26, Wed 25, Fri 27, Tue 24. DPD’s date: Fri 27');
   });
 
-  it('shows the hours out for delivery two to a cell, the past ones faded', () => {
+  it('shows the hours out for delivery two to a cell, the past ones faded and unshaded', () => {
     const strip = peekAiStrip(BY_TIME, words())!;
     expect(strip.kind).toBe('hours');
     expect(strip.cells.map(({ main }) => main)).toEqual(['08:00', '10:00', '12:00', '14:00', '16:00']);
-    expect(strip.cells.map(({ likely, maybe, past }) => [likely, maybe, past])).toEqual([
-      [false, true, true], [true, false, true], [true, false, true], [true, false, false], [false, true, false],
-    ]);
-    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Most likely hours: 14:00');
+    expect(strip.cells.map(({ level, past }) => [level, past])).toEqual([[0, true], [0, true], [0, true], [4, false], [2, false]]);
+    expect(peekAiStripSpoken(strip, 'DPD', words())).toBe('Hours, likeliest first: 14:00, 16:00');
+    // In the morning the midday hours are the likeliest.
+    const morning = peekAiStrip(BY_TIME, words({ now: new Date(2026, 10, 24, 9, 30).getTime() }))!;
+    expect(morning.cells.map(({ level }) => level)).toEqual([1, 3, 4, 2, 1]);
+    expect(peekAiStripSpoken(morning, 'DPD', words())).toBe('Hours, likeliest first: 12:00, 10:00, 14:00, 08:00, 16:00');
     expect(peekAiStrip(NOT_TODAY, words())).toBeNull();
   });
 });

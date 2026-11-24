@@ -12,6 +12,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -28,9 +29,11 @@ import com.plhery.peekdeliverytracker.core.api.PeekAi
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.parcelPeekAi
 import com.plhery.peekdeliverytracker.core.peekAiClaim
+import com.plhery.peekdeliverytracker.core.peekAiReason
 import com.plhery.peekdeliverytracker.core.peekAiStrip
 import com.plhery.peekdeliverytracker.core.peekAiStripSpoken
 import com.plhery.peekdeliverytracker.core.peekAiUntil
+import com.plhery.peekdeliverytracker.core.peekAiWhy
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -48,7 +51,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * Peek AI on a parcel's page, in the demo at the captures' moment: Birthday gift's card says what Peek AI expects, and
- * its (i) opens the sheet, counted, with the days, which TalkBack hears in words; switching Peek AI off there keeps the
+ * its (i) opens the sheet, counted, with the days, which TalkBack hears in words, likeliest first, without their key, and
+ * what Peek AI goes by, where the card says why of the parcel; switching Peek AI off there keeps the
  * sheet up, counted, and the card is gone once it closes. Belgian chocolate's sheet has the hours, written again on the
  * reader's clock, each whole in its cell. Left open, a list lets the chocolate's "by 16:00" go at 16:00, or as the app
  * comes back after it, and a page lets its card and sheet go once their day has passed.
@@ -97,6 +101,9 @@ class PeekAiPageTest {
     private fun heard(tag: String): String? = compose.onAllNodes(hasTestTag(tag) or hasAnyAncestor(hasTestTag(tag)))
         .fetchSemanticsNodes().firstNotNullOfOrNull { it.config.getOrNull(SemanticsProperties.ContentDescription)?.joinToString() }
 
+    /** Whether TalkBack reads `words` as a text on the screen, as it merges the nodes. */
+    private fun shows(words: String): Boolean = compose.onAllNodes(hasText(words)).fetchSemanticsNodes().isNotEmpty()
+
     /** The carrier's name the page gives the named parcel. */
     private fun carrier(name: String): String = DemoCards.identities.displayName(DemoCards.parcel(name).displayedCarrier, AppLanguage.En)
 
@@ -106,16 +113,21 @@ class PeekAiPageTest {
         open("Birthday gift")
         // TalkBack hears it as Peek AI's: "Peek AI: likely by …".
         assertEquals(copy.text("peekAi.says", mapOf("words" to copy.peekAiClaim(ai("Birthday gift"), CAPTURED))), heard(PEEK_AI_CARD))
+        assertTrue(shows(copy.peekAiWhy(ai("Birthday gift"), carrier("Birthday gift"), CAPTURED)))
         assertFalse(exists(PEEK_AI_SHEET))
 
         compose.onNodeWithTag(PEEK_AI_INFO).performClick()
         settle()
         assertEquals("peek-ai-open", source.actions.last())
         assertTrue(exists(PEEK_AI_SHEET))
-        // The days' shades in words: the likely ones, then the carrier's.
+        // The days' shades in words: the shaded ones, likeliest first, then the carrier's. The key under them stays silent.
         val strip = requireNotNull(copy.peekAiStrip(ai("Birthday gift"), CAPTURED))
         assertEquals(copy.peekAiStripSpoken(strip, carrier("Birthday gift")), heard(PEEK_AI_STRIP))
-        assertTrue(heard(PEEK_AI_STRIP).orEmpty().startsWith(copy.text("peekAi.sheet.days") + ": "))
+        assertTrue(heard(PEEK_AI_STRIP).orEmpty().startsWith(copy.text("peekAi.sheet.daysByChance") + ": "))
+        assertFalse(shows(copy.text("peekAi.sheet.lessLikely")))
+        assertFalse(shows(copy.text("peekAi.sheet.moreLikely")))
+        // The sheet's Why is what Peek AI goes by, where the card says why of the parcel.
+        assertTrue(shows(copy.peekAiReason(ai("Birthday gift"), carrier("Birthday gift"), CAPTURED)))
         val toggled = { compose.onNodeWithTag(PEEK_AI_SHOW).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState) }
         assertEquals(ToggleableState.On, toggled())
 
@@ -140,7 +152,7 @@ class PeekAiPageTest {
         assertTrue(exists(PEEK_AI_CARD))
         compose.onNodeWithTag(PEEK_AI_INFO).performClick()
         settle()
-        assertTrue(heard(PEEK_AI_STRIP).orEmpty().startsWith(copy.text("peekAi.sheet.hours") + ": "))
+        assertTrue(heard(PEEK_AI_STRIP).orEmpty().startsWith(copy.text("peekAi.sheet.hoursByChance") + ": "))
     }
 
     /**

@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -80,6 +81,7 @@ import com.plhery.peekdeliverytracker.core.peekAiCarrierWord
 import com.plhery.peekdeliverytracker.core.peekAiChanges
 import com.plhery.peekdeliverytracker.core.peekAiClaim
 import com.plhery.peekdeliverytracker.core.peekAiHeading
+import com.plhery.peekdeliverytracker.core.peekAiReason
 import com.plhery.peekdeliverytracker.core.peekAiRecord
 import com.plhery.peekdeliverytracker.core.peekAiStrip
 import com.plhery.peekdeliverytracker.core.peekAiStripSpoken
@@ -381,9 +383,9 @@ internal fun PeekAiPageCard(state: DeliveriesState, parcel: Parcel, modifier: Mo
 
 /**
  * Peek AI's sheet, as the alerts' ([ParcelAlertSwitches]): "Peek AI" with the close button; what it expects on a card in
- * the carrier's livery, the heading over the carrier's own word, with the parcel; the days or hours ([PeekAiStrip]); why
- * and how often it was right; the switch that shows it (`shown`, `onShow`); and what it is, centred in caption. It is
- * drawn at `now`, the page's time.
+ * the carrier's livery, the heading over the carrier's own word, with the parcel; the days or hours ([PeekAiStrip]); what
+ * it goes by ([peekAiReason]) and how often it was right; the switch that shows it (`shown`, `onShow`); and what it is,
+ * centred in caption. It is drawn at `now`, the page's time.
  */
 @Composable
 internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boolean, now: Instant, onShow: (Boolean) -> Unit, close: () -> Unit) {
@@ -452,7 +454,7 @@ internal fun PeekAiSheet(parcel: Parcel, ai: PeekAi, carrier: String, shown: Boo
             }
             localizer.peekAiStrip(ai, now)?.let { PeekAiStripBox(it, carrier) }
             Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                PeekAiFact(BULB, localizer.text("peekAi.sheet.why"), localizer.peekAiWhy(ai, carrier, now))
+                PeekAiFact(BULB, localizer.text("peekAi.sheet.why"), localizer.peekAiReason(ai, carrier, now))
                 PeekAiFact(CHART, localizer.text("peekAi.sheet.sure"), localizer.peekAiRecord(ai))
                 SwitchRow(
                     PEEK_AI_SHOW, null, localizer.text("peekAi.sheet.show"), localizer.text("peekAi.sheet.showHint"), on = shown, enabled = true,
@@ -500,10 +502,11 @@ private fun PeekAiFact(icon: String, title: String, words: String) {
 }
 
 /**
- * The days Peek AI expects, each with its weekday over its date, or the hours two to a cell: the likely ones on the ink
- * at 13 %, the possible ones at 5 %, the carrier's day ringed and the hours gone faded; under them, what the shades say.
- * A cell's words keep to one line, shrinking to 70 % ("10:00 PM" on a narrow phone). TalkBack hears the shades in words
- * ([peekAiStripSpoken]).
+ * The days Peek AI expects, each with its weekday over its date, or the hours two to a cell, each shaded by its chance in
+ * four steps of the ink (`peekAiShades`, [stripFill]), the likeliest in bold: the weight says it without colour. The
+ * carrier's day is ringed and the hours gone faded. Under them, the scale from "Less likely" to "More likely" and the
+ * ring. A cell's words keep to one line, shrinking to 70 % ("10:00 PM" on a narrow phone). TalkBack hears the shades in
+ * words ([peekAiStripSpoken]), likeliest first, and not the key.
  */
 @Composable
 private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
@@ -511,7 +514,8 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val ink = colors.label
-    val soft = colors.secondaryText
+    // With more contrast asked for, every word takes the ink.
+    val soft = if (colors.highContrast) ink else colors.secondaryText
     val spoken = localizer.peekAiStripSpoken(strip, carrier)
     Column(
         Modifier
@@ -525,40 +529,67 @@ private fun PeekAiStripBox(strip: PeekAiStrip, carrier: String) {
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             for (cell in strip.cells) {
                 val shape = ContinuousRoundedShape(9.dp)
+                val likeliest = cell.level == 4
                 Column(
                     Modifier
                         .weight(1f)
                         .alpha(if (cell.past) 0.45f else 1f)
-                        .background(
+                        .background(stripFill(cell.level), shape)
+                        .then(
                             when {
-                                cell.likely -> ink.copy(alpha = ink.alpha * 0.13f)
-                                cell.maybe -> ink.copy(alpha = ink.alpha * 0.05f)
-                                else -> Color.Transparent
+                                !cell.carrier -> Modifier
+                                colors.highContrast -> Modifier.border(1.5.dp, ink, shape)
+                                else -> Modifier.border(1.2.dp, soft, shape)
                             },
-                            shape,
                         )
-                        .then(if (cell.carrier) Modifier.border(1.2.dp, soft, shape) else Modifier)
                         .padding(top = 5.dp, bottom = 6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(1.dp),
                 ) {
-                    if (cell.over.isNotEmpty()) CellWords(cell.over, type.caption2.sfLines().copy(color = soft))
-                    CellWords(cell.main, type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines().copy(color = ink))
+                    // On the two strongest shades the weekday takes the ink, which the soft grey would lack contrast against.
+                    if (cell.over.isNotEmpty()) {
+                        CellWords(
+                            cell.over,
+                            (if (likeliest) type.style(IosTextStyle.Caption2, FontWeight.SemiBold) else type.caption2).sfLines()
+                                .copy(color = if (cell.level >= 3) ink else soft),
+                        )
+                    }
+                    CellWords(cell.main, type.style(IosTextStyle.Footnote, if (likeliest) FontWeight.Bold else FontWeight.Medium).sfLines().copy(color = ink))
                 }
             }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            StripKey(localizer.text(if (strip.kind == PeekAiStrip.Kind.Hours) "peekAi.sheet.hours" else "peekAi.sheet.days"), soft) {
-                Box(Modifier.size(9.dp).background(soft.copy(alpha = soft.alpha * 0.3f), RoundedCornerShape(3.dp)))
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                KeyWords(localizer.text("peekAi.sheet.lessLikely"), soft)
+                Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                    for (level in 1..4) Box(Modifier.size(10.dp).background(stripFill(level), RoundedCornerShape(3.dp)))
+                }
+                KeyWords(localizer.text("peekAi.sheet.moreLikely"), soft)
             }
             if (strip.cells.any { it.carrier }) {
-                StripKey(localizer.text("peekAi.sheet.carrierDate", mapOf("carrier" to carrier)), soft) {
-                    Box(Modifier.size(9.dp).border(1.2.dp, soft, RoundedCornerShape(3.dp)))
+                Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.size(10.dp).border(1.2.dp, soft, RoundedCornerShape(3.dp)))
+                    KeyWords(localizer.text("peekAi.sheet.carrierDate", mapOf("carrier" to carrier)), soft)
                 }
             }
         }
     }
 }
+
+/**
+ * A strip cell's shade at `level` (`peekAiShades`), and its swatch in the key: the ink at 5, 11, 19 and 30 %, none at 0,
+ * further apart (8, 15, 23 and 32 %) with more contrast asked for. Light and dark alike.
+ */
+@Composable
+private fun stripFill(level: Int): Color {
+    val colors = PeekTheme.colors
+    val ink = colors.label
+    val share = (if (colors.highContrast) HIGH_CONTRAST_FILLS else FILLS).getOrElse(level) { 0f }
+    return if (share == 0f) Color.Transparent else ink.copy(alpha = ink.alpha * share)
+}
+
+private val FILLS = floatArrayOf(0f, 0.05f, 0.11f, 0.19f, 0.30f)
+private val HIGH_CONTRAST_FILLS = floatArrayOf(0f, 0.08f, 0.15f, 0.23f, 0.32f)
 
 /** A strip cell's words, on one line that shrinks to 70 % before it ends in an ellipsis, as the iPhone's. */
 @Composable
@@ -588,12 +619,10 @@ private fun Modifier.touchTarget(visible: Dp, target: Dp = 48.dp): Modifier = la
     layout(shown, shown) { placeable.place((shown - side) / 2, (shown - side) / 2) }
 }
 
+/** Words of the strip's key, in caption2. */
 @Composable
-private fun StripKey(words: String, tint: Color, swatch: @Composable () -> Unit) {
-    Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-        swatch()
-        Text(words, color = tint, style = PeekTheme.type.caption2.sfLines())
-    }
+private fun KeyWords(words: String, tint: Color) {
+    Text(words, color = tint, style = PeekTheme.type.caption2.sfLines())
 }
 
 // Test tags, named apart from the copy's `peekAi.*` keys.

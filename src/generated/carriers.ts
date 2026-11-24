@@ -14822,6 +14822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "rastreamento-seur",
+      "title": "Rastreamento SEUR: códigos, status e pontos Pickup",
+      "name": "SEUR",
+      "color": "#0063b3"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "rastreamento-4px",
@@ -14940,6 +14948,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento La Poste / Colissimo: códigos e status",
       "name": "La Poste / Colissimo",
       "color": "#ffcf00"
+    },
+    {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "rastreamento-correos-espanha",
+      "title": "Rastreamento Correos Espanha: códigos, status e Citypaq",
+      "name": "Correos",
+      "color": "#ffcd00"
     },
     {
       "id": "royal-mail",
@@ -17844,6 +17860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "seur-tracking",
+      "title": "SEUR 西班牙快递查询：单号、西语状态与 Pickup 自提点",
+      "name": "SEUR",
+      "color": "#0063b3"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "disifang-4px-wuliu-chaxun",
@@ -17978,6 +18002,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "La Poste / Colissimo 物流查询：单号格式与状态说明",
       "name": "La Poste / Colissimo",
       "color": "#ffcf00"
+    },
+    {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "correos-spain-tracking",
+      "title": "Correos 西班牙邮政查询：单号、状态、Citypaq 与清关",
+      "name": "Correos",
+      "color": "#ffcd00"
     },
     {
       "id": "royal-mail",

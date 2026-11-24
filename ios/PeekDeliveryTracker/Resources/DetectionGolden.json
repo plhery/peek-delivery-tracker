@@ -25906,6 +25906,20 @@
     ]
   },
   {
+    "input": "181199999999999984",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "spring-gds",
+      "bpost",
+      "ecoscooting",
+      "gls-es"
+    ],
+    "asked": [
+      "spring-gds"
+    ]
+  },
+  {
     "input": "18128500124181",
     "carrier": "unknown",
     "confidence": "low",
@@ -47732,6 +47746,25 @@
   },
   {
     "input": "4002847016405018",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "correos-express",
+      "canada-post",
+      "tnt",
+      "evri-uk"
+    ],
+    "asked": [
+      "correos-express",
+      "evri-uk",
+      "canada-post",
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "4006318880257783",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -89723,6 +89756,18 @@
     ]
   },
   {
+    "input": "CODE010988136",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "CODE012951468",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "COP0308572",
     "carrier": "unknown",
     "confidence": "low",
@@ -91783,7 +91828,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -95961,6 +96015,14 @@
     ]
   },
   {
+    "input": "FXLP9999999980DH",
+    "carrier": "xyl-ships",
+    "confidence": "high",
+    "candidates": [
+      "xyl-ships"
+    ]
+  },
+  {
     "input": "FZ246006535JB",
     "carrier": "chronopost",
     "confidence": "high",
@@ -96244,7 +96306,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -96275,7 +96346,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -96591,6 +96671,28 @@
     "confidence": "high",
     "candidates": [
       "gofo-it"
+    ]
+  },
+  {
+    "input": "GFL0118266",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
+    ]
+  },
+  {
+    "input": "GFL0125070",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
     ]
   },
   {
@@ -97462,7 +97564,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -97493,7 +97604,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -100884,6 +101004,17 @@
     ]
   },
   {
+    "input": "JTC999999999901",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "360lion"
+    ],
+    "asked": [
+      "360lion"
+    ]
+  },
+  {
     "input": "JTDE100007312985",
     "carrier": "j-and-t-de",
     "confidence": "high",
@@ -102269,6 +102400,18 @@
     ]
   },
   {
+    "input": "LB095118387LT",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "lietuvos-pastas",
+      "chronopost"
+    ]
+  },
+  {
     "input": "LB278261857GB",
     "carrier": "royal-mail",
     "confidence": "high",
@@ -102930,10 +103073,17 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
       "the-courier-guy",
+      "gls-nl",
       "loggi"
     ],
     "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
       "the-courier-guy"
     ]
   },
@@ -106752,7 +106902,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -108254,7 +108413,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -122482,7 +122650,16 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "gls-nl",
       "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {

@@ -475,7 +475,7 @@ export const CARRIER_CAPABILITIES = {
         }
       ],
       "recognitionRank": 524,
-      "recognitionPattern": "^1810\\d{14}$"
+      "recognitionPattern": "^181\\d{15}$"
     },
     "trackingUrlTemplate": "https://postnl.post/track?barcodes={trackingNumber}",
     "linkRules": [
@@ -519,7 +519,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^1810\\d{14}$",
+        "pattern": "^181\\d{15}$",
         "confidence": "low"
       }
     ],
@@ -1103,7 +1103,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}$",
+        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])[A-Z0-9]{8}$",
         "confidence": "low"
       },
       {
@@ -1569,7 +1569,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}$",
+        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])[A-Z0-9]{8}$",
         "confidence": "low"
       },
       {
@@ -2187,7 +2187,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}|\\d{11})$",
+        "pattern": "^(?:(?=[A-Z0-9]{8}$)(?=.*[A-Z])[A-Z0-9]{8}|\\d{11})$",
         "confidence": "low"
       },
       {
@@ -26237,7 +26237,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "codexpress"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -36810,7 +36810,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "airroad"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -41630,6 +41630,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^AR\\d{10}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^JTC\\d{12}$",
         "confidence": "low"
       }
     ],
@@ -51854,7 +51858,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "boxc"
     },
     "trackingUrlTemplate": "https://boxc.com/track/{trackingNumber}",
     "linkRules": [
@@ -55555,6 +55559,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^XLWL\\d{10}EXP?$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^FXLP\\d{10}DH$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://xylships.com/"
@@ -58222,7 +58230,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "gls"
       },
       {
-        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9]{8}$",
+        "pattern": "^(?=[A-Z0-9]{8}$)(?=.*[A-Z])[A-Z0-9]{8}$",
         "confidence": "low"
       }
     ],

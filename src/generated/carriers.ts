@@ -17748,6 +17748,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#050059"
     },
     {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "jt-express-middle-east-chaxun",
+      "title": "极兔中东（J&T Express 沙特/阿联酋/科威特）查询与客服",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
+    },
+    {
       "id": "far-international",
       "catalog": "far-international",
       "slug": "fanyuan-guoji-far-international-chaxun",
@@ -17802,6 +17810,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "通世集运（TSJY）物流查询：TSJY单号、状态与17FEIA转单",
       "name": "TSJY",
       "color": "#4042e2"
+    },
+    {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "stone3pl-kuajing-chaxun",
+      "title": "Stone3PL 国际物流单号查询：S 运单格式、状态与客服",
+      "name": "Stone3PL",
+      "color": "#003d98"
     },
     {
       "id": "xinghe-freight",

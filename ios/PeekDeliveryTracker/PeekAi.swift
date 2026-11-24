@@ -186,7 +186,8 @@ extension Localizer {
         case .thisWeek: return text("peekAi.claim.thisWeek")
         case .byEndOfNextWeek: return text("peekAi.claim.byEndOfNextWeek")
         case .sooner:
-            guard let day = ai.day else { return text("peekAi.claim.sooner") }
+            // A copy kept since its first day has gone by names no day.
+            guard let day = ai.day, day >= PeekAi.day(of: now) else { return text("peekAi.claim.sooner") }
             let tomorrow = PeekAi.calendar.date(byAdding: .day, value: 1, to: now).map(PeekAi.day(of:))
             return day == tomorrow ? text("peekAi.claim.soonerTomorrow") : text("peekAi.claim.soonerFrom", ["date": peekAiCalendar(day)])
         }

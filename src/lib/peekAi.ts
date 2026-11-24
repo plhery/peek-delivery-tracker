@@ -120,9 +120,12 @@ export function peekAiClaim(ai: PeekAi, wording: PeekAiWording): string {
     case 'today_or_tomorrow': return t('peekAi.claim.todayOrTomorrow');
     case 'this_week': return t('peekAi.claim.thisWeek');
     case 'by_end_of_next_week': return t('peekAi.claim.byEndOfNextWeek');
-    case 'sooner':
-      if (!ai.day) return t('peekAi.claim.sooner');
-      return ai.day === addDays(isoDay(new Date(now)), 1) ? t('peekAi.claim.soonerTomorrow') : t('peekAi.claim.soonerFrom', { date: calendar(ai.day, wording) });
+    case 'sooner': {
+      const today = isoDay(new Date(now));
+      // A copy kept since its first day has gone by names no day.
+      if (!ai.day || ai.day < today) return t('peekAi.claim.sooner');
+      return ai.day === addDays(today, 1) ? t('peekAi.claim.soonerTomorrow') : t('peekAi.claim.soonerFrom', { date: calendar(ai.day, wording) });
+    }
   }
 }
 

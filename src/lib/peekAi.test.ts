@@ -81,6 +81,8 @@ describe('Peek AI’s words', () => {
     expect(peekAiClaim(BY_TIME, words())).toBe('likely by 16:00');
     expect(peekAiClaim(SOONER, words())).toBe('maybe sooner, from tomorrow');
     expect(peekAiClaim({ ...SOONER, day: '2026-11-26' }, words())).toBe('maybe sooner, from Thu 26 Nov');
+    // Kept past its first day, it names none.
+    expect(peekAiClaim({ ...SOONER, day: '2026-11-23' }, words())).toBe('maybe sooner');
     expect(peekAiClaim({ ...NO_DATE, says: 'by_end_of_next_week' }, words())).toBe('likely by the end of next week');
   });
 

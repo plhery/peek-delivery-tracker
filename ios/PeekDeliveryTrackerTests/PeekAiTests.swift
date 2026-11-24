@@ -195,6 +195,8 @@ final class PeekAiTests: XCTestCase {
         XCTAssertEqual(english.peekAiClaim(byTime, now: now), "likely by 16:00")
         XCTAssertEqual(english.peekAiClaim(sooner, now: now), "maybe sooner, from tomorrow")
         XCTAssertEqual(english.peekAiClaim(with(sooner) { $0.day = "2026-11-26" }, now: now), "maybe sooner, from Thu 26 Nov")
+        // Kept past its first day, it names none.
+        XCTAssertEqual(english.peekAiClaim(with(sooner) { $0.day = "2026-11-23" }, now: now), "maybe sooner")
         XCTAssertEqual(english.peekAiClaim(with(noDate) { $0.says = .byEndOfNextWeek }, now: now), "likely by the end of next week")
     }
 

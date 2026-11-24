@@ -14982,6 +14982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "rastreamento-lietuvos-pastas",
+      "title": "Rastreamento Lietuvos paštas: correio da Lituânia e lockers",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "rastreamento-ups",
@@ -15340,6 +15348,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Jadlog: código de 14 dígitos, Pickup e status",
       "name": "Jadlog",
       "color": "#dc0032"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "rastreamento-jt-express-mexico",
+      "title": "Rastreamento J&T Express México: códigos JMX e atendimento",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     },
     {
       "id": "360lion",
@@ -18228,6 +18244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "lietuvos-pastas-litaowan-youzheng-chaxun",
+      "title": "立陶宛邮政 Lietuvos paštas 查询：单号、状态与快递柜",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-guoji-kuaidi-chaxun",
@@ -18778,6 +18802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "XYL-Ships（FXYL）物流查询：NUDE与XLWL单号及状态",
       "name": "XYL-Ships",
       "color": "#b13c3c"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "jt-express-mexico-kuaidi-chaxun",
+      "title": "墨西哥极兔速递 J&T Express Mexico 查询：JMX 单号与客服",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     },
     {
       "id": "360lion",

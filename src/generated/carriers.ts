@@ -14750,6 +14750,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#008284"
     },
     {
+      "id": "cainiao",
+      "catalog": "aliexpress",
+      "slug": "rastreamento-cainiao",
+      "title": "Rastreamento Cainiao (AliExpress): códigos, status e ajuda",
+      "name": "Cainiao",
+      "color": "#e62e04"
+    },
+    {
+      "id": "4px",
+      "catalog": "four-px",
+      "slug": "rastreamento-4px",
+      "title": "Rastreamento 4PX: códigos, status, alfândega e contato",
+      "name": "4PX",
+      "color": "#005add"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "rastreamento-yanwen",
@@ -14772,6 +14788,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento iMile: códigos, status, alfândega e contato",
       "name": "iMile",
       "color": "#0032a0"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "rastreamento-sf-express",
+      "title": "Rastreamento SF Express: códigos SF, status e contato",
+      "name": "SF Express",
+      "color": "#dc1e32"
     },
     {
       "id": "correios-br",

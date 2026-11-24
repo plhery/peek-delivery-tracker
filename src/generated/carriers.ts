@@ -4644,6 +4644,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed010b"
     },
     {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "correos-de-mexico-sendungsverfolgung",
+      "title": "Correos de México Sendungsverfolgung: S10-MX-Codes & Hilfe",
+      "name": "Correos de México",
+      "color": "#ed007d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6862,6 +6870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed010b"
     },
     {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "suivi-correos-de-mexico",
+      "title": "Suivi Correos de México\u00a0: codes S10 MX, réclamations et aide",
+      "name": "Correos de México",
+      "color": "#ed007d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9062,6 +9078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento CMT Express: codici CMT, hub Shenzhen e aiuto",
       "name": "CMT Express",
       "color": "#ed010b"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "tracciamento-correos-de-mexico",
+      "title": "Tracciamento Correos de México: codici S10 MX e reclami",
+      "name": "Correos de México",
+      "color": "#ed007d"
     },
     {
       "id": "liccardi",
@@ -13508,6 +13532,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed010b"
     },
     {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "rastreio-correos-de-mexico",
+      "title": "Rastreio Correos de México: códigos S10 MX e reclamações",
+      "name": "Correos de México",
+      "color": "#ed007d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "rastreio-buffalo-ex",
@@ -15782,6 +15814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CMT Express: kody CMT, hub Shenzhen i kontakt",
       "name": "CMT Express",
       "color": "#ed010b"
+    },
+    {
+      "id": "correos-de-mexico",
+      "catalog": "correos-de-mexico",
+      "slug": "sledzenie-correos-de-mexico",
+      "title": "Śledzenie Correos de México: kody S10 MX i reklamacje",
+      "name": "Correos de México",
+      "color": "#ed007d"
     },
     {
       "id": "buffalo-ex",

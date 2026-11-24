@@ -272,7 +272,7 @@
   { "id": "chukou1", "catalog": "chukou1", "name": "Chukou1", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cj-packet", "catalog": "cj-packet", "name": "CJ Packet", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "cmt-express", "catalog": "cmt-express", "name": "CMT Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es"] },
+  { "id": "correos-de-mexico", "catalog": "correos-de-mexico", "name": "Correos de México", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "dobropost", "catalog": "dobropost", "name": "DobroPost", "languages": ["en", "ru"] },
   { "id": "ems", "catalog": "ems", "name": "EMS", "languages": ["en"] },
   { "id": "jiayang", "catalog": "jiayang", "name": "Jiayang International", "languages": ["en"] },

@@ -29,14 +29,20 @@ it.each(['direct', 'universal'])('reaches a real fallback after a slow %s failur
   let elapsed = 0;
   vi.spyOn(performance, 'now').mockImplementation(() => elapsed);
   vi.spyOn(monitoring, 'reportRoutingEvent').mockImplementation(() => undefined);
-  const fetcher = vi.fn<typeof fetch>().mockImplementation(async () => {
-    if (slow === 'universal' && fetcher.mock.calls.length === 1) {
+  // Requests other than ParcelsApp's tracking page, which the scraper opens for its ticket
+  // before the API from 0.1334.0 on.
+  let asked = 0;
+  const fetcher = vi.fn<typeof fetch>().mockImplementation(async (input) => {
+    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+    if (url.startsWith('https://parcelsapp.com/en/tracking/')) return new Response('<html></html>', { headers: { 'Content-Type': 'text/html' } });
+    asked += 1;
+    if (slow === 'universal' && asked === 1) {
       elapsed += 50_000.5;
       return new Response('', { status: 503 });
     }
     // Exercise HTTP-to-browser recovery as well as the router's budget. The
     // direct ParcelsApp tier now runs before the existing browser capture.
-    if (slow === 'direct' && fetcher.mock.calls.length === 1) return Response.json({ error: 'RELOAD' });
+    if (slow === 'direct' && asked === 1) return Response.json({ error: 'RELOAD' });
     return browserReply(slow === 'direct' ? 'ParcelsApp' : '17TRACK');
   });
   const tracker = new UniversalTracker({ trawlUrl: 'http://browser.test', fetcher,
@@ -55,7 +61,7 @@ it.each(['direct', 'universal'])('reaches a real fallback after a slow %s failur
     ...(slow === 'universal' ? { carrier_data: { routing: { version: 1, configured_carrier: 'unknown', preferred_provider: 'Ship24' } } } : {}),
   }, false);
   expect(result.result.tracking_provider).toBe(slow === 'direct' ? 'ParcelsApp' : '17TRACK');
-  expect(fetcher).toHaveBeenCalledTimes(2);
+  expect(asked).toBe(2);
   const sent = JSON.parse(String(fetcher.mock.calls.at(-1)![1]?.body));
   expect(Number.isInteger(sent.maxTimeout)).toBe(true);
   expect(sent.maxTimeout).toBeLessThanOrEqual(slow === 'direct' ? 45_000 : 29_999.25);

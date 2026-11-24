@@ -4468,6 +4468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b13c3c"
     },
     {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "jadlog-sendungsverfolgung",
+      "title": "Jadlog Sendungsverfolgung: 14 Ziffern, Pickup & Predict",
+      "name": "Jadlog",
+      "color": "#dc0032"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "jt-express-mexico-sendungsverfolgung",
@@ -6502,6 +6510,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b13c3c"
     },
     {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "suivi-jadlog",
+      "title": "Suivi Jadlog\u00a0: code à 14 chiffres, Pickup, Predict et aide",
+      "name": "Jadlog",
+      "color": "#dc0032"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "suivi-jt-express-mexico",
@@ -8512,6 +8528,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b13c3c"
     },
     {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "tracciamento-jadlog",
+      "title": "Tracciamento Jadlog: 14 cifre, Pickup, Predict e stati",
+      "name": "Jadlog",
+      "color": "#dc0032"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "tracciamento-jt-express-mexico",
@@ -10520,6 +10544,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento XYL-Ships: códigos NUDE y XLWL y estados",
       "name": "XYL-Ships",
       "color": "#b13c3c"
+    },
+    {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "seguimiento-jadlog",
+      "title": "Seguimiento Jadlog: 14 dígitos, Pickup, Predict y estados",
+      "name": "Jadlog",
+      "color": "#dc0032"
     },
     {
       "id": "j-and-t-mx",
@@ -12604,6 +12636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b13c3c"
     },
     {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "rastreio-jadlog",
+      "title": "Rastreio Jadlog: códigos de 14 dígitos, Pickup e Predict",
+      "name": "Jadlog",
+      "color": "#dc0032"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "rastreio-jt-express-mexico",
@@ -14686,6 +14726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie XYL-Ships: numery NUDE i XLWL oraz statusy",
       "name": "XYL-Ships",
       "color": "#b13c3c"
+    },
+    {
+      "id": "jadlog",
+      "catalog": "jadlog",
+      "slug": "sledzenie-jadlog",
+      "title": "Śledzenie Jadlog: 14 cyfr, Pickup, Predict i statusy",
+      "name": "Jadlog",
+      "color": "#dc0032"
     },
     {
       "id": "gls-pl",

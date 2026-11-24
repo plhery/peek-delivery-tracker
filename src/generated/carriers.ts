@@ -4524,6 +4524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "dtdc-sendungsverfolgung",
+      "title": "DTDC Sendungsverfolgung: AWB-Formate, RTO & Kontakt",
+      "name": "DTDC",
+      "color": "#0d237d"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "nova-global-sendungsverfolgung",
@@ -6630,6 +6638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#015db9"
     },
     {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "suivi-dtdc",
+      "title": "Suivi DTDC\u00a0: formats AWB, statuts RTO, délais et aide",
+      "name": "DTDC",
+      "color": "#0d237d"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "suivi-nova-global",
@@ -8710,6 +8726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento YDH: codici YDH...YQ e AZ, passaggi e aiuto",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "tracciamento-dtdc",
+      "title": "Tracciamento DTDC: formati AWB, stati RTO e assistenza",
+      "name": "DTDC",
+      "color": "#0d237d"
     },
     {
       "id": "nova-global",
@@ -10808,6 +10832,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento A Tu Hora Express: códigos y código postal",
       "name": "A Tu Hora Express",
       "color": "#1d2a84"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "seguimiento-dtdc",
+      "title": "Seguimiento DTDC: formatos AWB, estados RTO y soporte",
+      "name": "DTDC",
+      "color": "#0d237d"
     },
     {
       "id": "gofo-es",
@@ -12946,6 +12978,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio YDH: códigos YDH...YQ e AZ, entregas e ajuda",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "rastreio-dtdc",
+      "title": "Rastreio DTDC: formatos AWB, estados RTO e contactos",
+      "name": "DTDC",
+      "color": "#0d237d"
     },
     {
       "id": "nova-global",
@@ -15102,6 +15142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YDH: kody YDH...YQ i AZ, przekazania i pomoc",
       "name": "YDH",
       "color": "#015db9"
+    },
+    {
+      "id": "dtdc",
+      "catalog": "dtdc",
+      "slug": "sledzenie-dtdc",
+      "title": "Śledzenie DTDC: formaty AWB, statusy RTO i pomoc",
+      "name": "DTDC",
+      "color": "#0d237d"
     },
     {
       "id": "nova-global",

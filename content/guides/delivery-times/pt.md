@@ -87,6 +87,8 @@ Deixaram um aviso porque não estavas em casa? Vê [encomenda não entregue](gui
 
 O Peek verifica até de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, enquanto tens a encomenda aberta ou as notificações ativas, a partir das 6h00, hora local, e, se a transportadora der uma janela, no máximo meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te notificações com a opção «Só a entrega». Assim não tens de atualizar a página. Através de serviços de seguimento como o 17TRACK, nesse dia verifica até de 15 em 15 minutos, enquanto tens a encomenda aberta ou as notificações ativas, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
 
+Quando a transportadora não indica hora para uma encomenda em distribuição, o [Peek IA](guide:peek-ai) pode indicar uma se tiver uma pista forte, por exemplo «provavelmente até às 16:00»: a maioria das encomendas dessa transportadora que o Peek seguiu tinha chegado até essa hora.
+
 ## Há entregas nos feriados?
 
 Normalmente, não. A InPost diz que não há distribuição aos feriados nos Pontos Pack e Lockers, a GLS entrega de segunda a sexta-feira e a DPD conta o prazo em dias úteis.

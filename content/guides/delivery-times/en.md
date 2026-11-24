@@ -91,6 +91,8 @@ A card saying the driver came while you were out? See [missed delivery](guide:mi
 
 Peek checks up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, while you have the parcel open or notifications are on, from 6 a.m. local time and, when the carrier gives a window, no earlier than half an hour before it opens, while the carrier's own tracker answers), and can notify you just when the parcel goes out for delivery and when it arrives ("Delivery only"), so you can stop refreshing. Through tracking services such as 17TRACK it checks up to every 15 minutes that day while you have it open or notifications are on, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France, the Netherlands and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane, for China Post and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US, Cainiao, J&T Express in Brazil and Onlog Express). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
+For a parcel out for delivery without an hour from the carrier, [Peek AI](guide:peek-ai) may give one when it has a strong hint, such as "likely by 16:00": most of that carrier's parcels Peek has followed had arrived by then.
+
 ## Do parcels get delivered on bank holidays?
 
 Usually not. Royal Mail doesn't deliver on bank holidays, and Canada Post doesn't deliver on statutory holidays. Australia Post stops all deliveries on national public holidays, and local ones on state and local holidays.

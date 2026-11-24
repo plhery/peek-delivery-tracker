@@ -101,6 +101,8 @@ Se BRT non ti ha trovato, il tracking scrive `Destin.Assente:LASCIATO AVVISO` (�
 
 Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, solo mentre lo hai aperto o hai le notifiche attive, dalle 6.00 ora locale e, se il corriere indica una fascia oraria, non prima di mezz'ora dal suo inizio, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek lo controlla quel giorno fino a ogni 15 minuti, solo mentre lo hai aperto o hai le notifiche attive, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia, Paesi Bassi e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane, China Post e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti, Cainiao, J&T Express in Brasile e Onlog Express). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
 
+Se il corriere non indica un orario per un pacco in consegna, [Peek IA](guide:peek-ai) può darne uno quando ha un indizio forte, per esempio «probabilmente entro le 16:00»: la maggior parte dei pacchi di quel corriere seguiti da Peek era arrivata entro quell'ora.
+
 ## Il corriere consegna nei giorni festivi?
 
 Di solito no. Poste Italiane conta i tempi di consegna «sabato e festivi esclusi», BRT sospende i suoi nei festivi infrasettimanali e durante le chiusure per ferie estive e invernali, e la Posta svizzera non consegna pacchi PostPac nei giorni festivi.

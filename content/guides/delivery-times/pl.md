@@ -73,6 +73,8 @@ Kurier był, ale cię nie zastał? Zobacz [awizo i nieudana próba doręczenia](
 
 Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, gdy masz paczkę otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, nie wcześniej niż pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i może dać ci znać tylko wtedy, gdy przesyłka trafia do doręczenia i gdy dociera („Tylko doręczenie”), więc nie musisz w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
+Gdy przewoźnik nie podaje godziny dla paczki w doręczeniu, [Peek AI](guide:peek-ai) może ją podać, jeśli ma mocną wskazówkę, np. „pewnie do 16:00”: większość paczek tego przewoźnika, które śledził Peek, dotarła do tej godziny.
+
 ## Czy kurierzy dostarczają paczki w święta?
 
 Zwykle nie. W regulaminie Pocztex dzień roboczy to poniedziałek–piątek bez dni ustawowo wolnych od pracy. Są nimi wszystkie niedziele i święta, w tym 1 i 11 listopada, 24 grudnia (Wigilia) i oba dni Bożego Narodzenia. Harmonogram na święta sprawdź u swojego przewoźnika.

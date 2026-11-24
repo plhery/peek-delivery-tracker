@@ -4508,6 +4508,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fa4616"
     },
     {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "360lion-sendungsverfolgung",
+      "title": "360Lion Sendungsverfolgung: WSH- & AR-Codes & Kontakt",
+      "name": "360Lion",
+      "color": "#cf5d15"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6572,6 +6580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi HayPost\u00a0: numéros AM, statuts et contacts",
       "name": "HayPost",
       "color": "#fa4616"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "suivi-360lion",
+      "title": "Suivi 360Lion\u00a0: codes WSH et AR, statuts et contacts",
+      "name": "360Lion",
+      "color": "#cf5d15"
     }
   ],
   "it": [
@@ -8616,6 +8632,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fa4616"
     },
     {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "tracciamento-360lion",
+      "title": "Tracciamento 360Lion: codici WSH e AR, stati e contatti",
+      "name": "360Lion",
+      "color": "#cf5d15"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -10656,6 +10680,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento HayPost: códigos AM, estados y contactos",
       "name": "HayPost",
       "color": "#fa4616"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "seguimiento-360lion",
+      "title": "Seguimiento 360Lion: códigos WSH y AR, estados y ayuda",
+      "name": "360Lion",
+      "color": "#cf5d15"
     },
     {
       "id": "paquetexpress",
@@ -12770,6 +12802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio HayPost: códigos AM, estados e contactos",
       "name": "HayPost",
       "color": "#fa4616"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "rastreio-360lion",
+      "title": "Rastreio 360Lion: códigos WSH e AR, estados e contactos",
+      "name": "360Lion",
+      "color": "#cf5d15"
     }
   ],
   "pt-br": [
@@ -14886,6 +14926,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie HayPost: kody AM, statusy i kontakty",
       "name": "HayPost",
       "color": "#fa4616"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "sledzenie-360lion",
+      "title": "Śledzenie 360Lion: kody WSH i AR, statusy i kontakt",
+      "name": "360Lion",
+      "color": "#cf5d15"
     }
   ],
   "ru": [

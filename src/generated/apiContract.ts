@@ -1029,7 +1029,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^(?!8880|3[016]000)\\d{15}$",
+        "pattern": "^(?!888[01]|3[016]000)\\d{15}$",
         "confidence": "low",
         "checksum": "gs1",
         "preferred": true
@@ -21910,7 +21910,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^8880\\d{11}$",
+        "pattern": "^888[01]\\d{11}$",
         "confidence": "high"
       }
     ],
@@ -34588,7 +34588,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "joom-logistics"
     },
     "trackingUrlTemplate": "https://joomlogistics.com/en/track?id={trackingNumber}",
     "linkRules": [
@@ -64292,7 +64292,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zhongzhou-logistics"
     },
     "linkRules": [],
     "detectionRules": []
@@ -69166,6 +69166,41 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [],
     "trackingSearchUrl": "https://www.ctlgroup.pl/tracking",
     "helpUrl": "https://www.ctlgroup.pl/kontakt"
+  },
+  "shengao": {
+    "displayName": "SHENGAO",
+    "aliases": [
+      "盛傲物流",
+      "Shengao International Logistics",
+      "深圳市盛傲国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#084485",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "shengao"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "shengaoguojiwuliu.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^SA\\d{10}GJ$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -71279,7 +71314,8 @@ export const CARRIER_IDS = [
   "planete-courrier",
   "booths-logistics",
   "dragonfly-au",
-  "ctl-group-pl"
+  "ctl-group-pl",
+  "shengao"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

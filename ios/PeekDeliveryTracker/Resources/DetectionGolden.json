@@ -49178,6 +49178,17 @@
     ]
   },
   {
+    "input": "4208000792612927005645000002516253",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps"
+    ],
+    "preferred": [
+      "usps"
+    ]
+  },
+  {
     "input": "420902459261290336128704042634",
     "carrier": "unknown",
     "confidence": "low",
@@ -49193,10 +49204,32 @@
     ]
   },
   {
+    "input": "4209408592748927005645000005530306",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps"
+    ],
+    "preferred": [
+      "usps"
+    ]
+  },
+  {
     "input": "420940899234690327908706209435",
     "carrier": "usps",
     "confidence": "high",
     "candidates": [
+      "usps"
+    ]
+  },
+  {
+    "input": "4209811592748927005645000004650272",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "usps"
+    ],
+    "preferred": [
       "usps"
     ]
   },
@@ -76278,6 +76311,14 @@
     ]
   },
   {
+    "input": "888199999999980",
+    "carrier": "j-and-t-br",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-br"
+    ]
+  },
+  {
     "input": "88837165311674",
     "carrier": "unknown",
     "confidence": "low",
@@ -82709,6 +82750,35 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "99970849367338",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -94058,6 +94128,12 @@
     ]
   },
   {
+    "input": "EL356-230927-0298",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "EL597416197JP",
     "carrier": "japan-post",
     "confidence": "high",
@@ -98471,6 +98547,14 @@
     "asked": [
       "evri",
       "evri-uk"
+    ]
+  },
+  {
+    "input": "H1002710936861101050",
+    "carrier": "hermes-de",
+    "confidence": "high",
+    "candidates": [
+      "hermes-de"
     ]
   },
   {
@@ -110777,6 +110861,17 @@
     ]
   },
   {
+    "input": "RA103984139MN",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "RA123456789CH",
     "carrier": "unknown",
     "confidence": "none",
@@ -111920,6 +112015,30 @@
     "asked": [
       "south-african-post-office",
       "chronopost"
+    ]
+  },
+  {
+    "input": "RJ231407775RU",
+    "carrier": "russian-post",
+    "confidence": "high",
+    "candidates": [
+      "russian-post"
+    ]
+  },
+  {
+    "input": "RJ231423716RU",
+    "carrier": "russian-post",
+    "confidence": "high",
+    "candidates": [
+      "russian-post"
+    ]
+  },
+  {
+    "input": "RJ231427443RU",
+    "carrier": "russian-post",
+    "confidence": "high",
+    "candidates": [
+      "russian-post"
     ]
   },
   {
@@ -113878,6 +113997,14 @@
     "candidates": []
   },
   {
+    "input": "RY160739485HK",
+    "carrier": "hongkong-post",
+    "confidence": "high",
+    "candidates": [
+      "hongkong-post"
+    ]
+  },
+  {
     "input": "RY334745545CN",
     "carrier": "china-post",
     "confidence": "high",
@@ -114135,6 +114262,14 @@
     ],
     "asked": [
       "speedaf"
+    ]
+  },
+  {
+    "input": "SA9999999980GJ",
+    "carrier": "shengao",
+    "confidence": "high",
+    "candidates": [
+      "shengao"
     ]
   },
   {

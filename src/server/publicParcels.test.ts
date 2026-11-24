@@ -414,6 +414,20 @@ describe('what a link shows', () => {
     }
   });
 
+  it('says when the round a parcel went out on is over, except to whom a gift is still wrapped', () => {
+    const scan = { id: 'out', package_id: 'parcel', stage: 'out_for_delivery', description: 'Out for delivery', location: null,
+      occurred_at: '2026-10-02T06:10:00+00:00', provider_event_id: 'swiss-post:out', point: null, recipient_action: null };
+    const shown = (link: Record<string, unknown>) => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-01T08:00:00Z', forget_at: null, ...link },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'out_for_delivery',
+        created_at: '2026-10-01T08:00:00Z', expected_delivery: null, carrier_data: {}, tracking_events: [scan] },
+    }, alerts).package;
+    // Zurich's midnight, in summer time.
+    expect(shown({}).delivery_round_ends_at).toBe('2026-10-03T00:00:00+02:00');
+    expect(shown({ owner: true }).delivery_round_ends_at).toBe('2026-10-03T00:00:00+02:00');
+    expect(shown({ gift: true })).not.toHaveProperty('delivery_round_ends_at');
+  });
+
   it('asks the owner to correct a placeholder number, showing nothing of the shipments merged under it', () => {
     const merged = { id: 'merged', package_id: 'parcel', stage: 'delivered', description: 'Delivered', location: 'Lyon',
       occurred_at: '2026-10-02T07:00:00+00:00', provider_event_id: 'unknown:merged', point: null };

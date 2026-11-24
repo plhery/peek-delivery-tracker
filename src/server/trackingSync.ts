@@ -638,6 +638,12 @@ export function deliveryToday(parcel: JsonObject, now: Date): string {
   return DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
 }
 
+/** When the day `instant` falls on ends on the delivery clock (`deliveryClock`), as a moment with that clock's offset. */
+export function deliveryDayEnd(parcel: JsonObject, instant: string): string | null {
+  const at = DateTime.fromISO(instant, { zone: deliveryClock(parcel) });
+  return at.isValid ? at.startOf('day').plus({ days: 1 }).toISO({ suppressMilliseconds: true }) : null;
+}
+
 /** Whether the carrier's page states every scan on a clock of its own, not the scan's, as Landmark Global's US Central time (the catalog's `pageClock`). */
 function pageClock(carrier: string): boolean {
   return CARRIER_DEFINITIONS[carrier as CarrierId]?.tracking.pageClock === true;

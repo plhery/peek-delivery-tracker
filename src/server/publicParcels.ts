@@ -632,6 +632,8 @@ export function publicParcelResponse(
       expected_delivery: optionalText(row.expected_delivery),
       // A wrapped gift says nothing of a day it missed.
       ...(!wrapped && typeof row.expected_delivery_passed === 'string' ? { expected_delivery_passed: row.expected_delivery_passed } : {}),
+      // Nor when its round was over.
+      ...(!wrapped && typeof row.delivery_round_ends_at === 'string' ? { delivery_round_ends_at: row.delivery_round_ends_at } : {}),
       // Nor when Peek thinks it will come.
       ...(!wrapped && isRecord(row.peek_ai) ? { peek_ai: row.peek_ai as unknown as ApiPeekAi } : {}),
       // The carrier's status line can name the place the newest scan was made.

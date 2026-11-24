@@ -29,6 +29,8 @@ import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
+import com.plhery.peekdeliverytracker.core.api.PublicPackage
+import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -1347,6 +1349,35 @@ class ParcelLogicTests {
         assertEquals("link.quietLong", quietFor(21 * 86_400L))
         assertEquals("link.quietLong", quietFor(40 * 86_400L))
         assertEquals("link.quiet", makeParcel(id).quietNoteKey(now))
+    }
+
+    // As src/lib/parcelPriority.test.ts: a parcel out for delivery is flagged once its round is over on the parcel's
+    // clock, which the server serves as delivery_round_ends_at, whatever the device's.
+    @Test
+    fun aParcelOutForDeliveryIsFlaggedOnceItsRoundIsOverOnTheParcelsClock() {
+        val id = UUID.randomUUID()
+        fun at(value: String) = DateParser.date(value)!!
+        // Out at 07:10 in Sydney on the 6th: the round ends at Sydney's midnight, still the 6th on a European device.
+        var out = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-08-05T08:00:00Z"), event(id, TrackingStage.OutForDelivery, "2026-08-05T21:10:00Z")))
+        assertNull(out.attention(at("2026-08-09T12:00:00Z")))
+        out = out.copy(deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00")
+        assertNull(out.attention(at("2026-08-06T13:59:59Z")))
+        assertEquals(ParcelAttention.Stalled, out.attention(at("2026-08-06T14:00:00Z")))
+        assertEquals(ParcelAttention.Stalled, out.notice(at("2026-08-06T14:00:00Z")))
+        // Another stage keeps its own rules.
+        val pickup = out.copy(trackingEvents = out.trackingEvents + event(id, TrackingStage.ReadyForPickup, "2026-08-06T04:00:00Z"))
+        assertEquals(ParcelAttention.ReadyForPickup, pickup.attention(at("2026-08-06T14:00:00Z")))
+        val moved = out.copy(trackingEvents = out.trackingEvents + event(id, TrackingStage.InTransit, "2026-08-06T04:00:00Z"))
+        assertNull(moved.attention(at("2026-08-06T14:00:00Z")))
+        // A parcel read through a link keeps the moment.
+        val shared = Parcel(
+            shared = PublicPackage(
+                id = id, trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, createdAt = "2026-08-01T08:00:00Z",
+                syncStatus = SyncStatus.Ok, carrierData = PublicPackageCarrierData(), notificationsMuted = false,
+                trackingEvents = out.trackingEvents, deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00",
+            ),
+        )
+        assertEquals(ParcelAttention.Stalled, shared.attention(at("2026-08-06T14:00:00Z")))
     }
 
     @Test

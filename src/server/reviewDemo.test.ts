@@ -120,12 +120,15 @@ describe('review demo parcels', () => {
     const stored = row('TESTOUT01', 'swiss-post', 'IKEA');
     // Midnight in Zürich, whatever the clock of the machine running the test.
     const midnight = Date.parse('2026-11-16T23:00:00.000Z');
-    for (const minutes of [5, 59, 61, 12 * 60 + 30, 23 * 60 + 55]) {
+    for (const minutes of [1, 5, 59, 61, 12 * 60 + 30, 23 * 60 + 55]) {
       const now = midnight + minutes * 60_000;
       const parcel = served(stored, reviewer, now);
       expect(parcel.expectedDelivery).toBe(dayOf(now));
       expect(Date.parse(parcel.events.at(-1)!.occurredAt)).toBeLessThan(now);
       expect(Date.parse(parcel.events.at(-1)!.occurredAt)).toBeGreaterThan(now - 2 * HOUR);
+      // Out on today's round, never yesterday's, which would say it had no update since.
+      expect(dayOf(Date.parse(parcel.events.at(-1)!.occurredAt))).toBe(dayOf(now));
+      expect(parcelAttention(parcel, now)).toBeNull();
     }
     const first = served(stored, reviewer, midnight + 10 * HOUR + 60_000);
     const later = served(stored, reviewer, midnight + 10 * HOUR + 59 * 60_000);

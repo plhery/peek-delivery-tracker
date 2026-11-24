@@ -97,6 +97,21 @@ describe('parcel priority', () => {
     expect(parcelAttention({ ...parcel('error'), syncStatus: 'error' }, NOW)).toBe('sync_error');
   });
 
+  it('flags a parcel out for delivery once its round is over on the parcel\'s clock, whatever the device\'s', () => {
+    // Out at 07:10 in Sydney on the 6th, which the server ends at Sydney's midnight; still the 5th on a European device.
+    const out = { ...parcel('out', 'out_for_delivery', '2026-08-05T21:10:00Z'), deliveryRoundEndsAt: '2026-08-07T00:00:00+10:00' };
+    expect(parcelAttention(out, Date.parse('2026-08-06T13:59:59Z'))).toBeNull();
+    expect(parcelAttention(out, Date.parse('2026-08-06T14:00:00Z'))).toBe('stalled');
+    // On Los Angeles' clock, the round ends at its own midnight, when a European device is already in the next morning.
+    const evening = { ...out, deliveryRoundEndsAt: '2026-08-06T00:00:00-07:00' };
+    expect(parcelAttention(evening, Date.parse('2026-08-06T06:59:59Z'))).toBeNull();
+    expect(parcelAttention(evening, Date.parse('2026-08-06T07:00:00Z'))).toBe('stalled');
+    // Without the moment, as from a server before it, an old copy or another stage: nothing changes.
+    expect(parcelAttention(parcel('older', 'out_for_delivery', '2026-07-20T08:00:00Z'), NOW)).toBeNull();
+    expect(parcelAttention({ ...parcel('moved', 'in_transit'), deliveryRoundEndsAt: '2026-08-05T00:00:00+02:00' }, NOW)).toBeNull();
+    expect(parcelAttention({ ...parcel('held', 'ready_for_pickup'), deliveryRoundEndsAt: '2026-08-05T00:00:00+02:00' }, NOW)).toBe('ready_for_pickup');
+  });
+
   it('only escalates an unannounced parcel after two days', () => {
     const recent = parcel('recent', 'pending', '2026-08-04T08:00:00Z');
     recent.createdAt = '2026-08-04T13:00:00Z';

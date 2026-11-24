@@ -71358,6 +71358,7 @@ export interface ApiPackageRow {
   "created_at": string;
   "expected_delivery": string | null;
   "expected_delivery_passed"?: string;
+  "delivery_round_ends_at"?: string;
   "peek_ai"?: ApiPeekAi;
   "last_status_text": string | null;
   "last_synced_at": string | null;
@@ -71782,6 +71783,7 @@ export interface ApiPublicPackage {
   "created_at": string;
   "expected_delivery": string | null;
   "expected_delivery_passed"?: string;
+  "delivery_round_ends_at"?: string;
   "peek_ai"?: ApiPeekAi;
   "last_status_text": string | null;
   "last_synced_at": string | null;

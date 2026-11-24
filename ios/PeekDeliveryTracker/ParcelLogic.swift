@@ -451,6 +451,12 @@ extension Parcel {
            now.timeIntervalSince(update) >= 4 * 86_400 {
             return .stalled
         }
+        // Out for delivery on a day that has ended on the parcel's clock, with no scan since: that round is over.
+        if currentEvent?.stage == .outForDelivery,
+           let ends = deliveryRoundEndsAt.flatMap(DateParser.date),
+           now >= ends {
+            return .stalled
+        }
         if isUnannounced,
            let created = DateParser.date(createdAt),
            now.timeIntervalSince(created) >= 2 * 86_400 {

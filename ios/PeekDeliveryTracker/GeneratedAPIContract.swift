@@ -4385,6 +4385,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var createdAt: String
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
+    var deliveryRoundEndsAt: String? = nil
     var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
@@ -4415,6 +4416,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case createdAt
         case expectedDelivery
         case expectedDeliveryPassed
+        case deliveryRoundEndsAt
         case peekAi
         case lastStatusText
         case lastSyncedAt
@@ -4999,6 +5001,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var createdAt: String
     var expectedDelivery: String? = nil
     var expectedDeliveryPassed: String? = nil
+    var deliveryRoundEndsAt: String? = nil
     var peekAi: PeekAi? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
@@ -5026,6 +5029,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case createdAt
         case expectedDelivery
         case expectedDeliveryPassed
+        case deliveryRoundEndsAt
         case peekAi
         case lastStatusText
         case lastSyncedAt
@@ -5745,6 +5749,7 @@ extension Parcel {
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
+        deliveryRoundEndsAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundEndsAt)
         peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
@@ -5816,6 +5821,7 @@ extension PublicPackage {
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
+        deliveryRoundEndsAt = try values.decodeIfPresent(String.self, forKey: .deliveryRoundEndsAt)
         peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)

@@ -45,6 +45,11 @@ export interface Parcel {
    * the day after through the seventh, while the parcel is still due (`expected_delivery_passed`, passedEstimate.ts).
    */
   expectedDeliveryPassed?: string;
+  /**
+   * While the newest scan is out for delivery: when that round is over, the end of the scan's day on the parcel's clock
+   * (`delivery_round_ends_at`, deliveryRound.ts). Past it, the parcel has had no tracking update since (`parcelAttention`).
+   */
+  deliveryRoundEndsAt?: string;
   /** Peek AI's estimate, when Peek has a strong hint (`peek_ai`). */
   peekAi?: PeekAi;
   pickupPoint?: string;

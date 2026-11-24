@@ -154,6 +154,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     createdAt: row.created_at,
     expectedDelivery: row.expected_delivery ?? undefined,
     ...(row.expected_delivery_passed ? { expectedDeliveryPassed: row.expected_delivery_passed } : {}),
+    ...(row.delivery_round_ends_at ? { deliveryRoundEndsAt: row.delivery_round_ends_at } : {}),
     ...(row.peek_ai ? { peekAi: row.peek_ai } : {}),
     autoChangedFrom: row.carrier_data?.auto_changed_from ?? undefined,
     autoChangedTo: row.carrier_data?.auto_changed_to ?? undefined,

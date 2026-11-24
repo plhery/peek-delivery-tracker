@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { createHash } from 'node:crypto';
+import { DateTime } from 'luxon';
 import type { NumberInText } from '../peek/lookup/reading';
 import { normalizeTrackingNumber } from '../lib/carriers';
 import type { CarrierId, RecipientAction, Stage } from '../types';
@@ -218,17 +219,23 @@ export function withReviewDemo(row: JsonObject, userId: string | null | undefine
   const id = String(row.id);
   const hour = Math.floor(now / HOUR) * HOUR;
   const iso = (time: number) => new Date(time).toISOString();
-  const events = script.scans.map((step, index) => ({
-    id: scanId(id, index),
-    package_id: id,
-    stage: step.stage,
-    description: step.description,
-    location: step.location,
-    occurred_at: iso(hour - step.before),
-    stored_at: iso(hour - step.before + 2 * MINUTE),
-    provider_event_id: `review-demo:${index}`,
-    recipient_action: step.recipientAction ?? null,
-  }));
+  // A parcel out for delivery goes out today, in Zürich, even in the hour after midnight: its round is not over.
+  const today = DateTime.fromMillis(now, { zone: 'Europe/Zurich' }).startOf('day').toMillis();
+  const events = script.scans.map((step, index) => {
+    const out = step.stage === 'out_for_delivery' && index === script.scans.length - 1;
+    const time = out ? Math.max(hour - step.before, today) : hour - step.before;
+    return {
+      id: scanId(id, index),
+      package_id: id,
+      stage: step.stage,
+      description: step.description,
+      location: step.location,
+      occurred_at: iso(time),
+      stored_at: iso(Math.min(time + 2 * MINUTE, now)),
+      provider_event_id: `review-demo:${index}`,
+      recipient_action: step.recipientAction ?? null,
+    };
+  });
   const stored = isRecord(row.carrier_data) ? row.carrier_data : {};
   return {
     ...row,

@@ -532,6 +532,11 @@ fun Parcel.attention(now: Instant = AppClock.now()): ParcelAttention? {
         val update = DateParser.date(event.occurredAt)
         if (update != null && now.timeIntervalSince(update) >= 4 * 86_400) return ParcelAttention.Stalled
     }
+    // Out for delivery on a day that has ended on the parcel's clock, with no scan since: that round is over.
+    if (event?.stage == TrackingStage.OutForDelivery) {
+        val ends = deliveryRoundEndsAt?.let { DateParser.date(it) }
+        if (ends != null && now.timeIntervalSince(ends) >= 0) return ParcelAttention.Stalled
+    }
     if (isUnannounced) {
         val created = DateParser.date(createdAt)
         if (created != null && now.timeIntervalSince(created) >= 2 * 86_400) return ParcelAttention.NotAnnounced

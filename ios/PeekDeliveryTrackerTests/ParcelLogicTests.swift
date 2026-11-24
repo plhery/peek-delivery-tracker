@@ -2504,6 +2504,32 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(shared.expectedDeliveryPassed, "2026-11-17")
     }
 
+    /// As parcelPriority.test.ts: a parcel out for delivery is flagged once its round is over on the parcel's clock,
+    /// which the server serves as `delivery_round_ends_at`, whatever the device's.
+    func testAParcelOutForDeliveryIsFlaggedOnceItsRoundIsOverOnTheParcelsClock() {
+        let id = UUID()
+        // Out at 07:10 in Sydney on the 6th: the round ends at Sydney's midnight, still the 6th on a European device.
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        XCTAssertNil(out.attention(now: DateParser.date("2026-08-09T12:00:00Z")!))
+        out.deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00"
+        XCTAssertNil(out.attention(now: DateParser.date("2026-08-06T13:59:59Z")!))
+        XCTAssertEqual(out.attention(now: DateParser.date("2026-08-06T14:00:00Z")!), .stalled)
+        XCTAssertEqual(out.notice(now: DateParser.date("2026-08-06T14:00:00Z")!), .stalled)
+        // Another stage keeps its own rules.
+        var moved = out
+        moved.trackingEvents.append(event(id, .readyForPickup, "2026-08-06T04:00:00Z"))
+        XCTAssertEqual(moved.attention(now: DateParser.date("2026-08-06T14:00:00Z")!), .readyForPickup)
+        moved.trackingEvents[2] = event(id, .inTransit, "2026-08-06T04:00:00Z")
+        XCTAssertNil(moved.attention(now: DateParser.date("2026-08-06T14:00:00Z")!))
+        // A parcel read through a link keeps the moment.
+        let shared = Parcel(shared: PublicPackage(
+            id: id, trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, createdAt: "2026-08-01T08:00:00Z",
+            deliveryRoundEndsAt: "2026-08-07T00:00:00+10:00", syncStatus: .ok, carrierData: PublicPackageCarrierData(), notificationsMuted: false,
+            trackingEvents: out.trackingEvents
+        ))
+        XCTAssertEqual(shared.attention(now: DateParser.date("2026-08-06T14:00:00Z")!), .stalled)
+    }
+
     @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()

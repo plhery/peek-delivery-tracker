@@ -58,6 +58,9 @@ export function parcelAttention(
   ) {
     return 'stalled';
   }
+  // Out for delivery on a day that has ended on the parcel's clock, with no scan since: that round is over.
+  const roundEnds = Date.parse(parcel.deliveryRoundEndsAt ?? '');
+  if (current?.stage === 'out_for_delivery' && Number.isFinite(roundEnds) && now >= roundEnds) return 'stalled';
 
   const created = new Date(parcel.createdAt).getTime();
   if (

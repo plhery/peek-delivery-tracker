@@ -4866,6 +4866,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "5Post Sendungsverfolgung: Nummern, Abholung & Status",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "shipter-sendungsverfolgung",
+      "title": "Shipter Sendungsverfolgung: H3-Nummern aus Südkorea",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "fr": [
@@ -7268,6 +7276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi 5Post\u00a0: numéros, retrait Pyaterochka et statuts",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "suivi-shipter",
+      "title": "Suivi Shipter\u00a0: numéros H3 de Corée du Sud et statuts",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "it": [
@@ -9670,6 +9686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento 5Post: codici, ritiro Pyaterochka e stati",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "tracciamento-shipter",
+      "title": "Tracciamento Shipter: codici H3 dalla Corea del Sud",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "es": [
@@ -12064,6 +12088,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento 5Post: códigos, recogida Pyaterochka y estados",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "seguimiento-shipter",
+      "title": "Seguimiento Shipter: números H3 desde Corea del Sur",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "pt": [
@@ -14458,6 +14490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 5Post: números, levantamento Pyaterochka e ajuda",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "rastreio-shipter",
+      "title": "Rastreio Shipter: números H3 da Coreia do Sul e estados",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "pt-br": [
@@ -16934,6 +16974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 5Post: numery, odbiór Pyaterochka i statusy",
       "name": "5Post",
       "color": "#64b441"
+    },
+    {
+      "id": "shipter",
+      "catalog": "shipter",
+      "slug": "sledzenie-shipter",
+      "title": "Śledzenie Shipter: koreańskie numery H3 i statusy",
+      "name": "Shipter",
+      "color": "#005eff"
     }
   ],
   "ru": [

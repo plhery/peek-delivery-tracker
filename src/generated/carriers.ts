@@ -4716,6 +4716,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#003369"
     },
     {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "oca-sendungsverfolgung",
+      "title": "OCA Sendungsverfolgung: Nummern, Status, Filialen & Hilfe",
+      "name": "OCA",
+      "color": "#592c82"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-sendungsverfolgung",
@@ -6964,6 +6972,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi GO! Express\u00a0: lettres de voiture 12 chiffres et aide",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "suivi-oca",
+      "title": "Suivi OCA\u00a0: numéros 19 chiffres, statuts, agences et aide",
+      "name": "OCA",
+      "color": "#592c82"
     },
     {
       "id": "5post",
@@ -9222,6 +9238,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GO! Express: codici a 12 cifre, stati e aiuto",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "tracciamento-oca",
+      "title": "Tracciamento OCA: numeri a 19 cifre, stati, filiali e aiuto",
+      "name": "OCA",
+      "color": "#592c82"
     },
     {
       "id": "5post",
@@ -13748,6 +13772,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b9242b"
     },
     {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "rastreio-oca",
+      "title": "Rastreio OCA: números de 19 dígitos, estados e agências",
+      "name": "OCA",
+      "color": "#592c82"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "rastreio-5post",
@@ -16070,6 +16102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GO! Express: 12-cyfrowe listy przewozowe i pomoc",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "oca",
+      "catalog": "oca",
+      "slug": "sledzenie-oca",
+      "title": "Śledzenie OCA: 19-cyfrowe numery, statusy, oddziały i pomoc",
+      "name": "OCA",
+      "color": "#592c82"
     },
     {
       "id": "5post",

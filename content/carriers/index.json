@@ -287,7 +287,7 @@
   { "id": "serpost", "catalog": "serpost", "name": "Serpost", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "skypostal", "catalog": "skypostal", "name": "SkyPostal", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "thailand-post", "catalog": "thailand-post", "name": "Thailand Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "yunda", "catalog": "yunda", "name": "Yunda Express", "languages": ["en"] },
+  { "id": "yunda", "catalog": "yunda", "name": "Yunda Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "onlog-express", "catalog": "onlog-express", "name": "Onlog Express", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "a-duie-pyle", "catalog": "a-duie-pyle", "name": "A. Duie Pyle", "languages": ["en"] },
   { "id": "buffalo-ex", "catalog": "buffalo-ex", "name": "BUFFALO", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

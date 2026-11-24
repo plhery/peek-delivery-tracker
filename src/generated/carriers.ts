@@ -4764,6 +4764,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef172f"
     },
     {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "yunda-sendungsverfolgung",
+      "title": "Yunda Express Sendungsverfolgung: Nummern, Status & 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7204,6 +7212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Thailand Post\u00a0: codes TH S10, statuts EMS et 1545",
       "name": "Thailand Post",
       "color": "#ef172f"
+    },
+    {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "suivi-yunda",
+      "title": "Suivi Yunda Express\u00a0: bordereaux chinois, statuts et 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
     },
     {
       "id": "onlog-express",
@@ -9648,6 +9664,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef172f"
     },
     {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "tracciamento-yunda",
+      "title": "Tracciamento Yunda Express: codici, stati e 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "tracciamento-onlog-express",
@@ -12082,6 +12106,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef172f"
     },
     {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "seguimiento-yunda",
+      "title": "Seguimiento Yunda Express: códigos, estados y 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "seguimiento-onlog-express",
@@ -14514,6 +14546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Thailand Post: códigos TH S10, EMS e 1545",
       "name": "Thailand Post",
       "color": "#ef172f"
+    },
+    {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "rastreio-yunda",
+      "title": "Rastreio Yunda Express: códigos chineses, estados e 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
     },
     {
       "id": "onlog-express",
@@ -17030,6 +17070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Thailand Post: kody TH S10, statusy EMS i 1545",
       "name": "Thailand Post",
       "color": "#ef172f"
+    },
+    {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "sledzenie-yunda",
+      "title": "Śledzenie Yunda Express: chińskie numery, statusy i 95546",
+      "name": "Yunda Express",
+      "color": "#ffce00"
     },
     {
       "id": "onlog-express",

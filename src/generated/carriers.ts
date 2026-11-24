@@ -14966,6 +14966,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ee4d2d"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "rastreamento-meiteshun",
+      "title": "Rastreamento Meiteshun: códigos AMTS, status e entregas",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "rastreamento-jrt",
+      "title": "Rastreamento JRT: códigos JRT…MM, voos e entrega DHL",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "rastreamento-js-express",
@@ -17906,6 +17922,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Straightship（迅联捷航）物流查询：STRTD 单号、状态与派送",
       "name": "Straightship",
       "color": "#6aae66"
+    },
+    {
+      "id": "correios-br",
+      "catalog": "correios-br",
+      "slug": "correios-brazil-tracking",
+      "title": "Correios 巴西邮政物流查询：单号、状态与清关指南",
+      "name": "Correios Brazil",
+      "color": "#ffd500"
     },
     {
       "id": "yto",

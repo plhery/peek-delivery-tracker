@@ -14894,6 +14894,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "rastreamento-tipsa",
+      "title": "Rastreamento TIPSA: código de 22 dígitos, status e contato",
+      "name": "TIPSA",
+      "color": "#001e62"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "rastreamento-yanwen",
@@ -15260,6 +15268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento HuaHan Logistics: códigos HHW…YQ e entrega",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "rastreamento-epost-global",
+      "title": "Rastreamento ePost Global: códigos EPG e entrega final",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "india-post",
@@ -18092,6 +18108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#c43c2b"
     },
     {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "tipsa-kuaidi-chaxun",
+      "title": "TIPSA 快递查询：22 位单号、西班牙语状态与网点自提",
+      "name": "TIPSA",
+      "color": "#001e62"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "yanwen-wuliu-chaxun",
@@ -18594,6 +18618,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "华翰物流（HuaHan）单号查询：HHW…YQ状态与尾程",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "epost-global-kuaidi-chaxun",
+      "title": "ePost Global 快递查询：EPG 单号、物流状态与末端派送",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "india-post",

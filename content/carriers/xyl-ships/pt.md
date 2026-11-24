@@ -18,7 +18,7 @@ Procura o código de rastreio no e-mail de envio da loja online ou no histórico
 | `XLWL4829173640EX` | `XLWL`, 10 dígitos e `EX`. |
 | `XLWL4829173640EXP` | `XLWL`, 10 dígitos e `EXP`. |
 
-Como estes códigos são exclusivos da XYL-Ships, não se confundem com códigos de barras postais nacionais. Se a loja te deu antes um código postal internacional S10 (duas letras, nove dígitos e duas letras do país, como `CN`) ou o código de outra transportadora, consulta [formatos de números de rastreio](guide:tracking-number-formats) para saber a que operadora pertence.
+Como estes códigos são exclusivos da XYL-Ships, não se confundem com códigos de barras postais nacionais. Se a loja te deu, em vez disso, um código postal internacional S10 (duas letras, nove dígitos e duas letras do país, como `CN`) ou o código de outra transportadora, consulta [formatos de números de rastreio](guide:tracking-number-formats) para saber a que operadora pertence.
 
 ## O que significam os estados de rastreio XYL-Ships
 
@@ -79,7 +79,7 @@ O Peek lê diretamente o feed JSON da XYL-Ships e mostra a etapa («Em trânsito
 
 Enquanto manténs a encomenda aberta no Peek, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos; no dia em que a XYL-Ships mostra `Parcel currently being delivered`, de 2 em 2 minutos a partir das 6 h pela hora do registo mais recente da XYL-Ships, enquanto o sistema próprio da XYL-Ships responder. Nos restantes casos, verifica de hora em hora. Após 12 horas só em «Etiqueta criada» ou «Aceite pela transportadora», ou dois dias sem novidades, verifica de hora em hora seja como for. Quando o rastreio da XYL-Ships não responde e o Peek acompanha a encomenda apenas por serviços de rastreio, verifica de hora em hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia de distribuição enquanto a mantiveres aberta ou com notificações ativas.
 
-Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg., 12/10». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a XYL-Ships.» Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a XYL-Ships.»
+Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg 12 out». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a XYL-Ships.» Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a XYL-Ships.»
 
 Podes escolher os alertas «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek apenas acompanha o rastreio e não consegue indicar a transportadora local nem contactar a XYL-Ships por ti.
 

@@ -40,9 +40,9 @@ Zwróć uwagę na dwa mylące wpisy pod koniec trasy. `Arriving at the destinati
 
 ## Jak działa przesyłka transgraniczna XYL-Ships
 
-Na stronie [xylships.com](https://xylships.com/) XYL-Ships przedstawia komercyjny fracht lotniczy (w tym krajowy ekspres lotniczy 6- i 12-godzinny oraz konsolidację FBA door-to-door), konsolidację morską, kolejową i drogową, a także obsługę pojedynczych małych paczek e-commerce — przywołując przykład klienta ze skutecznością 99% dostaw w ciągu 20 dni.
+Na stronie [xylships.com](https://xylships.com/) XYL-Ships przedstawia komercyjny fracht lotniczy (w tym krajowy ekspres lotniczy 6- i 12-godzinny oraz konsolidację FBA door-to-door), konsolidację morską, transport kolejowy i drogowy, a także obsługę pojedynczych małych paczek e-commerce — przywołując przykład klienta ze skutecznością 99% dostaw w ciągu 20 dni.
 
-**Lokalne doręczenie ostatniej mili.** Jak pokazują same statusy XYL-Ships, po dotarciu do kraju docelowego paczka trafia do lokalnego partnera transportowego lub poczty, które odpowiadają za doręczenie pod drzwi.
+**Lokalne doręczenie ostatniej mili.** Jak pokazują same statusy XYL-Ships, po dotarciu do kraju docelowego paczka trafia do lokalnego partnera transportowego lub poczty, które odpowiadają za końcowe doręczenie.
 
 **Niepublikowane zasady doręczeń.** `xylships.com` nie podaje liczby prób doręczenia, zasad automatów paczkowych, terminów przechowywania, gwarancji czasu dostawy ani terminów reklamacji. Po wejściu przesyłki do twojego kraju konkretne zasady (zostawienie u sąsiada, w bezpiecznym miejscu albo liczba dni na odbiór po awizo) zależą od lokalnej poczty lub firmy kurierskiej.
 
@@ -50,7 +50,7 @@ Na stronie [xylships.com](https://xylships.com/) XYL-Ships przedstawia komercyjn
 
 ## Paczka XYL-Ships utknęła, milczy albo nie dotarła
 
-Jeśli zamówiłeś towar w sklepie internetowym wysyłającym przez XYL-Ships, stroną umowy pozostaje sprzedawca — to do niego zwracaj się w sprawie opóźnień, zwrotu pieniędzy lub ponownej wysyłki.
+Jeśli kupujesz w sklepie internetowym wysyłającym przez XYL-Ships, stroną umowy pozostaje sprzedawca — to do niego zwracaj się w sprawie opóźnień, zwrotu pieniędzy lub ponownej wysyłki.
 
 **Długa cisza w transporcie.** Kilkudniowe przerwy między `Departed from origin transportation center` a `Arrived at destination transportation center` są częste podczas oczekiwania na lot, odprawę celną i pierwszy skan w kraju docelowym. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 
@@ -77,9 +77,9 @@ Ponieważ XYL-Ships współpracuje z nadawcami biznesowymi zamiast prywatnych od
 
 Peek odczytuje bezpośrednio strumień JSON XYL-Ships i wyświetla etap („W transporcie”, „W doręczeniu” lub „Dostarczona”), angielskie opisy skanów XYL-Ships, lokalizację skanu gdy jest podana oraz znaczniki czasu z jawną strefą czasową (przeliczone na czas twojego urządzenia). Peek odrzuca adresy nadawcy i odbiorcy oraz wewnętrzne referencje klienta. Nie pokazuje przewidywanej daty, wagi, numeru lokalnego przewoźnika ani zdjęcia doręczenia.
 
-Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy XYL-Ships pokaże `Parcel currently being delivered`, co 2 minuty od 6:00 według zegara najnowszego skanu XYL-Ships, dopóki system XYL-Ships odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia. Gdy system XYL-Ships nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu doręczenia, gdy masz paczkę otwartą lub masz włączone powiadomienia.
+Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy XYL-Ships pokaże `Parcel currently being delivered`, co 2 minuty od 6:00 według zegara najnowszego skanu XYL-Ships, dopóki system XYL-Ships odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia. Gdy system XYL-Ships nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu, w którym paczka jest w doręczeniu, gdy masz paczkę otwartą lub masz włączone powiadomienia.
 
-Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika XYL-Ships.” Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika XYL-Ships.”
+Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika XYL-Ships.” Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika XYL-Ships.”
 
 Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek tylko monitoruje śledzenie — nie wskaże lokalnego przewoźnika ani nie skontaktuje się za ciebie z XYL-Ships.
 

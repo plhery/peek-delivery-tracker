@@ -80,7 +80,7 @@ SpeedX 的官方查询页面仅提供英文。以下按常见顺序列出包裹�
 
 SpeedX 在其[客服支持页面](https://speedx.io/customer-service-and-support/)列出的美国收件人联系渠道如下：
 
-- **在线聊天：** 聊天机器人 Miles，每天美东时间 8:00 至 20:00 提供服务。打开查询页并输入单号后，屏幕右下角会出现聊天入口。
+- **在线聊天：** 聊天机器人 Miles，每天美东时间 8:00 至 20:00 提供服务。打开查询页并输入单号后，屏幕下方角落会出现聊天入口。
 - **电话：** 1-949-667-6769，周一至周五美东标准时间 9:00 至 21:00，周末 11:00 至 20:00。同一页面上也同时写着 SpeedX 不设电话客服并引导使用 Miles，因此致电后大概率会被转到在线聊天。
 - **电子邮件：** speedxops@speedx.io。
 
@@ -117,4 +117,5 @@ SpeedX 查询页提示，这可能是因为寄件人尚未向 SpeedX 传回包�
 - [SpeedX: Cross-Border Shipping](https://speedx.io/cross-border-shipping/) – 美国航空枢纽接收海外包裹、自有报关清关及分拣入网说明
 - [SpeedX: About Us](https://speedx.io/about-us/) – 2022 年成立于纽约及美国服务城市
 - [SpeedX: Privacy Policy](https://speedx.io/privacy-policy/) – Speed Xpress Inc. 主体名称与纽约州 New Hyde Park 地址
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 从 SpeedX 读取的内容、各状态的显示方式及可识别的单号
 :::

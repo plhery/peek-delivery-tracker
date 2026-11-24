@@ -60,7 +60,7 @@ Quando o evento mais recente é um problema (`Parcel Void`, `Parcel Disposal` ou
 
 **Assinatura e foto.** A maioria dos pacotes da SpeedX não exige assinatura; itens com restrição de idade, como bebidas alcoólicas, podem exigir um adulto de 21 anos ou mais. Se não houver ninguém em casa, o entregador deixa a encomenda e tira uma foto. Para vê-la, rastreie o pacote em speedx.io e informe o ZIP code de entrega.
 
-**Instruções e endereço.** A SpeedX recebe instruções de entrega (senhas de portão, onde deixar o pacote, horário comercial, telefone) por meio do Miles, seu chatbot, informando o código de rastreamento. O entregador também recebe essas orientações, mas não é possível falar diretamente com ele. A SpeedX consegue corrigir o nome da rua ou número do apartamento se for avisada a tempo; para alterar cidade, estado ou ZIP code, fale com o vendedor.
+**Instruções e endereço.** A SpeedX recebe instruções de entrega (senhas de portão, onde deixar o pacote, horário comercial, telefone) por meio do Miles, seu chatbot, informando o código de rastreamento. O entregador também recebe essas orientações, mas não é possível falar diretamente com ele. A SpeedX consegue alterar o endereço (rua e número) ou o número do apartamento se for avisada a tempo; para alterar cidade, estado ou ZIP code, fale com o vendedor.
 
 **Tentativa sem sucesso.** Se constar uma tentativa de entrega que você considera indevida, confira o endereço cadastrado no site da loja e envie correções ou instruções pelo chat. A SpeedX afirma que a nova tentativa deve ocorrer em 1 a 2 dias úteis. A empresa não publica quantas tentativas faz nem por quanto tempo mantém o pacote.
 
@@ -117,4 +117,5 @@ A página de rastreamento da SpeedX indica que o remetente pode ainda não ter e
 - [SpeedX: Cross-Border Shipping](https://speedx.io/cross-border-shipping/) – encomendas internacionais em hubs aeroportuários dos EUA, desembaraço aduaneiro próprio e triagem na rede da SpeedX
 - [SpeedX: About Us](https://speedx.io/about-us/) – fundação em 2022 em Nova York e cidades atendidas nos EUA
 - [SpeedX: Privacy Policy](https://speedx.io/privacy-policy/) – razão social Speed Xpress Inc. e endereço em New Hyde Park
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê da SpeedX, o que mostra para cada status e quais códigos reconhece
 :::

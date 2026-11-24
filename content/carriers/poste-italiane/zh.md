@@ -120,4 +120,5 @@ Cerca Spedizioni 中的最新一行记录会告诉你状态：`In consegna` 表�
 - [Poste Italiane: Carta dei servizi postali](https://www.media.poste.it/37381c9f-a87e-4292-8b89-00e88fa53323/web/carta-servizi-non-universali) – Crono 时效、破损处理、理赔与周六派送规则
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – Poste Delivery Standard 申诉期限
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 7 月 1 日起货值 150 欧元及以下按类征收 3 欧元临时关税，自 2026 年 11 月 1 日起按类征收 2 欧元欧盟处理费
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

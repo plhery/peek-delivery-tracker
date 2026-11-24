@@ -283,7 +283,7 @@ export interface WebPushKeys {
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
-export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string; kept?: boolean };
+export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string; kept?: boolean; storedAt?: string };
 
 /** A connected assistant or personal token of an account, as its owner sees it in Settings. */
 export interface AssistantGrant {
@@ -888,20 +888,22 @@ export class SupabaseClient {
 
   /**
    * Each package's newest scans, enough to tell a generated track by (`generatedScans`), a carrier's
-   * repeats of a scan (`repeatedScans`) and its notices in the stage of the scan before them (`stageNotices`).
+   * repeats of a scan (`repeatedScans`), its notices in the stage of the scan before them (`stageNotices`)
+   * and its scans stored after a newer one (`storedLate`).
    */
   async recentScans(packageIds: string[]): Promise<Map<string, RecentScan[]>> {
     const recent = new Map<string, RecentScan[]>();
     await Promise.all([...new Set(packageIds)].map(async (packageId) => {
       const events = rows(await this.request(`/rest/v1/tracking_events?${query([
         ['package_id', `eq.${packageId}`],
-        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage'],
+        ['select', 'id,stage,location,occurred_at,created_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage'],
         ['order', 'occurred_at.desc'],
         ['limit', '60'],
       ])}`));
-      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider, stage_source, kept_stage }) =>
+      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, created_at, description, provider_event_id, universal_provider, stage_source, kept_stage }) =>
         typeof id === 'string' && typeof occurred_at === 'string' ? [{
           id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
+          ...(typeof created_at === 'string' ? { storedAt: created_at } : {}),
           description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
           ...(typeof stage_source === 'string' ? { stageSource: stage_source } : {}),
           ...(keptStage(kept_stage) ? { kept: true } : {}),

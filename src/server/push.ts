@@ -24,7 +24,7 @@ import { servedPlannedSteps, servedWrittenSteps } from './plannedSteps';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
-import { lateScans, providerTwins, relayRepeats } from './relayCopies';
+import { copyTellsProblem, lateScans, providerTwins, relayRepeats } from './relayCopies';
 import { repeatedScans } from './scanRepeats';
 import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
@@ -825,8 +825,9 @@ function twinRepeats(scans: readonly RecentScan[], fresh: ReadonlySet<string>): 
  * parcel's relay repeats and late scans (relayCopies.ts) and the universal
  * copies its timeline leaves out (providerCopies.ts) or shows under another
  * provider's row of the scan stored before (`twinRepeats`), a carrier's repeats
- * of a scan it had sent (scanRepeats.ts) and its notices in the stage of the
- * scan before them (stageNotices.ts). Copies are looked for only in
+ * of a scan it had sent (scanRepeats.ts), its notices in the stage of the
+ * scan before them (stageNotices.ts) and a source's scans stored after a newer
+ * one of its own (`storedLate`). Copies are looked for only in
  * parcels with a confirmed carrier whose batch holds a universal row. A
  * generated track's moves are no news either (generatedTrack.ts): they are
  * looked for in parcels whose batch holds a scan in transit. A repeat is told
@@ -834,6 +835,24 @@ function twinRepeats(scans: readonly RecentScan[], fresh: ReadonlySet<string>): 
  * another device still waits for was told to this one. With the parcels'
  * recent scans and their notices.
  */
+/**
+ * A source's scans stored after a newer scan of that source had reached the parcel: older news than it already had
+ * (`lateScans`' rule, for every source: a carrier that publishes a scan an hour late). Scans one check stored never
+ * make each other late. The newer scan counts only as news of its own: not the app's, not pending, no notice, not
+ * dated after it was stored (a forecast). A late scan that tells a problem the newer one doesn't stays news.
+ */
+export function storedLate(scans: readonly RecentScan[], notices: ReadonlySet<string> = new Set()): string[] {
+  const dated = scans.flatMap((scan) => {
+    const at = Date.parse(scan.occurredAt);
+    const stored = Date.parse(scan.storedAt ?? '');
+    return Number.isFinite(at) && Number.isFinite(stored) && scan.source !== 'app' ? [{ scan, at, stored }] : [];
+  });
+  const news = dated.filter(({ scan, at, stored }) => scan.stage !== 'pending' && !notices.has(scan.id) && at <= stored);
+  return dated.filter((late) => news.some((newer) => newer.scan.source === late.scan.source && newer.stored < late.stored
+    && newer.at > late.at && !copyTellsProblem({ stage: late.scan.stage }, { stage: newer.scan.stage })))
+    .map(({ scan }) => scan.id);
+}
+
 async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObject[][]) {
   const eventIds = batches.flat().map((event) => stringField(event, 'event_id')).filter(Boolean);
   const moving = new Set(batchParcels(batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'))));
@@ -851,7 +870,7 @@ async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObj
     const scans = batch.length ? recent.get(stringField(batch[0]!, 'package_id')) : undefined;
     if (!scans) return always;
     const waiting = new Set(batch.map((event) => stringField(event, 'event_id')).filter(Boolean));
-    return new Set([...always, ...twinRepeats(scans, waiting),
+    return new Set([...always, ...twinRepeats(scans, waiting), ...storedLate(scans, notices),
       ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), waiting)]);
   };
   return { known, recent, notices };

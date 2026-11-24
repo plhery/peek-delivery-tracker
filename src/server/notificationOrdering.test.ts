@@ -658,6 +658,52 @@ it.each(['web', 'native'] as const)('announces two providers\' rows of one scan 
   expect(await dispatched('next')).toEqual(['next']);
 });
 
+it.each(['web', 'native'] as const)('records a scan its carrier published after a newer one as handled, a problem aside, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-11-05T08:00:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  if (channel === 'web') vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue(); else vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  // Synthetic UPS rows: out for delivery told at 06:51, then the depot scan before it, published 40 min late, and a
+  // failed attempt the carrier also publishes late; a forecast stored ahead of its time is no news it had.
+  type Row = { id: string; stage: 'in_transit' | 'out_for_delivery' | 'failed_attempt'; occurredAt: string; created: string; source?: string };
+  const scans: Row[] = [
+    { id: 'forecast', stage: 'in_transit', occurredAt: '2026-11-05T09:00:00Z', created: '2026-11-05T06:00:00Z' },
+    { id: 'out', stage: 'out_for_delivery', occurredAt: '2026-11-05T06:40:00Z', created: '2026-11-05T06:50:00Z' },
+    { id: 'depot', stage: 'in_transit', occurredAt: '2026-11-05T06:00:00Z', created: '2026-11-05T07:20:00Z' },
+    { id: 'relayed', stage: 'in_transit', occurredAt: '2026-11-05T06:10:00Z', created: '2026-11-05T07:25:00Z', source: 'unknown/17TRACK' },
+    { id: 'attempt', stage: 'failed_attempt', occurredAt: '2026-11-05T06:30:00Z', created: '2026-11-05T07:30:00Z' },
+  ];
+  let stored: readonly string[] = [];
+  const kept = () => scans.filter((scan) => stored.includes(scan.id)).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  vi.mocked(client.recentScans).mockImplementation(async () => new Map([['pkg', kept().map(({ id, stage, occurredAt, created, source }) => ({
+    id, stage, occurredAt, storedAt: created, stageSource: 'carrier_map', description: `Fixture ${id}`, location: `Fixture ${id} place`,
+    source: source ?? 'ups',
+  }))]]));
+  vi.spyOn(client, 'latestScanTimes').mockImplementation(async () => new Map([['pkg', '2026-11-05T06:40:00Z']]));
+  const dispatched = async (...ids: string[]) => {
+    stored = [...new Set([...stored, ...ids])];
+    pending.mockResolvedValueOnce(ids.map((id) => {
+      const { stage, occurredAt, created } = scans.find((scan) => scan.id === id)!;
+      return { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: id, stage, occurred_at: occurredAt, event_created_at: created };
+    }));
+    send.mockClear();
+    await service.dispatch();
+    return send.mock.calls.map(([event]) => event.event_id);
+  };
+  stored = ['forecast'];
+  expect(await dispatched('out')).toEqual(['out']);
+  // Within the hour the clocks of two sources may differ by: UPS's own late scan is old news, another source's isn't.
+  expect(await dispatched('depot')).toEqual([]);
+  expect(await dispatched('relayed')).toEqual(['relayed']);
+  expect(await dispatched('attempt')).toEqual(['attempt']);
+});
+
 it.each(['web', 'native'] as const)('records a notice in transit its carrier\'s map says keeps the stage as handled, for %s', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const clock = clocks('2026-11-05T14:05:00Z');

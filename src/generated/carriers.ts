@@ -4692,6 +4692,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#084b86"
     },
     {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "liccardi-sendungsverfolgung",
+      "title": "Liccardi Express Courier Sendungsverfolgung: LDV & Hilfe",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6980,6 +6988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Kuayuan Express\u00a0: codes, relais locaux et aide",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "suivi-liccardi",
+      "title": "Suivi Liccardi Express Courier\u00a0: codes LDV, statuts et aide",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     },
     {
       "id": "buffalo-ex",
@@ -11562,6 +11578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#084b86"
     },
     {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "seguimiento-liccardi",
+      "title": "Seguimiento Liccardi Express Courier: códigos LDV y ayuda",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
+    },
+    {
       "id": "redur",
       "catalog": "redur",
       "slug": "seguimiento-redur",
@@ -13874,6 +13898,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Kuayuan Express: códigos, entregas locais e apoio",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "rastreio-liccardi",
+      "title": "Rastreio Liccardi Express Courier: códigos LDV e apoio",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     },
     {
       "id": "buffalo-ex",
@@ -16238,6 +16270,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Kuayuan Express: kody, przekazania i pomoc",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "liccardi",
+      "catalog": "liccardi",
+      "slug": "sledzenie-liccardi",
+      "title": "Śledzenie Liccardi Express Courier: kody LDV i pomoc",
+      "name": "Liccardi Express Courier",
+      "color": "#014895"
     },
     {
       "id": "buffalo-ex",

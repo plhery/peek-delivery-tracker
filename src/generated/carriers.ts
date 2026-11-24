@@ -14862,6 +14862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "rastreamento-mrw",
+      "title": "Rastreamento MRW: código de 12 dígitos, status e MRW Point",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "rastreamento-ctt-portugal",
@@ -14916,6 +14924,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DPD France: códigos, status e pontos Pickup",
       "name": "DPD France",
       "color": "#dc0032"
+    },
+    {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "rastreamento-gls-italia",
+      "title": "Rastreamento GLS Itália: códigos, status e pontos GLS",
+      "name": "GLS Italy",
+      "color": "#ffdd00"
     },
     {
       "id": "poczta-polska",
@@ -18196,6 +18212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "mrw-kuaidi-chaxun",
+      "title": "西班牙 MRW 快递查询：12 位单号、状态与 MRW Point",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "ctt-putaoya-youzheng-chaxun",
@@ -18250,6 +18274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD France 快递查询：单号、法语状态与 Pickup 自提点",
       "name": "DPD France",
       "color": "#dc0032"
+    },
+    {
+      "id": "gls-it",
+      "catalog": "gls-it",
+      "slug": "gls-yidali-kuaidi-chaxun",
+      "title": "GLS 意大利快递查询：单号、状态、GLS Point 与客服",
+      "name": "GLS Italy",
+      "color": "#ffdd00"
     },
     {
       "id": "poczta-polska",

@@ -4452,6 +4452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "anjun-logistics-sendungsverfolgung",
+      "title": "Anjun Logistics Sendungsverfolgung: Status & SAC-Kontakt",
+      "name": "Anjun Logistics",
+      "color": "#009944"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6460,6 +6468,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi J&T Express Brazil\u00a0: numéro, statuts et contact",
       "name": "J&T Express Brazil",
       "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "suivi-anjun-logistics",
+      "title": "Suivi Anjun Logistics\u00a0: statuts Chine-Brésil et contact SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
     }
   ],
   "it": [
@@ -8448,6 +8464,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "tracciamento-anjun-logistics",
+      "title": "Tracking Anjun Logistics: stati Cina-Brasile e contatti SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -10432,6 +10456,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento J&T Express Brazil: estados, aduanas y contacto",
       "name": "J&T Express Brazil",
       "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "seguimiento-anjun-logistics",
+      "title": "Seguimiento Anjun Logistics: estados China-Brasil y SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
     },
     {
       "id": "j-and-t-mx",
@@ -12498,6 +12530,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio J&T Express Brazil: estado, alfândega e contacto",
       "name": "J&T Express Brazil",
       "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "rastreio-anjun-logistics",
+      "title": "Rastreio Anjun Logistics: estados China-Brasil e SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
     }
   ],
   "pt-br": [
@@ -14558,6 +14598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express Brazil: statusy, cło i kontakt",
       "name": "J&T Express Brazil",
       "color": "#e60000"
+    },
+    {
+      "id": "anjun",
+      "catalog": "anjun",
+      "slug": "sledzenie-anjun-logistics",
+      "title": "Śledzenie Anjun Logistics: statusy Chiny–Brazylia i SAC",
+      "name": "Anjun Logistics",
+      "color": "#009944"
     },
     {
       "id": "gls-pl",

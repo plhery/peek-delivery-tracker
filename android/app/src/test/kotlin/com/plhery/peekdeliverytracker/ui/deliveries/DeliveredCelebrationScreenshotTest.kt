@@ -63,7 +63,9 @@ class DeliveredCelebrationScreenshotTest {
 
     /**
      * The demo's list with the iPhone's bars, the status bar 62 points tall, the gesture bar 24, then the check. With
-     * [atOnce], every map's picture is made as its card is composed ([LocalMapsAtOnce]), so no map is still fading in.
+     * [atOnce], every map's picture is made as its card is composed ([LocalMapsAtOnce]), so no map is still fading in,
+     * and Pip stands where his map has him when the postmark lands. The paper comes out of his box from there: with the
+     * maps made on another thread, it came out a few points off on a run whose map was made in time (CI's runner).
      */
     private fun deliver(dark: Boolean, atOnce: Boolean = false) {
         source = FakeDeliveries(demo.first, AuthenticationState.Demo)
@@ -115,10 +117,10 @@ class DeliveredCelebrationScreenshotTest {
 
     private fun theme(dark: Boolean) = if (dark) "dark" else "light"
 
-    /** The postmark has landed with its tap, and the card is read; the paper falls about it. */
+    /** The postmark has landed with its tap, and the card is read; the paper falls about it, the maps made at once. */
     @Test
     fun theCardHeldWithItsPostmark() {
-        deliver(dark = false)
+        deliver(dark = false, atOnce = true)
         shot(900, "celebration_held_light")
     }
 
@@ -140,11 +142,11 @@ class DeliveredCelebrationScreenshotTest {
     /**
      * 0.2 s into the flights: New trainers' card has shrunk most of the way to its place among the past deliveries,
      * below the screen, as it goes down to it, and Moon lamp's comes up into Next up, growing to it with its new card
-     * coming in over it. Both show, each clear of the other.
+     * coming in over it. Both show, each clear of the other, under the paper out of Pip's box, the maps made at once.
      */
     @Test
     fun theCardsMidFlight() {
-        deliver(dark = false)
+        deliver(dark = false, atOnce = true)
         advance(900)
         // The window draws the held cards, whose pictures fly: Robolectric draws it only when asked, as for a shot.
         compose.awaitFrame()

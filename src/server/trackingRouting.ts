@@ -659,8 +659,9 @@ const SHORT_NUMBER_GAP = 7 * DAY;
 /**
  * Shipping platforms a shop books other carriers through. A provider can name one beside the
  * parcel's carrier, or in its place, but no catalog entry or adapter of its own could track it.
+ * Wish Post is Wish's: ParcelsApp names it between HuaHan and Cainiao on a HuaHan waybill.
  */
-const SHIPPING_PLATFORMS: ReadonlySet<string> = new Set(['easyship', 'packlink', 'sendcloud', 'shiprocket']);
+const SHIPPING_PLATFORMS: ReadonlySet<string> = new Set(['easyship', 'packlink', 'sendcloud', 'shiprocket', 'wishpost']);
 function isShippingPlatformName(name: string): boolean {
   return SHIPPING_PLATFORMS.has(name.toLowerCase().replace(/[^a-z0-9]/g, ''));
 }

@@ -4516,6 +4516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "xlcourier-sendungsverfolgung",
+      "title": "XLCourier Sendungsverfolgung: XLC-Codes & UK-Sperrgut",
+      "name": "XLCourier",
+      "color": "#044ad6"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "gls-hungary-sendungsverfolgung",
@@ -6598,6 +6606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "suivi-xlcourier",
+      "title": "Suivi XLCourier\u00a0: codes XLC, colis lourds UK et aide",
+      "name": "XLCourier",
+      "color": "#044ad6"
+    },
+    {
       "id": "gls-hu",
       "catalog": "gls-hu",
       "slug": "suivi-gls-hungary",
@@ -8654,6 +8670,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento 360Lion: codici WSH e AR, stati e contatti",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "tracciamento-xlcourier",
+      "title": "Tracciamento XLCourier: codici XLC, pacchi pesanti UK",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "gls-hu",
@@ -10736,6 +10760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GOFO España: códigos GFES/CIES y ayuda",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "seguimiento-xlcourier",
+      "title": "Seguimiento XLCourier: códigos XLC, paquetes pesados UK",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "estafeta",
@@ -12842,6 +12874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 360Lion: códigos WSH e AR, estados e contactos",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "rastreio-xlcourier",
+      "title": "Rastreio XLCourier: códigos XLC, volumes pesados UK",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "gls-hu",
@@ -14974,6 +15014,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 360Lion: kody WSH i AR, statusy i kontakt",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "xlcourier",
+      "catalog": "xlcourier",
+      "slug": "sledzenie-xlcourier",
+      "title": "Śledzenie XLCourier: kody XLC, ciężkie paczki w UK",
+      "name": "XLCourier",
+      "color": "#044ad6"
     },
     {
       "id": "gls-hu",

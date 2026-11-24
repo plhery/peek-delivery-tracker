@@ -263,7 +263,7 @@
   { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },
   { "id": "korea-post", "catalog": "korea-post", "name": "Korea Post", "languages": ["en"] },
   { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk"] },
-  { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en"] },
+  { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "estafeta", "catalog": "estafeta", "name": "Estafeta", "languages": ["en", "es"] },
   { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dhl-freight", "catalog": "dhl-freight", "name": "DHL Freight", "languages": ["en", "de"] },

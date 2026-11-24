@@ -437,8 +437,11 @@ On SIGTERM/SIGINT the process turns unready at once and stops taking new work. C
 in progress get 10 s to end; a scheduled run starts no other parcel. A job that
 finishes in time is done. Otherwise the check is aborted and logged and recorded as
 `interrupted`, and its job goes back to the queue without using up a retry; the
-replacement checks what is still due. Its first scheduled run starts after 8 s, unless
-one already ended in the current window, which opens at every even minute. Next.js then drains HTTP requests. Time limits: 4 s
+replacement checks what is still due. It queues its first scheduled run after 8 s, unless
+one already ended in the current window, which opens at every even minute, or one was handed
+over, which keeps its Sentry check-in. Either waits in the queue behind readers' checks (a link
+opened, a parcel added or refreshed), which the replacement takes first: after a deploy amid
+slow checks, the scheduled run starts minutes later. Next.js then drains HTTP requests. Time limits: 4 s
 for an aborted check to stop, 18 s for the whole handoff, 500 ms for Sentry, 25 s
 overall, inside the platform's 30 s grace period.
 

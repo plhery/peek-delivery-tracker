@@ -4812,6 +4812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "seko-logistics-sendungsverfolgung",
+      "title": "SEKO Logistics Sendungsverfolgung: Nummern & OmniParcel",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
+    },
+    {
       "id": "bfe-express",
       "catalog": "bfe-express",
       "slug": "bfe-express-sendungsverfolgung",
@@ -7188,6 +7196,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi PigeonShip\u00a0: numéros 18 caractères, statuts et aide",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "suivi-seko-logistics",
+      "title": "Suivi SEKO Logistics\u00a0: numéros, OmniParcel et livraison",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     },
     {
       "id": "bfe-express",
@@ -9568,6 +9584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "tracciamento-seko-logistics",
+      "title": "Tracciamento SEKO Logistics: codici, OmniParcel e consegne",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
+    },
+    {
       "id": "bfe-express",
       "catalog": "bfe-express",
       "slug": "tracciamento-bfe-express",
@@ -11946,6 +11970,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f2b02c"
     },
     {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "seguimiento-seko-logistics",
+      "title": "Seguimiento SEKO Logistics: números, OmniParcel y entregas",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
+    },
+    {
       "id": "bfe-express",
       "catalog": "bfe-express",
       "slug": "seguimiento-bfe-express",
@@ -14314,6 +14346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio PigeonShip: códigos, estados e entrega",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "rastreio-seko-logistics",
+      "title": "Rastreio SEKO Logistics: números, OmniParcel e entrega",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     },
     {
       "id": "bfe-express",
@@ -16766,6 +16806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PigeonShip: 18-znakowe kody, statusy i pomoc",
       "name": "PigeonShip",
       "color": "#f2b02c"
+    },
+    {
+      "id": "seko",
+      "catalog": "seko",
+      "slug": "sledzenie-seko-logistics",
+      "title": "Śledzenie SEKO Logistics: numery, OmniParcel i doręczenie",
+      "name": "SEKO Logistics",
+      "color": "#ef3e42"
     },
     {
       "id": "bfe-express",

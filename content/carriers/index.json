@@ -249,7 +249,7 @@
   { "id": "fan-courier-international", "catalog": "fan-courier-international", "name": "FAN Courier International", "languages": ["en", "ro", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "j-and-t-br", "catalog": "j-and-t-br", "name": "J&T Express Brazil", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "anjun", "catalog": "anjun", "name": "Anjun Logistics", "languages": ["en", "pt-br", "zh", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "xyl-ships", "catalog": "xyl-ships", "name": "XYL-Ships", "languages": ["en", "zh"] },
+  { "id": "xyl-ships", "catalog": "xyl-ships", "name": "XYL-Ships", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jadlog", "catalog": "jadlog", "name": "Jadlog", "languages": ["en", "pt-br"] },
   { "id": "gls-pl", "catalog": "gls-pl", "name": "GLS Poland", "languages": ["en", "pl"] },
   { "id": "j-and-t-mx", "catalog": "j-and-t-mx", "name": "J&T Express Mexico", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },

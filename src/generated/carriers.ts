@@ -4460,6 +4460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#009944"
     },
     {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "xyl-ships-sendungsverfolgung",
+      "title": "XYL-Ships Sendungsverfolgung: NUDE, XLWL & Status",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "jt-express-mexico-sendungsverfolgung",
@@ -6486,6 +6494,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#009944"
     },
     {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "suivi-xyl-ships",
+      "title": "Suivi XYL-Ships\u00a0: numéros NUDE et XLWL, statuts et aide",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "suivi-jt-express-mexico",
@@ -8488,6 +8504,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#009944"
     },
     {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "tracciamento-xyl-ships",
+      "title": "Tracciamento XYL-Ships: codici NUDE e XLWL e stati",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "tracciamento-jt-express-mexico",
@@ -10488,6 +10512,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Anjun Logistics: estados China-Brasil y SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "seguimiento-xyl-ships",
+      "title": "Seguimiento XYL-Ships: códigos NUDE y XLWL y estados",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
     },
     {
       "id": "j-and-t-mx",
@@ -12564,6 +12596,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#009944"
     },
     {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "rastreio-xyl-ships",
+      "title": "Rastreio XYL-Ships: códigos NUDE e XLWL, estados e ajuda",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "rastreio-jt-express-mexico",
@@ -14638,6 +14678,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Anjun Logistics: statusy Chiny–Brazylia i SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "xyl-ships",
+      "catalog": "xyl-ships",
+      "slug": "sledzenie-xyl-ships",
+      "title": "Śledzenie XYL-Ships: numery NUDE i XLWL oraz statusy",
+      "name": "XYL-Ships",
+      "color": "#b13c3c"
     },
     {
       "id": "gls-pl",

@@ -28,8 +28,11 @@ import java.util.UUID
 import kotlinx.coroutines.runBlocking
 import org.junit.rules.ExternalResource
 
-/** The moment the iPhone's captures show: Thursday 29 October 2026, 06:11 in Zurich. */
-val CAPTURED: Instant = Instant.parse("2026-10-29T05:11:00Z")
+/**
+ * The moment the captures show: Thursday 29 October 2026, 11:11 in Zurich. The demo dates its scans back from now, so
+ * the chocolate's round leaves at 09:11, and the other days' deliveries come in at that hour.
+ */
+val CAPTURED: Instant = Instant.parse("2026-10-29T10:11:00Z")
 
 /** The demo's parcels as the captures show them, seen from Zurich at [CAPTURED]. */
 object DemoCards {

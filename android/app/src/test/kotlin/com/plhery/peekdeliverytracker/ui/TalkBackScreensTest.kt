@@ -207,7 +207,7 @@ class TalkBackScreensTest {
                 "1.2 kg",
                 "Tracking history, 3 updates [button, Show less]",
                 "yesterday [heading]",
-                "18:11, Customs is taking a look. No peeking., Basel, Switzerland",
+                "23:11, Customs is taking a look. No peeking., Basel, Switzerland",
                 "Tue 27 Oct [heading]",
             ),
         )

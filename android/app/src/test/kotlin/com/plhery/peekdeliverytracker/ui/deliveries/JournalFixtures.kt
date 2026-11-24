@@ -10,7 +10,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.util.UUID
 
 /**
- * Made-up parcels for the parcel page's journal, seen from Zurich at [CAPTURED] (Thursday 29 October 2026, 06:11),
+ * Made-up parcels for the parcel page's journal, seen from Zurich at [CAPTURED] (Thursday 29 October 2026, 11:11),
  * their scans in the demo's words and places.
  */
 object JournalFixtures {

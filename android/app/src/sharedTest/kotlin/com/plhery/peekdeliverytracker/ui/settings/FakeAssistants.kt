@@ -43,7 +43,7 @@ class FakeAssistantsClient : AssistantsClient {
     }
 }
 
-/** Synthetic assistants and Peek's address for them, at the tests' fixed moment (2026-10-29 05:11 UTC). */
+/** Synthetic assistants and Peek's address for them, at the tests' fixed moment (2026-10-29 10:11 UTC). */
 object AssistantsFixtures {
     const val ADDRESS = "https://example.com/mcp"
 
@@ -51,7 +51,7 @@ object AssistantsFixtures {
     val claude = AssistantConnection(
         id = UUID.fromString("0f6c1d2e-3a4b-4c5d-8e9f-0a1b2c3d4e5f"), kind = AssistantConnectionKind.Oauth, name = "Claude",
         redirectHost = "claude.ai", scopes = listOf(AssistantScope.ParcelsRead, AssistantScope.ParcelsWrite),
-        createdAt = "2026-10-20T08:00:00.000Z", lastUsedAt = "2026-10-29T04:11:00.000Z",
+        createdAt = "2026-10-20T08:00:00.000Z", lastUsedAt = "2026-10-29T09:11:00.000Z",
     )
 
     /** Connected with OAuth, not used yet: it only sees parcels. */

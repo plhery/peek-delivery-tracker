@@ -71,8 +71,8 @@ class ChangeCarrierScreenshotTest {
         syncStatus = SyncStatus.Ok, notificationsMuted = false,
     )
 
-    /** Filed under none: automatic detection. */
-    private val lamp = parcel(1, "Desk lamp", CarrierId.Unknown, "TESTLAMP0001")
+    /** Filed under none: automatic detection. Of the pinned carriers its made-up number fits Colis Privé's alone. */
+    private val lamp = parcel(1, "Desk lamp", CarrierId.Unknown, "DL0000000001")
 
     /** Mondial Relay asks for the delivery postcode, from one of several countries. */
     private val chair = parcel(2, "Garden chair", CarrierId.MondialRelay, "76434219")

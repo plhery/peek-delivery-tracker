@@ -186,9 +186,9 @@ class AppNotificationsTest {
         assertEquals("Arriving at 4:00 PM", told())
         defaults.set("auto", forKey = ClockPreference.storageKey)
         assertEquals("Arriving at 4:00 PM", told())
-        // A minute before the captures' 06:11 in Zurich.
+        // A minute before the captures' 11:11 in Zurich.
         val scanned = AppClock.now().minusSeconds(60).toString()
-        assertEquals("Books · delivered at 6:10 AM", told(deliveredPush(scanned)))
+        assertEquals("Books · delivered at 11:10 AM", told(deliveredPush(scanned)))
 
         // A clock chosen wins over the phone's, either way.
         defaults.set("24", forKey = ClockPreference.storageKey)
@@ -196,9 +196,9 @@ class AppNotificationsTest {
         phoneClock("24")
         defaults.set("12", forKey = ClockPreference.storageKey)
         assertEquals("Arriving at 4:00 PM", told())
-        assertEquals("Books · delivered at 6:10 AM", told(deliveredPush(scanned)))
+        assertEquals("Books · delivered at 11:10 AM", told(deliveredPush(scanned)))
         defaults.set("24", forKey = ClockPreference.storageKey)
-        assertEquals("Books · delivered at 06:10", told(deliveredPush(scanned)))
+        assertEquals("Books · delivered at 11:10", told(deliveredPush(scanned)))
     }
 
     @Test

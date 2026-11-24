@@ -64,8 +64,11 @@ class JournalDaysAfterMidnightTest {
     /** The same parcel read again from the server: the same scans, newly read, and a later sync. */
     private fun reread(at: String): Parcel = first.copy(lastSyncedAt = at, trackingEvents = first.trackingEvents.map { it.copy() })
 
+    /** The page's first drawing: Thu 29 Oct 2026 06:11 in Zurich, a few hours after midnight. */
+    private val drawn: Instant = Instant.parse("2026-10-29T05:11:00Z")
+
     /** The app's clock, one function for the page's life as `AppClock::now` is. */
-    private var clock: Instant = CAPTURED
+    private var clock: Instant = drawn
     private val now: () -> Instant = { clock }
 
     private var shown by mutableStateOf(first)
@@ -102,7 +105,7 @@ class JournalDaysAfterMidnightTest {
     /** Control: a page opened on Friday morning names Thursday yesterday and Wednesday by its date. */
     @Test
     fun controlAPageOpenedTheNextMorning() {
-        clock = CAPTURED.plusSeconds(86_400)
+        clock = drawn.plusSeconds(86_400)
         show()
         assertEquals(listOf("yesterday", "Wed 28 Oct"), days())
     }
@@ -114,7 +117,7 @@ class JournalDaysAfterMidnightTest {
     @Test
     fun aPageLeftOpenOvernightNamesItsDaysAfreshAfterTheReload() {
         show()
-        clock = CAPTURED.plusSeconds(86_400)
+        clock = drawn.plusSeconds(86_400)
         shown = reread("2026-10-30T05:00:00Z")
         compose.waitForIdle()
         assertEquals(
@@ -133,7 +136,7 @@ class JournalDaysAfterMidnightTest {
     fun aPageLeftOpenOvernightNamesItsDaysAfreshAtMidnight() {
         show()
         assertEquals(listOf("today", "yesterday"), days())
-        clock = CAPTURED.plusSeconds(86_400)
+        clock = drawn.plusSeconds(86_400)
         shown = first.copy(trackingEvents = first.trackingEvents.map { it.copy() })
         // The page's own wait for midnight runs on the test's clock, which a night moves on too.
         compose.mainClock.advanceTimeBy(86_400_000)

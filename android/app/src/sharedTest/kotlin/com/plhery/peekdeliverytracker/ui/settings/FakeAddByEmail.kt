@@ -55,7 +55,7 @@ class FakeAddByEmailClient : AddByEmailClient {
     }
 }
 
-/** Synthetic forwarding addresses and emails, at the tests' fixed moment (2026-10-29 05:11 UTC). */
+/** Synthetic forwarding addresses and emails, at the tests' fixed moment (2026-10-29 10:11 UTC). */
 object AddByEmailFixtures {
     const val ADDRESS = "add+abcdefghijklmnop@in.example.com"
     const val RENEWED = "add+qrstuvwxyz234567@in.example.com"
@@ -75,14 +75,14 @@ object AddByEmailFixtures {
 
     /** A week of forwarded emails, newest first, one of each kind the page words differently. */
     val recent = listOf(
-        AddByEmailEntry(at = "2026-10-29T04:58:00.000Z", sender = "Atelier Lune", result = AddByEmailResult.Added, added = 1),
-        AddByEmailEntry(at = "2026-10-28T16:20:00.000Z", sender = "Example Books", result = AddByEmailResult.Named, added = 0),
-        AddByEmailEntry(at = "2026-10-27T09:05:00.000Z", sender = "Synthetic Market", result = AddByEmailResult.None, added = 0),
-        AddByEmailEntry(at = "2026-10-25T11:40:00.000Z", sender = "Atelier Lune", result = AddByEmailResult.Delivered, added = 0),
+        AddByEmailEntry(at = "2026-10-29T09:58:00.000Z", sender = "Atelier Lune", result = AddByEmailResult.Added, added = 1),
+        AddByEmailEntry(at = "2026-10-28T21:20:00.000Z", sender = "Example Books", result = AddByEmailResult.Named, added = 0),
+        AddByEmailEntry(at = "2026-10-27T14:05:00.000Z", sender = "Synthetic Market", result = AddByEmailResult.None, added = 0),
+        AddByEmailEntry(at = "2026-10-25T16:40:00.000Z", sender = "Atelier Lune", result = AddByEmailResult.Delivered, added = 0),
     )
 
     /** Gmail's confirmation, come in while the reader was in Gmail. */
-    val confirmation = ForwardingConfirmation(code = "123456789", link = "https://mail.google.com/mail/vf-synthetic", receivedAt = "2026-10-29T05:09:00.000Z")
+    val confirmation = ForwardingConfirmation(code = "123456789", link = "https://mail.google.com/mail/vf-synthetic", receivedAt = "2026-10-29T10:09:00.000Z")
 
     fun offer(inbox: AddByEmail? = mailbox(), dailyLimit: Int = DAILY_LIMIT) = AddByEmailResponse(inbox = inbox, dailyLimit = dailyLimit)
 }

@@ -224,7 +224,7 @@ object LinkFixtures {
             lastSyncedAt = ago(2), expectedDelivery = "2026-10-30",
             trackingEvents = listOf(
                 event(it, TrackingStage.InTransit, "In transit", 95, location = "Zürich, CH"),
-                event(it, TrackingStage.Accepted, "Parcel handed to DPD", 600),
+                event(it, TrackingStage.Accepted, "Parcel handed to DPD", 900),
             ),
         )
     }
@@ -265,7 +265,7 @@ object LinkFixtures {
         gift.copy(link = gift.link.copy(giftWords = GiftWords(name = "trail running shoes", note = "Happy birthday!", from = "Sam"))).parcel {
             it.copy(
                 lastSyncedAt = ago(2), expectedDelivery = "2026-10-29 13:00–17:00",
-                trackingEvents = it.trackingEvents.mapIndexed { index, event -> event.copy(occurredAt = ago(50L + index * 600)) },
+                trackingEvents = it.trackingEvents.mapIndexed { index, event -> event.copy(occurredAt = ago(50L + index * 900)) },
             )
         }
     }

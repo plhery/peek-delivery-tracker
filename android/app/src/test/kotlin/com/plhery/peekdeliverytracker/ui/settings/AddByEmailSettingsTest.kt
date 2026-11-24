@@ -285,7 +285,7 @@ class AddByEmailSettingsTest {
 
     @Test
     fun anEmailWithoutANumberNamesTheAccountThatShowsIt() {
-        val amazon = AddByEmailEntry(at = "2026-10-29T04:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
+        val amazon = AddByEmailEntry(at = "2026-10-29T09:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
         show { addByEmailClient.offer = offer(mailbox(recent = listOf(amazon))) }
         tap(SETTINGS_ADD_BY_EMAIL)
         assertTrue(shows("Amazon.it"))
@@ -298,7 +298,7 @@ class AddByEmailSettingsTest {
     /** Where the server serves its guides, the Amazon guide under the last emails. */
     @Test
     fun anEmailWhoseNumberIsInTheAmazonAccountLinksTheGuide() {
-        val amazon = AddByEmailEntry(at = "2026-10-29T04:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
+        val amazon = AddByEmailEntry(at = "2026-10-29T09:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
         show(identities = guideIdentities) { addByEmailClient.offer = offer(mailbox(recent = listOf(amazon))) }
         tap(SETTINGS_ADD_BY_EMAIL)
         tap(ADD_BY_EMAIL_AMAZON_GUIDE)

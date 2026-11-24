@@ -35,7 +35,7 @@ import org.robolectric.annotation.GraphicsMode
  * changes with the page open (Android resets the default zone on ACTION_TIMEZONE_CHANGED, with no configuration change,
  * so the page stays), closing and opening the history shows the new zone's days over its times and name.
  *
- * Seen at the captures' moment, Thu 29 Oct 2026 06:11 in Zurich (01:11 in New York).
+ * Seen at the captures' moment, Thu 29 Oct 2026 11:11 in Zurich (06:11 in New York).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)

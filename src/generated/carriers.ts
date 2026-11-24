@@ -14790,6 +14790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "dhl",
+      "catalog": "dhl",
+      "slug": "rastreamento-dhl-paket",
+      "title": "Rastreamento DHL Paket: códigos, status e Packstation",
+      "name": "DHL Paket",
+      "color": "#ffcc00"
+    },
+    {
       "id": "usps",
       "catalog": "usps",
       "slug": "rastreamento-usps",
@@ -17562,6 +17570,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送失败",
       "name": "FedEx",
       "color": "#4d148c"
+    },
+    {
+      "id": "dhl",
+      "catalog": "dhl",
+      "slug": "dhl-paket-deguo-chaxun",
+      "title": "DHL Paket 德国包裹查询：单号格式、Packstation 自提与客服",
+      "name": "DHL Paket",
+      "color": "#ffcc00"
     },
     {
       "id": "usps",

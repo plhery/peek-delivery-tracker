@@ -111,7 +111,7 @@
   { "id": "la-poste", "catalog": "la-poste", "name": "La Poste / Colissimo", "languages": ["en", "fr", "pt", "es", "de", "it", "pl"] },
   { "id": "correos-spain", "catalog": "correos-spain", "name": "Correos", "languages": ["en", "es", "pt", "de", "fr", "it", "pl"] },
   { "id": "royal-mail", "catalog": "royal-mail", "name": "Royal Mail", "languages": ["en", "pt", "fr", "de", "es", "it", "pl"] },
-  { "id": "usps", "catalog": "usps", "name": "USPS", "languages": ["en", "es", "de", "fr", "it", "pt", "pl"] },
+  { "id": "usps", "catalog": "usps", "name": "USPS", "languages": ["en", "es", "de", "fr", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "canada-post", "catalog": "canada-post", "name": "Canada Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "purolator", "catalog": "purolator", "name": "Purolator", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "intelcom", "catalog": "intelcom", "name": "Intelcom / Dragonfly", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

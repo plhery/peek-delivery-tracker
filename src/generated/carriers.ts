@@ -14790,6 +14790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "rastreamento-usps",
+      "title": "Rastreamento USPS: códigos, status, entrega e contato",
+      "name": "USPS",
+      "color": "#004b87"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "rastreamento-china-post",
@@ -17554,6 +17562,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送失败",
       "name": "FedEx",
       "color": "#4d148c"
+    },
+    {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "usps-meiguo-youzheng-chaxun",
+      "title": "USPS 美国邮政单号查询：运单格式、英文状态与客服电话",
+      "name": "USPS",
+      "color": "#004b87"
     },
     {
       "id": "australia-post",

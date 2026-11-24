@@ -10,9 +10,12 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let trackingNumber: String
     /// When it is expected or arrived, as the app words it when it publishes; else its status.
     var detail: String
-    /// Whether it is out for delivery on a round that has not ended when the app publishes (`isOnDeliveryRound`): the
-    /// widgets put it first, with the bicycle.
-    let isOutForDelivery: Bool
+    /// Whether it is out for delivery on a round that has not ended (`isOnDeliveryRound`): the widgets put it first, with
+    /// the bicycle.
+    var isOutForDelivery: Bool
+    /// When that round ends (`deliveryRoundEnd`): from then on the parcel waits among the others while the app stays
+    /// closed. None from an app that didn't publish it.
+    var roundEndsAt: Date? = nil
     /// When a delivered parcel arrived: the widget keeps it for a day after.
     var deliveredAt: Date? = nil
     /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
@@ -132,13 +135,14 @@ enum DeliveryWidgetDays {
         return changes.isEmpty ? nil : changes
     }
 
-    /// When the parcels' words change after `now`, and the midnight after each of their steps, from which a step's time
-    /// names its weekday: a widget's timeline has an entry at each.
+    /// When the parcels' words change after `now`, the midnight after each of their steps, from which a step's time
+    /// names its weekday, and the end of each delivery round: a widget's timeline has an entry at each.
     static func changes(in parcels: [DeliveryWidgetParcel], after now: Date, calendar: Calendar = .current) -> [Date] {
         let worded = parcels.flatMap { $0.later ?? [] }.map { $0.midnight(in: calendar.timeZone) }
         let stepped = parcels.flatMap { $0.steps ?? [] }.compactMap { midnights(after: $0.at, count: 1, calendar: calendar).first }
         let guessed = parcels.compactMap(\.peekAiUntil)
-        return Set((worded + stepped + guessed).filter { $0 > now }).sorted()
+        let rounds = parcels.filter(\.isOutForDelivery).compactMap(\.roundEndsAt)
+        return Set((worded + stepped + guessed + rounds).filter { $0 > now }).sorted()
     }
 }
 
@@ -291,9 +295,11 @@ enum DeliveryWidgetSelection {
         return onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent
     }
 
-    /// The parcels the widget shows, in their order, worded for `now`.
+    /// The parcels the widget shows, in their order, worded for `now`: one whose round has ended since the app published
+    /// follows those still out for delivery.
     static func listed(_ parcels: [DeliveryWidgetParcel], now: Date = Date()) -> [DeliveryWidgetParcel] {
-        parcels.filter { isShown($0, now: now) }.map { $0.worded(at: now) }
+        let worded = parcels.filter { isShown($0, now: now) }.map { $0.worded(at: now) }
+        return worded.filter(\.isOutForDelivery) + worded.filter { !$0.isOutForDelivery }
     }
 
     /// A delivered parcel leaves the widget a day after it arrived, whenever the app last published it.
@@ -472,6 +478,7 @@ extension DeliveryWidgetParcel {
     func worded(at date: Date) -> DeliveryWidgetParcel {
         var parcel = self
         if let until = peekAiUntil, until <= date { (parcel.peekAi, parcel.peekAiAlone) = (nil, nil) }
+        if let ends = roundEndsAt, ends <= date { parcel.isOutForDelivery = false }
         guard let wording = later?.last(where: { $0.midnight() <= date }) else { return parcel }
         parcel.detail = wording.detail
         parcel.section = wording.section ?? section

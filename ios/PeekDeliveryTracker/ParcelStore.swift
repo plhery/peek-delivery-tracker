@@ -1813,6 +1813,7 @@ final class ParcelStore: ObservableObject {
             detail: first,
             // Out for delivery on a round that is over, it waits among the others, as on a Live Activity.
             isOutForDelivery: parcel.isOnDeliveryRound(now: now),
+            roundEndsAt: parcel.isOnDeliveryRound(now: now) ? parcel.deliveryRoundEnd : nil,
             // As the list's rows mark it.
             stage: DeliveryWidgetStage(
                 status: status, symbol: parcel.currentStage?.metadata.symbol ?? "shippingbox.fill",

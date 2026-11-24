@@ -2578,6 +2578,31 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(after.isOutForDelivery)
     }
 
+    /// Published during the round, the parcel stops leading the widgets when the round ends, while the app stays closed:
+    /// the widget's timeline has an entry then.
+    @MainActor
+    func testTheWidgetLetsAParcelWaitAmongTheOthersOnceItsRoundEnds() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00"
+        let ends = try XCTUnwrap(DateParser.date("2026-08-07T00:00:00+10:00"))
+        let before = ends.addingTimeInterval(-60)
+        let published = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: before).first)
+        XCTAssertEqual(published.roundEndsAt, ends)
+        let stillOut = widgetParcel(label: "Still out", outForDelivery: true)
+        let coming = widgetParcel(label: "Coming", outForDelivery: false)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: [published, stillOut, coming], delivered: [], now: before)
+        XCTAssertTrue(DeliveryWidgetDays.changes(in: parcels, after: before).contains(ends))
+        XCTAssertEqual(DeliveryWidgetSelection.listed(parcels, now: before).map(\.id), [published.id, stillOut.id, coming.id])
+        let listed = DeliveryWidgetSelection.listed(parcels, now: ends)
+        XCTAssertEqual(listed.map(\.id), [stillOut.id, published.id, coming.id])
+        XCTAssertEqual(listed.map(\.isOutForDelivery), [true, false, false])
+        // An app's parcel published after the round ended carries no end.
+        XCTAssertNil(try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: ends).first).roundEndsAt)
+    }
+
     @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()

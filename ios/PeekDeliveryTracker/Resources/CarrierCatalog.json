@@ -68679,6 +68679,124 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://callcourier.com.pk/tracking/"
+    },
+    "aquantuo": {
+      "displayName": "Aquantuo",
+      "aliases": [
+        "aquantuo.com"
+      ],
+      "countries": [
+        "GH",
+        "NG",
+        "KE",
+        "RW",
+        "TZ",
+        "UG",
+        "ZM",
+        "US",
+        "GB",
+        "CN"
+      ],
+      "color": "#066277",
+      "selectable": true,
+      "timezone": "Africa/Accra",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "aquantuo"
+      },
+      "trackingUrlTemplate": "https://aquantuo.com/track-order?package_id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "aquantuo.com",
+            "www.aquantuo.com"
+          ],
+          "pathPattern": "^/track-order/?$",
+          "params": [
+            "package_id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://aquantuo.com/track-order"
+    },
+    "hit-cargo-nicaragua": {
+      "displayName": "HIT Cargo",
+      "aliases": [
+        "HIT Cargo Nicaragua",
+        "hit-cargo.com"
+      ],
+      "countries": [
+        "NI",
+        "US"
+      ],
+      "color": "#14213D",
+      "selectable": true,
+      "timezone": "America/Managua",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "hit-cargo-nicaragua"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://hit-cargo.com/track/"
+    },
+    "interparcel-au": {
+      "displayName": "Interparcel Australia",
+      "aliases": [
+        "Interparcel",
+        "Interparcel AU",
+        "au.interparcel.com"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#4579B2",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "interparcel-au"
+      },
+      "trackingUrlTemplate": "https://au.interparcel.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "au.interparcel.com"
+          ],
+          "path": "^/tracking/(AU\\d{10})(?:/nocache)?/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://au.interparcel.com/tracking/"
+    },
+    "interparcel-uk": {
+      "displayName": "Interparcel UK",
+      "aliases": [
+        "Interparcel",
+        "uk.interparcel.com"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#4579B2",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "interparcel-uk"
+      },
+      "trackingUrlTemplate": "https://uk.interparcel.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "uk.interparcel.com"
+          ],
+          "path": "^/tracking/(GB\\d{10})(?:/nocache)?/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://uk.interparcel.com/tracking/"
     }
   }
 }

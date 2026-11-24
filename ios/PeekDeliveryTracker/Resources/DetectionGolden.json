@@ -33023,6 +33023,19 @@
     ]
   },
   {
+    "input": "2236371763054025",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
     "input": "2242836273",
     "carrier": "unknown",
     "confidence": "low",
@@ -77306,6 +77319,12 @@
     ]
   },
   {
+    "input": "910500",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "9107345678",
     "carrier": "unknown",
     "confidence": "low",
@@ -78212,6 +78231,12 @@
       "colisweb",
       "heppner"
     ]
+  },
+  {
+    "input": "926791",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "92726304",
@@ -84841,6 +84866,36 @@
     "confidence": "low",
     "candidates": [
       "fastgo"
+    ]
+  },
+  {
+    "input": "AU4046552724",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "AU8046336296",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
     ]
   },
   {
@@ -95900,6 +95955,30 @@
     "confidence": "low",
     "candidates": [
       "loggi"
+    ]
+  },
+  {
+    "input": "GB5206570633",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
+    "input": "GB6234015339",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
+    "input": "GB9221006391",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
     ]
   },
   {

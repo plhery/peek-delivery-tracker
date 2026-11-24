@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react';
-import { PARCEL, ParcelFlap } from '../Icon';
+import { useId, type CSSProperties } from 'react';
+import { KraftSides, PARCEL, ParcelFlap } from '../Icon';
 import styles from './map.module.css';
 import { EAGER_LIFT, PIP_FRAME, type PipMood, type PipSide } from './pipGeometry';
 
@@ -66,7 +66,7 @@ function Flap({ name, fill, rear = false, hidden = false }: { name: keyof typeof
  * Pip's drawing in the frame of `PIP_FRAME`, coloured by the `--pip-*` tones around it, without an `<svg>` of
  * its own and without state: `InkPip` keeps what changes as he is watched, and a page can draw him in its own scene.
  */
-export function PipDrawing({ mood, side, below = false, opened = false, before = null, inside = 'deep', onFaceShown }: {
+export function PipDrawing({ mood, side, below = false, opened = false, before = null, inside = 'deep', kraft = false, onFaceShown }: {
   mood: PipMood;
   side: PipSide;
   /** He stands straight below the dot, and looks up at it. */
@@ -77,14 +77,23 @@ export function PipDrawing({ mood, side, below = false, opened = false, before =
   before?: PipMood | null;
   /** The tone of the box's inside, the deep one unless a drawing names its own. */
   inside?: string;
+  /** He is the kraft parcel, drawn as the big one is: his sides shaded across the frame, no hairlines, and a soft shadow. */
+  kraft?: boolean;
   /** The new face has finished appearing. */
   onFaceShown?: () => void;
 }) {
   const open = mood === 'joy';
   const eager = mood === 'eager';
   const tilt = eager ? -5 : mood === 'worry' ? 3 : 0;
+  const shade = useId();
   return <>
-    <ellipse cx="150" cy="286" rx={eager ? 69 : 84} ry="10" style={tone('shadow')} />
+    {kraft ? <>
+      <defs>
+        <KraftSides id={shade} />
+        <filter id={`${shade}-shadow`} filterUnits="userSpaceOnUse" x="0" y="240" width="300" height="92"><feGaussianBlur stdDeviation="9" /></filter>
+      </defs>
+      <ellipse cx="151" cy="286" rx={eager ? 74 : 90} ry="10" fill="#000" opacity=".08" filter={`url(#${shade}-shadow)`} />
+    </> : <ellipse cx="150" cy="286" rx={eager ? 69 : 84} ry="10" style={tone('shadow')} />}
     {/* He hurries toward the dot, so his speed lines trail on the far side. */}
     {eager && <path d="M14 170H40M2 196H36M18 222H40" style={line} strokeWidth="7" strokeLinecap="round" opacity=".32"
       transform={side < 0 ? `matrix(-1 0 0 1 ${PIP_FRAME.width} 0)` : undefined} />}
@@ -93,10 +102,10 @@ export function PipDrawing({ mood, side, below = false, opened = false, before =
         <path d={PARCEL.inside} style={tone(inside)} />
         <Flap name="backLeft" fill="back-left" rear hidden />
         <Flap name="backRight" fill="back-right" rear />
-        <path d={PARCEL.left} style={tone('left')} />
-        <path d={PARCEL.right} style={tone('right')} />
+        <path d={PARCEL.left} {...(kraft ? { fill: `url(#${shade}-left)` } : { style: tone('left') })} />
+        <path d={PARCEL.right} {...(kraft ? { fill: `url(#${shade}-right)` } : { style: tone('right') })} />
         <path d={PARCEL.left} style={tone('paper')} opacity=".07" />
-        <path d={PARCEL.hairlines} style={line} strokeOpacity=".25" strokeWidth=".8" />
+        {!kraft && <path d={PARCEL.hairlines} style={line} strokeOpacity=".25" strokeWidth=".8" />}
         <path d={PARCEL.edges} style={{ stroke: 'var(--pip-paper)' }} strokeWidth="1" opacity=".4" />
         {/* The face is on the side, under the front flaps: open, the left one is a brim over his eyes. */}
         {before && <g key={`was-${before}`} className={styles.pipFaceGone}><Face mood={before} side={side} below={below} /></g>}

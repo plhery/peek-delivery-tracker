@@ -4,7 +4,7 @@ import type { CarrierInfo } from '../lib/carriers';
 import { TruckArt } from './CarrierMark';
 import { PARCEL, ParcelArt } from './Pip';
 
-export { flapPoints, PARCEL, ParcelFlap, PipFace, SmallPip, type PaperFlap, type PaperPoint } from './Pip';
+export { flapPoints, KraftSides, PARCEL, ParcelFlap, PipFace, SmallPip, type PaperFlap, type PaperPoint } from './Pip';
 
 const paths = {
   parcel: 'M3 7l9-5 9 5v10l-9 5-9-5V7Zm0 0 9 5 9-5M12 12v10M7.5 4.5l9 5',

@@ -64,12 +64,18 @@
   <text x="84" y="462" font-family="Geist, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" fill="#526E5B">Paste a number. No account needed.</text>
   <!-- Pip, where the parcel pictures seat him. -->
   <svg x="710" y="90" width="420" height="434" viewBox="0 0 300 310" fill="none">
-    <ellipse cx="150" cy="286" rx="84" ry="10" fill="#20251E" opacity=".08"/>
-    <path d="m55 142 95-47 95 47-95 48-95-48Z" fill="#DDBD96"/>
-    <path d="m55 142 95 48v87l-95-48v-87Z" fill="#C9A47B"/>
-    <path d="m150 190 95-48v87l-95 48v-87Z" fill="#B78F66"/>
-    <path d="M56 144v84l93 47m2 0 92-46v-84" stroke="#987450" stroke-opacity=".25" stroke-width=".8"/>
-    <path d="m55 142 95 48 95-48m-95 48v87" stroke="#FFF2CF" stroke-width="1"/>
+    <!-- The kraft sides are shaded across the frame, and he stands on a soft shadow, as the app draws him. -->
+    <defs>
+      <linearGradient id="pip-left" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stop-color="#DDBC95"/><stop offset="1" stop-color="#C49A6E"/></linearGradient>
+      <linearGradient id="pip-right" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stop-color="#BB946A"/><stop offset="1" stop-color="#A77E55"/></linearGradient>
+      <filter id="pip-shadow" filterUnits="userSpaceOnUse" x="0" y="240" width="300" height="92"><feGaussianBlur stdDeviation="9"/></filter>
+    </defs>
+    <ellipse cx="151" cy="286" rx="90" ry="10" fill="#000" opacity=".08" filter="url(#pip-shadow)"/>
+    <polygon points="150,95 245,142 197.5,166 102.5,118.5" fill="#D8B997" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
+    <path d="m55 142 95 48v87l-95-48v-87Z" fill="url(#pip-left)"/>
+    <path d="m150 190 95-48v87l-95 48v-87Z" fill="url(#pip-right)"/>
+    <path d="m55 142 95 48v87l-95-48v-87Z" fill="#FFF4D6" opacity=".07"/>
+    <path d="m55 142 95 48 95-48m-95 48v87" stroke="#FFF2CF" stroke-width="1" opacity=".4"/>
     <!-- His face, in the plane of the left side. -->
     <g transform="matrix(1 0.505263 0 1 55 142)">
       <ellipse cx="32.5" cy="36" rx="10" ry="11.5" fill="#FFFDF6"/>
@@ -82,12 +88,13 @@
       <ellipse cx="62.5" cy="51" rx="6.5" ry="3.2" fill="#E9958F" opacity=".55"/>
       <path d="M42 51Q48 58 54 51" stroke="#20251E" stroke-width="2.4" stroke-linecap="round"/>
     </g>
-    <g transform="translate(201 201) rotate(-27)"><path d="M10 22V4m-5 5 5-5 5 5" stroke="#735C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g transform="translate(203.2 207) rotate(-27)"><path d="M10 22V4m-5 5 5-5 5 5" stroke="#735C43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
     <g transform="translate(183 234) rotate(-27)">
       <circle r="14" fill="#DECCE2"/>
-      <circle r="11.5" stroke="#FFF6FF" stroke-width="1.2"/>
-      <path d="M0-7V7m-6-10 12 6M-6 3 6-3" stroke="#7C6787" stroke-width="1.5" stroke-linecap="round"/>
+      <circle r="11.5" stroke="#FFF6FF" stroke-width="1.2" opacity=".48"/>
+      <path d="M0-7V7m-6-10 12 6M-6 3 6-3" stroke="#7C6787" stroke-width="2" stroke-linecap="round"/>
     </g>
+    <polygon points="55,142 150,190 197.5,166 102.5,118.5" fill="#DDBD96" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
     <path d="m96 122 13-7 95 48-13 7-95-48Z" fill="#EBDDCA"/>
     <path d="m103 119 94 47" stroke="#AF9474" stroke-opacity=".6" stroke-width="1" stroke-dasharray="3 3"/>
   </svg>

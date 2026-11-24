@@ -126,6 +126,17 @@ export function PipFace({ k = 1, look = [.5, -.2] }: { k?: number; look?: PaperP
 }
 
 /**
+ * The kraft sides' shading across the 300 × 310 frame, as the iPhone and Android parcels have it, for a drawing's
+ * `<defs>`: it fills with `url(#<id>-left)` and `url(#<id>-right)`.
+ */
+export function KraftSides({ id }: { id: string }) {
+  return <>
+    <linearGradient id={`${id}-left`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#DDBC95" /><stop offset="1" stopColor="#C49A6E" /></linearGradient>
+    <linearGradient id={`${id}-right`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#BB946A" /><stop offset="1" stopColor="#A77E55" /></linearGradient>
+  </>;
+}
+
+/**
  * Pip: kraft paper, a face on the left side, and a card tucked behind the front faces.
  * A `label`, drawn in the right side's plane, takes the place of the arrow and the seal there: Icon's ParcelIllustration
  * passes the carrier's. This file imports no carrier art, so a page that shows Pip alone (the error and not-found
@@ -140,10 +151,7 @@ export function ParcelArt({ className = '', label, ribbon = false }: {
   // The sides are shaded across the frame, as the iPhone and Android parcels are: each drawing on a page needs its own ids.
   const shade = useId();
   return <svg className={`parcel-illustration ${className}`} viewBox="0 0 300 310" fill="none" aria-hidden="true">
-    <defs>
-      <linearGradient id={`${shade}-left`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#DDBC95" /><stop offset="1" stopColor="#C49A6E" /></linearGradient>
-      <linearGradient id={`${shade}-right`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#BB946A" /><stop offset="1" stopColor="#A77E55" /></linearGradient>
-    </defs>
+    <defs><KraftSides id={shade} /></defs>
     <ellipse className="parcel-illustration__shadow" cx="151" cy="286" rx="90" ry="10" fill="#000" opacity=".08" />
     <g className="parcel-illustration__body">
       <path d={PARCEL.inside} fill="#806345" />

@@ -16,10 +16,10 @@ const INK = '#20251e';
 const WORDMARKS: Record<string, string> = { dhl: 'DHL', gls: 'GLS', ups: 'ups' };
 /** The parcel's 300 × 310 frame, as the app draws Pip. */
 const BOX = {
-  top: 'm55 142 95-47 95 47-95 48-95-48Z',
+  backFlap: '150,95 245,142 197.5,166 102.5,118.5',
+  frontFlap: '55,142 150,190 197.5,166 102.5,118.5',
   left: 'm55 142 95 48v87l-95-48v-87Z',
   right: 'm150 190 95-48v87l-95 48v-87Z',
-  hairlines: 'M56 144v84l93 47m2 0 92-46v-84',
   edges: 'm55 142 95 48 95-48m-95 48v87',
   tape: 'm96 122 13-7 95 48-13 7-95-48Z',
   seam: 'm103 119 94 47',
@@ -68,17 +68,23 @@ const GIFT = { surface: '#e9deff', tone: '#654299' };
 
 /**
  * Pip, closed, with the carrier's label on his right side: its truck and a
- * barcode, never a number. With `ribbon` he is wrapped as a gift, as on the page.
+ * barcode, never a number. Without one he has the arrow and the seal, as on the
+ * page. With `ribbon` he is wrapped as a gift.
  */
 function Pip({ carrier, palette, width, ribbon = false }: { carrier: CarrierInfo | null; palette: CarrierPalette | null; width: number; ribbon?: boolean }) {
   return <div style={{ display: 'flex', position: 'relative', width, height: width * 310 / 300 }}>
     <svg width={width} height={width * 310 / 300} viewBox="0 0 300 310" fill="none">
-      <ellipse cx="150" cy="286" rx="84" ry="10" fill={INK} opacity=".08" />
-      <path d={BOX.top} fill="#DDBD96" />
-      <path d={BOX.left} fill="#C9A47B" />
-      <path d={BOX.right} fill="#B78F66" />
-      <path d={BOX.hairlines} stroke="#987450" strokeOpacity=".25" strokeWidth=".8" />
-      <path d={BOX.edges} stroke="#FFF2CF" strokeWidth="1" />
+      <defs>
+        <linearGradient id="pip-left" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#DDBC95" /><stop offset="1" stopColor="#C49A6E" /></linearGradient>
+        <linearGradient id="pip-right" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="310"><stop stopColor="#BB946A" /><stop offset="1" stopColor="#A77E55" /></linearGradient>
+        <filter id="pip-shadow" filterUnits="userSpaceOnUse" x="0" y="240" width="300" height="92"><feGaussianBlur stdDeviation="9" /></filter>
+      </defs>
+      <ellipse cx="151" cy="286" rx="90" ry="10" fill="#000" opacity=".08" filter="url(#pip-shadow)" />
+      <polygon points={BOX.backFlap} fill="#D8B997" stroke="#987450" strokeOpacity=".24" strokeWidth=".7" />
+      <path d={BOX.left} fill="url(#pip-left)" />
+      <path d={BOX.right} fill="url(#pip-right)" />
+      <path d={BOX.left} fill="#FFF4D6" opacity=".07" />
+      <path d={BOX.edges} stroke="#FFF2CF" strokeWidth="1" opacity=".4" />
       <g transform="matrix(1 0.505263 0 1 55 142)">
         {[32.5, 63.5].map((x) => <g key={x}>
           <ellipse cx={x} cy="36" rx="10" ry="11.5" fill="#FFFDF6" />
@@ -95,15 +101,20 @@ function Pip({ carrier, palette, width, ribbon = false }: { carrier: CarrierInfo
         <path d="M26 11h34" stroke={palette['brand-light']} strokeWidth="4" strokeLinecap="round" />
         <path d={BOX.barcode} stroke="#20251E" strokeWidth="1.05" />
         <path d="M6 41h44" stroke="#20251E" strokeOpacity=".3" strokeWidth="2.4" strokeLinecap="round" />
-      </g> : <g transform="translate(183 234) rotate(-27)">
-        <circle r="14" fill="#DECCE2" />
-        <circle r="11.5" stroke="#FFF6FF" strokeWidth="1.2" />
-        <path d="M0-7V7m-6-10 12 6M-6 3 6-3" stroke="#7C6787" strokeWidth="1.5" strokeLinecap="round" />
-      </g>}
+      </g> : <>
+        <g transform="translate(203.2 207) rotate(-27)"><path d="M10 22V4m-5 5 5-5 5 5" stroke="#735C43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></g>
+        <g transform="translate(183 234) rotate(-27)">
+          <circle r="14" fill="#DECCE2" />
+          <circle r="11.5" stroke="#FFF6FF" strokeWidth="1.2" opacity=".48" />
+          <path d="M0-7V7m-6-10 12 6M-6 3 6-3" stroke="#7C6787" strokeWidth="2" strokeLinecap="round" />
+        </g>
+      </>}
+      <polygon points={BOX.frontFlap} fill="#DDBD96" stroke="#987450" strokeOpacity=".24" strokeWidth=".7" />
       <path d={BOX.tape} fill="#EBDDCA" />
       <path d={BOX.seam} stroke="#AF9474" strokeOpacity=".6" strokeWidth="1" strokeDasharray="3 3" />
       {ribbon && <path d="M102.5 118.5 197.5 166M197.5 118.5 102.5 166M102.5 166v87M197.5 166v87" stroke="#A286B5" strokeWidth="9" />}
-      {ribbon && <path d="M150 142c-14-16-34-12-26 0 5 7 20 4 26 0Zm0 0c14-16 34-12 26 0-5 7-20 4-26 0Z" fill="#B99BCB" stroke="#9A82AA" strokeWidth="1" />}
+      {ribbon && <path d="M102.5 118.5 197.5 166M197.5 118.5 102.5 166" stroke="#CDB8DB" strokeWidth="2" opacity=".7" />}
+      {ribbon && <path d="M150 142c-14-16-34-12-26 0 5 7 20 4 26 0Zm0 0c14-16 34-12 26 0-5 7-20 4-26 0Z" fill="#B99BCB" stroke="#7C6787" strokeWidth="1" strokeOpacity=".5" />}
       {ribbon && <path d="M150 142c-6 10-12 18-20 22M150 142c6 10 13 17 22 20" stroke="#A286B5" strokeWidth="5" strokeLinecap="round" />}
       {ribbon && <ellipse cx="150" cy="142" rx="6" ry="4.5" fill="#8E6FA3" />}
     </svg>

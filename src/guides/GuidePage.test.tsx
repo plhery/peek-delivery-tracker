@@ -196,7 +196,8 @@ describe('the guides’ pictures', () => {
     expect(markup).toContain('role="img"');
     expect(markup).toContain('aria-label="What the picture shows"');
     // Pip's kraft, and nothing written but digits and the letters of a tracking number.
-    expect(markup).toContain('--pip-left:#C9A47B');
+    expect(markup).toContain('--pip-front-left:#DDBD96');
+    expect(markup).toContain('stop-color="#DDBC95"');
     const words = [...markup.matchAll(/<text[^>]*>([^<]*)<\/text>/g)].map(([, text]) => text);
     for (const word of words) expect(word).toMatch(/^[A-Z0-9]+$/);
   });

@@ -11,12 +11,12 @@ const WIDTH = 640;
 const HEIGHT = 300;
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 
-/** Pip's tones as the kraft parcel wears them. */
+/** Pip's tones as the kraft parcel wears them. His sides and his shadow are the kraft drawing's own. */
 const KRAFT = {
   '--pip-ink': '#987450', '--pip-deep': '#20251E', '--pip-inside': '#806345', '--pip-paper': '#FFFDF6',
-  '--pip-left': '#C9A47B', '--pip-right': '#B78F66', '--pip-back-left': '#C4A078', '--pip-back-right': '#D8B997',
+  '--pip-back-left': '#C4A078', '--pip-back-right': '#D8B997',
   '--pip-front-left': '#DDBD96', '--pip-front-right': '#D1AE85', '--pip-tape': '#EBDDCA', '--pip-seam': '#AF9474',
-  '--pip-blush': '#E9958F', '--pip-shadow': 'rgb(32 37 30 / 12%)', '--pip-glint': '#D6AE48', '--pip-glint-deep': '#C99B35',
+  '--pip-blush': '#E9958F', '--pip-glint': '#D6AE48', '--pip-glint-deep': '#C99B35',
 } as CSSProperties;
 
 /** Pip, standing with his feet on `(x, ground)`. He looks toward `side`. */
@@ -24,7 +24,7 @@ function Pip({ x, ground, width, mood, side = 0 }: { x: number; ground: number; 
   const scale = width / PIP_FRAME.width;
   return <svg x={x - PIP_FRAME.groundX * scale} y={ground - PIP_FRAME.groundY * scale} width={width} height={PIP_FRAME.height * scale}
     viewBox={`0 0 ${PIP_FRAME.width} ${PIP_FRAME.height}`} overflow="visible" fill="none" style={KRAFT}>
-    <PipDrawing mood={mood} side={side} inside="inside" />
+    <PipDrawing mood={mood} side={side} inside="inside" kraft />
   </svg>;
 }
 

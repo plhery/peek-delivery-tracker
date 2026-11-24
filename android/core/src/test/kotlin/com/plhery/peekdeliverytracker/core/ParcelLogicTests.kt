@@ -835,6 +835,9 @@ class ParcelLogicTests {
         assertEquals(NonTrackingShape.Mistyped(CarrierId.Ups, missing), CarrierCatalog.nonTrackingShape("1Z999AA1012345678"))
         assertEquals(NonTrackingShape.Mistyped(CarrierId.Ups, NonTrackingShape.Change.Extra), CarrierCatalog.nonTrackingShape("1Z999AA101234567840"))
         assertEquals(NonTrackingShape.Mistyped(CarrierId.JAndTAu, missing), CarrierCatalog.nonTrackingShape("JTAU12345678901"))
+        // J&T Germany's rule leaves out the numbers its other rule takes, still twelve digits.
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.JAndTDe, NonTrackingShape.Change.Extra), CarrierCatalog.nonTrackingShape("JTDE1234567890123"))
+        assertEquals(NonTrackingShape.Mistyped(CarrierId.JAndTDe, missing), CarrierCatalog.nonTrackingShape("JTDE12345678901"))
         assertNull(CarrierCatalog.nonTrackingShape("1Z999AA10123456784"))
         assertNull(CarrierCatalog.nonTrackingShape("JJD0000000000000000"))
         assertNull(CarrierCatalog.nonTrackingShape("1Z999AA10123456"))

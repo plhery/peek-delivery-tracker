@@ -133,10 +133,13 @@ describe('a looked-up number no carrier answered for', () => {
     ['TEMU1234567', null],
     ['ZZZJ0000008', null],
     ['ABCD1234560', null],
-    // Synthetic numbers that start like UPS's or J&T Australia's, with a character missing or one too many.
+    // Synthetic numbers that start like UPS's, J&T Australia's or J&T Germany's, with a character missing or one too
+    // many. J&T Germany's rule leaves out the numbers its other rule takes, still twelve digits.
     ['1Z999AA1012345678', { kind: 'mistyped', carrier: 'ups', change: 'missing' }],
     ['1Z999AA101234567840', { kind: 'mistyped', carrier: 'ups', change: 'extra' }],
     ['JTAU12345678901', { kind: 'mistyped', carrier: 'j-and-t-au', change: 'missing' }],
+    ['JTDE1234567890123', { kind: 'mistyped', carrier: 'j-and-t-de', change: 'extra' }],
+    ['JTDE12345678901', { kind: 'mistyped', carrier: 'j-and-t-de', change: 'missing' }],
     // UPS's own length, and a DHL rule that takes numbers of several lengths: neither says the number is mistyped.
     ['1Z999AA10123456784', null],
     ['JJD0000000000000000', null],

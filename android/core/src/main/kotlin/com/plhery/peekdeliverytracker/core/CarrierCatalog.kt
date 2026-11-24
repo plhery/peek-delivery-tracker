@@ -1329,10 +1329,13 @@ class CarrierCatalog private constructor(
             return if (normalized.characterCount < 8) NonTrackingShape.Short else null
         }
 
-        /** A high-confidence detection rule of one length, written as characters, digits and classes each taken
-         * once or a set number of times (`^1Z[A-Z0-9]{16}$`). A rule of several lengths, with a lookahead or with
-         * alternatives doesn't say how long its carrier's numbers are. */
-        private const val ONE_LENGTH_RULE = """^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$"""
+        /** A character, digit or class of a detection rule, taken once or a set number of times. */
+        private const val RULE_PART = """(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?"""
+
+        /** A high-confidence detection rule of one length, written as such parts (`^1Z[A-Z0-9]{16}$`), and at most
+         * leaving out some numbers of that length (`^JTDE(?!\d{2}00)\d{12}$`). A rule of several lengths, with a
+         * lookahead that sets the length or with alternatives doesn't say how long its carrier's numbers are. */
+        private const val ONE_LENGTH_RULE = """^\^(?:$RULE_PART|\(\?!(?:$RULE_PART)+\))+\$$"""
 
         /** The characters a rule of one length spells out at its start, at least two and one of them a letter, so
          * that a number starting with them is most likely that carrier's; null for any other rule. */

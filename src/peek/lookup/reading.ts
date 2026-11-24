@@ -99,12 +99,14 @@ export function isContainerNumber(normalized: string): boolean {
   return sum % 11 % 10 === Number(normalized[10]);
 }
 
+/** A character, digit or class of a detection rule, taken once or a set number of times. */
+const RULE_PART = String.raw`(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?`;
 /**
- * A high-confidence detection rule of one length, written as characters, digits and classes each taken once or a
- * set number of times (`^1Z[A-Z0-9]{16}$`, `^JTAU\d{12}$`). A rule of several lengths, with a lookahead or with
- * alternatives doesn't say how long its carrier's numbers are.
+ * A high-confidence detection rule of one length, written as such parts (`^1Z[A-Z0-9]{16}$`, `^JTAU\d{12}$`), and
+ * at most leaving out some numbers of that length (`^JTDE(?!\d{2}00)\d{12}$`). A rule of several lengths, with a
+ * lookahead that sets the length or with alternatives doesn't say how long its carrier's numbers are.
  */
-const ONE_LENGTH_RULE = /^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$/;
+const ONE_LENGTH_RULE = new RegExp(String.raw`^\^(?:${RULE_PART}|\(\?!(?:${RULE_PART})+\))+\$$`);
 
 /** The characters a rule spells out at its start, not counting one a count follows. */
 function spelledStart(pattern: string): string {

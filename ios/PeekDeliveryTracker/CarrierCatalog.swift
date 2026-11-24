@@ -1692,10 +1692,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return normalized.count < 8 ? .short : nil
     }
 
-    /// A high-confidence detection rule of one length, written as characters, digits and classes each taken once
-    /// or a set number of times (`^1Z[A-Z0-9]{16}$`). A rule of several lengths, with a lookahead or with
-    /// alternatives doesn't say how long its carrier's numbers are.
-    private static let oneLengthRule = #"^\^(?:(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?)+\$$"#
+    /// A character, digit or class of a detection rule, taken once or a set number of times.
+    private static let rulePart = #"(?:\\d|\[[^\]\\]+\]|[A-Z0-9])(?:\{\d+\})?"#
+
+    /// A high-confidence detection rule of one length, written as such parts (`^1Z[A-Z0-9]{16}$`), and at most
+    /// leaving out some numbers of that length (`^JTDE(?!\d{2}00)\d{12}$`). A rule of several lengths, with a
+    /// lookahead that sets the length or with alternatives doesn't say how long its carrier's numbers are.
+    private static let oneLengthRule = #"^\^(?:"# + rulePart + #"|\(\?!(?:"# + rulePart + #")+\))+\$$"#
 
     /// A detection pattern that is a bare run of digits: only its check digit points to its carrier.
     private static let bareDigitsRule = #"^\^(?:\\d|\[0-9\])\{\d+\}\$$"#

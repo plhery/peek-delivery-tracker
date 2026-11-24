@@ -6,7 +6,8 @@
  * three minutes. Every row is stored. A scan right after another in the
  * parcel's timeline, from the same source (a provider's row the carrier's
  * answer took over counts as the carrier's) and in the same stage, words and
- * place, within an hour of the first of them, tells the reader nothing new.
+ * place, within an hour of the first of them (a day for a USPS departure,
+ * which USPS re-dates), tells the reader nothing new.
  * Rows of one instant come between none of them: the carrier's other code for
  * a scan at its second (FAN Courier tells a delivery round under two codes)
  * splits no run, nor does a scan of another stage at a notice's instant.
@@ -15,6 +16,7 @@
  * (push.ts): a copy stored later announces nothing, even stamped before it. A scan La Poste lists twice at one
  * instant, in two wordings, is shown once (`wordingTwins`).
  */
+import { REDATED_DEPARTURE_WITHIN_MS, redatedDeparture } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 export type RepeatScan = { id: string; source: string; stage: string; description: string; location: string; at: number; held?: boolean };
@@ -48,6 +50,13 @@ const sameSource = (a: RepeatScan, b: RepeatScan) => a.source === b.source
   || (Boolean(a.held) !== Boolean(b.held) && carrierRow(a.held ? b : a));
 
 /**
+ * How long after its first scan a run takes scans: an hour, or a day for a USPS departure, which USPS re-dates up to a
+ * day on (`redatedDeparture`): a row stored before the re-date, which the sync could not move, is the same departure.
+ */
+const runWithin = (first: RepeatScan, scan: RepeatScan) =>
+  redatedDeparture((carrierRow(first) ? first : scan).source, { description: first.description }) ? REDATED_DEPARTURE_WITHIN_MS : RUN_MS;
+
+/**
  * Peek's own rows repeat nothing. At one instant, La Poste's two wordings of a scan are its words too, in whichever
  * stage each was read (`wordingTwins`).
  */
@@ -55,7 +64,7 @@ const repeats = (first: RepeatScan, scan: RepeatScan) => first.source !== '' && 
   && sameSource(first, scan)
   && ((scan.stage === first.stage && scan.description === first.description)
     || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
-  && scan.location === first.location && scan.at - first.at <= RUN_MS;
+  && scan.location === first.location && scan.at - first.at <= runWithin(first, scan);
 
 /**
  * The runs of repeated scans, each in time order, two scans or more. Each instant's rows go on the runs they repeat

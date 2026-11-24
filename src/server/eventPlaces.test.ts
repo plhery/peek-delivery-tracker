@@ -1009,6 +1009,26 @@ describe('withEventPlaces', () => {
     expect(apart.map(({ id, relay_of }) => [id, relay_of])).toEqual([['taken', undefined], ['own', undefined]]);
   });
 
+  it('serves a USPS departure stored before USPS re-dated it under the re-dated one', () => {
+    // Synthetic rows: USPS re-dates a departure four hours on and lists only the new time; the row stored before stays.
+    const scan = (id: string, occurredAt: string, source: string, description: string) => ({
+      ...event(id, null, occurredAt), stage: 'in_transit', description, location: 'SAMPLE TOWN, ST', provider_event_id: `${source}:${id}`,
+    });
+    const tracking_events = [
+      scan('before', '2026-11-20T13:23:00Z', 'usps', 'Departed USPS Regional Facility'),
+      scan('redated', '2026-11-20T17:25:00Z', 'usps', 'Departed USPS Regional Facility'),
+      // An arrival told again hours on, or another carrier's departure, is a step of its own.
+      scan('arrived', '2026-11-21T08:00:00Z', 'usps', 'Arrived at USPS Regional Facility'),
+      scan('again', '2026-11-21T12:00:00Z', 'usps', 'Arrived at USPS Regional Facility'),
+      scan('left', '2026-11-22T08:00:00Z', 'ups', 'Departed from Facility'),
+      scan('left-again', '2026-11-22T12:00:00Z', 'ups', 'Departed from Facility'),
+    ];
+    const served = (withEventPlaces({ id: 'parcel', carrier: 'usps', tracking_events }) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([
+      ['before', 'redated'], ['redated', undefined], ['arrived', undefined], ['again', undefined], ['left', undefined], ['left-again', undefined],
+    ]);
+  });
+
   it('runs a carrier\'s repeats on past its other rows of their instant', () => {
     const scan = (id: string, occurredAt: string, description: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'out_for_delivery', description, provider_event_id: `fan-courier:${id}`, ...extra,

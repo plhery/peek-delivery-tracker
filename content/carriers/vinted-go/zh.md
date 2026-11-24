@@ -16,7 +16,7 @@ Vinted Go 未对外公布运单号格式。Peek 快递目录中已知的格式�
 
 | 单号（示例） | 说明 |
 | --- | --- |
-| `1748291736058413` | Vinted Go 的常见格式：以 `17` 或 `18` 开头的 16 位数字。DHL eCommerce、TNT 和 Evri 也使用 16 位数字（其中 Evri 仅在末位校验通过其自身规则时符合）。 |
+| `1748291736058413` | Vinted Go 单号的格式：以 `17` 或 `18` 开头的 16 位数字。DHL eCommerce、TNT 和 Evri 也使用 16 位数字（其中 Evri 仅在末位校验通过其自身规则时符合）。 |
 | `1748291736058414` | 末位校验未通过的 16 位数字，因此不符合 Vinted Go 的格式。 |
 | `VGS48291736058419` | `VGS` 加 13 或 14 位数字：Vinted Go 官方查询支持的独有格式。 |
 | `KLT4UW8291736058` | 16 位字符：3 位字母、1 位数字、`UW`、1 位数字再加 9 位字母或数字。Vinted Go 查询系统同样支持此类单号。 |
@@ -24,13 +24,13 @@ Vinted Go 未对外公布运单号格式。Peek 快递目录中已知的格式�
 有两项信息容易混淆：
 
 - **查询链接。** 物流按钮跳转的地址形如 `vintedgo.com/en/tracking/1748291736058413`。看到这个链接就能最确切地确认承运商是 Vinted Go。
-- **取件码。** 取件码不是运单号：包裹准备就绪后，取件码会通过邮件（有时也通过短信）发送，且始终以大写字母开头。
+- **取件码。** 取件码不是运单号：包裹准备就绪后，取件码会通过邮件（也可能通过短信）发送，且始终以大写字母开头。
 
 完全找不到单号？请参阅[如何查找运单号](guide:find-tracking-number)（英文）。如果是由其他快递公司寄出，[Vinted 物流追踪指南](guide:vinted-orders)（英文）涵盖了 Vinted 使用的各家承运商。
 
 ## Vinted Go 物流状态中文说明
 
-Vinted Go 的英文查询页会在顶部以标题形式展示最新阶段及其时间，下方是各阶段的时间线；点击“Show details”可展开每一步的详细扫描记录。按包裹常见经过顺序如下：
+Vinted Go 的英文查询页会在顶部以标题形式展示最新阶段及其时间，下方是各阶段的时间线；点击“Show details”可展开每一步的详细扫描记录。按包裹经过的先后顺序如下：
 
 | Vinted Go 显示 | 对你的含义 |
 | --- | --- |
@@ -58,7 +58,7 @@ Vinted Go 页面还预留了 `Out for delivery`、`Couldn’t be delivered` 和 
 
 **如何取件。** 在自提柜前扫描或输入取件码即可打开对应柜门。在合作包裹点或社区取件点，请向店员出示取件码或有效身份证件。营业时间可在 Vinted Go 地图上查看。
 
-**保管期限。** 你有 7 个自然日的时间取件。Vinted Go 无法延长保管期限，也无法在包裹开始退回后拦截。逾期未取的包裹会退回卖家的寄件点；随后 Vinted 会取消订单并为你退款。
+**保管期限。** 你有 7 个自然日的时间取件。对于自提柜或包裹中心里的包裹，Vinted Go 条款另有付费的延长取件服务（Pickup Extension）：在取件期的最后 24 小时内，只要 Vinted Go 显示该服务可用，你就可以加购 24 小时，并可多次购买。包裹开始退回后，Vinted Go 无法拦截。逾期未取的包裹会退回卖家的寄件点；随后 Vinted 会取消订单并为你退款。
 
 **送货上门。** 在法国，部分网点支持通过 Vinted 发送的链接预约 Uber 骑手按约定时间送货上门。在提供送货上门服务的地区，Vinted Go 条款规定：预约时段提供一次派送尝试，未预约时段提供两次尝试。
 
@@ -92,7 +92,7 @@ Vinted 提醒，网络钓鱼也会通过短信传播；其法国帮助页面请�
 
 对于以 `VGS` 开头的单号，Peek 会立即识别为 Vinted Go。如果只输入 16 位纯数字，Peek 会向 Vinted Go 和 DHL eCommerce（部分单号也会向其他快递）查询其是否收录，Vinted Go 查到后即直接标明，只有当这些承运商均未查到时才会继续询问 TNT；对于 `UW` 格式单号则会直接询问 Vinted Go。其他情况下，可点击“更换”并选择“Vinted Go”，或直接粘贴 vintedgo.com 查询链接（粘贴链接可立即识别为 Vinted Go）。
 
-Peek 最高每 10 分钟检查一次更新；如果连续 48 小时没有新扫描（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），则转为每小时检查一次，并在状态变化时向你发送通知。如果 Vinted Go 将包裹转交至另一个承运网络并生成新单号，只要 Peek 直接支持读取该网络，便会自动继续跟进。当 16 位 `UW` 单号的后 13 位符合 [Poste Italiane](carrier:poste-italiane) 包裹单号格式时，Peek 会向 Poste Italiane 查询，并在对方出现最新扫描后衔接跟踪。Peek 无法代你联系 Vinted 或 Vinted Go，也无法代你提交异常申报。
+Peek 最高每 10 分钟检查一次更新；如果连续 48 小时没有新扫描（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），则转为每小时检查一次，并可在状态变化时通知你。如果 Vinted Go 将包裹转交至另一个承运网络并生成新单号，只要 Peek 直接支持读取该网络，便会自动继续跟进。当 16 位 `UW` 单号的后 13 位符合 [Poste Italiane](carrier:poste-italiane) 包裹单号格式时，Peek 会向 Poste Italiane 查询，并在对方出现最新扫描后衔接跟踪。Peek 无法代你联系 Vinted 或 Vinted Go，也无法代你提交异常申报。
 
 ## Vinted Go 物流查询常见问题
 
@@ -115,7 +115,7 @@ Peek 最高每 10 分钟检查一次更新；如果连续 48 小时没有新扫�
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – 取件码、7 天保管期、改投附近网点、25 个工作日、2 天申报期、时间线停顿与自提柜电话
 - [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – 荷兰和比利时自提柜客服热线
-- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – 运营公司、网点类型、上门派送次数、3 至 6 个工作日、提醒通知、自提柜破损与通过 Vinted 索赔
+- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – 运营公司、网点类型、上门派送次数、3 至 6 个工作日、提醒通知、付费 Pickup Extension、自提柜破损与通过 Vinted 索赔
 - [Vinted Go: Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – 覆盖国家与 2022 年启动信息
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – 查询表单、网站语言、状态文案与查无单号提示
 - [Vinted: Comment suivre un colis ?](https://www.vinted.fr/help/100) – 订单对话内单号、48 小时、25 个工作日与已签收未收到
@@ -127,4 +127,5 @@ Peek 最高每 10 分钟检查一次更新；如果连续 48 小时没有新扫�
 - [Vinted: Envio Vinted Go](https://www.vinted.pt/help/1110) – 葡萄牙自提柜每日 7:00–22:00 在线客服
 - [Vinted: Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – 包裹未到取件点时由 Vinted 联系承运商核查
 - [Vinted: Comment repérer et signaler les tentatives d'hameçonnage et d'escroquerie ?](https://www.vinted.fr/help/628) – 短信钓鱼提醒与 phishing@vinted.com 举报邮箱
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 从 Vinted Go 读取的内容与六个月期限
 :::

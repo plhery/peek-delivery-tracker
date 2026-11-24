@@ -30,7 +30,7 @@ Não encontra o código de jeito nenhum? Veja [como encontrar seu código de ras
 
 ## Status de rastreamento da Vinted Go explicados
 
-A página em inglês da Vinted Go destaca a etapa mais recente no topo com o horário, acima de uma linha do tempo com cada fase; "Show details" abre as leituras detalhadas de cada etapa. Na ordem em que uma encomenda costuma recebê-los:
+A página em inglês da Vinted Go destaca a etapa mais recente no topo com o horário, acima de uma linha do tempo com cada fase; "Show details" abre as leituras detalhadas de cada etapa. Na ordem em que a encomenda passa por eles:
 
 | A Vinted Go diz | O que significa para você |
 | --- | --- |
@@ -58,7 +58,7 @@ A página da Vinted Go também traz rótulos como `Out for delivery`, `Couldn’
 
 **Como retirar.** No armário, escaneie ou digite o código de retirada para abrir o compartimento certo. Em um ponto parceiro ou de bairro, apresente o código de retirada ou um documento de identidade ao atendente. Os horários de funcionamento aparecem no mapa da Vinted Go.
 
-**Prazo de guarda.** Você tem 7 dias corridos. A Vinted Go não consegue prorrogar esse prazo nem barrar o pacote depois que o retorno começa. Encomendas não retiradas voltam ao ponto de postagem do vendedor; a Vinted então cancela o pedido e reembolsa você.
+**Prazo de guarda.** Você tem 7 dias corridos. Para um pacote em armário ou centro de encomendas, os termos da Vinted Go preveem uma extensão paga do prazo (Pickup Extension): nas últimas 24 horas do prazo de retirada, você pode comprar mais 24 horas, mais de uma vez, quando a Vinted Go mostrar que ela está disponível. A Vinted Go não consegue barrar o pacote depois que o retorno começa. Encomendas não retiradas voltam ao ponto de postagem do vendedor; a Vinted então cancela o pedido e reembolsa você.
 
 **Entrega em casa.** Na França, alguns pontos oferecem entrega por entregador Uber em horário agendado por um link enviado pela Vinted. Onde existe entrega domiciliar, os termos da Vinted Go preveem uma tentativa com horário agendado e duas sem agendamento.
 
@@ -90,7 +90,7 @@ A Vinted alerta que golpes de phishing também chegam por SMS; sua página franc
 
 O [Peek](/) lê o rastreamento oficial da Vinted Go sem exigir conta nem código postal: exibe cada leitura com horário nos termos da Vinted Go (como `Ready to collect at the locker`), a cidade de cada centro de triagem e uma etapa própria ("Pronta para retirada", "Entregue"). Ele mostra o nome do armário ou ponto parceiro onde o pacote aguarda e depois quando e onde você o retirou, mas não exibe pontos de bairro. O endereço, os horários de funcionamento e a data limite ficam na página da Vinted Go, e não há previsão de data de entrega. Pacotes voltando ao vendedor aparecem como "Devolvida ao remetente".
 
-O Peek reconhece a Vinted Go de imediato em códigos iniciados por `VGS`. Se você digitar apenas o código de 16 dígitos, o Peek consulta a Vinted Go e a DHL eCommerce (e outras transportadoras em certos números) para ver quem o reconhece, escolhendo a Vinted Go quando ela responde, e consulta a TNT apenas se nenhuma delas responder; códigos `UW` são consultados na Vinted Go. Nos demais casos, clique em "Trocar" e escolha "Vinted Go", ou cole o link do vintedgo.com, que identifica a Vinted Go na hora.
+O Peek reconhece a Vinted Go de imediato em códigos iniciados por `VGS`. Se você digitar apenas o código de 16 dígitos, o Peek consulta a Vinted Go e a DHL eCommerce (e outras transportadoras em certos números) para ver quem o reconhece, escolhendo a Vinted Go quando ela o reconhece, e consulta a TNT apenas se nenhuma delas o reconhecer; códigos `UW` são consultados na Vinted Go. Nos demais casos, clique em "Trocar" e escolha "Vinted Go", ou cole o link do vintedgo.com, que identifica a Vinted Go na hora.
 
 O Peek verifica atualizações até a cada 10 minutos — ou de hora em hora depois de 48 horas sem nova leitura (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora") — e pode avisar você a cada mudança. Se a Vinted Go repassar a encomenda para outra rede sob um novo código, o Peek consegue continuar acompanhando se ler aquela rede diretamente. Quando os últimos 13 caracteres de um código `UW` de 16 caracteres formam um código da [Poste Italiane](carrier:poste-italiane), o Peek consulta a Poste Italiane e acompanha o pacote lá assim que ela registra o evento mais recente. Ele não pode falar com a Vinted ou a Vinted Go nem abrir relatos por você.
 
@@ -115,7 +115,7 @@ O rastreamento pode levar até 48 horas para aparecer após o envio pelo vendedo
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – código de retirada, 7 dias, redirecionamento para ponto próximo, 25 dias úteis, prazo de 2 dias para relato, pausas no histórico e telefone de armário
 - [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – linha telefônica de armários para Países Baixos e Bélgica
-- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – empresa, tipos de ponto, tentativas em casa, 3 a 6 dias úteis, lembrete, avaria em armário e reclamações pela Vinted
+- [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – empresa, tipos de ponto, tentativas em casa, 3 a 6 dias úteis, lembrete, Pickup Extension paga, avaria em armário e reclamações pela Vinted
 - [Vinted Go: Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – países atendidos e início em 2022
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – formulário, idiomas do site, status e mensagem de código não encontrado
 - [Vinted: Comment suivre un colis ?](https://www.vinted.fr/help/100) – número na conversa, 48 horas, 25 dias úteis e entregue mas não recebido
@@ -127,4 +127,5 @@ O rastreamento pode levar até 48 horas para aparecer após o envio pelo vendedo
 - [Vinted: Envio Vinted Go](https://www.vinted.pt/help/1110) – chat ao vivo para armários em Portugal, das 7h às 22h
 - [Vinted: Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – pacote ausente no ponto e investigação via Vinted
 - [Vinted: Comment repérer et signaler les tentatives d'hameçonnage et d'escroquerie ?](https://www.vinted.fr/help/628) – phishing por SMS e e-mail phishing@vinted.com
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê da Vinted Go e o limite de seis meses
 :::

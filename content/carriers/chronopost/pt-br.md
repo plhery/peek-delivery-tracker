@@ -24,7 +24,7 @@ O padrão de 13 caracteres é o formato postal internacional: um código termina
 
 ## O que significam os status de rastreamento da Chronopost
 
-Os status de rastreamento da Chronopost aparecem em francês. Na ordem em que uma encomenda costuma passar por eles:
+Os status de rastreamento da Chronopost aparecem em francês. Na ordem em que a encomenda passa por eles:
 
 | Status da Chronopost | O que significa para você |
 | --- | --- |
@@ -36,7 +36,7 @@ Os status de rastreamento da Chronopost aparecem em francês. Na ordem em que um
 | `Livraison reportée de 24h` | A unidade retém por um dia sem tentar entregar; a entrega retoma automaticamente. |
 | `Colis en cours de livraison` | Saiu para entrega hoje. |
 | `Echec de livraison suite à l'absence du destinataire.` | Ninguém estava em casa. |
-| `Colis mis à disposition au point de retrait` | Disponível aguardando você em um ponto de retirada. |
+| `Colis mis à disposition au point de retrait` | Aguardando você em um ponto de retirada. |
 | `Colis en retour expéditeur` | Voltando para a loja. |
 | `Livraison effectuée` | Entregue. |
 
@@ -57,7 +57,7 @@ Em um ponto ou armário Pickup, é necessário apresentar o Pickup Pass (QR code
 
 **Sem atualização ou atrasado.** Reclamações por atraso devem ser feitas à loja, que contratou o envio: na França, apenas a loja online responde pela entrega realizada pela transportadora escolhida por ela. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 
-**Extraviado ou danificado.** Reclame diretamente com a loja. Se chegar avariado, você pode registrar a ressalva no comprovante de entrega e acionar rapidamente o atendimento da loja. Em um ponto Pickup, informe o dano ao comerciante, que registra a ocorrência; você ainda pode optar por levar o pacote ou recusá-lo.
+**Extraviado ou danificado.** Reclame diretamente com a loja. Se chegar avariado, você pode registrar a ressalva no comprovante de entrega e acionar rapidamente o atendimento da loja. Em um ponto parceiro Pickup, informe o dano ao comerciante, que registra a ocorrência; você ainda pode optar por levar o pacote ou recusá-lo.
 
 **Marcado como entregue mas não recebido.** Fale com a loja: se ela não puder comprovar que você recebeu a encomenda, o prejuízo fica por conta dela. Veja [marcado como entregue mas não recebido](guide:delivered-not-received).
 
@@ -75,11 +75,11 @@ Se a Chronopost deixar uma reclamação escrita, datada e assinada sem resposta 
 
 ## Como rastrear encomendas da Chronopost com o Peek
 
-O [Peek](/) identifica imediatamente códigos de 13 caracteres começados por `PZ`, `XR`, `XT`, `XU`, `XW` ou `XY` com dígito verificador válido e terminados em `FR`, bem como os terminados em `JB`, `JF` ou `TS`. Para códigos válidos terminados em `CH`, `GB` ou alguns outros países, ele consulta a Chronopost e, em alguns casos, também os correios do país (como a Royal Mail para `GB`, caso a Chronopost não reconheça o código). Ele consulta apenas a Chronopost nesses prefixos quando o dígito verificador falha e em códigos terminados em `RV` ou `VF` ou iniciados por `XN`; já códigos válidos terminados em `FR` com outros prefixos seguem para a La Poste. Para 14 dígitos e uma letra verificadora, consulta a Chronopost e as empresas DPD que compartilham o formato (DPD Suíça, Alemanha, Portugal e Reino Unido); se duas reconhecerem, você seleciona com "Escolher"; se nenhuma reconhecer, com "Trocar". Para 14 dígitos simples que não começam por `10`, ele consulta várias transportadoras compatíveis, incluindo Chronopost e DPD; você também pode clicar em "Trocar" e escolher Chronopost em "Compatível com este código". Links de rastreamento de chronopost.fr e chronoshop2shop.fr também funcionam, sem precisar de código postal.
+O [Peek](/) identifica imediatamente códigos de 13 caracteres começados por `PZ`, `XR`, `XT`, `XU`, `XW` ou `XY` com dígito verificador válido e terminados em `FR`, bem como os terminados em `JB`, `JF` ou `TS`. Para códigos válidos terminados em `CH`, `GB` ou alguns outros países, ele consulta a Chronopost e, para alguns desses países, também os correios do país (como a Royal Mail para `GB`, caso a Chronopost não reconheça o código). Ele consulta apenas a Chronopost nesses prefixos quando o dígito verificador falha e em códigos terminados em `RV` ou `VF` ou iniciados por `XN`; já códigos válidos terminados em `FR` com outros prefixos seguem para a La Poste. Para 14 dígitos e uma letra verificadora, consulta a Chronopost e as empresas DPD que compartilham o formato (DPD Suíça, Alemanha, Portugal e Reino Unido); se duas reconhecerem, você seleciona com "Escolher"; se nenhuma reconhecer, com "Trocar". Para 14 dígitos simples que não começam por `10`, ele consulta várias transportadoras compatíveis, incluindo Chronopost e DPD; você também pode clicar em "Trocar" e escolher Chronopost em "Compatível com este código". Links de rastreamento da Chronopost e do chronoshop2shop.fr também funcionam. Não é preciso informar código postal.
 
 Os textos permanecem em francês, exceto `Livraison effectuée` ("Entregue"). O Peek coloca cada unidade no mapa e mostra país de destino, horário da entrega, o código da parceira na Alemanha ou em Portugal e, enquanto aguarda retirada, o nome e o endereço do ponto ou armário. Uma data prevista só aparece quando uma nova entrega ou janela de entrega é agendada, ou quando a Chronopost registra `Livraison prévue lundi prochain` entre sexta e domingo. Seu endereço e os contatos do ponto são omitidos. Um envio para a Alemanha ou Portugal com código de parceira pode ser acompanhado na DPD local. Depois que uma devolução começa, a entrega final conta como devolvida ao remetente.
 
-O Peek verifica atualizações até a cada 10 minutos e pode notificar você sobre mudanças. No dia da saída para entrega, verifica até a cada 2 minutos a partir das 6h (horário da França) enquanto o rastreador da própria Chronopost responde, mas aguarda 15 minutos após uma consulta falha; por meio de serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados. Ele mantém esse ritmo até 30 minutos antes do início de uma janela de entrega informada pela Chronopost, e enquanto o pacote estiver em rota desde um dia anterior. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo dela. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora. Leituras sem fuso horário da Chronopost são interpretadas no fuso horário do local do evento.
+O Peek verifica atualizações até a cada 10 minutos e pode notificar você sobre mudanças. No dia da saída para entrega, verifica até a cada 2 minutos a partir das 6h (horário da França) enquanto o rastreador da própria Chronopost responde, mas aguarda 15 minutos após uma consulta falha; por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados. Ele mantém esse ritmo até 30 minutos antes do início de uma janela de entrega informada pela Chronopost, e enquanto o pacote estiver em rota desde um dia anterior. Quando outra transportadora assume a entrega, o Peek acompanha o ritmo dela. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora. Leituras sem fuso horário da Chronopost são interpretadas no fuso horário do local do evento.
 
 ## Perguntas sobre o rastreamento da Chronopost
 
@@ -104,4 +104,5 @@ Até 8 dias, segundo a Pickup, que administra os pontos; o e-mail ou SMS informa
 - [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – sem pedido de documento ou taxas na França, abuse@chronopost.fr e 33700
 - [Geopost: leboncoin is teaming up with Chronopost](https://www.geopost.com/en/news/leboncoin-is-teaming-up-with-chronopost/) – Chronopost na Geopost e Shop2Shop
 - [Geopost: About us](https://www.geopost.com/en/about-us/) – Geopost pertence ao La Poste Groupe
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

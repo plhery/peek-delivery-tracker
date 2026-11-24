@@ -56,15 +56,20 @@ const sameSource = (a: RepeatScan, b: RepeatScan) => a.source === b.source
 const runWithin = (first: RepeatScan, scan: RepeatScan) =>
   redatedDeparture((carrierRow(first) ? first : scan).source, { description: first.description }) ? REDATED_DEPARTURE_WITHIN_MS : RUN_MS;
 
+/** Two rows of one instant in La Poste's two wordings, or read in two stages. */
+const twins = (first: RepeatScan, scan: RepeatScan) => scan.at === first.at
+  && (readWords(scan.description) !== readWords(first.description) || scan.stage !== first.stage);
+
 /**
  * Peek's own rows repeat nothing. At one instant, La Poste's two wordings of a scan are its words too, in whichever
- * stage each was read (`wordingTwins`).
+ * stage each was read, and one of them may have no place: the timeline shows such a pair as one row (`wordingTwins`).
  */
 const repeats = (first: RepeatScan, scan: RepeatScan) => first.source !== '' && first.source !== 'app'
   && sameSource(first, scan)
   && ((scan.stage === first.stage && scan.description === first.description)
     || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
-  && scan.location === first.location && scan.at - first.at <= runWithin(first, scan);
+  && (scan.location === first.location || (twins(first, scan) && (!scan.location || !first.location)))
+  && scan.at - first.at <= runWithin(first, scan);
 
 /**
  * The runs of repeated scans, each in time order, two scans or more. Each instant's rows go on the runs they repeat

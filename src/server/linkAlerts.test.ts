@@ -231,6 +231,25 @@ describe('what an alert announces', () => {
     expect(send).toHaveBeenCalledTimes(2);
   });
 
+  it('handles La Poste\'s other wording of a scan it had sent, at the same instant, silently, though only one has a place', async () => {
+    const scan = (id: string, description: string, location?: string) => ({ id, stage: 'in_transit' as const,
+      occurredAt: '2026-11-16T06:33:25Z', description, source: 'la-poste', ...location ? { location } : {} });
+    const colis = 'Votre colis est en transit sur nos plateformes logistiques.';
+    const colissimo = 'Votre Colissimo est en transit sur nos plateformes logistiques.';
+    pending([row({ occurred_at: '2026-11-16T06:33:25Z' })]);
+    // Either the twin told has the place, or the new one.
+    const recent = vi.mocked(client.recentScans)
+      .mockResolvedValueOnce(new Map([['package-1', [scan('event-1', colis), scan('earlier', colissimo, 'Wissous')]]]))
+      .mockResolvedValueOnce(new Map([['package-1', [scan('event-1', colis, 'Wissous'), scan('earlier', colissimo)]]]));
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(send).not.toHaveBeenCalled();
+    // Told at two places, they are two scans.
+    recent.mockResolvedValueOnce(new Map([['package-1', [scan('event-1', colis, 'Wissous'), scan('earlier', colissimo, 'Chilly-Mazarin')]]]));
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledOnce();
+  });
+
   it('handles La Poste\'s other wording of a scan it had sent, at the same instant, silently, though read in another stage', async () => {
     const scan = (id: string, stage: 'accepted' | 'in_transit', description: string) => ({ id, stage,
       location: 'Wissous', occurredAt: '2026-11-21T05:22:22Z', description, source: 'la-poste' });

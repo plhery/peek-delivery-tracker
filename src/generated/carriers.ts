@@ -14758,6 +14758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "rastreamento-mondial-relay",
+      "title": "Rastreamento Mondial Relay: status, retirada e contato",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "rastreamento-inpost",
@@ -14788,6 +14796,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Yanwen: códigos UL…YP, status e entrega",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "rastreamento-gofo-franca",
+      "title": "Rastreamento GOFO France: códigos GFFR, status e ajuda",
+      "name": "GOFO France",
+      "color": "#fc4c02"
     },
     {
       "id": "ecoscooting",
@@ -17596,6 +17612,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "mondial-relay-tracking",
+      "title": "Mondial Relay 物流查询：单号、法语状态与取件点",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "inpost-tracking",
@@ -17626,6 +17650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "燕文物流（Yanwen）单号查询：UL…YP格式、状态与尾程",
       "name": "Yanwen",
       "color": "#8cbe1e"
+    },
+    {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-tracking",
+      "title": "GOFO France 物流查询：GFFR 单号、状态与客服",
+      "name": "GOFO France",
+      "color": "#fc4c02"
     },
     {
       "id": "speedpak",

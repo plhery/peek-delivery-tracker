@@ -68798,6 +68798,55 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://uk.interparcel.com/tracking/"
+  },
+  "kargolife": {
+    "displayName": "Kargolife",
+    "aliases": [
+      "Kargo Life",
+      "KargoLife Lojistik"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "color": "#2d86c7",
+    "selectable": true,
+    "timezone": "Europe/Istanbul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "kargolife"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://kargolife.com/index.php?url=kargolife/main",
+    "helpUrl": "https://kargolife.com/index.php?url=kargolife/contact"
+  },
+  "shipagent-in": {
+    "displayName": "ShipAgent",
+    "aliases": [
+      "Shipagent Express"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#4f46e5",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "shipagent-in"
+    },
+    "trackingUrlTemplate": "https://www.shipagent.in/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "shipagent.in",
+          "www.shipagent.in"
+        ],
+        "path": "^/track/([A-Za-z0-9]{6,40})/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.shipagent.in/track"
   }
 } as const;
 
@@ -70901,7 +70950,9 @@ export const CARRIER_IDS = [
   "aquantuo",
   "hit-cargo-nicaragua",
   "interparcel-au",
-  "interparcel-uk"
+  "interparcel-uk",
+  "kargolife",
+  "shipagent-in"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

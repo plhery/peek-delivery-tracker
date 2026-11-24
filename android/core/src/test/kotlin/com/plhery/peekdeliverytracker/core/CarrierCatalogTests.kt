@@ -2671,6 +2671,21 @@ class CarrierCatalogTests {
         assertEquals("99999999", CarrierCatalog.carrierTrackingNumber("99-99-9999", CarrierId("seino")))
     }
 
+    /** A JRS Express reference, an airbill and its branch code, keeps its hyphen under JRS Express alone, unless a
+     * part is zeros alone; the same shape under another carrier normalizes. */
+    @Test
+    fun aJrsExpressReferenceKeepsItsHyphenUnderJrsExpressAlone() {
+        val jrs = CarrierId("jrs-express")
+        assertEquals("9999990-9990", CarrierCatalog.carrierTrackingNumber(" 9999990 - 9990 ", jrs))
+        assertEquals("0099990-0990", CarrierCatalog.carrierTrackingNumber("0099990-0990", jrs))
+        assertEquals("99999909990", CarrierCatalog.carrierTrackingNumber("99999909990", jrs))
+        assertEquals("99999900000", CarrierCatalog.carrierTrackingNumber("9999990-0000", jrs))
+        assertEquals("00009990", CarrierCatalog.carrierTrackingNumber("0000-9990", jrs))
+        assertEquals("999999999909990", CarrierCatalog.carrierTrackingNumber("99999999990-9990", jrs))
+        assertEquals("99999909990", CarrierCatalog.carrierTrackingNumber("9999990-99-90", jrs))
+        assertEquals("99999909990", CarrierCatalog.carrierTrackingNumber("9999990-9990", CarrierId("lbc-express")))
+    }
+
     /** A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits. */
     @Test
     fun anSSCCTypedWithItsBracketedIdentifierReadsAsItsDigits() {

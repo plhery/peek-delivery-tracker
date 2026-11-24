@@ -1551,12 +1551,18 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     /// The number a parcel is saved and looked up under for its carrier: `normalize`, except that a Tiui folio,
-    /// three groups of digits joined by hyphens, keeps its hyphens without its spaces, since Tiui's tracker needs
-    /// them. Mirrors `carrierTrackingNumber` in the shared engine.
+    /// three groups of digits joined by hyphens, and a JRS Express reference, an airbill and its branch code joined
+    /// by a hyphen, keep their hyphens without their spaces, since their trackers need them. Mirrors
+    /// `carrierTrackingNumber` in the shared engine.
     static func carrierTrackingNumber(_ raw: String, carrier: CarrierID) -> String {
-        guard carrier.rawValue == "tiui", raw.utf16.count <= 64, let spaces = expression("[\(whitespace)]") else { return normalize(raw) }
-        let folio = spaces.stringByReplacingMatches(in: raw, range: NSRange(raw.startIndex..., in: raw), withTemplate: "")
-        return matches(folio, pattern: "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$") ? folio : normalize(raw)
+        guard carrier.rawValue == "tiui" || carrier.rawValue == "jrs-express", raw.utf16.count <= 64,
+              let spaces = expression("[\(whitespace)]") else { return normalize(raw) }
+        let typed = spaces.stringByReplacingMatches(in: raw, range: NSRange(raw.startIndex..., in: raw), withTemplate: "")
+        let kept = carrier.rawValue == "tiui"
+            ? matches(typed, pattern: "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$")
+            // An airbill and its branch code, neither of them zeros alone.
+            : matches(typed, pattern: "^[0-9]{1,10}-[0-9]{1,4}$") && !matches(typed, pattern: "(^|-)0+(-|$)")
+        return kept ? typed : normalize(raw)
     }
 
     /// A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial,

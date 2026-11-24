@@ -1230,12 +1230,19 @@ class CarrierCatalog private constructor(
         }
 
         /** The number a parcel is saved and looked up under for its carrier: [normalize], except that a Tiui
-         * folio, three groups of digits joined by hyphens, keeps its hyphens without its spaces, since Tiui's tracker
-         * needs them. Mirrors `carrierTrackingNumber` in the shared engine. */
+         * folio, three groups of digits joined by hyphens, and a JRS Express reference, an airbill and its branch
+         * code joined by a hyphen, keep their hyphens without their spaces, since their trackers need them. Mirrors
+         * `carrierTrackingNumber` in the shared engine. */
         fun carrierTrackingNumber(raw: String, carrier: CarrierId): String {
-            if (carrier.rawValue != "tiui" || raw.length > 64) return normalize(raw)
-            val folio = CatalogExpressions.replacing("[$whitespace]", raw, "") ?: return normalize(raw)
-            return if (matches(folio, "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$")) folio else normalize(raw)
+            if ((carrier.rawValue != "tiui" && carrier.rawValue != "jrs-express") || raw.length > 64) return normalize(raw)
+            val typed = CatalogExpressions.replacing("[$whitespace]", raw, "") ?: return normalize(raw)
+            val kept = if (carrier.rawValue == "tiui") {
+                matches(typed, "^[0-9]{1,4}-[0-9]{1,3}-[0-9]{1,6}$")
+            } else {
+                // An airbill and its branch code, neither of them zeros alone.
+                matches(typed, "^[0-9]{1,10}-[0-9]{1,4}$") && !matches(typed, "(^|-)0+(-|$)")
+            }
+            return if (kept) typed else normalize(raw)
         }
 
         /** A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial, L and the

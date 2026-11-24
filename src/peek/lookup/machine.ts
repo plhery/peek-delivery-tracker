@@ -315,7 +315,7 @@ function lookupInput(found: Survey): ParcelLookupInput {
   const dpdPostcodeCountry = dpdPostcode ? sentPostcodeCountry(carrier, found.postcodeCountry) : undefined;
   const phoneDigits = wanted('phoneDigits') ? found.input('phoneDigits').trim() : undefined;
   return {
-    // As the carrier knows it: a Tiui folio keeps its hyphens.
+    // As the carrier knows it: a Tiui folio and a JRS Express reference keep their hyphens.
     trackingNumber: found.match ? carrierTrackingNumber(found.match.trackingNumber, carrier) : found.normalized,
     ...(carrier !== 'unknown' ? { carrier } : {}),
     ...(trackingUrl ? { trackingUrl } : {}),

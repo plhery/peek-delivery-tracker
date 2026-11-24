@@ -128,7 +128,7 @@ export function newPackageValues(payload: JsonObject, country: string | null = n
     });
   }
   return {
-    // As the carrier knows it: a Tiui folio keeps its hyphens, which Tiui's tracker needs, and every other number is the one checked above.
+    // As the carrier knows it: a Tiui folio and a JRS Express reference keep their hyphens, which their trackers need, and every other number is the one checked above.
     trackingNumber: carrierTrackingNumber(rawTracking, carrier),
     label: rawLabel.trim(),
     carrier,

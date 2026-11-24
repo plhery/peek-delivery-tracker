@@ -207,7 +207,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
 
     async lookupParcel(input, signal) {
       const details = lookupDetails(input);
-      // A Tiui folio keeps its hyphens, which Tiui's tracker needs.
+      // A Tiui folio and a JRS Express reference keep their hyphens, which their trackers need.
       const body: ApiPublicLookupRequest = { trackingNumber: carrierTrackingNumber(input.trackingNumber, details.carrier), ...details };
       const response = await protectedPost('/api/public/parcels', body, signal);
       if (!response.ok) throw await failure(response);

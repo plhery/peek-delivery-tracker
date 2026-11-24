@@ -447,7 +447,7 @@ export function createApiRepo(
     async add(input: NewParcelInput): Promise<ParcelWithEvents> {
       const carrier = input.carrier ?? detectCarrier(normalizeTrackingNumber(input.trackingNumber));
       const body: ApiCreatePackageRequest = {
-        // A Tiui folio keeps its hyphens, which Tiui's tracker needs.
+        // A Tiui folio and a JRS Express reference keep their hyphens, which their trackers need.
         trackingNumber: carrierTrackingNumber(input.trackingNumber, carrier),
         label: input.label,
         carrier,

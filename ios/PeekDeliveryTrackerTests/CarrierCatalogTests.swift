@@ -2840,6 +2840,20 @@ extension CarrierCatalogTests {
         XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99-99-9999", carrier: CarrierID(rawValue: "seino")), "99999999")
     }
 
+    /// A JRS Express reference, an airbill and its branch code, keeps its hyphen under JRS Express alone, unless a
+    /// part is zeros alone; the same shape under another carrier normalizes.
+    func testAJRSExpressReferenceKeepsItsHyphenUnderJRSExpressAlone() {
+        let jrs = CarrierID(rawValue: "jrs-express")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber(" 9999990 - 9990 ", carrier: jrs), "9999990-9990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("0099990-0990", carrier: jrs), "0099990-0990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99999909990", carrier: jrs), "99999909990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("9999990-0000", carrier: jrs), "99999900000")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("0000-9990", carrier: jrs), "00009990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("99999999990-9990", carrier: jrs), "999999999909990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("9999990-99-90", carrier: jrs), "99999909990")
+        XCTAssertEqual(CarrierCatalog.carrierTrackingNumber("9999990-9990", carrier: CarrierID(rawValue: "lbc-express")), "99999909990")
+    }
+
     /// A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits.
     func testAnSSCCTypedWithItsBracketedIdentifierReadsAsItsDigits() {
         let sscc = "00370123456789012347"

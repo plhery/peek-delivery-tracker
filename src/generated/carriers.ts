@@ -4684,6 +4684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "e24metro-ca-sendungsverfolgung",
+      "title": "E24 (Metro Supply Chain) Sendungsverfolgung & Kontakt",
+      "name": "E24",
+      "color": "#545859"
+    },
+    {
       "id": "go-express",
       "catalog": "go-express",
       "slug": "go-express-sendungsverfolgung",
@@ -6926,6 +6934,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "suivi-e24metro-ca",
+      "title": "Suivi E24 (Metro Supply Chain)\u00a0: colis au Canada et aide",
+      "name": "E24",
+      "color": "#545859"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9160,6 +9176,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "tracciamento-e24metro-ca",
+      "title": "Tracciamento E24 (Metro Supply Chain): Canada e aiuto",
+      "name": "E24",
+      "color": "#545859"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "tracciamento-5post",
@@ -11392,6 +11416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento DPD Hungary: códigos 14 dígitos, FOXPOST y ayuda",
       "name": "DPD Hungary",
       "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "seguimiento-e24metro-ca",
+      "title": "Seguimiento E24 (Metro Supply Chain): Canadá y ayuda",
+      "name": "E24",
+      "color": "#545859"
     },
     {
       "id": "oca",
@@ -13634,6 +13666,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio DPD Hungary: códigos 14 dígitos, FOXPOST e apoio",
       "name": "DPD Hungary",
       "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "rastreio-e24metro-ca",
+      "title": "Rastreio E24 (Metro Supply Chain): Canadá e contactos",
+      "name": "E24",
+      "color": "#545859"
     },
     {
       "id": "5post",
@@ -15934,6 +15974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DPD Hungary: kody 14-cyfrowe, FOXPOST i pomoc",
       "name": "DPD Hungary",
       "color": "#dc0032"
+    },
+    {
+      "id": "e24metro-ca",
+      "catalog": "e24metro-ca",
+      "slug": "sledzenie-e24metro-ca",
+      "title": "Śledzenie E24 (Metro Supply Chain): Kanada i kontakt",
+      "name": "E24",
+      "color": "#545859"
     },
     {
       "id": "5post",

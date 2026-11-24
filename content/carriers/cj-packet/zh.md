@@ -47,7 +47,7 @@ CJ Packet 将整体进度标签（`0` 至 `7`）与 CJ 仓库、出口货代及�
 由于买卖合同签订在你与网店之间（而非 CJ Dropshipping 或 CJ Packet），包裹超期未到、破损或丢失时请始终先联系卖家。
 
 - **`Label created` 或航班起飞后多日无更新：** 跨境小包在 CJ 仓库备货打包（`Label created. Warehouse is processing this order.`）或空运等待目的国清关期间，停滞数天属于常见情况。请参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
-- **使用末端承运商单号核查：** 当 CJ Packet 显示出目的国本地单号（如 USPS、Canada Post 或当地快递单号）后，去对方官网查询通常能查到取件地址或改约派送选项。
+- **使用末端承运商单号核查：** 当 CJ Packet 显示出目的国本地单号（如 USPS、Canada Post 或当地快递单号）后，去对方官网查询，可能会看到取件地址或改约派送选项。
 - **投递失败（`6`）或显示已签收但未收到：** 请先排查家人、邻居、大楼前台及当地快递公司，并赶在银行卡或电商平台申诉期限前联系网店卖家。详见[显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹破损](guide:damaged-parcel)（英文）、[包裹丢失](guide:lost-parcel)（英文）和[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## CJ Packet 官方客服与联系方式

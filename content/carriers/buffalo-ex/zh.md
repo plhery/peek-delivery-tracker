@@ -46,7 +46,7 @@ BUFFALO 联系页面注明，以 `BUFEX-` 开头的订单号归属南非端 ZA-B
 
 - **轨迹暂时没有更新：** BUFFALO 常见问题说明包裹正在运输途中、尚未到达下一扫描站点，具体详情可向客服核查。请参阅[为什么物流停止更新](guide:tracking-not-updating)（英文）。
 - **傍晚出现 `RETURNS` 扫描：** 在第三方追踪服务转发的本地快递扫描中，`RETURNS` 有时会出现在 `SCAN VEHICLE DEPARTURE` 当天傍晚，表示包裹结束当日派送返回分拨仓并在次日早晨再次出发；而 `Returned to BUFFALO warehouse[...]` 则代表投递失败退仓，需要你及时跟进。
-- **显示 `Client Received` 却未收到：** BUFFALO 建议先向家人、邻居以及小区/大楼物业保安核实，确认无误后再联系南非客服邮箱（`support@buffaloex.com`）。详见[显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹丢失](guide:lost-parcel)（英文）、[包裹破损](guide:damaged-parcel)（英文）和[包裹退回寄件人](guide:returned-to-sender)（英文）。
+- **显示 `Client Received` 却未收到：** BUFFALO 建议先向家人、邻居以及小区/大楼物业保安核实，仍未找到再联系南非客服邮箱（`support@buffaloex.com`）。详见[显示已签收但未收到](guide:delivered-not-received)（英文）、[包裹丢失](guide:lost-parcel)（英文）、[包裹破损](guide:damaged-parcel)（英文）和[包裹退回寄件人](guide:returned-to-sender)（英文）。
 
 ## BUFFALO 官方客服与联系方式
 
@@ -55,7 +55,7 @@ BUFFALO 联系页面注明，以 `BUFEX-` 开头的订单号归属南非端 ZA-B
 - **南非客服：** 邮箱 `support@buffaloex.com`，电话 `+27-10-510-9307`，WhatsApp `+27-67-758-6614`。
 - **中国客服邮箱与热线：** `service@bufflogistics.com`，`+86-400-921-9066`。
 - **在线咨询表单与状态说明：** [buffaloex.com/contact.html](https://www.buffaloex.com/contact.html) 与 [buffaloex.com/support.html](https://www.buffaloex.com/support.html)。
-- **办公地点：** 上海总部（上海市闵行区申滨南路 1156 弄 A 栋 301 室）、广州办事处（广州市花都区绿地空港国际中心 5 号地 3 栋 401 室）以及南非约翰内斯堡分公司。
+- **办公地点：** 上海总部（Room 301, Building A, Lane 1156, Shenbin South Road, Minhang District, Shanghai）、广州办事处（Room 401, Building 3, Site 5, Greenland Airport International Center, Huadu District, Guangzhou）以及南非约翰内斯堡分公司。
 
 > 请警惕冒充南非海关或 BUFFALO、附带仿冒网址的诈骗短信。付款前请务必先在 [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) 核对真实物流状态与应付税费金额。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
 

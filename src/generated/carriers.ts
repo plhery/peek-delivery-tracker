@@ -4618,6 +4618,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Kühne+Nagel Sendungsverfolgung — Nummern und Status",
       "name": "Kuehne+Nagel",
       "color": "#003369"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "5post-sendungsverfolgung",
+      "title": "5Post Sendungsverfolgung: Nummern, Abholung & Status",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "fr": [
@@ -6756,6 +6764,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi DHL Freight\u00a0: codes ActiveTracing, statuts et aide",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "suivi-5post",
+      "title": "Suivi 5Post\u00a0: numéros, retrait Pyaterochka et statuts",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "it": [
@@ -8902,6 +8918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Liccardi Express Courier: LDV, stati e aiuto",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "tracciamento-5post",
+      "title": "Tracciamento 5Post: codici, ritiro Pyaterochka e stati",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "es": [
@@ -11080,6 +11104,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo PasarEX — códigos AMZPSR, aduana, PQR y teléfonos",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "seguimiento-5post",
+      "title": "Seguimiento 5Post: códigos, recogida Pyaterochka y estados",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "pt": [
@@ -13210,6 +13242,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio DHL Freight: códigos ActiveTracing e ajuda",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "rastreio-5post",
+      "title": "Rastreio 5Post: números, levantamento Pyaterochka e ajuda",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "pt-br": [
@@ -15422,6 +15462,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie DHL Freight: kody ActiveTracing, statusy i pomoc",
       "name": "DHL Freight",
       "color": "#ffcc00"
+    },
+    {
+      "id": "5post",
+      "catalog": "5post",
+      "slug": "sledzenie-5post",
+      "title": "Śledzenie 5Post: numery, odbiór Pyaterochka i statusy",
+      "name": "5Post",
+      "color": "#64b441"
     }
   ],
   "ru": [

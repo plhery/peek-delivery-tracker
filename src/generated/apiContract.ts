@@ -34452,7 +34452,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "youbang-express"
+      "adapter": "youbang-express",
+      "recognitionRank": 39
     },
     "linkRules": [
       {
@@ -37109,7 +37110,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ross-express"
     },
     "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/rxic.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
     "linkRules": [
@@ -37133,7 +37134,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.rossexpress.com/",
+    "trackingSearchUrl": "https://rossexpress.com/quick_trace.php",
     "helpUrl": "https://www.rossexpress.com/contact/"
   },
   "whiz-delivery": {
@@ -38396,7 +38397,23 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rhenus-de",
+      "requirements": [
+        {
+          "field": "dpdPostcode",
+          "optional": true,
+          "showsMore": true,
+          "label": "Delivery postcode",
+          "type": "text",
+          "placeholder": "10115",
+          "pattern": "^[0-9]{5}$",
+          "maxLength": 5,
+          "inputMode": "numeric",
+          "autoComplete": "postal-code",
+          "help": "Rhenus shows an order only with its delivery postcode. Without it, other sources are asked.",
+          "validator": "germanyPostcode"
+        }
+      ]
     },
     "linkRules": [],
     "detectionRules": [],
@@ -49921,7 +49938,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "southwestern-motor-transport"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -55686,7 +55703,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "der-kurier"
     },
     "trackingUrlTemplate": "https://derkurier.de/sendungsverfolgung/?d-pt-search={trackingNumber}",
     "linkRules": [
@@ -58313,10 +58330,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "valls.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://valls.factapp.es/IRIS/Seguimiento",
-    "helpUrl": "https://www.altcampexpress.com/contacto/"
+    "helpUrl": "https://www.altcampexpress.com/contacto/",
+    "trackingUrlTemplate": "https://valls.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "fiscourier": {
     "displayName": "Fiscourier",
@@ -58333,10 +58361,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "fiscourier.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://fiscourier.factapp.es/IRIS/Seguimiento",
-    "helpUrl": "https://fiscourier.com/contacto/"
+    "helpUrl": "https://fiscourier.com/contacto/",
+    "trackingUrlTemplate": "https://fiscourier.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "kaizen-express": {
     "displayName": "Kaizen Express",
@@ -58375,9 +58414,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "kilbourne.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://kilbourne.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://kilbourne.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://kilbourne.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "logistica-alatec": {
     "displayName": "Logística Alatec",
@@ -58394,9 +58444,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "logisticaalatec.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://logisticaalatec.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://logisticaalatec.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://logisticaalatec.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "maam-envios": {
     "displayName": "MAAM Envíos",
@@ -58413,9 +58474,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "maam.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://maam.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://maam.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://maam.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "may-courier": {
     "displayName": "May Courier",
@@ -58455,9 +58527,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "zaragoza.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://zaragoza.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://zaragoza.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://zaragoza.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "paqline": {
     "displayName": "PAQLine",
@@ -58474,9 +58557,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "navarra.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://navarra.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://navarra.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://navarra.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "paquexpress-urgente": {
     "displayName": "Paquexpress Urgente",
@@ -58514,9 +58608,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "rojasexpress.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://rojasexpress.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://rojasexpress.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://rojasexpress.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "servipost": {
     "displayName": "ServiPost",
@@ -58556,9 +58661,20 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "alcorcon.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://alcorcon.factapp.es/IRIS/Seguimiento"
+    "trackingSearchUrl": "https://alcorcon.factapp.es/IRIS/Seguimiento",
+    "trackingUrlTemplate": "https://alcorcon.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "trablisa-expres": {
     "displayName": "Trablisa Exprés",
@@ -58577,10 +58693,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "trablisa.factapp.es"
+        ],
+        "pathPattern": "^/IRIS/Seguimiento(?:\\.aspx)?/?$",
+        "params": [
+          "s"
+        ]
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://trablisa.factapp.es/IRIS/Seguimiento",
-    "helpUrl": "https://www.trablisa.es/area-negocio/trablisa-expres#datos-de-contacto"
+    "helpUrl": "https://www.trablisa.es/area-negocio/trablisa-expres#datos-de-contacto",
+    "trackingUrlTemplate": "https://trablisa.factapp.es/IRIS/Seguimiento?s={trackingNumber}"
   },
   "alfta-frakt": {
     "displayName": "Alfta Frakt",
@@ -59770,7 +59897,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Santiago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "latam-cargo"
     },
     "linkRules": [],
     "detectionRules": [],

@@ -4,7 +4,8 @@
  * Now and then a carrier sends one step several times over, each time with its
  * own seconds: J&T Express Australia answers one failed delivery ten times in
  * three minutes. Every row is stored. A scan right after another in the
- * parcel's timeline, from the same source and in the same stage, words and
+ * parcel's timeline, from the same source (a provider's row the carrier's
+ * answer took over counts as the carrier's) and in the same stage, words and
  * place, within an hour of the first of them, tells the reader nothing new.
  * Rows of one instant come between none of them: the carrier's other code for
  * a scan at its second (FAN Courier tells a delivery round under two codes)
@@ -16,7 +17,7 @@
  */
 import { isRecord, type JsonObject } from './types';
 
-export type RepeatScan = { id: string; source: string; stage: string; description: string; location: string; at: number };
+export type RepeatScan = { id: string; source: string; stage: string; description: string; location: string; at: number; held?: boolean };
 
 /** A run ends an hour after its first scan: the same step told later is news that the parcel is still there. */
 const RUN_MS = 60 * 60 * 1_000;
@@ -27,20 +28,31 @@ export function scanSource(providerEventId: unknown, universalProvider: unknown)
   return carrier && typeof universalProvider === 'string' && universalProvider ? `${carrier}/${universalProvider}` : carrier;
 }
 
-function repeatScan(event: JsonObject): RepeatScan {
+function repeatScan(event: JsonObject, held: ReadonlySet<string>): RepeatScan {
   return {
     id: String(event.id), source: scanSource(event.provider_event_id, event.universal_provider),
     stage: String(event.stage ?? ''), description: String(event.description ?? '').trim(),
     location: typeof event.location === 'string' ? event.location.trim() : '', at: Date.parse(String(event.occurred_at)),
+    ...(typeof event.provider_event_id === 'string' && held.has(event.provider_event_id) ? { held: true } : {}),
   };
 }
+
+/** A carrier's own row: neither Peek's nor a universal provider's. */
+const carrierRow = (scan: RepeatScan) => !['', 'app'].includes(scan.source) && !scan.source.startsWith('unknown');
+
+/**
+ * Whether two rows come from one source. A universal row a carrier's answer holds (`held`, providerCopies.ts) is that
+ * carrier's scan: it is the source of any carrier's row.
+ */
+const sameSource = (a: RepeatScan, b: RepeatScan) => a.source === b.source
+  || (Boolean(a.held) !== Boolean(b.held) && carrierRow(a.held ? b : a));
 
 /**
  * Peek's own rows repeat nothing. At one instant, La Poste's two wordings of a scan are its words too, in whichever
  * stage each was read (`wordingTwins`).
  */
 const repeats = (first: RepeatScan, scan: RepeatScan) => first.source !== '' && first.source !== 'app'
-  && scan.source === first.source
+  && sameSource(first, scan)
   && ((scan.stage === first.stage && scan.description === first.description)
     || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
   && scan.location === first.location && scan.at - first.at <= RUN_MS;
@@ -78,10 +90,13 @@ export function repeatRuns(scans: readonly RepeatScan[], apart: ReadonlySet<stri
 
 /**
  * Each scan of a run but the newest, with the newest's id: the row the apps show the run as. Rows of
- * a relay pair (`apart`) are already shown under another or have one under them, and join no run.
+ * a relay pair (`apart`) are already shown under another or have one under them, and join no run. Rows whose identity
+ * is in `held` are their carrier's scans (`heldRows`).
  */
-export function repeatLeads(events: readonly JsonObject[], apart: ReadonlySet<string> = new Set()): Map<string, string> {
-  return new Map(repeatRuns(events.filter(isRecord).map(repeatScan), apart)
+export function repeatLeads(
+  events: readonly JsonObject[], apart: ReadonlySet<string> = new Set(), held: ReadonlySet<string> = new Set(),
+): Map<string, string> {
+  return new Map(repeatRuns(events.filter(isRecord).map((event) => repeatScan(event, held)), apart)
     .flatMap((run) => run.slice(0, -1).map((id): [string, string] => [id, run.at(-1)!])));
 }
 

@@ -108,6 +108,15 @@ function storedHistory(data: unknown): { from: number; to: number; held: Set<str
 }
 
 /**
+ * The identities of the universal rows a carrier's answer holds (`direct_history.held`): a carrier's scan that took a
+ * provider's row of it over, stored under the provider's identity. They are the carrier's own scans.
+ */
+export function heldRows(row: JsonObject): Set<string> {
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
+  return storedHistory(data[DIRECT_HISTORY])?.held ?? new Set();
+}
+
+/**
  * The `direct_history` a check leaves: the time its carriers' dated scans
  * cover and the universal rows they hold, with those of the parcel's earlier
  * answers whose rows are still stored. `scans` are the check's scans as they
@@ -155,12 +164,13 @@ function dayAlone(event: JsonObject): string | null {
 }
 
 /**
- * Whether `copy` tells a scan its carrier dated by its day alone, in its words and stage (or none), at the start of
- * that day on the copy's own wall clock: the provider knew the day alone too (Track123's copy of FedEx's pickup).
+ * Whether `copy` tells a scan its carrier dated by its day alone, in its words and stage (or none), by that day alone
+ * or at its start on the copy's own wall clock: the provider knew the day alone too (Track123's copy of FedEx's
+ * pickup, ParcelsApp's of USPS's label).
  */
 function startsScanDay(copy: JsonObject, scan: JsonObject): boolean {
   const day = dayAlone(scan);
-  return day !== null && [`${day}T00:00`, `${day}T00:00:00`].includes(rawField(copy, 'local_time'))
+  return day !== null && [day, `${day}T00:00`, `${day}T00:00:00`].includes(rawField(copy, 'local_time'))
     && stagesAgree(copy, scan) && wording(scan) !== '' && wording(copy) === wording(scan);
 }
 

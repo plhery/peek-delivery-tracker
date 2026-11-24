@@ -234,6 +234,21 @@ describe('providerCopies', () => {
     expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c2'])]]));
   });
 
+  it('leaves out a provider\'s copy dated by the same day alone, in the words and stage of the carrier\'s', () => {
+    // USPS dates its label by the day alone; ParcelsApp's copy of it is dated by that day alone too.
+    const parcelsApp = { universal_provider: 'ParcelsApp', stage: 'registered', description: 'Shipping Label Created' };
+    const events = [
+      scan('c1', 'usps', '2026-11-20T00:00:00Z', { stage: 'registered', description: 'Shipping Label Created', local_time: '2026-11-20' }),
+      scan('c2', 'usps', '2026-11-21T14:05:00Z', { stage: 'accepted', description: 'USPS in possession of item', time: '2026-11-21T09:05:00-05:00' }),
+      scan('u1', 'unknown', '2026-11-20T00:00:01Z', { ...parcelsApp, local_time: '2026-11-20' }),
+      // Another day, or other words, stay.
+      scan('u2', 'unknown', '2026-11-21T00:00:00Z', { ...parcelsApp, local_time: '2026-11-21' }),
+      scan('u3', 'unknown', '2026-11-20T00:00:02Z', { ...parcelsApp, description: 'Pre-Shipment Info Sent', local_time: '2026-11-20' }),
+    ];
+    const row = { carrier_data: { routing: { confirmed_carrier: 'usps' } }, tracking_events: events };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])]]));
+  });
+
   it('keeps a provider\'s scan beside a scan the carrier dated by its day alone, which the sync timed after it', () => {
     // 17TRACK times the label; FedEx dates its pickup by the day, which the sync puts a second after the label.
     const events = [

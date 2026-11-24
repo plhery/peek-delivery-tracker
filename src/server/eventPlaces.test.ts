@@ -988,6 +988,27 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves a carrier\'s repeat under its scan that took a provider\'s row over', () => {
+    // Synthetic USPS rows: 17TRACK's copy of an arrival, which USPS's answer took over (held), and USPS's own row of
+    // that arrival two minutes later, both in the same words and place.
+    const arrival = { stage: 'in_transit', description: 'Arrived at USPS Regional Facility', location: 'SAMPLE TOWN, ST' };
+    const row = {
+      id: 'parcel', carrier: 'usps',
+      carrier_data: { routing: { confirmed_carrier: 'usps' }, direct_history: {
+        from: '2026-11-20T10:00:00Z', to: '2026-11-20T14:00:00Z', held: ['unknown:taken'] } },
+      tracking_events: [
+        { ...event('taken', null, '2026-11-20T13:21:00Z'), ...arrival, provider_event_id: 'unknown:taken' },
+        { ...event('own', null, '2026-11-20T13:23:00Z'), ...arrival, provider_event_id: 'usps:own' },
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([['taken', 'own'], ['own', undefined]]);
+    // Held by no answer, the provider's row is not the carrier's: both rows are steps.
+    const loose = { ...row, carrier_data: { routing: { confirmed_carrier: 'usps' } } };
+    const apart = (withEventPlaces(loose) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(apart.map(({ id, relay_of }) => [id, relay_of])).toEqual([['taken', undefined], ['own', undefined]]);
+  });
+
   it('runs a carrier\'s repeats on past its other rows of their instant', () => {
     const scan = (id: string, occurredAt: string, description: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'out_for_delivery', description, provider_event_id: `fan-courier:${id}`, ...extra,

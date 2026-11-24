@@ -7,7 +7,7 @@ import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, placesApart, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
-import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
+import { DIRECT_HISTORY, heldRows, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './relayCopies';
 import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
@@ -661,7 +661,7 @@ function placedEvents(row: JsonObject): JsonObject {
   const current = currentCarrier(row);
   const relays = relayLeads(events, pairs, current);
   const apart = new Set([...relays.keys(), ...relays.values()]);
-  const repeats = repeatLeads(events, apart);
+  const repeats = repeatLeads(events, apart, heldRows(stored));
   const notices = noticeLeads(events, relays, repeats);
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt

@@ -14862,6 +14862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcf00"
     },
     {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "rastreamento-royal-mail",
+      "title": "Rastreamento Royal Mail: códigos, status e nova entrega",
+      "name": "Royal Mail",
+      "color": "#da202a"
+    },
+    {
       "id": "usps",
       "catalog": "usps",
       "slug": "rastreamento-usps",
@@ -17746,6 +17754,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "La Poste / Colissimo 物流查询：单号格式与状态说明",
       "name": "La Poste / Colissimo",
       "color": "#ffcf00"
+    },
+    {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "royal-mail-tracking",
+      "title": "Royal Mail 物流查询：单号格式、状态与重新派送",
+      "name": "Royal Mail",
+      "color": "#da202a"
     },
     {
       "id": "usps",

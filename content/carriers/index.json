@@ -110,7 +110,7 @@
   { "id": "dhl", "catalog": "dhl", "name": "DHL Paket", "languages": ["en", "de", "fr", "it", "es", "pt", "pl", "ru", "zh", "pt-br"] },
   { "id": "la-poste", "catalog": "la-poste", "name": "La Poste / Colissimo", "languages": ["en", "fr", "pt", "es", "de", "it", "pl", "zh", "pt-br"] },
   { "id": "correos-spain", "catalog": "correos-spain", "name": "Correos", "languages": ["en", "es", "pt", "de", "fr", "it", "pl"] },
-  { "id": "royal-mail", "catalog": "royal-mail", "name": "Royal Mail", "languages": ["en", "pt", "fr", "de", "es", "it", "pl"] },
+  { "id": "royal-mail", "catalog": "royal-mail", "name": "Royal Mail", "languages": ["en", "pt", "fr", "de", "es", "it", "pl", "zh", "pt-br"] },
   { "id": "usps", "catalog": "usps", "name": "USPS", "languages": ["en", "es", "de", "fr", "it", "pt", "pl", "zh", "pt-br"] },
   { "id": "canada-post", "catalog": "canada-post", "name": "Canada Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "purolator", "catalog": "purolator", "name": "Purolator", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },

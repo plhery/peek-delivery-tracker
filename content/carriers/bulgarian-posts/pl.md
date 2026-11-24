@@ -15,14 +15,14 @@ Bulgarian Posts (*Български пощи ЕАД*) to narodowy operator pocz
 | Format (zmyślony) | Co to jest |
 | --- | --- |
 | `PS48291736405` | Przesyłka krajowa lub e-paczka: `PS` i 11 liter oraz cyfr (łącznie 13 znaków). |
-| `RR482917367BG` | Polecony list lub mała paczka międzynarodowa (`R`, `C`, `E`, `L` lub `V` + druga litera + 9 cyfr + `BG`). |
+| `RR482917367BG` | List polecony lub mała paczka międzynarodowa (`R`, `C`, `E`, `L` lub `V` + druga litera + 9 cyfr + `BG`). |
 | `CP482917367BG` | Międzynarodowa paczka pocztowa nadana w Bułgarii (`CP` + 9 cyfr + `BG`). |
 
-Paczki przychodzące z zagranicy zachowują kod UPU S10 poczty nadawczej (zakończony dwuliterowym kodem jej kraju, np. `DE`, `CN` lub `US`). Bulgarian Posts podaje, że przesyłki wychodzące za granicę śledzi na swojej stronie do opuszczenia Bułgarii, a potem na stronie poczty docelowej, natomiast przychodzące pojawiają się po dotarciu do Bułgarii. Dla innych firm kurierskich w Bułgarii sprawdź [Sameday](carrier:sameday), [BOX NOW](carrier:box-now) lub [formaty numerów przesyłek](guide:tracking-number-formats).
+Paczki przychodzące z zagranicy zachowują kod UPU S10 poczty nadawczej (zakończony dwuliterowym kodem jej kraju, np. `DE`, `CN` lub `US`). Bulgarian Posts podaje, że przesyłki wychodzące za granicę można śledzić na jej stronie do opuszczenia Bułgarii, a potem na stronie poczty docelowej, natomiast przychodzące pojawiają się po dotarciu do Bułgarii. Dla innych firm kurierskich w Bułgarii sprawdź [Sameday](carrier:sameday), [BOX NOW](carrier:box-now) lub [formaty numerów przesyłek](guide:tracking-number-formats).
 
 ## Co oznaczają statusy śledzenia Bulgarian Posts
 
-Strumień śledzenia Bulgarian Posts pokazuje angielskie zdarzenia UPU IPS na odcinkach międzynarodowych — oznaczone `(Otb)` dla wyjścia lub `(Inb)` dla wejścia — obok bułgarskich opisów skanów krajowych (nawet na angielskiej wersji strony).
+Śledzenie Bulgarian Posts pokazuje angielskie zdarzenia UPU IPS na odcinkach międzynarodowych — oznaczone `(Otb)` dla wyjścia lub `(Inb)` dla wejścia — obok bułgarskich opisów skanów krajowych (nawet na angielskiej wersji strony).
 
 | Bulgarian Posts pokazuje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
@@ -30,8 +30,8 @@ Strumień śledzenia Bulgarian Posts pokazuje angielskie zdarzenia UPU IPS na od
 | `Insert item into bag (Otb) and Send item abroad`, `Send item abroad (EDI-received)`, `Receive item at office of exchange (Otb)` / `(Inb)` | Spakowana na eksport, wysłana za granicę lub przyjęta w bułgarskim międzynarodowym urzędzie wymiany. | „W transporcie” |
 | `Receive item at sorting centre (Inb)`, `Insert item into domestic bag`, `Send item to domestic location (Inb)`, `Receive item at location (Inb)`, kolejne `Приемане` | W drodze przez bułgarskie sortownie do twojej placówki pocztowej. | „W transporcie” |
 | `Send item to customs (Inb)`, `Record item customs information (Inb)` | Przedstawiona bułgarskiemu urzędowi celnemu lub oczekująca na dokumenty/wycenę celną (często z dopiskiem o oczekiwaniu na przedstawienie funkcjonariuszowi celnemu). | „W urzędzie celnym” |
-| `Return item from customs (Inb)` | Zwolniona przez cło z powrotem do sieci Bulgarian Posts (nie jest to zwrot do nadawcy). | „W transporcie” |
-| `Handover item to delivery agent` | Wydana doręczycielowi do doręczenia pod adres dziś. | „W doręczeniu” |
+| `Return item from customs (Inb)` | Zwolniona przez urząd celny i przekazana z powrotem do sieci Bulgarian Posts (nie jest to zwrot do nadawcy). | „W transporcie” |
+| `Handover item to delivery agent` | Wydana doręczycielowi; doręczenie pod adres dziś. | „W doręczeniu” |
 | `Unsuccessful item delivery attempt (Inb)`, `Първо посещение` | Pierwsza próba doręczenia nieudana; zostawiono pisemne awizo, a przesyłka trafia na pocztę. | „Próba doręczenia” |
 | `Receive item at collection point for pick-up (Inb)`, `За получаване в ПС`, `Второ посещение` | Czeka na odbiór w lokalnej placówce (`Второ посещение` oznacza drugie pisemne awizo wysłane po 10 dniach kalendarzowych). | „Do odbioru” |
 | `Deliver item (Inb)`, `Доставена`, `Доставена пратка` | Wydana za pokwitowaniem. | „Dostarczona” |
@@ -81,7 +81,7 @@ Dane kontaktowe opublikowane na [bgpost.bg/en/contacts](https://www.bgpost.bg/en
 - **Infolinie reklamacyjne (dni robocze 09:00–17:30):** krajowe `+359 2 949 3326`, międzynarodowe przychodzące `+359 2 949 3121`, międzynarodowe wychodzące `+359 2 949 3343`, pomoc portalu RQMS `02 949 31 90`.
 - **Siedziba:** 1, Akademik Stefan Mladenov Str., Bl. 31, 1700 Sofia, Bułgaria.
 
-> Uważaj na niechciane SMS-y i e-maile z linkiem do opłacenia kartą „zaplanowania doręczenia” przesyłki Bulgarian Posts: przesyłki po odprawie celnej opłaca się i odbiera we wskazanej placówce pocztowej. Sprawdzaj kod bezpośrednio na [bgpost.bg](https://www.bgpost.bg/en/postal-services/track-package). Zobacz [fałszywe SMS-y o przesyłce](guide:delivery-scam-texts).
+> Uważaj na niechciane SMS-y i e-maile proszące o zapłatę kartą online za „zaplanowanie doręczenia” przesyłki Bulgarian Posts: przesyłki po odprawie celnej opłaca się i odbiera we wskazanej placówce pocztowej. Sprawdzaj kod bezpośrednio na [bgpost.bg](https://www.bgpost.bg/en/postal-services/track-package). Zobacz [fałszywe SMS-y o przesyłce](guide:delivery-scam-texts).
 
 ## Śledzenie paczki Bulgarian Posts w Peek
 
@@ -89,9 +89,9 @@ Dane kontaktowe opublikowane na [bgpost.bg/en/contacts](https://www.bgpost.bg/en
 
 Peek odpytuje bezpośrednio publiczne API Bulgarian Posts i pokazuje etap („Przyjęta przez przewoźnika”, „W transporcie”, „W urzędzie celnym”, „W doręczeniu”, „Próba doręczenia”, „Do odbioru”, „Dostarczona”), angielskie wpisy IPS (wraz z bułgarskimi wpisami krajowymi i uwagami celnymi), miejscowości/kraje placówek (bez kodów pocztowych) oraz godziny doręczenia w bułgarskich urzędach. Skany w bułgarskich placówkach mają czas sofijski, a skany poczt zagranicznych — strefę czasową tamtego miejsca (np. niemiecką dla Frankfurtu); Peek przelicza je na zegar twojego urządzenia. System Bulgarian Posts nie udostępnia przewidywanej daty dostawy, wagi, nazwy usługi, danych nadawcy/odbiorcy ani zdjęcia potwierdzającego doręczenie.
 
-Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy Bulgarian Posts pokaże `Handover item to delivery agent`, co 2 minuty od 6:00 czasu bułgarskiego, dopóki system Bulgarian Posts odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Gdy system Bulgarian Posts nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu doręczenia, gdy masz paczkę otwartą lub masz włączone powiadomienia.
+Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy Bulgarian Posts pokaże `Handover item to delivery agent`, co 2 minuty od 6:00 czasu bułgarskiego, dopóki system Bulgarian Posts odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Gdy system Bulgarian Posts nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu, w którym paczka jest w doręczeniu, gdy masz paczkę otwartą lub masz włączone powiadomienia.
 
-Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Bulgarian Posts.”, wraz z linkiem „Poproś przewoźnika Bulgarian Posts o pomoc” do strony kontaktowej Bulgarian Posts. Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika Bulgarian Posts.”
+Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Bulgarian Posts.”, wraz z linkiem „Poproś przewoźnika Bulgarian Posts o pomoc” do strony kontaktowej Bulgarian Posts. Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika Bulgarian Posts.”
 
 Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek tylko monitoruje śledzenie — nie złoży za ciebie zgłoszenia celnego ani reklamacji w Bulgarian Posts.
 

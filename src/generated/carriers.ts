@@ -14742,6 +14742,30 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "yunexpress",
+      "catalog": "yunexpress",
+      "slug": "rastreamento-yunexpress",
+      "title": "Rastreamento YunExpress: código YT, status e entrega",
+      "name": "YunExpress",
+      "color": "#008284"
+    },
+    {
+      "id": "yanwen",
+      "catalog": "yanwen",
+      "slug": "rastreamento-yanwen",
+      "title": "Rastreamento Yanwen: códigos UL…YP, status e entrega",
+      "name": "Yanwen",
+      "color": "#8cbe1e"
+    },
+    {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "rastreamento-china-post",
+      "title": "Rastreamento China Post: códigos CN, status e entrega",
+      "name": "China Post",
+      "color": "#006d46"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "rastreamento-imile",

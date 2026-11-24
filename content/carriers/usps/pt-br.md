@@ -10,7 +10,7 @@ O USPS (U.S. Postal Service, serviço postal dos Estados Unidos) entrega em todo
 
 ## Onde encontrar e como identificar um código USPS
 
-Na etiqueta do pacote, o código aparece abaixo do código de barras. Como destinatário, peça o número ao remetente: agências dos correios e a central de atendimento não conseguem buscá-lo sem o código. Usuários do Informed Delivery veem os códigos das encomendas recebidas no próprio painel. Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
+Na etiqueta do pacote, o código aparece abaixo do código de barras. Como destinatário, peça o número ao remetente: agências dos correios e a central de atendimento não conseguem buscá-lo sem o código. Usuários do Informed Delivery veem no próprio painel os códigos das encomendas a caminho. Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
 Os códigos USPS têm de 13 a 34 caracteres. Os formatos mais comuns (com dígitos inventados):
 
@@ -76,13 +76,13 @@ Os canais oficiais divulgados em `usps.com` são:
 - **Atendimento online:** formulário de e-mail e chat para problemas em `usps.com` na página [Contact Us](https://www.usps.com/help/contact-us.htm).
 - **Serviço de retransmissão:** disque `7-1-1` nos EUA.
 
-> O USPS só envia SMS ou e-mail se você tiver solicitado alertas com um código de rastreamento, e suas mensagens nunca contêm links. A reentrega é gratuita. Encaminhe SMS falsos para `7726` (nos EUA) ou denuncie em `spam@uspis.gov`. Em remessas para fora dos EUA, eventuais tributos de importação são cobrados pelos canais oficiais do correio ou transportadora do país de destino.
+> O USPS só envia SMS ou e-mail se você tiver solicitado alertas com um código de rastreamento, e suas mensagens nunca contêm links. A reentrega é gratuita. Encaminhe SMS falsos para `7726` (nos EUA) e denuncie-os em `spam@uspis.gov`. Em remessas para fora dos EUA, eventuais tributos de importação são cobrados pelos canais oficiais do correio ou transportadora do país de destino.
 
 ## Rastrear encomendas USPS com o Peek
 
 O [Peek](/) identifica o USPS imediatamente para a maioria dos códigos válidos de 22 dígitos, códigos de 26 dígitos iniciados por `92` e códigos de barras `420` (removendo automaticamente o prefixo do ZIP). Para formatos compartilhados (`9261`, `9361` ou 20 dígitos), o Peek consulta primeiro outras transportadoras prováveis e serviços de rastreamento, abrindo o USPS por último. Links de `usps.com` também funcionam.
 
-O Peek abre a página de rastreamento do USPS em navegador no próprio servidor; quando o USPS recusa ou demora, serviços de rastreamento preenchem as informações (embora nem sempre guardem todo o histórico do USPS). O Peek mostra a etapa, cada leitura no mapa com horário convertido do estado de ocorrência para o fuso do seu dispositivo e a data prevista de entrega, com alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega", omitindo nome de quem assinou e instruções de entrega.
+O Peek abre a página de rastreamento do USPS em navegador no próprio servidor; quando o USPS recusa ou demora, serviços de rastreamento preenchem as informações (embora nem sempre guardem todo o histórico do USPS). O Peek mostra a etapa, cada leitura no mapa, com a hora lida no estado onde ocorreu e mostrada no horário do seu aparelho, e a data prevista de entrega, com alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega", omitindo nome de quem assinou e instruções de entrega.
 
 As descrições permanecem no inglês do USPS, com entregas exibidas como "Entregue". Quando [UPS](carrier:ups) ou [FedEx](carrier:fedex) repassam um pacote ao USPS, ou quando uma remessa internacional entra nos EUA, o Peek passa a acompanhá-la no USPS assim que surgem novas leituras. Agendamentos de reentrega e o Informed Delivery continuam sendo feitos em `usps.com`.
 
@@ -94,7 +94,7 @@ O USPS exibe essa mensagem para códigos que ainda não constam na base ou que j
 
 ### O USPS faz entregas aos domingos?
 
-Segundo o USPS, apenas Priority Mail Express e encomendas selecionadas da Amazon são entregues aos domingos. Os demais serviços entregam de segunda a sábado.
+Segundo o USPS, apenas Priority Mail Express e encomendas da Amazon são entregues aos domingos. Os demais serviços entregam de segunda a sábado.
 
 ### Um SMS do USPS sobre meu pacote é golpe?
 

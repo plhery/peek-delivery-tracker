@@ -363,6 +363,29 @@ begin
 end;
 $$;
 
+-- A JRS Express reference keeps the hyphen between its airbill and its branch code,
+-- which its tracker needs, unless a part is zeros alone; the same shape under another
+-- carrier is stored in capitals without it.
+do $$
+declare
+  reference public.packages;
+  zeros public.packages;
+  other public.packages;
+begin
+  reference := test_support.add_parcel('9999999 - 999', '', 'jrs-express', null, null);
+  zeros := test_support.add_parcel('9999998-000', '', 'jrs-express', null, null);
+  other := test_support.add_parcel('9999997-999', '', 'lbc-express', null, null);
+  if reference.tracking_number <> '9999999-999' or zeros.tracking_number <> '9999998000'
+      or other.tracking_number <> '9999997999' then
+    raise exception 'a JRS Express reference lost its hyphen, or another number kept it';
+  end if;
+  if not public.delete_owned_package(reference.id) or not public.delete_owned_package(zeros.id)
+      or not public.delete_owned_package(other.id) then
+    raise exception 'the reference checks'' parcels were not deleted';
+  end if;
+end;
+$$;
+
 do $$
 declare
   visible integer;

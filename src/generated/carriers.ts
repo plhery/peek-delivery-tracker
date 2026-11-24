@@ -6732,6 +6732,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi GLS Hungary\u00a0: numéros, consignes, délais et aide",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "suivi-dhl-freight",
+      "title": "Suivi DHL Freight\u00a0: codes ActiveTracing, statuts et aide",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     }
   ],
   "it": [
@@ -8854,6 +8862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GLS Hungary: numeri, locker e contatti",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "tracciamento-dhl-freight",
+      "title": "Tracciamento DHL Freight: codici ActiveTracing e aiuto",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     },
     {
       "id": "liccardi",
@@ -10984,6 +11000,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GLS Hungary: códigos, taquillas y contacto",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "seguimiento-dhl-freight",
+      "title": "Seguimiento DHL Freight: ActiveTracing, estados y ayuda",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     },
     {
       "id": "correos-de-mexico",
@@ -13146,6 +13170,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GLS Hungary: números, cacifos e contactos",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "rastreio-dhl-freight",
+      "title": "Rastreio DHL Freight: códigos ActiveTracing e ajuda",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     }
   ],
   "pt-br": [
@@ -15342,6 +15374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GLS Hungary: numery, automaty i kontakt",
       "name": "GLS Hungary",
       "color": "#ffdd00"
+    },
+    {
+      "id": "dhl-freight",
+      "catalog": "dhl-freight",
+      "slug": "sledzenie-dhl-freight",
+      "title": "Śledzenie DHL Freight: kody ActiveTracing, statusy i pomoc",
+      "name": "DHL Freight",
+      "color": "#ffcc00"
     }
   ],
   "ru": [

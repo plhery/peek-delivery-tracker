@@ -34610,7 +34610,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "parcel-one"
     },
     "trackingUrlTemplate": "https://parcel.one/tracking?trackno={trackingNumber}",
     "linkRules": [

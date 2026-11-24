@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { tagLocale } from '../../lib/locale';
 import { HttpError } from '../api';
 import { wakeEmailAddedWorker } from '../background';
 import { ownSenderAddress } from '../email/config';
@@ -9,6 +10,7 @@ import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
 import { carrierNames, carriersOfAddress } from './carrierSender';
 import { deliveredSubject } from './delivered';
 import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
+import { sentByReader, sentName } from './sentByReader';
 import { shopNameOf, shopNamedIn } from './shopName';
 import { shippingSubject } from './shippingSubject';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
@@ -61,7 +63,15 @@ async function nameFollowedParcels(
   return named;
 }
 
-/** Keeps the email 30 days, to learn to read emails better. A failure is reported, and the email's parcels stay. */
+/**
+ * The name of a parcel the reader sent, as a seller's notice tells of: the usual name after a few words that say so,
+ * in the language the account last used, English when that can't be read (`sentName`).
+ */
+async function nameSentParcel(service: SupabaseServiceClient, userId: string, name: string): Promise<string> {
+  const stored = await service.getAuthAccount(userId).then((account) => account?.locale ?? null, () => null);
+  return sentName((stored && tagLocale(stored)) || 'en', name);
+}
+
 /**
  * The parcels the email added start unseen, and are notified to the account's browsers and phones unless it switched
  * that off. A failure leaves them added, seen and unannounced, and is reported.
@@ -77,6 +87,7 @@ async function announce(service: SupabaseServiceClient, userId: string, addition
   }
 }
 
+/** Keeps the email 30 days, to learn to read emails better. A failure is reported, and the email's parcels stay. */
 async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Array): Promise<void> {
   try {
     await service.keepInboundMail(userId, raw);
@@ -154,8 +165,10 @@ export async function receiveInboundMail(
     return finish('limited', claim.scope ?? 'account');
   }
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
-  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered, retryEligibility: true });
-  const named = await nameFollowedParcels(service, userId, additions, label);
+  // A seller's notice tells of a parcel the reader sent: still followed, its name says so.
+  const name = sentByReader(mail.subject, mail.text) ? await nameSentParcel(service, userId, label) : label;
+  const additions = await addParcelsFromText(service, userId, mail.text, name, carriers, { addNew: !delivered, retryEligibility: true });
+  const named = await nameFollowedParcels(service, userId, additions, name);
   await announce(service, userId, additions);
   const result = mailResult(additions, { named, delivered });
   if (result === 'unavailable') throw new HttpError(503, 'Parcel eligibility is temporarily unavailable');

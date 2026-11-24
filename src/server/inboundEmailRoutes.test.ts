@@ -454,6 +454,35 @@ describe('an email to a forwarding address', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'DHL Info');
   });
 
+  it('follows a parcel the reader sent, as a seller\'s notice tells, named so in the account\'s language', async () => {
+    const db = account({ known: [DHL] });
+    const auth = vi.spyOn(SupabaseServiceClient.prototype, 'getAuthAccount')
+      .mockResolvedValue({ email: 'alex@example.com', emailConfirmed: true, locale: 'de-CH' });
+    db.name.mockResolvedValue(true);
+    await posted(mail('"Example Market" <noreply@example-market.com>', 'Your item is on its way',
+      `Your parcel ${UPS} is on its way to the buyer.\nYour other sale: ${DHL}`));
+    expect(auth).toHaveBeenCalledWith(userId);
+    expect(db.create.mock.calls.map(([, number, label]) => [number, label])).toEqual([[UPS, '(von dir verschickt) Example Market']]);
+    expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${DHL}`, '(von dir verschickt) Example Market');
+    // The mailbox's log names who wrote the email.
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Market');
+  });
+
+  it('names a parcel the reader dropped off at a carrier in English when the account\'s language can\'t be read', async () => {
+    const db = account();
+    vi.spyOn(SupabaseServiceClient.prototype, 'getAuthAccount').mockRejectedValue(new SupabaseError('down', 503));
+    await posted(mail('DHL Info <noreply@dhl.com>', 'Paket abgegeben', 'Danke für die Abgabe. Sendungsnummer 4612345678 geht an den Käufer.'));
+    expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([['4612345678', '(you sent)', 'dhl']]);
+  });
+
+  it('reads no buyer\'s email as one the reader sent, and asks nothing of the account for it', async () => {
+    const db = account();
+    const auth = vi.spyOn(SupabaseServiceClient.prototype, 'getAuthAccount');
+    await posted(mail('"Example Market" <noreply@example-market.com>', 'Shipped', `The seller shipped your order. Buyer Protection applies. Tracking: ${UPS}`));
+    expect(db.create.mock.calls.map(([, number, label]) => [number, label])).toEqual([[UPS, 'Example Market']]);
+    expect(auth).not.toHaveBeenCalled();
+  });
+
   it('adds nothing twice, and a number the account follows costs no allowance', async () => {
     const db = account({ known: [UPS] });
     await posted(mail('Shop <a@example.com>', 'Shipped', `Tracking: ${UPS}`));

@@ -6569,7 +6569,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "haypost",
       "catalog": "haypost",
       "slug": "suivi-haypost",
-      "title": "Suivi HayPost\u00a0: codes postaux AM, statuts et contacts",
+      "title": "Suivi HayPost\u00a0: numéros AM, statuts et contacts",
       "name": "HayPost",
       "color": "#fa4616"
     }

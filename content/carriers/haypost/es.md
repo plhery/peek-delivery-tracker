@@ -25,7 +25,7 @@ HayPost devuelve líneas de escaneo en inglés de la Unión Postal Universal (IP
 
 | HayPost muestra | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
-| `Receive item from customer (Otb)` | Admitido en una oficina de correos por el remitente. | «Admitido por el transportista» |
+| `Receive item from customer (Otb)` | El remitente lo entregó en una oficina de correos. | «Admitido por el transportista» |
 | `Insert item into bag (Otb)`, `Send item abroad (EDI-received)`, `Receive item at office of exchange (Otb)` / `(Inb)` | Embolsado para despacho internacional, notificado al extranjero por datos electrónicos o llegado a la oficina internacional de cambio. | «En tránsito» |
 | `Send item to customs (Otb)` | Despacho aduanero de exportación en la oficina de cambio de salida antes de dejar el país de origen. | «En tránsito» |
 | `Send item to customs (Inb)`, `Record item customs information (Inb)` | Retenido o inspeccionado por la aduana de importación en destino. | «En aduanas» |
@@ -79,7 +79,7 @@ Peek lee directamente la API JSON pública de HayPost en inglés y muestra la fa
 
 Mientras tienes el paquete abierto en Peek, o el día de entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos; el día en que HayPost muestra `Send item out for physical delivery (Inb)`, cada 2 minutos desde las 6:00 según la hora del último escaneo de HayPost, mientras su propio sistema responda. En el resto de casos comprueba cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o tras dos días sin novedades, comprueba cada hora sea cual sea tu forma de seguirlo, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el seguimiento de HayPost no responde y Peek sigue el paquete únicamente mediante servicios de seguimiento, comprueba cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de reparto mientras lo tengas abierto o tengas las notificaciones activadas.
 
-Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun, 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a HayPost.», junto con un enlace «Pide ayuda a HayPost» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a HayPost.»
+Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a HayPost.», junto con un enlace «Pide ayuda a HayPost» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a HayPost.»
 
 Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo supervisa el seguimiento y no puede despachar aduanas ni presentar una consulta ante HayPost por ti.
 
@@ -87,7 +87,7 @@ Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la ent
 
 ### ¿Cómo es un número de seguimiento de HayPost?
 
-HayPost usa códigos postales estándar UPU S10 de 13 caracteres: dos letras, nueve dígitos y `AM` al final para envíos depositados en Armenia (por ejemplo `RR482917367AM` o `CP482917367AM`, dígitos inventados). El correo internacional entrante conserva las dos letras del país remitente.
+HayPost usa códigos estándar UPU S10 de 13 caracteres: dos letras, nueve dígitos y `AM` al final para envíos depositados en Armenia (por ejemplo `RR482917367AM` o `CP482917367AM`, dígitos inventados). El correo internacional entrante conserva las dos letras del país remitente.
 
 ### ¿Por qué dice mi paquete HayPost `Return item from customs (Inb)`?
 

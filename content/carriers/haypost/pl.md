@@ -29,14 +29,14 @@ HayPost zwraca angielskie wpisy Światowego Związku Pocztowego (IPS) oznaczone 
 | `Insert item into bag (Otb)`, `Send item abroad (EDI-received)`, `Receive item at office of exchange (Otb)` / `(Inb)` | Spakowana do wysyłki zagranicznej, zgłoszona elektronicznie za granicę lub przyjęta w międzynarodowym urzędzie wymiany. | „W transporcie” |
 | `Send item to customs (Otb)` | Eksportowa odprawa celna w wychodzącym urzędzie wymiany przed opuszczeniem kraju nadania. | „W transporcie” |
 | `Send item to customs (Inb)`, `Record item customs information (Inb)` | Zatrzymana lub sprawdzana przez urząd celny importu w kraju docelowym. | „W urzędzie celnym” |
-| `Return item from customs (Inb)` | Zwolniona przez cło z powrotem do sieci pocztowej (nie jest to zwrot do nadawcy). | „W transporcie” |
+| `Return item from customs (Inb)` | Zwolniona przez urząd celny i przekazana z powrotem do sieci pocztowej (nie jest to zwrot do nadawcy). | „W transporcie” |
 | `Send item to domestic location (Inb)`, `Receive item at location (Inb)`, `Receive item at sorting centre (Inb)`, `Item was delivered to the postal office (Inb)` | W drodze przez krajowe sortownie aż do lokalnej placówki pocztowej odpowiedzialnej za wydanie. | „W transporcie” |
 | `Send item out for physical delivery (Inb)` | Wydana listonoszowi do doręczenia dziś. | „W doręczeniu” |
 | `Unsuccessful item delivery attempt (Inb)`, `The notification was sent to the customer: ...` | Próba doręczenia nieudana; HayPost często dopisuje przyczynę i dalszy krok (np. `Addressee not available; Scheduled for further action/processing today`). | „Próba doręczenia” |
 | `Receive item at collection point for pick-up (Inb)` | Gotowa do odbioru w placówce pocztowej. | „Do odbioru” |
 | `Deliver item (Inb)` | Wydana i zarejestrowana jako doręczona. | „Dostarczona” |
 
-Uważaj na dwa mylące komunikaty. Po pierwsze, `Return item from customs (Inb)` to dobra wiadomość: cło zakończyło kontrolę i oddało paczkę poczcie do dalszego przewozu. Po drugie, `Item was delivered to the postal office (Inb)` (często przekazywane przez poczty zagraniczne) oznacza, że przesyłkę przejęła lokalna placówka pocztowa, a nie że została wydana odbiorcy.
+Uważaj na dwa mylące komunikaty. Po pierwsze, `Return item from customs (Inb)` to dobra wiadomość: urząd celny zakończył kontrolę i oddał paczkę poczcie do dalszego przewozu. Po drugie, `Item was delivered to the postal office (Inb)` (często przekazywane przez poczty zagraniczne) oznacza, że przesyłkę przejęła lokalna placówka pocztowa, a nie że została wydana odbiorcy.
 
 ## Usługi krajowe, międzynarodowe i ekspresowe HayPost
 
@@ -48,7 +48,7 @@ W swojej sieci ok. 777 placówek pocztowych ([O HayPost](https://www.haypost.am/
 
 **FAQ HayPost.** W [FAQ HayPost](https://www.haypost.am/en/faq) wymieniono pytania o terminy doręczeń krajowych, opłaty celne, odszkodowania i czas przechowywania przesyłek EMS; szczegółowe stawki i terminy dla twojej paczki potwierdzisz na poczcie lub w HayPost.
 
-## Opóźnione, oclone lub zagubione paczki HayPost
+## Opóźnione, zatrzymane w urzędzie celnym lub zagubione paczki HayPost
 
 Przy zakupach online wysyłanych pocztą do lub z Armenii najpierw skontaktuj się ze sprzedawcą w sprawie zwrotu lub ponownej wysyłki.
 
@@ -77,9 +77,9 @@ Dla kodów UPU S10 kończących się na `AM` (np. `RR482917367AM` lub `CP4829173
 
 Peek odczytuje bezpośrednio publiczne angielskie API JSON HayPost i wyświetla etap („Przyjęta przez przewoźnika”, „W transporcie”, „W urzędzie celnym”, „W doręczeniu”, „Próba doręczenia”, „Do odbioru”, „Dostarczona”), komunikaty IPS (w tym przyczyny nieudanych prób i dalsze kroki takie jak `Addressee not available`), placówkę/kraj (bez numerycznych kodów pocztowych), kraj docelowy i godzinę doręczenia. Skany ormiańskie oraz wpisy `Send item abroad (EDI-received)` mają czas Erywania, a skany zagranicznych poczt strefę czasową tamtego miejsca (np. francuską dla Paryża); Peek pokazuje je na zegarze twojego urządzenia. Gdy HayPost z wyprzedzeniem publikuje zaplanowany wpis `Send item abroad (EDI-received)` z przyszłą datą (często kilka godzin naprzód), Peek pomija go do nadejścia właściwego czasu. API HayPost nie zwraca przewidywanej daty dostawy, wagi, nazwy usługi, danych nadawcy/odbiorcy ani zdjęcia doręczenia.
 
-Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy HayPost pokaże `Send item out for physical delivery (Inb)`, co 2 minuty od 6:00 według zegara najnowszego skanu HayPost, dopóki system HayPost odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Gdy system HayPost nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu doręczenia, gdy masz paczkę otwartą lub masz włączone powiadomienia.
+Gdy masz paczkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut; w dniu, gdy HayPost pokaże `Send item out for physical delivery (Inb)`, co 2 minuty od 6:00 według zegara najnowszego skanu HayPost, dopóki system HayPost odpowiada. Poza tym sprawdza co godzinę. Po 12 godzinach wyłącznie na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”, albo po dwóch dniach bez zmian, sprawdza co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na etapie „Zarejestrowana” — co 6 godzin. Gdy system HayPost nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, co 3 godziny po dniu ciszy i do co 15 minut w dniu, w którym paczka jest w doręczeniu, gdy masz paczkę otwartą lub masz włączone powiadomienia.
 
-Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika HayPost.”, wraz z linkiem „Poproś przewoźnika HayPost o pomoc” do strony kontaktowej HayPost. Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika HayPost.”
+Gdy najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika HayPost.”, wraz z linkiem „Poproś przewoźnika HayPost o pomoc” do strony kontaktowej HayPost. Po trzech tygodniach bez nowego skanu widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika HayPost.”
 
 Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek tylko monitoruje aktualizacje śledzenia — nie odprawi przesyłki celnie ani nie złoży za ciebie reklamacji w HayPost.
 
@@ -87,7 +87,7 @@ Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylk
 
 ### Jak wygląda numer śledzenia HayPost?
 
-HayPost używa standardowych 13-znakowych kodów pocztowych UPU S10: dwie litery, dziewięć cyfr i końcówka `AM` dla przesyłek nadanych w Armenii (np. `RR482917367AM` lub `CP482917367AM`, cyfry zmyślone). Przychodząca poczta zagraniczna zachowuje dwuliterowy kod kraju nadania.
+HayPost używa standardowych 13-znakowych kodów UPU S10: dwie litery, dziewięć cyfr i końcówka `AM` dla przesyłek nadanych w Armenii (np. `RR482917367AM` lub `CP482917367AM`, cyfry zmyślone). Przychodząca poczta zagraniczna zachowuje dwuliterowy kod kraju nadania.
 
 ### Dlaczego moja paczka HayPost ma status `Return item from customs (Inb)`?
 

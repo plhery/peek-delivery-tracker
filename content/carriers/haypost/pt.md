@@ -25,7 +25,7 @@ A HayPost devolve linhas de registo em inglês da União Postal Universal (IPS) 
 
 | A HayPost mostra | O que significa para ti | O Peek mostra |
 | --- | --- | --- |
-| `Receive item from customer (Otb)` | Aceite num posto de correios entregue pelo remetente. | «Aceite pela transportadora» |
+| `Receive item from customer (Otb)` | Entregue pelo remetente num posto de correios. | «Aceite pela transportadora» |
 | `Insert item into bag (Otb)`, `Send item abroad (EDI-received)`, `Receive item at office of exchange (Otb)` / `(Inb)` | Acondicionada para expedição internacional, comunicada ao estrangeiro por dados eletrónicos ou chegada à estação de permuta internacional. | «Em trânsito» |
 | `Send item to customs (Otb)` | Desalfandegamento de exportação na estação de permuta de saída antes de deixar o país de origem. | «Em trânsito» |
 | `Send item to customs (Inb)`, `Record item customs information (Inb)` | Retida ou inspecionada pela alfândega de importação no destino. | «Na alfândega» |
@@ -79,7 +79,7 @@ O Peek lê diretamente a API JSON pública da HayPost em inglês e mostra a etap
 
 Enquanto manténs a encomenda aberta no Peek, ou no dia da entrega com as notificações ativas, o Peek verifica até de 10 em 10 minutos; no dia em que a HayPost mostra `Send item out for physical delivery (Inb)`, de 2 em 2 minutos a partir das 6 h pela hora do registo mais recente da HayPost, enquanto o rastreio próprio da HayPost responder. Nos restantes casos verifica de hora em hora. Após 12 horas só em «Etiqueta criada» ou «Aceite pela transportadora», ou dois dias sem novidades, verifica de hora em hora seja como for, e de 6 em 6 horas após sete dias em «Etiqueta criada». Quando o rastreio da HayPost não responde e o Peek acompanha a encomenda apenas por serviços de rastreio, verifica de hora em hora, de 3 em 3 horas após um dia sem novidades e até de 15 em 15 minutos no dia de distribuição enquanto a mantiveres aberta ou com notificações ativas.
 
-Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg., 12/10». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a HayPost.», com a ligação «Pede ajuda a HayPost» para a página de contactos da HayPost. Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a HayPost.»
+Quando o último registo tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com a data desse registo, como «Sem atualizações desde seg 12 out». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a HayPost.», com a ligação «Pede ajuda a HayPost» para a página de contactos da HayPost. Após três semanas sem novos registos, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a HayPost.»
 
 Podes escolher os alertas «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek apenas acompanha o rastreio e não pode desalfandegar encomendas nem abrir pedidos de averiguação junto da HayPost por ti.
 
@@ -87,7 +87,7 @@ Podes escolher os alertas «Todos os registos», «Passos importantes» ou «Só
 
 ### Como é um número de rastreio HayPost?
 
-A HayPost usa códigos postais padrão UPU S10 de 13 caracteres: duas letras, nove dígitos e `AM` no fim para envios expedidos da Arménia (por exemplo `RR482917367AM` ou `CP482917367AM`, dígitos inventados). O correio internacional de entrada mantém as duas letras do país remetente.
+A HayPost usa códigos padrão UPU S10 de 13 caracteres: duas letras, nove dígitos e `AM` no fim para envios expedidos da Arménia (por exemplo `RR482917367AM` ou `CP482917367AM`, dígitos inventados). O correio internacional de entrada mantém as duas letras do país remetente.
 
 ### Porque diz a minha encomenda HayPost `Return item from customs (Inb)`?
 

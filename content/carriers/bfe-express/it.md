@@ -20,7 +20,7 @@ Peek accetta codici BFE Express composti da 6 a 50 lettere e cifre. Il modulo di
 | `CK548291736045182` | `CK54` + 13 cifre (17 caratteri) — formato alternativo per l’Argentina (stessa lunghezza di [Colis Privé](carrier:colis-prive)). |
 | `CK512829173604518` | `CK512` + 12 cifre (17 caratteri) — formato Perù (stessa lunghezza di [Colis Privé](carrier:colis-prive)). |
 | `CK598829173604518` | `CK598` + 12 cifre (17 caratteri) — formato Uruguay (stessa lunghezza di [Colis Privé](carrier:colis-prive)). |
-| `WYB482917360` | `WYB` + 9 cifre (12 caratteri) — lettera di vettura per il Perù (si sovrappone a [Colis Privé](carrier:colis-prive), [Purolator](carrier:purolator) e [TNT Australia](carrier:tnt-au)). |
+| `WYB482917360` | `WYB` + 9 cifre (12 caratteri) — lettera di vettura per il Perù (si sovrappone a [Purolator](carrier:purolator) e [TNT Australia](carrier:tnt-au)). |
 
 Le cifre dopo `CK` indicano la destinazione: `54` per l’Argentina, `512` per il Perù e `598` per l’Uruguay. Se incolli un link diretto `bfeexpress.com/track?track_number=...`, Peek estrae il codice e seleziona subito BFE Express. Per altri formati internazionali, consulta la guida ai [formati dei codici di tracciamento](guide:tracking-number-formats).
 
@@ -55,9 +55,9 @@ Per spedizioni nazionali in Argentina gestite direttamente da corrieri locali, c
 
 ## Tracciare BFE Express con Peek
 
-Incolla il codice `CK...` o `WYB...` in Peek, che segue oltre 4.500 corrieri. Peek non interroga mai BFE Express per un numero nudo: per un codice `CK54` di 16 caratteri non interroga alcun corriere, per un codice `CK` di 17 caratteri interroga [Colis Privé](carrier:colis-prive), e per un codice `WYB` interroga Colis Privé, [TNT Australia](carrier:tnt-au) e [Purolator](carrier:purolator) (prima TNT Australia in Australia, prima Purolator in Canada). Interroga poi i servizi di tracciamento («Verifica dei servizi di tracciamento…») e assegna il pacco a BFE Express solo se un servizio di tracciamento nomina esclusivamente lui con passaggi datati. Premi quindi «Cambia» e scegli BFE Express sotto «Compatibili con questo numero», oppure usa «Cambia corriere» su un pacco già aggiunto. Un link `bfeexpress.com/track?track_number=...` va subito su BFE Express.
+Incolla il codice `CK...` o `WYB...` in Peek, che segue oltre 4.500 corrieri. Peek non interroga mai BFE Express per un numero nudo: per un codice `CK54` di 16 caratteri non interroga alcun corriere, per un codice `CK` di 17 caratteri interroga [Colis Privé](carrier:colis-prive), e per un codice `WYB` interroga [TNT Australia](carrier:tnt-au) e [Purolator](carrier:purolator) (prima Purolator in Canada, prima TNT Australia altrove). Interroga poi i servizi di tracciamento («Verifica dei servizi di tracciamento…») e assegna il pacco a BFE Express solo se un servizio di tracciamento nomina esclusivamente lui con passaggi datati. Premi quindi «Cambia» e scegli BFE Express sotto «Compatibili con questo numero», oppure usa «Cambia corriere» su un pacco già aggiunto. Un link `bfeexpress.com/track?track_number=...` va subito su BFE Express.
 
-Peek interroga direttamente l’API di tracciamento BFE Express tramite l’[adattatore open source BFE Express di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express). Legge entrambi i gruppi di righe in ordine cronologico, usa città, filiale o paese come luogo e conserva il giorno di consegna previsto e il paese di destinazione. Un orario con offset GMT mantiene esattamente quell’istante; uno senza offset viene datato sul fuso del luogo (ora di Buenos Aires per Ezeiza, ora di Lima per Lima, ora di Montevideo per Montevideo), una scansione senza luogo su quello della scansione vicina, altrimenti sull’ora di Buenos Aires, e ogni scansione appare nell’orologio del tuo dispositivo. Gli indirizzi civici e le foto di prova di consegna presenti sul portale BFE vengono esclusi.
+Peek interroga direttamente l’API di tracciamento BFE Express tramite l’[adattatore open source BFE Express di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express). Legge entrambi i gruppi di righe in ordine cronologico, usa città, filiale o paese come luogo e conserva il giorno di consegna previsto e il paese di destinazione. Un orario con offset GMT mantiene esattamente quell’istante; uno senza offset viene datato sul fuso del luogo (ora di Buenos Aires per Ezeiza, ora di Lima per Lima, ora di Montevideo per Montevideo), una scansione senza luogo su quello della scansione vicina, altrimenti sull’ora di Buenos Aires, e ogni scansione appare con l’ora del tuo dispositivo. Gli indirizzi civici e le foto di prova di consegna presenti sul portale BFE vengono esclusi.
 
 Peek mostra le righe di BFE Express come «In transito», tranne `Reparto en curso` («In consegna») ed `Entregado` («Consegnato»). Segna il pacco «Consegnato» anche quando lo stato proprio di BFE dice `Delivered`.
 
@@ -89,7 +89,7 @@ Il tracker BFE Express può iniziare con `Arrived at Airport of destination`, l�
 
 ### Perché le mie scansioni BFE Express sono sia in inglese sia in spagnolo?
 
-BFE Express registra in inglese l’arrivo internazionale in aeroporto, la dichiarazione doganale e la consegna all’ultimo miglio, mentre il deposito locale che effettua la consegna finale pubblica le proprie scansioni in spagnolo (fino a `Reparto en curso` ed `Entregado`).
+BFE Express registra in inglese l’arrivo internazionale in aeroporto, la dichiarazione doganale e il passaggio all’ultimo miglio, mentre il deposito locale che effettua la consegna finale pubblica le proprie scansioni in spagnolo (fino a `Reparto en curso` ed `Entregado`).
 
 ### Cosa significano le cifre `54`, `512` e `598` nei codici `CK`?
 

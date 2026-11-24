@@ -4507,8 +4507,8 @@ describe('TrackingSyncService', () => {
     expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'list_waiting_packages' });
   });
 
-  // Whoever waits for it: a parcel at its label for a week, or never answered for after 12 failed checks in a row,
-  // every 6 hours; one out for delivery on an earlier day, hourly, until the carrier scans it again.
+  // Whoever waits for it: a parcel at its label for a week, or after 12 failed checks in a row, every 6 hours; one out
+  // for delivery on an earlier day, hourly, until the carrier scans it again.
   it.each([
     { name: 'registered a week after it was added', stage: 'registered', time: '15:00:00', checked: 0 },
     { name: 'registered a week after it was added', stage: 'registered', time: '16:00:00', checked: 1 },
@@ -4520,7 +4520,13 @@ describe('TrackingSyncService', () => {
     { name: 'never answered for after 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 12, time: '15:00:00', checked: 0 },
     { name: 'never answered for after 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 12, time: '16:00:00', checked: 1 },
     { name: 'never answered for after 11 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 11, time: '10:10:00', checked: 1 },
-    { name: 'answered once, then 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, answered: true, failures: 12, time: '10:10:00', checked: 1 },
+    { name: 'answered once, then 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, answered: true, failures: 12, time: '15:00:00', checked: 0 },
+    { name: 'answered once, then 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, answered: true, failures: 12, time: '16:00:00', checked: 1 },
+    // Its label scanned, then its carrier failing at every check while the providers find nothing.
+    { name: 'registered, then 12 failed checks', stage: 'registered', created: '2026-09-07T08:00:00Z', lastEvent: '2026-09-07T08:00:00Z', answered: true, failures: 12, time: '15:00:00', checked: 0 },
+    { name: 'registered, then 12 failed checks', stage: 'registered', created: '2026-09-07T08:00:00Z', lastEvent: '2026-09-07T08:00:00Z', answered: true, failures: 12, time: '16:00:00', checked: 1 },
+    { name: 'registered, then 11 failed checks', stage: 'registered', created: '2026-09-07T08:00:00Z', lastEvent: '2026-09-07T08:00:00Z', answered: true, failures: 11, time: '11:00:00', checked: 1 },
+    { name: 'in transit after 12 failed checks', stage: 'in_transit', created: '2026-09-07T08:00:00Z', lastEvent: '2026-09-07T08:00:00Z', answered: true, failures: 12, time: '11:00:00', checked: 1 },
     { name: 'out for delivery on an earlier day', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', time: '10:10:00', checked: 0 },
     { name: 'out for delivery on an earlier day', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', time: '11:00:00', checked: 1 },
     { name: 'out for delivery on an earlier day, expected today', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', expected: '2026-09-09', time: '10:10:00', checked: 1 },

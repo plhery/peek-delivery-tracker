@@ -219,10 +219,10 @@ const POSTCODE_UNANSWERED_MS = 24 * 60 * 60 * 1_000;
 const STALE_LABEL_AFTER_MS = 7 * 24 * 60 * 60 * 1_000;
 const STALE_LABEL_HOURS = 6;
 /**
- * So is a pending parcel no source has ever answered for once this many of its checks in a row asked and failed
- * (`consecutive_failures`): its carrier's inconclusive answer each time, every provider's miss.
+ * So is one once this many of its checks in a row asked and failed (`consecutive_failures`), whether a source answered
+ * for it before or not: its carrier's inconclusive answer or failure each time, every provider's miss.
  */
-const UNANSWERED_FAILED_CHECKS = 12;
+const LABEL_FAILED_CHECKS = 12;
 
 /**
  * An unsuccessful partner confirmation must not double every refresh's cost.
@@ -917,8 +917,8 @@ function scheduledSyncDue(
     // Hourly, then every 6 h, daily, then weekly, around the clock.
     return lastChecked < hourStart.minus({ hours: unseenIntervalHours(unseen, opened) - 1 }).toMillis();
   }
-  // Still at its label a week after its newest scan or its addition, or never answered for after 12 failed checks in a
-  // row: every 6 hours, whoever waits for it, unless it is expected today. Opening a link checks it hourly.
+  // Still at its label a week after its newest scan or its addition, or after 12 failed checks in a row: every 6 hours,
+  // whoever waits for it, unless it is expected today. Opening a link checks it hourly.
   if (!opened && stuckAtLabel(parcel, now) && !expectedToday(parcel, now)) {
     return lastChecked < hourStart.minus({ hours: STALE_LABEL_HOURS - 1 }).toMillis();
   }
@@ -968,17 +968,14 @@ function scheduledSyncDue(
 
 /**
  * Whether the parcel stays at its label as far as the schedule goes: pending or registered with no new scan for
- * STALE_LABEL_AFTER_MS since its newest one or its addition, or pending with no source ever answering for it after
- * UNANSWERED_FAILED_CHECKS failed checks in a row.
+ * STALE_LABEL_AFTER_MS since its newest one or its addition, or after LABEL_FAILED_CHECKS failed checks in a row.
  */
 function stuckAtLabel(parcel: JsonObject, now: Date): boolean {
   const stage = String(parcel.current_stage ?? 'pending');
   if (stage !== 'pending' && stage !== 'registered') return false;
   const activity = lastActivity(parcel);
   if (activity !== null && now.getTime() - activity >= STALE_LABEL_AFTER_MS) return true;
-  const routing = routingState(parcel);
-  return stage === 'pending' && !routing.last_success_at && !routing.last_event_at
-    && routing.consecutive_failures >= UNANSWERED_FAILED_CHECKS;
+  return routingState(parcel).consecutive_failures >= LABEL_FAILED_CHECKS;
 }
 
 /**

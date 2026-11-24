@@ -104,7 +104,7 @@ Peek 直接采用与极兔官网相同的英文查件接口，展示每条扫描
 
 ### 极兔速递在沙特阿拉伯和阿联酋是正规快递公司吗？
 
-是的。极兔速递 2015 年创立于印度尼西亚，在沙特注册主体为利雅得的 *JNT Express KSA LLC*（商业注册号 `1010728810`），在阿联酋注册主体为迪拜的 *J&T Express Couriers Services LLC*，运单号以 `JTE` 开头。
+是的。极兔速递 2015 年创立于印度尼西亚，在沙特注册主体为利雅得的 *JNT Express KSA LLC*（商业注册号 `1010728810`），其阿联酋页面署名的公司为迪拜的 *J&T Express Couriers Services LLC*，运单号以 `JTE` 开头。
 
 ### 极兔轨迹中的 `Order creation` 是什么意思？
 

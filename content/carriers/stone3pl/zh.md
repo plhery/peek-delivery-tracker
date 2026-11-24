@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Stone3PL 是一家总部位于中国深圳的国际物流公司，隶属于 Stone Group（石头集团），联合多家全球物流合作伙伴为电商卖家和企业将货物从中国发往世界各地。如果网店通过 Stone3PL 发货，你可以在 [Stone3PL 英文查件页面](https://stone3pl.com/?route=services/track) 查询，也可以直接把运单号粘贴到上方查询框中。运单号由卖家随订单发货信息提供。
+Stone3PL 是一家总部位于中国深圳的国际物流公司，隶属于 Stone Group，联合多家全球物流合作伙伴为电商卖家和企业将货物从中国发往世界各地。如果网店通过 Stone3PL 发货，你可以在 [Stone3PL 英文查件页面](https://stone3pl.com/?route=services/track) 查询，也可以直接把运单号粘贴到上方查询框中。运单号由卖家随订单发货信息提供。
 
 ## Stone3PL 单号格式：`S` 加 18 位数字
 
@@ -83,7 +83,7 @@ Stone3PL 面向商业发件卖家提供服务，官网未设个人收件人帮�
 
 - **电子邮箱：** `support@stone3pl.com`（隐私政策中亦公布此邮箱）。
 - **联系电话：** `86-0755-81466633`（中国深圳座机；官网未注明办公时间及支持语种）。
-- **公司地址：** 中国广东省深圳市宝安区固戍二路第二工业区新安实业 C5 栋一楼。
+- **公司地址：** Ground Floor, Building C5, Xin'an Industry Co., No.2 Industrial Zone, Gushu 2nd Rd., Baoan, Shenzhen, Guangdong Province, China。
 
 有关订单退款或配送问题请优先联系发货卖家，因为运输合同由卖家与 Stone3PL 签订。
 

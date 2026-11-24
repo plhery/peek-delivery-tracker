@@ -491,6 +491,35 @@ describe('relayCopies', () => {
       { ...placed('sorted-copy', 'brt', 'in_transit', '2026-10-15T16:11:42Z', 'Utrecht, UT, NL'), created_at: '2026-10-20T07:44:49Z' },
     ]))).toEqual(new Set(['sorted']));
   });
+
+  it('puts the rows of two other carriers that tell one scan both under it, and announces the one stored first', () => {
+    const at = (id: string, source: string, stage: string, occurred: string, stored: string) => ({ ...scan(id, source, stage, occurred, stored) });
+    // Spring GDS tracks the parcel; Royal Mail, which delivers it, and AliExpress, which sold it, tell its scans too.
+    const spring = (tracking_events: object[]) => ({ carrier: 'spring-gds', carrier_data: { active_tracking_carrier: 'spring-gds' }, tracking_events });
+    const round = spring([
+      at('round', 'spring-gds', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T07:40:00Z'),
+      at('round-royal-mail', 'royal-mail', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T06:50:00Z'),
+      at('round-aliexpress', 'aliexpress', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T11:30:00Z'),
+    ]);
+    expect(relayCopies(round)).toEqual(new Map([['round-aliexpress', 'round'], ['round-royal-mail', 'round']]));
+    // Royal Mail's came first: Spring GDS's and AliExpress's rows of the round are no news.
+    expect(relayRepeats(round)).toEqual(new Set(['round', 'round-aliexpress']));
+    // Two copies stored before the scan: still one announcement.
+    expect(relayRepeats(spring([
+      at('round', 'spring-gds', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T09:00:00Z'),
+      at('round-royal-mail', 'royal-mail', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T06:50:00Z'),
+      at('round-aliexpress', 'aliexpress', 'out_for_delivery', '2026-10-12T06:41:00Z', '2026-10-12T07:10:00Z'),
+    ]))).toEqual(new Set(['round', 'round-aliexpress']));
+    // AliExpress tells three scans at the second Royal Mail's row of Spring GDS's arrival is under: which one is the copy
+    // is not known, so none joins it.
+    expect(relayCopies(spring([
+      at('arrived', 'spring-gds', 'in_transit', '2026-10-11T23:12:00Z', '2026-10-12T01:00:00Z'),
+      at('arrived-royal-mail', 'royal-mail', 'in_transit', '2026-10-11T23:12:00Z', '2026-10-12T01:00:00Z'),
+      at('customs-left', 'aliexpress', 'in_transit', '2026-10-11T23:12:00Z', '2026-10-12T11:30:00Z'),
+      at('sorting-centre', 'aliexpress', 'in_transit', '2026-10-11T23:12:00Z', '2026-10-12T11:30:00Z'),
+      at('arrived-aliexpress', 'aliexpress', 'in_transit', '2026-10-11T23:12:00Z', '2026-10-12T11:30:00Z'),
+    ]))).toEqual(new Map([['arrived-royal-mail', 'arrived']]));
+  });
 });
 
 describe('relayRepeats', () => {

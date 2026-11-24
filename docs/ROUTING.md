@@ -1190,16 +1190,22 @@ A parcel often changes carrier at the border. The origin history is always kept.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless
-  the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row
+  the copy alone tells a problem: then the other row is the one left out. A scan with several rows
+  under it announces once, by the row stored first. The delivered email quotes the row
   without `relay_of` ([`relayCopies.ts`](../src/server/relayCopies.ts),
   [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
 - A parcel that records no handoff may hold another carrier's rows too: the carrier it was
   filed under before a correction, or one asked beside it, told the same scans. Such a row at
   the same second as a row of the carrier tracking the parcel now, in the same stage or, off a
   minute's first second, in any, from places that do not conflict once their words are read
-  (case, accents, countries and state codes left out; a postcode alone conflicts with none), is served with `relay_of` that row's id and announces as a relay pair's row does.
+  (case, accents, countries and state codes left out; a postcode alone conflicts with none), is served with `relay_of` that row's id.
   So is a third carrier's row in a handed-over parcel that no relay pair holds (Australia Post's
   rows of a Parcelforce parcel EMS carries on), even beside the earlier carrier's copy of the scan.
+  A scan takes one such row from each other carrier (Royal Mail's and AliExpress's rows of Spring GDS's
+  delivery round), a carrier's only row at that second first; a carrier with several rows there,
+  which tell several scans, adds none to a scan that holds another carrier's row already. Of a scan
+  and the rows under it, the one stored first announces, the scan when a check stored it with a copy,
+  unless a copy alone tells a problem.
 - Compatibility: AliExpress `L…CH` numbers keep a Swiss Post confirmation probe, and
   selected Swiss postal routes keep their Cainiao fallback. On such a route Swiss Post is
   asked first; once it has missed the item, Cainiao answers first. Cainiao's news asks Swiss

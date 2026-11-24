@@ -301,8 +301,10 @@ export function relayCopies(row: JsonObject): Map<string, string> {
 /**
  * On a parcel that records no handoff, the rows of another carrier that tell a scan of the carrier tracking the parcel
  * now, each with that scan's id: the same second, places that do not conflict, and the same stage, or, off a minute's
- * first second, any stage once the same stage's pairs are made. A scan is in one pair at most; a universal provider's
- * row is in none.
+ * first second, any stage once the same stage's pairs are made. A scan holds one row of each other carrier at most, so
+ * two carriers that both tell it (Royal Mail's round and AliExpress's beside Spring GDS's) both go under it. A carrier
+ * with several rows at that second tells several scans: a carrier's only row there pairs first, and once another
+ * carrier's row is under the scan, none of the several joins it. A universal provider's row is in no pair.
  */
 function otherCarrierCopies(
   scans: readonly Pick<Scan, 'id' | 'stage' | 'source' | 'at' | 'words'>[], current: string,
@@ -310,18 +312,24 @@ function otherCarrierCopies(
   const second = (at: number) => Math.floor(at / SECOND_MS);
   const own = scans.filter((scan) => scan.source === current);
   const pairs = new Map<string, string>();
-  const paired = new Set<string>();
-  const copies = scans.filter((scan) => scan.source !== current && scan.source !== UNIVERSAL_SOURCE)
-    .sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
+  /** The carriers each scan holds a row of. */
+  const held = new Map<string, Set<string>>();
+  const others = scans.filter((scan) => scan.source !== current && scan.source !== UNIVERSAL_SOURCE);
+  const rows = new Map<string, number>();
+  for (const copy of others) rows.set(`${copy.source} ${second(copy.at)}`, (rows.get(`${copy.source} ${second(copy.at)}`) ?? 0) + 1);
+  const alone = (copy: (typeof others)[number]) => rows.get(`${copy.source} ${second(copy.at)}`) === 1;
+  // Of a second's rows, a carrier's only row there pairs first.
+  const copies = others.sort((a, b) => a.at - b.at || Number(!alone(a)) - Number(!alone(b)) || a.id.localeCompare(b.id));
   for (const sameStage of [true, false]) {
     for (const copy of copies) {
       if (pairs.has(copy.id)) continue;
-      const scan = own.filter((other) => !paired.has(other.id) && second(other.at) === second(copy.at)
+      const scan = own.filter((other) => !held.get(other.id)?.has(copy.source) && (!held.has(other.id) || alone(copy))
+        && second(other.at) === second(copy.at)
         && (sameStage ? other.stage === copy.stage : second(copy.at) % 60 !== 0) && !placesConflict(copy.words, other.words))
-        .sort((a, b) => a.id.localeCompare(b.id))[0];
+        .sort((a, b) => Number(held.has(a.id)) - Number(held.has(b.id)) || a.id.localeCompare(b.id))[0];
       if (!scan) continue;
       pairs.set(copy.id, scan.id);
-      paired.add(scan.id);
+      held.set(scan.id, new Set([...held.get(scan.id) ?? [], copy.source]));
     }
   }
   return pairs;
@@ -367,18 +375,24 @@ export function providerTwins(events: readonly JsonObject[], paired: ReadonlySet
 }
 
 /**
- * The rows of relay pairs that reached the parcel after the other one: their
- * news was the parcel's already. Of a pair stored by the same check, the copy.
- * A copy that alone tells a problem is news whenever it came: its scan is the
- * repeat. The scans need their `stage` and `created_at`.
+ * The rows of relay pairs that reached the parcel after another row of their
+ * scan: their news was the parcel's already. Of a scan and the copies under it,
+ * the row stored first is the news, the scan when a check stored it with a copy.
+ * A copy that alone tells a problem is news whenever it came: its scan and the
+ * scan's other copies are the repeats. The scans need their `stage` and `created_at`.
  */
 export function relayRepeats(row: JsonObject): Set<string> {
   const events = new Map((Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [])
     .map((event) => [String(event.id), event]));
   const stored = (id: string) => Date.parse(String(events.get(id)!.created_at));
+  const under = new Map<string, string[]>();
+  for (const [copy, scan] of relayCopies(row)) under.set(scan, [...under.get(scan) ?? [], copy]);
   const repeats = new Set<string>();
-  for (const [copy, scan] of relayCopies(row)) {
-    repeats.add(copyTellsProblem(events.get(copy)!, events.get(scan)!) || stored(copy) < stored(scan) ? scan : copy);
+  for (const [scan, copies] of under) {
+    const problems = copies.filter((copy) => copyTellsProblem(events.get(copy)!, events.get(scan)!));
+    const first = copies.reduce((news, copy) => stored(copy) < stored(news) ? copy : news, scan);
+    const news = new Set(problems.length ? problems : [first]);
+    for (const id of [scan, ...copies]) if (!news.has(id)) repeats.add(id);
   }
   return repeats;
 }

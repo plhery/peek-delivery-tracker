@@ -35,7 +35,7 @@ DTDC pubblica tappe e movimenti di hub (come `Arrived at DELHI`, `Dispatched fro
 | `Delivered` (tratta di andata) | Consegnato al destinatario. | «Consegnato» |
 | `Delivered` (su tratta `RTO`) | Restituito e riconsegnato al mittente originale. | «Restituito al mittente» |
 
-**Attenzione ai resi `RTO`.** Quando un pacco non può essere consegnato, DTDC apre una tratta Return To Origin (`RTO`) che registra un proprio stato `Delivered` quando il pacco rientra dal mittente. Controlla se l’ultima tratta è di andata o `RTO` prima di supporre che sia stato consegnato a te.
+**Attenzione ai resi `RTO`.** Quando un pacco non può essere consegnato, DTDC apre una tratta Return To Origin (`RTO`) che registra un proprio stato `Delivered` quando il pacco torna al mittente. Controlla se l’ultima tratta è di andata o `RTO` prima di supporre che sia stato consegnato a te.
 
 ## Servizi nazionali e internazionali DTDC
 
@@ -43,7 +43,7 @@ Secondo [DTDC Express Parcel](https://www.dtdc.com/express-parcel/), [DTDC Inter
 
 - **Servizi nazionali in India:** *Express Parcel* (consegna quotidiana a giorno definito su oltre 15.300 codici postali con contrassegno, autenticazione consegna e logistica inversa), *Express Premium* (urgente giorno successivo), *AirMax*, *Raftaar*, *Personal Courier* e B2B *3PL* / *LTL*.
 - **Domeniche e festivi:** le [FAQ DTDC](https://www.dtdc.com/faq/) segnalano che alcune filiali locali DTDC operano anche di domenica e nei giorni festivi in base agli orari di sede.
-- **Tempi internazionali (*DTDC WorldWyde*):** oltre 220 destinazioni con sdoganamento interno e KYC/CSB-V digitale — *WorldWyde Express Premium* (**4–5 giorni**), *WorldWyde Express Standard* (**7–8 giorni**), *WorldWyde Imports Standard* (**10–12 giorni**) e *WorldWyde B2C Standard* (**15–20 giorni**). Le tempistiche reali dipendono anche dalla dogana di destinazione; consulta [pacchi fermi in dogana](guide:customs).
+- **Tempi internazionali (*DTDC WorldWyde*):** oltre 220 destinazioni con sdoganamento gestito in proprio e KYC/CSB-V digitale — *WorldWyde Express Premium* (**4–5 giorni**), *WorldWyde Express Standard* (**7–8 giorni**), *WorldWyde Imports Standard* (**10–12 giorni**) e *WorldWyde B2C Standard* (**15–20 giorni**). Le tempistiche reali dipendono anche dalla dogana di destinazione; consulta [pacchi fermi in dogana](guide:customs).
 
 Le pagine dei servizi DTDC non pubblicano un numero fisso di tentativi di consegna né giorni di giacenza. Un tentativo fallito appare come `Undelivered` e uno nuovo come `Reattempt Initiated`.
 
@@ -69,9 +69,9 @@ Recapiti pubblicati su [DTDC Customer Care](https://www.dtdc.com/customer-care/)
 
 [Peek](/) riconosce automaticamente `N` + 8 cifre (`N48291736`, inventato) e `7D` / `7X` + 9 cifre (`7D482917364`, `7X482917364`) come DTDC con alta affidabilità, oltre ai link incollati `dtdc.com` con parametri `trackingId=` o `awb=`. Per codici alfanumerici da 9 o 11 caratteri con altre lettere iniziali, tocca «Cambia» mentre aggiungi il pacco oppure «Cambia corriere» nella scheda del pacco e seleziona DTDC.
 
-Peek interroga DTDC in due passaggi diretti: prima dal feed anonimo MyDTDC e, se necessario, dalla pagina di tracciamento `dtdc.com`. Mostra la fase («Etichetta creata», «Preso in carico», «In transito», «In consegna», «Tentativo di consegna», «Problema segnalato», «Restituito al mittente», «Consegnato»), le descrizioni delle scansioni DTDC, la località di hub o filiale e gli orari indiani (`Asia/Kolkata`) convertiti nel fuso del tuo dispositivo. Aspetto fondamentale: quando DTDC segna `Delivered` su una tratta `RTO`, Peek lo mappa come «Restituito al mittente» anziché «Consegnato». Peek scarta indirizzi stradali, telefoni/contatti, metadati di prenotazione e valori di peso non etichettati; il tracker DTDC non fornisce data prevista né dettagli del punto di ritiro.
+Peek interroga DTDC in due passaggi diretti: prima dal feed anonimo MyDTDC e, se necessario, dalla pagina di tracciamento `dtdc.com`. Mostra la fase («Etichetta creata», «Preso in carico», «In transito», «In consegna», «Tentativo di consegna», «Problema segnalato», «Restituito al mittente», «Consegnato»), le descrizioni delle scansioni DTDC, la località di hub o filiale e gli orari indiani (`Asia/Kolkata`) convertiti nel fuso del tuo dispositivo. Aspetto fondamentale: quando DTDC segna `Delivered` su una tratta `RTO`, Peek lo mostra come «Restituito al mittente» anziché «Consegnato». Peek scarta indirizzi stradali, telefoni/contatti, metadati di prenotazione e valori di peso non etichettati; il tracker DTDC non fornisce data prevista né dettagli del punto di ritiro.
 
-Mentre tieni il pacco aperto in Peek, oppure il giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti; nel giorno in cui DTDC mostra `Out For Delivery`, ogni 2 minuti dalle 6:00 ora indiana, finché il tracker DTDC risponde. Altrimenti Peek controlla ogni ora. Dopo 12 ore con solo «Etichetta creata» o «Preso in carico», o dopo due giorni senza novità, controlla ogni ora comunque tu lo segua, e ogni 6 ore dopo sette giorni su «Etichetta creata». Quando il tracciamento di DTDC non risponde e Peek segue il pacco solo tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo una giornata senza movimenti e fino a ogni 15 minuti il giorno della consegna mentre lo tieni aperto o hai le notifiche attive.
+Mentre tieni il pacco aperto in Peek, oppure il giorno della consegna con le notifiche attive, Peek controlla fino a ogni 10 minuti; nel giorno in cui DTDC mostra `Out For Delivery`, ogni 2 minuti dalle 6:00 ora indiana, finché il tracker DTDC risponde. Altrimenti Peek controlla ogni ora. Dopo 12 ore con solo «Etichetta creata» o «Preso in carico», o dopo due giorni senza novità, controlla ogni ora comunque tu lo segua, e ogni 6 ore dopo sette giorni su «Etichetta creata». Quando il tracciamento di DTDC non risponde e Peek segue il pacco solo tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo una giornata senza movimenti e fino a ogni 15 minuti nel giorno in cui il pacco è in consegna, mentre lo tieni aperto o hai le notifiche attive.
 
 Quando la scansione più recente risale a quattro giorni prima e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con la data di quella scansione, ad esempio «Nessun aggiornamento da lun 12 ott». La pagina del pacco mostra allora: «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a DTDC.», con il link «Chiedi aiuto a DTDC» alla pagina Customer Care di DTDC. Dopo tre settimane senza nuove scansioni mostra: «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a DTDC.»
 
@@ -89,7 +89,7 @@ I codici spedizione comuni di DTDC hanno 9 caratteri che iniziano per `N` (`N482
 
 ### Quanto impiega una spedizione internazionale DTDC?
 
-Su [dtdc.com/international-shipping/](https://www.dtdc.com/international-shipping/), DTDC indica 4–5 giorni per *WorldWyde Express Premium*, 7–8 giorni per *Express Standard*, 10–12 giorni per *Imports Standard* e 15–20 giorni per *B2C Standard*, salvo sdoganamento.
+Su [dtdc.com/international-shipping/](https://www.dtdc.com/international-shipping/), DTDC indica 4–5 giorni per *WorldWyde Express Premium*, 7–8 giorni per *Express Standard*, 10–12 giorni per *Imports Standard* e 15–20 giorni per *B2C Standard*, a seconda dei tempi di sdoganamento.
 
 ### Come contatto l’assistenza clienti DTDC?
 

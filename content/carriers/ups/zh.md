@@ -46,12 +46,12 @@ UPS 也可将包裹转交至 UPS Access Point 自提点。送达后会出现 `De
 
 ## UPS 国际包裹的关税与清关费用
 
-寄往英国（来自英国以外）或欧盟成员国（来自欧盟以外）的国际包裹可能需要先付进口税费再派送，此时轨迹会显示 `Duties or taxes are due on this package.` 及 `Your package is being held until duties and taxes are paid. Awaiting customer action.`，Peek 会显示“清关中”并提示“需缴纳进口关税或税费”。
+从英国以外寄到英国的包裹，或从欧盟以外寄到爱尔兰的包裹，可能需要先付进口税费再派送，此时轨迹会显示 `Duties or taxes are due on this package.` 及 `Your package is being held until duties and taxes are paid. Awaiting customer action.`，Peek 会显示“清关中”并提示“需缴纳进口关税或税费”。
 
 如果海关需要你的税号才能放行，UPS 会显示 `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`，此时需由收件人提交个人或企业税号，Peek 会显示“清关中”并提示“海关需要你的税号”。
 
 - **英国：** 根据 GOV.UK 说明，快递公司会向收件人寄发增值税、关税及代垫费账单，通常代为保管约 3 周，逾期未付则退回寄件人。
-- **爱尔兰及欧盟：** 自 2026 年 7 月 1 日起，从欧盟以外寄入且货值不超过 150 欧元的多数包裹按商品类别征收 3 欧元关税；若商家结账时未代收，根据爱尔兰税务局（Revenue）说明，快递公司会在派送前向你收取并加收自身手续费。此外，自 2026 年 11 月 1 日起，从欧盟以外网购的货物不论货值高低，均须按商品类别另缴 2 欧元欧盟处理费。
+- **爱尔兰：** 自 2026 年 7 月 1 日起，从欧盟以外寄入且货值不超过 150 欧元的多数包裹按商品类别征收 3 欧元关税；若商家结账时未代收，根据爱尔兰税务局（Revenue）说明，快递公司会在派送前向你收取并加收自身手续费。此外，自 2026 年 11 月 1 日起，从欧盟以外网购的货物不论货值高低，均须按商品类别另缴 2 欧元欧盟处理费。
 
 详见[包裹被海关扣留怎么办](guide:customs)（英文）。
 
@@ -90,7 +90,7 @@ Peek 会展示标准阶段、带精确时间与地图标注的每条扫描、预
 
 ### 收到 UPS 派送收费短信是诈骗吗？
 
-很可能是。Citizens Advice 提醒，要求点击短信或邮件链接付费才能领取或改约派送的消息多为诈骗——真正的进口税费会直接显示在海关轨迹节点中，请务必通过 `ups.com` 或 Peek 核对单号，切勿轻点陌生链接。英国用户可将诈骗短信免费转发至 `7726`。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
+有可能。Citizens Advice 提醒，要求点击短信或邮件链接付费才能领取或改约派送的消息多为诈骗——真正的进口税费会直接显示在海关轨迹节点中，请务必通过 `ups.com` 或 Peek 核对单号，切勿轻点陌生链接。英国用户可将诈骗短信免费转发至 `7726`。详见[快递诈骗短信识别指南](guide:delivery-scam-texts)（英文）。
 
 :::sources
 - [Citizens Advice: 网购商品未送达的维权指引](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – 卖家责任、30 天期限、未经同意放置与防诈骗提醒

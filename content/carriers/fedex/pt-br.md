@@ -16,7 +16,7 @@ Procure o código no e-mail de envio da loja ou na página do pedido. Links de `
 | --- | --- |
 | `482917360586` | 12 dígitos: código padrão da FedEx. O último algarismo é um dígito verificador calculado a partir dos 11 anteriores. |
 | `482917360582919` | 15 dígitos: formato que o Peek também associa à FedEx, exceto quando começa por `8880` ([J&T Express Brasil](carrier:j-and-t-br)) ou por `30000`, `31000` ou `36000` (Andreani). |
-| `61294829173605829147` | 20 dígitos começando por `6129` ou `7489`: FedEx Ground Economy (antigo SmartPost) nos Estados Unidos. |
+| `61294829173605829146` | 20 dígitos começando por `6129` ou `7489`: FedEx Ground Economy (antigo SmartPost) nos Estados Unidos. |
 
 Códigos de 12 dígitos também são usados por DPD France, Mondial Relay, BRT e diversas transportadoras asiáticas, e códigos de 15 dígitos também pertencem a DPD France, BRT e Yunda Express. Se `fedex.com` não reconhecer o código, confirme qual transportadora consta no e-mail da loja.
 
@@ -46,27 +46,27 @@ Se você solicitar retenção em ponto de retirada da FedEx, uma leitura pode mo
 
 ## Encomenda FedEx retida na alfândega
 
-Envios internacionais podem exigir tributos de importação ou documentos extras. Durante a análise surgem `Clearance in progress` ou `Clearance delay`, seguidos de `International shipment release - Import` após a liberação.
+Envios internacionais podem exigir o pagamento de tributos de importação. Durante a análise surgem `Clearance in progress` ou `Clearance delay`, seguidos de `International shipment release - Import` após a liberação.
 
-- **Brasil:** encomendas expressas internacionais passam pela fiscalização da Receita Federal sob o [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) (com Imposto de Importação, ICMS estadual e eventuais taxas de desembaraço da courier quando não pagos na compra).
+- **Brasil:** a Receita Federal explica no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) como os tributos de compras internacionais são cobrados: em sites certificados, o Imposto de Importação e o ICMS são cobrados na compra; quando o site não os cobra, eles são cobrados na chegada ao Brasil.
 - **Reino Unido:** segundo o GOV.UK, a transportadora entra em contato com a cobrança de VAT/impostos e costuma guardar o pacote por cerca de 3 semanas antes da devolução se não houver pagamento.
-- **União Europeia e Irlanda:** desde 1º de julho de 2026, compras de até €150 de fora da UE pagam €3 de tarifa aduaneira por categoria de produto, e desde 1º de novembro de 2026 incidem mais €2 de taxa europeia de manuseio por categoria, cobrados antes da entrega quando não recolhidos no checkout (mais eventual taxa administrativa da courier).
+- **União Europeia e Irlanda:** desde 1º de julho de 2026, compras de até €150 de fora da UE pagam €3 de tarifa aduaneira por categoria de produto, e desde 1º de novembro de 2026 as compras online de fora da UE pagam também €2 de taxa europeia de manuseio por categoria, qualquer que seja o valor, cobrados antes da entrega quando não recolhidos no checkout (mais eventual taxa administrativa da courier).
 
 Veja mais em [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda FedEx atrasada, perdida ou marcada como entregue
 
-Se o rastreamento parou de atualizar, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating). Em compras feitas em lojas online, a responsabilidade pela entrega é do vendedor, mesmo usando a FedEx (na Grã-Bretanha e na Irlanda, Citizens Advice e CCPC destacam o prazo padrão de 30 dias e o direito a reembolso ou substituição pelo lojista).
+Se o rastreamento parou de atualizar, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating). Se você mora na Grã-Bretanha ou na Irlanda e comprou de uma loja, é a loja que responde pela entrega, mesmo quando a FedEx transporta a encomenda. Se ela não chegar em 30 dias, o Citizens Advice diz que você pode cancelar a compra e pedir o reembolso; na Irlanda, a CCPC diz para combinar uma nova data com a loja e, se ela também passar, dá direito ao reembolso integral, e diz que uma encomenda danificada ou perdida no transporte deve ser substituída.
 
 Consta `Delivered`, mas o pacote não chegou? A leitura de entrega da FedEx inclui quem assinou (dado que o Peek não armazena). Consulte o detalhamento em `fedex.com` e fale com a loja. Veja [entregue, mas não recebido](guide:delivered-not-received) e [encomenda perdida](guide:lost-parcel).
 
 ## Rastrear encomendas FedEx com o Peek
 
-O [Peek](/) identifica códigos FedEx de 12 e 15 dígitos quando o dígito verificador é válido. Como outras transportadoras compartilham esses comprimentos, o reconhecimento pode vir de um serviço de rastreamento após breve consulta. Números que falham na verificação — ou de 15 dígitos começando por `8880`, `30000`, `31000` ou `36000` — não são enviados automaticamente à FedEx: escolha FedEx tocando em "Trocar". Códigos Ground Economy de 20 dígitos são reconhecidos imediatamente, códigos de barras escaneados têm o número extraído e links de `fedex.com` com `trknbr=` ou `tracknumbers=` também funcionam. Números domésticos de 13 dígitos da Polônia seguem pela FedEx Poland.
+O [Peek](/) identifica códigos FedEx de 12 e 15 dígitos quando o dígito verificador é válido. Como outras transportadoras compartilham esses comprimentos, o reconhecimento pode vir de um serviço de rastreamento após breve consulta. Números que falham na verificação — ou de 15 dígitos começando por `8880`, `30000`, `31000` ou `36000` — não são enviados automaticamente à FedEx: escolha a transportadora em "Trocar". Códigos Ground Economy de 20 dígitos são reconhecidos imediatamente, códigos de barras escaneados têm o número extraído e links de `fedex.com` com `trknbr=` ou `tracknumbers=` também funcionam. Números domésticos de 13 dígitos da Polônia seguem pela FedEx Poland.
 
 O Peek abre o rastreamento de `fedex.com` em navegador no próprio servidor; quando a FedEx recusa ou solicita verificação do destinatário, serviços de rastreamento assumem a leitura.
 
-O Peek exibe a etapa, cada leitura com local e horário convertido para o fuso do seu dispositivo, o mapa do trajeto, a data prevista, o horário da entrega e, enquanto aguarda coleta, nome e endereço da unidade FedEx quando informados. Verifica atualizações até a cada 10 minutos enquanto você mantém o pacote aberto ou no dia da entrega com alertas ativados — e a cada 5 minutos a partir das 6h no horário local no dia em que a FedEx registra saída para entrega enquanto o rastreador da FedEx responde (pelos serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados). Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek omite nome, endereço, remetente, assinatura, peso e dimensões, e acompanha transferências Ground Economy ao USPS quando anunciadas ("Entrega por USPS").
+O Peek exibe a etapa, cada leitura com o local e a hora, no horário do seu aparelho, o mapa do trajeto, a data prevista, o horário da entrega e, enquanto aguarda coleta, nome e endereço da unidade FedEx quando informados. Verifica atualizações até a cada 10 minutos enquanto você mantém o pacote aberto ou no dia da entrega com alertas ativados — e a cada 5 minutos a partir das 6h no horário local no dia em que a FedEx registra saída para entrega enquanto o rastreador da FedEx responde (pelos serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados). Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek omite nome, endereço, remetente, assinatura, peso e dimensões, e acompanha transferências Ground Economy ao USPS quando anunciadas ("Entrega por USPS").
 
 ## Perguntas frequentes sobre o rastreamento FedEx
 
@@ -80,7 +80,7 @@ Essa primeira leitura indica apenas que o remetente enviou os dados eletrônicos
 
 ### Mensagem SMS da FedEx cobrando taxa de entrega é golpe?
 
-Pode ser. Órgãos de defesa do consumidor (como o Citizens Advice) alertam que mensagens pedindo pagamento em link desconhecido para liberar ou reagendar entrega geralmente são golpe. Não clique no link: confira o código diretamente em `fedex.com` ou no Peek. Veja [golpes por SMS de entrega](guide:delivery-scam-texts).
+Pode ser. O Citizens Advice, no Reino Unido, alerta que mensagens pedindo pagamento em link desconhecido para liberar ou reagendar entrega geralmente são golpe. Não clique no link: confira o código diretamente em `fedex.com` ou no Peek. No Reino Unido, encaminhe o SMS gratuitamente para 7726. Veja [golpes por SMS de entrega](guide:delivery-scam-texts).
 
 :::sources
 - [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – tributação de remessas expressas internacionais no Brasil

@@ -40,7 +40,7 @@ A página da UPS traz uma barra de progresso (`Label Created`, `We Have Your Pac
 
 ## Entrega não realizada e pontos UPS Access Point
 
-Quando o motorista não consegue entregar, a leitura informa destinatário ausente ou comércio fechado, e a UPS tenta novamente. Após a tentativa final, uma leitura seguinte indica se o pacote será mantido para retirada, levado a um Access Point ou devolvido ao remetente. Veja [entrega não realizada](guide:missed-delivery).
+Quando o motorista não consegue entregar, a leitura informa destinatário ausente ou comércio fechado, e a UPS tenta novamente. Após a tentativa final, uma leitura seguinte indica se a UPS vai reter o pacote, levá-lo a um Access Point ou devolvê-lo ao remetente. Veja [entrega não realizada](guide:missed-delivery).
 
 Quando a encomenda vai para um UPS Access Point, surgem `Delivered to UPS Access Point™` e `UPS Access Point™ possession`, e o Peek exibe o nome e o endereço do ponto. Retire antes de vencer o prazo: quando um pacote não retirado inicia retorno, aparece `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.`. Veja [encomenda não retirada](guide:uncollected-parcel).
 
@@ -50,7 +50,7 @@ Encomendas internacionais podem exigir pagamento de tributos antes da entrega: o
 
 Se a alfândega exigir seu número fiscal (como CPF ou CNPJ), a UPS exibe `Importer's consumer or business Identification number is required for clearance. Awaiting information from the customer.`, e o Peek exibe "Na alfândega" com "A alfândega precisa do seu número fiscal".
 
-- **Brasil:** remessas expressas internacionais seguem as regras do [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) (Imposto de Importação e ICMS estadual, além de eventual taxa administrativa da courier).
+- **Brasil:** a Receita Federal explica no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) como os tributos de compras internacionais são cobrados: em sites certificados, o Imposto de Importação e o ICMS são cobrados na compra; quando o site não os cobra, eles são cobrados na chegada ao Brasil.
 - **Reino Unido:** segundo o GOV.UK, a transportadora envia a cobrança de VAT/impostos e costuma guardar o pacote por cerca de 3 semanas antes de devolvê-lo se não houver pagamento.
 - **União Europeia e Irlanda:** desde 1º de julho de 2026, compras de até €150 de fora da UE pagam €3 de tarifa aduaneira por categoria de produto, e desde 1º de novembro de 2026 incidem mais €2 de taxa europeia de manuseio por categoria (independentemente do valor), cobrados pela transportadora com eventual taxa administrativa quando não pagos no checkout.
 
@@ -58,7 +58,7 @@ Mais detalhes em [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda UPS atrasada, perdida ou marcada como entregue
 
-Se o rastreamento parou de atualizar, leia [por que o rastreamento para de atualizar](guide:tracking-not-updating). Em compras online, a loja que contratou a UPS é responsável por fazer o pedido chegar até você (na Grã-Bretanha e na Irlanda, órgãos como Citizens Advice e CCPC reforçam o prazo padrão de 30 dias e a obrigação de reembolso ou reenvio pelo vendedor).
+Se o rastreamento parou de atualizar, leia [por que o rastreamento para de atualizar](guide:tracking-not-updating). Se você mora na Grã-Bretanha ou na Irlanda e comprou de uma loja, é a loja que responde pela entrega, mesmo quando a UPS transporta a encomenda. Se ela não chegar em 30 dias, o Citizens Advice diz que você pode cancelar a compra e pedir o reembolso; na Irlanda, a CCPC diz para combinar uma nova data com a loja e, se ela também passar, dá direito ao reembolso integral, e diz que uma encomenda danificada ou perdida no transporte deve ser substituída.
 
 Consta `DELIVERED`, mas você não recebeu? A página de `ups.com` pode mostrar onde o pacote foi deixado (`Left at: Front Door`, por exemplo) e um comprovante que o Peek não armazena. Confira em `ups.com` e acione a loja. Veja [entregue, mas não recebido](guide:delivered-not-received) e [encomenda perdida](guide:lost-parcel).
 
@@ -86,7 +86,7 @@ Não: o Peek apenas lê o rastreamento da UPS. Mudanças solicitadas diretamente
 
 ### SMS de entrega da UPS pedindo pagamento é golpe?
 
-Pode ser. Órgãos de defesa do consumidor (como o Citizens Advice) alertam que mensagens pedindo pagamento em link desconhecido para liberar ou reagendar entregas costumam ser golpe. Impostos legítimos aparecem no rastreamento oficial em `ups.com` ou no Peek. Veja [golpes por SMS de entrega](guide:delivery-scam-texts).
+Pode ser. O Citizens Advice, no Reino Unido, alerta que mensagens pedindo pagamento em link desconhecido para liberar ou reagendar entregas costumam ser golpe. Impostos legítimos aparecem no rastreamento oficial em `ups.com` ou no Peek. No Reino Unido, encaminhe o SMS gratuitamente para 7726. Veja [golpes por SMS de entrega](guide:delivery-scam-texts).
 
 :::sources
 - [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – regras tributárias para importações expressas no Brasil

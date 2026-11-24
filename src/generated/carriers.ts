@@ -17860,6 +17860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ed010b"
     },
     {
+      "id": "dobropost",
+      "catalog": "dobropost",
+      "slug": "dobropost-jiyun-chaxun",
+      "title": "DobroPost 集运单号查询：DBRPST 轨迹、清关与自提点",
+      "name": "DobroPost",
+      "color": "#ffbe2e"
+    },
+    {
       "id": "jiayang",
       "catalog": "jiayang",
       "slug": "jiayang-guoji-chaxun",
@@ -17868,12 +17876,36 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#105bcc"
     },
     {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "jumppoint-international-chaxun",
+      "title": "Jumppoint 国际快递查询：JP 单号、香港跨境时效与客服",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
       "id": "kuayuan-express",
       "catalog": "kuayuan-express",
       "slug": "kuayuan-express-chaxun",
       "title": "跨源速递（Kuayuan Express）单号查询：14 位运单与客服",
       "name": "Kuayuan Express",
       "color": "#084b86"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "pdu-youdilian-chaxun",
+      "title": "PDU 友递联单号查询：PD 尾缀运单、轨迹状态与上海客服",
+      "name": "PDU",
+      "color": "#005cfe"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "sengi-express-senji-chaxun",
+      "title": "森吉物流（Sengi Express）查询：中意单号、清关与客服",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
     },
     {
       "id": "yunda",
@@ -17890,6 +17922,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BUFFALO 国际物流单号查询：BUFZA 轨迹、南非清关与客服",
       "name": "BUFFALO",
       "color": "#bc8c4d"
+    },
+    {
+      "id": "bfe-express",
+      "catalog": "bfe-express",
+      "slug": "bfe-express-kuajing-chaxun",
+      "title": "BFE Express 国际快递查询：CK 与 WYB 单号、状态与客服",
+      "name": "BFE Express",
+      "color": "#122a88"
     }
   ],
   "nl": [

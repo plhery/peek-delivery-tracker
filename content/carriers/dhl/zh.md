@@ -48,9 +48,9 @@ DHL 将运单号称为 *Sendungsnummer*，按产品类型长度为 10 至 39 位
 
 如果派送时家中无人，DHL 可能会将包裹交给邻居或同住人，并通过通知卡或邮件告知；否则会转存至附近的邮局（Filiale）、Paketshop 或 Packstation。请以追踪页显示的实际地点为准（即便通知卡上写了其他网点）。
 
-- **邮局（Filiale）或 Paketshop：** 自首次投递次日起保管 **7 个工作日**（含周六）。在邮局取件须携带带照片的身份证明（不一定需要纸质通知卡）；他人代领须持你的亲笔授权书、通知卡及代领人证件。
+- **邮局（Filiale）或 Paketshop：** 自首次投递次日起保管 **7 个工作日**（含周六）。在邮局取件须携带带照片的身份证明（不一定需要纸质通知卡）；他人代领须持你签名的授权书、通知卡及代领人证件。
 - **Packstation 智能柜：** 直接寄往 Packstation 的包裹保管 **7 个自然日**，投递失败转存的包裹保管 **9 个自然日**，且不可延期。可用 Post & DHL App 取件码开柜，投递失败转存件也可用通知卡取件。
-- **申请二次派送：** 错过派送后，可在保管期截止前至少 2 天申请免费二次派送，通常在 2 个工作日后送达。
+- **申请二次派送：** 错过派送后，可在保管期截止前至少 2 天申请二次派送，通常在 2 个工作日后送达。
 
 派送前，DHL 允许免费将送达日顺延最多 6 个工作日（*Liefertag*）、指定安全放置点（*Ablageort*）或邻居代收；注册用户还可改投至 Packstation 或邮局网点。但包裹在途后无法直接更改收件地址。
 
@@ -76,7 +76,7 @@ DHL 提醒警惕带有短链接或异常国家区号的虚假短信，以及印�
 
 ## 使用 Peek 追踪 DHL Paket 包裹
 
-在 [Peek](/) 中输入 18 位 `JJD` 面单号（其中 `JJD0146…` 归属 DHL Express）、校验有效的 `0034043…` 20 位条码或 `C…DE` / `L…DE` 国际单号时，系统会立刻识别为 DHL。12 位 Identcode 与 10 位单号由多家承运商共享，照常粘贴即可（Peek 支持超过 4,500 家承运商），系统会向包括 DHL 在内的候选承运商核实；若归类不准或分到了其他 DHL 网络，点击“更换”选择 DHL 即可。粘贴 `dhl.de`、`deutschepost.de` 或 `nolp.dhl.de` 链接同样有效。
+在 [Peek](/) 中输入 18 位 `JJD` 面单号（其中 `JJD0146…` 归属 DHL Express）、校验有效的 `0034043…` 20 位条码或 `C…DE` / `L…DE` 国际单号时，系统会立刻识别为 DHL。12 位 Identcode 由多家承运商共用：Peek 会询问其中几家是否认得这个单号，DHL 也在其中。10 位单号同样适用于多家承运商：照常粘贴即可，Peek 支持超过 4,500 家承运商。若包裹没有归到 DHL，或分到了其他 DHL 网络，点击“更换”选择 DHL 即可。粘贴 `dhl.de`、`deutschepost.de` 或 `nolp.dhl.de` 链接同样有效。
 
 Peek 默认以英文读取 `dhl.de` 轨迹（当 Peek 语言设为德文时读德文），在直连受阻时自动切换服务器端浏览器。若多票包裹共用同一 12 位单号，DHL 会要求验证收件邮编：此时包裹页会提示“添加邮编”，添加前由聚合追踪服务代为补全；若 DHL 等待邮编或拒绝所填邮编且一整天无其他结果，Peek 每天检查一次，补充或修改邮编后会立即重查。当 DHL 提示该单号属于其他 DHL 业务线时，同样由追踪服务补全。
 
@@ -127,4 +127,5 @@ DHL 说明德国境内包裹通常在寄出后 **1 至 2 个工作日**内送达
 - [DHL: 安全警示（德文）](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – 绝不通过短信索要个人信息或收款
 - [Deutsche Post/DHL: 服务与资费手册（PDF）](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – 免费追踪、Post & DHL App 与客服热线时段
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 对 DHL Paket 的英文/德文解析、邮编核验与状态映射
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – DHL 等待或拒绝邮编期间每天检查一次，添加或修改邮编后立即重查
 :::

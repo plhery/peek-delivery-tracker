@@ -76,7 +76,7 @@ A DHL alerta contra SMS falsos com links encurtados ou códigos de país incomun
 
 ## Rastrear encomendas DHL Paket com o Peek
 
-O [Peek](/) identifica a DHL na hora a partir de etiquetas `JJD` com 18 dígitos (`JJD0146…` segue pela DHL Express), códigos de barras `0034043…` válidos ou códigos postais `C…DE` / `L…DE`. Códigos de 12 dígitos (*Identcode*) e de 10 dígitos são compartilhados por várias transportadoras — cole normalmente, pois o Peek acompanha mais de 4.500 transportadoras e consulta a DHL entre as candidatas; se precisar corrigir a transportadora ou a divisão DHL, toque em "Trocar". Links de `dhl.de`, `deutschepost.de` e `nolp.dhl.de` também são reconhecidos.
+O [Peek](/) identifica a DHL na hora a partir de etiquetas `JJD` com 18 dígitos (`JJD0146…` segue pela DHL Express), códigos de barras `0034043…` válidos ou códigos postais `C…DE` / `L…DE`. Um *Identcode* de 12 dígitos serve a várias transportadoras: o Peek pergunta a algumas delas se o conhecem, a DHL entre elas. Um código de 10 dígitos também serve a várias: cole-o mesmo assim, pois o Peek acompanha mais de 4.500 transportadoras. Se a encomenda não ficar com a DHL, escolha "DHL" em "Trocar", o que também corrige uma encomenda atribuída à rede DHL errada. Links de `dhl.de`, `deutschepost.de` e `nolp.dhl.de` também são reconhecidos.
 
 O Peek lê o rastreamento de `dhl.de` em inglês (ou em alemão se o Peek estiver em alemão), recorrendo a navegador próprio no servidor quando a DHL bloqueia a consulta direta. Quando várias remessas compartilham um código de 12 dígitos, a DHL solicita o código postal de entrega: o pacote pede "Adicionar código postal" e serviços de rastreamento suprem as leituras até você informá-lo (enquanto aguarda ou recusa o código postal sem resposta de outros serviços por um dia, o Peek checa uma vez por dia, e imediatamente ao atualizar o código postal).
 
@@ -127,4 +127,5 @@ Não. Tanto o DHL Päckchen quanto o DHL Päckchen International não têm rastr
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – política de nunca pedir dados ou pagamento por SMS
 - [Deutsche Post/DHL: Leistungen und Preise (PDF)](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – rastreamento gratuito, app Post & DHL e horários
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – dados lidos da DHL Paket pelo Peek, verificação de código postal e mapeamento de status
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – verificação diária enquanto a DHL aguarda ou recusa o código postal, e imediata ao adicionar ou mudar o código postal
 :::

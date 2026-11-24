@@ -6958,6 +6958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#545859"
     },
     {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "suivi-go-express",
+      "title": "Suivi GO! Express\u00a0: lettres de voiture 12 chiffres et aide",
+      "name": "GO! Express",
+      "color": "#b9242b"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9208,6 +9216,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#545859"
     },
     {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "tracciamento-go-express",
+      "title": "Tracciamento GO! Express: codici a 12 cifre, stati e aiuto",
+      "name": "GO! Express",
+      "color": "#b9242b"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "tracciamento-5post",
@@ -11456,6 +11472,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento E24 (Metro Supply Chain): Canadá y ayuda",
       "name": "E24",
       "color": "#545859"
+    },
+    {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "seguimiento-go-express",
+      "title": "Seguimiento GO! Express: albaranes de 12 dígitos y ayuda",
+      "name": "GO! Express",
+      "color": "#b9242b"
     },
     {
       "id": "oca",
@@ -13714,6 +13738,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio E24 (Metro Supply Chain): Canadá e contactos",
       "name": "E24",
       "color": "#545859"
+    },
+    {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "rastreio-go-express",
+      "title": "Rastreio GO! Express: guias de 12 dígitos, estados e apoio",
+      "name": "GO! Express",
+      "color": "#b9242b"
     },
     {
       "id": "5post",
@@ -16030,6 +16062,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie E24 (Metro Supply Chain): Kanada i kontakt",
       "name": "E24",
       "color": "#545859"
+    },
+    {
+      "id": "go-express",
+      "catalog": "go-express",
+      "slug": "sledzenie-go-express",
+      "title": "Śledzenie GO! Express: 12-cyfrowe listy przewozowe i pomoc",
+      "name": "GO! Express",
+      "color": "#b9242b"
     },
     {
       "id": "5post",

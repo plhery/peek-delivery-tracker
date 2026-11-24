@@ -294,7 +294,7 @@
   { "id": "chit-chats", "catalog": "chit-chats", "name": "Chit Chats", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dpd-hu", "catalog": "dpd-hu", "name": "DPD Hungary", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "e24metro-ca", "catalog": "e24metro-ca", "name": "E24", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "go-express", "catalog": "go-express", "name": "GO! Express", "languages": ["en", "de"] },
+  { "id": "go-express", "catalog": "go-express", "name": "GO! Express", "languages": ["en", "de", "fr", "es", "it", "pt", "pl"] },
   { "id": "kuehne-nagel", "catalog": "kuehne-nagel", "name": "Kuehne+Nagel", "languages": ["en", "de"] },
   { "id": "memphis-courier", "catalog": "memphis-courier", "name": "Memphis Courier", "languages": ["en", "pt-br"] },
   { "id": "oca", "catalog": "oca", "name": "OCA", "languages": ["en", "es"] },

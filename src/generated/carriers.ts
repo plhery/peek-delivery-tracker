@@ -14830,6 +14830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "rastreamento-dpd-polonia",
+      "title": "Rastreamento DPD Poland: status, pontos Pickup e contato",
+      "name": "DPD Poland",
+      "color": "#dc0032"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "rastreamento-4px",
@@ -15180,6 +15188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento India Post: códigos Speed Post e status",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "rastreamento-jt-express-oriente-medio",
+      "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
     },
     {
       "id": "j-and-t-br",
@@ -17922,6 +17938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SEUR 西班牙快递查询：单号、西语状态与 Pickup 自提点",
       "name": "SEUR",
       "color": "#0063b3"
+    },
+    {
+      "id": "dpd-pl",
+      "catalog": "dpd-pl",
+      "slug": "dpd-poland-tracking",
+      "title": "DPD Poland 波兰快递查询：14 位单号、状态与自提柜",
+      "name": "DPD Poland",
+      "color": "#dc0032"
     },
     {
       "id": "4px",

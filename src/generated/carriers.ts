@@ -14758,6 +14758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "rastreamento-poste-italiane",
+      "title": "Rastreamento Poste Italiane: códigos, status e retirada",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "rastreamento-4px",
@@ -14812,6 +14820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento GOFO Express: códigos GFUS, fotos e suporte",
       "name": "GOFO Express",
       "color": "#fc4c02"
+    },
+    {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "rastreamento-speedx",
+      "title": "Rastreamento SpeedX: status, tentativas de entrega e contato",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
     },
     {
       "id": "j-and-t-de",
@@ -17548,6 +17564,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-tracking",
+      "title": "Poste Italiane 物流查询：单号、状态与取件指南",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "disifang-4px-wuliu-chaxun",
@@ -17618,6 +17642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GOFO Express 美国快递查询：GFUS 单号、签收照片与客服",
       "name": "GOFO Express",
       "color": "#fc4c02"
+    },
+    {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "speedx-tracking",
+      "title": "SpeedX 物流查询：单号格式、状态说明与客服联系",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
     },
     {
       "id": "australia-post",

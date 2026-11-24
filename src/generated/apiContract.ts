@@ -20731,7 +20731,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "pargo"
     },
     "linkRules": [
       {
@@ -42671,7 +42671,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Dubai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "emirates-courier-express"
     },
     "trackingUrlTemplate": "https://www.emiratescx.com/en/tracking-details?awb_number={trackingNumber}",
     "linkRules": [
@@ -68932,6 +68932,75 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://commerciveparcel.com/#track"
+  },
+  "mbe-es": {
+    "displayName": "MBE Spain",
+    "aliases": [
+      "Mail Boxes Etc. Spain",
+      "Mail Boxes Etc. España",
+      "MBE España",
+      "MBE Spain 2000"
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#CC0000",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "mbe-es"
+    },
+    "trackingUrlTemplate": "https://www.mbe.es/es/tracking?c={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "mbe.es",
+          "www.mbe.es"
+        ],
+        "pathPattern": "^/es/tracking$",
+        "params": [
+          "c"
+        ],
+        "detectFromNumber": true
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.mbe.es/es/tracking",
+    "helpUrl": "https://www.mbe.es/es/faq"
+  },
+  "planete-courrier": {
+    "displayName": "Planète Courrier",
+    "aliases": [
+      "Planete Courrier",
+      "Planète Courrier Inc."
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#241F59",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "planete-courrier"
+    },
+    "trackingUrlTemplate": "https://www.planetecourrier.com/fr/suivi-courrier.html?r={trackingNumber}&detail=true",
+    "linkRules": [
+      {
+        "domains": [
+          "planetecourrier.com",
+          "www.planetecourrier.com"
+        ],
+        "pathPattern": "^/(?:fr/suivi-courrier|en/parcel-tracking)\\.html$",
+        "params": [
+          "r"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.planetecourrier.com/fr/suivi-courrier.html",
+    "helpUrl": "https://www.planetecourrier.com/fr/nous-joindre.html"
   }
 } as const;
 
@@ -71039,7 +71108,9 @@ export const CARRIER_IDS = [
   "kargolife",
   "shipagent-in",
   "cambodia-post",
-  "commercive-parcel"
+  "commercive-parcel",
+  "mbe-es",
+  "planete-courrier"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

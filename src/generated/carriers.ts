@@ -15022,6 +15022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "rastreamento-juxi-express",
+      "title": "Rastreamento Juxi Express: códigos JXC, entregas e suporte",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "j-and-t-au",
       "catalog": "j-and-t-au",
       "slug": "rastreamento-jt-express-australia",
@@ -15052,6 +15060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DHLink: códigos, status e quem entrega",
       "name": "DHLink",
       "color": "#143167"
+    },
+    {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "rastreamento-tnt-italia",
+      "title": "Rastreamento TNT Italy: guia, status e entrega perdida",
+      "name": "TNT Italy",
+      "color": "#ff6600"
     },
     {
       "id": "sf-express",
@@ -18188,6 +18204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#143167"
     },
     {
+      "id": "tnt-it",
+      "catalog": "tnt-it",
+      "slug": "tnt-italy-tracking",
+      "title": "TNT Italy 意大利快递查询：运单号、状态与错投处理",
+      "name": "TNT Italy",
+      "color": "#ff6600"
+    },
+    {
       "id": "sf-express",
       "catalog": "sf-express",
       "slug": "shunfeng-sf-express-wuliu-chaxun",
@@ -18498,6 +18522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "胜兴旺（SXW Express）物流查询：SXW单号与状态",
       "name": "SXW Express",
       "color": "#003876"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "jt-express-brazil-tracking",
+      "title": "极兔巴西（J&T Express Brazil）查询：单号、状态与清关",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
     },
     {
       "id": "anjun",

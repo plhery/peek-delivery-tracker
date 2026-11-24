@@ -25,7 +25,7 @@ Según el [soporte de BUFFALO](https://www.buffaloex.com/support.html) y el fluj
 
 | BUFFALO indica | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
-| `Order Confirmed` | Pedido creado mientras el paquete aún está con el proveedor o de camino al almacén de BUFFALO en China. | «Etiqueta creada» |
+| `Order Confirmed` | Pedido creado mientras el paquete aún está con el proveedor, antes de su envío al almacén de BUFFALO en China. | «Etiqueta creada» |
 | `Enter Warehouse` | El paquete llegó al almacén de BUFFALO en China. | «Admitido por el transportista» |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Salió del almacén de BUFFALO en China y fue expedido a Sudáfrica por transporte aéreo o marítimo. | «En tránsito» |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Despacho de exportación en China a la espera del vuelo, o aduana de importación sudafricana; es necesario pagar el IVA y los derechos antes del levante. | «En aduanas» |
@@ -40,7 +40,7 @@ Según el [soporte de BUFFALO](https://www.buffaloex.com/support.html) y [Sobre 
 
 - **IVA y derechos de importación:** cuando el seguimiento muestra `Customs VAT and duty can be paid now, please pay in time`, corresponde abonar el IVA y los derechos antes de que la aduana sudafricana libere el paquete. Los vídeos de IVA y aranceles de BUFFALO explican el pago online o por transferencia bancaria y la carga del justificante, y su formulario atiende dudas sobre pagos fiscales y sobre documentos de identidad o códigos de importador. Consulta [paquetes retenidos en aduanas](guide:customs).
 - **Horarios y plazo de entrega:** BUFFALO entrega en toda Sudáfrica **de lunes a sábado, de 08:00 a 17:00** (sin reparto domingos ni festivos). Una vez en tránsito, BUFFALO calcula la entrega en **1–5 días**, según la dirección del destinatario.
-- **Cambios de dirección, teléfono o valor aduanero:** según las preguntas frecuentes de BUFFALO, el valor declarado, la cantidad y el código SA **no** pueden cambiarse una vez que el paquete entra en el almacén de tránsito en China, y la dirección de entrega o teléfono **no** pueden modificarse después de que el paquete llegue a Sudáfrica.
+- **Cambios de dirección, teléfono o valor aduanero:** según las preguntas frecuentes de BUFFALO, el valor declarado, la cantidad y el código SA **no** pueden cambiarse una vez que el paquete entra en el almacén de tránsito, y la dirección de entrega o teléfono **no** pueden modificarse después de que el paquete llegue a Sudáfrica.
 
 ## Paquete de BUFFALO retrasado, devuelto al depósito o extraviado
 
@@ -67,7 +67,7 @@ Peek no tiene consulta directa con BUFFALO y sigue los paquetes de BUFFALO a tra
 
 Mientras Peek sigue el paquete a través de servicios de seguimiento, comprueba cada hora, cada 3 horas tras un día sin nuevos escaneos y hasta cada 15 minutos el día en que el paquete está en reparto, mientras tengas el paquete abierto o las notificaciones activadas.
 
-Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo señala con el día de ese escaneo, por ejemplo «Sin novedades desde el lun, 12 oct». La página del paquete muestra entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a BUFFALO.», con un enlace «Pide ayuda a BUFFALO» hacia la página de contacto de BUFFALO. Tras tres semanas sin ningún escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a BUFFALO.»
+Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo señala con el día de ese escaneo, por ejemplo «Sin novedades desde el lun 12 oct». La página del paquete muestra entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a BUFFALO.», con un enlace «Pide ayuda a BUFFALO» hacia la página de contacto de BUFFALO. Tras tres semanas sin ningún escaneo nuevo, dice «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a BUFFALO.»
 
 Puedes elegir avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo supervisa las actualizaciones de seguimiento y no puede pagar aranceles ante SARS, enviar códigos de importador ni contactar con BUFFALO por ti.
 

@@ -25,7 +25,7 @@ Laut [BUFFALO-Support](https://www.buffaloex.com/support.html) und dem Tracking-
 
 | BUFFALO meldet | Was das für dich bedeutet | Peek zeigt |
 | --- | --- | --- |
-| `Order Confirmed` | Auftrag erstellt, während das Paket noch beim Lieferanten oder auf dem Weg ins BUFFALO-Lager in China ist. | „Etikett erstellt“ |
+| `Order Confirmed` | Auftrag erstellt, während das Paket noch beim Lieferanten ist, bevor es ins BUFFALO-Lager in China geschickt wird. | „Etikett erstellt“ |
 | `Enter Warehouse` | Das Paket ist im BUFFALO-Lager in China eingetroffen. | „Beim Paketdienst eingegangen“ |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Hat das China-Lager von BUFFALO verlassen und wurde per Luft- oder Seefracht nach Südafrika versandt. | „Unterwegs“ |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Ausfuhrabfertigung in China vor dem Flug oder südafrikanische Einfuhrverzollung; Einfuhr-MwSt. und Zoll müssen vor der Freigabe bezahlt werden. | „Beim Zoll“ |
@@ -40,12 +40,12 @@ Laut [BUFFALO-Support](https://www.buffaloex.com/support.html) und [Über BUFFAL
 
 - **Einfuhr-MwSt. und Zoll:** Zeigt das Tracking `Customs VAT and duty can be paid now, please pay in time`, müssen Einfuhr-MwSt. und Zoll bezahlt werden, bevor der südafrikanische Zoll das Paket freigibt. Die Mehrwertsteuer- und Zoll-Videos von BUFFALO erklären Online- oder Banküberweisung und den Upload des Zahlungsbelegs; über das Anfrageformular lassen sich Fragen zu Steuerzahlungen sowie zu Ausweis- oder Importeurcodes klären. Siehe [Pakete beim Zoll](guide:customs).
 - **Lieferzeiten & Laufzeit:** BUFFALO stellt in ganz Südafrika **Montag bis Samstag von 08:00 bis 17:00 Uhr** zu (keine Zustellung an Sonn- und Feiertagen). Sobald das Paket im Tracking unterwegs ist, rechnet BUFFALO je nach Adresse mit **1–5 Tagen** bis zur Zustellung.
-- **Änderung von Adresse, Telefon oder Zollwert:** Laut BUFFALO-FAQ können deklarierter Wert, Menge und HS-Code **nicht** mehr geändert werden, sobald das Paket das chinesische Transitlager erreicht hat, und Lieferadresse oder Telefonnummer **nicht** mehr, nachdem das Paket in Südafrika eingetroffen ist.
+- **Änderung von Adresse, Telefon oder Zollwert:** Laut BUFFALO-FAQ können deklarierter Wert, Menge und HS-Code **nicht** mehr geändert werden, sobald das Paket das Transitlager erreicht hat, und Lieferadresse oder Telefonnummer **nicht** mehr, nachdem das Paket in Südafrika eingetroffen ist.
 
 ## BUFFALO-Paket verspätet, zurück im Depot oder vermisst
 
 - **Tracking aktualisiert nicht:** Laut BUFFALO-FAQ befindet sich das Paket auf dem Weg und hat den nächsten Scanpunkt noch nicht erreicht; der Kundenservice kann Näheres nennen. Siehe [warum die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
-- **Abendlicher `RETURNS`-Scan:** In Scans lokaler Kuriere über Tracking-Dienste erscheint `RETURNS` mitunter am Abend nach `SCAN VEHICLE DEPARTURE`: Das Paket kam nach einer Tour zurück ins Depot und ging am nächsten Morgen erneut raus. `Returned to BUFFALO warehouse[...]` folgt hingegen auf eine fehlgeschlagene Zustellung und erfordert Rückmeldung.
+- **Abendlicher `RETURNS`-Scan:** In Scans lokaler Kuriere über Tracking-Dienste erscheint `RETURNS` mitunter am Abend nach `SCAN VEHICLE DEPARTURE`: Das Paket kam nach einer Tour zurück ins Depot und ging am nächsten Morgen erneut raus. `Returned to BUFFALO warehouse[...]` folgt hingegen auf eine fehlgeschlagene Zustellung, und du solltest dich darum kümmern.
 - **Als `Client Received` markiert, aber nicht da:** BUFFALO empfiehlt, zuerst bei Familie, Nachbarn und Wohnanlagen-/Gebäudesicherheit nachzufragen und dann den Kundenservice Südafrika (`support@buffaloex.com`) zu kontaktieren. Siehe [zugestellt, aber nicht erhalten](guide:delivered-not-received), [verlorenes Paket](guide:lost-parcel), [beschädigtes Paket](guide:damaged-parcel) und [zurück an Absender](guide:returned-to-sender).
 
 ## BUFFALO Kundenservice und Kontakt
@@ -65,11 +65,11 @@ Offizielle Kontaktdaten auf [BUFFALO Kontakt](https://www.buffaloex.com/contact.
 
 Peek hat keine direkte BUFFALO-Abfrage und verfolgt BUFFALO-Pakete über Tracking-Dienste. Dabei wertet Peek deren Scans nach den eigenen BUFFALO-Textregeln aus, sodass ein abendliches `RETURNS` auf „Unterwegs“ bleibt, `SCAN VEHICLE DEPARTURE` als „In Zustellung“ und `Returned to BUFFALO warehouse[...]` als „Problem gemeldet“ erscheint; jeder Scan wird mit seiner Phase („Etikett erstellt“, „Beim Paketdienst eingegangen“, „Unterwegs“, „Beim Zoll“, „In Zustellung“, „Problem gemeldet“, „Zugestellt“) angezeigt.
 
-Während Peek das Paket über Tracking-Dienste verfolgt, fragt Peek stündlich nach, alle 3 Stunden nach einem Tag ohne neuen Scan und am Tag der Zustellung bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiviert sind.
+Während Peek das Paket über Tracking-Dienste verfolgt, fragt Peek stündlich nach, alle 3 Stunden nach einem Tag ohne neuen Scan und an dem Tag, an dem das Paket in Zustellung ist, bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiviert sind.
 
-Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo., 12. Okt.“. Auf der Paketseite steht dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei BUFFALO nach.“, samt Link „Hol dir Hilfe bei BUFFALO“ zur Kontaktseite von BUFFALO. Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei BUFFALO nach.“
+Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Auf der Paketseite steht dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei BUFFALO nach.“, samt Link „Hol dir Hilfe bei BUFFALO“ zur Kontaktseite von BUFFALO. Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei BUFFALO nach.“
 
-Bei den Benachrichtigungen kannst du zwischen „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Peek beobachtet ausschließlich Tracking-Updates und kann weder SARS-Zollgebühren bezahlen noch Importeurcodes übermitteln oder BUFFALO für dich kontaktieren.
+Bei den Benachrichtigungen kannst du zwischen „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“ wählen. Peek beobachtet ausschließlich Tracking-Updates und kann weder SARS-Zollgebühren bezahlen noch Importeurcodes übermitteln oder BUFFALO für dich kontaktieren.
 
 ## Häufige Fragen zur BUFFALO-Sendungsverfolgung
 

@@ -25,7 +25,7 @@ De acordo com o [apoio BUFFALO](https://www.buffaloex.com/support.html) e o feed
 
 | A BUFFALO indica | O que significa para ti | O Peek mostra |
 | --- | --- | --- |
-| `Order Confirmed` | Pedido criado enquanto a encomenda ainda está com o fornecedor ou a caminho do armazém BUFFALO na China. | «Etiqueta criada» |
+| `Order Confirmed` | Pedido criado enquanto a encomenda ainda está com o fornecedor, antes do envio para o armazém BUFFALO na China. | «Etiqueta criada» |
 | `Enter Warehouse` | A encomenda chegou ao armazém da BUFFALO na China. | «Aceite pela transportadora» |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Saiu do armazém BUFFALO na China e seguiu para a África do Sul por via aérea ou marítima. | «Em trânsito» |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Despacho de exportação na China à espera do voo ou alfândega de importação sul-africana; IVA e direitos aduaneiros têm de ser pagos antes da libertação. | «Na alfândega» |
@@ -40,7 +40,7 @@ Segundo o [apoio BUFFALO](https://www.buffaloex.com/support.html) e [Sobre a BUF
 
 - **IVA e direitos de importação:** quando o rastreio mostra `Customs VAT and duty can be paid now, please pay in time`, o IVA e os direitos de importação têm de ser pagos antes de a alfândega sul-africana libertar a encomenda. Os vídeos de IVA/direitos da BUFFALO explicam o pagamento online ou por transferência bancária e o envio do comprovativo, e o formulário de apoio responde a questões sobre pagamentos fiscais e sobre identificação ou códigos de importador. Vê [encomendas retidas na alfândega](guide:customs).
 - **Horários e prazo de entrega:** a BUFFALO entrega na África do Sul **de segunda a sábado, das 08:00 às 17:00** (sem entregas aos domingos nem feriados). Assim que o rastreio mostra a encomenda em trânsito, a BUFFALO prevê entrega em **1–5 dias**, conforme a morada do destinatário.
-- **Alterações de morada, telefone ou valor aduaneiro:** segundo as FAQ da BUFFALO, o valor declarado, a quantidade e o código SH **não** podem ser alterados depois de a encomenda dar entrada no armazém de trânsito na China, e a morada de entrega ou telefone **não** podem ser modificados após a chegada à África do Sul.
+- **Alterações de morada, telefone ou valor aduaneiro:** segundo as FAQ da BUFFALO, o valor declarado, a quantidade e o código SH **não** podem ser alterados depois de a encomenda dar entrada no armazém de trânsito, e a morada de entrega ou telefone **não** podem ser modificados após a chegada à África do Sul.
 
 ## Encomenda BUFFALO atrasada, devolvida ao armazém ou desaparecida
 
@@ -67,7 +67,7 @@ O Peek não faz consulta direta à BUFFALO e acompanha encomendas BUFFALO atrav�
 
 Enquanto o Peek acompanha a encomenda através de serviços de rastreio, verifica de hora a hora, de 3 em 3 horas após um dia sem novos registos e até de 15 em 15 minutos no dia em que a encomenda está em distribuição, enquanto tiveres a encomenda aberta ou as notificações ativadas.
 
-Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia desse registo, como «Sem atualizações desde seg., 12/10». A página da encomenda mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a BUFFALO.», com o link «Pede ajuda a BUFFALO» para a página de contactos da BUFFALO. Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a BUFFALO.»
+Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-a com o dia desse registo, como «Sem atualizações desde seg 12 out». A página da encomenda mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a BUFFALO.», com o link «Pede ajuda a BUFFALO» para a página de contactos da BUFFALO. Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a BUFFALO.»
 
 Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek acompanha apenas as atualizações de rastreio e não pode pagar direitos aduaneiros à SARS, submeter códigos de importador nem contactar a BUFFALO por ti.
 

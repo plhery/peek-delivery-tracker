@@ -25,7 +25,7 @@ Według [pomocy BUFFALO](https://www.buffaloex.com/support.html) i strumienia zd
 
 | Komunikat BUFFALO | Co oznacza dla Ciebie | Peek pokazuje |
 | --- | --- | --- |
-| `Order Confirmed` | Zamówienie utworzone, gdy paczka jest jeszcze u sprzedawcy w drodze do magazynu BUFFALO w Chinach. | „Zarejestrowana” |
+| `Order Confirmed` | Zamówienie utworzone, gdy paczka jest jeszcze u dostawcy, przed wysłaniem do magazynu BUFFALO w Chinach. | „Zarejestrowana” |
 | `Enter Warehouse` | Paczka dotarła do magazynu BUFFALO w Chinach. | „Przyjęta przez przewoźnika” |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Opuściła magazyn BUFFALO w Chinach i została wysłana do RPA frachtem lotniczym lub morskim. | „W transporcie” |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Odprawa eksportowa w Chinach przed wylotem lub odprawa importowa w RPA; VAT importowy i cło muszą zostać opłacone przed zwolnieniem paczki. | „W urzędzie celnym” |
@@ -40,7 +40,7 @@ Według [pomocy BUFFALO](https://www.buffaloex.com/support.html) oraz [O BUFFALO
 
 - **VAT importowy i cło:** gdy śledzenie pokazuje `Customs VAT and duty can be paid now, please pay in time`, trzeba opłacić VAT i cło, zanim służba celna RPA zwolni paczkę. Filmy BUFFALO o VAT i cle wyjaśniają płatność online lub przelewem bankowym oraz przesłanie potwierdzenia, a formularz kontaktowy obsługuje pytania o podatki oraz dokumenty tożsamości lub kody importera. Zobacz [przesyłki zatrzymane na cle](guide:customs).
 - **Godziny i czas dostawy:** BUFFALO doręcza w całej RPA **od poniedziałku do soboty w godz. 08:00–17:00** (bez doręczeń w niedziele i święta). Gdy paczka widnieje w transporcie, BUFFALO zakłada doręczenie w ciągu **1–5 dni**, zależnie od adresu odbiorcy.
-- **Zmiana adresu, telefonu lub wartości celnej:** według FAQ BUFFALO zadeklarowanej wartości, liczby sztuk i kodu HS **nie można** zmienić po przyjęciu paczki do magazynu tranzytowego w Chinach, a adresu dostawy ani numeru telefonu **nie można** zmienić po przybyciu paczki do RPA.
+- **Zmiana adresu, telefonu lub wartości celnej:** według FAQ BUFFALO zadeklarowanej wartości, liczby sztuk i kodu HS **nie można** zmienić po przyjęciu paczki do magazynu tranzytowego, a adresu dostawy ani numeru telefonu **nie można** zmienić po przybyciu paczki do RPA.
 
 ## Przesyłka BUFFALO opóźniona, zwrócona do magazynu lub zaginiona
 
@@ -63,11 +63,11 @@ Oficjalne dane kontaktowe ze strony [Kontakt BUFFALO](https://www.buffaloex.com/
 
 [Peek](/) wykrywa BUFFALO automatycznie jako jedynego kandydata po wpisaniu 17-znakowego kodu `BUFZA...YQ` (`BUFZA6482917305YQ` lub `BUFZA4SK73918BUYQ`, wymyślone), a także rozpoznaje wklejone linki `buffaloex.com/tracks.html?order=`, `buffaloex.com/track.html?order=` i `buffaloex.com/express/record?order=`. Jeśli musisz wybrać BUFFALO ręcznie, stuknij „Zmień” podczas dodawania lub „Zmień przewoźnika” na ekranie przesyłki (wyszukanie „Buffaloex”, „Buffalo Express” albo „BUFFALO International” także go znajduje).
 
-Peek nie ma bezpośredniego połączenia z BUFFALO i śledzi paczki BUFFALO przez zewnętrzne usługi śledzenia. Stosuje jednak własne reguły słownictwa BUFFALO, więc wieczorne `RETURNS` pozostaje „W transporcie”, `SCAN VEHICLE DEPARTURE` pokazuje „W doręczeniu”, a `Returned to BUFFALO warehouse[...]` pokazuje „Zgłoszono problem”; każdy skan wyświetla się wraz z etapem („Zarejestrowana”, „Przyjęta przez przewoźnika”, „W transporcie”, „W urzędzie celnym”, „W doręczeniu”, „Zgłoszono problem”, „Dostarczona”).
+Peek nie ma bezpośredniego połączenia z BUFFALO i śledzi paczki BUFFALO przez zewnętrzne usługi śledzenia. Odczytuje jednak ich skany według reguł dla sformułowań BUFFALO, więc wieczorne `RETURNS` pozostaje „W transporcie”, `SCAN VEHICLE DEPARTURE` pokazuje „W doręczeniu”, a `Returned to BUFFALO warehouse[...]` pokazuje „Zgłoszono problem”; każdy skan wyświetla się wraz z etapem („Zarejestrowana”, „Przyjęta przez przewoźnika”, „W transporcie”, „W urzędzie celnym”, „W doręczeniu”, „Zgłoszono problem”, „Dostarczona”).
 
-Gdy Peek śledzi przesyłkę przez zewnętrzne usługi śledzenia, sprawdza status co godzinę, co 3 godziny po dniu bez nowego skanu i do co 15 minut w dniu, gdy paczka jest w doręczeniu, dopóki masz przesyłkę otwartą lub włączone powiadomienia.
+Gdy Peek śledzi przesyłkę przez zewnętrzne usługi śledzenia, sprawdza status co godzinę, co 3 godziny po dniu bez nowego skanu i do co 15 minut w dniu, w którym paczka jest w doręczeniu, dopóki masz przesyłkę otwartą lub włączone powiadomienia.
 
-Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika BUFFALO.” oraz link „Poproś przewoźnika BUFFALO o pomoc” do strony kontaktowej BUFFALO. Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika BUFFALO.”
+Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika BUFFALO.” oraz link „Poproś przewoźnika BUFFALO o pomoc” do strony kontaktowej BUFFALO. Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika BUFFALO.”
 
 Możesz wybrać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek jedynie monitoruje aktualizacje śledzenia i nie może opłacić cła w SARS, przesłać kodów importera ani skontaktować się z BUFFALO za Ciebie.
 

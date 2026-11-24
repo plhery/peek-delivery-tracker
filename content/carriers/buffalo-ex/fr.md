@@ -25,7 +25,7 @@ D’après le [support BUFFALO](https://www.buffaloex.com/support.html) et le fl
 
 | BUFFALO indique | Ce que cela signifie pour toi | Peek affiche |
 | --- | --- | --- |
-| `Order Confirmed` | Commande créée alors que le colis est encore chez le fournisseur ou en route vers l’entrepôt BUFFALO en Chine. | « Étiquette créée » |
+| `Order Confirmed` | Commande créée alors que le colis est encore chez le fournisseur, avant son envoi à l’entrepôt BUFFALO en Chine. | « Étiquette créée » |
 | `Enter Warehouse` | Le colis est arrivé dans l’entrepôt BUFFALO en Chine. | « Pris en charge » |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Sorti de l’entrepôt BUFFALO en Chine et expédié vers l’Afrique du Sud par fret aérien ou maritime. | « En transit » |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Dédouanement export en Chine en attente du vol, ou douane import sud-africaine ; la TVA et les droits d’importation doivent être réglés avant libération. | « À la douane » |
@@ -40,7 +40,7 @@ D’après le [support BUFFALO](https://www.buffaloex.com/support.html) et [À p
 
 - **TVA et droits d’importation :** lorsque le suivi affiche `Customs VAT and duty can be paid now, please pay in time`, la TVA et les droits d’importation doivent être réglés avant que la douane sud-africaine ne libère le colis. Les vidéos TVA/droits de BUFFALO expliquent le paiement en ligne ou par virement bancaire et l’envoi de la preuve de paiement, et son formulaire d’assistance répond aux questions sur les taxes ainsi que sur les pièces d’identité ou codes d’importateur. Voir [les colis retenus en douane](guide:customs).
 - **Horaires et délais de livraison :** BUFFALO livre partout en Afrique du Sud **du lundi au samedi, de 08:00 à 17:00** (pas de livraison le dimanche ni les jours fériés). Une fois le colis indiqué en transit, BUFFALO annonce une livraison sous **1 à 5 jours**, selon l’adresse du destinataire.
-- **Modifications d’adresse, de téléphone ou de valeur déclarée :** selon la FAQ de BUFFALO, la valeur déclarée, la quantité et le code SH **ne peuvent plus** être modifiés une fois le colis entré dans l’entrepôt de transit en Chine, et l’adresse de livraison ou le téléphone **ne peuvent plus** être changés après l’arrivée du colis en Afrique du Sud.
+- **Modifications d’adresse, de téléphone ou de valeur déclarée :** selon la FAQ de BUFFALO, la valeur déclarée, la quantité et le code SH **ne peuvent plus** être modifiés une fois le colis entré dans l’entrepôt de transit, et l’adresse de livraison ou le téléphone **ne peuvent plus** être changés après l’arrivée du colis en Afrique du Sud.
 
 ## Colis BUFFALO retardé, retourné au dépôt ou manquant
 
@@ -67,7 +67,7 @@ Peek ne dispose pas d’une consultation directe chez BUFFALO et suit les colis 
 
 Tant que Peek suit le colis via des services de suivi, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu’à toutes les 15 minutes le jour où le colis est en livraison, tant que le colis est ouvert ou que les notifications sont activées.
 
-Quand le scan le plus récent remonte à quatre jours et que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun. 12 oct. ». La page du colis indique alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger BUFFALO. », avec un lien « Demande de l’aide à BUFFALO » vers la page de contact de BUFFALO. Après trois semaines sans nouveau scan, elle affiche « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger BUFFALO. »
+Quand le scan le plus récent remonte à quatre jours et que le colis reste sur « Étiquette créée », « Pris en charge » ou « En transit », Peek le signale avec le jour de ce scan, par exemple « Aucune mise à jour depuis lun 12 oct ». La page du colis indique alors « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger BUFFALO. », avec un lien « Demande de l’aide à BUFFALO » vers la page de contact de BUFFALO. Après trois semaines sans nouveau scan, elle affiche « Rien de nouveau depuis plus de trois semaines. Si le colis n’est toujours pas arrivé, contacte le vendeur. Peek continue d’interroger BUFFALO. »
 
 Tu peux choisir entre les réglages d’alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek se limite au suivi des mises à jour et ne peut ni payer les droits de douane SARS, ni soumettre de code d’importateur, ni contacter BUFFALO à ta place.
 

@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**BUFFALO** (*BUFFALO International Logistics*, spesso chiamata *Buffaloex* o *Buffalo Express*) è un operatore di logistica e-commerce transfrontaliera tra Cina e Africa attivo da aprile 2017 ([buffaloex.com](https://www.buffaloex.com/)). Ha sede centrale a Shanghai e filiale africana a Johannesburg. I suoi magazzini integrati coprono 35.000 metri quadrati — tra cui un magazzino doganale da 6.500 m² — e gestisce 300 veicoli di proprietà. BUFFALO afferma che i propri sistemi sono integrati con le piattaforme doganali e bancarie del Sudafrica e che detiene la prima quota di mercato nei piccoli pacchi e-commerce dalla Cina al Sudafrica. Puoi controllare una spedizione su [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) oppure incollare il codice `BUFZA` nel campo qui sopra.
+**BUFFALO** (*BUFFALO International Logistics*, spesso chiamata *Buffaloex* o *Buffalo Express*) è un operatore di logistica e-commerce transfrontaliera tra Cina e Africa attivo da aprile 2017 ([buffaloex.com](https://www.buffaloex.com/)). Ha sede centrale a Shanghai e filiale africana a Johannesburg. I suoi magazzini integrati coprono 35.000 metri quadrati — tra cui un magazzino doganale da 6.500 m² — e gestisce 300 veicoli di proprietà. BUFFALO afferma che i propri sistemi sono integrati con le piattaforme doganali e bancarie del Sudafrica e che è prima per quota di mercato nei piccoli pacchi e-commerce dalla Cina al Sudafrica. Puoi controllare una spedizione su [buffaloex.com/tracks.html](https://www.buffaloex.com/tracks.html) oppure incollare il codice `BUFZA` nel campo qui sopra.
 
 ## Codici di tracciamento BUFFALO (formato `BUFZA...YQ`)
 
@@ -25,7 +25,7 @@ Secondo l’[assistenza BUFFALO](https://www.buffaloex.com/support.html) e il fe
 
 | BUFFALO indica | Cosa significa per te | Peek mostra |
 | --- | --- | --- |
-| `Order Confirmed` | Ordine creato mentre il pacco è ancora presso il fornitore o diretto al magazzino BUFFALO in Cina. | «Etichetta creata» |
+| `Order Confirmed` | Ordine creato mentre il pacco è ancora presso il fornitore, prima dell’invio al magazzino BUFFALO in Cina. | «Etichetta creata» |
 | `Enter Warehouse` | Il pacco è arrivato nel magazzino BUFFALO in Cina. | «Preso in carico» |
 | `Out of Warehouse`, `Air Shipping`, `International Shipping` | Partito dal magazzino BUFFALO in Cina e spedito in Sudafrica via aerea o marittima. | «In transito» |
 | `Clearance`, `At Destination`, `Arrival at South Africa customs`, `Customs VAT and duty can be paid now, please pay in time`, `Tax Paid`, `Clearance finished` | Sdoganamento export in Cina in attesa del volo oppure dogana import sudafricana; IVA e dazi vanno pagati prima dello svincolo. | «In dogana» |
@@ -40,7 +40,7 @@ Secondo l’[assistenza BUFFALO](https://www.buffaloex.com/support.html) e [Chi 
 
 - **IVA e dazi di importazione:** quando il tracciamento mostra `Customs VAT and duty can be paid now, please pay in time`, IVA e dazi vanno saldati prima che la dogana sudafricana rilasci il pacco. I video IVA/dazi di BUFFALO mostrano il pagamento online o tramite bonifico e il caricamento della ricevuta, mentre il modulo richieste gestisce domande su pagamenti fiscali, documenti d’identità o codici importatore. Vedi [pacchi fermi in dogana](guide:customs).
 - **Orari e tempi di consegna:** BUFFALO consegna in Sudafrica **dal lunedì al sabato, dalle 08:00 alle 17:00** (nessuna consegna la domenica né nei festivi). Una volta che il pacco risulta in transito, BUFFALO prevede la consegna in **1–5 giorni**, in base all’indirizzo del destinatario.
-- **Modifiche a indirizzo, telefono o valore doganale:** secondo le FAQ di BUFFALO, valore dichiarato, quantità e codice SA **non** possono essere cambiati una volta entrato il pacco nel magazzino di transito in Cina, e indirizzo o telefono **non** possono essere modificati dopo l’arrivo del pacco in Sudafrica.
+- **Modifiche a indirizzo, telefono o valore doganale:** secondo le FAQ di BUFFALO, valore dichiarato, quantità e codice SA **non** possono essere cambiati una volta entrato il pacco nel magazzino di transito, e indirizzo o telefono **non** possono essere modificati dopo l’arrivo del pacco in Sudafrica.
 
 ## Pacco BUFFALO in ritardo, rientrato in deposito o smarrito
 
@@ -63,9 +63,9 @@ Contatti ufficiali pubblicati su [Contatti BUFFALO](https://www.buffaloex.com/co
 
 [Peek](/) rileva BUFFALO automaticamente come unico candidato quando inserisci un codice `BUFZA...YQ` di 17 caratteri (`BUFZA6482917305YQ` o `BUFZA4SK73918BUYQ`, inventati), e riconosce direttamente i link incollati `buffaloex.com/tracks.html?order=`, `buffaloex.com/track.html?order=` e `buffaloex.com/express/record?order=`. Se dovessi selezionare BUFFALO manualmente, tocca «Cambia» mentre aggiungi o «Cambia corriere» nella schermata del pacco (cercare «Buffaloex», «Buffalo Express» o «BUFFALO International» lo trova ugualmente).
 
-Peek non dispone di una ricerca diretta su BUFFALO e segue i pacchi BUFFALO tramite servizi di tracciamento. Applica comunque le regole lessicali proprie di BUFFALO alle scansioni ricevute, così un `RETURNS` serale resta «In transito», `SCAN VEHICLE DEPARTURE` mostra «In consegna» e `Returned to BUFFALO warehouse[...]` mostra «Problema segnalato», elencando ogni scansione con la relativa fase («Etichetta creata», «Preso in carico», «In transito», «In dogana», «In consegna», «Problema segnalato», «Consegnato»).
+Peek non dispone di una ricerca diretta su BUFFALO e segue i pacchi BUFFALO tramite servizi di tracciamento. Legge le loro scansioni con le regole di BUFFALO per le sue diciture, così un `RETURNS` serale resta «In transito», `SCAN VEHICLE DEPARTURE` mostra «In consegna» e `Returned to BUFFALO warehouse[...]` mostra «Problema segnalato», elencando ogni scansione con la relativa fase («Etichetta creata», «Preso in carico», «In transito», «In dogana», «In consegna», «Problema segnalato», «Consegnato»).
 
-Mentre Peek segue il pacco tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo un giorno senza nuovi aggiornamenti e fino a ogni 15 minuti il giorno in cui il pacco è in consegna, mentre hai il pacco aperto o le notifiche attive.
+Mentre Peek segue il pacco tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo un giorno senza nuovi aggiornamenti e fino a ogni 15 minuti nel giorno in cui il pacco è in consegna, mentre hai il pacco aperto o le notifiche attive.
 
 Quando l’ultima scansione risale a quattro giorni prima e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con la data di quella scansione, come «Nessun aggiornamento da lun 12 ott». La pagina del pacco mostra allora «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a BUFFALO.», con il link «Chiedi aiuto a BUFFALO» verso la pagina contatti di BUFFALO. Dopo tre settimane senza nuovi aggiornamenti mostra «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a BUFFALO.»
 

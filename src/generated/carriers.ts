@@ -14886,6 +14886,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "rastreamento-gofo-italia",
+      "title": "Rastreamento GOFO Italy: códigos GFIT, status e reclamações",
+      "name": "GOFO Italy",
+      "color": "#fc4c02"
+    },
+    {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "rastreamento-allegro-one",
@@ -15038,6 +15046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "rastreamento-dhlink",
+      "title": "Rastreamento DHLink: códigos, status e quem entrega",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "sf-express",
       "catalog": "sf-express",
       "slug": "rastreamento-sf-express",
@@ -15132,6 +15148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento YWE (YanwenExpress): códigos, status e suporte",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "rastreamento-huahan-logistics",
+      "title": "Rastreamento HuaHan Logistics: códigos HHW…YQ e entrega",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "india-post",
@@ -17937,6 +17961,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "gofo-france-tracking",
       "title": "GOFO France 物流查询：GFFR 单号、状态与客服",
       "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "gofo-it",
+      "catalog": "gofo-it",
+      "slug": "gofo-it-tracking",
+      "title": "GOFO Italy 意大利快递查询：GFIT 单号、状态与投诉指南",
+      "name": "GOFO Italy",
       "color": "#fc4c02"
     },
     {

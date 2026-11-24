@@ -4860,6 +4860,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "spee-dee-sendungsverfolgung",
+      "title": "Spee-Dee Delivery Sendungsverfolgung: SP-Codes & Hilfe",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
+    },
+    {
       "id": "tnt-au",
       "catalog": "tnt-au",
       "slug": "tnt-australia-sendungsverfolgung",
@@ -7276,6 +7284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi PasarEX\u00a0: codes Amazon AMZPSR, douane et aide",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "suivi-spee-dee",
+      "title": "Suivi Spee-Dee Delivery\u00a0: numéros SP, États et aide",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
     },
     {
       "id": "tnt-au",
@@ -9696,6 +9712,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "tracciamento-spee-dee",
+      "title": "Tracciamento Spee-Dee Delivery: codici SP, stati e aiuto",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
+    },
+    {
       "id": "tnt-au",
       "catalog": "tnt-au",
       "slug": "tracciamento-tnt-australia",
@@ -12106,6 +12130,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "seguimiento-spee-dee",
+      "title": "Seguimiento Spee-Dee Delivery: códigos SP, estados y ayuda",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
+    },
+    {
       "id": "tnt-au",
       "catalog": "tnt-au",
       "slug": "seguimiento-tnt-australia",
@@ -14514,6 +14546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio PasarEX: códigos Amazon AMZPSR, alfândega e apoio",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "rastreio-spee-dee",
+      "title": "Rastreio Spee-Dee Delivery: números SP, estados e apoio",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
     },
     {
       "id": "tnt-au",
@@ -17006,6 +17046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PasarEX: kody Amazon AMZPSR, cło i pomoc",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "spee-dee",
+      "catalog": "spee-dee",
+      "slug": "sledzenie-spee-dee",
+      "title": "Śledzenie Spee-Dee Delivery: kody SP, stany i pomoc",
+      "name": "Spee-Dee",
+      "color": "#ff4734"
     },
     {
       "id": "tnt-au",

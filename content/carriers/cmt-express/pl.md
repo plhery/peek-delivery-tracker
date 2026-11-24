@@ -26,7 +26,7 @@ CMT Express korzysta z platformy TMS wyświetlającej po chińsku i angielsku zd
 | --- | --- | --- |
 | `货物电子信息已经收到` (`The electronic cargo information has been received`), `Order processed by shipper` | Elektroniczne dane zamówienia odebrane od sprzedawcy przed dotarciem fizycznej paczki do magazynu CMT w Shenzhen. | „Zarejestrowana” |
 | `Arrive at SZ warehouse` (`ARRIVAL`) | Fizyczna przesyłka przyjęta i zarejestrowana w magazynie CMT Express w Shenzhen. | „Przyjęta przez przewoźnika” |
-| Wysłanie z hubu eksportowego, transport lotniczy i skany celne / lokalnego partnera w kraju docelowym | Opracowana do eksportu, wysłana samolotem, odprawiona celnie i przekazana lokalnemu partnerowi. | „W transporcie” |
+| Wysłanie z hubu eksportowego, transport lotniczy i skany celne / lokalnego partnera w kraju docelowym | Przygotowana do eksportu, wysłana samolotem, odprawiona celnie i przekazana lokalnemu partnerowi. | „W transporcie” |
 | Skan wydania do doręczenia partnera docelowego | Wydana do końcowego doręczenia przez lokalnego kuriera w kraju docelowym. | „W doręczeniu” |
 | Skan doręczenia partnera docelowego | Doręczona odbiorcy przez lokalnego przewoźnika. | „Dostarczona” |
 
@@ -40,8 +40,8 @@ Według [cmtexpress.com.cn](https://www.cmtexpress.com.cn/) oraz [O CMT Express]
 
 Ponieważ umowę przewozu z CMT Express zawarł sklep internetowy lub platforma, przy opóźnieniu, błędnym adresie lub zwrocie pieniędzy zawsze skontaktuj się najpierw ze sprzedawcą.
 
-- **Cisza po `Arrive at SZ warehouse`:** zbiorcze partie transgraniczne często zatrzymują się na kilka dni przed odprawą eksportową, załadunkiem lotniczym lub przyjęciem w kraju docelowym. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
-- **Sprawdź ewentualny numer lokalny:** jeśli śledzenie CMT poda kod przewoźnika ostatniej mili po przybyciu do Twojego kraju, sprawdź go bezpośrednio na stronie tego przewoźnika dla opcji dnia dostawy.
+- **Cisza po `Arrive at SZ warehouse`:** zbiorcze partie transgraniczne często stoją kilka dni w oczekiwaniu na odprawę eksportową, załadunek lotniczy lub przyjęcie w kraju docelowym. Zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
+- **Sprawdź ewentualny numer lokalny:** jeśli śledzenie CMT poda kod przewoźnika ostatniej mili po przybyciu do Twojego kraju, sprawdź go bezpośrednio na stronie tego przewoźnika, aby zobaczyć opcje na dzień doręczenia.
 - **Brak paczki, uszkodzenie lub status doręczenia bez odbioru:** sprawdź najpierw u domowników, sąsiadów, w recepcji i u lokalnego kuriera, a następnie szybko powiadom sprzedawcę przed końcem ochrony kupujących. Zobacz [doręczona, ale nieotrzymana](guide:delivered-not-received), [uszkodzona przesyłka](guide:damaged-parcel), [zaginiona przesyłka](guide:lost-parcel) i [zwrócona nadawcy](guide:returned-to-sender).
 
 ## Obsługa klienta i kontakt CMT Express
@@ -52,7 +52,7 @@ Oficjalne dane ze stron [cmtexpress.com.cn](https://www.cmtexpress.com.cn/), [cm
 - **Portal śledzenia:** [tms.cmtexpress.com.cn/en/trackIndex.htm](https://tms.cmtexpress.com.cn/en/trackIndex.htm).
 - **Firma:** Shenzhen Chengmaotong Supply Chain Co., Ltd. (*深圳诚贸通供应链有限公司*), Shenzhen, Chiny.
 
-> Uważaj na fałszywe SMS-y lub wiadomości WhatsApp żądające płatności kartą online za „odprawę celną” lub „poprawienie adresu” paczki z Chin. Każde prawdziwe opłaty importowe sprawdzaj najpierw na stronie zamówienia lub w oficjalnym serwisie poczty. Zobacz [fałszywe SMS-y o przesyłkach](guide:delivery-scam-texts).
+> Uważaj na fałszywe SMS-y lub wiadomości WhatsApp żądające płatności kartą online za „odprawę celną” lub „poprawienie adresu” paczki z Chin. Wszelkie prawdziwe opłaty importowe sprawdzaj najpierw na stronie zamówienia lub w oficjalnym serwisie poczty. Zobacz [fałszywe SMS-y o przesyłkach](guide:delivery-scam-texts).
 
 ## Śledzenie przesyłki CMT Express w Peek
 
@@ -60,9 +60,9 @@ Oficjalne dane ze stron [cmtexpress.com.cn](https://www.cmtexpress.com.cn/), [cm
 
 Peek odczytuje śledzenie CMT Express bezpośrednio i pokazuje etap („Zarejestrowana”, „Przyjęta przez przewoźnika”, „W transporcie”, „W doręczeniu”, „Dostarczona”), własny angielski tekst platformy (`The electronic cargo information has been received` dla `货物电子信息已经收到`), lokalizację bez skrótów magazynowych takich jak `SZ.` oraz kraj docelowy. Gdy CMT zapisuje przesyłkę pod innym numerem niż wpisany, Peek pokazuje go pod „CMT Express śledzi przesyłkę pod numerem”. Kody skanów i nazwa usługi nie pojawiają się w żadnej aplikacji Peek. CMT podaje godziny bez strefy czasowej: Peek datuje je według czasu pekińskiego (`Asia/Shanghai`) i przelicza na zegar Twojego urządzenia. Gdy CMT poda numer przewoźnika doręczającego, a Peek go rozpoznaje, sprawdza, czy ma on paczkę: przesyłka wyświetla wtedy „Doręcza:” z nazwą przewoźnika i pokazuje oba numery. Peek pomija liczbę paczek, wagę, referencję klienta, nazwy nadawcy i odbiorcy, adres odbiorcy, kody pocztowe, nazwisko odbierającego, podpis, potwierdzenia doręczenia i dane płatności; śledzenie CMT nie podaje szacowanej daty ani osobnej godziny doręczenia.
 
-Dopóki masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut; w dniu, gdy CMT Express pokazuje skan wydania do doręczenia, co 2 minuty od 6:00 czasu pekińskiego, dopóki odpowiada śledzenie CMT Express. W pozostałych sytuacjach sprawdza co godzinę. Po 12 godzinach z samym statusem „Zarejestrowana” lub „Przyjęta przez przewoźnika” albo po dwóch dniach bez wiadomości przechodzi na sprawdzanie co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na „Zarejestrowana” co 6 godzin. Gdy śledzenie CMT Express nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, po spokojnym dniu co 3 godziny i do co 15 minut w dniu doręczenia, dopóki masz przesyłkę otwartą lub włączone powiadomienia.
+Dopóki masz przesyłkę otwartą w Peek albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut; w dniu, gdy CMT Express pokazuje skan wydania do doręczenia, co 2 minuty od 6:00 czasu pekińskiego, dopóki odpowiada śledzenie CMT Express. W pozostałych sytuacjach sprawdza co godzinę. Po 12 godzinach z samym statusem „Zarejestrowana” lub „Przyjęta przez przewoźnika” albo po dwóch dniach bez wiadomości przechodzi na sprawdzanie co godzinę niezależnie od sposobu śledzenia, a po siedmiu dniach na „Zarejestrowana” co 6 godzin. Gdy śledzenie CMT Express nie odpowiada i Peek korzysta wyłącznie z zewnętrznych usług śledzenia, sprawdza co godzinę, po spokojnym dniu co 3 godziny i do co 15 minut w dniu, w którym paczka jest w doręczeniu, dopóki masz przesyłkę otwartą lub włączone powiadomienia.
 
-Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika CMT Express.” Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika CMT Express.”
+Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika CMT Express.” Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika CMT Express.”
 
 Możesz wybrać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek jedynie monitoruje aktualizacje śledzenia i nie może odprawić przesyłki celnie ani skontaktować się z CMT Express lub lokalnym przewoźnikiem w Twoim imieniu.
 

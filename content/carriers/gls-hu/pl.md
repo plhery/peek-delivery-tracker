@@ -16,7 +16,7 @@ Numeru szukaj w e-mailu wysyłkowym ze sklepu, powiadomieniu FlexDeliveryService
 | --- | --- |
 | `3482917364` | 10-cyfrowy krajowy numer paczki GLS Hungary. |
 | `03482917364` | 11-cyfrowy krajowy numer paczki GLS Hungary zapisany z zerem na początku. |
-| `94829173640` | 11-cyfrowy międzynarodowy numer GLS w ruchu do lub z Węgier. |
+| `94829173640` | 11-cyfrowy międzynarodowy numer GLS dla przesyłek do lub z Węgier. |
 
 Numery 10- i 11-cyfrowe stosują również inne spółki GLS (np. [GLS Austria](carrier:gls-at), [GLS Niemcy](carrier:gls-de), [GLS Polska](carrier:gls-pl) i [GLS Włochy](carrier:gls-it)) oraz inni przewoźnicy, więc wybierz GLS Hungary ręcznie albo wklej link `gls-group.com/HU/...`. Zobacz [formaty numerów przesyłek](guide:tracking-number-formats).
 
@@ -70,7 +70,7 @@ Peek pobiera z GLS Hungary skrócony przegląd widoczny bez kodu pocztowego i wy
 
 Peek sprawdza paczkę GLS Hungary najwyżej raz na godzinę, łącznie z ręcznym odświeżeniem, i czeka 4 godziny po nieudanej próbie. Po siedmiu dniach na etapie „Zarejestrowana” sprawdza co 6 godzin.
 
-Gdy status GLS Hungary nie zmienił się od czterech dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem ostatniej zauważonej zmiany, np. „Brak aktualizacji od pon., 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GLS Hungary.”, wraz z linkiem „Poproś przewoźnika GLS Hungary o pomoc” do strony kontaktowej GLS Hungary. Po trzech tygodniach bez zmian widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika GLS Hungary.”
+Gdy status GLS Hungary nie zmienił się od czterech dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem ostatniej zauważonej zmiany, np. „Brak aktualizacji od pon 12 paź”. Na stronie paczki pojawia się wtedy napis: „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika GLS Hungary.”, wraz z linkiem „Poproś przewoźnika GLS Hungary o pomoc” do strony kontaktowej GLS Hungary. Po trzech tygodniach bez zmian widnieje komunikat: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika GLS Hungary.”
 
 Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek tylko monitoruje status — nie przekieruje paczki przez FlexDeliveryService, nie przedłuży przechowywania ani nie skontaktuje się za ciebie z GLS Hungary.
 

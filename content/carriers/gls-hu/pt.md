@@ -47,7 +47,7 @@ Segundo a [página inicial da GLS Hungary](https://gls-group.com/HU/en/home/) e 
 
 As [FAQ da GLS Hungary](https://gls-group.com/HU/en/faq/) aconselham a inspecionar o volume na receção:
 
-- **Danos exteriores à chegada:** se a caixa estiver visivelmente danificada (como um rasgo ou furo), podes **recusar a encomenda**, e a GLS devolve-a ao remetente. Com embalagem danificada podes também verificar o conteúdo na entrega; o motorista lavra um auto de dano. Se a caixa parecia intacta mas o conteúdo veio danificado, reclama ao remetente.
+- **Danos exteriores à chegada:** se a caixa estiver visivelmente danificada (como um furo), podes **recusar a encomenda**, e a GLS devolve-a ao remetente. Com embalagem danificada podes também verificar o conteúdo na entrega; o motorista lavra um auto de dano. Se a caixa parecia intacta mas o conteúdo veio danificado, reclama ao remetente.
 - **Encomenda desaparecida ou atrasada:** verifica o cartão de aviso (caso um vizinho tenha assinado) e a mensagem FlexDeliveryService por e-mail ou Viber, depois liga para a linha de destinatários da GLS Hungary (`+36 29 886-700`) com o número da encomenda e informa o vendedor. Consulta [porque o rastreio deixa de atualizar](guide:tracking-not-updating), [entregue mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda perdida](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 ## Apoio ao cliente e contactos GLS Hungary
@@ -70,7 +70,7 @@ O Peek pede à GLS Hungary o resumo que a sua página mostra sem código postal 
 
 O Peek verifica uma encomenda GLS Hungary no máximo uma vez por hora, atualização manual incluída, e aguarda 4 horas após uma tentativa falhada. Após sete dias em «Etiqueta criada», verifica de 6 em 6 horas.
 
-Quando o estado da GLS Hungary não muda há quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia da última mudança vista, como «Sem atualizações desde seg., 12/10». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a GLS Hungary.», com a ligação «Pede ajuda a GLS Hungary» para a página de contactos da GLS Hungary. Após três semanas sem novidades, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a GLS Hungary.»
+Quando o estado da GLS Hungary não muda há quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia da última mudança vista, como «Sem atualizações desde seg 12 out». A página mostra então: «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a GLS Hungary.», com a ligação «Pede ajuda a GLS Hungary» para a página de contactos da GLS Hungary. Após três semanas sem novidades, mostra: «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a GLS Hungary.»
 
 Podes escolher os alertas «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek apenas acompanha o estado do rastreio e não pode redirecionar encomendas por FlexDeliveryService, prolongar o prazo de guarda nem contactar a GLS Hungary por ti.
 

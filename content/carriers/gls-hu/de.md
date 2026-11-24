@@ -47,7 +47,7 @@ Laut [GLS Hungary Home](https://gls-group.com/HU/en/home/) und den [GLS Hungary 
 
 Die [FAQ von GLS Hungary](https://gls-group.com/HU/en/faq/) raten dazu, das Paket bei der Übergabe zu prüfen:
 
-- **Äußere Schäden bei Ankunft:** Ist der Karton sichtbar beschädigt (z. B. ein Loch), kannst du **die Annahme verweigern**, und GLS sendet ihn an den Absender zurück. Bei beschädigter Verpackung darfst du den Inhalt auch bei Übergabe prüfen; der Fahrer hält dies in einem Schadensprotokoll fest. Sah das Paket unversehrt aus und der Inhalt ist beschädigt, reklamiere beim Absender.
+- **Äußere Schäden bei Ankunft:** Ist der Karton sichtbar beschädigt (z. B. ein Loch), kannst du **die Annahme verweigern**, und GLS schickt das Paket an den Absender zurück. Bei beschädigter Verpackung darfst du den Inhalt auch bei Übergabe prüfen; der Fahrer hält dies in einem Schadensprotokoll fest. Sah das Paket unversehrt aus und der Inhalt ist beschädigt, reklamiere beim Absender.
 - **Vermisstes oder verspätetes Paket:** Prüfe deine Benachrichtigungskarte (falls ein Nachbar unterschrieben hat) und deine FlexDeliveryService-E-Mail oder Viber-Nachricht, ruf dann die Empfänger-Hotline von GLS Hungary (`+36 29 886-700`) mit deiner Paketnummer an und informiere den Verkäufer. Siehe [Warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating), [Zugestellt, aber nicht erhalten](guide:delivered-not-received), [Beschädigtes Paket](guide:damaged-parcel), [Verlorenes Paket](guide:lost-parcel) und [Zurück an Absender](guide:returned-to-sender).
 
 ## Kundenservice und Kontakte von GLS Hungary
@@ -70,7 +70,7 @@ Peek fragt bei GLS Hungary die Übersicht ab, die die Tracking-Seite ohne Postle
 
 Peek prüft ein GLS-Hungary-Paket höchstens einmal pro Stunde, manuelle Aktualisierungen eingeschlossen, und wartet nach einem fehlgeschlagenen Versuch 4 Stunden. Nach sieben Tagen auf „Etikett erstellt“ prüft es alle 6 Stunden.
 
-Hat sich der GLS-Hungary-Status seit vier Tagen nicht geändert und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag der letzten Änderung, etwa „Keine Aktualisierung seit Mo., 12. Okt.“. Auf der Paketseite steht dann: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GLS Hungary nach.“, mit dem Link „Hol dir Hilfe bei GLS Hungary“ zur Kontaktseite von GLS Hungary. Nach drei Wochen ohne Neuigkeiten heißt es: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei GLS Hungary nach.“
+Hat sich der GLS-Hungary-Status seit vier Tagen nicht geändert und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag der letzten Änderung, etwa „Keine Aktualisierung seit Mo 12. Okt“. Auf der Paketseite steht dann: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei GLS Hungary nach.“, mit dem Link „Hol dir Hilfe bei GLS Hungary“ zur Kontaktseite von GLS Hungary. Nach drei Wochen ohne Neuigkeiten heißt es: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei GLS Hungary nach.“
 
 Als Benachrichtigungsstufe kannst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Peek überwacht nur den Sendungsstatus und kann weder Pakete über FlexDeliveryService umleiten noch Lagerfristen verlängern oder GLS Hungary für dich kontaktieren.
 

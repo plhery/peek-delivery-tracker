@@ -4516,6 +4516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "paquetexpress-sendungsverfolgung",
+      "title": "Paquetexpress Sendungsverfolgung: Guías, Ocurre & Hilfe",
+      "name": "Paquetexpress",
+      "color": "#002a52"
+    },
+    {
       "id": "ydh",
       "catalog": "ydh",
       "slug": "ydh-sendungsverfolgung",
@@ -6630,6 +6638,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "suivi-paquetexpress",
+      "title": "Suivi Paquetexpress\u00a0: guías, statuts, Ocurre et aide",
+      "name": "Paquetexpress",
+      "color": "#002a52"
+    },
+    {
       "id": "ydh",
       "catalog": "ydh",
       "slug": "suivi-ydh",
@@ -8718,6 +8734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento 360Lion: codici WSH e AR, stati e contatti",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "tracciamento-paquetexpress",
+      "title": "Tracciamento Paquetexpress: guías, Ocurre e reclami",
+      "name": "Paquetexpress",
+      "color": "#002a52"
     },
     {
       "id": "ydh",
@@ -12972,6 +12996,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "rastreio-paquetexpress",
+      "title": "Rastreio Paquetexpress: guías, Ocurre e reclamações",
+      "name": "Paquetexpress",
+      "color": "#002a52"
+    },
+    {
       "id": "ydh",
       "catalog": "ydh",
       "slug": "rastreio-ydh",
@@ -15134,6 +15166,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 360Lion: kody WSH i AR, statusy i kontakt",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "paquetexpress",
+      "catalog": "paquetexpress",
+      "slug": "sledzenie-paquetexpress",
+      "title": "Śledzenie Paquetexpress: guías, Ocurre i reklamacje",
+      "name": "Paquetexpress",
+      "color": "#002a52"
     },
     {
       "id": "ydh",

@@ -5292,7 +5292,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -5307,7 +5307,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers</loc>
@@ -5322,7 +5322,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers</loc>
@@ -5337,7 +5337,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers</loc>
@@ -5352,7 +5352,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt-br/carriers</loc>
@@ -5382,7 +5382,7 @@
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-11-23</lastmod>
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/ru/carriers</loc>
@@ -29361,16 +29361,106 @@
 <url>
 <loc>https://peektracker.com/carriers/jt-express-brazil-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
 <lastmod>2026-11-23</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/suivi-jt-express-brazil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/tracciamento-jt-express-brazil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/seguimiento-jt-express-brazil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/rastreio-jt-express-brazil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
 <lastmod>2026-11-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jt-express-brazil-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/rastreio-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-jt-express-brasil" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-jt-express-brazil" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-brazil-tracking" />
+<lastmod>2026-11-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/anjun-logistics-tracking</loc>

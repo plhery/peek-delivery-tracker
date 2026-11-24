@@ -4628,6 +4628,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b4da2"
     },
     {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "cj-packet-sendungsverfolgung",
+      "title": "CJ Packet Sendungsverfolgung: CJP...YQ-Codes & Kontakt",
+      "name": "CJ Packet",
+      "color": "#ff7700"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6830,6 +6838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b4da2"
     },
     {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "suivi-cj-packet",
+      "title": "Suivi CJ Packet\u00a0: codes CJP...YQ, relais locaux et contact",
+      "name": "CJ Packet",
+      "color": "#ff7700"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9016,6 +9032,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b4da2"
     },
     {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "tracciamento-cj-packet",
+      "title": "Tracciamento CJ Packet: codici CJP...YQ, consegna e aiuto",
+      "name": "CJ Packet",
+      "color": "#ff7700"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11200,6 +11224,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Chukou1: códigos EC-FirstClass, traspaso y ayuda",
       "name": "Chukou1",
       "color": "#0b4da2"
+    },
+    {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "seguimiento-cj-packet",
+      "title": "Seguimiento CJ Packet: códigos CJP...YQ, traspaso y ayuda",
+      "name": "CJ Packet",
+      "color": "#ff7700"
     },
     {
       "id": "correos-de-mexico",
@@ -13426,6 +13458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Chukou1: códigos EC-FirstClass, entrega e ajuda",
       "name": "Chukou1",
       "color": "#0b4da2"
+    },
+    {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "rastreio-cj-packet",
+      "title": "Rastreio CJ Packet: códigos CJP...YQ, entrega e contactos",
+      "name": "CJ Packet",
+      "color": "#ff7700"
     },
     {
       "id": "buffalo-ex",
@@ -15686,6 +15726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Chukou1: kody EC-FirstClass, przekazanie i pomoc",
       "name": "Chukou1",
       "color": "#0b4da2"
+    },
+    {
+      "id": "cj-packet",
+      "catalog": "cj-packet",
+      "slug": "sledzenie-cj-packet",
+      "title": "Śledzenie CJ Packet: kody CJP...YQ, przekazanie i kontakt",
+      "name": "CJ Packet",
+      "color": "#ff7700"
     },
     {
       "id": "buffalo-ex",

@@ -11945,6 +11945,20 @@
     ]
   },
   {
+    "input": "090420181030503",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "brt",
+      "yunda",
+      "ozon-logistics"
+    ],
+    "asked": [
+      "brt"
+    ]
+  },
+  {
     "input": "09187717",
     "carrier": "unknown",
     "confidence": "low",
@@ -17235,6 +17249,12 @@
     "asked": [
       "tnt"
     ]
+  },
+  {
+    "input": "110455",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "11049367794",
@@ -23767,6 +23787,12 @@
       "dpd-nl",
       "dpd-de"
     ]
+  },
+  {
+    "input": "159853",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "15BAEB8A",
@@ -60561,6 +60587,57 @@
     ]
   },
   {
+    "input": "6076184073827",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "aras-kargo"
+    ]
+  },
+  {
+    "input": "6076184085349",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "aras-kargo"
+    ]
+  },
+  {
+    "input": "6076184087637",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "aras-kargo"
+    ]
+  },
+  {
     "input": "607S3E-0004SN3W",
     "carrier": "unknown",
     "confidence": "none",
@@ -84685,40 +84762,40 @@
   },
   {
     "input": "AMZPSR020816106",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "pasarex",
+    "confidence": "high",
     "candidates": [
       "pasarex"
     ]
   },
   {
     "input": "AMZPSR020965874",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "pasarex",
+    "confidence": "high",
     "candidates": [
       "pasarex"
     ]
   },
   {
     "input": "AMZPSR023935072",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "pasarex",
+    "confidence": "high",
     "candidates": [
       "pasarex"
     ]
   },
   {
     "input": "AMZPSR024279529",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "pasarex",
+    "confidence": "high",
     "candidates": [
       "pasarex"
     ]
   },
   {
     "input": "AMZPSR025530371",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "pasarex",
+    "confidence": "high",
     "candidates": [
       "pasarex"
     ]
@@ -89477,6 +89554,12 @@
     "asked": [
       "aliexpress"
     ]
+  },
+  {
+    "input": "CNES00102358787",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "CNES00602228835",
@@ -99735,6 +99818,12 @@
     ]
   },
   {
+    "input": "JCW00002276193",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "JCZ0318108989DH",
     "carrier": "jcex",
     "confidence": "high",
@@ -105743,6 +105832,12 @@
     "candidates": []
   },
   {
+    "input": "MXTT88F27D091ABA1889",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "MY10002706",
     "carrier": "unknown",
     "confidence": "low",
@@ -107027,6 +107122,17 @@
     ],
     "asked": [
       "gls-it"
+    ]
+  },
+  {
+    "input": "O2AgL1Jhi6",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chit-chats"
+    ],
+    "asked": [
+      "chit-chats"
     ]
   },
   {
@@ -113754,6 +113860,24 @@
     ]
   },
   {
+    "input": "RXONC70OKLNWA14J26",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "RXONC70OPDXJNKNI26",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "RXONC70OSO5GWB6J26",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "RY334745545CN",
     "carrier": "china-post",
     "confidence": "high",
@@ -117358,6 +117482,19 @@
     "candidates": []
   },
   {
+    "input": "TPL600042194",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "purolator",
+      "tnt-au"
+    ],
+    "asked": [
+      "tnt-au",
+      "purolator"
+    ]
+  },
+  {
     "input": "TR005133118MT",
     "carrier": "unknown",
     "confidence": "none",
@@ -117581,6 +117718,12 @@
     "candidates": [
       "tusk-logistics"
     ]
+  },
+  {
+    "input": "TVb_j5l55P",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "TW240743518370H",
@@ -118667,6 +118810,36 @@
     "candidates": [
       "uniuni"
     ]
+  },
+  {
+    "input": "URA00340703ZPRU",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "URA00610618ZPRU",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "URA01849819ZPRU",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "URA02172676ZPRU",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "URA08634607ZPRU",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "URE6VI",
@@ -120864,6 +121037,18 @@
     "asked": [
       "dhlink"
     ]
+  },
+  {
+    "input": "XYYEX0035607568YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "XYYEX1036968315YQ",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "XYZ000000001",
@@ -123094,6 +123279,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "f4JZFWKhwf",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chit-chats"
+    ],
+    "asked": [
+      "chit-chats"
+    ]
   },
   {
     "input": "fmpp3100284908",

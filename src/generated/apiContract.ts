@@ -34452,7 +34452,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "youbang-express"
     },
     "linkRules": [
       {
@@ -35394,7 +35394,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rxo"
     },
     "trackingUrlTemplate": "https://track.rxo.com/?trackingnumber={trackingNumber}",
     "linkRules": [
@@ -35929,7 +35929,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Madrid",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "instapack"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -37938,7 +37938,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "top-logistics-au"
     },
     "trackingUrlTemplate": "https://toplogistics.com.au/?s={trackingNumber}",
     "linkRules": [
@@ -38505,7 +38505,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ural-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -41871,7 +41871,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xingyunyi"
     },
     "trackingUrlTemplate": "https://www.xingyunyi.com/tracking?nums={trackingNumber}",
     "linkRules": [
@@ -42612,7 +42612,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^AMZPSR\\d{9}$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ]
   },
@@ -42941,7 +42941,8 @@ export const CARRIER_CAPABILITIES = {
   "bfe-express": {
     "displayName": "BFE Express",
     "aliases": [
-      "BFEexpress"
+      "BFEexpress",
+      "BFE"
     ],
     "countries": [
       "AR",
@@ -43049,9 +43050,29 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Amsterdam",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "max-pakket",
+      "requirements": [
+        {
+          "field": "trackingUrl",
+          "validator": "mendrixCapabilityUrl",
+          "optional": true,
+          "label": "MAX Pakket tracking link",
+          "type": "url",
+          "placeholder": "https://emens.mendrix.cloud/TrackAndTrace/tnt?Tracecode=MXTT…",
+          "help": "The track and trace link from the delivery email names the order the code belongs to. Without it, other sources are asked."
+        }
+      ]
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "emens.mendrix.cloud"
+        ],
+        "pathPattern": "^/TrackAndTrace/tnt/?$",
+        "query": "^(?=(?:.*&)?orderid=[1-9]\\d{0,11}(?:&|$))(?:.*&)?tracecode=(MXTT[0-9A-F]{8,32})(?=&|$)",
+        "keepsCapabilityUrl": true
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://emens.mendrix.cloud/TrackAndTrace",
     "helpUrl": "https://maxpakket.nl/contact/"
@@ -48377,12 +48398,30 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rodonaves"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "rodonaves.com.br",
+          "www.rodonaves.com.br"
+        ],
+        "pathPattern": "^/rastreio-de-mercadoria/?$",
+        "query": "^(?=(?:.*&)?rastreiemercadoria=1(?:&|$))(?:.*&)?protocolo=([^&]+)(?=&|$)"
+      },
+      {
+        "domains": [
+          "rodonaves.com.br",
+          "www.rodonaves.com.br"
+        ],
+        "pathPattern": "^/rastreio-de-mercadoria/?$",
+        "query": "^(?=(?:.*&)?rastreiemercadoria=4(?:&|$))(?:.*&)?minuta=([^&]+)(?=&|$)"
+      }
+    ],
     "detectionRules": [],
     "trackingSearchUrl": "https://rodonaves.com.br/rastreio-de-mercadoria",
-    "helpUrl": "https://rodonaves.com.br/fale-conosco"
+    "helpUrl": "https://rodonaves.com.br/fale-conosco",
+    "trackingUrlTemplate": "https://rodonaves.com.br/rastreio-de-mercadoria?rastreiemercadoria=1&protocolo={trackingNumber}"
   },
   "route1-fulfilment": {
     "displayName": "Route 1 Group",
@@ -50399,7 +50438,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Vancouver",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "coship"
     },
     "trackingUrlTemplate": "https://www.coship.ca/tracking/?no={trackingNumber}",
     "linkRules": [
@@ -62699,15 +62738,27 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Paris",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "trusk",
+      "requirements": [
+        {
+          "field": "trackingUrl",
+          "validator": "truskCapabilityUrl",
+          "optional": true,
+          "label": "Trusk order link",
+          "type": "url",
+          "placeholder": "https://track.trusk.com/…",
+          "help": "The order link from Trusk's message opens your delivery. Without it, other sources are asked."
+        }
+      ]
     },
-    "trackingUrlTemplate": "https://track.trusk.com/fr/{trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "track.trusk.com"
         ],
-        "path": "^/[a-z]{2}/([^/?#]+)/?$"
+        "pathPattern": "^/(?:[a-z]{2}/)?[A-Za-z0-9_-]{6,32}/?$",
+        "path": "^/(?:[a-z]{2}/)?([A-Za-z0-9_-]{6,32})/?$",
+        "keepsCapabilityUrl": true
       }
     ],
     "detectionRules": []

@@ -149,3 +149,32 @@ it('adds and lists a review demo number in a listed account, with no allowance, 
   expect(listed).toMatchObject({ label: 'IKEA', sync_status: 'ok', last_status_text: 'Out for delivery' });
   expect(listed.tracking_events).toHaveLength(5);
 });
+
+it('replaces the number half typed from the same sign-in before it answers, and not for a review demo number', async () => {
+  const sessionId = '55000000-0000-4000-b000-000000000001';
+  vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({ id: userId, email: null, authenticatedAt: null, sessionId });
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+  vi.spyOn(SupabaseServiceClient.prototype, 'createAccountPackage').mockResolvedValue(parcel.id);
+  vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
+  vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob').mockResolvedValue({ row: { id: 'job' }, queued: true });
+  vi.spyOn(SupabaseClient.prototype, 'getPackage').mockResolvedValue(parcel);
+  const mark = vi.spyOn(SupabaseServiceClient.prototype, 'markAddedSession').mockResolvedValue(undefined);
+  vi.spyOn(SupabaseServiceClient.prototype, 'listAddedFromSession').mockResolvedValue([
+    { id: 'start', tracking_number: 'TEST12', label: '', archived_at: null, current_stage: 'pending', tracking_events: [{ stage: 'pending' }] },
+  ]);
+  const remove = vi.spyOn(SupabaseServiceClient.prototype, 'deleteHalfTypedPackage').mockResolvedValue(true);
+  const response = await add();
+  expect(response.status).toBe(201);
+  expect(mark).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, sessionId);
+  expect(remove).toHaveBeenCalledExactlyOnceWith(userId, sessionId, 'start', expect.any(Date));
+
+  vi.stubEnv('REVIEW_DEMO_ACCOUNTS', userId);
+  mark.mockClear();
+  const demo = await POST(new NextRequest('https://delivery.example/api/packages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer add-test' },
+    body: JSON.stringify({ trackingNumber: 'TEST-OUT-01', carrier: 'unknown' }),
+  }), { params: Promise.resolve({}) });
+  expect(demo.status).toBe(201);
+  expect(mark).not.toHaveBeenCalled();
+});

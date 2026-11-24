@@ -5493,6 +5493,66 @@ extension SessionIsolationTests {
         XCTAssertEqual(store.parcels.map(\.syncError), ["carrier:transport"])
         XCTAssertNil(store.errorMessage)
     }
+
+    /// In an account, a number added from Add takes the place of its start added from the same sign-in minutes before:
+    /// the server deletes that one before it answers (src/server/halfTypedParcels.ts). The list read after the add's
+    /// check drops it here, the widget with it, and the account's other device drops it at its next read.
+    @MainActor func testAnAddThatReplacesTheNumberHalfTypedDropsItHereAndOnTheAccountsOtherDevice() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let user = UUID()
+        let phone = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { phone.forceSignOut() }
+        try await authorize(phone, id: user)
+        let tablet = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { tablet.forceSignOut() }
+        try await authorize(tablet, id: user)
+        let store = self.store(phone, transport)
+        let other = self.store(tablet, transport)
+        let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
+        let start = Parcel(id: UUID(), trackingNumber: "TESTPARCEL12", label: "", carrier: .dhl, createdAt: "2026-11-24T12:00:00Z",
+                           syncStatus: .pending, notificationsMuted: false)
+        let whole = Parcel(id: UUID(), trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, createdAt: "2026-11-24T12:02:00Z",
+                           syncStatus: .pending, notificationsMuted: false)
+        respond(try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [start])))
+        await other.load()
+        await store.load()
+        XCTAssertEqual(store.parcels.map(\.id), [start.id])
+        XCTAssertEqual(shared.snapshot?.parcels.map(\.id), [start.id])
+
+        let job = UUID()
+        let created = try JSONEncoder.deliveryTracker.encode(CreatePackageResponse(package: whole, jobIDs: [job]))
+        let jobs = try JSONEncoder.deliveryTracker.encode(SyncJobListResponse(jobs: [
+            SyncJobResponse(id: job, status: .succeeded, requestedAt: "2026-11-24T12:02:00Z", result: SyncSummary(errors: 0)),
+        ]))
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [whole]))
+        let reread = expectation(description: "The list was read again after the check")
+        reread.assertForOverFulfill = false
+        nonisolated(unsafe) var checkAnswered = false
+        SessionTestURLProtocol.handler = { request, callback in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/packages"): callback(.success((201, created)))
+            case ("GET", "/api/sync/jobs"):
+                checkAnswered = true
+                callback(.success((200, jobs)))
+            case ("GET", "/api/packages"):
+                callback(.success((200, list)))
+                if checkAnswered { reread.fulfill() }
+            default: callback(.success((200, Data("{}".utf8))))
+            }
+        }
+        _ = try await store.add(trackingNumber: whole.trackingNumber, label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+        await fulfillment(of: [reread], timeout: 3)
+        await waitUntil { store.parcels.map(\.id) == [whole.id] }
+        XCTAssertEqual(store.parcels.map(\.id), [whole.id])
+        XCTAssertEqual(shared.snapshot?.parcels.map(\.id), [whole.id])
+
+        // The other device still shows it until it reads the list again.
+        XCTAssertEqual(other.parcels.map(\.id), [start.id])
+        await other.load()
+        XCTAssertEqual(other.parcels.map(\.id), [whole.id])
+        XCTAssertEqual(shared.snapshot?.parcels.map(\.id), [whole.id])
+    }
 }
 
 extension ParcelLogicTests {

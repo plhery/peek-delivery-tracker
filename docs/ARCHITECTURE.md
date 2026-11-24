@@ -233,7 +233,14 @@ Key server modules:
   - A lookup whose number starts with the number of one the browser, or the iPhone or Android
     app, looked up at most 10 minutes earlier replaces that one when it has no scan yet and
     no name or archive date from the device: it was the number half typed, and its link is
-    deleted on the server as "Forget it now" would.
+    deleted on the server as "Forget it now" would. In an account the server does the same
+    when Add adds a number (`src/server/halfTypedParcels.ts`): it deletes the account's parcel
+    whose number the new one starts with, added from Add on the same sign-in (the token's
+    session, kept as `packages.added_session`) at most 10 minutes earlier, while it has no
+    scan, no name and no archive date, before it answers. The app that added reads the list
+    after the first check and the account's other devices at their next read, and drop it
+    there, with its widget rows; a parcel with no scan has no Live Activity or alert. A token
+    without a session and parcels added another way replace nothing.
   - Archiving a parcel is the browser's alone, as in the apps: its page offers Archive among
     its actions once the journey is over, and at its foot before then. The list folds the
     archived parcels at its end, never leads with one and doesn't read them in the

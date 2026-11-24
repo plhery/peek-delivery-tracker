@@ -1419,6 +1419,58 @@ class SessionIsolationTests {
     }
 
     /**
+     * In an account, a number added from Add takes the place of its start added from the same sign-in minutes before:
+     * the server deletes that one before it answers (src/server/halfTypedParcels.ts). The list read after the add's
+     * check drops it here, the widget with it, and the account's other device drops it at its next read.
+     */
+    @Test
+    fun anAddThatReplacesTheNumberHalfTypedDropsItHereAndOnTheAccountsOtherDevice() = runTest {
+        val transport = RecordingTransport()
+        val user = UUID.randomUUID()
+        val phone = sessionStore(transport)
+        authorize(phone, transport, id = user)
+        val tablet = sessionStore(transport)
+        authorize(tablet, transport, id = user)
+        val other = store(tablet, transport)
+        val store = store(phone, transport)
+        val shared = DeliveryWidgetSharedStore(defaults)
+        val start = parcel().copy(trackingNumber = "TESTPARCEL12", label = "", carrier = CarrierId.Dhl, syncStatus = SyncStatus.Pending)
+        val whole = parcel().copy(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, syncStatus = SyncStatus.Pending)
+        transport.respond(packageList(start))
+        other.load()
+        store.load()
+        assertEquals(listOf(start.id), store.parcels.map { it.id })
+        assertEquals(listOf(start.id), shared.snapshot?.parcels?.map { it.id })
+
+        val job = UUID.randomUUID()
+        val created = json(CreatePackageResponse.serializer(), CreatePackageResponse(parcel = whole, jobIds = listOf(job)))
+        val jobs = json(
+            SyncJobListResponse.serializer(),
+            SyncJobListResponse(listOf(SyncJobResponse(id = job, status = SyncJobStatus.Succeeded, requestedAt = "2026-11-24T12:02:00Z", result = SyncSummary(errors = 0)))),
+        )
+        transport.handler = { request ->
+            when (request.method to request.path) {
+                "POST" to "/api/packages" -> jsonResponse(201, created)
+                "GET" to "/api/sync/jobs" -> jsonResponse(200, jobs)
+                "GET" to "/api/packages" -> jsonResponse(200, packageList(whole))
+                else -> jsonResponse(200, "{}")
+            }
+        }
+        store.add(trackingNumber = whole.trackingNumber, label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+        store.parcelsFlow.first { parcels -> parcels.map { it.id } == listOf(whole.id) }
+        runCurrent()
+        assertEquals(listOf(whole.id), store.parcels.map { it.id })
+        assertEquals(listOf(whole.id), shared.snapshot?.parcels?.map { it.id })
+
+        // The other device still shows it until it reads the list again.
+        assertEquals(listOf(start.id), other.parcels.map { it.id })
+        other.load()
+        runCurrent()
+        assertEquals(listOf(whole.id), other.parcels.map { it.id })
+        assertEquals(listOf(whole.id), shared.snapshot?.parcels?.map { it.id })
+    }
+
+    /**
      * C-D14, `beginPolling`: an account's parcels are asked for again every 30 s while the app is in front; behind it
      * the rounds pass without a request, and coming back asks at once.
      */

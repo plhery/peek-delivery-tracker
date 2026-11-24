@@ -153,3 +153,29 @@ describe('the server down for maintenance', () => {
     }
   });
 });
+
+describe('an account addition that replaces the number half typed', () => {
+  const parcel = (id: string, trackingNumber: string): ParcelWithEvents => ({
+    id, label: '', trackingNumber, carrier: 'gls-de', syncStatus: 'pending', createdAt: '2026-11-24T12:00:00.000Z', events: [],
+  });
+  function Add() {
+    const { addParcel, parcels } = useParcels();
+    return <><button onClick={() => void addParcel({ trackingNumber: '123459999981', carrier: 'gls-de', label: '' })}>Add</button>
+      <p>{parcels.map(({ id }) => id).join() || 'none'}</p></>;
+  }
+
+  it('drops the earlier parcel with the read of the list that follows', async () => {
+    const start = parcel('start', '12345');
+    const whole = parcel('whole', '123459999981');
+    // The server deleted the start before it answered the add.
+    const repo: ParcelRepo = {
+      mode: 'api', list: vi.fn().mockResolvedValueOnce([start]).mockResolvedValue([whole]),
+      add: vi.fn().mockResolvedValue(whole), rename: vi.fn(), remove: vi.fn(), refresh: vi.fn(),
+    };
+    render(<ParcelsProvider repo={repo}><Add /></ParcelsProvider>);
+    expect(await screen.findByText('start')).toBeVisible();
+    await userEvent.setup().click(screen.getByRole('button', { name: 'Add' }));
+    expect(await screen.findByText('whole')).toBeVisible();
+    expect(repo.list).toHaveBeenCalledTimes(2);
+  });
+});

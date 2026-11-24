@@ -10,6 +10,7 @@ import {
   requireUserClient,
 } from '../../../src/server/api';
 import { withEventPlaces } from '../../../src/server/eventPlaces';
+import { replaceHalfTyped } from '../../../src/server/halfTypedParcels';
 import { servedOwnParcel, withUsualPlaces } from '../../../src/server/usualPlace';
 import { clientInputs, withSuggestedInputs } from '../../../src/server/suggestedInputs';
 import { loadCarrierOutages } from '../../../src/server/carrierOutages';
@@ -91,6 +92,10 @@ export const POST = apiRoute(async (context) => {
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
   if (demo) return json({ package: await servedOwnParcel(client, parcel, clientInputs(context.request)), jobIds: [] }, 201);
+  // Before the answer, so the list the app reads next no longer holds the number half typed.
+  await replaceHalfTyped(service, requireUser(context).id, requireUser(context).sessionId, {
+    id: String(parcel.id), trackingNumber: values.trackingNumber,
+  });
   await rememberLookupCountry(service, parcel, country, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));

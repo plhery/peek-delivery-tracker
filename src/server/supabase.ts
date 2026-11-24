@@ -1273,6 +1273,44 @@ export class SupabaseServiceClient extends SupabaseClient {
     return result.id;
   }
 
+  /** Notes the sign-in an account's parcel was added from with Add. */
+  async markAddedSession(userId: string, packageId: string, sessionId: string): Promise<void> {
+    await this.request(`/rest/v1/packages?${query({ id: `eq.${packageId}`, user_id: `eq.${userId}` })}`, {
+      method: 'PATCH',
+      body: { added_session: sessionId },
+      prefer: 'return=minimal',
+    });
+  }
+
+  /** The account's open parcels added from this sign-in since `since`, with their scans' stages. */
+  async listAddedFromSession(userId: string, sessionId: string, since: Date): Promise<JsonObject[]> {
+    return rows(await this.request(`/rest/v1/packages?${query({
+      select: 'id,tracking_number,label,archived_at,current_stage,created_at,tracking_events(stage)',
+      user_id: `eq.${userId}`,
+      added_session: `eq.${sessionId}`,
+      archived_at: 'is.null',
+      created_at: `gte.${since.toISOString()}`,
+    })}`));
+  }
+
+  /**
+   * Deletes a parcel this sign-in added since `since` while it is still open, unnamed and without a scan. False when
+   * it no longer is.
+   */
+  async deleteHalfTypedPackage(userId: string, sessionId: string, packageId: string, since: Date): Promise<boolean> {
+    const deleted = rows(await this.request(`/rest/v1/packages?${query({
+      select: 'id',
+      id: `eq.${packageId}`,
+      user_id: `eq.${userId}`,
+      added_session: `eq.${sessionId}`,
+      archived_at: 'is.null',
+      label: 'eq.',
+      current_stage: 'eq.pending',
+      created_at: `gte.${since.toISOString()}`,
+    })}`, { method: 'DELETE', prefer: 'return=representation' }));
+    return deleted.length === 1;
+  }
+
   /**
    * The sync worker's snapshot of one package. It embeds the stored event
    * identities instead of the public event list, which the worker never reads.

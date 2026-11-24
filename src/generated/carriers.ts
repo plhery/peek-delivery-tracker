@@ -4740,6 +4740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a44a4"
     },
     {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "serpost-sendungsverfolgung",
+      "title": "Serpost Sendungsverfolgung: Peru S10-Codes, Zoll & Hilfe",
+      "name": "Serpost",
+      "color": "#00308a"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7134,6 +7142,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a44a4"
     },
     {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "suivi-serpost",
+      "title": "Suivi Serpost\u00a0: codes S10 du Pérou, douane SUNAT et aide",
+      "name": "Serpost",
+      "color": "#00308a"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "suivi-onlog-express",
@@ -9526,6 +9542,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Sengi Express: codici Cina–Italia e Poste",
       "name": "Sengi Express",
       "color": "#1a44a4"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "tracciamento-serpost",
+      "title": "Tracciamento Serpost: codici S10 Perù, dogana e aiuto",
+      "name": "Serpost",
+      "color": "#00308a"
     },
     {
       "id": "onlog-express",
@@ -14308,6 +14332,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#1a44a4"
     },
     {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "rastreio-serpost",
+      "title": "Rastreio Serpost: códigos S10 do Peru, alfândega e apoio",
+      "name": "Serpost",
+      "color": "#00308a"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "rastreio-onlog-express",
@@ -16774,6 +16806,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Sengi Express: kody Chiny–Włochy i pomoc",
       "name": "Sengi Express",
       "color": "#1a44a4"
+    },
+    {
+      "id": "serpost",
+      "catalog": "serpost",
+      "slug": "sledzenie-serpost",
+      "title": "Śledzenie Serpost: kody S10 z Peru, cło SUNAT i pomoc",
+      "name": "Serpost",
+      "color": "#00308a"
     },
     {
       "id": "onlog-express",

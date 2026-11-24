@@ -4548,6 +4548,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "korea-post-sendungsverfolgung",
+      "title": "Korea Post Sendungsverfolgung: EMS-KR-Codes, Status & Hilfe",
+      "name": "Korea Post",
+      "color": "#da291c"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "nova-global-sendungsverfolgung",
@@ -6686,6 +6694,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "suivi-korea-post",
+      "title": "Suivi Korea Post\u00a0: codes EMS KR, colis 13 chiffres et aide",
+      "name": "Korea Post",
+      "color": "#da291c"
+    },
+    {
       "id": "nova-global",
       "catalog": "nova-global",
       "slug": "suivi-nova-global",
@@ -8798,6 +8814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GOFO Spain: codici GFES e CIES e aiuto",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "tracciamento-korea-post",
+      "title": "Tracciamento Korea Post: codici EMS KR, 13 cifre e aiuto",
+      "name": "Korea Post",
+      "color": "#da291c"
     },
     {
       "id": "nova-global",
@@ -10920,6 +10944,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento GOFO España: códigos GFES/CIES y ayuda",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "seguimiento-korea-post",
+      "title": "Seguimiento Korea Post: códigos EMS KR, 13 dígitos y ayuda",
+      "name": "Korea Post",
+      "color": "#da291c"
     },
     {
       "id": "nova-global",
@@ -13074,6 +13106,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GOFO Spain: códigos GFES e CIES, 3 tentativas",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "rastreio-korea-post",
+      "title": "Rastreio Korea Post: códigos EMS KR, 13 dígitos e ajuda",
+      "name": "Korea Post",
+      "color": "#da291c"
     },
     {
       "id": "nova-global",
@@ -15262,6 +15302,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GOFO Spain: kody GFES i CIES, 3 próby",
       "name": "GOFO Spain",
       "color": "#fc4c02"
+    },
+    {
+      "id": "korea-post",
+      "catalog": "korea-post",
+      "slug": "sledzenie-korea-post",
+      "title": "Śledzenie Korea Post: kody EMS KR, 13 cyfr i pomoc",
+      "name": "Korea Post",
+      "color": "#da291c"
     },
     {
       "id": "nova-global",

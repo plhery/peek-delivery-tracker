@@ -15374,6 +15374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0279ff"
     },
     {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "rastreamento-cne-express",
+      "title": "Rastreamento CNE Express: códigos 3A5V, status e contato",
+      "name": "CNE Express",
+      "color": "#e83828"
+    },
+    {
       "id": "japan-post",
       "catalog": "japan-post",
       "slug": "rastreamento-japan-post",
@@ -15404,6 +15412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento India Post: códigos Speed Post e status",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "rastreamento-ekart",
+      "title": "Rastreamento Ekart Índia: códigos, status e RTO explicados",
+      "name": "Ekart",
+      "color": "#0074D9"
     },
     {
       "id": "j-and-t-middle-east",
@@ -18882,6 +18898,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Morning Global 物流查询：BR…MG单号、状态与客服联系",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "ekart-yindu-kuaidi-chaxun",
+      "title": "印度 Ekart 快递查询：14 位单号、状态与 RTO 退件说明",
+      "name": "Ekart",
+      "color": "#0074D9"
     },
     {
       "id": "j-and-t-middle-east",

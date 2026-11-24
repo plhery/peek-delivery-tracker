@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-InPost 是一家起源于波兰的智能自提柜物流网络，目前在英国、波兰、意大利、葡萄牙及其他国家提供自提柜、合作门店及上门派送服务。你可以在对应国家或地区的 InPost 官网查询包裹（例如英国站 [inpost.co.uk/tracking](https://inpost.co.uk/tracking)），或直接把单号粘贴到上方输入框中。单号由商家或寄件人提供；自提柜取件码则是另外一组码。
+InPost 是一家起源于波兰的自提柜网络，目前在英国、波兰、意大利、葡萄牙及其他国家提供自提柜、合作门店及上门派送服务。你可以在对应国家或地区的 InPost 官网查询包裹（例如英国站 [inpost.co.uk/tracking](https://inpost.co.uk/tracking)），或直接把单号粘贴到上方输入框中。单号由商家或寄件人提供；自提柜取件码则是另外一组码。
 
 ## InPost 运单号：格式与查找位置
 
@@ -58,7 +58,7 @@ InPost 英国 2024 年 7 月的官方博客按顺序列出了其网站显示的�
 
 **自提柜已满或故障。** InPost 英国可能会将包裹改投至附近的 InPost 自提柜或合作门店并通知你具体位置；InPost 葡萄牙会发邮件和短信让你等待原网点恢复或另选其他网点，若你未回复，可能会为你分配家附近的网点。InPost 物流服务可能会显示 `Stored Parcel - Temporary Parcel Locker`：包裹暂时存放在附近自提柜，仍使用同一取件码；若未在期限内领取（`The storage period has expired`），才会转投至你原先选择的柜机。
 
-**英国上门派送**时间为周一至周六 7:00 至 21:00，司机出发后应用内会显示 2 小时派送时段。若想将符合条件的包裹改送自提柜，可在 InPost 应用中点击“Manage my parcel”，再选择“Deliver to Locker”。错过派送？请先查看物流记录是否已交给邻居或放在安全位置；否则 InPost 会优先放入附近的 InPost 自提柜，或在下一个工作日再次尝试派送。
+**英国上门派送**时间为周一至周六 7:00 至 21:00，司机出发后应用内会显示 2 小时派送时段。若想将符合条件的包裹改送自提柜，可在 InPost 应用中点击“Manage my parcel”，再选择“Deliver to Locker”。错过派送？请先查看物流记录是否已交给邻居或放在安全位置；否则 InPost 会把包裹放入附近的 InPost 自提柜（如有），或在下一个工作日再次尝试派送。
 
 **英国以外更改取件点。** 在波兰，InPost 账户条款将更改与改派列为其应用的服务功能。InPost 葡萄牙说明包裹一旦进入网络便无法更改取件点，不过其查询页面或 InPost Iberia 应用可能会视包裹状态提供该选项。InPost 意大利的常见问题一方面指出可通过邮件中的链接将上门派送转为自提柜或 InPost Point，另一方面又在另一条回答中说明无法更改。
 
@@ -66,7 +66,7 @@ InPost 英国 2024 年 7 月的官方博客按顺序列出了其网站显示的�
 
 **英国。** 国际包裹可能需要长达一周才会交接给 InPost，在此之前物流可能不会更新。如果 InPost 收到包裹后连续 72 小时无更新，请联系其客服团队。InPost 表示退款由零售商或电商平台处理。另请参阅[物流为什么停止更新](guide:tracking-not-updating)（英文）。
 
-**波兰。** 波兰邮政监管机构 UKE 对所有邮政运营商制定了通用规则，InPost 已登记在其邮政运营商名录中。寄件人可以提出投诉（reklamacja），一旦包裹送达你手中或寄件人将索赔权转让给你，你也可以投诉。投诉须在寄出后 12 个月内提出，隐蔽破损须在 7 天内提出；明显外包装破损应在签收时当场提出。运营商须在 30 天内答复，逾期未复则视为接受投诉。
+**波兰。** 波兰邮政监管机构 UKE 对所有邮政运营商制定了通用规则，InPost 已登记在其邮政运营商名录中。寄件人可以提出投诉（reklamacja），一旦包裹送达你手中或寄件人将索赔权转让给你，你也可以投诉。投诉须在寄出后 12 个月内提出，隐蔽破损须在 7 天内提出；明显破损应在取件时当场提出。运营商须在 30 天内答复，逾期未复则视为接受投诉。
 
 **意大利和葡萄牙。** InPost 意大利通过电话受理包裹丢失或延误问题，如属内件破损则会让你联系商家；其条款注明争议可提交意大利通信监管机构 AGCOM 处理。InPost 葡萄牙在发货通知发出后超过 5 天可受理延误申诉，超过 30 天可受理丢失申诉。
 
@@ -81,7 +81,7 @@ InPost 英国 2024 年 7 月的官方博客按顺序列出了其网站显示的�
 
 ## 使用 Peek 查询 InPost 包裹
 
-[Peek](/) 会直接识别 `8YDR` 开头的单号。对于 24 位纯数字、`JJD`、`JD` 以及 Yodel 面单号，Peek 会向 InPost 查询其是否收录该单号（24 位数字还会同时查询奥地利邮政和 Ciblex，以 `3232` 或 `3299` 开头时则优先查询 bpost）。其他格式（包括 8 位数字）即使你手动选择 InPost，也不会通过 InPost 直连接口查询，而是仅通过通用物流查询服务获取信息。你可以直接粘贴 inpost.pl 查询页面的链接；inpost.co.uk 链接仅在包含 `8YDR` 单号时可识别；inpost.it 和 inpost.pt 的链接暂不支持解析，直接粘贴单号即可。
+[Peek](/) 会直接识别 `8YDR` 开头的单号。对于 24 位纯数字、`JJD`、`JD` 以及 Yodel 面单号，Peek 会向 InPost 查询其是否收录该单号（24 位数字还会同时查询奥地利邮政和 Ciblex，以 `3232` 或 `3299` 开头时则优先查询 bpost）。其他格式（包括 8 位数字）即使你手动选择 InPost，也不会通过 InPost 直连接口查询，而是仅通过通用物流查询服务获取信息。你可以直接粘贴 inpost.pl 查询页面的链接；inpost.co.uk 链接仅在包含 `8YDR` 单号时可识别；inpost.it 和 inpost.pt 的链接不会被读取，直接粘贴单号即可。
 
 在西班牙，Peek 将 InPost 归在 Mondial Relay 条目下追踪（搜索“InPost Spain”），并在 inpost.es 上读取 `FV` 单号（`FV` 加 8 位数字）。对于 8 位、10 位或 12 位西班牙单号，点击“更换”并选择 Mondial Relay 即可；但此时 Peek 会查询 Mondial Relay 的法国站，未必能查到 InPost 西班牙的包裹。
 
@@ -125,4 +125,5 @@ InPost 英国的查询页面告知寄件人：寄至自提柜或合作门店不�
 - [InPost Portugal: Como recolher uma encomenda](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – PIN 码、身份证件与 5 或 8 天保管期
 - [InPost Portugal: Fala connosco](https://www.inpost.pt/fala-connosco) – 联系寄件人、5 天延误线、网点停用、更改取件点、理赔、电话与服务时间
 - [InPost Easy: Parcel form](https://inposteasy.com/en) – Peek 读取的官方查询服务
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 显示的内容、波兰 24 位单号、InPost 英文文案、临时自提柜与转交
 :::

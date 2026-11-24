@@ -27,7 +27,7 @@ Peek 会逐字保留 La Poste 的法语扫描原文，并根据最新一条记�
 | `Votre Colissimo va bientôt nous être confié ! Il est en cours de préparation chez votre expéditeur.` | 已生成面单 | 寄件人正在打包准备，La Poste 尚未收到包裹。 |
 | `Votre colis a été déposé dans un point postal.` | 已揽收 | 寄件人已将包裹投递至邮政网点。 |
 | `Votre colis est en transit sur nos plateformes logistiques.` | 运输中 | 正在各分拣平台之间转运。 |
-| `Les formalités import/export sont en cours sur votre colis.` | 清关中 | 正在办理海关查验和清关手续。 |
+| `Les formalités import/export sont en cours sur votre colis.` | 清关中 | 正在办理清关手续。 |
 | `Votre Colissimo est en cours de traitement sur le site de tri local.` | 运输中 | 已到达当地分拣站点处理。 |
 | `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` | 派送中 | 正在分拣装车，准备当天派送。 |
 | `Votre colis n'a pas pu vous être remis. Il sera mis en livraison demain (hors dimanche et jours fériés).` | 派送未成功 | 未能成功送达，将在次日重新派送（周日和法定节假日除外）。 |
@@ -41,7 +41,7 @@ Peek 会逐字保留 La Poste 的法语扫描原文，并根据最新一条记�
 
 ## 派送未成功与取件点
 
-错过派送后，物流记录通常会写明下一步安排：次日重新派送，或转交取件点（见上表扫描记录）。通知包裹已到达取件点的扫描记录会写明保管期限，例如 `Le délai de retrait est de 5 jours.`（5 天）或 15 个自然日。Peek 会显示保管该包裹的邮局、合作门店或自提柜及其地址。如果逾期无人领取，包裹会退回寄件人。更改派送安排需在 laposte.fr 上直接向 La Poste 办理，Peek 无法代为操作。更多内容见[派送未成功指南](guide:missed-delivery)（英文）和[逾期未取包裹指南](guide:uncollected-parcel)（英文）。
+错过派送后，物流记录可能会写明下一步安排：次日重新派送，或转交取件点（见上表扫描记录）。通知包裹已到达取件点的扫描记录可能会写明保管期限，例如 `Le délai de retrait est de 5 jours.`（5 天）或 15 个自然日。Peek 会显示保管该包裹的邮局、合作门店或自提柜及其地址。如果逾期无人领取，包裹会退回寄件人。更改派送安排需在 laposte.fr 上直接向 La Poste 办理，Peek 无法代为操作。更多内容见[派送未成功指南](guide:missed-delivery)（英文）和[逾期未取包裹指南](guide:uncollected-parcel)（英文）。
 
 ## Colissimo 包裹延误、丢失、破损或清关
 
@@ -84,7 +84,7 @@ La Poste 集团公布数据显示，2025 年有 41% 的 Colissimo 包裹在寄�
 
 ### La Poste 周六派送吗？
 
-是的。La Poste 集团表示其信件、报刊和包裹每周派送六天，而且派送未成功后的物流记录也会写明包裹将于次日重新派送，“hors dimanche et jours fériés”（周日和法定节假日除外）。
+是的。La Poste 集团表示其信件、报刊和包裹每周派送六天，而且派送未成功后的物流记录可能会写明包裹将于次日重新派送，“hors dimanche et jours fériés”（周日和法定节假日除外）。
 
 ### 为什么我的 La Poste 单号查不到记录？
 
@@ -100,4 +100,6 @@ La Poste 集团公布数据显示，2025 年有 41% 的 Colissimo 包裹在寄�
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 11 月 1 日起按商品类别征收 2 欧元欧盟处理费
 - [Douane: Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – 承运商（点名 La Poste）在派送时收取税费及其自有清关手续费说明
 - [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – La Poste 绝不通过短信或邮件索要取件费用、phishing@laposte.fr 与 33700 举报渠道
+- [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – 单号格式、校验字符、La Poste 扫描文案与 Peek 阶段、取件点、境外合作承运商及 Peek 读取的内容
+- [Universal Parcel Scraper: audited tracking history](https://github.com/plhery/universal-parcel-scraper/blob/main/testing/auditedTrackingHistory.json) – 真实包裹上出现过的 La Poste 文案
 :::

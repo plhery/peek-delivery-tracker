@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A InPost é uma rede de armários inteligentes de encomendas que começou na Polônia e entrega em armários, lojas parceiras e endereços residenciais no Reino Unido, Polônia, Itália, Portugal e outros países. Rastreie uma encomenda no site da InPost do seu país, como [inpost.co.uk/tracking](https://inpost.co.uk/tracking), ou cole o código na caixa acima. O número vem da loja ou do vendedor; o código de retirada do armário é outro.
+A InPost é uma rede de armários de encomendas que começou na Polônia e entrega em armários, lojas parceiras e endereços residenciais no Reino Unido, Polônia, Itália, Portugal e outros países. Rastreie uma encomenda no site da InPost do seu país, como [inpost.co.uk/tracking](https://inpost.co.uk/tracking), ou cole o código na caixa acima. O número vem da loja ou do vendedor; o código de retirada do armário é outro.
 
 ## Código de rastreamento da InPost: formatos e onde encontrar
 
@@ -87,7 +87,7 @@ Na Espanha, o Peek acompanha a InPost dentro da entrada Mondial Relay (procure p
 
 Ele consulta o serviço da InPost em inposteasy.com, ainda sem confirmação de resposta para números do Reino Unido. Você vê o status, os 20 eventos mais recentes com cada cidade ou hub e país no mapa, o horário da entrega e o país de destino; a InPost não informa data prevista. Em encomendas de 24 dígitos aguardando em um Paczkomat ou ponto de retirada, o nome e o endereço do ponto aparecem assim que o rastreamento polonês da InPost os confirma, mas nunca o seu código de retirada. O Peek solicita ao serviço da InPost os textos em inglês, e uma encomenda esperando em um ponto italiano pode não mostrar "Pronta para retirada". Leituras sem fuso horário são ignoradas, e seu nome, endereço e telefone nunca são lidos.
 
-O Peek não transfere o acompanhamento de um pacote da InPost para outra transportadora. Ele verifica atualizações até a cada 10 minutos — ou a cada 2 minutos a partir das 6h (horário local) do dia em que a InPost registra o pacote como saído para entrega — enquanto o rastreador da própria InPost responde (por meio de serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar você a cada mudança. Quando outra transportadora assume a entrega, como a InPost faz com alguns pacotes do exterior, o Peek segue a frequência da transportadora responsável pela entrega. Após dois dias sem novidades (12 horas enquanto a encomenda ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a verificar de hora em hora.
+O Peek não transfere o acompanhamento de um pacote da InPost para outra transportadora. Ele verifica atualizações até a cada 10 minutos — ou a cada 2 minutos a partir das 6h (horário local) do dia em que a InPost registra o pacote como saído para entrega — enquanto o rastreador da própria InPost responde (por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar você a cada mudança. Quando outra transportadora assume a entrega, como a InPost faz com alguns pacotes do exterior, o Peek segue a frequência da transportadora responsável pela entrega. Após dois dias sem novidades (12 horas enquanto a encomenda ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek passa a verificar de hora em hora.
 
 ## Perguntas sobre o rastreamento da InPost
 
@@ -125,4 +125,5 @@ A página de rastreamento da InPost Reino Unido informa aos remetentes: até 3 d
 - [InPost Portugal: Como recolher uma encomenda](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – PIN, documento de identidade e 5 ou 8 dias
 - [InPost Portugal: Fala connosco](https://www.inpost.pt/fala-connosco) – remetente, 5 dias, ponto fora de serviço, alteração de ponto, reclamações, telefone e horários
 - [InPost Easy: Parcel form](https://inposteasy.com/en) – serviço consultado pelo Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek mostra, códigos poloneses de 24 dígitos, textos em inglês da InPost, armário temporário e transferências
 :::

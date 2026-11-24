@@ -5,11 +5,13 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackPageSaid
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.security.MessageDigest
 import java.time.Instant
 import java.util.UUID
@@ -59,6 +61,38 @@ enum class ParcelFeedbackQuestion {
 
 /** What the page ends on: its newest scan, and how many it has. Empty before the first one. */
 val Parcel.feedbackScan: String get() = currentEvent?.let { "${trackingEvents.size}:${it.occurredAt}" } ?: ""
+
+/**
+ * The next step for a reader who hasn't received the parcel (`missingStep` on the web): what the page says of it, sent
+ * with the answer, the carrier the step names, and the help page of the carrier that has the parcel, else of the one
+ * it is filed under ([CarrierCatalog.helpLink]).
+ */
+data class ParcelFeedbackMissingStep(val pageSaid: ParcelFeedbackPageSaid, val carrier: String, val help: ParcelTrackingLink?) {
+    override fun equals(other: Any?): Boolean =
+        other is ParcelFeedbackMissingStep && pageSaid == other.pageSaid && carrier.equalsCanonically(other.carrier) && help == other.help
+
+    override fun hashCode(): Int = listOf(pageSaid, carrier.canonicalHashCode(), help).hashCode()
+
+    companion object {
+        /**
+         * What the page says of the parcel: delivered by its carrier's scan; delivered or on its way by steps its carrier
+         * writes in advance (a delivery on a schedule, or a route written ahead); or not delivered yet. The step names
+         * the carrier that writes the steps, else the one whose help page it links, else the one the page names.
+         */
+        fun of(parcel: Parcel, carrier: String, language: AppLanguage, catalog: CarrierCatalog = CarrierCatalog.shared): ParcelFeedbackMissingStep {
+            val help = catalog.helpLink(parcel, language)
+            val stage = parcel.currentStage
+            val written = parcel.scheduledDelivery || parcel.writtenDelivery || (stage != TrackingStage.Delivered && parcel.writtenAheadBy != null)
+            val writer = parcel.writtenAheadBy?.takeIf { written }?.let { catalog.info(it, language).displayName }
+            val said = when {
+                written -> ParcelFeedbackPageSaid.WrittenAhead
+                stage == TrackingStage.Delivered -> ParcelFeedbackPageSaid.Delivered
+                else -> ParcelFeedbackPageSaid.InTransit
+            }
+            return ParcelFeedbackMissingStep(said, writer ?: help?.name ?: carrier, help)
+        }
+    }
+}
 
 /** The parcel a question is about, as this phone remembers it. */
 sealed class ParcelFeedbackSubject {
@@ -200,6 +234,18 @@ fun ParcelFeedbackRequest.Companion.wrong(
     )
 }
 
+/** The parcel hasn't come: what the page said of it, and maybe a note. */
+fun ParcelFeedbackRequest.Companion.notReceived(
+    id: UUID = UUID.randomUUID(),
+    pageSaid: ParcelFeedbackPageSaid,
+    note: String = "",
+    language: AppLanguage,
+    app: ParcelFeedbackRequestApp,
+): ParcelFeedbackRequest = ParcelFeedbackRequest(
+    id = id, answer = ParcelFeedbackAnswer.NotReceived, note = words(note, limit = noteLimit), pageSaid = pageSaid,
+    asked = ParcelFeedbackRequestAsked.Page, app = app, locale = locale(language),
+)
+
 /** Who carries a parcel no carrier was found for: a name, its tracking page as typed, or both. */
 fun ParcelFeedbackRequest.Companion.foundElsewhere(
     id: UUID = UUID.randomUUID(),
@@ -286,6 +332,12 @@ class ParcelFeedbackModel(
         /** The words were sent: there is nothing to add. */
         Noted,
 
+        /** "I haven't received it": the next step is shown ([Page.missing]); a note may follow it. */
+        Missing,
+
+        /** The note about a parcel that hasn't come was sent. */
+        MissingNoted,
+
         /** "Not yet": the carrier's own site does not show the parcel either. */
         Early,
 
@@ -310,6 +362,8 @@ class ParcelFeedbackModel(
          * own, with no time or place of the carrier's to be wrong.
          */
         val scanned: Boolean = true,
+        /** For a reader who hasn't received the parcel: what the page says and who to ask. Without it, that isn't offered. */
+        val missing: ParcelFeedbackMissingStep? = null,
     ) {
         /** What a reader may say is off. */
         val reasons: List<ParcelFeedbackReason>
@@ -318,10 +372,10 @@ class ParcelFeedbackModel(
         override fun equals(other: Any?): Boolean =
             other is Page && subject == other.subject && question == other.question && scan.equalsCanonically(other.scan) &&
                 carrier.equalsCanonically(other.carrier) && language == other.language && untroubled == other.untroubled &&
-                scanned == other.scanned
+                scanned == other.scanned && missing == other.missing
 
         override fun hashCode(): Int =
-            listOf(subject, question, scan.canonicalHashCode(), carrier.canonicalHashCode(), language, untroubled, scanned).hashCode()
+            listOf(subject, question, scan.canonicalHashCode(), carrier.canonicalHashCode(), language, untroubled, scanned, missing).hashCode()
 
         companion object {
             /**
@@ -342,17 +396,20 @@ class ParcelFeedbackModel(
                 return Page(
                     subject, question, parcel.feedbackScan, carrier, language,
                     untroubled = parcel.untroubled(), scanned = parcel.hasCarrierUpdate,
+                    missing = if (question == ParcelFeedbackQuestion.Found) ParcelFeedbackMissingStep.of(parcel, carrier, language) else null,
                 )
             }
         }
     }
 
-    /** The sheet that takes what is off. */
+    /** The sheet that takes what is off, or the note about a parcel that hasn't come ([pageSaid]). */
     data class Words(
         /** The answer's id: a note added to an answer already sent goes under the same one. */
         val id: UUID,
         val reasons: Set<ParcelFeedbackReason>,
         val asked: ParcelFeedbackRequestAsked,
+        /** What the page said of a parcel its reader hasn't received: the sheet takes a note alone, and needs one. */
+        val pageSaid: ParcelFeedbackPageSaid? = null,
     )
 
     /** A word at the bottom of the page. */
@@ -439,7 +496,7 @@ class ParcelFeedbackModel(
 
     private var client: ParcelFeedbackClient? = null
 
-    /** The answer whose reason was given in place, for the note that may follow it. */
+    /** The answer given in place, a reason or "I haven't received it", for the note that may follow it. */
     private var given: Words? = null
     private var visit: Visit? = null
 
@@ -567,9 +624,27 @@ class ParcelFeedbackModel(
         }
     }
 
-    /** More to say about the reason just given. */
+    /** "I haven't received it", given in place: the next step shows at once ([Page.missing]). */
+    suspend fun notReceived() {
+        val page = page ?: return
+        val missing = page.missing ?: return
+        if (moment != Moment.Reasons) return
+        answering {
+            val answer = Words(id = UUID.randomUUID(), reasons = emptySet(), asked = ParcelFeedbackRequestAsked.Page, pageSaid = missing.pageSaid)
+            given = answer
+            moment = Moment.Missing
+            val feedback = ParcelFeedbackRequest.notReceived(id = answer.id, pageSaid = missing.pageSaid, language = page.language, app = app)
+            if (!deliver(feedback, page) && this.page?.subject == page.subject) {
+                given = null
+                moment = Moment.Reasons
+                word = Word.Failed
+            }
+        }
+    }
+
+    /** More to say about the answer just given in place. */
     fun addNote() {
-        if (moment != Moment.Sent) return
+        if (moment != Moment.Sent && moment != Moment.Missing) return
         val given = given ?: return
         words = given
     }
@@ -601,14 +676,18 @@ class ParcelFeedbackModel(
         return answering {
             sending = true
             try {
-                // A note added to the reason given in place is the same answer: it is not counted twice.
-                val feedback = ParcelFeedbackRequest.wrong(
-                    id = words.id, reasons = reasons, note = note, asked = words.asked, language = page.language, app = app,
-                )
+                // A note added to the answer given in place is the same answer: it is not counted twice.
+                val missing = words.pageSaid
+                if (missing != null && ParcelFeedbackRequest.words(note, limit = ParcelFeedbackRequest.noteLimit) == null) return@answering false
+                val feedback = if (missing != null) {
+                    ParcelFeedbackRequest.notReceived(id = words.id, pageSaid = missing, note = note, language = page.language, app = app)
+                } else {
+                    ParcelFeedbackRequest.wrong(id = words.id, reasons = reasons, note = note, asked = words.asked, language = page.language, app = app)
+                }
                 val sent = deliver(feedback, page, counted = words.asked == ParcelFeedbackRequestAsked.Back)
                 if (sent && this.page?.subject == page.subject) {
                     this.words = null
-                    if (this.page?.question == ParcelFeedbackQuestion.Found) moment = Moment.Noted
+                    if (this.page?.question == ParcelFeedbackQuestion.Found) moment = if (missing != null) Moment.MissingNoted else Moment.Noted
                     if (words.asked == ParcelFeedbackRequestAsked.Back) word = Word.BackSent
                 }
                 sent
@@ -687,8 +766,8 @@ class ParcelFeedbackModel(
 
     /**
      * Puts the question in the state `ParcelFeedbackPreview` names, whatever was answered before (the iPhone's
-     * `-sdt.debug.parcelFeedback`): `quiet`, `reasons`, `right`, `sent`, `noted`, `early`, `named`, `back`,
-     * `backSent`, `failed`, `words` or `carrier`; anything else asks. Debug builds only.
+     * `-sdt.debug.parcelFeedback`): `quiet`, `reasons`, `right`, `sent`, `noted`, `missing`, `missingNoted`,
+     * `early`, `named`, `back`, `backSent`, `failed`, `words`, `missingWords` or `carrier`; anything else asks. Debug builds only.
      */
     fun preview(variant: String) {
         val page = page ?: return
@@ -700,6 +779,13 @@ class ParcelFeedbackModel(
             "right" -> moment = Moment.Right
             "sent" -> moment = Moment.Sent
             "noted" -> moment = Moment.Noted
+            "missing", "missingNoted", "missingWords" -> {
+                val missing = page.missing ?: return
+                val answer = Words(id = given.id, reasons = emptySet(), asked = ParcelFeedbackRequestAsked.Page, pageSaid = missing.pageSaid)
+                this.given = answer
+                moment = if (variant == "missingNoted") Moment.MissingNoted else Moment.Missing
+                if (variant == "missingWords") words = answer
+            }
             "early" -> moment = Moment.Early
             "named" -> moment = Moment.Named
             "back" -> word = Word.Back(site = page.carrier)

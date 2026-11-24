@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackPageSaid
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 
@@ -21,10 +22,23 @@ val ParcelFeedbackModel.Moment.thanksKey: String?
     get() = when (this) {
         ParcelFeedbackModel.Moment.Right -> "feedback.pip.right"
         ParcelFeedbackModel.Moment.Sent, ParcelFeedbackModel.Moment.Noted -> "feedback.pip.sent"
+        ParcelFeedbackModel.Moment.MissingNoted -> "feedback.missing.noted"
         ParcelFeedbackModel.Moment.Early -> "feedback.unknown.early"
         ParcelFeedbackModel.Moment.Named -> "feedback.unknown.sent"
-        ParcelFeedbackModel.Moment.Ask, ParcelFeedbackModel.Moment.Quiet, ParcelFeedbackModel.Moment.Reasons -> null
+        // The next step is said by its own words ([text] of the step).
+        ParcelFeedbackModel.Moment.Ask, ParcelFeedbackModel.Moment.Quiet, ParcelFeedbackModel.Moment.Reasons,
+        ParcelFeedbackModel.Moment.Missing -> null
     }
+
+/** The next step for a parcel that hasn't come, in the words that fit what the page says: who to ask. */
+fun Localizer.text(step: ParcelFeedbackMissingStep): String = text(
+    when (step.pageSaid) {
+        ParcelFeedbackPageSaid.Delivered -> "feedback.missing.delivered"
+        ParcelFeedbackPageSaid.WrittenAhead -> "feedback.missing.writtenAhead"
+        ParcelFeedbackPageSaid.InTransit -> "feedback.missing.inTransit"
+    },
+    mapOf("carrier" to step.carrier),
+)
 
 /** What a word at the bottom of the page says. */
 fun Localizer.text(word: ParcelFeedbackModel.Word): String = when (word) {

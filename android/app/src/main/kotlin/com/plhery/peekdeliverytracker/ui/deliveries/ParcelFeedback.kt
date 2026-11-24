@@ -81,6 +81,7 @@ import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
@@ -93,6 +94,7 @@ import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -372,6 +374,8 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
 
     fun pick(reason: ParcelFeedbackReason) = answer { model.pick(reason) }
 
+    fun notReceived() = answer { model.notReceived() }
+
     fun notQuite() = answer { model.notQuite() }
 
     fun addNote() = answer { model.addNote() }
@@ -438,7 +442,13 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
  * to come in, and Pip comes in as it is taken.
  */
 @Composable
-internal fun ParcelFeedbackQuestion(work: ParcelFeedbackWork, viewport: () -> LayoutCoordinates?, modifier: Modifier = Modifier) {
+internal fun ParcelFeedbackQuestion(
+    work: ParcelFeedbackWork,
+    viewport: () -> LayoutCoordinates?,
+    modifier: Modifier = Modifier,
+    /** The carrier's help page is opened from the next step for a parcel that hasn't come (`parcel-carrier-help`). */
+    onHelp: () -> Unit = {},
+) {
     val standing = work.standing ?: return
     var arrived by rememberSaveable { mutableStateOf(false) }
     var hops by rememberSaveable { mutableIntStateOf(0) }
@@ -457,7 +467,7 @@ internal fun ParcelFeedbackQuestion(work: ParcelFeedbackWork, viewport: () -> La
         ParcelFeedbackQuestion.Found -> if (work.moment == Moment.Quiet) {
             ReportProblem(work, modifier.fillMaxWidth())
         } else {
-            PipQuestion(work, shown, hops, modifier.fillMaxWidth().then(arrival))
+            PipQuestion(work, shown, hops, onHelp, modifier.fillMaxWidth().then(arrival))
         }
         ParcelFeedbackQuestion.Unknown -> UnknownCarrierRow(work, shown, modifier.fillMaxWidth().then(arrival))
     }
@@ -471,7 +481,7 @@ internal fun ParcelFeedbackQuestion(work: ParcelFeedbackWork, viewport: () -> La
  * (`PeekKeyframes.hop`) rises and leans about his feet.
  */
 @Composable
-private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, modifier: Modifier) {
+private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, onHelp: () -> Unit, modifier: Modifier) {
     val reduceMotion = PeekTheme.reduceMotion
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val density = LocalDensity.current
@@ -505,7 +515,7 @@ private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, mod
             }
         }
         Bubble(
-            work, large,
+            work, large, onHelp,
             Modifier
                 .weight(1f)
                 .graphicsLayer {
@@ -530,7 +540,7 @@ private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, mod
  * the reasons sideways and break their lines again as they come.
  */
 @Composable
-private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier) {
+private fun Bubble(work: ParcelFeedbackWork, large: Boolean, onHelp: () -> Unit, modifier: Modifier) {
     val colors = PeekTheme.colors
     val localizer = LocalLocalizer.current
     val shape = UnevenContinuousRoundedShape(topLeading = 18.dp, bottomLeading = if (large) 18.dp else 5.dp, bottomTrailing = 18.dp, topTrailing = 18.dp)
@@ -554,11 +564,17 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
                 Moment.Reasons -> Column(Modifier.padding(end = 4.dp, top = 4.dp, bottom = 4.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Question(localizer.text("feedback.whatsOff"))
                     FeedbackFlow {
+                        // The parcel hasn't come: its own answer, first.
+                        val missing = if (work.page?.missing != null) 1 else 0
+                        if (missing == 1) {
+                            FeedbackPill(localizer.text("feedback.reason.notReceived"), FEEDBACK_NOT_RECEIVED, Modifier.comesIn(0)) { work.notReceived() }
+                        }
                         (work.page?.reasons ?: ParcelFeedbackReason.entries).forEachIndexed { order, reason ->
-                            FeedbackPill(localizer.text(reason.labelKey), FEEDBACK_REASON + reason.name, Modifier.comesIn(order)) { work.pick(reason) }
+                            FeedbackPill(localizer.text(reason.labelKey), FEEDBACK_REASON + reason.name, Modifier.comesIn(order + missing)) { work.pick(reason) }
                         }
                     }
                 }
+                Moment.Missing, Moment.MissingNoted -> NextStep(work, moment, onHelp)
                 Moment.Ask, Moment.Quiet, Moment.Early, Moment.Named -> Beside({ Question(localizer.text("feedback.pip.question")) }) {
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         FeedbackPill(localizer.text("feedback.yes"), FEEDBACK_YES) { work.right() }
@@ -637,7 +653,7 @@ private fun UnknownCarrierRow(work: ParcelFeedbackWork, shown: Boolean, modifier
             when (moment) {
                 Moment.Early -> Said(localizer.text("feedback.unknown.early"))
                 Moment.Named -> Said(localizer.text("feedback.unknown.sent"))
-                Moment.Ask, Moment.Quiet, Moment.Reasons, Moment.Right, Moment.Sent, Moment.Noted ->
+                Moment.Ask, Moment.Quiet, Moment.Reasons, Moment.Right, Moment.Sent, Moment.Noted, Moment.Missing, Moment.MissingNoted ->
                     Beside({ Question(localizer.text("feedback.unknown.question")) }) {
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             FeedbackPill(localizer.text("feedback.yes"), FEEDBACK_YES, onControl = true) { work.elsewhere() }
@@ -751,6 +767,73 @@ private fun Said(text: String) {
     }
 }
 
+/**
+ * `nextStep`: what to do about a parcel that hasn't come, in footnote in the ink, in the words that fit what the page
+ * says (`feedback.missing.*`); under it, 16 apart where they fit, the carrier's help page when it has one ([HelpLink])
+ * and the way to add a note, or the thanks once the note went.
+ */
+@Composable
+private fun NextStep(work: ParcelFeedbackWork, moment: Moment, onHelp: () -> Unit) {
+    val localizer = LocalLocalizer.current
+    val step = work.page?.missing ?: return Said(localizer.text("feedback.pip.sent"))
+    Column(Modifier.padding(end = 6.dp, top = 6.dp).testTag(FEEDBACK_NEXT_STEP), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(localizer.text(step), color = PeekTheme.colors.ink, style = PeekTheme.type.footnote.sfLines())
+        FeedbackFlow(across = 16.dp, between = 0.dp) {
+            step.help?.let { help -> HelpLink(localizer.text("link.help", mapOf("carrier" to help.name)), help.url, onHelp) }
+            if (moment == Moment.Missing) AddNote(work::addNote) else Said(localizer.text("feedback.missing.noted"))
+        }
+    }
+}
+
+/** The carrier's help page: its name in caption semibold, in the ink and underlined in it at 45 %, and an arrow out. */
+@Composable
+private fun HelpLink(text: String, url: String, onHelp: () -> Unit) {
+    val colors = PeekTheme.colors
+    val uriHandler = LocalUriHandler.current
+    Row(
+        Modifier
+            .overhang(vertical = 4.dp)
+            .testTag(FEEDBACK_HELP)
+            // A button to TalkBack, as the quiet note's help link is: Compose has no link role but a link inside a text.
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                onHelp()
+                try {
+                    uriHandler.openUri(url)
+                } catch (_: IllegalArgumentException) {
+                    // Where no app opens web pages: nothing, as with the iPhone's link.
+                }
+            }
+            .padding(vertical = 4.dp)
+            .heightIn(min = 36.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        UnderlinedText(text, colors.ink, PeekTheme.type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines())
+        PeekSymbol("arrow.up.right", font = PeekTheme.type.fixed(10f), tint = colors.ink)
+    }
+}
+
+/** Words underlined in their colour at 45 %, a line under each of their lines. */
+@Composable
+private fun UnderlinedText(text: String, color: Color, style: TextStyle) {
+    var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
+    val underline = color.copy(alpha = color.alpha * 0.45f)
+    Text(
+        text,
+        Modifier.drawBehind {
+            val lines = layout ?: return@drawBehind
+            val thickness = 1.dp.toPx()
+            for (line in 0 until lines.lineCount) {
+                val y = lines.getLineBaseline(line) + UNDERLINE_GAP.toPx()
+                drawLine(underline, Offset(lines.getLineLeft(line), y), Offset(lines.getLineRight(line), y), thickness)
+            }
+        },
+        color = color,
+        style = style,
+        onTextLayout = { layout = it },
+    )
+}
+
 /** "feedback.addNote" in caption, in the soft ink and underlined in it at 45 %, 36 tall in a touch 44 tall, a plain button. */
 @Composable
 private fun AddNote(action: () -> Unit) {
@@ -812,24 +895,26 @@ private fun FeedbackPill(title: String, tag: String, modifier: Modifier = Modifi
 }
 
 /**
- * `FeedbackFlow`: pills laid out like words, 6 apart either way, each line's pills centred on it. The height it tells
+ * `FeedbackFlow`: pills laid out like words, 6 apart either way unless told otherwise, each line's pills centred on it. The height it tells
  * a fitted sheet is the height it lays out, its lines broken the same way: Compose's FlowRow can tell a line fewer
  * where a pill only just doesn't fit, and the sheet would cut off what is under it.
  */
 @Composable
-private fun FeedbackFlow(content: @Composable () -> Unit) {
-    Layout(content, measurePolicy = FeedbackFlowPolicy)
+private fun FeedbackFlow(across: Dp = FLOW_SPACING, between: Dp = FLOW_SPACING, content: @Composable () -> Unit) {
+    Layout(content, measurePolicy = remember(across, between) { FeedbackFlowPolicy(across, between) })
 }
 
-private object FeedbackFlowPolicy : MeasurePolicy {
+/** Items `across` apart on a line, and lines `between` apart. */
+private class FeedbackFlowPolicy(private val across: Dp, private val between: Dp) : MeasurePolicy {
     override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
-        val spacing = FLOW_SPACING.roundToPx()
+        val spacing = across.roundToPx()
+        val lineGap = between.roundToPx()
         val placeables = measurables.map { it.measure(Constraints(maxWidth = constraints.maxWidth)) }
         val lines = flowLines(placeables.map { it.width }, constraints.maxWidth, spacing)
         val heights = lines.map { line -> line.maxOf { placeables[it].height } }
         val widest = lines.maxOfOrNull { line -> line.sumOf { placeables[it].width } + spacing * (line.size - 1) } ?: 0
         val width = constraints.constrainWidth(widest)
-        val height = constraints.constrainHeight(heights.sum() + spacing * max(0, lines.size - 1))
+        val height = constraints.constrainHeight(heights.sum() + lineGap * max(0, lines.size - 1))
         return layout(width, height) {
             var y = 0
             lines.forEachIndexed { index, line ->
@@ -839,7 +924,7 @@ private object FeedbackFlowPolicy : MeasurePolicy {
                     placeable.placeRelative(x, y + (heights[index] - placeable.height) / 2)
                     x += placeable.width + spacing
                 }
-                y += heights[index] + spacing
+                y += heights[index] + lineGap
             }
         }
     }
@@ -851,17 +936,17 @@ private object FeedbackFlowPolicy : MeasurePolicy {
         height(measurables, width) { minIntrinsicHeight(it) }
 
     override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int): Int =
-        measurables.sumOf { it.maxIntrinsicWidth(Constraints.Infinity) } + FLOW_SPACING.roundToPx() * max(0, measurables.size - 1)
+        measurables.sumOf { it.maxIntrinsicWidth(Constraints.Infinity) } + across.roundToPx() * max(0, measurables.size - 1)
 
     override fun IntrinsicMeasureScope.minIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int): Int =
         measurables.maxOfOrNull { it.minIntrinsicWidth(Constraints.Infinity) } ?: 0
 
     /** The lines' heights and the spacing between them, each pill as wide as it would be laid out. */
     private fun IntrinsicMeasureScope.height(measurables: List<IntrinsicMeasurable>, width: Int, tall: IntrinsicMeasurable.(Int) -> Int): Int {
-        val spacing = FLOW_SPACING.roundToPx()
+        val spacing = across.roundToPx()
         val widths = measurables.map { min(it.maxIntrinsicWidth(Constraints.Infinity), width) }
         val lines = flowLines(widths, width, spacing)
-        return lines.sumOf { line -> line.maxOf { measurables[it].tall(widths[it]) } } + spacing * max(0, lines.size - 1)
+        return lines.sumOf { line -> line.maxOf { measurables[it].tall(widths[it]) } } + between.roundToPx() * max(0, lines.size - 1)
     }
 }
 
@@ -1006,7 +1091,7 @@ internal fun ParcelFeedbackOverlays(
     Sheet(
         visible = work.words != null,
         onDismiss = work::dismissWords,
-        paneTitle = localizer.text("feedback.whatsOff"),
+        paneTitle = localizer.text(if (work.words?.pageSaid != null) "feedback.addNote" else "feedback.whatsOff"),
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = gone,
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
@@ -1069,7 +1154,9 @@ private fun FeedbackNews(work: ParcelFeedbackWork, announce: (String) -> Unit) {
     LaunchedEffect(work) {
         snapshotFlow { work.moment }.drop(1).collect { moment ->
             // An answer given on the way back is said by its own word.
-            if (work.word == null) moment.thanksKey?.let { say(localizer.text(it)) }
+            if (work.word != null) return@collect
+            moment.thanksKey?.let { say(localizer.text(it)) }
+            if (moment == Moment.Missing) work.page?.missing?.let { say(localizer.text(it)) }
         }
     }
     LaunchedEffect(work) {
@@ -1166,12 +1253,16 @@ private fun WordToast(work: ParcelFeedbackWork, word: Word, backdrop: MaterialBa
 private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
     val localizer = LocalLocalizer.current
     val haptics = rememberHaptics()
-    FeedbackSheet(localizer.text("feedback.whatsOff"), FEEDBACK_WORDS_SHEET, work.sending, work::dismissWords) {
-        FeedbackFlow {
-            for (reason in work.page?.reasons ?: ParcelFeedbackReason.entries) {
-                ReasonChip(localizer.text(reason.labelKey), FEEDBACK_CHIP + reason.name, on = reason in work.reasons, enabled = !work.sending) {
-                    work.toggle(reason)
-                    haptics.selection()
+    // For a parcel that hasn't come, the note alone.
+    val missing = work.words?.pageSaid != null
+    FeedbackSheet(localizer.text(if (missing) "feedback.addNote" else "feedback.whatsOff"), FEEDBACK_WORDS_SHEET, work.sending, work::dismissWords) {
+        if (!missing) {
+            FeedbackFlow {
+                for (reason in work.page?.reasons ?: ParcelFeedbackReason.entries) {
+                    ReasonChip(localizer.text(reason.labelKey), FEEDBACK_CHIP + reason.name, on = reason in work.reasons, enabled = !work.sending) {
+                        work.toggle(reason)
+                        haptics.selection()
+                    }
                 }
             }
         }
@@ -1462,7 +1553,7 @@ private fun Promise(text: String) {
 private fun <T> settle(reduceMotion: Boolean): FiniteAnimationSpec<T> = if (reduceMotion) Motion.easeInOut(0.2) else Motion.springWithResponse(0.42, 0.86)
 
 /** The moments Pip smiles at. */
-private val HAPPY = setOf(Moment.Right, Moment.Sent, Moment.Noted)
+private val HAPPY = setOf(Moment.Right, Moment.Sent, Moment.Noted, Moment.Missing, Moment.MissingNoted)
 
 /** `spring(response: 0.42, dampingFraction: 0.86)`, for the question's size and what folds away. */
 private val SETTLE = Motion.springWithResponse<IntSize>(0.42, 0.86)
@@ -1495,6 +1586,9 @@ const val FEEDBACK_NOT_QUITE = "parcelFeedback.notQuite"
 const val FEEDBACK_NOT_YET = "parcelFeedback.notYet"
 const val FEEDBACK_REPORT = "parcelFeedback.report"
 const val FEEDBACK_REASON = "parcelFeedback.reason."
+const val FEEDBACK_NOT_RECEIVED = "parcelFeedback.notReceived"
+const val FEEDBACK_NEXT_STEP = "parcelFeedback.nextStep"
+const val FEEDBACK_HELP = "parcelFeedback.help"
 const val FEEDBACK_ADD_NOTE = "parcelFeedback.addNote"
 const val FEEDBACK_WORD = "parcelFeedback.word"
 const val FEEDBACK_BACK_YES = "parcelFeedback.back.yes"

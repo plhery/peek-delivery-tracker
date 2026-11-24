@@ -246,6 +246,32 @@ class ParcelFeedbackScreenshotTest {
         compose.screenshot("parcel_feedback_noted_light")
     }
 
+    /**
+     * "I haven't received it", first among the reasons: the next step for a parcel still on its way (ask the seller or
+     * contact Chronopost), Chronopost's help page and the way to a note.
+     */
+    @Test
+    fun notReceivedGivesTheNextStep() {
+        show()
+        tap(FEEDBACK_NOT_QUITE)
+        tap(FEEDBACK_NOT_RECEIVED)
+        compose.screenshot("parcel_feedback_missing_light")
+    }
+
+    /** Its note: the sheet takes the note alone, and the step stays with a thanks in place of the way to it. */
+    @Test
+    fun notReceivedWithANote() {
+        show(dark = true)
+        tap(FEEDBACK_NOT_QUITE)
+        tap(FEEDBACK_NOT_RECEIVED)
+        tap(FEEDBACK_ADD_NOTE)
+        doing { typeNote("Nothing yet, and the seller hasn't answered.") }
+        compose.screenshot("parcel_feedback_missing_sheet_dark")
+        doing { sendWords() }
+        toTheEnd()
+        compose.screenshot("parcel_feedback_missing_noted_dark")
+    }
+
     // The row asked where no carrier was found.
 
     @Test

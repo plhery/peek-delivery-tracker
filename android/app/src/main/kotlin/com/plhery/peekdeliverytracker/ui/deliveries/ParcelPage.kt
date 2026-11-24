@@ -327,7 +327,10 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
             }
             // Below the paper, on the ground it lies on, 8 in from its sides and no wider than 608.
             if (feedback != null) {
-                ParcelFeedbackQuestion(feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
+                ParcelFeedbackQuestion(
+                    feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE),
+                    onHelp = { state.source.action("parcel-carrier-help") },
+                )
             }
             if (frozen) RemoveFromDevice(state, pageId)
         }

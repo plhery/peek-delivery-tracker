@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackPageSaid
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
@@ -1269,7 +1270,7 @@ class ParcelFeedbackTests {
         assertEquals(
             ParcelFeedbackModel.Page(
                 ParcelFeedbackSubject.Parcel(parcel.id), ParcelFeedbackQuestion.Found, scan = "1:2026-10-02T08:00:00Z", carrier = "DHL",
-                language = AppLanguage.De,
+                language = AppLanguage.De, missing = ParcelFeedbackMissingStep.of(parcel, carrier = "DHL", language = AppLanguage.De),
             ),
             page(parcel, madeUp = false),
         )
@@ -1323,8 +1324,8 @@ class ParcelFeedbackTests {
     @Test
     fun theViewsWordsAreInEveryLanguage() {
         val keys = ParcelFeedbackReason.entries.map { it.labelKey } + ParcelFeedbackModel.Moment.entries.mapNotNull { it.thanksKey } +
-            "feedback.report"
-        assertEquals(6 + 5 + 1, keys.size)
+            "feedback.report" + "feedback.reason.notReceived"
+        assertEquals(6 + 6 + 2, keys.size)
         for (language in AppLanguage.entries) {
             val localizer = Localizer(language)
             for (key in keys) assertNotEquals("$key in ${language.rawValue}", key, localizer.text(key))
@@ -1333,6 +1334,10 @@ class ParcelFeedbackTests {
             }
             val back = localizer.text(ParcelFeedbackModel.Word.Back(site = "Swiss Post"))
             assertTrue(back, back.contains("Swiss Post") && !back.contains("{{"))
+            for (said in ParcelFeedbackPageSaid.entries) {
+                val step = localizer.text(ParcelFeedbackMissingStep(said, "Swiss Post", help = null))
+                assertTrue("$said in ${language.rawValue}: $step", step.contains("Swiss Post") && !step.contains("{{") && !step.startsWith("feedback."))
+            }
         }
     }
 
@@ -1357,5 +1362,102 @@ class ParcelFeedbackTests {
         assertEquals(delivered, ParcelFeedbackPreview.parcel(parcels, variant = "reasons", named = delivered.id.toString()))
         assertNull(ParcelFeedbackPreview.parcel(parcels, variant = "ask", named = UUID.randomUUID().toString()))
         assertNull(ParcelFeedbackPreview.parcel(listOf(delivered, archived, waiting), variant = "ask", named = null))
+    }
+
+    // A parcel that hasn't come
+
+    /** A page whose reader may say the parcel hasn't come, which the page says DHL delivered. */
+    private fun missingPage(subject: ParcelFeedbackSubject): ParcelFeedbackModel.Page = page(subject).copy(
+        missing = ParcelFeedbackMissingStep(
+            ParcelFeedbackPageSaid.Delivered, "DHL", ParcelTrackingLink(CarrierId.Dhl, "DHL", "https://example.com/help", ParcelTrackingLink.Role.Active),
+        ),
+    )
+
+    @Test
+    fun aReaderWhoHasNotReceivedTheParcelIsGivenTheNextStepAndMayAddANote() = runTest {
+        val sent = Sent()
+        val model = visit(missingPage(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), sent, MemoryDefaults(), Clock())
+        model.notReceived()
+        assertTrue("Offered among the reasons only", sent.requests.isEmpty())
+
+        model.notQuite()
+        model.notReceived()
+
+        assertEquals("The next step shows at once", listOf(ParcelFeedbackModel.Moment.Missing), sent.moments)
+        assertEquals(ParcelFeedbackModel.Moment.Missing, model.moment)
+        val answer = sent.requests.single()
+        assertEquals(ParcelFeedbackAnswer.NotReceived, answer.answer)
+        assertEquals(ParcelFeedbackPageSaid.Delivered, answer.pageSaid)
+        assertNull(answer.reasons)
+        assertNull(answer.note)
+        assertEquals("delivered", Json.parseToJsonElement(body(answer)).jsonObject["pageSaid"]?.jsonPrimitive?.content)
+        assertEquals(listOf("parcel-feedback-not-received success"), sent.counted)
+
+        // A note follows under the same answer, which needs one and isn't counted twice.
+        model.addNote()
+        assertEquals(answer.id, model.words?.id)
+        assertEquals(ParcelFeedbackPageSaid.Delivered, model.words?.pageSaid)
+        assertFalse(model.sendWords(emptySet(), "  "))
+        assertEquals(1, sent.requests.size)
+        assertTrue(model.sendWords(emptySet(), " Nothing at reception "))
+        val note = sent.requests.last()
+        assertEquals(answer.id, note.id)
+        assertEquals(ParcelFeedbackAnswer.NotReceived, note.answer)
+        assertEquals(ParcelFeedbackPageSaid.Delivered, note.pageSaid)
+        assertEquals("Nothing at reception", note.note)
+        assertEquals(1, sent.counted.size)
+        assertNull(model.words)
+        assertEquals(ParcelFeedbackModel.Moment.MissingNoted, model.moment)
+    }
+
+    @Test
+    fun aNotReceivedAnswerThatCouldNotBeSentIsTakenBack() = runTest {
+        val sent = Sent().apply { fails = true }
+        val model = visit(missingPage(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), sent, MemoryDefaults(), Clock())
+        model.notQuite()
+        model.notReceived()
+
+        assertEquals(listOf(ParcelFeedbackModel.Moment.Missing), sent.moments)
+        assertEquals(ParcelFeedbackModel.Moment.Reasons, model.moment)
+        assertEquals(ParcelFeedbackModel.Word.Failed, model.word)
+        assertEquals(listOf("parcel-feedback-not-received error"), sent.counted)
+        model.addNote()
+        assertNull(model.words)
+
+        // A page without a next step doesn't offer it.
+        val plain = Sent()
+        visit(page(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), plain, MemoryDefaults(), Clock()).run {
+            notQuite()
+            notReceived()
+            assertEquals(ParcelFeedbackModel.Moment.Reasons, moment)
+        }
+        assertTrue(plain.requests.isEmpty())
+    }
+
+    @Test
+    fun theNextStepSaysWhatThePageSaysAndWhoToAsk() {
+        val catalog = CarrierCatalog.shared
+        fun step(parcel: Parcel) = ParcelFeedbackMissingStep.of(parcel, carrier = "Named", language = AppLanguage.Fr)
+
+        val delivered = step(parcel(stage = TrackingStage.Delivered))
+        assertEquals(ParcelFeedbackPageSaid.Delivered, delivered.pageSaid)
+        assertEquals(catalog.helpLink(parcel(stage = TrackingStage.Delivered), AppLanguage.Fr), delivered.help)
+        assertEquals(delivered.help?.name ?: "Named", delivered.carrier)
+        assertEquals(ParcelFeedbackPageSaid.InTransit, step(parcel()).pageSaid)
+
+        // A route its carrier writes in advance: ask the seller, as that carrier's steps aren't scans.
+        val written = step(parcel().copy(writtenAheadBy = CarrierId.Gzyl))
+        assertEquals(ParcelFeedbackPageSaid.WrittenAhead, written.pageSaid)
+        assertEquals(catalog.info(CarrierId.Gzyl, AppLanguage.Fr).displayName, written.carrier)
+        // Delivered by a scan of its own once the parcel came.
+        assertEquals(ParcelFeedbackPageSaid.Delivered, step(parcel(stage = TrackingStage.Delivered).copy(writtenAheadBy = CarrierId.Gzyl)).pageSaid)
+        // A delivered step written on a schedule.
+        assertEquals(ParcelFeedbackPageSaid.WrittenAhead, step(parcel(carrier = CarrierId.Gzyl, stage = TrackingStage.Delivered)).pageSaid)
+
+        // Offered where the page asks whether it is right, not on the row about an unknown carrier.
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        fun page(parcel: Parcel) = ParcelFeedbackModel.Page(parcel, subject, showsHistory = true, madeUp = false, carrier = "DHL", language = AppLanguage.Fr)
+        assertEquals(ParcelFeedbackPageSaid.InTransit, page(parcel())?.missing?.pageSaid)
+        assertNull(page(parcel(carrier = CarrierId.Unknown, stage = null))?.missing)
     }
 }

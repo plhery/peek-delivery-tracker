@@ -954,7 +954,8 @@ class ParcelFeedbackTest {
         compose.mainClock.autoAdvance = false
         node(FEEDBACK_NOT_QUITE).performClick()
         compose.mainClock.advanceTimeBy(192)
-        val tags = ParcelFeedbackReason.entries.map { FEEDBACK_REASON + it.name }
+        // "I haven't received it" first, then the reasons.
+        val tags = listOf(FEEDBACK_NOT_RECEIVED) + ParcelFeedbackReason.entries.map { FEEDBACK_REASON + it.name }
         val coming = tags.map { drawn(it).top }
         compose.mainClock.advanceTimeBy(1_500)
         // How far under its place each still is, with what the moment's own turn leaves: the first well on its way,

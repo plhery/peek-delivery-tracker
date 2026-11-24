@@ -657,7 +657,7 @@ private fun LinkShared(
                     if (identities.catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate) {
                         ParcelJournal(parcel, tint)
                     }
-                    if (feedback != null) ParcelFeedbackQuestion(feedback, { viewport[0] })
+                    if (feedback != null) ParcelFeedbackQuestion(feedback, { viewport[0] }, onHelp = { source.action("parcel-carrier-help") })
                 }
             }
         }

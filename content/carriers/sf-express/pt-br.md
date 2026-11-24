@@ -21,7 +21,7 @@ Letras minúsculas e espaços não fazem diferença no Peek.
 
 **Onde encontrar.** O código vem impresso na etiqueta (*waybill*) da embalagem e no e-mail de envio ou página do pedido da loja. Se não encontrar, consulte [como encontrar o código de rastreamento](guide:find-tracking-number).
 
-**Rastreando nos sites da SF.** O portal de Taiwan exige resolver um quebra-cabeça visual e informar o telefone do remetente ou destinatário para exibir detalhes. Remessas sob proteção de privacidade mostram as movimentações sem mapa. Na Austrália, o FAQ indica usar "Track and Trace" em [sf-international.com/au/en](https://www.sf-international.com/au/en/support/faq); para envios domésticos da China continental, a SF International solicita login no site da SF Express.
+**Rastreando nos sites da SF.** O portal de Taiwan exige resolver um quebra-cabeça visual e informar o telefone do remetente ou destinatário para exibir detalhes. Remessas sob proteção de privacidade mostram as movimentações sem mapa. Na Austrália, o FAQ indica usar "Track and Trace" em [sf-international.com/au/en](https://www.sf-international.com/au/en/support/faq); para conhecimentos (*waybills*) da China continental, a SF International pede login no site da SF Express para mostrar os detalhes.
 
 ## Significado dos status de rastreamento da SF Express
 
@@ -50,7 +50,7 @@ Os termos da SF para remessas saindo da China continental para o exterior determ
 - O pacote vai ao endereço indicado pelo remetente, não necessariamente em mãos próprias: outra pessoa no local ou a portaria/recepção central do prédio pode receber.
 - A SF não entrega em endereços que contenham apenas caixa postal ou CEP.
 - O entregador local pode realizar a entrega sem aviso telefônico prévio.
-- O comprovante de entrega pode ser assinatura, carimbo, mensagem SMS, foto no endereço, recibo em unidade/ponto de serviço/armário ou registro de retirada no sistema da SF.
+- O comprovante de entrega pode ser assinatura ou carimbo, mensagem de texto ou foto, obtidos no seu endereço, numa unidade ou ponto de serviço da SF ou num armário, ou um registro de retirada no sistema da SF.
 
 **E-Parcel e E-Commerce Express (EX-CD).** Lojistas online usam o *E-Parcel* (até 2 kg) e o *E-Commerce Express* (`EX-CD`), repassados a parceiros locais chamados genericamente de "service partner" ou "agent". Remessas `EX-CD` não aceitam devolução, mudança de endereço nem nova tentativa de entrega.
 
@@ -60,7 +60,7 @@ Os termos da SF para remessas saindo da China continental para o exterior determ
 
 ## Alfândega e impostos em envios da SF Express
 
-Impostos e taxas de importação variam conforme o país de destino (veja [encomendas retidas na alfândega](guide:customs)). No Brasil, encomendas internacionais estão sujeitas às regras do [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona). Na União Europeia, compras online de fora do bloco pagam taxa aduaneira fixa de €3 por categoria de produto em remessas até €150 (desde 1º de julho de 2026) e taxa europeia de manuseio de €2 por categoria de produto (desde 1º de novembro de 2026).
+Impostos e taxas de importação variam conforme o país de destino (veja [encomendas retidas na alfândega](guide:customs)). Para o Brasil, a Receita Federal explica como os tributos são cobrados no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona). Na União Europeia, compras online de fora do bloco pagam taxa aduaneira fixa de €3 por categoria de produto em remessas até €150 (desde 1º de julho de 2026) e taxa europeia de manuseio de €2 por categoria de produto (desde 1º de novembro de 2026).
 
 Caso o destinatário recuse o pacote ou não pague os tributos, os termos permitem devolver o envio às custas do remetente; se a alfândega retiver a remessa e o remetente não resolver em 30 dias corridos após aviso escrito, a SF pode considerá-la abandonada.
 
@@ -93,15 +93,15 @@ Tenha o número do *waybill* em mãos. Sobre reembolso ou problemas do pedido, f
 
 O [Peek](/) identifica imediatamente códigos `SF` com dígito verificador válido. Códigos de 12 dígitos são compartilhados por muitas transportadoras — cole normalmente (o Peek acompanha mais de 4.500 transportadoras) e, se a SF não aparecer automaticamente, toque em "Trocar" e escolha SF Express em "Compatível com este código" ou use "Trocar transportadora" na tela do pacote. Links de `sf-express.com` com `waybill-detail/`, do portal de Taiwan com `#search/bill-number/` ou da SF International com `No=` também identificam a SF na hora.
 
-O Peek lê o rastreamento em inglês do site da SF Taiwan: exibe a etapa e o histórico na redação da SF, convertendo entregas em "Entregue" e os rótulos principais da SF em etapas equivalentes. Os horários são lidos no relógio da China e convertidos para o fuso horário do seu dispositivo (indicado abaixo do histórico em peektracker.com e nos apps). Não há data prevista nem comprovante fotográfico, e o Peek acompanha o código da SF até o fim, sem alternar para código de parceiro local.
+O Peek lê o rastreamento em inglês do site da SF Taiwan: exibe a etapa e o histórico na redação da SF, convertendo entregas em "Entregue" e os rótulos principais da SF em etapas equivalentes. Os horários são lidos no relógio da China e aparecem no horário do seu aparelho, não no da China; em peektracker.com e nos apps para iPhone e Android, uma linha abaixo do histórico indica o fuso. Não há data prevista nem comprovante de entrega, e o Peek acompanha o código da SF até o fim, sem alternar para código de parceiro local.
 
-O Peek verifica atualizações até a cada 10 minutos enquanto você mantém o pacote aberto ou no dia da entrega com alertas ativados (e de hora em hora fora disso); sob as mesmas condições, verifica até a cada 5 minutos das 6h à meia-noite (horário da China) no dia em que a SF registra saída para entrega enquanto o rastreador da SF responde; via serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a SF nem o vendedor em seu nome.
+O Peek verifica atualizações até a cada 10 minutos enquanto você mantém o pacote aberto ou no dia da entrega com alertas ativados (e de hora em hora fora disso); sob as mesmas condições, verifica até a cada 5 minutos das 6h à meia-noite (horário da China) no dia em que a SF registra saída para entrega (no Reino Unido e na Irlanda, até as 16h, ou 17h no verão), enquanto o rastreador da SF responde; via serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a SF nem o vendedor em seu nome.
 
 ## Perguntas frequentes sobre o rastreamento SF Express
 
 ### A SF Express é confiável?
 
-Sim. Fundada em 1993 em Shenzhen, a SF possui ações listadas nas bolsas de Shenzhen e Hong Kong e se apresenta, citando relatório da Frost & Sullivan, como a maior provedora integrada de logística da China e da Ásia.
+Sim. Fundada em 1993 em Shunde, na província de Guangdong, e sediada em Shenzhen desde 2002, a SF possui ações listadas nas bolsas de Shenzhen e Hong Kong e se apresenta, citando relatório da Frost & Sullivan, como a maior provedora integrada de logística da China e da Ásia.
 
 ### O que significa `Accepted` no rastreamento da SF Express?
 
@@ -117,9 +117,12 @@ Não. Os termos da SF para envios da China continental determinam que não há e
 
 :::sources
 - [SF Express: China continental (inglês)](https://www.sf-express.com/chn/en) – rastreador da China continental
-- [SF Express: Sobre a SF](https://www.sf-express.com/chn/en/about) – fundação em 1993, sede em Shenzhen, bolsas de Shenzhen/Hong Kong e ranking Frost & Sullivan
+- [SF Express: Sobre a SF](https://www.sf-express.com/chn/en/about) – fundação em 1993 em Shunde, sede em Shenzhen desde 2002, bolsas de Shenzhen/Hong Kong e ranking Frost & Sullivan
 - [SF Express Hong Kong: Track Shipment](https://hk.sf-express.com/hk/en/waybill/list) – portal de rastreamento em Hong Kong
 - [SF Express Taiwan: Track & Trace](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) – formatos de 12 dígitos e SF, verificação visual, privacidade e rótulos de resumo
+- [SF Express Taiwan: FAQs](https://htm.sf-express.com/tw/en/Customer_Zone/download_center/FAQ/) – central de Taiwan e `02` antes no celular
+- [SF International: Company Profile](https://www.sf-international.com/cn/en/about/intro/detail/about) – divisão internacional e seus clientes
+- [SF International: Tracking](https://www.sf-international.com/us/en/support/querySupport/waybill) – waybills da China continental vistos no site da SF Express, com login
 - [SF International: Contact Us](https://www.sf-international.com/us/en/about/contact) – centrais telefônicas e horários regionais
 - [SF International UK: Global Shipping Services](https://www.sf-international.com/gb/en) – e-mail `uk_csd@sf-express.com`
 - [SF International Europe: Global Shipping Services](https://www.sf-international.com/eu/en) – WhatsApp `+31 6 43249528` e horário

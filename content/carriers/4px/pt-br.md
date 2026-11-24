@@ -14,7 +14,7 @@ A 4PX não publica exemplos oficiais de código; seu rastreador aceita de 5 a 50
 
 | Código (inventado) | A quem pertence |
 | --- | --- |
-| `4PX4829173640581CN` | `4PX`, 13 dígitos e `CN`: código próprio da 4PX. |
+| `4PX4829173640587CN` | `4PX`, 13 dígitos e `CN`: código próprio da 4PX. |
 | `LP4829173640581CN` | `LP`, 13 dígitos e `CN`: provável 4PX. |
 | `LP48291736405812` | `LP` e 14 dígitos, sem `CN`: [Cainiao](carrier:cainiao) (referência logística do AliExpress). |
 | `RR482917367GB` | [Código postal](guide:tracking-number-formats) terminado em sigla de país: correio daquele país (aqui, Royal Mail). |
@@ -48,7 +48,7 @@ Acima das movimentações, a 4PX atribui um rótulo de resumo a cada pacote: `re
 
 A 4PX não realiza a entrega final na porta do destinatário: segundo o site, o pacote é repassado "à empresa de entrega do país de destino" (como Royal Mail no Reino Unido ou USPS nos EUA). Quando ocorre o repasse, o quadro "Terminal Service Provider" na página de resultado mostra o site e o contato dessa transportadora local.
 
-Tentativas de entrega, avisos, reagendamento e prazo de guarda seguem as regras dessa transportadora local, pois a 4PX não publica regras próprias. O aviso de `Arrived for Pickup` recomenda retirar o pacote "o quanto antes para evitar devolução pelo provedor". Após `Delivery attempt unsuccessful`, use o "Tracking No." e os dados do quadro local para solicitar nova tentativa ou retirada. Em encomendas enviadas ao Brasil, a cobrança de tributos na importação segue o [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona).
+Tentativas de entrega, avisos, reagendamento e prazo de guarda seguem as regras dessa transportadora local, pois a 4PX não publica regras próprias. O aviso de `Arrived for Pickup` recomenda retirar o pacote "o quanto antes para evitar devolução pelo provedor". Após `Delivery attempt unsuccessful`, use o "Tracking No." e os dados do quadro local para solicitar nova tentativa ou retirada. Para encomendas enviadas ao Brasil, a Receita Federal explica como os tributos são cobrados no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona).
 
 ## Encomenda 4PX sem atualização, perdida ou devolvida
 
@@ -72,11 +72,11 @@ A 4PX não lista contatos locais para destinatários no Brasil, Europa ou Estado
 
 ## Rastrear uma encomenda 4PX com o Peek
 
-O [Peek](/) reconhece códigos `4PX…CN` imediatamente. Para códigos `LP` terminados em `CN`, o app exibe "Consultando serviços de rastreamento…" e depois "4PX está com esta encomenda." assim que a 4PX confirma; se ainda não houver resposta, selecione a transportadora tocando em "Trocar". Links de `track.4px.com` contendo `#/result/0/` e o código são identificados como 4PX independentemente do formato, inclusive para o "Tracking No." local. Pedidos com múltiplos volumes seguem pelos serviços globais de rastreamento.
+O [Peek](/) reconhece códigos `4PX…CN` imediatamente. Para códigos `LP` terminados em `CN`, o app exibe "Consultando serviços de rastreamento…" e depois "4PX está com esta encomenda." assim que a 4PX confirma; se a 4PX não o conhecer, escolha a transportadora em "Trocar". Links de `track.4px.com` contendo `#/result/0/` e o código são identificados como 4PX independentemente do formato, inclusive para o "Tracking No." local. Pedidos com múltiplos volumes seguem pelos serviços globais de rastreamento.
 
 O Peek lê a 4PX em inglês e exibe a etapa, o histórico com o local de cada leitura no mapa, a hora da entrega, o país de destino e a transportadora local com seu número. Quando essa parceira faz parte da lista do Peek (como o USPS), o acompanhamento passa para ela assim que registra progresso mais recente. `Out for delivery` e `Delivery attempt unsuccessful` aparecem traduzidos nas etapas do Peek; demais linhas mantêm o texto da 4PX. A 4PX não informa data prevista de entrega nem peso.
 
-Os horários respeitam os fusos da 4PX (ou do local quando ausente) e são exibidos no relógio do seu dispositivo. Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ativados, o Peek verifica atualizações até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega, enquanto o rastreador próprio da 4PX responde; fora disso, checa de hora em hora. Pelos serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a 4PX nem a loja em seu nome.
+Os horários respeitam os fusos da 4PX (ou do local quando ausente) e aparecem no horário do seu aparelho. Enquanto você mantém a encomenda aberta, ou no dia da entrega com alertas ativados, o Peek verifica atualizações até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário local no dia em que sai para entrega, enquanto o rastreador próprio da 4PX responde; fora disso, checa de hora em hora. Pelos serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a 4PX nem a loja em seu nome.
 
 ## Perguntas frequentes sobre o rastreamento 4PX
 
@@ -86,7 +86,7 @@ Em Shenzhen, na China: o portal de rastreamento indica a *4PX Express Co., Ltd.*
 
 ### A 4PX é confiável?
 
-Sim. A 4PX é uma operadora logística chinesa consolidada, com portal próprio de rastreio global e parque logístico inteligente em Dongguan em parceria com a [Cainiao](carrier:cainiao). Se o site mostrar `No Data Found`, confira se o código está correto ou aguarde as primeiras leituras com o vendedor.
+Sim. A 4PX é uma operadora logística chinesa consolidada, com portal próprio de rastreio global e parque logístico inteligente em Dongguan em parceria com a [Cainiao](carrier:cainiao). Se o site mostrar `No Data Found`, a 4PX diz que o código pode estar errado ou ainda sem atualizações: confira-o e depois pergunte à loja.
 
 ### O que significa `Parcel information received` na 4PX?
 
@@ -98,6 +98,8 @@ A 4PX não divulga prazos oficiais ao destinatário; considere a estimativa info
 
 :::sources
 - [4PX: Global Order Tracking](https://track.4px.com/) – regras de código, rótulos de resumo, tradução, quadro Terminal Service Provider e seção de contato (`0755-23508000`, `track@4px.com`)
+- [4PX: arquivo de idioma do site de rastreamento](https://track.4px.com/js/index.6aecf0a2c58f0d7c56a3.js) – avisos dos rótulos, repasse à transportadora do país de destino e mensagem sem rastro
+- [4PX: Privacy Policy](https://track.4px.com/#/help/privacy) – 4PX Group e reclamações
 - [4PX: For Perfect X-border](https://www.4px.com/view/index.html) – visão geral da empresa e soluções para vendedores
 - [4PX: Devoluções (退换货)](https://www.4px.com/view/return.html) – devoluções como serviço voltado a lojistas
 - [4PX: Voo inaugural Chengdu–Londres](https://www.4px.com/view/newsCenterContentfive.html) – fundação em 2004

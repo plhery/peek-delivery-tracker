@@ -40,17 +40,17 @@ As principais movimentações, na ordem habitual:
 | `Arrived at pick-up point. Package available for collection.` | Disponível para retirada em ponto de coleta. |
 | `Package delivered` | Entregue a você ou retirado por você. |
 
-`Carrier update` é uma atualização geral indicando pacote em trânsito. `Accepted for transportation by postal service` significa que um correio parceiro assumiu após o repasse, não uma primeira coleta; `Delivery Carrier Accepted` confirma que a transportadora local recebeu o pacote. A chegada ao ponto de retirada registra a assinatura do próprio estabelecimento, e `Package delivered` surge quando você faz a retirada. `Processing delay at sorting center` indica atraso operacional, não extravio; `Delivery failed` encerra a entrega após as tentativas; e `Shipment cancelled` mostra que o pedido de coleta do vendedor foi cancelado antes do embarque (exibido como "Precisa de atenção" no Peek). Veja também [o que significam os status de rastreamento](guide:tracking-statuses).
+`Carrier update` é uma atualização geral indicando pacote em trânsito. `Accepted for transportation by postal service` significa que um correio parceiro assumiu após o repasse, não uma primeira coleta; `Delivery Carrier Accepted` confirma que a transportadora local recebeu o pacote. A chegada ao ponto de retirada registra a assinatura do próprio estabelecimento, e `Package delivered` surge quando você faz a retirada. `Processing delay at sorting center` indica atraso operacional, não extravio; `Delivery failed` encerra a entrega após as tentativas; e `Shipment cancelled` mostra que o pedido de coleta do vendedor foi encerrado antes de qualquer coleta: o envio foi cancelado e não será entregue (exibido como "Precisa de atenção" no Peek). Veja também [o que significam os status de rastreamento](guide:tracking-statuses).
 
 ## Tentativa sem sucesso, pontos de retirada e alfândega no Brasil
 
-A Cainiao informa operar entrega local própria em nove países e regiões — citando Espanha, França e Polônia, onde possui armários próprios —, mas não nomeia um único parceiro local para todos os destinos. Após o repasse no país de destino, o botão "View Contact Information" da página de rastreamento exibe os dados da transportadora local quando disponíveis.
+A Cainiao diz fazer entrega local em nove países e regiões, sem nomeá-los; em outra página, cita Espanha, França e Polônia, onde tem armários próprios. Após o repasse no país de destino, o botão "View Contact Information" da página de rastreamento exibe os dados da transportadora local quando disponíveis.
 
 O aviso de rastreamento da Cainiao ressalva que fretes econômicos "não incluem rastreamento após o pacote ser entregue à transportadora do país de destino". Para saber qual empresa assumiu, consulte o vendedor ou veja [como rastrear encomendas da China](guide:tracking-from-china).
 
 Na terminologia da Cainiao, `Undelivered` abrange destinatário ausente, endereço não localizado ou reagendamento solicitado, orientando contatar a transportadora para nova tentativa ou retirada. `Awaiting Collection` e `First Notification to recipient` indicam que o pacote aguarda coleta — retire quanto antes para evitar devolução ao remetente. Na Espanha, onde a Cainiao opera com os contatos da Ecoscooting, o FAQ da Ecoscooting informa nova tentativa em até 3 dias úteis e guarda por 14 dias em pontos de retirada ou armários com envio de PIN por e-mail ou SMS.
 
-**Alfândega no Brasil.** Em compras do AliExpress enviadas ao Brasil, a tributação segue o [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona): em compras certificadas, o Imposto de Importação e o ICMS são recolhidos no checkout; fora do programa, os tributos são cobrados na entrada no país.
+**Alfândega no Brasil.** A Receita Federal explica no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) como os tributos de compras internacionais são cobrados: em sites certificados, o Imposto de Importação e o ICMS são cobrados na compra; quando o site não os cobra, eles são cobrados na chegada ao Brasil.
 
 ## Rastreamento Cainiao sem atualização ou pacote perdido
 
@@ -77,7 +77,7 @@ Os telefones publicados no site chinês atendem a China e lojistas. Na Espanha, 
 
 O [Peek](/) exibe essas remessas como "AliExpress / Cainiao". Ele reconhece imediatamente códigos `DOFR`, `CNFR`, `CNG` e `AP`; para códigos `LP` e referências como `CNUSUP`, `CNBR` ou `CNMEX`, consulta a Cainiao entre as transportadoras compatíveis. Códigos postais digitados isoladamente vão ao correio correspondente, exceto os terminados em `TY`, `MI`, `XX` ou `GO`, para os quais a Cainiao também é consultada. Para outros códigos postais, colar o link de `global.cainiao.com` com `mailNoList=` direciona direto à Cainiao (links de `track.cainiao.com` ou páginas de pedido do AliExpress não são reconhecidos).
 
-Em alguns envios, o AliExpress informa já o número da transportadora de destino (como um código SDA para a Itália) enquanto o pacote ainda está com a Cainiao. Nesses casos, o Peek consulta ambas e mantém o pacote em AliExpress / Cainiao, incorporando as leituras locais assim que surgem.
+Em alguns envios, o AliExpress informa já o número da transportadora de destino (como um código SDA para a Itália) enquanto o pacote ainda está com a Cainiao. Para alguns desses formatos, o Peek consulta a Cainiao junto com essa transportadora; se as duas conhecem o código, o pacote fica em AliExpress / Cainiao, e as leituras da transportadora de destino entram no histórico assim que ela registra o pacote.
 
 O Peek verifica a Cainiao até a cada 30 minutos, inclusive quando sai para entrega (ou a cada hora após uma consulta sem resposta), marca cada movimentação no mapa e oferece alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Quando outra transportadora assume a entrega, o Peek passa a seguir o ritmo dela. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), checa de hora em hora. Quando acompanha via serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. O Peek exibe etapa, histórico, local da leitura quando informado, janela prevista de entrega, hora da entrega e código local quando divulgado pela Cainiao, mas não pode contatar a Cainiao nem abrir disputa em seu nome.
 
@@ -89,7 +89,7 @@ A leitura mais recente indica a etapa atual e a cidade, quando informada. Depois
 
 ### A Cainiao é confiável?
 
-Sim. A Cainiao é o grupo logístico do Alibaba, fundado em 2013 em Hangzhou, na China, e é o portal oficial indicado pelo AliExpress aos seus compradores.
+Sim. A Cainiao é o grupo logístico do Alibaba, fundado em 2013 e sediado em Hangzhou, na China, e o AliExpress envia seus compradores ao site de rastreamento da Cainiao.
 
 ### Quanto tempo a Cainiao demora para entregar?
 
@@ -104,6 +104,7 @@ A Cainiao não informa um prazo global e recomenda retirar imediatamente para ev
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – regra de letras e dígitos
 - [Cainiao: Logistics Status Explanation](https://global.cainiao.com/helpDoc.htm?slug=phdx0i) – significados de status e orientação de retirada
 - [Cainiao: FAQ](https://global.cainiao.com/helpDoc.htm?slug=bp5fbp) – atrasos, alfândega, devoluções e disputas
+- [Cainiao: arquivo de idioma da página de rastreamento](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – aviso do frete econômico e botão "View Contact Information"
 - [Cainiao: About Cainiao](https://www.cainiao.com/en/about-us-brief-introduction.html) – grupo Alibaba, fundação em 2013 e nove países com entrega local
 - [Cainiao: Overseas Local](https://www.cainiao.com/en/global-local-capabilities.html) – operações e armários na Espanha, França e Polônia
 - [Cainiao: Cross-border Express Delivery](https://www.cainiao.com/en/global-express.html) – prazos Premium, Standard e Economy

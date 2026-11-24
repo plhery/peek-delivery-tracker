@@ -279,7 +279,7 @@
   { "id": "jumppoint-international", "catalog": "jumppoint-international", "name": "Jumppoint International Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "kuayuan-express", "catalog": "kuayuan-express", "name": "Kuayuan Express", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "liccardi", "catalog": "liccardi", "name": "Liccardi Express Courier", "languages": ["en", "it", "fr", "de", "es", "pt", "pl"] },
-  { "id": "maersk-ecommerce", "catalog": "maersk-ecommerce", "name": "Maersk eCommerce", "languages": ["en"] },
+  { "id": "maersk-ecommerce", "catalog": "maersk-ecommerce", "name": "Maersk eCommerce", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "pdu", "catalog": "pdu", "name": "PDU", "languages": ["en"] },
   { "id": "post-haste", "catalog": "post-haste", "name": "Post Haste", "languages": ["en"] },
   { "id": "redur", "catalog": "redur", "name": "Redur", "languages": ["en", "es"] },

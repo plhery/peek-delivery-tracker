@@ -4700,6 +4700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#014895"
     },
     {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "maersk-ecommerce-sendungsverfolgung",
+      "title": "Maersk eCommerce Sendungsverfolgung: 1M-Codes & Status",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6996,6 +7004,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Liccardi Express Courier\u00a0: codes LDV, statuts et aide",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "suivi-maersk-ecommerce",
+      "title": "Suivi Maersk eCommerce\u00a0: codes 1M, statuts et aide",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "buffalo-ex",
@@ -9296,6 +9312,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#014895"
     },
     {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "tracciamento-maersk-ecommerce",
+      "title": "Tracciamento Maersk eCommerce: codici 1M, stati e aiuto",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "tracciamento-buffalo-ex",
@@ -11584,6 +11608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Liccardi Express Courier: códigos LDV y ayuda",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "seguimiento-maersk-ecommerce",
+      "title": "Seguimiento Maersk eCommerce: códigos 1M, estados y ayuda",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "redur",
@@ -13906,6 +13938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Liccardi Express Courier: códigos LDV e apoio",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "rastreio-maersk-ecommerce",
+      "title": "Rastreio Maersk eCommerce: códigos 1M, estados e apoio",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "buffalo-ex",
@@ -16278,6 +16318,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Liccardi Express Courier: kody LDV i pomoc",
       "name": "Liccardi Express Courier",
       "color": "#014895"
+    },
+    {
+      "id": "maersk-ecommerce",
+      "catalog": "maersk-ecommerce",
+      "slug": "sledzenie-maersk-ecommerce",
+      "title": "Śledzenie Maersk eCommerce: kody 1M, statusy i pomoc",
+      "name": "Maersk eCommerce",
+      "color": "#42b0d5"
     },
     {
       "id": "buffalo-ex",

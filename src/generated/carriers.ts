@@ -4636,6 +4636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff7700"
     },
     {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "cmt-express-sendungsverfolgung",
+      "title": "CMT Express Sendungsverfolgung: CMT-Codes & Kontakte",
+      "name": "CMT Express",
+      "color": "#ed010b"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6846,6 +6854,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff7700"
     },
     {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "suivi-cmt-express",
+      "title": "Suivi CMT Express\u00a0: codes CMT, hub Shenzhen et contacts",
+      "name": "CMT Express",
+      "color": "#ed010b"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9040,6 +9056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff7700"
     },
     {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "tracciamento-cmt-express",
+      "title": "Tracciamento CMT Express: codici CMT, hub Shenzhen e aiuto",
+      "name": "CMT Express",
+      "color": "#ed010b"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11232,6 +11256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento CJ Packet: códigos CJP...YQ, traspaso y ayuda",
       "name": "CJ Packet",
       "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "seguimiento-cmt-express",
+      "title": "Seguimiento CMT Express: códigos CMT, hub Shenzhen y ayuda",
+      "name": "CMT Express",
+      "color": "#ed010b"
     },
     {
       "id": "correos-de-mexico",
@@ -13466,6 +13498,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio CJ Packet: códigos CJP...YQ, entrega e contactos",
       "name": "CJ Packet",
       "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "rastreio-cmt-express",
+      "title": "Rastreio CMT Express: códigos CMT, hub Shenzhen e ajuda",
+      "name": "CMT Express",
+      "color": "#ed010b"
     },
     {
       "id": "buffalo-ex",
@@ -15734,6 +15774,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie CJ Packet: kody CJP...YQ, przekazanie i kontakt",
       "name": "CJ Packet",
       "color": "#ff7700"
+    },
+    {
+      "id": "cmt-express",
+      "catalog": "cmt-express",
+      "slug": "sledzenie-cmt-express",
+      "title": "Śledzenie CMT Express: kody CMT, hub Shenzhen i kontakt",
+      "name": "CMT Express",
+      "color": "#ed010b"
     },
     {
       "id": "buffalo-ex",

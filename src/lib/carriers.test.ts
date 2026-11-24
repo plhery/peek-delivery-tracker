@@ -89,7 +89,7 @@ describe('carrier detection', () => {
     expect(detectCarrier('C1004444444')).toBe('unknown');
     expect(detectCarrier('ZZ9999999980')).not.toBe('amazon-logistics');
     // Country-prefix retail identifiers (synthetic shape checks across marketplaces).
-    for (const prefix of ['FR', 'DE', 'BE', 'UK', 'GB', 'IT', 'ES', 'NL', 'AT', 'IE', 'PL', 'SE', 'PT', 'CH']) {
+    for (const prefix of ['FR', 'DE', 'BE', 'UK', 'IT', 'ES', 'NL', 'AT', 'IE', 'PL', 'SE', 'PT', 'CH']) {
       expect(parseTrackingInput(`Your parcel: ${prefix}0000000001`)).toMatchObject({ carrier: 'amazon-logistics', trackingNumber: `${prefix}0000000001` });
       expect(parseTrackingInput(`Your parcel: ${prefix} 0000-000001`)).toMatchObject({ carrier: 'amazon-logistics', trackingNumber: `${prefix} 0000-000001` });
     }

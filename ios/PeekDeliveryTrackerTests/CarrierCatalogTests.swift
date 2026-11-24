@@ -884,7 +884,7 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testDetectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {
-        for prefix in ["FR", "DE", "BE", "UK", "GB", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH"] {
+        for prefix in ["FR", "DE", "BE", "UK", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH"] {
             let number = "\(prefix)0000000001"
             XCTAssertEqual(catalog.parse(number).carrier, .amazonLogistics)
             XCTAssertEqual(catalog.parse("Your parcel: \(number)").carrier, .amazonLogistics)

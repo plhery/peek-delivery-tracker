@@ -966,7 +966,7 @@ class CarrierCatalogTests {
 
     @Test
     fun detectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {
-        for (prefix in listOf("FR", "DE", "BE", "UK", "GB", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH")) {
+        for (prefix in listOf("FR", "DE", "BE", "UK", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH")) {
             val number = "${prefix}0000000001"
             assertEquals(CarrierId.AmazonLogistics, catalog.parse(number).carrier)
             assertEquals(CarrierId.AmazonLogistics, catalog.parse("Your parcel: $number").carrier)

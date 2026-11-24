@@ -4708,6 +4708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#42b0d5"
     },
     {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "onlog-express-sendungsverfolgung",
+      "title": "Onlog Express Sendungsverfolgung: AA-Codes & Hilfe",
+      "name": "Onlog Express",
+      "color": "#1a345d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -7022,6 +7030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#42b0d5"
     },
     {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "suivi-onlog-express",
+      "title": "Suivi Onlog Express\u00a0: codes AA, statuts Brésil et aide",
+      "name": "Onlog Express",
+      "color": "#1a345d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9334,6 +9350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Maersk eCommerce: codici 1M, stati e aiuto",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "tracciamento-onlog-express",
+      "title": "Tracciamento Onlog Express: codici AA, stati e aiuto",
+      "name": "Onlog Express",
+      "color": "#1a345d"
     },
     {
       "id": "buffalo-ex",
@@ -11658,6 +11682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00308a"
     },
     {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "seguimiento-onlog-express",
+      "title": "Seguimiento Onlog Express: códigos AA, estados y ayuda",
+      "name": "Onlog Express",
+      "color": "#1a345d"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "seguimiento-buffalo-ex",
@@ -13978,6 +14010,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Maersk eCommerce: códigos 1M, estados e apoio",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "rastreio-onlog-express",
+      "title": "Rastreio Onlog Express: códigos AA, estados e apoio",
+      "name": "Onlog Express",
+      "color": "#1a345d"
     },
     {
       "id": "buffalo-ex",
@@ -16366,6 +16406,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Maersk eCommerce: kody 1M, statusy i pomoc",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "onlog-express",
+      "catalog": "onlog-express",
+      "slug": "sledzenie-onlog-express",
+      "title": "Śledzenie Onlog Express: kody AA, statusy Brazylia i pomoc",
+      "name": "Onlog Express",
+      "color": "#1a345d"
     },
     {
       "id": "buffalo-ex",

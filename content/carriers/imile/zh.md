@@ -17,12 +17,12 @@ iMile 官网没有公开统一的单号规范，但实际包裹主要采用以�
 | `IM06014829173640` | `IM` 加 `0601` 再加 10 位数字：iMile 专属单号。 |
 | `IM48291736405812` | `IM` 加 14 位数字：同样属于 iMile。 |
 | `6041526482917` | `6` 开头的 13 位数字，紧随其后的 6 位为“月日年”日期形态：iMile 自有运单号。 |
-| `49482917364058` | `49` 开头的 14 位数字：常见于发往欧洲等地的 iMile 包裹；由于 DPD、BRT、Chronopost 等也用 14 位数字，Peek 会将 iMile 列为优先询问对象之一。 |
+| `49482917364058` | `49` 开头的 14 位数字：见于发往意大利的 iMile 包裹。DPD、BRT、Chronopost 等也用 14 位数字，单看格式无法确定，但 Peek 会优先询问 iMile。 |
 | `3482917364058` | `3` 开头的 13 位数字：常用于 iMile，但 FAN Courier 等承运商同样使用 `3` 开头 13 位号，Peek 会同时向多家核实。 |
 | `2482917364058` | 其他 13 位数字：不符合 iMile 单号格式，可能属于韵达、韩国邮政等承运商。 |
 | `LP61840295738142` | `LP` 加 14 位数字：属于速卖通[菜鸟（Cainiao）](carrier:cainiao)物流单号，并非 iMile 原生运单。 |
 
-在 iMile 官网查询时，若系统尚未收录该单号，结果框会保持空白而不会报错。如果在订单中找不到运单号，可参阅[如何查找快递单号](guide:find-tracking-number)（英文）并联系购物店铺确认。
+在 iMile 查询页的“输入您的订单号”处输入单号，轨迹显示在“订单状态”下；若 iMile 尚未收录该单号，结果框会保持空白而不会报错。如果在订单中找不到运单号，可参阅[如何查找快递单号](guide:find-tracking-number)（英文）并联系购物店铺确认。
 
 ## iMile 英文物流轨迹含义解析
 
@@ -54,9 +54,9 @@ Peek 读取到的 iMile 扫描轨迹均为英文原文，其中带有中文方�
 
 ## iMile 跨境网络与末端派送规则
 
-iMile 的国际直邮派送（International Dropship Delivery）页面写明，公司配备自营最后一公里派送团队，从中国出发的线路覆盖阿联酋、沙特阿拉伯、墨西哥、阿曼、科威特、卡塔尔、巴林、黎巴嫩、澳大利亚、约旦、南非与马来西亚，并在欧洲和拉美多国设有实体与本地站点。
+iMile 的国际直邮派送（International Dropship Delivery）页面写明，公司配备自营最后一公里派送团队，从中国出发的线路覆盖阿联酋、沙特阿拉伯、墨西哥、阿曼、科威特、卡塔尔、巴林、黎巴嫩、澳大利亚、约旦、南非与马来西亚。
 
-**改约派送与签收凭证。** iMile 并未在官网公布各国统一的派送尝试次数、通知单规则或自提点保管期限，实际处理以追踪扫描为准。其通用[常见问题页面](https://www.imile.com/CN-zh/CustomerService/FAQ)说明：可通过客服热线申请改约派送；如需更改收货地址，须在包裹进入最终派送阶段前联系客服或通过 iMile 在线助手提交；签收凭证通常为投递点照片以及适用时的电子签名。iMile 官网追踪页也提供签收证明入口（需验证授权用户身份），部分派送中扫描还会附上派送员电话或当地客服热线。如遇投递未成功，可参阅[错过派送怎么办](guide:missed-delivery)（英文）。
+**改约派送与签收凭证。** iMile 并未在官网公布各国统一的派送尝试次数、通知单规则或自提点保管期限，实际处理以追踪扫描为准。其中文[常见问题页面](https://www.imile.com/CN-zh/CustomerService/FAQ)说明可通过客服热线申请改约派送；英文[常见问题页面](https://www.imile.com/en/CustomerService/FAQ)还说明：如需更改收货地址，须在包裹进入最终派送阶段前联系客服或通过 iMile 在线助手提交；签收凭证通常为投递点照片以及适用时的电子签名。iMile 官网追踪页也提供签收证明入口（需验证授权用户身份），部分派送中扫描还会附上派送员电话或当地客服热线。如遇投递未成功，可参阅[错过派送怎么办](guide:missed-delivery)（英文）。
 
 **欧盟进口关税与 2 欧元处理费。** 从欧盟以外（如中国）寄往欧盟成员国的跨境网购包裹，自 2026 年 7 月 1 日起，货值不超过 150 欧元的每类商品适用 3 欧元欧盟固定关税；自 2026 年 11 月 1 日起，不论订单货值高低，每类商品另须缴纳 2 欧元欧盟处理费。iMile 官网未说明这些税费的具体代收方式，请向购物平台确认是否已在结账时预缴，详见[包裹被海关扣留怎么办](guide:customs)（英文）。
 
@@ -74,10 +74,10 @@ iMile 的国际直邮派送（International Dropship Delivery）页面写明，�
 
 ## iMile 官方客服与联系方式
 
-根据 [iMile 中文官网](https://www.imile.com/CN-zh) 及英文[办公地点](https://www.imile.com/en/CustomerService/OfficeLocations)与[客户支持](https://www.imile.com/en/CustomerService/CustomerSupport)页面：
+根据 [iMile 中文官网](https://www.imile.com/CN-zh)、[澳大利亚法律声明](https://www.imile.com/AU-en/LegalNotice)与英文[客户支持](https://www.imile.com/en/CustomerService/CustomerSupport)页面：
 
 - **iMile Chat 在线助手**：点击 `imile.com` 右下角聊天按钮即可打开虚拟客服，支持英文、阿拉伯语、西班牙语、意大利语、葡萄牙语、匈牙利语与德语。
-- **澳大利亚客服**：热线 `+61 272 557 988`，邮箱 `customerservice-aus@imile.me`，仅限文字消息的 WhatsApp `+61 423796724`。
+- **澳大利亚客服**：热线 `+61 272 557 988`，邮箱 `customerservice-aus@imile.me`。
 - **客户支持表单**：位于官网客户支持页面，提交包裹咨询时需填写公司名称与日均订单量。
 - **中国与全球其他地区**：官网未公布面向个人买家的中国本地收件人电话或邮箱；涉及跨境网购订单问题，直接联系购物店铺或电商平台通常更快。
 
@@ -85,11 +85,11 @@ iMile 的国际直邮派送（International Dropship Delivery）页面写明，�
 
 粘贴 `IM0601…` 单号后，[Peek](/) 会立刻自动识别为 iMile（“识别出的快递公司”）。对于其他 `IM` 开头 14 位单号、`49` 开头 14 位单号，以及 `6` 或 `3` 开头的 13 位单号，由于与其他承运商共享长度，请照常粘贴——Peek 支持超过 4,500 家承运商，会在添加时先向格式匹配的承运商核实（对 `49` 开头及 `6` 开头日期形态单号会优先询问 iMile），一旦确认即显示“iMile 有这个包裹的记录。”；若暂未查到或需手动指定，可在添加时点击“更换”，或在已添加包裹页点击“更换快递公司”。包含 `/track?waybillNo=` 的 `imile.com` 追踪链接也可直接粘贴识别。
 
-Peek 直接读取 iMile 的英文追踪接口，展示标准中文阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“派送未成功”、“待取件”、“已签收”、“已退回寄件人”、“需要留意”）、带有中心或城市定位的地图轨迹、目的地国家，并将按目的国时钟读取的扫描时间自动换算为你的设备本地时区。若包裹前段由[菜鸟（Cainiao）](carrier:cainiao)运出中国再交由 iMile 派送，Peek 会把菜鸟前程的揽收、分拣、出口、航班与清关记录一并衔接在 iMile 历史之前。
+Peek 直接读取 iMile 的英文追踪接口，展示标准中文阶段（“已生成面单”、“已揽收”、“运输中”、“清关中”、“派送中”、“派送未成功”、“待取件”、“已签收”、“已退回寄件人”、“需要留意”）、带有中心或城市定位的地图轨迹、目的地国家，并将按目的国时钟读取的扫描时间自动换算为你的设备本地时区。若包裹前段由[菜鸟（Cainiao）](carrier:cainiao)运出中国再交由 iMile 派送，Peek 会把菜鸟前程的揽收、分拣、出口、航班与进口记录一并衔接在 iMile 历史之前。
 
 Peek 会将最新一条 `Shipment is scheduled to` 预约的日期显示为预计送达日，直至出现派送失败、异常、到达自提点、签收、退回或晚于该日期的新扫描。Peek 不显示包裹重量、具体服务名称、收件人姓名与地址、签收照片、联系信息或付款详情，同时会从轨迹文本中剔除派送员手机号与 iMile 客服热线。
 
-在打开包裹页面或预计派送当天开启提醒时，Peek 最高每 10 分钟检查一次，在 iMile 扫出“派送中”当天自当地时间早上 6 点起最高每 2 分钟检查一次（仅在 iMile 官网正常响应时）；其余时间每小时检查一次。若仅由第三方聚合追踪服务返回结果，Peek 每小时检查一次，最新扫描满一天后降为每 3 小时一次，派送当天在打开页面或开启提醒时最高每 15 分钟一次。连续两天无新动态（或停留在“已生成面单”、“已揽收”满 12 小时）后，刷新频率转为每小时一次（除非当前打开页面或预计今天送达）；若停留在“已生成面单”满七天无更新，则降为每 6 小时一次。当最新扫描满四天且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自 10 月 12 日周一起没有物流更新”），并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 iMile 查询。”及“向 iMile 寻求帮助”链接；超过三周无新动态时，则提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 iMile 查询。”
+在打开包裹页面或预计派送当天开启提醒时，Peek 最高每 10 分钟检查一次，在 iMile 扫出“派送中”当天自当地时间早上 6 点起最高每 2 分钟检查一次（仅在 iMile 官网正常响应时）；其余时间每小时检查一次。若仅由第三方聚合追踪服务返回结果，Peek 每小时检查一次，最新扫描满一天后降为每 3 小时一次，包裹被扫出“派送中”当天，在打开页面或开启提醒时最高每 15 分钟一次。连续两天无新动态（或停留在“已生成面单”、“已揽收”满 12 小时）后，无论你以何种方式关注，刷新频率都转为每小时一次；若停留在“已生成面单”满七天无更新，则降为每 6 小时一次。当最新扫描满四天且包裹仍处于“已生成面单”、“已揽收”或“运输中”时，Peek 会标出该扫描日期（如“自10月12日周一起没有物流更新”），并提示“包裹在长途航班上、在海关或遇到周末时，常常暂时没有动静。Peek 会持续向 iMile 查询。”及“向 iMile 寻求帮助”链接；超过三周无新动态时，则提示“已超过三周没有新动态。如果还没收到，请联系卖家。Peek 会持续向 iMile 查询。”
 
 你可以自由选择“每次扫描”、“重要环节”或“仅派送当天”三种通知预设。Peek 仅提供追踪服务，不能代你联系 iMile 或卖家。
 
@@ -113,14 +113,13 @@ Peek 会将最新一条 `Shipment is scheduled to` 预约的日期显示为预�
 
 :::sources
 - [iMile 中文官网首页](https://www.imile.com/CN-zh) – 跨境电商快递、国际直邮与本地派送业务概览
-- [iMile 中文订单查询](https://www.imile.com/CN-zh/track) – 中文查询入口
-- [iMile 中文常见问题](https://www.imile.com/CN-zh/CustomerService/FAQ) – 实时查询、客服热线改约派送与自助方式
-- [iMile 中文办公地点](https://www.imile.com/CN-zh/CustomerService/OfficeLocations) – 全球办公网络说明
+- [iMile 中文订单查询](https://www.imile.com/CN-zh/track) – 中文查询入口、“输入您的订单号”与“订单状态”
+- [iMile 中文常见问题](https://www.imile.com/CN-zh/CustomerService/FAQ) – 在线查询与客服热线改约派送
 - [iMile 英文官网首页](https://www.imile.com/en) – 2017 年创立于迪拜、跨境派送与 PUDO 自提点
 - [iMile: Track Your Shipment](https://www.imile.com/en/track) – 英文查询页、查无记录空白结果与签收证明入口
-- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – 改约派送、更改地址、Online Bot、签收照片与链接故障排查
+- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – 更改地址、Online Bot、签收照片与链接故障排查
 - [iMile: International Dropshipping](https://www.imile.com/en/logistics-solutions/international-dropship-delivery) – 自营末端团队及中国出发覆盖国家清单
-- [iMile: Office Locations](https://www.imile.com/en/CustomerService/OfficeLocations) – 各区域办公室及澳大利亚客服联系方式
+- [iMile: Legal Notice (Australia)](https://www.imile.com/AU-en/LegalNotice) – 澳大利亚客服电话与邮箱
 - [iMile: Customer Support](https://www.imile.com/en/CustomerService/CustomerSupport) – 在线支持表单及必填字段
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 自 2026 年 7 月 1 日起 3 欧元关税及自 2026 年 11 月 1 日起 2 欧元欧盟处理费
 - [Universal Parcel Scraper: iMile](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/imile) – 单号格式、英文轨迹映射、菜鸟前程拼接、保留与剔除字段及刷新规则

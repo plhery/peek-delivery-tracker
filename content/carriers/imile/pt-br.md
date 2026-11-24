@@ -17,12 +17,12 @@ A iMile não publica um formato padrão único em seu site, mas os códigos usad
 | `IM06014829173640` | `IM`, `0601` e 10 dígitos: formato exclusivo da iMile. |
 | `IM48291736405812` | `IM` e 14 dígitos: também pertence à iMile. |
 | `6041526482917` | 13 dígitos começando com `6`, seguidos de seis dígitos em formato de data (mês, dia, ano): conhecimento de transporte próprio da iMile. |
-| `49482917364058` | 14 dígitos começando com `49`: usado pela iMile em vários envios internacionais. Como [Jadlog](carrier:jadlog), DPD, BRT e Chronopost também usam 14 dígitos, o Peek consulta a iMile entre as primeiras. |
-| `3482917364058` | 13 dígitos começando com `3`: frequente na iMile, mas compartilhado com outras transportadoras; o Peek consulta todas em paralelo. |
+| `49482917364058` | 14 dígitos começando com `49`: visto em encomendas da iMile na Itália. Como [Jadlog](carrier:jadlog), DPD, BRT e Chronopost também usam 14 dígitos, só o formato não basta, mas o Peek consulta a iMile entre as primeiras. |
+| `3482917364058` | 13 dígitos começando com `3`: frequente na iMile, mas a FAN Courier e outras transportadoras também começam números de 13 dígitos com `3`. Só o formato não basta: o Peek consulta a iMile junto com elas. |
 | `2482917364058` | Outros códigos de 13 dígitos: não seguem os padrões da iMile (podem pertencer a Yunda, Korea Post ou outras transportadoras). |
 | `LP61840295738142` | Código `LP` seguido de 14 dígitos: pertence à logística Cainiao (AliExpress), não diretamente à iMile. |
 
-Na página de rastreamento da iMile, digite o código no campo de consulta para visualizar o histórico; quando o número ainda não consta na base, o campo de status permanece vazio sem mensagem de erro. Se não encontrar o código no e-mail da loja ou no aplicativo onde comprou, consulte [como encontrar o código de rastreamento](guide:find-tracking-number) e fale com o vendedor.
+Na página de rastreamento da iMile, digite o código em "DIGITE SEU NÚMERO DE PEDIDO"; o histórico aparece em "STATUS DO PEDIDO". Um número que a iMile não conhece deixa esse campo vazio, sem mensagem de erro. Se não encontrar o código no e-mail da loja ou no aplicativo onde comprou, consulte [como encontrar o código de rastreamento](guide:find-tracking-number) e fale com o vendedor.
 
 ## Significado dos status de rastreamento da iMile
 
@@ -54,16 +54,11 @@ Outros motivos comuns de tentativa falha incluem `wrong address` ou `Wrong Addre
 
 ## Entrega da iMile no Brasil e regras da alfândega
 
-A iMile mantém página oficial em português do Brasil ([imile.com/BR-pt](https://www.imile.com/BR-pt)), apresentando soluções de entrega transfronteiriça, entrega expressa doméstica, logística reversa e pontos de coleta e entrega (PUDO). No entanto, as páginas públicas da iMile para o Brasil não especificam quantas tentativas de entrega são feitas, qual o prazo de guarda em pontos de retirada nem se o entregador deixa aviso impresso.
+A iMile mantém página oficial em português do Brasil ([imile.com/BR-pt](https://www.imile.com/BR-pt)), apresentando soluções de entrega transfronteiriça, entrega expressa doméstica, logística reversa e pontos de coleta e entrega (PUDO). Nas perguntas frequentes brasileiras, a iMile diz cobrir a entrega de última milha em todas as regiões do Brasil. No entanto, as páginas públicas da iMile para o Brasil não especificam quantas tentativas de entrega são feitas, qual o prazo de guarda em pontos de retirada nem se o entregador deixa aviso impresso.
 
-Nas perguntas frequentes gerais da empresa, a iMile informa que solicitações de reagendamento podem ser feitas pela central de atendimento, alterações de endereço devem ser pedidas antes de o pacote entrar na fase final de entrega (pelo suporte ou pelo assistente virtual), e a comprovação de entrega pode incluir foto do pacote no local e assinatura digital quando aplicável. Na página oficial de rastreio há ainda a opção de visualizar o comprovante mediante confirmação do usuário autorizado. Para situações de destinatário ausente, veja [entrega não realizada](guide:missed-delivery).
+Nas [perguntas frequentes brasileiras](https://www.imile.com/BR-pt/CustomerService/FAQ), a iMile só aceita pequenas alterações do endereço de entrega dentro do mesmo CEP registrado no pedido, e a foto da encomenda entregue e a assinatura digital ficam disponíveis para consulta como comprovante. As perguntas frequentes gerais acrescentam que a central de atendimento recebe pedidos de reagendamento. Na página oficial de rastreio há ainda a opção de visualizar o comprovante mediante confirmação do usuário autorizado. Para situações de destinatário ausente, veja [entrega não realizada](guide:missed-delivery).
 
-**Alfândega e Programa Remessa Conforme no Brasil.** Em compras internacionais enviadas de fora do Brasil, a cobrança de tributos segue as regras do [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona):
-
-- **Lojas certificadas no Remessa Conforme:** o pagamento ocorre no momento da compra. Em remessas de até US$ 50 (incluindo produto, frete e seguro), há cobrança do Imposto de Importação conforme a faixa vigente e ICMS estadual de 17% a 20% conforme o estado de destino; acima de US$ 50, aplica-se alíquota de 60% de Imposto de Importação com desconto de US$ 30 no valor do tributo, além do ICMS estadual.
-- **Lojas não certificadas:** incide 60% de Imposto de Importação sem o desconto de US$ 30 (mesmo até US$ 50), mais ICMS de 17% a 20%, cobrados na chegada da encomenda ao Brasil.
-
-Para mais detalhes sobre retenções alfandegárias, consulte [encomendas retidas na alfândega](guide:customs).
+**Alfândega e Programa Remessa Conforme no Brasil.** Compras internacionais pagam o Imposto de Importação, federal, e o ICMS, estadual. Segundo a [Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona), uma loja certificada no Programa Remessa Conforme cobra os tributos no fechamento da compra e deve mostrá-los antes do pagamento; numa loja fora do programa, eles são cobrados quando a encomenda chega ao Brasil, antes de ser entregue. A iMile não diz como os tributos são pagos nas suas encomendas: a loja sabe se já estavam no preço. Para mais detalhes sobre retenções alfandegárias, consulte [encomendas retidas na alfândega](guide:customs).
 
 ## Encomenda iMile parada, atrasada ou não recebida
 
@@ -71,19 +66,20 @@ Para mais detalhes sobre retenções alfandegárias, consulte [encomendas retida
 
 **Dias sem atualização.** Entre o voo internacional, a fiscalização aduaneira e a chegada ao centro local, é normal passar vários dias sem novas leituras. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
 
-**Link de rastreio não abre.** As perguntas frequentes da iMile recomendam atualizar a página, limpar cookies ou testar outro navegador antes de contatar o suporte com o número do pedido.
+**Link de rastreio não abre.** As perguntas frequentes da iMile recomendam atualizar a página ou abri-la em outro navegador e, se o problema continuar, contatar o suporte com o número do pedido para receber um novo link.
 
 **Consta como entregue, mas você não recebeu.** Verifique primeiro com moradores, vizinhos ou portaria e procure o comprovante de entrega na página da iMile; depois acione a loja e a iMile. Veja [entregue, mas não recebido](guide:delivered-not-received).
 
-**Extravio, avaria ou devolução.** A iMile não publica um fluxo de indenização direta ao destinatário no Brasil: quem tem o contrato de frete é a loja, que deve providenciar reembolso ou reenvio. Veja [encomenda perdida](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender). Se uma loja ou transportadora cadastrada não resolver o problema, consumidores no Brasil com conta gov.br prata ou ouro podem registrar reclamação gratuita no [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1), com prazo de resposta de até 10 dias.
+**Extravio, avaria ou devolução.** A iMile não publica um fluxo de indenização direta ao destinatário no Brasil: quem tem o contrato de frete é a loja, que deve providenciar reembolso ou reenvio. Veja [encomenda perdida](guide:lost-parcel), [encomenda danificada](guide:damaged-parcel) e [devolvida ao remetente](guide:returned-to-sender). Se a loja não resolver o problema e estiver cadastrada no [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1), serviço público e gratuito, você pode registrar uma reclamação ali: a empresa tem até 10 dias para responder.
 
 ## Atendimento e contato da iMile no Brasil
 
-As páginas brasileiras da iMile ([Suporte iMile](https://www.imile.com/BR-pt/CustomerService/CustomerSupport), [Escritórios iMile](https://www.imile.com/BR-pt/CustomerService/OfficeLocations) e [Aviso Legal](https://www.imile.com/BR-pt/LegalNotice)) não divulgam telefone 0800 ou endereço de e-mail específico para o Brasil. Os canais disponíveis no site são:
+As páginas brasileiras da iMile ([Suporte iMile](https://www.imile.com/BR-pt/CustomerService/CustomerSupport), [Escritórios iMile](https://www.imile.com/BR-pt/CustomerService/OfficeLocations) e [Aviso Legal](https://www.imile.com/BR-pt/LegalNotice)) não divulgam telefone nem e-mail para o Brasil, e a página de escritórios não lista nenhum. Os canais disponíveis no site são:
 
 - **iMile Chat:** o botão de chat no canto inferior direito de `imile.com` abre o assistente virtual, com atendimento em português, inglês, espanhol, italiano, alemão, húngaro e árabe.
 - **Formulário de suporte ao cliente:** disponível na página de suporte da iMile para dúvidas sobre envios (o formulário solicita também nome da empresa e volume diário de pedidos).
-- **Escritórios regionais:** a página de escritórios reúne telefones e e-mails de mercados selecionados (como a Austrália); para pedidos de compras online no Brasil, o contato mais rápido continua sendo a loja ou o marketplace onde você comprou.
+
+Para o pedido em si, o contato mais rápido continua sendo a loja ou o marketplace onde você comprou: foi ela que contratou a iMile.
 
 > Desconfie de mensagens de SMS ou WhatsApp pedindo pagamento imediato por links desconhecidos para liberar uma encomenda iMile na alfândega. Leia [golpes por SMS de entrega](guide:delivery-scam-texts) antes de efetuar qualquer pagamento.
 
@@ -95,7 +91,7 @@ O Peek consulta o rastreamento da iMile em inglês e exibe o status traduzido ("
 
 O Peek mostra a data prevista pela linha `Shipment is scheduled to` mais recente até haver tentativa falha, imprevisto, chegada a ponto de retirada, entrega, devolução ou nova leitura posterior àquela data. O Peek não exibe peso, nome do serviço, nome ou endereço do destinatário, comprovante fotográfico de entrega, dados de contato nem detalhes de pagamento, e remove telefones do entregador e da central das descrições.
 
-Enquanto você mantém a encomenda aberta no Peek ou no dia da entrega com alertas ativados, o Peek verifica atualizações até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário local no dia em que a iMile registra "Saiu para entrega", enquanto o rastreador próprio da iMile responde; fora dessas condições, verifica a cada hora. Quando apenas serviços de rastreamento respondem, a checagem é de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), passa a checar a cada hora (exceto enquanto o pacote está aberto ou previsto para hoje), e a cada 6 horas após sete dias parado em "Etiqueta criada". Quando a leitura mais recente completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe o alerta com a data dessa leitura (por exemplo, "Sem atualizações desde seg., 12 de out."), junto da mensagem "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando iMile." e do link "Pedir ajuda a iMile". Após três semanas sem novidades, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando iMile."
+Enquanto você mantém a encomenda aberta no Peek ou no dia da entrega com alertas ativados, o Peek verifica atualizações até a cada 10 minutos — e até a cada 2 minutos a partir das 6h no horário local no dia em que a iMile registra "Saiu para entrega", enquanto o rastreador próprio da iMile responde; fora dessas condições, verifica a cada hora. Quando apenas serviços de rastreamento respondem, a checagem é de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia em que ela sai para entrega, enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), passa a checar a cada hora, qualquer que seja a forma de acompanhar, e a cada 6 horas após sete dias parado em "Etiqueta criada". Quando a leitura mais recente completa quatro dias em "Etiqueta criada", "Recebida pela transportadora" ou "Em trânsito", o Peek exibe o alerta com a data dessa leitura (por exemplo, "Sem atualizações desde seg 12 out"), junto da mensagem "É comum uma encomenda ficar sem atualizações em voos longos, na alfândega ou no fim de semana. O Peek continua consultando iMile." e do link "Pedir ajuda a iMile". Após três semanas sem novidades, aparece "Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, fale com o vendedor. O Peek continua consultando iMile."
 
 Você pode escolher alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek apenas acompanha o rastreamento e não pode reagendar entregas nem contatar a iMile ou a loja em seu nome.
 
@@ -120,14 +116,14 @@ As páginas brasileiras da iMile não listam telefone ou e-mail local; o atendim
 :::sources
 - [iMile Brasil: Página inicial](https://www.imile.com/BR-pt) – entregas transfronteiriças, entrega expressa doméstica, logística reversa e soluções no Brasil
 - [iMile Brasil: Rastrear encomenda](https://www.imile.com/BR-pt/track) – página de rastreamento em português
-- [iMile Brasil: Perguntas frequentes](https://www.imile.com/BR-pt/CustomerService/FAQ) – dúvidas de rastreio e entrega
+- [iMile Brasil: Perguntas frequentes](https://www.imile.com/BR-pt/CustomerService/FAQ) – entrega em todas as regiões do Brasil, endereço no mesmo CEP, comprovante de entrega, link de rastreio
 - [iMile Brasil: Suporte ao cliente](https://www.imile.com/BR-pt/CustomerService/CustomerSupport) – formulário de suporte e campos obrigatórios
-- [iMile Brasil: Escritórios](https://www.imile.com/BR-pt/CustomerService/OfficeLocations) – ausência de telefone/e-mail local listado para o Brasil
+- [iMile Brasil: Escritórios](https://www.imile.com/BR-pt/CustomerService/OfficeLocations) – nenhum escritório nem contato listado
 - [iMile Brasil: Aviso Legal](https://www.imile.com/BR-pt/LegalNotice) – dados legais da página brasileira
 - [iMile: Home](https://www.imile.com/en) – fundada em Dubai em 2017, entregas transfronteiriças e PUDOs
 - [iMile: Track Your Shipment](https://www.imile.com/en/track) – página em inglês, resultado vazio e comprovante de entrega
-- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – reagendamento, alteração de endereço, Online Bot, comprovante e erro no link
-- [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – regras de tributação para lojas certificadas e não certificadas
-- [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – mediação gratuita para consumidores com conta gov.br prata ou ouro e resposta em até 10 dias
+- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – reagendamento pela central de atendimento
+- [Receita Federal: Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona) – tributos cobrados na compra em lojas certificadas, na chegada ao Brasil nas demais
+- [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – serviço público e gratuito, empresas cadastradas, resposta em até 10 dias
 - [Universal Parcel Scraper: iMile](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/imile) – formatos de código, mapeamento de status, integração com Cainiao, campos exibidos/ocultados e ritmo de atualização
 :::

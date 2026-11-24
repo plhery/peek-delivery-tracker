@@ -4756,6 +4756,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#088aea"
     },
     {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "thailand-post-sendungsverfolgung",
+      "title": "Thailand Post Sendungsverfolgung: TH-Codes, EMS & 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7180,6 +7188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi SkyPostal\u00a0: codes SKAMZUS et SP, statuts et aide",
       "name": "SkyPostal",
       "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "suivi-thailand-post",
+      "title": "Suivi Thailand Post\u00a0: codes TH S10, statuts EMS et 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
     },
     {
       "id": "onlog-express",
@@ -9608,6 +9624,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#088aea"
     },
     {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "tracciamento-thailand-post",
+      "title": "Tracciamento Thailand Post: codici TH S10, EMS e 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "tracciamento-onlog-express",
@@ -12026,6 +12050,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#088aea"
     },
     {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "seguimiento-thailand-post",
+      "title": "Seguimiento Thailand Post: códigos TH S10, EMS y 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "seguimiento-onlog-express",
@@ -14442,6 +14474,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio SkyPostal: códigos SKAMZUS, SP e apoio",
       "name": "SkyPostal",
       "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "rastreio-thailand-post",
+      "title": "Rastreio Thailand Post: códigos TH S10, EMS e 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
     },
     {
       "id": "onlog-express",
@@ -16942,6 +16982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SkyPostal: kody SKAMZUS i SP, statusy i pomoc",
       "name": "SkyPostal",
       "color": "#088aea"
+    },
+    {
+      "id": "thailand-post",
+      "catalog": "thailand-post",
+      "slug": "sledzenie-thailand-post",
+      "title": "Śledzenie Thailand Post: kody TH S10, statusy EMS i 1545",
+      "name": "Thailand Post",
+      "color": "#ef172f"
     },
     {
       "id": "onlog-express",

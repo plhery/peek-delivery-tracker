@@ -23,7 +23,7 @@ Ten numer bywa różnie nazywany: numer przesyłki, numer paczki, numer listu pr
 - Wypróbuj przewoźników | Wpisz numer na stronie każdego przewoźnika, który wchodzi w grę. Ten, u którego pojawi się historia przesyłki, ma twoją paczkę.
 :::
 
-Jeśli nie chcesz bawić się w detektywa, wklej numer, link od przewoźnika albo całego e-maila o wysyłce do [Peeka](/): wyłowi z niego numer i rozpozna przewoźnika spośród ponad 4500. Jak działają takie trackery i czym się różnią, wyjaśnia poradnik o [śledzeniu przesyłek wszystkich firm](guide:universal-tracker).
+Jeśli nie chcesz bawić się w detektywa, [wklej numer, link od przewoźnika albo całego e-maila o wysyłce](guide:track-without-carrier) do [Peeka](/): wyłowi z niego numer i rozpozna przewoźnika spośród ponad 4500. Jak działają takie trackery i czym się różnią, wyjaśnia poradnik o [śledzeniu przesyłek wszystkich firm](guide:universal-tracker).
 
 Gdy kształt numeru pasuje do kilku przewoźników, narzędzie powyżej odpowiada „Możliwe, że to” i podaje kandydatów. W Peeku, gdy tylko wkleisz numer albo po wpisaniu go wyjdziesz z pola, w wierszu przewoźnika pojawia się „Sprawdzanie usług śledzenia…”, a Peek pyta najbardziej prawdopodobnych przewoźników, najwyżej pięciu naraz, a jeśli żaden z nich nie ma przesyłki, pięciu kolejnych. Liczy się tylko odpowiedź dotycząca niedawnej przesyłki, bo przewoźnicy po pewnym czasie używają numerów ponownie. Jeśli numer zna tylko jeden przewoźnik, zobaczysz jego nazwę i „ma tę przesyłkę”. Jeśli kilku, zobaczysz na przykład „3 przewoźnicy znają ten numer” i „wybierz swojego”: wybierz tego, którego podaje wiadomość o wysyłce. Jeśli żaden go jeszcze nie zna, przeczytasz „jeszcze nie znaleziono · Peek sprawdza dalej”.
 

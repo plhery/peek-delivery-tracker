@@ -105,7 +105,7 @@ To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamó
 - home | Nieudane doręczenie | Awizo często ma numer, który też działa
 :::
 
-Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer [InPost](carrier:inpost) ma zwykle 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats).
+Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer [InPost](carrier:inpost) ma zwykle 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats). Możesz też wkleić go do Peeka, który sam rozpozna przewoźnika: [śledzenie przesyłki bez znajomości przewoźnika](guide:track-without-carrier).
 
 Numer kontenera morskiego też nie jest numerem paczki: to trzy litery, U i siedem cyfr, jak `TEMU1234565` (zmyślony). Oznacza stalową skrzynię, którą wiezie statek, a nie twoją paczkę. Jeśli żaden przewoźnik nie zna numeru o takim kształcie, [Peek](/) napisze: „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
 

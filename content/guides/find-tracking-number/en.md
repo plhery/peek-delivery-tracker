@@ -115,7 +115,7 @@ No. DHL spells it out: an order number is assigned by your retailer, and it isn'
 - home | Missed delivery | The card left behind often has a number that works too
 :::
 
-To tell them apart: a number labelled "Order" is the shop's own and won't work on the carrier's site, while a tracking number comes with a carrier's name or a link to its tracking page. `1Z999AA10123456784` is a UPS number; many postal items carry the international 13-character format, like `RR000000005CH`. [Tracking number formats](guide:tracking-number-formats) shows which carrier a number belongs to.
+To tell them apart: a number labelled "Order" is the shop's own and won't work on the carrier's site, while a tracking number comes with a carrier's name or a link to its tracking page. `1Z999AA10123456784` is a UPS number; many postal items carry the international 13-character format, like `RR000000005CH`. [Tracking number formats](guide:tracking-number-formats) shows which carrier a number belongs to. Or paste it into Peek, which works the carrier out for you: [track a parcel without knowing the carrier](guide:track-without-carrier).
 
 A shipping container's number isn't a parcel's either: three letters, U and seven digits, like `TEMU1234565` (made up). It names the steel box a ship carries, not your parcel. If no carrier knows a number of that shape, [Peek](/) says "This looks like a shipping container number. The tracking number is in the shipping email or on the order page." and offers "Choose the carrier".
 

@@ -124,7 +124,7 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay,
 | La Posta | numero d'invio |
 | eBay.it | codice della spedizione |
 
-`1Z999AA10123456784` è un codice UPS; molti invii postali hanno il formato internazionale di 13 caratteri, come `RR000000005CH`. Per capire di chi è un codice, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
+`1Z999AA10123456784` è un codice UPS; molti invii postali hanno il formato internazionale di 13 caratteri, come `RR000000005CH`. Per capire di chi è un codice, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats). Oppure incollalo in Peek, che trova il corriere per te: [tracciare un pacco senza sapere il corriere](guide:track-without-carrier).
 
 Nemmeno il numero di un container marittimo è quello di un pacco: tre lettere, una U e sette cifre, come `TEMU1234565` (inventato). Indica la cassa d'acciaio che viaggia sulla nave, non il tuo pacco. Se nessun corriere conosce un numero di questa forma, [Peek](/) scrive «Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.» e ti propone «Scegli il corriere».
 

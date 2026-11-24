@@ -19,7 +19,7 @@ Here is everything that changes when you sign in:
 | New parcels a day | On the website, a few lookups a day for each network, then "No lookups left for today" | A daily allowance for adding parcels |
 | [Notifications](guide:parcel-notifications) | On the website, "Notify me" on a parcel's page, then every parcel in that browser if you like. The apps sign up each parcel themselves | Settings › "Notifications" covers every parcel, and can email you when one arrives |
 | [Add parcels by email](guide:add-parcels-by-email), [AI assistants](guide:ai-assistants) | Not offered | Settings › "Add parcels by email" (Beta); "Assistants" (Beta), on the website only |
-| Passport and Friends | Website: no tabs, but a delivered parcel from abroad offers "Start a passport". Apps: both tabs; Passport counts the parcels on that device, Friends asks you to sign in | Both tabs, on the website and in every app |
+| [Passport and Friends](guide:delivery-passport) | Website: no tabs, but a delivered parcel from abroad offers "Start a passport". Apps: both tabs; Passport counts the parcels on that device, Friends asks you to sign in | Both tabs, on the website and in every app |
 | Settings | Website: the gear button "Settings" holds "Preferences", with "Language" on a parcel's page; on the front page, the language is in the menu at its foot. Apps: "Preferences" and "On this device" | "Deliveries", "Preferences" (with "Language") and "Account & data". On the website, only "Dot on updated parcels" follows you to your other devices |
 | Your data | "Forget it now" on a parcel's page or "Forget all"; the apps also have "Download my data" | "Download my data", "Sign out", "Delete account" |
 

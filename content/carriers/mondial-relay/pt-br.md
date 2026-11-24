@@ -18,7 +18,7 @@ A Mondial Relay chama o código de "numéro d'expédition": são 8 dígitos envi
 | `0048291736` | 10 dígitos: código da marca seguido do número de envio. Também serve para DHL, Relais Colis e outras. |
 | `004829173602` | 12 dígitos: o mesmo código acrescido da sequência do volume. Também combina com DPD France, Colis Privé, BRT e outras. |
 | `00482917360101` | 14 dígitos: início do código de barras, com código da marca, número de envio, sequência e total de volumes. Também combina com DPD, Chronopost e outras. |
-| `00482917360101748291736058` | 26 dígitos: código de barras completo da etiqueta, exclusivo da Mondial Relay, com o número de envio nos dígitos 3 a 10. |
+| `00482917360101748291736052` | 26 dígitos: código de barras completo da etiqueta, exclusivo da Mondial Relay, com o número de envio nos dígitos 3 a 10. |
 
 Se o e-mail da loja citar outra transportadora, [o código pode ser dela](guide:tracking-number-formats).
 
@@ -73,9 +73,9 @@ Estes são os canais de contato da Mondial Relay:
 
 O [Peek](/) reconhece imediatamente o código de barras de 26 dígitos. Em códigos de 8, 10, 12 ou 14 dígitos, ele pode não identificar a Mondial Relay sozinho, pois outras transportadoras compartilham esses tamanhos; o Peek só consulta a Mondial Relay automaticamente para códigos `FV` da InPost Espanha (`FV` e 8 dígitos). Se nenhuma transportadora nem serviço de rastreamento reconhecer um código de 8 dígitos, o próprio Peek sugere a Mondial Relay com um campo para o código postal de entrega quando você acessa da França, Bélgica, Luxemburgo, Espanha, Portugal ou Países Baixos. Nos demais casos, clique em "Trocar" e escolha Mondial Relay, ou cole um link de rastreamento de mondialrelay.fr, .be, .nl ou .com (links dos sites espanhol e português não são lidos).
 
-Um código de 8 dígitos também exige o "Código postal de entrega": digite apenas o código de rastreamento e informe o código postal no campo correspondente. O Peek compara exatamente o que você digitou com o do destinatário em qualquer formato nacional, mas códigos postais portugueses precisam ter todos os sete dígitos (`4820-195`, hífen opcional). Um código postal errado retorna como não encontrado. Ele é enviado à Mondial Relay e, quando necessário, a serviços de rastreamento.
+Um código de 8 dígitos também exige o "Código postal de entrega": digite apenas o código de rastreamento e informe o código postal no campo correspondente. O Peek compara exatamente o que você digitou com o do destinatário em qualquer formato nacional, mas códigos postais portugueses precisam ter todos os sete dígitos (`1234-567`, hífen opcional). Um código postal errado retorna como não encontrado. Ele é enviado à Mondial Relay e, quando necessário, a serviços de rastreamento.
 
-O Peek exibe os textos franceses da Mondial Relay como registrados e mostra o centro logístico de cada leitura no mapa, além da data prevista, do horário da entrega e do país de destino quando informados. Enquanto o pacote aguarda retirada, mostra o nome e o endereço do Point Relais ou armário, nunca seu código de retirada nem seu nome. Ele verifica atualizações até a cada 10 minutos — ou a cada poucos minutos a partir das 6h (horário de Paris) do dia em que a Mondial Relay registra a saída para entrega — enquanto o rastreador da própria Mondial Relay responde (por meio de serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar você a cada mudança. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora. O Peek não transfere pacotes da Mondial Relay para outras transportadoras. Ele lê códigos `FV` da InPost Espanha em inpost.es, mas não garante localizar outras encomendas espanholas ou portuguesas da InPost.
+O Peek exibe os textos franceses da Mondial Relay como registrados e mostra o centro logístico de cada leitura no mapa, além da data prevista, do horário da entrega e do país de destino quando informados. Enquanto o pacote aguarda retirada, mostra o nome e o endereço do Point Relais ou armário, nunca seu código de retirada nem seu nome. Ele verifica atualizações até a cada 10 minutos — ou a cada poucos minutos a partir das 6h (horário de Paris) do dia em que a Mondial Relay registra a saída para entrega — enquanto o rastreador da própria Mondial Relay responde (por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar você a cada mudança. Após dois dias sem novidades (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), o Peek verifica de hora em hora. O Peek não acompanha pacotes que passam para outras transportadoras. Ele lê códigos `FV` da InPost Espanha em inpost.es, mas não garante localizar outras encomendas espanholas ou portuguesas da InPost.
 
 ## Perguntas sobre o rastreamento da Mondial Relay
 
@@ -93,7 +93,7 @@ Ela faz parte do grupo InPost. Na Espanha e em Portugal, a InPost assumiu a Mond
 
 ### A Mondial Relay é confiável?
 
-Sim: a Mondial Relay SASU é uma empresa francesa com sede em Villeneuve-d'Ascq. Porém, golpes usam seu nome com frequência — confira sempre o alerta acima.
+Sim: a Mondial Relay SASU é uma empresa francesa com sede em Villeneuve-d'Ascq. Porém, mensagens falsas usam seu nome: compare-as com o alerta acima.
 
 :::sources
 - [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – códigos de 8, 10 e 12 dígitos, código postal de destino, e-mail ou SMS e contato com o remetente
@@ -127,4 +127,5 @@ Sim: a Mondial Relay SASU é uma empresa francesa com sede em Villeneuve-d'Ascq.
 - [InPost: Contacto](https://www.inpost.es/contacta-con-nosotros) – telefone na Espanha e prazo de 5 dias
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – telefone em Portugal e prazo de 5 dias
 - [InPost: Como recolher](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – prazo de 5 ou 8 dias
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê, códigos de 14 dígitos, nomes de status e etapas, Mondial Relay consultada só para códigos `FV`
 :::

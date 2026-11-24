@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Mondial Relay 是隶属于 InPost 集团的法国包裹快递公司，负责将包裹派送至 Point Relais（作为取件点的本地合作商户）、智能自提柜以及收件人住址。你可以在 [Mondial Relay 比利时查询页面](https://www.mondialrelay.be/fr-be/suivi-de-colis/)输入 8 位发货编号和收件邮编查询，或直接将单号粘贴到上方输入框中。包裹发出后你会通过邮件或短信收到单号，寄件人同样掌握该单号。
+Mondial Relay 是隶属于 InPost 集团的法国包裹快递公司，负责将包裹派送至 Point Relais（作为取件点的本地合作商户）、自提柜以及收件人住址。你可以在 [Mondial Relay 比利时查询页面](https://www.mondialrelay.be/fr-be/suivi-de-colis/)输入 8 位发货编号和收件邮编查询，或直接将单号粘贴到上方输入框中。包裹发出后你会通过邮件或短信收到单号，寄件人同样掌握该单号。
 
 ## Mondial Relay 运单号：在哪里查找
 
@@ -18,7 +18,7 @@ Mondial Relay 将单号称为“numéro d'expédition”：8 位数字，位于�
 | `0048291736` | 10 位数字：品牌代码加发货编号。DHL、Relais Colis 等快递也使用该长度。 |
 | `004829173602` | 12 位数字：上述号码加包裹序号。DPD France、Colis Privé、BRT 等也使用 12 位数字。 |
 | `00482917360101` | 14 位数字：条形码前段，包含品牌代码、发货编号、包裹序号和总件数。DPD、Chronopost 等也使用该长度。 |
-| `00482917360101748291736058` | 26 位数字：面单完整条码，为 Mondial Relay 独有格式，第 3 至第 10 位为发货编号。 |
+| `00482917360101748291736052` | 26 位数字：面单完整条码，为 Mondial Relay 独有格式，第 3 至第 10 位为发货编号。 |
 
 如果商家邮件中写明了其他快递公司，[该单号可能属于那家承运商](guide:tracking-number-formats)（英文）。
 
@@ -71,11 +71,11 @@ Mondial Relay 官方查询页面仅提供法语（比利时站提供法语或荷
 
 ## 使用 Peek 查询 Mondial Relay 包裹
 
-[Peek](/) 会直接识别 26 位完整面单条码。若是 8 位、10 位、12 位或 14 位数字，由于多家快递共用这些长度，Peek 可能不会自动给出 Mondial Relay；Peek 只会对 InPost 西班牙的 `FV` 单号（`FV` 加 8 位数字）主动向 Mondial Relay 核验。如果没有其他快递公司或物流查询服务认领一个 8 位单号，且你位于法国、比利时、卢森堡、西班牙、葡萄牙或荷兰，Peek 会直接推荐 Mondial Relay 并弹出收件邮编输入框。其他情况下，可点击“更换”手动选择 Mondial Relay，或直接粘贴 mondialrelay.fr、.be、.nl 或 .com 的查询链接（西班牙和葡萄牙站点的链接暂不支持解析）。
+[Peek](/) 会直接识别 26 位完整面单条码。若是 8 位、10 位、12 位或 14 位数字，由于多家快递共用这些长度，Peek 可能不会自动给出 Mondial Relay；Peek 只会对 InPost 西班牙的 `FV` 单号（`FV` 加 8 位数字）主动向 Mondial Relay 核验。如果没有快递公司或物流查询服务认领一个 8 位单号，且你位于法国、比利时、卢森堡、西班牙、葡萄牙或荷兰，Peek 会直接推荐 Mondial Relay 并弹出收件邮编输入框。其他情况下，可点击“更换”手动选择 Mondial Relay，或直接粘贴 mondialrelay.fr、.be、.nl 或 .com 的查询链接（西班牙和葡萄牙站点的链接不会被读取）。
 
-使用 8 位单号查询时还需要填写“收件邮编”：先只输入单号，再在对应栏位填写邮编。Peek 会按你输入的原文与收件人邮编比对，支持各国邮编格式，但葡萄牙邮编必须填满全部七位数字（例如 `4820-195`，连字符可省略）。邮编错误会显示为查无此件。邮编会发送给 Mondial Relay，必要时也会发送给物流查询服务。
+使用 8 位单号查询时还需要填写“收件邮编”：先只输入单号，再在对应栏位填写邮编。Peek 会按你输入的原文与收件人邮编比对，支持各国邮编格式，但葡萄牙邮编必须填满全部七位数字（例如 `1234-567`，连字符可省略）。邮编错误会显示为查无此件。邮编会发送给 Mondial Relay，必要时也会发送给物流查询服务。
 
-Peek 会按原文显示 Mondial Relay 的法语状态，并在地图上标出每条扫描对应的物流站点，同时在官方提供时显示预计送达日、签收时间和目的国。包裹待取期间会显示 Point Relais 或自提柜的名称和地址，但绝不会显示你的取件码或姓名。只要 Mondial Relay 官方查询正常响应，Peek 最高每 10 分钟检查一次，在 Mondial Relay 扫描包裹进入派送中的当天自巴黎时间早上 6 点起每隔几分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并在每次状态变化时发送通知。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。Peek 不会把 Mondial Relay 包裹转交其他快递继续追踪；它可以在 inpost.es 上读取 InPost 西班牙的 `FV` 单号，但不保证能查到 InPost 西班牙或葡萄牙的其他单号。
+Peek 会按原文显示 Mondial Relay 的法语状态，并在地图上标出每条扫描对应的物流站点，同时在官方提供时显示预计送达日、签收时间和目的国。包裹待取期间会显示 Point Relais 或自提柜的名称和地址，但绝不会显示你的取件码或姓名。只要 Mondial Relay 官方查询正常响应，Peek 最高每 10 分钟检查一次，在 Mondial Relay 扫描包裹进入派送中的当天自巴黎时间早上 6 点起每隔几分钟检查一次（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并可在每次状态变化时通知你。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。包裹转交其他快递后，Peek 不会继续跟踪；它可以在 inpost.es 上读取 InPost 西班牙的 `FV` 单号，但不保证能查到 InPost 西班牙或葡萄牙的其他单号。
 
 ## Mondial Relay 物流查询常见问题
 
@@ -93,7 +93,7 @@ Peek 会按原文显示 Mondial Relay 的法语状态，并在地图上标出每
 
 ### Mondial Relay 正规吗？
 
-正规：Mondial Relay SASU 是一家总部位于法国 Villeneuve-d'Ascq 的正规公司。不过诈骗信息常冒用其名义，请对照上文防骗提醒仔细甄别。
+正规：Mondial Relay SASU 是一家总部位于法国 Villeneuve-d'Ascq 的正规公司。不过有诈骗信息冒用其名义，请对照上文防骗提醒仔细甄别。
 
 :::sources
 - [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8/10/12 位单号、收件邮编、邮件或短信与询问寄件人
@@ -127,4 +127,5 @@ Peek 会按原文显示 Mondial Relay 的法语状态，并在地图上标出每
 - [InPost: Contacto](https://www.inpost.es/contacta-con-nosotros) – 西班牙热线与 5 天保管期
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – 葡萄牙热线与 5 天保管期
 - [InPost: Como recolher](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – 5 天或 8 天保管期说明
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容、14 位单号、状态名称与阶段、仅对 `FV` 单号向 Mondial Relay 核验
 :::

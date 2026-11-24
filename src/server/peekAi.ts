@@ -165,7 +165,7 @@ interface PlacedScan extends AiScan {
 
 interface Placed {
   scans: PlacedScan[];
-  /** The model's chances by model version and snapshot moment. */
+  /** The model's chances by model version, snapshot moment and what the carrier says of the parcel itself. */
   F: Map<string, number[] | null>;
 }
 
@@ -299,8 +299,6 @@ function snapshot(local: DateTime): DateTime {
 
 function arrivalChances(row: JsonObject, placed: Placed, snap: DateTime, blob: PeekAiBlob, c: string): number[] | null {
   const t = snap.toSeconds();
-  const key = `${blob.version} ${t}`;
-  if (placed.F.has(key)) return placed.F.get(key)!;
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   const parcel: AiParcel = {
     c, destinationCountry: text(data.destination_country), serviceName: text(data.service_name),
@@ -308,6 +306,9 @@ function arrivalChances(row: JsonObject, placed: Placed, snap: DateTime, blob: P
     weightKg: data.weight_kg ?? null, lookup: typeof row.lookup === 'boolean' ? row.lookup : 'user_id' in row ? row.user_id === null : false,
     offset: snap.offset * 60,
   };
+  // The scans are placed once; what the carrier adds of the parcel itself, with no new scan, is read again.
+  const key = JSON.stringify([blob.version, t, parcel.serviceName, parcel.weightKg, parcel.lookup]);
+  if (placed.F.has(key)) return placed.F.get(key)!;
   const features = snapshotFeatures(parcel, placed.scans, t, ordinal(snap), snap.hour, blob);
   let F: number[] | null = null;
   if (features) {

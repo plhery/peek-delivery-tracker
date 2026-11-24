@@ -221,6 +221,19 @@ describe('the model', () => {
     expect(account).not.toEqual(lookup);
   });
 
+  it('reads again what the carrier adds of the parcel with no new scan, such as its weight', () => {
+    // A model that gives a light parcel good chances from today on, and a heavy one poor ones.
+    const base = blob();
+    const split: PeekAiTree = { f: [1], t: [5], d: [1], m: [0], l: [~0], r: [~1], v: [logit(0.97), logit(0.2)] };
+    const byWeight: PeekAiBlob = { ...base, model: { ...base.model, features: ['h', 'weight'], trees: [split] } };
+    const said = (weight: string) =>
+      ai(row({ id: 'p-weighed', carrier_data: { timezone: 'Europe/Zurich', weight_kg: weight } }), '2026-11-20T14:30:00Z', byWeight);
+    const heavy = said('12');
+    const light = said('1.2');
+    expect(light).not.toBeNull();
+    expect(light).not.toEqual(heavy);
+  });
+
   it('waits for a check when the last one is more than a day and a half old', () => {
     expect(ai(row({ last_synced_at: '2026-11-18T12:00:00Z' }), '2026-11-20T14:30:00Z')).toBeNull();
   });

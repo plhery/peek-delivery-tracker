@@ -14758,6 +14758,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "inpost",
+      "catalog": "inpost",
+      "slug": "rastreamento-inpost",
+      "title": "Rastreamento InPost: códigos, status e retirada em armário",
+      "name": "InPost",
+      "color": "#ffcc05"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "rastreamento-poste-italiane",
@@ -14804,6 +14812,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DHL Paket: códigos, status e Packstation",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "la-poste",
+      "catalog": "la-poste",
+      "slug": "rastreamento-la-poste-colissimo",
+      "title": "Rastreamento La Poste / Colissimo: códigos e status",
+      "name": "La Poste / Colissimo",
+      "color": "#ffcf00"
     },
     {
       "id": "usps",
@@ -17564,6 +17580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "inpost",
+      "catalog": "inpost",
+      "slug": "inpost-tracking",
+      "title": "InPost 物流查询：单号格式、状态说明与自提柜取件",
+      "name": "InPost",
+      "color": "#ffcc05"
+    },
+    {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-tracking",
@@ -17626,6 +17650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket 德国包裹查询：单号格式、Packstation 自提与客服",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "la-poste",
+      "catalog": "la-poste",
+      "slug": "la-poste-colissimo-tracking",
+      "title": "La Poste / Colissimo 物流查询：单号格式与状态说明",
+      "name": "La Poste / Colissimo",
+      "color": "#ffcf00"
     },
     {
       "id": "usps",

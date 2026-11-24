@@ -33,7 +33,7 @@ O Yuntrack funciona somente em inglês. Ele classifica cada encomenda em uma aba
 | --- | --- |
 | `Shipment information received` | O vendedor transmitiu os dados; a YunExpress pode ainda não ter o pacote fisicamente. |
 | `Shipment picked up` | A YunExpress coletou a encomenda com o vendedor. |
-| `The country of origin commences customs declaration.` | Despacho aduaneiro de exportação na China, não a alfândega do seu país. |
+| `The country of origin commences customs declaration.` | Despacho aduaneiro de exportação no país de origem, não a alfândega do seu país. |
 | `International flight has departed`, `Departed from AIRPORT` | Embarcou no voo internacional. |
 | `Start Customs Clearence` | A alfândega de importação no destino começou (grafia própria da YunExpress). |
 | `Customs inspection - Import` | Selecionada para inspeção aduaneira. |
@@ -52,19 +52,19 @@ Após `Delivered to local carrier`, surgem as leituras da parceira local em ingl
 
 ## Quem entrega encomendas da YunExpress na etapa final
 
-A YunExpress despacha os pacotes da China por via aérea, coordena o desembaraço aduaneiro e os transfere a uma transportadora local no destino — [o fluxo habitual de compras da China](guide:tracking-from-china). As linhas após `Delivered to local carrier` frequentemente revelam qual parceira local assumiu o pacote.
+A YunExpress despacha os pacotes da China por via aérea, coordena o desembaraço aduaneiro e os transfere a uma transportadora local no destino — [o fluxo habitual de compras da China](guide:tracking-from-china). As linhas após `Delivered to local carrier` às vezes indicam qual parceira local assumiu o pacote.
 
-**Reino Unido e Irlanda.** A YunExpress opera linha dedicada para o Reino Unido desde 2016, sem nomear publicamente um único parceiro local nem divulgar telefone ou escritório de atendimento ao destinatário; para questões de entrega, acione a transportadora indicada no rastreamento. Uma de suas linhas cobre o território britânico e ilhas integradas, excluindo Jersey e Guernsey. Para regras de impostos, veja [encomendas retidas na alfândega](guide:customs).
+**Reino Unido e Irlanda.** A YunExpress opera linha dedicada para o Reino Unido desde 2016, sem nomear parceiro de entrega no Reino Unido ou na Irlanda nem divulgar telefone ou escritório de atendimento ao destinatário; para questões de entrega, acione a transportadora indicada no rastreamento. Uma de suas linhas cobre o território britânico e ilhas integradas, excluindo Jersey e Guernsey. Para regras de impostos, veja [encomendas retidas na alfândega](guide:customs).
 
-**Estados Unidos.** O site chinês da YunExpress divulga aos lojistas a operação de última milha CIRRO-E-COMMERCE e a linha "US Standard Postal Service" (lançada em 2020), sem especificar previamente qual parceira entrega cada remessa. Em vários envios nos EUA, as movimentações mostram entrega pela GOFO sob o mesmo código `YT`.
+**Estados Unidos.** O site chinês da YunExpress oferece aos lojistas a operação de última milha CIRRO-E-COMMERCE, sem dizer quais pacotes ela leva. A empresa também lançou em 2020 a linha "US Standard Postal Service", mas não diz qual transportadora local entrega cada remessa nos EUA. Em alguns envios aos EUA, as movimentações mostram a entrega pela GOFO, e o rastreamento da própria GOFO encontra esses pacotes pelo mesmo código `YT`.
 
-**Brasil e demais países.** A YunExpress não publica regras para destinatários sobre tentativas de entrega, avisos, prazos de guarda ou reagendamento: tudo segue as políticas da transportadora ou correio local que recebe o pacote após a alfândega. Em compras internacionais enviadas ao Brasil, a tributação segue as regras do [Programa Remessa Conforme da Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona).
+**Brasil e demais países.** A YunExpress não publica regras para destinatários sobre tentativas de entrega, avisos, prazos de guarda ou reagendamento: tudo segue as políticas da transportadora ou correio local que recebe o pacote após a alfândega. Para compras internacionais enviadas ao Brasil, a Receita Federal explica como os tributos são cobrados no [Programa Remessa Conforme](https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona).
 
 Um artigo da YunExpress em chinês descreve ainda linhas europeias para pontos de retirada e armários inteligentes (a até 3 km ou escolhidos pelo destinatário), com média de 6 a 10 dias corridos da entrada até o ponto, exibindo o endereço no rastreamento.
 
 ## Rastreamento YunExpress sem atualização, atrasado ou perdido
 
-A YunExpress não oferece ao destinatário formulário de reclamação nem prazo próprio de reembolso para atraso, extravio ou avaria. O cliente contratual da YunExpress é o remetente com conta corporativa; portanto, acione a loja ou o marketplace informando o número do pedido e o código `YT`. Para intervalos sem leituras, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
+A YunExpress não oferece ao destinatário formulário de reclamação nem prazo próprio de reembolso para atraso, extravio ou avaria. O cliente da YunExpress é o titular da conta que assina o contrato, ou seja, o vendedor; portanto, acione a loja ou o marketplace informando o número do pedido e o código `YT`. Para intervalos sem leituras, veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
 Parado em `Customs inspection - Import`? O blog da YunExpress para lojistas explica que a seleção para fiscalização não garante longa retenção por si só: conferência documental costuma acrescentar de alguns dias úteis a cerca de uma semana; escaneamento ou inspeção física, de uma a duas semanas (às vezes com taxas de armazenagem ou inspeção); e revisão mais profunda pelas autoridades pode levar semanas ou mais de um mês. Veja [encomendas retidas na alfândega](guide:customs).
 
@@ -78,13 +78,13 @@ A YunExpress não publica telefone local, formulário ao consumidor nem escritó
 - **Telefone na China:** `400-8575-500` em `yunexpress.cn`, linha da China continental sem confirmação de acesso do exterior.
 - **Contatos regionais:** divulgados apenas para Ásia e Austrália em `sg.yunexpress.com/contact/`.
 
-A caixa de feedback do Yuntrack trata apenas de problemas técnicos do site. Para resolver problemas com a entrega, procure primeiro a loja (detentora do contrato) e depois a transportadora local exibida no rastreamento.
+A caixa de feedback do Yuntrack trata do próprio site. Para resolver problemas com a entrega, procure primeiro a loja (detentora do contrato) e depois a transportadora local exibida no rastreamento.
 
 ## Rastrear uma encomenda YunExpress com o Peek
 
 O [Peek](/) reconhece automaticamente `YT` seguido de 16 dígitos como YunExpress e também aceita links colados de `yuntrack.com`. Enquanto você mantém o pacote aberto, ou no dia da entrega com alertas ativados, o Peek verifica atualizações até a cada 10 minutos — e a cada 5 minutos a partir das 6h no horário local no dia em que o pacote sai para entrega, enquanto o rastreador próprio da YunExpress responde; fora disso, verifica a cada hora. Quando acompanha por serviços de rastreamento, consulta de hora em hora, a cada 3 horas após um dia sem novidades e até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados. Após dois dias sem novidades (ou 12 horas em "Etiqueta criada" ou "Recebida pela transportadora"), passa a checar de hora em hora.
 
-O Peek marca cada leitura no mapa e exibe etapa, histórico, local e horário da entrega. Leituras na China são interpretadas no horário chinês; pouso do voo e etapas terminadas em `- Import` sem cidade usam o fuso do aeroporto de chegada informado pela YunExpress; leituras da J&T Express Australia usam o horário de Sydney; e as demais seguem o fuso do local ou das leituras adjacentes — tudo convertido para o fuso do seu dispositivo.
+O Peek marca cada leitura no mapa e exibe etapa, histórico, local e horário da entrega. Leituras na China são interpretadas no horário chinês; pouso do voo e etapas terminadas em `- Import` sem cidade usam o fuso do aeroporto de chegada informado pela YunExpress; leituras da J&T Express Australia usam o horário de Sydney; e as demais seguem o fuso do local ou das leituras adjacentes. O Peek mostra cada leitura no horário do seu aparelho.
 
 Quando a YunExpress informa a transportadora local e seu código, o Peek pode acompanhar o pacote nessa parceira (embora não em todos os casos). O Peek não exibe data prevista nem ponto de retirada para a YunExpress, omite referências de pedido e não pode contatar a YunExpress nem abrir reclamação em seu nome.
 
@@ -104,7 +104,7 @@ Sim. Trata-se de uma empresa real de logística: *Shenzhen Qianhai YunExpress Lo
 
 ### Onde fica a sede da YunExpress?
 
-No distrito de Longgang, em Shenzhen, China. A empresa não lista escritórios ao destinatário na Europa, nos EUA ou no Brasil; sua política de privacidade aponta a *Hongkong YunExpress Logistics Limited* como controladora de dados fora da China continental.
+No distrito de Longgang, em Shenzhen, China. A empresa não lista escritórios para destinatários no Reino Unido, na Irlanda, nos EUA ou no Brasil; sua política de privacidade aponta a *Hongkong YunExpress Logistics Limited* como controladora de dados fora da China continental.
 
 ### Quanto tempo a YunExpress demora para entregar?
 
@@ -112,6 +112,8 @@ Segundo as estimativas da YunExpress para lojistas, o *Standard Express* leva de
 
 :::sources
 - [YunExpress: Track & Trace Platform (Yuntrack)](https://www.yuntrack.com/) – portal oficial de rastreamento, códigos `YT`, interface em inglês e feedback
+- [YunExpress: código da página do Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – "starting with YT", separadores, abas, `Alert`, barra de progresso, "Additional Notes", comprovante de entrega e `Estimated delivery time`
+- [YunExpress: código da página de resultados do Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – abas, `Not Found`, "Last Mile Tracking", 100 códigos por busca, sem conta
 - [YunExpress: Site oficial](https://www.yunexpress.com/) – empresa, endereço em Shenzhen, e-mail `info@yunexpress.com`, horários e link para Yuntrack
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – fundação em 2014, linha do Reino Unido (2016), linha postal dos EUA (2020), Priority Express (2024) e Amazon
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – titular do contrato como cliente e Hongkong YunExpress Logistics Limited

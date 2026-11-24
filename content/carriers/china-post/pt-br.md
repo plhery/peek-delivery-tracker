@@ -14,12 +14,12 @@ Um código padrão da China Post tem duas letras, nove dígitos e `CN` no final:
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `LT482917367CN` | `L`: pequeno pacote rastreado (correspondência prioritária / ePacket). |
+| `LT482917367CN` | `L`: pequeno pacote rastreado (correspondência). |
 | `RR482917367CN` | `R`: remessa registrada. |
 | `CP482917367CN` | `C`: encomenda postal. |
 | `EA482917367CN` | `E`: EMS, o serviço expresso da China Post. |
 | `UA482917367CN` | `U`: pequeno pacote com mercadoria "sem rastreamento voltado ao cliente", nos termos da UPU; não espere leituras após chegar ao país de destino. |
-| `ZS48291736501` | `ZS`, `ZC` ou `ZA` seguidos de 11 dígitos: também respondidos pelo rastreador da China Post. |
+| `ZS48291736701` | `ZS`, `ZC` ou `ZA` seguidos de 11 dígitos: também respondidos pelo rastreador da China Post. |
 | `LP48291736405812` | Não é China Post: código logístico da Cainiao (AliExpress). |
 | `YT4829173640581926` | Não é China Post, mas [YunExpress](carrier:yunexpress). |
 
@@ -41,7 +41,7 @@ A China Post publica suas movimentações em chinês. Os nomes de locais aparece
 | `出口海关/留存待验` | Retido pela alfândega de exportação para conferência. |
 | `出口海关/放行` | Liberado pela alfândega de exportação. |
 | `【…】已出口直封` | Fechado em despacho de exportação em uma unidade internacional da China. |
-| `已交承运商运输` | Entregue à transportadora responsável pelo transporte internacional. |
+| `已交承运商运输` | Entregue a uma transportadora para o transporte. |
 | `航空公司接收`, `航空公司启运` | Recebido pela companhia aérea e embarcado no voo. |
 | `飞机进港` | O voo pousou. |
 | `到达寄达地处理中心` | Chegou ao centro de tratamento no país de destino. |
@@ -96,9 +96,9 @@ O [Peek](/) identifica imediatamente códigos de duas letras, nove dígitos e `C
 
 O Peek consulta diretamente o rastreamento da China Post. Quando a China Post solicita os quatro dígitos do telefone, o Peek tenta a visualização pública em `ems.com.cn` sem pedir seu telefone; se essa visualização também exigir os dígitos e nenhum serviço de rastreamento tiver a encomenda, o Peek avisa que faltam dados e você pode consultar no site da China Post com os quatro dígitos. Como a consulta pública da China Post mostra apenas as três leituras mais recentes, o Peek acrescenta a data de postagem quando disponível e busca histórico mais completo nos serviços de rastreamento quando há cobertura.
 
-O Peek exibe a etapa, o histórico com a unidade de cada leitura (traduzindo o nome da cidade chinesa quando reconhecido) e o país de destino. Leituras conhecidas aparecem traduzidas; as demais permanecem em chinês. A China Post registra suas leituras no horário da China, mesmo ao chegar ao exterior, enquanto leituras repassadas pelo correio local geralmente mantêm o fuso local; o Peek converte tudo para o fuso do seu dispositivo, encerrando o histórico em peektracker.com e nos apps com "Horários no seu fuso horário:" e o nome do fuso. A China Post não informa data prevista, peso nem ponto de retirada, e o Peek omite nome do serviço, contatos, dados pessoais, nomes/telefones de carteiros e coordenadas.
+O Peek exibe a etapa, o histórico com a unidade de cada leitura (traduzindo o nome da cidade chinesa quando reconhecido) e o país de destino. Leituras cujo texto o Peek conhece aparecem em inglês; as demais, em chinês. A China Post registra suas leituras no horário da China, mesmo ao chegar ao exterior, enquanto leituras repassadas pelo correio local geralmente mantêm o fuso local; o Peek mostra cada leitura no horário do seu aparelho e, em peektracker.com e nos apps para iPhone e Android, encerra o histórico com "Horários no seu fuso horário:" e o nome do fuso. A China Post não informa data prevista, peso nem ponto de retirada, e o Peek omite nome do serviço, contatos, dados pessoais, nomes/telefones de carteiros e coordenadas.
 
-Em códigos terminados em `CN`, assim que a China Post informa o país de destino (ou segundo a região do seu aparelho), o Peek também consulta o correio nacional compatível e passa a segui-lo quando ele registra leituras mais novas, preservando o histórico da China Post.
+Em códigos terminados em `CN`, assim que a China Post informa o país de destino, o Peek também consulta o correio nacional desse país com o mesmo código (os Correios, no Brasil) e passa a segui-lo quando ele registra leituras mais novas, preservando o histórico da China Post. Se a China Post não informar o país, o Peek usa o seu: nos apps para iPhone e Android, a região configurada no celular; em peektracker.com, o país de onde você adicionou a encomenda.
 
 O Peek consulta a China Post de hora em hora, inclusive no dia da entrega; quando o correio local assume a entrega, o Peek passa a seguir o ritmo daquela transportadora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode contatar a China Post, o correio local nem a loja em seu nome.
 

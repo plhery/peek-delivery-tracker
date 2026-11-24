@@ -42,7 +42,7 @@ Auf [jadlog.com.br/jadlog/servicos](https://www.jadlog.com.br/jadlog/servicos), 
 - **[Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup):** über 4.000 Partnergeschäfte in Brasilien (über 90 % Bevölkerungsabdeckung) für Paketabholung, -abgabe und E-Commerce-Retouren (*Reversa*) mit SMS- und E-Mail-Benachrichtigungen.
 - **[Jadlog Internacional](https://www.jadlog.com.br/jadlog/internacional):** Export aus Brasilien in 154 Länder (300 Ziele) über das internationale Geopost-Netz.
 
-**Was Jadlog nicht öffentlich festlegt.** Die Website nennt weder eine einheitliche Zahl an Zustellversuchen noch garantierte Laufzeiten oder eine feste Abholfrist an Pickup-Punkten für alle Onlineshops. Prüfe die SMS oder E-Mail zu deinem Pickup-Paket – oder die Bestellseite des Shops – für genaue Abholfristen und erneute Zustellregeln.
+**Was Jadlog nicht öffentlich festlegt.** Die Website nennt weder eine einheitliche Zahl an Zustellversuchen noch garantierte Laufzeiten oder eine feste Abholfrist an Pickup-Punkten für alle Onlineshops. Prüfe die SMS oder E-Mail zu deinem Pickup-Paket – oder die Bestellseite des Shops – für genaue Abholfristen und die Regeln für eine erneute Zustellung.
 
 ## Jadlog-Paket steckt fest, verspätet sich oder kam nicht an
 
@@ -71,11 +71,11 @@ Die Seite [Atendimento von Jadlog](https://www.jadlog.com.br/jadlog/atendimento)
 
 Da 14-stellige Nummern weltweit von mehreren Geopost-/DPD-Diensten genutzt werden, richtet sich [Peek](/) nach deinem Standort, wen es zuerst fragt. In Brasilien fragt Peek unter den 14-stelligen Kandidaten zuerst bei Jadlog an (vor europäischen DPD-Einheiten, Chronopost, SEUR und BRT) und zeigt „Jadlog hat dieses Paket.“, sobald Jadlog es bestätigt. Außerhalb Brasiliens nutzt Peek Jadlog als Rückfalloption – es fragt erst die europäischen Geopost-Dienste und dann Jadlog, falls keiner die Nummer kennt. Ein eingefügter Link mit `jadlog.com.br/jadlog/captcha?cte=` wählt Jadlog weltweit direkt aus; sonst tippe beim Hinzufügen auf „Ändern“ oder in der Paketansicht auf „Paketdienst ändern“ und wähle Jadlog (die Suche nach „DPD Brazil“ findet ihn ebenfalls).
 
-Peek fragt die Gast-Tracking-API von Geopost direkt für Jadlog ab, ohne nach Postleitzahl oder CPF zu fragen. Angezeigt werden die aktuelle Phase („Etikett erstellt“, „Beim Paketdienst eingegangen“, „Unterwegs“, „In Zustellung“, „Zugestellt“), der Scan-Verlauf (auf Englisch aus der Geopost-API oder auf Portugiesisch vom lokalen Jadlog-Tracker) sowie der Zustellzeitpunkt. Voraussichtliche Lieferdaten, Gewicht, Adressen von Jadlog-Pickup-Punkten sowie Empfängernamen oder Unterschriften zeigt Peek nicht.
+Peek fragt die öffentliche Tracking-API von Geopost direkt für Jadlog ab, ohne nach Postleitzahl oder CPF zu fragen. Angezeigt werden die aktuelle Phase („Etikett erstellt“, „Beim Paketdienst eingegangen“, „Unterwegs“, „In Zustellung“, „Zugestellt“), der Scan-Verlauf (auf Englisch aus der Geopost-API oder auf Portugiesisch vom lokalen Jadlog-Tracker) sowie der Zustellzeitpunkt. Voraussichtliche Lieferdaten, Gewicht, Adressen von Jadlog-Pickup-Punkten sowie Empfängernamen oder Unterschriften zeigt Peek nicht.
 
-Solange du das Paket in Peek geöffnet hast oder am Zustelltag mit aktivierten Benachrichtigungen prüft Peek bis zu alle 10 Minuten; am Zustelltag alle 2 Minuten ab 6 Uhr Ortszeit, solange das Tracking von Jadlog antwortet. Sonst prüft Peek stündlich. Nach 12 Stunden mit nur „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ oder nach zwei Tagen ohne Neuigkeiten prüft es unabhängig davon stündlich, und nach sieben Tagen auf „Etikett erstellt“ alle 6 Stunden. Antwortet das Jadlog-Tracking nicht und verfolgt Peek das Paket allein über Tracking-Dienste, prüft es stündlich, nach einem stillen Tag alle 3 Stunden und am Zustelltag bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiv sind.
+Solange du das Paket in Peek geöffnet hast oder am Zustelltag mit aktivierten Benachrichtigungen, prüft Peek bis zu alle 10 Minuten; an dem Tag, an dem das Paket in Zustellung geht, alle 2 Minuten ab 6 Uhr Ortszeit, solange das Tracking von Jadlog antwortet. Sonst prüft Peek stündlich. Nach 12 Stunden mit nur „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ oder nach zwei Tagen ohne Neuigkeiten prüft es unabhängig davon stündlich, und nach sieben Tagen auf „Etikett erstellt“ alle 6 Stunden. Antwortet das Jadlog-Tracking nicht und verfolgt Peek das Paket allein über Tracking-Dienste, prüft es stündlich, nach einem stillen Tag alle 3 Stunden und an dem Tag, an dem das Paket in Zustellung ist, bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiv sind.
 
-Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Datum dieses Scans, etwa „Keine Aktualisierung seit Mo., 12. Okt.“. Auf der Paketseite steht dann: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Jadlog nach.“ Nach drei Wochen ohne neuen Scan heißt es: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Jadlog nach.“
+Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Datum dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Auf der Paketseite steht dann: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Jadlog nach.“ Nach drei Wochen ohne neuen Scan heißt es: „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei Jadlog nach.“
 
 Als Benachrichtigungsstufe kannst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Peek überwacht nur das Tracking und kann weder eine neue Zustellung buchen noch eine Jadlog-Franchise für dich kontaktieren.
 
@@ -93,7 +93,7 @@ Eine Jadlog-Paketnummer ist 14 Ziffern lang (zum Beispiel `48291736405821`, Ziff
 
 [Jadlog Pickup](https://www.jadlog.com.br/jadlog/pickup) umfasst mehr als 4.000 Partnergeschäfte in Brasilien, in denen Empfänger Pakete abholen oder Retouren abgeben können. Jadlog informiert per SMS und E-Mail über den Verlauf der Sendung.
 
-### Warum gehört Jadlog zu DPD und Geopost?
+### Warum ist Jadlog mit DPD und Geopost verbunden?
 
 Jadlog ist Teil der europäischen Geopost-Gruppe neben DPD, Chronopost, SEUR, BRT und Speedy. Deshalb nutzt Jadlog 14-stellige Geopost-Paketnummern und ist an das internationale Geopost-Netz in 154 Ländern angebunden.
 
@@ -108,5 +108,5 @@ Jadlog ist Teil der europäischen Geopost-Gruppe neben DPD, Chronopost, SEUR, BR
 - [Jadlog: Atendimento](https://www.jadlog.com.br/jadlog/atendimento) – Umfang der öffentlichen Hilfeseite
 - [Jadlog: LGPD](https://www.jadlog.com.br/jadlog/lgpd) – Datenschutzportal für Betroffene
 - [Consumidor.gov.br](https://www.consumidor.gov.br/pages/conteudo/publico/1) – öffentliche Schlichtungsplattform (10-Tage-Antwortfrist, gov.br-Konto Silber oder Gold)
-- [Universal Parcel Scraper: jadlog](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/jadlog) – 14-Ziffern-Erkennung und Brasilien-Priorität (Alias `DPD Brazil`), Linkregel `captcha?cte=`, Geopost-Gast-API, Statuszuordnung und Abfragerhythmus
+- [Universal Parcel Scraper: jadlog](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/jadlog) – 14-Ziffern-Erkennung und Brasilien-Priorität (Alias `DPD Brazil`), Linkregel `captcha?cte=`, öffentliche Tracking-API von Geopost, Statuszuordnung und Abfragerhythmus
 :::

@@ -4500,6 +4500,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd100"
     },
     {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "haypost-sendungsverfolgung",
+      "title": "HayPost Sendungsverfolgung: AM-Codes, Status & Kontakt",
+      "name": "HayPost",
+      "color": "#fa4616"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6556,6 +6564,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Bulgarian Posts\u00a0: codes PS et BG, douane et aide",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "suivi-haypost",
+      "title": "Suivi HayPost\u00a0: codes postaux AM, statuts et contacts",
+      "name": "HayPost",
+      "color": "#fa4616"
     }
   ],
   "it": [
@@ -8592,6 +8608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd100"
     },
     {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "tracciamento-haypost",
+      "title": "Tracciamento HayPost: codici AM, stati e contatti",
+      "name": "HayPost",
+      "color": "#fa4616"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -10624,6 +10648,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Bulgarian Posts: códigos PS/BG y aduanas",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "seguimiento-haypost",
+      "title": "Seguimiento HayPost: códigos AM, estados y contactos",
+      "name": "HayPost",
+      "color": "#fa4616"
     },
     {
       "id": "paquetexpress",
@@ -12730,6 +12762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Bulgarian Posts: códigos PS/BG, alfândega e ajuda",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "rastreio-haypost",
+      "title": "Rastreio HayPost: códigos AM, estados e contactos",
+      "name": "HayPost",
+      "color": "#fa4616"
     }
   ],
   "pt-br": [
@@ -14838,6 +14878,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Bulgarian Posts: kody PS/BG, cło i pomoc",
       "name": "Bulgarian Posts",
       "color": "#ffd100"
+    },
+    {
+      "id": "haypost",
+      "catalog": "haypost",
+      "slug": "sledzenie-haypost",
+      "title": "Śledzenie HayPost: kody AM, statusy i kontakty",
+      "name": "HayPost",
+      "color": "#fa4616"
     }
   ],
   "ru": [

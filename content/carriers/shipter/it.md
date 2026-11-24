@@ -16,7 +16,7 @@ I codici Shipter iniziano con `H3` e terminano con `KR`, con due lettere e cinqu
 
 | Formato (inventato) | Che cos’è |
 | --- | --- |
-| `H3AU482917KR` | 12 caratteri: `H3`, due lettere, sei cifre e `KR`. Peek interroga [Colis Privé](carrier:colis-prive) e Shipter, prima Shipter in Corea del Sud. |
+| `H3AU482917KR` | 12 caratteri: `H3`, due lettere, sei cifre e `KR`. Peek interroga solo Shipter. |
 | `H3FR48291KR` | 11 caratteri: `H3`, due lettere, cinque cifre e `KR`. Peek interroga solo Shipter. |
 
 Un link `shipter.kr/tracking/<codice>` o `shiptertracking.com/trackingResult/<codice>` assegna subito il pacco a Shipter. Per i pacchi spediti dalla Corea del Sud tramite Korea Post, vedi [Korea Post](carrier:korea-post); per altri formati, consulta la guida ai [formati dei codici di tracciamento](guide:tracking-number-formats).
@@ -50,9 +50,9 @@ Shipter spedisce i pacchi via aerea dalla Corea del Sud e li affida a un corrier
 
 ## Tracciare Shipter con Peek
 
-Incolla il codice `H3...KR` oppure un link `shipter.kr/tracking/...` o `shiptertracking.com/trackingResult/...` in Peek. Per un codice di 12 caratteri Peek interroga [Colis Privé](carrier:colis-prive) e Shipter (prima Shipter in Corea del Sud); per uno di 11 caratteri, solo Shipter. Mostra «Shipter ha questo pacco.» appena Shipter risponde. Se Peek indica un altro corriere, tocca «Cambia» mentre aggiungi il pacco oppure «Cambia corriere» nella sua pagina e seleziona Shipter.
+Incolla il codice `H3...KR` oppure un link `shipter.kr/tracking/...` o `shiptertracking.com/trackingResult/...` in Peek. Per un codice di 11 o 12 caratteri, Peek interroga solo Shipter. Mostra «Shipter ha questo pacco.» appena Shipter risponde. Se Peek indica un altro corriere, tocca «Cambia» mentre aggiungi il pacco oppure «Cambia corriere» nella sua pagina e seleziona Shipter.
 
-Peek legge il tracciamento Shipter tramite l’[adattatore open source Shipter di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) e riprova in caso di errore di rete. Mostra il testo inglese di ogni scansione con il deposito o il luogo indicato e l’orario di consegna. Shipter fornisce gli orari con offset GMT e Peek li visualizza sull’orologio del tuo dispositivo; un orario senza offset resta come indicato da Shipter.
+Peek legge il tracciamento Shipter tramite l’[adattatore open source Shipter di universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) e riprova in caso di errore di rete. Mostra il testo inglese di ogni scansione con il deposito o il luogo indicato e l’orario di consegna. Shipter fornisce gli orari con offset GMT e Peek li mostra con l’ora del tuo dispositivo; un orario senza offset resta come indicato da Shipter.
 
 Peek traduce le scansioni Shipter in fasi chiare: «Etichetta creata» per il preavviso prima del ritiro, «Preso in carico» appena Shipter scansiona il pacco in Corea, «In transito» per partenza del volo, arrivo in aeroporto, sdoganamento e passaggi nei centri locali, «In consegna» quando il corriere locale parte per la consegna e «Consegnato» a consegna avvenuta. Gli avvisi tardivi dell’ultimo miglio (`Shipping information received` e `Your parcel will be entrusted to last mile...`) restano nella cronologia senza far retrocedere lo stato.
 
@@ -66,7 +66,7 @@ Peek può avvisarti per «Ogni scansione», «Passaggi importanti» o «Solo la 
 
 Shipter opera per le aziende che spediscono tramite la sua rete:
 
-- **Sito ufficiale e richieste di servizio:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* per richieste commerciali)
+- **Sito ufficiale e richieste di servizio:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* per richieste di servizio)
 - **Tracker ufficiale online:** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **Contatta prima il venditore:** ogni azienda cliente ha un responsabile CS dedicato presso Shipter, che gestisce problemi, resi e reclami con i propri clienti. Se il pacco è in ritardo, danneggiato o smarrito, contatta il negozio che lo ha spedito indicando il codice `H3...KR`.
 

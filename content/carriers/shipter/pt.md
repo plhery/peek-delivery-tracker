@@ -16,7 +16,7 @@ Os números de rastreio da Shipter começam por `H3` e terminam em `KR`, com dua
 
 | Formato (inventado) | O que é |
 | --- | --- |
-| `H3AU482917KR` | 12 caracteres: `H3`, duas letras, seis dígitos e `KR`. O Peek consulta a [Colis Privé](carrier:colis-prive) e a Shipter, primeiro a Shipter na Coreia do Sul. |
+| `H3AU482917KR` | 12 caracteres: `H3`, duas letras, seis dígitos e `KR`. O Peek consulta apenas a Shipter. |
 | `H3FR48291KR` | 11 caracteres: `H3`, duas letras, cinco dígitos e `KR`. O Peek consulta apenas a Shipter. |
 
 Uma ligação de `shipter.kr/tracking/<número>` ou `shiptertracking.com/trackingResult/<número>` associa de imediato a encomenda à Shipter. Para encomendas enviadas da Coreia do Sul pela Korea Post, consulta [Korea Post](carrier:korea-post); para outros formatos, vê o guia de [formatos de números de seguimento](guide:tracking-number-formats).
@@ -50,9 +50,9 @@ A Shipter envia as encomendas por via aérea a partir da Coreia do Sul e entrega
 
 ## Acompanhar a Shipter com o Peek
 
-Cola o teu código `H3...KR`, ou uma ligação `shipter.kr/tracking/...` ou `shiptertracking.com/trackingResult/...`, no Peek. Para um código de 12 caracteres o Peek consulta a [Colis Privé](carrier:colis-prive) e a Shipter (primeiro a Shipter na Coreia do Sul); para um de 11 caracteres, apenas a Shipter. Mostra «Shipter tem esta encomenda.» assim que a Shipter responde. Se o Peek indicar outra transportadora, toca em «Alterar» ao adicionar ou em «Alterar transportadora» na página da encomenda e escolhe Shipter.
+Cola o teu código `H3...KR`, ou uma ligação `shipter.kr/tracking/...` ou `shiptertracking.com/trackingResult/...`, no Peek. Para um código de 11 ou 12 caracteres, o Peek consulta apenas a Shipter. Mostra «Shipter tem esta encomenda.» assim que a Shipter responde. Se o Peek indicar outra transportadora, toca em «Alterar» ao adicionar ou em «Alterar transportadora» na página da encomenda e escolhe Shipter.
 
-O Peek lê o rastreio da Shipter através do [adaptador Shipter em código aberto no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) e volta a tentar em caso de erro de rede. Mostra o texto em inglês de cada registo com o depósito ou local indicado e a hora de entrega. A Shipter indica as horas com desfasamento GMT e o Peek apresenta-as no relógio do teu dispositivo; uma hora sem desfasamento é apresentada tal como a Shipter a fornece.
+O Peek lê o rastreio da Shipter através do [adaptador Shipter em código aberto no universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) e volta a tentar em caso de erro de rede. Mostra o texto em inglês de cada registo com o depósito ou local indicado e a hora de entrega. A Shipter indica as horas com desfasamento GMT e o Peek apresenta-as na hora do teu dispositivo; uma hora sem desfasamento é apresentada tal como a Shipter a fornece.
 
 O Peek traduz os registos da Shipter em etapas claras: «Etiqueta criada» para o pré-aviso antes da recolha, «Aceite pela transportadora» assim que a Shipter regista a encomenda na Coreia, «Em trânsito» para partida de voo, chegada ao aeroporto, libertação aduaneira e transferências locais, «Em distribuição» quando o estafeta local inicia a rota e «Entregue» na conclusão. Avisos tardios do parceiro local (`Shipping information received` e `Your parcel will be entrusted to last mile...`) ficam no histórico sem fazer recuar a encomenda.
 
@@ -66,7 +66,7 @@ O Peek pode notificar-te para «Todos os registos», «Passos importantes» ou �
 
 A Shipter trabalha para as empresas que expedem através da sua rede:
 
-- **Site oficial e pedidos comerciais:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* para pedidos de serviço)
+- **Site oficial e pedidos de serviço:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* para pedidos de serviço)
 - **Rastreio oficial online:** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **Contacta primeiro o vendedor:** cada empresa cliente tem um gestor de apoio dedicado na Shipter, que trata de ocorrências, devoluções e reclamações com os seus clientes. Se a tua encomenda estiver atrasada, danificada ou perdida, contacta a loja que a enviou com o teu número `H3...KR`.
 

@@ -16,7 +16,7 @@ Les numéros de suivi Shipter commencent par `H3` et se terminent par `KR`, avec
 
 | Format (inventé) | Ce que c’est |
 | --- | --- |
-| `H3AU482917KR` | 12 caractères : `H3`, deux lettres, six chiffres et `KR`. Peek interroge [Colis Privé](carrier:colis-prive) et Shipter, Shipter en premier en Corée du Sud. |
+| `H3AU482917KR` | 12 caractères : `H3`, deux lettres, six chiffres et `KR`. Peek interroge uniquement Shipter. |
 | `H3FR48291KR` | 11 caractères : `H3`, deux lettres, cinq chiffres et `KR`. Peek interroge uniquement Shipter. |
 
 Un lien de suivi `shipter.kr/tracking/<numéro>` ou `shiptertracking.com/trackingResult/<numéro>` associe immédiatement le colis à Shipter. Pour les colis expédiés de Corée du Sud par Korea Post, consulte [Korea Post](carrier:korea-post) ; pour d’autres formats, vois le guide des [formats de numéros de suivi](guide:tracking-number-formats).
@@ -50,9 +50,9 @@ Shipter expédie les colis par avion depuis la Corée du Sud puis les remet à u
 
 ## Suivre un colis Shipter avec Peek
 
-Colle ton numéro `H3...KR`, ou un lien `shipter.kr/tracking/...` ou `shiptertracking.com/trackingResult/...`, dans Peek. Pour un numéro de 12 caractères Peek interroge [Colis Privé](carrier:colis-prive) et Shipter (Shipter en premier en Corée du Sud) ; pour un numéro de 11 caractères, uniquement Shipter. Il affiche « Shipter a ce colis. » dès que Shipter répond. Si Peek attribue un autre transporteur, appuie sur « Changer » lors de l’ajout ou « Changer de transporteur » sur la fiche du colis, puis choisis Shipter.
+Colle ton numéro `H3...KR`, ou un lien `shipter.kr/tracking/...` ou `shiptertracking.com/trackingResult/...`, dans Peek. Pour un numéro de 11 ou 12 caractères, Peek interroge uniquement Shipter. Il affiche « Shipter a ce colis. » dès que Shipter répond. Si Peek attribue un autre transporteur, appuie sur « Changer » lors de l’ajout ou « Changer de transporteur » sur la fiche du colis, puis choisis Shipter.
 
-Peek lit le suivi Shipter via l’[adaptateur Shipter open source de universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) et réessaie après une erreur réseau. Il affiche le libellé anglais de chaque scan avec le dépôt ou le lieu nommé, ainsi que l’heure de livraison. Shipter transmet ses horaires avec un décalage GMT et Peek les convertit dans le fuseau de ton appareil ; une heure sans décalage reste affichée telle que Shipter la fournit.
+Peek lit le suivi Shipter via l’[adaptateur Shipter open source de universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) et réessaie après une erreur réseau. Il affiche le libellé anglais de chaque scan avec le dépôt ou le lieu nommé, ainsi que l’heure de livraison. Shipter transmet ses horaires avec un décalage GMT et Peek les affiche à l’heure de ton appareil ; une heure sans décalage reste affichée telle que Shipter la fournit.
 
 Peek traduit les scans Shipter en étapes claires : « Étiquette créée » pour la pré-annonce avant enlèvement, « Pris en charge » dès que Shipter scanne le colis en Corée, « En transit » pour le départ du vol, l’arrivée à l’aéroport, le dédouanement et les transferts locaux, « En livraison » quand le livreur local entame sa tournée, et « Livré » à la fin. Les avis tardifs du partenaire local (`Shipping information received` et `Your parcel will be entrusted to last mile...`) restent dans l’historique sans faire reculer le colis d’étape.
 
@@ -66,7 +66,7 @@ Peek peut t’avertir pour « Chaque scan », « Étapes importantes » ou « Li
 
 Shipter travaille pour les entreprises qui expédient avec lui :
 
-- **Site officiel et demandes de service :** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd. ; *이용문의* pour les demandes commerciales)
+- **Site officiel et demandes de service :** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd. ; *이용문의* pour les demandes de service)
 - **Suivi officiel en ligne :** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **Contacter d’abord le vendeur :** chaque entreprise cliente dispose d’un responsable service client dédié chez Shipter, qui gère les incidents, retours et réclamations avec ses clients. Si ton colis est retardé, endommagé ou manquant, contacte la boutique expéditrice avec ton numéro `H3...KR`.
 

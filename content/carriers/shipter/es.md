@@ -16,7 +16,7 @@ Los números de Shipter empiezan por `H3` y terminan en `KR`, con dos letras y c
 
 | Formato (inventado) | Qué es |
 | --- | --- |
-| `H3AU482917KR` | 12 caracteres: `H3`, dos letras, seis dígitos y `KR`. Peek pregunta a [Colis Privé](carrier:colis-prive) y a Shipter, primero a Shipter en Corea del Sur. |
+| `H3AU482917KR` | 12 caracteres: `H3`, dos letras, seis dígitos y `KR`. Peek pregunta únicamente a Shipter. |
 | `H3FR48291KR` | 11 caracteres: `H3`, dos letras, cinco dígitos y `KR`. Peek pregunta únicamente a Shipter. |
 
 Un enlace de `shipter.kr/tracking/<número>` o `shiptertracking.com/trackingResult/<número>` asigna el paquete a Shipter de inmediato. Para paquetes enviados desde Corea del Sur con Korea Post, consulta [Korea Post](carrier:korea-post); para otros formatos, la guía de [formatos de números de seguimiento](guide:tracking-number-formats).
@@ -50,15 +50,15 @@ Shipter envía los paquetes por aire desde Corea del Sur y los entrega a un mens
 
 ## Seguir Shipter con Peek
 
-Pega tu código `H3...KR`, o un enlace `shipter.kr/tracking/...` o `shiptertracking.com/trackingResult/...`, en Peek. Para un código de 12 caracteres Peek pregunta a [Colis Privé](carrier:colis-prive) y a Shipter (primero a Shipter en Corea del Sur); para uno de 11 caracteres, solo a Shipter. Muestra «Shipter tiene este paquete.» en cuanto Shipter responde. Si Peek elige otro transportista, pulsa «Cambiar» al añadirlo o «Cambiar transportista» en su ficha y elige Shipter.
+Pega tu código `H3...KR`, o un enlace `shipter.kr/tracking/...` o `shiptertracking.com/trackingResult/...`, en Peek. Para un código de 11 o 12 caracteres, Peek pregunta solo a Shipter. Muestra «Shipter tiene este paquete.» en cuanto Shipter responde. Si Peek elige otro transportista, pulsa «Cambiar» al añadirlo o «Cambiar transportista» en su ficha y elige Shipter.
 
-Peek lee el seguimiento de Shipter a través del [adaptador Shipter de código abierto en universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) y reintenta tras un error de red. Muestra el texto en inglés de cada escaneo con el depósito o lugar indicado y la hora de entrega. Shipter entrega sus horas con desplazamiento GMT y Peek las muestra según el reloj de tu dispositivo; una hora sin desplazamiento se muestra tal cual la entrega Shipter.
+Peek lee el seguimiento de Shipter a través del [adaptador Shipter de código abierto en universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) y reintenta tras un error de red. Muestra el texto en inglés de cada escaneo con el depósito o lugar indicado y la hora de entrega. Shipter entrega sus horas con desplazamiento GMT y Peek las muestra en la hora de tu dispositivo; una hora sin desplazamiento se muestra tal cual la entrega Shipter.
 
 Peek clasifica los escaneos de Shipter en etapas claras: «Etiqueta creada» para el preaviso antes de la recogida, «Admitido por el transportista» cuando Shipter escanea el paquete en Corea, «En tránsito» para salida del vuelo, llegada al aeropuerto, despacho aduanero y traslados en centros locales, «En reparto» cuando el repartidor local inicia su ruta y «Entregado» al finalizar. Los avisos tardíos del socio local (`Shipping information received` y `Your parcel will be entrusted to last mile...`) permanecen en el historial sin hacer retroceder el envío.
 
 Cuando el escaneo más reciente tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con el día de ese escaneo, como «Sin novedades desde el lun 12 oct». La página del paquete muestra entonces «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a Shipter.» Tras tres semanas sin nuevos escaneos, indica «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a Shipter.»
 
-Mientras tienes el paquete abierto en Peek, o el día de entrega con las notificaciones activadas, Peek consulta hasta cada 10 minutos; el día en que Shipter muestra `Out for delivery` o `Your parcel is with your local courier and ready for delivery..`, cada 2 minutos desde las 6:00 según el reloj del escaneo más reciente mientras responda el localizador de Shipter. El resto del tiempo Peek comprueba cada hora. Tras 12 horas con solo «Etiqueta creada» o «Admitido por el transportista», o dos días sin novedades, consulta cada hora sea cual sea tu modo de seguimiento, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el localizador de Shipter no responde y Peek sigue el paquete únicamente a través de servicios de seguimiento, consulta cada hora, cada 3 horas tras un día tranquilo y hasta cada 15 minutos el día en que el paquete está en reparto, mientras tengas el paquete abierto o las notificaciones activadas.
+Mientras tienes el paquete abierto en Peek, o el día de entrega con las notificaciones activadas, Peek consulta hasta cada 10 minutos; el día en que Shipter muestra `Out for delivery` o `Your parcel is with your local courier and ready for delivery..`, cada 2 minutos desde las 6:00 según el reloj del escaneo más reciente mientras responda el localizador de Shipter. El resto del tiempo Peek comprueba cada hora. Tras 12 horas con solo «Etiqueta creada» o «Admitido por el transportista», o dos días sin novedades, consulta cada hora lo sigas como lo sigas, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el localizador de Shipter no responde y Peek sigue el paquete únicamente a través de servicios de seguimiento, consulta cada hora, cada 3 horas tras un día tranquilo y hasta cada 15 minutos el día en que el paquete está en reparto, mientras tengas el paquete abierto o las notificaciones activadas.
 
 Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
@@ -66,7 +66,7 @@ Peek puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entr
 
 Shipter trabaja para las empresas que realizan envíos con su red:
 
-- **Web oficial y consultas comerciales:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* para consultas de servicio)
+- **Web oficial y consultas de servicio:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* para consultas de servicio)
 - **Rastreador oficial online:** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **Contacta primero con el vendedor:** cada empresa cliente cuenta con un gestor de atención dedicado en Shipter que tramita incidencias, devoluciones y reclamaciones con sus clientes. Si tu paquete se retrasa, llega dañado o se pierde, contacta con la tienda remitente con tu código `H3...KR`.
 

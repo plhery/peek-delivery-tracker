@@ -16,7 +16,7 @@ Numery śledzenia Shipter zaczynają się od `H3` i kończą na `KR`, mając w �
 
 | Format (wymyślony) | Co oznacza |
 | --- | --- |
-| `H3AU482917KR` | 12 znaków: `H3`, dwie litery, sześć cyfr i `KR`. Peek pyta [Colis Privé](carrier:colis-prive) i Shipter, w Korei Południowej najpierw Shipter. |
+| `H3AU482917KR` | 12 znaków: `H3`, dwie litery, sześć cyfr i `KR`. Peek pyta wyłącznie Shipter. |
 | `H3FR48291KR` | 11 znaków: `H3`, dwie litery, pięć cyfr i `KR`. Peek pyta wyłącznie Shipter. |
 
 Link `shipter.kr/tracking/<numer>` lub `shiptertracking.com/trackingResult/<numer>` od razu przypisuje przesyłkę do Shipter. Dla paczek wysyłanych z Korei Południowej przez Korea Post zobacz [Korea Post](carrier:korea-post); inne formaty znajdziesz w poradniku o [formatach numerów śledzenia](guide:tracking-number-formats).
@@ -50,11 +50,11 @@ Shipter wysyła paczki drogą lotniczą z Korei Południowej, po czym przekazuje
 
 ## Śledzenie Shipter w Peek
 
-Wklej w Peek swój numer `H3...KR` albo link `shipter.kr/tracking/...` lub `shiptertracking.com/trackingResult/...`. Dla numeru 12-znakowego Peek pyta [Colis Privé](carrier:colis-prive) i Shipter (w Korei Południowej najpierw Shipter); dla 11-znakowego wyłącznie Shipter. Gdy Shipter odpowie, pojawia się „Shipter ma tę przesyłkę.” Jeśli Peek wskaże innego przewoźnika, kliknij „Zmień” przy dodawaniu paczki lub „Zmień przewoźnika” na jej ekranie i wybierz Shipter.
+Wklej w Peek swój numer `H3...KR` albo link `shipter.kr/tracking/...` lub `shiptertracking.com/trackingResult/...`. Dla numeru 11- lub 12-znakowego Peek pyta wyłącznie Shipter. Gdy Shipter odpowie, pojawia się „Shipter ma tę przesyłkę.” Jeśli Peek wskaże innego przewoźnika, kliknij „Zmień” przy dodawaniu paczki lub „Zmień przewoźnika” na jej ekranie i wybierz Shipter.
 
-Peek pobiera dane Shipter przez otwarty [adapter Shipter z universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) i ponawia próbę po błędzie sieciowym. Wyświetla angielski tekst każdego skanu z podanym oddziałem lub miejscem oraz godzinę doręczenia. Shipter podaje czasy z przesunięciem GMT, a Peek przelicza je na zegar Twojego urządzenia; czas bez przesunięcia wyświetlany jest tak, jak podaje go Shipter.
+Peek pobiera dane Shipter przez otwarty [adapter Shipter z universal-parcel-scraper](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shipter) i ponawia próbę po błędzie sieciowym. Wyświetla angielski tekst każdego skanu z podanym oddziałem lub miejscem oraz godzinę doręczenia. Shipter podaje czasy z przesunięciem GMT, a Peek wyświetla je w czasie Twojego urządzenia; czas bez przesunięcia wyświetlany jest tak, jak podaje go Shipter.
 
-Peek przekłada skany Shipter na przejrzyste etapy: „Zarejestrowana” dla danych przed odbiorem, „Przyjęta przez przewoźnika” po skanie Shipter w Korei, „W transporcie” dla wylotu, przylotu, zwolnienia celnego i przeładunków u lokalnego kuriera, „W doręczeniu” po wyjściu lokalnego kuriera na trasę oraz „Dostarczona” po doręczeniu. Późne komunikaty o przygotowaniu etykiety przez lokalnego partnera (`Shipping information received` i `Your parcel will be entrusted to last mile...`) zostają na osi czasu, nie cofając przesyłki.
+Peek przekłada skany Shipter na przejrzyste etapy: „Zarejestrowana” dla danych przed odbiorem, „Przyjęta przez przewoźnika” po skanie Shipter w Korei, „W transporcie” dla wylotu, przylotu, zwolnienia celnego i przeładunków u lokalnego kuriera, „W doręczeniu” po wyjściu lokalnego kuriera na trasę oraz „Dostarczona” po doręczeniu. Późne komunikaty wstępne od partnera ostatniej mili (`Shipping information received` i `Your parcel will be entrusted to last mile...`) zostają na osi czasu, nie cofając przesyłki.
 
 Jeśli najnowszy skan ma cztery dni, a przesyłka nadal widnieje jako „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie przesyłki pojawia się wtedy komunikat „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Shipter.” Po trzech tygodniach bez nowego skanu pojawia się informacja „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika Shipter.”
 
@@ -66,7 +66,7 @@ Peek może wysyłać powiadomienia dla opcji „Każdy skan”, „Ważne etapy�
 
 Shipter obsługuje firmy nadające przez niego przesyłki:
 
-- **Oficjalna strona i zapytania o usługę:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* dla zapytań biznesowych)
+- **Oficjalna strona i zapytania o usługę:** [shipter.kr](https://www.shipter.kr/) (H3 NETWORKS Co., Ltd.; *이용문의* dla zapytań o usługę)
 - **Oficjalny tracker online:** [shipter.kr/tracking](https://www.shipter.kr/tracking)
 - **Najpierw skontaktuj się ze sprzedawcą:** każda firma kliencka ma w Shipter dedykowanego opiekuna obsługi klienta, który rozwiązuje problemy, zwroty i reklamacje ze swoimi klientami. Jeśli paczka jest opóźniona, uszkodzona lub zaginęła, napisz do sklepu, który ją wysłał, podając numer `H3...KR`.
 

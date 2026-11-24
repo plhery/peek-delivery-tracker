@@ -4884,6 +4884,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "one-by-allegro-cz-sendungsverfolgung",
+      "title": "One by Allegro CZ (WE|DO) Sendungsverfolgung & Abholung",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-sendungsverfolgung",
@@ -7316,6 +7324,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi TNT Australia\u00a0: numéros, statuts et aide en Australie",
       "name": "TNT Australia",
       "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "suivi-one-by-allegro-cz",
+      "title": "Suivi One by Allegro CZ (WE|DO)\u00a0: codes et livraison",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     },
     {
       "id": "5post",
@@ -9752,6 +9768,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "tracciamento-one-by-allegro-cz",
+      "title": "Tracciamento One by Allegro CZ (WE|DO): codici e ritiro",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "tracciamento-5post",
@@ -12178,6 +12202,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "seguimiento-one-by-allegro-cz",
+      "title": "Seguimiento One by Allegro CZ (WE|DO): códigos y entrega",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "seguimiento-5post",
@@ -14602,6 +14634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio TNT Australia: números, estados e apoio",
       "name": "TNT Australia",
       "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "rastreio-one-by-allegro-cz",
+      "title": "Rastreio One by Allegro CZ (WE|DO): códigos e levantamento",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     },
     {
       "id": "5post",
@@ -17110,6 +17150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie TNT Australia: numery, statusy i pomoc",
       "name": "TNT Australia",
       "color": "#ff6600"
+    },
+    {
+      "id": "wedo",
+      "catalog": "wedo",
+      "slug": "sledzenie-one-by-allegro-cz",
+      "title": "Śledzenie One by Allegro CZ (WE|DO): kody i odbiór",
+      "name": "One by Allegro CZ",
+      "color": "#006d57"
     },
     {
       "id": "5post",

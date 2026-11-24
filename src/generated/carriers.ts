@@ -15198,12 +15198,36 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da381b"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "rastreamento-geodis-polonia",
+      "title": "Rastreamento GEODIS Poland: código, status e entregas",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
+    },
+    {
       "id": "ywe",
       "catalog": "ywe",
       "slug": "rastreamento-ywe",
       "title": "Rastreamento YWE (YanwenExpress): códigos, status e suporte",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "rastreamento-ecms-express",
+      "title": "Rastreamento ECMS Express: códigos, status e quem entrega",
+      "name": "ECMS Express",
+      "color": "#12823d"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "rastreamento-jd-logistics",
+      "title": "Rastreamento JD Logistics: códigos JD, status e contato",
+      "name": "JD Logistics",
+      "color": "#e1251b"
     },
     {
       "id": "japan-post",
@@ -18458,6 +18482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "守务国际（Shouwu）物流查询：SWECN单号、状态与尾程",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-poland-tracking",
+      "title": "GEODIS Poland 波兰物流查询：PL 单号、状态与自提",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
     },
     {
       "id": "hywl",

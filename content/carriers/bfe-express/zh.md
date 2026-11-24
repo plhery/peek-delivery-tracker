@@ -20,7 +20,7 @@ Peek 支持长度在 6 至 50 位之间、由字母和数字组成的 BFE Expres
 | `CK548291736045182` | `CK54` 加 13 位数字（共 17 位）——另一种阿根廷单号格式（长度与 Colis Privé 重叠）。 |
 | `CK512829173604518` | `CK512` 加 12 位数字（共 17 位）——发往秘鲁（长度与 Colis Privé 重叠）。 |
 | `CK598829173604518` | `CK598` 加 12 位数字（共 17 位）——发往乌拉圭（长度与 Colis Privé 重叠）。 |
-| `WYB482917360` | `WYB` 加 9 位数字（共 12 位）——秘鲁运单格式（形态与 Colis Privé、Purolator 和 TNT Australia 重叠）。 |
+| `WYB482917360` | `WYB` 加 9 位数字（共 12 位）——秘鲁运单格式（形态与 Purolator 和 TNT Australia 重叠）。 |
 
 `CK` 后面的数字对应目的国：`54` 代表阿根廷、`512` 代表秘鲁、`598` 代表乌拉圭。如果你直接粘贴形如 `bfeexpress.com/track?track_number=…` 的链接，Peek 会立即提取单号并选中 BFE Express。如需了解其他跨境单号规则，请参阅[运单号格式说明](guide:tracking-number-formats)（英文）。
 
@@ -55,7 +55,7 @@ BFE Express 官网提供小包运输、国际货运、清关、本地仓储及�
 
 ## 使用 Peek 追踪 BFE Express 包裹
 
-你可以将 `CK…` 或 `WYB…` 单号直接粘贴到支持超过 4,500 家承运商的 [Peek](/) 中。Peek 不会仅凭裸单号直接询问 BFE Express：对于 16 位 `CK54` 单号不会预设询问承运商；对于 17 位 `CK` 单号会询问 Colis Privé；对于 `WYB` 单号会询问 Colis Privé、TNT Australia 和 Purolator（在澳大利亚优先问 TNT Australia，在加拿大优先问 Purolator）。随后 Peek 会通过聚合追踪服务核实，且仅在追踪服务唯一指出 BFE Express 并附有带日期的扫描记录时才会归入 BFE Express。因此最直接的做法是在添加时点击“更换”，在“符合这个单号”下选择 BFE Express，或在已添加的包裹页面点击“更换快递公司”。如果粘贴 `bfeexpress.com/track?track_number=…` 链接，Peek 则会立即选定 BFE Express。
+你可以将 `CK…` 或 `WYB…` 单号直接粘贴到支持超过 4,500 家承运商的 [Peek](/) 中。Peek 不会仅凭裸单号直接询问 BFE Express：对于 16 位 `CK54` 单号不会预设询问承运商；对于 17 位 `CK` 单号会询问 Colis Privé；对于 `WYB` 单号会询问 TNT Australia 和 Purolator（在加拿大优先问 Purolator，其他地区优先问 TNT Australia）。随后 Peek 会通过聚合追踪服务核实，且仅在追踪服务唯一指出 BFE Express 并附有带日期的扫描记录时才会归入 BFE Express。因此最直接的做法是在添加时点击“更换”，在“符合这个单号”下选择 BFE Express，或在已添加的包裹页面点击“更换快递公司”。如果粘贴 `bfeexpress.com/track?track_number=…` 链接，Peek 则会立即选定 BFE Express。
 
 Peek 通过开源的 [universal-parcel-scraper BFE Express 适配器](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/bfe-express)直接请求 BFE Express 追踪接口，按时间顺序合并国际与末端两组记录，提取城市、网点或国家作为地点，并保留预计派送日与目的地国家。自带 GMT 偏移的时间按原始时刻保留；不带偏移的时间按扫描地点时区解析（埃塞萨按布宜诺斯艾利斯时间、利马按利马时间、蒙得维的亚按蒙得维的亚时间），无地点的扫描沿用相邻记录时区，其余默认布宜诺斯艾利斯时间，最后统一换算为你设备的本地时间。BFE 门户上显示的街道详细地址与签收照片不会被 Peek 保留。
 

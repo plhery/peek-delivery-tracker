@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**PDU**（*Parcel Delivery Union*，运营主体为*上海友递联科技有限公司*，简称*友递联科技*）是一家成立于 2022 年、总部位于上海的跨境智能物流服务商（[pduni.com](https://www.pduni.com/)）。PDU 在北美、欧洲、非洲和亚洲 10 多个国家运营自营分公司与本地操作中心，为跨境电商卖家和制造企业提供端到端清关、揽收、海外末端派送及货到付款（COD）代收服务。你可以在 PDU 英文运单查询页 [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) 查件，或直接将单号粘贴到上方查询框中。
+**PDU**（*Parcel Delivery Union*，运营主体为 *Shanghai Youdilian Technology Co., Ltd.*，中文简称*友递联科技*）是一家成立于 2022 年、总部位于上海的跨境智能物流服务商（[pduni.com](https://www.pduni.com/)）。PDU 在北美、欧洲、非洲和亚洲 10 多个国家运营自营分公司与本地操作中心，为跨境电商卖家和制造企业提供端到端清关、揽收、海外末端派送及货到付款（COD）代收服务。你可以在 PDU 英文运单查询页 [pduni.com/MV/en/customer-services/waybill-inquiry](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) 查件，或直接将单号粘贴到上方查询框中。
 
 ## PDU 友递联单号格式（`PD` 尾缀与自定义运单）
 
@@ -17,7 +17,7 @@ updated: 2026-11-24
 | `MX48291736PD` | 12 位 PDU 跨境运单号（`MX` + 8 位数字 + `PD`）。 |
 | `CO73918462PD` | 国际线路常用的另一组 12 位 `..PD` 运单号示例。 |
 
-当你手动选择 PDU 时，其官网查询页面也支持其他 6 至 40 位字母数字服务运单号。该 12 位形态与 Colis Privé 存在重叠：Peek 默认先询问 Colis Privé 再询问 PDU（在中国地区则会优先询问 PDU）。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
+当你手动选择 PDU 时，其官网查询页面也支持其他 6 至 40 位字母数字服务运单号。对于这一 12 位形态，PDU 是唯一匹配候选，Peek 会直接询问 PDU。详见[运单号格式说明](guide:tracking-number-formats)（英文）。
 
 ## PDU 友递联物流状态含义
 
@@ -56,7 +56,7 @@ PDU 为每票包裹和每条扫描分配状态代码（如 `TRANSIT`、`COLLECTI
 
 以下官方联系方式发布于 [PDU 运单查询页](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) 与 [PDU 帮助中心](https://www.pduni.com/MV/en/customer-services/help-center)：
 
-- **公司主体：** *上海友递联科技有限公司*（*友递联科技*，备案号 `沪ICP备2022026205号`）。
+- **公司主体：** *Shanghai Youdilian Technology Co., Ltd.*（*友递联科技*，备案号 `沪ICP备2022026205号`）。
 - **客服热线：** `021-50837888`（`+86 21 5083 7888`）。
 - **客服邮箱：** `service@pduni.com`。
 - **总部地址：** 中国上海市普陀区真北路中海大厦 6 楼 305 室。
@@ -66,7 +66,7 @@ PDU 为每票包裹和每条扫描分配状态代码（如 `TRANSIT`、`COLLECTI
 
 ## 使用 Peek 追踪 PDU 包裹
 
-输入 12 位 `..PD` 运单号（如虚构单号 `MX48291736PD` 或 `CO73918462PD`）时，[Peek](/) 会依次询问 Colis Privé 和 PDU（在中国地区优先询问 PDU），并在 PDU 查到记录后显示“PDU 有这个包裹的记录。”。如果你的 PDU 单号采用其他 6 至 40 位格式，请在添加时点击“更换”或在包裹页点击“更换快递公司”并选择 **PDU**（搜索“Parcel Delivery Union”或“友递联”均可找到）。
+输入 12 位 `..PD` 运单号（如虚构单号 `MX48291736PD` 或 `CO73918462PD`）时，PDU 是唯一匹配候选，[Peek](/) 会直接询问 PDU，并在 PDU 查到记录后显示“PDU 有这个包裹的记录。”。如果你的 PDU 单号采用其他 6 至 40 位格式，请在添加时点击“更换”或在包裹页点击“更换快递公司”并选择 **PDU**（搜索“Parcel Delivery Union”或“友递联”均可找到）。
 
 Peek 直接读取 PDU 追踪接口，展示标准阶段（“已生成面单”、“运输中”、“派送中”、“需要留意”、“已退回寄件人”、“已签收”）、已去除末端快递代码前缀的扫描文案（例如显示 `Entregado` 而非 `ENT,Entregado`）、地点及签收时间。PDU 状态码用于判定阶段，不会出现在任何 Peek 应用界面中。PDU 每条扫描如附带 UTC 偏移则按原偏移解析，否则按北京时间处理，Peek 会统一换算为你设备的本地时间。PDU 追踪接口本身不提供预计送达日期。
 
@@ -80,7 +80,7 @@ Peek 直接读取 PDU 追踪接口，展示标准阶段（“已生成面单”�
 
 ### PDU（*Parcel Delivery Union* / *友递联*）是什么公司？
 
-PDU（*上海友递联科技有限公司*）是一家 2022 年创立于上海的跨境智能物流公司，在 10 多个国家提供国际清关、揽收、末端派送与 COD 代收服务。
+PDU（*友递联科技*，*Shanghai Youdilian Technology Co., Ltd.*）是一家 2022 年创立于上海的跨境智能物流公司，在 10 多个国家提供国际清关、揽收、末端派送与 COD 代收服务。
 
 ### PDU 运单号是什么格式？
 
@@ -97,6 +97,6 @@ PDU（*上海友递联科技有限公司*）是一家 2022 年创立于上海的
 :::sources
 - [PDU 友递联官网](https://www.pduni.com/) – 2022 年成立于上海普陀区、10 余国自营清关与末端派送网络及 COD 服务
 - [PDU 运单查询门户](https://www.pduni.com/MV/en/customer-services/waybill-inquiry) – 公开英文运单查询、`service@pduni.com` 与 `021-50837888`
-- [PDU 帮助中心与常见问题](https://www.pduni.com/MV/en/customer-services/help-center) – 清关常见问题、防冒充诈骗提示及上海总部地址（*上海友递联科技有限公司*）
+- [PDU 帮助中心与常见问题](https://www.pduni.com/MV/en/customer-services/help-center) – 清关常见问题、防冒充诈骗提示及上海总部地址（*Shanghai Youdilian Technology Co., Ltd.*）
 - [Universal Parcel Scraper: pdu](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/pdu) – `^[A-Z]{2}\d{8}PD$` 识别规则、`traceByWeb` 接口、状态与文案映射（`DELIVERY` 与 `Salida a Ruta`）、前缀清理及 UTC/北京时间处理
 :::

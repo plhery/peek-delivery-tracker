@@ -4516,6 +4516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "gls-hungary-sendungsverfolgung",
+      "title": "GLS Hungary Sendungsverfolgung: Nummern, Locker & Hilfe",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6588,6 +6596,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi 360Lion\u00a0: codes WSH et AR, statuts et contacts",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "suivi-gls-hungary",
+      "title": "Suivi GLS Hungary\u00a0: numéros, consignes, délais et aide",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     }
   ],
   "it": [
@@ -8638,6 +8654,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento 360Lion: codici WSH e AR, stati e contatti",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "tracciamento-gls-hungary",
+      "title": "Tracciamento GLS Hungary: numeri, locker e contatti",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     },
     {
       "id": "liccardi",
@@ -10720,6 +10744,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Estafeta: guías, 2 intentos, reclamos y ayuda",
       "name": "Estafeta",
       "color": "#e30613"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "seguimiento-gls-hungary",
+      "title": "Seguimiento GLS Hungary: códigos, taquillas y contacto",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     },
     {
       "id": "correos-de-mexico",
@@ -12810,6 +12842,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 360Lion: códigos WSH e AR, estados e contactos",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "rastreio-gls-hungary",
+      "title": "Rastreio GLS Hungary: números, cacifos e contactos",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     }
   ],
   "pt-br": [
@@ -14934,6 +14974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 360Lion: kody WSH i AR, statusy i kontakt",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "gls-hu",
+      "catalog": "gls-hu",
+      "slug": "sledzenie-gls-hungary",
+      "title": "Śledzenie GLS Hungary: numery, automaty i kontakt",
+      "name": "GLS Hungary",
+      "color": "#ffdd00"
     }
   ],
   "ru": [

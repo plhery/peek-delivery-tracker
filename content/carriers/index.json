@@ -265,7 +265,7 @@
   { "id": "nova-global", "catalog": "nova-global", "name": "Nova Global", "languages": ["en", "uk"] },
   { "id": "xlcourier", "catalog": "xlcourier", "name": "XLCourier", "languages": ["en"] },
   { "id": "estafeta", "catalog": "estafeta", "name": "Estafeta", "languages": ["en", "es"] },
-  { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu"] },
+  { "id": "gls-hu", "catalog": "gls-hu", "name": "GLS Hungary", "languages": ["en", "hu", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "dhl-freight", "catalog": "dhl-freight", "name": "DHL Freight", "languages": ["en", "de"] },
   { "id": "anserx", "catalog": "anserx", "name": "AnserX", "languages": ["en"] },
   { "id": "bjs-home-delivery", "catalog": "bjs-home-delivery", "name": "BJS Home Delivery", "languages": ["en"] },

@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**E24** (*Metro E24*, *Metro E24 Solutions*) to kanadyjski przewoźnik doręczający przesyłki. Peek wymienia go również pod nazwami **Metro Supply Chain** — operatora logistyki kontraktowej (3PL) z siedzibą w Montrealu, którego własna strona nie używa nazwy E24 ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain prowadzi 190 obiektów w 6 krajach o łącznej powierzchni magazynowej 22,5 miliona stóp kwadratowych i realizuje 7 milionów dostaw ostatniej mili rocznie w Ameryce Północnej; wśród jego usług znajdują się fulfillment e-commerce i direct-to-consumer, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* oraz *Reverse Logistics*. Wklej numer referencyjny otrzymany od sklepu w pole powyżej i wybierz **E24**.
+**E24** (*Metro E24*, *Metro E24 Solutions*) to kanadyjski przewoźnik doręczający przesyłki. Peek wymienia go również pod nazwami **Metro Supply Chain** — operatora logistyki kontraktowej (3PL) z siedzibą w Montrealu, którego własna strona nie używa nazwy E24 ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain prowadzi 190 obiektów z 6 krajów o łącznej powierzchni magazynowej 22,5 miliona stóp kwadratowych i realizuje 7 milionów dostaw ostatniej mili rocznie w Ameryce Północnej; wśród jego usług znajdują się fulfillment e-commerce i direct-to-consumer, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* oraz *Reverse Logistics*. Wklej numer referencyjny otrzymany od sklepu w pole powyżej i wybierz **E24**.
 
 ## Numery śledzenia E24 (Metro Supply Chain)
 
@@ -29,7 +29,7 @@ E24 nie publikuje własnej listy statusów śledzenia. Peek śledzi E24 za pośr
 
 ## Przesyłka E24 opóźniona, nieudana lub zaginiona
 
-W sprawach wsparcia dostawy FAQ Metro Supply Chain kieruje na [stronę kontaktową](https://www.metroscg.com/contact-us/) z wyborem opcji „find my package” na liście rozwijanej. W sprawie zwrotu pieniędzy lub uszkodzonego towaru skontaktuj się ze sklepem, w którym złożyłeś zamówienie.
+W sprawach wsparcia dostawy FAQ Metro Supply Chain kieruje na [stronę kontaktową](https://www.metroscg.com/contact-us/) z wyborem opcji „find my package” na liście rozwijanej. W sprawie zwrotu pieniędzy lub uszkodzonego towaru skontaktuj się ze sklepem, w którym złożono zamówienie.
 
 - **Brak aktualizacji śledzenia:** zobacz [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 - **Status doręczona lub uszkodzona:** sprawdź najpierw ganek, garaż, recepcję budynku i sąsiadów, przejrzyj potwierdzenie dostawy od sprzedawcy i szybko zgłoś sklepowi braki lub szkody. Zobacz [doręczona, ale nieotrzymana](guide:delivered-not-received), [uszkodzona przesyłka](guide:damaged-parcel), [zaginiona przesyłka](guide:lost-parcel) i [zwrócona nadawcy](guide:returned-to-sender).
@@ -52,7 +52,7 @@ Peek nie ma bezpośredniego zapytania do E24 i śledzi przesyłki E24 przez zewn
 
 Gdy Peek śledzi przesyłkę przez zewnętrzne usługi śledzenia, sprawdza status co godzinę, co 3 godziny po dniu bez nowego skanu i do co 15 minut w dniu, gdy paczka jest w doręczeniu, dopóki masz przesyłkę otwartą lub włączone powiadomienia.
 
-Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon., 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika E24.” Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika E24.”
+Kiedy najnowszy skan ma cztery dni, a przesyłka nadal stoi na „Zarejestrowana”, „Przyjęta przez przewoźnika” lub „W transporcie”, Peek oznacza ją dniem tego skanu, np. „Brak aktualizacji od pon 12 paź”. Na stronie przesyłki wyświetla się wtedy „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika E24.” Po trzech tygodniach bez nowego skanu pojawia się komunikat „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika E24.”
 
 Możesz wybrać powiadomienia dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek jedynie monitoruje aktualizacje śledzenia i nie może umówić dostawy, zmienić Twojego adresu ani skontaktować się z Metro Supply Chain lub sklepem za Ciebie.
 
@@ -75,7 +75,7 @@ FAQ Metro Supply Chain wskazuje [stronę kontaktową](https://www.metroscg.com/c
 Kanadyjska siedziba Metro Supply Chain znajduje się pod adresem 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Kanada ([metroscg.com/contact-us/](https://www.metroscg.com/contact-us/)).
 
 :::sources
-- [Metro Supply Chain: oficjalna strona](https://www.metroscg.com/) – fulfillment 3PL, dostawy white-glove i ostatniej mili, 22,5 mln sq ft magazynów, 190 obiektów w 6 krajach, 7 mln dostaw/rok w Ameryce Północnej i wsparcie „find my package”
+- [Metro Supply Chain: oficjalna strona](https://www.metroscg.com/) – fulfillment 3PL, dostawy white-glove i ostatniej mili, 22,5 mln sq ft magazynów, 190 obiektów z 6 krajów, 7 mln dostaw/rok w Ameryce Północnej i wsparcie „find my package”
 - [Metro Supply Chain: kontakt](https://www.metroscg.com/contact-us/) – siedziba w Montrealu, biuro w Wielkiej Brytanii i portal kontaktowy online
 - [Universal Parcel Scraper: e24metro-ca](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/e24metro-ca) – aliasy (*Metro E24*, *Metro Supply Chain*), region Kanada (`America/Toronto`), uniwersalne trasowanie i ręczny wybór przewoźnika
 :::

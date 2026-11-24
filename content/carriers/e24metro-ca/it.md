@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**E24** (*Metro E24*, *Metro E24 Solutions*) è un corriere canadese. Peek lo elenca anche sotto i nomi di **Metro Supply Chain**, un operatore di logistica conto terzi (3PL) con sede a Montreal il cui sito ufficiale non usa il nome E24 ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain gestisce 190 sedi in 6 paesi con 22,5 milioni di piedi quadrati di magazzini ed effettua 7 milioni di consegne dell’ultimo miglio all’anno in Nord America; tra i servizi figurano logistica e-commerce e direct-to-consumer, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* e *Reverse Logistics*. Puoi incollare il codice di spedizione ricevuto dal venditore nel campo qui sopra e scegliere **E24**.
+**E24** (*Metro E24*, *Metro E24 Solutions*) è un corriere canadese. Peek lo elenca anche sotto i nomi di **Metro Supply Chain**, un operatore di logistica conto terzi (3PL) con sede a Montreal il cui sito ufficiale non usa il nome E24 ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain gestisce 190 sedi da 6 paesi con 22,5 milioni di piedi quadrati di magazzini ed effettua 7 milioni di consegne dell’ultimo miglio all’anno in Nord America; tra i servizi figurano logistica e-commerce e direct-to-consumer, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* e *Reverse Logistics*. Puoi incollare il codice di spedizione ricevuto dal venditore nel campo qui sopra e scegliere **E24**.
 
 ## Codici di tracciamento E24 (Metro Supply Chain)
 
@@ -50,9 +50,9 @@ Peek non ha né formato di codice né regola link per E24: inserisci il codice i
 
 Peek non dispone di una ricerca diretta su E24 e segue le spedizioni E24 tramite servizi di tracciamento, mostrando la fase («Etichetta creata», «Preso in carico», «In transito», «In consegna», «Tentativo di consegna», «Problema segnalato», «Restituito al mittente», «Consegnato») e le scansioni non appena sono disponibili aggiornamenti per il tuo riferimento.
 
-Mentre Peek segue il pacco tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo un giorno senza nuovi aggiornamenti e fino a ogni 15 minuti il giorno in cui il pacco è in consegna, mentre hai il pacco aperto o le notifiche attive.
+Mentre Peek segue il pacco tramite servizi di tracciamento, controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e fino a ogni 15 minuti il giorno in cui il pacco è in consegna, mentre hai il pacco aperto o le notifiche attive.
 
-Quando l’ultima scansione risale a quattro giorni prima e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con la data di quella scansione, come «Nessun aggiornamento da lun 12 ott». La pagina del pacco mostra allora «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a E24.» Dopo tre settimane senza nuovi aggiornamenti mostra «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a E24.»
+Quando l’ultima scansione risale a quattro giorni prima e il pacco è ancora su «Etichetta creata», «Preso in carico» o «In transito», Peek lo segnala con la data di quella scansione, come «Nessun aggiornamento da lun 12 ott». La pagina del pacco mostra allora «Spesso un pacco resta in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a E24.» Dopo tre settimane senza nuove scansioni mostra «Niente di nuovo da più di tre settimane. Se il pacco non è ancora arrivato, contatta il venditore. Peek continua a chiedere a E24.»
 
 Puoi scegliere gli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek si limita a monitorare gli aggiornamenti di tracciamento e non può prenotare una consegna, modificare il tuo indirizzo né contattare Metro Supply Chain o il tuo rivenditore al posto tuo.
 
@@ -75,7 +75,7 @@ Le FAQ di Metro Supply Chain invitano a usare la [pagina contatti](https://www.m
 La sede canadese di Metro Supply Chain si trova al 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Canada ([metroscg.com/contact-us/](https://www.metroscg.com/contact-us/)).
 
 :::sources
-- [Metro Supply Chain: sito ufficiale](https://www.metroscg.com/) – logistica 3PL, consegne white-glove e ultimo miglio, 22,5 M sq ft di magazzini, 190 sedi in 6 paesi, 7 M consegne/anno in Nord America e supporto «find my package»
+- [Metro Supply Chain: sito ufficiale](https://www.metroscg.com/) – logistica 3PL, consegne white-glove e ultimo miglio, 22,5 M sq ft di magazzini, 190 sedi da 6 paesi, 7 M consegne/anno in Nord America e supporto «find my package»
 - [Metro Supply Chain: contatti](https://www.metroscg.com/contact-us/) – sede canadese di Montreal, ufficio UK e portale contatti online
 - [Universal Parcel Scraper: e24metro-ca](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/e24metro-ca) – alias (*Metro E24*, *Metro Supply Chain*), regione Canada (`America/Toronto`), routing universale e selezione manuale del corriere
 :::

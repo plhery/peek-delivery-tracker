@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**E24** (*Metro E24*, *Metro E24 Solutions*) ist ein kanadischer Zustelldienst. Peek führt ihn auch unter dem Namen **Metro Supply Chain**, einem in Montreal ansässigen Kontraktlogistik-Unternehmen (3PL), dessen eigene Website den Namen E24 nicht verwendet ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain betreibt 190 Standorte in 6 Ländern mit 22,5 Millionen Quadratfuß Lagerfläche und führt jährlich 7 Millionen Zustellungen auf der letzten Meile in Nordamerika durch; zum Angebot gehören E-Commerce- und Direct-to-Consumer-Fulfillment, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* und *Reverse Logistics*. Du kannst die Sendungsreferenz deines Händlers oben einfügen und **E24** auswählen.
+**E24** (*Metro E24*, *Metro E24 Solutions*) ist ein kanadischer Zustelldienst. Peek führt ihn auch unter dem Namen **Metro Supply Chain**, einem in Montreal ansässigen Kontraktlogistik-Unternehmen (3PL), dessen eigene Website den Namen E24 nicht verwendet ([metroscg.com](https://www.metroscg.com/)). Metro Supply Chain betreibt 190 Standorte von 6 Ländern aus mit 22,5 Millionen Quadratfuß Lagerfläche und führt jährlich 7 Millionen Zustellungen auf der letzten Meile in Nordamerika durch; zum Angebot gehören E-Commerce- und Direct-to-Consumer-Fulfillment, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* und *Reverse Logistics*. Du kannst die Sendungsreferenz deines Händlers oben einfügen und **E24** auswählen.
 
 ## Sendungsnummern von E24 (Metro Supply Chain)
 
@@ -50,11 +50,11 @@ Da Peek kein Nummernformat und keine Link-Regel für E24 hat, gib deine Referenz
 
 Peek hat keine direkte E24-Abfrage und verfolgt E24-Sendungen über Tracking-Dienste; sobald diese Updates zu deiner Referenz liefern, zeigt Peek die Phase („Etikett erstellt“, „Beim Paketdienst eingegangen“, „Unterwegs“, „In Zustellung“, „Zustellversuch“, „Problem gemeldet“, „Zurück an Absender“, „Zugestellt“) und die Scans an.
 
-Während Peek das Paket über Tracking-Dienste verfolgt, fragt Peek stündlich nach, alle 3 Stunden nach einem Tag ohne neuen Scan und am Tag der Zustellung bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiviert sind.
+Während Peek das Paket über Tracking-Dienste verfolgt, fragt Peek stündlich nach, alle 3 Stunden nach einem Tag ohne neuen Scan und an dem Tag, an dem das Paket in Zustellung ist, bis zu alle 15 Minuten, solange du die Sendung geöffnet hast oder Benachrichtigungen aktiviert sind.
 
-Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo., 12. Okt.“. Auf der Paketseite steht dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei E24 nach.“ Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei E24 nach.“
+Ist der neueste Scan vier Tage alt und das Paket steht noch auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, markiert Peek es mit dem Tag dieses Scans, etwa „Keine Aktualisierung seit Mo 12. Okt“. Auf der Paketseite steht dann „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei E24 nach.“ Nach drei Wochen ohne neuen Scan heißt es „Seit über drei Wochen nichts Neues. Ist das Paket noch nicht angekommen, frag beim Verkäufer nach. Peek fragt weiter bei E24 nach.“
 
-Bei den Benachrichtigungen kannst du zwischen „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ wählen. Peek beobachtet ausschließlich Tracking-Updates und kann weder Lieferungen buchen noch deine Adresse ändern oder Metro Supply Chain beziehungsweise deinen Händler kontaktieren.
+Bei den Benachrichtigungen kannst du zwischen „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“ wählen. Peek beobachtet ausschließlich Tracking-Updates und kann weder Lieferungen buchen noch deine Adresse ändern oder Metro Supply Chain beziehungsweise deinen Händler für dich kontaktieren.
 
 ## Häufige Fragen zu E24 (Metro Supply Chain)
 
@@ -75,7 +75,7 @@ Die FAQ von Metro Supply Chain rät zur [Kontaktseite](https://www.metroscg.com/
 Der kanadische Hauptsitz von Metro Supply Chain befindet sich in 1002 Sherbrooke St West, Suite 2000, Montreal, Quebec, Kanada ([metroscg.com/contact-us/](https://www.metroscg.com/contact-us/)).
 
 :::sources
-- [Metro Supply Chain: Offizielle Website](https://www.metroscg.com/) – 3PL-Fulfillment, White-Glove- & Last-Mile-Zustellung, 22,5 Mio. sq ft Lagerfläche, 190 Standorte in 6 Ländern, 7 Mio. Zustellungen/Jahr in Nordamerika und „find my package“-Hilfe
+- [Metro Supply Chain: Offizielle Website](https://www.metroscg.com/) – 3PL-Fulfillment, White-Glove- & Last-Mile-Zustellung, 22,5 Mio. sq ft Lagerfläche, 190 Standorte von 6 Ländern aus, 7 Mio. Zustellungen/Jahr in Nordamerika und „find my package“-Hilfe
 - [Metro Supply Chain: Kontakt](https://www.metroscg.com/contact-us/) – kanadischer Hauptsitz Montreal, UK-Büro und Online-Kontaktportal
 - [Universal Parcel Scraper: e24metro-ca](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/e24metro-ca) – Aliase (*Metro E24*, *Metro Supply Chain*), Region Kanada (`America/Toronto`), universelles Routing und manuelle Paketdienst-Auswahl
 :::

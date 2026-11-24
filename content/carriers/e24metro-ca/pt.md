@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A **E24** (*Metro E24*, *Metro E24 Solutions*) é uma transportadora canadiana de entregas. O Peek lista-a também sob os nomes de **Metro Supply Chain**, uma empresa de logística contratada (3PL) sediada em Montreal cujo site próprio não utiliza o nome E24 ([metroscg.com](https://www.metroscg.com/)). A Metro Supply Chain opera 190 instalações em 6 países com 22,5 milhões de pés quadrados de armazenagem e realiza 7 milhões de entregas de última milha por ano na América do Norte; os seus serviços incluem logística de comércio eletrónico e direta ao consumidor, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* e *Reverse Logistics*. Podes colar a referência de rastreio fornecida pela loja na caixa acima e selecionar **E24**.
+A **E24** (*Metro E24*, *Metro E24 Solutions*) é uma transportadora canadiana de entregas. O Peek lista-a também sob os nomes de **Metro Supply Chain**, uma empresa de logística contratada (3PL) sediada em Montreal cujo site próprio não utiliza o nome E24 ([metroscg.com](https://www.metroscg.com/)). A Metro Supply Chain opera 190 instalações a partir de 6 países com 22,5 milhões de pés quadrados de armazenagem e realiza 7 milhões de entregas de última milha por ano na América do Norte; os seus serviços incluem logística de comércio eletrónico e direta ao consumidor, *White Glove Delivery*, *Last-Mile Delivery*, *Time Critical Logistics* e *Reverse Logistics*. Podes colar a referência de rastreio fornecida pela loja na caixa acima e selecionar **E24**.
 
 ## Números de rastreio E24 (Metro Supply Chain)
 
@@ -32,7 +32,7 @@ A E24 não publica uma lista oficial dos seus estados de rastreio. O Peek acompa
 Para apoio à entrega, as perguntas frequentes da Metro Supply Chain recomendam usar a [página de contactos](https://www.metroscg.com/contact-us/) e selecionar «find my package» no menu suspenso. Para reembolso ou artigo danificado, contacta a loja onde compraste.
 
 - **Rastreio sem atualizações:** vê [por que razão o rastreio deixa de atualizar](guide:tracking-not-updating).
-- **Marcada como entregue ou danificada:** verifica primeiro entrada, garagem, portaria e vizinhos, consulta qualquer confirmação de entrega enviada pela loja e reporta rapidamente artigos em falta ou danificados ao vendedor. Vê [entregue mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda perdida](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
+- **Marcada como entregue ou danificada:** verifica primeiro entrada, garagem, portaria e vizinhos, consulta qualquer confirmação de entrega enviada pela loja e reporta rapidamente artigos em falta ou danificados à loja. Vê [entregue mas não recebida](guide:delivered-not-received), [encomenda danificada](guide:damaged-parcel), [encomenda perdida](guide:lost-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
 ## Contactos corporativos da Metro Supply Chain (E24)
 
@@ -52,7 +52,7 @@ O Peek não tem consulta direta à E24 e acompanha envios E24 através de servi�
 
 Enquanto o Peek acompanha a encomenda através de serviços de rastreio, verifica de hora a hora, de 3 em 3 horas após um dia sem novos registos e até de 15 em 15 minutos no dia em que a encomenda está em distribuição, enquanto tiveres a encomenda aberta ou as notificações ativadas.
 
-Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-o com o dia desse registo, como «Sem atualizações desde seg., 12/10». A página da encomenda mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a E24.» Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a E24.»
+Quando o registo mais recente tem quatro dias e a encomenda continua em «Etiqueta criada», «Aceite pela transportadora» ou «Em trânsito», o Peek assinala-a com o dia desse registo, como «Sem atualizações desde seg 12 out». A página da encomenda mostra então «É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a E24.» Após três semanas sem novos registos, mostra «Nada de novo há mais de três semanas. Se a encomenda ainda não chegou, contacta o vendedor. O Peek continua a perguntar a E24.»
 
 Podes escolher alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek acompanha apenas as atualizações de rastreio e não pode agendar entregas, alterar a tua morada nem contactar a Metro Supply Chain ou a tua loja por ti.
 
@@ -75,7 +75,7 @@ As FAQ da Metro Supply Chain recomendam usar a [página de contactos](https://ww
 A sede canadiana da Metro Supply Chain situa-se em 1002 Sherbrooke St West, Suite 2000, Montreal, Quebeque, Canadá ([metroscg.com/contact-us/](https://www.metroscg.com/contact-us/)).
 
 :::sources
-- [Metro Supply Chain: site oficial](https://www.metroscg.com/) – fulfillment 3PL, entrega white-glove e última milha, 22,5 M sq ft de armazéns, 190 locais em 6 países, 7 M de entregas/ano na América do Norte e apoio «find my package»
+- [Metro Supply Chain: site oficial](https://www.metroscg.com/) – fulfillment 3PL, entrega white-glove e última milha, 22,5 M sq ft de armazéns, 190 locais a partir de 6 países, 7 M de entregas/ano na América do Norte e apoio «find my package»
 - [Metro Supply Chain: contactos](https://www.metroscg.com/contact-us/) – sede canadiana em Montreal, escritório no Reino Unido e portal de contactos online
 - [Universal Parcel Scraper: e24metro-ca](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/e24metro-ca) – nomes alternativos (*Metro E24*, *Metro Supply Chain*), região Canadá (`America/Toronto`), encaminhamento universal e seleção manual da transportadora
 :::

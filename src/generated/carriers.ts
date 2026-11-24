@@ -14798,6 +14798,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005add"
     },
     {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "rastreamento-poczta-polska",
+      "title": "Rastreamento Poczta Polska: códigos, status e retirada",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "rastreamento-yanwen",
@@ -14972,6 +14980,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Meiteshun: AMTS, etapas e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "rastreamento-topyou",
+      "title": "Rastreamento TopYou: códigos TYZR, status e entrega",
+      "name": "TopYou",
+      "color": "#045cd7"
     },
     {
       "id": "jrt",
@@ -17698,6 +17714,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "递四方（4PX）国际物流查询：单号格式、状态与客服",
       "name": "4PX",
       "color": "#005add"
+    },
+    {
+      "id": "poczta-polska",
+      "catalog": "poczta-polska",
+      "slug": "poczta-polska-tracking",
+      "title": "Poczta Polska 波兰邮政查询：单号、状态与取件",
+      "name": "Poczta Polska",
+      "color": "#c43c2b"
     },
     {
       "id": "yanwen",

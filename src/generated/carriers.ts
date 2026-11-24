@@ -4620,6 +4620,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "chukou1-sendungsverfolgung",
+      "title": "Chukou1 Sendungsverfolgung: EC-FirstClass-Codes & Hilfe",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6814,6 +6822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "suivi-chukou1",
+      "title": "Suivi Chukou1\u00a0: codes EC-FirstClass, relais locaux et aide",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -8992,6 +9008,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#feba30"
     },
     {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "tracciamento-chukou1",
+      "title": "Tracciamento Chukou1: codici EC-FirstClass e contatti",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11168,6 +11192,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento BJS Home Delivery: códigos B, franja 3 h y ayuda",
       "name": "BJS Home Delivery",
       "color": "#feba30"
+    },
+    {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "seguimiento-chukou1",
+      "title": "Seguimiento Chukou1: códigos EC-FirstClass, traspaso y ayuda",
+      "name": "Chukou1",
+      "color": "#0b4da2"
     },
     {
       "id": "correos-de-mexico",
@@ -13386,6 +13418,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio BJS Home Delivery: códigos B, janela 3 h e ajuda",
       "name": "BJS Home Delivery",
       "color": "#feba30"
+    },
+    {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "rastreio-chukou1",
+      "title": "Rastreio Chukou1: códigos EC-FirstClass, entrega e ajuda",
+      "name": "Chukou1",
+      "color": "#0b4da2"
     },
     {
       "id": "buffalo-ex",
@@ -15638,6 +15678,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie BJS Home Delivery: kody B, okna 3 h i pomoc",
       "name": "BJS Home Delivery",
       "color": "#feba30"
+    },
+    {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "sledzenie-chukou1",
+      "title": "Śledzenie Chukou1: kody EC-FirstClass, przekazanie i pomoc",
+      "name": "Chukou1",
+      "color": "#0b4da2"
     },
     {
       "id": "buffalo-ex",

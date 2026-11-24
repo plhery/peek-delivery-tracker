@@ -14,7 +14,7 @@ Como o portal padrão da SEKO e o OmniParcel funcionam como dois sistemas separa
 
 Os envios da SEKO Logistics não seguem um prefixo exclusivo único; dividem-se em duas famílias tratadas em portais distintos:
 
-- **Números de envio SEKO Logistics:** o Peek aceita de 8 a 20 letras e dígitos com uma sequência de pelo menos 7 dígitos. Entre as formas observadas há 3 letras seguidas de 7 dígitos (como `WFY4829173`), 5 letras seguidas de 7 dígitos ou 9 dígitos isolados (como `482917360`). O Peek nunca reconhece a SEKO por um número isolado: para 3 letras + 7 dígitos pergunta à [Australia Post](carrier:australia-post), para 5 letras + 7 dígitos à [Colis Privé](carrier:colis-prive) e para 9 dígitos à [DPD Ireland](carrier:dpd-ie) (fora da Irlanda apenas em último recurso). Seleciona SEKO Logistics manualmente ou cola a tua ligação de seguimento.
+- **Números de envio SEKO Logistics:** o Peek aceita de 8 a 20 letras e dígitos com uma sequência de pelo menos 7 dígitos. Entre as formas observadas há 3 letras seguidas de 7 dígitos (como `WFY4829173`), 5 letras seguidas de 7 dígitos ou 9 dígitos isolados (como `482917360`). O Peek nunca reconhece a SEKO por um número isolado: para 3 letras + 7 dígitos pergunta à [Australia Post](carrier:australia-post), para 5 letras + 7 dígitos a nenhuma e para 9 dígitos à [DPD Ireland](carrier:dpd-ie) (fora da Irlanda apenas em último recurso). Seleciona SEKO Logistics manualmente ou cola a tua ligação de seguimento.
 - **Números SEKO OmniParcel (`GX` + 17 ou 18 dígitos):** os envios transfronteiriços de comércio eletrónico em `track.omniparcel.com` usam `GX` seguido de 17 ou 18 dígitos (como `GX482917360514829173`). A página principal da SEKO não reconhece códigos `GX`; apenas o rastreio OmniParcel responde por eles.
 
 Se colares uma ligação de `sekologistics.com/en/track/?trackingNumbers=...` ou `track.omniparcel.com/...`, o Peek extrai o número e encaminha-o automaticamente para a SEKO Logistics. Para perceber melhor as diferenças entre códigos de carga e de encomendas, consulta o guia de [formatos de números de seguimento](guide:tracking-number-formats).
@@ -41,7 +41,7 @@ A página principal da SEKO apresenta frequentemente marcos no formato `Status C
 
 Duas expressões no portal principal da SEKO merecem atenção:
 
-- **`Delivered To Warehouse`** significa que a carga chegou ao armazém de destino da SEKO, não a tua casa — a entrega ainda não aconteceu.
+- **`Delivered To Warehouse`** significa que a carga chegou ao armazém de destino da SEKO, não à tua casa — a entrega ainda não aconteceu.
 - **`POD Image Attached` e `POD IMAGED`** assinalam o arquivo do comprovativo de entrega (por vezes dias após a entrega) e **`Return Data Received`** regista o pedido de devolução sem provar que a mercadoria já voltou atrás. Nenhuma delas altera a etapa física de entrega.
 
 ## Entrega ao domicílio, alfândega transfronteiriça e atrasos
@@ -50,7 +50,7 @@ O site da SEKO inclui *White Glove & Specialty Delivery* e *Home Delivery & Last
 
 - **Agendamentos de entrega ao domicílio:** `At Delivery Terminal Delivery Appt Set` e `On Hand DEST Delv Appt Set` indicam que há uma marcação de entrega definida enquanto o envio aguarda no terminal de entrega. Em trânsito, a página da SEKO mostra frequentemente uma data `Expected Arrival` ou um intervalo `Estimated delivery between`.
 - **Passagens transfronteiriças OmniParcel:** em encomendas internacionais de comércio eletrónico (`GX...`), os registos do OmniParcel vão do armazém de origem, exportação, voo e alfândega de destino até à transportadora local (`Received by Last Mile Provider`). Os registos podem parar durante voos e alfândega; consulta o [guia de alfândega](guide:customs) e [quando o rastreio deixa de atualizar](guide:tracking-not-updating) se não houver novidades.
-- **Horários e repetições:** a página da SEKO mostra horas ao minuto sem fuso horário e por vezes repete o mesmo estado duas vezes no mesmo minuto com maiúsculas diferentes; o Peek guarda apenas um e data os marcos da SEKO (que não indicam local) pela hora de Chicago. A página do OmniParcel apresenta horas em UTC+10:00 salvo se mudares o seletor de fuso horário; o Peek consulta o OmniParcel em UTC, mantendo o instante exato de cada registo. O Peek mostra cada registo no relógio do teu dispositivo.
+- **Horários e repetições:** a página da SEKO mostra horas ao minuto sem fuso horário e por vezes repete o mesmo estado duas vezes no mesmo minuto com maiúsculas diferentes; o Peek guarda apenas um e data os marcos da SEKO (que não indicam local) pela hora de Chicago. A página do OmniParcel apresenta horas em UTC+10:00 salvo se mudares o seletor de fuso horário; o Peek consulta o OmniParcel em UTC, mantendo o instante exato de cada registo. O Peek mostra cada registo na hora do teu dispositivo.
 
 Se a tua encomenda internacional usar outra grande transportadora noutra parte do trajeto, compara o rastreio com a [DHL Express](carrier:dhl-express) ou a [FedEx](carrier:fedex).
 

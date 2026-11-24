@@ -4,6 +4,7 @@
 package com.plhery.peekdeliverytracker.core.api
 
 import java.util.UUID
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -39,7 +40,7 @@ data class CarrierDetectionResponse(
     val providers: List<TrackingProviderCheck>? = null,
     val trackingFound: Boolean? = null,
     val lookupCountry: String? = null,
-    val inputSuggested: CarrierDetectionInputSuggested? = null,
+    @Serializable(with = LenientCarrierDetectionInputSuggestedSerializer::class) val inputSuggested: CarrierDetectionInputSuggested? = null,
 )
 
 @Serializable
@@ -4862,7 +4863,7 @@ data class ParcelLink(
     val alerts: ParcelAlerts? = null,
     val giftWords: GiftWords? = null,
     val inputNeeded: ParcelLinkInputNeeded? = null,
-    val inputSuggested: ParcelLinkInputSuggested? = null,
+    @Serializable(with = LenientParcelLinkInputSuggestedSerializer::class) val inputSuggested: ParcelLinkInputSuggested? = null,
 )
 
 @Serializable
@@ -5585,6 +5586,7 @@ enum class InstallSightingPlatform(val rawValue: String) {
 @Serializable
 enum class CarrierDetectionInputSuggestedField(val rawValue: String) {
     @SerialName("dpdPostcode") DpdPostcode("dpdPostcode"),
+    @SerialName("phoneDigits") PhoneDigits("phoneDigits"),
     ;
 
     companion object {
@@ -5597,7 +5599,7 @@ data class CarrierDataRouting(
     @SerialName("input_needed") val inputNeeded: CarrierInputNeeded? = null,
     @SerialName("postcode_refused") val postcodeRefused: CarrierPostcodeRefused? = null,
     @SerialName("served_elsewhere") val servedElsewhere: CarrierServedElsewhere? = null,
-    @SerialName("input_suggested") val inputSuggested: CarrierInputSuggested? = null,
+    @SerialName("input_suggested") @Serializable(with = LenientCarrierInputSuggestedSerializer::class) val inputSuggested: CarrierInputSuggested? = null,
     @SerialName("likely_carrier") val likelyCarrier: LikelyCarrier? = null,
     @SerialName("provider_input_needed") val providerInputNeeded: ProviderInputNeeded? = null,
     @SerialName("next_check_at") val nextCheckAt: String? = null,
@@ -5616,6 +5618,7 @@ enum class ParcelLinkInputNeededField(val rawValue: String) {
 @Serializable
 enum class ParcelLinkInputSuggestedField(val rawValue: String) {
     @SerialName("dpdPostcode") DpdPostcode("dpdPostcode"),
+    @SerialName("phoneDigits") PhoneDigits("phoneDigits"),
     ;
 
     companion object {
@@ -5667,6 +5670,7 @@ enum class CarrierInputNeededField(val rawValue: String) {
 @Serializable
 enum class CarrierInputSuggestedField(val rawValue: String) {
     @SerialName("dpdPostcode") DpdPostcode("dpdPostcode"),
+    @SerialName("phoneDigits") PhoneDigits("phoneDigits"),
     ;
 
     companion object {
@@ -5683,3 +5687,11 @@ enum class ProviderInputNeededField(val rawValue: String) {
         fun fromRawValue(rawValue: String): ProviderInputNeededField? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
+
+object LenientCarrierDetectionInputSuggestedSerializer : KSerializer<CarrierDetectionInputSuggested?> by LenientSerializer(CarrierDetectionInputSuggested.serializer())
+
+object LenientCarrierInputSuggestedSerializer : KSerializer<CarrierInputSuggested?> by LenientSerializer(CarrierInputSuggested.serializer())
+
+object LenientParcelLinkInputSuggestedSerializer : KSerializer<ParcelLinkInputSuggested?> by LenientSerializer(ParcelLinkInputSuggested.serializer())
+
+object LenientPeekAiSerializer : KSerializer<PeekAi?> by LenientSerializer(PeekAi.serializer())

@@ -139,8 +139,9 @@ extension Parcel {
         return refused
     }
 
-    /// Nobody has answered for the number yet, and its shape points to a carrier that needs
-    /// the delivery postcode before it can be asked about it.
+    /// Nobody has answered for the number yet, and its shape points to a carrier that needs the delivery postcode before
+    /// it can be asked about it, or shows it only with the last 4 digits of a phone (J&T China's JT numbers). As the
+    /// web's `inputSuggested` on the parcel's page.
     var inputSuggestedPrompt: CarrierInputSuggested? {
         guard inputNeededPrompt == nil, let suggested = carrierData?.routing?.inputSuggested,
               carrier == .unknown, !isArchived, currentEvent == nil else { return nil }

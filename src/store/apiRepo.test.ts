@@ -89,6 +89,8 @@ describe('createApiRepo', () => {
     }));
     const requestHeaders = new Headers(fetch.mock.calls[0][1]?.headers);
     expect(requestHeaders.get('X-Requested-With')).toBe('XMLHttpRequest');
+    // The server suggests the phone digits only to the clients that can ask for them.
+    expect(requestHeaders.get('X-Peek-Inputs')).toBe('phoneDigits');
     expect(parcels[0]).toMatchObject({
       trackingNumber: '993412345699999980',
       label: 'Coffee beans',

@@ -1568,10 +1568,11 @@ struct CarrierPostcodes {
 
 /// The carrier the carrier check suggests for a number nobody knew, which cannot be asked without one field: one that
 /// serves the reader's country and takes the delivery postcode and nothing else for this number (Mondial Relay's 8-digit
-/// numbers), otherwise the one of the number's candidates that shows it only with the last 4 digits of a phone (J&T
-/// China's JT numbers). The add sheet shows that field, optional, and the parcel goes to the carrier only with a value
-/// the field takes, as if it had been picked and its field filled; otherwise the parcel is added as it would be
-/// without. Mirrors `suggested` and `lookupInput` in `src/peek/lookup/machine.ts`.
+/// numbers), otherwise one that shows it only with the last 4 digits of a phone (J&T China's JT numbers): the check's, or
+/// when it names none (not asked, or failed) the one of the number's candidates that does. The add sheet shows that
+/// field, optional, and the parcel goes to the carrier only with a value the field takes, as if it had been picked and
+/// its field filled; otherwise the parcel is added as it would be without. Mirrors `suggested` and `lookupInput` in
+/// `src/peek/lookup/machine.ts`.
 struct SuggestedCarrier: Equatable {
     /// The carrier, and the postcode and its country or the phone's digits sent with the parcel.
     struct Added: Equatable {
@@ -1598,10 +1599,9 @@ struct SuggestedCarrier: Equatable {
             field.optional = true
             carrier = suggested
             requirement = field
-        } else if let suggested = catalog.phoneDigitsCandidate(candidates, trackingNumber: number),
-                  let field = catalog.requirements(for: suggested, trackingNumber: number).first {
-            carrier = suggested
-            requirement = field
+        } else if let suggested = Self.phoneDigitsCarrier(recognition, number: number, candidates: candidates, catalog: catalog) {
+            carrier = suggested.carrier
+            requirement = suggested.requirement
         } else {
             return nil
         }
@@ -1629,9 +1629,31 @@ struct SuggestedCarrier: Equatable {
 
     /// The carrier the check's answer for the number says may have it with the delivery postcode.
     private static func postcodeCarrier(_ recognition: CarrierRecognition, number: String) -> CarrierID? {
+        suggestedCarrier(recognition, number: number, field: .dpdPostcode)
+    }
+
+    /// The carrier the check's answer for the number says may have it with this field.
+    private static func suggestedCarrier(_ recognition: CarrierRecognition, number: String,
+                                         field: CarrierDetectionInputSuggestedField) -> CarrierID? {
         guard let answer = recognition.answer, answer.trackingNumber == number,
-              let suggested = answer.inputSuggested, suggested.field == .dpdPostcode else { return nil }
+              let suggested = answer.inputSuggested, suggested.field == field else { return nil }
         return suggested.carrier
+    }
+
+    /// The carrier that shows the number only with the last 4 digits of a phone, with its field for the number, optional:
+    /// the one the check's answer names, otherwise the one of the number's candidates that does, as when the check was
+    /// not asked or failed. One without that field in this iPhone's catalog is passed over.
+    private static func phoneDigitsCarrier(_ recognition: CarrierRecognition, number: String, candidates: [CarrierID],
+                                           catalog: CarrierCatalog) -> (carrier: CarrierID, requirement: CarrierRequirement)? {
+        let carriers = [suggestedCarrier(recognition, number: number, field: .phoneDigits),
+                        catalog.phoneDigitsCandidate(candidates, trackingNumber: number)].compactMap { $0 }
+        for carrier in carriers {
+            guard var field = catalog.requirements(for: carrier, trackingNumber: number)
+                .first(where: { $0.field == .phoneDigits }) else { continue }
+            field.optional = true
+            return (carrier, field)
+        }
+        return nil
     }
 
     /// What the parcel is added with: this carrier with its field's value, once the field takes what was typed (the

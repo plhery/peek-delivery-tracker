@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} has this parcel. Add the delivery postcode to track it.",
   "detail.inputNeededAction": "Add postcode",
   "detail.inputSuggested": "{{carrier}} may have this parcel. Add the delivery postcode to track it.",
+  "detail.phoneDigitsSuggested": "{{carrier}} may have this parcel. Add the last 4 digits of the recipient’s or sender’s phone to track it.",
   "link.postcode.checking": "Asking {{carrier}}…",
   "link.postcode.refused": "{{carrier}} doesn’t have this parcel for that postcode. Check it and try again.",
   "link.postcode.tries": "Too many postcodes were tried. Try again after {{time}}.",

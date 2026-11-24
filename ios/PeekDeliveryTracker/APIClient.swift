@@ -61,6 +61,18 @@ extension HTTPURLResponse {
     }
 }
 
+extension URLRequest {
+    /// The inputs beyond the delivery postcode this app can ask a reader for, which its requests to Peek's API name in
+    /// `X-Peek-Inputs`: the service suggests one that may find a parcel (`inputSuggested`) only to apps that name it, as
+    /// apps from before it reject an answer with an input they don't know.
+    static let peekInputs = "phoneDigits"
+
+    /// Names `peekInputs` to the service, on every request to Peek's API, signed in or not.
+    mutating func namePeekInputs() {
+        setValue(Self.peekInputs, forHTTPHeaderField: "X-Peek-Inputs")
+    }
+}
+
 /// What the edge in front of the server says about a maintenance: announced or not, and the end it gave, if any.
 struct MaintenanceNotice: Equatable, Sendable {
     var planned: Bool
@@ -217,6 +229,7 @@ final class DeliveryAPIClient {
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 15)
         request.httpShouldHandleCookies = false
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.namePeekInputs()
         if let key { request.setValue(key, forHTTPHeaderField: "X-Parcel-Key") }
         let (data, response): (Data, URLResponse)
         do { (data, response) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
@@ -670,6 +683,7 @@ final class DeliveryAPIClient {
             request.timeoutInterval = 30
             request.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.namePeekInputs()
             if body != nil { request.setValue("application/json", forHTTPHeaderField: "Content-Type") }
             if let token { request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
             let result = signs

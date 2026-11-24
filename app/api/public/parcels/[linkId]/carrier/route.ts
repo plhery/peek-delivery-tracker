@@ -27,6 +27,7 @@ import { SupabaseError, type StoredParcelLink } from '../../../../../../src/serv
 import type { JsonObject } from '../../../../../../src/server/types';
 import { packageCarrierValues, type PackageCarrierValues } from '../../../../../../src/server/validation';
 import type { ApiPublicParcelResponse } from '../../../../../../src/generated/apiContract';
+import { clientInputs } from '../../../../../../src/server/suggestedInputs';
 
 interface LinkParameters extends RouteParameters {
   linkId: string;
@@ -77,7 +78,7 @@ async function changeCarrier(context: ApiContext<LinkParameters>, progress: { st
   const trackingNumber = found.package.tracking_number;
   const values = packageCarrierValues(body, trackingNumber);
   progress.change = { tracking_number: trackingNumber, previous_carrier: String(found.package.carrier), carrier: values.carrier };
-  const answer = (parcel: StoredParcelLink) => json(publicParcelResponse(parcel, parcelAlerts(service)) satisfies ApiPublicParcelResponse);
+  const answer = (parcel: StoredParcelLink) => json(publicParcelResponse(parcel, parcelAlerts(service), { inputs: clientInputs(context.request) }) satisfies ApiPublicParcelResponse);
   // The details the parcel has already change nothing, and cost nothing.
   if (holds(found.package, values)) {
     recordChange('unchanged', context.requestId, progress.change);

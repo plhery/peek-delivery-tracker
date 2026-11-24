@@ -373,6 +373,34 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(Parcel(shared: package(id, number: number, carrier: .unknown, stage: nil), link: viewer).inputSuggestedPrompt)
     }
 
+    /// The carrier a lookup's number points to that shows it only with the last 4 digits of a phone (J&T China's JT
+    /// numbers) shows on the parcel, as an account's suggestion does; the digits move the link to that carrier
+    /// (`PATCH …/carrier`), as any change of carrier does, never to the postcode's route. The number is synthetic.
+    func testTheCarrierALinkSuggestsForThePhonesDigitsShowsOnTheParcelAndTheDigitsMoveTheLink() async throws {
+        let id = UUID(), filedID = UUID()
+        let calls = Calls()
+        let number = "JT0805136742918"
+        var suggesting = link("22222222222A")
+        suggesting.inputSuggested = ParcelLinkInputSuggested(carrier: .jAndTCn, field: .phoneDigits)
+        let moved = package(filedID, number: number, carrier: .jAndTCn, stage: nil)
+        let device = DeviceParcels(client: client(
+            calls, lookup: PublicLookupResponse(link: suggesting, key: key, package: package(id, number: number, carrier: .unknown, stage: nil)),
+            move: { _ in moved }, postcode: { _, _ in nil }
+        ), storage: Memory())
+        _ = try await device.add(CreatePackageRequest(trackingNumber: number, label: ""))
+        XCTAssertEqual(device.list().first?.inputSuggestedPrompt, CarrierInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        XCTAssertNil(device.list().first?.inputNeededPrompt)
+
+        let parcel = try await device.changeCarrier(id: id, carrier: .jAndTCn, trackingURL: nil, dpdPostcode: nil, phoneDigits: "0123")
+
+        XCTAssertEqual(calls.all, ["lookup \(number) -", "carrier 22222222222A k j-and-t-cn"])
+        XCTAssertEqual(calls.lookupPhoneDigits, [nil, "0123"])
+        XCTAssertEqual(parcel.id, filedID)
+        XCTAssertEqual(parcel.carrier, .jAndTCn)
+        XCTAssertNil(parcel.inputSuggestedPrompt)
+        XCTAssertEqual(device.postcodeGiven(id: filedID), false)
+    }
+
     /// The postcode a carrier asks the owner's link for goes to the link; one the carrier refuses changes nothing and
     /// says so. Another carrier, or that carrier with a link, moves the link as before.
     func testThePostcodeALinkAsksForGoesToTheLinkAndARefusedOneChangesNothing() async throws {
@@ -1810,6 +1838,50 @@ final class DeviceParcelTests: XCTestCase {
         let postcode = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT],
                                                 inputSuggested: CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode))
         XCTAssertNil(suggestion(postcode))
+    }
+
+    /// The check names the carrier that shows a number nobody knew only with the last 4 digits of a phone: Add shows that
+    /// carrier's field, optional, whatever the number's candidates say. The candidate the shape points to stays for a
+    /// check that names none, failed, or names a carrier with no such field here. The number is synthetic.
+    func testAddPrefersTheCarrierTheCheckNamesForThePhonesDigits() throws {
+        let number = "JT0805136742918"
+        let shape = CarrierCatalog.shared.read(number).candidates
+        func suggestion(_ answer: CarrierDetectionResponse?, picked: CarrierID? = nil, candidates: [CarrierID] = shape,
+                        failed: Bool = false) -> SuggestedCarrier? {
+            var recognition = CarrierRecognition(settledNumber: number)
+            recognition.answer = answer
+            if failed { recognition.failedNumber = number }
+            return SuggestedCarrier(picked: picked, shape: .unknown, candidates: candidates, recognition: recognition,
+                                    number: number, applies: true)
+        }
+        func naming(_ carrier: CarrierID, found: CarrierID = .unknown) -> CarrierDetectionResponse {
+            CarrierDetectionResponse(trackingNumber: number, carrier: found, asked: [.jAndT],
+                                     inputSuggested: CarrierDetectionInputSuggested(carrier: carrier, field: .phoneDigits))
+        }
+
+        // The check's carrier, even where the shape names none, several or another.
+        for candidates in [shape, [], [.jAndTCn, .jAndTMx], [.jAndT]] as [[CarrierID]] {
+            let suggested = try XCTUnwrap(suggestion(naming(.jAndTCn), candidates: candidates))
+            XCTAssertEqual(suggested.carrier, .jAndTCn)
+            XCTAssertEqual(suggested.requirement.field, .phoneDigits)
+            XCTAssertTrue(suggested.requirement.isOptional)
+            XCTAssertTrue(suggested.requirement.isSatisfied(by: ""), "It never holds the parcel back")
+            XCTAssertEqual(suggested.added(phoneDigits: "0123", otherwise: .unknown),
+                           SuggestedCarrier.Added(carrier: .jAndTCn, phoneDigits: "0123"))
+            XCTAssertEqual(suggested.added(phoneDigits: "", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
+        }
+        XCTAssertEqual(CarrierCatalog.shared.phoneDigitsCandidate(shape, trackingNumber: number), .jAndTCn)
+        XCTAssertEqual(suggestion(naming(.jAndTMx))?.carrier, .jAndTMx, "The check's carrier comes before the shape's")
+
+        // No carrier named, a check that failed, or one named with no field for the digits here: the shape's candidate.
+        XCTAssertEqual(suggestion(CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT]))?.carrier, .jAndTCn)
+        XCTAssertEqual(suggestion(nil, failed: true)?.carrier, .jAndTCn)
+        XCTAssertEqual(suggestion(naming(.dhl))?.carrier, .jAndTCn)
+        XCTAssertNil(suggestion(naming(.dhl), candidates: [.jAndT]))
+
+        // A carrier picked by hand, or one that knew the number: no field is offered.
+        XCTAssertNil(suggestion(naming(.jAndTCn), picked: .jAndT))
+        XCTAssertNil(suggestion(naming(.jAndTCn, found: .jAndT)))
     }
 
     func testAForgottenPostcodeEmptiesEveryOtherCarriersFieldHoldingItWhateverItsCapitalsAndSpaces() throws {

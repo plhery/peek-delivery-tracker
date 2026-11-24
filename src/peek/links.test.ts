@@ -165,6 +165,8 @@ describe('the API backend', () => {
     expect(JSON.parse(String(init!.body))).toEqual({ trackingNumber: 'TESTPARCEL983456', carrier: 'dpd', dpdPostcode: '8000' });
     expect(String(init!.body)).not.toContain('Mum');
     expect(new Headers(init!.headers).has('X-Parcel-Key')).toBe(false);
+    // The server suggests the phone digits only to the clients that can ask for them.
+    expect(new Headers(init!.headers).get('X-Peek-Inputs')).toBe('phoneDigits');
   });
 
   it('sends the browser clock\'s country with a lookup, a carrier change and a detection, when one country keeps that clock', async () => {
@@ -302,6 +304,9 @@ describe('the API backend', () => {
     const suggested = { ...owner, link: { ...owner.link, inputSuggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } } } as ApiPublicParcelResponse;
     expect(parcelLinkView(suggested).link.inputSuggested).toEqual({ carrier: 'mondial-relay', field: 'dpdPostcode' });
     expect(parcelLinkView({ ...suggested, link: { ...suggested.link, role: 'viewer' } }).link.inputSuggested).toBeUndefined();
+    const digits = { ...owner, link: { ...owner.link, inputSuggested: { carrier: 'j-and-t-cn', field: 'phoneDigits' } } } as ApiPublicParcelResponse;
+    expect(parcelLinkView(digits).link.inputSuggested).toEqual({ carrier: 'j-and-t-cn', field: 'phoneDigits' });
+    expect(parcelLinkView({ ...digits, link: { ...digits.link, role: 'viewer' } }).link.inputSuggested).toBeUndefined();
     const { links, request } = api(
       json(owner),
       json({ error: 'The carrier does not have the parcel for this postcode' }, 422),

@@ -19,6 +19,7 @@ import {
 import { SupabaseError } from '../../../../../../src/server/supabase';
 import { packageCarrierValues } from '../../../../../../src/server/validation';
 import type { ApiPublicParcelResponse } from '../../../../../../src/generated/apiContract';
+import { clientInputs } from '../../../../../../src/server/suggestedInputs';
 
 interface LinkParameters extends RouteParameters {
   linkId: string;
@@ -115,7 +116,7 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
       // The parcel is filed; the next read of the link queues its check.
       if (!(error instanceof SupabaseError)) throw error;
     }
-    return json(publicParcelResponse(filed, parcelAlerts(service)) satisfies ApiPublicParcelResponse);
+    return json(publicParcelResponse(filed, parcelAlerts(service), { inputs: clientInputs(context.request) }) satisfies ApiPublicParcelResponse);
   } finally {
     if (!settled) await service.releaseParcelLinkPostcode(claim.attempt).catch(() => undefined);
   }

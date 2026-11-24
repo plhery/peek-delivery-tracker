@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} está com esta encomenda. Adicione o código postal de entrega para rastreá-la.",
   "detail.inputNeededAction": "Adicionar código postal",
   "detail.inputSuggested": "{{carrier}} pode estar com esta encomenda. Adicione o código postal de entrega para rastreá-la.",
+  "detail.phoneDigitsSuggested": "{{carrier}} pode estar com esta encomenda. Adicione os últimos 4 dígitos do telefone do destinatário ou do remetente para rastreá-la.",
   "link.postcode.checking": "Consultando {{carrier}}…",
   "link.postcode.refused": "{{carrier}} não tem esta encomenda com esse código postal. Confira e tente novamente.",
   "link.postcode.tries": "Muitos códigos postais foram tentados. Tente novamente depois das {{time}}.",

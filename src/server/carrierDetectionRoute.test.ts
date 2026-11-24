@@ -501,6 +501,23 @@ it('suggests at the front door a carrier that cannot be asked without the postco
   expect(found).not.toHaveProperty('inputSuggested');
 });
 
+it('suggests the phone digits a number nobody knows may be shown with only to the apps that ask for them', async () => {
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+  const detect = async (inputs?: string, trackingNumber = 'JT0805136742918') => (await detectWithoutAccount(new NextRequest('https://delivery.example/api/public/detect', {
+    method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': '198.51.100.33', ...inputs ? { 'x-peek-inputs': inputs } : {} },
+    body: JSON.stringify({ trackingNumber, lookupCountryHint: 'CN' }),
+  }), { params: Promise.resolve({}) })).json();
+  // J&T China shows its JT numbers only with the last 4 digits of the recipient's or sender's phone.
+  expect(await detect('dpdPostcode, phoneDigits')).toMatchObject({ carrier: 'unknown', inputSuggested: { carrier: 'j-and-t-cn', field: 'phoneDigits' } });
+  // An app from before the input would reject the answer.
+  expect(await detect()).not.toHaveProperty('inputSuggested');
+  vi.mocked(preflightTracking).mockResolvedValue({ trackingFound: true, providers: [{ provider: 'Ship24', outcome: 'history' }] });
+  // Synthetic, of the same shape: nor once a tracking service has the number's history.
+  const found = await detect('phoneDigits', 'JT0000000000017');
+  expect(found).toMatchObject({ carrier: 'unknown', trackingFound: true });
+  expect(found).not.toHaveProperty('inputSuggested');
+});
+
 it('refuses an oversized or malformed body at the front door at once', async () => {
   const encoder = new TextEncoder();
   // Next passes the body on as a stream of the chunks as they arrive.

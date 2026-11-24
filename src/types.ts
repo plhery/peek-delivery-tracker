@@ -62,8 +62,11 @@ export interface Parcel {
   providerInputNeeded?: { provider: string; field: 'dpdPostcode'; refusedPostcode?: string };
   nextCheckAt?: string;
   inputNeeded?: { carrier: CarrierId; field: 'dpdPostcode' | 'trackingUrl' };
-  /** A carrier the number points to that needs the delivery postcode before it can be asked about it. */
-  inputSuggested?: { carrier: CarrierId; field: 'dpdPostcode' };
+  /**
+   * A carrier the number points to that needs the delivery postcode, or the last 4 digits of a phone, before it can be
+   * asked about it.
+   */
+  inputSuggested?: { carrier: CarrierId; field: 'dpdPostcode' | 'phoneDigits' };
   /** For a parcel filed under no carrier, the only carrier whose own format its number has, asked and not listing it since `since`. */
   likelyCarrier?: { carrier: CarrierId; since: string };
   /** The carrier whose tracker writes the parcel's timeline in advance: Peek shows its real scans as they arrive. */

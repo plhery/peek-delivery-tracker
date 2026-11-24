@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} ma tę przesyłkę. Dodaj kod pocztowy odbiorcy, aby ją śledzić.",
   "detail.inputNeededAction": "Dodaj kod pocztowy",
   "detail.inputSuggested": "Tę przesyłkę może mieć {{carrier}}. Dodaj kod pocztowy odbiorcy, aby ją śledzić.",
+  "detail.phoneDigitsSuggested": "Tę przesyłkę może mieć {{carrier}}. Dodaj ostatnie 4 cyfry telefonu odbiorcy lub nadawcy, aby ją śledzić.",
   "link.postcode.checking": "Peek pyta: {{carrier}}…",
   "link.postcode.refused": "{{carrier}} nie ma tej przesyłki pod tym kodem pocztowym. Sprawdź go i spróbuj ponownie.",
   "link.postcode.tries": "Wypróbowano zbyt wiele kodów pocztowych. Spróbuj ponownie po {{time}}.",

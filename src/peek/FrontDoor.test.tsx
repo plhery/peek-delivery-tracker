@@ -819,6 +819,25 @@ describe('FrontDoor', () => {
     expect(mocks.lookup).not.toHaveBeenCalled();
   });
 
+  it('takes a number its page hands back with the carrier the page names chosen, its field for the phone digits ready', async () => {
+    // JT and 13 digits fit J&T and J&T China, which shows them only with the last 4 digits of a phone.
+    const JT = 'JT0805136742918';
+    const waiting = (carrier: 'unknown' | 'j-and-t-cn') => testView({ parcel: { trackingNumber: JT, carrier, syncStatus: 'pending' }, stages: ['pending'] });
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: waiting('unknown') });
+    const moved: ParcelLookup = { id: LINK_ID, key: OWNER_KEY, view: waiting('j-and-t-cn') };
+    mocks.change.mockResolvedValue(moved);
+    writeCarrierHandoff(JT, Date.now(), { pick: true, link: LINK_ID, carrier: 'j-and-t-cn' });
+    const user = userEvent.setup();
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />, { wrapper: servingGuides });
+    const digits = await screen.findByRole('textbox', { name: /^Last 4 digits of the phone number/ });
+    await waitFor(() => expect(digits).toHaveFocus());
+    expect(screen.queryByRole('dialog', { name: 'Carrier' })).toBeNull();
+    await user.type(digits, '0123');
+    await user.click(screen.getByRole('button', { name: 'Track' }));
+    await waitFor(() => expect(onTracked).toHaveBeenCalledExactlyOnceWith({ id: LINK_ID, key: OWNER_KEY, carrier: 'j-and-t-cn', response: moved.view }));
+    expect(mocks.change).toHaveBeenCalledExactlyOnceWith(LINK_ID, OWNER_KEY, { trackingNumber: JT, carrier: 'j-and-t-cn', phoneDigits: '0123' }, expect.any(AbortSignal));
+  });
+
   it('looks the number up afresh when this device no longer holds the key of the link that handed it back', async () => {
     writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true, link: OTHER_LINK_ID });
     const user = userEvent.setup();

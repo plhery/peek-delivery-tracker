@@ -7,6 +7,7 @@ import {
   type RouteParameters,
 } from '../../../../../src/server/api';
 import { servedOwnParcel } from '../../../../../src/server/usualPlace';
+import { clientInputs } from '../../../../../src/server/suggestedInputs';
 import { SupabaseError } from '../../../../../src/server/supabase';
 
 interface PackageParameters extends RouteParameters {
@@ -33,5 +34,5 @@ export const POST = apiRoute<PackageParameters>(async (context) => {
     }
     throw error;
   }
-  return json(await servedOwnParcel(client, await client.getPackage(packageId) ?? { ...original, archived_at: null }));
+  return json(await servedOwnParcel(client, await client.getPackage(packageId) ?? { ...original, archived_at: null }, clientInputs(context.request)));
 }, { serviceRequired: true });

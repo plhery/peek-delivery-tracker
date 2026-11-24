@@ -95,6 +95,8 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const field = useRef<HTMLTextAreaElement>(null);
   const pasting = useRef(false);
   const [picking, setPicking] = useState(false);
+  // Each carrier chosen, in the picker or by a parcel's page, leads to the field it asks for (below).
+  const [led, setLed] = useState(0);
   const hero = useRef<HTMLElement>(null);
   const live = useLive(hero);
   const still = useReducedMotion();
@@ -157,7 +159,8 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   // A number typed into a carrier's page's box arrives here, never in the address: once the page is live it is
   // put in the field as if pasted, which looks it up. Not while a saved sign-in is still being restored: the
   // landing drawn meanwhile gives way to the account's, which takes it. A parcel's page hands its number back for its
-  // carrier to be chosen: once the page has left the door, the number waits in the field with the picker open.
+  // carrier to be chosen: once the page has left the door, the number waits in the field with the picker open, or
+  // with the carrier the page named chosen and its field ready.
   useEffect(() => {
     if (account === 'checking' || covered) return;
     const handed = takeCarrierHandoff();
@@ -174,7 +177,10 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
     send({ type: 'edit', text: handed.text, via: 'typing' });
     send({ type: 'pause', text: handed.text });
     send({ type: 'blur' });
-    setPicking(true);
+    if (handed.carrier && Object.hasOwn(CARRIERS, handed.carrier)) {
+      send({ type: 'choose', carrier: handed.carrier as CarrierId });
+      setLed((count) => count + 1);
+    } else setPicking(true);
   }, [account, covered, put, send, touch]);
 
   // Something shared to the installed app opens it here for a visitor: what came is put in the field as if pasted,
@@ -201,7 +207,6 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   // Without either, the focus stays where it is; only a focus left nowhere is brought back.
   // A choice in the picker is counted in the drawing it belongs to: the effects of an earlier drawing, run late,
   // see the count they were drawn with and leave the leading to the drawing that has the field.
-  const [led, setLed] = useState(0);
   const seen = useRef({ halted: state.halted, led });
   useEffect(() => {
     if (seen.current.halted === state.halted && seen.current.led === led) return;

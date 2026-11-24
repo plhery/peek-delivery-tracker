@@ -16,7 +16,7 @@ import type {
   ApiUpdateParcelLinkRequest,
 } from '../generated/apiContract';
 import type { Locale } from '../i18n';
-import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
+import { authenticatedFetch, CLIENT_INPUTS, type ApiAuth } from '../lib/apiClient';
 import { isDemoBuild } from '../lib/buildMode';
 import { announcedMaintenance, deviceOnline, serverDown, unanswered, type MaintenanceNotice } from '../lib/maintenance';
 import { typedNumber } from '../lib/carrierDetection';
@@ -132,11 +132,12 @@ function lookupCountryHint(): { lookupCountryHint?: string } {
  * goes along only when this device holds it.
  */
 export function createApiLinks(request: typeof fetch = (input, init) => fetch(input, init)): ParcelLinksClient {
-  async function send(path: string, init: RequestInit, signal?: AbortSignal): Promise<Response> {
+  async function send(path: string, init: Omit<RequestInit, 'headers'> & { headers?: Record<string, string> }, signal?: AbortSignal): Promise<Response> {
     const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
     try {
       return await request(path, {
         ...init,
+        headers: { ...init.headers, 'X-Peek-Inputs': CLIENT_INPUTS },
         cache: 'no-store',
         credentials: 'omit',
         referrerPolicy: 'no-referrer',

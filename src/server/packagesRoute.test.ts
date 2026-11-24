@@ -9,9 +9,9 @@ import { SupabaseClient, SupabaseError, SupabaseServiceClient, SupabaseUserClien
 const userId = '55000000-0000-4000-a000-000000000001';
 const parcel = { id: '55000000-0000-4000-a000-000000000002', tracking_number: 'TEST1234', carrier: 'swiss-post', carrier_data: {}, events: [] };
 
-function list(query = '') {
+function list(query = '', headers: Record<string, string> = {}) {
   return GET(new NextRequest(`https://delivery.example/api/packages${query}`, {
-    headers: { Authorization: 'Bearer list-test' },
+    headers: { Authorization: 'Bearer list-test', ...headers },
   }), { params: Promise.resolve({}) });
 }
 
@@ -90,6 +90,19 @@ it('heads a parcel in the account\'s country for the town its own deliveries usu
   expect(packages.find(({ id }) => id === 'open')?.usual_place).toMatchObject({ name: 'Villeurbanne', country: 'FR', precision: 'city' });
   expect(packages.filter(({ usual_place }) => usual_place)).toHaveLength(1);
   expect(delivery).not.toHaveBeenCalled();
+});
+
+it('suggests the phone digits for a JT number nobody knew only to the apps that ask for them', async () => {
+  // J&T China shows its JT numbers only with the last 4 digits of the recipient's or sender's phone.
+  const unknown = { ...parcel, tracking_number: 'JT0805136742918', carrier: 'unknown', current_stage: 'pending',
+    last_synced_at: '2026-11-23T08:00:00Z', tracking_events: [] };
+  vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([unknown, { ...unknown, id: 'unchecked', last_synced_at: null }]);
+  vi.spyOn(SupabaseUserClient.prototype, 'recordOpened').mockResolvedValue(undefined);
+  const suggested = async (headers: Record<string, string>) => ((await (await list('', headers)).json()).packages as Array<{
+    carrier_data: { routing?: { input_suggested?: unknown } } }>).map((row) => row.carrier_data.routing?.input_suggested ?? null);
+  expect(await suggested({ 'X-Peek-Inputs': 'phoneDigits' })).toEqual([{ carrier: 'j-and-t-cn', field: 'phoneDigits' }, null]);
+  // An app from before the input would reject the parcel.
+  expect(await suggested({})).toEqual([null, null]);
 });
 
 it('answers 409 with the parcel when a second add of it races the first', async () => {

@@ -65,6 +65,8 @@ import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ProviderInputNeeded
@@ -621,6 +623,34 @@ class ChangeCarrierTest {
         node(CHANGE_CARRIER_POSTCODE).assertExists()
         // The carrier asks for something: the large detent.
         assertLarge()
+    }
+
+    /**
+     * A JT number nobody answered for, which J&T China shows only with the last 4 digits of a phone: the page's button
+     * opens the editor on J&T China with its phone digits field, and the digits go with the change.
+     */
+    @Test
+    fun aPhoneDigitsSuggestionOpensTheEditorOnItsCarrierWithItsField() {
+        val suggested = parcel(
+            5, "Phone case", CarrierId.Unknown, "JT0805136742918",
+            data = CarrierData(routing = CarrierDataRouting(inputSuggested = CarrierInputSuggested(CarrierId.JAndTCn, CarrierInputSuggestedField.PhoneDigits))),
+        )
+        show(parcels + suggested)
+        compose.openCard(suggested.label)
+        settle()
+        compose.onNode(hasText("Add the digits") and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PROMPT))).performClick()
+        settle()
+        assertEquals(CarrierId.JAndTCn, deliveries.carrierEditor?.initialCarrier)
+        assertEquals("J&T Express China", carrierRowValue())
+        assertTrue(!exists(CHANGE_CARRIER_POSTCODE))
+        node(CHANGE_CARRIER_PHONE_DIGITS).performTextInput("0123")
+        compose.waitForIdle()
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.CarrierChangeRequest(suggested.id, CarrierId.JAndTCn, null, null, null, null, phoneDigits = "0123")),
+            source.carrierRequests,
+        )
     }
 
     @Test

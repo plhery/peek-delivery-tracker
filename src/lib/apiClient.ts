@@ -22,6 +22,12 @@ export class ApiRecentSignInError extends Error {
 const RECENT_SIGN_IN: NonNullable<ApiErrorResponse['code']> = 'recent_sign_in';
 
 /** The server's 401 for an action that needs a recent sign-in, which keeps the session. The body stays to be read. */
+/**
+ * The inputs beyond the delivery postcode this client can ask a reader for, named to the server in `X-Peek-Inputs`:
+ * it suggests one that may find a parcel only to the clients that name it.
+ */
+export const CLIENT_INPUTS = 'phoneDigits';
+
 async function asksForRecentSignIn(response: Response): Promise<boolean> {
   if (response.status !== 401) return false;
   try {
@@ -71,6 +77,7 @@ async function performAuthenticatedFetch(
     signal.throwIfAborted();
     const headers = new Headers(init?.headers);
     headers.set('X-Requested-With', 'XMLHttpRequest');
+    headers.set('X-Peek-Inputs', CLIENT_INPUTS);
     if (init?.body) headers.set('Content-Type', 'application/json');
     if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`);
     const response = await abortable(fetch(path, {

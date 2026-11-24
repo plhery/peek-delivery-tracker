@@ -34,6 +34,7 @@ const onItsWay = (scans: Scan[], carrierData: JsonObject = {}) => stored([['acce
 const served = (row: JsonObject) => withEventPlaces(row, { destination: true });
 const read = (rows: JsonObject[]) => rows.map((row) => toParcel(served(row) as unknown as ApiPackageRow));
 const town = (rows: JsonObject[]) => usualTown(read(rows));
+const NO_INPUTS = { phoneDigits: false };
 
 afterEach(() => { vi.restoreAllMocks(); });
 
@@ -124,11 +125,11 @@ describe('serving it', () => {
 
   it('reads the account\'s delivered parcels for one parcel, only when it could head for the town', async () => {
     const { client, listDeliveredPackages } = user(history());
-    const paris = await servedOwnParcel(client, onItsWay([['in_transit', '2026-11-21T08:00:00Z', 'Paris, FR']]));
+    const paris = await servedOwnParcel(client, onItsWay([['in_transit', '2026-11-21T08:00:00Z', 'Paris, FR']]), NO_INPUTS);
     expect(paris.usual_place).toMatchObject({ name: 'Lyon', country: 'FR', precision: 'city' });
     expect(listDeliveredPackages).toHaveBeenCalledOnce();
     for (const row of [deliveredIn('Lyon, FR', 4), stored([]), onItsWay([['in_transit', '2026-11-21T08:00:00Z', 'Paris, FR']], { pickup_point: 'Locker 12' })]) {
-      expect(await servedOwnParcel(client, row)).not.toHaveProperty('usual_place');
+      expect(await servedOwnParcel(client, row, NO_INPUTS)).not.toHaveProperty('usual_place');
     }
     expect(listDeliveredPackages).toHaveBeenCalledOnce();
   });
@@ -138,8 +139,8 @@ describe('serving it', () => {
     const failure = new Error('database unavailable');
     const { client } = user(failure);
     const row = onItsWay([['in_transit', '2026-11-21T08:00:00Z', 'Paris, FR']]);
-    expect(await servedOwnParcel(client, row)).toEqual(served(row));
-    await servedOwnParcel(client, row);
+    expect(await servedOwnParcel(client, row, NO_INPUTS)).toEqual(served(row));
+    await servedOwnParcel(client, row, NO_INPUTS);
     expect(capture).toHaveBeenCalledExactlyOnceWith(failure, { component: 'api', operation: 'usual_delivery_town' });
   });
 });

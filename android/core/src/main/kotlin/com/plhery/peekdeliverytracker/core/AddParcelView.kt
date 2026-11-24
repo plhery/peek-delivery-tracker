@@ -533,22 +533,25 @@ data class ParcelAddition(
             else -> false
         }
 
-    /** The carrier the check's answer for the number says may have it with the delivery postcode (`inputSuggested`). */
-    private val postcodeSuggested: CarrierId?
-        get() {
-            if (!nobodyKnew) return null
-            val answer = recognition.answer?.takeIf { it.trackingNumber == normalizedNumber } ?: return null
-            return answer.inputSuggested?.takeIf { it.field == CarrierDetectionInputSuggestedField.DpdPostcode }?.carrier
-        }
+    /** The carrier the check's answer for a number nobody knew says may have it with `field` (`inputSuggested`). */
+    private fun suggested(field: CarrierDetectionInputSuggestedField): CarrierId? {
+        if (!nobodyKnew) return null
+        val answer = recognition.answer?.takeIf { it.trackingNumber == normalizedNumber } ?: return null
+        return answer.inputSuggested?.takeIf { it.field == field }?.carrier
+    }
+
+    /** The carrier the check's answer for the number says may have it with the delivery postcode. */
+    private val postcodeSuggested: CarrierId? get() = suggested(CarrierDetectionInputSuggestedField.DpdPostcode)
 
     /**
      * The carrier suggested for a number nobody knew, while the carrier is left automatic, for a number whose shape
      * names none and that isn't Amazon's, once the check has settled without a carrier ([nobodyKnew]). Either the one
      * the check suggests (`inputSuggested`): one that serves the reader's country and takes the delivery postcode and
      * nothing else for the number, such as Mondial Relay for 8 digits, so nobody could ask it; its postcode field shows,
-     * optional. Or else the one candidate that shows the number only with the last 4 digits of a phone
-     * ([CarrierCatalog.phoneDigitsCandidate]), such as J&T China for a JT number; its field shows, optional. The
-     * parcel goes to it only with its field filled in (the web's `suggested`, `phoneSuggested` and `lookupInput`).
+     * optional. Or else the one that shows the number only with the last 4 digits of a phone, such as J&T China for a
+     * JT number: the one the check suggests, or, where it suggests none (not asked, failed, or an older service), the
+     * one candidate that does ([CarrierCatalog.phoneDigitsCandidate]); its field shows, optional. The parcel goes to it
+     * only with its field filled in (the web's `suggested`, `phoneSuggested` and `lookupInput`).
      */
     val suggestedCarrier: CarrierId? get() = suggestion?.first
 
@@ -562,7 +565,8 @@ data class ParcelAddition(
                     ?: return null
                 return carrier to listOf(field.copy(optional = true))
             }
-            val carrier = catalog.phoneDigitsCandidate(parsed.candidates, number) ?: return null
+            val carrier = suggested(CarrierDetectionInputSuggestedField.PhoneDigits)
+                ?: catalog.phoneDigitsCandidate(parsed.candidates, number) ?: return null
             return carrier to catalog.requirements(carrier, number)
         }
 

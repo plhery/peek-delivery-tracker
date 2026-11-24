@@ -255,7 +255,11 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
 
   const nobodyKnew = match && source === 'none' && state.carrier === 'auto' && ['none', 'unasked', 'failed'].includes(check.status);
   const postcodeSuggested = nobodyKnew && answer?.inputSuggested?.field === 'dpdPostcode' ? answer.inputSuggested.carrier : null;
-  const suggested = postcodeSuggested ?? (nobodyKnew ? phoneDigitsCandidate(match.candidates, match.trackingNumber) ?? null : null);
+  // The carrier that shows the number only with the phone digits: the server's, or the one the shape points to when
+  // the server was not asked.
+  const phoneSuggested = !nobodyKnew ? null : answer?.inputSuggested?.field === 'phoneDigits' ? answer.inputSuggested.carrier
+    : phoneDigitsCandidate(match.candidates, match.trackingNumber) ?? null;
+  const suggested = postcodeSuggested ?? phoneSuggested;
   const inputCarrier = suggested ?? carrier;
   const carrierFields = !match || onDevice ? []
     : postcodeSuggested ? carrierRequirements(postcodeSuggested, match.trackingNumber)

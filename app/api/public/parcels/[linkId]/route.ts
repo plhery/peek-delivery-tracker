@@ -23,6 +23,7 @@ import { isOpenedParcelSyncDue, isTrackingSyncDue } from '../../../../../src/ser
 import type { JsonObject } from '../../../../../src/server/types';
 import { shareSwitches } from '../../../../../src/server/validation';
 import type { ApiPublicParcelResponse } from '../../../../../src/generated/apiContract';
+import { clientInputs } from '../../../../../src/server/suggestedInputs';
 
 interface LinkParameters extends RouteParameters {
   linkId: string;
@@ -91,7 +92,7 @@ export const GET = apiRoute<LinkParameters>(async (context) => {
     }
   }
   recordPublicParcelRead('ok');
-  return json({ ...publicParcelResponse(found, parcelAlerts(service)), ...(checkQueued ? { checkQueued } : {}) } satisfies ApiPublicParcelResponse);
+  return json({ ...publicParcelResponse(found, parcelAlerts(service), { inputs: clientInputs(context.request) }), ...(checkQueued ? { checkQueued } : {}) } satisfies ApiPublicParcelResponse);
 }, {
   authenticated: false,
   serviceRequired: true,
@@ -112,7 +113,7 @@ export const PATCH = apiRoute<LinkParameters>(async (context) => {
   const updated = isParcelLinkId(linkId) && keyHash ? await service.updateParcelLink(linkId, keyHash, changes) : null;
   if (!updated) return unavailable();
   recordParcelShare('lookup', updated.transition ?? 'changed');
-  return json(publicParcelResponse(updated, parcelAlerts(service)) satisfies ApiPublicParcelResponse);
+  return json(publicParcelResponse(updated, parcelAlerts(service), { inputs: clientInputs(context.request) }) satisfies ApiPublicParcelResponse);
 }, {
   authenticated: false,
   serviceRequired: true,

@@ -421,7 +421,13 @@ struct ParcelDetailView: View {
                         inputNeededPrompt(needed.carrier, text: needed.carrier == parcel.carrier
                             ? "detail.carrierInputNeeded" : "detail.inputNeeded", tint: branding.ink)
                     } else if let suggested = parcel.inputSuggestedPrompt {
-                        inputNeededPrompt(suggested.carrier, text: "detail.inputSuggested", tint: branding.ink)
+                        switch suggested.field {
+                        case .dpdPostcode:
+                            inputNeededPrompt(suggested.carrier, text: "detail.inputSuggested", tint: branding.ink)
+                        case .phoneDigits:
+                            inputNeededPrompt(suggested.carrier, text: "detail.phoneDigitsSuggested", action: "detail.phoneDigitsAction",
+                                              tint: branding.ink)
+                        }
                     } else if let likely = parcel.likelyCarrierPrompt() {
                         likelyCarrierPrompt(likely.carrier, waited: likely.waited, tint: branding.ink)
                     } else if let shape = parcel.nonTrackingShape {
@@ -709,8 +715,11 @@ struct ParcelDetailView: View {
         .accessibilityElement(children: .contain)
     }
 
-    /// Recognition found the carrier, the number points to one, or the parcel's own carrier needs the postcode to find it.
-    private func inputNeededPrompt(_ carrier: CarrierID, text key: String, tint: Color) -> some View {
+    /// Recognition found the carrier, the number points to one, or the parcel's own carrier needs the postcode to find it;
+    /// or the number points to a carrier that shows it only with the last 4 digits of a phone. `action` opens the carrier
+    /// change on that carrier, its field ready.
+    private func inputNeededPrompt(_ carrier: CarrierID, text key: String, action: String = "detail.inputNeededAction",
+                                   tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(localizer.text(key, [
                 "carrier": catalog.info(for: carrier, language: localizer.language).displayName,
@@ -720,7 +729,7 @@ struct ParcelDetailView: View {
             Button {
                 carrierEditor = CarrierEditorRequest(initialCarrier: carrier)
             } label: {
-                Text(localizer.text("detail.inputNeededAction"))
+                Text(localizer.text(action))
                     .font(.footnote.weight(.semibold))
                     .frame(minHeight: 44, alignment: .leading)
                     .contentShape(Rectangle())
@@ -1366,7 +1375,8 @@ struct ChangeCarrierView: View {
 
     @ObservedObject private var catalog = CarrierCatalog.shared
 
-    /// `initialCarrier` preselects a carrier, such as one that recognized the number and needs a postcode.
+    /// `initialCarrier` preselects a carrier, such as one that recognized the number and needs a postcode, or one the
+    /// number points to that shows it only with a phone's last 4 digits: its field shows.
     init(parcel: Parcel, initialCarrier: CarrierID? = nil) {
         self.parcel = parcel
         let carrier = initialCarrier ?? parcel.carrier

@@ -9,6 +9,7 @@ import type { EventPlace, ParcelWithEvents, Stage } from '../types';
 import { ON_ITS_WAY } from './destinationPlace';
 import { withEventPlaces } from './eventPlaces';
 import { captureOperationalError } from './observability';
+import { withSuggestedInputs, type ClientInputs } from './suggestedInputs';
 import type { SupabaseUserClient } from './supabase';
 import type { JsonObject } from './types';
 
@@ -99,8 +100,9 @@ export async function withUsualPlaces(client: SupabaseUserClient, parcels: JsonO
 
 /**
  * One of the account's parcels as its own routes serve it (renaming, muting, restoring, changing its carrier, adding
- * it): with the town it is addressed to and, when its map heads there, the town its parcels are usually delivered to.
+ * it): with the town it is addressed to and, when its map heads there, the town its parcels are usually delivered to,
+ * and the inputs the app can ask for that may find it (suggestedInputs.ts).
  */
-export async function servedOwnParcel(client: SupabaseUserClient, row: JsonObject): Promise<JsonObject> {
-  return (await withUsualPlaces(client, [withEventPlaces(row, { destination: true })], { complete: false }))[0]!;
+export async function servedOwnParcel(client: SupabaseUserClient, row: JsonObject, inputs: ClientInputs): Promise<JsonObject> {
+  return (await withUsualPlaces(client, [withSuggestedInputs(withEventPlaces(row, { destination: true }), inputs)], { complete: false }))[0]!;
 }

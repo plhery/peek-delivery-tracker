@@ -34,6 +34,7 @@ import { legacyHosts } from './siteHosts';
 import type { PublicAllowance, StoredParcelLink, SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 import { loadCarrierOutages } from './carrierOutages';
+import { suggestedPhoneDigits, type ClientInputs } from './suggestedInputs';
 
 export { numberHint } from './hiddenNumbers';
 
@@ -505,9 +506,11 @@ function isoTime(value: unknown): string | null {
  * (`routing.input_needed`). Otherwise, for a lookup filed under no carrier, the
  * carrier its number points to that can't be asked without the postcode
  * (`routing.input_suggested`, trackingRouting.ts's suggestedInput), which may
- * have the parcel. The carrier's name and the input, nothing it told about the parcel.
+ * have the parcel, or, for an app that can ask for them, the one that shows its
+ * number only with the last 4 digits of a phone (suggestedInputs.ts). The
+ * carrier's name and the input, nothing it told about the parcel.
  */
-function postcodeAsked(row: JsonObject): Pick<ApiParcelLink, 'inputNeeded' | 'inputSuggested'> {
+function inputAsked(row: JsonObject, inputs: ClientInputs): Pick<ApiParcelLink, 'inputNeeded' | 'inputSuggested'> {
   const routing = isRecord(row.carrier_data) && isRecord(row.carrier_data.routing) ? row.carrier_data.routing : {};
   if (row.one_off !== true || row.current_stage === 'delivered' || row.current_stage === 'returned') return {};
   const needed = routing.input_needed;
@@ -516,9 +519,10 @@ function postcodeAsked(row: JsonObject): Pick<ApiParcelLink, 'inputNeeded' | 'in
     return { inputNeeded: { carrier: needed.carrier as ApiCarrierId, field: 'dpdPostcode' } };
   }
   const suggested = routing.input_suggested;
-  return row.carrier === 'unknown' && !isRecord(needed) && isRecord(suggested) && suggested.field === 'dpdPostcode'
-    && typeof suggested.carrier === 'string'
-    ? { inputSuggested: { carrier: suggested.carrier as ApiCarrierId, field: 'dpdPostcode' } } : {};
+  if (row.carrier === 'unknown' && !isRecord(needed) && isRecord(suggested) && suggested.field === 'dpdPostcode'
+    && typeof suggested.carrier === 'string') return { inputSuggested: { carrier: suggested.carrier as ApiCarrierId, field: 'dpdPostcode' } };
+  const digits = inputs.phoneDigits ? suggestedPhoneDigits(row) : undefined;
+  return digits ? { inputSuggested: digits } : {};
 }
 
 /** Whether the link is a gift still on its way for this caller: everyone but the owner, until the parcel is delivered. */
@@ -547,7 +551,8 @@ export function isWrappedGift({ link, package: row }: StoredParcelLink): boolean
  * left out (`viewerScan`), nor the town it is addressed to (`destination_place`).
  */
 export function publicParcelResponse(
-  found: StoredParcelLink, alerts: ApiParcelAlerts, { peekAi = true }: { peekAi?: boolean } = {},
+  found: StoredParcelLink, alerts: ApiParcelAlerts,
+  { peekAi = true, inputs = { phoneDigits: false } }: { peekAi?: boolean; inputs?: ClientInputs } = {},
 ): ApiPublicParcelResponse {
   const { link } = found;
   const owner = link.owner === true;
@@ -611,7 +616,7 @@ export function publicParcelResponse(
     // The stored link's own `shared` says that it belongs to an account: the kind above.
     shared: link.stopped !== true,
     alerts,
-    ...(owner ? postcodeAsked(row) : {}),
+    ...(owner ? inputAsked(row, inputs) : {}),
   };
   return {
     link: shownLink,

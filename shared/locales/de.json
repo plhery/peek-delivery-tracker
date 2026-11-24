@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} hat dieses Paket. Gib die Postleitzahl der Lieferadresse ein, um es zu verfolgen.",
   "detail.inputNeededAction": "Postleitzahl eingeben",
   "detail.inputSuggested": "{{carrier}} hat dieses Paket vielleicht. Gib die Postleitzahl der Lieferadresse ein, um es zu verfolgen.",
+  "detail.phoneDigitsSuggested": "{{carrier}} hat dieses Paket vielleicht. Gib die letzten 4 Ziffern der Telefonnummer von Empfänger oder Absender ein, um es zu verfolgen.",
   "link.postcode.checking": "{{carrier}} wird gefragt…",
   "link.postcode.refused": "{{carrier}} hat dieses Paket nicht unter dieser Postleitzahl. Prüfe sie und versuche es erneut.",
   "link.postcode.tries": "Zu viele Postleitzahlen versucht. Versuche es nach {{time}} erneut.",

@@ -172,6 +172,13 @@ fun HttpTransport.identifying(userAgent: String): HttpTransport = HttpTransport 
 }
 
 /**
+ * The inputs beyond the delivery postcode this app can ask a reader for, named in `X-Peek-Inputs` on each request for
+ * parcels, links and detections, with an account or without: the service suggests an input that may find a parcel
+ * (`inputSuggested`) only to the apps that name it (src/server/suggestedInputs.ts).
+ */
+const val CLIENT_INPUTS = "phoneDigits"
+
+/**
  * The `User-Agent` URLSession sends for the iPhone app: its bundle's name and build, then CFNetwork's and Darwin's
  * versions. Never the Android app's (see `identifying`); the tests and the differential harness compare with it.
  */
@@ -730,7 +737,7 @@ class DeliveryApiClient(
 
         suspend fun perform(token: String?): HttpResponse {
             session.checkGeneration(generation)
-            val headers = linkedMapOf("X-Requested-With" to "XMLHttpRequest", "Accept" to "application/json")
+            val headers = linkedMapOf("X-Requested-With" to "XMLHttpRequest", "Accept" to "application/json", "X-Peek-Inputs" to CLIENT_INPUTS)
             if (body != null) headers["Content-Type"] = "application/json"
             if (token != null) headers["Authorization"] = "Bearer $token"
             val request = HttpRequest(url, method, headers, body, timeout = 30.0)
@@ -840,7 +847,7 @@ class DeliveryApiClient(
          * only when the site handed the parcel over to this phone. It goes in a header alone.
          */
         suspend fun publicParcel(linkId: String, key: String? = null, configuration: AppConfiguration, transport: HttpTransport): PublicParcelResponse? {
-            val headers = linkedMapOf("Accept" to "application/json")
+            val headers = linkedMapOf("Accept" to "application/json", "X-Peek-Inputs" to CLIENT_INPUTS)
             if (key != null) headers["X-Parcel-Key"] = key
             val request = HttpRequest(
                 url = configuration.apiBaseUrl.appendingPath("api/public/parcels").appendingPath(linkId),

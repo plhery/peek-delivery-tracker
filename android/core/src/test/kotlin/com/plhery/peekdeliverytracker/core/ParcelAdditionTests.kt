@@ -679,6 +679,37 @@ class ParcelAdditionTests {
     }
 
     /**
+     * The carrier the check suggests with the last 4 digits of a phone (`inputSuggested`) comes before the one the
+     * number's shape points to, which stays for a check that suggests none. Synthetic: the check names J&T Mexico, which
+     * a JT number's shape doesn't, to tell the two apart. A carrier that knows the number leaves the suggestion unread.
+     */
+    @Test
+    fun theCarrierTheCheckSuggestsWithThePhonesDigitsComesBeforeTheOneTheShapePointsTo() {
+        val number = "JT0805136742918"
+        val settled = addition(number).settling(number)
+        fun answered(answer: CarrierDetectionResponse) = settled.copy(recognition = settled.recognition.copy(answer = answer))
+        val mexico = CarrierDetectionInputSuggested(CarrierId.JAndTMx, CarrierDetectionInputSuggestedField.PhoneDigits)
+
+        val form = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.JAndT), inputSuggested = mexico))
+        assertTrue(form.recognitionStatus is CarrierRecognition.Status.NotFound)
+        assertEquals(CarrierId.JAndTMx, form.suggestedCarrier)
+        assertEquals(CarrierId.JAndTMx, form.inputCarrier)
+        assertEquals(listOf(CarrierRequirement.Field.PhoneDigits), form.requirements.map { it.field })
+        assertTrue(form.phoneDigitsRequirement!!.isOptional)
+        assertEquals(CarrierId.Unknown, form.sentCarrier)
+        val filled = form.copy(phoneDigits = "0123")
+        assertEquals(CarrierId.JAndTMx, filled.sentCarrier)
+        assertEquals("0123", filled.sentPhoneDigits)
+
+        // None suggested: the one the shape points to.
+        assertEquals(CarrierId.JAndTCn, answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.JAndT))).suggestedCarrier)
+        // J&T knows it.
+        val known = answered(CarrierDetectionResponse(number, carrier = CarrierId.JAndT, asked = listOf(CarrierId.JAndT), inputSuggested = mexico))
+        assertNull(known.suggestedCarrier)
+        assertNull(known.phoneDigitsRequirement)
+    }
+
+    /**
      * Each carrier's postcode is its own, as the web's `carrierPostcodes`: a required field starts from the last postcode
      * given, PostNL's optional one for a 3S number is only offered, and one typed for a carrier never shows or goes
      * with another, which shows its own again.

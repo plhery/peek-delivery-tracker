@@ -49,15 +49,14 @@ object TrackingEventsSerializer : KSerializer<List<TrackingEvent>> {
 }
 
 /**
- * Peek AI's estimate on a parcel, read leniently: one the app can't read, a kind of call, a reason or a step added after
- * a release, reads as none, and the parcel and its list still read.
+ * A hint read leniently (`LenientPeekAiSerializer` and the others the contract generates): one the app can't read, a
+ * kind of call, a reason, an input or a step added after a release, reads as none, and the parcel, link or answer it
+ * came in still reads.
  */
-object LenientPeekAiSerializer : KSerializer<PeekAi?> {
-    private val strict = PeekAi.serializer()
-
+class LenientSerializer<T : Any>(private val strict: KSerializer<T>) : KSerializer<T?> {
     override val descriptor: SerialDescriptor = strict.nullable.descriptor
 
-    override fun deserialize(decoder: Decoder): PeekAi? {
+    override fun deserialize(decoder: Decoder): T? {
         if (decoder !is JsonDecoder) return if (decoder.decodeNotNullMark()) strict.deserialize(decoder) else decoder.decodeNull()
         val element = decoder.decodeJsonElement()
         if (element is JsonNull) return null
@@ -70,7 +69,7 @@ object LenientPeekAiSerializer : KSerializer<PeekAi?> {
         }
     }
 
-    override fun serialize(encoder: Encoder, value: PeekAi?) {
+    override fun serialize(encoder: Encoder, value: T?) {
         if (value == null) encoder.encodeNull() else encoder.encodeSerializableValue(strict, value)
     }
 }

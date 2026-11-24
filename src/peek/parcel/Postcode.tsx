@@ -34,6 +34,18 @@ export function PostcodeAsked({ carrier, ask, onAdd }: { carrier: CarrierId; ask
 }
 
 /**
+ * A carrier the number points to may have the parcel, and shows it only with the last 4 digits of the recipient's or
+ * sender's phone (J&T China's JT numbers).
+ */
+export function PhoneDigitsSuggested({ carrier, onAdd }: { carrier: CarrierId; onAdd: () => void }) {
+  const { t, locale } = useI18n();
+  return <div className="detail__input-needed peekp-asked" role="status">
+    <p>{t('detail.phoneDigitsSuggested', { carrier: carrierInfo(carrier, locale).name })}</p>
+    <button type="button" className="text-button" onClick={onAdd}>{t('detail.phoneDigitsAction')}</button>
+  </div>;
+}
+
+/**
  * The owner adds the postcode, and the country it is from: the parcel's
  * destination when known, else the device's. The server asks the carrier
  * first: a postcode it accepts files the parcel under that carrier and checks

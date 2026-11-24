@@ -874,7 +874,15 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   Mondial Relay number filed under InPost). The front door and the add sheets likewise offer, for
   a number nobody knew, the phone-digits field of the one candidate that shows it only with the
   last 4 digits of a phone (J&T China's JT numbers): optional, and the number goes to that
-  carrier only with the digits.
+  carrier only with the digits. The server names that carrier too (`inputSuggested` with
+  `phoneDigits`, [`suggestedInputs.ts`](../src/server/suggestedInputs.ts)): in detection's answer,
+  and, when the parcel is served, in the routing of an account's parcel filed under no carrier and
+  in a lookup's link for its owner, once a check has run and nobody answered, and while no postcode
+  is asked or suggested. Nothing stores it. Only a client whose requests name the input in
+  `X-Peek-Inputs` gets it, since app versions from before it reject an input they don't know; the
+  website and the apps name `phoneDigits`. The parcel page's prompt opens the carrier change on
+  that carrier with its digits field, and a lookup's page hands the number to the front door with
+  the carrier chosen, which moves the link with the digits.
   An account's open parcel filed under a carrier that shows more with the delivery postcode
   (the catalog's `showsMore`: DPD's verified scans, the pages that show a shipment only with
   it), saved without one, is given the postcode its owner gave their latest parcel once a check

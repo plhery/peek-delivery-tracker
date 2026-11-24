@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.DeleteParcelAppAlertRequest
@@ -278,11 +279,11 @@ class DeviceParcelClient(
     companion object {
         /**
          * The service's public parcel API, as the iPhone app calls it. Every request asks for JSON past any cache, with a
-         * 30-second timeout, no cookies (none sent, none kept) and no `Authorization`; `X-Parcel-Key` carries the owner
-         * key, only when there is one. A lookup and a detection go through `verification`, and a lookup alone may
-         * present the browser check. A detection sends `region`'s country as its hint: the device's region,
-         * `Resources.getSystem().configuration.locales[0]`, which the app's own language leaves as it is (never
-         * `Locale.getDefault()`).
+         * 30-second timeout, no cookies (none sent, none kept) and no `Authorization`, naming the inputs the app can ask
+         * for ([CLIENT_INPUTS]); `X-Parcel-Key` carries the owner key, only when there is one. A lookup and a detection
+         * go through `verification`, and a lookup alone may present the browser check. A detection sends `region`'s
+         * country as its hint: the device's region, `Resources.getSystem().configuration.locales[0]`, which the app's own
+         * language leaves as it is (never `Locale.getDefault()`).
          */
         fun api(
             configuration: AppConfiguration,
@@ -297,7 +298,7 @@ class DeviceParcelClient(
                 body: ByteArray? = null,
                 query: List<UrlComponents.QueryItem> = emptyList(),
             ): HttpResponse {
-                val headers = linkedMapOf("Accept" to "application/json")
+                val headers = linkedMapOf("Accept" to "application/json", "X-Peek-Inputs" to CLIENT_INPUTS)
                 if (key != null) headers["X-Parcel-Key"] = key
                 if (body != null) headers["Content-Type"] = "application/json"
                 val url = configuration.apiBaseUrl.appendingPath(path)
@@ -1048,8 +1049,9 @@ class DeviceParcels(
      * Follows the same number with another carrier, link, postcode or phone digits. The parcel's own link moves to it
      * (`PATCH …/carrier`), keeping its address, sharing and notifications, as on the website; where the service no
      * longer has that link for its key, a new lookup takes the old one's place and name. The postcode the link asks
-     * for, given alone for the carrier that asks, goes to the link instead (`POST …/postcode`), as on the website: the
-     * service tries it with that carrier first, and one it refuses changes nothing ([DevicePostcodeRefusal]).
+     * for or suggests, given alone for the carrier that asks, goes to the link instead (`POST …/postcode`), as on the
+     * website: the service tries it with that carrier first, and one it refuses changes nothing ([DevicePostcodeRefusal]).
+     * The phone digits a link suggests go with the move, as any carrier's do.
      */
     suspend fun changeCarrier(
         id: UUID,
@@ -1065,8 +1067,9 @@ class DeviceParcels(
         val key = keys.keyOf(entry.linkId)
         val move = client?.changeCarrier
         val postcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty
+        val postcodeSuggested = entry.parcel.inputSuggestedPrompt?.takeIf { it.field == CarrierInputSuggestedField.DpdPostcode }
         val give = client?.addPostcode?.takeIf {
-            postcode != null && (entry.parcel.inputNeeded?.carrier == carrier || entry.parcel.inputSuggestedPrompt?.carrier == carrier) &&
+            postcode != null && (entry.parcel.inputNeeded?.carrier == carrier || postcodeSuggested?.carrier == carrier) &&
                 trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty == null && phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty == null
         }
         if (key != null && (move != null || give != null)) {

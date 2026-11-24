@@ -31,11 +31,11 @@ describe('the text a carrier’s page hands to the tracker', () => {
     expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: true });
   });
 
-  it('names the carrier whose page the text was typed on, never with a choice', () => {
+  it('names the carrier whose page the text was typed on, or the one a parcel\'s page has chosen', () => {
     writeCarrierHandoff('JJD000390012345678', 1_000, { carrier: 'brt' });
     expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false, carrier: 'brt' });
-    writeCarrierHandoff('JJD000390012345678', 1_000, { pick: true, carrier: 'brt' });
-    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: true });
+    writeCarrierHandoff('JT0805136742918', 1_000, { pick: true, link: 'k7Qm2xHd9RtW', carrier: 'j-and-t-cn' });
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JT0805136742918', pick: true, link: 'k7Qm2xHd9RtW', carrier: 'j-and-t-cn' });
     sessionStorage.setItem(KEY, JSON.stringify({ text: 'JJD000390012345678', at: 1_000, carrier: 'BRT parcel' }));
     expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false });
   });

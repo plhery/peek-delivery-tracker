@@ -30,6 +30,19 @@ struct CarrierDetectionResponse: Codable, Equatable, Hashable, Sendable {
     var trackingFound: Bool? = nil
     var lookupCountry: String? = nil
     var inputSuggested: CarrierDetectionInputSuggested? = nil
+
+    private enum CodingKeys: String, CodingKey {
+        case trackingNumber
+        case amazonShippingStatus
+        case carrier
+        case recognized
+        case asked
+        case unanswered
+        case providers
+        case trackingFound
+        case lookupCountry
+        case inputSuggested
+    }
 }
 
 struct AccountExportResponse: Codable, Equatable, Hashable, Sendable {
@@ -4935,6 +4948,23 @@ struct ParcelLink: Codable, Equatable, Hashable, Sendable, Identifiable {
     var giftWords: GiftWords? = nil
     var inputNeeded: ParcelLinkInputNeeded? = nil
     var inputSuggested: ParcelLinkInputSuggested? = nil
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case role
+        case kind
+        case createdAt
+        case forgetAt
+        case numberShown
+        case canKeep
+        case showNumber
+        case gift
+        case shared
+        case alerts
+        case giftWords
+        case inputNeeded
+        case inputSuggested
+    }
 }
 
 struct ParcelNumberHint: Codable, Equatable, Hashable, Sendable {
@@ -5604,6 +5634,7 @@ enum InstallSightingPlatform: String, Codable, CaseIterable, Hashable, Sendable,
 
 enum CarrierDetectionInputSuggestedField: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case dpdPostcode
+    case phoneDigits
 
     var id: String { rawValue }
 }
@@ -5616,6 +5647,16 @@ struct CarrierDataRouting: Codable, Equatable, Hashable, Sendable {
     var likelyCarrier: LikelyCarrier? = nil
     var providerInputNeeded: ProviderInputNeeded? = nil
     var nextCheckAt: String? = nil
+
+    private enum CodingKeys: String, CodingKey {
+        case inputNeeded
+        case postcodeRefused
+        case servedElsewhere
+        case inputSuggested
+        case likelyCarrier
+        case providerInputNeeded
+        case nextCheckAt
+    }
 }
 
 enum ParcelLinkInputNeededField: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
@@ -5626,6 +5667,7 @@ enum ParcelLinkInputNeededField: String, Codable, CaseIterable, Hashable, Sendab
 
 enum ParcelLinkInputSuggestedField: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case dpdPostcode
+    case phoneDigits
 
     var id: String { rawValue }
 }
@@ -5664,6 +5706,7 @@ enum CarrierInputNeededField: String, Codable, CaseIterable, Hashable, Sendable,
 
 enum CarrierInputSuggestedField: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case dpdPostcode
+    case phoneDigits
 
     var id: String { rawValue }
 }
@@ -5708,6 +5751,42 @@ extension Parcel {
     }
 }
 
+extension CarrierDetectionResponse {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        trackingNumber = try values.decode(String.self, forKey: .trackingNumber)
+        amazonShippingStatus = try values.decodeIfPresent(CarrierDetectionResponseAmazonShippingStatus.self, forKey: .amazonShippingStatus)
+        carrier = try values.decode(CarrierID.self, forKey: .carrier)
+        recognized = try values.decodeIfPresent([CarrierID].self, forKey: .recognized)
+        asked = try values.decodeIfPresent([CarrierID].self, forKey: .asked)
+        unanswered = try values.decodeIfPresent([CarrierID].self, forKey: .unanswered)
+        providers = try values.decodeIfPresent([TrackingProviderCheck].self, forKey: .providers)
+        trackingFound = try values.decodeIfPresent(Bool.self, forKey: .trackingFound)
+        lookupCountry = try values.decodeIfPresent(String.self, forKey: .lookupCountry)
+        inputSuggested = try? values.decodeIfPresent(CarrierDetectionInputSuggested.self, forKey: .inputSuggested)
+    }
+}
+
+extension ParcelLink {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(String.self, forKey: .id)
+        role = try values.decode(ParcelLinkRole.self, forKey: .role)
+        kind = try values.decode(ParcelLinkKind.self, forKey: .kind)
+        createdAt = try values.decode(String.self, forKey: .createdAt)
+        forgetAt = try values.decodeIfPresent(String.self, forKey: .forgetAt)
+        numberShown = try values.decode(Bool.self, forKey: .numberShown)
+        canKeep = try values.decode(Bool.self, forKey: .canKeep)
+        showNumber = try values.decodeIfPresent(Bool.self, forKey: .showNumber)
+        gift = try values.decodeIfPresent(Bool.self, forKey: .gift)
+        shared = try values.decodeIfPresent(Bool.self, forKey: .shared)
+        alerts = try values.decodeIfPresent(ParcelAlerts.self, forKey: .alerts)
+        giftWords = try values.decodeIfPresent(GiftWords.self, forKey: .giftWords)
+        inputNeeded = try values.decodeIfPresent(ParcelLinkInputNeeded.self, forKey: .inputNeeded)
+        inputSuggested = try? values.decodeIfPresent(ParcelLinkInputSuggested.self, forKey: .inputSuggested)
+    }
+}
+
 extension PublicPackage {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -5736,5 +5815,18 @@ extension PublicPackage {
         carrierOutage = try values.decodeIfPresent(CarrierOutage.self, forKey: .carrierOutage)
         destinationPlace = try values.decodeIfPresent(EventPlace.self, forKey: .destinationPlace)
         newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
+    }
+}
+
+extension CarrierDataRouting {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        inputNeeded = try values.decodeIfPresent(CarrierInputNeeded.self, forKey: .inputNeeded)
+        postcodeRefused = try values.decodeIfPresent(CarrierPostcodeRefused.self, forKey: .postcodeRefused)
+        servedElsewhere = try values.decodeIfPresent(CarrierServedElsewhere.self, forKey: .servedElsewhere)
+        inputSuggested = try? values.decodeIfPresent(CarrierInputSuggested.self, forKey: .inputSuggested)
+        likelyCarrier = try values.decodeIfPresent(LikelyCarrier.self, forKey: .likelyCarrier)
+        providerInputNeeded = try values.decodeIfPresent(ProviderInputNeeded.self, forKey: .providerInputNeeded)
+        nextCheckAt = try values.decodeIfPresent(String.self, forKey: .nextCheckAt)
     }
 }

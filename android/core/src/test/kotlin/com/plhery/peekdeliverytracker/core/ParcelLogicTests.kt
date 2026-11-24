@@ -574,6 +574,43 @@ class ParcelLogicTests {
         assertEquals(CarrierId.GlsCh, needed.inputNeededPrompt?.carrier)
     }
 
+    /**
+     * A JT number nobody answered for, which J&T China shows only with the last 4 digits of a phone: the account's
+     * parcel suggests J&T China with them, on the same terms as a postcode, and asks for nothing else meanwhile.
+     */
+    @Test
+    fun promptsForThePhoneDigitsASuggestedCarrierShowsTheNumberWith() {
+        val packageId = UUID.randomUUID()
+        val json = """
+            {
+              "packages": [{
+                "id": "${packageId.uuidString}",
+                "tracking_number": "JT0805136742918",
+                "label": "Test parcel",
+                "carrier": "unknown",
+                "created_at": "2026-08-01T10:00:00Z",
+                "last_synced_at": "2026-08-01T10:05:00Z",
+                "sync_status": "ok",
+                "carrier_data": { "routing": { "input_suggested": { "carrier": "j-and-t-cn", "field": "phoneDigits" } } },
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        assertEquals(CarrierInputSuggested(CarrierId.JAndTCn, CarrierInputSuggestedField.PhoneDigits), parcel.inputSuggestedPrompt)
+        val catalog = CarrierCatalog(cacheFile = null)
+        assertFalse(parcel.showsMoreWithPhoneDigits(catalog))
+        assertFalse(parcel.showsMoreWithPostcode(catalog))
+        assertNull(parcel.nonTrackingShape)
+
+        // Filed under a carrier, archived or with a scan: nothing suggested.
+        assertNull(parcel.copy(carrier = CarrierId.JAndTCn, phoneDigits = "0123").inputSuggestedPrompt)
+        assertNull(parcel.copy(archivedAt = "2026-08-10T10:00:00Z").inputSuggestedPrompt)
+        val scanned = parcel.copy(trackingEvents = parcel.trackingEvents + event(packageId, TrackingStage.InTransit, "2026-08-10T10:00:00Z"))
+        assertNull(scanned.inputSuggestedPrompt)
+    }
+
     @Test
     fun asksForThePostcodeACheckedParcelsCarrierShowsMoreWith() {
         val catalog = CarrierCatalog(cacheFile = null)

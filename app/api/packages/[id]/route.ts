@@ -8,6 +8,7 @@ import {
   type RouteParameters,
 } from '../../../../src/server/api';
 import { servedOwnParcel } from '../../../../src/server/usualPlace';
+import { clientInputs } from '../../../../src/server/suggestedInputs';
 import { packageLabel } from '../../../../src/server/validation';
 
 interface PackageParameters extends RouteParameters {
@@ -29,7 +30,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   await client.updatePackage(packageId, { label });
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');
-  return json(await servedOwnParcel(client, parcel));
+  return json(await servedOwnParcel(client, parcel, clientInputs(context.request)));
 }, { serviceRequired: true });
 
 export const DELETE = apiRoute<PackageParameters>(async (context) => {

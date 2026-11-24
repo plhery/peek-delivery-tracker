@@ -894,6 +894,26 @@ describe('the postcode another carrier asks for', () => {
     }
   });
 
+  it('tells the owner of a JT lookup nobody knew, from an app that asks for them, which carrier shows it with the phone digits', async () => {
+    const opened = async (inputs?: string, key?: string) => (await read(new NextRequest(`https://delivery.example/api/public/parcels/${linkId}`, {
+      headers: { 'x-real-ip': nextIp(), ...(key ? { 'x-parcel-key': key } : {}), ...(inputs ? { 'x-peek-inputs': inputs } : {}) },
+    }), route(linkId))).json();
+    // J&T China shows its JT numbers only with the last 4 digits of the recipient's or sender's phone.
+    const unknown = { tracking_number: 'JT0805136742918', carrier_data: {}, tracking_events: [] };
+    find({ owner: true }, unknown);
+    expect((await opened('phoneDigits', ownerKey)).link.inputSuggested).toEqual({ carrier: 'j-and-t-cn', field: 'phoneDigits' });
+    // Not to an app from before the input, nor to a viewer.
+    expect((await opened(undefined, ownerKey)).link).not.toHaveProperty('inputSuggested');
+    find({}, unknown);
+    expect((await opened('phoneDigits')).link).not.toHaveProperty('inputSuggested');
+    // Not before the first check, nor once a carrier answered, nor past a postcode suggested.
+    for (const parcel of [{ ...unknown, last_synced_at: null }, { ...unknown, carrier_data: { routing: { confirmed_carrier: 'j-and-t' } } },
+      { ...unknown, carrier_data: { routing: { input_suggested: { carrier: 'mondial-relay', field: 'dpdPostcode' } } } }]) {
+      find({ owner: true }, parcel);
+      expect((await opened('phoneDigits', ownerKey)).link.inputSuggested?.field).not.toBe('phoneDigits');
+    }
+  });
+
   it('asks the carrier first, then files the lookup under it and checks it at once', async () => {
     const claimed = claim();
     const checked = check({ outcome: 'accepted' });

@@ -861,6 +861,35 @@ class AddParcelTest {
         )
     }
 
+    /**
+     * The carrier the check suggests with the phone digits comes before the one the number's shape points to: the
+     * field's help names it, and the parcel goes to it with the digits. Synthetic: J&T Mexico, which a JT number's shape
+     * doesn't point to, to tell the two apart.
+     */
+    @Test
+    fun theCarrierTheCheckSuggestsWithThePhoneDigitsTakesTheParcelWithThem() {
+        show {
+            detections[JT_NUMBER] = CarrierDetectionResponse(
+                JT_NUMBER, carrier = CarrierId.Unknown, asked = listOf(CarrierId.JAndT),
+                inputSuggested = CarrierDetectionInputSuggested(CarrierId.JAndTMx, CarrierDetectionInputSuggestedField.PhoneDigits),
+            )
+        }
+        open()
+        type(JT_NUMBER)
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        val name = CarrierCatalog.shared.info(CarrierId.JAndTMx, AppLanguage.En).displayName
+        compose.onNode(hasText(text("add.requirement.phoneDigitsHelp", mapOf("carrier" to name)))).assertExists()
+        node(ADD_PHONE_DIGITS).performTextInput("0123")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.AdditionRequest(JT_NUMBER, "", CarrierId.JAndTMx, null, null, null, phoneDigits = "0123")),
+            source.additions,
+        )
+    }
+
     /** Without the digits the number is added on automatic, as before. */
     @Test
     fun withoutThePhoneDigitsANumberNobodyKnewIsAddedOnAutomatic() {

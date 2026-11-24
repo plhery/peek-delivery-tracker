@@ -50,6 +50,8 @@ import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
 import com.plhery.peekdeliverytracker.core.api.CarrierServedElsewhere
@@ -356,6 +358,44 @@ class PassNotesTest {
         passParcel = kit.copy(phoneDigits = "0472")
         compose.waitForIdle()
         assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
+    }
+
+    /**
+     * A JT number nobody answered for, which J&T China shows only with the last 4 digits of a phone: the page says so,
+     * and its button opens the editor on J&T China, whose phone digits field shows. A postcode's suggestion keeps its
+     * own words; a parcel with a scan, filed under a carrier or archived is suggested nothing.
+     */
+    @Test
+    fun theCarrierANumberPointsToThatShowsItWithThePhoneDigitsIsSuggestedWithThem() {
+        val suggested = DemoCards.probable().copy(
+            trackingNumber = "JT0805136742918",
+            carrierData = CarrierData(routing = CarrierDataRouting(inputSuggested = CarrierInputSuggested(CarrierId.JAndTCn, CarrierInputSuggestedField.PhoneDigits))),
+        )
+        pass(suggested)
+        val name = identities.displayName(CarrierId.JAndTCn, AppLanguage.En)
+        assertTrue(textExists(localizer.text("detail.phoneDigitsSuggested", mapOf("carrier" to name))))
+        assertFalse(textExists(localizer.text("detail.inputSuggested", mapOf("carrier" to name))))
+        assertFalse(exists(PAGE_PHONE_DIGITS_MORE))
+        compose.onNode(hasText(localizer.text("detail.phoneDigitsAction")) and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PROMPT))).performClick()
+        compose.waitForIdle()
+        assertEquals(listOf<CarrierId?>(CarrierId.JAndTCn), edits)
+
+        val relay = CarrierInputSuggested(CarrierId.MondialRelay, CarrierInputSuggestedField.DpdPostcode)
+        passParcel = suggested.copy(trackingNumber = "99999990", carrierData = CarrierData(routing = CarrierDataRouting(inputSuggested = relay)))
+        compose.waitForIdle()
+        val relayName = identities.displayName(CarrierId.MondialRelay, AppLanguage.En)
+        assertTrue(textExists(localizer.text("detail.inputSuggested", mapOf("carrier" to relayName))))
+        compose.onNode(hasText(localizer.text("detail.inputNeededAction")) and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PROMPT))).assertExists()
+
+        val scan = TrackingEvent(
+            id = UUID.nameUUIDFromBytes("${suggested.id}-scan".toByteArray()), packageId = suggested.id, stage = TrackingStage.InTransit,
+            description = "In transit", occurredAt = DateParser.isoString(CAPTURED.minus(Duration.ofHours(2))),
+        )
+        for (answered in listOf(suggested.copy(trackingEvents = listOf(scan)), suggested.copy(carrier = CarrierId.JAndTCn), suggested.copy(archivedAt = archivedTime))) {
+            passParcel = answered
+            compose.waitForIdle()
+            assertFalse(textExists(localizer.text("detail.phoneDigitsSuggested", mapOf("carrier" to name))))
+        }
     }
 
     /** Moon lamp, its scans made up: each a day and 11 s after the last, each in a new place. */

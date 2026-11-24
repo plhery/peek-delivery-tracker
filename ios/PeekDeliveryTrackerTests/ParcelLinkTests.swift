@@ -48,6 +48,48 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertEqual(looked.package.carrierData, PublicPackageCarrierData())
     }
 
+    /// A link's suggestion of the last 4 digits of a phone, and a carrier check's, decode; one for an input this app
+    /// doesn't know, from a newer service, is left out, and the rest of the answer still decodes.
+    func testAnInputSuggestedDecodesAndOneThisAppDoesNotKnowIsLeftOut() throws {
+        func link(_ field: String) throws -> ParcelLink {
+            try JSONDecoder.deliveryTracker.decode(ParcelLink.self, from: Data("""
+            {"id":"\(linkID)","role":"owner","kind":"lookup","createdAt":"2026-10-01T08:00:00Z","numberShown":true,
+             "canKeep":true,"inputSuggested":{"carrier":"j-and-t-cn","field":"\(field)"}}
+            """.utf8))
+        }
+        XCTAssertEqual(try link("phoneDigits").inputSuggested, ParcelLinkInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        XCTAssertEqual(try link("dpdPostcode").inputSuggested?.field, .dpdPostcode)
+        let unknown = try link("somethingNew")
+        XCTAssertNil(unknown.inputSuggested)
+        XCTAssertEqual(unknown.id, linkID)
+        XCTAssertEqual(unknown.role, .owner)
+        XCTAssertTrue(unknown.canKeep)
+
+        func answer(_ field: String) throws -> CarrierDetectionResponse {
+            try JSONDecoder.deliveryTracker.decode(CarrierDetectionResponse.self, from: Data("""
+            {"trackingNumber":"JT0805136742918","carrier":"unknown","asked":["j-and-t"],
+             "inputSuggested":{"carrier":"j-and-t-cn","field":"\(field)"}}
+            """.utf8))
+        }
+        XCTAssertEqual(try answer("phoneDigits").inputSuggested, CarrierDetectionInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        let unknownAnswer = try answer("somethingNew")
+        XCTAssertNil(unknownAnswer.inputSuggested)
+        XCTAssertEqual(unknownAnswer.trackingNumber, "JT0805136742918")
+        XCTAssertEqual(unknownAnswer.carrier, .unknown)
+        XCTAssertEqual(unknownAnswer.asked, [.jAndT])
+
+        // The owner's parcel behind the link carries it as an account's does; a viewer's carries none.
+        let package = PublicPackage(id: UUID(), trackingNumber: "JT0805136742918", label: "", carrier: .unknown,
+                                    createdAt: "2026-10-01T08:00:00Z", syncStatus: .ok, carrierData: PublicPackageCarrierData(),
+                                    notificationsMuted: false, trackingEvents: [])
+        XCTAssertEqual(Parcel(shared: package, link: try link("phoneDigits")).inputSuggestedPrompt,
+                       CarrierInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        XCTAssertNil(Parcel(shared: package, link: unknown).carrierData?.routing)
+        var viewer = try link("phoneDigits")
+        viewer.role = .viewer
+        XCTAssertNil(Parcel(shared: package, link: viewer).inputSuggestedPrompt)
+    }
+
     func testClaimRequestSendsOnlyTheLinkAndItsSuggestedName() throws {
         let named = try JSONEncoder.deliveryTracker.encode(ClaimParcelsRequest(links: [ClaimParcelLink(id: linkID, label: "Moon lamp")]))
         XCTAssertEqual(String(decoding: named, as: UTF8.self), #"{"links":[{"id":"k7Qm2xHd9RtW","label":"Moon lamp"}]}"#)
@@ -644,6 +686,66 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertEqual(request.value(forHTTPHeaderField: "X-Parcel-Key"), key)
         XCTAssertFalse(request.httpShouldHandleCookies)
         XCTAssertNil(request.value(forHTTPHeaderField: "Authorization"))
+    }
+
+    /// Every request to the service names the inputs this app can ask a reader for (`X-Peek-Inputs`), without an
+    /// account or signed in: the service suggests the last 4 digits of a phone only to apps that name them.
+    @MainActor func testEveryRequestToTheServiceNamesTheInputsThisAppCanAskFor() async throws {
+        let transport = LinkTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let configuration = LinkTestURLProtocol.configuration
+        let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
+        let signedIn = try JSONEncoder.deliveryTracker.encode(AuthSession(
+            accessToken: "access", tokenType: "bearer", expiresIn: 3600,
+            expiresAt: Int(Date().timeIntervalSince1970) + 3600, refreshToken: "refresh", user: user
+        ))
+        let parcel = try JSONEncoder.deliveryTracker.encode(try fixture().publicParcel)
+        let lookup = try JSONEncoder.deliveryTracker.encode(try fixture().publicLookup)
+        let detection = Data(#"{"trackingNumber":"JT0805136742918","carrier":"unknown","inputSuggested":{"carrier":"j-and-t-cn","field":"phoneDigits"}}"#.utf8)
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: []))
+        nonisolated(unsafe) var requests: [URLRequest] = []
+        LinkTestURLProtocol.handler = { request in
+            let path = request.url?.path ?? ""
+            guard path.hasPrefix("/api/") else { return (200, [:], signedIn) }
+            requests.append(request)
+            switch (request.httpMethod ?? "GET", path) {
+            case (_, "/api/carriers/detect"), (_, "/api/public/detect"): return (200, [:], detection)
+            case ("GET", "/api/packages"): return (200, [:], list)
+            case ("POST", "/api/public/parcels"): return (201, [:], lookup)
+            default: return (200, [:], parcel)
+            }
+        }
+        let client = DeviceParcelClient.api(configuration: configuration, transport: transport)
+        let key = String(repeating: "K", count: 43)
+
+        _ = try await DeliveryAPIClient.publicParcel(linkID: linkID, configuration: configuration, transport: transport)
+        _ = try await client.lookup(PublicLookupRequest(trackingNumber: "JT0805136742918"))
+        _ = try await client.read(linkID, key, .shown)
+        let answer = try await client.detect(CarrierDetectionRequest(trackingNumber: "JT0805136742918"))
+        XCTAssertEqual(answer.inputSuggested, CarrierDetectionInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        _ = try await client.changeCarrier(linkID, key, ParcelLinkCarrierRequest(carrier: .jAndTCn, phoneDigits: "0123"))
+
+        let session = SessionStore(configuration: configuration, persistence: LinkTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        let api = DeliveryAPIClient(configuration: configuration, session: session, transport: transport)
+        _ = try await api.listPackages()
+        let signedInAnswer = try await api.detectCarrier(trackingNumber: "JT0805136742918")
+        XCTAssertEqual(signedInAnswer.inputSuggested?.field, .phoneDigits)
+
+        XCTAssertEqual(requests.map { "\($0.httpMethod ?? "") \($0.url?.path ?? "")" }, [
+            "GET /api/public/parcels/\(linkID)",
+            "POST /api/public/parcels",
+            "GET /api/public/parcels/\(linkID)",
+            "POST /api/public/detect",
+            "PATCH /api/public/parcels/\(linkID)/carrier",
+            "GET /api/packages",
+            "POST /api/carriers/detect",
+        ])
+        for request in requests {
+            XCTAssertEqual(request.value(forHTTPHeaderField: "X-Peek-Inputs"), "phoneDigits", request.url?.path ?? "")
+        }
+        XCTAssertEqual(URLRequest.peekInputs, "phoneDigits")
     }
 
     @MainActor func testALinkReadWithNothingOnScreenSaysSo() async throws {

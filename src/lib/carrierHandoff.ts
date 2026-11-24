@@ -9,6 +9,8 @@ import { languagePath, type Locale } from './locale';
  * parcel's page notes its number this way too, to `pick` its carrier: the
  * landing then opens its carrier picker instead of looking the number up, and
  * the carrier chosen goes to the page's own `link` rather than to a new one.
+ * A page that names the `carrier` to pick has it chosen in the picker's place,
+ * with its field ready (J&T China's, for the last 4 digits of a phone).
  */
 export const CARRIER_HANDOFF_STORAGE_KEY = 'sdt.peek.carrierHandoff.v1'; // gitleaks:allow -- sessionStorage name, not a credential
 // A note this old was left by a landing that never opened: it is not looked up on a later visit.
@@ -31,7 +33,7 @@ export interface CarrierHandoff {
   pick: boolean;
   /** The lookup the carrier is picked for, whose owner key this device holds. */
   link?: string;
-  /** The carrier whose page the text was typed on, never with `pick`. */
+  /** The carrier whose page the text was typed on or, with `pick`, the one the parcel's page has chosen. */
   carrier?: string;
 }
 
@@ -39,7 +41,7 @@ export interface CarrierHandoff {
 export function writeCarrierHandoff(text: string, now = Date.now(), { pick = false, link, carrier }: { pick?: boolean; link?: string; carrier?: string } = {}): void {
   try {
     window.sessionStorage.setItem(CARRIER_HANDOFF_STORAGE_KEY, JSON.stringify({
-      text: text.trim().slice(0, MAX_LENGTH), at: now, ...(pick ? { pick, ...(link ? { link } : {}) } : carrier ? { carrier } : {}),
+      text: text.trim().slice(0, MAX_LENGTH), at: now, ...(pick ? { pick, ...(link ? { link } : {}) } : {}), ...(carrier ? { carrier } : {}),
     }));
   } catch { /* The landing opens anyway, and the number can be typed again. */ }
 }
@@ -56,7 +58,7 @@ export function takeCarrierHandoff(now = Date.now()): CarrierHandoff | null {
     const pick = note.pick === true;
     return {
       text: note.text.trim().slice(0, MAX_LENGTH), pick, ...(pick && typeof note.link === 'string' ? { link: note.link } : {}),
-      ...(!pick && typeof note.carrier === 'string' && CARRIER_ID.test(note.carrier) ? { carrier: note.carrier } : {}),
+      ...(typeof note.carrier === 'string' && CARRIER_ID.test(note.carrier) ? { carrier: note.carrier } : {}),
     };
   } catch {
     return null;

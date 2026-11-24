@@ -4,6 +4,7 @@ import { verifyLookupRequest } from '../../../../src/server/lookupVerification';
 import { recordPublicDetection } from '../../../../src/server/metrics';
 import { claimDetection, secondsUntilUtcMidnight } from '../../../../src/server/publicParcels';
 import { lookupCountry, withLookupCountry } from '../../../../src/server/lookupCountry';
+import { clientInputs, detectionWithInputs } from '../../../../src/server/suggestedInputs';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -17,7 +18,7 @@ export const runtime = 'nodejs';
 export const POST = apiRoute(async (context) => {
   const { raw, value: body } = await readJsonBody(context.request);
   const country = lookupCountry(context.request, body.lookupCountryHint);
-  return json(withLookupCountry(await detectCarrier(body, async () => {
+  const answer = await detectCarrier(body, async () => {
     const verified = await verifyLookupRequest(context.request, requireService(context), raw);
     const now = new Date();
     const allowance = await claimDetection(requireService(context), clientIp(context.request), now, verified);
@@ -26,7 +27,8 @@ export const POST = apiRoute(async (context) => {
       throw new HttpError(429, 'No carrier checks are left for today.', { 'Retry-After': String(secondsUntilUtcMidnight(now)) });
     }
     recordPublicDetection('asked');
-  }, context.request.signal, requireService(context), country), country));
+  }, context.request.signal, requireService(context), country);
+  return json(withLookupCountry(detectionWithInputs(answer, clientInputs(context.request)), country));
 }, {
   authenticated: false,
   capability: true,

@@ -444,6 +444,13 @@ describe('a carrier that shows the number with the phone’s digits', () => {
     expect(filled.job).toEqual({ type: 'lookup', carrier: 'j-and-t-cn', input: { trackingNumber: JT, carrier: 'j-and-t-cn', phoneDigits: '0123' } });
   });
 
+  it('offers the carrier the server names for the digits over the one the shape points to', () => {
+    // Synthetic: the server's word decides, even for a carrier the app's catalog would not pick.
+    const named = run([pasted(JT), { type: 'answer', answer: { trackingNumber: JT, carrier: 'unknown', asked: ['j-and-t'],
+      inputSuggested: { carrier: 'j-and-t-mx', field: 'phoneDigits' } } }]);
+    expect(survey(named)).toMatchObject({ suggested: 'j-and-t-mx', inputCarrier: 'j-and-t-mx', fields: [{ field: 'phoneDigits', optional: true }] });
+  });
+
   it('asks nothing once a carrier knows the number, or for a carrier chosen by hand', () => {
     const known = run([pasted(JT), { type: 'answer', answer: { trackingNumber: JT, carrier: 'j-and-t', asked: ['j-and-t'] } }]);
     expect(survey(known)).toMatchObject({ suggested: null, carrier: 'j-and-t', fields: [] });

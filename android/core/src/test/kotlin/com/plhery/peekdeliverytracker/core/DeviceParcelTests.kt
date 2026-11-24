@@ -556,6 +556,8 @@ class DeviceParcelTests {
         assertEquals("/api/public/parcels/22222222222A/carrier", request.path)
         assertEquals(key, request.headers["X-Parcel-Key"])
         assertEquals("1", request.headers["X-Native-Verification"])
+        // The inputs the app can ask for, so that the link's answer may suggest phone digits.
+        assertEquals("phoneDigits", request.headers["X-Peek-Inputs"])
         val body = Json.parseToJsonElement(request.body!!.decodeToString()).jsonObject
         assertEquals(setOf("carrier", "lookupCountryHint"), body.keys)
 
@@ -644,6 +646,43 @@ class DeviceParcelTests {
         assertEquals(CarrierId.MondialRelay, parcel.carrier)
         assertNull(parcel.inputSuggestedPrompt)
         val viewer = reader("22222222222B").copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.MondialRelay, ParcelLinkInputSuggestedField.DpdPostcode))
+        assertNull(Parcel(shared = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null), link = viewer).inputSuggestedPrompt)
+    }
+
+    /**
+     * The carrier a lookup's link suggests with the last 4 digits of a phone (J&T China for a JT number) shows on the
+     * parcel as the postcode's does; its digits move the link to that carrier (`PATCH …/carrier`), as any carrier's
+     * input does, never through the postcode's route. A viewer is offered nothing.
+     */
+    @Test
+    fun thePhoneDigitsALinkSuggestsShowOnTheParcelAndMoveTheLink() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        val calls = Calls()
+        val number = "JT0805136742918"
+        val suggesting = { linkId: String ->
+            link(linkId).copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.JAndTCn, ParcelLinkInputSuggestedField.PhoneDigits))
+        }
+        val device = device(
+            client(
+                calls,
+                lookup = PublicLookupResponse(link = suggesting("22222222222A"), key = key, parcel = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null)),
+                postcode = { _, _ -> fail("The digits went to the postcode's route"); null },
+                move = { linkId, change -> PublicParcelResponse(link = link(linkId), parcel = pkg(id, number = number, carrier = change.carrier)) },
+            ),
+            storage, this,
+        )
+        device.add(CreatePackageRequest(trackingNumber = number, label = ""))
+        assertEquals(CarrierInputSuggested(CarrierId.JAndTCn, CarrierInputSuggestedField.PhoneDigits), device.list().single().inputSuggestedPrompt)
+        assertEquals(CarrierId.JAndTCn, storage.parcels.single().parcel.carrierData?.routing?.inputSuggested?.carrier)
+
+        val parcel = device.changeCarrier(id = id, carrier = CarrierId.JAndTCn, trackingUrl = null, dpdPostcode = null, phoneDigits = "0123")
+
+        assertEquals(listOf("lookup $number -", "carrier 22222222222A k j-and-t-cn"), calls.all)
+        assertEquals(listOf(null, "0123"), calls.lookupPhoneDigits)
+        assertEquals(CarrierId.JAndTCn, parcel.carrier)
+        assertNull(parcel.inputSuggestedPrompt)
+        val viewer = reader("22222222222B").copy(inputSuggested = ParcelLinkInputSuggested(CarrierId.JAndTCn, ParcelLinkInputSuggestedField.PhoneDigits))
         assertNull(Parcel(shared = pkg(id, number = number, carrier = CarrierId.Unknown, stage = null), link = viewer).inputSuggestedPrompt)
     }
 
@@ -917,6 +956,7 @@ class DeviceParcelTests {
             transport.requests.map { it.body?.decodeToString() },
         )
         assertEquals(listOf("/api/public/detect", "/api/public/detect"), transport.requests.map { it.path })
+        assertEquals(listOf("phoneDigits", "phoneDigits"), transport.requests.map { it.headers["X-Peek-Inputs"] })
     }
 
     @Test
@@ -1872,6 +1912,7 @@ class DeviceParcelTests {
         val lookup = transport.requests.first { it.method == "POST" && it.path == "/api/public/parcels" }
         assertEquals(30.0, lookup.timeout, 0.0)
         assertFalse(lookup.handlesCookies)
+        assertEquals("phoneDigits", lookup.header("X-Peek-Inputs"))
     }
 
     @Test

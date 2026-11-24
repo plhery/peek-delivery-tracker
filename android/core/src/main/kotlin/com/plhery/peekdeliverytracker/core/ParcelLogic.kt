@@ -161,7 +161,11 @@ val Parcel.providerRefusedPostcode: String?
         return refused.takeIf { it == dpdPostcode?.trimmingWhitespacesAndNewlines() }
     }
 
-/** Nobody has answered for the number yet, and its shape points to a carrier that needs the delivery postcode before it can be asked about it. */
+/**
+ * Nobody has answered for the number yet, and its shape points to a carrier that needs the delivery postcode before it
+ * can be asked about it (`dpdPostcode`), or that shows it only with the last 4 digits of the recipient's or sender's
+ * phone (`phoneDigits`, J&T China's JT numbers).
+ */
 val Parcel.inputSuggestedPrompt: CarrierInputSuggested?
     get() {
         if (inputNeededPrompt != null) return null

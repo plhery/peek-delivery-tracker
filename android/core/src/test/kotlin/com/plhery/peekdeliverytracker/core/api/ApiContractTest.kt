@@ -5,6 +5,7 @@ import java.util.UUID
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertThrows
 import org.junit.Test
 
@@ -90,6 +91,57 @@ class ApiContractTest {
         val response = ApiJson.decodeFromString<PackageListResponse>(json)
 
         assertEquals(emptyList<TrackingEvent>(), response.packages.first().trackingEvents)
+    }
+
+    /**
+     * The input a carrier may find a parcel with reads in each of the three places the service suggests it: an account's
+     * parcel, a lookup's link and a detection's answer. One added after a release reads as none, and the rest still reads.
+     */
+    @Test
+    fun readsASuggestedInputAndAnUnknownOneAsNone() {
+        fun row(field: String) = """
+            {
+              "packages": [{
+                "id": "${UUID.randomUUID()}",
+                "tracking_number": "JT0805136742918",
+                "label": "Synthetic parcel",
+                "carrier": "unknown",
+                "created_at": "2026-11-20T10:00:00Z",
+                "sync_status": "ok",
+                "carrier_data": { "routing": { "input_suggested": { "carrier": "j-and-t-cn", "field": "$field" }, "next_check_at": "2026-11-21T10:00:00Z" } },
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """
+        val row = ApiJson.decodeFromString<PackageListResponse>(row("phoneDigits")).packages.single()
+        assertEquals(CarrierInputSuggested(CarrierId.JAndTCn, CarrierInputSuggestedField.PhoneDigits), row.carrierData?.routing?.inputSuggested)
+        val newer = ApiJson.decodeFromString<PackageListResponse>(row("somethingNew")).packages.single()
+        assertNull(newer.carrierData?.routing?.inputSuggested)
+        assertEquals("2026-11-21T10:00:00Z", newer.carrierData?.routing?.nextCheckAt)
+        assertEquals("Synthetic parcel", newer.label)
+
+        fun link(field: String) = """
+            {"id":"22222222222A","role":"owner","kind":"lookup","createdAt":"2026-11-20T10:00:00Z","numberShown":true,
+             "canKeep":true,"showNumber":false,"gift":false,"shared":true,"inputSuggested":{"carrier":"j-and-t-cn","field":"$field"}}
+        """
+        assertEquals(
+            ParcelLinkInputSuggested(CarrierId.JAndTCn, ParcelLinkInputSuggestedField.PhoneDigits),
+            ApiJson.decodeFromString<ParcelLink>(link("phoneDigits")).inputSuggested,
+        )
+        val newerLink = ApiJson.decodeFromString<ParcelLink>(link("somethingNew"))
+        assertNull(newerLink.inputSuggested)
+        assertEquals(ParcelLinkRole.Owner, newerLink.role)
+
+        fun answer(field: String) =
+            """{"trackingNumber":"JT0805136742918","carrier":"unknown","inputSuggested":{"carrier":"j-and-t-cn","field":"$field"}}"""
+        assertEquals(
+            CarrierDetectionInputSuggested(CarrierId.JAndTCn, CarrierDetectionInputSuggestedField.PhoneDigits),
+            ApiJson.decodeFromString<CarrierDetectionResponse>(answer("phoneDigits")).inputSuggested,
+        )
+        val newerAnswer = ApiJson.decodeFromString<CarrierDetectionResponse>(answer("somethingNew"))
+        assertNull(newerAnswer.inputSuggested)
+        assertEquals("JT0805136742918", newerAnswer.trackingNumber)
     }
 
     @Test

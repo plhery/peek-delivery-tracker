@@ -63,6 +63,7 @@ import com.plhery.peekdeliverytracker.core.WorldAtlas
 import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.allAlertsMuted
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -588,9 +589,10 @@ internal class CarrierPromptCopy(val text: String, val action: String?, val carr
 
 /**
  * The first of what the page asks of the parcel's carrier: the delivery postcode its carrier, or the one its number
- * points to, needs (`inputNeededPrompt`), or would like (`inputSuggestedPrompt`); then the carrier the number probably
- * travels with (B-S73), with a way to choose another once it has waited a week; then that the number looks like a
- * shop's order number, may be mistyped or is too short (B-S74). Null when it asks nothing.
+ * points to, needs (`inputNeededPrompt`), or the postcode or the last 4 digits of a phone the one its number points to
+ * would like (`inputSuggestedPrompt`), the button opening the editor on that carrier with its field; then the carrier
+ * the number probably travels with (B-S73), with a way to choose another once it has waited a week; then that the
+ * number looks like a shop's order number, may be mistyped or is too short (B-S74). Null when it asks nothing.
  */
 internal fun carrierPrompt(
     parcel: Parcel,
@@ -606,7 +608,12 @@ internal fun carrierPrompt(
         val key = if (it.carrier == parcel.carrier) "detail.carrierInputNeeded" else "detail.inputNeeded"
         return CarrierPromptCopy(named(key, it.carrier), action, it.carrier)
     }
-    parcel.inputSuggestedPrompt?.let { return CarrierPromptCopy(named("detail.inputSuggested", it.carrier), action, it.carrier) }
+    parcel.inputSuggestedPrompt?.let {
+        if (it.field == CarrierInputSuggestedField.PhoneDigits) {
+            return CarrierPromptCopy(named("detail.phoneDigitsSuggested", it.carrier), localizer.text("detail.phoneDigitsAction"), it.carrier)
+        }
+        return CarrierPromptCopy(named("detail.inputSuggested", it.carrier), action, it.carrier)
+    }
     parcel.likelyCarrierPrompt(now)?.let {
         val text = named(if (it.waited) "link.likely.week" else "link.likely.body", it.carrier)
         return CarrierPromptCopy(text, if (it.waited) localizer.text("link.likely.choose") else null)

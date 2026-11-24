@@ -490,6 +490,19 @@ describe('shipment details', () => {
     expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
   });
 
+  it('offers the carrier a number points to that shows it only with the last 4 digits of a phone', async () => {
+    // JT and 13 digits fit J&T and J&T China, which shows them only with the phone's digits.
+    const view = show({ carrier: 'unknown', trackingNumber: 'JT0805136742918', inputSuggested: { carrier: 'j-and-t-cn', field: 'phoneDigits' } });
+    expect(screen.getByText('J&T Express China may have this parcel. Add the last 4 digits of the recipient’s or sender’s phone to track it.')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Add the digits' }));
+    expect(screen.getByRole('button', { name: 'Carrier J&T Express China' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Last 4 digits of the phone number/ })).toBeInTheDocument();
+    view.unmount();
+    show({ carrier: 'unknown', trackingNumber: 'JT0805136742918', inputSuggested: { carrier: 'j-and-t-cn', field: 'phoneDigits' },
+      events: [{ id: 'event', parcelId: 'parcel', stage: 'registered', description: 'Label created', occurredAt: '2026-09-10T10:00:00Z' }] });
+    expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
+  });
+
   it('names the carrier a number’s own format points to, and after a week offers to choose another', async () => {
     const day = 24 * 3_600_000;
     const view = show({ carrier: 'unknown', trackingNumber: 'EOB10293847561029384', likelyCarrier: { carrier: 'brt', since: new Date(Date.now() - day).toISOString() } });

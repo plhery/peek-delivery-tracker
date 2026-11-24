@@ -5,6 +5,7 @@ import { Icon, ParcelIllustration } from '../components/Icon';
 import { GuestSettings } from '../components/GuestSettings';
 import { ParcelMapSheet, useParcelRoute } from '../components/ParcelMap';
 import type { Rect } from '../components/map/WorldMap';
+import type { CarrierId } from '../types';
 // The journal and the pickup card keep their styles with the deliveries' detail.
 import '../components/ParcelDetail.css';
 import { PeekLockup } from '../components/PeekMark';
@@ -45,7 +46,7 @@ import { MaintenanceStrip, maintenanceText } from '../components/MaintenanceStri
 import { useNow, useOffline, useWideLayout } from './parcel/hooks';
 import { AccountRow, AddToDeliveries, AlreadyFollowed, KeepSheet, PassportTeaser, SharedWithYou } from './parcel/Keep';
 import { OtherParcels } from './parcel/OtherParcels';
-import { PostcodeAsked, PostcodeSheet, type PostcodeAsk } from './parcel/Postcode';
+import { PhoneDigitsSuggested, PostcodeAsked, PostcodeSheet, type PostcodeAsk } from './parcel/Postcode';
 import { RouteMap } from './parcel/RouteMap';
 import { SampleInvitation, SampleNote } from './parcel/Sample';
 import { copyText, shareParcelLink } from './parcel/share';
@@ -457,7 +458,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
 
   // The postcode another carrier holding the parcel asks for, or its own, or the one a carrier the number points to may
   // have it with: the owner's to add, with the key.
-  const asked = key ? link.inputNeeded ?? link.inputSuggested ?? null : null;
+  const asked = key ? link.inputNeeded ?? (link.inputSuggested?.field === 'dpdPostcode' ? link.inputSuggested : null) : null;
+  // Or the carrier the number points to that shows it only with the last 4 digits of a phone: the front door takes the
+  // number with that carrier chosen, its field ready, and moves this link to it.
+  const digitsSuggested = key && !link.inputNeeded && link.inputSuggested?.field === 'phoneDigits' ? link.inputSuggested.carrier : null;
   const ask: PostcodeAsk = !link.inputNeeded ? 'suggested' : asked?.carrier === parcel.carrier ? 'own' : 'other';
   const [addingPostcode, setAddingPostcode] = useState(false);
 
@@ -538,10 +542,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // The sample's way back to the landing: at its own address for someone signed in, whose `/` is their deliveries.
   const landingPath = signedIn ? LANDING_PATH : '/';
   const toLanding = () => { if (signedIn) openLanding(); else leave(); };
-  // The front door takes the number with its carrier picker open, and moves this link to the carrier chosen.
-  const chooseCarrier = () => {
+  // The front door takes the number with its carrier picker open, or with `carrier` chosen, and moves this link to
+  // the carrier chosen.
+  const chooseCarrier = (carrier?: CarrierId) => {
     trackAction('parcel-link-choose-carrier');
-    writeCarrierHandoff(parcel.trackingNumber, Date.now(), { pick: true, link: linkId });
+    writeCarrierHandoff(parcel.trackingNumber, Date.now(), { pick: true, link: linkId, ...(carrier ? { carrier } : {}) });
     toLanding();
   };
   const invitation = sample && <SampleInvitation carrier={displayed} onTrack={onHome} onSignIn={visitor ? signInToKeep : undefined} />;
@@ -580,10 +585,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {wrapped && <GiftSurprise />}
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}
         {asked && <PostcodeAsked carrier={asked.carrier} ask={ask} onAdd={() => setAddingPostcode(true)} />}
+        {digitsSuggested && <PhoneDigitsSuggested carrier={digitsSuggested} onAdd={() => chooseCarrier(digitsSuggested)} />}
         {owner && link.shared === false && <p className="peekp-shared"><Glyph name="info" />{t('share.stopped.owner')}</p>}
         {/* The likely carrier's words say Peek keeps asking it already; no carrier will answer for an order number. */}
         {!carrierKnown && !placeholder && !likely && !shape && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
-        {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={chooseCarrier}>
+        {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={() => chooseCarrier()}>
           {t(likely ? 'link.likely.choose' : 'link.chooseCarrier')}</button>}
         {signedIn && !followed && canKeep && <AddToDeliveries busy={adding || pendingId === linkId} error={addError && t(addError)} onAdd={() => void add()} />}
         {!afterwards && <Actions name={name} ping={ping}

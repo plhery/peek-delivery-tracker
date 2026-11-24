@@ -607,6 +607,85 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(needed.inputNeededPrompt?.carrier, .glsCh)
     }
 
+    /// A JT number nobody answered for, which J&T China shows only with the last 4 digits of a phone: the parcel's page
+    /// asks for them under the same conditions as for a suggested postcode, and nothing else asks meanwhile. The number
+    /// is synthetic.
+    func testPromptsForThePhoneDigitsOfASuggestedCarrierOnlyWhileNobodyAnsweredForTheNumber() throws {
+        let catalog = CarrierCatalog.shared
+        let packageID = UUID()
+        let json = """
+        {
+          "packages": [{
+            "id": "\(packageID.uuidString)",
+            "tracking_number": "JT0805136742918",
+            "label": "Test parcel",
+            "carrier": "unknown",
+            "created_at": "2026-08-01T10:00:00Z",
+            "last_synced_at": "2026-08-01T10:05:00Z",
+            "sync_status": "waiting",
+            "carrier_data": { "routing": { "input_suggested": { "carrier": "j-and-t-cn", "field": "phoneDigits" } } },
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        XCTAssertEqual(parcel.carrierData?.routing?.inputSuggested, CarrierInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        XCTAssertEqual(parcel.inputSuggestedPrompt, CarrierInputSuggested(carrier: .jAndTCn, field: .phoneDigits))
+        XCTAssertNil(parcel.inputNeededPrompt)
+        XCTAssertNil(parcel.nonTrackingShape)
+        XCTAssertFalse(parcel.showsMoreWithPostcode(catalog))
+        XCTAssertFalse(parcel.showsMoreWithPhoneDigits(catalog))
+        // J&T China's field for the number, which the carrier change opened on it shows.
+        XCTAssertEqual(catalog.requirements(for: .jAndTCn, trackingNumber: parcel.trackingNumber).map(\.field), [.phoneDigits])
+
+        // Filed under a carrier, archived, with a scan, or once a carrier asks for the postcode itself: nothing suggested.
+        var filed = parcel
+        filed.carrier = .jAndTCn
+        XCTAssertNil(filed.inputSuggestedPrompt)
+        var archived = parcel
+        archived.archivedAt = "2026-08-10T10:00:00Z"
+        XCTAssertNil(archived.inputSuggestedPrompt)
+        var scanned = parcel
+        scanned.trackingEvents.append(event(packageID, .inTransit, "2026-08-10T10:00:00Z"))
+        XCTAssertNil(scanned.inputSuggestedPrompt)
+        var needed = parcel
+        needed.carrierData?.routing?.inputNeeded = CarrierInputNeeded(carrier: .glsCh, field: .dpdPostcode)
+        XCTAssertNil(needed.inputSuggestedPrompt)
+        XCTAssertEqual(needed.inputNeededPrompt?.carrier, .glsCh)
+    }
+
+    /// A suggestion for an input this app doesn't know, from a newer service, is left out: the parcel and the rest of its
+    /// routing still decode.
+    func testAnInputSuggestedThatThisAppDoesNotKnowLeavesTheParcelAsItWas() throws {
+        let packageID = UUID()
+        let json = """
+        {
+          "packages": [{
+            "id": "\(packageID.uuidString)",
+            "tracking_number": "JT0805136742918",
+            "label": "Test parcel",
+            "carrier": "unknown",
+            "created_at": "2026-08-01T10:00:00Z",
+            "sync_status": "waiting",
+            "carrier_data": { "routing": {
+              "input_suggested": { "carrier": "j-and-t-cn", "field": "somethingNew" },
+              "likely_carrier": { "carrier": "j-and-t", "since": "2026-08-01T10:00:00Z" }
+            } },
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        XCTAssertEqual(parcel.id, packageID)
+        XCTAssertEqual(parcel.trackingNumber, "JT0805136742918")
+        XCTAssertNil(parcel.carrierData?.routing?.inputSuggested)
+        XCTAssertNil(parcel.inputSuggestedPrompt)
+        XCTAssertEqual(parcel.carrierData?.routing?.likelyCarrier?.carrier, .jAndT)
+        XCTAssertEqual(parcel.likelyCarrier, .jAndT)
+    }
+
     func testAsksForThePostcodeACheckedParcelsCarrierShowsMoreWith() throws {
         let catalog = CarrierCatalog(cacheURL: nil)
         let json = """

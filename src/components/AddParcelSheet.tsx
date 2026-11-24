@@ -263,10 +263,12 @@ export function AddParcelSheet({
     && currentRecognition?.inputSuggested?.field === 'dpdPostcode' && ['none', 'unasked', 'failed'].includes(check.status)
     ? currentRecognition.inputSuggested.carrier : undefined;
   // In the same way, a number nobody knew whose shape one carrier shows only with the last 4 digits of a phone (J&T
-  // China's JT numbers) gets that carrier's field, optional, and goes to it only with the digits.
+  // China's JT numbers) gets that carrier's field, optional, and goes to it only with the digits: the carrier the
+  // server suggests, or the one the shape points to when the server was not asked.
   const phoneSuggested = selectedCarrier === 'auto' && !amazonNumber && resolvedCarrier === 'unknown' && !suggested
     && ['none', 'unasked', 'failed'].includes(check.status)
-    ? phoneDigitsCandidate(parsedTracking.candidates, trackingNumber) : undefined;
+    ? currentRecognition?.inputSuggested?.field === 'phoneDigits' ? currentRecognition.inputSuggested.carrier
+      : phoneDigitsCandidate(parsedTracking.candidates, trackingNumber) : undefined;
   // The carrier the fields are for.
   const inputCarrier = suggested ?? phoneSuggested ?? resolvedCarrier;
   const chosenCountry = carrier ? postcodeCountryChoices[inputCarrier] : undefined;

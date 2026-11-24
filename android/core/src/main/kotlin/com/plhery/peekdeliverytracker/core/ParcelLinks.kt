@@ -102,9 +102,9 @@ fun Parcel(shared: PublicPackage): Parcel {
 /**
  * The parcel behind a link this phone follows, as [Parcel] shows it, with the delivery postcode the link asks its owner
  * for (`link.inputNeeded`, never a viewer's): another carrier holds the parcel, or its own can't find it without one.
- * Otherwise with the carrier its number points to that may have it and can't be asked without the postcode
- * (`link.inputSuggested`, the owner's too). The parcel's page asks for it as an account's does, and
- * [DeviceParcels.changeCarrier] gives it.
+ * Otherwise with the carrier its number points to that may have it and can't be asked without the postcode, or shows
+ * it only with the last 4 digits of a phone (`link.inputSuggested`, the owner's too). The parcel's page asks for it as
+ * an account's does, and [DeviceParcels.changeCarrier] gives it.
  */
 fun Parcel(shared: PublicPackage, link: ParcelLink): Parcel {
     val parcel = Parcel(shared = shared)
@@ -120,6 +120,7 @@ fun Parcel(shared: PublicPackage, link: ParcelLink): Parcel {
     val suggested = link.inputSuggested ?: return parcel
     val field = when (suggested.field) {
         ParcelLinkInputSuggestedField.DpdPostcode -> CarrierInputSuggestedField.DpdPostcode
+        ParcelLinkInputSuggestedField.PhoneDigits -> CarrierInputSuggestedField.PhoneDigits
     }
     return parcel.copy(carrierData = data.copy(routing = routing.copy(inputSuggested = CarrierInputSuggested(carrier = suggested.carrier, field = field))))
 }

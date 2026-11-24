@@ -187,6 +187,7 @@ struct DeviceParcelClient: Sendable {
             request.httpMethod = method
             request.httpShouldHandleCookies = false
             request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.namePeekInputs()
             if let key { request.setValue(key, forHTTPHeaderField: "X-Parcel-Key") }
             if let body {
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -864,8 +865,10 @@ final class DeviceParcels {
         let given = { (value: String?) in value?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty }
         // The postcode the link asks for, or its suggested carrier may have the parcel with, given alone for that
         // carrier, goes to the link: the service tries it with the carrier first, and one it refuses changes nothing.
+        // The phone digits a suggested carrier shows the parcel with move the link to it, as any other change does.
+        let suggestsPostcode = entry.parcel.inputSuggestedPrompt.map { $0.carrier == carrier && $0.field == .dpdPostcode } ?? false
         if let give = client.addPostcode, let postcode = given(dpdPostcode),
-           entry.parcel.inputNeeded?.carrier == carrier || entry.parcel.inputSuggestedPrompt?.carrier == carrier,
+           entry.parcel.inputNeeded?.carrier == carrier || suggestsPostcode,
            given(trackingURL) == nil, given(phoneDigits) == nil,
            let response = try await give(entry.linkID, key, ParcelLinkPostcodeRequest(
                carrier: carrier, postcode: postcode, postcodeCountry: dpdPostcodeCountry

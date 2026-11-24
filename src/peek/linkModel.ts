@@ -241,12 +241,13 @@ export function parcelLinkView(response: ApiPublicParcelResponse): ParcelLinkVie
       canKeep: link.canKeep === true,
       gift: link.gift === true,
       ...(link.giftWords ? { giftWords: link.giftWords } : {}),
-      // The postcode another carrier asks for, or the one a carrier the number points to may have the parcel with,
-      // which only the owner can add.
+      // The postcode another carrier asks for, or the postcode or phone digits a carrier the number points to may have
+      // the parcel with, which only the owner can add.
       ...(link.role === 'owner' && link.inputNeeded?.field === 'dpdPostcode' && typeof link.inputNeeded.carrier === 'string'
         ? { inputNeeded: { carrier: link.inputNeeded.carrier, field: 'dpdPostcode' as const } }
-        : link.role === 'owner' && link.inputSuggested?.field === 'dpdPostcode' && typeof link.inputSuggested.carrier === 'string'
-          ? { inputSuggested: { carrier: link.inputSuggested.carrier, field: 'dpdPostcode' as const } } : {}),
+        : link.role === 'owner' && (link.inputSuggested?.field === 'dpdPostcode' || link.inputSuggested?.field === 'phoneDigits')
+          && typeof link.inputSuggested.carrier === 'string'
+          ? { inputSuggested: { carrier: link.inputSuggested.carrier, field: link.inputSuggested.field } } : {}),
       // Only a link that says it was stopped is: an answer from before sharing could be stopped is a shared one.
       shared: link.shared !== false,
       // A browser can only subscribe with the server's key. Whether the server emails accounts is said only when it does.

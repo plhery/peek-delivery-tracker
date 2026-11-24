@@ -129,7 +129,7 @@ class APIClientTests {
         assertEquals(
             mapOf(
                 "Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "Content-Type" to "application/json",
-                "X-Requested-With" to "XMLHttpRequest",
+                "X-Requested-With" to "XMLHttpRequest", "X-Peek-Inputs" to "phoneDigits",
             ),
             request.headers,
         )
@@ -145,7 +145,10 @@ class APIClientTests {
         assertEquals("GET", read.method)
         assertEquals("https://peek.example/api/packages?includeArchived=true", read.url)
         assertEquals(
-            mapOf("Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "X-Requested-With" to "XMLHttpRequest"),
+            mapOf(
+                "Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "X-Requested-With" to "XMLHttpRequest",
+                "X-Peek-Inputs" to "phoneDigits",
+            ),
             read.headers,
         )
         assertNull(read.body)
@@ -171,7 +174,7 @@ class APIClientTests {
             assertEquals(
                 mapOf(
                     "Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "Content-Type" to "application/json",
-                    "X-Requested-With" to "XMLHttpRequest",
+                    "X-Requested-With" to "XMLHttpRequest", "X-Peek-Inputs" to "phoneDigits",
                 ),
                 request.headers,
             )
@@ -389,7 +392,8 @@ class APIClientTests {
         assertEquals(
             mapOf(
                 "Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "X-Native-Verification" to "1",
-                "X-Requested-With" to "XMLHttpRequest", "X-App-Attest-Key-Id" to "synthetic-key-0", "X-App-Attest-Challenge" to "synthetic-assertion-1",
+                "X-Requested-With" to "XMLHttpRequest", "X-Peek-Inputs" to "phoneDigits", "X-App-Attest-Key-Id" to "synthetic-key-0",
+                "X-App-Attest-Challenge" to "synthetic-assertion-1",
                 "X-App-Attest-Assertion" to
                     "YXNzZXJ0aW9uOnN5bnRoZXRpYy1rZXktMDo3N2E4Zjk0ZTVhYzRmNjA0ZTMzOTM4NDcxZDY1NzcyY2YxMDIxNDcyNGJlYWI1YzdkN2U3Mzg1ZTMzYmZkMTc1",
             ),
@@ -743,7 +747,7 @@ class APIClientTests {
             assertEquals(expected, outcome { DeliveryApiClient.publicParcel("k7Qm2xHd9RtW", configuration = configuration, transport = transport) })
             val request = transport.requests.single()
             assertEquals("https://peek.example/api/public/parcels/k7Qm2xHd9RtW", request.url)
-            assertEquals(mapOf("Accept" to "application/json"), request.headers)
+            assertEquals(mapOf("Accept" to "application/json", "X-Peek-Inputs" to "phoneDigits"), request.headers)
             assertFalse(request.handlesCookies)
             assertEquals(15.0, request.timeout, 0.0)
         }

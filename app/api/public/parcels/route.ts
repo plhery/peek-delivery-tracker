@@ -17,6 +17,7 @@ import {
 import { SupabaseError } from '../../../../src/server/supabase';
 import { newPackageValues } from '../../../../src/server/validation';
 import type { ApiPublicLookupResponse } from '../../../../src/generated/apiContract';
+import { clientInputs } from '../../../../src/server/suggestedInputs';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -73,7 +74,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage; parce
     // The first read of the link queues the check again.
     if (!(error instanceof SupabaseError)) throw error;
   }
-  return json({ ...publicParcelResponse(created, parcelAlerts(service)), key } satisfies ApiPublicLookupResponse, 201);
+  return json({ ...publicParcelResponse(created, parcelAlerts(service), { inputs: clientInputs(context.request) }), key } satisfies ApiPublicLookupResponse, 201);
 }
 
 /**

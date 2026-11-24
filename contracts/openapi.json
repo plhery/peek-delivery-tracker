@@ -72538,7 +72538,7 @@
             "description": "The country the carriers were ranked for: the request's lookupCountryHint, else the visitor's IP country. Absent when neither is known. The Add sheet names it."
           },
           "inputSuggested": {
-            "description": "When no carrier knows the number, a carrier its shape and the lookup country point to that answers only with the delivery postcode, which recognition cannot ask about it without. Nothing says that carrier has the parcel.",
+            "description": "When no carrier knows the number, a carrier its shape and the lookup country point to that answers only with the delivery postcode, which recognition cannot ask about it without, or a carrier its shape points to that shows its scans only with the last digits of a phone (phoneDigits), sent only to a client whose X-Peek-Inputs header names phoneDigits. Nothing says that carrier has the parcel.",
             "type": "object",
             "additionalProperties": false,
             "required": [
@@ -72552,7 +72552,8 @@
               "field": {
                 "type": "string",
                 "enum": [
-                  "dpdPostcode"
+                  "dpdPostcode",
+                  "phoneDigits"
                 ]
               }
             }
@@ -75581,7 +75582,7 @@
                     }
                   },
                   "input_suggested": {
-                    "description": "For a parcel filed under no carrier, a carrier its number's shape and lookup country point to that needs the listed input before it can be asked about the number. Nothing says that carrier has the parcel.",
+                    "description": "For a parcel filed under no carrier, a carrier its number's shape and lookup country point to that needs the listed input before it can be asked about the number, or that shows its scans only with the last digits of a phone (phoneDigits, served only to a client whose X-Peek-Inputs header names it). Nothing says that carrier has the parcel.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -75595,7 +75596,8 @@
                       "field": {
                         "type": "string",
                         "enum": [
-                          "dpdPostcode"
+                          "dpdPostcode",
+                          "phoneDigits"
                         ]
                       }
                     }
@@ -77126,7 +77128,7 @@
           "inputSuggested": {
             "type": "object",
             "additionalProperties": false,
-            "description": "For a lookup filed under no carrier that no carrier or provider has answered for yet, the carrier its number points to from the lookup's country that can't be asked about it without the delivery postcode. Nothing says that carrier has the parcel. The owner adds the postcode with addPublicParcelPostcode. Sent to the owner of a lookup only, never with inputNeeded.",
+            "description": "For a lookup filed under no carrier that no carrier or provider has answered for yet, the carrier its number points to from the lookup's country that can't be asked about it without the delivery postcode, which the owner adds with addPublicParcelPostcode, or the carrier its number points to that shows its scans only with the last digits of a phone (phoneDigits, sent only to a client whose X-Peek-Inputs header names it), which the owner gives by changing the lookup's carrier to it. Nothing says that carrier has the parcel. Sent to the owner of a lookup only, never with inputNeeded.",
             "required": [
               "carrier",
               "field"
@@ -77138,7 +77140,8 @@
               "field": {
                 "type": "string",
                 "enum": [
-                  "dpdPostcode"
+                  "dpdPostcode",
+                  "phoneDigits"
                 ]
               }
             }

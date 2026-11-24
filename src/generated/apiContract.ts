@@ -68830,7 +68830,7 @@ export interface ApiCarrierDetectionResponse {
   "lookupCountry"?: string;
   "inputSuggested"?: {
   "carrier": ApiCarrierId;
-  "field": "dpdPostcode";
+  "field": "dpdPostcode" | "phoneDigits";
 };
 }
 
@@ -71093,7 +71093,7 @@ export interface ApiPackageRow {
 };
   "input_suggested"?: {
   "carrier": ApiCarrierId;
-  "field": "dpdPostcode";
+  "field": "dpdPostcode" | "phoneDigits";
 };
   "likely_carrier"?: ApiLikelyCarrier;
   "provider_input_needed"?: {
@@ -71450,7 +71450,7 @@ export interface ApiParcelLink {
 };
   "inputSuggested"?: {
   "carrier": ApiCarrierId;
-  "field": "dpdPostcode";
+  "field": "dpdPostcode" | "phoneDigits";
 };
 }
 

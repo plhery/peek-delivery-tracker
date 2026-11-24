@@ -180,26 +180,27 @@ export function ParcelDetail({
   const inputNeeded = parcel.inputNeeded?.field === 'dpdPostcode'
     && (!ownCarrierAsks || (!parcel.dpdPostcode && parcel.syncError !== 'carrier:input_required'))
     && !parcel.archivedAt && !['delivered', 'returned'].includes(current?.stage ?? '') ? parcel.inputNeeded : undefined;
-  // Or nobody has answered for the number yet, and its shape points to a carrier that cannot be asked without the postcode.
-  const inputSuggested = !inputNeeded && parcel.inputSuggested?.field === 'dpdPostcode' && parcel.carrier === 'unknown'
-    && !parcel.archivedAt && !current ? parcel.inputSuggested : undefined;
-  const postcodePrompt = inputNeeded ?? inputSuggested;
+  // Or nobody has answered for the number yet, and its shape points to a carrier that cannot be asked without the
+  // postcode, or shows it only with the last 4 digits of a phone (J&T China's JT numbers).
+  const inputSuggested = !inputNeeded && ['dpdPostcode', 'phoneDigits'].includes(parcel.inputSuggested?.field ?? '')
+    && parcel.carrier === 'unknown' && !parcel.archivedAt && !current ? parcel.inputSuggested : undefined;
+  const inputPrompt = inputNeeded ?? inputSuggested;
   // Or its carrier shows more with the delivery postcode it was saved without. An account's own postcode is given at
   // the next check (docs/ROUTING.md), so this asks those who gave none, once the parcel has been checked.
-  const postcodeShowsMore = !postcodePrompt && !parcel.dpdPostcode && !parcel.archivedAt && Boolean(parcel.lastSyncedAt)
+  const postcodeShowsMore = !inputPrompt && !parcel.dpdPostcode && !parcel.archivedAt && Boolean(parcel.lastSyncedAt)
     && !['delivered', 'returned'].includes(current?.stage ?? '')
     && carrierRequirements(parcel.carrier, parcel.trackingNumber).some(({ field, showsMore }) => field === 'dpdPostcode' && showsMore);
   // Or its carrier shows its own scans only with the phone digits it was saved without (J&T Express Mexico and China),
   // unless the sync error already asks for them.
-  const phoneDigitsShowsMore = !postcodePrompt && !postcodeShowsMore && !parcel.phoneDigits && !parcel.archivedAt
+  const phoneDigitsShowsMore = !inputPrompt && !postcodeShowsMore && !parcel.phoneDigits && !parcel.archivedAt
     && Boolean(parcel.lastSyncedAt) && parcel.syncError !== 'carrier:input_required' && !['delivered', 'returned'].includes(current?.stage ?? '')
     && carrierRequirements(parcel.carrier, parcel.trackingNumber).some(({ field }) => field === 'phoneDigits');
   // Or the number has one carrier's own format, and that carrier does not list it yet: after a week, its owner is asked
   // to choose another.
-  const likely = !postcodePrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
+  const likely = !inputPrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
   // Or a number no carrier answered for that looks like a shop's order number or a shipping container's, or is shorter
   // than tracking numbers are: its owner is told where the tracking number is, and may choose the carrier.
-  const shape = !postcodePrompt && !likely && !parcel.providerInputNeeded && parcel.carrier === 'unknown' && !parcel.archivedAt
+  const shape = !inputPrompt && !likely && !parcel.providerInputNeeded && parcel.carrier === 'unknown' && !parcel.archivedAt
     && !current && !numberToCheck(parcel.syncError) ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
   // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
   const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
@@ -608,14 +609,14 @@ export function ParcelDetail({
             setCarrierSheetInitial(parcel.carrier); setEditingCarrier(true);
           }}>{t(parcel.providerInputNeeded.refusedPostcode ? 'detail.editPostcode' : 'detail.inputNeededAction')}</button>
         </div>}
-        {postcodePrompt && (
+        {inputPrompt && (
           <div className="detail__input-needed" role="status">
-            <p>{t(!inputNeeded ? 'detail.inputSuggested' : ownCarrierAsks ? 'detail.carrierInputNeeded' : 'detail.inputNeeded',
-              { carrier: carrierInfo(postcodePrompt.carrier, locale).name })}</p>
+            <p>{t(!inputNeeded ? inputPrompt.field === 'phoneDigits' ? 'detail.phoneDigitsSuggested' : 'detail.inputSuggested'
+              : ownCarrierAsks ? 'detail.carrierInputNeeded' : 'detail.inputNeeded', { carrier: carrierInfo(inputPrompt.carrier, locale).name })}</p>
             <button type="button" className="text-button" onClick={() => {
-              setCarrierSheetInitial(postcodePrompt.carrier);
+              setCarrierSheetInitial(inputPrompt.carrier);
               setEditingCarrier(true);
-            }}>{t('detail.inputNeededAction')}</button>
+            }}>{t(inputPrompt.field === 'phoneDigits' ? 'detail.phoneDigitsAction' : 'detail.inputNeededAction')}</button>
           </div>
         )}
         {likely && (

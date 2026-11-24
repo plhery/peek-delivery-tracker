@@ -1026,6 +1026,20 @@ describe('ParcelPage actions', () => {
     expect(screen.queryByText(words)).toBeNull();
   });
 
+  it('offers the phone digits a carrier the number points to may have the parcel with, through the front door', async () => {
+    // JT and 13 digits fit J&T and J&T China, which shows them only with the last 4 digits of a phone.
+    const suggested = testView({ parcel: { carrier: 'unknown', trackingNumber: 'JT0805136742918' } });
+    suggested.link = { ...suggested.link, inputSuggested: { carrier: 'j-and-t-cn', field: 'phoneDigits' } };
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: suggested });
+    mocks.read.mockResolvedValue(suggested);
+    open();
+    const prompt = await screen.findByText('J&T Express China may have this parcel. Add the last 4 digits of the recipient’s or sender’s phone to track it.');
+    expect(screen.queryByRole('button', { name: 'Add postcode' })).toBeNull();
+    await userEvent.click(within(prompt.parentElement!).getByRole('button', { name: 'Add the digits' }));
+    // The front door takes the number with that carrier chosen, and moves this link to it.
+    expect(takeCarrierHandoff()).toEqual({ text: 'JT0805136742918', pick: true, link: LINK_ID, carrier: 'j-and-t-cn' });
+  });
+
   it('asks nobody but the holder of the owner key for a postcode', async () => {
     const asked = testView();
     asked.link = { ...asked.link, inputNeeded: { carrier: 'dhl', field: 'dpdPostcode' } };

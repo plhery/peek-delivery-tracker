@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} 有这个包裹的记录。添加收件邮编即可跟踪。",
   "detail.inputNeededAction": "添加邮编",
   "detail.inputSuggested": "{{carrier}} 可能有这个包裹的记录。添加收件邮编即可跟踪。",
+  "detail.phoneDigitsSuggested": "{{carrier}} 可能有这个包裹的记录。填写收件人或寄件人手机号后 4 位即可跟踪。",
   "link.postcode.checking": "正在询问 {{carrier}}…",
   "link.postcode.refused": "{{carrier}} 没有找到与这个邮编对应的包裹。请检查后重试。",
   "link.postcode.tries": "尝试的邮编太多了。请在 {{time}} 后重试。",

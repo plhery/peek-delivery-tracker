@@ -1131,6 +1131,7 @@
   "detail.inputNeeded": "{{carrier}} tem esta encomenda. Adiciona o código postal de entrega para a seguires.",
   "detail.inputNeededAction": "Adicionar código postal",
   "detail.inputSuggested": "{{carrier}} pode ter esta encomenda. Adiciona o código postal de entrega para a seguires.",
+  "detail.phoneDigitsSuggested": "{{carrier}} pode ter esta encomenda. Adiciona os últimos 4 dígitos do telefone do destinatário ou do remetente para a seguires.",
   "link.postcode.checking": "A perguntar a {{carrier}}…",
   "link.postcode.refused": "{{carrier}} não tem esta encomenda com esse código postal. Verifica-o e tenta novamente.",
   "link.postcode.tries": "Foram tentados demasiados códigos postais. Tenta novamente depois das {{time}}.",

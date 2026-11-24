@@ -71,11 +71,6 @@ pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,versand
 ## What's new
 
 ```text
-• Referenznummern von JRS Express und Tiui behalten ihre Bindestriche, wenn du ein Paket hinzufügst oder abfragst, damit diese Paketdienste sie finden.
-• Für eine J&T-China-Nummer, die kein Paketdienst kennt, bietet Peek in „Paket hinzufügen“ und auf der Seite des Pakets an, das Paket mit den letzten 4 Ziffern der Telefonnummer von Empfänger oder Absender zu verfolgen.
-• Wählst du von Hand einen Paketdienst, der keine Nummern wie deine vergibt, zeigt „Paket hinzufügen“, welcher Paketdienst das Paket haben könnte, und mit einem Tipp ist er ausgewählt, samt seinem optionalen Feld für die Postleitzahl: etwa bei einer 8-stelligen Mondial-Relay-Nummer, die mit InPost als Paketdienst hinzugefügt wurde. Ohne Konto bietet auch die Seite des Pakets an, die Postleitzahl für diesen Paketdienst einzugeben.
-• Während die Paketdienste gefragt werden oder wenn keiner die Nummer kennt, nennt „Paket hinzufügen“ das Land, für das Peek die Nummer gesucht hat, und du kannst ein anderes wählen.
-• Ohne Konto ersetzt die Abfrage einer vollständigen Nummer die Abfrage ihrer ersten Ziffern, die du ein paar Minuten vorher gemacht hast, statt sie in deiner Liste zu lassen.
-• Die Ländermenüs in „Paket hinzufügen“ und in Feldern für die Postleitzahl bleiben dort, wohin du gescrollt hast, und eine Linie trennt die ersten Länder vom Rest.
-• Eine J&T-Germany-Nummer mit einer Ziffer zu viel oder zu wenig bekommt einen Hinweis.
+• Ein Paket, das an einem Tag in Zustellung ging, der in der Zeitzone seines Paketdienstes schon vorbei ist, zeigt jetzt „Keine Aktualisierung seit“ diesem Tag, mit dem Hilfe-Link des Paketdienstes, so wie ein Paket ohne neuen Scan seit vier Tagen.
+• Peek AI: Auf der Seite eines Pakets sind die wahrscheinlichen Tage oder Uhrzeiten je nach Wahrscheinlichkeit abgestuft eingefärbt, von „Weniger wahrscheinlich“ bis „Wahrscheinlicher“, und „Warum“ sagt, worauf jede Schätzung beruht.
 ```

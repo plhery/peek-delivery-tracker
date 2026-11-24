@@ -73,11 +73,6 @@ suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,lettre,numé
 ## What's new
 
 ```text
-• Les références JRS Express et Tiui gardent leurs tirets quand tu ajoutes ou recherches un colis, pour que ces transporteurs les trouvent.
-• Pour un numéro J&T China qu’aucun transporteur ne connaît, Peek propose de suivre le colis avec les 4 derniers chiffres du téléphone du destinataire ou de l’expéditeur, dans « Ajouter un colis » et sur la page du colis.
-• Si tu choisis toi-même un transporteur qui n’émet pas de numéros comme le tien, « Ajouter un colis » indique quel transporteur a peut-être le colis et te permet de le choisir d’un geste, avec son champ de code postal facultatif : par exemple, un numéro Mondial Relay à 8 chiffres ajouté avec InPost. Sans compte, la page du colis propose aussi d’indiquer le code postal pour ce transporteur.
-• Pendant que les transporteurs sont interrogés, ou quand aucun ne connaît le numéro, « Ajouter un colis » indique le pays pour lequel Peek a cherché le numéro, et tu peux en choisir un autre.
-• Sans compte, rechercher un numéro complet remplace la recherche de ses premiers chiffres que tu as faite quelques minutes plus tôt, au lieu de la laisser dans ta liste.
-• Les menus de pays, dans « Ajouter un colis » et dans les champs de code postal, restent là où tu les as fait défiler, et un trait sépare les premiers pays des autres.
-• Un numéro J&T Germany avec un chiffre en trop ou en moins affiche une indication.
+• Un colis parti en livraison un jour déjà terminé dans le fuseau horaire de son transporteur affiche désormais « Aucune mise à jour depuis » ce jour-là, avec le lien d’aide du transporteur, comme le fait un colis sans nouveau scan depuis quatre jours.
+• Peek IA : sur la page d’un colis, les jours ou les heures probables sont plus ou moins teintés selon leurs chances, de « Moins probable » à « Plus probable », et « Pourquoi » dit sur quoi se fonde chaque estimation.
 ```

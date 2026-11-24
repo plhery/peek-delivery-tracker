@@ -71,11 +71,6 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Numery referencyjne JRS Express i Tiui zachowują myślniki, gdy dodajesz lub wyszukujesz przesyłkę, dzięki czemu ci przewoźnicy je znajdują.
-• Dla numeru J&T China, którego nie zna żaden przewoźnik, Peek proponuje śledzenie po ostatnich 4 cyfrach telefonu odbiorcy lub nadawcy, w „Dodaj przesyłkę” i na ekranie przesyłki.
-• Jeśli ręcznie wybierzesz przewoźnika, który nie wydaje takich numerów jak twój, „Dodaj przesyłkę” podpowie, który przewoźnik może mieć tę przesyłkę, i pozwoli go wybrać jednym stuknięciem, razem z jego opcjonalnym polem na kod pocztowy: na przykład 8-cyfrowy numer Mondial Relay dodany z przewoźnikiem InPost. Bez konta ekran przesyłki też proponuje wpisanie kodu pocztowego dla tego przewoźnika.
-• Gdy przewoźnicy są odpytywani albo gdy żaden nie zna numeru, „Dodaj przesyłkę” podaje kraj, dla którego Peek szukał numeru, i możesz wybrać inny.
-• Bez konta wyszukanie pełnego numeru zastępuje wyszukanie jego pierwszych cyfr sprzed kilku minut, zamiast zostawiać je na twojej liście.
-• Menu krajów w „Dodaj przesyłkę” i w polach kodu pocztowego zostają tam, gdzie je przewiniesz, a linia oddziela pierwsze kraje od pozostałych.
-• Przy numerze J&T Germany z jedną cyfrą za dużo lub za mało pojawia się podpowiedź.
+• Przesyłka wydana do doręczenia w dniu, który w strefie czasowej przewoźnika już się skończył, pokazuje teraz „Brak aktualizacji od” tego dnia, z linkiem do pomocy przewoźnika, tak jak przesyłka bez nowego skanu od czterech dni.
+• Peek AI: na ekranie przesyłki prawdopodobne dni lub godziny są cieniowane w zależności od szans, od „Mniej prawdopodobne” do „Bardziej prawdopodobne”, a „Dlaczego” mówi, na czym opiera się każda prognoza.
 ```

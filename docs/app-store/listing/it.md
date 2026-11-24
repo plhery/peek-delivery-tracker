@@ -71,11 +71,6 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• I numeri di riferimento di JRS Express e Tiui mantengono i trattini quando aggiungi o cerchi un pacco, così questi corrieri li trovano.
-• Per un numero J&T China che nessun corriere conosce, Peek propone di seguire il pacco con le ultime 4 cifre del telefono del destinatario o del mittente, in «Aggiungi un pacco» e nella pagina del pacco.
-• Se scegli a mano un corriere che non emette numeri come il tuo, «Aggiungi un pacco» indica quale corriere potrebbe avere il pacco e te lo fa scegliere con un tocco, con il suo campo facoltativo per il codice postale: per esempio, un numero Mondial Relay di 8 cifre aggiunto con InPost. Senza account, anche la pagina del pacco propone di inserire il codice postale per quel corriere.
-• Mentre i corrieri vengono interpellati, o quando nessuno conosce il numero, «Aggiungi un pacco» indica il Paese per cui Peek ha cercato il numero, e puoi sceglierne un altro.
-• Senza account, cercare un numero completo sostituisce la ricerca delle sue prime cifre che hai fatto qualche minuto prima, invece di lasciarla nella tua lista.
-• I menu dei Paesi in «Aggiungi un pacco» e nei campi del codice postale restano dove li hai fatti scorrere, e una linea separa i primi Paesi dagli altri.
-• Un numero J&T Germany con una cifra in più o in meno mostra un suggerimento.
+• Un pacco partito in consegna in un giorno ormai concluso nel fuso orario del suo corriere ora mostra «Nessun aggiornamento da» quel giorno, con il link di aiuto del corriere, come un pacco senza nuove scansioni da quattro giorni.
+• Peek IA: nella pagina di un pacco, i giorni o gli orari probabili sono colorati più o meno intensamente in base alla probabilità, da «Meno probabile» a «Più probabile», e «Perché» dice su cosa si basa ogni stima.
 ```

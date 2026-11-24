@@ -71,11 +71,6 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Os códigos de JRS Express e de Tiui mantêm os hifens quando você adiciona ou consulta uma encomenda, para que essas transportadoras os encontrem.
-• Para um código de J&T China que nenhuma transportadora conhece, o Peek oferece rastrear a encomenda com os últimos 4 dígitos do telefone do destinatário ou do remetente, em “Adicionar encomenda” e na página da encomenda.
-• Se você escolher manualmente uma transportadora que não emite códigos como o seu, “Adicionar encomenda” mostra qual transportadora pode estar com a encomenda e deixa você escolhê-la com um toque, com o campo opcional de código postal dela: por exemplo, um código de Mondial Relay de 8 dígitos adicionado com InPost. Sem conta, a página da encomenda também oferece informar o código postal para essa transportadora.
-• Enquanto as transportadoras são consultadas, ou quando nenhuma conhece o código, “Adicionar encomenda” mostra o país para o qual o Peek procurou o código, e você pode escolher outro.
-• Sem conta, consultar um código completo substitui a consulta dos primeiros dígitos dele que você fez alguns minutos antes, em vez de deixá-la na sua lista.
-• Os menus de países em “Adicionar encomenda” e nos campos de código postal continuam onde você parou de rolar, e uma linha separa os primeiros países dos demais.
-• Um código de J&T Germany com um dígito a mais ou a menos mostra uma dica.
+• Uma encomenda que saiu para entrega em um dia que já terminou no fuso horário da transportadora agora mostra “Sem atualizações desde” esse dia, com o link de ajuda da transportadora, como uma encomenda sem nova movimentação há quatro dias.
+• Peek IA: na página de uma encomenda, os dias ou horários prováveis ganham tons mais ou menos fortes conforme a chance de cada um, de “Menos provável” a “Mais provável”, e “Por quê” diz em que cada estimativa se baseia.
 ```

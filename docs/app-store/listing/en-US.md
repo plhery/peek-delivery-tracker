@@ -73,11 +73,6 @@ parcel,tracking,shipment,shipping,courier,carrier,mail,post,postal,number,where,
 ## What's new
 
 ```text
-• JRS Express references and Tiui folios keep their hyphens when you add or look up a package, so these carriers find them.
-• For a J&T China number no carrier knew, Peek offers to track it with the last 4 digits of the recipient’s or sender’s phone, on the Add sheet and on the package’s page.
-• If you pick a carrier by hand that doesn’t issue numbers like yours, the Add sheet says which carrier may have the package and picks it in one tap, with its optional postal code field: an 8-digit Mondial Relay number added under InPost, for example. Without an account, the package’s page offers that carrier’s postal code too.
-• While carriers are being asked, or when none knows the number, the Add sheet names the country it looked the number up for, and you can pick another.
-• Without an account, looking up a whole number replaces the lookup of its first digits you made a few minutes before, instead of leaving it in your list.
-• The country menus in the Add sheet and in postal code fields stay where you scrolled them, and a line sets the first countries apart from the rest.
-• A J&T Germany number with one digit too many or too few gets a hint.
+• A package out for delivery on a day that has ended on its carrier’s clock now says “No tracking update since” that day, with the carrier’s help link, as a package with no new scan for four days does.
+• Peek AI: on a package’s page, the likely days or hours are shaded by their chance, from “Less likely” to “More likely”, and Why says what each estimate goes by.
 ```

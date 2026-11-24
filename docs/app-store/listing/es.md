@@ -71,11 +71,6 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Las referencias de JRS Express y los folios de Tiui conservan sus guiones al añadir o buscar un paquete, para que estos transportistas los encuentren.
-• Para un número de J&T China que ningún transportista conoce, Peek ofrece seguir el paquete con los últimos 4 dígitos del teléfono del destinatario o del remitente, en «Añadir un paquete» y en la página del paquete.
-• Si eliges a mano un transportista que no emite números como el tuyo, «Añadir un paquete» indica qué transportista puede tener el paquete y te deja elegirlo con un toque, con su campo de código postal opcional: por ejemplo, un número de Mondial Relay de 8 dígitos añadido con InPost. Sin cuenta, la página del paquete también te ofrece añadir el código postal para ese transportista.
-• Mientras se consulta a los transportistas, o cuando ninguno conoce el número, «Añadir un paquete» indica el país para el que Peek ha buscado el número, y puedes elegir otro.
-• Sin cuenta, buscar un número completo sustituye la búsqueda de sus primeros dígitos que hiciste unos minutos antes, en lugar de dejarla en tu lista.
-• Los menús de países de «Añadir un paquete» y de los campos de código postal se quedan donde los dejaste al desplazarte, y una línea separa los primeros países del resto.
-• Un número de J&T Germany con un dígito de más o de menos muestra un aviso.
+• Un paquete que salió a reparto un día que ya ha terminado en la zona horaria de su transportista ahora muestra «Sin novedades desde el» con la fecha de ese día y el enlace de ayuda del transportista, como un paquete sin escaneos nuevos desde hace cuatro días.
+• Peek IA: en la página de un paquete, los días u horas probables se sombrean más o menos según su probabilidad, de «Menos probable» a «Más probable», y «Por qué» explica en qué se basa cada estimación.
 ```

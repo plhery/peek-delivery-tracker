@@ -71,11 +71,6 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• As referências da JRS Express e da Tiui mantêm os hífenes quando adicionas ou pesquisas uma encomenda, para que estas transportadoras as encontrem.
-• Para um número da J&T China que nenhuma transportadora conhece, o Peek propõe seguir a encomenda com os últimos 4 dígitos do telefone do destinatário ou do remetente, em «Adicionar uma encomenda» e na página da encomenda.
-• Se escolheres à mão uma transportadora que não emite números como o teu, «Adicionar uma encomenda» diz qual a transportadora que pode ter a encomenda e deixa-te escolhê-la com um toque, com o seu campo de código postal opcional: por exemplo, um número da Mondial Relay de 8 dígitos adicionado com a InPost. Sem conta, a página da encomenda também propõe indicar o código postal para essa transportadora.
-• Enquanto as transportadoras são consultadas, ou quando nenhuma conhece o número, «Adicionar uma encomenda» indica o país para o qual o Peek procurou o número, e podes escolher outro.
-• Sem conta, pesquisar um número completo substitui a pesquisa dos seus primeiros dígitos que fizeste uns minutos antes, em vez de a deixar na tua lista.
-• Os menus de países em «Adicionar uma encomenda» e nos campos de código postal ficam onde os deixaste ao deslizar, e uma linha separa os primeiros países dos restantes.
-• Um número da J&T Germany com um dígito a mais ou a menos mostra uma dica.
+• Uma encomenda que saiu para entrega num dia que já terminou no fuso horário da sua transportadora mostra agora «Sem atualizações desde» esse dia, com a ligação de ajuda da transportadora, como uma encomenda sem registos novos há quatro dias.
+• Peek IA: na página de uma encomenda, os dias ou as horas prováveis aparecem mais ou menos sombreados consoante a probabilidade, de «Menos provável» a «Mais provável», e «Porquê» diz em que se baseia cada estimativa.
 ```

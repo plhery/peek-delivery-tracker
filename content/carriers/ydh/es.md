@@ -39,7 +39,7 @@ YDH asigna códigos cortos de hito a sus escaneos de almacén, exportación y vu
 
 En [ydhex.com](https://www.ydhex.com/), YDH menciona más de 50 aerolíneas y navieras contratadas y despacho aduanero en 12 países. Su [página de contacto](https://www.ydhex.com/product/59/) enumera oficinas en Japón (Tokio, Narita, Osaka, Kansai y Nagoya), Estados Unidos (La Puente, California), Reino Unido (Hounslow) y Bélgica (Grâce-Hollogne, cerca de Lieja).
 
-**Entrega local de última milla.** YDH gestiona la recogida en origen, el tramo aéreo y la aduana, y transfiere después el paquete (`CARR`) a un servicio postal o mensajería de tu país para la entrega en puerta, puntos de recogida o devoluciones. Ese transportista local fija intentos, lugares seguros y plazos de custodia.
+**Entrega local de última milla.** YDH gestiona la recogida en origen, el tramo aéreo y la aduana, y transfiere después el paquete (`CARR`) a un servicio postal o mensajería de tu país para la entrega en puerta, puntos de recogida o devoluciones. Ese transportista local fija los intentos, dónde puede dejar el paquete y los plazos de custodia.
 
 **Aduanas y tasas de importación.** Los pedidos transfronterizos enviados por YDH quedan sujetos al IVA de importación, aranceles y tasas locales de tu país salvo pago previo al comercio o marketplace en el checkout. Consulta [paquetes retenidos en aduanas](guide:customs).
 
@@ -47,7 +47,7 @@ En [ydhex.com](https://www.ydhex.com/), YDH menciona más de 50 aerolíneas y na
 
 Como el contrato de transporte de YDH es con la tienda online o marketplace y no con el comprador, contacta siempre primero con el vendedor o abre una consulta en la plataforma para retrasos, cambios de dirección o reembolsos.
 
-- **Pausas durante el vuelo o el traspaso:** son normales varios días sin novedades esperando espacio aéreo (`HBYP`), en aduanas de destino (`RC`) o esperando el primer escaneo local (`DSD` / `D-SCAN DELAY`). Consulta [por qué deja de actualizarse el seguimiento](guide:tracking-not-updating).
+- **Pausas durante el vuelo o el traspaso:** son normales varios días sin novedades esperando hueco en un vuelo (`HBYP`), en aduanas de destino (`RC`) o esperando el primer escaneo local (`DSD` / `D-SCAN DELAY`). Consulta [por qué deja de actualizarse el seguimiento](guide:tracking-not-updating).
 - **Usa el código local tras el traspaso:** en cuanto YDH muestra el número propio del transportista local, la web de ese operador puede ofrecer opciones de entrega que el rastreador de YDH no incluye.
 - **Entregado, dañado o desaparecido:** si aparece `CC` / entregado sin haber llegado, comprueba con familiares, vecinos, conserjería y el transportista local, y avisa pronto al vendedor. Consulta [entregado pero no recibido](guide:delivered-not-received), [paquete dañado](guide:damaged-parcel), [paquete perdido](guide:lost-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
@@ -71,7 +71,7 @@ Peek lee directamente el seguimiento de YDH y muestra la fase («Etiqueta creada
 
 Mientras tienes el paquete abierto en Peek, o el día de entrega con las notificaciones activadas, Peek comprueba hasta cada 10 minutos; el día en que YDH muestra `OD`, cada 2 minutos desde las 6:00 según la hora del último escaneo de YDH, mientras su propio sistema responda. En el resto de casos comprueba cada hora. Tras 12 horas solo en «Etiqueta creada» o «Admitido por el transportista», o tras dos días sin novedades, comprueba cada hora sea cual sea tu forma de seguirlo, y cada 6 horas tras siete días en «Etiqueta creada». Cuando el seguimiento de YDH no responde y Peek sigue el paquete únicamente mediante servicios de seguimiento, comprueba cada hora, cada 3 horas tras un día sin cambios y hasta cada 15 minutos el día de reparto mientras lo tengas abierto o tengas las notificaciones activadas.
 
-Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun, 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a YDH.», con un enlace «Pide ayuda a YDH» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a YDH.»
+Cuando el último escaneo tiene cuatro días y el paquete sigue en «Etiqueta creada», «Admitido por el transportista» o «En tránsito», Peek lo marca con la fecha de ese escaneo, por ejemplo «Sin novedades desde el lun 12 oct». La ficha muestra entonces: «Los paquetes suelen quedarse sin novedades en vuelos largos, en la aduana o el fin de semana. Peek sigue preguntando a YDH.», con un enlace «Pide ayuda a YDH» a su página de contacto. Tras tres semanas sin ningún escaneo nuevo, dice: «Nada nuevo desde hace más de tres semanas. Si el paquete aún no ha llegado, contacta con el vendedor. Peek sigue preguntando a YDH.»
 
 Puedes elegir los avisos «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek solo supervisa el seguimiento y no puede contactar con YDH, despachar aduanas ni redirigir tu paquete con el socio local.
 

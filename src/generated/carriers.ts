@@ -14822,6 +14822,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005add"
     },
     {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "rastreamento-ctt-express",
+      "title": "Rastreamento CTT Express: status em espanhol e contato",
+      "name": "CTT Express",
+      "color": "#df0024"
+    },
+    {
       "id": "poczta-polska",
       "catalog": "poczta-polska",
       "slug": "rastreamento-poczta-polska",
@@ -15036,6 +15044,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento JS Express: códigos JSE…YQ, status e entrega",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "rastreamento-india-post",
+      "title": "Rastreamento India Post: códigos Speed Post e status",
+      "name": "India Post",
+      "color": "#b82025"
     },
     {
       "id": "j-and-t-br",
@@ -17772,6 +17788,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005add"
     },
     {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "ctt-express-tracking",
+      "title": "CTT Express 西班牙物流查询：单号、状态与客服",
+      "name": "CTT Express",
+      "color": "#df0024"
+    },
+    {
       "id": "poczta-polska",
       "catalog": "poczta-polska",
       "slug": "poczta-polska-tracking",
@@ -18186,6 +18210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "华翰物流（HuaHan）单号查询：HHW…YQ状态与尾程",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "india-post-tracking",
+      "title": "India Post 印度邮政查询：Speed Post 单号与状态",
+      "name": "India Post",
+      "color": "#b82025"
     },
     {
       "id": "morning-global",

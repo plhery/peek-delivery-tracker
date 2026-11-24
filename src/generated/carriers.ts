@@ -14790,6 +14790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "rastreamento-hermes-alemanha",
+      "title": "Rastreamento Hermes Alemanha: status em alemão e entregas",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "rastreamento-inpost",
@@ -14820,6 +14828,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento 4PX: códigos, status, alfândega e contato",
       "name": "4PX",
       "color": "#005add"
+    },
+    {
+      "id": "swiss-post",
+      "catalog": "swiss-post",
+      "slug": "rastreamento-swiss-post",
+      "title": "Rastreamento Swiss Post: status, retirada e contato",
+      "name": "Swiss Post",
+      "color": "#ffcc00"
     },
     {
       "id": "ctt-express",
@@ -17780,6 +17796,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "hermes-de-tracking",
+      "title": "Hermes 德国快递查询：单号、德语状态说明与网点自提",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "inpost-tracking",
@@ -17810,6 +17834,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "递四方（4PX）国际物流查询：单号格式、状态与客服",
       "name": "4PX",
       "color": "#005add"
+    },
+    {
+      "id": "swiss-post",
+      "catalog": "swiss-post",
+      "slug": "swiss-post-tracking",
+      "title": "Swiss Post 瑞士邮政查询：单号、状态说明与取件通知",
+      "name": "Swiss Post",
+      "color": "#ffcc00"
     },
     {
       "id": "ctt-express",

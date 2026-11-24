@@ -73,7 +73,7 @@ import { afterSameDayScans } from './dayScans';
 import { aheadOfCheck, datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, keptNotices, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
-import { DIRECT_HISTORY, directHistory } from './providerCopies';
+import { DIRECT_HISTORY, directHistory, heldRows } from './providerCopies';
 import { earlierCarrier } from './relayCopies';
 import { carrierBrand, eventTimestamp, latestResultTime, resultTimezone, statusMapAnswer, SWISS_POST_GLOBAL_STATUSES, trackingPlace } from 'universal-parcel-scraper/app';
 import { trackingSupportEvidence } from './trackingSupport';
@@ -3204,10 +3204,12 @@ export class TrackingSyncService {
       // it: a scraper release re-read the scan that set it (Ekart's undelivered attempt, once read as delivered, or
       // SPX Brazil's announced return, once read as the return), and the parcel takes the answer's stage. A later
       // scan of another stage leaves it. Only the source that wrote a row reads it again: another source's copy of
-      // the scan is no re-read (ParcelsApp's copy of 17TRACK's DHL delivery, in words no rule reads).
+      // the scan is no re-read (ParcelsApp's copy of 17TRACK's DHL delivery, in words no rule reads). A provider's row
+      // the carrier's answer took over (`heldRows`) is the carrier's scan.
+      const takenOver = heldRows(parcel);
       const wroteRow = (row: JsonObject) => typeof answeredBy === 'string'
         ? String(row.provider_event_id).startsWith('unknown:') && row.universal_provider === answeredBy
-        : String(row.provider_event_id).startsWith(`${sourceCarrierId}:`);
+        : String(row.provider_event_id).startsWith(`${sourceCarrierId}:`) || takenOver.has(String(row.provider_event_id));
       const savedEnds = ['delivered', 'returned'].includes(previousStage) ? stored.filter((row) => row.stage === previousStage) : [];
       const endReread = savedEnds.length > 0 && selectedStage !== null && selectedStage !== previousStage
         && !events.some((event) => event.stage === previousStage)

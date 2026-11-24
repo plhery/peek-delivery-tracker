@@ -10576,6 +10576,38 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(history().direct_history).toEqual({ from: '2026-01-02T12:30:00.000Z', to: '2026-01-04T21:58:30.000Z', held: [copy(out)] });
   });
 
+  it('lets GOFO read its delivery again once its scan took over the provider\'s row', async () => {
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const store = eventStore();
+    const client = { ...store.client,
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-01-05T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    // A scraper release reads the delivery scan as a failed attempt.
+    const attempt: Scan = { ...delivered, stage: 'failed_attempt' };
+    const adapter = {
+      fetch: vi.fn().mockResolvedValueOnce(result([hub, label])).mockRejectedValueOnce(new Error('GOFO tracking endpoint is unavailable'))
+        .mockResolvedValueOnce(result([delivered, out, hub, label]))
+        .mockResolvedValueOnce({ ...result([attempt, out, hub, label]), status: 'exception' }),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...result([delivered, out, hub, label].map(copied)), tracking_provider: 'ParcelsApp' }),
+    };
+    let saved: JsonObject = { ...parcel, current_stage: 'pending' };
+    for (const at of ['2026-01-03T20:00:00Z', '2026-01-05T14:00:00Z', '2026-01-06T08:00:00Z', '2026-01-07T02:00:00Z']) {
+      // Only the stage and the history go from one check to the next, so the router asks GOFO first every time.
+      await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+        .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+      const values = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      saved = { ...parcel, current_stage: values.current_stage ?? saved.current_stage,
+        carrier_data: { direct_history: (values.carrier_data as JsonObject).direct_history } };
+    }
+
+    // GOFO's delivery holds the provider's row, which it now reads as a failed attempt: the parcel takes that stage.
+    expect(((saved.carrier_data as JsonObject).direct_history as JsonObject).held).toContain(copy(delivered));
+    expect([...store.rows.values()].filter((row) => ['delivered', 'failed_attempt'].includes(String(row.stage)))
+      .map((row) => [row.provider_event_id, row.stage])).toEqual([[copy(delivered), 'failed_attempt']]);
+    expect(saved.current_stage).toBe('failed_attempt');
+  });
+
   it('absorbs every copy at a carrier scan\'s instant and keeps them out of later fallbacks', async () => {
     vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
     const store = eventStore();

@@ -1941,17 +1941,19 @@ final class ParcelStore: ObservableObject {
             }
         }
 
+        // A parcel left out for delivery on a day gone by, with no scan since, gets no activity: its round is over.
+        let now = Date()
         let orderedOutForDelivery = ParcelOrganizer.visible(
             parcels,
             query: "",
             status: .active,
             carrier: nil,
             sort: .standard
-        ).filter { $0.currentStage == .outForDelivery }
+        ).filter { $0.isOnDeliveryRound(now: now) }
         var desiredParcelIDs: [UUID] = []
         for activity in activities where !duplicateActivityIDs.contains(activity.id) {
             let parcelID = activity.attributes.parcelID
-            guard parcelsByID[parcelID]?.currentStage == .outForDelivery else { continue }
+            guard parcelsByID[parcelID]?.isOnDeliveryRound(now: now) == true else { continue }
             if !desiredParcelIDs.contains(parcelID) && desiredParcelIDs.count < 2 {
                 desiredParcelIDs.append(parcelID)
             }

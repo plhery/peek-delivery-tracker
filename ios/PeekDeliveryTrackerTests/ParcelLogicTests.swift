@@ -2530,6 +2530,40 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(shared.attention(now: DateParser.date("2026-08-06T14:00:00Z")!), .stalled)
     }
 
+    /// A Live Activity follows a parcel out for delivery only while its round lasts: until `delivery_round_ends_at`, or
+    /// without it until the end of the scan's day. One left out for delivery days ago gets none.
+    func testALiveActivityFollowsAParcelOutForDeliveryOnlyUntilItsRoundIsOver() throws {
+        let id = UUID()
+        // The server's moment: Sydney's midnight after a scan at 07:10 there.
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00"
+        XCTAssertTrue(out.isOnDeliveryRound(now: DateParser.date("2026-08-06T13:59:59Z")!))
+        XCTAssertFalse(out.isOnDeliveryRound(now: DateParser.date("2026-08-06T14:00:00Z")!))
+        XCTAssertFalse(out.isOnDeliveryRound(now: DateParser.date("2026-08-10T09:00:00Z")!))
+
+        // Without it, the end of the scan's day on the device's calendar.
+        let day = try XCTUnwrap(DateParser.deliveryDate("2026-08-06"))
+        let next = try XCTUnwrap(DateParser.deliveryDate("2026-08-07"))
+        let scanned = try XCTUnwrap(Calendar.current.date(bySettingHour: 7, minute: 10, second: 0, of: day))
+        var older = makeParcel(id: id, events: [event(id, .outForDelivery, DateParser.isoString(scanned))])
+        XCTAssertEqual(older.deliveryRoundEnd, next)
+        XCTAssertTrue(older.isOnDeliveryRound(now: next.addingTimeInterval(-1)))
+        XCTAssertFalse(older.isOnDeliveryRound(now: next))
+        XCTAssertFalse(older.isOnDeliveryRound(now: next.addingTimeInterval(4 * 86_400)))
+
+        // A scan dated by its day alone starts that day at `occurredAt`, in the carrier's zone.
+        older.trackingEvents[0].occurredAt = "2026-08-05T22:00:00Z"
+        older.trackingEvents[0].day = "2026-08-06"
+        XCTAssertEqual(older.deliveryRoundEnd, DateParser.date("2026-08-06T22:00:00Z"))
+
+        // A scan with no moment, or another stage, says nothing of a round.
+        var undated = makeParcel(id: id, events: [event(id, .outForDelivery, "")])
+        XCTAssertTrue(undated.isOnDeliveryRound(now: next))
+        undated.trackingEvents = [event(id, .inTransit, "2026-08-06T05:00:00Z")]
+        XCTAssertNil(undated.deliveryRoundEnd)
+        XCTAssertFalse(undated.isOnDeliveryRound(now: day))
+    }
+
     @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()

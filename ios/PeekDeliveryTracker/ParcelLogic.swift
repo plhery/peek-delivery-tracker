@@ -465,6 +465,26 @@ extension Parcel {
         return nil
     }
 
+    /// When the parcel's delivery round ends: the end of its out-for-delivery scan's day on the carrier's clock, as the
+    /// server gives it (`deliveryRoundEndsAt`). Without it, the end of that scan's day: a scan dated by its day alone
+    /// starts that day at `occurredAt` in the carrier's zone, a timed one is read on the device's calendar.
+    var deliveryRoundEnd: Date? {
+        guard let event = currentEvent, event.stage == .outForDelivery else { return nil }
+        if let ends = deliveryRoundEndsAt.flatMap(DateParser.date) { return ends }
+        guard let at = DateParser.date(event.occurredAt) else { return nil }
+        if event.day != nil { return at.addingTimeInterval(24 * 60 * 60) }
+        let calendar = Calendar.current
+        return calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: at))
+    }
+
+    /// Whether the parcel is out for delivery on a round that has not ended: a Live Activity follows only such a parcel.
+    /// One out for delivery on a day gone by, with no scan since, is not on its way any more.
+    func isOnDeliveryRound(now: Date = Date()) -> Bool {
+        guard currentStage == .outForDelivery else { return false }
+        guard let ends = deliveryRoundEnd else { return true }
+        return now < ends
+    }
+
     /// Whether the map has a place to draw: a generated track's are left out.
     var hasMappedPlace: Bool { GeneratedTrack.without(trackingEvents).contains { $0.place != nil } }
 

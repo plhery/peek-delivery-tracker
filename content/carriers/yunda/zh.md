@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-**韵达快递**（*上海韵达货运有限公司*，英文 *Yunda Express* / *韵达速递*）是中国大型全国性快递网络之一，总部位于上海市青浦区（[yundaex.com](https://www.yundaex.com/cn/index.php)）。韵达业务涵盖国内快递（含电商件与国际快递）、仓储、*韵达快运*、冷链及供应链服务。你可以在 [web.yundaex.com/infoInquiry](https://web.yundaex.com/infoInquiry) 查询国内运单，也可以直接把 13 位或 15 位韵达运单号粘贴到上方查询框中。
+**韵达快递**（*上海韵达货运有限公司*，英文 *Yunda Express* / *韵达速递*）是中国大型全国性快递网络之一，总部位于上海市青浦区（[yundaex.com](https://www.yundaex.com/cn/index.php)）。韵达业务涵盖快递（含电商件与国际快递）、仓储、*韵达快运*、冷链及供应链服务。你可以在 [web.yundaex.com/infoInquiry](https://web.yundaex.com/infoInquiry) 查询国内运单，也可以直接把 13 位或 15 位韵达运单号粘贴到上方查询框中。
 
 ## 韵达快递单号格式（13 位与 15 位国内运单）
 

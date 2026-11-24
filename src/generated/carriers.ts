@@ -14774,6 +14774,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "ups",
+      "catalog": "ups",
+      "slug": "rastreamento-ups",
+      "title": "Rastreamento UPS: códigos 1Z, status Exception e alfândega",
+      "name": "UPS",
+      "color": "#351c15"
+    },
+    {
+      "id": "fedex",
+      "catalog": "fedex",
+      "slug": "rastreamento-fedex",
+      "title": "Rastreamento FedEx: códigos, Delivery exception e alfândega",
+      "name": "FedEx",
+      "color": "#4d148c"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "rastreamento-china-post",
@@ -17522,6 +17538,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "顺友物流（SunYou / SYPost）查询：SY单号、状态与派送",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "ups",
+      "catalog": "ups",
+      "slug": "ups-guoji-kuaidi-chaxun",
+      "title": "UPS 国际快递单号查询：1Z 运单、Exception 状态与清关",
+      "name": "UPS",
+      "color": "#351c15"
     },
     {
       "id": "fedex",

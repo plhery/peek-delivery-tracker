@@ -9,7 +9,7 @@ updated: 2026-11-21
 
 Inoltra l'e-mail di spedizione al tuo indirizzo e-mail Peek personale e Peek aggiunge il pacco alle tue consegne. L'indirizzo lo trovi in «Impostazioni» → «Consegne» → «Aggiungi pacchi via e-mail», e puoi inoltrare un'e-mail a mano oppure lasciare che la tua app di posta inoltri da sola le e-mail di spedizione.
 
-Serve un account Peek: gli ospiti, che seguono i pacchi senza account, non ricevono un indirizzo. E Peek indica la funzione come «Beta»: con parole sue, «può perdere un pacco e potrebbe ancora cambiare».
+Serve un account Peek: gli ospiti, che seguono i pacchi senza account, non ricevono un indirizzo. E Peek indica la funzione come «Beta»: con parole sue, «può non rilevare un pacco e potrebbe ancora cambiare».
 
 :::steps
 - Apri «Aggiungi pacchi via e-mail» | Se hai effettuato l'accesso sul sito o nell'app per iPhone, iPad o Android, il pulsante rotondo dell'account con la tua iniziale apre «Impostazioni»: in «Consegne», scegli «Aggiungi pacchi via e-mail». Su Mac è una scheda della finestra «Impostazioni» di Peek (⌘,).

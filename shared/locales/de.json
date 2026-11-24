@@ -1412,7 +1412,7 @@
   "assistants.setup.gemini.open": "Öffne {{settings}} und dann {{apps}}.",
   "assistants.setup.gemini.add": "Füge unter {{custom}} die Adresse oben ein und wähle {{next}}.",
   "assistants.setup.gemini.use": "Tippe in einem Chat @ und wähle Peek.",
-  "assistants.setup.gemini.devMode": "Außerhalb der USA gibt es unter {{settings}} kein {{apps}}: Öffne stattdessen {{devMode}} und wähle {{create}}. Füge die Adresse oben ein und wähle {{next}}, setze das Häkchen, um die Risiken zu akzeptieren, und wähle dann {{connect}} und {{agree}}. Wenn du Peek erlaubt hast, wähle noch einmal {{connect}}, um es zu speichern.",
+  "assistants.setup.gemini.devMode": "Außerhalb der USA fehlt unter {{settings}} der Eintrag {{apps}}: Öffne stattdessen {{devMode}} und wähle {{create}}. Füge die Adresse oben ein und wähle {{next}}, setze das Häkchen, um die Risiken zu akzeptieren, und wähle dann {{connect}} und {{agree}}. Wenn du Peek erlaubt hast, wähle noch einmal {{connect}}, um es zu speichern.",
   "assistants.setup.openclaw.lead": "Füge die Adresse oben im Terminal mit {{set}} hinzu und melde dich dann mit {{login}} an.",
   "assistants.setup.openclaw.who": "In einem Terminal auf dem Computer oder Server, auf dem OpenClaw läuft. Seine Agenten nutzen dann dein Peek-Konto in jedem Chat, egal mit wem sie schreiben.",
   "assistants.setup.openclaw.open": "Stoppe das Gateway von OpenClaw mit {{stop}} und füge Peek dann mit {{set}} hinzu.",

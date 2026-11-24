@@ -730,7 +730,7 @@
   "share.pending": "分享或复制时才会生成链接。",
   "share.failed": "无法保存。请检查网络连接后重试。",
   "share.withYou": "与你分享 · 无需账号",
-  "share.withYouUntil": "与你分享 ·链接有效期至 {{date}}",
+  "share.withYouUntil": "与你分享 · 链接有效期至 {{date}}",
   "share.gift.marker": "礼物",
   "share.gift.headline": "有东西正在寄给你",
   "share.gift.arrives": "预计送达：{{date}}",

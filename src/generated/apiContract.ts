@@ -17875,7 +17875,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Manila",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jrs-express"
     },
     "trackingUrlTemplate": "https://jrs-express.com/track?or={trackingNumber}",
     "linkRules": [

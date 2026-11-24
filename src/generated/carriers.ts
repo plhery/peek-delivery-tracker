@@ -7022,6 +7022,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b9242b"
     },
     {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "suivi-kuehne-nagel",
+      "title": "Suivi Kuehne+Nagel\u00a0: numéros, statuts, douane et livraison",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "suivi-oca",
@@ -9310,6 +9318,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento GO! Express: codici a 12 cifre, stati e aiuto",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "tracciamento-kuehne-nagel",
+      "title": "Tracciamento Kuehne+Nagel: numeri, stati e consegne",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     },
     {
       "id": "oca",
@@ -11602,6 +11618,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#b9242b"
     },
     {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "seguimiento-kuehne-nagel",
+      "title": "Seguimiento Kuehne+Nagel: números, estados y entregas",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
+    },
+    {
       "id": "oca",
       "catalog": "oca",
       "slug": "seguimiento-oca",
@@ -13890,6 +13914,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GO! Express: guias de 12 dígitos, estados e apoio",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "rastreio-kuehne-nagel",
+      "title": "Rastreio Kuehne+Nagel: números, estados e entregas",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     },
     {
       "id": "oca",
@@ -16246,6 +16278,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GO! Express: 12-cyfrowe listy przewozowe i pomoc",
       "name": "GO! Express",
       "color": "#b9242b"
+    },
+    {
+      "id": "kuehne-nagel",
+      "catalog": "kuehne-nagel",
+      "slug": "sledzenie-kuehne-nagel",
+      "title": "Śledzenie Kuehne+Nagel: numery, statusy i doręczenia",
+      "name": "Kuehne+Nagel",
+      "color": "#003369"
     },
     {
       "id": "oca",

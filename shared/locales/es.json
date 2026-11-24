@@ -1524,7 +1524,7 @@
   "peekAi.card.byDay": "para el {{date}}",
   "peekAi.card.todayOrTomorrow": "hoy o mañana",
   "peekAi.card.thisWeek": "esta semana",
-  "peekAi.card.byEndOfNextWeek": "antes de fin de la semana que viene",
+  "peekAi.card.byEndOfNextWeek": "antes del fin de la semana que viene",
   "peekAi.card.sooner": "quizá antes",
   "peekAi.claim.notToday": "hoy es poco probable",
   "peekAi.claim.byTime": "probablemente antes de las {{time}}",

@@ -4676,6 +4676,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#105bcc"
     },
     {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "jumppoint-international-sendungsverfolgung",
+      "title": "Jumppoint International Sendungsverfolgung: JP & Hilfe",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "buffalo-ex-sendungsverfolgung",
@@ -6950,6 +6958,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#105bcc"
     },
     {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "suivi-jumppoint-international",
+      "title": "Suivi Jumppoint International\u00a0: codes JP, statuts et aide",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
       "id": "buffalo-ex",
       "catalog": "buffalo-ex",
       "slug": "suivi-buffalo-ex",
@@ -9216,6 +9232,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#105bcc"
     },
     {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "tracciamento-jumppoint-international",
+      "title": "Tracciamento Jumppoint International: codici JP e aiuto",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -11480,6 +11504,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Jiayang International: códigos JYGJ y ayuda",
       "name": "Jiayang International",
       "color": "#105bcc"
+    },
+    {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "seguimiento-jumppoint-international",
+      "title": "Seguimiento Jumppoint International: códigos JP y ayuda",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
     },
     {
       "id": "redur",
@@ -13770,6 +13802,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Jiayang International: códigos JYGJ e apoio",
       "name": "Jiayang International",
       "color": "#105bcc"
+    },
+    {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "rastreio-jumppoint-international",
+      "title": "Rastreio Jumppoint International: códigos JP e apoio",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
     },
     {
       "id": "buffalo-ex",
@@ -16110,6 +16150,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Jiayang International: kody JYGJ i pomoc",
       "name": "Jiayang International",
       "color": "#105bcc"
+    },
+    {
+      "id": "jumppoint-international",
+      "catalog": "jumppoint-international",
+      "slug": "sledzenie-jumppoint-international",
+      "title": "Śledzenie Jumppoint International: kody JP i pomoc",
+      "name": "Jumppoint International Express",
+      "color": "#0f4ae1"
     },
     {
       "id": "buffalo-ex",

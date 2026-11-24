@@ -14774,6 +14774,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "rastreamento-gls-alemanha",
+      "title": "Rastreamento GLS Alemanha: status, ParcelShops e contato",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "rastreamento-dpd-alemanha",
+      "title": "Rastreamento DPD Alemanha: status, janelas e contato",
+      "name": "DPD Germany",
+      "color": "#dc0032"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "rastreamento-inpost",
@@ -17706,6 +17722,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Mondial Relay 物流查询：单号、法语状态与取件点",
       "name": "Mondial Relay",
       "color": "#ef3026"
+    },
+    {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "gls-tracking-germany",
+      "title": "GLS 德国物流查询：单号、ParcelShop 与客服",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "dpd-tracking-germany",
+      "title": "DPD 德国物流查询：14 位单号、状态与自提点",
+      "name": "DPD Germany",
+      "color": "#dc0032"
     },
     {
       "id": "inpost",

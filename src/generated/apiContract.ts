@@ -1630,12 +1630,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?!YW[A-Z]{3}\\d{12}$|YWE\\d{14}$|BYT\\d{14}$|(?:GF|CI)[A-Z]{2}\\d{13}$|CNG\\d{14}$|DBRPST\\d{11}$)[A-Z0-9]{12}(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
+        "pattern": "^(?:[A-Z]{2}\\d{10}|[A-Z]\\d{11}|\\d{12})(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
         "confidence": "low",
         "servedCountriesOnly": true
       },
       {
-        "pattern": "^[A-Z0-9]{12}$",
+        "pattern": "^(?:[A-Z]{2}\\d{10}|[A-Z]\\d{11}|\\d{12})$",
         "confidence": "low",
         "servedCountriesOnly": true
       }
@@ -35950,7 +35950,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "obibox"
     },
     "trackingUrlTemplate": "https://tracking.obibox.io/{trackingNumber}",
     "linkRules": [
@@ -36903,7 +36903,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cope-sensitive-freight"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -38727,7 +38727,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "delivro"
     },
     "trackingUrlTemplate": "https://delivro.dsapp.io/customer/{trackingNumber}",
     "linkRules": [

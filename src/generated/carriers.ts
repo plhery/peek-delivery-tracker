@@ -4484,6 +4484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60012"
     },
     {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "bulgarian-posts-sendungsverfolgung",
+      "title": "Bulgarian Posts Sendungsverfolgung: PS/BG, Zoll & Hilfe",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6524,6 +6532,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi J&T Express Mexico\u00a0: codes JMX, téléphone et aide",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "suivi-bulgarian-posts",
+      "title": "Suivi Bulgarian Posts\u00a0: codes PS et BG, douane et aide",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     }
   ],
   "it": [
@@ -8544,6 +8560,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60012"
     },
     {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "tracciamento-bulgarian-posts",
+      "title": "Tracciamento Bulgarian Posts: codici PS/BG, dogana e aiuto",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -10560,6 +10584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo J&T Express México: guías JMX, teléfono y contacto",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "seguimiento-bulgarian-posts",
+      "title": "Seguimiento Bulgarian Posts: códigos PS/BG y aduanas",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     },
     {
       "id": "paquetexpress",
@@ -12650,6 +12682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio J&T Express Mexico: códigos JMX, telefone e ajuda",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "rastreio-bulgarian-posts",
+      "title": "Rastreio Bulgarian Posts: códigos PS/BG, alfândega e ajuda",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     }
   ],
   "pt-br": [
@@ -14750,6 +14790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie J&T Express Mexico: kody JMX, telefon i pomoc",
       "name": "J&T Express Mexico",
       "color": "#e60012"
+    },
+    {
+      "id": "bulgarian-posts",
+      "catalog": "bulgarian-posts",
+      "slug": "sledzenie-bulgarian-posts",
+      "title": "Śledzenie Bulgarian Posts: kody PS/BG, cło i pomoc",
+      "name": "Bulgarian Posts",
+      "color": "#ffd100"
     }
   ],
   "ru": [

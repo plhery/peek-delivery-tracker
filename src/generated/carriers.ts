@@ -14790,6 +14790,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "rastreamento-ecoscooting",
+      "title": "Rastreamento Ecoscooting: status, retirada e contato",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "rastreamento-ups",
@@ -14908,6 +14916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio SPX Express: pedidos da Shopee, status e prazos",
       "name": "SPX Express Brazil",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "rastreamento-js-express",
+      "title": "Rastreamento JS Express: códigos JSE…YQ, status e entrega",
+      "name": "JS Express",
+      "color": "#fe9b00"
     },
     {
       "id": "j-and-t-br",
@@ -17626,6 +17642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "顺友物流（SunYou / SYPost）查询：SY单号、状态与派送",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "ecoscooting-tracking",
+      "title": "Ecoscooting 物流查询：单号格式、状态与取件点",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
     },
     {
       "id": "ups",

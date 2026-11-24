@@ -14846,6 +14846,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "rastreamento-ctt-portugal",
+      "title": "Rastreamento CTT Portugal: códigos, status e alfândega",
+      "name": "CTT",
+      "color": "#df0024"
+    },
+    {
       "id": "dpd-pl",
       "catalog": "dpd-pl",
       "slug": "rastreamento-dpd-polonia",
@@ -15252,6 +15260,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento JD Logistics: códigos JD, status e contato",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "rastreamento-zto-express",
+      "title": "Rastreamento ZTO Express: códigos, status e contato",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     },
     {
       "id": "japan-post",
@@ -18058,6 +18074,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SEUR 西班牙快递查询：单号、西语状态与 Pickup 自提点",
       "name": "SEUR",
       "color": "#0063b3"
+    },
+    {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "ctt-putaoya-youzheng-chaxun",
+      "title": "葡萄牙邮政 CTT 快递查询：单号、状态、自提与关税",
+      "name": "CTT",
+      "color": "#df0024"
     },
     {
       "id": "dpd-pl",

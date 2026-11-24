@@ -51,8 +51,8 @@
       "severity": "warning",
       "noDataState": "Alerting",
       "execErrState": "KeepLast",
-      "summary": "A scheduled sync took over 7.5 minutes, three quarters of its 10-minute limit.",
-      "description": "A scheduled sync that finished in the last two hours took more than 450 seconds. A run starts no check after 4 minutes and leaves the rest to the next run (scheduled_sync_budget_reached in Loki), so a run this long means a check took minutes. Sentry's cron monitors report a sync that is missed, fails or passes 10 minutes; this warns before that. The sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) say how many parcels each run checked, and the dashboard's step durations which carrier is slow. Clears two hours after the last slow run."
+      "summary": "A scheduled sync took over 7.5 minutes.",
+      "description": "A scheduled sync that finished in the last two hours took more than 450 seconds. A run starts no check after 4 minutes and leaves the rest to the next run (scheduled_sync_budget_reached in Loki), so a run this long means a check took minutes. Sentry's cron monitors report a sync that is missed, fails or passes 30 minutes; this warns of a slow one well before that. The sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) say how many parcels each run checked, and the dashboard's step durations which carrier is slow. Clears two hours after the last slow run."
     },
     {
       "uid": "peek-checks-stopped",

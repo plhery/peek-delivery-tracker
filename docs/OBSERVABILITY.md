@@ -973,11 +973,14 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Crons**: a scheduled run sends an in-progress check-in to the
   `delivery-tracker-sync-daytime` monitor, which runs every 2 minutes around the clock despite
   its name, then `ok` or `error` with its duration in seconds. A run handed over at a deploy
-  keeps its check-in. The first check-in also sends the monitor's settings (schedule, 5
-  minutes of margin, 10 minutes of maximum runtime), which overwrite edits made in Sentry:
-  change them in `beginScheduledSyncCheckIn`. Runs never overlap, so a stuck run holds the
-  queue: Sentry reports it as timed out after 10 minutes, and as missed once the next run is
-  late. A run whose worker died three times is failed by the next claim; the next run closes
+  keeps its check-in. The first check-in also sends the monitor's settings (schedule, 20
+  minutes of margin, 30 minutes of maximum runtime), which overwrite edits made in Sentry:
+  change them in `SCHEDULED_SYNC_MONITOR`. Runs follow one another rather than the clock and
+  send nothing between their first and last check-ins, so the margin covers a run slowed by a
+  carrier and one handed over at a deploy that waits behind the readers' checks the new server
+  takes first. Runs never overlap, so a stuck run holds the queue: Sentry reports it as missed
+  once no check-in has come for 20 minutes past the next even minute, and as timed out after
+  30. A run whose worker died three times is failed by the next claim; the next run closes
   its check-in as `error` before opening its own, so the monitor alerts. Each reclaim
   before that was reported.
 - **Background work**: each run of the sync worker, the scheduler, the friendship,
@@ -1359,7 +1362,7 @@ most fire in Grafana only. A rule with `"notify": "user"` in the file gets the l
 `notify=user`, and only those reach the `telegram-paul` contact point, grouped by alert name.
 Here that is **Peek down for 15 minutes** alone. Sentry already reports each error, each
 carrier or provider outage, and a scheduled sync that is missed, fails or passes its
-10-minute limit (its cron monitors). The rules cover what none of those show:
+30-minute limit (its cron monitors). The rules cover what none of those show:
 
 - **Peek unreachable**: Prometheus has not scraped `/api/metrics` for 5 minutes. A deploy
   takes less.
@@ -1374,8 +1377,8 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   incident. Several at once usually mean Peek's side: the network, Chromium, the database or
   a provider many carriers share.
 - **Peek scheduled sync slow**: a scheduled sync that finished in the last 2 hours took
-  over 7.5 minutes, three quarters of its limit. A run starts no check after 4 minutes, so
-  a run this long means a check took minutes.
+  over 7.5 minutes. A run starts no check after 4 minutes, so a run this long means a check
+  took minutes.
 - **Peek stopped checking parcels**: no check has finished for 30 minutes, at any hour,
   while Prometheus still reaches Peek. The scheduled sync can run without checking anything.
 - **Peek server errors**: 5 API requests or more answered a 5xx in 15 minutes, health checks

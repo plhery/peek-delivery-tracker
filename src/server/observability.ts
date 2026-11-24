@@ -855,24 +855,30 @@ export function databaseUnavailable(error: unknown): boolean {
   return details.code === 'unreachable' || details.status === 502 || details.status === 503 || details.status === 504;
 }
 
+/**
+ * The scheduled sync's Sentry monitor. Every run's first check-in sends it, replacing edits made in Sentry.
+ *
+ * Runs follow one another rather than the clock: the next is queued when one ends, behind readers' checks,
+ * and a run sends no check-in between its first and its last. A run starts no check after four minutes, but
+ * a slow carrier's check keeps it going past ten, and a run handed over at a deploy keeps its check-in while
+ * it waits behind the readers' checks the new server takes first. The margin and the maximum runtime leave
+ * room for both: Sentry reports a sync that stopped once no check-in has come for 20 minutes past the even
+ * minute after the last, and a run still open after 30 minutes as timed out.
+ */
+export const SCHEDULED_SYNC_MONITOR = {
+  schedule: { type: 'crontab', value: '*/2 * * * *' },
+  checkinMargin: 20,
+  maxRuntime: 30,
+  timezone: 'Europe/Zurich',
+  failureIssueThreshold: 1,
+  recoveryThreshold: 1,
+} as const;
+
 export function beginScheduledSyncCheckIn(now = new Date()): ScheduledCheckIn | null {
   if (!initObservability()) return null;
   // The monitor kept its name from when runs came every 20 minutes overnight: renaming it would drop its history.
   const monitorSlug = 'delivery-tracker-sync-daytime';
-  const checkInId = Sentry.captureCheckIn({ monitorSlug, status: 'in_progress' }, {
-    schedule: {
-      type: 'crontab',
-      value: '*/2 * * * *',
-    },
-    checkinMargin: 5,
-    // Runs never overlap: a stuck one holds the queue, no later check-in arrives, and
-    // Sentry reports it as timed out after ten minutes, far beyond a normal run.
-    // Every run's first check-in sends this configuration, replacing edits made in Sentry.
-    maxRuntime: 10,
-    timezone: 'Europe/Zurich',
-    failureIssueThreshold: 1,
-    recoveryThreshold: 1,
-  });
+  const checkInId = Sentry.captureCheckIn({ monitorSlug, status: 'in_progress' }, SCHEDULED_SYNC_MONITOR);
   return { checkInId, monitorSlug, startedAt: now.getTime() };
 }
 

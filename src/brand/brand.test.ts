@@ -83,10 +83,10 @@ describe('carrier brand', () => {
     for (const id of Object.keys(CARRIER_DEFINITIONS)) {
       const palette = carrierBrand(CARRIER_DEFINITIONS[id as keyof typeof CARRIER_DEFINITIONS].color, CARRIER_PALETTES[id]);
       const edge = litEdge(palette.truck, palette['surface-dark'], palette.edge);
-      if (edge === palette.edge) continue;
-      lit += 1;
-      // A lit outline stands out from the card the body sinks into.
-      expect(contrast(edge, palette['surface-dark']), id).toBeGreaterThanOrEqual(paletteSource.litEdge.below);
+      // Every truck stands out from its dark card, by its body or by its outline (3:1, as any picture's shapes).
+      const shown = Math.max(contrast(palette.truck, palette['surface-dark']), contrast(edge, palette['surface-dark']));
+      expect(shown, id).toBeGreaterThanOrEqual(paletteSource.litEdge.below);
+      if (edge !== palette.edge) lit += 1;
     }
     expect(lit).toBeGreaterThan(0);
   });

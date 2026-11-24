@@ -1197,7 +1197,7 @@ dashboard's failure panels leave out.
 | `android_attestation_total` (key, play, mode) | Android key registrations by what the key attestation gave (`strong`, `basic` or its failure) and the Play Integrity token (`strong`, `basic`, its failure, `absent` or `unconfigured`), in `log` or `enforce` mode |
 | `lookup_proof_total` (kind, proof) | What let a `lookup` or `detection` without an account through: `app_attest`, `key_attestation` or `play_integrity` (Android), `turnstile` (a browser proof) or `none` (no verification configured), or that it was `refused` |
 | `public_parcel_read_total` (outcome) | Reads of a parcel link: `ok`, `not_found` or `stopped` (its sharing was stopped) |
-| `peek_ai_served_total` (says) | Parcels served with a Peek AI estimate, by what it says (`not_today`, `by_time`, `by_day`…): zero while the routes have no model |
+| `peek_ai_served_total` (says) | Parcels served with a Peek AI estimate, by what it says (`not_today`, `by_time`, `by_day`…), each counted once a day for each call however often a list left open asks for it: zero while the routes have no model |
 | `parcel_claim_total` (outcome) | Links kept after sign-in: `kept`, `already`, `quota`, `unavailable` |
 | `parcel_forgotten_total` (kind, reason) | Forgotten links and parcels (`kind`): `asked` by their owner, `expired`, or `stopped` 30 days ago |
 | `parcel_share_total` (kind, change) | Sharing `started`, `changed` (what the link shows) or `stopped`, through a `lookup`'s link or an `account`'s |

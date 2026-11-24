@@ -526,11 +526,28 @@ export function withEventPlaces(row: JsonObject, { peekAi: withPeekAi = true, de
 let peekAiReported = false;
 const DELIVERY_STEPS: ReadonlySet<string> = new Set(['out_for_delivery', 'delivered']);
 
+/** The call each parcel was last counted with, the newest last; a list left open asks for its parcels every 30 seconds. */
+const countedCalls = new Map<string, string>();
+const COUNTED_PARCELS = 50_000;
+
+/** Counts a parcel's estimate once a day for each call, however often it is served. */
+function countPeekAi(id: unknown, ai: NonNullable<ReturnType<typeof peekAiFor>>): void {
+  const call = `${new Date().toISOString().slice(0, 10)}|${ai.says}|${ai.ends_at ?? ''}`;
+  const parcel = typeof id === 'string' ? id : '';
+  if (parcel && countedCalls.get(parcel) === call) return;
+  if (parcel) {
+    countedCalls.delete(parcel);
+    countedCalls.set(parcel, call);
+    if (countedCalls.size > COUNTED_PARCELS) countedCalls.delete(countedCalls.keys().next().value!);
+  }
+  recordPeekAiServed(ai.says);
+}
+
 /** Peek AI's estimate for the served row, or null; a failure leaves the parcel served without it, reported once. */
 function peekAi(row: JsonObject, served: JsonObject): ReturnType<typeof peekAiFor> {
   try {
     const ai = peekAiFor(row, served);
-    if (ai) recordPeekAiServed(ai.says);
+    if (ai) countPeekAi(row.id, ai);
     return ai;
   } catch (error) {
     if (!peekAiReported) captureOperationalError(error, { component: 'api', operation: 'peek_ai' });

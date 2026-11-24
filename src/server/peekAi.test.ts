@@ -3,8 +3,12 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 vi.mock('./observability', async (original) => ({
   ...await original<typeof import('./observability')>(), captureOperationalError: vi.fn(),
 }));
+vi.mock('./metrics', async (original) => ({
+  ...await original<typeof import('./metrics')>(), recordPeekAiServed: vi.fn(),
+}));
 
 import { withEventPlaces } from './eventPlaces';
+import { recordPeekAiServed } from './metrics';
 import { captureOperationalError } from './observability';
 import { keepPeekAiModel, peekAiBlob, peekAiBlobFrom, peekAiFor, setPeekAiBlob, shortestRange, type PeekAiBlob } from './peekAi';
 import type { PeekAiTree } from './peekAiModel';
@@ -244,6 +248,22 @@ describe('served', () => {
     expect(withEventPlaces(planned('in_transit')).peek_ai).toMatchObject({ says: 'today_or_tomorrow' });
     expect(withEventPlaces(planned('out_for_delivery'))).not.toHaveProperty('peek_ai');
     expect(withEventPlaces(planned('delivered'))).not.toHaveProperty('peek_ai');
+  });
+
+  it('counts a parcel once a day for each call, however often a list left open serves it', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    setPeekAiBlob(blob());
+    vi.mocked(recordPeekAiServed).mockClear();
+    const counted = (id: string, at: string) => {
+      vi.setSystemTime(new Date(at));
+      withEventPlaces(row({ id }));
+      return vi.mocked(recordPeekAiServed).mock.calls.length;
+    };
+    expect(counted('counted-1', '2026-11-20T14:30:00Z')).toBe(1);
+    expect(counted('counted-1', '2026-11-20T14:30:30Z')).toBe(1);
+    expect(counted('counted-2', '2026-11-20T14:31:00Z')).toBe(2);
+    // The next day it is counted again.
+    expect(counted('counted-1', '2026-11-21T08:00:00Z')).toBe(3);
   });
 });
 

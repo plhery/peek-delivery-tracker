@@ -14854,6 +14854,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "rastreamento-packeta",
+      "title": "Rastreamento Packeta (Zásilkovna): códigos Z e pontos",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "dpd-pl",
       "catalog": "dpd-pl",
       "slug": "rastreamento-dpd-polonia",
@@ -15164,6 +15172,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento DHLink: códigos, status e quem entrega",
       "name": "DHLink",
       "color": "#143167"
+    },
+    {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "rastreamento-dpd-portugal",
+      "title": "Rastreamento DPD Portugal: códigos, status e pontos Pickup",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
     },
     {
       "id": "tnt-it",
@@ -18132,6 +18148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-zasilkovna-kuaidi-chaxun",
+      "title": "Packeta（Zásilkovna）快递查询：Z 单号、状态与自提",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "dpd-pl",
       "catalog": "dpd-pl",
       "slug": "dpd-poland-tracking",
@@ -18490,6 +18514,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "驼飞侠（DHLink）物流查询：敦煌网单号、状态与尾程",
       "name": "DHLink",
       "color": "#143167"
+    },
+    {
+      "id": "dpd-pt",
+      "catalog": "dpd-pt",
+      "slug": "dpd-portugal-kuaidi-chaxun",
+      "title": "DPD Portugal 葡萄牙快递查询：14 位单号、状态与自提点",
+      "name": "DPD Portugal",
+      "color": "#dc0032"
     },
     {
       "id": "tnt-it",

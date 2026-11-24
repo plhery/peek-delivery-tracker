@@ -4516,6 +4516,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "ydh-sendungsverfolgung",
+      "title": "YDH Sendungsverfolgung: YDH...YQ & AZ-Codes & Hilfe",
+      "name": "YDH",
+      "color": "#015db9"
+    },
+    {
       "id": "xlcourier",
       "catalog": "xlcourier",
       "slug": "xlcourier-sendungsverfolgung",
@@ -6606,6 +6614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#cf5d15"
     },
     {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "suivi-ydh",
+      "title": "Suivi YDH\u00a0: codes YDH...YQ et AZ, relais et contacts",
+      "name": "YDH",
+      "color": "#015db9"
+    },
+    {
       "id": "xlcourier",
       "catalog": "xlcourier",
       "slug": "suivi-xlcourier",
@@ -8670,6 +8686,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento 360Lion: codici WSH e AR, stati e contatti",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "tracciamento-ydh",
+      "title": "Tracciamento YDH: codici YDH...YQ e AZ, passaggi e aiuto",
+      "name": "YDH",
+      "color": "#015db9"
     },
     {
       "id": "xlcourier",
@@ -10744,6 +10768,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo Paquetexpress: guías, estados, Ocurre y contacto",
       "name": "Paquetexpress",
       "color": "#002a52"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "seguimiento-ydh",
+      "title": "Seguimiento YDH: códigos YDH...YQ y AZ y contactos",
+      "name": "YDH",
+      "color": "#015db9"
     },
     {
       "id": "a-tu-hora-express",
@@ -12874,6 +12906,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio 360Lion: códigos WSH e AR, estados e contactos",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "rastreio-ydh",
+      "title": "Rastreio YDH: códigos YDH...YQ e AZ, entregas e ajuda",
+      "name": "YDH",
+      "color": "#015db9"
     },
     {
       "id": "xlcourier",
@@ -15014,6 +15054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie 360Lion: kody WSH i AR, statusy i kontakt",
       "name": "360Lion",
       "color": "#cf5d15"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "sledzenie-ydh",
+      "title": "Śledzenie YDH: kody YDH...YQ i AZ, przekazania i pomoc",
+      "name": "YDH",
+      "color": "#015db9"
     },
     {
       "id": "xlcourier",

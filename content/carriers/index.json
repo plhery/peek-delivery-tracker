@@ -257,7 +257,7 @@
   { "id": "haypost", "catalog": "haypost", "name": "HayPost", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "360lion", "catalog": "360lion", "name": "360Lion", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "paquetexpress", "catalog": "paquetexpress", "name": "Paquetexpress", "languages": ["en", "es"] },
-  { "id": "ydh", "catalog": "ydh", "name": "YDH", "languages": ["en"] },
+  { "id": "ydh", "catalog": "ydh", "name": "YDH", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "a-tu-hora-express", "catalog": "a-tu-hora-express", "name": "A Tu Hora Express", "languages": ["en", "es"] },
   { "id": "dtdc", "catalog": "dtdc", "name": "DTDC", "languages": ["en"] },
   { "id": "gofo-es", "catalog": "gofo-es", "name": "GOFO Spain", "languages": ["en", "es"] },

@@ -68,3 +68,33 @@ it('a browser told the scan hears nothing of its earlier-stamped copies', async 
 it('nor when another browser of the account failed to hear it, which hears it once', async () => {
   expect(await scenario(true)).toEqual(['sub2:earlier']);
 });
+
+// A carrier's scan that took a universal provider's row of it over is stored under the provider's identity (`held`):
+// it is the carrier's scan, so the carrier's own row of the same step minutes later repeats it.
+async function afterHeldRow(held: boolean): Promise<string[]> {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const service = new WebPushNotificationService(client, '', '', '', () => Date.parse('2026-11-20T14:35:00Z'));
+  const sent: string[] = [];
+  vi.spyOn(service, 'send').mockImplementation(async (row) => { sent.push(String(row.event_id)); });
+  vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue();
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  const arrival = { stage: 'in_transit' as const, description: 'Arrived at Regional Facility', location: 'SAMPLE TOWN, ST', stageSource: 'carrier_map' };
+  vi.mocked(client.recentScans).mockResolvedValue(new Map([['pkg', [
+    { id: 'own', occurredAt: '2026-11-20T13:23:00Z', source: 'usps', ...arrival },
+    { id: 'taken', occurredAt: '2026-11-20T13:21:00Z', source: 'unknown/17TRACK', ...arrival, ...held ? { held: true } : {} },
+  ]]]));
+  vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map([['pkg', '2026-11-20T13:23:00Z']]));
+  vi.spyOn(client, 'listPendingPushNotifications').mockResolvedValueOnce([{
+    subscription_id: 'sub1', package_id: 'pkg', event_id: 'own', stage: 'in_transit',
+    occurred_at: '2026-11-20T13:23:00Z', event_created_at: '2026-11-20T14:30:00Z',
+  }]);
+  await service.dispatch();
+  return sent;
+}
+
+it('the carrier\'s own row of a scan its answer took over from a provider tells nothing new', async () => {
+  expect(await afterHeldRow(true)).toEqual([]);
+  // A provider's row the carrier's answer holds nothing of is another source's.
+  expect(await afterHeldRow(false)).toEqual(['own']);
+});

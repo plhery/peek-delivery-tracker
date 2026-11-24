@@ -1366,6 +1366,24 @@ describe('notification reads', () => {
     }]);
   });
 
+  it('marks the recent scans a carrier\'s answer took over from a provider (held) as that carrier\'s', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const scan = (id: string, providerEventId: string) => ({ id, stage: 'in_transit', occurred_at: '2026-11-20T13:21:00Z', description: 'Arrived ',
+      provider_event_id: providerEventId });
+    const request = vi.spyOn(client, 'request').mockImplementation(async (path: string) => path.startsWith('/rest/v1/packages')
+      ? [{ id: 'package-1', direct_history: { from: '2026-11-20T10:00:00Z', to: '2026-11-20T14:00:00Z', held: ['unknown:taken'] } }]
+      : path.includes('package-1') ? [scan('own', 'usps:own'), scan('taken', 'unknown:taken')] : [scan('other', 'unknown:taken')]);
+    const recent = await client.recentScans(['package-1', 'package-2', 'package-1']);
+    expect(recent.get('package-1')?.map(({ id, held }) => ({ id, held }))).toEqual([{ id: 'own', held: undefined }, { id: 'taken', held: true }]);
+    // Another parcel's row of the same identity is not held.
+    expect(recent.get('package-2')?.[0]).not.toHaveProperty('held');
+    const packages = request.mock.calls.map(([path]) => new URL(`https://database.example${String(path)}`))
+      .filter(({ pathname }) => pathname === '/rest/v1/packages');
+    expect(packages).toHaveLength(1);
+    expect(packages[0]!.searchParams.get('id')).toBe('in.(package-1,package-2)');
+    expect(packages[0]!.searchParams.get('carrier_data->direct_history->>held')).toBe('not.is.null');
+  });
+
   it('reads the scans of handed-over parcels, with their carriers, for relay copies', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const scan = { id: 'scan', stage: 'in_transit', occurred_at: '2026-09-09T14:16:00Z', created_at: '2026-09-09T15:30:01Z', provider_event_id: 'dhl:a' };

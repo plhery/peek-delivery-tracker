@@ -10,6 +10,7 @@ import type { AssistantClient } from './assistants/clients';
 import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
+import { DIRECT_HISTORY, heldRows } from './providerCopies';
 import { providerLimit } from './providerPolicy';
 import { withReviewDemo } from './reviewDemo';
 import { keptStage } from './stageNotices';
@@ -283,7 +284,9 @@ export interface WebPushKeys {
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
-export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string; kept?: boolean; storedAt?: string };
+/** A stored scan as push reads it; `held`: a universal row its carrier's answer took over (`heldRows`), that carrier's scan. */
+export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'>
+  & { source: string; stageSource?: string; kept?: boolean; storedAt?: string; held?: boolean };
 
 /** A connected assistant or personal token of an account, as its owner sees it in Settings. */
 export interface AssistantGrant {
@@ -892,24 +895,35 @@ export class SupabaseClient {
    * and its scans stored after a newer one (`storedLate`).
    */
   async recentScans(packageIds: string[]): Promise<Map<string, RecentScan[]>> {
-    const recent = new Map<string, RecentScan[]>();
-    await Promise.all([...new Set(packageIds)].map(async (packageId) => {
-      const events = rows(await this.request(`/rest/v1/tracking_events?${query([
+    const ids = [...new Set(packageIds)];
+    const [held, found] = await Promise.all([this.heldScans(ids), Promise.all(ids.map(async (packageId) => [packageId, rows(await this.request(
+      `/rest/v1/tracking_events?${query([
         ['package_id', `eq.${packageId}`],
         ['select', 'id,stage,location,occurred_at,created_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage'],
         ['order', 'occurred_at.desc'],
         ['limit', '60'],
-      ])}`));
-      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, created_at, description, provider_event_id, universal_provider, stage_source, kept_stage }) =>
-        typeof id === 'string' && typeof occurred_at === 'string' ? [{
-          id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
-          ...(typeof created_at === 'string' ? { storedAt: created_at } : {}),
-          description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
-          ...(typeof stage_source === 'string' ? { stageSource: stage_source } : {}),
-          ...(keptStage(kept_stage) ? { kept: true } : {}),
-        }] : []));
-    }));
-    return recent;
+      ])}`))] as const))]);
+    return new Map(found.map(([packageId, events]) => [packageId, events.flatMap(({ id, stage, location, occurred_at, created_at, description, provider_event_id, universal_provider, stage_source, kept_stage }) =>
+      typeof id === 'string' && typeof occurred_at === 'string' ? [{
+        id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
+        ...(typeof created_at === 'string' ? { storedAt: created_at } : {}),
+        description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
+        ...(typeof stage_source === 'string' ? { stageSource: stage_source } : {}),
+        ...(keptStage(kept_stage) ? { kept: true } : {}),
+        ...(typeof provider_event_id === 'string' && held.get(packageId)?.has(provider_event_id) ? { held: true } : {}),
+      }] : [])]));
+  }
+
+  /** The universal rows each package's carrier answer holds (`heldRows`), for the packages that hold any. */
+  private async heldScans(packageIds: string[]): Promise<Map<string, Set<string>>> {
+    const pages = Array.from({ length: Math.ceil(packageIds.length / 100) }, (_, page) => packageIds.slice(page * 100, page * 100 + 100));
+    const found = await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/packages?${query([
+      ['id', `in.(${page.join(',')})`],
+      ['carrier_data->direct_history->>held', 'not.is.null'],
+      ['select', 'id,direct_history:carrier_data->direct_history'],
+    ])}`))));
+    return new Map(found.flat().flatMap(({ id, direct_history }) => typeof id === 'string'
+      ? [[id, heldRows({ carrier_data: { [DIRECT_HISTORY]: direct_history ?? null } })] as const] : []));
   }
 
   /**

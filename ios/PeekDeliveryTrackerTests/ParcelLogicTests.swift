@@ -4470,6 +4470,10 @@ extension SessionIsolationTests {
         var presetAnswer = draft.preferences(timezone: "Europe/Zurich")
         presetAnswer.emailOnDelivery = true
         presetAnswer.emailAvailable = true
+        // The clock and units the app shows, as in `emailPreferences`: other ones would have the app send its own back
+        // on its own, and that save, answered meanwhile, would set aside a load the test waits for.
+        presetAnswer.clock = saved.clock
+        presetAnswer.distance = saved.distance
         respond(try JSONEncoder.deliveryTracker.encode(presetAnswer), recording: log)
         try await store.saveNotificationPreferences(draft.preferences(timezone: "Europe/Zurich"))
         let preset = try XCTUnwrap(log.requests.last?.body)

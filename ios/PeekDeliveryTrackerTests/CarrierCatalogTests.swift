@@ -584,8 +584,8 @@ final class CarrierCatalogTests: XCTestCase {
         let hint = CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
         recognition.failedNumber = nil
         recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], inputSuggested: hint)
-        XCTAssertNotNil(SuggestedPostcodeCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "DE", applies: true))
-        XCTAssertNil(SuggestedPostcodeCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "FR", applies: true))
+        XCTAssertNotNil(SuggestedCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "DE", applies: true))
+        XCTAssertNil(SuggestedCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, country: "FR", applies: true))
     }
 
     /// The Add sheet names the country the carriers are asked for while it decides what the check says: asking, nobody

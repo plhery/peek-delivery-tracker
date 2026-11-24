@@ -515,36 +515,63 @@ data class ParcelAddition(
         }
 
     /**
-     * The carrier the check suggests for a number nobody knew (`inputSuggested`): one that serves the reader's country
-     * and takes the delivery postcode and nothing else for the number, such as Mondial Relay for 8 digits, so nobody
-     * could ask it. Only while the carrier is left automatic, for a number whose shape names none and that isn't
-     * Amazon's, once the check has settled without a carrier: nobody knew it, nothing could be asked, or it failed.
-     * Its postcode field shows, optional, and the parcel goes to it only with a postcode the field takes (the web's
-     * `suggested` and `lookupInput`).
+     * For a carrier picked by hand that refuses the number, the carrier the check suggests for it with the delivery
+     * postcode, while nobody knew it ([postcodeSuggested]): it is offered instead (an 8-digit Mondial Relay number filed
+     * under InPost; the web's `offeredInstead`).
+     */
+    val offeredInstead: CarrierId?
+        get() {
+            val override = carrierOverride ?: return null
+            if (!refused || amazonNumber) return null
+            return postcodeSuggested?.takeIf { it != override }
+        }
+
+    /** The check has settled without a carrier: nobody knew the number, nothing could be asked, or it failed. */
+    private val nobodyKnew: Boolean
+        get() = when (recognitionStatus) {
+            is CarrierRecognition.Status.NotFound, is CarrierRecognition.Status.Failed, CarrierRecognition.Status.Unasked -> true
+            else -> false
+        }
+
+    /** The carrier the check's answer for the number says may have it with the delivery postcode (`inputSuggested`). */
+    private val postcodeSuggested: CarrierId?
+        get() {
+            if (!nobodyKnew) return null
+            val answer = recognition.answer?.takeIf { it.trackingNumber == normalizedNumber } ?: return null
+            return answer.inputSuggested?.takeIf { it.field == CarrierDetectionInputSuggestedField.DpdPostcode }?.carrier
+        }
+
+    /**
+     * The carrier suggested for a number nobody knew, while the carrier is left automatic, for a number whose shape
+     * names none and that isn't Amazon's, once the check has settled without a carrier ([nobodyKnew]). Either the one
+     * the check suggests (`inputSuggested`): one that serves the reader's country and takes the delivery postcode and
+     * nothing else for the number, such as Mondial Relay for 8 digits, so nobody could ask it; its postcode field shows,
+     * optional. Or else the one candidate that shows the number only with the last 4 digits of a phone
+     * ([CarrierCatalog.phoneDigitsCandidate]), such as J&T China for a JT number; its field shows, optional. The
+     * parcel goes to it only with its field filled in (the web's `suggested`, `phoneSuggested` and `lookupInput`).
      */
     val suggestedCarrier: CarrierId? get() = suggestion?.first
 
-    /** The suggested carrier and its postcode field for the number, optional, before a country shapes it. */
-    private val suggestion: Pair<CarrierId, CarrierRequirement>?
+    /** The suggested carrier and its fields for the number, optional, before a country shapes the postcode's. */
+    private val suggestion: Pair<CarrierId, List<CarrierRequirement>>?
         get() {
-            if (carrierOverride != null || amazonNumber || parsed.carrier != CarrierId.Unknown) return null
-            val answer = recognition.answer?.takeIf { it.trackingNumber == normalizedNumber } ?: return null
-            val carrier = answer.inputSuggested?.takeIf { it.field == CarrierDetectionInputSuggestedField.DpdPostcode }?.carrier ?: return null
-            when (recognitionStatus) {
-                is CarrierRecognition.Status.NotFound, is CarrierRecognition.Status.Failed, CarrierRecognition.Status.Unasked -> Unit
-                else -> return null
+            if (carrierOverride != null || amazonNumber || parsed.carrier != CarrierId.Unknown || !nobodyKnew) return null
+            val number = parsed.trackingNumber
+            postcodeSuggested?.let { carrier ->
+                val field = catalog.requirements(carrier, number).firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
+                    ?: return null
+                return carrier to listOf(field.copy(optional = true))
             }
-            val field = catalog.requirements(carrier, parsed.trackingNumber).firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
-                ?: return null
-            return carrier to field.copy(optional = true)
+            val carrier = catalog.phoneDigitsCandidate(parsed.candidates, number) ?: return null
+            return carrier to catalog.requirements(carrier, number)
         }
 
     /** The carrier the fields are for: the one suggested ([suggestedCarrier]), otherwise the one in play. */
     val inputCarrier: CarrierId get() = suggestedCarrier ?: resolvedCarrier
 
-    /** The fields before a country shapes the postcode's: the suggested carrier's postcode alone, otherwise the carrier's own. */
+    /** The fields before a country shapes the postcode's: the suggested carrier's, otherwise the carrier's own. */
     private val carrierRequirements: List<CarrierRequirement>
-        get() = suggestion?.let { listOf(it.second) } ?: catalog.requirements(resolvedCarrier, parsed.trackingNumber)
+        get() = suggestion?.second ?: catalog.requirements(resolvedCarrier, parsed.trackingNumber)
 
     /** The carrier's fields, the postcode's shaped for the country beside it. */
     val requirements: List<CarrierRequirement>
@@ -659,10 +686,11 @@ data class ParcelAddition(
     val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, sentPostcode, sentCarrier)
 
     /**
-     * The carrier `save()` sends: the one suggested once its field takes the postcode, as if it had been picked and its
-     * field filled, otherwise the one in play (the web's `lookupInput`).
+     * The carrier `save()` sends: the one suggested once its field takes the postcode or holds the phone's digits, as if
+     * it had been picked and its field filled, otherwise the one in play (the web's `lookupInput`).
      */
-    val sentCarrier: CarrierId get() = suggestedCarrier?.takeIf { sentPostcode != null } ?: resolvedCarrier
+    val sentCarrier: CarrierId
+        get() = suggestedCarrier?.takeIf { sentPostcode != null || sentPhoneDigits != null } ?: resolvedCarrier
 
     /** The phone digits `save()` sends: only while the carrier asks for them, and none when empty. */
     val sentPhoneDigits: String? get() = phoneDigitsRequirement?.normalizedValue(phoneDigits)?.nonEmpty

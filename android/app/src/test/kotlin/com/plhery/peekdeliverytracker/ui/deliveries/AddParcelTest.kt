@@ -680,10 +680,10 @@ class AddParcelTest {
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", carrier, null, "1010", null)), source.additions)
     }
 
-    /** The check's answer for [RELAY_NUMBER]: nobody knew it, and Mondial Relay may have it with the delivery postcode. */
-    private fun FakeDeliveries.suggestingMondialRelay(carrier: CarrierId = CarrierId.Unknown) {
-        detections[RELAY_NUMBER] = CarrierDetectionResponse(
-            RELAY_NUMBER, carrier = carrier,
+    /** The check's answer for `number`: nobody knew it, and Mondial Relay may have it with the delivery postcode. */
+    private fun FakeDeliveries.suggestingMondialRelay(carrier: CarrierId = CarrierId.Unknown, number: String = RELAY_NUMBER) {
+        detections[number] = CarrierDetectionResponse(
+            number, carrier = carrier,
             inputSuggested = CarrierDetectionInputSuggested(CarrierId.MondialRelay, CarrierDetectionInputSuggestedField.DpdPostcode),
         )
     }
@@ -772,6 +772,134 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(listOf(FakeDeliveries.AdditionRequest(RELAY_NUMBER, "", CarrierId("colisweb"), null, null, null)), source.additions)
+    }
+
+    /**
+     * InPost picked by hand for an 8-digit number nobody knew refuses it: Mondial Relay, which the check suggests with
+     * the postcode, is offered instead under the line, and once used its own postcode field shows, required.
+     */
+    @Test
+    fun aCarrierTheCheckSuggestsIsOfferedInsteadOfOnePickedByHandThatRefusesTheNumber() {
+        show {
+            suggestingMondialRelay(number = EIGHT_DIGITS)
+            refusals = setOf(NumberRefusalRequest(EIGHT_DIGITS, CarrierId.Inpost))
+        }
+        open()
+        type(EIGHT_DIGITS)
+        leave()
+        assertTrue(exists(ADD_POSTCODE))
+        pick(CarrierId.Inpost, "InPost")
+        val line = description(ADD_CARRIER)
+        assertTrue("$line", line!!.endsWith("${text("add.line.refused")}, ${text("add.line.change")}"))
+        val name = CarrierCatalog.shared.info(CarrierId.MondialRelay, AppLanguage.En).displayName
+        val offered = text("detail.inputSuggested", mapOf("carrier" to name))
+        compose.onNode(hasText(offered)).assertExists()
+        assertFalse(exists(ADD_POSTCODE))
+        node(ADD_USE_SUGGESTED).assert(hasText(text("add.useCarrier", mapOf("carrier" to name)))).performClick()
+        settle()
+        // Mondial Relay picked: its postcode is required for this number.
+        assertEquals("$name, ${text("add.line.chosen")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertTrue(exists(ADD_POSTCODE))
+        compose.onNode(hasText(text("add.requirement.dpdPostcodeHelp"))).assertExists()
+        compose.onNode(hasText(offered)).assertDoesNotExist()
+        assertFalse(exists(ADD_USE_SUGGESTED))
+        node(ADD_SAVE).assertIsNotEnabled()
+        chooseCountry("PT")
+        node(ADD_POSTCODE).performTextInput("1000-001")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(EIGHT_DIGITS, "", CarrierId.MondialRelay, null, "1000-001", "PT")), source.additions)
+    }
+
+    /** A carrier picked by hand that may issue the number is offered nothing instead. */
+    @Test
+    fun aCarrierPickedByHandThatMayIssueTheNumberIsOfferedNothingInstead() {
+        show { suggestingMondialRelay(number = EIGHT_DIGITS) }
+        open()
+        type(EIGHT_DIGITS)
+        leave()
+        pick(CarrierId("colisweb"), "Colisweb")
+        assertEquals(listOf(NumberRefusalRequest(EIGHT_DIGITS, CarrierId("colisweb"))), source.refusalQuestions)
+        assertEquals("Colisweb, ${text("add.line.chosen")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        val name = CarrierCatalog.shared.info(CarrierId.MondialRelay, AppLanguage.En).displayName
+        compose.onNode(hasText(text("detail.inputSuggested", mapOf("carrier" to name)))).assertDoesNotExist()
+        assertFalse(exists(ADD_USE_SUGGESTED))
+    }
+
+    /** The check's answer for [JT_NUMBER]: J&T was asked, and `carrier` knows it, or nobody. */
+    private fun FakeDeliveries.answeringJAndT(carrier: CarrierId = CarrierId.Unknown) {
+        detections[JT_NUMBER] = CarrierDetectionResponse(JT_NUMBER, carrier = carrier, asked = listOf(CarrierId.JAndT))
+    }
+
+    /**
+     * JT and 13 digits fit J&T and J&T China, whose tracker cannot confirm a number without the last 4 digits of a
+     * phone: once nobody knew the number, J&T China's field shows, optional, its help naming it, and the parcel goes to
+     * J&T China with the digits.
+     */
+    @Test
+    fun aNumberNobodyKnewOffersThePhoneDigitsOfTheCarrierThatShowsItWithThemAndGoesToItWithThem() {
+        show { answeringJAndT() }
+        open()
+        type(JT_NUMBER)
+        assertFalse(exists(ADD_PHONE_DIGITS))
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        assertEquals("", fieldText(ADD_PHONE_DIGITS))
+        val name = CarrierCatalog.shared.info(CarrierId.JAndTCn, AppLanguage.En).displayName
+        compose.onNode(hasText(text("add.requirement.phoneDigitsHelp", mapOf("carrier" to name)))).assertExists()
+        // The line still says nobody knows the number.
+        assertTrue(description(ADD_CARRIER)!!.startsWith("${text("add.detect")}, "))
+        node(ADD_SAVE).assertIsEnabled()
+        node(ADD_PHONE_DIGITS).performTextInput("0123")
+        compose.waitForIdle()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(
+            listOf(FakeDeliveries.AdditionRequest(JT_NUMBER, "", CarrierId.JAndTCn, null, null, null, phoneDigits = "0123")),
+            source.additions,
+        )
+    }
+
+    /** Without the digits the number is added on automatic, as before. */
+    @Test
+    fun withoutThePhoneDigitsANumberNobodyKnewIsAddedOnAutomatic() {
+        show { answeringJAndT() }
+        open()
+        type(JT_NUMBER)
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(JT_NUMBER, "", CarrierId.Unknown, null, null, null)), source.additions)
+    }
+
+    /** A carrier that knows the number asks for no phone digits. */
+    @Test
+    fun aCarrierThatKnowsTheNumberAsksForNoPhoneDigits() {
+        show { answeringJAndT(CarrierId.JAndT) }
+        open()
+        type(JT_NUMBER)
+        leave()
+        val name = CarrierCatalog.shared.info(CarrierId.JAndT, AppLanguage.En).displayName
+        assertEquals("$name, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        assertFalse(exists(ADD_PHONE_DIGITS))
+    }
+
+    /** Nor does a carrier picked by hand that doesn't ask for them. */
+    @Test
+    fun aCarrierPickedByHandAsksForNoOtherCarriersPhoneDigits() {
+        show { answeringJAndT() }
+        open()
+        type(JT_NUMBER)
+        leave()
+        node(ADD_PHONE_DIGITS).performTextInput("0123")
+        compose.waitForIdle()
+        pick(CarrierId.JAndT, "J&T")
+        assertFalse(exists(ADD_PHONE_DIGITS))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(JT_NUMBER, "", CarrierId.JAndT, null, null, null)), source.additions)
     }
 
     /** J&T Express Mexico shows its scans with the last 4 digits of a phone: an optional field, sent with the parcel. */
@@ -2571,6 +2699,12 @@ private const val POSTNL = "3SABCD826405193"
 
 /** A synthetic 8-digit number, the shape Mondial Relay can be asked about only with the delivery postcode. */
 private const val RELAY_NUMBER = "76434219"
+
+/** Another synthetic 8-digit number, which InPost refuses as one it doesn't issue. */
+private const val EIGHT_DIGITS = "30517294"
+
+/** A synthetic JT number with 13 digits: J&T's shape, and J&T China's, which shows it only with the phone's digits. */
+private const val JT_NUMBER = "JT0805136742918"
 
 /** Packs, whose lookup needs the postcode. */
 private val PACKS = CarrierId("packs")

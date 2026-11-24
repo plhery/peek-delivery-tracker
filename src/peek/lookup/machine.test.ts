@@ -429,6 +429,29 @@ describe('a carrier that may have the number', () => {
   });
 });
 
+describe('a carrier that shows the number with the phone’s digits', () => {
+  // JT and 13 digits fit J&T and J&T China; J&T China's tracker cannot confirm a number without the phone's digits.
+  const JT = 'JT0805136742918';
+  const answer: LookupEvent = { type: 'answer', answer: { trackingNumber: JT, carrier: 'unknown', asked: ['j-and-t'] } };
+
+  it('offers its field, optional, and names the carrier only with the digits', () => {
+    const pasting = run([pasted(JT), answer]);
+    expect(pasting.job).toBeNull();
+    expect(survey(pasting)).toMatchObject({ carrier: 'unknown', source: 'none', suggested: 'j-and-t-cn', inputCarrier: 'j-and-t-cn',
+      fields: [{ field: 'phoneDigits', optional: true }], missing: null, need: null });
+    expect(run([track], [], pasting).job).toEqual({ type: 'lookup', carrier: 'unknown', input: { trackingNumber: JT } });
+    const filled = run([{ type: 'fill', carrier: 'j-and-t-cn', field: 'phoneDigits', value: '0123' }, track], [], pasting);
+    expect(filled.job).toEqual({ type: 'lookup', carrier: 'j-and-t-cn', input: { trackingNumber: JT, carrier: 'j-and-t-cn', phoneDigits: '0123' } });
+  });
+
+  it('asks nothing once a carrier knows the number, or for a carrier chosen by hand', () => {
+    const known = run([pasted(JT), { type: 'answer', answer: { trackingNumber: JT, carrier: 'j-and-t', asked: ['j-and-t'] } }]);
+    expect(survey(known)).toMatchObject({ suggested: null, carrier: 'j-and-t', fields: [] });
+    const chosen = run([{ type: 'choose', carrier: 'j-and-t' }], [], run([pasted(JT), answer]));
+    expect(survey(chosen)).toMatchObject({ suggested: null, carrier: 'j-and-t', fields: [] });
+  });
+});
+
 describe('a postcode this device gave before', () => {
   const GLS = 'gls-ch';
   const choose = (carrier: GivenPostcode['carrier'], postcodes: readonly GivenPostcode[]) =>

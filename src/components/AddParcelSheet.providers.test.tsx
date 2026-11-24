@@ -428,4 +428,75 @@ describe('a carrier that may have the number', () => {
     expect(await screen.findByText('Peek looks it up after you add it')).toBeInTheDocument();
     expect(screen.queryByRole('textbox', { name: /^Delivery postcode/ })).not.toBeInTheDocument();
   });
+
+  it('is offered instead of a carrier chosen by hand that issues no number like this one', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue(suggesting);
+    vi.stubGlobal('fetch', vi.fn(async (_path: string, init?: RequestInit) =>
+      Response.json({ refused: JSON.parse(String(init?.body)).carrier === 'inpost' })));
+    const onAdd = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    await screen.findByRole('textbox', { name: /^Delivery postcode/ });
+    await pickCarrier(user, carrierLine(/^Detect automatically/), 'InPost');
+    expect(await screen.findByText('doesn’t issue numbers like this one')).toBeInTheDocument();
+    expect(screen.getByText('Mondial Relay may have this parcel. Add the delivery postcode to track it.')).toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /^Delivery postcode/ })).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Use Mondial Relay' }));
+    // Mondial Relay picked: its postcode is required for this number.
+    const postcode = await screen.findByRole('textbox', { name: /^Delivery postcode/ });
+    expect(postcode).toBeRequired();
+    expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Delivery country' }), 'PT');
+    await user.type(postcode, '1000-001');
+    await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
+    expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({
+      trackingNumber: number, carrier: 'mondial-relay', dpdPostcode: '1000-001', dpdPostcodeCountry: 'PT',
+    }));
+  });
+
+  it('is not offered beside a carrier chosen by hand that may issue the number', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue(suggesting);
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+    const user = userEvent.setup();
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    await screen.findByRole('textbox', { name: /^Delivery postcode/ });
+    await pickCarrier(user, carrierLine(/^Detect automatically/), 'Colisweb');
+    expect(await screen.findByText('Chosen by you')).toBeInTheDocument();
+    expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Use Mondial Relay' })).not.toBeInTheDocument();
+  });
+});
+
+describe('a carrier that shows the number with the phone’s digits', () => {
+  // JT and 13 digits fit J&T and J&T China; J&T China's tracker cannot confirm a number without the phone's digits.
+  const number = 'JT0805136742918';
+
+  it('offers its field, optional, when nobody knew the number, and names the carrier only with the digits', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: number, carrier: 'unknown', asked: ['j-and-t'] });
+    const onAdd = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    const phone = await screen.findByRole('textbox', { name: /^Last 4 digits of the phone number/ });
+    expect(phone).not.toBeRequired();
+    expect(screen.getByText(/^J&T Express China shows its scans only with the last 4 digits/)).toBeInTheDocument();
+    await user.type(phone, '0123');
+    await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
+    expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ trackingNumber: number, carrier: 'j-and-t-cn', phoneDigits: '0123' }));
+  });
+
+  it('adds the number as before without the digits, and asks nothing once a carrier knows it', async () => {
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: number, carrier: 'unknown', asked: ['j-and-t'] });
+    const onAdd = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    const { unmount } = render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    await screen.findByRole('textbox', { name: /^Last 4 digits of the phone number/ });
+    await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
+    expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ trackingNumber: number, carrier: 'unknown', phoneDigits: undefined }));
+    unmount();
+
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: number, carrier: 'j-and-t', asked: ['j-and-t'] });
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput={number} />, { wrapper: servingGuides });
+    expect(await screen.findByRole('button', { name: /^J&T Express has this parcel/ })).toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /^Last 4 digits of the phone number/ })).not.toBeInTheDocument();
+  });
 });

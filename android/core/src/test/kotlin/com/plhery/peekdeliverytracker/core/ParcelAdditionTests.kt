@@ -548,6 +548,137 @@ class ParcelAdditionTests {
     }
 
     /**
+     * A carrier picked by hand that refuses an 8-digit number nobody knew (InPost) is pointed out, and the carrier the
+     * check suggests with the postcode is offered instead; once picked, its own postcode field shows, required for 8
+     * digits. A carrier picked by hand that may issue the number is offered nothing.
+     */
+    @Test
+    fun aCarrierTheCheckSuggestsIsOfferedInsteadOfOnePickedByHandThatRefusesTheNumber() {
+        val number = "30517294"
+        val settled = addition(number, region = "PT").settling(number)
+        val relay = CarrierDetectionInputSuggested(CarrierId.MondialRelay, CarrierDetectionInputSuggestedField.DpdPostcode)
+        fun answered(answer: CarrierDetectionResponse) = settled.copy(recognition = settled.recognition.copy(answer = answer))
+        val form = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId("colisweb")), inputSuggested = relay))
+        val inpost = form.copy(carrierOverride = CarrierId.Inpost)
+        val question = NumberRefusalRequest(trackingNumber = number, carrier = CarrierId.Inpost)
+        assertEquals(question, inpost.refusalQuestion)
+        // Until the server says InPost refuses it, nothing is offered.
+        assertNull(inpost.offeredInstead)
+        val refused = inpost.copy(refusedQuestion = question)
+        assertEquals(localizer.text("add.line.refused"), refused.lineDetail(localizer))
+        assertEquals(CarrierId.MondialRelay, refused.offeredInstead)
+        // InPost's fields, none: Mondial Relay's postcode isn't asked for beside it.
+        assertNull(refused.suggestedCarrier)
+        assertNull(refused.postcodeRequirement)
+        assertEquals(CarrierId.Inpost, refused.sentCarrier)
+        // The check failed or asked nobody: offered too.
+        val failed = answered(
+            CarrierDetectionResponse(
+                number, carrier = CarrierId.Unknown, asked = listOf(CarrierId("colisweb")), unanswered = listOf(CarrierId("colisweb")),
+                inputSuggested = relay,
+            ),
+        )
+        assertEquals(CarrierId.MondialRelay, failed.copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question).offeredInstead)
+        val unasked = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, inputSuggested = relay))
+        assertEquals(CarrierId.MondialRelay, unasked.copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question).offeredInstead)
+
+        // Mondial Relay picked: its own postcode, required, and the parcel goes to it with the postcode and its country.
+        val picked = refused.copy(carrierOverride = CarrierId.MondialRelay)
+        assertNull(picked.offeredInstead)
+        assertFalse(picked.postcodeRequirement!!.isOptional)
+        assertFalse(picked.canSave)
+        val filled = picked.copy(deliveryPostcode = "1000-001")
+        assertTrue(filled.canSave)
+        assertEquals(CarrierId.MondialRelay, filled.sentCarrier)
+        assertEquals("1000-001", filled.sentPostcode)
+        assertEquals("PT", filled.sentPostcodeCountry)
+        // Mondial Relay itself refusing it is offered nothing.
+        val relayRefused = picked.copy(refusedQuestion = NumberRefusalRequest(trackingNumber = number, carrier = CarrierId.MondialRelay))
+        assertTrue(relayRefused.refused)
+        assertNull(relayRefused.offeredInstead)
+
+        // A carrier picked by hand that may issue the number, one the check found, or an answer that suggests nobody:
+        // nothing offered.
+        assertNull(form.copy(carrierOverride = CarrierId("colisweb")).offeredInstead)
+        val found = answered(CarrierDetectionResponse(number, carrier = CarrierId("colisweb"), inputSuggested = relay))
+            .copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question)
+        assertEquals(CarrierId("colisweb"), found.knownElsewhere)
+        assertNull(found.offeredInstead)
+        val several = answered(
+            CarrierDetectionResponse(
+                number, carrier = CarrierId.Unknown, recognized = listOf(CarrierId("colisweb"), CarrierId("heppner")), inputSuggested = relay,
+            ),
+        )
+        assertNull(several.copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question).offeredInstead)
+        assertNull(settled.copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question).offeredInstead)
+        val plain = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown))
+        assertNull(plain.copy(carrierOverride = CarrierId.Inpost, refusedQuestion = question).offeredInstead)
+    }
+
+    /**
+     * JT and 13 digits fit J&T and J&T China, and J&T China's tracker cannot confirm a number without the last 4 digits
+     * of a phone. Once nobody knew the number, J&T China's field shows, optional, with its help naming it; the parcel
+     * goes to J&T China with the digits, and on automatic without them, as before. A carrier that knows the number, or
+     * one picked by hand, asks for nothing.
+     */
+    @Test
+    fun aCarrierThatShowsTheNumberOnlyWithThePhonesDigitsIsSuggestedOnceNobodyKnewIt() {
+        val number = "JT0805136742918"
+        val settled = addition(number).settling(number)
+        fun answered(answer: CarrierDetectionResponse) = settled.copy(recognition = settled.recognition.copy(answer = answer))
+        // Not before the check has settled.
+        assertTrue(settled.recognitionStatus is CarrierRecognition.Status.Asking)
+        assertNull(settled.suggestedCarrier)
+        assertNull(settled.phoneDigitsRequirement)
+
+        val form = answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.JAndT)))
+        assertTrue(form.recognitionStatus is CarrierRecognition.Status.NotFound)
+        assertEquals(CarrierId.JAndTCn, form.suggestedCarrier)
+        assertEquals(CarrierId.JAndTCn, form.inputCarrier)
+        assertEquals(CarrierId.Unknown, form.resolvedCarrier)
+        assertEquals(localizer.text("add.detect"), form.lineName(localizer))
+        assertEquals(listOf(CarrierRequirement.Field.PhoneDigits), form.requirements.map { it.field })
+        assertTrue(form.phoneDigitsRequirement!!.isOptional)
+        assertTrue(form.needsRequiredDetails)
+        assertNull(form.postcodeRequirement)
+
+        // Without the digits, on automatic with nothing else.
+        assertTrue(form.canSave)
+        assertEquals(CarrierId.Unknown, form.sentCarrier)
+        assertNull(form.sentPhoneDigits)
+        // With them, J&T China's.
+        val filled = form.copy(phoneDigits = "0123")
+        assertTrue(filled.canSave)
+        assertEquals(CarrierId.JAndTCn, filled.sentCarrier)
+        assertEquals("0123", filled.sentPhoneDigits)
+        assertFalse(form.copy(phoneDigits = "01").canSave)
+
+        // The check failed, or asked nobody: the field shows too.
+        val failed = answered(
+            CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.JAndT), unanswered = listOf(CarrierId.JAndT)),
+        )
+        assertTrue(failed.recognitionStatus is CarrierRecognition.Status.Failed)
+        assertEquals(CarrierId.JAndTCn, failed.suggestedCarrier)
+        assertEquals(CarrierId.JAndTCn, answered(CarrierDetectionResponse(number, carrier = CarrierId.Unknown)).suggestedCarrier)
+
+        // J&T knows it: its own fields, none.
+        val known = answered(CarrierDetectionResponse(number, carrier = CarrierId.JAndT, asked = listOf(CarrierId.JAndT)))
+        assertNull(known.suggestedCarrier)
+        assertNull(known.phoneDigitsRequirement)
+        assertEquals(CarrierId.JAndT, known.copy(phoneDigits = "0123").sentCarrier)
+        assertNull(known.copy(phoneDigits = "0123").sentPhoneDigits)
+        // Picked by hand: J&T's own fields, none; J&T China's, its field as the carrier's own.
+        val picked = form.copy(carrierOverride = CarrierId.JAndT, phoneDigits = "0123")
+        assertNull(picked.suggestedCarrier)
+        assertNull(picked.phoneDigitsRequirement)
+        assertEquals(CarrierId.JAndT, picked.sentCarrier)
+        val china = form.copy(carrierOverride = CarrierId.JAndTCn)
+        assertNull(china.suggestedCarrier)
+        assertTrue(china.phoneDigitsRequirement!!.isOptional)
+        assertEquals(CarrierId.JAndTCn, china.sentCarrier)
+    }
+
+    /**
      * Each carrier's postcode is its own, as the web's `carrierPostcodes`: a required field starts from the last postcode
      * given, PostNL's optional one for a 3S number is only offered, and one typed for a carrier never shows or goes
      * with another, which shows its own again.

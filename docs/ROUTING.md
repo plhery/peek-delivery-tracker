@@ -869,7 +869,12 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   postcode, sent in the request body like any other. The add sheets on the website and in the
   apps do the same while the carrier is left automatic: the field is optional, a postcode given
   before is offered, not filled in, and the parcel is added under that carrier only with a
-  postcode, otherwise automatic.
+  postcode, otherwise automatic. A carrier picked by hand that refuses the number gets the same
+  carrier offered instead, with a button that picks it and so asks for its postcode (an 8-digit
+  Mondial Relay number filed under InPost). The front door and the add sheets likewise offer, for
+  a number nobody knew, the phone-digits field of the one candidate that shows it only with the
+  last 4 digits of a phone (J&T China's JT numbers): optional, and the number goes to that
+  carrier only with the digits.
   An account's open parcel filed under a carrier that shows more with the delivery postcode
   (the catalog's `showsMore`: DPD's verified scans, the pages that show a shipment only with
   it), saved without one, is given the postcode its owner gave their latest parcel once a check

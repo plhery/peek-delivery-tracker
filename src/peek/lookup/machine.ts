@@ -9,6 +9,7 @@ import {
   isPickupCode,
   normalizeTrackingNumber,
   notTrackingNumber,
+  phoneDigitsCandidate,
   requirementSatisfied,
   type CarrierInputField,
   type CarrierInputRequirement,
@@ -166,8 +167,9 @@ export interface Survey {
   certain: boolean;
   /**
    * Nobody answered for the number, and its shape points to this carrier,
-   * which cannot be asked without the delivery postcode: its postcode field is
-   * offered, and the lookup names the carrier only once the postcode is in.
+   * which cannot be asked without the delivery postcode, or shows it only with
+   * the last 4 digits of a phone (J&T China): that field is offered, and the
+   * lookup names the carrier only once it is filled in.
    */
   suggested: CarrierId | null;
   /** The carrier the inputs are for: the lookup's, or the suggested one. */
@@ -251,13 +253,15 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
             : shape ? [shape, 'shape'] : ['unknown', 'none'];
   const certain = source !== 'none' && carrier !== 'intl-post' && !(amazon && !shipping);
 
-  const suggested = match && source === 'none' && state.carrier === 'auto' && answer?.inputSuggested?.field === 'dpdPostcode'
-    && ['none', 'unasked', 'failed'].includes(check.status) ? answer.inputSuggested.carrier : null;
+  const nobodyKnew = match && source === 'none' && state.carrier === 'auto' && ['none', 'unasked', 'failed'].includes(check.status);
+  const postcodeSuggested = nobodyKnew && answer?.inputSuggested?.field === 'dpdPostcode' ? answer.inputSuggested.carrier : null;
+  const suggested = postcodeSuggested ?? (nobodyKnew ? phoneDigitsCandidate(match.candidates, match.trackingNumber) ?? null : null);
   const inputCarrier = suggested ?? carrier;
   const carrierFields = !match || onDevice ? []
-    : suggested ? carrierRequirements(suggested, match.trackingNumber)
+    : postcodeSuggested ? carrierRequirements(postcodeSuggested, match.trackingNumber)
       .filter((requirement) => requirement.field === 'dpdPostcode').map((requirement) => ({ ...requirement, optional: true }))
-      : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [];
+      : suggested ? carrierRequirements(suggested, match.trackingNumber)
+        : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [];
   const chosenCountry = state.countries[inputCarrier];
   // A required postcode starts from one given before, with its country; an optional one is only offered.
   const postcodeField = carrierFields.find((requirement) => requirement.field === 'dpdPostcode');
@@ -295,10 +299,11 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
 
 /**
  * What the lookup sends: the number, the carrier when one is known, and the
- * inputs that carrier asked for. A suggested carrier goes only with its postcode.
+ * inputs that carrier asked for. A suggested carrier goes only with its field
+ * filled in.
  */
 function lookupInput(found: Survey): ParcelLookupInput {
-  const carrier = found.suggested && found.input('dpdPostcode').trim() ? found.suggested : found.carrier;
+  const carrier = found.suggested && found.fields.some(({ field }) => found.input(field).trim()) ? found.suggested : found.carrier;
   const wanted = (field: CarrierInputField) =>
     carrierRequirements(carrier, found.match!.trackingNumber).some((requirement) => requirement.field === field);
   const trackingUrl = wanted('trackingUrl') ? found.input('trackingUrl').trim() : found.match!.carrier === carrier ? found.match!.trackingUrl : undefined;

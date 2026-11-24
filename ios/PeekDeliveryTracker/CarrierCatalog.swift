@@ -1023,6 +1023,17 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         }
     }
 
+    /// The one carrier among a number's candidates that shows it with the last 4 digits of a phone and asks for nothing
+    /// else (J&T China's JT numbers, which its tracker cannot confirm without them). Mirrors `phoneDigitsCandidate` in
+    /// `src/lib/carriers.ts`.
+    func phoneDigitsCandidate(_ candidates: [CarrierID], trackingNumber: String) -> CarrierID? {
+        let fitting = candidates.filter { carrier in
+            let fields = requirements(for: carrier, trackingNumber: trackingNumber)
+            return fields.count == 1 && fields[0].field == .phoneDigits && fields[0].isOptional
+        }
+        return fitting.count == 1 ? fitting[0] : nil
+    }
+
     /// What a number's shape says. `inText` reads a number out of a text, as the shared engine's
     /// `detectCarrierMatch(raw, { inText: true })` does: a standalone rule then names no carrier.
     func detect(_ raw: String, inText: Bool = false) -> CarrierMatch {

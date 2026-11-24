@@ -196,7 +196,7 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
         </button>}
         {inputTrouble && found.missing?.field === requirement.field && <p className="door-message" role="alert">{t(validation)}</p>}
         <p id={`${id}-help`} className="door-aside">
-          {t(found.suggested ? 'detail.inputSuggested' : requirementHelpKey(fieldCarrier.id, requirement), { carrier: fieldCarrier.name })}
+          {t(found.suggested && postcode ? 'detail.inputSuggested' : requirementHelpKey(fieldCarrier.id, requirement), { carrier: fieldCarrier.name })}
         </p>
         {/* Phone digits go to their carrier alone, as their help line says. */}
         <p className="door-private"><Icon name="lock" />{t(requirement.field === 'phoneDigits' ? 'door.phoneDigits.private' : 'door.postcode.private', { carrier: fieldCarrier.name })}</p>

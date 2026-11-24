@@ -97,6 +97,18 @@ export function carrierRequirements(carrierId: CarrierId, trackingNumber: string
 }
 
 /**
+ * The one carrier among a number's candidates that shows it with the last 4 digits of a phone and asks for nothing
+ * else (J&T China's JT numbers, which its tracker cannot confirm without them).
+ */
+export function phoneDigitsCandidate(candidates: readonly CarrierId[], trackingNumber: string): CarrierId | undefined {
+  const fitting = candidates.filter((id) => {
+    const requirements = carrierRequirements(id, trackingNumber);
+    return requirements.length === 1 && requirements[0].field === 'phoneDigits' && requirements[0].optional === true;
+  });
+  return fitting.length === 1 ? fitting[0] : undefined;
+}
+
+/**
  * What an optional postcode gives, by the adapter that asks for it; DPD's line when it only shows more.
  * GLS's own tracker and Asendia's show no scans without it, the others no parcel at all, or PostNL none
  * sent within the Netherlands; DHL needs it only for a number several shipments share, Canpar for some

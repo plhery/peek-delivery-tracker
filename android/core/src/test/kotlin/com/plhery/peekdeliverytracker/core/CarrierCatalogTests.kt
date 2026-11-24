@@ -2276,6 +2276,22 @@ class CarrierCatalogTests {
     }
 
     /**
+     * JT and 13 digits fit J&T and J&T China, and only J&T China shows the number with the phone's digits and asks for
+     * nothing else: it is the one candidate that does. Mondial Relay asks for a postcode instead.
+     */
+    @Test
+    fun theOneCandidateThatShowsANumberOnlyWithThePhonesDigits() {
+        val number = "JT0805136742918"
+        val candidates = catalog.detect(number).candidates
+        assertTrue(CarrierId.JAndT in candidates && CarrierId.JAndTCn in candidates)
+        assertEquals(CarrierId.JAndTCn, catalog.phoneDigitsCandidate(candidates, number))
+        assertNull(catalog.phoneDigitsCandidate(listOf(CarrierId.JAndT), number))
+        // Two that do: neither is the one.
+        assertNull(catalog.phoneDigitsCandidate(listOf(CarrierId.JAndTCn, CarrierId.JAndTMx), number))
+        assertNull(catalog.phoneDigitsCandidate(catalog.detect("30517294").candidates, "30517294"))
+    }
+
+    /**
      * A build before the field could not read J&T's definition, so it kept its old one beside the new ETag: the cache's
      * name changed with the field, and a cache this build writes keeps it.
      */

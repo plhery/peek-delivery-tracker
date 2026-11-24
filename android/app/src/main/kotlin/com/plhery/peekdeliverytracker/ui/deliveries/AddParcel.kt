@@ -1139,9 +1139,9 @@ private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String
 
 /**
  * `carrierFeedback`: the carrier line, and the number found in a link or a text, or the choice between several numbers;
- * how the carrier tracks, or what Amazon said; a carrier that knows the number better than the one picked by hand;
- * Amazon's check to ask again; and Amazon's orders, with Peek's guide to finding the number, where only an account
- * follows the parcel.
+ * how the carrier tracks, or what Amazon said; a carrier that knows the number better than the one picked by hand, or
+ * that may have it with the postcode when the one picked refuses it; Amazon's check to ask again; and Amazon's orders,
+ * with Peek's guide to finding the number, where only an account follows the parcel.
  */
 @Composable
 private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, form: AddForm, actions: AddActions) {
@@ -1183,6 +1183,12 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
             val name = catalog.info(known, language).displayName
             Text(localizer.text("add.carrierKnownElsewhere", mapOf("carrier" to name)), color = colors.secondaryText, style = type.caption.sfLines())
             TintedButton(AnnotatedString(localizer.text("add.useCarrier", mapOf("carrier" to name))), { form.carrierOverride = known }, ADD_USE_CARRIER)
+        }
+        // A carrier picked by hand that refuses the number: the one the check suggests with the postcode is offered instead.
+        addition.offeredInstead?.let { offered ->
+            val name = catalog.info(offered, language).displayName
+            Text(localizer.text("detail.inputSuggested", mapOf("carrier" to name)), color = colors.secondaryText, style = type.caption.sfLines())
+            TintedButton(AnnotatedString(localizer.text("add.useCarrier", mapOf("carrier" to name))), { form.carrierOverride = offered }, ADD_USE_SUGGESTED)
         }
         if (addition.amazonCheckUnavailable) {
             Text(localized("add.amazonCheckUnavailable"), Modifier.testTag(ADD_AMAZON_UNAVAILABLE), color = colors.secondaryText, style = type.caption.sfLines())
@@ -1466,8 +1472,8 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
  * `requiredDetails`: the complete link where the carrier needs one and the text had none, and the delivery postcode
  * with its country beside it where it reads several, or, optional, that of the carrier the check suggests while nobody
  * knows the number; an optional postcode offered from those given before, and, for a guest, the one filled in to
- * forget; the last 4 digits of a phone where the carrier shows the parcel with them, and, for a guest, that its link
- * never shows them.
+ * forget; the last 4 digits of a phone where the carrier shows the parcel with them, or, optional, where the one
+ * candidate that does is suggested while nobody knows the number, and, for a guest, that its link never shows them.
  */
 @Composable
 private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions) {
@@ -1586,7 +1592,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                     localized("add.requirement.phoneDigits"),
                     localizer.text(
                         "add.requirement.phoneDigitsHelp",
-                        mapOf("carrier" to catalog.info(addition.resolvedCarrier, language).displayName),
+                        mapOf("carrier" to catalog.info(addition.inputCarrier, language).displayName),
                     ),
                     optional = digits.isOptional,
                 ) {
@@ -2096,6 +2102,7 @@ internal const val ADD_AMAZON_GUIDE = "addParcel.amazonGuide"
 internal const val ADD_AMAZON_UNAVAILABLE = "addParcel.amazonUnavailable"
 internal const val ADD_AMAZON_RETRY = "addParcel.amazonRetry"
 internal const val ADD_USE_CARRIER = "addParcel.useCarrier"
+internal const val ADD_USE_SUGGESTED = "addParcel.useSuggested"
 internal const val ADD_TRACKING_URL = "addParcel.trackingUrl"
 internal const val ADD_POSTCODE = "addParcel.postcode"
 internal const val ADD_COUNTRY = "addParcel.country"

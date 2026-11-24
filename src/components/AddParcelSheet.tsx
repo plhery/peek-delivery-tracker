@@ -16,6 +16,7 @@ import {
   normalizeTrackingNumber,
   notTrackingNumber,
   parseTrackingInput,
+  phoneDigitsCandidate,
   requirementHelpKey,
   requirementSatisfied,
   tracksAutomatically,
@@ -261,13 +262,18 @@ export function AddParcelSheet({
   const suggested = selectedCarrier === 'auto' && !amazonNumber && resolvedCarrier === 'unknown'
     && currentRecognition?.inputSuggested?.field === 'dpdPostcode' && ['none', 'unasked', 'failed'].includes(check.status)
     ? currentRecognition.inputSuggested.carrier : undefined;
+  // In the same way, a number nobody knew whose shape one carrier shows only with the last 4 digits of a phone (J&T
+  // China's JT numbers) gets that carrier's field, optional, and goes to it only with the digits.
+  const phoneSuggested = selectedCarrier === 'auto' && !amazonNumber && resolvedCarrier === 'unknown' && !suggested
+    && ['none', 'unasked', 'failed'].includes(check.status)
+    ? phoneDigitsCandidate(parsedTracking.candidates, trackingNumber) : undefined;
   // The carrier the fields are for.
-  const inputCarrier = suggested ?? resolvedCarrier;
+  const inputCarrier = suggested ?? phoneSuggested ?? resolvedCarrier;
   const chosenCountry = carrier ? postcodeCountryChoices[inputCarrier] : undefined;
   const carrierFields = !carrier ? [] : suggested
     ? carrierRequirements(suggested, trackingNumber).filter(({ field }) => field === 'dpdPostcode')
       .map((requirement) => ({ ...requirement, optional: true }))
-    : carrierRequirements(carrier.id, trackingNumber);
+    : carrierRequirements(inputCarrier, trackingNumber);
   // A required postcode starts from one given before, with its country; an optional one is only offered.
   const { value: postcodeValue, offered: offeredPostcode, country: rememberedCountry } = rememberedPostcodeField(inputCarrier,
     trackingNumber, carrierFields.find(({ field }) => field === 'dpdPostcode'), carrierPostcodes[inputCarrier], postcodes, chosenCountry);
@@ -284,7 +290,7 @@ export function AddParcelSheet({
   const carrierInputValue = (field: CarrierInputField) =>
     field === 'trackingUrl' && parsedCarrierTrackingUrl
       ? parsedCarrierTrackingUrl
-      : field === 'phoneDigits' ? phoneInput?.number === normalizedNumber && phoneInput.carrier === resolvedCarrier ? phoneInput.digits : ''
+      : field === 'phoneDigits' ? phoneInput?.number === normalizedNumber && phoneInput.carrier === inputCarrier ? phoneInput.digits : ''
         : field === 'dpdPostcode' ? postcodeValue : carrierInputs[field];
   const requirementsSatisfied = requirements.every((requirement) =>
     requirementSatisfied(requirement, carrierInputValue(requirement.field)));
@@ -306,6 +312,11 @@ export function AddParcelSheet({
   // A carrier picked by hand that issues no number of this shape is pointed out before the parcel is added.
   const refused = useNumberRefusal(!automatic && !amazonNumber ? selectedCarrier : null,
     normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber ? normalizedNumber : null);
+  // When it is so, and nobody knew the number, the carrier that may have it with the delivery postcode is offered
+  // instead (an 8-digit Mondial Relay number filed under InPost).
+  const offeredInstead = refused && !amazonNumber && currentRecognition?.inputSuggested?.field === 'dpdPostcode'
+    && currentRecognition.inputSuggested.carrier !== selectedCarrier && ['none', 'unasked', 'failed'].includes(check.status)
+    ? carrierInfo(currentRecognition.inputSuggested.carrier, locale) : null;
   // The carriers asked, and so a number found nowhere, depend on the country: the line names it, and the reader can
   // pick another for this number.
   const askedFor = ['asking', 'none', 'failed'].includes(check.status) && !preflightDetail
@@ -381,8 +392,11 @@ export function AddParcelSheet({
     const postcode = requirements.some(({ field }) => field === 'dpdPostcode')
       ? carrierInputValue('dpdPostcode').trim().toUpperCase()
       : undefined;
-    // A suggested carrier goes only with its postcode.
-    const savedCarrier = suggested && postcode ? suggested : resolvedCarrier;
+    const phoneDigits = requirements.some(({ field }) => field === 'phoneDigits')
+      ? carrierInputValue('phoneDigits').trim() || undefined
+      : undefined;
+    // A suggested carrier goes only with its postcode or the phone's digits.
+    const savedCarrier = suggested && postcode ? suggested : phoneSuggested && phoneDigits ? phoneSuggested : resolvedCarrier;
     try {
       const parcel = await onAdd({
         trackingNumber: trackingNumber.trim(),
@@ -393,9 +407,7 @@ export function AddParcelSheet({
           : undefined,
         dpdPostcode: suggested && !postcode ? undefined : postcode,
         dpdPostcodeCountry: postcode ? sentPostcodeCountry(savedCarrier, postcodeCountry) : undefined,
-        phoneDigits: requirements.some(({ field }) => field === 'phoneDigits')
-          ? carrierInputValue('phoneDigits').trim() || undefined
-          : undefined,
+        phoneDigits,
         lookupCountry: picked,
       });
       if (!mounted.current) return;
@@ -550,6 +562,14 @@ export function AddParcelSheet({
                       </button>
                     </div>
                   )}
+                  {offeredInstead && (
+                    <div>
+                      <p className="add-parcel-carrier__hint">{t('detail.inputSuggested', { carrier: offeredInstead.name })}</p>
+                      <button type="button" className="add-parcel-carrier__account-link" onClick={() => setSelectedCarrier(offeredInstead.id)}>
+                        {t('add.useCarrier', { carrier: offeredInstead.name })}
+                      </button>
+                    </div>
+                  )}
                   {amazonNumber && currentVerification?.amazonShippingStatus === 'unavailable' && (
                     <div>
                       <p className="add-parcel-carrier__hint">{t('add.amazonCheckUnavailable')}</p>
@@ -637,7 +657,7 @@ export function AddParcelSheet({
                       </small>
                     ) : requirement.help && (
                       <small className="field__help">
-                        {t(requirementHelpKey(resolvedCarrier, requirement), { carrier: carrier?.name ?? '' })}
+                        {t(requirementHelpKey(inputCarrier, requirement), { carrier: carrierInfo(inputCarrier, locale).name })}
                       </small>
                     )}
                   </label>

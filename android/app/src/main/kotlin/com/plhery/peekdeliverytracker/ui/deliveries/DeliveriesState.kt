@@ -996,8 +996,8 @@ internal class DeliveriesState(
     }
 
     /**
-     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier (the one the check suggests once its
-     * postcode is in, [ParcelAddition.sentCarrier]), the link and the postcode it needs,
+     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier (the one suggested once its field is
+     * filled in, [ParcelAddition.sentCarrier]), the link and the postcode it needs,
      * the postcode's country, the phone digits its carrier asks for and the country picked to look it up for, goes to
      * the store, in the app's scope while Add waits, which a window made again still hears of ([PageWork.add], by the
      * request's id).

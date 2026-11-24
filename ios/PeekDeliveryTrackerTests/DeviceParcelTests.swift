@@ -1477,8 +1477,8 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(applies)
         let hint = CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
         var recognition = CarrierRecognition(settledNumber: number)
-        func suggestion() -> SuggestedPostcodeCarrier? {
-            SuggestedPostcodeCarrier(picked: nil, shape: input.carrier, recognition: recognition, number: number, applies: applies)
+        func suggestion() -> SuggestedCarrier? {
+            SuggestedCarrier(picked: nil, shape: input.carrier, recognition: recognition, number: number, applies: applies)
         }
 
         // Nothing while the check is asking.
@@ -1521,18 +1521,18 @@ final class DeviceParcelTests: XCTestCase {
         var recognition = CarrierRecognition(settledNumber: number)
         recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe],
                                                       inputSuggested: CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode))
-        let suggested = try XCTUnwrap(SuggestedPostcodeCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, applies: true))
+        let suggested = try XCTUnwrap(SuggestedCarrier(picked: nil, shape: .unknown, recognition: recognition, number: number, applies: true))
 
         XCTAssertEqual(suggested.added(postcode: "1000", country: "BE", otherwise: .unknown),
-                       SuggestedPostcodeCarrier.Added(carrier: .mondialRelay, postcode: "1000", country: "BE"))
+                       SuggestedCarrier.Added(carrier: .mondialRelay, postcode: "1000", country: "BE"))
         // Its home country's postcode goes alone, as for a carrier picked by hand.
         XCTAssertEqual(suggested.added(postcode: " 75002 ", country: "FR", otherwise: .unknown),
-                       SuggestedPostcodeCarrier.Added(carrier: .mondialRelay, postcode: "75002"))
+                       SuggestedCarrier.Added(carrier: .mondialRelay, postcode: "75002"))
         XCTAssertEqual(catalog.homeCountry(of: .mondialRelay), "FR")
 
-        XCTAssertEqual(suggested.added(postcode: "", country: "FR", otherwise: .unknown), SuggestedPostcodeCarrier.Added(carrier: .unknown))
-        XCTAssertEqual(suggested.added(postcode: "  ", country: "BE", otherwise: .unknown), SuggestedPostcodeCarrier.Added(carrier: .unknown))
-        XCTAssertEqual(suggested.added(postcode: "AB", country: "FR", otherwise: .unknown), SuggestedPostcodeCarrier.Added(carrier: .unknown))
+        XCTAssertEqual(suggested.added(postcode: "", country: "FR", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
+        XCTAssertEqual(suggested.added(postcode: "  ", country: "BE", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
+        XCTAssertEqual(suggested.added(postcode: "AB", country: "FR", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
     }
 
     /// A carrier picked by hand, a carrier that knew the number, several that did, Amazon's numbers, an answer with no
@@ -1541,11 +1541,11 @@ final class DeviceParcelTests: XCTestCase {
         let number = "76434219"
         let hint = CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
         func suggestion(_ answer: CarrierDetectionResponse, picked: CarrierID? = nil, shape: CarrierID = .unknown,
-                        spelling: String? = nil, applies: Bool = true) -> SuggestedPostcodeCarrier? {
+                        spelling: String? = nil, applies: Bool = true) -> SuggestedCarrier? {
             var recognition = CarrierRecognition(settledNumber: number)
             recognition.answer = answer
-            return SuggestedPostcodeCarrier(picked: picked, shape: shape, recognition: recognition, number: number,
-                                            spelling: spelling, applies: applies)
+            return SuggestedCarrier(picked: picked, shape: shape, recognition: recognition, number: number,
+                                    spelling: spelling, applies: applies)
         }
         let nobody = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], inputSuggested: hint)
         XCTAssertNotNil(suggestion(nobody))
@@ -1562,6 +1562,148 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(suggestion(CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe])))
         XCTAssertNil(suggestion(CarrierDetectionResponse(trackingNumber: "76434218", carrier: .unknown, asked: [.glsDe], inputSuggested: hint)))
         XCTAssertNil(suggestion(nobody, spelling: "7643-4219"))
+    }
+
+    /// An 8-digit number filed by hand under InPost, which issues no number like it, while the check says Mondial
+    /// Relay may have it: Add offers Mondial Relay instead, whose own field then asks for the postcode. A carrier picked
+    /// by hand that may issue the number gets nothing new. The number is synthetic.
+    func testACarrierPickedByHandThatRefusesTheNumberIsOfferedTheSuggestedOneInstead() throws {
+        let number = "30517294"
+        XCTAssertEqual(CarrierCatalog.shared.read(number).carrier, .unknown)
+        XCTAssertNotNil(NumberRefusals.question(carrier: .inpost, trackingNumber: number, demo: false), "InPost is asked")
+        let hint = CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
+        func instead(_ answer: CarrierDetectionResponse?, picked: CarrierID? = .inpost, refused: Bool = true,
+                     spelling: String? = nil, applies: Bool = true) -> CarrierID? {
+            var recognition = CarrierRecognition(settledNumber: number)
+            recognition.answer = answer
+            return SuggestedCarrier.instead(of: picked, refused: refused, recognition: recognition, number: number,
+                                            spelling: spelling, applies: applies)
+        }
+
+        // Nobody knew it, nobody could be asked, or nobody answered.
+        for answer in [
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], inputSuggested: hint),
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, inputSuggested: hint),
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], unanswered: [.glsDe], inputSuggested: hint),
+        ] {
+            XCTAssertEqual(instead(answer), .mondialRelay)
+        }
+        let nobody = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe], inputSuggested: hint)
+
+        // Picked, Mondial Relay asks for the postcode, required for this number, and nothing is offered instead.
+        XCTAssertNil(instead(nobody, picked: .mondialRelay))
+        XCTAssertFalse(try postcodeField(.mondialRelay, number).isOptional)
+        var recognition = CarrierRecognition(settledNumber: number)
+        recognition.answer = nobody
+        XCTAssertNil(SuggestedCarrier(picked: .mondialRelay, shape: .unknown, recognition: recognition, number: number, applies: true))
+
+        // A carrier that may issue the number, or whose answer is not in, gets nothing new; nor does a carrier left automatic.
+        XCTAssertNil(instead(nobody, picked: .colisweb, refused: false))
+        XCTAssertNil(instead(nobody, refused: false))
+        XCTAssertNil(instead(nobody, picked: nil))
+        // Nor while the check asks, once a carrier knows the number or several do, without a suggestion, for another
+        // spelling, or for Amazon's numbers, which are never checked.
+        XCTAssertNil(instead(nil))
+        XCTAssertNil(instead(CarrierDetectionResponse(trackingNumber: number, carrier: .glsDe, asked: [.glsDe], inputSuggested: hint)))
+        XCTAssertNil(instead(CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, recognized: [.dpd, .hermesDe],
+                                                      inputSuggested: hint)))
+        XCTAssertNil(instead(CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe])))
+        XCTAssertNil(instead(nobody, spelling: "3051-7294"))
+        XCTAssertNil(instead(nobody, applies: false))
+    }
+
+    /// JT and 13 digits fit J&T and J&T China, whose tracker cannot confirm a number without the last 4 digits of a
+    /// phone. Once nobody knew such a number, Add shows J&T China's field for them, optional. The number is synthetic.
+    func testAJTNumberNobodyKnewShowsJTChinasPhoneDigitsFieldOptional() throws {
+        let catalog = CarrierCatalog.shared
+        let number = "JT0805136742918"
+        let input = catalog.read(number)
+        XCTAssertEqual(input.carrier, .unknown)
+        XCTAssertTrue(input.candidates.contains(.jAndT))
+        XCTAssertTrue(input.candidates.contains(.jAndTCn))
+        XCTAssertEqual(catalog.phoneDigitsCandidate(input.candidates, trackingNumber: number), .jAndTCn)
+        let applies = CarrierRecognition.applies(to: input, amazon: false, demo: false)
+        XCTAssertTrue(applies)
+        var recognition = CarrierRecognition(settledNumber: number)
+        func suggestion() -> SuggestedCarrier? {
+            SuggestedCarrier(picked: nil, shape: input.carrier, candidates: input.candidates, recognition: recognition,
+                             number: number, applies: applies)
+        }
+
+        // Nothing while the check is asking.
+        XCTAssertNil(suggestion())
+
+        // Nobody knew it, nobody could be asked, or the check failed: J&T China's field shows, optional.
+        for answer in [
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT]),
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown),
+            CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT], unanswered: [.jAndT]),
+        ] {
+            recognition.answer = answer
+            let suggested = try XCTUnwrap(suggestion())
+            XCTAssertEqual(suggested.carrier, .jAndTCn)
+            XCTAssertEqual(suggested.requirement.field, .phoneDigits)
+            XCTAssertTrue(suggested.requirement.isOptional)
+            XCTAssertTrue(suggested.requirement.isSatisfied(by: ""), "It never holds the parcel back")
+            XCTAssertFalse(suggested.requirement.isSatisfied(by: "01"))
+        }
+        recognition.answer = nil
+        recognition.failedNumber = number
+        XCTAssertEqual(suggestion()?.carrier, .jAndTCn)
+
+        // The digits typed are kept for J&T China, the carrier the field is for.
+        var phone = ParcelPhoneInput()
+        phone[number, .jAndTCn] = "0123"
+        XCTAssertEqual(phone[number, .jAndTCn], "0123")
+        XCTAssertEqual(phone[number, .unknown], "")
+    }
+
+    /// With digits its field takes, the parcel is added to J&T China with them; without, it is added as before, the
+    /// carrier unknown and no digits.
+    func testJTChinaIsSentOnlyWithThePhonesDigits() throws {
+        let number = "JT0805136742918"
+        var recognition = CarrierRecognition(settledNumber: number)
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT])
+        let suggested = try XCTUnwrap(SuggestedCarrier(picked: nil, shape: .unknown, candidates: [.jAndT, .jAndTCn],
+                                                       recognition: recognition, number: number, applies: true))
+
+        XCTAssertEqual(suggested.added(phoneDigits: "0123", otherwise: .unknown),
+                       SuggestedCarrier.Added(carrier: .jAndTCn, phoneDigits: "0123"))
+        XCTAssertEqual(suggested.added(phoneDigits: " 0123 ", otherwise: .unknown),
+                       SuggestedCarrier.Added(carrier: .jAndTCn, phoneDigits: "0123"))
+        // A postcode in another carrier's field does not go with them.
+        XCTAssertEqual(suggested.added(postcode: "75002", country: "FR", phoneDigits: "0123", otherwise: .unknown),
+                       SuggestedCarrier.Added(carrier: .jAndTCn, phoneDigits: "0123"))
+        XCTAssertEqual(suggested.added(phoneDigits: "", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
+        XCTAssertEqual(suggested.added(phoneDigits: "01", otherwise: .unknown), SuggestedCarrier.Added(carrier: .unknown))
+    }
+
+    /// A carrier that knew the number, several that did, one picked by hand, a postcode suggestion, or a number no single
+    /// carrier shows with the phone's digits alone: no phone field is offered.
+    func testNoPhoneDigitsFieldOnceACarrierKnowsTheNumberOrIsPicked() {
+        let number = "JT0805136742918"
+        let candidates = CarrierCatalog.shared.read(number).candidates
+        func suggestion(_ answer: CarrierDetectionResponse, picked: CarrierID? = nil,
+                        candidates: [CarrierID] = candidates) -> SuggestedCarrier? {
+            var recognition = CarrierRecognition(settledNumber: number)
+            recognition.answer = answer
+            return SuggestedCarrier(picked: picked, shape: .unknown, candidates: candidates, recognition: recognition,
+                                    number: number, applies: true)
+        }
+        let nobody = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT])
+        XCTAssertEqual(suggestion(nobody)?.carrier, .jAndTCn)
+
+        XCTAssertNil(suggestion(CarrierDetectionResponse(trackingNumber: number, carrier: .jAndT, asked: [.jAndT])))
+        XCTAssertNil(suggestion(CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, recognized: [.jAndT, .dpd])))
+        XCTAssertNil(suggestion(nobody, picked: .jAndT))
+        XCTAssertNil(suggestion(nobody, picked: .jAndTCn))
+        // Two carriers that ask for the digits alone, or none: nobody to name.
+        XCTAssertNil(suggestion(nobody, candidates: [.jAndTCn, .jAndTMx]))
+        XCTAssertNil(suggestion(nobody, candidates: [.jAndT]))
+        // The check's suggestion with the postcode speaks instead, here for a carrier with no field for the number.
+        let postcode = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.jAndT],
+                                                inputSuggested: CarrierDetectionInputSuggested(carrier: .mondialRelay, field: .dpdPostcode))
+        XCTAssertNil(suggestion(postcode))
     }
 
     func testAForgottenPostcodeEmptiesEveryOtherCarriersFieldHoldingItWhateverItsCapitalsAndSpaces() throws {

@@ -448,6 +448,16 @@ class CarrierCatalog private constructor(
     }
 
     /**
+     * The one carrier among a number's candidates that shows it with the last 4 digits of a phone and asks for nothing
+     * else (J&T China's JT numbers, which its tracker cannot confirm without them); none unless exactly one does.
+     */
+    fun phoneDigitsCandidate(candidates: List<CarrierId>, trackingNumber: String): CarrierId? =
+        candidates.filter { carrier ->
+            val requirement = requirements(carrier, trackingNumber).singleOrNull()
+            requirement != null && requirement.field == CarrierRequirement.Field.PhoneDigits && requirement.isOptional
+        }.singleOrNull()
+
+    /**
      * What a number's shape says. [inText] reads a number out of a text, as the shared engine's
      * `detectCarrierMatch(raw, { inText: true })` does: a standalone rule then names no carrier.
      */

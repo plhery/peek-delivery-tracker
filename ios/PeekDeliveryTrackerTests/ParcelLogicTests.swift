@@ -2564,6 +2564,20 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(undated.isOnDeliveryRound(now: day))
     }
 
+    /// The widgets and a Mac's menu bar put a parcel out for delivery first, with the bicycle, only while its round lasts.
+    @MainActor
+    func testTheWidgetPutsFirstOnlyAParcelWhoseDeliveryRoundLasts() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        var out = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-05T08:00:00Z"), event(id, .outForDelivery, "2026-08-05T21:10:00Z")])
+        out.deliveryRoundEndsAt = "2026-08-07T00:00:00+10:00"
+        let during = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: DateParser.date("2026-08-06T13:59:59Z")!).first)
+        XCTAssertTrue(during.isOutForDelivery)
+        let after = try XCTUnwrap(ParcelStore.nextDeliveries(of: [out], localizer: localizer, now: DateParser.date("2026-08-09T09:00:00Z")!).first)
+        XCTAssertFalse(after.isOutForDelivery)
+    }
+
     @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()

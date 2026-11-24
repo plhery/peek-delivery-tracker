@@ -1811,7 +1811,8 @@ final class ParcelStore: ObservableObject {
             carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
             trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
             detail: first,
-            isOutForDelivery: parcel.currentStage == .outForDelivery,
+            // Out for delivery on a round that is over, it waits among the others, as on a Live Activity.
+            isOutForDelivery: parcel.isOnDeliveryRound(now: now),
             // As the list's rows mark it.
             stage: DeliveryWidgetStage(
                 status: status, symbol: parcel.currentStage?.metadata.symbol ?? "shippingbox.fill",

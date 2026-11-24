@@ -10,6 +10,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let trackingNumber: String
     /// When it is expected or arrived, as the app words it when it publishes; else its status.
     var detail: String
+    /// Whether it is out for delivery on a round that has not ended when the app publishes (`isOnDeliveryRound`): the
+    /// widgets put it first, with the bicycle.
     let isOutForDelivery: Bool
     /// When a delivered parcel arrived: the widget keeps it for a day after.
     var deliveredAt: Date? = nil

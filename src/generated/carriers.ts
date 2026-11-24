@@ -4460,6 +4460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#009944"
     },
     {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "jt-express-mexico-sendungsverfolgung",
+      "title": "J&T Express Mexico Sendungsverfolgung: JMX-Codes & Hilfe",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6476,6 +6484,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Anjun Logistics\u00a0: statuts Chine-Brésil et contact SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "suivi-jt-express-mexico",
+      "title": "Suivi J&T Express Mexico\u00a0: codes JMX, téléphone et aide",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     }
   ],
   "it": [
@@ -8470,6 +8486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Anjun Logistics: stati Cina-Brasile e contatti SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "tracciamento-jt-express-mexico",
+      "title": "Tracking J&T Express Mexico: codici JMX, telefono e aiuto",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     },
     {
       "id": "liccardi",
@@ -12538,6 +12562,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Anjun Logistics: estados China-Brasil e SAC",
       "name": "Anjun Logistics",
       "color": "#009944"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "rastreio-jt-express-mexico",
+      "title": "Rastreio J&T Express Mexico: códigos JMX, telefone e ajuda",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     }
   ],
   "pt-br": [
@@ -14614,6 +14646,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie GLS Polska: statusy, punkty GLS, automaty i pomoc",
       "name": "GLS Poland",
       "color": "#ffdd00"
+    },
+    {
+      "id": "j-and-t-mx",
+      "catalog": "j-and-t-mx",
+      "slug": "sledzenie-jt-express-mexico",
+      "title": "Śledzenie J&T Express Mexico: kody JMX, telefon i pomoc",
+      "name": "J&T Express Mexico",
+      "color": "#e60012"
     }
   ],
   "ru": [

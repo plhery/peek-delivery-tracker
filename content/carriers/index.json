@@ -252,7 +252,7 @@
   { "id": "xyl-ships", "catalog": "xyl-ships", "name": "XYL-Ships", "languages": ["en", "zh"] },
   { "id": "jadlog", "catalog": "jadlog", "name": "Jadlog", "languages": ["en", "pt-br"] },
   { "id": "gls-pl", "catalog": "gls-pl", "name": "GLS Poland", "languages": ["en", "pl"] },
-  { "id": "j-and-t-mx", "catalog": "j-and-t-mx", "name": "J&T Express Mexico", "languages": ["en", "es"] },
+  { "id": "j-and-t-mx", "catalog": "j-and-t-mx", "name": "J&T Express Mexico", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "bulgarian-posts", "catalog": "bulgarian-posts", "name": "Bulgarian Posts", "languages": ["en", "bg"] },
   { "id": "haypost", "catalog": "haypost", "name": "HayPost", "languages": ["en"] },
   { "id": "360lion", "catalog": "360lion", "name": "360Lion", "languages": ["en"] },

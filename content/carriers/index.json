@@ -303,7 +303,7 @@
   { "id": "bfe-express", "catalog": "bfe-express", "name": "BFE Express", "languages": ["en", "es"] },
   { "id": "pasarex", "catalog": "pasarex", "name": "PasarEX", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "spee-dee", "catalog": "spee-dee", "name": "Spee-Dee", "languages": ["en"] },
-  { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en"] },
+  { "id": "tnt-au", "catalog": "tnt-au", "name": "TNT Australia", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "wedo", "catalog": "wedo", "name": "One by Allegro CZ", "languages": ["en", "cs"] },
   { "id": "5post", "catalog": "5post", "name": "5Post", "languages": ["en", "ru", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "shipter", "catalog": "shipter", "name": "Shipter", "languages": ["en"] }

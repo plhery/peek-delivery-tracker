@@ -4820,6 +4820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "tnt-australia-sendungsverfolgung",
+      "title": "TNT Australia Sendungsverfolgung: Nummern, Status & Hilfe",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "5post-sendungsverfolgung",
@@ -7182,6 +7190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "suivi-tnt-australia",
+      "title": "Suivi TNT Australia\u00a0: numéros, statuts et aide en Australie",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "suivi-5post",
@@ -9542,6 +9558,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento PasarEX: codici Amazon AMZPSR, dogana e aiuto",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "tracciamento-tnt-australia",
+      "title": "Tracciamento TNT Australia: codici, stati e assistenza",
+      "name": "TNT Australia",
+      "color": "#ff6600"
     },
     {
       "id": "5post",
@@ -11914,6 +11938,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#124381"
     },
     {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "seguimiento-tnt-australia",
+      "title": "Seguimiento TNT Australia: números, estados y ayuda",
+      "name": "TNT Australia",
+      "color": "#ff6600"
+    },
+    {
       "id": "5post",
       "catalog": "5post",
       "slug": "seguimiento-5post",
@@ -14266,6 +14298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio PasarEX: códigos Amazon AMZPSR, alfândega e apoio",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "rastreio-tnt-australia",
+      "title": "Rastreio TNT Australia: números, estados e apoio",
+      "name": "TNT Australia",
+      "color": "#ff6600"
     },
     {
       "id": "5post",
@@ -16702,6 +16742,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie PasarEX: kody Amazon AMZPSR, cło i pomoc",
       "name": "PasarEX",
       "color": "#124381"
+    },
+    {
+      "id": "tnt-au",
+      "catalog": "tnt-au",
+      "slug": "sledzenie-tnt-australia",
+      "title": "Śledzenie TNT Australia: numery, statusy i pomoc",
+      "name": "TNT Australia",
+      "color": "#ff6600"
     },
     {
       "id": "5post",

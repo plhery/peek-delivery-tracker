@@ -4724,6 +4724,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c4c49"
     },
     {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "sengi-express-sendungsverfolgung",
+      "title": "Sengi Express Sendungsverfolgung: China–Italien & Hilfe",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7076,6 +7084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Redur\u00a0: codes à 14 chiffres, statuts Espagne et aide",
       "name": "Redur",
       "color": "#0c4c49"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "suivi-sengi-express",
+      "title": "Suivi Sengi Express\u00a0: codes Chine–Italie et relais Poste",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
     },
     {
       "id": "onlog-express",
@@ -9432,6 +9448,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0c4c49"
     },
     {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "tracciamento-sengi-express",
+      "title": "Tracciamento Sengi Express: codici Cina–Italia e Poste",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "tracciamento-onlog-express",
@@ -11776,6 +11800,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Redur: códigos de 14 dígitos, estados y ayuda",
       "name": "Redur",
       "color": "#0c4c49"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "seguimiento-sengi-express",
+      "title": "Seguimiento Sengi Express: códigos China–Italia y ayuda",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
     },
     {
       "id": "serpost",
@@ -14138,6 +14170,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Redur: códigos de 14 dígitos, Espanha e apoio",
       "name": "Redur",
       "color": "#0c4c49"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "rastreio-sengi-express",
+      "title": "Rastreio Sengi Express: códigos China–Itália e apoio",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
     },
     {
       "id": "onlog-express",
@@ -16566,6 +16606,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Redur: 14-cyfrowe kody, Hiszpania i pomoc",
       "name": "Redur",
       "color": "#0c4c49"
+    },
+    {
+      "id": "sengi-express",
+      "catalog": "sengi-express",
+      "slug": "sledzenie-sengi-express",
+      "title": "Śledzenie Sengi Express: kody Chiny–Włochy i pomoc",
+      "name": "Sengi Express",
+      "color": "#1a44a4"
     },
     {
       "id": "onlog-express",

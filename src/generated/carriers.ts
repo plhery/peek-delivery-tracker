@@ -4476,6 +4476,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "gls-poland-sendungsverfolgung",
+      "title": "GLS Poland Sendungsverfolgung: Status, Points & Locker",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "jt-express-mexico-sendungsverfolgung",
@@ -6526,6 +6534,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "suivi-gls-poland",
+      "title": "Suivi GLS Poland\u00a0: statuts, GLS Points, consignes et aide",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "suivi-jt-express-mexico",
@@ -8552,6 +8568,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "tracciamento-gls-poland",
+      "title": "Tracciamento GLS Poland: stati, GLS Points, locker e aiuto",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
+    },
+    {
       "id": "j-and-t-mx",
       "catalog": "j-and-t-mx",
       "slug": "tracciamento-jt-express-mexico",
@@ -10576,6 +10600,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Jadlog: 14 dígitos, Pickup, Predict y estados",
       "name": "Jadlog",
       "color": "#dc0032"
+    },
+    {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "seguimiento-gls-poland",
+      "title": "Seguimiento GLS Poland: estados, GLS Points y taquillas",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
     },
     {
       "id": "j-and-t-mx",
@@ -12674,6 +12706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Jadlog: códigos de 14 dígitos, Pickup e Predict",
       "name": "Jadlog",
       "color": "#dc0032"
+    },
+    {
+      "id": "gls-pl",
+      "catalog": "gls-pl",
+      "slug": "rastreio-gls-poland",
+      "title": "Rastreio GLS Poland: estados, GLS Points, cacifos e ajuda",
+      "name": "GLS Poland",
+      "color": "#ffdd00"
     },
     {
       "id": "j-and-t-mx",

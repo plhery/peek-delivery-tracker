@@ -251,7 +251,7 @@
   { "id": "anjun", "catalog": "anjun", "name": "Anjun Logistics", "languages": ["en", "pt-br", "zh", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "xyl-ships", "catalog": "xyl-ships", "name": "XYL-Ships", "languages": ["en", "zh", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "jadlog", "catalog": "jadlog", "name": "Jadlog", "languages": ["en", "pt-br", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "gls-pl", "catalog": "gls-pl", "name": "GLS Poland", "languages": ["en", "pl"] },
+  { "id": "gls-pl", "catalog": "gls-pl", "name": "GLS Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },
   { "id": "j-and-t-mx", "catalog": "j-and-t-mx", "name": "J&T Express Mexico", "languages": ["en", "es", "fr", "de", "it", "pt", "pl"] },
   { "id": "bulgarian-posts", "catalog": "bulgarian-posts", "name": "Bulgarian Posts", "languages": ["en", "bg", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "haypost", "catalog": "haypost", "name": "HayPost", "languages": ["en"] },

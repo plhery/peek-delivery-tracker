@@ -195,7 +195,7 @@ Key server modules:
     A viewer's delivery alert names no place, and another alert no place that names one (with
     none when the parcel's details can't be read). The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.
-  - A parcel with no new scan for four days is flagged with the day of its latest scan, links
+  - A parcel registered, accepted or in transit with no new scan for four days is flagged with the day of its latest scan, links
     the help page of the carrier that has it, else of the one it is filed under (the catalog's
     `helpUrl`; no link when neither has one), and says so when that carrier's tracking leaves
     out the destination country (`hidesDestinationLeg`). After three weeks the note says to ask

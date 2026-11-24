@@ -4444,6 +4444,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#2daae1"
     },
     {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "jt-express-brazil-sendungsverfolgung",
+      "title": "J&T Express Brazil Sendungsverfolgung: Status & Kontakt",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
+    },
+    {
       "id": "dhl-freight",
       "catalog": "dhl-freight",
       "slug": "dhl-freight-sendungsverfolgung",
@@ -6444,6 +6452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi FAN Courier International\u00a0: AWB et statuts",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "suivi-jt-express-brazil",
+      "title": "Suivi J&T Express Brazil\u00a0: numéro, statuts et contact",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
     }
   ],
   "it": [
@@ -8424,6 +8440,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#2daae1"
     },
     {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "tracciamento-jt-express-brazil",
+      "title": "Tracking J&T Express Brazil: codice, stati e contatti",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
+    },
+    {
       "id": "liccardi",
       "catalog": "liccardi",
       "slug": "tracciamento-liccardi",
@@ -10400,6 +10424,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento FAN Courier International: AWB y estados",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "seguimiento-jt-express-brazil",
+      "title": "Seguimiento J&T Express Brazil: estados, aduanas y contacto",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
     },
     {
       "id": "j-and-t-mx",
@@ -12458,6 +12490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento FAN Courier International: AWB e estados",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "rastreio-jt-express-brazil",
+      "title": "Rastreio J&T Express Brazil: estado, alfândega e contacto",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
     }
   ],
   "pt-br": [
@@ -14510,6 +14550,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie FAN Courier International: AWB i statusy",
       "name": "FAN Courier International",
       "color": "#2daae1"
+    },
+    {
+      "id": "j-and-t-br",
+      "catalog": "j-and-t-br",
+      "slug": "sledzenie-jt-express-brazil",
+      "title": "Śledzenie J&T Express Brazil: statusy, cło i kontakt",
+      "name": "J&T Express Brazil",
+      "color": "#e60000"
     },
     {
       "id": "gls-pl",

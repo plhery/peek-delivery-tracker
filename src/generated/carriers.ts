@@ -4708,6 +4708,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#42b0d5"
     },
     {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "pdu-sendungsverfolgung",
+      "title": "PDU Sendungsverfolgung: Parcel Delivery Union & Hilfe",
+      "name": "PDU",
+      "color": "#005cfe"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "onlog-express-sendungsverfolgung",
@@ -7028,6 +7036,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Maersk eCommerce\u00a0: codes 1M, statuts et aide",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "suivi-pdu",
+      "title": "Suivi PDU\u00a0: codes Parcel Delivery Union, statuts et aide",
+      "name": "PDU",
+      "color": "#005cfe"
     },
     {
       "id": "onlog-express",
@@ -9352,6 +9368,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#42b0d5"
     },
     {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "tracciamento-pdu",
+      "title": "Tracciamento PDU: codici Parcel Delivery Union e aiuto",
+      "name": "PDU",
+      "color": "#005cfe"
+    },
+    {
       "id": "onlog-express",
       "catalog": "onlog-express",
       "slug": "tracciamento-onlog-express",
@@ -11664,6 +11688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Maersk eCommerce: códigos 1M, estados y ayuda",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "seguimiento-pdu",
+      "title": "Seguimiento PDU: códigos Parcel Delivery Union y ayuda",
+      "name": "PDU",
+      "color": "#005cfe"
     },
     {
       "id": "redur",
@@ -14010,6 +14042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Maersk eCommerce: códigos 1M, estados e apoio",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "rastreio-pdu",
+      "title": "Rastreio PDU: códigos Parcel Delivery Union e apoio",
+      "name": "PDU",
+      "color": "#005cfe"
     },
     {
       "id": "onlog-express",
@@ -16406,6 +16446,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Maersk eCommerce: kody 1M, statusy i pomoc",
       "name": "Maersk eCommerce",
       "color": "#42b0d5"
+    },
+    {
+      "id": "pdu",
+      "catalog": "pdu",
+      "slug": "sledzenie-pdu",
+      "title": "Śledzenie PDU: kody Parcel Delivery Union, statusy i pomoc",
+      "name": "PDU",
+      "color": "#005cfe"
     },
     {
       "id": "onlog-express",

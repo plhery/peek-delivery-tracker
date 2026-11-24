@@ -44,7 +44,7 @@ export const GET = apiRoute(async (context) => {
     }),
   ]);
   const inputs = clientInputs(context.request);
-  const served = packages.map((row) => withSuggestedInputs(withEventPlaces(row, { destination: true }), inputs));
+  const served = packages.map((row) => withEventPlaces(withSuggestedInputs(row, inputs), { destination: true }));
   // With its archived parcels, the list holds every delivery the usual town is worked out from.
   return json({ packages: await withUsualPlaces(client, served, { complete: includeArchived }) });
 }, { serviceRequired: true });

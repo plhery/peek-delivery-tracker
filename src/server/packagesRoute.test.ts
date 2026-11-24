@@ -94,8 +94,10 @@ it('heads a parcel in the account\'s country for the town its own deliveries usu
 
 it('suggests the phone digits for a JT number nobody knew only to the apps that ask for them', async () => {
   // J&T China shows its JT numbers only with the last 4 digits of the recipient's or sender's phone.
+  // Every parcel holds Peek's own "Tracking added" row, which is no carrier's answer.
+  const added = { id: 'e0', stage: 'pending', description: 'Tracking added', occurred_at: '2026-11-23T07:59:00Z', provider_event_id: 'app:pending' };
   const unknown = { ...parcel, tracking_number: 'JT0805136742918', carrier: 'unknown', current_stage: 'pending',
-    last_synced_at: '2026-11-23T08:00:00Z', tracking_events: [] };
+    last_synced_at: '2026-11-23T08:00:00Z', tracking_events: [added] };
   vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([unknown, { ...unknown, id: 'unchecked', last_synced_at: null }]);
   vi.spyOn(SupabaseUserClient.prototype, 'recordOpened').mockResolvedValue(undefined);
   const suggested = async (headers: Record<string, string>) => ((await (await list('', headers)).json()).packages as Array<{

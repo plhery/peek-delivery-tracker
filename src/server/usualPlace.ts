@@ -104,5 +104,5 @@ export async function withUsualPlaces(client: SupabaseUserClient, parcels: JsonO
  * and the inputs the app can ask for that may find it (suggestedInputs.ts).
  */
 export async function servedOwnParcel(client: SupabaseUserClient, row: JsonObject, inputs: ClientInputs): Promise<JsonObject> {
-  return (await withUsualPlaces(client, [withSuggestedInputs(withEventPlaces(row, { destination: true }), inputs)], { complete: false }))[0]!;
+  return (await withUsualPlaces(client, [withEventPlaces(withSuggestedInputs(row, inputs), { destination: true })], { complete: false }))[0]!;
 }

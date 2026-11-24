@@ -22,24 +22,30 @@ function phoneDigitsCarrier(number: string): ApiCarrierId | undefined {
   return carrier && AUTOMATIC_CARRIER_IDS.has(carrier) ? carrier as ApiCarrierId : undefined;
 }
 
+/** Whether a carrier wrote any of the parcel's rows: Peek's own (`app:` source), such as "Tracking added", don't count. */
+function carrierRows(row: JsonObject): boolean {
+  return Array.isArray(row.tracking_events) && row.tracking_events.some((event) =>
+    !(isRecord(event) && typeof event.provider_event_id === 'string' && event.provider_event_id.startsWith('app:')));
+}
+
 /**
  * For a parcel filed under no carrier that a check found no carrier or provider to answer for, the carrier its number
  * points to that shows it only with the last 4 digits of the recipient's or sender's phone, which its owner may give.
  * Nothing says that carrier has the parcel. A postcode already asked or suggested (`input_needed`, `input_suggested`)
- * comes first.
+ * comes first. It reads the stored row: the served one no longer tells Peek's own rows apart.
  */
 export function suggestedPhoneDigits(row: JsonObject): { carrier: ApiCarrierId; field: 'phoneDigits' } | undefined {
   const metadata = isRecord(row.carrier_data) ? row.carrier_data : {};
   const routing = isRecord(metadata.routing) ? metadata.routing : {};
   if (row.carrier !== 'unknown' || row.last_synced_at == null || ['delivered', 'returned'].includes(String(row.current_stage))
-    || (Array.isArray(row.tracking_events) && row.tracking_events.length > 0) || metadata.original_carrier
+    || carrierRows(row) || metadata.original_carrier
     || routing.last_event_at || routing.confirmed_carrier || routing.discovered_carrier || routing.input_needed
     || routing.input_suggested) return undefined;
   const carrier = phoneDigitsCarrier(String(row.tracking_number ?? ''));
   return carrier ? { carrier, field: 'phoneDigits' } : undefined;
 }
 
-/** An owner's parcel as served to the app: with the phone digits it may give (`routing.input_suggested`), when it asks for them. */
+/** An owner's stored parcel with the phone digits it may give (`routing.input_suggested`) when the app asks for them, to be placed for serving. */
 export function withSuggestedInputs(row: JsonObject, inputs: ClientInputs): JsonObject {
   const suggested = inputs.phoneDigits ? suggestedPhoneDigits(row) : undefined;
   if (!suggested) return row;

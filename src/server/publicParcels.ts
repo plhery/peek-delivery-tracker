@@ -507,10 +507,11 @@ function isoTime(value: unknown): string | null {
  * carrier its number points to that can't be asked without the postcode
  * (`routing.input_suggested`, trackingRouting.ts's suggestedInput), which may
  * have the parcel, or, for an app that can ask for them, the one that shows its
- * number only with the last 4 digits of a phone (suggestedInputs.ts). The
+ * number only with the last 4 digits of a phone (suggestedInputs.ts, from the
+ * stored row). The
  * carrier's name and the input, nothing it told about the parcel.
  */
-function inputAsked(row: JsonObject, inputs: ClientInputs): Pick<ApiParcelLink, 'inputNeeded' | 'inputSuggested'> {
+function inputAsked(row: JsonObject, stored: JsonObject, inputs: ClientInputs): Pick<ApiParcelLink, 'inputNeeded' | 'inputSuggested'> {
   const routing = isRecord(row.carrier_data) && isRecord(row.carrier_data.routing) ? row.carrier_data.routing : {};
   if (row.one_off !== true || row.current_stage === 'delivered' || row.current_stage === 'returned') return {};
   const needed = routing.input_needed;
@@ -521,7 +522,7 @@ function inputAsked(row: JsonObject, inputs: ClientInputs): Pick<ApiParcelLink, 
   const suggested = routing.input_suggested;
   if (row.carrier === 'unknown' && !isRecord(needed) && isRecord(suggested) && suggested.field === 'dpdPostcode'
     && typeof suggested.carrier === 'string') return { inputSuggested: { carrier: suggested.carrier as ApiCarrierId, field: 'dpdPostcode' } };
-  const digits = inputs.phoneDigits ? suggestedPhoneDigits(row) : undefined;
+  const digits = inputs.phoneDigits ? suggestedPhoneDigits(stored) : undefined;
   return digits ? { inputSuggested: digits } : {};
 }
 
@@ -616,7 +617,7 @@ export function publicParcelResponse(
     // The stored link's own `shared` says that it belongs to an account: the kind above.
     shared: link.stopped !== true,
     alerts,
-    ...(owner ? inputAsked(row, inputs) : {}),
+    ...(owner ? inputAsked(row, found.package, inputs) : {}),
   };
   return {
     link: shownLink,

@@ -899,7 +899,9 @@ describe('the postcode another carrier asks for', () => {
       headers: { 'x-real-ip': nextIp(), ...(key ? { 'x-parcel-key': key } : {}), ...(inputs ? { 'x-peek-inputs': inputs } : {}) },
     }), route(linkId))).json();
     // J&T China shows its JT numbers only with the last 4 digits of the recipient's or sender's phone.
-    const unknown = { tracking_number: 'JT0805136742918', carrier_data: {}, tracking_events: [] };
+    // Every parcel holds Peek's own "Tracking added" row, which is no carrier's answer.
+    const added = { id: 'e0', stage: 'pending', description: 'Tracking added', occurred_at: '2026-11-23T07:59:00Z', provider_event_id: 'app:pending' };
+    const unknown = { tracking_number: 'JT0805136742918', carrier_data: {}, tracking_events: [added] };
     find({ owner: true }, unknown);
     expect((await opened('phoneDigits', ownerKey)).link.inputSuggested).toEqual({ carrier: 'j-and-t-cn', field: 'phoneDigits' });
     // Not to an app from before the input, nor to a viewer.

@@ -23,6 +23,13 @@ describe('suggestedPhoneDigits', () => {
     expect(suggestedPhoneDigits(checked)).toEqual({ carrier: 'j-and-t-cn', field: 'phoneDigits' });
   });
 
+  it('names it past Peek\'s own "Tracking added" row, which every parcel holds', () => {
+    const added = { id: 'e0', stage: 'pending', description: 'Tracking added', provider_event_id: 'app:pending' };
+    expect(suggestedPhoneDigits({ ...checked, tracking_events: [added] })).toEqual({ carrier: 'j-and-t-cn', field: 'phoneDigits' });
+    expect(suggestedPhoneDigits({ ...checked, tracking_events: [added, { id: 'e1', stage: 'pending', provider_event_id: 'jt:1' }] }))
+      .toBeUndefined();
+  });
+
   it('suggests nothing before the first check, once anyone answered, once it is over, or past another input', () => {
     for (const row of [
       { ...checked, last_synced_at: null },

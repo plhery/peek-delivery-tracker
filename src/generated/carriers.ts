@@ -14942,6 +14942,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "rastreamento-bpost",
+      "title": "Rastreamento bpost: correio da Bélgica, status e alfândega",
+      "name": "bpost",
+      "color": "#ef2637"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "rastreamento-gofo-franca",
@@ -14972,6 +14980,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento Amazon Shipping: códigos, problemas e ajuda",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "rastreamento-dhl-ecommerce-holanda",
+      "title": "Rastreamento DHL eCommerce Holanda: códigos JVGL e status",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
     },
     {
       "id": "ecoscooting",
@@ -18204,6 +18220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-bilishi-youzheng-chaxun",
+      "title": "比利时邮政 bpost 快递查询：单号、状态、自提与关税",
+      "name": "bpost",
+      "color": "#ef2637"
+    },
+    {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracking",
@@ -18250,6 +18274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping 快递查询：单号、问题与求助",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "dhl-ecommerce-helan-kuaidi-chaxun",
+      "title": "DHL eCommerce 荷兰快递查询：JVGL 单号、状态与自提点",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
     },
     {
       "id": "ecoscooting",

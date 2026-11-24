@@ -17794,6 +17794,54 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "XYL-Ships（FXYL）物流查询：NUDE与XLWL单号及状态",
       "name": "XYL-Ships",
       "color": "#b13c3c"
+    },
+    {
+      "id": "360lion",
+      "catalog": "360lion",
+      "slug": "360lion-wuliu-chaxun",
+      "title": "纬狮物流（360Lion）单号查询：WSH 与 AR 格式、轨迹与客服",
+      "name": "360Lion",
+      "color": "#cf5d15"
+    },
+    {
+      "id": "ydh",
+      "catalog": "ydh",
+      "slug": "ydh-yida-kuajing-chaxun",
+      "title": "义达跨境（YDH）快递查询：YQ 与 AZ 单号、状态与客服",
+      "name": "YDH",
+      "color": "#015db9"
+    },
+    {
+      "id": "anserx",
+      "catalog": "anserx",
+      "slug": "anserx-bantouyan-chaxun",
+      "title": "斑头雁国际物流（AnserX）查询：BTYCN 单号、状态与客服",
+      "name": "AnserX",
+      "color": "#2478be"
+    },
+    {
+      "id": "chukou1",
+      "catalog": "chukou1",
+      "slug": "chukou1-chukouyi-chaxun",
+      "title": "出口易（Chukou1 / CK1）单号查询：EC-FirstClass 轨迹与客服",
+      "name": "Chukou1",
+      "color": "#0b4da2"
+    },
+    {
+      "id": "jiayang",
+      "catalog": "jiayang",
+      "slug": "jiayang-guoji-chaxun",
+      "title": "东莞嘉扬国际（Jiayang）单号查询：JYGJ 轨迹、清关与客服",
+      "name": "Jiayang International",
+      "color": "#105bcc"
+    },
+    {
+      "id": "yunda",
+      "catalog": "yunda",
+      "slug": "yunda-kuaidi-chaxun",
+      "title": "韵达快递单号查询：13 与 15 位运单、轨迹状态与 95546 客服",
+      "name": "Yunda Express",
+      "color": "#ffce00"
     }
   ],
   "nl": [

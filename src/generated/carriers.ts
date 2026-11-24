@@ -14750,6 +14750,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "rastreamento-correos-express",
+      "title": "Rastreamento Correos Express: códigos, status e contato",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "rastreamento-yunexpress",
@@ -14868,6 +14876,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento CTT Express: status em espanhol e contato",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "rastreamento-dpd-france",
+      "title": "Rastreamento DPD France: códigos, status e pontos Pickup",
+      "name": "DPD France",
+      "color": "#dc0032"
     },
     {
       "id": "poczta-polska",
@@ -17932,6 +17948,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-kuaidi-chaxun",
+      "title": "Correos Express 快递查询：单号、西班牙语状态与客服",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "yuntu-yunexpress-wuliu-chaxun",
@@ -18050,6 +18074,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTT Express 西班牙物流查询：单号、状态与客服",
       "name": "CTT Express",
       "color": "#df0024"
+    },
+    {
+      "id": "dpd-fr",
+      "catalog": "dpd-fr",
+      "slug": "dpd-france-kuaidi-chaxun",
+      "title": "DPD France 快递查询：单号、法语状态与 Pickup 自提点",
+      "name": "DPD France",
+      "color": "#dc0032"
     },
     {
       "id": "poczta-polska",

@@ -42,7 +42,7 @@ DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫�
 | `Awaiting collection by the consignee` | 待取件 | 包裹暂存在 DHL 网点，等待你前去自提。 |
 | `Delivered` | 已签收 | 包裹已送达。 |
 | `Shipment is on hold` | 需要留意 | DHL 暂时中止了该货件的流转。 |
-| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | 需要留意 | 包裹被误分拣至错误站点，将转往正确目的地，可能延误。 |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | 需要留意 | 包裹被误分拣至错误站点，将转往正确目的地，因此会晚到。 |
 | `Returned to shipper` | 已退回寄件人 | 包裹正在退回发件人。 |
 
 ## DHL Express 派送未成功处理
@@ -54,7 +54,7 @@ DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫�
 寄往英国的非英国本土包裹，或寄往爱尔兰的欧盟外包裹，可能需要缴纳进口税费。清关期间物流会显示 `Customs clearance status updated…`、`Processed for clearance at` 或 `Clearance event`；缴清费用后显示 `Payment is received and recorded for shipment related fees`；海关放行后显示 `Clearance processing complete at`。
 
 - **英国：** 据 GOV.UK 说明，快递公司会向你发送增值税（VAT）、关税或派送相关费用的账单，并通常保管包裹约 3 周；逾期未付将退回寄件人。
-- **爱尔兰：** 自 2026 年 7 月 1 日起，大多数来自欧盟以外、货值 150 欧元及以下的包裹需按商品类别每类缴纳 3 欧元关税。如果商家结账时未代收，爱尔兰税务局（Revenue）说明快递公司会在派送前向你收取，并可能加收其自身的清关代理费，请提前向承运商核实金额。
+- **爱尔兰：** 自 2026 年 7 月 1 日起，大多数来自欧盟以外、货值 150 欧元及以下的包裹需按商品类别每类缴纳 3 欧元关税。如果商家结账时未代收，爱尔兰税务局（Revenue）说明快递公司会在派送前向你收取，快递公司还可能加收自己的手续费（administration fee），请向其核实金额。
 
 更多说明见[清关中的包裹指南](guide:customs)（英文）。
 
@@ -71,7 +71,7 @@ DHL 会循环复用旧运单号：部分单号可能附带先前旧货件的扫�
 
 ## 使用 Peek 查询 DHL Express 包裹
 
-对于通过 DHL Express 校验位的 10 位运单号，[Peek](/) 会优先排在第一位，并同时向 DHL Express 以及共用该格式的其他承运商查询，例如 ACS Courier、Geniki Taxydromiki（这两家仅在不带空格和连字符的纯数字时触发）以及 DHL eCommerce Iberia，最终以查到包裹的承运商为准。由于 ACS 和 Geniki 使用相同校验规则，如果其中一家也查到了该单号，系统会让你自行选择。未通过校验的 10 位数字不会自动发给 DHL Express，请点击“更换”手动选择。`JD01` 单件编号和 `JJD0146` 面单号（如 `JJD014648291736058419`）会直接识别为 DHL Express 并关联至主运单号。mydhl.express.dhl 的链接同样可直接粘贴查询；若是 dhl.com 链接，请直接粘贴运单号本身——如果包裹被分到了“DHL”名下，请点击“更换”切换为“DHL Express”。
+对于通过 DHL Express 校验位的 10 位运单号，[Peek](/) 会把 DHL Express 排在第一位，并同时向它以及共用该格式的其他承运商查询，例如 ACS Courier、Geniki Taxydromiki（这两家仅在不带空格和连字符的纯数字时触发）以及 DHL eCommerce Iberia，最终以查到包裹的承运商为准。由于 ACS 和 Geniki 使用相同校验规则，如果其中一家也查到了该单号，系统会让你自行选择。未通过校验的 10 位数字不会自动发给 DHL Express，请点击“更换”手动选择。`JD01` 单件编号和 `JJD0146` 面单号（如 `JJD014648291736058419`）会直接识别为 DHL Express 并关联至主运单号。mydhl.express.dhl 的链接同样可直接粘贴查询；若是 dhl.com 链接，请直接粘贴运单号本身——如果包裹被分到了“DHL”名下，请点击“更换”切换为“DHL Express”。
 
 Peek 通过 DHL 移动应用背后的接口读取数据；若不可用，则在自有服务器的浏览器中打开 dhl.com 查询页（速度较慢且可能被拦截），此时再由物流查询服务补充。只要 DHL 官方查询正常响应，Peek 最高每 10 分钟检查一次，在 DHL 扫描包裹进入派送中的当天早上 6 点（当地时间）起最高每 2 至 5 分钟检查一次（需用浏览器访问 dhl.com 时为每 5 分钟）（通过物流查询服务时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并可按每次扫描、重要环节或仅派送当天向你推送通知。若连续两天无新动态（包裹仍处于“已生成面单”或“已揽收”状态时为 12 小时），Peek 会转为每小时检查一次。
 
@@ -97,7 +97,7 @@ Peek 通过 DHL 移动应用背后的接口读取数据；若不可用，则在�
 
 ### 收到要求付款的 DHL Express 短信是诈骗吗？
 
-很可能是。英国公民咨询局（Citizens Advice）指出，要求你付款以领取包裹或重新安排派送的短信通常是诈骗。请勿点击链接，而是直接在 DHL 官网或 Peek 中查询运单号。在英国可将诈骗短信免费转发至 7726。更多防骗方法见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
+有可能。英国公民咨询局（Citizens Advice）指出，要求你付款以领取包裹或重新安排派送的短信通常是诈骗。请勿点击链接，而是直接在 DHL 官网或 Peek 中查询运单号。在英国可将诈骗短信免费转发至 7726。在美国，美国联邦贸易委员会（FTC）建议通过你确知真实的网站或电话联系快递公司。更多防骗方法见[快递诈骗短信指南](guide:delivery-scam-texts)（英文）。
 
 :::sources
 - [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – 卖家责任、30 天期限、约定放置位置与诈骗短信提醒（适用于英格兰、苏格兰与威尔士）
@@ -105,5 +105,7 @@ Peek 通过 DHL 移动应用背后的接口读取数据；若不可用，则在�
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 免费转发诈骗短信至 7726
 - [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 天规则、新送达日、全额退款及送达前商家责任（爱尔兰）
 - [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – 自 2026 年 7 月 1 日起按商品类别每类征收 3 欧元关税，派送前向承运商缴纳
-- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – 承运商清关代理费说明
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – 快递公司可能收取的手续费
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – 通过确知真实的网站或电话联系快递公司
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – 运单号与单件编号格式、校验位、相似的 10 位单号、复用运单号、DHL Express 扫描文案及 Peek 对应状态、DHL 显示的签名、Peek 从 DHL Express 读取的内容
 :::

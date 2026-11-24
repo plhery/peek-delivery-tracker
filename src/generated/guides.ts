@@ -252,6 +252,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Open-source parcel tracking: Peek's code and engine"
     },
     {
+      "id": "peek-ai",
+      "slug": "when-will-my-parcel-arrive",
+      "title": "When will my parcel arrive? Peek AI's delivery estimate"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "christmas-posting-dates",
       "title": "Last posting dates for Christmas and shipping deadlines"
@@ -552,6 +557,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "developers",
       "slug": "open-source-sendungsverfolgung",
       "title": "Open-Source-Sendungsverfolgung: Peeks Code und Engine"
+    },
+    {
+      "id": "peek-ai",
+      "slug": "wann-kommt-mein-paket",
+      "title": "Wann kommt mein Paket? Die Lieferschätzung von Peek AI"
     },
     {
       "id": "christmas-posting-dates",
@@ -856,6 +866,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Suivi de colis open source\u00a0: le code et le moteur de Peek"
     },
     {
+      "id": "peek-ai",
+      "slug": "quand-arrive-mon-colis",
+      "title": "Quand mon colis va-t-il arriver\u202f? L'estimation de Peek IA"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
       "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
@@ -1156,6 +1171,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "developers",
       "slug": "tracciamento-pacchi-open-source",
       "title": "Tracciamento pacchi open source: codice e motore di Peek"
+    },
+    {
+      "id": "peek-ai",
+      "slug": "quando-arriva-il-mio-pacco",
+      "title": "Quando arriva il mio pacco? La stima di consegna di Peek IA"
     },
     {
       "id": "christmas-posting-dates",
@@ -1460,6 +1480,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Seguimiento de paquetes de código abierto: Peek y su motor"
     },
     {
+      "id": "peek-ai",
+      "slug": "cuando-llega-mi-paquete",
+      "title": "¿Cuándo llega mi paquete? La estimación de Peek IA"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "fecha-limite-envio-paquetes-navidad",
       "title": "Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW"
@@ -1762,6 +1787,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas open source: código e motor do Peek"
     },
     {
+      "id": "peek-ai",
+      "slug": "quando-chega-a-minha-encomenda",
+      "title": "Quando chega a minha encomenda? A estimativa do Peek IA"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "prazos-envio-encomendas-natal",
       "title": "Prazos de envio no Natal: datas limite dos CTT, DPD e GLS"
@@ -2062,6 +2092,11 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "developers",
       "slug": "sledzenie-przesylek-open-source",
       "title": "Śledzenie przesyłek open source: kod i silnik Peeka"
+    },
+    {
+      "id": "peek-ai",
+      "slug": "kiedy-przyjdzie-paczka",
+      "title": "Kiedy przyjdzie paczka? Prognoza dostawy Peek AI"
     },
     {
       "id": "christmas-posting-dates",

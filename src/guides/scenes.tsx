@@ -1561,6 +1561,52 @@ function Terminal() {
   </>;
 }
 
+/** Peek AI's spark, as the app draws it, in a box of 24. */
+const SPARK = 'M10 2.5c.5 4.6 2.4 6.5 7 7-4.6.5-6.5 2.4-7 7-.5-4.6-2.4-6.5-7-7 4.6-.5 6.5-2.4 7-7Zm8.5 11c.3 2.3 1.2 3.2 3.5 3.5-2.3.3-3.2 1.2-3.5 3.5-.3-2.3-1.2-3.2-3.5-3.5 2.3-.3 3.2-1.2 3.5-3.5Z';
+
+function Estimate() {
+  // The coming days, shaded by their chance; the carrier's own day is ringed.
+  const chances = [.15, .4, 1, .6, .25];
+  const carrierDay = 3;
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A clock at four, the hour Peek AI names. */}
+    <circle cx="132" cy="120" r="58" fill={paper} />
+    <circle cx="132" cy="120" r="58" stroke="var(--rose)" strokeWidth="7" />
+    {Array.from({ length: 12 }, (_, hour) => {
+      const angle = hour * Math.PI / 6;
+      const inner = hour % 3 ? 44 : 38;
+      return <path key={hour} d={`M${132 + Math.sin(angle) * inner} ${120 - Math.cos(angle) * inner}L${132 + Math.sin(angle) * 48} ${120 - Math.cos(angle) * 48}`}
+        stroke={soft} strokeWidth="3" strokeLinecap="round" />;
+    })}
+    <path d="M132 120 159 135.5M132 120V82" stroke={ink} strokeWidth="5" strokeLinecap="round" />
+    <circle cx="132" cy="120" r="5.5" fill={ink} />
+    <path d={SPARK} transform="translate(166 46) scale(1.5)" fill="var(--rose)" />
+    {/* A phone: a parcel's card with Peek AI's estimate under the carrier's date, and below it the days. */}
+    <Phone x={236} y={34} width={156} height={214}>
+      <g transform="translate(14 38)">
+        <rect width="128" height="78" rx="14" fill="var(--rose-soft)" />
+        <circle cx="22" cy="22" r="10" fill="var(--rose)" />
+        <rect x="40" y="14" width="68" height="7" rx="3.5" fill="var(--rose)" />
+        <rect x="40" y="26" width="46" height="6" rx="3" fill="var(--rose)" opacity=".45" />
+        <g transform="translate(10 46)">
+          <rect width="108" height="22" rx="11" fill={paper} />
+          <path d={SPARK} transform="translate(7 4) scale(.6)" fill="var(--rose)" />
+          <rect x="28" y="8" width="62" height="6" rx="3" fill="var(--rose)" opacity=".75" />
+        </g>
+      </g>
+      <g transform="translate(14 128)">
+        <rect width="128" height="48" rx="12" fill="var(--control)" />
+        {chances.map((chance, index) => <rect key={index} x={11 + index * 22} y="12" width="18" height="24" rx="6" fill="var(--rose)" opacity={.12 + chance * .68} />)}
+        <rect x={11 + carrierDay * 22 - 2.5} y="9.5" width="23" height="29" rx="8" stroke={soft} strokeWidth="2" />
+      </g>
+    </Phone>
+    <path d={SPARK} transform="translate(398 40) scale(1.1)" fill="var(--yellow)" />
+    {/* Pip, peering at the phone. */}
+    <Pip x={478} ground={248} width={150} mood="look" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1611,6 +1657,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'track-without-carrier': { tone: 'blue', draw: Pasted },
   'delivery-passport': { tone: 'orange', draw: Passport },
   'developers': { tone: 'green', draw: Terminal },
+  'peek-ai': { tone: 'rose', draw: Estimate },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },
   'uncollected-parcel': { tone: 'ochre', draw: Uncollected },
   'parcel-lockers': { tone: 'rose', draw: Lockers },

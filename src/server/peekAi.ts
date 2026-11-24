@@ -299,7 +299,9 @@ function arrivalChances(row: JsonObject, placed: Placed, snap: DateTime, blob: P
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   const parcel: AiParcel = {
     c, destinationCountry: text(data.destination_country), serviceName: text(data.service_name),
-    weightKg: data.weight_kg ?? null, lookup: 'user_id' in row ? row.user_id === null : false, offset: snap.offset * 60,
+    // A link's row says whether it is a lookup (`lookup`) without naming the account: parcel_link_view.
+    weightKg: data.weight_kg ?? null, lookup: typeof row.lookup === 'boolean' ? row.lookup : 'user_id' in row ? row.user_id === null : false,
+    offset: snap.offset * 60,
   };
   const features = snapshotFeatures(parcel, placed.scans, t, ordinal(snap), snap.hour, blob);
   let F: number[] | null = null;

@@ -196,6 +196,21 @@ describe('the model', () => {
     expect(ai(reached, '2026-11-20T14:30:00Z')?.last).toEqual({ kind: 'country', at: '2026-11-19T19:00:00+01:00', country: 'CH' });
   });
 
+  it("tells a lookup from an account's parcel by its owner, or by what a link's row says of it", () => {
+    // A model that gives a lookup good chances from today on, and an account's parcel poor ones.
+    const base = blob();
+    const split: PeekAiTree = { f: [1], t: [0.5], d: [1], m: [0], l: [~0], r: [~1], v: [logit(0.2), logit(0.97)] };
+    const byOwner: PeekAiBlob = { ...base, model: { ...base.model, features: ['h', 'lookup'], trees: [split] } };
+    // Each its own parcel: a parcel's chances are kept with its scans.
+    const said = (id: string, fields: JsonObject) => ai(row({ id, ...fields }), '2026-11-20T14:30:00Z', byOwner);
+    const lookup = said('p-guest', { user_id: null });
+    expect(lookup).not.toBeNull();
+    expect(said('p-guest-link', { lookup: true })).toEqual(lookup);
+    const account = said('p-account', { user_id: 'an-account' });
+    expect(said('p-account-link', { lookup: false })).toEqual(account);
+    expect(account).not.toEqual(lookup);
+  });
+
   it('waits for a check when the last one is more than a day and a half old', () => {
     expect(ai(row({ last_synced_at: '2026-11-18T12:00:00Z' }), '2026-11-20T14:30:00Z')).toBeNull();
   });

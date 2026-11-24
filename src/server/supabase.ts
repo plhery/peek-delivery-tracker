@@ -2687,8 +2687,9 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * A parcel link, the role its caller has and the whole package row with its
-   * events, each with the fields an account's events carry (`PACKAGE_SELECT`). Null when the link is unknown or past its forget date, and
+   * A parcel link, the role its caller has and the package's columns the server
+   * reads (parcel_link_view names them, never the whole row) with its events, each
+   * with the fields an account's events carry (`PACKAGE_SELECT`). Null when the link is unknown or past its forget date, and
    * `stopped` when its sharing was stopped and the caller does not hold the
    * owner key. The link id and key hash travel in the body, never in a logged
    * URL. `touch` records that the link was opened.

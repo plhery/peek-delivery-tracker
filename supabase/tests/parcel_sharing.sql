@@ -388,6 +388,29 @@ begin
 end;
 $$;
 
+-- A link's package names the columns the server reads: the owner's name for the parcel, the account and a column
+-- added to packages later stay out. A field added to this list is one a link is meant to carry.
+do $$
+declare
+  answer jsonb := public.parcel_link_view(current_setting('share_test.foreign_link'));
+  listed constant text[] := array[
+    'archived_at', 'carrier', 'carrier_data', 'created_at', 'current_stage', 'dpd_postcode', 'expected_delivery', 'id',
+    'last_status_text', 'last_synced_at', 'lookup', 'one_off', 'phone_digits', 'sync_error', 'sync_status',
+    'tracking_events', 'tracking_number', 'tracking_url'
+  ];
+  served text[];
+begin
+  select array_agg(key order by key collate "C") into served from jsonb_object_keys(answer->'package') as key;
+  if served is distinct from listed then
+    raise exception 'A link''s package carries %, not the listed %', served, listed;
+  end if;
+  if answer::text like '%Private name%' or answer::text like '%d1000000-0000-4000-8000-000000000001%'
+      or answer#>>'{package,lookup}' <> 'false' then
+    raise exception 'A link carries its owner''s name for the parcel or account: %', answer;
+  end if;
+end;
+$$;
+
 set local role authenticated;
 
 do $$

@@ -50396,7 +50396,12 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^YHC\\d{12}CN$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.tiptop56.com/",
     "helpUrl": "https://www.tiptop56.com/aboutus/contact/"
   },

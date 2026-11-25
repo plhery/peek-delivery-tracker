@@ -15310,6 +15310,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "rastreamento-cttyex",
+      "title": "Rastreamento CTTYEX: códigos CTTY, eventos e horário",
+      "name": "CTTYEX",
+      "color": "#0068AC"
+    },
+    {
       "id": "speedaf",
       "catalog": "speedaf",
       "slug": "rastreamento-speedaf",
@@ -15452,6 +15460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento J&T Express na Arábia Saudita, EAU e Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "rastreamento-jifan",
+      "title": "Rastreamento Jifan: códigos JFGJ, eventos e horário",
+      "name": "Jifan",
+      "color": "#c81011"
     },
     {
       "id": "17feia",

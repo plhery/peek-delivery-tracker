@@ -24,11 +24,11 @@ Nenhuma outra transportadora do catálogo do Peek usa esses formatos. Espaços e
 
 **Onde encontrar.** A ECMS imprime o código no conhecimento da etiqueta do pacote, e a loja o envia no e-mail de despacho ou na página do pedido. Se não conseguir achar, veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
-**Link de rastreamento.** Um link para o rastreador da ECMS terminado em `?number=` e um código já preenche o campo e abre a verificação por imagem. Outros links da ECMS trazem o código depois de `orderNumber=` ou `trackingno=`. Você pode colar qualquer um deles no Peek, que extrai o código ECMS automaticamente.
+**Link de rastreamento.** Um link para o rastreador da ECMS terminado em `?number=` e um código já preenche o campo e abre a verificação por imagem. Outros links da ECMS trazem o código depois de `orderNumber=` ou `trackingno=`. Você pode colar qualquer um deles no Peek: ele encontra o código ECMS no link.
 
 ## Status do rastreamento ECMS Express explicados
 
-O rastreador da ECMS pede primeiro uma verificação por imagem ("Security verification"). Depois resume o envio em um de oito rótulos — de Shipment Information Received a Delivered ou Exception — e lista as movimentações da mais recente à mais antiga, com data, hora e local. O Peek mostra cada evento com o texto original da ECMS, nesta ordem:
+O rastreador da ECMS pede primeiro uma verificação por imagem ("Security verification"). Depois resume o envio em um de oito rótulos — de Shipment Information Received a Delivered ou Exception — e lista as movimentações da mais recente à mais antiga, com data, hora e local. O Peek mostra cada evento com o texto original da ECMS. Na ordem em que o pacote os recebe:
 
 | A ECMS mostra | O que significa para você | O Peek mostra |
 | --- | --- | --- |
@@ -53,7 +53,7 @@ O rastreador da ECMS pede primeiro uma verificação por imagem ("Security verif
 
 **Em chinês.** Alguns históricos trazem essas etapas em chinês, e o Peek atribui as mesmas fases das versões em inglês: `发货预报已收到，正在等待货物到达我们的始发站仓库` (dados recebidos, aguardando pacote), `干线航班起飞` e `干线航班已到达` (voo partiu e pousou), `货物已进入清关流程` (na alfândega), `货物已清关放行` (liberado), `货物已到达目的站仓库` (no armazém de destino) e `货物出库前往配送中心安排最终派送` (a caminho da transportadora local).
 
-**Horários.** A ECMS marca suas próprias leituras com o relógio e deslocamento UTC da estação onde ocorreram, e o Peek lê dessa forma. Eventos da transportadora local repassados pela ECMS vêm com deslocamento zero: o Peek lê como UTC, a menos que o horário fique mais de dez minutos à frente do registro na ECMS — nesse caso, interpreta no horário local do lugar informado. Linhas de voo (`Flight departure`, `Flight arrival`) marcadas exatamente à meia-noite indicam apenas o dia do voo e aparecem no Peek sem hora. Veja também [como rastrear encomendas da China](guide:tracking-from-china).
+**Horários.** A ECMS marca suas próprias leituras com o relógio e deslocamento UTC da estação onde ocorreram, e o Peek lê dessa forma. Eventos da transportadora local repassados pela ECMS vêm com deslocamento zero: o Peek lê como UTC, a menos que uma leitura desse fluxo fique, assim, mais de dez minutos depois do registro na ECMS — nesse caso, o Peek lê os horários desse fluxo como horários locais do lugar informado. Linhas de voo (`Flight departure`, `Flight arrival`) marcadas exatamente à meia-noite indicam apenas o dia do voo e aparecem no Peek sem hora. Veja também [como rastrear encomendas da China](guide:tracking-from-china).
 
 ## Quem entrega pacotes da ECMS Express
 
@@ -61,13 +61,13 @@ Para o trecho final, a ECMS diz trabalhar com transportadoras locais confiáveis
 
 **Prazo de entrega.** A ECMS diz que varia conforme origem, destino e serviço. Saindo dos Estados Unidos, a página do serviço informa de 3 a 6 dias úteis para o Reino Unido, 3 a 11 para o Canadá, 3 a 8 para a Austrália e 4 a 8 para a União Europeia.
 
-**Tentativas de entrega e retirada** seguem as regras da transportadora local, portanto consulte-a: a ECMS não publica regras para destinatários. Veja [entrega perdida](guide:missed-delivery).
+**Tentativas de entrega e retirada** seguem as regras da transportadora local, portanto consulte-a: a ECMS não publica regras para destinatários. Veja [entrega não realizada](guide:missed-delivery).
 
 ## Pacote ECMS Express atrasado ou rastreamento parado
 
 **"We could not find a shipment for this tracking number."** O rastreador da ECMS não conhece o número: erro de digitação ou a loja ainda não enviou os dados. O Peek mostra "Aguardando ECMS Express" e continua verificando. Confira o número; se nada surgir após alguns dias, confirme com o vendedor se o envio foi feito. Se depois de dois dias a ECMS continuar sem reconhecer e nenhum serviço de rastreamento encontrar, o Peek exibe: "Depois de dois dias, a transportadora ainda não reconhece este código. Confira o código, escolha outra transportadora ou exclua a encomenda."
 
-**Parado em `Virtual Manifest has been received`.** A ECMS tem apenas os dados, não o pacote. Pergunte à loja quando ele foi entregue.
+**Parado em `Virtual Manifest has been received`.** A ECMS tem apenas os dados, não o pacote. Pergunte à loja quando ela entregou o pacote à ECMS.
 
 **Parado na alfândega.** Após `Shipment started customs clearance process.`, o pacote aguarda a alfândega do seu país. O FAQ da ECMS explica que em envios DDU ou DAP o destinatário pode precisar pagar impostos e tarifas antes da entrega; em envios DDP, o remetente costuma pagar antecipadamente. Se pedirem pagamento, veja [encomendas paradas na alfândega](guide:customs).
 
@@ -94,11 +94,11 @@ A página Contact Us da ECMS lista estes telefones para países de língua ingle
 
 O [Peek](/) identifica códigos da ECMS pelo formato e consulta diretamente o rastreador da ECMS. Não precisa de conta, CEP nem telefone.
 
-A verificação por imagem da ECMS é uma soma simples: o Peek resolve sozinho e, se falhar, tenta mais uma vez com nova imagem. Se a ECMS ainda assim não responder, o Peek recorre a serviços de rastreamento nesse meio tempo e mostra o histórico deles, nas palavras deles.
+A verificação por imagem da ECMS é uma soma simples: o próprio Peek a lê e, se falhar, tenta mais uma vez com nova imagem. Se a ECMS ainda assim não responder, o Peek recorre a serviços de rastreamento nesse meio tempo e mostra o histórico deles, nas palavras deles.
 
 O Peek exibe o status, cada movimentação com cidade, região e país e o país de destino, do mais recente ao mais antigo, com horários no fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Ele omite referências da loja e links de pagamento presentes no registro da ECMS, e não exibe peso nem data prevista de entrega.
 
-Quando o registro da ECMS informa uma transportadora local conhecida pelo Peek, ele mostra "Entrega por" seguido dela (e do número dela quando aparece nas leituras). Enquanto a entregadora só tiver a pré-notificação, sem leitura própria, aparece "Anunciada a …, ainda não recebida". Se o Peek lê o rastreador direto dela, consulta-o também e migra para ele assim que houver evento pelo menos tão recente quanto o último da ECMS, mantendo as leituras anteriores. Caso contrário, adicione o "LM Tracking No." como outro pacote: o Peek acompanha mais de 4.500 transportadoras.
+Quando o registro da ECMS informa uma transportadora local conhecida pelo Peek, ele mostra "Entrega por" seguido dela (e do número dela quando aparece nas leituras). Enquanto a entregadora só tiver a pré-notificação, sem leitura própria, aparece "Anunciada a …, ainda não recebida". Se o Peek lê o rastreador direto dela, consulta-o também e migra para ele assim que ela mostrar uma leitura pelo menos tão recente quanto a última da ECMS, mantendo as leituras da ECMS. Caso contrário, adicione o "LM Tracking No." como outro pacote: o Peek acompanha mais de 4.500 transportadoras.
 
 Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia da saída para entrega, enquanto o rastreador da ECMS responder; fora disso, de hora em hora. Apenas por serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando passa a acompanhar na transportadora local, segue o ritmo dela. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode receber alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". "Etapas importantes" inclui a etapa aduaneira da ECMS, `Return to origin`, saída para entrega, `Available for pickup` e entrega — não voos nem passagens por armazém. O Peek não pode falar com a ECMS nem com o vendedor por você.
 
@@ -114,7 +114,7 @@ Na caixa acima ou na página "Track Your Shipment" em ecmsglobal.com, após pass
 
 ### Quem entrega pacotes da ECMS Express no meu país?
 
-Uma transportadora local parceira da ECMS, que pode aparecer em "LM Provider" no rastreador da ECMS. Nos históricos presentes no código do Peek, é a SpeedX nos EUA; em outros países, confira esse quadro ou pergunte ao vendedor.
+Uma transportadora local com a qual a ECMS trabalha, que pode aparecer em "LM Provider" no rastreador da ECMS. Nos históricos presentes no código do Peek, é a SpeedX nos EUA; em outros países, confira esse quadro ou pergunte ao vendedor.
 
 ### O que significa "Shipment is tendering to third party carrier for final delivery"?
 
@@ -122,7 +122,7 @@ Que a ECMS está repassando seu pacote à transportadora local que fará a entre
 
 ### Quem devo contatar se meu pacote da ECMS Express sumir?
 
-Primeiro o vendedor: o FAQ da ECMS encaminha destinatários ao varejista para reembolso ou reenvio, e só o expedidor pode reclamar junto à ECMS. Sobre a entrega em si, fale com a transportadora local; a ECMS lista telefones nos EUA, Reino Unido e Austrália.
+Primeiro o vendedor: o FAQ da ECMS encaminha destinatários ao varejista para reembolso ou substituição, e só o expedidor pode reclamar junto à ECMS. Sobre a entrega em si, fale com a transportadora local; a ECMS lista telefones nos EUA, Reino Unido e Austrália.
 
 :::sources
 - [ECMS Express: Home](https://www.ecmsglobal.com/en-us/home.html) – serviço expresso para lojas online
@@ -133,4 +133,5 @@ Primeiro o vendedor: o FAQ da ECMS encaminha destinatários ao varejista para re
 - [ECMS Express: FAQ](https://www.ecmsglobal.com/en-us/faq.html) – conhecimento, impostos e taxas, devoluções, cancelamento, extravio e prazo de 30 dias para reclamação pelo expedidor
 - [ECMS Express: Contact Us](https://www.ecmsglobal.com/en-us/contact-us.html) – telefones regionais, horários e formulário
 - [ECMS Express: Support (UK)](https://www.ecmsglobal.com/en-uk/support.html) – telefone do Reino Unido em formato local
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomes, formatos de código, links, verificação por imagem e nova tentativa, textos dos eventos em inglês e chinês e suas fases, horários, locais, a transportadora local e o número dela, o que o Peek omite, serviços de rastreamento
 :::

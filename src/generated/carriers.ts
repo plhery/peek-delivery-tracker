@@ -18487,7 +18487,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "geodis-pl",
       "catalog": "geodis-pl",
       "slug": "geodis-poland-tracking",
-      "title": "GEODIS Poland 波兰物流查询：PL 单号、状态与自提",
+      "title": "GEODIS Poland 波兰物流查询：PL 单号、状态与派送",
       "name": "GEODIS Poland",
       "color": "#3100e6"
     },

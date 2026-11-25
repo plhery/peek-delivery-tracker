@@ -1,6 +1,6 @@
 ---
 title: Rastreamento GEODIS Poland: código, status e entregas
-description: Rastreie uma remessa da GEODIS Poland (antiga Pekaes): formato do código PL, significado dos status, entregas, retirada em terminal e contato.
+description: Rastreie uma remessa da GEODIS Poland (antiga Pekaes): formato do código PL, significado dos status, entregas, retirada em terminal, reclamações e contato.
 slug: rastreamento-geodis-polonia
 published: 2026-11-24
 updated: 2026-11-24
@@ -21,7 +21,7 @@ A GEODIS atende apenas empresas, portanto o número fica com quem enviou a merca
 | `PL4829105736491827` | `PL` e 16 dígitos: código de remessa da GEODIS Poland, chamado de "Shipment No." no rastreador. |
 | `1G4829105736` | `1G` e 10 letras maiúsculas ou dígitos: código da GEODIS na França, acompanhado na área francesa de destinatários, não na Strefa Klienta. |
 
-Na Strefa Klienta, digite o código em "Enter Shipment No." e clique em "Search". Se responder `Shipment with such number does not exist`, o sistema não reconhece o número: fale com a loja ou remetente, como orienta a GEODIS. A mensagem em polonês `Proszę wprowadzić właściwy numer przesyłki.` pede um número válido: verifique se há erro de digitação.
+Na Strefa Klienta, digite o código em "Enter Shipment No." e clique em "Search". Se responder `Shipment with such number does not exist`, o sistema não reconhece o número: fale com a loja ou remetente, como a GEODIS orienta quando um código não funciona. A mensagem em polonês `Proszę wprowadzić właściwy numer przesyłki.` pede um número válido: verifique se há erro de digitação.
 
 ## O que significam os status da GEODIS Poland
 
@@ -50,10 +50,10 @@ Alguns eventos indicam retenção: `Stopped at Hub` e `Stopped at Collection Ter
 
 As condições gerais da GEODIS, vigentes desde 4 de novembro de 2024, regem as entregas. Elas vinculam o cliente contratante (geralmente a loja) e detalham principalmente entregas de carga paletizada (fracionada):
 
-- **Entrega perdida.** Se não houver ninguém, o motorista deixa aviso da tentativa. Após a segunda tentativa sem sucesso, a remessa volta ao remetente; também volta se você recusar ou se o endereço informado estiver errado. Veja [entrega perdida](guide:missed-delivery) e [devolvida ao remetente](guide:returned-to-sender).
+- **Entrega não realizada.** Se não houver ninguém, o motorista deixa aviso da tentativa. Após a segunda tentativa sem sucesso, a remessa volta ao remetente; também volta se você recusar ou se o remetente informou um endereço errado. Veja [entrega não realizada](guide:missed-delivery) e [devolvida ao remetente](guide:returned-to-sender).
 - **Paletes em endereço residencial.** A GEODIS entrega apenas em dias úteis, de segunda a sexta-feira, das 8h às 16h. O cliente precisa fornecer seu celular: a GEODIS envia atualizações e agenda previamente por telefone, SMS ou e-mail, ligando no mais tardar no dia disponível para entrega. Se não conseguir contato em dois dias úteis, avisa o contratante e devolve ao remetente.
-- **Descarga.** Em endereços residenciais, o motorista descarrega o palete no nível do solo ou no ponto pavimentado e seguro mais próximo se o caminhão não puder estacionar com segurança. Subir ou levar para dentro ("wniesienie"), horário marcado e entrega até as 10h ou 12h (apenas alguns códigos postais) são serviços extras contratados pelo remetente.
-- **Retirada no terminal.** Quando o remetente autoriza retirada em um terminal da GEODIS, a carga aguarda 48 horas em dias úteis a partir da instrução, com retirada de segunda a sexta-feira das 11h às 16h; depois volta ao remetente.
+- **Descarga.** Em endereços residenciais, o motorista descarrega o palete no nível do solo ou no ponto pavimentado e seguro mais próximo se o caminhão não puder estacionar com segurança. Subir ou levar para dentro ("wniesienie"), horário marcado e entrega até as 10h ou 12h (apenas alguns códigos postais) são serviços à parte que o contratante pode pedir.
+- **Retirada no terminal.** Quando o contratante pede que você retire a remessa em um terminal da GEODIS, a carga aguarda 48 horas em dias úteis a partir da instrução, com retirada de segunda a sexta-feira das 11h às 16h; depois volta ao remetente.
 - **Pagamento na entrega.** Aceita dinheiro, cartão, BLIK ou outro meio sem dinheiro admitido pela GEODIS, até 10.000 PLN.
 - **Assinatura.** Você assina no aparelho do motorista ou nos documentos de entrega. Os termos da GEODIS proíbem conferir o conteúdo antes de assinar, então inspecione a embalagem e anote qualquer avaria ou falta nos documentos nesse momento.
 
@@ -65,7 +65,7 @@ As condições gerais da GEODIS, vigentes desde 4 de novembro de 2024, regem as 
 
 **Avaria ou falta de itens.** Lavre termo de avaria ("protokół szkody") com o motorista no ato da entrega, no formulário da GEODIS, assinado por ambos. Danos ocultos ou faltas devem ser reportados à GEODIS em até 7 dias do recebimento, cabendo ao reclamante provar que ocorreram antes da entrega. Guarde a mercadoria para vistoria e tire fotos com data e hora. O formulário alerta que o termo de avaria sozinho não substitui o pedido de reclamação. Veja [encomenda avariada](guide:damaged-parcel).
 
-**Quem reclama.** Pelos termos da GEODIS, reclamações partem do cliente contratante ou de quem ele autorizar por escrito, enviadas ao departamento de reclamações em Błonie: em até 14 dias do recebimento para avaria ou falta, e até 21 dias da data prevista para atraso ou extravio. Como comprador, trate com a loja: segundo a UOKiK, o vendedor responde pelo envio até você recebê-lo — mesmo se a transportadora causou o dano —, então você reclama com a loja, que aciona a transportadora.
+**Quem reclama.** Pelos termos da GEODIS, reclamações partem do cliente contratante ou de quem ele autorizar por escrito, enviadas por escrito ao departamento de reclamações em Błonie, sem demora: em até 14 dias do recebimento para avaria ou falta, e até 21 dias da data prevista para atraso ou extravio. Como comprador, trate com a loja: segundo a UOKiK, o vendedor responde pelo envio até você recebê-lo — mesmo se a transportadora causou o dano —, então você reclama com a loja, que aciona a transportadora.
 
 ## Contato e atendimento da GEODIS Poland
 
@@ -74,15 +74,15 @@ Canais da GEODIS na Polônia:
 - **Atendimento ao cliente (Dział Obsługi Klienta):** +48 22 460 26 26, listado na página polonesa da Strefa Klienta, sem horários publicados.
 - **Reclamações por correio:** Dział Reklamacji, ul. Spedycyjna 1, 05-870 Błonie. Os formulários de reclamação e avaria ficam na Strefa Klienta.
 - **Unidades:** a [página de contato polonesa da GEODIS](https://geodis.com/pl-pl/skontaktuj-sie-z-nami) lista 42 endereços na Polônia, incluindo filiais da GEODIS Road Network.
-- **Formulário online:** o formulário em geodis.com é voltado a cotações e exige nome de empresa.
+- **Formulário online:** o formulário em geodis.com é voltado a cotações e exige nome de empresa: é destinado a empresas.
 
 ## Como rastrear uma remessa da GEODIS Poland no Peek
 
-`PL` seguido de 16 dígitos não é exclusivo da GEODIS (`PL` indica Polônia), portanto o Peek não fixa a GEODIS Poland só pelo código. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ele consulta a GEODIS Poland e mostra "GEODIS Poland está com esta encomenda" quando ela reconhece o número. Se ainda não constar, aparece "Provavelmente GEODIS Poland" e "Aguardando a primeira movimentação de GEODIS Poland" enquanto o Peek segue consultando; se após uma semana continuar ausente, sugere conferir com o remetente ou escolher outra transportadora. Para definir manualmente, toque em "Trocar" e selecione "GEODIS Poland" em "Compatível com este código" ou pesquise (digitar Pekaes também encontra; "GEODIS" sozinho é a GEODIS France). Em remessas já adicionadas, use "Trocar transportadora". Links da Strefa Klienta contendo o número identificam a GEODIS Poland de imediato.
+`PL` seguido de 16 dígitos não é exclusivo da GEODIS (`PL` indica Polônia), portanto o Peek não fixa a GEODIS Poland só pelo código. Cole mesmo assim: o Peek acompanha mais de 4.500 transportadoras. Ele consulta a GEODIS Poland e mostra "GEODIS Poland está com esta encomenda." quando ela reconhece o número. Se ainda não constar, aparece "Provavelmente GEODIS Poland" e "Aguardando a primeira movimentação de GEODIS Poland" enquanto o Peek segue consultando; se após uma semana continuar ausente, sugere conferir com o remetente ou escolher outra transportadora. Para definir manualmente, toque em "Trocar" na linha da transportadora e selecione "GEODIS Poland" em "Compatível com este código" ou pesquise (digitar Pekaes também encontra; "GEODIS" sozinho é a GEODIS France). Em remessas já adicionadas, use "Trocar transportadora". Um link da Strefa Klienta com o número dispensa tudo isso: o Peek o atribui à GEODIS Poland.
 
-O Peek lê a Strefa Klienta em inglês e exibe o status, cada evento nas palavras da GEODIS com a cidade do terminal, o horário da entrega e o país de destino. Leituras em terminais poloneses usam o horário de Varsóvia; terminais no exterior usam o relógio local. Todos aparecem no fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Quando uma linha `Pseudoscan` cancela eventos anteriores, o Peek também os descarta, e `Claim Received` mantém o status anterior. O rastreador da GEODIS não fornece data prevista, peso, serviço, nome do destinatário nem comprovante; o Peek omite CEP, endereço, quantidade de volumes, códigos de terminal e observações (que podem citar quem assinou).
+O Peek lê a Strefa Klienta em inglês e exibe o status, cada evento nas palavras em inglês da GEODIS, com o local do terminal, o horário da entrega e o país de destino. Leituras em terminais poloneses usam o horário de Varsóvia; terminais no exterior usam o relógio local. Todos aparecem no fuso do seu aparelho; em peektracker.com e nos aplicativos para iPhone e Android, o histórico termina com "Horários no seu fuso horário:" e o nome dele. Quando uma linha `Pseudoscan` cancela eventos anteriores, o Peek também os descarta, e `Claim Received` mantém o status anterior. O rastreador da GEODIS não fornece data prevista, peso, serviço, nome do destinatário nem comprovante; o Peek omite o código postal e o endereço de entrega, quantidade de volumes, códigos de terminal e observações (que podem citar quem assinou).
 
-Enquanto a remessa estiver aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a GEODIS registra saída para entrega, enquanto o rastreador da GEODIS responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não pode marcar data, combinar retirada nem abrir reclamação: ligue para a GEODIS ou fale com a loja.
+Enquanto a remessa estiver aberta, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos a partir das 6h no horário local no dia em que a GEODIS registra saída para entrega, enquanto o rastreador da GEODIS responder (por meio de serviços de rastreamento, até a cada 15 minutos); fora disso, de hora em hora. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Ele pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega", mas não pode marcar data, combinar retirada nem abrir reclamação: ligue para a GEODIS ou fale com a loja.
 
 ## Perguntas sobre o rastreamento GEODIS Poland
 
@@ -114,4 +114,5 @@ A GEODIS informa 24 a 48 horas dentro da Polônia no padrão, ou dia seguinte an
 - [GEODIS: Historia](https://geodis.com/pl-pl/historia) – compra da PEKAES em 2021 e SNCF
 - [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – vendedor responsável até a entrega
 - [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 dias, prazo adicional e rescisão
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato do código, links da Strefa Klienta, textos dos status, rota de entrega que volta ao terminal, códigos da GEODIS France, o que o Peek lê
 :::

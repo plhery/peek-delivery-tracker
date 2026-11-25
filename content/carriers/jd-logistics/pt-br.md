@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-A JD Logistics (京东物流, Jingdong Logistics) é a operação logística da JD.com, com ações listadas em Hong Kong. No exterior atua sob as marcas JoyLogistics e JoyExpress: despacha estoques de vendedores a partir de armazéns nos EUA, Reino Unido, Austrália e outros países, além de enviar encomendas da China para lojas online. Rastreie no [rastreador internacional da JD](https://www.jingdonglogistics.com/Tracking), em inglês, ou cole o código na caixa acima. O número vem da loja que enviou seu pedido.
+A JD Logistics (京东物流, Jingdong Logistics) é a operação logística da JD.com, com ações listadas em Hong Kong. No exterior atua sob as marcas JoyLogistics e JoyExpress: despacha estoques de vendedores a partir de armazéns nos EUA, Reino Unido, Austrália e outros países, além de transportar, a partir da China, encomendas de vendedores online. Rastreie no [rastreador internacional da JD](https://www.jingdonglogistics.com/Tracking), em inglês, ou cole o código na caixa acima. O número vem da loja que enviou seu pedido.
 
 ## Código de rastreamento JD Logistics: como reconhecer
 
@@ -24,7 +24,7 @@ Minúsculas, espaços e traços não importam no Peek. O rastreador internaciona
 
 **Onde encontrar.** A loja que contratou a JD informa o número no e-mail de envio ou na página do pedido. Se não encontrar, veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
-**Pacote dentro da China.** Envios em circulação na China (por exemplo, até o armazém de uma operadora) são rastreados no site chinês da JD, [jdl.com](https://www.jdl.com/orderSearch). Digite o número em `运单查询` (busca de conhecimento) e clique em `立即查询` (buscar agora); aceita vários códigos separados por vírgula, espaço ou quebra de linha.
+**Pacote dentro da China.** Envios em circulação na China (por exemplo, até o armazém de uma redirecionadora) são rastreados no site chinês da JD, [jdl.com](https://www.jdl.com/orderSearch). Digite o número do conhecimento de transporte ou do volume em `运单查询` (consulta de conhecimento de transporte) e clique em `立即查询` (buscar agora); aceita vários códigos separados por vírgula, espaço ou quebra de linha.
 
 ## Status do rastreamento JD Logistics explicados
 
@@ -39,23 +39,23 @@ O rastreamento internacional da JD mostra cada etapa em inglês junto com o loca
 | `Shipping Label Created` | sem mudança | Etiqueta dessa transportadora, repassada pela JD. O status do pacote não muda. |
 | `Arrived at GOFO Regional Hub` | "Em trânsito" | Nos EUA: a GOFO Express, que aparece entregando no histórico da JD lá, bipou o pacote em seu hub. |
 
-**Pacote vindo da China** passa por outras etapas, nesta ordem. Primeiro `Shipment Picked up` (coletado na loja), depois `Arrived at Warehouse`, `Weighed at Warehouse` e `Consolidation Completed` no armazém da JD na China — tudo como "Recebida pela transportadora". Consolidado significa agrupado com outros pacotes para o voo, não entregue. Em seguida, tudo como "Em trânsito": `Departed from Warehouse.`, `Arrive at airport`, `Customs released from origin port` (exportação liberada), `Departure from origin port`, `Arrive at destination port`, `Cleanrance agency picked` (grafia da própria JD: o despachante recolheu o pacote liberado, não você) e `Handover to local carrier`. Nos EUA entram então os eventos da GOFO sob códigos da JD: `Arrived at GOFO Regional Hub`, `In Transit to Next Facility`, `Loaded on Vehicle` e `Arrived at GOFO Delivery Station` ("Em trânsito"), seguidos de `Out for Delivery` ("Saiu para entrega").
+**Pacote vindo da China** passa por outras etapas, nesta ordem. Primeiro `Shipment Picked up` (coletado na loja), depois `Arrived at Warehouse`, `Weighed at Warehouse` e `Consolidation Completed` no armazém da JD na China, que guarda o pacote até a partida — tudo como "Recebida pela transportadora". Consolidado significa agrupado com outros pacotes para o voo, não entregue. Em seguida, tudo como "Em trânsito": `Departed from Warehouse.`, `Arrive at airport`, `Customs released from origin port` (exportação liberada), `Departure from origin port`, `Arrive at destination port`, `Cleanrance agency picked` (grafia da própria JD: o despachante recolheu o pacote liberado, não você) e `Handover to local carrier`. Nos EUA entram então os eventos da GOFO sob códigos da JD: `Arrived at GOFO Regional Hub`, `In Transit to Next Facility`, `Loaded on Vehicle` (carregado em um hub da GOFO) e `Arrived at GOFO Delivery Station` ("Em trânsito"), seguidos de `Out for Delivery` ("Saiu para entrega").
 
 **O número da transportadora local.** No rastreador da JD, `Departed from Warehouse.` em um pacote da China termina com "Tracking no" e o código dado pela transportadora que entrega perto de você (nos EUA, um número GOFO iniciado em `GFUS`). O Peek remove esse número do texto da linha, mas consulta o rastreador dela quando o formato identifica a empresa — como `GFUS` com 14 dígitos identifica a GOFO. Assim que a GOFO mostra uma leitura pelo menos tão recente quanto a última da JD, o Peek acompanha por lá, mantém as etapas da JD no histórico e exibe "Entrega por GOFO Express". Quando o formato não permite associar o número a uma transportadora, consulte no site da entregadora local.
 
-O Peek interpreta outras etapas da JD pelo código interno dela: pedido criado ("Etiqueta criada"), início de desembaraço ("Na alfândega"), liberação, descarga ou carga em centro de triagem e movimentações entre centros ("Em trânsito"), entregador a caminho ("Saiu para entrega") e assinado ("Entregue"). Cada linha preserva o texto da JD, removendo nome e telefone do entregador na linha de saída para entrega.
+O Peek interpreta outras etapas da JD pelo código interno dela: pedido criado ("Etiqueta criada"), início de desembaraço ("Na alfândega"), fim do desembaraço, descarga ou carga em centro de triagem, descarga na unidade de destino e pacote encaminhado a um centro de triagem no exterior ou chegando a ele ("Em trânsito"), entregador a caminho ("Saiu para entrega") e assinado ("Entregue"). Cada linha preserva o texto da JD, removendo nome e telefone do entregador na linha de saída para entrega.
 
-**Textos do rastreador chinês da JD.** Dentro da China, as linhas vêm em chinês, como `京东快件已取件` (coletado com o remetente), `已到达【…】` (chegou à unidade entre colchetes: centro de triagem ou estação de entrega), `正在派送中` (saiu para entrega) e `已送达` (entregue).
+**Textos do rastreador chinês da JD.** Dentro da China, as linhas vêm em chinês, como `京东快件已取件` (coletado com o remetente), `已到达【…】` (chegou à unidade entre colchetes: centro de triagem ou estação de entrega antes da rota do entregador), `正在派送中` (saiu para entrega) e `已送达` (entregue).
 
 ## Entregas da JD Logistics nos EUA, Reino Unido, Canadá e Austrália
 
-**Pacotes da China.** O serviço Cross-Border Parcels da JD, para vendedores online chineses, lista EUA, Reino Unido, Austrália, Canadá, México e Rússia, nas modalidades standard, express ou economic. A JD despacha de avião e entrega a parceiras locais na última milha — processo que leva em média de 3 a 6 dias úteis, segundo a JD, sem nomear essas parceiras. Nos EUA, o histórico mostra a [GOFO Express](carrier:gofo) entregando, com os eventos da GOFO aparecendo no próprio rastreamento da JD.
+**Pacotes da China.** O serviço Cross-Border Parcels da JD, para vendedores online que enviam da China, lista EUA, Reino Unido, Austrália, Canadá, México e Rússia, nas modalidades standard, express ou economic. A JD despacha de avião e entrega a parceiras locais na última milha, que leva em média de 3 a 6 dias úteis, segundo a JD. A JD não nomeia essas parceiras. Nos EUA, o histórico mostra a [GOFO Express](carrier:gofo) entregando, com os eventos da GOFO aparecendo no próprio rastreamento da JD.
 
 **Pacotes de armazéns locais da JD.** A JD também opera armazéns no exterior: nos EUA (Nova Jersey, Los Angeles e Atlanta), na Inglaterra e em Sydney, entre outros. Quando o vendedor mantém estoque ali, o envio sai já de dentro do seu país, começando por `Picking Completed.` e `Weighed at Warehouse.` (em vez de `Shipment Picked up`, típico da China).
 
-As páginas da JD não informam quantas tentativas a transportadora local faz nem onde o pacote fica guardado: isso depende da entregadora do seu país. Veja [entrega perdida](guide:missed-delivery).
+As páginas da JD não informam quantas tentativas a transportadora local faz nem onde fica guardado um pacote não entregue: isso depende da entregadora do seu país. Veja [entrega não realizada](guide:missed-delivery).
 
-**Alfândega.** Envios da China passam pela alfândega do seu país. As regras do expresso internacional da JD dizem que impostos e tarifas podem incidir no desembaraço, pagos pelo remetente ou destinatário, e não estão incluídos no frete. Pergunte à loja se o valor pago já cobriu esses tributos. Mais em [encomendas paradas na alfândega](guide:customs).
+**Alfândega.** Envios da China passam pela alfândega do seu país. As regras da JD para o seu expresso internacional a partir da China dizem que impostos e tarifas podem incidir no desembaraço, pagos pelo remetente ou destinatário, e não estão incluídos no frete. Pergunte à loja se o valor pago já cobriu esses tributos. Mais em [encomendas paradas na alfândega](guide:customs).
 
 ## Pacote JD Logistics sem atualizar, perdido ou devolvido
 
@@ -63,7 +63,7 @@ As páginas da JD não informam quantas tentativas a transportadora local faz ne
 
 **Sem atualização por dias.** Quando um pacote ainda em viagem completa 4 dias sem nova leitura, o Peek explica que encomendas costumam ficar quietas em voos longos, na alfândega ou no fim de semana (após três semanas sem leitura, orienta falar com o vendedor) e exibe o link "Pedir ajuda a JD Logistics" para a página de contato (depois que a GOFO assume, muda para "Pedir ajuda a GOFO Express" e o suporte da GOFO). Mais em [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
 
-**Atrasado ou extraviado.** Quem contratou a JD foi o vendedor, então fale com ele primeiro. Para seu expresso internacional da China, as regras da JD classificam o prazo no conhecimento como mera referência, sem reembolso de frete nem indenização por atraso. Veja [encomendas extraviadas](guide:lost-parcel).
+**Atrasado ou extraviado.** Quem contratou a JD foi o vendedor, então fale com ele primeiro. Para seu expresso internacional da China, as regras da JD classificam o prazo estimado de entrega no conhecimento de transporte como mera referência, sem reembolso de frete nem indenização por atraso. Veja [encomendas extraviadas](guide:lost-parcel).
 
 **Devolvido.** As regras do expresso internacional da JD não oferecem serviço de devolução depois que o pacote deixa a China continental. Para devolver um pedido, combine com a loja. Veja [devolvida ao remetente](guide:returned-to-sender).
 
@@ -77,15 +77,15 @@ A [página Contact Us internacional da JD](https://www.jingdonglogistics.com/con
 - **Reino Unido:** org.cs.eu1@jd.com, de segunda a sexta-feira, das 9h às 18h — mesmo canal usado para Alemanha, Holanda e França.
 - **Austrália:** +61 (02) 87239755 e org.cs.intl1@jd.com, de segunda a sexta-feira, das 9h às 18h.
 
-A JD não especifica o fuso horário desses atendimentos, fecha em feriados públicos e não lista contato para Canadá ou Irlanda. Na China, o telefone é 950616 (grafado 0086 950616 na página International Express em inglês); a [página Contact Us em jdl.com](https://www.jdl.com/en/contactUs) também oferece o botão "Online Consultation". Sobre seu pedido, fale com a loja.
+A JD não especifica o fuso horário desses atendimentos, fecha em feriados públicos e não lista contato para Canadá ou Irlanda. Na China, o telefone é 950616 (grafado 0086 950616 na página International Express em inglês); a [página Contact Us em jdl.com](https://www.jdl.com/en/contactUs) também oferece o botão "Online Consultation". Sobre o pedido em si, fale com a loja: quem contratou a JD foi o vendedor, não você.
 
 ## Como rastrear um pacote da JD Logistics no Peek
 
 O [Peek](/) identifica a JD Logistics de imediato nos formatos `JD…` da tabela acima. Códigos `VG` também coincidem com o padrão da La Poste: o Peek consulta a La Poste e serviços de rastreamento e, se não encontrarem, toque em "Trocar" e escolha JD Logistics. Um link de jingdonglogistics.com com `waybillCodes=` seleciona a JD Logistics qualquer que seja o formato; em links de jdl.com, o Peek só captura o código quando ele segue um dos formatos `JD…`. Se seu código JD tiver outra forma, cole mesmo assim (o Peek acompanha mais de 4.500 transportadoras), toque em "Trocar" e escolha JD Logistics em "Todas as transportadoras" (buscar por Jingdong ou 京东物流 também encontra), ou use "Trocar transportadora" em um pacote já adicionado.
 
-O Peek lê o rastreamento internacional da JD: status, cada etapa nas palavras da JD com cidade e país (em inglês, mesmo quando a JD escreve o país em chinês) e horário da entrega. Os horários são lidos no fuso local de cada leitura e exibidos no seu fuso; em peektracker.com e nos aplicativos para iPhone e Android, a linha final do histórico indica esse fuso. O Peek não exibe data prevista de entrega para a JD e omite dados do destinatário, fotos da entrega, nome e telefone do entregador e o número da transportadora local no fim da linha de saída.
+O Peek lê o rastreamento internacional da JD: status, cada etapa nas palavras da JD com cidade e país (em inglês, mesmo quando a JD escreve o país em chinês) e horário da entrega. Os horários são lidos no fuso local de cada leitura e exibidos no fuso horário do seu dispositivo; em peektracker.com e nos aplicativos para iPhone e Android, a linha final do histórico indica esse fuso. O Peek não exibe data prevista de entrega para a JD e omite dados do destinatário, fotos da entrega, nome e telefone do entregador e o número da transportadora local no fim da linha de saída.
 
-Para códigos domésticos chineses (`JD` + 13 dígitos começando em `0`; `JDJ`, `JDK`, `JDV` ou `JDX` + 12 dígitos; `JDVA`, `JDVB`, `JDVC` ou `JDAZ` + 11 dígitos), o Peek abre o rastreador chinês em jdl.com em vez do internacional. Para `JDW` + 12 dígitos ou `JDAP` + 11, consulta só o internacional; nos demais códigos JD, tenta o internacional primeiro e recorre ao chinês se vier vazio. As linhas chinesas aparecem em chinês, omitindo entregador, telefone e quem assinou. Como o site chinês frequentemente exige verificação que o Peek não contorna, ele pausa novas tentativas ali por 6 horas ou mais (até um dia): para pacotes dentro da China sem dados no Peek, consulte em jdl.com. Resposta vazia da JD não significa código inválido; o Peek continua verificando.
+Para códigos domésticos chineses (`JD` + 13 dígitos começando em `0`; `JDJ`, `JDK`, `JDV` ou `JDX` + 12 dígitos; `JDVA`, `JDVB`, `JDVC` ou `JDAZ` + 11 dígitos), o Peek abre o rastreador chinês em jdl.com em vez do internacional. Para `JDW` + 12 dígitos ou `JDAP` + 11, consulta só o internacional; nos demais códigos JD, tenta o internacional primeiro e recorre ao chinês se vier vazio. As linhas chinesas aparecem em chinês, omitindo entregador, telefone e quem assinou. Como o rastreador chinês da JD frequentemente pede uma verificação que o Peek não consegue passar, o Peek deixa de consultá-lo para esse código por 6 horas ou mais, até um dia: para pacotes dentro da China sem dados no Peek, consulte em jdl.com. Resposta vazia da JD não significa código inválido; o Peek continua verificando.
 
 Enquanto o pacote estiver aberto, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos (a cada 5 quando precisa abrir o rastreador chinês) a partir das 6h no horário local no dia da saída para entrega, enquanto o rastreador da JD responder; fora disso, de hora em hora. Apenas por serviços de rastreamento, verifica de hora em hora, a cada 3 horas após um dia sem movimento e até a cada 15 minutos no dia em que sai para entrega enquanto o pacote estiver aberto ou com alertas ligados. Quando outra transportadora assume a entrega, o Peek segue o ritmo dela. Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Alertas disponíveis: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a JD nem com a loja por você.
 
@@ -101,7 +101,7 @@ Em jingdonglogistics.com/Tracking, ou em jdl.com para pacotes dentro da China �
 
 ### Quem entrega pacotes da JD Logistics nos EUA?
 
-A JD não nomeia parceiras locais. Nos EUA, o histórico da JD mostra a GOFO Express entregando: depois de `Handed over to Carrier` ou `Handover to local carrier` vêm etapas como `Arrived at GOFO Regional Hub` e `Arrived at GOFO Delivery Station`. Quando a linha de saída da JD informa o código `GFUS` da GOFO, o Peek também acompanha na GOFO assim que ela registra uma leitura.
+A JD não nomeia parceiras locais. Nos EUA, o histórico da JD mostra a GOFO Express entregando: depois de `Handed over to Carrier` ou `Handover to local carrier` vêm etapas como `Arrived at GOFO Regional Hub` e `Arrived at GOFO Delivery Station`, no próprio rastreamento da JD. Quando a linha de saída da JD informa o código `GFUS` da GOFO, o Peek também acompanha na GOFO assim que ela registra uma leitura.
 
 ### Por que meu rastreamento da JD Logistics não atualiza?
 
@@ -119,9 +119,10 @@ Pela página Contact Us em jingdonglogistics.com, que traz contatos e horários 
 - [JD Logistics: JINGDONG Logistics (USA)](https://www.jingdonglogistics.com/ser/GlobalWarehouseUS) – armazéns nos EUA
 - [JD Logistics: JINGDONG Logistics (United Kingdom)](https://www.jingdonglogistics.com/ser/GlobalWarehouseUK) – armazém na Inglaterra
 - [JD Logistics: JINGDONG Logistics (Australia)](https://www.jingdonglogistics.com/ser/GlobalWarehouseAS) – armazéns em Sydney
-- [JDL: 运单查询 (busca de conhecimento)](https://www.jdl.com/orderSearch) – rastreador chinês e múltiplos códigos
+- [JDL: 运单查询 (consulta de conhecimento de transporte)](https://www.jdl.com/orderSearch) – rastreador chinês e múltiplos códigos
 - [JDL: 服务细则 (regras de serviço)](https://www.jdl.com/serviceDetails) – expresso internacional: impostos e taxas, estimativa apenas como referência e sem devolução após sair da China
 - [JDL: International Express](https://www.jdl.com/en/crossBorder/internationalC2C) – expresso da China para destinatários no exterior e 0086 950616
 - [JDL: Contact Us](https://www.jdl.com/en/contactUs) – telefone 950616 e Online Consultation
 - [JDL: Company Profile](https://www.jdl.com/en/profile) – 2007, 2017 e listagem em Hong Kong em maio de 2021
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos de código e links, textos e códigos das etapas da JD, a GOFO no histórico da JD, o que o Peek lê e omite, o rastreador chinês da JD e quais códigos o abrem, passagem para a GOFO
 :::

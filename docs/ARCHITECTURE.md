@@ -137,7 +137,10 @@ Key server modules:
   UnifiedPush distributor it registers the distributor's endpoint and keys, and each notice
   goes as a Web Push message of that data in JSON (aes128gcm, signed with the VAPID key),
   kept a day at high urgency and replaced by a later one with the same Topic, a hash of
-  the collapse key. Without one, the notices wait in its inbox, which the app empties
+  the collapse key. A distributor may refuse each send for hours, as ntfy does with 507
+  while the phone's app is not connected, so a device whose send failed waits before the
+  next: a minute, twice as long after each failure in a row, up to a quarter of an hour.
+  Its notices stay pending until one goes through or they are a day old. Without one, the notices wait in its inbox, which the app empties
   about every quarter of an hour (`/api/public/push/inbox`): a later notice about the same
   thing replaces the waiting one, and none is kept more than a day. A phone that switches
   between the two keeps its registration and its link alerts.

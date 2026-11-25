@@ -131,6 +131,61 @@ describe('a UnifiedPush message', () => {
   });
 });
 
+describe('an account\'s notices to a UnifiedPush device', () => {
+  const phone = receiver();
+  const row: JsonObject = {
+    device_id: 'device-1', token, endpoint, ...phone.keys, environment: 'production', transport: 'unifiedpush', locale: 'en',
+    package_id: 'package-1', event_id: 'event-1', stage: 'in_transit', location: 'Example Town',
+    occurred_at: '2026-10-02T12:30:00Z', event_created_at: '2026-10-02T12:39:00Z', event_has_time: true,
+  };
+  let clock = now;
+  let service: UnifiedPushNotificationService;
+  let post: MockInstance<typeof publicAddress.postToPublicEndpoint>;
+  let delivered: MockInstance<SupabaseServiceClient['recordNativePushDeliveries']>;
+  beforeEach(() => {
+    clock = now;
+    service = new UnifiedPushNotificationService(client, vapid.publicKey, vapid.privateKey, 'https://delivery.example', () => clock / 1_000);
+    vi.spyOn(client, 'listPendingNativePushNotifications').mockResolvedValue([row]);
+    delivered = vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+    vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+    vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map());
+    vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
+    vi.spyOn(client, 'archivedPackageIds').mockResolvedValue(new Set());
+    post = vi.spyOn(publicAddress, 'postToPublicEndpoint').mockResolvedValue(507);
+  });
+
+  it('wait a minute after a refused send, then twice as long after each refusal in a row, up to a quarter of an hour', async () => {
+    // ntfy answers 507 while the phone's app is not connected: each dispatch would meet the same refusal.
+    expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 1, expired: 0 });
+    clock += 59_000;
+    expect(await service.dispatch()).toEqual({ attempted: 0, sent: 0, failed: 0, expired: 0 });
+    clock += 1_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1 });
+    clock += 119_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 0 });
+    clock += 1_000;
+    await service.dispatch();
+    for (let index = 0; index < 4; index++) { clock += 15 * 60_000; await service.dispatch(); }
+    expect(post).toHaveBeenCalledTimes(7);
+    clock += 15 * 60_000 - 1;
+    await service.dispatch();
+    expect(post).toHaveBeenCalledTimes(7);
+    expect(delivered).not.toHaveBeenCalled();
+  });
+
+  it('go out once the distributor takes them, and the next refusal waits a minute again', async () => {
+    await service.dispatch();
+    post.mockResolvedValue(201);
+    clock += 60_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 1, sent: 1 });
+    expect(delivered).toHaveBeenCalledExactlyOnceWith('device-1', ['event-1']);
+    post.mockResolvedValue(507);
+    await service.dispatch();
+    clock += 60_000;
+    expect(await service.dispatch()).toMatchObject({ attempted: 1, failed: 1 });
+  });
+});
+
 describe('the inbox', () => {
   const inbox = () => new InboxPushNotificationService(client, () => now / 1_000);
 

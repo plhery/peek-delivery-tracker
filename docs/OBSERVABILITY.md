@@ -1006,7 +1006,8 @@ provider failure in an `AggregateError` so every cause is visible.
   incidents open no issue;
   see [Review signals](#review-signals).
 - **Push deliveries**: a send the push service refuses, other than for a subscription that is
-  gone, is retried by the next dispatch, so a dispatch with failed deliveries is only logged.
+  gone, is retried by the next dispatch (a UnifiedPush device after its wait,
+  [ARCHITECTURE.md](ARCHITECTURE.md)), so a dispatch with failed deliveries is only logged.
   While every dispatch keeps failing some, it is reported 1, 2, 3, 4, 8, 16… dispatches after
   the first. A channel that cannot dispatch at all is reported at once, and so is a dispatch
   that could not take or keep its lease (`WorkerLeaseLost`).

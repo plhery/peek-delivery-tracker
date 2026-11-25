@@ -1484,7 +1484,18 @@ export function fcmData(payload: JsonObject): Record<string, string> {
  * sends to the devices of its own transport. Payloads take the iPhone's shape (`payload`);
  * FCM, UnifiedPush and the inbox carry the same alert and fields as data (`fcmData`).
  */
+/** How long a UnifiedPush device whose send failed waits before the next: doubling with each failure in a row, up to the cap. */
+const UNIFIEDPUSH_RETRY_MS = 60_000;
+const UNIFIEDPUSH_RETRY_MAX_MS = 15 * 60_000;
+
 abstract class AppPushNotificationService {
+  /**
+   * The UnifiedPush devices whose sends failed: how many in a row, and until when the next waits. The endpoint is on a
+   * host the phone chose, which may refuse each send alike for hours (ntfy answers 507 while the phone's app is not
+   * connected): the device is not asked again on every dispatch, and its notices stay pending until a send goes through
+   * or they are a day old. Kept by the server, which starts with none.
+   */
+  readonly #retries = new Map<string, { failures: number; at: number }>();
   abstract readonly client: SupabaseServiceClient;
   /** Seconds. */
   abstract readonly now: () => number;
@@ -1527,9 +1538,11 @@ abstract class AppPushNotificationService {
         recordAccountPushSent('skipped', this.app);
         continue;
       }
+      if ((this.#retries.get(deviceId)?.at ?? 0) > this.now() * 1_000) continue;
       summary.attempted += 1;
       try {
         await this.send(toldScan(newest, events, times));
+        this.#retries.delete(deviceId);
         // Sent is recorded, even while the server stops: the scan must not go out twice.
         await this.client.recordNativePushDeliveries(
           deviceId,
@@ -1544,6 +1557,7 @@ abstract class AppPushNotificationService {
       } catch (error) {
         signal?.throwIfAborted();
         if (this.isExpired(error)) {
+          this.#retries.delete(deviceId);
           await this.client.updateNativePushDevice(deviceId, {
             disabled_at: new Date().toISOString(),
             last_error: `${this.serviceName} device token expired`,
@@ -1551,6 +1565,11 @@ abstract class AppPushNotificationService {
           recordAccountPushSent('expired', this.app);
           summary.expired += 1;
         } else {
+          if (this.transport === 'unifiedpush') {
+            const failures = (this.#retries.get(deviceId)?.failures ?? 0) + 1;
+            const wait = Math.min(UNIFIEDPUSH_RETRY_MAX_MS, UNIFIEDPUSH_RETRY_MS * 2 ** Math.min(failures - 1, 10));
+            this.#retries.set(deviceId, { failures, at: this.now() * 1_000 + wait });
+          }
           logDeliveryFailure('native', error, this.transport);
           await this.client.updateNativePushDevice(deviceId, {
             last_error: `${this.serviceName} delivery failed`,

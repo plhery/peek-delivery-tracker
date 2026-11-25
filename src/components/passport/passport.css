@@ -1,0 +1,61 @@
+/* The passport's paper seals, the line a delivered card carries for a new one, and the dot on the tab. Timings and
+   curves are the ones the iPhone and Android apps use: drop falls faster and faster, settle is quick then soft, move
+   is in-out. */
+.tone-rose { --tone: var(--rose); --tone-surface: var(--rose-soft); }
+:root { --passport-drop: cubic-bezier(.5,0,.9,.4); --passport-settle: cubic-bezier(.2,.8,.3,1); --passport-move: cubic-bezier(.3,0,.2,1); }
+
+.passport-seal { overflow: visible; }
+.passport-seal__numeral { font-size: 20px; font-weight: 300; font-variant-numeric: tabular-nums; }
+.passport-seal .passport-postmark { position: absolute; right: -11px; bottom: -3px; width: 27px; height: 27px; stroke-width: 1.05; opacity: .34; }
+.passport-postmark__outer { transform: rotate(-150deg); transform-origin: 16px 16px; }
+.passport-seal--cover .passport-postmark { right: -9px; bottom: 3px; width: 33px; height: 33px; }
+.passport-seal--mini { width: 24px; height: 30px; padding: 3px; }
+.passport-seal--mini svg { width: 14px; height: 14px; stroke-width: 1.4; }
+.passport-seal--mini .passport-seal__numeral { font-size: 10px; font-weight: 500; }
+
+/* A new seal is pressed in, then postmarked. */
+.passport-seal--press { animation: passport-press 480ms var(--press-delay) both, passport-ink-in 100ms var(--press-delay) linear both; }
+.passport-seal--press .passport-postmark__outer { stroke-dasharray: 1; animation: passport-ring 320ms calc(var(--press-delay) + 276ms) var(--passport-move) both; }
+.passport-seal--press .passport-postmark__inner { animation: passport-ink-in 160ms calc(var(--press-delay) + 436ms) linear both; }
+@keyframes passport-press {
+  0% { scale: 1.5; rotate: -8deg; animation-timing-function: var(--passport-drop); }
+  45% { scale: .94; rotate: 0deg; animation-timing-function: var(--passport-settle); }
+  100% { scale: 1; rotate: 0deg; }
+}
+@keyframes passport-ink-in { from { opacity: 0; } }
+@keyframes passport-ring { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes passport-pop { from { opacity: 0; scale: .6; } }
+@keyframes passport-rise { from { opacity: 0; translate: 0 8px; } }
+
+.stamp-card { position: relative; gap: 8px; }
+.stamp-card__name { font-size: 10px; line-height: 1.35; overflow-wrap: anywhere; }
+.stamp-card__day { margin-top: -6px; color: var(--ink-soft); font-size: 10px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.passport-new-pill { position: absolute; top: -6px; right: calc(50% - 38px); padding: 1px 6px; background: var(--yellow); color: var(--on-yellow); font-size: 9px; font-weight: 650; line-height: 15px; border-radius: 8px; animation: passport-pop 200ms calc(var(--press-delay, 0ms) + 416ms) var(--passport-settle) both; }
+
+/* "New stamp" under a delivered card: tucked under the card, opening once the card is in place. */
+.passport-news-line { position: relative; z-index: 0; display: flex; align-items: center; gap: 10px; width: 100%; margin-top: -18px; padding: 26px 8px 8px; overflow: hidden; background: var(--tone-surface, var(--paper)); color: var(--ink); text-align: left; border-radius: 0 0 18px 18px; animation: passport-line-open 260ms 150ms var(--passport-move) both; }
+.passport-news-line::before { content: ''; position: absolute; inset: 18px 8px 8px; z-index: -1; background: var(--paper); border-radius: 12px; }
+.passport-news-line > :first-child { margin-left: 8px; animation: passport-pop 220ms 350ms var(--passport-settle) both; }
+.passport-news-line__text { display: flex; flex: 1; flex-direction: column; gap: 1px; min-width: 0; padding: 7px 0; animation: passport-rise 300ms 230ms var(--passport-settle) both; }
+.passport-news-line__text strong { font-size: 13px; font-weight: 600; }
+.passport-news-line__text span { overflow: hidden; color: var(--ink-soft); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.passport-news-line__chevron { width: 16px; height: 16px; margin-right: 10px; color: var(--ink-soft); }
+.passport-news-line__country { display: grid; flex: none; place-items: center; width: 30px; height: 30px; color: var(--tone); font-size: 10px; font-weight: 700; letter-spacing: .3px; border: 1.4px solid currentColor; border-radius: 50%; }
+@keyframes passport-line-open { from { max-height: 18px; } to { max-height: 96px; } }
+
+/* The dot on the Passport tab, a little after the line, so the eye goes from the card to the tab. */
+.app__navigation-dot { position: absolute; top: 6px; left: 26px; width: 7px; height: 7px; background: var(--orange); border: 1.5px solid var(--control); border-radius: 50%; box-sizing: content-box; animation: passport-dot 320ms 750ms both; }
+@keyframes passport-dot {
+  0% { scale: 0; opacity: 0; animation-timing-function: var(--passport-move); }
+  37% { opacity: 1; }
+  59% { scale: 1.25; opacity: 1; animation-timing-function: var(--passport-settle); }
+  100% { scale: 1; opacity: 1; }
+}
+@media (max-width: 760px) { .app__navigation-dot { top: 5px; left: calc(50% + 5px); border-color: var(--paper); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .passport-seal--press, .passport-seal--press .passport-postmark__outer, .passport-seal--press .passport-postmark__inner,
+  .passport-new-pill, .passport-news-line > :first-child, .passport-news-line__text { animation: none; }
+  .passport-news-line { animation: passport-ink-in 200ms linear both; }
+  .app__navigation-dot { animation: passport-ink-in 150ms linear both; }
+}

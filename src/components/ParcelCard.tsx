@@ -1,5 +1,5 @@
 import { AutoCarrierNotice } from './AutoCarrierNotice';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { deliveringCarrierId, deliveryLineKey, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
 import { estimateDays, numberToCheck } from '../lib/messages';
@@ -24,7 +24,7 @@ import { NoteMatch, SearchMarked, useListSearch, useNoteMatch } from './SearchMa
 import { peekAiCardWords } from '../lib/peekAi';
 import { PeekAiPhrase, useParcelPeekAi } from './PeekAi';
 
-export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regular', arrived = false }: {
+export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regular', arrived = false, footer }: {
   parcel: ParcelWithEvents;
   onOpen: (parcel: ParcelWithEvents, source: HTMLButtonElement) => void;
   onArchive?: (parcel: ParcelWithEvents) => Promise<unknown>;
@@ -32,6 +32,8 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   variant?: 'regular' | 'hero';
   /** Just delivered, and still shown where it stood: the card says so before it leaves for the past deliveries. */
   arrived?: boolean;
+  /** A line under the card, its own button: the passport's news on a delivered parcel. */
+  footer?: ReactNode;
 }) {
   const { locale, languageTag, t, use24HourTime } = useI18n();
   const carrier = shownCarrier(parcel, carrierInfo(displayedCarrierId(parcel), locale), t, locale);
@@ -162,6 +164,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
         </>}
       </button>
     </div>
+    {footer}
     {archiveError && <p className="parcel-card__error" role="alert">{archiveError}</p>}
   </div>;
 }

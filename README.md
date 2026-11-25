@@ -214,6 +214,7 @@ the carrier checks and the notifications.
 - [Deployment](docs/DEPLOYMENT.md): hosting, upgrades, operations
 - [Authentication](docs/AUTHENTICATION.md): Google, Apple, email and custom OIDC sign-in
 - [Observability](docs/OBSERVABILITY.md): logs, audit tables, Sentry, metrics
+- [Passport](docs/PASSPORT.md): how deliveries become stamps and countries
 - [Friends](docs/FRIENDS.md): how passports are shared, and what never is
 - [Analytics](docs/ANALYTICS.md): optional usage analytics with Umami
 - [Localization](docs/LOCALIZATION.md): which language carrier text shows up in

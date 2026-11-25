@@ -1,7 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Passport } from './Passport';
+import { Passport as PassportPage } from './Passport';
+import { usePassportNews } from './passport/news';
 import type { ParcelWithEvents } from '../types';
+
+function Passport({ parcels, loading }: { parcels: ParcelWithEvents[]; loading: boolean }) {
+  return <PassportPage news={usePassportNews(parcels, 'test', loading)} loading={loading} />;
+}
 
 describe('Passport journal', () => {
   it('keeps stamps available without inventing timing or country records for a new passport', () => {
@@ -11,13 +16,13 @@ describe('Passport journal', () => {
     expect(container.querySelectorAll('.time-card, .country-row')).toHaveLength(0);
     expect(container.querySelector('.passport-note')).toBeVisible();
     expect(container.textContent).not.toContain('—');
-    expect(screen.getByRole('button', { name: 'Double digits, 0 / 10' })).toHaveAttribute('aria-haspopup', 'dialog');
+    expect(screen.getByRole('button', { name: 'First arrival, Not yet' })).toHaveAttribute('aria-haspopup', 'dialog');
   });
 
-  it('reveals all twelve stamps on request and keeps Century club out of the collection', () => {
+  it('reveals all nineteen stamps on request and keeps Century club out of the collection', () => {
     const { container } = render(<Passport parcels={[]} loading={false} />);
     fireEvent.click(screen.getByRole('button', { name: 'All stamps' }));
-    expect(container.querySelectorAll('.stamp-card')).toHaveLength(12);
+    expect(container.querySelectorAll('.stamp-card')).toHaveLength(19);
     for (const name of ['Across borders', 'Around the world', 'The regular', 'Right next door', 'Worth the wait', 'A busy doorstep', 'Picked up', 'Home for the holidays']) {
       expect(screen.getByRole('button', { name: new RegExp(`^${name},`) })).toBeVisible();
     }
@@ -34,9 +39,9 @@ describe('Passport journal', () => {
     }));
     const { rerender } = render(<Passport parcels={parcels.slice(0, 24)} loading={false} />);
     fireEvent.click(screen.getByRole('button', { name: 'All stamps' }));
-    expect(screen.getByRole('button', { name: 'The regular, 24 / 25' })).not.toHaveClass('stamp-card--earned');
+    expect(screen.getByRole('button', { name: 'The regular, 24 of 25' })).not.toHaveClass('stamp-card--earned');
     rerender(<Passport parcels={parcels} loading={false} />);
-    expect(screen.getByRole('button', { name: 'The regular' })).toHaveClass('stamp-card--earned');
+    expect(screen.getByRole('button', { name: /^The regular, Earned on/ })).toHaveClass('stamp-card--earned');
   });
 
   it('counts an archived arrival with partial history without presenting a made-up duration', () => {
@@ -47,7 +52,7 @@ describe('Passport journal', () => {
     };
     const { container } = render(<Passport parcels={[parcel]} loading={false} />);
     expect(container.querySelector('.passport-cover__count')).toHaveTextContent('1');
-    expect(screen.getByRole('button', { name: 'First arrival' })).toBeVisible();
+    expect(screen.getByRole('button', { name: /^First arrival, Earned on 3 September 2026$/ })).toBeVisible();
     expect(container.querySelectorAll('.time-card, .country-row')).toHaveLength(0);
   });
 });

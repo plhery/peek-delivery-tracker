@@ -18,7 +18,8 @@ translating it (not implemented).
   [`trackingLocation.ts`](https://github.com/plhery/universal-parcel-scraper/blob/main/places/trackingLocation.ts),
   `TrackingLocation` in `PassportStatistics.swift`). Passport and Friends stamps count a
   final country field, or a code that is also a state or canton once the scan was placed in
-  that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)).
+  that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)); the passport's countries also
+  take the country the server placed a scan in.
 - A scan or planned step location written in a script other than Latin shows the town the
   server placed it in, by the name the scraper's place reader gives it, with its flag and
   country: "深圳市" reads "🇨🇳 Shenzhen, China", and one placed only in a country shows the

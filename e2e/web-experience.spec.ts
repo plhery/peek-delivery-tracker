@@ -235,14 +235,14 @@ test('opens Passport explanation bubbles without moving the journal and restores
   await expect(page.locator('.passport-note')).toHaveCount(0);
   await expect(page.locator('.country-row')).toHaveCount(3);
   await expect(page.locator('.passport-count')).toHaveCount(0);
-  await expect(page.locator('.stamp-card')).toHaveCount(12);
+  await expect(page.locator('.stamp-card')).toHaveCount(13);
   // Allow subpixel rounding while the page's entrance transform settles.
   await expect.poll(() => page.locator('.stamp-card').evaluateAll((cards) => {
     const positions = cards.slice(0, 4).map((card) => card.getBoundingClientRect().top);
     return Math.max(...positions) - Math.min(...positions);
   })).toBeLessThan(0.01);
   await expect(page.getByText('Unlocked', { exact: true })).toHaveCount(0);
-  const stamp = page.getByRole('button', { name: 'First arrival', exact: true });
+  const stamp = page.getByRole('button', { name: /^First arrival, Earned on / });
   const explanation = page.locator(`[id="${await stamp.getAttribute('aria-controls')}"]`);
   await expect(explanation).toBeHidden();
   const height = (await page.locator('.passport-stamps').boundingBox())!.height;
@@ -271,7 +271,7 @@ test('anchors every Passport bubble within a narrow screen and explains the coun
   await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
   await demo(page);
   await page.getByRole('button', { name: 'Passport', exact: true }).click();
-  await expect(page.locator('.stamp-card')).toHaveCount(12);
+  await expect(page.locator('.stamp-card')).toHaveCount(13);
   const cards = page.locator('.passport-page button[aria-haspopup="dialog"]');
   for (const card of await cards.all()) {
     await card.click();

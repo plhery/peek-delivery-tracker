@@ -1,6 +1,7 @@
 import { Suspense, useRef } from 'react';
 import { Icon, type IconName } from '../../components/Icon';
 import { Seal } from '../../components/Seal';
+import { PassportSeal } from '../../components/passport/PassportSeal';
 import { PeekMark } from '../../components/PeekMark';
 import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
@@ -86,7 +87,7 @@ export function More({ onSignIn, landed }: {
       <div className="landing-passport" aria-hidden="true">
         <div className="passport-cover landing-passport__cover">
           <span><strong className="passport-cover__count">{DELIVERED.toLocaleString(languageTag)}</strong><span>{t('passport.delivered', { count: DELIVERED })}</span></span>
-          <Seal icon="parcel" />
+          <PassportSeal stamp={{ tone: 'green', glyph: 'parcel' }} size="cover" />
         </div>
         <div className="landing-passport__stamps">
           {STAMPS.map(({ icon, tone, tilt }) => <span key={icon} className={`landing-stamp tone-${tone}`} style={{ rotate: `${tilt}deg` }}><Seal icon={icon} /></span>)}

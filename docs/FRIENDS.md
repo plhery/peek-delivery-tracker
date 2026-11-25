@@ -68,12 +68,11 @@ invitations and both sides of every friendship, and account deletion cascades th
 
 Twelve shareable stamps: the original four plus `acrossBorders`, `aroundWorld`,
 `theRegular`, `rightNextDoor`, `worthTheWait`, `busyDoorstep`, `pickedUp` and
-`homeForHolidays`. They're derived from all of the owner's events, archived parcels
-included, and returned only when stats sharing is on.
+`homeForHolidays`. They're worked out as the [Passport](PASSPORT.md) works them out, from
+the owner's parcels, archived ones included, and returned only when stats sharing is on.
+The passport's newer stamps stay off friend cards, so the apps that know only these twelve
+can still read them.
 
-- Country stamps need explicit country evidence. A code that is also a state or canton
-  ("Haiger, DE") counts once the scan was placed in that country. Registration scans,
-  unplaced state codes, tied scans and returns don't count.
 - Repeated delivery scans count once.
 - Calendar stamps use UTC, since Friends doesn't know the owner's timezone, so they can
   differ from the local Passport near midnight.

@@ -9,7 +9,7 @@ const TABS = [
 ] as const;
 export type AppTab = typeof TABS[number]['id'];
 
-export function AppNavigation({ selected, onSelect }: { selected: AppTab; onSelect: (tab: AppTab) => void }) {
+export function AppNavigation({ selected, onSelect, dotted }: { selected: AppTab; onSelect: (tab: AppTab) => void; /** A tab with news it has not shown yet. */ dotted?: AppTab | null }) {
   const { t } = useI18n();
   const navigation = useRef<HTMLElement>(null);
   const selection = useRef<HTMLSpanElement>(null);
@@ -88,6 +88,7 @@ export function AppNavigation({ selected, onSelect }: { selected: AppTab; onSele
     <span ref={selection} className="app__navigation-selection" aria-hidden="true" />
     {TABS.map((tab) => <button key={tab.id} type="button" aria-current={selected === tab.id ? 'page' : undefined} onClick={() => onSelect(tab.id)}>
       <Icon name={tab.icon} /><span>{t(tab.label)}</span>
+      {dotted === tab.id && <><i className="app__navigation-dot" aria-hidden="true" /><span className="sr-only">{t('passport.new')}</span></>}
     </button>)}
   </nav>;
 }

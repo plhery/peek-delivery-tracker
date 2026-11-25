@@ -334,7 +334,6 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .passport-seal__ten { font-size: 20px; font-weight: 300; }
 .passport-seal--locked { opacity: .3; filter: grayscale(1); }
 .passport-cover .passport-seal { --stamp-paper: #fff; width: 66px; height: 80px; transform: rotate(-7deg); color: #745300; }
-.passport-cover .passport-seal::after { content: ''; position: absolute; right: -3px; bottom: 7px; width: 31px; height: 31px; border: 1px solid currentColor; border-radius: 50%; outline: 1px solid currentColor; outline-offset: -5px; opacity: .2; }
 .passport-stamps__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; gap: 8px; }
 .stamp-card { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-height: 96px; padding: 2px 0; background: transparent; color: var(--ink-soft); text-align: center; border-radius: 8px; transition: scale .2s var(--spring); }
 .stamp-card--earned { color: var(--ink); }

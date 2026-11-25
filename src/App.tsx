@@ -68,6 +68,8 @@ import { useParcels } from './store/ParcelsContext';
 import { MaintenanceStrip } from './components/MaintenanceStrip';
 import { onKeepOutcome, type KeepOutcome } from './peek/pending';
 import type { CarrierId, ParcelWithEvents } from './types';
+import { usePassportNews } from './components/passport/news';
+import { NewStampLine } from './components/passport/NewStampLine';
 
 const DETAIL_HISTORY_KEY = 'parcelPostDetail';
 const PARCEL_VIEW_CONTROLS_ID = 'parcel-view-controls';
@@ -141,6 +143,8 @@ export default function App({
     retryLoad,
     resetDemoData,
   } = useParcels();
+  // What the passport earned that this device has not shown: a line on the delivered card and a dot on the tab.
+  const passportNews = usePassportNews(parcels, mode === 'api' && apiAuth ? apiAuth.userId : 'guest', loading);
   // What was shared to the installed app, handed to the add sheet it opens.
   const [shared, setShared] = useState<SharedParcel | null>(null);
   const [adding, setAdding] = useState(false);
@@ -545,7 +549,7 @@ export default function App({
             <button type="button" className="app__add-button" aria-label={t('app.addParcelAria')} onClick={() => setAdding(true)}><Icon name="plus" /><span>{t('app.addParcel')}</span></button>
             <AccountMenu email={accountEmail} onExport={onExportAccount} onDelete={onDeleteAccount} onSignOut={onSignOut} onExitDemo={onExitDemo} onResetDemo={mode === 'demo' ? resetDemo : undefined} onOpenLanding={openLanding} apiAuth={apiAuth} signIn={signIn} />
           </div>
-          <AppNavigation selected={tab} onSelect={switchTab} />
+          <AppNavigation selected={tab} onSelect={switchTab} dotted={passportNews.unseen.length && tab !== 'passport' ? 'passport' : null} />
         </div>
       </header>
       {mode === 'demo' && <div className="demo-banner"><span>{t('app.demo')}</span>{onExitDemo && <button type="button" onClick={onExitDemo}>{t('native.exitDemo')}<Icon name="close" /></button>}</div>}
@@ -719,6 +723,7 @@ export default function App({
                   parcel={parcel}
                   onOpen={(p, source) => openParcelDetail(p.id, source)}
                   onArchive={handleArchive}
+                  footer={<NewStampLine items={passportNews.byParcel.get(parcel.id)} onOpen={() => switchTab('passport')} />}
                 />
               ))}
             </div>
@@ -764,6 +769,7 @@ export default function App({
                     key={parcel.id}
                     parcel={parcel}
                     onOpen={(p, source) => openParcelDetail(p.id, source)}
+                    footer={<NewStampLine items={passportNews.byParcel.get(parcel.id)} onOpen={() => switchTab('passport')} />}
                   />
                 ))}
               </div>
@@ -776,7 +782,7 @@ export default function App({
         {/* The foot ends the deliveries and moves with them when they are pulled. */}
         {openLanding && <AppFoot onOpenLanding={openLanding} />}
         </PullToRefresh>
-        {tab === 'passport' && <Passport parcels={parcels} loading={loading} />}
+        {tab === 'passport' && <Passport news={passportNews} loading={loading} />}
         {tab === 'friends' && <Friends key={apiAuth?.userId ?? 'demo'} client={friendsClient} parcels={parcels} demo={mode === 'demo'} onExitDemo={onExitDemo} />}
       </main>
 

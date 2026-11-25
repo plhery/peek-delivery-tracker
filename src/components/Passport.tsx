@@ -1,19 +1,29 @@
 import { localizedCalendarDate } from '../lib/format';
 import { trackAction } from '../lib/analytics';
-import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
-import { useI18n, type MessageKey } from '../i18n';
-import { formatJourneyDuration, passportStatistics } from '../lib/passport';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useI18n } from '../i18n';
+import { formatJourneyDuration, type StampProgress } from '../lib/passport';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
-import type { ParcelWithEvents } from '../types';
-import type { IconName } from './Icon';
-import { Seal } from './Seal';
 import { placeBubble } from '../lib/bubble';
+import { PassportSeal } from './passport/PassportSeal';
+import { STAMP_COPY, stampDay, stampFullDay, stampProgress } from './passport/copy';
+import type { PassportNews } from './passport/news';
 
-export function Passport({ parcels, loading }: { parcels: ParcelWithEvents[]; loading: boolean }) {
+const COVER_SEAL = { tone: 'green', glyph: 'parcel' } as const;
+
+export function Passport({ news, loading }: { news: PassportNews; loading: boolean }) {
   const { t, languageTag } = useI18n();
-  const stats = useMemo(() => passportStatistics(parcels), [parcels]);
+  const { stats, stamps } = news.book;
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const [showAllStamps, setShowAllStamps] = useState(false);
+  // What was new when the passport opened stays new, and is pressed in, until the reader leaves it.
+  const [fresh, setFresh] = useState<ReadonlySet<string>>(() => new Set());
+  const { unseen, markSeen } = news;
+  useEffect(() => {
+    if (loading || !unseen.length) return;
+    setFresh((current) => new Set([...current, ...unseen.map((item) => item.seen)]));
+    markSeen();
+  }, [loading, markSeen, unseen]);
   const idPrefix = useId();
   const detailId = (id: string) => `${idPrefix}-${id}`;
   const anchors = useRef(new Map<string, HTMLButtonElement>());
@@ -31,10 +41,10 @@ export function Passport({ parcels, loading }: { parcels: ParcelWithEvents[]; lo
       window.removeEventListener('scroll', dismiss, true);
     };
   }, [expandedCard, idPrefix]);
-  const button = (id: string, className: string, label: string, children: ReactNode) => <button type="button" className={className} aria-label={label}
+  const button = (id: string, className: string, label: string, children: ReactNode, onOpen?: () => void) => <button type="button" className={className} aria-label={label}
     ref={(node) => { if (node) anchors.current.set(id, node); else anchors.current.delete(id); }}
     popoverTarget={detailId(id)} aria-haspopup="dialog" aria-expanded={expandedCard === id} aria-controls={detailId(id)}
-    onClick={() => { if (expandedCard !== id) trackAction('stamp-open'); }}>{children}</button>;
+    onClick={() => { if (expandedCard !== id) onOpen?.(); }}>{children}</button>;
   const detail = (id: string, title: string, explanation: string) => <div id={detailId(id)} className="passport-bubble" popover="auto" role="dialog"
     aria-labelledby={`${detailId(id)}-title`} tabIndex={-1} onToggle={(event) => {
       const bubble = event.currentTarget;
@@ -49,44 +59,43 @@ export function Passport({ parcels, loading }: { parcels: ParcelWithEvents[]; lo
       bubble.focus({ preventScroll: true });
     }}><h3 id={`${detailId(id)}-title`}>{title}</h3><p>{explanation}</p></div>;
   const format = (duration: number) => duration < 60_000 ? t('passport.underOneMinute') : formatJourneyDuration(duration, languageTag);
-  const stamps: { title: MessageKey; explanation: MessageKey; icon: IconName; tone: string; count: number; total: number; numeral?: string }[] = [
-    { title: 'passport.firstArrival', explanation: 'passport.firstExplanation', icon: 'parcel', tone: 'green', count: stats.deliveredCount, total: 1 },
-    { title: 'passport.doubleDigits', explanation: 'passport.tenExplanation', icon: 'stamp', tone: 'lilac', count: stats.deliveredCount, total: 10 },
-    { title: 'passport.wellConnected', explanation: 'passport.carrierExplanation', icon: 'globe', tone: 'blue', count: stats.carrierCount, total: 3 },
-    { title: 'passport.expressArrival', explanation: 'passport.expressExplanation', icon: 'express', tone: 'peach', count: stats.fastestDelivery && stats.fastestDelivery.duration <= 48 * 3600_000 ? 1 : 0, total: 1 },
-    { title: 'passport.acrossBorders', explanation: 'passport.acrossExplanation', icon: 'border', tone: 'blue', count: stats.crossBorderCount, total: 1 },
-    { title: 'passport.aroundWorld', explanation: 'passport.aroundExplanation', icon: 'worldMap', tone: 'green', count: stats.originCountries.length, total: 5 },
-    { title: 'passport.theRegular', explanation: 'passport.regularExplanation', icon: 'stamp', tone: 'lilac', count: stats.deliveredCount, total: 25, numeral: '25' },
-    { title: 'passport.rightNextDoor', explanation: 'passport.domesticExplanation', icon: 'houses', tone: 'green', count: stats.domesticDeliveryCount, total: 1 },
-    { title: 'passport.worthTheWait', explanation: 'passport.waitExplanation', icon: 'hourglass', tone: 'ochre', count: stats.longWaitDeliveryCount, total: 1 },
-    { title: 'passport.busyDoorstep', explanation: 'passport.busyExplanation', icon: 'parcels', tone: 'peach', count: stats.maxDeliveriesInOneDay, total: 3 },
-    { title: 'passport.pickedUp', explanation: 'passport.pickupExplanation', icon: 'storefront', tone: 'blue', count: stats.pickupDeliveryCount, total: 1 },
-    { title: 'passport.homeForHolidays', explanation: 'passport.holidayExplanation', icon: 'gift', tone: 'green', count: stats.decemberDeliveryCount, total: 1 },
-  ];
-  const upcoming = new Set(stamps.filter((stamp) => stamp.count < stamp.total).slice(0, 3).map((stamp) => stamp.title));
-  const visibleStamps = showAllStamps ? stamps : stamps.filter((stamp) => stamp.count >= stamp.total || upcoming.has(stamp.title));
-  const hasMoreStamps = stamps.some((stamp) => stamp.count < stamp.total && !upcoming.has(stamp.title));
-  const progress = (stamp: typeof stamps[number]) => stamp.icon === 'express' ? t('passport.underTwoDays') : `${Math.min(stamp.count, stamp.total)} / ${stamp.total}`;
+  // Earned stamps first, in the passport's order, then the next three to reach; the rest behind "All stamps".
+  const earned = stamps.filter((stamp) => stamp.earned);
+  const ahead = stamps.filter((stamp) => !stamp.earned);
+  const visibleStamps = showAllStamps ? [...earned, ...ahead] : [...earned, ...ahead.slice(0, 3)];
+  const pressed = earned.filter((stamp) => fresh.has(`stamp:${stamp.key}`)).map((stamp) => stamp.key);
+  const earnedLine = (stamp: StampProgress) => stamp.earnedAt === null ? null : t('passport.earnedOn', { date: stampFullDay(stamp.earnedAt, languageTag) });
+  const stampDetail = (stamp: StampProgress) => [
+    t(STAMP_COPY[stamp.key].explanation),
+    stamp.earned ? stamp.earnedAt !== null && `${earnedLine(stamp)} · ${stamp.label || t('common.parcel')}` : stampProgress(stamp, t),
+  ].filter(Boolean).join('\n');
   const timingExplanation = `${t(stats.durationSampleCount === 1 ? 'passport.timedJourneys.one' : 'passport.timedJourneys.many', { count: stats.durationSampleCount })}. ${t('passport.timingExplanation')}`;
   if (loading) return <div className="passport-loading" role="status" aria-label={t('app.loadingParcels')}><div className="skeleton" /><div className="skeleton" /></div>;
 
   return <div className="passport-page">
     <div className="passport-cover">
       {button('delivered', 'passport-cover__main', `${stats.deliveredCount} ${t('passport.delivered', { count: stats.deliveredCount })}`, <>
-        <span><strong className="passport-cover__count">{stats.deliveredCount.toLocaleString(languageTag)}</strong><span>{t('passport.delivered', { count: stats.deliveredCount })}</span></span><Seal icon="parcel" />
+        <span><strong className="passport-cover__count">{stats.deliveredCount.toLocaleString(languageTag)}</strong><span>{t('passport.delivered', { count: stats.deliveredCount })}</span></span><PassportSeal stamp={COVER_SEAL} size="cover" />
       </>)}
       {detail('delivered', t('passport.delivered', { count: stats.deliveredCount }), t('passport.deliveredExplanation'))}
     </div>
     <section className="passport-stamps" aria-labelledby="passport-stamps-title">
       <h2 id="passport-stamps-title">{t('passport.stamps')}</h2>
       <div className="passport-stamps__grid" id={`${idPrefix}-stamps`}>{visibleStamps.map((stamp) => {
-        const earned = stamp.count >= stamp.total;
-        return <div key={stamp.title}>{button(stamp.title, `stamp-card tone-${stamp.tone}${earned ? ' stamp-card--earned' : ''}`,
-          [t(stamp.title), earned ? '' : progress(stamp)].filter(Boolean).join(', '),
-          <><Seal icon={stamp.icon} earned={earned} numeral={stamp.numeral} /><span>{t(stamp.title)}</span></>)}</div>;
+        const press = pressed.indexOf(stamp.key);
+        const title = t(STAMP_COPY[stamp.key].title);
+        const under = stamp.earned ? stamp.earnedAt === null ? null : stampDay(stamp.earnedAt, languageTag) : stampProgress(stamp, t);
+        return <div key={stamp.key} className="stamp-card-cell">{button(stamp.key, `stamp-card${stamp.earned ? ' stamp-card--earned' : ''}`,
+          [title, stamp.earned ? earnedLine(stamp) : stampProgress(stamp, t), press >= 0 ? t('passport.new') : null].filter(Boolean).join(', '),
+          <>
+            <PassportSeal stamp={stamp} earned={stamp.earned} press={press >= 0 ? press : undefined} />
+            {press >= 0 && <span className="passport-new-pill" aria-hidden="true">{t('passport.new')}</span>}
+            <span className="stamp-card__name">{title}</span>
+            {under && <span className="stamp-card__day" aria-hidden="true">{under}</span>}
+          </>, () => trackAction('stamp-open'))}</div>;
       })}</div>
-      {hasMoreStamps && <button type="button" className="passport-collection-toggle" aria-expanded={showAllStamps} aria-controls={`${idPrefix}-stamps`} onClick={() => setShowAllStamps((value) => !value)}>{t(showAllStamps ? 'passport.showLess' : 'passport.showAll')}</button>}
-      {visibleStamps.map((stamp) => <div key={stamp.title}>{detail(stamp.title, t(stamp.title), `${t(stamp.explanation)}${stamp.count >= stamp.total ? '' : `\n${progress(stamp)}`}`)}</div>)}
+      {ahead.length > 3 && <button type="button" className="passport-collection-toggle" aria-expanded={showAllStamps} aria-controls={`${idPrefix}-stamps`} onClick={() => setShowAllStamps((value) => !value)}>{t(showAllStamps ? 'passport.showLess' : 'passport.showAll')}</button>}
+      {visibleStamps.map((stamp) => <div key={stamp.key}>{detail(stamp.key, t(STAMP_COPY[stamp.key].title), stampDetail(stamp))}</div>)}
     </section>
     <section className="passport-times" aria-label={t('passport.deliveryTimes')}>
       {stats.averageDeliveryDuration != null && stats.fastestDelivery ? <>

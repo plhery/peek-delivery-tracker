@@ -13,6 +13,7 @@ import { accountLookupCountry, rememberLookupCountry } from './lookupCountry';
 import { captureOperationalError } from './observability';
 import { reviewDemoCarrier, reviewDemoNumbersInText } from './reviewDemo';
 import { settleTypedSupportCases } from './reviewQueues';
+import { shopLinkNumbers, withShopLinkNumbers } from './shopLinks';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { newPackageValues } from './validation';
 
@@ -261,7 +262,8 @@ export async function addNumbersToAccount(
 /**
  * Reads a text's tracking numbers and adds them to the account (addNumbersToAccount), named `label`. `carriers`
  * are those the text's writer is, for a carrier's own email (trackingNumbersInText). In a review demo account the
- * text's demo numbers come first (reviewDemo.ts).
+ * text's demo numbers come first (reviewDemo.ts). A shop's tracking-page link adds the parcels its platform names
+ * (shopLinkNumbers), after the text's own numbers.
  */
 export async function addParcelsFromText(
   service: SupabaseServiceClient,
@@ -273,7 +275,8 @@ export async function addParcelsFromText(
 ): Promise<ParcelAddition[]> {
   const demos = reviewDemoNumbersInText(userId, text.slice(0, MOST_TEXT_LENGTH));
   const named = new Set(demos.map(({ normalized }) => normalized));
-  const numbers = [...demos, ...trackingNumbersInText(text, carriers, options.trust).filter(({ normalized }) => !named.has(normalized))]
-    .slice(0, MOST_NUMBERS_PER_TEXT);
+  const read = trackingNumbersInText(text, carriers, options.trust).filter(({ normalized }) => !named.has(normalized));
+  const linked = (await shopLinkNumbers(text.slice(0, MOST_TEXT_LENGTH))).numbers.filter(({ normalized }) => !named.has(normalized));
+  const numbers = [...demos, ...withShopLinkNumbers(read, linked)].slice(0, MOST_NUMBERS_PER_TEXT);
   return numbers.length ? addNumbersToAccount(service, userId, numbers, label, options) : [];
 }

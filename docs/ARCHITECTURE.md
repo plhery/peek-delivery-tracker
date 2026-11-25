@@ -477,6 +477,11 @@ Key server modules:
     parcel limit, labelled with the sender's name, without trademark signs or legal form and in
     the capitals it is said with ("EXAMPLE® SHOP AG" is "Example Shop"); one the account follows already costs
     nothing, and takes that name when it has none. A name it has is never changed.
+    A link to a shop's own tracking page (parcelLab's `delivery-status.com`, as H&M's "Follow
+    package") adds the parcels the shop's platform names, with the carrier it names, after the
+    text's own numbers; a number the text names itself keeps its place. At most three such links
+    are read, in eight seconds, anonymously and read-only; only the number and carrier are kept
+    (`src/server/shopLinks.ts`, resolved by the scraper's `resolveShopTrackingLink`).
     `src/server/parcelsFromText.ts` is that step.
   - An email whose subject says its parcel was delivered adds no parcel: it comes too late
     for following to help. Only the past counts, in the languages of the Gmail filter

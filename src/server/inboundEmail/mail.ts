@@ -3,6 +3,7 @@ import 'server-only';
 import { decodeHTMLStrict } from 'entities';
 import { Parser } from 'htmlparser2';
 import PostalMime, { type Address, type Email } from 'postal-mime';
+import { shopTrackingLink } from 'universal-parcel-scraper';
 import { carrierLink } from './carrierSender';
 
 /** What Peek keeps from an email: the text to read numbers from, which it drops after, and who sent it. */
@@ -255,8 +256,9 @@ export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const links = [...new Set([...htmlLinks(html), ...plain?.links ?? []])];
   const read: string[] = [];
   let room = LINKS_SHARE;
-  // A link to a carrier's site names the parcel's number: those are read first, before the shop's own links.
-  const carriers = new Set(links.filter(carrierLink));
+  // A link to a carrier's site names the parcel's number, as a link to the shop's tracking page names its parcels
+  // (shopTrackingLink): those are read first, before the shop's other links.
+  const carriers = new Set(links.filter((link) => carrierLink(link) || shopTrackingLink(link)));
   for (const link of [...carriers, ...links.filter((link) => !carriers.has(link))]) {
     if (link.length >= room) continue;
     read.push(link);

@@ -124,12 +124,15 @@ order by a.started_at desc;
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check. A check
 -- the fence refused (superseded) saved nothing and loaded a stage that may be stale: it is no step.
 -- A linked parcel holds the checks of the parcel merged into it (original_package_id), filed under its
--- original_carrier: each leg's checks are read apart, as the two parcels saved their own stages, and the merged leg's
--- last check has no next one. A handover in place records the parcel's own carrier as its original_carrier: one leg.
+-- original_carrier, or under no carrier while it asked that one (added automatic, its carrier found later): each
+-- leg's checks are read apart, as the two parcels saved their own stages, and the merged leg's last check has no next
+-- one. A handover in place records the parcel's own carrier as its original_carrier: one leg.
 with legs as (
   select a.*, p.current_stage, p.carrier as parcel_carrier,
          p.carrier_data ? 'original_package_id'
-           and a.configured_carrier is not distinct from p.carrier_data->>'original_carrier' as merged_leg
+           and (a.configured_carrier is not distinct from p.carrier_data->>'original_carrier'
+             or (a.configured_carrier = 'unknown' and coalesce(a.lookups ? (p.carrier_data->>'original_carrier'), false)))
+           as merged_leg
   from public.tracking_sync_attempts as a
   join public.packages as p on p.id = a.package_id
   where a.started_at >= :since and a.previous_stage is not null and a.outcome <> 'superseded'
@@ -179,7 +182,9 @@ left join lateral (
   join public.packages as p on p.id = b.package_id
   where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id) and b.outcome <> 'superseded'
     and (p.carrier_data ? 'original_package_id'
-      and b.configured_carrier is not distinct from p.carrier_data->>'original_carrier') = back.merged_leg
+      and (b.configured_carrier is not distinct from p.carrier_data->>'original_carrier'
+        or (b.configured_carrier = 'unknown' and coalesce(b.lookups ? (p.carrier_data->>'original_carrier'), false))))
+      = back.merged_leg
   order by b.started_at desc, b.id desc limit 1
 ) as prior on true
 where not coalesce(back.from_stage = 'returned' and prior.selected_stage = 'returned'

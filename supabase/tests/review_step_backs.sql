@@ -41,6 +41,22 @@ from (values
   ('scheduled', 'la-poste', '2025-12-31T11:10:00Z', 'in_transit')
 ) as checks (trigger, carrier, started_at, previous_stage);
 
+-- A later leg added first, then the earlier one added automatic and linked into it: the merged parcel's check
+-- under no carrier asked the carrier it was found to be, so it is that leg's, and the later leg did not step back.
+insert into public.packages (id, user_id, tracking_number, carrier, current_stage, carrier_data)
+values ('39000000-0000-0000-0000-000000000207', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0207', 'la-poste',
+  'in_transit', '{"original_carrier": "colissimo", "original_package_id": "39000000-0000-0000-0000-000000000297"}');
+
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_stage, outcome, completed_at, lookups)
+select '39000000-0000-0000-0000-000000000207', trigger, carrier, started_at::timestamptz, previous_stage, 'updated',
+  started_at::timestamptz + interval '1 minute', lookups::jsonb
+from (values
+  ('added', 'la-poste', '2025-12-31T10:00:00Z', 'pending', '{"la-poste": "success"}'),
+  ('scheduled', 'la-poste', '2025-12-31T10:01:00Z', 'in_transit', '{"la-poste": "success"}'),
+  ('added', 'unknown', '2025-12-31T10:02:00Z', 'pending', '{"la-poste": "success", "colissimo": "success"}'),
+  ('scheduled', 'la-poste', '2025-12-31T10:20:00Z', 'in_transit', '{"la-poste": "success"}')
+) as checks (trigger, carrier, started_at, previous_stage, lookups);
+
 -- A parcel handed over in place records its own carrier as the original: one leg, whose step back is listed.
 insert into public.packages (id, user_id, tracking_number, carrier, current_stage, carrier_data)
 values ('49000000-0000-0000-0000-000000000204', '19000000-0000-0000-0000-000000000002', 'EXAMPLESTEP0204', 'dhl',

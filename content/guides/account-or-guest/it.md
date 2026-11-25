@@ -4,7 +4,7 @@ description: Traccia un pacco su Peek senza account e senza password. Cosa resta
 slug: tracking-pacchi-senza-account
 picture: Pip, il pacco con la faccia, saluta dallo schermo di un telefono, con accanto un portatile e un tablet e una porta aperta tra loro.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Per tracciare un pacco su [Peek](/) non serve un account: cercalo, seguilo, attiva le sue notifiche e condividilo, senza indirizzo e-mail e senza password. Accedi quando vuoi tenere insieme i tuoi pacchi sul sito, su iPhone, iPad, Mac e Android, o per gli extra di un account, come le e-mail di consegna e l'aggiunta di pacchi via email.
@@ -17,10 +17,10 @@ Ecco tutto ciò che cambia quando accedi:
 | Quanto resta un pacco | 30 giorni dopo la consegna o il reso, o 90 giorni senza novità | Finché non elimini il pacco o l'account; archiviarlo lo nasconde soltanto |
 | Quanti pacchi | 100 nella lista di un browser | 50 attivi e 500 in tutto |
 | Nuovi pacchi al giorno | Sul sito, alcune ricerche al giorno per ogni rete, poi «Ricerche finite per oggi» | Una quota giornaliera per aggiungere pacchi |
-| [Notifiche](guide:parcel-notifications) | Sul sito, «Avvisami» sulla pagina di un pacco, poi, se vuoi, ogni pacco di quel browser. Le app iscrivono da sole ogni pacco | Impostazioni › «Notifiche» vale per tutti i pacchi, e può mandarti un'e-mail quando ne arriva uno |
+| [Notifiche](guide:parcel-notifications) | Sul sito, «Avvisami» sulla pagina di un pacco, poi, se vuoi, ogni pacco di quel browser. Nelle app, Impostazioni › «Notifiche» sceglie gli aggiornamenti di ogni pacco del dispositivo, e la campanella di un pacco spegne i suoi | Impostazioni › «Notifiche» vale per tutti i pacchi, e può mandarti un'e-mail quando ne arriva uno |
 | [Aggiungere pacchi via email](guide:add-parcels-by-email), [assistenti IA](guide:ai-assistants) | Non disponibile | Impostazioni › «Aggiungi pacchi via e-mail» (Beta); «Assistenti» (Beta), solo sul sito |
 | [Passaporto e Amici](guide:delivery-passport) | Sito: nessuna scheda, ma un pacco consegnato dall'estero propone «Inizia un passaporto». App: entrambe le schede; il Passaporto conta i pacchi su quel dispositivo, Amici ti chiede di accedere | Entrambe le schede, sul sito e in ogni app |
-| Impostazioni | Sito: il pulsante a ingranaggio «Impostazioni» contiene «Preferenze», con «Lingua» sulla pagina di un pacco; nella pagina iniziale, la lingua è nel menu in fondo alla pagina. App: «Preferenze» e «Su questo dispositivo» | «Consegne», «Preferenze» (con «Lingua») e «Account e dati». Sul sito, solo «Puntino sui pacchi aggiornati» ti segue sugli altri dispositivi |
+| Impostazioni | Sito: il pulsante a ingranaggio «Impostazioni» contiene «Preferenze», con «Lingua» sulla pagina di un pacco; nella pagina iniziale, la lingua è nel menu in fondo alla pagina. App: «Consegne» (con «Notifiche»), «Preferenze» e «Su questo dispositivo» | «Consegne», «Preferenze» (con «Lingua») e «Account e dati». Sul sito, solo «Puntino sui pacchi aggiornati» e «Peek IA» ti seguono sugli altri dispositivi |
 | I tuoi dati | «Dimenticalo ora» sulla pagina di un pacco o «Dimentica tutti»; le app hanno anche «Scarica i miei dati» | «Scarica i miei dati», «Esci», «Elimina account» |
 
 Accedere richiede un minuto, con un codice che Peek ti manda via e-mail:
@@ -95,6 +95,7 @@ Tutti hanno «Preferenze», con o senza account, sul sito e nelle app; la tabell
 - **«Formato dell’ora»**: «24 ore», «12 ore» o Automatico.
 - **«Distanza»** e **«Peso»**: chilometri o miglia, chilogrammi o libbre. Lasciati su Automatico, seguono il tuo dispositivo; con le libbre anche le dimensioni dei pacchi sono in pollici.
 - **«Puntino sui pacchi aggiornati»**: «Un puntino compare su un pacco con novità dall’ultima volta che l’hai aperto.»
+- **«Peek IA»**: «Quando Peek ha un indizio forte, ti dice quando pensa che arriverà il pacco.» Vedi [la stima di consegna di Peek IA](guide:peek-ai).
 
 Per aggiungere Peek alla schermata Home di un iPhone e ricevere le notifiche, vedi [Notifiche di consegna dei pacchi](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Per aggiungere Peek alla schermata Home di un iPhone e ricevere le notifiche, ve
 - [Peek: autenticazione (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – i 30 minuti del codice, riaccedere per eliminare
 - [Peek: impostazioni del sito](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Consegne, Preferenze, Account e dati, l'eliminazione
 - [Peek: le impostazioni di un visitatore](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – le Preferenze del pulsante a ingranaggio, con la lingua sulla pagina di un pacco
-- [Peek: preferenze](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – aspetto, formato dell'ora, unità, cosa resta nel browser
-- [Peek: impostazioni su iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – le Impostazioni senza account, «Su questo dispositivo», il pulsante dell'account
+- [Peek: preferenze](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – aspetto, formato dell'ora, unità, Peek IA, cosa resta nel browser
+- [Peek: impostazioni su iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – le Impostazioni senza account, la loro pagina Notifiche, «Su questo dispositivo», il pulsante dell'account
 - [Peek: impostazioni su Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – lo stesso su Android
 - [Peek: limiti (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 pacchi attivi e 500 in tutto, le quote giornaliere
 - [Peek: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – ogni etichetta citata qui

@@ -4,7 +4,7 @@ description: Track a parcel on Peek with no account and no password. See what st
 slug: track-parcels-without-account
 picture: Pip, the parcel with a face, waving from a phone screen, with a laptop and a tablet beside it and an open door between them.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 You don't need an account to track a parcel on [Peek](/): look it up, follow it, turn on its notifications and share it, with no email address and no password. Sign in when you want your parcels kept together on the website, iPhone, iPad, Mac and Android, or the extras an account adds, such as delivery emails and adding parcels by email.
@@ -17,10 +17,10 @@ Here is everything that changes when you sign in:
 | How long a parcel stays | 30 days after delivery or return, or 90 days without news | Until you delete it or the account; archiving only hides it |
 | How many parcels | 100 in a browser's list | 50 active and 500 in all |
 | New parcels a day | On the website, a few lookups a day for each network, then "No lookups left for today" | A daily allowance for adding parcels |
-| [Notifications](guide:parcel-notifications) | On the website, "Notify me" on a parcel's page, then every parcel in that browser if you like. The apps sign up each parcel themselves | Settings › "Notifications" covers every parcel, and can email you when one arrives |
+| [Notifications](guide:parcel-notifications) | On the website, "Notify me" on a parcel's page, then every parcel in that browser if you like. In the apps, Settings › "Notifications" sets which updates every parcel on the device gets, and a parcel's bell turns its own off | Settings › "Notifications" covers every parcel, and can email you when one arrives |
 | [Add parcels by email](guide:add-parcels-by-email), [AI assistants](guide:ai-assistants) | Not offered | Settings › "Add parcels by email" (Beta); "Assistants" (Beta), on the website only |
 | [Passport and Friends](guide:delivery-passport) | Website: no tabs, but a delivered parcel from abroad offers "Start a passport". Apps: both tabs; Passport counts the parcels on that device, Friends asks you to sign in | Both tabs, on the website and in every app |
-| Settings | Website: the gear button "Settings" holds "Preferences", with "Language" on a parcel's page; on the front page, the language is in the menu at its foot. Apps: "Preferences" and "On this device" | "Deliveries", "Preferences" (with "Language") and "Account & data". On the website, only "Dot on updated parcels" follows you to your other devices |
+| Settings | Website: the gear button "Settings" holds "Preferences", with "Language" on a parcel's page; on the front page, the language is in the menu at its foot. Apps: "Deliveries" (with "Notifications"), "Preferences" and "On this device" | "Deliveries", "Preferences" (with "Language") and "Account & data". On the website, only "Dot on updated parcels" and "Peek AI" follow you to your other devices |
 | Your data | "Forget it now" on a parcel's page or "Forget all"; the apps also have "Download my data" | "Download my data", "Sign out", "Delete account" |
 
 Signing in takes a minute, with a code Peek emails you:
@@ -95,6 +95,7 @@ Everyone has "Preferences", with or without an account, on the website and in th
 - **"Time format"**: "24-hour", "12-hour" or Automatic.
 - **"Distance"** and **"Weight"**: kilometres or miles, kilograms or pounds. Left on Automatic, they follow your device; pounds also give parcel sizes in inches.
 - **"Dot on updated parcels"**: "A dot appears on a parcel with a new update since you last opened it."
+- **"Peek AI"**: "When Peek has a strong hint, it says when it thinks a parcel will come." See [Peek AI's delivery estimate](guide:peek-ai).
 
 To add Peek to an iPhone's Home Screen for notifications, see [parcel delivery notifications](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ To add Peek to an iPhone's Home Screen for notifications, see [parcel delivery n
 - [Peek: authentication](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – the code's 30 minutes, signing in again to delete
 - [Peek: website settings](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Deliveries, Preferences, Account & data, deleting
 - [Peek: a visitor's settings](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – the gear button's Preferences, with the language on a parcel's page
-- [Peek: preferences](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – appearance, time format, units, what stays in the browser
-- [Peek: iPhone settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Settings without an account, "On this device", the account button
+- [Peek: preferences](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – appearance, time format, units, Peek AI, what stays in the browser
+- [Peek: iPhone settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Settings without an account, its Notifications page, "On this device", the account button
 - [Peek: Android settings](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – the same on Android
 - [Peek: limits](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 active and 500 parcels, the daily allowances
 - [Peek: English copy](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – every label quoted here

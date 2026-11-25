@@ -4,7 +4,7 @@ description: Segue uma encomenda no Peek sem conta nem palavra-passe. Vê o que 
 slug: seguir-encomendas-sem-conta
 picture: O Pip, a encomenda com cara, acena do ecrã de um telemóvel, com um portátil e um tablet ao lado e uma porta aberta entre eles.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Não precisas de conta para seguir uma encomenda no [Peek](/): pesquisa-a, segue-a, ativa as notificações dela e partilha-a, sem endereço de e-mail nem palavra-passe. Inicia sessão quando quiseres ter as tuas encomendas juntas no site, no iPhone, no iPad, no Mac e no Android, ou os extras que uma conta acrescenta, como os e-mails de entrega e adicionar encomendas por e-mail.
@@ -17,10 +17,10 @@ Isto é tudo o que muda quando inicias sessão:
 | Quanto tempo fica uma encomenda | 30 dias depois da entrega ou da devolução, ou 90 dias sem novidades | Até eliminares a encomenda ou a conta; arquivá-la só a esconde |
 | Quantas encomendas | 100 na lista de um navegador | 50 ativas e 500 no total |
 | Encomendas novas por dia | No site, algumas pesquisas por dia para cada rede, e depois «Já não há pesquisas por hoje» | Um limite diário para adicionar encomendas |
-| [Notificações](guide:parcel-notifications) | No site, «Notificar-me» na página de uma encomenda e depois, se quiseres, todas as encomendas desse navegador. As apps inscrevem cada encomenda sozinhas | Definições › «Notificações» cobre todas as encomendas e pode enviar-te um e-mail quando uma chega |
+| [Notificações](guide:parcel-notifications) | No site, «Notificar-me» na página de uma encomenda e depois, se quiseres, todas as encomendas desse navegador. Nas apps, Definições › «Notificações» escolhe as atualizações de cada encomenda do dispositivo, e o sino de uma encomenda desliga as dela | Definições › «Notificações» cobre todas as encomendas e pode enviar-te um e-mail quando uma chega |
 | [Adicionar encomendas por e-mail](guide:add-parcels-by-email), [assistentes de IA](guide:ai-assistants) | Não disponíveis | Definições › «Adicionar encomendas por e-mail» (Beta); «Assistentes» (Beta), só no site |
 | [Passaporte e Amigos](guide:delivery-passport) | Site: sem separadores, mas uma encomenda entregue vinda do estrangeiro oferece «Começar um passaporte». Apps: os dois separadores; o Passaporte conta as encomendas desse dispositivo e o separador Amigos pede-te que inicies sessão | Os dois separadores, no site e em todas as apps |
-| Definições | Site: o botão da roda dentada «Definições» tem «Preferências», com «Idioma» na página de uma encomenda; na página inicial, o idioma está no menu do rodapé. Apps: «Preferências» e «Neste dispositivo» | «Entregas», «Preferências» (com «Idioma») e «Conta e dados». No site, só «Ponto nas encomendas atualizadas» te acompanha nos outros dispositivos |
+| Definições | Site: o botão da roda dentada «Definições» tem «Preferências», com «Idioma» na página de uma encomenda; na página inicial, o idioma está no menu do rodapé. Apps: «Entregas» (com «Notificações»), «Preferências» e «Neste dispositivo» | «Entregas», «Preferências» (com «Idioma») e «Conta e dados». No site, só «Ponto nas encomendas atualizadas» e «Peek IA» te acompanham nos outros dispositivos |
 | Os teus dados | «Esquecer agora» na página de uma encomenda ou «Esquecer todas»; as apps também têm «Transferir os meus dados» | «Transferir os meus dados», «Terminar sessão», «Eliminar conta» |
 
 Iniciar sessão demora um minuto, com um código que o Peek te envia por e-mail:
@@ -95,6 +95,7 @@ Toda a gente tem «Preferências», com ou sem conta, no site e nas apps; a tabe
 - **«Formato da hora»**: «24 horas», «12 horas» ou Automático.
 - **«Distância»** e **«Peso»**: quilómetros ou milhas, quilogramas ou libras. Em Automático, seguem o teu dispositivo; com libras, os tamanhos das encomendas também aparecem em polegadas.
 - **«Ponto nas encomendas atualizadas»**: «Aparece um ponto numa encomenda com novidades desde a última vez que a abriste.»
+- **«Peek IA»**: «Quando tem uma pista forte, o Peek diz-te quando acha que a encomenda vai chegar.» Vê [a estimativa do Peek IA](guide:peek-ai).
 
 Para adicionares o Peek ao ecrã principal de um iPhone e receberes notificações, vê [as notificações de entrega de encomendas](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Para adicionares o Peek ao ecrã principal de um iPhone e receberes notificaçõ
 - [Peek: autenticação (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – os 30 minutos do código, iniciar sessão de novo para eliminar
 - [Peek: definições do site](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Entregas, Preferências, Conta e dados, eliminar
 - [Peek: as definições de um visitante](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – as Preferências da roda dentada, com o idioma na página de uma encomenda
-- [Peek: preferências](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – aspeto, formato da hora, unidades, o que fica no navegador
-- [Peek: definições do iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – as Definições sem conta, «Neste dispositivo», o botão da conta
+- [Peek: preferências](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – aspeto, formato da hora, unidades, Peek IA, o que fica no navegador
+- [Peek: definições do iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – as Definições sem conta, a sua página Notificações, «Neste dispositivo», o botão da conta
 - [Peek: definições do Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – o mesmo no Android
 - [Peek: limites (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 encomendas ativas e 500 no total, os limites diários
 - [Peek: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – cada etiqueta citada aqui

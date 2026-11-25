@@ -4,7 +4,7 @@ description: Sigue un paquete en Peek sin cuenta ni contraseña. Mira qué se qu
 slug: seguir-paquetes-sin-cuenta
 picture: Pip, el paquete con cara, saluda desde la pantalla de un móvil, con un portátil y una tableta al lado y una puerta abierta entre ellos.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 No necesitas cuenta para seguir un paquete en [Peek](/): búscalo, síguelo, activa sus notificaciones y compártelo, sin dirección de correo ni contraseña. Inicia sesión cuando quieras tener tus paquetes juntos en la web, el iPhone, el iPad, el Mac y Android, o los extras que añade una cuenta, como los correos de entrega y añadir paquetes por correo.
@@ -17,10 +17,10 @@ Esto es todo lo que cambia al iniciar sesión:
 | Cuánto tiempo se queda un paquete | 30 días tras su entrega o devolución, o 90 días sin novedades | Hasta que elimines el paquete o la cuenta; archivarlo solo lo oculta |
 | Cuántos paquetes | 100 en la lista de un navegador | 50 activos y 500 en total |
 | Paquetes nuevos al día | En la web, unas pocas búsquedas al día por cada red, y luego «No quedan búsquedas por hoy» | Un cupo diario para añadir paquetes |
-| [Notificaciones](guide:parcel-notifications) | En la web, «Notificarme» en la página de un paquete y luego, si quieres, todos los paquetes de ese navegador. Las apps dan de alta cada paquete por su cuenta | Ajustes › «Notificaciones» cubre todos los paquetes y puede avisarte por correo cuando llega uno |
+| [Notificaciones](guide:parcel-notifications) | En la web, «Notificarme» en la página de un paquete y luego, si quieres, todos los paquetes de ese navegador. En las apps, Ajustes › «Notificaciones» elige las novedades de cada paquete del dispositivo, y la campana de un paquete apaga las suyas | Ajustes › «Notificaciones» cubre todos los paquetes y puede avisarte por correo cuando llega uno |
 | [Añadir paquetes por correo](guide:add-parcels-by-email), [asistentes de IA](guide:ai-assistants) | No se ofrecen | Ajustes › «Añadir paquetes por correo» (Beta); «Asistentes» (Beta), solo en la web |
 | [Pasaporte y Amigos](guide:delivery-passport) | Web: sin pestañas, pero un paquete entregado que viene del extranjero ofrece «Empezar un pasaporte». Apps: las dos pestañas; Pasaporte cuenta los paquetes de ese dispositivo y Amigos te pide iniciar sesión | Las dos pestañas, en la web y en todas las apps |
-| Ajustes | Web: el botón del engranaje «Ajustes» contiene «Preferencias», con «Idioma» en la página de un paquete; en la página principal, el idioma está en el menú al pie de la página. Apps: «Preferencias» y «En este dispositivo» | «Entregas», «Preferencias» (con «Idioma») y «Cuenta y datos». En la web, solo «Punto en los paquetes actualizados» te sigue a tus otros dispositivos |
+| Ajustes | Web: el botón del engranaje «Ajustes» contiene «Preferencias», con «Idioma» en la página de un paquete; en la página principal, el idioma está en el menú al pie de la página. Apps: «Entregas» (con «Notificaciones»), «Preferencias» y «En este dispositivo» | «Entregas», «Preferencias» (con «Idioma») y «Cuenta y datos». En la web, solo «Punto en los paquetes actualizados» y «Peek IA» te siguen a tus otros dispositivos |
 | Tus datos | «Olvidarlo ahora» en la página de un paquete u «Olvidar todos»; las apps también tienen «Descargar mis datos» | «Descargar mis datos», «Cerrar sesión», «Eliminar cuenta» |
 
 Iniciar sesión lleva un minuto, con un código que Peek te envía por correo:
@@ -95,6 +95,7 @@ Todo el mundo tiene «Preferencias», con cuenta o sin ella, en la web y en las 
 - **«Formato de hora»**: «24 horas», «12 horas» o Automático.
 - **«Distancia»** y **«Peso»**: kilómetros o millas, kilogramos o libras. Si los dejas en Automático, siguen a tu dispositivo; con libras, los tamaños de los paquetes también salen en pulgadas.
 - **«Punto en los paquetes actualizados»**: «Aparece un punto en un paquete con novedades desde la última vez que lo abriste.»
+- **«Peek IA»**: «Cuando Peek tiene una pista clara, te dice cuándo cree que llegará el paquete.» Mira [la estimación de Peek IA](guide:peek-ai).
 
 Para añadir Peek a la pantalla de inicio de un iPhone y recibir notificaciones, mira [las notificaciones de entrega de paquetes](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Para añadir Peek a la pantalla de inicio de un iPhone y recibir notificaciones,
 - [Peek: autenticación (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – los 30 minutos del código, volver a iniciar sesión para eliminar
 - [Peek: ajustes de la web](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Entregas, Preferencias, Cuenta y datos, eliminar
 - [Peek: los ajustes de un visitante](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – las Preferencias del engranaje, con el idioma en la página de un paquete
-- [Peek: preferencias](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – apariencia, formato de hora, unidades, lo que se queda en el navegador
-- [Peek: ajustes del iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – los Ajustes sin cuenta, «En este dispositivo», el botón de la cuenta
+- [Peek: preferencias](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – apariencia, formato de hora, unidades, Peek IA, lo que se queda en el navegador
+- [Peek: ajustes del iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – los Ajustes sin cuenta, su página Notificaciones, «En este dispositivo», el botón de la cuenta
 - [Peek: ajustes de Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – lo mismo en Android
 - [Peek: límites (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 paquetes activos y 500 en total, los cupos diarios
 - [Peek: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – cada etiqueta citada aquí

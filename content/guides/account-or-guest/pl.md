@@ -4,7 +4,7 @@ description: Śledź przesyłkę w Peeku bez konta i bez hasła. Zobacz, co zost
 slug: sledzenie-przesylek-bez-konta
 picture: Pip, przesyłka z buzią, macha z ekranu telefonu, obok stoją laptop i tablet, a między nimi otwarte drzwi.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Nie potrzebujesz konta, żeby śledzić przesyłkę w [Peeku](/): wyszukaj ją, śledź, włącz jej powiadomienia i udostępnij, bez adresu e-mail i bez hasła. Zaloguj się, gdy chcesz mieć swoje przesyłki razem na stronie internetowej, iPhonie, iPadzie, Macu i Androidzie, albo dodatki, które daje konto, np. e-maile o doręczeniu i dodawanie przesyłek e-mailem.
@@ -17,10 +17,10 @@ Oto wszystko, co zmienia się po zalogowaniu:
 | Jak długo zostaje przesyłka | 30 dni po doręczeniu lub zwrocie albo 90 dni bez nowych informacji | Dopóki nie usuniesz jej albo konta; archiwizacja tylko ją ukrywa |
 | Ile przesyłek | 100 na liście w przeglądarce | 50 aktywnych i 500 łącznie |
 | Nowe przesyłki dziennie | Na stronie internetowej kilka wyszukiwań dziennie na każdą sieć, potem „Na dziś nie ma już wyszukiwań” | Dzienny limit dodawania przesyłek |
-| [Powiadomienia](guide:parcel-notifications) | Na stronie internetowej „Powiadom mnie” na stronie przesyłki, a potem, jeśli chcesz, wszystkie przesyłki w tej przeglądarce. Aplikacje same zapisują do powiadomień każdą przesyłkę | Ustawienia › „Powiadomienia” obejmują wszystkie przesyłki i mogą wysłać ci e-maila, gdy któraś dotrze |
+| [Powiadomienia](guide:parcel-notifications) | Na stronie internetowej „Powiadom mnie” na stronie przesyłki, a potem, jeśli chcesz, wszystkie przesyłki w tej przeglądarce. W aplikacjach Ustawienia › „Powiadomienia” ustalają, jakie aktualizacje dostaje każda przesyłka na urządzeniu, a dzwonek przesyłki wyłącza jej własne | Ustawienia › „Powiadomienia” obejmują wszystkie przesyłki i mogą wysłać ci e-maila, gdy któraś dotrze |
 | [Dodawanie przesyłek e-mailem](guide:add-parcels-by-email), [asystenci AI](guide:ai-assistants) | Niedostępne | Ustawienia › „Dodawaj przesyłki e-mailem” (Beta); „Asystenci” (Beta), tylko na stronie internetowej |
 | [Paszport i Znajomi](guide:delivery-passport) | Strona internetowa: bez tych zakładek, ale doręczona przesyłka z zagranicy proponuje „Załóż paszport”. Aplikacje: obie zakładki; Paszport liczy przesyłki na tym urządzeniu, a Znajomi proszą o zalogowanie | Obie zakładki, na stronie internetowej i we wszystkich aplikacjach |
-| Ustawienia | Strona internetowa: przycisk z kołem zębatym „Ustawienia” zawiera „Preferencje”, z pozycją „Język” na stronie przesyłki; na stronie głównej język wybiera się w menu na dole strony. Aplikacje: „Preferencje” i „Na tym urządzeniu” | „Dostawy”, „Preferencje” (z pozycją „Język”) i „Konto i dane”. Na stronie internetowej tylko „Kropka przy zaktualizowanych przesyłkach” przechodzi na twoje inne urządzenia |
+| Ustawienia | Strona internetowa: przycisk z kołem zębatym „Ustawienia” zawiera „Preferencje”, z pozycją „Język” na stronie przesyłki; na stronie głównej język wybiera się w menu na dole strony. Aplikacje: „Dostawy” (z pozycją „Powiadomienia”), „Preferencje” i „Na tym urządzeniu” | „Dostawy”, „Preferencje” (z pozycją „Język”) i „Konto i dane”. Na stronie internetowej tylko „Kropka przy zaktualizowanych przesyłkach” i „Peek AI” przechodzą na twoje inne urządzenia |
 | Twoje dane | „Zapomnij teraz” na stronie przesyłki albo „Zapomnij o wszystkich”; aplikacje mają też „Pobierz moje dane” | „Pobierz moje dane”, „Wyloguj się”, „Usuń konto” |
 
 Logowanie zajmuje minutę i wymaga kodu, który Peek wyśle ci e-mailem:
@@ -95,6 +95,7 @@ Każdy ma „Preferencje”, z kontem lub bez, na stronie internetowej i w aplik
 - **„Format czasu”**: „24-godzinny”, „12-godzinny” albo Automatycznie.
 - **„Odległość”** i **„Waga”**: kilometry albo mile, kilogramy albo funty. Ustawione na Automatycznie, dopasowują się do urządzenia; przy funtach wymiary przesyłek są też podawane w calach.
 - **„Kropka przy zaktualizowanych przesyłkach”**: „Kropka pojawia się przy przesyłce, w której coś się zmieniło od ostatniego otwarcia.”
+- **„Peek AI”**: „Gdy Peek ma mocną wskazówkę, podaje, kiedy jego zdaniem przyjdzie przesyłka.” Zobacz [prognozę dostawy Peek AI](guide:peek-ai).
 
 Żeby dodać Peeka do ekranu początkowego iPhone’a i dostawać powiadomienia, zobacz [powiadomienia o dostawie przesyłek](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Każdy ma „Preferencje”, z kontem lub bez, na stronie internetowej i w aplik
 - [Peek: uwierzytelnianie](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – 30 minut ważności kodu, ponowne logowanie przed usunięciem
 - [Peek: ustawienia na stronie internetowej](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Dostawy, Preferencje, Konto i dane, usuwanie
 - [Peek: ustawienia gościa](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – Preferencje pod kołem zębatym, z językiem na stronie przesyłki
-- [Peek: preferencje](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – wygląd, format czasu, jednostki, co zostaje w przeglądarce
-- [Peek: ustawienia na iPhonie](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Ustawienia bez konta, „Na tym urządzeniu”, przycisk konta
+- [Peek: preferencje](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – wygląd, format czasu, jednostki, Peek AI, co zostaje w przeglądarce
+- [Peek: ustawienia na iPhonie](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Ustawienia bez konta, ich strona „Powiadomienia”, „Na tym urządzeniu”, przycisk konta
 - [Peek: ustawienia na Androidzie](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – to samo na Androidzie
 - [Peek: limity](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 aktywnych i 500 przesyłek łącznie, dzienne limity
 - [Peek: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – każda cytowana tu etykieta

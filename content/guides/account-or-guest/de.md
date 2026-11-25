@@ -4,7 +4,7 @@ description: Verfolge ein Paket mit Peek ohne Konto und Passwort. Was auf deinem
 slug: sendungsverfolgung-ohne-konto
 picture: Pip, das Paket mit Gesicht, winkt aus einem Handybildschirm, daneben ein Laptop und ein Tablet und zwischen ihnen eine offene Tür.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Um ein Paket mit [Peek](/) zu verfolgen, brauchst du kein Konto: Frag es ab, verfolge es, schalte seine Benachrichtigungen ein und teile es, ohne E-Mail-Adresse und ohne Passwort. Melde dich an, wenn du deine Pakete auf der Website, auf iPhone, iPad, Mac und Android beisammen haben willst, oder für die Extras eines Kontos, etwa Zustell-E-Mails und das Hinzufügen von Paketen per E-Mail.
@@ -17,10 +17,10 @@ Das alles ändert sich, wenn du dich anmeldest:
 | Wie lange ein Paket bleibt | 30 Tage nach Zustellung oder Rücksendung oder 90 Tage ohne Neuigkeiten | Bis du es oder das Konto löschst; Archivieren blendet es nur aus |
 | Wie viele Pakete | 100 in der Liste eines Browsers | 50 aktive und 500 insgesamt |
 | Neue Pakete pro Tag | Auf der Website ein paar Abfragen pro Tag und Netzwerk, dann „Für heute sind die Abfragen aufgebraucht“ | Ein Tageskontingent zum Hinzufügen von Paketen |
-| [Benachrichtigungen](guide:parcel-notifications) | Auf der Website „Sag mir Bescheid“ auf der Seite eines Pakets, danach auf Wunsch für jedes Paket in diesem Browser. Die Apps melden jedes Paket selbst an | Einstellungen › „Mitteilungen“ gilt für jedes Paket und kann dir eine E-Mail schicken, wenn eines ankommt |
+| [Benachrichtigungen](guide:parcel-notifications) | Auf der Website „Sag mir Bescheid“ auf der Seite eines Pakets, danach auf Wunsch für jedes Paket in diesem Browser. In den Apps legt Einstellungen › „Mitteilungen“ fest, welche Aktualisierungen jedes Paket auf dem Gerät bekommt, und die Glocke eines Pakets schaltet seine eigenen ab | Einstellungen › „Mitteilungen“ gilt für jedes Paket und kann dir eine E-Mail schicken, wenn eines ankommt |
 | [Pakete per E-Mail hinzufügen](guide:add-parcels-by-email), [KI-Assistenten](guide:ai-assistants) | Nicht verfügbar | Einstellungen › „Pakete per E-Mail hinzufügen“ (Beta); „Assistenten“ (Beta), nur auf der Website |
 | [Reisepass und Freunde](guide:delivery-passport) | Website: keine Tabs, aber ein zugestelltes Paket aus dem Ausland bietet „Reisepass starten“ an. Apps: beide Tabs; der Reisepass zählt die Pakete auf diesem Gerät, Freunde bittet dich, dich anzumelden | Beide Tabs, auf der Website und in jeder App |
-| Einstellungen | Website: Der Zahnrad-Knopf „Einstellungen“ enthält „Präferenzen“, mit „Sprache“ auf der Seite eines Pakets; auf der Startseite steht die Sprache im Menü ganz unten. Apps: „Präferenzen“ und „Auf diesem Gerät“ | „Sendungen“, „Präferenzen“ (mit „Sprache“) und „Konto & Daten“. Auf der Website folgt dir nur „Punkt bei aktualisierten Paketen“ auf deine anderen Geräte |
+| Einstellungen | Website: Der Zahnrad-Knopf „Einstellungen“ enthält „Präferenzen“, mit „Sprache“ auf der Seite eines Pakets; auf der Startseite steht die Sprache im Menü ganz unten. Apps: „Sendungen“ (mit „Mitteilungen“), „Präferenzen“ und „Auf diesem Gerät“ | „Sendungen“, „Präferenzen“ (mit „Sprache“) und „Konto & Daten“. Auf der Website folgen dir nur „Punkt bei aktualisierten Paketen“ und „Peek AI“ auf deine anderen Geräte |
 | Deine Daten | „Jetzt vergessen“ auf der Seite eines Pakets oder „Alle vergessen“; die Apps haben auch „Meine Daten herunterladen“ | „Meine Daten herunterladen“, „Abmelden“, „Konto löschen“ |
 
 Die Anmeldung dauert eine Minute, mit einem Code, den Peek dir per E-Mail schickt:
@@ -95,6 +95,7 @@ Alle haben „Präferenzen“, mit oder ohne Konto, auf der Website und in den A
 - **„Zeitformat“**: „24 Stunden“, „12 Stunden“ oder Automatisch.
 - **„Entfernung“** und **„Gewicht“**: Kilometer oder Meilen, Kilogramm oder Pfund. Stehen sie auf Automatisch, folgen sie deinem Gerät; mit Pfund werden Paketgrößen auch in Zoll angegeben.
 - **„Punkt bei aktualisierten Paketen“**: „Ein Punkt erscheint bei einem Paket, bei dem sich seit dem letzten Öffnen etwas getan hat.“
+- **„Peek AI“**: „Wenn Peek einen starken Hinweis hat, sagt es dir, wann ein Paket wohl kommt.“ Siehe [die Lieferschätzung von Peek AI](guide:peek-ai).
 
 Wie du Peek für Benachrichtigungen auf den Home-Bildschirm eines iPhones legst, steht in [Paketbenachrichtigungen](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Wie du Peek für Benachrichtigungen auf den Home-Bildschirm eines iPhones legst,
 - [Peek: Authentifizierung (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – die 30 Minuten des Codes, erneut anmelden zum Löschen
 - [Peek: Einstellungen der Website](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Sendungen, Präferenzen, Konto & Daten, Löschen
 - [Peek: Einstellungen ohne Konto](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – die Präferenzen hinter dem Zahnrad-Knopf, mit der Sprache auf der Seite eines Pakets
-- [Peek: Präferenzen](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – Darstellung, Zeitformat, Einheiten, was im Browser bleibt
-- [Peek: Einstellungen auf dem iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Einstellungen ohne Konto, „Auf diesem Gerät“, der Konto-Knopf
+- [Peek: Präferenzen](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – Darstellung, Zeitformat, Einheiten, Peek AI, was im Browser bleibt
+- [Peek: Einstellungen auf dem iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Einstellungen ohne Konto, ihre Seite „Mitteilungen“, „Auf diesem Gerät“, der Konto-Knopf
 - [Peek: Einstellungen unter Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – dasselbe unter Android
 - [Peek: Grenzen (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 aktive und 500 Pakete, die Tageskontingente
 - [Peek: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – jede hier zitierte Beschriftung

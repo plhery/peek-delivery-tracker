@@ -4,7 +4,7 @@ description: Suis un colis sur Peek sans compte ni mot de passe. Ce qui reste su
 slug: suivi-colis-sans-compte
 picture: Pip, le colis avec un visage, fait coucou depuis l'écran d'un téléphone, à côté d'un ordinateur portable et d'une tablette, avec une porte ouverte entre eux.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Pas besoin de compte pour suivre un colis sur [Peek](/) : recherche-le, suis-le, active ses notifications et partage-le, sans adresse e-mail ni mot de passe. Connecte-toi quand tu veux retrouver tes colis ensemble sur le site, sur iPhone, iPad, Mac et Android, ou pour les extras d'un compte, comme les e-mails de livraison et l'ajout de colis par e-mail.
@@ -17,10 +17,10 @@ Voici tout ce qui change quand tu te connectes :
 | Combien de temps un colis reste | 30 jours après la livraison ou le retour, ou 90 jours sans nouvelles | Jusqu'à ce que tu le supprimes, lui ou le compte ; l'archiver ne fait que le masquer |
 | Combien de colis | 100 dans la liste d'un navigateur | 50 actifs et 500 en tout |
 | Nouveaux colis par jour | Sur le site, quelques recherches par jour pour chaque réseau, puis « Plus de recherches pour aujourd’hui » | Un quota quotidien pour ajouter des colis |
-| [Notifications](guide:parcel-notifications) | Sur le site, « Préviens-moi » sur la page d'un colis, puis, si tu veux, chaque colis de ce navigateur. Les apps inscrivent chaque colis elles-mêmes | Réglages › « Notifications » couvre tous les colis, et peut t'envoyer un e-mail quand l'un d'eux arrive |
+| [Notifications](guide:parcel-notifications) | Sur le site, « Préviens-moi » sur la page d'un colis, puis, si tu veux, chaque colis de ce navigateur. Dans les apps, Réglages › « Notifications » choisit les mises à jour de chaque colis de l'appareil, et la cloche d'un colis coupe les siennes | Réglages › « Notifications » couvre tous les colis, et peut t'envoyer un e-mail quand l'un d'eux arrive |
 | [Ajouter des colis par e-mail](guide:add-parcels-by-email), [assistants IA](guide:ai-assistants) | Pas proposé | Réglages › « Ajouter des colis par e-mail » (Bêta) ; « Assistants » (Bêta), sur le site seulement |
 | [Passeport et Amis](guide:delivery-passport) | Site : pas d'onglets, mais un colis livré venu de l'étranger propose « Commencer un passeport ». Apps : les deux onglets ; Passeport compte les colis de cet appareil, Amis te demande de te connecter | Les deux onglets, sur le site et dans chaque app |
-| Réglages | Site : le bouton engrenage « Réglages » contient « Préférences », avec « Langue » sur la page d'un colis ; sur la page d'accueil, la langue est dans le menu en bas de page. Apps : « Préférences » et « Sur cet appareil » | « Livraisons », « Préférences » (avec « Langue ») et « Compte et données ». Sur le site, seul « Point sur les colis mis à jour » te suit sur tes autres appareils |
+| Réglages | Site : le bouton engrenage « Réglages » contient « Préférences », avec « Langue » sur la page d'un colis ; sur la page d'accueil, la langue est dans le menu en bas de page. Apps : « Livraisons » (avec « Notifications »), « Préférences » et « Sur cet appareil » | « Livraisons », « Préférences » (avec « Langue ») et « Compte et données ». Sur le site, seuls « Point sur les colis mis à jour » et « Peek IA » te suivent sur tes autres appareils |
 | Tes données | « L’oublier maintenant » sur la page d'un colis ou « Tout oublier » ; les apps ont aussi « Télécharger mes données » | « Télécharger mes données », « Se déconnecter », « Supprimer le compte » |
 
 Se connecter prend une minute, avec un code que Peek t'envoie par e-mail :
@@ -95,6 +95,7 @@ Tout le monde a « Préférences », avec ou sans compte, sur le site et dans le
 - **« Format de l’heure »** : « 24 heures », « 12 heures » ou Automatique.
 - **« Distance »** et **« Poids »** : kilomètres ou miles, kilogrammes ou livres. Laissés sur Automatique, ils suivent ton appareil ; les livres donnent aussi les dimensions des colis en pouces.
 - **« Point sur les colis mis à jour »** : « Un point apparaît sur un colis qui a bougé depuis la dernière fois que tu l’as ouvert. »
+- **« Peek IA »** : « Quand Peek a un indice solide, il te dit quand il pense que le colis arrivera. » Voir [l'estimation de Peek IA](guide:peek-ai).
 
 Pour ajouter Peek à l'écran d'accueil d'un iPhone et recevoir ses notifications, voir [Notifications de livraison](guide:parcel-notifications).
 
@@ -108,8 +109,8 @@ Pour ajouter Peek à l'écran d'accueil d'un iPhone et recevoir ses notification
 - [Peek : authentification (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/AUTHENTICATION.md) – les 30 minutes du code, se reconnecter pour supprimer
 - [Peek : réglages du site](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AccountMenu.tsx) – Livraisons, Préférences, Compte et données, la suppression
 - [Peek : les réglages d'un visiteur](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/GuestSettings.tsx) – les Préférences du bouton engrenage, avec la langue sur la page d'un colis
-- [Peek : préférences](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – apparence, format de l'heure, unités, ce qui reste dans le navigateur
-- [Peek : réglages sur iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – les Réglages sans compte, « Sur cet appareil », le bouton du compte
+- [Peek : préférences](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Preferences.tsx) – apparence, format de l'heure, unités, Peek IA, ce qui reste dans le navigateur
+- [Peek : réglages sur iPhone](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – les Réglages sans compte, leur page Notifications, « Sur cet appareil », le bouton du compte
 - [Peek : réglages sur Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – la même chose sur Android
 - [Peek : limites (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – 50 colis actifs et 500 en tout, les quotas quotidiens
 - [Peek : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – chaque libellé cité ici

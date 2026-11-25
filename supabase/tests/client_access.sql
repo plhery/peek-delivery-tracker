@@ -7,12 +7,12 @@ do $$
 declare
   anon_functions constant text[] := array['missing_migrations'];
   authenticated_functions constant text[] := array[
-    'change_owned_package_carrier', 'change_owned_package_carrier_with_digits', 'claim_parcel_link', 'delete_owned_archived_package',
-    'delete_owned_package', 'friends_action', 'friends_activity', 'friends_snapshot',
-    'mark_owned_package_seen', 'missing_migrations', 'owned_delivery_emails', 'owned_package_share',
+    'add_package_file', 'change_owned_package_carrier', 'change_owned_package_carrier_with_digits', 'claim_parcel_link',
+    'delete_owned_archived_package', 'delete_owned_package', 'delete_package_file', 'friends_action', 'friends_activity',
+    'friends_snapshot', 'mark_owned_package_seen', 'missing_migrations', 'owned_delivery_emails', 'owned_package_share',
     'record_account_opened', 'rename_owned_package', 'set_owned_notification_preferences', 'patch_owned_notification_preferences',
     'set_owned_package_archived', 'set_owned_package_email_muted',
-    'set_owned_package_notifications_muted', 'set_owned_package_provider_postcode',
+    'set_owned_package_notifications_muted', 'set_owned_package_provider_postcode', 'set_package_note',
     'share_owned_package', 'stop_owned_package_share'
   ];
   found text;

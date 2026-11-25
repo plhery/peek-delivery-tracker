@@ -43,9 +43,9 @@ begin
       end if;
     end loop;
   end loop;
-  if not has_function_privilege('authenticated', 'public.claim_parcel_link(text,text,text)', 'EXECUTE')
-      or has_function_privilege('anon', 'public.claim_parcel_link(text,text,text)', 'EXECUTE')
-      or has_function_privilege('service_role', 'public.claim_parcel_link(text,text,text)', 'EXECUTE') then
+  if not has_function_privilege('authenticated', 'public.claim_parcel_link(text,text,text,text)', 'EXECUTE')
+      or has_function_privilege('anon', 'public.claim_parcel_link(text,text,text,text)', 'EXECUTE')
+      or has_function_privilege('service_role', 'public.claim_parcel_link(text,text,text,text)', 'EXECUTE') then
     raise exception 'Keeping a parcel must be reserved to signed-in accounts';
   end if;
 end;

@@ -127,7 +127,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     const sheet = screen.getByRole('dialog', { name: 'Add a note' });
     expect(within(sheet).queryByRole('button', { name: 'Wrong status' })).toBeNull();
     expect(within(sheet).getByRole('button', { name: 'Send' })).toBeDisabled();
-    await user.type(within(sheet).getByLabelText('Anything to add? Optional'), ' Asked the neighbours. ');
+    await user.type(within(sheet).getByLabelText('What happened?'), ' Asked the neighbours. ');
     await user.click(within(sheet).getByRole('button', { name: 'Send' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(send).toHaveBeenLastCalledWith({ id, answer: 'not_received', pageSaid: 'delivered', note: 'Asked the neighbours.', asked: 'page', app: 'web', locale: 'en' });

@@ -452,7 +452,7 @@ function WrongSheet({ feedback, initial, choose = true, dismiss }: {
       {feedback.reasons.map((reason) => <button key={reason} type="button" className="peekfb-chip" aria-pressed={picked.includes(reason)} onClick={() => toggle(reason)}>{t(REASON_KEYS[reason])}</button>)}
     </div>}
     <div className={choose ? 'peekfb-field' : 'peekfb-field peekfb-field--first'}>
-      <label htmlFor={field}>{t('feedback.note')}</label>
+      <label htmlFor={field}>{t(choose ? 'feedback.note' : 'feedback.missing.note')}</label>
       <textarea id={field} rows={2} maxLength={NOTE_LIMIT} value={note} onChange={(event) => setNote(event.target.value)}
         aria-describedby={left <= NOTE_WARNING ? `${field}-left` : undefined} />
       {left <= NOTE_WARNING && <p id={`${field}-left`} className="peekfb-left">{t('feedback.noteLeft.many', { count: left })}</p>}

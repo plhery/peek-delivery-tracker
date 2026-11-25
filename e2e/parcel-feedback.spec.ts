@@ -56,7 +56,7 @@ test('tells a reader who hasn’t received the parcel what to do, on a phone at 
 
   await bubble.getByRole('button', { name: 'Add a note' }).click();
   const sheet = page.getByRole('dialog', { name: 'Add a note' });
-  await sheet.getByLabel('Anything to add? Optional').fill('Nothing in the letterbox.');
+  await sheet.getByLabel('What happened?').fill('Nothing in the letterbox.');
   await sheet.getByRole('button', { name: 'Send' }).click();
   await expect(sheet).toHaveCount(0);
   await expect(bubble.getByText('Thanks, noted.')).toBeVisible();

@@ -1279,6 +1279,7 @@
   "feedback.missing.writtenAhead": "{{carrier}} 会提前写好这些步骤，并非真实扫描。请问问卖家你的包裹在哪里。",
   "feedback.missing.inTransit": "{{carrier}} 还没有送达。如果迟迟未到，请询问卖家或联系 {{carrier}}。",
   "feedback.missing.noted": "谢谢，已记下。",
+  "feedback.missing.note": "发生了什么？",
   "feedback.pip.sent": "谢谢！我会去看看。",
   "feedback.addNote": "添加备注",
   "feedback.note": "还有要补充的吗？（可选）",

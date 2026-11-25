@@ -1279,6 +1279,7 @@
   "feedback.missing.writtenAhead": "{{carrier}} registra essas etapas com antecedência: não são movimentações reais. Pergunte ao vendedor onde está sua encomenda.",
   "feedback.missing.inTransit": "{{carrier}} ainda não a entregou. Se estiver atrasada, fale com o vendedor ou com {{carrier}}.",
   "feedback.missing.noted": "Valeu, anotado.",
+  "feedback.missing.note": "O que aconteceu?",
   "feedback.pip.sent": "Valeu! Vou dar uma olhada.",
   "feedback.addNote": "Adicionar uma observação",
   "feedback.note": "Algo a acrescentar? Opcional",

@@ -1279,6 +1279,7 @@
   "feedback.missing.writtenAhead": "{{carrier}} вносит эти этапы заранее, это не настоящие отметки. Спросите продавца, где ваша посылка.",
   "feedback.missing.inTransit": "По данным {{carrier}}, посылка ещё не вручена. Если она задерживается, спросите продавца или свяжитесь с {{carrier}}.",
   "feedback.missing.noted": "Спасибо, записано.",
+  "feedback.missing.note": "Что случилось?",
   "feedback.pip.sent": "Спасибо! Я разберусь.",
   "feedback.addNote": "Добавить комментарий",
   "feedback.note": "Хотите что-то добавить? Необязательно",

@@ -1266,7 +1266,7 @@ private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
                 }
             }
         }
-        val label = localizer.text("feedback.note")
+        val label = localizer.text(if (missing) "feedback.missing.note" else "feedback.note")
         FeedbackField(label) { focused ->
             BasicTextField(
                 work.note,

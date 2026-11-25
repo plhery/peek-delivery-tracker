@@ -571,6 +571,9 @@ private struct ParcelFeedbackWordsSheet: View {
 
     private var noteLeft: Int { ParcelFeedbackRequest.noteLimit - note.unicodeScalars.count }
 
+    /// The note is the only thing a missing parcel's sheet sends, so its label doesn't call it optional.
+    private var noteLabel: String { missing ? "feedback.missing.note" : "feedback.note" }
+
     var body: some View {
         FeedbackSheet(title: localizer.text(missing ? "feedback.addNote" : "feedback.whatsOff"), busy: model.sending, writing: writing) {
             if !missing {
@@ -578,8 +581,8 @@ private struct ParcelFeedbackWordsSheet: View {
                     ForEach(model.page?.reasons ?? ParcelFeedbackReason.allCases) { reason in chip(reason) }
                 }
             }
-            FeedbackField(label: localizer.text("feedback.note"), focused: writing) { writing = true } input: {
-                TextField(text: $note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("feedback.note")) }
+            FeedbackField(label: localizer.text(noteLabel), focused: writing) { writing = true } input: {
+                TextField(text: $note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text(noteLabel)) }
                     .drawnField()
                     .lineLimit(2...6)
                     .focused($writing)

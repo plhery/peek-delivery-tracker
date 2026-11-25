@@ -1279,6 +1279,7 @@
   "feedback.missing.writtenAhead": "Przewoźnik {{carrier}} wpisuje te etapy z góry, to nie są prawdziwe skany. Zapytaj sprzedawcę, gdzie jest twoja przesyłka.",
   "feedback.missing.inTransit": "Przewoźnik {{carrier}} jeszcze jej nie doręczył. Jeśli się spóźnia, zapytaj sprzedawcę lub skontaktuj się z przewoźnikiem {{carrier}}.",
   "feedback.missing.noted": "Dzięki, zapisane.",
+  "feedback.missing.note": "Co się stało?",
   "feedback.pip.sent": "Dzięki! Przyjrzę się temu.",
   "feedback.addNote": "Dodaj notatkę",
   "feedback.note": "Chcesz coś dodać? Opcjonalnie",

@@ -1279,6 +1279,7 @@
   "feedback.missing.writtenAhead": "{{carrier}} scrive questi passaggi in anticipo: non sono scansioni reali. Chiedi al venditore dov’è il tuo pacco.",
   "feedback.missing.inTransit": "{{carrier}} non l’ha ancora consegnato. Se è in ritardo, contatta il venditore o {{carrier}}.",
   "feedback.missing.noted": "Grazie, annotato.",
+  "feedback.missing.note": "Cos’è successo?",
   "feedback.pip.sent": "Grazie! Ci do un’occhiata.",
   "feedback.addNote": "Aggiungi una nota",
   "feedback.note": "Qualcosa da aggiungere? Facoltativo",

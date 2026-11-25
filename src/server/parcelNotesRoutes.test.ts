@@ -107,7 +107,7 @@ beforeEach(async () => {
   userRequest = vi.spyOn(SupabaseUserClient.prototype, 'request').mockImplementation(database);
   photo ??= await sharp({ create: { width: 800, height: 600, channels: 3, background: { r: 10, g: 120, b: 200 } } }).jpeg().toBuffer();
 });
-afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); vi.useRealTimers(); });
 
 describe('PATCH /api/packages/{id}', () => {
   it('writes the note, the name or both, and serves the parcel with its note', async () => {
@@ -274,6 +274,9 @@ describe('GET /api/files/{fileId}', () => {
   });
 
   it('serves the owner\'s file through its signed address, to the reader\'s own cache only', async () => {
+    // Mid-quarter: an address signed in the last second before a quarter hour is read just after it, at 900 s or less.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-25T23:07:30Z'));
     const expires = fileAddressExpiry();
     const response = await read(signedFileAddress(stored.id, userId, 'full', expires)!);
     expect(response.status).toBe(200);

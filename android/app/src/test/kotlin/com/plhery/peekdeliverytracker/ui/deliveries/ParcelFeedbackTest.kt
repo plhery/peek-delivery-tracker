@@ -357,7 +357,7 @@ class ParcelFeedbackTest {
         tap(FEEDBACK_REASON + ParcelFeedbackReason.Steps.name)
         settle()
         assertTrue(shows(FEEDBACK_BUBBLE, "Thanks! I’ll look into it."))
-        assertTrue(shows(FEEDBACK_ADD_NOTE, "Add a note"))
+        assertTrue(shows(FEEDBACK_ADD_NOTE, "Add details"))
         assertEquals("Thanks! I’ll look into it.", announced())
         val given = source.feedbackRequests.single().second
         assertEquals(ParcelFeedbackAnswer.Wrong, given.answer)
@@ -616,7 +616,7 @@ class ParcelFeedbackTest {
         settle()
         assertFalse(exists(FEEDBACK_WORDS_SHEET))
         assertFalse(deliveries.modal)
-        assertTrue(shows(FEEDBACK_ADD_NOTE, "Add a note"))
+        assertTrue(shows(FEEDBACK_ADD_NOTE, "Add details"))
         assertEquals(1, source.feedbackRequests.size)
     }
 

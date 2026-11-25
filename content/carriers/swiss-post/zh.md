@@ -1,6 +1,6 @@
 ---
 title: Swiss Post 瑞士邮政查询：单号、状态说明与取件通知
-description: 查询 Swiss Post 瑞士邮政包裹：单号格式、物流状态说明、取件通知单与 My Post 24 自提柜期限、海关及联系方式。
+description: 查询 Swiss Post 瑞士邮政包裹：单号的样子、每个英文状态的含义、收到取件通知单后怎么办、海关以及如何联系瑞士邮政。
 slug: swiss-post-tracking
 published: 2026-11-24
 updated: 2026-11-24
@@ -10,14 +10,14 @@ Swiss Post（瑞士邮政，德语 Die Post、法语 La Poste、意大利语 La 
 
 ## Swiss Post 运单号格式
 
-单号通常由寄件人在交寄前生成。瑞士邮政未公布完整的格式清单，以下是 Peek 识别的瑞士邮政专属格式：
+单号由寄件人生成，通常在交寄之前。瑞士邮政未公布格式清单，以下是 Peek 识别的瑞士邮政专属格式：
 
-| 单号（示例） | 说明 |
+| 单号（虚构） | 说明 |
 | --- | --- |
 | `RR482917367CH` | 两位字母、九位数字加 `CH`：瑞士签发的国际邮政单号。`CH` 前的最后一位是校验位。 |
 | `99.48.291736.05841926` | 以 `98` 或 `99` 开头的 18 位数字，带或不带小数点与空格：瑞士邮政境内条码号。 |
 
-建议直接复制粘贴而非手打：错一位、少一位或多一位都可能被识别成其他快递。以 `44` 开头的 18 位数字属于 Quickpac。托盘和其他货运件由瑞士邮政旗下的货运品牌 Swiss Post Cargo 承运，并有独立查询系统。来自境外的包裹进入瑞士后仍保留原国外单号（例如以 `DE`、`FR` 结尾）：比如来自法国商家的 Delivengo 包裹仍使用以 `FR` 结尾的法国邮政单号。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
+建议直接复制粘贴而非手打：错一位、少一位或多一位都会让它看起来像其他快递的单号。以 `44` 开头的 18 位数字属于 Quickpac。托盘和其他货运件由瑞士邮政旗下的货运品牌 Swiss Post Cargo 承运，并有独立查询系统。来自境外的包裹进入瑞士后仍保留原国外单号（例如以 `DE`、`FR` 结尾）：比如来自法国商家的 Delivengo 包裹仍使用以 `FR` 结尾的法国邮政单号。找不到单号？请看[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## Swiss Post 物流状态说明
 
@@ -62,19 +62,19 @@ post.ch 会按你选用的网页语言（英文、德文、法文或意大利文
 
 **破损。** 须在签收后 8 天内在线申报、在 Post-App 中通过“Receive”>“Report damage”提交，或携带包裹及原包装前往邮政网点办理。
 
-**进口费用。** 境外寄入的包裹需缴纳增值税、关税以及瑞士邮政的清关服务费，可在 Post-App 中在线支付。收费标准可能会调整，请查看[瑞士邮政进口清关说明](https://www.post.ch/en/receiving-mail/import-customs-clearance)及 Peek 的[海关指南](guide:customs)（英文）。
+**进口费用。** 境外寄入的包裹需缴纳增值税、关税以及瑞士邮政的清关服务费，可在 Post-App 中在线支付。收费标准会调整，请查看[瑞士邮政进口清关说明](https://www.post.ch/en/receiving-mail/import-customs-clearance)及 Peek 的[海关指南](guide:customs)（英文）。
 
 ## Swiss Post 客服电话、在线聊天与 WhatsApp
 
 post.ch 公布的联系方式如下：
 
 - **电话：** +41 848 888 888（瑞士固话拨打每分钟 0.08 瑞士法郎），周一至周五 7:30 至 18:00，周六 8:00 至 12:00。
-- **在线聊天：** 智能客服后台可转接人工专员，入口位于德文、法文和意大利文联系页面。
+- **在线聊天：** 聊天机器人，背后有专员支持，入口位于德文、法文和意大利文联系页面。
 - **WhatsApp：** 与电话、在线聊天并列，可用于修改派送指令。
 - **查件表单：** 在[收件帮助页面](https://www.post.ch/en/help-and-contact/receiving-mail)可选择“Start a domestic enquiry”或“Start an international enquiry”。
 - **网点办理：** 修改派送指令也可携带有效身份证件前往邮局网点办理。
 
-> 瑞士邮政提醒警惕虚假包裹通知，例如声称包裹被“扣留”或要求点击链接支付小额关税/邮费。瑞士邮政绝不会通过短信或邮件索要密码、验证码或完整银行卡号。查询包裹请仅使用 swisspost.ch 或官方 Post-App。
+> 瑞士邮政提醒警惕虚假包裹通知，例如声称包裹被“扣留”或要求点击链接支付小额关税/邮费。瑞士邮政绝不会通过短信或邮件索要密码、验证码或完整银行卡信息。查询包裹请仅使用 swisspost.ch 或官方 Post-App。
 
 ## 使用 Peek 跟踪 Swiss Post 包裹
 
@@ -84,17 +84,17 @@ Peek 会读取瑞士邮政的英文状态文本，如果你在 Peek 中使用德
 
 `Delivered` 会显示为 Peek 的“已签收”。`Registered for collection` 和 `Deposited in the MyPost24 machine` 会显示为“待取件”。
 
-在瑞士邮政官网正常响应期间，Peek 最高每 10 分钟检查一次；包裹派送当天，自瑞士时间早上 6 点起（若瑞士邮政给出了派送时段，则最早从该时段开始前半小时起）最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并支持“每次扫描”、“重要环节”或“仅派送当天”提醒。连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后），Peek 改为每小时检查一次。寄往瑞士的 GLS Switzerland 包裹和外国邮政单号可以自动延续到瑞士邮政跟踪；从瑞士寄往境外的 `CH` 单号，当 Peek 支持目的地国家邮政（例如德国、法国或意大利）且对方出现更新扫描时，也会继续跟踪。
+在瑞士邮政官网正常响应期间，Peek 最高每 10 分钟检查一次；包裹派送当天，自瑞士时间早上 6 点起（若瑞士邮政给出了派送时段，则最早从该时段开始前半小时起）最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并支持“每次扫描”、“重要环节”或“仅派送当天”提醒。连续两天无新动态后（若仍处于“已生成面单”或“已揽收”，则为 12 小时后），Peek 改为每小时检查一次。GLS Switzerland 包裹和寄往瑞士的外国邮政单号可以延续到瑞士邮政跟踪；从瑞士寄往境外的 `CH` 单号，当 Peek 支持目的地国家邮政（例如德国、法国或意大利）且对方出现更新扫描时，也会继续跟踪。
 
 ## Swiss Post 快递查询常见问题
 
 ### Swiss Post 周六派送吗？
 
-是的，前提是在“My consignments”中提前预约：事先选择收费 3.80 瑞士法郎，错过派送后作为二次派送预约收费 7 瑞士法郎。
+是的，前提是在“My consignments”中预约：事先选择收费 3.80 瑞士法郎，错过派送后作为二次派送预约收费 7 瑞士法郎。
 
 ### Swiss Post 显示“delivery date unknown”是什么意思？
 
-说明瑞士邮政暂时无法确定送达日期，常见原因是包裹来自境外、寄往境外，或寄件人已预报但尚未实际交寄。
+说明瑞士邮政暂时无法确定送达日期，因为包裹来自境外、寄往境外，或寄件人已预报但尚未实际交寄。
 
 ### 什么是 Swiss Post 的派送授权？
 
@@ -117,4 +117,6 @@ Peek 会读取瑞士邮政的英文状态文本，如果你在 Peek 中使用德
 - [Swiss Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – 在线聊天入口
 - [Swiss Post: Recognize phishing and fraud](https://site.post.ch/en/about-us/security/phishing-and-fraud) – 虚假通知防骗提示
 - [Swiss Post: Receipt locations](https://www.post.ch/en/receiving-mail/receipt-locations) – PickPost 自提点与 My Post 24 自提柜
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – Peek 读取的扫描文案
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

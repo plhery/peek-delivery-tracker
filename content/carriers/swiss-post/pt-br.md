@@ -1,6 +1,6 @@
 ---
 title: Rastreamento Swiss Post: status, retirada e contato
-description: Rastreie uma encomenda da Swiss Post: formato dos códigos, significado dos status, aviso de retirada, prazos de guarda e contato.
+description: Rastreie uma encomenda da Swiss Post: formato dos códigos, significado dos status, o que fazer após um aviso de retirada e como contatar a Swiss Post.
 slug: rastreamento-swiss-post
 published: 2026-11-24
 updated: 2026-11-24
@@ -14,10 +14,10 @@ O remetente gera o código, normalmente antes de entregar a encomenda aos correi
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `RR482917367CH` | Duas letras, nove dígitos e `CH`: código postal internacional emitido na Suíça. O último dígito antes de `CH` é o dígito verificador. |
+| `RR482917367CH` | Duas letras, nove dígitos e `CH`: código de rastreamento postal internacional emitido na Suíça. O último dígito antes de `CH` é o dígito verificador. |
 | `99.48.291736.05841926` | 18 dígitos começando com `98` ou `99`, com ou sem pontos ou espaços: código de barras doméstico da Swiss Post. |
 
-Copie o código em vez de digitar: um dígito errado, faltando ou sobrando faz com que ele pareça de outra transportadora. Códigos de 18 dígitos começando com `44` pertencem à Quickpac. Paletes e outras cargas viajam pela Swiss Post Cargo, a divisão de cargas da Swiss Post, que tem rastreador próprio. Uma encomenda vinda do exterior mantém seu código estrangeiro (terminado em `DE`, `FR` e assim por diante) também na Suíça: um pacote Delivengo de uma loja francesa, por exemplo, mantém o número da La Poste terminado em `FR`. Sem nenhum código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
+Copie o código em vez de digitar: um dígito errado, faltando ou sobrando faz com que ele pareça de outra transportadora. Códigos de 18 dígitos começando com `44` pertencem à Quickpac. Paletes e outras cargas viajam pela Swiss Post Cargo, a marca de cargas da Swiss Post, que tem rastreador próprio. Uma encomenda vinda do exterior mantém seu código estrangeiro (terminado em `DE`, `FR` e assim por diante) também na Suíça: um pacote Delivengo de uma loja francesa, por exemplo, mantém o número da La Poste terminado em `FR`. Sem nenhum código? Veja [como encontrar o código de rastreamento](guide:find-tracking-number).
 
 ## Status do rastreamento Swiss Post explicados
 
@@ -40,7 +40,7 @@ O site post.ch exibe cada registro no idioma em que você o abre (inglês, alem�
 
 `Registered for collection` parece algo burocrático, mas indica uma entrega sem sucesso com aviso de retirada. `Consignment recorded by the foreign sender (data delivered)` significa apenas que o remetente no exterior enviou os dados eletrônicos: nada foi entregue. `Returned item`, com um motivo como `Reason: Not collected`, significa que a encomenda está voltando ao remetente.
 
-## Entrega perdida na Swiss Post: avisos de retirada e coleta
+## Entrega não realizada na Swiss Post: avisos de retirada e coleta
 
 No dia anterior à entrega, a Swiss Post envia aviso por SMS, e-mail ou notificação no Post-App. Com o serviço "My consignments", você geralmente recebe uma janela de 40 a 120 minutos.
 
@@ -84,7 +84,7 @@ O Peek lê os textos em inglês da Swiss Post — ou em alemão, francês ou ita
 
 `Delivered` aparece como "Entregue" no Peek. `Registered for collection` e `Deposited in the MyPost24 machine` aparecem como "Pronta para retirada".
 
-O Peek verifica até a cada 10 minutos, ou a cada 2 minutos no dia em que a encomenda sai para entrega, a partir das 6h no horário suíço e, quando a Swiss Post informa janela de horário, não antes de meia hora do início dela, enquanto o rastreador da Swiss Post responder (por serviços de rastreamento, até a cada 15 minutos enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Encomendas da GLS Switzerland e códigos postais estrangeiros enviados para a Suíça podem ser acompanhados até a Swiss Post; códigos `CH` enviados ao exterior seguem até os correios nacionais do país de destino quando o Peek os reconhece (Alemanha, França ou Itália, por exemplo), assim que mostrarem avanço mais recente.
+O Peek verifica até a cada 10 minutos, ou a cada 2 minutos no dia em que a encomenda sai para entrega, a partir das 6h no horário suíço e, quando a Swiss Post informa janela de horário, a partir de meia hora antes do início dela, enquanto o rastreador da Swiss Post responder (por meio de serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados), e pode avisar em "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidade (12 horas enquanto ainda mostra "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Encomendas da GLS Switzerland e códigos de rastreamento postais estrangeiros enviados para a Suíça podem ser acompanhados até a Swiss Post; códigos `CH` enviados ao exterior seguem até os correios nacionais do país de destino quando o Peek os reconhece (Alemanha, França ou Itália, por exemplo), assim que mostrarem avanço mais recente.
 
 ## Perguntas sobre o rastreamento Swiss Post
 
@@ -117,4 +117,6 @@ Os armários da Swiss Post são os terminais My Post 24 — mais de 320, abertos
 - [Swiss Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – chat
 - [Swiss Post: Recognize phishing and fraud](https://site.post.ch/en/about-us/security/phishing-and-fraud) – mensagens falsas
 - [Swiss Post: Receipt locations](https://www.post.ch/en/receiving-mail/receipt-locations) – PickPost e My Post 24
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – os textos dos eventos que o Peek lê
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

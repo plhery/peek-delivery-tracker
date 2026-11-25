@@ -55,7 +55,7 @@ Se a primeira linha não mudar em 2 a 3 dias, a Hermes orienta falar com o remet
 
 **Sem atualização.** A Hermes não lista cada etapa, então um dia sem movimento pode ser normal. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating).
 
-**Desaparecido.** Após 5 dias úteis sem avanço, peça ao atendimento que faça uma busca pelo formulário de contato. Se a busca não localizar o pacote em 20 dias (30 em envios internacionais), a Hermes envia por e-mail um formulário de extravio. Pelos termos dela, quem solicita indenização é o remetente, então avise também a loja.
+**Desaparecido.** Após 5 dias úteis, peça ao atendimento que faça uma busca pelo formulário de contato. Se a busca não localizar o pacote em 20 dias (30 em envios internacionais), a Hermes envia por e-mail um formulário de extravio. Pelos termos dela, quem solicita indenização é o remetente, então avise também a loja.
 
 **Avariado.** Para compras em lojas online, a Hermes direciona você à própria loja. Em envios de remetentes particulares, relate danos visíveis na entrega e danos ocultos em até 7 dias, segundo os termos da Hermes.
 
@@ -125,4 +125,5 @@ Não. A Hermes encerrou o atendimento por WhatsApp e não divulga um e-mail de a
 - [Hermes: Sicherheitshinweise](https://www.myhermes.de/sicherheit/) – sem SMS
 - [Hermes: Hermes auf einen Blick](https://www.hermesworld.com/de/ueber-uns/auf-einen-blick/hermes-auf-einen-blick/) – Grupo Otto
 - [Evri: About us](https://www.evri.com/about-us) – antiga Hermes UK
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

@@ -69,6 +69,8 @@ import {
 import { announceNotice, Toast } from './parcel/Toast';
 import { announceKeepOutcome, onKeepOutcome, usePendingKeep, type KeepOutcome } from './pending';
 import { archiveRecent, forgetRecent, recentFor, renameParcel } from './recents';
+import { deviceNoteFilesOf, useAllDeviceNoteFiles } from './noteFiles';
+import { GuestNote } from './parcel/GuestNote';
 import { nonTrackingNote, nonTrackingShape } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
@@ -441,6 +443,13 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     announceNotice('link.remove.done');
   }
 
+  // A lookup of this device's own has a private note, kept here until the parcel is kept in an account.
+  const notable = state.onDevice && !sample && !present && (owner || frozen);
+  const [editingNote, setEditingNote] = useState(false);
+  const noteButton = useRef<HTMLButtonElement>(null);
+  const deviceFiles = useAllDeviceNoteFiles();
+  const noted = Boolean(state.note?.trim()) || deviceNoteFilesOf(deviceFiles, linkId).length > 0;
+
   // Archiving puts the device's copy away: the list folds it at its end, and the page offers it back.
   const archivable = state.onDevice && !sample && !present;
   const shownName = () => name ?? t('common.parcel');
@@ -582,7 +591,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           bell={bell} />
         <PeekAiCard parcel={parcel} />
         <p className="sr-only" role="status">{checked}</p>
-        {wrapped && <GiftSurprise />}
+        {wrapped && state.words.early && <GiftNote note={state.words.note} from={state.words.from} inside={null} />}
+        {wrapped && <GiftSurprise early={!!state.words.early} />}
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}
         {asked && <PostcodeAsked carrier={asked.carrier} ask={ask} onAdd={() => setAddingPostcode(true)} />}
         {digitsSuggested && <PhoneDigitsSuggested carrier={digitsSuggested} onAdd={() => chooseCarrier(digitsSuggested)} />}
@@ -597,12 +607,15 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           onCalendar={!owner && slot ? addToCalendar : undefined}
           onShare={owner && !frozen ? () => void share() : undefined}
           onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : state.onDevice ? (next) => renameParcel(linkId, next) : undefined}
+          onNote={notable ? () => setEditingNote(true) : undefined} noted={noted} noteButton={noteButton}
           onArchive={archivable && !state.archived && archiveInRow ? archive : undefined}
           onRestore={archivable && state.archived ? restore : undefined}
           compactName={!owner} />}
         <AndroidTestRow />
         {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} outage={outage} />}
         {waitingAt && <PickupPointCard point={waitingAt} />}
+        {notable && <GuestNote linkId={linkId} name={name ?? t('common.parcel')} text={state.note ?? ''}
+          editing={editingNote} onEditing={setEditingNote} fallbackFocus={noteButton} />}
         {!beside && teaser}
         {/* One invitation at a time: the passport's, on the day a parcel from abroad arrives, else the account's. */}
         {visitorCanKeep && !teaser && <AccountRow carrier={displayed} onSignIn={signInToKeep} />}

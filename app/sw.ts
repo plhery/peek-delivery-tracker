@@ -174,7 +174,8 @@ const serwist: Serwist = new Serwist({
       handler: async ({ url }) => consumeShareTarget(url),
     },
     {
-      // Account data and authentication traffic must never enter CacheStorage,
+      // Account data, the signed addresses of a note's photos and files
+      // (`/api/files/`) and authentication traffic must never enter CacheStorage,
       // nor may a page whose address is a capability: an invitation or a
       // parcel link, or an assistant's request to connect. Keep this route ahead
       // of Serwist's defaults, which cache GET APIs and cross-origin responses

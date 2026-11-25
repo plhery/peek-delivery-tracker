@@ -179,3 +179,40 @@ describe('an account addition that replaces the number half typed', () => {
     expect(repo.list).toHaveBeenCalledTimes(2);
   });
 });
+
+describe("a parcel's note", () => {
+  const tea: ParcelWithEvents = {
+    id: 'tea', label: 'Tea', trackingNumber: '993412345612345678', carrier: 'swiss-post', syncStatus: 'ok', createdAt: '2026-11-01T08:00:00.000Z', events: [],
+    files: [{ id: 'box', name: 'Box.jpg', contentType: 'image/jpeg', size: 10, createdAt: '2026-11-01T08:00:00.000Z', url: '/api/files/box', thumbnailUrl: null, expiresAt: '2026-11-01T09:00:00.000Z' }],
+  };
+  function Note() {
+    const { parcels, saveParcelNote, removeParcelFile, error } = useParcels();
+    return <><button onClick={() => void saveParcelNote('tea', 'Door code').catch(() => undefined)}>Save</button>
+      <button onClick={() => void removeParcelFile('tea', 'box', { keepalive: true }).catch(() => undefined)}>Remove</button>
+      <p>{parcels.map((parcel) => `${parcel.note ?? 'no note'} ${parcel.files?.length ?? 0} files`).join()}</p><p>{error === null ? 'no error' : 'error'}</p></>;
+  }
+
+  it('keeps what the server saved in the list, and leaves a refusal to the note’s sheet', async () => {
+    const repo: ParcelRepo = {
+      mode: 'api', list: vi.fn().mockResolvedValue([tea]), add: vi.fn(), rename: vi.fn(), remove: vi.fn(), refresh: vi.fn(),
+      setNote: vi.fn(async (_id: string, note: string | null) => ({ ...tea, note: note ?? undefined })),
+      removeFile: vi.fn(async () => undefined),
+    };
+    render(<ParcelsProvider repo={repo}><Note /></ParcelsProvider>);
+    expect(await screen.findByText('no note 1 files')).toBeVisible();
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByText('Door code 1 files')).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Remove' }));
+    expect(await screen.findByText('Door code 0 files')).toBeVisible();
+    expect(repo.removeFile).toHaveBeenCalledWith('tea', 'box', { keepalive: true });
+
+    vi.mocked(repo.setNote!).mockRejectedValueOnce(new Error('Broken'));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() => expect(repo.setNote).toHaveBeenCalledTimes(2));
+    expect(screen.getByText('no error')).toBeVisible();
+    vi.mocked(repo.setNote!).mockRejectedValueOnce(new ApiAuthenticationError());
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByText('error')).toBeVisible();
+  });
+});

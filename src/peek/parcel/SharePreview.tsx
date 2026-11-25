@@ -14,12 +14,14 @@ import { giftArrival, giftDelivered, parcelDetail, parcelHeadline, parcelStage }
  * switches under it change it, so none of them needs a sentence. A gift on
  * its way is the wrapped parcel, with no number and no name.
  */
-export function SharePreview({ parcel, name, showNumber, gift }: {
+export function SharePreview({ parcel, name, showNumber, gift, early }: {
   parcel: ParcelWithEvents;
   /** The name the link carries, when it carries one. */
   name: string | null;
   showNumber: boolean;
   gift: boolean;
+  /** A gift's note and who it is from, shown before it is delivered. */
+  early?: { note: string | null; from: string | null };
 }) {
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const caption = useId();
@@ -52,6 +54,10 @@ export function SharePreview({ parcel, name, showNumber, gift }: {
         <strong>{headline}</strong>
         {detail && <span className="peeks-preview__detail">{detail}</span>}
         {!wrapped && <span className="peeks-preview__number">{number}</span>}
+        {wrapped && early && (early.note || early.from) && <span className="peeks-preview__note">
+          {early.note && <span>{early.note}</span>}
+          {early.from && <span className="peeks-preview__from">— {early.from}</span>}
+        </span>}
       </div>
       <span className={`peeks-preview__pip${delivered ? ' peeks-preview__pip--open' : ''}`}>
         <ParcelIllustration label={known && !gift ? { carrier, number } : undefined} ribbon={gift} />

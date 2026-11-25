@@ -26,8 +26,11 @@ describe('a gift’s drawings and words', () => {
   });
 
   it('says why a gift on its way tells so little', () => {
-    render(<GiftSurprise />);
+    const { rerender } = render(<GiftSurprise />);
     expect(screen.getByText('What’s inside and who sent it stay a surprise until it’s delivered.')).toBeVisible();
+    // With its note shown early, only what is inside waits.
+    rerender(<GiftSurprise early />);
+    expect(screen.getByText('What’s inside stays a surprise until it’s delivered.')).toBeVisible();
   });
 
   it('shows the note, who it is from and what is inside, each only when the link carried it', () => {

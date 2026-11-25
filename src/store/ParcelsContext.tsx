@@ -16,6 +16,7 @@ import {
   type ParcelWithEvents,
 } from '../types';
 import { ApiAuthenticationError } from '../lib/apiClient';
+import { withoutFile } from '../lib/parcelNote';
 import { quietRetryDelay, readMaintenance, ServerDownError, type MaintenanceNotice } from '../lib/maintenance';
 import { useI18n } from '../i18n';
 
@@ -52,6 +53,12 @@ interface ParcelsState {
   mode: ParcelRepo['mode'];
   addParcel: (input: NewParcelInput) => Promise<ParcelWithEvents>;
   renameParcel: (id: string, label: string) => Promise<ParcelWithEvents>;
+  /** Saves a parcel's private note; null or blank text deletes it. */
+  saveParcelNote: (id: string, note: string | null, options?: { keepalive?: boolean }) => Promise<ParcelWithEvents>;
+  /** Adds a photo or PDF to a parcel's note, telling how many bytes have gone. */
+  addParcelFile: (id: string, file: Blob, name: string, onProgress?: (sent: number) => void, signal?: AbortSignal) => Promise<ParcelWithEvents>;
+  /** Removes one of a parcel's note's files; `keepalive` as the page goes away. */
+  removeParcelFile: (id: string, fileId: string, options?: { keepalive?: boolean }) => Promise<void>;
   changeParcelCarrier: (id: string, input: ParcelCarrierInput) => Promise<ParcelWithEvents>;
   setParcelNotificationsMuted: (id: string, muted: boolean) => Promise<void>;
   setParcelEmailMuted: (id: string, muted: boolean) => Promise<void>;
@@ -295,6 +302,49 @@ export function ParcelsProvider({
     [repo, rememberError],
   );
 
+  /** A note's changes report their own errors in its sheet: only a lost sign-in or a server down concerns the list. */
+  const rememberNoteError = useCallback((error: unknown) => {
+    if (error instanceof ApiAuthenticationError || error instanceof ServerDownError) rememberError(error);
+  }, [rememberError]);
+
+  const replaceParcel = useCallback((updated: ParcelWithEvents) => {
+    revision.current += 1;
+    if (mounted.current) setParcels((current) => current.map((parcel) => parcel.id === updated.id ? updated : parcel));
+    return updated;
+  }, []);
+
+  const saveParcelNote = useCallback(async (id: string, note: string | null, options?: { keepalive?: boolean }) => {
+    try {
+      if (!repo.setNote) throw new Error('Notes are unavailable');
+      return replaceParcel(await repo.setNote(id, note, options));
+    } catch (error) {
+      rememberNoteError(error);
+      throw error;
+    }
+  }, [repo, replaceParcel, rememberNoteError]);
+
+  const addParcelFile = useCallback(async (id: string, file: Blob, name: string, onProgress?: (sent: number) => void, signal?: AbortSignal) => {
+    try {
+      if (!repo.addFile) throw new Error('Files are unavailable');
+      return replaceParcel(await repo.addFile(id, file, name, onProgress, signal));
+    } catch (error) {
+      rememberNoteError(error);
+      throw error;
+    }
+  }, [repo, replaceParcel, rememberNoteError]);
+
+  const removeParcelFile = useCallback(async (id: string, fileId: string, options?: { keepalive?: boolean }) => {
+    try {
+      if (!repo.removeFile) throw new Error('Files are unavailable');
+      await repo.removeFile(id, fileId, options);
+      revision.current += 1;
+      if (mounted.current) setParcels((current) => current.map((parcel) => parcel.id === id ? withoutFile(parcel, fileId) : parcel));
+    } catch (error) {
+      rememberNoteError(error);
+      throw error;
+    }
+  }, [repo, rememberNoteError]);
+
   const changeParcelCarrier = useCallback(
     async (id: string, input: ParcelCarrierInput) => {
       try {
@@ -475,6 +525,9 @@ export function ParcelsProvider({
       mode: repo.mode,
       addParcel,
       renameParcel,
+      saveParcelNote,
+      addParcelFile,
+      removeParcelFile,
       changeParcelCarrier,
       setParcelNotificationsMuted,
       setParcelEmailMuted,
@@ -499,6 +552,9 @@ export function ParcelsProvider({
       repo.mode,
       addParcel,
       renameParcel,
+      saveParcelNote,
+      addParcelFile,
+      removeParcelFile,
       changeParcelCarrier,
       setParcelNotificationsMuted,
       setParcelEmailMuted,

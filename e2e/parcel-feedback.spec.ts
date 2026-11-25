@@ -24,7 +24,7 @@ test('asks where the history ends whether the page is right, takes a reason and 
   await bubble.getByRole('button', { name: 'Missing steps' }).click();
   await expect(bubble.getByRole('status')).toHaveText('Thanks! I’ll look into it.');
 
-  await bubble.getByRole('button', { name: 'Add a note' }).click();
+  await bubble.getByRole('button', { name: 'Add details' }).click();
   const sheet = page.getByRole('dialog', { name: 'What’s off?' });
   await expect(sheet.getByRole('button', { name: 'Missing steps' })).toHaveAttribute('aria-pressed', 'true');
   await sheet.getByLabel('Anything to add? Optional').fill('It left the depot yesterday.');
@@ -54,8 +54,8 @@ test('tells a reader who hasn’t received the parcel what to do, on a phone at 
   await expect(bubble.getByRole('link', { name: 'Get help from UPS' })).toHaveAttribute('href', /ups\.com/);
   expect(await fits(page)).toBe(true);
 
-  await bubble.getByRole('button', { name: 'Add a note' }).click();
-  const sheet = page.getByRole('dialog', { name: 'Add a note' });
+  await bubble.getByRole('button', { name: 'Add details' }).click();
+  const sheet = page.getByRole('dialog', { name: 'Add details' });
   await sheet.getByLabel('What happened?').fill('Nothing in the letterbox.');
   await sheet.getByRole('button', { name: 'Send' }).click();
   await expect(sheet).toHaveCount(0);

@@ -230,6 +230,10 @@ describe('action mapping shared with native', () => {
     expect(apiAnalyticsEvent('/api/packages?includeArchived=true')).toBeUndefined();
     expect(apiAnalyticsEvent('/api/sync/jobs?ids=secret')).toBeUndefined();
     expect(apiAnalyticsEvent('/api/push/devices', 'POST', '{"token":"secret"}')).toBeUndefined();
+    // A note is counted by its own events, never as a rename.
+    expect(apiAnalyticsEvent('/api/packages/private-parcel-id', 'PATCH', '{"label":"Shoes"}')).toBe('parcel-rename');
+    expect(apiAnalyticsEvent('/api/packages/private-parcel-id', 'PATCH', '{"note":"private words"}')).toBeUndefined();
+    expect(apiAnalyticsEvent('/api/packages/private-parcel-id', 'PATCH', '{"note":null}')).toBeUndefined();
   });
 });
 

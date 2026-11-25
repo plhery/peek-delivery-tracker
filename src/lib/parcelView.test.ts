@@ -45,6 +45,17 @@ describe('parcel view', () => {
     expect(parcelMatchesSearch(item, 'shoes')).toBe(false);
   });
 
+  it('searches the private note’s words and its files’ names', () => {
+    const item = {
+      ...parcel('alpha', 'in_transit'),
+      note: 'Door code 4812, leave with the neighbour',
+      files: [{ id: 'f', name: 'Return label.pdf', contentType: 'application/pdf' as const, size: 1, createdAt: '', url: '', thumbnailUrl: null, expiresAt: '' }],
+    };
+    expect(parcelMatchesSearch(item, 'neighbour')).toBe(true);
+    expect(parcelMatchesSearch(item, 'return label')).toBe(true);
+    expect(parcelMatchesSearch({ ...item, note: undefined, files: undefined }, 'neighbour')).toBe(false);
+  });
+
   it('filters active, actionable, today, delivered, and archived parcels', () => {
     const active = parcel('active', 'in_transit');
     active.expectedDelivery = '2026-08-05 13:00–15:00';

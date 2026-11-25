@@ -187,7 +187,9 @@ export function createDemoLinks(
         forgetAt: link.account ? null : forgetAt(link), numberShown, canKeep: numberShown,
         ...(owner ? { showNumber: !!link.showNumber } : {}),
         gift: !!link.gift, shared: !link.stopped,
-        ...((owner || (link.gift && !wrapped)) && link.giftWords ? { giftWords: link.giftWords } : {}),
+        ...((owner || (link.gift && !wrapped)) && link.giftWords ? { giftWords: link.giftWords }
+          // A gift's note shown early reaches its recipient without what is inside, as the server sends it.
+          : link.gift && link.giftWords?.early ? { giftWords: { name: null, note: link.giftWords.note, from: link.giftWords.from, early: true } } : {}),
         // The demo has no push service: a browser's alert is only remembered here.
         alerts: { available: true, vapidPublicKey: null },
       },
@@ -239,6 +241,9 @@ export function createDemoLinks(
       archivedAt: undefined,
       lastSyncedAt: new Date(time + FIRST_CHECK_MS).toISOString(),
     };
+    // The sample's journey is the carrier's; its private note stays with the demo's own parcel.
+    delete parcel.note;
+    delete parcel.files;
     parcel.events = told.events.map((event) => ({ ...event, parcelId: parcel.id }));
     return {
       createdAt,

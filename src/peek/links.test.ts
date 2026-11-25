@@ -542,12 +542,12 @@ describe('keeping links in an account', () => {
   it('claims with the signed-in bearer, sending the name only as the label', async () => {
     const fetch = vi.fn<typeof globalThis.fetch>(async () => json({ results: [{ id: ID, outcome: 'kept', packageId: 'p1' }, { id: 'k7Qm2xHd9RtX', outcome: 'unavailable' }] }));
     vi.stubGlobal('fetch', fetch);
-    const results = await claimParcelLinks([{ id: ID, key: KEY, label: '  For Mum ' }, { id: 'k7Qm2xHd9RtX', key: null, label: null }], auth);
+    const results = await claimParcelLinks([{ id: ID, key: KEY, label: '  For Mum ', note: ' Door code 4812 ' }, { id: 'k7Qm2xHd9RtX', key: null, label: null, note: '  ' }], auth);
     expect(results).toEqual([{ id: ID, outcome: 'kept', packageId: 'p1' }, { id: 'k7Qm2xHd9RtX', outcome: 'unavailable' }]);
     const [path, init] = fetch.mock.calls[0];
     expect(path).toBe('/api/packages/claim');
     expect(new Headers(init!.headers).get('Authorization')).toBe('Bearer token');
-    expect(JSON.parse(String(init!.body))).toEqual({ links: [{ id: ID, key: KEY, label: 'For Mum' }, { id: 'k7Qm2xHd9RtX' }] });
+    expect(JSON.parse(String(init!.body))).toEqual({ links: [{ id: ID, key: KEY, label: 'For Mum', note: 'Door code 4812' }, { id: 'k7Qm2xHd9RtX' }] });
   });
 
   it('sends and decodes protected gift words on the owner update', async () => {

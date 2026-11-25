@@ -2,6 +2,7 @@ import { authenticatedFetch, type ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
 import { linkNote } from '../deviceNotes';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
+import { handOverNoteFiles, moveNoteIntoDemo } from '../keptNotes';
 import { forgetRecent, recentFor, type RecentParcel } from '../recents';
 
 /**
@@ -90,7 +91,7 @@ export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth
   const outcome: BroughtAlong = { brought: 0, refused: [] };
   for (let start = 0; start < parcels.length; start += CLAIM_BATCH) {
     const batch = parcels.slice(start, start + CLAIM_BATCH);
-    const results = await claimParcelLinks(batch.map(({ id, key, name }) => ({ id, key, label: name })), auth, auth.signal);
+    const results = await claimParcelLinks(batch.map(({ id, key, name, note }) => ({ id, key, label: name, note })), auth, auth.signal);
     for (const result of results) {
       if (result.outcome === 'quota' || result.outcome === 'unavailable') {
         outcome.refused.push({ id: result.id, reason: result.outcome });
@@ -100,6 +101,7 @@ export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth
         if (batch.find((recent) => recent.id === result.id)?.archivedAt) await archiveKept(result.packageId, auth);
         if (linkNote(result.id).muted) await muteKept(result.packageId, auth);
       }
+      await handOverNoteFiles(result.id, result.packageId, auth);
       forgetRecent(result.id);
       outcome.brought += 1;
     }
@@ -119,6 +121,7 @@ export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: P
     try {
       const added = repo.adopt ? await repo.adopt(read.parcel, recent.name ?? '')
         : await repo.add({ trackingNumber: read.parcel.trackingNumber, label: recent.name ?? '', carrier: read.parcel.carrier });
+      await moveNoteIntoDemo(repo, recent.id, added.id, recent.note);
       if (linkNote(recent.id).muted) await repo.setNotificationsMuted?.(added.id, true);
       if (recent.archivedAt) await repo.remove(added.id);
     } catch (error) {

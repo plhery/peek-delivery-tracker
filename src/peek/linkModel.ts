@@ -94,6 +94,8 @@ export interface ParcelClaim {
   id: string;
   key?: string | null;
   label?: string | null;
+  /** The private note this device kept about the parcel, which goes with it into the account. */
+  note?: string | null;
 }
 
 export interface ParcelLinksClient {

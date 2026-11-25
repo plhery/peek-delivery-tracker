@@ -147,7 +147,7 @@ describe('createDemoRepo', () => {
     const repo = createDemoRepo(window.localStorage);
     const followed = {
       id: 'link-parcel', trackingNumber: 'DEMOADOPT20260001', label: '', carrier: 'ups' as const,
-      createdAt: '2026-10-02T08:00:00.000Z', syncStatus: 'ok' as const, archivedAt: '2026-10-02T09:00:00.000Z',
+      createdAt: '2026-10-02T08:00:00.000Z', syncStatus: 'ok' as const, archivedAt: '2026-10-02T09:00:00.000Z', note: 'Not this one',
       events: [
         { id: 'a', parcelId: 'link-parcel', stage: 'registered' as const, description: 'Announced', occurredAt: '2026-10-01T08:00:00.000Z' },
         { id: 'b', parcelId: 'link-parcel', stage: 'in_transit' as const, description: 'On its way', occurredAt: '2026-10-02T07:00:00.000Z' },
@@ -157,6 +157,8 @@ describe('createDemoRepo', () => {
     expect(adopted).toMatchObject({ trackingNumber: 'DEMOADOPT20260001', label: 'From the link', carrier: 'ups' });
     expect(adopted.id).not.toBe('link-parcel');
     expect(adopted.archivedAt).toBeUndefined();
+    // What this device noted comes after, on its own.
+    expect(adopted).not.toHaveProperty('note');
     expect(adopted.events.map((event) => [event.stage, event.description, event.parcelId])).toEqual([
       ['registered', 'Announced', adopted.id], ['in_transit', 'On its way', adopted.id],
     ]);

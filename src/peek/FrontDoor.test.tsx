@@ -4,6 +4,7 @@ import { hydrateRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { scroll, stubIntersections } from '../test/intersections';
+import { MemoryIndexedDB } from '../test/memoryIndexedDB';
 import '../test/parcelCode';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
 import type { EventPlace, Stage } from '../types';
@@ -14,7 +15,8 @@ import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
 import { LookupVerificationError } from './lookup/verification';
 import { takePendingAdd } from './pendingAdd';
-import { archiveRecent, forgetAllRecents, markRecentSeen, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
+import { addDeviceNoteFile, resetDeviceNoteFilesForTests } from './noteFiles';
+import { archiveRecent, forgetAllRecents, markRecentSeen, noteParcel, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
 import { PeekSessionProvider, type PeekSession } from './session';
 import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
@@ -1049,6 +1051,35 @@ describe('FrontDoor: on this device', () => {
     expect(within(list).queryByRole('searchbox')).toBeNull();
     expect(within(list).getAllByRole('link', { hidden: true })).toHaveLength(5);
     expect(within(list).getByRole('button', { name: 'Search parcels' })).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('marks a parcel with a note beside its name, says so to a screen reader, and finds it by the note’s words and files’ names', async () => {
+    vi.stubGlobal('indexedDB', new MemoryIndexedDB());
+    resetDeviceNoteFilesForTests();
+    onTestFinished(() => resetDeviceNoteFilesForTests());
+    const ids = ['s2Qm2xHd9RtA', 's2Qm2xHd9RtB', 's2Qm2xHd9RtC', 's2Qm2xHd9RtD'];
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    renameParcel(LINK_ID, 'New sneakers');
+    noteParcel(LINK_ID, 'Door code 4812, leave it with the neighbour');
+    ids.forEach((id, index) => rememberParcel({
+      id, key: OWNER_KEY, now: Date.now() - (index + 1) * 60_000,
+      view: testView({ id, parcel: { trackingNumber: `JD01460000000${index}` } }),
+    }));
+    renameParcel(ids[1], 'Winter boots');
+    await addDeviceNoteFile(ids[1], { blob: new Blob(['%PDF'], { type: 'application/pdf' }), name: 'Receipt.pdf', type: 'application/pdf' });
+    const { user } = door();
+    const list = screen.getByRole('region', { name: 'On this device' });
+    const sneakers = within(list).getByRole('link', { name: /New sneakers, has a note/ });
+    expect(sneakers.querySelector('.note-mark-join')).toHaveTextContent('sneakers');
+    await waitFor(() => expect(within(list).getByRole('link', { name: /Winter boots, has a note/ })).toBeVisible());
+    expect(within(list).getAllByRole('link', { name: /has a note/ })).toHaveLength(2);
+    await user.click(within(list).getByRole('button', { name: 'Search parcels' }));
+    const field = within(list).getByRole('searchbox', { name: 'Search parcels' });
+    await user.type(field, 'neighbour');
+    expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${LINK_ID}`]);
+    await user.clear(field);
+    await user.type(field, 'receipt');
+    expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${ids[1]}`]);
   });
 
   it('offers no search for a short list', () => {

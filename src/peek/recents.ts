@@ -1,8 +1,10 @@
 import { useSyncExternalStore } from 'react';
 import { normalizeTrackingNumber } from '../lib/carriers';
+import { clipNote } from '../lib/parcelNote';
 import { currentEvent, isFinal } from '../lib/stages';
 import type { CarrierId, Stage, SyncStatus } from '../types';
 import { forgetAllLinkNotes, forgetLinkNote } from './deviceNotes';
+import { deviceNoteFiles, deviceNoteFilesOf, forgetAllDeviceNoteFiles, forgetDeviceNoteFiles, moveDeviceNoteFiles } from './noteFiles';
 import { isParcelLinkId, type ParcelLinkView } from './linkModel';
 
 /**
@@ -54,6 +56,11 @@ export interface RecentParcel {
    * background, and an account it is kept in archives it too. Its alerts stay as they were.
    */
   archivedAt?: string;
+  /**
+   * The private note this device keeps about its own lookup, which goes into an account with it. Its photos and PDFs
+   * are kept apart ([noteFiles.ts](./noteFiles.ts)).
+   */
+  note?: string;
 }
 
 /**
@@ -82,6 +89,7 @@ function isRecent(value: unknown): value is RecentParcel {
     && (recent.key === null || typeof recent.key === 'string') && (recent.name === null || typeof recent.name === 'string')
     && (recent.frozen === undefined || typeof recent.frozen === 'string')
     && (recent.archivedAt === undefined || typeof recent.archivedAt === 'string')
+    && (recent.note === undefined || typeof recent.note === 'string')
     && !!recent.snapshot && typeof recent.snapshot === 'object'
     && !!recent.snapshot.link && !!recent.snapshot.parcel && Array.isArray(recent.snapshot.parcel.events);
 }
@@ -218,6 +226,11 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
   const current = currentEvent(view.parcel.events, view.parcel.returnHeld);
   const firstAnswer = !existing?.snapshot.parcel.lastSyncedAt && !!view.parcel.lastSyncedAt;
   const kept = typeof existing?.openedNews === 'string' && !firstAnswer ? existing.openedNews : null;
+  const number = view.parcel.trackingNumber;
+  const superseded = (candidate: RecentParcel) => !!number && !!candidate.frozen && candidate.snapshot.parcel.trackingNumber === number;
+  // A new lookup that takes a frozen copy's place takes its note and files along.
+  const replaced = list.filter((candidate) => candidate.id !== id && superseded(candidate));
+  const note = existing?.note ?? replaced.find((candidate) => candidate.note)?.note;
   const recent: RecentParcel = {
     id,
     // A parcel saved in a way this version could not read gets its key back.
@@ -232,10 +245,10 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
     snapshot: view,
     openedNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
     ...(existing?.archivedAt ? { archivedAt: existing.archivedAt } : {}),
+    ...(note ? { note } : {}),
   };
-  const number = view.parcel.trackingNumber;
-  const superseded = (candidate: RecentParcel) => !!number && !!candidate.frozen && candidate.snapshot.parcel.trackingNumber === number;
   write([recent, ...list.filter((candidate) => candidate.id !== id && !superseded(candidate))], stranded.filter((entry) => entry.id !== id));
+  for (const old of replaced) void moveDeviceNoteFiles(old.id, id);
 }
 
 /**
@@ -284,6 +297,19 @@ export function renameParcel(id: string, name: string | null): void {
   write(list.map((recent) => recent.id === id ? { ...recent, name: cleanParcelName(name) } : recent));
 }
 
+/** Keeps a private note about a parcel on this device; blank text removes it. */
+export function noteParcel(id: string, note: string | null): void {
+  const list = read();
+  if (!list.some((recent) => recent.id === id)) return;
+  const text = note?.trim() ? clipNote(note.trim()) : undefined;
+  write(list.map((recent) => {
+    if (recent.id !== id) return recent;
+    const next = { ...recent, note: text };
+    if (!text) delete next.note;
+    return next;
+  }));
+}
+
 /** Archives a parcel on this device, or brings it back to the list. */
 export function archiveRecent(id: string, archived: boolean, now = Date.now()): void {
   const list = read();
@@ -299,7 +325,7 @@ export const HALF_TYPED_MS = 10 * 60_000;
 /**
  * This device's own lookups that one of `number` takes the place of: the start of that number, looked up here within
  * the last minutes and with no scan yet, which was the number half typed. An older lookup, one with a scan, one named
- * or archived here, and a link opened from someone else all stay.
+ * or archived here, one with a note, and a link opened from someone else all stay.
  */
 export function halfTypedLookups(number: string, now = Date.now()): (RecentParcel & { key: string })[] {
   const typed = normalizeTrackingNumber(number);
@@ -307,7 +333,8 @@ export function halfTypedLookups(number: string, now = Date.now()): (RecentParce
     const { link, parcel } = recent.snapshot;
     const start = normalizeTrackingNumber(parcel.trackingNumber);
     const age = now - Date.parse(link.createdAt);
-    return Boolean(recent.key) && !recent.frozen && !recent.archivedAt && !recent.name && link.kind === 'lookup'
+    return Boolean(recent.key) && !recent.frozen && !recent.archivedAt && !recent.name && !recent.note && link.kind === 'lookup'
+      && !deviceNoteFilesOf(deviceNoteFiles(), recent.id).length
       && start.length > 0 && typed.length > start.length && typed.startsWith(start)
       && age >= 0 && age <= HALF_TYPED_MS && parcel.events.every((event) => event.stage === 'pending');
   });
@@ -320,9 +347,11 @@ export function forgetRecent(id: string): void {
     write(list.filter((recent) => recent.id !== id), stranded.filter((entry) => entry.id !== id));
   }
   forgetLinkNote(id);
+  void forgetDeviceNoteFiles(id);
 }
 
 export function forgetAllRecents(): void {
   write([], []);
   forgetAllLinkNotes();
+  void forgetAllDeviceNoteFiles();
 }

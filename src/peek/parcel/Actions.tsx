@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from 'react';
 import { Icon } from '../../components/Icon';
 import { useI18n } from '../../i18n';
 import { MAX_NAME_LENGTH } from '../recents';
@@ -21,7 +21,7 @@ export interface PingAction {
  * device. Once it has arrived, "I have it" takes the place of the alerts, and
  * the parcel can be archived on this device, or restored once it is.
  */
-export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onArchive, onRestore, compactName = false }: {
+export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onNote, noted = false, noteButton, onArchive, onRestore, compactName = false }: {
   name: string | null;
   /** Absent once the journey is over. */
   ping?: PingAction;
@@ -31,6 +31,11 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onA
   onCalendar?: () => void;
   onShare?: () => void;
   onRename?: (name: string | null) => void;
+  /** Opens the parcel's private note, kept on this device. */
+  onNote?: () => void;
+  /** The parcel has a note: the action edits it. */
+  noted?: boolean;
+  noteButton?: RefObject<HTMLButtonElement | null>;
   onArchive?: () => void;
   onRestore?: () => void;
   /** The name action is its pencil alone, where the row has more to say. */
@@ -68,7 +73,7 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onA
     </form>;
   }
   // A gift that has arrived leaves its recipient nothing to do here.
-  if (!ping && !onHave && !onCalendar && !onShare && !onRename && !onArchive && !onRestore) return null;
+  if (!ping && !onHave && !onCalendar && !onShare && !onRename && !onNote && !onArchive && !onRestore) return null;
   const row = <>
     {ping && !ping.prominent && <button type="button" className="peekp-action" onClick={ping.onOpen}>
       <Icon name="bell" />{ping.long ? <><span className="peekp-action__short">{ping.label}</span><span className="peekp-action__long">{ping.long}</span></> : <span>{ping.label}</span>}
@@ -79,6 +84,7 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onA
     {onRename && <button ref={nameButton} type="button" className={`peekp-action peekp-action--name${compactName ? ' peekp-action--compact' : ''}`} aria-label={t(name ? 'detail.editTitle' : 'link.name')} onClick={edit}>
       <Glyph name="pencil" /><span>{t(name ? 'detail.editTitle' : 'link.name')}</span>
     </button>}
+    {onNote && <button ref={noteButton} type="button" className="peekp-action" onClick={onNote}><Glyph name="note" /><span>{t(noted ? 'note.edit' : 'note.add')}</span></button>}
     {onArchive && <button type="button" className="peekp-action" onClick={onArchive}><Icon name="archive" /><span>{t('parcel.archive')}</span></button>}
     {onRestore && <button type="button" className="peekp-action" onClick={onRestore}><Icon name="archive" /><span>{t('detail.restore')}</span></button>}
   </>;

@@ -239,7 +239,7 @@ describe('the parcel page of a link’s owner', () => {
     const announced = open(view({ events: [scan('registered', 50)] }));
     const lead = await screen.findByRole('button', { name: 'Notify me when it moves' });
     expect(lead).toHaveClass('button--primary');
-    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['Notify me when it moves', 'Share', 'Name it']);
+    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['Notify me when it moves', 'Share', 'Name it', 'Add a note']);
     announced.unmount();
 
     const unknown = open(view({ events: [scan('pending', 50, 'Tracking added')], parcel: { carrier: 'unknown', syncStatus: 'waiting' } }));
@@ -269,7 +269,7 @@ describe('the parcel page of a link’s owner', () => {
     expect(await within(sheet).findByText('Notifications are on in this browser')).toBeVisible();
     await user.click(within(sheet).getByRole('button', { name: 'Close' }));
     // The alerts are no longer the next step: the row says they are on.
-    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['Notifications on', 'Share', 'Name it']);
+    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['Notifications on', 'Share', 'Name it', 'Add a note']);
     expect(document.querySelector('.peekp-actions--led')).toBeNull();
   });
 
@@ -313,7 +313,7 @@ describe('the parcel page of a link’s owner', () => {
     const user = userEvent.setup();
     open(view({ events: arrived, parcel: { expectedDelivery: undefined } }));
     expect(await screen.findByRole('heading', { level: 1, name: 'Delivered' })).toBeVisible();
-    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['I have it', 'Share', 'Name it', 'Archive']);
+    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['I have it', 'Share', 'Name it', 'Add a note', 'Archive']);
     // The alerts ended with the delivery.
     await waitFor(() => expect(linkNote(LINK_ID).alert).toBeUndefined());
 
@@ -398,6 +398,17 @@ describe('a gift', () => {
     fireEvent.click(bell);
     fireEvent.click(within(screen.getByRole('dialog', { name: 'Notify me when it arrives' })).getByRole('button', { name: 'Close' }));
     expect(bell).toHaveFocus();
+  });
+
+  it('on its way shows the note and who it is from when its sender asked, never what is inside', async () => {
+    const shown = wrapped();
+    open({ ...shown, link: { ...shown.link, giftWords: { name: null, note: 'Happy birthday, Alex!', from: 'Sam', early: true } } });
+    expect(await screen.findByText('Happy birthday, Alex!')).toBeVisible();
+    expect(screen.getByText('— Sam')).toBeVisible();
+    expect(screen.getByText('What’s inside stays a surprise until it’s delivered.')).toBeVisible();
+    expect(screen.queryByText(/Inside:/)).toBeNull();
+    expect(document.title).toBe('Something’s on its way to you · Peek');
+    expect(recentFor(LINK_ID)).toMatchObject({ name: null });
   });
 
   it('turns alerts on from the card, which then says they are on, and has no row of actions without a delivery window', async () => {

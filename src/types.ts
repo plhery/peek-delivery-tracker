@@ -3,6 +3,7 @@ import type {
   ApiCarrierId,
   ApiEventPlace,
   ApiImportCharges,
+  ApiPackageFileType,
   ApiPeekAi,
   ApiRecipientAction,
   ApiStage,
@@ -24,6 +25,27 @@ export type ImportCharges = ApiImportCharges;
 
 /** What a carrier asks its recipient to do before customs lets the parcel go: give a tax number, pay duties or taxes, or send documents. */
 export type RecipientAction = ApiRecipientAction;
+
+/** The kinds of file a parcel's note keeps: photos and PDFs. */
+export type ParcelFileType = ApiPackageFileType;
+
+/**
+ * A photo or PDF kept with a parcel's private note. Its addresses are signed and last until `expiresAt`: past it, the
+ * parcel is read again for new ones.
+ */
+export interface ParcelFile {
+  id: string;
+  name: string;
+  contentType: ParcelFileType;
+  size: number;
+  width?: number;
+  height?: number;
+  createdAt: string;
+  url: string;
+  /** None for a PDF. */
+  thumbnailUrl: string | null;
+  expiresAt: string;
+}
 
 /**
  * The lifecycle of a parcel. The first six are the "happy path" in order;
@@ -131,6 +153,9 @@ export interface Parcel {
   destinationPlace?: EventPlace;
   /** The town where the account's parcels are usually delivered, which the map heads for as an estimate, for its owner alone. */
   usualPlace?: EventPlace;
+  /** The owner's private note, and the photos and PDFs kept with it: never on a shared link. */
+  note?: string;
+  files?: ParcelFile[];
 }
 
 /** Where a scan happened, located on the server from its free-text location. */
@@ -232,6 +257,12 @@ export interface ParcelRepo {
   /** Take in a parcel followed through a parcel link, with its history; available only in the local demo. */
   adopt?(parcel: ParcelWithEvents, label: string): Promise<ParcelWithEvents>;
   rename(id: string, label: string): Promise<ParcelWithEvents>;
+  /** Saves the parcel's private note; null or blank text deletes it (its files stay). */
+  setNote?(id: string, note: string | null, options?: { keepalive?: boolean }): Promise<ParcelWithEvents>;
+  /** Adds a photo or PDF to the note, telling how many bytes have gone so far. Fails with a `NoteFileError`. */
+  addFile?(id: string, file: Blob, name: string, onProgress?: (sent: number) => void, signal?: AbortSignal): Promise<ParcelWithEvents>;
+  /** Removes one of the note's files. `keepalive` lets the request outlive the page, as it closes. */
+  removeFile?(id: string, fileId: string, options?: { keepalive?: boolean }): Promise<void>;
   changeCarrier?(id: string, input: ParcelCarrierInput): Promise<ParcelWithEvents>;
   setNotificationsMuted?(id: string, muted: boolean): Promise<ParcelWithEvents>;
   /** Turns the account's delivery email off or back on for one parcel; only an account has it. */

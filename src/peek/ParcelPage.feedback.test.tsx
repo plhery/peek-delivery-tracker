@@ -82,7 +82,7 @@ describe('the question on a parcel’s page', () => {
     await user.click(within(bubble()!).getByRole('button', { name: 'Not quite' }));
     await user.click(within(bubble()!).getByRole('button', { name: 'Wrong status' }));
     expect(mocks.feedback).toHaveBeenCalledExactlyOnceWith(LINK_ID, expect.objectContaining({ answer: 'wrong', reasons: ['status'] }), null);
-    await user.click(await within(bubble()!).findByRole('button', { name: 'Add a note' }));
+    await user.click(await within(bubble()!).findByRole('button', { name: 'Add details' }));
     expect(within(screen.getByRole('dialog', { name: 'What’s off?' })).getByText('Sent with this parcel’s number and what DHL answered. Nothing about you.')).toBeVisible();
   });
 

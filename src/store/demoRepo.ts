@@ -5,13 +5,17 @@ import {
   supportsSwissPostHandoff,
 } from '../lib/carriers';
 import { isLocale, type Locale } from '../lib/locale';
+import { clipNote, FILE_MAX_BYTES, FILES_PER_PARCEL, FILES_TOTAL_BYTES, NoteFileError, withoutFile } from '../lib/parcelNote';
 import { currentStage, isFinal, latestEvent } from '../lib/stages';
 import { uid } from '../lib/uid';
+import { DEMO_NOTE, DEMO_NOTE_PARCEL, demoFiles, demoNoteIn, freshDemoFile, isDemoFile } from './demoNote';
 import {
   ParcelAlreadyExistsError,
   type EventPlace,
   type NewParcelInput,
   type ParcelCarrierInput,
+  type ParcelFile,
+  type ParcelFileType,
   type ParcelRepo,
   type ParcelWithEvents,
   type PeekAi,
@@ -232,7 +236,28 @@ export function seedParcels(now: number): ParcelWithEvents[] {
       ...(sample.plannedEvents ? { plannedEvents: sample.plannedEvents.map((step) => ({
         stage: step.stage as Stage, description: step.description, location: step.location, occurredAt: iso(step.hoursAgo),
       })) } : {}),
+      // One sample carries a private note, with a receipt and a photo.
+      ...(sample.trackingNumber === DEMO_NOTE_PARCEL ? { note: DEMO_NOTE.en, files: demoFiles(iso(Math.min(...sample.events.map((event) => event.hoursAgo)))) } : {}),
     };
+  });
+}
+
+/**
+ * The files added to the demo's notes, kept by this page alone as object addresses: a demo has no server to send them
+ * to, and they go when the page does.
+ */
+const addedFiles = new Map<string, ParcelFile>();
+
+/** The notes' files as this page can show them: the demo's own with fresh addresses, added ones while the page keeps them. */
+function withPageFiles(parcels: ParcelWithEvents[]): ParcelWithEvents[] {
+  return parcels.map((parcel) => {
+    if (!parcel.files) return parcel;
+    const files = parcel.files.flatMap((file) => isDemoFile(file.id) ? [freshDemoFile(file)] : addedFiles.has(file.id) ? [addedFiles.get(file.id)!] : []);
+    if (files.length === parcel.files.length && files.every((file, index) => file === parcel.files![index])) return parcel;
+    if (files.length) return { ...parcel, files };
+    const next: ParcelWithEvents = { ...parcel };
+    delete next.files;
+    return next;
   });
 }
 
@@ -372,15 +397,16 @@ export function createDemoRepo(
     const wanted = await demoDictionary(target);
     const written = storage.getItem(LANGUAGE_KEY);
     const from = isLocale(written) ? written : 'en';
-    if (from === target) return withPeekAi(saved(), now());
+    if (from === target) return withPeekAi(withPageFiles(saved()), now());
     const english = new Map(Object.entries(await demoDictionary(from)).map(([text, translated]) => [translated, text]));
     const say = (text: string) => {
       const original = english.get(text) ?? text;
       return wanted[original] ?? original;
     };
-    const parcels = saved().map((parcel) => ({
+    const parcels = withPageFiles(saved()).map((parcel) => ({
       ...parcel,
       label: say(parcel.label),
+      ...(parcel.note ? { note: demoNoteIn(parcel.note, target) } : {}),
       events: parcel.events.map((scan) => ({
         ...scan, description: say(scan.description), location: scan.location && say(scan.location),
       })),
@@ -497,6 +523,9 @@ export function createDemoRepo(
         archivedAt: undefined,
         events: followed.events.map((scan) => ({ ...scan, id: uid(), parcelId: id })),
       };
+      // A followed parcel's link carries no note; what the device noted about it comes after, with setNote and addFile.
+      delete parcel.note;
+      delete parcel.files;
       save(storage, [...parcels, parcel]);
       return parcel;
     },
@@ -517,6 +546,48 @@ export function createDemoRepo(
       return renamed;
     },
 
+    async setNote(id: string, text: string | null) {
+      const parcels = await getAll();
+      const parcel = parcels.find((candidate) => candidate.id === id);
+      if (!parcel) throw new Error('Parcel not found');
+      const updated = { ...parcel, note: text?.trim() ? clipNote(text) : undefined };
+      if (!updated.note) delete updated.note;
+      save(storage, parcels.map((candidate) => candidate.id === id ? updated : candidate));
+      return updated;
+    },
+
+    async addFile(id: string, file: Blob, name: string, onProgress?: (sent: number) => void) {
+      const parcels = await getAll();
+      const parcel = parcels.find((candidate) => candidate.id === id);
+      if (!parcel) throw new Error('Parcel not found');
+      // The demo keeps the limits an account has.
+      if (file.size > FILE_MAX_BYTES) throw new NoteFileError('too-big', file.size);
+      if ((parcel.files?.length ?? 0) >= FILES_PER_PARCEL) throw new NoteFileError('parcel-full');
+      const used = parcels.flatMap((candidate) => candidate.files ?? []).reduce((total, kept) => total + kept.size, 0);
+      if (used + file.size > FILES_TOTAL_BYTES) throw new NoteFileError('account-full');
+      const contentType = file.type as ParcelFileType;
+      const url = URL.createObjectURL(file);
+      const added: ParcelFile = {
+        id: uid(), name, contentType, size: file.size, createdAt: new Date(now()).toISOString(), url,
+        thumbnailUrl: contentType === 'application/pdf' ? null : url, expiresAt: '9999-12-31T23:59:59.000Z',
+      };
+      addedFiles.set(added.id, added);
+      onProgress?.(file.size);
+      const updated = { ...parcel, files: [...parcel.files ?? [], added] };
+      save(storage, parcels.map((candidate) => candidate.id === id ? updated : candidate));
+      return updated;
+    },
+
+    async removeFile(id: string, fileId: string) {
+      const parcels = await getAll();
+      const removed = addedFiles.get(fileId);
+      if (removed) {
+        addedFiles.delete(fileId);
+        URL.revokeObjectURL(removed.url);
+      }
+      save(storage, parcels.map((candidate) => candidate.id === id ? withoutFile(candidate, fileId) : candidate));
+    },
+
     async changeCarrier(id: string, input: ParcelCarrierInput) {
       const parcels = await getAll();
       const parcel = parcels.find((candidate) => candidate.id === id);
@@ -533,6 +604,9 @@ export function createDemoRepo(
         dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
         archivedAt: parcel.archivedAt,
         notificationsMuted: parcel.notificationsMuted,
+        // The note stays with the parcel, whichever carrier tracks it.
+        ...(parcel.note ? { note: parcel.note } : {}),
+        ...(parcel.files ? { files: parcel.files } : {}),
         syncStatus: 'pending',
         events: [event(parcel.id, 'pending', changedAt)],
       };

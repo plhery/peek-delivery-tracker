@@ -1,14 +1,17 @@
 import { carrierTrackingNumber, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 import { timeZoneRegion } from '../lib/postcodeExample';
-import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
+import { ApiAuthenticationError, authenticatedFetch, CLIENT_INPUTS, type ApiAuth } from '../lib/apiClient';
+import { NoteFileError, uploadProblem, withoutFile } from '../lib/parcelNote';
 import { announcedMaintenance, deviceOnline, ServerDownError, serverDown, unanswered } from '../lib/maintenance';
 import type {
+  ApiAddPackageFileResponse,
   ApiCreatePackageResponse,
   ApiCreatePackageRequest,
   ApiChangePackageCarrierRequest,
   ApiChangePackageCarrierResponse,
   ApiOkResponse,
+  ApiPackageFile,
   ApiPackageListResponse,
   ApiPackageRow,
   ApiQueueResponse,
@@ -25,6 +28,7 @@ import {
   RefreshTimeoutError,
   type NewParcelInput,
   type ParcelCarrierInput,
+  type ParcelFile,
   type ParcelRepo,
   type ParcelWithEvents,
   type PlannedEvent,
@@ -201,6 +205,8 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     destinationPlace: row.destination_place ?? undefined,
     usualPlace: row.usual_place ?? undefined,
     archivedAt: row.archived_at ?? undefined,
+    ...(row.note ? { note: row.note } : {}),
+    ...(row.files?.length ? { files: row.files.map(toParcelFile) } : {}),
     newsAt: row.news_at ?? undefined,
     seenAt: row.seen_at ?? undefined,
     notificationsMuted: row.notifications_muted,
@@ -212,6 +218,22 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
       carrier: row.carrier_outage.carrier, since: row.carrier_outage.since,
       ...(row.carrier_outage.tracking_url ? { trackingUrl: row.carrier_outage.tracking_url } : {}),
     } } : {}),
+  };
+}
+
+/** A photo or PDF of the parcel's note. Its addresses are relative to the API, which the web app shares an origin with. */
+export function toParcelFile(row: ApiPackageFile): ParcelFile {
+  return {
+    id: row.id,
+    name: row.name,
+    contentType: row.content_type,
+    size: row.size,
+    ...(row.width ? { width: row.width } : {}),
+    ...(row.height ? { height: row.height } : {}),
+    createdAt: row.created_at,
+    url: row.url,
+    thumbnailUrl: row.thumbnail_url,
+    expiresAt: row.expires_at,
   };
 }
 
@@ -232,6 +254,71 @@ class ApiResponseError extends Error {
   constructor(message: string, readonly status: number, readonly retryAfterMs: number, readonly scope?: string) {
     super(message);
   }
+}
+
+/**
+ * Adds a photo or PDF to an account's parcel, telling how much has gone. A refusal is a NoteFileError that says why,
+ * with the server's status.
+ */
+export async function uploadPackageFile(
+  packageId: string, file: Blob, name: string, auth: ApiAuth | undefined, onProgress?: (sent: number) => void, signal?: AbortSignal,
+): Promise<ApiAddPackageFileResponse> {
+  const path = `/api/packages/${encodeURIComponent(packageId)}/files`;
+  const stop = AbortSignal.any([...(signal ? [signal] : []), ...(auth?.signal ? [auth.signal] : [])]);
+  let answer = await sendFile(path, file, name, await auth?.getAccessToken() ?? null, onProgress, stop);
+  // An expired token is renewed once, as for every other request.
+  if (answer.status === 401 && auth) {
+    const renewed = await auth.getAccessToken(true);
+    if (renewed) answer = await sendFile(path, file, name, renewed, onProgress, stop);
+  }
+  if (answer.status === 401) {
+    void auth?.onAuthenticationFailure?.().catch(() => undefined);
+    throw new ApiAuthenticationError();
+  }
+  if (answer.status !== 200 && answer.status !== 201) {
+    const code = (answer.body as { code?: unknown } | null)?.code;
+    throw new NoteFileError(uploadProblem(answer.status, typeof code === 'string' ? code : undefined), file.size, answer.status);
+  }
+  return answer.body as ApiAddPackageFileResponse;
+}
+
+/** One upload's answer: its status, and its body when it was JSON. */
+interface UploadAnswer { status: number; body: unknown }
+
+/**
+ * Sends a file's bytes as they are, with its type and name in the headers. XMLHttpRequest, unlike fetch, tells how much
+ * of the body has gone.
+ */
+function sendFile(path: string, file: Blob, name: string, accessToken: string | null, onProgress?: (sent: number) => void, signal?: AbortSignal): Promise<UploadAnswer> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) { reject(signal.reason); return; }
+    const request = new XMLHttpRequest();
+    request.open('POST', path);
+    request.timeout = 120_000;
+    request.setRequestHeader('Content-Type', file.type);
+    request.setRequestHeader('X-File-Name', encodeURIComponent(name));
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    request.setRequestHeader('X-Peek-Inputs', CLIENT_INPUTS);
+    if (accessToken) request.setRequestHeader('Authorization', `Bearer ${accessToken}`);
+    const abort = () => request.abort();
+    signal?.addEventListener('abort', abort, { once: true });
+    const done = () => signal?.removeEventListener('abort', abort);
+    request.upload.addEventListener('progress', (event) => onProgress?.(event.loaded));
+    request.addEventListener('load', () => {
+      done();
+      let body: unknown = null;
+      try { body = request.responseText ? JSON.parse(request.responseText) : null; } catch { /* Not JSON: the status says enough. */ }
+      resolve({ status: request.status, body });
+    });
+    const failed = () => {
+      done();
+      reject(new NoteFileError(typeof navigator !== 'undefined' && navigator.onLine === false ? 'offline' : 'failed'));
+    };
+    request.addEventListener('error', failed);
+    request.addEventListener('timeout', failed);
+    request.addEventListener('abort', () => { done(); reject(signal?.reason ?? new DOMException('The upload was stopped', 'AbortError')); });
+    request.send(file);
+  });
 }
 
 function retryAfterMilliseconds(value: string | null): number {
@@ -478,6 +565,38 @@ export function createApiRepo(
         },
       );
       return rememberParcel(toParcel(row));
+    },
+
+    async setNote(id: string, note: string | null, options?: { keepalive?: boolean }): Promise<ParcelWithEvents> {
+      const body: ApiRenamePackageRequest = { note: note?.trim() ? note : null };
+      const row = await request<ApiPackageRow>(`/api/packages/${encodeURIComponent(id)}`, auth, {
+        method: 'PATCH',
+        body: JSON.stringify(body),
+        ...(options?.keepalive ? { keepalive: true } : {}),
+      });
+      return rememberParcel(toParcel(row));
+    },
+
+    async addFile(id: string, file: Blob, name: string, onProgress?: (sent: number) => void, signal?: AbortSignal): Promise<ParcelWithEvents> {
+      const stop = AbortSignal.any([lifecycle.signal, ...(signal ? [signal] : [])]);
+      const added = await uploadPackageFile(id, file, name, auth, onProgress, stop);
+      revision += 1;
+      latest = null;
+      return rememberParcel(toParcel(added.package));
+    },
+
+    async removeFile(id: string, fileId: string, options?: { keepalive?: boolean }): Promise<void> {
+      try {
+        await request<ApiOkResponse>(`/api/packages/${encodeURIComponent(id)}/files/${encodeURIComponent(fileId)}`, auth, {
+          method: 'DELETE',
+          ...(options?.keepalive ? { keepalive: true } : {}),
+        });
+      } catch (error) {
+        // Already gone: what was asked is done.
+        if (!(error instanceof ApiResponseError && error.status === 404)) throw error;
+      }
+      const cached = cachedParcels(storage, cacheKey);
+      if (cached) saveCachedParcels(storage, cacheKey, cached.map((parcel) => parcel.id !== id ? parcel : withoutFile(parcel, fileId)));
     },
 
     async changeCarrier(id: string, input: ParcelCarrierInput): Promise<ParcelWithEvents> {

@@ -1294,6 +1294,7 @@
   "note.files.pdf": "PDF",
   "note.files.open": "{{name}}, {{kind}}",
   "note.files.remove": "Remover {{name}}",
+  "note.files.removeShort": "Remover",
   "note.files.removed": "Removido: {{name}}",
   "note.files.share": "Compartilhar",
   "note.files.save": "Salvar",

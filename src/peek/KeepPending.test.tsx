@@ -5,8 +5,9 @@ import { LINK_ID } from '../test/parcelLinks';
 import { KeepPendingParcel } from './KeepPending';
 import { clearPendingKeep, onKeepOutcome, rememberPendingKeep, type KeepOutcome } from './pending';
 
-const mocks = vi.hoisted(() => ({ claim: vi.fn(), retryLoad: vi.fn() }));
+const mocks = vi.hoisted(() => ({ claim: vi.fn(), retryLoad: vi.fn(), send: vi.fn() }));
 vi.mock('./links', async (original) => ({ ...await original<typeof import('./links')>(), claimParcelLinks: mocks.claim }));
+vi.mock('./keptNotes', async (original) => ({ ...await original<typeof import('./keptNotes')>(), sendKeptFiles: mocks.send }));
 vi.mock('../store/ParcelsContext', () => ({ useParcels: () => ({ retryLoad: mocks.retryLoad }) }));
 vi.mock('../lib/pushNotifications', async (original) => ({
   ...await original<typeof import('../lib/pushNotifications')>(),
@@ -25,6 +26,7 @@ let stop = () => {};
 beforeEach(() => {
   mocks.claim.mockReset().mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }]);
   mocks.retryLoad.mockReset();
+  mocks.send.mockReset().mockResolvedValue({ sent: 0, left: 0 });
   vi.mocked(getNotificationPreferences).mockReset().mockResolvedValue(SAVED);
   vi.mocked(saveNotificationPreferences).mockReset().mockImplementation(async (preferences) => ({ ...SAVED, ...preferences }));
   heard = [];
@@ -59,5 +61,14 @@ describe('the deliveries of someone who just signed in', () => {
     await waitFor(() => expect(heard).toEqual([{ id: LINK_ID, outcome: 'quota', name: null }]));
     expect(saveNotificationPreferences).not.toHaveBeenCalled();
     expect(mocks.retryLoad).not.toHaveBeenCalled();
+  });
+
+  it('send the files of notes kept in the account, those waiting since an earlier visit too, and reload once one went', async () => {
+    const auth = session();
+    mocks.send.mockResolvedValue({ sent: 1, left: 0 });
+    render(<KeepPendingParcel auth={auth} />);
+    await waitFor(() => expect(mocks.retryLoad).toHaveBeenCalledOnce());
+    expect(mocks.send).toHaveBeenCalledExactlyOnceWith(auth);
+    expect(mocks.claim).not.toHaveBeenCalled();
   });
 });

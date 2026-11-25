@@ -1,4 +1,5 @@
 import { carrierInfo } from './carriers';
+import { noteSearchText } from './parcelNote';
 import {
   compareParcelPriority,
   expectedDeliveryDay,
@@ -47,6 +48,7 @@ function searchText(parcel: ParcelWithEvents): string {
     carrierInfo(parcel.carrier).name,
     parcel.lastStatusText ?? '',
     ...events,
+    noteSearchText(parcel.note, parcel.files?.map((file) => file.name)),
   ].join(' ').toLocaleLowerCase();
 }
 

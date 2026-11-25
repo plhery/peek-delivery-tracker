@@ -123,6 +123,36 @@ test('once the parcel is delivered, the share sheet and the recipient read the d
   await context.close();
 });
 
+test('a gift whose note is shown early shows it on the way, and keeps what is inside for the delivery', async ({ page, browser }) => {
+  await allowCopying(page);
+  await track(page, 'DEMOCHOC20260001');
+  await page.getByRole('button', { name: 'Name it' }).click();
+  await page.keyboard.type('Belgian chocolate');
+  await page.keyboard.press('Enter');
+  const sheet = await openShare(page);
+  await sheet.getByRole('switch', { name: 'Wrap as a gift' }).check();
+  await sheet.getByRole('checkbox', { name: 'Show it before it’s delivered' }).check();
+  await sheet.getByRole('textbox', { name: 'A note, shown right away' }).fill('Happy birthday, Alex!');
+  await sheet.getByRole('textbox', { name: 'From' }).fill('Sam');
+  await sheet.getByRole('switch', { name: 'Show its name' }).check();
+  await expect(sheet.getByRole('group', { name: 'What they’ll see until it’s delivered' })).toContainText('Happy birthday, Alex!');
+  await sheet.getByRole('button', { name: 'Copy' }).click();
+  await expect(sheet.getByText('Link copied')).toBeVisible();
+  const link = await copied(page);
+  expect(new URL(link).hash).toBe('');
+
+  const { context: other, page: recipient } = await anotherBrowser(browser);
+  await show(page, recipient, link);
+  await expect(status(recipient)).toHaveText('Something’s on its way to you');
+  await expect(recipient.getByText('Happy birthday, Alex!')).toBeVisible();
+  await expect(recipient.getByText('— Sam')).toBeVisible();
+  await expect(recipient.getByText('What’s inside stays a surprise until it’s delivered.')).toBeVisible();
+  await expect(recipient.locator('body')).not.toContainText(/Belgian chocolate|DEMOCHOC|Inside:/);
+  await expect(recipient).toHaveTitle('Something’s on its way to you · Peek');
+  expect(await fits(recipient)).toBe(true);
+  await other.close();
+});
+
 test('a gift stays a surprise until it is delivered, then shows its note and what is inside', async ({ page, browser }) => {
   await allowCopying(page);
   await track(page, 'DEMOCHOC20260001');

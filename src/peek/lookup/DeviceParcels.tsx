@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseE
 import { CarrierMark } from '../../components/CarrierMark';
 import { Icon } from '../../components/Icon';
 import { MaintenanceStrip } from '../../components/MaintenanceStrip';
+import { NameWithMark } from '../../components/note/NoteMark';
 import { pipMood } from '../../components/map/Pip';
 import { defaultMode } from '../../components/map/route';
 import { WorldMap } from '../../components/map/WorldMap';
@@ -16,12 +17,14 @@ import { carrierInfo, displayedCarrierId, formatTrackingNumber, normalizeTrackin
 import { useMarkNewUpdates } from '../../lib/newUpdate';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { trackAction } from '../../lib/analytics';
+import { noteSearchText } from '../../lib/parcelNote';
 import { parcelMatchesSearch } from '../../lib/parcelView';
 import { peekAiCardWords } from '../../lib/peekAi';
 import type { Translate } from '../../lib/messages';
 import { pickupPoint } from '../../lib/pickupPoint';
 import { isFinal } from '../../lib/stages';
 import { maskedNumber } from '../links';
+import { deviceNoteFilesOf, useAllDeviceNoteFiles, type DeviceNoteFile } from '../noteFiles';
 import { useMedia, useNow } from '../parcel/hooks';
 import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../parcel/summary';
 import { frozenOnTheWay, hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
@@ -43,6 +46,17 @@ function useParcelTitle(recent: RecentParcel): string {
   const { parcel, numberHint } = recent.snapshot;
   return recent.name ?? (parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel'));
+}
+
+/**
+ * A card's name, with the list's quiet mark after it when this device keeps a note or files for the parcel, and "has a
+ * note" for a screen reader.
+ */
+function CardName({ recent, title }: { recent: RecentParcel; title: string }) {
+  const { t } = useI18n();
+  const files = deviceNoteFilesOf(useAllDeviceNoteFiles(), recent.id).length > 0;
+  if (!recent.note?.trim() && !files) return title;
+  return <><NameWithMark name={title} files={files} /><span className="sr-only">{`, ${t('note.hasNote')}`}</span></>;
 }
 
 /**
@@ -93,7 +107,7 @@ function DeviceParcel({ recent, arrived = false, archived = false }: { recent: R
     <span className="door-parcel__top">{news.said}<CarrierMark carrier={carrier} />{peekAiWords
       ? <span className="door-parcel__dates">{when && <span className="door-parcel__when">{when}</span>}<PeekAiPhrase words={peekAiWords} /></span>
       : when && <span className="door-parcel__when">{when}</span>}</span>
-    <strong>{title}</strong>
+    <strong><CardName recent={recent} title={title} /></strong>
     <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}{stale && ` · ${t('link.frozen.label')}`}{archived && ` · ${t('app.archived')}`}</span>
   </a>;
 }
@@ -145,7 +159,7 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
       <span className="door-nextup__fresh">{freshness.dot && <i aria-hidden="true" />}{freshness.label}</span>
     </span>
     <span className="door-nextup__text">
-      <span className="door-nextup__name">{title}</span>
+      <span className="door-nextup__name"><CardName recent={recent} title={title} /></span>
       <strong>{news.dot}{parcelHeadline(parcel, t)}</strong>
       {detail && <span className="door-nextup__detail">{detail}</span>}
       {peekAiWords && <PeekAiPhrase words={peekAiWords} className="door-nextup__ai" />}
@@ -158,10 +172,14 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
 /** From this many parcels on the device, the list can be searched. */
 export const SEARCH_FROM = 5;
 
-/** Whether a parcel answers a search, as the account's list reads it: its name, number, carrier, status and scans. */
-function found(recent: RecentParcel, query: string, t: Translate, locale: Locale): boolean {
+/**
+ * Whether a parcel answers a search, as the account's list reads it: its name, number, carrier, status and scans, and
+ * the note's words and its files' names.
+ */
+function found(recent: RecentParcel, files: readonly DeviceNoteFile[], query: string, t: Translate, locale: Locale): boolean {
   const { parcel } = recent.snapshot;
-  return parcelMatchesSearch({ ...parcel, label: recent.name ?? '', lastStatusText: parcelStatusLabel(parcel, t, locale) }, query);
+  const note = noteSearchText(recent.note, deviceNoteFilesOf(files, recent.id).map((file) => file.name));
+  return parcelMatchesSearch({ ...parcel, label: recent.name ?? '', lastStatusText: parcelStatusLabel(parcel, t, locale), note }, query);
 }
 
 /** The parcels archived on this device, folded away at the end of the list. */
@@ -197,6 +215,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   const { t, locale } = useI18n();
   const { account } = usePeekSession();
   const recents = useRecents();
+  const noteFiles = useAllDeviceNoteFiles();
   const [searching, setSearching] = useState(false);
   const [query, setQuery] = useState('');
   // Saved parcels this version can't list keep their owner keys: Forget all is offered for them too.
@@ -216,7 +235,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   const active = useMemo(() => recents.filter((recent) => !recent.archivedAt), [recents]);
   const archived = recents.filter((recent) => recent.archivedAt);
   const searchable = recents.length >= SEARCH_FROM;
-  const matches = searching && searchable && query.trim() ? recents.filter((recent) => found(recent, query, t, locale)) : null;
+  const matches = searching && searchable && query.trim() ? recents.filter((recent) => found(recent, noteFiles, query, t, locale)) : null;
   const watching = listed && !covered;
   useEffect(() => watching ? watchDeviceParcels(() => list.current) : undefined, [watching]);
   useEffect(() => { if (asking) question.current?.focus(); }, [asking]);
@@ -252,7 +271,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
           aria-label={t(searching ? 'view.hideSearch' : 'view.search')} onClick={() => searching ? closeSearch() : setSearching(true)}>
           <Icon name="search" />
         </button>}
-        {listed && <button type="button" className="door-device__icon" aria-label={t('account.export')} onClick={() => downloadDeviceExport(recents)}>
+        {listed && <button type="button" className="door-device__icon" aria-label={t('account.export')} onClick={() => void downloadDeviceExport(recents)}>
           <Icon name="download" />
         </button>}
         <button type="button" className="door-device__forget" onClick={() => { setFailed(false); setAsking(true); }}>{t('door.recents.forgetAll')}</button>

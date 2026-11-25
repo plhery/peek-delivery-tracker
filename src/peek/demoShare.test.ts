@@ -115,6 +115,14 @@ describe('sharing in the device demo', () => {
     expect(opened.parcel.events).toEqual(view.parcel.events);
   });
 
+  it('shows a gift’s note and who it is from on the way when its sender asked, never what is inside', async () => {
+    const { links, id, key, read } = await looked('DEMOCHOC20260001');
+    const giftWords = { name: 'Chocolates', note: 'Enjoy!', from: 'Sam', early: true };
+    await links.updateParcelLink(id, key, { gift: true, giftWords });
+    expect((await read(false)).link.giftWords).toEqual({ name: null, note: 'Enjoy!', from: 'Sam', early: true });
+    expect((await read(true)).link.giftWords).toEqual(giftWords);
+  });
+
   it('remembers who asked for alerts: ten for viewers and ten for the owner, none once the parcel has arrived', async () => {
     const { links, id, key, read } = await looked('DEMOCHOC20260001');
     for (let index = 0; index < 10; index += 1) await links.setParcelAlert(id, alert(`demo:${index}`));

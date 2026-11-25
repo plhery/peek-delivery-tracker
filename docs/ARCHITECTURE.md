@@ -238,6 +238,12 @@ Key server modules:
     copy stays, marked no longer updated, without its key or link notes, and is never read
     again; a new lookup of the same number replaces it. A copy of a link someone shared goes,
     since the 404 doesn't say why it ended.
+  - A guest's private note on a parcel it looked up or keeps stays beside the link in
+    `localStorage`, and its photos and PDFs in the browser's IndexedDB (`peek-parcel-files`,
+    `src/peek/noteFiles.ts`), at most 200 MB for the device. Keeping the parcel in an account
+    sends the note with the claim, then uploads each file to the account's parcel; a file goes
+    from the device once uploaded, and one that fails waits for the next signed-in visit.
+    Forgetting the parcel deletes both; a frozen copy keeps them. Neither ever reaches a link.
   - A lookup whose number starts with the number of one the browser, or the iPhone or Android
     app, looked up at most 10 minutes earlier replaces that one when it has no scan yet and
     no name or archive date from the device: it was the number half typed, and its link is
@@ -255,11 +261,11 @@ Key server modules:
     background; their alerts stay as they were, but turning alerts on for every parcel
     passes them over. Kept in an account, a parcel archived here is archived there too, and
     one whose alerts were turned off here is muted there, unless the account had it already. From five parcels on, the list can be searched as
-    the account's is, by name, number, carrier, status and scans, archived parcels included.
+    the account's is, by name, number, carrier, status, scans and the note's words and files' names, archived parcels included.
     Its download button saves the list as a JSON file, as the apps do for a guest: each parcel
-    as last shown, with its name, link and archive date, and never its owner key. "Open them
+    as last shown, with its name, link, archive date, note and its files' names, and never its owner key. "Open them
     on another device" shows a QR code (while the address fits in 1,800 characters) and a link,
-    `/move#p=<id>.<key>.<a>.<name>&…`; frozen copies stay behind. The page at `/move` is the one
+    `/move#p=<id>.<key>.<a>.<name>&…`, without notes or files; frozen copies stay behind. The page at `/move` is the one
     at `/`: `instrumentation-client.ts` takes the `#` out of the address before the router reads
     it, and the page reads each link with its key (a hidden read). A key stays only when the link
     answers as its owner; a parcel already on the device keeps its name and fold, and gains a key

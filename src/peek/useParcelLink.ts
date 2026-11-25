@@ -63,10 +63,12 @@ export interface ParcelLinkState {
   onDevice: boolean;
   /** The device archived the parcel: its list folds it away. */
   archived: boolean;
+  /** The private note this device keeps about the parcel. */
+  note?: string;
   /**
    * The link's public name and protected gift message. Empty for a gift on its way.
    */
-  words: LinkWords;
+  words: LinkWords & { early?: boolean };
   /** Why the newest read failed; the view then is the last one that worked. */
   trouble: ParcelLinkError | null;
   /** The service forgot this device's lookup: the view is the device's last copy, no longer updated and never read again. */
@@ -290,13 +292,17 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
   const markSeen = useCallback(async (id: string) => { if (newsAt) markRecentSeen(id, newsAt); }, [newsAt]);
   useSeenWhileOpen(opened, markSeen);
   // Until the first answer says what the link is, nothing it carries is shown: it may be a gift.
-  const words = view && !isWrappedGift(view) ? view.link.giftWords ?? carried : NO_WORDS;
+  // A gift on its way may show its note and who it is from early; what is inside waits for the delivery.
+  const early = view && isWrappedGift(view) && view.link.giftWords?.early
+    ? { name: null, note: view.link.giftWords.note ?? null, from: view.link.giftWords.from ?? null, early: true } : null;
+  const words = early ?? (view && !isWrappedGift(view) ? view.link.giftWords ?? carried : NO_WORDS);
   return {
     status: frozen ? 'ready' : answer.gone || (view ? 'ready' : 'loading'),
     view,
     name: recent?.name ?? words.name,
     onDevice: !!recent,
     archived: !!recent?.archivedAt,
+    note: recent?.note,
     words,
     trouble: frozen ? null : answer.trouble,
     frozen,

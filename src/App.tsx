@@ -125,6 +125,9 @@ export default function App({
     mode,
     addParcel,
     renameParcel,
+    saveParcelNote,
+    addParcelFile,
+    removeParcelFile,
     changeParcelCarrier,
     setParcelNotificationsMuted,
     setParcelEmailMuted,
@@ -816,6 +819,10 @@ export default function App({
           openingOrigin={detailOrigin}
           onBack={closeParcelDetail}
           onRename={(p, label) => renameParcel(p.id, label)}
+          onSaveNote={(p, note, keepalive) => saveParcelNote(p.id, note, keepalive ? { keepalive } : undefined)}
+          onAddNoteFile={(p, file, name, onProgress, signal) => addParcelFile(p.id, file, name, onProgress, signal)}
+          onRemoveNoteFile={(p, fileId, keepalive) => removeParcelFile(p.id, fileId, keepalive ? { keepalive } : undefined)}
+          onRereadNote={() => retryLoad()}
           onChangeCarrier={(p, input) => changeParcelCarrier(p.id, input)}
           usedCarriers={usedCarriers}
           postcodes={givenPostcodes}

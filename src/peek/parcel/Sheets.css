@@ -53,6 +53,8 @@
 .peeks-preview strong { font-size: 19px; font-weight: 650; letter-spacing: -.5px; line-height: 1.2; overflow-wrap: anywhere; }
 .peeks-preview__detail { color: var(--tone); font-size: 12.5px; font-weight: 500; }
 .peeks-preview__number { margin-top: 4px; font: 400 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.peeks-preview__note { display: grid; gap: 2px; margin-top: 6px; font-size: 12.5px; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere; }
+.peeks-preview__from { color: var(--ink-soft); }
 /* Pip, as on the page: its label while it travels, the open box once it has arrived, a ribbon for a gift. */
 .peeks-preview__pip { flex: 0 0 auto; width: 84px; margin: -10px -4px -10px 0; }
 /* He keeps still beside the switches: only his eyes blink. */
@@ -98,6 +100,9 @@
 .peeks-gift textarea, .peeks-gift input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--canvas); font-size: 16px; line-height: 1.4; resize: vertical; }
 .peeks-gift textarea:focus, .peeks-gift input:focus { outline: none; border-color: var(--ochre); box-shadow: 0 0 0 3px color-mix(in srgb, var(--yellow) 20%, transparent); }
 .peeks-gift small { color: var(--ink-soft); font-size: 11.5px; line-height: 1.4; }
+/* Show the gift's note before it is delivered: one checkbox row under the note. */
+.peeks-gift .peeks-gift__early { display: flex; align-items: center; gap: 10px; min-height: 44px; color: var(--ink); font-size: 13px; cursor: pointer; }
+.peeks-gift .peeks-gift__early input { flex: 0 0 20px; width: 20px; min-height: 0; height: 20px; margin: 0; padding: 0; accent-color: var(--ink); }
 .peeks-gift .postcode-country { min-height: 44px; border-radius: 12px; background: var(--canvas); }
 
 /* Ping me: the ways to be told. */

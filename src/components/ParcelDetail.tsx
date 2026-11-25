@@ -81,6 +81,8 @@ import { Glyph } from '../peek/parcel/glyphs';
 import { AccountShareSheet } from '../peek/parcel/ShareSheet';
 import { useDeliveryEmail, useNotificationPreferences } from '../store/notificationPreferences';
 import { EmailOffer } from './EmailOffer';
+import { noteFilesOf, ParcelNote, type NoteStore } from './note/ParcelNote';
+import { hasNote } from '../lib/parcelNote';
 import { presetTitleKey } from './NotificationControl';
 import { ParcelAlertsSheet } from './ParcelAlertsSheet';
 import './Refresh.css';
@@ -96,6 +98,10 @@ export function ParcelDetail({
   onRestore,
   onArchive,
   onDelete,
+  onSaveNote,
+  onAddNoteFile,
+  onRemoveNoteFile,
+  onRereadNote,
   onExitDemo,
   openingOrigin,
   usedCarriers,
@@ -134,6 +140,12 @@ export function ParcelDetail({
   onRestore: (parcel: ParcelWithEvents) => Promise<unknown>;
   onArchive: (parcel: ParcelWithEvents) => Promise<unknown>;
   onDelete: (parcel: ParcelWithEvents) => Promise<unknown>;
+  /** The parcel's private note: its text (null deletes it) and its files. Without these, the page offers no note. */
+  onSaveNote?: (parcel: ParcelWithEvents, note: string | null, keepalive?: boolean) => Promise<unknown>;
+  onAddNoteFile?: (parcel: ParcelWithEvents, file: Blob, name: string, onProgress: (sent: number) => void, signal: AbortSignal) => Promise<unknown>;
+  onRemoveNoteFile?: (parcel: ParcelWithEvents, fileId: string, keepalive: boolean) => Promise<unknown>;
+  /** Reads the parcel again, for file addresses that have expired. */
+  onRereadNote?: (parcel: ParcelWithEvents) => Promise<unknown>;
 }) {
   const { locale, languageTag, t, use24HourTime, weightUnit } = useI18n();
   const carrier = carrierInfo(activeTrackingCarrierId(parcel), locale);
@@ -261,6 +273,16 @@ export function ParcelDetail({
   const shareClient = useMemo(() => apiAuth ? createAccountShare(apiAuth) : demoAccountShare, [apiAuth]);
   const canShare = !!shareClient && !parcel.archivedAt;
   const [sharing, setSharing] = useState(false);
+  const [editingNote, setEditingNote] = useState(false);
+  const [noteBusy, setNoteBusy] = useState(false);
+  const actionsSummary = useRef<HTMLElement>(null);
+  const noteStore = useMemo<NoteStore | null>(() => onSaveNote && onAddNoteFile && onRemoveNoteFile ? {
+    saveText: async (text, keepalive) => { await onSaveNote(parcel, text, keepalive); },
+    addFile: async (file, onProgress, signal) => { await onAddNoteFile(parcel, file.blob, file.name, onProgress, signal); },
+    removeFile: async (id, keepalive) => { await onRemoveNoteFile(parcel, id, keepalive); },
+    ...(onRereadNote ? { reread: async () => { await onRereadNote(parcel); } } : {}),
+  } : null, [parcel, onSaveNote, onAddNoteFile, onRemoveNoteFile, onRereadNote]);
+  const noteFiles = useMemo(() => noteFilesOf(parcel.files), [parcel.files]);
   // The reader is asked whether the page is right, or who carries a parcel no carrier was found for: not about an
   // archived parcel, not before a first check, and not in the demo, whose parcels are stories.
   const feedbackNotes = useMemo(() => parcelFeedbackNotes(parcel.id), [parcel.id]);
@@ -273,7 +295,7 @@ export function ParcelDetail({
     scanned: moving,
     missing: missingStep(parcel, current?.stage, displayedCarrier, locale),
     carrier: displayedCarrier.name,
-    busy: sharing || alertsOpen || editingCarrier || confirmingDelete || mapOpen,
+    busy: sharing || alertsOpen || editingCarrier || confirmingDelete || mapOpen || noteBusy,
     notes: feedbackNotes,
     send: async (answer) => { await sendFeedback?.(parcel.id, answer); },
   });
@@ -289,7 +311,7 @@ export function ParcelDetail({
     findCard: () => document.querySelector<HTMLElement>(`.parcel-card-swipe[data-parcel-id="${CSS.escape(parcel.id)}"] .parcel-card`),
     anchor: () => hero.current,
     header: () => header.current,
-    canPull: () => !editingCarrier && !confirmingDelete,
+    canPull: () => !editingCarrier && !confirmingDelete && !noteBusy,
   });
 
   function openMap() {
@@ -489,7 +511,7 @@ export function ParcelDetail({
       onClick={(event) => {
         const outside = backdropPress.current && event.target === event.currentTarget;
         backdropPress.current = false;
-        if (outside && !editingCarrier && !confirmingDelete && !dialog.current?.hasAttribute('inert')) onBack();
+        if (outside && !editingCarrier && !confirmingDelete && !noteBusy && !dialog.current?.hasAttribute('inert')) onBack();
       }}
     >
     <div
@@ -511,7 +533,7 @@ export function ParcelDetail({
         </button>
         <span>{t('detail.label')}</span>
         <details className="detail__actions-menu" ref={actionsMenu}>
-          <summary aria-label={t('detail.parcelActions')}>
+          <summary ref={actionsSummary} aria-label={t('detail.parcelActions')}>
             <span aria-hidden="true">•••</span>
           </summary>
           <div>
@@ -519,6 +541,10 @@ export function ParcelDetail({
               if (actionsMenu.current) actionsMenu.current.open = false;
               beginTitleEdit();
             }}>{t('detail.editTitle')}</button>
+            {noteStore && <button type="button" onClick={() => {
+              if (actionsMenu.current) actionsMenu.current.open = false;
+              setEditingNote(true);
+            }}>{t(hasNote(parcel) ? 'note.edit' : 'note.add')}</button>}
             {canShare && <button type="button" onClick={() => {
               if (actionsMenu.current) actionsMenu.current.open = false;
               setSharing(true);
@@ -721,6 +747,16 @@ export function ParcelDetail({
         <div><strong>{t('link.carrierSays', { carrier: carrier.name })}</strong><blockquote>{carrierWaits.description.trim()}</blockquote></div>
       </div>}
       {quiet && <div className="detail__quiet"><NoteCard note={quiet} /></div>}
+      {noteStore && <ParcelNote
+        text={parcel.note ?? ''}
+        files={noteFiles}
+        store={noteStore}
+        name={parcel.label || t('common.parcel')}
+        editing={editingNote}
+        onEditing={setEditingNote}
+        fallbackFocus={actionsSummary}
+        onBusy={setNoteBusy}
+      />}
       {delivered && apiAuth && accountEmail && <EmailOffer apiAuth={apiAuth} email={accountEmail} />}
       <section className="detail__information">
         {(importCharges || pickupFact || parcel.receiverName || parcel.dimensionsText || (Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0)) && (

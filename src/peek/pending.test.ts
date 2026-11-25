@@ -15,7 +15,8 @@ import {
   rememberPendingKeep,
   type KeepOutcome,
 } from './pending';
-import { forgetAllRecents, recentFor, rememberParcel, renameParcel } from './recents';
+import * as keptNotes from './keptNotes';
+import { forgetAllRecents, noteParcel, recentFor, rememberParcel, renameParcel } from './recents';
 
 const mocks = vi.hoisted(() => ({
   claim: vi.fn(),
@@ -123,6 +124,21 @@ describe('keeping after sign-in', () => {
     expect(pendingKeep()).toBeNull();
     expect(await keepPendingParcel(auth)).toBeNull();
     expect(mocks.claim).toHaveBeenCalledTimes(1);
+  });
+
+  it('sends the device’s note with the claim, and marks its files for the account’s parcel before the copy goes', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+    noteParcel(LINK_ID, 'Door code 4812');
+    rememberPendingKeep(LINK_ID);
+    const handed = vi.spyOn(keptNotes, 'handOverNoteFiles').mockImplementation(async () => {
+      // The link is still on the device while its files are handed over.
+      expect(recentFor(LINK_ID)).not.toBeNull();
+    });
+    mocks.claim.mockResolvedValueOnce([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }]);
+    await keepPendingParcel(auth);
+    expect(mocks.claim).toHaveBeenCalledWith([{ id: LINK_ID, key: OWNER_KEY, label: null, note: 'Door code 4812' }], auth, undefined);
+    expect(handed).toHaveBeenCalledWith(LINK_ID, 'p1', auth);
+    expect(recentFor(LINK_ID)).toBeNull();
   });
 
   it('drops the device’s copy for a parcel the account already follows, and keeps it when the account cannot take it', async () => {

@@ -7,6 +7,7 @@ const paths = {
   back: 'M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3',
   calendar: 'M4 6h16v15H4V6Zm0 5h16M8 3v5m8-5v5',
   receipt: 'M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6m-6 4h3',
+  note: 'M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm2 5h6m-6 4h6m-6 4h3',
 } as const;
 
 export type GlyphName = keyof typeof paths;

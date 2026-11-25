@@ -1,10 +1,10 @@
 import { Icon } from '../../components/Icon';
 import { useI18n } from '../../i18n';
 
-/** Under a gift on its way: why the page says so little. */
-export function GiftSurprise() {
+/** Under a gift on its way: why the page says so little. With its note shown early, only what is inside waits. */
+export function GiftSurprise({ early = false }: { early?: boolean }) {
   const { t } = useI18n();
-  return <p className="peekp-surprise"><Icon name="gift" />{t('share.gift.surprise')}</p>;
+  return <p className="peekp-surprise"><Icon name="gift" />{t(early ? 'share.gift.surpriseInside' : 'share.gift.surprise')}</p>;
 }
 
 /**

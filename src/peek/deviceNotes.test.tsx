@@ -39,6 +39,10 @@ describe('what this browser notes about a link', () => {
     expect(note.share!.note.startsWith('two lines xxx')).toBe(true);
     expect([...note.share!.note]).toHaveLength(280);
     expect(linkNote(OTHER_LINK_ID)).toEqual({ alert: { preset: 'delivery', endpoint: 'demo:1' } });
+    // A gift's note shown early is remembered only as a plain yes.
+    localStorage.setItem(LINK_NOTES_STORAGE_KEY, JSON.stringify({ [LINK_ID]: { share: { ...share, early: true } }, [OTHER_LINK_ID]: { share: { ...share, early: 'yes' } } }));
+    expect(linkNote(LINK_ID).share).toEqual({ ...share, early: true });
+    expect(linkNote(OTHER_LINK_ID).share).toEqual(share);
     expect(linkNote('not-a-link')).toEqual({});
     noteLink('not-a-link', { alert });
     expect(linkNote('not-a-link')).toEqual({});

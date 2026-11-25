@@ -3,6 +3,7 @@ import type { ApiAuth } from '../lib/apiClient';
 import { turnOnDeliveryEmail } from '../store/notificationPreferences';
 import { useParcels } from '../store/ParcelsContext';
 import type { ParcelRepo } from '../types';
+import { sendKeptFiles } from './keptNotes';
 import { keepPendingInDemo, keepPendingParcel } from './pending';
 
 /**
@@ -15,6 +16,9 @@ export function KeepPendingParcel({ auth }: { auth: ApiAuth }) {
   useEffect(() => {
     void keepPendingParcel(auth, () => turnOnDeliveryEmail(auth)).then((outcome) => {
       if (outcome?.outcome === 'kept' || outcome?.outcome === 'already') void retryLoad();
+    }).finally(() => {
+      // The files of notes kept in the account go after them, those that waited since an earlier visit too.
+      void sendKeptFiles(auth).then(({ sent }) => { if (sent) void retryLoad(); }, () => undefined);
     });
   }, [auth, retryLoad]);
   return null;

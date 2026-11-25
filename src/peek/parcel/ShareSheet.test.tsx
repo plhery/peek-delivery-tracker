@@ -187,6 +187,34 @@ describe('the share sheet of a looked-up parcel', () => {
     expect(previewNumber()).toHaveTextContent('••• 99');
   });
 
+  it('shows a gift’s note and who it is from before delivery only when asked, and says what still waits', async () => {
+    const share = vi.fn(async () => undefined);
+    Object.defineProperty(navigator, 'share', { configurable: true, value: share });
+    const user = userEvent.setup();
+    render(<OwnerSheet />);
+    await user.click(toggle('Wrap as a gift'));
+    const early = await screen.findByRole('checkbox', { name: 'Show it before it’s delivered' });
+    expect(early).not.toBeChecked();
+    await user.type(screen.getByRole('textbox', { name: 'A note, shown once it’s delivered' }), 'Happy birthday, Alex!');
+    await user.type(screen.getByRole('textbox', { name: 'From' }), 'Sam');
+    // Off, the card the recipient gets keeps the note to itself.
+    expect(document.querySelector('.peeks-preview__note')).toBeNull();
+    await user.click(early);
+    const note = screen.getByRole('textbox', { name: 'A note, shown right away' });
+    expect(note).toHaveAccessibleDescription('Stored securely by Peek. What’s inside stays hidden until it’s delivered.');
+    expect(preview('What they’ll see until it’s delivered').getByText('Happy birthday, Alex!')).toBeVisible();
+    expect(preview('What they’ll see until it’s delivered').getByText('— Sam')).toBeVisible();
+    expect(linkNote(LINK_ID).share).toEqual({ name: false, note: 'Happy birthday, Alex!', from: 'Sam', early: true });
+    await user.click(screen.getByRole('button', { name: 'Share…' }));
+    expect(share).toHaveBeenCalledWith({ url: ADDRESS });
+    expect(mocks.update).toHaveBeenLastCalledWith(LINK_ID, OWNER_KEY, {
+      giftWords: { name: null, note: 'Happy birthday, Alex!', from: 'Sam', early: true },
+    });
+    await user.click(early);
+    expect(screen.getByRole('textbox', { name: 'A note, shown once it’s delivered' })).toHaveAccessibleDescription('Stored securely by Peek; shared only after delivery.');
+    expect(linkNote(LINK_ID).share).not.toHaveProperty('early');
+  });
+
   it('waits for the gift message to be saved before copying, and copies nothing if saving fails', async () => {
     const user = userEvent.setup();
     const copied = clipboard();

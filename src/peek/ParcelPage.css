@@ -190,7 +190,7 @@
 .peekp-note a svg { width: 13px; height: 13px; }
 .peekp-already { background: var(--yellow-soft); color: var(--ochre); }
 .peekp-already > span, .peekp-already p { color: var(--ochre); }
-.peekp .pickup-card { margin: 0; }
+.peekp .pickup-card, .peekp .note-card { margin: 0; }
 
 /* The number, the carrier's page and the journal. */
 .peekp-number { margin: 0 6px; padding: 4px 0 14px; border-bottom: 1px solid var(--line); }

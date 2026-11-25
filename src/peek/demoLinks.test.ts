@@ -41,6 +41,9 @@ describe('the device demo backend', () => {
     expect(landed.parcel).toMatchObject({ carrier: 'ups', syncStatus: 'ok', trackingNumber: '1ZDEMO202600000001' });
     expect(currentStage(landed.parcel.events)).toBe('in_transit');
     expect(new Set(landed.parcel.events.map((event) => event.parcelId))).toEqual(new Set([landed.parcel.id]));
+    // The sample's journey comes without the private note the demo keeps on it.
+    expect(landed.parcel).not.toHaveProperty('note');
+    expect(landed.parcel).not.toHaveProperty('files');
     expect((await read(links, unknown.id, { key: unknown.key })).parcel).toMatchObject({ carrier: 'gls-de', trackingNumber: 'DEMO0000000001' });
     expect((await read(links, chosen.id, { key: chosen.key })).parcel.carrier).toBe('dhl');
     // A number the demo itself uses brings that sample's whole story, without its name.

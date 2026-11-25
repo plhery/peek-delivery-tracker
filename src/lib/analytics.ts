@@ -12,7 +12,9 @@ export type AlertsReason = 'blocked' | 'dismissed' | 'unsupported' | 'worker' | 
 type WidgetFamily = '100' | '102' | '103' | '104' | '105' | '106' | '110' | '120' | '200' | '300' | '400' | '600';
 /** Why the browser check a lookup needs failed, sent with `door-verification` as one fixed word ([ANALYTICS.md](../../docs/ANALYTICS.md)). */
 export type VerificationReason = 'setup' | 'script' | `widget-${WidgetFamily}` | 'widget' | 'timeout' | 'refused' | 'unanswered' | 'proof' | 'other';
-export type AnalyticsReason = AlertsReason | VerificationReason;
+/** Why a photo or PDF did not join a parcel's note, sent with `parcel-file-add` ([ANALYTICS.md](../../docs/ANALYTICS.md)). */
+export type FileReason = 'too-big' | 'type' | 'parcel-full' | 'account-full' | 'device-full' | 'unreadable' | 'offline' | 'failed';
+export type AnalyticsReason = AlertsReason | VerificationReason | FileReason;
 type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; spot?: AnalyticsSpot; reason?: AnalyticsReason; mode: 'demo' | 'account' | 'anonymous' };
 let config: Configuration | null = null;
 let startup: Promise<void> | undefined;
@@ -198,6 +200,14 @@ export function trackAction(name: string, outcome?: AnalyticsOutcome, spot?: Ana
   enqueue({ screen, mode, name, outcome, ...(spot ? { spot } : {}), ...(reason ? { reason } : {}) });
 }
 
+/** A parcel's change that holds its note and not its name. */
+function noteAlone(body: unknown): boolean {
+  try {
+    const value: unknown = typeof body === 'string' ? JSON.parse(body) : body;
+    return Boolean(value) && typeof value === 'object' && Object.hasOwn(value as object, 'note') && !Object.hasOwn(value as object, 'label');
+  } catch { return false; }
+}
+
 /** Only fixed event names leave this mapper. Paths, IDs and request bodies never do. */
 export function apiAnalyticsEvent(path: string, method = 'GET', body?: unknown): string | undefined {
   const pathname = path.split(/[?#]/, 1)[0];
@@ -210,6 +220,8 @@ export function apiAnalyticsEvent(path: string, method = 'GET', body?: unknown):
     } catch { /* Malformed requests are not analytics input. */ }
     return;
   }
+  // A note saved or deleted counts as such where it happens, never as a rename.
+  if (method === 'PATCH' && /^\/api\/packages\/[^/]+$/.test(pathname) && noteAlone(body)) return;
   return catalog.operations.find((rule) => rule.method === method && new RegExp(rule.path).test(pathname))?.event;
 }
 

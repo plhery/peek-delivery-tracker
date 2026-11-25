@@ -89,7 +89,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     const id = send.mock.calls[0][0].id;
     await waitFor(() => expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-feedback-wrong', 'success'));
 
-    await user.click(within(bubble()).getByRole('button', { name: 'Add a note' }));
+    await user.click(within(bubble()).getByRole('button', { name: 'Add details' }));
     const sheet = screen.getByRole('dialog', { name: 'What’s off?' });
     expect(within(sheet).getByRole('button', { name: 'Missing steps' })).toHaveAttribute('aria-pressed', 'true');
     expect(within(sheet).getByText('Sent with this parcel’s number and what UPS answered. Nothing about you.')).toBeVisible();
@@ -99,7 +99,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(send).toHaveBeenLastCalledWith({ id, answer: 'wrong', reasons: ['steps', 'status'], note: 'Delivered on Monday.', asked: 'page', app: 'web', locale: 'en' });
     // The note was offered once; the same answer is counted once.
-    await waitFor(() => expect(within(bubble()).queryByRole('button', { name: 'Add a note' })).toBeNull());
+    await waitFor(() => expect(within(bubble()).queryByRole('button', { name: 'Add details' })).toBeNull());
     expect(within(bubble()).getByRole('status')).toHaveTextContent('Thanks! I’ll look into it.');
     expect(mocks.track).toHaveBeenCalledTimes(1);
   });
@@ -123,15 +123,15 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     // Not a yes: the question stands on the next visit.
     expect(notes.memory).toEqual({ at: expect.any(String), scan: SCAN, right: undefined });
 
-    await user.click(within(bubble()).getByRole('button', { name: 'Add a note' }));
-    const sheet = screen.getByRole('dialog', { name: 'Add a note' });
+    await user.click(within(bubble()).getByRole('button', { name: 'Add details' }));
+    const sheet = screen.getByRole('dialog', { name: 'Add details' });
     expect(within(sheet).queryByRole('button', { name: 'Wrong status' })).toBeNull();
     expect(within(sheet).getByRole('button', { name: 'Send' })).toBeDisabled();
     await user.type(within(sheet).getByLabelText('What happened?'), ' Asked the neighbours. ');
     await user.click(within(sheet).getByRole('button', { name: 'Send' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(send).toHaveBeenLastCalledWith({ id, answer: 'not_received', pageSaid: 'delivered', note: 'Asked the neighbours.', asked: 'page', app: 'web', locale: 'en' });
-    await waitFor(() => expect(within(bubble()).queryByRole('button', { name: 'Add a note' })).toBeNull());
+    await waitFor(() => expect(within(bubble()).queryByRole('button', { name: 'Add details' })).toBeNull());
     expect(within(bubble()).getByText('Thanks, noted.')).toBeVisible();
     expect(within(bubble()).getByText(/^UPS says it was delivered/)).toBeVisible();
     expect(mocks.track).toHaveBeenCalledTimes(1);
@@ -172,7 +172,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     expect(within(bubble()).getAllByRole('button').map((button) => button.textContent))
       .toEqual(['It has arrived', 'Wrong status', 'Missing steps', 'Wrong carrier', 'Something else']);
     await user.click(within(bubble()).getByRole('button', { name: 'Missing steps' }));
-    await user.click(await within(bubble()).findByRole('button', { name: 'Add a note' }));
+    await user.click(await within(bubble()).findByRole('button', { name: 'Add details' }));
     const sheet = screen.getByRole('dialog', { name: 'What’s off?' });
     expect(within(sheet).queryByRole('button', { name: 'Wrong time or place' })).toBeNull();
   });
@@ -199,7 +199,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     open({ send });
     await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
     await user.click(within(bubble()).getByRole('button', { name: 'Something else' }));
-    await user.click(await within(bubble()).findByRole('button', { name: 'Add a note' }));
+    await user.click(await within(bubble()).findByRole('button', { name: 'Add details' }));
     const sheet = screen.getByRole('dialog', { name: 'What’s off?' });
     send.mockRejectedValueOnce(new Error('offline'));
     await user.type(within(sheet).getByLabelText('Anything to add? Optional'), 'A note');
@@ -216,7 +216,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     open();
     await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
     await user.click(within(bubble()).getByRole('button', { name: 'Something else' }));
-    await user.click(await within(bubble()).findByRole('button', { name: 'Add a note' }));
+    await user.click(await within(bubble()).findByRole('button', { name: 'Add details' }));
     const sheet = screen.getByRole('dialog', { name: 'What’s off?' });
     const field = within(sheet).getByLabelText('Anything to add? Optional');
     expect(field).toHaveAttribute('maxLength', '4000');

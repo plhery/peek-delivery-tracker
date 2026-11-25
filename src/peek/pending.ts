@@ -3,6 +3,7 @@ import { ApiAuthenticationError, type ApiAuth } from '../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../types';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from './links';
 import { isParcelLinkId, type ParcelClaimResult } from './linkModel';
+import { handOverNoteFiles, moveNoteIntoDemo } from './keptNotes';
 import { forgetRecent, recentFor } from './recents';
 
 /**
@@ -114,14 +115,17 @@ const settled = (outcome: KeepOutcome['outcome']) => outcome === 'kept' || outco
  */
 export async function keepParcelLink(id: string, auth: ApiAuth, signal?: AbortSignal): Promise<KeepOutcome> {
   const recent = recentFor(id);
-  const [result] = await claimParcelLinks([{ id, key: recent?.key, label: recent?.name }], auth, signal);
+  const [result] = await claimParcelLinks([{ id, key: recent?.key, label: recent?.name, note: recent?.note }], auth, signal);
   const outcome: KeepOutcome = {
     id,
     outcome: result?.outcome ?? 'unavailable',
     ...(result?.packageId ? { packageId: result.packageId } : {}),
     name: recent?.name ?? null,
   };
-  if (settled(outcome.outcome)) forgetRecent(id);
+  if (settled(outcome.outcome)) {
+    await handOverNoteFiles(id, outcome.packageId, auth);
+    forgetRecent(id);
+  }
   return outcome;
 }
 
@@ -181,6 +185,7 @@ export async function keepPendingInDemo(repo: ParcelRepo): Promise<KeepOutcome |
         if (!(error instanceof ParcelAlreadyExistsError)) throw error;
         outcome = { id, outcome: 'already', packageId: error.parcelId, name };
       }
+      if (outcome.packageId) await moveNoteIntoDemo(repo, id, outcome.packageId, recent?.note);
     }
     if (settled(outcome.outcome)) {
       if (recent?.key) await forgetParcelLink(id, recent.key).catch(() => undefined);

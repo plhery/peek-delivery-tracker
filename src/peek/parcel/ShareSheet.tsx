@@ -23,6 +23,11 @@ import { Sheet, SwitchRow } from './Sheet';
 
 const NO_WORDS: ShareWords = { name: false, note: '', from: '' };
 
+/** The words a link was shared with, as the sheet edits them. */
+const sharedWords = (gift: NonNullable<ParcelLinkChanges['giftWords']>): ShareWords => ({
+  name: !!gift.name, note: gift.note ?? '', from: gift.from ?? '', ...(gift.early ? { early: true } : {}),
+});
+
 interface Settings { showNumber: boolean; gift: boolean }
 
 /**
@@ -120,7 +125,10 @@ function ShareSheetView({ title, parcel, linkId, settings, loading, stopped, sto
   }
 
   const handOut = (how: 'share' | 'copy') => run(async () => {
-    const protectedWords = shown.gift ? { name: carried.name, note: cleanLinkText(carried.note, MAX_GIFT_NOTE_LENGTH), from: cleanLinkText(carried.from, MAX_GIFT_FROM_LENGTH) } : undefined;
+    const protectedWords = shown.gift ? {
+      name: carried.name, note: cleanLinkText(carried.note, MAX_GIFT_NOTE_LENGTH), from: cleanLinkText(carried.from, MAX_GIFT_FROM_LENGTH),
+      ...(words.early ? { early: true } : {}),
+    } : undefined;
     const url = parcelShareURL(await onLink(protectedWords), shown.gift ? {} : carried);
     if (how === 'share') {
       const outcome = await shareParcelLink(url);
@@ -142,7 +150,8 @@ function ShareSheetView({ title, parcel, linkId, settings, loading, stopped, sto
         <button type="button" className="button button--primary" disabled={working} onClick={() => void run(onAgain)}>{t('share.again')}</button>
       </div>}
     </> : <>
-      <SharePreview parcel={parcel} name={carried.name} showNumber={shown.showNumber} gift={shown.gift} />
+      <SharePreview parcel={parcel} name={carried.name} showNumber={shown.showNumber} gift={shown.gift}
+        early={shown.gift && words.early ? { note: cleanLinkText(note, MAX_GIFT_NOTE_LENGTH), from: cleanLinkText(from, MAX_GIFT_FROM_LENGTH) } : undefined} />
       <div className="peeks-switches peeks-switches--joined">
         <SwitchRow icon={<Glyph name="receipt" />} title={t('share.number.title')}
           checked={shown.showNumber} disabled={loading || working} busy={'showNumber' in saving} onChange={(value) => void change('showNumber', value)} />
@@ -152,13 +161,17 @@ function ShareSheetView({ title, parcel, linkId, settings, loading, stopped, sto
           checked={shown.gift} disabled={loading || working} busy={'gift' in saving} onChange={(value) => void change('gift', value)} />
       </div>
       {shown.gift && <div className="peeks-gift">
-        <label htmlFor={`${fields}-note`}>{t('share.gift.note')}</label>
+        <label htmlFor={`${fields}-note`}>{t(words.early ? 'share.gift.noteNow' : 'share.gift.note')}</label>
         <textarea id={`${fields}-note`} rows={2} maxLength={MAX_GIFT_NOTE_LENGTH} value={note} autoComplete="off"
           aria-describedby={`${fields}-private`} onChange={(event) => write('note', event.target.value)} />
+        <label className="peeks-gift__early">
+          <input type="checkbox" checked={!!words.early} onChange={(event) => onWords({ ...words, early: event.target.checked || undefined })} />
+          <span>{t('share.gift.early')}</span>
+        </label>
         <label htmlFor={`${fields}-from`}>{t('share.gift.from')}</label>
         <input id={`${fields}-from`} type="text" maxLength={MAX_GIFT_FROM_LENGTH} value={from} autoComplete="off"
           onChange={(event) => write('from', event.target.value)} />
-        <small id={`${fields}-private`}>{t('share.gift.private')}</small>
+        <small id={`${fields}-private`}>{t(words.early ? 'share.gift.privateEarly' : 'share.gift.private')}</small>
       </div>}
       <div className="peeks-link" aria-busy={loading || undefined}>
         {address
@@ -200,8 +213,7 @@ export function LinkShareSheet({ linkId, ownerKey, view, name, worksUntil, onCha
   onClose: () => void;
 }) {
   const { t } = useI18n();
-  const words = useLinkNote(linkId).share ?? (view.link.giftWords
-    ? { name: !!view.link.giftWords.name, note: view.link.giftWords.note ?? '', from: view.link.giftWords.from ?? '' } : NO_WORDS);
+  const words = useLinkNote(linkId).share ?? (view.link.giftWords ? sharedWords(view.link.giftWords) : NO_WORDS);
   const { link, parcel } = view;
 
   async function save(changes: ParcelLinkChanges, event: 'parcel-link-share-change' | 'parcel-link-share-stop') {
@@ -258,8 +270,7 @@ export function AccountShareSheet({ parcel, client, onClose }: {
   const [chosen, setChosen] = useState<Settings>({ showNumber: false, gift: false });
   const [draft, setDraft] = useState<ShareWords>(NO_WORDS);
   const noted = useLinkNote(state.link?.id ?? null).share;
-  const words = state.link ? noted ?? (state.link.giftWords
-    ? { name: !!state.link.giftWords.name, note: state.link.giftWords.note ?? '', from: state.link.giftWords.from ?? '' } : draft) : draft;
+  const words = state.link ? noted ?? (state.link.giftWords ? sharedWords(state.link.giftWords) : draft) : draft;
   const name = parcel.label.trim() || null;
 
   useEffect(() => {

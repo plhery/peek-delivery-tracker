@@ -7,7 +7,8 @@ import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLi
 import { noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
-import { archiveRecent, forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
+import * as keptNotes from '../keptNotes';
+import { archiveRecent, forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, noteParcel, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
 import { BringAlongInDemo, BringAlongParcels } from './BringAlong';
 import { bringable, BRING_ALONG_STORAGE_KEY, bringAlong, bringAlongInDemo, markOffered, offeredParcels } from './deviceParcels';
 
@@ -319,6 +320,28 @@ describe('the device’s parcels to bring along', () => {
     expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [] });
     const kept = (await repo.list()).find((parcel) => parcel.trackingNumber === '1ZDEMO202600000009');
     expect(kept?.archivedAt).toEqual(expect.any(String));
+  });
+
+  it('take a parcel’s note along: its words in the request, then its files to the parcel the account holds', async () => {
+    noteParcel(LINK_ID, 'Door code 4812');
+    const handed = vi.spyOn(keptNotes, 'handOverNoteFiles').mockResolvedValue(undefined);
+    mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'quota' }]);
+    await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth);
+    expect(mocks.claim.mock.calls[0][0]).toEqual([
+      { id: LINK_ID, key: OWNER_KEY, label: 'Coffee beans', note: 'Door code 4812' },
+      { id: OTHER_LINK_ID, key: OWNER_KEY, label: null },
+    ]);
+    expect(handed).toHaveBeenCalledExactlyOnceWith(LINK_ID, 'p1', auth);
+    handed.mockRestore();
+  });
+
+  it('in the demo, keep a parcel’s note with it', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    noteParcel(OTHER_LINK_ID, 'Door code 4812');
+    mocks.read.mockResolvedValueOnce(ups(OTHER_LINK_ID));
+    expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [] });
+    const kept = (await repo.list()).find((parcel) => parcel.trackingNumber === '1ZDEMO202600000009');
+    expect(kept?.note).toBe('Door code 4812');
   });
 
   it('keep more than twenty parcels twenty to a request', async () => {

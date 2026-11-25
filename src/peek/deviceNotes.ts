@@ -23,6 +23,8 @@ export interface ShareWords {
   /** A gift's note, and who it is from. */
   note: string;
   from: string;
+  /** The gift's note and who it is from show before it is delivered; what is inside still waits. */
+  early?: boolean;
 }
 
 /** The alert this browser has on a link: what it announces, and the push address the server knows it by. */
@@ -66,6 +68,7 @@ function note(value: unknown): LinkNote | null {
       name: share.name === true,
       note: cleanLinkText(typeof share.note === 'string' ? share.note : '', MAX_GIFT_NOTE_LENGTH) ?? '',
       from: cleanLinkText(typeof share.from === 'string' ? share.from : '', MAX_GIFT_FROM_LENGTH) ?? '',
+      ...(share.early === true ? { early: true } : {}),
     };
   }
   if (alert && typeof alert === 'object' && typeof alert.endpoint === 'string' && alert.endpoint

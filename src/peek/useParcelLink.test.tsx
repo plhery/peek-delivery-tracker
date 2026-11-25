@@ -428,6 +428,17 @@ describe('useParcelLink', () => {
     expect(location.hash).toBe('');
   });
 
+  it('shows a gift’s note and who it is from on the way when its sender asked, and keeps the name for the delivery', async () => {
+    history.replaceState(null, '', `/p/${LINK_ID}`);
+    const underway = testView({ owner: false, stages: ['accepted', 'in_transit'] });
+    answers({ ...underway, link: { ...underway.link, gift: true, giftWords: { name: null, note: 'Happy birthday!', from: 'Sam', early: true } } });
+    const { result } = renderHook(() => useParcelLink(LINK_ID));
+    await pass(0);
+    expect(result.current.words).toEqual({ name: null, note: 'Happy birthday!', from: 'Sam', early: true });
+    expect(result.current.name).toBeNull();
+    expect(recentFor(LINK_ID)?.name).toBeNull();
+  });
+
   it('shows a gift’s sender everything it carries all along', async () => {
     history.replaceState(null, '', `/p/${LINK_ID}#g=${encodeURIComponent('Happy birthday!')}`);
     const view = testView();

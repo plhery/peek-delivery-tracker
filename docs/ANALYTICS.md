@@ -55,6 +55,13 @@ are virtual names, never real URLs.
 - **Auth**: sign-in attempts and results, sign-out, demo entry/exit.
 - **Parcels**: add, rename, change carrier, archive, restore, delete, mute, refresh, copy,
   open carrier link, paste, scan, share-in.
+- **Notes**: a parcel's private note saved or deleted, and a photo or PDF added or removed, in
+  an account or on a guest's device. A file that did not join the note says why in one word
+  (`reason`): too big (`too-big`), not a photo or PDF (`type`), the parcel's five files
+  (`parcel-full`), the account's 200 MB (`account-full`) or the device's room (`device-full`)
+  taken, a photo Peek can't read (`unreadable`), offline (`offline`), or any other failure
+  (`failed`). A change of the note alone is not counted as a rename. Never the words, the
+  file names or the files.
 - **Front door**: each notice or question that stops a lookup, once as it appears: no
   number found, an order number, a pickup code, a placeholder or phone number, a check digit, several numbers or
   carriers to choose from, a carrier asking for a postcode or link, an Amazon account, a

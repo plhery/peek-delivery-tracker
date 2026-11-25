@@ -4,7 +4,7 @@ description: Send someone a link to follow your parcel, no account needed. Choos
 slug: share-parcel-tracking-link
 picture: Pip, the parcel with a face, wearing a red ribbon and holding up a phone that shows a parcel link to a smiling friend.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 To share a parcel's tracking in [Peek](/), open the parcel, tap its share button and send the link Peek makes: the person you send it to opens the parcel's page with no account. Turn on "Wrap as a gift" first, and the page keeps what's inside and who sent it a surprise until it's delivered, then shows your note.
@@ -71,9 +71,9 @@ The recipient can turn on notifications from the bell on the gift's card; they d
 
 ## Can the person I share with get notifications?
 
-Yes, for that one parcel and without an account: on the website, they tap "Notify me", as [parcel delivery notifications](guide:parcel-notifications) explains. A link takes up to ten such sign-ups.
+Yes, for that one parcel and without an account: on the website, they tap "Notify me", as [parcel delivery notifications](guide:parcel-notifications) explains. A link takes up to ten such sign-ups, browsers and phones together.
 
-If they have the [Peek app](https://peektracker.com/app), the link opens in it. Without an account, the app offers "Follow on this iPhone" ("Follow on this iPad", "Follow on this Mac", or "Follow on this device" on Android); signed in, "Add to my deliveries".
+If they have the [Peek app](https://peektracker.com/app), the link opens in it. Without an account, the app offers "Follow on this iPhone" ("Follow on this iPad", "Follow on this Mac", or "Follow on this device" on Android); signed in, "Add to my deliveries". Followed in the app, the parcel gets the notifications set for every parcel on that device, and its bell turns them off.
 
 Opening the link signs them up to nothing, and their notifications never carry the parcel's name or number.
 

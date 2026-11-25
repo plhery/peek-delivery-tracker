@@ -4,7 +4,7 @@ description: Envía a alguien un enlace para seguir tu paquete, sin cuenta. Elig
 slug: compartir-seguimiento-de-paquete
 picture: Pip, el paquete con cara, lleva un lazo rojo y sostiene en alto un móvil que enseña el enlace de un paquete a un amigo sonriente.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Para compartir el seguimiento de un paquete en [Peek](/), abre el paquete, toca su botón de compartir y envía el enlace que crea Peek: la persona que lo recibe abre la página del paquete sin cuenta. Si antes activas «Envolver como regalo», la página mantiene en secreto qué hay dentro y quién lo envía hasta que se entrega, y luego muestra tu nota.
@@ -71,9 +71,9 @@ El destinatario puede activar las notificaciones con la campana de la tarjeta de
 
 ## ¿Puede recibir notificaciones la persona con la que lo comparto?
 
-Sí, para ese paquete y sin cuenta: en la web, toca «Notificarme», como explican [las notificaciones de entrega de paquetes](guide:parcel-notifications). Un enlace admite hasta diez de estas suscripciones.
+Sí, para ese paquete y sin cuenta: en la web, toca «Notificarme», como explican [las notificaciones de entrega de paquetes](guide:parcel-notifications). Un enlace admite hasta diez de estas suscripciones, entre navegadores y móviles.
 
-Si tiene la [app de Peek](https://peektracker.com/app), el enlace se abre en ella. Sin cuenta, la app ofrece «Seguir en este iPhone» («Seguir en este iPad», «Seguir en este Mac» o, en Android, «Seguir en este dispositivo»); con sesión iniciada, «Añadir a mis entregas».
+Si tiene la [app de Peek](https://peektracker.com/app), el enlace se abre en ella. Sin cuenta, la app ofrece «Seguir en este iPhone» («Seguir en este iPad», «Seguir en este Mac» o, en Android, «Seguir en este dispositivo»); con sesión iniciada, «Añadir a mis entregas». Seguido en la app, el paquete recibe las notificaciones elegidas para todos los paquetes de ese dispositivo, y su campana las apaga.
 
 Abrir el enlace no activa ninguna suscripción, y sus notificaciones nunca llevan el nombre ni el número del paquete.
 

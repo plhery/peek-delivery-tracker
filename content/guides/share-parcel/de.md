@@ -4,7 +4,7 @@ description: Schick einen Link zu deinem Paket, ohne Konto. Wähle, ob er die ga
 slug: sendungsverfolgung-teilen
 picture: Pip, das Paket mit Gesicht, trägt eine rote Schleife und hält einer lächelnden Freundin ein Handy hin, auf dem ein Paket-Link zu sehen ist.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Um die Sendungsverfolgung eines Pakets in [Peek](/) zu teilen, öffne das Paket, tippe auf seinen Teilen-Knopf und schick den Link, den Peek erstellt: Wer ihn bekommt, öffnet die Seite des Pakets ohne Konto. Schaltest du vorher „Als Geschenk verpacken“ ein, bleibt auf der Seite bis zur Zustellung eine Überraschung, was drin ist und wer es geschickt hat; danach zeigt sie deine Nachricht.
@@ -71,9 +71,9 @@ Die beschenkte Person kann Benachrichtigungen über die Glocke auf der Karte des
 
 ## Bekommt die Person, mit der ich teile, Benachrichtigungen?
 
-Ja, für dieses eine Paket und ohne Konto: Auf der Website tippt sie auf „Sag mir Bescheid“, wie [Paketbenachrichtigungen](guide:parcel-notifications) erklärt. Ein Link nimmt bis zu zehn solcher Anmeldungen an.
+Ja, für dieses eine Paket und ohne Konto: Auf der Website tippt sie auf „Sag mir Bescheid“, wie [Paketbenachrichtigungen](guide:parcel-notifications) erklärt. Ein Link nimmt bis zu zehn solcher Anmeldungen an, Browser und Handys zusammen.
 
-Hat sie die [Peek-App](https://peektracker.com/app), öffnet sich der Link darin. Ohne Konto bietet die App „Auf diesem iPhone verfolgen“ an („Auf diesem iPad verfolgen“, „Auf diesem Mac verfolgen“ oder unter Android „Auf diesem Gerät verfolgen“); angemeldet „Zu meinen Sendungen hinzufügen“.
+Hat sie die [Peek-App](https://peektracker.com/app), öffnet sich der Link darin. Ohne Konto bietet die App „Auf diesem iPhone verfolgen“ an („Auf diesem iPad verfolgen“, „Auf diesem Mac verfolgen“ oder unter Android „Auf diesem Gerät verfolgen“); angemeldet „Zu meinen Sendungen hinzufügen“. In der App verfolgt, bekommt das Paket die Mitteilungen, die für jedes Paket auf diesem Gerät eingestellt sind, und seine Glocke schaltet sie ab.
 
 Das Öffnen des Links meldet sie nirgends an, und ihre Benachrichtigungen nennen nie den Namen oder die Nummer des Pakets.
 

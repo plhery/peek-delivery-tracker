@@ -4,7 +4,7 @@ description: Manda un link per seguire il tuo pacco, senza account. Scegli se mo
 slug: condividere-tracking-pacco
 picture: Pip, il pacco con la faccia, porta un fiocco rosso e mostra a un'amica sorridente un telefono con il link di un pacco.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Per condividere il tracciamento di un pacco in [Peek](/), apri il pacco, tocca il suo pulsante di condivisione e manda il link che crea Peek: chi lo riceve apre la pagina del pacco senza account. Se prima attivi «Incarta come regalo», la pagina tiene nascosti il contenuto e il mittente fino alla consegna, poi mostra il tuo biglietto.
@@ -71,9 +71,9 @@ Il destinatario può attivare le notifiche dalla campanella sulla scheda del reg
 
 ## La persona con cui condivido può ricevere notifiche?
 
-Sì, per quel pacco e senza account: sul sito tocca «Avvisami», come spiega [Notifiche di consegna dei pacchi](guide:parcel-notifications). Un link accetta fino a dieci iscrizioni di questo tipo.
+Sì, per quel pacco e senza account: sul sito tocca «Avvisami», come spiega [Notifiche di consegna dei pacchi](guide:parcel-notifications). Un link accetta fino a dieci iscrizioni di questo tipo, tra browser e telefoni.
 
-Se ha l'[app Peek](https://peektracker.com/app), il link si apre lì. Senza account, l'app propone «Segui su questo iPhone» («Segui su questo iPad», «Segui su questo Mac», o «Segui su questo dispositivo» su Android); con l'accesso, «Aggiungi alle mie consegne».
+Se ha l'[app Peek](https://peektracker.com/app), il link si apre lì. Senza account, l'app propone «Segui su questo iPhone» («Segui su questo iPad», «Segui su questo Mac», o «Segui su questo dispositivo» su Android); con l'accesso, «Aggiungi alle mie consegne». Seguito nell'app, il pacco riceve le notifiche scelte per tutti i pacchi di quel dispositivo, e la sua campanella le spegne.
 
 Aprire il link non la iscrive a niente, e le sue notifiche non riportano mai il nome o il numero del pacco.
 

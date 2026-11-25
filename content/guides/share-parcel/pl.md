@@ -4,7 +4,7 @@ description: Wyślij komuś link do śledzenia przesyłki, bez zakładania konta
 slug: udostepnianie-sledzenia-przesylki
 picture: Pip, przesyłka z buzią, przewiązany czerwoną wstążką, trzyma w górze telefon z linkiem do przesyłki i pokazuje go uśmiechniętemu przyjacielowi.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Żeby udostępnić śledzenie przesyłki w [Peeku](/), otwórz przesyłkę, stuknij jej przycisk udostępniania i wyślij link, który utworzy Peek: osoba, która go dostanie, otworzy stronę przesyłki bez konta. Jeśli najpierw włączysz „Zapakuj jako prezent”, strona do czasu doręczenia zachowa w tajemnicy, co jest w środku i kto to wysłał, a potem pokaże twój liścik.
@@ -71,9 +71,9 @@ Odbiorca może włączyć powiadomienia dzwonkiem na karcie prezentu; nie mówi�
 
 ## Czy osoba, której udostępniam przesyłkę, dostanie powiadomienia?
 
-Tak, o tej jednej przesyłce i bez konta: na stronie internetowej stuka „Powiadom mnie”, jak wyjaśniają [powiadomienia o dostawie przesyłek](guide:parcel-notifications). Jeden link przyjmuje do dziesięciu takich zapisów.
+Tak, o tej jednej przesyłce i bez konta: na stronie internetowej stuka „Powiadom mnie”, jak wyjaśniają [powiadomienia o dostawie przesyłek](guide:parcel-notifications). Jeden link przyjmuje do dziesięciu takich zapisów, z przeglądarek i telefonów razem.
 
-Jeśli ma [aplikację Peek](https://peektracker.com/app), link otworzy się w niej. Bez konta aplikacja proponuje „Śledź na tym iPhonie” („Śledź na tym iPadzie”, „Śledź na tym Macu” albo, na Androidzie, „Śledź na tym urządzeniu”); po zalogowaniu „Dodaj do moich dostaw”.
+Jeśli ma [aplikację Peek](https://peektracker.com/app), link otworzy się w niej. Bez konta aplikacja proponuje „Śledź na tym iPhonie” („Śledź na tym iPadzie”, „Śledź na tym Macu” albo, na Androidzie, „Śledź na tym urządzeniu”); po zalogowaniu „Dodaj do moich dostaw”. Śledzona w aplikacji przesyłka dostaje powiadomienia ustawione dla wszystkich przesyłek na tym urządzeniu, a jej dzwonek je wyłącza.
 
 Otwarcie linku nie zapisuje jej do niczego, a jej powiadomienia nigdy nie zawierają nazwy ani numeru przesyłki.
 

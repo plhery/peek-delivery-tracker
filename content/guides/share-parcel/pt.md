@@ -4,7 +4,7 @@ description: Envia a alguém uma ligação para seguir a tua encomenda, sem cont
 slug: partilhar-seguimento-encomenda
 picture: O Pip, a encomenda com cara, tem uma fita vermelha e ergue um telemóvel que mostra a ligação de uma encomenda a um amigo sorridente.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Para partilhar o seguimento de uma encomenda no [Peek](/), abre a encomenda, toca no botão de partilha e envia a ligação que o Peek cria: quem a receber abre a página da encomenda sem conta. Se ativares antes «Embrulhar como presente», a página guarda segredo sobre o que vem dentro e quem a enviou até à entrega, e depois mostra a tua nota.
@@ -71,9 +71,9 @@ O destinatário pode ligar as notificações no sino do cartão do presente; ela
 
 ## A pessoa com quem partilho pode receber notificações?
 
-Pode, para essa encomenda e sem conta: no site, toca em «Notificar-me», como explicam [as notificações de entrega de encomendas](guide:parcel-notifications). Uma ligação aceita até dez destas inscrições.
+Pode, para essa encomenda e sem conta: no site, toca em «Notificar-me», como explicam [as notificações de entrega de encomendas](guide:parcel-notifications). Uma ligação aceita até dez destas inscrições, entre navegadores e telemóveis.
 
-Se tiver a [app do Peek](https://peektracker.com/app), a ligação abre-se nela. Sem conta, a app oferece «Seguir neste iPhone» («Seguir neste iPad», «Seguir neste Mac» ou, no Android, «Seguir neste dispositivo»); com sessão iniciada, «Adicionar às minhas entregas».
+Se tiver a [app do Peek](https://peektracker.com/app), a ligação abre-se nela. Sem conta, a app oferece «Seguir neste iPhone» («Seguir neste iPad», «Seguir neste Mac» ou, no Android, «Seguir neste dispositivo»); com sessão iniciada, «Adicionar às minhas entregas». Seguida na app, a encomenda recebe as notificações escolhidas para todas as encomendas desse dispositivo, e o sino dela desliga-as.
 
 Abrir a ligação não inscreve a pessoa em nada, e as notificações dela nunca trazem o nome nem o número da encomenda.
 

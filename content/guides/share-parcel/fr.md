@@ -4,7 +4,7 @@ description: Envoie un lien pour suivre ton colis, sans compte. Choisis s'il mon
 slug: partager-suivi-colis
 picture: Pip, le colis avec un visage, porte un ruban rouge et tend à une amie souriante un téléphone qui affiche le lien d'un colis.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-25
 ---
 
 Pour partager le suivi d'un colis dans [Peek](/), ouvre le colis, touche son bouton de partage et envoie le lien que Peek crée : la personne qui le reçoit ouvre la page du colis sans compte. Active d'abord « Emballer en cadeau », et la page garde le contenu et l'expéditeur secrets jusqu'à la livraison, puis affiche ton mot.
@@ -71,9 +71,9 @@ Le destinataire peut activer les notifications avec la cloche sur la carte du ca
 
 ## La personne avec qui je partage peut-elle recevoir des notifications ?
 
-Oui, pour ce colis-là et sans compte : sur le site, elle touche « Préviens-moi », comme l'explique [Notifications de livraison](guide:parcel-notifications). Un lien accepte jusqu'à dix inscriptions de ce type.
+Oui, pour ce colis-là et sans compte : sur le site, elle touche « Préviens-moi », comme l'explique [Notifications de livraison](guide:parcel-notifications). Un lien accepte jusqu'à dix inscriptions de ce type, navigateurs et téléphones ensemble.
 
-Si elle a l'[app Peek](https://peektracker.com/app), le lien s'ouvre dedans. Sans compte, l'app propose « Suivre sur cet iPhone » (« Suivre sur cet iPad », « Suivre sur ce Mac », ou « Suivre sur cet appareil » sur Android) ; connectée, « Ajouter à mes livraisons ».
+Si elle a l'[app Peek](https://peektracker.com/app), le lien s'ouvre dedans. Sans compte, l'app propose « Suivre sur cet iPhone » (« Suivre sur cet iPad », « Suivre sur ce Mac », ou « Suivre sur cet appareil » sur Android) ; connectée, « Ajouter à mes livraisons ». Suivi dans l'app, le colis reçoit les notifications choisies pour tous les colis de cet appareil, et sa cloche les coupe.
 
 Ouvrir le lien ne l'inscrit à rien, et ses notifications ne contiennent jamais le nom ni le numéro du colis.
 

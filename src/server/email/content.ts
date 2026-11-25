@@ -75,6 +75,9 @@ async function emailContent(input: DeliveryEmailInput, draw = drawCard): Promise
   webAddress(input.offUrl, 'offUrl');
 
   const parcel = toParcel(input.parcel);
+  // The owner's private note and its files never reach an email or its picture.
+  delete parcel.note;
+  delete parcel.files;
   const stage = input.stage ?? 'delivered';
   // The message's own words: the rest of the email is the same for all three. A delivered parcel whose last movement
   // made it ready for pickup was collected there, as the app says; one taken back out for delivery was brought to the door.

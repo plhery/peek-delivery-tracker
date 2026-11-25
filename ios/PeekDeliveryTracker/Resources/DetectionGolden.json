@@ -55023,6 +55023,14 @@
     ]
   },
   {
+    "input": "51000000001775001",
+    "carrier": "colis-prive",
+    "confidence": "high",
+    "candidates": [
+      "colis-prive"
+    ]
+  },
+  {
     "input": "5101637912",
     "carrier": "unknown",
     "confidence": "low",
@@ -106916,12 +106924,9 @@
   },
   {
     "input": "MYYF99000017CN",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "mayiyinfu",
+    "confidence": "high",
     "candidates": [
-      "mayiyinfu"
-    ],
-    "asked": [
       "mayiyinfu"
     ]
   },

@@ -1638,6 +1638,10 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
+        "pattern": "^5[12]\\d{10}(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}$",
+        "confidence": "high"
+      },
+      {
         "pattern": "^(?:[A-Z]{2}\\d{10}|[A-Z]\\d{11}|\\d{12})(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
         "confidence": "low",
         "servedCountriesOnly": true
@@ -22319,9 +22323,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "mayiyinfu",
-      "recognitionRank": 751,
-      "recognitionPattern": "^MYYF\\d{8}CN$"
+      "adapter": "mayiyinfu"
     },
     "linkRules": [
       {
@@ -22342,7 +22344,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^MYYF\\d{8}CN$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ]
   },

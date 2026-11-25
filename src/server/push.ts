@@ -1844,11 +1844,17 @@ export class InboxPushNotificationService extends AppPushNotificationService {
 type LiveActivityDeliveryKind = 'start' | 'update' | 'end';
 
 /**
- * Whether a scan out for delivery is from a round that is over, too old to start a Live Activity: more than a day
- * old, as for the other notifications (`isOldNews`), or two days for a scan without a clock. The app would end such
- * an activity as soon as it ran (`isOnDeliveryRound`).
+ * Whether a scan out for delivery is from a round that is over, too old to start a Live Activity: its day has ended
+ * on the clock its time states (`event_time`, "…T17:00:00+01:00"; a "Z" or "-00:00" states none), as the round's end
+ * the apps go by (`delivery_round_ends_at`), or else it is more than a day old, as for the other notifications
+ * (`isOldNews`), or two days for a scan without a clock. The app would end such an activity as soon as it ran
+ * (`isOnDeliveryRound`).
  */
 export function pastRound(row: JsonObject, now: number): boolean {
+  const time = typeof row.event_time === 'string' ? row.event_time.trim() : '';
+  const stated = row.event_has_time !== false && /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(time)
+    ? DateTime.fromISO(time, { setZone: true }) : null;
+  if (stated?.isValid && now >= stated.startOf('day').plus({ days: 1 }).toMillis()) return true;
   return Date.parse(stringField(row, 'occurred_at')) < now - (row.event_has_time === false ? 2 : 1) * DAY_MS;
 }
 
@@ -1896,7 +1902,7 @@ export class DeliveryLiveActivityNotificationService {
       }
       const kind = this.deliveryKind(newest);
       if (!kind) continue;
-      // An old scan out for delivery, such as the history of a parcel just added, starts nothing: its round is over.
+      // A scan out for delivery on a round that is over, such as the history of a parcel just added, starts nothing.
       // Recorded as updates, as a start sent would be, the batch leaves the parcel's native alerts as they were.
       if (kind === 'start' && pastRound(newest, this.apns.now() * 1_000)) {
         await record(events, 'update');

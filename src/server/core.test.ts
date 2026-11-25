@@ -1240,7 +1240,7 @@ describe('native notification boundaries', () => {
 
   it('starts no Live Activity for a scan out for delivery on a round that is over', async () => {
     const now = Date.parse('2026-11-24T12:00:00Z');
-    const start = (packageId: string, occurredAt: string, eventHasTime = true) => ({
+    const start = (packageId: string, occurredAt: string, eventHasTime = true, eventTime?: string) => ({
       device_id: 'device-1',
       package_id: packageId,
       event_id: `${packageId}-scan`,
@@ -1249,12 +1249,17 @@ describe('native notification boundaries', () => {
       stage: 'out_for_delivery',
       occurred_at: occurredAt,
       event_has_time: eventHasTime,
+      ...eventTime ? { event_time: eventTime } : {},
     });
-    // A parcel just added whose newest scan went out three days ago, one out this morning, and one dated by its day alone yesterday.
+    // A parcel just added whose newest scan went out three days ago, one out this morning, one dated by its day alone
+    // yesterday, one out yesterday evening in Paris, its day over at midnight there, and one out this morning in Tokyo,
+    // yesterday in UTC.
     const rows = [
       start('added', '2026-11-21T08:10:00Z'),
       start('today', '2026-11-24T07:30:00Z'),
       start('dated', '2026-11-23T00:00:00Z', false),
+      start('evening', '2026-11-23T16:00:00Z', true, '2026-11-23T17:00:00+01:00'),
+      start('tokyo', '2026-11-23T23:00:00Z', true, '2026-11-24T08:00:00+09:00'),
     ];
     const client = {
       listPendingLiveActivityEvents: vi.fn().mockResolvedValue(rows),
@@ -1272,11 +1277,15 @@ describe('native notification boundaries', () => {
     const live = new DeliveryLiveActivityNotificationService(client as never, native);
     const send = vi.spyOn(live, 'send').mockResolvedValue(undefined);
 
-    await expect(live.dispatch()).resolves.toMatchObject({ attempted: 2, sent: 2 });
-    expect(send.mock.calls.map(([row, kind]) => [row.package_id, kind])).toEqual([['today', 'start'], ['dated', 'start']]);
+    await expect(live.dispatch()).resolves.toMatchObject({ attempted: 3, sent: 3 });
+    expect(send.mock.calls.map(([row, kind]) => [row.package_id, kind]))
+      .toEqual([['today', 'start'], ['dated', 'start'], ['tokyo', 'start']]);
     // Recorded as handled, the old scan is not read again, and blocks no start for a later round.
     expect(client.recordLiveActivityDeliveries).toHaveBeenCalledWith([
       expect.objectContaining({ packageId: 'added', deliveryKind: 'update' }),
+    ]);
+    expect(client.recordLiveActivityDeliveries).toHaveBeenCalledWith([
+      expect.objectContaining({ packageId: 'evening', deliveryKind: 'update' }),
     ]);
   });
 

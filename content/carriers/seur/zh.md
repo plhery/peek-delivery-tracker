@@ -12,7 +12,7 @@ SEUR 是西班牙的包裹和快递公司，隶属于同样运营 DPD 的 Geopos
 
 SEUR 运单号通常为 14 位或 21 位数字，也支持 7 位编码：
 
-| 格式（示例） | 说明 |
+| 格式（虚构） | 说明 |
 | --- | --- |
 | `48291736058419` | 14 位数字 |
 | `739204815620374815264` | 21 位数字 |
@@ -20,7 +20,7 @@ SEUR 运单号通常为 14 位或 21 位数字，也支持 7 位编码：
 
 请在商家的发货邮件或订单页面查找单号。完全找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
 
-14 位数字也常见于 DPD、BRT 等多家快递，请以商家发货邮件中注明的快递公司为准。
+14 位数字也符合 DPD、BRT 等其他快递的单号格式，请以商家发货邮件中注明的快递公司为准。
 
 ## SEUR 物流状态说明
 
@@ -56,7 +56,7 @@ SEUR 查询官网提供西班牙语和英语版本。下表列出的是 SEUR 原
 
 **派送未成功。** 物流会显示 `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`，你可以重新预约派送。如果改为转投 SEUR Pickup 自提点，则会显示 `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.`。
 
-**SEUR Pickup 自提点与自提柜。** SEUR 拥有数千家 Pickup 合作门店和自提柜，可在 seur.com 查找。包裹到达后，状态会显示 `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`；从门店取走后会显示 `EL DESTINATARIO HA RETIRADO EL ENVÍO DE LA TIENDA SEUR PICKUP SELECCIONADA.`。如果指定的自提点无法接收，会显示 `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO`；如果所选柜机无法投递，`EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.` 表示需要另选其他 SEUR Pickup 网点。
+**SEUR Pickup 自提点与自提柜。** SEUR 拥有数千家 Pickup 门店和自提柜，可在 seur.com 查找。包裹到达后，状态会显示 `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`；从门店取走后会显示 `EL DESTINATARIO HA RETIRADO EL ENVÍO DE LA TIENDA SEUR PICKUP SELECCIONADA.`。如果指定的自提点无法接收，会显示 `NO SE HA PODIDO DEPOSITAR EL ENVÍO EN EL PUNTO SOLICITADO`；如果所选柜机无法投递，`EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.` 表示需要另选其他 SEUR Pickup 网点。
 
 ## SEUR 包裹延误、丢失或破损
 
@@ -74,9 +74,9 @@ SEUR 查询官网提供西班牙语和英语版本。下表列出的是 SEUR 原
 
 ## 使用 Peek 跟踪 SEUR 包裹
 
-遇到 21 位数字时，[Peek](/) 会直接向 SEUR 查询。遇到 14 位数字时，Peek 会同时向多家可能匹配的快递查询，并对位于西班牙的用户优先查 SEUR。界面会先显示“正在查询物流服务…”，当只有 SEUR 有记录时显示“SEUR 有这个包裹的记录”；若未自动选中，点击“更换”选择 SEUR 即可。7 位单号也请这样手动选择——由于 SEUR 会循环复用 7 位码，Peek 不会自动拿 7 位数字去查 SEUR。带有 `tracking=` 参数的 miSEUR 或实时跟踪链接同样可直接粘贴，无需邮编。第 13 至 15 位为 `000` 的 21 位数字会被优先识别为[澳大利亚邮政](carrier:australia-post)，如需查 SEUR 请点击“更换”手动选择。
+遇到 21 位数字时，[Peek](/) 会直接向 SEUR 查询。遇到 14 位数字时，Peek 会同时向多家可能匹配的快递查询，并对位于西班牙的用户优先查 SEUR。界面会先显示“正在查询物流服务…”，当只有 SEUR 有记录时显示“SEUR 有这个包裹的记录。”；否则点击“更换”并选择 SEUR。7 位单号也请这样手动选择——由于 SEUR 会复用 7 位码，Peek 不会自动拿 7 位数字去查 SEUR。带有 `tracking=` 参数的 miSEUR 或实时跟踪链接同样可直接粘贴，无需邮编。第 13 至 15 位为 `000` 的 21 位数字会被识别为[澳大利亚邮政](carrier:australia-post)，如需查 SEUR 请点击“更换”手动选择。
 
-Peek 会显示包裹状态、物流轨迹和重量。由于 SEUR 的扫描记录不附带地点，地图上不会标出轨迹位置。状态文字保留 SEUR 的西班牙语原文，签收类状态会显示为“已签收”。Peek 会隐去包裹件数、寄件人、收件人以及取件 PIN 码和二维码。SEUR 的时间戳不含可靠时区，因此 Peek 按马德里时间解析并展示 SEUR 原轨迹。一票多件（多包裹）货件只能通过第三方物流跟踪服务跟进。你可以开启状态变化通知。
+Peek 会显示包裹状态、物流轨迹和重量。由于 SEUR 的扫描记录不附带地点，地图上不会标出轨迹位置。状态文字保留 SEUR 的西班牙语原文，签收类状态会显示为“已签收”。Peek 会隐去包裹件数、寄件人、收件人以及派送 PIN 码和二维码。SEUR 的时间戳不含可靠时区，因此 Peek 按马德里时间解析并展示 SEUR 原轨迹。一票多件（多包裹）货件只能通过第三方物流跟踪服务跟进。你可以开启状态变化通知。
 
 ## SEUR 快递查询常见问题
 
@@ -90,11 +90,12 @@ Peek 会显示包裹状态、物流轨迹和重量。由于 SEUR 的扫描记录
 
 ### SEUR 和 DPD 是同一家公司吗？
 
-不完全是：SEUR 与 DPD 同属 Geopost 集团，是该集团旗下的两家并行派送品牌。
+不完全是：SEUR 是 Geopost 集团旗下的派送品牌之一，与 DPD 并列。
 
 :::sources
 - [Geopost: Who we are](https://www.geopost.com/en/about-us/who-we-are/) – SEUR 与 DPD 同为 Geopost 集团旗下派送品牌
-- [Geopost: SEUR](https://www.geopost.com/en/about-us/our-companies-and-partners/seur/) – 西班牙快递服务、Pickup 合作门店与自提柜
+- [Geopost: SEUR](https://www.geopost.com/en/about-us/our-companies-and-partners/seur/) – 西班牙快递服务、Pickup 门店与自提柜
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – 欧盟规则下收货前的运输破损责任由卖家承担
 - [INCIBE: Circulan SMS fraudulentos que suplantan a SEUR (西班牙语)](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-seur-que-no-te-enganen) – 2021 年 2 月防诈骗警示：虚假短信、小额收费、盗刷银行卡、手动输入官网及联系银行
+- [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – 免账号查询、西班牙语和英语跟踪页、单号格式、状态与阶段、“未找到”提示、客服页面、Peek 读取的内容
 :::

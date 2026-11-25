@@ -1,6 +1,6 @@
 ---
 title: Correos 西班牙邮政查询：单号、状态、Citypaq 与清关
-description: 查询西班牙 Correos 邮政包裹：单号格式、西语与英语物流状态含义、错投处理、Citypaq 自提柜、海关清关与客服联系方式。
+description: 查询西班牙 Correos 邮政包裹：单号格式、西语与英语物流状态含义、派送未成功、Citypaq 自提柜、海关清关与客服联系方式。
 slug: correos-spain-tracking
 published: 2026-11-24
 updated: 2026-11-24
@@ -10,7 +10,7 @@ Correos 是西班牙国家邮政。你可以在其英文[快递查询页](https:
 
 ## Correos 运单号格式
 
-Correos 未公开官方单号格式列表，但常见单号通常如下所示（示例为编造号码）：
+Correos 未公开官方单号格式列表，但其单号通常如下所示（示例为编造号码）：
 
 | 格式 | 说明 |
 | --- | --- |
@@ -19,13 +19,13 @@ Correos 未公开官方单号格式列表，但常见单号通常如下所示（
 | `PR482910573649182C` | `PR` 加 15 位数字和 `C`。 |
 | `RR482910576ES` | 2 位字母、9 位数字加 `ES`：西班牙签发的国际邮政单号。 |
 
-Correos 会通过电子邮件、短信（或两者同时）发送单号，并印在到达通知单（aviso de llegada）上；网店通常会写在发货邮件里。Citypaq 的 PIN 码仅用于开柜，不是运单号。
+Correos 会通过电子邮件、短信（或两者同时）发送单号，并印在到达通知单（aviso de llegada）上；网店会写在发货邮件里。Citypaq 的 PIN 码仅用于开柜，不是运单号。
 
 纯数字的 16 位或 23 位号码绝不是 Correos 单号，它们可能属于 Correos Express。找不到单号？查看[如何查找运单号](guide:find-tracking-number)（英文）。
 
 ## Correos 物流状态含义
 
-Correos 查询页默认为西班牙语，同时也提供英文版。下表按包裹常见经历顺序列出西班牙语状态以及 Correos 官方英文表述：
+Correos 查询页默认为西班牙语，同时也提供英文版。下表按包裹经历的顺序列出西班牙语状态以及 Correos 官方英文表述：
 
 | Correos 状态 | 中文含义 |
 | --- | --- |
@@ -42,11 +42,11 @@ Correos 查询页默认为西班牙语，同时也提供英文版。下表按包
 
 有两条状态容易让人看错。英文版中的 `In delivery` 实际对应西班牙语里的两种不同状态：`En reparto`（正在派送途中）和 `En proceso de entrega`（等待下一次派送），需要结合下方明细行判断。另外，`Entregado al remitente` 虽然字面带有“已送达”，实际意思是包裹已经退回到寄件人手里。
 
-## 错投处理、邮局自提与 Citypaq 自提柜
+## 派送未成功、邮局自提与 Citypaq 自提柜
 
-收到 Correos 的上门派送短信后，包裹通常会在 24 至 72 小时内送达（视所选服务而定）。如果当时无人且该服务包含两次派送，第二条短信会预告在 24 小时内再次派送；随后会再发短信告知存放邮局，次日起即可前去自提。
+收到 Correos 的上门派送短信后，包裹会在 24 至 72 小时内送达（视所选服务而定）。如果当时无人且该服务包含两次派送，第二条短信会预告在 24 小时内再次派送；随后会再发短信告知存放邮局，次日起即可前去自提。
 
-Correos 通常从该条短信次日起为包裹保留 15 天（部分产品期限可能不同，具体以通知为准），逾期后将退回寄件人。
+Correos 从该条短信次日起为包裹保留 15 天（部分产品期限可能不同，具体以通知为准），逾期后将退回寄件人。
 
 位于超市、加油站和商场的 Citypaq 自提柜全天随时可取，只需输入通过短信、邮件或 Correos App 收到的一次性 PIN 码。取件期限为 5 个自然日。丢失 PIN 码可在 Citypaq 页面使用“Resend PIN code”重新获取。
 
@@ -58,7 +58,7 @@ Correos 通常从该条短信次日起为包裹保留 15 天（部分产品期�
 
 Correos 未规定无更新满多少天即认定为丢失：请先向寄件人核实，再联系 Correos（见[物流停止更新怎么办](guide:tracking-not-updating)（英文））。地址有误或存在其他异常的包裹会被暂扣（“estacionado”）5 个自然日；你可以使用 Correos 发来的 PIN 码在“Gestión de estacionados”中更正，或联系寄件人处理。
 
-Correos 的赔付款默认支付给寄件人，只有寄件人签署书面授权申请后收件人才能受偿，因此请让商家发起理赔。Correos 的申报时限为：Paquete Premium 和 Estándar 延误索赔在首次派送尝试后 21 天内；这两类产品的破损在签收当场或 7 个自然日内；Paquete Estándar 丢失索赔在交寄后第 4 天至 1 年内。
+Correos 的赔付款支付给寄件人，只有寄件人签署书面授权申请后收件人才能受偿，因此请让商家发起理赔。Correos 的申报时限为：Paquete Premium 和 Estándar 延误索赔在首次派送尝试后 21 天内；这两类产品的破损在签收当场或 7 个自然日内；Paquete Estándar 丢失索赔在交寄后第 4 天至 1 年内。
 
 来自欧盟以外地区以及加那利群岛、休达和梅利利亚的商品需要办理进口手续。货值不超过 150 欧元时，你需缴纳增值税（若卖家已在 IOSS 下代收则除外）以及 Correos 清关手续费，可在派送前通过 correosaduanas.es 或 Correos App 支付，也可在送货上门时以现金支付。自 2026 年 7 月 1 日起，从欧盟以外寄往西班牙本土、巴利阿里群岛及加那利群岛、货值不超过 150 欧元的包裹还需按商品类别每类缴纳 3 欧元欧盟关税，由 Correos 在派送前代收且不留成。自 2026 年 11 月 1 日起，从欧盟以外跨境网购的包裹不论货值高低，还须按商品类别每类缴纳 2 欧元欧盟处理费，除非已在始发地缴纳，否则同样由 Correos 在派送前代收。更多说明见[包裹清关指南](guide:customs)（英文）。
 
@@ -75,17 +75,17 @@ Correos 的官方联系渠道如下（英语用户同样适用）：
 
 ## 使用 Peek 跟踪 Correos 包裹
 
-输入 23 位包裹编码、16 位货件编码、`PR` 开头单号或以 `ES` 结尾的国际邮政单号时，[Peek](/) 会立刻识别为 Correos。如果校验字母不正确，Peek 不会自动选中快递：请检查是否拼写有误，或点击“更换”手动选择 Correos。对于仅含一件包裹的 16 位货件编码，Peek 会直接跟踪该包裹；若包含多件包裹，请分别输入每件的 23 位单号。带有 `tracking-number=` 或旧版 `numero=` 参数的 correos.es 链接均可直接粘贴。
+输入 23 位包裹编码、16 位货件编码、`PR` 开头单号或以 `ES` 结尾的国际邮政单号时，[Peek](/) 会立刻识别为 Correos。如果校验字母不正确，Peek 不会给出任何快递公司：请检查是否拼写有误，或点击“更换”手动选择 Correos。对于仅含一件包裹的 16 位货件编码，Peek 会直接跟踪该包裹；若包含多件包裹，请分别输入每件的 23 位单号。带有 `tracking-number=` 或旧版 `numero=` 参数的 correos.es 链接均可直接粘贴。
 
 Peek 会按 Correos 原文展示状态：如果你在 Peek 中使用西班牙语、葡萄牙语或法语，会显示对应语言版本，其余情况显示英文版本。页面显示最近 20 条扫描（不含地点）、重量与尺寸、签收时间，以及包裹待取时所在邮局的名称和地址。Peek 会隐藏你的地址和签名（若 Correos 返回了姓名，仅对添加该包裹的本人显示在收件人一栏，绝不出现在分享链接中）。Peek 不显示预计送达日期；时间按马德里时间解析，但加那利群岛派送局的扫描按加那利时间解析，境外来件在始发国邮政的扫描按该国当地时间解析。
 
-来自境外的国际邮政单号一旦在西班牙 Correos 出现新进展，即可延续到 Correos 跟进。在 Correos 官网正常响应期间，Peek 最高每 10 分钟检查一次，在 Correos 扫描进入派送当天自当地时间早上 6 点起最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并支持“每次扫描”、“重要环节”或“仅派送当天”提醒。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。Peek 无法代缴关税或更改派送。
+来自境外的国际邮政单号一旦在西班牙 Correos 出现新进展，即可延续到 Correos 跟进。在 Correos 官网正常响应期间，Peek 最高每 10 分钟检查一次，在 Correos 扫描进入派送当天自当地时间早上 6 点起最高每 2 分钟检查一次（通过物流跟踪服务查询时，在派送当天打开页面或开启提醒时最高每 15 分钟检查一次），并支持“每次扫描”、“重要环节”或“仅派送当天”提醒。连续两天无新动态后（若仍停留在“已生成面单”或“已揽收”，则为 12 小时后），改为每小时检查一次。Peek 无法代缴海关税费或更改派送。
 
 ## Correos 快递查询常见问题
 
-### Correos 派送通常要几天？
+### Correos 派送要几天？
 
-Correos 表示 Paquete Estándar 境内通常需要 48 至 72 小时；往返加那利群岛需另加 5 天，休达和梅利利亚另加 6 天，均不含清关时间。收到 Correos 上门派送短信后，通常 24 至 72 小时送达。
+Correos 表示 Paquete Estándar 需要 48 至 72 小时；往返加那利群岛需另加 5 天，休达和梅利利亚另加 6 天，均不含清关时间。收到 Correos 上门派送短信后，请预留 24 至 72 小时。
 
 ### 为什么我的 Correos 单号查不到？
 
@@ -124,4 +124,6 @@ Correos Aduanas 是 Correos 的进口清关平台：你可以在 correosaduanas.
 - [Correos: Handling of queries and claims](https://www.correos.es/es/en/customer-service/your-query-your-complaint/handling-of-queries-and-claims) – 客服电话与服务时间
 - [Correos: Incidencias en el envío de paquetes](https://www.correos.es/es/es/atencion-al-cliente/recibir/incidencias) – 邮局渠道与 @CorreosAtiende
 - [Correos: Phishing](https://www.correos.es/es/en/customer-service/information-security/phishing) – 绝不通过短信索要资料或付款
+- [SEPI: Grupo CORREOS](https://www.sepi.es/en/sectores/grupo-correos) – 普遍服务、集团旗下的 Correos Express
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

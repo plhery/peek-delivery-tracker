@@ -15006,6 +15006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "rastreamento-gls-espanha",
+      "title": "Rastreamento GLS Espanha: status, Parcel Shops e contato",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dhl-ecommerce-pl",
       "catalog": "dhl-ecommerce-pl",
       "slug": "rastreamento-dhl-ecommerce-polonia",
@@ -15500,6 +15508,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreamento India Post: códigos Speed Post e status",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "rastreamento-delhivery",
+      "title": "Rastreamento Delhivery: códigos AWB, status e suporte",
+      "name": "Delhivery",
+      "color": "#ed4136"
     },
     {
       "id": "ekart",
@@ -18484,6 +18500,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "gls-es",
+      "catalog": "gls-es",
+      "slug": "gls-xibanya-kuaidi-chaxun",
+      "title": "GLS 西班牙（GLS Spain）查询：单号、邮编与自提点",
+      "name": "GLS Spain",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dhl-ecommerce-pl",
       "catalog": "dhl-ecommerce-pl",
       "slug": "dhl-ecommerce-bolan-kuaidi-chaxun",
@@ -19082,6 +19106,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Morning Global 物流查询：BR…MG单号、状态与客服联系",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "delhivery-yindu-kuaidi-chaxun",
+      "title": "Delhivery 印度快递查询：AWB 单号、状态与客服",
+      "name": "Delhivery",
+      "color": "#ed4136"
     },
     {
       "id": "ekart",

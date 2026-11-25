@@ -19,7 +19,7 @@ Digite o código sem espaços nem parênteses. O rastreamento cobre todos os env
 | `00159007734829173604` | 20 dígitos, trazendo `5900773` logo após os três primeiros. |
 | `RR482910576PL` | Formato postal internacional: duas letras, nove dígitos e `PL`. |
 
-Onde o número costuma aparecer:
+Onde o número aparece:
 
 - **Comprovante de postagem do remetente:** pergunte à loja se o e-mail do pedido não trouxer o código.
 - **Mensagem de retirada** para um ponto ou armário Pocztex, trazendo o código, o local, o prazo limite e um código de uso único.
@@ -50,33 +50,33 @@ O eMonitoring abre em polonês; a versão em inglês mostra estas frases, junto 
 | `Final delivery`, `Delivered to the PO box`, `Delivery at sender's request - delivered` | Entregue. |
 | `Returned`, `Returned to sender`, `Not collected at the delivery point` | Voltando para o remetente. |
 
-`Posting/collection` corresponde à postagem do remetente, não à retirada por você. A Poczta Polska também dá o nome `In delivery` a um de seus eventos de tentativa falha: o Peek distingue os dois pelo código interno do evento e exibe "Tentativa de entrega" em vez de "Saiu para entrega". Uma linha `Customs service` pode surgir depois da entrega para registrar tributos cobrados na porta. Sem "(Poland)", `Arrival at inward office of exchange` significa que um pacote enviado da Polônia chegou ao país de destino. Na página em polonês, uma entrega sem sucesso aparece como `Awizowana` e um pacote aguardando retirada como `Oczekuje na odbiór`. A Poczta Polska ressalva que os nomes dos eventos podem mudar.
+`Posting/collection` corresponde à postagem do remetente, não à retirada por você. A Poczta Polska também dá o nome `In delivery` a um de seus eventos de tentativa falha: o Peek distingue os dois pelo código interno do evento e exibe "Tentativa de entrega" em vez de "Saiu para entrega". Uma linha `Customs service` pode surgir depois da entrega para registrar tributos cobrados na porta. Sem "(Poland)", `Arrival at inward office of exchange` significa que um pacote enviado da Polônia chegou ao país de destino. Na página em polonês, uma entrega sem sucesso aparece como `Awizowana` e um pacote aguardando retirada na agência como `Oczekuje na odbiór`. A Poczta Polska ressalva que os nomes dos eventos podem mudar.
 
 ## Entrega sem sucesso da Poczta Polska: avisos, pontos e armários
 
 **Encomendas expressas Pocztex.** O entregador entrega a você, a um adulto da casa ou a alguém autorizado por você. Se ninguém estiver, você é avisado por SMS, e-mail ou aplicativo caso o remetente tenha informado seus dados; do contrário, recebe aviso na caixa de correio, seguido de segunda mensagem dois dias depois. O pacote aguarda na agência postal por 7 dias contados do dia seguinte ao aviso e depois volta ao remetente. Você também pode ligar para o entregador para deixar o pacote junto ao endereço (exceto entregas contra reembolso, com valor declarado, pagas pelo destinatário ou "do rąk własnych"), por sua conta e risco.
 
-**Pontos de retirada e armários.** Em um ponto Pocztex (PUNKT) escolhido pelo remetente, a encomenda aguarda 7 dias em uma agência postal ou 3 dias em comércios parceiros como Żabka, ABC ou Lewiatan. Armários (AUTOMAT), instalados em agências, postos de combustível e mercados como o Biedronka, guardam o pacote por 72 horas, com lembretes após 24 e 48 horas. Abra usando seu telefone e o código, ou pelo app Pocztex Mobile. Não é possível prorrogar o prazo nem transferir para outro ponto, mas qualquer pessoa com o código pode retirar.
+**Pontos de retirada e armários.** Em um ponto Pocztex (PUNKT) escolhido pelo remetente, a encomenda aguarda 7 dias em uma agência postal ou 3 dias em comércios parceiros como Żabka, ABC ou Lewiatan. Armários (AUTOMAT), instalados em agências, postos de combustível e mercados como o Biedronka, guardam o pacote por 72 horas, com lembretes após 24 e 48 horas. Abra usando seu número de telefone e o código, ou pelo app Pocztex Mobile. Não é possível prorrogar o prazo nem transferir para outro ponto, mas qualquer pessoa com o código pode retirar.
 
 **Cartas registradas e encomendas postais.** Um aviso ("awizo") é deixado na caixa de correio ou enviado eletronicamente mediante adesão. Um segundo aviso sai após 7 dias, e o objeto retorna se não for retirado em até 14 dias do primeiro. Mediante taxa, é possível pedir na agência ou em poczta-polska.pl até 14 dias extras.
 
 ## Pacote da Poczta Polska atrasado, extraviado, danificado ou na alfândega
 
-O rastreamento da Poczta Polska tem caráter apenas informativo, não servindo por si só como base para reclamação, e a empresa não publica orientação para rastreamento parado: pergunte ao remetente e consulte [rastreamento que não atualiza](guide:tracking-not-updating).
+O rastreamento da Poczta Polska tem caráter apenas informativo, não servindo como base para reclamação, e a empresa não publica orientação para rastreamento parado: pergunte ao remetente e consulte [rastreamento que não atualiza](guide:tracking-not-updating).
 
 **Quem pode reclamar.** O remetente, ou você depois da entrega ou se o remetente ceder o direito à reclamação: online em poczta-polska.pl, em papel ou pessoalmente em qualquer agência.
 
 **Prazos** para envios domésticos, conforme os termos da Poczta Polska:
 
 - Até 12 meses da postagem.
-- Avaria visível: no ato da entrega, registrada em termo. Você pode conferir o conteúdo de um pacote visivelmente danificado, exceto em pontos parceiros e armários.
+- Avaria visível: no ato da entrega, registrada em termo. Você pode conferir o conteúdo de um pacote visivelmente danificado, exceto em pontos e armários.
 - Avaria oculta ou conteúdo faltante: em até 7 dias do recebimento.
 - Extravio: uma encomenda Pocztex conta como extraviada 30 dias após a postagem; o extravio de encomenda postal comum pode ser comunicado após 14 dias da postagem, excluindo domingos e feriados.
 - A Poczta Polska responde em até 30 dias; cabe recurso em até 14 dias.
 
 Envios internacionais: até seis meses contados do dia seguinte à postagem.
 
-**Alfândega.** Desde 1º de julho de 2026, itens vindos de fora da UE de até € 150 pagam imposto alfandegário europeu de € 3 por tipo de produto, cobrado pela Poczta Polska; presentes entre pessoas físicas de até € 45 ficam isentos. Desde 1º de novembro de 2026, mercadorias compradas online fora da UE também pagam taxa de manuseio da UE de € 2 por item (produtos idênticos podem contar como um): a Poczta Polska cobra do destinatário e repassa à autoridade tributária polonesa (KAS). Podem incidir ainda IVA (se não pago antes) e a tarifa de declaração aduaneira da Poczta Polska de PLN 20 (PLN 25 se você fizer o despacho por conta própria), pagos na entrega ou antes da retirada. Você pode recusar o objeto. Saiba mais em [encomendas paradas na alfândega](guide:customs).
+**Alfândega.** Desde 1º de julho de 2026, itens vindos de fora da UE de até € 150 pagam imposto alfandegário europeu de € 3 por tipo de produto, cobrado pela Poczta Polska; presentes entre pessoas físicas de até € 45 ficam isentos. Desde 1º de novembro de 2026, mercadorias compradas online e enviadas de fora da UE também pagam taxa de manuseio da UE de € 2 por item (produtos idênticos podem contar como um): a Poczta Polska cobra do destinatário e repassa à autoridade tributária polonesa (KAS). Podem incidir ainda IVA (se não pago antes) e a tarifa de declaração aduaneira da Poczta Polska de PLN 20 (PLN 25 se você fizer o despacho por conta própria), pagos na entrega ou antes da retirada. Você pode recusar o objeto. Saiba mais em [encomendas paradas na alfândega](guide:customs).
 
 ## Telefone e atendimento ao cliente da Poczta Polska
 
@@ -91,7 +91,7 @@ Canais listados nas páginas em inglês e em polonês da Poczta Polska:
 
 ## Como rastrear encomendas da Poczta Polska com o Peek
 
-O [Peek](/) identifica imediatamente códigos `PX` com dígito verificador válido e códigos de 20 dígitos contendo `5900773` após os três primeiros e dígito verificador válido. Para códigos de 19 dígitos começados por `00`, ele consulta apenas a Poczta Polska, adicionando o dígito verificador exatamente como faz o site oficial. Códigos internacionais válidos terminados em `PL` iniciados por `R`, `E`, `L` ou `C` (exceto `CV`), como `RR`, `EE` ou `CP`, vão direto para a Poczta Polska; outros códigos válidos, como `VV`, aparecem como "Unknown postal carrier" enquanto o Peek consulta Poczta Polska e Chronopost, vencendo a Poczta Polska quando reconhece o envio. Links do eMonitoring com `numer=` também funcionam, sem precisar de código postal.
+O [Peek](/) identifica imediatamente códigos `PX` com dígito verificador válido e códigos de 20 dígitos contendo `5900773` após os três primeiros e dígito verificador válido. Para códigos de 19 dígitos começados por `00`, ele consulta apenas a Poczta Polska, adicionando o dígito verificador exatamente como faz o site oficial. Códigos internacionais válidos terminados em `PL` iniciados por `R`, `E`, `L` ou `C` (exceto `CV`), como `RR`, `EE` ou `CP`, vão direto para a Poczta Polska; outros códigos válidos, como `VV`, aparecem como "Operador postal desconhecido" enquanto o Peek consulta Poczta Polska e Chronopost, vencendo a Poczta Polska quando reconhece o envio. Links do eMonitoring com `numer=` também funcionam, sem precisar de código postal.
 
 O Peek mostra os textos em inglês conforme publicados (ou os em polonês se você usar o Peek em polonês), cada agência postal no mapa, o peso, o país de destino e a agência onde o pacote aguarda retirada. Não há previsão de data de entrega, e o Peek omite endereços de agências, horários de atendimento, documentos de pagamento e serviços adicionais. Leituras repassadas do exterior não trazem fuso horário e são interpretadas no horário do país de origem. Paletes, lotes agrupados e correspondências simples sem registro não podem ser rastreados.
 
@@ -105,7 +105,7 @@ A Pocztex é o serviço de entregas expressas da Poczta Polska, com site própri
 
 ### Posso rastrear a Poczta Polska em inglês?
 
-Sim. O eMonitoring abre em polonês, mas oferece uma versão completa em inglês.
+Sim. O eMonitoring abre em polonês, mas oferece uma versão em inglês.
 
 ### Quanto tempo a Pocztex leva para entregar?
 
@@ -137,4 +137,5 @@ Não como destinatário. Os termos da Poczta Polska deixam alterações de ender
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – tarifas de declaração alfandegária
 - [Poczta Polska: Poczta Polska SA Group](https://www.poczta-polska.pl/en/grupa-pp/poczta-polska/) – empresa estatal
 - [Pocztex Mobile on the App Store](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – aplicativo oficial
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

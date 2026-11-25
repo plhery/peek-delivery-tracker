@@ -6,17 +6,17 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-葡萄牙邮政 CTT（CTT – Correios de Portugal）是葡萄牙国家邮政运营商，旗下设有速递部门 CTT Expresso。你可以在 [ctt.pt 的 “Seguir objeto” 页面](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt)（提供英文切换）、CTT 手机应用中查件，或直接将单号粘贴到上方输入框。运单号通常通过 CTT 发送的短信或邮件、纸质投递通知单或寄件人发给你。
+葡萄牙邮政 CTT（CTT – Correios de Portugal）是葡萄牙国家邮政运营商，旗下设有速递部门 CTT Expresso。你可以在 [ctt.pt 的 “Seguir objeto” 页面](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt)（提供英文切换）、CTT 手机应用中查件，或直接将单号粘贴到上方输入框。运单号会通过 CTT 发送的短信或邮件、纸质投递通知单或寄件人发给你。
 
 ## 葡萄牙邮政 CTT 运单号格式
 
-大多数 CTT 运单号由 2 位业务前缀字母、9 位数字和 2 位发件国代码字母组成；部分快件则使用 22 位或 25 位纯数字编号。
+大多数 CTT 运单号由 2 位业务前缀字母、9 位数字和 2 位代表生成该单号国家的字母组成；部分快件则使用 22 位或 25 位纯数字编号。
 
-| 单号示例（虚构） | 说明 |
+| 单号格式（虚构） | 说明 |
 | --- | --- |
-| `RR482910576PT` | CTT 国际邮政单号。9 位数字中的最后一位是校验位。 |
+| `RR482910576PT` | CTT 邮政单号。9 位数字中的最后一位是校验位。 |
 | `RR482910576ES` | 相同结构但结尾为其他国家代码：由该国邮政生成（此例为[西班牙邮政 Correos](carrier:correos-spain)）。 |
-| `0048290048291057364918` | 22 位纯数字：在 ctt.pt 上通常对应从西班牙发出的包裹。 |
+| `0048290048291057364918` | 22 位纯数字：在 ctt.pt 上表示从西班牙发出的包裹。 |
 | `0048290048291057364918001` | 25 位纯数字。 |
 
 22 位和 25 位纯数字单号同样用于西班牙运营商 [CTT Express](carrier:ctt-express)（往返西班牙与葡萄牙），它在 cttexpress.com 有独立的查件系统。
@@ -27,7 +27,7 @@ updated: 2026-11-24
 
 Seguir objeto 页面支持葡萄牙语与英语版本。下表列出 Peek 记录及 CTT 帮助页中的葡萄牙语状态，另含 CTT 英文帮助页给出的两条英语状态：
 
-| CTT 状态原文 | 中文含义 |
+| CTT 状态原文 | 对你意味着什么 |
 | --- | --- |
 | `Aguarda entrada nos CTT` | CTT 已收到寄件人预报信息，尚未收到包裹实物。 |
 | `Aceite` | 已由 CTT 或发件国邮政收寄，正式开始运输。 |
@@ -45,7 +45,7 @@ Seguir objeto 页面支持葡萄牙语与英语版本。下表列出 Peek 记录
 
 `Em importação` 表示包裹已到葡萄牙海关，可能需要缴纳税费（见下文）。`Não entregue` 同样表示一次派送未成功。
 
-## 错过派送、自提点与 Locky 快递柜
+## CTT 包裹派送失败：通知单、自提点与 Locky 快递柜
 
 如果上门时无人签收，后续处理取决于寄件人所买的服务：包裹可能转存自提点（Loja CTT 邮局、Ponto CTT 合作店、Cacifo Locky 快递柜或 Payshop 网点）、安排再次派送、等待寄件人指示或直接退回。其中 Encomenda Postal 邮政包裹除非寄件人额外付了送货上门费，否则会直接送至 Loja 或 Ponto CTT 待取。
 
@@ -58,9 +58,9 @@ CTT 会通过短信、邮件或纸质通知单告知领取地点与截止时间�
 | 国际邮政包裹 | 15 天 |
 | 速递包裹（Expresso） | 5 天（部分产品为 10 天） |
 
-邮政包裹可申请延长保管至最多 30 天。取件请携带通知单和有效身份证件（葡萄牙居民证 Cartão de Cidadão、护照、居留许可或驾照等），或在柜台报单号并出示证件。
+邮政包裹可申请延长保管至最多 30 天。取件请携带通知单和有效身份证件（葡萄牙公民卡 Cartão de Cidadão、护照、居留许可或驾照等），或在柜台报单号并出示证件。
 
-**Locky 快递柜**保管包裹 5 天。CTT 通过短信或邮件发送取件 PIN 码；轨迹显示到达后，有时需最多等待 48 小时才可取件。
+**Locky 快递柜**保管包裹 5 天。CTT 通过短信或邮件发送取件 PIN 码；轨迹显示到达后，最多可能需要 48 小时才可取件。
 
 **以 `D` 开头的 Expresso 速递单号**（如 Para Amanhã、Em Dois Dias）可在 Seguir objeto 页面或 CTT 应用中更改派送地址、自提点、日期、重新派送或派送时段。改派需付费（更改日期费用为 5.01 欧元另加增值税），一旦包裹已存放在自提点则无法再改。
 
@@ -70,7 +70,7 @@ CTT 会通过短信、邮件或纸质通知单告知领取地点与截止时间�
 
 CTT 说明部分国家共享国际轨迹数据较慢甚至不共享。若包裹停滞不前，请联系向 CTT 购买运输服务的寄件人；另见[物流停止更新怎么办](guide:tracking-not-updating)（英文）。
 
-**海关税费：** 从欧盟境外寄来且购买时未预缴增值税的包裹，货值不超过 150 欧元需缴纳增值税加 CTT 7 欧元清关费（另加增值税）；150 至 1,000 欧元需缴纳增值税、关税及 14 欧元清关费。自 2026 年 7 月 1 日起，150 欧元以内的网购包裹还需按商品种类每项缴纳 3 欧元关税；自 2026 年 11 月 1 日起，无论货值高低均按商品种类每项加征 2 欧元欧盟处理费，由海关申报方承担并加计增值税，若结账时未预缴，则包裹抵葡时支付。包裹抵葡后你有 20 天时间办理清关，超期即永久退回寄件人。另见[包裹滞留海关怎么办](guide:customs)（英文）。
+**海关税费：** 从欧盟境外寄来且购买时未预缴增值税的包裹，货值不超过 150 欧元需缴纳增值税加 CTT 7 欧元清关费（另加增值税）；150 至 1,000 欧元需缴纳增值税、关税及 14 欧元清关费。自 2026 年 7 月 1 日起，150 欧元以内的网购包裹还需按商品种类每项缴纳 3 欧元关税；自 2026 年 11 月 1 日起，无论货值高低均按商品种类每项加征 2 欧元欧盟处理费，由海关申报方承担并加计增值税；若结账时未支付，则由你在包裹抵达葡萄牙时支付。包裹抵葡后你有 20 天时间办理清关，超期即永久退回寄件人。另见[包裹滞留海关怎么办](guide:customs)（英文）。
 
 **投诉与索赔：** 可通过 CTT 在线联系表单、客服电话或在任意 Loja/Ponto CTT 办理，国内件须在收寄后一年内提出，国际件为六个月内。按 CTT Expresso 条款，寄件人可在签收后 8 天内就破损索赔，在 30 天内就丢失或延误索赔。
 
@@ -89,13 +89,13 @@ CTT 官方客服渠道如下：
 
 ## 用 Peek 查询和跟踪 CTT 包裹
 
-[Peek](/) 会立即识别符合校验位的 CTT 国际邮政单号（两位字母 + 九位数字 + `PT`）并直接读取 CTT 官方轨迹，也支持粘贴带 `objects=` 参数的 ctt.pt 查件链接。只要输错一位数字导致校验位不符，Peek 就无法识别承运商，请仔细核对。其余非国际邮政格式的 CTT 编号不直连 CTT 官网，Peek 会通过综合跟踪服务查询。
+[Peek](/) 会立即识别符合校验位的 CTT 邮政单号（两位字母 + 九位数字 + `PT`）并直接读取 CTT 官方轨迹，带 `objects=` 参数的 ctt.pt 查件链接也可以直接粘贴。只要输错一位数字导致校验位不符，Peek 就无法识别承运商，请仔细核对。其余 CTT 编号不从 CTT 读取，Peek 会通过通用物流查询服务查询。
 
-Peek 会展示物流状态、最新 20 条扫描记录及地图上的大致网点/自提点位置，并附带 CTT 状态码。Peek 会隐藏寄件人信息（若 CTT 返回收件人姓名，也只在“收件人”栏向添加该包裹的本人可见，绝不出现在分享链接中），且 CTT 本身不提供预计送达日期。扫描时间按里斯本时间（亚速尔群岛按亚速尔时间）解析，并自动换算为你设备的本地时区。
+Peek 会展示物流状态、最新 20 条扫描记录及地图上的大致网点/自提点位置，并附带 CTT 状态码。Peek 会隐藏寄件人信息（若 CTT 返回收件人姓名，也只在“收件人”栏向添加该包裹的本人可见，绝不出现在分享链接中），且 CTT 本身不提供预计送达日期。扫描时间按里斯本时间（亚速尔群岛按亚速尔时间）解析，并按你设备的时区显示。
 
 CTT Express 的 22 位和 25 位纯数字单号（`00` 加 4 位数字、再加 `00` 和 14 位数字，25 位末尾再加 `001`）会归入单独列出的 CTT Express 渠道：记录不含地图地点，但会显示预计送达日、重量、签收时间以及 `El envío fue entregado correctamente` 等西班牙语状态。
 
-当 CTT 官方系统正常响应时，Peek 最高每 10 分钟检查一次，在包裹扫描进入派送当天自当地时间早上 6 点起最高每 2 分钟检查一次；若仅通过综合跟踪服务获取更新，则在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。状态变动时可推送通知。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 会改为每小时检查一次。
+Peek 最高每 10 分钟检查一次；在 CTT 扫描包裹外出派送的当天，从当地时间早上 6 点起，只要 CTT 自己的查询系统正常响应，最高每 2 分钟检查一次（通过物流查询服务时，每 15 分钟一次）。状态变动时可推送通知。连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 会改为每小时检查一次。
 
 ## 葡萄牙邮政 CTT 常见问题
 
@@ -107,9 +107,9 @@ CTT Express 的 22 位和 25 位纯数字单号（`00` 加 4 位数字、再加 
 
 指 Loja CTT（邮局门店）、Ponto CTT（合作商铺）、Cacifo Locky 快递柜或 Payshop 代办网点。CTT 发送的通知会写明具体存放地点。
 
-### CTT 客服支持英文或中文吗？
+### CTT 客服说英语吗？
 
-CTT 未单独开设英文或中文客服专线。可在工作日 8:30 至 19:30 拨打 +351 21 047 16 16，或通过官网在线表单提交咨询。
+CTT 未列出英文客服专线。可在工作日 8:30 至 19:30 拨打 +351 21 047 16 16，或通过官网在线表单提交咨询。
 
 ### CTT Express 和 CTT 是同一家吗？
 
@@ -122,7 +122,7 @@ CTT 未单独开设英文或中文客服专线。可在工作日 8:30 至 19:30 
 - [CTT: Como seguir uma entrega](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/como-seguir-uma-entrega) – CTT 手机应用
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/empresas/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – 运单号格式说明
 - [CTT: Não tenho código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/alterar/a-entrega-vem-a-caminho-mas-nao-tenho-codigo-de-envio-o-que-posso-fazer) – 缺失单号说明
-- [CTT: Entrega não conseguida](https://www.ctt.pt/ajuda/particulares/receber/problemas-na-entrega/entrega-nao-conseguida) – 错过派送处理
+- [CTT: Entrega não conseguida](https://www.ctt.pt/ajuda/particulares/receber/problemas-na-entrega/entrega-nao-conseguida) – 派送失败处理
 - [CTT: O que precisa de levar consigo](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/o-que-precisa-de-levar-consigo) – 取件证件要求
 - [CTT: Locky](https://www.ctt.pt/ajuda/particulares/receber/cacifos-locky/como-levantar-uma-encomenda) – Locky 快递柜取件规则
 - [CTT: Prazo para levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – 各类邮件保管期限
@@ -143,4 +143,5 @@ CTT 未单独开设英文或中文客服专线。可在工作日 8:30 至 19:30 
 - [CTT Express: Envío y recogida](https://www.cttexpress.com/red-collectt-express/envio-y-recogida) – Collectt 自提点与快递柜保管期
 - [CTT Express: Cómo contactar](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – CTT Express 联系方式
 - [Wikipedia: CTT Correios de Portugal](https://en.wikipedia.org/wiki/CTT_Correios_de_Portugal) – 葡萄牙国家邮政背景
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取的内容
 :::

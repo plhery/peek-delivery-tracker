@@ -26,7 +26,7 @@ Espaços não interferem no Peek. O rastreador oficial da ZTO aceita até 10 có
 
 ## Status de rastreamento da ZTO Express explicados
 
-Cada movimentação traz uma etapa curta em chinês. O Peek traduz o texto da etapa para o inglês e a classifica no seu idioma:
+Cada movimentação traz uma etapa curta em chinês. O Peek mostra essa etapa em inglês:
 
 | A ZTO mostra | O Peek exibe (em inglês) | Etapa no Peek | O que significa |
 | --- | --- | --- | --- |
@@ -36,11 +36,11 @@ Cada movimentação traz uma etapa curta em chinês. O Peek traduz o texto da et
 | `派件中` | "Out for delivery" | Saiu para entrega | O entregador está com o pacote em rota. |
 | `已代收` | "Held at a collection point for the recipient" | Pronta para retirada | Um ponto de coleta, como uma estação de encomendas, guardou o pacote para você retirar. |
 | `已签收` | "Signed for" | Entregue | Alguém assinou o recebimento (`签收`): você, um representante ou o galpão de destino. |
-| `异常通知` | "Exception notice" | Precisa de atenção | A ZTO registrou uma ocorrência. O Peek exibe só a etapa; o site da ZTO traz o texto completo. |
+| `异常通知` | "Exception notice" | Precisa de atenção | A ZTO registrou uma ocorrência. O Peek exibe só a etapa; o próprio rastreador da ZTO traz o texto completo. |
 
 Outras etapas, como devolução ou redirecionamento, mantêm as palavras originais em chinês no Peek.
 
-**Enviado para um redirecionador?** Nesse caso, `已签收` significa que o galpão do redirecionador assinou o recebimento e encerrou a parte da ZTO: a partir daí vale o código do próprio redirecionador. A ZTO também oferece um serviço internacional de consolidação (`中通国际集运`), que reúne vários pacotes num armazém e os envia juntos; para utilizá-lo, ligue para 95311 na China continental e peça o setor internacional.
+**Enviado para um redirecionador?** Nesse caso, `已签收` significa que o galpão do redirecionador assinou o recebimento e encerrou a parte da ZTO: a partir daí vale o código do próprio redirecionador. A ZTO também oferece um serviço internacional de consolidação (`中通国际集运`), que reúne vários pacotes num armazém e os envia juntos; para esse serviço, ligue para 95311 na China continental e peça o setor internacional.
 
 ## Entrega da ZTO Express na China: entregadores, estações e lockers
 
@@ -62,9 +62,9 @@ Do FAQ oficial da ZTO:
 
 **Sem atualização.** Quando uma encomenda em trânsito fica 4 dias sem nova leitura, o Peek avisa que pacotes costumam pausar e adiciona o link "Pedir ajuda a ZTO Express" para a página de contato da ZTO. Veja [por que o rastreamento para de atualizar](guide:tracking-not-updating) e [como rastrear encomendas da China](guide:tracking-from-china).
 
-**Extravio ou avaria (China continental).** Procure o vendedor: pelo contrato da ZTO, o remetente deve reclamar por escrito em até 30 dias após tomar ciência do extravio ou dano. Sem seguro (`保价`), a indenização máxima da ZTO é de 500 yuans; com seguro, até o valor declarado. Conteúdo faltante ou danificado dentro de embalagem intacta fica excluído, portanto confira no ato. Veja [encomendas extraviadas](guide:lost-parcel).
+**Extravio ou dano (China continental).** Procure o vendedor: pelo contrato da ZTO, o remetente deve reclamar por escrito em até 30 dias após tomar ciência do extravio ou dano. Sem seguro (`保价`), a indenização máxima da ZTO é de 500 yuans; com seguro, até o valor declarado. Conteúdo faltante ou danificado dentro de embalagem intacta fica excluído, portanto confira no ato. Veja [encomendas extraviadas](guide:lost-parcel).
 
-**Devolvida.** Na China continental, a ZTO pode devolver o pacote quando o endereço é pouco claro, há recusa ou duas tentativas de entrega falham sem culpa da transportadora. Veja [devolvida ao remetente](guide:returned-to-sender).
+**Devolvida.** Na China continental, a ZTO pode devolver o pacote quando o endereço é pouco claro, há recusa ou a entrega não é realizada em duas tentativas sem culpa da ZTO. Veja [devolvida ao remetente](guide:returned-to-sender).
 
 **Entregue, mas não chegou.** `已代收` indica espera num ponto de coleta e `已签收` que alguém assinou — nem sempre você. Cheque estações de encomendas e lockers próximos, a portaria e o redirecionador, se aplicável. Para reclamar na China continental, informe o código ao 95311 ou use o formulário de reclamação (`投诉反馈`), que exige login. Se a resposta da ZTO não satisfizer ou atrasar, as normas chinesas permitem recorrer às autoridades postais. Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
@@ -80,11 +80,11 @@ Para os canais da ZTO International, consulte o atendimento próprio dela. Para 
 
 ## Como rastrear uma encomenda da ZTO Express no Peek
 
-Cole o código no [Peek](/): ele acompanha mais de 4.500 transportadoras. Um código da ZTO colado sozinho não basta para o Peek consultar a ZTO Express de primeira. Ele pergunta antes a outras transportadoras que usam o mesmo formato (FedEx, DHL, BRT e Colis Privé em 12 dígitos, nunca ZTO; DPD, SEUR e BRT em 14 dígitos; ZTO International primeiro num código 771) e depois aos serviços de rastreamento, exibindo "Consultando serviços de rastreamento…" nesse meio tempo. Se eles encontrarem o pacote e indicarem ZTO Express, o Peek passa a acompanhá-lo ali e consulta a ZTO na checagem seguinte. Depois dos serviços de rastreamento, em códigos de 14 dígitos iniciados em 73 ou 79, o Peek verifica o site da ZTO no navegador e associa o pacote à ZTO Express se ela o localizar. Se nada aparecer, surge "ainda não encontrada · o Peek continua verificando". Para fazer o Peek consultar a ZTO desde o início, toque em "Trocar" e escolha ZTO Express em "Compatível com este código", ou busque por ZTO ou 中通快递 (中通 sozinho traz também a ZTO International). Num pacote já adicionado, use "Trocar transportadora". A consulta direta da ZTO no Peek aceita apenas os dois formatos acima: para qualquer outro, avisa que a ZTO Express "não emite códigos como este".
+Cole o código no [Peek](/): ele acompanha mais de 4.500 transportadoras. Um código da ZTO colado sozinho não basta para o Peek consultar a ZTO Express de primeira. Ele pergunta antes a outras transportadoras que usam o mesmo formato (FedEx, DHL, BRT e Colis Privé em 12 dígitos, nunca ZTO; DPD, SEUR e BRT em 14 dígitos; ZTO International primeiro num código 771) e depois aos serviços de rastreamento, exibindo "Consultando serviços de rastreamento…" nesse meio tempo. Se eles encontrarem o pacote e indicarem ZTO Express, o Peek passa a acompanhá-lo ali e consulta a ZTO na checagem seguinte. Depois dos serviços de rastreamento, em códigos de 14 dígitos iniciados em 73 ou 79, o Peek verifica o próprio rastreador da ZTO num navegador e associa o pacote à ZTO Express se ela o localizar. Se nada aparecer, a linha abaixo do código mostra "ainda não encontrada · o Peek continua verificando". Para fazer o Peek ler o próprio rastreador da ZTO desde o início, toque em "Trocar" e escolha ZTO Express em "Compatível com este código", ou busque por ZTO ou 中通快递 (中通 sozinho traz também a ZTO International). Num pacote já adicionado, use "Trocar transportadora". A consulta direta da ZTO no Peek aceita apenas os dois formatos acima: para qualquer outro, avisa que a ZTO Express "não emite códigos como este".
 
-O Peek lê o rastreador oficial da ZTO e abre um navegador quando o site exige verificação. Para cada movimentação, mostra a etapa (tabela acima), a cidade da unidade ZTO responsável (ou o nome chinês da unidade quando não há correspondência no mapa) e o horário exato no fuso do seu dispositivo (em peektracker.com e nos apps de iPhone e Android, uma linha ao final do histórico informa o fuso). O Peek descarta a frase completa de cada leitura da ZTO — omitindo contatos e telefones dos entregadores, bem como nome e endereço do destinatário — e não exibe previsão de entrega. O rastreador público da ZTO às vezes oculta as leituras mais antigas, o que também se reflete no Peek. O Peek acompanha apenas o código da ZTO: o número de um redirecionador deve ser adicionado como outra encomenda.
+O Peek lê o próprio rastreador da ZTO e abre um navegador quando a ZTO pede uma verificação. Para cada movimentação, mostra a etapa (tabela acima), a cidade da unidade ZTO responsável (ou o nome chinês da unidade quando não há correspondência no mapa) e o horário exato no fuso do seu dispositivo (em peektracker.com e nos apps de iPhone e Android, uma linha ao final do histórico informa o fuso). O Peek descarta a frase completa de cada leitura da ZTO — omitindo contatos e telefones dos entregadores, bem como nome e endereço do destinatário — e não exibe previsão de entrega. O rastreador público da ZTO pode omitir as primeiras leituras de um pacote, e o Peek também. O Peek acompanha apenas o código da ZTO: o número de um redirecionador deve ser adicionado como outra encomenda.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a checagem ocorre até a cada 10 minutos, e até a cada 2 minutos (ou a cada 5 quando a consulta à ZTO exigiu abrir o navegador) a partir das 6h no horário local no dia em que a ZTO marca saída para entrega, enquanto o rastreador oficial responde (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a ZTO, o redirecionador ou o vendedor por você.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, a checagem ocorre até a cada 10 minutos, e até a cada 2 minutos (ou a cada 5 quando a consulta à ZTO exigiu abrir o navegador) a partir das 6h no horário local no dia em que a ZTO marca saída para entrega, enquanto o próprio rastreador da ZTO responde (pelos serviços de rastreamento, até a cada 15 minutos); fora disso, de hora em hora. Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. Você pode ativar alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não pode falar com a ZTO, o redirecionador ou o vendedor por você.
 
 ## Perguntas frequentes sobre rastreamento ZTO Express
 
@@ -98,7 +98,7 @@ Mesmo grupo, dois serviços e dois rastreadores. O contrato da ZTO Express cobre
 
 ### Quanto tempo a ZTO Express leva para entregar?
 
-Em condições normais, no dia seguinte dentro da mesma província e entre Jiangsu, Zhejiang, Xangai e Anhui, de 3 a 5 dias entre outras províncias e de 5 a 7 dias para áreas remotas, segundo o FAQ da ZTO — prazos tratados apenas como referência. Se o pacote for para um redirecionador, soma-se ainda o prazo internacional dele.
+Em condições normais, no dia seguinte dentro da mesma província e entre Jiangsu, Zhejiang, Xangai e Anhui, de 3 a 5 dias entre outras províncias e de 5 a 7 dias para algumas áreas remotas, segundo o FAQ da ZTO — prazos tratados apenas como referência. Se o pacote for para um redirecionador, soma-se ainda o prazo do redirecionador.
 
 ### O que significa 已签收 no rastreamento da ZTO?
 
@@ -121,4 +121,5 @@ Significa assinado/entregue: no Peek aparece como "Signed for", na etapa "Entreg
 - [ZTO Express: 中通国际 (ZTO International)](https://www.zto.com/introduce/service/international) – braço internacional do grupo desde 2014
 - [ZTO Express: 中通集运 (consolidação)](https://www.zto.com/introduce/service/concentrated) – serviço internacional de consolidação e contatos
 - [Ministério dos Transportes da China: 快递市场管理办法](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – conferência na entrega, consentimento para lockers e estações, recursos
+- [Universal Parcel Scraper: ZTO Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/zto) – formatos de código, nomes das etapas, o que o Peek mostra e omite, quebra-cabeça de verificação da ZTO e consultas no navegador, reconhecimento no navegador de códigos de 14 dígitos iniciados em 73 ou 79
 :::

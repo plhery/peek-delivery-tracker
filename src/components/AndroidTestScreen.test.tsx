@@ -125,4 +125,21 @@ describe('the steps page', () => {
     expect(screen.getByRole('heading', { level: 1, name: fr['androidTest.page.title'] })).toBeVisible();
     expect(within(steps()[1]).getByRole('button')).toHaveTextContent(fr['androidTest.step.locked']);
   });
+
+  it('leads to Google Play once the test is over, with the ways without it and no steps', async () => {
+    const user = userEvent.setup();
+    render(<AndroidTestScreen />, {
+      wrapper: ({ children }) => <SiteProvider site={{ ...PEEK_SITE, android: { ...PEEK_SITE.android!, testGroup: null } }}>{children}</SiteProvider>,
+    });
+    expect(screen.getByRole('heading', { level: 1, name: 'Peek for Android' })).toBeVisible();
+    expect(screen.queryByRole('list')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Don’t ask me again' })).toBeNull();
+    const play = screen.getByRole('link', { name: 'Install Peek' });
+    expect([play.getAttribute('href'), play.getAttribute('target')])
+      .toEqual(['https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker', '_blank']);
+    expect(screen.getByRole('region', { name: 'Without Google Play' })).toBeVisible();
+    play.addEventListener('click', (event) => event.preventDefault());
+    await user.click(play);
+    expect(mocks.track).toHaveBeenCalledExactlyOnceWith('android-test-install');
+  });
 });

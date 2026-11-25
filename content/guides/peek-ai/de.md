@@ -9,7 +9,7 @@ updated: 2026-11-25
 
 Wenn [Peek](/) einen starken Hinweis hat, wann dein Paket ankommt, sagt Peek AI es neben dem Datum des Paketdienstes, oder an dessen Stelle, wenn der Paketdienst keins nennt: „wahrscheinlich bis 16:00“, „wahrscheinlich heute oder morgen“, „vielleicht früher“ oder „heute eher nicht“. Das ist Peeks eigene Schätzung, nie ein Versprechen des Paketdienstes, und bei den meisten Paketen steht keine.
 
-Peek AI ist standardmäßig eingeschaltet, mit oder ohne Konto: auf peektracker.com, in der App für iPhone, iPad und Mac und in der [Android-Beta](guide:android-app), ob aus dem Google-Play-Test, aus Peeks eigener F-Droid-Paketquelle oder von GitHub.
+Peek AI ist standardmäßig eingeschaltet, mit oder ohne Konto: auf peektracker.com, in der App für iPhone, iPad und Mac und in der [Android-App](guide:android-app), ob von Google Play, aus Peeks eigener F-Droid-Paketquelle oder von GitHub.
 
 :::steps
 - Schau in deine Liste | Unter dem Datum des Paketdienstes auf der Karte eines Pakets, oder neben dem Status bei „Als Nächstes“: „✦ Peek AI“ und ein paar Worte, etwa „bis 16:00“.
@@ -99,7 +99,7 @@ Mit Konto folgt dir die Wahl auf deine anderen Geräte, und verbundene Assistent
 - [Peek: Einstellungen unter Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – „Peek AI“ unter „Präferenzen“
 - [Peek: die Werkzeuge der Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – die Schätzung in der Paketliste eines Assistenten
 - [App Store: Peek](https://apps.apple.com/app/id6823615370) – Peek AI in den Versionshinweisen der App
-- [Peek: Versionshinweise für Android (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek AI in der Android-Beta
-- [Peek: Teste Peek für Android](https://peektracker.com/android) – die Beta aus dem Google-Play-Test, von F-Droid und GitHub
+- [Peek: Versionshinweise für Android (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek AI in der Android-App
+- [Peek: Peek für Android](https://peektracker.com/android) – die App bei Google Play, auf F-Droid und GitHub
 - [Peek: Demo](https://peektracker.com/demo) – Beispielpakete mit einer Schätzung
 :::

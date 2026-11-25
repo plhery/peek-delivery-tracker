@@ -9,7 +9,7 @@ updated: 2026-11-25
 
 Gdy [Peek](/) ma mocną wskazówkę, kiedy przyjdzie twoja przesyłka, Peek AI podaje to obok daty przewoźnika albo zamiast niej, jeśli przewoźnik żadnej nie podaje: „pewnie do 16:00”, „pewnie dziś lub jutro”, „może wcześniej” albo „dziś raczej nie”. To własna prognoza Peeka, nigdy obietnica przewoźnika, a większość przesyłek nie pokazuje żadnej.
 
-Peek AI działa domyślnie, z kontem i bez, na peektracker.com, w aplikacji na iPhone’a, iPada i Maca oraz w [wersji beta na Androida](guide:android-app), którą instalujesz z testów w Google Play, z własnego repozytorium F-Droid Peeka albo z GitHuba.
+Peek AI działa domyślnie, z kontem i bez, na peektracker.com, w aplikacji na iPhone’a, iPada i Maca oraz w [aplikacji na Androida](guide:android-app), którą instalujesz z Google Play, z własnego repozytorium F-Droid Peeka albo z GitHuba.
 
 :::steps
 - Spójrz na listę | Pod datą przewoźnika na karcie przesyłki albo obok statusu na karcie „Najbliższa dostawa”: „✦ Peek AI” i kilka słów, na przykład „do 16:00”.
@@ -99,7 +99,7 @@ Z kontem twój wybór przenosi się na pozostałe urządzenia, a podłączeni as
 - [Peek: Ustawienia na Androidzie](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Peek AI w Preferencjach
 - [Peek: narzędzia asystentów](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – prognoza na liście przesyłek asystenta
 - [App Store: Peek](https://apps.apple.com/pl/app/id6823615370) – Peek AI w opisie nowości
-- [Peek: informacje o wersji na Androida](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek AI w wersji beta na Androida
-- [Peek: Wypróbuj Peek na Androida](https://peektracker.com/android) – wersja beta z testów w Google Play, z F-Droid i z GitHuba
+- [Peek: informacje o wersji na Androida](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek AI w aplikacji na Androida
+- [Peek: Peek na Androida](https://peektracker.com/android) – aplikacja z Google Play, z F-Droid i z GitHuba
 - [Peek: demo](https://peektracker.com/demo) – przykładowe przesyłki z prognozą
 :::

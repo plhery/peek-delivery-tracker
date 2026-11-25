@@ -376,8 +376,8 @@ comes from. Peek's own site sets each of them.
   App Store is never asked. The codes (`public/*/app-qr.svg`) lead to Peek's `/app`.
 - `ANDROID_APP_PACKAGE` is the Android app on Google Play; without it no page offers one.
   `ANDROID_TEST_GROUP` is the Google Group of its closed test's testers: with it, the site
-  invites Android phones to the test at `/android`; without it, `/android` is the 404 page
-  and the Android button leads to Google Play. `ANDROID_FDROID_REPO` and
+  invites Android phones to the test at `/android`; without it, the Android buttons lead to
+  Google Play and `/android` shows Google Play's link. `ANDROID_FDROID_REPO` and
   `ANDROID_RELEASES_URL` add an F-Droid repository to copy and a releases page to `/android`.
 - `SOURCE_URL` (default the repository the code comes from) is where the pages, the emails
   and the Sentry alerts' runbook link the code.

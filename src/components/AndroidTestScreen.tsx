@@ -7,7 +7,7 @@ import { GuideTitleLink } from '../guides/GuideTitleLink';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
 import {
-  androidTestLinks, androidTestOpen, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
+  androidTestLinks, androidTestOpen, googlePlayLink, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
 } from '../lib/androidTest';
 import { AppearanceProvider } from '../lib/appearance';
 import { backOnSite } from '../lib/backOnSite';
@@ -33,8 +33,9 @@ const nothing = () => null;
  * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Google Play lets in
  * only the group's members, so the last two steps stay locked until the group's link was followed. Anyone who
  * reaches the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
- * Under them, the same app without Google Play where the site gives a way: its F-Droid repository, whose address is
- * copied, or its releases; then the app's guide, in the reader's language or the nearest one it is written in.
+ * Once the test is over, Google Play's page stands in their place. Under them, the same app without Google Play where
+ * the site gives a way: its F-Droid repository, whose address is copied, or its releases; then the app's guide, in the
+ * reader's language or the nearest one it is written in.
  */
 export function AndroidTestScreen({ guide, initialLocale, initialMessages }: { guide?: GuideAddresses; initialLocale?: Locale; initialMessages?: Messages }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
@@ -45,15 +46,16 @@ export function AndroidTestScreen({ guide, initialLocale, initialMessages }: { g
 function AndroidTest({ guide }: { guide?: GuideAddresses }) {
   const { t, locale } = useI18n();
   const { android } = useSite();
-  // The page is served only while the test is open.
   const links = androidTestOpen(android) ? androidTestLinks(android) : null;
+  const play = android && !links ? googlePlayLink(android) : null;
   const fdroid = android?.fdroid ?? null;
   const releases = android?.releases ?? null;
   const note = useSyncExternalStore(subscribeAndroidTest, readAndroidTestNote, nothing);
   const [declined, setDeclined] = useState(false);
   const [copied, setCopied] = useState(false);
   const said = useRef<HTMLParagraphElement>(null);
-  useTabTitle(`${t('app.title')} — ${t('androidTest.page.title')}`);
+  const title = play ? t('androidTest.alerts.title') : t('androidTest.page.title');
+  useTabTitle(`${t('app.title')} — ${title}`);
   useEffect(() => {
     trackScreen('android-test', holdsSignIn() ? 'account' : 'anonymous');
     void startAnalytics({ open: false });
@@ -82,10 +84,12 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
     <main className="android-steps__main" aria-labelledby="android-steps-title">
       <div className="android-steps__intro">
         <PeekMark size={60} />
-        <h1 id="android-steps-title">{t('androidTest.page.title')}</h1>
-        <p>{t('androidTest.page.lead')}</p>
+        <h1 id="android-steps-title">{title}</h1>
+        {!play && <p>{t('androidTest.page.lead')}</p>}
       </div>
-      <ol className="android-steps__list">
+      {play && <a className="button button--primary android-steps__play" href={play} target="_blank" rel="noopener noreferrer"
+        onClick={() => trackAction('android-test-install')}>{t('androidTest.step.install.action')}<Icon name="arrow" /></a>}
+      {!play && <><ol className="android-steps__list">
         {STEPS.map(({ step, event, title, body, action }, index) => {
           const locked = step !== 'group' && !joined;
           const done = !locked && !!note?.steps?.[step];
@@ -106,7 +110,7 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
           </li>;
         })}
       </ol>
-      <p className="android-steps__note">{t('androidTest.page.note')}</p>
+      <p className="android-steps__note">{t('androidTest.page.note')}</p></>}
       {(fdroid || releases) && <section className="android-steps__other" aria-labelledby="android-steps-other">
         <h2 id="android-steps-other">{t('androidTest.other.title')}</h2>
         {fdroid && <>
@@ -124,7 +128,7 @@ function AndroidTest({ guide }: { guide?: GuideAddresses }) {
         <p>{t('androidTest.other.note')}</p>
       </section>}
       {guide && <p className="android-steps__guide"><GuideTitleLink guide={guide} locale={locale} /></p>}
-      {note?.never
+      {play ? null : note?.never
         ? <p ref={said} className="android-steps__never" tabIndex={-1}>{t('androidTest.page.neverDone')}</p>
         : <button type="button" className="android-steps__never" onClick={() => {
           trackAction('android-test-never');

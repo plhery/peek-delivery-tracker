@@ -1,27 +1,19 @@
 ---
-title: Peek pour Android : obtenir la bêta et le widget « Colis »
-description: Peek pour Android est en bêta : rejoins le test Google Play ou installe-le depuis F-Droid ou GitHub. Sans compte. Ajoute le widget, partage tes liens vers Peek.
+title: Peek pour Android sur Google Play, avec le widget « Colis »
+description: Peek pour Android est sur Google Play, et aussi dans le dépôt F-Droid de Peek et sur GitHub. Sans compte. Ajoute le widget, partage tes liens vers Peek.
 slug: application-suivi-colis-android
 picture: Un téléphone Android avec le widget « Colis » sur son écran d'accueil, et Pip, le colis avec un visage, qui jette un œil par-dessus le téléphone.
 published: 2026-11-19
 updated: 2026-11-25
 ---
 
-Peek pour Android est une bêta, non publique sur Google Play : tu l'obtiens depuis [peektracker.com/android](https://peektracker.com/android), en rejoignant le test Google Play ou en l'installant depuis le dépôt F-Droid de Peek ou depuis GitHub. Il demande Android 12 ou plus récent, pas de compte, et il ajoute un widget « Colis » à ton écran d'accueil et « Ajouter à Peek » à ton menu de partage.
+Peek pour Android est sur [Google Play](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker), et aussi dans le dépôt F-Droid de Peek et sur GitHub. Il demande Android 12 ou plus récent, pas de compte, et il ajoute un widget « Colis » à ton écran d'accueil et « Ajouter à Peek » à ton menu de partage.
 
 Il suit les colis de plus de 4 500 transporteurs : colle un numéro de suivi, le lien d'un transporteur ou tout un e-mail d'expédition, et [Peek](/) trouve le transporteur et affiche le trajet sur une carte. C'est gratuit, sans achats intégrés et sans pub. Pour un iPhone, un iPad ou un Mac, voir [Peek pour iPhone, iPad et Mac](guide:iphone-app).
 
 ## Peek est-il sur Google Play ?
 
-Seulement pour les testeurs. Peek est en test fermé, et sa page Google Play ne s'ouvre pour personne en dehors de ce test. Google l'ouvre à tous dès qu'au moins 12 testeurs l'ont gardé 14 jours d'affilée, et n'importe qui peut rejoindre le test. Sur ton téléphone Android, ouvre [peektracker.com/android](https://peektracker.com/android), « Essaie Peek pour Android » :
-
-:::steps
-- « Rejoins le groupe des testeurs » | Touche « Rejoindre le groupe », rejoins le groupe Google sur la page qui s'ouvre, puis reviens.
-- « Deviens testeur sur Google Play » | Touche « Ouvrir Google Play », puis **Devenir testeur** sur la page qui s'ouvre.
-- « Installe-la et garde-la deux semaines » | Touche « Installer Peek », et garde l'app 14 jours.
-:::
-
-Tant que tu n'as pas suivi le lien du groupe dans ce navigateur, les deux boutons suivants affichent « Rejoins d’abord le groupe ». Tu peux quitter le test à tout moment, sur la même page Google Play.
+Oui. Sur ton téléphone Android, ouvre [Peek sur Google Play](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker) et installe-le. Le bouton « Installer Peek » de [peektracker.com/android](https://peektracker.com/android), « Peek pour Android », y mène aussi, et la même page explique comment l'installer sans Google Play.
 
 ### Comment installer Peek sans Google Play ?
 
@@ -35,7 +27,7 @@ Ajoute à la main le dépôt de Peek à l'app F-Droid, ou télécharge l'app dep
 
 Ou touche « Ouvrir GitHub » sur la même page : dans la version la plus récente des [versions de Peek sur GitHub](https://github.com/plhery/peek-delivery-tracker/releases), touche le fichier .apk, puis laisse ton navigateur l'installer. Les versions de Peek y sont marquées « Pre-release ».
 
-Cette version est signée par Peek, pas par Google, donc elle ne peut pas mettre à jour une copie de Google Play, ni l'inverse : si tu as Peek depuis Google Play, ou une ancienne copie du dépôt ou de GitHub, désinstalle-la d'abord. Les mises à jour arrivent par le dépôt F-Droid de Peek. Aucune des deux voies ne fait de toi un testeur Google Play.
+Cette version est signée par Peek, pas par Google, donc elle ne peut pas mettre à jour une copie de Google Play, ni l'inverse : si tu as Peek depuis Google Play, ou une ancienne copie du dépôt ou de GitHub, désinstalle-la d'abord. Les mises à jour arrivent par le dépôt F-Droid de Peek.
 
 ### Quelle différence entre les versions Google Play et F-Droid ?
 
@@ -103,10 +95,10 @@ Les liens de colis de Peek (peektracker.com/p/…) s'ouvrent dans l'app une fois
 Seule la version Google Play le peut. Touche l'icône de code-barres au bout du champ de suivi (nom lu à voix haute : « Scanner le code-barres »), sur le premier écran ou dans « Ajouter un colis » ; avec une liste vide, il y a aussi un bouton « Scanner le code-barres ». « Scanner un code-barres de suivi » s'ouvre avec l'appareil photo arrière et suit le code-barres le plus proche du centre. Si tu refuses l'appareil photo, le scanner disparaît jusqu'à ce que tu l'autorises dans les paramètres d'Android. Tu ne sais pas quel numéro est le numéro de suivi ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
 
 :::sources
-- [Peek : Essaie Peek pour Android](https://peektracker.com/android) – les trois étapes du test, Android 12, le dépôt F-Droid, GitHub, la signature
-- [Peek : notes sur Google Play (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/google-play/README.md) – test fermé, 12 testeurs pendant 14 jours, le groupe des testeurs
+- [Peek : Peek pour Android](https://peektracker.com/android) – Google Play, Android 12, le dépôt F-Droid, GitHub, la signature
+- [Google Play : Peek](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker) – la fiche de l'app
 - [Peek : app Android (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/android/README.md) – les deux versions, contenu et rafraîchissement du widget, raccourcis, clés de signature, préversions
-- [Peek : fiche F-Droid (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/android/fdroid/com.plhery.peekdeliverytracker.yml) – bêta, nom, quelles copies antérieures désinstaller
+- [Peek : fiche F-Droid (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/android/fdroid/com.plhery.peekdeliverytracker.yml) – nom, quelles copies antérieures désinstaller
 - [F-Droid : Comment ajouter un dépôt à F-Droid](https://f-droid.org/fr/tutorials/add-repo/) – Paramètres › Dépôts › +, puis le choix des apps à installer
 - [Peek : versions sur GitHub](https://github.com/plhery/peek-delivery-tracker/releases) – les fichiers .apk, marqués Pre-release
 - [Peek : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – chaque libellé de Peek cité ici

@@ -116,7 +116,7 @@ team.
 The [iPhone guide](ios/README.md) covers connecting it to a server, signing it for a real
 phone, notifications and widgets.
 
-The Android beta, built without Google's libraries and signed with Peek's own key, is in [Peek's F-Droid repository](https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7) and on [GitHub Releases](https://github.com/plhery/peek-delivery-tracker/releases).
+The Android app is [on Google Play](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker). A build without Google's libraries, signed with Peek's own key, is in [Peek's F-Droid repository](https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7) and on [GitHub Releases](https://github.com/plhery/peek-delivery-tracker/releases).
 To add the repository, open the F-Droid app, go to Settings → Repositories → +, and paste
 the whole address, `?fingerprint=…` included:
 

@@ -1,4 +1,4 @@
-/* Peek for Android's three steps, at /android: a page of its own, which loads this stylesheet itself. */
+/* Peek for Android at /android, its closed test's three steps or Google Play: a page of its own, which loads this stylesheet itself. */
 .android-steps { min-height: 100dvh; padding: env(safe-area-inset-top) 16px max(28px, env(safe-area-inset-bottom)); background: var(--canvas); color: var(--ink); }
 .android-steps__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100%, 520px); min-height: 56px; margin: 0 auto; }
 .android-steps__header > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding-inline: 4px; color: inherit; font-size: 13px; font-weight: 600; text-decoration: none; }
@@ -20,6 +20,8 @@
 .android-steps__list > li[data-done] .android-steps__number { color: var(--green); background: var(--green-soft); }
 .android-steps__list > li[data-locked] .button { cursor: not-allowed; }
 .android-steps__number svg { width: 15px; height: 15px; stroke-width: 2.6; }
+.android-steps__play { justify-self: center; min-height: 48px; padding: 12px 22px; border-radius: 16px; font-size: 15px; }
+.android-steps__play svg { width: 13px; height: 13px; stroke-width: 2.4; }
 .android-steps__guide { margin: 0 6px; font-size: 14px; line-height: 1.4; text-align: center; }
 .android-steps__guide a { color: inherit; font-weight: 600; text-underline-offset: 2px; text-wrap: balance; }
 .android-steps__note { margin: 0 6px; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }

@@ -1,7 +1,8 @@
 import 'server-only';
 import { hrefLanguage, SUPPORTED_LOCALES, type Locale } from '../lib/locale';
 import { siteTitle, wordsIn } from './sitePreview';
-import { appStoreApp, siteAlternateNames, siteName, sourceUrl } from './siteSettings';
+import { androidTestOpen } from '../lib/androidTest';
+import { androidStoreApp, appStoreApp, siteAlternateNames, siteName, sourceUrl } from './siteSettings';
 
 /**
  * Who makes the site, as schema.org data: one node that the landing, the guides and
@@ -22,8 +23,8 @@ export function peekOrganization(origin: URL) {
 /**
  * What the landing tells search engines, as schema.org data: the site with its
  * names, the web application at this address, described as the page describes
- * it, free, on the web and, where the site has an app on the App Store, on iOS,
- * and who makes them. No rating, no count, nothing a reader could not check.
+ * it, free, on the web and, where the site has an app on the App Store or one
+ * open to everyone on Google Play, on iOS or Android, and who makes them. No rating, no count, nothing a reader could not check.
  */
 export function landingStructuredData({ origin, url, locale }: {
   /** The origin the site's addresses are written on. */
@@ -33,6 +34,7 @@ export function landingStructuredData({ origin, url, locale }: {
   locale: Locale;
 }) {
   const t = wordsIn(locale);
+  const android = androidStoreApp();
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -52,7 +54,8 @@ export function landingStructuredData({ origin, url, locale }: {
         url,
         description: t('preview.landing.description'),
         applicationCategory: 'UtilitiesApplication',
-        operatingSystem: appStoreApp() ? 'Web, iOS' : 'Web',
+        // Android once its app is open to everyone on Google Play, not during its closed test.
+        operatingSystem: ['Web', appStoreApp() && 'iOS', android && !androidTestOpen(android) && 'Android'].filter(Boolean).join(', '),
         inLanguage: hrefLanguage(locale),
         isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },

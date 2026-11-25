@@ -9,7 +9,7 @@ updated: 2026-11-25
 
 Quando o [Peek](/) tem uma pista forte sobre quando a tua encomenda vai chegar, o Peek IA di-lo ao lado da data da transportadora, ou no lugar dela quando a transportadora não indica nenhuma: «provavelmente até às 16:00», «provavelmente hoje ou amanhã», «talvez antes» ou «hoje é pouco provável». É uma estimativa do próprio Peek, nunca uma promessa da transportadora, e a maioria das encomendas não mostra nenhuma.
 
-Está ligado por predefinição, com ou sem conta, em peektracker.com, na app para iPhone, iPad e Mac e na [beta para Android](guide:android-app), que se instala a partir do teste no Google Play, do repositório F-Droid do próprio Peek ou do GitHub.
+Está ligado por predefinição, com ou sem conta, em peektracker.com, na app para iPhone, iPad e Mac e na [app para Android](guide:android-app), que se instala a partir do Google Play, do repositório F-Droid do próprio Peek ou do GitHub.
 
 :::steps
 - Olha para a tua lista | Por baixo da data da transportadora, no cartão de uma encomenda, ou ao lado do estado em «A seguir»: «✦ Peek IA» e poucas palavras, como «até às 16:00».
@@ -99,7 +99,7 @@ Com uma conta, a escolha acompanha-te nos outros dispositivos, e os assistentes 
 - [Peek: Definições no Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – o Peek IA em Preferências
 - [Peek: ferramentas dos assistentes](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – a estimativa na lista de encomendas de um assistente
 - [App Store: Peek](https://apps.apple.com/pt/app/id6823615370) – o Peek IA nas novidades da app
-- [Peek: notas do Android (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – o Peek IA na beta para Android
-- [Peek: Experimenta o Peek para Android](https://peektracker.com/android) – a beta no teste do Google Play, no F-Droid e no GitHub
+- [Peek: notas do Android (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – o Peek IA na app para Android
+- [Peek: Peek para Android](https://peektracker.com/android) – a app no Google Play, no F-Droid e no GitHub
 - [Peek: demonstração](https://peektracker.com/demo) – encomendas de exemplo com uma estimativa
 :::

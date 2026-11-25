@@ -224,7 +224,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "parcel-tracker-app-android",
-      "title": "Peek for Android: get the beta, add the Parcels widget"
+      "title": "Peek for Android on Google Play, with the Parcels widget"
     },
     {
       "id": "share-parcel",
@@ -531,7 +531,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "sendungsverfolgung-app-android",
-      "title": "Peek für Android: Beta holen, Widget „Pakete“ hinzufügen"
+      "title": "Peek für Android bei Google Play, mit dem Widget „Pakete“"
     },
     {
       "id": "share-parcel",
@@ -838,7 +838,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "application-suivi-colis-android",
-      "title": "Peek pour Android\u00a0: obtenir la bêta et le widget «\u00a0Colis\u00a0»"
+      "title": "Peek pour Android sur Google Play, avec le widget «\u00a0Colis\u00a0»"
     },
     {
       "id": "share-parcel",
@@ -1145,7 +1145,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "app-tracking-pacchi-android",
-      "title": "Peek per Android: ottieni la beta e il widget «Pacchi»"
+      "title": "Peek per Android su Google Play, con il widget «Pacchi»"
     },
     {
       "id": "share-parcel",
@@ -1452,7 +1452,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "app-seguimiento-paquetes-android",
-      "title": "Peek para Android: consigue la beta y el widget Paquetes"
+      "title": "Peek para Android en Google Play, con el widget Paquetes"
     },
     {
       "id": "share-parcel",
@@ -1759,7 +1759,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "app-seguimento-encomendas-android",
-      "title": "Peek para Android: obtém a beta e o widget Encomendas"
+      "title": "Peek para Android no Google Play, com o widget Encomendas"
     },
     {
       "id": "share-parcel",
@@ -2066,7 +2066,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "android-app",
       "slug": "aplikacja-sledzenie-przesylek-android",
-      "title": "Peek na Androida: wersja beta i widżet Przesyłki"
+      "title": "Peek na Androida w Google Play, z widżetem Przesyłki"
     },
     {
       "id": "share-parcel",

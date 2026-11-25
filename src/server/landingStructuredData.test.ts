@@ -55,6 +55,10 @@ describe('landingStructuredData', () => {
     });
     const german = landingStructuredData({ origin: new URL('https://peek.example.test'), url: 'https://peek.example.test/de', locale: 'de' });
     expect(german['@graph'][1]).toMatchObject({ url: 'https://peek.example.test/de', inLanguage: 'de', description: de['preview.landing.description'] });
+    // Android once its app is open to everyone on Google Play.
+    vi.stubEnv('ANDROID_TEST_GROUP', '');
+    const released = landingStructuredData({ origin: new URL('https://peek.example.test'), url: 'https://peek.example.test/', locale: 'en' });
+    expect(released['@graph'][1]).toMatchObject({ operatingSystem: 'Web, iOS, Android' });
     // Three things are told, and nothing about what others think of them.
     expect(data['@graph']).toHaveLength(3);
   });

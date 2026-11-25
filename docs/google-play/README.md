@@ -46,17 +46,17 @@ screenshots unless they have their own.
 
 ## Closed test
 
-Play opens an app from a personal developer account to everyone only after a closed test with at
-least 12 testers opted in for 14 days in a row. Peek's closed track takes its testers from the
+Peek is on Play's production track, open to everyone; the account is an organization's, so Play
+asked for no closed test before it. The closed track stays for betas. It takes its testers from the
 Google Group `peek-android-testers`, which anyone can join: a tester joins it, becomes a tester on
 Play's opt-in page with the same Google account, and installs the app from Play.
 
-The site invites Android visitors to it while the switch in
-[`src/lib/androidTest.ts`](../../src/lib/androidTest.ts) is on, with the group's and Play's links
+The site invites Android visitors to a beta only while the switch in
+[`src/lib/androidTest.ts`](../../src/lib/androidTest.ts) is on (it is off now), with the group's and Play's links
 beside it. It invites a browser on Android 12 or later (the version Chrome's client hints give;
 without them, any Android but a version below 12 the user agent states), not an app's WebView, where
 Google allows no sign-in. It stands on the parcel page under its actions, in its "Notify me" and as
-a banner on the home page, and leads to the steps at `/android`, which are not found while the
+a banner on the home page, and leads to the steps at `/android`, which shows Google Play's link while the
 switch is off. The landing's "Android app" button and footer link lead there too, and so do `/app`, its code to
 scan and Settings' app row and code on an Android phone. Play lets in only the group's members, so the steps page keeps its last two steps
 locked until the group's link was followed. Under the steps, the same release without Play: the F-Droid repository's

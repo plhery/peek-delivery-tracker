@@ -1,27 +1,19 @@
 ---
-title: Peek for Android: get the beta, add the Parcels widget
-description: Peek for Android is in beta: join the Google Play test or install it from F-Droid or GitHub. No account needed. Add the widget, share links into Peek.
+title: Peek for Android on Google Play, with the Parcels widget
+description: Peek for Android is on Google Play, and also in Peek's own F-Droid repository and on GitHub. No account needed. Add the widget, share links into Peek.
 slug: parcel-tracker-app-android
 picture: An Android phone with the Parcels widget on its home screen, and Pip, the parcel with a face, peeking over the top of the phone.
 published: 2026-11-19
 updated: 2026-11-25
 ---
 
-Peek for Android is a beta, not public on Google Play: you get it from [peektracker.com/android](https://peektracker.com/android), by joining the Google Play test or by installing it from Peek's own F-Droid repository or from GitHub. It needs Android 12 or later and no account, and it adds a "Parcels" widget to your home screen and "Add to Peek" to your share sheet.
+Peek for Android is on [Google Play](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker), and also in Peek's own F-Droid repository and on GitHub. It needs Android 12 or later and no account, and it adds a "Parcels" widget to your home screen and "Add to Peek" to your share sheet.
 
 It follows parcels from more than 4,500 carriers: paste a tracking number, a carrier's link or a whole shipping email, and [Peek](/) finds the carrier and shows the journey on a map. It's free, with no in-app purchases and no ads. For an iPhone, iPad or Mac, see [Peek for iPhone, iPad and Mac](guide:iphone-app).
 
 ## Is Peek on Google Play?
 
-Only for testers. Peek is in a closed test, and its Google Play page doesn't open for anyone outside it. Google opens it to everyone once at least 12 testers have kept it for 14 days in a row, and anyone can join the test. On your Android phone, open [peektracker.com/android](https://peektracker.com/android), "Try Peek for Android":
-
-:::steps
-- "Join the testers’ group" | Tap "Join the group", join the Google Group on the page that opens, then come back.
-- "Become a tester on Google Play" | Tap "Open Google Play", then **Become a tester** on the page that opens.
-- "Install it, and keep it two weeks" | Tap "Install Peek", and keep the app for 14 days.
-:::
-
-Until you've followed the group's link in that browser, the next two buttons read "Join the group first". You can leave the test any time, on the same Google Play page.
+Yes. On your Android phone, open [Peek on Google Play](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker) and install it. The "Install Peek" button on [peektracker.com/android](https://peektracker.com/android), "Peek for Android", leads there too, and the same page has the ways to install it without Google Play.
 
 ### How do I install Peek without Google Play?
 
@@ -35,7 +27,7 @@ Add Peek's own repository to the F-Droid app by hand, or download the app from G
 
 Or tap "Open GitHub" on the same page: in the newest release on [Peek's GitHub releases](https://github.com/plhery/peek-delivery-tracker/releases), tap the .apk file, then let your browser install it. Peek's releases there are marked "Pre-release".
 
-This build is signed by Peek, not Google, so it can't update over a Google Play copy, or the other way round: if you have Peek from Google Play, or an early copy from the repository or GitHub, uninstall it first. Updates come through Peek's F-Droid repository. Neither route makes you a Google Play tester.
+This build is signed by Peek, not Google, so it can't update over a Google Play copy, or the other way round: if you have Peek from Google Play, or an early copy from the repository or GitHub, uninstall it first. Updates come through Peek's F-Droid repository.
 
 ### What's the difference between the Google Play and F-Droid builds?
 
@@ -103,10 +95,10 @@ Peek's parcel links (peektracker.com/p/…) open in the app once it's installed.
 Only the Google Play build can. Tap the barcode icon at the end of the tracking field (read out as "Scan barcode"), on the first screen or in Add; with an empty list, there's also a "Scan barcode" button. "Scan a tracking barcode" opens with the back camera and follows the barcode nearest the middle. If you refuse the camera, the scanner goes away until you allow it in Android's settings. Not sure which number is the tracking number? See [how to find your tracking number](guide:find-tracking-number).
 
 :::sources
-- [Peek: Try Peek for Android](https://peektracker.com/android) – the test's three steps, Android 12, the F-Droid repository, GitHub, signing
-- [Peek: Google Play notes](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/google-play/README.md) – closed test, 12 testers for 14 days, the testers' group
+- [Peek: Peek for Android](https://peektracker.com/android) – Google Play, Android 12, the F-Droid repository, GitHub, signing
+- [Google Play: Peek](https://play.google.com/store/apps/details?id=com.plhery.peekdeliverytracker) – the app's listing
 - [Peek: Android app](https://github.com/plhery/peek-delivery-tracker/blob/main/android/README.md) – the two builds, widget contents and refresh, shortcuts, signing keys, pre-releases
-- [Peek: F-Droid entry](https://github.com/plhery/peek-delivery-tracker/blob/main/android/fdroid/com.plhery.peekdeliverytracker.yml) – beta, name, which earlier copies to uninstall
+- [Peek: F-Droid entry](https://github.com/plhery/peek-delivery-tracker/blob/main/android/fdroid/com.plhery.peekdeliverytracker.yml) – name, which earlier copies to uninstall
 - [F-Droid: How to Add a Repo to F-Droid](https://f-droid.org/en/tutorials/add-repo/) – Settings › Repositories › +, then choosing the apps to install
 - [Peek: GitHub releases](https://github.com/plhery/peek-delivery-tracker/releases) – the .apk files, marked Pre-release
 - [Peek: English copy](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – every Peek label quoted here

@@ -9,7 +9,7 @@ updated: 2026-11-25
 
 Quand [Peek](/) a un indice solide sur l'arrivée de ton colis, Peek IA le dit à côté de la date du transporteur, ou à sa place quand le transporteur n'en donne pas : « probablement avant 16:00 », « probablement aujourd’hui ou demain », « peut-être plus tôt » ou « peu probable aujourd’hui ». C'est l'estimation de Peek, jamais une promesse du transporteur, et la plupart des colis n'en affichent aucune.
 
-Peek IA est activé par défaut, avec ou sans compte : sur peektracker.com, dans l'app iPhone, iPad et Mac, et dans la [bêta Android](guide:android-app), qu'elle vienne du test Google Play, du dépôt F-Droid de Peek ou de GitHub.
+Peek IA est activé par défaut, avec ou sans compte : sur peektracker.com, dans l'app iPhone, iPad et Mac, et dans l'[app Android](guide:android-app), qu'elle vienne de Google Play, du dépôt F-Droid de Peek ou de GitHub.
 
 :::steps
 - Regarde ta liste | Sous la date du transporteur sur la carte d'un colis, ou à côté du statut dans « À suivre » : « ✦ Peek IA » et quelques mots, comme « avant 16:00 ».
@@ -99,7 +99,7 @@ Avec un compte, ton choix te suit sur tes autres appareils, et les assistants co
 - [Peek : réglages Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – « Peek IA » sous « Préférences »
 - [Peek : les outils des assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – l'estimation dans la liste de colis d'un assistant
 - [App Store : Peek](https://apps.apple.com/app/id6823615370) – Peek IA dans les notes de version de l'app
-- [Peek : notes de version Android (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek IA dans la bêta Android
-- [Peek : Essaie Peek pour Android](https://peektracker.com/android) – la bêta depuis le test Google Play, F-Droid et GitHub
+- [Peek : notes de version Android (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/fastlane/metadata/android/en-US/changelogs/21.txt) – Peek IA dans l'app Android
+- [Peek : Peek pour Android](https://peektracker.com/android) – l'app sur Google Play, F-Droid et GitHub
 - [Peek : démo](https://peektracker.com/demo) – des colis d'exemple avec une estimation
 :::

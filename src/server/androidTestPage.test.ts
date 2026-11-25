@@ -9,11 +9,12 @@ vi.mock('next/server', async (original) => ({ ...await original<typeof import('n
 
 afterEach(() => { vi.unstubAllEnvs(); });
 
-it('is not found on a site without an Android app, or while its closed test has no testers’ group', async () => {
-  const { default: page } = await import('../../app/android/page');
+it('is not found on a site without an Android app, and names the app once its closed test is over', async () => {
+  const { default: page, generateMetadata } = await import('../../app/android/page');
   await expect(page()).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
   vi.stubEnv('ANDROID_APP_PACKAGE', PEEK_ENV.ANDROID_APP_PACKAGE);
-  await expect(page()).rejects.toThrow(/NEXT_HTTP_ERROR_FALLBACK;404/);
+  expect((await page()).props).toMatchObject({ initialLocale: 'de' });
+  expect(await generateMetadata()).toEqual({ title: 'Peek — Peek für Android', robots: { index: false, follow: false } });
 });
 
 it('draws the steps in the request’s language while the test is open, and is never indexed', async () => {

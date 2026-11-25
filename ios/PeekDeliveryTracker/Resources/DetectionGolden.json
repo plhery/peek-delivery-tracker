@@ -89099,6 +89099,14 @@
     ]
   },
   {
+    "input": "CGD74019263851",
+    "carrier": "gfs-express",
+    "confidence": "high",
+    "candidates": [
+      "gfs-express"
+    ]
+  },
+  {
     "input": "CGK002986959",
     "carrier": "unknown",
     "confidence": "low",

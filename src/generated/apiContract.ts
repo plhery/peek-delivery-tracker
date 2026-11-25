@@ -299,6 +299,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^CGD\\d{11}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^HRBC\\d{10}$",
         "confidence": "low"
       },

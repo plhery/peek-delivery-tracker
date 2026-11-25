@@ -42,7 +42,7 @@ O Peek lê o rastreamento da Colis Privé em francês, com uma frase datada por 
 
 A ajuda da Colis Privé cita ainda `Colis attendu par Colis Privé` (`Package awaiting Colis Privé` em inglês), linha que o Peek não enquadra numa etapa: significa que a Colis Privé ainda não recebeu o volume do remetente (ainda está com a loja ou, acrescenta o site belga, em transporte internacional ou alfândega) — fale com a loja. `pris en charge` significa apenas que a Colis Privé assumiu o pacote; `va être prochainement déposé` avisa que será deixado num ponto na data indicada; `subi un retard` indica atraso.
 
-## Horários, entregas sem sucesso e pontos de retirada Colis Privé
+## Horários, entregas não realizadas e pontos de retirada Colis Privé
 
 **França.** As entregas ocorrem das 8h às 19h (o site não informa os dias da semana). O volume vai para a caixa de correio se couber, em mãos se exigir assinatura, ou para um vizinho ou zelador; caso contrário, fica um aviso. Se a loja permitir, clique em "Modify my delivery" ("Convenir d'une date de présentation") no rastreamento para escolher um dia em casa entre 12h e 21h, outro destinatário no mesmo código postal ou um ponto de retirada; senão, o pacote aguarda no ponto mais próximo. O prazo é de 10 dias úteis para reagendar e 8 dias para retirar antes de voltar à loja.
 
@@ -50,11 +50,11 @@ A Colis Privé afirma contar com mais de 5.500 pontos na França continental (co
 
 **Bélgica e Luxemburgo.** Entregas de segunda a sábado, das 12h às 22h. Se você não estiver, o pacote pode ficar com um vizinho indicado no aviso. A segunda tentativa só ocorre se você agendar em colisprive.be: outro dia, ponto de retirada ou endereço no mesmo código postal. Agende logo: as páginas citam 8 ou 10 dias antes da devolução. Os 800 pontos de retirada ([buscador](https://colisprive.be/trouver-un-relais/)) guardam encomendas por 8 dias corridos.
 
-## Encomenda atrasada, extraviada ou avariada na Colis Privé
+## Encomenda atrasada, extraviada ou danificada na Colis Privé
 
 A Colis Privé trata reclamações de entrega; reembolso ou reenvio dependem das regras da loja.
 
-**França.** Confira primeiro o banner de atrasos gerais em colisprive.fr. Em caso de atraso, avaria ou não entrega, surge o botão "File a claim" ("Déposer une réclamation") na página de rastreamento. As páginas divergem no prazo de resposta: a página de reclamações cita 2 a 7 dias úteis (por e-mail ou telefone), enquanto as de atraso e entregue-não-recebido falam em 48 horas úteis. Sem botão, uma reclamação já foi aberta (talvez pela loja) ou o prazo venceu. Consta entregue mas não chegou? Confira caixa de correio, portaria e vizinhos e abra reclamação; veja [encomenda entregue mas não recebida](guide:delivered-not-received).
+**França.** Confira primeiro o banner de atrasos gerais em colisprive.fr. Em caso de atraso, dano ou não entrega, surge o botão "File a claim" ("Déposer une réclamation") na página de rastreamento. As páginas divergem no prazo de resposta: a página de reclamações cita 2 a 7 dias úteis (por e-mail ou telefone), enquanto as de atraso e entregue-não-recebido falam em 48 horas úteis. Sem botão, uma reclamação já foi aberta (talvez pela loja) ou o prazo venceu. Consta entregue mas não chegou? Confira caixa de correio, portaria e vizinhos e abra reclamação; veja [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 **Bélgica e Luxemburgo.** Após recebida pela Colis Privé, a entrega costuma levar 48 horas. Mais de 4 dias de atraso? Reclame em colisprive.be; respostas levam ao menos 4 dias úteis. O botão fica disponível por um mês após a entrega. Depois que o volume volta ao remetente, apenas a loja pode agir. Na Bélgica, se a reclamação for mal atendida, o Serviço de Mediação Postal (ombudsmanposte.be) é gratuito.
 
@@ -73,7 +73,7 @@ Canais divulgados nas páginas da Colis Privé:
 
 O [Peek](/) precisa do código de 12 caracteres e do código postal de entrega. Digite o código e escolha Colis Privé como transportadora: aparece um campo para o código postal (cinco dígitos na França, quatro na Bélgica, ou `L` e quatro dígitos em Luxemburgo). Você também pode digitar tudo junto (exemplos fictícios): `KL4829173648 75001` (França), `KL4829173648 B1000` (Bélgica) ou `KL4829173648 L4829` (Luxemburgo). Mantendo o `B` ou `L`, o Peek identifica a Colis Privé sozinho. Links de colisprive.com ou colisprive.fr também funcionam.
 
-Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, verifica até a cada 10 minutos. Como as leituras da Colis Privé trazem data sem horário, as checagens rápidas a cada 2 minutos ocorrem apenas no dia da saída para entrega, a partir das 6h da França, enquanto o rastreador oficial responde. Fora disso, e após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada" sem novidades. O Peek oferece alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele mostra status, histórico em francês, entrega prevista e, somente para você, o nome em "Destinatário". O Peek não abre reclamações nem fala com a Colis Privé por você.
+Enquanto o pacote está aberto no Peek, ou no dia da entrega com alertas ligados, o Peek verifica até a cada 10 minutos. Como as leituras da Colis Privé trazem data sem horário, as checagens rápidas a cada 2 minutos ocorrem apenas no dia da saída para entrega, a partir das 6h da França, enquanto o rastreador da própria Colis Privé responde. Fora disso, e após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora, e a cada 6 horas depois de sete dias em "Etiqueta criada" sem novidades. O Peek oferece alertas para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Ele mostra status, histórico em francês, entrega prevista e, somente para você, o nome em "Destinatário". O Peek não abre reclamações nem fala com a Colis Privé por você.
 
 ## Perguntas frequentes sobre rastreamento Colis Privé
 
@@ -116,4 +116,5 @@ Não. A Colis Privé BeLux não possui linha telefônica receptiva e atende por 
 - [Colis Privé: Accueil](https://colisprive.fr/) – prazo de 24/48h e pontos
 - [Colis Privé BeLux: Trouver un relais](https://colisprive.be/trouver-un-relais/) – 800 pontos de retirada
 - [Colis Privé BeLux: Qui sommes-nous ?](https://colisprive.be/qui-sommes-nous/) – histórico da empresa
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

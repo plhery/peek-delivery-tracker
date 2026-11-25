@@ -6,25 +6,25 @@ published: 2026-10-10
 updated: 2026-11-17
 ---
 
-Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal, Andorra y los Países Bajos con más de 300 franquicias.
+Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `4829/10573649`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal, Andorra y los Países Bajos con más de 300 franquicias.
 
 ## Número de envío NACEX: cómo es y dónde encontrarlo
 
 La casilla de la portada de NACEX muestra el ejemplo `0000/00000000`, cuatro cifras y ocho, y la página [Seguimiento de envíos](https://www.nacex.es/irSeguimiento.do) de su menú «Envíos» pide las dos partes por separado, en el bloque «Expedición». NACEX no publica una longitud fija: ese formulario admite hasta 5 caracteres en la agencia y hasta 10 cifras en el albarán. Con cifras inventadas, en la forma de la casilla:
 
-:::anatomy 0123 / 45678901
-- 0123 | Agencia: la franquicia NACEX de la que salió el envío
+:::anatomy 4829 / 10573649
+- 4829 | Agencia: la franquicia NACEX de la que salió el envío
 - / | La barra entre las dos partes
-- 45678901 | Albarán: el número de la expedición
+- 10573649 | Albarán: el número de la expedición
 :::
 
 NACEX no dice dónde aparece el número ni con qué nombre firma sus SMS. Busca en el correo de envío de la tienda o en la página de tu pedido, o mira [otros sitios donde puede estar](guide:find-tracking-number). Las demás búsquedas del formulario piden datos del remitente: la «Referencia» solo vale con su agencia y su código de «Cliente», y el «Nº solicitud» es el de una petición de recogida.
 
 | Lo que tienes | Qué es |
 | --- | --- |
-| `1234/12345678` | Un número de NACEX: síguelo tal cual. |
-| `123412345678` | Sin la barra, Peek no lo reconoce como NACEX: no sabe de quién es y solo propone [transportistas posibles](guide:tracking-number-formats). Si es de NACEX, falta la barra entre agencia y albarán, que en el ejemplo de la casilla va tras la cuarta cifra. |
-| `2345678901` | Hasta 10 cifras: quizá la «referencia alternativa» que NACEX imprime en la etiqueta. |
+| `4829/10573649` | Un número de NACEX: síguelo tal cual. |
+| `482910573649` | Sin la barra, Peek no lo reconoce como NACEX: no sabe de quién es y solo propone [transportistas posibles](guide:tracking-number-formats). Si es de NACEX, falta la barra entre agencia y albarán, que en el ejemplo de la casilla va tras la cuarta cifra. |
+| `4829105736` | Hasta 10 cifras: quizá la «referencia alternativa» que NACEX imprime en la etiqueta. |
 | 16 o 23 cifras | Puede ser de [Correos Express](carrier:correos-express). |
 
 ## Estados del seguimiento NACEX: qué significa cada uno
@@ -79,7 +79,7 @@ La página de Reclamaciones de NACEX se dirige a su cliente, quien contrató el 
 
 ## NACEX teléfono, atención al cliente y recogidas
 
-Así lo indicaban las webs de NACEX en octubre de 2026. Ningún canal publica horario, así que NACEX no anuncia un teléfono 24 horas:
+Ningún canal publica horario, así que NACEX no anuncia un teléfono 24 horas:
 
 - **Teléfono gratuito:** 900 100 000.
 - **Correo electrónico:** atencion.cliente@nacex.com.

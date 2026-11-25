@@ -12,19 +12,19 @@ A NACEX é uma transportadora expresso do Grupo Logista que entrega em Portugal,
 
 A caixa do site mostra a forma `0000/00000000`, e a página [Seguimento](https://www.nacex.pt/irSeguimiento.do) pede as duas partes em campos separados, «Agência» e «Nº expedição». Com algarismos inventados:
 
-:::anatomy 0123 / 45678901
-- 0123 | Agência: a agência NACEX de onde a encomenda partiu
+:::anatomy 4829 / 10573649
+- 4829 | Agência: a agência NACEX de onde a encomenda partiu
 - / | A barra entre as duas partes
-- 45678901 | Nº expedição: o número do próprio envio
+- 10573649 | Nº expedição: o número do próprio envio
 :::
 
 A NACEX não diz onde aparece o número, nem publica um SMS de exemplo ou o nome com que as suas mensagens chegam ao telemóvel. Para saber onde procurar, vê [onde encontrar o número de seguimento](guide:find-tracking-number).
 
 | O que tens | O que é |
 | --- | --- |
-| `1234/12345678` | Um número NACEX: segue-o tal como está. |
-| `123412345678` | Sem a barra, o Peek não o reconhece como NACEX e só propõe [outras transportadoras possíveis](guide:tracking-number-formats). Se for da NACEX, falta a barra, que a caixa da NACEX mostra depois do quarto algarismo, embora a NACEX não fixe o comprimento. |
-| `2345678901` | Até 10 algarismos: talvez a «referência alternativa» impressa na etiqueta; a NACEX não diz onde a escrever. |
+| `4829/10573649` | Um número NACEX: segue-o tal como está. |
+| `482910573649` | Sem a barra, o Peek não o reconhece como NACEX e só propõe [outras transportadoras possíveis](guide:tracking-number-formats). Se for da NACEX, falta a barra, que a caixa da NACEX mostra depois do quarto algarismo, embora a NACEX não fixe o comprimento. |
+| `4829105736` | Até 10 algarismos: talvez a «referência alternativa» impressa na etiqueta; a NACEX não diz onde a escrever. |
 
 Um número só com algarismos, de 16 ou 23 dígitos, pode ser da [Correos Express](carrier:correos-express), outra transportadora espanhola. Se a NACEX responder «Não existe nenhum envio introduzido no sistema…», confirma os algarismos e a barra e, como a própria mensagem sugere, fala com a agência NACEX mais próxima.
 
@@ -78,7 +78,7 @@ O seguimento diz `Entregado` mas não tens nada? Vê [encomenda dada como entreg
 
 ## NACEX contacto em Portugal: telefone, e-mail e chat
 
-Tal como o site português da NACEX os indicava a 9 de outubro de 2026, sem horário publicado para o telefone, o e-mail ou o chat:
+Tal como o site português da NACEX os indica, sem horário publicado para o telefone, o e-mail ou o chat:
 
 - **Telefone:** 800 200 077, «Chamada Gratuita». Se o site abrir em espanhol, mostra o 900 100 000, o número de Espanha: escolhe PT no topo da página.
 - **E-mail:** atencao.cliente@nacex.com, com «atencao» (o de Espanha é atencion.cliente@nacex.com).

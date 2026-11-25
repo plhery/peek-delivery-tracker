@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-NACEX 是 Logista 集团旗下的加急快递公司，派送范围覆盖西班牙、葡萄牙、安道尔和荷兰。你可以把运单号（4 位数字 + 斜杠 + 8 位数字）输入 [NACEX 官网](https://www.nacex.es/)查件框，或直接粘贴到上方输入框查询。运单号对应寄件人（通常是商家）下单创建的快件；NACEX 不支持按订单号或邮编查件。
+NACEX 是 Logista 集团旗下的加急快递公司，派送范围覆盖西班牙、葡萄牙、安道尔和荷兰。你可以把运单号（4 位数字 + 斜杠 + 8 位数字）输入 [NACEX 官网](https://www.nacex.es/)查件框，或直接粘贴到上方输入框查询。运单号对应寄件人（通常是商家）下单创建的快件；NACEX 不能按订单号或邮编查件。
 
 ## NACEX 运单号是什么样的？
 
@@ -18,7 +18,7 @@ NACEX 查件框标示的标准格式为 4 位数字、斜杠再加 8 位数字�
 - 10573649 | 运单号：该快件本身的流水编号
 :::
 
-NACEX 未说明收件人具体在何处查找单号，也未公布官方短信发件人名称；常见查找位置见[如何查找运单号](guide:find-tracking-number)（英文）。
+NACEX 未说明收件人具体在何处查找单号，也未说明其短信显示的发件人名称；一般可以在哪里找到单号，见[如何查找运单号](guide:find-tracking-number)（英文）。
 
 | 你手头的编号（虚构） | 说明 |
 | --- | --- |
@@ -30,7 +30,7 @@ NACEX 未说明收件人具体在何处查找单号，也未公布官方短信�
 
 ## NACEX 西班牙语物流状态中文解读
 
-NACEX 官网未公布完整状态列表。下表列出 Peek 抓取到的西班牙语状态原文（NACEX 表单可切换英语，但状态行是否随之翻译尚未确认），按常见顺序排列：
+NACEX 官网未公布完整状态列表。下表列出 Peek 抓取到的西班牙语状态原文（NACEX 表单可切换英语，但状态行是否随之翻译尚未确认），按通常顺序排列：
 
 | NACEX 状态原文 | 中文含义 |
 | --- | --- |
@@ -50,13 +50,13 @@ NACEX 官网未公布完整状态列表。下表列出 Peek 抓取到的西班�
 
 以 `Solución de entrega…` 开头的记录代表已安排处理措施而非终点，包裹随后会继续流转。最需要留意的是 `Solucionado sin OK`：请立即向 NACEX 或商家核实情况。`Sin estado`（无状态）仅为行政备注（如已发送通知或达到尝试次数上限），实际进度以上一条记录为准。各物流阶段含义另见[物流状态说明](guide:tracking-statuses)（英文）。
 
-## NACEX 自提点与错过派送处理
+## NACEX 自提点与派送未成功
 
-**上门无人：** 按 NACEX 2026 年服务条款，住宅地址派送失败时，快递员会留下通知单以安排第二次（亦即最后一次）派送。常见问题补充称“视情况而定”，且当地网点若有你的电话会致电联系。近期外出请联系客服或就近网点。
+**上门无人：** 按 NACEX 2026 年服务条款，住宅地址派送失败时，快递员会留下通知单以安排第二次（亦即最后一次）派送。常见问题补充说“在可能的情况下”，且当地网点若有你的电话会致电联系。近期外出请联系客服或就近网点。
 
 **预通知（Pre-Alert）：** 若寄件人服务包含此项，NACEX 会通过短信或邮件告知预计派送日期与时段，其中的链接可进入 My Preferred Delivery，供你改选日期、时段、NACEX 网点或 NACEX.shop 自提点。
 
-**NACEX.shop 自提点：** 在西班牙和葡萄牙拥有 4,000 多家合作店铺与快递柜，许多周末照常营业。发往自提点的包裹通常在次个工作日 09:00 起或 12:00 前就绪（视网点而定），到件后 NACEX 会通知你。可通过 [NACEX 网点查找器](https://www.nacex.es/irCerca.do)搜索网点与自提点。NACEX 未公布自提点或快递柜的保管天数。
+**NACEX.shop 自提点：** 在西班牙和葡萄牙有 4,000 多家店铺与快递柜，许多周末照常营业。发往自提点的包裹在次个工作日 09:00 起或 12:00 前可取（视自提点而定），到件后 NACEX 会通知你。可通过 [NACEX 网点查找器](https://www.nacex.es/irCerca.do)搜索网点与自提点。NACEX 未公布自提点或快递柜的保管天数。
 
 **NACEX 营业网点自提：** 包裹最长保管 **15 天**，逾期退回寄件人。请提前告知网点，并于周一至周五营业时间内（各网点不同）前往领取。委托他人代领需提供你的签字授权书及身份证件复印件。
 
@@ -88,9 +88,9 @@ NACEX 官网未列出 WhatsApp 客服号码。
 
 ## 用 Peek 查询和跟踪 NACEX 包裹
 
-[Peek](/) 会按“4 位数字 + 斜杠 + 8 位数字”的专属结构立刻识别 NACEX。粘贴带 `intcli=` 的 nacex.es 查询链接，甚至整封发货邮件文本均可自动提取单号。
+[Peek](/) 根据单号结构识别 NACEX：正好 4 位数字、斜杠和 8 位数字。粘贴带 `intcli=` 的 nacex.es 查询链接或整封发货邮件也可以。
 
-当 NACEX 官方系统响应时，Peek 最高每 10 分钟检查一次，在包裹扫描进入派送当天自当地时间早上 6 点起最高每 2 分钟检查一次；若仅通过综合跟踪服务获取更新，则在派送当天打开页面或开启提醒时最高每 15 分钟检查一次。支持设置“每次扫描”、“重要环节”或“仅派送当天”提醒。若连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。Peek 会显示物流状态、完整历史并在地图上标出各扫描网点位置。NACEX 官网仅为签收一步提供具体时刻，其余步骤仅显示日期。Peek 会隐去收件人详情、签收凭证、派送备注、联系方式和商家参考号，也无法代你催件或联系 NACEX。
+Peek 最高每 10 分钟检查一次；在 NACEX 扫描包裹进入派送的当天，只要 NACEX 自己的查询系统正常响应，自当地时间早上 6 点起最高每 2 分钟检查一次；通过物流查询服务时，派送当天在打开包裹页面或开启通知时最高每 15 分钟检查一次。可以设置“每次扫描”、“重要环节”或“仅派送当天”提醒。若连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次。Peek 会显示物流状态、完整历史并在地图上标出各扫描网点位置。NACEX 官网仅为签收一步提供具体时刻，其余步骤仅显示日期。Peek 会隐去收件人详情、签收凭证、派送备注、联系方式和商家参考号，也无法代你催件或联系 NACEX。
 
 ## NACEX 查询常见问题
 
@@ -112,6 +112,7 @@ NACEX 创立于 1995 年，隶属 Logista 集团，是一家覆盖西班牙本�
 
 :::sources
 - [NACEX: Tracking and Tracing](https://www.nacex.es/irSeguimiento.do) – 单号结构与其他参考号说明
+- [NACEX: Track and trace form](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) – 查询链接与未找到提示
 - [NACEX: Home](https://www.nacex.es/) – 查件框、Logista 集团与 4,000 个自提点
 - [NACEX: FAQs](https://www.nacex.es/irFaqs.do) – 联系方式、无人签收、15 天保管、改址与拒收
 - [NACEX: FAQ by category](https://www.nacex.es/visualizarfaq.do?category=900) – 网点致电与网点自提
@@ -129,4 +130,5 @@ NACEX 创立于 1995 年，隶属 Logista 集团，是一家覆盖西班牙本�
 - [NACEX: Servicios y condiciones de transporte 2026](https://www.nacex.es/pages/img/servicios/condiciones_tramitaciones/condiciones-generales-2026-ES.pdf) – 50 公里规则与周六 15 公里范围
 - [NACEX: ¿Quiénes somos?](https://www.nacex.es/irEmpresaQuienes.do) – 1995 年成立、Logista、荷兰与快递柜
 - [BOE: Ley 15/2009](https://www.boe.es/buscar/act.php?id=BOE-A-2009-18004) – 破损书面异议与 7 天时限
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

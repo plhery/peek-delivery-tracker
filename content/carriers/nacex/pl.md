@@ -1,6 +1,6 @@
 ---
 title: Śledzenie przesyłek NACEX: numer, statusy i kontakt
-description: Śledź paczkę NACEX z Hiszpanii lub Portugalii: format numeru 0100/00000005, znaczenie hiszpańskich statusów po polsku, punkty NACEX.shop i kontakt.
+description: Śledź paczkę NACEX z Hiszpanii lub Portugalii: format numeru 4829/10573649, znaczenie hiszpańskich statusów po polsku, punkty NACEX.shop i kontakt.
 slug: nacex-sledzenie
 published: 2026-11-17
 updated: 2026-11-17
@@ -12,19 +12,19 @@ NACEX to firma kurierska ekspresowa należąca do grupy Logista, która posiada 
 
 Pole wyszukiwania na stronie NACEX podpowiada wzór `0000/00000000`, a szczegółowy formularz na [stronie śledzenia NACEX](https://www.nacex.es/irSeguimiento.do) prosi o wpisanie obu części osobno (*Agencia* oraz *Albarán*). Na przykładzie zmyślonego numeru:
 
-:::anatomy 0100 / 00000005
-- 0100 | Agencja: czterocyfrowy kod oddziału franczyzowego NACEX nadającego paczkę
+:::anatomy 4829 / 10573649
+- 4829 | Agencja: czterocyfrowy kod oddziału franczyzowego NACEX nadającego paczkę
 - / | Ukośnik oddzielający kod oddziału od numeru listu przewozowego
-- 00000005 | List przewozowy (*albarán*): ośmiocyfrowy numer samej przesyłki
+- 10573649 | List przewozowy (*albarán*): ośmiocyfrowy numer samej przesyłki
 :::
 
 NACEX nie podaje, w której wiadomości odbiorca znajdzie ten numer ani pod jaką nazwą nadawcy przychodzą SMS-y; poradnik [jak znaleźć numer śledzenia](guide:find-tracking-number) podpowiada typowe miejsca, takie jak e-mail potwierdzający wysyłkę, konto klienta w sklepie czy etykieta.
 
 | Co masz pod ręką | Co to za numer i jak go śledzić |
 | --- | --- |
-| `0100/00000005` | Pełny numer przesyłki NACEX: wklej go bez zmian (spacje wokół ukośnika, np. `0100 / 00000005`, są również akceptowane przy bezpośrednim wpisywaniu numeru). |
-| `010000000005` | 12 cyfr bez ukośnika: prawdopodobnie numer NACEX, w którym sklep pominął znak `/` po czwartej cyfrze. Bez ukośnika Peek nie podpowiada NACEX i sprawdza przewoźników używających [12-cyfrowych numerów](guide:tracking-number-formats). Dopisz `/` po czwartej cyfrze. |
-| `0100000005` | Do 10 cyfr: to zapewne „numer referencyjny alternatywny” (*referencia alternativa*) widoczny na etykiecie NACEX. NACEX nie podaje, gdzie go wpisać; Peek nie odpytuje po nim systemu NACEX. |
+| `4829/10573649` | Pełny numer przesyłki NACEX: wklej go bez zmian (spacje wokół ukośnika, np. `4829 / 10573649`, są również akceptowane przy bezpośrednim wpisywaniu numeru). |
+| `482910573649` | 12 cyfr bez ukośnika: prawdopodobnie numer NACEX, w którym sklep pominął znak `/` po czwartej cyfrze. Bez ukośnika Peek nie podpowiada NACEX i sprawdza przewoźników używających [12-cyfrowych numerów](guide:tracking-number-formats). Dopisz `/` po czwartej cyfrze. |
+| `4829105736` | Do 10 cyfr: to zapewne „numer referencyjny alternatywny” (*referencia alternativa*) widoczny na etykiecie NACEX. NACEX nie podaje, gdzie go wpisać; Peek nie odpytuje po nim systemu NACEX. |
 | `3230 0000 0000 0000` | 16 cyfr (lub 23 cyfry) bez ukośnika: to format należący do [Correos Express](carrier:correos-express) albo kurierów takich jak [TNT](carrier:tnt), a nie do NACEX. |
 
 Upewnij się też, że zamiast cyfry `0` nie wpisano litery `O` – obecność liter uniemożliwia rozpoznanie numeru. Jeśli [zewnętrzny formularz śledzenia](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) wyświetla komunikat *„No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana”* („W systemie nie ma żadnego listu przewozowego spełniającego podane kryteria. Skontaktuj się z najbliższą agencją NACEX”), sprawdź cztery pierwsze cyfry, ukośnik i osiem kolejnych cyfr. Gdy sprzedawca dopiero wygenerował wysyłkę, odczekaj kilka godzin lub poproś sklep o potwierdzenie numeru.
@@ -91,7 +91,7 @@ Dane ze stron hiszpańskich NACEX (bez opublikowanych godzin pracy infolinii, e-
 
 ## Śledzenie przesyłek NACEX w aplikacji Peek
 
-[Peek](/) rozpoznaje numer NACEX od razu po układzie czterech cyfr, ukośnika i ośmiu cyfr (`0100/00000005`) w polu „Wykryty przewoźnik” (z przyciskiem „Zmień”). Możesz też wkleić link `nacex.es` z `intcli=` albo cały e-mail ze sklepu.
+[Peek](/) rozpoznaje numer NACEX od razu po układzie czterech cyfr, ukośnika i ośmiu cyfr (`4829/10573649`) w polu „Wykryty przewoźnik” (z przyciskiem „Zmień”). Możesz też wkleić link `nacex.es` z `intcli=` albo cały e-mail ze sklepu.
 
 Peek sprawdza status nawet co 10 minut, a w dniu wydania kurierowi („W doręczeniu”) od 06:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada system NACEX (przez serwisy śledzące – nawet co 15 minut). Po dwóch dniach bez nowości – albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” – aplikacja odpytuje co godzinę. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek tłumaczy etapy na polski, pokazuje przewidywaną datę dostawy w drodze i zaznacza skany na mapie. Ponieważ NACEX podaje godzinę tylko dla samego doręczenia, przy wcześniejszych krokach widoczna jest data. Peek pomija dane odbiorcy, potwierdzenie odbioru, komentarze kurierskie, dane kontaktowe i referencję sklepu, i nie zmienia dostawy ani nie kontaktuje się z NACEX za ciebie.
 
@@ -111,7 +111,7 @@ Zmiana adresu domowego wymaga zgody płatnika przesyłki (zwykle sklepu): w rejo
 
 ### Dlaczego mój 12-cyfrowy numer NACEX nie działa?
 
-Wzór numeru NACEX ma ukośnik po czwartej cyfrze (`0100/00000005`). Bez `/` Peek sprawdza przewoźników z 12 cyframi ciągiem – wstaw `/` między czwartą a piątą cyfrą.
+Wzór numeru NACEX ma ukośnik po czwartej cyfrze (`4829/10573649`). Bez `/` Peek sprawdza przewoźników z 12 cyframi ciągiem – wstaw `/` między czwartą a piątą cyfrą.
 
 :::sources
 - [NACEX: Strona główna](https://www.nacex.es/irHome.do) – wyszukiwarka, Logista, sieć, języki

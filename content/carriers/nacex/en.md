@@ -12,19 +12,19 @@ NACEX is an express courier of the Logista group that delivers across Spain, Por
 
 NACEX's tracking box shows the shape as `0000/00000000`, and its [Tracking and Tracing](https://www.nacex.es/irSeguimiento.do) page asks for the two parts separately. With invented digits:
 
-:::anatomy 0123 / 45678901
-- 0123 | Office: the NACEX franchise office the parcel left from
+:::anatomy 4829 / 10573649
+- 4829 | Office: the NACEX franchise office the parcel left from
 - / | The slash between the two parts
-- 45678901 | Delivery note: the shipment's own number
+- 10573649 | Delivery note: the shipment's own number
 :::
 
 NACEX doesn't say where recipients find the number or which sender name its SMS show; [how to find your tracking number](guide:find-tracking-number) lists the usual places.
 
 | What you have | What it is |
 | --- | --- |
-| `1234/12345678` | A NACEX number: track it as it is. |
-| `123412345678` | Perhaps a NACEX number without its slash (NACEX's example puts it after the fourth digit); [12 digits alone fit other carriers too](guide:tracking-number-formats). |
-| `2345678901` | Up to 10 digits: perhaps NACEX's "alternative reference", printed on the label; NACEX doesn't say where to enter it. |
+| `4829/10573649` | A NACEX number: track it as it is. |
+| `482910573649` | Perhaps a NACEX number without its slash (NACEX's example puts it after the fourth digit); [12 digits alone fit other carriers too](guide:tracking-number-formats). |
+| `4829105736` | Up to 10 digits: perhaps NACEX's "alternative reference", printed on the label; NACEX doesn't say where to enter it. |
 
 If NACEX answers "There are no delivery notes entered into the system…", check the digits and the slash, then ask your nearest NACEX office, as the message suggests.
 
@@ -76,7 +76,7 @@ Tracking says `Entregado` but you have nothing? See [delivered but not received]
 
 ## NACEX contact number and customer service
 
-As NACEX's sites listed them on 9 October 2026, with no opening hours for phone, email or chat:
+NACEX's sites list these, with no opening hours for phone, email or chat:
 
 - **Spain:** 900 100 000, free (+34 on the English pages, which don't say if it works from abroad), atencion.cliente@nacex.com and the live chat on the [contact page](https://www.nacex.es/irContactenosContacto.do).
 - **Andorra:** no phone or email of its own; use the Spanish channels and the Finder's Andorra tab.

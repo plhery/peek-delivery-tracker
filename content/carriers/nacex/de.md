@@ -1,6 +1,6 @@
 ---
 title: NACEX Sendungsverfolgung: Nummer, Status und Kontakt
-description: NACEX-Paket aus Spanien oder Portugal verfolgen: Nummer 0100/00000005, spanische Statusmeldungen auf Deutsch, NACEX.shop-Punkte, Zoll und Kontakt.
+description: NACEX-Paket aus Spanien oder Portugal verfolgen: Nummer 4829/10573649, spanische Statusmeldungen auf Deutsch, NACEX.shop-Punkte, Zoll und Kontakt.
 slug: nacex-sendungsverfolgung
 published: 2026-11-17
 updated: 2026-11-17
@@ -12,19 +12,19 @@ NACEX ist ein Express-Paketdienst der Logista-Gruppe mit eigenem Franchisenetz i
 
 Das Suchfeld auf der Startseite zeigt das Muster `0000/00000000`, während das ausführliche Formular auf der [NACEX-Tracking-Seite](https://www.nacex.es/irSeguimiento.do) beide Teile getrennt abfragt (*Agencia* und *Albarán*). Anhand einer frei erfundenen Nummer:
 
-:::anatomy 0100 / 00000005
-- 0100 | Agentur: vierstelliger Code der absendenden NACEX-Franchise-Niederlassung
+:::anatomy 4829 / 10573649
+- 4829 | Agentur: vierstelliger Code der absendenden NACEX-Franchise-Niederlassung
 - / | Schrägstrich zwischen Agenturcode und Sendungsschein
-- 00000005 | Lieferschein (*albarán*): achtstellige Nummer der eigentlichen Sendung
+- 10573649 | Lieferschein (*albarán*): achtstellige Nummer der eigentlichen Sendung
 :::
 
 NACEX gibt nicht an, in welcher Nachricht Empfänger die Nummer erhalten oder unter welchem Absendernamen SMS erscheinen; unser Ratgeber [Sendungsnummer finden](guide:find-tracking-number) zeigt die üblichen Stellen wie Versandbestätigung, Kundenkonto des Shops oder Paketlabel.
 
 | Was dir vorliegt | Worum es sich handelt |
 | --- | --- |
-| `0100/00000005` | Vollständige NACEX-Sendungsnummer: direkt so verfolgen (Leerzeichen rund um den Schrägstrich wie `0100 / 00000005` werden beim direkten Einfügen ebenfalls akzeptiert). |
-| `010000000005` | 12 Ziffern ohne Schrägstrich: vermutlich eine NACEX-Nummer, bei der der `/` nach der vierten Ziffer weggelassen wurde. Ohne Schrägstrich schlägt Peek nicht NACEX vor, sondern prüft andere Paketdienste mit [12-stelligen Nummern](guide:tracking-number-formats). Setze den `/` nach der vierten Ziffer ein. |
-| `0100000005` | Bis zu 10 Ziffern: möglicherweise die auf dem Etikett gedruckte „alternative Referenz“ (*referencia alternativa*). Wo man sie eingibt, sagt NACEX nicht; Peek fragt NACEX damit nicht ab. |
+| `4829/10573649` | Vollständige NACEX-Sendungsnummer: direkt so verfolgen (Leerzeichen rund um den Schrägstrich wie `4829 / 10573649` werden beim direkten Einfügen ebenfalls akzeptiert). |
+| `482910573649` | 12 Ziffern ohne Schrägstrich: vermutlich eine NACEX-Nummer, bei der der `/` nach der vierten Ziffer weggelassen wurde. Ohne Schrägstrich schlägt Peek nicht NACEX vor, sondern prüft andere Paketdienste mit [12-stelligen Nummern](guide:tracking-number-formats). Setze den `/` nach der vierten Ziffer ein. |
+| `4829105736` | Bis zu 10 Ziffern: möglicherweise die auf dem Etikett gedruckte „alternative Referenz“ (*referencia alternativa*). Wo man sie eingibt, sagt NACEX nicht; Peek fragt NACEX damit nicht ab. |
 | `3230 0000 0000 0000` | 16 Ziffern (oder 23 Ziffern) ohne Schrägstrich: kein NACEX-Format, sondern [Correos Express](carrier:correos-express) oder ein anderer Paketdienst wie [DHL eCommerce](carrier:dhl-ecommerce). |
 
 Achte außerdem darauf, nicht den Buchstaben `O` statt der Ziffer `0` einzutippen – Buchstaben verhindern die Erkennung. Meldet das [externe NACEX-Suchformular](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) *„No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana“* („Kein Lieferschein im System entspricht den angegebenen Kriterien. Wenden Sie sich an Ihre nächstgelegene NACEX-Agentur“), prüfe die vier Ziffern vor und die acht Ziffern nach dem Schrägstrich. Wurde das Paket gerade erst angekündigt, warte einige Stunden oder frag beim Shop nach.
@@ -94,7 +94,7 @@ Auf seinen spanischen Kontaktseiten nennt NACEX folgende Kanäle (ohne veröffen
 
 ## NACEX-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt eine NACEX-Sendung sofort am Muster aus vier Ziffern, Schrägstrich und acht Ziffern (`0100/00000005`) unter „Erkannter Paketdienst“ (über „Ändern“ anpassbar). Ebenso funktionieren ein `nacex.es`-Trackinglink mit `intcli=` oder die gesamte Versand-E-Mail.
+[Peek](/) erkennt eine NACEX-Sendung sofort am Muster aus vier Ziffern, Schrägstrich und acht Ziffern (`4829/10573649`) unter „Erkannter Paketdienst“ (über „Ändern“ anpassbar). Ebenso funktionieren ein `nacex.es`-Trackinglink mit `intcli=` oder die gesamte Versand-E-Mail.
 
 Peek prüft bis zu alle 10 Minuten und am Zustelltag ab 06:00 Uhr Ortszeit bis zu alle 2 Minuten, sobald NACEX das Paket als „In Zustellung“ scannt und solange der NACEX-Tracker direkt antwortet (über Tracking-Dienste bis zu alle 15 Minuten). Nach zwei Tagen ohne Ereignis – oder nach 12 Stunden auf „Etikett erstellt“ bzw. „Beim Paketdienst eingegangen“ – wechselt Peek auf stündliche Abfragen. Mitteilungen lassen sich auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ stellen. Peek übersetzt die Statusphasen, zeigt unterwegs das voraussichtliche Lieferdatum und stellt jeden Scan auf einer Karte dar. Da NACEX öffentlich nur für die Zustellung eine Uhrzeit nennt, siehst du bei Zwischenschritten das Datum. Empfängerdaten, Zustellnachweis, Zustellkommentare, Kontaktdaten und Händlerreferenz lässt Peek weg und kann weder Zustelloptionen ändern noch NACEX für dich kontaktieren.
 
@@ -114,7 +114,7 @@ Eine Änderung der Hausadresse muss vom zahlenden Auftraggeber (meist dem Shop) 
 
 ### Warum erkennt Peek meine 12-stellige NACEX-Nummer nicht?
 
-Weil das NACEX-Muster nach den ersten vier Ziffern einen Schrägstrich hat (`0100/00000005`). Ohne `/` prüft Peek Paketdienste mit durchgehend 12 Ziffern – füge den `/` nach der vierten Ziffer ein.
+Weil das NACEX-Muster nach den ersten vier Ziffern einen Schrägstrich hat (`4829/10573649`). Ohne `/` prüft Peek Paketdienste mit durchgehend 12 Ziffern – füge den `/` nach der vierten Ziffer ein.
 
 :::sources
 - [NACEX: Startseite](https://www.nacex.es/irHome.do) – Suchfeld, Logista, Netz, Sprachen

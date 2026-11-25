@@ -50,7 +50,7 @@ A NACEX não publica uma lista oficial de status. Estes são os textos em espanh
 
 Linhas iniciadas por `Solución de entrega…` são providências, não o fim do envio: o pacote volta a circular. O status que exige ação é `Solucionado sin OK`: pergunte à NACEX ou à loja o que aconteceu. `Sin estado` ("sem status") é apenas nota administrativa (como aviso enviado ou limite de tentativas atingido); a linha anterior mostra a situação real. Veja cada etapa geral em [o que significam os status de rastreamento](guide:tracking-statuses).
 
-## Pontos NACEX.shop e entregas sem sucesso
+## Pontos NACEX.shop e entregas não realizadas
 
 **Se você não estiver:** em endereços residenciais, as condições de 2026 da NACEX determinam que o entregador deixa um aviso para combinar uma segunda e última tentativa. O FAQ acrescenta "sempre que possível" e diz que a agência local liga se tiver seu telefone. Vai viajar? Avise o atendimento abaixo ou a agência mais próxima.
 
@@ -62,14 +62,14 @@ Linhas iniciadas por `Solución de entrega…` são providências, não o fim do
 
 Entrega aos sábados (09h às 13h) é serviço pago à parte em cidades com franquia NACEX e até 15 km ao redor; nas Canárias, apenas documentos. Domingos não contam como dias úteis. Você pode recusar um pacote na porta avisando o entregador.
 
-## Encomenda atrasada, extraviada ou avariada na NACEX
+## Encomenda atrasada, extraviada ou danificada na NACEX
 
 As reclamações na NACEX são feitas pelo cliente contratante (em geral a loja); qualquer indenização passa pela franquia desse cliente.
 
 - **Não chegou ou não atualiza:** o FAQ da NACEX orienta escrever para atencion.cliente@nacex.com ou ligar para 900 100 000, sem definir tempo mínimo de espera. Veja [rastreamento que não atualiza](guide:tracking-not-updating).
 - **Atraso:** o cliente da NACEX pode reclamar em até 31 dias se a entrega ultrapassar o serviço contratado.
 - **Extravio ou furto:** reclamação em até 7 dias, com fatura do conteúdo.
-- **Avaria ou falta de itens:** a NACEX recomenda registrar na entrega; o prazo é de 7 dias a partir da entrega, com fotos da avaria. A lei espanhola de transportes (Ley 15/2009, art. 60) exige ressalva escrita na entrega, ou em até sete dias corridos para dano oculto.
+- **Dano ou falta de itens:** a NACEX recomenda registrar na entrega; o prazo é de 7 dias a partir da entrega, com fotos do dano. A lei espanhola de transportes (Ley 15/2009, art. 60) exige ressalva escrita na entrega, ou em até sete dias corridos para dano oculto.
 - **Devolvida:** a NACEX não traz instruções ao destinatário; combine reenvio ou reembolso com a loja.
 
 Consta `Entregado` mas nada chegou? Veja [encomenda entregue mas não recebida](guide:delivered-not-received).
@@ -88,9 +88,9 @@ As páginas de contato da NACEX não listam número de WhatsApp.
 
 ## Como rastrear encomendas da NACEX no Peek
 
-O [Peek](/) reconhece códigos da NACEX de imediato pelo formato exato de quatro dígitos, barra e oito dígitos. Links de rastreamento de nacex.es com `intcli=` ou o texto completo do e-mail de envio também funcionam.
+O [Peek](/) reconhece um código da NACEX pelo formato: exatamente quatro dígitos, uma barra e oito dígitos. Links de rastreamento de nacex.es com `intcli=` ou o texto completo do e-mail de envio também funcionam.
 
-Ele verifica até a cada 10 minutos — ou a cada 2 minutos a partir das 6h locais no dia em que a NACEX registra saída para entrega — enquanto o rastreador oficial responde (pelos serviços de rastreamento, até a cada 15 minutos no dia da entrega enquanto o pacote estiver aberto ou com alertas ligados). Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. O Peek exibe o status, o histórico e cada local lido no mapa. O rastreador da NACEX informa horário exato apenas para a entrega; nas demais etapas, mostra somente o dia. O Peek omite dados do destinatário, comprovante, observações, contatos e referência da loja, e não pode agilizar a entrega nem falar com a NACEX por você.
+Ele verifica até a cada 10 minutos; no dia em que a NACEX registra saída para entrega, enquanto o rastreador da própria NACEX responde, a cada 2 minutos a partir das 6h locais (pelos serviços de rastreamento, até a cada 15 minutos nesse dia, enquanto o pacote estiver aberto ou com alertas ligados). Você pode escolher notificações para "Cada movimentação", "Etapas importantes" ou "Só a entrega". Após dois dias sem novidades (ou 12 horas ainda em "Etiqueta criada" ou "Recebida pela transportadora"), verifica de hora em hora. O Peek exibe o status, o histórico e cada local lido no mapa. O rastreador da NACEX informa horário exato apenas para a entrega; nas demais etapas, mostra somente o dia. O Peek omite dados do destinatário, comprovante, observações, contatos e referência da loja, e não pode agilizar a entrega nem falar com a NACEX por você.
 
 ## Perguntas frequentes sobre rastreamento NACEX
 
@@ -112,6 +112,7 @@ A troca de endereço exige autorização do pagador do envio (em geral a loja): 
 
 :::sources
 - [NACEX: Tracking and Tracing](https://www.nacex.es/irSeguimiento.do) – partes do código e outras referências
+- [NACEX: Track and trace form](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) – link e mensagem de número não encontrado
 - [NACEX: Home](https://www.nacex.es/) – rastreamento, Logista e 4.000 pontos
 - [NACEX: FAQs](https://www.nacex.es/irFaqs.do) – contato, ausência, 15 dias, endereço e recusa
 - [NACEX: FAQ by category](https://www.nacex.es/visualizarfaq.do?category=900) – ligação da agência e retirada
@@ -129,4 +130,5 @@ A troca de endereço exige autorização do pagador do envio (em geral a loja): 
 - [NACEX: Servicios y condiciones de transporte 2026](https://www.nacex.es/pages/img/servicios/condiciones_tramitaciones/condiciones-generales-2026-ES.pdf) – regra de 50 km e raio de 15 km aos sábados
 - [NACEX: ¿Quiénes somos?](https://www.nacex.es/irEmpresaQuienes.do) – 1995, Logista, Holanda e lockers
 - [BOE: Ley 15/2009](https://www.boe.es/buscar/act.php?id=BOE-A-2009-18004) – ressalvas e prazo de 7 dias
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
 :::

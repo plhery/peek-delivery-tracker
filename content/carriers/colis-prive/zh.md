@@ -6,7 +6,7 @@ published: 2026-11-24
 updated: 2026-11-24
 ---
 
-Colis Privé 是法国面向电商的包裹快递公司，在法国、比利时和卢森堡提供送货上门、自提点以及（法国境内）快递柜派送服务。你可以凭 12 位运单号和收件邮编在法国官网 [colisprive.fr](https://colisprive.fr/en/) 或比利时/卢森堡官网 [colisprive.be](https://colisprive.be/en/) 查件。运单号可在商家的发货邮件或 Colis Privé 的通知里找到。2026 年 10 月 16 日，Colis Privé 宣布将与 [Paack](carrier:paack) 合并为统一品牌 Paack，自 2027 年 1 月起逐步推进；在此之前其派送与查询服务均照常运行。
+Colis Privé 是法国面向电商的包裹快递公司，在法国、比利时和卢森堡提供送货上门、自提点以及（法国境内）快递柜派送服务。你可以凭 12 位运单号和收件邮编在法国官网 [colisprive.fr](https://colisprive.fr/en/) 或比利时/卢森堡官网 [colisprive.be](https://colisprive.be/en/) 查件。运单号可在商家的发货邮件或 Colis Privé 的通知里找到。2026 年 10 月 16 日，Colis Privé 宣布将与 [Paack](carrier:paack) 统一使用 Paack 一个品牌，自 2027 年 1 月起逐步推行；在此之前其服务（包括派送与查询）照常运行。
 
 ## Colis Privé 运单号在哪里找？
 
@@ -24,11 +24,11 @@ Colis Privé 帮助中心列出四个查找位置：商家订单确认邮件、C
 
 ## Colis Privé 法语物流状态中文解读
 
-Peek 直接抓取 Colis Privé 的法语轨迹（每一步为一句带日期的法语描述），其英文帮助页则使用 `in transit` 等简化标签（详见[物流状态说明](guide:tracking-statuses)（英文））。Peek 识别的常见法语状态按顺序如下：
+Peek 直接抓取 Colis Privé 的法语轨迹（每一步为一句带日期的法语描述），其英文帮助页则使用 `in transit` 等简化标签（详见[物流状态说明](guide:tracking-statuses)（英文））。Peek 识别的法语状态，按包裹依次经历的顺序如下：
 
 | Colis Privé 状态原文 | 中文含义 |
 | --- | --- |
-| `arrivé chez le partenaire d'expédition` | 已到达发件合作方处，正转交给 Colis Privé。 |
+| `arrivé chez le partenaire d'expédition` | 包裹在另一家发运商手中，正转交给 Colis Privé。 |
 | `en transit vers` | 正运往 Colis Privé 分拨网络。 |
 | `pris en charge` | Colis Privé 已揽收包裹。 |
 | `arrivé sur notre agence` | 已抵达当地派送网点。 |
@@ -42,9 +42,9 @@ Peek 直接抓取 Colis Privé 的法语轨迹（每一步为一句带日期的�
 
 Colis Privé 帮助页还提到 `Colis attendu par Colis Privé`（英文帮助写作 `Package awaiting Colis Privé`），Peek 不将其归入具体阶段，意为 Colis Privé 尚未从寄件人处拿到包裹（仍在商家手中，比利时站补充称也可能正在国际运输或清关中），建议咨询商家。`pris en charge` 并非“已解决”，只是表示 Colis Privé 已揽收；`va être prochainement déposé` 预告包裹将在指定日期存入自提点，`subi un retard` 表示出现延误。
 
-## 派送时段、错过派送与自提点规则
+## 派送时段、派送未成功与自提点规则
 
-**法国：** 派送时间为每天 8:00 至 19:00（官网未标明具体星期）。尺寸合适会直接投入信箱，需签收的当面交付，或交由邻居、门房代收；否则留下通知单。若商家允许改派，可在查询页点击 “Modify my delivery”（“Convenir d'une date de présentation”），选择家中 12:00 至 21:00 的新日期、同邮编内其他收件人地址或改投自提点；否则包裹自动转存附近自提点。重新预约时限为 10 个工作日，自提点保管期为 8 天，逾期退回商家。
+**法国：** 派送时间为每天 8:00 至 19:00（官网未标明具体星期）。尺寸合适会直接投入信箱，需签收的当面交付，或交由邻居、门房代收；否则留下通知单。若商家允许改派，可在查询页点击 “Modify my delivery”（“Convenir d'une date de présentation”），选择家中 12:00 至 21:00 的新日期、同邮编内其他收件人地址或改投自提点；否则包裹会存放在最近的自提点。重新预约时限为 10 个工作日，自提点保管期为 8 天，逾期退回商家。
 
 Colis Privé 称在法国本土拥有超过 5,500 家自提点（可在 client.colisprive-store.com/relais 查询网点），户外快递柜凭邮件和短信发送的取件码开启。
 
@@ -54,7 +54,7 @@ Colis Privé 称在法国本土拥有超过 5,500 家自提点（可在 client.c
 
 Colis Privé 负责受理派送申诉，但退款或补发需遵循商家条款。
 
-**法国：** 先查看 colisprive.fr 顶部横幅是否有全网延误通告。如包裹延误、破损或未收到，查件页面会出现 “File a claim”（“Déposer une réclamation”）按钮。不同帮助页给出的回复时限略有差异：理赔页写明 2 至 7 个工作日（邮件或电话答复），延误与已签收未收到页写明 48 个工作小时。如果没有按钮，通常表示商家已提单或已过时限。显示已签收但没收到时，先核查信箱、门房和邻居，再提交申诉；另见[显示已签收但未收到](guide:delivered-not-received)（英文）。
+**法国：** 先查看 colisprive.fr 顶部横幅是否有全网延误通告。如包裹延误、破损或未收到，查件页面会出现 “File a claim”（“Déposer une réclamation”）按钮。不同帮助页给出的回复时限略有差异：理赔页写明 2 至 7 个工作日（邮件或电话答复），延误与已签收未收到页写明 48 个工作小时。没有按钮，说明已有申诉在处理（可能由商家提交），或已过时限。显示已签收但没收到时，先核查信箱、门房和邻居，再提交申诉；另见[显示已签收但未收到](guide:delivered-not-received)（英文）。
 
 **比利时与卢森堡：** 揽收后一般 48 小时送达。延误超过 4 天可在 colisprive.be 申诉，回复至少需 4 个工作日。申诉按钮仅在送达后一个月内显示。包裹一旦退回寄件人，只有商家能处理。在比利时若对处理结果不满，可免费向邮政调解机构（ombudsmanposte.be）申诉。
 
@@ -71,9 +71,9 @@ Colis Privé 官网列出的联系方式：
 
 ## 用 Peek 查询和跟踪 Colis Privé 包裹
 
-[Peek](/) 需要 12 位运单号加上收件邮编。输入单号并选定 Colis Privé 后，页面会出现邮编栏：法国填 5 位数字、比利时填 4 位数字、卢森堡填 `L` 加 4 位数字。你也可以直接把单号和邮编一起输入（以下均为虚构示例）：`KL4829173648 75001`（法国）、`KL4829173648 B1000`（比利时）或 `KL4829173648 L4829`（卢森堡）；保留 `B` 或 `L` 前缀即可让 Peek 自动识别为 Colis Privé。也支持直接粘贴 colisprive.com 或 colisprive.fr 查件链接。
+[Peek](/) 需要 12 位运单号加上收件邮编。输入单号并选定 Colis Privé 后，页面会出现邮编栏：法国填 5 位数字、比利时填 4 位数字、卢森堡填 `L` 加 4 位数字。你也可以直接把单号和邮编一起输入（以下均为虚构示例）：`KL4829173648 75001`（法国）、`KL4829173648 B1000`（比利时）或 `KL4829173648 L4829`（卢森堡）；保留 `B` 或 `L` 前缀，Peek 就能自行认出 Colis Privé。也可以直接粘贴 colisprive.com 或 colisprive.fr 查件链接。
 
-当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次。由于 Colis Privé 轨迹只含日期不含具体时刻，派送当天最高每 2 分钟一次的高频检查仅在派送当日自法国时间早上 6 点起、且官方查件系统响应时运行。其余时间，以及连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次；“已生成面单”满七天无动态则每 6 小时一次。支持设置“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 会显示包裹状态、法语历史轨迹和预计送达日期，并在“收件人”一栏仅向你本人显示收件人姓名。Peek 无法代你发起理赔或联系 Colis Privé。
+当你打开包裹页面或在派送当天开启提醒时，Peek 最高每 10 分钟检查一次。由于 Colis Privé 轨迹只含日期不含具体时刻，派送当天最高每 2 分钟一次的高频检查仅在派送当日自法国时间早上 6 点起、且 Colis Privé 自己的查询系统正常响应时运行。其余时间，以及连续两天无新动态（或在“已生成面单”、“已揽收”状态下满 12 小时），Peek 改为每小时检查一次；“已生成面单”满七天无动态则每 6 小时一次。可以设置“每次扫描”、“重要环节”或“仅派送当天”提醒。Peek 会显示包裹状态、法语历史轨迹和预计送达日期，并在“收件人”一栏仅向你本人显示收件人姓名。Peek 无法代你发起理赔或联系 Colis Privé。
 
 ## Colis Privé 查询常见问题
 
@@ -116,4 +116,5 @@ Colis Privé 官方宣传法国、比利时和卢森堡境内时效为 24 至 48
 - [Colis Privé: Accueil](https://colisprive.fr/) – 24/48 小时时效与 5,500+ 自提点
 - [Colis Privé BeLux: Trouver un relais](https://colisprive.be/trouver-un-relais/) – 800 家自提点查询
 - [Colis Privé BeLux: Qui sommes-nous ?](https://colisprive.be/qui-sommes-nous/) – 公司历史与比卢拓展
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 读取和显示的信息
 :::

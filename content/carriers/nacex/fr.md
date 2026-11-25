@@ -1,6 +1,6 @@
 ---
 title: NACEX suivi : numéro, statuts espagnols et contact
-description: Suivre un colis NACEX depuis l'Espagne ou le Portugal : format 0100/00000005, sens des statuts en espagnol, points NACEX.shop, douane et contacts.
+description: Suivre un colis NACEX depuis l'Espagne ou le Portugal : format 4829/10573649, sens des statuts en espagnol, points NACEX.shop, douane et contacts.
 slug: nacex-suivi
 published: 2026-11-17
 updated: 2026-11-17
@@ -12,19 +12,19 @@ NACEX est une messagerie express du groupe Logista implantée en Espagne, au Por
 
 L'accueil affiche le modèle `0000/00000000`, et la [page de suivi NACEX](https://www.nacex.es/irSeguimiento.do) sépare *Agencia* et *Albarán*. Exemple fictif :
 
-:::anatomy 0100 / 00000005
-- 0100 | Agence : code à 4 chiffres de la franchise NACEX d'origine
+:::anatomy 4829 / 10573649
+- 4829 | Agence : code à 4 chiffres de la franchise NACEX d'origine
 - / | Barre oblique séparant l'agence et le bordereau
-- 00000005 | Bordereau (*albarán*) : numéro à 8 chiffres de l'expédition
+- 10573649 | Bordereau (*albarán*) : numéro à 8 chiffres de l'expédition
 :::
 
 NACEX ne précise pas dans quel message arrive ce code ni l'émetteur de ses SMS ; vois [comment trouver son numéro de suivi](guide:find-tracking-number) pour vérifier l'e-mail du marchand, ton compte client ou l'étiquette.
 
 | Ce que tu as | Ce que c'est et comment le suivre |
 | --- | --- |
-| `0100/00000005` | Numéro NACEX complet : colle-le tel quel (les espaces comme `0100 / 00000005` sont acceptés en saisie directe). |
-| `010000000005` | 12 chiffres sans barre : il manque sans doute `/` après le quatrième chiffre. Sans `/`, Peek ne propose pas NACEX et teste des transporteurs à [12 chiffres](guide:tracking-number-formats) comme [Colis Privé](carrier:colis-prive). Ajoute `/`. |
-| `0100000005` | Jusqu'à 10 chiffres : probablement la « référence alternative » de l'étiquette (NACEX ne dit pas où la saisir) ; Peek n'interroge pas NACEX avec ce format. |
+| `4829/10573649` | Numéro NACEX complet : colle-le tel quel (les espaces comme `4829 / 10573649` sont acceptés en saisie directe). |
+| `482910573649` | 12 chiffres sans barre : il manque sans doute `/` après le quatrième chiffre. Sans `/`, Peek ne propose pas NACEX et teste des transporteurs à [12 chiffres](guide:tracking-number-formats) comme [Colis Privé](carrier:colis-prive). Ajoute `/`. |
+| `4829105736` | Jusqu'à 10 chiffres : probablement la « référence alternative » de l'étiquette (NACEX ne dit pas où la saisir) ; Peek n'interroge pas NACEX avec ce format. |
 | `3230 0000 0000 0000` | 16 chiffres (ou 23 chiffres) sans barre : [Correos Express](carrier:correos-express) ou un autre transporteur, pas NACEX. |
 
 Vérifie aussi l'absence de lettre `O` à la place du chiffre `0`. Si le [formulaire externe NACEX](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) affiche *« No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana »* (« Aucun bordereau enregistré ne correspond aux critères indiqués. Consultez votre agence NACEX la plus proche »), contrôle les quatre chiffres, la barre et les huit chiffres suivants, ou attends quelques heures après une création récente.
@@ -93,7 +93,7 @@ Canaux publiés sur les pages espagnoles de NACEX (sans horaires affichés ni Wh
 
 ## Suivre un colis NACEX avec Peek
 
-[Peek](/) reconnaît aussitôt le format à quatre chiffres, barre oblique et huit chiffres (`0100/00000005`) sous « Transporteur détecté » (modifiable via « Changer »), ainsi qu'un lien `nacex.es` avec `intcli=` ou l'e-mail d'expédition complet.
+[Peek](/) reconnaît aussitôt le format à quatre chiffres, barre oblique et huit chiffres (`4829/10573649`) sous « Transporteur détecté » (modifiable via « Changer »), ainsi qu'un lien `nacex.es` avec `intcli=` ou l'e-mail d'expédition complet.
 
 Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès 6 h 00 (heure locale) lorsque le colis passe « En livraison », tant que NACEX répond directement (via des services de suivi, jusqu'à toutes les 15 minutes). Après deux jours sans nouveauté — ou 12 heures sur « Étiquette créée » ou « Pris en charge » — le relevé devient horaire. Alertes au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek traduit l'étape, affiche la livraison estimée en route et place chaque scan sur une carte ; NACEX ne donnant l'heure qu'à la livraison, les étapes précédentes affichent la date. Peek laisse de côté destinataire, preuve de remise, commentaires internes, contacts et référence marchand, et ne peut ni modifier la livraison ni joindre NACEX pour toi.
 
@@ -113,7 +113,7 @@ Changer d'adresse postale demande l'accord du client payeur (souvent la boutique
 
 ### Pourquoi mon numéro NACEX à 12 chiffres n'est-il pas reconnu ?
 
-Parce que le modèle NACEX place une barre oblique après les quatre premiers chiffres (`0100/00000005`). Sans `/`, Peek interroge des transporteurs à 12 chiffres comme [Colis Privé](carrier:colis-prive) : insère `/` après le quatrième chiffre.
+Parce que le modèle NACEX place une barre oblique après les quatre premiers chiffres (`4829/10573649`). Sans `/`, Peek interroge des transporteurs à 12 chiffres comme [Colis Privé](carrier:colis-prive) : insère `/` après le quatrième chiffre.
 
 :::sources
 - [NACEX : Accueil](https://www.nacex.es/irHome.do) – suivi, Logista, réseau, langues

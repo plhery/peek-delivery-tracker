@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} sellos nuevos",
   "passport.newStamps.one": "{{count}} sello nuevo",
   "passport.newStamps.few": "{{count}} sellos nuevos",
-  "passport.fiftyExplanation": "50 paquetes entregados, archivados incluidos."
+  "passport.fiftyExplanation": "50 paquetes entregados, archivados incluidos.",
+  "passport.card.button": "Tu {{year}} en paquetes",
+  "passport.card.inParcels": "en paquetes",
+  "passport.card.alt": "{{year}} en paquetes",
+  "passport.card.delivered": "{{count}} entregados",
+  "passport.card.delivered.one": "{{count}} entregado",
+  "passport.card.delivered.few": "{{count}} entregados",
+  "passport.card.countries": "{{count}} países",
+  "passport.card.countries.one": "{{count}} país",
+  "passport.card.countries.few": "{{count}} países",
+  "passport.card.fastest": "El más rápido: {{time}}",
+  "passport.card.share": "Compartir",
+  "passport.card.save": "Guardar imagen"
 }

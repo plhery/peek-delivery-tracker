@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} nouveaux timbres",
   "passport.newStamps.one": "{{count}} nouveau timbre",
   "passport.newStamps.few": "{{count}} nouveaux timbres",
-  "passport.fiftyExplanation": "50 colis livrés, archivés compris."
+  "passport.fiftyExplanation": "50 colis livrés, archivés compris.",
+  "passport.card.button": "Ton {{year}} en colis",
+  "passport.card.inParcels": "en colis",
+  "passport.card.alt": "{{year}} en colis",
+  "passport.card.delivered": "{{count}} livrés",
+  "passport.card.delivered.one": "{{count}} livré",
+  "passport.card.delivered.few": "{{count}} livrés",
+  "passport.card.countries": "{{count}} pays",
+  "passport.card.countries.one": "{{count}} pays",
+  "passport.card.countries.few": "{{count}} pays",
+  "passport.card.fastest": "Le plus rapide : {{time}}",
+  "passport.card.share": "Partager",
+  "passport.card.save": "Enregistrer l’image"
 }

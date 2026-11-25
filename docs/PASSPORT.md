@@ -22,3 +22,8 @@ cases ([`passport-cases.json`](../shared/passport-cases.json)).
   delivered or archived card that earned it, and a dot on the Passport tab. The list of
   seen stamps and countries stays on the device, one per account and one for a guest; the
   first time a passport is read on a device, everything it holds counts as seen.
+- **The year's card.** In December, once a parcel was delivered that year, the passport
+  offers "Your <year> in parcels": a 1080×1350 picture made on the device and handed to the
+  share sheet or saved. It carries counts, the countries that year's parcels went through
+  (six at most), the stamps they earned and the fastest time; never a parcel's name, a
+  shop, a carrier, a tracking number or a place below the country.

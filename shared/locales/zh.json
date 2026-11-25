@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} 枚新邮票",
   "passport.newStamps.one": "{{count}} 枚新邮票",
   "passport.newStamps.few": "{{count}} 枚新邮票",
-  "passport.fiftyExplanation": "签收 50 个包裹，含已归档的。"
+  "passport.fiftyExplanation": "签收 50 个包裹，含已归档的。",
+  "passport.card.button": "你的 {{year}} 包裹之年",
+  "passport.card.inParcels": "包裹之年",
+  "passport.card.alt": "{{year}} 包裹之年",
+  "passport.card.delivered": "签收 {{count}} 个",
+  "passport.card.delivered.one": "签收 {{count}} 个",
+  "passport.card.delivered.few": "签收 {{count}} 个",
+  "passport.card.countries": "{{count}} 个国家/地区",
+  "passport.card.countries.one": "{{count}} 个国家/地区",
+  "passport.card.countries.few": "{{count}} 个国家/地区",
+  "passport.card.fastest": "最快 {{time}}",
+  "passport.card.share": "分享",
+  "passport.card.save": "保存图片"
 }

@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} selos novos",
   "passport.newStamps.one": "{{count}} selo novo",
   "passport.newStamps.few": "{{count}} selos novos",
-  "passport.fiftyExplanation": "50 encomendas entregues, incluindo as arquivadas."
+  "passport.fiftyExplanation": "50 encomendas entregues, incluindo as arquivadas.",
+  "passport.card.button": "Seu {{year}} em encomendas",
+  "passport.card.inParcels": "em encomendas",
+  "passport.card.alt": "{{year}} em encomendas",
+  "passport.card.delivered": "{{count}} entregues",
+  "passport.card.delivered.one": "{{count}} entregue",
+  "passport.card.delivered.few": "{{count}} entregues",
+  "passport.card.countries": "{{count}} países",
+  "passport.card.countries.one": "{{count}} país",
+  "passport.card.countries.few": "{{count}} países",
+  "passport.card.fastest": "A mais rápida: {{time}}",
+  "passport.card.share": "Compartilhar",
+  "passport.card.save": "Salvar imagem"
 }

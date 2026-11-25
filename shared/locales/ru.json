@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} новых марок",
   "passport.newStamps.one": "{{count}} новая марка",
   "passport.newStamps.few": "{{count}} новые марки",
-  "passport.fiftyExplanation": "50 доставленных посылок, включая архивные."
+  "passport.fiftyExplanation": "50 доставленных посылок, включая архивные.",
+  "passport.card.button": "Ваш {{year}} в посылках",
+  "passport.card.inParcels": "в посылках",
+  "passport.card.alt": "{{year}} в посылках",
+  "passport.card.delivered": "{{count}} доставлено",
+  "passport.card.delivered.one": "{{count}} доставлена",
+  "passport.card.delivered.few": "{{count}} доставлены",
+  "passport.card.countries": "{{count}} стран",
+  "passport.card.countries.one": "{{count}} страна",
+  "passport.card.countries.few": "{{count}} страны",
+  "passport.card.fastest": "Быстрее всего: {{time}}",
+  "passport.card.share": "Поделиться",
+  "passport.card.save": "Сохранить изображение"
 }

@@ -8,6 +8,7 @@ import { placeBubble } from '../lib/bubble';
 import { PassportSeal } from './passport/PassportSeal';
 import { STAMP_COPY, stampDay, stampFullDay, stampProgress } from './passport/copy';
 import type { PassportNews } from './passport/news';
+import { YearCard } from './passport/YearCard';
 
 const COVER_SEAL = { tone: 'green', glyph: 'parcel' } as const;
 
@@ -107,6 +108,7 @@ export function Passport({ news, loading }: { news: PassportNews; loading: boole
         {detail('best', t('passport.personalBest'), `${stats.fastestDelivery.label || t('common.parcel')} · ${localizedCalendarDate(new Date(stats.fastestDelivery.deliveredAt), languageTag)}\n${timingExplanation}`)}
       </> : <p className="passport-note">{t('passport.waitingForTimes')}</p>}
     </section>
+    <YearCard book={news.book} />
     {stats.originCountries.length > 0 && <section className="passport-countries" aria-labelledby="passport-countries-title">
       <div className="passport-section-heading"><h2 id="passport-countries-title">
         {button('countries', 'passport-heading-button', t('passport.firstSeenIn'), t('passport.firstSeenIn'))}

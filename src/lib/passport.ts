@@ -237,6 +237,32 @@ export function passportBook(parcels: readonly ParcelWithEvents[], timeZone?: st
 
 export type PassportBook = ReturnType<typeof passportBook>;
 
+/**
+ * "Your <year> in parcels": the year's deliveries on the reader's calendar, the countries they went through (the six
+ * with the most of them, in the passport's order, when there are more), the stamps they earned and the fastest one.
+ * Aggregates only: no parcel, shop, carrier or place below the country.
+ */
+export function yearInParcels(book: PassportBook, year: number) {
+  const deliveries = book.stats.deliveries.filter((delivery) => delivery.day.startsWith(`${year}-`));
+  const parcels = new Set(deliveries.map((delivery) => delivery.parcelId));
+  const counts = new Map<string, number>();
+  for (const delivery of deliveries) for (const code of delivery.countries.keys()) counts.set(code, (counts.get(code) ?? 0) + 1);
+  const countries = book.countries.filter((country) => counts.has(country.code)).map((country) => ({ ...country, count: counts.get(country.code)! }));
+  const shown = countries.length <= 6 ? countries
+    : [...countries].sort((a, b) => b.count - a.count || a.number - b.number).slice(0, 6).sort((a, b) => a.number - b.number);
+  const durations = deliveries.flatMap((delivery) => delivery.duration === null ? [] : [delivery.duration]);
+  return {
+    year,
+    deliveredCount: deliveries.length,
+    countryCount: countries.length,
+    countries: shown,
+    stamps: book.stamps.filter((stamp) => stamp.earned && stamp.parcelId !== null && parcels.has(stamp.parcelId)),
+    fastest: durations.length ? Math.min(...durations) : null,
+  };
+}
+
+export type YearInParcels = ReturnType<typeof yearInParcels>;
+
 /** The keys a reader marks as seen: a stamp by its key, a country by its code. */
 export const stampSeenKey = (stamp: Pick<StampProgress, 'key'>) => `stamp:${stamp.key}`;
 export const countrySeenKey = (country: Pick<CountryStamp, 'code'>) => `country:${country.code}`;

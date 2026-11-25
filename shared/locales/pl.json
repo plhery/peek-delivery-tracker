@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} nowych znaczków",
   "passport.newStamps.one": "{{count}} nowy znaczek",
   "passport.newStamps.few": "{{count}} nowe znaczki",
-  "passport.fiftyExplanation": "50 dostarczonych przesyłek, także tych z archiwum."
+  "passport.fiftyExplanation": "50 dostarczonych przesyłek, także tych z archiwum.",
+  "passport.card.button": "Twój {{year}} w przesyłkach",
+  "passport.card.inParcels": "w przesyłkach",
+  "passport.card.alt": "{{year}} w przesyłkach",
+  "passport.card.delivered": "{{count}} dostarczonych",
+  "passport.card.delivered.one": "{{count}} dostarczona",
+  "passport.card.delivered.few": "{{count}} dostarczone",
+  "passport.card.countries": "{{count}} krajów",
+  "passport.card.countries.one": "{{count}} kraj",
+  "passport.card.countries.few": "{{count}} kraje",
+  "passport.card.fastest": "Najszybciej: {{time}}",
+  "passport.card.share": "Udostępnij",
+  "passport.card.save": "Zapisz obraz"
 }

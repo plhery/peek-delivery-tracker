@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} nuovi francobolli",
   "passport.newStamps.one": "{{count}} nuovo francobollo",
   "passport.newStamps.few": "{{count}} nuovi francobolli",
-  "passport.fiftyExplanation": "50 pacchi consegnati, archiviati inclusi."
+  "passport.fiftyExplanation": "50 pacchi consegnati, archiviati inclusi.",
+  "passport.card.button": "Il tuo {{year}} in pacchi",
+  "passport.card.inParcels": "in pacchi",
+  "passport.card.alt": "{{year}} in pacchi",
+  "passport.card.delivered": "{{count}} consegnati",
+  "passport.card.delivered.one": "{{count}} consegnato",
+  "passport.card.delivered.few": "{{count}} consegnati",
+  "passport.card.countries": "{{count}} paesi",
+  "passport.card.countries.one": "{{count}} paese",
+  "passport.card.countries.few": "{{count}} paesi",
+  "passport.card.fastest": "Il più veloce: {{time}}",
+  "passport.card.share": "Condividi",
+  "passport.card.save": "Salva immagine"
 }

@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} neue Briefmarken",
   "passport.newStamps.one": "{{count}} neue Briefmarke",
   "passport.newStamps.few": "{{count}} neue Briefmarken",
-  "passport.fiftyExplanation": "50 zugestellte Pakete, archivierte mitgezählt."
+  "passport.fiftyExplanation": "50 zugestellte Pakete, archivierte mitgezählt.",
+  "passport.card.button": "Dein {{year}} in Paketen",
+  "passport.card.inParcels": "in Paketen",
+  "passport.card.alt": "{{year}} in Paketen",
+  "passport.card.delivered": "{{count}} zugestellt",
+  "passport.card.delivered.one": "{{count}} zugestellt",
+  "passport.card.delivered.few": "{{count}} zugestellt",
+  "passport.card.countries": "{{count}} Länder",
+  "passport.card.countries.one": "{{count}} Land",
+  "passport.card.countries.few": "{{count}} Länder",
+  "passport.card.fastest": "Am schnellsten: {{time}}",
+  "passport.card.share": "Teilen",
+  "passport.card.save": "Bild sichern"
 }

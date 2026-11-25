@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { passportBook } from './passport';
+import { passportBook, yearInParcels } from './passport';
 import type { ParcelWithEvents, Stage } from '../types';
 
 type Scan = [Stage, string, string?, string?];
@@ -26,12 +26,16 @@ const iso = (at: number | null) => at === null ? null : new Date(at).toISOString
 
 /** What a case's passport holds, as the three platforms compare it. */
 function outcome(input: Case) {
-  const { stats, stamps, countries } = passportBook(parcels(input.parcels), input.timeZone);
+  const book = passportBook(parcels(input.parcels), input.timeZone);
+  const { stats, stamps, countries } = book;
+  const year = yearInParcels(book, 2026);
   return {
     deliveredCount: stats.deliveredCount,
     carrierCount: stats.carrierCount,
     stamps: Object.fromEntries(stamps.map((stamp) => [stamp.key, { count: stamp.count, earned: stamp.earned, earnedAt: iso(stamp.earnedAt), parcel: stamp.parcelId }])),
     countries: countries.map((country) => ({ code: country.code, number: country.number, firstAt: iso(country.firstAt), parcel: country.parcelId, count: country.count, continent: country.continent })),
+    year2026: { deliveredCount: year.deliveredCount, countryCount: year.countryCount, countries: year.countries.map((country) => [country.code, country.count]),
+      stamps: year.stamps.map((stamp) => stamp.key), fastest: year.fastest },
   };
 }
 

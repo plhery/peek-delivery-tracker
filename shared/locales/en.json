@@ -1644,5 +1644,17 @@
   "passport.newStamps": "{{count}} new stamps",
   "passport.newStamps.one": "{{count}} new stamp",
   "passport.newStamps.few": "{{count}} new stamps",
-  "passport.fiftyExplanation": "50 delivered parcels, archived ones included."
+  "passport.fiftyExplanation": "50 delivered parcels, archived ones included.",
+  "passport.card.button": "Your {{year}} in parcels",
+  "passport.card.inParcels": "in parcels",
+  "passport.card.alt": "{{year}} in parcels",
+  "passport.card.delivered": "{{count}} delivered",
+  "passport.card.delivered.one": "{{count}} delivered",
+  "passport.card.delivered.few": "{{count}} delivered",
+  "passport.card.countries": "{{count}} countries",
+  "passport.card.countries.one": "{{count}} country",
+  "passport.card.countries.few": "{{count}} countries",
+  "passport.card.fastest": "Fastest {{time}}",
+  "passport.card.share": "Share",
+  "passport.card.save": "Save image"
 }
